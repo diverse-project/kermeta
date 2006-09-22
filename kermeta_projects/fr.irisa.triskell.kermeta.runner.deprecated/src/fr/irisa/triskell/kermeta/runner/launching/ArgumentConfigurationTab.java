@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.24 2006-03-10 13:25:45 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.25 2006-09-22 09:37:52 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -691,20 +691,29 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	            qnameList.add(selectedUnit.getQualifiedName((NamedElement)typedefs.get(i)));
 	        }
 	        
-	        SelectionListDialog classDialog = new SelectionListDialog(getShell());
-	        classDialog.setList(qnameList);
-	        int code = classDialog.open();
-	        selectedClassString = classDialog.getSelectedItem();
-	        // If user clicked on OK, set the field to the class he selected
-	        if (code == InputDialog.OK)
-	        {
-	            getclassNameText().setText(selectedClassString);
+	        // if no classes found alert the user
+	        if (qnameList.size() == 0) {
+	        	org.eclipse.swt.widgets.MessageBox d = (new org.eclipse.swt.widgets.MessageBox(new Shell()));
+	        	d.setMessage("Enabled to find any classes. The file may be incorrect. Please check for errors.");
+	        	d.open();
+	        } 
+	        // otherwise we let the user choose the main class
+	        else {
+	        	SelectionListDialog classDialog = new SelectionListDialog(getShell());
+	        	classDialog.setList(qnameList);
+	        	int code = classDialog.open();
+	        	selectedClassString = classDialog.getSelectedItem();
+	        	// If user clicked on OK, set the field to the class he selected
+	        	if (code == InputDialog.OK)
+	        	{
+	        		getclassNameText().setText(selectedClassString);
+	        	}
+	        	// Disable the operation choice if needed
+	        	if (selectedClassString != null)
+	        		setOperationEnabled(true);
+	        	else setOperationEnabled(false);
 	        }
-	        // Disable the operation choice if needed
-	        if (selectedClassString != null)
-	            setOperationEnabled(true);
-	        else setOperationEnabled(false);
-	    	}
+	    }
     	catch(Exception e)
     	{
     		System.err.print(e);
