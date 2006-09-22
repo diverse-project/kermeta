@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.28 2006-08-07 15:42:31 zdrey Exp $
+/* $Id: structure.kmt,v 1.29 2006-09-22 10:08:00 zdrey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -13,7 +13,9 @@
  
 /**
  * Contains the concrete implementation (including the operation bodies) 
- * of the classes of the kermeta::reflection package.
+ * of the classes of the <code>kermeta::reflection</code> package. If you need
+ * documentation for elements marked as "Undocumented", please take a look
+ * at the <code>kermeta::reflection</code> package which is more complete.
  */
 package kermeta::language::structure; 
 
@@ -380,6 +382,7 @@ class EnumerationLiteral inherits NamedElement, kermeta::reflection::Enumeration
 			result := visitor.visitEnumerationLiteral(self, context)
 		end
 }
+
 class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -387,7 +390,10 @@ class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KM
 			result := visitor.visitParameter(self, context)
 		end
 }
+/** Alias to kermeta::standard::UnlimitedNatural */
 alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
+
+/** Implementation of the Visitor pattern for the model elements contained in structure package */
 abstract class KMStructureVisitor<ContextType, ResultType>
 {
 	operation visitClass(node : Class, context : ContextType) : ResultType is abstract
@@ -420,6 +426,8 @@ abstract class KMStructureVisitor<ContextType, ResultType>
 	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is abstract
 	
 }
+/** All the classes defined in this <code>kermeta::language::structure</code> package 
+ * inherit this class. Part of Visitor pattern implementation. */
 abstract class KMStructureVisitable
 {
 	operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
