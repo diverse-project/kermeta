@@ -1,4 +1,4 @@
-/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.4 2006-06-21 14:28:39 zdrey Exp $
+/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.5 2006-09-22 11:21:02 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -32,7 +32,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
-import fr.irisa.triskell.kermeta.loader.ecore.ECore2KMPass1;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 
 /**
