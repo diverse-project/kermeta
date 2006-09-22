@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.29 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.30 2006-09-22 11:12:24 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -13,10 +13,8 @@
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -52,6 +50,7 @@ import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
+
 
 /**
  * Exports KM or KMT to Ecore.
@@ -224,21 +223,19 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 					String tagValue = t.getValue();
 					ecoreExporter.addConstraintAnnotation(
 						newEClass,
-						KM2Ecore.ANNOTATION_INV_DOC,
+						KM2Ecore.ANNOTATION_NESTED_DOC,
 						tagKey,
 						tagValue,
 						eAnnot);
 				}
 				
 			}
-			if (!ecoreExporter.getKermetaUnit().typeDefs.containsKey(node))
-			{
+			if (!ecoreExporter.getKermetaUnit().typeDefs.containsKey(node)) {
 				// Add the created EClass to km2ecoremapping
 				km2ecoremapping.put(node,newEClass);
 			}
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 			internalLog.error("Visiting ClassDefinition: "+ current_name + ", Exception: " + e.getMessage() ,e);
 			e.printStackTrace();
 		}
@@ -356,7 +353,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 				String tagValue = t.getValue();
 				ecoreExporter.addConstraintAnnotation(
 					newEOperation,
-					KM2Ecore.ANNOTATION_INV_DOC,
+					KM2Ecore.ANNOTATION_NESTED_DOC,
 					tagKey,
 					tagValue,
 					eAnnot);
@@ -384,7 +381,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 				String tagValue = t.getValue();
 				ecoreExporter.addConstraintAnnotation(
 					newEOperation,
-					KM2Ecore.ANNOTATION_INV_DOC,
+					KM2Ecore.ANNOTATION_NESTED_DOC,
 					tagKey,
 					tagValue,
 					eAnnot);
@@ -519,7 +516,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		current_name = node.getName();
 		newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
 				
-		if(KMT2KMPass7.KERMETADOC.equals(current_name)){
+		if(KMT2KMPass7.KERMETA_DOCUMENTATION.equals(current_name)){
 			//	deal with special case of documentation
 			newEAnnotation.setSource(KM2Ecore.ANNOTATION_DOCUMENTATION);
 			newEAnnotation.getDetails().put(KM2Ecore.ANNOTATION_DOCUMENTATION_DETAILS, KMTHelper.formatTagValue(node.getValue()));
@@ -543,8 +540,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEClassifier.setName(node.getName());
 		if (type_name == null) 
 			throw new KM2ECoreConversionException(
-			"KM2Ecore error : could not find InstanceType for '" + node.getName() +"' PrimitiveType; ( getInstanceType: " +
-			node.getInstanceType().toString() + ")");
+				"KM2Ecore error : could not find InstanceType for '" + node.getName() +"' PrimitiveType; ( getInstanceType: " +
+				node.getInstanceType().toString() + ")");
+		
 		if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 			newEClassifier.setInstanceClassName(KM2Ecore.primitive_types_mapping.get(type_name));
 		}

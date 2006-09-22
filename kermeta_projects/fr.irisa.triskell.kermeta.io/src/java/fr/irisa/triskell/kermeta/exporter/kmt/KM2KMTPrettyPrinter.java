@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.39 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.40 2006-09-22 11:12:24 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -986,17 +986,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			}
 		}
 		else {
-			/*
-			result += "self";
-			result += "." + KMTHelper.getMangledIdentifier(node.getName());
-			*/
 			result += KMTHelper.getMangledIdentifier(node.getName());
 			
 			// handle the special case where there is 1 parameter, and when This
 			// parameter is a lambdaPostFix
 			//	TODO : throw an exception if type is not a LambdaExpression
-			if (node.getParameters().size()==1 && LambdaExpression.class.isInstance(node.getParameters().get(0)))
-			{
+			if (node.getParameters().size()==1 && LambdaExpression.class.isInstance(node.getParameters().get(0))) {
 			   result+= ppComaSeparatedNodes(node.getParameters());
 			}
 			// the classic case : a list of parameters
@@ -1034,7 +1029,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
     public Object visitTag(Tag node) {
         String result = "";
         // User can choose to add a "@kdoc" tag
-        if (node.getName().equals(KMT2KMPass7.KERMETADOC) && !node.getValue().startsWith("/**"))
+        if (node.getName().equals(KMT2KMPass7.KERMETA_DOCUMENTATION) && !node.getValue().startsWith("/**"))
         {
             result = "/**" + node.getValue() + "*/";
         }

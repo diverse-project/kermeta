@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.24 2006-09-18 10:10:16 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.25 2006-09-22 11:12:24 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,19 +24,16 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
+
 
 /**
  * Exports KM or KMT to Ecore.
@@ -79,7 +76,6 @@ public class KM2Ecore {
 	 * This contains typically errors and warnings detected while building the model
 	 */
 	public KMUnitMessageManager messages;	
-	
 
 	/**
 	 * <code>kmt2ecoremapping</code> is a trace mapping. 
@@ -101,37 +97,40 @@ public class KM2Ecore {
     	primitive_types_mapping.put("kermeta::standard::UnlimitedNatural",	"java.lang.Integer");
     	
     }
-	// Annotation.getSource() == "kermeta" 
+ 
+    // Supported EAnnotation names, along with the type of elements they can be associated with:
+    //  => All annotated elements
     public final static String ANNOTATION = "kermeta";
     public final static String ANNOTATION_DOCUMENTATION = "http://www.eclipse.org/emf/2002/GenModel";
-    public final static String ANNOTATION_DOCUMENTATION_DETAILS = "documentation";
-    /** Used only in EDatatypes */
-    public final static String ANNOTATION_ALIAS_DETAILS = "alias";
-    /** Used only in EAttributes */
-    public final static String ANNOTATION_ISCOMPOSITE_DETAILS = "isComposite";
-    /** Used only in EOperation */
-    public final static String ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
-    /** Kermeta documentation */
-    public final static String ANNOTATION_KDOC_DETAILS = KMT2KMPass7.KERMETADOC;
-    /** Used only in EOperation */
-    public final static String ANNOTATION_SUPEROPERATION_DETAILS = "superOperation";
-    public final static String ANNOTATION_BODY_DETAILS = "body";
-    // Annotation.getSource() == "kermeta.inv"
+    //  => ClassDefs 
     public final static String ANNOTATION_INV = ANNOTATION + ".inv";
-    // Next corresponds to constraints annotations
-    public final static String ANNOTATION_INV_DOC = ANNOTATION_INV + ".doc";
+    //  => Operations
     public final static String ANNOTATION_PRE = ANNOTATION + ".pre";
     public final static String ANNOTATION_POST = ANNOTATION + ".post";
-	// Annotation.getSource() == "KermetaRaisedExceptions"
-    public final static String ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
-    public final static String ANNOTATION_RAISEDEXCEPTION_DETAILS = "raisedException";
-	// Annotation.getSource() == "KermetaTypeParameters"
-    public final static String ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
-	// Annotation.getSource() == "KermetaDerivedProperty"
-    public final static String ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
-    public final static String ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
-    public final static String ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
-    public final static String ANNOTATION_DERIVEDPROPERTY_SETTERBODY = "setter.body";
+    public final static String ANNOTATION_RAISEDEXCEPTION = ANNOTATION + ".raisedExceptions";
+    //  => ClassDefs, Operations
+    public final static String ANNOTATION_NESTED_DOC = ANNOTATION_INV + ".doc";
+    public final static String ANNOTATION_TYPEPARAMETER = ANNOTATION + ".typeParameters";
+    //  => Properties
+    public final static String ANNOTATION_DERIVEDPROPERTY_GETTER = 	ANNOTATION + "derivedProp.getter";
+    public final static String ANNOTATION_DERIVEDPROPERTY_SETTER = 	ANNOTATION + "derivedProp.setter";
+    
+    // Available static keys for the "kermeta" EAnnotation, along with the type of elements
+    // these entries relate to:
+    //   => All annotated elements
+    public final static String ANNOTATION_DOCUMENTATION_DETAILS = "documentation";
+    //   => Operations, invraiants, pre/post conditions
+    public final static String ANNOTATION_BODY_DETAILS = "body";
+    //   => Properties
+    public final static String ANNOTATION_ISCOMPOSITE_DETAILS = "isComposite";
+    public final static String ANNOTATION_DERIVEDPROPERTY_ISREADONLY_DETAILS = "isReadOnly";
+    //   => ClassDefs
+    public final static String ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
+    //   => Operations
+    public final static String ANNOTATION_SUPEROPERATION_DETAILS = "superOperation";
+    //   => PrimitiveTypes
+    public final static String ANNOTATION_ALIAS_DETAILS = "alias";
+
     
 	/**
 	 * @param resource : the resource to populate
@@ -284,8 +283,7 @@ public class KM2Ecore {
 	}
 	
 	/** Accessor for kermetaUnit attribute */
-	public KermetaUnit getKermetaUnit()
-	{
+	public KermetaUnit getKermetaUnit() {
 		return kermetaUnit;
 	}
 
@@ -309,6 +307,4 @@ public class KM2Ecore {
 	public void setEcoreGenDirectory(String ecoreGenDirectory) {
 		this.ecoreGenDirectory = ecoreGenDirectory;
 	}
-	
-	
 }

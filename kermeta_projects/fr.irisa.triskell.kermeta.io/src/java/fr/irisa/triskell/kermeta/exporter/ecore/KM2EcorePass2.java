@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.23 2006-09-18 10:10:16 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.24 2006-09-22 11:12:24 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -587,30 +587,34 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	/**
 	 * Set the annotations corresponding to the bodies of a derived property
 	 * Important note : we do not add those annotation in Ecore "generated metamodel"...
+	 * @param node
+	 * @param newEStructuralFeature
+	 * @param getterBody
+	 * @param setterBody
 	 */
-	protected void setDerivedPropertyAnnotation(Property node, EStructuralFeature newEStructuralFeature, String getterBody, String setterBody) 
-	{
+	protected void setDerivedPropertyAnnotation(Property node, EStructuralFeature newEStructuralFeature, String getterBody, String setterBody)  {
 		// We know that : EStructuralFeature container type : EClass
 		// EClass container type : EPackage.
-		if (! node.isIsReadOnly())
-		{
+		if (! node.isIsReadOnly()) {
 			ecoreExporter.addAnnotation( 
 					newEStructuralFeature,
-					KM2Ecore.ANNOTATION_DERIVEDPROPERTY,
-					KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
+					KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTER,
+					KM2Ecore.ANNOTATION_BODY_DETAILS,
 					setterBody,
 					null);
 		}
+		
 		ecoreExporter.addAnnotation( 
 				newEStructuralFeature,
-				KM2Ecore.ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTER,
+				KM2Ecore.ANNOTATION_BODY_DETAILS,
 				getterBody,
 				null);
+		
 		ecoreExporter.addAnnotation( 
 				newEStructuralFeature,
-				KM2Ecore.ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
+				KM2Ecore.ANNOTATION,
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_ISREADONLY_DETAILS,
 				new Boolean(node.isIsReadOnly()).toString(),
 				null);
 	}
@@ -625,18 +629,18 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				(EObject)accept(superOperation));		
 	}
 	
+	
 	/**
-	 * 
 	 * @param anException
 	 * @param newEOperation
 	 */
 	public void setRaisedExceptionAnnotation(fr.irisa.triskell.kermeta.language.structure.Class anException, EOperation newEOperation) {
 		EClassifier exceptionEClassifier =  (EClassifier)accept(anException);
-		ecoreExporter.addAnnotation( 
+		ecoreExporter.addConstraintAnnotation( 
 				newEOperation,
 				KM2Ecore.ANNOTATION_RAISEDEXCEPTION,
-				KM2Ecore.ANNOTATION_RAISEDEXCEPTION_DETAILS,
-				KMTHelper.getQualifiedName(anException.getTypeDefinition()),
+				KMTHelper.getQualifiedName(anException.getTypeDefinition()), // Only decorative info, currently useless
+				KMTHelper.getQualifiedName(anException.getTypeDefinition()), // Idem
 				exceptionEClassifier);		
 	}
 

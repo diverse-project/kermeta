@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.3 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: Ecore2KMPass4.java,v 1.4 2006-09-22 11:12:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -30,12 +30,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 
 
@@ -45,8 +43,7 @@ import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
  */
 public class Ecore2KMPass4 extends EcoreVisitor {
 	
-	
-	protected ECore2KMPass1 visitorPass1;
+	protected Ecore2KMPass1 visitorPass1;
 	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
 	protected Resource resource;
@@ -54,24 +51,24 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	
 
 	/**
-	 * 
+	 * @param visitor
+	 * @param t
+	 * @param exporter
 	 */
-	public Ecore2KMPass4(ECore2KMPass1 visitor, Hashtable t, Ecore2KM exporter) {
+	public Ecore2KMPass4(Ecore2KMPass1 visitor, Hashtable t, Ecore2KM exporter) {
 		this.visitorPass1 = visitor;
 		this.unit = visitorPass1.unit;
 		this.exporter = exporter;
 		this.opTable = t;
 	}
 	
-	
+
 	/**
 	 * 
 	 */
 	public void fixUnit() {
 		for (EObject node : visitorPass1.eclassifier_typedefinition_map.keySet()) {
-			if (node instanceof EClass) {
-				accept(node); 
-			}
+			if (node instanceof EClass) accept(node); 
 		}
 	}
 	
@@ -79,8 +76,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EClass)
 	 */
-	public Object visit(EClass node)
-	{
+	public Object visit(EClass node) {
 		exporter.current_classdef = (ClassDefinition)visitorPass1.eclassifier_typedefinition_map.get(node);
 		visitorPass1.isClassTypeOwner = true;
 		
@@ -95,21 +91,21 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAnnotation)
 	 */
 	public Object visit(EAnnotation node) {
-
-		// Visit annotation details that are dedicated to operation:
-		//  - operation pre and post conditions 
-		if (node.getSource().equals(KM2Ecore.ANNOTATION_INV_DOC)) {
+		// Visit annotation details that contain user-defined annotations on some KM elements:
+		//  - class invariants
+		//  - operation pre and post conditions
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_NESTED_DOC)) {
 			EList refs = node.getReferences();
 			
 			if(! refs.isEmpty()) {
 				EAnnotation tgtAnnot = (EAnnotation) refs.get(0);
-				Constraint tgtInv = exporter.constraints_mapping.get(tgtAnnot);
+				fr.irisa.triskell.kermeta.language.structure.Object tgtElt = exporter.nestedAnnotMap.get(tgtAnnot);
 
 				for ( Object annot_name : node.getDetails().keySet() ) {
 					Tag tag = unit.struct_factory.createTag();
 					tag.setName((String) annot_name);
 					tag.setValue((String) node.getDetails().get(annot_name));
-					tgtInv.getTag().add(tag);
+					tgtElt.getTag().add(tag);
 				}
 			}
 		}

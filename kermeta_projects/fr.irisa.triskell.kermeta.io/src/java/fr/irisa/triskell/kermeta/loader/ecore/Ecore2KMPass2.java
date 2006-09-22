@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.9 2006-08-31 12:18:28 dtouzet Exp $
+/* $Id: Ecore2KMPass2.java,v 1.10 2006-09-22 11:12:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -33,7 +33,7 @@ import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
  */
 public class Ecore2KMPass2 extends EcoreVisitor {
 
-	protected ECore2KMPass1 visitorPass1;
+	protected Ecore2KMPass1 visitorPass1;
 	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
 	protected Resource resource;
@@ -43,7 +43,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	 * @param resource
 	 * @param visitor
 	 */
-	public Ecore2KMPass2(ECore2KMPass1 visitor, Ecore2KM exporter)
+	public Ecore2KMPass2(Ecore2KMPass1 visitor, Ecore2KM exporter)
 	{
 		this.visitorPass1 = visitor;
 		this.unit = visitorPass1.unit;
@@ -173,7 +173,6 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			if (etype.eResource() != resource)
 			{
 				String etype_qname = Ecore2KM.getQualifiedName(etype);
-				String dep_uri = etype.eResource().getURI().toString();
 				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
 				// this unit is not related to a real file in the user file system
 				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.

@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.9 2006-08-22 11:51:30 dtouzet Exp $
+/* $Id: Ecore2KMPass1.java,v 1.1 2006-09-22 11:12:23 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -49,7 +49,7 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class ECore2KMPass1 extends EcoreVisitor {
+public class Ecore2KMPass1 extends EcoreVisitor {
 
 	// to differenciate the owner of a "KermetaTypeParameter" annotation -> either an EClass or an EOperation
 	// since the info. is not contained in this annotation
@@ -71,7 +71,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	/** Properties indexed by their qualified names used to set opposites */
 	protected Hashtable<String, Property> properties;
 	
-	protected Stack<Package> current_pack = new Stack<Package>();
+	protected Stack<Package> packagesStack = new Stack<Package>();
 	protected Ecore2KM exporter;
 	protected Enumeration current_enum;
 	protected PrimitiveType current_primitivetype;
@@ -79,7 +79,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	/**
 	 * @param unit
 	 */
-	public ECore2KMPass1(Ecore2KM exporter) {
+	public Ecore2KMPass1(Ecore2KM exporter) {
 		super();
 		this.unit = exporter.unit;
 		this.resource = exporter.resource;
@@ -112,13 +112,13 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		if (getCurrentPackage() != null) pack.setNestingPackage(getCurrentPackage());
 		else unit.rootPackage = pack;
 		
-		current_pack.push(pack);
+		packagesStack.push(pack);
 		
 		acceptList(node.getEClassifiers());
 		acceptList(node.getESubpackages());
 		acceptList(node.getEAnnotations());
 		
-		current_pack.pop();
+		packagesStack.pop();
 		
 		return pack;
 	}
@@ -157,12 +157,18 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	public Object visit(EAttribute node) {
 		// Create the property
 		Property prop = createPropertyFromEStructuralFeature(node);
+		
 		// EAttribute specific values
 		prop.setIsID(node.isID());
 		// Composite? -> we get an annotation if there is one, otherwise by default it is composite.
-		String isComposite_ann = node.getEAnnotation(KM2Ecore.ANNOTATION)!=null?
-				(String)this.accept(node.getEAnnotation(KM2Ecore.ANNOTATION)):"true";
-		boolean isc = (isComposite_ann.equals("false"))?false:true;
+		boolean isc = true;
+		EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION);
+		if(eAnnot != null) {
+			if (eAnnot.getDetails().containsKey(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS)) {
+				String res = (String)eAnnot.getDetails().get(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS);
+				isc = Boolean.valueOf(res);
+			}
+		}
 		prop.setIsComposite(isc);
 		return prop;
 	}
@@ -276,25 +282,22 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	 * annotation.getDetails() => hashtable, with { "body" : <body_content> } for body operations
 	 * This visit method only handle the details of EAnnotations that could be shared by any
 	 */
-	public Object visit(EAnnotation node)
-	{	
+	public Object visit(EAnnotation node) {	
 		String result = "";
-		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS))
-		{
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS);
-		}
-		// Create a Tag for given EAnnotation if its type is kdoc
-		else if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_KDOC_DETAILS))
-		{
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_KDOC_DETAILS);
-			Tag tag = unit.struct_factory.createTag();
-			tag.setName(KM2Ecore.ANNOTATION_KDOC_DETAILS);
-			tag.setValue(result);
-			fr.irisa.triskell.kermeta.language.structure.Object o = getObjectForEModelElement(node.getEModelElement()); 
-			if (o!=null) o.getTag().add(tag);
+		if(node.getSource().equals(KM2Ecore.ANNOTATION)) {
+			for (Object next :  node.getDetails().keySet()) {
+				String crtKey = (String) next;
+				result = (String)node.getDetails().get(crtKey);
+				Tag tag = unit.struct_factory.createTag();
+				tag.setName(crtKey);
+				tag.setValue(result);
+				fr.irisa.triskell.kermeta.language.structure.Object o = getObjectForEModelElement(node.getEModelElement()); 
+				if (o!=null) o.getTag().add(tag);
+			}
 		}
 		return result;
 	}
+
 	
 	/** This is AWFUL */
 	public fr.irisa.triskell.kermeta.language.structure.Object getObjectForEModelElement(EModelElement element)
@@ -359,10 +362,15 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	
 	/** Return the package currently visited */
 	protected Package getCurrentPackage() {
-		if (current_pack.size() == 0) return null;
-		return (Package)current_pack.peek();
+		if (packagesStack.size() == 0) return null;
+		return (Package)packagesStack.peek();
 	}
 	
+	
+	/**
+	 * @param node
+	 * @return
+	 */
 	public List<TypeVariable> createTypeParametersFromEAnnotation(EAnnotation node)
 	{
 		List<TypeVariable> params = new ArrayList<TypeVariable>();
@@ -380,4 +388,3 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	}
 
 }
-

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.7 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: Ecore2KM.java,v 1.8 2006-09-22 11:12:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -21,12 +21,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Constraint;
-import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Package;
+
 
 public class Ecore2KM {
 
@@ -64,10 +61,10 @@ public class Ecore2KM {
 	/**
 	 * Hashtable used to manage the invariants annotations that are encoded in Ecore as annotations
 	 * that refer the annotation containing the invariant.
-	 * The structure enbales to map the visited "invariants annotations" EAnnotations to the allocated
-	 *  Tag elements.
+	 * The structure enables to map the visited "invariants annotations" EAnnotations to the allocated
+	 * Tag elements.
 	 */
-	public Hashtable<EAnnotation,Constraint> constraints_mapping = new Hashtable<EAnnotation,Constraint>();
+	public Hashtable<EAnnotation,fr.irisa.triskell.kermeta.language.structure.Object> nestedAnnotMap = new Hashtable<EAnnotation,fr.irisa.triskell.kermeta.language.structure.Object>();
 	
 	public Ecore2KM(Resource resource, EcoreUnit unit)
 	{
@@ -79,7 +76,7 @@ public class Ecore2KM {
 	{
 		// First pass : visit all the packages, type definitions, and operations and properties without
 		// their types
-		ECore2KMPass1 visitor1 = new ECore2KMPass1(this);
+		Ecore2KMPass1 visitor1 = new Ecore2KMPass1(this);
 
 		// Visit the metamodel : we visit the packages, which imply the visit of 
 		// the classdefinitions and sub packages

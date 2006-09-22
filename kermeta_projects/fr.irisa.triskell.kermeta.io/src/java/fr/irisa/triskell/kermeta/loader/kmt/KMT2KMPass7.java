@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.20 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: KMT2KMPass7.java,v 1.21 2006-09-22 11:12:23 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -76,7 +76,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
 
     protected String fileData =  null;
     protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*");
-    public final static String KERMETADOC = "kdoc";
+    public final static String KERMETA_DOCUMENTATION = "documentation";
+    
 	/**
 	 * 
 	 */
@@ -309,7 +310,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	public fr.irisa.triskell.kermeta.language.structure.Tag createFTagFromAnnotation(Annotation a)
 	{
 	    String tag_value = "";
-        String tag_name = KERMETADOC;
+        String tag_name = KERMETA_DOCUMENTATION;
         if (Tag.class.isInstance(a))
         {
             tag_name  = ((Tag)a).getName().getFirstChild().getText();
@@ -335,7 +336,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	protected void processAnnotations(Annotations annLst, fr.irisa.triskell.kermeta.language.structure.Object element)
 	{
-	    String tag_name = KERMETADOC;
+	    String tag_name = KERMETA_DOCUMENTATION;
 	    String tag_value = null;
 	    
 	   // Resource resource;
@@ -357,7 +358,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    		}
 	    		else
 	    		{	// note : the concrete syntax -- /** */ -- is kept
-	    		    tag_name = KERMETADOC;
+	    		    tag_name = KERMETA_DOCUMENTATION;
 	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
 	    		}
 	    		
@@ -379,7 +380,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	protected void processAnnotationsForExpression(Annotations annLst, Expression element)
 	{
-	    String tag_name = KERMETADOC;
+	    String tag_name = KERMETA_DOCUMENTATION;
 	    String tag_value = null;
 	    
 	   // Resource resource;
@@ -401,7 +402,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    		}
 	    		else
 	    		{	// note : the concrete syntax -- /** */ -- is kept
-	    		    tag_name = KERMETADOC;
+	    		    tag_name = KERMETA_DOCUMENTATION;
 	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
 	    		}
 	    		tag.setName(tag_name);
