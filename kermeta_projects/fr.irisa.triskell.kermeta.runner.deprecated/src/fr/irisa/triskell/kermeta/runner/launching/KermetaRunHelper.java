@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.17 2006-09-19 12:39:59 ftanguy Exp $
+/* $Id: KermetaRunHelper.java,v 1.18 2006-09-22 09:39:18 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -113,6 +113,8 @@ public class KermetaRunHelper {
 	/** Get and flatten recursively the classes in the given package and in the packages children */
 	public static void getRecursivePackageTypeDefs(Package pPackage, ArrayList pList)
 	{
+		if (pPackage == null) return;
+		
 	    pList.addAll(pPackage.getOwnedTypeDefinition());
 	    EList packages = pPackage.getNestedPackage();
 	    for  (int i=0; i<packages.size(); i++)
