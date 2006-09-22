@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDecl.java,v 1.2 2006-09-12 12:59:22 dvojtise Exp $
+ * $Id: VariableDecl.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -89,7 +89,7 @@ public interface VariableDecl extends Expression {
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Type()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	TypeReference getType();

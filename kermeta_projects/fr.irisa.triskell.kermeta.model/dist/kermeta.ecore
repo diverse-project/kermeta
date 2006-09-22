@@ -26,7 +26,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings" upperBound="-1" eType="//language/structure/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//language/behavior/Expression">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" lowerBound="1" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="//language/behavior/Rescue" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//language/behavior/CallExpression"/>
@@ -41,9 +41,9 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="//language/behavior/CallVariable"/>
       <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="//language/behavior/CallExpression"/>
       <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="//language/behavior/Expression">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="thenBody" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="thenBody" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="elseBody" eType="//language/behavior/Expression" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Raise" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
@@ -63,11 +63,11 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LambdaExpression" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//language/behavior/LambdaParameter" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="LambdaParameter" eSuperTypes="//language/structure/Object">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//language/behavior/TypeReference" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//language/behavior/TypeReference" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="//language/behavior/Literal">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//language/structure/Integer"/>
@@ -85,13 +85,13 @@
       <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//language/behavior/Expression" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="SelfExpression" eSuperTypes="//language/behavior/Expression"/>
       <eClassifiers xsi:type="ecore:EClass" name="VariableDecl" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="//language/structure/String"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//language/behavior/TypeReference" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//language/behavior/TypeReference" containment="true"/>
       </eClassifiers>
     </eSubpackages>
     <eSubpackages name="structure" nsURI="http://kermeta/kermeta.ecore//language/structure" nsPrefix="kermeta_language_structure">
@@ -174,7 +174,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" upperBound="-1" eType="//language/structure/EnumerationLiteral" containment="true" eOpposite="//language/structure/EnumerationLiteral/enumeration"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="//language/structure/Object">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//language/structure/String"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//language/structure/NamedElement //language/structure/TypeDefinitionContainer">
         <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" upperBound="-1" eType="//language/structure/Package" containment="true" eOpposite="//language/structure/Package/nestingPackage"/>

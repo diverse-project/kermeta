@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Loop.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: Loop.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -89,7 +89,7 @@ public interface Loop extends Expression {
 	 * @return the value of the '<em>Stop Condition</em>' containment reference.
 	 * @see #setStopCondition(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_StopCondition()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getStopCondition();

@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.26 2006-09-22 09:54:17 zdrey Exp $
+/* $Id: reflection.kmt,v 1.27 2006-09-22 12:23:31 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -338,7 +338,7 @@ abstract class PrimitiveType inherits TypeContainer, DataType
 abstract class NamedElement inherits Object
 {   
     /** Name of this named element */
-	attribute name : String
+	attribute name : String[1..1]
 	
 	/** Returns the qualified name of this named element. Qualified name is 
 	 * the list of the names of the packages hierarchically ordered, delimited by

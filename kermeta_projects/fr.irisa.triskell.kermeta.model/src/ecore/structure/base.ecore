@@ -26,7 +26,8 @@
           transient="true" eOpposite="#//structure/Enumeration/ownedLiteral"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//structure/Object">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="#//structure/String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//structure/MultiplicityElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1"

@@ -9,8 +9,8 @@
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//behavior/Expression"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" eType="#//behavior/Expression"
-          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" lowerBound="1"
+          eType="#//behavior/Expression" containment="true"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

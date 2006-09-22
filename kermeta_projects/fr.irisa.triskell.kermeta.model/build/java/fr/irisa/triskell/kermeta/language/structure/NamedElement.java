@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElement.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: NamedElement.java,v 1.2 2006-09-22 12:23:06 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -35,7 +35,7 @@ public interface NamedElement extends fr.irisa.triskell.kermeta.language.structu
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getNamedElement_Name()
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String"
+	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.String" required="true"
 	 * @generated
 	 */
 	String getName();

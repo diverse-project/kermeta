@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpression.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: LambdaExpression.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -53,7 +53,7 @@ public interface LambdaExpression extends Expression {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Body()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getBody();

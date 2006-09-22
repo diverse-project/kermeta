@@ -6,14 +6,14 @@
     <eClassifiers xsi:type="ecore:EClass" name="LambdaExpression" eSuperTypes="#//behavior/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
           eType="#//behavior/LambdaParameter" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//behavior/Expression"
-          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
+          eType="#//behavior/Expression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="LambdaParameter" eSuperTypes="#//structure/Object">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//behavior/TypeReference"
-          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//behavior/TypeReference" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeReference"/>
   </eSubpackages>

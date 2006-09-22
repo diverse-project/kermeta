@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Kermeta Emf-Editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.model.editor; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.3.1
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.presentation.Kermeta_javaEditorPlugin$Implementation
-Bundle-Vendor: %providerName
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.kermeta.language.behavior.presentation,
  fr.irisa.triskell.kermeta.language.presentation,

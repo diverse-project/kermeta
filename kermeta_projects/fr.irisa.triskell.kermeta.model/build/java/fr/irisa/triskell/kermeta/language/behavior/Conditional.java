@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Conditional.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: Conditional.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -37,7 +37,7 @@ public interface Conditional extends Expression {
 	 * @return the value of the '<em>Then Body</em>' containment reference.
 	 * @see #setThenBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_ThenBody()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getThenBody();
@@ -89,7 +89,7 @@ public interface Conditional extends Expression {
 	 * @return the value of the '<em>Condition</em>' containment reference.
 	 * @see #setCondition(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getConditional_Condition()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getCondition();

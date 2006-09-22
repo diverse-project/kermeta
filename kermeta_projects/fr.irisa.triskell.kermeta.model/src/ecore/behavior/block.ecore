@@ -6,8 +6,8 @@
   <eSubpackages name="behavior" nsPrefix="">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//behavior/Expression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="statement" lowerBound="1"
-          upperBound="-1" eType="#//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1"
+          eType="#//behavior/Expression" containment="true"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

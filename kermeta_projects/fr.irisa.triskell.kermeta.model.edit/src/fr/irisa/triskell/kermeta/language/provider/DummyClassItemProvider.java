@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyClassItemProvider.java,v 1.1 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: DummyClassItemProvider.java,v 1.2 2006-09-22 12:23:10 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.provider;
 
@@ -60,16 +60,6 @@ public class DummyClassItemProvider
 
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This returns DummyClass.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DummyClass"));
 	}
 
 	/**

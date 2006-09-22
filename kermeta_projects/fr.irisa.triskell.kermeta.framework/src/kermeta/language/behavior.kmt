@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.14 2006-09-20 14:44:05 zdrey Exp $
+/* $Id: behavior.kmt,v 1.15 2006-09-22 12:23:31 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -147,7 +147,7 @@ class Assignment inherits Expression, KMExpressionVisitable
  */
 class Block inherits Expression, KMExpressionVisitable
 {
-	attribute statement : set Expression[1..*]
+	attribute statement : set Expression[0..*]
 	attribute rescueBlock : set Rescue[0..*]
 	
 	/** Implementation of the visitor design pattern on Block objects */	
@@ -161,9 +161,9 @@ class Block inherits Expression, KMExpressionVisitable
  */
 class Conditional inherits Expression, KMExpressionVisitable
 {
-	attribute thenBody : Expression
-	attribute elseBody : Expression
-	attribute condition : Expression
+	attribute thenBody : Expression[1..1]
+	attribute elseBody : Expression[0..1]
+	attribute condition : Expression[1..1]
 	
 	/** Implementation of the visitor design pattern on Conditional objects */	
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
@@ -235,9 +235,9 @@ class TypeLiteral inherits Literal, KMExpressionVisitable
 	attribute typeref : TypeReference[1..1]
 	/** Implementation of the visitor design pattern on TypeLiteral objects */	
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
-	do
-		result := visitor.visitTypeLiteral(self, context)
-	end
+		do
+			result := visitor.visitTypeLiteral(self, context)
+		end
 }
 /**
  * TypeReference refers to the type used in a variable declaration
@@ -264,9 +264,9 @@ class VoidLiteral inherits Literal, KMExpressionVisitable
 */
 class Loop inherits Expression, KMExpressionVisitable
 {
-	attribute initialization : Expression
-	attribute body : Expression
-	attribute stopCondition : Expression
+	attribute initialization : Expression[0..1]
+	attribute body : Expression[0..1]
+	attribute stopCondition : Expression[1..1]
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitLoop(self, context)
@@ -290,7 +290,7 @@ class VariableDecl inherits Expression, KMExpressionVisitable
 {
 	attribute initialization : Expression[1..1]
 	attribute identifier : kermeta::reflection::String
-	attribute type : TypeReference
+	attribute type : TypeReference[1..1]
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitVariableDecl(self, context)
@@ -340,7 +340,7 @@ class JavaStaticCall inherits Expression, KMExpressionVisitable
 class LambdaExpression inherits Expression, KMExpressionVisitable
 {
 	attribute parameters : set LambdaParameter[0..*]
-	attribute body : Expression
+	attribute body : Expression[0..1]
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitLambdaExpression(self, context)
@@ -352,7 +352,7 @@ class LambdaExpression inherits Expression, KMExpressionVisitable
 class LambdaParameter inherits kermeta::reflection::Object, KMExpressionVisitable
 {
 	attribute name : kermeta::reflection::String
-	attribute type : TypeReference
+	attribute type : TypeReference[1..1]
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitLambdaParameter(self, context)

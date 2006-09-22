@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Kermeta Emf-Model
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.model; singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 0.3.1
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.impl,
