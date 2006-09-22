@@ -40,16 +40,5 @@
       id="org.eclipse.ui.editors.text.texteditor">
    </editor>
    </extension>
-   <extension point = "org.eclipse.ui.editors">
-    <editor
-        id = "org.eclipse.emf.ecore.presentation.XMLReflectiveEditorID"
-        name = "Reflexive Editor"
-        icon = "src/java/fr/irisa/triskell/kermeta/texteditor/icons/kermeta_km.png"
-        class = "org.eclipse.emf.ecore.presentation.EcoreEditor" 
-        contributorClass="org.eclipse.emf.ecore.presentation.EcoreActionBarContributor$Reflective" 
-        extensions="km">
-        <!-- other possible icon: platform:/plugin/org.eclipse.emf.edit/icons/full/obj16/ModelFile.gif-->
-    </editor>
-   </extension>     
 
 </plugin>
