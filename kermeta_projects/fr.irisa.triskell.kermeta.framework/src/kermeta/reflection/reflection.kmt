@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.25 2006-08-18 09:18:20 dvojtise Exp $
+/* $Id: reflection.kmt,v 1.26 2006-09-22 09:54:17 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -27,6 +27,7 @@ alias String : kermeta::standard::String;
  */
 abstract class Object
 {
+	/** Tags are used to put comments/documentation */
 	reference tag : set Tag[0..*]#object
 	operation getMetaClass() : Class is abstract
 	operation container() : Object is abstract
@@ -146,7 +147,7 @@ abstract class ModelType inherits ParameterizedType
 			result := mtDef.ownedTypeDefinition
 		end
 }
-/** Element with a multiplicity [lower..upper] */
+/** Model elements with a multiplicity [lower..upper] inherit this class*/
 abstract class MultiplicityElement inherits TypedElement
 {
 	attribute isOrdered : Boolean
@@ -154,14 +155,16 @@ abstract class MultiplicityElement inherits TypedElement
 	attribute lower : Integer
 	attribute upper : UnlimitedNatural
 }
-/** Class representing the constraint definition */
+/** Constraint is part of a contract implementation in a Class definition or an operation.
+ * Three kinds of constraints are available : pre, post, and inv (invariant constraint)
+ */
 abstract class Constraint inherits NamedElement
 {
 	reference invOwner : ClassDefinition[0..1]#~inv
 	reference preOwner : Operation[0..1]#~pre
 	reference postOwner : Operation[0..1]#~post
 }
-/** Class representing the operation definition */
+/** Every one knows what an operation is. */
 abstract class Operation inherits MultiplicityElement
 {
 	attribute isAbstract : Boolean
@@ -174,14 +177,17 @@ abstract class Operation inherits MultiplicityElement
 	reference raisedException : set Type[0..*]
 	attribute ownedParameter : set Parameter[0..*]#~operation
 }
-/** Class representing the tag definition */
+/** Tag is intended to be used to add documentation on a 
+ * model element, or add some textual information that cannot be expressed
+ * with any model element definition.
+ */
 abstract class Tag inherits Object
 {
 	reference object : set Object[1..*]#tag
 	attribute name : String
 	attribute ~value : String
 }
-/** Class representing the property definition. Kermeta-Ecore equivalence:
+/** Class representing the property definition. Kermeta<->Ecore equivalence:
  *  - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute
  *  - Property with isComposite == false : EReference
  */
@@ -211,17 +217,16 @@ abstract class GenericTypeDefinition inherits TypeDefinition
 {
 	attribute typeParameter : set TypeVariable[0..*]
 }
-/** Defines a ClassDefinition. 
+/** The definition of a class definition :)
  *  <pre>class A
  *{ 
  *   attribute s : String
  *}
- *   </pre> is a class definition
- * in :
+ *   </pre> is a class definition; in :
  * <pre>
  * main() : A is do end
  * </pre>
- * A is a Class : it is the use of the class definition of A
+ * A is a <b>Class</b> : it corresponds to the <b>use</b> of the class definition of A
  */
 abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 {
@@ -257,10 +262,12 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 			}
 		end
 }
-/** Definition of a model type */
+
+/** Definition for a model type */
 abstract class ModelTypeDefinition inherits GenericTypeDefinition, TypeDefinitionContainer
 {
 }
+
 /** Abstraction of the notion of typed element : each element 
  * that is typed inherits this class. */
 abstract class TypedElement inherits TypeContainer, NamedElement
@@ -268,6 +275,7 @@ abstract class TypedElement inherits TypeContainer, NamedElement
     /** The type of this model element */
 	reference type : Type
 }
+
 /** Definition of a type variable for generic types :  
  * in class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables.
  */
@@ -295,7 +303,7 @@ abstract class ProductType inherits TypeContainer, Type
  *
  *  In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; 
  *  Boolean, with a parameter of type G and a return type of type Boolean
- *  The operation <pre>forAll</pre> takes a lambda expression as parameter.
+ *  The operation <code>forAll</code> takes a lambda expression as parameter.
  */
 abstract class FunctionType inherits TypeContainer, Type
 {
@@ -303,6 +311,8 @@ abstract class FunctionType inherits TypeContainer, Type
 	reference right : Type
 }
 
+/** Base class definition for the <b>use</b> of a type.
+ */
 abstract class Type inherits Object
 {
 	reference typeContainer : TypeContainer[1..1]#containedType
@@ -314,13 +324,16 @@ abstract class TypeVariableBinding inherits TypeContainer, Object
 	reference variable : TypeVariable[1..1]
 	reference type : Type[1..1]
 }
-/** The class definition for kermeta aliases. */
+/** The class definition for kermeta aliases. Above statement defines a primitive
+ * type called MyString, which instanceType is <code>kermeta::standard::String</code>
+ * <pre>alias MyString : kermeta::standard::String</pre>
+ */
 abstract class PrimitiveType inherits TypeContainer, DataType
 {
 	reference instanceType : Type
 }
-/** The class definition of which others inherit when they represent a model element with a 
- * name (example : Operation, Property) 
+/** Any element that contain a  name (example : Operation, Property) inherit this
+* class.
  */
 abstract class NamedElement inherits Object
 {   
