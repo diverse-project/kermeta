@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.10 2006-05-09 16:31:08 jmottu Exp $
+/* $Id: KermetaTypeChecker.java,v 1.11 2006-09-25 14:49:19 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -18,6 +19,8 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
@@ -32,6 +35,8 @@ public class KermetaTypeChecker {
     
     protected KermetaUnit unit;
     protected TypeCheckerContext context;
+    /** Attribute that is set to semantically abstract class definitions */
+    public static final String IS_SEMANTICALLY_ABSTRACT = "isSemanticallyAbstract";
         
     public Type getTypeOfExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
         return new SimpleType(expression.getStaticType());
@@ -62,16 +67,74 @@ public class KermetaTypeChecker {
      * of a kermeta unit
      */
     public void checkUnit() {
-        
-        
-        Iterator it = unit.typeDefs.values().iterator();
-        while(it.hasNext()) {
-            TypeDefinition td = (TypeDefinition)it.next();
+    	Collection<TypeDefinition> typedefs = unit.typeDefs.values();
+        // First, annotate semantically abstract class definitions
+    	for (TypeDefinition td : typedefs)
+    	{
+    		if (td instanceof ClassDefinition)
+    			annotateSemanticallyAbstractClassDefinition((ClassDefinition)td);
+    	}
+        // Second, check for each class def, its operation (inc. bodies) and properties
+    	// (Uses annotations set above to check operation call "new".)
+    	for (TypeDefinition td : typedefs)
+    	{
             if (td instanceof ClassDefinition) {
                 checkClassDefinition((ClassDefinition)td);
             }
         }
     }
+    
+	/** 
+	 * A semantically abstract class definition contains at least one abstract 
+	 * operation, or does not provide a concrete implementation of an inherited
+	 * operation.
+	 * This method adds a transient tag to any type definition that is "semantically abstract".
+	 * The tag name is "isSemanticallyAbstract"
+	 * <pre>
+	 * class A {
+	 * 		operation x() is abstract
+	 * 		operation y() is do end
+	 * }
+	 * 
+	 * class B inherits A {
+	 * 	 	method x() is do end
+	 * }
+	 * </pre>
+	 * 
+	 * FIXME : This method is not efficient.
+	 */
+	public boolean annotateSemanticallyAbstractClassDefinition(ClassDefinition typedef)
+	{
+		boolean foundSAbstractTag = false;
+		if (typedef.isIsAbstract()) return true;
+		Iterator it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition((ClassDefinition)typedef)).iterator();
+		while (it.hasNext() && !foundSAbstractTag && !isSemanticallyAbstract(typedef))
+		{
+			if (((CallableOperation)it.next()).getOperation().isIsAbstract())
+			{
+				foundSAbstractTag = true;
+				Tag tag = StructureFactory.eINSTANCE.createTag(); tag.setName(IS_SEMANTICALLY_ABSTRACT);
+				typedef.getTag().add(tag);
+			}
+		}
+		return foundSAbstractTag;
+	}
+	
+
+	
+	/** The necessary and sufficient condition to know if a class definition is semantically
+	 * abstract or not is the presence of a tag which name is "isSemanticallyAbstract"; 
+	 * this methods looks for this tag and returns true if it found it. */
+	public static boolean isSemanticallyAbstract(ClassDefinition cdef) {
+		boolean isSemanticallyAbstract = false;
+		if (cdef.isIsAbstract()) return true;
+		Iterator it = cdef.getTag().iterator();
+		while(it.hasNext() && !isSemanticallyAbstract)
+		{
+			isSemanticallyAbstract = ((Tag)it.next()).getName().equals(IS_SEMANTICALLY_ABSTRACT);
+		}
+		return isSemanticallyAbstract;
+	}
     
     /**
      * Type check all the operations and derived properties
@@ -79,7 +142,7 @@ public class KermetaTypeChecker {
      * @param clsdef
      */
     public void checkClassDefinition(ClassDefinition clsdef) {
-        
+		
         Iterator it = clsdef.getOwnedOperation().iterator();
         while(it.hasNext()) {
             Operation op = (Operation)it.next();
@@ -97,7 +160,6 @@ public class KermetaTypeChecker {
             Constraint c = (Constraint)it.next();
             checkConstraint(c);
         }
-        
     }
     
     public void checkConstraint(Constraint c)

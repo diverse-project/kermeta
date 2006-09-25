@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.30 2006-04-18 16:23:22 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.31 2006-09-25 14:49:19 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -51,14 +51,12 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -74,7 +72,6 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
         visitor.accept(expression);
         return visitor.expressionTypes;
     }
-	
 	
 	// The unit to type-check
 	protected KermetaUnit unit;
@@ -254,9 +251,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	            result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
 	            // check that it is a concrete class
-	            if (((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()) {
-	                unit.messages.addError("TYPE-CHECKER : Abstract class "+ result +" should not be instanciated.", (Expression)exp);
-	            }
+	            if (((SimpleType)result).isSemanticallyAbstract())
+	                unit.messages.addError("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	        }
 	    }
 	    

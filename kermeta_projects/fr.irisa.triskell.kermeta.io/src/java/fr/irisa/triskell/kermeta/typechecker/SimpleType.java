@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.8 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: SimpleType.java,v 1.9 2006-09-25 14:49:20 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -18,12 +18,14 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-//import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author Franck Fleurey
@@ -36,6 +38,7 @@ public class SimpleType extends Type {
 	 * The corresponding fr.irisa.triskell.kermeta.language.structure.Type
 	 */
 	protected fr.irisa.triskell.kermeta.language.structure.Type type;
+	private boolean isSemanticallyAbstract;
 	
 	/**
 	 * Constructor
@@ -43,6 +46,16 @@ public class SimpleType extends Type {
 	public SimpleType(fr.irisa.triskell.kermeta.language.structure.Type type) {
 		super();
 		this.type = type;
+		this.setIsSemanticallyAbstract();
+	}
+	
+	public void setIsSemanticallyAbstract()
+	{
+		// If type is linked to a class definition and if it is semantically abstract
+		isSemanticallyAbstract = true;
+		TypeDefinition typedef = getTypeDefinition();
+		if (typedef!=null && typedef instanceof ClassDefinition)
+			isSemanticallyAbstract = KermetaTypeChecker.isSemanticallyAbstract((ClassDefinition)typedef);
 	}
 	
 	/**
@@ -164,6 +177,10 @@ public class SimpleType extends Type {
 		return (String)FTypePrettyPrinter.getInstance().accept(type);
 	}
 	
+	public boolean isSemanticallyAbstract() {
+		return isSemanticallyAbstract;
+	}
+	
 	/**
 	 * Return the type definition of the type if it has one, null otherwise
 	 * @return
@@ -175,7 +192,7 @@ public class SimpleType extends Type {
 	    }
 	    return null;
 	}
-	
+
 	public fr.irisa.triskell.kermeta.language.structure.Type getFType() {
 		return type;
 	}
@@ -183,6 +200,7 @@ public class SimpleType extends Type {
 	public fr.irisa.triskell.kermeta.language.structure.Type getType() {
 		return type;
 	}
+	
 	public void setType(fr.irisa.triskell.kermeta.language.structure.Type type) {
 		this.type = type;
 	}
