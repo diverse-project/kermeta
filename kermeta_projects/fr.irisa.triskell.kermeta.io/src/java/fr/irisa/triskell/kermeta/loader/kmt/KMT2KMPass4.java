@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.16 2006-08-31 15:03:32 dtouzet Exp $
+/* $Id: KMT2KMPass4.java,v 1.17 2006-09-25 14:46:01 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -97,15 +97,16 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		// Is there already an operation in the super types of this class?
 		EList superclasses = builder.current_class.getSuperType();
 		if (operation.getOperationKind().getText().equals("operation")) {
+			// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
 			// If not, is there already an operation in the common *implicit* super type object?
-			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
-			if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
+			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::language::structure::Object"));
+			if (object_classdef != null) // robustness useless test -> Object type should already have been parsed!
 			{
 				if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null && 
-						builder.current_class != object_classdef && // ignore "kermeta::reflection::Object" itself ...
+						builder.current_class != object_classdef && // ignore "Object" itself ...
 						!builder.getQualifiedName(builder.current_class).equals("kermeta::language::structure::KMStructureVisitable")) // the concret implementation of Object inherits from KMStructureVisitable
 				builder.messages.addMessage(new KMTUnitLoadError(
-						base_msg + "kermeta::reflection::Object'. (implicit inheritance!)" + end_msg,
+						base_msg + "kermeta:language::structure::Object'. (implicit inheritance!)" + end_msg,
 						operation));
 					return false;
 			}

@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.9 2006-09-07 07:37:46 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.10 2006-09-25 14:42:13 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -18,6 +18,8 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -90,10 +92,11 @@ public class OperationChecker extends AbstractChecker {
 		boolean result = false;
 		Object found = null;
 		Operation next = null;
-		// Get the kermeta::reflection::Object *implicitly* inherited super operation
-		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
-		if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
-		{
+		// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
+		// Get the kermeta::language::structure::Object *implicitly* inherited super operation
+		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::language::structure::Object"));
+		if (object_classdef != null) // robustness useless test -> kermeta::language::structure::Object type should already have been parsed!
+		{ 
 			next = builder.findOperationByName(object_classdef, operation.getName());
 		}
 		// If this operation was not found in implicitly inherited Object
@@ -129,6 +132,10 @@ public class OperationChecker extends AbstractChecker {
 		return result;
 	}
 	
+	/** 
+	 * 
+	 * @return
+	 */
 	public boolean checkOperationIsUnique()
 	{
 		boolean result = true;
