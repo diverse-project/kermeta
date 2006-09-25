@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.73 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: KermetaUnit.java,v 1.74 2006-09-25 14:44:58 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -13,42 +13,32 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.behavior.Assignment;
-import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -57,14 +47,16 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
@@ -916,7 +908,7 @@ public abstract class KermetaUnit {
 	
 	/** @return all the type definitions available in this kermeta unit, in
 	 * all packages */
-	public ArrayList getAllTypeDefinitions() {
+	public ArrayList<TypeDefinition> getAllTypeDefinitions() {
 		ArrayList<TypeDefinition> result = new ArrayList<TypeDefinition>();
 		for (Iterator<Package> it = getAllPackages().iterator(); it.hasNext();)
 			result.addAll(it.next().getOwnedTypeDefinition());
