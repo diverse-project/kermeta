@@ -1,4 +1,4 @@
-<!-- $Id: deploy_jar_build.xml,v 1.4 2005-07-08 12:21:08 dvojtise Exp $ -->
+<!-- $Id: deploy_jar_build.xml,v 1.5 2006-09-25 13:44:02 cfaucher Exp $ -->
 <project name="interpreter_kermeta.jar" default="all" basedir=".">
 	
 	<description>
@@ -15,6 +15,7 @@
 	<target name="deploy" 
 		description="deploy the jar file">
 		<copy file="${kermeta.interpreter.jar}" todir="../fr.irisa.triskell.kermeta/lib/"/>
+		<copy file="${kermeta.interpreter.jar}" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
 	</target>
 	
 	<target name="create_jar" 
