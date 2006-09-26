@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.18 2006-09-20 15:59:32 dvojtise Exp $
+/* $Id: KermetaUnitFactory.java,v 1.19 2006-09-26 14:27:09 zdrey Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.loader;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -36,6 +37,18 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 public class KermetaUnitFactory {
     
 	protected static KermetaUnitFactory defaultLoader;
+	/** Contains the qualified ids that are allowed to follow a "require"*/
+	private static ArrayList<String> allowedQualifiedIDs ;
+	public static ArrayList<String> getAllowedQualifiedIDs() 
+	{
+		if (allowedQualifiedIDs == null)
+		{
+			allowedQualifiedIDs = new ArrayList<String>();
+			allowedQualifiedIDs.add("kermeta"); 
+			allowedQualifiedIDs.add("java_rt_jar");
+		}
+		return allowedQualifiedIDs;
+	}
 	
 	public static KermetaUnitFactory getDefaultLoader() {
 		if (defaultLoader == null) {
@@ -121,9 +134,7 @@ public class KermetaUnitFactory {
     		String javahome = System.getProperty("java.home");
     		javahome = javahome.replace("\\", "/");
     		uri = "file:/"+javahome+"/lib/rt.jar";
-    		
     	}
-    	
     	// resolve uri
     	URI u = URI.createURI(uri);
     	if (u.isRelative()) {

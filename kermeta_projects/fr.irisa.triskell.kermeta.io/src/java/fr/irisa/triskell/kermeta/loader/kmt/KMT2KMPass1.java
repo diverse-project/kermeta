@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.8 2006-08-09 13:44:38 dvojtise Exp $
+/* $Id: KMT2KMPass1.java,v 1.9 2006-09-26 14:27:09 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import fr.irisa.triskell.kermeta.ast.*;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 
 
 /**
@@ -47,10 +48,15 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	public boolean beginVisit(ImportStmt importStmt) {
 		StringLiteralOrQualifiedID node = importStmt.getUri();
 		if (node instanceof QualifiedID) {
-			currentImportedUnit = builder.importModelFromID(qualifiedIDAsString((QualifiedID)node)); 
-			builder.traceImportedUnits.put(
-					currentImportedUnit,
-					node);
+			// The only qualified ID for now is 'kermeta' and 'java_rt_jar'. Any other is forbidden.
+			String qid = qualifiedIDAsString((QualifiedID)node);
+			if (KermetaUnitFactory.getAllowedQualifiedIDs().contains(qid))
+			{
+				currentImportedUnit = builder.importModelFromID(qid); 
+				builder.traceImportedUnits.put(currentImportedUnit, node);
+			}
+			else
+				builder.messages.addError("PASS 1 : invalid require was found : 'require " + qid + "'" , null);
 		}
 		else {
 			String uri = ((StringLiteralContainer)node).getString_literal().getText();

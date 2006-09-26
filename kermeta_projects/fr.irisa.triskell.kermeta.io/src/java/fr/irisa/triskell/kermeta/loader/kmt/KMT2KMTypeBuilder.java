@@ -94,7 +94,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			// If result is null here, then the type is unresolved
 			
 			if(result == null) {
-				builder.messages.addMessage(new KMTUnitLoadError("Unresolved type '" + qname + "'.",basictype));
+				builder.messages.addMessage(new KMTUnitLoadError("Unresolved type '" + qname + "'. (missing using ?)",basictype));
 				return false;
 			}
 			
