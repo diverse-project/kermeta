@@ -82,7 +82,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 		{
 			addProposalsForPackages(doc, offset, propList, qualifier);
 		}
-		else if (qualifier.startsWith(":")) {
+		else if (qualifier.startsWith(":") || qualifier.startsWith("<")) {
 		    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
 		}
 		// "." -> should be followed by call feature
@@ -117,6 +117,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 		            }
 		        }
 		    }
+		    else {System.err.println("unit is null" + unit);}
 		}
 		/*
 		if (qualifier.equals("")) { addPrposalsForKW(doc, offset, propList, qualifier); }
@@ -168,7 +169,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#getCompletionProposalAutoActivationCharacters()
 	 */
 	public char[] getCompletionProposalAutoActivationCharacters() {
-		return new char[] { '.', ':' };
+		return new char[] { '.', ':', '<' };
 	}
 
 	/* (non-Javadoc)
@@ -223,7 +224,7 @@ public class EditorCompletion implements IContentAssistProcessor {
              }
              
              // Start of tag or attribute value. Return qualifier
-             if (c == '.' || c == ':')
+             if (c == ':' || c == '.' || c == '<')
              {
                 buf.append(c);
                 if (c == ':')
@@ -235,14 +236,15 @@ public class EditorCompletion implements IContentAssistProcessor {
                 	{
                 		doubleColon = true;
                 		buf.append(c);
-                		while ( !Character.isWhitespace(c)) 
+                		// '<' refers to type parameters
+                		while ( !Character.isWhitespace(c) && c != '<') 
                 		{
                 			c = doc.getChar(--documentOffset);
                 			buf.append(c);
                 		}
                 	}
                 }
-                if (doubleColon == false || Character.isWhitespace(c) )
+                if (doubleColon == false || Character.isWhitespace(c) || c != '<')
                 	return buf.reverse().toString();
              }
              
