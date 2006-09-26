@@ -319,8 +319,8 @@ public class EditorCompletion implements IContentAssistProcessor {
     		 TypeDefinition t = (TypeDefinition)next;
     		 CompletionItem ci = new NamedElementCompletionItem(t);
              if (short_name.length() == 0 ) props.add(ci.getCompletionProposal(offset, 0));
-    		 else if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase())) {
-                 props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
+    		 else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase())) {
+                 props.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
              }
             	 
     	}
