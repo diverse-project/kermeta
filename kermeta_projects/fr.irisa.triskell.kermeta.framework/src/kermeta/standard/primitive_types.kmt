@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.22 2005-11-25 10:08:11 zdrey Exp $
+// $Id: primitive_types.kmt,v 1.23 2006-09-26 10:26:55 dvojtise Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -121,6 +121,28 @@ class Boolean
 	 */ 
 	operation ~or(other : Boolean) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~or(self, other)
+	end
+	
+	/**
+	 * return self implies other
+	 * meaning : not( (not (self and other)) and self)
+	 */
+	operation ~implies(other : Boolean) : Boolean is do
+		result := not( (not (self and other)) and self)
+	end
+	
+	/**
+	 * return self xor other
+	 */ 
+	operation ~xor(other : Boolean) : Boolean is do
+		result := ( self and (not other)) or ( (not self) and other)
+	end
+	
+	/**
+	 * return self nand other
+	 */ 
+	operation ~nand(other : Boolean) : Boolean is do
+		result := not ( self and other)
 	end
 	
 	method toString() : String is do
