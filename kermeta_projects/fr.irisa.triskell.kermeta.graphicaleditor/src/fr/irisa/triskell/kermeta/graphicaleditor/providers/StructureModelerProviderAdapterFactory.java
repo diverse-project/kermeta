@@ -1,3 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse
+ * Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
+ *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
+ *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ ******************************************************************************/
+
 package fr.irisa.triskell.kermeta.graphicaleditor.providers;
 
 import java.util.ArrayList;
@@ -13,6 +25,8 @@ import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
+//import org.topcased.modeler.providers.IDeleteObjectProvider;
+import org.topcased.modeler.providers.IDeletePartnerProvider;
 
 import fr.irisa.triskell.kermeta.language.structure.util.StructureAdapterFactory;
 
@@ -62,57 +76,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Operation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private OperationModelerProvider operationModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Property} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private PropertyModelerProvider propertyModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Type} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private TypeModelerProvider typeModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeContainer} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private TypeContainerModelerProvider typecontainerModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.EnumerationLiteral} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	private EnumerationLiteralModelerProvider enumerationliteralModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Class} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Class} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -122,7 +86,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Object} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Object} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -132,7 +96,57 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.MultiplicityElement} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Operation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private OperationModelerProvider operationModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link fr.irisa.triskell.kermeta.model.Property} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private PropertyModelerProvider propertyModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link fr.irisa.triskell.kermeta.model.Type} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private TypeModelerProvider typeModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link fr.irisa.triskell.kermeta.model.TypeContainer} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private TypeContainerModelerProvider typecontainerModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link fr.irisa.triskell.kermeta.model.EnumerationLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EnumerationLiteralModelerProvider enumerationliteralModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link fr.irisa.triskell.kermeta.model.MultiplicityElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -142,7 +156,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.DataType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.DataType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -152,7 +166,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Enumeration} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Enumeration} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -162,7 +176,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.NamedElement} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.NamedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -172,7 +186,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Package} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Package} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -182,7 +196,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Parameter} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Parameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -192,7 +206,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.PrimitiveType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.PrimitiveType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -202,7 +216,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.TypedElement} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.TypedElement} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -212,7 +226,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.Tag} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Tag} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -222,7 +236,17 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.ClassDefinition} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.Constraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private ConstraintModelerProvider constraintModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all
+	 * {@link fr.irisa.triskell.kermeta.model.ClassDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -232,7 +256,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeVariable} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.TypeVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -242,7 +266,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.ProductType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.ProductType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -252,7 +276,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.FunctionType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.FunctionType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -262,7 +286,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeVariableBinding} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.TypeVariableBinding} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -272,7 +296,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeDefinition} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.TypeDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -282,7 +306,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.VoidType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.VoidType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -292,7 +316,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.ParameterizedType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.ParameterizedType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -302,7 +326,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.GenericTypeDefinition} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.GenericTypeDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -312,7 +336,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.ModelTypeDefinition} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.ModelTypeDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -322,7 +346,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.ModelType} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.ModelType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -332,7 +356,7 @@ public class StructureModelerProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeDefinitionContainer} instances.
+	 * {@link fr.irisa.triskell.kermeta.model.TypeDefinitionContainer} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -345,10 +369,12 @@ public class StructureModelerProviderAdapterFactory extends
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public StructureModelerProviderAdapterFactory() {
 		supportedTypes.add(ILabelFeatureProvider.class);
+        supportedTypes.add(IDeletePartnerProvider.class);
+        //supportedTypes.add(IDeleteObjectProvider.class);
 	}
 
 	/**
@@ -467,7 +493,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Class}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Class}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -483,7 +509,23 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Operation}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Object}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the Adapter
+	 * 
+	 * @generated
+	 */
+	public Adapter createObjectAdapter() {
+		if (objectModelerProvider == null) {
+			objectModelerProvider = new ObjectModelerProvider(this);
+		}
+
+		return objectModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Operation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -499,7 +541,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Property}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Property}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -515,7 +557,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Type}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Type}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -531,7 +573,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeContainer}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.TypeContainer}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -548,7 +590,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.EnumerationLiteral}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.EnumerationLiteral}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -565,23 +607,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Object}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the Adapter
-	 * 
-	 * @generated
-	 */
-	public Adapter createObjectAdapter() {
-		if (objectModelerProvider == null) {
-			objectModelerProvider = new ObjectModelerProvider(this);
-		}
-
-		return objectModelerProvider;
-	}
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.MultiplicityElement}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.MultiplicityElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -598,7 +624,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.DataType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.DataType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -614,7 +640,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Enumeration}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Enumeration}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -630,7 +656,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.NamedElement}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.NamedElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -646,7 +672,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Package}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Package}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -662,7 +688,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Parameter}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Parameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -678,7 +704,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.PrimitiveType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.PrimitiveType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -695,7 +721,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.TypedElement}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.TypedElement}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -711,7 +737,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.Tag}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Tag}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -727,7 +753,23 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.ClassDefinition}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the Adapter
+	 * 
+	 * @generated
+	 */
+	public Adapter createConstraintAdapter() {
+		if (constraintModelerProvider == null) {
+			constraintModelerProvider = new ConstraintModelerProvider(this);
+		}
+
+		return constraintModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.ClassDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -744,7 +786,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeVariable}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.TypeVariable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -760,7 +802,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.ProductType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.ProductType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -776,7 +818,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.FunctionType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.FunctionType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -792,7 +834,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeVariableBinding}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.TypeVariableBinding}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -809,7 +851,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeDefinition}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.TypeDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -826,7 +868,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.VoidType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.VoidType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -842,7 +884,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.ParameterizedType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.ParameterizedType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -859,7 +901,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.GenericTypeDefinition}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.GenericTypeDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -876,7 +918,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.ModelTypeDefinition}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.ModelTypeDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -893,7 +935,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.ModelType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.ModelType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -909,7 +951,7 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.graphicaleditor.TypeDefinitionContainer}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.model.TypeDefinitionContainer}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Adapter
@@ -933,6 +975,10 @@ public class StructureModelerProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void dispose() {
+		if (classModelerProvider != null)
+			classModelerProvider.dispose();
+		if (objectModelerProvider != null)
+			objectModelerProvider.dispose();
 		if (operationModelerProvider != null)
 			operationModelerProvider.dispose();
 		if (propertyModelerProvider != null)
@@ -943,10 +989,6 @@ public class StructureModelerProviderAdapterFactory extends
 			typecontainerModelerProvider.dispose();
 		if (enumerationliteralModelerProvider != null)
 			enumerationliteralModelerProvider.dispose();
-		if (classModelerProvider != null)
-			classModelerProvider.dispose();
-		if (objectModelerProvider != null)
-			objectModelerProvider.dispose();
 		if (multiplicityelementModelerProvider != null)
 			multiplicityelementModelerProvider.dispose();
 		if (datatypeModelerProvider != null)
@@ -965,6 +1007,8 @@ public class StructureModelerProviderAdapterFactory extends
 			typedelementModelerProvider.dispose();
 		if (tagModelerProvider != null)
 			tagModelerProvider.dispose();
+		if (constraintModelerProvider != null)
+			constraintModelerProvider.dispose();
 		if (classdefinitionModelerProvider != null)
 			classdefinitionModelerProvider.dispose();
 		if (typevariableModelerProvider != null)
