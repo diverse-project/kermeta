@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+     <objectContribution
+            adaptable="false"
+            id="fr.irisa.triskell.kermeta.objectContribution1"
+            nameFilter="*.xmi"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="KerMeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="fr.irisa.triskell.sintaks.ui.Model2TextAction"
+               enablesFor="1"
+               id="fr.irisa.triskell.kermeta.textloader.ui.Text2Model"
+               label="Model to Text"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution>
+      <objectContribution
+            id="fr.irisa.triskell.kermeta.objectContribution2"
+            nameFilter="*.txt"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+               label="KerMeta"
+               path="additions">
+            <separator name="kermetagroup1"/>
+         </menu>
+         <action
+               class="fr.irisa.triskell.sintaks.ui.Text2ModelAction"
+               enablesFor="1"
+               id="fr.irisa.triskell.kermeta.textloader.ui.Text2Model"
+               label="Text to Model"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution>
+   </extension>
+
+</plugin>
