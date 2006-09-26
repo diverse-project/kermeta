@@ -5,12 +5,15 @@
 package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 //import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 //import org.eclipse.jface.text.contentassist.CompletionProposal;
+import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -26,6 +29,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
@@ -46,6 +50,7 @@ import fr.irisa.triskell.kermeta.typechecker.Type;
 public class EditorCompletion implements IContentAssistProcessor {
 	
 	protected Editor editor;
+	protected boolean doubleColon;
 	
 	public EditorCompletion(Editor editor) {
 		super();
@@ -66,14 +71,19 @@ public class EditorCompletion implements IContentAssistProcessor {
 		
 		// Get the token between the cursor and last character reliable for completion
 		// "." -> should be followed by call feature
-		// ":" -> should be followed by package or class
+		// ":" -> should be followed by class definition
+		// "::" -> should be followed by package or class definition
 		String qualifier = getQualifier(doc, offset);
 		
 		TexteditorPlugin.pluginLog.info(" * Completion -> qualifier = " + qualifier);
 		
-		// ":" -> should be followed by package (todo) or class (done)
-		if (qualifier.startsWith(":")) {
-		    addPrposalsForTypes(doc, offset, propList, qualifier.substring(1));
+		// "::" -> should be followed by package or type definition 
+		if (doubleColon == true)
+		{
+			addProposalsForPackages(doc, offset, propList, qualifier);
+		}
+		else if (qualifier.startsWith(":")) {
+		    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
 		}
 		// "." -> should be followed by call feature
 		else if (qualifier.startsWith(".")) {
@@ -102,7 +112,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 	//		                if (((SimpleType)t).getType() instanceof FunctionType) {
 	//		                    t = t.getFunctionTypeRight();
 	//		                }
-		                    addPrposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1), t);
+		                    addProposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1), t);
 		                }
 		            }
 		        }
@@ -195,6 +205,7 @@ public class EditorCompletion implements IContentAssistProcessor {
        // Use string buffer to collect characters
        StringBuffer buf = new StringBuffer();
        boolean white = false;
+       doubleColon = false;
        while (true)
        {
           try
@@ -215,7 +226,24 @@ public class EditorCompletion implements IContentAssistProcessor {
              if (c == '.' || c == ':')
              {
                 buf.append(c);
-                return buf.reverse().toString();
+                if (c == ':')
+                {
+                	c = doc.getChar(--documentOffset);
+                	// Handle the case where we have a '::' so that we can
+                	// do a "qualified_name-related completion".
+                	if (c == ':')
+                	{
+                		doubleColon = true;
+                		buf.append(c);
+                		while ( !Character.isWhitespace(c)) 
+                		{
+                			c = doc.getChar(--documentOffset);
+                			buf.append(c);
+                		}
+                	}
+                }
+                if (doubleColon == false || Character.isWhitespace(c) )
+                	return buf.reverse().toString();
              }
              
              if (white) return "";
@@ -231,7 +259,7 @@ public class EditorCompletion implements IContentAssistProcessor {
        }
     }
     
-    private void addPrposalsForFeatureCalls(IDocument doc, int offset, ArrayList props, String begining, Type type) {
+    private void addProposalsForFeatureCalls(IDocument doc, int offset, ArrayList props, String begining, Type type) {
         for (Object next : type.callableProperties())
         {
             CallableProperty cp = (CallableProperty)next;
@@ -250,42 +278,79 @@ public class EditorCompletion implements IContentAssistProcessor {
                 
             }
         }
-        //Collections.sort(props);
+        Collections.sort(props, cpCmp);
     }
     
-    /*
-    private void addPrposalsForKW(IDocument doc, int offset, ArrayList props, String begining) {
-    	// find possible methods :
-    	String[] propositions = kws;
-    	// selet those which match
-    	for(int i=0; i<propositions.length; i++) {
-    		if(propositions[i].startsWith(begining)) {
-    			CompletionProposal p = new CompletionProposal(propositions[i], offset, 0, propositions[i].length(),null, propositions[i], null, null);
-    			props.add(p);
-    		}
-    	}
-    }
-    */
-    
-    private void addPrposalsForTypes(IDocument doc, int offset, ArrayList props, String begining) {
-        Iterator it = editor.getMcunit().packages.values().iterator();
-        while(it.hasNext()) {
-            Package p = (Package)it.next();
-            Iterator typeit = p.getOwnedTypeDefinition().iterator();
-            while(typeit.hasNext()) {
-                TypeDefinition td = (TypeDefinition)typeit.next();
-                
-                CompletionItem ci = new TypeCompletionItem(td);
-                
-                if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase())) {
+    private void addProposalsForTypes(IDocument doc, int offset, ArrayList props, String begining) {
+        for ( Package p : editor.getMcunit().packages.values())
+        {
+            for (Object next: p.getOwnedTypeDefinition()) {
+                TypeDefinition td = (TypeDefinition)next;
+                CompletionItem ci = new NamedElementCompletionItem(td);
+                if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase()))
                     props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
-                    
-                }
-               //Collections.sort(props);
             }
+            CompletionItem ci = new NamedElementCompletionItem(p);
+            if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase()))
+                 props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
         }
+    	Collections.sort(props, cpCmp);
     }
     
-    
+    /***
+     * Proposes the nested packages and owned type definitions for the package given
+     * by <code>begining</code> string
+     * @param doc the document contained by the text editor
+     * @param offset the position of the cursor
+     * @param props A list of proposals, initialized to empty list
+     * @param begining The string to complete (should contain at least "::" substring)
+     */
+    private void addProposalsForPackages(IDocument doc, int offset, ArrayList props, String begining) {
+    	// Get the name of package
+    	String pkg_name = begining.substring(1, begining.lastIndexOf("::"));
+    	String short_name = ""; // can be class name or package name
+    	if (begining.length() > begining.lastIndexOf("::") + 2) 
+    		short_name = begining.substring(begining.lastIndexOf("::")+2);
+    	
+    	Package pkg = editor.getMcunit().packageLookup(pkg_name);
+    	// Get classdefinitions inside pkg
+    	for (Object next : pkg.getOwnedTypeDefinition())
+    	{
+    		 TypeDefinition t = (TypeDefinition)next;
+    		 CompletionItem ci = new NamedElementCompletionItem(t);
+             if (short_name.length() == 0 ) props.add(ci.getCompletionProposal(offset, 0));
+    		 else if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase())) {
+                 props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
+             }
+            	 
+    	}
+    	
+    	// Get sub packages of this pkg
+        for (Object next : pkg.getNestedPackage()) {
+        	Package p = (Package)next;
+        	CompletionItem ci = new NamedElementCompletionItem(p);
+        	if (short_name.length() == 0) props.add(ci.getCompletionProposal(offset,0));
+        	else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase()))
+        		props.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
+        }
+        Collections.sort(props, cpCmp);
+    }
+
+	/** Comparator for CompletionProposals sorting. */
+	static final Comparator cpCmp = new Comparator() {
+	     public int compare(Object o1, Object o2) {
+	         String s1 = ((CompletionProposal)o1).getDisplayString();
+	         String s2 = ((CompletionProposal)o2).getDisplayString();
+	         int len1 = s1.length();
+	         int len2 = s2.length();
+	         for (int i=0, n=Math.min(len1, len2); i<n; i++) {
+	        	 char c1 = s1.charAt(i);
+	        	 char c2 = s2.charAt(i);
+	        	 if (c1 != c2)
+	        		 return c1 - c2;
+	         }
+	          return len1 - len2;
+	     }
+	 };
     
 }

@@ -1,4 +1,4 @@
-/* $Id: TypeCompletionItem.java,v 1.2 2006-03-03 15:23:52 dvojtise Exp $
+/* $Id: NamedElementCompletionItem.java,v 1.1 2006-09-26 09:57:46 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCompletionItem.java
 * License : GPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import org.eclipse.swt.graphics.Image;
 
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
@@ -19,41 +20,41 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class TypeCompletionItem extends CompletionItem {
+public class NamedElementCompletionItem extends CompletionItem {
 
-    protected TypeDefinition type;
+    protected NamedElement namedElement;
     
     protected static GetTextVisitor getTextVisitor =  new GetTextVisitor();
     protected static GetImageVisitor getImageVisitor =  new GetImageVisitor();
     
-    public TypeCompletionItem(TypeDefinition t) {
-        type = t;
+    public NamedElementCompletionItem(NamedElement n) {
+        namedElement = n;
     }
     
     /**
      * @see fr.irisa.triskell.kermeta.texteditor.completion.CompletionItem#getLabel()
      */
     public String getLabel() {
-        return getTextVisitor.accept(type).toString();
+        return getTextVisitor.accept(namedElement).toString();
     }
 
     /**
      * @see fr.irisa.triskell.kermeta.texteditor.completion.CompletionItem#getDescription()
      */
     public String getDescription() {
-        return getTextVisitor.getQualifiedName(type);
+        return getTextVisitor.getQualifiedName(namedElement);
     }
 
     /**
      * @see fr.irisa.triskell.kermeta.texteditor.completion.CompletionItem#getImage()
      */
     public Image getImage() {
-        return (Image)getImageVisitor.accept(type);
+        return (Image)getImageVisitor.accept(namedElement);
     }
 
     
     public String getCompletionText() {
-        return type.getName();
+        return namedElement.getName();
     }
     public int getCursorLocation() {
         return getCompletionText().length();
