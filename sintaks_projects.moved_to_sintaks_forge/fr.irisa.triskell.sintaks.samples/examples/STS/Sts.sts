@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://sts" start="//@rules.0">
+  <rules xsi:type="sts:Template" id="Root">
+    <metaclass href="http://sts#//Root"/>
+    <rule xsi:type="sts:Iteration" id="Root.rules">
+      <subRule xsi:type="sts:Sequence">
+        <subRules xsi:type="sts:RuleRef" id="@Template" ref="//@rules.1"/>
+        <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+        <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+      </subRule>
+      <container xsi:type="ecore:EReference" href="http://sts#//Root/rules"/>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="Template">
+    <metaclass href="http://sts#//Template"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="template" terminal="template"/>
+      <subRules xsi:type="sts:StringValue" id="template.id">
+        <features xsi:type="ecore:EAttribute" href="http://sts#//Rule/id"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="returns" terminal="returns"/>
+      <subRules xsi:type="sts:URIValue" id="Template.metaclass">
+        <features xsi:type="ecore:EReference" href="http://sts#//Template/metaclass"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="=" terminal="=" separator="true"/>
+      <subRules xsi:type="sts:Adornment" terminal="eoln"/>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Sequence" ref="//@rules.2">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//Sequence"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Iteration" ref="//@rules.7">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//Iteration"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Alternative" ref="//@rules.8">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//Alternative"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@ObjectReference" ref="//@rules.6">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//ObjectReference"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@RuleRef" ref="//@rules.5">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//RuleRef"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@StringValue" ref="//@rules.4">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//StringValue"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Terminal" ref="//@rules.3">
+            <features xsi:type="ecore:EReference" href="http://sts#//Template/rule"/>
+          </subRule>
+          <metaclass href="http://sts#//Terminal"/>
+        </condition>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="." terminal="." separator="true"/>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="Sequence">
+    <metaclass href="http://sts#//Sequence"/>
+    <rule xsi:type="sts:Iteration" id="Sequence.subRules">
+      <subRule xsi:type="sts:Alternative">
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Iteration" ref="//@rules.7"/>
+          <metaclass href="http://sts#//Iteration"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Alternative" ref="//@rules.8"/>
+          <metaclass href="http://sts#//Alternative"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@ObjectReference" ref="//@rules.6"/>
+          <metaclass href="http://sts#//ObjectReference"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@RuleRef" ref="//@rules.5"/>
+          <metaclass href="http://sts#//RuleRef"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@StringValue" ref="//@rules.4"/>
+          <metaclass href="http://sts#//StringValue"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Terminal" ref="//@rules.3"/>
+          <metaclass href="http://sts#//Terminal"/>
+        </condition>
+      </subRule>
+      <container xsi:type="ecore:EReference" href="http://sts#//Sequence/subRules"/>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="Terminal">
+    <metaclass href="http://sts#//Terminal"/>
+    <rule xsi:type="sts:StringValue" id="Terminal.terminal">
+      <features xsi:type="ecore:EAttribute" href="http://sts#//Terminal/terminal"/>
+      <features xsi:type="ecore:EAttribute" href="http://sts#//Rule/id"/>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="StringValue">
+    <metaclass href="http://sts#//StringValue"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="feat" terminal="feat"/>
+      <subRules xsi:type="sts:Terminal" id=":" terminal=":" separator="true"/>
+      <subRules xsi:type="sts:Iteration" id="StringValue.features">
+        <subRule xsi:type="sts:URIValue" id="StringValue.features"/>
+        <container xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+      </subRules>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="RuleRef">
+    <metaclass href="http://sts#//RuleRef"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="call" terminal="call"/>
+      <subRules xsi:type="sts:ObjectReference" id="RuleRef.ref">
+        <features xsi:type="ecore:EReference" href="http://sts#//RuleRef/ref"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://sts#//Rule/id"/>
+      </subRules>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:CustomCond" value="filled">
+          <subRule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" id="in" terminal="in"/>
+            <subRules xsi:type="sts:Iteration" id="RuleRef.features">
+              <subRule xsi:type="sts:URIValue" id="RuleRef.features"/>
+              <container xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+            </subRules>
+          </subRule>
+          <feature xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+        </condition>
+        <condition xsi:type="sts:CustomCond" value="null">
+          <feature xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+        </condition>
+      </subRules>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="ObjectReference">
+    <metaclass href="http://sts#//ObjectReference"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="ref" terminal="ref"/>
+      <subRules xsi:type="sts:Terminal" id=":" terminal=":" separator="true"/>
+      <subRules xsi:type="sts:URIValue" id="ObjectReference.identifier">
+        <features xsi:type="ecore:EReference" href="http://sts#//ObjectReference/identifier"/>
+      </subRules>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:CustomCond" value="filled">
+          <subRule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" id="into" terminal="into"/>
+            <subRules xsi:type="sts:Iteration" id="ObjectReference.features">
+              <subRule xsi:type="sts:URIValue" id="ObjectReference.features"/>
+              <container xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+            </subRules>
+          </subRule>
+          <feature xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+        </condition>
+        <condition xsi:type="sts:CustomCond" value="null">
+          <feature xsi:type="ecore:EReference" href="http://sts#//Value/features"/>
+        </condition>
+      </subRules>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="Iteration">
+    <metaclass href="http://sts#//Iteration"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="iterate" terminal="iterate"/>
+      <subRules xsi:type="sts:Terminal" id="over" terminal="over"/>
+      <subRules xsi:type="sts:URIValue" id="Iterator.container">
+        <features xsi:type="ecore:EReference" href="http://sts#//Iteration/container"/>
+      </subRules>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:CustomCond" value="any">
+          <subRule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" id="separated" terminal="separated"/>
+            <subRules xsi:type="sts:Terminal" id="by" terminal="by"/>
+            <subRules xsi:type="sts:RuleRef" id="@Terminal" ref="//@rules.3">
+              <features xsi:type="ecore:EReference" href="http://sts#//Iteration/separator"/>
+            </subRules>
+          </subRule>
+          <feature xsi:type="ecore:EReference" href="http://sts#//Iteration/separator"/>
+        </condition>
+        <condition xsi:type="sts:CustomCond" value="null">
+          <feature xsi:type="ecore:EReference" href="http://sts#//Iteration/separator"/>
+        </condition>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="as" terminal="as"/>
+      <subRules xsi:type="sts:Terminal" id="(" terminal="(" separator="true"/>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Sequence" ref="//@rules.2">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Sequence"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Iteration" ref="//@rules.7">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Iteration"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Alternative" ref="//@rules.8">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Alternative"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@ObjectReference" ref="//@rules.6">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//ObjectReference"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@RuleRef" ref="//@rules.5">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//RuleRef"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@StringValue" ref="//@rules.4">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//StringValue"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Terminal" ref="//@rules.3">
+            <features xsi:type="ecore:EReference" href="http://sts#//Iteration/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Terminal"/>
+        </condition>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id=")" terminal=")" separator="true"/>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="Alternative">
+    <metaclass href="http://sts#//Alternative"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="(" terminal="(" separator="true"/>
+      <subRules xsi:type="sts:Iteration" id="Alternative.condition" separator="//@rules.13">
+        <subRule xsi:type="sts:Alternative">
+          <condition xsi:type="sts:PolymorphicCond">
+            <subRule xsi:type="sts:RuleRef" id="@PolymorphicCond" ref="//@rules.10"/>
+            <metaclass href="http://sts#//PolymorphicCond"/>
+          </condition>
+          <condition xsi:type="sts:PolymorphicCond">
+            <subRule xsi:type="sts:RuleRef" id="@CustomCond" ref="//@rules.9"/>
+            <metaclass href="http://sts#//CustomCond"/>
+          </condition>
+        </subRule>
+        <container xsi:type="ecore:EReference" href="http://sts#//Alternative/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id=")" terminal=")" separator="true"/>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="CustumCond">
+    <metaclass href="http://sts#//CustomCond"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="feature" terminal="feature"/>
+      <subRules xsi:type="sts:Terminal" id=":" terminal=":" separator="true"/>
+      <subRules xsi:type="sts:URIValue" id="CustomCond.feature">
+        <features xsi:type="ecore:EReference" href="http://sts#//CustomCond/feature"/>
+      </subRules>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:CustomCond" value="any">
+          <subRule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" id="," terminal="," separator="true"/>
+            <subRules xsi:type="sts:Terminal" id="value" terminal="value"/>
+            <subRules xsi:type="sts:Terminal" id=":" terminal=":" separator="true"/>
+            <subRules xsi:type="sts:StringValue" id="CustomCond.value">
+              <features xsi:type="ecore:EAttribute" href="http://sts#//Condition/value"/>
+            </subRules>
+          </subRule>
+          <feature xsi:type="ecore:EAttribute" href="http://sts#//Condition/value"/>
+        </condition>
+        <condition xsi:type="sts:CustomCond" value="null">
+          <feature xsi:type="ecore:EAttribute" href="http://sts#//Condition/value"/>
+        </condition>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="=" terminal="=" separator="true"/>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Sequence" ref="//@rules.2">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Sequence"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Iteration" ref="//@rules.7">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Iteration"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Alternative" ref="//@rules.8">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Alternative"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@ObjectReference" ref="//@rules.6">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//ObjectReference"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@RuleRef" ref="//@rules.5">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//RuleRef"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@StringValue" ref="//@rules.4">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//StringValue"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Terminal" ref="//@rules.3">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Terminal"/>
+        </condition>
+      </subRules>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="PolymorphicCond">
+    <metaclass href="http://sts#//PolymorphicCond"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" id="metaclass" terminal="metaclass"/>
+      <subRules xsi:type="sts:Terminal" id=":" terminal=":" separator="true"/>
+      <subRules xsi:type="sts:URIValue" id="PolymorphicCond.metaclass">
+        <features xsi:type="ecore:EReference" href="http://sts#//PolymorphicCond/metaclass"/>
+      </subRules>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:CustomCond" value="any">
+          <subRule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" id="," terminal="," separator="true"/>
+            <subRules xsi:type="sts:Terminal" id="value" terminal="value"/>
+            <subRules xsi:type="sts:Terminal" id=":" terminal=":" separator="true"/>
+            <subRules xsi:type="sts:StringValue" id="PolymorphicCond.value">
+              <features xsi:type="ecore:EAttribute" href="http://sts#//Condition/value"/>
+            </subRules>
+          </subRule>
+          <feature xsi:type="ecore:EAttribute" href="http://sts#//Condition/value"/>
+        </condition>
+        <condition xsi:type="sts:CustomCond" value="null">
+          <feature xsi:type="ecore:EAttribute" href="http://sts#//Condition/value"/>
+        </condition>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" id="=" terminal="=" separator="true"/>
+      <subRules xsi:type="sts:Alternative">
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Sequence" ref="//@rules.2">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Sequence"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Iteration" ref="//@rules.7">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Iteration"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Alternative" ref="//@rules.8">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Alternative"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@ObjectReference" ref="//@rules.6">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//ObjectReference"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@RuleRef" ref="//@rules.5">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//RuleRef"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@StringValue" ref="//@rules.4">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//StringValue"/>
+        </condition>
+        <condition xsi:type="sts:PolymorphicCond">
+          <subRule xsi:type="sts:RuleRef" id="@Terminal" ref="//@rules.3">
+            <features xsi:type="ecore:EReference" href="http://sts#//Condition/subRule"/>
+          </subRule>
+          <metaclass href="http://sts#//Terminal"/>
+        </condition>
+      </subRules>
+    </rule>
+  </rules>
+  <rules xsi:type="sts:Template" id="Adornment">
+    <metaclass href="http://sts#//Adornment"/>
+  </rules>
+  <rules xsi:type="sts:Template" id="Constant">
+    <metaclass href="http://sts#//Constant"/>
+  </rules>
+  <rules xsi:type="sts:Terminal" id="|" terminal="|" separator="true"/>
+</sts:Root>
