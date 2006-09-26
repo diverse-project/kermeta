@@ -61,50 +61,38 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	public Object visitClassDefinition(ClassDefinition arg0) {
 		ArrayList result = new ArrayList();
 		if (outline.prefInheritanceFlattening()) {
-		    Iterator it = InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
-		    while(it.hasNext()) {
-		        CallableProperty cp = (CallableProperty)it.next();
+		    for (Object next : InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)))
+		    {
+		        CallableProperty cp = (CallableProperty)next;
 		        if (cp.getFclass().getTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cp.getTypeBoundedProperty(), item, outline));
 		    }
 		    
-		    it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
-		    while(it.hasNext()) {
-		        CallableOperation cop = (CallableOperation)it.next();
+		    for (Object next : InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition(arg0)))
+		    {
+		        CallableOperation cop = (CallableOperation)next;
 		        if (cop.getFclass().getTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cop.getTypeBoundedOperation(), item, outline));
 		    }
 		    
-		    it = arg0.getSuperType().iterator();
-		    while(it.hasNext()){
-		    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+		    for (Object next : arg0.getSuperType()) {
+		    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)next;
 			     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
-			     Iterator it2 = parent.getInv().iterator();
-		    	 while (it2.hasNext()){
-		    		Constraint ci = (Constraint)it2.next();
-			        result.add(new OutlineItem(ci, item, outline));
+			     for (Object inv : parent.getInv()) {
+			        result.add(new OutlineItem((Constraint)inv, item, outline));
 		    	 }
 		    }
 		
 		}
 
-		Iterator it = arg0.getInv().iterator();
-	    while(it.hasNext()) {
-	    	Constraint ci = (Constraint)it.next();
-	        result.add(new OutlineItem(ci, item, outline));
-	    }
+		for (Object ci : arg0.getInv())
+	    	result.add(new OutlineItem((Constraint)ci, item, outline));
 	    
-	    it = arg0.getOwnedAttribute().iterator();
-	    while(it.hasNext()) {
-	        Property p = (Property)it.next();
-	        result.add(new OutlineItem(p, item, outline));
-	    }
+	    for (Object p : arg0.getOwnedAttribute())
+	        result.add(new OutlineItem((Property)p, item, outline));
 	    
-	    it = arg0.getOwnedOperation().iterator();
-	    while(it.hasNext()) {
-	        Operation op = (Operation)it.next();
-	        result.add(new OutlineItem(op, item, outline));
-	    }
+	    for (Object op : arg0.getOwnedOperation())
+	        result.add(new OutlineItem((Operation)op, item, outline));
 	    
 		if (outline.prefSortedOutline())
 		    Collections.sort(result);
@@ -123,11 +111,8 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	public Object visitEnumeration(Enumeration arg0) {
 		ArrayList result = new ArrayList();
 		
-		Iterator it = arg0.getOwnedLiteral().iterator();
-	    while(it.hasNext()) {
-	        EnumerationLiteral lit = (EnumerationLiteral)it.next();
-	        result.add(new OutlineItem(lit, item, outline));
-	    }
+		for (Object lit : arg0.getOwnedLiteral())
+	        result.add(new OutlineItem((EnumerationLiteral)lit, item, outline));
 		
 	    if (outline.prefSortedOutline())
 		    Collections.sort(result);
@@ -148,31 +133,19 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		ArrayList result = new ArrayList();
 
 		if (outline.prefInheritanceFlattening() && arg0.getSuperOperation() != null) {
-			Iterator itpre = arg0.getSuperOperation().getPre().iterator();
-			while(itpre.hasNext()) {
-		    	Constraint ci = (Constraint)itpre.next();
-		        result.add(new OutlineItem(ci, item, outline));
-			}
+			for (Object ci : arg0.getSuperOperation().getPre())
+		        result.add(new OutlineItem((Constraint)ci, item, outline));
 		}
 		
-		Iterator it = arg0.getPre().iterator();
-	    while(it.hasNext()) {
-	    	Constraint ci = (Constraint)it.next();
-	        result.add(new OutlineItem(ci, item, outline));
-	    }
+		for (Object ci : arg0.getPre())
+	        result.add(new OutlineItem((Constraint)ci, item, outline));
 	    
-	    it = arg0.getPost().iterator();
-	    while(it.hasNext()) {
-	    	Constraint ci = (Constraint)it.next();
-	        result.add(new OutlineItem(ci, item, outline));
-	    }
+	    for (Object ci : arg0.getPost())
+	        result.add(new OutlineItem((Constraint)ci, item, outline));
 	    
 	    if (outline.prefInheritanceFlattening() && arg0.getSuperOperation() != null) {
-	    	it = arg0.getSuperOperation().getPost().iterator();
-			while(it.hasNext()) {
-		    	Constraint ci = (Constraint)it.next();
-		        result.add(new OutlineItem(ci, item, outline));
-		    }
+	    	for (Object ci : arg0.getSuperOperation().getPost())
+		        result.add(new OutlineItem((Constraint)ci, item, outline));
 	    }
 	    
 		if (outline.prefSortedOutline())
@@ -186,9 +159,9 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		ArrayList result = new ArrayList();
 		
 		if (outline.prefPackageTree()) {
-		    Iterator it = arg0.getNestedPackage().iterator();
-		    while(it.hasNext()) {
-		        Package spack = (Package)it.next();
+			for (Object next : arg0.getNestedPackage())
+			{
+		        Package spack = (Package)next;
 		        
 		        OutlineItem spack_item = new OutlineItem(spack, item, outline);
 		        
@@ -201,9 +174,8 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		    }
 		}
 		
-		Iterator it = arg0.getOwnedTypeDefinition().iterator();
-		while(it.hasNext()) {
-			TypeDefinition td = (TypeDefinition)it.next();
+		for (Object next : arg0.getOwnedTypeDefinition()) {
+			TypeDefinition td = (TypeDefinition)next;
 			OutlineItem td_item = new OutlineItem(td, item, outline);
 			if (outline.prefShowImported() || !td_item.isTypeDefinitionImported()) {
 			    result.add(td_item);
