@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.20 2006-08-07 09:17:30 zdrey Exp $
+ * $Id: kunit.kmt,v 1.21 2006-09-26 13:25:43 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -12,7 +12,9 @@
  * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
  *
  * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
- * You can also find a little example if you go to TestRunner documentation.
+ *
+ * You can also find a little example if you go to the documentation of the class
+ * TestRunner.
  */
 package kermeta::kunit;
 
@@ -116,12 +118,35 @@ abstract class Test inherits Assert
 	end
 	
 	/** The main method that the testes has to implement for his specific tests */
-	operation runTest() : Void is abstract
+	operation runTest() : Void is do end
 }
 
 /**
- * A test case
- * pattern : Command
+ * A test case contains a set of testOperations. 
+ * See TestRunner class to find how to run a TestCase.
+ * Related design-pattern : Command
+ *
+ * An Example of TestCase : 
+ *<pre> class MyTestCase inherits kermeta::kunit::TestCase
+ * {
+ *    attribute cString : String
+ * 
+ *     method setUp() is do
+ *		  cString := "String"
+ *     end
+ *
+ * 	  method tearDown() is do
+ *        // We don't need to tearDown anything in this example.
+ *    end
+ *
+ *    operation testStringAssignment() : Void is do
+ *        var aString : String init "String"
+ *        assert(aString==cString)
+ *        // You can also add a message if assert fails :
+ *        assertTrueWithMsg(aString==cString, "expected aString == cString")
+ *     end
+ * }
+ *</pre> 
  */
 class TestCase inherits Test
 {
@@ -186,7 +211,7 @@ class TestCase inherits Test
 /**
  * Get the number of run tests, errors and failures that resulted from the launch of a 
  * Test. (This is a minimal but functional class that can be improved)
- * pattern : Collecting parameter
+ * Related design-pattern : Collecting parameter
  */
 class TestResult
 {
@@ -236,7 +261,7 @@ class TestFailure
 /** 
  * A test suite is composed of a set of tests (which can inherit either of TestSuite
  * or TestCase)
- * pattern : Composite
+ * Related design-pattern : Composite
  */
 class TestSuite inherits Test
 {
@@ -252,6 +277,8 @@ class TestSuite inherits Test
 	method run(test_result : TestResult) : Void is do
 		tests.each{ t | t.run(test_result) }
 	end
+	
+	method runTest() : Void is do end
 	
 	operation addTest(test : Test) : Void is do
 		tests.add(test)
@@ -298,7 +325,7 @@ class TestLoader
 }
 
 /** 
- * User instanciates this class to run a test suite/case 
+ * User instanciates this class to run a TestSuite or a TestCase
  * 
  * Usage : 
  * 
@@ -313,7 +340,7 @@ class TestLoader
  *     var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
  *     // Here, we run our test case class called "TestClass", 
  *     // contained in the_file_that_contains_the_tests.kmt.
- *     // TestClass must inherit TestCase
+ *     // TestClass must inherit TestCase, or TestSuite
  *	   testRunner.run(TestClass)
  *	   testRunner.printTestResult
  *	end
