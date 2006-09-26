@@ -87,4 +87,39 @@ class TestBoolean inherits kermeta::kunit::Test
 	operation testoptofanf() : Void is do
 		assert((true or false and not false)==true)
 	end
+	
+	/** true implies true  = true*/
+	operation testtit() : Void is do
+		assert(true.implies(true) == true)
+	end
+	/** true implies false  = false*/
+	operation testtif() : Void is do
+		assert(true.implies(false) == false)
+	end
+	/** false implies true  = true*/
+	operation testfit() : Void is do
+		assert(false.implies(true) == true)
+	end
+	/** false implies false  = true*/
+	operation testfif() : Void is do
+		assert(false.implies(false) == true)
+	end
+	
+	/** true xor true  = false*/
+	operation testtxort() : Void is do
+		assert(true.xor(true) == false)
+	end
+	/** true xor false  = true*/
+	operation testtxorf() : Void is do
+		assert(true.xor(false) == true)
+	end
+	/** false xor true  = true*/
+	operation testfxort() : Void is do
+		assert(false.xor(true) == true)
+	end
+	/** false xor false  = false*/
+	operation testfxorf() : Void is do
+		assert(false.xor(false) == false)
+	end
+	
 }
