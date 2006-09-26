@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.17 2006-09-25 14:46:01 zdrey Exp $
+/* $Id: KMT2KMPass4.java,v 1.18 2006-09-26 13:24:32 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -97,9 +97,8 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		// Is there already an operation in the super types of this class?
 		EList superclasses = builder.current_class.getSuperType();
 		if (operation.getOperationKind().getText().equals("operation")) {
-			// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
 			// If not, is there already an operation in the common *implicit* super type object?
-			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::language::structure::Object"));
+			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
 			if (object_classdef != null) // robustness useless test -> Object type should already have been parsed!
 			{
 				if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null && 
