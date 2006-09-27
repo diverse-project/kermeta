@@ -1,5 +1,5 @@
-/* $Id: InheritanceSearch.java,v 1.8 2006-03-03 15:22:18 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: InheritanceSearch.java,v 1.9 2006-09-27 09:58:48 zdrey Exp $
+* Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : GPL
 * Copyright : IRISA / Universite de Rennes 1
@@ -41,10 +41,9 @@ public class InheritanceSearch {
 		ArrayList result = new ArrayList();
 		result.add(c);
 		// get all super types of direct supertypes
-		Iterator it = ((ClassDefinition) c.getTypeDefinition()).getSuperType().iterator();
-		while(it.hasNext()) {
+		for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
 			// get the super type
-			fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+			fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)super_type;
 			// propagate type variables
 			direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
 			ArrayList sts = allSuperTypes(direct_st);
@@ -73,10 +72,9 @@ public class InheritanceSearch {
 	    // The class Object is the Root Class
 	    if (TypeEqualityChecker.equals(c, object)) return result;
 	    
-	    Iterator it = ((ClassDefinition) c.getTypeDefinition()).getSuperType().iterator();
-	    while(it.hasNext()) {
+	    for (Object super_type : ((ClassDefinition) c.getTypeDefinition()).getSuperType()) {
 			// get the super type
-	    	fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+	    	fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)super_type;
 			// propagate type variables
 			direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
 			result.add(direct_st);
@@ -96,62 +94,48 @@ public class InheritanceSearch {
 	 * @return
 	 */	
 	public static ArrayList callableOperations(fr.irisa.triskell.kermeta.language.structure.Class c) {
-		ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
 		Hashtable found_ops = new Hashtable();
-		
 		ArrayList toVisit = new ArrayList();
 		toVisit.add(c);
-		
 		
 		while(!toVisit.isEmpty()) {
 			fr.irisa.triskell.kermeta.language.structure.Class current = (fr.irisa.triskell.kermeta.language.structure.Class)toVisit.get(0);
 		    toVisit.remove(0);
-		    Iterator it = getDirectSuperTypes(current).iterator();
-		    while(it.hasNext()) {
-		    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+		    // Get the direct super type of the current parsed class
+		    for (Object next_t : getDirectSuperTypes(current)) {
+		    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
 		        if (!toVisit.contains(stype)) toVisit.add(stype);
 		    }
-		    
-		    Iterator ops = ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation().iterator();
-			// Add all operations
-			while (ops.hasNext()) {
-				Operation op = (Operation)ops.next();
-				if (!found_ops.containsKey(op.getName())) {
-				    found_ops.put(op.getName(),op);
-				    result.add(new CallableOperation(op,current));
-				}
-			}
-		    
+		    // Add all operations of current parsed class
+		    for (Object next_op : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
+		    	Operation op = (Operation)next_op;
+		    	if (!found_ops.containsKey(op.getName())) {
+		    		found_ops.put(op.getName(),op);
+		    		result.add(new CallableOperation(op,current));
+		    	}
+		    }
 		}
 		
 		return result;
 	}
 	
 	
-	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method) {
-	    
-		ArrayList allTypes = allSuperTypes(c);
-		ArrayList result = new ArrayList();
-		Hashtable found_ops = new Hashtable();
-		
+	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method) {		
 		ArrayList toVisit = new ArrayList();
 		toVisit.add(c);
-		
 		
 		while(!toVisit.isEmpty()) {
 			fr.irisa.triskell.kermeta.language.structure.Class current = (fr.irisa.triskell.kermeta.language.structure.Class)toVisit.get(0);
 		    toVisit.remove(0);
-		    Iterator it = getDirectSuperTypes(current).iterator();
-		    while(it.hasNext()) {
-		    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+		    for (Object next : getDirectSuperTypes(current)) {
+		    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)next;
 		        if (!toVisit.contains(stype)) toVisit.add(stype);
 		    }
 		    
-		    Iterator ops = ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation().iterator();
 			// Add all operations
-			while (ops.hasNext()) {
-				Operation op = (Operation)ops.next();
+			for (Object next : ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation()) {
+				Operation op = (Operation)next;
 				if (method.getSuperOperation() == op) {
 				    return new CallableOperation(op,current);
 				}
@@ -172,9 +156,8 @@ public class InheritanceSearch {
 	    StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
 	    fr.irisa.triskell.kermeta.language.structure.Class fclass = struct_factory.createClass();
 	    fclass.setTypeDefinition(cdef);
-	    Iterator it = cdef.getTypeParameter().iterator();
-	    while(it.hasNext()) {
-	        TypeVariable tv = (TypeVariable)it.next();
+	    for (Object next : cdef.getTypeParameter()) {
+	        TypeVariable tv = (TypeVariable)next;
 	        TypeVariableBinding binding = struct_factory.createTypeVariableBinding();
 	        binding.setType(tv);
 	        binding.setVariable(tv);
@@ -194,13 +177,11 @@ public class InheritanceSearch {
 		ArrayList result = new ArrayList();
 		Hashtable found_properties = new Hashtable();
 		
-		Iterator it = allTypes.iterator();
-		while (it.hasNext()) {
-			fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
-			Iterator ops = ((ClassDefinition) fclass.getTypeDefinition()).getOwnedAttribute().iterator();
-			// Add all operations
-			while (ops.hasNext()) {
-				Property prop = (Property)ops.next();
+		for (Object next_t : allTypes) {
+			fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
+			// Add all properties
+			for (Object next_at : ((ClassDefinition) fclass.getTypeDefinition()).getOwnedAttribute()) {
+				Property prop = (Property)next_at;
 				if (!found_properties.containsKey(prop)) {
 					found_properties.put(prop, prop);
 					result.add(new CallableProperty(prop,fclass));
