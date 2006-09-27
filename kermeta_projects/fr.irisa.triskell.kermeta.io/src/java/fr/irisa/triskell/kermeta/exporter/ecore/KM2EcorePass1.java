@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.30 2006-09-22 11:12:24 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.31 2006-09-27 15:45:26 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -102,11 +102,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		root_p = root_package;
 		current_ppath = "";
 		
-		// Add the created package into the ecoreResource (we just need to add the 
-		// root package). EPackage is Ecore metamodel root ("Model object") in our case, 
-		// and all the ecore elements have a direct or undirect containment relationship 
-		// with EPackages. And we only need to add the root elements to the resource contents.
-		
 		// If the root package corresponds in fact to a sub package (for example, when it comes
 		// from a KMT file which package "declaration" is "package foo::bar;", we have to precreate
 		// its sup-packages?
@@ -130,6 +125,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
 		newEPackage.setName( KMTHelper.getUnescapedIdentifier(current_name) );
+		
+		setUnitDependencies(newEPackage);
 		
 		if (ecoreExporter.tracer != null)
 		    ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
@@ -280,20 +277,24 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		return lit;
 	}
 	
+	
 	/** Define the annotation for the Tags associated to the given node 
 	 * @param node the kermeta node that contains the tags to convert into ecore annotations 
 	 * @param newEModelElement the ecore element that corresponds to the given kermeta node 
 	 */
 	protected void setTagAnnotations(NamedElement node, EModelElement newEModelElement) {
 		for (Object next : node.getTag()) {
-			Object o = accept((EObject)next);
-			if (o != null)
-				newEModelElement.getEAnnotations().add(o);
-			else
-				throw new KM2ECoreConversionException("A tag in '"+node.getName() + "' could not be resolved");				
+			Tag t = (Tag) next;
+			ecoreExporter.addAnnotation( 
+				newEModelElement,
+				KM2Ecore.ANNOTATION,
+				t.getName(),
+				t.getValue(),
+				null);
 		}
 	}
 
+	
 	/**
 	 * Convert an kermeta Operation into EOperation
 	 */
@@ -315,7 +316,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 					KM2Ecore.ANNOTATION,
 					KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS,
 					b.toString(),
-					null);	
+					null);
 		}
 		
 		// Create an annotation to hold the operation body
@@ -559,5 +560,23 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		setTagAnnotations(node, newEClassifier);
 		km2ecoremapping.put(node,newEClassifier);
 		return newEClassifier;
-	}	
+	}
+	
+	
+	/**
+	 * @param newEPackage
+	 */
+	protected void setUnitDependencies(EPackage newEPackage) {
+		for(Object next : ecoreExporter.kermetaUnit.importedUnits) {
+			KermetaUnit ku = (KermetaUnit) next;
+			ecoreExporter.addAnnotation( 
+					newEPackage,
+					KM2Ecore.ANNOTATION_REQUIRE,
+					ku.getUri(),
+					ku.getUri(),
+					null);
+			
+		}
+		
+	}
 }

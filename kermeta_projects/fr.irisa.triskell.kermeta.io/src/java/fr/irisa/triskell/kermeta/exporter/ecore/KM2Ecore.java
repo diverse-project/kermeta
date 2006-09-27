@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.25 2006-09-22 11:12:24 dtouzet Exp $
+/* $Id: KM2Ecore.java,v 1.26 2006-09-27 15:45:26 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -102,6 +102,8 @@ public class KM2Ecore {
     //  => All annotated elements
     public final static String ANNOTATION = "kermeta";
     public final static String ANNOTATION_DOCUMENTATION = "http://www.eclipse.org/emf/2002/GenModel";
+    //  => Packages
+    public final static String ANNOTATION_REQUIRE = ANNOTATION + ".req";
     //  => ClassDefs 
     public final static String ANNOTATION_INV = ANNOTATION + ".inv";
     //  => Operations
