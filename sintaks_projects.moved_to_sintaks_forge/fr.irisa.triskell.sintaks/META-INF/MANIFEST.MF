@@ -15,3 +15,5 @@ Require-Bundle: fr.irisa.triskell.sintaks.model,
  org.eclipse.ui.ide,
  org.eclipse.ui.console
 Export-Package: fr.irisa.triskell.sintaks.main
+Bundle-Activator: fr.irisa.triskell.sintaks.samples.plugin.SintaksPlugin
+Bundle-Vendor: IRISA/INRIA

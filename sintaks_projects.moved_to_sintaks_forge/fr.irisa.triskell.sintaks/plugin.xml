@@ -39,5 +39,22 @@
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
       </objectContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="fr.irisa.triskell.sintaks.samples.category"
+            name="Sintaks samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.sintaks.samples.category"
+            class="fr.irisa.triskell.sintaks.samples.wizards.SintaksSampleExampleWizard"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            icon="icons/Sintaks.gif"
+            id="fr.irisa.triskell.sintaks.samples.wizard"
+            name="Sintaks samples"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
 
 </plugin>
