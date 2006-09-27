@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Textloader Plug-in
-Bundle-SymbolicName: fr.irisa.triskell.kermeta.textloader;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-SymbolicName: fr.irisa.triskell.sintaks;singleton:=true
+Bundle-Version: 0.0.1
 Bundle-Localization: plugin
 Require-Bundle: fr.irisa.triskell.sintaks.model,
  fr.irisa.triskell.kermeta,
