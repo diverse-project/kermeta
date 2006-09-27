@@ -12,69 +12,18 @@
    <feature url="features/fr.irisa.triskell.kermeta_0.3.0.jar" id="fr.irisa.triskell.kermeta" version="0.3.0">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/edu.cmu.sei.osate-frontend_0.0.0.jar" id="edu.cmu.sei.osate-frontend" version="1.1.1">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.administration_0.8.0.jar" id="org.topcased.administration" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
    <feature url="features/org.topcased.dependencies_0.8.0.jar" id="org.topcased.dependencies" version="0.8.0">
       <category name="Topcased"/>
    </feature>
-   <feature url="features/org.topcased.dependencies_0.8.0.jar" id="org.topcased.dependencies" version="0.8.0">
-      <category name="Topcased"/>
+   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm.feature_0.0.1.jar" id="fr.irisa.triskell.kermeta.samples.fsm.feature" version="0.0.1">
+      <category name="Kermeta"/>
    </feature>
-   <feature url="features/org.topcased.modeler.aadl_0.8.0.jar" id="org.topcased.modeler.aadl" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.modeler.ecore_0.8.0.jar" id="org.topcased.modeler.ecore" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.modeler.sam_0.8.0.jar" id="org.topcased.modeler.sam" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.modeler.uml2_0.8.0.jar" id="org.topcased.modeler.uml2" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.sdk_0.8.0.jar" id="org.topcased.sdk" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.toolkit.source_0.8.0.jar" id="org.topcased.toolkit.source" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.topcased.toolkit_0.8.0.jar" id="org.topcased.toolkit" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/org.eclipse.emf.ecore.sdo_2.1.1.jar" id="org.eclipse.emf.ecore.sdo" version="2.1.1">
-      <category name="EMF"/>
-   </feature>
-   <feature url="features/org.eclipse.emf.sdk_2.1.2.jar" id="org.eclipse.emf.sdk" version="2.1.2">
-      <category name="EMF"/>
-   </feature>
-   <feature url="features/org.eclipse.emf_2.1.2.jar" id="org.eclipse.emf_2.1.2.jar" version="2.1.2">
-      <category name="EMF"/>
-   </feature>
-   <feature url="features/org.eclipse.gef_3.1.1.jar" id="org.eclipse.gef_3.1.1.jar" version="3.1.1">
-      <category name="GEF"/>
+   <feature url="features/fr.irisa.triskell.sintaks.feature_0.0.1.jar" id="fr.irisa.triskell.sintaks.feature" version="0.0.1">
+      <category name="Kermeta"/>
    </feature>
    <category-def name="Kermeta" label="Kermeta and its MDKs">
       <description>
          provided by Triskell team
-      </description>
-   </category-def>
-   <category-def name="Topcased" label="Topcased">
-      <description>
-         Topcased runtime
-      </description>
-   </category-def>
-   <category-def name="EMF" label="EMF runtime (doesn&apos;t include documentation">
-      <description>
-         EMF runtime (doesn&apos;t include documentation
-      </description>
-   </category-def>
-   <category-def name="GEF" label="GEF runtime (doesn&apos;t include documentation">
-      <description>
-         GEF runtime (doesn&apos;t include documentation
       </description>
    </category-def>
 </site>
