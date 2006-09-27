@@ -6,10 +6,46 @@
 
 <body>
 <!--
-$Id: history.html,v 1.14 2006-08-21 09:39:49 dvojtise Exp $
+$Id: history.html,v 1.15 2006-09-27 14:17:55 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">current changes in the CVS </h2>
+<h3>New features</h3>
+<ul>
+	<li>Graphical editor available again (and improved)</li>
+	<li>#96; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=96&group_id=32&atid=208">Ability to stop the execution of a kermeta program</a></li>	
+   	<li>#982; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=982&group_id=32&atid=208">"implies", "xor" and "nand" operators on boolean</a></li>	
+   	<li>#1264; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1264&group_id=32&atid=208">"Run As" action behaviour</a></li>	
+   	<li>#1330; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1330&group_id=32&atid=208">A class that contains abstract operations should be semantically abstract, csqtly not instantiable</a></li>	
+   	
+</ul>
+<h3>Bug fixed</h3>
+	<li>#108; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=108&group_id=32&atid=205">Type checker craches with twice the same primitive type as param of an operation</a></li>	
+   	<li>#306; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=306&group_id=32&atid=205">Creating a new run configuration does not react when user tries to load a kmt file that has errors</a></li>	
+   	<li>#601; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=601&group_id=32&atid=205">A few multiplicities in Kermeta metamodel are semantically unconsistant</a></li>	
+   	<li>#831; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=831&group_id=32&atid=205">the completion proposes the Classes but not the Packages</a></li>	
+   	<li>#877; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=877&group_id=32&atid=205">kmt2ecore : used of tilda(~) in kermeta files is exactly copied as same in ecore files</a></li>	
+   	<li>#891; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=891&group_id=32&atid=205">invariant declaration : self overlap in a lambda expression bugs</a></li>
+    <li>#962; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=962&group_id=32&atid=205">Non implemented abstract operation fails without information (only "the node to visit is null")</a></li>
+	<li>#1041; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1041&group_id=32&atid=205">Type Checker does not detect call of [unimplemented] abstract operations</a></li>	
+   	<li>#1060; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1060&group_id=32&atid=205">Deleting inheritance doesn't affect child Classes</a></li>	
+   	<li>#1063; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1063&group_id=32&atid=205">initial upper and lower cardinality is set to [0..0]. Expecting [0..1], more consistent</a></li>	
+   	<li>#1067; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1067&group_id=32&atid=205">Deleting an inheritance edge</a></li>	
+   	<li>#1115; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1115&group_id=32&atid=205">Annotations are lost when transforming: kermeta to and from ecore</a></li>	
+   	<li>#1116; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1116&group_id=32&atid=205">Big big big blocks made by the kermeta prettyprinter</a></li>
+    <li>#1126; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1126&group_id=32&atid=205">Invariants are not kept when going from kmt2ecore</a></li>   	
+	<li>#1154; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1154&group_id=32&atid=205">Control-D key-shortcut gives null pointer error</a></li>	
+   	<li>#1160; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1160&group_id=32&atid=205">When you click on an invariant in the outline view the editor doesn't go to that invariant</a></li>	
+   	<li>#1166; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1166&group_id=32&atid=205">Kmt2Km: pb when overloading operations defined in class 'Object'</a></li>	
+   	<li>#1182; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1182&group_id=32&atid=205">Bug in Ecore2KMT transformation</a></li>	
+   	<li>#1258; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1258&group_id=32&atid=205">Invariants annotations are lost when moving from KMT to KM</a></li>	
+   	<li>#1287; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1287&group_id=32&atid=205">Operation pre and post conditions are lost during the Kmt2Ecore2Kmt</a></li>
+    <li>#1293; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1293&group_id=32&atid=205">saving a model in several resources doesn't work correctly if there are Xreferences</a></li>
+	<li>#1297; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1297&group_id=32&atid=205">wrong require statement produces understandable error</a></li>	
+   	<li>#1302; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1302&group_id=32&atid=205">bug in conversion KMT2Ecore</a></li>
+    <li>#1308; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1308&group_id=32&atid=205">Properties annotations are lost when moving from Ecore to KM</a></li>
+	
 <h2 class="Heading">V0.3.0 (19/08/2006)</h2>
 <h3>New features</h3>
 <ul>
