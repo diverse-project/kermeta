@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.5 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: ClassItemProvider.java,v 1.6 2006-09-27 11:36:22 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -195,13 +195,15 @@ public class ClassItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String label = ((fr.irisa.triskell.kermeta.language.structure.Class)object).getName();
+		// We get the label of the class definition that is refered by the given class
+		// a '->' is added to show the "reference" semantic
+		String label = ((fr.irisa.triskell.kermeta.language.structure.Class)object).getTypeDefinition().getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Class_type") :
-			getString("_UI_Class_type") + " " + label;
+			getString("_UI_Class_type") + " -> " + label;
 	}
 
 	/**
