@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.8 2006-09-22 11:12:23 dtouzet Exp $
+/* $Id: Ecore2KM.java,v 1.9 2006-09-27 15:58:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -109,5 +109,4 @@ public class Ecore2KM {
 			return getQualifiedName((ENamedElement)e.eContainer()) + "::" + e.getName();
 		else return e.getName();
 	}
-
 }

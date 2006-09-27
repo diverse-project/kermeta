@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.1 2006-09-22 11:12:23 dtouzet Exp $
+/* $Id: Ecore2KMPass1.java,v 1.2 2006-09-27 15:58:23 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -40,8 +40,12 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -100,7 +104,8 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			pack = unit.struct_factory.createPackage();
 			
 			// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-			pack.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+			//pack.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+			pack.setName( node.getName() );
 
 			// FIXME : we have to test if URI is valid as a file path or not!
 			// Was : pack.setUri(node.getNsURI());
@@ -109,14 +114,14 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			unit.packages.put(Ecore2KM.getQualifiedName(node), pack);
 		}
 
-		if (getCurrentPackage() != null) pack.setNestingPackage(getCurrentPackage());
+		if (getTopPackage() != null) pack.setNestingPackage(getTopPackage());
 		else unit.rootPackage = pack;
 		
 		packagesStack.push(pack);
 		
+		acceptList(node.getEAnnotations());
 		acceptList(node.getEClassifiers());
 		acceptList(node.getESubpackages());
-		acceptList(node.getEAnnotations());
 		
 		packagesStack.pop();
 		
@@ -140,7 +145,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 		
 		// Should we ignore the ecore metamodel types?
-		getCurrentPackage().getOwnedTypeDefinition().add(exporter.current_classdef);
+		getTopPackage().getOwnedTypeDefinition().add(exporter.current_classdef);
 
 		// Add the type defs in the unit 
 		unit.typeDefs.put(Ecore2KM.getQualifiedName(node), exporter.current_classdef);
@@ -203,9 +208,9 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 		exporter.current_prop = prop;
 		
-		
 		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-		prop.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		//prop.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		prop.setName( node.getName() );
 		
 		prop.setIsOrdered(node.isOrdered());
 		prop.setIsUnique(node.isUnique());
@@ -226,7 +231,8 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		operations.put(node, exporter.current_op);
 		
 		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-		exporter.current_op.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		//exporter.current_op.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		exporter.current_op.setName( node.getName() );
 		
 		exporter.current_op.setIsOrdered(node.isOrdered());
 		exporter.current_op.setIsUnique(node.isUnique());
@@ -245,9 +251,10 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 		
 		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-		current_enum.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		//current_enum.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		current_enum.setName( node.getName() );
 		
-		getCurrentPackage().getOwnedTypeDefinition().add(current_enum);
+		getTopPackage().getOwnedTypeDefinition().add(current_enum);
 		acceptList(node.getELiterals());
 		unit.typeDefs.put(Ecore2KM.getQualifiedName(node), current_enum);
 		return current_enum;
@@ -268,9 +275,9 @@ public class Ecore2KMPass1 extends EcoreVisitor {
         // BEGIN HORRIBLE TEMPORARY PATCH (the if)
         // This condition is used because we use the visitor for the definition of the type of model
         // elements, and sometimes, current package is null
-        if (getCurrentPackage()!=null)
+        if (getTopPackage()!=null)
         {
-        	getCurrentPackage().getOwnedTypeDefinition().add(result);
+        	getTopPackage().getOwnedTypeDefinition().add(result);
         }
     	unit.typeDefs.put(Ecore2KM.getQualifiedName(node), result);
         // END HORRIBLE TEMPORARY PATCH
@@ -284,6 +291,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	 */
 	public Object visit(EAnnotation node) {	
 		String result = "";
+		// node.getSource() == "kermeta"
 		if(node.getSource().equals(KM2Ecore.ANNOTATION)) {
 			for (Object next :  node.getDetails().keySet()) {
 				String crtKey = (String) next;
@@ -295,6 +303,16 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 				if (o!=null) o.getTag().add(tag);
 			}
 		}
+		// node.getSource() == "kermeta.req"
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_REQUIRE)) {
+			for (Object next :  node.getDetails().keySet()) {
+				String uri = (String) next;
+				KermetaUnit requiredUnit = null; 
+				requiredUnit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
+				requiredUnit.load();
+				unit.importedUnits.add( requiredUnit );
+			}
+		}
 		return result;
 	}
 
@@ -303,7 +321,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	public fr.irisa.triskell.kermeta.language.structure.Object getObjectForEModelElement(EModelElement element)
 	{
 		fr.irisa.triskell.kermeta.language.structure.Object result =  null; 
-		if (element instanceof EPackage) result = getCurrentPackage();
+		if (element instanceof EPackage) result = getTopPackage();
 		if (element instanceof EClassifier)
 		{// I wish we could select {e| e instanceof EDatatype } more easily EDataTypes...
 			result = eclassifier_typedefinition_map.get(element)!=null?eclassifier_typedefinition_map.get(element):datatypes.get(element);
@@ -318,11 +336,6 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		if (e.eContainer() instanceof ENamedElement) 
 			return getURI((ENamedElement)e.eContainer()) + "/" + e.getName();
 		else return "";
-	}
-	
-	public String getEscapedName(ENamedElement e)
-	{
-		return KMTHelper.getMangledIdentifier(e.getName());
 	}
 	
 	/**
@@ -351,7 +364,8 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			result = unit.struct_factory.createClassDefinition();
 			
 			// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-			result.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+			//result.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+			result.setName( node.getName() );
 			
 			result.setIsAbstract(node.isAbstract() || node.isInterface());
 			eclassifier_typedefinition_map.put(node, result);
@@ -361,7 +375,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	
 	
 	/** Return the package currently visited */
-	protected Package getCurrentPackage() {
+	protected Package getTopPackage() {
 		if (packagesStack.size() == 0) return null;
 		return (Package)packagesStack.peek();
 	}
@@ -385,6 +399,75 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			} 
 		}
 		return params;
+	}
+	
+	
+	/**
+	 * Get the kermeta type corresponding to this EType.
+	 * 
+	 * This method is called from Ecore2KMPass2 and Ecore2KMPass3 that both refer to Ecore2Pass1.
+	 * It is defined here for factorization purposes.
+	 * 
+	 * @param etype the EType to be transformed
+	 * @param node  is only used to get the node for which this class was called
+	 * @return
+	 */
+	protected Type createTypeForEClassifier(EClassifier etype, ENamedElement node) {
+		Type result = null;
+		TypeDefinition def = null;
+		
+		if (etype == null) { 
+			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
+		}
+		else {
+			def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
+		}
+		
+		if (def == null) {
+			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
+			// does not reflect a real path in the user file system. We will handle it separately
+			// Try to find the given element in the loaded kermeta units
+			// If not found, load a kermeta unit for the resource of the given element
+			if (etype.eResource() != resource) {
+				String etype_qname = Ecore2KM.getQualifiedName(etype);
+				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
+				// this unit is not related to a real file in the user file system
+				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
+				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
+				dep_unit.load();
+				unit.importedUnits.add(dep_unit);
+				def = dep_unit.typeDefs.get(etype_qname);
+			}
+			else
+				def = (TypeDefinition)eclassifier_typedefinition_map.get(etype)!=null?
+						eclassifier_typedefinition_map.get(etype):datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
+		}
+
+		if (def == null)
+			throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+
+		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
+		if (def instanceof Type) {
+			result = (Type)def;
+		}
+		else {
+			// Otherwise it is always a ClassDefinition
+			ClassDefinition cd = (ClassDefinition)def;
+			fr.irisa.triskell.kermeta.language.structure.Class fc = classes.get(cd);
+			if (fc == null) {
+				fc = unit.struct_factory.createClass();
+				fc.setTypeDefinition(cd);
+				classes.put(cd, fc);
+			}
+			result = fc;
+		}
+		// Type should never be null
+		if (result == null) {
+			throw new Error("Internal error of ecore2kermeta transfo : type " +
+					"of '" + node.getName() + node.eClass().getName() + ":" + etype.getName() + "' not found " +
+							"in Kermeta side");
+		}
+		return result;
 	}
 
 }

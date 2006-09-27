@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.10 2006-09-22 11:12:23 dtouzet Exp $
+/* $Id: Ecore2KMPass2.java,v 1.11 2006-09-27 15:58:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -116,7 +116,8 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		// First of all, set the super types
 		for (Object next : ((EClass)node).getESuperTypes()) {
 			EClassifier st = (EClassifier)next;
-			Type t = createTypeForEClassifier(st, node);
+			//Type t = createTypeForEClassifier(st, node);
+			Type t = visitorPass1.createTypeForEClassifier(st, node);
 			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				throw new KM2ECoreConversionException(
 						"Internal error of ecore2kermeta :" +
@@ -153,10 +154,12 @@ public class Ecore2KMPass2 extends EcoreVisitor {
         return iType;
 	}
 
+
 	/**
 	 * Get the kermeta type corresponding to this EType
 	 * @param node is only used to get the node for which this class were called 
 	 * */
+	/*
 	protected Type createTypeForEClassifier(EClassifier etype, ENamedElement node) {
 		Type result = null;
 		TypeDefinition def = null;
@@ -165,28 +168,30 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
 		}
 		else def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
-		if (def == null) {
-			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
-			// does not reflect a real path in the user file system. We will handle it separately
-			// Try to find the given element in the loaded kermeta units
-			// If not found, load a kermeta unit for the resource of the given element
-			if (etype.eResource() != resource)
-			{
-				String etype_qname = Ecore2KM.getQualifiedName(etype);
-				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
-				// this unit is not related to a real file in the user file system
-				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
-				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
-				dep_unit.load();
-				unit.importedUnits.add(dep_unit);
-				def = dep_unit.typeDefs.get(etype_qname);
-			}
-			else
-				def = (TypeDefinition)visitorPass1.eclassifier_typedefinition_map.get(etype)!=null?
-						visitorPass1.eclassifier_typedefinition_map.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
-		}
-		
-		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+
+//		if (def == null) {
+//			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
+//			// does not reflect a real path in the user file system. We will handle it separately
+//			// Try to find the given element in the loaded kermeta units
+//			// If not found, load a kermeta unit for the resource of the given element
+//			if (etype.eResource() != resource)
+//			{
+//				String etype_qname = Ecore2KM.getQualifiedName(etype);
+//				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
+//				// this unit is not related to a real file in the user file system
+//				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
+//				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
+//				dep_unit.load();
+//				unit.importedUnits.add(dep_unit);
+//				def = dep_unit.typeDefs.get(etype_qname);
+//			}
+//			else
+//				def = (TypeDefinition)visitorPass1.eclassifier_typedefinition_map.get(etype)!=null?
+//						visitorPass1.eclassifier_typedefinition_map.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
+//		}
+//		
+//		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+
 		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
 		if (def instanceof Type)
 			result = (Type)def;
@@ -210,4 +215,5 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		}
 		return result;
 	}
+	*/
 }
