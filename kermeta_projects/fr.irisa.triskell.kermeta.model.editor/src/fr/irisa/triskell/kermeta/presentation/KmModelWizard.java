@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmModelWizard.java,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
+ * $Id: KmModelWizard.java,v 1.3 2006-09-27 11:55:05 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -74,6 +74,8 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 import fr.irisa.triskell.kermeta.KmFactory;
 import fr.irisa.triskell.kermeta.KmPackage;
 import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 
 import org.eclipse.core.runtime.Path;
@@ -172,6 +174,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 	protected Collection getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList();
+			
 			for (Iterator classifiers = kmPackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
 				EClassifier eClassifier = (EClassifier)classifiers.next();
 				if (eClassifier instanceof EClass) {
@@ -190,11 +193,20 @@ public class KmModelWizard extends Wizard implements INewWizard {
 	 * Create a new model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected EObject createInitialModel() {
-		EClass eClass = (EClass)kmPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-		EObject rootObject = kmFactory.create(eClass);
+		// Old sources
+		//EClass eClass = (EClass)kmPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
+		//EObject rootObject = kmFactory.create(eClass);
+		
+		// We are setting strongly the initial object of the new model => Package from kermeta::language::structure
+		// A finest way will be to get the classifiers
+		// that are in all the subpackages of KmPackage
+		// (with an exploration recursive method in getInitialObjectNames())
+		StructurePackage structurePackage = StructurePackage.eINSTANCE;
+		EClass eClass = (EClass)structurePackage.getEClassifier("Package");
+		EObject rootObject = structurePackage.getStructureFactory().create(eClass);
 		return rootObject;
 	}
 
@@ -465,10 +477,12 @@ public class KmModelWizard extends Wizard implements INewWizard {
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @generated
+		 * @generated NOT
 		 */
 		protected boolean validatePage() {
-			return getInitialObjectName() != null && getEncodings().contains(encodingField.getText());
+			// The "initial object name" initialization is skipped,
+			// we are setting strongly the initial object in createInitialModel()
+			return /*getInitialObjectName() != null && */getEncodings().contains(encodingField.getText());
 		}
 
 		/**
