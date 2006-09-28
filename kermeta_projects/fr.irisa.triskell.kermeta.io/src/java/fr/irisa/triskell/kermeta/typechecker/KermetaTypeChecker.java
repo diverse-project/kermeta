@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.11 2006-09-25 14:49:19 zdrey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.12 2006-09-28 09:45:02 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -113,7 +113,8 @@ public class KermetaTypeChecker {
 			if (((CallableOperation)it.next()).getOperation().isIsAbstract())
 			{
 				foundSAbstractTag = true;
-				Tag tag = StructureFactory.eINSTANCE.createTag(); tag.setName(IS_SEMANTICALLY_ABSTRACT);
+				Tag tag = StructureFactory.eINSTANCE.createTag(); 
+				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue("");
 				typedef.getTag().add(tag);
 			}
 		}
