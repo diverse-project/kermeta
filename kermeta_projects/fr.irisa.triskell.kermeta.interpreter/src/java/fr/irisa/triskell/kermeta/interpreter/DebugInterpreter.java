@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.18 2006-09-28 12:53:20 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.19 2006-09-28 13:04:04 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -32,8 +32,6 @@ import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -385,7 +383,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     /** Returns a hashtable of all the RuntimeObject available in the current frame*/
     public Hashtable initVisibleRuntimeObjects()
     {
-    	Hashtable variables = new Hashtable();
+    	Hashtable<String, RuntimeObject> variables = new Hashtable<String, RuntimeObject>();
     	if (getInterpreterContext().getFrameStack().isEmpty()==false)
     	{	
     		for (Object fnext : getInterpreterContext().getFrameStack())
@@ -394,7 +392,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
     			if (frame.hasVariables())
     			{
     				// We need to parse the current context?
-    				Iterator it = frame.getVariables().iterator();
     				for (Object vnext : frame.getVariables()) {
     					Variable v =  (Variable)vnext;
         				RuntimeObject ro = v.getRuntimeObject();
@@ -420,11 +417,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	if (ro.getProperties()!=null || !ro.getProperties().isEmpty())
     	{
     		Hashtable properties = ro.getProperties();
-    		Hashtable pmap = getRuntimeObjectListForProperties(properties, "property");
-    		Iterator pmap_it = pmap.entrySet().iterator(); 
-    		while (pmap_it.hasNext())
+    		Hashtable pmap = getRuntimeObjectListForProperties(properties);
+    		for (Object pmnext : pmap.entrySet())
     		{
-    			Map.Entry next = (Map.Entry)pmap_it.next();
+    			Map.Entry next = (Map.Entry)pmnext;
     			Object[] next_value = (Object [])next.getValue();
     			result.put(next_value[0], next_value[1]);
     		}
@@ -432,11 +428,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	if (ro.getData().get("CollectionArrayList") !=null)
     	{
     		Collection collection = (Collection)ro.getData().get("CollectionArrayList");
-    		Hashtable cmap = getRuntimeObjectList(collection, "collection");
-    		Iterator cmap_it = cmap.entrySet().iterator(); 
-    		while (cmap_it.hasNext())
+    		Hashtable cmap = getRuntimeObjectList(collection);
+    		for (Object cmnext : cmap.entrySet())  
     		{
-    			Map.Entry next = (Map.Entry)cmap_it.next();
+    			Map.Entry next = (Map.Entry)cmnext;
     			Object[] next_value = (Object [])next.getValue();
     			result.put(next_value[0], next_value[1]);
     		}
@@ -447,23 +442,21 @@ public class DebugInterpreter extends ExpressionInterpreter {
     
     public synchronized void updateVisibleRuntimeObjects(Hashtable vro)
     {
-    	Iterator vro_it = vro.values().iterator();
-    	while (vro_it.hasNext())
+    	for (Object vronext : vro.values())
     	{
-    		RuntimeObject next = (RuntimeObject)vro_it.next();
+    		RuntimeObject next = (RuntimeObject)vronext;
     		currentVisibleRuntimeObjects.put(next.getOId(), next);
     	}
     }
     
-    protected synchronized Hashtable getRuntimeObjectList(Collection rolist, String list_type)
+    protected synchronized Hashtable getRuntimeObjectList(Collection rolist)
     {
     	Hashtable result = new Hashtable();
-    	Iterator it = rolist.iterator();
     	int i = 0;
-    	while (it.hasNext())
+    	for (Object ronext : rolist)
     	{
     		String name = "";
-    		RuntimeObject next = (RuntimeObject)it.next();
+    		RuntimeObject next = (RuntimeObject)ronext;
     		name = "["+Integer.toString(i)+"]";
     		result.put(next.getOId(), new Object[] {name, next});
     		i+=1;
@@ -472,13 +465,14 @@ public class DebugInterpreter extends ExpressionInterpreter {
     }
     
 
-    protected synchronized Hashtable getRuntimeObjectListForProperties(Hashtable romap, String list_type)
+    protected synchronized Hashtable getRuntimeObjectListForProperties(Hashtable romap)
     {
     	Hashtable result = new Hashtable();
-    	Iterator it = romap.keySet().iterator(); int i = 0;
-    	while (it.hasNext())
+    	Iterator it = romap.keySet().iterator();
+    	int i = 0;
+    	for (Object knext : romap.keySet())
     	{
-    		String name = (String)it.next();
+    		String name = (String)knext;
     		RuntimeObject ro = (RuntimeObject)romap.get(name);
     		result.put(ro.getOId(), new Object[] {name, ro}); 
     		i+=1;
@@ -493,7 +487,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
      */
     public static String getRONameProp(RuntimeObject rObject){
     	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
-    	//System.err.println("object : " + roName);
         return  roName == null ? "" : (String)roName.getData().get("StringValue");
     }
 }

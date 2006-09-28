@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.11 2006-07-20 09:05:44 zdrey Exp $
+/* $Id: Traceback.java,v 1.12 2006-09-28 13:06:12 zdrey Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -60,9 +60,8 @@ public class Traceback {
     public String getStackTrace()
     {   
         String stack_trace = "------------END OF STACK TRACE------------\n";
-        Iterator it = interpreter.interpreterContext.frame_stack.iterator();
-        while(it.hasNext()) {
-            CallFrame frame = (CallFrame)it.next();
+        for (CallFrame frame : interpreter.interpreterContext.frame_stack)
+        {
             fr.irisa.triskell.kermeta.language.structure.Object expr = frame.getExpression();
             if (expr!=null) // The only case where this cond is false is on first invokation
                 stack_trace = getContextForFObject(frame, expr) + stack_trace;
