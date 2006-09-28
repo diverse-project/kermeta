@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.13 2006-07-19 11:21:57 zdrey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.14 2006-09-28 13:19:29 zdrey Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -47,24 +47,25 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
     protected KermetaUnit unit;
     protected RuntimeMemory memory;
     
-    // properties by qualified name
-    private Hashtable properties;
+    /** Properties hashtable : { qualified_name : RuntimeObject } */
+    private Hashtable<String, RuntimeObject> properties;
     
     // mapping kcoreObject -> RuntimeObject
     private Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject> objects;
     // mapping qualified_name -> RuntimeObject (TypeDefinition)
-    private Hashtable typeDefinitions;
+    /** TypeDefinition hashtable : { qualified_name : RuntimeObject } */
+    private Hashtable<String, RuntimeObject> typeDefinitions;
     
     /**
      * Constructor
      */
     protected RuntimeMemoryLoader(KermetaUnit unit, RuntimeMemory memory) {
         super();
-        properties = new Hashtable();
+        properties = new Hashtable<String, RuntimeObject>();
         this.unit = unit;
         this.memory = memory;
         objects = new Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject>();
-        typeDefinitions = new Hashtable();
+        typeDefinitions = new Hashtable<String, RuntimeObject>();
     }
     
     protected void init() {
@@ -108,30 +109,26 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
      * Pre-create runtime objects for type definitions
      */
     private void _1_loadTypes() {
-        Iterator it = unit.packages.values().iterator();
-        while(it.hasNext()) {
-            Package p = (Package)it.next();
-            Iterator tit = p.getOwnedTypeDefinition().iterator();
+        for (Package p : unit.packages.values()) {
             // For each type definition, create the associated RuntimeObject
-            while(tit.hasNext()) {
+            for (Object tnext : p.getOwnedTypeDefinition()) {
             	// TypeDefinition can be a ClassDefinition or a ModelTypeDefinition
-                TypeDefinition td = (TypeDefinition)tit.next();
+                TypeDefinition td = (TypeDefinition)tnext;
                 RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
                 typeDefinitions.put(unit.getQualifiedName(td), ro);
                 objects.put(td, ro);
                 // If the type definition is a *classDefinition* than, create the complete runtime object, for the 
                 // class definition itself, AND for all its properties.
                 if (td instanceof ClassDefinition) {
-                    Iterator pit = ((ClassDefinition)td).getOwnedAttribute().iterator();
-                    while (pit.hasNext()) {
-                        Property prop = (Property)pit.next();
+                    for (Object pnext : ((ClassDefinition)td).getOwnedAttribute())
+                    {
+                        Property prop = (Property)pnext;
                         RuntimeObject ro_prop = new KCoreRuntimeObject(memory.getROFactory(), null, prop);
                         //ro_prop.getData().put("kcoreObject", prop);
                         properties.put(unit.getQualifiedName(prop), ro_prop);
                         objects.put(prop, ro_prop);
                     }
                 }
-                
             }
         }
     }
@@ -147,12 +144,11 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
     }
     
     /**
-     * Create all objects and fill correspondance table
+     * Create all runtime objects and fill correspondance table
      */
     private void _3_createRuntimeObjects() {
-        Iterator it = unit.packages.values().iterator();
-        while(it.hasNext()) {
-            getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)it.next());
+        for (Object next : unit.packages.values()) {
+            getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)next);
         }
     }
     
@@ -173,9 +169,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 		run_obj.setContainer( getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)kcoreObject.eContainer()) );
 		
 		// set properties
-		Iterator it = kcoreObject.eClass().getEAllAttributes().iterator();
-		while (it.hasNext()) {
-			EAttribute att = (EAttribute)it.next();
+		for (Object next : kcoreObject.eClass().getEAllAttributes())
+		{
+			EAttribute att = (EAttribute)next;
 			if (att.getUpperBound() == 1) {
 				// it is a single primitive value
 				if (kcoreObject.eGet(att) != null) {
@@ -204,9 +200,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 			}
 		}
 		// set references
-		it = kcoreObject.eClass().getEAllReferences().iterator();
-		while (it.hasNext()) {
-			EReference ref = (EReference)it.next();
+		for (Object next : kcoreObject.eClass().getEAllReferences())
+		{
+			EReference ref = (EReference)next;
 			if (ref.getUpperBound() == 1) {
 				// it is a single object
 				if (kcoreObject.eGet(ref) != null)
