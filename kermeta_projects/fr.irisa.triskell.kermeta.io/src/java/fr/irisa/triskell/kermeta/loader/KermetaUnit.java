@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.74 2006-09-25 14:44:58 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.75 2006-09-28 14:40:35 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
@@ -110,7 +109,7 @@ public abstract class KermetaUnit {
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
 		behav_factory = BehaviorPackageImpl.init().getBehaviorFactory();
 		
-		interpreter_symbols = new Hashtable();
+		interpreter_symbols = new Hashtable<String, KMSymbol>();
 		interpreter_symbols.put("stdio", new KMSymbolInterpreterVariable("stdio"));
 		
 		
@@ -129,12 +128,8 @@ public abstract class KermetaUnit {
 	        	
 	            checker.checkUnit();
 	            setType_checked(true);
-	            Iterator it = importedUnits.iterator();
-	    		while(it.hasNext()) {
-	    			KermetaUnit u = (KermetaUnit)it.next();
-	    			u.typeCheck(null);
-	    			
-	    		}
+	            for (KermetaUnit u : importedUnits) 
+	            	u.typeCheck(null);
 	            return checker;
 	        }
 	        catch(Throwable t) {
@@ -146,14 +141,9 @@ public abstract class KermetaUnit {
 	}
 	
 	public void typeCheckAllUnits() {
-		
 		typeCheck(null);
-		
-		ArrayList iulist = getAllImportedUnits();
-	    for (int i=0; i<iulist.size(); i++) {	        
-	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+		for (KermetaUnit iu : getAllImportedUnits())
 	        iu.typeCheck(null);
-	    }			   
 	}
 	
 	/**
@@ -168,15 +158,10 @@ public abstract class KermetaUnit {
 	    
 	    if (!this.messages.hasError()) {
 	        try {
-	        	
 	        	constraint_checker.checkUnit();
 	            setConstraint_checked(true);
-	            Iterator it = importedUnits.iterator();
-	    		while(it.hasNext()) {
-	    			KermetaUnit u = (KermetaUnit)it.next();
+	            for (KermetaUnit u : importedUnits)
 	    			u.constraintCheck(null);
-	    			
-	    		}
 	            return constraint_checker;
 	        }
 	        catch(Throwable t) {
@@ -218,12 +203,8 @@ public abstract class KermetaUnit {
 	public void constraintCheckAllUnits() {
 		
 		constraintCheck(null);
-		
-		ArrayList iulist = getAllImportedUnits();
-	    for (int i=0; i<iulist.size(); i++) {	        
-	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+		for (KermetaUnit iu : getAllImportedUnits())
 	        iu.constraintCheck(null);
-	    }			   
 	}
 	
 	protected void importStdlib() {
@@ -339,7 +320,6 @@ public abstract class KermetaUnit {
 	    Object result = getNodeByModelElement(object);
 	    if (result != null) return this;
 	    
-	    
 	    ArrayList iulist = getAllImportedUnits();
 	    for (int i=0; i<iulist.size(); i++) {	        
 	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
@@ -371,10 +351,9 @@ public abstract class KermetaUnit {
 	{
 		if(tracer !=  null)			
 		{	
-			Iterator it = traceT2M.keySet().iterator();
-			while (it.hasNext())
+			for (Object next : traceT2M.keySet()) 
 			{				
-				KermetaASTNode astNode = (KermetaASTNode)it.next();
+				KermetaASTNode astNode = (KermetaASTNode)next;
 				fr.irisa.triskell.kermeta.language.structure.Object model_element = getModelElementByNode(astNode);
 				astNode.getRangeStart();
 				tracer.addTextInputTrace(this.uri, 
@@ -395,15 +374,15 @@ public abstract class KermetaUnit {
 	 * 	  - the local variables of the current block.
 	 * 	  - the parameters of the current lambda expression.
 	 * Each hashtable contains a mapping
-	 * symbol : String -> MCSymbol
+	 * symbol : { String : MCSymbol }
 	 */
-	protected Stack symbols = new Stack();
+	protected Stack<Hashtable<String, KMSymbol>> symbols = new Stack<Hashtable<String, KMSymbol>>();
 	
 	/**
 	 * This is a the same principle ast the symbol table
 	 * but for type variables.
 	 */
-	protected Stack typeVars = new Stack();
+	protected Stack<Hashtable<String, TypeVariable>> typeVars = new Stack<Hashtable<String, TypeVariable>>();
 	
 	/**
 	 * The list of unit messages.
@@ -416,7 +395,7 @@ public abstract class KermetaUnit {
 	 * This is the list of unit directly imported by this one
 	 * @see getAllImportedUnits 
 	 */
-	public ArrayList<KermetaUnit> importedUnits = new ArrayList();
+	public ArrayList<KermetaUnit> importedUnits = new ArrayList<KermetaUnit>();
 	
 	/**
 	 * Allows to retreive the node that has defined each of the imported units
@@ -439,8 +418,7 @@ public abstract class KermetaUnit {
 	public void getAllImportedUnits(ArrayList<KermetaUnit> currentList)
 	{
 	    for (int i=0; i<importedUnits.size(); i++) {
-	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-	       
+	        KermetaUnit iu = importedUnits.get(i);
 	        if(!currentList.contains(iu)) 
 	        {
 	        	currentList.add(iu);
@@ -507,22 +485,19 @@ public abstract class KermetaUnit {
 	    		// OK, the package exists, see if it has a model type def inside it corresponding to the
 	    		// second-last piece of the qualified name
 	    		String mt_name = tdef_container_name.substring(tdef_container_name.lastIndexOf("::") + 2);
-	    		Iterator it = pack.getOwnedTypeDefinition().iterator();
-	    		while (it.hasNext()) {
-	    			TypeDefinition td = (TypeDefinition)it.next();
+	    		for (Object tdefnext : pack.getOwnedTypeDefinition())
+	    		{
+	    			TypeDefinition td = (TypeDefinition)tdefnext;
 	    			if ((td instanceof ModelTypeDefinition) && td.getName().equals(mt_name))
 	    				tdef_container = (ModelTypeDefinition) td;
 	    		}
 	    	}
-	    }
-	    
-//	    FPackage pack = packageLookup(pkg_name);
+	    }	    
 	    
 	    if (tdef_container == null) return null;
-   
-	    Iterator it = tdef_container.getOwnedTypeDefinition().iterator();
-	    while(it.hasNext()) {
-	        TypeDefinition td = (TypeDefinition)it.next();
+
+	    for (Object tdnext : tdef_container.getOwnedTypeDefinition()) {
+	        TypeDefinition td = (TypeDefinition)tdnext;
 	        if (td.getName().equals(tname)) return td;
 	    }
 	    return null;
@@ -550,8 +525,8 @@ public abstract class KermetaUnit {
 	}
 	
 	public void pushContext() {
-		symbols.push(new Hashtable());
-		typeVars.push(new Hashtable());
+		symbols.push(new Hashtable<String, KMSymbol>());
+		typeVars.push(new Hashtable<String, TypeVariable>());
 	}
 	
 	public void popContext() {
@@ -560,11 +535,11 @@ public abstract class KermetaUnit {
 	}
 	
 	public void addSymbol(KMSymbol s) {
-		((Hashtable)symbols.peek()).put(s.getIdentifier(), s);
+		symbols.peek().put(s.getIdentifier(), s);
 	}
 	
 	public void addTypeVar(TypeVariable var){
-		((Hashtable)typeVars.peek()).put(var.getName(), var);
+		typeVars.peek().put(var.getName(), var);
 	}
 	
 	public void addUsing(String name) {
@@ -627,7 +602,7 @@ public abstract class KermetaUnit {
 	}
 	
 	
-	protected Hashtable interpreter_symbols;
+	protected Hashtable<String, KMSymbol> interpreter_symbols;
 	
 	/**
 	 * Find a symbol in the symbol tables
@@ -752,10 +727,8 @@ public abstract class KermetaUnit {
 	 * Get an operation by its name. search in the inheritance tree
 	 */
 	public Operation findOperationByName(ClassDefinition c, String name) {
-		
-	    Iterator it = getAllOperations(c).iterator();
-	    while(it.hasNext()) {
-	        Operation op = (Operation)it.next();
+		for (Object next : getAllOperations(c)) {
+	        Operation op = (Operation)next;
 	        if (op.getName().equals(name)) return op;
 	    }
 	    return null;
@@ -841,9 +814,8 @@ public abstract class KermetaUnit {
 	 * @return
 	 */
 	public boolean isSuperClass(ClassDefinition supercls, ClassDefinition cls) {
-		EList stypes = cls.getSuperType();
-		for(int i=0; i< stypes.size(); i++) {
-			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stypes.get(i)).getTypeDefinition();
+		for(Object stype : cls.getSuperType()) {
+			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
 			if (supercls == scls) return true;
 			else if(isSuperClass(supercls, scls)) return true;
 		}
@@ -856,12 +828,10 @@ public abstract class KermetaUnit {
 	 * @return a Array of the <b>cls</b>'s first-level parents
 	 */
 	public ClassDefinition[] getDirectSuperClasses(ClassDefinition cls) {
-		EList scs = cls.getSuperType();
 		ArrayList result = new ArrayList();
-		for(int i=0; i<scs.size(); i++) {
-			result.add( ((fr.irisa.triskell.kermeta.language.structure.Class)scs.get(i)).getTypeDefinition() );
+		for(Object next : cls.getSuperType()) {
+			result.add( ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition() );
 		}
-		
 		// THIS LOOKS USELESS
 		/*
 		// Add the type Object which is implicilty a direct supertype of everything
@@ -892,16 +862,14 @@ public abstract class KermetaUnit {
 		    result.addAll(getAllOperationsOnRootType(ObjectTypeDef));
 		}
 		
-		Iterator it = cls.getOwnedOperation().iterator();
-		while(it.hasNext()) {
-			Operation op = (Operation)it.next();
+		for (Object next : cls.getOwnedOperation()) {
+			Operation op = (Operation)next;
 			// only take operation. no methods
 			if (op.getSuperOperation() == null && !result.contains(op)) result.add(op);
 		}
 		// search recursively in super classes
-		it = cls.getSuperType().iterator();
-		while(it.hasNext()) {
-			result.addAll(getAllOperations((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()));
+		for (Object next : cls.getSuperType()) {
+			result.addAll(getAllOperations((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition()));
 		}
 		return result;
 	}
@@ -910,8 +878,8 @@ public abstract class KermetaUnit {
 	 * all packages */
 	public ArrayList<TypeDefinition> getAllTypeDefinitions() {
 		ArrayList<TypeDefinition> result = new ArrayList<TypeDefinition>();
-		for (Iterator<Package> it = getAllPackages().iterator(); it.hasNext();)
-			result.addAll(it.next().getOwnedTypeDefinition());
+		for (Package p : getAllPackages())
+			result.addAll(p.getOwnedTypeDefinition());
 		return result;
 	}
 
@@ -922,15 +890,9 @@ public abstract class KermetaUnit {
 	public ArrayList<Package> getAllPackages() {
 		ArrayList<Package> result = new ArrayList<Package>();
 		result.addAll(packages.values());
-		
-		ArrayList iulist = getAllImportedUnits();
-	    for (int i=0; i<iulist.size(); i++) {	        
-	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
-	        for (Iterator it = iu.packages.values().iterator(); it.hasNext();)
-	        {
-	        	Package n = (Package)it.next();
-	        	if (!iu.packages.contains(n)) result.add(n);
-	        }
+		for (KermetaUnit iu : getAllImportedUnits()) {
+	        for (Package next : iu.packages.values())
+	        	if (!result.contains(next)) result.add(next);
 	    }  
 		return result;
 	}
@@ -942,22 +904,16 @@ public abstract class KermetaUnit {
 	 */
 	public ArrayList getAllOperationsOnRootType(ClassDefinition cls) {
 		ArrayList result = new ArrayList();
-		Iterator it = cls.getOwnedOperation().iterator();
-		while(it.hasNext()) {
-			Operation op = (Operation)it.next();
+		for (Object next : cls.getOwnedOperation()) {
+			Operation op = (Operation)next;
 			// only take operation. no methods
 			if (op.getSuperOperation() == null) result.add(op);
 		}
 		// search recursively in super classes
-		it = cls.getSuperType().iterator();
-		while(it.hasNext()) {
-			result.addAll(getAllOperationsOnRootType((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()));
+		for (Object next : cls.getSuperType()) {
+			result.addAll(getAllOperationsOnRootType((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition()));
 		}
-		
-		
 		return result;
-	}{
-	    
 	}
 	
 	/**
@@ -967,18 +923,14 @@ public abstract class KermetaUnit {
 	public ArrayList<Property> getAllProperties(ClassDefinition cls) {
 		ArrayList<Property> result = new ArrayList<Property>();
 		// ensures that each property is added only once.
-		Iterator itAtt = cls.getOwnedAttribute().iterator();
-		while(itAtt.hasNext()){
-			Property prop = (Property) itAtt.next();
-			if(!result.contains(prop)) result.add(prop);
+		for (Object prop : cls.getOwnedAttribute()) {
+			if(!result.contains(prop)) result.add( (Property) prop);
 		}
-		Iterator it = cls.getSuperType().iterator();
-		while(it.hasNext()) {
+		for (Object stnext : cls.getSuperType()) {
 			//ensures that each property is added only once.
-			Iterator itAtt2 = getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()).iterator();
-			while(itAtt2.hasNext()){
-				Property prop = (Property) itAtt2.next();
-				if(!result.contains(prop)) result.add(prop);
+			for (Object prop : getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition()))
+			{
+				if(!result.contains(prop)) result.add( (Property) prop);
 			}
 		}
 		return result;
@@ -987,7 +939,7 @@ public abstract class KermetaUnit {
 	public void prettyPrint(String file_name) {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		for (int i=0; i<importedUnits.size(); i++) {
-	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+	        KermetaUnit iu = importedUnits.get(i);
 	        if (STD_LIB_URI != null && iu == getStdLib()) continue;
 	        pp.getImports().add(iu.getResolvedURI(uri));
 	    }
@@ -1005,10 +957,7 @@ public abstract class KermetaUnit {
 	    ResourceSet resource_set = new ResourceSetImpl();
 	    ArrayList resource_tags = new ArrayList();
 	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));
-	    Iterator it = packages.values().iterator();
-	    while(it.hasNext()) {
-	    	
-	        Package p = (Package)it.next();    
+	    for (Package p : packages.values()) {
 	        if (p.eResource() == null && p.eContainer() == null) {
 	            fixTypeContainement(p);
 	            resource.getContents().add(p);	           
@@ -1063,6 +1012,7 @@ public abstract class KermetaUnit {
 	
 	/**
 	 * Create and return a copy of the given package
+	 * @deprecated
 	 */
 	private Package copyPackageStructure(Package pkg) {
 		Package result = struct_factory.createPackage();
@@ -1257,10 +1207,9 @@ public abstract class KermetaUnit {
 			// load imported units
 			loadBodies();
 			doneLoadBodies = true;
-			for(int i=0; i<importedUnits.size(); i++) {
-				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+			for(KermetaUnit iu : importedUnits)
 				if (!iu.loading) iu.loadAllBodies();
-			}
+			
 			loading = false;
 		}
 	    catch(Throwable t) {
@@ -1279,10 +1228,8 @@ public abstract class KermetaUnit {
 		    loading = true;
 		    loadAnnotations();
 		    doneLoadAnnotations = true;
-		    for (int i=0; i<importedUnits.size(); i++) {
-		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+		    for(KermetaUnit iu : importedUnits)
 		        if (!iu.loading) iu.loadAllAnnotations();
-		    }
 		    loading = false;
 		}
 	    catch(Throwable t) {
@@ -1313,6 +1260,7 @@ public abstract class KermetaUnit {
 	 */
 	public abstract void loadTypeDefinitions();
 	private boolean doneLoadTypeDefinitions = false;
+	
 	/**
 	 * Updates type definitions relationships (inheritance, ...)
 	 * Create properties / operations
@@ -1331,39 +1279,6 @@ public abstract class KermetaUnit {
 	public abstract void loadBodies();
 	private boolean doneLoadBodies = false;
 	
-	/**
-	 * @return Returns the error from this unit. If there is an error in imported unit, 
-	 * 	only report the name of the unit that contain the error
-	 */
-/*	public ArrayList getError() {
-	    visited = true;
-	    ArrayList result = new ArrayList();
-	    result.addAll(error);
-	    for (int i=0; i<importedUnits.size(); i++) {
-	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-	        if (iu.visited) continue;
-	        if (iu.getError().size() != 0) {
-	            result.add(new KMUnitError("Error in imported unit " + iu.getUri(), null));
-	        }
-	    }
-	    visited = false;
-		return result;
-	}*/
-	
-/*	public ArrayList getAllErrors() {
-	    visited = true;
-	    ArrayList result = new ArrayList();
-	    result.addAll(error);
-	    for (int i=0; i<importedUnits.size(); i++) {
-	        
-	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-	        if (iu.visited) continue;
-	        result.addAll(iu.getAllErrors());
-	    }
-	    visited = false;
-		return result;
-	}*/
-		
 	/**
 	 * @return Returns the uri.
 	 */
@@ -1392,7 +1307,6 @@ public abstract class KermetaUnit {
     
     public Package getRootPackage() { return rootPackage; }
 
-
 	/**
 	 * @return Returns the type_checked.
 	 */
@@ -1407,18 +1321,12 @@ public abstract class KermetaUnit {
 		this.type_checked = type_checked;
 	}
 
-
-
-
 	/**
 	 * @return Returns the constraint_checked.
 	 */
 	public synchronized boolean isConstraint_checked() {
 		return constraint_checked;
 	}
-
-
-
 
 	/**
 	 * @param constraint_checked The constraint_checked to set.
@@ -1427,9 +1335,6 @@ public abstract class KermetaUnit {
 		this.constraint_checked = constraint_checked;
 	}
 
-
-
-
 	/**
 	 * @return Returns the cycle_constraint_checked.
 	 */
@@ -1437,17 +1342,11 @@ public abstract class KermetaUnit {
 		return cycle_constraint_checked;
 	}
 
-
-
-
 	/**
 	 * @param cycle_constraint_checked The cycle_constraint_checked to set.
 	 */
 	public synchronized void setCycle_constraint_checked(
 			boolean cycle_constraint_checked) {
 		this.cycle_constraint_checked = cycle_constraint_checked;
-	}
-    
-
-    
+	}    
 }
