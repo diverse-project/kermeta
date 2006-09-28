@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.17 2006-09-19 14:43:47 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.18 2006-09-28 12:53:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -388,16 +388,15 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	Hashtable variables = new Hashtable();
     	if (getInterpreterContext().getFrameStack().isEmpty()==false)
     	{	
-    		Iterator fit = getInterpreterContext().getFrameStack().iterator();
-    		while (fit.hasNext())
+    		for (Object fnext : getInterpreterContext().getFrameStack())
     		{
-    			CallFrame frame = (CallFrame)fit.next();
+    			CallFrame frame = (CallFrame)fnext;
     			if (frame.hasVariables())
     			{
     				// We need to parse the current context?
     				Iterator it = frame.getVariables().iterator();
-    				while (it.hasNext()) {
-    					Variable v =  (Variable)it.next();
+    				for (Object vnext : frame.getVariables()) {
+    					Variable v =  (Variable)vnext;
         				RuntimeObject ro = v.getRuntimeObject();
     					variables.put(v.getName(), ro);
     					currentVisibleRuntimeObjects.put(ro.getOId(), ro);

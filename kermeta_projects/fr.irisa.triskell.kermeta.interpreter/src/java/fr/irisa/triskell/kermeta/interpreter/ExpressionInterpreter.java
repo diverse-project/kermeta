@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.47 2006-09-20 13:35:37 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.48 2006-09-28 12:51:19 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -1093,9 +1093,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     protected Constructor getJavaConstructor(Operation operation){
     	Constructor constructor = null;
-		Iterator it = memory.getUnit().getAllImportedUnits().iterator();
-    	while(it.hasNext()){
-    		KermetaUnit unit = (KermetaUnit) it.next();
+    	for (KermetaUnit unit : memory.getUnit().getAllImportedUnits()){
     		if(unit instanceof JarUnit){
     			JarUnit jarunit = (JarUnit)unit;
     			constructor = jarunit.cachedJavaConstructors.get(operation);
@@ -1112,9 +1110,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     protected Method getJavaMethod(Operation operation){
     	Method method = null;
-		Iterator it = memory.getUnit().getAllImportedUnits().iterator();
-    	while(it.hasNext()){
-    		KermetaUnit unit = (KermetaUnit) it.next();
+		for (KermetaUnit unit : memory.getUnit().getAllImportedUnits() ){
     		if(unit instanceof JarUnit){
     			JarUnit jarunit = (JarUnit)unit;
     			method = jarunit.cachedJavaMethods.get(operation);
@@ -1130,9 +1126,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     protected Field getJavaField(Property prop){
     	Field field = null;
-		Iterator it = memory.getUnit().getAllImportedUnits().iterator();
-    	while(it.hasNext()){
-    		KermetaUnit unit = (KermetaUnit) it.next();
+		for (KermetaUnit unit : memory.getUnit().getAllImportedUnits() ) {
     		if(unit instanceof JarUnit){
     			JarUnit jarunit = (JarUnit)unit;
     			field = jarunit.cachedJavaFields.get(prop);
@@ -1161,9 +1155,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			// Get the parameters of this operation
 			ArrayList parameters = visitList(node.getParameters());
 			// Get the param types for invokated method
-			Iterator it = parameters.iterator();
 			int i = 0;
-			while (it.hasNext()) paramsArray[i++] = (RuntimeObject)it.next();
+			for (Object next : parameters) paramsArray[i++] = (RuntimeObject)next;
 			
 			// Execute the command
 			try{
@@ -1193,12 +1186,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		// Get the parameters of this operation
 		ArrayList parameters = visitList(node.getParameters());
 		// Get the param types for invokated method
-		Iterator it = parameters.iterator();
 		int i = 0;
-		while (it.hasNext())
-		{
-		    paramtypes[i] = RuntimeObject.class;
-		    paramsArray[i++] = (RuntimeObject)it.next();
+		for (Object next : parameters) {
+			paramtypes[i] = RuntimeObject.class;
+		    paramsArray[i++] = (RuntimeObject)next;
 		    // TODO : test if the RuntimeObject is null or not
 		}
 		
@@ -1391,10 +1382,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public ArrayList visitList(EList expressions)
 	{
-		Iterator it = expressions.iterator();
 		ArrayList result_list = new ArrayList();
-		while(it.hasNext()) {
-			result_list.add(this.accept((EObject)it.next()));
+		for (Object next : expressions) {
+			result_list.add(this.accept((EObject)next));
 		}
 		return result_list;
 	}
@@ -1410,12 +1400,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public ArrayList visitStatementList(EList expressions)
 	{
-		Iterator it = expressions.iterator();
 		ArrayList result_list = new ArrayList();
-		while(it.hasNext()) {
-			EObject next = (EObject)it.next();
-			interpreterContext.peekCallFrame().peekExpressionContext().setStatement(next);
-			result_list.add(this.accept(next));
+		for (Object next : expressions) {
+			interpreterContext.peekCallFrame().peekExpressionContext().setStatement((EObject) next);
+			result_list.add(this.accept((EObject) next));
 		}
 		return result_list;
 	}
@@ -1471,13 +1459,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     protected void displayHashtable(Hashtable hash)
     {
         Set keys = hash.keySet();
-        Iterator it = keys.iterator();
         System.out.print("[ ");
-        while (it.hasNext())
-        {
-            Object key = it.next();
-            System.out.print(key+": "+hash.get(key));
-        }
+        for (Object key : keys) { System.out.print(key+": "+hash.get(key)); }
         System.out.print(" ]");
     }
     

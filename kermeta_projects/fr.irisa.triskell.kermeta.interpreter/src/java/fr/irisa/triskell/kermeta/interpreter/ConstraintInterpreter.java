@@ -40,44 +40,33 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		Operation superOp = node.getSuperOperation();
 		try {
 			// Memorise the value of the @pre variables
-			Iterator itatpre = node.getPost().iterator();
-			while(itatpre.hasNext()){
-				atpreV.accept((Constraint)itatpre.next());
-			}
+			for (Object next : node.getPost())
+				atpreV.accept((Constraint)next);
 			
 			if (superOp != null){
-				Iterator itparentatpre = superOp.getPost().iterator();
-				while(itparentatpre.hasNext()){
-					atpreV.accept((Constraint)itparentatpre.next());
-				}
+				for (Object next : superOp.getPost())
+					atpreV.accept((Constraint)next);
 				
 				// Check the pre conditions
-				Iterator itParentPre = superOp.getPre().iterator();
-				while(itParentPre.hasNext()){
-					this.accept((Constraint)itParentPre.next());
-				}
+				for (Object next : superOp.getPre())
+					this.accept((Constraint)next);
 			}
+		
 			//TODO : check that parentPre implies Pre			
-			Iterator itpre = node.getPre().iterator();
-			while(itpre.hasNext()){
-				this.accept((Constraint)itpre.next());
-			}
+			for (Object next : node.getPre())
+				this.accept((Constraint)next);
 			
 			// Interpret body
 			this.accept(node.getBody());
 			
 			// Check the post conditions
-			Iterator itpost = node.getPost().iterator();
-			while(itpost.hasNext()){
-				this.accept((Constraint)itpost.next());
-			}
-			
+			for (Object next : node.getPost())
+				this.accept((Constraint)next);
+
 			//TODO : check that post implies parentPost
-			if (superOp != null){
-				Iterator itParentPost = superOp.getPost().iterator();
-				while(itParentPost.hasNext()){
-					this.accept((Constraint)itParentPost.next());
-				}
+			if (superOp != null) {
+				for (Object next : superOp.getPost())
+					this.accept((Constraint)next);
 			}
 			// Set the result
 			result = interpreterContext.peekCallFrame().getOperationResult();
@@ -94,7 +83,6 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitConstraint(Constraint node)
 	{
-		// System.out.println(node.getName());
 		
 		// The result returned by the visit
 		RuntimeObject result = null;

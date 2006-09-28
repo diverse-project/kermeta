@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.19 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: CallFrame.java,v 1.20 2006-09-28 12:52:27 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -31,7 +31,7 @@ public abstract class CallFrame {
     /**
      * the list of expression contexts that are linked to this frame (@see ExpressionContext class javadoc)
      */
-    protected Stack block_stack;
+    protected Stack<ExpressionContext> block_stack;
 
     
     /**
@@ -43,7 +43,7 @@ public abstract class CallFrame {
     public CallFrame( InterpreterContext pContext )
     {
         context = pContext;
-        block_stack = new Stack();
+        block_stack = new Stack<ExpressionContext>();
         
     }
     
@@ -59,7 +59,7 @@ public abstract class CallFrame {
     public ExpressionContext peekExpressionContext()
     {
     	if (block_stack.isEmpty()) return null;
-    	else return (ExpressionContext)block_stack.peek();
+    	else return block_stack.peek();
     }
     
     /**
@@ -74,7 +74,7 @@ public abstract class CallFrame {
     public Variable getVariableByName(String name) {
         Variable result = null;
         for (int i=block_stack.size()-1; i>=0; i--) {
-            result = ((ExpressionContext)block_stack.get(i)).getVariableByName(name);
+            result = block_stack.get(i).getVariableByName(name);
             if (result != null) return result;
         }
         result = context.getInterpreterVariableByName(name);
@@ -82,10 +82,10 @@ public abstract class CallFrame {
     }
 
     /** Return the visible variables in this CallFrame */
-    public List getVariables() {
-        List result = new ArrayList(); 
+    public List<Variable> getVariables() {
+        List<Variable> result = new ArrayList<Variable>(); 
         for (int i=block_stack.size()-1; i>=0; i--) {
-            result.addAll(((ExpressionContext)block_stack.get(i)).getVariables().values());
+            result.addAll(block_stack.get(i).getVariables().values());
         }
         //result.put("self", getSelf());
         result.addAll(context.getInterpreterVariables().values());
@@ -110,7 +110,7 @@ public abstract class CallFrame {
         return context;
     }
     
-    public Stack getExpressionContext() {
+    public Stack<ExpressionContext> getExpressionContext() {
     	return block_stack;
     }
     

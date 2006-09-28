@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.12 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: ExpressionContext.java,v 1.13 2006-09-28 12:51:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -39,7 +39,7 @@ public class ExpressionContext {
      * The set of variables defined in this block
      * key : the name of the variable (String)
      * value : the variable itself (Variable) */
-    protected Hashtable variables;
+    protected Hashtable<String, Variable> variables;
     
     
     /** @deprecated */
@@ -56,7 +56,7 @@ public class ExpressionContext {
 	public ExpressionContext(/*Expression pRoot*/)
 	{
 	 //   root = pRoot;
-	    variables = new Hashtable();
+	    variables = new Hashtable<String, Variable>();
 	}
 	
 	/** 
@@ -77,7 +77,7 @@ public class ExpressionContext {
 	    
 	}
 	
-	public void addVariables(Hashtable vars) {
+	public void addVariables(Hashtable<String, Variable> vars) {
 	    variables.putAll(vars);
 	}
 	
@@ -117,7 +117,7 @@ public class ExpressionContext {
      *
      */
     
-    public Hashtable getVariables() {
+    public Hashtable<String, Variable> getVariables() {
         return variables;
     }
 
