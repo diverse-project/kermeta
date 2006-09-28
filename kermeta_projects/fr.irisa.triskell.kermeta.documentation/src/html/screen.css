@@ -2,9 +2,9 @@ body{
 	font: 9pt/13pt "Lucida Grande",Lucida,sans-serif;
 	color:rgb(80,80,80);
 	background: #ababab;
-	padding: 10pt;
-	padding-left: 5pt;
-	padding-right: 5pt;
+	padding: 1pt;
+	padding-left: 1pt;
+	padding-right: 1pt;
 	margin: 0;
 }
 
@@ -18,14 +18,13 @@ h2,
 h3,
 h4{
 	font-family:"Trebuchet MS",sans-serif;
-	color:#680634;
+	color:#340600;
 	font-weight:normal;
 	padding-top:0.5em;
 }
 
 h1{
-	padding-bottom: 0.5em;
-	border-bottom: 0.8em solid #ededed;
+	padding-bottom: 0.2em;
 }
 
 #synopsis h1, #synopsis h2 {
@@ -42,7 +41,7 @@ strong{
 a,
 a:active,
 a:visited{
-	color:#680634;
+	color:#454545;
 	text-decoration:none;
 }
 a:hover{
@@ -55,19 +54,20 @@ a img{
 
 hr {
 	border: 1px solid white;
-	border-top: 1px solid #680634;
-	color: #680634;
-	background: #680634;
+ 	border-top: 1px solid #340600; 
+	color: #340600;
+	background: #340600;
 }
 
 #body {
-	padding: 5pt;
-	border: 1px solid black;
+	padding-left: 5pt;
+	padding-top: 1px;
+	border: 1px solid #909090;
 	background: white;
-	-moz-border-radius-bottomleft: 15px;
-	-moz-border-radius-bottomright: 15px;
-	-moz-border-radius-topleft: 15px;
-	-moz-border-radius-topright: 15px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
 }
 
 #header, #footer{
@@ -76,12 +76,9 @@ hr {
 }
 
 #header {
-
-	background: url("icon-kermeta.png") no-repeat;
 	margin: 0;
-	padding: 0;
+	padding-left: 2pt;
 	border: 1px solid white;
-	border-bottom: 1px solid #680634;
 	text-align: right;
 }
 
@@ -97,7 +94,7 @@ hr {
 	padding-top: 1em;
 	clear:both;
 	text-align:right;
-	border-top: 1px solid #680634;
+	border-top: 1px solid #340600;
 	color: #909090;
 }
 
@@ -152,7 +149,7 @@ hr {
 	padding-bottom: 0.5em;
 	font-style: italic;
 	font-size: 90%;
-	color:#680634;
+	color:#340600;
 }
 
 #content table tr td {
@@ -167,7 +164,7 @@ hr {
 }
 
 #content span.term {
-	color:#680634;
+	color:#340600;
 	border-bottom:  1px solid #c6c6c6;
 }
 
@@ -213,5 +210,5 @@ hr {
 }
 #content table.small b
 {
-	color: #680634;
+	color: #340600; /* 680634 */
 }

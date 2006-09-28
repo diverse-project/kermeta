@@ -23,22 +23,22 @@ text/css" href="screen.css" />
         display: none;
 }
 
-.description {
+.description, .de {
         display: none;
         padding: 5pt;
 }
 
-.representation {
+.representation, .re {
 }
 
-.title {
+.title, .t {
         padding-top: 10pt;
         font-weight: bold;
 		font-size: 9pt;
         border-bottom: 1px solid #f0f0f0;
 }
 
-.docstring {
+.docstring, .ds {
         border-top: 1px solid #f0f0f0;
         background: #fafafa;
         padding: 10pt;
@@ -47,14 +47,14 @@ text/css" href="screen.css" />
         color: #808080;
 }
 
-.root, .container {
+.root, .container, .cr, .ro {
         padding-left: 10pt;
         color: #808080;
         border-left: 1px solid #f0f0f0;
         float: left;
 }
 
-.container {
+.container, .cr {
         margin-left: 10pt;
         display: none;
 }
@@ -63,16 +63,16 @@ text/css" href="screen.css" />
         display: none;
 }
 
-.name, .name a {
+.name, .name, .n a {
         color: #5ed4db;
 }
 
-.name {
+.name, .n {
         font-weight: bold;
         margin-top: 1em;
 }
 
-.undocumented, .undocumented a {
+.undocumented, .undocumented, .u a {
         color: #b0c0c0;
         font-style: italic;
 }
@@ -87,17 +87,19 @@ text/css" href="screen.css" />
 }
 
 #modules {
+		background: #f0f0f0 url("kermeta_logo.gif") right center no-repeat;
         text-align: left;
         clear: both;
-        padding: 5pt;
         font-size: 9pt;
         color: #A0A0A0;
-        background: #fafafa;
-        border-bottom: 1px solid #f0f0f0;
+        border: 2px solid #f0f0f0;
         margin:0;
 }
+#modules a:active, a:focus { background-color: #eae08c; padding: 2px}
+#modules a:hover { background-color: #eae08c}
 
 #api {
+		display: block;
         border: 0;
         height: 600px;
         width: 40%;
@@ -108,7 +110,7 @@ text/css" href="screen.css" />
         overflow: auto;
 }
 
-.name, .name a {
+.name, .name, .n a {
         color: black;
 }
 /*]]>*/
