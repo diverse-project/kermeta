@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.2 2006-09-27 15:58:23 dtouzet Exp $
+/* $Id: Ecore2KMPass1.java,v 1.3 2006-09-29 08:30:58 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -103,9 +103,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		if (pack == null) {
 			pack = unit.struct_factory.createPackage();
 			
-			// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-			//pack.setName( KMTHelper.getMangledIdentifier(node.getName()) );
-			pack.setName( node.getName() );
+			pack.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 
 			// FIXME : we have to test if URI is valid as a file path or not!
 			// Was : pack.setUri(node.getNsURI());
@@ -208,9 +206,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 		exporter.current_prop = prop;
 		
-		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-		//prop.setName( KMTHelper.getMangledIdentifier(node.getName()) );
-		prop.setName( node.getName() );
+		prop.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 		
 		prop.setIsOrdered(node.isOrdered());
 		prop.setIsUnique(node.isUnique());
@@ -230,9 +226,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		exporter.current_op = unit.struct_factory.createOperation();
 		operations.put(node, exporter.current_op);
 		
-		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-		//exporter.current_op.setName( KMTHelper.getMangledIdentifier(node.getName()) );
-		exporter.current_op.setName( node.getName() );
+		exporter.current_op.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 		
 		exporter.current_op.setIsOrdered(node.isOrdered());
 		exporter.current_op.setIsUnique(node.isUnique());
@@ -244,15 +238,14 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	}
 	
 	public Object visit(EEnum node) {
-		if (eclassifier_typedefinition_map.containsKey(node)) current_enum = (Enumeration)eclassifier_typedefinition_map.get(node);
+		if (eclassifier_typedefinition_map.containsKey(node))
+			current_enum = (Enumeration)eclassifier_typedefinition_map.get(node);
 		else { 
 			current_enum = unit.struct_factory.createEnumeration();
 			eclassifier_typedefinition_map.put(node, current_enum);
 		}
 		
-		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-		//current_enum.setName( KMTHelper.getMangledIdentifier(node.getName()) );
-		current_enum.setName( node.getName() );
+		current_enum.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 		
 		getTopPackage().getOwnedTypeDefinition().add(current_enum);
 		acceptList(node.getELiterals());
@@ -322,8 +315,8 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	{
 		fr.irisa.triskell.kermeta.language.structure.Object result =  null; 
 		if (element instanceof EPackage) result = getTopPackage();
-		if (element instanceof EClassifier)
-		{// I wish we could select {e| e instanceof EDatatype } more easily EDataTypes...
+		if (element instanceof EClassifier) {
+			// I wish we could select {e| e instanceof EDatatype } more easily EDataTypes...
 			result = eclassifier_typedefinition_map.get(element)!=null?eclassifier_typedefinition_map.get(element):datatypes.get(element);
 		}
 		if (element instanceof EStructuralFeature)	result = exporter.current_prop;
@@ -363,9 +356,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		{
 			result = unit.struct_factory.createClassDefinition();
 			
-			// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
-			//result.setName( KMTHelper.getMangledIdentifier(node.getName()) );
-			result.setName( node.getName() );
+			result.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
 			
 			result.setIsAbstract(node.isAbstract() || node.isInterface());
 			eclassifier_typedefinition_map.put(node, result);
