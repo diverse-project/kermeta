@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.31 2006-09-27 15:45:26 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.32 2006-09-29 13:23:18 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -106,6 +106,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// from a KMT file which package "declaration" is "package foo::bar;", we have to precreate
 		// its sup-packages?
 		Object epackage = accept(KermetaUnit.getRootPackageForSerialization(root_p));
+		
+		// Save the unit dependencies as EAnnotations of the root package
+		setUnitDependencies((EPackage) epackage);
+		
 		ecoreResource.getContents().add(epackage);
 		return epackage;
 	}
@@ -125,8 +129,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
 		newEPackage.setName( KMTHelper.getUnescapedIdentifier(current_name) );
-		
-		setUnitDependencies(newEPackage);
 		
 		if (ecoreExporter.tracer != null)
 		    ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
