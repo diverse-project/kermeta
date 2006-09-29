@@ -25,7 +25,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.compilationunit.CompilationUnitManager;;
+//import fr.irisa.triskell.kermeta.loader.compilationunit.CompilationUnitManager;;
 
 public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 
