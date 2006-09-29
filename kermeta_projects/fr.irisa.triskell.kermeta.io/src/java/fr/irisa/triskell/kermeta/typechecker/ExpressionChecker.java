@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.31 2006-09-25 14:49:19 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.32 2006-09-29 13:29:04 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -401,9 +401,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		result = visitExpressionList(expression.getStatement());
 		context.popContext();
 		//handle rescue blocks
-		Iterator it = expression.getRescueBlock().iterator();
-		while (it.hasNext()) {
-			Rescue resc = (Rescue)it.next();
+		for (Object next : expression.getRescueBlock()) {
+			Rescue resc = (Rescue)next;
 			
 			// Chech the constraint on multiplicity of exception type
 			if (resc.getExceptionType() != null && resc.getExceptionType().getUpper() != 1) {

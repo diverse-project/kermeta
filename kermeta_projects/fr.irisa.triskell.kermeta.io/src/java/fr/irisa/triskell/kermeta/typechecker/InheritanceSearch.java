@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.9 2006-09-27 09:58:48 zdrey Exp $
+/* $Id: InheritanceSearch.java,v 1.10 2006-09-29 13:29:04 zdrey Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -116,6 +116,10 @@ public class InheritanceSearch {
 		    	}
 		    }
 		}
+		// TODO And only finally, handle the object kind -> consequently, remove
+		// from getDirectSuperTypes() the code that adds object to the list of direct super types.
+		// Implies to change all the methods of getDirectSuperTypes.
+		
 		
 		return result;
 	}

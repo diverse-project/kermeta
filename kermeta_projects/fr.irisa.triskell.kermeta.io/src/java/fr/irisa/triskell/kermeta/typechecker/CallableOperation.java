@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: CallableOperation.java,v 1.5 2006-09-29 13:29:04 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : GPL
@@ -83,10 +83,8 @@ public class CallableOperation extends CallableElement {
         } else {
             FunctionType ft = struct_factory.createFunctionType();
             ProductType pt = struct_factory.createProductType();
-            Iterator ps = operation.getOwnedParameter().iterator();
-            while (ps.hasNext()) {
-                Parameter param = (Parameter) ps.next();
-                pt.getType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param)).getType());
+            for (Object param : operation.getOwnedParameter()) {
+                pt.getType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement((Parameter)param)).getType());
             }
             ft.setRight(rt);
             ft.setLeft(pt);
@@ -112,9 +110,8 @@ public class CallableOperation extends CallableElement {
        
         result.setSuperOperation(operation.getSuperOperation());
         
-        Iterator it = operation.getTypeParameter().iterator();
-        while(it.hasNext()) {
-            TypeVariable otv = (TypeVariable)it.next();
+        for (Object next : operation.getTypeParameter()) {
+            TypeVariable otv = (TypeVariable)next;
             TypeVariable ntv = struct_factory.createTypeVariable();
             ntv.setName(otv.getName());
             if (otv.getSupertype() != null)
@@ -126,15 +123,13 @@ public class CallableOperation extends CallableElement {
         if (operation.getType() != null)
             result.setType(TypeVariableEnforcer.getBoundType(operation.getType(), bindings));
         
-        it = operation.getRaisedException().iterator();
-        while(it.hasNext()) {
-        	fr.irisa.triskell.kermeta.language.structure.Type extype = (fr.irisa.triskell.kermeta.language.structure.Type)it.next();
+        for (Object next : operation.getRaisedException()) {
+        	fr.irisa.triskell.kermeta.language.structure.Type extype = (fr.irisa.triskell.kermeta.language.structure.Type)next;
             result.getRaisedException().add(TypeVariableEnforcer.getBoundType(extype, bindings));
         }
         
-        it = operation.getOwnedParameter().iterator();
-        while(it.hasNext()) {
-            Parameter op = (Parameter)it.next();
+        for (Object next : operation.getOwnedParameter()) {
+            Parameter op = (Parameter)next;
             Parameter np = struct_factory.createParameter();
             np.setLower(op.getLower());
             np.setUpper(op.getUpper());

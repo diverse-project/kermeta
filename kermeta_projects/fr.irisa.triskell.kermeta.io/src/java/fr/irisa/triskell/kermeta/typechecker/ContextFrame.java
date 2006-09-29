@@ -1,4 +1,4 @@
-/* $Id: ContextFrame.java,v 1.2 2005-04-20 15:21:04 ffleurey Exp $
+/* $Id: ContextFrame.java,v 1.3 2006-09-29 13:29:04 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ContextFrame.java
 * License : GPL
@@ -25,16 +25,16 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 public class ContextFrame {
 
 	// the symbols defined in the context
-	protected Hashtable symbols;
-	protected Hashtable types;
+	protected Hashtable<String, KMSymbol> symbols;
+	protected Hashtable<String, Type> types;
 	
 	/**
 	 * Constructors
 	 */
 	public ContextFrame() {
 		super();
-		symbols = new Hashtable();
-		types = new Hashtable();
+		symbols = new Hashtable<String, KMSymbol>();
+		types = new Hashtable<String, Type>();
 	}
 	
 	public void addSymbol(KMSymbol symbol, Type type) {
@@ -43,11 +43,11 @@ public class ContextFrame {
 	}
 	
 	public KMSymbol getSymbol(String id) {
-		return (KMSymbol)symbols.get(id);
+		return symbols.get(id);
 	}
 	
 	public Type getTypeOfSymbol(String id) {
-		return (Type)types.get(id);
+		return types.get(id);
 	}
 
 }
