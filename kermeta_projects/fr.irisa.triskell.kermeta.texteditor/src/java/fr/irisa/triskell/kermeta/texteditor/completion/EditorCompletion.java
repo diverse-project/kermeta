@@ -29,7 +29,9 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
@@ -37,8 +39,11 @@ import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 //import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.ExpressionChecker;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 /**
  * @author Franck Fleurey
@@ -104,7 +109,10 @@ public class EditorCompletion implements IContentAssistProcessor {
 		                if (lexp.eContainer() instanceof CallFeature) obj = (CallFeature)lexp.eContainer();
 		                TexteditorPlugin.pluginLog.info(" * -> Completion FObject -> " + obj);
 		            }
-		            
+		            // FIXME : completion with "." sometimes does not work because getStaticType returns null, because
+		            // the Parsed Unit contains errors, which is logic, during edition : so KermetaUnit reparsing/typechecking
+		            // Philosophy has definitely to be changed. -> related to CompilationUnit studies, particularly
+		            // type checking at relevant time, not every X seconds
 		            if (obj != null && obj instanceof Expression && ((Expression)obj).getStaticType() != null) {
 		                Type t = new SimpleType(((Expression)obj).getStaticType());
 		                TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
@@ -121,8 +129,6 @@ public class EditorCompletion implements IContentAssistProcessor {
 		}
 		/*
 		if (qualifier.equals("")) { addPrposalsForKW(doc, offset, propList, qualifier); }
-		else if(qualifier.charAt(0) == '.') { addPrposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1)); }
-		else if(qualifier.charAt(0) == ':') { addPrposalsForTypes(doc, offset, propList, qualifier.substring(1)); }
 		*/
 		
 		// Create completion proposal array
@@ -277,7 +283,6 @@ public class EditorCompletion implements IContentAssistProcessor {
             CompletionItem ci = new CallOperationCompletionItem(cp);
             if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase())) {
                 props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
-                
             }
         }
         Collections.sort(props, cpCmp);
