@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.5 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: TypeEqualityChecker.java,v 1.6 2006-10-04 08:35:26 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -17,12 +17,10 @@ import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
@@ -82,12 +80,21 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 						result = new Boolean(false);
 						break;
 					}
+					
 				}
+			
+				// special case of UnknownJavaObject, we need to check the real underlying type 
+				// which is stored in a tag 
+				//String t1JavaTypeName = JarUnit.getUnderlyingJavaTypeName(p);
+				//String t2JavaTypeName = JarUnit.getUnderlyingJavaTypeName(arg0);
+				//if(!t1JavaTypeName.equals(t2JavaTypeName)) 
+				//	result = new Boolean(false);
 			}
 		}
 		return result;
-	}
-	
+	}	
+
+
 	public Object visitEnumeration(Enumeration arg0) {
 		return new Boolean(provided == arg0);
 	}
