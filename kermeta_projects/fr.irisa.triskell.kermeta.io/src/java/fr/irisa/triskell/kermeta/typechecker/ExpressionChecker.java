@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.32 2006-09-29 13:29:04 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.33 2006-10-04 15:08:21 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -324,6 +324,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    this.accept(expression.getTarget());
 	    this.accept(expression.getValue());
 	    
+	    
 	    // The target of the assignenement cannot have any parameter
 	    if (expression.getTarget().getParameters().size() != 0) {
 	        unit.messages.addError("TYPE-CHECKER : Only variables and properties can be assigned", expression);
@@ -339,6 +340,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    // It should not be an operation call
 	    if (expression.getTarget() instanceof CallFeature) {
 	        CallFeature fc = (CallFeature)expression.getTarget();
+	        
 	        // Determine the type of the target
 			Type target;
 			if (fc.getTarget() != null) target = getTypeOfExpression(fc.getTarget());
@@ -356,6 +358,12 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 				unit.messages.addError("TYPE-CHECKER : '"+ fc.getName() + "' property is readonly. You can't assign it.", expression);
 				return TypeCheckerContext.VoidType;
 				
+			}
+			// Check if the property is not a collection
+			int upperBound = prop.getProperty().getUpper();
+			if ( (prop != null) && ((upperBound == -1) || (upperBound > 1)) ) {
+				unit.messages.addError("TYPE-CHECKER : You are trying to affect a value to property '" + prop.getProperty().getName() + "' which is a collection.", expression);
+				return TypeCheckerContext.VoidType;
 			}
 	    }
 	    
