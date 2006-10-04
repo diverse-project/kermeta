@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.6 2006-10-02 14:54:48 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.7 2006-10-04 17:14:03 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -117,19 +117,23 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 						if (eOpposite == eReference) {
 							i.remove();
 						} else {
-							// Get the owner of this property, thus a ClassDefinition
+							// Get the owner of this property, thus a
+							// ClassDefinition
 							ClassDefinition eOppositeContainingClass = eOpposite
 									.getOwningClass();
-							// Get the target of this property, thus a ClassDefinition
+							// Get the target of this property, thus a
+							// ClassDefinition
 							ClassDefinition eOppositeReferenceType = (ClassDefinition) ((Class) eOpposite
 									.getType()).getTypeDefinition();
 							if (eOppositeContainingClass == null
 									|| !KermetaCommonUtils.isSuperType(
 											eOppositeContainingClass,
 											eReferenceType)
+									|| eOppositeContainingClass != eReferenceType
 									|| !KermetaCommonUtils.isSuperType(
 											eContainingClass,
-											eOppositeReferenceType)) {
+											eOppositeReferenceType)
+									|| eContainingClass != eOppositeReferenceType) {
 								i.remove();
 							}
 						}
