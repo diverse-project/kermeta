@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.21 2006-09-22 11:12:23 dtouzet Exp $
+/* $Id: KMT2KMPass7.java,v 1.22 2006-10-04 11:30:23 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -26,8 +26,10 @@ import java.io.InputStreamReader;
 //import java.util.ArrayList;
 //import java.util.Stack;
 import java.util.regex.Pattern;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.EList;
 //import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -338,7 +340,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	{
 	    String tag_name = KERMETA_DOCUMENTATION;
 	    String tag_value = null;
-	    
+	        
 	   // Resource resource;
 	    fr.irisa.triskell.kermeta.language.structure.Tag tag = null;
 	    int i = 0;
@@ -348,23 +350,45 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    	for (i=0; i<annLst.getChildCount();i++)
 	    	{
 	    		Annotation a = (Annotation)annLst.getChild(i);
-	    		// Create the Tag in kcore repr.
-    			tag = builder.struct_factory.createTag();
-	    		if (Tag.class.isInstance(a))
-	    		{
-	    			tag_name  = ((Tag)a).getName().getFirstChild().getText();
-	    			String str = ((Tag)a).getVal().getText();
-	    			tag_value = str.substring(1, str.length()-1);
-	    		}
-	    		else
-	    		{	// note : the concrete syntax -- /** */ -- is kept
-	    		    tag_name = KERMETA_DOCUMENTATION;
-	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
+	    		
+	    		boolean foundSpecialTag = false;
+	    		if (a instanceof Tag) {
+	    			String tagName = ((Tag)a).getName().getFirstToken().getText();
+	    		
+	    			// check if the tag is @mainOperation or @mainClass
+	    			if (	tagName.equals("mainClass") ||
+	    					tagName.equals("mainOperation") ) {
+	    				// check if the element already contains the tag.
+	    				// if yes, then we do not add the tag
+	    				EList elementTag = element.getTag();
+	    				Iterator it = elementTag.iterator();
+	    			
+	    				while ( !foundSpecialTag && it.hasNext()) {
+	    					fr.irisa.triskell.kermeta.language.structure.Tag  existingTag = (fr.irisa.triskell.kermeta.language.structure.Tag) it.next();
+	    					if (existingTag.getName().equals(tagName)) foundSpecialTag = true;
+	    				}
+	    			}
 	    		}
 	    		
-	    		tag.setName(tag_name);
-    			tag.setValue(tag_value);
-	    		element.getTag().add(tag);
+	    		if ( ! foundSpecialTag ) {
+	    			// Create the Tag in kcore repr.
+	    			tag = builder.struct_factory.createTag();
+	    			if (Tag.class.isInstance(a))
+	    			{
+	    				tag_name  = ((Tag)a).getName().getFirstChild().getText();
+	    				String str = ((Tag)a).getVal().getText();
+	    				tag_value = str.substring(1, str.length()-1);
+	    			}
+	    			else
+	    			{	// note : the concrete syntax -- /** */ -- is kept
+	    				tag_name = KERMETA_DOCUMENTATION;
+	    				tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
+	    			}
+	    		
+	    			tag.setName(tag_name);
+	    			tag.setValue(tag_value);
+	    			element.getTag().add(tag);
+	    		}
 	    	}
 	    }
 	}
