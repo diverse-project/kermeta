@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.6 2006-09-27 11:36:22 cfaucher Exp $
+ * $Id: ClassItemProvider.java,v 1.7 2006-10-04 17:15:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
-
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
@@ -200,10 +201,12 @@ public class ClassItemProvider
 	public String getText(Object object) {
 		// We get the label of the class definition that is refered by the given class
 		// a '->' is added to show the "reference" semantic
-		String label = ((fr.irisa.triskell.kermeta.language.structure.Class)object).getTypeDefinition().getName();
+		String label = ((Class)object).getTypeDefinition().getName();
+		// Strict casting : a type is contained by a NamedElement
+		String parent = " owned by " + ((NamedElement) ((Class) object).eContainer()).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Class_type") :
-			getString("_UI_Class_type") + " -> " + label;
+			getString("_UI_Class_type") + " -> " + label + parent;
 	}
 
 	/**
