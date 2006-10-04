@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.3.0"
+      version="0.3.1"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -32,7 +32,7 @@ GPL license.
 
    <url>
       <update label="Kermeta update site on Triskell" url="http://www.kermeta.org//update"/>
-      <discovery label="Kermeta discovery site on Triskell" url="http://www.kermeta.org/update"/>
+      <discovery label="Kermeta update site" url="http://www.kermeta.org/update"/>
    </url>
 
    <requires>
