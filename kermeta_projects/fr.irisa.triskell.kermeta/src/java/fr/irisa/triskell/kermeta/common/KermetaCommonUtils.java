@@ -13,7 +13,8 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
- * KermetaCommonUtils contained some static methods used by the graphicaleditor and model.edit
+ * KermetaCommonUtils contained some static methods used by the graphicaleditor
+ * and model.edit
  * 
  * @author cfaucher
  * 
@@ -27,15 +28,14 @@ public class KermetaCommonUtils {
 
 	/**
 	 * Get the type that refers a source ClassDefinition in a target
-	 * ClassDefinition through the type-typeDefinition path or the
-	 * superType-typeDefinition path
+	 * ClassDefinition through the superType-typeDefinition path
 	 * 
 	 * @param sourceClassDef
 	 * @param targetClassDef
 	 * @return
 	 * @generated NOT
 	 */
-	public static Type getReferencingTypeBetween2ClassDef(
+	public static Type getTypeRepresentingAnInheritance(
 			ClassDefinition sourceClassDef, ClassDefinition targetClassDef) {
 		if (sourceClassDef.getSuperType() != null
 				|| !sourceClassDef.getSuperType().isEmpty()) {
@@ -53,6 +53,30 @@ public class KermetaCommonUtils {
 		}
 		return null;
 	}
+/*
+	public static Type getTypeRepresentingProperty(
+			ClassDefinition sourceClassDef, ClassDefinition targetClassDef,
+			Property prop) {
+		Type theType = null;
+		List<Type> typeList = getTypeRepresentingAnInheritance(sourceClassDef,
+				targetClassDef);
+		for (Iterator it = typeList.iterator(); it.hasNext();) {
+			if (((Type) it.next()).eContainer() instanceof ClassDefinition) {
+				return theType;
+			}
+		}
+		return theType;
+	}
+*/
+	/*
+	 * public static Type
+	 * getTypeOwnedByClassDefContextInheritance(ClassDefinition sourceClassDef,
+	 * ClassDefinition targetClassDef, Property prop) { Type theType = null;
+	 * List<Type> typeList = getTypeRepresentingAnInheritance(sourceClassDef,
+	 * targetClassDef); for(Iterator it=typeList.iterator(); it.hasNext();) {
+	 * if(((Type) it.next()).eContainer() instanceof ClassDefinition) { return
+	 * theType; } } return theType; }
+	 */
 
 	/**
 	 * Get all the types corresponding to the type definitions that belong to
@@ -77,21 +101,16 @@ public class KermetaCommonUtils {
 
 	/**
 	 * Evaluate the inheritance property between 2 DefinitionClasses
-	 * @param parent
+	 * 
 	 * @param child
-	 * @return true if parent is the same as child or if parent is super type of child, else false
+	 * @param parent
+	 * @return true if parent is a super type of child, else false
 	 */
-	public static boolean isSuperType(ClassDefinition parent,
-			ClassDefinition child) {
-		if (parent == child) {
+	public static boolean isSuperType(ClassDefinition child,
+			ClassDefinition parent) {
+		if (getTypeRepresentingAnInheritance(child, parent) != null) {
 			return true;
 		}
-
-		Type betType = getReferencingTypeBetween2ClassDef(parent, child);
-		if (betType != null && betType.eContainer() instanceof ClassDefinition) {
-			return true;
-		}
-
 		return false;
 	}
 

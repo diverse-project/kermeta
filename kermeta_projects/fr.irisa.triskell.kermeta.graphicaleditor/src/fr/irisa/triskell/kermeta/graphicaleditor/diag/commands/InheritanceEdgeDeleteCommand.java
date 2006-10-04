@@ -101,7 +101,7 @@ public class InheritanceEdgeDeleteCommand extends Command
         {
         	ClassDefinition sourceClassDef = (ClassDefinition) Utils.getElement(source);
         	ClassDefinition targetClassDef = (ClassDefinition) Utils.getElement(target);
-        	Type typeToRemove = KermetaCommonUtils.getReferencingTypeBetween2ClassDef(sourceClassDef, targetClassDef);
+        	Type typeToRemove = KermetaCommonUtils.getTypeRepresentingAnInheritance(sourceClassDef, targetClassDef);
         	sourceClassDef.getSuperType().remove(typeToRemove);
         	sourceClassDef.getContainedType().remove(typeToRemove);
         }

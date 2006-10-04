@@ -29,27 +29,31 @@ import org.topcased.modeler.utils.Utils;
 import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureSimpleObjectConstants;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-//import fr.irisa.triskell.kermeta.language.structure.*;
+// import fr.irisa.triskell.kermeta.language.structure.*;
 
 import fr.irisa.triskell.kermeta.language.structure.Property;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KermetaUtils;
+import fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureCreationNodeUtils;
+import fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureCreationEdgeUtils;
 
 /**
  * ClassDefinition restore connection command<br>
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma</a>
  */
 public class ClassDefinitionRestoreConnectionCommand extends
 		AbstractRestoreConnectionCommand {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param part the EditPart that is restored
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param part
+	 *            the EditPart that is restored
 	 * @generated
 	 */
 	public ClassDefinitionRestoreConnectionCommand(EditPart part) {
@@ -57,8 +61,8 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.topcased.modeler.commands.AbstractRestoreConnectionCommand#initializeCommands()
 	 * @generated
 	 */
@@ -85,10 +89,14 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						if (autoRef) {
 							// autoRef not allowed
 						} else {
-							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+							// if the node is the source of the edge or if it is
+							// the target and that the SourceTargetCouple is
+							// reversible
 							createInheritanceFromClassDefinitionToClassDefinition(
 									node, node2);
-							// if node is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+							// if node is the target of the edge or if it is the
+							// source and that the SourceTargetCouple is
+							// reversible
 							createInheritanceFromClassDefinitionToClassDefinition(
 									node2, node);
 						}
@@ -98,10 +106,14 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						if (autoRef) {
 							// autoRef not allowed
 						} else {
-							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+							// if the node is the source of the edge or if it is
+							// the target and that the SourceTargetCouple is
+							// reversible
 							createPropertyFromClassDefinitionToClassDefinition(
 									node, node2);
-							// if node is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+							// if node is the target of the edge or if it is the
+							// source and that the SourceTargetCouple is
+							// reversible
 							createPropertyFromClassDefinitionToClassDefinition(
 									node2, node);
 						}
@@ -113,10 +125,12 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param srcNode the source node
-	 * @param targetNode the target node
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param srcNode
+	 *            the source node
+	 * @param targetNode
+	 *            the target node
 	 * @generated NOT
 	 */
 	private void createInheritanceFromClassDefinitionToClassDefinition(
@@ -126,8 +140,7 @@ public class ClassDefinitionRestoreConnectionCommand extends
 		ClassDefinition targetObject = (ClassDefinition) Utils
 				.getElement(targetNode);
 
-		if ( KermetaCommonUtils.getReferencingTypeBetween2ClassDef(sourceObject,targetObject)!=null )
-		{
+		if (!KermetaCommonUtils.isSuperType(sourceObject, targetObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcNode, targetNode,
 					StructureSimpleObjectConstants.SIMPLE_OBJECT_INHERITANCE)
@@ -143,10 +156,12 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param srcNode the source node
-	 * @param targetNode the target node
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param srcNode
+	 *            the source node
+	 * @param targetNode
+	 *            the target node
 	 * @generated NOT
 	 */
 	private void createPropertyFromClassDefinitionToClassDefinition(
@@ -159,25 +174,44 @@ public class ClassDefinitionRestoreConnectionCommand extends
 		EList edgeObjectList = sourceObject.getOwnedAttribute();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
 			Object obj = it.next();
-			
+
 			if (obj instanceof Property) {
 				Property edgeObject = (Property) obj;
 				// Change : edgeObject.getType()
-				if (targetObject.equals(edgeObject.getType())
-						// FIXME Why that ?
-						/*&& sourceObject.equals(edgeObject.getOwningClass())
+				if (targetObject.equals(((ParameterizedType) edgeObject
+						.getType()).getTypeDefinition())
+						&& sourceObject.equals(edgeObject.getOwningClass())
 						&& sourceObject.getOwnedAttribute()
-								.contains(edgeObject)*/) {
+								.contains(edgeObject)) {
 					// check if the relation does not exists yet
+
 					List existing = getExistingEdges(srcNode, targetNode,
 							Property.class);
 					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
+
+						/*
+						 * 
+						 */
+						ICreationUtils factory = null;
+
+						if (KermetaUtils.getDefault().isStandardType(
+								edgeObject.getType())) {
+							factory = ((fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration) getModeler()
+									.getActiveConfiguration())
+									.getCreationUtils();
+						} else {
+
+							factory = ((fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration) getModeler()
+									.getActiveConfiguration())
+									.getCreationUtilsEdge();
+						}
+
 						// restore the link with its default presentation
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
+						GraphElement edge = factory.createGraphElement(edgeObject);
 						if (edge instanceof GraphEdge) {
+
+							System.out.println("Debug - t4");
+
 							PropertyEdgeCreationCommand cmd = new PropertyEdgeCreationCommand(
 									getEditDomain(), (GraphEdge) edge, srcNode,
 									false);

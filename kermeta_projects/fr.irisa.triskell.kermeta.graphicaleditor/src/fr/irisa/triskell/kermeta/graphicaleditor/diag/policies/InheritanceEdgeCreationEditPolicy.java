@@ -161,7 +161,8 @@ public class InheritanceEdgeCreationEditPolicy extends
 		// is the inheritance relation unique? 
 		if (StructurePackage.eINSTANCE.getClassDefinition_SuperType().isUnique())
 		{
-			if (KermetaCommonUtils.getReferencingTypeBetween2ClassDef(sourceClassDef, targetClassDef)!=null)
+			// check if an inheritance relation always exists between the 2 given classes
+			if (KermetaCommonUtils.isSuperType(sourceClassDef, targetClassDef))
 				isvalid = false;
 		}
 		return isvalid;
