@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure" name="%name%" uri="http://%name%">
+</kermeta_language_structure:Package>
