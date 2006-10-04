@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.20 2006-10-04 07:56:37 dvojtise Exp $
+/* $Id: KermetaUnitFactory.java,v 1.21 2006-10-04 14:05:23 dvojtise Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -45,7 +45,7 @@ public class KermetaUnitFactory {
 		{
 			allowedQualifiedIDs = new ArrayList<String>();
 			allowedQualifiedIDs.add("kermeta"); 
-			//allowedQualifiedIDs.add("java_rt_jar");
+			allowedQualifiedIDs.add("java_rt_jar");
 		}
 		return allowedQualifiedIDs;
 	}
@@ -57,7 +57,7 @@ public class KermetaUnitFactory {
 			defaultLoader.loadModules.put("km",    new KMLoaderModuleKM());
 			defaultLoader.loadModules.put("kmt",   new KMLoaderModuleMCT());
 			defaultLoader.loadModules.put("ecore", new KMLoaderModuleECore());
-			//defaultLoader.loadModules.put("jar",   new KMLoaderModuleJar());
+			defaultLoader.loadModules.put("jar",   new KMLoaderModuleJar());
 		}
 		return defaultLoader;
 	}
