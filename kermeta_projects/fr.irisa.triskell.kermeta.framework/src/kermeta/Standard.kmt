@@ -29,4 +29,6 @@ require "exceptions/exceptions.kmt"
 require "language/dynamic_expression.kmt"
 
 require "persistence/resource.kmt"
+
+require "standard/java.kmt"
  

@@ -19,12 +19,6 @@ using kermeta::exceptions
  *************************************************** */
  alias Object : kermeta::language::structure::Object ;
  
- /** 
-  * This special object is used to represent java object that cannot be concretly used with kermeta
-  * the only actions possible on these objects are : assignment and passing them as parameter
-  * question : maybe it would be better to have a real type UnknownJavaObject instead of a simple alias ?
-  */
- alias UnknownJavaObject : kermeta::language::structure::Object ;
  
 /**
  * Collection is the root abstract class for all kermeta collections
