@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.1 2006-10-04 08:37:16 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.2 2006-10-04 14:01:50 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -82,21 +82,19 @@ public class KermetaUtils {
 	/** Private constructor to prevent user to use it */
 	private KermetaUtils() {
 		super();
-		System.err.println("Debug - KermetaUtils [1]" + standardUnit.toString());
 		standardUnit = loadStdLib();
-		System.err.println("Debug - KermetaUtils [2]");
+		System.out.println("Debug - KermetaUtils [1]" + standardUnit.toString());
+		
 		//typeFixer = new TypeContainementFixer();
 		System.err.println("Debug - KermetaUtils [3]");
-		prettyPrinter = new KM2KMTPrettyPrinter();
+		//prettyPrinter = new KM2KMTPrettyPrinter();
 		System.err.println("Debug - KermetaUtils [4]");
 	}
 
 	public static KermetaUtils getDefault() {
 		System.err.println("Debug - KermetaUtils.getDefault()");
 		if (kermetaUtils == null) {
-			System.err.println("Debug - KermetaUtils.getDefault() [null 1]");
 			kermetaUtils = new KermetaUtils();
-			System.err.println("Debug - KermetaUtils.getDefault() [null 2]");
 		}
 		return kermetaUtils;
 	}
