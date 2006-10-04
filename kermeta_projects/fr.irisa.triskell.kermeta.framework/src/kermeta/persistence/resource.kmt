@@ -7,7 +7,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.20 2006-06-22 10:03:39 zdrey Exp $
+ * $Id: resource.kmt,v 1.21 2006-10-04 08:57:23 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -124,14 +124,14 @@ class EMFResource inherits Resource
 	    This allows to save the result of a transformation without changing the original file. */
 	method saveWithNewURI(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
-			new_uri, metaModelURI, "EMF", instances
+			self, new_uri, metaModelURI, "EMF", instances
 		)
 	end
 	
 	/** Save a resource in a file referenced by the uri associated to the resource */
 	method save() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
-			self.uri, metaModelURI, "EMF", instances
+			self, self.uri, metaModelURI, "EMF", instances
 		)
 	end
 	
