@@ -1,122 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="fr.irisa.triskell.kermeta.graphicaleditor"
-   name="kmEditor : Kermeta Graphical editor"
-   version="0.0.2"
-   provider-name="Topcased / INRIA"
-   class="fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin">
-   <runtime>
-      <library name="fr.irisa.triskell.kermeta.graphicaleditor.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-  <!-- eclipse says it is ignored if there is a manifest but this still cause trouble when deploying it -->
-   <requires>
-      <import plugin="fr.irisa.triskell.kermeta"/>      
-      <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>   
-      <import plugin="org.eclipse.emf.edit.ui" export="true"/>      
-      <import plugin="org.eclipse.ui.ide" export="true"/>      
-      <import plugin="org.eclipse.emf.edit" export="true"/>      
-      <import plugin="org.eclipse.core.resources" export="true"/>
-      <import plugin="org.eclipse.core.runtime" />
-      <import plugin="org.eclipse.emf.ecore.xmi" export="true"/>
-      <import plugin="org.eclipse.emf.ecore" export="true"/>      
-      <import plugin="org.topcased.modeler"/>
-     <!-- <import plugin="org.topcased.modeler.di"/>
-      <import plugin="org.topcased.checkresultmodel"/>
-      <import plugin="org.topcased.checkresultmodel.util"/>-->
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.emf.validation"/>
-   </requires>
-
-   <extension
-         id="TopcasedKermetaEditor"
-         point="org.eclipse.ui.editors">
+<plugin>
+<extension point="org.eclipse.ui.editors">
       <editor
             class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             icon="icons/Structure.png"
             default="true"
-            name="Kermeta GUI Editor"
+            name="Kermeta metamodeler"
             id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureEditorActionBarContributor"
             extensions="kmdi">
       </editor>
    </extension>
    
-   <extension
-         point="org.eclipse.ui.newWizards">
+   <extension point="org.eclipse.ui.newWizards">
       <wizard
-            category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
+            category="KermetaWizard"
             class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
-            icon="icons/ClassDiagram.png"
+            finalPerspective="kermetaPerspective"
+            icon="icons/Structure.png"
             id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
-            name="Kermeta Diagram">
+            name="New Kermeta metamodeler"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
    
    <extension
-         id="fr.irisa.triskell.kermeta.graphicaleditor.templates"
-         point="org.topcased.modeler.templates">
-      <template
-            di="templates/template1/%name%.kmdi"
-            editorId="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
-            id="kmClassDiagram"
-            model="templates/template1/%name%.km"
-            name="kmClassDiagram"/>
-   </extension>
-   
-   <extension point="org.eclipse.ui.perspectiveExtensions">
+         name="Kermeta metamodeler"
+         point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension targetID="org.topcased.modeler.perspective">
          <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"/>
       </perspectiveExtension>
    </extension>
-   
    <extension
-         point="org.eclipse.ui.preferencePages">
+         name="Kermeta metamodeler"
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="kermetaPerspective">
+         <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension point="org.eclipse.ui.preferencePages">
       <page
             category="org.topcased.modeler.preferences.ModelerPreferencePage"
             class="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
             id="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
             name="Structure"/>
    </extension>
-   <extension
-         id="fr.irisa.triskell.kermeta.graphicaleditor.validation"
-         name="KermetaValidatorAdapter"
-         point="org.eclipse.ui.startup">
-      <startup class="fr.irisa.triskell.kermeta.graphicaleditor.validation.KermetaValidatorStartup"/>
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/diag/%name%.kmdi"
+            model="templates/diag/%name%.km"
+            name="Km - Kermeta class diagram"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.templates.diag"
+            editorId="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"/>
    </extension>
-   <extension
-         point="org.topcased.modeler.diagrams">
+   
+   <extension point="org.topcased.modeler.diagrams">
       <diagram
-            configuration="fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureConfiguration"
-            id="kmClassDiagram"
-            name="kmClassDiagram">
+            configuration="fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration"
+            id="fr.irisa.triskell.kermeta.graphicaleditor"
+            name="Kermeta class diagram">
          <enableFor class="fr.irisa.triskell.kermeta.language.structure.Package"/>
       </diagram>
-   </extension>
-   <extension
-         point="org.topcased.modeler.outline">
-      <createChildMenu
-            class="fr.irisa.triskell.kermeta.graphicaleditor.outline.MenuManager"
-            editorId="fr.irisa.triskell.kermeta.graphicaleditor.StructureEditor"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.createChildMenu"
-            name="createChildMenu"/>
-   </extension> 
-<!--    <extension
-          id="validators"
-          name="Validator"
-          point="org.topcased.validation.core.validators">
-       <validator
-             class="fr.irisa.triskell.kermeta.graphicaleditor.validation.KermetaModelValidator"
-             id="fr.irisa.triskell.kermeta.graphicaleditor.validation.KermetaModelValidator"
-             name="Kermeta model validator">
-          <description>Kermeta basic model validator</description>
-       </validator>
-   </extension> -->
-
+	</extension>
+   
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+    	<propertySections contributorId="org.topcased.modeler.editor.Modeler">
+	    	<propertySection
+	        	id="fr.irisa.triskell.kermeta.graphicaleditor.NameSection"
+	        	class="fr.irisa.triskell.kermeta.graphicaleditor.editor.properties.sections.NamePropertySection"
+	        	tab="org.topcased.modeler.modelTab">
+	        <input type="fr.irisa.triskell.kermeta.language.structure.NamedElement"/>
+			</propertySection>
+		</propertySections>
+	</extension>
 </plugin>

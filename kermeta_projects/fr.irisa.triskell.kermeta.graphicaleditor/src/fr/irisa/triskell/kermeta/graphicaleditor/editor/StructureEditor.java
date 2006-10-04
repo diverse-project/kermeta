@@ -1,22 +1,38 @@
+/*******************************************************************************
+ * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
+ * accompanying materials are made available under the terms of the Eclipse
+ * Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
+ *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
+ *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ ******************************************************************************/
+
 package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
+import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
-import fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureKm2KmtAction;
-import fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureValidateAction;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureCreationUtils;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureEditPartFactory;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructurePaletteManager;
+import fr.irisa.triskell.kermeta.graphicaleditor.actions.DeleteInheritanceEdgeAction;
+import fr.irisa.triskell.kermeta.graphicaleditor.actions.utils.StructureActionConstants;
+
+
 
 /**
  * Generated Model editor
@@ -25,21 +41,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructurePaletteManager
  * @generated
  */
 public class StructureEditor extends Modeler {
-
-	private StructurePaletteManager paletteManager;
-
-	private StructureEditPartFactory editPartFactory;
-
-	private StructureCreationUtils creationUtils;
-
-	protected SourceViewerConfiguration configuration;
-
-	/**
-	 * 
-	 */
-	public StructureEditor() {
-		super();
-	}
 
 	/**
 	 * @see org.topcased.modeler.editor.Modeler#getAdapterFactories()
@@ -96,44 +97,39 @@ public class StructureEditor extends Modeler {
 	}
 
 	/**
-	 * I overrid this method in order to add a new Action (linked to a button
-	 * that appears in the tool bar), which is StructureValidateAction.
-	 * @see org.topcased.modeler.editor.Modeler#createActions()
-	 */
-	protected void createActions() {
-		super.createActions();
-		// The constraint checking action
-		ActionRegistry registry = getActionRegistry();
-		IAction action = new StructureValidateAction(this);
-		// Once it is registered, we can find it through a RetargetAction
-		// See StructureEditorActionBarContributor
-		registry.registerAction(action);
-
-		// The convert km2kmt action
-		action = new StructureKm2KmtAction(this);
-		registry.registerAction(action);
-	}
-
-	/**
-	 * Method and javadoc copied from Modeler class, and adapted because of some special stuff in kermeta model :
-	 * 
-	 *   - the contained types
-	 *   - the tags
-	 *   
-	 * Effective save action : <br>
-	 * <ol>
-	 * <li> Save the models in temporary files
-	 * <li> Read the saved model
-	 * <li> Save the models in the right files
-	 * </ol>
-	 * If one of these tasks fails, the save is cancelled and a message is send
-	 * to the user.
-	 * 
-	 * @see org.topcased.modeler.editor.Modeler#doSave(org.eclipse.core.runtime.IProgressMonitor)
-	 * @see org.eclipse.ui.ISaveablePart#doSave(org.eclipse.core.runtime.IProgressMonitor)
-	 */
-	/*public void doSave(IProgressMonitor monitor)
-	 {
-	 }*/
-
+     * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+     * @generated NOT
+     */
+    protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
+    {
+        return new StructureContextMenuProvider(viewer, getActionRegistry());
+    }
+    
+    /**
+     * @see org.topcased.modeler.editor.Modeler#configureGraphicalViewer()
+     * @generated NOT
+     */
+    protected void configureGraphicalViewer()
+    {
+        super.configureGraphicalViewer();
+        
+        IAction deleteImplementLinkAction = getActionRegistry().getAction(StructureActionConstants.DELETE_INHERITANCE_EDGE);
+        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteImplementLinkAction);
+    }
+    
+    /**
+     * @see org.topcased.modeler.editor.Modeler#createActions()
+     * @generated NOT
+     */
+    protected void createActions()
+    {
+        super.createActions();
+        
+        ActionRegistry registry = getActionRegistry();
+        IAction action;
+        
+        action = new DeleteInheritanceEdgeAction(this);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+    }
 }

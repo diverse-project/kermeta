@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.topcased.modeler.providers.IDeletePartnerProvider;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
+import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
@@ -27,7 +28,6 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KGEUtils;
 
 import java.util.Iterator;
 
@@ -74,15 +74,15 @@ public class ClassDefinitionModelerProvider extends
 		ClassDefinition theClassDef = (ClassDefinition) object;
 
 		// Get the types that refer the cuurent ClassDefinition
-		for (Iterator itLinks = KGEUtils.getOwnedTypesForTypeDefinitions(
+		for (Iterator itLinks = KermetaCommonUtils.getOwnedTypesForTypeDefinitions(
 				theClassDef).iterator(); itLinks.hasNext();) {
 			Object objType = itLinks.next();
 			if (objType instanceof ParameterizedType) {
 				ParameterizedType paramType = (ParameterizedType) objType;
-				// Give the TypeDefinition that refers the ParameterizedType
+				// Give the TypeDefinition that references the ParameterizedType
 				GenericTypeDefinition refObj = paramType.getTypeDefinition();
 				if (refObj instanceof ClassDefinition) {
-					// If the refered ClassDefinition is the same than the current
+					// If the referenced ClassDefinition is the same than the current
 					// => this ParameterizedType must be deleted
 					if (theClassDef == ((ClassDefinition) refObj)) {
 						deletelist.add(paramType);

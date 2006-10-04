@@ -10,17 +10,20 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.graphicaleditor.actions;
-
-import org.topcased.modeler.actions.ModelerActionBarContributor;
+package fr.irisa.triskell.kermeta.graphicaleditor.diag;
 
 /**
- * Generated Actions
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
+ * A Set of properties that are used for the graphical objects that are not
+ * associated with a model object. Each name is used as the typeInfo attribute
+ * in the DI file.
+ * 
+ * Creation : 11 may 2006
+ * 
  * @generated
  */
-public class StructureEditorActionBarContributor extends
-		ModelerActionBarContributor {
-	// TODO defined customized actions
+public interface StructureSimpleObjectConstants {
+	/** The name that identify the <i>Inheritance</i> SimpleObject. */
+	String SIMPLE_OBJECT_INHERITANCE = "Inheritance";
 }

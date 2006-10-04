@@ -1,13 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: kmEditor
+Bundle-Name: Kermeta Metamodeler
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
-Bundle-Version: 0.0.2
+Bundle-Version: 0.0.4
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin
-Bundle-Vendor: Topcased / INRIA
+Bundle-Vendor: Topcased - IRISA/INRIA
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore.edit,
  org.eclipse.emf.edit.ui,
  org.eclipse.ui.ide,
  org.eclipse.emf.edit,
@@ -15,30 +14,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.emf.ecore,
  org.topcased.modeler,
+ org.topcased.modeler.graphconf,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.model.edit,
- org.eclipse.jface.text,
- org.eclipse.ui.editors,
- fr.irisa.triskell.kermeta.texteditor,
- org.eclipse.emf.validation
-Eclipse-AutoStart: true
-Export-Package: fr.irisa.triskell.kermeta.graphicaleditor,
- fr.irisa.triskell.kermeta.graphicaleditor.actions,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension,
- fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils,
- fr.irisa.triskell.kermeta.graphicaleditor.editor,
- fr.irisa.triskell.kermeta.graphicaleditor.extensions,
- fr.irisa.triskell.kermeta.graphicaleditor.outline,
- fr.irisa.triskell.kermeta.graphicaleditor.preferences,
- fr.irisa.triskell.kermeta.graphicaleditor.providers,
- fr.irisa.triskell.kermeta.graphicaleditor.validation,
- fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints,
- fr.irisa.triskell.kermeta.graphicaleditor.validation.ocl,
- fr.irisa.triskell.kermeta.graphicaleditor.wizards
+ fr.irisa.triskell.kermeta.model.editor
+Eclipse-LazyStart: true

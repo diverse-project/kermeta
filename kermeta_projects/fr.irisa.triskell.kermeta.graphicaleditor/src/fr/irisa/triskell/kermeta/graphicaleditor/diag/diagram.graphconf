@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphconf:DiagramGraphConf xmlns:graphconf="http://www.topcased.org/1.0/graphconf"
+    id="fr.irisa.triskell.kermeta.graphicaleditor"
+    defaultBackgroundColor="255,255,255"
+    defaultForegroundColor="0,0,0"
+    defaultFont="Tahoma-regular-8">
+    <node
+        presentation="default"
+        defaultHeight="50"
+        defaultWidth="20"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="241,241,241"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://kermeta/kermeta.ecore//language/structure#//Package"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="241,235,215"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://kermeta/kermeta.ecore//language/structure#//ClassDefinition"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://kermeta/kermeta.ecore//language/structure#//Property"/>
+        </bridge>
+    </node>
+    <node
+        presentation="default"
+        defaultHeight="-1"
+        defaultWidth="-1"
+        minimumHeight="20"
+        minimumWidth="20"
+        maximumHeight="200"
+        maximumWidth="200"
+        defaultBackgroundColor="255,255,255"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://kermeta/kermeta.ecore//language/structure#//Operation"/>
+        </bridge>
+    </node>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:StringBridge" type="Inheritance"/>
+    </edge>
+    <edge
+        presentation="default"
+        defaultForegroundColor="0,0,0"
+        defaultFont="Tahoma-regular-8"
+        defaultRouter="ObliqueRouter"
+        lineWidth="1"
+        lineStyle="SOLID">
+        <bridge xsi:type="graphconf:EMFBridge">
+            <type href="http://kermeta/kermeta.ecore//language/structure#//Property"/>
+        </bridge>
+    </edge>
+</graphconf:DiagramGraphConf>
+

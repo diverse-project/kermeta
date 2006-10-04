@@ -10,17 +10,22 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.graphicaleditor.actions;
+package fr.irisa.triskell.kermeta.graphicaleditor.diag.policies;
 
-import org.topcased.modeler.actions.ModelerActionBarContributor;
+import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 
 /**
- * Generated Actions
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
-public class StructureEditorActionBarContributor extends
-		ModelerActionBarContributor {
-	// TODO defined customized actions
+public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
+	/**
+	 * Default contructor. 
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PackageLayoutEditPolicy() {
+		super();
+	}
+
 }

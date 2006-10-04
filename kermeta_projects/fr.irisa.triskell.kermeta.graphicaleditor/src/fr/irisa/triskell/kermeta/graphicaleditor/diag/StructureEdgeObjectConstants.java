@@ -10,17 +10,23 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.graphicaleditor.actions;
-
-import org.topcased.modeler.actions.ModelerActionBarContributor;
+package fr.irisa.triskell.kermeta.graphicaleditor.diag;
 
 /**
- * Generated Actions
+ * An interface defining EdgeObject Constants.<br>
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureEditorActionBarContributor extends
-		ModelerActionBarContributor {
-	// TODO defined customized actions
+public interface StructureEdgeObjectConstants {
+	/** Public constant defining the name EdgeObject id. 
+	 * @generated
+	 */
+	String NAME_EDGE_OBJECT_ID = "nameEdgeObject";
+	
+	/**
+     * Public constant defining the multiplicity EdgeObject id.
+     * @generated NOT
+     */
+    String MULTIPLICITY_EDGE_OBJECT_ID = "multiplicityEdgeObject";
 }

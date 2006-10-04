@@ -10,17 +10,25 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.graphicaleditor.actions;
+package fr.irisa.triskell.kermeta.graphicaleditor.diag.figures;
 
-import org.topcased.modeler.actions.ModelerActionBarContributor;
 
 /**
- * Generated Actions
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureEditorActionBarContributor extends
-		ModelerActionBarContributor {
-	// TODO defined customized actions
+public class OperationFigure extends
+		org.topcased.draw2d.figures.EditableLabelFigure {
+	/**
+	 * Constructor
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationFigure() {
+
+		super();
+	}
+
 }
