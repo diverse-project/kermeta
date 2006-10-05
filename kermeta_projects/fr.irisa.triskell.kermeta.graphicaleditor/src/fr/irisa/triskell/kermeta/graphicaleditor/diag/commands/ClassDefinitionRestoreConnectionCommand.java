@@ -140,7 +140,7 @@ public class ClassDefinitionRestoreConnectionCommand extends
 		ClassDefinition targetObject = (ClassDefinition) Utils
 				.getElement(targetNode);
 
-		if (!KermetaCommonUtils.isSuperType(sourceObject, targetObject)) {
+		if (KermetaCommonUtils.isSuperType(sourceObject, targetObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcNode, targetNode,
 					StructureSimpleObjectConstants.SIMPLE_OBJECT_INHERITANCE)
