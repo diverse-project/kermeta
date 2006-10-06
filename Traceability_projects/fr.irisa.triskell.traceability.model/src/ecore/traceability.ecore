@@ -1,60 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="traceability" nsURI="http://modelware.inria.fr/Traceability" nsPrefix="traceability">
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="traceability"
+    nsURI="http://modelware.inria.fr/Traceability" nsPrefix="traceability">
   <eClassifiers xsi:type="ecore:EClass" name="Trace">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="traceSet" lowerBound="1" eType="//Model" eOpposite="//Model/traces"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceReferences" upperBound="-1" eType="//Reference" eOpposite="//Reference/targetTrace"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetReferences" upperBound="-1" eType="//Reference" eOpposite="//Reference/sourceTrace"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="description" lowerBound="1" upperBound="-1" eType="//Message" eOpposite="//Message/trace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceSet" lowerBound="1"
+        eType="#//Model" eOpposite="#//Model/traces"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceReferences" upperBound="-1"
+        eType="#//Reference" eOpposite="#//Reference/targetTrace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetReferences" upperBound="-1"
+        eType="#//Reference" eOpposite="#//Reference/sourceTrace"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" lowerBound="1"
+        upperBound="-1" eType="#//Message" eOpposite="#//Message/trace"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Model">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optimizedReferencesOnly">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents a Trace model.  Actually, this is a set of traces, references and messages."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optimizedReferencesOnly"
+        eType="#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If true, means that the references are unique within the trace model."/>
+      </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="traces" upperBound="-1" eType="//Trace" containment="true" eOpposite="//Trace/traceSet"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1" eType="//Reference" containment="true" eOpposite="//Reference/referenceSet"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1" eType="//Message" containment="true" eOpposite="//Message/messageSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traces" upperBound="-1"
+        eType="#//Trace" containment="true" eOpposite="#//Trace/traceSet">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set of traces contained by this trace model"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//Reference" containment="true" eOpposite="#//Reference/referenceSet">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set of references to the traced objects of this trace model"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
+        eType="#//Message" containment="true" eOpposite="#//Message/messageSet">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set of messages contained by this trace model"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TextReference" eSuperTypes="//InternalReference">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileURI">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="line">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginAt">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEndAt">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="TextReference" eSuperTypes="#//InternalReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents some part of text in a file."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileURI" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charBeginAt" eType="#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEndAt" eType="#//Integer"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reference" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetTrace" upperBound="-1" eType="//Trace" eOpposite="//Trace/sourceReferences"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTrace" upperBound="-1" eType="//Trace" eOpposite="//Trace/targetReferences"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceSet" lowerBound="1" eType="//Model" eOpposite="//Model/references"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A Reference is a kind of proxy pointing to a concrete object"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetTrace" upperBound="-1"
+        eType="#//Trace" eOpposite="#//Trace/sourceReferences"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceTrace" upperBound="-1"
+        eType="#//Trace" eOpposite="#//Trace/targetReferences"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceSet" lowerBound="1"
+        eType="#//Model" eOpposite="#//Model/references"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XMLReference" eSuperTypes="//TextReference">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPointer">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="XMLReference" eSuperTypes="#//TextReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xPointer" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExternalReference" eSuperTypes="//Reference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" lowerBound="1">
-      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalReference" eSuperTypes="#//Reference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is a pointer to a concrete object contained by another model."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refObject" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternalReference" abstract="true" eSuperTypes="//Reference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InternalReference" abstract="true" eSuperTypes="#//Reference"/>
   <eClassifiers xsi:type="ecore:EClass" name="Message">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="messageSet" lowerBound="1" eType="//Model" eOpposite="//Model/messages"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trace" eType="//Trace" eOpposite="//Trace/description"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Message is used to add some information to a trace. Typically, in order to known what had generated a given trace or provide a user friendly message to the user."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messageSet" lowerBound="1"
+        eType="#//Model" eOpposite="#//Model/messages"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trace" eType="#//Trace"
+        eOpposite="#//Trace/description"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
 </ecore:EPackage>
