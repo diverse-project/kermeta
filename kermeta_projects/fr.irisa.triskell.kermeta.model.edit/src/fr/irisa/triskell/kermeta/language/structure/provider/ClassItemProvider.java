@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.7 2006-10-04 17:15:29 cfaucher Exp $
+ * $Id: ClassItemProvider.java,v 1.8 2006-10-06 08:40:46 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -30,23 +30,19 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Class} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link fr.irisa.triskell.kermeta.language.structure.Class} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class ClassItemProvider
-	extends ParameterizedTypeItemProvider
-	implements	
-		IEditingDomainItemProvider,	
-		IStructuredItemContentProvider,	
-		ITreeItemContentProvider,	
-		IItemLabelProvider,	
-		IItemPropertySource {
+public class ClassItemProvider extends ParameterizedTypeItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider,
+		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ClassItemProvider(AdapterFactory adapterFactory) {
@@ -54,9 +50,9 @@ public class ClassItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List getPropertyDescriptors(Object object) {
@@ -73,176 +69,164 @@ public class ClassItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Owned Attribute feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Owned Attribute feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addOwnedAttributePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_ownedAttribute_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_ownedAttribute_feature", "_UI_Class_type"),
-				 StructurePackage.Literals.CLASS__OWNED_ATTRIBUTE,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Class_ownedAttribute_feature"), getString(
+						"_UI_PropertyDescriptor_description",
+						"_UI_Class_ownedAttribute_feature", "_UI_Class_type"),
+				StructurePackage.Literals.CLASS__OWNED_ATTRIBUTE, false, false,
+				false, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Owned Operation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Owned Operation feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addOwnedOperationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_ownedOperation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_ownedOperation_feature", "_UI_Class_type"),
-				 StructurePackage.Literals.CLASS__OWNED_OPERATION,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Class_ownedOperation_feature"), getString(
+						"_UI_PropertyDescriptor_description",
+						"_UI_Class_ownedOperation_feature", "_UI_Class_type"),
+				StructurePackage.Literals.CLASS__OWNED_OPERATION, false, false,
+				false, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Super Class feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Super Class feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addSuperClassPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_superClass_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_superClass_feature", "_UI_Class_type"),
-				 StructurePackage.Literals.CLASS__SUPER_CLASS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Class_superClass_feature"), getString(
+						"_UI_PropertyDescriptor_description",
+						"_UI_Class_superClass_feature", "_UI_Class_type"),
+				StructurePackage.Literals.CLASS__SUPER_CLASS, false, false,
+				false, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Is Abstract feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Is Abstract feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addIsAbstractPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_isAbstract_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_isAbstract_feature", "_UI_Class_type"),
-				 StructurePackage.Literals.CLASS__IS_ABSTRACT,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Class_isAbstract_feature"), getString(
+						"_UI_PropertyDescriptor_description",
+						"_UI_Class_isAbstract_feature", "_UI_Class_type"),
+				StructurePackage.Literals.CLASS__IS_ABSTRACT, false, false,
+				false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Class_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Class_name_feature", "_UI_Class_type"),
-				 StructurePackage.Literals.CLASS__NAME,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
+		itemPropertyDescriptors.add(createItemPropertyDescriptor(
+				((ComposeableAdapterFactory) adapterFactory)
+						.getRootAdapterFactory(), getResourceLocator(),
+				getString("_UI_Class_name_feature"), getString(
+						"_UI_PropertyDescriptor_description",
+						"_UI_Class_name_feature", "_UI_Class_type"),
+				StructurePackage.Literals.CLASS__NAME, false, false, false,
+				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This returns Class.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns Class.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Class"));
+		return overlayImage(object, getResourceLocator().getImage(
+				"full/obj16/Class"));
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		// We get the label of the class definition that is refered by the given class
+		// We get the label of the class definition that is refered by the given
+		// class
 		// a '->' is added to show the "reference" semantic
-		String label = ((Class)object).getTypeDefinition().getName();
+		String label = "";
+		if (((Class) object).getTypeDefinition().getName() != null) {
+			label = " -> " + ((Class) object).getTypeDefinition().getName();
+		}
 		// Strict casting : a type is contained by a NamedElement
-		String parent = " owned by " + ((NamedElement) ((Class) object).eContainer()).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Class_type") :
-			getString("_UI_Class_type") + " -> " + label + parent;
+		String parent = "";
+		if (((NamedElement) ((Class) object).eContainer()).getName() != null) {
+			parent = " owned by "
+					+ ((NamedElement) ((Class) object).eContainer()).getName();
+		}
+
+		return label == null || label.length() == 0 ? getString("_UI_Class_type")
+				: getString("_UI_Class_type") + label + parent;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(fr.irisa.triskell.kermeta.language.structure.Class.class)) {
-			case StructurePackage.CLASS__IS_ABSTRACT:
-			case StructurePackage.CLASS__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
+		switch (notification
+				.getFeatureID(fr.irisa.triskell.kermeta.language.structure.Class.class)) {
+		case StructurePackage.CLASS__IS_ABSTRACT:
+		case StructurePackage.CLASS__NAME:
+			fireNotifyChanged(new ViewerNotification(notification, notification
+					.getNotifier(), false, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing all of the children that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds to the collection of
+	 * {@link org.eclipse.emf.edit.command.CommandParameter}s describing all of
+	 * the children that can be created under this object. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
+	protected void collectNewChildDescriptors(Collection newChildDescriptors,
+			Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
 	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Return the resource locator for this item provider's resources. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
