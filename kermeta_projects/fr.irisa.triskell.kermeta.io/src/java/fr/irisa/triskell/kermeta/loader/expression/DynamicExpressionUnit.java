@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.7 2006-05-04 15:27:43 jmottu Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.8 2006-10-06 12:19:01 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -65,13 +65,31 @@ public class DynamicExpressionUnit extends KermetaUnit {
     }
     
     
-    public void parse(String body, ClassDefinition context, Hashtable formalParams) {
+    // A private method just to check if the string is correct
+    /* 
+     * FIXME The parser does not correctly parse expression. If an expression is not correct but its beginning matches 
+     * a rule, then it is accepted. Of course it should not be. If the parser found a matched rule, it skips the other charachters.
+     */
+    private fr.irisa.triskell.kermeta.ast.FExpression parseString(String expression) throws Exception {
+    	
+    	KermetaLexer lexer = new KermetaLexer(new StringReader(expression));
+    	KermetaParser parser = new KermetaParser(lexer);
+    	
+    	fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = parser.asingleExpression().getFExpression();
+
+    	return ast_exp;
+    }
+    
+    
+    public void parse(String stringExpression, ClassDefinition context, Hashtable formalParams) throws Exception {
         
-        this.context = context;
+   		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = parseString(stringExpression);
+
+   		this.context = context;
         variables = new ArrayList();
         
         this.current_class = context;
-        //this.pushContext();
+        this.pushContext();
         
         Enumeration e = formalParams.keys();
         while(e.hasMoreElements()) {
@@ -88,19 +106,6 @@ public class DynamicExpressionUnit extends KermetaUnit {
             variables.add(var);
             this.addSymbol(new KMSymbolVariable(var));
         }
-        
-        KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(body)));
-		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = null;
-		try {
-			ast_exp = parser.asingleExpression().getFExpression();
-			
-		} catch (RecognitionException e1) {
-		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null, ast_exp));
-			 throw new Error(e1);
-		} catch (TokenStreamException e1) {
-		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null, ast_exp));
-			 throw new Error(e1);
-		}
 		
 		if (ast_exp != null)
 		    expression = KMT2KMExperessionBuilder.process(ast_exp, this);
