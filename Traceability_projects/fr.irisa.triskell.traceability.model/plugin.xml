@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.traceability"
    name="Model Plug-in"
-   version="0.0.2"
+   version="0.0.3"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.traceability.model.ModelPlugin">
 
