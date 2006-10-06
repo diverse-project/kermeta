@@ -1,0 +1,84 @@
+/* $Id: traceability.kmt,v 1.1 2006-10-06 14:34:19 dvojtise Exp $ */
+package traceability;
+
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+class Trace
+{
+	reference traceSet : Model[1..1]#traces
+
+	reference sourceReferences : Reference[0..*]#targetTrace
+
+	reference targetReferences : Reference[0..*]#sourceTrace
+
+	reference description : Message[1..*]#trace
+
+}
+/**Represents a Trace model.  Actually, this is a set of traces, references and messages.*/
+class Model
+{
+	/**If true, means that the references are unique within the trace model.*/
+	attribute optimizedReferencesOnly : Boolean
+
+	/**Set of traces contained by this trace model*/
+	attribute traces : Trace[0..*]#traceSet
+
+	/**Set of references to the traced objects of this trace model*/
+	attribute references : Reference[0..*]#referenceSet
+
+	/**Set of messages contained by this trace model*/
+	attribute messages : Message[0..*]#messageSet
+
+}
+/**Represents some part of text in a file.*/
+class TextReference inherits InternalReference
+{
+	attribute fileURI : String
+
+	attribute line : Integer
+
+	attribute charBeginAt : Integer
+
+	attribute charEndAt : Integer
+
+}
+/**A Reference is a kind of proxy pointing to a concrete object*/
+abstract class Reference
+{
+	reference targetTrace : Trace[0..*]#sourceReferences
+
+	reference sourceTrace : Trace[0..*]#targetReferences
+
+	reference referenceSet : Model[1..1]#references
+
+}
+class XMLReference inherits TextReference
+{
+	attribute xPointer : String
+
+}
+/**This is a pointer to a concrete object contained by another model.*/
+class ExternalReference inherits Reference
+{
+	reference refObject : ecore::EObject[1..1]
+
+}
+abstract class InternalReference inherits Reference
+{
+}
+/**Message is used to add some information to a trace. Typically, in order to known what had generated a given trace or provide a user friendly message to the user.*/
+class Message
+{
+	attribute type : String
+
+	attribute ~value : String
+
+	attribute language : String
+
+	reference messageSet : Model[1..1]#messages
+
+	reference trace : Trace#description
+
+}
+alias String : kermeta::standard::String;
+alias Integer : kermeta::standard::Integer;
+alias Boolean : kermeta::standard::Boolean;
