@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.traceability.edit; singleton:=true
+Bundle-Version: 0.0.3
+Bundle-ClassPath: fr.irisa.triskell.traceability.edit.jar
+Bundle-Activator: fr.irisa.triskell.traceability.provider.TraceabilityEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: fr.irisa.triskell.traceability.provider
+Require-Bundle: org.eclipse.core.runtime,
+ fr.irisa.triskell.traceability;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport
+Eclipse-LazyStart: true
