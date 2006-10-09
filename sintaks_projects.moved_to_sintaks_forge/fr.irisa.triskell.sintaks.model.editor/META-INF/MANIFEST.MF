@@ -5,7 +5,7 @@ Bundle-SymbolicName: fr.irisa.triskell.sintaks.model.editor; singleton:=true
 Bundle-Version: 0.0.1
 Bundle-ClassPath: .
 Bundle-Activator: sts.presentation.STSEditorPlugin$Implementation
-Bundle-Vendor: %providerName
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: sts.presentation
 Require-Bundle: org.eclipse.core.runtime,
