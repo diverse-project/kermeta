@@ -12,8 +12,6 @@
 
 package fr.irisa.triskell.kermeta.graphicaleditor.diag.edit;
 
-import java.util.List;
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;

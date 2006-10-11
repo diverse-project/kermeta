@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.1 2006-10-04 08:37:17 cfaucher Exp $
+/* $Id: OperationEditDialog.java,v 1.2 2006-10-11 08:54:07 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -49,9 +49,9 @@ import org.eclipse.swt.widgets.Text;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.OperationDataStructure;
-//import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
-//import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
-//import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
+import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
+import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
+import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -122,7 +122,7 @@ public class OperationEditDialog extends Dialog
 	
 	// Boolean set to true if user modified in the text editor the body of an operation
 	protected boolean isModified;
-	//protected EditDialogHelper _dialogHelper;
+	protected EditDialogHelper _dialogHelper;
 	
 	/**
 	 * Create the dialog for a given operation
@@ -139,7 +139,7 @@ public class OperationEditDialog extends Dialog
 		_operation = operation;
 		isModified = false;
 		// Used to construct a list of types
-		//_dialogHelper = new EditDialogHelper(operation.getOwningClass());
+		_dialogHelper = new EditDialogHelper(operation.getOwningClass());
 		dataStructure = new OperationDataStructure(_operation);
 		
 		initializeData();		
@@ -176,8 +176,8 @@ public class OperationEditDialog extends Dialog
 	 */
 	private void initializeTypes()
 	{	// get the types available in the package owning the class of the given operation.
-		//_types = _dialogHelper.getSortedTypes();
-		//_typeNames = _dialogHelper.getSortedTypeNames();
+		_types = _dialogHelper.getSortedTypes();
+		_typeNames = _dialogHelper.getSortedTypeNames();
 	}
 	
 	private void initializeSuperTypes()
@@ -245,7 +245,7 @@ public class OperationEditDialog extends Dialog
 		if (_operation.getType() != null)
 		{
 			// Items are Strings -> this was 
-			// _returnTypeComboBox.select(_types.indexOf(_operation.getType()) + 1);
+			//_returnTypeComboBox.select(_types.indexOf(_operation.getType()) + 1);
 			String type_name = KermetaUtils.getDefault().getLabelForType(_operation.getType());
 			_returnTypeComboBox.select(_typeNames.indexOf(type_name) + 1);
 		}
@@ -306,7 +306,7 @@ public class OperationEditDialog extends Dialog
 	{
 		// Create tab item and add it composite that fills it
 		TabItem fourthItem = new TabItem(_parent, SWT.NONE);
-		fourthItem.setText("Code");
+		fourthItem.setText("Operation body");
 		Composite composite = new Composite(_parent, SWT.NONE);
 		fourthItem.setControl(composite);
 		
@@ -322,7 +322,7 @@ public class OperationEditDialog extends Dialog
 		
 		// FIXME : ultra-buggy!!!! -> the checker does not check the correct version of the model (the correct one is
 		// the one in memory, not the serialized one.
-		createInjectButton(composite);
+		//createInjectButton(composite);
 	}
 	
 	/**
@@ -365,7 +365,7 @@ public class OperationEditDialog extends Dialog
 	    errorView = new StyledText(composite, styles);
 
 	    // Add the syntax coloring handler
-	    //errorView.addLineStyleListener(new EditorStyleListener(SyntaxManager.getSyntaxData(SyntaxManager.KERMETA_SYNTAX_DATA)));
+	    errorView.addLineStyleListener(new EditorStyleListener(SyntaxManager.getSyntaxData(SyntaxManager.KERMETA_SYNTAX_DATA)));
 	    
 	    // Not editable 
 	    errorView.setEditable(false);
@@ -385,7 +385,7 @@ public class OperationEditDialog extends Dialog
 	    styledText = new StyledText(composite, styles);
 
 	    // Add the syntax coloring handler
-	    //styledText.addLineStyleListener(new EditorStyleListener(SyntaxManager.getSyntaxData(SyntaxManager.KERMETA_SYNTAX_DATA)));
+	    styledText.addLineStyleListener(new EditorStyleListener(SyntaxManager.getSyntaxData(SyntaxManager.KERMETA_SYNTAX_DATA)));
 	    
 	    // set the operation pretty print 
 	    styledText.setTabs(4);
@@ -395,11 +395,6 @@ public class OperationEditDialog extends Dialog
 				isModified = true;
 			}	    	
 	    });
-	    // To add a special modif : do it through the commented method, below
-		/*
-	    styledText.addExtendedModifyListener(new ExtendedModifyListener() {
-	    	public void modifyText(ExtendedModifyEvent event) {} }
-	    });*/
 	}
 
 	/**
@@ -420,20 +415,20 @@ public class OperationEditDialog extends Dialog
 				// translate and inject
 				String textError = "";
 				//_operation.eResource().load ?
-				//KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource());
+				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource());
 				// FIXME : when we try to type check here the kermetaunit unit, it fails because twice the same
 				// objects in memory seem to be present...
 				dataStructure.setOperationBody(styledText.getText());
 				// Try to check the size of a resource...
 				//TreeIterator it = _operation.eResource().getAllContents();
 				try
-				{/*
+				{
 					_operation.setBody(ExpressionParser.parse_operation2body(
 		        		unit, 
 		        		dataStructure.getOperationBody()));
 					unit.setType_checked(false);
 			        unit.typeCheck(null);
-			        unit.constraintCheck(null);*/
+			        unit.constraintCheck(null);
 				}
 				// Try to catch a parse error
 				catch (Error error)
@@ -445,7 +440,7 @@ public class OperationEditDialog extends Dialog
 					"\n" + error.getCause();
 				}
 				errorView.setText("");
-				/*System.err.println("errors?:" + unit.messages.getAllMessages().size() + " messages.");
+				System.err.println("errors?:" + unit.messages.getAllMessages().size() + " messages.");
 				if (unit.messages.getAllErrors().size() == 0 && textError.length()==0)
 				{
 					errorItem.setImage(StructureImageRegistry.getImage("NOERROR"));
@@ -463,7 +458,7 @@ public class OperationEditDialog extends Dialog
 					errorItem.setImage(StructureImageRegistry.getImage("ERROR"));
 					textError += "\n" + unit.messages.getAllMessagesAsString();
 					errorView.setText(textError);
-				}*/
+				}
 			}
 		});
 	}
@@ -483,6 +478,7 @@ public class OperationEditDialog extends Dialog
 		createSecondTabItem(tabFolder);
 		createThirdTabItem(tabFolder);
 		createFourthTabItem(tabFolder);
+		// not used for the moment
 		createFifthTabItem(tabFolder);
 	}
 	
@@ -512,8 +508,11 @@ public class OperationEditDialog extends Dialog
 		{
 			_data.put(Operation_RETURN_TYPE, _types.size()==0?null:_types.get(_returnTypeComboBox.getSelectionIndex() - 1));
 		}
+
 		// update the body of the operation
-		dataStructure.setOperationBody(styledText.getText());
+		// FIXME temporarily disable
+		//dataStructure.setOperationBody(styledText.getText());
+		
 		// Input
 		_data.put(Operation_INPUTS, dataStructure);
 		_data.put(Operation_TYPE_PARAMS, dataStructure);

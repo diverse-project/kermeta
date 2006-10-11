@@ -1,4 +1,4 @@
-/* $Id: OperationDataStructure.java,v 1.1 2006-10-04 08:37:16 cfaucher Exp $
+/* $Id: OperationDataStructure.java,v 1.2 2006-10-11 08:54:06 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 20, 2006
  * Authors       : zdrey
  */
-/* $Id: OperationDataStructure.java,v 1.1 2006-10-04 08:37:16 cfaucher Exp $
+/* $Id: OperationDataStructure.java,v 1.2 2006-10-11 08:54:06 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+
 /**
  * Provide a structure for handling some of the Operation datas, that is, the
  * parameters, the type parameters, and the operation body. They are handled
@@ -66,7 +67,7 @@ public class OperationDataStructure
         
         if (operation != null)
         {
-            addAll(operation.getOwnedParameter());
+            addAllParameters(operation.getOwnedParameter());
             addAllTypeParameters(operation.getTypeParameter());
             if (operation.getBody()!=null)
             {	
@@ -76,6 +77,7 @@ public class OperationDataStructure
             	}
             	catch (Error e)
             	{
+            		// FIXME
             		//KermetaUtils.internalLog.error("The body of the operation could not be set :");
             	}
             }
@@ -127,7 +129,7 @@ public class OperationDataStructure
      * 
      * @param parameters
      */
-    public void addAll(Collection<Parameter> parameters)
+    public void addAllParameters(Collection<Parameter> parameters)
     {
         for (Iterator<Parameter> iterator = parameters.iterator(); iterator.hasNext();)
             addOwnedParameter(iterator.next());

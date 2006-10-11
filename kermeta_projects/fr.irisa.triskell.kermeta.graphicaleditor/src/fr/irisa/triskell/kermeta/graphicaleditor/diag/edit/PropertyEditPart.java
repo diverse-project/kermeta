@@ -77,10 +77,6 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected DirectEditManager manager;
 
-	/**
-	 * @generated NOT
-	 */
-	private Property oldOppositeProp;
 
 	/**
 	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -92,9 +88,19 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	public PropertyEditPart(GraphEdge model) {
 		super(model);
 		multiplicityInitialization();
-		oldOppositeProp = getProperty().getOpposite();
 	}
 
+	/**
+	 * Initialize the multiplicities and mainly the upper_bound to 1
+	 * 
+	 * @generated NOT
+	 */
+	private void multiplicityInitialization() {
+		if (getProperty().getUpper() == 0) {
+			getProperty().setUpper(1);
+		}
+	}
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -198,7 +204,6 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	protected void refreshEdgeObjects() {
 		super.refreshEdgeObjects();
 
-		/* adding */
 		updateSourceDecoration();
 		updateTargetDecoration();
 		updateNameLabel();
@@ -227,21 +232,10 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 
 		if (getProperty().isIsDerived()) {
 			lbl = "/ " + lbl;
-		} else {
-
 		}
 		theLabel.setIcon(icon);
 		theLabel.setText(lbl);
 		theLabel.setToolTip(hoverLbl);
-
-		/*
-		 * for(java.util.Iterator itContent =
-		 * getProperty().container().eContents().iterator();
-		 * itContent.hasNext();){ java.lang.Object tmp = (java.lang.Object)
-		 * itContent.next(); if(tmp instanceof Property) { ((Property)
-		 * tmp).getName(); } }
-		 */
-		// getProperty().container().eContents().
 	}
 
 	/**
@@ -364,15 +358,14 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	 * @throws BoundsFormatException
 	 * @generated NOT
 	 */
-
 	private String createCountString(Property ref) throws BoundsFormatException {
 		int lower = ref.getLower();
 		int upper = ref.getUpper();
 
 		if (lower < 0)
-			throw new BoundsFormatException("LowerBound must be [0..n]");
+			throw new BoundsFormatException("LowerBound must be [0..*]");
 		if (upper < -1)
-			throw new BoundsFormatException("UpperBound must be [-1..n]");
+			throw new BoundsFormatException("UpperBound must be [-1..*]");
 		if (upper != -1 && lower > upper)
 			throw new BoundsFormatException(
 					"UpperBound must be higher than LowerBound");
@@ -407,21 +400,6 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 			break;
 		}
 		super.handleModelChanged(msg);
-	}
-
-	/**
-	 * Initialize the multiplicities and mainly the upper_bound to 1
-	 * 
-	 * @generated NOT
-	 */
-	protected void multiplicityInitialization() {
-		if (getProperty().getUpper() == 0) {
-			getProperty().setUpper(1);
-		}
-	}
-
-	protected void deleteOpposite(Property opp) {
-
 	}
 
 	/**

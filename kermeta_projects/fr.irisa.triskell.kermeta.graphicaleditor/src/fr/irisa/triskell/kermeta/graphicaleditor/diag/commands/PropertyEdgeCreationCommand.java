@@ -12,22 +12,16 @@
 
 package fr.irisa.triskell.kermeta.graphicaleditor.diag.commands;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditDomain;
 import org.topcased.modeler.commands.CreateTypedEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
-import org.topcased.modeler.utils.LabelHelper;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.Type;
 
 /**
  * Property edge creation command<br>

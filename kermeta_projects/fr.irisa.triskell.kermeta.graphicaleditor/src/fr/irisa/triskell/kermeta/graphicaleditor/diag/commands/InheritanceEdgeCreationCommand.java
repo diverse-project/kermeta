@@ -20,7 +20,6 @@ import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 /**

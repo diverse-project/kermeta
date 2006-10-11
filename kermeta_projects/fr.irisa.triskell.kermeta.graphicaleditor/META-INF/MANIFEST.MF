@@ -17,5 +17,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.topcased.modeler.graphconf,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.model.edit,
- fr.irisa.triskell.kermeta.model.editor
+ fr.irisa.triskell.kermeta.model.editor,
+ org.eclipse.ui.editors
 Eclipse-LazyStart: true

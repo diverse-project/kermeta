@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.2 2006-10-04 14:01:50 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.3 2006-10-11 08:54:06 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -35,7 +35,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-//import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
+import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -72,7 +72,7 @@ public class KermetaUtils {
 	 * inherits TypeContainer, when setting a type to an operation, we have to
 	 * set the contained type for those elements as well.
 	 */
-	//protected TypeContainementFixer typeFixer;
+	protected TypeContainementFixer typeFixer;
 
 	/** Use to display some elements on the graphical editor */
 	protected KM2KMTPrettyPrinter prettyPrinter;
@@ -83,16 +83,13 @@ public class KermetaUtils {
 	private KermetaUtils() {
 		super();
 		standardUnit = loadStdLib();
-		System.out.println("Debug - KermetaUtils [1]" + standardUnit.toString());
+		System.out.println("Debug - Standard Lib: " + standardUnit.toString());
 		
-		//typeFixer = new TypeContainementFixer();
-		System.err.println("Debug - KermetaUtils [3]");
-		//prettyPrinter = new KM2KMTPrettyPrinter();
-		System.err.println("Debug - KermetaUtils [4]");
+		typeFixer = new TypeContainementFixer();
+		prettyPrinter = new KM2KMTPrettyPrinter();
 	}
 
 	public static KermetaUtils getDefault() {
-		System.err.println("Debug - KermetaUtils.getDefault()");
 		if (kermetaUtils == null) {
 			kermetaUtils = new KermetaUtils();
 		}
@@ -106,16 +103,15 @@ public class KermetaUtils {
 	 */
 	public KermetaUnit loadStdLib() { // KermetaUnit.STD_LIB_URI =
 										// "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-		System.err.println("Debug - loadStdLib [1]");
 		return KermetaUnit.getStdLib();
 	}
 
 	/**
 	 * @return Returns the typeFixer.
 	 */
-	/*public TypeContainementFixer getTypeFixer() {
+	public TypeContainementFixer getTypeFixer() {
 		return typeFixer;
-	}*/
+	}
 
 	/**
 	 * @return Returns the unit.
@@ -297,18 +293,10 @@ public class KermetaUtils {
 	}
 
 	public Type createTypeForTypeDefinition(TypeDefinition typedef) {
-		System.err.println("Debug - createTypeForTypeDefinition [if]");
 		Type type = null;
 		if (typedef instanceof ClassDefinition) {
-			
-			System.err.println("Debug - createTypeForTypeDefinition [if]");
 			type = StructureFactory.eINSTANCE.createClass();
 			((Class) type).setTypeDefinition((ClassDefinition) typedef);
-
-		}
-		else
-		{
-			System.err.println("Debug - createTypeForTypeDefinition [else]");
 		}
 		return type;
 	}

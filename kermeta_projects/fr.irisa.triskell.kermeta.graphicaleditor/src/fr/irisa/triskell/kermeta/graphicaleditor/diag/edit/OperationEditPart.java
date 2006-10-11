@@ -12,7 +12,8 @@
 
 package fr.irisa.triskell.kermeta.graphicaleditor.diag.edit;
 
-import org.eclipse.draw2d.ColorConstants;
+import java.util.Iterator;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.EditPolicy;
@@ -22,11 +23,9 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Font;
-import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.ModelerPlugin;
-import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
@@ -39,10 +38,12 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diag.commands.OperationRestoreC
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.commands.OperationUpdateCommand;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.dialogs.OperationEditDialog;
-import fr.irisa.triskell.kermeta.graphicaleditor.diag.figures.ClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.figures.OperationFigure;
+import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KermetaUtils;
+
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 /**
  * The Operation object controller <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -130,30 +131,73 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 		EditableLabel lbl = (EditableLabel) fig.getLabel();
 		lbl.setIcon(StructureImageRegistry.getImage("OPERATION"));
 		lbl.setLabelAlignment(PositionConstants.LEFT);
+		updateLabel(lbl);
+	}
+	
+	/**
+	 * Thanks to topcased source code
+	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#performRequest(Request)
+	 * @generated NOT
+	 */
+	protected void updateLabel(EditableLabel label) {
+		String text = "";
+		if (getModelOperation().getName() != null
+				&& !"".equals(getModelOperation().getName()))
+			text = getModelOperation().getName();
+		else
+			text = "null";
+		Boolean first = true;
+		// The type parameters
+		if (getModelOperation().getTypeParameter().size() > 0) {
+			text += "<";
+			for (Iterator it = getModelOperation().getTypeParameter()
+					.iterator(); it.hasNext();) {
+				TypeVariable var = (TypeVariable) it.next();
+				if (first)
+					first = false;
+				else
+					text += ",";
+				text += KermetaUtils.getDefault().getLabelForTypeVariable(var);
+			}
+			text += ">";
+		}
+		// Now the parameters
+		text += "(";
+		first = true;
+		for (Iterator it = getModelOperation().getOwnedParameter().iterator(); it
+				.hasNext();) {
+			Parameter param = (Parameter) it.next();
+			if (first)
+				first = false;
+			else
+				text += ",";
+			text += KermetaUtils.getDefault().getLabelForType(param.getType());
+		}
+		text += ")";
+		// The return type
+		if (getModelOperation().getType() != null) {
+			text += " : "
+					+ KermetaUtils.getDefault().getLabelForType(
+							getModelOperation().getType());
+		}
+		label.setText(text);
 	}
 
 	/**
 	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#performRequest(Request)
 	 */
 	public void performRequest(Request request) {
-		System.err.println("before");
 		if (request.getType() == RequestConstants.REQ_OPEN) {
-			System.err.println("in perform request 1");
 			OperationEditDialog operationDlg = new OperationEditDialog(
 					getModelOperation(), ModelerPlugin
 							.getActiveWorkbenchShell());
-			System.err.println("in perform request 2");
 			if (operationDlg.open() == Window.OK) {
-				System.err.println("in perform request 3");
 				OperationUpdateCommand command = new OperationUpdateCommand(
 						getModelOperation(), operationDlg.getData());
-				System.err.println("in perform request 4");
 				getViewer().getEditDomain().getCommandStack().execute(command);
-				System.err.println("in perform request 5");
 			}
 		} else {
 			super.performRequest(request);
-			System.err.println("in perform request 6");
 		}
 	}
 }
