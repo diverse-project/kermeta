@@ -126,9 +126,8 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 						.getElement(((GraphElement) getParent().getModel())
 								.getSemanticModel().getGraphElement())) {
 			if (getModelPackage().getNestingPackage().getName() != null) {
-				lbl.setSuffix("<<from "
-						+ getModelPackage().getNestingPackage().getName()
-						+ ">>");
+				lbl.setSuffix("from "
+						+ getModelPackage().getNestingPackage().getName());
 			}
 		} else {
 			lbl.setSuffix("");

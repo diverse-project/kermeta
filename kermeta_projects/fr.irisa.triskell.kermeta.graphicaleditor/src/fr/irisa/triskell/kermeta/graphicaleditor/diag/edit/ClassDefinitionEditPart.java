@@ -172,7 +172,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 							.getElement(((GraphElement) getParent().getModel())
 									.getSemanticModel().getGraphElement())) {
 				if (owningPackage.getName() != null) {
-					lbl.setSuffix("<<from " + owningPackage.getName() + ">>");
+					lbl.setSuffix("from " + owningPackage.getName());
 				}
 				//String qname = KMTHelper.getQualifiedName(getModelClassDefinition());
 				/*if (getModelClassDefinition().getName() != null)

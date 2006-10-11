@@ -67,11 +67,9 @@ public class ClassDefinitionRestoreConnectionCommand extends
 		EObject nodeObject = Utils.getElement(node);
 
 		if (nodeObject instanceof ClassDefinition) {
-			System.out.println("Debug - yeh ! 1");
 			Iterator itDiagContents = getModeler().getActiveDiagram()
 					.eAllContents();
 			while (itDiagContents.hasNext()) {
-				System.out.println("Debug - yeh ! 2");
 				Object obj = itDiagContents.next();
 				// FIXME Change the way to handle EList GraphNodes
 				if (obj instanceof GraphElement
@@ -79,7 +77,6 @@ public class ClassDefinitionRestoreConnectionCommand extends
 								.getProperty(
 										(GraphElement) obj,
 										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID) == null) {
-					System.out.println("Debug - yeh ! 3");
 					boolean autoRef = obj.equals(node);
 					GraphElement node2 = (GraphElement) obj;
 					EObject nodeObject2 = Utils.getElement(node2);
@@ -101,20 +98,17 @@ public class ClassDefinitionRestoreConnectionCommand extends
 					}
 
 					if (nodeObject2 instanceof ClassDefinition) {
-						System.err.println("Debug - yeh ! 4");
 						if (autoRef) {
 							// autoRef not allowed
 						} else {
 							// if the node is the source of the edge or if it is
 							// the target and that the SourceTargetCouple is
 							// reversible
-							System.out.println("Debug - yeh ! 5");
 							createPropertyFromClassDefinitionToClassDefinition(
 									node, node2);
 							// if node is the target of the edge or if it is the
 							// source and that the SourceTargetCouple is
 							// reversible
-							System.out.println("Debug - yeh ! 6");
 							createPropertyFromClassDefinitionToClassDefinition(
 									node2, node);
 						}
@@ -167,7 +161,6 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	 */
 	private void createPropertyFromClassDefinitionToClassDefinition(
 			GraphElement srcNode, GraphElement targetNode) {
-		System.out.println("Debug - isStandardType 0");
 		ClassDefinition sourceObject = (ClassDefinition) Utils
 				.getElement(srcNode);
 		ClassDefinition targetObject = (ClassDefinition) Utils
@@ -179,7 +172,6 @@ public class ClassDefinitionRestoreConnectionCommand extends
 
 			if (obj instanceof Property) {
 				Property edgeObject = (Property) obj;
-				System.out.println("Debug - is1 " + edgeObject.getName());
 				// Change : edgeObject.getType()
 				if (targetObject.equals(((ParameterizedType) edgeObject
 						.getType()).getTypeDefinition())
@@ -191,7 +183,6 @@ public class ClassDefinitionRestoreConnectionCommand extends
 					List existing = getExistingEdges(srcNode, targetNode,
 							Property.class);
 					if (!isAlreadyPresent(existing, edgeObject)) {
-						System.out.println("Debug - is2 " + edgeObject.getName());
 						// We use 2 CreationUtlis, one for the nodes and a second for the edges
 						// in order to permit to have 2 graphical elements for the same model object => Property
 						ICreationUtils factory = null;
@@ -201,13 +192,10 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						if (KermetaUtils.getDefault().isStandardType(
 								edgeObject.getType()) || KermetaUtils.getDefault()
 								.isPrimitiveType(edgeObject.getType())) {
-							
-							System.out.println("Debug - isStandardType " + edgeObject.getName());
 							factory = ((fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration) getModeler()
 									.getActiveConfiguration())
 									.getCreationUtils();
 						} else {
-							System.out.println("Debug - isNotNotNotNotNotStandardType " + edgeObject.getName());
 							factory = ((fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration) getModeler()
 									.getActiveConfiguration())
 									.getCreationUtilsEdge();

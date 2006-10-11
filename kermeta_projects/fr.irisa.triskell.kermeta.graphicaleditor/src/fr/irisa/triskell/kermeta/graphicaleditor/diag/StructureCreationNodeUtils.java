@@ -18,6 +18,7 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.editor.AbstractCreationUtils;
 import org.topcased.modeler.graphconf.DiagramGraphConf;
 
+import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -181,7 +182,14 @@ public class StructureCreationNodeUtils extends AbstractCreationUtils {
 	 */
 	protected GraphElement createGraphElementProperty(Property element,
 			String presentation) {
+		// Check if the type of the property is a StandardType or a PrimitiveType
+		// => then it appears like a node else like an edge
+		if (KermetaUtils.getDefault().isStandardType(
+				element.getType()) || KermetaUtils.getDefault()
+				.isPrimitiveType(element.getType())) {
 		return createGraphNode(element, presentation);
+		}
+		return null;
 	}
 
 	/**

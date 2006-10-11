@@ -38,17 +38,17 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 /**
- * The PropertyNode object controller
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * The PropertyNode object controller <!-- begin-user-doc --> <!-- end-user-doc
+ * -->
+ * 
  * @generated
  */
 public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 	/**
-	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param obj the graph node
+	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public PropertyNodeEditPart(GraphNode obj) {
@@ -56,7 +56,7 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 		multiplicityInitialization();
 		typeInitialization();
 	}
-	
+
 	/**
 	 * Initialize the multiplicities and mainly the upper_bound to 1
 	 * 
@@ -67,34 +67,35 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 			getProperty().setUpper(1);
 		}
 	}
-	
+
 	/**
 	 * Initialize the type
 	 * 
 	 * @generated NOT
 	 */
 	private void typeInitialization() {
-		if(getProperty().getType()==null) {
+		if (getProperty().getType() == null) {
 			getProperty().setType(StructureFactory.eINSTANCE.createVoidType());
 			KermetaUtils.getDefault().getTypeFixer().accept(getProperty());
 		}
 	}
 
 	/**
-	 * Creates edit policies and associates these with roles
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates edit policies and associates these with roles <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		//installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, null);
+		// installEditPolicy(EditPolicy.GRAPHICAL_NODE_ROLE, null);
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
 							RestoreConnectionsRequest request) {
-						return new PropertyNodeRestoreConnectionCommand(getHost());
+						return new PropertyNodeRestoreConnectionCommand(
+								getHost());
 					}
 				});
 
@@ -106,8 +107,8 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 * @generated
 	 */
@@ -128,26 +129,31 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 
 		PropertyNodeFigure fig = (PropertyNodeFigure) getFigure();
 		EditableLabel lbl = (EditableLabel) fig.getLabel();
-		lbl.setIcon(StructureImageRegistry
-				.getImage("PROPERTY"));
+
 		lbl.setLabelAlignment(PositionConstants.LEFT);
-		
+
+		// Setting of the icon fornt of the property label
+		if (getProperty().isIsComposite()) {
+			lbl.setIcon(StructureImageRegistry.getImage("PROPERTY_CONTAINED"));
+		} else {
+			lbl.setIcon(StructureImageRegistry.getImage("PROPERTY"));
+		}
+
 		updateLabel(lbl);
 	}
-	
-	////////////////////////////////////////////////////////////////
 
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPartCommonInterface#performRequest(org.eclipse.gef.Request)
 	 */
 	public void performRequest(Request request) {
 		if (request.getType() == RequestConstants.REQ_OPEN) {
 			PropertyEditDialog propertyDlg = new PropertyEditDialog(
-					getProperty(), ModelerPlugin
-							.getActiveWorkbenchShell()); 
+					getProperty(), ModelerPlugin.getActiveWorkbenchShell());
 			int isOk = propertyDlg.open();
-			if (isOk == Window.OK)
-			{
+			if (isOk == Window.OK) {
 				PropertyNodeUpdateCommand command = new PropertyNodeUpdateCommand(
 						getProperty(), propertyDlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
@@ -159,35 +165,35 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Thanks to topcased source code
+	 * 
 	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#performRequest(Request)
 	 * @generated NOT
 	 */
 	protected void updateLabel(EditableLabel label) {
 		String text = "";
-		
+
 		if (getProperty().getName() != null
 				&& !"".equals(getProperty().getName())) {
 			if (getProperty().isIsDerived()) {
 				text = "/" + text;
 			}
 			text += getProperty().getName();
-		}
-		else
+		} else
 			text = "null";
 		Boolean first = true;
-		
+
 		// The property type
 		if (getProperty().getType() != null) {
 			text += " : "
 					+ KermetaUtils.getDefault().getLabelForType(
 							getProperty().getType());
 		}
-		
+
 		// The multiplicity
-		String mult="";
+		String mult = "";
 		try {
 			mult = createCountString(getProperty());
-			label.setIcon(null);
+			// label.setIcon(null);
 		} catch (BoundsFormatException e) {
 			Label hoverLbl = new Label(e.getMessage());
 			mult = ("error mult");
@@ -199,12 +205,12 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 					e.getMessage(), null);
 			ResourcesPlugin.getPlugin().getLog().log(status);
 		}
-		
-		text += "[" + mult + "]"; 
-		
+
+		text += "[" + mult + "]";
+
 		label.setText(text);
 	}
-	
+
 	/**
 	 * Calculate the String corresponding to the bounds
 	 * 
@@ -233,7 +239,7 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 			return "" + lower;
 		return lower + ".." + (upper == -1 ? "*" : "" + upper);
 	}
-	
+
 	/**
 	 * Get the EReference model object
 	 * 
