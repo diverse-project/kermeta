@@ -283,7 +283,7 @@ class EReference inherits EStructuralFeature
 			end
 		end
 		setter is do
-			if eType.getMetaClass == EClass then				
+			if value.getMetaClass == EClass then				
 				eType := value
 			else
 				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
