@@ -141,17 +141,17 @@ public class StructureCreationNodeUtils extends AbstractCreationUtils {
 		// TODO this snippet of code should be customized if it is not well
 		// generated
 		GraphNode nodeParent = createGraphNode(element, presentation);
-		
+
 		GraphNode property = createGraphNode(element,
 				StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE,
 				presentation);
 		property.setContainer(nodeParent);
-		
+
 		GraphNode operation = createGraphNode(element,
 				StructurePackage.CLASS_DEFINITION__OWNED_OPERATION,
 				presentation);
 		operation.setContainer(nodeParent);
-		
+
 		return nodeParent;
 	}
 
@@ -182,12 +182,13 @@ public class StructureCreationNodeUtils extends AbstractCreationUtils {
 	 */
 	protected GraphElement createGraphElementProperty(Property element,
 			String presentation) {
-		// Check if the type of the property is a StandardType or a PrimitiveType
+		// Check if the type of the property is a StandardType or a
+		// PrimitiveType
 		// => then it appears like a node else like an edge
-		if (KermetaUtils.getDefault().isStandardType(
-				element.getType()) || KermetaUtils.getDefault()
-				.isPrimitiveType(element.getType())) {
-		return createGraphNode(element, presentation);
+		if (KermetaUtils.getDefault().isStandardType(element.getType())
+				|| KermetaUtils.getDefault().isPrimitiveType(element.getType())
+				|| element.getType() == null) {
+			return createGraphNode(element, presentation);
 		}
 		return null;
 	}
