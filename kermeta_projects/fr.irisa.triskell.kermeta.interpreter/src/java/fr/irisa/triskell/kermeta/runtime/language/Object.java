@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.12 2006-09-13 07:23:47 cfaucher Exp $
+/* $Id: Object.java,v 1.13 2006-10-13 08:34:31 ftanguy Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -123,6 +123,14 @@ public class Object {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
+	
+	/** Implementation of method isSameAs called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.isSameAs(element) */
+	public static RuntimeObject isSameAs(RuntimeObject self, RuntimeObject param0) {
+		if(self.getOId() == param0.getOId()) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
 
 	/** Implementation of method get called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property) */
