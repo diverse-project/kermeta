@@ -1,4 +1,4 @@
-/* $Id: 046_testClassEquals.main.kmt,v 1.4 2006-09-20 14:46:22 dvojtise Exp $
+/* $Id: 046_testClassEquals.main.kmt,v 1.5 2006-10-13 11:52:47 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter
  * File      : 046_testClassEquals.main.kmt
  * License   : EPL
@@ -26,7 +26,7 @@ class TestClassEquals inherits kermeta::kunit::Test {
     operation testStringEquals2() : Void is do
     	var c : Class init Class.new
     	c.typeDefinition ?= "titi".getMetaClass.typeDefinition
-        assertTrue("toto".getMetaClass == c)
+        assertTrue("toto".getMetaClass.equals(c))
     end
 
 

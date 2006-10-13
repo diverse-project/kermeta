@@ -37,7 +37,7 @@ class TestParametricClass inherits kermeta::kunit::Test
 	operation test1() is do
 		var l : Collection<String> init Bag<String>.new
 		// check the metaclass
-		assert(l.getMetaClass == Bag<String>)
+		assert(l.isKindOf(Bag<String>))
 	end
 	
 	operation test2() is do

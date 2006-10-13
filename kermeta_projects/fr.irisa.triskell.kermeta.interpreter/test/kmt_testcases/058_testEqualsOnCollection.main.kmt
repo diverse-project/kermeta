@@ -1,0 +1,186 @@
+
+@mainClass "CollectionTest::Test"
+@mainOperation "main"
+
+package CollectionTest;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+using kermeta::kunit
+
+class Test inherits kermeta::kunit::Test {
+
+	operation main() : Boolean is do	
+	end
+	
+	operation test_try1() : Void is do
+		var os : OrderedSet<Integer> init OrderedSet<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : OrderedSet<Integer> init OrderedSet<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+	
+		assert (os.equals(os2) )
+	end
+
+	operation test_try2() : Void is do
+		var os : OrderedSet<Integer> init OrderedSet<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : OrderedSet<Integer> init OrderedSet<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5)
+	
+		assert ( not os.equals(os2) )
+	end
+
+	operation test_try3() : Void is do
+		var os : OrderedSet<Integer> init OrderedSet<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : OrderedSet<Integer> init OrderedSet<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(8)
+	
+		assert ( not os.equals(os2) )
+	end
+	
+	operation test_try4() : Void is do
+		var os : Set<Integer> init Set<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Set<Integer> init Set<Integer>.new
+		os2.add(4) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os2.add(2)
+	
+		assert ( os.equals(os2) )
+	end
+
+	operation test_try5() : Void is do
+		var os : Set<Integer> init Set<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Set<Integer> init Set<Integer>.new
+		os2.add(4) os2.add(6) os2.add(3) os2.add(1) os2.add(5)
+	
+		assert ( not os.equals(os2) )
+	end
+	
+	operation test_try6() : Void is do
+		var os : Set<Integer> init Set<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Set<Integer> init Set<Integer>.new
+		os2.add(4) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os2.add(7)
+	
+		assert ( not os.equals(os2) )
+	end
+	
+	operation test_try7() : Void is do
+		var os : Bag<Integer> init Bag<Integer>.new
+		os.add(1) 
+		os.add(2) 
+		os.add(3) 
+		os.add(4) 
+		os.add(5) 
+		os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Bag<Integer> init Bag<Integer>.new
+		os2.add(4) os2.add(2) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+	
+		assert ( os.equals(os2) )
+	end
+	
+	operation test_try8() : Void is do
+		var os : Bag<Integer> init Bag<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Bag<Integer> init Bag<Integer>.new
+		os2.add(4) os2.add(50) os2.add(3) os2.add(1) os2.add(5) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+	
+		assert ( not os.equals(os2) )
+	end
+	
+	operation test_try9() : Void is do
+		var os : Bag<Integer> init Bag<Integer>.new
+		os.add(1) os.add(20) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Bag<Integer> init Bag<Integer>.new
+		os2.add(4) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+	
+		assert ( not os.equals(os2) )
+	end
+	
+	operation test_try10() : Void is do
+		var os : Sequence<Integer> init Sequence<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Sequence<Integer> init Sequence<Integer>.new
+		os2.add(4) os2.add(2) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+	
+		assert ( not os.equals(os2) )
+	end
+
+	operation test_try11() : Void is do
+		var os : Sequence<Integer> init Sequence<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Sequence<Integer> init Sequence<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+	
+		assert ( os.equals(os2) )
+	end
+	
+	operation test_try12() : Void is do
+		var os : Sequence<Integer> init Sequence<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Sequence<Integer> init Sequence<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+	
+		var s1 : Set<Sequence<Integer>> init Set<Sequence<Integer>>.new
+		var s2 : Set<Sequence<Integer>> init Set<Sequence<Integer>>.new
+		
+		s1.add(os) s1.add(os2)
+		s2.add(os) s2.add(os2)
+	
+		assert ( s1.equals(s2) )
+	end
+	
+	operation test_try13() : Void is do
+		var os : Sequence<Integer> init Sequence<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Sequence<Integer> init Sequence<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+	
+		var os3 : Sequence<Integer> init Sequence<Integer>.new
+	
+		var s1 : Set<Sequence<Integer>> init Set<Sequence<Integer>>.new
+		var s2 : Set<Sequence<Integer>> init Set<Sequence<Integer>>.new
+		
+		s1.add(os) s1.add(os2) s1.add(os3)
+		s2.add(os) s2.add(os2)
+	
+		assert ( not s1.equals(s2) )
+	end
+	
+	operation test_try14() : Void is do
+		var os : Sequence<Integer> init Sequence<Integer>.new
+		os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6) os.add(3) os.add(4) os.add(5) os.add(6)
+
+		var os2 : Sequence<Integer> init Sequence<Integer>.new
+		os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+	
+		var os3 : Sequence<Integer> init Sequence<Integer>.new
+		os2.add(1) os2.add(50) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+			
+		var s1 : Set<Sequence<Integer>> init Set<Sequence<Integer>>.new
+		var s2 : Set<Sequence<Integer>> init Set<Sequence<Integer>>.new
+		
+		s1.add(os) s1.add(os3)
+		s2.add(os) s2.add(os2)
+	
+		assert ( not s1.equals(s2) )
+	end
+}
