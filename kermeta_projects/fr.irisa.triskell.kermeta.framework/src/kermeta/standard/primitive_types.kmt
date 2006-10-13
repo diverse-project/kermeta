@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.24 2006-10-13 08:33:49 ftanguy Exp $
+// $Id: primitive_types.kmt,v 1.25 2006-10-13 11:12:16 ftanguy Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -40,6 +40,10 @@ abstract class PrimitiveType {
 
 	method isSameAs(element : Object) : Boolean is do
 		result := self.equals(element)
+	end
+
+	method isNotSameAs(element : Object) : Boolean is do
+		result := self.isNotEqual(element)
 	end
 
 }
@@ -108,6 +112,10 @@ class Boolean inherits PrimitiveType
 {
 
 	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
+	method isNotSameAs(element : Object) : Boolean from PrimitiveType is do
 		result := super(element)
 	end
 
@@ -185,6 +193,10 @@ class Integer inherits Numeric
 {
 
 	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
+	method isNotSameAs(element : Object) : Boolean from PrimitiveType is do
 		result := super(element)
 	end
 
@@ -338,6 +350,10 @@ class Real inherits Numeric
 		result := super(element)
 	end
 
+	method isNotSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
 	/**
 	 * returns self + other
 	 */
@@ -403,6 +419,10 @@ class Character inherits ValueType, Comparable
 		result := super(element)
 	end
 
+	method isNotSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
 	/**
 	 * Comparaison
 	 */
@@ -432,6 +452,10 @@ class String inherits ValueType, Comparable
 {
 
 	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
+	method isNotSameAs(element : Object) : Boolean from PrimitiveType is do
 		result := super(element)
 	end
 

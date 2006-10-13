@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.30 2006-10-13 08:33:49 ftanguy Exp $
+/* $Id: structure.kmt,v 1.31 2006-10-13 11:12:16 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -69,6 +69,10 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	
 	method isSameAs(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSameAs(self, element)
+	end
+	
+	method isNotSameAs(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
+		result := not isSameAs(element)
 	end
 	
 	method isKindOf(cl : kermeta::reflection::Class) : Boolean is do
