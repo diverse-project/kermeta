@@ -207,6 +207,21 @@ class Set<G> inherits Collection<G>
 		end
 		// TODO : should it raise an exception otherwise ?
 	end
+
+	method equals(element : Object) : Boolean is do
+		var isEqual : Boolean init false
+		var collection : Collection<G>
+		collection ?= element
+		if (self.size() == collection.size()) then
+			var temp : Set<G> init Set<G>.new
+			temp.addAll(collection)
+			temp.addAll(self)
+			if (temp.size() == self.size()) then
+				isEqual := true
+			end
+		end
+		result := isEqual
+	end
 }
 
 /**
@@ -214,7 +229,18 @@ class Set<G> inherits Collection<G>
  */
 class Bag<G> inherits Collection<G>
 {
-	// Everything is defined in Collection<G>
+	operation asSet() : Set<G> is do
+		var s : Set<G> init Set<G>.new
+		s.addAll(self)
+		result := s
+	end
+
+	method equals(element : Object) : Boolean is do
+		var collection : Bag<G>
+		collection ?= element
+		var selfAsSet : Set<G> init self.asSet()
+		result := selfAsSet.equals(collection.asSet())
+	end
 }
 
 /**
@@ -267,6 +293,26 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		end
 		result := elementAt(size - 1)
 	end
+	
+	method equals(element : Object) : Boolean is do
+		var collection : Collection<G>
+		collection ?= element
+		if (self.size() != collection.size()) then
+			result := false
+		else
+			var selfIterator : Iterator<G> init self.iterator()
+			var collectionIterator : Iterator<G> init collection.iterator()
+			var difference : Boolean init false
+			from "void"
+			until (	selfIterator.isOff() or collectionIterator.isOff() or difference	)
+			loop
+				if (	not (selfIterator.next == collectionIterator.next)	) then
+					difference := true
+				end
+			end
+			result := not difference
+		end
+	end
 }
 
 /**
@@ -289,6 +335,10 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 		end
 		// TODO : should it raise an exception otherwise ?
 	end
+	
+	method equals(element : Object) : Boolean from OrderedCollection is do
+		result := super(element)
+	end
 }
 
 /**
@@ -296,7 +346,9 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
  */
 class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 {
-	// Everything is defined in Bag<G>, OrderedCollection<G>
+	method equals(element : Object) : Boolean from OrderedCollection is do
+		result := super(element)
+	end
 }
 
 /**
