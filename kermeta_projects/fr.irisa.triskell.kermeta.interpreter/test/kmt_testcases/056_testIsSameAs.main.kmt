@@ -1,0 +1,72 @@
+@mainClass "Object::Test"
+@mainOperation "main"
+
+package Object;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::language::structure
+
+abstract class Bidon<G> {
+}
+
+class SubBidon<G> inherits Bidon<G> {
+}
+
+class Riri {
+}
+class Loulou inherits Riri {}
+class Fifi<G> inherits Riri {}
+
+class Test inherits kermeta::kunit::Test {
+
+	operation main() : Void is do
+	end
+	
+	operation testCorrectIsSameAs1() : Boolean is do
+		var i1 : Integer init 10
+		var i2 : Integer init 10
+		assert (i1.isSameAs(i2))
+		result := i1.isSameAs(i2)
+	end
+
+	operation testCorrectIsSameAs2() : Boolean  is do
+		var i1 : Integer init 10
+		var i2 : Integer
+		i2 := i1
+		assert (i1.isSameAs(i2))
+		result := i1.isSameAs(i2)
+	end
+
+	operation testIncorrectIsSameAs1() : Boolean  is do
+		var i1 : Riri init Riri.new
+		var i2 : Riri init Riri.new
+		assert ( not i1.isSameAs(i2))
+		result := not i1.isSameAs(i2)
+	end
+
+	operation testCorrectIsKindOf3() : Boolean  is do
+		var i1 : Riri init Riri.new
+		var i2 : Riri
+		i2 := i1
+		assert ( i1.isSameAs(i2))
+		result := i1.isSameAs(i2)
+	end
+
+	operation testCorrectIsKindOf4() : Boolean  is do
+		var i1 : Fifi<Riri> init Fifi<Riri>.new
+		var i2 : Fifi<Riri>
+		i2 := i1
+		assert ( i1.isSameAs(i2))
+		result := i1.isSameAs(i2)
+	end
+	
+	operation testIncorrectIsKindOf2() : Boolean  is do
+		var i1 : Fifi<Riri> init Fifi<Riri>.new
+		var i2 : Fifi<Riri> init Fifi<Riri>.new
+		assert ( not i1.isSameAs(i2))
+		result := not i1.isSameAs(i2)
+	end
+}
