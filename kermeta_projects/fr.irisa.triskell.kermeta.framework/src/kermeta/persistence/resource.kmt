@@ -7,7 +7,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.21 2006-10-04 08:57:23 dvojtise Exp $
+ * $Id: resource.kmt,v 1.22 2006-10-13 08:33:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -44,16 +44,21 @@ abstract class Resource
 {
 	/** The uri of the model-instance to load */
 	reference uri : String
+	
 	/** The uri of the meta-model of the model-instance to load */
 	reference metaModelURI : String
+	
 	/** The includedResource if the model-instance "inter-depends" on other instances*/
 	reference includedResources : set String[*] 
+	
 	/** The entities contained in the model-instance, that are provided when user loads a resource 
 	 *  instances == rootContents
 	 */
 	reference instances : set Object[*]
+	
 	/** The repository used to create this resource */
 	reference repository : Repository#resources
+	
 	/** The hashtable that contains the contents loaded by the resource.
 	 *  It is composed of 4 entries : "rootContents", "allRootContents", "contents", "allContents"
 	 *  The two last ones will be kept empty since resource-heavy

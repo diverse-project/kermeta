@@ -36,8 +36,8 @@ abstract class Collection<G>
 	 * Remove an element from the collection
 	 */
 	operation remove(element : G) : Void is do
-		var elem : G init self.detect { e | e.equals(element) }
-		if elem != void then
+		var elem : G init self.detect { e | e == element }
+		if (elem != void) then
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
 		end
 	end
@@ -64,7 +64,7 @@ abstract class Collection<G>
 		from var it : Iterator<G> init iterator
 		until it.isOff or result
 		loop
-			result := it.next == element 
+			result := (it.next == element) 
 		end
 	end
 	

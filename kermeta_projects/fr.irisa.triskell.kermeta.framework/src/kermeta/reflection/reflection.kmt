@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.27 2006-09-22 12:23:31 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.28 2006-10-13 08:33:49 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -35,6 +35,12 @@ abstract class Object
 	operation checkAllInvariants() : Void is abstract
 	operation equals(element : Object) : Boolean is abstract
 	operation isNotEqual(element : Object) : Boolean is abstract
+	
+	/** isSameAs operation checks if both objects have the same id */ 
+	operation isSameAs(element : Object) : Boolean is abstract
+	
+	/** Check if the current object is an instance of the given class.*/
+	operation isKindOf(cl : Class) : Boolean is abstract
 	
 	/** 
 	 * Returns the instances of the given property for this Object.

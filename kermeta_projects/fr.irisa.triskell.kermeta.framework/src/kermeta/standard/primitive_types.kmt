@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.23 2006-09-26 10:26:55 dvojtise Exp $
+// $Id: primitive_types.kmt,v 1.24 2006-10-13 08:33:49 ftanguy Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -32,11 +32,24 @@ class ~Void {
 
 
 /**
+ * The PrimitiveType redefine isSameAs operation from Object class to use in an easier way
+ * primitive types. Comparing two primitive types value can be written as x == y
+ */
+
+abstract class PrimitiveType {
+
+	method isSameAs(element : Object) : Boolean is do
+		result := self.equals(element)
+	end
+
+}
+
+/**
  * The abstract class ValueType does not contain any feature
  * but any instance of a sub-class of ValueType will be passed by value 
  * instead of by reference for any other objects.
  */
-abstract class  ValueType {}
+abstract class  ValueType inherits PrimitiveType {}
 
 /**
  * The abstract class Comparable defines a set of operation
@@ -91,8 +104,12 @@ class NotComparableException inherits kermeta::exceptions::Exception {
 /**
  * The Boolean type
  */
-class Boolean
+class Boolean inherits PrimitiveType
 {
+
+	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
 
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Boolean then  
@@ -166,6 +183,10 @@ abstract class Numeric inherits Comparable, ValueType
  */
 class Integer inherits Numeric
 {
+
+	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
 
 	/**
 	 * Iteration
@@ -312,6 +333,11 @@ class Integer inherits Numeric
  */
 class Real inherits Numeric
 {
+
+	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
 	/**
 	 * returns self + other
 	 */
@@ -372,6 +398,11 @@ class Real inherits Numeric
  */
 class Character inherits ValueType, Comparable
 {
+
+	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
+
 	/**
 	 * Comparaison
 	 */
@@ -399,6 +430,10 @@ class Character inherits ValueType, Comparable
  */
 class String inherits ValueType, Comparable 
 {
+
+	method isSameAs(element : Object) : Boolean from PrimitiveType is do
+		result := super(element)
+	end
 
 	/**
 	 * Comparaison
