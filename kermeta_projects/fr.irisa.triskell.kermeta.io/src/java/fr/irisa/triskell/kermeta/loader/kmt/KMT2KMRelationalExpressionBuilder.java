@@ -45,7 +45,7 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 		operators.put("<", "isLower");
 		operators.put("<=", "isLowerOrEqual");
 		operators.put(">=", "isGreaterOrEqual");
-		operators.put("!=", "isNotEqual");
+		operators.put("!=", "isNotSameAs");
 	}
 	
 	protected Expression result;
