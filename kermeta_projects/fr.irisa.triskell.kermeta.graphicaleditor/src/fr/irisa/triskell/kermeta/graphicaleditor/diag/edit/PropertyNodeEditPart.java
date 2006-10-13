@@ -172,6 +172,7 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 	protected void updateLabel(EditableLabel label) {
 		String text = "";
 
+		// Add the prefix '/' for marking the derived property
 		if (getProperty().getName() != null
 				&& !"".equals(getProperty().getName())) {
 			if (getProperty().isIsDerived()) {

@@ -1,4 +1,4 @@
-/* $Id: PropertyNodeUpdateCommand.java,v 1.1 2006-10-11 08:54:06 cfaucher Exp $
+/* $Id: PropertyNodeUpdateCommand.java,v 1.2 2006-10-13 17:17:40 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -77,7 +77,7 @@ public class PropertyNodeUpdateCommand extends Command
        
         // We handle the case user didnot provide a correct format
         _multiplicity = (String) data.get(PropertyEditDialog.Property_MULTIPLICITY);
-        if (_multiplicity == null || !Pattern.matches("\\[(\\d)+..[(\\d|)+|\\*]\\]", _multiplicity))
+        if (_multiplicity == null || !Pattern.matches("\\[(\\d)+..((\\d)+|(-1){1}|\\*)\\]", _multiplicity))
         {
         	_multiplicity = "[0..1]";
         }
@@ -116,7 +116,7 @@ public class PropertyNodeUpdateCommand extends Command
         // Update the property multiplicity
         String lower_str = _multiplicity.substring(1, _multiplicity.indexOf("."));
         String upper_str = _multiplicity.substring(_multiplicity.lastIndexOf(".")+1, _multiplicity.indexOf("]"));
-        
+
         int lower = Integer.valueOf(lower_str);
         int upper = upper_str.equals("*")?-1:Integer.valueOf(upper_str);
         _property.setUpper(upper);
