@@ -40,7 +40,7 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 	static {
 		// Maping operator -> method
 		operators = new Hashtable();
-		operators.put("==", "equals");
+		operators.put("==", "isSameAs");
 		operators.put(">", "isGreater");
 		operators.put("<", "isLower");
 		operators.put("<=", "isLowerOrEqual");
