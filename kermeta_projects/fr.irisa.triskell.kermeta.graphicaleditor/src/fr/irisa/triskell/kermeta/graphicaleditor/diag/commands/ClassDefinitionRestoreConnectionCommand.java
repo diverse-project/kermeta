@@ -172,43 +172,47 @@ public class ClassDefinitionRestoreConnectionCommand extends
 
 			if (obj instanceof Property) {
 				Property edgeObject = (Property) obj;
-				// Change : edgeObject.getType()
-				if (targetObject.equals(((ParameterizedType) edgeObject
-						.getType()).getTypeDefinition())
-						&& sourceObject.equals(edgeObject.getOwningClass())
-						&& sourceObject.getOwnedAttribute()
-								.contains(edgeObject)) {
-					// check if the relation does not exists yet
 
-					List existing = getExistingEdges(srcNode, targetNode,
-							Property.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						// We use 2 CreationUtlis, one for the nodes and a second for the edges
-						// in order to permit to have 2 graphical elements for the same model object => Property
-						ICreationUtils factory = null;
+				if (!KermetaUtils.getDefault().isStandardType(
+						edgeObject.getType())
+						&& !KermetaUtils.getDefault().isPrimitiveType(
+								edgeObject.getType())) {
 
-						// If the type of the property is a StandardType then the given property
-						// will display like a node else like an edge
-						if (KermetaUtils.getDefault().isStandardType(
-								edgeObject.getType()) || KermetaUtils.getDefault()
-								.isPrimitiveType(edgeObject.getType())) {
-							factory = ((fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration) getModeler()
-									.getActiveConfiguration())
-									.getCreationUtils();
-						} else {
+					// Change : edgeObject.getType()
+					if (targetObject.equals(((ParameterizedType) edgeObject
+							.getType()).getTypeDefinition())
+							&& sourceObject.equals(edgeObject.getOwningClass())
+							&& sourceObject.getOwnedAttribute().contains(
+									edgeObject)) {
+						// check if the relation does not exists yet
+
+						List existing = getExistingEdges(srcNode, targetNode,
+								Property.class);
+						if (!isAlreadyPresent(existing, edgeObject)) {
+							// We use 2 CreationUtlis, one for the nodes and a
+							// second for the edges
+							// in order to permit to have 2 graphical elements
+							// for
+							// the same model object => Property
+							ICreationUtils factory = null;
+
+							// If the type of the property is not either a
+							// StandardType or a PrimitiveType
+							// then the given property will display like an edge
 							factory = ((fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration) getModeler()
 									.getActiveConfiguration())
 									.getCreationUtilsEdge();
-						}
 
-						// restore the link with its default presentation
-						GraphElement edge = factory.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							PropertyEdgeCreationCommand cmd = new PropertyEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcNode,
-									false);
-							cmd.setTarget(targetNode);
-							add(cmd);
+							// restore the link with its default presentation
+							GraphElement edge = factory
+									.createGraphElement(edgeObject);
+							if (edge instanceof GraphEdge) {
+								PropertyEdgeCreationCommand cmd = new PropertyEdgeCreationCommand(
+										getEditDomain(), (GraphEdge) edge,
+										srcNode, false);
+								cmd.setTarget(targetNode);
+								add(cmd);
+							}
 						}
 					}
 				}
