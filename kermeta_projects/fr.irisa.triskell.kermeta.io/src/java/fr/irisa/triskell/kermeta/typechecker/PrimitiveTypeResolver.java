@@ -1,4 +1,4 @@
-/* $Id: PrimitiveTypeResolver.java,v 1.2 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: PrimitiveTypeResolver.java,v 1.3 2006-10-17 09:15:16 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : PrimitiveTypeResolver.java
 * License : GPL
@@ -12,7 +12,7 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 /**
  * @author Franck Fleurey
@@ -26,8 +26,8 @@ public class PrimitiveTypeResolver {
 	 * @param ptype an fr.irisa.triskell.kermeta.language.structure.Type
 	 * @return the non-primitive type ptype stands for
 	 */
-	public static fr.irisa.triskell.kermeta.language.structure.Type getResolvedType(fr.irisa.triskell.kermeta.language.structure.Type ptype) {
-		fr.irisa.triskell.kermeta.language.structure.Type result = ptype;
+	public static Type getResolvedType(Type ptype) {
+		Type result = ptype;
 		while(result instanceof PrimitiveType) {
 			result = ((PrimitiveType)result).getInstanceType();
 		}

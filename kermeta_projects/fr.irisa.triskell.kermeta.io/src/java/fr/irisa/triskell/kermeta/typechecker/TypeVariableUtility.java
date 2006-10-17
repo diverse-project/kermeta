@@ -1,4 +1,4 @@
-/* $Id: TypeVariableUtility.java,v 1.2 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: TypeVariableUtility.java,v 1.3 2006-10-17 09:15:16 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableUtility.java
 * License : GPL
@@ -12,7 +12,7 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
-//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 /**
@@ -22,8 +22,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
  */
 public class TypeVariableUtility {
 
-	public static fr.irisa.triskell.kermeta.language.structure.Type getLeastDerivedAdmissibleType(fr.irisa.triskell.kermeta.language.structure.Type ptype) {
-		fr.irisa.triskell.kermeta.language.structure.Type result = ptype;
+	public static Type getLeastDerivedAdmissibleType(Type ptype) {
+		Type result = ptype;
 		while(result instanceof TypeVariable) {
 			TypeVariable tv = (TypeVariable)result;
 			if (tv.getSupertype() != null) result = PrimitiveTypeResolver.getResolvedType(tv.getSupertype());
