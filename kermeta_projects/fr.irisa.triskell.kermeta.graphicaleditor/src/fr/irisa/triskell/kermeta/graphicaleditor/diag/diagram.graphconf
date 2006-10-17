@@ -20,24 +20,26 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://kermeta/kermeta.ecore//language/structure#//Package"/>
+            <type href="http://kermeta/kermeta.ecore#//language/structure/Package"/>
         </bridge>
     </node>
     <node
         presentation="default"
         defaultHeight="-1"
         defaultWidth="-1"
-        minimumHeight="20"
-        minimumWidth="20"
+        minimumHeight="-1"
+        minimumWidth="-1"
         maximumHeight="200"
         maximumWidth="200"
         defaultBackgroundColor="241,235,215"
         defaultForegroundColor="0,0,0"
         defaultFont="Tahoma-regular-8"
         lineWidth="1"
-        lineStyle="SOLID">
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="false">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://kermeta/kermeta.ecore//language/structure#//ClassDefinition"/>
+            <type href="http://kermeta/kermeta.ecore#//language/structure/ClassDefinition"/>
         </bridge>
     </node>
     <node
@@ -54,7 +56,7 @@
         lineWidth="1"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://kermeta/kermeta.ecore//language/structure#//Property"/>
+            <type href="http://kermeta/kermeta.ecore#//language/structure/Property"/>
         </bridge>
     </node>
     <node
@@ -71,7 +73,7 @@
         lineWidth="1"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://kermeta/kermeta.ecore//language/structure#//Operation"/>
+            <type href="http://kermeta/kermeta.ecore#//language/structure/Operation"/>
         </bridge>
     </node>
     <edge
@@ -91,7 +93,7 @@
         lineWidth="1"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="http://kermeta/kermeta.ecore//language/structure#//Property"/>
+            <type href="http://kermeta/kermeta.ecore#//language/structure/Property"/>
         </bridge>
     </edge>
 </graphconf:DiagramGraphConf>

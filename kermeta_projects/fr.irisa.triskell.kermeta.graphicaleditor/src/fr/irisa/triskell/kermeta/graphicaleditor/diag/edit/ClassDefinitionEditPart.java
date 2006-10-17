@@ -67,7 +67,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 	 * Creates edit policies and associates these with roles <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
@@ -190,32 +190,4 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 			lbl.getSuffix().setForegroundColor(ColorConstants.gray);
 		}
 	}
-
-	/**
-	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultBackgroundColor()
-	 * @generated NOT
-	 */
-	protected Color getDefaultBackgroundColor() {
-		return ColorRegistry.getInstance().get("241,235,215");
-	}
-
-	@Override
-	protected int getDefaultHeight() {
-		// TODO Auto-generated method stub
-		return -1;
-	}
-	
-
-	@Override
-	public int getMinimumHeight() {
-		// TODO Auto-generated method stub
-		return -1;
-	}
-
-	@Override
-	protected int getDefaultWidth() {
-		// TODO Auto-generated method stub
-		return 120;
-	}
-
 }

@@ -99,14 +99,6 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultBackgroundColor()
-	 * @generated NOT
-	 */
-	protected Color getDefaultBackgroundColor() {
-		return ColorRegistry.getInstance().get("241,241,241");
-	}
-
-	/**
 	 * Update the ComposedLabel with the correct Suffix label (if necessary) and
 	 * the right icon and font for the Main EditableLabel
 	 * 
@@ -134,5 +126,5 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 		}
 		lbl.getSuffix().setForegroundColor(ColorConstants.gray);
 	}
-
+	
 }
