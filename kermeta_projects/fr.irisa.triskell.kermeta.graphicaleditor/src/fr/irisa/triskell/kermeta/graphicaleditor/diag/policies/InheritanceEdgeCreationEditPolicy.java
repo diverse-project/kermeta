@@ -23,12 +23,12 @@ import org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy;
 import org.topcased.modeler.utils.SourceTargetData;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureSimpleObjectConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.commands.InheritanceEdgeCreationCommand;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 /**
  * Inheritance edge creation <br>

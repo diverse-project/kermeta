@@ -20,14 +20,12 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.topcased.modeler.providers.IDeletePartnerProvider;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
-import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
-import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 import java.util.Iterator;
 
@@ -72,6 +70,8 @@ public class ClassDefinitionModelerProvider extends
 		ArrayList deletelist = new ArrayList();
 
 		ClassDefinition theClassDef = (ClassDefinition) object;
+		
+		System.out.println("Debug - delete ClassDefinition");
 
 		// Get the types that refer the cuurent ClassDefinition
 		for (Iterator itLinks = KermetaCommonUtils.getOwnedTypesForTypeDefinitions(

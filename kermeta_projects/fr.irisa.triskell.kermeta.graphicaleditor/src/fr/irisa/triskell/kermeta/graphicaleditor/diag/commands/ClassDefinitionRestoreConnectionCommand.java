@@ -26,12 +26,12 @@ import org.topcased.modeler.di.model.util.DIUtils;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureSimpleObjectConstants;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.utils.KermetaUtils;
 

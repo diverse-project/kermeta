@@ -41,7 +41,6 @@ public class PackageRestoreConnectionCommand extends
 	 * @generated
 	 */
 	protected void initializeCommands() {
-
 		// Do nothing
 	}
 

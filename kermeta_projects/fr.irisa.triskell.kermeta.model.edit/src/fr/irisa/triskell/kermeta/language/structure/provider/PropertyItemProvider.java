@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.7 2006-10-04 17:14:03 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.8 2006-10-17 09:10:35 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -11,9 +11,9 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
 
 import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;

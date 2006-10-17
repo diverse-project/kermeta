@@ -19,11 +19,11 @@ import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.common.KermetaCommonUtils;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 /**
  * The command to delete an Inheritance Edge

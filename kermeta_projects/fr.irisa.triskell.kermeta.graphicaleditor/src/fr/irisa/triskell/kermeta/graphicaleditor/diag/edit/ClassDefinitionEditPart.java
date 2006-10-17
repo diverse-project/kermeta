@@ -43,18 +43,20 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diag.policies.InheritanceEdgeCr
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.policies.PropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
- * The ClassDefinition object controller
- * <!-- begin-user-doc --> <!--
+ * The ClassDefinition object controller <!-- begin-user-doc --> <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 	/**
-	 * Constructor
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @param obj the graph node
+	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param obj
+	 *            the graph node
 	 * @generated
 	 */
 	public ClassDefinitionEditPart(GraphNode obj) {
@@ -62,9 +64,9 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * Creates edit policies and associates these with roles
-	 * <!-- begin-user-doc
+	 * Creates edit policies and associates these with roles <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	protected void createEditPolicies() {
@@ -87,6 +89,8 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 
 		ResizableEditPolicy resizableEditPolicy = new ResizableEditPolicy();
 		resizableEditPolicy.setResizeDirections(PositionConstants.EAST_WEST);
+		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
+				resizableEditPolicy);
 
 		installEditPolicy(EditPolicy.LAYOUT_ROLE,
 				new ClassDefinitionLayoutEditPolicy());
@@ -96,6 +100,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 * @generated
 	 */
@@ -117,8 +122,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 	 * @generated NOT
 	 */
 	protected Font getDefaultFont() {
-		return EditPartUtils.changeFont(getClassDefinition()
-				.isIsAbstract());
+		return EditPartUtils.changeFont(getClassDefinition().isIsAbstract());
 	}
 
 	/**
@@ -139,23 +143,22 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 			lbl.setMain(getClassDefinition().getName());
 
 		String imageLabel = "";
-		if(getClassDefinition().isIsAbstract()){
+		if (getClassDefinition().isIsAbstract()) {
 			imageLabel = "CLASSDEFINITION_ABSTRACT";
-		}
-		else{
+		} else {
 			imageLabel = "CLASSDEFINITION";
 		}
-		
+
 		Label hoverLbl = new Label("");
-		if( lbl.getText()==null || lbl.getText().equals("")){
+		if (lbl.getText() == null || lbl.getText().equals("")) {
 			imageLabel = "ERROR";
 			lbl.setText("name");
 			hoverLbl.setText("The ClassDefinition name must be set");
-			
+
 		}
-		//hoverLbl.setParent(lbl);
+		// hoverLbl.setParent(lbl);
 		lbl.setToolTip(hoverLbl);
-		
+
 		((EditableLabel) lbl.getMain()).setIcon(StructureImageRegistry
 				.getImage(imageLabel));
 
@@ -164,8 +167,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 		if (getClassDefinition() != null
 				&& getClassDefinition().eContainer() != null
 				&& getClassDefinition().eContainer() instanceof Package) {
-			Package owningPackage = (Package) getClassDefinition()
-					.eContainer();
+			Package owningPackage = (Package) getClassDefinition().eContainer();
 
 			if (owningPackage != null
 					&& owningPackage != Utils
@@ -174,19 +176,21 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 				if (owningPackage.getName() != null) {
 					lbl.setSuffix("from " + owningPackage.getName());
 				}
-				//String qname = KMTHelper.getQualifiedName(getModelClassDefinition());
-				/*if (getModelClassDefinition().getName() != null)
-				 qname = qname.substring(0,
-				 qname.lastIndexOf(getModelClassDefinition()
-				 .getName()) - 2);
-				 lbl.setSuffix(qname);*/
+				String qname = KMTHelper.getQualifiedName(getClassDefinition());
+				System.err.println("Debug - qname: " + qname);
+				/*
+				 * if (getClassDefinition().getName() != null) qname =
+				 * qname.substring(0,
+				 * qname.lastIndexOf(getModelClassDefinition() .getName()) - 2);
+				 * lbl.setSuffix(qname);
+				 */
 			} else {
 				lbl.setSuffix("");
 			}
 			lbl.getSuffix().setForegroundColor(ColorConstants.gray);
 		}
 	}
-	
+
 	/**
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultBackgroundColor()
 	 * @generated NOT
@@ -200,13 +204,18 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 		// TODO Auto-generated method stub
 		return -1;
 	}
+	
+
+	@Override
+	public int getMinimumHeight() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
 
 	@Override
 	protected int getDefaultWidth() {
 		// TODO Auto-generated method stub
-		return -1;
+		return 120;
 	}
-	
-	
 
 }

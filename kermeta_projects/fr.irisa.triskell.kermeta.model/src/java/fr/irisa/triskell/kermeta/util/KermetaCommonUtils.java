@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.common;
+package fr.irisa.triskell.kermeta.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
