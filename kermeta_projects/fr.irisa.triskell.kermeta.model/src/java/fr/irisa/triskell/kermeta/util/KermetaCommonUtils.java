@@ -90,12 +90,11 @@ public class KermetaCommonUtils {
 	 */
 	public static List<Type> getOwnedTypesForTypeDefinitions(
 			TypeDefinition typedef) {
+		
 		ownedTypesForTypeDefinitions = new ArrayList<Type>();
 		// By definition, a TypeDefinition container is always of type Package
 		Package pkg = getRootPackage((Package) typedef.eContainer());
-
 		getAllTypesForAllPackages(pkg);
-
 		return ownedTypesForTypeDefinitions;
 	}
 
@@ -124,7 +123,7 @@ public class KermetaCommonUtils {
 		getAllTypesForAPackage(pkg);
 		for (Iterator<Package> it = pkg.getNestedPackage().iterator(); it
 				.hasNext();) {
-			getAllTypesForAllPackages(pkg);
+			getAllTypesForAllPackages(it.next());
 		}
 	}
 
