@@ -69,6 +69,37 @@ abstract class Collection<G>
 	end
 	
 	/**
+	 * returns true if the collection contains all elements
+	 */
+	operation containsAll(elements : Collection<G>) : Boolean is do
+		result := true
+		from var it : Iterator<G> init elements.iterator
+		until (it.isOff or not result)
+		loop
+			result := self.contains(it.next)
+		end
+	end
+	
+	/**
+	 * Returns true if the collection does not contain element
+	 */
+	operation excludes(element : G) : Boolean is do
+		result := not self.contains(element)
+	end
+	
+	/**
+	 * Returns true if the collection contains none of elements
+	 */
+	operation excludesAll(elements : Collection<G>) : Boolean is do
+		result := true
+		from var it : Iterator<G> init elements.iterator
+		until (it.isOff or not result)
+		loop
+			result := not self.contains(it.next)
+		end
+	end
+	
+	/**
 	 * returns the number of elements in the collection
 	 */
 	operation size() : Integer is do
