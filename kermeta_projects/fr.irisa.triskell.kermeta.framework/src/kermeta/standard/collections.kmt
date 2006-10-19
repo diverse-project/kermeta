@@ -190,6 +190,12 @@ abstract class Collection<G>
 		result := self.select { elem | not rejector(elem) } 
 	end
 	
+	/**
+	 * Returns the nb of instances of 'element' in the collection
+	 */
+	operation count(element : G) : Integer is do
+		result := self.select{e | e == element}.size()
+	end
 }
 
 /**
@@ -222,6 +228,58 @@ class Set<G> inherits Collection<G>
 		end
 		result := isEqual
 	end
+	
+	/** returns the union of a set of elements  and the Set */
+	operation union(elements : Set<G>) : Set<G> is do
+		result := Set<G>.new
+		result := self
+		from var it : Iterator<G> init elements.iterator
+		until it.isOff
+		loop
+			result.add( it.next )
+		end
+	end
+	
+	/** returns the union of a bag of elements and the Set */
+	operation unionWithBag(elements : Bag<G>) : Bag<G> is do
+		result := Bag<G>.new
+		result := self
+		from var it : Iterator<G> init elements.iterator
+		until it.isOff
+		loop
+			result.add( it.next )
+		end
+	end
+	
+	/** returns the intersection of elements and the Set */
+	operation intersection(elements : Collection<G>) : Set<G> is do
+		result := Set<G>.new
+		var elem : G
+		from var it : Iterator<G> init self.iterator
+		until it.isOff
+		loop
+			elem := it.next
+			if elements.contains(elem) then
+				result.add(elem)
+			end
+		end
+	end
+	
+	/** returns the difference of elements and the Set: the elements of the Set 
+	 *  that are not in elements
+	 */
+	operation minus(elements : Set<G>) : Set<G> is do
+		result := Set<G>.new
+		var elem : G
+		from var it : Iterator<G> init self.iterator
+		until it.isOff
+		loop
+			elem := it.next
+			if not elements.contains(elem) then
+				result.add(elem)
+			end
+		end
+	end
 }
 
 /**
@@ -240,6 +298,57 @@ class Bag<G> inherits Collection<G>
 		collection ?= element
 		var selfAsSet : Set<G> init self.asSet()
 		result := selfAsSet.equals(collection.asSet())
+	end
+
+	/** returns the union of elements and the Bag */
+	operation union(elements : Collection<G>) : Bag<G> is do
+		result := Bag<G>.new
+		result := self
+		from var it : Iterator<G> init elements.iterator
+		until it.isOff
+		loop
+			result.add( it.next )
+		end
+	end
+	
+	/** returns the intersection of elements and the Bag */
+	operation intersection(elements : Bag<G>) : Bag<G> is do
+		result := Bag<G>.new
+		var elem : G
+		var it : Iterator<G> init self.iterator
+		from it	until it.isOff
+		loop
+			elem := it.next
+			if elements.contains(elem) then
+				if(self.count(elem) <= elements.count(elem)) then
+					result.add(elem)
+				end
+			end
+		end
+		it := elements.iterator
+		from it until it.isOff
+		loop
+			elem := it.next
+			if self.contains(elem) then
+				if(elements.count(elem) < self.count(elem)) then
+					result.add(elem)
+				end
+			end
+		end
+	end
+	
+	/** returns the intersection of a set of elements and the Bag */
+	operation intersectionWithSet(elements : Set<G>) : Set<G> is do
+		result := Set<G>.new
+		var elem : G
+		from var it : Iterator<G> init elements.iterator
+		until it.isOff
+		loop
+			elem := it.next
+			if self.contains(elem) then
+				result.add(elem)
+			end
+		end
 	end
 }
 
@@ -293,7 +402,7 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 		end
 		result := elementAt(size - 1)
 	end
-	
+
 	method equals(element : Object) : Boolean is do
 		var collection : Collection<G>
 		collection ?= element
@@ -311,6 +420,28 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 				end
 			end
 			result := not difference
+		end
+	end
+	
+	/** returns the index of the first element instance in the OrderedCollection */
+	operation indexOf(element : G) : Integer is do
+		if size == 0 then
+			raise EmptyCollection.new
+		end
+		if not self.contains(element) then
+			result := -1
+		else
+			var i : Integer init 0
+			from var found : Boolean init false
+			until found
+			loop
+				if(element == elementAt(i)) then
+					found := true
+				else
+					i := i + 1
+				end
+			end
+			result := i
 		end
 	end
 }
