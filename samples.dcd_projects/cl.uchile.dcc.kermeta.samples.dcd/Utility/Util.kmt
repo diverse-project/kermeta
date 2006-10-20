@@ -1,0 +1,81 @@
+/* $Id: Util.kmt,v 1.1 2006-10-20 18:03:39 avignaga Exp $
+ * Creation date: September 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package Utility;
+
+
+require kermeta
+
+using kermeta::standard
+
+class StringUtil
+{
+	operation equalSequenceString(s1 : Sequence<String>, s2 : Sequence<String>) : Boolean is do
+		if (s1.size != s2.size) then
+			result := false
+		else
+			result := true
+			s1.size.times{i |
+				if s1.elementAt(i)!=s1.elementAt(i) then
+					result := false
+				end
+			}
+		end
+	
+	end
+    operation toLower(c : String) : String is do
+		if c=="A" then result := "a"
+		else if c=="B" then result := "b"
+			 else if c=="C" then result := "c"
+			      else if c=="D" then result := "d"
+			           else if c=="E" then result := "e"
+			                else if c=="F" then result := "f"
+			                     else if c=="G" then result := "g"
+			                          else if c=="H" then result := "h"
+			                               else if c=="J" then result := "j"
+			                                    else if c=="K" then result := "k"
+			                                         else if c=="L" then result := "l"
+			                                              else if c=="M" then result := "m"
+			                                                   else if c=="N" then result := "n"
+			                                                        else if c== "O" then result := "o"
+			                                                             else if c=="P" then result := "p"
+			                                                                  else if c=="Q" then result := "q"
+			                                                                       else if c=="R" then result := "r"
+			                                                                            else if c=="S" then result := "s"
+			                                                                                 else if c=="T" then result := "t"
+			                                                                                      else if c=="U" then result := "u"
+			                                                                                           else if c=="V" then result := "v"
+			                                                                                                else if c=="W" then result := "w"
+			                                                                                                     else if c=="X" then result := "x"
+			                                                                                                          else if c=="Y" then result := "y"
+			                                                                                                               else result := "z"
+			                                                                                                               end
+			                                                                                                          end
+			                                                                                                      end
+			                                                                                                end
+			                                                                                            end
+			                                                                                       end
+			                                                                                  end
+			                                                                             end
+			                                                                        end
+			                                                                   end
+			                                                              end
+			                                                         end
+			                                                    end
+			                                               end
+			                                          end
+			                                     end
+			                               end
+			                          end
+			                      end
+			                 end
+			            end
+			       end
+			  end
+		end
+ 	end
+    
+}

@@ -1,0 +1,109 @@
+package CommunicationDiagrams;
+
+require kermeta
+require "../Utility/Util.kmt"
+
+using kermeta::standard
+using Utility
+
+class CommunicationDiagram
+{
+	attribute roles : Lifeline[1..*]
+	attribute messages : Message[1..*]
+}
+abstract class Lifeline
+{
+	attribute type : String[1..1]
+	attribute name : String
+	reference incoming : Message[1..*]#dest
+}
+class Message
+{
+	attribute name : String[1..1]
+	reference dest : Lifeline[1..1]#incoming
+	attribute seqNumber : String[1..1]
+	attribute returnValue : String
+	attribute returnType : String
+	attribute visibility : String 
+	// An exception is raised when when loading resources if visibility is of type VisibilityKind
+	reference src : SingleObject#outgoing
+	attribute args : Argument[0..*]
+	attribute locallyResolved : Boolean
+	
+	// Tells whether self matches (in name and argument types) to m
+	operation match(m : Message) : Boolean is do
+		var util : StringUtil init StringUtil.new
+		
+		if self == m then
+			result := true
+		else
+			if dest.type == m.dest.type or name != m.name then
+				result := false
+			else
+				if name == "create" then
+					result := true
+				else
+					if util.equalSequenceString(args.collect{z | z.type},m.args.collect{y | y.type}) then
+						result := true
+					else
+						result := false
+					end
+				end
+			end
+		end
+	end
+	
+	operation isCreate() : Boolean is do
+		result := name == "create"
+	end
+	
+	operation isDestroy() : Boolean is do
+		result := name == "destroy"
+	end
+	
+	operation isGetter() : Boolean is do
+		result := name.substring(0,3) == "get"
+	end
+	
+	operation isSetter() : Boolean is do
+		result := name.substring(0,3) == "set"
+	end
+	
+	// Tells whether m is a message with sequence number nested in self's sequence number
+	// (e.g. 2.1.3 is nested in 2.1, is not nested in 2.2)
+	operation isNested(m : Message) : Boolean is do
+		if seqNumber == "0" then
+			result := true
+		else
+			if seqNumber.size >= m.seqNumber.size then
+				result := false
+			else
+				var n : String init m.seqNumber.substring(0,seqNumber.size())
+				if (seqNumber == n) then
+					result := true
+				else
+					result := false
+				end
+			end
+		end
+	end
+}
+enumeration VisibilityKind
+{
+	unknown;
+	association;
+	parameter;
+	local;
+}
+class SingleObject inherits Lifeline
+{
+	reference outgoing : Message[0..*]#src
+}
+class MultiObject inherits Lifeline
+{
+}
+class Argument
+{
+	attribute name : String[1..1]
+	attribute type : String
+}

@@ -1,0 +1,553 @@
+package Transformations;
+
+require kermeta
+require "../Metamodels/CommunicationDiagrams.kmt"
+require "../Metamodels/ClassDiagrams.kmt"
+require "../Utility/Util.kmt"
+
+using kermeta::standard
+using CommunicationDiagrams
+using ClassDiagrams
+using Utility
+
+
+class Transformation {
+
+	reference interactions : Sequence<CommunicationDiagram>
+	reference dm : ClassDiagram
+	reference dcd : ClassDiagram
+	reference util : StringUtil
+	
+	operation initialize(ints : Sequence<CommunicationDiagram>, domainModel : ClassDiagram) : Void is do
+		interactions := ints
+		dm := domainModel
+		dcd := ClassDiagram.new
+		util := StringUtil.new
+	end
+		
+
+	operation transform() : ClassDiagram is do
+		
+		addDataTypes()
+		addClasses()
+		addAttributes()
+		addOperations()
+		addAssociations()
+		refineMultiplicities()
+		addDependencies()
+		factorize()
+		
+		result := dcd
+	end
+	
+	// Transformation operations ---------------------------------------------------------------------
+	
+	// Add every Data Type to the DCD
+	operation addDataTypes() : Void is do
+		dm.classifiers.select {c | DataType.isInstance(c)}.each {d |
+			var dt : DataType init DataType.new
+			dt.name := d.name
+			d.attrs.each {s | 
+				var att : Attribute init Attribute.new
+				att.name := s.name
+				att.type ?= dcd.classifiers.detect{z | z.name == s.type.name}
+				dt.attrs.add(att)
+			}
+			dcd.classifiers.add(dt)
+		}
+	end
+	
+	// Add all neccesary classes to the DCD
+	operation addClasses() : Void is do
+		interactions.each {inter |
+			inter.messages.each {m |
+			var c1 : Class
+			if (m.src != void) then
+				addClass(m.src.type)
+			end
+			
+			var c2 : Class init Class.new
+			addClass(m.dest.type)
+			}
+		}
+	end
+	
+	// Add every attribute to the DCD
+	operation addAttributes() : Void is do
+		dcd.classifiers.each {c |
+			if Class.isInstance(c) then
+				var concept : Class
+				concept ?= dm.classifiers.detect {p | p.name == c.name}
+				if concept != void then
+					concept.attrs.each {t |
+						var att : Attribute init Attribute.new
+						att.name := t.name
+						att.type ?= dcd.classifiers.detect{z | z.name == t.type.name}
+						c.attrs.add(att)
+					}
+				end
+			end
+		}
+		interactions.each {inter |
+			inter.messages.each {m |
+				if (m.isGetter() or m.isSetter()) and SingleObject.isInstance(m.dest) then
+					var s : String
+					s := m.name.substring(3,m.name.size)
+					s := util.toLower(s.elementAt(0).toString()) + s.substring(1,s.size)
+					var c : Class
+					var r : Classifier
+					c ?= dcd.classifiers.detect {z | z.name == m.dest.type}
+					r := dcd.classifiers.detect {z | z.name == m.returnType}
+					if not c.attrs.exists {z | z.name == s} then
+						var att : Attribute init Attribute.new
+						att.name := s
+						att.type ?= r
+						c.attrs.add(att)
+					end
+				end
+			}
+		}
+	end
+	
+	// Add every operation to the DCD
+	operation addOperations() : Void is do
+		interactions.each {inter |
+			inter.messages.each {m |
+				if SingleObject.isInstance(m.dest) 
+				   and not (m.isCreate() or m.isDestroy() or m.isGetter() or m.isSetter()) then
+					var pars : Sequence<String> init Sequence<String>.new
+					m.args.each {p | pars.add(p.type)}
+					var c : Class
+					c := dcd.findClass(m.dest.type)
+					if not c.matchOperation(m.name,pars) then
+						var op : Operation init Operation.new
+						op.name := m.name
+						op.returnType := dcd.findClassifier(m.returnType)
+						m.args.each{a |
+							var p : Parameter init Parameter.new
+							p.name := a.name
+							p.type := dcd.findClassifier(a.type)
+							op.params.add(p)
+						}
+						c := dcd.findClass(m.dest.type)
+						if SingleObject.isInstance(m.dest) then
+							var ob : SingleObject
+							ob ?= m.dest
+							if not ob.outgoing.exists{n | m.isNested(n)} and not m.locallyResolved then
+								op.isAbstract := true
+								c.isAbstract := true
+							else
+								op.isAbstract := false
+							end
+						end
+						c.opers.add(op)
+					end
+				end
+			}
+		}
+	end
+	
+	// Add every association to the DCD
+	operation addAssociations() : Void is do
+		interactions.each{inter |
+			inter.messages.each {m |
+				if m.src != void and m.visibility == "association" then
+					var r1 : String init m.src.type
+					var r2 : String init m.dest.type
+					var c1 : Class init dm.findClass(r1)
+					var c2 : Class init dm.findClass(r2)
+					var aname : String
+					var mult1 : Multiplicity init Multiplicity.new
+					var assoc : Association
+					if dm.existsAssociation(c1,c2) then
+						assoc := dm.findAssociation(c1,c2)
+						aname := assoc.name
+						if assoc.end1.name == r1 then
+							mult1.multVal := assoc.mult1.multVal
+						else
+							mult1.multVal := assoc.mult2.multVal
+						end
+					else
+						aname := r1 + "-" + r2
+						mult1.multVal := "1"
+					end
+					c1 := dcd.findClass(r1)
+					c2 := dcd.findClass(r2)
+					if not dcd.existsAssociation(c1,c2) then
+						var as : Association init Association.new
+						as.name := aname
+						as.end1 := c1
+						as.end2 := c2
+						as.mult1 := mult1
+						as.end1Nav := false
+						as.end2Nav := true
+						as.mult2 := Multiplicity.new
+						if assoc != void then
+							if MultiObject.isInstance(m.dest) then
+								if assoc.end1.name == r1 then
+									if assoc.mult2.lower == "1" then
+										as.mult2.multVal := "1..*"
+									else
+										as.mult2.multVal := "*"
+									end
+								else
+									if assoc.mult1.lower == "1" then
+										as.mult2.multVal := "1..*"
+									else
+										as.mult2.multVal := "*"
+									end
+								end
+							else
+								if assoc.end1.name == r1 then
+									if assoc.mult2.lower == "1" then
+										as.mult2.multVal := "1"
+									else
+										as.mult2.multVal := "0..1"
+									end
+								else
+									if assoc.mult1.lower == "1" then
+										as.mult2.multVal := "1"
+									else
+										as.mult2.multVal := "0..1"
+									end
+								end
+							end
+						else
+							if MultiObject.isInstance(m.dest) then
+								as.mult2.multVal := "*"
+							else
+								as.mult2.multVal := "0..1"
+							end
+						end
+						dcd.associations.add(as)
+					else
+						var as : Association init dcd.findAssociation(c1,c2)
+						if MultiObject.isInstance(m.dest) then
+							if as.end1.name == r1 then
+								as.mult2.upper := "*"
+								as.end2Nav := true
+							else
+								as.mult1.upper := "*"
+								as.end1Nav := true
+							end
+						end
+					end
+				end
+			}
+		}
+	end
+	
+	// Refine every multiplicity of the DCD
+	operation refineMultiplicities() : Void is do
+		dcd.associations.each { a |
+			var c1 : Class init a.end1
+			var c2 : Class init a.end2
+			if not (interactions.exists{z | 
+					z.messages.select {y | y.src != void}.exists {m | 
+					m.src.type == c1.name and m.dest.type == c2.name and m.isCreate() and m.visibility == "association"}} or
+			   interactions.exists{z |
+					z.messages.exists {y | y.dest.type == c1.name and y.args.collect{t | t.type}.contains(c2.name)}} or
+			   interactions.exists{z |
+					z.messages.select {y | y.src != void}.exists {m |
+					m.src.type == c1.name and m.returnValue == c2.name}})
+			then
+				a.mult2.lower := "1"
+			end
+		}		
+	end
+	
+	// Add every dependency to the DCD
+	// (no check of existence of generalization between involved class is currently implemented)
+	operation addDependencies() : Void is do
+		interactions.each {inter |
+			inter.messages.each {m |
+				// find parameter dependencies
+				var c1 : Class
+				if (m.src != void) then
+					c1 := dcd.findClass(m.src.type)
+				end
+				var c2 : Class
+				c2 := dcd.findClass(m.dest.type)
+				m.args.each{a |
+					var c : Classifier init dcd.findClassifier(a.type)
+					if Class.isInstance(c) and c.name != c2.name and not c2.suppliers.exists{x | x.name == c.name} then
+						var cl : Class
+						cl ?= c
+						
+						if not dcd.existsAssociation(cl,c2) then
+							c2.suppliers.add(cl)
+						else
+							var assoc : Association
+							assoc := dcd.findAssociation(cl,c2)
+							if assoc.end1.name == cl.name then
+								if not assoc.end1Nav then
+									c2.suppliers.add(cl)
+								end
+							else
+								if not assoc.end2Nav then
+									c2.suppliers.add(cl)
+								end
+							end
+						end
+					end
+				}
+				// find return type dependencies
+				var c : Classifier init dcd.findClassifier(m.returnType)
+				if c != void and c1 != void then
+					if Class.isInstance(c) and not c1.suppliers.exists{z | z.name == c.name} then
+						var cl : Class
+						cl ?= c
+						if not dcd.existsAssociation(cl,c1) then
+							c1.suppliers.add(cl)
+						else
+							var assoc : Association
+							assoc := dcd.findAssociation(cl,c1)
+							if assoc.end1.name == cl.name then
+								if not assoc.end1Nav then
+									c1.suppliers.add(cl)
+								end
+							else
+								if not assoc.end2Nav then
+									c1.suppliers.add(cl)
+								end
+							end
+						end
+					end
+				end
+				// find "parameter" and "local" dependencies
+				if c1 != void then
+					if (m.visibility == "parameter" or m.visibility == "local") and not c1.suppliers.exists{x | x.name == c2.name} then
+						if not dcd.existsAssociation(c1,c2) then
+							c1.suppliers.add(c2)
+						else
+							var assoc : Association
+							assoc := dcd.findAssociation(c1,c2)
+							if assoc.end1.name == c1.name then
+								if not assoc.end2Nav then
+									c1.suppliers.add(c2)
+								end
+							else
+								if not assoc.end1Nav then
+									c1.suppliers.add(c2)
+								end
+							end
+						end
+					end
+				end
+			}
+		}
+		
+	end
+	
+	// Factorizes attributes
+	operation factorizeAttributes() : Boolean is do
+		var changes : Boolean init false
+		var allClasses : Sequence<Class> init dcd.classes
+		
+		var candidate : Class init allClasses.detect{ c | dcd.getChildren(c).size > 0}
+		
+		if candidate != void then
+			var children : Sequence<Class> init dcd.getChildren(candidate)
+			var child : Class init children.first
+			var att : Attribute
+			att := child.attrs.detect{a | children.forAll{x | x.attrs.exists{y | a.match(y)}}}
+			if att != void then
+				changes := true
+				children.each{x | x.attrs.remove(x.attrs.detect{a | a.match(att)})}
+				candidate.attrs.add(att)
+			end
+		end
+	
+		result := changes
+	end
+	
+	// Factorizes operations
+	operation factorizeOperations() : Boolean is do
+		var changes : Boolean init false
+		var allClasses : Sequence<Class> init dcd.classes
+		
+		var candidate : Class init allClasses.detect{c | dcd.getChildren(c).size > 0}
+		
+		if candidate != void then
+			var children : Sequence<Class> init dcd.getChildren(candidate)
+			var child : Class init children.first
+			var op : Operation
+			op := child.opers.detect{o | children.forAll{x | x.existsOperation(o)}}
+			if op != void then
+				if not candidate.existsOperation(op) then
+					changes := true
+					var countRem : Integer init 0
+					children.each{x | 
+						var aux : Operation
+						aux := x.opers.detect{x | x.match(op)}
+						if aux.isAbstract then
+							countRem := countRem + 1
+							x.opers.remove(aux)
+						end
+					}
+					if countRem == 0 then
+						var newOp : Operation init op.copy()
+						newOp.isAbstract := true
+						candidate.isAbstract := true
+						candidate.opers.add(newOp)
+					else
+						op.isAbstract := false
+						candidate.opers.add(op)
+					end
+				end
+			end
+		end
+		
+		result := changes
+	end
+	
+	// Factorizes associations
+	operation factorizeAssociations() : Boolean is do
+		var changes : Boolean init false
+		var allClasses : Sequence<Class> init dcd.classes
+		
+		var candidate : Class init allClasses.detect{c | dcd.getChildren(c).size > 0}
+		
+		if candidate != void then
+			var children : Sequence<Class> init dcd.getChildren(candidate)
+			var child : Class init children.first
+			var c : Class
+			c := allClasses.detect{cx | children.forAll{x | dcd.existsAssociation(cx,x)}}
+			if c != void then
+				changes := true
+				var m1 : Multiplicity init Multiplicity.new
+				m1.multVal := "0..1"
+				var m2 : Multiplicity init Multiplicity.new
+				m2.multVal := "0..1"
+				var n1 : Boolean init false
+				var n2 : Boolean init false
+				children.each{ch |
+					var a : Association init dcd.findAssociation(c,ch)
+					if a.end1 == c then
+						if a.mult1.lower == "1" then
+							m1.lower := "1"
+						end
+						if a.mult1.upper == "*" then
+							m1.upper := "*"
+						end
+						if a.mult2.lower == "1" then
+							m2.lower := "1"
+						end
+						if a.mult2.upper == "*" then
+							m2.upper := "*"
+						end
+						if a.end1Nav then
+							n1 := true
+						end
+						if a.end2Nav then
+							n2 := true
+						end
+					else
+						if a.mult1.lower == "1" then
+							m2.lower := "1"
+						end
+						if a.mult1.upper == "*" then
+							m2.upper := "*"
+						end
+						if a.mult2.lower == "1" then
+							m1.lower := "1"
+						end
+						if a.mult2.upper == "*" then
+							m1.upper := "*"
+						end
+						if a.end1Nav then
+							n2 := true
+						end
+						if a.end2Nav then
+							n1 := true
+						end
+					
+					end
+					dcd.associations.remove(a)
+				}
+				var a : Association init Association.new
+				var aux : Association
+				if dm.existsAssociation(dm.findClass(c.name),dm.findClass(candidate.name)) then
+					aux := dm.findAssociation(dm.findClass(c.name),dm.findClass(candidate.name))
+					a.name := aux.name
+					if aux.end1 == c then
+						if aux.mult1.lower == "1" then
+							m1.lower := "1"
+						end
+						if aux.mult2.lower == "1" then
+							m2.lower := "1"
+						end
+					else
+						if aux.mult1.lower == "1" then
+							m2.lower := "1"
+						end
+						if aux.mult2.lower == "1" then
+							m1.lower := "1"
+						end
+					end
+				else
+					a.name := c.name + "-" + candidate.name
+				end
+				a.end1 := c
+				a.end2 := candidate
+				a.mult1 := m1
+				a.mult2 := m2
+				a.end1Nav := n1
+				a.end2Nav := n2
+				dcd.associations.add(a)
+				
+			end
+		end
+		
+		result := changes
+	end
+	
+	// Factorizes attributes, operations and associations in the DCD
+	operation factorize() : Void is do
+		from var b : Boolean init true
+		until b == false
+		loop
+			b := factorizeAttributes()
+		end
+		
+		from var b : Boolean init true
+		until b == false
+		loop
+			b := factorizeOperations()
+		end
+		
+		from var b : Boolean init true
+		until b == false
+		loop
+			b := factorizeAssociations()
+		end
+	end
+	
+	// Aux operations: Class  -------------------------------------------------------------------------
+	
+	// Add a class to the DCD
+	operation addClass(n : String) : Void is do
+		var c : Class
+		var cl : Class init Class.new
+		
+		if not dcd.existsClass(n) then
+			c := dm.findClass(n)
+			if c!= void then
+				cl.name := c.name
+				cl.isAbstract := c.isAbstract
+				if c.parent != void then
+					if dcd.classifiers.exists {pt | pt.name == c.parent.name} then
+						cl.parent ?= dcd.classifiers.detect {pt | pt.name == c.parent.name}
+					else
+						addClass(c.parent.name)
+						cl.parent ?= dcd.classifiers.detect {pt | pt.name == c.parent.name}
+					end
+				end
+			else
+				cl.name := n
+			end
+			dcd.classifiers.add(cl)
+		end
+	end
+	
+}

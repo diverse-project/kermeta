@@ -1,0 +1,107 @@
+/* $Id: Main.kmt,v 1.1 2006-10-20 18:03:39 avignaga Exp $
+ * Creation date: September 8, 2006
+ * License:
+ * Copyright:
+ * Authors: Andres Vignaga
+ */
+@mainClass "Transformations::Main"
+@mainOperation "main"
+
+
+package Transformations;
+
+
+require kermeta
+require "Transformation.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using CommunicationDiagrams
+using ClassDiagrams
+
+class Main
+{
+	operation main() : Void is do
+	   	var interactions : Sequence<CommunicationDiagram>
+       	interactions := loadInteractions()
+       	
+       	var domainModel : ClassDiagram
+       	domainModel := loadDomainModel()
+       	
+       	var trans : Transformation init Transformation.new
+       	trans.initialize(interactions,domainModel)
+       	
+		var output : ClassDiagram
+		output := trans.transform()
+		
+		saveClassDiagram(output)
+		
+		stdio.writeln("Success!")
+	end
+	
+	// Edit this operation to load other communication diagrams		
+	operation loadInteractions() : Sequence<CommunicationDiagram> is do
+		var repository : EMFRepository init EMFRepository.new
+			
+		result := Sequence<CommunicationDiagram>.new
+		
+		var res1 : EMFResource 
+		res1 ?= repository.createResource("../Models/makeNewSale.xmi", "../Metamodels/CommunicationDiagrams.ecore")
+       	res1.load
+       	var dc1 : CommunicationDiagram
+       	dc1 ?= res1.instances.one
+       	result.add(dc1)
+       	
+       	var res2 : EMFResource 
+		res2 ?= repository.createResource("../Models/enterItem.xmi", "../Metamodels/CommunicationDiagrams.ecore")
+       	res2.load
+       	var dc2 : CommunicationDiagram
+       	dc2 ?= res2.instances.one
+       	result.add(dc2)
+       	
+       	var res3 : EMFResource 
+		res3 ?= repository.createResource("../Models/endSale.xmi", "../Metamodels/CommunicationDiagrams.ecore")
+       	res3.load
+       	var dc3 : CommunicationDiagram
+       	dc3 ?= res3.instances.one
+       	result.add(dc3)
+       	
+       	var res4 : EMFResource 
+		res4 ?= repository.createResource("../Models/makeCashPayment.xmi", "../Metamodels/CommunicationDiagrams.ecore")
+       	res4.load
+       	var dc4 : CommunicationDiagram
+       	dc4 ?= res4.instances.one
+       	result.add(dc4)
+	
+		var res5 : EMFResource 
+		res5 ?= repository.createResource("../Models/makeCheckPayment.xmi", "../Metamodels/CommunicationDiagrams.ecore")
+       	res5.load
+       	var dc5 : CommunicationDiagram
+       	dc5 ?= res5.instances.one
+       	result.add(dc5)
+	end
+	
+	// Edit this operation to load a different Domain Model
+	operation loadDomainModel() : ClassDiagram is do
+		var repository : EMFRepository init EMFRepository.new
+		
+		result := ClassDiagram.new
+		
+		var res : EMFResource
+		res ?= repository.createResource("../Models/DomainModel.xmi", "../Metamodels/ClassDiagrams.ecore")
+		res.load
+		result ?= res.instances.one
+	end
+	
+	// Edit this operation to save elsewere the result
+	operation saveClassDiagram(cm : ClassDiagram) : Void is do
+		var repository : EMFRepository init EMFRepository.new
+		
+		var resource : EMFResource
+		resource ?= repository.createResource("../Models/DesignClassDiagram.xmi","../Metamodels/ClassDiagrams.ecore")
+	 	resource.instances.add(cm)
+	 	resource.save()
+	
+	end
+}

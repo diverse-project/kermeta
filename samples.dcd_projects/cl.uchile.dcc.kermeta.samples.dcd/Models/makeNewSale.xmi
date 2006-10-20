@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<CommunicationDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="platform:/resource/DCD/Metamodels/CommunicationDiagrams.ecore">
+  <roles xsi:type="SingleObject" type="Register" name="r" incoming="//@messages.0" outgoing="//@messages.1"/>
+  <roles xsi:type="SingleObject" type="Sale" name="s" incoming="//@messages.1" outgoing="//@messages.2"/>
+  <roles xsi:type="MultiObject" type="SalesLineItem" name="sli" incoming="//@messages.2"/>
+  <messages name="makeNewSale" dest="//@roles.0" seqNumber="0" visibility=""/>
+  <messages name="create" dest="//@roles.1" seqNumber="1" visibility="association" src="//@roles.0"/>
+  <messages name="create" dest="//@roles.2" seqNumber="1.1" visibility="association" src="//@roles.1" locallyResolved="true"/>
+</CommunicationDiagram>

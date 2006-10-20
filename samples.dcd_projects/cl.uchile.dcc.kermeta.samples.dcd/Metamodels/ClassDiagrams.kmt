@@ -1,0 +1,213 @@
+package ClassDiagrams;
+
+require kermeta
+require "../Utility/Util.kmt"
+
+using kermeta::standard
+using Utility
+
+class ClassDiagram
+{
+	attribute classifiers : Classifier[0..*]
+	attribute associations : Association[0..*]
+	
+	// Tells whether the diagram contains a class named c
+	operation existsClass(c : String) : Boolean is do
+		if classifiers.exists{x | x.name == c and Class.isInstance(x)} then
+			result := true
+		else
+			result := false
+		end
+	end
+	
+	// Returns the class named c
+	operation findClass(c : String) : Class is do
+		result ?= classifiers.detect {x | x.name == c and Class.isInstance(x)}
+	end
+	
+	// Returns the classifier named c
+	operation findClassifier(c : String) : Classifier is do
+		result := classifiers.detect {x | x.name == c}
+	end
+	
+	// Returns all subclasses of c in the diagram
+	operation getChildren(c : Class) : Sequence<Class> is do
+		var cl : Class
+		var children : Sequence<Class> init Sequence<Class>.new
+		classifiers.each{z | 
+			if Class.isInstance(z) then
+				cl ?= z
+				if cl.parent == c then
+					children.add(cl)
+				end
+			end
+		}
+		result := children
+	end
+	
+	// Returns all the classes in the diagram
+	property classes : Sequence<Class>
+		getter is do
+			var all : Sequence<Class> init Sequence<Class>.new
+			classifiers.each {z |
+				if Class.isInstance(z) then
+					var c : Class
+					c ?= z
+					all.add(c)
+				end
+			}
+			result := all
+		end
+		
+	// Tells whether an association relates c1 and c2 (in any order)
+	// Multiple associations between the same two classes is not currently supported
+	operation existsAssociation(c1 : Class, c2 : Class) : Boolean is do
+		result := associations.exists{a | (a.end1 == c1 and a.end2 == c2) or (a.end1 == c2 and a.end2 == c1)}
+	end
+	
+	// Returns the association that relates c1 and c2 (in any order)
+	// Multiple associations between the same two classes is not currently supported
+	operation findAssociation(c1 : Class, c2 : Class) : Association is do
+		result := associations.detect{a | (a.end1 == c1 and a.end2 == c2) or (a.end1 == c2 and a.end2 == c1)}
+	end
+}
+abstract class Classifier
+{
+	attribute name : String[1..1]
+	attribute attrs : Attribute[0..*]
+}
+class Attribute
+{
+	attribute name : String[1..1]
+	reference type : DataType
+	
+	// Tells whether self match a
+	operation match(a : Attribute) : Boolean is do
+		result := name == a.name and type == a.type
+	end
+}
+class DataType inherits Classifier
+{
+}
+class Class inherits Classifier
+{
+	attribute isAbstract : Boolean[1..1]
+	reference suppliers : Class[0..*]
+	reference parent : Class
+	attribute opers : Operation[0..*]
+	reference util : StringUtil
+	
+	// Tells whether self has an operation named n and its parameter types exactly match those in p
+	operation matchOperation(n : String, p : Sequence<String>) : Boolean is do
+		var util : StringUtil init StringUtil.new
+		result := opers.exists{ x | x.name == n and x.params.size == p.size and util.equalSequenceString(x.params.collect{ y | y.type.name },p) }
+	end
+	
+	// Tells whether self has an operation matching op
+	operation existsOperation(op : Operation) : Boolean is do
+		result := opers.exists{y | op.match(y)}
+	end
+
+}
+class Operation
+{
+	attribute name : String[1..1]
+	attribute isAbstract : Boolean
+	reference returnType : Classifier
+	attribute params : Parameter[0..*]
+	
+	// Tells wheter self matches (in name and parameter types) to op
+	operation match(op : Operation) : Boolean is do
+		var util : StringUtil init StringUtil.new
+		var parTypes1 : Sequence<String> init params.collect{p | p.type.name}
+		var parTypes2 : Sequence<String> init op.params.collect{p | p.type.name}
+
+		result := name == op.name and util.equalSequenceString(parTypes1,parTypes2)
+	end
+	
+	// Returns an independent copy of self
+	operation copy() : Operation is do
+		var op : Operation init Operation.new
+		
+		op.name := name
+		op.isAbstract := isAbstract
+		op.returnType := returnType
+		params.each{ p | 
+			var par : Parameter init Parameter.new
+			par.name := p.name
+			par.type := p.type
+			op.params.add(par)	
+		}
+		
+		result := op
+	end
+}
+class Parameter
+{
+	attribute name : String[1..1]
+	reference type : Classifier
+}
+class Multiplicity
+{
+	attribute multVal : String[1..1]
+	
+	// The lower bound of the multiplicity
+	property lower : String
+		getter is do
+			if multVal.elementAt(0).toString() == "1" then
+				result := "1"
+			else
+				result := "0"
+			end
+		end
+		setter is do
+			if upper() == "*" then
+				if value == "0" then
+					multVal := "*"
+				else
+					multVal := "1..*"
+				end
+			else
+				if value == "0" then
+					multVal := "0..1"
+				else
+					multVal := "1"
+				end
+			end
+		end
+	
+	// The upper bound of the multiplicity
+	property upper : String
+		getter is do
+			if multVal.elementAt(multVal.size() - 1).toString() == "1" then
+				result := "1"
+			else
+				result := "*"
+			end
+		end
+		setter is do
+			if value == "1" then
+				if lower == "0" then
+					multVal := "0..1"
+				else
+					multVal := "1"
+				end
+			else
+				if lower == "0" then
+					multVal := "*"
+				else
+					multVal := "1..*"
+				end
+			end
+		end
+}
+class Association
+{
+	attribute name : String[1..1]
+	reference end1 : Class[1..1]
+	reference end2 : Class[1..1]
+	attribute mult1 : Multiplicity[0..1]
+	attribute mult2 : Multiplicity[0..1]
+	attribute end1Nav : Boolean[1..1]
+	attribute end2Nav : Boolean[1..1]
+}

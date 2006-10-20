@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="platform:/resource/DCD/Metamodels/ClassDiagrams.ecore">
+  <classifiers xsi:type="DataType" name="String"/>
+  <classifiers xsi:type="DataType" name="Integer"/>
+  <classifiers xsi:type="DataType" name="Boolean"/>
+  <classifiers xsi:type="DataType" name="Float"/>
+  <classifiers xsi:type="DataType" name="Date">
+    <attrs name="year" type="//@classifiers.1"/>
+    <attrs name="month" type="//@classifiers.1"/>
+    <attrs name="day" type="//@classifiers.1"/>
+  </classifiers>
+  <classifiers xsi:type="DataType" name="Time">
+    <attrs name="hour" type="//@classifiers.1"/>
+    <attrs name="minute" type="//@classifiers.1"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="Register" suppliers="//@classifiers.10">
+    <opers name="makeNewSale"/>
+    <opers name="enterItem">
+      <params name="id" type="//@classifiers.1"/>
+      <params name="qty" type="//@classifiers.1"/>
+    </opers>
+    <opers name="endSale" returnType="//@classifiers.3"/>
+    <opers name="makeCashPayment">
+      <params name="amount" type="//@classifiers.3"/>
+      <params name="cashTendered" type="//@classifiers.3"/>
+    </opers>
+    <opers name="makeCheckPayment">
+      <params name="amount" type="//@classifiers.3"/>
+      <params name="idNum" type="//@classifiers.0"/>
+    </opers>
+  </classifiers>
+  <classifiers xsi:type="Class" name="Sale" suppliers="//@classifiers.10">
+    <attrs name="date" type="//@classifiers.4"/>
+    <attrs name="time" type="//@classifiers.5"/>
+    <attrs name="isComplete" type="//@classifiers.2"/>
+    <opers name="makeLineItem">
+      <params name="spec" type="//@classifiers.10"/>
+      <params name="qty" type="//@classifiers.1"/>
+    </opers>
+    <opers name="becomeComplete"/>
+    <opers name="calculateTotal" returnType="//@classifiers.3"/>
+    <opers name="makeCashPayment">
+      <params name="amount" type="//@classifiers.3"/>
+      <params name="cashTendered" type="//@classifiers.3"/>
+    </opers>
+    <opers name="makeCheckPayment">
+      <params name="amount" type="//@classifiers.3"/>
+      <params name="idNum" type="//@classifiers.0"/>
+    </opers>
+  </classifiers>
+  <classifiers xsi:type="Class" name="SalesLineItem">
+    <attrs name="quantity" type="//@classifiers.1"/>
+    <opers name="calculateSubTotal" returnType="//@classifiers.3"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="ProductCatalog">
+    <opers name="findSpecification" returnType="//@classifiers.10">
+      <params name="id" type="//@classifiers.1"/>
+    </opers>
+  </classifiers>
+  <classifiers xsi:type="Class" name="ProductSpecification">
+    <attrs name="description" type="//@classifiers.0"/>
+    <attrs name="price" type="//@classifiers.3"/>
+    <attrs name="itemID" type="//@classifiers.1"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="Payment" isAbstract="true">
+    <attrs name="amount" type="//@classifiers.3"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="CashPayment" parent="//@classifiers.11">
+    <attrs name="amountTendered" type="//@classifiers.3"/>
+  </classifiers>
+  <classifiers xsi:type="Class" name="Store">
+    <attrs name="address" type="//@classifiers.0"/>
+    <attrs name="name" type="//@classifiers.0"/>
+    <opers name="addSale">
+      <params name="s" type="//@classifiers.7"/>
+    </opers>
+  </classifiers>
+  <classifiers xsi:type="Class" name="CheckPayment" parent="//@classifiers.11">
+    <attrs name="idNumber" type="//@classifiers.0"/>
+  </classifiers>
+  <associations name="captured-on" end1="//@classifiers.6" end2="//@classifiers.7" end1Nav="false">
+    <mult1/>
+    <mult2/>
+  </associations>
+  <associations name="contained-in" end1="//@classifiers.7" end2="//@classifiers.8" end1Nav="false">
+    <mult1/>
+    <mult2 multVal="1..*"/>
+  </associations>
+  <associations name="Register-ProductCatalog" end1="//@classifiers.6" end2="//@classifiers.9" end1Nav="false">
+    <mult1/>
+    <mult2/>
+  </associations>
+  <associations name="contains" end1="//@classifiers.9" end2="//@classifiers.10" end1Nav="false">
+    <mult1/>
+    <mult2 multVal="1..*"/>
+  </associations>
+  <associations name="described-by" end1="//@classifiers.8" end2="//@classifiers.10" end1Nav="false">
+    <mult1 multVal="*"/>
+    <mult2/>
+  </associations>
+  <associations name="houses" end1="//@classifiers.6" end2="//@classifiers.13" end1Nav="false">
+    <mult1 multVal="1..*"/>
+    <mult2/>
+  </associations>
+  <associations name="logs-completed" end1="//@classifiers.13" end2="//@classifiers.7" end1Nav="false">
+    <mult1/>
+    <mult2 multVal="*"/>
+  </associations>
+  <associations name="paid-by" end1="//@classifiers.7" end2="//@classifiers.11" end1Nav="false">
+    <mult1/>
+    <mult2/>
+  </associations>
+</ClassDiagram>
