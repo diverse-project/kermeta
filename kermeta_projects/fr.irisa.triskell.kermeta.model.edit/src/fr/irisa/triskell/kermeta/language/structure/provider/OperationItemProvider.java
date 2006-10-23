@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationItemProvider.java,v 1.5 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: OperationItemProvider.java,v 1.6 2006-10-23 16:08:45 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -209,13 +209,13 @@ public class OperationItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
 		String label = ((Operation)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_Operation_type") :
-			getString("_UI_Operation_type") + " " + label;
+			/*getString("_UI_Operation_type") + " " + */label;
 	}
 
 	/**
