@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Package.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -40,7 +40,7 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @return the value of the '<em>Nested Package</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_NestedPackage()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Package#getNestingPackage
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Package" opposite="nestingPackage" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Package" opposite="nestingPackage" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getNestedPackage();

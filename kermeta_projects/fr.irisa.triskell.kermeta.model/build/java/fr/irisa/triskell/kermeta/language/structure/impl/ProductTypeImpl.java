@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.5 2006-09-05 07:19:38 dvojtise Exp $
+ * $Id: ProductTypeImpl.java,v 1.6 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -77,6 +77,16 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	public TypeContainer getTypeContainer() {
 		if (eContainerFeatureID != StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER) return null;
 		return (TypeContainer)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeContainer basicGetTypeContainer() {
+		if (eContainerFeatureID != StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER) return null;
+		return (TypeContainer)eInternalContainer();
 	}
 
 	/**
@@ -182,7 +192,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
-				return getTypeContainer();
+				if (resolve) return getTypeContainer();
+				return basicGetTypeContainer();
 			case StructurePackage.PRODUCT_TYPE__TYPE:
 				return getType();
 		}
@@ -232,7 +243,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
-				return getTypeContainer() != null;
+				return basicGetTypeContainer() != null;
 			case StructurePackage.PRODUCT_TYPE__TYPE:
 				return type != null && !type.isEmpty();
 		}

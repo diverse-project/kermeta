@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: PackageImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -110,7 +110,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 */
 	public EList getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
-			ownedTypeDefinition = new EObjectContainmentEList(TypeDefinition.class, this, StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION);
+			ownedTypeDefinition = new EObjectContainmentEList.Resolving(TypeDefinition.class, this, StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
 	}
@@ -122,7 +122,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 */
 	public EList getNestedPackage() {
 		if (nestedPackage == null) {
-			nestedPackage = new EObjectContainmentWithInverseEList(fr.irisa.triskell.kermeta.language.structure.Package.class, this, StructurePackage.PACKAGE__NESTED_PACKAGE, StructurePackage.PACKAGE__NESTING_PACKAGE);
+			nestedPackage = new EObjectContainmentWithInverseEList.Resolving(fr.irisa.triskell.kermeta.language.structure.Package.class, this, StructurePackage.PACKAGE__NESTED_PACKAGE, StructurePackage.PACKAGE__NESTING_PACKAGE);
 		}
 		return nestedPackage;
 	}
@@ -135,6 +135,16 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	public fr.irisa.triskell.kermeta.language.structure.Package getNestingPackage() {
 		if (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE) return null;
 		return (fr.irisa.triskell.kermeta.language.structure.Package)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public fr.irisa.triskell.kermeta.language.structure.Package basicGetNestingPackage() {
+		if (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE) return null;
+		return (fr.irisa.triskell.kermeta.language.structure.Package)eInternalContainer();
 	}
 
 	/**
@@ -248,7 +258,8 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 			case StructurePackage.PACKAGE__NESTED_PACKAGE:
 				return getNestedPackage();
 			case StructurePackage.PACKAGE__NESTING_PACKAGE:
-				return getNestingPackage();
+				if (resolve) return getNestingPackage();
+				return basicGetNestingPackage();
 			case StructurePackage.PACKAGE__URI:
 				return getUri();
 		}
@@ -315,7 +326,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 			case StructurePackage.PACKAGE__NESTED_PACKAGE:
 				return nestedPackage != null && !nestedPackage.isEmpty();
 			case StructurePackage.PACKAGE__NESTING_PACKAGE:
-				return getNestingPackage() != null;
+				return basicGetNestingPackage() != null;
 			case StructurePackage.PACKAGE__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}

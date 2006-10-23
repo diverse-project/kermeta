@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ClassDefinition.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -42,7 +42,7 @@ public interface ClassDefinition extends TypeContainer, GenericTypeDefinition {
 	 * @return the value of the '<em>Inv</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="invOwner" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="invOwner" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getInv();
@@ -86,7 +86,7 @@ public interface ClassDefinition extends TypeContainer, GenericTypeDefinition {
 	 * @return the value of the '<em>Owned Attribute</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedAttribute()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Property" opposite="owningClass" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Property" opposite="owningClass" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getOwnedAttribute();
@@ -104,7 +104,7 @@ public interface ClassDefinition extends TypeContainer, GenericTypeDefinition {
 	 * @return the value of the '<em>Owned Operation</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedOperation()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Operation" opposite="owningClass" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Operation" opposite="owningClass" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getOwnedOperation();

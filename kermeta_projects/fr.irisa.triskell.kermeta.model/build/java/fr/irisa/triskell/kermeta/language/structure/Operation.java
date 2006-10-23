@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: Operation.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -90,7 +90,7 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwnedParameter()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Parameter" opposite="operation" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Parameter" opposite="operation" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getOwnedParameter();
@@ -108,7 +108,7 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Pre</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="preOwner" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="preOwner" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getPre();
@@ -126,7 +126,7 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Post</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="postOwner" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="postOwner" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getPost();
@@ -142,7 +142,7 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Body()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Expression getBody();

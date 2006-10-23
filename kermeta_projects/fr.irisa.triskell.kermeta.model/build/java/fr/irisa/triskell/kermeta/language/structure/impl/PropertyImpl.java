@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: PropertyImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -346,6 +346,29 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 */
 	public Expression getGetterBody() {
+		if (getterBody != null && getterBody.eIsProxy()) {
+			InternalEObject oldGetterBody = (InternalEObject)getterBody;
+			getterBody = (Expression)eResolveProxy(oldGetterBody);
+			if (getterBody != oldGetterBody) {
+				InternalEObject newGetterBody = (InternalEObject)getterBody;
+				NotificationChain msgs = oldGetterBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StructurePackage.PROPERTY__GETTER_BODY, null, null);
+				if (newGetterBody.eInternalContainer() == null) {
+					msgs = newGetterBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StructurePackage.PROPERTY__GETTER_BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.PROPERTY__GETTER_BODY, oldGetterBody, getterBody));
+			}
+		}
+		return getterBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetGetterBody() {
 		return getterBody;
 	}
 
@@ -389,6 +412,29 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 */
 	public Expression getSetterBody() {
+		if (setterBody != null && setterBody.eIsProxy()) {
+			InternalEObject oldSetterBody = (InternalEObject)setterBody;
+			setterBody = (Expression)eResolveProxy(oldSetterBody);
+			if (setterBody != oldSetterBody) {
+				InternalEObject newSetterBody = (InternalEObject)setterBody;
+				NotificationChain msgs = oldSetterBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StructurePackage.PROPERTY__SETTER_BODY, null, null);
+				if (newSetterBody.eInternalContainer() == null) {
+					msgs = newSetterBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StructurePackage.PROPERTY__SETTER_BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.PROPERTY__SETTER_BODY, oldSetterBody, setterBody));
+			}
+		}
+		return setterBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetSetterBody() {
 		return setterBody;
 	}
 
@@ -434,6 +480,16 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	public ClassDefinition getOwningClass() {
 		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS) return null;
 		return (ClassDefinition)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDefinition basicGetOwningClass() {
+		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS) return null;
+		return (ClassDefinition)eInternalContainer();
 	}
 
 	/**
@@ -533,11 +589,14 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			case StructurePackage.PROPERTY__IS_ID:
 				return isIsID() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.PROPERTY__GETTER_BODY:
-				return getGetterBody();
+				if (resolve) return getGetterBody();
+				return basicGetGetterBody();
 			case StructurePackage.PROPERTY__SETTER_BODY:
-				return getSetterBody();
+				if (resolve) return getSetterBody();
+				return basicGetSetterBody();
 			case StructurePackage.PROPERTY__OWNING_CLASS:
-				return getOwningClass();
+				if (resolve) return getOwningClass();
+				return basicGetOwningClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -642,7 +701,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			case StructurePackage.PROPERTY__SETTER_BODY:
 				return setterBody != null;
 			case StructurePackage.PROPERTY__OWNING_CLASS:
-				return getOwningClass() != null;
+				return basicGetOwningClass() != null;
 		}
 		return super.eIsSet(featureID);
 	}

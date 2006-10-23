@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDecl.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
+ * $Id: VariableDecl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -37,7 +37,7 @@ public interface VariableDecl extends Expression {
 	 * @return the value of the '<em>Initialization</em>' containment reference.
 	 * @see #setInitialization(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Initialization()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	Expression getInitialization();
@@ -89,7 +89,7 @@ public interface VariableDecl extends Expression {
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getVariableDecl_Type()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	TypeReference getType();

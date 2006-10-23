@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.3 2006-08-16 09:09:07 dvojtise Exp $
+ * $Id: ExpressionImpl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -92,7 +92,7 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 */
 	public EList getContainedType() {
 		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList(Type.class, this, BehaviorPackage.EXPRESSION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+			containedType = new EObjectContainmentWithInverseEList.Resolving(Type.class, this, BehaviorPackage.EXPRESSION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
 	}

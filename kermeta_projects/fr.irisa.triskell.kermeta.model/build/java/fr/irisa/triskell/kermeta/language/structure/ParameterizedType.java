@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedType.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ParameterizedType.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -37,7 +37,7 @@ public interface ParameterizedType extends Type {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameterizedType_TypeParamBinding()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getTypeParamBinding();

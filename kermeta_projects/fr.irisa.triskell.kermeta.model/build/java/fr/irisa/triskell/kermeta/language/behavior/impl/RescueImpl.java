@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RescueImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: RescueImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -110,7 +110,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 */
 	public EList getBody() {
 		if (body == null) {
-			body = new EObjectContainmentEList(Expression.class, this, BehaviorPackage.RESCUE__BODY);
+			body = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.RESCUE__BODY);
 		}
 		return body;
 	}
@@ -121,6 +121,29 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * @generated
 	 */
 	public TypeReference getExceptionType() {
+		if (exceptionType != null && exceptionType.eIsProxy()) {
+			InternalEObject oldExceptionType = (InternalEObject)exceptionType;
+			exceptionType = (TypeReference)eResolveProxy(oldExceptionType);
+			if (exceptionType != oldExceptionType) {
+				InternalEObject newExceptionType = (InternalEObject)exceptionType;
+				NotificationChain msgs = oldExceptionType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.RESCUE__EXCEPTION_TYPE, null, null);
+				if (newExceptionType.eInternalContainer() == null) {
+					msgs = newExceptionType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.RESCUE__EXCEPTION_TYPE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.RESCUE__EXCEPTION_TYPE, oldExceptionType, exceptionType));
+			}
+		}
+		return exceptionType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeReference basicGetExceptionType() {
 		return exceptionType;
 	}
 
@@ -204,7 +227,8 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 			case BehaviorPackage.RESCUE__BODY:
 				return getBody();
 			case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
-				return getExceptionType();
+				if (resolve) return getExceptionType();
+				return basicGetExceptionType();
 			case BehaviorPackage.RESCUE__EXCEPTION_NAME:
 				return getExceptionName();
 		}

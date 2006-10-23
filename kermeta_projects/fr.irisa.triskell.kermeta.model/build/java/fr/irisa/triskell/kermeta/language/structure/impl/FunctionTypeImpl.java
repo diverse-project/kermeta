@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeImpl.java,v 1.4 2006-08-16 11:20:48 dvojtise Exp $
+ * $Id: FunctionTypeImpl.java,v 1.5 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -90,6 +90,16 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	public TypeContainer getTypeContainer() {
 		if (eContainerFeatureID != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER) return null;
 		return (TypeContainer)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeContainer basicGetTypeContainer() {
+		if (eContainerFeatureID != StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER) return null;
+		return (TypeContainer)eInternalContainer();
 	}
 
 	/**
@@ -259,7 +269,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
-				return getTypeContainer();
+				if (resolve) return getTypeContainer();
+				return basicGetTypeContainer();
 			case StructurePackage.FUNCTION_TYPE__LEFT:
 				if (resolve) return getLeft();
 				return basicGetLeft();
@@ -318,7 +329,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
-				return getTypeContainer() != null;
+				return basicGetTypeContainer() != null;
 			case StructurePackage.FUNCTION_TYPE__LEFT:
 				return left != null;
 			case StructurePackage.FUNCTION_TYPE__RIGHT:

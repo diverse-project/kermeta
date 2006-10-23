@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoopImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: LoopImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -95,6 +95,29 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * @generated
 	 */
 	public Expression getInitialization() {
+		if (initialization != null && initialization.eIsProxy()) {
+			InternalEObject oldInitialization = (InternalEObject)initialization;
+			initialization = (Expression)eResolveProxy(oldInitialization);
+			if (initialization != oldInitialization) {
+				InternalEObject newInitialization = (InternalEObject)initialization;
+				NotificationChain msgs = oldInitialization.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LOOP__INITIALIZATION, null, null);
+				if (newInitialization.eInternalContainer() == null) {
+					msgs = newInitialization.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LOOP__INITIALIZATION, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.LOOP__INITIALIZATION, oldInitialization, initialization));
+			}
+		}
+		return initialization;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetInitialization() {
 		return initialization;
 	}
 
@@ -138,6 +161,29 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * @generated
 	 */
 	public Expression getBody() {
+		if (body != null && body.eIsProxy()) {
+			InternalEObject oldBody = (InternalEObject)body;
+			body = (Expression)eResolveProxy(oldBody);
+			if (body != oldBody) {
+				InternalEObject newBody = (InternalEObject)body;
+				NotificationChain msgs = oldBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LOOP__BODY, null, null);
+				if (newBody.eInternalContainer() == null) {
+					msgs = newBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LOOP__BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.LOOP__BODY, oldBody, body));
+			}
+		}
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetBody() {
 		return body;
 	}
 
@@ -181,6 +227,29 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * @generated
 	 */
 	public Expression getStopCondition() {
+		if (stopCondition != null && stopCondition.eIsProxy()) {
+			InternalEObject oldStopCondition = (InternalEObject)stopCondition;
+			stopCondition = (Expression)eResolveProxy(oldStopCondition);
+			if (stopCondition != oldStopCondition) {
+				InternalEObject newStopCondition = (InternalEObject)stopCondition;
+				NotificationChain msgs = oldStopCondition.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LOOP__STOP_CONDITION, null, null);
+				if (newStopCondition.eInternalContainer() == null) {
+					msgs = newStopCondition.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LOOP__STOP_CONDITION, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.LOOP__STOP_CONDITION, oldStopCondition, stopCondition));
+			}
+		}
+		return stopCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetStopCondition() {
 		return stopCondition;
 	}
 
@@ -243,11 +312,14 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.LOOP__INITIALIZATION:
-				return getInitialization();
+				if (resolve) return getInitialization();
+				return basicGetInitialization();
 			case BehaviorPackage.LOOP__BODY:
-				return getBody();
+				if (resolve) return getBody();
+				return basicGetBody();
 			case BehaviorPackage.LOOP__STOP_CONDITION:
-				return getStopCondition();
+				if (resolve) return getStopCondition();
+				return basicGetStopCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

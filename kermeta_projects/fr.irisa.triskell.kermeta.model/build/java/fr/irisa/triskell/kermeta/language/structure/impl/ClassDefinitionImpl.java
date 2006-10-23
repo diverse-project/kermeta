@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -191,7 +191,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 */
 	public EList getTypeParameter() {
 		if (typeParameter == null) {
-			typeParameter = new EObjectContainmentEList(TypeVariable.class, this, StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER);
+			typeParameter = new EObjectContainmentEList.Resolving(TypeVariable.class, this, StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER);
 		}
 		return typeParameter;
 	}
@@ -203,7 +203,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 */
 	public EList getInv() {
 		if (inv == null) {
-			inv = new EObjectContainmentWithInverseEList(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
+			inv = new EObjectContainmentWithInverseEList.Resolving(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
 		}
 		return inv;
 	}
@@ -236,7 +236,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 */
 	public EList getOwnedAttribute() {
 		if (ownedAttribute == null) {
-			ownedAttribute = new EObjectContainmentWithInverseEList(Property.class, this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, StructurePackage.PROPERTY__OWNING_CLASS);
+			ownedAttribute = new EObjectContainmentWithInverseEList.Resolving(Property.class, this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, StructurePackage.PROPERTY__OWNING_CLASS);
 		}
 		return ownedAttribute;
 	}
@@ -248,7 +248,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 */
 	public EList getOwnedOperation() {
 		if (ownedOperation == null) {
-			ownedOperation = new EObjectContainmentWithInverseEList(Operation.class, this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, StructurePackage.OPERATION__OWNING_CLASS);
+			ownedOperation = new EObjectContainmentWithInverseEList.Resolving(Operation.class, this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, StructurePackage.OPERATION__OWNING_CLASS);
 		}
 		return ownedOperation;
 	}

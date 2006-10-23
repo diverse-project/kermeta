@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpressionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: CallExpressionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -110,7 +110,7 @@ public abstract class CallExpressionImpl extends ExpressionImpl implements CallE
 	 */
 	public EList getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList(Expression.class, this, BehaviorPackage.CALL_EXPRESSION__PARAMETERS);
+			parameters = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.CALL_EXPRESSION__PARAMETERS);
 		}
 		return parameters;
 	}

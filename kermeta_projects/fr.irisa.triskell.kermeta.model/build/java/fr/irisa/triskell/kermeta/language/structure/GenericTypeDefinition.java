@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinition.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: GenericTypeDefinition.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -36,7 +36,7 @@ public interface GenericTypeDefinition extends TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariable" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariable" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getTypeParameter();

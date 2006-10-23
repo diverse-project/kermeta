@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: BlockImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -86,7 +86,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 */
 	public EList getStatement() {
 		if (statement == null) {
-			statement = new EObjectContainmentEList(Expression.class, this, BehaviorPackage.BLOCK__STATEMENT);
+			statement = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.BLOCK__STATEMENT);
 		}
 		return statement;
 	}
@@ -98,7 +98,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 */
 	public EList getRescueBlock() {
 		if (rescueBlock == null) {
-			rescueBlock = new EObjectContainmentEList(Rescue.class, this, BehaviorPackage.BLOCK__RESCUE_BLOCK);
+			rescueBlock = new EObjectContainmentEList.Resolving(Rescue.class, this, BehaviorPackage.BLOCK__RESCUE_BLOCK);
 		}
 		return rescueBlock;
 	}

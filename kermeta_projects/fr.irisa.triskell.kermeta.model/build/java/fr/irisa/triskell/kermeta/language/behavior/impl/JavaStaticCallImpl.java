@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: JavaStaticCallImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -119,7 +119,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 */
 	public EList getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList(Expression.class, this, BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS);
+			parameters = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS);
 		}
 		return parameters;
 	}

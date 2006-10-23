@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteral.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: TypeLiteral.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -35,7 +35,7 @@ public interface TypeLiteral extends Literal {
 	 * @return the value of the '<em>Typeref</em>' containment reference.
 	 * @see #setTyperef(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getTypeLiteral_Typeref()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	TypeReference getTyperef();

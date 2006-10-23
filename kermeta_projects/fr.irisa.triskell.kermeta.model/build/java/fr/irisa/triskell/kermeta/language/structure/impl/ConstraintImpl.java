@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ConstraintImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -123,6 +123,29 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	public Expression getBody() {
+		if (body != null && body.eIsProxy()) {
+			InternalEObject oldBody = (InternalEObject)body;
+			body = (Expression)eResolveProxy(oldBody);
+			if (body != oldBody) {
+				InternalEObject newBody = (InternalEObject)body;
+				NotificationChain msgs = oldBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StructurePackage.CONSTRAINT__BODY, null, null);
+				if (newBody.eInternalContainer() == null) {
+					msgs = newBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StructurePackage.CONSTRAINT__BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.CONSTRAINT__BODY, oldBody, body));
+			}
+		}
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetBody() {
 		return body;
 	}
 
@@ -217,6 +240,16 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ClassDefinition basicGetInvOwner() {
+		if (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER) return null;
+		return (ClassDefinition)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain basicSetInvOwner(ClassDefinition newInvOwner, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newInvOwner, StructurePackage.CONSTRAINT__INV_OWNER, msgs);
 		return msgs;
@@ -258,6 +291,16 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Operation basicGetPreOwner() {
+		if (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER) return null;
+		return (Operation)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain basicSetPreOwner(Operation newPreOwner, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newPreOwner, StructurePackage.CONSTRAINT__PRE_OWNER, msgs);
 		return msgs;
@@ -292,6 +335,16 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	public Operation getPostOwner() {
 		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER) return null;
 		return (Operation)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation basicGetPostOwner() {
+		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER) return null;
+		return (Operation)eInternalContainer();
 	}
 
 	/**
@@ -392,17 +445,21 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.CONSTRAINT__BODY:
-				return getBody();
+				if (resolve) return getBody();
+				return basicGetBody();
 			case StructurePackage.CONSTRAINT__STEREOTYPE:
 				return getStereotype();
 			case StructurePackage.CONSTRAINT__LANGUAGE:
 				return getLanguage();
 			case StructurePackage.CONSTRAINT__INV_OWNER:
-				return getInvOwner();
+				if (resolve) return getInvOwner();
+				return basicGetInvOwner();
 			case StructurePackage.CONSTRAINT__PRE_OWNER:
-				return getPreOwner();
+				if (resolve) return getPreOwner();
+				return basicGetPreOwner();
 			case StructurePackage.CONSTRAINT__POST_OWNER:
-				return getPostOwner();
+				if (resolve) return getPostOwner();
+				return basicGetPostOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -479,11 +536,11 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			case StructurePackage.CONSTRAINT__LANGUAGE:
 				return language != LANGUAGE_EDEFAULT;
 			case StructurePackage.CONSTRAINT__INV_OWNER:
-				return getInvOwner() != null;
+				return basicGetInvOwner() != null;
 			case StructurePackage.CONSTRAINT__PRE_OWNER:
-				return getPreOwner() != null;
+				return basicGetPreOwner() != null;
 			case StructurePackage.CONSTRAINT__POST_OWNER:
-				return getPostOwner() != null;
+				return basicGetPostOwner() != null;
 		}
 		return super.eIsSet(featureID);
 	}

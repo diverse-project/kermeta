@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeature.java,v 1.3 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: CallFeature.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -42,7 +42,7 @@ public interface CallFeature extends CallExpression {
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallFeature_Target()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Expression getTarget();

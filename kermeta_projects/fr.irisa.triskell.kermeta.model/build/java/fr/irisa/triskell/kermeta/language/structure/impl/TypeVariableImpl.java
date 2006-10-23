@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.4 2006-08-16 11:20:48 dvojtise Exp $
+ * $Id: TypeVariableImpl.java,v 1.5 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -100,6 +100,16 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public TypeContainer getTypeContainer() {
 		if (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER) return null;
 		return (TypeContainer)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeContainer basicGetTypeContainer() {
+		if (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER) return null;
+		return (TypeContainer)eInternalContainer();
 	}
 
 	/**
@@ -252,7 +262,8 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
-				return getTypeContainer();
+				if (resolve) return getTypeContainer();
+				return basicGetTypeContainer();
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				return getName();
 			case StructurePackage.TYPE_VARIABLE__SUPERTYPE:
@@ -310,7 +321,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
-				return getTypeContainer() != null;
+				return basicGetTypeContainer() != null;
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.TYPE_VARIABLE__SUPERTYPE:

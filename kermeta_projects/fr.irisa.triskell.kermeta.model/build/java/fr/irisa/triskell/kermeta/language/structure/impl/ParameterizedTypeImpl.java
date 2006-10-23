@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ParameterizedTypeImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -87,7 +87,7 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public EList getTypeParamBinding() {
 		if (typeParamBinding == null) {
-			typeParamBinding = new EObjectContainmentEList(TypeVariableBinding.class, this, StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
+			typeParamBinding = new EObjectContainmentEList.Resolving(TypeVariableBinding.class, this, StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 		}
 		return typeParamBinding;
 	}

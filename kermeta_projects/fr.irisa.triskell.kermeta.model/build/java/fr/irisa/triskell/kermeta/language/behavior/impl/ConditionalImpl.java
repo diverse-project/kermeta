@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionalImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ConditionalImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -95,6 +95,29 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 */
 	public Expression getThenBody() {
+		if (thenBody != null && thenBody.eIsProxy()) {
+			InternalEObject oldThenBody = (InternalEObject)thenBody;
+			thenBody = (Expression)eResolveProxy(oldThenBody);
+			if (thenBody != oldThenBody) {
+				InternalEObject newThenBody = (InternalEObject)thenBody;
+				NotificationChain msgs = oldThenBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CONDITIONAL__THEN_BODY, null, null);
+				if (newThenBody.eInternalContainer() == null) {
+					msgs = newThenBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CONDITIONAL__THEN_BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CONDITIONAL__THEN_BODY, oldThenBody, thenBody));
+			}
+		}
+		return thenBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetThenBody() {
 		return thenBody;
 	}
 
@@ -138,6 +161,29 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 */
 	public Expression getElseBody() {
+		if (elseBody != null && elseBody.eIsProxy()) {
+			InternalEObject oldElseBody = (InternalEObject)elseBody;
+			elseBody = (Expression)eResolveProxy(oldElseBody);
+			if (elseBody != oldElseBody) {
+				InternalEObject newElseBody = (InternalEObject)elseBody;
+				NotificationChain msgs = oldElseBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CONDITIONAL__ELSE_BODY, null, null);
+				if (newElseBody.eInternalContainer() == null) {
+					msgs = newElseBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CONDITIONAL__ELSE_BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CONDITIONAL__ELSE_BODY, oldElseBody, elseBody));
+			}
+		}
+		return elseBody;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetElseBody() {
 		return elseBody;
 	}
 
@@ -181,6 +227,29 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 */
 	public Expression getCondition() {
+		if (condition != null && condition.eIsProxy()) {
+			InternalEObject oldCondition = (InternalEObject)condition;
+			condition = (Expression)eResolveProxy(oldCondition);
+			if (condition != oldCondition) {
+				InternalEObject newCondition = (InternalEObject)condition;
+				NotificationChain msgs = oldCondition.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CONDITIONAL__CONDITION, null, null);
+				if (newCondition.eInternalContainer() == null) {
+					msgs = newCondition.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CONDITIONAL__CONDITION, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CONDITIONAL__CONDITION, oldCondition, condition));
+			}
+		}
+		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetCondition() {
 		return condition;
 	}
 
@@ -243,11 +312,14 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
-				return getThenBody();
+				if (resolve) return getThenBody();
+				return basicGetThenBody();
 			case BehaviorPackage.CONDITIONAL__ELSE_BODY:
-				return getElseBody();
+				if (resolve) return getElseBody();
+				return basicGetElseBody();
 			case BehaviorPackage.CONDITIONAL__CONDITION:
-				return getCondition();
+				if (resolve) return getCondition();
+				return basicGetCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

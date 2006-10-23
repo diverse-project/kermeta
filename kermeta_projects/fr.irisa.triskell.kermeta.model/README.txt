@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.10 2006-07-28 12:20:47 cfaucher Exp $
+$Id: README.txt,v 1.11 2006-10-23 15:40:50 cfaucher Exp $
 
 
 Leaders :
@@ -32,12 +32,15 @@ How to build this project :
 	* kermeta_java.ecore : a version of the model to generate java classes
 	
 2) Generate java code using emf
-	a) create kermeta.genmodel in build/ecore using eclipse wizard by loading kermeta_java.ecore 
+	a) create kermeta_java.genmodel in build/ecore using eclipse wizard by loading kermeta_java.ecore 
 		(the wizard name is EMF modeling framework/EMF models)
-	b) set the 'Model Directory' of  kermeta.genmodel to '/fr.irisa.triskell.kermeta.model/build/java' (in Properties tab)
-	c) set the Kermeta package 'Base Package' to 'fr.irisa.triskell' (in Properties tab)
-	d) set the Kermeta package 'Prefix' to 'Km' (in Properties tab)
-	e) 'Generate model code' from  kermeta.genmodel
+	b) In the Properties tab section "Model" of kermeta_java.genmodel:
+		set the 'Containment proxies' to 'true'
+		set the 'Model Directory' of  kermeta_java.genmodel to '/fr.irisa.triskell.kermeta.model/build/java'
+	c) In the Properties tab section "All" of kermeta_java.genmodel:
+		set the Kermeta package 'Base Package' to 'fr.irisa.triskell'
+		set the Kermeta package 'Prefix' to 'Km'
+	d) 'Generate Model Code', 'Generate Edit Code', 'Generate Editor Code' from  kermeta_java.genmodel
 
 3) Check that java source code generated in src/java compiles correctly
 
@@ -49,6 +52,10 @@ How to build this project :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.10  2006/07/28 12:20:47  cfaucher
+Addition : at step 2, d) set the name of the prefix property
+d) becomes e)
+
 Revision 1.9  2006/05/04 15:40:07  jmottu
 added support for constraints in kermeta
 

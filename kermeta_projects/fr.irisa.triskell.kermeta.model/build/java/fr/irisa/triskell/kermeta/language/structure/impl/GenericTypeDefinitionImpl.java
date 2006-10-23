@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: GenericTypeDefinitionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -72,7 +72,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 */
 	public EList getTypeParameter() {
 		if (typeParameter == null) {
-			typeParameter = new EObjectContainmentEList(TypeVariable.class, this, StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
+			typeParameter = new EObjectContainmentEList.Resolving(TypeVariable.class, this, StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
 		}
 		return typeParameter;
 	}

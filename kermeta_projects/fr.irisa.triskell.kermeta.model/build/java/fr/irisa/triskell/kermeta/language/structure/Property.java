@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Property.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -203,7 +203,7 @@ public interface Property extends MultiplicityElement {
 	 * @return the value of the '<em>Getter Body</em>' containment reference.
 	 * @see #setGetterBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_GetterBody()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Expression getGetterBody();
@@ -229,7 +229,7 @@ public interface Property extends MultiplicityElement {
 	 * @return the value of the '<em>Setter Body</em>' containment reference.
 	 * @see #setSetterBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_SetterBody()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Expression getSetterBody();

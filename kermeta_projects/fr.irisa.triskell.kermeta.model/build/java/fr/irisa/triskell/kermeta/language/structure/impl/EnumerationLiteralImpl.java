@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteralImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: EnumerationLiteralImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -64,6 +64,16 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements Enumerat
 	public Enumeration getEnumeration() {
 		if (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION) return null;
 		return (Enumeration)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumeration basicGetEnumeration() {
+		if (eContainerFeatureID != StructurePackage.ENUMERATION_LITERAL__ENUMERATION) return null;
+		return (Enumeration)eInternalContainer();
 	}
 
 	/**
@@ -146,7 +156,8 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements Enumerat
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
-				return getEnumeration();
+				if (resolve) return getEnumeration();
+				return basicGetEnumeration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -187,7 +198,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements Enumerat
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION_LITERAL__ENUMERATION:
-				return getEnumeration() != null;
+				return basicGetEnumeration() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaParameterImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: LambdaParameterImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -115,6 +115,29 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * @generated
 	 */
 	public TypeReference getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (TypeReference)eResolveProxy(oldType);
+			if (type != oldType) {
+				InternalEObject newType = (InternalEObject)type;
+				NotificationChain msgs = oldType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LAMBDA_PARAMETER__TYPE, null, null);
+				if (newType.eInternalContainer() == null) {
+					msgs = newType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LAMBDA_PARAMETER__TYPE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.LAMBDA_PARAMETER__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeReference basicGetType() {
 		return type;
 	}
 
@@ -175,7 +198,8 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 			case BehaviorPackage.LAMBDA_PARAMETER__NAME:
 				return getName();
 			case BehaviorPackage.LAMBDA_PARAMETER__TYPE:
-				return getType();
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

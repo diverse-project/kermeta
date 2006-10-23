@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Block.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
+ * $Id: Block.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -37,7 +37,7 @@ public interface Block extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statement</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock_Statement()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getStatement();
@@ -53,7 +53,7 @@ public interface Block extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rescue Block</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock_RescueBlock()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Rescue" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Rescue" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getRescueBlock();

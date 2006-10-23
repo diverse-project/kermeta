@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Rescue.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: Rescue.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -38,7 +38,7 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Body</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_Body()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" required="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	EList getBody();
@@ -54,7 +54,7 @@ public interface Rescue extends fr.irisa.triskell.kermeta.language.structure.Obj
 	 * @return the value of the '<em>Exception Type</em>' containment reference.
 	 * @see #setExceptionType(TypeReference)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getRescue_ExceptionType()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	TypeReference getExceptionType();

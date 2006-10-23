@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpression.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: CallExpression.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -38,7 +38,7 @@ public interface CallExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_Parameters()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getParameters();

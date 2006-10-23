@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: OperationImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -205,7 +205,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public EList getOwnedParameter() {
 		if (ownedParameter == null) {
-			ownedParameter = new EObjectContainmentWithInverseEList(Parameter.class, this, StructurePackage.OPERATION__OWNED_PARAMETER, StructurePackage.PARAMETER__OPERATION);
+			ownedParameter = new EObjectContainmentWithInverseEList.Resolving(Parameter.class, this, StructurePackage.OPERATION__OWNED_PARAMETER, StructurePackage.PARAMETER__OPERATION);
 		}
 		return ownedParameter;
 	}
@@ -217,7 +217,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public EList getPre() {
 		if (pre == null) {
-			pre = new EObjectContainmentWithInverseEList(Constraint.class, this, StructurePackage.OPERATION__PRE, StructurePackage.CONSTRAINT__PRE_OWNER);
+			pre = new EObjectContainmentWithInverseEList.Resolving(Constraint.class, this, StructurePackage.OPERATION__PRE, StructurePackage.CONSTRAINT__PRE_OWNER);
 		}
 		return pre;
 	}
@@ -229,7 +229,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public EList getPost() {
 		if (post == null) {
-			post = new EObjectContainmentWithInverseEList(Constraint.class, this, StructurePackage.OPERATION__POST, StructurePackage.CONSTRAINT__POST_OWNER);
+			post = new EObjectContainmentWithInverseEList.Resolving(Constraint.class, this, StructurePackage.OPERATION__POST, StructurePackage.CONSTRAINT__POST_OWNER);
 		}
 		return post;
 	}
@@ -240,6 +240,29 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	public Expression getBody() {
+		if (body != null && body.eIsProxy()) {
+			InternalEObject oldBody = (InternalEObject)body;
+			body = (Expression)eResolveProxy(oldBody);
+			if (body != oldBody) {
+				InternalEObject newBody = (InternalEObject)body;
+				NotificationChain msgs = oldBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StructurePackage.OPERATION__BODY, null, null);
+				if (newBody.eInternalContainer() == null) {
+					msgs = newBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StructurePackage.OPERATION__BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.OPERATION__BODY, oldBody, body));
+			}
+		}
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetBody() {
 		return body;
 	}
 
@@ -323,6 +346,16 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	public ClassDefinition getOwningClass() {
 		if (eContainerFeatureID != StructurePackage.OPERATION__OWNING_CLASS) return null;
 		return (ClassDefinition)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDefinition basicGetOwningClass() {
+		if (eContainerFeatureID != StructurePackage.OPERATION__OWNING_CLASS) return null;
+		return (ClassDefinition)eInternalContainer();
 	}
 
 	/**
@@ -441,12 +474,14 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__POST:
 				return getPost();
 			case StructurePackage.OPERATION__BODY:
-				return getBody();
+				if (resolve) return getBody();
+				return basicGetBody();
 			case StructurePackage.OPERATION__SUPER_OPERATION:
 				if (resolve) return getSuperOperation();
 				return basicGetSuperOperation();
 			case StructurePackage.OPERATION__OWNING_CLASS:
-				return getOwningClass();
+				if (resolve) return getOwningClass();
+				return basicGetOwningClass();
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return getTypeParameter();
 		}
@@ -556,7 +591,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__SUPER_OPERATION:
 				return superOperation != null;
 			case StructurePackage.OPERATION__OWNING_CLASS:
-				return getOwningClass() != null;
+				return basicGetOwningClass() != null;
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return typeParameter != null && !typeParameter.isEmpty();
 		}

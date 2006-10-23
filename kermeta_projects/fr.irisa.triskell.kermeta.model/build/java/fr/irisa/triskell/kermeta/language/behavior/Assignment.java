@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Assignment.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: Assignment.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -37,7 +37,7 @@ public interface Assignment extends Expression {
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(CallExpression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_Target()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	CallExpression getTarget();
@@ -63,7 +63,7 @@ public interface Assignment extends Expression {
 	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getAssignment_Value()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	Expression getValue();

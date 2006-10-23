@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeDefinitionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ModelTypeDefinitionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -73,7 +73,7 @@ public class ModelTypeDefinitionImpl extends GenericTypeDefinitionImpl implement
 	 */
 	public EList getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
-			ownedTypeDefinition = new EObjectContainmentEList(TypeDefinition.class, this, StructurePackage.MODEL_TYPE_DEFINITION__OWNED_TYPE_DEFINITION);
+			ownedTypeDefinition = new EObjectContainmentEList.Resolving(TypeDefinition.class, this, StructurePackage.MODEL_TYPE_DEFINITION__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
 	}

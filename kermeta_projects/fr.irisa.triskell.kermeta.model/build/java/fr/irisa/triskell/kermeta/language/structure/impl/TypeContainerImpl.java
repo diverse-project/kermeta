@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeContainerImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
+ * $Id: TypeContainerImpl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -73,7 +73,7 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 */
 	public EList getContainedType() {
 		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList(Type.class, this, StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+			containedType = new EObjectContainmentWithInverseEList.Resolving(Type.class, this, StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
 	}

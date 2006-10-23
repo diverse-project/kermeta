@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpressionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: LambdaExpressionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -89,7 +89,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 */
 	public EList getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList(LambdaParameter.class, this, BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS);
+			parameters = new EObjectContainmentEList.Resolving(LambdaParameter.class, this, BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -100,6 +100,29 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * @generated
 	 */
 	public Expression getBody() {
+		if (body != null && body.eIsProxy()) {
+			InternalEObject oldBody = (InternalEObject)body;
+			body = (Expression)eResolveProxy(oldBody);
+			if (body != oldBody) {
+				InternalEObject newBody = (InternalEObject)body;
+				NotificationChain msgs = oldBody.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LAMBDA_EXPRESSION__BODY, null, null);
+				if (newBody.eInternalContainer() == null) {
+					msgs = newBody.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.LAMBDA_EXPRESSION__BODY, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.LAMBDA_EXPRESSION__BODY, oldBody, body));
+			}
+		}
+		return body;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetBody() {
 		return body;
 	}
 
@@ -162,7 +185,8 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 			case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
 				return getParameters();
 			case BehaviorPackage.LAMBDA_EXPRESSION__BODY:
-				return getBody();
+				if (resolve) return getBody();
+				return basicGetBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

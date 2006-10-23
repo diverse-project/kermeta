@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ParameterImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -65,6 +65,16 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	public Operation getOperation() {
 		if (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION) return null;
 		return (Operation)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation basicGetOperation() {
+		if (eContainerFeatureID != StructurePackage.PARAMETER__OPERATION) return null;
+		return (Operation)eInternalContainer();
 	}
 
 	/**
@@ -147,7 +157,8 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
-				return getOperation();
+				if (resolve) return getOperation();
+				return basicGetOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -188,7 +199,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
-				return getOperation() != null;
+				return basicGetOperation() != null;
 		}
 		return super.eIsSet(featureID);
 	}

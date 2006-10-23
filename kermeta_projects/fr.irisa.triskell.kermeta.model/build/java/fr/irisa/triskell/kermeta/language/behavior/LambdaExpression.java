@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpression.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
+ * $Id: LambdaExpression.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -37,7 +37,7 @@ public interface LambdaExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Parameters()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.LambdaParameter" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.behavior.LambdaParameter" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getParameters();
@@ -53,7 +53,7 @@ public interface LambdaExpression extends Expression {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLambdaExpression_Body()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	Expression getBody();

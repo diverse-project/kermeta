@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainer.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: TypeDefinitionContainer.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -36,7 +36,7 @@ public interface TypeDefinitionContainer extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Type Definition</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinitionContainer_OwnedTypeDefinition()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeDefinition" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeDefinition" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getOwnedTypeDefinition();

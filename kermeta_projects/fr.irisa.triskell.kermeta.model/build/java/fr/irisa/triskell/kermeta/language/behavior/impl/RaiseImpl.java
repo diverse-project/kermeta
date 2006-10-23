@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RaiseImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: RaiseImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -73,6 +73,29 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * @generated
 	 */
 	public Expression getExpression() {
+		if (expression != null && expression.eIsProxy()) {
+			InternalEObject oldExpression = (InternalEObject)expression;
+			expression = (Expression)eResolveProxy(oldExpression);
+			if (expression != oldExpression) {
+				InternalEObject newExpression = (InternalEObject)expression;
+				NotificationChain msgs = oldExpression.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.RAISE__EXPRESSION, null, null);
+				if (newExpression.eInternalContainer() == null) {
+					msgs = newExpression.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.RAISE__EXPRESSION, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.RAISE__EXPRESSION, oldExpression, expression));
+			}
+		}
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetExpression() {
 		return expression;
 	}
 
@@ -131,7 +154,8 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.RAISE__EXPRESSION:
-				return getExpression();
+				if (resolve) return getExpression();
+				return basicGetExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

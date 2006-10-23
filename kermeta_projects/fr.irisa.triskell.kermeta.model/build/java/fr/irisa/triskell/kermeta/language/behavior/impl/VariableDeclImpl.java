@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDeclImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: VariableDeclImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -106,6 +106,29 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 	 * @generated
 	 */
 	public Expression getInitialization() {
+		if (initialization != null && initialization.eIsProxy()) {
+			InternalEObject oldInitialization = (InternalEObject)initialization;
+			initialization = (Expression)eResolveProxy(oldInitialization);
+			if (initialization != oldInitialization) {
+				InternalEObject newInitialization = (InternalEObject)initialization;
+				NotificationChain msgs = oldInitialization.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.VARIABLE_DECL__INITIALIZATION, null, null);
+				if (newInitialization.eInternalContainer() == null) {
+					msgs = newInitialization.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.VARIABLE_DECL__INITIALIZATION, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.VARIABLE_DECL__INITIALIZATION, oldInitialization, initialization));
+			}
+		}
+		return initialization;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetInitialization() {
 		return initialization;
 	}
 
@@ -170,6 +193,29 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 	 * @generated
 	 */
 	public TypeReference getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (TypeReference)eResolveProxy(oldType);
+			if (type != oldType) {
+				InternalEObject newType = (InternalEObject)type;
+				NotificationChain msgs = oldType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.VARIABLE_DECL__TYPE, null, null);
+				if (newType.eInternalContainer() == null) {
+					msgs = newType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.VARIABLE_DECL__TYPE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.VARIABLE_DECL__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeReference basicGetType() {
 		return type;
 	}
 
@@ -230,11 +276,13 @@ public class VariableDeclImpl extends ExpressionImpl implements VariableDecl {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.VARIABLE_DECL__INITIALIZATION:
-				return getInitialization();
+				if (resolve) return getInitialization();
+				return basicGetInitialization();
 			case BehaviorPackage.VARIABLE_DECL__IDENTIFIER:
 				return getIdentifier();
 			case BehaviorPackage.VARIABLE_DECL__TYPE:
-				return getType();
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

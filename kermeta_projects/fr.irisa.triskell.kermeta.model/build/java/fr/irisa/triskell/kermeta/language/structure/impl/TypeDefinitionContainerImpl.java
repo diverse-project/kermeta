@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: TypeDefinitionContainerImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -72,7 +72,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 */
 	public EList getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
-			ownedTypeDefinition = new EObjectContainmentEList(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
+			ownedTypeDefinition = new EObjectContainmentEList.Resolving(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.3 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: CallFeatureImpl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -130,6 +130,29 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 */
 	public Expression getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (Expression)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
+				InternalEObject newTarget = (InternalEObject)target;
+				NotificationChain msgs = oldTarget.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, null);
+				if (newTarget.eInternalContainer() == null) {
+					msgs = newTarget.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__TARGET, oldTarget, target));
+			}
+		}
+		return target;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetTarget() {
 		return target;
 	}
 
@@ -323,7 +346,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
-				return getTarget();
+				if (resolve) return getTarget();
+				return basicGetTarget();
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
 				return isIsAtpre() ? Boolean.TRUE : Boolean.FALSE;
 			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: EnumerationImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -72,7 +72,7 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 */
 	public EList getOwnedLiteral() {
 		if (ownedLiteral == null) {
-			ownedLiteral = new EObjectContainmentWithInverseEList(EnumerationLiteral.class, this, StructurePackage.ENUMERATION__OWNED_LITERAL, StructurePackage.ENUMERATION_LITERAL__ENUMERATION);
+			ownedLiteral = new EObjectContainmentWithInverseEList.Resolving(EnumerationLiteral.class, this, StructurePackage.ENUMERATION__OWNED_LITERAL, StructurePackage.ENUMERATION_LITERAL__ENUMERATION);
 		}
 		return ownedLiteral;
 	}

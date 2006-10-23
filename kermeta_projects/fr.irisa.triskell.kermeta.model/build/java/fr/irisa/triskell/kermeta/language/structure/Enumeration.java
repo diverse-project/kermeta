@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Enumeration.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Enumeration.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -38,7 +38,7 @@ public interface Enumeration extends DataType {
 	 * @return the value of the '<em>Owned Literal</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getEnumeration_OwnedLiteral()
 	 * @see fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral#getEnumeration
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral" opposite="enumeration" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral" opposite="enumeration" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList getOwnedLiteral();

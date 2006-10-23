@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteralImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: TypeLiteralImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -73,6 +73,29 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * @generated
 	 */
 	public TypeReference getTyperef() {
+		if (typeref != null && typeref.eIsProxy()) {
+			InternalEObject oldTyperef = (InternalEObject)typeref;
+			typeref = (TypeReference)eResolveProxy(oldTyperef);
+			if (typeref != oldTyperef) {
+				InternalEObject newTyperef = (InternalEObject)typeref;
+				NotificationChain msgs = oldTyperef.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.TYPE_LITERAL__TYPEREF, null, null);
+				if (newTyperef.eInternalContainer() == null) {
+					msgs = newTyperef.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.TYPE_LITERAL__TYPEREF, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.TYPE_LITERAL__TYPEREF, oldTyperef, typeref));
+			}
+		}
+		return typeref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeReference basicGetTyperef() {
 		return typeref;
 	}
 
@@ -131,7 +154,8 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.TYPE_LITERAL__TYPEREF:
-				return getTyperef();
+				if (resolve) return getTyperef();
+				return basicGetTyperef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

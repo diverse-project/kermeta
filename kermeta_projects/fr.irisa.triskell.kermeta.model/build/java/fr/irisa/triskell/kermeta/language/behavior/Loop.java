@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Loop.java,v 1.3 2006-09-22 12:23:06 cfaucher Exp $
+ * $Id: Loop.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -37,7 +37,7 @@ public interface Loop extends Expression {
 	 * @return the value of the '<em>Initialization</em>' containment reference.
 	 * @see #setInitialization(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_Initialization()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Expression getInitialization();
@@ -63,7 +63,7 @@ public interface Loop extends Expression {
 	 * @return the value of the '<em>Body</em>' containment reference.
 	 * @see #setBody(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_Body()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	Expression getBody();
@@ -89,7 +89,7 @@ public interface Loop extends Expression {
 	 * @return the value of the '<em>Stop Condition</em>' containment reference.
 	 * @see #setStopCondition(Expression)
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getLoop_StopCondition()
-	 * @model containment="true" required="true"
+	 * @model containment="true" resolveProxies="true" required="true"
 	 * @generated
 	 */
 	Expression getStopCondition();
