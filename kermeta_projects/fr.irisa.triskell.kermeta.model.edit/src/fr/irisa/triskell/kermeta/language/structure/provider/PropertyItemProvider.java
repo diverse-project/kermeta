@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.9 2006-10-23 16:08:45 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.10 2006-10-24 09:19:19 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -12,7 +12,8 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
+
 import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 import java.util.ArrayList;
@@ -201,17 +202,19 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * @generated
 	 */
 	protected void addIsReadOnlyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(), getResourceLocator(),
-						getString("_UI_Property_isReadOnly_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_Property_isReadOnly_feature",
-								"_UI_Property_type"),
-						StructurePackage.Literals.PROPERTY__IS_READ_ONLY, true,
-						false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_isReadOnly_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_isReadOnly_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__IS_READ_ONLY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -221,14 +224,19 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * @generated
 	 */
 	protected void addDefaultPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Property_default_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Property_default_feature", "_UI_Property_type"),
-				StructurePackage.Literals.PROPERTY__DEFAULT, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_default_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_default_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__DEFAULT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -238,17 +246,19 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * @generated
 	 */
 	protected void addIsCompositePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(), getResourceLocator(),
-						getString("_UI_Property_isComposite_feature"),
-						getString("_UI_PropertyDescriptor_description",
-								"_UI_Property_isComposite_feature",
-								"_UI_Property_type"),
-						StructurePackage.Literals.PROPERTY__IS_COMPOSITE, true,
-						false, false,
-						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_isComposite_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_isComposite_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__IS_COMPOSITE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -258,14 +268,19 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * @generated
 	 */
 	protected void addIsDerivedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Property_isDerived_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Property_isDerived_feature", "_UI_Property_type"),
-				StructurePackage.Literals.PROPERTY__IS_DERIVED, true, false,
-				false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_isDerived_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_isDerived_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__IS_DERIVED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -275,58 +290,55 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * @generated
 	 */
 	protected void addIsIDPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Property_isID_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Property_isID_feature", "_UI_Property_type"),
-				StructurePackage.Literals.PROPERTY__IS_ID, true, false, false,
-				ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Property_isID_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Property_isID_feature", "_UI_Property_type"),
+				 StructurePackage.Literals.PROPERTY__IS_ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(StructurePackage.Literals.PROPERTY__GETTER_BODY);
-			childrenFeatures
-					.add(StructurePackage.Literals.PROPERTY__SETTER_BODY);
+			childrenFeatures.add(StructurePackage.Literals.PROPERTY__GETTER_BODY);
+			childrenFeatures.add(StructurePackage.Literals.PROPERTY__SETTER_BODY);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Property.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Property.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/Property"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Property"));
 	}
 
 	/**
@@ -346,205 +358,240 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Property.class)) {
-		case StructurePackage.PROPERTY__IS_READ_ONLY:
-		case StructurePackage.PROPERTY__DEFAULT:
-		case StructurePackage.PROPERTY__IS_COMPOSITE:
-		case StructurePackage.PROPERTY__IS_DERIVED:
-		case StructurePackage.PROPERTY__IS_ID:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
-			return;
-		case StructurePackage.PROPERTY__GETTER_BODY:
-		case StructurePackage.PROPERTY__SETTER_BODY:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
-			return;
+			case StructurePackage.PROPERTY__IS_READ_ONLY:
+			case StructurePackage.PROPERTY__DEFAULT:
+			case StructurePackage.PROPERTY__IS_COMPOSITE:
+			case StructurePackage.PROPERTY__IS_DERIVED:
+			case StructurePackage.PROPERTY__IS_ID:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case StructurePackage.PROPERTY__GETTER_BODY:
+			case StructurePackage.PROPERTY__SETTER_BODY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds to the collection of
-	 * {@link org.eclipse.emf.edit.command.CommandParameter}s describing all of
-	 * the children that can be created under this object. <!-- begin-user-doc
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
-	protected void collectNewChildDescriptors(Collection newChildDescriptors,
-			Object object) {
+	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createAssignment()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createBlock()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallVariable()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallFeature()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallSuperOperation()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallResult()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallResult()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallValue()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallValue()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createConditional()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createConditional()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createRaise()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createRaise()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createEmptyExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createLambdaExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createIntegerLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createStringLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createBooleanLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createTypeLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createVoidLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createLoop()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createLoop()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createSelfExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__GETTER_BODY,
-				BehaviorFactory.eINSTANCE.createVariableDecl()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__GETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createAssignment()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createBlock()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallVariable()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallFeature()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallSuperOperation()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallResult()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallResult()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createCallValue()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createCallValue()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createConditional()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createConditional()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createRaise()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createRaise()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createEmptyExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createLambdaExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createIntegerLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createStringLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createBooleanLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createTypeLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createVoidLiteral()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createLoop()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createLoop()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createSelfExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
-		newChildDescriptors.add(createChildParameter(
-				StructurePackage.Literals.PROPERTY__SETTER_BODY,
-				BehaviorFactory.eINSTANCE.createVariableDecl()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.PROPERTY__SETTER_BODY,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
 	/**
@@ -554,18 +601,18 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * 
 	 * @generated
 	 */
-	public String getCreateChildText(Object owner, Object feature,
-			Object child, Collection selection) {
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == StructurePackage.Literals.PROPERTY__GETTER_BODY
-				|| childFeature == StructurePackage.Literals.PROPERTY__SETTER_BODY;
+		boolean qualify =
+			childFeature == StructurePackage.Literals.PROPERTY__GETTER_BODY ||
+			childFeature == StructurePackage.Literals.PROPERTY__SETTER_BODY;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}
@@ -577,7 +624,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return Kermeta_javaEditPlugin.INSTANCE;
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

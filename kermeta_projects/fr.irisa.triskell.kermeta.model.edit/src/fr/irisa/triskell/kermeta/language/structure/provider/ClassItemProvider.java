@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.8 2006-10-06 08:40:46 cfaucher Exp $
+ * $Id: ClassItemProvider.java,v 1.9 2006-10-24 09:19:19 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -10,7 +10,7 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -75,14 +75,19 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	 * @generated
 	 */
 	protected void addOwnedAttributePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Class_ownedAttribute_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Class_ownedAttribute_feature", "_UI_Class_type"),
-				StructurePackage.Literals.CLASS__OWNED_ATTRIBUTE, false, false,
-				false, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_ownedAttribute_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_ownedAttribute_feature", "_UI_Class_type"),
+				 StructurePackage.Literals.CLASS__OWNED_ATTRIBUTE,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -92,14 +97,19 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	 * @generated
 	 */
 	protected void addOwnedOperationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Class_ownedOperation_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Class_ownedOperation_feature", "_UI_Class_type"),
-				StructurePackage.Literals.CLASS__OWNED_OPERATION, false, false,
-				false, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_ownedOperation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_ownedOperation_feature", "_UI_Class_type"),
+				 StructurePackage.Literals.CLASS__OWNED_OPERATION,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -109,14 +119,19 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	 * @generated
 	 */
 	protected void addSuperClassPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Class_superClass_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Class_superClass_feature", "_UI_Class_type"),
-				StructurePackage.Literals.CLASS__SUPER_CLASS, false, false,
-				false, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_superClass_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_superClass_feature", "_UI_Class_type"),
+				 StructurePackage.Literals.CLASS__SUPER_CLASS,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -126,41 +141,50 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	 * @generated
 	 */
 	protected void addIsAbstractPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Class_isAbstract_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Class_isAbstract_feature", "_UI_Class_type"),
-				StructurePackage.Literals.CLASS__IS_ABSTRACT, false, false,
-				false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_isAbstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_isAbstract_feature", "_UI_Class_type"),
+				 StructurePackage.Literals.CLASS__IS_ABSTRACT,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_Class_name_feature"), getString(
-						"_UI_PropertyDescriptor_description",
-						"_UI_Class_name_feature", "_UI_Class_type"),
-				StructurePackage.Literals.CLASS__NAME, false, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Class_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Class_name_feature", "_UI_Class_type"),
+				 StructurePackage.Literals.CLASS__NAME,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns Class.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This returns Class.gif.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/Class"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Class"));
 	}
 
 	/**
@@ -189,33 +213,29 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification
-				.getFeatureID(fr.irisa.triskell.kermeta.language.structure.Class.class)) {
-		case StructurePackage.CLASS__IS_ABSTRACT:
-		case StructurePackage.CLASS__NAME:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
-			return;
+		switch (notification.getFeatureID(fr.irisa.triskell.kermeta.language.structure.Class.class)) {
+			case StructurePackage.CLASS__IS_ABSTRACT:
+			case StructurePackage.CLASS__NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds to the collection of
-	 * {@link org.eclipse.emf.edit.command.CommandParameter}s describing all of
-	 * the children that can be created under this object. <!-- begin-user-doc
+	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing all of the children that can be created under this object.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors,
@@ -230,7 +250,7 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return Kermeta_javaEditPlugin.INSTANCE;
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

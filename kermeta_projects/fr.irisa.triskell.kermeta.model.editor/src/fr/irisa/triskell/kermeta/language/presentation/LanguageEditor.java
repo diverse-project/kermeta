@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguageEditor.java,v 1.1 2006-09-13 16:49:00 cfaucher Exp $
+ * $Id: LanguageEditor.java,v 1.2 2006-10-24 09:19:08 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.presentation;
 
@@ -162,7 +162,7 @@ import fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProvider
 
 import fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
 
-import fr.irisa.triskell.kermeta.presentation.Kermeta_javaEditorPlugin;
+import fr.irisa.triskell.kermeta.presentation.KermetaEditorPlugin;
 
 import fr.irisa.triskell.kermeta.provider.KmItemProviderAdapterFactory;
 
@@ -526,7 +526,7 @@ public class LanguageEditor
 						}
 					}
 					catch (CoreException exception) {
-						Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+						KermetaEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			}
@@ -638,7 +638,7 @@ public class LanguageEditor
 					showTabs();
 				}
 				catch (PartInitException exception) {
-					Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+					KermetaEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 
@@ -649,7 +649,7 @@ public class LanguageEditor
 						markerHelper.createMarkers(diagnostic);
 					}
 					catch (CoreException exception) {
-						Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+						KermetaEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			}
@@ -1441,7 +1441,7 @@ public class LanguageEditor
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
 			//
-			Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+			KermetaEditorPlugin.INSTANCE.log(exception);
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
@@ -1531,7 +1531,7 @@ public class LanguageEditor
 			}
 		}
 		catch (CoreException exception) {
-			Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+			KermetaEditorPlugin.INSTANCE.log(exception);
 		}
 	}
 
@@ -1652,7 +1652,7 @@ public class LanguageEditor
 	 * @generated
 	 */
 	private static String getString(String key) {
-		return Kermeta_javaEditorPlugin.INSTANCE.getString(key);
+		return KermetaEditorPlugin.INSTANCE.getString(key);
 	}
 
 	/**
@@ -1662,7 +1662,7 @@ public class LanguageEditor
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
-		return Kermeta_javaEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
+		return KermetaEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
 	/**

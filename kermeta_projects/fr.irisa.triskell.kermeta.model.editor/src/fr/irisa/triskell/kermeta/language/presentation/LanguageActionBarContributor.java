@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LanguageActionBarContributor.java,v 1.1 2006-09-13 16:49:00 cfaucher Exp $
+ * $Id: LanguageActionBarContributor.java,v 1.2 2006-10-24 09:19:08 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.presentation;
 
-import fr.irisa.triskell.kermeta.presentation.Kermeta_javaEditorPlugin;
+import fr.irisa.triskell.kermeta.presentation.KermetaEditorPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,13 +78,13 @@ public class LanguageActionBarContributor
 	 * @generated
 	 */
 	protected IAction showPropertiesViewAction =
-		new Action(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
+		new Action(KermetaEditorPlugin.INSTANCE.getString("_UI_ShowPropertiesView_menu_item")) {
 			public void run() {
 				try {
 					getPage().showView("org.eclipse.ui.views.PropertySheet");
 				}
 				catch (PartInitException exception) {
-					Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+					KermetaEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 		};
@@ -97,7 +97,7 @@ public class LanguageActionBarContributor
 	 * @generated
 	 */
 	protected IAction refreshViewerAction =
-		new Action(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
+		new Action(KermetaEditorPlugin.INSTANCE.getString("_UI_RefreshViewer_menu_item")) {
 			public boolean isEnabled() {
 				return activeEditorPart instanceof IViewerProvider;
 			}
@@ -180,7 +180,7 @@ public class LanguageActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditor_menu"), "fr.irisa.triskell.kermeta.languageMenuID");
+		IMenuManager submenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_LanguageEditor_menu"), "fr.irisa.triskell.kermeta.languageMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));
@@ -189,12 +189,12 @@ public class LanguageActionBarContributor
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		createChildMenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
 		submenuManager.insertBefore("additions", createChildMenuManager);
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		createSiblingMenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		submenuManager.insertBefore("additions", createSiblingMenuManager);
 
 		// Force an update because Eclipse hides empty menus now.
@@ -384,11 +384,11 @@ public class LanguageActionBarContributor
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
-		submenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
+		submenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_CreateChild_menu_item"));
 		populateManager(submenuManager, createChildActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 
-		submenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
+		submenuManager = new MenuManager(KermetaEditorPlugin.INSTANCE.getString("_UI_CreateSibling_menu_item"));
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager);
 	}

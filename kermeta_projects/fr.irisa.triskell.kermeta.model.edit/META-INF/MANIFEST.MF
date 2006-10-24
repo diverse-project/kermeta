@@ -4,7 +4,7 @@ Bundle-Name: Kermeta Emf-Edit
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.model.edit; singleton:=true
 Bundle-Version: 0.3.1
 Bundle-ClassPath: .
-Bundle-Activator: fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin$Implementation
+Bundle-Activator: fr.irisa.triskell.kermeta.provider.KermetaEditPlugin$Implementation
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.kermeta.language.behavior.provider,

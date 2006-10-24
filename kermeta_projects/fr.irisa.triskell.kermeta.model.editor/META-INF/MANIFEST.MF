@@ -4,7 +4,7 @@ Bundle-Name: Kermeta Emf-Editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.model.editor; singleton:=true
 Bundle-Version: 0.3.1
 Bundle-ClassPath: .
-Bundle-Activator: fr.irisa.triskell.kermeta.presentation.Kermeta_javaEditorPlugin$Implementation
+Bundle-Activator: fr.irisa.triskell.kermeta.presentation.KermetaEditorPlugin$Implementation
 Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.kermeta.language.behavior.presentation,
@@ -17,5 +17,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport,
- fr.irisa.triskell.kermeta
+ fr.irisa.triskell.kermeta,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.ecore.editor
 Eclipse-LazyStart: true

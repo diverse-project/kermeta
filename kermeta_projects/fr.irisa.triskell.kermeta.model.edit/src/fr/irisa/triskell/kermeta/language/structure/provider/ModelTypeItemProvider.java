@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeItemProvider.java,v 1.5 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: ModelTypeItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -111,7 +111,7 @@ public class ModelTypeItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return Kermeta_javaEditPlugin.INSTANCE;
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

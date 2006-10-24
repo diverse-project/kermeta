@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.3 2006-10-24 09:19:08 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -524,7 +524,7 @@ public class KmEditor
 						}
 					}
 					catch (CoreException exception) {
-						Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+						KermetaEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			}
@@ -636,7 +636,7 @@ public class KmEditor
 					showTabs();
 				}
 				catch (PartInitException exception) {
-					Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+					KermetaEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 
@@ -647,7 +647,7 @@ public class KmEditor
 						markerHelper.createMarkers(diagnostic);
 					}
 					catch (CoreException exception) {
-						Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+						KermetaEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			}
@@ -1439,7 +1439,7 @@ public class KmEditor
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
 			//
-			Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+			KermetaEditorPlugin.INSTANCE.log(exception);
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
@@ -1529,7 +1529,7 @@ public class KmEditor
 			}
 		}
 		catch (CoreException exception) {
-			Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+			KermetaEditorPlugin.INSTANCE.log(exception);
 		}
 	}
 
@@ -1650,7 +1650,7 @@ public class KmEditor
 	 * @generated
 	 */
 	private static String getString(String key) {
-		return Kermeta_javaEditorPlugin.INSTANCE.getString(key);
+		return KermetaEditorPlugin.INSTANCE.getString(key);
 	}
 
 	/**
@@ -1660,7 +1660,7 @@ public class KmEditor
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
-		return Kermeta_javaEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
+		return KermetaEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageItemProvider.java,v 1.6 2006-10-23 16:08:45 cfaucher Exp $
+ * $Id: PackageItemProvider.java,v 1.7 2006-10-24 09:19:19 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -10,7 +10,7 @@ package fr.irisa.triskell.kermeta.language.structure.provider;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -214,7 +214,7 @@ public class PackageItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return Kermeta_javaEditPlugin.INSTANCE;
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

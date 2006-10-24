@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmModelWizard.java,v 1.3 2006-09-27 11:55:05 cfaucher Exp $
+ * $Id: KmModelWizard.java,v 1.4 2006-10-24 09:19:08 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -73,7 +73,10 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 
 import fr.irisa.triskell.kermeta.KmFactory;
 import fr.irisa.triskell.kermeta.KmPackage;
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
+
+
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
@@ -161,8 +164,8 @@ public class KmModelWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
-		setWindowTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(Kermeta_javaEditorPlugin.INSTANCE.getImage("full/wizban/NewKm")));
+		setWindowTitle(KermetaEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(KermetaEditorPlugin.INSTANCE.getImage("full/wizban/NewKm")));
 	}
 
 	/**
@@ -174,7 +177,6 @@ public class KmModelWizard extends Wizard implements INewWizard {
 	protected Collection getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList();
-			
 			for (Iterator classifiers = kmPackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
 				EClassifier eClassifier = (EClassifier)classifiers.next();
 				if (eClassifier instanceof EClass) {
@@ -254,7 +256,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 							resource.save(options);
 						}
 						catch (Exception exception) {
-							Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+							KermetaEditorPlugin.INSTANCE.log(exception);
 						}
 						finally {
 							progressMonitor.done();
@@ -287,14 +289,14 @@ public class KmModelWizard extends Wizard implements INewWizard {
 					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());
 			}
 			catch (PartInitException exception) {
-				MessageDialog.openError(workbenchWindow.getShell(), Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
+				MessageDialog.openError(workbenchWindow.getShell(), KermetaEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
 				return false;
 			}
 
 			return true;
 		}
 		catch (Exception exception) {
-			Kermeta_javaEditorPlugin.INSTANCE.log(exception);
+			KermetaEditorPlugin.INSTANCE.log(exception);
 			return false;
 		}
 	}
@@ -326,10 +328,10 @@ public class KmModelWizard extends Wizard implements INewWizard {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".km".
 				//
-				String requiredExt = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameExtension");
+				String requiredExt = KermetaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameExtension");
 				String enteredExt = new Path(getFileName()).getFileExtension();
 				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(Kermeta_javaEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+					setErrorMessage(KermetaEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
 					return false;
 				}
 				else {
@@ -411,7 +413,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
-				containerLabel.setText(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
+				containerLabel.setText(KermetaEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -437,7 +439,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 
 			Label encodingLabel = new Label(composite, SWT.LEFT);
 			{
-				encodingLabel.setText(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_XMLEncoding"));
+				encodingLabel.setText(KermetaEditorPlugin.INSTANCE.getString("_UI_XMLEncoding"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -538,10 +540,10 @@ public class KmModelWizard extends Wizard implements INewWizard {
 		 */
 		protected String getLabel(String typeName) {
 			try {
-				return Kermeta_javaEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
+				return KermetaEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
 			}
 			catch(MissingResourceException mre) {
-				Kermeta_javaEditorPlugin.INSTANCE.log(mre);
+				KermetaEditorPlugin.INSTANCE.log(mre);
 			}
 			return typeName;
 		}
@@ -554,7 +556,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 		protected Collection getEncodings() {
 			if (encodings == null) {
 				encodings = new ArrayList();
-				for (StringTokenizer stringTokenizer = new StringTokenizer(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
+				for (StringTokenizer stringTokenizer = new StringTokenizer(KermetaEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}
 			}
@@ -572,9 +574,9 @@ public class KmModelWizard extends Wizard implements INewWizard {
 		// Create a page, set the title, and the initial model file name.
 		//
 		newFileCreationPage = new KmModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmModelWizard_label"));
-		newFileCreationPage.setDescription(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmModelWizard_description"));
-		newFileCreationPage.setFileName(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameDefaultBase") + "." + Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameExtension"));
+		newFileCreationPage.setTitle(KermetaEditorPlugin.INSTANCE.getString("_UI_KmModelWizard_label"));
+		newFileCreationPage.setDescription(KermetaEditorPlugin.INSTANCE.getString("_UI_KmModelWizard_description"));
+		newFileCreationPage.setFileName(KermetaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameDefaultBase") + "." + KermetaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameExtension"));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -600,8 +602,8 @@ public class KmModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameExtension");
+					String defaultModelBaseFilename = KermetaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameDefaultBase");
+					String defaultModelFilenameExtension = KermetaEditorPlugin.INSTANCE.getString("_UI_KmEditorFilenameExtension");
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
@@ -611,8 +613,8 @@ public class KmModelWizard extends Wizard implements INewWizard {
 			}
 		}
 		initialObjectCreationPage = new KmModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmModelWizard_label"));
-		initialObjectCreationPage.setDescription(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
+		initialObjectCreationPage.setTitle(KermetaEditorPlugin.INSTANCE.getString("_UI_KmModelWizard_label"));
+		initialObjectCreationPage.setDescription(KermetaEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}
 

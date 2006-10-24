@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyClassItemProvider.java,v 1.2 2006-09-22 12:23:10 cfaucher Exp $
+ * $Id: DummyClassItemProvider.java,v 1.3 2006-10-24 09:19:19 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.provider;
 
 
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
+import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -102,7 +102,7 @@ public class DummyClassItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return Kermeta_javaEditPlugin.INSTANCE;
+		return KermetaEditPlugin.INSTANCE;
 	}
 
 }

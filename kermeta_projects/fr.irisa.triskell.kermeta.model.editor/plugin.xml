@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.4 2006-10-02 15:25:26 cfaucher Exp $
+ $Id: plugin.xml,v 1.5 2006-10-24 09:19:08 cfaucher Exp $
 -->
 
 <plugin>
@@ -13,10 +13,6 @@
 
   <extension
     point = "org.eclipse.ui.newWizards">
-    <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
     <wizard
           category="KermetaWizard"
           class="fr.irisa.triskell.kermeta.presentation.KmModelWizard"
@@ -45,9 +41,8 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
-    </category>
+          id="org.eclipse.emf.ecore.Wizard.category.ID"
+          name="%_UI_Wizard_category"/>
     <wizard
       id = "fr.irisa.triskell.kermeta.language.presentation.LanguageModelWizardID"
       name = "%_UI_LanguageModelWizard_label"
