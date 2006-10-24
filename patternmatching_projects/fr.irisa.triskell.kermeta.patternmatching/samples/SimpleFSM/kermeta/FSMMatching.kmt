@@ -1,0 +1,79 @@
+/* $Id: FSMMatching.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+ * Creation date: October 19, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::FSMMatching"
+@mainOperation "main"
+
+package fsm;
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMM.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"       
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMatching.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
+
+require kermeta
+
+using kermeta::standard 
+using kermeta::persistence 
+using kermeta::utils
+using ecore
+
+using kermeta::pattern
+using kermeta::pattern::flora2
+
+class FSMMatching
+{
+    operation main() : Void is do 
+        var inputMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/models/FSMM.xmi"                              
+        var patternPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/models/FSMMPattern_frame.xmi"                               
+        
+        executePatternMatching (inputMPath, patternPath )    
+    end
+    
+    operation executePatternMatching(targetFsmURI: String, patternFSMURI : String)  is do
+    
+     	var repository : EMFRepository init EMFRepository.new                         
+        var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
+        handler.initialize()        	 
+
+        var packageName : String init "FSM"
+        var inputMMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMM.ecore"
+        var patternFramePath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+     
+        stdio.writeln(" Loading models ...")
+        var inputMetamodel : Sequence<EPackage> init handler.loadEcoreModel(repository, inputMMPath)    
+        var inputModel : Set<Object> init loadModel(repository, targetFsmURI, inputMMPath)
+
+        var template : patternframework::ModelPattern 
+        template ?= loadModel(repository, patternFSMURI, patternFramePath).one 
+      
+        stdio.writeln(" Executing matching  ...")
+        var matcher : PatternMatching init PatternMatchingFlora2.new
+        var iteVindings : Iterator<Hashtable<Object, Object>> init 
+             matcher.match(inputMetamodel, inputModel, template) 
+             
+        stdio.writeln(" Printing results ...")           
+		from iteVindings until iteVindings.isOff loop  
+            stdio.writeln("#--- Set of bindings")           		                     
+		     var hash : Hashtable<Object, Object>
+		     hash := iteVindings.next
+		     
+		     template.pattern.roles.each{ rol |
+		        stdio.writeln(rol.name + " : "+ rol.player.toString + " -> " + hash.getValue(rol.player).toString)		        
+		     }
+	    end             
+             
+    end
+
+    operation loadModel(repository : EMFRepository, modePath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
+   		var resource : Resource init repository.createResource(modePath, metamodelPath)
+       	resource.load()
+        result := resource.instances
+    end	    
+}

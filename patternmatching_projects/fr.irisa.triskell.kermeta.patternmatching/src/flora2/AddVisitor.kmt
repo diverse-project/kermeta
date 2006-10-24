@@ -1,0 +1,54 @@
+@mainClass "pattern_macros::AddVisitor"
+@mainOperation "main"
+
+package pattern_macros;
+
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/Patterns4Ecore.kmt"
+ 
+
+using kermeta 
+ using kermeta::standard
+using kermeta::persistence
+using ecore
+
+class AddVisitor inherits kermeta::kunit::Assert
+{
+    reference helper : EcoreHelpers::EcoreHelper
+    reference patternHelper : EcoreTransformations::Patterns4Ecore
+    reference repository : EMFRepository
+    
+    operation addVisitor(im : String, pa : String, rt: String, om : String) : Void is do
+    	helper := EcoreHelpers::EcoreHelper.new 
+    	patternHelper := EcoreTransformations::Patterns4Ecore.new
+    	helper.initialize
+    	patternHelper.initialize
+    	repository := EMFRepository.new
+    	      
+        stdio.writeln("inputModel: " + im)
+        stdio.writeln("outputModelName: " + om)
+              
+        // load the model and find classes
+        var inputModel : Sequence<EPackage> init helper.loadEcoreModel(repository, im)
+
+                
+        var patternPackage : EPackage init helper.findPackageByName(inputModel, pa)
+   //     var returnType : EClassifier init  patternPackage.eClassifiers.detect{c | c.name.equals(rt)}
+        // do the real work	        
+  //      patternHelper.addVisitor(patternPackage, returnType)
+		stdio.writeln("------> Visitor added")       
+
+        helper.saveEcoreModel(repository, patternPackage, om)		
+    end
+    
+    operation main() : Void is do
+    	var inputModelName : String init "../flora2/Flora2.ecore"
+        var patternPackageName : String init "flora2"
+        var outputModelName : String init "../flora2/Flora2wVisitor212.ecore"
+        var returnType : String init "DTString"
+        addVisitor (inputModelName, patternPackageName, returnType, outputModelName)
+    end
+}
+
+
+

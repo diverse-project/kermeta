@@ -1,0 +1,309 @@
+package flora2;
+
+class Program inherits visitors::Visitable
+{
+	attribute clauses : Clause[0..*]
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::visitors::Visitable is
+		result := visitor.visitProgram(self)
+
+}
+class Clause inherits visitors::Visitable
+{
+	method accept(visitor : visitors::Visitor) : DTString from flora2::visitors::Visitable is
+		result := visitor.visitClause(self)
+ 
+}
+class Rule inherits Clause
+{
+	reference head : AtomicFormula
+
+	reference body : Expression
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Clause is
+		result := visitor.visitRule(self)
+
+}
+abstract class AtomicFormula inherits Expression
+{
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Expression is
+		result := visitor.visitAtomicFormula(self)
+
+}
+class Query inherits Clause
+{
+	reference body : Expression
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Clause is
+		result := visitor.visitQuery(self)
+
+}
+class DataAtom inherits FeatureAtom
+{
+	reference ~value : Term
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::FeatureAtom is
+		result := visitor.visitDataAtom(self)
+
+}
+abstract class Term inherits AtomicFormula
+{
+	attribute grounded : kermeta::standard::~Void
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::AtomicFormula is
+		result := visitor.visitTerm(self)
+
+}
+class Variable inherits IdTerm
+{
+	attribute symbolName : DTSymbol
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::IdTerm is
+		result := visitor.visitVariable(self)
+
+}
+abstract class NonFunctionalTerm inherits Term
+{
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Term is
+		result := visitor.visitNonFunctionalTerm(self)
+
+}
+class FunctionalTerm inherits Term
+{
+	attribute parameters : Term[1..*]
+
+	reference functor : IdTerm[1..1]
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Term is
+		result := visitor.visitFunctionalTerm(self)
+
+}
+class SignatureAtom inherits FeatureAtom
+{
+	reference ~class : Term
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::FeatureAtom is
+		result := visitor.visitSignatureAtom(self)
+
+}
+abstract class ISAAtom inherits AtomicFormula
+{
+	reference element : Term[1..1]
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::AtomicFormula is
+		result := visitor.visitISAAtom(self)
+
+}
+abstract class FeatureAtom inherits AtomicFormula
+{
+	attribute inheritable : kermeta::standard::~Void
+
+	reference host : Term
+
+	reference feature : Term
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::AtomicFormula is
+		result := visitor.visitFeatureAtom(self)
+
+}
+class ISAInstance inherits ISAAtom
+{
+	reference ~class : Term
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::ISAAtom is
+		result := visitor.visitISAInstance(self)
+
+}
+class ISASubclass inherits ISAAtom
+{
+	reference superclass : Term
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::ISAAtom is
+		result := visitor.visitISASubclass(self)
+
+}
+class String inherits NonFunctionalTerm
+{
+	attribute strName : DTString
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::NonFunctionalTerm is
+		result := visitor.visitString(self)
+
+}
+class Integer inherits NonFunctionalTerm
+{
+	attribute intName : DTInteger
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::NonFunctionalTerm is
+		result := visitor.visitInteger(self)
+
+}
+abstract class IdTerm inherits NonFunctionalTerm
+{
+	method accept(visitor : visitors::Visitor) : DTString from flora2::NonFunctionalTerm is
+		result := visitor.visitIdTerm(self)
+
+}
+class Expression inherits visitors::Visitable
+{
+	method accept(visitor : visitors::Visitor) : DTString from flora2::visitors::Visitable is
+		result := visitor.visitExpression(self)
+
+}
+class CompoundedFormula inherits Expression
+{
+	attribute elements : Expression[2..*]
+
+	attribute operator : ConnectiveOp
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Expression is
+		result := visitor.visitCompoundedFormula(self)
+
+}
+enumeration ConnectiveOp
+{
+	conjunctionOp;
+	disjunctionOp;
+}
+class Float inherits NonFunctionalTerm
+{
+	attribute floatName : DTFloat
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::NonFunctionalTerm is
+		result := visitor.visitFloat(self)
+
+}
+enumeration PrimitiveClasses
+{
+	string;
+	number;
+	float;
+	integer;
+}
+class BuiltInClasses inherits NonFunctionalTerm
+{
+	attribute className : PrimitiveClasses
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::NonFunctionalTerm is
+		result := visitor.visitBuiltInClasses(self)
+
+}
+class Constant inherits IdTerm
+{
+	attribute symbolName : DTSymbol
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::IdTerm is
+		result := visitor.visitConstant(self)
+
+}
+alias DTString : kermeta::standard::String;
+alias DTFloat : kermeta::standard::Integer;
+alias DTInteger : kermeta::standard::Integer;
+alias DTSymbol : kermeta::standard::String;
+class Fact inherits Clause
+{
+	reference expression : Expression
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Clause is
+		result := visitor.visitFact(self)
+
+}
+class Negation inherits Expression
+{
+	reference expression : Expression
+
+	method accept(visitor : visitors::Visitor) : DTString from flora2::Expression is
+		result := visitor.visitNegation(self)
+
+}
+package visitors
+{
+	abstract class Visitable
+	{
+operation accept(visitor : Visitor) : DTString is
+			abstract
+
+	}
+	abstract class Visitor
+	{
+operation visit(visitable : Visitable) : DTString is
+			abstract
+
+		operation visitProgram(visitable : Program) : DTString is
+			abstract
+
+		operation visitClause(visitable : Clause) : DTString is
+			abstract
+
+		operation visitRule(visitable : Rule) : DTString is
+			abstract
+
+		operation visitAtomicFormula(visitable : AtomicFormula) : DTString is
+			abstract
+
+		operation visitQuery(visitable : Query) : DTString is
+			abstract
+
+		operation visitDataAtom(visitable : DataAtom) : DTString is
+			abstract
+
+		operation visitTerm(visitable : Term) : DTString is
+			abstract
+
+		operation visitVariable(visitable : Variable) : DTString is
+			abstract
+
+		operation visitNonFunctionalTerm(visitable : NonFunctionalTerm) : DTString is
+			abstract
+
+		operation visitFunctionalTerm(visitable : FunctionalTerm) : DTString is
+			abstract
+
+		operation visitSignatureAtom(visitable : SignatureAtom) : DTString is
+			abstract
+
+		operation visitISAAtom(visitable : ISAAtom) : DTString is
+			abstract
+
+		operation visitFeatureAtom(visitable : FeatureAtom) : DTString is
+			abstract
+
+		operation visitISAInstance(visitable : ISAInstance) : DTString is
+			abstract
+
+		operation visitISASubclass(visitable : ISASubclass) : DTString is
+			abstract
+
+		operation visitString(visitable : String) : DTString is
+			abstract
+
+		operation visitInteger(visitable : Integer) : DTString is
+			abstract
+
+		operation visitIdTerm(visitable : IdTerm) : DTString is
+			abstract
+
+		operation visitExpression(visitable : Expression) : DTString is
+			abstract
+
+		operation visitCompoundedFormula(visitable : CompoundedFormula) : DTString is
+			abstract
+
+		operation visitFloat(visitable : Float) : DTString is
+			abstract
+
+		operation visitBuiltInClasses(visitable : BuiltInClasses) : DTString is
+			abstract
+
+		operation visitConstant(visitable : Constant) : DTString is
+			abstract
+
+		operation visitFact(visitable : Fact) : DTString is
+			abstract
+
+		operation visitNegation(visitable : Negation) : DTString is
+			abstract
+
+	}
+}
+

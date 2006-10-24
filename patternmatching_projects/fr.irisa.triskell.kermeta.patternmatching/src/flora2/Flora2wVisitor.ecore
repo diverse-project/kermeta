@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="flora2" nsURI="" nsPrefix="">
+  <eAnnotations source="There is a builin classes" references="//BuiltInClasses //PrimitiveClasses"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Program" instanceClassName="" eSuperTypes="//visitors/Visitable">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitProgram(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitProgram(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clauses" upperBound="-1" eType="//Clause" defaultValueLiteral="" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clause" instanceClassName="" eSuperTypes="//visitors/Visitable">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitClause(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitClause(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule" instanceClassName="" eSuperTypes="//Clause">
+    <eAnnotations source="body is a conjunction of atoms"/>
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitRule(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitRule(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="//AtomicFormula" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//Expression" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicFormula" instanceClassName="" abstract="true" eSuperTypes="//Expression">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitAtomicFormula(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitAtomicFormula(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Query" instanceClassName="" eSuperTypes="//Clause">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitQuery(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitQuery(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//Expression" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataAtom" instanceClassName="" eSuperTypes="//FeatureAtom">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitDataAtom(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitDataAtom(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Term" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Term" instanceClassName="" abstract="true" eSuperTypes="//AtomicFormula">
+    <eAnnotations source="It is a HiLog Term"/>
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitTerm(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitTerm(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grounded" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" instanceClassName="" eSuperTypes="//IdTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitVariable(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitVariable(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="//DTSymbol" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonFunctionalTerm" instanceClassName="" abstract="true" eSuperTypes="//Term">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitNonFunctionalTerm(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitNonFunctionalTerm(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalTerm" instanceClassName="" eSuperTypes="//Term">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitFunctionalTerm(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitFunctionalTerm(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" lowerBound="1" upperBound="-1" eType="//Term" defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functor" lowerBound="1" eType="//IdTerm" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SignatureAtom" instanceClassName="" eSuperTypes="//FeatureAtom">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitSignatureAtom(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitSignatureAtom(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="//Term" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ISAAtom" instanceClassName="" abstract="true" eSuperTypes="//AtomicFormula">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitISAAtom(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitISAAtom(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1" eType="//Term" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureAtom" instanceClassName="" abstract="true" eSuperTypes="//AtomicFormula">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitFeatureAtom(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitFeatureAtom(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inheritable" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="//Term" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="//Term" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ISAInstance" instanceClassName="" eSuperTypes="//ISAAtom">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitISAInstance(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitISAInstance(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="//Term" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ISASubclass" instanceClassName="" eSuperTypes="//ISAAtom">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitISASubclass(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitISASubclass(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superclass" eType="//Term" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="String" instanceClassName="" eSuperTypes="//NonFunctionalTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitString(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitString(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strName" eType="//DTString" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Integer" instanceClassName="" eSuperTypes="//NonFunctionalTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitInteger(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitInteger(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intName" eType="//DTInteger" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IdTerm" instanceClassName="" abstract="true" eSuperTypes="//NonFunctionalTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitIdTerm(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitIdTerm(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" instanceClassName="" eSuperTypes="//visitors/Visitable">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitExpression(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitExpression(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundedFormula" instanceClassName="" eSuperTypes="//Expression">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitCompoundedFormula(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCompoundedFormula(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" lowerBound="2" upperBound="-1" eType="//Expression" defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//ConnectiveOp" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConnectiveOp">
+    <eLiterals name="conjunctionOp" value="1"/>
+    <eLiterals name="disjunctionOp" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Float" instanceClassName="" eSuperTypes="//NonFunctionalTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitFloat(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitFloat(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="floatName" eType="//DTFloat" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveClasses">
+    <eLiterals name="string" value="1"/>
+    <eLiterals name="number" value="2"/>
+    <eLiterals name="float" value="3"/>
+    <eLiterals name="integer" value="4" literal="integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltInClasses" instanceClassName="" eSuperTypes="//NonFunctionalTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitBuiltInClasses(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitBuiltInClasses(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="//PrimitiveClasses" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" instanceClassName="" eSuperTypes="//IdTerm">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitConstant(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitConstant(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="//DTSymbol" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DTString" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DTFloat" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DTInteger" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DTSymbol" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Fact" instanceClassName="" eSuperTypes="//Clause">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitFact(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitFact(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//Expression" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="//Expression">
+    <eOperations name="accept" eType="//DTString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return := visitor.visitNegation(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitNegation(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//Expression"/>
+  </eClassifiers>
+  <eSubpackages name="visitors">
+    <eClassifiers xsi:type="ecore:EClass" name="Visitable" abstract="true" interface="true">
+      <eOperations name="accept" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitor" eType="//visitors/Visitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Visitor" abstract="true">
+      <eOperations name="visit" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//visitors/Visitable"/>
+      </eOperations>
+      <eOperations name="visitProgram" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Program"/>
+      </eOperations>
+      <eOperations name="visitClause" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Clause"/>
+      </eOperations>
+      <eOperations name="visitRule" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Rule"/>
+      </eOperations>
+      <eOperations name="visitAtomicFormula" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//AtomicFormula"/>
+      </eOperations>
+      <eOperations name="visitQuery" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Query"/>
+      </eOperations>
+      <eOperations name="visitDataAtom" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//DataAtom"/>
+      </eOperations>
+      <eOperations name="visitTerm" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Term"/>
+      </eOperations>
+      <eOperations name="visitVariable" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Variable"/>
+      </eOperations>
+      <eOperations name="visitNonFunctionalTerm" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//NonFunctionalTerm"/>
+      </eOperations>
+      <eOperations name="visitFunctionalTerm" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//FunctionalTerm"/>
+      </eOperations>
+      <eOperations name="visitSignatureAtom" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//SignatureAtom"/>
+      </eOperations>
+      <eOperations name="visitISAAtom" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//ISAAtom"/>
+      </eOperations>
+      <eOperations name="visitFeatureAtom" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//FeatureAtom"/>
+      </eOperations>
+      <eOperations name="visitISAInstance" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//ISAInstance"/>
+      </eOperations>
+      <eOperations name="visitISASubclass" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//ISASubclass"/>
+      </eOperations>
+      <eOperations name="visitString" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//String"/>
+      </eOperations>
+      <eOperations name="visitInteger" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Integer"/>
+      </eOperations>
+      <eOperations name="visitIdTerm" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//IdTerm"/>
+      </eOperations>
+      <eOperations name="visitExpression" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Expression"/>
+      </eOperations>
+      <eOperations name="visitCompoundedFormula" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CompoundedFormula"/>
+      </eOperations>
+      <eOperations name="visitFloat" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Float"/>
+      </eOperations>
+      <eOperations name="visitBuiltInClasses" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//BuiltInClasses"/>
+      </eOperations>
+      <eOperations name="visitConstant" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Constant"/>
+      </eOperations>
+      <eOperations name="visitFact" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Fact"/>
+      </eOperations>
+      <eOperations name="visitNegation" eType="//DTString">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//Negation"/>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

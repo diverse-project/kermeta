@@ -1,0 +1,116 @@
+/* $Id: PatternMatching.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+ * Creation date: October 19, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+package kermeta::pattern;
+
+
+require kermeta
+require "./metamodel/PatternFramework.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+
+using ecore
+using kermeta::standard
+using kermeta::utils  
+using kermeta::interpreter
+
+class PatternMatching
+{
+   operation match(metamodel : Sequence<EPackage>, model : Set<Object>, 
+       template : patternframework::ModelPattern) : Iterator<Hashtable<Object, Object>> is do
+      // match structural part 
+      var firsResult : Sequence<Hashtable<Object, Object>> 
+      firsResult := matchStep1 (metamodel, model, template)
+       
+      var finalResult : Sequence<Hashtable<Object, Object>>      
+      finalResult := matchStep2 (model, template, firsResult)
+      result := finalResult.iterator
+   end    
+
+
+   operation matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
+       template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is abstract
+       
+   operation matchStep2(model : Set<Object>, template : patternframework::ModelPattern, 
+       bindings : Sequence<Hashtable<Object, Object>>) : Sequence<Hashtable<Object, Object>> is do
+       if (template.constraints.isVoid) then
+          result := bindings
+       else       
+	    result := bindings.select{binding | 
+     	       var mockFramework : MockPatternModel init MockPatternModel.new 
+	           mockFramework.initializeRoles(model, template, binding)
+	           checkConstraint( mockFramework)}
+        end                                    
+   end
+   
+   
+   operation checkConstraint( template : MockPatternModel) : Boolean is do
+     var bool : Set<Boolean> init  Set<Boolean>.new
+     if (template.constraints.language == patternframework::PConstraintLanguage.ocl) then       
+      // TODO resolve constraints in OCL
+      result := true
+   else  
+  	   var seqpro : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
+	 
+       var de : DynamicExpression init DynamicExpression.new
+       de.initializeDefaults
+       de.formalParameters.put("pattern", patternframework::ModelPattern)  
+       de.formalParameters.put("res", Set<Boolean>)         
+       de.parse(" res.add( "+template.constraints.expression+ ")") 
+       var params : Hashtable<String, kermeta::standard::Object> init Hashtable<String, kermeta::standard::Object>.new
+       params.put("pattern", template)
+       params.put("res", bool)       
+       de.execute(void, params)	
+       result := bool.one
+   end          
+   end
+}
+
+class MockPatternModel {
+    // moke attributes
+	attribute pattern : MockPModel
+	reference constraints : patternframework::PConstraint
+	reference featureIdentifier : patternframework::PLabel[0..*]
+	
+    
+    operation initializeRoles(model : Set<Object>,
+                              template : patternframework::ModelPattern, 
+                              bindings : Hashtable<Object, Object>) is do
+   	       var mockModel : MockPModel init MockPModel.new 	          
+	       mockModel.content := model
+	        
+           pattern := mockModel
+	       constraints := template.constraints
+	       featureIdentifier := template.featureIdentifier
+           pattern.roles := OrderedSet<MockePRole>.new	       
+                           
+           template.pattern.roles.each{ prol | 
+               var rol : MockePRole init MockePRole.new
+               rol.name := prol.name 
+               rol.player := bindings.getValue(prol.player)
+               pattern.roles.add(rol)} 
+    end
+
+	operation getRole(roleName : patternframework::PLabel) : Object is
+		do
+			var rol : MockePRole init pattern.roles.detect{r | r.name.equals(roleName)}
+			result := if rol.isVoid.~not then
+				rol.player
+			else
+				void
+			end
+	end
+
+} 
+
+class MockPModel {
+	reference content : Set<Object>
+	attribute roles : MockePRole[0..*]    	
+}
+
+class MockePRole {
+	attribute name : patternframework::PLabel[0..1]
+	reference player : Object[0..1]
+}

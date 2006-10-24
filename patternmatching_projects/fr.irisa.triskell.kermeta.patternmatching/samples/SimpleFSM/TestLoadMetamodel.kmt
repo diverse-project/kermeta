@@ -1,0 +1,42 @@
+/* $Id: TestLoadMetamodel.kmt,v 1.1 2006-10-24 12:27:27 rodrigotex Exp $
+ * Creation date: October 16, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "test::Main"
+@mainOperation "main"
+
+
+package test;
+
+require kermeta
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+using kermeta::standard
+using kermeta::persistence
+
+   
+class Main
+{
+    operation main() is do 
+   	  var repository : EMFRepository init EMFRepository.new
+   	  
+        /* Load Pattern */               
+        var inputPatternMMPath: String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+        var inputPatternPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/models/FSMMPattern_structure.xmi"                        
+   		var resource2 : Resource init repository.createResource(inputPatternPath, inputPatternMMPath)
+       	resource2.load()    
+        var inputPattern : Set<Object> init resource2.instances
+        
+        stdio.writeln(inputPattern.toString) 
+
+
+             	      
+      /*var resource : Resource init EMFRepository.new.createResource(metamodelUri , ecoreMetamodelUri)      
+      resource.load
+        */ 
+  
+    end
+
+}

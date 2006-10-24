@@ -1,0 +1,77 @@
+@mainClass "FSMTemp::Main"
+@mainOperation "main"
+
+package FSMTemp;
+
+require kermeta
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+//require "platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/patternframework.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+ 
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+
+using kermeta::standard 
+using kermeta::persistence 
+ 
+using ecore  
+class Main
+{
+    operation main() : Void is do 
+        var patternTemplate : patternframework::ModelPattern init patternframework::ModelPattern.new
+        patternTemplate.featureIdentifier.add("name")
+
+        var pmodel : patternframework::PModel init patternframework::PModel.new
+        patternTemplate.pattern := pmodel
+        pmodel.content := OrderedSet<patternframework::PObject>.new
+                
+        // Creating structural model
+		var s1 : pattern::FSM::State init pattern::FSM::State.new
+		s1.name := "A"	
+		var s2 : pattern::FSM::State init pattern::FSM::State.new
+		s2.name := "B"			
+		var t12: pattern::FSM::Transition init pattern::FSM::Transition.new
+		t12.source := s1
+		t12.target := s2		
+		
+		// Adding  elements to the structural part of the pattern
+		pmodel.content.add(s1)		
+		pmodel.content.add(s2)
+		pmodel.content.add(t12)		
+		// Setting roles
+		var role1 : patternframework::PRole init patternframework::PRole.new
+		role1.name := "link"
+		role1.player := t12		
+		var role2 : patternframework::PRole init patternframework::PRole.new
+		role2.name := "sourceState"
+		role2.player := s1				
+		var role3 : patternframework::PRole init patternframework::PRole.new
+		role3.name := "targetState"
+		role3.player := s2						
+		patternTemplate.pattern.roles.add(role1)
+		patternTemplate.pattern.roles.add(role2)		
+		patternTemplate.pattern.roles.add(role3)				
+		
+		// creating Constraint
+        var cons : patternframework::PConstraint init patternframework::PConstraint.new		
+        cons.language := patternframework::PConstraintLanguage.kermeta
+        cons.expression := "do not pattern.getRole(\"sourceState\").equals( pattern.getRole(\"targetState\")) end"        
+		patternTemplate.constraints := cons
+
+        // Persisting the model		
+		stdio.writeln("Creating file ../models/FSMMPattern2_structure.xmi ")
+		var repository : EMFRepository init EMFRepository.new
+		var resource1 : Resource init repository.createResource("FSMMPattern2_structure.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMMPattern.ecore")		
+        pmodel.content.each { o | resource1.instances.add(o) } 
+		resource1.save()			
+		
+		stdio.writeln("Creating file ../models/FSMMPattern2_frame.xmi ")		
+		var resource2 : Resource init repository.createResource("FSMMPattern2_frame.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")		
+		resource2.instances.add(patternTemplate)
+
+		
+		resource2.save()						
+    end
+}

@@ -1,0 +1,56 @@
+package patternframework;
+
+class ModelPattern
+{
+	attribute pattern : PModel
+
+	attribute constraints : PConstraint
+
+	attribute featureIdentifier : PLabel[0..*]
+
+	reference falsepositivepatterns : PModel[0..*]
+
+	operation getRole(roleName : PLabel) : PObject is
+		do
+			var rol : PRole init pattern.roles.detect{r | r.name.equals(roleName)}
+			result := if rol.isVoid.~not then
+				rol.player
+
+			else
+				void
+
+			end
+		end
+
+}
+class PModel
+{
+	reference content : PObject[0..*]
+
+	attribute roles : PRole[0..*]
+
+}
+class PObject
+{
+}
+class PConstraint
+{
+	attribute expression : PExpression
+
+	attribute language : PConstraintLanguage
+
+}
+alias PExpression : kermeta::standard::String;
+alias PLabel : kermeta::standard::String;
+enumeration PConstraintLanguage
+{
+	kermeta;
+	ocl;
+}
+class PRole
+{
+	attribute name : PLabel[1..1]
+
+	reference player : PObject[1..1]
+
+}

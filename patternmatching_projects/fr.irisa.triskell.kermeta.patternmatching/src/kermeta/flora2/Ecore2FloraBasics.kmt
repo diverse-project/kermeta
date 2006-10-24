@@ -1,0 +1,94 @@
+/* $Id: Ecore2FloraBasics.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+ * Creation date: October 12, 2006
+ * License:
+ * Copyright:
+ * Authors: Rodrigo Ramos
+ */
+
+
+package kermeta::pattern::flora2;
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "../../flora2/Flora2wVisitor.ecore"
+
+require kermeta
+
+using ecore
+using kermeta::standard
+
+class Ecore2FloraBasicElements
+{
+
+	operation createClauseForClassDeclaration(eclass : EClass) : flora2::Clause is do 
+	  var formulas : flora2::CompoundedFormula init flora2::CompoundedFormula.new
+	  formulas.operator := flora2::ConnectiveOp.conjunctionOp
+      if not  eclass.eSuperTypes.empty then   
+	      eclass.eSuperTypes.collect{ ec | createsSubclassClause(eclass, ec)}.
+	           each{e | formulas.elements.add (e)}
+	  end 	  
+	  
+     eclass.eAttributes.collect{ ec | createsSignatureForAttr(eclass, ec)}.
+               each{e | formulas.elements.add (e)}	  
+     eclass.eReferences.collect{ ec | createsSignatureForRef(eclass, ec)}.
+               each{e | formulas.elements.add (e)}	       
+	  
+	  var clause : flora2::Fact init flora2::Fact.new
+	  clause.expression := formulas
+	  result := clause
+	end
+	
+	operation createsSubclassClause (eclass : EClass, esuper : EClass) : flora2::ISASubclass is do
+          var isa_subclass : flora2::ISASubclass init flora2::ISASubclass.new 
+          isa_subclass.element := createConstantTerm (eclass)    
+          isa_subclass.superclass := createConstantTerm (esuper)
+          result := isa_subclass
+	end
+	
+	operation createsSignatureForRef (eclass : EClass, eattr : EReference) : flora2::SignatureAtom is do
+          var sigfeature : flora2::SignatureAtom init flora2::SignatureAtom.new 
+          sigfeature.host := createConstantTerm(eclass)
+          sigfeature.feature := createConstantTerm( eattr)
+          sigfeature.~class := createConstantTerm(eattr.eReferenceType)
+          result := sigfeature          
+	end	
+		
+	operation createsSignatureForAttr (eclass : EClass, eattr : EAttribute) : flora2::SignatureAtom is do
+          var sigfeature : flora2::SignatureAtom init flora2::SignatureAtom.new 
+          sigfeature.host := createConstantTerm(eclass)
+          sigfeature.feature := createConstantTerm( eattr)
+          sigfeature.~class := createConstantTerm(eattr.eAttributeType)
+          result := sigfeature          
+	end	
+	
+	operation createConstantTerm (elementName: ENamedElement) : flora2::Term is do	
+          var oid : flora2::Constant init flora2::Constant.new
+          oid.symbolName := elementName.name
+          result := oid
+	end	 
+	
+	/* Diferent of the other operations in this class, this operation is used 
+	   specificly in the transformation of instances
+	*/
+	operation createsDataClause (host: flora2::Term,  proName : String, val : flora2::Term) : flora2::DataAtom is do
+          var dataeature : flora2::DataAtom init flora2::DataAtom.new 
+          dataeature.host := host
+          
+          var feature : flora2::Constant init flora2::Constant.new
+          feature.symbolName := proName
+          dataeature.feature :=  feature
+          dataeature.~value := val
+          result := dataeature          
+	end		
+	
+		        
+
+            
+	operation createsInstanceClause (term: flora2::Term,  className : String) : flora2::ISAInstance is do
+          var isa_instance : flora2::ISAInstance init flora2::ISAInstance.new 
+            isa_instance.element := term
+            
+            var ~class : flora2::Constant init flora2::Constant.new
+            ~class.symbolName := className
+            isa_instance.~class := ~class
+          result := isa_instance          
+	end		
+}

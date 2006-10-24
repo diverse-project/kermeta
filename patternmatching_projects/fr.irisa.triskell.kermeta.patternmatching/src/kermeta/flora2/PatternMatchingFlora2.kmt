@@ -1,0 +1,81 @@
+/* $Id: PatternMatchingFlora2.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+ * Creation date: October 19, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package kermeta::pattern::flora2;
+
+require kermeta
+
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "../pattern/PatternMatching.kmt"
+require "../pattern/metamodel/PatternFramework.ecore"
+
+require "../../flora2/Flora2wVisitor.ecore"
+require "../flora2/FloraInterpreter.kmt"
+require "../flora2/Ecore2Flora.kmt"
+require "../flora2/visitor/Flora2SerializerVisitor.kmt"
+
+using ecore
+using kermeta::standard
+using kermeta::utils
+using kermeta::pattern
+using kermeta::pattern::flora2
+using flora2
+using flora2::visitors
+
+class PatternMatchingFlora2 inherits PatternMatching
+{
+   operation matchStep1(metamodel : Sequence<EPackage>, model : Set<Object>, 
+       template : patternframework::ModelPattern) : Sequence<Hashtable<Object, Object>> is do
+        var factClauses : flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
+        
+       //  creating facts related to the metamodel and model ...        
+        var tranfoEcore2Flora : Ecore2Flora init Ecore2Flora.new
+        factClauses.addAll( tranfoEcore2Flora.transformMetamodel(metamodel))
+
+        var tranfoMode2Flora : Model2Flora init Model2Flora.new               
+        tranfoMode2Flora.initialize() 
+        factClauses.addAll( tranfoMode2Flora.transformModel(model))
+
+       //  creating a query for the pattern ...
+        var tranfoPattern2Flora : ModelPattern2Flora init ModelPattern2Flora.new               
+        tranfoPattern2Flora.initialize()             
+        var queryPattern : flora2::Query init 
+                    tranfoPattern2Flora.transformModelPattern(template)
+
+       var interpreter : FloraInterpreter init FloraInterpreter.new
+       interpreter.initialize      
+       
+       //  inserting facts related to the metamodel and model ...
+       factClauses.select{c |Fact.isInstance(c)}.
+                   collect{c | var fact : Fact fact ?= c}.
+                   each{fact | interpreter.insertFactInDefaultModule(fact)}
+
+
+       var itBindings : Iterator<Hashtable<String, String>> init
+               interpreter.queryInDefaultModule(queryPattern, 
+               tranfoPattern2Flora.lastIdVariants(template))
+      interpreter.finalize 
+        
+      var resultBindings : Sequence<Hashtable<Object, Object>> init Sequence<Hashtable<Object, Object>>.new
+      from itBindings until itBindings.isOff loop  
+	    var hash : Hashtable<String, String> init itBindings.next
+        var hashObj : Hashtable<Object, Object> init Hashtable<Object, Object>.new	    
+	       stdio.writeln("#--- Bindings in the flora side (Identifier into Identifier)")
+	    hash.keys.each{ k | 
+	       stdio.writeln(k.toString + " => " + hash.getValue(k).toString)
+	       hashObj.put(
+              tranfoPattern2Flora.objTable.getObj( k),
+              tranfoMode2Flora.objTable.getObj( hash.getValue(k)))
+	       stdio.writeln(tranfoPattern2Flora.objTable.getObj( k).toString + " => " + tranfoMode2Flora.objTable.getObj( hash.getValue(k)).toString)              
+	    }   
+	    resultBindings.add( hashObj)
+	  end
+      result := resultBindings
+
+   end    
+   
+}

@@ -1,0 +1,153 @@
+/* $Id: PatternMetamodelBuilder2.kmt,v 1.1 2006-10-24 12:27:26 rodrigotex Exp $
+ * Creation date: October 12, 2006
+ * Authors: Rodrigo Ramos
+ */
+@mainClass "pattern::CreatePatternExample"
+@mainOperation "main"
+
+package kermeta::pattern;
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+
+
+class PatternMetamodelBuilder {
+    attribute helper : EcoreHelpers::EcoreHelper
+   	attribute repository : EMFRepository 
+   	      
+    operation initialize( rep : EMFRepository) is do
+		helper := EcoreHelpers::EcoreHelper.new
+    	helper.initialize        
+    	repository := rep
+    end
+    
+    operation addPatternFramework(sequencePack : Sequence<EPackage>, newURI : String) : EPackage is do 
+       //var outputModel : Model init Model.new
+      
+      var patternFramework : Sequence<EPackage> init 
+              helper.loadEcoreModel(repository, "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")
+      var pattern : EPackage init EPackage.new
+      
+      pattern.name := "pattern"
+      pattern.nsPrefix:="pattern"      
+      pattern.nsURI:=newURI 
+      
+      
+      var frameworkPack : EPackage init helper.findPackageByName(patternFramework, "patternframework")      
+      var basicObject : EClass init helper.findClassByName(frameworkPack, "PObject")
+
+
+      // add package corresponding pattern framwwork
+      pattern.eSubpackages.addAll(sequencePack)                 
+      
+      // put the correct reference to all subPackges  
+      pattern.nsURI :=  newURI
+      setSubPackagesURI(pattern)
+
+      // Link model to the pattern framwwork      
+      sequencePack.each{p | addBasicObjectAsSupertype( p , basicObject)}         
+
+      // remove invariants and constraints on upper multiplicities
+      sequencePack.each{p | makeMetaModelLessRestricted(p)} 
+
+      //clean instanceClassName
+      result := pattern
+    end
+    
+    operation addBasicObjectAsSupertype(pack : EPackage, basicObject : EClass) is do
+        stdio.writeln(pack.name)
+    
+        pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+            	if (not helper.hasParentInPackage(eClass, pack)) then
+        stdio.writeln(eClass.name)            	
+            		eClass.eSuperTypes.add(basicObject)
+    			end
+        	end
+        }
+    end    
+    
+    operation makeMetaModelLessRestricted(model : EPackage) is do 
+      var eTypedElements :  Set<ETypedElement> init Set<ETypedElement>.new
+      
+      // get all eTypedElements from each operator, attribute and reference 
+      // from EClass iW the package
+      model.eClassifiers.select{ eClassifier | EClass.isInstance(eClassifier)}.
+              each{eClassifier | 
+                 var eClass : EClass
+                 eClass ?= eClassifier
+
+                 eClass.eReferences.each{ e | eTypedElements.add(e) }
+                 eClass.eAttributes.each{ e | eTypedElements.add(e) }                 
+                 eClass.eOperations.each{ e | eTypedElements.add(e) }                                  
+                 eClass.eOperations.each{op | 
+                     op.eParameters.each{e | eTypedElements.add(e)}}
+               }
+      // zero the lower bounds of each eTypedElement         
+      eTypedElements.each{ e | e.lowerBound := 0 }
+    end
+
+    operation setSubPackagesURI (pack :EPackage) is do   
+      pack.eSubpackages.each{p |  
+          p.nsURI:=pack.nsURI+"/"+p.name 
+          p.nsPrefix:=p.name 
+          setSubPackagesURI(p)
+      }    
+    end  
+    
+    operation cleanInstanceClassNames(pack :EPackage) is do
+      pack.eClassifiers.select{ eClassifier | EClass.isInstance(eClassifier)}.
+              each{eClassifier | 
+                 var eClass : EClass
+                 eClass ?= eClassifier
+                 eClass.instanceClassName := void
+           }      
+      pack.eSubpackages.each{ p | cleanInstanceClassNames(p)}
+    end      
+} 
+
+class CreatePatternExample {
+
+  operation main() is do 
+      var metamodelUri : String init "../../../samples/SimpleFSM/metamodels/FSMMM.ecore"
+      var ecoreMetamodel : String init "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore"
+
+      var metamodelPatternUri : String init "platform:/resource/Pattern_project/samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+
+//      var helper : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new
+   	  var repository : EMFRepository init EMFRepository.new
+//      helper.initialize           	      
+              	      
+      var resource : Resource init EMFRepository.new.createResource(metamodelUri , ecoreMetamodel)      
+      resource.load
+/*      
+       var patternCreator : CreatePatternMetamodel init CreatePatternMetamodel.new      
+
+      // retreives only the packages   	
+      var packagesModelModel : Sequence<EPackage> init 
+    	      resource.instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage pack ?= p}   	          	      
+      
+      // Add framework for patterns
+      patternCreator.initialize        
+      var pattern : EPackage init patternCreator.addPatternFramework(packagesModelModel, metamodelPatternUri) 
+      
+      packagesModelModel.each{p | resource.remove(p)} 
+      resource.add(pattern)
+*/    
+
+      /* Another problem. the load repository method is seting instanceClassName to "" */     
+/*           resource.instances.select { e | EPackage.isInstance(e) }.
+    	      collect{p | var pack : EPackage pack ?= p}.
+    	      each { p | patternCreator.cleanInstanceClassNames(p)}
+*/        
+      resource.saveWithNewURI(metamodelPatternUri)
+      /* There is a bug when I am trying to use EMFRepository.new.createResource ... resource.save */
+  end
+}

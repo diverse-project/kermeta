@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FSM" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching/samples/SimpleFSM/metamodels/FSMMM.ecore" nsPrefix="FSM">
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//Label"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fsm">
+    <eAnnotations source="kermeta">
+      <details key="inv" value="templateConstraint is&#xD;&#xA;&#x9;do&#xD;&#xA;&#x9;&#x9;self.states.forAll{s | do&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;self.transitions.exists{t | do&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;t.target.equals(s)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xD;&#xA;&#x9;&#x9;&#x9;end}&#xD;&#xA;&#x9;end"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" lowerBound="1" upperBound="-1" eType="//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1" eType="//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Label" instanceClassName="java.lang.String"/>
+</ecore:EPackage>
