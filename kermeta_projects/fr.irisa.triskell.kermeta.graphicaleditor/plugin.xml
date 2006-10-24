@@ -6,7 +6,7 @@
             class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             icon="icons/Structure.png"
             default="true"
-            name="Kermeta metamodeler"
+            name="Kermeta class diagram"
             id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureEditorActionBarContributor"
             extensions="kmdi">
@@ -20,7 +20,7 @@
             finalPerspective="kermetaPerspective"
             icon="icons/Structure.png"
             id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
-            name="New Kermeta metamodeler"
+            name="New Kermeta class diagram"
             preferredPerspectives="org.eclipse.ui.resourcePerspective">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
