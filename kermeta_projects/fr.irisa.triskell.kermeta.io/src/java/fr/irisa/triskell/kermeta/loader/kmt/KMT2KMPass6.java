@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.9 2006-08-30 10:16:05 jmottu Exp $
+/* $Id: KMT2KMPass6.java,v 1.10 2006-10-25 08:26:41 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -33,6 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 //import fr.irisa.triskell.kermeta.language.structure.FProperty;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 
 /**
@@ -60,10 +61,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		Iterator tvs = builder.current_class.getTypeParameter().iterator();
 		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
 		// add attributes and operations
-		Iterator it = builder.getAllOperations(builder.current_class).iterator();
-		while (it.hasNext()) builder.addSymbol(new KMSymbolOperation((fr.irisa.triskell.kermeta.language.structure.Operation)it.next()));
-		it = builder.getAllProperties(builder.current_class).iterator();
-		while (it.hasNext()) builder.addSymbol(new KMSymbolProperty((fr.irisa.triskell.kermeta.language.structure.Property)it.next()));
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Operation> itOp = ClassDefinitionHelper.getAllOperations(builder.current_class).iterator(); 
+		while (itOp.hasNext()) builder.addSymbol(new KMSymbolOperation(itOp.next()));
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Property> itProp = ClassDefinitionHelper.getAllProperties(builder.current_class).iterator();
+		while (itProp.hasNext()) builder.addSymbol(new KMSymbolProperty(itProp.next()));
 		return super.beginVisit(classDecl);
 	}
 

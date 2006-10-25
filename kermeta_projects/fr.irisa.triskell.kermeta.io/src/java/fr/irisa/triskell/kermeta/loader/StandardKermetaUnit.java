@@ -1,4 +1,4 @@
-/* $Id: StandardKermetaUnit.java,v 1.10 2006-05-03 15:02:43 zdrey Exp $
+/* $Id: StandardKermetaUnit.java,v 1.11 2006-10-25 08:25:45 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -32,7 +32,7 @@ public class StandardKermetaUnit extends KMTUnit {
 	 * @param importStdLib
 	 */
 	public StandardKermetaUnit(Hashtable packages) {
-		super(KermetaUnit.STD_LIB_URI, packages);
+		super(StdLibKermetaUnitHelper.STD_LIB_URI, packages);
 		// TODO Auto-generated constructor stub
 	}
 	

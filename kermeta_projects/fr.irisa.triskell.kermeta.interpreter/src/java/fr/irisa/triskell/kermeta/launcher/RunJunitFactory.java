@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.16 2006-09-08 12:31:11 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.17 2006-10-25 08:30:14 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -20,6 +20,7 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
@@ -60,9 +61,9 @@ public class RunJunitFactory implements Test {
 
         
         if(root_unit == null) {
-        	KermetaUnit.unloadStdLib();
+        	StdLibKermetaUnitHelper.unloadStdLib();
         	KermetaUnitFactory.resetDefaultLoader();
-            root_unit = KermetaUnit.getStdLib();
+            root_unit = StdLibKermetaUnitHelper.getKermetaUnit();
             TypeCheckerContext.initializeTypeChecker(root_unit);
         }
         //KermetaUnitFactory.resetDefaultLoader(); // each test must be run in its own environment

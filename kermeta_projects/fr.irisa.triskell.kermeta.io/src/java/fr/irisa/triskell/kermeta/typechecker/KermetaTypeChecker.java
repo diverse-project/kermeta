@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.12 2006-09-28 09:45:02 zdrey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.13 2006-10-25 08:26:21 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -57,7 +58,7 @@ public class KermetaTypeChecker {
         if (unit.typeDefinitionLookup("kermeta::language::structure::Object") != null)
             TypeCheckerContext.initializeTypeChecker(unit);
         else
-            TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
+            TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
         context = new TypeCheckerContext(unit);
         
     }

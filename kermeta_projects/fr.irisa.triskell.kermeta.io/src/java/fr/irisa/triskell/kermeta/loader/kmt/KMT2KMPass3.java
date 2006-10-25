@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.9 2006-08-07 15:45:21 zdrey Exp $
+/* $Id: KMT2KMPass3.java,v 1.10 2006-10-25 08:26:41 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -46,6 +46,8 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 
 /**
@@ -180,11 +182,11 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			builder.current_operation.setLower(getLower(operation.getTypeRef()));
 		}
 		// checks that the class do not have an op with the same name yet
-		if (builder.getOperationByName(builder.current_class, builder.current_operation.getName()) != null) {
+		if (ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName()) != null) {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation));
 			return false;
 		}
-		if (builder.getPropertyByName(builder.current_class, builder.current_operation.getName()) != null) {
+		if (ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_operation.getName()) != null) {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_operation.getName()+"'.",operation));
 			return false;
 		}
@@ -322,13 +324,13 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		// is readonly, false by default
 		builder.current_property.setIsReadOnly(false);
 		
-		if (builder.getPropertyByName(builder.current_class, builder.current_property.getName()) != null) {
+		if (ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()) != null) {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of property '"+builder.current_property.getName()+"'.",property));
 			return false;
 		}
 		
 		// checks that the class do not have an op with the same name yet
-		if (builder.getOperationByName(builder.current_class, builder.current_property.getName()) != null) {
+		if (ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_property.getName()) != null) {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_property.getName()+"'.",property));
 			return false;
 		}

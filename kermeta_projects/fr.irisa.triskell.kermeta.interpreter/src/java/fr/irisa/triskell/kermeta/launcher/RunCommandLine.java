@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.12 2006-10-25 08:30:14 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -29,7 +29,7 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -181,7 +181,7 @@ public class RunCommandLine {
 	        internalLog.error("Cannot initialise because the location of Kermeta Standard Library is not known. Please use option -K ");
 	        return; 
 	    }
-	    else KermetaUnit.STD_LIB_URI = kermetaStandardURI;
+	    else StdLibKermetaUnitHelper.STD_LIB_URI = kermetaStandardURI;
         
         
 	    theInterpreter = new KermetaInterpreter(unitURI);

@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.21 2006-10-04 14:05:23 dvojtise Exp $
+/* $Id: KermetaUnitFactory.java,v 1.22 2006-10-25 08:25:45 dvojtise Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -96,8 +96,8 @@ public class KermetaUnitFactory {
     
     public KermetaUnit createKermetaUnit(String uri) {
         Hashtable packages;
-        if (KermetaUnit.STD_LIB_URI != null) {
-            packages = KermetaUnit.getStdLib().packages;
+        if (StdLibKermetaUnitHelper.STD_LIB_URI != null) {
+            packages = StdLibKermetaUnitHelper.getKermetaUnit().packages;
         }
         else {
             packages = new Hashtable();
@@ -122,11 +122,11 @@ public class KermetaUnitFactory {
     	    	
     	// check if it is the stdlib
     	if (uri.equals("kermeta")) {
-    	    if (KermetaUnit.STD_LIB_URI == null) {
+    	    if (StdLibKermetaUnitHelper.STD_LIB_URI == null) {
     	        KermetaUnit.internalLog.error("  **** CRITICAL : Cannot find kermeta standard library");
     	        KermetaUnit.internalLog.error("  **** CRITICAL : Please update KermetaUnit.STD_LIB_URI variable");
     	    }
-    	    uri = KermetaUnit.STD_LIB_URI;
+    	    uri = StdLibKermetaUnitHelper.STD_LIB_URI;
     	    //if (standard_lib != null) return standard_lib;
     	}
     	else if (uri.equals("java_rt_jar")){
@@ -197,7 +197,7 @@ public class KermetaUnitFactory {
      * 
      */
     public void unloadAll() {
-        KermetaUnit.unloadStdLib();
+    	StdLibKermetaUnitHelper.unloadStdLib();
     	loadedUnits.clear();
     	KMUnit.clearRessourceSet();
     }

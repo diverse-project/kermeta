@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.24 2006-09-22 11:12:24 dtouzet Exp $
+/* $Id: KM2EcorePass2.java,v 1.25 2006-10-25 08:27:26 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
@@ -470,7 +471,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		// Take a look in framework. FIXME : require kermeta is not mandatory anymore in 
 		// kermeta files, so if user did not put it, it is not in imported units, so we
 		// have to handle specially dependency with kermeta framework here:
-		String framework_ecore_path = KermetaUnit.STD_LIB_URI.substring(0, KermetaUnit.STD_LIB_URI.lastIndexOf(".km")) + ".ecore";
+		String framework_ecore_path = StdLibKermetaUnitHelper.STD_LIB_URI.substring(0, StdLibKermetaUnitHelper.STD_LIB_URI.lastIndexOf(".km")) + ".ecore";
 		// This file exists in Kermeta distribution, so we point to it :
 		depResource = ecoreResourceSet.getResource(URI.createURI(framework_ecore_path), true);
 		result = depResource.getEObject("//" + ecore_path);
@@ -495,7 +496,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				}
 				// If KMUnit, it means that the underlying resource if a .km file,
 				// then we have to convert it in an .ecore file!.
-				else if (!ku.getUri().equals(KermetaUnit.STD_LIB_URI) 
+				else if (!ku.getUri().equals(StdLibKermetaUnitHelper.STD_LIB_URI) 
 						&& (ku instanceof KMUnit || ku instanceof KMTUnit))
 				{
 					String kmpath = ku.getUri();

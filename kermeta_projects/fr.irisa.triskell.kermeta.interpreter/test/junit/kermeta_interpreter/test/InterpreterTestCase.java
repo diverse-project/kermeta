@@ -1,4 +1,4 @@
-/* $Id: InterpreterTestCase.java,v 1.1 2006-07-18 11:27:35 zdrey Exp $
+/* $Id: InterpreterTestCase.java,v 1.2 2006-10-25 08:30:35 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : LoadTest.java
 * License : GPL
@@ -11,7 +11,7 @@
 package kermeta_interpreter.test;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import junit.framework.TestCase;
 
 /**
@@ -27,7 +27,7 @@ public class InterpreterTestCase extends TestCase {
      */
     protected void setUp() throws Exception {
         super.setUp();
-        KermetaUnit.STD_LIB_URI = "lib/framework.km";
+        StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
     }
 
     /**

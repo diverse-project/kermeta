@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.26 2006-07-25 16:03:53 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.27 2006-10-25 08:28:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.URI;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
@@ -44,7 +45,7 @@ public class JunitTestSuite extends TestCase {
 		super(arg0);
 		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 		        "../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
-		KermetaUnit.STD_LIB_URI = "./lib/framework.km";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "./lib/framework.km";
 	}
 	
 	protected void setUp() throws Exception {
@@ -58,8 +59,8 @@ public class JunitTestSuite extends TestCase {
 	
 	// do not modify this comment
 
-/*** BEGIN GENERATED TESTS ***/
 
+/*** BEGIN GENERATED TESTS ***/
 public void testpuzzle() throws Exception {
 testWithFile("test/ecore_testcases","puzzle.ecore" );
 }
@@ -361,7 +362,7 @@ public void testWithFile(String dir, String file) throws Exception {
 	//	builder.loadMCT(new File(baseDir + file));
 	
 	// phase 1 : test that it load correctly
-	KermetaUnit.unloadStdLib();
+	StdLibKermetaUnitHelper.unloadStdLib();
 	KermetaUnitFactory.resetDefaultLoader();
 	KermetaUnitFactory.getDefaultLoader().unloadAll();
 	KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
@@ -409,7 +410,7 @@ public void testWithFile(String dir, String file) throws Exception {
 			
 			// phase 3 bis, check that the prettyprinted version can be parsed 
 			// try to re-parse the pretty-printed version
-			KermetaUnit.unloadStdLib();
+			StdLibKermetaUnitHelper.unloadStdLib();
 			KermetaUnitFactory.resetDefaultLoader();
 			KermetaUnitFactory.getDefaultLoader().unloadAll();
 			KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);

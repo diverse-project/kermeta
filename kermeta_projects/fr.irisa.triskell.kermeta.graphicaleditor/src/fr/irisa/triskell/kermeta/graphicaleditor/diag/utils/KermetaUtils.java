@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.3 2006-10-11 08:54:06 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.4 2006-10-25 08:30:54 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -103,7 +104,7 @@ public class KermetaUtils {
 	 */
 	public KermetaUnit loadStdLib() { // KermetaUnit.STD_LIB_URI =
 										// "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-		return KermetaUnit.getStdLib();
+		return StdLibKermetaUnitHelper.getKermetaUnit();
 	}
 
 	/**

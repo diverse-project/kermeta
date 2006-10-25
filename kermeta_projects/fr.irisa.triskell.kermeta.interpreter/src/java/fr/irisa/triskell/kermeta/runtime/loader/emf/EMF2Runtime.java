@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.50 2006-08-03 15:33:47 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.51 2006-10-25 08:30:14 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -15,10 +15,8 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
@@ -26,18 +24,16 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
@@ -474,13 +470,13 @@ public class EMF2Runtime {
 		if (propertyExists == true)
 		{
 			//System.out.println("feature name : " + eclass.getName()+ "."+ feature.getName());
-			result = unit.getKermetaUnit().findPropertyByName(classDef, propName);
+			result = ClassDefinitionHelper.findPropertyByName(classDef, propName);
 			// If result is still null, send an exception
 			if (result == null)
 			{
 				String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + classDef.getName() +
 				" ; known properties are : ";
-				for ( Object prop : unit.getKermetaUnit().getAllProperties(classDef)) 
+				for ( Object prop : ClassDefinitionHelper.getAllProperties(classDef)) 
 				{ errmsg += ((Property)prop).getName() + ", "; }
 				errmsg += "\n in class \"" + classDef.getName() +"\"";
 				errmsg += "\nwith feature == " + feature;

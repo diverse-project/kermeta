@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.22 2006-10-04 11:30:23 ftanguy Exp $
+/* $Id: KMT2KMPass7.java,v 1.23 2006-10-25 08:26:41 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -65,6 +65,9 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
+
 
 /**
  * Pass that adds the comments (annotations) as tags of a model element (class, assignment,
@@ -115,18 +118,18 @@ public class KMT2KMPass7 extends KMT2KMPass {
         if (annNode instanceof Operation)
         {   
             name = ((Operation)annNode).getName().getText();
-            e = builder.findOperationByName(builder.current_class, name);
+            e = ClassDefinitionHelper.findOperationByName(builder.current_class, name);
             builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation) e;
         }
         else if (annNode instanceof Property)
         {	
        	    name = ((Property)annNode).getName().getText();
-            e = builder.findPropertyByName(builder.current_class, name);
+            e = ClassDefinitionHelper.findPropertyByName(builder.current_class, name);
             builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property) e;
         }
         else if (annNode instanceof Invariant) {
         	name = ((Invariant)annNode).getName().getText();
-        	e = builder.findInvariantByName(builder.current_class, name);
+        	e = ClassDefinitionHelper.findInvariantByName(builder.current_class, name);
         	builder.current_constraint = (fr.irisa.triskell.kermeta.language.structure.Constraint) e;
         }
         
@@ -143,7 +146,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
         Annotations annLst = node.getAnnotations();
         fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
         String name = node.getName().getText();
-        c = builder.findPreConditionByName(builder.current_operation, name);
+        c = OperationHelper.findPreConditionByName(builder.current_operation, name);
         builder.current_constraint = c;
 
         if (c != null) // we should have found the object however...
@@ -159,7 +162,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
         Annotations annLst = node.getAnnotations();
         fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
         String name = node.getName().getText();
-        c = builder.findPostConditionByName(builder.current_operation, name);
+        c = OperationHelper.findPostConditionByName(builder.current_operation, name);
         builder.current_constraint = c;
 
         if (c != null) // we should have found the object however...

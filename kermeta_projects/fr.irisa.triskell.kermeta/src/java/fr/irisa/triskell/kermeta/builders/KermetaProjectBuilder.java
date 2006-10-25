@@ -2,10 +2,6 @@ package fr.irisa.triskell.kermeta.builders;
 
 import java.util.Map;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -23,9 +19,9 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-//import fr.irisa.triskell.kermeta.loader.compilationunit.CompilationUnitManager;;
 
 public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 
@@ -98,8 +94,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	public static final String BUILDER_ID = "fr.irisa.triskell.kermeta.kermetaProjectBuilder";
 
 	private static final String MARKER_TYPE = "fr.irisa.triskell.kermeta.kermetaProblem";
-
-	private SAXParserFactory parserFactory;
 
 	private void addMarker(IFile file, String message, int lineNumber,
 			int severity) {
@@ -212,8 +206,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	 */
 	protected KermetaUnit compile(IFile file)
     {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-    	String uri = "platform:/resource" + file.getFullPath().toString();
+		StdLibKermetaUnitHelper.setURItoDefault();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
         deleteMarkers(file);

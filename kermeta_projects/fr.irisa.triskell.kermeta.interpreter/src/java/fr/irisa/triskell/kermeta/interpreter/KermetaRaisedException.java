@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.12 2006-06-27 12:31:25 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.13 2006-10-25 08:30:14 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -22,6 +22,8 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * @author Franck Fleurey
@@ -154,9 +156,9 @@ public class KermetaRaisedException extends Error {
         fr.irisa.triskell.kermeta.language.structure.Class fc = (fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getData().get("kcoreObject");
         ClassDefinition exception_cd = (ClassDefinition)memory.getUnit().getTypeDefinitionByName("kermeta::exceptions::RuntimeError");
         // Is the raised_object an kermeta::exceptions::RuntimeError?
-        if (cause_object!=null && memory.getUnit().isSuperClass(exception_cd, (ClassDefinition) fc.getTypeDefinition()))
+        if (cause_object!=null && ClassDefinitionHelper.isSuperClassOf(exception_cd, (ClassDefinition) fc.getTypeDefinition()))
         {
-            Property fexp_prop = memory.getUnit().findPropertyByName((ClassDefinition) fc.getTypeDefinition(), "expression");
+            Property fexp_prop = ClassDefinitionHelper.findPropertyByName((ClassDefinition) fc.getTypeDefinition(), "expression");
             RuntimeObject expression_property = memory.getRuntimeObjectForFObject(fexp_prop);
             RuntimeObject expression_value = cause_object;
             // Set the "expression" property of the RuntimeError

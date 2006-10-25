@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.3 2006-09-29 08:30:58 dtouzet Exp $
+/* $Id: Ecore2KMPass1.java,v 1.4 2006-10-25 08:27:12 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -45,6 +45,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -408,7 +409,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		TypeDefinition def = null;
 		
 		if (etype == null) { 
-			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
+			def = StdLibKermetaUnitHelper.getKermetaUnit().typeDefinitionLookup("kermeta::standard::Void");
 		}
 		else {
 			def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));

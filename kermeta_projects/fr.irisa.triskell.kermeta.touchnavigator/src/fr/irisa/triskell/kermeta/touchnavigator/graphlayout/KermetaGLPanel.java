@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.13 2006-04-05 19:51:48 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.14 2006-10-25 08:29:45 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -28,6 +28,7 @@ import com.touchgraph.graphlayout.interaction.TGUIManager;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -401,7 +402,7 @@ public class KermetaGLPanel extends GLPanel
 		}
         //result = findAClassInUnitPackage(kunit.rootPackage);
 		//result = findAClassInResource(kunit.rootPackage.eResource());
-        if (result == null) result = kunit.get_ROOT_TYPE_ClassDefinition();
+        if (result == null) result = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
 		return result;
 	}
 	
@@ -415,7 +416,7 @@ public class KermetaGLPanel extends GLPanel
         		result = (ClassDefinition)obj;
         	}
         }
-        if (result == null) result = TexteditorPlugin.getDefault().getEditor().getMcunit().get_ROOT_TYPE_ClassDefinition();		
+        if (result == null) result = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();		
         return result;
 	}
 	

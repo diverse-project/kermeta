@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.3 2006-05-03 15:02:22 zdrey Exp $
+/* $Id: PropertyChecker.java,v 1.4 2006-10-25 08:27:26 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -15,15 +15,13 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import java.util.Iterator;
 import java.util.List;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -94,7 +92,7 @@ public class PropertyChecker extends AbstractChecker {
 		// An property cannot be defined twice in the same class
 		boolean result = true;
 		int number_of_duplicate = 0;
-		List<Property> props = builder.getAllProperties(classDefinition);
+		List<Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
 		for (Property p : props) {
 			if (p.getName().equals(property.getName()))
 			{

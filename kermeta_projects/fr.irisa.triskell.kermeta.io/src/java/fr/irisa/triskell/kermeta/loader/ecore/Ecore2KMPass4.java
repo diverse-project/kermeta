@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.4 2006-09-22 11:12:23 dtouzet Exp $
+/* $Id: Ecore2KMPass4.java,v 1.5 2006-10-25 08:27:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -35,6 +35,8 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
+
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 
 /**
@@ -126,7 +128,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 			
 			// Quickfix to handle operation named like properties
 			if (Ecore2KM.isMethodPropertyNameOverlapSafe) {
-				Property prop = unit.findPropertyByName(exporter.current_classdef, exporter.current_op.getName());
+				Property prop = ClassDefinitionHelper.findPropertyByName(exporter.current_classdef, exporter.current_op.getName());
 				if (prop != null) {
 					String newName = Ecore2KM.methodRenamePrefix + exporter.current_op.getName() +Ecore2KM.methodRenamePostfix;
 					unit.messages.addWarning("Quickfix used to rename duplicate operation due to a the property with the same name: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
@@ -141,7 +143,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 			if (Ecore2KM.isMethodNameOverlapSafe) {
 				
 				// Quickfix to avoid two operations with the same name in the same class (even with different parameters)
-				Operation op = unit.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
+				Operation op = ClassDefinitionHelper.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
 
 				int i = 2;
 				String newName;
@@ -150,7 +152,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 					unit.messages.addWarning("Quickfix used to rename duplicate operation: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
 					exporter.current_op.setName(newName);
 					
-					op = unit.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
+					op = ClassDefinitionHelper.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
 					
 					propagateRenaming(exporter.current_op);
 				}
@@ -159,7 +161,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 				// Quickfix to avoid 2 operations with the same name but different parameters in a single inheritance tree
 				EList refParams = exporter.current_op.getOwnedParameter();
 
-				ArrayList opList = exporter.unit.getAllOperations(exporter.current_classdef);
+				ArrayList opList = ClassDefinitionHelper.getAllOperations(exporter.current_classdef);
 				Iterator it = opList.iterator();
 				
 				boolean match = true;
@@ -273,7 +275,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 			}
 			else
 			{
-				superop = (Operation)unit.getOperationByName(cdef, exporter.current_op.getName()); 
+				superop = ClassDefinitionHelper.getOperationByName(cdef, exporter.current_op.getName()); 
 				exporter.current_op.setSuperOperation(superop);
 			}
 		}

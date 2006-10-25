@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.9 2006-09-27 15:58:23 dtouzet Exp $
+/* $Id: Ecore2KMPass3.java,v 1.10 2006-10-25 08:27:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
@@ -41,13 +40,12 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -357,7 +355,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			}
 			else
 			{
-				superop = (Operation)unit.getOperationByName(cdef, exporter.current_op.getName()); 
+				superop = (Operation)ClassDefinitionHelper.getOperationByName(cdef, exporter.current_op.getName()); 
 				exporter.current_op.setSuperOperation(superop);
 			}
 		}

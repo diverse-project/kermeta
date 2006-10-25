@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.2 2006-09-20 12:08:18 dvojtise Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.3 2006-10-25 08:30:14 dvojtise Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -11,6 +11,8 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * this class contains many static operation that helps to deal with runtime object
@@ -56,7 +58,7 @@ public class RuntimeObjectHelper {
 		ClassDefinition coll_cd = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Collection");
 		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
 				.getMetaclass().getData().get("kcoreObject");
-		if (kunit.isSuperClass(coll_cd,
+		if (ClassDefinitionHelper.isSuperClassOf(coll_cd,
 				(ClassDefinition) c.getTypeDefinition()))
 			b = true;
 		return b;

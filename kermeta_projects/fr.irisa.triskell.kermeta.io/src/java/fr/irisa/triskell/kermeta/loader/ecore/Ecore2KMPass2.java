@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.11 2006-09-27 15:58:23 dtouzet Exp $
+/* $Id: Ecore2KMPass2.java,v 1.12 2006-10-25 08:27:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -14,7 +14,6 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -24,7 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 
 /**
@@ -84,19 +83,19 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		{
 			unit.messages.addWarning("Instance class seems to be unset for EDatatype '" + 
 					Ecore2KM.getQualifiedName((EDataType)node) + "' : replaced by Object", null);
-			type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object"); 
+			type = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
 		}
 		else
 		{
 			type = unit.typeDefinitionLookup(type_name);
 			// FIXME : standard library is not browsable anymore?
-			if (type == null) type = KermetaUnit.getStdLib().typeDefinitionLookup(type_name);
+			if (type == null) type = StdLibKermetaUnitHelper.getKermetaUnit().typeDefinitionLookup(type_name);
 			// FIXME : If type is still null, replacing by the basic Object type of Kermeta. 
 			// Not the best way to process. Idea: annotate Kermeta alias with an extern "instanceClassName"?
 			if (type == null) {
 				unit.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + 
 						Ecore2KM.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
-				type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object");
+				type = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
 			}
 		}
 		result.setInstanceType(createInstanceTypeForTypeDefinition(type));

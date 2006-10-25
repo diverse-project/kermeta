@@ -1,4 +1,4 @@
-/* $Id: IoTestSuite.java,v 1.1 2005-12-28 12:51:10 dvojtise Exp $
+/* $Id: IoTestSuite.java,v 1.2 2006-10-25 08:28:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : IoTestSuite.java
  * License    : EPL
@@ -15,7 +15,7 @@ package kermeta_io;
 
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 
 /**
@@ -29,7 +29,7 @@ public class IoTestSuite extends TestSuite {
 		super(arg0);
 		
 		 // SET THE STD LIB
-	    KermetaUnit.STD_LIB_URI = "lib/framework.km";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
 	    // INIT TYPE CHECKER
 	  //  TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
 	    this.addTest(new TestSuite(kermeta_io.constraintchecker_test.JunitTestSuite.class));

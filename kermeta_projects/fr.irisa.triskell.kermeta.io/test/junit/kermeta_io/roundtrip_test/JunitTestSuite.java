@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2006-07-25 15:59:14 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2006-10-25 08:28:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
@@ -52,7 +53,7 @@ public class JunitTestSuite extends TestCase {
 		super(arg0);
 		
 		 // SET THE STD LIB
-		KermetaUnit.STD_LIB_URI = "lib/framework.km";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
 		printer = new KM2KMTPrettyPrinter();
 	    // INIT TYPE CHECKER
 	  //  TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());

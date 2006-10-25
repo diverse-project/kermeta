@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: Ecore2KMPass4.java,v 1.5 2006-10-25 08:27:01 dvojtise Exp $
  * Project : Kermeta 
  * File : ECore2KMPass4.java
  * License : EPL
@@ -16,6 +16,8 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 
 /**
@@ -42,7 +44,7 @@ public class Ecore2KMPass4 extends ECore2KMPass {
 		// opposite :
 		
 		if (node.getOppositeName() != null) { // there is an opposite
-		    Property oposite = builder.getPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)res.getType()).getTypeDefinition(), getTextForID(node.getOppositeName()));
+		    Property oposite = ClassDefinitionHelper.getPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)res.getType()).getTypeDefinition(), getTextForID(node.getOppositeName()));
 		    if (oposite == null) {
 		    	builder.messages.addError("Unable to resolve opposite property '" + getTextForID(node.getOppositeName()) + "'.", null);
 		    	return false;

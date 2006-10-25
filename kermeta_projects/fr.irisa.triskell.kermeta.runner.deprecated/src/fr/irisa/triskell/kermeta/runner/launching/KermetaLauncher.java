@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.20 2006-09-19 15:00:51 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.21 2006-10-25 08:29:16 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -24,8 +24,8 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
@@ -110,8 +110,8 @@ public class KermetaLauncher
         try
         {
         	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-            //  be sure this value is correctly set        
-            KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+            //  be sure this value is correctly set           
+        	StdLibKermetaUnitHelper.setURItoDefault();
             
             Tracer tracer = isDebugMode?createTracer():null;
             
@@ -207,7 +207,7 @@ public class KermetaLauncher
         {
         	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
             //  be sure this value is correctly set        
-            KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+        	StdLibKermetaUnitHelper.setURItoDefault();
             
             Tracer tracer = isDebugMode?createTracer():null;
             

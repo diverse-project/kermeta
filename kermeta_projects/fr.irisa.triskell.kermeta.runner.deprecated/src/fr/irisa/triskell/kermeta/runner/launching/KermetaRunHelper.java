@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.18 2006-09-22 09:39:18 ftanguy Exp $
+/* $Id: KermetaRunHelper.java,v 1.19 2006-10-25 08:29:16 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -19,7 +19,7 @@ import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
@@ -45,8 +45,8 @@ public class KermetaRunHelper {
 	 * @return KermetaUnit the compilation unit for the given file
 	 */
     public static KermetaUnit parse(IFile file)
-    {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+    {   
+    	StdLibKermetaUnitHelper.setURItoDefault();
 
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();

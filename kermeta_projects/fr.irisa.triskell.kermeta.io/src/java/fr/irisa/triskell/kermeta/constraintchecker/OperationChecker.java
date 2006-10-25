@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.10 2006-09-25 14:42:13 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.11 2006-10-25 08:27:26 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -15,11 +15,8 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -30,10 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -90,14 +84,13 @@ public class OperationChecker extends AbstractChecker {
 	public boolean checkOperationSignature()
 	{
 		boolean result = false;
-		Object found = null;
 		Operation next = null;
 		// (Dev.note : kermeta::reflection::Object "became" kermeta::language::structure::Object)
 		// Get the kermeta::language::structure::Object *implicitly* inherited super operation
 		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::language::structure::Object"));
 		if (object_classdef != null) // robustness useless test -> kermeta::language::structure::Object type should already have been parsed!
 		{ 
-			next = builder.findOperationByName(object_classdef, operation.getName());
+			next = ClassDefinitionHelper.findOperationByName(object_classdef, operation.getName());
 		}
 		// If this operation was not found in implicitly inherited Object
 		// then get all operations, including the inherited ones
@@ -140,7 +133,7 @@ public class OperationChecker extends AbstractChecker {
 	{
 		boolean result = true;
 		int number_of_duplicate = 0;
-		List<Operation> ops = builder.getAllOperations(classDefinition);
+		List<Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
 		for (Operation op : ops) {
 			if (op.getName().equals(operation.getName()) && operation.getSuperOperation()==null)
 			{

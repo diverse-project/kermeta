@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2006-07-20 13:18:43 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2006-10-25 08:28:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -20,6 +20,7 @@ package kermeta_io.typechecker_test;
 import junit.framework.TestCase;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
@@ -34,7 +35,7 @@ public class JunitTestSuite extends TestCase {
 		super(arg0);
 		
 		 // SET THE STD LIB
-	    KermetaUnit.STD_LIB_URI = "lib/framework.km";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
 	    // INIT TYPE CHECKER
 	  //  TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
 		
@@ -64,6 +65,7 @@ public class JunitTestSuite extends TestCase {
 	}
 	*/
 	// do not modify this comment
+
 
 
 

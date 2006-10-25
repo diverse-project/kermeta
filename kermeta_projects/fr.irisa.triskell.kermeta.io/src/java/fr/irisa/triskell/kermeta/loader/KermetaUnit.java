@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.75 2006-09-28 14:40:35 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.76 2006-10-25 08:25:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -17,7 +17,6 @@ import java.util.Hashtable;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -62,43 +61,24 @@ import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
- * A kermeta unit is an entity that embeds the model
- * of a Kermeta program, and provides a set of methods that are aimed at helping
- * the access to the model object
+ * A Kermeta unit is an entity that represents a logical representation of the files of the model
+ * It provides some helper classes (or delegate method) that aim to ease the access to model objects
+ * Several methods navigate through the import graph to provide even higher level abstraction 
+ * so it can look like a model. 
  */
 public abstract class KermetaUnit {
 	
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
 	
-    public static String STD_LIB_URI = null;//"platform:/resource/fr.irisa.triskell.kermeta.io/lib/framework.km";
-	
-    public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
-	
-	protected static KermetaUnit std_lib = null;
-	
 	protected boolean constraint_checked = false;
 	public boolean cycle_constraint_checked = false;
 	
+		
 	/**
 	 * those filters are used only in the case of jar unit
 	 */
 	public ArrayList<String> excludeFilters = new ArrayList<String>();
-	public ArrayList<String> includeFilters = new ArrayList<String>();
-	
-	public static KermetaUnit getStdLib() {
-		if (std_lib == null) {
-			std_lib = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("kermeta", new Hashtable());
-			
-			try {
-				std_lib.load();
-			}
-			catch(Throwable e) {
-				std_lib.messages.addError("Exception while importing the standartd library : " + e, null);
-				internalLog.error("Exception while importing the standartd library", e);
-			}
-		}
-		return std_lib;
-	}
+	public ArrayList<String> includeFilters = new ArrayList<String>();	
 	
     protected void finalize() throws Throwable {
     	internalLog.debug("Finalise kermeta unit " + this + " " + uri);
@@ -206,13 +186,7 @@ public abstract class KermetaUnit {
 		for (KermetaUnit iu : getAllImportedUnits())
 	        iu.constraintCheck(null);
 	}
-	
-	protected void importStdlib() {
-		//if (STD_LIB_URI != null && this != std_lib) importedUnits.add(getStdLib());
-		//System.out.println("importStdlib " + this + " != " + std_lib);
-	}
 
-	
 	/**
 	 * URI of the Unit
 	 */
@@ -396,7 +370,7 @@ public abstract class KermetaUnit {
 	 * @see getAllImportedUnits 
 	 */
 	public ArrayList<KermetaUnit> importedUnits = new ArrayList<KermetaUnit>();
-	
+		
 	/**
 	 * Allows to retreive the node that has defined each of the imported units
 	 * Key: an importedUnit
@@ -647,233 +621,6 @@ public abstract class KermetaUnit {
 		else return element.getName();
 	}
 	
-	/**
-	 * Get an operation by its name
-	 */
-	public Operation getOperationByName(ClassDefinition c, String name) {
-		EList ops = c.getOwnedOperation();
-		for (int i=0; i<ops.size(); i++) {
-			Operation op = (Operation)ops.get(i);
-			if (op.getName().equals(name)) return op;
-		}
-		return null;
-	}
-	
-	/**
-	 * Get a property by its name
-	 */
-	public Property getPropertyByName(ClassDefinition c, String name) {
-		EList props = c.getOwnedAttribute();
-		for (int i=0; i<props.size(); i++) {
-			Property prop = (Property)props.get(i);
-			if (prop.getName().equals(name)) return prop;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get a Constraint by its name in ClassDef c
-	 * @param c
-	 * @param name
-	 * @return
-	 */
-	public Constraint getInvariantByName(ClassDefinition c, String name) {
-		EList invs = c.getInv();
-		for (int i=0; i<invs.size(); i++) {
-			Constraint inv = (Constraint) invs.get(i);
-			if(inv.getName().equals(name))
-				return inv;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get a PreCondition by its name in Operation op
-	 * @param op
-	 * @param name
-	 * @return
-	 */
-	public Constraint getPreConditionByName(Operation op, String name) {
-		EList preConds = op.getPre();
-		for (int i=0; i<preConds.size(); i++) {
-			Constraint pre = (Constraint) preConds.get(i);
-			if(pre.getName().equals(name))
-				return pre;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get a PostCondition by its name in Operation op
-	 * @param op
-	 * @param name
-	 * @return
-	 */
-	public Constraint getPostConditionByName(Operation op, String name) {
-		EList postConds = op.getPost();
-		for (int i=0; i<postConds.size(); i++) {
-			Constraint post = (Constraint) postConds.get(i);
-			if(post.getName().equals(name))
-				return post;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get an operation by its name. search in the inheritance tree
-	 */
-	public Operation findOperationByName(ClassDefinition c, String name) {
-		for (Object next : getAllOperations(c)) {
-	        Operation op = (Operation)next;
-	        if (op.getName().equals(name)) return op;
-	    }
-	    return null;
-	}
-	
-	/**
-	 * Get an property by its name. search in the inheritance tree
-	 */
-	public Property findPropertyByName(ClassDefinition c, String name) {
-		Property result = getPropertyByName(c, name);
-		if (result != null) return result;
-		EList superclasses = c.getSuperType();
-		for(int i=0; i<superclasses.size();i++) {
-			ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
-			result = findPropertyByName(sc, name);
-			if (result != null) return result;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get a Constraint by its name in ClassDef c and its inheritance tree
-	 * @param c
-	 * @param name
-	 * @return
-	 */
-	public Constraint findInvariantByName(ClassDefinition c, String name) {
-		Constraint result = getInvariantByName(c, name);
-		if (result != null) return result;
-		EList superclasses = c.getSuperType();
-		for(int i=0; i<superclasses.size();i++) {
-			ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
-			result = findInvariantByName(sc, name);
-			if (result != null) return result;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get a PreCondition by its name in Operation op and its superoperations
-	 * @param op
-	 * @param name
-	 * @return
-	 */
-	public Constraint findPreConditionByName(Operation op, String name) {
-		Constraint result = getPreConditionByName(op, name);
-		if (result != null) return result;
-		
-		Operation superOp = op.getSuperOperation();
-		if(superOp != null) {
-			result = findPreConditionByName(superOp, name);
-			if(result != null) return result;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Get a PostCondition by its name in Operation op and its superoperations
-	 * @param op
-	 * @param name
-	 * @return
-	 */
-	public Constraint findPostConditionByName(Operation op, String name) {
-		Constraint result = getPostConditionByName(op, name);
-		if (result != null) return result;
-		
-		Operation superOp = op.getSuperOperation();
-		if(superOp != null) {
-			result = findPostConditionByName(superOp, name);
-			if(result != null) return result;
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Return true if supercls is a super class of cls
-	 * @param supercls the Super class to which we compare cls
-	 * @param cls the class to compare to the super class
-	 * @return
-	 */
-	public boolean isSuperClass(ClassDefinition supercls, ClassDefinition cls) {
-		for(Object stype : cls.getSuperType()) {
-			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
-			if (supercls == scls) return true;
-			else if(isSuperClass(supercls, scls)) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Get the list of direct parents of a class
-	 * @param cls Class for which we get the first-level parents
-	 * @return a Array of the <b>cls</b>'s first-level parents
-	 */
-	public ClassDefinition[] getDirectSuperClasses(ClassDefinition cls) {
-		ArrayList result = new ArrayList();
-		for(Object next : cls.getSuperType()) {
-			result.add( ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition() );
-		}
-		// THIS LOOKS USELESS
-		/*
-		// Add the type Object which is implicilty a direct supertype of everything
-		ClassDefinition ObjectTypeDef = (ClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
-		if (ObjectTypeDef != null && cls != ObjectTypeDef && !result.contains(ObjectTypeDef)) {
-			result.add(ObjectTypeDef);
-		}
-		*/
-			
-		return (ClassDefinition[])result.toArray(new ClassDefinition[result.size()]);
-	}
-	
-	public ClassDefinition get_ROOT_TYPE_ClassDefinition() {
-	    ClassDefinition result = (ClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
-	    if (result == null && STD_LIB_URI != null) {
-	        result = (ClassDefinition)getStdLib().typeDefinitionLookup(ROOT_CLASS_QNAME);
-	    }
-	    
-	    return result;
-	}
-	
-	public ArrayList getAllOperations(ClassDefinition cls) {
-		ArrayList result = new ArrayList();
-		
-		// Get the operations on object type :
-		ClassDefinition ObjectTypeDef = get_ROOT_TYPE_ClassDefinition();
-		if (ObjectTypeDef != null) {
-		    result.addAll(getAllOperationsOnRootType(ObjectTypeDef));
-		}
-		
-		for (Object next : cls.getOwnedOperation()) {
-			Operation op = (Operation)next;
-			// only take operation. no methods
-			if (op.getSuperOperation() == null && !result.contains(op)) result.add(op);
-		}
-		// search recursively in super classes
-		for (Object next : cls.getSuperType()) {
-			result.addAll(getAllOperations((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition()));
-		}
-		return result;
-	}
-	
 	/** @return all the type definitions available in this kermeta unit, in
 	 * all packages */
 	public ArrayList<TypeDefinition> getAllTypeDefinitions() {
@@ -897,50 +644,11 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
-	/**
-	 * Get all the operations that are not a redefinition of a super operation.
-	 * @param cls
-	 * @return
-	 */
-	public ArrayList getAllOperationsOnRootType(ClassDefinition cls) {
-		ArrayList result = new ArrayList();
-		for (Object next : cls.getOwnedOperation()) {
-			Operation op = (Operation)next;
-			// only take operation. no methods
-			if (op.getSuperOperation() == null) result.add(op);
-		}
-		// search recursively in super classes
-		for (Object next : cls.getSuperType()) {
-			result.addAll(getAllOperationsOnRootType((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition()));
-		}
-		return result;
-	}
-	
-	/**
-	 * @param classDefinition
-	 * @return the list of all properties defined for the given class definition. This includes the inherited properties
-	 */
-	public ArrayList<Property> getAllProperties(ClassDefinition cls) {
-		ArrayList<Property> result = new ArrayList<Property>();
-		// ensures that each property is added only once.
-		for (Object prop : cls.getOwnedAttribute()) {
-			if(!result.contains(prop)) result.add( (Property) prop);
-		}
-		for (Object stnext : cls.getSuperType()) {
-			//ensures that each property is added only once.
-			for (Object prop : getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stnext).getTypeDefinition()))
-			{
-				if(!result.contains(prop)) result.add( (Property) prop);
-			}
-		}
-		return result;
-	}
-	
 	public void prettyPrint(String file_name) {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		for (int i=0; i<importedUnits.size(); i++) {
 	        KermetaUnit iu = importedUnits.get(i);
-	        if (STD_LIB_URI != null && iu == getStdLib()) continue;
+	        if (iu == StdLibKermetaUnitHelper.getKermetaUnit()) continue;
 	        pp.getImports().add(iu.getResolvedURI(uri));
 	    }
 		pp.getUsings().addAll(usings);
@@ -1066,28 +774,7 @@ public abstract class KermetaUnit {
 			}
 		}
 	}
-	
-	/**
-	 * Get all the tags attached to class members, and return
-	 * them, in order to save them in a resource (when saving as
-	 * XMI) */
-	public ArrayList fixClassMemberTags(ClassDefinition o)
-	{	// for the class
-	    ArrayList oTags = new ArrayList();
-	    oTags.addAll(o.getTag());
-	    // for its members
-	    EList opLst = o.getOwnedOperation();
-	    EList atLst = o.getOwnedAttribute();
-	    if (opLst.size()>0)
-	    for (int i=0; i<opLst.size();i++)
-	    {  oTags.addAll(((Operation)opLst.get(i)).getTag());}
-	    if (atLst.size()>0)
-	    for (int i=0; i<atLst.size();i++)
-	    {  oTags.addAll(((Property)atLst.get(i)).getTag());
-	    }
-	    return oTags;
-	}
-	
+		
 	public void load() {
 		//System.out.println("\nLOAD " + uri);
 	    //importStdlib();
@@ -1292,12 +979,7 @@ public abstract class KermetaUnit {
 		this.uri = uri;
 	}
     
-    /**
-     * 
-     */
-    public static void unloadStdLib() {
-       std_lib = null;
-    }
+    
     
     /** @return the trace handler */
     public Tracer getTracer() { return tracer; }
