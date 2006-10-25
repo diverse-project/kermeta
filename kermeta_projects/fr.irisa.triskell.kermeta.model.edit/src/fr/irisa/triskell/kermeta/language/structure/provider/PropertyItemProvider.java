@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.10 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.11 2006-10-25 08:55:42 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -11,10 +11,10 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
-import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
+//import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,11 +127,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 							ClassDefinition eOppositeReferenceType = (ClassDefinition) ((Class) eOpposite
 									.getType()).getTypeDefinition();
 							if (eOppositeContainingClass == null
-									|| !KermetaCommonUtils.isSuperType(
+									|| !ClassDefinitionHelper.isSuperClassOf(
 											eOppositeContainingClass,
 											eReferenceType)
 									|| eOppositeContainingClass != eReferenceType
-									|| !KermetaCommonUtils.isSuperType(
+									|| !ClassDefinitionHelper.isSuperClassOf(
 											eContainingClass,
 											eOppositeReferenceType)
 									|| eContainingClass != eOppositeReferenceType) {
@@ -353,7 +353,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		// We get the label (ClassDefinition name) of the parent of the given
 		// Property
 		return label == null || label.length() == 0 ? getString("_UI_Property_type")
-				: /*getString("_UI_Property_type") + " " + */label + " from "
+				: getString("_UI_Property_type") + " " + label + " from "
 						+ parent;
 	}
 

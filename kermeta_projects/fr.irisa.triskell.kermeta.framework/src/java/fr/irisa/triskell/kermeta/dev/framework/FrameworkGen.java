@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.14 2006-03-03 15:21:25 dvojtise Exp $
+/* $Id: FrameworkGen.java,v 1.15 2006-10-25 08:56:03 dvojtise Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Package;
 
@@ -50,11 +51,11 @@ public class FrameworkGen {
 	public void loadModels() {
 		
 		
-		KermetaUnit.STD_LIB_URI = "src/kermeta/Standard.kmt";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "src/kermeta/Standard.kmt";
 		
 		
-		if (KermetaUnit.getStdLib().messages.unitHasError) {
-			System.err.println(KermetaUnit.getStdLib().messages.getMessagesAsString());
+		if (StdLibKermetaUnitHelper.getKermetaUnit().messages.unitHasError) {
+			System.err.println(StdLibKermetaUnitHelper.getKermetaUnit().messages.getMessagesAsString());
 			System.exit(-1);
 		}
 		
