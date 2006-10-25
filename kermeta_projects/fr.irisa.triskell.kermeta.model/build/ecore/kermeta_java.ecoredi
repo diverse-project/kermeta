@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="kermeta_java.ecore#/"/>
-  <diagrams position="0,0" size="100,100" name="Kermeta structure" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="Kermeta structure" viewport="711,310">
     <property key="pageFormatName" value="A3"/>
     <property key="diagramWidth" value="1188"/>
     <property key="diagramHeight" value="1680"/>
@@ -469,8 +469,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.24/@anchorage.0 //@diagrams.0/@contained.11/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -102, -920, 179]</waypoints>
-      <waypoints>[920, -102, 0, 179]</waypoints>
+      <waypoints>[0, -80, -920, 179]</waypoints>
+      <waypoints>[920, -80, 0, 179]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.24/@anchorage.0 //@diagrams.0/@contained.14/@anchorage.0">
       <property key="router" value="Rectilinear"/>
@@ -985,8 +985,8 @@
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.71/@anchorage.0 //@diagrams.0/@contained.45/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -307, 560, 143]</waypoints>
-      <waypoints>[-560, -307, 0, 143]</waypoints>
+      <waypoints>[0, -351, 576, 143]</waypoints>
+      <waypoints>[-576, -351, 0, 143]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.71/@anchorage.0 //@diagrams.0/@contained.64/@anchorage.0">
       <property key="font" value="-regular-8"/>
