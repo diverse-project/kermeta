@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="kermeta_java.ecore#/"/>
-  <diagrams position="0,0" size="100,100" name="Kermeta structure" viewport="711,310">
+  <diagrams position="0,0" size="100,100" name="Kermeta structure" viewport="777,540">
     <property key="pageFormatName" value="A3"/>
     <property key="diagramWidth" value="1188"/>
     <property key="diagramHeight" value="1680"/>
@@ -355,8 +355,8 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="24" vDistance="6"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="9" vDistance="7"/>
-      <waypoints>[-23, 144, 657, 122]</waypoints>
-      <waypoints>[-635, 144, 45, 122]</waypoints>
+      <waypoints>[-23, 149, 657, 149]</waypoints>
+      <waypoints>[-635, 149, 45, 149]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.14/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
       <property key="router" value="Rectilinear"/>
@@ -624,8 +624,8 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="kermeta_java.ecore#//language/structure/ClassDefinition/ownedAttribute"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="23" vDistance="-3"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="4" vDistance="-3"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="18" vDistance="-3"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="3" vDistance="-4"/>
       <waypoints>[-46, 233, -867, 144]</waypoints>
       <waypoints>[782, 233, -39, 144]</waypoints>
     </contained>
@@ -640,7 +640,7 @@
         <element href="kermeta_java.ecore#//language/structure/Property/opposite"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="18" vDistance="-4"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="2" vDistance="-8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="3" vDistance="-8"/>
       <waypoints>[109, 47, 109, 47]</waypoints>
       <waypoints>[109, 96, 109, 96]</waypoints>
       <waypoints>[56, 96, 56, 96]</waypoints>
@@ -864,15 +864,15 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="kermeta_java.ecore#//language/structure/TypedElement/type"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="33" vDistance="-4"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="40" vDistance="-3"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="11" vDistance="-2"/>
       <waypoints>[71, -11, 133, 205]</waypoints>
       <waypoints>[71, -195, 133, 21]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.59/@anchorage.0 //@diagrams.0/@contained.45/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -72, 316, 144]</waypoints>
-      <waypoints>[-316, -72, 0, 144]</waypoints>
+      <waypoints>[0, -73, 363, 143]</waypoints>
+      <waypoints>[-363, -73, 0, 143]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="469,726" size="115,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.65 //@diagrams.0/@contained.66 //@diagrams.0/@contained.67 //@diagrams.0/@contained.68 //@diagrams.0/@contained.69 //@diagrams.0/@contained.70 //@diagrams.0/@contained.76"/>
@@ -981,7 +981,7 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="24" vDistance="-4"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="13" vDistance="-6"/>
-      <waypoints>[50, -487, 364, 7]</waypoints>
+      <waypoints>[54, -508, 359, -14]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.71/@anchorage.0 //@diagrams.0/@contained.45/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
