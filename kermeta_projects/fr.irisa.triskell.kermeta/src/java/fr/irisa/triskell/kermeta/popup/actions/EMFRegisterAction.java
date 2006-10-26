@@ -79,11 +79,30 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			obj = Registry.INSTANCE.get( uri );
 			if(obj instanceof EPackage) {
 				p = (EPackage) obj;
-				pList = pList + "  " + p.getName() + " [" + uri + "]\n";
+				//pList = pList + "  " + p.getName() + " [" + uri + "]\n";
+				pList = pList + "  " + getEPackageQualifiedName(p) + " [" + uri + "]\n";
 			}
 		}
 		
 		KermetaPlugin.getDefault().getConsoleStream().println(pList);
 	}
+	
+	
+	/**
+	 * @param p
+	 * @return
+	 */
+	protected String getEPackageQualifiedName(EPackage p) {
+		String result = null;
+		if(p == null)
+			result = "";
+		else
+			if(p.getESuperPackage() != null)
+				result = getEPackageQualifiedName(p.getESuperPackage()) + "::" + p.getName();
+			else
+				result = p.getName();
+		return result;
+	}
+	
 
 }
