@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.6 2006-10-04 08:35:26 dvojtise Exp $
+/* $Id: TypeEqualityChecker.java,v 1.7 2006-10-26 12:51:37 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -73,16 +73,20 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 			fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)provided;
 			if (p.getTypeDefinition() == arg0.getTypeDefinition()) {
 				result = new Boolean(true);
-				for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-					fr.irisa.triskell.kermeta.language.structure.Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
-					fr.irisa.triskell.kermeta.language.structure.Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
-					if (!TypeEqualityChecker.equals(t1, t2)) {
-						result = new Boolean(false);
-						break;
+				if (arg0.getTypeParamBinding().size()== p.getTypeParamBinding().size())
+					for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+						fr.irisa.triskell.kermeta.language.structure.Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
+						fr.irisa.triskell.kermeta.language.structure.Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
+						if (!TypeEqualityChecker.equals(t1, t2)) {
+							result = new Boolean(false);
+							break;
+						}
+						
 					}
+				else {
 					
+					result = new Boolean(false);
 				}
-			
 				// special case of UnknownJavaObject, we need to check the real underlying type 
 				// which is stored in a tag 
 				//String t1JavaTypeName = JarUnit.getUnderlyingJavaTypeName(p);
