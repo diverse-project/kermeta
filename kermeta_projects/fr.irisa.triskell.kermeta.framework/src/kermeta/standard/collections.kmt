@@ -263,23 +263,15 @@ class Set<G> inherits Collection<G>
 	/** returns the union of a set of elements  and the Set */
 	operation union(elements : Set<G>) : Set<G> is do
 		result := Set<G>.new
-		result := self
-		from var it : Iterator<G> init elements.iterator
-		until it.isOff
-		loop
-			result.add( it.next )
-		end
+		result.addAll(self)
+		result.addAll(elements)
 	end
 	
 	/** returns the union of a bag of elements and the Set */
 	operation unionWithBag(elements : Bag<G>) : Bag<G> is do
-		result := Bag<G>.new
-		result := self
-		from var it : Iterator<G> init elements.iterator
-		until it.isOff
-		loop
-			result.add( it.next )
-		end
+		result := Bag<G>.new				
+		result := addAll(self)
+		result := addAll(elements)
 	end
 	
 	/** returns the intersection of elements and the Set */
@@ -334,12 +326,8 @@ class Bag<G> inherits Collection<G>
 	/** returns the union of elements and the Bag */
 	operation union(elements : Collection<G>) : Bag<G> is do
 		result := Bag<G>.new
-		result := self
-		from var it : Iterator<G> init elements.iterator
-		until it.isOff
-		loop
-			result.add( it.next )
-		end
+		result := addAll(self)
+		result := addAll(elements)
 	end
 	
 	/** returns the intersection of elements and the Bag */
