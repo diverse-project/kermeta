@@ -70,23 +70,22 @@ public class ClassDefinitionModelerProvider extends
 		ArrayList deletelist = new ArrayList();
 
 		ClassDefinition theClassDef = (ClassDefinition) object;
-		
-		System.out.println("Debug - delete ClassDefinition");
 
 		// Get the types that refer the cuurent ClassDefinition
 		for (Iterator itLinks = KermetaCommonUtils.getOwnedTypesForTypeDefinitions(
 				theClassDef).iterator(); itLinks.hasNext();) {
+			
 			Object objType = itLinks.next();
 			if (objType instanceof ParameterizedType) {
 				ParameterizedType paramType = (ParameterizedType) objType;
 				// Give the TypeDefinition that references the ParameterizedType
 				GenericTypeDefinition refObj = paramType.getTypeDefinition();
+				
 				if (refObj instanceof ClassDefinition) {
 					// If the referenced ClassDefinition is the same than the current
 					// => this ParameterizedType must be deleted
 					if (theClassDef == ((ClassDefinition) refObj)) {
 						deletelist.add(paramType);
-						
 						// Get the container of the ParametizedType
 						// and if it is an instance of Property, then
 						// it will be deleted because it is the case
