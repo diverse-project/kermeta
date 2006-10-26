@@ -1,4 +1,4 @@
-/* $Id: StdLibKermetaUnitHelper.java,v 1.1 2006-10-25 08:25:45 dvojtise Exp $
+/* $Id: StdLibKermetaUnitHelper.java,v 1.2 2006-10-26 12:54:25 dvojtise Exp $
  * Project   : Kermeta 
  * File      : KermetaUnitSharedData.java
  * License   : EPL
@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 /**
  * This class deal with the special KermetaUnit for standard library which is shared by the other KermetaUnits
  *
+ * Currently, the StdLib acts as a singleton
  */
 public class StdLibKermetaUnitHelper  {
 
@@ -47,20 +48,29 @@ public class StdLibKermetaUnitHelper  {
 	}
 	
 	/** cache for get_ROOT_TYPE_ClassDefinition operation */
-	protected static ClassDefinition cachedRootTypeClassDefintion = null;
+	protected static ClassDefinition cachedRootTypeClassDefinition = null;
+	
 	
 	/** retreives the classDefinition for the root type namely "Object"
 	 * This is the special ClassDefinition of the superclass of all ClassDefinition
 	 * @return
 	 */
 	public static ClassDefinition get_ROOT_TYPE_ClassDefinition() {
-	    ClassDefinition result = cachedRootTypeClassDefintion;
-	    if (cachedRootTypeClassDefintion == null && STD_LIB_URI != null) {
+	    ClassDefinition result = cachedRootTypeClassDefinition;
+	    if (cachedRootTypeClassDefinition == null && (STD_LIB_URI != null || std_lib != null)) {
 	        result = (ClassDefinition)getKermetaUnit().typeDefinitionLookup(ROOT_CLASS_QNAME);
-	        cachedRootTypeClassDefintion = result;
+	        cachedRootTypeClassDefinition = result;
 	    }
 	    
 	    return result;
+	}
+	
+
+	/**
+	 * set the standard library to this KermetaUnit. this is usefull when compiling the standard lib itself
+	 */
+	public static void forceStdLib(KermetaUnit ku) {
+		std_lib = ku;
 	}
 	
 	/**
@@ -68,6 +78,6 @@ public class StdLibKermetaUnitHelper  {
      */
     public static void unloadStdLib() {
        std_lib = null;
-       cachedRootTypeClassDefintion = null;
+       cachedRootTypeClassDefinition = null;
     }
 }

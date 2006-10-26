@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.19 2006-10-25 08:26:41 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.20 2006-10-26 12:54:25 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -235,10 +235,10 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		}
 		
 		ClassDefinition objectClass = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
-		
 		if ( objectClass != null) {
 		    result.putAll(getSupersForMethodOnObject(objectClass, methname));
 		}
+		else builder.internalLog.warn("Not able to retreive Object ClassDefinition for operation/method check");
 		
 		return result;
 	}
