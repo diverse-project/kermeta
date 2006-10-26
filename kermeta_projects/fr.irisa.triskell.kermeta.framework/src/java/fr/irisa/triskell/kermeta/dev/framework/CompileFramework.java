@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.5 2005-11-28 12:48:02 dvojtise Exp $
+/* $Id: CompileFramework.java,v 1.6 2006-10-26 12:55:06 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.dev.framework;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 /**
  * @author Franck Fleurey
@@ -26,7 +27,11 @@ public class CompileFramework {
 
     public static void main(String[] args) {
         
+    	StdLibKermetaUnitHelper.unloadStdLib();
         KermetaUnit u = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/kermeta/Standard.kmt");
+
+        // As we are checking the standard lib itself, it cannot find it automatically using the usal way ...        
+        StdLibKermetaUnitHelper.forceStdLib(u);
         System.out.println("LOADING STANDARD LIBRARY...");
         u.load();
         if (u.messages.getAllErrors().size() != 0) {
