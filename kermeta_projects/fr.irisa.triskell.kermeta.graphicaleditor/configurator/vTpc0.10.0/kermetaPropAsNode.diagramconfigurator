@@ -11,11 +11,11 @@
       <items name="Inheritance link" part="//@parts.4"/>
     </paletteCategories>
   </palette>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.0" defaultFont="Tahoma-regular-8" type="Package" childElements="//@parts.0 //@parts.1" defaultBackgroundColor="0,0,0" container="true" defaultWidth="20"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.1" defaultFont="Tahoma-regular-8" type="Class" childElements="//@parts.2 //@parts.3" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.0" defaultFont="Tahoma-regular-8" type="Package" childElements="//@parts.0 //@parts.1" defaultBackgroundColor="241,241,241" container="true" defaultWidth="20" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.1" defaultFont="Tahoma-regular-8" type="Class" childElements="//@parts.2 //@parts.3" defaultBackgroundColor="241,235,215" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="0" maximumHeight="-1"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.2" type="Label"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.3" type="Label"/>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.4" targetDecoration="TRIANGLE">
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.4" targetDecoration="TRIANGLE" defaultRouter="TreeRouter">
     <sourceTargetCouple containerType="SOURCE" sourceNode="//@parts.1" targetNode="//@parts.1">
       <containerObject href="kermeta_structure.genmodel#//structure/ClassDefinition"/>
     </sourceTargetCouple>
