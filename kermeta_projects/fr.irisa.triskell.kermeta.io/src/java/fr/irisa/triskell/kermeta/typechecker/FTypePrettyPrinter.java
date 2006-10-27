@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.7 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.8 2006-10-27 08:49:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : FTypePrettyPrinter.java
 * License : GPL
@@ -19,6 +19,7 @@ import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -43,7 +44,7 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     //public Object visit(FClass arg0) {
     public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class arg0) {
         //String result = arg0.getFClassDefinition().getFName();
-        String result = KMTHelper.getQualifiedName(arg0.getTypeDefinition());
+        String result = NamedElementHelper.getMangledQualifiedName(arg0.getTypeDefinition());
         if (arg0.getTypeParamBinding().size() > 0) {
             result += "<";
 	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {

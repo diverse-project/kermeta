@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.14 2006-10-25 08:29:45 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.15 2006-10-27 08:50:38 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -33,6 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
@@ -40,7 +41,6 @@ import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaGLNavigateUI;
 import fr.irisa.triskell.kermeta.touchnavigator.textPresentation.KTNHintHTMLPrettyPrinter;
 import fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.utils.BooleanLock;
 
 /** KermetaGLPanel contains code for adding scrollbars and interfaces to the TGPanel
@@ -332,7 +332,7 @@ public class KermetaGLPanel extends GLPanel
 	                //ClassDefinition clasDef = findAClassInUnit();
 	                //clasDef = kunit.get_ROOT_TYPE_ClassDefinition(); // return Object all the time
 	                //System.err.println(KMTHelper.getQualifiedName(clasDef));
-	                Collection nodes = tgPanel.getGES().findNodesByLabel(KMTHelper.getQualifiedName(clasDef));
+	                Collection nodes = tgPanel.getGES().findNodesByLabel(NamedElementHelper.getQualifiedName(clasDef));
 	                Node node= null;
 	                if (nodes != null)
 	                {

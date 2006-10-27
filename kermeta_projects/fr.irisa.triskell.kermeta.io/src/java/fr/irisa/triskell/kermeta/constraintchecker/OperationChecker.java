@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.11 2006-10-25 08:27:26 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.12 2006-10-27 08:49:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -28,8 +28,9 @@ import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
+//import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * Defaults : some comparison tests need to be done using KM2KMTPrettyPrinter..
@@ -139,7 +140,7 @@ public class OperationChecker extends AbstractChecker {
 			{
 				// if superOperation is null, perhaps it however exists in the implicit inherited Object?
 				// ex: Boolean does not inherit explicitely Object.
-				if (!KMTHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object"))
+				if (!NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object"))
 					number_of_duplicate += 1;
 			}
 		}
@@ -263,8 +264,8 @@ public class OperationChecker extends AbstractChecker {
 		// else if (op1.getType()==null && op2.getType()==null)  isConform = true; 
 		else if (op1.getType()==null || op2==null || op2.getType()==null) 
 		{
-			if (op1.getType()==null) message+="of " + KMTHelper.getQualifiedName(op1);
-			else message+="of " + KMTHelper.getQualifiedName(op2);
+			if (op1.getType()==null) message+="of " + NamedElementHelper.getQualifiedName(op1);
+			else message+="of " + NamedElementHelper.getQualifiedName(op2);
 			message += " is null : " + new KM2KMTPrettyPrinter().accept(op1.getType()==null?op2:op1);
 			isConform = false;
 		}
@@ -305,8 +306,8 @@ public class OperationChecker extends AbstractChecker {
 		if (supertype instanceof ClassImpl && thistype instanceof ClassImpl)
 		{
 			ClassImpl superclass = (ClassImpl)supertype; ClassImpl thisclass = (ClassImpl)thistype;
-			String classname = KMTHelper.getQualifiedName(thisclass.getTypeDefinition());
-			String superclassname = KMTHelper.getQualifiedName(superclass.getTypeDefinition());
+			String classname = NamedElementHelper.getQualifiedName(thisclass.getTypeDefinition());
+			String superclassname = NamedElementHelper.getQualifiedName(superclass.getTypeDefinition());
 			return superclassname.equals(classname);
 		}
 		return TypeEqualityChecker.equals(supertype, thistype);

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.25 2006-10-25 08:27:26 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.26 2006-10-27 08:49:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -56,6 +56,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -163,7 +164,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		if (newEOperation == null)
 			throw new KM2ECoreConversionException("KM2Ecore exception : could not find" 
 					+ " an operation with this qualified name :\n    "
-					+ KMTHelper.getQualifiedName(node));
+					+ NamedElementHelper.getQualifiedName(node));
 		// Parameters
 		for ( Object next : node.getOwnedParameter() ) { this.accept((EObject)next); }
 		
@@ -205,7 +206,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		if (type == null ) // null type forbidden for parameter type
 			throw new KM2ECoreConversionException( 
 			"Problem : type not found for a parameter '"+ node.getName()+ "' in operation : " +
-			KMTHelper.getQualifiedName(node.getOperation()));
+			NamedElementHelper.getQualifiedName(node.getOperation()));
 		newEParameter.setEType(type);
 		return newEParameter;
 	}
@@ -222,7 +223,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		{	// maybe this is new reference to a primitive type or a class defined in another file
 			// we do that here because we don't want to visit the whole FClass tree during the pass1 
 			// only to retreive some references to String or Integer  
-			String type_name = KMTHelper.getQualifiedName(node.getTypeDefinition());
+			String type_name = NamedElementHelper.getMangledQualifiedName(node.getTypeDefinition());
 			  
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 				//internalLog.debug(loggerTabs + "Creating DataType: "+ node.getTypeDefinition().getName());
@@ -296,7 +297,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		if (type == null ) // null type forbidden for parameter type
 			throw new KM2ECoreConversionException( 
 			"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
-			KMTHelper.getQualifiedName(node.getOwningClass()));
+			NamedElementHelper.getQualifiedName(node.getOwningClass()));
 		newEStructuralFeature.setEType(type);
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
@@ -371,7 +372,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitPrimitiveType(PrimitiveType node)
 	{
-		String type_name = KMTHelper.getQualifiedName(node);
+		String type_name = NamedElementHelper.getMangledQualifiedName(node);
 		EClassifier newEClassifier = (EClassifier)kmt2ecoremapping.get(node);
 		if (newEClassifier ==  null)
 		{
@@ -418,8 +419,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			return (EOperation) kmt2ecoremapping.get(node);
 		else
 			return (EOperation)getEObjectForQualifiedName(
-				KMTHelper.getQualifiedName(node),
-				KMTHelper.getQualifiedName(node.getOwningClass()));
+					NamedElementHelper.getMangledQualifiedName(node),
+					NamedElementHelper.getMangledQualifiedName(node.getOwningClass()));
 	}
 	
 	protected EStructuralFeature getEObjectForProperty(Property node)
@@ -428,8 +429,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			return (EStructuralFeature) kmt2ecoremapping.get(node);
 		else
 			return (EStructuralFeature)getEObjectForQualifiedName(
-				KMTHelper.getQualifiedName(node),
-				KMTHelper.getQualifiedName(node.getOwningClass()));
+					NamedElementHelper.getMangledQualifiedName(node),
+					NamedElementHelper.getMangledQualifiedName(node.getOwningClass()));
 	}
 	
 	protected EParameter getEObjectForParameter(Parameter node)
@@ -438,8 +439,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			return (EParameter) kmt2ecoremapping.get(node);
 		else
 			return (EParameter)getEObjectForQualifiedName(
-				KMTHelper.getQualifiedName(node),
-				KMTHelper.getQualifiedName(node.getOperation().getOwningClass()));
+					NamedElementHelper.getMangledQualifiedName(node),
+					NamedElementHelper.getMangledQualifiedName(node.getOperation().getOwningClass()));
 	}
 
 	/**
@@ -626,7 +627,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				newEOperation,
 				KM2Ecore.ANNOTATION,
 				KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS,
-				KMTHelper.getQualifiedName(superOperation.getOwningClass()),
+				NamedElementHelper.getMangledQualifiedName(superOperation.getOwningClass()),
 				(EObject)accept(superOperation));		
 	}
 	
@@ -640,8 +641,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		ecoreExporter.addConstraintAnnotation( 
 				newEOperation,
 				KM2Ecore.ANNOTATION_RAISEDEXCEPTION,
-				KMTHelper.getQualifiedName(anException.getTypeDefinition()), // Only decorative info, currently useless
-				KMTHelper.getQualifiedName(anException.getTypeDefinition()), // Idem
+				NamedElementHelper.getMangledQualifiedName(anException.getTypeDefinition()), // Only decorative info, currently useless
+				NamedElementHelper.getMangledQualifiedName(anException.getTypeDefinition()), // Idem
 				exceptionEClassifier);		
 	}
 

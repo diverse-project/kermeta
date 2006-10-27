@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.40 2006-09-22 11:12:24 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.41 2006-10-27 08:49:38 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -72,6 +72,7 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -136,7 +137,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 
 	public String ppPackage(Package p) {
-		root_pname = KMTHelper.getQualifiedName(p);
+		root_pname = NamedElementHelper.getMangledQualifiedName(p);
 		String result = "package " + root_pname + ";\n\n";
 		for(int i=0; i<imports.size();i++)
 			result += "require \"" + imports.get(i) + "\"\n";
@@ -155,7 +156,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	public String ppPackageContents(Package p) {
-		root_pname = KMTHelper.getQualifiedName(p);
+		root_pname = NamedElementHelper.getMangledQualifiedName(p);
 		String result = "";
 		current_pname = root_pname;
 		typedef = true;
@@ -295,7 +296,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
-		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
+		String qname = NamedElementHelper.getMangledQualifiedName(node.getTypeDefinition());
 		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		if(qname == null || name == null){
 			internalLog.error("Problem visiting a Class node with TypeDefinition name == null" );
@@ -309,7 +310,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	public Object visitModelType(ModelType node) {
-		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
+		String qname = NamedElementHelper.getMangledQualifiedName(node.getTypeDefinition());
 		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		String result = ppTypeName(qname, name);
 		if (node.getTypeParamBinding().size() > 0) {
@@ -401,7 +402,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			return result;
 		}
 		else {
-			String qname = KMTHelper.getQualifiedName(node);
+			String qname = NamedElementHelper.getMangledQualifiedName(node);
 			String name = KMTHelper.getMangledIdentifier(node.getName());
 			String result = ppTypeName(qname, name);
 			return result;
@@ -479,7 +480,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			return result;
 		}
 		else {
-			String qname = KMTHelper.getQualifiedName(node);
+			String qname = NamedElementHelper.getMangledQualifiedName(node);
 			String name = KMTHelper.getMangledIdentifier(node.getName());
 			String result = ppTypeName(qname, name);
 			return result;
@@ -570,7 +571,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		result += "\n" + getPrefix() + "{\n";
 		String old_cname = current_pname;
-		current_pname = KMTHelper.getQualifiedName(node);
+		current_pname = NamedElementHelper.getMangledQualifiedName(node);
 		pushPrefix();
 		typedef = true;
 		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
@@ -614,8 +615,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 		if (node.getSuperOperation() != null) {
 			ClassDefinition cDef = node.getSuperOperation().getOwningClass();
-			if(! KMTHelper.getQualifiedName(cDef).equals("kermeta::reflection::Object"))
-				result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
+			if(! NamedElementHelper.getMangledQualifiedName(cDef).equals("kermeta::reflection::Object"))
+				result += " from " + KMTHelper.getMangledIdentifier(NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass()));
 		}
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
@@ -684,7 +685,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		result += "package " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 		result += getPrefix() + "{\n";
 		String old_cname = current_pname;
-		current_pname = KMTHelper.getQualifiedName(node);
+		current_pname = NamedElementHelper.getMangledQualifiedName(node);
 		pushPrefix();
 		typedef = true;
 		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
@@ -1165,7 +1166,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 	
 		if (node.getSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
+			result += " from " + KMTHelper.getMangledIdentifier(NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass()));
 		}
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());

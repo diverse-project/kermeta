@@ -1,4 +1,4 @@
-/* $Id: OutlineItem.java,v 1.5 2006-03-03 15:23:52 dvojtise Exp $
+/* $Id: OutlineItem.java,v 1.6 2006-10-27 08:50:26 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : OutlineItem.java
 * License : GPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * @author Franck Fleurey
@@ -111,7 +112,7 @@ public class OutlineItem implements Comparable {
         KermetaUnit unit = outline.editor.getMcunit();
         if (unit == null) return false;
         if (modelElement instanceof TypeDefinition) {
-            return !unit.typeDefs.containsKey(unit.getQualifiedName((TypeDefinition)modelElement));
+            return !unit.typeDefs.containsKey(NamedElementHelper.getQualifiedName((TypeDefinition)modelElement));
         }
         else return false;
     }

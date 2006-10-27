@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.7 2006-06-16 08:51:44 zdrey Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.8 2006-10-27 08:50:13 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -17,8 +17,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
-import org.eclipse.core.resources.*;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -26,7 +30,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.model.IBreakpoint;
@@ -46,29 +49,21 @@ import org.eclipse.ui.texteditor.AbstractMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
-import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.typechecker.Type;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
-import fr.irisa.triskell.traceability.helper.Tracer;
-//import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 
 /**
  * Action that is executed when user added a breakpoint
@@ -337,7 +332,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		        }
 		        else if(fobj instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 		        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)fobj;
-					return KMTHelper.getQualifiedName(aClass.getTypeDefinition());
+					return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition());
 		        }
 		        
 		    }

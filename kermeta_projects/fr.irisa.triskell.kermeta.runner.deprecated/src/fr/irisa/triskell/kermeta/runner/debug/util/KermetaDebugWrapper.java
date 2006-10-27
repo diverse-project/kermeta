@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.17 2006-03-03 15:23:35 dvojtise Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.18 2006-10-27 08:50:13 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -30,8 +30,8 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVar
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
@@ -240,7 +240,7 @@ public class KermetaDebugWrapper {
 		else
 		{
 			String qname = 
-				KMTHelper.getQualifiedName((NamedElement)((fr.irisa.triskell.kermeta.language.structure.Class)ro.getMetaclass().getData().get("kcoreObject")).getTypeDefinition());
+				NamedElementHelper.getMangledQualifiedName((NamedElement)((fr.irisa.triskell.kermeta.language.structure.Class)ro.getMetaclass().getData().get("kcoreObject")).getTypeDefinition());
 			if (qname.equals("kermeta::standard::String")) {
 				result[0] = "\"" + data.get("StringValue").toString() + "\"";
 			} else if (qname.equals("kermeta::standard::Integer")) {

@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.26 2006-09-27 15:45:26 dtouzet Exp $
+/* $Id: KM2Ecore.java,v 1.27 2006-10-27 08:49:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -30,8 +30,8 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 
@@ -179,7 +179,7 @@ public class KM2Ecore {
 	 * @return the equivalent root_package in the Ecore ressource
 	 */
 	public Object exportPackage(Package root_package) {
-		root_pname = KMTHelper.getQualifiedName(root_package);
+		root_pname = NamedElementHelper.getMangledQualifiedName(root_package);
 		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, km2ecoremapping, this);
 		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, km2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
@@ -276,7 +276,7 @@ public class KM2Ecore {
 		if(type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 			// retreive the qualified name of the definition of this class
 			fr.irisa.triskell.kermeta.language.structure.Class fClass = (fr.irisa.triskell.kermeta.language.structure.Class)type;
-			type_def_name = KMTHelper.getQualifiedName(fClass.getTypeDefinition());
+			type_def_name = NamedElementHelper.getMangledQualifiedName(fClass.getTypeDefinition());
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_def_name)) {
 				return true;
 			}

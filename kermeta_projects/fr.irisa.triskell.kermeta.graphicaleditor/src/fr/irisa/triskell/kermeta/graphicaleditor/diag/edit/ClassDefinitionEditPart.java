@@ -43,6 +43,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diag.policies.InheritanceEdgeCr
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.policies.PropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -176,7 +177,7 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 				if (owningPackage.getName() != null) {
 					lbl.setSuffix("from " + owningPackage.getName());
 				}
-				String qname = KMTHelper.getQualifiedName(getClassDefinition());
+				String qname = NamedElementHelper.getMangledQualifiedName(getClassDefinition());
 				System.err.println("Debug - qname: " + qname);
 				/*
 				 * if (getClassDefinition().getName() != null) qname =

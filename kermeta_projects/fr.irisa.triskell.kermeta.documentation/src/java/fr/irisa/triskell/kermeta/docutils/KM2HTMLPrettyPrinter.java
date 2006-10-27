@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.5 2006-09-20 12:34:36 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.6 2006-10-27 08:49:59 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -49,6 +49,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -257,7 +258,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		while (it.hasNext())
 		{
 			Package node = it.next();
-			String qname = KMTHelper.getQualifiedName(node); 
+			String qname = NamedElementHelper.getMangledQualifiedName(node); 
 			// Visit the packages in order to document their children
 			this.accept(node);
 			// Construct the list of package names from which user will browse the code documentation
@@ -389,7 +390,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			result.append( ")");
 			result.append( node.getType() != null?(" : " + ppTypeFromMultiplicityElement(node)):" : Void");
 			if (node.getSuperOperation() != null) {
-				result.append( " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass())) );
+				result.append( " from " + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass())) ;
 			}
 		}
 		return result;
@@ -469,7 +470,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
 		typedef = false;
-		String signature = KMTHelper.getQualifiedName(node);
+		String signature = NamedElementHelper.getMangledQualifiedName(node);
 		Package container = (Package)node.eContainer();
 		// If we want to print only a signature (see method "representation")
 		if (_as_signature == true)
@@ -508,7 +509,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	}
 	
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
-		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
+		String qname = NamedElementHelper.getMangledQualifiedName(node.getTypeDefinition());
 		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		if(qname == null || name == null){
 			internalLog.error("Problem visiting a Class node with TypeDefinition name == null" );
@@ -534,7 +535,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 */
 	public Object visitPackage(Package node) {
 
-		if (_as_signature == true) return KMTHelper.getQualifiedName(node);
+		if (_as_signature == true) return NamedElementHelper.getMangledQualifiedName(node);
 		this.document(node);
 		String this_id = String.valueOf(node.hashCode());
 		// Construct the list of class definitions that belong to this package
@@ -611,7 +612,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	/** If named element's qualified name is "toto::titi" then returns "toto::" */
 	public String getPathForNamedElement(NamedElement node)
 	{
-		String qname = KMTHelper.getQualifiedName(node);
+		String qname = NamedElementHelper.getMangledQualifiedName(node);
 		return ((qname.contains("::"))?qname.substring(0, (qname.length()-node.getName().length())):"");
 	}
 	

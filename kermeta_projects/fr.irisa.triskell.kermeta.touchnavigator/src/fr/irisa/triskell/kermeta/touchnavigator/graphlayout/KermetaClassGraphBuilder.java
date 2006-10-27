@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.10 2006-03-09 23:02:22 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.11 2006-10-27 08:50:38 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -30,8 +30,8 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
@@ -183,7 +183,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 						else if(obj instanceof PrimitiveType)
 						{
 							PrimitiveType primType = (PrimitiveType)obj;
-							Collection col = tgPanel.findNodesByLabel(KMTHelper.getQualifiedName(primType));
+							Collection col = tgPanel.findNodesByLabel(NamedElementHelper.getQualifiedName(primType));
 							if(col != null){
 	
 								Iterator primitiveIt = col.iterator();
@@ -197,7 +197,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 								
 							}
 							else{
-								String msg = "primitive node not found "+KMTHelper.getQualifiedName(primType);
+								String msg = "primitive node not found "+NamedElementHelper.getQualifiedName(primType);
 			            		System.err.println(msg);
 			                	
 							}
@@ -312,7 +312,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 			else
 				n1 = tgpHelper.addClassNode();
 			graphUnitMapping.put(theType, n1);
-			n1.setLabel(KMTHelper.getQualifiedName(theType));
+			n1.setLabel(NamedElementHelper.getQualifiedName(theType));
 			n1.setType(Node.TYPE_RECTANGLE);
 			/*if(startingClass.getFName().compareTo(theType.getFName())==0)
 			{	// select this node for the animation
@@ -343,7 +343,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 			}
 			else {
 				// check name doublon
-				Collection c = this.tgPanel.findNodesByLabel(KMTHelper.getQualifiedName(theClass));
+				Collection c = this.tgPanel.findNodesByLabel(NamedElementHelper.getQualifiedName(theClass));
 				if(c != null) {
 					//TouchNavigatorPlugin.internalLog.debug("There is already a node named "+KMTHelper.getQualifiedName(theClass));
 					n1 = (ClassNode)c.iterator().next();
@@ -352,7 +352,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 					n1 = (ClassNode) tgpHelper.addClassNode();
 			}
 			graphUnitMapping.put(theClass, n1);
-			n1.setLabel(KMTHelper.getQualifiedName(theClass));
+			n1.setLabel(NamedElementHelper.getQualifiedName(theClass));
 			n1.setShortLabel (theClass.getName());
 			n1.setType(Node.TYPE_RECTANGLE);
 			//n1.setVisible(false);

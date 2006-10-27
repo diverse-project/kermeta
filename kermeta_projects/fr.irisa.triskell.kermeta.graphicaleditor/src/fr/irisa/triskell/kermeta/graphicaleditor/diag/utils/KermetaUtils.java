@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.4 2006-10-25 08:30:54 dvojtise Exp $
+/* $Id: KermetaUtils.java,v 1.5 2006-10-27 08:52:33 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -338,7 +339,7 @@ public class KermetaUtils {
 
 		if (type instanceof Class) {
 			typedef = ((Class) type).getTypeDefinition();
-			typedef_qname = KMTHelper.getQualifiedName(typedef);
+			typedef_qname = NamedElementHelper.getMangledQualifiedName(typedef);
 		} else if (!(type instanceof VoidType)) {
 			// do not throw an error but just print a message in a dialog box
 			// throw new Error("Not implemented exception : a model element has

@@ -1,4 +1,4 @@
-/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.5 2006-03-03 15:24:04 dvojtise Exp $
+/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.6 2006-10-27 08:50:38 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -25,6 +25,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -268,7 +269,7 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		}
 	
 		if (node.getSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
+			result += " from " + NamedElementHelper.getMangledQualifiedName(node.getSuperOperation().getOwningClass());
 		}
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());

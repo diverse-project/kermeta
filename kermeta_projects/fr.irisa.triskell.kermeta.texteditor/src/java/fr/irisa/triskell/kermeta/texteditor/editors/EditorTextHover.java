@@ -33,12 +33,12 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 
 /**
@@ -190,7 +190,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        else if(fobj instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 		        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)fobj;
 					ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
-					return KMTHelper.getQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
+					return NamedElementHelper.getMangledQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
 		        }
 		        
 		    }

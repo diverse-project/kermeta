@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.10 2006-10-18 15:12:52 cfaucher Exp $
+/* $Id: KMTHelper.java,v 1.11 2006-10-27 08:49:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -20,6 +20,7 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * Some helper methods usefull when dealing with kermeta text syntax
@@ -29,14 +30,14 @@ public class KMTHelper {
 	/**
 	 * Get the fully qualified name of an NamedElement
 	 */
-	public static String getQualifiedName(NamedElement element) {
+/*	public static String getQualifiedName(NamedElement element) {
 		if (element.eContainer() != null
 				&& element.eContainer() instanceof NamedElement)
 			return getQualifiedName((NamedElement) element.eContainer()) + "::"
 					+ getMangledIdentifier(element.getName());
 		else
 			return element.getName();
-	}
+	}*/
 
 	/**
 	 * Get the fully qualified name of FType as the concrete types usually
@@ -47,10 +48,10 @@ public class KMTHelper {
 		if (type instanceof NamedElement) {
 			NamedElement fNamedElement = (NamedElement) type;
 
-			return KMTHelper.getQualifiedName(fNamedElement);
+			return NamedElementHelper.getMangledQualifiedName(fNamedElement);
 		} else if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 			ClassImpl fClass = (ClassImpl) type;
-			return getQualifiedName(fClass.getTypeDefinition());
+			return NamedElementHelper.getMangledQualifiedName(fClass.getTypeDefinition());
 		}
 		return "";
 	}
