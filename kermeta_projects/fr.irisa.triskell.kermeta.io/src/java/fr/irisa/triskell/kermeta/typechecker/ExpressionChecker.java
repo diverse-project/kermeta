@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.33 2006-10-04 15:08:21 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.34 2006-10-27 07:17:51 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -22,6 +22,7 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.ast.FSuperCall;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -359,10 +360,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 				return TypeCheckerContext.VoidType;
 				
 			}
-			// Check if the property is not a collection
+			// Check if the property is not a reflectivecollection
 			int upperBound = prop.getProperty().getUpper();
 			if ( (prop != null) && ((upperBound == -1) || (upperBound > 1)) ) {
-				unit.messages.addError("TYPE-CHECKER : You are trying to affect a value to property '" + prop.getProperty().getName() + "' which is a collection.", expression);
+				KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+				unit.messages.addError("TYPE-CHECKER : You are trying to overwrite the internal reflective collection of the property '" + prop.getProperty().getName() + "'.\n"
+						+ "Did you mean ? \n\t" + pp.accept(expression.getTarget()) + ".clear\n\t" + 
+						pp.accept(expression.getTarget()) + ".addAll(" +pp.accept(expression.getValue()) + ")"
+						, expression);
 				return TypeCheckerContext.VoidType;
 			}
 	    }
