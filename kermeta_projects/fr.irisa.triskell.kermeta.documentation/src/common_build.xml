@@ -6,6 +6,7 @@
 	<property name="build.dir" location="${project.base.dir}/build"/>
 	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
+	<property name="docbook.source.dir" location="${project.base.dir}/src/docbook"/>
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
 	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>
 		
@@ -53,6 +54,22 @@
     	</copy>		
 	</target>
 
+	<target name="preparedbk">
+		<!-- copy the docbook -->
+		<copy todir="${build.docbook.dir}/${project.name}">
+			<fileset file="${docbook.source.dir}/${project.name}.docb.xml"/>
+		</copy>
+		<!-- copy the images -->		
+		<copy todir="${build.docbook.dir}/${project.name}/figures">
+			<fileset dir="${OOo.source.dir}/figures"/>
+		</copy>
+		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
+			<fileset dir="${docbook.source.dir}/${project.name}_figures"/>
+		</copy>
+    	<copy todir="${build.dir}/figures">
+    	    <fileset dir="${OOo.source.dir}/figures"/>
+    	</copy>		
+	</target>
 	<target name="prepare_index.xml">
 		<tstamp>
 			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>

@@ -1,8 +1,8 @@
-<project name="KerMeta-The-FSM-example" default="all">
+<project name="KerMeta-How-to-add-behavior-to-a-metamodel" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property name="project.base.dir" location=".."/>
-	<property name="project.name" value="KerMeta-The-FSM-example"/>
+	<property name="project.name" value="KerMeta-How-to-add-behavior-to-a-metamodel"/>
 	<property name="build.dir" location="${project.base.dir}/build"/>
 	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
@@ -17,11 +17,6 @@
 	<target name="OOo2dbk">
 		<ant antfile="common_build.xml"
 		     target="OOo2dbk"/>
-	</target>
-	
-	<target name="preparedbk">
-		<ant antfile="common_build.xml"
-		     target="preparedbk"/>
 	</target>
 	
 	<target name="html.single">
