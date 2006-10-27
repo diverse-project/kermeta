@@ -15,7 +15,6 @@ package fr.irisa.triskell.kermeta.graphicaleditor.diag.figures;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.topcased.draw2d.figures.ComposedLabel;
-import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.Label;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
@@ -44,7 +43,7 @@ public class PackageFigure extends org.topcased.draw2d.figures.PackageFigure {
 	 * @generated NOT
 	 */
 	protected IFigure createHeader() {
-		EditableLabel mainFigure = new EditableLabel(StructureImageRegistry.getImage("PACKAGE"));
+		Label mainFigure = new Label(StructureImageRegistry.getImage("PACKAGE"));
 		mainFigure.setLabelAlignment(PositionConstants.CENTER);
 		
 		ComposedLabel label = new ComposedLabel(new Label(), mainFigure,
