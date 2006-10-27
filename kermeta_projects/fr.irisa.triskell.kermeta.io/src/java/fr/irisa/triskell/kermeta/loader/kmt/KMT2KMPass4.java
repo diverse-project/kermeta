@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.20 2006-10-26 12:54:25 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.21 2006-10-27 08:26:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 /**
@@ -101,7 +102,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			{
 				if (ClassDefinitionHelper.findOperationByName(object_classdef, builder.current_operation.getName())!=null && 
 						builder.current_class != object_classdef && // ignore "Object" itself ...
-						!builder.getQualifiedName(builder.current_class).equals("kermeta::language::structure::KMStructureVisitable")) // the concret implementation of Object inherits from KMStructureVisitable
+						!NamedElementHelper.getQualifiedName(builder.current_class).equals("kermeta::language::structure::KMStructureVisitable")) // the concret implementation of Object inherits from KMStructureVisitable
 				builder.messages.addMessage(new KMTUnitLoadError(
 						base_msg + "kermeta:language::structure::Object'. (implicit inheritance!)" + end_msg,
 						operation));
@@ -151,7 +152,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 					fr.irisa.triskell.kermeta.language.structure.Operation superop = null;
 					superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(provided_name);
 					
-					if (superop == null) superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(builder.getQualifiedName(builder.rootPackage) + "::" + provided_name);
+					if (superop == null) superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(NamedElementHelper.getQualifiedName(builder.rootPackage) + "::" + provided_name);
 					
 					if (superop == null) {
 						Iterator uit = builder.usings.iterator();
@@ -226,7 +227,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			fr.irisa.triskell.kermeta.language.structure.Operation superop = ClassDefinitionHelper.getOperationByName(supers.get(i), methname);
 			if (superop != null)
 			{
-				result.put(builder.getQualifiedName(supers.get(i)), superop);
+				result.put(NamedElementHelper.getQualifiedName(supers.get(i)), superop);
 			}
 			else 
 			{ // search in supertypes of supers[i]
@@ -251,7 +252,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			fr.irisa.triskell.kermeta.language.structure.Operation superop = ClassDefinitionHelper.getOperationByName(supers.get(i), methname);
 			if (superop != null)
 			{
-				result.put(builder.getQualifiedName(supers.get(i)), superop);
+				result.put(NamedElementHelper.getQualifiedName(supers.get(i)), superop);
 			}
 			else 
 			{ // search in supertypes of supers[i]

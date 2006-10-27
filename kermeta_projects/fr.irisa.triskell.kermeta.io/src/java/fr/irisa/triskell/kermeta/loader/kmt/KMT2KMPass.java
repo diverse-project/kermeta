@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.6 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMT2KMPass.java,v 1.7 2006-10-27 08:26:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 //import fr.irisa.triskell.kermeta.language.structure.FProperty;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 /**
@@ -108,7 +109,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 			result.setName(qualified_name);
 			//TODO: result.setFUri(). What to put here ?
 		}
-		builder.packages.put(builder.getQualifiedName(result), result);
+		builder.packages.put(NamedElementHelper.getQualifiedName(result), result);
 		if (node != null) builder.storeTrace(result, node);
 		return result;
 	}

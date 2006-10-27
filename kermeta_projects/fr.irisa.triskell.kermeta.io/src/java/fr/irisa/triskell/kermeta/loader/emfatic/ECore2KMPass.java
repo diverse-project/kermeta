@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass.java,v 1.5 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: ECore2KMPass.java,v 1.6 2006-10-27 08:26:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * @author Franck Fleurey
@@ -74,7 +75,7 @@ public class ECore2KMPass extends EmfaticASTNodeVisitor {
 			result.setName(qualified_name);
 			//TODO: result.setFUri(). What to put here ?
 		}
-		builder.packages.put(builder.getQualifiedName(result), result);
+		builder.packages.put(NamedElementHelper.getQualifiedName(result), result);
 		return result;
 	}
 	

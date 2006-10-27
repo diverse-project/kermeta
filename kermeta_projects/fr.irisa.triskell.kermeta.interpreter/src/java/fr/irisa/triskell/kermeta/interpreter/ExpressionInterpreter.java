@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.48 2006-09-28 12:51:19 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.49 2006-10-27 08:27:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -65,17 +65,18 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
+//import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
+//import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
+//import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
 import fr.irisa.triskell.kermeta.loader.java.JarUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 import java.net.URLClassLoader;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -1320,7 +1321,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	{
 		if (node!=null) setParent(node);
 	    // Get the qualified name of this class
-	    String qname = memory.getUnit().getQualifiedName(node);
+	    String qname = NamedElementHelper.getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
 	    return result;
 	}

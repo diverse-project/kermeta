@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.14 2006-09-28 13:19:29 zdrey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.15 2006-10-27 08:27:32 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -12,30 +12,27 @@ package fr.irisa.triskell.kermeta.builder;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * @author Franck Fleurey
@@ -115,7 +112,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
             	// TypeDefinition can be a ClassDefinition or a ModelTypeDefinition
                 TypeDefinition td = (TypeDefinition)tnext;
                 RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
-                typeDefinitions.put(unit.getQualifiedName(td), ro);
+                typeDefinitions.put(NamedElementHelper.getQualifiedName(td), ro);
                 objects.put(td, ro);
                 // If the type definition is a *classDefinition* than, create the complete runtime object, for the 
                 // class definition itself, AND for all its properties.
@@ -125,7 +122,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
                         Property prop = (Property)pnext;
                         RuntimeObject ro_prop = new KCoreRuntimeObject(memory.getROFactory(), null, prop);
                         //ro_prop.getData().put("kcoreObject", prop);
-                        properties.put(unit.getQualifiedName(prop), ro_prop);
+                        properties.put(NamedElementHelper.getQualifiedName(prop), ro_prop);
                         objects.put(prop, ro_prop);
                     }
                 }
@@ -246,9 +243,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 		// Create the object
 		RuntimeObject result;
 		if (kcoreObject instanceof TypeDefinition) {
-		    result = (RuntimeObject)typeDefinitions.get(unit.getQualifiedName((TypeDefinition)kcoreObject));
+		    result = (RuntimeObject)typeDefinitions.get(NamedElementHelper.getQualifiedName((TypeDefinition)kcoreObject));
 		}
-		else if (kcoreObject instanceof Property) result = (RuntimeObject)properties.get(unit.getQualifiedName((Property)kcoreObject));
+		else if (kcoreObject instanceof Property) result = (RuntimeObject)properties.get(NamedElementHelper.getQualifiedName((Property)kcoreObject));
 		else result = new KCoreRuntimeObject(memory.getROFactory(), null, kcoreObject);
 		
 		// This is an error

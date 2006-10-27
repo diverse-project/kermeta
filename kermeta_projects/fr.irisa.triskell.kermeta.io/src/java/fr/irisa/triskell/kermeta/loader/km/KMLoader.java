@@ -10,6 +10,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -34,22 +35,22 @@ public class KMLoader extends KermetaVisitor {
     }
     
     public Object visit(ClassDefinition node) {
-        unit.typeDefs.put(unit.getQualifiedName(node), node);
+        unit.typeDefs.put(NamedElementHelper.getQualifiedName(node), node);
         return null;
     }
     public Object visit(Enumeration node) {
-        unit.typeDefs.put(unit.getQualifiedName(node), node);
+        unit.typeDefs.put(NamedElementHelper.getQualifiedName(node), node);
         return null;
     }
     public Object visit(Package node) {
         if (unit.rootPackage == null) {
             unit.rootPackage = node;
         }
-        unit.packages.put(unit.getQualifiedName(node), node);
+        unit.packages.put(NamedElementHelper.getQualifiedName(node), node);
         return super.visit(node);
     }
     public Object visit(PrimitiveType node) {
-        unit.typeDefs.put(unit.getQualifiedName(node), node);
+        unit.typeDefs.put(NamedElementHelper.getQualifiedName(node), node);
         return null;
     }
 }

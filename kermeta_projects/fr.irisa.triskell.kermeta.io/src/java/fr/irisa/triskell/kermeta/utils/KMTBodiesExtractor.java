@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.5 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.6 2006-10-27 08:26:16 dvojtise Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -70,7 +71,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	public Object visit(Property property)
 	{
 		String opHeader = "$"; // $package::class::
-		opHeader += unit.getQualifiedName(property.getOwningClass());
+		opHeader += NamedElementHelper.getQualifiedName(property.getOwningClass());
 		opHeader += "::"+property.getName();
 		
 		String setter = opHeader + "::setter";
@@ -101,7 +102,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		
 		if (!operation.isIsAbstract())
 		{
-		    op += "$"+unit.getQualifiedName(operation.getOwningClass());
+		    op += "$"+NamedElementHelper.getQualifiedName(operation.getOwningClass());
 		    op += "::"+operation.getName();
 		    System.out.println(op);
 		    if (operation.getBody()!=null)

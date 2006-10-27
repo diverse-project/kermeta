@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.10 2006-10-25 08:26:41 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.11 2006-10-27 08:26:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -34,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 //import fr.irisa.triskell.kermeta.language.structure.FProperty;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 /**
@@ -116,7 +117,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationExpressionBody)
 	 */
 	public boolean beginVisit(OperationExpressionBody operationExpressionBody) {
-		String qname = builder.getQualifiedName(builder.current_operation);
+		String qname = NamedElementHelper.getQualifiedName(builder.current_operation);
 		if (builder.operation_bodies.containsKey(qname)) {
 			builder.current_operation.setBody(ExpressionParser.parse(builder, (String)builder.operation_bodies.get(qname)));
 		}

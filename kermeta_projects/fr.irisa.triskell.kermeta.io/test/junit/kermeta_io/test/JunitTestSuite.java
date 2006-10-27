@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.27 2006-10-25 08:28:21 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.28 2006-10-27 08:26:30 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -31,6 +31,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 
@@ -453,9 +454,9 @@ public void testWithFile(String dir, String file) throws Exception {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File(file)));
-		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
+		String pkg_name = "package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n";
 		
-		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
+		w.write("package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n");
 	
 		/* imported units needed to recognize the imported classes...*/
 		Iterator it = builder.importedUnits.iterator();

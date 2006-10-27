@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.15 2006-10-25 08:56:03 dvojtise Exp $
+/* $Id: FrameworkGen.java,v 1.16 2006-10-27 08:26:58 dvojtise Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -17,6 +17,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 import fr.irisa.triskell.kermeta.utils.KMTBodiesExtractor;
 
@@ -143,7 +144,7 @@ public class FrameworkGen {
 	
 	public void writeAbstractStructure(Package abstract_structure) throws Exception {
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/reflection/reflection.kmt")));
-		w.write("package " + abstract_unit.getQualifiedName(abstract_structure) + ";\n\n");
+		w.write("package " + NamedElementHelper.getQualifiedName(abstract_structure) + ";\n\n");
 		w.write("require \"../standard/Collections.kmt\"\n\n");
 		w.write(pp.ppPackageContents(abstract_structure) + "\n");
 		w.close();
@@ -151,7 +152,7 @@ public class FrameworkGen {
 	
 	public void writeKermetaStructure(Package kermeta_structure) throws Exception {
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/language/structure.kmt")));
-		w.write("package " + abstract_unit.getQualifiedName(kermeta_structure) + ";\n\n");
+		w.write("package " + NamedElementHelper.getQualifiedName(kermeta_structure) + ";\n\n");
 		w.write("require \"../reflection/reflection.kmt\"\n\n");
 		w.write(pp.ppPackageContents(kermeta_structure) + "\n");
 		w.close();
@@ -160,7 +161,7 @@ public class FrameworkGen {
 	
 	public void writeBehavior(Package behavior_pack) throws Exception {
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/language/behavior.kmt")));
-		w.write("package " + abstract_unit.getQualifiedName(behavior_pack) + ";\n\n");
+		w.write("package " + NamedElementHelper.getQualifiedName(behavior_pack) + ";\n\n");
 		w.write("require \"structure.kmt\"\n\n");
 		w.write(pp.ppPackageContents(behavior_pack) + "\n");
 		w.close();

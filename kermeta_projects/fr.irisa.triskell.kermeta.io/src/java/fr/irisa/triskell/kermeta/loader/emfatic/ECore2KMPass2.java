@@ -18,6 +18,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 
@@ -50,7 +51,7 @@ public class ECore2KMPass2 extends ECore2KMPass {
 	}
 	
 	public boolean beginVisit(SubPackageDecl node) {
-		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		builder.storeTrace(getOrCreatePackage(qname, node), node);
 		pkgs.push(getOrCreatePackage(qname, node));
 		return super.beginVisit(node);

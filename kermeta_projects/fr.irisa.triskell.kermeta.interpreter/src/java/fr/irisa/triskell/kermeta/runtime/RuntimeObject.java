@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.16 2006-08-21 08:56:22 zdrey Exp $
+/* $Id: RuntimeObject.java,v 1.17 2006-10-27 08:27:33 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Hashtable;
 
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
@@ -145,7 +146,7 @@ public class RuntimeObject {
 	public RuntimeObject getContainer() {
 		fr.irisa.triskell.kermeta.language.structure.Class self_cls = ((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject"));
 		// FIXME: this is just a quick fix, we should check that self_cls inherits from ValueType
-		String name = getFactory().getMemory().getUnit().getQualifiedName(self_cls.getTypeDefinition());
+		String name = NamedElementHelper.getQualifiedName(self_cls.getTypeDefinition());
 		if (name.equals("kermeta::standard::Boolean")) return null;
 		if (name.equals("kermeta::standard::Integer")) return null;
 		if (name.equals("kermeta::standard::String")) return null;
@@ -251,7 +252,7 @@ public class RuntimeObject {
 	public String toString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = factory.getMemory().getUnit().getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
+	        class_name = NamedElementHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
 		    String sValue = (String)getData().get("StringValue");
 		    if(sValue != null)
 		    	return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
@@ -278,7 +279,7 @@ public class RuntimeObject {
 	public String toUserString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = factory.getMemory().getUnit().getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
+	        class_name = NamedElementHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
 		    String sValue = (String)getData().get("StringValue");
 		    if(sValue != null)
 		    	return "\"" +sValue+"\"";

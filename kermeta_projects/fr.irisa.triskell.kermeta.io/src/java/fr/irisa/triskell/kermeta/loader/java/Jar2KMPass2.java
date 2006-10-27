@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.3 2006-08-18 09:21:18 dvojtise Exp $
+/* $Id: Jar2KMPass2.java,v 1.4 2006-10-27 08:26:16 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  *  Jar2KM PASS 2 : creates packages and collects types
@@ -168,7 +169,7 @@ public class Jar2KMPass2 extends Jar2KMPass {
 			result.setName(qualified_name);
 			result.setUri(builder.getUri()+"/"+qualified_name);
 		}
-		builder.packages.put(builder.getQualifiedName(result), result);
+		builder.packages.put(NamedElementHelper.getQualifiedName(result), result);
 		return result;
 	}
 

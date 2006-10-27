@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.45 2006-09-20 13:38:26 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.46 2006-10-27 08:27:32 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -16,7 +16,6 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -32,7 +31,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
@@ -328,7 +328,7 @@ public class Runtime2EMF {
 		fr.irisa.triskell.kermeta.language.structure.Class metaclass = (fr.irisa.triskell.kermeta.language.structure.Class) rObject
 				.getMetaclass().getData().get("kcoreObject");
 		// Get the qualified name of this meta class
-		String kqname = unit.getKermetaUnit().getQualifiedName(
+		String kqname = NamedElementHelper.getQualifiedName(
 				metaclass.getTypeDefinition());
 
 		if (rObject.getData().get("r2e.emfObject") == null)

@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.76 2006-10-25 08:25:32 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.77 2006-10-27 08:26:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -55,6 +55,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
@@ -488,9 +489,9 @@ public abstract class KermetaUnit {
 	public TypeDefinition getTypeDefinitionByName(String name) {
 	    //System.out.println("\nXXXXXX   getTypeDefinitionByName " + name + "" );
 		TypeDefinition result = typeDefinitionLookup(name);
-		if (result == null && current_modeltype != null) result = typeDefinitionLookup(getQualifiedName(current_modeltype) + "::" + name);
-		if (result == null && current_package != null) result = typeDefinitionLookup(getQualifiedName(current_package) + "::" + name);
-		if (result == null)	result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
+		if (result == null && current_modeltype != null) result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(current_modeltype) + "::" + name);
+		if (result == null && current_package != null) result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(current_package) + "::" + name);
+		if (result == null)	result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(rootPackage) + "::" + name);
 		for(int i=0; i<usings.size() && result == null; i++) {
 			result = typeDefinitionLookup(usings.get(i) + "::" + name);
 		}
@@ -609,16 +610,6 @@ public abstract class KermetaUnit {
 			if (result != null) break;
 		}
 		return result;
-	}
-	
-	/**
-	 * Get the fully qualified name of an FNamedElemenet
-	 */
-	public String getQualifiedName(NamedElement element) {
-		if (element == null) return "";
-		if (element.eContainer() != null && element.eContainer() instanceof NamedElement)
-			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + element.getName();
-		else return element.getName();
 	}
 	
 	/** @return all the type definitions available in this kermeta unit, in

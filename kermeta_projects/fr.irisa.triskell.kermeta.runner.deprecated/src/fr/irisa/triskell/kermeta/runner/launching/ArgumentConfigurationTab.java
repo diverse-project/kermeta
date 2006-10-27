@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.25 2006-09-22 09:37:52 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.26 2006-10-27 08:28:10 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -19,11 +19,9 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.DebugPluginImages;
@@ -56,15 +54,15 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
+import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-
-import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
 /**
  * 
  */
@@ -688,7 +686,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	        ArrayList<String> qnameList = new ArrayList<String>(typedefs.size());
 	        for (int i=0; i<typedefs.size(); i++)
 	        {
-	            qnameList.add(selectedUnit.getQualifiedName((NamedElement)typedefs.get(i)));
+	            qnameList.add(NamedElementHelper.getQualifiedName((NamedElement)typedefs.get(i)));
 	        }
 	        
 	        // if no classes found alert the user

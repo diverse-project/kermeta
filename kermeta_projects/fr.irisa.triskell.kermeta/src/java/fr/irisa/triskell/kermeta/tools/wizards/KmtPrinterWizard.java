@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.9 2006-09-06 07:26:56 dtouzet Exp $
+/* $Id: KmtPrinterWizard.java,v 1.10 2006-10-27 08:26:41 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * Pretty print of kmt files from a KermetaUnit.
@@ -73,9 +74,9 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( builder.getUri() );
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(ifile.getLocation().toFile()));
-		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
+		String pkg_name = "package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n";
 		
-		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
+		w.write("package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n");
 	
 		/* imported units needed to recognize the imported classes...*/
 		Iterator it = builder.importedUnits.iterator();

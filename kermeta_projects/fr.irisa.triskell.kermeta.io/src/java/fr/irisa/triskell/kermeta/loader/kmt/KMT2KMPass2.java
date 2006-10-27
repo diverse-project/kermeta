@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.7 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.8 2006-10-27 08:26:16 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 /**
@@ -63,7 +64,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(SubPackageDecl node) {
-		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		pkgs.push(getOrCreatePackage(qname, node));
 		return super.beginVisit(node);
 	}
@@ -73,7 +74,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(ClassDecl node) {
-		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
@@ -128,7 +129,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		return false;
 	}
 	public boolean beginVisit(EnumDecl node) {
-		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
@@ -137,7 +138,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			Enumeration c = builder.struct_factory.createEnumeration();
 			c.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(c);
-			builder.typeDefs.put(builder.getQualifiedName(c), c);
+			builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
 		return false;
@@ -148,7 +149,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.DataTypeDecl)
 	 */
 	public boolean beginVisit(DataTypeDecl node) {
-		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
@@ -157,7 +158,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			PrimitiveType c = builder.struct_factory.createPrimitiveType();
 			c.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(c);
-			builder.typeDefs.put(builder.getQualifiedName(c), c);
+			builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
 		return false;
@@ -165,7 +166,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	
 	
 	public boolean beginVisit(ModelTypeDecl node) {
-		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
