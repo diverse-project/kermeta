@@ -1,0 +1,53 @@
+package testEnum;
+
+require kermeta
+
+using kermeta::standard
+
+class Test {
+
+	operation test1() : Void is
+	do
+		var aA : A init A.new
+		aA.aNames := OrderedSet<String>
+	end
+
+	operation test2() : Void is
+	do
+		var aB : B init B.new
+		aB.bNames := OrderedSet<String>
+	end
+	
+	operation test3() : Void is
+	do
+		var aC : C init C.new
+		var aD : D init D.new
+		aC.cNames := aD.dNames
+	end
+	
+	operation test4() : Void is
+	do
+		var aE : E init E.new
+		aE.eNames := aE.eNames
+	end
+}
+
+class A {
+	attribute aNames : String[0..*]
+}
+
+class B {
+	reference bNames : String[0..*]
+}
+
+class C {
+	reference cNames : String[0..*]#dNames
+}
+
+class D {
+	reference dNames : String[0..*]#cNames
+}
+
+class E {
+	attribute eNames : String[1..1]
+}
