@@ -42,6 +42,7 @@ public class ClassDefinitionFigure extends ClassFigure {
 	}
 
 	/**
+	 * @override
 	 * @see org.topcased.draw2d.figures.ClassFigure#drawFigure()
 	 * @generated NOT
 	 */
@@ -53,7 +54,6 @@ public class ClassDefinitionFigure extends ClassFigure {
 
 		EditableLabel mainFigure = new EditableLabel();
 		mainFigure.setLabelAlignment(PositionConstants.CENTER);
-		mainFigure.setIcon(StructureImageRegistry.getImage("CLASSDEFINITION"));
 
 		setLabel(new ComposedLabel(new Label(), mainFigure, new Label(), false));
 		add(getLabel());

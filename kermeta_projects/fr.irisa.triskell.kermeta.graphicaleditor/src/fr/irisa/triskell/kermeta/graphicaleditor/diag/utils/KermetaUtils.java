@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.5 2006-10-27 08:52:33 dvojtise Exp $
+/* $Id: KermetaUtils.java,v 1.6 2006-10-27 11:06:14 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL

@@ -294,12 +294,12 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 				.getMultiplicityEdgeObjectFigure();
 		try {
 			targetCount.setText(createCountString(getProperty()));
-			targetCount.setIcon(null);
+			//targetCount.setIcon(null);
 		} catch (BoundsFormatException e) {
 			Label hoverLbl = new Label(e.getMessage());
 			targetCount.setText("multiplicity");
 			targetCount.setToolTip(hoverLbl);
-			targetCount.setIcon(StructureImageRegistry.getImage("ERROR"));
+			//targetCount.setIcon(StructureImageRegistry.getImage("ERROR"));
 
 			IStatus status = new Status(IStatus.ERROR, StructurePlugin
 					.getDefault().getBundle().getSymbolicName(), IStatus.ERROR,

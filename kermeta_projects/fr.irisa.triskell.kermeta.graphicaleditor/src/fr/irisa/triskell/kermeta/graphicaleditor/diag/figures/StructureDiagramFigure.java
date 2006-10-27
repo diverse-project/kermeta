@@ -37,9 +37,8 @@ public class StructureDiagramFigure extends DiagramFigure {
      */
     protected ILabel createLabel()
     {
-        Label header = new Label();
+        Label header = new Label(StructureImageRegistry.getImage("PACKAGE"));
         header.setLabelAlignment(PositionConstants.LEFT);
-        header.setIcon(StructureImageRegistry.getImage("PACKAGE"));
         header.setBorder(new PackageHeaderFigureBorder());
         
         return header;

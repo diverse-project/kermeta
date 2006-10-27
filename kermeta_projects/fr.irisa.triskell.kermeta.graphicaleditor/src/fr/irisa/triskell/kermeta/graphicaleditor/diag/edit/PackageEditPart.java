@@ -14,11 +14,13 @@ package fr.irisa.triskell.kermeta.graphicaleditor.diag.edit;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.swt.graphics.Color;
 import org.topcased.draw2d.figures.ComposedLabel;
+import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphElement;
@@ -29,6 +31,7 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.commands.PackageRestoreConnectionCommand;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.figures.PackageFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diag.policies.PackageLayoutEditPolicy;
@@ -110,7 +113,7 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 
 		PackageFigure fig = (PackageFigure) getFigure();
 		ComposedLabel lbl = (ComposedLabel) fig.getLabel();
-
+		
 		// check if the package is not included in the EPackage of the current
 		// diagram
 		if (getModelPackage().getNestingPackage() != null
@@ -125,6 +128,8 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 			lbl.setSuffix("");
 		}
 		lbl.getSuffix().setForegroundColor(ColorConstants.gray);
+		//editLbl.setLabelAlignment(PositionConstants.LEFT);
+		//lbl.setIcon(StructureImageRegistry.getImage("PACKAGE"));
 	}
 	
 }

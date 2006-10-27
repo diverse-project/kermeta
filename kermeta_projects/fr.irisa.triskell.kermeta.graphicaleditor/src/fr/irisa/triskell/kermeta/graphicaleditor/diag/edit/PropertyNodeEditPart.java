@@ -194,12 +194,12 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 		String mult = "";
 		try {
 			mult = createCountString(getProperty());
-			// label.setIcon(null);
+			// label.setIcon(null); Don't uncommment
 		} catch (BoundsFormatException e) {
 			Label hoverLbl = new Label(e.getMessage());
 			mult = ("error mult");
 			label.setToolTip(hoverLbl);
-			label.setIcon(StructureImageRegistry.getImage("ERROR"));
+			//label.setIcon(StructureImageRegistry.getImage("ERROR"));
 
 			IStatus status = new Status(IStatus.ERROR, StructurePlugin
 					.getDefault().getBundle().getSymbolicName(), IStatus.ERROR,

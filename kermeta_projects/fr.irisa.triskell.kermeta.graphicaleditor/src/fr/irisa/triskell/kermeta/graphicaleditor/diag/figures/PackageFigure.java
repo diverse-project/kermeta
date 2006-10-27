@@ -44,10 +44,9 @@ public class PackageFigure extends org.topcased.draw2d.figures.PackageFigure {
 	 * @generated NOT
 	 */
 	protected IFigure createHeader() {
-		EditableLabel mainFigure = new EditableLabel();
+		EditableLabel mainFigure = new EditableLabel(StructureImageRegistry.getImage("PACKAGE"));
 		mainFigure.setLabelAlignment(PositionConstants.CENTER);
-		mainFigure.setIcon(StructureImageRegistry.getImage("PACKAGE"));
-
+		
 		ComposedLabel label = new ComposedLabel(new Label(), mainFigure,
 				new Label(), false);
 		return label;
