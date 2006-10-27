@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.9 2006-08-24 11:51:09 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.10 2006-10-27 11:58:15 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -10,7 +10,6 @@
  */
 package fr.irisa.triskell.kermeta.loader.java;
 
-import java.io.Writer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -23,7 +22,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -33,8 +31,8 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  *  Jar2KM PASS 4 : 
@@ -169,7 +167,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				Parameter parameter = (Parameter)it.next();
 				Type pt = parameter.getType();
 				
-				String paramTName =KMTHelper.getTypeName(pt);
+				String paramTName =TypeHelper.getName(pt);
 				if(parameter.getUpper()!=1) 
 					paramTName+="s"; // this is a collection, add a "s" to the end of the typename
 				if(paramTName.equals("UnknownJavaObject")){

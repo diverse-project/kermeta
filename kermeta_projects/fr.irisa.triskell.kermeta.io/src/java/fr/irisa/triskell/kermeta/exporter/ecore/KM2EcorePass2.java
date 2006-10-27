@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.26 2006-10-27 08:49:38 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.27 2006-10-27 11:58:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -57,9 +57,9 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -398,7 +398,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	protected EClassifier getEObjectForType(Type node)
 	{ 
 		// Get the type and short_types
-		String qtype = KMTHelper.getTypeQualifiedName(node);
+		String qtype = TypeHelper.getMangledQualifiedName(node);
 		if (qtype.equals("") || node instanceof FunctionType || node instanceof TypeVariable)
 		{
 			ecoreExporter.getKermetaUnit().messages.addWarning("The kind of type " + node.getClass() + 

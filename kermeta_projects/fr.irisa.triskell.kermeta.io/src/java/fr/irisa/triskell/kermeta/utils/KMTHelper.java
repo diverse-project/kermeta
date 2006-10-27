@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.11 2006-10-27 08:49:38 dvojtise Exp $
+/* $Id: KMTHelper.java,v 1.12 2006-10-27 11:58:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -26,52 +26,6 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  * Some helper methods usefull when dealing with kermeta text syntax
  */
 public class KMTHelper {
-
-	/**
-	 * Get the fully qualified name of an NamedElement
-	 */
-/*	public static String getQualifiedName(NamedElement element) {
-		if (element.eContainer() != null
-				&& element.eContainer() instanceof NamedElement)
-			return getQualifiedName((NamedElement) element.eContainer()) + "::"
-					+ getMangledIdentifier(element.getName());
-		else
-			return element.getName();
-	}*/
-
-	/**
-	 * Get the fully qualified name of FType as the concrete types usually
-	 * inherit from NamedElement or is a FClass. In the later case, returns the
-	 * class definition qualified name
-	 */
-	public static String getTypeQualifiedName(Type type) {
-		if (type instanceof NamedElement) {
-			NamedElement fNamedElement = (NamedElement) type;
-
-			return NamedElementHelper.getMangledQualifiedName(fNamedElement);
-		} else if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-			ClassImpl fClass = (ClassImpl) type;
-			return NamedElementHelper.getMangledQualifiedName(fClass.getTypeDefinition());
-		}
-		return "";
-	}
-
-	/**
-	 * Get thename of FType as the concrete types usually inherit from
-	 * NamedElement or is a FClass. In the later case, returns the class
-	 * definition name
-	 */
-	public static String getTypeName(Type type) {
-		if (type instanceof NamedElement) {
-			NamedElement fNamedElement = (NamedElement) type;
-
-			return fNamedElement.getName();
-		} else if (type instanceof ParameterizedType) {
-			ParameterizedType fClass = (ParameterizedType) type;
-			return fClass.getTypeDefinition().getName();
-		}
-		return "";
-	}
 
 	/**
 	 * 

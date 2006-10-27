@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.32 2006-09-29 13:23:18 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.33 2006-10-27 11:58:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -45,6 +45,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -473,7 +474,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			if (ecoreExporter.isPropertyValidForEAttribute(node) && !node.isIsComposite()){
 				//	attribute
 				ecoreExporter.messages.addWarning(
-						"The reference to type '"+ KMTHelper.getTypeQualifiedName(node.getType()) + 
+						"The reference to type '"+ TypeHelper.getMangledQualifiedName(node.getType()) + 
 						"' needs to be translated into an Ecore data type and then must be put into an EAttribute.\n"
 						,node);
 			}
@@ -538,7 +539,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
-		String type_name = KMTHelper.getTypeQualifiedName(node.getInstanceType());
+		String type_name = TypeHelper.getMangledQualifiedName(node.getInstanceType());
 		EClassifier newEClassifier = EcoreFactory.eINSTANCE.createEDataType();
 		newEClassifier.setName(node.getName());
 		if (type_name == null) 

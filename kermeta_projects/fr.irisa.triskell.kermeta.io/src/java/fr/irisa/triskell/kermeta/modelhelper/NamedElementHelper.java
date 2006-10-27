@@ -1,4 +1,4 @@
-/* $Id: NamedElementHelper.java,v 1.1 2006-10-27 08:26:16 dvojtise Exp $
+/* $Id: NamedElementHelper.java,v 1.2 2006-10-27 11:58:15 dvojtise Exp $
  * Project   : Kermeta 
  * File      : NamedElementHelper.java
  * License   : EPL
@@ -13,7 +13,7 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
- * this class proposes various helper functions that applies to ClassDefinition in the Kermeta model
+ * this class proposes various helper functions that applies to NamedElement in the Kermeta model
  *
  */
 public class NamedElementHelper {

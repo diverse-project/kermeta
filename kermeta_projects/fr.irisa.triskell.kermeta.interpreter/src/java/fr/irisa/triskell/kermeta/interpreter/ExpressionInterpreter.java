@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.49 2006-10-27 08:27:32 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.50 2006-10-27 11:58:48 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -77,6 +77,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
 import fr.irisa.triskell.kermeta.loader.java.JarUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
 import java.net.URLClassLoader;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -85,7 +86,6 @@ import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -1027,7 +1027,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     	//    	 Set the result
 		RuntimeObject returnType = this.getMemory().getRuntimeObjectForFObject(typedElement.getType());
 		//RuntimeObject stringType = this.getMemory().getTypeDefinitionAsRuntimeObject("kermeta::standard::String");
-		String returnTypeQName = KMTHelper.getTypeQualifiedName((Type) returnType.getData().get("kcoreObject"));
+		String returnTypeQName = TypeHelper.getMangledQualifiedName((Type) returnType.getData().get("kcoreObject"));
 		if (returnedObject ==  null){
 			result = getMemory().voidINSTANCE;
 		}	
