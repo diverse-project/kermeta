@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="diag" prefix="km" forceOverwrite="true" copyrightText="" pluginVersion="0.0.6" provider="IRISA/INRIA">
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor2" name="Kermeta class diagram" package="diag" prefix="Km" forceOverwrite="true" copyrightText="" pluginVersion="0.0.5" provider="IRISA/INRIA" samePluginAsEditor="true">
   <palette name="Palette">
     <paletteCategories name="Node">
       <items name="Package" part="//@parts.0"/>
@@ -22,12 +22,12 @@
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.2" targetDecoration="ARROW" defaultRouter="RectilinearRouter">
     <sourceTargetCouple containerType="SOURCE" sourceNode="//@parts.1" targetNode="//@parts.1">
       <containerObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ClassDefinition"/>
-      <containerRef xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//ClassDefinition/ownedAttribute"/>
-      <refSourceToEdge xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//ClassDefinition/ownedAttribute"/>
-      <refEdgeToSource xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//Property/owningClass"/>
+      <containerRef xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/ClassDefinition/ownedAttribute"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/ClassDefinition/ownedAttribute"/>
+      <refEdgeToSource xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Property/owningClass"/>
     </sourceTargetCouple>
     <edgeObjects id="name" type="Target">
-      <eStructuralFeature xsi:type="ecore:EAttribute" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//NamedElement/name"/>
+      <eStructuralFeature xsi:type="ecore:EAttribute" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/NamedElement/name"/>
     </edgeObjects>
   </parts>
   <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
