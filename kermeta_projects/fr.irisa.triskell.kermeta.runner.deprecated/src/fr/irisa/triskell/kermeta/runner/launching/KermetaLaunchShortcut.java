@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.14 2006-10-04 11:31:51 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.15 2006-10-30 16:12:37 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -83,15 +83,19 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 				
 				// compatibility windows / linux
 				String comparedFileName = fileName.replace('\\', '/');
-				String comparedConfigurationFileName = attributes.get(KermetaLaunchConfiguration.KM_FILENAME).toString().replace('\\', '/');
 				
-				if (
-						(attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals(projectName))
-					&&	(comparedConfigurationFileName.equals(comparedFileName))
-					&& 	(attributes.get(KermetaLaunchConfiguration.KM_CLASSQNAME).toString().equals(className))
-					&& 	(attributes.get(KermetaLaunchConfiguration.KM_OPERATIONNAME).toString().equals(operationName))
-					)	{				
-					existingLaunchConfigurations.add(tab[index]);
+				// We must check if the attributes.get is null, the run configurations may be null !
+				// bug detected when we use a workspace from Eclipse 3.1.x with an Eclipse 3.2.x
+				if( attributes.get(KermetaLaunchConfiguration.KM_FILENAME)!= null ) {
+				String comparedConfigurationFileName = attributes.get(KermetaLaunchConfiguration.KM_FILENAME).toString().replace('\\', '/');
+					if (
+							(attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals(projectName))
+						&&	(comparedConfigurationFileName.equals(comparedFileName))
+						&& 	(attributes.get(KermetaLaunchConfiguration.KM_CLASSQNAME).toString().equals(className))
+						&& 	(attributes.get(KermetaLaunchConfiguration.KM_OPERATIONNAME).toString().equals(operationName))
+						)	{				
+						existingLaunchConfigurations.add(tab[index]);
+					}
 				}
 				index++;
 			}
