@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book lang="en-US">
+  <bookinfo>
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <author>
+      <firstname>François Tanguy, Didier Vojtisek</firstname>
+
+      <firstname></firstname>
+    </author>
+
+    <title>Kermeta tutorial</title>
+
+    <date>2006-10-27T16:24:23</date>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metamodeling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>How to create a metamodel</subtitle>
+
+    <bibliomisc>Licence EPL</bibliomisc>
+
+    <date>19/11/2006</date>
+
+    <abstract>
+      <para>This manual presents the various aspects of the Kermeta language.
+      This is the reference manual for anybody who want to use Kermeta.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address>
+        <state>France</state>
+        <otheraddr>
+          <ulink url="http://www.inria.fr">http://www.inria.fr</ulink>
+        </otheraddr>
+      </address>
+    </publisher>
+
+    <confgroup>
+      <conftitle>title</conftitle>
+
+      <confnum>Reference</confnum>
+
+      <confsponsor>sponsor</confsponsor>
+    </confgroup>
+  </bookinfo>
+
+  <preface>
+    <?print-orientation portrait?>
+
+    <title>Preface</title>
+
+    <para><emphasis role="strong">Kermeta is a Domain Specific Language
+    dedicated to metamodel engineering. It fills the gap let by MOF which
+    defines only the structure of meta-models, by adding a way to specify
+    static semantic (similar to OCL) and dynamic semantic (using operational
+    semantic in the operation of the metamodel). </emphasis> <emphasis
+    role="strong"> <emphasis role="strong">Kermeta uses the object-oriented
+    paradigm like Java or Eiffel.</emphasis> </emphasis> <emphasis
+    role="strong"> This document presents various aspects of the language,
+    including the textual syntax, the metamodel (which can be viewed as the
+    abstract syntax) and some more advanced features typically included in its
+    framework. </emphasis></para>
+
+    <important>
+      <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">espite that we put a lot of attention to this
+        document, it may contain errors (more likely in the code samples). If
+        you find any error or have some information that improves this
+        document, please send it to us using the bug tracker in the
+        forge:</emphasis>
+      </emphasis>
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis role="strong">
+          <emphasis role="strong">
+            <emphasis
+            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+          </emphasis>
+        </emphasis>
+      </ulink>
+
+      <emphasis role="strong">
+        <emphasis role="strong">
+          <emphasis role="strong" />
+        </emphasis>
+      </emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">
+          <emphasis role="strong">or using the developer mailing list
+          (kermeta-developers@lists.gforge.inria.fr)</emphasis>
+        </emphasis>
+      </emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">
+          <emphasis role="strong" />
+        </emphasis>
+      </emphasis>
+
+      Last check: v0.2.1
+    </important>
+
+    <tip>
+      The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       .
+    </tip>
+  </preface>
+
+  <chapter>
+    <title>Prerequisites</title>
+
+    <para>No particular background is necessary to read this tutorial.</para>
+
+    <important>
+      KerMeta must be installed. If not, please refer to “How to install KerMeta” tutorial.
+    </important>
+  </chapter>
+
+  <chapter>
+    <title>Introduction</title>
+
+    <para>There are two ways to create a KerMeta meta model. The first one is
+    to start from scratch just by creating a “.kmt” file. The second one is to
+    create an Ecore file and then to transform it into a KerMeta meta
+    model.</para>
+
+    <para>This tutorial should help you in manipulating the Ecore and KerMeta
+    files. It gives an overview on how to create meta models and how to
+    transform them.</para>
+
+    <para>Start by creating a new general empty project in Eclipse.</para>
+  </chapter>
+
+  <chapter>
+    <title>A KerMeta meta model from scratch</title>
+
+    <para>Select in the main menu of Eclipse</para>
+
+    <para>“File” &gt; “New” &gt;&gt; “Other...”</para>
+
+    <para>This action opens the following window.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/kmt-from-scratch.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Select “New Kermeta file” and press “Next &gt;”.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/kmt-file.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Give a name (MyMetamodel.kmt for instance) to the new file, select a
+    location (The default one is good for us) and leave Main class and Main
+    operation blank for the moment. It will be used later to run models. Click
+    on “Finish”.</para>
+
+    <para>Now your main window should look like the one above. The file is
+    written in KerMeta language. So you can edit this file to add some
+    classes, attributes and so on using the KerMeta language (read <ulink
+    type=""
+    url="http://www.kermeta.org/documents/manual/">http://www.kermeta.org/documents/manual/</ulink>
+    for more details on KerMeta language).</para>
+
+    <para></para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/kmt-blank-file.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </chapter>
+
+  <chapter>
+    <title>A KerMeta meta model from an Ecore meta model</title>
+
+    <para>Create an Ecore file. In the main menu of Eclipse select :</para>
+
+    <para>“File” &gt; “New” &gt;&gt; “Other...”</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-file.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Select “Ecore model” wizard and click “Next &gt;”. Select a location
+    and a name for the file. Call it “AnOtherMetamodel.ecore” for example.
+    Click on “Finish”.</para>
+
+    <para>Your main window now looks like this :</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-blank-file.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>You can edit this meta model. If you do not know how to do that,
+    please visit the following link :</para>
+
+    <para><ulink type=""
+    url="http://dev.eclipse.org/viewcvs/indextech.cgi/org.eclipse.gmt/umlx/org.eclipse.gmt.umlx.doc/html/tutorial.html?rev=1.2">http://dev.eclipse.org/viewcvs/indextech.cgi/org.eclipse.gmt/umlx/org.eclipse.gmt.umlx.doc/html/tutorial.html?rev=1.2</ulink></para>
+
+    <important>
+      You must at least fill in the name, ns prefix and ns URI of the package.
+    </important>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-package.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Let us say that you edited this meta model and now you want to add
+    some behaviors. Then you must transform the Ecore meta model into a
+    KerMeta meta model. Right click on “AnOtherMetamodel.ecore” and select
+    “KerMeta” and “Generate Kermeta source”.</para>
+
+    <para>Do not pay attention to the dialog box alerting you that this is not
+    a stable process. The following window appears :</para>
+
+    <para><figure>
+        <title></title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/ecore-to-kmt.png" />
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>Choose a name for the new KerMeta meta model. The default one is
+    correct for us. So just click on “Finish”.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/after-ecore-kmt.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Now your main window looks like this one :</para>
+  </chapter>
+
+  <chapter>
+    <title>Transformations of KerMeta meta models</title>
+
+    <para>Several transformations are available. This may appear complex but
+    this is not. Actually, you can switch the representation of your meta
+    model from one format to another. If you prefer coding, then you will
+    probably prefer the kmt format (KerMeta text). Otherwise you will design
+    with the reflexive editor and the km files (serialized files).</para>
+
+    <para>So transformations give you the ability to adapt the meta model to
+    your preferred point of view : coding view or graphical view.</para>
+
+    <para>kmt meta model to km meta model</para>
+
+    <para>From a “.kmt” file, you can generate a “km” file more appropriate to
+    design your meta model because it allows you to edit with the reflexive
+    editor and later a graphical editor (We are working on it).</para>
+
+    <para>To do that, right click on “MyMetamodel.kmt” and select “Kermeta”
+    and “Compite to Kermeta mode”l. Choose a file name and click on “Finish”
+    (The default name is good). If you chose the default name, then double
+    click on “MyMetamodel.km”. Normally it opened the file thanks to the
+    reflexive editor.</para>
+
+    <tip>
+      If not, right click on “MyMetamodel.km” and select “Open With” and “Reflexive Editor”.
+    </tip>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-How-to-create-a-metamodel_figures/km-usage.png"
+                     scale="" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>km meta model to kmt meta model</para>
+
+    <para>Because “.km” and “.kmt” files are describing the same meta model,
+    you can transform a “.km” file into a “.kmt file” and vice versa.</para>
+
+    <para>Right click on “MyMetamodel.km” file and select “Kermeta” and
+    “Generate Kermeta Source”. Choose a name and click on “Finish”.</para>
+
+    <para>kmt meta model to Ecore meta model</para>
+
+    <para>You can generate an Ecore meta model from a “.kmt” file. Right click
+    on “MyMetamodel.kmt” and select “Kermeta” and “Generate Ecore”.</para>
+
+    <para>Km meta model to Ecore meta model</para>
+
+    <para>You can generate an Ecore meta model from a “.km” file. Right click
+    on “MyMetamodel.km” and select “Kermeta” and “Generate Ecore”.</para>
+  </chapter>
+</book>
