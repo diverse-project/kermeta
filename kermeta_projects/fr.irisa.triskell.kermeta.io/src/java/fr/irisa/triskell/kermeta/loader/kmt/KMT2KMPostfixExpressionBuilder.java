@@ -85,24 +85,33 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(LambdaPostfix lambdaPostfix) {
 		if (result instanceof CallExpression &&((CallExpression)result).getParameters().size() == 0) {
-			current_le = builder.behav_factory.createLambdaExpression();
-			builder.storeTrace(current_le,lambdaPostfix);
-			builder.pushContext();
-			lambdaPostfix.getParams().accept(this);
 			
-			// Patch that avoids to create a Block element in case the body of the lambda expression
-			// contains a single expression.
-			//OLD: current_le.setBody(createBlock(lambdaPostfix.getExpression()));
-			if(lambdaPostfix.getExpression().getChildCount() > 1) {
-				current_le.setBody( createBlock(lambdaPostfix.getExpression()) );
-			}
-			else {
-				FExpression fExp = (FExpression) lambdaPostfix.getExpression().getChild(0);
-				fr.irisa.triskell.kermeta.language.behavior.Expression expr =  builder.behav_factory.createEmptyExpression();
-				builder.storeTrace(expr, fExp);
-				current_le.setBody( KMT2KMExperessionBuilder.process(fExp, builder) );
-			}
+			// prevent against no expression
+			if ( lambdaPostfix.getExpression().getChildCount() > 0 ) {
 			
+				current_le = builder.behav_factory.createLambdaExpression();
+				builder.storeTrace(current_le,lambdaPostfix);
+				builder.pushContext();
+				lambdaPostfix.getParams().accept(this);
+			
+						
+				// Patch that avoids to create a Block element in case the body of the lambda expression
+				// contains a single expression.
+				//OLD: current_le.setBody(createBlock(lambdaPostfix.getExpression()));
+				if(lambdaPostfix.getExpression().getChildCount() > 1) {
+					current_le.setBody( createBlock(lambdaPostfix.getExpression()) );
+				} else {
+
+					FExpression fExp = (FExpression) lambdaPostfix.getExpression().getChild(0);
+					fr.irisa.triskell.kermeta.language.behavior.Expression expr =  builder.behav_factory.createEmptyExpression();
+					builder.storeTrace(expr, fExp);
+					current_le.setBody( KMT2KMExperessionBuilder.process(fExp, builder) );
+				}
+			} else {
+				builder.messages.addMessage(new KMTUnitLoadError("A lambda expression should have at least one expression in its body.", lambdaPostfix));
+				return false;						
+			}
+						
 			((CallExpression)result).getParameters().add(current_le);
 			builder.popContext();
 		}
