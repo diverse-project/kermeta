@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.13 2006-08-18 09:19:35 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.14 2006-10-31 14:35:29 rdelamar Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -283,7 +283,9 @@ public class RuntimeObjectFactory {
 		} else if ( theMetaClassName.equals("Boolean") ) {
 			result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
 		
-		} else if ( theMetaClassName.equals("Collection") || theMetaClassName.equals("OrderedCollection") ) {				    						    		
+		} else if ( theMetaClassName.equals("Collection") || theMetaClassName.equals("OrderedCollection") ||
+					theMetaClassName.equals("Set") || theMetaClassName.equals("OrderedSet") || // tests if theMetaClassName is Set, Bag, OrderedSet or Sequence to fix bug #1550
+					theMetaClassName.equals("Bag") || theMetaClassName.equals("Sequence")) {
 			ArrayList objectToCloneContents = (ArrayList) objectToClone.getData().get("CollectionArrayList");
 			ArrayList resultContents = new ArrayList();
 			
