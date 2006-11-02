@@ -14,14 +14,15 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "org.eclipse.emf.ecore.Wizard.category.ID"
-      name="%_UI_Wizard_category">
+          id="fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
+          name="FSM Sample"
+          parentCategory="KermetaWizard">
     </category>
     <wizard
       id = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizardID"
       name = "%_UI_FsmModelWizard_label"
       class = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizard"
-      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      category = "KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
       icon = "icons/full/obj16/FsmModelFile.gif">
       <description>%_UI_FsmModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
