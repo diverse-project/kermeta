@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Graphical Editor
-Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor;singleton:=true
 Bundle-Version: 0.0.4
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin
 Bundle-Vendor: Topcased - IRISA/INRIA
