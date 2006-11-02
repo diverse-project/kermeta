@@ -46,7 +46,7 @@ class FSM
 		
 		end
 	
-	// Semantique operationnelle
+	// Operational semantic
 	operation run() : Void raises FSMException is do  
 		// reset if there is no current state
 		if self.currentState == void then self.currentState := self.initialState end
@@ -62,7 +62,6 @@ class FSM
 			else 
 				if str == "print" then
 					stdio.writeln("")
-					//serializer.printFSM(self)
 				else	
 					stdio.writeln(str)			
 					stdio.writeln("stepping...")

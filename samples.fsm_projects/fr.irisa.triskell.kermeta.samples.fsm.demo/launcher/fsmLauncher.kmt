@@ -21,9 +21,9 @@ require kermeta
 require "../kermeta/fsm.kmt"
 
 using fsm
-using kermeta::standard
-using kermeta::persistence
 using kermeta::exceptions
+using kermeta::persistence
+using kermeta::standard
 
 class Main
 {
