@@ -52,17 +52,20 @@ public class ReflectiveCollection {
 	 * as the method addAt in ReflectiveSequence
 	 */	
 	public static void add(RuntimeObject self, RuntimeObject element, boolean handle_opposite) {
-		// add the new object
-		Collection.add(self, element);
 		// set the new objects container if needed
 		if (isaContainer(self)) {
-		    // FIXME : We remove from self container an object that we just precedingly added??
 		    if (element.getContainer() != null) {
 		        Object.removeObjectFromItsContainer(element);
-		    }
-		    
+		    }    
 		    element.setContainer(getObject(self));
 		}
+		
+		// add the new object after its container initialization
+		// this instruction has been moved in order to solve the bug #1536
+		// this adding must be done after the container initialization
+		// TODO more test suites
+		Collection.add(self, element);
+		
 		// take care of the opposite
 		if(handle_opposite) {
 			RuntimeObject oproperty = getOppositeProperty(self);
