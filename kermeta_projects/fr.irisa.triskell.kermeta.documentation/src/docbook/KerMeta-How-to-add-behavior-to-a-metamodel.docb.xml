@@ -145,8 +145,8 @@
     the reader may lack information he can find in the big tutorial.</para>
 
     <para>To understand this tutorial, you must be familiar with meta model
-    creation. If not, please read the the dedicated tutorial on “How to create
-    KerMeta meta model”.</para>
+    creation. If not, please read the the dedicated tutorial on "How to create
+    KerMeta meta model".</para>
 
     <important>
        This tutorial does not cover the study of KerMeta language. Please have a look at the KerMeta manual located at: 
@@ -172,13 +172,13 @@
 
     <para>We want to represent IO/state machines. Inputs and outputs can be
     attached on each transition. To illustrate finite state machine, here is a
-    simple example. This state machine recognizes the “hello” motif and
-    produces the “world” motif.</para>
+    simple example. This state machine recognizes the "hello" motif and
+    produces the "world" motif.</para>
 
     <para>Here, we present this finite-state machine in a specific graphical
     syntax where states are presented as squares and transitions by arrow
     between squares. Input and outputs are present above transitions. Here,
-    “h/w” says that we consume an “h” to produce a “w”.</para>
+    "h/w" says that we consume an "h" to produce a "w".</para>
 
     <figure>
       <title></title>
@@ -212,7 +212,7 @@
       </mediaobject>
     </figure>
 
-    <para>Then have a look at the “fsm.kmt” file in the “kermeta”
+    <para>Then have a look at the "fsm.kmt" file in the "kermeta"
     directory.</para>
 
     <para>The class diagram suggests that we must fill in three operations
@@ -263,7 +263,7 @@
 
     <para>1 – initialize current state</para>
 
-    <para>2 – loop until the user's input equal to “quit”</para>
+    <para>2 – loop until the user's input equal to "quit"</para>
 
     <para>print the current state</para>
 
