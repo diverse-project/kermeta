@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book lang="en-US">
+  <?ooogenerator OpenOffice.org/2.0$Linux OpenOffice.org_project/680m1$Build-8990?>
+
+  <?oooversion ?>
+
+  <bookinfo>
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <author>
+      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril
+      Faucher</firstname>
+
+      <firstname></firstname>
+    </author>
+
+    <title>Kermeta language</title>
+
+    <date>2006-09-25T10:35:34</date>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metamodeling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>Reference manual</subtitle>
+
+    <bibliomisc>Licence EPL</bibliomisc>
+
+    <date>19/07/2006</date>
+
+    <abstract>
+      <para>This manual presents the various aspects of the Kermeta language.
+      This is the reference manual for anybody who want to use Kermeta.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address>
+        <state>France</state>
+        <otheraddr>
+          <ulink url="http://www.inria.fr">http://www.inria.fr</ulink>
+        </otheraddr>
+      </address>
+    </publisher>
+
+    <confgroup>
+      <conftitle>title</conftitle>
+
+      <confnum>Reference</confnum>
+
+      <confsponsor>sponsor</confsponsor>
+    </confgroup>
+  </bookinfo>
+
+  <preface>
+    <?print-orientation portrait?>
+
+    <title>Preface</title>
+
+    <para><emphasis role="strong">Kermeta is a Domain Specific Language
+    dedicated to metamodel engineering. It fills the gap let by MOF which
+    defines only the structure of meta-models, by adding a way to specify
+    static semantic (similar to OCL) and dynamic semantic (using operational
+    semantic in the operation of the metamodel). </emphasis> <emphasis
+    role="strong"> <emphasis role="strong">Kermeta uses the object-oriented
+    paradigm like Java or Eiffel.</emphasis> </emphasis> <emphasis
+    role="strong"> This document presents various aspects of the language,
+    including the textual syntax, the metamodel (which can be viewed as the
+    abstract syntax) and some more advanced features typically included in its
+    framework. </emphasis></para>
+
+    <important>
+      <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">espite that we put a lot of attention to this
+        document, it may contain errors (more likely in the code samples). If
+        you find any error or have some information that improves this
+        document, please send it to us using the bug tracker in the
+        forge:</emphasis>
+      </emphasis>
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis role="strong">
+          <emphasis role="strong">
+            <emphasis
+            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+          </emphasis>
+        </emphasis>
+      </ulink>
+
+      <emphasis role="strong">
+        <emphasis role="strong">
+          <emphasis role="strong" />
+        </emphasis>
+      </emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">
+          <emphasis role="strong">or using the developer mailing list
+          (kermeta-developers@lists.gforge.inria.fr)</emphasis>
+        </emphasis>
+      </emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">
+          <emphasis role="strong" />
+        </emphasis>
+      </emphasis>
+
+      Last check: v0.2.1
+    </important>
+
+    <tip>
+      The most update version of this document is available on line from 
+
+      <ulink type=""
+      url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
+
+       .
+    </tip>
+  </preface>
+
+  <chapter>
+    <title>Prerequisites</title>
+
+    <para></para>
+
+    <caution>
+      <para>KerMeta must be installed. If not, please read the “How to install
+      KerMeta” tutorial.</para>
+    </caution>
+  </chapter>
+
+  <chapter>
+    <title>Introduction</title>
+
+    <para>This tutorial has been written to give an overview of many concepts
+    used through KerMeta project creation. Following this tutorial should give
+    you the knowledge : to create KerMeta project to create KerMeta meta
+    models to add behavior to KerMeta meta models to execute a model To cover
+    all this features, we decided to start from an existing example. It is a
+    reference you should browse each time you are in difficulty because it is
+    a complete KerMeta project. This example is about the finite state machine
+    which acronym is FSM. This tutorial is divided in several dependent
+    sub-tutorials. So it means that the reader should follow the speech
+    structure. Anyway, if you want to jump some sections, in each sub-tutorial
+    you will find a section named “Prerequisites” which specify the minimal
+    background needed to understand the contents. List of sub tutorials : How
+    to create a KerMeta meta model How to add behavior to a KerMeta meta model
+    How to run a FSM model and to use run configurations? Firstly, a section
+    is dedicated to the finite state machine we want to model. The next
+    section explains how to load files of the example in your Eclipse
+    workspace. You will have access to every files. The last three sections
+    point on one sub tutorial (in the list order above)</para>
+  </chapter>
+
+  <chapter>
+    <title>Finite State Machine Specifications</title>
+
+    <para>We want to represent IO/state machines. Inputs and outputs can be
+    attached on each transition. To illustrate finite state machine, here is a
+    simple example. This state machine recognizes the “hello!” motif and
+    produces the “world!” motif. Here, we present this finite-state machine in
+    a specific graphical syntax where states are represented as squares and
+    transitions by arrow between squares. Input and outputs are present above
+    transitions. Here, “h/w” says that we consume an “h” to produce a
+    “w”.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-The-FSM-example_figures/helloWorldFSM.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>This simple state machine can be modeled and executed easily in
+    Kermeta. See the following meta-model presented in a class diagram syntax.
+    </para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-The-FSM-example_figures/fsm-metamodel.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </chapter>
+
+  <chapter>
+    <title>Loading the FSM example</title>
+
+    <para></para>
+
+    <caution>
+      <para>The FSM example is available from Eclipse only if KerMeta is
+      already installed.</para>
+    </caution>
+
+    <para>We start from the main Eclipse window.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-The-FSM-example_figures/main_window.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Select : “File” &gt; “New”&gt;&gt; “Example...”&gt;&gt;&gt; A window
+    appears. You are asked to choose a wizard for project creation. At the
+    bottom of the list, you will find “Kermeta samples” item. Browse it and
+    select “FSM Demo”. The “Finish” button has been enabled. Click on
+    it.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-The-FSM-example_figures/wizard_selection.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Thanks to the wizard creation project, a project named
+    ”fr.irisa.triskell.kermeta.samples.fsm.demo” appeared on the left side of
+    Eclipse.</para>
+
+    <figure>
+      <title></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-The-FSM-example_figures/main_window_fsm_loaded.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </chapter>
+
+  <chapter>
+    <title>How to create a KerMeta meta model ?</title>
+
+    <para>Please read “How to create a KerMeta meta model” tutorial.</para>
+  </chapter>
+
+  <chapter>
+    <title>How to add behavior to a KerMeta meta model ?</title>
+
+    <para>Please read “How to add behavior to a KerMeta meta model”
+    tutorial.</para>
+  </chapter>
+
+  <chapter>
+    <title>How to run a FSM model and to use run configurations?</title>
+
+    <para>Please read “How to use run configuration” tutorial.</para>
+  </chapter>
+</book>
