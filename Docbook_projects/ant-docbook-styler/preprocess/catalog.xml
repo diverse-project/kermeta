@@ -17,7 +17,7 @@
 <public publicId="-//Dawid Weiss//DTD DocBook V3.1-Based Extension for XML and graphics inclusion//EN" 
      	uri="dweiss-docbook-extensions.dtd" />
 
-<public publicId="-//OASIS//DTD DocBook XML V4.2//EN" 
+<public publicId="-//OASIS//DTD DocBook XML V4.4//EN" 
 		uri="../docbook/dtd/docbookx.dtd" />
 
 
