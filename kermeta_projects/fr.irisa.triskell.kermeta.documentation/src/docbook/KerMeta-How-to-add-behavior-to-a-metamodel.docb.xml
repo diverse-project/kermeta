@@ -23,15 +23,15 @@
       <keyword>language</keyword>
     </keywordset>
 
-    <subtitle>How to add behavior to a metamodell</subtitle>
+    <subtitle>How to add behavior to a metamodel</subtitle>
 
     <bibliomisc>Licence EPL</bibliomisc>
 
     <date>19/10/2006</date>
 
     <abstract>
-      <para>This manual presents the various aspects of the Kermeta language.
-      This is the reference manual for anybody who want to use Kermeta.</para>
+      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
+      This one will explain you how to add operational behavior to a metamodel.</para>
     </abstract>
 
     <publisher>
@@ -122,7 +122,7 @@
         </emphasis>
       </emphasis>
 
-       Last check: v0.2.1 
+       Last check: v0.3.1 
     </important>
 
     <tip>

@@ -6,13 +6,12 @@
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
     <author>
-      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril
-      Faucher</firstname>
+      <firstname>François Tanguy, Didier Vojtisek</firstname>
 
       <firstname></firstname>
     </author>
 
-    <title>Kermeta language</title>
+    <title>Kermeta tutorial</title>
 
     <date>2006-09-25T10:54:27</date>
 
@@ -22,17 +21,19 @@
       <keyword>metamodeling</keyword>
 
       <keyword>language</keyword>
+      <keyword>tutorial</keyword>
+      <keyword>install</keyword>
     </keywordset>
 
-    <subtitle>Reference manual</subtitle>
+    <subtitle>How to install Kermeta</subtitle>
 
     <bibliomisc>Licence EPL</bibliomisc>
 
     <date>19/07/2006</date>
 
     <abstract>
-      <para>This manual presents the various aspects of the Kermeta language.
-      This is the reference manual for anybody who want to use Kermeta.</para>
+      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
+      This one shows how to install Kermeta workbench.</para>
     </abstract>
 
     <publisher>
@@ -111,7 +112,7 @@
         </emphasis>
       </emphasis>
 
-      Last check: v0.2.1
+      Last check: v0.3.1
     </important>
 
     <tip>
@@ -165,7 +166,7 @@
     workspace location. This is just a directory used by Eclipse to store any
     project you will create in the future. The image below is the dialog box
     you should see. By default, Eclipse propose to create a workspace
-    directory named “workspace” in your home directory.</para>
+    directory named "workspace" in your home directory.</para>
 
     <figure>
       <title></title>
@@ -178,7 +179,7 @@
     </figure>
 
     <para>At every Eclipse launching, you will be prompted for the workspace
-    location. For now, we just click “OK” to open the main window of Eclipse.
+    location. For now, we just click "OK" to open the main window of Eclipse.
     You should see appearing a window like the one below.</para>
 
     <figure>
@@ -191,7 +192,7 @@
       </mediaobject>
     </figure>
 
-    <para>You can close the “Welcome” tab, it will be of no use for us. Now
+    <para>You can close the "Welcome" tab, it will be of no use for us. Now
     your window looks like this one :</para>
 
     <figure>
@@ -231,8 +232,8 @@
 
           <para>In the main menu of Eclipse, select &gt; Help &gt;&gt;
           Software Updates &gt;&gt; &gt;&gt;&gt;Find and install... A dialog
-          box appears. Select “Search for new features to install” and click
-          “Next &gt;”</para>
+          box appears. Select "Search for new features to install" and click
+          "Next &gt;"</para>
 
           <figure>
             <title></title>
@@ -244,11 +245,11 @@
             </mediaobject>
           </figure>
 
-          <para>An other window appears. You can read “Updates sites to
-          visit”. From this window, you will add some sites that Eclipse uses
+          <para>An other window appears. You can read "Updates sites to
+          visit". From this window, you will add some sites that Eclipse uses
           to find and install PlugIns. But you don't know which sites you must
           add. That is the contents of the file you downloaded at step 1. Now
-          click on “Import sites...”. You are prompted to choose a file.
+          click on "Import sites...". You are prompted to choose a file.
           Select the file you downloaded at step 1.</para>
 
           <figure>
@@ -289,8 +290,8 @@
             </figure>
           </caution>
 
-          <para>Click on “Finish”. You will be asked to choose a location for
-          some sites. Don't pay attention and click “OK” for all of
+          <para>Click on "Finish". You will be asked to choose a location for
+          some sites. Don't pay attention and click "OK" for all of
           them.</para>
         </listitem>
       </itemizedlist>
@@ -313,7 +314,7 @@
 
           <itemizedlist>
             <listitem>
-              <para>Step 3.1 : Check “Kermeta Updates”.</para>
+              <para>Step 3.1 : Check "Kermeta Updates".</para>
 
               <figure>
                 <title></title>
@@ -348,15 +349,15 @@
                 </mediaobject>
               </figure>
 
-              <para>Now click on “Select Required”. Some items have been
-              selected and the “Next &gt;” button has been enabled. Click on
+              <para>Now click on "Select Required". Some items have been
+              selected and the "Next &gt;" button has been enabled. Click on
               it.</para>
 
               <para></para>
 
               <para>A new window opened. This is for the using license of
-              Eclipse. If you do agree with the terms, select “I accept the
-              terms in the license agreement” and click on “Next &gt;</para>
+              Eclipse. If you do agree with the terms, select "I accept the
+              terms in the license agreement" and click on "Next &gt;</para>
 
               <figure>
                 <title></title>
@@ -369,11 +370,11 @@
               </figure>
 
               <para>A window summarizes the PlugIns to be installed. Click on
-              “Finish”. Now wait for PlugIns downloading. It can take several
+              "Finish". Now wait for PlugIns downloading. It can take several
               minutes depending on your connection.</para>
 
               <para>You are warned about an unsigned feature. No matter. Click
-              on “Install All”.</para>
+              on "Install All".</para>
 
               <figure>
                 <title></title>
@@ -386,7 +387,7 @@
               </figure>
 
               <para>Finally, you are asked about rebooting Eclipse to take
-              changes in account. Do it by clicking on “Yes”.</para>
+              changes in account. Do it by clicking on "Yes".</para>
 
               <figure>
                 <title></title>
@@ -431,8 +432,8 @@
         <listitem>
           <para>Step 1 : Sites update In the main menu of Eclipse, select Help
           &gt; Software Updates &gt;&gt; Find and install... &gt;&gt;&gt; A
-          dialog box appeared. Select “Search for new features to install” and
-          click “Next &gt;”</para>
+          dialog box appeared. Select "Search for new features to install" and
+          click "Next &gt;"</para>
 
           <figure>
             <title></title>
@@ -444,8 +445,8 @@
             </mediaobject>
           </figure>
 
-          <para>An other window appears. You can read “Updates sites to
-          visit”. From this window, you will add some sites that Eclipse uses
+          <para>An other window appears. You can read "Updates sites to
+          visit". From this window, you will add some sites that Eclipse uses
           to find and install PlugIns.</para>
 
           <figure>
@@ -483,7 +484,7 @@
             </listitem>
           </itemizedlist>
 
-          <para>Now for every site, click on “New Remote Site...”. You are
+          <para>Now for every site, click on "New Remote Site...". You are
           asked for a name and an URL. Fill them in with the information
           above.</para>
 
@@ -524,8 +525,8 @@
             </figure>
           </caution>
 
-          <para>Click on “Finish”. You will be asked to choose a location for
-          some sites. Don't pay attention and click “OK”.</para>
+          <para>Click on "Finish". You will be asked to choose a location for
+          some sites. Don't pay attention and click "OK".</para>
         </listitem>
       </itemizedlist>
 

@@ -10,13 +10,12 @@
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
     <author>
-      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril
-      Faucher</firstname>
+      <firstname>François Tanguy, Didier Vojtisek</firstname>
 
       <firstname></firstname>
     </author>
 
-    <title>Kermeta language</title>
+    <title>Kermeta tutorial</title>
 
     <date>2006-09-25T10:35:34</date>
 
@@ -28,15 +27,18 @@
       <keyword>language</keyword>
     </keywordset>
 
-    <subtitle>Reference manual</subtitle>
+    <subtitle>The FSM example</subtitle>
 
     <bibliomisc>Licence EPL</bibliomisc>
 
     <date>19/07/2006</date>
 
     <abstract>
-      <para>This manual presents the various aspects of the Kermeta language.
-      This is the reference manual for anybody who want to use Kermeta.</para>
+      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
+      This one is the master tutorial that will guide you through the different tutorials illustrating the 
+      explanation using the Finite State Machine example.
+      After having read this tutorial (and dependent tutorials) you will know how to create a metamodel, 
+      add behavior and use it for simulation</para>
     </abstract>
 
     <publisher>
@@ -115,7 +117,7 @@
         </emphasis>
       </emphasis>
 
-      Last check: v0.2.1
+      Last check: v0.3.1
     </important>
 
     <tip>
@@ -134,8 +136,8 @@
     <para></para>
 
     <caution>
-      <para>KerMeta must be installed. If not, please read the “How to install
-      KerMeta” tutorial.</para>
+      <para>KerMeta must be installed. If not, please read the "How to install
+      KerMeta" tutorial.</para>
     </caution>
   </chapter>
 
@@ -152,7 +154,7 @@
     which acronym is FSM. This tutorial is divided in several dependent
     sub-tutorials. So it means that the reader should follow the speech
     structure. Anyway, if you want to jump some sections, in each sub-tutorial
-    you will find a section named “Prerequisites” which specify the minimal
+    you will find a section named "Prerequisites" which specify the minimal
     background needed to understand the contents. List of sub tutorials : How
     to create a KerMeta meta model How to add behavior to a KerMeta meta model
     How to run a FSM model and to use run configurations? Firstly, a section
@@ -167,12 +169,12 @@
 
     <para>We want to represent IO/state machines. Inputs and outputs can be
     attached on each transition. To illustrate finite state machine, here is a
-    simple example. This state machine recognizes the “hello!” motif and
-    produces the “world!” motif. Here, we present this finite-state machine in
+    simple example. This state machine recognizes the "hello!" motif and
+    produces the "world!" motif. Here, we present this finite-state machine in
     a specific graphical syntax where states are represented as squares and
     transitions by arrow between squares. Input and outputs are present above
-    transitions. Here, “h/w” says that we consume an “h” to produce a
-    “w”.</para>
+    transitions. Here, "h/w" says that we consume an "h" to produce a
+    "w".</para>
 
     <figure>
       <title></title>
@@ -221,10 +223,10 @@
       </mediaobject>
     </figure>
 
-    <para>Select : “File” &gt; “New”&gt;&gt; “Example...”&gt;&gt;&gt; A window
+    <para>Select : "File" &gt; "New"&gt;&gt; "Example..."&gt;&gt;&gt; A window
     appears. You are asked to choose a wizard for project creation. At the
-    bottom of the list, you will find “Kermeta samples” item. Browse it and
-    select “FSM Demo”. The “Finish” button has been enabled. Click on
+    bottom of the list, you will find "Kermeta samples" item. Browse it and
+    select "FSM Demo". The "Finish" button has been enabled. Click on
     it.</para>
 
     <figure>
@@ -238,7 +240,7 @@
     </figure>
 
     <para>Thanks to the wizard creation project, a project named
-    ”fr.irisa.triskell.kermeta.samples.fsm.demo” appeared on the left side of
+    "fr.irisa.triskell.kermeta.samples.fsm.demo" appeared on the left side of
     Eclipse.</para>
 
     <figure>
@@ -255,19 +257,19 @@
   <chapter>
     <title>How to create a KerMeta meta model ?</title>
 
-    <para>Please read “How to create a KerMeta meta model” tutorial.</para>
+    <para>Please read "How to create a KerMeta meta model" tutorial.</para>
   </chapter>
 
   <chapter>
     <title>How to add behavior to a KerMeta meta model ?</title>
 
-    <para>Please read “How to add behavior to a KerMeta meta model”
+    <para>Please read "How to add behavior to a KerMeta meta model"
     tutorial.</para>
   </chapter>
 
   <chapter>
     <title>How to run a FSM model and to use run configurations?</title>
 
-    <para>Please read “How to use run configuration” tutorial.</para>
+    <para>Please read "How to use run configuration" tutorial.</para>
   </chapter>
 </book>

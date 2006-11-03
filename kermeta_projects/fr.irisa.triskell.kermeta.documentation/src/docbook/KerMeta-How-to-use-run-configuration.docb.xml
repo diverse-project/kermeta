@@ -11,7 +11,7 @@
       <firstname></firstname>
     </author>
 
-    <title>Kermeta language</title>
+    <title>Kermeta tutorial</title>
 
     <date>2006-09-25T10:56:58</date>
 
@@ -30,8 +30,8 @@
     <date>19/07/2006</date>
 
     <abstract>
-      <para>This manual presents the various aspects of the Kermeta language.
-      This is the reference manual for anybody who want to use Kermeta.</para>
+      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
+      This one will show you how to use Eclipse to run a Kermeta program.</para>
     </abstract>
 
     <publisher>
@@ -110,7 +110,7 @@
         </emphasis>
       </emphasis>
 
-      Last check: v0.2.1
+      Last check: v0.3.1
     </important>
 
     <tip>

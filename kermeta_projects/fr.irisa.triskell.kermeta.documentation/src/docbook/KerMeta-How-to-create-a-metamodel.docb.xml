@@ -30,8 +30,9 @@
     <date>19/11/2006</date>
 
     <abstract>
-      <para>This manual presents the various aspects of the Kermeta language.
-      This is the reference manual for anybody who want to use Kermeta.</para>
+      <para>This tutorial is part of a serie of tutorials that explain step by step one of the aspect of Kermeta. 
+      This one will explain you how to a metamodel to be used by kermeta. However, 
+      there are many ways to create them, this tutorial will present some of them.</para>
     </abstract>
 
     <publisher>
@@ -110,7 +111,7 @@
         </emphasis>
       </emphasis>
 
-      Last check: v0.2.1
+      Last check: v0.3.1
     </important>
 
     <tip>
@@ -129,7 +130,7 @@
     <para>No particular background is necessary to read this tutorial.</para>
 
     <important>
-      KerMeta must be installed. If not, please refer to “How to install KerMeta” tutorial.
+      KerMeta must be installed. If not, please refer to "How to install KerMeta" tutorial.
     </important>
   </chapter>
 
@@ -137,7 +138,7 @@
     <title>Introduction</title>
 
     <para>There are two ways to create a KerMeta meta model. The first one is
-    to start from scratch just by creating a “.kmt” file. The second one is to
+    to start from scratch just by creating a ".kmt" file. The second one is to
     create an Ecore file and then to transform it into a KerMeta meta
     model.</para>
 
@@ -153,7 +154,7 @@
 
     <para>Select in the main menu of Eclipse</para>
 
-    <para>“File” &gt; “New” &gt;&gt; “Other...”</para>
+    <para>"File" &gt; "New" &gt;&gt; "Other..."</para>
 
     <para>This action opens the following window.</para>
 
@@ -167,7 +168,7 @@
       </mediaobject>
     </figure>
 
-    <para>Select “New Kermeta file” and press “Next &gt;”.</para>
+    <para>Select "New Kermeta file" and press "Next &gt;".</para>
 
     <figure>
       <title></title>
@@ -182,7 +183,7 @@
     <para>Give a name (MyMetamodel.kmt for instance) to the new file, select a
     location (The default one is good for us) and leave Main class and Main
     operation blank for the moment. It will be used later to run models. Click
-    on “Finish”.</para>
+    on "Finish".</para>
 
     <para>Now your main window should look like the one above. The file is
     written in KerMeta language. So you can edit this file to add some
@@ -209,7 +210,7 @@
 
     <para>Create an Ecore file. In the main menu of Eclipse select :</para>
 
-    <para>“File” &gt; “New” &gt;&gt; “Other...”</para>
+    <para>"File" &gt; "New" &gt;&gt; "Other..."</para>
 
     <figure>
       <title></title>
@@ -221,9 +222,9 @@
       </mediaobject>
     </figure>
 
-    <para>Select “Ecore model” wizard and click “Next &gt;”. Select a location
-    and a name for the file. Call it “AnOtherMetamodel.ecore” for example.
-    Click on “Finish”.</para>
+    <para>Select "Ecore model" wizard and click "Next &gt;". Select a location
+    and a name for the file. Call it "AnOtherMetamodel.ecore" for example.
+    Click on "Finish".</para>
 
     <para>Your main window now looks like this :</para>
 
@@ -259,8 +260,8 @@
 
     <para>Let us say that you edited this meta model and now you want to add
     some behaviors. Then you must transform the Ecore meta model into a
-    KerMeta meta model. Right click on “AnOtherMetamodel.ecore” and select
-    “KerMeta” and “Generate Kermeta source”.</para>
+    KerMeta meta model. Right click on "AnOtherMetamodel.ecore" and select
+    "KerMeta" and "Generate Kermeta source".</para>
 
     <para>Do not pay attention to the dialog box alerting you that this is not
     a stable process. The following window appears :</para>
@@ -276,7 +277,7 @@
       </figure></para>
 
     <para>Choose a name for the new KerMeta meta model. The default one is
-    correct for us. So just click on “Finish”.</para>
+    correct for us. So just click on "Finish".</para>
 
     <figure>
       <title></title>
@@ -305,18 +306,18 @@
 
     <para>kmt meta model to km meta model</para>
 
-    <para>From a “.kmt” file, you can generate a “km” file more appropriate to
+    <para>From a ".kmt" file, you can generate a "km" file more appropriate to
     design your meta model because it allows you to edit with the reflexive
     editor and later a graphical editor (We are working on it).</para>
 
-    <para>To do that, right click on “MyMetamodel.kmt” and select “Kermeta”
-    and “Compite to Kermeta mode”l. Choose a file name and click on “Finish”
+    <para>To do that, right click on "MyMetamodel.kmt" and select "Kermeta"
+    and "Compite to Kermeta mode"l. Choose a file name and click on "Finish"
     (The default name is good). If you chose the default name, then double
-    click on “MyMetamodel.km”. Normally it opened the file thanks to the
+    click on "MyMetamodel.km". Normally it opened the file thanks to the
     reflexive editor.</para>
 
     <tip>
-      If not, right click on “MyMetamodel.km” and select “Open With” and “Reflexive Editor”.
+      If not, right click on "MyMetamodel.km" and select "Open With" and "Reflexive Editor".
     </tip>
 
     <figure>
@@ -332,20 +333,20 @@
 
     <para>km meta model to kmt meta model</para>
 
-    <para>Because “.km” and “.kmt” files are describing the same meta model,
-    you can transform a “.km” file into a “.kmt file” and vice versa.</para>
+    <para>Because ".km" and ".kmt" files are describing the same meta model,
+    you can transform a ".km" file into a ".kmt file" and vice versa.</para>
 
-    <para>Right click on “MyMetamodel.km” file and select “Kermeta” and
-    “Generate Kermeta Source”. Choose a name and click on “Finish”.</para>
+    <para>Right click on "MyMetamodel.km" file and select "Kermeta" and
+    "Generate Kermeta Source". Choose a name and click on "Finish".</para>
 
     <para>kmt meta model to Ecore meta model</para>
 
-    <para>You can generate an Ecore meta model from a “.kmt” file. Right click
-    on “MyMetamodel.kmt” and select “Kermeta” and “Generate Ecore”.</para>
+    <para>You can generate an Ecore meta model from a ".kmt" file. Right click
+    on "MyMetamodel.kmt" and select "Kermeta" and "Generate Ecore".</para>
 
     <para>Km meta model to Ecore meta model</para>
 
-    <para>You can generate an Ecore meta model from a “.km” file. Right click
-    on “MyMetamodel.km” and select “Kermeta” and “Generate Ecore”.</para>
+    <para>You can generate an Ecore meta model from a ".km" file. Right click
+    on "MyMetamodel.km" and select "Kermeta" and "Generate Ecore".</para>
   </chapter>
 </book>
