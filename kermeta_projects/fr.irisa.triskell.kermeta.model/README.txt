@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.12 2006-10-23 16:55:58 cfaucher Exp $
+$Id: README.txt,v 1.13 2006-11-03 11:02:42 cfaucher Exp $
 
 
 Leaders :
@@ -40,7 +40,9 @@ How to build this project :
 	c) In the Properties tab section "All" of kermeta.genmodel:
 		set the Kermeta package 'Base Package' to 'fr.irisa.triskell'
 		set the Kermeta package 'Prefix' to 'Km'
-	d) 'Generate Model Code', 'Generate Edit Code', 'Generate Editor Code' from  kermeta.genmodel
+	d) Through the Properties of kermeta.genmodel:
+		set the parameter 'notify' of ParameterizedType.typeDefinition to 'true'
+	e) 'Generate Model Code', 'Generate Edit Code', 'Generate Editor Code' from  kermeta.genmodel
 
 3) Check that java source code generated in src/java compiles correctly
 
@@ -52,6 +54,10 @@ How to build this project :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.12  2006/10/23 16:55:58  cfaucher
+It is better to use the name kermeta.genmodel than kermeta_java.genmodel.
+The value of the property : "name of the model" is automatically right (== "Kermeta")
+
 Revision 1.11  2006/10/23 15:40:50  cfaucher
 Added the "Control" option in the reflexive in order to split km model.
 
