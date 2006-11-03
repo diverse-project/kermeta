@@ -51,7 +51,7 @@
 
 	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" >
 		<ant antfile="common_build.xml"
-		     target="deploy"/>
+		     target="dbkdeploy"/>
 
 	</target>
 

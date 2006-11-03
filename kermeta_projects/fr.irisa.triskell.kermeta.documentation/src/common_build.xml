@@ -214,7 +214,7 @@
 				tofile="${build.dir}/pdf.fop/${project.name}/${project.name}.pdf"/>
 		</target>
 
-	<target name="deploy" description="generate all and copy documentation files to http://www.irisa.fr/triskell/prive/docs" 
+	<target name="OOodeploy" description="generate all and copy documentation files to http://www.irisa.fr/triskell/prive/docs" 
 		depends="OOo2dbk, html.single, html.chunked, html.help, pdf.fop, eclipse.help">
 	  	<delete dir="${deployment.dest}\\html.single\\${project.name}" failonerror="false"/>
 	  	<delete dir="${deployment.dest}\\html.chunked\\${project.name}" failonerror="false"/>
@@ -232,7 +232,25 @@
 			todir="${deployment.dest}"/>
 
 	</target>
+	<target name="dbkdeploy" description="generate all and copy documentation files to http://www.irisa.fr/triskell/prive/docs" 
+			depends="preparedbk, html.single, html.chunked, html.help, pdf.fop, eclipse.help">
+		  	<delete dir="${deployment.dest}\\html.single\\${project.name}" failonerror="false"/>
+		  	<delete dir="${deployment.dest}\\html.chunked\\${project.name}" failonerror="false"/>
+			<copy todir="${deployment.dest}\\html.chunked\\${project.name}">
+		  		<fileset dir="${build.dir}\\html.chunked\\${project.name}">
+		  		</fileset>  			
+		  	</copy>
+		  	<copy todir="${deployment.dest}\\html.single\\${project.name}">
+		  		<fileset dir="${build.dir}\\html.single\\${project.name}">
+		  		</fileset>  			
+		  	</copy>
+			<copy file="${build.dir}/pdf.fop/${project.name}/${project.name}.pdf" 
+					todir="${deployment.dest}"/>
+			<copy file="${build.dir}/html.help/${project.name}/${project.name}.chm" 
+				todir="${deployment.dest}"/>
 
+		</target>
+	
 	<!-- Cleaning targets -->
     <target name="clean">
         <delete dir="${project.base.dir}/build" failonerror="false" quiet="true" />

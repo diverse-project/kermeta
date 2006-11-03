@@ -47,7 +47,7 @@
 
 	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" depends="OOo2dbk, html.single, html.chunked, html.help">
 		<ant antfile="common_build.xml"
-		     target="deploy"/>
+		     target="OOodeploy"/>
 
 	</target>
 
