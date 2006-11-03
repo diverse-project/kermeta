@@ -128,7 +128,7 @@
 
     <para>The reader is supposed to know <ulink type=""
       url="../KerMeta-How-to-create-a-metamodel/">how to create KerMeta meta models</ulink> and <ulink type=""
-      url="../KerMeta-How-to-add-behavior-to-a-metamodel/">how to add behavior to a metamodels</ulink>. If not, please 
+      url="../KerMeta-How-to-add-behavior-to-a-metamodel/">how to add behavior to a metamodel</ulink>. If not, please 
       read the corresponding tutorials.
     models.</para>
   </chapter>
