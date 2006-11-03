@@ -130,7 +130,8 @@
     <para>No particular background is necessary to read this tutorial.</para>
 
     <important>
-      KerMeta must be installed. If not, please refer to "How to install KerMeta" tutorial.
+      KerMeta must be installed. If not, please refer to "<ulink type=""
+      url="../KerMeta-How-to-install-KerMeta/">How to install KerMeta</ulink>" tutorial.
     </important>
   </chapter>
 

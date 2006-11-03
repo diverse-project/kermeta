@@ -145,8 +145,9 @@
     the reader may lack information he can find in the big tutorial.</para>
 
     <para>To understand this tutorial, you must be familiar with meta model
-    creation. If not, please read the the dedicated tutorial on "How to create
-    KerMeta meta model".</para>
+    creation. If not, please read the the dedicated tutorial on <ulink type=""
+      url="../KerMeta-How-to-create-a-metamodel/">"How to create
+    KerMeta meta model"</ulink>.</para>
 
     <important>
        This tutorial does not cover the study of KerMeta language. Please have a look at the KerMeta manual located at: 

@@ -136,8 +136,8 @@
     <para></para>
 
     <caution>
-      <para>KerMeta must be installed. If not, please read the "How to install
-      KerMeta" tutorial.</para>
+      <para>KerMeta must be installed. If not, please read the "<ulink type=""
+      url="../KerMeta-How-to-install-KerMeta/">How to install KerMeta</ulink>" tutorial.</para>
     </caution>
   </chapter>
 
