@@ -258,14 +258,14 @@
     <title>How to create a KerMeta meta model ?</title>
 
     <para>Please read <ulink type=""
-      url="../KerMeta-How-to-create-a-metamodel/">"How to create a KermMeta meta model"</ulink> tutorial.</para>
+      url="../KerMeta-How-to-create-a-metamodel/">"How to create a KerMeta meta model"</ulink> tutorial.</para>
   </chapter>
 
   <chapter>
     <title>How to add behavior to a KerMeta meta model ?</title>
 
     <para>Please read <ulink type=""
-      url="../KerMeta-How-to-add-behavior-to-a-metamodel/">how to add behavior to a metamodel</ulink>
+      url="../KerMeta-How-to-add-behavior-to-a-metamodel/">"How to add behavior to a metamodel"</ulink>
     tutorial.</para>
   </chapter>
 
