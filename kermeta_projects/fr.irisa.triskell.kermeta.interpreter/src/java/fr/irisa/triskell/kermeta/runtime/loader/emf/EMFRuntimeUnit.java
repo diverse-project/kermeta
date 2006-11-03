@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.24 2006-09-20 13:39:03 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.25 2006-11-03 14:02:24 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -333,10 +333,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					if (roResource != associatedResource){
 						// get orcreate an emf resource for this Resource
 						String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
-						Resource res2 = updateEMFResource(roResource, createURI(res_uri)); 
+						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
+						
+						String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
 						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-			        		getConcreteFactory("EMF").
-			        				createRuntimeUnit("", this.metamodel_uri, roResource.getProperties().get("instances")) ;
+		        		getConcreteFactory("EMF").
+		        				createRuntimeUnit("", mm_uri, roResource.getProperties().get("instances")) ;
 						runtime_unit.associatedResource = roResource;
 						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
 						r2emf.updateEMFModel();
