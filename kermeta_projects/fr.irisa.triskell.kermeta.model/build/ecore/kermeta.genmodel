@@ -257,8 +257,7 @@
         <genClasses ecoreClass="kermeta_java.ecore#//language/structure/VoidType"/>
         <genClasses image="false" ecoreClass="kermeta_java.ecore#//language/structure/ParameterizedType">
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ParameterizedType/typeParamBinding"/>
-          <genFeatures notify="false" createChild="false" propertySortChoices="true"
-              ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ParameterizedType/typeDefinition"/>
+          <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ParameterizedType/typeDefinition"/>
         </genClasses>
         <genClasses image="false" ecoreClass="kermeta_java.ecore#//language/structure/GenericTypeDefinition">
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/GenericTypeDefinition/typeParameter"/>

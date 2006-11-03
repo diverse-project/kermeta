@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: ParameterizedTypeItemProvider.java,v 1.7 2006-11-03 10:51:42 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -127,6 +127,9 @@ public class ParameterizedTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ParameterizedType.class)) {
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
