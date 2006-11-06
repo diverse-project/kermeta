@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -41,12 +40,12 @@ public class CompileKMTAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		Shell shell = new Shell();
-	    MessageDialog.openWarning(
+	   /* MessageDialog.openWarning(
 				shell,
 				"Warning",
 				"This feature has not been tested, it cannot be considered as stable.\n"
 				+ "The file produced may contain errors.");
-	        
+	    */    
     	UnitExporterWizard wizard =  new UnitExporterWizard();
     	wizard.defaultOutputExtension = "km";
     	wizard.init(PlatformUI.getWorkbench(),currentSelection);

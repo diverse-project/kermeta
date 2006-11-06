@@ -1,4 +1,4 @@
-/* $Id: Ecore2KermetaAction.java,v 1.3 2005-07-21 15:41:45 dvojtise Exp $
+/* $Id: Ecore2KermetaAction.java,v 1.4 2006-11-06 15:02:53 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Ecore2kmtAction.java
  * License    : EPL
@@ -17,7 +17,6 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -54,12 +53,12 @@ public class Ecore2KermetaAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		Shell shell = new Shell();
-	    MessageDialog.openWarning(
+	    /*MessageDialog.openWarning(
 				shell,
 				"Warning",
 				"This feature has not been tested, it cannot be considered as stable.\n"
 				+ "The kermeta file produced may contain errors.");
-	        
+	       */ 
     	Ecore2kmtWizard wizard =  new Ecore2kmtWizard();
     	wizard.init(PlatformUI.getWorkbench(),currentSelection);
     	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,wizard);

@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreAction.java,v 1.6 2006-02-13 17:19:09 zdrey Exp $
+/* $Id: Kermeta2EcoreAction.java,v 1.7 2006-11-06 15:02:53 dvojtise Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -18,7 +18,7 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
+//import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -60,12 +60,12 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		Shell shell = new Shell();
-	    MessageDialog.openWarning(
+	    /*MessageDialog.openWarning(
 				shell,
 				"Warning",
 				"This feature has not been tested, it cannot be considered as stable.\n"
 				+ "The ecore file produced may contain errors.");
-	    
+	    */
 	    // determine weither this is a km or another format
 	    boolean isKM =(kmtfile.getFileExtension().compareTo("km") == 0);
 	    
