@@ -204,8 +204,8 @@
         <eOperations name="isInstance" eType="#//language/structure/Boolean">
           <eParameters name="element" eType="#//language/structure/Object"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" lowerBound="1"
-            eType="#//language/structure/TypeContainer" eOpposite="#//language/structure/TypeContainer/containedType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" eType="#//language/structure/TypeContainer"
+            eOpposite="#//language/structure/TypeContainer/containedType"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="#//language/structure/Object">
         <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1"

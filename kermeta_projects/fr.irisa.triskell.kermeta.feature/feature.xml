@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.3.1"
+      version="0.3.2"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>

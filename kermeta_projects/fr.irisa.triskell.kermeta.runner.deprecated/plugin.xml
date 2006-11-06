@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Kermeta Runner Plug-in"
-   version="0.3.1"
+   version="0.3.2"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
