@@ -62,7 +62,7 @@
   </ownedTypeDefinition>
   <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="String" instanceType="//@ownedTypeDefinition.7/@containedType.0">
     <containedType xsi:type="kermeta_language_structure:Class">
-      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
     </containedType>
   </ownedTypeDefinition>
 </kermeta_language_structure:Package>

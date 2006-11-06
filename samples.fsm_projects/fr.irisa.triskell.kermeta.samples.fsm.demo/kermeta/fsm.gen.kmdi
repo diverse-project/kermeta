@@ -14,166 +14,167 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
       <element href="fsm.gen.km#/"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="121,41" size="83,59">
-      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.6"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+    <contained xsi:type="di:GraphNode" position="203,59" size="-1,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.6 //@diagrams.0/@contained.7"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="fsm.gen.km#//@ownedTypeDefinition.0"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="6"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="fsm.gen.km#//@ownedTypeDefinition.0"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="7"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="fsm.gen.km#//@ownedTypeDefinition.0"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedOperation.0"/>
           </semanticModel>
         </contained>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedOperation.1"/>
           </semanticModel>
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="275,174" size="115,44">
-      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.6 //@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.10 //@diagrams.0/@contained.11"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+    <contained xsi:type="di:GraphNode" position="187,193" size="-1,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.6 //@diagrams.0/@contained.7 //@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.10 //@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="fsm.gen.km#//@ownedTypeDefinition.1"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="6"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="fsm.gen.km#//@ownedTypeDefinition.1"/>
         </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="fsm.gen.km#//@ownedTypeDefinition.1/@ownedAttribute.1"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="7"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="fsm.gen.km#//@ownedTypeDefinition.1"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="fsm.gen.km#//@ownedTypeDefinition.1/@ownedOperation.0"/>
           </semanticModel>
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.0"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.1"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.2"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-      <waypoints>[0, 30, -170, -96]</waypoints>
-      <waypoints>[0, 59, -170, -67]</waypoints>
-      <waypoints>[170, 59, 0, -67]</waypoints>
-      <waypoints>[170, 104, 0, -22]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
-      <property key="router" value="Rectilinear"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.3"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.1/@ownedAttribute.0"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-      <waypoints>[0, -22, 170, 104]</waypoints>
-      <waypoints>[0, -180, 170, -54]</waypoints>
-      <waypoints>[-170, -180, 0, -54]</waypoints>
-      <waypoints>[-170, -155, 0, -29]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="309,360" size="82,44">
+    <contained xsi:type="di:GraphNode" position="186,323" size="-1,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.10 //@diagrams.0/@contained.11"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="fsm.gen.km#//@ownedTypeDefinition.2"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="6"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="fsm.gen.km#//@ownedTypeDefinition.2"/>
         </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedAttribute.2"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedAttribute.3"/>
+          </semanticModel>
+        </contained>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="7"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="fsm.gen.km#//@ownedTypeDefinition.2"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedOperation.0"/>
           </semanticModel>
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedAttribute.0"/>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.0"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="10" vDistance="-10"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedAttribute.1"/>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.1"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-      <waypoints>[0, -22, 18, 164]</waypoints>
-      <waypoints>[0, -120, 18, 66]</waypoints>
-      <waypoints>[-18, -120, 0, 66]</waypoints>
-      <waypoints>[-18, -164, 0, 22]</waypoints>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="15" vDistance="5"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="14" vDistance="-4"/>
+      <waypoints>[122, 0, 122, -130]</waypoints>
+      <waypoints>[122, 116, 122, -14]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="2" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="11" vDistance="-5"/>
+      <waypoints>[-132, 4, -132, -126]</waypoints>
+      <waypoints>[-132, 148, -132, 18]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.0/@ownedAttribute.3"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="10" vDistance="2"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="10" vDistance="-5"/>
+      <waypoints>[-96, 20, -96, -110]</waypoints>
+      <waypoints>[-96, 111, -96, -19]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.1/@ownedAttribute.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="6" vDistance="11"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="4" vDistance="-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="fsm.gen.km#//@ownedTypeDefinition.1/@ownedAttribute.2"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
-      <waypoints>[0, 22, -18, -164]</waypoints>
-      <waypoints>[0, 132, -18, -54]</waypoints>
-      <waypoints>[18, 132, 0, -54]</waypoints>
-      <waypoints>[18, 164, 0, -22]</waypoints>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="10" vDistance="-10"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
-      <property key="router" value="Forest"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="fsm.gen.km#//@ownedTypeDefinition.1/@ownedAttribute.3"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="multiplicityLabel" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="4" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="5" vDistance="-4"/>
+      <waypoints>[123, 18, 122, -120]</waypoints>
+      <waypoints>[123, 138, 122, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedAttribute.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="10" vDistance="-10"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="fsm.gen.km#//@ownedTypeDefinition.2/@ownedAttribute.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameEdgeObject" uDistance="18" vDistance="3"/>
+      <contained xsi:type="di:EdgeObjectUV" id="multiplicityEdgeObject" uDistance="5" vDistance="2"/>
+      <waypoints>[122, 0, 123, 138]</waypoints>
+      <waypoints>[122, -120, 123, 18]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>
