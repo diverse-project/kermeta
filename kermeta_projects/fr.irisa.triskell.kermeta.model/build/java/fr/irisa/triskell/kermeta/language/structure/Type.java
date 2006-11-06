@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
+ * $Id: Type.java,v 1.5 2006-11-06 10:57:22 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -37,7 +37,7 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * @see #setTypeContainer(TypeContainer)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getType_TypeContainer()
 	 * @see fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType
-	 * @model opposite="containedType" required="true"
+	 * @model opposite="containedType"
 	 * @generated
 	 */
 	TypeContainer getTypeContainer();
