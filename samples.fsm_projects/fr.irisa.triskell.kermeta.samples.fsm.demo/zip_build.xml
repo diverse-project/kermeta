@@ -6,10 +6,18 @@
 		and we get a in the PDE error log : java.lang.NoClassDefFoundError: fr/irisa/triskell/kermeta/graphicaleditor/diagram/policies/extension/ExtendedPropertyEdgeCreationEditPolicy
 	-->
 	<target name="gather.bin.parts" >
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 		<mkdir dir="mytemp"/>
 		<copy todir="mytemp" failonerror="true" overwrite="true">
-			<fileset dir="." includes="**" excludes="*zip_build.xml,*mytemp"/>
+			<fileset dir="." includes="**" excludes="*zip_build.xml,readme.txt,*mytemp"/>
 		</copy>
+		<copy file="readme.txt" 
+			tofile="mytemp/readme.txt"
+			filtering="true"
+			overwrite="true"/>
 		<zip destfile="fr.irisa.triskell.kermeta.samples.fsm.demo.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
 		<delete dir="mytemp"/>
 	</target>
