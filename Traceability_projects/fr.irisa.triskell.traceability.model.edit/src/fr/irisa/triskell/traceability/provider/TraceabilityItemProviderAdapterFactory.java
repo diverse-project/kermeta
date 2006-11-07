@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityItemProviderAdapterFactory.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: TraceabilityItemProviderAdapterFactory.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -19,6 +19,7 @@ import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
+import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
@@ -35,7 +36,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier {
+public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -293,6 +294,21 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 		if (parentAdapterFactory != null) {
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
+	}
+
+	/**
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void dispose() {
+		if (traceItemProvider != null) traceItemProvider.dispose();
+		if (modelItemProvider != null) modelItemProvider.dispose();
+		if (textReferenceItemProvider != null) textReferenceItemProvider.dispose();
+		if (xmlReferenceItemProvider != null) xmlReferenceItemProvider.dispose();
+		if (externalReferenceItemProvider != null) externalReferenceItemProvider.dispose();
+		if (messageItemProvider != null) messageItemProvider.dispose();
 	}
 
 }

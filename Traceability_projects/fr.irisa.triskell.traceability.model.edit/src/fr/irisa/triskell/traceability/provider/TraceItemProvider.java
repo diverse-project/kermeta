@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceItemProvider.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: TraceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -89,7 +89,7 @@ public class TraceItemProvider
 				 TraceabilityPackage.Literals.TRACE__SOURCE_REFERENCES,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
@@ -111,7 +111,7 @@ public class TraceItemProvider
 				 TraceabilityPackage.Literals.TRACE__TARGET_REFERENCES,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
@@ -133,7 +133,7 @@ public class TraceItemProvider
 				 TraceabilityPackage.Literals.TRACE__DESCRIPTION,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));

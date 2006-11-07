@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExternalReferenceItemProvider.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: ExternalReferenceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -81,7 +81,7 @@ public class ExternalReferenceItemProvider
 				 TraceabilityPackage.Literals.EXTERNAL_REFERENCE__REF_OBJECT,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
@@ -116,12 +116,6 @@ public class ExternalReferenceItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ExternalReference.class)) {
-			case TraceabilityPackage.EXTERNAL_REFERENCE__REF_OBJECT:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

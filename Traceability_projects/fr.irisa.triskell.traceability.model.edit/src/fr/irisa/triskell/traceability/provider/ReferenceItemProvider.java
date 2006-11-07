@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceItemProvider.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: ReferenceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -81,7 +81,7 @@ public class ReferenceItemProvider
 				 TraceabilityPackage.Literals.REFERENCE__TARGET_TRACE,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
@@ -103,20 +103,10 @@ public class ReferenceItemProvider
 				 TraceabilityPackage.Literals.REFERENCE__SOURCE_TRACE,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This returns Reference.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Reference"));
 	}
 
 	/**

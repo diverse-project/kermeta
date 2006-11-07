@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageItemProvider.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: MessageItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -153,7 +153,7 @@ public class MessageItemProvider
 				 TraceabilityPackage.Literals.MESSAGE__TRACE,
 				 true,
 				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
@@ -178,8 +178,8 @@ public class MessageItemProvider
 	public String getText(Object object) {
 		String label = ((Message)object).getType();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Message_type") :
-			getString("_UI_Message_type") + " " + label + " \"" + ((Message)object).getValue()+ "\"";
+			"\"" + ((Message)object).getValue()+ "\"" :
+			label + " \"" + ((Message)object).getValue()+ "\"";
 	}
 
 	/**
