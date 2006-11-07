@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: fr.irisa.triskell.traceability.edit; singleton:=true
+Bundle-SymbolicName: fr.irisa.triskell.traceability.model.edit;singleton:=true
 Bundle-Version: 0.0.3
 Bundle-ClassPath: fr.irisa.triskell.traceability.edit.jar
 Bundle-Activator: fr.irisa.triskell.traceability.provider.TraceabilityEditPlugin$Implementation
