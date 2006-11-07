@@ -1,0 +1,1408 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+  <kermeta_language_structure:Package name="fsm">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FSM">
+      <ownedAttribute name="ownedState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="initialState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="finalState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="currentState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="ownedTransition" type="/0/@ownedTypeDefinition.0/@ownedAttribute.4/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isDerived="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedAttribute.4/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+            <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17"/>
+        </containedType>
+        <getterBody xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="seqTransition">
+            <type type="/0/@ownedTypeDefinition.0/@ownedAttribute.4/@getterBody/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedAttribute.4/@getterBody/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedAttribute.4/@getterBody/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+                      <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+                  </containedType>
+                  <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="seqTransition"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="collect">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                <parameters name="st"/>
+                <body xsi:type="kermeta_language_behavior:CallFeature" name="outgoingTransition">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="st"/>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedState">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="seq1ToSet">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="seqTransition"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                  <typeref type="/0/@ownedTypeDefinition.0/@ownedAttribute.4/@getterBody/@statement.2/@value/@target/@target/@typeref/@containedType.0" upper="1">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.7"/>
+                  </typeref>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </getterBody>
+      </ownedAttribute>
+      <ownedAttribute name="alphabet" type="/0/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0" isOrdered="true" upper="1" isReadOnly="true" isDerived="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+            </containedType>
+            <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+        </containedType>
+        <getterBody xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="seqState">
+            <type type="/0/@ownedTypeDefinition.0/@ownedAttribute.5/@getterBody/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedAttribute.5/@getterBody/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedAttribute.5/@getterBody/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class">
+                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+                      </containedType>
+                      <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+                  </containedType>
+                  <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="seqState"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="collect">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                <parameters name="st"/>
+                <body xsi:type="kermeta_language_behavior:CallFeature" name="collect">
+                  <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                    <parameters name="tr"/>
+                    <body xsi:type="kermeta_language_behavior:CallFeature" name="input">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="tr"/>
+                    </body>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="outgoingTransition">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="st"/>
+                  </target>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedState">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="seq2ToSet">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="seqState"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                  <typeref type="/0/@ownedTypeDefinition.0/@ownedAttribute.5/@getterBody/@statement.2/@value/@target/@target/@typeref/@containedType.0" upper="1">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.7"/>
+                  </typeref>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </getterBody>
+      </ownedAttribute>
+      <ownedOperation name="run" type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" raisedException="/0/@ownedTypeDefinition.0/@ownedOperation.0/@containedType.1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="currentState">
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </target>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="initialState">
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="currentState">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:SelfExpression"/>
+          <statement xsi:type="kermeta_language_behavior:Loop">
+            <initialization xsi:type="kermeta_language_behavior:VariableDecl" identifier="str">
+              <initialization xsi:type="kermeta_language_behavior:StringLiteral" value="init"/>
+              <type type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+                </containedType>
+              </type>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="currentState">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:StringLiteral" value="Current state : "/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="read">
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="give me a letter : "/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                </value>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional">
+                <thenBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                    <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="quitting ..."/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Conditional">
+                    <thenBody xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                      </statement>
+                    </thenBody>
+                    <elseBody xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                        <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="stepping..."/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:Block">
+                        <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="textRes">
+                          <type type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@body/@statement.2/@elseBody/@statement.0/@elseBody/@statement.2/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class">
+                              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+                            </containedType>
+                          </type>
+                        </statement>
+                        <statement xsi:type="kermeta_language_behavior:Assignment">
+                          <target xsi:type="kermeta_language_behavior:CallVariable" name="textRes"/>
+                          <value xsi:type="kermeta_language_behavior:CallFeature" name="step">
+                            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                            <target xsi:type="kermeta_language_behavior:CallFeature" name="currentState">
+                              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                            </target>
+                          </value>
+                        </statement>
+                        <statement xsi:type="kermeta_language_behavior:Conditional">
+                          <thenBody xsi:type="kermeta_language_behavior:Block">
+                            <statement xsi:type="kermeta_language_behavior:Assignment">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="textRes"/>
+                              <value xsi:type="kermeta_language_behavior:StringLiteral" value="NC"/>
+                            </statement>
+                          </thenBody>
+                          <condition xsi:type="kermeta_language_behavior:CallFeature" name="or">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="textRes"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                              <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="textRes"/>
+                            </target>
+                          </condition>
+                        </statement>
+                        <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="textRes"/>
+                            <target xsi:type="kermeta_language_behavior:StringLiteral" value="string produced : "/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                        </statement>
+                        <rescueBlock exceptionName="err">
+                          <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="err"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                          </body>
+                          <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="message">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="err"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                          </body>
+                          <body xsi:type="kermeta_language_behavior:Assignment">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                            <value xsi:type="kermeta_language_behavior:StringLiteral" value="quit"/>
+                          </body>
+                          <exceptionType type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@body/@statement.2/@elseBody/@statement.0/@elseBody/@statement.2/@rescueBlock.0/@exceptionType/@containedType.0" isOrdered="true" upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class">
+                              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.11"/>
+                            </containedType>
+                          </exceptionType>
+                        </rescueBlock>
+                        <rescueBlock exceptionName="err">
+                          <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="err"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                          </body>
+                          <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="message">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="err"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                          </body>
+                          <body xsi:type="kermeta_language_behavior:Assignment">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                            <value xsi:type="kermeta_language_behavior:StringLiteral" value="quit"/>
+                          </body>
+                          <exceptionType type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@body/@statement.2/@elseBody/@statement.0/@elseBody/@statement.2/@rescueBlock.1/@exceptionType/@containedType.0" isOrdered="true" upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class">
+                              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.12"/>
+                            </containedType>
+                          </exceptionType>
+                        </rescueBlock>
+                        <rescueBlock exceptionName="err">
+                          <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="err"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                          </body>
+                          <body xsi:type="kermeta_language_behavior:Assignment">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                            <value xsi:type="kermeta_language_behavior:StringLiteral" value="quit"/>
+                          </body>
+                          <exceptionType type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@body/@statement.2/@elseBody/@statement.0/@elseBody/@statement.2/@rescueBlock.2/@exceptionType/@containedType.0" isOrdered="true" upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.4"/>
+                          </exceptionType>
+                        </rescueBlock>
+                        <rescueBlock exceptionName="err">
+                          <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                              <target xsi:type="kermeta_language_behavior:CallVariable" name="err"/>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                          </body>
+                          <body xsi:type="kermeta_language_behavior:Assignment">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                            <value xsi:type="kermeta_language_behavior:StringLiteral" value="quit"/>
+                          </body>
+                          <exceptionType type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.2/@body/@statement.2/@elseBody/@statement.0/@elseBody/@statement.2/@rescueBlock.3/@exceptionType/@containedType.0" isOrdered="true" upper="1">
+                            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.5"/>
+                          </exceptionType>
+                        </rescueBlock>
+                      </statement>
+                    </elseBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                      <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="print"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                    </condition>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="quit"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                </condition>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="quit"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+            </stopCondition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation tag="/1" name="initialize">
+        <ownedParameter name="p_state" type="/0/@ownedTypeDefinition.0/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <ownedParameter name="isInitComb" type="/0/@ownedTypeDefinition.0/@ownedOperation.1/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="initState">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="copy">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="p_state"/>
+            </initialization>
+            <type type="/0/@ownedTypeDefinition.0/@ownedOperation.1/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="initState"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedState"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="initialState"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="initState"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="combination">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="initialState"/>
+                </target>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                    <typeref type="/0/@ownedTypeDefinition.0/@ownedOperation.1/@body/@statement.3/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                      <containedType xsi:type="kermeta_language_structure:Class">
+                        <typeParamBinding type="/0/@ownedTypeDefinition.0/@ownedOperation.1/@body/@statement.3/@thenBody/@statement.0/@value/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
+                          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+                          <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                        </typeParamBinding>
+                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+                      </containedType>
+                    </typeref>
+                  </target>
+                </value>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" value="true"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="isInitComb"/>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="State">
+      <inv name="deterministicTransition">
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="forAll">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="tr1"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="forAll">
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                  <parameters name="tr2"/>
+                  <body xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="tr2"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="tr1"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="input">
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="tr1"/>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="input">
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="tr2"/>
+                      </target>
+                    </target>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="outgoingTransition">
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </target>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="outgoingTransition">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </inv>
+      <ownedAttribute name="name" type="/0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="owningFSM" type="/0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.0/@ownedAttribute.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="outgoingTransition" type="/0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0" upper="-1" opposite="/0/@ownedTypeDefinition.2/@ownedAttribute.0" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="incomingTransition" type="/0/@ownedTypeDefinition.1/@ownedAttribute.3/@containedType.0" upper="-1" opposite="/0/@ownedTypeDefinition.2/@ownedAttribute.1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="combination" type="/0/@ownedTypeDefinition.1/@ownedAttribute.4/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="/0/@ownedTypeDefinition.1/@ownedAttribute.4/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+            <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="step" type="/0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" raisedException="/0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+        <ownedParameter name="c" type="/0/@ownedTypeDefinition.1/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <pre name="notVoidInput" stereotype="pre">
+          <body xsi:type="kermeta_language_behavior:CallFeature" name="and">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="c"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="c"/>
+            </target>
+          </body>
+        </pre>
+        <post name="notVoidOutput" stereotype="post">
+          <body xsi:type="kermeta_language_behavior:CallFeature" name="and">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+          </body>
+        </post>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="validTransitions">
+            <type type="/0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="/0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.0/@type/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+                  <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@typeParameter.0"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="validTransitions"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="select">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                <parameters name="t"/>
+                <body xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="c"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="input">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                  </target>
+                </body>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="outgoingTransition"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Raise">
+                <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                    <typeref type="/0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.2/@thenBody/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.5"/>
+                    </typeref>
+                  </target>
+                </expression>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="empty">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="validTransitions"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Raise">
+                <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                    <typeref type="/0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.3/@thenBody/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.4"/>
+                    </typeref>
+                  </target>
+                </expression>
+              </statement>
+            </thenBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="size">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="validTransitions"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="fire">
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="one">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="validTransitions"/>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="copy" type="/0/@ownedTypeDefinition.1/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="clone">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.1/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="combination">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.2/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="/0/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.2/@value/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+                      <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Transition">
+      <ownedAttribute name="source" type="/0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.2">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="target" type="/0/@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.3">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="input" type="/0/@ownedTypeDefinition.2/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="output" type="/0/@ownedTypeDefinition.2/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="fire" type="/0/@ownedTypeDefinition.2/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="currentState">
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="owningFSM">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="source"/>
+              </target>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="target"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="output"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FSMException" isAbstract="true"/>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NonDeterminism" superType="/0/@ownedTypeDefinition.4/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NoTransition" superType="/0/@ownedTypeDefinition.5/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NoInitialStateException" superType="/0/@ownedTypeDefinition.6/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/2" name="AutomatonHelper">
+      <ownedOperation tag="/3" name="seqToSet" type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" typeParameter="/0/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:TypeVariable" name="G"/>
+            <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+        </containedType>
+        <ownedParameter name="iseq" type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="n"/>
+              <body xsi:type="kermeta_language_behavior:Conditional">
+                <thenBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                    <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                  </statement>
+                </thenBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                    </target>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+                    <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                  </target>
+                </condition>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="iseq"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="seq1ToSet" type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1" typeParameter="/0/@ownedTypeDefinition.7/@ownedOperation.1/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:TypeVariable" name="G"/>
+            <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17"/>
+        </containedType>
+        <ownedParameter name="iseq" type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+              </containedType>
+              <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="a"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="each">
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                  <parameters name="n"/>
+                  <body xsi:type="kermeta_language_behavior:Conditional">
+                    <thenBody xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                        <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                          <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                        </target>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+                        <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                      </target>
+                    </condition>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="a"/>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="iseq"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="seq2ToSet" type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@containedType.0" isOrdered="true" upper="1" typeParameter="/0/@ownedTypeDefinition.7/@ownedOperation.2/@containedType.0/@typeParamBinding.0/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:TypeVariable" name="G"/>
+            <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+        </containedType>
+        <ownedParameter name="iseq" type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+              </containedType>
+              <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@typeParameter.0"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="a"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="each">
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                  <parameters name="n"/>
+                  <body xsi:type="kermeta_language_behavior:Conditional">
+                    <thenBody xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                        <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                      </statement>
+                    </thenBody>
+                    <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                          <parameters xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                          <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                        </target>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+                        <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="n"/>
+                      </target>
+                    </condition>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="a"/>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="iseq"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="join" type="/0/@ownedTypeDefinition.7/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+        <ownedParameter name="str_seq" type="/0/@ownedTypeDefinition.7/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.3/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+              </containedType>
+              <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@typeParameter.0"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="str"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="append">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="str_seq"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="join_with" type="/0/@ownedTypeDefinition.7/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+        </containedType>
+        <ownedParameter name="str_seq" type="/0/@ownedTypeDefinition.7/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeParamBinding type="/0/@ownedTypeDefinition.7/@ownedOperation.4/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+              </containedType>
+              <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@typeParameter.0"/>
+            </typeParamBinding>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="sep" type="/0/@ownedTypeDefinition.7/@ownedOperation.4/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" value=""/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="str"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="append">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="sep"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="str"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="str_seq"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="substring">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="size">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="sep"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="size">
+                  <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+                </target>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="createPair" type="/0/@ownedTypeDefinition.7/@ownedOperation.5/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.8"/>
+        <ownedParameter name="p" type="/0/@ownedTypeDefinition.7/@ownedOperation.5/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <ownedParameter name="q" type="/0/@ownedTypeDefinition.7/@ownedOperation.5/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.5/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.8"/>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="left">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="copy">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="p"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="right">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="copy">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="q"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="createTransition" type="/0/@ownedTypeDefinition.7/@ownedOperation.6/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+        <ownedParameter name="s" type="/0/@ownedTypeDefinition.7/@ownedOperation.6/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <ownedParameter name="t" type="/0/@ownedTypeDefinition.7/@ownedOperation.6/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <ownedParameter name="l" type="/0/@ownedTypeDefinition.7/@ownedOperation.6/@ownedParameter.2/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.6/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="source">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="s"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="target">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="input">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="l"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation tag="/4" name="saveEMFAutomaton" type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+        <ownedParameter name="repository" type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.8/@ownedTypeDefinition.4"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="a" type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <ownedParameter name="uri" type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@ownedParameter.2/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="mmuri" type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@ownedParameter.3/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="resource">
+                <initialization xsi:type="kermeta_language_behavior:CallFeature" name="createResource">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="uri"/>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="mmuri"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="repository"/>
+                </initialization>
+                <type type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@body/@statement.0/@thenBody/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
+                  </containedType>
+                </type>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="a"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="instances">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="resource"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="save">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="resource"/>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : "/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" - Do the transitions source and target states belong to the set of states of the automaton?"/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" value="true"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="conformityChecker">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="a"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                    <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@body/@statement.0/@condition/@target/@target/@target/@typeref/@containedType.0" upper="1">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.7"/>
+                    </typeref>
+                  </target>
+                </target>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="loadEMFAutomaton" type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+        <ownedParameter name="repository" type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.8/@ownedTypeDefinition.4"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="uri" type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="mmuri" type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@ownedParameter.2/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="resource">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="createResource">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="uri"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="mmuri"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="repository"/>
+            </initialization>
+            <type type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="load">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="resource"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="roots">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="rootContents">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="resource"/>
+            </initialization>
+            <type type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@body/@statement.2/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding>
+                  <variable href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0"/>
+                  <type href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment" isCast="true">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="one">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="roots"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation tag="/5" name="dotprint">
+        <ownedParameter name="fsm" type="/0/@ownedTypeDefinition.7/@ownedOperation.9/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="&#xA;digraph finite_state_machine {"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="  rankdir=LR;"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="  node [shape = doublecircle];"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="s"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="write">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="s"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="  "/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="finalState">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fsm"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=";"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="  node [shape = circle];"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="t"/>
+              <body xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="&quot; ];"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="input">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                      <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" [ label=&quot;"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="target">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                          </target>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                          <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" -> "/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                              <target xsi:type="kermeta_language_behavior:CallFeature" name="source">
+                                <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                              </target>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:StringLiteral" value="  "/>
+                          </target>
+                        </target>
+                      </target>
+                    </target>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedTransition">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fsm"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="}"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation tag="/6" name="ask_dotprint">
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="dotprint">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="ask_emfmodel">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="Enter an EMF model representing an automata to 'dot-printer' : "/>
+            </parameters>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="ask_emfmodel" type="/0/@ownedTypeDefinition.7/@ownedOperation.11/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+        <ownedParameter name="prompt" type="/0/@ownedTypeDefinition.7/@ownedOperation.11/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="file">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="read">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="prompt"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+            </initialization>
+            <type type="/0/@ownedTypeDefinition.7/@ownedOperation.11/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="file"/>
+              <target xsi:type="kermeta_language_behavior:StringLiteral" value="&#xA;"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="r">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.11/@body/@statement.2/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.8/@ownedTypeDefinition.4"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="/0/@ownedTypeDefinition.7/@ownedOperation.11/@body/@statement.2/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.8/@ownedTypeDefinition.4"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="loadEMFAutomaton">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="r"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="file"/>
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="../metamodels/fsm.ecore"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation tag="/7" name="conformityChecker" type="/0/@ownedTypeDefinition.7/@ownedOperation.12/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+        </containedType>
+        <ownedParameter name="fsm" type="/0/@ownedTypeDefinition.7/@ownedOperation.12/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <parameters xsi:type="kermeta_language_behavior:VoidLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="detect">
+                <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+                  <parameters name="t"/>
+                  <body xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                      <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="target">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                          </target>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                          <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=", "/>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                              <target xsi:type="kermeta_language_behavior:CallFeature" name="source">
+                                <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                              </target>
+                            </parameters>
+                            <target xsi:type="kermeta_language_behavior:StringLiteral" value="transitions : "/>
+                          </target>
+                        </target>
+                      </parameters>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                    </statement>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                        <parameters xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature" name="target">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedState">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="fsm"/>
+                          </target>
+                        </parameters>
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="contains">
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature" name="source">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedState">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" name="fsm"/>
+                          </target>
+                        </target>
+                      </target>
+                    </statement>
+                  </body>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="ownedTransition">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="fsm"/>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/8" name="Pair">
+      <ownedAttribute name="left" type="/0/@ownedTypeDefinition.8/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="right" type="/0/@ownedTypeDefinition.8/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+  </kermeta_language_structure:Package>
+  <kermeta_language_structure:Tag name="documentation" value="/** Initialize a new automaton from an existing one &#xD;&#xA;  *  param :&#xD;&#xA;  *    p_state : the initial state&#xD;&#xA;  *    isInitComb&#xD;&#xA;  */" object="/0/@ownedTypeDefinition.0/@ownedOperation.1"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** &#xD;&#xA; * A set of helper methods to ease the determinisation/minimization&#xD;&#xA; * From Automata&#xD;&#xA; */" object="/0/@ownedTypeDefinition.7"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Quick transformation of a Set into a Sequence */" object="/0/@ownedTypeDefinition.7/@ownedOperation.0"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** &#xD;&#xA;  * Serialization helpers&#xD;&#xA;  */" object="/0/@ownedTypeDefinition.7/@ownedOperation.7"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Print in dot format the given automaton */" object="/0/@ownedTypeDefinition.7/@ownedOperation.9"/>
+  <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;     * Interactive commands&#xD;&#xA;     */" object="/0/@ownedTypeDefinition.7/@ownedOperation.10"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Operation that tries to check the validity of the given automaton &#xD;&#xA;     *  (the states referenced in all the transitions must appear in the stateSet of the&#xD;&#xA;     *  given automaton)&#xD;&#xA;    */" object="/0/@ownedTypeDefinition.7/@ownedOperation.12"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** A pair of States, as an equivalence relation */" object="/0/@ownedTypeDefinition.8"/>
+</xmi:XMI>
