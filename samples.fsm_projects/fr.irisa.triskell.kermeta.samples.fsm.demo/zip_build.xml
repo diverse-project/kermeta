@@ -12,7 +12,7 @@
 		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
 		<mkdir dir="mytemp"/>
 		<copy todir="mytemp" failonerror="true" overwrite="true">
-			<fileset dir="." includes="**" excludes="*zip_build.xml,readme.txt,*mytemp"/>
+			<fileset dir="." includes="**" excludes="*zip_build.xml,readme.txt,*mytemp,fr.irisa.triskell.kermeta.samples.fsm.demo.zip"/>
 		</copy>
 		<copy file="readme.txt" 
 			tofile="mytemp/readme.txt"
