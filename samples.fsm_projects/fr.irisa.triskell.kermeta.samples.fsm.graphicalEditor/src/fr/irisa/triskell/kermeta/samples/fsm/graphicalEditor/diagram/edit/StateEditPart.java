@@ -13,10 +13,13 @@
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.swt.graphics.Color;
+import org.topcased.draw2d.figures.ComposedLabel;
+import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
@@ -24,9 +27,13 @@ import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 
+import fr.irisa.triskell.kermeta.samples.fsm.FSM;
+import fr.irisa.triskell.kermeta.samples.fsm.State;
+
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmImageRegistry;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.StateFigure;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmEditPolicyConstants;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.commands.StateRestoreConnectionCommand;
-import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.StateFigure;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.TransitionEdgeCreationEditPolicy;
 
 /**
@@ -86,42 +93,6 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * @generated NOT
-	 */
-	@Override
-	protected Color getDefaultBackgroundColor() {
-		Color theColor = super.getDefaultBackgroundColor();
-
-		if (isInitial()) {
-			// the new color for the initial state
-			theColor = new Color(null, 240, 240, 180);
-		}
-		if (isFinal()) {
-			// the new color for the final states
-			theColor = new Color(null, 0, 0, 0);
-		}
-		return theColor;
-	}
-
-	/**
-	 * @generated NOT
-	 */
-	@Override
-	protected Color getDefaultForegroundColor() {
-		Color theColor = super.getDefaultForegroundColor();
-
-		if (isInitial()) {
-			// the new color for the initial state
-			theColor = new Color(null, 0, 0, 0);
-		}
-		if (isFinal()) {
-			// the new color for the final states
-			theColor = new Color(null, 255, 255, 255);
-		}
-		return theColor;
-	}
-
-	/**
 	 * Check if the state is initial @return boolean - true if the state is
 	 * initial, false if the state is not initial
 	 * @generated NOT
@@ -164,11 +135,43 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		return false;
 	}
 
+	
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	protected void refreshHeaderLabel() {
+		// TODO Auto-generated method stub
+		super.refreshHeaderLabel();
+		
+		String imageLabel = "STATE";
+		if (isInitial()) {
+			imageLabel = "INITIAL_STATE";
+		}
+		if (isFinal()) {
+			imageLabel = "FINAL_STATE";
+		}
+		
+		StateFigure fig = (StateFigure) getFigure();
+		EditableLabel lbl = (EditableLabel) fig.getLabel();
+		
+		lbl.setIcon(FsmImageRegistry.getImage(imageLabel));
+		
+	}
+
 	/**
 	 * @generated NOT
 	 */
 	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
+	}
+	
+	/**
+	 * @return the model object
+	 * @generated NOT
+	 */
+	public State getState() {
+		return (State) getEObject();
 	}
 }
