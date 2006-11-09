@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<article>
+  <title>How to : == or equals ?</title>
+
+  <articleinfo>
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+
+    <author>
+      <firstname>François Tanguy, Didier Vojtisek</firstname>
+
+      <firstname></firstname>
+    </author>
+
+    <title>Kermeta tutorial</title>
+
+    <date>2006-10-27T16:24:23</date>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metamodeling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <subtitle>How to create a metamodel</subtitle>
+
+    <bibliomisc>Licence EPL</bibliomisc>
+
+    <date>19/11/2006</date>
+
+    <abstract>
+      <para>This tutorial explains differences between the use of == operator
+      and equals method. Sometimes it could be confusing for users because
+      they do not know how to use them. After reading this tutorial, you
+      will.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address>
+        <state>France</state>
+        <otheraddr>
+          <ulink url="http://www.inria.fr">http://www.inria.fr</ulink>
+        </otheraddr>
+      </address>
+    </publisher>
+
+    <confgroup>
+      <conftitle>title</conftitle>
+
+      <confnum>Reference</confnum>
+
+      <confsponsor>sponsor</confsponsor>
+    </confgroup>
+  </articleinfo>
+
+  <section>
+    <title>Introduction</title>
+
+    <para>Kermeta users could be confused about <emphasis>==</emphasis>
+    operator and <emphasis>equals</emphasis> method. This tutorial explains
+    the differences of use. For the moment there is only one thing to remember
+    : <emphasis>isSameAs</emphasis> and <emphasis>equals</emphasis> methods do
+    NOT behave the same way. The second point points on
+    <emphasis>==</emphasis> operator also known as
+    <emphasis>isSameAs</emphasis> method. Then the equals method is detailled.
+    Finally, and this is the most important part of this tutorial, we explain
+    the <emphasis>isSameAs</emphasis> and <emphasis>equals</emphasis> methods
+    for primitive types.</para>
+  </section>
+
+  <section>
+    <title>isSameAs method</title>
+
+    <para>We said in introduction that the operator <emphasis>==</emphasis> is
+    mapped to <emphasis>isSameAs</emphasis> method. This method compares two
+    references. If they are the same, <emphasis>isSameAs</emphasis> returns
+    true (false otherwise). Then, both pieces of code below behaves EXACTLY
+    the same.</para>
+
+    <programlisting>// assuming class A has been declared
+var a1 : A init A.new
+var a2 : A init A.new
+assert ( not a1.isSameAs(a2) )
+
+var a3 : A init A.new 
+var a4 : A init a3
+assert ( a1.isSameAs(a2) )</programlisting>
+
+    <programlisting>// assuming class A has been declared
+var a1 : A init A.new
+var a2 : A init A.new
+assert ( not a1 == a2 )
+
+var a3 : A init A.new
+var a4 : A init a3
+assert ( a1 == a2 )</programlisting>
+  </section>
+
+  <section>
+    <title>equals method</title>
+
+    <para>The <emphasis>equals</emphasis> method behaves the same way as in
+    java. This means that if you want to compare the contents of two objects
+    of the same class, you MUST rewrite the <emphasis>equals</emphasis>
+    method. Look at the example (it results in printing "a1 does not equal a2"
+    and 'a1 equals a2") : </para>
+
+    <programlisting>@mainClass "root::NewPrimitiveType"
+@mainOperation "main"
+
+package root;
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+  reference x : Integer
+
+  method equals(compared : Object) : Boolean is do
+    var castedCompared : A
+    castedCompared ?= compared
+    result := x.equals (castedCompared.x)
+  end
+
+}
+
+
+class NewPrimitiveType {
+
+  operation main() : Void is do
+
+    var a1 : A init A.new
+    var a2 : A init A.new
+ 
+    a1.x := 10
+    a2.x := 20
+
+    if ( a1.equals(a2) ) then
+      stdio.writeln("a1 equals a2")
+    else
+      stdio.writeln("a1 does not equal a2")
+    end
+
+    a2.x := 10
+ 
+    if ( a1.equals(a2) ) then
+      stdio.writeln("a1 equals a2")
+    else
+      stdio.writeln("a1 does not equal a2")
+    end
+
+  end
+
+}</programlisting>
+  </section>
+
+  <section>
+    <title>Primitive types</title>
+
+    <para>In Kermeta language, there is a notion of primitive type. Here is
+    the list of primitive types :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Boolean</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Integer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Real</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Character</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>String</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>These classes have a special property. We do not want two Integer
+    objects with the same value to be different. What we want is to use
+    <emphasis>==</emphasis> operator to compare values of primitive types.
+    Then we can write this code :</para>
+
+    <programlisting>var i1 : Integer init 10
+var i2 : Integer init 10
+assert (i1.isSameAs(i2))
+
+var i3 : Integer init 10
+var i4 : Integer init 10
+assert (i3 == i4)</programlisting>
+
+    <important>
+      <para>All you have to remember is that for primitive types,
+      <emphasis>==</emphasis> operator behaves the same as
+      <emphasis>equals</emphasis> method</para>
+    </important>
+
+    <para>In fact, it is very simple. We just rewrite the
+    <emphasis>equals</emphasis> method from <emphasis>Object</emphasis> class
+    like this :</para>
+
+    <programlisting>method isSameAs(element : Object) : Boolean is do
+  // instead of comparing references, let us compare the values !
+  result := self.equals(element)
+end</programlisting>
+  </section>
+
+  <section>
+    <para />
+  </section>
+</article>
