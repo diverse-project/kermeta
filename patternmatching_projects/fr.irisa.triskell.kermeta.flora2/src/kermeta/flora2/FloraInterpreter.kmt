@@ -1,0 +1,48 @@
+/* $Id: FloraInterpreter.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+ * Creation date: October 16, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */ 
+
+package flora2;
+
+require kermeta
+
+require "../../flora2/Flora2wVisitor.ecore"
+require "./visitor/Flora2SerializerVisitor.kmt"
+
+ 
+using kermeta::standard 
+using kermeta::utils
+//using kermeta::exceptions
+
+using flora2
+ 
+class FloraInterpreter
+{
+
+    attribute visitor : flora2::visitors::Flora2SerializerVisitor 
+      
+    operation initialize() is do 
+        visitor := flora2::visitors::Flora2SerializerVisitor.new
+    end
+
+	operation insertFactInDefaultModule(fact : flora2::Fact) is do
+	    stdio.writeln("Interpreter : insert{"+fact.expression.accept(visitor)+"}.")
+		extern fr::irisa::triskell::kermeta::pattern::Flora2XSBEngine.executeCommand(
+			self, "insert{"+fact.expression.accept(visitor)+"}."
+		)
+	 end
+
+	operation queryInDefaultModule(query : flora2::Query, vars : OrderedSet<kermeta::standard::String>) : Iterator<Hashtable<kermeta::standard::String, kermeta::standard::String>> is do
+	    stdio.writeln("Interpreter : "+ query.body.accept(visitor)+".")	    
+		result ?= extern fr::irisa::triskell::kermeta::pattern::Flora2XSBEngine.executeQueryCommand(
+			self, query.body.accept(visitor)+".", vars)
+	end 
+	
+
+	operation finalize() is do
+       extern fr::irisa::triskell::kermeta::pattern::Flora2XSBEngine.close(self)
+	end
+}

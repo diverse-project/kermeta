@@ -1,0 +1,187 @@
+/* $Id: Model2Flora.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+ * Creation date: November 9, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+
+package kermeta::flora2;
+
+require "../../flora2/Flora2wVisitor.ecore"
+require "./Ecore2FloraBasicElements.kmt"
+require "../reflection/ReflectionHandler.kmt"
+require kermeta
+
+using kermeta::standard 
+using kermeta::reflection 
+using kermeta::persistence 
+using kermeta::utils 
+
+
+
+class Model2Flora inherits Ecore2FloraBasicElements { 	
+   attribute objTable : IDTable
+   attribute packageName : String 
+   attribute handler : ReflectionHandler 
+   	
+   operation initialize() is do
+      objTable := IDTable.new
+      handler := ReflectionHandler.new
+      objTable.initialize()
+   end	
+   
+   operation initializeTable(table : IDTable) is do
+      objTable := table
+      handler := ReflectionHandler.new
+   end	   
+   	
+   operation transformModel(objects: Set<Object>) : flora2::Clause[0..*] is do 
+      var clauses : oset flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
+      objTable.clear
+      objects.each { o | clauses.addAll (clausesAboutObject( o, false))} 
+
+      result := clauses
+   end	
+   
+   operation clausesAboutObject(obj : Object, isToCompoundClauses : Boolean) : flora2::Clause[0..*] is do 
+      var clauses : oset flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
+	  var formula : flora2::CompoundedFormula init flora2::CompoundedFormula.new      
+	  formula.operator := flora2::ConnectiveOp.conjunctionOp      
+      
+      // create a initial clause. Declaration will have Facts and Patterns Queries  
+	  clauses.add( createStandardClause(formula)) 	  
+      // Adding type declaration ( obj : Class)
+	  formula.elements.add( createsInstanceClause(objTable.getTermId(obj), obj.getMetaClass.name))
+	  
+	  var pendingClauses : OrderedSet <flora2::Clause> init OrderedSet<flora2::Clause>.new
+	  var pros : OrderedSet<Property> init OrderedSet<Property>.new
+	  pros.addAll( obj.getMetaClass.ownedAttribute)	  
+      handler.getAllSuperClasses(obj.getMetaClass).each{c | pros.addAll(c.ownedAttribute)} 
+
+      from var it2 : Iterator<Property> init pros.iterator
+      until it2.isOff loop             
+        var pro : Property init it2.next
+        var propertyInstances : Sequence<Object> init handler.getSequenceProperties(obj, pro)
+        
+        // Each instance of a property has it own expression
+        //for example Obj[name -> "toto"], ..., Obj[address -> "Rennes"]
+        from var it3 : Iterator<Object> init propertyInstances.iterator      
+        until it3.isOff loop        
+          var inst : Object init it3.next
+          var proType : Type init  pro.type
+          
+          // already exists a clause for the instance?
+          var term : flora2::Term           
+          if ( Class.isInstance( proType)) then
+             if (not objTable.hasAnId(inst) ) then
+                pendingClauses.addAll( clausesAboutObject(inst, isToCompoundClauses))
+             end   
+             term := getTermOfPropertyInstance(obj, pro, inst)
+          else
+            var dataType : DataType 
+            dataType ?= proType           
+          
+            term := getTermOfAnDataType(obj, pro, inst) 
+            clauses.add( createStandardClause( createsInstanceClause(term, dataType.name))) 
+          end
+
+//             if not (PNamedElement.isInstance(obj) and inst.isVoid) then   
+          if ( term != void) then formula.elements.add(createsDataClause(objTable.getTermId(obj), pro.name, term)) end
+        end   
+      end  
+      
+      pendingClauses.each{ auxClause | 
+         if not isToCompoundClauses then
+            clauses.add(auxClause)
+         else 
+	        formula.elements.add( getExpressionFromStandardClause( auxClause))
+         end
+      }
+
+	  result := clauses           	
+	end   
+	
+	operation createStandardClause(body : flora2::Expression) : flora2::Clause is do
+	     var fact : flora2::Fact init flora2::Fact.new
+	     fact.expression := body  
+	     result := fact 
+	end
+	
+	operation getExpressionFromStandardClause(clause : flora2::Clause) : flora2::Expression  is do
+       var fact : flora2::Fact 
+       fact ?= clause
+       result := fact.expression
+	end	
+	
+	operation getTermOfAnDataType(objHost : Object, pro : Property, proInstance : Object) : flora2::Term is do
+	   var term : flora2::Term  
+        if proInstance.getMetaClass.name == "String" then
+          var strTerm : flora2::String init flora2::String.new
+          strTerm.strName ?= proInstance
+          term := strTerm
+        else if proInstance.getMetaClass.name == "Integer" then
+          var intTerm : flora2::Integer init flora2::Integer.new
+          intTerm.intName ?= proInstance
+          term := intTerm              
+        else if proInstance.getMetaClass.name == "Boolean" then                        
+          // FIXME see how to represent it in Flora
+        end end end
+       result := term   
+	end
+	
+	operation getTermOfPropertyInstance(objHost : Object, pro : Property, proInstance: Object) : flora2::Term is do
+       result := objTable.getTermId(proInstance)	         
+	end 
+}
+
+/* class that manages an unique id for each object */
+class IDTable {
+
+   attribute  forwardTable : Hashtable<Object, String>
+   attribute  reverseTable : Hashtable<String, Object>   
+   attribute handler : ReflectionHandler 
+   	
+   operation initialize() is do
+      forwardTable := Hashtable<Object, String>.new
+      reverseTable := Hashtable<String, Object>.new      
+      handler := ReflectionHandler.new
+   end	
+   
+  /* This method controls a hashtable of Obj-> Id in order to give a unique Id 
+     for each object */	   
+   operation getId( obj : Object) : String is do
+      if forwardTable.getValue(obj) == void  then 
+         assignIDObj("obj"+obj.oid.toString, obj)
+      end      
+      result := forwardTable.getValue(obj)
+   end
+   
+   operation assignIDObj(newId : String, obj :Object ) is do
+     forwardTable.put(obj, newId)   
+     // give priority for the fist insertion in the reversetable
+     if (reverseTable.getValue(newId) == void) then
+         reverseTable.put(newId, obj)  
+     end      
+   end
+
+   operation getObj( strId : String) : Object is do
+      result := reverseTable.getValue(strId) 
+   end
+
+   operation clear() is do 
+      forwardTable.clear
+      reverseTable.clear
+   end
+  
+  operation hasAnId( obj : Object) : Boolean is do
+       result := forwardTable.getValue(obj) != void 
+  end   
+  
+   operation getTermId( obj : Object) : flora2::Constant is do   
+     var termId : flora2::Constant init flora2::Constant.new
+     termId.symbolName := getId(obj)
+     result := termId
+   end  
+}

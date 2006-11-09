@@ -1,0 +1,42 @@
+/* $Id: Ecore2Flora.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+ * Creation date: October 4, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+ 
+ 
+package kermeta::flora2;
+
+require kermeta
+
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+require "./Ecore2FloraBasicElements.kmt"
+require "../../flora2/Flora2wVisitor.ecore"   
+using kermeta::standard 
+
+using ecore
+//using flora2::visitors
+ 
+
+class Ecore2Flora inherits Ecore2FloraBasicElements {
+
+   /* Returns a set of clauses for a given metamodel. Each classifier (EClass or Datatype) 
+    * of the metamodel is mapped into a CompoundedExpression with expressions for the declaration
+    * of the type, features and operations.
+    * The mapping of each class is delegated to transformClass
+    */
+   operation transformMetamodel(epackages: Sequence<EPackage>) : flora2::Clause[0..*] is do 
+      var clauses : oset flora2::Clause[0..*] init OrderedSet<flora2::Clause>.new
+      
+      // FIXME : Allow more packages, check how to do that with modules in Flora2
+      var eclassifiers : EClassifier[0..*] init epackages.one.eClassifiers
+      
+      eclassifiers.select{ e | EClass.isInstance(e)}.collect{ c| var eclass : EClass eclass ?=c}.
+         each{c | clauses.add( createClauseForClassDeclaration(c))} 
+      result := clauses   
+   end
+}
+
+
+

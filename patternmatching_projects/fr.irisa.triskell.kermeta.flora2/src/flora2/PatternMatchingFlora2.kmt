@@ -1,4 +1,4 @@
-/* $Id: PatternMatchingFlora2.kmt,v 1.2 2006-11-09 15:19:30 rodrigotex Exp $
+/* $Id: PatternMatchingFlora2.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
@@ -9,30 +9,22 @@ package kermeta::pattern::flora2;
 
 require kermeta
 
-//require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
-
-
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.ecore"
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/FloraInterpreter.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Ecore2Flora.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/visitor/Flora2SerializerVisitor.kmt"
-
-require "./ModelPattern2Flora.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
 require "../pattern/PatternMatching.kmt"
 require "../pattern/metamodel/PatternFramework.ecore"
 
-
+require "../../flora2/Flora2wVisitor.ecore"
+require "../flora2/FloraInterpreter.kmt"
+require "../flora2/Ecore2Flora.kmt"
+require "../flora2/visitor/Flora2SerializerVisitor.kmt"
 
 using ecore
-using kermeta::standard  
+using kermeta::standard
 using kermeta::utils
 using kermeta::pattern
+using kermeta::pattern::flora2
 using flora2
 using flora2::visitors
-using kermeta::flora2
-using kermeta::flora2::pattern
-
 
 class PatternMatchingFlora2 inherits PatternMatching
 {
