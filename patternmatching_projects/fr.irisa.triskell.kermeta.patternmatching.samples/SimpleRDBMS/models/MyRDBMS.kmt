@@ -1,0 +1,62 @@
+@mainClass "RDBMSM::Main"
+@mainOperation "main"
+
+package RDBMSM;
+
+require kermeta
+require "../metamodels/RDBMSMM.kmt"
+using kermeta::standard
+
+class Main
+{
+    operation main() : Void is do 
+		var rdbmodel : RDBMSMM::RDBMSModel init RDBMSMM::RDBMSModel.new
+
+        /* Initializing the table for Teachers */
+		var tabTeachers : RDBMSMM::Table init RDBMSMM::Table.new
+		var colTchName : RDBMSMM::Column init RDBMSMM::Column.new
+		tabTeachers.name := "TabTeacher"
+		colTchName.name := "TeacherName"
+		colTchName.type := "varchar2"		
+		var colTchResearchArea : RDBMSMM::Column init RDBMSMM::Column.new
+		colTchResearchArea.name := "Area"
+		colTchResearchArea.type := "varchar2"			
+
+		tabTeachers.cols.add(colTchName)		
+		tabTeachers.cols.add(colTchResearchArea)		
+		tabTeachers.pkey.add(colTchName)
+		
+        /* Initializing the table for Students */
+		var tabStudents : RDBMSMM::Table init RDBMSMM::Table.new				
+		tabStudents.name := "tabStudents"
+		var colStuID : RDBMSMM::Column init RDBMSMM::Column.new
+		colStuID.name := "ID"
+		colStuID.type := "varchar2"
+		var colStuName : RDBMSMM::Column init RDBMSMM::Column.new		
+		colStuName.name := "StudentName"
+		colStuName.type := "varchar2"		
+		var colStuAddress : RDBMSMM::Column init RDBMSMM::Column.new		
+		colStuAddress.name := "Address"
+		colStuAddress.type := "varchar2"		
+				
+		tabStudents.cols.add(colStuID)		
+		tabStudents.cols.add(colStuName)		
+		tabStudents.cols.add(colStuAddress)
+		tabStudents.pkey.add(colStuID)
+		
+		
+		var tabAdvisors : RDBMSMM::Table init RDBMSMM::Table.new				
+		tabAdvisors.name := "tabAdvisors"
+		tabAdvisors.cols.add(colStuID)
+		tabAdvisors.cols.add(colTchName)		
+		tabAdvisors.pkey.add(colStuID)
+		tabAdvisors.pkey.add(colTchName)		
+
+		rdbmodel.table.add(tabAdvisors)
+		rdbmodel.table.add(tabTeachers)	
+		rdbmodel.table.add(tabStudents)
+        
+        rdbmodel.print
+
+    end
+}

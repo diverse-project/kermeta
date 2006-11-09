@@ -1,0 +1,24 @@
+
+s0: state[
+    name -> "foo"
+].
+
+s1:state[
+    name -> "bar"
+].
+
+t01:State[
+    source -> s0,
+    target -> s1    
+].
+
+t11: State[
+    source -> s1,
+    target -> s1    
+].
+
+fsm2: fsm[
+	states -> {s0, s1} ,
+	transitions -> {t01, t11}
+].
+

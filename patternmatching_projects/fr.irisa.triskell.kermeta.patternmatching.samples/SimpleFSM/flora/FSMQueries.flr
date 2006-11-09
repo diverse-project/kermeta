@@ -1,0 +1,14 @@
+		
+?- ?FSM [ 
+    states -> {?S3: state},
+    transitions -> {?T33:transition[source -> ?S3,
+                                  target -> ?S3]}
+ ].
+ 
+?- ?FSM [ 
+    states -> {?S1: state, ?S2: state, ?S3state },
+    transitions -> {?T12:transition[source -> ?S1,
+                                  target -> ?S2],
+                    ?T23:transition[source -> ?S2,
+                                  target -> ?S3]}
+ ].

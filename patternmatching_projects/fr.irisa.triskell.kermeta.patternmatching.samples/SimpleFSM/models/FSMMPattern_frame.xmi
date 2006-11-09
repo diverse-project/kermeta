@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<patternframework:ModelPattern xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:patternframework="platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore">
+  <pattern>
+    <content href="FSMMPattern_structure.xmi#/0"/>
+    <content href="FSMMPattern_structure.xmi#/1"/>
+    <roles name="cyclicTransition">
+      <player href="FSMMPattern_structure.xmi#/1"/>
+    </roles>
+    <roles name="targetState">
+      <player href="FSMMPattern_structure.xmi#/0"/>
+    </roles>
+  </pattern>
+  <featureIdentifier>name</featureIdentifier>
+</patternframework:ModelPattern>

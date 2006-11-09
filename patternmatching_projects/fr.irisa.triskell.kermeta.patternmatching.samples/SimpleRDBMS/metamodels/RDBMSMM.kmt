@@ -1,0 +1,56 @@
+package RDBMSMM;
+
+require kermeta
+using kermeta::standard
+
+class Table
+{
+	attribute name : String
+	attribute cols : Column[1..*]
+	reference pkey : Column[1..*]
+	attribute fkeys : FKey[0..*]    
+	
+	operation print() : String  is do 
+      stdio.writeln(name)	
+
+	  from var i : Integer init 0
+        until i == cols.size
+        loop
+           cols.elementAt(i).print
+           i := i+1           
+        end
+    end	
+}
+
+class FKey
+{
+	reference references : Table
+	reference cols : Column[1..*]
+}
+
+class Column
+{
+	attribute name : String
+	attribute type : String
+	
+	operation print() : String  is do 
+      stdio.writeln("Column "+name+" : "+type )	
+    end		
+}
+
+class RDBMSModel
+{
+	attribute table : Table[1..*]
+	
+	operation print() : String  is do 
+      stdio.writeln("RDBMS Model with "+table.size().toString()+" tables" )		      
+	  from var i : Integer init 0
+        until i == table.size()
+        loop
+           
+           table.elementAt(i).print
+           i := i+1
+        end
+    end
+	
+}

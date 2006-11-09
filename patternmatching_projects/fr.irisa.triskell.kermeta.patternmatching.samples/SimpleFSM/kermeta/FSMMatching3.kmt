@@ -1,0 +1,26 @@
+/* $Id: FSMMatching3.kmt,v 1.1 2006-11-09 15:28:58 rodrigotex Exp $
+ * Creation date: October 19, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::FSMMatching3"
+@mainOperation "main"
+
+
+package fsm;
+
+require kermeta
+require "./FSMMatching.kmt"
+ 
+using kermeta::standard 
+ 
+class FSMMatching3 inherits FSMMatching
+{
+    operation main() : Void is do 
+        var inputMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/models/FSMM.xmi"                              
+        var patternPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/models/FSMMPattern3_frame.xmi"                               
+        
+        executePatternMatching (inputMPath, patternPath )    
+    end
+}  

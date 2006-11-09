@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:FSM="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMMPattern.ecore/FSM">
+  <FSM:State name="A"/>
+  <FSM:State name="B"/>
+  <FSM:Transition source="/0" target="/1"/>
+</xmi:XMI>

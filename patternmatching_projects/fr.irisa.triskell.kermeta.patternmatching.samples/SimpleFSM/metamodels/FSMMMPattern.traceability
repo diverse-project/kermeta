@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traceability:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:traceability="http://modelware.inria.fr/Traceability" optimizedReferencesOnly="true">
+  <traces sourceReferences="//@references.0" targetReferences="//@references.1" description="//@messages.0"/>
+  <traces sourceReferences="//@references.2" targetReferences="//@references.1" description="//@messages.1"/>
+  <traces sourceReferences="//@references.3" targetReferences="//@references.4" description="//@messages.2"/>
+  <traces sourceReferences="//@references.5" targetReferences="//@references.6" description="//@messages.3"/>
+  <traces sourceReferences="//@references.7" targetReferences="//@references.8" description="//@messages.4"/>
+  <traces sourceReferences="//@references.9" targetReferences="//@references.10" description="//@messages.5"/>
+  <traces sourceReferences="//@references.11" targetReferences="//@references.12" description="//@messages.6"/>
+  <traces sourceReferences="//@references.13" targetReferences="//@references.14" description="//@messages.7"/>
+  <traces sourceReferences="//@references.15" targetReferences="//@references.16" description="//@messages.8"/>
+  <traces sourceReferences="//@references.17" targetReferences="//@references.18" description="//@messages.9"/>
+  <traces sourceReferences="//@references.19" targetReferences="//@references.20" description="//@messages.10"/>
+  <traces sourceReferences="//@references.21" targetReferences="//@references.22" description="//@messages.11"/>
+  <traces sourceReferences="//@references.23" targetReferences="//@references.24" description="//@messages.12"/>
+  <traces sourceReferences="//@references.25" targetReferences="//@references.26" description="//@messages.13"/>
+  <traces sourceReferences="//@references.27" targetReferences="//@references.28" description="//@messages.14"/>
+  <traces sourceReferences="//@references.29" targetReferences="//@references.30" description="//@messages.15"/>
+  <traces sourceReferences="//@references.31" targetReferences="//@references.32" description="//@messages.16"/>
+  <traces sourceReferences="//@references.33" targetReferences="//@references.34" description="//@messages.17"/>
+  <traces sourceReferences="//@references.35" targetReferences="//@references.36" description="//@messages.18"/>
+  <traces sourceReferences="//@references.37" targetReferences="//@references.38" description="//@messages.19"/>
+  <traces sourceReferences="//@references.39" targetReferences="//@references.40" description="//@messages.20"/>
+  <traces sourceReferences="//@references.41" targetReferences="//@references.42" description="//@messages.21"/>
+  <traces sourceReferences="//@references.43" targetReferences="//@references.44" description="//@messages.22"/>
+  <traces sourceReferences="//@references.45" targetReferences="//@references.46" description="//@messages.23"/>
+  <traces sourceReferences="//@references.47" targetReferences="//@references.48" description="//@messages.24"/>
+  <traces sourceReferences="//@references.49" targetReferences="//@references.50" description="//@messages.25"/>
+  <traces sourceReferences="//@references.51" targetReferences="//@references.52" description="//@messages.26"/>
+  <traces sourceReferences="//@references.53" targetReferences="//@references.54" description="//@messages.27"/>
+  <traces sourceReferences="//@references.55" targetReferences="//@references.56" description="//@messages.28"/>
+  <traces sourceReferences="//@references.57" targetReferences="//@references.58" description="//@messages.29"/>
+  <traces sourceReferences="//@references.59" targetReferences="//@references.60" description="//@messages.30"/>
+  <traces sourceReferences="//@references.61" targetReferences="//@references.62" description="//@messages.31"/>
+  <traces sourceReferences="//@references.63" targetReferences="//@references.64" description="//@messages.32"/>
+  <traces sourceReferences="//@references.65" targetReferences="//@references.66" description="//@messages.33"/>
+  <traces sourceReferences="//@references.67" targetReferences="//@references.68" description="//@messages.34"/>
+  <traces sourceReferences="//@references.69" targetReferences="//@references.70" description="//@messages.35"/>
+  <traces sourceReferences="//@references.71" targetReferences="//@references.72" description="//@messages.36"/>
+  <traces sourceReferences="//@references.73" targetReferences="//@references.74" description="//@messages.37"/>
+  <traces sourceReferences="//@references.75" targetReferences="//@references.76" description="//@messages.38"/>
+  <traces sourceReferences="//@references.77" targetReferences="//@references.78" description="//@messages.39"/>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.0" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="1" charBeginAt="17"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.0 //@traces.1">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.1" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="4" charBeginAt="575"/>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.2" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="4" charBeginAt="575"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.2">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.3" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="6" charBeginAt="142"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.3">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.4" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="11" charBeginAt="256"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.4">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.5" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="20" charBeginAt="531"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.5">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.6" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="36" charBeginAt="573"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.6">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.3"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.7" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="6" charBeginAt="112"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.7">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.8" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="8" charBeginAt="138"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.8">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.9" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="11" charBeginAt="195"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.9">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.1/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.10" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="13" charBeginAt="223"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.10">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.11" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="13" charBeginAt="223"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.11">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.12" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="15" charBeginAt="251"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.12">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.13" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="15" charBeginAt="251"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.13">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.14" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="20" charBeginAt="302"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.14">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.15" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="31" charBeginAt="483"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.15">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.16" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="31" charBeginAt="477"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.16">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.17" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="33" charBeginAt="527"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.17">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.1"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.18" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="33" charBeginAt="521"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.18">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.19" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="36" charBeginAt="572"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.19">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.3/@containedType.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.20" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="23" charBeginAt="447"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.20">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.21" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="343"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.21">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.22" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="350"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.22">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.23" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="357"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.23">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.24" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="442"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.24">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.25" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="359"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.25">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.26" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="441"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.26" refObject="/"/>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.27" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="24" charBeginAt="441"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.27">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.28" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="373"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.28">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.29" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="385"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.29">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.30" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="392"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.30">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.31" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="434"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.31">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.32" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="394"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.32">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.33" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="433"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.33" refObject="/"/>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.34" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="25" charBeginAt="433"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.34">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@body"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.35" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="26" charBeginAt="407"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.35">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0/@target/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.36" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="26" charBeginAt="414"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.36">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0/@target"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.37" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="26" charBeginAt="421"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.37">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.38" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="26" charBeginAt="423"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.38">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0/@body/@statement.0/@parameters.0"/>
+  </references>
+  <references xsi:type="traceability:TextReference" targetTrace="//@traces.39" fileURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.kmt" line="22" charBeginAt="447"/>
+  <references xsi:type="traceability:ExternalReference" sourceTrace="//@traces.39">
+    <refObject href="file:/C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.km#/0/@nestedPackage.0/@ownedTypeDefinition.2/@inv.0"/>
+  </references>
+  <messages type="Mapping" value="Parsing of PackageDecl" language="english" trace="//@traces.0"/>
+  <messages type="Mapping" value="Parsing of SubPackageDecl" language="english" trace="//@traces.1"/>
+  <messages type="Mapping" value="Parsing of SubPackageDecl" language="english" trace="//@traces.2"/>
+  <messages type="Mapping" value="Parsing of ClassDecl" language="english" trace="//@traces.3"/>
+  <messages type="Mapping" value="Parsing of ClassDecl" language="english" trace="//@traces.4"/>
+  <messages type="Mapping" value="Parsing of ClassDecl" language="english" trace="//@traces.5"/>
+  <messages type="Mapping" value="Parsing of DataTypeDecl" language="english" trace="//@traces.6"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.7"/>
+  <messages type="Mapping" value="Parsing of Property" language="english" trace="//@traces.8"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.9"/>
+  <messages type="Mapping" value="Parsing of Property" language="english" trace="//@traces.10"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.11"/>
+  <messages type="Mapping" value="Parsing of Property" language="english" trace="//@traces.12"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.13"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.14"/>
+  <messages type="Mapping" value="Parsing of Property" language="english" trace="//@traces.15"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.16"/>
+  <messages type="Mapping" value="Parsing of Property" language="english" trace="//@traces.17"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.18"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.19"/>
+  <messages type="Mapping" value="Parsing of FBlock" language="english" trace="//@traces.20"/>
+  <messages type="Mapping" value="Parsing of FSelfCall" language="english" trace="//@traces.21"/>
+  <messages type="Mapping" value="Parsing of CallPostfix" language="english" trace="//@traces.22"/>
+  <messages type="Mapping" value="Parsing of CallPostfix" language="english" trace="//@traces.23"/>
+  <messages type="Mapping" value="Parsing of LambdaPostfix" language="english" trace="//@traces.24"/>
+  <messages type="Mapping" value="Parsing of LambdaPostfixParam" language="english" trace="//@traces.25"/>
+  <messages type="Mapping" value="Parsing of FAssignement" language="english" trace="//@traces.26"/>
+  <messages type="Mapping" value="Parsing of FBlock" language="english" trace="//@traces.27"/>
+  <messages type="Mapping" value="Parsing of FSelfCall" language="english" trace="//@traces.28"/>
+  <messages type="Mapping" value="Parsing of CallPostfix" language="english" trace="//@traces.29"/>
+  <messages type="Mapping" value="Parsing of CallPostfix" language="english" trace="//@traces.30"/>
+  <messages type="Mapping" value="Parsing of LambdaPostfix" language="english" trace="//@traces.31"/>
+  <messages type="Mapping" value="Parsing of LambdaPostfixParam" language="english" trace="//@traces.32"/>
+  <messages type="Mapping" value="Parsing of FAssignement" language="english" trace="//@traces.33"/>
+  <messages type="Mapping" value="Parsing of FBlock" language="english" trace="//@traces.34"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.35"/>
+  <messages type="Mapping" value="Parsing of CallPostfix" language="english" trace="//@traces.36"/>
+  <messages type="Mapping" value="Parsing of CallPostfix" language="english" trace="//@traces.37"/>
+  <messages type="Mapping" value="Parsing of Basictype" language="english" trace="//@traces.38"/>
+  <messages type="Mapping" value="Parsing of Invariant" language="english" trace="//@traces.39"/>
+</traceability:Model>

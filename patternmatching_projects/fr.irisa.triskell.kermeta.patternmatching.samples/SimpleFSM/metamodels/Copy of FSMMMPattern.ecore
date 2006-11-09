@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pattern" nsURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.ecore" nsPrefix="pattern">
+  <eSubpackages name="FSM" nsURI="platform:/resource/fr.irisa.triskell.kermeta.pattern/samples/SimpleFSM/metamodels/FSMMMPattern.ecore/FSM" nsPrefix="FSM">
+    <eClassifiers xsi:type="ecore:EClass" name="State">
+      <eSuperTypes href="../../../src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//@eSubpackages.0/@eClassifiers.3" defaultValueLiteral=""/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition">
+      <eSuperTypes href="../../../src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//@eSubpackages.0/@eClassifiers.0" defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//@eSubpackages.0/@eClassifiers.0" defaultValueLiteral=""/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Fsm">
+      <eAnnotations source="kermeta">
+        <details key="inv" value="templateConstraint is&#xD;&#xA;&#x9;do&#xD;&#xA;&#x9;&#x9;self.states.forAll{s | do&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;self.transitions.exists{t | do&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;t.target.equals(s)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xD;&#xA;&#x9;&#x9;&#x9;end}&#xD;&#xA;&#x9;end"/>
+      </eAnnotations>
+      <eSuperTypes href="../../../src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1" eType="//@eSubpackages.0/@eClassifiers.0" defaultValueLiteral="" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1" eType="//@eSubpackages.0/@eClassifiers.1" defaultValueLiteral="" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Label" instanceClassName="java.lang.String"/>
+  </eSubpackages>
+</ecore:EPackage>

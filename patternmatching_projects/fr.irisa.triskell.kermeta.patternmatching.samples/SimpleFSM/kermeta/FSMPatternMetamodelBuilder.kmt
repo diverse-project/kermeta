@@ -1,0 +1,51 @@
+/* $Id: FSMPatternMetamodelBuilder.kmt,v 1.1 2006-11-09 15:28:58 rodrigotex Exp $
+ * Creation date: October 18, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::pattern::FSMPatternMetamodelBuilder"
+@mainOperation "main"
+
+package fsm::pattern;
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMetamodelBuilder2.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+
+// require statement to workaround a problem in kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/persistence/EMFHandler.kmt"
+
+using ecore 
+using kermeta::standard
+using kermeta::persistence
+using kermeta::pattern
+
+class FSMPatternMetamodelBuilder {
+
+  operation main() is do 
+      var sourceMetamodelUri : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore"
+      var targetMetamodelUri : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+
+   	  var repository : EMFRepository init EMFRepository.new
+      var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
+      handler.initialize()        	 
+              	 
+      var packagesModelModel : Sequence<EPackage> init handler.loadEcoreModel (repository, sourceMetamodelUri)    
+
+      // Link packages to the framework of patterns (the content of the packages are changed 
+      var patternCreator : PatternMetamodelBuilder init PatternMetamodelBuilder.new       
+      patternCreator.initialize (repository)       
+      var patternPack : EPackage init patternCreator.addPatternFramework(packagesModelModel, targetMetamodelUri) 
+      
+      // remove the source packages from their previours container
+      packagesModelModel.each{p | repository.getResource(sourceMetamodelUri).remove(p)} 
+      
+      // problem in Kermeta: we have to clea instance class name
+      var emfhandler : EMFHandler init EMFHandler.new
+      emfhandler.cleanInstanceClassNames(patternPack)
+      
+      handler.saveEcoreModel(repository, patternPack, targetMetamodelUri) 
+
+  end
+}

@@ -1,0 +1,48 @@
+@mainClass "FSM::Main"
+@mainOperation "main"
+
+package FSM;
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore"
+using kermeta::persistence
+using kermeta::standard
+
+
+class Main
+{ 
+    operation main() : Void is do 
+		var fsm2 : FSM::Fsm init FSM::Fsm.new
+		var s0 : FSM::State init FSM::State.new
+		var s1 : FSM::State init FSM::State.new
+		var s2 : FSM::State init FSM::State.new		
+		var t01 : FSM::Transition init FSM::Transition.new
+		var t11 : FSM::Transition init FSM::Transition.new
+				
+		s0.name := "foo" 
+		s1.name := "bar"
+		s2.name := "test"		
+		t01.source := s0
+		t01.target := s1
+		
+		t11.source := s1
+		t11.target := s1
+		
+		fsm2.states.add(s0)
+		fsm2.states.add(s1)
+		fsm2.states.add(s2)		
+		fsm2.transitions.add(t01)
+		fsm2.transitions.add(t11)
+		
+        // Persisty the model
+		var repository : EMFRepository init EMFRepository.new
+		var resource : EMFResource 
+		resource ?= repository.createResource("../models/FSMM.xmi",
+		 "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore")
+		resource.instances.add(fsm2)
+				
+
+		resource.save()		
+
+    end
+}

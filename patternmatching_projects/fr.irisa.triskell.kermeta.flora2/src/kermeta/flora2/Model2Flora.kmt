@@ -1,4 +1,4 @@
-/* $Id: Model2Flora.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+/* $Id: Model2Flora.kmt,v 1.2 2006-11-09 15:33:22 rodrigotex Exp $
  * Creation date: November 9, 2006
  * License:
  * Copyright:
@@ -19,7 +19,7 @@ using kermeta::reflection
 using kermeta::persistence 
 using kermeta::utils 
 
-
+ 
 
 class Model2Flora inherits Ecore2FloraBasicElements { 	
    attribute objTable : IDTable
