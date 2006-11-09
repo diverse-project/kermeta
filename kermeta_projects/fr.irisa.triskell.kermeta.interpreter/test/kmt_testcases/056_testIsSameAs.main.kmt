@@ -31,6 +31,13 @@ class Test inherits kermeta::kunit::Test {
 		assert (i1.isSameAs(i2))
 		result := i1.isSameAs(i2)
 	end
+	
+	operation testCorrectIsSameAs1bis() : Boolean is do
+		var i1 : Integer init 10
+		var i2 : Integer init 10
+		assert (i1 == i2)
+		result := i1 == i2
+	end
 
 	operation testCorrectIsSameAs2() : Boolean  is do
 		var i1 : Integer init 10
@@ -40,11 +47,26 @@ class Test inherits kermeta::kunit::Test {
 		result := i1.isSameAs(i2)
 	end
 
+	operation testCorrectIsSameAs2bis() : Boolean  is do
+		var i1 : Integer init 10
+		var i2 : Integer
+		i2 := i1
+		assert ( i1 == i2 )
+		result := i1 == i2
+	end
+
 	operation testIncorrectIsSameAs1() : Boolean  is do
 		var i1 : Riri init Riri.new
 		var i2 : Riri init Riri.new
 		assert ( not i1.isSameAs(i2))
 		result := not i1.isSameAs(i2)
+	end
+	
+	operation testIncorrectIsSameAs1bis() : Boolean  is do
+		var i1 : Riri init Riri.new
+		var i2 : Riri init Riri.new
+		assert ( not (i1 == i2) )
+		result := not (i1 == i2)
 	end
 
 	operation testCorrectIsKindOf3() : Boolean  is do
@@ -53,6 +75,14 @@ class Test inherits kermeta::kunit::Test {
 		i2 := i1
 		assert ( i1.isSameAs(i2))
 		result := i1.isSameAs(i2)
+	end
+	
+	operation testCorrectIsKindOf3bis() : Boolean  is do
+		var i1 : Riri init Riri.new
+		var i2 : Riri
+		i2 := i1
+		assert ( i1 == i2 )
+		result := i1 == i2
 	end
 
 	operation testCorrectIsKindOf4() : Boolean  is do
