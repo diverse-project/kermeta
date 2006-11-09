@@ -1,4 +1,4 @@
-/* $Id: Ecore2Flora.kmt,v 1.2 2006-11-09 15:33:22 rodrigotex Exp $
+/* $Id: Ecore2Flora.kmt,v 1.3 2006-11-09 15:36:05 rodrigotex Exp $
  * Creation date: October 4, 2006
  * License:
  * Copyright:
@@ -16,7 +16,7 @@ require "../../flora2/Flora2wVisitor.ecore"
 using kermeta::standard 
 
 using ecore
-//using flora2::visitors 
+//using flora2::visitors  
  
 
 class Ecore2Flora inherits Ecore2FloraBasicElements {

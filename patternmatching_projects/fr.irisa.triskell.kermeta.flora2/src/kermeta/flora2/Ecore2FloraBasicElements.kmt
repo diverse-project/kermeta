@@ -1,4 +1,4 @@
-/* $Id: Ecore2FloraBasicElements.kmt,v 1.2 2006-11-09 15:33:22 rodrigotex Exp $
+/* $Id: Ecore2FloraBasicElements.kmt,v 1.3 2006-11-09 15:36:05 rodrigotex Exp $
  * Creation date: October 12, 2006
  * License:
  * Copyright:
@@ -13,7 +13,7 @@ require "../../flora2/Flora2wVisitor.ecore"
 
 require kermeta
 
-using ecore 
+using ecore  
 using kermeta::standard
 
 class Ecore2FloraBasicElements
