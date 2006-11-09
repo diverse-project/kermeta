@@ -7,7 +7,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.22 2006-10-13 08:33:49 ftanguy Exp $
+ * $Id: resource.kmt,v 1.23 2006-11-09 14:04:02 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -79,12 +79,14 @@ abstract class Resource
 		getter is do result:=contentMap.getValue("allRootContents") end
     /** - returns all the model elements hosted by this resource, excluding elements from the
  	 * dependent resources */
-	property readonly contents : set Object[0..*] 
-		getter is do result:=contentMap.getValue("contents") end
+	property readonly contents : set Object[0..*] getter is do
+		result:=contentMap.getValue("contents").union(contentMap.getValue("rootContents"))
+	end
     /** - returns all the model elements hosted by this resource, including elements from the
  	 * dependent resources */
-	property readonly allContents : set Object[0..*] 
-		getter is do result:=contentMap.getValue("allContents") end
+	property readonly allContents : set Object[0..*] getter is do
+		result:=contentMap.getValue("allContents").union(contentMap.getValue("allRootContents"))
+	end
 	
 	/** Save a model instance, in the file specified by the initial uri 
 	 * Overrides the old version.
