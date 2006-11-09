@@ -8187,17 +8187,38 @@
             </containedType>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@target/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
-                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="contents"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
-                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
-                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
-                        <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
-                      </containedType>
-                    </typeParamBinding>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@containedType.0" name="union" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.2">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                    <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                   </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="rootContents"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@parameters.0/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@parameters.0/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                          <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                        </containedType>
+                      </typeParamBinding>
+                    </containedType>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@target/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                    <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="contents"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@target/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.8/@getterBody/@statement.0/@value/@target/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                          <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                        </containedType>
+                      </typeParamBinding>
+                    </containedType>
+                  </target>
                 </target>
               </value>
             </statement>
@@ -8210,17 +8231,38 @@
             </containedType>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@target/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
-                <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="allContents"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
-                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
-                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
-                        <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
-                      </containedType>
-                    </typeParamBinding>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@containedType.0" name="union" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.2">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                    <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                   </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="allRootContents"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@parameters.0/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@parameters.0/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                          <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                        </containedType>
+                      </typeParamBinding>
+                    </containedType>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@target/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                    <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                  </containedType>
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="allContents"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@target/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                      <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.9/@getterBody/@statement.0/@value/@target/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                          <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                        </containedType>
+                      </typeParamBinding>
+                    </containedType>
+                  </target>
                 </target>
               </value>
             </statement>
