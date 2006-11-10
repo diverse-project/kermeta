@@ -13,12 +13,10 @@
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PositionConstants;
+//import org.eclipse.draw2d.Figure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
-import org.eclipse.swt.graphics.Color;
-import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
@@ -27,7 +25,6 @@ import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 
-import fr.irisa.triskell.kermeta.samples.fsm.FSM;
 import fr.irisa.triskell.kermeta.samples.fsm.State;
 
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmImageRegistry;
@@ -144,7 +141,7 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		// TODO Auto-generated method stub
 		super.refreshHeaderLabel();
 		
-		String imageLabel = "STATE";
+		String imageLabel = "NOTHING_STATE";
 		if (isInitial()) {
 			imageLabel = "INITIAL_STATE";
 		}
@@ -156,7 +153,6 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		EditableLabel lbl = (EditableLabel) fig.getLabel();
 		
 		lbl.setIcon(FsmImageRegistry.getImage(imageLabel));
-		
 	}
 
 	/**
