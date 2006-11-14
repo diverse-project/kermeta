@@ -23,16 +23,18 @@
     </node>
     <node
         presentation="default"
-        defaultHeight="40"
-        defaultWidth="60"
+        defaultHeight="25"
+        defaultWidth="55"
         minimumHeight="0"
         minimumWidth="0"
         maximumHeight="0"
         maximumWidth="0"
-        defaultBackgroundColor="255,255,255"
+        defaultBackgroundColor="200,220,230"
         defaultForegroundColor="0,0,0"
         defaultFont="Tahoma-regular-8"
         lineWidth="1"
+        isWidthResizable="true"
+        isHeightResizable="true"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
             <type href="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore#//State"/>
@@ -42,7 +44,7 @@
         presentation="default"
         defaultForegroundColor="0,0,0"
         defaultFont="Tahoma-regular-8"
-        defaultRouter="ObliqueRouter"
+        defaultRouter="RectilinearRouter"
         lineWidth="1"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
