@@ -1,4 +1,4 @@
-/* $Id: ResourceSetManager.java,v 1.1 2006-11-15 15:45:27 dvojtise Exp $
+/* $Id: ResourceSetManager.java,v 1.2 2006-11-15 15:49:57 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ResourceSetManager.java
  * License   : EPL
@@ -56,8 +56,10 @@ public class ResourceSetManager {
 	 */
 	public void addResources(Collection<Resource> ressources){
 		for(Resource res : ressources){
-			savedResourceSetForResources.put(res,res.getResourceSet());
-			resourceSet.getResources().add(res);
+			addResource(res);
+			//savedResourceSetForResources.put(res,res.getResourceSet());
+			//resourceSet.getResources().add(res);
+			
 		}
 	}
 	
