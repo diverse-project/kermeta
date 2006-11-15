@@ -1,0 +1,81 @@
+/* $Id: ResourceSetManager.java,v 1.1 2006-11-15 15:45:27 dvojtise Exp $
+ * Project   : Kermeta 
+ * File      : ResourceSetManager.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 15 nov. 06
+ * Authors       : dvojtise <dvojtise.irisa.fr>
+ */
+/** 
+ *
+ */
+package fr.irisa.triskell.kermeta.utils;
+
+import java.util.Collection;
+import java.util.Hashtable;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+
+/**
+ * this class provides some management methods used to work with a given ResourceSet 
+ *
+ */
+public class ResourceSetManager {
+
+	/**
+	 * the ResourceSet that is managed
+	 */
+	protected ResourceSet resourceSet;
+	
+	public ResourceSetManager(ResourceSet resource_set){
+		resourceSet = resource_set;
+	}
+	/** add the resource to this resourceSet, save its resourceSet for a restore later
+	 * @param resource_set
+	 */
+	public void addResource(Resource res){
+		savedResourceSetForResources.put(res,res.getResourceSet());
+		resourceSet.getResources().add(res);
+	}
+
+	/** add the resource of StandardLib to this resourceSet, save its resourceSet for a restore later
+	 * @param resource_set
+	 */
+	public void addStdLibResource(){
+		KMUnit frameworkUnit = (KMUnit)StdLibKermetaUnitHelper.getKermetaUnit();
+		addResource(frameworkUnit.resource);
+	}
+	
+	/** add the resources to this resourceSet, save their resourceSet for a restore later
+	 * @param resource_set
+	 */
+	public void addResources(Collection<Resource> ressources){
+		for(Resource res : ressources){
+			savedResourceSetForResources.put(res,res.getResourceSet());
+			resourceSet.getResources().add(res);
+		}
+	}
+	
+	/** remove the internal resources of the interpreter to this resourceSet 
+	 * and put them back to their original resourceSet
+	 * @param resource_set
+	 */
+	public void restoreInterpreterInternalResources(){
+		for(Resource res : savedResourceSetForResources.keySet()){
+			ResourceSet resSet = savedResourceSetForResources.get(res);
+			resSet.getResources().add(res);
+		}
+		// can be restored only once ...
+		savedResourceSetForResources.clear();
+	}
+	/**
+	 * structure used to store the original resourceSet  for the Resources
+	 */
+	protected Hashtable<Resource,ResourceSet> savedResourceSetForResources =  new Hashtable<Resource,ResourceSet>();
+	
+}
