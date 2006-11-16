@@ -56,6 +56,7 @@
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.jdt.ui"/>
       <import plugin="org.eclipse.ui.views.properties.tabbed"/>
+      <import plugin="org.eclipse.emf.validation"/>
    </requires>
    <extension
          point="org.eclipse.ui.popupMenus">

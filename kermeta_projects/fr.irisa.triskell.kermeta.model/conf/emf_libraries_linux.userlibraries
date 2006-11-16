@@ -4,5 +4,7 @@
         <archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.common_2.0.1/runtime/common.jar"/>
         <archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.ecore_2.0.1/runtime/ecore.jar"/>
         <archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.ecore.xmi_2.0.1/runtime/ecore.xmi.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.validation_1.0.0.v200606261144.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
     </library>
 </eclipse-userlibraries>
