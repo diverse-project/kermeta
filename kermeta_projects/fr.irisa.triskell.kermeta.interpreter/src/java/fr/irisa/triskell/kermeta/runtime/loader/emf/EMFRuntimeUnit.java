@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.26 2006-11-16 14:10:16 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.27 2006-11-16 15:44:45 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -738,16 +738,27 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		validator.setIncludeLiveConstraints(true);
 
 		for(Object eobj : res.getContents()){
-			IStatus status = validator.validate(eobj);
-			internalLog.debug("Validating EObject with EMF validator");
-			// do something if this is not valid ...
-			if(!status.isOK()){
-				throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-		    			"EMF validation failed : " + status.getMessage(),
-		    			getRuntimeMemory().getCurrentInterpreter(),
-		    			getRuntimeMemory(),
-		    			null);
+			try{
+				IStatus status = validator.validate(eobj);
+				internalLog.debug("Validating EObject with EMF validator");
+				// do something if this is not valid ...
+				if(!status.isOK()){
+					throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+			    			"EMF validation failed : " + status.getMessage(),
+			    			getRuntimeMemory().getCurrentInterpreter(),
+			    			getRuntimeMemory(),
+			    			null);
+				}
 			}
+			catch(java.lang.ExceptionInInitializerError e){
+				// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
+				internalLog.warn("Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...",e);
+			}
+			catch(NoClassDefFoundError e){
+				// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
+				internalLog.warn("Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...",e);
+			}
+			
 		}
 		
 	}
