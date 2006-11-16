@@ -49,11 +49,21 @@ public class ParserIteration implements IParser {
 			
 		IParser separatorParser = ParserRule.findParser (iteration.getSeparator(), subject);
 
+		
+		
 		boolean ok = true;
-		boolean loop=true;
-		int state=1;
+		boolean loop = true;
+		long position = lexer.getPosition();
+		int state = 1;
+		if (ruleParser.parse(lexer)) {
+			accept ();
+			state=2;
+		} else {
+			loop=false;
+            reject (lexer, position);
+		}
 		while (loop) {
-            long position = lexer.getPosition();
+            position = lexer.getPosition();
 			switch (state) {
 			case 1 :
 				if (ruleParser.parse(lexer)) {
@@ -75,6 +85,7 @@ public class ParserIteration implements IParser {
 				break;
 			}
 		}
+
 		return ok;
 	}
 
