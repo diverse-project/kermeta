@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <P1:C1 xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:P1="049_simple_splittedMM_P1" xsi:schemaLocation="049_simple_splittedMM_P1 ../metamodels/049_simple_splittedMM1.ecore">
+    xmlns:P1="049_simple_splittedMM_P1" xsi:schemaLocation="049_simple_splittedMM_P1 platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/049_simple_splittedMM1.ecore">
   <aC2>
     <aC3/>
   </aC2>
