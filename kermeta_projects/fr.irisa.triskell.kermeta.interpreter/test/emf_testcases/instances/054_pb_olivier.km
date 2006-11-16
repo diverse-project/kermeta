@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure" name="example">
+  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Guest" isAbstract="true">
+    <ownedAttribute name="t" type="//@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
+      <containedType xsi:type="kermeta_language_structure:Class">
+        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+      </containedType>
+    </ownedAttribute>
+    <ownedAttribute name="t2" type="//@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.0"/>
+    </ownedAttribute>
+    <ownedOperation name="op" type="//@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+      <containedType xsi:type="kermeta_language_structure:Class">
+        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+      </containedType>
+    </ownedOperation>
+  </ownedTypeDefinition>
+</kermeta_language_structure:Package>

@@ -1,0 +1,22 @@
+/* $Id: 054_pb_olivier.kmt,v 1.1 2006-11-16 13:49:53 dvojtise Exp $
+ * Creation date: November 7, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package example;
+
+require kermeta
+
+using kermeta::standard
+
+abstract class Guest
+{
+	reference t : String 
+	reference t2 : Guest
+	
+	operation op () : String is abstract
+
+}

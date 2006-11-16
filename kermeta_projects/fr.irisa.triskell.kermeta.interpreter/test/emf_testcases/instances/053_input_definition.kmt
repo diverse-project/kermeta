@@ -1,0 +1,22 @@
+/* $Id: 053_input_definition.kmt,v 1.1 2006-11-16 13:49:53 dvojtise Exp $
+ * Creation date: November 16, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+
+package input_definition;
+
+
+require kermeta
+class Bidule {
+}
+class MachinChose {
+}
+class InputDef
+{
+    operation blabla() : Void is do 
+        // TODO: implement 'blabla' operation
+    end
+}

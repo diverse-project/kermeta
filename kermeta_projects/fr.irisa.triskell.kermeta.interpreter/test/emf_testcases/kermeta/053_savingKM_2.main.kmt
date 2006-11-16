@@ -1,4 +1,4 @@
-/* $Id: 053_savingKM.main.kmt,v 1.2 2006-11-16 13:49:53 dvojtise Exp $
+/* $Id: 053_savingKM_2.main.kmt,v 1.1 2006-11-16 13:49:53 dvojtise Exp $
  * Creation date: June 14, 2006
  * License:
  * Copyright:
@@ -6,17 +6,19 @@
  *		vmahe
  *		dvojtise
  * This test is related to bug931
- * more generaly it create a km model dependent to framework.km
- * 
+ * variant 2 :
+ * it creates a km model dependent to a class defined as a definition in the current program
+ * the class we point to is defined in a km file
  */
-@mainClass "savingKM::Main"
+@mainClass "savingKM2::Main"
 @mainOperation "testmain"
 
 
-package savingKM;
+package savingKM2;
 
 
 require kermeta
+require "../instances/053_input_definition.km"
 
 using kermeta::interpreter
 using kermeta::standard
@@ -31,8 +33,8 @@ class Main inherits kermeta::kunit::Test
         var sclass2 : kermeta::language::structure::Class init kermeta::language::structure::Class.new
         
         
-        // make a link to framework.km : reuse typedefinition of Boolean
-        sclass.typeDefinition := Boolean.typeDefinition        
+        // make a link to framework.km : reuse typedefinition of InputDef which is defined in a km model file
+        sclass.typeDefinition := input_definition::InputDef.typeDefinition        
         ope.type := sclass
         ope.containedType.add(sclass)
         
@@ -49,16 +51,16 @@ class Main inherits kermeta::kunit::Test
         
 		var resRepository : EMFRepository init EMFRepository.new
 		
-		stdio.writeln("Creating pb_EnregKM.km...")
+		stdio.writeln("Creating pb_EnregKM2.km...")
 		var resResource : kermeta::persistence::EMFResource
-		resResource ?= resRepository.createResource("pb_EnregKM.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		resResource ?= resRepository.createResource("pb_EnregKM2.km", "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
 		resResource.instances.add(pack)
-		
 
-		stdio.writeln("Saving pb_EnregKM.km...")		
+		stdio.writeln("Saving pb_EnregKM2.km...")		
 		resResource.saveAndValidateWithEMF()
         
         // no assertion needed, if there were an error we would have got an exception
         stdio.writeln("done")
     end
 }
+
