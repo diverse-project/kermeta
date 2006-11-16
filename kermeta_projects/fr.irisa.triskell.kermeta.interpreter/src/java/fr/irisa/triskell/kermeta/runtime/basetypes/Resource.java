@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.8 2006-09-20 13:38:26 dvojtise Exp $
+/* $Id: Resource.java,v 1.9 2006-11-16 14:05:50 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -37,7 +37,8 @@ public class Resource {
     		RuntimeObject newUri, 
     		RuntimeObject mmUri, 
     		RuntimeObject resourceType, 
-    		RuntimeObject instances)
+    		RuntimeObject instances,
+    		RuntimeObject mustValidate)
     {
         // runtime unit handles the transformation Kermeta2EMFInstance
         java.lang.String str_uri = String.getValue(newUri);
@@ -45,6 +46,7 @@ public class Resource {
         	getConcreteFactory(String.getValue(resourceType)).
         	createRuntimeUnit(str_uri, String.getValue(mmUri), instances);
         runtime_unit.associatedResource = self;
+        runtime_unit.setMustValidate(Boolean.getValue(mustValidate));
 	    runtime_unit.save(str_uri);
         return instances.getFactory().getMemory().voidINSTANCE;
     }
@@ -77,5 +79,7 @@ public class Resource {
         runtime_unit.load();
         return runtime_unit.getContentMap();
     }
+    
+ 
     
 }

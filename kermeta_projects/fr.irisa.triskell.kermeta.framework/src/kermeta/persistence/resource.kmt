@@ -7,7 +7,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.23 2006-11-09 14:04:02 dtouzet Exp $
+ * $Id: resource.kmt,v 1.24 2006-11-16 14:02:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -131,14 +131,25 @@ class EMFResource inherits Resource
 	    This allows to save the result of a transformation without changing the original file. */
 	method saveWithNewURI(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
-			self, new_uri, metaModelURI, "EMF", instances
+			self, new_uri, metaModelURI, "EMF", instances,false
 		)
 	end
 	
 	/** Save a resource in a file referenced by the uri associated to the resource */
 	method save() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
-			self, self.uri, metaModelURI, "EMF", instances
+			self, self.uri, metaModelURI, "EMF", instances, false
+		)
+	end
+
+	/** save and check the resource using the EMF validation function
+	 * apply the validate on all the object in the root of this resource
+	 * returns true if the validation reports no error
+	 * otherwise raises exceptions
+	 */
+	operation saveAndValidateWithEMF() : Boolean is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
+			self, self.uri, metaModelURI, "EMF", instances, true
 		)
 	end
 	
@@ -174,6 +185,8 @@ class EMFResource inherits Resource
 		end
 	end
 	
+
+		
 	/**
 	 * Helper that returns true if new_instance type is in the tparam Set, false otherwise
 	 * FIXME : Loop-and-cast done in order to temporarily get round the type 
@@ -284,6 +297,13 @@ class EMFRepository inherits Repository
 	method getResource(uri : String) : Resource is do
 		result := super(uri)
 	end
+	
+	/** 
+	 * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself
+	 * this is usefull for example to make a dependency to framework.km
+	 * by default, not setting this is considered as false.
+	 */
+	attribute useInterpreterInternalResources : Boolean
 	
 }
 

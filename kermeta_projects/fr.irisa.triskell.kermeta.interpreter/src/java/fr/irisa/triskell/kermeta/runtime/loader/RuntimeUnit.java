@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.5 2006-09-20 13:38:26 dvojtise Exp $
+/* $Id: RuntimeUnit.java,v 1.6 2006-11-16 14:06:12 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : GPL
@@ -39,12 +39,17 @@ public abstract class RuntimeUnit {
     
     public abstract void save(String file_path); // as XMI
     
+    
     /** @return the instances of the model loaded through this runtimeUnit */
     public RuntimeObject getContentMap()
     {
         return contentMap;
     }
     
+    /**
+     * tells if the save should validate the output model
+     */
+    protected boolean mustValidate = false; 
 
     /**
      * @return Returns the factory.
@@ -71,4 +76,9 @@ public abstract class RuntimeUnit {
     {
     	return getRuntimeMemory().getUnit();
     }
+
+	public void setMustValidate(boolean mustValidate) {
+		this.mustValidate = mustValidate;
+	}
+    
 }
