@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.25 2006-11-03 14:02:24 dtouzet Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.26 2006-11-16 14:10:16 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -38,14 +39,20 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.validation.model.EvaluationMode;
+import org.eclipse.emf.validation.service.IBatchValidator;
+import org.eclipse.emf.validation.service.ModelValidationService;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.kermeta.utils.ResourceSetManager;
 
 /**
  * FIXME : Check that we work with all qualified names of Classes.
@@ -307,9 +314,11 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         registerEMFextensionToFactoryMap(getKermetaUnit().getUri());
         
         Resource res;
+        boolean useInterpreterInternalResources = false;	// by default do not include				
         if(associatedResource == null){
         	// No RuntimeObject Resource associated need to fall back to previous way to save it 
 	        // Create the resource, and fill it (done in updateEMFModel)
+        	// DVK: does this case occurs ???
 	        ResourceSet resource_set = new ResourceSetImpl();
 	        Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
 	        r2e.updateEMFModel();
@@ -324,31 +333,39 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	        r2e.updateEMFModel();
 	        res = r2e.getResource();
     		
-        	// for each of the resources in the repository (other than the current one
+        	// for each of the resources in the repository (other than the current one)
     		RuntimeObject roRepository = (RuntimeObject) associatedResource.getProperties().get("repository");
-			RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");        					
+			RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
+			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
+			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
+	        
 			for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
-				{
-					RuntimeObject roResource = (RuntimeObject) next;
-					if (roResource != associatedResource){
-						// get orcreate an emf resource for this Resource
-						String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
-						Resource res2 = updateEMFResource(roResource, createURI(res_uri));
-						
-						String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
-						RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-		        		getConcreteFactory("EMF").
-		        				createRuntimeUnit("", mm_uri, roResource.getProperties().get("instances")) ;
-						runtime_unit.associatedResource = roResource;
-						Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
-						r2emf.updateEMFModel();
+			{
+				RuntimeObject roResource = (RuntimeObject) next;
+				if (roResource != associatedResource){
+					// get orcreate an emf resource for this Resource
+					String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
+					Resource res2 = updateEMFResource(roResource, createURI(res_uri));
 					
-					}
+					String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
+					RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+	        		getConcreteFactory("EMF").
+	        				createRuntimeUnit("", mm_uri, roResource.getProperties().get("instances")) ;
+					runtime_unit.associatedResource = roResource;
+					Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
+					r2emf.updateEMFModel();					
 				}
+			}
 	        
         }
+        ResourceSetManager rsManager = new ResourceSetManager(res.getResourceSet());
+        // if the resource must know about the resources from the interpreter
+        if(useInterpreterInternalResources) rsManager.addStdLibResource();
         // And save the created resource!
-        try { res.save(null); }
+        try { 
+        	res.save(null);
+            if(mustValidate) validateWithEMF(res);
+        }
         catch (IOException e) {
         	// "t" can be of type Resource.IOWrappedException or DanglingHREFException
 		    Throwable t = e.getCause();
@@ -357,7 +374,13 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		    e.printStackTrace();
 		    throwKermetaRaisedExceptionOnSave(msg, e); 
 		}
+        finally{
+        	// if the resource must know about the resources from the interpreter
+        	// set them back to their original ResourceSet
+        	if(useInterpreterInternalResources) rsManager.restoreInterpreterInternalResources();
+        }
     }
+	
 	
 	
 	/** deal with an eventual change in the uri
@@ -704,6 +727,29 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			result = ((mmroot instanceof EPackage) && ((EPackage)mmroot).getName().equals("ecore"));
 		}
 		return result;
+	}
+
+	/**
+	 * use EMF validation framework, 
+	 */
+	public void validateWithEMF(Resource res) {
+		IBatchValidator validator = (IBatchValidator)ModelValidationService.getInstance()
+			.newValidator(EvaluationMode.BATCH);
+		validator.setIncludeLiveConstraints(true);
+
+		for(Object eobj : res.getContents()){
+			IStatus status = validator.validate(eobj);
+			internalLog.debug("Validating EObject with EMF validator");
+			// do something if this is not valid ...
+			if(!status.isOK()){
+				throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+		    			"EMF validation failed : " + status.getMessage(),
+		    			getRuntimeMemory().getCurrentInterpreter(),
+		    			getRuntimeMemory(),
+		    			null);
+			}
+		}
+		
 	}
 	   
 }

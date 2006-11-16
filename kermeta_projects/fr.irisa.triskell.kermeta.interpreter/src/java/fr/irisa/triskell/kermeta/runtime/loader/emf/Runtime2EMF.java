@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.46 2006-10-27 08:27:32 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.47 2006-11-16 14:10:16 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Vector;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -32,6 +33,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 //import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
@@ -113,23 +116,29 @@ public class Runtime2EMF {
 		// save() method (in Kermeta side)
 		// Important : *On save process*, unit.getContentMap contains the
 		// "instances" collection (which equals contentMap entry "rootContents").
+		if (unit.getContentMap() == null) return; //there is nothing to update here, the resource was created but never loaded 
+			// and nothing added to it. this is still useful in some case since it may help emf to save dependent files 
 		ArrayList<RuntimeObject> instances = Collection.getArrayList(unit.getContentMap());
 		// Get each instance and convert it in an EObject
 		// (Instances only contain the root elements of the resource to save)
+		internalLog.debug("updateEMFModel phase 1 : create a list of all RuntimeObject that are involved ");
 		for (RuntimeObject ro : instances)
 		{ fillRuntimeObjectList(ro); }
 		// Now that we have the complete list of runtime objects, we can update
 		// the properties of each of those runtime objects. The mapping between
 		// RuntimeObject and EObject to update is done through the
 		// entry { "r2e.emfObject" : EObject } in RuntimeObject.data hashtable.
+		internalLog.debug("updateEMFModel phase 2 : get/create the associated EObject, update the properties ");
 		for (RuntimeObject ro : runtimeObjects)
 		{	setEObjectPropertiesFromRuntimeObject(ro); }
 
+		
+		
 		// Add the root elements to the XMI resource
 		// Note: emfObject2 entry is only used for eObject retrieval during the
 		// save process!
 		for (RuntimeObject o : instances)
-		{	resource.getContents().add(o.getData().get("r2e.emfObject")); }
+		{	resource.getContents().add(o.getData().get("r2e.emfObject")); }	
 	}
 
 	/**
@@ -146,6 +155,16 @@ public class Runtime2EMF {
 					|| RuntimeObjectHelper.isanEnumerationLiteral(rObject)
 					|| RuntimeObjectHelper.isanEnumeration(rObject)) )
 		{
+			EObject kcoreObject = (EObject)rObject.getData().get("kcoreObject");
+			if(kcoreObject != null){
+				// ignore objects from the kermeta program itself but only if it comes from a model				
+				// ie. that where loaded and typechecked => they should not be changed dynamicaly
+				// this greatly improve the performance of the save ...
+				if (kcoreObject.eResource() != null){
+					internalLog.debug("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getData().get("kcoreObject")).eClass().getName());
+					return;
+				}
+			}
 			runtimeObjects.add(rObject);
 			// Now, get the RO repr. of the properties of this object
 			for (String prop_name : rObject.getProperties().keySet())
@@ -184,6 +203,13 @@ public class Runtime2EMF {
 	 */
 	protected void setEObjectPropertiesFromRuntimeObject(RuntimeObject rObject) {
 		EObject eObject = createEObjectFromRuntimeObject(rObject);
+		if(eObject != null) 
+			if(eObject.equals(rObject.getData().get("kcoreObject")))
+			{
+				//	do not update objects from the framework it self (this is may be due to bug #156 the reflexion seem to not be complete and the save crashes ...
+				internalLog.debug("     Ignoring update of framework EObject : "+eObject.eClass().getName());
+				return;
+			}
 		EStructuralFeature feature = null; 
 		
 		// Get all the Structural features of requested eObject
@@ -229,15 +255,17 @@ public class Runtime2EMF {
 						Object p_o = getOrCreatePropertyFromRuntimeObject((RuntimeObject) rcoll, feature);
 						if (p_o != null) { ((EList) eObject.eGet(feature)).add(p_o); }
 					}
-					internalLog.debug("     "+ rObject + "; \n" +
-							"     "+
-					eObject + "; \n" +
-					eObject.eClass().getName() + "."  + feature.getName() + "; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());
+					internalLog.debug("     "+ rObject + "; \n\t" +
+							eObject + "; \n\t" +
+							eObject.eClass().getName() + "."  + feature.getName() + 
+							"; num. of elts in feature : " + ((EList) eObject.eGet(feature)).size());
 				}
 				else // EObject, EClass, EDataType
 				{
 					Object p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
 					eObject.eSet(feature, p_o);
+					if (p_o == null) {
+						internalLog.warn("    setting null to "+ eObject.eClass().getName() + "."  + feature.getName() + "");}
 				}
 			}
 			
@@ -344,6 +372,13 @@ public class Runtime2EMF {
 					rObject.getData().put("r2e.emfObject", result);
 				}
 			} 
+			else if( rObject.getData().containsKey("emfObject")){
+				// this object was loaded from a resoure 
+				// do not create a new EMF object, reuse the existing one (in order to keep the resource)				
+				result = (EObject)rObject.getData().get("emfObject");
+				rObject.getData().put("r2e.emfObject", result);
+				
+			}
 			else
 			{
 				EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);

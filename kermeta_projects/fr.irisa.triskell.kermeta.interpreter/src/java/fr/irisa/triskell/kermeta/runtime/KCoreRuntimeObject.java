@@ -1,4 +1,4 @@
-/* $Id: KCoreRuntimeObject.java,v 1.2 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: KCoreRuntimeObject.java,v 1.3 2006-11-16 14:10:16 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KCoreRuntimeObject.java
 * License : GPL
@@ -34,6 +34,8 @@ public class KCoreRuntimeObject extends RuntimeObject {
         super(factory, metaclass);
         this.kcoreObject = kcoreObject;
         super.getData().put("kcoreObject", kcoreObject);
+        // in order to serialise model that have dependencies to the framework, set the saved emf object to the one used to load it
+        super.getData().put("r2e.emfObject", kcoreObject);
     }
     
     private void load() {
