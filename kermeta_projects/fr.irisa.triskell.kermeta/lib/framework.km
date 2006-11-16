@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
-  <kermeta_language_structure:Package tag="/318" name="kermeta">
+  <kermeta_language_structure:Package tag="/320" name="kermeta">
     <nestedPackage tag="/1 /2" name="standard">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/3" name="Void">
         <ownedOperation name="isVoid" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.17">
@@ -8386,6 +8386,9 @@
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                 </containedType>
               </parameters>
+              <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+              </parameters>
             </statement>
           </body>
         </ownedOperation>
@@ -8406,40 +8409,62 @@
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                 </containedType>
               </parameters>
+              <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0"/>
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation name="load" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.2">
+        <ownedOperation tag="/307" name="saveAndValidateWithEMF" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="save">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.1"/>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" name="uri" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.0">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@parameters.0/@containedType.0"/>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" name="metaModelURI" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.1"/>
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="EMF"/>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@parameters.4/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
+                  <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                </containedType>
+              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0" value="true"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="load" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.2">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.3/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@containedType.0" identifier="e">
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.0/@containedType.0" identifier="e">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.6"/>
-              <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@initialization/@containedType.0" name="new" staticOperation="/0/@nestedPackage.1/@nestedPackage.0/@ownedTypeDefinition.6/@ownedOperation.0">
+              <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.0/@initialization/@containedType.0" name="new" staticOperation="/0/@nestedPackage.1/@nestedPackage.0/@ownedTypeDefinition.6/@ownedOperation.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.6"/>
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.0/@value/@target/@containedType.0">
-                  <typeref type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@initialization/@containedType.0" upper="1"/>
+                  <typeref type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.0/@initialization/@containedType.0" upper="1"/>
                 </target>
               </initialization>
-              <type type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+              <type type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.1/@containedType.0" isCast="true">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@containedType.0" isCast="true">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
                 <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-                <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.1/@containedType.0/@typeParamBinding.1/@containedType.0">
+                <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@containedType.0/@typeParamBinding.1/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                     <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                   </containedType>
                 </typeParamBinding>
               </containedType>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.1/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="load">
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" name="uri" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" name="metaModelURI" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.1"/>
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="EMF"/>
-                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.1/@value/@parameters.3/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.3/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
                     <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.1/@value/@parameters.3/@containedType.0/@typeParamBinding.1/@containedType.0">
+                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.3/@containedType.0/@typeParamBinding.1/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                         <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                       </containedType>
@@ -8452,28 +8477,28 @@
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.1/@body/@containedType.0">
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.3/@ownedTypeDefinition.8/@ownedOperation.3/@body/@containedType.0" name="writeln" staticOperation="/0/@nestedPackage.5/@ownedTypeDefinition.0/@ownedOperation.1">
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="Resource load failed!"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0" name="stdio">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0" name="stdio">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.5/@ownedTypeDefinition.0"/>
                   </target>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:Raise" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.1/@body/@containedType.0">
-                  <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.0/@containedType.0" name="e"/>
+                  <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.0/@containedType.0" name="e"/>
                 </statement>
               </thenBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0" name="isSameAs" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.7/@ownedOperation.0">
-                <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.2/@condition/@parameters.0/@containedType.0">
+                <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.2/@condition/@parameters.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.8/@containedType.0" name="size" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.8">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.2/@condition/@target/@target/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.2/@condition/@target/@target/@containedType.0" name="getValue" staticOperation="/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                       <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                     </containedType>
                     <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="allRootContents"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.2/@condition/@target/@target/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.2/@condition/@target/@target/@target/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
                         <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-                        <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.2/@condition/@target/@target/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
+                        <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.2/@condition/@target/@target/@target/@containedType.0/@typeParamBinding.1/@containedType.0">
                           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                             <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                           </containedType>
@@ -8485,19 +8510,19 @@
               </condition>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.2/@containedType.0" name="clear" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.2">
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.3/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.3/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                 </containedType>
               </target>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.3/@containedType.0" name="addAll" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.3">
-              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.4/@parameters.0/@containedType.0" name="rootContents" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.4/@parameters.0/@containedType.0" name="rootContents" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.6">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                 </containedType>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3/@body/@statement.4/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.4/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                 </containedType>
@@ -8505,13 +8530,13 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation name="add" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.3">
+        <ownedOperation name="add" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.5/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.3">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="instance" type="/0/@nestedPackage.0/@ownedTypeDefinition.12" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.0/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.0/@containedType.0" name="add" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.0">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.12" name="instance"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.0/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.5/@body/@statement.0/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                 </containedType>
@@ -8526,7 +8551,7 @@
               <thenBody xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.12">
                 <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.1/@containedType.0" name="remove" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.1">
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.12" name="instance"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.5/@body/@statement.0/@thenBody/@statement.0/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@thenBody/@statement.0/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                       <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                     </containedType>
@@ -8545,7 +8570,7 @@
               </elseBody>
               <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.4/@containedType.0" name="contains" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.4">
                 <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.12" name="instance"/>
-                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.5/@body/@statement.0/@condition/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@condition/@target/@containedType.0" name="instances" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.3">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
                     <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                   </containedType>
@@ -8554,53 +8579,52 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/307" name="isInTypeDefSet" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/308" name="isInTypeDefSet" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
-          <ownedParameter name="tparams" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <ownedParameter name="tparams" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.14">
-              <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+              <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.14/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.2/@ownedTypeDefinition.27"/>
               </typeParamBinding>
             </containedType>
           </ownedParameter>
           <ownedParameter name="new_instance" type="/0/@nestedPackage.0/@ownedTypeDefinition.12" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.1/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0">
-              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Loop" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.1/@body/@containedType.0">
-              <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@containedType.0" identifier="it">
+              <initialization xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@containedType.0" identifier="it">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.19">
-                  <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.2/@ownedTypeDefinition.27"/>
                   </typeParamBinding>
                 </containedType>
-                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@initialization/@containedType.0" name="iterator" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.10">
+                <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@initialization/@containedType.0" name="iterator" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.10">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.19">
-                    <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0"/>
+                    <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@ownedParameter.0/@containedType.0/@typeParamBinding.0/@containedType.0"/>
                   </containedType>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@ownedParameter.0/@containedType.0" name="tparams"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@ownedParameter.0/@containedType.0" name="tparams"/>
                 </initialization>
-                <type type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@containedType.0" isOrdered="true" upper="1"/>
+                <type type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@containedType.0" isOrdered="true" upper="1"/>
               </initialization>
-              <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0">
-                <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@body/@statement.0/@containedType.0" identifier="next">
+              <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@body/@statement.0/@containedType.0" identifier="next">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.1/@nestedPackage.0/@ownedTypeDefinition.28"/>
-                  <type type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                  <type type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@body/@statement.0/@containedType.0" isCast="true">
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@body/@statement.0/@containedType.0" name="next"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0" name="next" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.19/@ownedOperation.2">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@containedType.0" name="it"/>
+                <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@body/@statement.0/@containedType.0" isCast="true">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@body/@statement.0/@containedType.0" name="next"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@containedType.0/@typeParamBinding.0/@containedType.0" name="next" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.19/@ownedOperation.2">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@containedType.0" name="it"/>
                   </value>
                 </statement>
-                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0">
-                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0">
-                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0">
-                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@containedType.0" name="result"/>
-                      <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0" value="true"/>
+                <statement xsi:type="kermeta_language_behavior:Conditional" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0">
+                  <thenBody xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0">
+                    <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0">
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@containedType.0" name="result"/>
+                      <value xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0" value="true"/>
                     </statement>
                   </thenBody>
                   <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.10/@ownedOperation.3/@containedType.0" name="equals" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.10/@ownedOperation.3">
@@ -8612,18 +8636,18 @@
                       </target>
                     </parameters>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.2/@ownedTypeDefinition.0" name="qualifiedName" staticOperation="/0/@nestedPackage.2/@ownedTypeDefinition.23/@ownedOperation.0">
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@body/@statement.0/@containedType.0" name="next"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@body/@statement.0/@containedType.0" name="next"/>
                     </target>
                   </condition>
                 </statement>
               </body>
               <stopCondition xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.5/@ownedOperation.5/@containedType.0" name="or" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.5/@ownedOperation.5">
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.5/@ownedOperation.0/@containedType.0" name="isSameAs" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.5/@ownedOperation.0">
-                  <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.0/@containedType.0" value="true"/>
-                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@containedType.0" name="result"/>
+                  <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@parameters.5/@containedType.0" value="true"/>
+                  <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@containedType.0" name="result"/>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.4/@body/@statement.1/@stopCondition/@target/@containedType.0" name="isOff" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.19/@ownedOperation.0">
-                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6/@body/@statement.1/@initialization/@containedType.0" name="it"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7/@body/@statement.1/@initialization/@containedType.0" name="it"/>
                 </target>
               </stopCondition>
             </statement>
@@ -8655,11 +8679,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/308" name="Repository" isAbstract="true">
-        <ownedAttribute tag="/309" name="resources" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedAttribute.0/@containedType.0" upper="-1" opposite="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.4" isComposite="true">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/309" name="Repository" isAbstract="true">
+        <ownedAttribute tag="/310" name="resources" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedAttribute.0/@containedType.0" upper="-1" opposite="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.4" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
         </ownedAttribute>
-        <ownedOperation tag="/310 /311" name="createResource" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+        <ownedOperation tag="/311 /312" name="createResource" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
           <ownedParameter name="uri" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
@@ -8668,7 +8692,7 @@
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation tag="/312 /313" name="getResource" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/313 /314" name="getResource" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
           <ownedParameter name="uri" type="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
@@ -8744,8 +8768,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/314" name="EMFRepository" superType="/0/@nestedPackage.8/@ownedTypeDefinition.4/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/315" name="EMFRepository" superType="/0/@nestedPackage.8/@ownedTypeDefinition.4/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.3"/>
+        <ownedAttribute tag="/316" name="useInterpreterInternalResources" type="/0/@nestedPackage.8/@ownedTypeDefinition.4/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+        </ownedAttribute>
         <ownedOperation name="createResource" type="/0/@nestedPackage.8/@ownedTypeDefinition.4/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.0">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
           <ownedParameter name="uri" type="/0/@nestedPackage.8/@ownedTypeDefinition.4/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
@@ -8808,7 +8835,7 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/315" name="KMRepository" superType="/0/@nestedPackage.8/@ownedTypeDefinition.5/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/317" name="KMRepository" superType="/0/@nestedPackage.8/@ownedTypeDefinition.5/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.3"/>
         <ownedOperation name="createResource" type="/0/@nestedPackage.8/@ownedTypeDefinition.5/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.0">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.0"/>
@@ -8828,13 +8855,13 @@
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.1/@body/@containedType.0"/>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/316" name="ResourceLoadException" superType="/0/@nestedPackage.8/@ownedTypeDefinition.6/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/318" name="ResourceLoadException" superType="/0/@nestedPackage.8/@ownedTypeDefinition.6/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.6/@ownedTypeDefinition.0"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ResourceSaveException" superType="/0/@nestedPackage.8/@ownedTypeDefinition.7/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.6/@ownedTypeDefinition.0"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/317" name="ResourceUnconformityException" superType="/0/@nestedPackage.8/@ownedTypeDefinition.8/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/319" name="ResourceUnconformityException" superType="/0/@nestedPackage.8/@ownedTypeDefinition.8/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.6/@ownedTypeDefinition.0"/>
       </ownedTypeDefinition>
     </nestedPackage>
@@ -9145,7 +9172,8 @@
   <kermeta_language_structure:Tag name="documentation" value="/** Remove an instance from the Resource */" object="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.4"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1"/>
   <kermeta_language_structure:Tag name="documentation" value="/** &#xD;&#xA;  * Create an hashtable with appropriates keys and empty collections. This method &#xD;&#xA;  * should not be called by the end-user&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.0"/>
-  <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Helper that returns true if new_instance type is in the tparam Set, false otherwise&#xD;&#xA;  * FIXME : Loop-and-cast done in order to temporarily get round the type &#xD;&#xA;  * system limits for reflection&#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.6"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** save and check the resource using the EMF validation function&#xD;&#xA;  * apply the validate on all the object in the root of this resource&#xD;&#xA;  * returns true if the validation reports no error&#xD;&#xA;  * otherwise raises exceptions&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3"/>
+  <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Helper that returns true if new_instance type is in the tparam Set, false otherwise&#xD;&#xA;  * FIXME : Loop-and-cast done in order to temporarily get round the type &#xD;&#xA;  * system limits for reflection&#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.7"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Abstract resource container, that contains a list of available loaded resources, &#xD;&#xA; * and methods to create or get a resource given an URI.&#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.3"/>
   <kermeta_language_structure:Tag name="documentation" value="/** The resources created by this repository */" object="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedAttribute.0"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Create a resource with given uri. &#xD;&#xA;  * params : &#xD;&#xA;  *    - uri : the uri where to save the model handled by the resource&#xD;&#xA;  *    - mm_uri : the uri of the metamodel of which model is an instance&#xD;&#xA;  * User must provide the mm_uri if he creates a new model from scratch.&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.0"/>
@@ -9153,6 +9181,7 @@
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. &#xD;&#xA;  * This suppose that this URI resource was already created in this Repository.&#xD;&#xA;  * If this resource wasn't already created it will silently create&#xD;&#xA;  * and load a new one. In this case, the &#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.1"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xD;&#xA;  * and load a new one if a resource with this uri was not found.&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.3/@ownedOperation.1"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.4"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** &#xD;&#xA;  * If true, tells to the save of the resources that they should also integrate the resources from Kermeta interpreter itself&#xD;&#xA;  * this is usefull for example to make a dependency to framework.km&#xD;&#xA;  * by default, not setting this is considered as false.&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.4/@ownedAttribute.0"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.5"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Specialized exceptions */" object="/0/@nestedPackage.8/@ownedTypeDefinition.6"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Raised when user tries to add an object that is not conform to the metamodel */" object="/0/@nestedPackage.8/@ownedTypeDefinition.8"/>
