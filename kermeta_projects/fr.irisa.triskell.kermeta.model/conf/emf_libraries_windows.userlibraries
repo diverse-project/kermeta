@@ -6,5 +6,8 @@
 <archive path="C:/eclipse3.2/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
 <archive path="C:/eclipse3.2/eclipse/plugins/org.eclipse.emf.validation_1.0.0.v200606261144.jar"/>
 <archive path="C:/eclipse3.2/eclipse/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
+<archive path="C:/eclipse3.2/eclipse/plugins/org.eclipse.osgi_3.2.0.v20060601.jar"/>
+<archive path="C:/eclipse3.2/eclipse/plugins/org.eclipse.core.runtime_3.2.0.v20060603.jar"/>
+<archive path="C:/eclipse3.2/eclipse/plugins/org.eclipse.equinox.registry_3.2.0.v20060601.jar"/>
 </library>
 </eclipse-userlibraries>

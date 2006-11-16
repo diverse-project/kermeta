@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eclipse-userlibraries version="1">
     <library name="emf_libraries" systemlibrary="false">
-        <archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.common_2.0.1/runtime/common.jar"/>
-        <archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.ecore_2.0.1/runtime/ecore.jar"/>
-        <archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.ecore.xmi_2.0.1/runtime/ecore.xmi.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar" source="C:/eclipse3.2/eclipse/plugins/org.eclipse.emf.source_2.2.0.v200606271057/src/org.eclipse.emf.ecore_2.2.0.v200606271057/src.zip"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
 		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.emf.validation_1.0.0.v200606261144.jar"/>
 		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.osgi_3.2.0.v20060601.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.core.runtime_3.2.0.v20060603.jar"/>
+		<archive path="/opt/apps/eclipse/eclipse3.0-dev/plugins/org.eclipse.equinox.registry_3.2.0.v20060601.jar"/>
     </library>
 </eclipse-userlibraries>
