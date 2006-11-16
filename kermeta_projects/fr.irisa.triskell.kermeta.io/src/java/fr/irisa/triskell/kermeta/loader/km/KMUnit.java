@@ -1,4 +1,4 @@
-/* $Id: KMUnit.java,v 1.13 2006-05-03 15:04:11 zdrey Exp $
+/* $Id: KMUnit.java,v 1.14 2006-11-16 13:52:48 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : 	KMUnit.java
 * License : EPL
@@ -56,7 +56,7 @@ public class KMUnit extends KermetaUnit {
 	/**
 	 * The resource that contains a kermeta program in its EMF representation
 	 */
-	Resource resource ;
+	public Resource resource ;
 	
 	
 	public KMUnit(String uri, Hashtable packages, Resource res) {
