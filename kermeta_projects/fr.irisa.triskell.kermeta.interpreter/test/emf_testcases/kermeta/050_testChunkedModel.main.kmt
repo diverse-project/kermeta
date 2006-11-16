@@ -43,10 +43,10 @@ class Main inherits kermeta::kunit::Test
     
     operation loadClassModel() : Set<C1> is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		//var resource : Resource init repository.createResource("../test/emf_testcases/instances/050_ModelChunk1.xmi","../metamodels/050_MM_with_no_containment_tree.ecore")
+   		//var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk1.xmi","platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/050_MM_with_no_containment_tree.ecore")
    		var resource : Resource init repository.createResource(
-   		"../test/emf_testcases/instances/050_ModelChunk1.xmi",
-   		"../test/emf_testcases/metamodels/050_MM_with_no_containment_tree.ecore")
+   		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk1.xmi",
+   		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/050_MM_with_no_containment_tree.ecore")
    		
    		resource.load()      
        

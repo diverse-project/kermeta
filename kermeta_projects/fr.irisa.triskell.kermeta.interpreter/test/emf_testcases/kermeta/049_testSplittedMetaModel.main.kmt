@@ -38,8 +38,8 @@ class Main inherits kermeta::kunit::Test
     operation loadClassModel() : Set<P1::C1> is do             
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource(
-   		"../test/emf_testcases/instances/049_simplemodel_C1.xmi",
-   		"../test/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
+   		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/049_simplemodel_C1.xmi",
+   		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
    		resource.load()      
        
        	result := Set<P1::C1>.new
