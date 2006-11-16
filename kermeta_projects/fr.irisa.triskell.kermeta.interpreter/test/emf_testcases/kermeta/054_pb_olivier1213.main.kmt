@@ -1,4 +1,4 @@
-/* $Id: 054_pb_olivier1213.main.kmt,v 1.1 2006-11-16 13:49:53 dvojtise Exp $
+/* $Id: 054_pb_olivier1213.main.kmt,v 1.2 2006-11-16 14:34:43 dvojtise Exp $
  * Creation date: November 7, 2006
  * License:
  * Copyright:
@@ -31,11 +31,11 @@ class Test
 	    _repository:= EMFRepository.new
 		
 		stdio.writeln("loading km user model...")
-		firstModel ?= _repository.createResource("../instances/054_pb_olivier.km", kermetaMeta)
+		firstModel ?= _repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/054_pb_olivier.km", kermetaMeta)
 		firstModel.load
 		stdio.writeln("saving km user model...")
 		// save to another location
-		firstModel.uri:= "../output/054_pb_olivier_out.km"
+		firstModel.uri:= "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/output/054_pb_olivier_out.km"
 		firstModel.saveAndValidateWithEMF()
 		stdio.writeln("done")
     end
