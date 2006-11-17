@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.11 2006-07-26 12:09:49 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.12 2006-11-17 10:54:14 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -35,7 +35,8 @@
     <property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar"/>
 	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar"/>
 	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
-	
+	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.0.0.v200606261144.jar"/>
+		
 	<path id="interpreter.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${kermeta.io.jar}"/>
@@ -44,6 +45,7 @@
 	    <pathelement location="${emf.common.jar}"/>
 	    <pathelement location="${emf.ecore.jar}"/>
 	    <pathelement location="${emf.ecore.xmi.jar}"/>
+	    <pathelement location="${emf.validation.jar}"/>
 	    <pathelement location="${log4j.jar}"/>
 	    <pathelement location="${antlr.jar}"/>
 	    <pathelement location="${ldt-core.jar}"/>
