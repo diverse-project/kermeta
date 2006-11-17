@@ -2,9 +2,8 @@
 <feature
       id="fr.irisa.triskell.traceability.feature"
       label="Traceability Framework"
-      version="0.0.2"
+      version="0.0.3"
       provider-name="INRIA/IRISA">
-
    <install-handler/>
 
    <description url="[Enter Feature URL here.]">
@@ -65,18 +64,18 @@ License (&quot;EPL&quot;).
          id="fr.irisa.triskell.traceability"
          download-size="0"
          install-size="0"
-         version="0.0.2"/>
+         version="0.0.0"/>
 
    <plugin
          id="fr.irisa.triskell.traceability.edit"
          download-size="0"
          install-size="0"
-         version="0.0.2"/>
+         version="0.0.0"/>
 
    <plugin
          id="fr.irisa.triskell.traceability.editor"
          download-size="0"
          install-size="0"
-         version="0.0.2"/>
+         version="0.0.0"/>
 
 </feature>
