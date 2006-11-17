@@ -1,0 +1,15 @@
+/* $Id: 004_cyclicCompositions_05.kmt,v 1.1 2006-11-17 09:05:14 dvojtise Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* cyclic composition */
+class A {
+    attribute b : B[0..1]#a
+}
+class B {
+	attribute a : A[0..*]#b
+}
+
