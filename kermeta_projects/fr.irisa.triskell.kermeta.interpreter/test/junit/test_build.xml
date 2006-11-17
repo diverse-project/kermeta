@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.12 2006-11-17 10:54:14 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.13 2006-11-17 12:49:26 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -36,7 +36,8 @@
 	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar"/>
 	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
 	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.0.0.v200606261144.jar"/>
-		
+	<property name="equinox.common.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
+	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.2.0.v20060601.jar"/>
 	<path id="interpreter.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${kermeta.io.jar}"/>
@@ -46,6 +47,8 @@
 	    <pathelement location="${emf.ecore.jar}"/>
 	    <pathelement location="${emf.ecore.xmi.jar}"/>
 	    <pathelement location="${emf.validation.jar}"/>
+	    <pathelement location="${equinox.common.jar}"/>
+	    <pathelement location="${equinox.registry.jar}"/>
 	    <pathelement location="${log4j.jar}"/>
 	    <pathelement location="${antlr.jar}"/>
 	    <pathelement location="${ldt-core.jar}"/>
