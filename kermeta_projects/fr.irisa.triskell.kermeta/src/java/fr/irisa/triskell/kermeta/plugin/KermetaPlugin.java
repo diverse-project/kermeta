@@ -78,6 +78,8 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		}
 		if(StdLibKermetaUnitHelper.STD_LIB_URI == null) StdLibKermetaUnitHelper.setURItoDefault();
 		
+		// check the compatibility of dependent  stuff ... 
+		new CompatibilityChecker().check();
 	}
 
 	/**
