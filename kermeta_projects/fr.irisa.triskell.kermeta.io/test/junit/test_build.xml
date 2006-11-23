@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.10 2006-07-25 13:36:28 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.11 2006-11-23 14:38:00 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -166,5 +166,19 @@
 		  <!--<report format="frames" todir="${report.dir}/html" styledir="./report_stylesheet"/>-->
 		  <report format="frames" todir="${report.dir}/html" />
 		</junitreport>
+		<!-- generate the Build date -->
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+		<copy file="${report.dir}/html/overview-summary.html" 
+					tofile="${report.dir}/html/overview-summary_tmp.html"
+					filtering="true"
+					overwrite="true"/>
+
+		<copy file="${report.dir}/html/overview-summary_tmp.html" 
+					tofile="${report.dir}/html/overview-summary.html"
+					filtering="true"
+					overwrite="true"/>
 	</target>
 </project>
