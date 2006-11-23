@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PolymorphicCondItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: PolymorphicCondItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,6 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import sts.Condition;
 import sts.PolymorphicCond;
 import sts.StsPackage;
 
@@ -100,13 +102,25 @@ public class PolymorphicCondItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((PolymorphicCond)object).getValue();
-		return label == null || label.length() == 0 ?
-			getString("_UI_PolymorphicCond_type") :
-			getString("_UI_PolymorphicCond_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_PolymorphicCond_type"));
+        tmp.append(" ");
+        EClass c = ((PolymorphicCond)object).getMetaclass();
+        if (c != null) {
+        	String name = c.getName();
+        	if (name != null && name.length() != 0) {
+        		tmp.append(name);
+        	}
+		}
+        String value = ((Condition)object).getValue();
+        if (value != null && value.length() > 0) {
+            tmp.append(" == ");
+            tmp.append(value);
+        }
+        return tmp.toString();
 	}
 
 	/**

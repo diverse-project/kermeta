@@ -6,20 +6,15 @@
  */
 package fr.irisa.triskell.sintaks.parser.ll;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import fr.irisa.triskell.sintaks.lexer.ILexer;
-import fr.irisa.triskell.sintaks.parser.IParser;
-import fr.irisa.triskell.sintaks.parser.ModelParser;
-import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
-import fr.irisa.triskell.sintaks.subject.Feature;
-import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Constant;
 import sts.Rule;
+import fr.irisa.triskell.sintaks.lexer.ILexer;
+import fr.irisa.triskell.sintaks.parser.IParser;
+import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
+import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 public class ParserConstant implements IParser {
 
@@ -30,25 +25,27 @@ public class ParserConstant implements IParser {
 	}
 
 	public boolean parse(ILexer input) throws ParserSemanticException {
-		EList fList = value.getFeatures();
-		
-		if (fList.isEmpty())
-            //throw new ParserSemanticException ("Constant : feature "+((EClass) feature.eContainer()).getName()+"."+feature.getName()+" inaceptable");
-			throw new ParserSemanticException ("Constant inaceptable");
-
-        String text = value.getValue();
-        
-        Iterator it = fList.iterator();
-        while(it.hasNext()) {
-        	Feature attribute = new Feature((EStructuralFeature) it.next());
-        	
-    		if(! subject.setAttribute (attribute, text)) {
-    			return false;
-    		}
+		EList features = value.getFeatures();
+        String textRead = value.getValue();
+//TODO should be converted in each kind of constant ecore and the MM supports
+//like in Value
+        String value = new String (textRead);
+        boolean ok;
+        if (value != null) {
+	        if(! features.isEmpty()) {
+	        	ok = subject.setFeatures(features, value);
+	        } else {
+	        	subject.push(value);
+	        	ok = true;
+	        }
+	        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+	        	SintaksPlugin.getDefault().debugln ("Accepted Constant : "+value);
+        } else {
+        	ok = false;
+	        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+	        	SintaksPlugin.getDefault().debugln ("Refused Constant : "+value);
         }
-        
-        if (ModelParser.debugParser) System.out.println ("Accepted Constant : "+text);
-		return true;
+		return ok;
 	}
 
 	private Constant value;

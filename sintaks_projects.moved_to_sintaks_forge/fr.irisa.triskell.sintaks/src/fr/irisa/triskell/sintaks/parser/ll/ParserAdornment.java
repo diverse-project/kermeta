@@ -26,5 +26,6 @@ public class ParserAdornment implements IParser {
 		return true;
 	}
 
+	@SuppressWarnings("unused")
 	private Adornment adornment;
 }

@@ -26,8 +26,10 @@ public class PrinterTemplate implements IPrinter {
         EClass metaClass = template.getMetaclass();
         if (metaClass == null)
             throw new PrinterSemanticException ("Template : metaClass "+metaClass.getName()+" inaceptable");
-        IPrinter printer = PrinterRule.findPrinter (template.getRule(), subject);
-		printer.print(output);
+        if (template.getRule() != null) {
+        	IPrinter printer = PrinterRule.findPrinter (template.getRule(), subject);
+        	printer.print(output);
+        }
     }
     
 	private Template template;

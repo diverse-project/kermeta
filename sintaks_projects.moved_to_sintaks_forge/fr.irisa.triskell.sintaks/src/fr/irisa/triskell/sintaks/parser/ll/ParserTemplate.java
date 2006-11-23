@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 
 import fr.irisa.triskell.sintaks.lexer.ILexer;
 import fr.irisa.triskell.sintaks.parser.IParser;
-import fr.irisa.triskell.sintaks.parser.ModelParser;
 import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 
@@ -30,21 +30,24 @@ public class ParserTemplate implements IParser {
 	public boolean parse(ILexer input) throws ParserSemanticException {
 		EClass metaClass = template.getMetaclass();
 		if (metaClass == null)
-			throw new ParserSemanticException ("Template : metaClass "+metaClass.getName()+" inaceptable");
+			throw new ParserSemanticException ("Template : metaClass (null) unaceptable");
 
         EObject object = subject.createInstance(metaClass);
         if (object == null)
-			throw new ParserSemanticException ("Template : metaClass "+metaClass.getName()+" inaceptable");
+			throw new ParserSemanticException ("Template : metaClass "+metaClass.getName()+" unaceptable");
 
-        if (ModelParser.debugParser)
-            System.out.println ("Template : metaClass "+metaClass.getName()+" created");
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+        	SintaksPlugin.getDefault().debugln ("Template : metaClass "+metaClass.getName()+" created");
         subject.push(object);
-        IParser parser = ParserRule.findParser(template.getRule(), subject);
-        boolean ok = parser.parse(input);
-		if (ok == false) {
-	        subject.pop();
-		}
-		return ok;
+        boolean ok = true;
+        if (template.getRule() != null) {
+	        IParser parser = ParserRule.findParser(template.getRule(), subject);
+	        ok = parser.parse(input);
+			if (ok == false) {
+		        subject.pop();
+			}
+        }
+        return ok;
 	}
 
 	private Template template;

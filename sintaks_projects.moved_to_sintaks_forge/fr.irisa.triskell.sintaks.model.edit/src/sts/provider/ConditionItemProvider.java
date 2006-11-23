@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: ConditionItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -173,22 +173,17 @@ public class ConditionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.CONDITION__SUB_RULE,
+				 StsFactory.eINSTANCE.createPrimitiveValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StsPackage.Literals.CONDITION__SUB_RULE,
 				 StsFactory.eINSTANCE.createObjectReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.CONDITION__SUB_RULE,
 				 StsFactory.eINSTANCE.createTemplate()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.CONDITION__SUB_RULE,
-				 StsFactory.eINSTANCE.createStringValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.CONDITION__SUB_RULE,
-				 StsFactory.eINSTANCE.createIntegerValue()));
 
 		newChildDescriptors.add
 			(createChildParameter

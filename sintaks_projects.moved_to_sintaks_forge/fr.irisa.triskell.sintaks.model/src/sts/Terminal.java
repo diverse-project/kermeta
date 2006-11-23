@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Terminal.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Terminal.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -16,7 +16,7 @@ package sts;
  * The following features are supported:
  * <ul>
  *   <li>{@link sts.Terminal#getTerminal <em>Terminal</em>}</li>
- *   <li>{@link sts.Terminal#isSeparator <em>Separator</em>}</li>
+ *   <li>{@link sts.Terminal#isLexicalSeparator <em>Lexical Separator</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,7 +36,7 @@ public interface Terminal extends Rule {
 	 * @return the value of the '<em>Terminal</em>' attribute.
 	 * @see #setTerminal(String)
 	 * @see sts.StsPackage#getTerminal_Terminal()
-	 * @model dataType="sts.String"
+	 * @model
 	 * @generated
 	 */
 	String getTerminal();
@@ -52,29 +52,29 @@ public interface Terminal extends Rule {
 	void setTerminal(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Separator</b></em>' attribute.
+	 * Returns the value of the '<em><b>Lexical Separator</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Separator</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Lexical Separator</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Separator</em>' attribute.
-	 * @see #setSeparator(boolean)
-	 * @see sts.StsPackage#getTerminal_Separator()
+	 * @return the value of the '<em>Lexical Separator</em>' attribute.
+	 * @see #setLexicalSeparator(boolean)
+	 * @see sts.StsPackage#getTerminal_LexicalSeparator()
 	 * @model
 	 * @generated
 	 */
-	boolean isSeparator();
+	boolean isLexicalSeparator();
 
 	/**
-	 * Sets the value of the '{@link sts.Terminal#isSeparator <em>Separator</em>}' attribute.
+	 * Sets the value of the '{@link sts.Terminal#isLexicalSeparator <em>Lexical Separator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Separator</em>' attribute.
-	 * @see #isSeparator()
+	 * @param value the new value of the '<em>Lexical Separator</em>' attribute.
+	 * @see #isLexicalSeparator()
 	 * @generated
 	 */
-	void setSeparator(boolean value);
+	void setLexicalSeparator(boolean value);
 
 } // Terminal

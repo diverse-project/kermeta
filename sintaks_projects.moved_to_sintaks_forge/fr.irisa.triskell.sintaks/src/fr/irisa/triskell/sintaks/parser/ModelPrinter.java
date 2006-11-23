@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IFile;
 import fr.irisa.triskell.sintaks.printer.IPrinter;
 import fr.irisa.triskell.sintaks.printer.PrinterAbstract;
 import fr.irisa.triskell.sintaks.printer.PrinterSemanticException;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Rule;
@@ -25,9 +26,6 @@ public class ModelPrinter {
 
     private MetaModelParser mmParser;
     private ModelSubject subject;
-    
-    static public boolean debugPrinter = true;
-    
     
     public ModelPrinter (MetaModelParser mmParser, ModelSubject subject) {
         this.mmParser = mmParser;
@@ -51,10 +49,10 @@ public class ModelPrinter {
 
     public void print (IFile ruleFile, String outputFilename) {
         Rule startSymbol = mmParser.getStartSymbol(ruleFile);
-        if (debugPrinter) {
-            System.out.print ("startSymbol=");
-            System.out.print (startSymbol);
-            System.out.println ();
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
+        	SintaksPlugin.getDefault().debug ("startSymbol=");
+        	SintaksPlugin.getDefault().debug (startSymbol.toString());
+        	SintaksPlugin.getDefault().debugln ("");
         }
         
         IPrinter printer = new PrinterAbstract (startSymbol, subject);
@@ -66,7 +64,7 @@ public class ModelPrinter {
                 stream.flush();
                 stream.close();
         	} else {
-        		PrintWriter writer = new PrintWriter (System.out);
+        		PrintWriter writer = new PrintWriter (SintaksPlugin.getDefault().getDebugStream());
         		printer.print(writer);
         		writer.flush();
         	}

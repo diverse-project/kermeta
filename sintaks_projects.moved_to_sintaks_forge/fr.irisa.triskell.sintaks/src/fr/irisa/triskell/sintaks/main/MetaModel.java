@@ -29,6 +29,7 @@ public class MetaModel implements IMetaModel {
 		this.resSet = rs;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void registers (String ext) {
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map m = reg.getExtensionToFactoryMap();
@@ -41,6 +42,7 @@ public class MetaModel implements IMetaModel {
 		root = resource.getContents().get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void store(IFile outputFile) {
 		URI uri = URI.createURI("platform:/resource" + outputFile.getFullPath().toString());
 		Resource resource = resSet.createResource(uri);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TerminalItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: TerminalItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import sts.Rule;
 import sts.StsPackage;
 import sts.Terminal;
 
@@ -62,7 +63,7 @@ public class TerminalItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTerminalPropertyDescriptor(object);
-			addSeparatorPropertyDescriptor(object);
+			addLexicalSeparatorPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,19 +91,19 @@ public class TerminalItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Separator feature.
+	 * This adds a property descriptor for the Lexical Separator feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSeparatorPropertyDescriptor(Object object) {
+	protected void addLexicalSeparatorPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Terminal_separator_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Terminal_separator_feature", "_UI_Terminal_type"),
-				 StsPackage.Literals.TERMINAL__SEPARATOR,
+				 getString("_UI_Terminal_lexicalSeparator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Terminal_lexicalSeparator_feature", "_UI_Terminal_type"),
+				 StsPackage.Literals.TERMINAL__LEXICAL_SEPARATOR,
 				 true,
 				 false,
 				 false,
@@ -125,13 +126,24 @@ public class TerminalItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((Terminal)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Terminal_type") :
-			getString("_UI_Terminal_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_Terminal_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        String terminal = ((Terminal)object).getTerminal();
+        if (terminal != null && terminal.length() != 0) {
+            tmp.append(terminal);
+        }
+        return tmp.toString();
 	}
 
 	/**
@@ -146,7 +158,7 @@ public class TerminalItemProvider
 
 		switch (notification.getFeatureID(Terminal.class)) {
 			case StsPackage.TERMINAL__TERMINAL:
-			case StsPackage.TERMINAL__SEPARATOR:
+			case StsPackage.TERMINAL__LEXICAL_SEPARATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

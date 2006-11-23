@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsPackageImpl.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: StsPackageImpl.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -19,7 +18,6 @@ import sts.Alternative;
 import sts.Condition;
 import sts.Constant;
 import sts.CustomCond;
-import sts.IntegerValue;
 import sts.Iteration;
 import sts.ObjectReference;
 import sts.PolymorphicCond;
@@ -28,7 +26,6 @@ import sts.Root;
 import sts.Rule;
 import sts.RuleRef;
 import sts.Sequence;
-import sts.StringValue;
 import sts.StsFactory;
 import sts.StsPackage;
 import sts.Template;
@@ -132,20 +129,6 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass stringValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass integerValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass rootEClass = null;
 
 	/**
@@ -175,13 +158,6 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * @generated
 	 */
 	private EClass uriValueEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType stringEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -319,7 +295,7 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAlternative_Condition() {
+	public EReference getAlternative_Conditions() {
 		return (EReference)alternativeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -364,7 +340,7 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTerminal_Separator() {
+	public EAttribute getTerminal_LexicalSeparator() {
 		return (EAttribute)terminalEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -508,24 +484,6 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getStringValue() {
-		return stringValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getIntegerValue() {
-		return integerValueEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRoot() {
 		return rootEClass;
 	}
@@ -535,7 +493,7 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRoot_Rules() {
+	public EReference getRoot_Fragments() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -607,15 +565,6 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getString() {
-		return stringEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public StsFactory getStsFactory() {
 		return (StsFactory)getEFactoryInstance();
 	}
@@ -648,14 +597,14 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 		createEReference(iterationEClass, ITERATION__SEPARATOR);
 
 		alternativeEClass = createEClass(ALTERNATIVE);
-		createEReference(alternativeEClass, ALTERNATIVE__CONDITION);
+		createEReference(alternativeEClass, ALTERNATIVE__CONDITIONS);
 
 		sequenceEClass = createEClass(SEQUENCE);
 		createEReference(sequenceEClass, SEQUENCE__SUB_RULES);
 
 		terminalEClass = createEClass(TERMINAL);
 		createEAttribute(terminalEClass, TERMINAL__TERMINAL);
-		createEAttribute(terminalEClass, TERMINAL__SEPARATOR);
+		createEAttribute(terminalEClass, TERMINAL__LEXICAL_SEPARATOR);
 
 		valueEClass = createEClass(VALUE);
 		createEReference(valueEClass, VALUE__FEATURES);
@@ -679,12 +628,8 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 		customCondEClass = createEClass(CUSTOM_COND);
 		createEReference(customCondEClass, CUSTOM_COND__FEATURE);
 
-		stringValueEClass = createEClass(STRING_VALUE);
-
-		integerValueEClass = createEClass(INTEGER_VALUE);
-
 		rootEClass = createEClass(ROOT);
-		createEReference(rootEClass, ROOT__RULES);
+		createEReference(rootEClass, ROOT__FRAGMENTS);
 		createEReference(rootEClass, ROOT__START);
 
 		ruleRefEClass = createEClass(RULE_REF);
@@ -696,9 +641,6 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 		createEAttribute(constantEClass, CONSTANT__VALUE);
 
 		uriValueEClass = createEClass(URI_VALUE);
-
-		// Create data types
-		stringEDataType = createEDataType(STRING);
 	}
 
 	/**
@@ -735,12 +677,10 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 		templateEClass.getESuperTypes().add(this.getRule());
 		polymorphicCondEClass.getESuperTypes().add(this.getCondition());
 		customCondEClass.getESuperTypes().add(this.getCondition());
-		stringValueEClass.getESuperTypes().add(this.getPrimitiveValue());
-		integerValueEClass.getESuperTypes().add(this.getPrimitiveValue());
 		ruleRefEClass.getESuperTypes().add(this.getValue());
 		adornmentEClass.getESuperTypes().add(this.getTerminal());
 		constantEClass.getESuperTypes().add(this.getValue());
-		uriValueEClass.getESuperTypes().add(this.getPrimitiveValue());
+		uriValueEClass.getESuperTypes().add(this.getValue());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(ruleEClass, Rule.class, "Rule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -748,34 +688,34 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 
 		initEClass(iterationEClass, Iteration.class, "Iteration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIteration_SubRule(), this.getRule(), null, "subRule", null, 1, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIteration_Container(), ecorePackage.getEStructuralFeature(), null, "container", null, 0, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIteration_Container(), ecorePackage.getEStructuralFeature(), null, "container", null, 1, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getIteration_Separator(), this.getRule(), null, "separator", null, 0, 1, Iteration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(alternativeEClass, Alternative.class, "Alternative", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAlternative_Condition(), this.getCondition(), null, "condition", null, 1, -1, Alternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAlternative_Conditions(), this.getCondition(), null, "conditions", null, 1, -1, Alternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sequenceEClass, Sequence.class, "Sequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSequence_SubRules(), this.getRule(), null, "subRules", null, 1, -1, Sequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(terminalEClass, Terminal.class, "Terminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTerminal_Terminal(), this.getString(), "terminal", null, 0, 1, Terminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTerminal_Separator(), ecorePackage.getEBoolean(), "separator", null, 0, 1, Terminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerminal_Terminal(), ecorePackage.getEString(), "terminal", null, 0, 1, Terminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerminal_LexicalSeparator(), ecorePackage.getEBoolean(), "lexicalSeparator", null, 0, 1, Terminal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getValue_Features(), ecorePackage.getEStructuralFeature(), null, "features", null, 1, -1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getValue_Features(), ecorePackage.getEStructuralFeature(), null, "features", null, 0, -1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(primitiveValueEClass, PrimitiveValue.class, "PrimitiveValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(primitiveValueEClass, PrimitiveValue.class, "PrimitiveValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(objectReferenceEClass, ObjectReference.class, "ObjectReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObjectReference_Identifier(), ecorePackage.getEStructuralFeature(), null, "identifier", null, 1, 1, ObjectReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCondition_SubRule(), this.getRule(), null, "subRule", null, 1, 1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCondition_SubRule(), this.getRule(), null, "subRule", null, 0, 1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCondition_Value(), ecorePackage.getEString(), "value", null, 0, 1, Condition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateEClass, Template.class, "Template", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplate_Metaclass(), ecorePackage.getEClass(), null, "metaclass", null, 1, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTemplate_Rule(), this.getRule(), null, "rule", null, 1, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTemplate_Rule(), this.getRule(), null, "rule", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(polymorphicCondEClass, PolymorphicCond.class, "PolymorphicCond", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPolymorphicCond_Metaclass(), ecorePackage.getEClass(), null, "metaclass", null, 1, 1, PolymorphicCond.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -783,12 +723,8 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 		initEClass(customCondEClass, CustomCond.class, "CustomCond", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCustomCond_Feature(), ecorePackage.getEStructuralFeature(), null, "feature", null, 1, 1, CustomCond.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(stringValueEClass, StringValue.class, "StringValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(integerValueEClass, IntegerValue.class, "IntegerValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRoot_Rules(), this.getRule(), null, "rules", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRoot_Fragments(), this.getRule(), null, "fragments", null, 1, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRoot_Start(), this.getRule(), null, "start", null, 1, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ruleRefEClass, RuleRef.class, "RuleRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -797,12 +733,9 @@ public class StsPackageImpl extends EPackageImpl implements StsPackage {
 		initEClass(adornmentEClass, Adornment.class, "Adornment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(constantEClass, Constant.class, "Constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConstant_Value(), ecorePackage.getEString(), "value", null, 0, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstant_Value(), ecorePackage.getEString(), "value", null, 1, 1, Constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(uriValueEClass, URIValue.class, "URIValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Initialize data types
-		initEDataType(stringEDataType, String.class, "String", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -12,7 +12,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import fr.irisa.triskell.sintaks.subject.Feature;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Alternative;
@@ -30,9 +29,9 @@ public class PrinterAlternative implements IPrinter {
 	}
 
 	public void print(PrintWriter output) throws PrinterSemanticException {
-		EList list = alternative.getCondition();
+		EList list = alternative.getConditions();
 		if (list == null)
-			throw new PrinterSemanticException ("Alternative : alternatives "+alternative.getCondition()+" inaceptable");
+			throw new PrinterSemanticException ("Alternative : alternatives "+alternative.getConditions()+" inaceptable");
 
 		Iterator i = list.iterator();
 		while (i.hasNext()) {
@@ -43,10 +42,10 @@ public class PrinterAlternative implements IPrinter {
 			
 			if (o != null) {
 				Object tmp = null;
-				EStructuralFeature sf = null;
+				EStructuralFeature feature = null;
 				Condition cond = (Condition) o;
 				boolean doPop = false;
-				
+//TODO understand the purpose of this hack				
 				// In case of a PolymorphicCond, it may be necessary to push the property to be set
 				// onto the stack. It is here assumed that the subrule of a PolymorphicCond is a
 				// RuleRef (although the metamodel allows any kind of rule).
@@ -59,12 +58,10 @@ public class PrinterAlternative implements IPrinter {
 					Object subRule = cond.getSubRule();
 					if(subRule instanceof RuleRef) {
 						RuleRef rr = (RuleRef) subRule;
-						sf = null;
 						if(! rr.getFeatures().isEmpty() )
-							sf = (EStructuralFeature) rr.getFeatures().get(0);
-						
-						if(sf != null) {
-							tmp = subject.getAttribute( new Feature(sf) );
+							feature = (EStructuralFeature) rr.getFeatures().get(0);
+						if(feature != null) {
+							tmp = subject.getFeature(feature);
 							subject.push(tmp);
 							doPop = true;
 						}

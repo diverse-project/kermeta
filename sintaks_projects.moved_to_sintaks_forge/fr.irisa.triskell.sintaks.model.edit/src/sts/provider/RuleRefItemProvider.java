@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleRefItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: RuleRefItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -22,6 +23,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import sts.Rule;
 import sts.RuleRef;
 import sts.StsPackage;
 
@@ -100,13 +102,34 @@ public class RuleRefItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((RuleRef)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_RuleRef_type") :
-			getString("_UI_RuleRef_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_RuleRef_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        EList features = ((RuleRef)object).getFeatures();
+        if (features != null) {
+        	tmp.append(getFeatureAsString (features));
+        }
+        tmp.append(" ==> ");
+        sts.Rule ref = ((RuleRef)object).getRef();
+        if (ref != null) {
+        	String name = ref.getId();
+        	if (name != null && name.length()!=0) {
+	            tmp.append(name);
+        	} else {
+                tmp.append("(noid)");
+        	}
+        }
+        return tmp.toString();
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Template.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Template.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -63,7 +63,7 @@ public interface Template extends Rule {
 	 * @return the value of the '<em>Rule</em>' containment reference.
 	 * @see #setRule(Rule)
 	 * @see sts.StsPackage#getTemplate_Rule()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	Rule getRule();

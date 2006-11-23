@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Value.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Value.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -36,7 +36,7 @@ public interface Value extends Rule {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Features</em>' reference list.
 	 * @see sts.StsPackage#getValue_Features()
-	 * @model type="org.eclipse.emf.ecore.EStructuralFeature" required="true"
+	 * @model type="org.eclipse.emf.ecore.EStructuralFeature"
 	 * @generated
 	 */
 	EList getFeatures();

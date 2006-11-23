@@ -21,5 +21,6 @@ public interface ILexer {
 	public abstract void next();
 	
 	public abstract void close();
-
+	
+	public abstract boolean isTerminal(String token);
 }

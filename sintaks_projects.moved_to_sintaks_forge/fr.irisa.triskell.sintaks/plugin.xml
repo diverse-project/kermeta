@@ -6,7 +6,6 @@
      <objectContribution
             adaptable="false"
             id="fr.irisa.triskell.kermeta.objectContribution1"
-            nameFilter="*.xmi"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
@@ -57,4 +56,15 @@
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
    </extension>
 
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="fr.irisa.triskell.sintaks.PreferenceInitializer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="fr.irisa.triskell.sintaks.ui.Preferences"
+            id="fr.irisa.triskell.sintaks.preferences"
+            name="Sintaks preference pages"/>
+   </extension>
 </plugin>

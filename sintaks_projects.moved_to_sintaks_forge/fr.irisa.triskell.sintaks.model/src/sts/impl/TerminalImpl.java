@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TerminalImpl.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: TerminalImpl.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.impl;
 
@@ -23,7 +23,7 @@ import sts.Terminal;
  * The following features are implemented:
  * <ul>
  *   <li>{@link sts.impl.TerminalImpl#getTerminal <em>Terminal</em>}</li>
- *   <li>{@link sts.impl.TerminalImpl#isSeparator <em>Separator</em>}</li>
+ *   <li>{@link sts.impl.TerminalImpl#isLexicalSeparator <em>Lexical Separator</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,24 +51,24 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 	protected String terminal = TERMINAL_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isSeparator() <em>Separator</em>}' attribute.
+	 * The default value of the '{@link #isLexicalSeparator() <em>Lexical Separator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isSeparator()
+	 * @see #isLexicalSeparator()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean SEPARATOR_EDEFAULT = false;
+	protected static final boolean LEXICAL_SEPARATOR_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isSeparator() <em>Separator</em>}' attribute.
+	 * The cached value of the '{@link #isLexicalSeparator() <em>Lexical Separator</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isSeparator()
+	 * @see #isLexicalSeparator()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean separator = SEPARATOR_EDEFAULT;
+	protected boolean lexicalSeparator = LEXICAL_SEPARATOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,8 +114,8 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isSeparator() {
-		return separator;
+	public boolean isLexicalSeparator() {
+		return lexicalSeparator;
 	}
 
 	/**
@@ -123,11 +123,11 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSeparator(boolean newSeparator) {
-		boolean oldSeparator = separator;
-		separator = newSeparator;
+	public void setLexicalSeparator(boolean newLexicalSeparator) {
+		boolean oldLexicalSeparator = lexicalSeparator;
+		lexicalSeparator = newLexicalSeparator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StsPackage.TERMINAL__SEPARATOR, oldSeparator, separator));
+			eNotify(new ENotificationImpl(this, Notification.SET, StsPackage.TERMINAL__LEXICAL_SEPARATOR, oldLexicalSeparator, lexicalSeparator));
 	}
 
 	/**
@@ -139,8 +139,8 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 		switch (featureID) {
 			case StsPackage.TERMINAL__TERMINAL:
 				return getTerminal();
-			case StsPackage.TERMINAL__SEPARATOR:
-				return isSeparator() ? Boolean.TRUE : Boolean.FALSE;
+			case StsPackage.TERMINAL__LEXICAL_SEPARATOR:
+				return isLexicalSeparator() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -155,8 +155,8 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 			case StsPackage.TERMINAL__TERMINAL:
 				setTerminal((String)newValue);
 				return;
-			case StsPackage.TERMINAL__SEPARATOR:
-				setSeparator(((Boolean)newValue).booleanValue());
+			case StsPackage.TERMINAL__LEXICAL_SEPARATOR:
+				setLexicalSeparator(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -172,8 +172,8 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 			case StsPackage.TERMINAL__TERMINAL:
 				setTerminal(TERMINAL_EDEFAULT);
 				return;
-			case StsPackage.TERMINAL__SEPARATOR:
-				setSeparator(SEPARATOR_EDEFAULT);
+			case StsPackage.TERMINAL__LEXICAL_SEPARATOR:
+				setLexicalSeparator(LEXICAL_SEPARATOR_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -188,8 +188,8 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 		switch (featureID) {
 			case StsPackage.TERMINAL__TERMINAL:
 				return TERMINAL_EDEFAULT == null ? terminal != null : !TERMINAL_EDEFAULT.equals(terminal);
-			case StsPackage.TERMINAL__SEPARATOR:
-				return separator != SEPARATOR_EDEFAULT;
+			case StsPackage.TERMINAL__LEXICAL_SEPARATOR:
+				return lexicalSeparator != LEXICAL_SEPARATOR_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -205,8 +205,8 @@ public class TerminalImpl extends RuleImpl implements Terminal {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (terminal: ");
 		result.append(terminal);
-		result.append(", separator: ");
-		result.append(separator);
+		result.append(", lexicalSeparator: ");
+		result.append(lexicalSeparator);
 		result.append(')');
 		return result.toString();
 	}

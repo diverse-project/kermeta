@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IterationItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: IterationItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -24,6 +25,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import sts.Iteration;
+import sts.Rule;
 import sts.StsFactory;
 import sts.StsPackage;
 
@@ -141,13 +143,27 @@ public class IterationItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((Iteration)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Iteration_type") :
-			getString("_UI_Iteration_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_Iteration_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        EStructuralFeature feature = ((Iteration)object).getContainer();
+        if (feature != null) {
+        	String name = feature.getName();
+        	if (name != null && name.length() != 0) {
+        		tmp.append(name);
+        	}
+		}
+        return tmp.toString();
 	}
 
 	/**
@@ -201,22 +217,17 @@ public class IterationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.ITERATION__SUB_RULE,
+				 StsFactory.eINSTANCE.createPrimitiveValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StsPackage.Literals.ITERATION__SUB_RULE,
 				 StsFactory.eINSTANCE.createObjectReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.ITERATION__SUB_RULE,
 				 StsFactory.eINSTANCE.createTemplate()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.ITERATION__SUB_RULE,
-				 StsFactory.eINSTANCE.createStringValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.ITERATION__SUB_RULE,
-				 StsFactory.eINSTANCE.createIntegerValue()));
 
 		newChildDescriptors.add
 			(createChildParameter

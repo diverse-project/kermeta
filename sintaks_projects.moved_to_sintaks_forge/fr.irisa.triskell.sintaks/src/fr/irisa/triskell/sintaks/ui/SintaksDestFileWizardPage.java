@@ -3,7 +3,6 @@
  */
 package fr.irisa.triskell.sintaks.ui;
 
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -23,15 +22,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
-import fr.irisa.triskell.kermeta.tools.wizards.DestFileWizardPage;
-
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 
 /**
  * @author dtouzet
  *
  */
 public class SintaksDestFileWizardPage extends DestFileWizardPage {
-
 
 	/**
 	 * @param pageName
@@ -43,7 +40,6 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 		this.currentSelection = selection;
 	}
 	
-
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.tools.wizards.DestFileWizardPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
@@ -60,7 +56,8 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 		createPreControls(topLevel);
 		
 		// Resource and container group
-		resourceGroup = new ResourceAndContainerGroup(topLevel, this, getNewFileLabel(), NEW_FILE_MSG, false, SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
+		resourceGroup = new ResourceAndContainerGroup(topLevel, this, getNewFileLabel(), 
+				SintaksPlugin.getResourceString("Sintaks.NEWFILE"), false, SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
 		resourceGroup.setAllowExistingResources(false);
 		initialPopulateContainerNameField();
 		createFileExistsBehaviorControls(topLevel);
@@ -82,7 +79,7 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 	protected Label sMdlLbl;
 	protected Text sMdlText;
 	protected Button sMdlSelectBtn;
-	
+	private String syntacticModel;
 	
 	/**
 	 * @param parent
@@ -91,7 +88,7 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 		Font font = parent.getFont();
 
 		sMdlSelectGrp = new Group(parent, SWT.NONE);
-		GridLayout sMdlLayout = new GridLayout(3, false);
+		GridLayout sMdlLayout = new GridLayout(4, false);
 		sMdlSelectGrp.setLayout(sMdlLayout);
 		sMdlSelectGrp.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		sMdlSelectGrp.setFont(font);
@@ -100,13 +97,15 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 		sMdlLbl = new Label(sMdlSelectGrp, SWT.NULL);
 		sMdlLbl.setText("Syntactic model: ");
 		sMdlText = new Text(sMdlSelectGrp, SWT.SINGLE | SWT.BORDER);
+		sMdlText.setText(syntacticModel);
 		sMdlSelectBtn = new Button(sMdlSelectGrp, SWT.PUSH);
 		sMdlSelectBtn.setText("Browse");
 		sMdlSelectBtn.setAlignment(SWT.RIGHT);
 		sMdlSelectBtn.addSelectionListener(
 			new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
-					sMdlText.setText( handleBrowseButtonSelect() );
+					String text = handleBrowseButtonSelect();
+					sMdlText.setText(text);
 				}
 			}
 		);
@@ -143,8 +142,16 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 	protected String getSMdlText() {
 		return sMdlText.getText();
 	}
-	
 
+	
+	/**
+	 * should be called before activation of the wizard to propose previous file
+	 */
+	protected void setSMdlText(String text) {
+		syntacticModel = text;
+	}
+
+	
 	/**
 	 * @return
 	 */

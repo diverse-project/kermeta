@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RootImpl.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: RootImpl.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.impl;
 
@@ -33,7 +33,7 @@ import sts.StsPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link sts.impl.RootImpl#getRules <em>Rules</em>}</li>
+ *   <li>{@link sts.impl.RootImpl#getFragments <em>Fragments</em>}</li>
  *   <li>{@link sts.impl.RootImpl#getStart <em>Start</em>}</li>
  * </ul>
  * </p>
@@ -42,14 +42,14 @@ import sts.StsPackage;
  */
 public class RootImpl extends EObjectImpl implements Root {
 	/**
-	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+	 * The cached value of the '{@link #getFragments() <em>Fragments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRules()
+	 * @see #getFragments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList rules = null;
+	protected EList fragments = null;
 
 	/**
 	 * The cached value of the '{@link #getStart() <em>Start</em>}' reference.
@@ -84,11 +84,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRules() {
-		if (rules == null) {
-			rules = new EObjectContainmentEList(Rule.class, this, StsPackage.ROOT__RULES);
+	public EList getFragments() {
+		if (fragments == null) {
+			fragments = new EObjectContainmentEList(Rule.class, this, StsPackage.ROOT__FRAGMENTS);
 		}
-		return rules;
+		return fragments;
 	}
 
 	/**
@@ -136,8 +136,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StsPackage.ROOT__RULES:
-				return ((InternalEList)getRules()).basicRemove(otherEnd, msgs);
+			case StsPackage.ROOT__FRAGMENTS:
+				return ((InternalEList)getFragments()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -149,8 +149,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StsPackage.ROOT__RULES:
-				return getRules();
+			case StsPackage.ROOT__FRAGMENTS:
+				return getFragments();
 			case StsPackage.ROOT__START:
 				if (resolve) return getStart();
 				return basicGetStart();
@@ -165,9 +165,9 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StsPackage.ROOT__RULES:
-				getRules().clear();
-				getRules().addAll((Collection)newValue);
+			case StsPackage.ROOT__FRAGMENTS:
+				getFragments().clear();
+				getFragments().addAll((Collection)newValue);
 				return;
 			case StsPackage.ROOT__START:
 				setStart((Rule)newValue);
@@ -183,8 +183,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StsPackage.ROOT__RULES:
-				getRules().clear();
+			case StsPackage.ROOT__FRAGMENTS:
+				getFragments().clear();
 				return;
 			case StsPackage.ROOT__START:
 				setStart((Rule)null);
@@ -200,8 +200,8 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StsPackage.ROOT__RULES:
-				return rules != null && !rules.isEmpty();
+			case StsPackage.ROOT__FRAGMENTS:
+				return fragments != null && !fragments.isEmpty();
 			case StsPackage.ROOT__START:
 				return start != null;
 		}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: URIValue.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: URIValue.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -17,5 +17,5 @@ package sts;
  * @model
  * @generated
  */
-public interface URIValue extends PrimitiveValue {
+public interface URIValue extends Value {
 } // URIValue

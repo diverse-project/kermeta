@@ -19,12 +19,14 @@ public class PrinterAdornment implements IPrinter {
 		super();
 		this.adornment = (Adornment) adornment;
 	}
-
+//TODO the final else is forbitten as the parser will not reconnize it
     public void print (PrintWriter output) throws PrinterSemanticException {
         output.print(IPrinter.separator);
         String text = adornment.getTerminal();
         if ("eoln".equals(text))
         	output.println();
+        else if ("tab".equals(text))
+        	output.print("\t");
         else output.print(text);
         output.print(IPrinter.separator);
     }

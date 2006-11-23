@@ -62,48 +62,17 @@ public class PrettyPrinterSubject extends PrettyPrinterAbstract {
         decrease ();
     }
 
-    public void print (Feature f) {
-        increase ();
-        if (f == null) {
-            println ("Feature : null");
-        } else {
-            println ("Feature {");
-            increase ();
-            println ("ClassName   : " + f.getClassName());
-            println ("FeatureName : " + f.getAttributeName());
-            decrease ();
-            println ("}");
-        }
-        decrease ();
-    }
-
-    public void print (Reference ref) {
+    public void print (Ghost ref) {
         increase ();
         if (ref == null) {
-            println ("Reference : null");
+            println ("Ghost : null");
         } else {
-            println ("Reference {");
-            increase ();
-            print ("From  ");  print (ref.getFrom());
-            print ("To    ");  print (ref.getTo());
-            decrease ();
-            println ("}");
-        }
-        decrease ();
-    }
-
-    public void print (FakeReference ref) {
-        increase ();
-        if (ref == null) {
-            println ("FakeReference : null");
-        } else {
-            println ("FakeReference @"+Integer.toHexString(ref.hashCode())+" {");
+            println ("Ghost @"+Integer.toHexString(ref.hashCode())+" {");
             increase ();
             print ("From   ");  print (ref.getFrom());
             print ("To     ");  print (ref.getTo());
             print ("Value : ");println (ref.getValue());
             print ("Target ");  print (ref.getFromObject());
-            print ("Object ");  print (ref.getToObject());
             decrease ();
             println ("}");
         }
@@ -114,12 +83,11 @@ public class PrettyPrinterSubject extends PrettyPrinterAbstract {
 	 * @see subject.IPrettyPrinter#print(java.lang.Object)
 	 */
 	public void print (Object o) {
-		if (recurse(o))						{ printRecursion(o); }
-        else if (o instanceof Feature)		{ push(o); print ((Feature) o); pop(); }
-        else if (o instanceof Reference)	{ push(o); print ((Reference) o); pop(); }
-        else if (o instanceof FakeReference){ push(o); print ((FakeReference) o); pop(); }
-        else if (o instanceof EObject)		{ push(o); print ((EObject) o); pop(); }
-        else if (o instanceof String)		{ push(o); print ((String) o); pop(); }
+		if (recurse(o))					{ printRecursion(o); }
+		else if (cycle(o))				{ printCycle(o); }
+        else if (o instanceof Ghost)	{ enterObject(o); print ((Ghost) o); leaveObject(); }
+        else if (o instanceof EObject)	{ enterObject(o); print ((EObject) o); leaveObject(); }
+        else if (o instanceof String)	{ enterObject(o); print ((String) o); leaveObject(); }
         else super.print(o);
 	}
 	

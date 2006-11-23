@@ -8,10 +8,8 @@ package fr.irisa.triskell.sintaks.printer;
 
 import java.io.PrintWriter;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import fr.irisa.triskell.sintaks.subject.Feature;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Constant;
@@ -27,25 +25,19 @@ public class PrinterConstant implements IPrinter {
 	}
 
 	public void print (PrintWriter output) throws PrinterSemanticException {
-		EStructuralFeature smmFeature = null;
+		EStructuralFeature feature = null;
 		if(! value.getFeatures().isEmpty())
-			smmFeature = (EStructuralFeature) value.getFeatures().get(0);
+			feature = (EStructuralFeature) value.getFeatures().get(0);
         
-        if (smmFeature == null) 
-            throw new PrinterSemanticException ("Constant : feature "+((EClass) smmFeature.eContainer()).getName()+"."+smmFeature.getName()+" inaceptable");
-
-        Feature feature = new Feature (smmFeature);
-        String textModel = (String) subject.getAttribute (feature);
-        String textConstant = value.getValue();
-        if (textModel != textConstant)
-            throw new PrinterSemanticException ("Constant : feature "+((EClass) smmFeature.eContainer()).getName()+"."+smmFeature.getName()+" not constant");
-        
-        if (textModel != null && textModel.length() > 0) {
-	        output.print(IPrinter.separator);
-	        output.print(textConstant);
-	        output.print(IPrinter.separator);
-	    }
-	}
+    	Object object;
+        if(feature != null) {
+        	object = subject.getFeature (feature);
+        } else {
+        	object = subject.top();
+        }
+        @SuppressWarnings("unused")
+		String text = object.toString();
+    }
 	
 	private Constant value;
     private ModelSubject subject;

@@ -2,19 +2,22 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ValueItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: ValueItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -130,6 +133,27 @@ public class ValueItemProvider
 	 */
 	public ResourceLocator getResourceLocator() {
 		return STSEditPlugin.INSTANCE;
+	}
+
+	/**
+	 * This returns the feature List as a String
+	 */
+	protected String getFeatureAsString (EList features) {
+        if (features == null)
+        	return null;
+        StringBuffer tmp = new StringBuffer();
+        Iterator i = features.iterator();
+        if (i.hasNext()) {
+			EStructuralFeature feature;
+			feature = (EStructuralFeature) i.next();
+	        tmp.append(feature.getName());
+	        while (i.hasNext()) {
+    	        tmp.append(", ");
+    			feature = (EStructuralFeature) i.next();
+    	        tmp.append(feature.getName());
+	        }
+        }
+        return tmp.toString();
 	}
 
 }

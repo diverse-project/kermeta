@@ -10,9 +10,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import fr.irisa.triskell.sintaks.lexer.ILexer;
 import fr.irisa.triskell.sintaks.parser.IParser;
-import fr.irisa.triskell.sintaks.parser.ModelParser;
 import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
-import fr.irisa.triskell.sintaks.subject.Feature;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Iteration;
@@ -28,17 +27,16 @@ public class ParserIteration implements IParser {
 
 	private void accept () {
 		EStructuralFeature container = iteration.getContainer();
-		Feature attribute = new Feature(container);
-        if (ModelParser.debugParser)
-            System.out.println ("Iteration : addFeature "+attribute);
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+        	SintaksPlugin.getDefault().debugln ("Iteration : addFeature "+container);
 		Object object = subject.top();
 		subject.pop();
-        subject.addFeature (attribute, object);
+		subject.setFeature (container, object);
 	}
 
 	private void reject (ILexer lexer, long position) {
-        if (ModelParser.debugParser)
-            System.out.println ("Iteration : backtracking ");
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+        	SintaksPlugin.getDefault().debugln ("Iteration : backtracking ");
 		lexer.back(position);
 	}
 
@@ -49,8 +47,34 @@ public class ParserIteration implements IParser {
 			
 		IParser separatorParser = ParserRule.findParser (iteration.getSeparator(), subject);
 
-		
-		
+		/*
+		boolean ok = true;
+		boolean loop=true;
+		int state=1;
+		while (loop) {
+            long position = lexer.getPosition();
+			switch (state) {
+			case 1 :
+				if (ruleParser.parse(lexer)) {
+					accept ();
+					state=2;
+				} else {
+					loop=false;
+					ok = false;
+                    reject (lexer, position);
+				}
+				break;
+			case 2 :
+				if (separatorParser.parse(lexer)) {
+					state=1;
+				} else {
+					loop=false;
+                    reject (lexer, position);
+				}
+				break;
+			}
+		}
+		*/
 		boolean ok = true;
 		boolean loop = true;
 		long position = lexer.getPosition();
@@ -85,7 +109,7 @@ public class ParserIteration implements IParser {
 				break;
 			}
 		}
-
+		
 		return ok;
 	}
 

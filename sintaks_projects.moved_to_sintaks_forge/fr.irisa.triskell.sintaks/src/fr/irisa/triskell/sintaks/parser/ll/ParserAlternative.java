@@ -29,9 +29,9 @@ public class ParserAlternative implements IParser {
 	}
 
 	public boolean parse(ILexer input) throws ParserSemanticException {
-		EList list = alternative.getCondition();
+		EList list = alternative.getConditions();
 		if (list == null)
-			throw new ParserSemanticException ("Alternative : alternatives "+alternative.getCondition()+" inaceptable");
+			throw new ParserSemanticException ("Alternative : alternatives "+alternative.getConditions()+" inaceptable");
 
 		Iterator i = list.iterator();
 		boolean ok = false;
@@ -41,7 +41,7 @@ public class ParserAlternative implements IParser {
 			if (i.hasNext()) {
 				Object o = i.next();
 				if (!(o instanceof Condition))
-					throw new ParserSemanticException ("Alternative : condition "+o+" inaceptable");
+					throw new ParserSemanticException ("Alternative : condition "+o+" unaceptable");
 				IParser parser = new ParserCondition ((Condition) o, subject);
 				input.back(position);
 				ok = parser.parse(input);

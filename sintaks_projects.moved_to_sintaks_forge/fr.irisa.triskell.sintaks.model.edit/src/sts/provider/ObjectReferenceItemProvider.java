@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectReferenceItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: ObjectReferenceItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -13,8 +13,10 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,6 +25,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import sts.ObjectReference;
+import sts.Rule;
 import sts.StsPackage;
 
 /**
@@ -100,13 +103,34 @@ public class ObjectReferenceItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((ObjectReference)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_ObjectReference_type") :
-			getString("_UI_ObjectReference_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_ObjectReference_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        EList features = ((ObjectReference)object).getFeatures();
+        if (features != null) {
+        	tmp.append(getFeatureAsString (features));
+        }
+        tmp.append(" ==> ");
+        EStructuralFeature key = ((ObjectReference)object).getIdentifier();
+        if (key != null) {
+        	String name = key.getName();
+        	if (name != null && name.length()!=0) {
+	        	tmp.append("[");
+	            tmp.append(name);
+	            tmp.append("]");
+        	}
+        }
+        return tmp.toString();
 	}
 
 	/**

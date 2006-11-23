@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Iteration.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Iteration.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -64,7 +64,7 @@ public interface Iteration extends Rule {
 	 * @return the value of the '<em>Container</em>' reference.
 	 * @see #setContainer(EStructuralFeature)
 	 * @see sts.StsPackage#getIteration_Container()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	EStructuralFeature getContainer();
@@ -83,7 +83,7 @@ public interface Iteration extends Rule {
 	 * Returns the value of the '<em><b>Separator</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Separator</em>' reference isn't clear,
+	 * If the meaning of the '<em>Separator</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

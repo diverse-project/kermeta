@@ -8,8 +8,8 @@ package fr.irisa.triskell.sintaks.parser.ll;
 
 import fr.irisa.triskell.sintaks.lexer.ILexer;
 import fr.irisa.triskell.sintaks.parser.IParser;
-import fr.irisa.triskell.sintaks.parser.ModelParser;
 import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 import sts.Rule;
 import sts.Terminal;
@@ -26,13 +26,13 @@ public class ParserTerminal implements IParser {
         if (input.atEnd()) return false;
 		String textRead = input.get();
 		if (textReference.equals(textRead)) {
-            if (ModelParser.debugParser)
-                System.out.println ("Accepted Terminal : "+textRead);
+            if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+            	SintaksPlugin.getDefault().debugln ("Accepted Terminal : "+textRead);
 			input.next();
 			return true;
 		} else {
-            if (ModelParser.debugParser)
-                System.out.println ("Refused Terminal : "+textRead);
+            if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+            	SintaksPlugin.getDefault().debugln ("Refused Terminal : "+textRead);
 			return false;
 		}
 	}

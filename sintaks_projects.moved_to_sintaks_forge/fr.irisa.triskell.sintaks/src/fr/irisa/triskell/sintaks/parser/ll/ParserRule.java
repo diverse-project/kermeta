@@ -43,12 +43,11 @@ public class ParserRule implements IParser {
 		case StsPackage.ALTERNATIVE			:	parser = new ParserAlternative (rule, subject); break;
 		case StsPackage.ITERATION			:	parser = new ParserIteration (rule, subject); break;
 		case StsPackage.TERMINAL			:	parser = new ParserTerminal (rule, subject); break;
-		case StsPackage.STRING_VALUE		:	parser = new ParserStringValue (rule, subject); break;
-		case StsPackage.INTEGER_VALUE		:	parser = new ParserIntegerValue (rule, subject); break;
 		case StsPackage.OBJECT_REFERENCE	:	parser = new ParserReferenceValue (rule, subject); break;
 		case StsPackage.RULE_REF			:	parser = new ParserRuleRef (rule, subject); break;
 		case StsPackage.ADORNMENT			:	parser = new ParserAdornment (rule, subject); break;
 		case StsPackage.CONSTANT			:	parser = new ParserConstant (rule, subject); break;
+		case StsPackage.PRIMITIVE_VALUE		:	parser = new ParserPrimitiveValue (rule, subject); break;
 		case StsPackage.URI_VALUE			:	parser = new ParserURIValue (rule, subject); break;
 		default 							:
 			throw new ParserSemanticException ("unknown (and unimplemented) ClassID");

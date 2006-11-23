@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsPackage.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: StsPackage.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -163,13 +162,13 @@ public interface StsPackage extends EPackage {
 	int ALTERNATIVE__ID = RULE__ID;
 
 	/**
-	 * The feature id for the '<em><b>Condition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALTERNATIVE__CONDITION = RULE_FEATURE_COUNT + 0;
+	int ALTERNATIVE__CONDITIONS = RULE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Alternative</em>' class.
@@ -246,13 +245,13 @@ public interface StsPackage extends EPackage {
 	int TERMINAL__TERMINAL = RULE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Separator</b></em>' attribute.
+	 * The feature id for the '<em><b>Lexical Separator</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERMINAL__SEPARATOR = RULE_FEATURE_COUNT + 1;
+	int TERMINAL__LEXICAL_SEPARATOR = RULE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Terminal</em>' class.
@@ -559,80 +558,6 @@ public interface StsPackage extends EPackage {
 	int CUSTOM_COND_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link sts.impl.StringValueImpl <em>String Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see sts.impl.StringValueImpl
-	 * @see sts.impl.StsPackageImpl#getStringValue()
-	 * @generated
-	 */
-	int STRING_VALUE = 12;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_VALUE__ID = PRIMITIVE_VALUE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Features</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_VALUE__FEATURES = PRIMITIVE_VALUE__FEATURES;
-
-	/**
-	 * The number of structural features of the '<em>String Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_VALUE_FEATURE_COUNT = PRIMITIVE_VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link sts.impl.IntegerValueImpl <em>Integer Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see sts.impl.IntegerValueImpl
-	 * @see sts.impl.StsPackageImpl#getIntegerValue()
-	 * @generated
-	 */
-	int INTEGER_VALUE = 13;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_VALUE__ID = PRIMITIVE_VALUE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Features</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_VALUE__FEATURES = PRIMITIVE_VALUE__FEATURES;
-
-	/**
-	 * The number of structural features of the '<em>Integer Value</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTEGER_VALUE_FEATURE_COUNT = PRIMITIVE_VALUE_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link sts.impl.RootImpl <em>Root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -640,16 +565,16 @@ public interface StsPackage extends EPackage {
 	 * @see sts.impl.StsPackageImpl#getRoot()
 	 * @generated
 	 */
-	int ROOT = 14;
+	int ROOT = 12;
 
 	/**
-	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Fragments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__RULES = 0;
+	int ROOT__FRAGMENTS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' reference.
@@ -677,7 +602,7 @@ public interface StsPackage extends EPackage {
 	 * @see sts.impl.StsPackageImpl#getRuleRef()
 	 * @generated
 	 */
-	int RULE_REF = 15;
+	int RULE_REF = 13;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -723,7 +648,7 @@ public interface StsPackage extends EPackage {
 	 * @see sts.impl.StsPackageImpl#getAdornment()
 	 * @generated
 	 */
-	int ADORNMENT = 16;
+	int ADORNMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -744,13 +669,13 @@ public interface StsPackage extends EPackage {
 	int ADORNMENT__TERMINAL = TERMINAL__TERMINAL;
 
 	/**
-	 * The feature id for the '<em><b>Separator</b></em>' attribute.
+	 * The feature id for the '<em><b>Lexical Separator</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADORNMENT__SEPARATOR = TERMINAL__SEPARATOR;
+	int ADORNMENT__LEXICAL_SEPARATOR = TERMINAL__LEXICAL_SEPARATOR;
 
 	/**
 	 * The number of structural features of the '<em>Adornment</em>' class.
@@ -769,7 +694,7 @@ public interface StsPackage extends EPackage {
 	 * @see sts.impl.StsPackageImpl#getConstant()
 	 * @generated
 	 */
-	int CONSTANT = 17;
+	int CONSTANT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -815,7 +740,7 @@ public interface StsPackage extends EPackage {
 	 * @see sts.impl.StsPackageImpl#getURIValue()
 	 * @generated
 	 */
-	int URI_VALUE = 18;
+	int URI_VALUE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -824,7 +749,7 @@ public interface StsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URI_VALUE__ID = PRIMITIVE_VALUE__ID;
+	int URI_VALUE__ID = VALUE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Features</b></em>' reference list.
@@ -833,7 +758,7 @@ public interface StsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URI_VALUE__FEATURES = PRIMITIVE_VALUE__FEATURES;
+	int URI_VALUE__FEATURES = VALUE__FEATURES;
 
 	/**
 	 * The number of structural features of the '<em>URI Value</em>' class.
@@ -842,17 +767,7 @@ public interface StsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URI_VALUE_FEATURE_COUNT = PRIMITIVE_VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '<em>String</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see sts.impl.StsPackageImpl#getString()
-	 * @generated
-	 */
-	int STRING = 19;
+	int URI_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 
 	/**
@@ -930,15 +845,15 @@ public interface StsPackage extends EPackage {
 	EClass getAlternative();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link sts.Alternative#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference list '{@link sts.Alternative#getConditions <em>Conditions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Condition</em>'.
-	 * @see sts.Alternative#getCondition()
+	 * @return the meta object for the containment reference list '<em>Conditions</em>'.
+	 * @see sts.Alternative#getConditions()
 	 * @see #getAlternative()
 	 * @generated
 	 */
-	EReference getAlternative_Condition();
+	EReference getAlternative_Conditions();
 
 	/**
 	 * Returns the meta object for class '{@link sts.Sequence <em>Sequence</em>}'.
@@ -983,15 +898,15 @@ public interface StsPackage extends EPackage {
 	EAttribute getTerminal_Terminal();
 
 	/**
-	 * Returns the meta object for the attribute '{@link sts.Terminal#isSeparator <em>Separator</em>}'.
+	 * Returns the meta object for the attribute '{@link sts.Terminal#isLexicalSeparator <em>Lexical Separator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Separator</em>'.
-	 * @see sts.Terminal#isSeparator()
+	 * @return the meta object for the attribute '<em>Lexical Separator</em>'.
+	 * @see sts.Terminal#isLexicalSeparator()
 	 * @see #getTerminal()
 	 * @generated
 	 */
-	EAttribute getTerminal_Separator();
+	EAttribute getTerminal_LexicalSeparator();
 
 	/**
 	 * Returns the meta object for class '{@link sts.Value <em>Value</em>}'.
@@ -1152,26 +1067,6 @@ public interface StsPackage extends EPackage {
 	EReference getCustomCond_Feature();
 
 	/**
-	 * Returns the meta object for class '{@link sts.StringValue <em>String Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>String Value</em>'.
-	 * @see sts.StringValue
-	 * @generated
-	 */
-	EClass getStringValue();
-
-	/**
-	 * Returns the meta object for class '{@link sts.IntegerValue <em>Integer Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Integer Value</em>'.
-	 * @see sts.IntegerValue
-	 * @generated
-	 */
-	EClass getIntegerValue();
-
-	/**
 	 * Returns the meta object for class '{@link sts.Root <em>Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1182,15 +1077,15 @@ public interface StsPackage extends EPackage {
 	EClass getRoot();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link sts.Root#getRules <em>Rules</em>}'.
+	 * Returns the meta object for the containment reference list '{@link sts.Root#getFragments <em>Fragments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Rules</em>'.
-	 * @see sts.Root#getRules()
+	 * @return the meta object for the containment reference list '<em>Fragments</em>'.
+	 * @see sts.Root#getFragments()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_Rules();
+	EReference getRoot_Fragments();
 
 	/**
 	 * Returns the meta object for the reference '{@link sts.Root#getStart <em>Start</em>}'.
@@ -1266,17 +1161,6 @@ public interface StsPackage extends EPackage {
 	EClass getURIValue();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>String</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
-	 * @generated
-	 */
-	EDataType getString();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1297,7 +1181,7 @@ public interface StsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals {
+	interface Literals  {
 		/**
 		 * The meta object literal for the '{@link sts.impl.RuleImpl <em>Rule</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1361,12 +1245,12 @@ public interface StsPackage extends EPackage {
 		EClass ALTERNATIVE = eINSTANCE.getAlternative();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Conditions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ALTERNATIVE__CONDITION = eINSTANCE.getAlternative_Condition();
+		EReference ALTERNATIVE__CONDITIONS = eINSTANCE.getAlternative_Conditions();
 
 		/**
 		 * The meta object literal for the '{@link sts.impl.SequenceImpl <em>Sequence</em>}' class.
@@ -1405,12 +1289,12 @@ public interface StsPackage extends EPackage {
 		EAttribute TERMINAL__TERMINAL = eINSTANCE.getTerminal_Terminal();
 
 		/**
-		 * The meta object literal for the '<em><b>Separator</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Lexical Separator</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TERMINAL__SEPARATOR = eINSTANCE.getTerminal_Separator();
+		EAttribute TERMINAL__LEXICAL_SEPARATOR = eINSTANCE.getTerminal_LexicalSeparator();
 
 		/**
 		 * The meta object literal for the '{@link sts.impl.ValueImpl <em>Value</em>}' class.
@@ -1547,26 +1431,6 @@ public interface StsPackage extends EPackage {
 		EReference CUSTOM_COND__FEATURE = eINSTANCE.getCustomCond_Feature();
 
 		/**
-		 * The meta object literal for the '{@link sts.impl.StringValueImpl <em>String Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see sts.impl.StringValueImpl
-		 * @see sts.impl.StsPackageImpl#getStringValue()
-		 * @generated
-		 */
-		EClass STRING_VALUE = eINSTANCE.getStringValue();
-
-		/**
-		 * The meta object literal for the '{@link sts.impl.IntegerValueImpl <em>Integer Value</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see sts.impl.IntegerValueImpl
-		 * @see sts.impl.StsPackageImpl#getIntegerValue()
-		 * @generated
-		 */
-		EClass INTEGER_VALUE = eINSTANCE.getIntegerValue();
-
-		/**
 		 * The meta object literal for the '{@link sts.impl.RootImpl <em>Root</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1577,12 +1441,12 @@ public interface StsPackage extends EPackage {
 		EClass ROOT = eINSTANCE.getRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>Rules</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Fragments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__RULES = eINSTANCE.getRoot_Rules();
+		EReference ROOT__FRAGMENTS = eINSTANCE.getRoot_Fragments();
 
 		/**
 		 * The meta object literal for the '<em><b>Start</b></em>' reference feature.
@@ -1647,16 +1511,6 @@ public interface StsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass URI_VALUE = eINSTANCE.getURIValue();
-
-		/**
-		 * The meta object literal for the '<em>String</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see sts.impl.StsPackageImpl#getString()
-		 * @generated
-		 */
-		EDataType STRING = eINSTANCE.getString();
 
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Root.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Root.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link sts.Root#getRules <em>Rules</em>}</li>
+ *   <li>{@link sts.Root#getFragments <em>Fragments</em>}</li>
  *   <li>{@link sts.Root#getStart <em>Start</em>}</li>
  * </ul>
  * </p>
@@ -29,20 +29,20 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Root extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Fragments</b></em>' containment reference list.
 	 * The list contents are of type {@link sts.Rule}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Fragments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rules</em>' containment reference list.
-	 * @see sts.StsPackage#getRoot_Rules()
-	 * @model type="sts.Rule" containment="true"
+	 * @return the value of the '<em>Fragments</em>' containment reference list.
+	 * @see sts.StsPackage#getRoot_Fragments()
+	 * @model type="sts.Rule" containment="true" required="true"
 	 * @generated
 	 */
-	EList getRules();
+	EList getFragments();
 
 	/**
 	 * Returns the value of the '<em><b>Start</b></em>' reference.

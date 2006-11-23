@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AdornmentItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: AdornmentItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -22,6 +22,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import sts.Adornment;
+import sts.Rule;
 
 /**
  * This is the item provider adapter for a {@link sts.Adornment} object.
@@ -75,13 +76,24 @@ public class AdornmentItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((Adornment)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Adornment_type") :
-			getString("_UI_Adornment_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_Adornment_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        String terminal = ((Adornment)object).getTerminal();
+        if (terminal != null && terminal.length() != 0) {
+            tmp.append(terminal);
+        }
+        return tmp.toString();
 	}
 
 	/**

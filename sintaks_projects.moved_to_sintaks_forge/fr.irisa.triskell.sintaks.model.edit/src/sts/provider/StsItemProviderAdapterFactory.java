@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsItemProviderAdapterFactory.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: StsItemProviderAdapterFactory.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -164,6 +164,28 @@ public class StsItemProviderAdapterFactory extends StsAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link sts.PrimitiveValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveValueItemProvider primitiveValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link sts.PrimitiveValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createPrimitiveValueAdapter() {
+		if (primitiveValueItemProvider == null) {
+			primitiveValueItemProvider = new PrimitiveValueItemProvider(this);
+		}
+
+		return primitiveValueItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link sts.ObjectReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -249,50 +271,6 @@ public class StsItemProviderAdapterFactory extends StsAdapterFactory implements 
 		}
 
 		return customCondItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link sts.StringValue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected StringValueItemProvider stringValueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link sts.StringValue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createStringValueAdapter() {
-		if (stringValueItemProvider == null) {
-			stringValueItemProvider = new StringValueItemProvider(this);
-		}
-
-		return stringValueItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link sts.IntegerValue} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IntegerValueItemProvider integerValueItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link sts.IntegerValue}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createIntegerValueAdapter() {
-		if (integerValueItemProvider == null) {
-			integerValueItemProvider = new IntegerValueItemProvider(this);
-		}
-
-		return integerValueItemProvider;
 	}
 
 	/**
@@ -505,12 +483,11 @@ public class StsItemProviderAdapterFactory extends StsAdapterFactory implements 
 		if (alternativeItemProvider != null) alternativeItemProvider.dispose();
 		if (sequenceItemProvider != null) sequenceItemProvider.dispose();
 		if (terminalItemProvider != null) terminalItemProvider.dispose();
+		if (primitiveValueItemProvider != null) primitiveValueItemProvider.dispose();
 		if (objectReferenceItemProvider != null) objectReferenceItemProvider.dispose();
 		if (templateItemProvider != null) templateItemProvider.dispose();
 		if (polymorphicCondItemProvider != null) polymorphicCondItemProvider.dispose();
 		if (customCondItemProvider != null) customCondItemProvider.dispose();
-		if (stringValueItemProvider != null) stringValueItemProvider.dispose();
-		if (integerValueItemProvider != null) integerValueItemProvider.dispose();
 		if (rootItemProvider != null) rootItemProvider.dispose();
 		if (ruleRefItemProvider != null) ruleRefItemProvider.dispose();
 		if (adornmentItemProvider != null) adornmentItemProvider.dispose();

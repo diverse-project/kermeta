@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveValue.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: PrimitiveValue.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -14,7 +14,7 @@ package sts;
  *
  *
  * @see sts.StsPackage#getPrimitiveValue()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface PrimitiveValue extends Value {

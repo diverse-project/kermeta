@@ -8,10 +8,8 @@ package fr.irisa.triskell.sintaks.printer;
 
 import java.io.PrintWriter;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import fr.irisa.triskell.sintaks.subject.Feature;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.RuleRef;
@@ -33,11 +31,9 @@ public class PrinterRuleRef implements IPrinter {
 		if(! rule.getFeatures().isEmpty())
 			feature = (EStructuralFeature) rule.getFeatures().get(0);
 		
-		Feature attribute;
 		if (feature != null) {
-			attribute = new Feature (feature);
-			Object o = subject.getAttribute (attribute);
-	        subject.push((EObject) o);
+			Object value = subject.getFeature (feature);
+	        subject.push(value);
 			printer.print(output);
 			subject.pop();
 		} else {

@@ -1,6 +1,6 @@
 package fr.irisa.triskell.sintaks.main;
 
-import java.util.ArrayList;
+import java.io.PrintStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -16,13 +16,12 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import sts.Template;
-import sts.Terminal;
 
 import fr.irisa.triskell.sintaks.parser.MetaModelParser;
 import fr.irisa.triskell.sintaks.parser.ModelParser;
 import fr.irisa.triskell.sintaks.parser.ModelPrinter;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
-
 
 
 /**
@@ -36,10 +35,6 @@ public class Master {
 	private ModelPrinter printer;
 	private ResourceSet resSet;
     
-    static boolean debugProcess = false;
-    static boolean debugSubProcess = false;
-
-
 	/**
 	 * @param mmFile
 	 */
@@ -56,12 +51,12 @@ public class Master {
 	 * @param inputFile
 	 * @return
 	 */
-	public boolean parse (IFile ruleFile, IFile inputFile) {
-        if (debugProcess)
-        	System.out.println("Parsing file: " + inputFile.getName());
+	private boolean parse (IFile ruleFile, IFile inputFile) {
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Parsing file: " + inputFile.getName());
         boolean ok = parser.parse(ruleFile, inputFile);
-        if (debugProcess)
-        	System.out.println("Parse finished");
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Parse finished");
         return ok;
 	}
 
@@ -70,50 +65,61 @@ public class Master {
 	 * @param ruleFile
 	 * @param inputFile
 	 */
-	public void print (IFile ruleFile, IFile inputFile) {
+	private void print (IFile ruleFile, IFile inputFile) {
 		String realName =
 			ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
 			+ inputFile.getFullPath().toString();
         
-		if (debugProcess)
-        	System.out.println("Printing file: " + realName);
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+			SintaksPlugin.getDefault().debugln("Printing file: " + realName);
         printer.print(ruleFile, realName);
-        if (debugProcess)
-        	System.out.println("Print finished");
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Print finished");
 	}
 
 	
 	/**
+	 * @param inputFile
+	 */
+	private void load (IFile inputFile) {
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Loading file: " + inputFile.getName());
+        subject.load(inputFile);
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Load finished");
+	}
+
+	/**
 	 * @param outputFile
 	 */
-	public void store (IFile outputFile) {
-        if (debugProcess)
-        	System.out.println("Storing file: " + outputFile.getName());
+	private void store (IFile outputFile) {
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Storing file: " + outputFile.getName());
         subject.store(outputFile);
-        if (debugProcess)
-        	System.out.println("Store finished");
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
+        	SintaksPlugin.getDefault().debugln("Store finished");
 	}
 
 	
     /**
      * @return
      */
-    public boolean relink () {
-        if (debugSubProcess) {
-        	System.out.println("Model before relinking:");
-        	subject.print(System.out);
+	private boolean relink () {
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
+        	SintaksPlugin.getDefault().debugln("Model before relinking:");
+        	subject.print(new PrintStream(SintaksPlugin.getDefault().getDebugStream()));
         }
         boolean ok = subject.relink ();
-        if (debugSubProcess) {
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
         	if (ok) {
-        		System.out.println ("Relinking successfull");
+        		SintaksPlugin.getDefault().debugln ("Relinking successfull");
         	} else {
-        		System.out.println ("Relinking failed");                
+        		SintaksPlugin.getDefault().debugln ("Relinking failed");                
         	}
     	}
-        if (debugSubProcess) {
-        	System.out.println("Model after relinking:");
-        	subject.print(System.out);
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
+        	SintaksPlugin.getDefault().debugln("Model after relinking:");
+        	subject.print(new PrintStream(SintaksPlugin.getDefault().getDebugStream()));
         }
         return ok;
     }
@@ -126,17 +132,7 @@ public class Master {
      */
     public void getModelFromText(IFile inputFile, IFile outputFile, IFile ruleFile) {
     	
-    	ArrayList<Terminal> terminals = new ArrayList<Terminal>();
-        URI fileURI = URI.createURI("platform:/resource" + ruleFile.getFullPath().toString());
-        ResourceSet rs = new ResourceSetImpl();
-        Resource res = rs.getResource(fileURI, true);
-		TreeIterator i = res.getAllContents();
-		while(i.hasNext()) {
-			Object o = i.next();
-			if(o instanceof Terminal) terminals.add((Terminal) o);
-		}
-    	
-    	this.subject = new ModelSubject (new MetaModel(resSet), terminals);
+    	this.subject = new ModelSubject (new MetaModel(resSet));
 		this.parser  = new ModelParser (new MetaModelParser(resSet), subject);
 
 		try {
@@ -146,6 +142,7 @@ public class Master {
  		}
 		catch (Exception e) {
 			e.printStackTrace();
+			SintaksPlugin.log(e);
 		}
     }
     
@@ -164,16 +161,9 @@ public class Master {
     		boolean ok = checkMetamodelUnicity(inputFile, ruleFile);
     		
     		if(ok) {
-        		URI fileURI = URI.createURI("platform:/resource" + inputFile.getFullPath().toString());
-        		Resource res = resSet.getResource(fileURI, true);
-        		EObject e = (EObject) res.getContents().get(0);
-        		
-        		this.subject.initialize();
-        		this.subject.setModel( e );
-
+    			this.load (inputFile);
                 this.print(ruleFile, outputFile);
-    		}
-    		else {
+    		} else {
     		    MessageDialog.openWarning(
     		    	new Shell(),
     				"Error",
@@ -184,6 +174,7 @@ public class Master {
  		}
 		catch (Exception e) {
 			e.printStackTrace();
+			SintaksPlugin.log(e);
 		}
     }
     
@@ -193,7 +184,7 @@ public class Master {
      * @param ruleFile
      * @return
      */
-    protected boolean checkMetamodelUnicity(IFile inputFile, IFile ruleFile) {
+    private boolean checkMetamodelUnicity(IFile inputFile, IFile ruleFile) {
     	
     	URI fileURI = null;
     	EPackage p = null;
@@ -231,7 +222,7 @@ public class Master {
      * @param p
      * @return
      */
-    protected EPackage getRootPackage(EPackage p) {
+    private EPackage getRootPackage(EPackage p) {
     	EPackage crtPack = p;
     	EObject container = crtPack.eContainer();
     	

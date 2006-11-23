@@ -15,7 +15,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 
 
 /**
@@ -38,33 +38,32 @@ public abstract class SintaksWizard extends Wizard {
     /** pagenames */
     public static final String OUTPUTFILE_PAGENAME = "OutputFile";
     
-    
-    
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
 	@Override
 	public boolean performFinish() {
 		
-		KermetaPlugin.getDefault().newConsole();
-		KermetaPlugin.getDefault().getConsoleStream().println("Loading " + inputFile.getName()  );
-		
-		//DestFileWizardPage outputPage = (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
 		outputPage.getFileName();
 		
 		outputFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(outputPage.getContainerFullPath().append(outputPage.getFileName()));
 
+		SintaksPlugin.getDefault().getOptionManager().setSyntacticModel(outputPage.getSMdlText());
 		try {
 			outputFile = outputPage.createNewFile();				
-			    
-		    KermetaPlugin.getDefault().getConsoleStream().println("Writing " + outputFile.getName()  );
+			SintaksPlugin.getDefault().createDebugStream (outputPage.getContainerFullPath());
+			SintaksPlugin.getDefault().debugln("Loading " + inputFile.getName()  );
+			SintaksPlugin.getDefault().debugln("Writing " + outputFile.getName()  );
 			writeUnit(outputFile);
+			outputFile.refreshLocal(1, null);
+			outputFile.getParent().refreshLocal(1, null);
+			SintaksPlugin.getDefault().closeDebugStream ();
 		}
 		catch (Throwable e)	{
 				Shell theShell = this.getContainer().getShell();
 	        	MessageDialog.openError(theShell,"Error writing file", "errors: "+ e.getMessage());
 				e.printStackTrace();
-				KermetaPlugin.getDefault().consolePrintStackTrace(e);
+				SintaksPlugin.log(e);
 		}
 
 		return true;
@@ -81,7 +80,7 @@ public abstract class SintaksWizard extends Wizard {
 		this.workbench = workbench;
 		if (selection instanceof StructuredSelection)
 		{
-			// the selection should be a single *.km file
+			// the selection should be a single file
 			Iterator it = selection.iterator();
 
 			while(it.hasNext()) {
@@ -100,6 +99,7 @@ public abstract class SintaksWizard extends Wizard {
 		SintaksDestFileWizardPage newfilepage = new SintaksDestFileWizardPage(OUTPUTFILE_PAGENAME, selection);
 		newfilepage.setTitle("Export to XMI / Destination file selection");
 		newfilepage.setDescription("This wizard exports your file into a XMI file.\nPlease specify the output file name.");
+		newfilepage.setSMdlText (SintaksPlugin.getDefault().getOptionManager().getSyntacticModel());
 		
 		// Use the input file name with the xmi extension as default
 		IFile kmtfile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(inputFile.getFullPath().removeFileExtension().addFileExtension(defaultOutputExtension));		

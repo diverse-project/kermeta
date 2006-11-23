@@ -8,14 +8,8 @@ package fr.irisa.triskell.sintaks.lexer;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.Iterator;
-
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.resource.Resource;
-
-import sts.Terminal;
-
+import java.util.List;
 
 public class Lexer implements ILexer {
 	
@@ -23,23 +17,18 @@ public class Lexer implements ILexer {
 	private StringBuffer current;
 	private long position;
 	private boolean eof;
-	private ArrayList<Terminal> separators;
+	private List<String> terminals;
+	private List<String> separators;
 
 	
 	/**
 	 * @param input
 	 * @param res
 	 */
-	public Lexer(Reader input, Resource res) {
+	public Lexer(Reader input, List<String> terminals, List<String> separators) {
 		this.input = input;
-		this.separators = new ArrayList<Terminal>();
-		
-		TreeIterator i = res.getAllContents();
-		while(i.hasNext()) {
-			Object o = i.next();
-			if(o instanceof Terminal)
-				if(((Terminal) o).isSeparator()) separators.add((Terminal) o);
-		}
+		this.separators = separators;
+		this.terminals = terminals;
 	}
 	
 
@@ -49,7 +38,7 @@ public class Lexer implements ILexer {
 	public void begin () {
 		position=0;
 		try {
-			input.mark(1024);
+			input.mark(4096);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -170,22 +159,6 @@ public class Lexer implements ILexer {
 	}
 	
 	
-	/**
-	 * @param s
-	 * @return
-	 */
-	private String getSeparator(String s) {
-		Iterator i = separators.iterator();
-		
-		while(i.hasNext()) {
-			String ter = ((Terminal) i.next()).getTerminal();
-			if(s.endsWith(ter)) return ter;
-		}
-		
-		return null;
-	}
-	
-	
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.textloader.lexer.ILexer#close()
 	 */
@@ -195,5 +168,33 @@ public class Lexer implements ILexer {
 		}
 		catch(IOException e) {
 		}
+	}
+
+	
+	/**
+	 * @param s
+	 * @return
+	 */
+	private String getSeparator(String s) {
+		Iterator<String> i = separators.iterator();
+		while(i.hasNext()) {
+			String ter = i.next();
+			if(s.endsWith(ter)) return ter;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * @param s
+	 * @return
+	 */
+	public boolean isTerminal(String s) {
+		Iterator<String> i = terminals.iterator();
+		while(i.hasNext()) {
+			String ter = i.next();
+			if(s.equals(ter)) return true;
+		}
+		return false;
 	}
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SequenceItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: SequenceItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -94,7 +94,7 @@ public class SequenceItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
 		String label = ((Sequence)object).getId();
@@ -154,22 +154,17 @@ public class SequenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.SEQUENCE__SUB_RULES,
+				 StsFactory.eINSTANCE.createPrimitiveValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StsPackage.Literals.SEQUENCE__SUB_RULES,
 				 StsFactory.eINSTANCE.createObjectReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.SEQUENCE__SUB_RULES,
 				 StsFactory.eINSTANCE.createTemplate()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.SEQUENCE__SUB_RULES,
-				 StsFactory.eINSTANCE.createStringValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.SEQUENCE__SUB_RULES,
-				 StsFactory.eINSTANCE.createIntegerValue()));
 
 		newChildDescriptors.add
 			(createChildParameter

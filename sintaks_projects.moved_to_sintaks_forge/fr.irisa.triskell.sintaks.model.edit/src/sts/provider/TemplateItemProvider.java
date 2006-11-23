@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TemplateItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: TemplateItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -15,6 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,6 +24,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import sts.Rule;
 import sts.StsFactory;
 import sts.StsPackage;
 import sts.Template;
@@ -118,13 +120,27 @@ public class TemplateItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((Template)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Template_type") :
-			getString("_UI_Template_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_Template_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        EClass c = ((Template)object).getMetaclass();
+        if (c != null) {
+        	String name = c.getName();
+        	if (name != null && name.length() != 0) {
+        		tmp.append(name);
+        	}
+		}
+        return tmp.toString();
 	}
 
 	/**
@@ -178,22 +194,17 @@ public class TemplateItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.TEMPLATE__RULE,
+				 StsFactory.eINSTANCE.createPrimitiveValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StsPackage.Literals.TEMPLATE__RULE,
 				 StsFactory.eINSTANCE.createObjectReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StsPackage.Literals.TEMPLATE__RULE,
 				 StsFactory.eINSTANCE.createTemplate()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.TEMPLATE__RULE,
-				 StsFactory.eINSTANCE.createStringValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.TEMPLATE__RULE,
-				 StsFactory.eINSTANCE.createIntegerValue()));
 
 		newChildDescriptors.add
 			(createChildParameter

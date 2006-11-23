@@ -11,15 +11,15 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
-import fr.irisa.triskell.sintaks.subject.Feature;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Condition;
 import sts.CustomCond;
 import sts.PolymorphicCond;
 
-
+//TODO understand the purpose of the hack with the pop
 public class PrinterCondition implements IPrinter {
 
 	public PrinterCondition(Condition condition, ModelSubject subject) {
@@ -39,6 +39,9 @@ public class PrinterCondition implements IPrinter {
 	private boolean valid (PolymorphicCond c) {
 		EObject top = (EObject) subject.top();
 		
+		if (top == null) {
+			System.out.println ("hhh");
+		}
 		if(doPop) {
 			subject.pop();
 		}
@@ -46,13 +49,12 @@ public class PrinterCondition implements IPrinter {
 		String value = c.getValue();
 		String name = top.eClass().getName();
 		
-		if (value == null) {
+		if (value == null || value.length()==0) {
 			EClass metaClass = c.getMetaclass();
 			if (metaClass == null) return false;
 			String metaClassName = metaClass.getName();
 			return metaClassName.equals(name);
-		}
-		else {
+		} else {
 			if ("null".equals(value)) {
 				if (name == null) return true;
 				if ("".equals(name)) return true;
@@ -75,8 +77,8 @@ public class PrinterCondition implements IPrinter {
 	}
 
 	private boolean valid (CustomCond c) {
-		Feature feature = new Feature (c.getFeature());
-        Object o = subject.getAttribute(feature);
+		EStructuralFeature feature = c.getFeature();
+        Object o = subject.getFeature(feature);
         String value = c.getValue();
 		if ("null".equals(value))
 			return (o == null);

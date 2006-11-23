@@ -8,9 +8,9 @@
 	<target name="gather.bin.parts" >
 		<mkdir dir="mytemp"/>
 		<copy todir="mytemp" failonerror="true" overwrite="true">
-			<fileset dir="." includes="**" excludes="*zip_build.xml,*mytemp"/>
+			<fileset dir="." includes="**" excludes="*zip_build.xml,*mytemp,*.project"/>
 		</copy>
-		<zip destfile="../fr.irisa.triskell.sintaks/samples/fr.irisa.triskell.sintaks.samples.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		<zip destfile="fr.irisa.triskell.sintaks.samples.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
 		<delete dir="mytemp"/>
 	</target>
 

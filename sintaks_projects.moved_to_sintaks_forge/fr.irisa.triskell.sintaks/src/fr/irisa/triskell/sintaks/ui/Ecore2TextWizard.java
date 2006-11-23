@@ -30,7 +30,6 @@ public class Ecore2TextWizard extends SintaksWizard {
 	public void writeUnit(IFile targetFile) throws Exception {
 		Master m = new Master();
 		m.getTextFromModel(inputFile, targetFile, outputPage.getSMdlFile());
-	    targetFile.refreshLocal(1, null);
 	}
 	
 	

@@ -2,12 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsFactoryImpl.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: StsFactoryImpl.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -32,7 +31,7 @@ public class StsFactoryImpl extends EFactoryImpl implements StsFactory {
 	 */
 	public static StsFactory init() {
 		try {
-			StsFactory theStsFactory = (StsFactory)EPackage.Registry.INSTANCE.getEFactory("http://sts"); 
+			StsFactory theStsFactory = (StsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/sintaks"); 
 			if (theStsFactory != null) {
 				return theStsFactory;
 			}
@@ -64,12 +63,11 @@ public class StsFactoryImpl extends EFactoryImpl implements StsFactory {
 			case StsPackage.ALTERNATIVE: return createAlternative();
 			case StsPackage.SEQUENCE: return createSequence();
 			case StsPackage.TERMINAL: return createTerminal();
+			case StsPackage.PRIMITIVE_VALUE: return createPrimitiveValue();
 			case StsPackage.OBJECT_REFERENCE: return createObjectReference();
 			case StsPackage.TEMPLATE: return createTemplate();
 			case StsPackage.POLYMORPHIC_COND: return createPolymorphicCond();
 			case StsPackage.CUSTOM_COND: return createCustomCond();
-			case StsPackage.STRING_VALUE: return createStringValue();
-			case StsPackage.INTEGER_VALUE: return createIntegerValue();
 			case StsPackage.ROOT: return createRoot();
 			case StsPackage.RULE_REF: return createRuleRef();
 			case StsPackage.ADORNMENT: return createAdornment();
@@ -77,34 +75,6 @@ public class StsFactoryImpl extends EFactoryImpl implements StsFactory {
 			case StsPackage.URI_VALUE: return createURIValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object createFromString(EDataType eDataType, String initialValue) {
-		switch (eDataType.getClassifierID()) {
-			case StsPackage.STRING:
-				return createStringFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertToString(EDataType eDataType, Object instanceValue) {
-		switch (eDataType.getClassifierID()) {
-			case StsPackage.STRING:
-				return convertStringToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -153,6 +123,16 @@ public class StsFactoryImpl extends EFactoryImpl implements StsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PrimitiveValue createPrimitiveValue() {
+		PrimitiveValueImpl primitiveValue = new PrimitiveValueImpl();
+		return primitiveValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ObjectReference createObjectReference() {
 		ObjectReferenceImpl objectReference = new ObjectReferenceImpl();
 		return objectReference;
@@ -186,26 +166,6 @@ public class StsFactoryImpl extends EFactoryImpl implements StsFactory {
 	public CustomCond createCustomCond() {
 		CustomCondImpl customCond = new CustomCondImpl();
 		return customCond;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StringValue createStringValue() {
-		StringValueImpl stringValue = new StringValueImpl();
-		return stringValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IntegerValue createIntegerValue() {
-		IntegerValueImpl integerValue = new IntegerValueImpl();
-		return integerValue;
 	}
 
 	/**
@@ -256,24 +216,6 @@ public class StsFactoryImpl extends EFactoryImpl implements StsFactory {
 	public URIValue createURIValue() {
 		URIValueImpl uriValue = new URIValueImpl();
 		return uriValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String createStringFromString(EDataType eDataType, String initialValue) {
-		return (String)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertStringToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

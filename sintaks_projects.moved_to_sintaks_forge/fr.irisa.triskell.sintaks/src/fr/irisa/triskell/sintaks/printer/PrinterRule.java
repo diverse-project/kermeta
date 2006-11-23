@@ -25,8 +25,7 @@ public class PrinterRule implements IPrinter {
 	/* (non-Javadoc)
 	 * @see compiler.IParser#parse(java.io.Reader)
 	 */
-	public void print (PrintWriter output) throws PrinterSemanticException
-	{
+	public void print (PrintWriter output) throws PrinterSemanticException {
         IPrinter printer = findPrinter (rule, subject);
         EObject o = subject.getModel();
         subject.initialize ();
@@ -46,8 +45,7 @@ public class PrinterRule implements IPrinter {
 		case StsPackage.ALTERNATIVE			:	printer = new PrinterAlternative (rule, subject); break;
 		case StsPackage.ITERATION			:	printer = new PrinterIteration (rule, subject); break;
 		case StsPackage.TERMINAL			:	printer = new PrinterTerminal (rule, subject); break;
-		case StsPackage.STRING_VALUE		:	printer = new PrinterStringValue (rule, subject); break;
-		case StsPackage.INTEGER_VALUE		:	printer = new PrinterIntegerValue (rule, subject); break;
+		case StsPackage.PRIMITIVE_VALUE		:	printer = new PrinterPrimitiveValue (rule, subject); break;
 		case StsPackage.OBJECT_REFERENCE	:	printer = new PrinterReferenceValue (rule, subject); break;
 		case StsPackage.RULE_REF			:	printer = new PrinterRuleRef (rule, subject); break;
 		case StsPackage.ADORNMENT			:	printer = new PrinterAdornment (rule, subject); break;

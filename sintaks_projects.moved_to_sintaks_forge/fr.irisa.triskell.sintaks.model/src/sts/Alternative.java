@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Alternative.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Alternative.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link sts.Alternative#getCondition <em>Condition</em>}</li>
+ *   <li>{@link sts.Alternative#getConditions <em>Conditions</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,19 +26,19 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Alternative extends Rule {
 	/**
-	 * Returns the value of the '<em><b>Condition</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Conditions</b></em>' containment reference list.
 	 * The list contents are of type {@link sts.Condition}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Condition</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Conditions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition</em>' containment reference list.
-	 * @see sts.StsPackage#getAlternative_Condition()
+	 * @return the value of the '<em>Conditions</em>' containment reference list.
+	 * @see sts.StsPackage#getAlternative_Conditions()
 	 * @model type="sts.Condition" containment="true" required="true"
 	 * @generated
 	 */
-	EList getCondition();
+	EList getConditions();
 
 } // Alternative

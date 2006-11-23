@@ -12,7 +12,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import fr.irisa.triskell.sintaks.subject.Feature;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Iteration;
@@ -35,11 +34,16 @@ public class PrinterIteration implements IPrinter {
 	private Iterator iterator () {
         Iterator iterator = null;
         EStructuralFeature container = iteration.getContainer();
-        Feature feature = new Feature (container);
-        EList list = subject.getFeature (feature);
-        if (list != null)
-            iterator = list.iterator();
-        return iterator;
+        Object object = subject.getFeature (container);
+        if (object == null) return null;
+        if (object instanceof EList) {
+	        EList list = (EList) object;
+	        if (list != null)
+	            iterator = list.iterator();
+	        return iterator;
+        } else {
+        	return null;
+        }
 	}
 
 	private void printWithSeparator (PrintWriter output) throws PrinterSemanticException {

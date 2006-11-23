@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RootItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: RootItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -100,7 +100,7 @@ public class RootItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StsPackage.Literals.ROOT__RULES);
+			childrenFeatures.add(StsPackage.Literals.ROOT__FRAGMENTS);
 		}
 		return childrenFeatures;
 	}
@@ -136,7 +136,7 @@ public class RootItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Root.class)) {
-			case StsPackage.ROOT__RULES:
+			case StsPackage.ROOT__FRAGMENTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -155,62 +155,57 @@ public class RootItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createIteration()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createAlternative()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createTerminal()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
+				 StsFactory.eINSTANCE.createPrimitiveValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createObjectReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createTemplate()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
-				 StsFactory.eINSTANCE.createStringValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
-				 StsFactory.eINSTANCE.createIntegerValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createRuleRef()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createAdornment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createConstant()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ROOT__RULES,
+				(StsPackage.Literals.ROOT__FRAGMENTS,
 				 StsFactory.eINSTANCE.createURIValue()));
 	}
 

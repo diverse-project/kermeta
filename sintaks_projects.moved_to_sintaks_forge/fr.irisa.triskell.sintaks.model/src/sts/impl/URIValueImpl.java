@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: URIValueImpl.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: URIValueImpl.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.impl;
 
@@ -20,7 +20,7 @@ import sts.URIValue;
  *
  * @generated
  */
-public class URIValueImpl extends PrimitiveValueImpl implements URIValue {
+public class URIValueImpl extends ValueImpl implements URIValue {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

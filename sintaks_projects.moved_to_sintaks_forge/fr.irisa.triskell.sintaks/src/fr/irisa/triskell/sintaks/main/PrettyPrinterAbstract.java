@@ -19,7 +19,8 @@ public abstract class PrettyPrinterAbstract implements IPrettyPrinter {
 		this.output = output;
 		this.level = 0;
 		this.nl=true;
-		this.stack = new LinkedList<Object> ();
+		this.recurseStack = new LinkedList<Object> ();
+		this.cycleList = new LinkedList<Object> ();
 	}
 
 	private int level;
@@ -55,7 +56,8 @@ public abstract class PrettyPrinterAbstract implements IPrettyPrinter {
 	 */
 	public void print (Object o) {
 		if (recurse(o))						{ printRecursion(o); }
-		else if (o instanceof List) 		{ push (o); print ((List) o); pop(); }
+		else if (cycle(o))					{ printCycle(o); }
+		else if (o instanceof List) 		{ enterObject (o); print ((List) o); leaveObject(); }
         else if (o == null)					{ println ("(null)"); }
         else println ("***** Unknown Object *****");
 	}
@@ -86,19 +88,28 @@ public abstract class PrettyPrinterAbstract implements IPrettyPrinter {
 		println ("Warning recursion with object @"+Integer.toHexString(e.hashCode())+" ");
 	}
 
+	protected void printCycle (Object e) {
+		println ("Warning cycling with object @"+Integer.toHexString(e.hashCode())+" ");
+	}
+
 	protected boolean recurse (Object o) {
-		return stack.contains(o);
+		return recurseStack.contains(o);
 	}
 
-	protected void push (Object o) {
-		stack.add(0, o);
+	protected boolean cycle (Object o) {
+		return cycleList.contains(o);
 	}
 
-	protected void pop () {
-		stack.remove(0);
+	protected void enterObject (Object o) {
+		recurseStack.add(0, o);
+		cycleList.add (o);
+	}
+
+	protected void leaveObject () {
+		recurseStack.remove(0);
 	}
 
 	private PrintStream output;
-	private List<Object> stack;
+	private List<Object> recurseStack, cycleList;
 
 }

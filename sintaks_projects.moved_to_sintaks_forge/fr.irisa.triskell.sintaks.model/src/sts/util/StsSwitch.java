@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsSwitch.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: StsSwitch.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.util;
 
@@ -171,24 +171,6 @@ public class StsSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StsPackage.STRING_VALUE: {
-				StringValue stringValue = (StringValue)theEObject;
-				Object result = caseStringValue(stringValue);
-				if (result == null) result = casePrimitiveValue(stringValue);
-				if (result == null) result = caseValue(stringValue);
-				if (result == null) result = caseRule(stringValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StsPackage.INTEGER_VALUE: {
-				IntegerValue integerValue = (IntegerValue)theEObject;
-				Object result = caseIntegerValue(integerValue);
-				if (result == null) result = casePrimitiveValue(integerValue);
-				if (result == null) result = caseValue(integerValue);
-				if (result == null) result = caseRule(integerValue);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StsPackage.ROOT: {
 				Root root = (Root)theEObject;
 				Object result = caseRoot(root);
@@ -222,7 +204,6 @@ public class StsSwitch {
 			case StsPackage.URI_VALUE: {
 				URIValue uriValue = (URIValue)theEObject;
 				Object result = caseURIValue(uriValue);
-				if (result == null) result = casePrimitiveValue(uriValue);
 				if (result == null) result = caseValue(uriValue);
 				if (result == null) result = caseRule(uriValue);
 				if (result == null) result = defaultCase(theEObject);
@@ -409,36 +390,6 @@ public class StsSwitch {
 	 * @generated
 	 */
 	public Object caseCustomCond(CustomCond object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpretting the object as an instance of '<em>String Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>String Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseStringValue(StringValue object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Integer Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Integer Value</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseIntegerValue(IntegerValue object) {
 		return null;
 	}
 

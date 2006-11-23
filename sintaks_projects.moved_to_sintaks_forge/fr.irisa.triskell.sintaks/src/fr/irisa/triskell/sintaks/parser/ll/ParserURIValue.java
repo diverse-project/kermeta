@@ -6,25 +6,20 @@
  */
 package fr.irisa.triskell.sintaks.parser.ll;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EPackage.Registry;
-
-import fr.irisa.triskell.sintaks.lexer.ILexer;
-import fr.irisa.triskell.sintaks.parser.IParser;
-import fr.irisa.triskell.sintaks.parser.ModelParser;
-import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
-import fr.irisa.triskell.sintaks.subject.Feature;
-import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Rule;
 import sts.URIValue;
+import fr.irisa.triskell.sintaks.lexer.ILexer;
+import fr.irisa.triskell.sintaks.parser.IParser;
+import fr.irisa.triskell.sintaks.parser.ParserSemanticException;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
+import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 
 public class ParserURIValue implements IParser {
@@ -39,34 +34,27 @@ public class ParserURIValue implements IParser {
 	 * @see fr.irisa.triskell.kermeta.textloader.parser.IParser#parse(fr.irisa.triskell.kermeta.textloader.lexer.ILexer)
 	 */
 	public boolean parse(ILexer input) throws ParserSemanticException {
-		EList fList = value.getFeatures();
-		
-        if (input.atEnd()) return false;
+		EList features = value.getFeatures();
+		if (input.atEnd()) return false;
         String textRead = input.get();
-        
-       	EObject obj = getEObjectFromStringURI(textRead);
-       	if(obj == null) return false;
-        	
-       	if(! fList.isEmpty()) {
-       		Iterator it = fList.iterator();
-       		
-       		while(it.hasNext()) {
-       			Feature attribute = new Feature((EStructuralFeature) it.next());
-           		if(! subject.setAttribute(attribute, obj)) {
-           			return false;
-           		}
-       		}
-       		
-   			if (ModelParser.debugParser) System.out.println ("Accepted URI: " + textRead);
-   			input.next();
-   			return true;
-       	}
-       	else {
-           	subject.push(obj);
-           	if(ModelParser.debugParser) System.out.println ("Accepted URI: " + textRead);
-           	input.next();
-           	return true;
+        EObject value = getEObjectFromStringURI (textRead);
+        boolean ok;
+        if (value != null) {
+	        if(! features.isEmpty()) {
+	        	ok = subject.setFeatures(features, value);
+	        } else {
+	        	subject.push(value);
+	        	ok = true;
+	        }
+	        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+	        	SintaksPlugin.getDefault().debugln ("Accepted URI : "+value);
+			input.next();
+        } else {
+        	ok = false;
+	        if (SintaksPlugin.getDefault().getOptionManager().isDebugParser())
+	        	SintaksPlugin.getDefault().debugln ("Refused URI : "+value);
         }
+        return ok;
 	}
 	
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AlternativeImpl.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: AlternativeImpl.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.impl;
 
@@ -29,7 +29,7 @@ import sts.StsPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link sts.impl.AlternativeImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link sts.impl.AlternativeImpl#getConditions <em>Conditions</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,14 +37,14 @@ import sts.StsPackage;
  */
 public class AlternativeImpl extends RuleImpl implements Alternative {
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference list.
+	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCondition()
+	 * @see #getConditions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList condition = null;
+	protected EList conditions = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,11 +69,11 @@ public class AlternativeImpl extends RuleImpl implements Alternative {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getCondition() {
-		if (condition == null) {
-			condition = new EObjectContainmentEList(Condition.class, this, StsPackage.ALTERNATIVE__CONDITION);
+	public EList getConditions() {
+		if (conditions == null) {
+			conditions = new EObjectContainmentEList(Condition.class, this, StsPackage.ALTERNATIVE__CONDITIONS);
 		}
-		return condition;
+		return conditions;
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class AlternativeImpl extends RuleImpl implements Alternative {
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StsPackage.ALTERNATIVE__CONDITION:
-				return ((InternalEList)getCondition()).basicRemove(otherEnd, msgs);
+			case StsPackage.ALTERNATIVE__CONDITIONS:
+				return ((InternalEList)getConditions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -96,8 +96,8 @@ public class AlternativeImpl extends RuleImpl implements Alternative {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StsPackage.ALTERNATIVE__CONDITION:
-				return getCondition();
+			case StsPackage.ALTERNATIVE__CONDITIONS:
+				return getConditions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,9 +109,9 @@ public class AlternativeImpl extends RuleImpl implements Alternative {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StsPackage.ALTERNATIVE__CONDITION:
-				getCondition().clear();
-				getCondition().addAll((Collection)newValue);
+			case StsPackage.ALTERNATIVE__CONDITIONS:
+				getConditions().clear();
+				getConditions().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +124,8 @@ public class AlternativeImpl extends RuleImpl implements Alternative {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StsPackage.ALTERNATIVE__CONDITION:
-				getCondition().clear();
+			case StsPackage.ALTERNATIVE__CONDITIONS:
+				getConditions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -138,8 +138,8 @@ public class AlternativeImpl extends RuleImpl implements Alternative {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StsPackage.ALTERNATIVE__CONDITION:
-				return condition != null && !condition.isEmpty();
+			case StsPackage.ALTERNATIVE__CONDITIONS:
+				return conditions != null && !conditions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

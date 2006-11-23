@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AlternativeItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: AlternativeItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import sts.Alternative;
+import sts.Rule;
 import sts.StsFactory;
 import sts.StsPackage;
 
@@ -75,7 +76,7 @@ public class AlternativeItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StsPackage.Literals.ALTERNATIVE__CONDITION);
+			childrenFeatures.add(StsPackage.Literals.ALTERNATIVE__CONDITIONS);
 		}
 		return childrenFeatures;
 	}
@@ -94,13 +95,20 @@ public class AlternativeItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public String getText(Object object) {
-		String label = ((Alternative)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Alternative_type") :
-			getString("_UI_Alternative_type") + " " + label;
+        StringBuffer tmp = new StringBuffer();
+        tmp.append(getString("_UI_Alternative_type"));
+        tmp.append(" ");
+        String label = ((Rule)object).getId();
+        if (label != null && label.length() != 0) {
+            tmp.append("(");
+            tmp.append(label);
+            tmp.append(")");
+            tmp.append(" : ");
+        }
+        return tmp.toString();
 	}
 
 	/**
@@ -114,7 +122,7 @@ public class AlternativeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Alternative.class)) {
-			case StsPackage.ALTERNATIVE__CONDITION:
+			case StsPackage.ALTERNATIVE__CONDITIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -133,12 +141,12 @@ public class AlternativeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ALTERNATIVE__CONDITION,
+				(StsPackage.Literals.ALTERNATIVE__CONDITIONS,
 				 StsFactory.eINSTANCE.createPolymorphicCond()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StsPackage.Literals.ALTERNATIVE__CONDITION,
+				(StsPackage.Literals.ALTERNATIVE__CONDITIONS,
 				 StsFactory.eINSTANCE.createCustomCond()));
 	}
 

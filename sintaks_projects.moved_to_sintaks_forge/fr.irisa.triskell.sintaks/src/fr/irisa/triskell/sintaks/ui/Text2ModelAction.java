@@ -42,12 +42,13 @@ public class Text2ModelAction implements IObjectActionDelegate {
 	 */
 	public void run(IAction action) {
 		Shell shell = new Shell();
+/*
 	    MessageDialog.openWarning(
 				shell,
 				"Warning",
 				"This feature has not been tested, it cannot be considered as stable.\n"
 				+ "The Ecore file produced may contain errors.");
-
+*/
     	Text2EcoreWizard wizard =  new Text2EcoreWizard();
     	wizard.init(PlatformUI.getWorkbench(), currentSelection);
     	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell, wizard);

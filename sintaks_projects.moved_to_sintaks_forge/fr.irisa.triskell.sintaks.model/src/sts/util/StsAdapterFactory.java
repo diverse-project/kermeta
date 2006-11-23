@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsAdapterFactory.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: StsAdapterFactory.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts.util;
 
@@ -105,12 +105,6 @@ public class StsAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseCustomCond(CustomCond object) {
 				return createCustomCondAdapter();
-			}
-			public Object caseStringValue(StringValue object) {
-				return createStringValueAdapter();
-			}
-			public Object caseIntegerValue(IntegerValue object) {
-				return createIntegerValueAdapter();
 			}
 			public Object caseRoot(Root object) {
 				return createRootAdapter();
@@ -310,34 +304,6 @@ public class StsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCustomCondAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link sts.StringValue <em>String Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see sts.StringValue
-	 * @generated
-	 */
-	public Adapter createStringValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link sts.IntegerValue <em>Integer Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see sts.IntegerValue
-	 * @generated
-	 */
-	public Adapter createIntegerValueAdapter() {
 		return null;
 	}
 

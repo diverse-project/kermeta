@@ -15,6 +15,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,43 +25,70 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.sintaks.main.IMetaModel;
 import fr.irisa.triskell.sintaks.main.IPrettyPrinter;
-
-import sts.Terminal;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 
 
 public class ModelSubject {
 
 	private IMetaModel mmSubject;
     private List<Object> stack;
-	private List<FakeReference> fakeReferences;
-	private List<Terminal> terminals;
+	private List<Ghost> ghosts;
 	
-    static public boolean debugModel = false;
-	
-	
-	public ModelSubject(IMetaModel subject) {
+    public ModelSubject(IMetaModel subject) {
 	    this.mmSubject = subject;
-	    this.terminals = null;
     }
     
-	public ModelSubject(IMetaModel subject, List<Terminal> terms) {
-	    this.mmSubject = subject;
-	    this.terminals = terms;
-    }
-	
-	public boolean isTerminal(String token) {
-		Terminal crtTerm = null;
-		Iterator i = terminals.iterator();
-		while(i.hasNext()) {
-			crtTerm = (Terminal) i.next();
-			if(token.equals(crtTerm.getTerminal())) return true;
-		}
-		return false;
+	public void initialize () {
+		ghosts = new LinkedList<Ghost> ();
+	    stack = new LinkedList<Object> ();
 	}
 
-	public void initialize () {
-		fakeReferences = new LinkedList<FakeReference> ();
-	    stack = new LinkedList<Object> ();
+	private Object convertToType (EStructuralFeature eFeature, Object value) {
+		if (value instanceof EList) {
+// no conversion should be required
+			return value;
+		}
+		EClassifier type = eFeature.getEType();
+		if (type instanceof EClass) {
+// no conversion should be required
+			return value;
+		}
+		if (type instanceof EDataType) {
+// String to eType conversion required
+			EDataType dataType = (EDataType) type;
+			if (dataType.isSerializable()) {
+				EFactory factory = type.getEPackage().getEFactoryInstance();
+				return factory.createFromString(dataType, value.toString());
+			} else {
+				SintaksPlugin.getDefault().debugln("    created  : noserialisable");
+				return null;
+			}
+		}
+		return null;
+	}
+
+	private Object convertFromType (EStructuralFeature eFeature, Object value) {
+		if (value instanceof EList) {
+// no conversion should be required
+			return value;
+		}
+		EClassifier type = eFeature.getEType();
+		if (type instanceof EClass) {
+// no conversion should be required
+			return value;
+		}
+		if (type instanceof EDataType) {
+// String to eType conversion required
+			EDataType dataType = (EDataType) type;
+			if (dataType.isSerializable()) {
+				EFactory factory = type.getEPackage().getEFactoryInstance();
+				return factory.convertToString(dataType, value);
+			} else {
+				SintaksPlugin.getDefault().debugln("    created  : noserialisable");
+				return null;
+			}
+		}
+		return null;
 	}
 
 	public EObject createInstance(EClass c) {
@@ -67,151 +96,135 @@ public class ModelSubject {
 		return fact.create(c);
 	}
 
-    public EStructuralFeature getStructuralFeature (Feature feature) {
-    	return feature.getEStructuralFeature();
+    @SuppressWarnings("unchecked")
+    private void setTargetFeature (EObject target, EStructuralFeature eFeature, Object value) {
+    	Object convertedValue = convertToType (eFeature, value);
+    	if (eFeature.isMany()) {
+	   		((EList) target.eGet(eFeature)).add(convertedValue);
+		} else {
+	    	target.eSet(eFeature, convertedValue);
+		}
     }
 
-    public boolean setAttribute (Feature feature, Object value) {
-		if (stack.isEmpty()) return false;
-		EObject target = (EObject) top();
-		if (target == null) return false;
+    private Object getTargetFeature (EObject target, EStructuralFeature eFeature) {
+    	Object value = target.eGet(eFeature);
+    	if (eFeature.isMany()) {
+    		return value;
+    	} else {
+    		return convertFromType (eFeature, value);
+    	}
+    }
 
-		EStructuralFeature eFeature = getStructuralFeature (feature);
-		if (eFeature == null) return false;
-
-		if (debugModel) {
-            System.out.println("SetAttribute : ");
-    		System.out.println("   On        : "+target);
-    		System.out.println("   Attribute : "+eFeature);
-    		System.out.println("   Value     : "+value);
+    public boolean setFeatures (EList features, Object value) {
+        Iterator it = features.iterator();
+        boolean ok = true;
+        while(it.hasNext()) {
+        	EStructuralFeature attribute = (EStructuralFeature) it.next();
+    		if(! setFeature(attribute, value)) {
+    			ok = false;
+    		}
         }
-		target.eSet(eFeature, value);
-		return true;
-	}
-	
-    public Object getAttribute (Feature feature) {
-        if (stack.isEmpty()) return null;
-        EObject target = (EObject) top();
-        if (target == null) return null;
+        return ok;
+    }
 
-        EStructuralFeature eFeature = getStructuralFeature (feature);
-        if (eFeature == null) return null;
-
-        if (debugModel) {
-            System.out.println("GetAttribute : ");
-            System.out.println("   On        : "+target);
-            System.out.println("   Attribute : "+eFeature);
-        }
-        Object value = target.eGet(eFeature);
-        return value;
+    private void dumpTargetStack () {
+    	Iterator i = stack.iterator();
+    	int j=0;
+    	while (i.hasNext()) {
+    		Object o = i.next();
+    		++j;
+    		SintaksPlugin.getDefault().debugln("Stack ["+j+"]: "+o.toString());
+    	}
     }
     
-	public boolean setReference (Reference ref, String value) {
-		if (stack.isEmpty()) return false;
-        EObject target = (EObject) top();
-        if (target == null) return false;
-
-		EObject instance = findInstance (ref.getTo(), value);
-		if (instance == null) {
-			instance = createInstance (ref.getTo().getEClass());
-			push (instance);
-			setAttribute (ref.getTo(), value);
-			pop ();
-            fakeReferences.add(new FakeReference (ref, value, target, instance));
+    private EObject findTarget (EStructuralFeature feature) {
+		if (SintaksPlugin.getDefault().getOptionManager().isDebugModel()) {
+			dumpTargetStack ();
 		}
-		
-        EStructuralFeature feature = getStructuralFeature (ref.getFrom());
-        if (feature == null) return false;
+    	if (stack.isEmpty()) return null;
+		EObject target = (EObject) top();
+		if (target == null) return null;
+//TODO check if the target is usable
+		try {
+			target.eGet(feature);
+			if (SintaksPlugin.getDefault().getOptionManager().isDebugModel()) {
+				SintaksPlugin.getDefault().debugln("Target usable : "+target);
+			}
+			return target;
+		}
+		catch (Exception e) {
+			if (SintaksPlugin.getDefault().getOptionManager().isDebugModel()) {
+				SintaksPlugin.getDefault().debugln("Target unusable : "+target);
+			}
+			return null;
+		}
+    }
 
-        if (debugModel) {
-            System.out.println("SetReference : ");
-            System.out.println("   On        : "+target);
-            System.out.println("   Attribute : "+feature);
-            System.out.println("   Object    : "+instance);
+    public boolean setFeature (EStructuralFeature feature, Object value) {
+		if (feature == null) return false;
+		EObject target = findTarget (feature);
+		if (target == null) return false;
+
+		if (SintaksPlugin.getDefault().getOptionManager().isDebugModel()) {
+			PrintStream debugStream = SintaksPlugin.getDefault().getDebugStream();
+			debugStream.println("SetAttribute : ");
+			debugStream.println("   On        : "+target);
+			debugStream.println("   Attribute : "+feature);
+			debugStream.println("   Value     : "+value);
         }
-        target.eSet(feature, instance);
+		setTargetFeature (target, feature, value);
 		return true;
 	}
 	
-	public String getReference (Reference ref) {
-		if (stack.isEmpty()) return null;
-        EObject target = (EObject) top();
-        if (target == null) return null;
+    public Object getFeature (EStructuralFeature feature) {
+		if (feature == null) return null;
+		EObject target = findTarget (feature);
+		if (target == null) return null;
 
-        EStructuralFeature fromFeature = getStructuralFeature (ref.getFrom());
-        if (fromFeature == null) return null;
-
-        if (debugModel) {
-            System.out.println("GetReference : ");
-            System.out.println("   On        : "+target);
-            System.out.println("   Attribute : "+fromFeature);
+		if (SintaksPlugin.getDefault().getOptionManager().isDebugModel()) {
+			PrintStream debugStream = SintaksPlugin.getDefault().getDebugStream();
+			debugStream.println("GetAttribute : ");
+			debugStream.println("   On        : "+target);
+			debugStream.println("   Attribute : "+feature);
         }
-        EObject reference = (EObject) target.eGet(fromFeature);
-        
-        EStructuralFeature toFeature = getStructuralFeature (ref.getTo());
-        if (toFeature == null) return null;
-        return (String) reference.eGet(toFeature);
-	}
-	
-	public boolean addFeature (Feature attribute, Object value)	{
-		if (stack.isEmpty()) return false;
-		EObject target = (EObject) top();
+        return getTargetFeature (target, feature);
+    }
+
+    public boolean createGhosts (EList features, EStructuralFeature to, String value) {
+        Iterator it = features.iterator();
+        boolean ok = true;
+        while(it.hasNext()) {
+        	EStructuralFeature attribute = (EStructuralFeature) it.next();
+    		if(! createGhost (attribute, to, value)) {
+    			ok = false;
+    		}
+        }
+        return ok;
+    }
+    
+    public boolean createGhost (EStructuralFeature from, EStructuralFeature to, String value) {
+		EObject target = findTarget (from);
 		if (target == null) return false;
 
-		EStructuralFeature feature = getStructuralFeature (attribute);
-		if (feature == null) return false;
-
-        if (debugModel) {
-            System.out.println("AddFeature   : ");
-            System.out.println("   On        : "+target);
-    		System.out.println("   Feature   : "+feature);
-    		System.out.println("   Value     : "+value);
-        }
-        ((EList) target.eGet(feature)).add(value);
+        ghosts.add(new Ghost (from, to, value, target));
         return true;
-	}
-
-    public EList getFeature (Feature attribute) {
-        if (stack.isEmpty()) return null;
-        EObject target = (EObject) top();
-        if (target == null) return null;
-
-        EStructuralFeature feature = getStructuralFeature (attribute);
-        if (feature == null) return null;
-
-        if (debugModel) {
-            System.out.println("GetFeature   : ");
-            System.out.println("   On        : "+target);
-            System.out.println("   Feature   : "+feature);
-        }
-        return (EList) target.eGet(feature);
     }
 
-    static private boolean isInstanceof (EClass aClass, String className) {
-        if (aClass.getName().equals(className))
-        	return true;
-        EList list = aClass.getESuperTypes();
-        Iterator i = list.iterator();
-        while (i.hasNext()) {
-        	EClass currentClass = (EClass) i.next();
-        	if (currentClass.getName().equals(className))
-        		return true;
-        }
-    	return false;
-    }
-
-    protected EObject findInstance (Feature feature, String text) {
+    public EObject findInstance (EStructuralFeature to, String text) {
 	    TreeIterator i = getModel ().eAllContents();
         while (i.hasNext()) {
 			Object o = i.next();
 			if (o instanceof EObject) {
                 EObject eo = (EObject) o;
                 EClass ec = (EClass) eo.eClass();
-                if (isInstanceof(ec, feature.getClassName())) {
-    				EStructuralFeature sf = ec.getEStructuralFeature(feature.getAttributeName());
+                //TODO a verifier si c'est dans le bon ordre ...
+                // to.getEContainingClass().isSuperTypeOf (ec)
+                if (ec.isSuperTypeOf(to.getEContainingClass())) {
+    				EStructuralFeature sf = ec.getEStructuralFeature(to.getName());
     				if (eo.eIsSet(sf)) {
     					Object value = eo.eGet(sf);
-    					if (value.equals(text)) {
+    					Object converted = convertFromType(sf, value);
+    					if (converted.equals(text)) {
     					    return eo;
                         }
                     }
@@ -222,37 +235,34 @@ public class ModelSubject {
 	}
 	
 	public boolean relink () {
-        List<FakeReference> fakes = fakeReferences;
-        fakeReferences = new LinkedList<FakeReference> ();
+        List<Ghost> fakes = ghosts;
+        ghosts = new LinkedList<Ghost> ();
         
         Iterator i = fakes.iterator();
         
         while (i.hasNext()) {
-            FakeReference fake = (FakeReference) i.next();
+            Ghost fake = (Ghost) i.next();
             if (! relink (fake)) {
-                fakeReferences.add(fake);
+                ghosts.add(fake);
             }
         }
-        return fakeReferences.isEmpty();
+        return ghosts.isEmpty();
     }
 
-    protected boolean relink (FakeReference fake) {
+    protected boolean relink (Ghost fake) {
         EObject instance = findInstance (fake.getTo(), fake.getValue());
         if (instance == null) return false;
         
-        EStructuralFeature feature = getStructuralFeature (fake.getFrom());
+        EStructuralFeature feature = fake.getFrom();
         if (feature == null) return false;
 
         EObject target = fake.getFromObject();
-        EcoreUtil.replace(target, feature, fake.getToObject(), instance);
-        if (debugModel) {
-            IPrettyPrinter pp = mmSubject.getPrettyPrinter(System.out);
-//            pp.println("Replace      : ");
-//            pp.increase();
-            pp.print("On : "); pp.print(target);
-            pp.print("Attribute : "); pp.print(feature);
-            pp.print("Object : "); pp.print(instance);
-//            pp.decrease();
+        EcoreUtil.replace(target, feature, null, instance);
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugModel()) {
+            SintaksPlugin.getDefault().debugln ("Replace      : ");
+            SintaksPlugin.getDefault().debugln ("   On        : "+target);
+            SintaksPlugin.getDefault().debugln ("   Attribute : "+feature);
+            SintaksPlugin.getDefault().debugln ("   Object    : "+instance);
         }
         return true;
     }
@@ -262,7 +272,7 @@ public class ModelSubject {
 	}
 
 	public void pop (int count) {
-//		IPrettyPrinter pp = mmSubject.getPrettyPrinter(new PrintStream (System.out));
+//		IPrettyPrinter pp = mmSubject.getPrettyPrinter(new PrintStream (SintaksPlugin.getDefault().getConsoleStream()));
 //		pp.print("POP*");
 		for (int i=0; i <count; ++i) {
 //			Object o = stack.get(0);
@@ -272,7 +282,7 @@ public class ModelSubject {
 	}
 
 	public void pop () {
-//		IPrettyPrinter pp = mmSubject.getPrettyPrinter(new PrintStream (System.out));
+//		IPrettyPrinter pp = mmSubject.getPrettyPrinter(new PrintStream (SintaksPlugin.getDefault().getConsoleStream()));
 //		Object o = stack.get(0);
 //		pp.print("POP");
 //		pp.print(o);
@@ -301,9 +311,11 @@ public class ModelSubject {
         stack.add(o);
     }
 
-    public List<FakeReference> getFakeReference () {
-		return fakeReferences;
-	}
+    public void load (IFile inputFile) {
+    	mmSubject.load(inputFile);
+		initialize();
+    	setModel ( (EObject) mmSubject.getRoot());
+    }
 
     public void store (IFile outputFile) {
     	mmSubject.setRoot(getModel());
@@ -311,22 +323,29 @@ public class ModelSubject {
     }
 
     public void print (PrintStream out) {
-        IPrettyPrinter pp = mmSubject.getPrettyPrinter(out);
+        IPrettyPrinter pp;
+        pp = mmSubject.getPrettyPrinter(out);
         if (pp != null) {
             out.println();
             out.println("Model created : ");
             pp.print(getModel());
+        }
+        pp = mmSubject.getPrettyPrinter(out);
+        if (pp != null) {
             out.println();
             out.println("Stack : ");
             pp.print(stack);
-            out.println();
-            out.println("FakeReferences : ");
-            pp.print(fakeReferences);
-            out.println();
         }
-        else {
+        pp = mmSubject.getPrettyPrinter(out);
+        if (pp != null) {
+            out.println();
+            out.println("Ghosts : ");
+            pp.print(ghosts);
+            out.println();
+        } else {
             out.println();
             out.println("Warning no Pretty-Printer");
         }
+        pp = null;
     }
 }

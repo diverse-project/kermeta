@@ -11,26 +11,30 @@ import java.io.Reader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import fr.irisa.triskell.sintaks.lexer.ILexer;
 import fr.irisa.triskell.sintaks.lexer.Lexer;
+import fr.irisa.triskell.sintaks.SintaksPlugin;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Rule;
+import sts.Terminal;
 
 
 public class ModelParser {
 
     private MetaModelParser mmParser;
     private ModelSubject subject;
-    
-    static public boolean debugParser = false;
     
     
     /**
@@ -55,7 +59,21 @@ public class ModelParser {
             
             URI fileURI = URI.createURI("platform:/resource" + ruleFile.getFullPath().toString());
     		ResourceSet rs = new ResourceSetImpl();
-            ILexer lexer = new Lexer (r, rs.getResource(fileURI, true));
+    		Resource res = rs.getResource(fileURI, true);
+    		
+    		List<String> terminals = new ArrayList<String> ();
+    		List<String> separators = new ArrayList<String> ();
+    		TreeIterator i = res.getAllContents();
+    		while(i.hasNext()) {
+    			Object o = i.next();
+    			if(o instanceof Terminal) {
+    				Terminal terminal = (Terminal) o;
+    				terminals.add(terminal.getTerminal());
+    				if(terminal.isLexicalSeparator())
+    					separators.add(terminal.getTerminal());
+    			}
+    		}
+            ILexer lexer = new Lexer (r, terminals, separators);
             
             return lexer;
         }
@@ -73,10 +91,10 @@ public class ModelParser {
      */
     public boolean parse (IFile ruleFile, IFile inputFile) {
         Rule startSymbol = mmParser.getStartSymbol(ruleFile);
-        if (debugParser) {
-            System.out.print ("startSymbol=");
-            System.out.print (startSymbol);
-            System.out.println ();
+        if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
+        	SintaksPlugin.getDefault().debug ("startSymbol=");
+        	SintaksPlugin.getDefault().debug (startSymbol.toString());
+        	SintaksPlugin.getDefault().debugln ("");
         }
         
         IParser parser = new ParserAbstract (startSymbol, subject);
@@ -93,16 +111,15 @@ public class ModelParser {
                 e.printStackTrace();
             }
             r2 = lexer.atEnd();
-            System.out.print ("State");
-            System.out.print ("\t");
-            System.out.print ("Parser=");
-            System.out.print (r1 ? "atend" : "failed");
-            System.out.print ("\t");
-            System.out.print ("Lexer=");
-            System.out.print (r2 ? "atend" : "pending character(s)");
-            System.out.println ();
-            System.out.print ("Acceptable : ");
-            System.out.println (r1 & r2);
+            StringBuffer tmp = new StringBuffer ();
+            tmp.append("State\tParser=");
+            tmp.append(r1 ? "atend" : "failed");
+            tmp.append("\tLexer=");
+            tmp.append(r2 ? "atend" : "pending character(s)");
+            tmp.append("\r\n");
+            tmp.append("Acceptable : ");
+            tmp.append((r1 & r2) ? "true" : "false");
+            SintaksPlugin.getDefault().debugln (tmp.toString());
         }
         lexer.close();
         

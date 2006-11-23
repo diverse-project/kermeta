@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Condition.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: Condition.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -37,7 +37,7 @@ public interface Condition extends EObject {
 	 * @return the value of the '<em>Sub Rule</em>' containment reference.
 	 * @see #setSubRule(Rule)
 	 * @see sts.StsPackage#getCondition_SubRule()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	Rule getSubRule();

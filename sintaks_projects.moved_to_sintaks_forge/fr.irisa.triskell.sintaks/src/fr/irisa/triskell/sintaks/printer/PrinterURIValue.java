@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import fr.irisa.triskell.sintaks.subject.Feature;
 import fr.irisa.triskell.sintaks.subject.ModelSubject;
 
 import sts.Rule;
@@ -24,26 +23,22 @@ public class PrinterURIValue implements IPrinter {
 	}
 
 	public void print(PrintWriter output) throws PrinterSemanticException {
-		EStructuralFeature sFeature = null;
+		EStructuralFeature feature = null;
 		if(! value.getFeatures().isEmpty())
-			sFeature = (EStructuralFeature) value.getFeatures().get(0);
+			feature = (EStructuralFeature) value.getFeatures().get(0);
         
-        String text = null;
-        EObject eObj = null;
-        
-        if(sFeature != null) {
-            Feature feature = new Feature (sFeature);
-            
-            eObj = (EObject) subject.getAttribute (feature);
-            text = getURIStringFromEObject( eObj );
-       }
-        else {
-            text = getURIStringFromEObject( (EObject) subject.top() );
+    	Object object;
+        if(feature != null) {
+        	object = subject.getFeature (feature);
+        } else {
+        	object = subject.top();
         }
-        
-        output.print(IPrinter.separator);
-        output.print("\"" + text + "\"");
-        output.print(IPrinter.separator);
+        String text = getURIStringFromEObject((EObject) object);
+        if (text != null && text.length()!=0) {
+        	output.print(IPrinter.separator);
+            output.print("\"" + text + "\"");
+        	output.print(IPrinter.separator);
+        }
 	}
 	
 	

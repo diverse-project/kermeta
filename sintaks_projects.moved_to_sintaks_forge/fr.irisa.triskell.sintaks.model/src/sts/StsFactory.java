@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsFactory.java,v 1.1 2006-09-26 15:28:31 dtouzet Exp $
+ * $Id: StsFactory.java,v 1.2 2006-11-23 16:06:15 dtouzet Exp $
  */
 package sts;
 
@@ -62,6 +62,15 @@ public interface StsFactory extends EFactory {
 	Terminal createTerminal();
 
 	/**
+	 * Returns a new object of class '<em>Primitive Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Value</em>'.
+	 * @generated
+	 */
+	PrimitiveValue createPrimitiveValue();
+
+	/**
 	 * Returns a new object of class '<em>Object Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,24 +105,6 @@ public interface StsFactory extends EFactory {
 	 * @generated
 	 */
 	CustomCond createCustomCond();
-
-	/**
-	 * Returns a new object of class '<em>String Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String Value</em>'.
-	 * @generated
-	 */
-	StringValue createStringValue();
-
-	/**
-	 * Returns a new object of class '<em>Integer Value</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Integer Value</em>'.
-	 * @generated
-	 */
-	IntegerValue createIntegerValue();
 
 	/**
 	 * Returns a new object of class '<em>Root</em>'.

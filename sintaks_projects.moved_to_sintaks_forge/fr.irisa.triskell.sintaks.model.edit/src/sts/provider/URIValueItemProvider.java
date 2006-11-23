@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: URIValueItemProvider.java,v 1.1 2006-09-26 15:29:20 dtouzet Exp $
+ * $Id: URIValueItemProvider.java,v 1.2 2006-11-23 16:06:07 dtouzet Exp $
  */
 package sts.provider;
 
@@ -30,7 +30,7 @@ import sts.URIValue;
  * @generated
  */
 public class URIValueItemProvider
-	extends PrimitiveValueItemProvider
+	extends ValueItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
