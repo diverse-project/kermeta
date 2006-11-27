@@ -6,16 +6,71 @@ package testPackageTestReflection;
 require kermeta
 
 using kermeta::standard
- 
+using kermeta::language::structure
+
+
+alias String : kermeta::standard::String;
+alias aClassAlias : testPackageTestReflection::AClass;
+
 
 class TestReflection inherits kermeta::kunit::Test
 {    
-     operation testGetMetaClass1() is do
+    operation testGetMetaClass1() is do
      	assert(self.getMetaClass.typeDefinition.name == "TestReflection")
-     end
+    end
      
-     operation testGetMetaClassNew() is do
-     	//assert(self.getMetaClass.new.getMetaClass.typeDefinition.name == "TestReflection")
-     end
+    operation testGetMetaClassNew() is do
+     	assert(self.getMetaClass.new.getMetaClass.typeDefinition.name == "TestReflection")
+    end
      
+	// Test on a Kermeta primitive datatype
+	operation testAllocationUsingClassVariable1() is do
+	    var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := kermeta::standard::String.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+    
+    // Test on a defined class - direct access
+    operation testAllocationUsingClassVariable2() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := AClass.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+
+	// Test on a class accessed through the metaclass operation
+    operation testAllocationUsingClassVariable3() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := AClass.getMetaClass.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+
+	/*
+	// Test on an alias for a Kermeta primitive datatype
+    operation testAllocationUsingClassVariable4() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := String.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+    
+    // Test on an alias for a defined class
+    operation testAllocationUsingClassVariable5() is do
+     	var myClass : kermeta::language::structure::Class init kermeta::language::structure::Class.new
+     	myClass.typeDefinition := aClassAlias.typeDefinition
+     	var anInstance : Object init myClass.new
+     	assert(anInstance.getMetaClass == myClass)
+    end
+    */
 }    
+
+
+
+class AClass {
+	reference aReference : kermeta::standard::String
+	
+	operation anOperation() is do
+	end
+}
