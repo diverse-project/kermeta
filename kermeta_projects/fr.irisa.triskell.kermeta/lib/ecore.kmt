@@ -1,11 +1,3 @@
-/* $Id: ecore.kmt,v 1.6 2006-11-28 12:57:20 dvojtise Exp $
- * Creation date: May 2, 2006
- * License: E.P.L.
- * Copyright:
- * 	Implementation of ECORE metamodel in Kermeta
- * Authors:	
- *	Vincent MAHÉ vmahe@irisa.fr
- */
 package ecore;
 
 //require kermeta
@@ -184,8 +176,12 @@ abstract class EClassifier inherits ENamedElement
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	reference ePackage : EPackage#eClassifiers
-	operation isInstance(object : EJavaObject) : EBoolean is abstract
-	operation getClassifierID() : EInt is abstract
+	operation isInstance(object : EJavaObject) : EBoolean is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+	operation getClassifierID() : EInt is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
 }
 class EDataType inherits EClassifier
 {
@@ -214,9 +210,17 @@ class EEnumLiteral inherits ENamedElement
 class EFactory inherits EModelElement
 {
 	reference ePackage : EPackage[1..1]#eFactoryInstance
-	operation create(eClass : EClass) : EObject is abstract
-	operation createFromString(eDataType : EDataType, literalValue : EString) : EJavaObject is abstract
-	operation convertToString(eDataType : EDataType, instanceValue : EJavaObject) : EString is abstract
+	operation create(eClass : EClass) : EObject is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation createFromString(eDataType : EDataType, literalValue : EString) : EJavaObject is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation convertToString(eDataType : EDataType, instanceValue : EJavaObject) : EString is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
 }
 abstract class EModelElement inherits EObject
 {
@@ -243,16 +247,46 @@ class EObject
 	operation eContainer() : EObject is do
 		result ?= self.container
 	end
-	operation eContainingFeature() : EStructuralFeature is abstract
-	operation eContainmentFeature() : EReference is abstract
-	operation eContents() : EEList is abstract
-	operation eAllContents() : ETreeIterator is abstract
-	operation eCrossReferences() : EEList is abstract
-	operation op_eGet(feature : EStructuralFeature) : EJavaObject is abstract
-	operation eGet(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is abstract
-	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is abstract
-	operation eIsSet(feature : EStructuralFeature) : EBoolean is abstract
-	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is abstract
+	
+	operation eContainingFeature() : EStructuralFeature is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eContainmentFeature() : EReference is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eContents() : EEList is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eAllContents() : ETreeIterator is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eCrossReferences() : EEList is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation op_eGet(feature : EStructuralFeature) : EJavaObject is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eGet(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eIsSet(feature : EStructuralFeature) : EBoolean is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
 }
 class EOperation inherits ETypedElement
 {
@@ -302,7 +336,7 @@ class EReference inherits EStructuralFeature
 			end
 		end
     
-    // due to inner reflction problems with Object.container(), the
+    // due to inner reflection problems with Object.container(), the
     // 'container' property can only be accessed through a getter
 	operation getContainerValue() : EBoolean is do
 		var cls : kermeta::reflection::ClassDefinition
@@ -333,8 +367,13 @@ abstract class EStructuralFeature inherits ETypedElement
 	attribute unsettable : EBoolean
 	attribute derived : EBoolean
 	reference eContainingClass : EClass#eStructuralFeatures
-	operation getFeatureID() : EInt is abstract
-	operation getContainerClass() : EJavaClass is abstract
+	operation getFeatureID() : EInt is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+
+	operation getContainerClass() : EJavaClass is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
 }
 abstract class ETypedElement inherits ENamedElement
 {
