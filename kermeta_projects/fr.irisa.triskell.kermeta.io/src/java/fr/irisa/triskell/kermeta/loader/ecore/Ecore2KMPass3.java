@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.10 2006-10-25 08:27:12 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.11 2006-11-28 14:31:36 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -211,8 +211,11 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// add parameters
 			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
 		
-			// Is operation abstract? : we can know it already if the given operation contains no annotation
-			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
+			if(node.getEAnnotation(KM2Ecore.ANNOTATION)==null){
+				// by default operation should be concrete othewise we cannot instanciate them !!
+				// so as we don't have body => default body is a raise of an exception
+				exporter.current_op.setBody(ExpressionParser.parse(unit, "do raise kermeta::exceptions::NotImplementedException.new end"));
+			}
 			visitorPass1.isClassTypeOwner=false;
 			
 			// Visit the annotations
