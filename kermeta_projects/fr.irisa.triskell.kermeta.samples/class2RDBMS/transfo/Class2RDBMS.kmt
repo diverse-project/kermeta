@@ -211,7 +211,7 @@ class Main
         var outputModel : RDBMSModel init tranfo.transform(inputModel)
         
         var repository : EMFRepository init EMFRepository.new    
-        var resource : EMFResource init 
+        var resource : Resource init 
         	repository.createResource("../models/out.xmi", 
         							  "../metamodels/RDBMSMM.ecore")
 	 	// Define a Root ...
