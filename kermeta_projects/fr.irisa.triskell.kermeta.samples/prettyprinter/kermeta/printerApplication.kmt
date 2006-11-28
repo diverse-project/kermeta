@@ -1,7 +1,7 @@
-@mainClass "naze::Main" 
+@mainClass "ptpr::Main" 
 @mainOperation "main"
 
-package naze;
+package ptpr;
 require "../../kmlogo/kermeta/kmLogo.kmt"
 require "printer.kmt"
 using kermeta::standard

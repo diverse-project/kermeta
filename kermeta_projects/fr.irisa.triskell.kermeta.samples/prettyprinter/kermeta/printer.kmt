@@ -1,9 +1,9 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.4 2006-04-07 14:19:54 dvojtise Exp $
+/* $Id: printer.kmt,v 1.5 2006-11-28 13:01:51 cfaucher Exp $
  * Project : Kermeta samples
  * File : printer.kmt
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 04, 2005
