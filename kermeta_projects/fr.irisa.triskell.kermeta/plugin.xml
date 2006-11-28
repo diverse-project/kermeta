@@ -265,5 +265,21 @@
             id="fr.irisa.triskell.kermeta.view1"
             name="Kermeta"/>
    </extension>
-
+	<extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="fr.irisa.triskell.kermeta.samples.category"
+            name="Kermeta samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="fr.irisa.triskell.kermeta.tools.wizards.KermetaExampleWizard"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="fr.irisa.triskell.kermeta.samples.wizard"
+            name="Kermeta samples"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
 </plugin>
