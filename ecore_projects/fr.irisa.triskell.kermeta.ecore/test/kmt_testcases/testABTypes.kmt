@@ -3,8 +3,7 @@ package root_package;
 require "serializer.kmt"
 //require "./ecore/ABC01_inh_att_opp.ecore" 
 require kermeta
-using kermeta::standard  
-using root
+using kermeta::standard 
 using serializer
 
 /** 
