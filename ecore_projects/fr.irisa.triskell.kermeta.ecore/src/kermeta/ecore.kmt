@@ -260,7 +260,9 @@ class EPackage inherits ENamedElement
 	attribute eClassifiers : EClassifier[0..*]#ePackage
 	attribute eSubpackages : EPackage[0..*]#eSuperPackage
 	reference eSuperPackage : EPackage#eSubpackages
-	operation getEClassifier(name : EString) : EClassifier is abstract
+	operation getEClassifier(name : EString) : EClassifier is do
+		result := eClassifiers.select{c | c.name == name}.one
+	end
 }
 class EParameter inherits ETypedElement
 {
