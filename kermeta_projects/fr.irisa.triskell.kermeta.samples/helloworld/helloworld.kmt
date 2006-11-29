@@ -1,0 +1,20 @@
+/* $Id: helloworld.kmt,v 1.1 2006-11-29 08:59:30 cfaucher Exp $
+ * Creation date: November 29, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "helloworld::HelloworldExample"
+@mainOperation "sayHello"
+package helloworld;
+
+require kermeta
+using kermeta::standard
+
+class HelloworldExample
+{
+    operation sayHello() is
+    do
+        stdio.writeln("Hello world, ...")
+    end
+}

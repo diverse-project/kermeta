@@ -5,7 +5,13 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>fr.irisa.triskell.kermeta.kermetaProjectBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>fr.irisa.triskell.kermeta.runner.kermetanature</nature>
 	</natures>
 </projectDescription>
