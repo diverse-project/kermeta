@@ -3,6 +3,7 @@
  */
 package fr.irisa.triskell.kermeta.popup.actions;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -24,12 +25,14 @@ import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 public class EMFRegisterAction implements IObjectActionDelegate {
 	
 	protected StructuredSelection currentSelection;
-    protected IFile ecoreFile;
+    //protected IFile ecoreFile;
+    protected ArrayList<IFile> ecoreFiles; // = new ArrayList<IFile>();
 
 	/**
 	 * 
 	 */
 	public EMFRegisterAction() {
+		ecoreFiles = new ArrayList<IFile>();
 	}
 
 	
@@ -57,7 +60,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			Iterator it = currentSelection.iterator();
 
 			while(it.hasNext()) {
-				ecoreFile = (IFile)it.next();
+				ecoreFiles.add( (IFile) it.next() );
 			}
 		}
 	}

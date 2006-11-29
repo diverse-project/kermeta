@@ -5,6 +5,7 @@ package fr.irisa.triskell.kermeta.popup.actions;
 
 import java.util.Iterator;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -34,14 +35,24 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	public void run(IAction action) {
-		String strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
-
-		URI mmURI = URI.createURI(strURI);
-		ResourceSet rs = new ResourceSetImpl();
-		Resource res = rs.getResource(mmURI, true);
+		IFile ecoreFile = null;
+		String strURI = null;
+		URI mmURI = null;
+		Resource res = null;
+		EPackage ePack = null;
 		
-		EPackage ePack = (EPackage) res.getContents().get(0);
-		unregisterPackages(ePack);
+		ResourceSet rs = new ResourceSetImpl();
+		Iterator it = ecoreFiles.iterator();
+		while(it.hasNext()) {
+			ecoreFile = (IFile) it.next();
+			
+			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
+			mmURI = URI.createURI(strURI);
+			res = rs.getResource(mmURI, true);
+			
+			ePack = (EPackage) res.getContents().get(0);
+			unregisterPackages(ePack);
+		}
 		
 		displayRegisteredPackages();
 	}

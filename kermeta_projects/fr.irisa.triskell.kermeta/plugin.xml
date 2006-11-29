@@ -168,7 +168,7 @@
       		<separator name="kermetagroup1"/>
 		</menu>
         <action
-               enablesFor="1"
+               enablesFor="*"
                label="Register EPackages into repository"
                icon="images/eclipse_ecore.gif"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
