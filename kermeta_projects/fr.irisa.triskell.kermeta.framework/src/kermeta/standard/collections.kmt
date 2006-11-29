@@ -489,6 +489,18 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
 	end
+	
+	operation subSet(min : Integer, max : Integer) : OrderedSet<G> is do
+		result := OrderedSet<G>.new
+		if(min >= 0 and max <= self.size) then
+			self.each{e |
+				var i : Integer init self.indexOf(e)
+				if(i >= min and i <= max) then
+					result.add(e)
+				end
+			}
+		end
+	end
 }
 
 /**
@@ -498,6 +510,18 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 {
 	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
+	end
+
+	operation subSequence(min : Integer, max : Integer) : Sequence<G> is do
+		result := Sequence<G>.new
+		if(min >= 0 and max <= self.size) then
+			self.each{e |
+				var i : Integer init self.indexOf(e)
+				if(i >= min and i <= max) then
+					result.add(e)
+				end
+			}
+		end
 	end
 }
 
