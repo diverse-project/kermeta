@@ -1,0 +1,2 @@
+dummy file ... this folder should be in the cvs
+avoid an error when checking out
