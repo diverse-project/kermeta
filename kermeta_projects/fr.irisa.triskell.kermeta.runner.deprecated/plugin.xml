@@ -16,33 +16,22 @@
    <requires>
       <import plugin="org.eclipse.ui" optional="true"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.debug.core"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.junit"/>
-      <import plugin="org.eclipse.jdt"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.jdt.launching"/>
       <import plugin="org.eclipse.jdt.ui"/>
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="org.eclipse.ui.cheatsheets"/>
       <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.externaltools"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui.intro"/>
-   <import plugin="org.eclipse.pde"/>
-   <import plugin="org.eclipse.core.variables"/>
    <import plugin="org.eclipse.jdt.debug.ui"/>
    <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
    <import plugin="fr.irisa.triskell.kermeta"/>
    <import plugin="org.eclipse.ui.workbench.texteditor"/>
    <import plugin="org.eclipse.jface.text"/>
-   <import plugin="org.eclipse.core.expressions"/>
    </requires>
       <extension
       
@@ -282,25 +271,6 @@
                class="fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator"
                name="fr.irisa.triskell.kermeta.runner.kermetaSourceLocator"
                id="kermetaSourceLocator"/>
-      </extension>
-      <extension
-            id="kermetaActionSets"
-            point="org.eclipse.ui.actionSets">
-          <!-- Dev. note : visible="false" lets actionSet appear only in kermetaPerspective -->
-         <actionSet
-               label="fr.irisa.triskell.kermeta.runner.actions.actionSet"
-               visible="false"
-               id="kermetaActionSet">
-          <action
-                  toolbarPath="Normal"
-                  label="newFileAction"
-                  icon="icons/newkermetafile.png"
-                  class="fr.irisa.triskell.kermeta.runner.actions.KermetaNewFileWizardAction"
-                  tooltip="Create a new K. File"
-                  id="newFileAction">
-            </action>
-
-         </actionSet>
       </extension>
       <!-- Kermeta launch short cut -->
      <extension
