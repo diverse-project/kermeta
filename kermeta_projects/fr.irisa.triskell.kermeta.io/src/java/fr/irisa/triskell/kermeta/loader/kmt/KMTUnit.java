@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.22 2006-05-03 15:04:00 zdrey Exp $
+/* $Id: KMTUnit.java,v 1.23 2006-12-01 15:48:29 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -12,6 +12,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -66,7 +67,8 @@ public class KMTUnit extends KermetaUnit {
 			KermetaUnit.internalLog.info("PARSE UNIT : " + uri.toString());
 			InputStream stream = converter.createInputStream(uri);
 			// (remove the annoying tabs)
-		    p = new KermetaParser(new KermetaLexer(new StringReader(readAll(stream).replace('\t', ' '))));
+		    //p = new KermetaParser(new KermetaLexer(new StringReader(readAll(stream).replace('\t', ' '))));
+			p = new KermetaParser(new KermetaLexer(new BufferedReader(new StringReader(readAll(stream)))));
 		} 
 		catch (IOException e1) {
 		    //messages.addError("i/o error loading ressource '"+this.uri+"': " + e1, null);
@@ -86,7 +88,8 @@ public class KMTUnit extends KermetaUnit {
 	
 	public void parseString(String document) {
 		KermetaParser p;
-		p = new KermetaParser(new KermetaLexer(new StringReader(document.replace('\t', ' '))));
+		//p = new KermetaParser(new KermetaLexer(new StringReader(document.replace('\t', ' '))));
+		p = new KermetaParser(new KermetaLexer(new StringReader(document)));
 		try {
 			mctAST = p.compUnit();
 		}
