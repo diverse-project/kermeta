@@ -27,7 +27,7 @@
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="fr.irisa.triskell.kermeta"/>
       <import plugin="org.eclipse.emf.ecore.editor"/>
-      <import plugin="fr.irisa.triskell.kermeta.kpm"/>
+      <import plugin="fr.irisa.triskell.kermeta.kpm" export="true"/>
    </requires>
    
     <extension
