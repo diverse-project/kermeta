@@ -230,7 +230,7 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 			public void run() {
 				boolean result = KermetaWorkspace.getInstance().declareInterest(editor, getKPMFile());
 				if ( ! result ) {
-					KMTUnit unit = KermetaUnitHelper.typeCheckKMTFile( getFile() );
+					KMTUnit unit = KermetaUnitHelper.typeCheckKMTFile( getFile(), null );
 					setMcunit( unit );
 					MarkersHelper.clearMarkers(getFile());
 					MarkersHelper.createMarkers( getFile(), unit);
