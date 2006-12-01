@@ -49,6 +49,7 @@ public class KermetaWorkspace {
 	 */
 	private Hashtable <File, KermetaUnit> units = new Hashtable <File, KermetaUnit> ();
 	
+	private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
 	//////////////////////////
 	//////////////////////////
 	//		Constructor		//
@@ -67,7 +68,7 @@ public class KermetaWorkspace {
 		if ( instance == null ) {
 			instance = new KermetaWorkspace();
 			instance.initialize();
-			instance.typeCheckNecessaryFiles();
+			//instance.typeCheckNecessaryFiles();
 		}
 		return instance;
 	}
@@ -101,7 +102,7 @@ public class KermetaWorkspace {
 	 * @throws CoreException
 	 */
 	private void initializeChangeListener() throws CoreException {
-		IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
+		//IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
 		IResourceHelper.touchWorkspace();
 	}
 	
@@ -218,7 +219,24 @@ public class KermetaWorkspace {
 	 * @param file
 	 */
 	public KermetaUnit getKermetaUnit( File file ) {
-		return KermetaUnitHelper.typeCheckFile(file);
+		KermetaUnit unit = findKermetaUnit(file);
+		if ( unit == null )
+			unit = KermetaUnitHelper.typeCheckFile(file);
+		return unit;
+	}
+	
+	private KermetaUnit findKermetaUnit (File file) {
+		KermetaUnit unit = units.get(file);
+		if ( unit == null ) {
+			Iterator <KermetaUnit> itOnUnits = unitList.iterator();
+			while ( (unit == null) && itOnUnits.hasNext() ) {
+				KermetaUnit currentUnit = itOnUnits.next();
+				String relativeFileName = StringHelper.getRelativeName(currentUnit.getUri());
+				if ( relativeFileName.equals (file.getRelativeName()) )
+					unit = currentUnit;
+			}
+		}
+		return unit;
 	}
 	//////////////////////////////////
 	//////////////////////////////////
@@ -293,6 +311,16 @@ public class KermetaWorkspace {
 			return false;
 	}
 	
+	private void addUnits( KermetaUnit unit ) {
+		unitList.add(unit);
+		for (KermetaUnit currentUnit : unit.importedUnits) {
+			
+			addUnits(currentUnit);
+			unitList.add(currentUnit);
+			
+		}
+	}
+	
 	/**
 	 * This method is called when an object implementing KermetaUnitInterest interface is not interested
 	 * anymore in the given file. First the object is unregistered. Then the method takes a look at the number 
@@ -317,7 +345,7 @@ public class KermetaWorkspace {
 	 * @param file
 	 */
 	private void notifyInterestedObject( KermetaUnitInterest o, File file ) {
-		o.updateKermetaUnit( units.get(file) );
+		o.updateKermetaUnit( findKermetaUnit(file) );
 	}
 	
 	/**
@@ -345,8 +373,13 @@ public class KermetaWorkspace {
 		
 		if ( units.size() == 0 ) {
 			units.put(file, unit);
+			addUnits(unit);
 			return;
 		}
+		
+		units.put(file, unit);
+		notifyInterestedObjects(file);
+		//		notifyInterestedObject(o, file)
 		
 		ArrayList <File> files = new ArrayList <File> ();
 		for ( File f : units.keySet() ) {

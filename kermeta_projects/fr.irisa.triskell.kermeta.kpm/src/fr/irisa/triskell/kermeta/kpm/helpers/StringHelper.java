@@ -69,7 +69,11 @@ public final class StringHelper {
 	static public String getRelativeName(String fileURI) {
 		String absoluteName = getAbsoluteName(fileURI);
 		String[] splits = absoluteName.split( IResourceHelper.getAbsolutePath() );
-		return splits[1];
+		if ( splits.length == 1 ) {
+			String[] s = splits[0].split("/.+/");
+			return s[1];
+		} else
+			return splits[1];
 	}
 	
 	/**

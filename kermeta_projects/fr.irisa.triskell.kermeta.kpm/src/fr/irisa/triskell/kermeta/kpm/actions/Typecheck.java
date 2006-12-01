@@ -18,7 +18,8 @@ public class Typecheck implements IAction {
 		
 		File from = (File) dependency.getFrom();
 		
-		KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit( from );
+	//	KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit( from );
+		KermetaUnit unit = KermetaUnitHelper.typeCheckFile(from);
 		
 		DependencyHelper.addRequireDependencies(unit);
 		
