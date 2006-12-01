@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.URI;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 public class KermetaUnitHelper {
@@ -20,15 +21,15 @@ public class KermetaUnitHelper {
 	 * @param unit
 	 */
 	static public void unloadKermetaUnit( KermetaUnit unit ) {
-		
-		
-		/*try {
-			kermetaUnitFactoryAvailable.acquire();
-		} catch (InterruptedException exception) {
-			exception.printStackTrace();
-		}
-		*/
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
+	}
+	
+	static public void unloadKermetaUnitAndFreeMemory( KermetaUnit unit ) {
+		unloadKermetaUnit(unit);
+		garbageCollect();
+	}
+	
+	static private void garbageCollect() {
 		Runtime r = Runtime.getRuntime();
 		
 		long freeMem = r.freeMemory();
@@ -36,28 +37,27 @@ public class KermetaUnitHelper {
 		r.gc();
 		freeMem = r.freeMemory();
 		System.out.println("free memory after running gc(): " + freeMem);
-		
-		//kermetaUnitFactoryAvailable.release();
-		
 	}
-	
 	
 	//////////////////////////////////////
 	//////////////////////////////////////
 	//		Typechecking Mechanism		//
 	//////////////////////////////////////
 	//////////////////////////////////////
-	static public KMTUnit typeCheckKMTFile(IFile file) {
-		return typeCheckKMTFile(file.getLocation().toString());
+	static public KMTUnit typeCheckKMTFile(IFile file, String content) {
+		return typeCheckKMTFile(file.getLocation().toString(), content);
 	}
 	
-	static private KMTUnit typeCheckKMTFile (String absoluteFileName ) {
+	static private KMTUnit typeCheckKMTFile (String absoluteFileName, String content ) {
 		unloadKermetaUnit( null );
 		
 		URI fileURI = URI.createFileURI(absoluteFileName);
 		KMTUnit unit = (KMTUnit) KermetaUnitFactory.getDefaultLoader().createKermetaUnit(fileURI.toString());
 		if ( unit != null ) {
-			unit.parse();
+			if ( content != null )	
+				unit.parseString(content);
+			else
+				unit.parse();
 		    if ( ! unit.messages.hasError() ) {
 		    	// No parsing errors, let us try to load.
 		    	unit.load();
@@ -67,6 +67,9 @@ public class KermetaUnitHelper {
 		    	unit.typeCheck( null );
 		    }
 		}
+		
+		garbageCollect();
+		
 		return unit;
 	}
 	
@@ -77,7 +80,7 @@ public class KermetaUnitHelper {
 	 * @param kpmFile
 	 * @return The method returns the Kermeta unit used.
 	 */
-	static public KermetaUnit typeCheckFile(File file) {
+	static public KermetaUnit typeCheckFile(File file, String content) {
 	
 		System.out.println();
 		System.out.println();
@@ -91,37 +94,15 @@ public class KermetaUnitHelper {
 		String extension = StringHelper.getExtension( file.getName() );
 		
 		if ( extension.equals(".kmt") ) {
-			unit = typeCheckKMTFile(file);
-		} /*else if ( extension.equals(".km") ) {
-			unit = typeCheckKMFile(file);
-		}*/
-	    
+			unit = typeCheckKMTFile(file, content);
+		}
 		
-		
-		
-		/*if ( unit != null ) {
-			
-	    	//MarkersHelper.clearMarkers( file );
-	    	//MarkersHelper.createMarkers( file, unit);
-			
-			//associateKermetaUnitWithFile(unit, file);
-			//notifyInterestedObjects(file);
-		}*/
 		return unit;
 	}
 	
-	
-	
-	/*private KMUnit typeCheckKMFile( File file ) {
-		KMUnit unit = (KMUnit) getNewKermetaUnitForFile(file);
-		if ( unit != null ) {
-			unit.load();
-			if ( ! unit.messages.hasError() ) {
-				unit.typeCheck( null );
-			}
-		}
-		return unit;
-	}*/
+	static public KermetaUnit typeCheckFile(File file) {
+		return typeCheckFile(file, null);
+	}
 	
 	/**
 	 * This method typechecks a kmt file. It starts with a KermetaUnit creation, then parsing, loading and finally
@@ -130,8 +111,8 @@ public class KermetaUnitHelper {
 	 * @param file
 	 * @return The method returns the Kermeta unit used.
 	 */
-	static private KMTUnit typeCheckKMTFile ( File file ) {
-		return typeCheckKMTFile(file.getAbsoluteName());
+	static private KMTUnit typeCheckKMTFile ( File file, String content ) {
+		return typeCheckKMTFile(file.getAbsoluteName(), content);
 	}
 	//////////////////////////////////////////////
 	//////////////////////////////////////////////
