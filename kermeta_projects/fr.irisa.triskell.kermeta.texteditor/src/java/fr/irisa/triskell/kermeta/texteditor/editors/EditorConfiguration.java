@@ -84,13 +84,13 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	/**
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getTextHover(ISourceViewer, String)
 	 */
-    public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType)
+   public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType)
     {
         return texthover;
     }
 	
     /** @see org.eclipse.jface.text.source.SourceViewerConfiguration#getTextHover(ISourceViewer, String) */
-    public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask)
+   public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask)
     {
     	return texthover;
     }

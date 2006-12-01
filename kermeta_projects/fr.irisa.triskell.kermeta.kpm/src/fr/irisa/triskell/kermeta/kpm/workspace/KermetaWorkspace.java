@@ -278,15 +278,19 @@ public class KermetaWorkspace {
 	 * @param o The object which is interested in the the given file.
 	 * @param file The interesting file.
 	 */
-	public void declareInterest( KermetaUnitInterest o, File file ) {
-		interestedObjects.put(o, file);
-		// calculate the KermetaUnit if necessary
-		if ( units.get(file) == null ) {
-			file.receiveEvent( "simple_typecheck" );
-			//KermetaUnit unit =  units.get(file);  // getKermetaUnit(file);
-			//units.put(file, unit);
-		}
-		notifyInterestedObject(o, file);
+	public boolean declareInterest( KermetaUnitInterest o, File file ) {
+		if ( file != null ) {
+			interestedObjects.put(o, file);
+			// calculate the KermetaUnit if necessary
+			if ( units.get(file) == null ) {
+				file.receiveEvent( "simple_typecheck" );
+				//KermetaUnit unit =  units.get(file);  // getKermetaUnit(file);
+				//units.put(file, unit);
+			}
+			notifyInterestedObject(o, file);
+			return true;
+		} else
+			return false;
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package fr.irisa.triskell.kermeta.kpm.helpers;
 
 import java.util.concurrent.Semaphore;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 
 import fr.irisa.triskell.kermeta.kpm.File;
@@ -46,6 +47,29 @@ public class KermetaUnitHelper {
 	//		Typechecking Mechanism		//
 	//////////////////////////////////////
 	//////////////////////////////////////
+	static public KMTUnit typeCheckKMTFile(IFile file) {
+		return typeCheckKMTFile(file.getLocation().toString());
+	}
+	
+	static private KMTUnit typeCheckKMTFile (String absoluteFileName ) {
+		unloadKermetaUnit( null );
+		
+		URI fileURI = URI.createFileURI(absoluteFileName);
+		KMTUnit unit = (KMTUnit) KermetaUnitFactory.getDefaultLoader().createKermetaUnit(fileURI.toString());
+		if ( unit != null ) {
+			unit.parse();
+		    if ( ! unit.messages.hasError() ) {
+		    	// No parsing errors, let us try to load.
+		    	unit.load();
+		    }
+		    if ( ! unit.messages.hasError() ) {
+		    	// No loading errors, let us try to type check.
+		    	unit.typeCheck( null );
+		    }
+		}
+		return unit;
+	}
+	
 	/**
 	 * This method typechecks the given file. This file can be either be a kmt file,
 	 * or a km file. The method delegates to a specialized method.
@@ -107,23 +131,7 @@ public class KermetaUnitHelper {
 	 * @return The method returns the Kermeta unit used.
 	 */
 	static private KMTUnit typeCheckKMTFile ( File file ) {
-		
-		unloadKermetaUnit( null );
-		
-		URI fileURI = URI.createFileURI(file.getAbsoluteName());
-		KMTUnit unit = (KMTUnit) KermetaUnitFactory.getDefaultLoader().createKermetaUnit(fileURI.toString());
-		if ( unit != null ) {
-			unit.parse();
-		    if ( ! unit.messages.hasError() ) {
-		    	// No parsing errors, let us try to load.
-		    	unit.load();
-		    }
-		    if ( ! unit.messages.hasError() ) {
-		    	// No loading errors, let us try to type check.
-		    	unit.typeCheck( null );
-		    }
-		}
-		return unit;
+		return typeCheckKMTFile(file.getAbsoluteName());
 	}
 	//////////////////////////////////////////////
 	//////////////////////////////////////////////
