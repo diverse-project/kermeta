@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.28 2006-11-28 15:25:10 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.29 2006-12-01 10:13:51 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -39,14 +38,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.validation.model.EvaluationMode;
-import org.eclipse.emf.validation.service.IBatchValidator;
-import org.eclipse.emf.validation.service.ModelValidationService;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
@@ -734,29 +728,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 */
 	public void validateWithEMF(Resource res) {
 		try{
-			IBatchValidator validator = (IBatchValidator)ModelValidationService.getInstance()
-				.newValidator(EvaluationMode.BATCH);
-			validator.setIncludeLiveConstraints(true);
-	
-			for(Object eobj : res.getContents()){
-				try{
-					IStatus status = validator.validate(eobj);
-					internalLog.debug("Validating EObject with EMF validator");
-					// do something if this is not valid ...
-					if(!status.isOK()){
-						throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-				    			"EMF validation failed : " + status.getMessage(),
-				    			getRuntimeMemory().getCurrentInterpreter(),
-				    			getRuntimeMemory(),
-				    			null);
-					}
-				}
-				catch(java.lang.ExceptionInInitializerError e){
-					// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
-					internalLog.warn("Didn't succeed to validate EObject with EMF validator, maybe you are running outside of eclipse ...",e);
-				}
-				
-			}
+			OptionalEMFValidator validator = new OptionalEMFValidator(internalLog, getRuntimeMemory());
+			validator.validateWithEMF(res);
 		}
 		catch(NoClassDefFoundError e){
 			// didn't succeed to validate maybe we are running outside of eclipse and the service is not correctly activated
