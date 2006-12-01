@@ -54,6 +54,13 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 		
 		case IncrementalProjectBuilder.FULL_BUILD :
 			System.out.println("full_build");
+			project = getProject();
+			delta = getDelta( project );
+			if ( delta != null ) {
+				KermetaDeltaVisitor visitor = new KermetaDeltaVisitor(kpm);
+				delta.accept(visitor);
+				project.refreshLocal(IResource.DEPTH_INFINITE, null);
+			}
 			//build();
 			break;
 			
