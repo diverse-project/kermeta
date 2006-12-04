@@ -2,8 +2,9 @@ package fr.irisa.triskell.kermeta.kpm.helpers;
 
 import java.net.URISyntaxException;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.filesystem.URIUtil;
+import org.eclipse.core.resources.IResource;
+//import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -80,19 +81,26 @@ public final class StringHelper {
 	 */
 	static public String getRelativeName(String fileURI) {
 		IPath path = null;
+		String result = "";
 		try {
+			System.out.println();
 			java.net.URI uri = new java.net.URI(fileURI);
-			path = URIUtil.toPath(uri);
+
+			path = URIUtil.toPath( uri );
+			
+			if ( path != null ) {
+				String[] splits = path.toString().split( IResourceHelper.getAbsolutePath() );
+				if ( splits.length == 1 ) {
+					String[] s = splits[0].split("/.+/");
+					result = s[1];
+				} else
+					result = splits[1];
+			}
 		} catch (URISyntaxException exception) {
 			exception.printStackTrace();
 		}
 
-		String[] splits = path.toString().split( IResourceHelper.getAbsolutePath() );
-		if ( splits.length == 1 ) {
-			String[] s = splits[0].split("/.+/");
-			return s[1];
-		} else
-			return splits[1];
+		return result;
 	}
 	
 	/**

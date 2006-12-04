@@ -353,7 +353,7 @@ public class KermetaWorkspace {
 		interestedObjects.remove(o);
 		if ( numberOfObjectsInterestedInFile(file) == 0 ) {
 			units.remove(file);
-			KermetaUnitHelper.unloadKermetaUnit( null );
+			KermetaUnitHelper.unloadKermetaUnitAndFreeMemory( null );
 		}
 	}
 	

@@ -231,19 +231,24 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 		super.init(site, input);
 
 		final Editor editor = this;
-		Runnable r = new Runnable() {
-			public void run() {
-				boolean result = KermetaWorkspace.getInstance().declareInterest(editor, getKPMFile());
-				if ( ! result ) {
-					KMTUnit unit = KermetaUnitHelper.typeCheckKMTFile( getFile(), null );
-					setMcunit( unit );
-					MarkersHelper.clearMarkers(getFile());
-					MarkersHelper.createMarkers( getFile(), unit);
+		
+		file = KermetaWorkspace.getInstance().getFile( getFile() );
+		
+		if ( file != null ) {
+			Runnable r = new Runnable() {
+				public void run() {
+					boolean result = KermetaWorkspace.getInstance().declareInterest(editor, getKPMFile());
+					if ( ! result ) {
+						KMTUnit unit = KermetaUnitHelper.typeCheckKMTFile( getFile(), null );
+						setMcunit( unit );
+						MarkersHelper.clearMarkers(getFile());
+						MarkersHelper.createMarkers( getFile(), unit);
+					}
 				}
-			}
-		};
-		Thread thread = new Thread(r);
-		thread.start();
+			};
+			Thread thread = new Thread(r);
+			thread.start();
+		}
 	}
 	
 }
