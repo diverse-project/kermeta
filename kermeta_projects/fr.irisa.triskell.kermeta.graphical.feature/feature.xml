@@ -24,6 +24,19 @@ the terms of the EPL licence.
 
    <requires>
       <import feature="fr.irisa.triskell.kermeta" version="0.2.1"/>
+      <import feature="fr.irisa.triskell.kermeta" version="0.2.1"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.topcased.modeler"/>
+      <import plugin="org.topcased.modeler.graphconf"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.edit"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.editor"/>
+      <import plugin="org.eclipse.ui.editors"/>
    </requires>
 
    <plugin

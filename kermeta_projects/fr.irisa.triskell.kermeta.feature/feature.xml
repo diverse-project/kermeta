@@ -64,11 +64,13 @@ GPL license.
       <import plugin="org.eclipse.team.core"/>
       <import plugin="org.eclipse.emf.ecore.editor"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.help"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.junit"/>
+      <import plugin="org.eclipse.ui.views.properties.tabbed"/>
    </requires>
 
    <plugin
