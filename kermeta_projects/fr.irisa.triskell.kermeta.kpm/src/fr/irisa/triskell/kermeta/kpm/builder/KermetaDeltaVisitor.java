@@ -43,7 +43,8 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			break;
 			
 		case IResourceDelta.CHANGED :
-			mustContinue = processChanging( delta.getResource() );
+			if ( delta.getFlags() == IResourceDelta.CONTENT )
+				mustContinue = processChanging( delta.getResource() );
 			break;
 			
 		default :
@@ -127,7 +128,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		
 		switch ( resource.getType() ) {
 		
-		case IResource.FILE :
+		case IResource.FILE :			
 			File file = kpm.findFile ( (IFile) resource );
 			if ( file != null )
 				file.changed();

@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.kpm.helpers.*;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 public class KermetaWorkspace {
 
@@ -50,6 +51,24 @@ public class KermetaWorkspace {
 	private Hashtable <File, KermetaUnit> units = new Hashtable <File, KermetaUnit> ();
 	
 	private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
+	
+	/**
+	 * To improve performances, we keep in memory the content of kmt file. It parses much faster.
+	 */
+	private Hashtable <String, String> kmtUnitsContent = new Hashtable <String, String> ();
+	
+	public String getContent(String unitURI) {
+		return kmtUnitsContent.get(unitURI);
+	}
+	
+	public void setContent(String unitURI, String content) {
+		kmtUnitsContent.put(unitURI, content);
+	}
+	
+	public void removeContent(String unitURI) {
+		kmtUnitsContent.remove(unitURI);
+	}
+	
 	//////////////////////////
 	//////////////////////////
 	//		Constructor		//
@@ -76,7 +95,7 @@ public class KermetaWorkspace {
 	private void initialize() {
 		try {
 			initializeKpm();
-			//initializeChangeListener();
+			initializeChangeListener();
 			initializeProjects();
 		} catch (CoreException exception) {
 			System.out.println("Exception during initialization of KermetaWorkspace : ");
@@ -102,7 +121,7 @@ public class KermetaWorkspace {
 	 * @throws CoreException
 	 */
 	private void initializeChangeListener() throws CoreException {
-		//IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
+		IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
 		IResourceHelper.touchWorkspace();
 	}
 	

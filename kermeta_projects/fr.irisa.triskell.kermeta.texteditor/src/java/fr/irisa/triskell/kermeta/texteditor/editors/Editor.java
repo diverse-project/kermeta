@@ -211,14 +211,15 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 	
 	public void updateKermetaUnit(KermetaUnit unit) {
 		setMcunit( (KMTUnit) unit);
-		//MarkersHelper.clearMarkers( getFile() );	
-		//MarkersHelper.createMarkers( getFile(), mcunit);
+		getContentDescription().toString();
+		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getSourceViewer().getDocument().get() );
 	}
 	
 	@Override
 	public void dispose() {
 		super.dispose();
 		KermetaWorkspace.getInstance().undeclareInterest(this);
+		KermetaWorkspace.getInstance().removeContent( mcunit.getUri() );
 	}
 
 	@Override

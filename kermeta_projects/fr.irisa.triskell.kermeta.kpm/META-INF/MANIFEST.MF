@@ -13,7 +13,8 @@ Require-Bundle: fr.irisa.triskell.kermeta,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.ui,
- org.eclipse.ui.editors
+ org.eclipse.ui.editors,
+ org.eclipse.core.filesystem
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kermeta.kpm,
  fr.irisa.triskell.kermeta.kpm.helpers,

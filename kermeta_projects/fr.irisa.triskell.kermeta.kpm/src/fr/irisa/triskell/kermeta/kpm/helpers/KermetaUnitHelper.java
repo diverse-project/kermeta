@@ -6,6 +6,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 
 import fr.irisa.triskell.kermeta.kpm.File;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
@@ -48,7 +49,7 @@ public class KermetaUnitHelper {
 		return typeCheckKMTFile(file.getLocation().toString(), content);
 	}
 	
-	static private KMTUnit typeCheckKMTFile (String absoluteFileName, String content ) {
+static private KMTUnit typeCheckKMTFile (String absoluteFileName, String content ) {
 		unloadKermetaUnit( null );
 		
 		URI fileURI = URI.createFileURI(absoluteFileName);
@@ -56,6 +57,8 @@ public class KermetaUnitHelper {
 		if ( unit != null ) {
 			if ( content != null )	
 				unit.parseString(content);
+			else if ( KermetaWorkspace.getInstance().getContent(unit.getUri()) != null )
+				unit.parseString( KermetaWorkspace.getInstance().getContent(unit.getUri()) );
 			else
 				unit.parse();
 		    if ( ! unit.messages.hasError() ) {
