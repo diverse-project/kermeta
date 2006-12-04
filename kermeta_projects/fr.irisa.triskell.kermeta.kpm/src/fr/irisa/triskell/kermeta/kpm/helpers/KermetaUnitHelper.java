@@ -49,7 +49,7 @@ public class KermetaUnitHelper {
 		return typeCheckKMTFile(file.getLocation().toString(), content);
 	}
 	
-static private KMTUnit typeCheckKMTFile (String absoluteFileName, String content ) {
+	static private KMTUnit typeCheckKMTFile (String absoluteFileName, String content ) {
 		unloadKermetaUnit( null );
 		
 		URI fileURI = URI.createFileURI(absoluteFileName);

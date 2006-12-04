@@ -211,8 +211,6 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 	
 	public void updateKermetaUnit(KermetaUnit unit) {
 		setMcunit( (KMTUnit) unit);
-		getContentDescription().toString();
-		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getSourceViewer().getDocument().get() );
 	}
 	
 	@Override
@@ -222,6 +220,12 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 		KermetaWorkspace.getInstance().removeContent( mcunit.getUri() );
 	}
 
+	@Override
+	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
+		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getSourceViewer().getDocument().get() );
+		super.performSave(overwrite, progressMonitor);
+	}
+	
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);

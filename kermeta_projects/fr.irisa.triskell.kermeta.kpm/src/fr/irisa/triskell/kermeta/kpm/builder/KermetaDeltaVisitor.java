@@ -43,8 +43,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			break;
 			
 		case IResourceDelta.CHANGED :
-			if ( delta.getFlags() == IResourceDelta.CONTENT )
-				mustContinue = processChanging( delta.getResource() );
+			mustContinue = processChanging( delta );
 			break;
 			
 		default :
@@ -122,18 +121,22 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 	 * a change is applied otherwise it means that the resource must be created.
 	 * @param resource
 	 */
-	private boolean processChanging(IResource resource) throws CoreException {
+	private boolean processChanging(IResourceDelta delta) throws CoreException {
 		
 		boolean mustContinue = true;
 		
+		IResource resource = delta.getResource();
+		
 		switch ( resource.getType() ) {
 		
-		case IResource.FILE :			
-			File file = kpm.findFile ( (IFile) resource );
-			if ( file != null )
-				file.changed();
-			else
-				kpm.createFile( (IFile) resource );
+		case IResource.FILE :		
+			if ( delta.getFlags() == IResourceDelta.CONTENT ) {
+				File file = kpm.findFile ( (IFile) resource );
+				if ( file != null )
+					file.changed();
+				else
+					kpm.createFile( (IFile) resource );
+			}
 			break;
 			
 		case IResource.FOLDER :

@@ -177,7 +177,7 @@ public class KermetaOutline extends ContentOutlinePage {
 
         if (treeViewer != null) {
             if (editor.getMcunit() == null) {
-                treeViewer.setInput("Nothing to display");
+                //treeViewer.setInput("Nothing to display");
                 return;
             } else {
                 

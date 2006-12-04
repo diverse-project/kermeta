@@ -121,7 +121,7 @@ public class KermetaWorkspace {
 	 * @throws CoreException
 	 */
 	private void initializeChangeListener() throws CoreException {
-		IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
+		//IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
 		IResourceHelper.touchWorkspace();
 	}
 	
