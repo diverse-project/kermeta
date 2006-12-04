@@ -55,16 +55,24 @@ public final class StringHelper {
 	 */
 	static public String getAbsoluteName(String fileURI) {
 		
-		String[] splitsURI = fileURI.split( ".+:" );
-		String absoluteName = splitsURI[1];
+		String[] splitsURI = fileURI.split( ":/");
+		String absoluteName;
+		if ( splitsURI.length == 3)
+			absoluteName = splitsURI[1] + ":/" + splitsURI[2];
+		else
+			absoluteName = splitsURI[0];
 		
 		return absoluteName;
 	}
 
 	/**
+	 * Linux compatibility
+	 * platform:/plugin/myProject/myFile.kmt
+	 * The method returns /myProject/myFile.kmt
+	 * 
+	 * Windows compatibility
 	 * platform:/plugin/myProject/myFile.kmt
 	 * @param fileURI
-	 * @return /myProject/myFile.kmt
 	 */
 	static public String getRelativeName(String fileURI) {
 		String absoluteName = getAbsoluteName(fileURI);
@@ -82,7 +90,7 @@ public final class StringHelper {
 	 */
 	static public String[] getNameAndPath (IPath path) {
 		String[] result = new String[2];
-		result[0] = path.lastSegment().toString();
+		result[0] = path.lastSegment();
 		if ( result[0].equals("") ) result[0] = "/";
 		result[1] = path.removeLastSegments(1).toString();
 		return result;	
@@ -92,6 +100,7 @@ public final class StringHelper {
 	 * Example : /myProject/myDir/myFile.kmt
 	 * It returns at element 0 : /myProject/myDir
 	 *            at element 1 : myFile.kmt
+	 * @param fileRelativeName This is a String representing the file path relative to the platform project.
 	 */
 	static public String[] getNameAndPath( String fileRelativeName ) {
 		String[] result = new String[2];
@@ -123,10 +132,22 @@ public final class StringHelper {
 		return fileName.substring(index);
 	}
 	
+	/**
+	 * This method gets the extension of the file given as parameter.
+	 * @param file
+	 * @return The method returns the extension of the file (".kmt" for example)
+	 * or an empty string if the file has no extension.
+	 */
 	static public String getExtension(File file) {
 		return getExtension(file.getName());
 	}
 	
+	/**
+	 * testa.kmt
+	 * Returns testa
+	 * @param fileName
+	 * @return
+	 */
 	static public String getNameWithoutExtension(String fileName) {
 		int index = fileName.lastIndexOf(".");
 		return fileName.substring(0, index);
@@ -136,12 +157,56 @@ public final class StringHelper {
 		return getNameWithoutExtension(unit.getName());
 	}
 	
+	/**
+	 * oldName = testa.kmt
+	 * extension = .km
+	 * it returns testa.km
+	 * @param oldName
+	 * @param extension
+	 * @return
+	 */
 	static public String getNewNameWithExtension(String oldName, String extension) {
 		String nameWithoutExtension = getNameWithoutExtension(oldName);
 		return nameWithoutExtension + extension;
 	}
 	
+	/**
+	 * oldName = testa.kmt
+	 * extension = .km
+	 * it returns testa.km 
+	 * @param file
+	 * @param extension
+	 * @return
+	 */
 	static public String getNewNameWithExtension(File file, String extension) {
 		return getNewNameWithExtension(file.getName(), extension);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String args[]) {
+		
+		System.out.println("coucou");
+		
+		String s1 = getAbsoluteName("file:/c:/blah/reblah/testa.kmt");
+		if ( ! s1.equals("c:/blah/reblah/testa.kmt") )
+			System.out.println(s1);
+		
+		String s2 = getAbsoluteName("/udd/blah/reblah/testa.kmt");
+		if ( ! s2.equals("/udd/blah/reblah/testa.kmt") )
+			System.out.println(s2);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }
