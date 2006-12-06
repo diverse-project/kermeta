@@ -4,9 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="structure">
     <eClassifiers xsi:type="ecore:EClass" name="Type"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//structure/Type #//structure/NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//structure/Type"/>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="#//structure/TypeVariable"/>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="Property">
@@ -16,11 +14,15 @@
     <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="#//structure/ClassDefinition"
           eOpposite="#//structure/ClassDefinition/ownedOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1"
+          eType="#//structure/TypeVariable"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/GenericTypeDefinition">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//structure/Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="#//structure/Property" containment="true" eOpposite="#//structure/Property/owningClass"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="#//structure/Operation" containment="true" eOpposite="#//structure/Operation/owningClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+          eType="#//structure/Property" containment="true" eOpposite="#//structure/Property/owningClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
+          eType="#//structure/Operation" containment="true" eOpposite="#//structure/Operation/owningClass"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
           eType="#//structure/Type"/>
     </eClassifiers>
@@ -43,10 +45,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//structure/TypeDefinitionContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//structure/NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="#//structure/Type"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Operation">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1"
-          eType="#//structure/TypeVariable"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
     <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//structure/TypeDefinition"/>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true"
@@ -61,12 +59,13 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1"
           eType="#//structure/TypeVariable" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinition" eSuperTypes="#//structure/GenericTypeDefinition #//structure/TypeDefinitionContainer"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//structure/ParameterizedType"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" abstract="true"
         eSuperTypes="#//structure/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeDefinition"
           upperBound="-1" eType="#//structure/TypeDefinition" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true" eSuperTypes="#//structure/Type #//structure/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//structure/Type"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>
