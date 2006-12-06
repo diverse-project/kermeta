@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.kpm.builder;
+package fr.irisa.triskell.kermeta.kpm.actions.popup;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -13,39 +13,40 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 
-public class KermetaResourceVisitor implements IResourceVisitor {
+public class DependencyVisitor implements IResourceVisitor {
 
 	private KPM kpm;
 	
-	public static final int CREATION = 0;
-	public static final int DELETION = 1;
+	public static final int ADDING = 0;
+	public static final int REMOVING = 1;
 	
 	private int mode;
 	
-	public KermetaResourceVisitor(KPM kpm) {
+	public DependencyVisitor(KPM kpm) {
 		this.kpm = kpm;
-		mode = CREATION;
+		mode = ADDING;
 	}
 	
-	public KermetaResourceVisitor(KPM kpm, int mode) {
+	public DependencyVisitor(KPM kpm, int mode) {
 		this.kpm = kpm;
 		this.mode = mode;
 	}
 	
 	public boolean visit(IResource resource) throws CoreException {
 		switch ( mode ) {
-		case CREATION :
-			return creationVisit(resource);
-		case DELETION :
-			return deletionVisit(resource);
+		case ADDING :
+			return addingVisit(resource);
+		case REMOVING :
+			return removingVisit(resource);
 		default : 
 			break;
 		}
 		return false;
 	}
 
-	public boolean creationVisit(IResource resource) {
+	public boolean addingVisit(IResource resource) {
 		
 		boolean mustContinue = true;
 		
@@ -53,7 +54,7 @@ public class KermetaResourceVisitor implements IResourceVisitor {
 		
 		case IResource.FILE :
 			File file = kpm.createFileIfNecessary( (IFile) resource );
-			DependencyHelper.addTypecheckingDependencies(file);
+			DependencyHelper.addTypecheckingDependenciesToKMTFile(file);
 			break;
 			
 		case IResource.FOLDER :
@@ -74,22 +75,25 @@ public class KermetaResourceVisitor implements IResourceVisitor {
 		return mustContinue;
 	}
 	
-	public boolean deletionVisit(IResource resource) {
+	public boolean removingVisit(IResource resource) {
 		
 		boolean mustContinue = true;
 		
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			kpm.removeFile( (IFile) resource );
+			File file = kpm.findFile( (IFile) resource );
+			file.removeDependencies( KPMHelper.createType("typechecking") );
+			//kpm.removeDependencies( file );
+			//kpm.removeFile( (IFile) resource );
 			break;
 			
 		case IResource.FOLDER :
-			kpm.removeDirectory( (IFolder) resource );
+			//kpm.removeDirectory( (IFolder) resource );
 			break;
 			
 		case IResource.PROJECT :
-			kpm.removeProject( (IProject) resource );
+			//	kpm.removeProject( (IProject) resource );
 			break;
 			
 		case IResource.ROOT :

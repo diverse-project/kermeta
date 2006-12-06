@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -433,6 +433,7 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * This method removes each dependencies where the "to" attribute is the given unit.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -441,7 +442,9 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 		for ( int index = 0; index < dependencies.length; index++ ) {
 			Dependency currentDependency = dependencies[index];
 			if ( currentDependency.getTo() == to ) {
-				getOwnedDependencies().remove(currentDependency);		
+				// remove the dependency from the unit
+				getOwnedDependencies().remove(currentDependency);
+				// remove the dependency from the system
 				getKpm().getDependencies().remove(currentDependency);
 			}
 		}
@@ -515,6 +518,17 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 				getKpm().getDependencies().remove(currentDependency);
 			}
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void remove() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

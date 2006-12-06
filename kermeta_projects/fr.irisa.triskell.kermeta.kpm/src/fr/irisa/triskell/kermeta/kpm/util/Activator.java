@@ -4,6 +4,7 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import org.eclipse.ui.IStartup;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
@@ -11,7 +12,7 @@ import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends Plugin implements IStartup {
+public class Activator extends AbstractUIPlugin implements IStartup {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.kpmspy";

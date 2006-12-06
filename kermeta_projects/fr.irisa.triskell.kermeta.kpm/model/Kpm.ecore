@@ -161,6 +161,10 @@
     <eOperations name="removeDependencies">
       <eParameters name="type" eType="#//Type"/>
     </eOperations>
+    <eOperations name="remove"/>
+    <eOperations name="removeDependencies">
+      <eParameters name="type" eType="#//Type"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="#//Date"/>
@@ -177,6 +181,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//File">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//File"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//Directory"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IFile" instanceClassName="org.eclipse.core.resources.IFile"/>

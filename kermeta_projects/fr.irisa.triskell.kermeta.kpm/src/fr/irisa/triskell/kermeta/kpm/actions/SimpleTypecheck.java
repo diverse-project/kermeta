@@ -13,7 +13,8 @@ public class SimpleTypecheck implements IAction {
 		
 		File from = (File) dependency.getFrom();
 		
-		KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit( from );
+		//KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit( from );
+		KermetaUnit unit = KermetaUnitHelper.typeCheckFile( from );
 		
 		if ( unit == null )
 			return;

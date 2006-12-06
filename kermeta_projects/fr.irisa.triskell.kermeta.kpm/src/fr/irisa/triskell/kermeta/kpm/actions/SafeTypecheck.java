@@ -12,16 +12,16 @@ public class SafeTypecheck implements IAction {
 
 		File from = (File) dependency.getFrom();
 		
+		
 		File mostRecentFile = mostRecentFile( from );
 		
 		if ( mostRecentFile != null ) {
-		
+	
 			if ( mostRecentFile == from ) {
 				from.receiveEvent( "typecheck" );
 			} else {
 				mostRecentFile.receiveEvent( "typecheck" );
 			}
-			
 		}
 		
 	}

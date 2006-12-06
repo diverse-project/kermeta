@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -368,8 +368,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public void removeFile(File file) {
 		if ( file != null ) {
-			removeUnit(file);
 			file.getContainer().getContents().remove(file);
+			removeUnit(file);
 		}
 	}
 	
@@ -400,9 +400,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public void removeDirectory(Directory directory) {
 		if ( directory != null ) {
-			removeUnit(directory);
 			directory.getContainer().getContents().remove(directory);
 			directory.getContents().clear();
+			removeUnit(directory);
 		}
 	}
 	
@@ -464,12 +464,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public Dependency createDependency(Unit from, Unit to, String typeName, String eventName, ArrayList actionsName) {
 		Dependency dependency = KpmFactory.eINSTANCE.createDependency();
-		Type type = KpmFactory.eINSTANCE.createType();
-		type.setName(typeName);
-		dependency.setType( type );
-		Event event = KpmFactory.eINSTANCE.createEvent();
-		event.setName( eventName );
-		dependency.setEvent(event);
+
+		dependency.setType( KPMHelper.createType(typeName) );
+		dependency.setEvent( KPMHelper.createEvent(eventName) );
 		
 		for ( String actionName : (ArrayList<String>) actionsName ) {
 			Action action = KpmFactory.eINSTANCE.createAction();
@@ -488,18 +485,25 @@ public class KPMImpl extends EObjectImpl implements KPM {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Remove every dependencies for a unit. The given unit plays the role of from. The dependency
+	 * for the unit playing the role of to is also removed.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void removeDependencies(Unit unit) {
-		Iterator <Dependency> itOnDependencies = unit.getOwnedDependencies().iterator();
-		while ( itOnDependencies.hasNext() ) {
-			Dependency currentDependency = itOnDependencies.next();
+		Dependency[] dependencies = (Dependency[]) unit.getOwnedDependencies().toArray();
+		
+		for ( int index = 0; index < dependencies.length; index++ ) {
+			
+			Dependency currentDependency = dependencies[index];
+			
+			currentDependency.getTo().removeDependencies(unit);
 			getDependencies().remove(currentDependency);
-			// remove dependencies where unit is playing the "to" role
-			//currentDependency.getTo().removeDependencies( unit );
+			
 		}
+		
 		unit.getOwnedDependencies().clear();
+		
 	}
 
 	/**
@@ -510,7 +514,12 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated NOT
 	 */
 	public void removeUnit(Unit unit) {
-		List <Unit> units = unit.getDependenciesUnit();
+		
+		removeDependencies(unit);
+		
+		getUnits().remove(unit);
+		
+		/*List <Unit> units = unit.getDependenciesUnit();
 		
 		boolean canIDelete = true;
 		Iterator <Unit> itOnUnits = units.iterator();
@@ -518,7 +527,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		while ( canIDelete && itOnUnits.hasNext() ) {
 		
 			Unit currentUnit = itOnUnits.next();
-		
+			//unit.removeDependencies(unit);
+			//removeDependencies(currentUnit);
+			
 			if ( currentUnit.getDependencies(unit).size() != 0 )
 				canIDelete = false;
 			
@@ -529,7 +540,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			removeDependencies(unit);
 		}
 		
-		unit.setLastTimeModified( new Date(0) );
+		unit.setLastTimeModified( new Date(0) );*/
 		/*
 		Iterator <Dependency> itOnDependencies = unit.getOwnedDependencies().iterator();
 		while ( itOnDependencies.hasNext() )
@@ -544,6 +555,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	public Dependency findDependency(Unit from, Unit to, String typeName, String eventName) {
 		return from.findDependency(to, typeName, eventName);
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->

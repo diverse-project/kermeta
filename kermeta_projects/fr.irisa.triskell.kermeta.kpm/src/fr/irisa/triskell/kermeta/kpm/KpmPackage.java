@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -335,13 +335,22 @@ public interface KpmPackage extends EPackage {
 	int DIRECTORY__CONTENTS = FILE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTORY__SOURCE = FILE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Directory</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
+	int DIRECTORY_FEATURE_COUNT = FILE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.
@@ -424,6 +433,15 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROJECT__CONTENTS = DIRECTORY__CONTENTS;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__SOURCE = DIRECTORY__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Project</em>' class.
@@ -839,6 +857,17 @@ public interface KpmPackage extends EPackage {
 	EReference getDirectory_Contents();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Directory#isSource <em>Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Source</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Directory#isSource()
+	 * @see #getDirectory()
+	 * @generated
+	 */
+	EAttribute getDirectory_Source();
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Project <em>Project</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1226,6 +1255,14 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DIRECTORY__CONTENTS = eINSTANCE.getDirectory_Contents();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DIRECTORY__SOURCE = eINSTANCE.getDirectory_Source();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.

@@ -95,7 +95,7 @@ public class KermetaWorkspace {
 	private void initialize() {
 		try {
 			initializeKpm();
-			initializeChangeListener();
+			//initializeChangeListener();
 			initializeProjects();
 		} catch (CoreException exception) {
 			System.out.println("Exception during initialization of KermetaWorkspace : ");
@@ -120,10 +120,10 @@ public class KermetaWorkspace {
 	 * 
 	 * @throws CoreException
 	 */
-	private void initializeChangeListener() throws CoreException {
+	/*private void initializeChangeListener() throws CoreException {
 		//IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
 		IResourceHelper.touchWorkspace();
-	}
+	}*/
 	
 	/**
 	 * Creates KermetaProjects object. It lists the project of the
@@ -397,7 +397,7 @@ public class KermetaWorkspace {
 		}
 		
 		units.put(file, unit);
-		notifyInterestedObjects(file);
+		//notifyInterestedObjects(file);
 		//		notifyInterestedObject(o, file)
 		
 		ArrayList <File> files = new ArrayList <File> ();

@@ -35,7 +35,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		switch ( delta.getKind() ) {
 		
 		case IResourceDelta.ADDED :
-			mustContinue = processAdding (delta.getResource() );
+			//mustContinue = processAdding (delta.getResource() );
 			break;
 			
 		case IResourceDelta.REMOVED :
@@ -152,6 +152,8 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
 				if ( project != null )
 					project.changed();
+				/*else
+					kpm.createProject( (IProject) resource );*/
 				else {
 					KermetaResourceVisitor visitor = new KermetaResourceVisitor(kpm);
 					resource.accept(visitor);

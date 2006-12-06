@@ -14,8 +14,14 @@ public class UpdateUnit implements IAction {
 			String extension = file.getExtension();
 			
 			if ( extension.equals(".km")
-				|| extension.equals(".kmt") )
-				file.receiveEvent("safe_typecheck");
+				|| extension.equals(".kmt") ) {
+				
+				if ( ! file.getContainer().isSource() )
+					file.receiveEvent("simple_typecheck");		
+				else
+					file.receiveEvent("safe_typecheck");
+			}
+
 			
 		}
 

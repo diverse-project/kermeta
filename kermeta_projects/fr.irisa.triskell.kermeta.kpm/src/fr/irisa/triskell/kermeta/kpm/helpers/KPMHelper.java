@@ -29,6 +29,7 @@ public class KPMHelper {
 		Directory directory = KpmFactory.eINSTANCE.createDirectory();
 		directory.setName(directoryName);
 		directory.setPath(directoryPath);
+		directory.setSource(false);
 		directory.setLastTimeModified( new Date() );
 		return directory;
 	}
@@ -57,5 +58,18 @@ public class KPMHelper {
 		}
 		
 		return dependency;
+	}
+	
+	
+	static public Type createType(String typeName) {
+		Type type = KpmFactory.eINSTANCE.createType();
+		type.setName(typeName);
+		return type;
+	}
+	
+	static public Event createEvent(String eventName) {
+		Event event = KpmFactory.eINSTANCE.createEvent();
+		event.setName(eventName);
+		return event;
 	}
 }

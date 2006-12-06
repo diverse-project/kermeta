@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProjectImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: ProjectImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -51,4 +51,7 @@ public class ProjectImpl extends DirectoryImpl implements Project {
 		return getPath() + getName();
 	}
 	
+	public void remove() {
+		kpm.removeProject(this);
+	}
 } //ProjectImpl

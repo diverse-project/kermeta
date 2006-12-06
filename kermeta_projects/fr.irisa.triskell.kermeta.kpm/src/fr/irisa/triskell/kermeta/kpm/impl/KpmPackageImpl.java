@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -371,6 +371,15 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDirectory_Source() {
+		return (EAttribute)directoryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getProject() {
 		return projectEClass;
 	}
@@ -618,6 +627,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		directoryEClass = createEClass(DIRECTORY);
 		createEReference(directoryEClass, DIRECTORY__CONTENTS);
+		createEAttribute(directoryEClass, DIRECTORY__SOURCE);
 
 		projectEClass = createEClass(PROJECT);
 
@@ -850,11 +860,17 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(unitEClass, null, "removeDependencies");
 		addEParameter(op, this.getType(), "type", 0, 1);
 
+		addEOperation(unitEClass, null, "remove");
+
+		op = addEOperation(unitEClass, null, "removeDependencies");
+		addEParameter(op, this.getType(), "type", 0, 1);
+
 		initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFile_Container(), this.getDirectory(), null, "container", null, 0, 1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directoryEClass, Directory.class, "Directory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectory_Contents(), this.getFile(), null, "contents", null, 0, -1, Directory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDirectory_Source(), this.getboolean(), "source", null, 0, 1, Directory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

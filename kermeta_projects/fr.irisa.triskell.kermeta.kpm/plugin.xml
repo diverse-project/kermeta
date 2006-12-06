@@ -16,5 +16,32 @@
       <run class="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
    </builder>
 </extension>
+<extension
+      point="org.eclipse.ui.popupMenus">
+   <objectContribution
+         adaptable="false"
+         id="fr.irisa.triskell.kermeta.kpm.srcFolderContribution"
+         objectClass="org.eclipse.core.resources.IFolder">
+      <action
+            class="fr.irisa.triskell.kermeta.kpm.actions.popup.MakeAFolderAnSrcFolder"
+            icon="images/kermeta.png"
+            id="fr.irisa.triskell.kermeta.kpm.srcAction"
+            label="Add / Remove src property"/>
+   </objectContribution>
+</extension>
+<extension
+      point="org.eclipse.ui.decorators">
+   <decorator
+         adaptable="true"
+         class="fr.irisa.triskell.kermeta.kpm.actions.popup.SRCFolderDecorator"
+         icon="images/kermeta.png"
+         id="fr.irisa.triskell.kermeta.kpm.decorator"
+         label="Kermeta Folder Decorator"
+         lightweight="false"
+         location="TOP_RIGHT"
+         objectClass="org.eclipse.core.resources.IFolder"
+         state="true">
+   </decorator>
+</extension>
 
 </plugin>
