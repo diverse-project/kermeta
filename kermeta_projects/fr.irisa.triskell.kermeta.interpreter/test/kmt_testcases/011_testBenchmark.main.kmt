@@ -5,7 +5,7 @@ package testBenchmark;
 
 require kermeta
 
-class Test_benchmark inherits kermeta::kunit::Test {
+class Test_benchmark inherits kermeta::kunit::TestCase {
 
     operation testBenchmark() : kermeta::standard::Integer is do
  		var v1 : kermeta::standard::Integer init 0

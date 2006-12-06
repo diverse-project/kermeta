@@ -8,7 +8,7 @@ require kermeta
 using kermeta::standard
 
 // Testing the operations toString on classes of the framework : 
-class TestFrameworkToString inherits kermeta::kunit::Test {
+class TestFrameworkToString inherits kermeta::kunit::TestCase {
  
    
 	operation testOnString1() is do 

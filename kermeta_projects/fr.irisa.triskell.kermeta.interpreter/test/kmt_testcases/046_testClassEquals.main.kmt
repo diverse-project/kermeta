@@ -1,4 +1,4 @@
-/* $Id: 046_testClassEquals.main.kmt,v 1.5 2006-10-13 11:52:47 ftanguy Exp $
+/* $Id: 046_testClassEquals.main.kmt,v 1.6 2006-12-06 16:00:05 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter
  * File      : 046_testClassEquals.main.kmt
  * License   : EPL
@@ -17,7 +17,7 @@ require kermeta
 
 using kermeta::language::structure
 
-class TestClassEquals inherits kermeta::kunit::Test {
+class TestClassEquals inherits kermeta::kunit::TestCase {
 
     operation testStringEquals() : Void is do
         assertTrue("toto".getMetaClass == "titi".getMetaClass)

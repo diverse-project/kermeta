@@ -6,7 +6,7 @@ package testUML2km;
 require "input_test_models/UML2.km"
 using uml2
 
-class Main inherits kermeta::kunit::Test {
+class Main inherits kermeta::kunit::TestCase {
 
 
 	operation main () is do

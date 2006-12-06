@@ -6,7 +6,7 @@ package opsignature;
 using kermeta::standard
 using kermeta::io
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
     operation testSignature() : Void is do
         var t : Top

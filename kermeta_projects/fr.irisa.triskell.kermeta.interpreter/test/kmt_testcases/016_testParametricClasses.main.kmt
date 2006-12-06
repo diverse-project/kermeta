@@ -29,7 +29,7 @@ using kermeta::standard
  	end
  }
 
-class TestParametricClass inherits kermeta::kunit::Test
+class TestParametricClass inherits kermeta::kunit::TestCase
 {    
 
 	property names : String[*]

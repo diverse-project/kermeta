@@ -12,7 +12,7 @@ alias Integer : kermeta::standard::Integer;
 @TODO "this testsuite must be cleaned and verified !!"
 
 // arithmetic operations
-class Test_arithm inherits kermeta::kunit::Test {
+class Test_arithm inherits kermeta::kunit::TestCase {
 
     operation main_operation() : kermeta::standard::Integer is do
         var r1 : kermeta::standard::Integer

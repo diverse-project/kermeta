@@ -7,7 +7,7 @@ require kermeta
 
 
 /*****************************************************************************
- * $Id: 031_testVariable.main.kmt,v 1.4 2005-05-13 16:41:13 ffleurey Exp $
+ * $Id: 031_testVariable.main.kmt,v 1.5 2006-12-06 16:00:06 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt
@@ -21,7 +21,7 @@ require kermeta
  ***************************************************************************
  */
 
-class TestVariable inherits kermeta::kunit::Test
+class TestVariable inherits kermeta::kunit::TestCase
 {    
     // Main operation that embeds all the tests 
      operation main_operation() is do

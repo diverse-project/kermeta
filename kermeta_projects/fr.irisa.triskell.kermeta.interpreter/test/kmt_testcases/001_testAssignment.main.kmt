@@ -10,7 +10,7 @@ using kermeta::standard
 // Test simple assignements and casts on variables.
 // assignement of propoerties is covered by other tests
 
-class Test_assignment inherits kermeta::kunit::Test {
+class Test_assignment inherits kermeta::kunit::TestCase {
 
     operation testoperation1() : kermeta::standard::Integer is do
         var ~result : kermeta::standard::Integer

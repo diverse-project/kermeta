@@ -24,7 +24,7 @@ using kermeta::standard
 
 class NonPrimitiveType {}
 
-class TestCollection inherits kermeta::kunit::Test {
+class TestCollection inherits kermeta::kunit::TestCase {
 
 	operation main() : Void is do
 	end

@@ -139,7 +139,7 @@ class Printer inherits Visitor
 
 
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
 	operation testmain() is 
 	do 

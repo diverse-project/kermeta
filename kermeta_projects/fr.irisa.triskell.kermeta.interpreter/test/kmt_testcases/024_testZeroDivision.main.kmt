@@ -8,7 +8,7 @@ package root_package;
 require kermeta
 using kermeta::standard
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
     operation main() : Void is do 
        //testZeroDivision

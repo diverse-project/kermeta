@@ -7,7 +7,7 @@ require kermeta
 
 
 // call an operation from another package 
-class TestLoop inherits kermeta::kunit::Test {
+class TestLoop inherits kermeta::kunit::TestCase {
 
     operation testLoop1() : kermeta::standard::Integer is do
 		var v1 : kermeta::standard::Integer init 2

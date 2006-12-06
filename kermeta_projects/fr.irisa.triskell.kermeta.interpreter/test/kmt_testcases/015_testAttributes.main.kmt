@@ -38,7 +38,7 @@ class MyObjectTwo {
 
 }
 
-class MyObjectsCreation inherits kermeta::kunit::Test {
+class MyObjectsCreation inherits kermeta::kunit::TestCase {
 
 	operation testcreateMyObjects() : Void is do
 		/*

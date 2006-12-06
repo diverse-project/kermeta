@@ -10,7 +10,7 @@ require kermeta
 package testPackage 
 {
 
-	class TestClass inherits kermeta::kunit::Test 
+	class TestClass inherits kermeta::kunit::TestCase 
 	{
 		@testopsub "test operation for a 1 level 'sub'"
 		operation testopsub() : kermeta::standard::Integer is do

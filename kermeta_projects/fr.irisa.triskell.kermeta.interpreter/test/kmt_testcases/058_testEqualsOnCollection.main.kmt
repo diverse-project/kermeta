@@ -11,7 +11,7 @@ using kermeta::utils
 using kermeta::language::structure
 using kermeta::kunit
 
-class Test inherits kermeta::kunit::Test {
+class Test inherits kermeta::kunit::TestCase {
 
 	operation main() : Boolean is do	
 	end

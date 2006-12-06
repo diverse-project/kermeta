@@ -8,7 +8,7 @@ require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 036_testIterator.main.kmt,v 1.5 2005-05-16 23:57:26 ffleurey Exp $
+ * $Id: 036_testIterator.main.kmt,v 1.6 2006-12-06 16:00:06 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -23,7 +23,7 @@ alias Integer : kermeta::standard::Integer;
  ***************************************************************************
  */
 
-class TestIterator inherits kermeta::kunit::Test
+class TestIterator inherits kermeta::kunit::TestCase
 {    
 	attribute aset : kermeta::standard::Set<Integer>
 

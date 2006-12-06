@@ -22,7 +22,7 @@ class MyObject {
 
 }
 
-class MyObjectCreation inherits kermeta::kunit::Test {
+class MyObjectCreation inherits kermeta::kunit::TestCase {
 
 	operation testcreateMyObject() : MyObject is do
 		var object : MyObject

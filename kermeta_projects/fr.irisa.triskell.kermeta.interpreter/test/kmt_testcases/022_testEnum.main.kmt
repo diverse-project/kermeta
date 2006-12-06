@@ -23,7 +23,7 @@ enumeration Jour {
 }
 
 
-class TestEnum inherits kermeta::kunit::Test {
+class TestEnum inherits kermeta::kunit::TestCase {
 	
 	operation testCompareLiteral() : Couleur is
 	do

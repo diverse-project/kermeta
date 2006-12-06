@@ -57,7 +57,7 @@ class B
  	end
 }
 
-class TestExceptions inherits kermeta::kunit::Test
+class TestExceptions inherits kermeta::kunit::TestCase
 {    
      operation testmain_operation() is do
      	var a : A

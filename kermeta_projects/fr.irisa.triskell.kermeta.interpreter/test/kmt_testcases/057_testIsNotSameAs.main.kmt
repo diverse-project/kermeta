@@ -20,7 +20,7 @@ class Riri {
 class Loulou inherits Riri {}
 class Fifi<G> inherits Riri {}
 
-class Test inherits kermeta::kunit::Test {
+class Test inherits kermeta::kunit::TestCase {
 
 	operation main() : Void is do
 	end

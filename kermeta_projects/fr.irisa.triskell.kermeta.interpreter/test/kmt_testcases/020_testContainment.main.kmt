@@ -15,7 +15,7 @@ class B {
 
 }
 
-class TestContainment inherits kermeta::kunit::Test {
+class TestContainment inherits kermeta::kunit::TestCase {
 
 
 	operation testSetOnAssign() is do

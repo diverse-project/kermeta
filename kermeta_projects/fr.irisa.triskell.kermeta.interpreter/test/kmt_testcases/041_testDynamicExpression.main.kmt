@@ -1,4 +1,4 @@
-/* $Id: 041_testDynamicExpression.main.kmt,v 1.1 2006-05-05 21:50:15 dvojtise Exp $
+/* $Id: 041_testDynamicExpression.main.kmt,v 1.2 2006-12-06 16:00:05 dvojtise Exp $
  * Creation date: May 5, 2006
  * License: EPL
  * Copyright: INRIA / IRISA
@@ -17,7 +17,7 @@ using kermeta::interpreter
 using kermeta::utils
 using kermeta::standard
 
-class TestDynamicExpression inherits kermeta::kunit::Test 
+class TestDynamicExpression inherits kermeta::kunit::TestCase 
 {
     operation test1() : Void is do 
         var tester : TesterClass1 init TesterClass1.new
@@ -53,7 +53,7 @@ class TestDynamicExpression inherits kermeta::kunit::Test
 }
 
 /**  */
-class TesterClass1 inherits kermeta::kunit::Test
+class TesterClass1 inherits kermeta::kunit::TestCase
 {
 	attribute wasTestTotoLaunched : Boolean
 	

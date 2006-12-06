@@ -18,7 +18,7 @@ class B {
 	reference ass : A[*]#bss
 }
 
-class TestOpposites inherits kermeta::kunit::Test {
+class TestOpposites inherits kermeta::kunit::TestCase {
 
 	operation test1_1Opposites1() is do
 		var a : A init A.new

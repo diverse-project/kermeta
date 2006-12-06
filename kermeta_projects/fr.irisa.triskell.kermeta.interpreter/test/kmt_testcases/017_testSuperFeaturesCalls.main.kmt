@@ -47,7 +47,7 @@ class D inherits B,C
  	end
 }
 
-class TestSuperFeatures inherits kermeta::kunit::Test
+class TestSuperFeatures inherits kermeta::kunit::TestCase
 {    
      operation testMain_operation() is do
      	var a : A

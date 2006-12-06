@@ -9,7 +9,7 @@ require kermeta
 using kermeta::standard
 
 
-class TestEx inherits kermeta::kunit::Test {
+class TestEx inherits kermeta::kunit::TestCase {
 
 	operation test1() is do
 		

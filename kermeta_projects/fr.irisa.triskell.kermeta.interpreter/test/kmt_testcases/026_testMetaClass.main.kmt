@@ -5,7 +5,7 @@
 package metaclass_package;
 
 require kermeta
-class TestMetaClass inherits kermeta::kunit::Test
+class TestMetaClass inherits kermeta::kunit::TestCase
 {
     operation testMetaClassOfClass() : Void is do 
     	var type : kermeta::language::structure::Class init TheClass
