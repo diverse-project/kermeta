@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedType.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: ParameterizedType.java,v 1.3 2006-12-06 16:22:58 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getVirtualTypeBinding <em>Virtual Type Binding</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getTypeDefinition <em>Type Definition</em>}</li>
  * </ul>
@@ -26,6 +27,22 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ParameterizedType extends Type {
+	/**
+	 * Returns the value of the '<em><b>Virtual Type Binding</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Virtual Type Binding</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Virtual Type Binding</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getParameterizedType_VirtualTypeBinding()
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList getVirtualTypeBinding();
+
 	/**
 	 * Returns the value of the '<em><b>Type Param Binding</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding}.

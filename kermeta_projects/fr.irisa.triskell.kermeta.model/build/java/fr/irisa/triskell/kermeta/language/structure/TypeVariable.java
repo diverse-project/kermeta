@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariable.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: TypeVariable.java,v 1.2 2006-12-06 16:22:58 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeVariable()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface TypeVariable extends TypeContainer, Type, NamedElement {

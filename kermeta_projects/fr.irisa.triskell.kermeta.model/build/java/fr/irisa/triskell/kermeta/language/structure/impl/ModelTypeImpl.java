@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ModelTypeImpl.java,v 1.3 2006-12-06 16:23:09 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
+import fr.irisa.triskell.kermeta.language.structure.Model;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
@@ -46,6 +47,28 @@ public class ModelTypeImpl extends ParameterizedTypeImpl implements ModelType {
 	 */
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.MODEL_TYPE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Model _new() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isModelTypeOf(Model model) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 } //ModelTypeImpl

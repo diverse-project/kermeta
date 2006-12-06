@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ModelType.java,v 1.2 2006-12-06 16:22:58 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,4 +18,20 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @generated
  */
 public interface ModelType extends ParameterizedType {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Model _new();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	boolean isModelTypeOf(Model model);
+
 } // ModelType

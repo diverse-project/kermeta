@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
+  <eSubpackages name="structure">
+    <eClassifiers xsi:type="ecore:EClass" name="Object"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/GenericTypeDefinition"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" upperBound="-1"
+          eType="#//structure/TypeVariableBinding" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="#//structure/TypeVariable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinition" eSuperTypes="#//structure/GenericTypeDefinition #//structure/TypeDefinitionContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//structure/ParameterizedType">
+      <eOperations name="isModelTypeOf" eType="#//structure/Boolean">
+        <eParameters name="model" eType="#//structure/Model"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualTypeContainer" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1"
+          eType="#//structure/VirtualType" containment="true" eOpposite="#//structure/VirtualType/modelType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable" eSuperTypes="#//structure/VirtualTypeContainer #//structure/TypeVariable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="VirtualType" eSuperTypes="#//structure/ObjectTypeVariable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" lowerBound="1"
+          eType="#//structure/ClassDefinition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1"
+          eType="#//structure/VirtualTypeContainer" eOpposite="#//structure/VirtualTypeContainer/virtualType"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1"
+          eType="#//structure/TypeVariableBinding" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//structure/Object">
+      <eOperations name="filter" upperBound="-1" eType="#//structure/Object">
+        <eParameters name="typeName" eType="#//structure/Type"/>
+      </eOperations>
+      <eOperations name="add">
+        <eParameters name="obj" eType="#//structure/Object"/>
+      </eOperations>
+      <eOperations name="remove">
+        <eParameters name="obj" eType="#//structure/Object"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+          eType="#//structure/Object" changeable="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+  </eSubpackages>
+</ecore:EPackage>

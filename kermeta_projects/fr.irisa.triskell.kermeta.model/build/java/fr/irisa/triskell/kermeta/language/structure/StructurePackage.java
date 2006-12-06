@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.5 2006-09-01 09:32:52 dvojtise Exp $
+ * $Id: StructurePackage.java,v 1.6 2006-12-06 16:22:58 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -97,7 +97,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 4;
+	int TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -134,7 +134,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameterizedType()
 	 * @generated
 	 */
-	int PARAMETERIZED_TYPE = 24;
+	int PARAMETERIZED_TYPE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -155,13 +155,22 @@ public interface StructurePackage extends EPackage {
 	int PARAMETERIZED_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING = TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = TYPE_FEATURE_COUNT + 0;
+	int PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
@@ -170,7 +179,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 1;
+	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Parameterized Type</em>' class.
@@ -179,7 +188,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+	int PARAMETERIZED_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl <em>Class</em>}' class.
@@ -208,6 +217,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__VIRTUAL_TYPE_BINDING = PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING;
 
 	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -282,6 +300,43 @@ public interface StructurePackage extends EPackage {
 	int CLASS_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl <em>Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModel()
+	 * @generated
+	 */
+	int MODEL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__TAG = OBJECT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contents</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL__CONTENTS = OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -289,7 +344,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 10;
+	int NAMED_ELEMENT = 13;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl <em>Typed Element</em>}' class.
@@ -299,7 +354,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypedElement()
 	 * @generated
 	 */
-	int TYPED_ELEMENT = 14;
+	int TYPED_ELEMENT = 17;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl <em>Multiplicity Element</em>}' class.
@@ -309,7 +364,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getMultiplicityElement()
 	 * @generated
 	 */
-	int MULTIPLICITY_ELEMENT = 7;
+	int MULTIPLICITY_ELEMENT = 10;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.
@@ -319,7 +374,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 2;
+	int OPERATION = 4;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
@@ -329,7 +384,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 3;
+	int PROPERTY = 5;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl <em>Type Container</em>}' class.
@@ -339,7 +394,281 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeContainer()
 	 * @generated
 	 */
-	int TYPE_CONTAINER = 5;
+	int TYPE_CONTAINER = 7;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumerationLiteral()
+	 * @generated
+	 */
+	int ENUMERATION_LITERAL = 8;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl <em>Data Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getDataType()
+	 * @generated
+	 */
+	int DATA_TYPE = 11;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl <em>Enumeration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumeration()
+	 * @generated
+	 */
+	int ENUMERATION = 12;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl <em>Package</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPackage()
+	 * @generated
+	 */
+	int PACKAGE = 14;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameter()
+	 * @generated
+	 */
+	int PARAMETER = 15;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPrimitiveType()
+	 * @generated
+	 */
+	int PRIMITIVE_TYPE = 16;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TagImpl <em>Tag</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TagImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTag()
+	 * @generated
+	 */
+	int TAG = 18;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl <em>Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraint()
+	 * @generated
+	 */
+	int CONSTRAINT = 19;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClassDefinition()
+	 * @generated
+	 */
+	int CLASS_DEFINITION = 20;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl <em>Type Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariable()
+	 * @generated
+	 */
+	int TYPE_VARIABLE = 24;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ObjectTypeVariableImpl <em>Object Type Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ObjectTypeVariableImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getObjectTypeVariable()
+	 * @generated
+	 */
+	int OBJECT_TYPE_VARIABLE = 25;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProductType()
+	 * @generated
+	 */
+	int PRODUCT_TYPE = 30;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getFunctionType()
+	 * @generated
+	 */
+	int FUNCTION_TYPE = 31;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariableBinding()
+	 * @generated
+	 */
+	int TYPE_VARIABLE_BINDING = 9;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinition()
+	 * @generated
+	 */
+	int TYPE_DEFINITION = 32;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVoidType()
+	 * @generated
+	 */
+	int VOID_TYPE = 33;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.GenericTypeDefinitionImpl <em>Generic Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.GenericTypeDefinitionImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getGenericTypeDefinition()
+	 * @generated
+	 */
+	int GENERIC_TYPE_DEFINITION = 21;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeDefinitionImpl <em>Model Type Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeDefinitionImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinition()
+	 * @generated
+	 */
+	int MODEL_TYPE_DEFINITION = 26;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeContainerImpl <em>Virtual Type Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeContainerImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVirtualTypeContainer()
+	 * @generated
+	 */
+	int VIRTUAL_TYPE_CONTAINER = 27;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeVariable()
+	 * @generated
+	 */
+	int MODEL_TYPE_VARIABLE = 28;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeImpl <em>Virtual Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVirtualType()
+	 * @generated
+	 */
+	int VIRTUAL_TYPE = 29;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
+	 * @generated
+	 */
+	int MODEL_TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TAG = PARAMETERIZED_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Type Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__VIRTUAL_TYPE_BINDING = PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_PARAM_BINDING = PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
+
+	/**
+	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_DEFINITION = PARAMETERIZED_TYPE__TYPE_DEFINITION;
+
+	/**
+	 * The number of structural features of the '<em>Model Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -846,16 +1175,6 @@ public interface StructurePackage extends EPackage {
 	int NAMED_ELEMENT_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumerationLiteral()
-	 * @generated
-	 */
-	int ENUMERATION_LITERAL = 6;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -892,14 +1211,49 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_LITERAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl <em>Data Type</em>}' class.
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getDataType()
 	 * @generated
+	 * @ordered
 	 */
-	int DATA_TYPE = 8;
+	int TYPE_VARIABLE_BINDING__TAG = TYPE_CONTAINER__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_BINDING__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_BINDING__VARIABLE = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_BINDING__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Type Variable Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE_BINDING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -936,16 +1290,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl <em>Enumeration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumeration()
-	 * @generated
-	 */
-	int ENUMERATION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -991,16 +1335,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl <em>Package</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPackage()
-	 * @generated
-	 */
-	int PACKAGE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1064,16 +1398,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl <em>Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameter()
-	 * @generated
-	 */
-	int PARAMETER = 12;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1166,16 +1490,6 @@ public interface StructurePackage extends EPackage {
 	int PARAMETER_FEATURE_COUNT = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPrimitiveType()
-	 * @generated
-	 */
-	int PRIMITIVE_TYPE = 13;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1230,16 +1544,6 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TagImpl <em>Tag</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TagImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTag()
-	 * @generated
-	 */
-	int TAG = 15;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1283,16 +1587,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int TAG_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl <em>Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraint()
-	 * @generated
-	 */
-	int CONSTRAINT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1376,32 +1670,13 @@ public interface StructurePackage extends EPackage {
 	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClassDefinition()
-	 * @generated
-	 */
-	int CLASS_DEFINITION = 17;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__TAG = TYPE_CONTAINER__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DEFINITION__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
+	int TYPE_DEFINITION__TAG = NAMED_ELEMENT__TAG;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1410,7 +1685,34 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__NAME = TYPE_CONTAINER_FEATURE_COUNT + 0;
+	int TYPE_DEFINITION__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__TAG = TYPE_DEFINITION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
@@ -1419,7 +1721,52 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__TYPE_PARAMETER = TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Generic Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__TAG = GENERIC_TYPE_DEFINITION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__NAME = GENERIC_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__TYPE_PARAMETER = GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__CONTAINED_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Inv</b></em>' containment reference list.
@@ -1428,7 +1775,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__INV = TYPE_CONTAINER_FEATURE_COUNT + 2;
+	int CLASS_DEFINITION__INV = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -1437,7 +1784,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__IS_ABSTRACT = TYPE_CONTAINER_FEATURE_COUNT + 3;
+	int CLASS_DEFINITION__IS_ABSTRACT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
@@ -1446,7 +1793,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__OWNED_ATTRIBUTE = TYPE_CONTAINER_FEATURE_COUNT + 4;
+	int CLASS_DEFINITION__OWNED_ATTRIBUTE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -1455,7 +1802,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__OWNED_OPERATION = TYPE_CONTAINER_FEATURE_COUNT + 5;
+	int CLASS_DEFINITION__OWNED_OPERATION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Super Type</b></em>' reference list.
@@ -1464,7 +1811,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION__SUPER_TYPE = TYPE_CONTAINER_FEATURE_COUNT + 6;
+	int CLASS_DEFINITION__SUPER_TYPE = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Class Definition</em>' class.
@@ -1473,17 +1820,53 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DEFINITION_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 7;
+	int CLASS_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl <em>Type Variable</em>}' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariable()
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl
+	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
 	 * @generated
 	 */
-	int TYPE_VARIABLE = 18;
+	int TYPE_DEFINITION_CONTAINER = 22;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__TAG = NAMED_ELEMENT__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Definition Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1540,14 +1923,265 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProductType()
 	 * @generated
+	 * @ordered
 	 */
-	int PRODUCT_TYPE = 19;
+	int OBJECT_TYPE_VARIABLE__TAG = TYPE_VARIABLE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__CONTAINED_TYPE = TYPE_VARIABLE__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__TYPE_CONTAINER = TYPE_VARIABLE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__NAME = TYPE_VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Supertype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE__SUPERTYPE = TYPE_VARIABLE__SUPERTYPE;
+
+	/**
+	 * The number of structural features of the '<em>Object Type Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_VARIABLE_FEATURE_COUNT = TYPE_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__TAG = GENERIC_TYPE_DEFINITION__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__NAME = GENERIC_TYPE_DEFINITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__TYPE_PARAMETER = GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION__OWNED_TYPE_DEFINITION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Type Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Virtual Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__VIRTUAL_TYPE = VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__TAG = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__CONTAINED_TYPE = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__TYPE_CONTAINER = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__NAME = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Supertype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE__SUPERTYPE = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_VARIABLE_FEATURE_COUNT = VIRTUAL_TYPE_CONTAINER_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Tag</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__TAG = OBJECT_TYPE_VARIABLE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__CONTAINED_TYPE = OBJECT_TYPE_VARIABLE__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__TYPE_CONTAINER = OBJECT_TYPE_VARIABLE__TYPE_CONTAINER;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__NAME = OBJECT_TYPE_VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Supertype</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__SUPERTYPE = OBJECT_TYPE_VARIABLE__SUPERTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Class Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__CLASS_DEFINITION = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Model Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__MODEL_TYPE = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE__TYPE_PARAM_BINDING = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Virtual Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VIRTUAL_TYPE_FEATURE_COUNT = OBJECT_TYPE_VARIABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1593,16 +2227,6 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getFunctionType()
-	 * @generated
-	 */
-	int FUNCTION_TYPE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1659,108 +2283,6 @@ public interface StructurePackage extends EPackage {
 	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariableBinding()
-	 * @generated
-	 */
-	int TYPE_VARIABLE_BINDING = 21;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_BINDING__TAG = TYPE_CONTAINER__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_BINDING__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_BINDING__VARIABLE = TYPE_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_BINDING__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Type Variable Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_VARIABLE_BINDING_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinition()
-	 * @generated
-	 */
-	int TYPE_DEFINITION = 22;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__TAG = NAMED_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Type Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVoidType()
-	 * @generated
-	 */
-	int VOID_TYPE = 23;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1788,208 +2310,6 @@ public interface StructurePackage extends EPackage {
 	int VOID_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.GenericTypeDefinitionImpl <em>Generic Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.GenericTypeDefinitionImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getGenericTypeDefinition()
-	 * @generated
-	 */
-	int GENERIC_TYPE_DEFINITION = 25;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__TAG = TYPE_DEFINITION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__NAME = TYPE_DEFINITION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = TYPE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Generic Type Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERIC_TYPE_DEFINITION_FEATURE_COUNT = TYPE_DEFINITION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeDefinitionImpl <em>Model Type Definition</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeDefinitionImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinition()
-	 * @generated
-	 */
-	int MODEL_TYPE_DEFINITION = 26;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_DEFINITION__TAG = GENERIC_TYPE_DEFINITION__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_DEFINITION__NAME = GENERIC_TYPE_DEFINITION__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_DEFINITION__TYPE_PARAMETER = GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_DEFINITION__OWNED_TYPE_DEFINITION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Model Type Definition</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_DEFINITION_FEATURE_COUNT = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
-	 * @generated
-	 */
-	int MODEL_TYPE = 27;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TAG = PARAMETERIZED_TYPE__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TYPE_PARAM_BINDING = PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
-
-	/**
-	 * The feature id for the '<em><b>Type Definition</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TYPE_DEFINITION = PARAMETERIZED_TYPE__TYPE_DEFINITION;
-
-	/**
-	 * The number of structural features of the '<em>Model Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_FEATURE_COUNT = PARAMETERIZED_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl
-	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
-	 * @generated
-	 */
-	int TYPE_DEFINITION_CONTAINER = 28;
-
-	/**
-	 * The feature id for the '<em><b>Tag</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__TAG = NAMED_ELEMENT__TAG;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type Definition</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Definition Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_DEFINITION_CONTAINER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1997,7 +2317,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
 	 * @generated
 	 */
-	int CONSTRAINT_LANGUAGE = 29;
+	int CONSTRAINT_LANGUAGE = 34;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
@@ -2007,7 +2327,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 30;
+	int CONSTRAINT_TYPE = 35;
 
 	/**
 	 * The meta object id for the '<em>String</em>' data type.
@@ -2017,7 +2337,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getString()
 	 * @generated
 	 */
-	int STRING = 31;
+	int STRING = 36;
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -2026,7 +2346,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
 	 * @generated
 	 */
-	int BOOLEAN = 32;
+	int BOOLEAN = 37;
 
 	/**
 	 * The meta object id for the '<em>Integer</em>' data type.
@@ -2035,7 +2355,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
 	 * @generated
 	 */
-	int INTEGER = 33;
+	int INTEGER = 38;
 
 	/**
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type.
@@ -2044,7 +2364,7 @@ public interface StructurePackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
-	int UNLIMITED_NATURAL = 34;
+	int UNLIMITED_NATURAL = 39;
 
 
 	/**
@@ -2132,6 +2452,27 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getObject_Tag();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Model
+	 * @generated
+	 */
+	EClass getModel();
+
+	/**
+	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.language.structure.Model#getContents <em>Contents</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Contents</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Model#getContents()
+	 * @see #getModel()
+	 * @generated
+	 */
+	EReference getModel_Contents();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.Operation <em>Operation</em>}'.
@@ -2832,6 +3173,16 @@ public interface StructurePackage extends EPackage {
 	EReference getTypeVariable_Supertype();
 
 	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable <em>Object Type Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Object Type Variable</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable
+	 * @generated
+	 */
+	EClass getObjectTypeVariable();
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.ProductType <em>Product Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2947,6 +3298,17 @@ public interface StructurePackage extends EPackage {
 	EClass getParameterizedType();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getVirtualTypeBinding <em>Virtual Type Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Virtual Type Binding</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getVirtualTypeBinding()
+	 * @see #getParameterizedType()
+	 * @generated
+	 */
+	EReference getParameterizedType_VirtualTypeBinding();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.ParameterizedType#getTypeParamBinding <em>Type Param Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2998,6 +3360,80 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getModelTypeDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer <em>Virtual Type Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Type Container</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer
+	 * @generated
+	 */
+	EClass getVirtualTypeContainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer#getVirtualType <em>Virtual Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Virtual Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer#getVirtualType()
+	 * @see #getVirtualTypeContainer()
+	 * @generated
+	 */
+	EReference getVirtualTypeContainer_VirtualType();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable <em>Model Type Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Type Variable</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable
+	 * @generated
+	 */
+	EClass getModelTypeVariable();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType <em>Virtual Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Virtual Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType
+	 * @generated
+	 */
+	EClass getVirtualType();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType#getClassDefinition <em>Class Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Class Definition</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType#getClassDefinition()
+	 * @see #getVirtualType()
+	 * @generated
+	 */
+	EReference getVirtualType_ClassDefinition();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Model Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType#getModelType()
+	 * @see #getVirtualType()
+	 * @generated
+	 */
+	EReference getVirtualType_ModelType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType#getTypeParamBinding <em>Type Param Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Type Param Binding</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType#getTypeParamBinding()
+	 * @see #getVirtualType()
+	 * @generated
+	 */
+	EReference getVirtualType_TypeParamBinding();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.ModelType <em>Model Type</em>}'.
@@ -3180,6 +3616,24 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OBJECT__TAG = eINSTANCE.getObject_Tag();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl <em>Model</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModel()
+		 * @generated
+		 */
+		EClass MODEL = eINSTANCE.getModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Contents</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL__CONTENTS = eINSTANCE.getModel_Contents();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.
@@ -3736,6 +4190,16 @@ public interface StructurePackage extends EPackage {
 		EReference TYPE_VARIABLE__SUPERTYPE = eINSTANCE.getTypeVariable_Supertype();
 
 		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ObjectTypeVariableImpl <em>Object Type Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ObjectTypeVariableImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getObjectTypeVariable()
+		 * @generated
+		 */
+		EClass OBJECT_TYPE_VARIABLE = eINSTANCE.getObjectTypeVariable();
+
+		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3836,6 +4300,14 @@ public interface StructurePackage extends EPackage {
 		EClass PARAMETERIZED_TYPE = eINSTANCE.getParameterizedType();
 
 		/**
+		 * The meta object literal for the '<em><b>Virtual Type Binding</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING = eINSTANCE.getParameterizedType_VirtualTypeBinding();
+
+		/**
 		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3878,6 +4350,68 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MODEL_TYPE_DEFINITION = eINSTANCE.getModelTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeContainerImpl <em>Virtual Type Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeContainerImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVirtualTypeContainer()
+		 * @generated
+		 */
+		EClass VIRTUAL_TYPE_CONTAINER = eINSTANCE.getVirtualTypeContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Virtual Type</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE = eINSTANCE.getVirtualTypeContainer_VirtualType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl <em>Model Type Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeVariableImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeVariable()
+		 * @generated
+		 */
+		EClass MODEL_TYPE_VARIABLE = eINSTANCE.getModelTypeVariable();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeImpl <em>Virtual Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.VirtualTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVirtualType()
+		 * @generated
+		 */
+		EClass VIRTUAL_TYPE = eINSTANCE.getVirtualType();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_TYPE__CLASS_DEFINITION = eINSTANCE.getVirtualType_ClassDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Model Type</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_TYPE__MODEL_TYPE = eINSTANCE.getVirtualType_ModelType();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VIRTUAL_TYPE__TYPE_PARAM_BINDING = eINSTANCE.getVirtualType_TypeParamBinding();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.

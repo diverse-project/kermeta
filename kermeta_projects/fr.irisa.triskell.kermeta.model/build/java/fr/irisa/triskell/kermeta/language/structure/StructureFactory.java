@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: StructureFactory.java,v 1.3 2006-12-06 16:22:58 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -42,6 +42,15 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	fr.irisa.triskell.kermeta.language.structure.Object createObject();
+
+	/**
+	 * Returns a new object of class '<em>Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model</em>'.
+	 * @generated
+	 */
+	Model createModel();
 
 	/**
 	 * Returns a new object of class '<em>Operation</em>'.
@@ -152,13 +161,13 @@ public interface StructureFactory extends EFactory {
 	ClassDefinition createClassDefinition();
 
 	/**
-	 * Returns a new object of class '<em>Type Variable</em>'.
+	 * Returns a new object of class '<em>Object Type Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Variable</em>'.
+	 * @return a new object of class '<em>Object Type Variable</em>'.
 	 * @generated
 	 */
-	TypeVariable createTypeVariable();
+	ObjectTypeVariable createObjectTypeVariable();
 
 	/**
 	 * Returns a new object of class '<em>Product Type</em>'.
@@ -213,6 +222,24 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	ModelTypeDefinition createModelTypeDefinition();
+
+	/**
+	 * Returns a new object of class '<em>Model Type Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Type Variable</em>'.
+	 * @generated
+	 */
+	ModelTypeVariable createModelTypeVariable();
+
+	/**
+	 * Returns a new object of class '<em>Virtual Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Virtual Type</em>'.
+	 * @generated
+	 */
+	VirtualType createVirtualType();
 
 	/**
 	 * Returns a new object of class '<em>Model Type</em>'.

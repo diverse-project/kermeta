@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: ParameterizedTypeImpl.java,v 1.4 2006-12-06 16:23:09 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl#getVirtualTypeBinding <em>Virtual Type Binding</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeParamBinding <em>Type Param Binding</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeDefinition <em>Type Definition</em>}</li>
  * </ul>
@@ -42,6 +43,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public abstract class ParameterizedTypeImpl extends TypeImpl implements ParameterizedType {
+	/**
+	 * The cached value of the '{@link #getVirtualTypeBinding() <em>Virtual Type Binding</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVirtualTypeBinding()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList virtualTypeBinding = null;
+
 	/**
 	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -78,6 +89,18 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.PARAMETERIZED_TYPE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getVirtualTypeBinding() {
+		if (virtualTypeBinding == null) {
+			virtualTypeBinding = new EObjectContainmentEList.Resolving(TypeVariableBinding.class, this, StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
+		}
+		return virtualTypeBinding;
 	}
 
 	/**
@@ -137,6 +160,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
+				return ((InternalEList)getVirtualTypeBinding()).basicRemove(otherEnd, msgs);
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				return ((InternalEList)getTypeParamBinding()).basicRemove(otherEnd, msgs);
 		}
@@ -150,6 +175,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
+				return getVirtualTypeBinding();
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				return getTypeParamBinding();
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
@@ -166,6 +193,10 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
+				getVirtualTypeBinding().clear();
+				getVirtualTypeBinding().addAll((Collection)newValue);
+				return;
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
 				getTypeParamBinding().addAll((Collection)newValue);
@@ -184,6 +215,9 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
+				getVirtualTypeBinding().clear();
+				return;
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
 				return;
@@ -201,6 +235,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
+				return virtualTypeBinding != null && !virtualTypeBinding.isEmpty();
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				return typeParamBinding != null && !typeParamBinding.isEmpty();
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:

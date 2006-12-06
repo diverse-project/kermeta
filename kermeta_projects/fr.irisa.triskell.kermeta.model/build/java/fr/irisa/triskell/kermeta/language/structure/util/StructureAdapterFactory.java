@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureAdapterFactory.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: StructureAdapterFactory.java,v 1.2 2006-12-06 16:23:27 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -13,10 +13,13 @@ import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Model;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
@@ -32,6 +35,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -102,6 +107,12 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
 				return createObjectAdapter();
 			}
+			public Object caseModel(Model object) {
+				return createModelAdapter();
+			}
+			public Object caseModelType(ModelType object) {
+				return createModelTypeAdapter();
+			}
 			public Object caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
@@ -116,6 +127,9 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseEnumerationLiteral(EnumerationLiteral object) {
 				return createEnumerationLiteralAdapter();
+			}
+			public Object caseTypeVariableBinding(TypeVariableBinding object) {
+				return createTypeVariableBindingAdapter();
 			}
 			public Object caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
@@ -150,8 +164,32 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseClassDefinition(ClassDefinition object) {
 				return createClassDefinitionAdapter();
 			}
+			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
+				return createGenericTypeDefinitionAdapter();
+			}
+			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
+				return createTypeDefinitionContainerAdapter();
+			}
+			public Object caseParameterizedType(ParameterizedType object) {
+				return createParameterizedTypeAdapter();
+			}
 			public Object caseTypeVariable(TypeVariable object) {
 				return createTypeVariableAdapter();
+			}
+			public Object caseObjectTypeVariable(ObjectTypeVariable object) {
+				return createObjectTypeVariableAdapter();
+			}
+			public Object caseModelTypeDefinition(ModelTypeDefinition object) {
+				return createModelTypeDefinitionAdapter();
+			}
+			public Object caseVirtualTypeContainer(VirtualTypeContainer object) {
+				return createVirtualTypeContainerAdapter();
+			}
+			public Object caseModelTypeVariable(ModelTypeVariable object) {
+				return createModelTypeVariableAdapter();
+			}
+			public Object caseVirtualType(VirtualType object) {
+				return createVirtualTypeAdapter();
 			}
 			public Object caseProductType(ProductType object) {
 				return createProductTypeAdapter();
@@ -159,29 +197,11 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseFunctionType(FunctionType object) {
 				return createFunctionTypeAdapter();
 			}
-			public Object caseTypeVariableBinding(TypeVariableBinding object) {
-				return createTypeVariableBindingAdapter();
-			}
 			public Object caseTypeDefinition(TypeDefinition object) {
 				return createTypeDefinitionAdapter();
 			}
 			public Object caseVoidType(VoidType object) {
 				return createVoidTypeAdapter();
-			}
-			public Object caseParameterizedType(ParameterizedType object) {
-				return createParameterizedTypeAdapter();
-			}
-			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
-				return createGenericTypeDefinitionAdapter();
-			}
-			public Object caseModelTypeDefinition(ModelTypeDefinition object) {
-				return createModelTypeDefinitionAdapter();
-			}
-			public Object caseModelType(ModelType object) {
-				return createModelTypeAdapter();
-			}
-			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
-				return createTypeDefinitionContainerAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -226,6 +246,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.Model <em>Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Model
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
 		return null;
 	}
 
@@ -468,6 +502,20 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable <em>Object Type Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable
+	 * @generated
+	 */
+	public Adapter createObjectTypeVariableAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.ProductType <em>Product Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -576,6 +624,48 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelTypeDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer <em>Virtual Type Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer
+	 * @generated
+	 */
+	public Adapter createVirtualTypeContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable <em>Model Type Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable
+	 * @generated
+	 */
+	public Adapter createModelTypeVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType <em>Virtual Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType
+	 * @generated
+	 */
+	public Adapter createVirtualTypeAdapter() {
 		return null;
 	}
 

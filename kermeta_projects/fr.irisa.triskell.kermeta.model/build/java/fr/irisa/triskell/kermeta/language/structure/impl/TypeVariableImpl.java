@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.5 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: TypeVariableImpl.java,v 1.6 2006-12-06 16:23:09 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -43,7 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable {
+public abstract class TypeVariableImpl extends TypeContainerImpl implements TypeVariable {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

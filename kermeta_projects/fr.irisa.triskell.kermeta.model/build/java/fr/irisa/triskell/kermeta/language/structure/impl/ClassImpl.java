@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.3 2006-09-12 12:59:25 dvojtise Exp $
+ * $Id: ClassImpl.java,v 1.4 2006-12-06 16:23:09 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -258,4 +258,39 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 		return result.toString();
 	}
 
+	/**
+	 * Unparameterized classes with the same type definition are equal
+	 * @generated NOT
+	 */
+	public boolean equals(Object o) {
+		if (super.equals(o)) {
+			return true;
+		} else if ((o instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+				&& (null != ((fr.irisa.triskell.kermeta.language.structure.Class) o).getTypeDefinition())
+				&& (null != getTypeDefinition())
+				&& ((fr.irisa.triskell.kermeta.language.structure.Class) o).getTypeDefinition().equals(getTypeDefinition())
+				&& ((fr.irisa.triskell.kermeta.language.structure.Class) o).getTypeDefinition().getTypeParameter().isEmpty()
+				&& getTypeDefinition().getTypeParameter().isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Objects that are equals() should always yield the same hashCode()
+	 * @generated NOT
+	 */
+	public int hashCode() {
+		// If there are type parameters, all bets are off
+		if (!getTypeParamBinding().isEmpty()) {
+			return super.hashCode();
+		} else {
+			int code = 11;
+			code += null == getTypeDefinition() ? 0 : 31 * getTypeDefinition().hashCode();
+			return code;
+		}
+		
+	}
+	
 } //ClassImpl
