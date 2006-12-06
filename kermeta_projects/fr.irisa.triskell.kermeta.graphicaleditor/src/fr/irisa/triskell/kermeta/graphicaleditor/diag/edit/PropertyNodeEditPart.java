@@ -136,7 +136,7 @@ public class PropertyNodeEditPart extends EMFGraphNodeEditPart {
 		if (getProperty().isIsComposite()) {
 			lbl.setIcon(StructureImageRegistry.getImage("PROPERTY_CONTAINED"));
 		} else {
-			lbl.setIcon(StructureImageRegistry.getImage("PROPERTY"));
+			lbl.setIcon(StructureImageRegistry.getImage("PROPERTY_NODE"));
 		}
 
 		updateLabel(lbl);

@@ -66,7 +66,6 @@
       </diagram>
 	</extension>
    
-   <!--
 	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
     	<propertySections contributorId="org.topcased.modeler.editor.Modeler">
 	    	<propertySection
@@ -77,5 +76,5 @@
 			</propertySection>
 		</propertySections>
 	</extension>
-	-->
+	
 </plugin>

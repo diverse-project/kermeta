@@ -99,7 +99,8 @@ public class ClassDefinitionRestoreConnectionCommand extends
 
 					if (nodeObject2 instanceof ClassDefinition) {
 						if (autoRef) {
-							// autoRef not allowed
+							createPropertyFromClassDefinitionToClassDefinition(
+									node, node);
 						} else {
 							// if the node is the source of the edge or if it is
 							// the target and that the SourceTargetCouple is

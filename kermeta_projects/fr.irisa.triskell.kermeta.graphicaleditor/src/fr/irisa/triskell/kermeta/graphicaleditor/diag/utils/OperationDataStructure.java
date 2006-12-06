@@ -1,4 +1,4 @@
-/* $Id: OperationDataStructure.java,v 1.2 2006-10-11 08:54:06 cfaucher Exp $
+/* $Id: OperationDataStructure.java,v 1.3 2006-12-06 14:06:36 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 20, 2006
  * Authors       : zdrey
  */
-/* $Id: OperationDataStructure.java,v 1.2 2006-10-11 08:54:06 cfaucher Exp $
+/* $Id: OperationDataStructure.java,v 1.3 2006-12-06 14:06:36 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Type;

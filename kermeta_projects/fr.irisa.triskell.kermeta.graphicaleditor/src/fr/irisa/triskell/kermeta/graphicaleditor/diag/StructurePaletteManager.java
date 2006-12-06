@@ -113,8 +113,8 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 		
 		factory = new GraphElementCreationFactory(creationUtilsNode,
 				StructurePackage.eINSTANCE.getProperty(), "default");
-		entries.add(new ModelerCreationToolEntry("Property", "Property",
-				factory, StructureImageRegistry.getImageDescriptor("PROPERTY"),
+		entries.add(new ModelerCreationToolEntry("Property", "Property as node",
+				factory, StructureImageRegistry.getImageDescriptor("PROPERTY_NODE"),
 				StructureImageRegistry.getImageDescriptor("PROPERTY_LARGE")));
 		
 		factory = new GraphElementCreationFactory(creationUtilsNode,
@@ -152,9 +152,9 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 
 		factory = new GraphElementCreationFactory(creationUtilsEdge,
 				StructurePackage.eINSTANCE.getProperty(), "default");
-		entries.add(new ModelerConnectionCreationToolEntry("Reference",
-				"Reference", factory, StructureImageRegistry
-						.getImageDescriptor("PROPERTY"), null));
+		entries.add(new ModelerConnectionCreationToolEntry("Property",
+				"Property as edge", factory, StructureImageRegistry
+						.getImageDescriptor("PROPERTY_EDGE"), null));
 
 		edgeDrawer.addAll(entries);
 		getRoot().add(edgeDrawer);

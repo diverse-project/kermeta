@@ -74,12 +74,12 @@ public class PropertyEdgeCreationCommand extends CreateTypedEdgeCommand {
 		// the super method add the property under the ClassDefinition
 		super.redoModel();
 
-		if (Utils.getElement(target) instanceof ClassDefinition
-				&& Utils.getElement(edge) instanceof Property) {
+		if (Utils.getElement(getTarget()) instanceof ClassDefinition
+				&& Utils.getElement(getEdge()) instanceof Property) {
 
 			ClassDefinition targetClassDef = (ClassDefinition) Utils
-					.getElement(target);
-			Property fProperty = (Property) Utils.getElement(edge);
+					.getElement(getTarget());
+			Property fProperty = (Property) Utils.getElement(getEdge());
 
 			// "type" is the class referencing the targeted ClassDefinition
 			Class type = StructureFactory.eINSTANCE.createClass();
@@ -90,14 +90,6 @@ public class PropertyEdgeCreationCommand extends CreateTypedEdgeCommand {
 			// Set the type
 			fProperty.setType(type);
 		}
-	}
-
-	public GraphElement getSource() {
-		return source;
-	}
-
-	public GraphElement getTarget() {
-		return target;
 	}
 
 	/**
