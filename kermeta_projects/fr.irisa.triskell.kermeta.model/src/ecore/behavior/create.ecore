@@ -7,6 +7,10 @@
       <eOperations name="_new" eType="#//structure/Object"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Model"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelType">
+      <eOperations name="_new" eType="#//structure/Model"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
