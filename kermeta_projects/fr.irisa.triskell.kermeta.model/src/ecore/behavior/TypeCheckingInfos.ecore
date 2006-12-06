@@ -24,5 +24,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding"/>
   </eSubpackages>
 </ecore:EPackage>
