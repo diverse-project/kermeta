@@ -1,7 +1,7 @@
-/* $Id: UnionType.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: UnionType.java,v 1.5 2006-12-06 16:38:03 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 10 avr. 2005
@@ -23,14 +23,14 @@ import java.util.Iterator;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class UnionType extends Type {
 
 	/**
 	 * A set of Type
 	 */
-	protected ArrayList types;
+	protected ArrayList<Type> types;
 	
 	
 	/**
@@ -38,7 +38,7 @@ public class UnionType extends Type {
 	 */
 	public UnionType() {
 		super();
-		types = new ArrayList();
+		types = new ArrayList<Type>();
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class UnionType extends Type {
 	 * @return
 	 */
 	public Type getType(int index) {
-		return (Type)types.get(index);
+		return types.get(index);
 	}
 
 	/**
