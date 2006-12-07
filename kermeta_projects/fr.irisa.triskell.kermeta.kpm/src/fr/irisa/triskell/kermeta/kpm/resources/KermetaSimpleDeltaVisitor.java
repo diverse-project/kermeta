@@ -129,6 +129,16 @@ public class KermetaSimpleDeltaVisitor implements IResourceDeltaVisitor {
 		
 		switch ( resource.getType() ) {
 		
+		case IResource.FOLDER :
+			Directory directory = kpm.findDirectory( (IFolder) resource );
+			if ( directory != null ) {
+				
+				if ( ! directory.isSource() )
+					kpm.removeDirectory(directory);
+				System.out.println();
+			}
+			break;
+		
 		case IResource.PROJECT :
 			Project project = kpm.findProject( (IProject) resource );
 			boolean isNatureKermeta = IResourceHelper.isNatureKermeta( (IProject) resource );

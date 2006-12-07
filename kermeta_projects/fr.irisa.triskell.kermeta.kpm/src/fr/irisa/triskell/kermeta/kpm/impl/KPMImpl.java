@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.4 2006-12-07 14:52:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -305,6 +305,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		getUnits().add(directory);
 		
 		directory.load();
+		
+		directory.setSource( "false" );
 		
 		return directory;
 	}

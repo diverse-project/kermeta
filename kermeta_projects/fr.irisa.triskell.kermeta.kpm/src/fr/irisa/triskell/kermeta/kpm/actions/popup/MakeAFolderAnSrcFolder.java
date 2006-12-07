@@ -31,32 +31,29 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 	StructuredSelection currentSelection;
 	
 	public void run(IAction action) {
-		Directory directory = KermetaWorkspace.getInstance().getKpm().createDirectoryIfNecessary( folder );
+		Directory directory = KermetaWorkspace.getInstance().getKpm().findDirectory( folder );
 		
 		try {
 
-			if ( directory.isSource() ) {
+			if ( directory != null ) {
+			
+				if ( directory.isSource() ) {
 				
-				directory.setSource( "false" );
-				DependencyVisitor visitor = new DependencyVisitor( directory.getKpm(), DependencyVisitor.REMOVING);
-				folder.accept(visitor);
+					directory.setSource( "false" );
+					SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.REMOVING);
+					folder.accept(visitor);
 			
+				} 
 			} else {
-			
-			//	RequestTargetDirectory wizard = new RequestTargetDirectory(folder);
-				//wizard.init(PlatformUI.getWorkbench(), currentSelection);
-		    	//wizard.create();
-		    	//wizard.open();	
-		    	
-				directory.setSource( "true" );
-		    					
-				DependencyVisitor visitor = new DependencyVisitor( directory.getKpm(), DependencyVisitor.ADDING);
+		    	directory = KermetaWorkspace.getInstance().getKpm().createDirectory( folder );
+				directory.setSource( "true" );				
+				SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.ADDING);
 				folder.accept(visitor);
-			
+		
 			}
-			SrcFolderDecorator.getDecorator().refresh( folder );
-			
 			KermetaWorkspace.getInstance().save();
+			
+			SrcFolderDecorator.getDecorator().refresh( folder );
 			
 		} catch (CoreException exception) {
 			exception.printStackTrace();

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DirectoryImpl.java,v 1.4 2006-12-07 13:58:01 ftanguy Exp $
+ * $Id: DirectoryImpl.java,v 1.5 2006-12-07 14:52:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -102,11 +102,14 @@ public class DirectoryImpl extends FileImpl implements Directory {
 	 */
 	public boolean isSource() {
 		try {
-			String bool = value.getPersistentProperty (sourceProperty);
-			return new Boolean(bool);
+			boolean bool = new Boolean( value.getPersistentProperty (sourceProperty) );
+			if ( ! bool && (container != null) )
+					bool = container.isSource();
+			return bool;
 		} catch (CoreException exception) {
 			exception.printStackTrace();
 		}
+		
 		return false;
 		/*if ( source )
 			return source;
