@@ -54,7 +54,8 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		
 		case IResource.FILE :
 			File file = kpm.createFileIfNecessary( (IFile) resource );
-			DependencyHelper.addTypecheckingDependenciesToKMTFile(file);
+			file.load();
+			DependencyHelper.addTypecheckingDependencies(file);
 			break;
 			
 		case IResource.FOLDER :

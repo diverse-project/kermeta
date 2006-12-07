@@ -18,10 +18,10 @@ public class DependencyHelper {
 		
 		addUpdateDependencies(file);
 		
-		if ( extension.equals(".kmt") )
+		if ( extension.equals(".kmt") ) {
 			addBasicTypeCheckingDependencies(file);
-			//addTypecheckingDependenciesToKMTFile( file );
-		
+			addTypecheckingDependenciesToKMTFile( file );
+		}
 		
 	}
 	
