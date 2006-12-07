@@ -1,13 +1,20 @@
+/* $Id: AtPreVisitor.java,v 1.2 2006-12-07 09:55:46 dvojtise Exp $
+ * Project   : kermeta interpreter
+ * File      : Extern2CmdCompiler.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 2006
+ * Authors       : 
+ *     Jean-Marie Mottu
+ */
 package fr.irisa.triskell.kermeta.interpreter;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -99,7 +106,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 				//				This should never happen is the type checker has checked the program
 				if (property == null) {
 					internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getName() + "in type : " + target_type);
-					internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");		        
+					internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developers");		        
 					throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getName());
 				}
 				
@@ -109,7 +116,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 				// This is just a debbuging check. It should never occur
 				if (ro_property == null) {
 					internalLog.error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
-					internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");
+					internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developers");
 					throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
 				}
 				

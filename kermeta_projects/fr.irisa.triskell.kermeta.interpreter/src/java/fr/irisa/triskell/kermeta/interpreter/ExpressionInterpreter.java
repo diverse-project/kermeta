@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.50 2006-10-27 11:58:48 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.51 2006-12-07 09:55:46 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
-//import java.net.URLClassLoader;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -26,6 +26,10 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -48,38 +52,30 @@ import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.parser.SimpleKWList;
-import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
-import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
-import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-//import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-//import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-//import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
 import fr.irisa.triskell.kermeta.loader.java.JarUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
-
-import java.net.URLClassLoader;
+import fr.irisa.triskell.kermeta.parser.SimpleKWList;
+import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
+import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
+import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -194,6 +190,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	            
 	        }    
 	        result = memory.getROFactory().createMetaClass(c);
+        } else if (t instanceof ModelType) {
+        	ModelType mt = (ModelType) t;
+        	// FIXME : substitution of variables for parameterized model types.
+        	result = memory.getROFactory().createModelType(mt);
+    	} else if (t instanceof TypeVariable) {
+        	// Find the bound type for this variable
+        	fr.irisa.triskell.kermeta.language.structure.Type boundType = (Type) interpreterContext.peekCallFrame().getTypeParameters().get(t);
+        	result = memory.getRuntimeObjectForFObject(boundType);
         }
         else {
             // It is an ennumeration
@@ -605,6 +609,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
 	    throw new Error("INTERPRETER INTERNAL ERROR : visit a Class");
+	}
+	
+	public Object visitModelType(ModelType node) {
+		throw new Error("INTERPRETER INTERNAL ERROR : visit a ModelType");
 	}
 	
 	/**
@@ -1326,7 +1334,15 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    return result;
 	}
 	
-	
+	public Object visitModelTypeDefinition(ModelTypeDefinition node)
+	{
+		if (node!=null) setParent(node);
+	    // Get the qualified name of this modelTypeDef
+	    String qname = NamedElementHelper.getQualifiedName(node);
+	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
+	    return result;
+
+	}
 	
     /**
      * visit a raise node

@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.13 2006-10-25 08:30:14 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.14 2006-12-07 09:55:46 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -27,9 +27,8 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
+@SuppressWarnings("serial")
 public class KermetaRaisedException extends Error {
 
     public RuntimeObject raised_object;
@@ -42,7 +41,7 @@ public class KermetaRaisedException extends Error {
     
     /**
      * Constructor 
-     * Developper should then use the setContext method on this object in order to fill the readable stack trace
+     * Developer should then use the setContext method on this object in order to fill the readable stack trace
      * If possible, developer should use the other constructor, othewise he should try to build the context later
      */
     public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter)
@@ -56,7 +55,7 @@ public class KermetaRaisedException extends Error {
     /**
      * Constructor 
      * keeps an existing java exception as a cause
-     * Developper should then use the setContext method on this object in order to fill the readable stack trace
+     * Developer should then use the setContext method on this object in order to fill the readable stack trace
      */
     public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter, Throwable t)
     {
@@ -109,6 +108,7 @@ public class KermetaRaisedException extends Error {
 	    {
 		    CallableOperation coperation = target.getOperationByName("toString");
 	    	RuntimeObject rovalue = (RuntimeObject) interpreter.invoke(raised_object, coperation.getOperation(), new ArrayList());
+	    	result += fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(rovalue);
 	    }
     	if(issetContextString())
     		result += "\n" + contextString;

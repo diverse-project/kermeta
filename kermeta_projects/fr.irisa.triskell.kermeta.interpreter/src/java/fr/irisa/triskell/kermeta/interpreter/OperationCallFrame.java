@@ -1,11 +1,15 @@
-/* $Id: OperationCallFrame.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: OperationCallFrame.java,v 1.12 2006-12-07 09:55:46 dvojtise Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 16 mai 2005
-* Author : Franck Fleurey
+* Authors : 
+* 		Franck Fleurey
+* 		Zoé Drey
+* 		Didier Vojtisek
+* 		Jim Steel
 */ 
 
 package fr.irisa.triskell.kermeta.interpreter;
@@ -15,12 +19,11 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -28,8 +31,7 @@ import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Call frame associated to an operation call. Used in the call stack in the interpreter
  */
 public class OperationCallFrame extends CallFrame {
 
@@ -79,7 +81,7 @@ public class OperationCallFrame extends CallFrame {
     	        }
     	        
     	         for(int i=0; i<operation.getTypeParameter().size(); i++) {
-    	            typeParameters.put(operation.getTypeParameter().get(i), TypeVariableEnforcer.getBoundType((Type)expression.getStaticTypeVariableBindings().get(i), pContext.peekCallFrame().getTypeParameters()));
+    	            typeParameters.put(operation.getTypeParameter().get(i), TypeVariableEnforcer.getBoundType(((TypeVariableBinding)expression.getStaticTypeVariableBindings().get(i)).getType(), pContext.peekCallFrame().getTypeParameters()));
     	        }
             }
             
