@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Directory.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: Directory.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Directory#getContents <em>Contents</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Directory#isSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,29 +43,23 @@ public interface Directory extends File {
 	EList getContents();
 
 	/**
-	 * Returns the value of the '<em><b>Source</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model valueDataType="fr.irisa.triskell.kermeta.kpm.String"
+	 * @generated
+	 */
+	void setSource(String value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Source</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' attribute.
-	 * @see #setSource(boolean)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDirectory_Source()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.boolean"
+	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
 	 * @generated
 	 */
 	boolean isSource();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Directory#isSource <em>Source</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' attribute.
-	 * @see #isSource()
-	 * @generated
-	 */
-	void setSource(boolean value);
 
 } // Directory

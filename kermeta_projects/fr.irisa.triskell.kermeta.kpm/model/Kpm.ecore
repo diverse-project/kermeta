@@ -124,6 +124,7 @@
       <eParameters name="typeName" eType="#//String"/>
       <eParameters name="eventName" eType="#//String"/>
     </eOperations>
+    <eOperations name="load"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
         eType="#//Unit" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
@@ -165,6 +166,7 @@
     <eOperations name="removeDependencies">
       <eParameters name="type" eType="#//Type"/>
     </eOperations>
+    <eOperations name="load"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="#//Date"/>
@@ -172,6 +174,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDependencies" upperBound="-1"
         eType="#//Dependency"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Project"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//IResource"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Unit">
     <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//Directory"/>
@@ -179,9 +182,12 @@
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="boolean" instanceClassName="boolean"/>
   <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//File">
+    <eOperations name="setSource">
+      <eParameters name="value" eType="#//String"/>
+    </eOperations>
+    <eOperations name="isSource" eType="#//boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//File"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//boolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//Directory"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IFile" instanceClassName="org.eclipse.core.resources.IFile"/>
@@ -226,4 +232,6 @@
   <eClassifiers xsi:type="ecore:EDataType" name="ArrayList" instanceClassName="java.util.ArrayList"/>
   <eClassifiers xsi:type="ecore:EDataType" name="HashSet" instanceClassName="java.util.HashSet"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EnumSet" instanceClassName="java.util.EnumSet"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IResource" instanceClassName="org.eclipse.core.resources.IResource"
+      serializable="false"/>
 </ecore:EPackage>

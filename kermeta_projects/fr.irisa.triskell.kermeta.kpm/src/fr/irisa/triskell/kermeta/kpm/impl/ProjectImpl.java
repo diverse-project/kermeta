@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProjectImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: ProjectImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Project;
+import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -53,5 +54,14 @@ public class ProjectImpl extends DirectoryImpl implements Project {
 	
 	public void remove() {
 		kpm.removeProject(this);
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void load() {
+		setValue( IResourceHelper.getIProject( this ) );
 	}
 } //ProjectImpl

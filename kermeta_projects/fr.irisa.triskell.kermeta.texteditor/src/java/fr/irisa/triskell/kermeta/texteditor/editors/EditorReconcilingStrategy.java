@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.17 2006-12-01 12:47:31 ftanguy Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.18 2006-12-07 13:47:43 ftanguy Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -60,7 +60,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 	 */	
     public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion)
     {
-    	try
+   /* 	try
     	{ 
     		if ( _editor.getKPMFile() == null ) {
     			KMTUnit unit = (KMTUnit) parse();
@@ -76,7 +76,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         	// valid KermetaUnit (for example : by creating a KermetaUnit
         	// when user saved a valid kermeta model).
             //_editor.setMcunit(null);
-        }
+        }*/
     }
     
     /**
@@ -84,7 +84,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 	 */
    public void reconcile(IRegion partition)
     {
-    	try
+    	/*try
         {
     		if ( _editor.getKPMFile() == null )
     			reconcile(null, null);
@@ -104,7 +104,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         {
         	ex.printStackTrace();
             //_editor.setMcunit(null);
-        }
+        }*/
     }
 
     

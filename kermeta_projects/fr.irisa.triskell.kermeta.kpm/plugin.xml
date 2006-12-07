@@ -43,5 +43,15 @@
          state="true">
    </decorator>
 </extension>
+<extension
+      id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
+      point="org.eclipse.ui.decorators">
+   <decorator
+         class="fr.irisa.triskell.kermeta.kpm.actions.popup.SrcFolderDecorator"
+         id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
+         label="fr.irisa.triskell.kermeta.kpm.decorator1"
+         lightweight="true"
+         objectClass="org.eclipse.core.resources.IFolder"/>
+</extension>
 
 </plugin>

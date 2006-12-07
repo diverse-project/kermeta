@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -29,6 +29,8 @@ import org.eclipse.core.resources.IFile;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+
+import org.eclipse.core.resources.IResource;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -171,6 +173,13 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * @generated
 	 */
 	private EDataType enumSetEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iResourceEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -335,6 +344,15 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getUnit_Value() {
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFile() {
 		return fileEClass;
 	}
@@ -364,15 +382,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 */
 	public EReference getDirectory_Contents() {
 		return (EReference)directoryEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getDirectory_Source() {
-		return (EAttribute)directoryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -587,6 +596,15 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getIResource() {
+		return iResourceEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public KpmFactory getKpmFactory() {
 		return (KpmFactory)getEFactoryInstance();
 	}
@@ -621,13 +639,13 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(unitEClass, UNIT__KPM);
 		createEReference(unitEClass, UNIT__OWNED_DEPENDENCIES);
 		createEReference(unitEClass, UNIT__PROJECT);
+		createEAttribute(unitEClass, UNIT__VALUE);
 
 		fileEClass = createEClass(FILE);
 		createEReference(fileEClass, FILE__CONTAINER);
 
 		directoryEClass = createEClass(DIRECTORY);
 		createEReference(directoryEClass, DIRECTORY__CONTENTS);
-		createEAttribute(directoryEClass, DIRECTORY__SOURCE);
 
 		projectEClass = createEClass(PROJECT);
 
@@ -658,6 +676,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		arrayListEDataType = createEDataType(ARRAY_LIST);
 		hashSetEDataType = createEDataType(HASH_SET);
 		enumSetEDataType = createEDataType(ENUM_SET);
+		iResourceEDataType = createEDataType(IRESOURCE);
 	}
 
 	/**
@@ -813,6 +832,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		addEParameter(op, this.getString(), "typeName", 0, 1);
 		addEParameter(op, this.getString(), "eventName", 0, 1);
 
+		addEOperation(kpmEClass, null, "load");
+
 		initEClass(unitEClass, Unit.class, "Unit", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnit_Name(), this.getString(), "name", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_Path(), this.getString(), "path", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -820,6 +841,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEReference(getUnit_Kpm(), this.getKPM(), null, "kpm", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnit_OwnedDependencies(), this.getDependency(), null, "ownedDependencies", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnit_Project(), this.getProject(), null, "project", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_Value(), this.getIResource(), "value", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(unitEClass, this.getboolean(), "isFile", 0, 1);
 
@@ -865,12 +887,18 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(unitEClass, null, "removeDependencies");
 		addEParameter(op, this.getType(), "type", 0, 1);
 
+		addEOperation(unitEClass, null, "load");
+
 		initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFile_Container(), this.getDirectory(), null, "container", null, 0, 1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directoryEClass, Directory.class, "Directory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectory_Contents(), this.getFile(), null, "contents", null, 0, -1, Directory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDirectory_Source(), this.getboolean(), "source", null, 0, 1, Directory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(directoryEClass, null, "setSource");
+		addEParameter(op, this.getString(), "value", 0, 1);
+
+		addEOperation(directoryEClass, this.getboolean(), "isSource", 0, 1);
 
 		initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -918,6 +946,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEDataType(arrayListEDataType, ArrayList.class, "ArrayList", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(hashSetEDataType, HashSet.class, "HashSet", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(enumSetEDataType, EnumSet.class, "EnumSet", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iResourceEDataType, IResource.class, "IResource", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

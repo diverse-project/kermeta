@@ -20,7 +20,7 @@ import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.builder.KermetaResourceVisitor;
-import fr.irisa.triskell.kermeta.kpm.util.Activator;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.workspace.*;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
@@ -37,7 +37,7 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 
 			if ( directory.isSource() ) {
 				
-				directory.setSource( false );
+				directory.setSource( "false" );
 				DependencyVisitor visitor = new DependencyVisitor( directory.getKpm(), DependencyVisitor.REMOVING);
 				folder.accept(visitor);
 			
@@ -48,16 +48,14 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 		    	//wizard.create();
 		    	//wizard.open();	
 		    	
-				directory.setSource( true );
-				
-				SRCFolderDecorator.getSRCFolderDecorator().refresh( folder );
-		    	
-				
+				directory.setSource( "true" );
+		    					
 				DependencyVisitor visitor = new DependencyVisitor( directory.getKpm(), DependencyVisitor.ADDING);
 				folder.accept(visitor);
 			
 			}
-		
+			SrcFolderDecorator.getDecorator().refresh( folder );
+			
 			KermetaWorkspace.getInstance().save();
 			
 		} catch (CoreException exception) {

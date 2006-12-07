@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: FileImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -66,6 +67,15 @@ public class FileImpl extends UnitImpl implements File {
 	 */
 	public void fullRemove() {
 		kpm.removeFile(this);
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void load() {
+		setValue( IResourceHelper.getIFile( this ) );
 	}
 	
 	/**

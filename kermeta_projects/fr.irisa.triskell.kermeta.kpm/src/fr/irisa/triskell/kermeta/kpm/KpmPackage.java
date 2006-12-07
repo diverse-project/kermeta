@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -162,13 +162,22 @@ public interface KpmPackage extends EPackage {
 	int UNIT__PROJECT = 5;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT__VALUE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT_FEATURE_COUNT = 6;
+	int UNIT_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FileImpl <em>File</em>}' class.
@@ -233,6 +242,15 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE__PROJECT = UNIT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILE__VALUE = UNIT__VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
@@ -317,6 +335,15 @@ public interface KpmPackage extends EPackage {
 	int DIRECTORY__PROJECT = FILE__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTORY__VALUE = FILE__VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -335,22 +362,13 @@ public interface KpmPackage extends EPackage {
 	int DIRECTORY__CONTENTS = FILE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__SOURCE = FILE_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Directory</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY_FEATURE_COUNT = FILE_FEATURE_COUNT + 2;
+	int DIRECTORY_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.
@@ -417,6 +435,15 @@ public interface KpmPackage extends EPackage {
 	int PROJECT__PROJECT = DIRECTORY__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROJECT__VALUE = DIRECTORY__VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Container</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -433,15 +460,6 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROJECT__CONTENTS = DIRECTORY__CONTENTS;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__SOURCE = DIRECTORY__SOURCE;
 
 	/**
 	 * The number of structural features of the '<em>Project</em>' class.
@@ -707,6 +725,17 @@ public interface KpmPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>IResource</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.core.resources.IResource
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIResource()
+	 * @generated
+	 */
+	int IRESOURCE = 18;
+
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.KPM <em>KPM</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -815,6 +844,17 @@ public interface KpmPackage extends EPackage {
 	EReference getUnit_Project();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getValue()
+	 * @see #getUnit()
+	 * @generated
+	 */
+	EAttribute getUnit_Value();
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.File <em>File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,17 +895,6 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDirectory_Contents();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Directory#isSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Source</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Directory#isSource()
-	 * @see #getDirectory()
-	 * @generated
-	 */
-	EAttribute getDirectory_Source();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Project <em>Project</em>}'.
@@ -1115,6 +1144,17 @@ public interface KpmPackage extends EPackage {
 	EDataType getEnumSet();
 
 	/**
+	 * Returns the meta object for data type '{@link org.eclipse.core.resources.IResource <em>IResource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IResource</em>'.
+	 * @see org.eclipse.core.resources.IResource
+	 * @model instanceClass="org.eclipse.core.resources.IResource" serializable="false"
+	 * @generated
+	 */
+	EDataType getIResource();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1221,6 +1261,14 @@ public interface KpmPackage extends EPackage {
 		EReference UNIT__PROJECT = eINSTANCE.getUnit_Project();
 
 		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNIT__VALUE = eINSTANCE.getUnit_Value();
+
+		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FileImpl <em>File</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1255,14 +1303,6 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DIRECTORY__CONTENTS = eINSTANCE.getDirectory_Contents();
-
-		/**
-		 * The meta object literal for the '<em><b>Source</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DIRECTORY__SOURCE = eINSTANCE.getDirectory_Source();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.
@@ -1475,6 +1515,16 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType ENUM_SET = eINSTANCE.getEnumSet();
+
+		/**
+		 * The meta object literal for the '<em>IResource</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.core.resources.IResource
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIResource()
+		 * @generated
+		 */
+		EDataType IRESOURCE = eINSTANCE.getIResource();
 
 	}
 

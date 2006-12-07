@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: Unit.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -11,6 +11,8 @@ import java.util.Date;
 
 import java.util.EnumSet;
 import java.util.HashSet;
+
+import org.eclipse.core.resources.IResource;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -30,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getOwnedDependencies <em>Owned Dependencies</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getProject <em>Project</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -185,6 +188,32 @@ public interface Unit extends EObject {
 	void setProject(Project value);
 
 	/**
+	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(IResource)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Value()
+	 * @model dataType="fr.irisa.triskell.kermeta.kpm.IResource"
+	 * @generated
+	 */
+	IResource getValue();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(IResource value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
@@ -304,6 +333,14 @@ public interface Unit extends EObject {
 	 */
 	void removeDependencies(Type type);
 
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void load();
 
 	/**
 	 * <!-- begin-user-doc -->

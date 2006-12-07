@@ -18,7 +18,7 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaSimpleChangeListener;
 import fr.irisa.triskell.kermeta.kpm.helpers.*;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
@@ -27,6 +27,10 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 public class KermetaWorkspace {
 
+	
+	static private Thread kermetaUnitCalculation = null;
+	
+	
 	/**
 	 * KPM object is the key part of the system. It contains dependencies between files.
 	 */
@@ -43,12 +47,12 @@ public class KermetaWorkspace {
 	 * KermetaUnit of the file and notifies the interested objects if the unit changes. If there is not any more
 	 * interested objects in a file, the KermetaUnit is unloaded / destroyed in order to free memory.
 	 */
-	private Hashtable <KermetaUnitInterest, File> interestedObjects = new Hashtable <KermetaUnitInterest, File> ();
+	private Hashtable <KermetaUnitInterest, IFile> interestedObjects = new Hashtable <KermetaUnitInterest, IFile> ();
 	
 	/**
 	 * The table is linked to the attribute interestedObjects. It allows an easy Kermeta Unit retrieving.
 	 */
-	private Hashtable <File, KermetaUnit> units = new Hashtable <File, KermetaUnit> ();
+	private Hashtable <IFile, KermetaUnit> units = new Hashtable <IFile, KermetaUnit> ();
 	
 	private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
 	
@@ -95,7 +99,7 @@ public class KermetaWorkspace {
 	private void initialize() {
 		try {
 			initializeKpm();
-			//initializeChangeListener();
+			initializeChangeListener();
 			initializeProjects();
 		} catch (CoreException exception) {
 			System.out.println("Exception during initialization of KermetaWorkspace : ");
@@ -113,6 +117,7 @@ public class KermetaWorkspace {
 			kpm = KpmFactory.eINSTANCE.createKPM();
 		} else {
 			load();
+			kpm.load();
 		}
 	}
 	
@@ -120,10 +125,10 @@ public class KermetaWorkspace {
 	 * 
 	 * @throws CoreException
 	 */
-	/*private void initializeChangeListener() throws CoreException {
-		//IResourceHelper.workspace.addResourceChangeListener( new KermetaChangeListener(kpm) );
-		IResourceHelper.touchWorkspace();
-	}*/
+	private void initializeChangeListener() throws CoreException {
+		IResourceHelper.workspace.addResourceChangeListener( new KermetaSimpleChangeListener(kpm) );
+		//IResourceHelper.touchWorkspace();
+	}
 	
 	/**
 	 * Creates KermetaProjects object. It lists the project of the
@@ -219,7 +224,7 @@ public class KermetaWorkspace {
 	 * @param file
 	 * @return
 	 */
-	private int numberOfObjectsInterestedInFile( File file ) {
+	private int numberOfObjectsInterestedInFile( IFile file ) {
 		int counter = 0;
 		for ( KermetaUnitInterest o : interestedObjects.keySet() ) {
 			if ( interestedObjects.get(o) == file )
@@ -237,21 +242,21 @@ public class KermetaWorkspace {
 	 * the file is well known format from Kermeta.
 	 * @param file
 	 */
-	public KermetaUnit getKermetaUnit( File file ) {
+	public KermetaUnit getKermetaUnit( IFile file ) {
 		KermetaUnit unit = findKermetaUnit(file);
 		if ( unit == null )
-			unit = KermetaUnitHelper.typeCheckFile(file);
+			unit = KermetaUnitHelper.typeCheckFile( file );
 		return unit;
 	}
 	
-	private KermetaUnit findKermetaUnit (File file) {
+	private KermetaUnit findKermetaUnit (IFile file) {
 		KermetaUnit unit = units.get(file);
 		if ( unit == null ) {
 			Iterator <KermetaUnit> itOnUnits = unitList.iterator();
 			while ( (unit == null) && itOnUnits.hasNext() ) {
 				KermetaUnit currentUnit = itOnUnits.next();
 				String relativeFileName = StringHelper.getRelativeName(currentUnit.getUri());
-				if ( relativeFileName.equals (file.getRelativeName()) )
+				if ( relativeFileName.equals ( getFile(file).getRelativeName()) )
 					unit = currentUnit;
 			}
 		}
@@ -307,6 +312,26 @@ public class KermetaWorkspace {
 	//		Interest Mechanism		//
 	//////////////////////////////////
 	//////////////////////////////////
+	public void declareInterestThreading( final KermetaUnitInterest o, final IFile file ) {
+		
+		if ( kermetaUnitCalculation != null )
+			kermetaUnitCalculation = null;
+		
+		Runnable r = new Runnable() {
+			
+			public void run() {
+				
+				declareInterest(o, file);
+				
+			}
+			
+		};
+		
+		kermetaUnitCalculation = new Thread(r);
+		kermetaUnitCalculation.start();
+		
+	}
+	
 	/**
 	 * This method handles an interest formulated by an object implementing
 	 * KermetaUnitInterest interface. First the object is registered as an interested object 
@@ -315,19 +340,20 @@ public class KermetaWorkspace {
 	 * @param o The object which is interested in the the given file.
 	 * @param file The interesting file.
 	 */
-	public boolean declareInterest( KermetaUnitInterest o, File file ) {
+	public void declareInterest( KermetaUnitInterest o, IFile file ) {
 		if ( file != null ) {
 			interestedObjects.put(o, file);
 			// calculate the KermetaUnit if necessary
 			if ( units.get(file) == null ) {
-				file.receiveEvent( "simple_typecheck" );
+				if ( getFile(file) != null )
+					getFile( file ).receiveEvent( "simple_typecheck" );
+				if ( units.get(file) == null )
+					units.put(file, KermetaUnitHelper.typeCheckFile(file)); 
 				//KermetaUnit unit =  units.get(file);  // getKermetaUnit(file);
 				//units.put(file, unit);
 			}
 			notifyInterestedObject(o, file);
-			return true;
-		} else
-			return false;
+		}
 	}
 	
 	private void addUnits( KermetaUnit unit ) {
@@ -349,7 +375,7 @@ public class KermetaWorkspace {
 	 * @param file
 	 */
 	public void undeclareInterest ( KermetaUnitInterest o ) {
-		File file = interestedObjects.get(o);
+		IFile file = interestedObjects.get(o);
 		interestedObjects.remove(o);
 		if ( numberOfObjectsInterestedInFile(file) == 0 ) {
 			units.remove(file);
@@ -363,7 +389,7 @@ public class KermetaWorkspace {
 	 * @param o
 	 * @param file
 	 */
-	private void notifyInterestedObject( KermetaUnitInterest o, File file ) {
+	private void notifyInterestedObject( KermetaUnitInterest o, IFile file ) {
 		o.updateKermetaUnit( findKermetaUnit(file) );
 	}
 	
@@ -385,10 +411,29 @@ public class KermetaWorkspace {
 	 * @return
 	 */
 	public boolean isAnObjectInterestedInFile (File file) {
+		return interestedObjects.contains( file.getValue() );
+	}
+	
+	public boolean isAnObjectInterestedInFile (IFile file) {
 		return interestedObjects.contains(file);
 	}
 	
+	
+	public void updateFile(IFile file) {
+		String content = kmtUnitsContent.get( units.get(file).getUri() );
+		KermetaUnit unit = KermetaUnitHelper.typeCheckFile( file, content );
+		updateKermetaUnit(file, unit);
+	}
+	
+	public void updateFile(File file) {
+		updateFile( (IFile) file.getValue() );
+	}
+	
 	public void updateKermetaUnit(File file, KermetaUnit unit) {
+		updateKermetaUnit( (IFile) file.getValue(), unit);
+	}
+	
+	public void updateKermetaUnit(IFile file, KermetaUnit unit) {
 		
 		if ( units.size() == 0 ) {
 			units.put(file, unit);
@@ -400,14 +445,14 @@ public class KermetaWorkspace {
 		//notifyInterestedObjects(file);
 		//		notifyInterestedObject(o, file)
 		
-		ArrayList <File> files = new ArrayList <File> ();
-		for ( File f : units.keySet() ) {
+		ArrayList <IFile> files = new ArrayList <IFile> ();
+		for ( IFile f : units.keySet() ) {
 			
 			if ( units.get(f).getUri().equals( unit.getUri() ) )
 				files.add(f);
 		}
 		
-		for ( File f : files ) {
+		for ( IFile f : files ) {
 		
 			ArrayList <KermetaUnitInterest> objectsToNotify = new ArrayList<KermetaUnitInterest> ();
 			for ( KermetaUnitInterest o : interestedObjects.keySet() ) {
@@ -418,7 +463,8 @@ public class KermetaWorkspace {
 		
 			for ( KermetaUnitInterest o : objectsToNotify ) {
 				units.put(f, unit);
-				notifyInterestedObject(o, f);
+				//File kpmFile = getFile( f );
+				notifyInterestedObject(o, f );
 			}
 			
 		}

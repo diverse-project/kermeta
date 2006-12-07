@@ -1,5 +1,7 @@
 package fr.irisa.triskell.kermeta.kpm.actions.popup;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Vector;
 
@@ -7,6 +9,9 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelDecorator;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -20,9 +25,9 @@ import org.eclipse.swt.graphics.Device;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.util.Activator;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
-
+import org.eclipse.core.resources.ResourcesPlugin;
 
 
 public class SRCFolderDecorator extends LabelProvider implements ILabelDecorator
@@ -36,7 +41,7 @@ public class SRCFolderDecorator extends LabelProvider implements ILabelDecorator
    */
   public static SRCFolderDecorator getSRCFolderDecorator() throws CoreException {
     IDecoratorManager decoratorManager =
-      Activator.getDefault().getWorkbench().getDecoratorManager();
+      KPMPlugin.getDefault().getWorkbench().getDecoratorManager();
 
     decoratorManager.setEnabled("fr.irisa.triskell.kermeta.kpm.decorator", true);
     
@@ -61,23 +66,34 @@ public class SRCFolderDecorator extends LabelProvider implements ILabelDecorator
 			   Image image;
 			   
 			   ImageDescriptor base = ImageDescriptor.createFromImage(baseImage);
-			   
-			   //java.net.URI uri = new java.net.URI("file:/plugin/fr.irisa.triskell.kermeta.kpm/images/kermeta.png");
-			   
-			//   uri.
-			   
-			   Path path = new Path("/fr.irisa.triskell.kermeta.kpm/images/kermeta.png");
-			   
-			  // IFile file = IResourceHelper.getAbsolutePath() + 
-			   
-	//		   String path = "/images/kermeta.png";
-			   //Image overlayImage = new Image( Activator.getDefault().getWorkbench().getDisplay(), path);
-			   //ImageDescriptor overlay = ImageDescriptor.createFromImage ( overlayImage );
-			   
-			   //OverlayIcon overlayIcon = new OverlayIcon(base, overlay, new Point(5,5) );
 			
-			   //image = overlayIcon.createImage();
-			   //return image;
+	//		   ResourcesPlugin.getPlugin().getPluginPreferences().
+			   Image overlayImage = new Image( KPMPlugin.getDefault().getWorkbench().getDisplay(), "plugin:/resource/fr.irisa.triskell.kermeta.kpm/images/kermeta.png");
+			   ImageDescriptor overlay = ImageDescriptor.createFromImage ( overlayImage );
+			   
+			   OverlayIcon overlayIcon = new OverlayIcon(base, overlay, new Point(5,5) );
+			
+			   image = overlayIcon.createImage();
+			   return image;
+			   
+			   /*
+			   URI uri = URI.createFileURI("plugin:/resource/fr.irisa.triskell.kermeta.kpm/images/kermeta.png");
+			   URIConverter converter = new URIConverterImpl();
+			   
+			   try {
+				   
+				   InputStream is = converter.createInputStream(uri);
+				   Image overlayImage = new Image( Activator.getDefault().getWorkbench().getDisplay(), is);
+				   ImageDescriptor overlay = ImageDescriptor.createFromImage ( overlayImage );
+				   
+				   OverlayIcon overlayIcon = new OverlayIcon(base, overlay, new Point(5,5) );
+				
+				   image = overlayIcon.createImage();
+				   return image;
+			   
+			   } catch (IOException exception) {
+				   exception.printStackTrace();
+			   }*/
 		  }
 	  }
 	  return null;

@@ -78,19 +78,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 		
 		return null;
 	}
-	
-	/*public void build() {
-		
-		Iterator <Dependency> itOnDependencies = kpm.getDependencies().iterator();
-		
-		while ( itOnDependencies.hasNext() ) {
-			Dependency dependency = itOnDependencies.next();
-			if ( dependency.getFrom().getLastTimeModified() != dependency.getTo().getLastTimeModified() ) {
-				dependency.getFrom().receiveEvent( dependency.getEvent() );
-			}
-		}
-		
-	}*/
 	//////////////////////////////
 	//////////////////////////////
 	//		End of Building		//

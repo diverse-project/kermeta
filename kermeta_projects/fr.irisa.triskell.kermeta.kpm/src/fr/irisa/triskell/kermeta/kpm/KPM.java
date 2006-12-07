@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPM.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: KPM.java,v 1.2 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -352,5 +352,13 @@ public interface KPM extends EObject {
 	 * @generated
 	 */
 	Dependency findDependency(Unit from, Unit to, String typeName, String eventName);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void load();
 
 } // KPM

@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kpm Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.kpm;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Activator: fr.irisa.triskell.kermeta.kpm.util.Activator
+Bundle-Version: 0.0.1
+Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin
 Bundle-Localization: plugin
 Require-Bundle: fr.irisa.triskell.kermeta,
  org.eclipse.core.resources,

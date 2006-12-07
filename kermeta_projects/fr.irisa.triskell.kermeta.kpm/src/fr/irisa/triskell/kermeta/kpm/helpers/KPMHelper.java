@@ -29,7 +29,7 @@ public class KPMHelper {
 		Directory directory = KpmFactory.eINSTANCE.createDirectory();
 		directory.setName(directoryName);
 		directory.setPath(directoryPath);
-		directory.setSource(false);
+		//directory.setSource(false);
 		directory.setLastTimeModified( new Date() );
 		return directory;
 	}

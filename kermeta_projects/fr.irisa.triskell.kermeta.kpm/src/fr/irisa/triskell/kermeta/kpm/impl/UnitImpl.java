@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -20,6 +20,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
+
+import org.eclipse.core.resources.IResource;
 
 import java.util.Iterator;
 
@@ -53,6 +55,7 @@ import fr.irisa.triskell.kermeta.kpm.Event;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getOwnedDependencies <em>Owned Dependencies</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -148,6 +151,26 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * @ordered
 	 */
 	protected Project project = null;
+
+	/**
+	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final IResource VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected IResource value = VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -316,6 +339,27 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 		project = newProject;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__PROJECT, oldProject, project));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IResource getValue() {
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(IResource newValue) {
+		IResource oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__VALUE, oldValue, value));
 	}
 
 	/**
@@ -536,6 +580,17 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public void load() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.UNIT__NAME:
@@ -552,6 +607,8 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__PROJECT:
 				if (resolve) return getProject();
 				return basicGetProject();
+			case KpmPackage.UNIT__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -582,6 +639,9 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__PROJECT:
 				setProject((Project)newValue);
 				return;
+			case KpmPackage.UNIT__VALUE:
+				setValue((IResource)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -611,6 +671,9 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__PROJECT:
 				setProject((Project)null);
 				return;
+			case KpmPackage.UNIT__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -634,6 +697,8 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 				return ownedDependencies != null && !ownedDependencies.isEmpty();
 			case KpmPackage.UNIT__PROJECT:
 				return project != null;
+			case KpmPackage.UNIT__VALUE:
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -653,6 +718,8 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 		result.append(path);
 		result.append(", lastTimeModified: ");
 		result.append(lastTimeModified);
+		result.append(", value: ");
+		result.append(value);
 		result.append(')');
 		return result.toString();
 	}

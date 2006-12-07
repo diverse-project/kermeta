@@ -83,11 +83,11 @@ public class KermetaUnitHelper {
 	 * @param kpmFile
 	 * @return The method returns the Kermeta unit used.
 	 */
-	static public KermetaUnit typeCheckFile(File file, String content) {
+	static public KermetaUnit typeCheckFile(IFile file, String content) {
 	
 		System.out.println();
 		System.out.println();
-		System.out.println("TYPECHECKING " + file.getRelativeName() );
+		System.out.println("TYPECHECKING " + file.getLocation().toString() );
 		System.out.println();
 		System.out.println();
 	
@@ -103,8 +103,12 @@ public class KermetaUnitHelper {
 		return unit;
 	}
 	
-	static public KermetaUnit typeCheckFile(File file) {
+	static public KermetaUnit typeCheckFile(IFile file) {
 		return typeCheckFile(file, null);
+	}
+	
+	static public KermetaUnit typeCheckFile(File file) {
+		return typeCheckFile( (IFile) file.getValue() );
 	}
 	
 	/**
@@ -114,9 +118,9 @@ public class KermetaUnitHelper {
 	 * @param file
 	 * @return The method returns the Kermeta unit used.
 	 */
-	static private KMTUnit typeCheckKMTFile ( File file, String content ) {
+	/*static private KMTUnit typeCheckKMTFile ( IFile file, String content ) {
 		return typeCheckKMTFile(file.getAbsoluteName(), content);
-	}
+	}*/
 	//////////////////////////////////////////////
 	//////////////////////////////////////////////
 	//		End of Typechecking Mechanism		//

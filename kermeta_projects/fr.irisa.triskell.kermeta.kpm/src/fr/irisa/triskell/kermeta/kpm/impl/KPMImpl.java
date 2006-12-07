@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.2 2006-12-06 09:54:39 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -303,6 +303,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		container.getContents().add(directory);
 		
 		getUnits().add(directory);
+		
+		directory.load();
+		
 		return directory;
 	}
 
@@ -556,6 +559,18 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		return from.findDependency(to, typeName, eventName);
 	}
 
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void load() {
+		Iterator <Unit> itOnUnits = getUnits().iterator();
+		while ( itOnUnits.hasNext() ) {
+			itOnUnits.next().load();
+		}
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
