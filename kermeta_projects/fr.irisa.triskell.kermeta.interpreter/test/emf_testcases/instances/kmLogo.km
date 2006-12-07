@@ -766,7 +766,7 @@
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeParamBinding type="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0/@typeParamBinding.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.2/@ownedTypeDefinition.3"/>
-              <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@typeParameter.0"/>
+              <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@typeParameter.0"/>
             </typeParamBinding>
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
           </containedType>
@@ -793,7 +793,7 @@
                     <containedType xsi:type="kermeta_language_structure:Class">
                       <typeParamBinding type="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.1/@value/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
                         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.2/@ownedTypeDefinition.3"/>
-                        <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@typeParameter.0"/>
+                        <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@typeParameter.0"/>
                       </typeParamBinding>
                       <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
                     </containedType>
@@ -1668,13 +1668,13 @@
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
             </containedType>
-            <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0"/>
+            <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0"/>
           </typeParamBinding>
           <typeParamBinding type="/0/@nestedPackage.2/@ownedTypeDefinition.3/@containedType.0/@typeParamBinding.1/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
               <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
             </containedType>
-            <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1"/>
+            <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1"/>
           </typeParamBinding>
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0"/>
         </containedType>
@@ -2266,7 +2266,7 @@
                 <type type="/0/@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.3/@body/@statement.5/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeParamBinding>
-                      <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0"/>
+                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0"/>
                       <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
                     </typeParamBinding>
                     <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19"/>

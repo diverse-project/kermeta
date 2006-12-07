@@ -1,4 +1,4 @@
-/* $Id: OperationUpdateCommand.java,v 1.2 2006-10-11 08:54:06 cfaucher Exp $
+/* $Id: OperationUpdateCommand.java,v 1.3 2006-12-07 10:11:30 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -126,7 +126,7 @@ public class OperationUpdateCommand extends Command {
 				.getDataTypeParameters().iterator(); iterator.hasNext();) {
 			ParameterObject param_object = iterator.next();
 			// TypeDefinition type = _inputTypes.getTypeDefinition(object);
-			TypeVariable tvar = StructureFactory.eINSTANCE.createTypeVariable();
+			TypeVariable tvar = StructureFactory.eINSTANCE.createObjectTypeVariable();
 			tvar.setName(_dataStructure.getDisplayName(param_object));
 			if (param_object.getType() != null)
 				tvar.setSupertype(param_object.getType());
