@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.26 2006-10-25 08:30:35 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.27 2006-12-07 10:05:15 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -153,6 +153,16 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","051_scopeVisibility.main.kmt" );
 
 		testWithFile("test/kmt_testcases","052_testReadWriteParameter.main.kmt" );
+
+		testWithFile("test/kmt_testcases","053_testCollection.main.kmt" );
+
+		testWithFile("test/kmt_testcases","054_testIsKindOf.main.kmt" );
+
+		testWithFile("test/kmt_testcases","056_testIsSameAs.main.kmt" );
+
+		testWithFile("test/kmt_testcases","057_testIsNotSameAs.main.kmt" );
+
+		testWithFile("test/kmt_testcases","058_testEqualsOnCollection.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
