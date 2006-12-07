@@ -73,12 +73,12 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 		// TODO add specific code if super method is not sufficient
 		// super.redoModel();
 
-		if (Utils.getElement(getSource()) instanceof ClassDefinition
-				&& Utils.getElement(getTarget()) instanceof ClassDefinition) {
+		if (Utils.getElement(source) instanceof ClassDefinition
+				&& Utils.getElement(target) instanceof ClassDefinition) {
 			ClassDefinition sourceFClass = (ClassDefinition) Utils
-					.getElement(getSource());
+					.getElement(source);
 			ClassDefinition targetFClass = (ClassDefinition) Utils
-					.getElement(getTarget());
+					.getElement(target);
 
 			// "type" is the class referencing the targeted ClassDefinition
 			Class type = StructureFactory.eINSTANCE.createClass();
