@@ -7,12 +7,12 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id:
- * Project : Kermeta (First iteration)
+ * $Id: exceptions.kmt,v 1.10 2006-12-07 08:55:47 dvojtise Exp $
+ * Project : Kermeta framework
  * Creation date :  
- * File : testSuite.skel
- * License : GPL
- * Copyright : IRISA / Universite de Rennes 1
+ * File : exception.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
  * Creation date : Mar 14, 2005
  * Author : zdrey
  * Description :  
@@ -53,9 +53,9 @@ class Exception
  * ****************************************************************************/ 
 
 /**
- * Abstract exception for interpreter exceptions
+ * Exception for interpreter exceptions
  */
-abstract class RuntimeError inherits Exception {
+class RuntimeError inherits Exception {
 	
 	/**
 	 * The code that raised the exception
@@ -79,6 +79,13 @@ class NotImplementedException inherits RuntimeError {}
  * which has an upper bound != -1 ( ie *)
  */
 class UpperBoundReachedError inherits RuntimeError {}
+
+/**
+ * Creation on an abstract class. Usually this is detected by the type-checker. The only
+ * case where this happens is when instantiating a type variable, whose bound type turns
+ * out to be abstract.
+ */
+class AbstractClassInstantiationError inherits RuntimeError {}
 
 /* ****************************************************************************
  * 3-Standard library related errors
