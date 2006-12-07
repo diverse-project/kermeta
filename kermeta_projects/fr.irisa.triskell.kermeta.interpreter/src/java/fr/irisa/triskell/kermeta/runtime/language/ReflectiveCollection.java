@@ -1,4 +1,17 @@
-/* Implementation of Kermeta base type ReflectiveCollection */
+/* $Id: ReflectiveCollection.java,v 1.11 2006-12-07 09:35:29 dvojtise Exp $
+ * Project   : Kermeta interpreter
+ * File      : ReflectiveCollection.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jul 7, 2005
+ * Authors       :
+ *      Franck Fleurey <ffleurey@irisa.fr> 
+ *		Zoé Drey <zdrey@irisa.fr>
+ *		Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
+ * 		Implementation of Kermeta base type ReflectiveCollection
+ */
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
