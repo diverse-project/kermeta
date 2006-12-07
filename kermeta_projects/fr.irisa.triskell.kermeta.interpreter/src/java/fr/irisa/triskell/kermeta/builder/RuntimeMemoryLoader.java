@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.15 2006-10-27 08:27:32 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.16 2006-12-07 10:04:23 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -22,9 +22,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
@@ -36,8 +38,9 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * The RuntimeMemoryLoader is reponsible of loading the object RuntimeMemory for the interpreter from a kermeta model
+ * This Kermeta model is considered as definitions for the kermeta program (ie. correspond to require statements)
+ * It creates the RuntimeObjects corresponding to all these defintions. 
  */
  class RuntimeMemoryLoader {
     
@@ -108,26 +111,35 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
     private void _1_loadTypes() {
         for (Package p : unit.packages.values()) {
             // For each type definition, create the associated RuntimeObject
-            for (Object tnext : p.getOwnedTypeDefinition()) {
-            	// TypeDefinition can be a ClassDefinition or a ModelTypeDefinition
-                TypeDefinition td = (TypeDefinition)tnext;
-                RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
-                typeDefinitions.put(NamedElementHelper.getQualifiedName(td), ro);
-                objects.put(td, ro);
-                // If the type definition is a *classDefinition* than, create the complete runtime object, for the 
-                // class definition itself, AND for all its properties.
-                if (td instanceof ClassDefinition) {
-                    for (Object pnext : ((ClassDefinition)td).getOwnedAttribute())
-                    {
-                        Property prop = (Property)pnext;
-                        RuntimeObject ro_prop = new KCoreRuntimeObject(memory.getROFactory(), null, prop);
-                        //ro_prop.getData().put("kcoreObject", prop);
-                        properties.put(NamedElementHelper.getQualifiedName(prop), ro_prop);
-                        objects.put(prop, ro_prop);
-                    }
+        	loadTypesForTypeDefContainer(p);
+        }
+    }
+    
+    private void loadTypesForTypeDefContainer(TypeDefinitionContainer td_cont) {
+        // For each type definition, create the associated RuntimeObject
+        for (Object tnext : td_cont.getOwnedTypeDefinition()) {
+        	// TypeDefinition can be a ClassDefinition or a ModelTypeDefinition
+            TypeDefinition td = (TypeDefinition)tnext;
+            RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
+            typeDefinitions.put(NamedElementHelper.getQualifiedName(td), ro);
+            objects.put(td, ro);
+            // If the type definition is a *classDefinition* than, create the complete runtime object, for the 
+            // class definition itself, AND for all its properties.
+            if (td instanceof ClassDefinition) {
+                for (Object pnext : ((ClassDefinition)td).getOwnedAttribute())
+                {
+                    Property prop = (Property)pnext;
+                    RuntimeObject ro_prop = new KCoreRuntimeObject(memory.getROFactory(), null, prop);
+                    //ro_prop.getData().put("kcoreObject", prop);
+                    properties.put(NamedElementHelper.getQualifiedName(prop), ro_prop);
+                    objects.put(prop, ro_prop);
                 }
+            } else if (td instanceof ModelTypeDefinition) {
+            	//Go add the definitions for the classes inside
+            	loadTypesForTypeDefContainer((ModelTypeDefinition) td);
             }
         }
+
     }
     
     private void _2_initializeMemory() {
@@ -136,6 +148,11 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 		fclass.setTypeDefinition(
 		  (ClassDefinition)unit.getTypeDefinitionByName("kermeta::language::structure::Class"));
 	    memory.getROFactory().setClassClassFromFClass(fclass);
+	    // Initialize the class ModelType
+	    fr.irisa.triskell.kermeta.language.structure.Class fModelType = unit.struct_factory.createClass();
+	    fModelType.setTypeDefinition(
+	    		(ClassDefinition)unit.getTypeDefinitionByName("kermeta::language::structure::ModelType"));
+	    memory.getROFactory().setModelTypeClassFromFClass(fModelType);
 	    // Initialize singletons
         memory.createSingletons(unit);
     }
