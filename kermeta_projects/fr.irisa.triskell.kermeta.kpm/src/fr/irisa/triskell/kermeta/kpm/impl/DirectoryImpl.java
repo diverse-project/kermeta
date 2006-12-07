@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DirectoryImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
+ * $Id: DirectoryImpl.java,v 1.4 2006-12-07 13:58:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -136,7 +136,6 @@ public class DirectoryImpl extends FileImpl implements Directory {
 	 */
 	public void load() {
 		setValue( IResourceHelper.getIFolder( this ) );
-		setSource( "false" );
 	}
 	
 	/**
