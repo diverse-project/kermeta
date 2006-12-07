@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2006-10-25 08:28:21 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2006-12-07 08:47:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -48,6 +48,9 @@ public class JunitTestSuite extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+
+
+
 
 
 
@@ -120,6 +123,10 @@ testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_0
 
 public void testinvalid_004_cyclicCompositions_04() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_04.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_05() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_05.kmt" );
 }
 
 /*** END GENERATED TESTS ***/

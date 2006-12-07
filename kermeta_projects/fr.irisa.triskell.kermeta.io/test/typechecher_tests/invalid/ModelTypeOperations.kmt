@@ -1,0 +1,76 @@
+package testPackage1;
+
+using kermeta::standard
+
+modeltype mt1 {
+  class c1 {
+    property a : String
+    reference my_c2 : c2[0..*]#my_c1
+  }
+  class c2 {
+    property b : String
+    reference my_c1 : c1[0..*]#my_c2
+  }
+}
+
+modeltype mt2 {
+  class c1 {
+    property a : String
+    reference my_c2 : c2[0..*]#my_c1
+  }
+  class c2 {
+    property b : String
+    reference my_c1 : c1[0..*]#my_c2
+  }
+  class c3 {
+    property c: String
+  }
+}
+
+modeltype mt3 {
+  class c1 {
+    property a : String
+    property a2 : Boolean
+    reference my_c2 : c2[0..*]#my_c1
+  }
+  class c2 {
+    property b : String
+    reference my_c1 : c1[0..*]#my_c2
+    property b2: Boolean
+  }
+}
+
+class test1 <MT : mt1> {
+	operation transform(model : MT) : Void is
+	do
+		void
+	end
+}
+
+class test2 <MT : mt3> {
+	operation transform(model : MT) : Void is
+	do
+		void
+	end
+}
+
+class tester {
+	operation caller() : Void is
+	do
+		var m1 : mt1
+		var m2 : mt2
+		var m3 : mt3
+		
+		//ok
+		test1<mt1>.new.transform(m1)
+		test1<mt2>.new.transform(m2)
+		test1<mt3>.new.transform(m3)
+		
+		//not ok
+		test2<mt1>.new.transform(m1)
+		test2<mt2>.new.transform(m2)
+		
+		//ok
+		test2<mt3>.new.transform(m3)
+	end
+}

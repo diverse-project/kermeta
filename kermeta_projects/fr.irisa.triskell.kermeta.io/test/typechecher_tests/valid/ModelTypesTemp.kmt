@@ -1,0 +1,28 @@
+
+package testModelTypes;
+
+require "basic_fsm_modeltype.kmt"
+
+using kermeta::standard
+
+class Blah<T : basic_fsm> {
+  operation beelah(in : T) : T is do
+  	result := T.new
+  end
+  operation o2(p2 : T::State) : T::State is do
+  	result := p2
+  end
+}
+
+class Baz<MT : basic_fsm> {
+  attribute bl : Blah<MT>
+  operation baz1(p1 : MT::State) : MT::State is do
+  	result := bl.o2(p1)
+  end
+}
+
+class Foo {
+  operation main() : Void is do
+  	Blah<basic_fsm>.new.beelah(basic_fsm.new)
+  end
+}
