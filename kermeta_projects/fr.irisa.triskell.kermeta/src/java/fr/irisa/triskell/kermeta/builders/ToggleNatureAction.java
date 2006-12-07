@@ -4,8 +4,12 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -65,32 +69,49 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 	 * @param project
 	 *            to have sample nature added or removed
 	 */
-	private void toggleNature(IProject project) {
-		try {
-			IProjectDescription description = project.getDescription();
-			String[] natures = description.getNatureIds();
+	private void toggleNature(final IProject project) {
+		
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRunnable operation = new IWorkspaceRunnable() {
+		      public void run(IProgressMonitor monitor) throws CoreException {
 
-			for (int i = 0; i < natures.length; ++i) {
-				if (KermetaNature.NATURE_ID.equals(natures[i])) {
-					// Remove the nature
-					String[] newNatures = new String[natures.length - 1];
-					System.arraycopy(natures, 0, newNatures, 0, i);
-					System.arraycopy(natures, i + 1, newNatures, i,
-							natures.length - i - 1);
+					IProjectDescription description = project.getDescription();
+					String[] natures = description.getNatureIds();
+
+					for (int i = 0; i < natures.length; ++i) {
+						if (KermetaNature.NATURE_ID.equals(natures[i])) {
+							// Remove the nature
+							String[] newNatures = new String[natures.length - 1];
+							System.arraycopy(natures, 0, newNatures, 0, i);
+							System.arraycopy(natures, i + 1, newNatures, i,
+									natures.length - i - 1);
+							description.setNatureIds(newNatures);
+							project.setDescription(description, null);
+							return;
+						}
+					}
+
+					// Add the nature
+					String[] newNatures = new String[natures.length + 1];
+					System.arraycopy(natures, 0, newNatures, 0, natures.length);
+					newNatures[natures.length] = KermetaNature.NATURE_ID;
 					description.setNatureIds(newNatures);
 					project.setDescription(description, null);
-					return;
-				}
-			}
 
-			// Add the nature
-			String[] newNatures = new String[natures.length + 1];
-			System.arraycopy(natures, 0, newNatures, 0, natures.length);
-			newNatures[natures.length] = KermetaNature.NATURE_ID;
-			description.setNatureIds(newNatures);
-			project.setDescription(description, null);
+		      }
+		   };
+		   
+		   
+	  		try {
+		   workspace.run(operation, null);
+		
 		} catch (CoreException e) {
-		}
+		}		
+		
+		
+		
+		
+
 	}
 
 }

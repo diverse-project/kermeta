@@ -1,4 +1,4 @@
-/* $Id: KermetaConstants.java,v 1.1 2006-02-15 18:17:11 zdrey Exp $
+/* $Id: KermetaConstants.java,v 1.2 2006-12-07 13:45:55 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RunnerConstants.java
  * License   : EPL
@@ -19,5 +19,6 @@ public class KermetaConstants {
 	public static final String FILE = "file";
 	public static final String ECORE_FILE = "file";
 	public static final String PROJECT = "project";
+	public static final String KLOGO = "klogo";
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("Kermeta");
 }
