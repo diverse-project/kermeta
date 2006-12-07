@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.77 2006-10-27 08:26:16 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.78 2006-12-07 08:39:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -41,7 +41,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -115,7 +114,7 @@ public abstract class KermetaUnit {
 	        }
 	        catch(Throwable t) {
 	            messages.addError("Type checker internal error " + t.getMessage(), null);
-	            KermetaUnit.internalLog.error("Type checker error", t);
+	            KermetaUnit.internalLog.error("Type checker error in Unit at "+ getUri(), t);
 	        }
 	    }
 	    return checker;

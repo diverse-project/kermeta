@@ -1,4 +1,4 @@
-/* $Id: TypeContainementFixer.java,v 1.5 2006-04-06 09:50:44 zdrey Exp $
+/* $Id: TypeContainementFixer.java,v 1.6 2006-12-07 08:39:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -11,16 +11,15 @@
 package fr.irisa.triskell.kermeta.loader;
 
 import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -28,10 +27,8 @@ import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-//import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
 /**
@@ -110,7 +107,7 @@ public class TypeContainementFixer extends KermetaOptimizedVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariable)
 	 */
-	public Object visitTypeVariable(TypeVariable node) {
+	public Object visitObjectTypeVariable(ObjectTypeVariable node) {
 		addContainedTypes(node.getSupertype(), node);
 		return null;
 	}
@@ -131,7 +128,7 @@ public class TypeContainementFixer extends KermetaOptimizedVisitor {
 		return super.visitPrimitiveType(node);
 	}
 	
-	public void addContainedTypes(EList types, TypeContainer container) {
+	protected void addContainedTypes(List types, TypeContainer container) {
 		Iterator it = types.iterator();
 		while(it.hasNext()) {
 			addContainedTypes((Type)it.next(), container);

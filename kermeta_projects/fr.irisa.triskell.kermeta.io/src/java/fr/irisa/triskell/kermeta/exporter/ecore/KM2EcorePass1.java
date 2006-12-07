@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.33 2006-10-27 11:58:15 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.34 2006-12-07 08:40:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -43,6 +44,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
@@ -146,15 +148,61 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// Visit the type definitions
 		for (Object next : node.getOwnedTypeDefinition()) {
 			Object o = accept((EObject)next);
-			if (o != null)
-				newEPackage.getEClassifiers().add(o);
-			else
-				throw new KM2ECoreConversionException("A type definition in package '"+node.getName() + "' could not be resolved (" + o + ")");
+			if (o != null) {
+				if (o instanceof EClass) {
+					newEPackage.getEClassifiers().add(o);
+				} else if (o instanceof EPackage) {
+					newEPackage.getESubpackages().add(o);
+				}
+			} else
+				throw new KM2ECoreConversionException("A type definition in package '"+node.getName() + "' could not be resolved (" + ((TypeDefinition) next).getName() + ")");
 		}
 		// Visit the tags of package and convert them into EAnnotations
 		setTagAnnotations(node, newEPackage);
 		// Add the created EPackage to km2ecoremapping
 		km2ecoremapping.put(node,newEPackage);
+		loggerTabs.decrement();
+		return newEPackage;
+	}
+	/**
+	 * Convert model type definitions into EPackages
+	 * @param node
+	 * @return
+	 */
+	public Object visitModelTypeDefinition(ModelTypeDefinition node) {
+		current_name = node.getName();
+		internalLog.debug(loggerTabs + "Visiting Package: " + current_name);
+		loggerTabs.increment();
+		
+		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
+		newEPackage.setNsPrefix(current_name);
+		newEPackage.setNsURI(ecoreResource.getURI().toString() + "#/" + current_ppath);
+		
+		newEPackage.setName( KMTHelper.getUnescapedIdentifier(current_name) );
+		
+		if (ecoreExporter.tracer != null)
+			ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
+		
+		//Visit the type definitions
+		for (Object next : node.getOwnedTypeDefinition()) {
+			Object o = accept((EObject) next);
+			if (o != null)
+				newEPackage.getEClassifiers().add(o);
+			else
+				throw new KM2ECoreConversionException("A type definition in model type '" + node.getName() + "' could not be resolved (" + o + ")");
+		}
+		//Visit the tags of the modeltype and convert them into EAnnotations
+		setTagAnnotations(node, newEPackage);
+		
+		//Add a tag indicating that the generated EPackage came from a modelTypeDefinition
+		ecoreExporter.addAnnotation(
+				newEPackage,
+				KM2Ecore.ANNOTATION,
+				"isModelTypeDefinition",
+				"true",
+				null);
+		
+		km2ecoremapping.put(node, newEPackage);
 		loggerTabs.decrement();
 		return newEPackage;
 	}

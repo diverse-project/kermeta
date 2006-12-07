@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.41 2006-10-27 08:49:38 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.42 2006-12-07 08:40:02 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -8,12 +8,9 @@
  * Authors : 
  * 	Franck Fleurey	ffleurey@irisa.fr
  *  Zoe Drey 		zdrey@irisa.fr
- *  Didier Vojtisek	zdrey@irisa.fr
- * Description :
- * 	Prints a kermeta model into a human-readable form (which is KMT)
+ *  Didier Vojtisek	dvojtise@irisa.fr
  * 
- * 
-*/
+ */
 package fr.irisa.triskell.kermeta.exporter.kmt;
 
 import java.io.File;
@@ -49,6 +46,7 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -56,7 +54,9 @@ import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -67,8 +67,8 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
@@ -82,6 +82,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * PrettyPrinter that prints a Kermeta program in its concrete syntax. 
+ * ie. Prints a kermeta model into a human-readable form (which is KMT)
  */
 public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
@@ -793,10 +794,19 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	    return ppTypeFromMultiplicityElement(node);
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariable)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ObjectTypeVariable)
 	 */
-	public Object visitTypeVariable(TypeVariable node) {
+	public Object visitObjectTypeVariable(ObjectTypeVariable node) {
 		return KMTHelper.getMangledIdentifier(node.getName());
+	}
+	public Object visitModelTypeVariable(ModelTypeVariable node) {
+		return KMTHelper.getMangledIdentifier(node.getName());
+	}
+	public Object visitVirtualType(VirtualType node) {
+		String result = KMTHelper.getMangledIdentifier(((ModelTypeVariable) node.getModelType()).getName());
+		result += "::";
+		result += KMTHelper.getMangledIdentifier(node.getName());
+		return result;
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VariableDecl)
