@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.29 2006-10-13 11:12:16 ftanguy Exp $
+/* $Id: reflection.kmt,v 1.30 2006-12-07 09:33:06 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -12,7 +12,7 @@
  */
  
 /**
- * Contains all the abstract classes used in the reflection mecanism. Implements the <b>derived
+ * Contains all the abstract classes used in the reflection mechanism. Implements the <b>derived
  * properties</b> contained in the classes; declares the abstract operations.
  * Concrete implementation is in kermeta.language.structure.
  */
@@ -86,6 +86,7 @@ abstract class ParameterizedType inherits Type
 {
 	reference typeDefinition : GenericTypeDefinition[1..1]
 	attribute typeParamBinding : set TypeVariableBinding[0..*]
+	attribute virtualTypeBinding : set TypeVariableBinding[0..*]
 }
 /** Type corresponding to the <b>use</b> of a ClassDefinition (see ClassDefinition)
  */
@@ -153,6 +154,31 @@ abstract class ModelType inherits ParameterizedType
 			mtDef ?= typeDefinition
 			result := mtDef.ownedTypeDefinition
 		end
+	operation new() : Model is abstract
+	operation isModelTypeOf(model : Model) : Boolean is abstract
+}
+
+/** Is the holder of a set of model elements (Object) that are compatible with the ModelType that has 
+ * instanciated this Model.
+ */
+abstract class Model inherits Object
+{
+	/** Contents of this model ... */
+ 	reference readonly contents : set Object[0..*]
+ 	
+ 	/** returns a set of all the elements of the model that are instance of the given Type */
+ 	operation filter(vtype : Type) : set Object[0..*] is abstract
+ 	
+ 	/** add an object to the model. According to the ModelType, the typechecker will statically verify if the object can be added or not */ 
+ 	operation add(obj : Object) : Void is abstract
+ 	
+ 	/** remove an object from the model */
+ 	operation remove(obj : Object) : Void is abstract
+ 	
+ 	/** add all the Object of the collection that are copmpatible with the ModelDefinition. Other objects are ignored.
+ 	 * Returns the list of Object that have been added (One can check that some element have been ignored or not)
+ 	 */
+ 	operation addAllCompatible(objectsToAdd : kermeta::standard::Collection<Object>) : kermeta::standard::Collection<Object> is abstract
 }
 /** Model elements with a multiplicity [lower..upper] inherit this class*/
 abstract class MultiplicityElement inherits TypedElement
@@ -216,6 +242,11 @@ abstract class TypeContainer inherits Object
 {
 	attribute containedType : set Type[0..*]#typeContainer
 }
+abstract class VirtualTypeContainer inherits Object
+{
+	attribute virtualType : set VirtualType[0..*]#modelType
+}
+
 /** 
  * Abstracts the definition of generic type definitions (i.e. type definitions that
  * can be parameterized), namely, for ClassDefinition and ModelTypeDefinition.
@@ -289,6 +320,16 @@ abstract class TypedElement inherits TypeContainer, NamedElement
 abstract class TypeVariable inherits TypeContainer, Type, NamedElement
 {
 	reference supertype : Type
+}
+abstract class ObjectTypeVariable inherits TypeContainer, TypeVariable
+{
+}
+abstract class VirtualType inherits ObjectTypeVariable {
+	reference classDefinition : ClassDefinition[1]
+	reference modelType : VirtualTypeContainer[1]#virtualType
+	reference typeParamBinding : TypeVariableBinding[0..*]
+}
+abstract class ModelTypeVariable inherits TypeVariable, VirtualTypeContainer {
 }
 abstract class ProductType inherits TypeContainer, Type
 {

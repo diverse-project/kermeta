@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.31 2006-10-13 11:12:16 ftanguy Exp $
+/* $Id: structure.kmt,v 1.32 2006-12-07 09:32:17 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -120,18 +120,28 @@ alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
 
 
-class ParameterizedType inherits Type, kermeta::reflection::ParameterizedType, KMStructureVisitable
+abstract class ParameterizedType inherits Type, kermeta::reflection::ParameterizedType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitParameterizedType(self, context)
 		end
+
 }
 class ModelType inherits ParameterizedType, kermeta::reflection::ModelType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitModelType(self, context)
+		end
+
+	method new() : kermeta::reflection::Model is
+		do
+			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.newObject(self)
+		end
+	method isModelTypeOf(m : kermeta::reflection::Model) : Boolean is
+		do
+			result ?= extern fr::irisa::triskell::kermeta::runtime::language::ModelType.isModelTypeOf(self, m)
 		end
 }
 
@@ -229,6 +239,9 @@ class Property inherits MultiplicityElement, kermeta::reflection::Property, KMSt
 abstract class TypeContainer inherits Object, kermeta::reflection::TypeContainer
 {
 }
+abstract class VirtualTypeContainer inherits Object, kermeta::reflection::VirtualTypeContainer
+{
+}
 class GenericTypeDefinition inherits TypeDefinition, kermeta::reflection::GenericTypeDefinition, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -257,12 +270,54 @@ class TypedElement inherits TypeContainer, NamedElement, kermeta::reflection::Ty
 			result := visitor.visitTypedElement(self, context)
 		end
 }
-class TypeVariable inherits TypeContainer, Type, NamedElement, kermeta::reflection::TypeVariable, KMStructureVisitable
+abstract class TypeVariable inherits Type, NamedElement, kermeta::reflection::TypeVariable, KMStructureVisitable
+{
+}
+class ObjectTypeVariable inherits TypeContainer, TypeVariable, kermeta::reflection::ObjectTypeVariable, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
-			result := visitor.visitTypeVariable(self, context)
+			result := visitor.visitObjectTypeVariable(self, context)
 		end
+}
+class VirtualType inherits ObjectTypeVariable, kermeta::reflection::VirtualType, KMStructureVisitable {
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitVirtualType(self, context)
+		end
+}
+class ModelTypeVariable inherits TypeVariable, TypeContainer, VirtualTypeContainer, kermeta::reflection::ModelTypeVariable {
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitModelTypeVariable(self, context)
+		end
+}
+class Model inherits Object, kermeta::reflection::Model {
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitModel(self, context)
+		end
+	method filter(typeName : kermeta::reflection::Type) : set kermeta::reflection::Object[0..*] is
+		do
+			result := contents.select { o | typeName.isInstance(o) }.asSet
+		end
+	method add(obj : kermeta::reflection::Object) : Void is
+		do
+			// This is only implemented as an extern so that at some point in the future, a runtime
+			// typecheck might be added in the event that un-modeltype-safe adds start occurring
+			
+			// Cute hack. The java code for add is hard if contents hasn't already been accessed. So...
+			contents
+			extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, obj)
+		end
+	method remove(obj : kermeta::reflection::Object) : Void is
+		do
+			// This is not really a hack.
+			extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(contents, obj)
+		end
+	method addAllCompatible(objectsToAdd : kermeta::standard::Collection<Object>) : kermeta::standard::Collection<Object> is do
+		raise "NOT IMPLEMENTED"
+	end
 }
 class ProductType inherits TypeContainer, Type, kermeta::reflection::ProductType, KMStructureVisitable
 {
@@ -415,7 +470,10 @@ abstract class KMStructureVisitor<ContextType, ResultType>
 	operation visitProperty(node : Property, context : ContextType) : ResultType is abstract
 	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is abstract
 	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is abstract
-	operation visitTypeVariable(node : TypeVariable, context : ContextType) : ResultType is abstract
+	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is abstract
+	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is abstract
+	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is abstract
+	operation visitModel(node : Model, context : ContextType) : ResultType is abstract
 	operation visitProductType(node : ProductType, context : ContextType) : ResultType is abstract
 	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is abstract
 	operation visitType(node : Type, context : ContextType) : ResultType is abstract
