@@ -9,11 +9,11 @@ require "structure.kmt"
 using kermeta::standard
 
 /* *************************************************
- * $Id: reflective_collections.kmt,v 1.6 2006-05-23 12:26:46 zdrey Exp $
+ * $Id: reflective_collections.kmt,v 1.7 2006-12-07 09:31:50 dvojtise Exp $
  * Franck FLEUREY - 17/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
- * Distributed under the terms of the GPL licence
+ * Distributed under the terms of the EPL licence
  ************************************************* */
  
 /**
@@ -21,7 +21,7 @@ using kermeta::standard
  * of attributes that have an upper multiplicity > 1 in a class. It indeed handles
  * the update of opposite property if such an attribute has got one.
  */
-abstract class ReflectiveCollection<G> inherits Set<G>
+class ReflectiveCollection<G> inherits Set<G>
 {
 	/** Add an element to this collection and update its opposite property if it exists. */
 	method add(element : G) : Void is do
@@ -40,7 +40,7 @@ abstract class ReflectiveCollection<G> inherits Set<G>
 /**
  * ReflectiveSequence is an ordered ReflectiveCollection.
  */
-abstract class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
+class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
 	
 	method add(element : G) : Void from ReflectiveCollection is do
 		super(element)
