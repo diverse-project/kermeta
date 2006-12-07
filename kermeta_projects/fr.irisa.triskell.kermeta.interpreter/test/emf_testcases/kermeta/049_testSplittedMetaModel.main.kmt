@@ -11,7 +11,7 @@ require "../metamodels/049_simple_splittedMM1.ecore"
 using kermeta::persistence
 using kermeta::standard
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
     operation testmain() : Void is do 
         var inputModel : Set<P1::C1> init loadClassModel
@@ -37,10 +37,12 @@ class Main inherits kermeta::kunit::Test
     
     operation loadClassModel() : Set<P1::C1> is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.createResource(
+   		/*var resource : Resource init repository.createResource(
    		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/049_simplemodel_C1.xmi",
    		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
-   		resource.load()      
+   		resource.load()      */
+   		var resource : Resource 
+		resource ?= repository.getResource(	"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/049_simplemodel_C1.xmi")
        
        	result := Set<P1::C1>.new
        	from var it : Iterator<Object> init resource.instances.iterator

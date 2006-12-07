@@ -11,7 +11,7 @@ using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
     operation testmain() : Void is do 
      	var inputModel : Set<Package> init loadClassModel

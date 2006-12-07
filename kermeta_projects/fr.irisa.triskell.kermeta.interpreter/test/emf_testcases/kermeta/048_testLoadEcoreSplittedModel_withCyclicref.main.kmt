@@ -12,7 +12,7 @@ using kermeta::persistence
 using kermeta::standard
 using ecore
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
     operation testmain() : Void is do 
         var inputModel : Set<ecore::EPackage> init loadClassModel

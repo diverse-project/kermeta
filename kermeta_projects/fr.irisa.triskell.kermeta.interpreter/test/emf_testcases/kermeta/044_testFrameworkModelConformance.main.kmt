@@ -27,7 +27,7 @@ using ecore
  * from ecore or viewed from the reflexivity
  * it must check all classes and their attributes
  */
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
     operation testmain() : Void is do 
         var kermetaPackageFromModel : ecore::EPackage init getKermetaPackageFromModel

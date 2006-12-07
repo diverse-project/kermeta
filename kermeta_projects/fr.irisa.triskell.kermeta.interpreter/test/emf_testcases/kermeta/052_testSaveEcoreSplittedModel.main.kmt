@@ -15,7 +15,7 @@ using kermeta::standard
 using kermeta::utils
 using ecore
 
-class Main inherits kermeta::kunit::Test
+class Main inherits kermeta::kunit::TestCase
 {
 	attribute filename1 : String
 	attribute filename2 : String

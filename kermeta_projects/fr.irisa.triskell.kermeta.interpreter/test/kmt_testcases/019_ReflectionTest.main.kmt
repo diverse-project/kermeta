@@ -13,7 +13,7 @@ alias String : kermeta::standard::String;
 alias aClassAlias : testPackageTestReflection::AClass;
 
 
-class TestReflection inherits kermeta::kunit::Test
+class TestReflection inherits kermeta::kunit::TestCase
 {    
     operation testGetMetaClass1() is do
      	assert(self.getMetaClass.typeDefinition.name == "TestReflection")
