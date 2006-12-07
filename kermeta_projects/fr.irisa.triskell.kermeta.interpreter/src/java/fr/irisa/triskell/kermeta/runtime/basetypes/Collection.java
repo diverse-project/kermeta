@@ -1,4 +1,14 @@
-/* Implementation of Kermeta base type Collection */
+/* $Id: Collection.java,v 1.8 2006-12-07 09:39:48 dvojtise Exp $
+ * Project : Kermeta interpreter
+ * File : Collection.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mars 14, 2005
+ * Authors : 
+ * 		Franck Fleurey <ffleurey@irisa.fr>
+ * 		Jean-Philippe Thibault <jpthibau@irisa.fr> 
+ */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
@@ -9,9 +19,12 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
+
+/** Implementation of Kermeta base type Collection  
+ * to be used via an extern call in Kermeta */
 public class Collection {
 
 	// Implementation of method add called as :
@@ -53,7 +66,7 @@ public class Collection {
 	    
 	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setVariable((TypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
+	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
@@ -90,7 +103,7 @@ public class Collection {
 	    
 	    TypeVariableBinding binding = factory.getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
+	    binding.setVariable((ObjectTypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
 	    
 	    // Set the param binding type
 	    binding.setType(typeParam);

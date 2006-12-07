@@ -1,7 +1,7 @@
-/* $Id: RuntimeObjectFactory.java,v 1.14 2006-10-31 14:35:29 rdelamar Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.15 2006-12-07 09:39:08 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mars 14, 2005
@@ -29,22 +29,25 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.Enumeration; // conflict here ...
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.runtime.language.Class;
+import fr.irisa.triskell.kermeta.typechecker.FTypePrettyPrinter;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  * 
  * Contains a set of convenient methods to create RuntimeObjects.
  */
@@ -95,6 +98,11 @@ public class RuntimeObjectFactory {
 	private RuntimeObject class_class;
 	
 	/**
+	 * The meta-class ModelType
+	 */
+	private RuntimeObject modelType_class;
+	
+	/**
 	 * Set the metaclass Class : it creates a new runtime object specific
 	 * to the class Class
 	 * @param classdef the ClassDefinition corresponding to this class
@@ -106,6 +114,17 @@ public class RuntimeObjectFactory {
 		class_class.getData().put("kcoreObject",fclass);
 	}
 	
+	/**
+	 * Set the metaclass ModelType : it creates a new runtime object specific
+	 * to the class ModelType
+	 * @param classdef the ClassDefinition corresponding to this class
+	 */
+	public void setModelTypeClassFromFClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
+		modelType_class = new RuntimeObject(this, null);
+		modelType_class.setMetaclass(modelType_class);
+		modelType_class.setData(new Hashtable());
+		modelType_class.getData().put("kcoreObject", fclass);
+	}
 	
 	public RuntimeObject getClassClass() {
 		return class_class;
@@ -154,7 +173,8 @@ public class RuntimeObjectFactory {
 	}
 	
 	private Hashtable non_parametric_metaclass_cache = new Hashtable();
-	
+	private Hashtable<TypeDefinition, RuntimeObject> non_parametric_modeltype_cache = new Hashtable();
+
 	public RuntimeObject createMetaClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
 	    
 	    if (fclass.getTypeParamBinding().size() == 0) {
@@ -164,7 +184,7 @@ public class RuntimeObjectFactory {
 	    
 	    // precondition
 	    if (fclass.getTypeParamBinding().size() != fclass.getTypeDefinition().getTypeParameter().size()) {
-	        throw new Error("INTERNAL ERROR : invalid FClass : all type variable should be bound.");
+	        throw new Error("INTERNAL ERROR : invalid FClass : all type variables should be bound.");
 	    }
 	    
 	    RuntimeObject meta_class = new RuntimeObject(this, getClassClass());
@@ -187,6 +207,8 @@ public class RuntimeObjectFactory {
 	        RuntimeObject ro_type = null;
 	        if (binding_type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 	            ro_type = createMetaClass((fr.irisa.triskell.kermeta.language.structure.Class)binding_type);
+	        } else if (binding_type instanceof ModelType) {
+	        	ro_type = createModelType((ModelType) binding_type);
 	        }
 	        else {
 	            // it is an enum
@@ -207,6 +229,59 @@ public class RuntimeObjectFactory {
 	    return meta_class;
 	}
 	
+	public RuntimeObject createModelType(ModelType fModelType) {
+		if (fModelType.getTypeParamBinding().isEmpty()) {
+			RuntimeObject result = (RuntimeObject) non_parametric_modeltype_cache.get(fModelType.getTypeDefinition());
+			if (result != null) return result;
+		}
+		
+		if (fModelType.getTypeParamBinding().size() != fModelType.getTypeDefinition().getTypeParameter().size()) {
+			throw new Error("INTERNAL ERROR : invalid Model Type : all type variables should be bound.");
+		}
+		
+		RuntimeObject model_type = new RuntimeObject(this, getModelTypeClass());
+		model_type.getData().put("kcoreObject", fModelType);
+		model_type.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fModelType.getTypeDefinition()));
+		
+		RuntimeObject ro_bindings = new RuntimeObject(this, getClassReflectiveSequenceOtTypeParamBinding());
+		model_type.getProperties().put("typeParamBinding", ro_bindings);
+		
+		for (int i=0; i<fModelType.getTypeParamBinding().size(); i++) {
+			TypeVariableBinding binding = (TypeVariableBinding) fModelType.getTypeParamBinding().get(i);
+			
+			Type binding_type = binding.getType();
+			while (binding_type instanceof PrimitiveType) {
+				binding_type = ((PrimitiveType) binding_type).getInstanceType();
+			}
+			
+			RuntimeObject ro_var = (RuntimeObject) memory.getRuntimeObjectForFObject((TypeVariable)fModelType.getTypeDefinition().getTypeParameter().get(i));
+			RuntimeObject ro_type = null;
+			if (binding_type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+				ro_type = createMetaClass((fr.irisa.triskell.kermeta.language.structure.Class)binding_type);
+			} else if (binding_type instanceof ModelType) {
+				ro_type = createModelType((ModelType) binding_type);
+			} else {
+				ro_type = memory.getRuntimeObjectForFObject(binding_type);
+			}
+			
+			RuntimeObject ro_binding = createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
+			ro_binding.getData().put("kcoreObject", binding);
+			ro_binding.getProperties().put("variable", ro_var);
+			ro_binding.getProperties().put("type", ro_type);
+			Collection.getArrayList(ro_bindings).add(ro_binding);
+		}
+		
+		if (fModelType.getTypeParamBinding().isEmpty()) {
+			non_parametric_modeltype_cache.put(fModelType.getTypeDefinition(), model_type);
+		}
+		
+		return model_type;
+	}
+	
+	private RuntimeObject getModelTypeClass() {
+		return modelType_class;
+	}
+
 	public static int createRuntimeObjectFromClass_count = 0;
 	
 	/**
@@ -218,7 +293,22 @@ public class RuntimeObjectFactory {
 	    createRuntimeObjectFromClass_count++;
 		RuntimeObject result = new RuntimeObject(this, meta_class);
 		if(meta_class.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-			ClassDefinition class_def = (ClassDefinition)((fr.irisa.triskell.kermeta.language.structure.Class)meta_class.getData().get("kcoreObject")).getTypeDefinition();
+			fr.irisa.triskell.kermeta.language.structure.Class the_class = (fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject");
+			SimpleType t = (new SimpleType(the_class)); 
+			if (t.isSemanticallyAbstract()) {
+				//throw new Error("Kermeta Runtime Error: Unable to instantiate semantically abstract class " + FTypePrettyPrinter.getInstance().accept(the_class));
+				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::AbstractClassInstantiationError",
+						"Unable to instantiate semantically abstract class " + FTypePrettyPrinter.getInstance().accept(the_class) + "; " +t.getSemanticallyAbstractCause(),
+						meta_class.getFactory().memory.getCurrentInterpreter(),
+						meta_class.getFactory().memory,
+						the_class,
+						null);
+				/*
+				RuntimeObject ex = createObjectFromClassName("kermeta::exceptions::AbstractClassInstantiationError");
+				memory.getCurrentInterpreter().raiseKermetaException(ex, memory.getCurrentInterpreter().getInterpreterContext().peekCallFrame().getOperation());
+				*/
+			}
+			ClassDefinition class_def = (ClassDefinition)the_class.getTypeDefinition();
 			//		 if this comes from a jar unit, create it in a special way
 	        if(RuntimeHelper.isJarProxy(class_def)){
 	        	result.getData().put("isJarProxy", true);
@@ -229,6 +319,20 @@ public class RuntimeObjectFactory {
 		return result;
 	}
 	
+	/**
+	 * Create a new RuntimeObject representing a model, given its model type.
+	 * @param modelType the RuntimeObject representing the model type to instantiate
+	 * @return a RuntimeObject which is an "instance" of kermeta::language::structure::Model and typed by modelType.
+	 */
+	public RuntimeObject createRuntimeObjectFromModelType(RuntimeObject modelType) {
+		//We'll count models as objects, shall we?
+		createRuntimeObjectFromClass_count++;
+		RuntimeObject model_typedef = getTypeDefinitionByName("kermeta::language::structure::Model");
+		RuntimeObject model_class = getClassForClassDefinition(model_typedef);
+		RuntimeObject result = new RuntimeObject(this, model_class);
+		result.getData().put("modelType", modelType);
+		return result;
+	}
 	
 	/**
 	 * Create a new instance of a class (the class should not have any type parameter)

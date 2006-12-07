@@ -1,4 +1,13 @@
-/* Implementation of Kermeta base type Map */
+/* $Id: Map.java,v 1.8 2006-12-07 09:39:48 dvojtise Exp $
+ * Project : Kermeta interpreter
+ * File : Map.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mars 14, 2005
+ * Authors : 
+ * 		Franck Fleurey <ffleurey@irisa.fr>
+ */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
@@ -7,9 +16,11 @@ import java.util.Hashtable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
+/** Implementation of Kermeta base type Map  
+ * to be used via an extern call in Kermeta */
 public class Map {
 	
 	/**
@@ -50,7 +61,7 @@ public class Map {
 	    
 	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setVariable((TypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
+	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
@@ -76,7 +87,7 @@ public class Map {
 	    
 	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setVariable((TypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
+	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
