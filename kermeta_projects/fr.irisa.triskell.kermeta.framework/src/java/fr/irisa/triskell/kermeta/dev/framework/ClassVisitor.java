@@ -1,6 +1,13 @@
-/*
- * Created on 17 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: ClassVisitor.java,v 1.6 2006-12-07 08:53:07 dvojtise Exp $
+ * Project   : Kermeta framework
+ * File      : ClassVisitor.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 17, 2005
+ * Authors : 
+ * 	Franck FLEUREY (ffleurey@irisa.fr)
+ * 
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
@@ -17,14 +24,12 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class ClassVisitor extends KermetaVisitor {
 	
@@ -50,7 +55,7 @@ public class ClassVisitor extends KermetaVisitor {
 		visitor = unit.struct_factory.createClassDefinition();
 		visitor.setName(visitor_name + "Visitor");
 		visitor.setIsAbstract(true);
-		TypeVariable typevar = unit.struct_factory.createTypeVariable();
+		ObjectTypeVariable typevar = unit.struct_factory.createObjectTypeVariable();
 		typevar.setName("ContextType");
 		visitor.getTypeParameter().add(typevar);
 		
@@ -88,7 +93,7 @@ public class ClassVisitor extends KermetaVisitor {
 		result = unit.struct_factory.createOperation();
 		result.setSuperOperation(acceptOp);
 		result.setName("accept" + visitor.getName());
-		TypeVariable typevar = unit.struct_factory.createTypeVariable();
+		ObjectTypeVariable typevar = unit.struct_factory.createObjectTypeVariable();
 		typevar.setName("ContextType");
 		result.getTypeParameter().add(typevar);
 		// visitor : Visitor<ContextType>
@@ -97,7 +102,7 @@ public class ClassVisitor extends KermetaVisitor {
 		fr.irisa.triskell.kermeta.language.structure.Class p1Type = unit.struct_factory.createClass();
 		p1Type.setTypeDefinition(visitor);
 		TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
-		bind.setVariable((TypeVariable)visitor.getTypeParameter().get(0));
+		bind.setVariable((ObjectTypeVariable)visitor.getTypeParameter().get(0));
 		bind.setType(typevar);
 		p1Type.getTypeParamBinding().add(bind);
 		p1.setType(p1Type);
