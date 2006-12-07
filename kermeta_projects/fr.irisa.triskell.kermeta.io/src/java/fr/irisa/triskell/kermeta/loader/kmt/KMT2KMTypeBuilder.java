@@ -1,11 +1,17 @@
-/*
- * Created on 2 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMTypeBuilder.java,v 1.13 2006-12-07 08:08:03 dvojtise Exp $
+ * Project : Kermeta io
+ * File : KMT2KMTypeBuilder.java
+ * License : EPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : ffleurey
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
@@ -15,27 +21,24 @@ import fr.irisa.triskell.kermeta.ast.Prodtype;
 import fr.irisa.triskell.kermeta.ast.Type;
 import fr.irisa.triskell.kermeta.ast.Typelst;
 import fr.irisa.triskell.kermeta.ast.VoidType;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-//import fr.irisa.triskell.kermeta.language.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
-//import fr.irisa.triskell.kermeta.language.structure.FProductType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-//import fr.irisa.triskell.kermeta.language.structure.FVoidType;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class KMT2KMTypeBuilder extends KMT2KMPass {
 	
@@ -91,6 +94,44 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				return false;
 			}
 			
+			// It might be relative to a model-type variable, in which case we need to build a virtual type
+			if (qname.contains("::")) {
+				String prefix = qname.substring(0, qname.lastIndexOf("::"));
+				if ((prefix != null) && (builder.typeVariableLookup(prefix) instanceof ModelTypeVariable)) {
+					ModelTypeVariable mtv = (ModelTypeVariable) builder.typeVariableLookup(prefix);
+					String vtypename = qname.substring(qname.lastIndexOf("::")+2);
+					ModelTypeDefinition mtdef = (ModelTypeDefinition) ((ModelType) mtv.getSupertype()).getTypeDefinition();
+					// If it already exists we just grab the existing one.
+					Iterator vt_iter = (mtv).getVirtualType().iterator();
+					while (vt_iter.hasNext()) {
+						VirtualType v = (VirtualType) vt_iter.next();
+						if (v.getName().equals(vtypename)) {
+							result = v;
+						}
+					}
+					// If there isn't already one, do some checks and then create one
+					if (result == null) {
+						ClassDefinition vtclsdef = (ClassDefinition) builder.getTypeDefinitionByName(NamedElementHelper.getQualifiedName(mtdef) + "::" + vtypename);
+						if (null == vtclsdef) {
+							builder.messages.addMessage(new KMTUnitLoadError("Unable to find class '" + vtypename + "' in model type definition '" + NamedElementHelper.getQualifiedName(mtdef) + "'.",basictype));
+							return false;
+						}
+						fr.irisa.triskell.kermeta.language.structure.Type[] actual_params = getTypeFromLst(basictype.getParams());
+						if (actual_params.length > 0) {
+							builder.messages.addMessage(new KMTUnitLoadError("Parameterized virtual types not permitted: '" + basictype.getName().toString() + "'.", basictype));
+							return false;
+						}
+						VirtualType virt = builder.struct_factory.createVirtualType();
+						virt.setName(vtypename);
+						virt.setClassDefinition(vtclsdef);
+						virt.setModelType(mtv);
+						builder.storeTrace(virt, basictype);
+						result = virt;
+					}
+				}
+			}
+			
+			
 			// If result is null here, then the type is unresolved
 			
 			if(result == null) {
@@ -106,43 +147,97 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				return false;
 			}
 		}
-		else if (def instanceof ClassDefinition){ // it is a class
-			ClassDefinition classdef = (ClassDefinition)def;
-			fr.irisa.triskell.kermeta.language.structure.Class res = builder.struct_factory.createClass();
+		else if (def instanceof GenericTypeDefinition) {
+			GenericTypeDefinition gtdef = (GenericTypeDefinition) def;
+			ParameterizedType res = null;
+			if (gtdef instanceof ClassDefinition) {
+				res = builder.struct_factory.createClass();
+			} else if (gtdef instanceof ModelTypeDefinition) {
+				res = builder.struct_factory.createModelType();
+			}
 			builder.storeTrace(res, basictype);
 			result = res;
-			res.setTypeDefinition(classdef);
+			res.setTypeDefinition(gtdef);
 			//res.setFName(classdef.getFName());
 			fr.irisa.triskell.kermeta.language.structure.Type[] actual_params = getTypeFromLst(basictype.getParams());
-			if (actual_params.length != classdef.getTypeParameter().size()) {
-				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for class '" + qname + "'.",basictype));
+			if (actual_params.length != gtdef.getTypeParameter().size()) {
+				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for generic type '" + qname + "'.",basictype));
 			}
 			else {
 				for(int i=0; i<actual_params.length; i++) {
+
+					
+					/*
+					//Check whether actual type params conform to any supertype constraints on the type variable declaration
+					TypeVariable var = (TypeVariable) gtdef.getTypeParameter().get(i);
+					fr.irisa.triskell.kermeta.language.structure.Type required = var.getSupertype();
+					fr.irisa.triskell.kermeta.language.structure.Type provided = actual_params[i];
+					if (null != required) {
+						//This smells like a hack. Need to initialize the type checker context
+						TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
+						if (var instanceof ObjectTypeVariable) {
+							if (!TypeConformanceChecker.conforms(required, provided)) {
+								builder.messages.addMessage(new KMTUnitLoadError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".",basictype));
+							}
+						} else if (var instanceof ModelTypeVariable) {
+							if (provided instanceof ModelType) {
+								TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided);
+								boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
+								if (!match) {
+									builder.messages.addMessage(new KMTUnitLoadError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".",basictype));
+									for(TypeDoesNotMatchError err : matcher.getErrors()) {
+										builder.messages.addMessage(new KMTUnitLoadError(err.getMessage(),basictype));
+									}
+								} else {
+									//TODO Populate static bindings somehow to bind each required::virtual to its match
+									for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
+										//Find (or more probably create) the virtual type corresponding to the class
+										//Find (or more probably create) the virtual type corresponding to the class
+										VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
+										//Now create a binding
+										TypeVariableBinding new_tvb = builder.struct_factory.createTypeVariableBinding();
+										new_tvb.setVariable(vt);
+										new_tvb.setType(matcher.getResultMatch().get(e));
+										res.getVirtualTypeBinding().add(new_tvb);
+									}
+								}
+							} else if (provided instanceof ModelTypeVariable) {
+								TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype());
+								//match = TypeMatchChecker.match((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype(), new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
+								boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
+								if (!match) {
+									builder.messages.addMessage(new KMTUnitLoadError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".",basictype));
+									for(TypeDoesNotMatchError err : matcher.getErrors()) {
+										builder.messages.addMessage(new KMTUnitLoadError(err.getMessage(),basictype));
+									}
+								} else {
+									//TODO Populate static bindings somehow to bind each required::virtual to its match
+									for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
+										//Find (or more probably create) the virtual type corresponding to the class
+										VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
+										//The provided is also an MTV, so we need to convert its classes back to Virtual Types, too
+										VirtualType target_vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) provided, (ClassDefinition) matcher.getResultMatch().get(e).getTypeDefinition());
+										//Now create a binding
+										TypeVariableBinding new_tvb = builder.struct_factory.createTypeVariableBinding();
+										new_tvb.setVariable(vt);
+										new_tvb.setType(target_vt);
+										res.getVirtualTypeBinding().add(new_tvb);
+									}
+								}
+							} else {
+								builder.messages.addMessage(new KMTUnitLoadError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".",basictype));
+							}
+						}
+					}
+					*/
+					
+					
+					
 					TypeVariableBinding bind = builder.struct_factory.createTypeVariableBinding();
-					//builder.trace.put(bind, basictype); IT SHOULD BE basictype.getParams().chils[xxx] ...
-					bind.setVariable((TypeVariable)classdef.getTypeParameter().get(i));
+					bind.setVariable((TypeVariable)gtdef.getTypeParameter().get(i));
 					bind.setType(actual_params[i]);
 					res.getTypeParamBinding().add(bind);
 				}
-			}
-		} else if (def instanceof ModelTypeDefinition){ //it is a model type
-			// For the moment, this is identical to the code for class
-			ModelTypeDefinition mtypedef = (ModelTypeDefinition) def;
-			ModelType res = builder.struct_factory.createModelType();
-			builder.storeTrace(res, basictype);
-			result  = res;
-			res.setTypeDefinition(mtypedef);
-			fr.irisa.triskell.kermeta.language.structure.Type[] actual_params = getTypeFromLst(basictype.getParams());
-			if (actual_params.length != mtypedef.getTypeParameter().size()) {
-				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for model type '" + qname + "'.",basictype));
-			} else {
-				for(int i=0; i<actual_params.length; i++) {
-					TypeVariableBinding bind = builder.struct_factory.createTypeVariableBinding();
-					bind.setVariable((TypeVariable) mtypedef.getTypeParameter().get(i));
-					bind.setType(actual_params[i]);
-					res.getTypeParamBinding().add(bind);
-		}
 			}
 		} else {
 			//Its something unknown

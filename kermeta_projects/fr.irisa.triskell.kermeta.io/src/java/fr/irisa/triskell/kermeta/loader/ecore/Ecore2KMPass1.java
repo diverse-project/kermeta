@@ -1,5 +1,5 @@
-/* $Id: Ecore2KMPass1.java,v 1.4 2006-10-25 08:27:12 dvojtise Exp $
- * Project : Kermeta (First iteration)
+/* $Id: Ecore2KMPass1.java,v 1.5 2006-12-07 08:08:24 dvojtise Exp $
+ * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -51,8 +51,6 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class Ecore2KMPass1 extends EcoreVisitor {
 
@@ -385,7 +383,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			for (Object oname : node.getDetails().keySet())
 			{
 				String name = (String)oname;
-				TypeVariable tv = unit.struct_factory.createTypeVariable();
+				TypeVariable tv = unit.struct_factory.createObjectTypeVariable();
 				tv.setName(name);
 				params.add(tv);
 			} 

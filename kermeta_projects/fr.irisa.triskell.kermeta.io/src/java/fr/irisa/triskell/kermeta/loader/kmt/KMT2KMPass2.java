@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.8 2006-10-27 08:26:16 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.9 2006-12-07 08:08:03 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -24,14 +24,13 @@ import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
@@ -99,7 +98,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		//if (builder.current_class == null) return false;
 		// create the parameter
 		String name = getTextForID(typeVarDecl.getName());
-		TypeVariable tv = builder.struct_factory.createTypeVariable();
+		ObjectTypeVariable tv = builder.struct_factory.createObjectTypeVariable();
 		tv.setName(name);
 		// check that another param with the same name does not exist yet
 		GenericTypeDefinition context;
@@ -110,7 +109,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		}
 		EList other_params = context.getTypeParameter();
 		for (int i=0; i<other_params.size(); i++) {
-			if (((TypeVariable)other_params.get(i)).getName().equals(name)) {
+			if (((ObjectTypeVariable)other_params.get(i)).getName().equals(name)) {
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : Parametric type definition '" + context.getName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
 				return false;
 			}

@@ -1,7 +1,7 @@
-/* $Id: Type.java,v 1.3 2006-03-03 15:22:18 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: Type.java,v 1.4 2006-12-07 08:04:38 dvojtise Exp $
+* Project : Kermeta io
 * File : Type.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 10 avr. 2005
@@ -19,8 +19,8 @@ import java.util.Hashtable;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * This is the implementation of Type for the type checker.
+*  This class defines the sub-typing relationship
  */
 public abstract class Type {
 	
@@ -39,7 +39,7 @@ public abstract class Type {
 	
 	/**
 	 * Return an fr.irisa.triskell.kermeta.language.structure.Type : the corresponding FType if this is a
-	 * simple type and the moste derived ftype as possible if it is a 
+	 * simple type and the most derived ftype as possible if it is a 
 	 * union type
 	 */
 	public abstract fr.irisa.triskell.kermeta.language.structure.Type getFType();

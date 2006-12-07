@@ -1,6 +1,11 @@
-/*
- * Created on 6 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.9 2006-12-07 08:08:03 dvojtise Exp $
+ * Project : Kermeta io
+ * File : KMT2KMPostfixExpressionBuilder.java
+ * License : EPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : ffleurey
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
@@ -21,8 +26,6 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  * 
  * sequence postfixExp : target=primitiveExpression postfixlst ;
  * 
@@ -151,7 +154,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	public boolean beginVisit(ParamPostfix paramPostfix) {
 		// It should be a call expression and it must not have actual parameters yet
 		if (result instanceof CallExpression &&((CallExpression)result).getParameters().size() == 0) {
-			// The parameters are binded by beginVisit(ActualParameter actualParameter)
+			// The parameters are bound by beginVisit(ActualParameter actualParameter)
 		}
 		else {
 			builder.messages.addMessage(new KMTUnitLoadError("Parameters can only be associated to a call expression.", paramPostfix));

@@ -1,7 +1,7 @@
-/* $Id: FTypePrettyPrinter.java,v 1.8 2006-10-27 08:49:38 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: FTypePrettyPrinter.java,v 1.9 2006-12-07 08:04:38 dvojtise Exp $
+* Project : Kermeta io
 * File : FTypePrettyPrinter.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 19 avr. 2005
@@ -13,20 +13,19 @@ package fr.irisa.triskell.kermeta.typechecker;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     
@@ -78,8 +77,8 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	
-    //public Object visit(TypeVariable arg0) {
-    public Object visitTypeVariable(TypeVariable arg0) {
+    //public Object visit(ObjectTypeVariable arg0) {
+    public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		String result = arg0.getName();
 		if (arg0.getSupertype() != null) {
 		    result += " : " + this.accept(arg0.getSupertype());
@@ -87,6 +86,40 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
+    public Object visitModelTypeVariable(ModelTypeVariable arg0) {
+    	String result = arg0.getName();
+    	result += " : " + this.accept(arg0.getSupertype());
+    	return result;
+    }
+    
+    public Object visitModelType(ModelType arg0) {
+        String result = NamedElementHelper.getMangledQualifiedName(arg0.getTypeDefinition());
+        if (arg0.getTypeParamBinding().size() > 0) {
+            result += "<";
+	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+		        result += this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType());
+		        if (i != arg0.getTypeParamBinding().size()-1) result += ", ";
+			}
+	        result += ">";
+        }
+        return result;
+    }
+    
+    public Object visitVirtualType(VirtualType arg0) {
+    	String result = ((ModelTypeVariable) arg0.getModelType()).getName() + "::" + arg0.getName();
+    	result += " [virtual of " + NamedElementHelper.getMangledQualifiedName(arg0.getClassDefinition());
+    	if (!arg0.getTypeParamBinding().isEmpty()) {
+    		result += "<";
+	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+		        result += this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType());
+		        if (i != arg0.getTypeParamBinding().size()-1) result += ", ";
+			}
+	        result += ">";
+    	}
+    	result += "]";
+    	return result;
+    }
+    
 	//public Object visit(VoidType arg0) {
     public Object visitVoidType(VoidType arg0) {
 	    return "Void";

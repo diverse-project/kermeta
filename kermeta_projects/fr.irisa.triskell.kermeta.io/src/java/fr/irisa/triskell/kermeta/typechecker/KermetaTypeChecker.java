@@ -1,8 +1,8 @@
-/* $Id: KermetaTypeChecker.java,v 1.13 2006-10-25 08:26:21 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.14 2006-12-07 08:04:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
-* License : GPL
-* Copyright : IRISA / Universite de Rennes 1
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 18 avr. 2005
 * Author : Franck Fleurey
@@ -19,15 +19,16 @@ import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  * 
  * Type checker facade
  * 
@@ -70,10 +71,35 @@ public class KermetaTypeChecker {
     public void checkUnit() {
     	Collection<TypeDefinition> typedefs = unit.typeDefs.values();
         // First, annotate semantically abstract class definitions
+    	// Lets call this the structural-only pass, and check type parameterizations, too
     	for (TypeDefinition td : typedefs)
     	{
-    		if (td instanceof ClassDefinition)
-    			annotateSemanticallyAbstractClassDefinition((ClassDefinition)td);
+    		if (td instanceof ClassDefinition) {
+    			ClassDefinition cdef = (ClassDefinition) td;
+    			annotateSemanticallyAbstractClassDefinition(cdef);
+       			// Check any parameterized supertypes
+    			for (Object sup : cdef.getSuperType()) {
+    				ParameterizedTypeChecker.checkType((fr.irisa.triskell.kermeta.language.structure.Type) sup, unit, context, cdef);
+    			}
+    			// Check property types
+    			for (Object prop : cdef.getOwnedAttribute()) {
+    				ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop);
+    			}
+    			// Check operation signatures
+    			for (Object opObj : cdef.getOwnedOperation()) {
+    				Operation op = (Operation) opObj;
+    				if (null != op.getType()) {
+    					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
+    				}
+    				//Check parameter types
+    				for (Object param : op.getOwnedParameter()) {
+    					ParameterizedTypeChecker.checkType(((Parameter)param).getType(), unit, context, (Parameter)param);
+    				}
+    			}
+    		} else if (td instanceof PrimitiveType) {
+    			// Check aliased types
+    			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td);
+    		}
     	}
         // Second, check for each class def, its operation (inc. bodies) and properties
     	// (Uses annotations set above to check operation call "new".)
@@ -91,6 +117,7 @@ public class KermetaTypeChecker {
 	 * operation.
 	 * This method adds a transient tag to any type definition that is "semantically abstract".
 	 * The tag name is "isSemanticallyAbstract"
+	 * If this tag exists, its value represent a message explaining why it is abstract
 	 * <pre>
 	 * class A {
 	 * 		operation x() is abstract
@@ -109,13 +136,14 @@ public class KermetaTypeChecker {
 		boolean foundSAbstractTag = false;
 		if (typedef.isIsAbstract()) return true;
 		Iterator it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition((ClassDefinition)typedef)).iterator();
-		while (it.hasNext() && !foundSAbstractTag && !isSemanticallyAbstract(typedef))
+		while (it.hasNext() && !foundSAbstractTag && !ClassDefinitionHelper.isSemanticallyAbstract(typedef))
 		{
-			if (((CallableOperation)it.next()).getOperation().isIsAbstract())
+			Operation op = ((CallableOperation)it.next()).getOperation();
+			if (op.isIsAbstract())
 			{
 				foundSAbstractTag = true;
 				Tag tag = StructureFactory.eINSTANCE.createTag(); 
-				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue("");
+				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue(op.getName());
 				typedef.getTag().add(tag);
 			}
 		}
@@ -123,20 +151,6 @@ public class KermetaTypeChecker {
 	}
 	
 
-	
-	/** The necessary and sufficient condition to know if a class definition is semantically
-	 * abstract or not is the presence of a tag which name is "isSemanticallyAbstract"; 
-	 * this methods looks for this tag and returns true if it found it. */
-	public static boolean isSemanticallyAbstract(ClassDefinition cdef) {
-		boolean isSemanticallyAbstract = false;
-		if (cdef.isIsAbstract()) return true;
-		Iterator it = cdef.getTag().iterator();
-		while(it.hasNext() && !isSemanticallyAbstract)
-		{
-			isSemanticallyAbstract = ((Tag)it.next()).getName().equals(IS_SEMANTICALLY_ABSTRACT);
-		}
-		return isSemanticallyAbstract;
-	}
     
     /**
      * Type check all the operations and derived properties

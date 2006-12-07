@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.13 2006-08-24 14:41:30 dtouzet Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.14 2006-12-07 08:08:03 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -296,8 +296,8 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 					return false;
 				}
 				else {
-					// it is a type. we check here if it exists to give an appropriate error if it does not...
-					if (builder.getTypeDefinitionByName(name) == null) {
+					// it is either a type or a type variable. we check here if it exists to give an appropriate error if it does not...
+					if ((builder.getTypeDefinitionByName(name) == null) && (builder.typeVariableLookup(name) == null)) {
 						builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve symbol : '"+name+"'.", btype));
 						return false;
 					}

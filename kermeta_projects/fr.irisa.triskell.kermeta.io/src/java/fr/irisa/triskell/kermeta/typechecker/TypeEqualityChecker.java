@@ -1,13 +1,15 @@
-/* $Id: TypeEqualityChecker.java,v 1.7 2006-10-26 12:51:37 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: TypeEqualityChecker.java,v 1.8 2006-12-07 08:04:38 dvojtise Exp $
+* Project : Kermeta io
 * File : TypeConformanceChecker.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 13 avr. 2005
-* Author : Franck Fleurey
+* Authors : 
+* 		Franck Fleurey
+* 		Jim Steel
 * Description :
-*  This class implements type conformance for kermeta types
+*  This class implements equality for kermeta types
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
@@ -15,17 +17,19 @@ package fr.irisa.triskell.kermeta.typechecker;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * This class implements equality for kermeta types
  */
 public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 
@@ -98,6 +102,25 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 		return result;
 	}	
 
+	public Object visitModelType(ModelType arg0) {
+		Boolean result = new Boolean(false);
+		if (provided instanceof ModelType) {
+			ModelType p = (ModelType)provided;
+			if (p.getTypeDefinition() == arg0.getTypeDefinition()) {
+				result = new Boolean(true);
+				for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+					fr.irisa.triskell.kermeta.language.structure.Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
+					fr.irisa.triskell.kermeta.language.structure.Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
+					if (!TypeEqualityChecker.equals(t1, t2)) {
+						result = new Boolean(false);
+						break;
+					}
+				}
+			}
+		}
+		return result;
+	}	
+
 
 	public Object visitEnumeration(Enumeration arg0) {
 		return new Boolean(provided == arg0);
@@ -126,7 +149,7 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 	}
 
 	
-	public Object visitTypeVariable(TypeVariable arg0) {
+	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		return new Boolean(provided == arg0);
 	}
 	
@@ -134,4 +157,12 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 		return new Boolean(provided instanceof VoidType);
 	}
 
+	public Object visitVirtualType(VirtualType arg0) {
+		return new Boolean(provided == arg0);
+		//TODO Does this need to broadened?
+	}
+	
+	public Object visitModelTypeVariable(ModelTypeVariable arg0) {
+		return new Boolean(provided == arg0);
+	}
 }

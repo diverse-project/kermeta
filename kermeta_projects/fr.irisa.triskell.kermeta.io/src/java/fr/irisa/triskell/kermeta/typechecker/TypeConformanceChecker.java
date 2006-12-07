@@ -1,11 +1,13 @@
-/* $Id: TypeConformanceChecker.java,v 1.10 2006-03-03 15:22:18 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: TypeConformanceChecker.java,v 1.11 2006-12-07 08:04:38 dvojtise Exp $
+* Project : Kermeta (io
 * File : TypeConformanceChecker.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 13 avr. 2005
-* Author : Franck Fleurey
+* Authors : 
+* 		Franck Fleurey
+* 		Jim Steel
 * Description :
 *  This class implements type conformance for kermeta types
 */ 
@@ -14,22 +16,21 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Iterator;
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * This class implements type conformance for kermeta types
  */
 public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 
@@ -45,12 +46,27 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		
 		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
 		fr.irisa.triskell.kermeta.language.structure.Class cobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
-		 if (TypeEqualityChecker.equals(cobject, required)) return true;
-		 Iterator it = ((ClassDefinition) cobject.getTypeDefinition()).getSuperType().iterator();
-		 while (it.hasNext()) {
-			 fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
-		     if (TypeEqualityChecker.equals(c, required)) return true;
-		 }
+		if (TypeEqualityChecker.equals(cobject, required)) return true;
+		Iterator it = ((ClassDefinition) cobject.getTypeDefinition()).getSuperType().iterator();
+		while (it.hasNext()) {
+			fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+		    if (TypeEqualityChecker.equals(c, required)) return true;
+		}
+		
+		//Return true if the required type is Model and the provided type is a modeltype
+		if (provided instanceof ModelType) {
+			fr.irisa.triskell.kermeta.language.structure.Class mobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).getType();
+			
+			if (TypeEqualityChecker.equals(mobject, required) && (provided instanceof ModelType)) {
+				return true;
+			}
+			//Or any of its supertypes
+			it = ((ClassDefinition) mobject.getTypeDefinition()).getSuperType().iterator();
+			while(it.hasNext()) {
+				fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+			    if (TypeEqualityChecker.equals(c, required)) return true;
+			}
+		}
 		
 		// Transformation if provided is a type variable to the least derived type admissible
 		// for the variable.
@@ -116,6 +132,9 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 				
 			}
 		}
+		if ((arg0 == TypeCheckerContext.ObjectType) && (provided instanceof VirtualType)) {
+			result = new Boolean(true);
+		}
 		return result;
 	}
 	
@@ -146,10 +165,10 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
-	public Object visitTypeVariable(TypeVariable arg0) {
+	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		// FIXME: This is probably too restrictive
 	    fr.irisa.triskell.kermeta.language.structure.Type r = TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
-	    if (provided instanceof TypeVariable) {
+	    if (provided instanceof ObjectTypeVariable) {
 	        fr.irisa.triskell.kermeta.language.structure.Type p = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
 	        return new Boolean(TypeConformanceChecker.conforms(r, p));
 	    }
@@ -163,7 +182,37 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 	    }
 	}
 
+	public Object visitVirtualType(VirtualType arg0) {
+		Boolean result = new Boolean(false);
+		if (TypeEqualityChecker.equals(arg0, provided)) {
+			result = new Boolean(true);
+		}
+		//TODO Expand. Presumably MTV::X conforms to MTV::Y if X conforms to Y? Is that true? Does matching preserve pairwise subtyping?
+		return result;
+	}
+	
+	public Object visitModelTypeVariable(ModelTypeVariable arg0) {
+		Boolean result = new Boolean(false);
+		if (TypeEqualityChecker.equals(arg0, provided)) {
+			result = new Boolean(true);
+		}
+		//TODO Think about this
+		return result;
+	}
+	
 	public Object visitVoidType(VoidType arg0) {
 		return new Boolean(provided instanceof VoidType);
+	}
+	
+	public Object visitModelType(ModelType arg0) {
+		Boolean result = new Boolean(false);
+		if (TypeEqualityChecker.equals(arg0, provided)) {
+			//x conforms to x
+			result = new Boolean(true);
+		} else {
+			// Can't match here. Model types are monomorphic.
+		}
+		//throw new Error("Type checker error: Model type conformance is not yet implemented! (incidentally " + result + ")");
+		return result;
 	}
 }

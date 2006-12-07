@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.10 2006-10-25 08:26:41 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.11 2006-12-07 08:08:03 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -41,9 +41,12 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
@@ -52,8 +55,6 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  * 
  * PASS 3 :
  *  - the usings are checked
@@ -107,8 +108,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 					fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process((Type)supertypes[i], builder);
 					//System.out.println(builder.current_class.getFName() + " Found a super type : " + supertype.getFName() + " : " + supertype.getClass().getName());
 					if (!(supertype instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
-						builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit from classes ("+supertype+" is not a class).",(KermetaASTNode)supertypes[i]));
-						return false;
+						if  (!(supertype instanceof VirtualType)) {
+							builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).",(KermetaASTNode)supertypes[i]));
+							return false;
+						}
 					}
 					EList tmpsts = builder.current_class.getSuperType();
 					for(int a=0;a<tmpsts.size();a++) {
@@ -234,7 +237,15 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			
 			// create the parameter
 			String name = getTextForID(typeVarDecl.getName());
-			tv = builder.struct_factory.createTypeVariable();
+			// If it has a supertype that is a model type, then we need to create a modeltypeVar.
+			// Otherwise create an ObjectTypeVariable
+			if (KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder) instanceof ModelType) {
+				//tv = builder.struct_factory.createModelTypeVariable();
+				builder.messages.addMessage(new KMTUnitLoadError("Unable to create type variable '" + name + "': no model-type variables on operations", typeVarDecl));
+				return false;
+			} else {
+				tv = builder.struct_factory.createObjectTypeVariable();
+			}
 			tv.setName(name);
 			// check that another param with the same name does not exist yet
 			EList other_params = builder.current_operation.getTypeParameter();
@@ -247,10 +258,14 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			// add the parameter to the operation
 			builder.current_operation.getTypeParameter().add(tv);
 			builder.storeTrace(tv, typeVarDecl);
+			//tv.setSupertype(KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder));
+
 			
 		}
 		
-		tv.setSupertype(KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder));
+		if (!(tv instanceof ModelTypeVariable)) {
+			tv.setSupertype(KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder));
+		}
 		// in both cases the variable should be added to the context
 		builder.addTypeVar(tv);
 		return false;

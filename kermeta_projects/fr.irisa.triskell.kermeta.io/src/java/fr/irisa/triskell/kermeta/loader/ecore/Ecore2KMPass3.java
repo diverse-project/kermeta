@@ -1,12 +1,12 @@
-/* $Id: Ecore2KMPass3.java,v 1.11 2006-11-28 14:31:36 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.12 2006-12-07 08:08:24 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
- * File       : Ecore2KMPass2.java
+ * File       : Ecore2KMPass3.java
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : Jun 19, 2006
  * Authors : 
- *    zdrey <zdrey@irisa.fr>
+ *    David Touzet
  * Contributors :
  */
 package fr.irisa.triskell.kermeta.loader.ecore;
@@ -211,11 +211,8 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// add parameters
 			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
 		
-			if(node.getEAnnotation(KM2Ecore.ANNOTATION)==null){
-				// by default operation should be concrete othewise we cannot instanciate them !!
-				// so as we don't have body => default body is a raise of an exception
-				exporter.current_op.setBody(ExpressionParser.parse(unit, "do raise kermeta::exceptions::NotImplementedException.new end"));
-			}
+			// Is operation abstract? : we can know it already if the given operation contains no annotation
+			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
 			visitorPass1.isClassTypeOwner=false;
 			
 			// Visit the annotations
@@ -562,7 +559,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		List<TypeVariable> params = new ArrayList<TypeVariable>();
 		for (Object next :  node.getDetails().keySet()) {
 			String name = (String)next;
-			TypeVariable tv = unit.struct_factory.createTypeVariable(); 
+			TypeVariable tv = unit.struct_factory.createObjectTypeVariable(); 
 			tv.setName(name);
 			// detail can be " A : Anothertype" -> means that A must inherit Anothertype
 			String detail = (String)node.getDetails().get(name); 

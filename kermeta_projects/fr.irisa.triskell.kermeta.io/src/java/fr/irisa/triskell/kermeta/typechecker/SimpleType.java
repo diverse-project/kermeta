@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.9 2006-09-25 14:49:20 zdrey Exp $
+/* $Id: SimpleType.java,v 1.10 2006-12-07 08:04:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -20,12 +20,15 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**
  * @author Franck Fleurey
@@ -49,13 +52,24 @@ public class SimpleType extends Type {
 		this.setIsSemanticallyAbstract();
 	}
 	
+
 	public void setIsSemanticallyAbstract()
 	{
 		// If type is linked to a class definition and if it is semantically abstract
 		isSemanticallyAbstract = true;
 		TypeDefinition typedef = getTypeDefinition();
 		if (typedef!=null && typedef instanceof ClassDefinition)
-			isSemanticallyAbstract = KermetaTypeChecker.isSemanticallyAbstract((ClassDefinition)typedef);
+			isSemanticallyAbstract = ClassDefinitionHelper.isSemanticallyAbstract((ClassDefinition)typedef);
+	}
+	public String getSemanticallyAbstractCause(){
+		if(isSemanticallyAbstract == true){
+			TypeDefinition typedef = getTypeDefinition();
+			if (typedef!=null && typedef instanceof ClassDefinition)
+				return ClassDefinitionHelper.getSemanticallyAbstractCause((ClassDefinition)typedef);
+			else
+				return "";
+		}
+		else return "";
 	}
 	
 	/**
@@ -92,9 +106,32 @@ public class SimpleType extends Type {
 	public ArrayList callableOperations() {
 		// Try to get a FClass
 		fr.irisa.triskell.kermeta.language.structure.Type resolved = PrimitiveTypeResolver.getResolvedType(type);
-		resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
+		if (resolved instanceof VirtualType) {
+//			Temporary class just for the purposes of inheritance searching
+			//TODO This is a nasty, evil, dirty hack, and probably a memory leak
+			VirtualType virt = (VirtualType) resolved;
+			StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
+			fr.irisa.triskell.kermeta.language.structure.Class tmp_cls = struct_factory.createClass();
+			tmp_cls.setTypeDefinition(virt.getClassDefinition());
+			Iterator bindings = virt.getTypeParamBinding().iterator();
+			while (bindings.hasNext()) {
+				TypeVariableBinding old_tvb = (TypeVariableBinding) bindings.next();
+				TypeVariableBinding tvb = struct_factory.createTypeVariableBinding();
+				tvb.setVariable(old_tvb.getVariable());
+				tvb.setType(old_tvb.getType());
+				tmp_cls.getTypeParamBinding().add(tvb);
+			}
+			resolved = tmp_cls;
+		} else {
+			resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
+		}
 		if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 			return InheritanceSearch.callableOperations((fr.irisa.triskell.kermeta.language.structure.Class)resolved);
+		} else if (resolved instanceof ModelType) {
+			ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
+			fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).type;
+			result = InheritanceSearch.callableOperations(model);
+			return result;
 		}
 		else {
 			return new ArrayList();
@@ -103,9 +140,32 @@ public class SimpleType extends Type {
 	public ArrayList callableProperties() {
 		// Try to get a FClass
 		fr.irisa.triskell.kermeta.language.structure.Type resolved = PrimitiveTypeResolver.getResolvedType(type);
-		resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
+		if (resolved instanceof VirtualType) {
+//			Temporary class just for the purposes of inheritance searching
+			//TODO This is a nasty, evil, dirty hack, and probably a memory leak
+			VirtualType virt = (VirtualType) resolved;
+			StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
+			fr.irisa.triskell.kermeta.language.structure.Class tmp_cls = struct_factory.createClass();
+			tmp_cls.setTypeDefinition(virt.getClassDefinition());
+			Iterator bindings = virt.getTypeParamBinding().iterator();
+			while (bindings.hasNext()) {
+				TypeVariableBinding old_tvb = (TypeVariableBinding) bindings.next();
+				TypeVariableBinding tvb = struct_factory.createTypeVariableBinding();
+				tvb.setVariable(old_tvb.getVariable());
+				tvb.setType(old_tvb.getType());
+				tmp_cls.getTypeParamBinding().add(tvb);
+			}
+			resolved = tmp_cls;
+		} else {
+			resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
+		}
 		if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {			
 			return InheritanceSearch.callableProperties((fr.irisa.triskell.kermeta.language.structure.Class)resolved);
+		} else if (resolved instanceof ModelType) {
+			ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
+			fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).type;
+			result = InheritanceSearch.callableProperties(model);
+			return result;
 		}
 		else {
 			return new ArrayList();
@@ -187,8 +247,8 @@ public class SimpleType extends Type {
 	 */
 	public TypeDefinition getTypeDefinition() {
 	    if (type instanceof TypeDefinition) return (TypeDefinition)type;
-	    else if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-	        return ((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition();
+	    else if (type instanceof ParameterizedType) {
+	        return ((ParameterizedType)type).getTypeDefinition();
 	    }
 	    return null;
 	}

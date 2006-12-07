@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.23 2006-12-01 15:48:29 ftanguy Exp $
+/* $Id: KMTUnit.java,v 1.24 2006-12-07 08:08:03 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -155,7 +155,9 @@ public class KMTUnit extends KermetaUnit {
 	public void loadTypeDefinitions() {
 		KMT2KMPass pass = new KMT2KMPass2(this); 
 		mctAST.accept(pass);
-
+		if (this.messages.hasError()) return;
+		pass = new KMT2KMPass2_1(this);
+		mctAST.accept(pass);
 	}
 	
     public CompUnit getMctAST() {

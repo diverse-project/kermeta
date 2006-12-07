@@ -1,20 +1,18 @@
-/* $Id: CallableOperation.java,v 1.5 2006-09-29 13:29:04 zdrey Exp $
+/* $Id: CallableOperation.java,v 1.6 2006-12-07 08:04:38 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
- * License : GPL
- * Copyright : IRISA / Universite de Rennes 1
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 15 avr. 2005
  * Author : Franck Fleurey
- * Description :
- *     describe here file content
- * TODO :
- *     The class encapsulate information about operation call
  */
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
@@ -22,13 +20,13 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
- * @author Franck Fleurey IRISA / University of rennes 1 Distributed under the
- *         terms of the GPL license
+ * @author Franck Fleurey 
+ * The class encapsulate information about operation call
  */
 public class CallableOperation extends CallableElement {
 
@@ -94,6 +92,22 @@ public class CallableOperation extends CallableElement {
         return result;
     }
     
+    public Type getReturnType() {
+        Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
+        fr.irisa.triskell.kermeta.language.structure.Type rt = ((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(operation)).getType();
+        return new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings));
+    }
+    
+    public List<Type> getParameterTypes() {
+        List<Type> result = new ArrayList<Type>();
+        Iterator ps = operation.getOwnedParameter().iterator();
+        while (ps.hasNext()) {
+            Parameter param = (Parameter) ps.next();
+            result.add((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param));
+        }
+        return result;
+    }
+    
     public Operation getTypeBoundedOperation() {
         StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
         Operation result = struct_factory.createOperation();
@@ -111,8 +125,8 @@ public class CallableOperation extends CallableElement {
         result.setSuperOperation(operation.getSuperOperation());
         
         for (Object next : operation.getTypeParameter()) {
-            TypeVariable otv = (TypeVariable)next;
-            TypeVariable ntv = struct_factory.createTypeVariable();
+            ObjectTypeVariable otv = (ObjectTypeVariable)next;
+            ObjectTypeVariable ntv = struct_factory.createObjectTypeVariable();
             ntv.setName(otv.getName());
             if (otv.getSupertype() != null)
                 ntv.setSupertype(TypeVariableEnforcer.getBoundType(otv.getSupertype(), bindings));

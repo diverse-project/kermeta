@@ -1,11 +1,13 @@
-/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.6 2006-03-03 15:22:18 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.7 2006-12-07 08:04:38 dvojtise Exp $
+* Project : Kermeta io
 * File : GenericTypeSubstitution.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 12 avr. 2005
-* Author : Franck Fleurey
+* Authors : 
+* 		Franck Fleurey
+* 		Jim Steel
 * Description :
 * Transforms a fr.irisa.triskell.kermeta.language.structure.Type that contains type variables into an 
 * actual Ftype by replacing type variables by their least derived
@@ -21,7 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
@@ -94,7 +96,7 @@ public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 	}
 
 	
-	public Object visitTypeVariable(TypeVariable arg0) {
+	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		return TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
 	}
 	

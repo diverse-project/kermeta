@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.34 2006-10-27 07:17:51 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.35 2006-12-07 08:04:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -6,13 +6,6 @@
 * ----------------------------------------------------------------------------
 * Creation date : 12 mars 2005
 * Author : Franck Fleurey
-* Description :
-*     This is visitor for kermeta expressions which
-* 		the types of expressions.
-* 	  It adds type errors in the KermetaUnit
-*     The complete description of the type system can
-* 	  	be found in the document KerMeta-TypeSystem.sxw
-*     	in project documentation.
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
@@ -47,23 +40,34 @@ import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
-import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-import fr.irisa.triskell.kermeta.language.structure.ProductType;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ *     This is visitor for kermeta expressions which
+ * 		the types of expressions.
+ * 	  It adds type errors in the KermetaUnit
+ *     The complete description of the type system can
+ * 	  	be found in the document KerMeta-TypeSystem.sxw
+ *     	in project documentation.
  */
 public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
@@ -171,13 +175,23 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    // It can contain type variables that needs to be bound
 		Type result = operation_type.getFunctionTypeRight();
 		
+		//If the destination is a virtual type, we need to do a deep replacement of
+		//all class types with corresponding virtual types, creating them where necessary
+		if (exp instanceof CallFeature) {
+			// To avoid CallSuperOperations, which don't need to be virtualized
+			if ( (((CallFeature)exp).getTarget() != null) && getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof VirtualType) {
+				operation_type = TypeVirtualizer.virtualizeOperationType(op, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType());
+				result = operation_type.getFunctionTypeRight();
+			}
+		}
+		
 		// Check number of provided arguments
 	    if (op.getOperation().getOwnedParameter().size() != exp.getParameters().size()) {
 	        unit.messages.addError("TYPE-CHECKER : Wrong number of arguments, expecting "+op.getOperation().getOwnedParameter().size()+" arguments.", exp);
 	        return result;
 	    }
 	    
-		// if there is no parameters the operation type is the return type of the operation.
+		// if there are no parameters the operation type is the return type of the operation.
 		// The operation cannot be a generic operation and there are no unbound type variables
 	    if (exp.getParameters().size() == 0) {
 		    result = operation_type;
@@ -187,7 +201,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    boolean error = false;
 	
 		    // It can be a generic operation : Type parameters
-		    // actual values has to be infered from parameter types
+		    // actual values have to be inferred from parameter types
 		    Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
 		    
 		    // Try to infer actual types of type variables
@@ -217,7 +231,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    }
 		    }
 		    
-		    // Check that the type of the actual parameter match the types of the formal paramenters
+		    // Check that the type of the actual parameter matches the types of the formal parameters
 		    if (!error) {
 			    // REPLACE AND CHECK
 			    for(int i=0; i<exp.getParameters().size(); i++) {
@@ -235,6 +249,12 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    exp.getStaticTypeVariableBindings().clear();
 			    // store values of type variables in the call expression
 			    for(int i=0; i<op.getOperation().getTypeParameter().size(); i++) {
+			    	// Need to create new TypeVariableBindings
+			    	TypeVariableBinding tvb = unit.struct_factory.createTypeVariableBinding();
+			    	tvb.setVariable((TypeVariable) op.getOperation().getTypeParameter().get(i));
+			    	tvb.setType((fr.irisa.triskell.kermeta.language.structure.Type) binding.get(op.getOperation().getTypeParameter().get(i)));
+			    	// Jim: If parameterized virtual type bindings were possible on operation calls, then staticTypeVariableBindings would be
+			    	// TypeVariableBindings instead of just types, and the following line would add tvb instead.
 			        exp.getStaticTypeVariableBindings().add(binding.get(op.getOperation().getTypeParameter().get(i)));
 			    }
 		    }
@@ -251,36 +271,137 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    if (op.getOperation() == TypeCheckerContext.getClassNewOperation()) {
 	        if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	            result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
-	            // check that it is a concrete class
-	            if (((SimpleType)result).isSemanticallyAbstract())
+	            // check that it is a concrete class (if the literal is in fact a class. If its a type variable, we're ok)
+	            if ((result instanceof fr.irisa.triskell.kermeta.language.structure.Class) && ((SimpleType)result).isSemanticallyAbstract())
 	                unit.messages.addError("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	        }
+	    }
+	    if ((op.getOperation() == TypeCheckerContext.getModelTypeNewOperation())
+	    		|| (op.getOperation() == TypeCheckerContext.getModelTypeVariableNewOperation())
+	    		|| (op.getOperation() == TypeCheckerContext.getObjectTypeVariableNewOperation())) {
+	    	if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
+	    		result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
+	    	}
 	    }
 	    
 	    // THE CLONE AND DEEPCLONE OPERATIONS ON CLASS 
 	    // FIXME Why the following line doesn't work !!!!
-	    // if ( op.getOperation() == TypeCheckerContext.getClassCloneOperation() ) {
-	    if ( exp.getName().equals("clone") ||  exp.getName().equals("deepClone") )
-	    {
+	    if ( op.getOperation() == TypeCheckerContext.getClassCloneOperation() ) {
+	    	if (((CallFeature)exp).getTarget() instanceof TypeLiteral) {
 	    	// Check that the parameter is a instance of the type of the target ... A.clone(e:A) : A
-	    	if (exp.getParameters().size() == 1 ) {
-	    		Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
-	    		
-	    		Type provided = getTypeOfExpression((Expression)exp.getParameters().get(0));
-				Type expected = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget()) ;
-				
-				if (!provided.isSubTypeOf(expected)) {
-				    unit.messages.addError("TYPE-CHECKER : Type of argument of operation clone must be "+ expected + ".", (Expression)exp.getParameters().get(0));
-				}  		
-	    		
+		    	if (exp.getParameters().size() == 1 ) {
+		    		//Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
+		    		
+		    		Type provided = getTypeOfExpression((Expression)exp.getParameters().get(0));
+					Type expected = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget()) ;
+					
+					if (!provided.isSubTypeOf(expected)) {
+					    unit.messages.addError("TYPE-CHECKER : Type of argument of operation clone must be "+ expected + ".", (Expression)exp.getParameters().get(0));
+					}  		
+		    		
+		    	} else {
+		    	    unit.messages.addError("TYPE-CHECKER : Clone operation takes only one parameter", (Expression)exp);	    		
+		    	}
+		    	
+		    	result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
+	
+		    	if (((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()) {
+	                unit.messages.addError("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (Expression)exp);
+	            }
 	    	} else {
-	    	    unit.messages.addError("TYPE-CHECKER : Clone operation take only one parameter", (Expression)exp);	    		
+	    		unit.messages.addError("TYPE-CHECKER : clone() may only be called on a type literal.", exp);
+	    	}
+	    }
+	    // THE FILTER OPERATION ON MODEL
+	    if (op.getOperation() == TypeCheckerContext.getModelFilterOperation()) {
+	    	//Can only filter on one of the classes belonging to the model type or virtual types belonging to the model type variable
+	    	if (exp.getParameters().size() == 1) {
+	    		if (exp.getParameters().get(0) instanceof TypeLiteral) {
+	    			Type provided = getTypeFromTypeLiteral((TypeLiteral) exp.getParameters().get(0));
+	    			if ( getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof ModelType ) {
+	    				if (!(provided.getFType() instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
+	    					unit.messages.addError("TYPE-CHECKER : The model '" + ((CallFeature)exp).getTarget() + "' may only be filtered by a class present in its type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "', not by '" + provided + "'.", exp);
+	    				} else {
+		    				ModelTypeDefinition targetTypeDef = (ModelTypeDefinition) ((ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType()).getTypeDefinition();
+		    				if ( !targetTypeDef.getOwnedTypeDefinition().contains(((fr.irisa.triskell.kermeta.language.structure.Class)provided.getFType()).getTypeDefinition()) ) {
+		    					unit.messages.addError("TYPE-CHECKER : The model '" + ((CallFeature)exp).getTarget() + "' may only be filtered by a class present in its type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "', not by '" + provided + "'.", exp);
+		    				}
+	    				}
+	    			} else if ( getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof ModelTypeVariable ) {
+	    				if (!(provided.getFType() instanceof VirtualType)) {
+	    					unit.messages.addError("TYPE-CHECKER : The model '" + ((CallFeature)exp).getTarget() + "' may only be filtered by a virtual type present in its type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "', not by '" + provided + "'.", exp);
+	    				} else {
+	    					ModelTypeVariable targetType = (ModelTypeVariable) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType();
+	    					//Assume that the virtual type has been created
+	    					if ( !targetType.getVirtualType().contains(provided.getFType())) {
+		    					unit.messages.addError("TYPE-CHECKER : The model '" + ((CallFeature)exp).getTarget() + "' may only be filtered by a virtual type present in its type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "', not by '" + provided + "'.", exp);	    						
+	    					}
+	    				}
+	    			}
+			    	// The return type is a set of the parameter, so long as the parameter was a literal.
+		    		result = TypeCheckerContext.getSetType(provided.getFType());
+	    		}
+
+	    	} else {
+	    	    unit.messages.addError("TYPE-CHECKER : Filter operation takes only one parameter", (Expression)exp);
 	    	}
 	    	
-	    	 result = getTypeFromTypeLiteral((TypeLiteral)((CallFeature)exp).getTarget());
-	    	 if (((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)result).getType()).getTypeDefinition()).isIsAbstract()) {
-                unit.messages.addError("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (Expression)exp);
-            }
+	    }
+	    //The add operation on Model
+	    if (op.getOperation() == TypeCheckerContext.getModelAddOperation()) {
+	    	// The type of the parameter must be a subtype of one of the types contained by the model-type of the receiver
+	    	if (exp.getParameters().size() == 1) {
+	    		Type provided = getTypeOfExpression((Expression) exp.getParameters().get(0));
+    			if ( getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof ModelType ) {
+    	    		Boolean foundType = false;
+    	    		Iterator<fr.irisa.triskell.kermeta.language.structure.Class> classes = TypeMatchChecker.getContainedTypes((ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType()).iterator();
+    				while (!foundType && classes.hasNext()) {
+    					fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class) classes.next();
+    					if (provided.isSubTypeOf(new SimpleType(cls))) {
+    						foundType = true;
+    					}
+    				}
+    				if (!foundType) {
+    					unit.messages.addError("Unable to add object of type '" + provided + "' to model of type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "'.", exp);
+    				}
+    			} else if ( getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof ModelTypeVariable ) {
+    				//VirtualTypes, for the moment, are monomorphic
+    				ModelTypeVariable mtv = (ModelTypeVariable) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType();
+    				if (!mtv.getVirtualType().contains(provided.getFType())) {
+    					unit.messages.addError("Unable to add object of type '" + provided + "' to model of type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "'.", exp);
+    				}
+    			}
+	    	} else {
+	    	    unit.messages.addError("TYPE-CHECKER : Add operation takes only one parameter", (Expression)exp);
+	    	}
+	    }
+	    //The remove operation on Model
+	    if (op.getOperation() == TypeCheckerContext.getModelRemoveOperation()) {
+	    	// The type of the parameter must be a subtype of one of the types contained by the model-type of the receiver
+	    	if (exp.getParameters().size() == 1) {
+	    		Type provided = getTypeOfExpression((Expression) exp.getParameters().get(0));
+    			if ( getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof ModelType ) {
+    	    		Boolean foundType = false;
+    	    		Iterator<fr.irisa.triskell.kermeta.language.structure.Class> classes = TypeMatchChecker.getContainedTypes((ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType()).iterator();
+    				while (!foundType && classes.hasNext()) {
+    					fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class) classes.next();
+    					if (provided.isSubTypeOf(new SimpleType(cls))) {
+    						foundType = true;
+    					}
+    				}
+    				if (!foundType) {
+    					unit.messages.addError("Unable to remove object of type '" + provided + "' from model of type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "'.", exp);
+    				}
+    			} else if ( getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof ModelTypeVariable ) {
+    				//VirtualTypes, for the moment, are monomorphic
+    				ModelTypeVariable mtv = (ModelTypeVariable) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType();
+    				if (!mtv.getVirtualType().contains(provided.getFType())) {
+    					unit.messages.addError("Unable to remove object of type '" + provided + "' from model of type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "'.", exp);
+    				}
+    			}
+	    	} else {
+	    	    unit.messages.addError("TYPE-CHECKER : Add operation takes only one parameter", (Expression)exp);
+	    	}
 	    }
 	    
 	    // Return result
@@ -289,6 +410,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	protected Type checkPropertyCall(CallableProperty prop, CallExpression exp) {
 		if (exp.getParameters().size() == 0) {
+			if ( (((CallFeature)exp).getTarget() != null) && (getTypeOfExpression(((CallFeature) exp).getTarget()).getFType() instanceof VirtualType)) {
+				return TypeVirtualizer.virtualizePropertyType(prop, (VirtualType) getTypeOfExpression(((CallFeature)exp).getTarget()).getFType());
+			}
 		    return prop.getType();
 		}
 		else {
@@ -398,7 +522,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	    else {
 	        if (!provided_type.isSubTypeOf(targetType)) {
-	            unit.messages.addError("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conforms to required type : "+targetType+".", expression);
+	            unit.messages.addError("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conform to required type : "+targetType+".", expression);
 	        }
 	        expressionTypes.put(expression, provided_type);
     		expression.setStaticType(provided_type.getFType());
@@ -464,7 +588,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		
 		preVisit();
 		
-		//The ennumeration if it is a enum lietral call
+		//The enumeration if it is a enum literal call
 		Enumeration e = null;
 		
 		// Determine the type of the target
@@ -500,7 +624,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		
 		if (result == null) {
 		    
-		    // It the target type is an ennumeration, the object should be an enumeration literal
+		    // It the target type is an enumeration, the object should be an enumeration literal
 		    if (expression.getTarget() != null && target.getFType() instanceof Enumeration) {
 		        target = TypeCheckerContext.EnumLitType;
 		    }
@@ -674,6 +798,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	        else {
 	            Type t = TypeCheckerContext.getTypeFromMultiplicityElement(param.getType());
+	            ParameterizedTypeChecker.checkType(t.getFType(), unit, context, expression);
 	            context.addSymbol(new KMSymbolLambdaParameter(param), t);
 	            result_param.getType().add(((SimpleType)t).type);
 	        }
@@ -755,6 +880,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    preVisit();
 		Type result;
 	    fr.irisa.triskell.kermeta.language.structure.Type type = getTypeFromTypeLiteral(expression).type;
+	    ParameterizedTypeChecker.checkType(type, unit, context, expression);
 		
 	    if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 	    	result = TypeCheckerContext.ClassType;
@@ -762,8 +888,23 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    else if (type instanceof Enumeration){
 	    	result = TypeCheckerContext.EnumType;
 	    }
+	    else if (type instanceof ModelType) {
+	    	result = TypeCheckerContext.ModelTypeType;
+	    }
+	    else if (type instanceof ObjectTypeVariable) {
+	    	//result = TypeCheckerContext.ObjectTypeVariableType;
+	    	result = TypeCheckerContext.ClassType;
+	    }
+	    else if (type instanceof ModelTypeVariable) {
+	    	//result = TypeCheckerContext.ModelTypeVariableType;
+	    	result = TypeCheckerContext.ModelTypeType;
+	    }
+	    else if (type instanceof VirtualType) {
+	    	//result = TypeCheckerContext.VirtualTypeType;
+	    	result = TypeCheckerContext.ClassType;
+	    }
 	    else {
-	    	unit.messages.addError("TYPE-CHECKER : Type literal should only refer to classes or ennumerations", expression);
+	    	unit.messages.addError("TYPE-CHECKER : Type literal should only refer to classes, enumerations, model types or type variables.", expression);
 		    result = TypeCheckerContext.VoidType;
 	    }
 		
@@ -774,7 +915,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitVariableDecl(VariableDecl expression) {
 	    preVisit();
-		Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getType());
+	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getType());
+	    ParameterizedTypeChecker.checkType(result.getFType(), unit, context, expression);
 		// process contained expressions
 		if (expression.getInitialization() != null) 
 			this.accept(expression.getInitialization());
@@ -812,7 +954,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	
 	protected SimpleType getTypeFromTypeLiteral(TypeLiteral expression) {
-	    Type result;
+	    Type result = null;
 		
 		//FIXME: check that it is realy a class and generate an error othewise
 		

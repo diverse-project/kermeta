@@ -1,8 +1,8 @@
-/* $Id: TypeVariableEnforcer.java,v 1.6 2006-03-03 15:22:18 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: TypeVariableEnforcer.java,v 1.7 2006-12-07 08:04:38 dvojtise Exp $
+* Project : Kermeta io
 * File : GenericTypeSubstitution.java
-* License : GPL
-* Copyright : IRISA / Universite de Rennes 1
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 12 avr. 2005
 * Author : Franck Fleurey
@@ -15,24 +15,25 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Transforms a fr.irisa.triskell.kermeta.language.structure.Type that contains type variables into an 
+ * actual fr.irisa.triskell.kermeta.language.structure.Type by replacing variables by their values.
  */
 public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	
@@ -41,11 +42,16 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 		return (fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(generic);
 	}
 	
-	public static Hashtable getTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Class c) {
+	public static Hashtable getTypeVariableBinding(ParameterizedType c) {
 		Hashtable result = new Hashtable();
 		Iterator it = c.getTypeParamBinding().iterator();
 		while(it.hasNext()) {
 			TypeVariableBinding bind = (TypeVariableBinding)it.next();
+			result.put(bind.getVariable(), bind.getType());
+		}
+		it = c.getVirtualTypeBinding().iterator();
+		while (it.hasNext()) {
+			TypeVariableBinding bind = (TypeVariableBinding) it.next();
 			result.put(bind.getVariable(), bind.getType());
 		}
 		return result;
@@ -84,7 +90,55 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 				bind.setType(getBoundType(provided.getType(), bindings));
 				result.getTypeParamBinding().add(bind);
 			}
+			it = arg0.getVirtualTypeBinding().iterator();
+			while (it.hasNext()) {
+				TypeVariableBinding provided = (TypeVariableBinding) it.next();
+				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+				bind.setVariable(provided.getVariable());
+				bind.setType(getBoundType(provided.getType(), bindings));
+				result.getVirtualTypeBinding().add(bind);
+			}
 		}
+		return result;
+	}
+	
+	public Object visitModelType(ModelType arg0) {
+		ModelType result;
+		if (arg0.getTypeParamBinding().isEmpty()) {
+			result = arg0;
+		} else {
+			result = struct_factory.createModelType();
+			result.setTypeDefinition(arg0.getTypeDefinition());
+			for (Object tpb : arg0.getTypeParamBinding()) {
+				TypeVariableBinding provided = (TypeVariableBinding) tpb;
+				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+				bind.setVariable(provided.getVariable());
+				bind.setType(getBoundType(provided.getType(), bindings));
+				result.getTypeParamBinding().add(bind);
+			}
+		}
+		return result;
+	}
+	
+	public Object visitFModelType(ModelType arg0) {
+		ModelType result;
+		if ( arg0.getTypeParamBinding().size() == 0) {
+			result = arg0;
+		}
+		else {
+			result = struct_factory.createModelType();
+			result.setTypeDefinition(arg0.getTypeDefinition());
+			Iterator it = arg0.getTypeParamBinding().iterator();
+			while (it.hasNext()) {
+				TypeVariableBinding provided = (TypeVariableBinding) it.next();
+				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+				bind.setVariable(provided.getVariable());
+				bind.setType(getBoundType(provided.getType(), bindings));
+				result.getTypeParamBinding().add(bind);
+			}
+		}
+		//FIXME: Need to descend down into the contained Classes and substitute their
+		// bound types too?
 		return result;
 	}
 	
@@ -107,13 +161,23 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	}
 	
 	
-	public Object visitTypeVariable(TypeVariable arg0) {
+	public Object visitObjectTypeVariable(ObjectTypeVariable arg0) {
 		if (bindings.containsKey(arg0)) return (fr.irisa.triskell.kermeta.language.structure.Type)bindings.get(arg0);
 		else return arg0;
 	}
 	
 	public Object visitVoidType(VoidType arg0) {
 	    return arg0;
+	}
+
+	public Object visitVirtualType(VirtualType arg0) {
+		if (bindings.containsKey(arg0)) return (fr.irisa.triskell.kermeta.language.structure.Type) bindings.get(arg0);
+		return arg0;
+	}
+	
+	public Object visitModelTypeVariable(ModelTypeVariable arg0) {
+		if (bindings.containsKey(arg0)) return (fr.irisa.triskell.kermeta.language.structure.Type)bindings.get(arg0);
+		else return arg0;
 	}
 	
 	/**

@@ -1,7 +1,7 @@
-/* $Id: TypeVariableUtility.java,v 1.3 2006-10-17 09:15:16 cfaucher Exp $
+/* $Id: TypeVariableUtility.java,v 1.4 2006-12-07 08:04:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableUtility.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 14 avr. 2005
@@ -12,8 +12,9 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
-import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 
 /**
  * @author Franck Fleurey
@@ -22,12 +23,21 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
  */
 public class TypeVariableUtility {
 
-	public static Type getLeastDerivedAdmissibleType(Type ptype) {
-		Type result = ptype;
-		while(result instanceof TypeVariable) {
-			TypeVariable tv = (TypeVariable)result;
+	public static fr.irisa.triskell.kermeta.language.structure.Type getLeastDerivedAdmissibleType(fr.irisa.triskell.kermeta.language.structure.Type ptype) {
+		fr.irisa.triskell.kermeta.language.structure.Type result = ptype;
+		if (result instanceof VirtualType) {
+			//Can't do this statically for a VirtualType!
+			result = ((SimpleType)TypeCheckerContext.ObjectType).getType();
+		}
+		while(result instanceof ObjectTypeVariable) {
+			ObjectTypeVariable tv = (ObjectTypeVariable)result;
 			if (tv.getSupertype() != null) result = PrimitiveTypeResolver.getResolvedType(tv.getSupertype());
 			else result = ((SimpleType)TypeCheckerContext.ObjectType).getType();
+		}
+		while (result instanceof ModelTypeVariable) {
+			ModelTypeVariable mtv = (ModelTypeVariable) result;
+			//This line is probably useless - can't imagine a modeltypevariable using an alias as its supertype...
+			result = PrimitiveTypeResolver.getResolvedType(mtv.getSupertype());
 		}
 		return result;
 	}

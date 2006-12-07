@@ -1,8 +1,8 @@
-/* $Id: TypeCheckerContext.java,v 1.16 2006-05-04 15:31:37 jmottu Exp $
+/* $Id: TypeCheckerContext.java,v 1.17 2006-12-07 08:04:38 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
-* Copyright : IRISA / Universite de Rennes 1
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 9 avr. 2005
 * Author : Franck Fleurey
@@ -30,27 +30,41 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * This is the context of the type checker
  */
 public class TypeCheckerContext {
 
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
 	    classNew = null;
+	    classClone = null;
+	    modelTypeNew = null;
+	    objectTypeVariableNew = null;
+	    modelTypeVariableNew = null;
+	    
+	    modelAdd = null;
+	    modelRemove = null;
+	    modelFilter = null;
+	    
 		// TODO : Assign Basic types and classdefinition here
 	    KermetaUnit.internalLog.info("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
+	    ModelType = createTypeForClassDefinition("kermeta::language::structure::Model", std_lib);
 	    
 	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
 	    EnumType = createTypeForClassDefinition("kermeta::reflection::Enumeration", std_lib);
+	    ModelTypeType = createTypeForClassDefinition("kermeta::language::structure::ModelType", std_lib);
+	    ObjectTypeVariableType = createTypeForClassDefinition("kermeta::language::structure::ObjectTypeVariable", std_lib);
+	    ModelTypeVariableType = createTypeForClassDefinition("kermeta::language::structure::ModelTypeVariable", std_lib);
+	    VirtualTypeType = createTypeForClassDefinition("kermeta::language::structure::VirtualType", std_lib);
 	    EnumLitType = createTypeForClassDefinition("kermeta::reflection::EnumerationLiteral", std_lib);
 	    VoidType = createTypeForClassDefinition("kermeta::standard::Void", std_lib);
 	    IntegerType = createTypeForClassDefinition("kermeta::standard::Integer", std_lib);
@@ -90,6 +104,89 @@ public class TypeCheckerContext {
 	    return classNew;
 	}
 	
+	protected static Operation getModelTypeNewOperation() {
+	    if (modelTypeNew == null) {
+	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeType).type).getTypeDefinition()).getOwnedOperation().iterator();
+	       while(it.hasNext()) {
+	           Operation op = (Operation)it.next();
+	           if (op.getName().equals("new")) {
+	               modelTypeNew = op;
+	               break;
+	           }
+	       }
+	    }
+	    return modelTypeNew;
+	}
+
+	protected static Operation getModelTypeVariableNewOperation() {
+	    if (modelTypeVariableNew == null) {
+	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelTypeVariableType).type).getTypeDefinition()).getOwnedOperation().iterator();
+	       while(it.hasNext()) {
+	           Operation op = (Operation)it.next();
+	           if (op.getName().equals("new")) {
+	               modelTypeVariableNew = op;
+	               break;
+	           }
+	       }
+	    }
+	    return modelTypeVariableNew;
+	}
+
+	protected static Operation getObjectTypeVariableNewOperation() {
+	    if (objectTypeVariableNew == null) {
+	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectTypeVariableType).type).getTypeDefinition()).getOwnedOperation().iterator();
+	       while(it.hasNext()) {
+	           Operation op = (Operation)it.next();
+	           if (op.getName().equals("new")) {
+	               objectTypeVariableNew = op;
+	               break;
+	           }
+	       }
+	    }
+	    return objectTypeVariableNew;
+	}
+	
+	protected static Operation getModelFilterOperation() {
+		if (modelFilter == null) {
+		       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition()).getOwnedOperation().iterator();
+		       while(it.hasNext()) {
+		           Operation op = (Operation)it.next();
+		           if (op.getName().equals("filter")) {
+		               modelFilter = op;
+		               break;
+		           }
+		       }
+		    }
+		    return modelFilter;
+	}
+	
+	protected static Operation getModelAddOperation() {
+		if (modelAdd == null) {
+		       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition()).getOwnedOperation().iterator();
+		       while(it.hasNext()) {
+		           Operation op = (Operation)it.next();
+		           if (op.getName().equals("add")) {
+		               modelAdd = op;
+		               break;
+		           }
+		       }
+		    }
+		    return modelAdd;
+	}
+	
+	protected static Operation getModelRemoveOperation() {
+		if (modelRemove == null) {
+		       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ModelType).type).getTypeDefinition()).getOwnedOperation().iterator();
+		       while(it.hasNext()) {
+		           Operation op = (Operation)it.next();
+		           if (op.getName().equals("remove")) {
+		               modelRemove = op;
+		               break;
+		           }
+		       }
+		    }
+		    return modelRemove;
+	}
 	
 	protected static Operation getClassCloneOperation() {
 		
@@ -144,9 +241,14 @@ public class TypeCheckerContext {
 	
 	// The base types
 	protected static Type ObjectType;
+	protected static Type ModelType;
 	//protected static Type ReflectionObject;
 	protected static Type ClassType;
 	protected static Type EnumType;
+	protected static Type ModelTypeType;
+	protected static Type ObjectTypeVariableType;
+	protected static Type ModelTypeVariableType;
+	protected static Type VirtualTypeType;
 	protected static Type EnumLitType;
 	protected static Type VoidType;
 	protected static Type IntegerType;
@@ -156,6 +258,14 @@ public class TypeCheckerContext {
 	
 	protected static Operation classNew;
 	protected static Operation classClone;
+	
+	protected static Operation modelTypeNew;
+	protected static Operation modelTypeVariableNew;
+	protected static Operation objectTypeVariableNew;
+
+	protected static Operation modelFilter;
+	protected static Operation modelAdd;
+	protected static Operation modelRemove;
 	
 	// The collection classes
 	protected static ClassDefinition SetClassDef;
@@ -412,7 +522,7 @@ public class TypeCheckerContext {
 		// Bind the type variable
 		TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
 		bind.setType(contentsType);
-		bind.setVariable((TypeVariable)collection.getTypeParameter().get(0));
+		bind.setVariable((ObjectTypeVariable)collection.getTypeParameter().get(0));
 		result.getTypeParamBinding().add(bind);
 		return result;
 	}
