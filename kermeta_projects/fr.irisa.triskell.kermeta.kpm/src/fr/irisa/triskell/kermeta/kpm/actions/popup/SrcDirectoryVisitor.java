@@ -38,8 +38,8 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		switch ( mode ) {
 		case ADDING :
 			return addingVisit(resource);
-		case REMOVING :
-			return removingVisit(resource);
+		/*case REMOVING :
+			return removingVisit(resource);*/
 		default : 
 			break;
 		}
@@ -76,7 +76,7 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		return mustContinue;
 	}
 	
-	public boolean removingVisit(IResource resource) {
+/*	public boolean removingVisit(IResource resource) {
 		
 		boolean mustContinue = true;
 		
@@ -108,5 +108,5 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		}
 		return mustContinue;
 	}
-	 
+	 */
 }

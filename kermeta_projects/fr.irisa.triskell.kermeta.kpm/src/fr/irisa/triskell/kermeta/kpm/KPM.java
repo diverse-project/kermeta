@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPM.java,v 1.2 2006-12-07 13:47:21 ftanguy Exp $
+ * $Id: KPM.java,v 1.3 2006-12-08 13:12:09 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -360,5 +360,21 @@ public interface KPM extends EObject {
 	 * @generated
 	 */
 	void load();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void removeSafelyDirectory(Directory directory);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void removeSafelyFile(File file);
 
 } // KPM

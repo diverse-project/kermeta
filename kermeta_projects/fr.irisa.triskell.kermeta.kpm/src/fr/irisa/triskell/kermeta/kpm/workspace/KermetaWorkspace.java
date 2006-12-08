@@ -1,6 +1,7 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 
@@ -13,6 +14,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
@@ -244,8 +246,18 @@ public class KermetaWorkspace {
 	 */
 	public KermetaUnit getKermetaUnit( IFile file ) {
 		KermetaUnit unit = findKermetaUnit(file);
-		if ( unit == null )
-			unit = KermetaUnitHelper.typeCheckFile( file );
+		if ( unit == null ) {
+			if ( IResourceHelper.couldFileBeTypechecked(file) )
+				unit = KermetaUnitHelper.typeCheckFile( file );
+			else {
+				File kpmFile = kpm.findFile(file);
+				if ( kpmFile != null ) {
+					HashSet <Dependency> dependencies = kpmFile.getDependencies("traduction");
+					if ( dependencies.size() != 0 )
+						unit = getKermetaUnit( (IFile) dependencies.iterator().next().getTo().getValue() );
+				}
+			}
+		}
 		return unit;
 	}
 	
@@ -457,7 +469,7 @@ public class KermetaWorkspace {
 			ArrayList <KermetaUnitInterest> objectsToNotify = new ArrayList<KermetaUnitInterest> ();
 			for ( KermetaUnitInterest o : interestedObjects.keySet() ) {
 			
-				if ( interestedObjects.get(o) == f )
+				if ( interestedObjects.get(o).equals(f) )
 					objectsToNotify.add(o);
 			}
 		

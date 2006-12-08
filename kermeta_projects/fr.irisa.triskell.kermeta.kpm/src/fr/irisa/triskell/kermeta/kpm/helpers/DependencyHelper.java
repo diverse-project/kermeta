@@ -3,6 +3,8 @@ package fr.irisa.triskell.kermeta.kpm.helpers;
 import java.util.Date;
 import java.util.ArrayList;
 
+import org.eclipse.core.resources.IFile;
+
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
@@ -56,7 +58,8 @@ public class DependencyHelper {
 		if ( kmFile == null ) {
 			kmFile = kpm.createFile( fileName, target.getRelativeName() );
 			kmFile.setLastTimeModified( new Date(0) );
-		}		
+		}	
+		
 		ArrayList <String> actions = new ArrayList <String> ();
 		actions.add( "fr.irisa.triskell.kermeta.kpm.actions.SafeTypecheck" );
 		kpm.createDependency(kmtFile, kmFile, "typechecking", "safe_typecheck", actions);
@@ -66,6 +69,14 @@ public class DependencyHelper {
 		actions.add( "fr.irisa.triskell.kermeta.kpm.actions.Typecheck" );
 		kpm.createDependency(kmtFile, kmFile, "typechecking", "typecheck", actions);
 		//kpm.createDependency(kmFile, kmtFile, "typechecking", "typecheck", actions);
+		
+		
+		fileName = StringHelper.getNewNameWithExtension(kmtFile, ".ecore");
+		IFile ecoreIFile = IResourceHelper.getIFile(fileName, target.getRelativeName() );
+		if ( ecoreIFile.exists() ) {
+			File ecoreFile =  kpm.createFile( fileName, target.getRelativeName() );
+			DependencyHelper.addEcoreDependencies(kmtFile, ecoreFile);
+		}
 		
 	}
 
@@ -97,6 +108,18 @@ public class DependencyHelper {
 		}
 	}
 
-
+	
+	static public void addEcoreDependencies( File kmtFile, File ecoreFile ) {
+		KPM kpm = kmtFile.getKpm();
+		ArrayList <String> actions = new ArrayList <String> ();
+		actions.add( "fr.irisa.triskell.kermeta.kpm.actions.SafeTypecheck" );
+		kpm.createDependency(kmtFile, ecoreFile, "typechecking", "typecheck", actions);
+		
+		actions = new ArrayList <String> ();
+		//actions.add( "fr.irisa.triskell.kermeta.kpm.actions.SafeTypecheck" );
+		kpm.createDependency(ecoreFile, kmtFile, "traduction", "NO_EVENT", actions);
+		
+	}
+	
 
 }

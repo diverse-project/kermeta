@@ -40,8 +40,9 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 				if ( directory.isSource() ) {
 				
 					directory.setSource( "false" );
-					SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.REMOVING);
-					folder.accept(visitor);
+					/*SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.REMOVING);
+					folder.accept(visitor);*/
+					directory.getKpm().removeSafelyDirectory(directory);
 			
 				} 
 			} else {

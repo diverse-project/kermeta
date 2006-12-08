@@ -45,6 +45,11 @@ public class IResourceHelper {
 		return root.getFile(path);
 	}
 	
+	static public IFile getIFile (String fileName, String filePath) {
+		Path path = new Path( filePath + "/" + fileName );
+		return root.getFile(path);
+	}
+	
 	static public IFolder getIFolder (Directory directory) {
 		Path path = new Path(directory.getRelativeName());
 		return root.getFolder(path);
@@ -165,4 +170,33 @@ public class IResourceHelper {
 	//		End of Builder Mechanism		//
 	//////////////////////////////////////////
 	//////////////////////////////////////////
+	
+	
+	
+	
+	//////////////////////
+	//////////////////////
+	//		Testing		//
+	//////////////////////
+	//////////////////////
+	static public boolean couldFileBeTypechecked(IFile file) {
+		
+		boolean result = false;
+		
+		String extension = file.getFileExtension();
+		
+		if ( extension.equals("km") )
+			result = true;
+		else if ( extension.equals("kmt") )
+			result = true;
+		
+		return result;
+		
+	}
+	//////////////////////////////
+	//////////////////////////////
+	//		End of Testing		//
+	//////////////////////////////
+	//////////////////////////////
+	
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DirectoryImpl.java,v 1.5 2006-12-07 14:52:59 ftanguy Exp $
+ * $Id: DirectoryImpl.java,v 1.6 2006-12-08 13:12:09 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -206,6 +206,10 @@ public class DirectoryImpl extends FileImpl implements Directory {
 
 	public void remove() {
 		kpm.removeDirectory(this);
+	}
+	
+	public void removeSafely() {
+		kpm.removeSafelyDirectory(this);
 	}
 
 } //DirectoryImpl

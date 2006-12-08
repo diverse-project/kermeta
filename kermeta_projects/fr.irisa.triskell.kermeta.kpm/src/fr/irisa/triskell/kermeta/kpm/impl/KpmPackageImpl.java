@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.4 2006-12-08 13:12:09 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -834,6 +834,12 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		addEOperation(kpmEClass, null, "load");
 
+		op = addEOperation(kpmEClass, null, "removeSafelyDirectory");
+		addEParameter(op, this.getDirectory(), "directory", 0, 1);
+
+		op = addEOperation(kpmEClass, null, "removeSafelyFile");
+		addEParameter(op, this.getFile(), "file", 0, 1);
+
 		initEClass(unitEClass, Unit.class, "Unit", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnit_Name(), this.getString(), "name", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_Path(), this.getString(), "path", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -888,6 +894,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		addEParameter(op, this.getType(), "type", 0, 1);
 
 		addEOperation(unitEClass, null, "load");
+
+		addEOperation(unitEClass, null, "removeSafely");
 
 		initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFile_Container(), this.getDirectory(), null, "container", null, 0, 1, File.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

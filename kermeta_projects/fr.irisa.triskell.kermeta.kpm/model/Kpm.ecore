@@ -125,6 +125,12 @@
       <eParameters name="eventName" eType="#//String"/>
     </eOperations>
     <eOperations name="load"/>
+    <eOperations name="removeSafelyDirectory">
+      <eParameters name="directory" eType="#//Directory"/>
+    </eOperations>
+    <eOperations name="removeSafelyFile">
+      <eParameters name="file" eType="#//File"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
         eType="#//Unit" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
@@ -167,6 +173,7 @@
       <eParameters name="type" eType="#//Type"/>
     </eOperations>
     <eOperations name="load"/>
+    <eOperations name="removeSafely"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="#//Date"/>

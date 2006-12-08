@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.4 2006-12-07 14:52:59 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.5 2006-12-08 13:12:09 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -572,6 +572,27 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		while ( itOnUnits.hasNext() ) {
 			itOnUnits.next().load();
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeSafelyDirectory(Directory directory) {
+		Unit[] units = (Unit[]) directory.getContents().toArray();
+		for (int index = 0; index < units.length; index++ )
+			units[index].removeSafely();
+		removeDirectory(directory);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeSafelyFile(File file) {
+		removeFile(file);
 	}
 
 	/**

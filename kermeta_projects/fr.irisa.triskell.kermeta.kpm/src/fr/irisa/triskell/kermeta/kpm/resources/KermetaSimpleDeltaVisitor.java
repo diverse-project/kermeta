@@ -14,7 +14,9 @@ import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.StringHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
 
 public class KermetaSimpleDeltaVisitor implements IResourceDeltaVisitor {
 
@@ -35,7 +37,7 @@ public class KermetaSimpleDeltaVisitor implements IResourceDeltaVisitor {
 		switch ( delta.getKind() ) {
 		
 		case IResourceDelta.ADDED :
-			//mustContinue = processAdding (delta.getResource() );
+			mustContinue = processAdding (delta.getResource() );
 			break;
 			
 		case IResourceDelta.REMOVED :
@@ -65,12 +67,33 @@ public class KermetaSimpleDeltaVisitor implements IResourceDeltaVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			File file = kpm.createFileIfNecessary( (IFile) resource );
-			DependencyHelper.addTypecheckingDependencies(file);
+			IFile ifile = (IFile) resource;
+			if ( ifile.getFullPath().getFileExtension().equals("ecore") ) {
+				
+				File ecoreFile = kpm.findFile( (IFile) resource );
+				if ( ecoreFile == null ) {
+					
+					String[] nameAndPath = StringHelper.getNameAndPath( ifile.getFullPath() );
+					Directory directory = kpm.findDirectory( nameAndPath[1] );
+					if ( (directory != null) && directory.isSource() ) {
+						ecoreFile = kpm.createFile( ifile );
+						ecoreFile.load();
+						String kmtFileName = StringHelper.getNewNameWithExtension(ecoreFile, ".kmt");
+						File kmtFile = kpm.findFile( kmtFileName, ecoreFile.getPath() );
+						if ( kmtFile != null ) 
+							DependencyHelper.addEcoreDependencies(kmtFile, ecoreFile);
+					}
+						
+				}
+				
+			} else {
+				File file = kpm.createFileIfNecessary( ifile );
+				DependencyHelper.addTypecheckingDependencies(file);
+			}
 			break;
 			
 		case IResource.FOLDER :
-			kpm.createDirectoryIfNecessary( (IFolder) resource );
+			//kpm.createDirectoryIfNecessary( (IFolder) resource );
 			break;
 			
 		case IResource.PROJECT :

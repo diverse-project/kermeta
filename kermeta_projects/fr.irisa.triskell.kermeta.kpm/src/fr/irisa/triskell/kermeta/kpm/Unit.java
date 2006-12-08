@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.3 2006-12-07 13:47:21 ftanguy Exp $
+ * $Id: Unit.java,v 1.4 2006-12-08 13:12:09 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -333,7 +333,6 @@ public interface Unit extends EObject {
 	 */
 	void removeDependencies(Type type);
 
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -341,6 +340,14 @@ public interface Unit extends EObject {
 	 * @generated
 	 */
 	void load();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void removeSafely();
 
 	/**
 	 * <!-- begin-user-doc -->
