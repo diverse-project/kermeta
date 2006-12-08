@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.27 2006-10-27 08:49:38 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.28 2006-12-08 13:11:31 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -12,16 +12,23 @@
  */
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
@@ -133,7 +140,6 @@ public class KM2Ecore {
     //   => PrimitiveTypes
     public final static String ANNOTATION_ALIAS_DETAILS = "alias";
 
-    
 	/**
 	 * @param resource : the resource to populate
 	 */
@@ -172,6 +178,48 @@ public class KM2Ecore {
 			ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/"));
 		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
+	
+	public KM2Ecore(KermetaUnit unit) {
+		this(null, unit);
+	}
+	
+	/**
+	 * Write ecore : launches the KM2Ecore exporter and save it in "file"
+	 * TODO Since this method is called in JunitTestSuite, in Kermeta2EcoreWizard, and many other
+	 * files, it should be shared elsewhere... 
+	 * @param builder
+	 * @param file
+	 * @param overwrite overxrite file if already exists
+	 * @return the resource that hosts the wanted ecore file
+	 */
+	static public Resource writeEcore(KermetaUnit unit, String file, boolean overwrite)
+	{   
+	    // Create Ecore structure
+	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+	    URI u = URI.createURI(file);
+    	URIConverter c = new URIConverterImpl();
+    	u = c.normalize(u);
+	    ResourceSet resource_set = new ResourceSetImpl();
+	    Resource resource = resource_set.createResource(  URI.createFileURI(file)  );
+    	//    	Resource resource = ecoreResourceSet.createResource(u);
+	    // KMT2ECORE
+	    KM2Ecore exporter;
+	    exporter = new KM2Ecore(resource, unit);
+		exporter.exportPackage(unit.rootPackage);
+	    // Save Ecore structure	
+		try {
+			// TODO : test if file exists!! -> u.toFileString() reutrns null :(
+			if (overwrite==true)
+				resource.save(null);
+			//savedFiles.put(file, resource); // add the file so that we avoid re-save of resources
+		} catch (IOException e) {
+			KermetaUnit.internalLog.error("cannot save ecore ressource, due to Exception: "+ e.getMessage(), e);
+			throw new Error("Cannot save ecore ressource (" + file + "), due to Exception: ", e);
+		}
+
+		return resource;
+	}
+	
 	
 	/**
 	 * Exports the given package into an ecore ressource

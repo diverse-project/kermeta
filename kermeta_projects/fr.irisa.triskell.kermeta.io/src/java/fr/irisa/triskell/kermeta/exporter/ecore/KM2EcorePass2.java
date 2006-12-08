@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.27 2006-10-27 11:58:15 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.28 2006-12-08 13:11:31 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -543,6 +543,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @param overwrite overxrite file if already exists
 	 * @return the resource that hosts the wanted ecore file
 	 */
+	
+	// FIXME (François) I am not sure that this method should be here. I copied this method in KM2Ecore class as a
+	// a static class.
 	public Resource writeEcore(KermetaUnit builder, String file, boolean overwrite)
 	{   
 	    // Create Ecore structure
