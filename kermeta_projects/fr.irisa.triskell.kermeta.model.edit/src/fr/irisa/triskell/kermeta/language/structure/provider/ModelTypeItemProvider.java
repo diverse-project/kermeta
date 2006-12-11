@@ -2,10 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: ModelTypeItemProvider.java,v 1.7 2006-12-11 08:59:21 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.structure.Model;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
@@ -75,10 +80,24 @@ public class ModelTypeItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public String getText(Object object) {
-		return getString("_UI_ModelType_type");
+	public String getText(Object object) {		
+		//		We get the label of the model definition that is refered by the given
+		// class
+		// a '->' is added to show the "reference" semantic
+		String label = "";
+	       if (object instanceof ModelType && ((ModelType) object).getTypeDefinition().getName() != null) {
+	           label = " -> " + ((ModelType) object).getTypeDefinition().getName();
+	       }
+	             String parent = "";
+	             if (object instanceof ModelType && ((ModelType) object).eContainer() instanceof NamedElement && ((NamedElement) ((ModelType) object).eContainer()).getName() != null) {
+	           parent = " owned by "
+	                   + ((NamedElement) ((ModelType) object).eContainer()).getName();
+	       }
+
+	       return label == null || label.length() == 0 ? getString("_UI_ModelType_type")
+	               : getString("_UI_ModelType_type") + label + parent; 
 	}
 
 	/**
@@ -102,6 +121,28 @@ public class ModelTypeItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING ||
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

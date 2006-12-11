@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableItemProvider.java,v 1.7 2006-12-11 08:59:21 dvojtise Exp $
+ * $Id: ObjectTypeVariableItemProvider.java,v 1.2 2006-12-11 08:58:34 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
@@ -20,23 +19,20 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.TypeVariable} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeVariableItemProvider
-	extends TypeContainerItemProvider
+public class ObjectTypeVariableItemProvider
+	extends TypeVariableItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -49,7 +45,7 @@ public class TypeVariableItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeVariableItemProvider(AdapterFactory adapterFactory) {
+	public ObjectTypeVariableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,54 +59,18 @@ public class TypeVariableItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addSupertypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature.
+	 * This returns ObjectTypeVariable.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NamedElement_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Supertype feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSupertypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeVariable_supertype_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariable_supertype_feature", "_UI_TypeVariable_type"),
-				 StructurePackage.Literals.TYPE_VARIABLE__SUPERTYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ObjectTypeVariable"));
 	}
 
 	/**
@@ -120,10 +80,10 @@ public class TypeVariableItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((TypeVariable)object).getName();
+		String label = ((ObjectTypeVariable)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_TypeVariable_type") :
-			getString("_UI_TypeVariable_type") + " " + label;
+			getString("_UI_ObjectTypeVariable_type") :
+			getString("_UI_ObjectTypeVariable_type") + " " + label;
 	}
 
 	/**
@@ -135,12 +95,6 @@ public class TypeVariableItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(TypeVariable.class)) {
-			case StructurePackage.TYPE_VARIABLE__NAME:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 

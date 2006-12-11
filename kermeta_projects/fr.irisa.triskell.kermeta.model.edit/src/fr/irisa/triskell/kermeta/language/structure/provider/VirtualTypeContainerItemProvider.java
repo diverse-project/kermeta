@@ -2,18 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionItemProvider.java,v 1.7 2006-12-11 08:58:20 dvojtise Exp $
+ * $Id: VirtualTypeContainerItemProvider.java,v 1.2 2006-12-11 08:58:34 dvojtise Exp $
  */
-package fr.irisa.triskell.kermeta.language.behavior.provider;
+package fr.irisa.triskell.kermeta.language.structure.provider;
 
-
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
-import fr.irisa.triskell.kermeta.language.structure.provider.ObjectItemProvider;
+import fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
@@ -25,22 +21,22 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.Expression} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionItemProvider
-	extends ObjectItemProvider
+public class VirtualTypeContainerItemProvider
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -53,7 +49,7 @@ public class ExpressionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionItemProvider(AdapterFactory adapterFactory) {
+	public VirtualTypeContainerItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -67,31 +63,8 @@ public class ExpressionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addStaticTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Static Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addStaticTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Expression_staticType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Expression_staticType_feature", "_UI_Expression_type"),
-				 BehaviorPackage.Literals.EXPRESSION__STATIC_TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -105,7 +78,7 @@ public class ExpressionItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
+			childrenFeatures.add(StructurePackage.Literals.VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -117,7 +90,7 @@ public class ExpressionItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		return getString("_UI_Expression_type");
+		return getString("_UI_VirtualTypeContainer_type");
 	}
 
 	/**
@@ -130,8 +103,8 @@ public class ExpressionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Expression.class)) {
-			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
+		switch (notification.getFeatureID(VirtualTypeContainer.class)) {
+			case StructurePackage.VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -150,58 +123,8 @@ public class ExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createClass()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createEnumeration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				(StructurePackage.Literals.VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE,
 				 StructureFactory.eINSTANCE.createVirtualType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createProductType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createFunctionType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createVoidType()));
 	}
 
 	/**

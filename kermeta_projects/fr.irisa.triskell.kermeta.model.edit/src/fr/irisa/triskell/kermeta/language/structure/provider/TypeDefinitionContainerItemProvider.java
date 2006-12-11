@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: TypeDefinitionContainerItemProvider.java,v 1.7 2006-12-11 08:59:21 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -136,12 +136,12 @@ public class TypeDefinitionContainerItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createClassDefinition()));
+				 StructureFactory.eINSTANCE.createTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createTypeDefinition()));
+				 StructureFactory.eINSTANCE.createClassDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter

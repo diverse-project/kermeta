@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: GenericTypeDefinitionItemProvider.java,v 1.7 2006-12-11 08:59:21 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -126,7 +126,17 @@ public class GenericTypeDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
-				 StructureFactory.eINSTANCE.createTypeVariable()));
+				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
+				 StructureFactory.eINSTANCE.createVirtualType()));
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureItemProviderAdapterFactory.java,v 1.4 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: StructureItemProviderAdapterFactory.java,v 1.5 2006-12-11 08:59:21 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -117,6 +117,28 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		}
 
 		return objectItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Model} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelItemProvider modelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Model}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
+		if (modelItemProvider == null) {
+			modelItemProvider = new ModelItemProvider(this);
+		}
+
+		return modelItemProvider;
 	}
 
 	/**
@@ -384,25 +406,25 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.TypeVariable} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeVariableItemProvider typeVariableItemProvider;
+	protected ObjectTypeVariableItemProvider objectTypeVariableItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.TypeVariable}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createTypeVariableAdapter() {
-		if (typeVariableItemProvider == null) {
-			typeVariableItemProvider = new TypeVariableItemProvider(this);
+	public Adapter createObjectTypeVariableAdapter() {
+		if (objectTypeVariableItemProvider == null) {
+			objectTypeVariableItemProvider = new ObjectTypeVariableItemProvider(this);
 		}
 
-		return typeVariableItemProvider;
+		return objectTypeVariableItemProvider;
 	}
 
 	/**
@@ -538,6 +560,50 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelTypeVariableItemProvider modelTypeVariableItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createModelTypeVariableAdapter() {
+		if (modelTypeVariableItemProvider == null) {
+			modelTypeVariableItemProvider = new ModelTypeVariableItemProvider(this);
+		}
+
+		return modelTypeVariableItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.VirtualType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VirtualTypeItemProvider virtualTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.VirtualType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createVirtualTypeAdapter() {
+		if (virtualTypeItemProvider == null) {
+			virtualTypeItemProvider = new VirtualTypeItemProvider(this);
+		}
+
+		return virtualTypeItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -657,10 +723,13 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	public void dispose() {
 		if (classItemProvider != null) classItemProvider.dispose();
 		if (objectItemProvider != null) objectItemProvider.dispose();
+		if (modelItemProvider != null) modelItemProvider.dispose();
+		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (typeItemProvider != null) typeItemProvider.dispose();
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
+		if (typeVariableBindingItemProvider != null) typeVariableBindingItemProvider.dispose();
 		if (multiplicityElementItemProvider != null) multiplicityElementItemProvider.dispose();
 		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
 		if (packageItemProvider != null) packageItemProvider.dispose();
@@ -669,14 +738,14 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
 		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
-		if (typeVariableItemProvider != null) typeVariableItemProvider.dispose();
+		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
+		if (modelTypeDefinitionItemProvider != null) modelTypeDefinitionItemProvider.dispose();
+		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
+		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
 		if (productTypeItemProvider != null) productTypeItemProvider.dispose();
 		if (functionTypeItemProvider != null) functionTypeItemProvider.dispose();
-		if (typeVariableBindingItemProvider != null) typeVariableBindingItemProvider.dispose();
 		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
 		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
-		if (modelTypeDefinitionItemProvider != null) modelTypeDefinitionItemProvider.dispose();
-		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
 	}
 
 }

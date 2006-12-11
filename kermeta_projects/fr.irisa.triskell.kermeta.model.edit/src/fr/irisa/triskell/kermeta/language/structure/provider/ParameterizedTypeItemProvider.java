@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeItemProvider.java,v 1.7 2006-11-03 10:51:42 cfaucher Exp $
+ * $Id: ParameterizedTypeItemProvider.java,v 1.8 2006-12-11 08:59:21 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -20,6 +20,8 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -101,9 +103,22 @@ public class ParameterizedTypeItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
 			childrenFeatures.add(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 		}
 		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -130,6 +145,7 @@ public class ParameterizedTypeItemProvider
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case StructurePackage.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING:
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -149,8 +165,35 @@ public class ParameterizedTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING,
+				 StructureFactory.eINSTANCE.createTypeVariableBinding()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING,
 				 StructureFactory.eINSTANCE.createTypeVariableBinding()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING ||
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

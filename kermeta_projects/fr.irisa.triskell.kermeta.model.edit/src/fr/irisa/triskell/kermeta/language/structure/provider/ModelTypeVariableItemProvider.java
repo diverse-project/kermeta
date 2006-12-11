@@ -2,18 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionItemProvider.java,v 1.7 2006-12-11 08:58:20 dvojtise Exp $
+ * $Id: ModelTypeVariableItemProvider.java,v 1.2 2006-12-11 08:58:44 dvojtise Exp $
  */
-package fr.irisa.triskell.kermeta.language.behavior.provider;
+package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
-import fr.irisa.triskell.kermeta.language.structure.provider.ObjectItemProvider;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
@@ -31,16 +27,17 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.Expression} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExpressionItemProvider
-	extends ObjectItemProvider
+public class ModelTypeVariableItemProvider
+	extends VirtualTypeContainerItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -53,7 +50,7 @@ public class ExpressionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpressionItemProvider(AdapterFactory adapterFactory) {
+	public ModelTypeVariableItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -67,25 +64,71 @@ public class ExpressionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addStaticTypePropertyDescriptor(object);
+			addTagPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addSupertypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Static Type feature.
+	 * This adds a property descriptor for the Tag feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addStaticTypePropertyDescriptor(Object object) {
+	protected void addTagPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Expression_staticType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Expression_staticType_feature", "_UI_Expression_type"),
-				 BehaviorPackage.Literals.EXPRESSION__STATIC_TYPE,
+				 getString("_UI_Object_tag_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Object_tag_feature", "_UI_Object_type"),
+				 StructurePackage.Literals.OBJECT__TAG,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Supertype feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSupertypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeVariable_supertype_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariable_supertype_feature", "_UI_TypeVariable_type"),
+				 StructurePackage.Literals.TYPE_VARIABLE__SUPERTYPE,
 				 true,
 				 false,
 				 true,
@@ -111,13 +154,26 @@ public class ExpressionItemProvider
 	}
 
 	/**
+	 * This returns ModelTypeVariable.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelTypeVariable"));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getText(Object object) {
-		return getString("_UI_Expression_type");
+		String label = ((ModelTypeVariable)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ModelTypeVariable_type") :
+			getString("_UI_ModelTypeVariable_type") + " " + label;
 	}
 
 	/**
@@ -130,8 +186,11 @@ public class ExpressionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Expression.class)) {
-			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
+		switch (notification.getFeatureID(ModelTypeVariable.class)) {
+			case StructurePackage.MODEL_TYPE_VARIABLE__NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -202,6 +261,28 @@ public class ExpressionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createVoidType()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == StructurePackage.Literals.VIRTUAL_TYPE_CONTAINER__VIRTUAL_TYPE ||
+			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**
