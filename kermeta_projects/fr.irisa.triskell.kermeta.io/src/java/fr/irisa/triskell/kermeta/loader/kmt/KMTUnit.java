@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.24 2006-12-07 08:08:03 dvojtise Exp $
+/* $Id: KMTUnit.java,v 1.25 2006-12-11 14:31:35 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -67,8 +67,8 @@ public class KMTUnit extends KermetaUnit {
 			KermetaUnit.internalLog.info("PARSE UNIT : " + uri.toString());
 			InputStream stream = converter.createInputStream(uri);
 			// (remove the annoying tabs)
-		    //p = new KermetaParser(new KermetaLexer(new StringReader(readAll(stream).replace('\t', ' '))));
-			p = new KermetaParser(new KermetaLexer(new BufferedReader(new StringReader(readAll(stream)))));
+		    p = new KermetaParser(new KermetaLexer(new StringReader(readAll(stream).replace('\t', ' '))));
+			//p = new KermetaParser(new KermetaLexer(new BufferedReader(new StringReader(readAll(stream)))));
 		} 
 		catch (IOException e1) {
 		    //messages.addError("i/o error loading ressource '"+this.uri+"': " + e1, null);
@@ -88,8 +88,8 @@ public class KMTUnit extends KermetaUnit {
 	
 	public void parseString(String document) {
 		KermetaParser p;
-		//p = new KermetaParser(new KermetaLexer(new StringReader(document.replace('\t', ' '))));
-		p = new KermetaParser(new KermetaLexer(new StringReader(document)));
+		p = new KermetaParser(new KermetaLexer(new StringReader(document.replace('\t', ' '))));
+		//p = new KermetaParser(new KermetaLexer(new StringReader(document)));
 		try {
 			mctAST = p.compUnit();
 		}
