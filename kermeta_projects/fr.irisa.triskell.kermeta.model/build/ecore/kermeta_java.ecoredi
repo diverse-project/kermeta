@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.1">
   <model href="kermeta_java.ecore#/"/>
-  <diagrams position="0,0" size="100,100" name="Kermeta structure" viewport="777,540">
+  <diagrams position="0,0" size="100,100" name="Kermeta structure" viewport="80,80">
     <property key="pageFormatName" value="A3"/>
     <property key="diagramWidth" value="1188"/>
     <property key="diagramHeight" value="1680"/>
@@ -11,8 +11,12 @@
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
     <property key="orientation" value="landscape"/>
-    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+    <!--<semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
       <element href="kermeta_java.ecore#/"/>
+    </semanticModel>-->
+    
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="kermeta_java.ecore#//language/structure"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="665,38" size="191,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.4 //@diagrams.0/@contained.13 //@diagrams.0/@contained.40 //@diagrams.0/@contained.46 //@diagrams.0/@contained.72"/>
@@ -1003,6 +1007,1146 @@
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
       <waypoints>[0, -233, 195, 80]</waypoints>
       <waypoints>[-196, -233, -1, 80]</waypoints>
+    </contained>
+  </diagrams>
+  <diagrams position="0,0" size="100,100" name="TypeSystem" zoom="0.75" viewport="335,0">
+    <property key="pageFormatName" value="A2"/>
+    <property key="diagramWidth" value="1680"/>
+    <property key="diagramHeight" value="2376"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="kermeta_java.ecore#//language/structure"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="1484,777" size="179,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.8 //@diagrams.1/@contained.42 //@diagrams.1/@contained.73"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/MultiplicityElement"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/MultiplicityElement"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/MultiplicityElement/isOrdered"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/MultiplicityElement/isUnique"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/MultiplicityElement/upper"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/MultiplicityElement"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1627,255" size="114,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.5 //@diagrams.1/@contained.6 //@diagrams.1/@contained.9 //@diagrams.1/@contained.17 //@diagrams.1/@contained.25 //@diagrams.1/@contained.29 //@diagrams.1/@contained.33 //@diagrams.1/@contained.65 //@diagrams.1/@contained.68"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeContainer"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeContainer"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeContainer"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2049,219" size="148,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.14 //@diagrams.1/@contained.19 //@diagrams.1/@contained.36"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeDefinitionContainer"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeDefinitionContainer"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeDefinitionContainer"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="585,785" size="134,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.57 //@diagrams.1/@contained.60 //@diagrams.1/@contained.61"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/VirtualTypeContainer"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/VirtualTypeContainer"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/VirtualTypeContainer"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="513,131" size="292,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.5 //@diagrams.1/@contained.6 //@diagrams.1/@contained.11 //@diagrams.1/@contained.30 //@diagrams.1/@contained.52 //@diagrams.1/@contained.66 //@diagrams.1/@contained.69 //@diagrams.1/@contained.71 //@diagrams.1/@contained.80 //@diagrams.1/@contained.81 //@diagrams.1/@contained.82 //@diagrams.1/@contained.83 //@diagrams.1/@contained.84 //@diagrams.1/@contained.85 //@diagrams.1/@contained.86 //@diagrams.1/@contained.87 //@diagrams.1/@contained.88"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Type"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Type"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Type"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Type/isInstance"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Type/typeContainer"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="14" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="24" vDistance="-3"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.1/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeContainer/containedType"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="62" vDistance="-1"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="41" vDistance="-1"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1503,561" size="114,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.8 //@diagrams.1/@contained.9 //@diagrams.1/@contained.80"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypedElement"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypedElement"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypedElement"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.0/@anchorage.0 //@diagrams.1/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -183, 85, 57]</waypoints>
+      <waypoints>[-84, -183, 1, 57]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.7/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[1, -83, -123, 224]</waypoints>
+      <waypoints>[124, -83, 0, 224]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1053,1059" size="114,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.11 //@diagrams.1/@contained.20 //@diagrams.1/@contained.23 //@diagrams.1/@contained.26"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/DataType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/DataType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/DataType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.10/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[1, -529, 357, 334]</waypoints>
+      <waypoints>[-356, -529, 0, 334]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1903,631" size="138,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.15 //@diagrams.1/@contained.21 //@diagrams.1/@contained.31 //@diagrams.1/@contained.34 //@diagrams.1/@contained.89"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/GenericTypeDefinition"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/GenericTypeDefinition"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/GenericTypeDefinition"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2027,821" size="130,-1">
+      <property key="backgroundColor" value="128,255,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.14 //@diagrams.1/@contained.15"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ModelTypeDefinition"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ModelTypeDefinition"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ModelTypeDefinition"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.13/@anchorage.0 //@diagrams.1/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.13/@anchorage.0 //@diagrams.1/@contained.12/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[-71, -103, 49, 88]</waypoints>
+      <waypoints>[-120, -103, 0, 88]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1173,783" size="128,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.17 //@diagrams.1/@contained.53 //@diagrams.1/@contained.54 //@diagrams.1/@contained.62 //@diagrams.1/@contained.81 //@diagrams.1/@contained.92"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeVariableBinding"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeVariableBinding"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeVariableBinding"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.16/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -305, -447, 223]</waypoints>
+      <waypoints>[447, -305, 0, 223]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1795,357" size="114,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.19 //@diagrams.1/@contained.20 //@diagrams.1/@contained.21"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeDefinition"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeDefinition"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeDefinition"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.2/@anchorage.0 //@diagrams.1/@contained.18/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeDefinitionContainer/ownedTypeDefinition"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-8" vDistance="22"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="15" vDistance="-1"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.10/@anchorage.0 //@diagrams.1/@contained.18/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[674, -614, -68, 88]</waypoints>
+      <waypoints>[742, -614, 0, 88]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.12/@anchorage.0 //@diagrams.1/@contained.18/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[-48, -190, 72, 84]</waypoints>
+      <waypoints>[-120, -190, 0, 84]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1045,1199" size="114,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.23 //@diagrams.1/@contained.46 //@diagrams.1/@contained.47"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Enumeration"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Enumeration"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Enumeration"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.22/@anchorage.0 //@diagrams.1/@contained.10/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -120, -22, 46]</waypoints>
+      <waypoints>[22, -120, 0, 46]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1279,1193" size="114,-1">
+      <property key="backgroundColor" value="255,255,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.25 //@diagrams.1/@contained.26 //@diagrams.1/@contained.82"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/PrimitiveType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/PrimitiveType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/PrimitiveType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.24/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[1, -716, -347, 223]</waypoints>
+      <waypoints>[348, -716, 0, 223]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.24/@anchorage.0 //@diagrams.1/@contained.10/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[-173, -157, 65, 47]</waypoints>
+      <waypoints>[-238, -157, 0, 47]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="663,903" size="234,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.55"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ModelType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ModelType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ModelType"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/ModelType/_new"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/ModelType/isModelTypeOf"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="539,637" size="114,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.29 //@diagrams.1/@contained.30 //@diagrams.1/@contained.31 //@diagrams.1/@contained.40 //@diagrams.1/@contained.58 //@diagrams.1/@contained.83 //@diagrams.1/@contained.90 //@diagrams.1/@contained.92"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeVariable"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeVariable"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/TypeVariable"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.28/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[642, -104, -446, 278]</waypoints>
+      <waypoints>[642, -158, -446, 224]</waypoints>
+      <waypoints>[1088, -158, 0, 224]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.28/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[1, -167, -63, 335]</waypoints>
+      <waypoints>[64, -167, 0, 335]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.12/@anchorage.0 //@diagrams.1/@contained.28/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/GenericTypeDefinition/typeParameter"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1785,891" size="154,-1">
+      <property key="backgroundColor" value="128,128,255"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.33 //@diagrams.1/@contained.34 //@diagrams.1/@contained.43 //@diagrams.1/@contained.44 //@diagrams.1/@contained.49 //@diagrams.1/@contained.50 //@diagrams.1/@contained.74 //@diagrams.1/@contained.75 //@diagrams.1/@contained.84"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ClassDefinition"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ClassDefinition"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/ClassDefinition/isAbstract"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ClassDefinition"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -418, 178, 223]</waypoints>
+      <waypoints>[-178, -418, 0, 223]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.12/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[91, -177, -19, 88]</waypoints>
+      <waypoints>[110, -177, 0, 88]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2119,993" size="114,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.36 //@diagrams.1/@contained.37 //@diagrams.1/@contained.38"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.37 //@diagrams.1/@contained.38"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Package"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Package"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Package/uri"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Package"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.35/@anchorage.0 //@diagrams.1/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.35/@anchorage.0 //@diagrams.1/@contained.35/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Package/nestedPackage"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="72"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="9" vDistance="-7"/>
+      <waypoints>[-84, 16, -84, 16]</waypoints>
+      <waypoints>[-84, 94, -84, 94]</waypoints>
+      <waypoints>[28, 94, 28, 94]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.35/@anchorage.0 //@diagrams.1/@contained.35/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Package/nestingPackage"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="-76"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="-42" vDistance="-95"/>
+      <waypoints>[-84, 16, -84, 16]</waypoints>
+      <waypoints>[-84, 94, -84, 94]</waypoints>
+      <waypoints>[28, 94, 28, 94]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="315,895" size="126,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.40 //@diagrams.1/@contained.63"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ObjectTypeVariable"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ObjectTypeVariable"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ObjectTypeVariable"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.39/@anchorage.0 //@diagrams.1/@contained.28/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1433,929" size="170,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.42 //@diagrams.1/@contained.43 //@diagrams.1/@contained.44 //@diagrams.1/@contained.93 //@diagrams.1/@contained.96"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.93"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Property"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Property"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Property/isReadOnly"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Property/default"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Property/isComposite"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Property/isDerived"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Property/isID"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Property"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.41/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
+      <property key="router" value="Forest"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -86, -55, 84]</waypoints>
+      <waypoints>[55, -86, 0, 84]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.41/@anchorage.0 //@diagrams.1/@contained.32/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Property/owningClass"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.41/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ClassDefinition/ownedAttribute"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-7" vDistance="12"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="781,1207" size="122,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.46 //@diagrams.1/@contained.47"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/EnumerationLiteral"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/EnumerationLiteral"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/EnumerationLiteral"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.45/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/EnumerationLiteral/enumeration"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.22/@anchorage.0 //@diagrams.1/@contained.45/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Enumeration/ownedLiteral"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1677,1362" size="222,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.49 //@diagrams.1/@contained.50 //@diagrams.1/@contained.76 //@diagrams.1/@contained.77 //@diagrams.1/@contained.78 //@diagrams.1/@contained.79"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Constraint"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Constraint"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Constraint/stereotype"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Constraint/language"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Constraint"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.48/@anchorage.0 //@diagrams.1/@contained.32/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Constraint/invOwner"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="9" vDistance="37"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[104, -132, 94, 204]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.48/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ClassDefinition/inv"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[95, 206, 105, -130]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="747,731" size="126,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.52 //@diagrams.1/@contained.53 //@diagrams.1/@contained.54 //@diagrams.1/@contained.55 //@diagrams.1/@contained.89 //@diagrams.1/@contained.97"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ParameterizedType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ParameterizedType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ParameterizedType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.51/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -260, 150, 335]</waypoints>
+      <waypoints>[-150, -260, 0, 335]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.51/@anchorage.0 //@diagrams.1/@contained.16/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ParameterizedType/virtualTypeBinding"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-2" vDistance="19"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.51/@anchorage.0 //@diagrams.1/@contained.16/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ParameterizedType/typeParamBinding"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="132" vDistance="22"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.27/@anchorage.0 //@diagrams.1/@contained.51/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -84, -30, 102]</waypoints>
+      <waypoints>[30, -84, 0, 102]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="463,897" size="122,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.57 //@diagrams.1/@contained.58"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ModelTypeVariable"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ModelTypeVariable"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ModelTypeVariable"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.56/@anchorage.0 //@diagrams.1/@contained.3/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.56/@anchorage.0 //@diagrams.1/@contained.28/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="561,1165" size="114,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.60 //@diagrams.1/@contained.61 //@diagrams.1/@contained.62 //@diagrams.1/@contained.63"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/VirtualType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/VirtualType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/VirtualType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.59/@anchorage.0 //@diagrams.1/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/VirtualType/modelType"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.59/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/VirtualTypeContainer/virtualType"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.59/@anchorage.0 //@diagrams.1/@contained.16/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/VirtualType/typeParamBinding"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[384, -118, -236, 292]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.59/@anchorage.0 //@diagrams.1/@contained.39/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -428, -194, 178]</waypoints>
+      <waypoints>[195, -428, 1, 178]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1425,365" size="114,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.65 //@diagrams.1/@contained.66 //@diagrams.1/@contained.85"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ProductType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ProductType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/ProductType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.64/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.64/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1395,105" size="114,-1">
+      <property key="backgroundColor" value="255,128,128"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.68 //@diagrams.1/@contained.69 //@diagrams.1/@contained.86 //@diagrams.1/@contained.87"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/FunctionType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/FunctionType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/FunctionType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.67/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.67/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <property key="router" value="Oblique"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="347,567" size="114,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.71"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/VoidType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/VoidType"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/VoidType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.70/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[1, -96, -255, 335]</waypoints>
+      <waypoints>[256, -96, 0, 335]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1580,1127" size="155,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.73 //@diagrams.1/@contained.74 //@diagrams.1/@contained.75 //@diagrams.1/@contained.76 //@diagrams.1/@contained.77 //@diagrams.1/@contained.78 //@diagrams.1/@contained.79 //@diagrams.1/@contained.88 //@diagrams.1/@contained.90 //@diagrams.1/@contained.91 //@diagrams.1/@contained.98"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.91"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Operation"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Operation/isAbstract"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Operation"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -248, 84, 84]</waypoints>
+      <waypoints>[-84, -248, 0, 84]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.32/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation/owningClass"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="38" vDistance="3"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="9" vDistance="-13"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.72/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ClassDefinition/ownedOperation"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.48/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation/pre"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="11" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[20, 99, -111, -145]</waypoints>
+      <waypoints>[20, 99, -111, -145]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.48/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation/post"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-31, 77, -156, -69]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.48/@anchorage.0 //@diagrams.1/@contained.72/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Constraint/preOwner"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-2" vDistance="33"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-112, -142, 19, 102]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.48/@anchorage.0 //@diagrams.1/@contained.72/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Constraint/postOwner"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="9" vDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-154, -69, -29, 77]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.7/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypedElement/type"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="94" vDistance="39"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="77" vDistance="32"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.16/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeVariableBinding/type"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="106"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="106" vDistance="-24"/>
+      <waypoints>[-120, -356, 458, 292]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.24/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/PrimitiveType/instanceType"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="68" vDistance="12"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="26" vDistance="17"/>
+      <waypoints>[-152, 142, 524, 1200]</waypoints>
+      <waypoints>[-1040, 142, -364, 1200]</waypoints>
+      <waypoints>[-1040, -1058, -364, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.28/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeVariable/supertype"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="37"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-284, 0, -348, 502]</waypoints>
+      <waypoints>[-284, -312, -348, 190]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ClassDefinition/superType"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="90" vDistance="83"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="74" vDistance="74"/>
+      <waypoints>[-224, -376, 978, 384]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.64/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ProductType/type"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="117" vDistance="4"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="94" vDistance="8"/>
+      <waypoints>[-232, -144, 366, 85]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.67/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/FunctionType/left"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="46" vDistance="-4"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="69" vDistance="-2"/>
+      <waypoints>[-176, 10, 194, -90]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.67/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/FunctionType/right"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="23"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="24" vDistance="19"/>
+      <waypoints>[-188, -30, 182, -130]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation/raisedException"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="46" vDistance="-1"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="19" vDistance="-8"/>
+      <waypoints>[-396, 230, 602, 1226]</waypoints>
+      <waypoints>[-1384, 230, -386, 1226]</waypoints>
+      <waypoints>[-1384, -1024, -386, -28]</waypoints>
+      <waypoints>[-1162, -1024, -164, -28]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.51/@anchorage.0 //@diagrams.1/@contained.12/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/ParameterizedType/typeDefinition"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="2" vDistance="20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.28/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation/typeParameter"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-312, 154, 750, 648]</waypoints>
+      <waypoints>[-1348, 160, -286, 654]</waypoints>
+      <waypoints>[-1348, -444, -286, 50]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.72/@anchorage.0 //@diagrams.1/@contained.72/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Operation/superOperation"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.16/@anchorage.0 //@diagrams.1/@contained.28/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/TypeVariableBinding/variable"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-236, -80, 344, 38]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.41/@anchorage.0 //@diagrams.1/@contained.41/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Property/opposite"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="4" vDistance="10"/>
+      <waypoints>[-70, 100, -70, 100]</waypoints>
+      <waypoints>[-6, 100, -6, 100]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1813,112" size="147,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Model"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Model"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Model"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Model/filter"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Model/add"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Model/remove"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="901,904" size="155,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.96 //@diagrams.1/@contained.97 //@diagrams.1/@contained.98 //@diagrams.1/@contained.99"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.99"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Class"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Class"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Class/isAbstract"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Class/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="kermeta_java.ecore#//language/structure/Class"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="kermeta_java.ecore#//language/structure/Class/_new"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.95/@anchorage.0 //@diagrams.1/@contained.41/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Class/ownedAttribute"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="6" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-8"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.95/@anchorage.0 //@diagrams.1/@contained.51/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[2, -90, 170, 102]</waypoints>
+      <waypoints>[-168, -90, 0, 102]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.95/@anchorage.0 //@diagrams.1/@contained.72/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Class/ownedOperation"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="122" vDistance="11"/>
+      <waypoints>[312, 206, -362, -38]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.95/@anchorage.0 //@diagrams.1/@contained.95/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="kermeta_java.ecore#//language/structure/Class/superClass"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="46"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[36, 72, 36, 72]</waypoints>
+      <waypoints>[-4, 72, -4, 72]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>
