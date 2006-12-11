@@ -87,8 +87,12 @@ public class KermetaSimpleDeltaVisitor implements IResourceDeltaVisitor {
 				}
 				
 			} else {
-				File file = kpm.createFileIfNecessary( ifile );
-				DependencyHelper.addTypecheckingDependencies(file);
+				String[] nameAndPath = StringHelper.getNameAndPath( ifile.getFullPath() );
+				Directory directory = kpm.findDirectory( nameAndPath[1] );
+				if ( (directory != null) && directory.isSource() ) {
+					File file = kpm.createFileIfNecessary( ifile );
+					DependencyHelper.addTypecheckingDependencies(file);
+				}
 			}
 			break;
 			
