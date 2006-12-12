@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: File.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: File.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -23,9 +23,10 @@ package fr.irisa.triskell.kermeta.kpm;
  * @model
  * @generated
  */
-public interface File extends Unit {
+public interface File extends Unit, AbstractFile {
 	/**
 	 * Returns the value of the '<em><b>Container</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Directory#getContents <em>Contents</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Container</em>' reference isn't clear,
@@ -35,7 +36,8 @@ public interface File extends Unit {
 	 * @return the value of the '<em>Container</em>' reference.
 	 * @see #setContainer(Directory)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getFile_Container()
-	 * @model
+	 * @see fr.irisa.triskell.kermeta.kpm.Directory#getContents
+	 * @model opposite="contents"
 	 * @generated
 	 */
 	Directory getContainer();

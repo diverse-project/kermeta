@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmAdapterFactory.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: KpmAdapterFactory.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -70,11 +70,38 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected KpmSwitch modelSwitch =
 		new KpmSwitch() {
-			public Object caseKPM(KPM object) {
-				return createKPMAdapter();
+			public Object caseAbstractFile(AbstractFile object) {
+				return createAbstractFileAdapter();
 			}
-			public Object caseUnit(Unit object) {
-				return createUnitAdapter();
+			public Object caseAbstractDirectory(AbstractDirectory object) {
+				return createAbstractDirectoryAdapter();
+			}
+			public Object caseAbstractProject(AbstractProject object) {
+				return createAbstractProjectAdapter();
+			}
+			public Object caseFilter(Filter object) {
+				return createFilterAdapter();
+			}
+			public Object caseNameFilter(NameFilter object) {
+				return createNameFilterAdapter();
+			}
+			public Object caseAbstractUnit(AbstractUnit object) {
+				return createAbstractUnitAdapter();
+			}
+			public Object caseDependency(Dependency object) {
+				return createDependencyAdapter();
+			}
+			public Object caseDependencyType(DependencyType object) {
+				return createDependencyTypeAdapter();
+			}
+			public Object caseDependencyEvent(DependencyEvent object) {
+				return createDependencyEventAdapter();
+			}
+			public Object caseExistFilter(ExistFilter object) {
+				return createExistFilterAdapter();
+			}
+			public Object caseTypeFilter(TypeFilter object) {
+				return createTypeFilterAdapter();
 			}
 			public Object caseFile(File object) {
 				return createFileAdapter();
@@ -85,17 +112,29 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 			public Object caseProject(Project object) {
 				return createProjectAdapter();
 			}
-			public Object caseDependency(Dependency object) {
-				return createDependencyAdapter();
+			public Object caseUnit(Unit object) {
+				return createUnitAdapter();
 			}
-			public Object caseType(Type object) {
-				return createTypeAdapter();
+			public Object caseKPM(KPM object) {
+				return createKPMAdapter();
 			}
 			public Object caseAction(Action object) {
 				return createActionAdapter();
 			}
-			public Object caseEvent(Event object) {
-				return createEventAdapter();
+			public Object caseExpression(Expression object) {
+				return createExpressionAdapter();
+			}
+			public Object caseAnd(And object) {
+				return createAndAdapter();
+			}
+			public Object caseOr(Or object) {
+				return createOrAdapter();
+			}
+			public Object caseAbstractExpression(AbstractExpression object) {
+				return createAbstractExpressionAdapter();
+			}
+			public Object caseSuitedExpression(SuitedExpression object) {
+				return createSuitedExpressionAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -116,30 +155,156 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.KPM <em>KPM</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.AbstractFile <em>Abstract File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractFile
 	 * @generated
 	 */
-	public Adapter createKPMAdapter() {
+	public Adapter createAbstractFileAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Unit <em>Unit</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.AbstractDirectory <em>Abstract Directory</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractDirectory
 	 * @generated
 	 */
-	public Adapter createUnitAdapter() {
+	public Adapter createAbstractDirectoryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.AbstractProject <em>Abstract Project</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractProject
+	 * @generated
+	 */
+	public Adapter createAbstractProjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Filter <em>Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.Filter
+	 * @generated
+	 */
+	public Adapter createFilterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.NameFilter <em>Name Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.NameFilter
+	 * @generated
+	 */
+	public Adapter createNameFilterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.AbstractUnit <em>Abstract Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractUnit
+	 * @generated
+	 */
+	public Adapter createAbstractUnitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Dependency <em>Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.Dependency
+	 * @generated
+	 */
+	public Adapter createDependencyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.DependencyType <em>Dependency Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyType
+	 * @generated
+	 */
+	public Adapter createDependencyTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.DependencyEvent <em>Dependency Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyEvent
+	 * @generated
+	 */
+	public Adapter createDependencyEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.ExistFilter <em>Exist Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.ExistFilter
+	 * @generated
+	 */
+	public Adapter createExistFilterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.TypeFilter <em>Type Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.TypeFilter
+	 * @generated
+	 */
+	public Adapter createTypeFilterAdapter() {
 		return null;
 	}
 
@@ -186,30 +351,30 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Dependency <em>Dependency</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Unit <em>Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit
 	 * @generated
 	 */
-	public Adapter createDependencyAdapter() {
+	public Adapter createUnitAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Type <em>Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.KPM <em>KPM</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Type
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM
 	 * @generated
 	 */
-	public Adapter createTypeAdapter() {
+	public Adapter createKPMAdapter() {
 		return null;
 	}
 
@@ -228,16 +393,72 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Event <em>Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Event
+	 * @see fr.irisa.triskell.kermeta.kpm.Expression
 	 * @generated
 	 */
-	public Adapter createEventAdapter() {
+	public Adapter createExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.And <em>And</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.And
+	 * @generated
+	 */
+	public Adapter createAndAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Or <em>Or</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.Or
+	 * @generated
+	 */
+	public Adapter createOrAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression <em>Abstract Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractExpression
+	 * @generated
+	 */
+	public Adapter createAbstractExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.SuitedExpression <em>Suited Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.SuitedExpression
+	 * @generated
+	 */
+	public Adapter createSuitedExpressionAdapter() {
 		return null;
 	}
 

@@ -1,0 +1,175 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: TypeFilterImpl.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ */
+package fr.irisa.triskell.kermeta.kpm.impl;
+
+import fr.irisa.triskell.kermeta.kpm.AbstractUnit;
+import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.TypeFilter;
+import fr.irisa.triskell.kermeta.kpm.Unit;
+
+import org.eclipse.core.resources.IResource;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Type Filter</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.TypeFilterImpl#getType <em>Type</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class TypeFilterImpl extends FilterImpl implements TypeFilter {
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected AbstractUnit type = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeFilterImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EClass eStaticClass() {
+		return KpmPackage.Literals.TYPE_FILTER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractUnit getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (AbstractUnit)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.TYPE_FILTER__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractUnit basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(AbstractUnit newType) {
+		AbstractUnit oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.TYPE_FILTER__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case KpmPackage.TYPE_FILTER__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case KpmPackage.TYPE_FILTER__TYPE:
+				setType((AbstractUnit)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case KpmPackage.TYPE_FILTER__TYPE:
+				setType((AbstractUnit)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case KpmPackage.TYPE_FILTER__TYPE:
+				return type != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean apply(Unit unit) {
+		return unit.getTypeName().equals(type.value);
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean apply(IResource resource) {
+		return true;
+	}
+} //TypeFilterImpl

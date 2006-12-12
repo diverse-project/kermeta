@@ -11,9 +11,8 @@ import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
 
 public class SrcDirectoryVisitor implements IResourceVisitor {
 
@@ -38,8 +37,8 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		switch ( mode ) {
 		case ADDING :
 			return addingVisit(resource);
-		/*case REMOVING :
-			return removingVisit(resource);*/
+		case REMOVING :
+			return removingVisit(resource);
 		default : 
 			break;
 		}
@@ -53,17 +52,15 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			File file = kpm.createFileIfNecessary( (IFile) resource );
-			file.load();
-			DependencyHelper.addTypecheckingDependencies(file);
+			KpmHelper.createKMTFile( (IFile) resource, kpm);
 			break;
 			
 		case IResource.FOLDER :
-			kpm.createDirectoryIfNecessary( (IFolder) resource );
+			KpmHelper.createDirectory( (IFolder) resource, kpm);
 			break;
 			
 		case IResource.PROJECT :
-			kpm.createProjectIfNecessary( (IProject) resource );
+			//kpm.createProjectIfNecessary( (IProject) resource );
 			break;
 			
 		case IResource.ROOT :
@@ -76,19 +73,14 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		return mustContinue;
 	}
 	
-/*	public boolean removingVisit(IResource resource) {
+	public boolean removingVisit(IResource resource) {
 		
 		boolean mustContinue = true;
 		
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			File file = kpm.findFile( (IFile) resource );
-			file.removeDependencies( KPMHelper.createType("typechecking") );
 			kpm.removeFile( (IFile) resource );
-			//file.removeDependencies( KPMHelper.createType("typechecking") );
-			//kpm.removeDependencies( file );
-			//kpm.removeFile( (IFile) resource );
 			break;
 			
 		case IResource.FOLDER :
@@ -108,5 +100,5 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		}
 		return mustContinue;
 	}
-	 */
+	
 }

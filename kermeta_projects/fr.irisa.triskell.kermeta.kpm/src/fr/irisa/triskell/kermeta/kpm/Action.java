@@ -2,9 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: Action.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
+
+import java.util.ArrayList;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -54,9 +58,9 @@ public interface Action extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model dependentsDataType="fr.irisa.triskell.kermeta.kpm.ArrayList"
 	 * @generated
 	 */
-	void execute(Dependency dependency);
+	void execute(Unit unit, ArrayList dependents);
 
 } // Action

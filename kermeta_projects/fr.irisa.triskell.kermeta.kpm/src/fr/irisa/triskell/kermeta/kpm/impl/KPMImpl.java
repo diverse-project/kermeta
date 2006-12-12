@@ -2,34 +2,32 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.5 2006-12-08 13:12:09 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.6 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.kermeta.kpm.AbstractExpression;
+import fr.irisa.triskell.kermeta.kpm.AbstractUnit;
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.DependencyEvent;
+import fr.irisa.triskell.kermeta.kpm.DependencyType;
 import fr.irisa.triskell.kermeta.kpm.Directory;
-import fr.irisa.triskell.kermeta.kpm.Event;
+import fr.irisa.triskell.kermeta.kpm.ExistFilter;
+import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.File;
+import fr.irisa.triskell.kermeta.kpm.Filter;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NameFilter;
+
 import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import java.util.ArrayList;
-import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.StringHelper;
 
 import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-
-import java.util.Set;
-
 import org.eclipse.core.resources.IFile;
-
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 
@@ -55,8 +53,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getUnits <em>Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getFilters <em>Filters</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getTypes <em>Types</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getExpressions <em>Expressions</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getUnits <em>Units</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,14 +67,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class KPMImpl extends EObjectImpl implements KPM {
 	/**
-	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
+	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUnits()
+	 * @see #getEvents()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList units = null;
+	protected EList events = null;
 
 	/**
 	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
@@ -82,6 +85,56 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @ordered
 	 */
 	protected EList dependencies = null;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList actions = null;
+
+	/**
+	 * The cached value of the '{@link #getFilters() <em>Filters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFilters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList filters = null;
+
+	/**
+	 * The cached value of the '{@link #getTypes() <em>Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList types = null;
+
+	/**
+	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExpressions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList expressions = null;
+
+	/**
+	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUnits()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList units = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,7 +161,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public EList getUnits() {
 		if (units == null) {
-			units = new EObjectContainmentEList(Unit.class, this, KpmPackage.KPM__UNITS);
+			units = new EObjectContainmentWithInverseEList(Unit.class, this, KpmPackage.KPM__UNITS, KpmPackage.UNIT__KPM);
 		}
 		return units;
 	}
@@ -116,33 +169,20 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList getDependencies() {
-		if (dependencies == null) {
-			dependencies = new EObjectContainmentWithInverseEList(Dependency.class, this, KpmPackage.KPM__DEPENDENCIES, KpmPackage.DEPENDENCY__KPM);
-		}
-		return dependencies;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public File createFile(String fileName, String filePath) {
-		File file = KPMHelper.createFile(fileName, filePath);
-		file.setKpm(this);
-		
-		Directory container = findDirectory(filePath);
-		if ( container == null )
-			container = createDirectory(filePath);
+	public NameFilter getNameFilter(String regex) {
+		Iterator <Filter> itOnFilters = getFilters().iterator();
+		NameFilter found = null;
+		while ( (found == null) && (itOnFilters.hasNext()) ) {
 			
-		file.setContainer(container);
-		container.getContents().add(file);
-		
-		getUnits().add(file);
-		return file;
+			Filter currentFilter = itOnFilters.next();
+			
+			if ( (currentFilter instanceof NameFilter)
+					&& ((NameFilter) currentFilter).getRegexIn().equals(regex) ) 
+				found = (NameFilter) currentFilter;
+		}
+		return found;
 	}
 
 	/**
@@ -150,59 +190,138 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public File createFileIfNecessary(String fileName, String filePath) {
-		File foundFile = findFile(fileName, filePath);
-		if ( foundFile == null )
-			return createFile(fileName, filePath);
-		else
-			return foundFile;
+	public ExistFilter getExistFilter() {
+		Iterator <Filter> itOnFilters = getFilters().iterator();
+		ExistFilter found = null;
+		while ( (found == null) && (itOnFilters.hasNext()) ) {
+			
+			Filter currentFilter = itOnFilters.next();
+			
+			if (currentFilter instanceof ExistFilter)	 
+				found = (ExistFilter) currentFilter;
+		}
+		return found;
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public File createFileIfNecessary(IFile iFile) {
-		File foundFile = findFile(iFile);
-		if ( foundFile == null )
-			return createFile(iFile);
-		else
-			return foundFile;		
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public File createFile(String fileRelativeName) {
-		String[] nameAndPath = StringHelper.getNameAndPath(fileRelativeName);
-		return createFile(nameAndPath[0], nameAndPath[1]);
-
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public File createFile(IFile iFile) {
-		String[] nameAndPath = StringHelper.getNameAndPath( iFile.getFullPath() );
-		return createFile(nameAndPath[0], nameAndPath[1]);
-	}
+	
 	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Directory createDirectoryIfNecessary(String directoryName, String directoryPath) {
-		Directory foundDirectory = findDirectory(directoryName, directoryPath);
-		if ( foundDirectory == null )
-			return createDirectory(directoryName, directoryPath);
-		else
-			return foundDirectory;
+	public Action getAction(String name) {		
+		Iterator <Action> itOnActions = getActions().iterator();
+		Action found = null;
+		while ( (found == null) && (itOnActions.hasNext()) ) {
+		
+			Action currentAction = itOnActions.next();
+		
+			if ( currentAction.getName().equals(name) ) 
+				found = currentAction;
+		}
+		return found;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public DependencyEvent getEvent(String name) {
+		Iterator <DependencyEvent> itOnEvents = getEvents().iterator();
+		DependencyEvent found = null;
+		while ( (found == null) && (itOnEvents.hasNext()) ) {
+		
+			DependencyEvent currentEvent = itOnEvents.next();
+		
+			if ( currentEvent.getName().equals(name) ) 
+				found = currentEvent;
+		}
+		return found;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Expression getExpression(String name) {
+		Iterator <AbstractExpression> itOnExpressions = getExpressions().iterator();
+		Expression found = null;
+		while ( (found == null) && (itOnExpressions.hasNext()) ) {
+		
+			AbstractExpression currentExpression = itOnExpressions.next();
+		
+			if ( currentExpression.getId().equals(name) ) 
+				found = (Expression) currentExpression;
+		}
+		return found;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Dependency getDependency(String name) {
+		Iterator <Dependency> itOnDependencies = getDependencies().iterator();
+		Dependency found = null;
+		while ( (found == null) && (itOnDependencies.hasNext()) ) {
+		
+			Dependency currentDependency = itOnDependencies.next();
+		
+			if ( currentDependency.getName().equals(name) ) 
+				found = currentDependency;
+		}
+		return found;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public File findFile(String fileRelativeName) {
+		String[] nameAndPath = StringHelper.getNameAndPath(fileRelativeName);
+		return findFile(nameAndPath[0], nameAndPath[1]);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public File findFile(String fileName, String filePath) {
+		Iterator itOnUnits = getUnits().iterator();
+		File foundFile = null;
+		while ( (foundFile == null) && (itOnUnits.hasNext()) ) {
+			Unit currentUnit = (Unit) itOnUnits.next();
+			if ( currentUnit.isFile()
+				&& currentUnit.getName().equals(fileName)
+				&& currentUnit.getPath().equals(filePath))
+				foundFile = (File) currentUnit;
+		}
+		return foundFile;			
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public File findFile(IFile iFile) {
+		//String[] nameAndPath = StringHelper.getNameAndPath( iFile.getFullPath() );
+		return findFile(iFile.getName(), iFile.getFullPath().toString());
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Directory findDirectory(String directoryRelativeName) {
+		String[] nameAndPath = StringHelper.getNameAndPath(directoryRelativeName);
+		return findDirectory(nameAndPath[0], directoryRelativeName);
 	}
 
 	/**
@@ -228,32 +347,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Directory findDirectory(String directoryRelativeName) {
-		String[] nameAndPath = StringHelper.getNameAndPath(directoryRelativeName);
-		return findDirectory(nameAndPath[0], nameAndPath[1]);
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
 	public Directory findDirectory(IFolder iFolder) {
-		String[] nameAndPath = StringHelper.getNameAndPath( iFolder.getFullPath() );
-		return findDirectory(nameAndPath[0], nameAndPath[1] );
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Project createProjectIfNecessary(String projectName) {
-		Project foundProject = findProject(projectName);
-		if ( foundProject == null )
-			return createProject(projectName);
-		else
-			return foundProject;
+		return findDirectory(iFolder.getName(), iFolder.getFullPath().toString() );
 	}
 
 	/**
@@ -276,377 +371,13 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Directory createDirectoryIfNecessary(IFolder iDirectory) {
-		Directory foundDirectory = findDirectory(iDirectory);
-		if ( foundDirectory == null )
-			return createDirectory(iDirectory);
-		else
-			return foundDirectory;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Directory createDirectory(String directoryName, String directoryPath) {
-		Directory directory = KPMHelper.createDirectory(directoryName, directoryPath);
-		directory.setKpm(this);
-		
-		Directory container = findDirectory(directoryPath);
-		if ( container == null )
-			container = createDirectory(directoryPath);
-			
-		directory.setContainer(container);
-		container.getContents().add(directory);
-		
-		getUnits().add(directory);
-		
-		directory.load();
-		
-		directory.setSource( "false" );
-		
-		return directory;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Directory createDirectory(String directoryRelativeName) {
-		String[] nameAndPath = StringHelper.getNameAndPath(directoryRelativeName);
-		return createDirectory(nameAndPath[0], nameAndPath[1]);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Directory createDirectory(IFolder iDirectory) {
-		String[] nameAndPath = StringHelper.getNameAndPath( iDirectory.getFullPath() );
-		return createDirectory ( nameAndPath[0], nameAndPath[1] );
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Project createProjectIfNecessary(IProject iProject) {
-		Project foundProject = findProject(iProject);
-		if ( foundProject == null )
-			return createProject(iProject);
-		else
-			return foundProject;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Project createProject(String projectName) {
-		Project project = KPMHelper.createProject(projectName);
-		project.setKpm(this);
-		getUnits().add(project);
-		return project;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Project createProject(IProject iProject) {
-		return createProject ( iProject.getName() );
-	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeFile(File file) {
-		if ( file != null ) {
-			file.getContainer().getContents().remove(file);
-			removeUnit(file);
-		}
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeFile(String fileName, String filePath) {
-		File foundFile = findFile(fileName, filePath);
-		removeFile(foundFile);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeFile(IFile iFile) {
-		String[] nameAndPath = StringHelper.getNameAndPath( iFile.getFullPath() );
-		removeFile(nameAndPath[0], nameAndPath[1]);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeDirectory(Directory directory) {
-		if ( directory != null ) {
-			directory.getContainer().getContents().remove(directory);
-			directory.getContents().clear();
-			removeUnit(directory);
-		}
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeDirectory(String directoryName, String directoryPath) {
-		Directory foundDirectory = findDirectory(directoryName, directoryPath);
-		removeDirectory(foundDirectory);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeDirectory(IFolder iDirectory) {
-		String[] nameAndPath = StringHelper.getNameAndPath( iDirectory.getFullPath() );
-		removeDirectory(nameAndPath[0], nameAndPath[1]);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeProject(Project project) {
-		if ( project != null ) {
-			removeUnit(project);
-			project.getContents().clear();
-		}
-	}	
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeProject(String projectName) {
-		Project foundProject = findProject(projectName);
-		removeProject(foundProject);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeProject(IProject iProject) {
-		removeProject(iProject.getName());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Dependency createDependency(Unit from, Unit to, String typeName, String eventName, ArrayList actionsName) {
-		Dependency dependency = KpmFactory.eINSTANCE.createDependency();
-
-		dependency.setType( KPMHelper.createType(typeName) );
-		dependency.setEvent( KPMHelper.createEvent(eventName) );
-		
-		for ( String actionName : (ArrayList<String>) actionsName ) {
-			Action action = KpmFactory.eINSTANCE.createAction();
-			action.setName(actionName);		
-			dependency.getActions().add(action);
-		}
-		
-		
-		dependency.setFrom( from );
-		dependency.setTo( to );
-		getDependencies().add(dependency);
-		from.getOwnedDependencies().add(dependency);
-		dependency.setKpm(this);
-		return dependency;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Remove every dependencies for a unit. The given unit plays the role of from. The dependency
-	 * for the unit playing the role of to is also removed.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeDependencies(Unit unit) {
-		Dependency[] dependencies = (Dependency[]) unit.getOwnedDependencies().toArray();
-		
-		for ( int index = 0; index < dependencies.length; index++ ) {
-			
-			Dependency currentDependency = dependencies[index];
-			
-			currentDependency.getTo().removeDependencies(unit);
-			getDependencies().remove(currentDependency);
-			
-		}
-		
-		unit.getOwnedDependencies().clear();
-		
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * A unit can only be removed if and only if no other units points to the current unit via
-	 * a dependency.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeUnit(Unit unit) {
-		
-		removeDependencies(unit);
-		
-		getUnits().remove(unit);
-		
-		/*List <Unit> units = unit.getDependenciesUnit();
-		
-		boolean canIDelete = true;
-		Iterator <Unit> itOnUnits = units.iterator();
-		
-		while ( canIDelete && itOnUnits.hasNext() ) {
-		
-			Unit currentUnit = itOnUnits.next();
-			//unit.removeDependencies(unit);
-			//removeDependencies(currentUnit);
-			
-			if ( currentUnit.getDependencies(unit).size() != 0 )
-				canIDelete = false;
-			
-		}
-		
-		if ( canIDelete ) {
-			getUnits().remove(unit);
-			removeDependencies(unit);
-		}
-		
-		unit.setLastTimeModified( new Date(0) );*/
-		/*
-		Iterator <Dependency> itOnDependencies = unit.getOwnedDependencies().iterator();
-		while ( itOnDependencies.hasNext() )
-			getDependencies().remove(itOnDependencies.next());*/
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Dependency findDependency(Unit from, Unit to, String typeName, String eventName) {
-		return from.findDependency(to, typeName, eventName);
-	}
-
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void load() {
-		Iterator <Unit> itOnUnits = getUnits().iterator();
-		while ( itOnUnits.hasNext() ) {
-			itOnUnits.next().load();
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeSafelyDirectory(Directory directory) {
-		Unit[] units = (Unit[]) directory.getContents().toArray();
-		for (int index = 0; index < units.length; index++ )
-			units[index].removeSafely();
-		removeDirectory(directory);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeSafelyFile(File file) {
-		removeFile(file);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case KpmPackage.KPM__DEPENDENCIES:
-				return ((InternalEList)getDependencies()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+	public Project findProject(String name, String path) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public File findFile(String fileName, String filePath) {
-		Iterator itOnUnits = getUnits().iterator();
-		File foundFile = null;
-		while ( (foundFile == null) && (itOnUnits.hasNext()) ) {
-			Unit currentUnit = (Unit) itOnUnits.next();
-			if ( currentUnit.isFile()
-				&& currentUnit.getName().equals(fileName)
-				&& currentUnit.getPath().equals(filePath))
-				foundFile = (File) currentUnit;
-		}
-		return foundFile;			
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public File findFile(String fileRelativeName) {
-		String[] nameAndPath = StringHelper.getNameAndPath(fileRelativeName);
-		return findFile(nameAndPath[0], nameAndPath[1]);
-	}
-
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public File findFile(IFile iFile) {
-		String[] nameAndPath = StringHelper.getNameAndPath( iFile.getFullPath() );
-		return findFile(nameAndPath[0], nameAndPath[1]);
-	}
-
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -657,6 +388,187 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		return findProject(iProject.getName());
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeFile(File unit) {
+		getUnits().remove(unit);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeDirectory(Directory unit) {
+		
+		Iterator <File> itOnFiles = unit.getContents().iterator();
+		while ( itOnFiles.hasNext() )
+			removeFile(itOnFiles.next());
+		
+		getUnits().remove(unit);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeProject(Project unit) {
+		getUnits().remove(unit);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeFile(IFile unit) {
+		File file = findFile(unit);
+		if ( file != null )
+			removeFile(file);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeDirectory(IFolder unit) {
+		Directory directory = findDirectory(unit);
+		if ( directory != null )
+			removeDirectory(directory);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeProject(IProject unit) {
+		Project project = findProject(unit);
+		if ( project != null )
+			removeProject(project);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Directory createDirectory(IFolder ifolder) {
+		Directory directory = KpmFactory.eINSTANCE.createDirectory();
+		directory.setKpm(this);
+		directory.setName(ifolder.getName());
+		directory.setPath(ifolder.getFullPath().toString());
+		getUnits().add(directory);
+		return directory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public DependencyType getType(String name) {
+		Iterator <DependencyType> itOnTypes = getTypes().iterator();
+		DependencyType found = null;
+		while ( (found == null) && (itOnTypes.hasNext()) ) {
+		
+			DependencyType currentType = itOnTypes.next();
+		
+			if ( currentType.getName().equals(name) ) 
+				found = currentType;
+		}
+		return found;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KpmPackage.KPM__UNITS:
+				return ((InternalEList)getUnits()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getEvents() {
+		if (events == null) {
+			events = new EObjectContainmentEList(DependencyEvent.class, this, KpmPackage.KPM__EVENTS);
+		}
+		return events;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getDependencies() {
+		if (dependencies == null) {
+			dependencies = new EObjectContainmentEList(Dependency.class, this, KpmPackage.KPM__DEPENDENCIES);
+		}
+		return dependencies;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList(Action.class, this, KpmPackage.KPM__ACTIONS);
+		}
+		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getFilters() {
+		if (filters == null) {
+			filters = new EObjectContainmentEList(Filter.class, this, KpmPackage.KPM__FILTERS);
+		}
+		return filters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getTypes() {
+		if (types == null) {
+			types = new EObjectContainmentEList(DependencyType.class, this, KpmPackage.KPM__TYPES);
+		}
+		return types;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getExpressions() {
+		if (expressions == null) {
+			expressions = new EObjectContainmentEList(Expression.class, this, KpmPackage.KPM__EXPRESSIONS);
+		}
+		return expressions;
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -665,10 +577,20 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.KPM__UNITS:
-				return ((InternalEList)getUnits()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__EVENTS:
+				return ((InternalEList)getEvents()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__DEPENDENCIES:
 				return ((InternalEList)getDependencies()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__ACTIONS:
+				return ((InternalEList)getActions()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__FILTERS:
+				return ((InternalEList)getFilters()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__TYPES:
+				return ((InternalEList)getTypes()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__EXPRESSIONS:
+				return ((InternalEList)getExpressions()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__UNITS:
+				return ((InternalEList)getUnits()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -680,10 +602,20 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.KPM__UNITS:
-				return getUnits();
+			case KpmPackage.KPM__EVENTS:
+				return getEvents();
 			case KpmPackage.KPM__DEPENDENCIES:
 				return getDependencies();
+			case KpmPackage.KPM__ACTIONS:
+				return getActions();
+			case KpmPackage.KPM__FILTERS:
+				return getFilters();
+			case KpmPackage.KPM__TYPES:
+				return getTypes();
+			case KpmPackage.KPM__EXPRESSIONS:
+				return getExpressions();
+			case KpmPackage.KPM__UNITS:
+				return getUnits();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -695,13 +627,33 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.KPM__UNITS:
-				getUnits().clear();
-				getUnits().addAll((Collection)newValue);
+			case KpmPackage.KPM__EVENTS:
+				getEvents().clear();
+				getEvents().addAll((Collection)newValue);
 				return;
 			case KpmPackage.KPM__DEPENDENCIES:
 				getDependencies().clear();
 				getDependencies().addAll((Collection)newValue);
+				return;
+			case KpmPackage.KPM__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection)newValue);
+				return;
+			case KpmPackage.KPM__FILTERS:
+				getFilters().clear();
+				getFilters().addAll((Collection)newValue);
+				return;
+			case KpmPackage.KPM__TYPES:
+				getTypes().clear();
+				getTypes().addAll((Collection)newValue);
+				return;
+			case KpmPackage.KPM__EXPRESSIONS:
+				getExpressions().clear();
+				getExpressions().addAll((Collection)newValue);
+				return;
+			case KpmPackage.KPM__UNITS:
+				getUnits().clear();
+				getUnits().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -714,11 +666,26 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.KPM__UNITS:
-				getUnits().clear();
+			case KpmPackage.KPM__EVENTS:
+				getEvents().clear();
 				return;
 			case KpmPackage.KPM__DEPENDENCIES:
 				getDependencies().clear();
+				return;
+			case KpmPackage.KPM__ACTIONS:
+				getActions().clear();
+				return;
+			case KpmPackage.KPM__FILTERS:
+				getFilters().clear();
+				return;
+			case KpmPackage.KPM__TYPES:
+				getTypes().clear();
+				return;
+			case KpmPackage.KPM__EXPRESSIONS:
+				getExpressions().clear();
+				return;
+			case KpmPackage.KPM__UNITS:
+				getUnits().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -731,10 +698,20 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.KPM__UNITS:
-				return units != null && !units.isEmpty();
+			case KpmPackage.KPM__EVENTS:
+				return events != null && !events.isEmpty();
 			case KpmPackage.KPM__DEPENDENCIES:
 				return dependencies != null && !dependencies.isEmpty();
+			case KpmPackage.KPM__ACTIONS:
+				return actions != null && !actions.isEmpty();
+			case KpmPackage.KPM__FILTERS:
+				return filters != null && !filters.isEmpty();
+			case KpmPackage.KPM__TYPES:
+				return types != null && !types.isEmpty();
+			case KpmPackage.KPM__EXPRESSIONS:
+				return expressions != null && !expressions.isEmpty();
+			case KpmPackage.KPM__UNITS:
+				return units != null && !units.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

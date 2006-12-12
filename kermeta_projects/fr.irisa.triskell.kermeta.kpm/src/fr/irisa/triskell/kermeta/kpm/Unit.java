@@ -2,17 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.4 2006-12-08 13:12:09 ftanguy Exp $
+ * $Id: Unit.java,v 1.5 2006-12-12 16:06:11 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
 import java.util.ArrayList;
+
 import java.util.Date;
-
-import java.util.EnumSet;
-import java.util.HashSet;
-
-import org.eclipse.core.resources.IResource;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -26,13 +22,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getPath <em>Path</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getOwnedDependencies <em>Owned Dependencies</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getProject <em>Project</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,7 +35,51 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface Unit extends EObject {
+public interface Unit extends AbstractUnit {
+	/**
+	 * Returns the value of the '<em><b>Dependencies</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dependencies</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dependencies</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependencies()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency"
+	 * @generated
+	 */
+	EList getDependencies();
+
+	/**
+	 * Returns the value of the '<em><b>Kpm</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kpm</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kpm</em>' container reference.
+	 * @see #setKpm(KPM)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Kpm()
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getUnits
+	 * @model opposite="units"
+	 * @generated
+	 */
+	KPM getKpm();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kpm</em>' container reference.
+	 * @see #getKpm()
+	 * @generated
+	 */
+	void setKpm(KPM value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -66,6 +105,22 @@ public interface Unit extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Dependents</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Unit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dependents</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dependents</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependents()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Unit"
+	 * @generated
+	 */
+	EList getDependents();
 
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' attribute.
@@ -120,98 +175,20 @@ public interface Unit extends EObject {
 	void setLastTimeModified(Date value);
 
 	/**
-	 * Returns the value of the '<em><b>Kpm</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Kpm</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Kpm</em>' reference.
-	 * @see #setKpm(KPM)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Kpm()
-	 * @model
+	 * @model eventNameDataType="fr.irisa.triskell.kermeta.kpm.String"
 	 * @generated
 	 */
-	KPM getKpm();
+	void receiveEvent(String eventName);
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kpm</em>' reference.
-	 * @see #getKpm()
+	 * @model dataType="fr.irisa.triskell.kermeta.kpm.ArrayList" eventNameDataType="fr.irisa.triskell.kermeta.kpm.String"
 	 * @generated
 	 */
-	void setKpm(KPM value);
-
-	/**
-	 * Returns the value of the '<em><b>Owned Dependencies</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Dependencies</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Dependencies</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_OwnedDependencies()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency"
-	 * @generated
-	 */
-	EList getOwnedDependencies();
-
-	/**
-	 * Returns the value of the '<em><b>Project</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Project</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Project</em>' reference.
-	 * @see #setProject(Project)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Project()
-	 * @model
-	 * @generated
-	 */
-	Project getProject();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getProject <em>Project</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Project</em>' reference.
-	 * @see #getProject()
-	 * @generated
-	 */
-	void setProject(Project value);
-
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(IResource)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Value()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.IResource"
-	 * @generated
-	 */
-	IResource getValue();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(IResource value);
+	ArrayList getDependenciesWithEvent(String eventName);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -227,7 +204,7 @@ public interface Unit extends EObject {
 	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
 	 * @generated
 	 */
-	boolean isProject();
+	boolean isDirectory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -235,7 +212,7 @@ public interface Unit extends EObject {
 	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
 	 * @generated
 	 */
-	boolean isDirectory();
+	boolean isProject();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -244,117 +221,5 @@ public interface Unit extends EObject {
 	 * @generated
 	 */
 	void changed();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	String getRelativeName();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	String getAbsoluteName();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.HashSet" typeDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	HashSet getDependencies(String type);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	String getExtension();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	void receiveEvent(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.HashSet"
-	 * @generated
-	 */
-	HashSet getDependencies(Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeDependencies(Unit to);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model typeNameDataType="fr.irisa.triskell.kermeta.kpm.String" eventNameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Dependency findDependency(Unit to, String typeName, String eventName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.ArrayList"
-	 * @generated
-	 */
-	ArrayList getDependenciesUnit();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.HashSet" eventNameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	HashSet getDependenciesWithEvent(String eventName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeDependencies(Type type);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void load();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeSafely();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void remove();
 
 } // Unit

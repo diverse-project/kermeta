@@ -12,7 +12,6 @@ import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.KPM;
-import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
@@ -131,15 +130,9 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		
 		case IResource.FILE :		
 			if ( delta.getFlags() == IResourceDelta.CONTENT ) {
-				File file = kpm.findFile ( (IFile) resource );
+				File file = kpm.findFile( (IFile) resource);
 				if ( file != null )
 					file.changed();
-				else {
-					boolean isThereAnInterest = KermetaWorkspace.getInstance().isAnObjectInterestedInFile( (IFile) resource );
-					if ( isThereAnInterest )
-						KermetaWorkspace.getInstance().updateFile( (IFile) resource );
-				}
-					//kpm.createFile( (IFile) resource );
 			}
 			break;
 			
@@ -147,8 +140,6 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			Directory directory = kpm.findDirectory( (IFolder) resource );
 			if ( directory != null )
 				directory.changed();
-			//else
-				//kpm.createDirectory( (IFolder) resource );
 			break;
 			
 		case IResource.PROJECT :
@@ -156,15 +147,6 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
 				if ( project != null )
 					project.changed();
-				/*else
-					kpm.createProject( (IProject) resource );*/
-				//else {
-				//	KermetaResourceVisitor visitor = new KermetaResourceVisitor(kpm);
-					//resource.accept(visitor);
-				//}
-			//} else if ( project != null ) {
-			//	kpm.removeProject(project);
-			//	mustContinue = false;
 			}
 			break;
 			

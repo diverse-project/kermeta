@@ -2,24 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.*;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 
-import java.util.EnumSet;
-import java.util.HashSet;
-
-import java.util.Set;
-
 import org.eclipse.core.resources.IFile;
-
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+
+import org.eclipse.core.resources.IResource;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -45,7 +42,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 */
 	public static KpmFactory init() {
 		try {
-			KpmFactory theKpmFactory = (KpmFactory)EPackage.Registry.INSTANCE.getEFactory("plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/kpm.ecore"); 
+			KpmFactory theKpmFactory = (KpmFactory)EPackage.Registry.INSTANCE.getEFactory("plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore"); 
 			if (theKpmFactory != null) {
 				return theKpmFactory;
 			}
@@ -73,14 +70,23 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 */
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case KpmPackage.KPM: return createKPM();
+			case KpmPackage.ABSTRACT_FILE: return createAbstractFile();
+			case KpmPackage.ABSTRACT_DIRECTORY: return createAbstractDirectory();
+			case KpmPackage.ABSTRACT_PROJECT: return createAbstractProject();
+			case KpmPackage.NAME_FILTER: return createNameFilter();
+			case KpmPackage.DEPENDENCY: return createDependency();
+			case KpmPackage.DEPENDENCY_TYPE: return createDependencyType();
+			case KpmPackage.DEPENDENCY_EVENT: return createDependencyEvent();
+			case KpmPackage.EXIST_FILTER: return createExistFilter();
+			case KpmPackage.TYPE_FILTER: return createTypeFilter();
 			case KpmPackage.FILE: return createFile();
 			case KpmPackage.DIRECTORY: return createDirectory();
 			case KpmPackage.PROJECT: return createProject();
-			case KpmPackage.DEPENDENCY: return createDependency();
-			case KpmPackage.TYPE: return createType();
+			case KpmPackage.KPM: return createKPM();
 			case KpmPackage.ACTION: return createAction();
-			case KpmPackage.EVENT: return createEvent();
+			case KpmPackage.EXPRESSION: return createExpression();
+			case KpmPackage.AND: return createAnd();
+			case KpmPackage.OR: return createOr();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -95,6 +101,8 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 		switch (eDataType.getClassifierID()) {
 			case KpmPackage.STRING:
 				return createStringFromString(eDataType, initialValue);
+			case KpmPackage.ARRAY_LIST:
+				return createArrayListFromString(eDataType, initialValue);
 			case KpmPackage.BOOLEAN:
 				return createbooleanFromString(eDataType, initialValue);
 			case KpmPackage.IFILE:
@@ -105,12 +113,8 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 				return createIProjectFromString(eDataType, initialValue);
 			case KpmPackage.DATE:
 				return createDateFromString(eDataType, initialValue);
-			case KpmPackage.ARRAY_LIST:
-				return createArrayListFromString(eDataType, initialValue);
-			case KpmPackage.HASH_SET:
-				return createHashSetFromString(eDataType, initialValue);
-			case KpmPackage.ENUM_SET:
-				return createEnumSetFromString(eDataType, initialValue);
+			case KpmPackage.IRESOURCE:
+				return createIResourceFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -125,6 +129,8 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 		switch (eDataType.getClassifierID()) {
 			case KpmPackage.STRING:
 				return convertStringToString(eDataType, instanceValue);
+			case KpmPackage.ARRAY_LIST:
+				return convertArrayListToString(eDataType, instanceValue);
 			case KpmPackage.BOOLEAN:
 				return convertbooleanToString(eDataType, instanceValue);
 			case KpmPackage.IFILE:
@@ -135,12 +141,8 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 				return convertIProjectToString(eDataType, instanceValue);
 			case KpmPackage.DATE:
 				return convertDateToString(eDataType, instanceValue);
-			case KpmPackage.ARRAY_LIST:
-				return convertArrayListToString(eDataType, instanceValue);
-			case KpmPackage.HASH_SET:
-				return convertHashSetToString(eDataType, instanceValue);
-			case KpmPackage.ENUM_SET:
-				return convertEnumSetToString(eDataType, instanceValue);
+			case KpmPackage.IRESOURCE:
+				return convertIResourceToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -151,9 +153,89 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KPM createKPM() {
-		KPMImpl kpm = new KPMImpl();
-		return kpm;
+	public AbstractFile createAbstractFile() {
+		AbstractFileImpl abstractFile = new AbstractFileImpl();
+		return abstractFile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractDirectory createAbstractDirectory() {
+		AbstractDirectoryImpl abstractDirectory = new AbstractDirectoryImpl();
+		return abstractDirectory;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AbstractProject createAbstractProject() {
+		AbstractProjectImpl abstractProject = new AbstractProjectImpl();
+		return abstractProject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NameFilter createNameFilter() {
+		NameFilterImpl nameFilter = new NameFilterImpl();
+		return nameFilter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Dependency createDependency() {
+		DependencyImpl dependency = new DependencyImpl();
+		return dependency;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DependencyType createDependencyType() {
+		DependencyTypeImpl dependencyType = new DependencyTypeImpl();
+		return dependencyType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DependencyEvent createDependencyEvent() {
+		DependencyEventImpl dependencyEvent = new DependencyEventImpl();
+		return dependencyEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExistFilter createExistFilter() {
+		ExistFilterImpl existFilter = new ExistFilterImpl();
+		return existFilter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeFilter createTypeFilter() {
+		TypeFilterImpl typeFilter = new TypeFilterImpl();
+		return typeFilter;
 	}
 
 	/**
@@ -191,19 +273,9 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dependency createDependency() {
-		DependencyImpl dependency = new DependencyImpl();
-		return dependency;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type createType() {
-		TypeImpl type = new TypeImpl();
-		return type;
+	public KPM createKPM() {
+		KPMImpl kpm = new KPMImpl();
+		return kpm;
 	}
 
 	/**
@@ -221,9 +293,29 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event createEvent() {
-		EventImpl event = new EventImpl();
-		return event;
+	public Expression createExpression() {
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public And createAnd() {
+		AndImpl and = new AndImpl();
+		return and;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Or createOr() {
+		OrImpl or = new OrImpl();
+		return or;
 	}
 
 	/**
@@ -241,6 +333,24 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * @generated
 	 */
 	public String convertStringToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArrayList createArrayListFromString(EDataType eDataType, String initialValue) {
+		return (ArrayList)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertArrayListToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
@@ -339,8 +449,8 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArrayList createArrayListFromString(EDataType eDataType, String initialValue) {
-		return (ArrayList)super.createFromString(eDataType, initialValue);
+	public IResource createIResourceFromString(EDataType eDataType, String initialValue) {
+		return (IResource)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -348,43 +458,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertArrayListToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public HashSet createHashSetFromString(EDataType eDataType, String initialValue) {
-		return (HashSet)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertHashSetToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EnumSet createEnumSetFromString(EDataType eDataType, String initialValue) {
-		return (EnumSet)super.createFromString(eDataType, initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertEnumSetToString(EDataType eDataType, Object instanceValue) {
+	public String convertIResourceToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

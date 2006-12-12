@@ -1,19 +1,12 @@
 package fr.irisa.triskell.kermeta.kpm.plugin;
 
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.jface.viewers.ILabelDecorator;
-import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.osgi.framework.BundleContext;
-
 import org.eclipse.ui.IStartup;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import fr.irisa.triskell.kermeta.KermetaIcons;
-import fr.irisa.triskell.kermeta.kpm.actions.popup.SrcFolderDecorator;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-
 
 /**
  * The activator class controls the plug-in life cycle
@@ -21,7 +14,7 @@ import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.kpmspy";
+	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.kpm";
 
 	// The shared instance
 	private static KPMPlugin plugin;
@@ -32,15 +25,17 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 	public KPMPlugin() {
 		plugin = this;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		
 		System.out.println("[KPM Plugin started]");
-		KermetaWorkspace.getInstance();	
+		
+		KermetaWorkspace.getInstance();
 	}
 
 	/*
@@ -61,6 +56,17 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 		return plugin;
 	}
 
-	public void earlyStartup() {}
+	public void earlyStartup() {
+		
+	}
+	
+	/**
+	 * Keep track of the singleton.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final KPMPlugin INSTANCE = new KPMPlugin();
+
 	
 }

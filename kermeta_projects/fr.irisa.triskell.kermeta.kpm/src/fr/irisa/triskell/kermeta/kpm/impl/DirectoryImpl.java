@@ -2,28 +2,41 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DirectoryImpl.java,v 1.6 2006-12-08 13:12:09 ftanguy Exp $
+ * $Id: DirectoryImpl.java,v 1.7 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.kermeta.kpm.AbstractDirectory;
+import fr.irisa.triskell.kermeta.kpm.Container;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
+import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,10 +51,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *
  * @generated
  */
-public class DirectoryImpl extends FileImpl implements Directory {
-	
-	QualifiedName sourceProperty = new QualifiedName ("fr.irisa.triskell.kermeta.kpm", "SrcDirectory");
-	
+public class DirectoryImpl extends UnitImpl implements Directory {
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -55,10 +65,11 @@ public class DirectoryImpl extends FileImpl implements Directory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected DirectoryImpl() {
 		super();
+		typeName = AbstractDirectory.value;
 	}
 
 	/**
@@ -77,7 +88,7 @@ public class DirectoryImpl extends FileImpl implements Directory {
 	 */
 	public EList getContents() {
 		if (contents == null) {
-			contents = new EObjectResolvingEList(File.class, this, KpmPackage.DIRECTORY__CONTENTS);
+			contents = new EObjectWithInverseResolvingEList(File.class, this, KpmPackage.DIRECTORY__CONTENTS, KpmPackage.FILE__CONTAINER);
 		}
 		return contents;
 	}
@@ -85,62 +96,29 @@ public class DirectoryImpl extends FileImpl implements Directory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public void setSource(String value) {	
-		try {
-			getValue().setPersistentProperty (sourceProperty, value);
-		} catch (CoreException exception) {
-			exception.printStackTrace();
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KpmPackage.DIRECTORY__CONTENTS:
+				return ((InternalEList)getContents()).basicAdd(otherEnd, msgs);
 		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public boolean isSource() {
-		try {
-			boolean bool = new Boolean( value.getPersistentProperty (sourceProperty) );
-			if ( ! bool && (container != null) )
-					bool = container.isSource();
-			return bool;
-		} catch (CoreException exception) {
-			exception.printStackTrace();
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KpmPackage.DIRECTORY__CONTENTS:
+				return ((InternalEList)getContents()).basicRemove(otherEnd, msgs);
 		}
-		
-		return false;
-		/*if ( source )
-			return source;
-		else {
-			if ( getContainer() != null)
-				return getContainer().isSource();
-		}
-		return false;*/
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-/*	public void setSource(boolean newSource) {
-		boolean oldSource = source;
-		source = newSource;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DIRECTORY__SOURCE, oldSource, source));
-	}*/
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void load() {
-		setValue( IResourceHelper.getIFolder( this ) );
-	}
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -194,22 +172,6 @@ public class DirectoryImpl extends FileImpl implements Directory {
 				return contents != null && !contents.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	public boolean isFile() {
-		return false;
-	}
-	
-	public boolean isDirectory() {
-		return true;
-	}
-
-	public void remove() {
-		kpm.removeDirectory(this);
-	}
-	
-	public void removeSafely() {
-		kpm.removeSafelyDirectory(this);
 	}
 
 } //DirectoryImpl

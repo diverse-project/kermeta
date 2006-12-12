@@ -2,31 +2,27 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.4 2006-12-08 13:12:09 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.5 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.kermeta.kpm.AbstractDirectory;
+import fr.irisa.triskell.kermeta.kpm.AbstractFile;
+import fr.irisa.triskell.kermeta.kpm.AbstractProject;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.StringHelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashSet;
-
-import org.eclipse.core.resources.IResource;
 
 import java.util.Iterator;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -39,8 +35,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.Event;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,19 +44,28 @@ import fr.irisa.triskell.kermeta.kpm.Event;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependents <em>Dependents</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getPath <em>Path</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getLastTimeModified <em>Last Time Modified</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getKpm <em>Kpm</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getOwnedDependencies <em>Owned Dependencies</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getProject <em>Project</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class UnitImpl extends EObjectImpl implements Unit {
+public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
+	/**
+	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDependencies()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList dependencies = null;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -81,6 +85,16 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDependents() <em>Dependents</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDependents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList dependents = null;
 
 	/**
 	 * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
@@ -123,56 +137,6 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	protected Date lastTimeModified = LAST_TIME_MODIFIED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getKpm() <em>Kpm</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getKpm()
-	 * @generated
-	 * @ordered
-	 */
-	protected KPM kpm = null;
-
-	/**
-	 * The cached value of the '{@link #getOwnedDependencies() <em>Owned Dependencies</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedDependencies()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList ownedDependencies = null;
-
-	/**
-	 * The cached value of the '{@link #getProject() <em>Project</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProject()
-	 * @generated
-	 * @ordered
-	 */
-	protected Project project = null;
-
-	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final IResource VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected IResource value = VALUE_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -195,6 +159,59 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList getDependencies() {
+		if (dependencies == null) {
+			dependencies = new EObjectResolvingEList(Dependency.class, this, KpmPackage.UNIT__DEPENDENCIES);
+		}
+		return dependencies;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KPM getKpm() {
+		if (eContainerFeatureID != KpmPackage.UNIT__KPM) return null;
+		return (KPM)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetKpm(KPM newKpm, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newKpm, KpmPackage.UNIT__KPM, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKpm(KPM newKpm) {
+		if (newKpm != eInternalContainer() || (eContainerFeatureID != KpmPackage.UNIT__KPM && newKpm != null)) {
+			if (EcoreUtil.isAncestor(this, newKpm))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newKpm != null)
+				msgs = ((InternalEObject)newKpm).eInverseAdd(this, KpmPackage.KPM__UNITS, KPM.class, msgs);
+			msgs = basicSetKpm(newKpm, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__KPM, newKpm, newKpm));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
@@ -209,6 +226,18 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getDependents() {
+		if (dependents == null) {
+			dependents = new EObjectResolvingEList(Unit.class, this, KpmPackage.UNIT__DEPENDENTS);
+		}
+		return dependents;
 	}
 
 	/**
@@ -256,110 +285,34 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public KPM getKpm() {
-		if (kpm != null && kpm.eIsProxy()) {
-			InternalEObject oldKpm = (InternalEObject)kpm;
-			kpm = (KPM)eResolveProxy(oldKpm);
-			if (kpm != oldKpm) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.UNIT__KPM, oldKpm, kpm));
-			}
+	public void receiveEvent(String eventName) {
+		ArrayList <Dependency> dependencies = getDependenciesWithEvent(eventName);
+		
+		for ( Dependency d : dependencies ) {
+			
+			d.process(this );
+			
 		}
-		return kpm;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public KPM basicGetKpm() {
-		return kpm;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setKpm(KPM newKpm) {
-		KPM oldKpm = kpm;
-		kpm = newKpm;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__KPM, oldKpm, kpm));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList getOwnedDependencies() {
-		if (ownedDependencies == null) {
-			ownedDependencies = new EObjectResolvingEList(Dependency.class, this, KpmPackage.UNIT__OWNED_DEPENDENCIES);
+	public ArrayList getDependenciesWithEvent(String eventName) {
+		ArrayList <Dependency> foundDependencies = new ArrayList <Dependency> ();
+		Iterator <Dependency> itOnDependencies = getDependencies().iterator();
+		while ( itOnDependencies.hasNext() ) {
+			
+			Dependency currentDependency = itOnDependencies.next();
+			if ( currentDependency.getEvent().equals(eventName) )
+				foundDependencies.add(currentDependency);
+			
 		}
-		return ownedDependencies;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Project getProject() {
-		if (project != null && project.eIsProxy()) {
-			InternalEObject oldProject = (InternalEObject)project;
-			project = (Project)eResolveProxy(oldProject);
-			if (project != oldProject) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.UNIT__PROJECT, oldProject, project));
-			}
-		}
-		return project;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Project basicGetProject() {
-		return project;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setProject(Project newProject) {
-		Project oldProject = project;
-		project = newProject;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__PROJECT, oldProject, project));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public IResource getValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(IResource newValue) {
-		IResource oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__VALUE, oldValue, value));
+		return foundDependencies;
 	}
 
 	/**
@@ -368,7 +321,7 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public boolean isFile() {
-		return false;
+		return typeName.equals( AbstractFile.value );
 	}
 
 	/**
@@ -377,7 +330,16 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public boolean isDirectory() {
-		return false;
+		return typeName.equals( AbstractDirectory.value );
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isProject() {
+		return typeName.equals( AbstractProject.value );
 	}
 
 	/**
@@ -393,175 +355,16 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public boolean isProject() {
-		return false;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getRelativeName() {
-		return getPath() + "/" + getName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getAbsoluteName() {
-		
-		return IResourceHelper.getAbsolutePath() + getRelativeName();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public HashSet getDependencies(String type) {		
-		HashSet <Dependency> dependencies = new HashSet <Dependency> ();
-		Iterator <Dependency> itOnDependencies = getOwnedDependencies().iterator();
-		while ( itOnDependencies.hasNext() ) {
-		
-			Dependency currentDependency = itOnDependencies.next();
-			if ( currentDependency.getType().equals(type) )
-				dependencies.add(currentDependency);
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KpmPackage.UNIT__KPM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetKpm((KPM)otherEnd, msgs);
 		}
-		return dependencies;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getExtension() {
-		return StringHelper.getExtension( getName() );
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void receiveEvent(String name) {
-		Iterator <Dependency> itOnDependencies = getOwnedDependencies().iterator();
-		while ( itOnDependencies.hasNext() ) {
-			Dependency dependency = itOnDependencies.next();
-			if ( dependency.getEvent().equals(name) )
-				dependency.process();
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public HashSet getDependencies(Unit unit) {
-		HashSet <Dependency> dependencies = new HashSet <Dependency> ();
-		Iterator <Dependency> itOnDependencies = getOwnedDependencies().iterator();
-		while ( itOnDependencies.hasNext() ) {
-		
-			Dependency currentDependency = itOnDependencies.next();
-			if ( currentDependency.getTo().equals(unit) )
-				dependencies.add(currentDependency);
-		}
-		return dependencies;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * This method removes each dependencies where the "to" attribute is the given unit.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeDependencies(Unit to) {
-		Dependency[] dependencies = (Dependency[]) getOwnedDependencies().toArray();
-		for ( int index = 0; index < dependencies.length; index++ ) {
-			Dependency currentDependency = dependencies[index];
-			if ( currentDependency.getTo() == to ) {
-				// remove the dependency from the unit
-				getOwnedDependencies().remove(currentDependency);
-				// remove the dependency from the system
-				getKpm().getDependencies().remove(currentDependency);
-			}
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public Dependency findDependency(Unit to, String typeName, String eventName) {
-		Iterator <Dependency> itOnDependencies = getOwnedDependencies().iterator();
-		Dependency foundDependency = null;
-		while ( (foundDependency == null) && itOnDependencies.hasNext() ) {
-			
-			Dependency currentDependency = itOnDependencies.next();
-			if ( (currentDependency.getTo() == to)
-				&& (currentDependency.getType().equals(typeName))
-				&& (currentDependency.getEvent().equals(eventName)) )
-				foundDependency = currentDependency;
-		}
-		return foundDependency;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * This method calculates the set of units the current unit is linked to via dependencies.
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public ArrayList getDependenciesUnit() {
-		Iterator <Dependency> itOnDependencies = getOwnedDependencies().iterator();
-		ArrayList <Unit> units = new ArrayList <Unit> ();
-		while ( itOnDependencies.hasNext() ) {
-			
-			Dependency currentDependency = itOnDependencies.next();
-			if ( ! units.contains(currentDependency.getTo()) )
-				units.add ( currentDependency.getTo() );
-		}
-		return units;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public HashSet getDependenciesWithEvent(String eventName) {
-		HashSet <Dependency> dependencies = new HashSet <Dependency> ();
-		Iterator <Dependency> itOnDependencies = getOwnedDependencies().iterator();
-		while ( itOnDependencies.hasNext() ) {
-		
-			Dependency currentDependency = itOnDependencies.next();
-			if ( currentDependency.getEvent().equals(eventName) )
-				dependencies.add(currentDependency);
-		}
-		return dependencies;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void removeDependencies(Type type) {
-		Dependency[] dependencies = (Dependency[]) getOwnedDependencies().toArray();
-		for ( int index = 0; index < dependencies.length; index++ ) {
-			Dependency currentDependency = dependencies[index];
-			if ( currentDependency.getType().equals(type) ) {
-				getOwnedDependencies().remove(currentDependency);		
-				getKpm().getDependencies().remove(currentDependency);
-			}
-		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -569,10 +372,12 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void remove() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case KpmPackage.UNIT__KPM:
+				return basicSetKpm(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -580,21 +385,12 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void load() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void removeSafely() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case KpmPackage.UNIT__KPM:
+				return eInternalContainer().eInverseRemove(this, KpmPackage.KPM__UNITS, KPM.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -604,22 +400,18 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case KpmPackage.UNIT__DEPENDENCIES:
+				return getDependencies();
+			case KpmPackage.UNIT__KPM:
+				return getKpm();
 			case KpmPackage.UNIT__NAME:
 				return getName();
+			case KpmPackage.UNIT__DEPENDENTS:
+				return getDependents();
 			case KpmPackage.UNIT__PATH:
 				return getPath();
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				return getLastTimeModified();
-			case KpmPackage.UNIT__KPM:
-				if (resolve) return getKpm();
-				return basicGetKpm();
-			case KpmPackage.UNIT__OWNED_DEPENDENCIES:
-				return getOwnedDependencies();
-			case KpmPackage.UNIT__PROJECT:
-				if (resolve) return getProject();
-				return basicGetProject();
-			case KpmPackage.UNIT__VALUE:
-				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -631,27 +423,25 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case KpmPackage.UNIT__DEPENDENCIES:
+				getDependencies().clear();
+				getDependencies().addAll((Collection)newValue);
+				return;
+			case KpmPackage.UNIT__KPM:
+				setKpm((KPM)newValue);
+				return;
 			case KpmPackage.UNIT__NAME:
 				setName((String)newValue);
+				return;
+			case KpmPackage.UNIT__DEPENDENTS:
+				getDependents().clear();
+				getDependents().addAll((Collection)newValue);
 				return;
 			case KpmPackage.UNIT__PATH:
 				setPath((String)newValue);
 				return;
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				setLastTimeModified((Date)newValue);
-				return;
-			case KpmPackage.UNIT__KPM:
-				setKpm((KPM)newValue);
-				return;
-			case KpmPackage.UNIT__OWNED_DEPENDENCIES:
-				getOwnedDependencies().clear();
-				getOwnedDependencies().addAll((Collection)newValue);
-				return;
-			case KpmPackage.UNIT__PROJECT:
-				setProject((Project)newValue);
-				return;
-			case KpmPackage.UNIT__VALUE:
-				setValue((IResource)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -664,26 +454,23 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case KpmPackage.UNIT__DEPENDENCIES:
+				getDependencies().clear();
+				return;
+			case KpmPackage.UNIT__KPM:
+				setKpm((KPM)null);
+				return;
 			case KpmPackage.UNIT__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case KpmPackage.UNIT__DEPENDENTS:
+				getDependents().clear();
 				return;
 			case KpmPackage.UNIT__PATH:
 				setPath(PATH_EDEFAULT);
 				return;
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				setLastTimeModified(LAST_TIME_MODIFIED_EDEFAULT);
-				return;
-			case KpmPackage.UNIT__KPM:
-				setKpm((KPM)null);
-				return;
-			case KpmPackage.UNIT__OWNED_DEPENDENCIES:
-				getOwnedDependencies().clear();
-				return;
-			case KpmPackage.UNIT__PROJECT:
-				setProject((Project)null);
-				return;
-			case KpmPackage.UNIT__VALUE:
-				setValue(VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -696,20 +483,18 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case KpmPackage.UNIT__DEPENDENCIES:
+				return dependencies != null && !dependencies.isEmpty();
+			case KpmPackage.UNIT__KPM:
+				return getKpm() != null;
 			case KpmPackage.UNIT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case KpmPackage.UNIT__DEPENDENTS:
+				return dependents != null && !dependents.isEmpty();
 			case KpmPackage.UNIT__PATH:
 				return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
 				return LAST_TIME_MODIFIED_EDEFAULT == null ? lastTimeModified != null : !LAST_TIME_MODIFIED_EDEFAULT.equals(lastTimeModified);
-			case KpmPackage.UNIT__KPM:
-				return kpm != null;
-			case KpmPackage.UNIT__OWNED_DEPENDENCIES:
-				return ownedDependencies != null && !ownedDependencies.isEmpty();
-			case KpmPackage.UNIT__PROJECT:
-				return project != null;
-			case KpmPackage.UNIT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -729,8 +514,6 @@ public abstract class UnitImpl extends EObjectImpl implements Unit {
 		result.append(path);
 		result.append(", lastTimeModified: ");
 		result.append(lastTimeModified);
-		result.append(", value: ");
-		result.append(value);
 		result.append(')');
 		return result.toString();
 	}

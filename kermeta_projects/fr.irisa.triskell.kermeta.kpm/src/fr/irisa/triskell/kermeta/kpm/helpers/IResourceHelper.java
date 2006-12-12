@@ -23,7 +23,8 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
+import fr.irisa.triskell.kermeta.kpm.Unit;
+//import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 public class IResourceHelper {
@@ -40,18 +41,38 @@ public class IResourceHelper {
 		return root.getLocation().toString();
 	}
 
+	static public IResource getIResource (Unit unit) {
+		if ( unit instanceof File )
+			return getIFile( (File) unit);
+		if ( unit instanceof Directory )
+			return getIFolder( (Directory) unit);
+		if ( unit instanceof Project )
+			return getIProject( (Project) unit);
+		return null;
+	}
+	
+	static public IResource getIResource (String relativeName) {
+		Path path = new Path(relativeName);
+		IResource result = root.getFile(path);
+		return result;
+	}
+	
 	static public IFile getIFile (File file) {
-		Path path = new Path(file.getRelativeName());
+		Path path = new Path(file.getPath());
+		return root.getFile(path);
+	}
+
+	static public IFile getIFile (String relativeName) {
+		Path path = new Path( relativeName );
 		return root.getFile(path);
 	}
 	
 	static public IFile getIFile (String fileName, String filePath) {
-		Path path = new Path( filePath + "/" + fileName );
-		return root.getFile(path);
+		return getIFile( filePath + "/" + fileName );
 	}
 	
 	static public IFolder getIFolder (Directory directory) {
-		Path path = new Path(directory.getRelativeName());
+		Path path = new Path(directory.getPath());
 		return root.getFolder(path);
 	}
 	
@@ -67,7 +88,8 @@ public class IResourceHelper {
 	
 	static public boolean isNatureKermeta(IProject project) throws CoreException {
 		// To get the project description, it must be opened
-		if ( ! project.isOpen() ) project.open(null);
+		if ( ! project.isOpen() ) 
+			return false;
 		return project.getDescription().hasNature("fr.irisa.triskell.kermeta.runner.kermetanature");
 	}
 	

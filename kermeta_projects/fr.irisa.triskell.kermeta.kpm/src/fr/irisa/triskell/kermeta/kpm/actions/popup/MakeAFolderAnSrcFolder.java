@@ -32,22 +32,15 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 	
 	public void run(IAction action) {
 		Directory directory = KermetaWorkspace.getInstance().getKpm().findDirectory( folder );
-		
+
 		try {
 
 			if ( directory != null ) {
 			
-				if ( directory.isSource() ) {
+				directory.getKpm().removeDirectory( directory );
 				
-					directory.setSource( "false" );
-					/*SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.REMOVING);
-					folder.accept(visitor);*/
-					directory.getKpm().removeSafelyDirectory(directory);
-			
-				} 
 			} else {
-		    	directory = KermetaWorkspace.getInstance().getKpm().createDirectory( folder );
-				directory.setSource( "true" );				
+		    	directory = KermetaWorkspace.getInstance().getKpm().createDirectory( folder );				
 				SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.ADDING);
 				folder.accept(visitor);
 		

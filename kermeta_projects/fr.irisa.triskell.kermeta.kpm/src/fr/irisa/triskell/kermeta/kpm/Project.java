@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Project.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: Project.java,v 1.2 2006-12-12 16:06:11 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -17,5 +17,5 @@ package fr.irisa.triskell.kermeta.kpm;
  * @model
  * @generated
  */
-public interface Project extends Directory {
+public interface Project extends Unit, AbstractProject {
 } // Project

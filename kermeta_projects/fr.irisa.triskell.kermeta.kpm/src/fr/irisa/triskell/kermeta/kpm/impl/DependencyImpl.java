@@ -2,25 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: DependencyImpl.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.kermeta.kpm.AbstractExpression;
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
-import fr.irisa.triskell.kermeta.kpm.Event;
-import fr.irisa.triskell.kermeta.kpm.KPM;
+import fr.irisa.triskell.kermeta.kpm.DependencyEvent;
+import fr.irisa.triskell.kermeta.kpm.DependencyType;
+import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.Type;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -30,12 +30,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,9 +42,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getType <em>Type</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getActions <em>Actions</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getFrom <em>From</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getTo <em>To</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getKpm <em>Kpm</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getIn <em>In</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getOuts <em>Outs</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,27 +52,27 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class DependencyImpl extends EObjectImpl implements Dependency {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type = null;
+	protected DependencyType type = null;
 
 	/**
-	 * The cached value of the '{@link #getEvent() <em>Event</em>}' containment reference.
+	 * The cached value of the '{@link #getEvent() <em>Event</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEvent()
 	 * @generated
 	 * @ordered
 	 */
-	protected Event event = null;
+	protected DependencyEvent event = null;
 
 	/**
-	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getActions()
@@ -87,24 +82,44 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	protected EList actions = null;
 
 	/**
-	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
+	 * The cached value of the '{@link #getIn() <em>In</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFrom()
+	 * @see #getIn()
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit from = null;
+	protected Expression in = null;
 
 	/**
-	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
+	 * The cached value of the '{@link #getOuts() <em>Outs</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTo()
+	 * @see #getOuts()
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit to = null;
+	protected EList outs = null;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,7 +144,15 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getType() {
+	public DependencyType getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (DependencyType)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__TYPE, oldType, type));
+			}
+		}
 		return type;
 	}
 
@@ -138,14 +161,20 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(Type newType, NotificationChain msgs) {
-		Type oldType = type;
+	public DependencyType basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(DependencyType newType) {
+		DependencyType oldType = type;
 		type = newType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__TYPE, oldType, newType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__TYPE, oldType, type));
 	}
 
 	/**
@@ -153,26 +182,15 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(Type newType) {
-		if (newType != type) {
-			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.DEPENDENCY__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KpmPackage.DEPENDENCY__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
-			if (msgs != null) msgs.dispatch();
+	public DependencyEvent getEvent() {
+		if (event != null && event.eIsProxy()) {
+			InternalEObject oldEvent = (InternalEObject)event;
+			event = (DependencyEvent)eResolveProxy(oldEvent);
+			if (event != oldEvent) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__EVENT, oldEvent, event));
+			}
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__TYPE, newType, newType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Event getEvent() {
 		return event;
 	}
 
@@ -181,14 +199,8 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetEvent(Event newEvent, NotificationChain msgs) {
-		Event oldEvent = event;
-		event = newEvent;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__EVENT, oldEvent, newEvent);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public DependencyEvent basicGetEvent() {
+		return event;
 	}
 
 	/**
@@ -196,18 +208,11 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setEvent(Event newEvent) {
-		if (newEvent != event) {
-			NotificationChain msgs = null;
-			if (event != null)
-				msgs = ((InternalEObject)event).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.DEPENDENCY__EVENT, null, msgs);
-			if (newEvent != null)
-				msgs = ((InternalEObject)newEvent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KpmPackage.DEPENDENCY__EVENT, null, msgs);
-			msgs = basicSetEvent(newEvent, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__EVENT, newEvent, newEvent));
+	public void setEvent(DependencyEvent newEvent) {
+		DependencyEvent oldEvent = event;
+		event = newEvent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__EVENT, oldEvent, event));
 	}
 
 	/**
@@ -217,7 +222,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public EList getActions() {
 		if (actions == null) {
-			actions = new EObjectContainmentEList(Action.class, this, KpmPackage.DEPENDENCY__ACTIONS);
+			actions = new EObjectResolvingEList(Action.class, this, KpmPackage.DEPENDENCY__ACTIONS);
 		}
 		return actions;
 	}
@@ -227,16 +232,16 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit getFrom() {
-		if (from != null && from.eIsProxy()) {
-			InternalEObject oldFrom = (InternalEObject)from;
-			from = (Unit)eResolveProxy(oldFrom);
-			if (from != oldFrom) {
+	public Expression getIn() {
+		if (in != null && in.eIsProxy()) {
+			InternalEObject oldIn = (InternalEObject)in;
+			in = (Expression)eResolveProxy(oldIn);
+			if (in != oldIn) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__FROM, oldFrom, from));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__IN, oldIn, in));
 			}
 		}
-		return from;
+		return in;
 	}
 
 	/**
@@ -244,8 +249,8 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit basicGetFrom() {
-		return from;
+	public Expression basicGetIn() {
+		return in;
 	}
 
 	/**
@@ -253,11 +258,11 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFrom(Unit newFrom) {
-		Unit oldFrom = from;
-		from = newFrom;
+	public void setIn(Expression newIn) {
+		Expression oldIn = in;
+		in = newIn;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__FROM, oldFrom, from));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__IN, oldIn, in));
 	}
 
 	/**
@@ -265,16 +270,11 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit getTo() {
-		if (to != null && to.eIsProxy()) {
-			InternalEObject oldTo = (InternalEObject)to;
-			to = (Unit)eResolveProxy(oldTo);
-			if (to != oldTo) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__TO, oldTo, to));
-			}
+	public EList getOuts() {
+		if (outs == null) {
+			outs = new EObjectResolvingEList(Expression.class, this, KpmPackage.DEPENDENCY__OUTS);
 		}
-		return to;
+		return outs;
 	}
 
 	/**
@@ -282,8 +282,8 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit basicGetTo() {
-		return to;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -291,52 +291,11 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTo(Unit newTo) {
-		Unit oldTo = to;
-		to = newTo;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__TO, oldTo, to));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public KPM getKpm() {
-		if (eContainerFeatureID != KpmPackage.DEPENDENCY__KPM) return null;
-		return (KPM)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetKpm(KPM newKpm, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newKpm, KpmPackage.DEPENDENCY__KPM, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setKpm(KPM newKpm) {
-		if (newKpm != eInternalContainer() || (eContainerFeatureID != KpmPackage.DEPENDENCY__KPM && newKpm != null)) {
-			if (EcoreUtil.isAncestor(this, newKpm))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newKpm != null)
-				msgs = ((InternalEObject)newKpm).eInverseAdd(this, KpmPackage.KPM__DEPENDENCIES, KPM.class, msgs);
-			msgs = basicSetKpm(newKpm, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__KPM, newKpm, newKpm));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__NAME, oldName, name));
 	}
 
 	/**
@@ -344,59 +303,70 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void process() {
-		Iterator <Action> itOnActions = getActions().iterator();
-		while ( itOnActions.hasNext() ) {
-			Action currentAction = (Action) itOnActions.next();
-			currentAction.execute(this);
+	public void process(Unit unit) {
+
+		if ( isExecutable(unit) ) {
+			ArrayList <Unit> dependents = getDependents(unit);
+			Iterator <Action> itOnActions = getActions().iterator();
+			while ( itOnActions.hasNext() ) 
+				itOnActions.next().execute(unit, dependents);
 		}
+	}
+
+	public ArrayList getDependents(Unit unit) {
+		
+		ArrayList <String> l = new ArrayList <String> ();
+		
+		Iterator <AbstractExpression> itOnExpressions = getOuts().iterator();
+		while ( itOnExpressions.hasNext() ) {
+			
+			AbstractExpression currentExpression = itOnExpressions.next();
+			String dependent = currentExpression.getDependentFrom(unit);
+			if ( ! dependent.equals("") )
+				l.add(dependent);
+			
+		}
+		
+		return l;
+	}
+	
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isExecutable(Unit unit) {
+		AbstractExpression expression = getIn();
+		if ( ! expression.evaluate(unit) )
+			return false;
+		
+		/*Iterator <Unit> itOnUnits = getOuts().iterator();
+		Iterator <AbstractExpression> itOnExpressions = getOuts().iterator();
+		
+		while ( itOnUnits.hasNext() && itOnExpressions.hasNext() ) {
+			
+			AbstractExpression currentExpression = itOnExpressions.next();
+			Unit currentUnit = itOnUnits.next();
+			
+			if ( currentExpression.evaluate(currentUnit) )
+				return false;
+			
+		}*/
+		return true;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case KpmPackage.DEPENDENCY__KPM:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetKpm((KPM)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case KpmPackage.DEPENDENCY__TYPE:
-				return basicSetType(null, msgs);
-			case KpmPackage.DEPENDENCY__EVENT:
-				return basicSetEvent(null, msgs);
-			case KpmPackage.DEPENDENCY__ACTIONS:
-				return ((InternalEList)getActions()).basicRemove(otherEnd, msgs);
-			case KpmPackage.DEPENDENCY__KPM:
-				return basicSetKpm(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
-			case KpmPackage.DEPENDENCY__KPM:
-				return eInternalContainer().eInverseRemove(this, KpmPackage.KPM__DEPENDENCIES, KPM.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
+	public boolean couldBeExecutable(Unit unit) {
+		AbstractExpression expression = getIn();
+		if ( ! expression.evaluate(unit) )
+			return false;
+		
+		return true;
 	}
 
 	/**
@@ -407,19 +377,20 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:
-				return getType();
+				if (resolve) return getType();
+				return basicGetType();
 			case KpmPackage.DEPENDENCY__EVENT:
-				return getEvent();
+				if (resolve) return getEvent();
+				return basicGetEvent();
 			case KpmPackage.DEPENDENCY__ACTIONS:
 				return getActions();
-			case KpmPackage.DEPENDENCY__FROM:
-				if (resolve) return getFrom();
-				return basicGetFrom();
-			case KpmPackage.DEPENDENCY__TO:
-				if (resolve) return getTo();
-				return basicGetTo();
-			case KpmPackage.DEPENDENCY__KPM:
-				return getKpm();
+			case KpmPackage.DEPENDENCY__IN:
+				if (resolve) return getIn();
+				return basicGetIn();
+			case KpmPackage.DEPENDENCY__OUTS:
+				return getOuts();
+			case KpmPackage.DEPENDENCY__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -432,23 +403,24 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:
-				setType((Type)newValue);
+				setType((DependencyType)newValue);
 				return;
 			case KpmPackage.DEPENDENCY__EVENT:
-				setEvent((Event)newValue);
+				setEvent((DependencyEvent)newValue);
 				return;
 			case KpmPackage.DEPENDENCY__ACTIONS:
 				getActions().clear();
 				getActions().addAll((Collection)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__FROM:
-				setFrom((Unit)newValue);
+			case KpmPackage.DEPENDENCY__IN:
+				setIn((Expression)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__TO:
-				setTo((Unit)newValue);
+			case KpmPackage.DEPENDENCY__OUTS:
+				getOuts().clear();
+				getOuts().addAll((Collection)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__KPM:
-				setKpm((KPM)newValue);
+			case KpmPackage.DEPENDENCY__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -462,22 +434,22 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY__TYPE:
-				setType((Type)null);
+				setType((DependencyType)null);
 				return;
 			case KpmPackage.DEPENDENCY__EVENT:
-				setEvent((Event)null);
+				setEvent((DependencyEvent)null);
 				return;
 			case KpmPackage.DEPENDENCY__ACTIONS:
 				getActions().clear();
 				return;
-			case KpmPackage.DEPENDENCY__FROM:
-				setFrom((Unit)null);
+			case KpmPackage.DEPENDENCY__IN:
+				setIn((Expression)null);
 				return;
-			case KpmPackage.DEPENDENCY__TO:
-				setTo((Unit)null);
+			case KpmPackage.DEPENDENCY__OUTS:
+				getOuts().clear();
 				return;
-			case KpmPackage.DEPENDENCY__KPM:
-				setKpm((KPM)null);
+			case KpmPackage.DEPENDENCY__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -496,14 +468,29 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 				return event != null;
 			case KpmPackage.DEPENDENCY__ACTIONS:
 				return actions != null && !actions.isEmpty();
-			case KpmPackage.DEPENDENCY__FROM:
-				return from != null;
-			case KpmPackage.DEPENDENCY__TO:
-				return to != null;
-			case KpmPackage.DEPENDENCY__KPM:
-				return getKpm() != null;
+			case KpmPackage.DEPENDENCY__IN:
+				return in != null;
+			case KpmPackage.DEPENDENCY__OUTS:
+				return outs != null && !outs.isEmpty();
+			case KpmPackage.DEPENDENCY__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DependencyImpl

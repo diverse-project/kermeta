@@ -2,16 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.1 2006-12-01 12:23:38 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import java.util.ArrayList;
+
 import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+
+import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.actions.IAction;
 
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -96,24 +101,23 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void execute(Dependency dependency) {
-					
+	public void execute(Unit unit, ArrayList dependents) {
 		try {
-				
+			
 			Class c = Class.forName( getName() );
 			IAction a = (IAction) c.newInstance();
 		
-			a.execute(dependency);		
+			a.execute(unit, dependents);		
 					
 		} catch (InstantiationException exception) {
 			System.out.println(exception.getMessage());
 		} catch (IllegalAccessException exception) {
 			System.out.println(exception.getMessage());
 		} catch (ClassNotFoundException exception) {
-			System.out.println(exception.getMessage());
+			exception.printStackTrace();
 		}
-
 	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -11,7 +11,7 @@ import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
+//import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
 public class KermetaResourceVisitor implements IResourceVisitor {
@@ -36,16 +36,16 @@ public class KermetaResourceVisitor implements IResourceVisitor {
 	public boolean visit(IResource resource) throws CoreException {
 		switch ( mode ) {
 		case CREATION :
-			return creationVisit(resource);
+			//return creationVisit(resource);
 		case DELETION :
-			return deletionVisit(resource);
+			//return deletionVisit(resource);
 		default : 
 			break;
 		}
 		return false;
 	}
 
-	public boolean creationVisit(IResource resource) {
+/*	public boolean creationVisit(IResource resource) {
 		
 		boolean mustContinue = true;
 		
@@ -72,9 +72,9 @@ public class KermetaResourceVisitor implements IResourceVisitor {
 		
 		}
 		return mustContinue;
-	}
+	}*/
 	
-	public boolean deletionVisit(IResource resource) {
+	/*public boolean deletionVisit(IResource resource) {
 		
 		boolean mustContinue = true;
 		
@@ -100,6 +100,6 @@ public class KermetaResourceVisitor implements IResourceVisitor {
 		
 		}
 		return mustContinue;
-	}
+	}*/
 	 
 }

@@ -108,7 +108,7 @@ public class KermetaUnitHelper {
 	}
 	
 	static public KermetaUnit typeCheckFile(File file) {
-		return typeCheckFile( (IFile) file.getValue() );
+		return typeCheckFile( IResourceHelper.getIFile(file) );
 	}
 	
 	/**

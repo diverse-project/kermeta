@@ -20,12 +20,13 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaSimpleChangeListener;
+//import fr.irisa.triskell.kermeta.kpm.resources.KermetaSimpleChangeListener;
 import fr.irisa.triskell.kermeta.kpm.helpers.*;
 import fr.irisa.triskell.kermeta.kpm.File;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
+//import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
+//import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+//import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 public class KermetaWorkspace {
 
@@ -93,6 +94,7 @@ public class KermetaWorkspace {
 		if ( instance == null ) {
 			instance = new KermetaWorkspace();
 			instance.initialize();
+			instance.save();
 			//instance.typeCheckNecessaryFiles();
 		}
 		return instance;
@@ -116,10 +118,12 @@ public class KermetaWorkspace {
 	 */
 	private void initializeKpm() throws CoreException {
 		if ( ! doIHaveAKPMFile() ) {
-			kpm = KpmFactory.eINSTANCE.createKPM();
+			kpm = KpmHelper.createKpm();
+			//save();
+			//kpm = KpmFactory.eINSTANCE.createKPM();
 		} else {
 			load();
-			kpm.load();
+			//kpm.load();
 		}
 	}
 	
@@ -128,7 +132,7 @@ public class KermetaWorkspace {
 	 * @throws CoreException
 	 */
 	private void initializeChangeListener() throws CoreException {
-		IResourceHelper.workspace.addResourceChangeListener( new KermetaSimpleChangeListener(kpm) );
+		//IResourceHelper.workspace.addResourceChangeListener( new KermetaSimpleChangeListener(kpm) );
 		//IResourceHelper.touchWorkspace();
 	}
 	
@@ -141,8 +145,10 @@ public class KermetaWorkspace {
 	private void initializeProjects() throws CoreException {
 		IProject[] projects = IResourceHelper.getProjects();
 		for ( int index = 0; index < projects.length; index++ ) {
-			if ( IResourceHelper.isNatureKermeta(projects[index]) )
+			if ( IResourceHelper.isNatureKermeta(projects[index]) ) {
+				//KpmHelper.createProject(projects[index], kpm);
 				IResourceHelper.attachDefaultBuilderToKermetaProject(projects[index]);
+			}
 		}
 	}
 	
@@ -150,7 +156,7 @@ public class KermetaWorkspace {
 	 * 
 	 *
 	 */
-	private void typeCheckNecessaryFiles() {
+	/*private void typeCheckNecessaryFiles() {
 		Runnable r = new Runnable () {
 			
 			public void run() {
@@ -175,7 +181,7 @@ public class KermetaWorkspace {
 		Thread thread = new Thread(r);
 		thread.setPriority(3);
 		thread.start();
-	}
+	}*/
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Constructor		//
@@ -249,14 +255,14 @@ public class KermetaWorkspace {
 		if ( unit == null ) {
 			if ( IResourceHelper.couldFileBeTypechecked(file) )
 				unit = KermetaUnitHelper.typeCheckFile( file );
-			else {
+			/*else {
 				File kpmFile = kpm.findFile(file);
 				if ( kpmFile != null ) {
 					HashSet <Dependency> dependencies = kpmFile.getDependencies("traduction");
 					if ( dependencies.size() != 0 )
 						unit = getKermetaUnit( (IFile) dependencies.iterator().next().getTo().getValue() );
 				}
-			}
+			}*/
 		}
 		return unit;
 	}
@@ -268,7 +274,7 @@ public class KermetaWorkspace {
 			while ( (unit == null) && itOnUnits.hasNext() ) {
 				KermetaUnit currentUnit = itOnUnits.next();
 				String relativeFileName = StringHelper.getRelativeName(currentUnit.getUri());
-				if ( relativeFileName.equals ( getFile(file).getRelativeName()) )
+				if ( relativeFileName.equals ( getFile(file).getPath()) )
 					unit = currentUnit;
 			}
 		}
@@ -357,12 +363,12 @@ public class KermetaWorkspace {
 			interestedObjects.put(o, file);
 			// calculate the KermetaUnit if necessary
 			if ( units.get(file) == null ) {
-				if ( getFile(file) != null )
-					getFile( file ).receiveEvent( "simple_typecheck" );
-				if ( units.get(file) == null )
-					units.put(file, KermetaUnitHelper.typeCheckFile(file)); 
-				//KermetaUnit unit =  units.get(file);  // getKermetaUnit(file);
-				//units.put(file, unit);
+				//if ( getFile(file) != null )
+				//	getFile( file ).receiveEvent( "typecheck" );
+				//else {
+					KermetaUnit unit = getKermetaUnit(file);
+					units.put(file, unit);
+				//}
 			}
 			notifyInterestedObject(o, file);
 		}
@@ -394,7 +400,7 @@ public class KermetaWorkspace {
 			KermetaUnitHelper.unloadKermetaUnitAndFreeMemory( null );
 		}
 	}
-	
+
 	/**
 	 * This method is used to notify a specific object that the 
 	 * Kermeta Unit it is interested in has changed. 
@@ -423,7 +429,7 @@ public class KermetaWorkspace {
 	 * @return
 	 */
 	public boolean isAnObjectInterestedInFile (File file) {
-		return interestedObjects.contains( file.getValue() );
+		return interestedObjects.contains( IResourceHelper.getIFile(file) );
 	}
 	
 	public boolean isAnObjectInterestedInFile (IFile file) {
@@ -438,11 +444,11 @@ public class KermetaWorkspace {
 	}
 	
 	public void updateFile(File file) {
-		updateFile( (IFile) file.getValue() );
+		updateFile( IResourceHelper.getIFile(file) );
 	}
 	
 	public void updateKermetaUnit(File file, KermetaUnit unit) {
-		updateKermetaUnit( (IFile) file.getValue(), unit);
+		updateKermetaUnit( IResourceHelper.getIFile(file), unit);
 	}
 	
 	public void updateKermetaUnit(IFile file, KermetaUnit unit) {

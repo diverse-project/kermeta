@@ -2,9 +2,8 @@ package fr.irisa.triskell.kermeta.kpm.helpers;
 
 import java.net.URISyntaxException;
 
-import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IResource;
-//import org.eclipse.core.filesystem.URIUtil;
+import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
@@ -202,6 +201,37 @@ public final class StringHelper {
 	}
 	
 	
+	
+	//////////////////////////////////
+	//////////////////////////////////
+	//		Regular Expression		//
+	//////////////////////////////////
+	//////////////////////////////////
+	static public String getName(String in, String regularExpression) {
+
+		String[] inSegments = in.split( "/" );
+		String inLastSegment = inSegments[inSegments.length-1];
+
+		String[] regularExpressionSegments = regularExpression.split( "/" );
+		String regularExpressionSegmentsLastSegment = regularExpressionSegments[regularExpressionSegments.length-1];
+	
+		String[] bodyAndExtensionOut = regularExpressionSegmentsLastSegment.split ( "\\." );
+		String[] bodyAndExtensionIn = inLastSegment.split ( "\\." );
+	
+		String newName = bodyAndExtensionIn[0] + "." + bodyAndExtensionOut[bodyAndExtensionOut.length-1];
+	
+		String result = "";
+		
+		for (int index = 0; index < inSegments.length -1; index++)
+			result += inSegments[index] + "/";
+		
+		return result + newName;
+	}
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+	//		End of Regular Expression		//
+	//////////////////////////////////////////
+	//////////////////////////////////////////
 	
 	
 	
