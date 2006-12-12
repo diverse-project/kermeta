@@ -12,6 +12,7 @@
  *       Finite State Machine Sample with Behaviour implemented in Kermeta
  */
 
+
 package fsm;
 
 require kermeta
@@ -128,13 +129,14 @@ class State {
 	
 	reference combination : Set<State>
 	
-	// Go to the next state
-	operation step(c : String) : String raises FSMException is
-	
 	// Declaration of the pre-condition
 	pre notVoidInput is
 		c != void and c != ""
-		
+	// Declaration of the post-condition
+	post notVoidOutput is
+		result != void and result != ""
+	// Go to the next state
+	operation step(c : String) : String raises FSMException is
 	do
 		// Get the valid transitions
 		var validTransitions : Collection<Transition> 
@@ -146,10 +148,6 @@ class State {
 		// Fire the transition
 		result := validTransitions.one.fire
 	end
-		
-	// Declaration of the post-condition
-	post notVoidOutput is
-		result != void and result != ""
 	
 	// Create a new state from self state
 	operation copy() : State is do
