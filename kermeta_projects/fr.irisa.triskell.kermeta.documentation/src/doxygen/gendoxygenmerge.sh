@@ -7,7 +7,7 @@
 
 # Set the directory in which the doxygen documentation will be
 # generated.
-set builddir=../../build/doxygen
+export builddir=../../build/doxygen
 if ! [ -d $builddir ] 
 then
     echo "create a build/doxygen directory"
