@@ -1,7 +1,7 @@
-/* $Id: EMFRuntimeUnit.java,v 1.29 2006-12-01 10:13:51 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.30 2006-12-12 08:55:22 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 6, 2005
@@ -196,7 +196,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			URI u = createURI(unit.getUriAsString());
 			
 			// register the extension of this uri into EMF
-			registerEMFextensionToFactoryMap(kunit.getUri());
+			registerEMFextensionToFactoryMap(unit.getUriAsString());
 			// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
 			HashMap options = new HashMap();
 			ResourceSet resourceset = new ResourceSetImpl();
@@ -221,7 +221,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     			resource.load(options);
     		else
     			throwKermetaRaisedExceptionOnLoad(
-    			"Not able to create a resource for URI: "+ u + "\n    " + logEMFRegistryContent(), null);
+    			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryContent(), null);
 
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = new EMF2Runtime(unit, resource);
