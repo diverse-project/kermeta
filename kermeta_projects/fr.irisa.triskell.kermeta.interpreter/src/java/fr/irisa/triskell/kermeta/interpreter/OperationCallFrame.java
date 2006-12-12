@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.12 2006-12-07 09:55:46 dvojtise Exp $
+/* $Id: OperationCallFrame.java,v 1.13 2006-12-12 12:14:19 dvojtise Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -22,7 +22,8 @@ import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+//import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -81,7 +82,9 @@ public class OperationCallFrame extends CallFrame {
     	        }
     	        
     	         for(int i=0; i<operation.getTypeParameter().size(); i++) {
-    	            typeParameters.put(operation.getTypeParameter().get(i), TypeVariableEnforcer.getBoundType(((TypeVariableBinding)expression.getStaticTypeVariableBindings().get(i)).getType(), pContext.peekCallFrame().getTypeParameters()));
+    	        	Type typeToBeBound = (Type)expression.getStaticTypeVariableBindings().get(i);
+    	        	Type enforcedType = TypeVariableEnforcer.getBoundType(typeToBeBound, pContext.peekCallFrame().getTypeParameters());
+    	        	typeParameters.put(operation.getTypeParameter().get(i), enforcedType); 
     	        }
             }
             
