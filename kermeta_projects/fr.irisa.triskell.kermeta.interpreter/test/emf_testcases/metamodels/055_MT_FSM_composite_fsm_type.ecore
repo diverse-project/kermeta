@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm" nsURI="platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/055_MT_FSM_composite_fsm_type.ecore" nsPrefix="fsm">
+  <eAnnotations source="kermeta">
+    <details key="mainClass" value="fsm::Main"/>
+    <details key="mainOperation" value="main"/>
+  </eAnnotations>
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eSubpackages name="composite_fsm" nsURI="platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/055_MT_FSM_composite_fsm_type.ecore#/" nsPrefix="composite_fsm">
+    <eAnnotations source="kermeta">
+      <details key="isModelTypeDefinition" value="true"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="FSM" eSuperTypes="//composite_fsm/State">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="alphabet" ordered="false" upperBound="-1" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" ordered="false" upperBound="-1" eType="//composite_fsm/State" containment="true" eOpposite="//composite_fsm/State/owningFSM"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTransition" ordered="false" upperBound="-1" eType="//composite_fsm/Transition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" eType="//composite_fsm/State"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" ordered="false" upperBound="-1" eType="//composite_fsm/State"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="State">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" eType="//composite_fsm/FSM" eOpposite="//composite_fsm/FSM/ownedState"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" upperBound="-1" eType="//composite_fsm/Transition" volatile="true" transient="true" derived="true" eOpposite="//composite_fsm/Transition/target">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;   //TODO: implement setterfor derived property incomingTransition&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;   //TODO: implement getterfor derived property incomingTransition&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1" eType="//composite_fsm/Transition" volatile="true" transient="true" derived="true" eOpposite="//composite_fsm/Transition/source">
+        <eAnnotations source="kermetaderivedProp.setter">
+          <details key="body" value="do&#xA;   //TODO: implement setterfor derived property outgoingTransition&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermetaderivedProp.getter">
+          <details key="body" value="do&#xA;   //TODO: implement getterfor derived property outgoingTransition&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="isReadOnly" value="false"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//composite_fsm/State" eOpposite="//composite_fsm/State/outgoingTransition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//composite_fsm/State" eOpposite="//composite_fsm/State/incomingTransition"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
