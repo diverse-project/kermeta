@@ -6,6 +6,15 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>fr.irisa.triskell.kermeta.kpm.kermetaProjectBuilder</name>
+			<arguments>
+				<dictionary>
+					<key>kpm</key>
+					<value>fr.irisa.triskell.kermeta.kpm.impl.KPMImpl@1713b42</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>fr.irisa.triskell.kermeta.kermetaProjectBuilder</name>
 			<arguments>
 			</arguments>
