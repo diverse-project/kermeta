@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.5 2006-11-28 13:01:51 cfaucher Exp $
+/* $Id: printer.kmt,v 1.6 2006-12-12 10:00:57 cfaucher Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -216,7 +216,7 @@ class BasicPrettyPrinter inherits
 		result := "[typed element]"
 	end
 	
-	method visitTypeVariable(node : TypeVariable, context : Integer) : String is do
+	operation visitTypeVariable(node : TypeVariable, context : Integer) : String is do
 		result := pp.ppIdentifier(node.name)
 	end
 	
