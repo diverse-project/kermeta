@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.15 2006-09-22 12:23:31 cfaucher Exp $
+/* $Id: behavior.kmt,v 1.16 2006-12-12 10:03:36 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -362,29 +362,29 @@ class LambdaParameter inherits kermeta::reflection::Object, KMExpressionVisitabl
 /** This class implements the visitor design pattern for all the classes of this Behavior package, in particular the classes that inherits from kermeta::behavior::Expression */
 abstract class KMExpressionVisitor<ContextType, ResultType>
 {
-	operation visitCallVariable(node : CallVariable, context : ContextType) : ResultType is abstract
-	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is abstract
-	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is abstract
-	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is abstract
-	operation visitCallValue(node : CallValue, context : ContextType) : ResultType is abstract
-	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is abstract
-	operation visitBlock(node : Block, context : ContextType) : ResultType is abstract
-	operation visitConditional(node : Conditional, context : ContextType) : ResultType is abstract
-	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is abstract
-	operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is abstract
-	operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is abstract
-	operation visitBooleanLiteral(node : BooleanLiteral, context : ContextType) : ResultType is abstract
-	operation visitTypeLiteral(node : TypeLiteral, context : ContextType) : ResultType is abstract
-	operation visitTypeReference(node : TypeReference, context : ContextType) : ResultType is abstract
-	operation visitVoidLiteral(node : VoidLiteral, context : ContextType) : ResultType is abstract
-	operation visitLoop(node : Loop, context : ContextType) : ResultType is abstract
-	operation visitSelfExpression(node : SelfExpression, context : ContextType) : ResultType is abstract
-	operation visitVariableDecl(node : VariableDecl, context : ContextType) : ResultType is abstract
-	operation visitRaise(node : Raise, context : ContextType) : ResultType is abstract
-	operation visitRescue(node : Rescue, context : ContextType) : ResultType is abstract
-	operation visitJavaStaticCall(node : JavaStaticCall, context : ContextType) : ResultType is abstract
-	operation visitLambdaExpression(node : LambdaExpression, context : ContextType) : ResultType is abstract
-	operation visitLambdaParameter(node : LambdaParameter, context : ContextType) : ResultType is abstract
+	operation visitCallVariable(node : CallVariable, context : ContextType) : ResultType is do end
+	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is do end
+	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is do end
+	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is do end
+	operation visitCallValue(node : CallValue, context : ContextType) : ResultType is do end
+	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is do end
+	operation visitBlock(node : Block, context : ContextType) : ResultType is do end
+	operation visitConditional(node : Conditional, context : ContextType) : ResultType is do end
+	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is do end
+	operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is do end
+	operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is do end
+	operation visitBooleanLiteral(node : BooleanLiteral, context : ContextType) : ResultType is do end
+	operation visitTypeLiteral(node : TypeLiteral, context : ContextType) : ResultType is do end
+	operation visitTypeReference(node : TypeReference, context : ContextType) : ResultType is do end
+	operation visitVoidLiteral(node : VoidLiteral, context : ContextType) : ResultType is do end
+	operation visitLoop(node : Loop, context : ContextType) : ResultType is do end
+	operation visitSelfExpression(node : SelfExpression, context : ContextType) : ResultType is do end
+	operation visitVariableDecl(node : VariableDecl, context : ContextType) : ResultType is do end
+	operation visitRaise(node : Raise, context : ContextType) : ResultType is do end
+	operation visitRescue(node : Rescue, context : ContextType) : ResultType is do end
+	operation visitJavaStaticCall(node : JavaStaticCall, context : ContextType) : ResultType is do end
+	operation visitLambdaExpression(node : LambdaExpression, context : ContextType) : ResultType is do end
+	operation visitLambdaParameter(node : LambdaParameter, context : ContextType) : ResultType is do end
 }
 /** All classes that can be visited using kermeta::behavior::KMExpressionVisitor must implement this class */
 abstract class KMExpressionVisitable

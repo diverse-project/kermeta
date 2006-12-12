@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.32 2006-12-07 09:32:17 dvojtise Exp $
+/* $Id: structure.kmt,v 1.33 2006-12-12 10:03:36 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -463,37 +463,37 @@ alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
 /** Implementation of the Visitor pattern for the model elements contained in structure package */
 abstract class KMStructureVisitor<ContextType, ResultType>
 {
-	operation visitClass(node : Class, context : ContextType) : ResultType is abstract
-	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is abstract
-	operation visitOperation(node : Operation, context : ContextType) : ResultType is abstract
-	operation visitTag(node : Tag, context : ContextType) : ResultType is abstract
-	operation visitProperty(node : Property, context : ContextType) : ResultType is abstract
-	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is abstract
-	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is abstract
-	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is abstract
-	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is abstract
-	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is abstract
-	operation visitModel(node : Model, context : ContextType) : ResultType is abstract
-	operation visitProductType(node : ProductType, context : ContextType) : ResultType is abstract
-	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is abstract
-	operation visitType(node : Type, context : ContextType) : ResultType is abstract
-	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is abstract
-	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is abstract
-	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is abstract
-	//operation visitSelfType(node : SelfType, context : ContextType) : ResultType is abstract
-	operation visitPackage(node : Package, context : ContextType) : ResultType is abstract
-	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is abstract
-	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is abstract
-	operation visitDataType(node : DataType, context : ContextType) : ResultType is abstract
-	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is abstract
-	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is abstract
-	operation visitParameter(node : Parameter, context : ContextType) : ResultType is abstract
-	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is abstract
-	operation visitModelTypeDefinition(node : ModelTypeDefinition, context : ContextType) : ResultType is abstract
-	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is abstract
-	operation visitModelType(node : ModelType, context : ContextType) : ResultType is abstract
-	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is abstract
-	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is abstract
+	operation visitClass(node : Class, context : ContextType) : ResultType is do end
+	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is do end
+	operation visitOperation(node : Operation, context : ContextType) : ResultType is do end
+	operation visitTag(node : Tag, context : ContextType) : ResultType is do end
+	operation visitProperty(node : Property, context : ContextType) : ResultType is do end
+	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is do end
+	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is do end
+	operation visitObjectTypeVariable(node : ObjectTypeVariable, context : ContextType) : ResultType is do end
+	operation visitVirtualType(node : VirtualType, context : ContextType) : ResultType is do end
+	operation visitModelTypeVariable(node : ModelTypeVariable, context : ContextType) : ResultType is do end
+	operation visitModel(node : Model, context : ContextType) : ResultType is do end
+	operation visitProductType(node : ProductType, context : ContextType) : ResultType is do end
+	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is do end
+	operation visitType(node : Type, context : ContextType) : ResultType is do end
+	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is do end
+	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is do end
+	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is do end
+	//operation visitSelfType(node : SelfType, context : ContextType) : ResultType is do end
+	operation visitPackage(node : Package, context : ContextType) : ResultType is do end
+	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is do end
+	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is do end
+	operation visitDataType(node : DataType, context : ContextType) : ResultType is do end
+	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is do end
+	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do end
+	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do end
+	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do end
+	operation visitModelTypeDefinition(node : ModelTypeDefinition, context : ContextType) : ResultType is do end
+	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do end
+	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do end
+	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do end
+	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do end
 	
 }
 /** All the classes defined in this <code>kermeta::language::structure</code> package 
