@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.30 2006-12-12 08:55:22 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.31 2006-12-12 09:30:46 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -172,11 +172,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     /** print the content of the EMF Registry */
 	public String logEMFRegistryContent() {
 		String msg = "";
+		Boolean isFirst = true;
     	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
     	while(it.hasNext()) {
-    		msg += " | "+it.next().toString();
+    		if(!isFirst) msg += " | ";
+    		else isFirst = false;
+    		msg += it.next().toString();
     	}
-    	internalLog.debug("Factory.Registry known extensions are :" + msg);
+    	internalLog.debug("Factory.Registry known extensions are : " + msg);
     	return msg;
 	}
     
@@ -262,19 +265,23 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	return emf_msg;
     }
 
+    /**
+     * Register a Factory for a file extension. This is necessary especially when running outside of eclipse 
+     * @param kunit_uri : name of the file for which we want to register the extension
+     */
 	private void registerEMFextensionToFactoryMap(String kunit_uri) {
 		String ext = kunit_uri.substring(kunit_uri.lastIndexOf(".")+1);
-		internalLog.debug("registering extension:" + ext);
-		logEMFRegistryContent();
-		//
+		
 		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains(ext)){
 			internalLog.debug("registering extension: " + ext);		
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
 		}
+		else internalLog.debug(" extension " + ext + " is already registered ");
 		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains("ecore")){
 			internalLog.debug("registering extension: ecore");
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 		}
+		logEMFRegistryContent();
 	}
     
 	/**
