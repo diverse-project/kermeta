@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.*;
-import fr.irisa.triskell.kermeta.kpm.helpers.KermetaUnitHelper;
+//import fr.irisa.triskell.kermeta.kpm.helpers.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
@@ -41,7 +41,7 @@ import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
  * Distributed under the terms of the GPL license
  */
 public class Editor extends TextEditor implements KermetaUnitInterest {
-
+//public class Editor extends TextEditor {
 	
 	protected KermetaUnit mcunit; 
 	protected KermetaOutline outline;
@@ -136,12 +136,6 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 		MarkersHelper.createMarkers( getFile(), mcunit);
 		if (outline != null)
 			outline.update();
-	/*	Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
-		while(it.hasNext())
-		{
-			KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
-			listener.unitGotFocus(this);
-		}*/
 	}
 	
 	public void setFocus() {
@@ -224,12 +218,12 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
 		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getSourceViewer().getDocument().get() );
-		try {
-			if ( ! IResourceHelper.isNatureKermeta( getFile().getProject() ) )
+		//try {
+			//if ( IResourceHelper.isNatureKermeta( getFile().getProject() ) )
 				KermetaWorkspace.getInstance().updateFile( getFile() );
-		} catch (CoreException exception) {
-			exception.printStackTrace();
-		}
+		//} catch (CoreException exception) {
+		//	exception.printStackTrace();
+		//}
 		super.performSave(overwrite, progressMonitor);
 	}
 	
@@ -238,20 +232,11 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 		super.init(site, input);
 
 		final Editor editor = this;
-		
-	//	file = KermetaWorkspace.getInstance().getFile( getFile() );
-		
-		//if ( file != null ) {
+
 			Runnable r = new Runnable() {
 				public void run() {
-					//boolean result = 
 						KermetaWorkspace.getInstance().declareInterestThreading(editor, getFile());
-					/*if ( ! result ) {
-						KMTUnit unit = KermetaUnitHelper.typeCheckKMTFile( getFile(), null );
-						setMcunit( unit );
-						MarkersHelper.clearMarkers(getFile());
-						MarkersHelper.createMarkers( getFile(), unit);
-					}*/
+
 				}
 			};
 			Thread thread = new Thread(r);

@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.18 2006-12-07 13:47:43 ftanguy Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.19 2006-12-12 17:07:14 ftanguy Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 
-import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
+//import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 
@@ -135,7 +135,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
      * 
      * @return a KermetaUnit of the "compiled" file.
      */
-    private KermetaUnit parse()
+   /* private KermetaUnit parse()
     {   
     	//KermetaUnit unit = KermetaWorkspace.typeCheckFile( _editor.getFile() );
     	StdLibKermetaUnitHelper.setURItoDefault();
@@ -143,7 +143,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
-    	MarkersHelper.clearMarkers(file);
+    	//MarkersHelper.clearMarkers(file);
         try {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.parseString(_document.get());
@@ -162,8 +162,8 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
         }
         
-        MarkersHelper.createMarkers(_editor.getFile(), result);
+        //MarkersHelper.createMarkers(_editor.getFile(), result);
         return result;
-    }
+    }*/
 
 }
