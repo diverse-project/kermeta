@@ -1,57 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?>
-<plugin>
-   <extension
-         id="kpmStartup"
-         point="org.eclipse.ui.startup">
-   </extension>
+<?eclipse version="3.0"?>
 
-<extension point="org.eclipse.emf.ecore.generated_package">
-<package uri="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/kpm.ecore" class="fr.irisa.triskell.kermeta.kpm.KpmPackage"/>
-</extension>
-<extension
-      id="kermetaProjectBuilder"
-      point="org.eclipse.core.resources.builders">
-   <builder>
-      <run class="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
-   </builder>
-</extension>
-<extension
-      point="org.eclipse.ui.popupMenus">
-   <objectContribution
-         adaptable="false"
-         id="fr.irisa.triskell.kermeta.kpm.srcFolderContribution"
-         objectClass="org.eclipse.core.resources.IFolder">
-      <action
-            class="fr.irisa.triskell.kermeta.kpm.actions.popup.MakeAFolderAnSrcFolder"
-            icon="images/kermeta.png"
-            id="fr.irisa.triskell.kermeta.kpm.srcAction"
-            label="Add / Remove src property"/>
-   </objectContribution>
-</extension>
-<extension
-      point="org.eclipse.ui.decorators">
-   <decorator
-         adaptable="true"
-         class="fr.irisa.triskell.kermeta.kpm.actions.popup.SRCFolderDecorator"
-         icon="images/kermeta.png"
-         id="fr.irisa.triskell.kermeta.kpm.decorator"
-         label="Kermeta Folder Decorator"
-         lightweight="false"
-         location="TOP_RIGHT"
-         objectClass="org.eclipse.core.resources.IFolder"
-         state="true">
-   </decorator>
-</extension>
-<extension
-      id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
-      point="org.eclipse.ui.decorators">
-   <decorator
-         class="fr.irisa.triskell.kermeta.kpm.actions.popup.SrcFolderDecorator"
-         id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
-         label="fr.irisa.triskell.kermeta.kpm.decorator1"
-         lightweight="true"
-         objectClass="org.eclipse.core.resources.IFolder"/>
-</extension>
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.4 2006-12-12 16:06:31 ftanguy Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore" 
+       class = "fr.irisa.triskell.kermeta.kpm.KpmPackage"
+       genModel = "model/Kpm.genmodel" /> 
+  </extension>
+  <extension
+        id="fr.irisa.triskell.kermeta.kpm.startup"
+        point="org.eclipse.ui.startup">
+  </extension>
+  <extension
+        id="kermetaProjectBuilder"
+        point="org.eclipse.core.resources.builders">
+     <builder>
+        <run class="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
+     </builder>
+  </extension>
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="false"
+           id="fr.irisa.triskell.kermeta.kpm.srcFolderContribution"
+           objectClass="org.eclipse.core.resources.IFolder">
+        <action
+              class="fr.irisa.triskell.kermeta.kpm.actions.popup.MakeAFolderAnSrcFolder"
+              icon="images/kermeta.png"
+              id="fr.irisa.triskell.kermeta.kpm.srcAction"
+              label="Add / Remove src property"/>
+     </objectContribution>
+  </extension>
+  <extension
+        point="org.eclipse.ui.decorators">
+     <decorator
+           class="fr.irisa.triskell.kermeta.kpm.actions.popup.SrcFolderDecorator"
+           id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
+           label="fr.irisa.triskell.kermeta.kpm.decorator1"
+           lightweight="true"
+           objectClass="org.eclipse.core.resources.IFolder"/>
+  </extension>
 
 </plugin>
+

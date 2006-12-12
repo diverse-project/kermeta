@@ -1,27 +1,27 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Kpm Plug-in
-Bundle-SymbolicName: fr.irisa.triskell.kermeta.kpm;singleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.kpm; singleton:=true
 Bundle-Version: 0.0.1
-Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Require-Bundle: fr.irisa.triskell.kermeta,
- org.eclipse.core.resources,
- org.eclipse.core.runtime,
- org.eclipse.emf,
- org.eclipse.emf.common,
- org.eclipse.emf.ecore,
- org.eclipse.emf.ecore.xmi,
- org.eclipse.ui,
- org.eclipse.ui.editors,
- org.eclipse.core.filesystem,
- org.eclipse.jface.text,
- org.eclipse.ui.forms,
- org.eclipse.ui.ide,
- org.eclipse.ui.intro,
- org.eclipse.ui.views,
- org.eclipse.ui.views.properties.tabbed
-Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kermeta.kpm,
  fr.irisa.triskell.kermeta.kpm.helpers,
+ fr.irisa.triskell.kermeta.kpm.impl,
+ fr.irisa.triskell.kermeta.kpm.util,
  fr.irisa.triskell.kermeta.kpm.workspace
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ui,
+ org.eclipse.core.resources,
+ org.eclipse.emf,
+ org.eclipse.emf.ecore.xmi,
+ fr.irisa.triskell.kermeta,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.core.filesystem,
+ org.eclipse.emf.edit,
+ org.eclipse.emf.edit.ui
+Eclipse-LazyStart: true
+Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin
