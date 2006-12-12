@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.23 2006-10-25 08:26:41 dvojtise Exp $
+/* $Id: KMT2KMPass7.java,v 1.24 2006-12-12 16:45:21 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -23,24 +23,21 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import java.util.ArrayList;
-//import java.util.Stack;
-import java.util.regex.Pattern;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.EList;
-//import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-
-//import com.sun.rsasign.t;
-
 import fr.irisa.triskell.kermeta.ast.AnnotableClassMemberDecl;
 import fr.irisa.triskell.kermeta.ast.AnnotableElement;
+import fr.irisa.triskell.kermeta.ast.Annotableassertion;
 import fr.irisa.triskell.kermeta.ast.Annotation;
 import fr.irisa.triskell.kermeta.ast.Annotations;
+import fr.irisa.triskell.kermeta.ast.Assertion;
+import fr.irisa.triskell.kermeta.ast.ClassMemberDecl;
 import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
 import fr.irisa.triskell.kermeta.ast.FAssignement;
@@ -57,14 +54,11 @@ import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.ast.Tag;
 import fr.irisa.triskell.kermeta.ast.TopLevelDecl;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
-//import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
-
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 
@@ -111,6 +105,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
      */
     public boolean beginVisit(AnnotableClassMemberDecl node) {
         
+   	
         Annotations annLst = node.getAnnotations();
         KermetaASTNode annNode = node.getClassMemberDecl();
         fr.irisa.triskell.kermeta.language.structure.Object e = null;
@@ -120,6 +115,33 @@ public class KMT2KMPass7 extends KMT2KMPass {
             name = ((Operation)annNode).getName().getText();
             e = ClassDefinitionHelper.findOperationByName(builder.current_class, name);
             builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation) e;
+            Annotableassertion annotableassertionNode = (Annotableassertion) ((Operation)annNode).getAssertions().getFirstChild();
+            if (annotableassertionNode != null) {
+				Assertion assertionNode = annotableassertionNode.getAssertion();
+
+				fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
+				String nameAssertion = "";
+				if (assertionNode instanceof Precondition) {
+					nameAssertion = ((Precondition) assertionNode).getName()
+							.getText();
+					c = OperationHelper.findPreConditionByName(
+							builder.current_operation, nameAssertion);
+					builder.current_constraint = c;
+				} else if (assertionNode instanceof Postcondition) {
+					nameAssertion = ((Postcondition) assertionNode).getName()
+							.getText();
+					c = OperationHelper.findPostConditionByName(
+							builder.current_operation, nameAssertion);
+					builder.current_constraint = c;
+				}
+
+				if (c != null) { // we should have found the object
+									// however...
+					processAnnotations(annLst, c);
+					annLst = ((Operation) annNode).getAnnotations();
+				}
+			} 
+            
         }
         else if (annNode instanceof Property)
         {	
@@ -136,40 +158,69 @@ public class KMT2KMPass7 extends KMT2KMPass {
         if (e != null) // we should have found the object however...
             processAnnotations(annLst, e);
         return super.beginVisit(node);
+        
+        
+//      modif JMM 	
+    	
+//    	Annotations annLst = null;
+//        KermetaASTNode annNode = node;
+//        fr.irisa.triskell.kermeta.language.structure.Object e = null;
+//        String name = "";
+//        if (annNode instanceof Operation)
+//        {   
+//            name = ((Operation)annNode).getName().getText();
+//            e = ClassDefinitionHelper.findOperationByName(builder.current_class, name);
+//            builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation) e;
+//            annLst = ((Operation)annNode).getAnnotations();
+//        }
+//        else if (annNode instanceof Property)
+//        {	
+//       	    name = ((Property)annNode).getName().getText();
+//            e = ClassDefinitionHelper.findPropertyByName(builder.current_class, name);
+//            builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property) e;
+//            annLst = ((Property)annNode).getAnnotations();
+//        }
+//        else if (annNode instanceof Invariant) {
+//        	name = ((Invariant)annNode).getName().getText();
+//        	e = ClassDefinitionHelper.findInvariantByName(builder.current_class, name);
+//        	builder.current_constraint = (fr.irisa.triskell.kermeta.language.structure.Constraint) e;
+//        	annLst = ((Invariant)annNode).getAnnotations();
+//        }
+//        
+//        if (e != null) // we should have found the object however...
+//            processAnnotations(annLst, e);
+//        return super.beginVisit(node);
     }
     
-    
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.Precondition)
+    /**
+     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.Annotableassertion)
      */
-    public boolean beginVisit(Precondition node) {
+    public boolean beginVisit(Annotableassertion node) {
+        
+   	
         Annotations annLst = node.getAnnotations();
+        KermetaASTNode annNode = node.getAssertion();
         fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
-        String name = node.getName().getText();
-        c = OperationHelper.findPreConditionByName(builder.current_operation, name);
-        builder.current_constraint = c;
-
+        String name = "";
+        if (annNode instanceof Precondition)
+        {   
+            name = ((Precondition)annNode).getName().getText();
+            c = OperationHelper.findPreConditionByName(builder.current_operation, name);
+            builder.current_constraint = c;
+        }
+        else if (annNode instanceof Postcondition)
+        {	
+       	    name = ((Postcondition)annNode).getName().getText();
+            c = OperationHelper.findPostConditionByName(builder.current_operation, name);
+            builder.current_constraint = c;
+        }
+        
         if (c != null) // we should have found the object however...
             processAnnotations(annLst, c);
-        return false;
+        return super.beginVisit(node);
     }
     
     
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.Postcondition)
-     */
-    public boolean beginVisit(Postcondition node) {
-        Annotations annLst = node.getAnnotations();
-        fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
-        String name = node.getName().getText();
-        c = OperationHelper.findPostConditionByName(builder.current_operation, name);
-        builder.current_constraint = c;
-
-        if (c != null) // we should have found the object however...
-            processAnnotations(annLst, c);
-        return false;
-    }
- 
     
     /** 
      * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.FAssignement)

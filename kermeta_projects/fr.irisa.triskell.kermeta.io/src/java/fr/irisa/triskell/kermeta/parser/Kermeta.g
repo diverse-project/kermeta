@@ -9,7 +9,7 @@ import com.ibm.eclipse.ldt.core.parser.*;
 class KermetaParser extends Parser;
 
 options {
-  k=3;
+  k=5;
 
   defaultErrorHandler=false;
 
@@ -296,9 +296,9 @@ annotableClassMemberDecl returns [ AnnotableClassMemberDecl retVal = null ]
 
 classMemberDecl returns [ ClassMemberDecl retVal = null ]
 :
-  ( retVal=operation
+  ( retVal=invariant
+  | retVal=operation
   | retVal=property
-  | retVal=invariant
   )
 ;
 
@@ -355,9 +355,9 @@ setterBody returns [ SetterBody retVal = null ]
 
 operation returns [ Operation retVal = null ]
 :
-{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; Preconditions preconditions = null; OperationBody operationBody = null; Postconditions postconditions = null; }
-  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" preconditions=preconditions operationBody=operationBody postconditions=postconditions 
-{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, preconditions, operationBody, postconditions); }
+{ Assertions assertions = null; Annotations annotations = null; OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; OperationBody operationBody = null; }
+  assertions=assertions annotations=annotations operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" operationBody=operationBody 
+{ retVal = new Operation(assertions, annotations, operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody); }
 ;
 
 operationKind returns [ OperationKind retVal = null ]
@@ -368,30 +368,38 @@ operationKind returns [ OperationKind retVal = null ]
 { retVal = new OperationKind(tok); }
 ;
 
-preconditions returns [ Preconditions retVal = new Preconditions() ]
+assertions returns [ Assertions retVal = new Assertions() ]
 :
-{ Precondition precondition = null; }
-  ( precondition=precondition { retVal.addChild(precondition); } )*
+{ Annotableassertion annotableassertion = null; }
+  ( annotableassertion=annotableassertion { retVal.addChild(annotableassertion); } )*
 ;
 
-postconditions returns [ Postconditions retVal = new Postconditions() ]
+annotableassertion returns [ Annotableassertion retVal = null ]
 :
-{ Postcondition postcondition = null; }
-  ( postcondition=postcondition { retVal.addChild(postcondition); } )*
+{ Annotations annotations = null; Assertion assertion = null; }
+  annotations=annotations assertion=assertion 
+{ retVal = new Annotableassertion(annotations, assertion); }
+;
+
+assertion returns [ Assertion retVal = null ]
+:
+  ( retVal=precondition
+  | retVal=postcondition
+  )
 ;
 
 precondition returns [ Precondition retVal = null ]
 :
-{ Annotations annotations = null; FExpression body = null; }
-  annotations=annotations pre_KW:"pre" name:ID is_KW:"is" body=fExpression 
-{ retVal = new Precondition(annotations, pre_KW, name, is_KW, body); }
+{ FExpression body = null; }
+  pre_KW:"pre" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Precondition(pre_KW, name, is_KW, body); }
 ;
 
 postcondition returns [ Postcondition retVal = null ]
 :
-{ Annotations annotations = null; FExpression body = null; }
-  annotations=annotations post_KW:"post" name:ID is_KW:"is" body=fExpression 
-{ retVal = new Postcondition(annotations, post_KW, name, is_KW, body); }
+{ FExpression body = null; }
+  post_KW:"post" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Postcondition(post_KW, name, is_KW, body); }
 ;
 
 operationBody returns [ OperationBody retVal = null ]

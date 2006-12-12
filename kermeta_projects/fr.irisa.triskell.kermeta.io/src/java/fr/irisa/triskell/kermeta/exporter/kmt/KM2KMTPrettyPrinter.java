@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.42 2006-12-07 08:40:02 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.43 2006-12-12 16:45:21 jmottu Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -588,7 +588,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitOperation(Operation node) {
 		setParent(node);
-		String result = ppTags(node.getTag());
+		String result = "";
+		result += ppCRSeparatedNode(node.getPre());
+		result += ppCRSeparatedNode(node.getPost());
+		result += ppTags(node.getTag());
 		
 		if(!alreadyPrefixed) result += getPrefix();
 		
@@ -626,15 +629,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		result += " is\n";
 		pushPrefix();
 		alreadyPrefixed = false;
-		result += ppCRSeparatedNode(node.getPre());
+		// JMM result += ppCRSeparatedNode(node.getPre());
 		
 		if (node.getBody() != null) {
 			result += getPrefix() + this.accept(node.getBody()) + "\n";
-			result += ppCRSeparatedNode(node.getPost());
+//			 JMM 	result += ppCRSeparatedNode(node.getPost());
 		}
 		else if (node.isIsAbstract()) {
 			result += getPrefix() + "abstract\n";
-			result += ppCRSeparatedNode(node.getPost());
+//			 JMM 	result += ppCRSeparatedNode(node.getPost());
 		}
 		else {
 			result += getPrefix() + "do\n";

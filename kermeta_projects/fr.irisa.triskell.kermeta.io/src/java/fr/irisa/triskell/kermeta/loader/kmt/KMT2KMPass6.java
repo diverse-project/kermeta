@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.11 2006-10-27 08:26:16 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.12 2006-12-12 16:45:21 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Iterator;
 
+import fr.irisa.triskell.kermeta.ast.Annotations;
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.GetterBody;
 import fr.irisa.triskell.kermeta.ast.Invariant;
@@ -84,6 +85,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		//if (builder.current_operation.getFType() != null && !(builder.current_operation.getFType() instanceof FVoidType)) {
 		//	builder.addSymbol(new MCSymbolParameter((Parameter)params.next()));
 		//}
+		
 		return super.beginVisit(operation);
 	}
 	

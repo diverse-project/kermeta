@@ -1,4 +1,4 @@
-/* $Id: TypeVirtualizer.java,v 1.2 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeVirtualizer.java,v 1.3 2006-12-12 16:45:21 jmottu Exp $
 * Project : Kermeta io
 * File : TypeVirtualizer.java
 * License : EPL
@@ -146,7 +146,7 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitModelTypeVariable(fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable)
 	 */
-	@Override
+	
 	public Object visitModelTypeVariable(ModelTypeVariable node) {
 		// TODO Auto-generated method stub
 		return node;
@@ -155,7 +155,7 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitObjectTypeVariable(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable)
 	 */
-	@Override
+	
 	public Object visitObjectTypeVariable(ObjectTypeVariable node) {
 		// TODO Auto-generated method stub
 		return node;
@@ -186,7 +186,7 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitVirtualType(fr.irisa.triskell.kermeta.language.structure.VirtualType)
 	 */
-	@Override
+	
 	public Object visitVirtualType(VirtualType node) {
 		// TODO Can we leave this to be resolved by the inferrer?
 		return node;
