@@ -36,8 +36,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//DependencyEvent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//Action"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" eType="#//AbstractExpression"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outs" upperBound="-1" eType="#//AbstractExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outs" upperBound="-1" eType="#//Expression"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyType">
@@ -92,7 +92,7 @@
     <eOperations name="getEvent" eType="#//DependencyEvent">
       <eParameters name="name" eType="#//String"/>
     </eOperations>
-    <eOperations name="getExpression" eType="#//AbstractExpression">
+    <eOperations name="getExpression" eType="#//Expression">
       <eParameters name="name" eType="#//String"/>
     </eOperations>
     <eOperations name="getDependency" eType="#//Dependency">

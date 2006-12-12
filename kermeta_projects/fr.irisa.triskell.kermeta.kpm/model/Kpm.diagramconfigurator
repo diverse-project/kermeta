@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.kpm.graphicaleditor" name="KPM" package="diagram" prefix="Kpm" forceOverwrite="true" pluginVersion="0.0.1" provider="Irisa / INRIA" samePluginAsEditor="true">
+  <palette name="palette">
+    <paletteCategories name="node">
+      <items name="Expression" part="//@parts.1"/>
+    </paletteCategories>
+    <paletteCategories name="edge">
+      <items name="Dependency" part="//@parts.0"/>
+    </paletteCategories>
+  </palette>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.5" targetDecoration="ARROW" defaultRouter="RectilinearRouter">
+    <sourceTargetCouple containerType="SOURCE_CONTAINER" sourceNode="//@parts.1" targetNode="//@parts.1">
+      <containerObject href="Kpm.genmodel#//kpm/KPM"/>
+      <containerRef xsi:type="ecore:EReference" href="Kpm.ecore#//KPM/dependencies"/>
+      <refEdgeToSource xsi:type="ecore:EReference" href="Kpm.ecore#//Dependency/in"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="Kpm.ecore#//Dependency/outs"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.9" type="BorderedLabel" layout="ClassLayout"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.1" type="BorderedLabel" layout="ClassLayout"/>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/KPM"/>
+    <diagrams diagram="/"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/Directory"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/Project"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/File"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/NameFilter"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/Dependency"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/DependencyType"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/DependencyEvent"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/Action"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/Expression"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/And"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/Or"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="Kpm.genmodel#//kpm/SuitedExpression"/>
+  </objects>
+  <genModel href="Kpm.genmodel#/"/>
+  <templateRootObject href="Kpm.genmodel#//kpm/KPM"/>
+  <editorConfigurator href="Kpm.editorconfigurator#/"/>
+</diagramconfigurator:DiagramConfiguration>
