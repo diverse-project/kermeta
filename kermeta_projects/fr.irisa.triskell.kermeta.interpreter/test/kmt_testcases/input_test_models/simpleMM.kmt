@@ -1,0 +1,21 @@
+package simpleMM;
+
+require kermeta
+using kermeta::standard
+
+alias String : kermeta::standard::String;
+
+
+class ASimpleClass {
+	attribute name : String
+}
+
+class AGenericClass<G> {
+	attribute name : String
+}
+
+class ClassA {
+}
+
+class ClassB {
+}

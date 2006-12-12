@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.13 2006-10-13 08:34:31 ftanguy Exp $
+/* $Id: Object.java,v 1.14 2006-12-12 14:13:39 dtouzet Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -14,19 +14,25 @@
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 
+import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
+import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
@@ -230,10 +236,91 @@ public class Object {
 	public static RuntimeObject oid(RuntimeObject self) {
 		return Integer.create((int)self.getOId(), self.getFactory());
 	}
+
 	/** Implementation of method container called as :
-	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.oid() */
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze() */
 	public static RuntimeObject freeze(RuntimeObject self) {
 		self.setFrozen(true);
+		
+		// If metaclass is kermeta::language::structure::Class
+		if(fr.irisa.triskell.kermeta.runtime.language.Class.equals(self.getMetaclass(), self.getFactory().getClassClass()) == self.getFactory().getMemory().trueINSTANCE) {
+			RuntimeObject tDef_ro = self.getProperties().get("typeDefinition");
+
+			InterpreterContext ic = self.getFactory().getMemory().getCurrentInterpreter().getInterpreterContext();
+			CallFrame cf = (CallFrame) ic.getFrameStack().lastElement();
+			fr.irisa.triskell.kermeta.language.structure.Object contextObj = cf.getExpression();
+
+			if(tDef_ro != null) {
+				KCoreRuntimeObject tDef_kro = (KCoreRuntimeObject) tDef_ro;
+				if(tDef_kro.isFrozen()) {
+					StructureFactoryImpl factory = new StructureFactoryImpl();
+					fr.irisa.triskell.kermeta.language.structure.Class newClass = factory.createClass();
+					
+					// Set ClassDefinition
+					ClassDefinition cDef = (ClassDefinition) tDef_kro.getData().get("kcoreObject");
+					newClass.setTypeDefinition( cDef );
+					
+					// Set TypeVariableBinding
+					RuntimeObject bindings_ro = self.getProperties().get("typeParamBinding");
+					if(bindings_ro != null) {
+						ArrayList<RuntimeObject> bindings = (ArrayList<RuntimeObject>) bindings_ro.getData().get("CollectionArrayList");
+						if(bindings != null) {
+							RuntimeObject crtBinding_ro = null;
+							TypeVariableBinding typeVB = null;
+							RuntimeObject ctrType_ro = null;
+							RuntimeObject ctrVar_ro = null;
+							fr.irisa.triskell.kermeta.language.structure.Type crtType = null;
+							fr.irisa.triskell.kermeta.language.structure.TypeVariable crtTypeVar = null;
+							Iterator<RuntimeObject> it = bindings.iterator();
+							while(it.hasNext()) {
+								crtBinding_ro = it.next();
+								
+								ctrType_ro = crtBinding_ro.getProperties().get("type");
+								crtType = (fr.irisa.triskell.kermeta.language.structure.Type) ctrType_ro.getData().get("kcoreObject"); 
+								ctrVar_ro = crtBinding_ro.getProperties().get("variable");
+								crtTypeVar = (fr.irisa.triskell.kermeta.language.structure.TypeVariable) ctrVar_ro.getData().get("kcoreObject"); 
+								
+								typeVB = factory.createTypeVariableBinding();
+								typeVB.setType( crtType );
+								typeVB.setVariable( crtTypeVar );
+								newClass.getTypeParamBinding().add(typeVB);
+							}
+						}
+					}
+					
+					// If "newClass" compliant with its ClassDefinition "cDef"
+					if(checkInvariants(self) == self.getFactory().getMemory().trueINSTANCE) {
+						self.getData().put("kcoreObject", newClass);
+					}
+					else {
+						throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+								"Effective parameters of an allocated Class must match formal parameters of its ClassDefinition",
+								self.getFactory().getMemory().getCurrentInterpreter(),
+								self.getFactory().getMemory(),
+								contextObj,
+								null);
+					}
+				}
+				else {
+					throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+							"ClassDefinition of an allocated Class must be frozen",
+							self.getFactory().getMemory().getCurrentInterpreter(),
+							self.getFactory().getMemory(),
+							contextObj,
+							null);
+				}
+			}
+			else {
+				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+						"Allocated Class must have a ClassDefinition before being frozen",
+						self.getFactory().getMemory().getCurrentInterpreter(),
+						self.getFactory().getMemory(),
+						contextObj,
+						null); // Throwable
+			}
+			
+		}
+		
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
