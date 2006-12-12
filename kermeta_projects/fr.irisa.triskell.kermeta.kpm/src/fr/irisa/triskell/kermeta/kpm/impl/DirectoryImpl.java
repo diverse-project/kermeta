@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DirectoryImpl.java,v 1.7 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: DirectoryImpl.java,v 1.8 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -17,6 +17,7 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -51,7 +52,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *
  * @generated
  */
-public class DirectoryImpl extends UnitImpl implements Directory {
+public class DirectoryImpl extends FileImpl implements Directory {
 	/**
 	 * The cached value of the '{@link #getContents() <em>Contents</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -174,4 +175,19 @@ public class DirectoryImpl extends UnitImpl implements Directory {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void remove() {
+		Unit[] units = (Unit[]) getContents().toArray();
+		for ( int index = 0; index < units.length; index++ )
+			units[index].remove();
+		
+		if ( getContainer() != null )
+			getContainer().getContents().remove(this);
+		
+		getKpm().getUnits().remove(this);
+	}
 } //DirectoryImpl

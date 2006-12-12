@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmSwitch.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: KpmSwitch.java,v 1.3 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -171,8 +171,10 @@ public class KpmSwitch {
 			case KpmPackage.DIRECTORY: {
 				Directory directory = (Directory)theEObject;
 				Object result = caseDirectory(directory);
-				if (result == null) result = caseUnit(directory);
+				if (result == null) result = caseFile(directory);
 				if (result == null) result = caseAbstractDirectory(directory);
+				if (result == null) result = caseUnit(directory);
+				if (result == null) result = caseAbstractFile(directory);
 				if (result == null) result = caseAbstractUnit(directory);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -205,10 +207,9 @@ public class KpmSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.EXPRESSION: {
-				Expression expression = (Expression)theEObject;
-				Object result = caseExpression(expression);
-				if (result == null) result = caseAbstractExpression(expression);
+			case KpmPackage.ABSTRACT_EXPRESSION: {
+				AbstractExpression abstractExpression = (AbstractExpression)theEObject;
+				Object result = caseAbstractExpression(abstractExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -228,9 +229,10 @@ public class KpmSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.ABSTRACT_EXPRESSION: {
-				AbstractExpression abstractExpression = (AbstractExpression)theEObject;
-				Object result = caseAbstractExpression(abstractExpression);
+			case KpmPackage.EXPRESSION: {
+				Expression expression = (Expression)theEObject;
+				Object result = caseExpression(expression);
+				if (result == null) result = caseAbstractExpression(expression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

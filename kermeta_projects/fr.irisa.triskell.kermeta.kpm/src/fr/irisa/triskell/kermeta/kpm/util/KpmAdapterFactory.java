@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmAdapterFactory.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: KpmAdapterFactory.java,v 1.3 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -121,8 +121,8 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 			public Object caseAction(Action object) {
 				return createActionAdapter();
 			}
-			public Object caseExpression(Expression object) {
-				return createExpressionAdapter();
+			public Object caseAbstractExpression(AbstractExpression object) {
+				return createAbstractExpressionAdapter();
 			}
 			public Object caseAnd(And object) {
 				return createAndAdapter();
@@ -130,8 +130,8 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 			public Object caseOr(Or object) {
 				return createOrAdapter();
 			}
-			public Object caseAbstractExpression(AbstractExpression object) {
-				return createAbstractExpressionAdapter();
+			public Object caseExpression(Expression object) {
+				return createExpressionAdapter();
 			}
 			public Object caseSuitedExpression(SuitedExpression object) {
 				return createSuitedExpressionAdapter();

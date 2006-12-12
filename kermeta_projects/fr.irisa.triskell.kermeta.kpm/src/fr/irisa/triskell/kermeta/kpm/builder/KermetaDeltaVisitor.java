@@ -13,6 +13,7 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
@@ -34,11 +35,11 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		switch ( delta.getKind() ) {
 		
 		case IResourceDelta.ADDED :
-			//mustContinue = processAdding (delta.getResource() );
+			mustContinue = processAdding (delta.getResource() );
 			break;
 			
 		case IResourceDelta.REMOVED :
-			//mustContinue = processRemoving( delta.getResource() );
+			mustContinue = processRemoving( delta.getResource() );
 			break;
 			
 		case IResourceDelta.CHANGED :
@@ -57,25 +58,24 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 	}
 
 	
-/*	private boolean processAdding(IResource resource) throws CoreException {
+	private boolean processAdding(IResource resource) throws CoreException {
 		
 		boolean mustContinue = true;
 		
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			File file = kpm.createFileIfNecessary( (IFile) resource );
-			DependencyHelper.addTypecheckingDependencies(file);
+			KpmHelper.createKMTFile( (IFile) resource, kpm);
 			break;
 			
 		case IResource.FOLDER :
-			kpm.createDirectoryIfNecessary( (IFolder) resource );
+			KpmHelper.createDirectory( (IFolder) resource, kpm);
 			break;
 			
 		case IResource.PROJECT :
-			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) 
-				kpm.createProjectIfNecessary( (IProject) resource );
-			else mustContinue = false;
+			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) { 
+				//kpm.createProjectIfNecessary( (IProject) resource );
+			} else mustContinue = false;
 			break;
 			
 		default :
@@ -84,27 +84,31 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		}
 		
 		return mustContinue;
-	}*/
+	}
 	
 	
-	/*private boolean processRemoving(IResource resource) throws CoreException {
+	private boolean processRemoving(IResource resource) throws CoreException {
 		
 		boolean mustContinue = true;
 		
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			kpm.removeFile( (IFile) resource );
+			File file = kpm.findFile( (IFile) resource );
+			if ( file != null )
+				file.remove();
 			break;
 			
 		case IResource.FOLDER :
-			kpm.removeDirectory( (IFolder) resource );
+			Directory directory = kpm.findDirectory( (IFolder) resource );
+			if ( directory != null )
+				directory.remove();
 			break;
 			
 		case IResource.PROJECT :
-			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) )
-				kpm.removeProject( (IProject) resource );
-			else mustContinue = false;
+			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
+				//kpm.removeProject( (IProject) resource );
+			} else mustContinue = false;
 			break;
 			
 		default :
@@ -112,7 +116,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		
 		}
 		return mustContinue;
-	}*/
+	}
 	
 	
 	/**

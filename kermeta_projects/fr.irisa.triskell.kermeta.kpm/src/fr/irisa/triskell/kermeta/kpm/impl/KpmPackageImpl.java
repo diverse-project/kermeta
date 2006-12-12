@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.5 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -974,16 +974,16 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		actionEClass = createEClass(ACTION);
 		createEAttribute(actionEClass, ACTION__NAME);
 
-		expressionEClass = createEClass(EXPRESSION);
-		createEReference(expressionEClass, EXPRESSION__SUB_EXPRESSIONS);
+		abstractExpressionEClass = createEClass(ABSTRACT_EXPRESSION);
+		createEReference(abstractExpressionEClass, ABSTRACT_EXPRESSION__FILTER);
+		createEAttribute(abstractExpressionEClass, ABSTRACT_EXPRESSION__ID);
 
 		andEClass = createEClass(AND);
 
 		orEClass = createEClass(OR);
 
-		abstractExpressionEClass = createEClass(ABSTRACT_EXPRESSION);
-		createEReference(abstractExpressionEClass, ABSTRACT_EXPRESSION__FILTER);
-		createEAttribute(abstractExpressionEClass, ABSTRACT_EXPRESSION__ID);
+		expressionEClass = createEClass(EXPRESSION);
+		createEReference(expressionEClass, EXPRESSION__SUB_EXPRESSIONS);
 
 		suitedExpressionEClass = createEClass(SUITED_EXPRESSION);
 
@@ -1030,16 +1030,16 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		typeFilterEClass.getESuperTypes().add(this.getFilter());
 		fileEClass.getESuperTypes().add(this.getUnit());
 		fileEClass.getESuperTypes().add(this.getAbstractFile());
-		directoryEClass.getESuperTypes().add(this.getUnit());
+		directoryEClass.getESuperTypes().add(this.getFile());
 		directoryEClass.getESuperTypes().add(this.getAbstractDirectory());
 		projectEClass.getESuperTypes().add(this.getUnit());
 		projectEClass.getESuperTypes().add(this.getAbstractProject());
 		unitEClass.getESuperTypes().add(this.getAbstractUnit());
-		expressionEClass.getESuperTypes().add(this.getAbstractExpression());
 		andEClass.getESuperTypes().add(this.getAbstractExpression());
 		andEClass.getESuperTypes().add(this.getSuitedExpression());
 		orEClass.getESuperTypes().add(this.getAbstractExpression());
 		orEClass.getESuperTypes().add(this.getSuitedExpression());
+		expressionEClass.getESuperTypes().add(this.getAbstractExpression());
 		suitedExpressionEClass.getESuperTypes().add(this.getAbstractExpression());
 
 		// Initialize classes and features; add operations and parameters
@@ -1124,6 +1124,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		addEOperation(unitEClass, this.getboolean(), "isProject", 0, 1);
 
 		addEOperation(unitEClass, null, "changed");
+
+		addEOperation(unitEClass, null, "remove");
 
 		initEClass(kpmEClass, fr.irisa.triskell.kermeta.kpm.KPM.class, "KPM", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getKPM_Events(), this.getDependencyEvent(), null, "events", null, 0, -1, fr.irisa.triskell.kermeta.kpm.KPM.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1212,13 +1214,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		addEParameter(op, this.getUnit(), "unit", 0, 1);
 		addEParameter(op, this.getArrayList(), "dependents", 0, 1);
 
-		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpression_SubExpressions(), this.getSuitedExpression(), null, "subExpressions", null, 0, -1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(orEClass, Or.class, "Or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(abstractExpressionEClass, AbstractExpression.class, "AbstractExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractExpression_Filter(), this.getFilter(), null, "filter", null, 1, 1, AbstractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractExpression_Id(), this.getString(), "id", null, 0, 1, AbstractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1231,6 +1226,13 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		op = addEOperation(abstractExpressionEClass, this.getString(), "getDependentFrom", 0, 1);
 		addEParameter(op, this.getUnit(), "unit", 0, 1);
+
+		initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(orEClass, Or.class, "Or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExpression_SubExpressions(), this.getSuitedExpression(), null, "subExpressions", null, 0, -1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(suitedExpressionEClass, SuitedExpression.class, "SuitedExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

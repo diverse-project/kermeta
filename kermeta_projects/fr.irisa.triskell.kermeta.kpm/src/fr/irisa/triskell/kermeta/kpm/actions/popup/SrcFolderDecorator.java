@@ -50,8 +50,8 @@ public class SrcFolderDecorator extends LabelProvider implements ILightweightLab
 		IDecoratorManager decoratorManager = KPMPlugin.getDefault().getWorkbench().getDecoratorManager();
 	
 		decoratorManager.setEnabled("fr.irisa.triskell.kermeta.kpm.srcFolderDecorator", true);
-		
-		return (SrcFolderDecorator) decoratorManager.getLabelDecorator(
+
+		return (SrcFolderDecorator) decoratorManager.getBaseLabelProvider(
 		        "fr.irisa.triskell.kermeta.kpm.srcFolderDecorator");
 	}
 

@@ -28,7 +28,8 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 
 	private IFolder folder;
 	
-	StructuredSelection currentSelection;
+	private StructuredSelection currentSelection;
+	
 	
 	public void run(IAction action) {
 		Directory directory = KermetaWorkspace.getInstance().getKpm().findDirectory( folder );
@@ -37,7 +38,7 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 
 			if ( directory != null ) {
 			
-				directory.getKpm().removeDirectory( directory );
+				directory.remove();
 				
 			} else {
 		    	directory = KermetaWorkspace.getInstance().getKpm().createDirectory( folder );				
@@ -47,7 +48,7 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 			}
 			KermetaWorkspace.getInstance().save();
 			
-			SrcFolderDecorator.getDecorator().refresh( folder );
+			SrcFolderDecorator.getDecorator();
 			
 		} catch (CoreException exception) {
 			exception.printStackTrace();

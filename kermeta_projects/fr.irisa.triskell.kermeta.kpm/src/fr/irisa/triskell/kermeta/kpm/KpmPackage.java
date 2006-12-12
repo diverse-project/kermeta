@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.4 2006-12-12 16:06:11 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.5 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -596,7 +596,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__TYPE_NAME = UNIT__TYPE_NAME;
+	int DIRECTORY__TYPE_NAME = FILE__TYPE_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Dependencies</b></em>' reference list.
@@ -605,7 +605,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__DEPENDENCIES = UNIT__DEPENDENCIES;
+	int DIRECTORY__DEPENDENCIES = FILE__DEPENDENCIES;
 
 	/**
 	 * The feature id for the '<em><b>Kpm</b></em>' container reference.
@@ -614,7 +614,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__KPM = UNIT__KPM;
+	int DIRECTORY__KPM = FILE__KPM;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -623,7 +623,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__NAME = UNIT__NAME;
+	int DIRECTORY__NAME = FILE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Dependents</b></em>' reference list.
@@ -632,7 +632,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__DEPENDENTS = UNIT__DEPENDENTS;
+	int DIRECTORY__DEPENDENTS = FILE__DEPENDENTS;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -641,7 +641,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__PATH = UNIT__PATH;
+	int DIRECTORY__PATH = FILE__PATH;
 
 	/**
 	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
@@ -650,7 +650,16 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__LAST_TIME_MODIFIED = UNIT__LAST_TIME_MODIFIED;
+	int DIRECTORY__LAST_TIME_MODIFIED = FILE__LAST_TIME_MODIFIED;
+
+	/**
+	 * The feature id for the '<em><b>Container</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIRECTORY__CONTAINER = FILE__CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Contents</b></em>' reference list.
@@ -659,7 +668,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY__CONTENTS = UNIT_FEATURE_COUNT + 0;
+	int DIRECTORY__CONTENTS = FILE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Directory</em>' class.
@@ -668,7 +677,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIRECTORY_FEATURE_COUNT = UNIT_FEATURE_COUNT + 1;
+	int DIRECTORY_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.
@@ -870,7 +879,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractExpression()
 	 * @generated
 	 */
-	int ABSTRACT_EXPRESSION = 20;
+	int ABSTRACT_EXPRESSION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
@@ -907,43 +916,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 17;
-
-	/**
-	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__FILTER = ABSTRACT_EXPRESSION__FILTER;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__ID = ABSTRACT_EXPRESSION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Sub Expressions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__SUB_EXPRESSIONS = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 1;
+	int EXPRESSION = 20;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AndImpl <em>And</em>}' class.
@@ -1018,6 +991,42 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int OR_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__FILTER = ABSTRACT_EXPRESSION__FILTER;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__ID = ABSTRACT_EXPRESSION__ID;
+
+	/**
+	 * The feature id for the '<em><b>Sub Expressions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__SUB_EXPRESSIONS = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.SuitedExpressionImpl <em>Suited Expression</em>}' class.

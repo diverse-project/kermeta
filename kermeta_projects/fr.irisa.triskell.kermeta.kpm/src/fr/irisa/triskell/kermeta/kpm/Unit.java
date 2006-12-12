@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.5 2006-12-12 16:06:11 ftanguy Exp $
+ * $Id: Unit.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -221,5 +221,13 @@ public interface Unit extends AbstractUnit {
 	 * @generated
 	 */
 	void changed();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void remove();
 
 } // Unit

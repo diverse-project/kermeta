@@ -167,6 +167,11 @@ public class KpmHelper {
 		if ( kpm.findFile(ifile) != null )
 			return;
 
+		String containerPath = ifile.getFullPath().removeLastSegments(1).toString();
+		Directory container = kpm.findDirectory(containerPath);
+		if ( container == null )
+			return;
+		
 		Dependency dependency = kpm.getDependency("d1");
 		
 		File file = KpmFactory.eINSTANCE.createFile();
@@ -178,14 +183,8 @@ public class KpmHelper {
 			file.setKpm(kpm);
 			file.getDependencies().add( dependency );
 			file.setLastTimeModified( new Date() );
-			
-			String containerPath = ifile.getFullPath().removeLastSegments(1).toString();
-			Directory container = kpm.findDirectory(containerPath);
-			if ( container != null ) {
-				container.getContents().add(file);
-				file.setContainer(container);
-			}
-			
+			container.getContents().add(file);
+			file.setContainer(container);
 			kpm.getUnits().add( file );
 		}
 		
@@ -197,11 +196,18 @@ public class KpmHelper {
 		if ( kpm.findDirectory(folder) != null )
 			return null;
 		
+		String containerPath = folder.getFullPath().removeLastSegments(1).toString();
+		Directory container = kpm.findDirectory(containerPath);
+		if ( container == null ) 
+			return null;		
+		
 		Directory directory = KpmFactory.eINSTANCE.createDirectory();
 		directory.setName(folder.getName());
 		directory.setPath(folder.getFullPath().toString());
 		directory.setKpm(kpm);
 		directory.setLastTimeModified( new Date() );
+		container.getContents().add(directory);
+		directory.setContainer(container);
 		kpm.getUnits().add(directory);
 		return directory;
 	}

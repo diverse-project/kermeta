@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.6 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.7 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -394,7 +394,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated NOT
 	 */
 	public void removeFile(File unit) {
-		getUnits().remove(unit);
+		unit.remove();
 	}
 
 	/**
@@ -403,12 +403,7 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * @generated NOT
 	 */
 	public void removeDirectory(Directory unit) {
-		
-		Iterator <File> itOnFiles = unit.getContents().iterator();
-		while ( itOnFiles.hasNext() )
-			removeFile(itOnFiles.next());
-		
-		getUnits().remove(unit);
+		unit.remove();
 	}
 
 	/**

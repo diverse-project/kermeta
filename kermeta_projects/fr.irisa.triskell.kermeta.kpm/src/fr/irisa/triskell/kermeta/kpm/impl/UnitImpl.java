@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.5 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -350,6 +350,17 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 	public void changed() {
 		setLastTimeModified( new Date() );
 		receiveEvent("update");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void remove() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.3 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -84,9 +84,9 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.PROJECT: return createProject();
 			case KpmPackage.KPM: return createKPM();
 			case KpmPackage.ACTION: return createAction();
-			case KpmPackage.EXPRESSION: return createExpression();
 			case KpmPackage.AND: return createAnd();
 			case KpmPackage.OR: return createOr();
+			case KpmPackage.EXPRESSION: return createExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

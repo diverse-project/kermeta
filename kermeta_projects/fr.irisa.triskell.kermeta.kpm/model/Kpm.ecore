@@ -57,7 +57,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//Directory"
         eOpposite="#//Directory/contents"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//Unit #//AbstractDirectory">
+  <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//File #//AbstractDirectory">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//File" eOpposite="#//File/container"/>
   </eClassifiers>
@@ -73,6 +73,7 @@
     <eOperations name="isDirectory" eType="#//boolean"/>
     <eOperations name="isProject" eType="#//boolean"/>
     <eOperations name="changed"/>
+    <eOperations name="remove"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
         eType="#//Dependency"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kpm" eType="#//KPM" eOpposite="#//KPM/units"/>

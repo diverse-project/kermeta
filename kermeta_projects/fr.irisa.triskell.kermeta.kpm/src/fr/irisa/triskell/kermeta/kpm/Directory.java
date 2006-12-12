@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Directory.java,v 1.4 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: Directory.java,v 1.5 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Directory extends Unit, AbstractDirectory {
+public interface Directory extends File, AbstractDirectory {
 	/**
 	 * Returns the value of the '<em><b>Contents</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.File}.

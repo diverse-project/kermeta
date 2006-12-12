@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileImpl.java,v 1.5 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: FileImpl.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -206,6 +206,17 @@ public class FileImpl extends UnitImpl implements File {
 				return container != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void remove() {
+		if ( getContainer() != null )
+			getContainer().getContents().remove(this);
+		getKpm().getUnits().remove(this);
 	}
 
 } //FileImpl
