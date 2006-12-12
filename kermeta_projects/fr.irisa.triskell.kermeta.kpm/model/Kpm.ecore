@@ -2,243 +2,205 @@
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kpm"
-    nsURI="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/kpm.ecore" nsPrefix="kpm">
-  <eClassifiers xsi:type="ecore:EClass" name="KPM">
-    <eOperations name="createFileIfNecessary" eType="#//File">
-      <eParameters name="fileName" eType="#//String"/>
-      <eParameters name="filePath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createFile" eType="#//File">
-      <eParameters name="fileRelativeName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createFileIfNecessary" eType="#//File">
-      <eParameters name="iFile" eType="#//IFile"/>
-    </eOperations>
-    <eOperations name="createFile" eType="#//File">
-      <eParameters name="fileName" eType="#//String"/>
-      <eParameters name="filePath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createFile" eType="#//File">
-      <eParameters name="iFile" eType="#//IFile"/>
-    </eOperations>
-    <eOperations name="findFile" eType="#//File">
-      <eParameters name="fileRelativeName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="findFile" eType="#//File">
-      <eParameters name="fileName" eType="#//String"/>
-      <eParameters name="filePath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="findFile" eType="#//File">
-      <eParameters name="iFile" eType="#//IFile"/>
-    </eOperations>
-    <eOperations name="removeFile">
-      <eParameters name="file" eType="#//File"/>
-    </eOperations>
-    <eOperations name="removeFile">
-      <eParameters name="fileName" eType="#//String"/>
-      <eParameters name="filePath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="removeFile">
-      <eParameters name="iFile" eType="#//IFile"/>
-    </eOperations>
-    <eOperations name="createDirectoryIfNecessary" eType="#//Directory">
-      <eParameters name="directoryName" eType="#//String"/>
-      <eParameters name="directoryPath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createDirectoryIfNecessary" eType="#//Directory">
-      <eParameters name="iDirectory" eType="#//IFolder"/>
-    </eOperations>
-    <eOperations name="createDirectory" eType="#//Directory">
-      <eParameters name="directoryName" eType="#//String"/>
-      <eParameters name="directoryPath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createDirectory" eType="#//Directory">
-      <eParameters name="directoryRelativeName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createDirectory" eType="#//Directory">
-      <eParameters name="iDirectory" eType="#//IFolder"/>
-    </eOperations>
-    <eOperations name="removeDirectory">
-      <eParameters name="directory" eType="#//Directory"/>
-    </eOperations>
-    <eOperations name="removeDirectory">
-      <eParameters name="directoryName" eType="#//String"/>
-      <eParameters name="directoryPath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="removeDirectory">
-      <eParameters name="iDirectory" eType="#//IFolder"/>
-    </eOperations>
-    <eOperations name="findDirectory" eType="#//Directory">
-      <eParameters name="directoryRelativeName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="findDirectory" eType="#//Directory">
-      <eParameters name="directoryName" eType="#//String"/>
-      <eParameters name="directoryPath" eType="#//String"/>
-    </eOperations>
-    <eOperations name="findDirectory" eType="#//Directory">
-      <eParameters name="iFolder" eType="#//IFolder"/>
-    </eOperations>
-    <eOperations name="createProjectIfNecessary" eType="#//Project">
-      <eParameters name="projectName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createProjectIfNecessary" eType="#//Project">
-      <eParameters name="iProject" eType="#//IProject"/>
-    </eOperations>
-    <eOperations name="createProject" eType="#//Project">
-      <eParameters name="projectName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="createProject" eType="#//Project">
-      <eParameters name="iProject" eType="#//IProject"/>
-    </eOperations>
-    <eOperations name="findProject" eType="#//Project">
-      <eParameters name="projectName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="findProject" eType="#//Project">
-      <eParameters name="iProject" eType="#//IProject"/>
-    </eOperations>
-    <eOperations name="removeProject">
-      <eParameters name="projectName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="removeProject">
-      <eParameters name="project" eType="#//Project"/>
-    </eOperations>
-    <eOperations name="removeProject">
-      <eParameters name="iProject" eType="#//IProject"/>
-    </eOperations>
-    <eOperations name="createDependency" eType="#//Dependency">
-      <eParameters name="from" eType="#//Unit"/>
-      <eParameters name="to" eType="#//Unit"/>
-      <eParameters name="typeName" eType="#//String"/>
-      <eParameters name="eventName" eType="#//String"/>
-      <eParameters name="actionsName" eType="#//ArrayList"/>
-    </eOperations>
-    <eOperations name="removeDependencies">
+    nsURI="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore" nsPrefix="kpm">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractFile" eSuperTypes="#//AbstractUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractDirectory" eSuperTypes="#//AbstractUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractProject" eSuperTypes="#//AbstractUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Filter" abstract="true">
+    <eOperations name="apply" eType="#//boolean">
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
-    <eOperations name="removeUnit">
-      <eParameters name="unit" eType="#//Unit"/>
+    <eOperations name="apply" eType="#//boolean">
+      <eParameters name="resource" eType="#//IResource"/>
     </eOperations>
-    <eOperations name="findDependency" eType="#//Dependency">
-      <eParameters name="from" eType="#//Unit"/>
-      <eParameters name="to" eType="#//Unit"/>
-      <eParameters name="typeName" eType="#//String"/>
-      <eParameters name="eventName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="load"/>
-    <eOperations name="removeSafelyDirectory">
-      <eParameters name="directory" eType="#//Directory"/>
-    </eOperations>
-    <eOperations name="removeSafelyFile">
-      <eParameters name="file" eType="#//File"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
-        eType="#//Unit" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
-        eType="#//Dependency" containment="true" eOpposite="#//Dependency/kpm"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Unit" abstract="true">
-    <eOperations name="isFile" eType="#//boolean"/>
-    <eOperations name="isProject" eType="#//boolean"/>
-    <eOperations name="isDirectory" eType="#//boolean"/>
-    <eOperations name="changed"/>
-    <eOperations name="getRelativeName" eType="#//String"/>
-    <eOperations name="getAbsoluteName" eType="#//String"/>
-    <eOperations name="getDependencies" eType="#//HashSet">
-      <eParameters name="type" eType="#//String"/>
-    </eOperations>
-    <eOperations name="getExtension" eType="#//String"/>
-    <eOperations name="receiveEvent">
-      <eParameters name="name" eType="#//String"/>
-    </eOperations>
-    <eOperations name="getDependencies" eType="#//HashSet">
-      <eParameters name="unit" eType="#//Unit"/>
-    </eOperations>
-    <eOperations name="removeDependencies">
-      <eParameters name="to" eType="#//Unit"/>
-    </eOperations>
-    <eOperations name="findDependency" eType="#//Dependency">
-      <eParameters name="to" eType="#//Unit"/>
-      <eParameters name="typeName" eType="#//String"/>
-      <eParameters name="eventName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="getDependenciesUnit" eType="#//ArrayList"/>
-    <eOperations name="getDependenciesWithEvent" eType="#//HashSet">
-      <eParameters name="eventName" eType="#//String"/>
-    </eOperations>
-    <eOperations name="removeDependencies">
-      <eParameters name="type" eType="#//Type"/>
-    </eOperations>
-    <eOperations name="remove"/>
-    <eOperations name="removeDependencies">
-      <eParameters name="type" eType="#//Type"/>
-    </eOperations>
-    <eOperations name="load"/>
-    <eOperations name="removeSafely"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="#//Date"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kpm" eType="#//KPM"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDependencies" upperBound="-1"
-        eType="#//Dependency"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="project" eType="#//Project"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//IResource"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Unit">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//Directory"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NameFilter" eSuperTypes="#//Filter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexIn" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="regexOut" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="boolean" instanceClassName="boolean"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//File">
-    <eOperations name="setSource">
-      <eParameters name="value" eType="#//String"/>
-    </eOperations>
-    <eOperations name="isSource" eType="#//boolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
-        eType="#//File"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractUnit" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//Directory"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency">
+    <eOperations name="process">
+      <eParameters name="unit" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="isExecutable" eType="#//boolean">
+      <eParameters name="unit" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="couldBeExecutable" eType="#//boolean">
+      <eParameters name="unit" eType="#//Unit"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DependencyType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//DependencyEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="in" lowerBound="1" eType="#//AbstractExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outs" upperBound="-1" eType="#//AbstractExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyEvent">
+    <eOperations name="equals" eType="#//boolean">
+      <eParameters name="eventName" eType="#//String"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExistFilter" eSuperTypes="#//Filter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeFilter" eSuperTypes="#//Filter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//AbstractUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Unit #//AbstractFile">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//Directory"
+        eOpposite="#//Directory/contents"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//Unit #//AbstractDirectory">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//File" eOpposite="#//File/container"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Project" eSuperTypes="#//Unit #//AbstractProject"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unit" abstract="true" eSuperTypes="#//AbstractUnit">
+    <eOperations name="receiveEvent">
+      <eParameters name="eventName" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getDependenciesWithEvent" eType="#//ArrayList">
+      <eParameters name="eventName" eType="#//String"/>
+    </eOperations>
+    <eOperations name="isFile" eType="#//boolean"/>
+    <eOperations name="isDirectory" eType="#//boolean"/>
+    <eOperations name="isProject" eType="#//boolean"/>
+    <eOperations name="changed"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Dependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kpm" eType="#//KPM" eOpposite="#//KPM/units"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" upperBound="-1"
+        eType="#//Unit"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="#//Date"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KPM">
+    <eOperations name="getNameFilter" eType="#//NameFilter">
+      <eParameters name="regex" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getAction" eType="#//Action">
+      <eParameters name="name" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getEvent" eType="#//DependencyEvent">
+      <eParameters name="name" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getExpression" eType="#//AbstractExpression">
+      <eParameters name="name" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getDependency" eType="#//Dependency">
+      <eParameters name="name" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findFile" eType="#//File">
+      <eParameters name="relativeName" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findFile" eType="#//File">
+      <eParameters name="name" eType="#//String"/>
+      <eParameters name="path" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findFile" eType="#//File">
+      <eParameters name="ifile" eType="#//IFile"/>
+    </eOperations>
+    <eOperations name="findDirectory" eType="#//Directory">
+      <eParameters name="relativeName" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findDirectory" eType="#//Directory">
+      <eParameters name="name" eType="#//String"/>
+      <eParameters name="path" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findDirectory" eType="#//Directory">
+      <eParameters name="ifolder" eType="#//IFolder"/>
+    </eOperations>
+    <eOperations name="findProject" eType="#//Project">
+      <eParameters name="relativeName" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findProject" eType="#//Project">
+      <eParameters name="name" eType="#//String"/>
+      <eParameters name="path" eType="#//String"/>
+    </eOperations>
+    <eOperations name="findProject" eType="#//Project">
+      <eParameters name="iproject" eType="#//IProject"/>
+    </eOperations>
+    <eOperations name="removeFile">
+      <eParameters name="unit" eType="#//File"/>
+    </eOperations>
+    <eOperations name="removeDirectory">
+      <eParameters name="unit" eType="#//Directory"/>
+    </eOperations>
+    <eOperations name="removeProject">
+      <eParameters name="unit" eType="#//Project"/>
+    </eOperations>
+    <eOperations name="removeFile">
+      <eParameters name="unit" eType="#//IFile"/>
+    </eOperations>
+    <eOperations name="removeDirectory">
+      <eParameters name="unit" eType="#//IFolder"/>
+    </eOperations>
+    <eOperations name="removeProject">
+      <eParameters name="unit" eType="#//IProject"/>
+    </eOperations>
+    <eOperations name="createDirectory" eType="#//Directory">
+      <eParameters name="ifolder" eType="#//IFolder"/>
+    </eOperations>
+    <eOperations name="getType" eType="#//DependencyType">
+      <eParameters name="name" eType="#//String"/>
+    </eOperations>
+    <eOperations name="getExistFilter" eType="#//ExistFilter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//DependencyEvent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Dependency" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filters" upperBound="-1"
+        eType="#//Filter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//DependencyType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
+        eType="#//Unit" containment="true" eOpposite="#//Unit/kpm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eOperations name="execute">
+      <eParameters name="unit" eType="#//Unit"/>
+      <eParameters name="dependents" eType="#//ArrayList"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractExpression" abstract="true">
+    <eOperations name="evaluate" eType="#//boolean">
+      <eParameters name="unit" eType="#//Unit"/>
+    </eOperations>
+    <eOperations name="evaluate" eType="#//boolean">
+      <eParameters name="resource" eType="#//IResource"/>
+    </eOperations>
+    <eOperations name="getDependentFrom" eType="#//String">
+      <eParameters name="unit" eType="#//Unit"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="filter" lowerBound="1"
+        eType="#//Filter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//AbstractExpression #//SuitedExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//AbstractExpression #//SuitedExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//AbstractExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subExpressions" upperBound="-1"
+        eType="#//SuitedExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SuitedExpression" abstract="true" eSuperTypes="#//AbstractExpression"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ArrayList" instanceClassName="java.util.ArrayList"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="boolean" instanceClassName="boolean"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IFile" instanceClassName="org.eclipse.core.resources.IFile"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IFolder" instanceClassName="org.eclipse.core.resources.IFolder"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IProject" instanceClassName="org.eclipse.core.resources.IProject"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Dependency">
-    <eOperations name="process"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Event"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="#//Action" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Unit"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Unit"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="kpm" eType="#//KPM" eOpposite="#//KPM/dependencies"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Type">
-    <eOperations name="equals" eType="#//boolean">
-      <eParameters name="type" eType="#//Type"/>
-    </eOperations>
-    <eOperations name="equals" eType="#//boolean">
-      <eParameters name="type" eType="#//String"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Action">
-    <eOperations name="execute">
-      <eParameters name="dependency" eType="#//Dependency"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event">
-    <eOperations name="equals" eType="#//boolean">
-      <eParameters name="event" eType="#//Event"/>
-    </eOperations>
-    <eOperations name="equals" eType="#//boolean">
-      <eParameters name="name" eType="#//String"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="ArrayList" instanceClassName="java.util.ArrayList"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="HashSet" instanceClassName="java.util.HashSet"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="EnumSet" instanceClassName="java.util.EnumSet"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="IResource" instanceClassName="org.eclipse.core.resources.IResource"
-      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IResource" instanceClassName="org.eclipse.core.resources.IResource"/>
 </ecore:EPackage>

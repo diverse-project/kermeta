@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
+  <model href="Kpm.ecore#/"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="1842,246">
+    <property key="pageFormatName" value="A1"/>
+    <property key="diagramWidth" value="2376"/>
+    <property key="diagramHeight" value="3364"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="Kpm.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="1859,604" size="103,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.30 //@diagrams.0/@contained.31"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//AbstractFile"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractFile"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractFile"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1983,607" size="135,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.32 //@diagrams.0/@contained.33"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//AbstractDirectory"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractDirectory"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractDirectory"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2145,607" size="123,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.34 //@diagrams.0/@contained.35"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//AbstractProject"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractProject"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractProject"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1539,9" size="192,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.36 //@diagrams.0/@contained.37 //@diagrams.0/@contained.38 //@diagrams.0/@contained.39 //@diagrams.0/@contained.40"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Filter"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Filter"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Filter"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Filter/apply"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Filter/apply.1"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1407,142" size="135,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.36"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//NameFilter"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//NameFilter"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//NameFilter/regexIn"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//NameFilter/regexOut"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//NameFilter"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="5,9" size="199,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//String"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1978,499" size="142,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.30 //@diagrams.0/@contained.32 //@diagrams.0/@contained.34 //@diagrams.0/@contained.41 //@diagrams.0/@contained.42"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//AbstractUnit"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractUnit"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//AbstractUnit/typeName"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractUnit"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2489,472" size="237,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.43 //@diagrams.0/@contained.44 //@diagrams.0/@contained.45 //@diagrams.0/@contained.46 //@diagrams.0/@contained.47 //@diagrams.0/@contained.48 //@diagrams.0/@contained.49"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Dependency"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Dependency"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Dependency/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Dependency"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Dependency/process"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Dependency/isExecutable"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Dependency/couldBeExecutable"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2530,198" size="135,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.43 //@diagrams.0/@contained.50"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//DependencyType"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//DependencyType"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//DependencyType/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//DependencyType"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2917,485" size="173,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.44 //@diagrams.0/@contained.51"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//DependencyEvent"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//DependencyEvent"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//DependencyEvent/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//DependencyEvent"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//DependencyEvent/equals"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1682,140" size="92,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.37"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//ExistFilter"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//ExistFilter"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//ExistFilter"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1559,142" size="91,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.38 //@diagrams.0/@contained.41"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//TypeFilter"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//TypeFilter"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//TypeFilter"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1889,748" size="54,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.31 //@diagrams.0/@contained.52 //@diagrams.0/@contained.53 //@diagrams.0/@contained.54"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//File"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//File"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//File"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1995,748" size="86,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.33 //@diagrams.0/@contained.52 //@diagrams.0/@contained.53 //@diagrams.0/@contained.55"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Directory"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Directory"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Directory"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2170,736" size="74,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.35 //@diagrams.0/@contained.56"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Project"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Project"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Project"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1962,882" size="304,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.42 //@diagrams.0/@contained.45 //@diagrams.0/@contained.54 //@diagrams.0/@contained.55 //@diagrams.0/@contained.56 //@diagrams.0/@contained.57 //@diagrams.0/@contained.58 //@diagrams.0/@contained.59"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.57"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Unit"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Unit"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/name"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/path"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/lastTimeModified"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Unit"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/receiveEvent"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/getDependenciesWithEvent"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/isFile"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/isDirectory"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/isProject"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Unit/changed"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2812,718" size="287,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.39 //@diagrams.0/@contained.46 //@diagrams.0/@contained.50 //@diagrams.0/@contained.51 //@diagrams.0/@contained.58 //@diagrams.0/@contained.59 //@diagrams.0/@contained.60 //@diagrams.0/@contained.61"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//KPM"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//KPM"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getNameFilter"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getAction"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getEvent"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getExpression"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getDependency"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findFile"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findFile.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findFile.2"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findDirectory"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findDirectory.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findDirectory.2"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findProject"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findProject.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/findProject.2"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/removeFile"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/removeDirectory"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/removeProject"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/removeFile.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/removeDirectory.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/removeProject.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/createDirectory"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getType"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//KPM/getExistFilter"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2724,193" size="170,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.47 //@diagrams.0/@contained.60"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Action"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Action"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Action/name"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Action"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//Action/execute"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1972,9" size="225,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.40 //@diagrams.0/@contained.48 //@diagrams.0/@contained.49 //@diagrams.0/@contained.62 //@diagrams.0/@contained.63"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//AbstractExpression"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractExpression"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//AbstractExpression/id"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//AbstractExpression"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//AbstractExpression/evaluate"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//AbstractExpression/evaluate.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="Kpm.ecore#//AbstractExpression/getDependentFrom"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2022,267" size="56,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.64"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//And"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//And"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//And"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1884,264" size="50,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.65"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Or"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Or"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Or"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="2222,167" size="98,-1">
+      <property key="backgroundColor" value="255,255,0"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.61 //@diagrams.0/@contained.62 //@diagrams.0/@contained.66"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Expression"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Expression"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//Expression"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1938,164" size="135,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.63 //@diagrams.0/@contained.64 //@diagrams.0/@contained.65 //@diagrams.0/@contained.66"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//SuitedExpression"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//SuitedExpression"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="Kpm.ecore#//SuitedExpression"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="215,9" size="210,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//ArrayList"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="425,9" size="154,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//boolean"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="1,82" size="291,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//IFile"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="321,90" size="306,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//IFolder"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="13,146" size="311,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//IProject"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="7,225" size="186,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Date"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="217,225" size="326,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//IResource"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.13/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.14/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/filters"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.18/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//AbstractExpression/filter"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//TypeFilter/type"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -397, 65, 58]</waypoints>
+      <waypoints>[-65, -397, 0, 58]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Dependency/type"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.9/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Dependency/event"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Unit/dependencies"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/dependencies"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.17/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Dependency/actions"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Dependency/in"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-314, -170, 209, 293]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Dependency/outs"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-209, -463, 314, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/types"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.9/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/events"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.13/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//File/container"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.13/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Directory/contents"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, 61, -198, -151]</waypoints>
+      <waypoints>[198, 61, 0, -151]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.13/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, 61, -76, -151]</waypoints>
+      <waypoints>[76, 61, 0, -151]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.14/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, 74, 93, -150]</waypoints>
+      <waypoints>[-93, 74, 0, -150]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Unit/dependents"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.16/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Unit/kpm"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/units"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.17/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/actions"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//KPM/expressions"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.21/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.22/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.22/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.20/@anchorage.0 //@diagrams.0/@contained.22/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.21/@anchorage.0 //@diagrams.0/@contained.22/@anchorage.0">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="Kpm.ecore#//Expression/subExpressions"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
