@@ -1,0 +1,5 @@
+_$_$_flora'dyn_newoid5556[$order->0].  // @att
+_$_$_flora'dyn_newoid5556[foo->>_$_$_flora'dyn_newoid5559].  // @att
+_$_$_flora'dyn_newoid5559[$order->1].  // @att
+_$_$_flora'dyn_newoid5559[bar->10].  // @att
+_$_$_flora'dyn_newoid5556[$child(0)->_$_$_flora'dyn_newoid5559].  // @att

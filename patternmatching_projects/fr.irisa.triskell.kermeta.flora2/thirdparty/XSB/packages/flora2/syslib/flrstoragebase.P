@@ -1,0 +1,266 @@
+/* File:      flrstoragebase.P - access to base facts
+**
+** Author(s): Michael Kifer
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2006
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+%% This file exists in order to isolate Flora's access to base facts
+%% and make it possible to easily switch the access methods
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_porting.flh"
+
+:- export
+	flora_db_insert_base/2,
+	flora_db_delete_base/2,
+	flora_db_insert_base_bt/2,
+	flora_db_delete_base_bt/2,
+	flora_db_find_base/2,
+	flora_db_delete_all/1,
+	flora_db_commit/1,
+	flora_db_reclaim_space/1,
+	flora_storage_insert_fact_bt/3,
+	flora_storage_delete_fact_bt/3,
+	flora_storage_insert_fact/3,
+	flora_storage_delete_fact/3,
+	flora_storage_find_fact/2.
+
+
+:- import trie_intern/5, trie_interned/4, trie_unintern_nr/2,
+	unmark_uninterned_nr/2,
+	delete_trie/1,
+	trie_reclaim_uninterned_nr/1
+   from intern.
+
+:- import flora_refresh_tables/1 from flrtables.
+
+:- import flora_call_hooks/5 from flrhooks.
+
+
+:- import flora_trim_last/2 from flrtrim.
+
+:- import
+	 flora_storage_module/2,
+	 flora_is_fdb_storage/1
+   from flrwrapper.
+
+
+%% Lop off the last argument before inserting/querying the database
+%% exported
+flora_db_insert_base(StorageName,Call) :-
+	flora_trim_last(Call, CallSansCaller),
+	flora_storage_module(StorageName,Module),
+	%% Hooks get CallSansCaller as argument. Always use _ as the last arg.
+	%% This var is used by around-hooks to pass info from before to after
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,INSERTFACT,CallSansCaller,before,AroundHookLink)),
+	flora_storage_insert_fact(StorageName,CallSansCaller,_ResultFlag),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,INSERTFACT,CallSansCaller,after,AroundHookLink)).
+
+%% exported
+/*
+   Logic for interacting with DB interface:
+      delete from database is in the after-hook
+      If Call is in memory or in DB:
+          Since we are calling flora_db_delete_base, we must have queried
+	    Call before and the result was true. So, we first delete
+	    from memory and then the afterhook deletes from DB, if any.
+      If Call is not in memory or in DB, we don't even get here.
+          This is because flora_db_delete_base is called only after
+	  we queried that Call is true. (Such a query will also check the DB.)
+*/
+flora_db_delete_base(StorageName,Call) :-
+	flora_trim_last(Call, CallSansCaller),
+	flora_storage_module(StorageName,Module),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,DELETEFACT,CallSansCaller,before,AroundHookLink)),
+	%%may or may not be present in main memory.
+	flora_storage_delete_fact(StorageName,CallSansCaller,_ResultFlag),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,DELETEFACT,CallSansCaller,after,AroundHookLink)).
+
+%% exported
+flora_db_insert_base_bt(StorageName,Call) :-
+	flora_trim_last(Call, CallSansCaller),
+	flora_storage_module(StorageName,Module),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,INSERTFACT,CallSansCaller,before,AroundHookLink)),
+	flora_storage_insert_fact_bt(StorageName,CallSansCaller,Call,_ResultFlag),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,INSERTFACT,CallSansCaller,after,AroundHookLink)).
+
+%% exported
+flora_db_delete_base_bt(StorageName,Call) :-
+	flora_trim_last(Call, CallSansCaller),
+	flora_storage_module(StorageName,Module),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,DELETEFACT,CallSansCaller,before,AroundHookLink)),
+	flora_storage_delete_fact_bt(StorageName,CallSansCaller,Call,_ResultFlag),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,DELETEFACT,CallSansCaller,after,AroundHookLink)).
+
+
+%% Used to search database of facts
+%% exported
+flora_db_find_base(StorageName,Call) :-
+	flora_trim_last(Call, CallSansCaller),
+	flora_storage_module(StorageName,Module),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,FINDFACT,CallSansCaller,before,AroundHookLink)),
+	flora_storage_find_fact(StorageName,CallSansCaller),
+	call_if_fdb_storage(StorageName,
+			    flora_call_hooks(Module,FINDFACT,CallSansCaller,after,AroundHookLink)).
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Here we need to implement backtrackable updates using assert and retract_nr
+
+#include "storage_xsb_defs.h"
+#include "builtin.h"
+
+
+storage_builtin(_BuiltinNumber,_StorageName,_Handle,_Snapshot,_Changed) :-
+	'_$builtin'(STORAGE_BUILTIN).
+
+
+%% Inserts facts. On backtracking, the fact is deleted.
+flora_storage_insert_fact_bt(StorageName,Fact,Call,Inserted) :-	
+	triehandle_for_storage(StorageName,H,Snapshot),
+	trie_intern(Fact, H, Leaf, New, _),
+	(New == 0
+	->  Inserted=1,  % new fact inserted
+	    mark_storage_changed_bt(StorageName),
+	    (  true
+	    ; %% On backtracking
+		triehandle_for_storage(StorageName,_,NewSnapshot),
+		(NewSnapshot =< Snapshot
+		-> trie_unintern_nr(H, Leaf),
+		    %% Here we only refresh on backtracking.  Normal
+		    %% refresh is done in flrbtdbop.P and flrdbop.P
+		    %% Can't be done here (esp. in flora_storage_insert_fact:
+		    %% this predicate is too low level and is used elsewhere.
+		    %% Refreshig of tables at this low level can be dangerous
+		    flora_refresh_tables(Call),
+		    fail 
+		)
+	    )
+	; Inserted=0	 % fact was already there: no action
+	).
+
+
+%% Nonbacktrackable insert
+flora_storage_insert_fact(StorageName,Fact,Inserted) :-	
+	triehandle_for_storage(StorageName,H,_),
+	trie_intern(Fact, H, _Leaf, New, _),
+	(New == 0
+	->  Inserted=1   % new fact inserted
+	; Inserted=0	 % fact was already there: no action
+	).
+
+
+%% Backtrackable delete.
+%% Doesn't remove anything, but instead "marks" for deletion.
+%% On backtracking: unmarks facts that are marked for deletion
+
+flora_storage_delete_fact_bt(StorageName,Fact,Call,Deleted) :-
+	triehandle_for_storage(StorageName,H,Snapshot),
+	(trie_interned(Fact, H, Leaf, _)
+	->  Deleted=1,   % existing fact deleted
+	    mark_storage_changed_bt(StorageName),
+	    ( trie_unintern_nr(H, Leaf)
+	    ; %% On backtracking
+		triehandle_for_storage(StorageName,_,NewSnapshot),
+		(NewSnapshot =< Snapshot
+		-> unmark_uninterned_nr(H, Leaf),
+		    %% Here we only refresh on backtracking.  Normal
+		    %% refresh is done in flrbtdbop.P and flrdbop.P
+		    %% Can't be done here (esp. in flora_storage_delete_fact:
+		    %% this predicate is too low level and is used elsewhere.
+		    %% Refreshig of tables at this low level can be dangerous
+		    flora_refresh_tables(Call),
+		    fail
+		)
+	    )
+	;   Deleted=0    % non-existing fact: no action
+	).
+
+%% Nonbacktrackable delete
+flora_storage_delete_fact(StorageName,Fact,Deleted) :-
+	triehandle_for_storage(StorageName,H,_),
+	(trie_interned(Fact, H, Leaf, _)
+	->  Deleted=1,   % existing fact deleted
+	    trie_unintern_nr(H, Leaf)
+	;   Deleted=0    % non-existing fact: no action
+	).
+
+%% deletes the whole trie
+%% exported
+flora_db_delete_all(StorageName) :- 
+	triehandle_for_storage(StorageName,H,_),
+	storage_builtin(DESTROY_STORAGE_HANDLE,StorageName,_,_,_),
+	delete_trie(H).
+
+
+%% Find fact in storage
+flora_storage_find_fact(StorageName,Fact) :-
+	triehandle_for_storage(StorageName,H,_),
+	trie_interned(Fact, H, _, _).
+
+
+
+%% Commit changes to the storage trie associated with StorageName
+%% (only if storage has been changed)
+%% exported
+flora_db_commit(StorageName) :-
+	( storage_builtin(INCREMENT_STORAGE_SNAPSHOT,StorageName,_,_,_),
+	    !
+	%% don't backtrack over it
+	; fail
+	).
+
+%% Reclaims space by removing nodes from the backtrackable insert/keypair trie
+%% which were marked for deletion. This should be done only at the top 
+%% level of a query.
+%% exported
+flora_db_reclaim_space(StorageName) :-
+	triehandle_for_storage(StorageName,H,_),
+	trie_reclaim_uninterned_nr(H).
+
+
+%% Create a new trie or use an existing one 
+%% that is already saved as a property of StorageName
+triehandle_for_storage(StorageName,Handle,Snapshot) :-
+	storage_builtin(GET_STORAGE_HANDLE,StorageName,Handle,Snapshot,_).
+
+
+%% This one seems no longer used. Check!!!
+mark_storage_changed_bt(StorageName) :-
+	storage_builtin(MARK_STORAGE_CHANGED,StorageName,_,_,_).
+
+
+%% Call Goal, if StorageName is FDB storage
+call_if_fdb_storage(StorageName,Goal) :-
+	(flora_is_fdb_storage(StorageName) -> Goal; true).

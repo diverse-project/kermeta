@@ -1,0 +1,471 @@
+\chapter[SGML and XML Parser for \FLORA]{SGML and XML Parsers for \FLORA\\ {by Rohan Shirwaikar}}
+
+
+
+    This chapter documents the \FLORA package that provides SGML and
+    XPath parsing capabilities. One set of predicates supports parsing
+    SGML, XML, and HTML documents, which creates \FLORA objects in the user
+    specified module. Other predicates evaluate XPath queries
+    on XML documents and create \FLORA objects in user specified
+    modules. The predicates make use of the {\bf sgml} and {\bf xpath}
+    packages of XSB.
+ 
+
+
+\section{Summary of the Predicates}
+
+\begin{longtable}[l]{ll}
+  {\bf \%load\_xml\_structure/3}&Parse XML data into \FLORA objects\\
+  {\bf \%load\_sgml\_structure/3}&Parse SGML data into \FLORA objects\\
+  {\bf \%load\_html\_structure/3}&Parse HTML data into \FLORA objects\\
+  {\bf \%load\_xhtml\_structure/3}&Parse XHTML data into \FLORA objects\\
+  {\bf \%parse\_xpath\_xml/3}&Apply an XPath expression to an XML
+  document and parse the result\\
+  {\bf \%parse\_xpath\_sgml/4}&Apply an XPath expression to an SGML
+  document and parse the result\\
+  {\bf \%parse\_xpath\_html/4}&Apply an XPath expression to an HTML document and parse the result\\
+  {\bf \%parse\_xpath\_xhtml/4}&Apply an XPath expression to an XHTML document and parse the result\\
+\end{longtable}
+
+\section{Description}
+
+This package supports parsing SGML, XML, and HTML documents,
+converting them to sets of \FLORA objects stored in user-specified
+\FLORA modules. The SGML interface
+provides facilities to parse input in the form of files,
+URLs and strings (Prolog atoms).  
+
+For example, the following XML snippet
+
+\begin{verbatim}
+<greeting id='1'>
+<first ssn=111'>
+John
+</first>
+</greeting>
+\end{verbatim}
+
+will be converted into the following \FLORA objects:
+
+\begin{verbatim}
+o1[ element -> {o2}]
+o2[ id = '1']
+o2[ first -> {o3}]
+o2[ ssn -> '111']
+\end{verbatim}
+
+To load the {\tt flrxml} package, the user should run the
+following command at the \FLORA prompt.
+
+%%
+\begin{verbatim}
+  flora?- [flrxml]. 
+\end{verbatim}
+%%
+
+The following predicates are provided by the {\tt flrxml} package.  They
+take SGML, XML, HTML, or XHTML documents and create the corresponding
+\FLORA objects as specified in Section~\ref{xml-to-flora}.
+
+\begin{description}
+\item [\%load\_sgml\_structure({\tt +?Source,-?Warn,+?Module})@flrxml]
+\item[\%load\_xml\_structure({\tt +?Source,-?Warn,+?Module})@flrxml]
+\item[\%load\_html\_structure({\tt +?Source,-?Warn,+?Module})@flrxml]
+\item[\%load\_xhtml\_structure({\tt +?Source,-?Warn,+?Module})@flrxml]
+\end{description}
+%%
+The arguments to these predicates have the following meaning:
+
+{\tt ?Source} is an input SGML, XML, HTML, or XHTML document.
+It is of the form {\tt url({\tt {url}})},
+{\tt file('{\tt {file name}}')} or {\tt string('{\tt document as a string}')}. 
+{\tt ?Module} is the name of the \FLORA module where the objects created
+by {\tt flrxml}  should be placed. {\tt ?Module}  must be bound.
+{\tt ?Warn} gets bound to a list of warnings, if any are generated, or to
+an empty list.
+  
+
+\section{XPath Support}
+
+XPath support is based on the XSB {\tt xpath} package, which must be
+configured as explained in the XSB manual. This package, in turn, relies on
+the XML parser called {\tt libxml2}. It comes with most Linux
+distributions and is also available for Windows, MacOS, and other
+Unix-based systems from {\tt http://xmlsoft.org}. 
+Note that both the library itself and the {\tt .h} files of that
+library must be installed. 
+
+The following predicates are provided. They select parts of the input
+document using the provided XPath expression and create \FLORA objects as
+specified in Section~\ref{xml-to-flora}. These predicates handle XML, SGML,
+HTML, and XHTML, respectively.
+
+\begin{description}
+\item[\%parse\_xpath\_xml({\tt +?Source,+?XPath,+?NamespacePrefixList,-?Warn,+?Module})@flrxml]
+\item[\%parse\_xpath\_sgml({\tt +?Source,+?XPath,+?NamespacePrefixList,-?Warn,+?Module})@flrxml]
+\item[\%parse\_xpath\_html({\tt +?Source,+?XPath,+?NamespacePrefixList,-?Warn,+?Module})@flrxml]
+\item[\%parse\_xpath\_xhtml({\tt +?Source,+?XPath,+?NamespacePrefixList,-?Warn,+?Module})@flrxml]
+\end{description}
+%%
+The arguments have the following meaning:
+
+{\tt Source} specifies the input document; this parameter has the same
+format as in {\tt \%load\_structure}. {\tt ?XPath} is an XPath expression
+specified as a Prolog atom. \emph{?Module} is the module where the resulting
+\FLORA objects should be placed. {\tt ?Module} must be bound. \emph{?Warn}
+gets bound to a list of warnings, if any are generated during the
+processing, or to an empty list.
+
+{\tt ?NamespacePrefixList} is a string that looks like a
+space separated list of items of the form {\tt
+  \emph{prefix} = \emph{namespaceURL}}. This allows one to use namespace
+prefixes in the
+XPath query given in the \emph{?XPath} parameter.
+For example if the XPath expression is {\tt '/x:html/x:head/x:meta'}
+where {\tt x} 
+stands for {\tt 'http://www.w3.org/1999/xhtml'}, then this
+prefix would have to be
+defined in {\tt ?NamespacePrefixList}:
+
+%%
+\begin{verbatim}	
+    parse_xpath_xhtml(url('http://w3.org'),
+                      '/x:html/x:head/x:meta',
+                      'x=http://www.w3.org/1999/xhtml',
+                      ?Warnings,
+                      foomodule)@flrxml.
+\end{verbatim}
+%%
+
+
+
+\section{Mapping XML to \FLORA}\label{xml-to-flora}
+
+This mapping is based on a proposal by Guizhen Yang.
+It specifies how an XML parser can construct the
+corresponding F-logic objects as a result of parsing an input XML
+document.
+
+The basic idea is as follows:
+\begin{itemize}
+\item Elements in XML are modeled as objects in F-logic.
+
+\item Subelements in XML are modeled as multivalued attributes in F-logic.
+
+\item Element attributes in XML are modeled as single-valued attributes
+    in F-logic. This complies to the XML 1.0 specification which states
+    that an attribute be defined only once for each element in an XML
+    document.
+\end{itemize}
+
+This proposal deals with data-intensive XML documents, i.e., those that
+don't rely on the interpretation of comments or processing instructions to
+carry data. However, this proposal does consider the modeling of mixed
+element content in which text and subelements are interspersed.
+
+We do not consider modeling XML entities either, assuming no entity
+references or that all entity references in the original XML document
+are already resolved by an XML parser.
+
+
+
+\subsection{Object Ids}
+
+According to the XML specification 1.0, an XML element can be defined
+with an oid that is unique across the document. Such an oid can be
+provided as the value of an element attribute of type ID, although
+this attribute can be arbitrarily named. Since an XML element is
+modeled as an F-logic object, we would like the oid of this object to
+take the value of any ID attribute if such value is defined.
+Otherwise, the oid must be automatically generated by the system.
+
+Sitting on top of the XML root element, there is an additional root
+object which just functions as the access point to the entire object
+hierarchy.
+
+Note:
+\begin{itemize}
+\item Only a validating XML parser can decide whether an attribute
+    is an ID attribute since such definition is provided by a DTD.
+
+\item The oids of leaf nodes, which have no outgoing edges and carry
+    plain text, are just the string values.
+\end{itemize}
+
+For example, the following XML document:
+
+%%
+\begin{verbatim}
+<?xml version="1.0"?>
+<person ssn="111-22-3333">
+  <name first="John"                       (Example 1)
+        last="Smith"/>
+</person>
+\end{verbatim}
+%%
+is represented by the following F-logic objects, provided we already
+know that {\tt ssn}  is an ID attribute:
+%%
+\begin{verbatim}
+   o1[person -> {'111-22-3333'}].
+   '111-22-3333'[ssn -> '111-22-3333',
+                 name -> {o2}
+                ].
+   o2[first -> 'John', last -> 'Smith'].
+\end{verbatim}
+%%
+
+
+\subsection{Text and Mixed Element Content}
+
+The content of an XML element may consist of plain text, or
+subelements interspersed with plain text, for instance:
+
+%%
+\begin{verbatim}
+  <greeting>Hi! My name is <first>John</first> <last>Smith</last>.</greeting> 
+\end{verbatim}
+%%
+
+Each text segment is modeled in F-logic as if it were referred to by a
+special tag, named {\tt '\$text'}.  Corresponding to each text segment, a node
+is created and is referred to from the parent node by an edge labeled
+{\tt '\$text'}. The text becomes the value of a special single-valued
+attribute, named {\tt '\$string'},  of the newly created node. Moreover, if the
+content of an XML element consists solely of plain text, then the text
+also becomes the value of a special single-valued attribute of this
+element, named {\tt '\$content'},  which is introduced for convenience purpose.
+
+Therefore, the above XML segment would generate the following F-logic
+objects, where {\tt o1, ..., o9}   are new oids:
+
+\begin{verbatim}
+o1[greeting -> {o2}].
+o2['$text' -> {o3},
+   first -> {o4},
+   '$text' -> {o6},
+   last  -> {o7},
+   '$text' -> {o9}
+  ].
+o3['$string' -> 'Hi! My name is '].
+o4['$content' -> 'John', '$text' -> {o5}].
+o5['$string' -> 'John'].
+o6['$string' -> ' '].
+o7['$content' -> 'Smith', '$text' -> {o8}].
+o8['$string' -> 'Smith'}.
+o9['$string' -> '.'].
+\end{verbatim}
+
+Note:
+\begin{itemize}
+\item Handling of the whitespaces depends on the application. In the
+  examples shown here, we assume that
+  ``insignificant'' whitespaces have been omitted by the XML parser.
+\item {\tt '\$content'}  can also be defined for every element. Its value is
+    just the ASCII string as it appeared in the original document.
+\end{itemize}
+
+\subsection{Multivalued XML Attributes}
+
+XML element attributes of type IDREFS are multivalued, in the sense
+that their value is a string consisting of one or more oids separated
+by whitespaces. Therefore, the value of such an attribute is a set. To
+stick to the convention that element attributes are modeled as
+single-valued attributes in F-logic, the value of an XML IDREFS
+attribute is represented as a list.
+
+For example, the following XML segment:
+%%
+\begin{verbatim}
+<paper id="yk00" references="klw95 ckw91">
+  <title>paper title</title>
+</paper>
+\end{verbatim}
+%%
+will generate the following F-logic atoms, assuming that the
+{\tt reference}  attribute is of type IDREFS:
+%%
+\begin{verbatim}
+yk00[references -> [klw95,ckw91],
+       title -> {o1}
+      ].
+o1['$content' -> 'paper title', '$text' -> {o2}].
+o2['$string' -> 'paper title'].
+\end{verbatim}
+%%
+Note that since attribute definitions are provided by DTDs, only a
+validating XML parser can decide whether an element attribute has the type
+IDREFS.  A non-validating parser should just output the attribute values as
+strings. The semantics of these strings is subject to further
+interpretation by the applications.
+
+
+\subsection{Ordering}
+
+XML is order-sensitive, since XML DTDs impose order among elements.
+For example, the following DTD element definition
+%%
+\begin{verbatim}
+  <!ELEMENT book (author+, title, ISBN?)> 
+\end{verbatim}
+%%
+states that the content of a {\tt book}  element consists of one or more
+{\tt author}  element, followed by one {\tt title}  element, followed by an
+optional {\tt ISBN}  element.
+Note that XML 1.0 does not prescribe any order among element attributes.
+
+Preserving the order of elements can also be useful for translating F-logic
+objects back into an XML document.
+
+A total order among the elements in an XML document should suffice to
+establish the order in which the elements appear sequentially in the
+XML document. In other words, such a total order should correspond to
+the order in which the element open tags appear. In addition, the
+ordering should also take into account the mixed element contents in
+which each text segment is referred to by a {\tt '\$text'}  attribute.
+
+\begin{verbatim}
+<?xml version="1.0"?>
+<person ssn="111-22-3333">
+  <name>
+    <first>John</first>                       (Example 2)
+    <last>Smith</last>
+  </name>
+  <email>jsmith@abc.com</email>
+</person>
+\end{verbatim}
+
+
+For example, the XML document in Example 2 can be represented by the
+following tree, in which the integers enclosed by parentheses beside
+the nodes represent the order assigned to the elements:
+
+\begin{verbatim}
+                    o1 (0)
+                    |
+                    | person
+                    |
+               '111-22-3333' (1)
+                   / \
+             name /   \ email
+                 /     \
+            (2) o2     o7 (7)
+               / \       \ 
+        first /   \last   \ '$text'
+             /     \       \
+        (3) o3     o5 (5)  o8 (8)
+            |      |       'jsmith@abc.com'
+    '$text' |      |'$text'
+            |      |
+        (4) o4     o6 (6)
+           'John'  'Smith'
+\end{verbatim}
+
+Pre-order traversal of the XML tree will generate the total order for
+the XML elements and text segments.
+
+The ordering information that exists in XML documents is encoded as
+follows. For each node, we introduce a special single-valued attribute,
+named {\tt '\$order'}, which stores the order number.
+
+\begin{verbatim}
+<bibliography>
+<paper id="sb97">
+  <author>
+    <first>John</first>
+    <last>Smith</last>
+  </author>
+  <author>
+    <first>David</first>
+    <last>Brown</last>
+  </author>                                  (Example 3)
+</paper>
+
+<paper id="s91">
+  <author>
+    <first>John</first>
+    <last>Smith</last>
+  </author>
+</paper>
+</bibliography>
+\end{verbatim}
+
+
+\subsection{More on Special Attributes}
+
+The following special attributes are all single-valued.  Note that
+this proposal does not intend to eliminate redundant information that
+may exist across various attributes. It is up to the implementation to
+decide whether to generate these attributes extensionally or
+intentionally.
+
+\begin{enumerate}
+\item {\tt '\$tag'} \\
+For each node, {\tt '\$tag'}  returns the unordered label of the edge
+pointing to this node. {\tt '\$tag'}  can be defined as follows:
+  %%
+  \begin{verbatim}
+     O['$tag' -> Tag] :- _[Tag -> {O}].
+  \end{verbatim}
+  %%
+Note that for a node representing a text segment, the value of
+its {\tt '\$tag'}  attribute is {\tt '\$text'}. 
+
+\item {\tt '\$parent'} \\
+For each node, {\tt '\$parent'}  returns the oid of the parent node.
+
+\item {\tt '\$leftSibling'} \\
+For each node, {\tt '\$leftSibling'}  returns the oid of the node appearing
+immediately before the current node. This attribute is not defined
+for the nodes without a left sibling.
+
+\item {\tt '\$rightSibling'} \\
+For each node, {\tt '\$rightSibling'}  returns the oid of the node appearing
+immediately after the current node. This attribute is not defined
+for those nodes without a right sibling.
+
+\item {\tt '\$childrenNum'} \\
+For each node, {\tt '\$childrenNum'}  returns the number of children including
+nodes representing text segments.
+
+\item {\tt '\$childrenList'} \\
+For each node, {\tt '\$childrenList'}  returns a list, which is ordered, of the
+oids of its children. Note that each text segment is also counted
+as a child node.
+
+\item {\tt '\$child'(N)} \\
+For each node, {\tt '\$child'(N)} returns the {\tt N}-th child, where {\tt 1
+  $\leq$ N} and {\tt N $\leq$ '\$chidlrenNum'}.
+
+\item {\tt '\$tagList'} \\
+For each node, {\tt '\$tagList'}  returns an ordered list of the
+tags of its children. Note that each text segment is also counted
+as if it were enclosed by a {\tt '\$text'}  tag.
+
+\item {\tt '\$tag'(N)} \\
+For each node, {\tt '\$tag'(N)}  returns the tag of the {\tt N}-th child, where {\tt 1
+  $\leq$ N} and {\tt N $\leq$ '\$chidlrenNum'}.
+This attribute can be defined as follows:
+
+  %%
+  \begin{verbatim}
+     O['$tag'(N) -> Tag] :- O['$child'(N) -> V['$tag' -> Tag]]. 
+  \end{verbatim}
+  %%
+\end{enumerate}
+
+Note:
+  The aforesaid attribute {\tt '\$content'}  can be defined
+  for the nodes whose content is pure text as follows:
+
+    %%
+    \begin{verbatim}
+      O['$content' -> String] :- 
+	       O['$childrenNum' -> 1].text(1)['$string' -> String].
+    \end{verbatim}
+    %%
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "flora-packages"
+%%% End: 

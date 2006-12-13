@@ -1,0 +1,9 @@
+_$_$_flora'dyn_newoid5696[$order->0].  // @estag
+_$_$_flora'dyn_newoid5696[oops->>_$_$_flora'dyn_newoid5699].  // @estag
+_$_$_flora'dyn_newoid5699[$order->1].  // @estag
+_$_$_flora'dyn_newoid5699[$text->>_$_$_flora'dyn_newoid5700].  // @estag
+_$_$_flora'dyn_newoid5700[$order->2].  // @estag
+_$_$_flora'dyn_newoid5700[$string-><snag attr=2>
+].  // @estag
+_$_$_flora'dyn_newoid5699[$child(0)->_$_$_flora'dyn_newoid5700].  // @estag
+_$_$_flora'dyn_newoid5696[$child(0)->_$_$_flora'dyn_newoid5699].  // @estag

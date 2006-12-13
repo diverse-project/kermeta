@@ -1,0 +1,547 @@
+\chapter{Calling XSB from C}
+%===================================
+\label{ccallingxsb}
+
+There are many situations in which it may be desirable to use XSB as a
+rule-processing subcomponent of a larger system, which is written in
+another language.  To do this, one wants to be able to {\em call}\ XSB
+from the host language, providing queries for XSB to evaluate and
+retrieving back the answers.  An interface for calling XSB from C is
+provided for this purpose and is described in this chapter.  XSB can
+also be called from Java either through a {\tt jni} or a socket-based
+interface XSB, as described in the documentation for Interprolog,
+available through {\tt xsb.sourceforge.net}.  To call XSB from Visual
+Basic, a DLL is created as described in this chapter.  Additional
+declarations must be made in visual basic as described in the web page
+``How to use XSB DLL from Visual Basic''
+\url{http://xsb.sourceforge.net/vbdll.html}.  In general, the
+interface described in this chapter is quite flexible, and has also
+been extended to allow XSB to be called from Delphi and Ruby --
+contact the XSB development group for information about these
+extensions~\footnote{We note, however, that in \version{}, the
+  interface for C to call XSB has not yet been made thread-safe,
+  (unlike the interface for XSB to call C, described in
+  Chapter~\ref{foreign}.}.
+
+
+%
+Simple examples of the use of this interface are given in the {\tt
+  XSB/examples/c\_calling\_XSB} subdirectory, in files {\tt cmain.c},
+{\tt cmain2.c}, {\tt ctest.P}, and {\tt Makefile}.
+
+\section{C Functions for Calling XSB}
+
+XSB provides several C functions (declared in {\tt XSB/emu/cinterf.h}
+and defined in \\ {\tt XSB/emu/cinterf.c}), which can be called from C
+to interact with \ourprolog\ as a subroutine. These functions allow a
+C program to initialize \ourprolog\ (most easily with a call to {\tt
+xsb\_init\_string(options)}) and then to interact with XSB to have it
+execute {\em commands} or {\em queries}. A command is a deterministic
+query which simply succeeds or fails (without returning any
+interesting data value.)  A non-deterministic query can be evaluated
+so that its answers are retrieved one at a time, as they are
+produced. There are several levels of interface provided.  The highest
+level interface uses the XSB-specific C-type definition for
+variable-length strings (Section \ref{sec-varstring}), to communicate
+queries to \ourprolog\ and to get answers back.  The {\tt
+xsb\_command\_string(cmd)} function allows you to pass a command as a
+(period-terminated) string to \ourprolog .  The {\tt
+xsb\_query\_string\_string(query,buff,sep)} function allows you to
+pass a query to XSB as a string, and have its (first) answer returned
+as a string.  Subsequent answers can be calculated and retrieved using
+{\tt xsb\_next\_string(buff,sep)}.
+
+The second level provides routines that return answers with an
+interface that does not require variable-length strings.  The routines
+at this level are: 
+\begin{itemize}
+\item {\tt xsb\_query\_string\_string\_b(query,buff,bufflen,anslen,sep)}, 
+\item {\tt xsb\_next\_string\_b(buff,bufflen,anslen,sep)}, and
+\item  {\tt xsb\_get\_last\_answer(buff,bufflen,anslen)}.  
+\end{itemize}
+They are normally intended to be used with the initialization routines
+above.
+
+There are lower-level interfaces that allow you to manipulate directly
+the XSB data structures (both to construct queries and to retrieve
+answers) and thus avoid the overhead of converting to and from
+strings.  See the detailed descriptions of the routines below to see
+how to use the lower level interface.
+
+Currently, only one query can be active at a time.
+I.e., one must completely finish processing one query (either by
+retrieving all the answers for it, or by issuing a call to {\tt
+xsb\_close\_query()}, before trying to evaluate another.  The
+routines to perform all these functions are described below:
+
+\begin{description}
+\ouritem{int xsb\_init(int argc, char *argv[])} \index{\texttt{xsb\_init}}
+This is a C-callable function that initializes \ourprolog . It must be
+called before any other calls can be made.  {\tt argc} is the count of
+the number of arguments in the {\tt argv} vector.  The {\tt argv}
+vector is exactly as would be passed from the command line to
+\ourprolog .  It must contain at least the following two things:
+%%
+\begin{itemize}
+\item $\tt argv[0]$ must be an absolute or relative path name of the XSB
+  installation directory ({\it i.e.}, {\tt \$XSB\_DIR}.  Here is an
+  example, which assumes that we invoke the C program from the XSB
+  installation directory.
+    %%
+    \begin{verbatim}
+int main(int argc, char *argv[])
+{ 
+  int myargc = 2;
+  char *myargv[2];
+
+  /* XSB_init relies on the calling program to pass the addr of the XSB
+     installation directory. From here, it will find all the libraries */
+  myargv[0] = ".";
+  myargv[1] = "-n";
+
+  /* Initialize xsb */
+  xsb_init(myargc,myargv);
+    \end{verbatim}
+    %%
+  \item $\tt argv[1]$ must be the {\tt -n} flag.  This flag tells
+    \ourprolog\ not to start the read-eval-print top loop, but to act as a
+    subroutine to a calling C routine.
+\end{itemize}
+%%
+Other flags are optional, but can be used to modify sizes of the various
+spaces used in \ourprolog.  {\tt xsb\_init} returns 0 if initialization is
+completed, and 1 if an error is encountered.
+
+\ouritem{int xsb\_init\_string(char *options)} \index{\texttt{xsb\_init\_string}}
+This is a variant of {\tt xsb\_init} which takes the command line as a
+string argument (rather than as a argc/argv pair.)  For example, a call
+could be
+%%
+\begin{verbatim}
+   xsb_init_string(". -n");
+\end{verbatim}
+%%
+Note that just as with {\tt xsb\_init}, you must pass the path name of the
+XSB installation directory. In the above, we pass ``.'', assuming that we
+are invoking the C program from the XSB installation directory.  The
+parameters following the file name are just as those that could appear on a
+command line.  The function of this subroutine is exactly the same as {\tt
+  xsb\_init}, and its return codes are the same.
+
+\ouritem{int xsb\_command()} \index{\texttt{xsb\_command}}
+This function passes a command to \ourprolog .  No query can be active
+when this command is called.  Before calling {\tt xsb\_command}, the
+calling program must construct the \ourprolog\ term representing the
+command in register 1 in \ourprolog 's space.  This can be done by
+using the {\tt c2p\_*} (and {\tt p2p\_*}) routines, which are
+described in Section \ref{c2p_p2p_p2c} below.  Register 2 may also be
+set before the call to {\tt xsb\_query} (using {\tt
+xsb\_make\_vars(int)} and {\tt xsb\_set\_var\_*()}) in which case any
+variables set to values in the {\tt ret/n} term will be so bound in
+the call to the command goal.  {\tt xsb\_command} invokes the command
+represented in register 1 and returns 0 if the command succeeds and 1
+if it fails. In either case it resets register 1 back to a free
+variable. If there is an error, it returns 2.
+
+\ouritem{int xsb\_command\_string(char *cmd)} \index{\texttt{xsb\_command\_string}}
+This function passes a command to \ourprolog .  The command is a
+string consisting of a term that can be read by the \ourprolog\
+reader.  The string must be terminated by a period (.).  Any previous
+query must have already been closed.  In all other respects, {\tt
+xsb\_command\_string} is similar to {\tt xsb\_command}.
+
+\ouritem{int xsb\_query()} \index{\texttt{xsb\_query}}
+This function passes a query to \ourprolog .  Any previous query must
+have already been closed.  A query is expected to return possibly
+multiple data answers.  The first is found and made available to the
+caller as a result of this call.  To get subsequent answers, {\tt
+xsb\_next} must be called.  Before calling {\tt xsb\_query} the caller
+must construct the term representing the query in \ourprolog 's
+register 1 (using routines described in Section \ref{c2p_p2p_p2c}
+below.)  If the query has no answers (i.e., just fails), register 1 is
+set back to a free variable and {\tt xsb\_query} returns 1.  If the
+query has at least one answer, the variables in the query term in
+register 1 are bound to those answers and {\tt xsb\_query} returns 0.
+In addition, register 2 is bound to a term whose main functor symbol
+is {\tt ret/n}, where n is the number of variables in the query. The
+main subfields of this term are set to the variable values for the
+first answer. (These fields can be accessed by the functions {\tt
+p2c\_*}, or the functions {\tt xsb\_var\_*}, described in Section
+\ref{c2p_p2p_p2c} below.)  Thus there are two places the answers are
+returned. Register 2 is used to make it easier to access them.  To get
+subsequent answers, {\tt xsb\_next} must be called.  Register 2 may
+also be set before the call to {\tt xsb\_query} (using {\tt
+xsb\_make\_vars(int)} and {\tt xsb\_set\_var\_*()}) in which case any
+variables set to values in the {\tt ret/n} term will be so bound in
+the call to the goal.
+
+\ouritem{int xsb\_query\_string(char *query)} \index{\texttt{xsb\_query\_string}}
+This function passes a query to \ourprolog .  The query is a string
+consisting of a term that can be read by the \ourprolog\ reader.  The
+string must be terminated with a period (.).  Any previous query must
+have already been closed.  In all other respects, xsb\_query\_string
+is similar to xsb\_query, except the only way to retrieve answers is
+through Register 2.  The ability to create the return structure and
+bind variables in it is particularly useful in this function.
+
+\ouritem{int xsb\_query\_string\_string(char *query, VarString *buff,
+char *sep)} \index{\texttt{xsb\_query\_string\_string}} This function
+is a variant of {\tt xsb\_query\_string} that returns its answer (if
+there is one) as a string.  An example call is:
+\begin{verbatim}
+rc = xsb_query_string_string("append(X,Y,[a,b,c]).",buff,";");
+\end{verbatim}
+The first argument is the period-terminated query string.  The second
+argument is a variable string buffer in which the subroutine returns the answer
+(if any.) The variable string data type {\tt VarString}  is explained in
+Section~\ref{sec-varstring}. (Use the following function if you cannot 
+declare a parameter of this type in your programming language.)  
+The last argument is a string
+provided by the caller, which is used to separate fields in the returned
+answer.  For the example query, buff would be set to the string:
+\begin{verbatim}
+        [];[a,b,c]
+\end{verbatim}
+which is the first answer to the append query.  There are two fields
+of this answer, corresponding to the two variables in the query,
+\verb|X| and \verb|Y|.  The bindings of those variables make up the
+answer and the individual fields are separated by the \verb|sep|
+string, here the semicolon (\verb|;|).  Its returns are just as for
+{\tt xsb\_query\_string}.  In the answer string, XSB atoms are printed
+in their standard print form (without quotes).  Complex terms are
+printed in a canonical form, with atoms quoted if necessary, and lists
+produced in the normal list notation.
+
+\ouritem{int xsb\_query\_string\_string\_b(char *query, char *buff,
+int bufflen, int *anslen, char *sep)}
+\index{\texttt{xsb\_query\_string\_string\_b}} This function provides a
+lower-level interface to {\tt xsb\_query\_string\_string} (not using
+the {\tt VarString} type), which makes it easier for non-C callers
+(such as Visual Basic or Delphi) to access XSB functionality.  The
+first and last arguments are the same as in {\tt
+xsb\_query\_string\_string}.  The \verb|buff|, \verb|bufflen|, and
+\verb|anslen| parameters are used to pass the answer (if any) back to
+the caller.  \verb|buff| is a buffer provided by the caller in which
+the answer is returned.
+\verb|bufflen| is the length of the buffer (\verb|buff|) and is
+provided by the caller.  \verb|anslen| is returned by this routine and
+is the length of the computed answer.  If that length is less than
+\verb|bufflen|, then the answer is put in \verb|buff| (and
+null-terminated).  If the answer is longer than will fit in the buffer
+(with the null terminator), then the answer is not copied to the
+buffer and 3 is returned.  In this case the caller can retrieve the
+answer by providing a bigger buffer (of size greater than the returned
+\verb|anslen|) in a call to {\tt xsb\_get\_last\_answer\_string}.
+
+\ouritem{int xsb\_get\_last\_answer\_string(char *buff, int bufflen,
+int *anslen)} \index{\texttt{xsb\_get\_last\_answer\_string\_b}} This
+function is used only when a call to {\tt
+xsb\_query\_string\_string\_b} or to {\tt xsb\_next\_string\_b}
+returns a 3, indicating that the buffer provided was not big enough to
+contain the computed answer.  In that case the user may allocate a
+larger buffer and then call this routine to retrieve the answer (that
+had been saved.)  Only one answer is saved, so this routine must
+called immediately after the failing call in order to get the right
+answer.  The parameters are the same as the 2nd through 4th parameters
+of {\tt xsb\_query\_string\_string\_b}.
+
+\ouritem{int xsb\_next()} \index{\texttt{xsb\_next}}
+This routine is called after {\tt xsb\_query} (which must have
+returned 0) to retrieve more answers.  It rebinds the query variables
+in the term in register 1 and rebinds the argument fields of the {\tt
+ret/n} answer term in register 2 to reflect the next answer to the
+query.  It returns 0 if an answer is found, and returns 1 if there are
+no more answers and no answer is returned. On a return of 1, the query
+has been closed.  After a query is closed, another {\tt xsb\_command}
+or {\tt xsb\_query} invocation can be made.
+
+\ouritem{int xsb\_next\_string(VarString *buff,char *sep)} \index{\texttt{xsb\_next\_string}}  This routine is a variant of {\tt xsb\_next} that
+returns its answer (if there is one) as a string.  Its treatment of
+answers is just as {\tt xsb\_query\_string\_string}.  For example
+after the example call
+\begin{verbatim}
+rc = xsb_query_string_string("append(X,Y,[a,b,c]).",buff,";");
+\end{verbatim}
+which returns with buff set to 
+\begin{verbatim}
+        [];[a,b,c]
+\end{verbatim}
+Then a call:
+\begin{verbatim}
+rc = xsb_next_string(buff,";");
+\end{verbatim}
+returns with buff set to 
+\begin{verbatim}
+        [a];[b,c]
+\end{verbatim}
+the second answer to the indicated query. {\tt xsb\_next\_string}
+returns codes just as {\tt xsb\_next}.
+
+\ouritem{int xsb\_next\_string\_b(char *buff, int bufflen, int
+*anslen, char *sep)} \index{\texttt{xsb\_next\_string}} This routine is a
+variant of {\tt xsb\_next\_string} that does not use the {\tt
+VarString} type.  Its parameters are the same as the 2nd through 5th
+parameters of {\tt xsb\_query\_string\_string\_b}.  The next answer to
+the current query is returned in \verb|buff|, if there is enough
+space.  If the buffer would overflow, this routine returns 3, and the
+answer can be retrieved by providing a larger buffer in a call to {\tt
+xsb\_get\_last\_answer\_string\_b}.  In any case, the length of the
+answer is returned in \verb|anslen|.
+
+\ouritem{int xsb\_close\_query()} \index{\texttt{xsb\_close\_query}}
+This routine closes a query, before all its answers have been
+retrieved.  Since \ourprolog\ is (usually) a tuple-at-a-time system,
+answers that are not retrieved are not computed.
+It is an error to call {\tt xsb\_query} again without
+first either retrieving all the answers to the previous query or
+calling {\tt xsb\_close\_query} to close it.
+
+\ouritem{int xsb\_close()} \index{\texttt{xsb\_close}}
+This routine closes the entire connection to \ourprolog .  After this,
+no more calls can be made (including calls to {\tt xsb\_init}.)
+\end{description}
+
+\section{The Variable-length String Data Type}\label{sec-varstring}
+
+\index{VarString} XSB uses variable-length strings to communicate with
+certain C subroutines when the size of the output that needs to be passed
+from the Prolog side to the C side is not known. Variable-length strings
+adjust themselves depending on the size of the data they must hold and are
+ideal for this situation. For instance, as we have seem the two subroutines
+{\tt xsb\_query\_string\_string(query,buff,sep)} and {\tt
+  xsb\_next\_string(buff,sep)} use the variable string data type, {\tt
+  VarString}, for their second argument.  To use this data type, make sure
+that
+%%
+\begin{verbatim}
+#include "cinterf.h"  
+\end{verbatim}
+%%
+appears at the top of the program file.  Variables of the {\tt VarString}
+type are declared using a macro that must appear in the declaration section
+of the program:
+%%
+\begin{verbatim}
+XSB_StrDefine(buf);  
+\end{verbatim}
+%%
+There is one important consideration concerning VarString with the
+\emph{automatic} storage class: they must be
+\emph{destroyed} on exit (see {\tt XSB\_StrDestroy}, below) from the procedure
+that defines them, or else there will be a memory leak. 
+It is not necessary to destroy static {\tt VarString}'s.
+
+The public attributes of the type are {\tt int length} and {\tt char *string}.
+Thus, {\tt buf.string} represents the actual contents of the buffer and
+{\tt buf.length} is the length of that data. Although the length and the
+contents of a {\tt VarString} string is readily accessible, the user {\bf must
+not} modify these items directly. Instead, he should use the macros
+provided for that purpose:
+%%
+\begin{itemize}
+  \item {\tt XSB\_StrSet(VarString *vstr, char *str)}:~
+    Assign the value of the regular null-terminated C string to the
+    {\tt VarString} {\tt vstr}. The size of {\tt vstr} is adjusted
+    automatically.
+  \item {\tt XSB\_StrSetV(VarString *vstr1, VarString *vstr2)}:~
+    Like {\tt XSB\_StrSet}, but the second argument is a variable-length
+    string, not a regular C string.
+  \item {\tt XSB\_StrAppend(VarString *vstr, char *str)}:~
+    Append the null-terminated string {\tt str} to the {\tt VarString} {\tt
+      vstr}. The size of {\tt vstr} is adjusted.
+  \item {\tt XSB\_StrPrepend(VarString *vstr, char *str)}:~
+    Like {\tt XSB\_StrAppend}, except that {\tt str} is prepended.
+  \item {\tt XSB\_StrAppendV(VarString *vstr1, VarString *vstr2)}:~
+    Like {\tt XSB\_StrAppend}, except that the second string is also a
+    {\tt VarString}.
+  \item {\tt XSB\_StrPrependV(VarString *vstr1, VarString *vstr2)}:~
+    Like {\tt XSB\_StrAppendV}, except that the second string is prepended.
+  \item {\tt XSB\_StrCompare(VarString *vstr1, VarString *vstr2)}:~
+    Compares two {\tt VarString}. If the first one is lexicographically
+    larger, then the result is positive; if the first string is smaller,
+    than the result is negative; if the two strings have the same content
+    ({\it i.e.}, {\tt vstr1->string} equals {\tt vstr2->string} then the
+    result is zero.
+  \item {\tt XSB\_StrCmp(VarString *vstr, char *str)}:~
+    Like {\tt XSB\_StrCompare} but the second argument is a regular,
+    null-terminated string.
+  \item {\tt XSB\_StrAppendBlk(VarString *vstr, char *blk, int size)}:~
+    This is like {\tt XSB\_StrAppend}, but the second argument is not assumed
+    to be null-terminated. Instead, {\tt size} characters pointed to by
+    {\tt blk} are appended to {\tt vstr}. The size of {\tt vstr} is
+    adjusted, but the content is \emph{not} null terminated.
+  \item {\tt XSB\_StrPrependBlk(VarString *vstr, char *blk, int size)}:~
+    Like {\tt XSB\_StrPrepend}, but {\tt blk} is not assumed to point to a
+    null-terminated string. Instead, {\tt size} characters from the region
+    pointed to by {\tt blk} are prepended to {\tt vstr}.
+  \item {\tt XSB\_StrNullTerminate(VarString *vstr)}:~
+    Null-terminates the {\tt VarString}  string {\tt vstr}. This is used in
+    conjunction with {\tt XSB\_StrAppendBlk}, because the latter does not
+    null-terminate variable-length strings.
+  \item {\tt XSB\_StrEnsureSize(VarString *vstr, int minsize)}:~
+    Ensure that the string has room for at least {\tt minsize} bytes.
+    This is a low-level routine, which is used to interface to procedures
+    that do not use {\tt VarString} internally. If the string is larger
+    than {\tt minsize}, the size might actually shrink to the nearest
+    increment that is larger {\tt minsize}.
+  \item {\tt XSB\_StrShrink(VarString *vstr, int increment)}:~ Shrink the
+    size of {\tt vstr} to the minimum necessary to hold the data. {\tt
+      increment} becomes the new increment by which {\tt vstr} is adjusted.
+    Since {\tt VarString} is automatically shrunk by {\tt XSB\_StrSet}, it
+    is rarely necessary to shrink a {\tt VarString} explicitly.  However,
+    one might want to change the adustment increment using this macro (the
+    default increment is 128).
+  \item {\tt XSB\_StrDestroy(VarString *vstr)}:~
+    Destroys a {\tt VarString}.  Explicit destruction is necessary for
+    {\tt VarString}'s with the automatic storage class. Otherwise, memory
+    leak is possible.
+\end{itemize}
+%%
+
+
+\section{Passing Data into an XSB Module}
+
+The previous chapter described the low-level XSB/C interface that supports
+passing the data of arbitrary complexity between XSB and C. However, in
+cases when data needs to be passed into an executable XSB module by the
+main C program, the following higher-level interface should suffice.  (This
+interface is actually implemented using macros that call the lower level
+functions.)  These routines can be used to construct commands and queries
+into \ourprolog 's register 1, which is necessary before calling {\tt
+  xsb\_query()} or {\tt xsb\_command()}.
+
+
+\begin{description}
+\ouritem{void xsb\_make\_vars((int) N)} \index{\texttt{xsb\_make\_vars}}
+    {\tt xsb\_make\_vars} creates a return structure of arity {\tt N}
+in Register 2.  So this routine may called before calling any of {\tt
+xsb\_query}, {\tt xsb\_query\_string}, {\tt xsb\_command}, or {\tt
+xsb\_command\_string} if parameters are to be set to be sent to the
+goal.  It must be called before calling one of the {\tt
+xsb\_set\_var\_*} routines can be called. {\tt N} must be the number
+of variables in the query that is to be evaluated.
+
+\ouritem{void xsb\_set\_var\_int((int) Val, (int) N)} 
+\index{\texttt{xsb\_set\_var\_int}}
+    {\tt set\_and\_int} sets the {\tt N}$^{th}$ field in the return
+structure to the integer value {\tt Val}.  It is used to set the value of
+the {\tt N}$^{th}$ variable in a query before calling {\tt xsb\_query} or
+{\tt xsb\_query\_string}.  When called in \ourprolog, the query will
+have the {\tt N}$^{th}$ variable set to this value.
+
+\ouritem{void xsb\_set\_var\_string((char *) Val, (int) N)} 
+\index{\texttt{xsb\_set\_var\_string}}
+    {\tt set\_and\_string} sets the {\tt N}$^{th}$ field in the return
+structure to the atom with name {\tt Val}.  It is used to set the
+value of the {\tt N}$^{th}$ variable in a query before calling {\tt
+xsb\_query} or {\tt xsb\_query\_string}.  When called in \ourprolog,
+the query will have the {\tt N}$^{th}$ variable set to this value.
+
+\ouritem{void xsb\_set\_var\_float((float) Val, (int) N)} 
+\index{\texttt{xsb\_set\_var\_float}}
+    {\tt set\_and\_float} sets the {\tt N}$^{th}$ field in the return
+structure to the floating point number with value {\tt Val}.  It is
+used to set the value of the {\tt N}$^{th}$ variable in a query before
+calling {\tt xsb\_query} or {\tt xsb\_query\_string}.  When called in
+\ourprolog, the query will have the {\tt N}$^{th}$ variable set to this
+value.
+
+\ouritem{prolog\_int xsb\_var\_int((int) N)} \index{\texttt{xsb\_var\_int}} 
+{\tt xsb\_var\_int} is called after {\tt xsb\_query} or {\tt
+xsb\_query\_string} returns an answer.  It returns the value of the
+{\tt N}$^{th}$ variable in the query as set in the returned answer.
+This variable must have an integer value (which is cast to {\tt
+long} in a 64-bit architecture).
+
+\ouritem{char* xsb\_var\_string((int) N)} \index{\texttt{xsb\_var\_string}}
+    {\tt xsb\_var\_string} is called after {\tt xsb\_query} or {\tt
+xsb\_query\_string} returns an answer.  It returns the value of the
+{\tt N}$^{th}$ variable in the query as set in the returned answer.
+This variable must have an atom value.
+
+\ouritem{prolog\_float xsb\_var\_float((int) N)} \index{\texttt{xsb\_var\_float}}
+    {\tt xsb\_var\_float} is called after {\tt xsb\_query} or {\tt
+    xsb\_query\_string} returns an answer.  It returns the value of
+    the {\tt N}$^{th}$ variable in the query as set in the returned
+    answer.  This variable must have a floating point value (which is
+    cast to {\tt double} in a 64-bit architecture).
+
+
+\end{description}
+
+
+\section{Creating an XSB Module that Can be Called from C}
+
+To create an executable that includes calls to the above C functions,
+these routines, and the \ourprolog\ routines that they call, must be
+included in the link ({\tt ld}) step.
+
+\paragraph{Unix instructions:}
+You must link your C program, which should include the main procedure, with
+the XSB object file located in
+%%
+\begin{verbatim}
+ $XSB_DIR/config/<your-system-architecture>/saved.o/xsb.o  
+\end{verbatim}
+%%$
+Your program should include the file {\tt cinterf.h} located in the {\tt
+  XSB/emu} subdirectory, which defines the routines described earlier,
+which you will need to use in order to talk to XSB.  It is therefore
+recommended to compile your program with the option
+\verb|-I$XSB_DIR/XSB/emu|.
+%%$
+
+The file {\tt \$XSB\_DIR/config/your-system-architecture/modMakefile} is a
+makefile you can use to build your programs and link them with XSB.  It is
+generated automatically and contains all the right settings for your
+architecture, but you will have to fill in the name of your program, etc.
+
+It is also possible to compile and link your program with XSB using XSB
+itself as follows:
+%%
+\begin{verbatim}
+:- xsb_configuration(compiler_flags,CFLAGS),
+        xsb_configuration(loader_flags,LDFLAGS),
+        xsb_configuration(config_dir,CONFDIR),
+        xsb_configuration(emudir,EMUDIR),
+        xsb_configuration(compiler,Compiler),
+        str_cat(CONFDIR, '/saved.o/', ObjDir),
+        write('Compiling myprog.c ... '),
+        shell([Compiler, ' -I', EMUDIR, ' -c ', CFLAGS, ' myprog.c ']),
+        shell([Compiler, ' -o ', './myprog ',
+               ObjDir, 'xsb.o ', ' myprog.o ', LDFLAGS]),
+        writeln(done).  
+\end{verbatim}
+%%
+This works for every architecture and is often more convenient than using
+the make files.
+
+There are simple examples of C programs calling \ourprolog\ in the
+{\tt \$XSB\_DIR/examples/c\_calling\_XSB} directory, in files {\tt cmain.c},
+{\tt ctest.P}, {\tt cmain2.c}.
+
+\paragraph{Windows instructions:}
+To call XSB from C, you must build it as a DLL, which is done as follows:
+%%
+\begin{verbatim}
+  cd $XSB_DIR\XSB\build
+  makexsb_wind DLL="yes"
+\end{verbatim}
+%%$
+The DLL, which you can call dynamically from your program is then found in 
+%%
+\[
+ \tt
+ \$XSB\_DIR\backslash config\backslash \mbox{\tt x86-pc-windows}\backslash
+ bin \backslash xsb.dll
+\]
+%%
+Since your program must include the file {\tt cinterf.h}, it is recommended
+to compile it with the option \verb|/I$XSB_DIR\XSB\emu|.
+%%$
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "manual2"
+%%% End: 

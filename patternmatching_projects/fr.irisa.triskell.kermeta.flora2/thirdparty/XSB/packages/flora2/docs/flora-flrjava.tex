@@ -1,0 +1,744 @@
+
+
+    \chapter[JAVA Interface for \FLORA]{JAVA Interface for \FLORA\\by Aditi
+      Pandit and Michael Kifer}
+
+
+     This chapter documents the API for accessing \FLORA from a Java program.
+  The API has two versions: a \emph{low-level API},
+  which enables Java programs to
+  send arbitrary queries to \FLORA and get results, and a \emph{high-level
+    API}, which is more limited, but is easier to use. The high-level API
+  establishes a correspondence between Java classes and \FLORA classes,
+  which enables manipulation of \FLORA classes by executing appropriate
+  methods on the corresponding Java classes. Both interfaces rely on the
+  Java-XSB interface, called \emph{Interprolog}, provided by Declarativa.com.
+
+
+\section{Description}
+\subsection{The Low-level Interface}
+ The low-level API enables Java programs to send arbitrary queries
+to \FLORA and get results. 
+
+In order to be able to access \FLORA, the Java program must first establish
+a session for a running instance of \FLORA. Multiple sessions can be active
+at the same time. The knowledge bases in the different running instances
+are completely independent. Sessions are instances of
+the {\tt
+net.sourceforge.flora.javaAPI.src.FloraSession}. This class provides methods
+for opening/closing sessions and loading \FLORA knowledge bases
+(which are also used in the high-level
+interface). In addition, a session provides 
+methods for executing arbitrary \FLORA queries. The following is the complete
+list of the methods that are available in that class.
+\begin{itemize}
+\item
+\begin{verbatim}
+public FloraSession()
+\end{verbatim}
+    This method creates a connection to an instance of \FLORA.
+The initialization parameters needed are:
+
+{\tt JAVA\_BIN}. This variable points to the directory containing
+the javac and java executable programs. This variable is specified in
+the {\tt windowsVariables.bat} and  {\tt unixVariables.sh}  files in the
+{\tt java} subdirectory of the \FLORA distribution.
+
+{\tt XSB\_ROOT\_DIRECTORY}. This variable points to the directory
+containing the XSB executable. This variable is specified in the {\tt
+  flora\_settings.bat} and {\tt flora\_settings.sh} files in the {\tt java}
+directory.  {\tt FLORA\_DIRECTORY}. This variable points to the directory
+containing the \FLORA installation. This variable is specified in the {\tt
+  flora\_settings.bat} and {\tt flora\_settings.sh} files in the {\tt java}
+directory.  Both of these files are generated automatically by the {\tt
+  makeflora} script and should be of no concern to the user under normal
+circumstances.
+\item {\tt close()} \\
+  This method must be called to terminate a \FLORA session. Note that this does
+  not terminate the Java program that initiated the session:
+  to exit the Java program that talks to \FLORA, one needs to execute
+  the statement
+  %%
+\begin{verbatim}
+ System.exit();  
+\end{verbatim}
+  %%
+  Note that just returning from the {\tt main} method is not enough. 
+
+\item
+\begin{verbatim}
+public Iterator ExecuteQuery(String command)
+\end{verbatim}
+    This method executes the \FLORA command given by the
+parameter {\tt command}.  This method is used to execute \FLORA queries that
+do not require variable bindings to be returned back to Java or queries that
+have only
+a single variable to be returned. Each binding is represented as
+an instance of {\tt net.sourceforge.flora.javaAPI.src.FloraObject}.
+The examples below illustrate how to process the results returned by this
+method.
+
+\item
+\begin{verbatim}
+public Iterator ExecuteQuery(String query, Vector vars)
+\end{verbatim}
+  This method executes the \FLORA query given by the first argument. The
+  Vector {\tt vars} (of strings) specifies the names of all the variables
+  in the query for which bindings need to be returned. These variables are
+  added to the vector using the method {\tt add} before calling
+  {\tt ExecuteQuery}. For instance, {\tt vars.add("?X")}.  
+  
+  This version of {\tt ExecuteQuery} returns an iterator over all bindings
+  returned by the \FLORA query.  Each binding is represented by a {\tt
+    HashMap} 
+  object which can be used to obtain the value of each variable in the
+  query (using the {\tt get()} method). The value of each variable returned
+  is an instance of {\tt
+    net.sourceforge.flora.javaAPI.src.FloraObject}.
+
+  See the examples below for how to handle the results
+  returned by this method.
+
+\item
+\begin{verbatim}
+void loadFile(String fileName,String moduleName)
+\end{verbatim}
+  This method loads the \FLORA program, specified by the parameter {\tt
+    fileName} into the \FLORA module specified in {\tt moduleName}.
+\end{itemize}
+
+The code snippet below illustrates the low-level API.
+
+\paragraph{Step 1: Writing a \FLORA program.}
+  Let us assume that we have a file, called  {\tt flogic\_basics.flr},
+  which contains the following information:
+\begin{quote}
+\begin{verbatim}
+person :: object.
+dangerous_hobby :: object.
+john:employee.
+employee::person.
+
+bob:person.
+tim:person.
+betty:employee.
+
+person[age=>integer,
+       kids=>person,
+       salary(year)=>value,
+       hobbies=>hobby,
+       believes_in*=>something,
+       instances => person
+].
+
+mary:employee[
+    age->29,
+    kids -> {tim,leo,betty},
+    salary(1998) -> a_lot
+].
+
+tim[hobbies -> {stamps, snowboard}].
+betty[hobbies->{fishing,diving}].
+
+snowboard:dangerous_hobby.
+diving:dangerous_hobby.
+
+?_X[self-> ?_X].
+
+person[believes_in *-> {something, something_else}].
+\end{verbatim}
+\end{quote}
+
+\paragraph{Step 2:  Writing a JAVA application to interface with \FLORA.}
+ The following code loads a \FLORA program from a file and then passes
+ queries to the knowledge base.
+
+\begin{verbatim}
+import net.sourceforge.flora.javaAPI.src.*;
+import java.util.*;
+
+public class flogicbasicsExample {
+
+    public static void main(String[] args) {
+        // create a new session for a running instance of FLORA-2
+        FloraSession session = new FloraSession();
+        System.out.println("FLORA-2 session started");
+
+        // Assume that Java was called with -DFLORA_FILE=the-file-name
+        String fileName = System.getProperty("FLORA_FILE");
+        if(fileName == null || fileName.trim().length() == 0) {
+            System.out.println("Invalid path to example file!");
+            System.exit(0);
+
+        }
+        // load the FLORA-2 program into module basic_mod
+        session.loadFile(fileName,"basic_mod");
+
+        /* Running queries from flogic_basics.flr */
+
+        /* Query for persons */
+        String command = "?X:person@basic_mod.";
+        System.out.println("Query:"+command);
+        Iterator personObjs = session.ExecuteQuery(command);
+
+        /* Printing out the person names and information about their kids */
+        while (personObjs.hasNext()) {
+            FloraObject personObj = (FloraObject)personObjs.next();
+            System.out.println("Person name:"+personObj);
+
+
+        command = "person[instances -> ?X]@basic_mod.";
+        System.out.println("Query:"+command);
+        personObjs = session.ExecuteQuery(command);
+
+        /* Prining out the person names  */
+        while (personObjs.hasNext()) {
+            Object personObj = personObjs.next();
+            System.out.println("Person Id: "+personObj);
+        }
+
+        /* Example of ExecuteQuery with two arguments */
+        Vector vars = new Vector();
+        vars.add("?X");
+        vars.add("?Y");
+
+        Iterator allmatches =
+            session.ExecuteQuery("?X[believes_in -> ?Y]@basic_mod.",vars);
+        System.out.println("Query:?X[believes_in -> ?Y]@basic_mod.");
+        while(allmatches.hasNext()) {
+            HashMap firstmatch = (HashMap)allmatches.next();
+            Object Xobj = firstmatch.get("?X");
+            Object Yobj = firstmatch.get("?Y");
+            System.out.println(Xobj+" believes in: "+?Yobj);
+        }
+        // quit the system
+        session.close();
+        System.exit(0);
+    }
+}
+\end{verbatim}
+
+\subsection{The High-Level Interface}
+
+The high-level API operates by creating proxy Java classes for 
+\FLORA classes selected by the user.
+This enables the Java program to operate on \FLORA classes by
+executing appropriate methods on the corresponding proxy Java classes.
+The use of the high-level API involves a number of stages, as described below.
+
+\paragraph{Stage 1: Writing a \FLORA file.}
+We assume the same {\tt flogic\_basics.flr} file as in the previous
+example.
+
+\paragraph{Stage 2: Generating Java classes that serve as proxies for \FLORA classes.}
+The \FLORA side of the Java-to-\FLORA high level API provides a predicate
+to generate Java proxy classes for each \fl class which have a signature
+declaration in the \FLORA knowledge base. A proxy class gets defined so
+that it would have methods to manipulate the attributes and methods of the
+corresponding \fl class for which signature declarations are available.  If
+an \fl class has a declared value-returning attribute {\tt foobar} then the
+proxy class will have the following methods. Each method name has the form
+\emph{action}$S_1S_2S_3$\_{\tt foobar}, where \emph{action} is either {\tt
+  get}, {\tt set}, or {\tt delete}. The specifier $S_1$ indicates the type
+of the method --- {\tt V} for value-returning, {\tt B} for Boolean, and
+{\tt P} for procedural. The specifier $S_2$ tells whether the operation
+applies to the signature of the method ({\tt S}), e.g., {\tt
+  person[foobar=>string]}, or to the actual data ({\tt D}), for example,
+{\tt john[foobar->3]}.  Finally, the specifier $S_3$ tells if the operation
+applies to the inheritable variant of the method ({\tt I})
+or its non-inheritable variant ({\tt N}).
+%% 
+\begin{enumerate}
+\item {\tt public Iterator getVDI\_foobar()}\\
+  {\tt public Iterator getVDN\_foobar()}
+  \\
+  {\tt public Iterator getVSI\_foobar()}\\
+  {\tt public Iterator getVSN\_foobar()}
+  \\
+  The above methods query the knowledge base and get all answers for the
+  attribute {\tt foobar}. They return iterators through which these answers
+  can be processed one-by-one. Each object returned by the iterator is of
+  type {\tt FloraObject}.  The {\tt getVDN} form queries non-inheritable
+  data methods and {\tt getVDI} the inheritable ones. The {\tt getVSI} and
+  {\tt getVSN} forms query the signatures of the attribute {\tt foobar}.
+\item {\tt public boolean setVDI\_foobar(Vector value)}\\
+  {\tt public boolean setVDN\_foobar(Vector value)}
+  \\
+  {\tt public boolean setVSI\_foobar(Vector value)}\\
+  {\tt public boolean setVSN\_foobar(Vector value)}
+  \\
+  These methods
+  add values to the set of values returned by the attribute {\tt foobar}. The
+  values must be placed in the vector parameter passed these methods.
+  Again, {\tt setVDN} adds data for non-inheritable methods and {\tt setVDI}
+  is used for inheritable methods.
+  {\tt setVSI} and {\tt setVSN} add types to signatures.  
+\item {\tt public boolean setVDI\_foobar(Object value)}\\
+  {\tt public boolean setVDN\_foobar(Object value)}
+  \\
+  {\tt public boolean setVSI\_foobar(Object value)}\\
+  {\tt public boolean setVSN\_foobar(Object value)}\\
+  These methods provide a simplified interface when only one value needs to
+  be added.  It works like the earlier set\_* methods, except that only one
+  value given as an argument is added.
+\item {\tt public boolean deleteVDI\_foobar(Vector value)}\\
+  {\tt public boolean deleteVDN\_foobar(Vector value)}
+  \\
+  {\tt public boolean deleteVSI\_foobar(Vector value)}\\
+  {\tt public boolean deleteVSN\_foobar(Vector value)}
+  \\
+  Delete a set of values of the attribute {\tt foobar}. The set is
+  specified in the vector argument.
+\item {\tt public boolean deleteVDI\_foobar(Object value)}\\
+  {\tt public boolean deleteVDN\_foobar(Object value)}
+  \\
+  {\tt public boolean deleteVSI\_foobar(Object value)}\\
+  {\tt public boolean deleteVSN\_foobar(Object value)}
+  \\
+  A simplified interface for the case when only one value needs to be deleted.
+\item {\tt public boolean deleteVDI\_foobar()}\\
+  {\tt public boolean deleteVDN\_foobar()}
+  \\
+  {\tt public boolean deleteVSI\_foobar()}\\
+  {\tt public boolean deleteVSN\_foobar()}
+  \\
+  Delete all values for the attribute {\tt foobar}. 
+\end{enumerate}
+%% 
+For \fl methods with arguments, the high-level API provides Java methods as
+above, but they take more arguments to accommodate the parameters that \fl
+methods take. Let us
+assume that the \fl method is called {\tt foobar2} and it takes parameters
+{\tt arg1} and {\tt arg2}.  As before the {\tt getVDI\_*}, {\tt setVDI\_*},
+etc., forms of the Java methods are for dealing with inheritable \FLORA
+methods and the {\tt getVDN\_*}, {\tt setVDN\_*},
+etc., forms are for dealing with non-inheritable \FLORA methods.
+
+%%
+\begin{enumerate}
+\item {\tt public Iterator getVDI\_foobar2(Object arg1, Object arg2)}\\
+  {\tt public Iterator getVDN\_foobar2(Object arg1, Object arg2)}
+  \\
+  Obtain all values for the \fl method invocation {\tt foobar2(arg1,arg2)}.
+\item {\tt public boolean setVDI\_foobar2(Object arg1, Object arg2, Vector value)}\\
+  {\tt public boolean setVDN\_foobar2(Object arg1, Object arg2, Vector value)}
+  \\
+  Add a set of methods specified in the parameter {\tt value} for the method
+  invocation {\tt foobar2(arg1,arg2)}. 
+\item {\tt public boolean setVDI\_foobar2(Object arg1, Object arg2, Object value)}\\
+  {\tt public boolean setVDN\_foobar2(Object arg1, Object arg2, Object value)}
+  \\
+  A simplified interface when only one value is to be added.
+\item {\tt public boolean deleteVDI\_foobar2(Object arg1, Object arg2, Vector value)}\\
+  {\tt public boolean deleteVDN\_foobar2(Object arg1, Object arg2, Vector value)}
+  \\
+  Delete a set of values from {\tt foobar2(arg1,arg2)}. The set is given by
+  the vector parameter {\tt value}. 
+\item {\tt public boolean deleteVDI\_foobar2(Object arg1, Object arg2, Object value)}\\
+  {\tt public boolean deleteVDN\_foobar2(Object arg1, Object arg2, Object value)}
+  \\
+  A simplified interface for deleting a single value.
+\item {\tt public boolean deleteVDI\_foobar2(Object arg1, Object arg2)}\\
+  {\tt public boolean deleteVDN\_foobar2(Object arg1, Object arg2)}
+  \\
+  Delete all values for the method invocation {\tt foobar2(arg1,arg2)}. 
+\end{enumerate}
+%% 
+For Boolean and procedural methods, the generated methods are similar
+except that there is only one version for the set and delete methods. In
+addition, Boolean inheritable methods use the {\tt getBDI\_*}, {\tt
+  setBDI\_*}, etc., form, while non-inheritable methods use the {\tt
+  getBDN\_*}, etc., form.  Procedural methods use the {\tt getPDI\_*}, {\tt
+  getPDN\_*}, etc., forms.  For instance,
+%% 
+\begin{enumerate}
+\item  {\tt public boolean getBDI\_foobar3()}   \\
+  {\tt public boolean getBDN\_foobar3()} \\
+  {\tt public boolean getPDI\_foobar3()}   \\
+  {\tt public boolean getPDN\_foobar3()}
+\item {\tt public boolean setBDI\_foobar3()}   \\
+  {\tt public boolean setBDN\_foobar3()} \\
+  {\tt public boolean setPDI\_foobar3()}   \\
+  {\tt public boolean setPDN\_foobar3()}
+\item {\tt public boolean deleteBDI\_foobar3()}  \\
+  {\tt public boolean deleteBDN\_foobar3()}  \\
+  {\tt public boolean deletePDI\_foobar3()}  \\
+  {\tt public boolean deletePDN\_foobar3()}  
+\end{enumerate}
+%% 
+
+In addition, the methods to query the ISA hierarchy are available:
+%% 
+\begin{itemize}
+\item  {\tt public Iterator getDirectInstances()}
+\item  {\tt public Iterator getInstances()}
+\item  {\tt public Iterator getDirectSubClasses()}
+\item  {\tt public Iterator getSubClasses()}
+\item   {\tt public Iterator getSuperClasses()}   
+\item   {\tt public Iterator getDirectSuperClasses()}   
+\end{itemize}
+%% 
+These methods apply to the java proxy object that corresponds to the \fl
+class person.
+
+All these methods are generated automatically by executing the following
+\FLORA query, where all arguments must be bound:
+%% 
+\begin{verbatim}
+ // %write(?Class,?Module,?ProxyClassFileName).
+ ?- %write(foo,example,'myproject/foo.java').
+\end{verbatim}
+%% 
+The first argument specifies the class for which to generate the methods,
+the file name tells where to put the Java file for the proxy object,
+and the model argument tells which \FLORA model to load this program to. The
+result of this execution will be the file {\tt foo.java} which should be
+included with your java program (the program that is going to interface with
+\FLORA). Note that because of Java conventions, the file name must have
+the same name as the class name.
+It is important to remember, however, that proxy methods will
+be generated only for those \fl methods that have been declared using
+signatures.
+
+Let us now come back to our program {\tt flogic\_basics.flr} for which we
+want to use the high-level API.  Suppose we want to query the person class.
+To generate the proxy declarations for that class, we create
+the file {\tt person.java} for the 
+module {\tt basic\_mod} as follows.
+%%
+\begin{quote}
+\begin{verbatim}
+?- flLoad('examples/flogic_basics'>>basic_mod).
+?- flLoad(javaAPI).
+?- %write(person,basic_mod,'examples/person.java')
+\end{verbatim}
+\end{quote}
+
+
+The {\tt \%write} method will create the file {\tt person.java} shown
+below.  The methods defined in {\tt person.java} are the class constructors
+for {\tt person}, the methods to query the ISA hierarchy, and the ``get'',
+``set'' and ``delete'' methods for each method and attribute declared in
+the \FLORA class {\tt person}.  The parameters for the ``get'', ``set'' and
+``delete'' Java methods are the same as for the corresponding \FLORA
+methods. The first constructor for class {\tt person} takes a low-level
+object of class {\tt net.sourceforge.flora.javaAPI.src.FloraObject} as a
+parameter. The second parameter is the \FLORA module for which the proxy
+object is to be created.
+The second {\tt person}-constructor takes \fl object Id instead of a
+low-level {\tt FloraObject}. It also takes the module name, as before, but,
+in addition, it takes a session for a running \FLORA instance.
+The session parameter was not needed for the first {\tt person}-constructor
+because {\tt FloraObject} is already attached to a concrete session.  
+
+It can be seen from the form of the proxy object constructors that
+proxy objects are attached to specific \FLORA modules, which may seem to
+go against the general philosophy that \fl objects do not belong to any
+module --- only their methods do. On closer examination, however, attaching
+high-level proxy Java objects to modules makes perfect sense. Indeed, a
+proxy object encapsulates operations for manipulating \fl attributes 
+and methods, which belong to concrete \FLORA modules, so the proxy object
+needs to know which module it operates upon.
+
+
+\underline{{\bf person.java file}}
+
+\begin{quote}
+\begin{verbatim}
+import java.util.*;
+import net.sourceforge.flora.javaAPI.src.*;
+public class person {
+
+    public FloraObject sourceFloraObject;
+
+    // proxy objects' constructors
+    public person(FloraObject sourceFloraObject, String moduleName) { ... }
+    public person(String floraOID,String moduleName, FloraSession session) { ... }
+
+    // ISA hierarchy queries
+    public Iterator getDirectInstances() { ... }
+    public Iterator getInstances() { ... }
+    public Iterator getDirectSubClasses() { ... }
+    public Iterator getSubClasses() { ... }
+    public Iterator getDirectSuperClasses() { ... }
+    public Iterator getSuperClasses() { ... }
+
+    // Java methods for manipulating FLORA-2 methods
+    public boolean setVDI_age(Object value) { ... }
+    public boolean setVDN_age(Object value) { ... }
+    public Iterator getVDI_age(){ ... }
+    public Iterator getVDN_age(){ ... }
+    public boolean deleteVDI_age(Object value) { ... }
+    public boolean deleteVDN_age(Object value) { ... }
+    public boolean deleteVDI_age() { ... }
+    public boolean deleteVDN_age() { ... }
+    public boolean setVDI_salary(Object year,Object value) { ... }
+    public boolean setVDN_salary(Object year,Object value) { ... }
+    public Iterator getVDI_salary(Object year) { ... }
+    public Iterator getVDN_salary(Object year) { ... }
+    public boolean deleteVDI_salary(Object year,Object value) { ... }
+    public boolean deleteVDN_salary(Object year,Object value) { ... }
+    public boolean deleteVDI_salary(Object year) { ... }
+    public boolean deleteVDN_salary(Object year) { ... }
+    public boolean setVDI_hobbies(Vector value) { ... }
+    public boolean setVDN_hobbies(Vector value) { ... }
+    public Iterator getVDI_hobbies(){ ... }
+    public Iterator getVDN_hobbies(){ ... }
+    public boolean deleteVDI_hobbies(Vector value) { ... }
+    public boolean deleteVDN_hobbies(Vector value) { ... }
+    public boolean deleteVDI_hobbies(){ ... }
+    public boolean deleteVDN_hobbies(){ ... }
+    public boolean setVDI_instances(Vector value) { ... }
+    public boolean setVDN_instances(Vector value) { ... }
+    public Iterator getVDI_instances(){ ... }
+    public Iterator getVDN_instances(){ ... }
+    public boolean deleteVDI_instances(Vector value) { ... }
+    public boolean deleteVDN_instances(Vector value) { ... }
+    public boolean deleteVDI_instances(){ ... }
+    public boolean deleteVDN_instances(){ ... }
+    public boolean setVDI_kids(Vector value) { ... }
+    public boolean setVDN_kids(Vector value) { ... }
+    public Iterator getVDI_kids(){ ... }
+    public Iterator getVDN_kids(){ ... }
+    public boolean deleteVDI_kids(Vector value) { ... }
+    public boolean deleteVDN_kids(Vector value) { ... }
+    public boolean deleteVDI_kids(){ ... }
+    public boolean deleteVDN_kids(){ ... }
+    public boolean setVDI_believes_in(Vector value) { ... }
+    public boolean setVDN_believes_in(Vector value) { ... }
+    public Iterator getVDI_believes_in(){ ... }
+    public Iterator getVDN_believes_in(){ ... }
+    public boolean deleteVDI_believes_in(Vector value) { ... }
+    public boolean deleteVDN_believes_in(Vector value) { ... }
+    public boolean deleteVDI_believes_in(){ ... }
+    public boolean deleteVDN_believes_in(){ ... }
+}
+\end{verbatim}
+\end{quote}
+
+\paragraph{Stage 3: Writing Java application programs.}
+
+The following program ({\tt flogicbasicsExample.java}) shows several
+queries that use the high-level interface. The
+class {\tt person.java} is generated at the previous stage.
+The methods of the high-level interface operate on Java objects that are
+proxies for \FLORA objects. These Java objects are members of the class
+{\tt net.sourceforge.flora.javaAPI.src.FloraObject}.
+Therefore, before one can use the high-level methods one need to first
+retrieve the appropriate proxy objects on which to operate. This is done
+by sending an appropriate query through the method {\tt ExecuteQuery}---the
+same method that was used in the low-level interface.
+Alternatively, {\tt person}-objects could be constructed using the
+3-argument proxy constructor, which takes \fl oids.
+
+
+\begin{quote}
+\begin{verbatim}
+import net.sourceforge.flora.javaAPI.src.*;
+import java.util.*;
+
+public class flogicbasicsExample {
+
+    public static void main(String[] args) {
+        /* Initializing the session */
+        FloraSession session = new FloraSession();
+        System.out.println("Flora session started");
+
+        String fileName = "examples/flogic_basics"; // must be a valid path
+        /* Loading the flora file */
+        session.loadFile(fileName,"basic_mod");
+
+        // Retrieving instances of the class person through low-level API
+        String command = "?X:person@basic_mod.";
+        System.out.println("Query:"+command);
+        Iterator personObjs = session.ExecuteQuery(command);
+
+        /* Print out person names and information about their kids */
+        person currPerson = null;
+        while (personObjs.hasNext()) {
+            FloraObject personObj = personObjs.next();
+            // Elevate personObj to the higher-level person-object
+            currPerson =new person(personObj,"basic_mod");
+
+            /* Set that person's age to 50 */
+            currPerson.setVDN_age("50");
+
+            /* Get this person's kids */
+            Iterator kidsItr = currPerson.getVDN_kids();
+            while (kidsItr.hasNext()) {
+                FloraObject kidObj = (FloraObject)(kidsItr.next());
+                System.out.println("Person: " + personObj + " has kid: " +kidObj);
+
+                person kidPerson = null;
+                // Elevate kidObj to kidPerson
+                kidPerson = new person(kidObj,"basic_mod");
+
+                /* Get kidPerson's hobbies */
+                Iterator hobbiesItr = kidPerson.getVDN_hobbies();
+                while(hobbiesItr.hasNext()) {
+                    FloraObject hobbyObj = (FloraObject)(hobbiesItr.next());
+                    System.out.println("Kid:"+kidObj + " has hobby:" +hobbyObj);
+                }
+            }
+        }
+
+        FloraObject age;
+        // create a person-object directly by supplying its F-logic OID
+        // father(mary)
+        currPerson = new person("father(mary)", "example", session);
+        Iterator maryfatherItr = currPerson.getVDN_age();
+        age = (FloraObject)maryfatherItr.next();
+        System.out.println("Mary's father is " + age + " years old");
+
+        // create a proxy object for the F-logic class person itself
+        person personClass = new person("person", "example", session);
+        // query its instances through the high-level interface
+        instanceIter = personClass.getInstances();
+        System.out.println("Person instances using high-level API:");
+        while (instanceIter.hasNext())
+            System.out.println("    " + (FloraObject)instanceIter.next());
+        
+        session.close();
+        System.exit();
+    }
+}
+\end{verbatim}
+\end{quote}
+
+\paragraph{Stage 4: Running the Java application program.}
+To run Java programs that interface with \FLORA, one must follow the
+following guidelines.
+
+\begin{itemize}
+\item Place the files {\tt flogicsbasicsExample.java} (the program you have
+  written) and {\tt person.java} (the automatically generated file)
+in the same directory and compile them using the {\tt javac}  command. Add
+the directories containing the API code (i.e., the correct path name of the
+directory {\tt .../flora2/java/API}) and the {\tt
+interprolog.jar} file to the Java classpath.
+
+
+\item Run the code using the following command (for Unix, change {\tt
+    \%VAR\%} to {\tt \$VAR} and replace $\backslash$ with {\tt /}).
+\begin{verbatim}
+%JAVA_BIN%\java -DXSB_ROOT_DIRECTORY=%XSB_ROOT_DIRECTORY%
+                -DFLORA_DIRECTORY=%FLORA_DIRECTORY%
+                -Djava.library.path=%XSB_ROOT_DIRECTORY%
+                -DENGINE=%ENGINE%
+                -classpath %CLASSPATH% flogicbasicsExample
+\end{verbatim}
+
+  The above command uses several shell variables, which are explained below.
+  Instead of using the variables, one can substitute their values directly.
+
+{\tt JAVA\_BIN}: This variable should point to the directory
+containing the {\tt java}  and {\tt javac}  executables.
+
+{\tt XSB\_ROOT\_DIRECTORY}: This variable should be set to the
+directory containing the XSB executable.
+
+{\tt FLORA\_DIRECTORY}: This variable should be set to the directory
+containing the \FLORA system.
+
+{\tt ENGINE}: This variable should be set to
+{\tt Native} or  {\tt Subprocess}. The variable indicates whether InterProlog
+should use the Java Native Interface (JNI) or sockets to communicate with \FLORA.
+
+{\tt CLASSPATH}: This variable should point to the directory
+containing the API code (i.e., the correct path name of the
+directory {\tt .../flora2/java/API})  and the file {\tt interprolog.jar}
+(see below).
+
+\end{itemize}
+
+\section{Configuring the System}
+The Java-to-\FLORA interface needs XSB, \FLORA, Java, and the
+Interprolog library to be installed and configured. Here are the
+configuration steps.
+
+\begin{itemize}
+\item Download J2SE 1.4.2 (or newer) from
+  {\tt http://java.sun.com/j2se/},
+and install it in some directory, say {\tt MY\_JAVA\_DIR}.
+\item On Linux and other Unix-based systems,
+  XSB needs to be configured in a special way
+in order to interoperate with InterProlog. To build XSB with
+InterProlog support, run the following commands in the {\tt build}
+subdirectory of XSB.
+The {\tt configure} script needs to be run only on Linux and
+other Unix-based systems.
+%%
+\begin{verbatim}
+./configure --with-interprolog
+            --site-includes='MY_JAVA_DIR/includes MY_JAVA_DIR/includes/linux'
+./makexsb
+./makexsb dynmodule.
+\end{verbatim}
+%%
+{\tt --site-includes} is needed only if Java is installed in a non-standard
+place where {\tt configure} cannot find it automatically.
+
+Under Cygwin, XSB also needs to be configured as above, but the last step,
+{\tt ./makexsb dynmodule}, should be dropped.
+
+\item Under Windows, XSB is distributed preconfigured for use with
+  Interprolog. However, if you still need to rebuild it, use the following
+  command sequence. First, you would need to configure XSB \emph{under
+    Cygwin} (it is not possible to configure XSB under native Windows!) in a
+  Cygwin terminal window.  
+  %% 
+\begin{verbatim}
+./configure --with-interprolog
+            --with-wind
+            --site-includes='MY_JAVA_DIR\includes MY_JAVA_DIR\includes\win32'
+\end{verbatim}
+  %% 
+  The path names in {\tt --site-include} must be Windows path names, not
+  Cygwin's.
+
+  Then, in a Windows (not Cygwin) command terminal, type:
+  %% 
+\begin{verbatim}
+makexsb_wind  
+\end{verbatim}
+  %% 
+  Note: this assumes that {\tt nmake} and the C++ compiler are available on
+  your system. See the \FLORA manual, Section 1, for the instructions on
+  obtaining these programs.
+\item Rebuild \FLORA with the new XSB binary obtained in the
+previous step.
+\item Get InterProlog from {\tt http://www.declarativa.com/interprolog/}
+and put it in the {\tt java}  folder of the \FLORA distribution.
+(Do this only if you need a newer version of InterProlog. \FLORA
+distribution already includes a version of {\tt interprolog.jar} in the
+{\tt java} subdirectory).
+\item The {\tt java/API/net} subdirectory in the \FLORA distribution
+  consists of the system code for the interface.
+  Sample applications are found in the {\tt java/API/examples}  folder.
+\item To build the code for the interface, use the scripts {\tt build.bat} or
+  {\tt build.sh} in the {\tt java/API}  folder (depending on whether you are
+  using Windows or Unix).
+\item To build the the examples, use the scripts
+  {\tt buildExample.bat} or  {\tt buildExample.sh} in the {\tt java/API/examples}
+  folder. For instance, to
+  build the {\tt flogicbasicsExample} example, use the commands
+\begin{verbatim}
+cd examples
+buildExample.sh flogicbasicsExample
+(or buildExample.bat flogicbasicsExample, for Windows)
+\end{verbatim}
+\item To run the demos, use the scripts
+{\tt runExample.bat} and  {\tt runExample.sh}  in the {\tt java/API/examples}
+folder. For instance, to
+run the {\tt flogicbasicsExample},  use the commands
+\begin{verbatim}
+runExample.sh flogicbasicsExample
+(or runExample.bat flogicbasicsExample , for Windows)
+\end{verbatim}
+\end{itemize}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "flora-packages"
+%%% End: 

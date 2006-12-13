@@ -1,0 +1,385 @@
+:- compiler_options([spec_off]).
+/************************************************************************
+  file: headerinc/flrheader_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrheader.flh"
+#include "flora_porting.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrheader2_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+  It includes files that must be included in the header and typically
+  contain some Prolog statements. Such files cannot appear
+  in flrheader.flh because flrheader.flh is included in various restricted
+  contexts where Prolog statements are not allowed.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrtable.flh"
+
+/***********************************************************************/
+
+
+/********** Trailer Control Variables ************/
+
+#define EQUALITYnone
+#define INHERITANCEflogic
+#define CUSTOMnone
+
+/************************************************************************
+  file: headerinc/flrdefinition_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrdefinition.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrtrailerregistry_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrtrailerregistry.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrrefreshtable_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrrefreshtable.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flrimportedcalls_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+%% Loads the file with all the import statements for predicates
+%% that must be known everywhere
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBIMPORTEDCALLS).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrindex_P_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrindex_P.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrpatch_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrexportcheck.flh"
+#include "flrpatch.flh"
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrdyna_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrdyna.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flrexport_inc.flh
+
+  Author(s): Vishal Chowdhary
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBEXPORT).
+
+
+/***********************************************************************/
+
+
+/************************************************************************
+  file: syslibinc/flrclause_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBCLAUSE).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flrmetaops.flh
+
+  Author(s): kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+
+?- flora_load_library(FLLIBMETAOPS).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: libinc/flrsystem_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+#endif
+
+:- import flora_load_system_module/1 from flrlibman.
+?- flora_load_system_module(FLSYSMODSYSTEM).
+
+/***********************************************************************/
+
+#if !defined(FLORA_FLD_FILENAME)
+#if !defined(FLORA_LOADDYN_DATA)
+#define FLORA_LOADDYN_DATA
+:- import flora_loaddyn_data/3 from flrutils.
+#endif
+#define FLORA_FLD_FILENAME  'flrio.fld'
+?- flora_loaddyn_data(FLORA_FLD_FILENAME,FLORA_THIS_MODULE_NAME,'fld').
+#else
+#if !defined(FLORA_READ_CANONICAL_AND_INSERT)
+#define FLORA_READ_CANONICAL_AND_INSERT
+:- import flora_read_canonical_and_insert/2 from flrutils.
+#endif
+?- flora_read_canonical_and_insert(FLORA_FLD_FILENAME,FLORA_THIS_FLD_STORAGE).
+#endif
+
+:-('fllibexport'([['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar1,'flapply'('open',__newvar2,__newvar3),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar4,'close',[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar5,'flapply'('read',__newvar6),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('write',__newvar7,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar8,'flapply'('write',__newvar9),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('stdread',__newvar10,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('stdwrite',__newvar11,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('fmt_write',__newvar12,__newvar13,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar14,'flapply'('fmt_write',__newvar15,__newvar16),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('fmt_write_string',__newvar17,__newvar18,__newvar19,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('fmt_read',__newvar20,__newvar21,__newvar22,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar23,'flapply'('fmt_read',__newvar24,__newvar25,__newvar26),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar27,'flapply'('write_canonical',__newvar28),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('write_canonical',__newvar29,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('read_canonical',__newvar30,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar31,'flapply'('read_canonical',__newvar32),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar33,'flapply'('readline',__newvar34,__newvar35),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('readline',__newvar36,__newvar37,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar38,'flapply'('writeln',__newvar39),[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('writeln',__newvar40,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)(nl,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('nl',__newvar41,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar42,'see',[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('see',__newvar43,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)(seen,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('seeing',__newvar44,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar45,'tell',[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('tell',__newvar46,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)(told,[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(d_tran)(__newvar47,'telling',[_CallerModuleVar,_CallerModuleArgsVar]))],['flexport'('readable',FLORA_THIS_MODULE_NAME,[],FLORA_THIS_WORKSPACE(flapply)('telling',__newvar48,[_CallerModuleVar,_CallerModuleArgsVar]))]])).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filename,'flapply'('open',__Mode,__Port),[_CallerModuleVar,_CallerModuleArgsVar]),'open'(__Filename,__Mode,__Port),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filename,'flapply'('open',__Mode,__Port),[_CallerModuleVar,_CallerModuleArgsVar]),'open'(__Filename,__Mode,__Port)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Port,'close',[_CallerModuleVar,_CallerModuleArgsVar]),'close'(__Port),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Port,'close',[_CallerModuleVar,_CallerModuleArgsVar]),'close'(__Port)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('stdread',__HResult,[_CallerModuleVar,_CallerModuleArgsVar]),','('read'(0,__PResult),'flora_plg2hlg'(__PResult,__HResult,flapply,0)),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('stdread',__HResult,[_CallerModuleVar,_CallerModuleArgsVar]),','('read'(0,__PResult),'flora_plg2hlg'(__PResult,__HResult,flapply,0))).
+:-(import(from(/(flora_write_oid,2),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('stdwrite',__Term,[_CallerModuleVar,_CallerModuleArgsVar]),'flora_write_oid'(1,__Term),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('stdwrite',__Term,[_CallerModuleVar,_CallerModuleArgsVar]),'flora_write_oid'(1,__Term)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('fmt_write',__Format,__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__O,__FO,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fmt_write'(__Format,__FO))),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('fmt_write',__Format,__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__O,__FO,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fmt_write'(__Format,__FO)))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__FileHandle,'flapply'('fmt_write',__Format,__O),[_CallerModuleVar,_CallerModuleArgsVar]),','(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__O,__FO,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fmt_write'(__FileHandle,__Format,__FO)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__FileHandle,'flapply'('fmt_write',__Format,__O),[_CallerModuleVar,_CallerModuleArgsVar]),','(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__O,__FO,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fmt_write'(__FileHandle,__Format,__FO))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('fmt_write_string',__String,__Format,__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__O,__FO,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fmt_write_string'(__String,__Format,__FO))),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('fmt_write_string',__String,__Format,__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__O,__FO,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fmt_write_string'(__String,__Format,__FO)))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('fmt_read',__Format,__Result,__Status,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','('fmt_read'(__Format,__PResult,__Status),'flora_plg2hlg'(__PResult,__Result,flapply,0))),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('fmt_read',__Format,__Result,__Status,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','('fmt_read'(__Format,__PResult,__Status),'flora_plg2hlg'(__PResult,__Result,flapply,0)))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__FileHandle,'flapply'('fmt_read',__Format,__Result,__Status),[_CallerModuleVar,_CallerModuleArgsVar]),','('fmt_read'(__FileHandle,__Format,__PResult,__Status),'flora_plg2hlg'(__PResult,__Result,flapply,0)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__FileHandle,'flapply'('fmt_read',__Format,__Result,__Status),[_CallerModuleVar,_CallerModuleArgsVar]),','('fmt_read'(__FileHandle,__Format,__PResult,__Status),'flora_plg2hlg'(__PResult,__Result,flapply,0))).
+:-(import(from(/(file_write_canonical,2),xsb_writ))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filehandle,'flapply'('write_canonical',__HTerm),[_CallerModuleVar,_CallerModuleArgsVar]),','('flora_plg2hlg'(__PTerm,__HTerm,flapply,0),'file_write_canonical'(__Filehandle,__PTerm)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filehandle,'flapply'('write_canonical',__HTerm),[_CallerModuleVar,_CallerModuleArgsVar]),','('flora_plg2hlg'(__PTerm,__HTerm,flapply,0),'file_write_canonical'(__Filehandle,__PTerm))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('write_canonical',__HTerm,[_CallerModuleVar,_CallerModuleArgsVar]),','('flora_plg2hlg'(__PTerm,__HTerm,flapply,0),'write_canonical'(__PTerm)),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('write_canonical',__HTerm,[_CallerModuleVar,_CallerModuleArgsVar]),','('flora_plg2hlg'(__PTerm,__HTerm,flapply,0),'write_canonical'(__PTerm))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('read_canonical',__HTerm,[_CallerModuleVar,_CallerModuleArgsVar]),','('read_canonical'(__PTerm),'flora_plg2hlg'(__PTerm,__HTerm,flapply,0)),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('read_canonical',__HTerm,[_CallerModuleVar,_CallerModuleArgsVar]),','('read_canonical'(__PTerm),'flora_plg2hlg'(__PTerm,__HTerm,flapply,0))).
+:-(import(from(/(file_read_canonical,3),machine))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filehandle,'flapply'('read_canonical',__HTerm),[_CallerModuleVar,_CallerModuleArgsVar]),','('file_read_canonical'(__Filehandle,__PTerm,__newvar1),'flora_plg2hlg'(__PTerm,__HTerm,flapply,0)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filehandle,'flapply'('read_canonical',__HTerm),[_CallerModuleVar,_CallerModuleArgsVar]),','('file_read_canonical'(__Filehandle,__PTerm,__newvar1),'flora_plg2hlg'(__PTerm,__HTerm,flapply,0))).
+:-(import(from(/(file_read_line_atom,2),file_io))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filehandle,'flapply'('readline','atom',__String),[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_atom'(__Filehandle,__String)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filehandle,'flapply'('readline','atom',__String),[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_atom'(__Filehandle,__String))).
+:-(import(from(/(file_read_line_list,2),file_io))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filehandle,'flapply'('readline','charlist',__String),[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_list'(__Filehandle,__String)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filehandle,'flapply'('readline','charlist',__String),[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_list'(__Filehandle,__String))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(___Filehandle,'flapply'('readline',__Request,__newvar1),[_CallerModuleVar,_CallerModuleArgsVar]),FLORA_SYSTEM_WORKSPACE(sys,flapply)('abort',','('Invalid readline format, ',__Request),[FLORA_THIS_MODULE_NAME,'flora'('sys')]),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(___Filehandle,'flapply'('readline',__Request,__newvar1),[_CallerModuleVar,_CallerModuleArgsVar]),FLORA_SYSTEM_WORKSPACE(sys,flapply)('abort',','('Invalid readline format, ',__Request),[FLORA_THIS_MODULE_NAME,'flora'('sys')])).
+:-(import(from(/(file_read_line_atom,1),file_io))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('readline','atom',__String,[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_atom'(__String)),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('readline','atom',__String,[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_atom'(__String))).
+:-(import(from(/(file_read_line_list,1),file_io))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('readline','charlist',__String,[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_list'(__String)),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('readline','charlist',__String,[_CallerModuleVar,_CallerModuleArgsVar]),','('!','file_read_line_list'(__String))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('readline',__Request,__newvar1,[_CallerModuleVar,_CallerModuleArgsVar]),FLORA_SYSTEM_WORKSPACE(sys,flapply)('abort',','('Invalid readline format, ',__Request),[FLORA_THIS_MODULE_NAME,'flora'('sys')]),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('readline',__Request,__newvar1,[_CallerModuleVar,_CallerModuleArgsVar]),FLORA_SYSTEM_WORKSPACE(sys,flapply)('abort',','('Invalid readline format, ',__Request),[FLORA_THIS_MODULE_NAME,'flora'('sys')])).
+:-(import(from(/(flora_write_oid,1),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('write',__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!','flora_write_oid'(__O)),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('write',__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!','flora_write_oid'(__O))).
+:-(import(from(/(flora_write_oid,2),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__IOstream,'flapply'('write',__O),[_CallerModuleVar,_CallerModuleArgsVar]),'flora_write_oid'(__IOstream,__O),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__IOstream,'flapply'('write',__O),[_CallerModuleVar,_CallerModuleArgsVar]),'flora_write_oid'(__IOstream,__O)).
+:-(import(from(/(flora_write_oid,1),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('writeln',__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','('flora_write_oid'(__O),'nl')),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('writeln',__O,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','('flora_write_oid'(__O),'nl'))).
+:-(import(from(/(flora_write_oid,2),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__IOstream,'flapply'('writeln',__O),[_CallerModuleVar,_CallerModuleArgsVar]),','('flora_write_oid'(__IOstream,__O),'nl'(__IOstream)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__IOstream,'flapply'('writeln',__O),[_CallerModuleVar,_CallerModuleArgsVar]),','('flora_write_oid'(__IOstream,__O),'nl'(__IOstream))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)(nl,[_CallerModuleVar,_CallerModuleArgsVar]),'nl',null)).
+:-(FLORA_THIS_WORKSPACE(flapply)(nl,[_CallerModuleVar,_CallerModuleArgsVar]),'nl').
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('nl',__IOstream,[_CallerModuleVar,_CallerModuleArgsVar]),'nl'(__IOstream),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('nl',__IOstream,[_CallerModuleVar,_CallerModuleArgsVar]),'nl'(__IOstream)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('read',__Result,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','('read'(__PResult),'flora_plg2hlg'(__PResult,__Result,flapply,0))),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('read',__Result,[_CallerModuleVar,_CallerModuleArgsVar]),','('!',','('read'(__PResult),'flora_plg2hlg'(__PResult,__Result,flapply,0)))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__IOstream,'flapply'('read',__Result),[_CallerModuleVar,_CallerModuleArgsVar]),','('read'(__IOstream,__PResult),'flora_plg2hlg'(__PResult,__Result,flapply,0)),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__IOstream,'flapply'('read',__Result),[_CallerModuleVar,_CallerModuleArgsVar]),','('read'(__IOstream,__PResult),'flora_plg2hlg'(__PResult,__Result,flapply,0))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filename,'see',[_CallerModuleVar,_CallerModuleArgsVar]),'see'(__Filename),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filename,'see',[_CallerModuleVar,_CallerModuleArgsVar]),'see'(__Filename)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('see',__Filename,[_CallerModuleVar,_CallerModuleArgsVar]),'see'(__Filename),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('see',__Filename,[_CallerModuleVar,_CallerModuleArgsVar]),'see'(__Filename)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)(seen,[_CallerModuleVar,_CallerModuleArgsVar]),'seen',null)).
+:-(FLORA_THIS_WORKSPACE(flapply)(seen,[_CallerModuleVar,_CallerModuleArgsVar]),'seen').
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('seeing',__Stream,[_CallerModuleVar,_CallerModuleArgsVar]),'seeing'(__Stream),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('seeing',__Stream,[_CallerModuleVar,_CallerModuleArgsVar]),'seeing'(__Stream)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Filename,'tell',[_CallerModuleVar,_CallerModuleArgsVar]),'tell'(__Filename),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Filename,'tell',[_CallerModuleVar,_CallerModuleArgsVar]),'tell'(__Filename)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('tell',__Filename,[_CallerModuleVar,_CallerModuleArgsVar]),'tell'(__Filename),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('tell',__Filename,[_CallerModuleVar,_CallerModuleArgsVar]),'tell'(__Filename)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)(told,[_CallerModuleVar,_CallerModuleArgsVar]),'told',null)).
+:-(FLORA_THIS_WORKSPACE(flapply)(told,[_CallerModuleVar,_CallerModuleArgsVar]),'told').
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('telling',__Stream,[_CallerModuleVar,_CallerModuleArgsVar]),'telling'(__Stream),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('telling',__Stream,[_CallerModuleVar,_CallerModuleArgsVar]),'telling'(__Stream)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(d_tran)(__Stream,'telling',[_CallerModuleVar,_CallerModuleArgsVar]),'telling'(__Stream),null)).
+:-(FLORA_THIS_WORKSPACE(derived_tran)(__Stream,'telling',[_CallerModuleVar,_CallerModuleArgsVar]),'telling'(__Stream)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__WrappedArgs,__OutTerm,[_CallerModuleVar,_CallerModuleArgsVar]),','('fllibmetauniv'(__WrappedArgs,['flapply'('hilog',__Fun)|__Args]),','('!',','(FLORA_THIS_WORKSPACE(flapply)('florify_arglist',__Args,__OutList,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fllibmetauniv'(__OutTerm,[__Fun|__OutList])))),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__WrappedArgs,__OutTerm,[_CallerModuleVar,_CallerModuleArgsVar]),','('fllibmetauniv'(__WrappedArgs,['flapply'('hilog',__Fun)|__Args]),','('!',','(FLORA_THIS_WORKSPACE(flapply)('florify_arglist',__Args,__OutList,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fllibmetauniv'(__OutTerm,[__Fun|__OutList]))))).
+:-(import(from(/(flora_decode_oid_as_atom,2),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__Arg,__OutTerm,[_CallerModuleVar,_CallerModuleArgsVar]),'flora_decode_oid_as_atom'(__Arg,__OutTerm),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('florify_arguments',__Arg,__OutTerm,[_CallerModuleVar,_CallerModuleArgsVar]),'flora_decode_oid_as_atom'(__Arg,__OutTerm)).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('florify_arglist',[],[],[_CallerModuleVar,_CallerModuleArgsVar]),'!',null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('florify_arglist',[],[],[_CallerModuleVar,_CallerModuleArgsVar]),'!').
+:-(import(from(/(flora_decode_oid_as_atom,2),flrdecode))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('florify_arglist',[__Arg|__Args],[__OutArg|__OutArgs],[_CallerModuleVar,_CallerModuleArgsVar]),','('compound'(__Arg),','('!',','('flora_decode_oid_as_atom'(__Arg,__OutArg),FLORA_THIS_WORKSPACE(flapply)('florify_arglist',__Args,__OutArgs,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME])))),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('florify_arglist',[__Arg|__Args],[__OutArg|__OutArgs],[_CallerModuleVar,_CallerModuleArgsVar]),','('compound'(__Arg),','('!',','('flora_decode_oid_as_atom'(__Arg,__OutArg),FLORA_THIS_WORKSPACE(flapply)('florify_arglist',__Args,__OutArgs,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]))))).
+?-('fllibinsrulesig'(FLORA_THIS_MODULE_NAME,FLORA_THIS_WORKSPACE(flapply)('florify_arglist',[___Arg|__Args],[___Arg|__OutArgs],[_CallerModuleVar,_CallerModuleArgsVar]),FLORA_THIS_WORKSPACE(flapply)('florify_arglist',__Args,__OutArgs,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),null)).
+:-(FLORA_THIS_WORKSPACE(flapply)('florify_arglist',[___Arg|__Args],[___Arg|__OutArgs],[_CallerModuleVar,_CallerModuleArgsVar]),FLORA_THIS_WORKSPACE(flapply)('florify_arglist',__Args,__OutArgs,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME])).
+/************************************************************************
+  file: headerinc/flrtrailer_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrtrailer.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrdynz_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrdynz.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrpreddef_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrpreddef.flh"
+
+/***********************************************************************/
+

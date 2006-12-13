@@ -1,0 +1,76 @@
+/* File:      jutils.P
+** Author: Damyan Ognyamoff
+*/
+
+
+:- compiler_options([xpp_on]).
+#include "extensions_xsb.h"
+
+/*#include "flora_exceptions.flh"*/
+#include "flora_terms.flh"
+
+
+:- import flAll/0 from flrshell.
+:- import
+	flora_db_find_base/2
+   from flrstoragebase.
+:-[flrstoragebase].
+__foo(X,Y):- flora_db_find_base(X,Y).
+
+:- import member/2 from basics.
+
+:- import
+	flora_load_library/1,
+	flora_load_system_module/1
+   from flrlibman.
+
+:- import stat_flag/2, stat_set_flag/2 from machine.
+
+:- import 	
+	flora_good_command/1,
+	flora_shell_command_line/3 from flrutils.
+
+:- import
+	flora_set_counter/2
+   from flrporting.
+
+:- import flora_commit_storage/0, flora_reclaim_storage_space/0 from flrutils.
+/*:- import flora_refresh_tables/1,flora_abolish_table_predicate/1 from flrtables.*/
+
+jutils_init_shell :- 
+	consult(flrundefhook),
+	consult(flrutils),
+	flora_load_library(FLLIBSHELLANS),
+	flora_load_library(FLLIBLOAD),
+	flora_load_library(FLLIBDISPLAY),
+	flora_load_library(FLLIBIMPORTEDCALLS),
+	flora_set_counter(flora_shell_loaded,1),
+	!.
+
+:- jutils_init_shell.
+
+evalFLogic(Term, Code) :-
+	stat_flag(10, StdIn),
+	file_open(Term, 3, InputFile),
+	stat_set_flag(10,InputFile),
+	
+	flora_shell_command_line(Code,Options,Status),
+	( flora_good_command(Status) ->
+	    findall(SysLibOp,member(FLSYSLIB(SysLibOp),Options),SysLibList),
+	    flora_load_library(SysLibList),
+	    findall(SysModOp,member(FLSYSMOD(SysModOp),Options),SysModList),
+	    flora_load_system_module(SysModList)/*,
+	    flora_reclaim_storage_space*/
+	;
+	  true
+        ),
+	stat_set_flag(10,StdIn),
+	file_close(InputFile)
+.
+
+jEval(Code,Spec) :- 
+	Code=..[',',L,R],call(L),R=..[_, L1, Spec],call(L1)/*,flora_commit_storage*/.
+jEval(Code,Spec) :- 
+	Code=..[F,L,Spec],F \==',',call(L)/*,flora_commit_storage*/.
+
+:- export evalFLogic/2, jutils_init_shell/0,jEval/2.

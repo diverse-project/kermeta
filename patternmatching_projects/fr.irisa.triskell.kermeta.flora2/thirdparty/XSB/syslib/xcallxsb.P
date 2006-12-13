@@ -1,0 +1,119 @@
+/* File:      xcallxsb.P
+** Author(s): David Warren, Ernie Johnson
+** Contact:   xsb-contact@cs.sunysb.edu
+** 
+** Copyright (C) The Research Foundation of SUNY, 1997-1998
+** 
+** XSB is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** XSB is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with XSB; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: xcallxsb.P,v 1.14 2005/11/09 17:46:33 dwarren Exp $
+** 
+*/
+
+
+:- compiler_options([sysmod,xpp_on]).
+#include "standard.h"
+#include "sig_xsb.h"
+#include "flag_defs_xsb.h"
+
+:- import conget/2, conset/2 from gensym.
+
+:- c_callloop.
+
+
+c_callloop :-
+        set_inthandler('_$keyboard_int'(_), MYSIG_KEYB),
+	catch(c_callloop_cmd_goal([]),Ball,default_error_handler(Ball)),
+	fail.
+c_callloop :-
+	repeat,
+	catch(c_callloop_query_loop([]),Ball,default_error_handler(Ball)),
+	fail.
+
+c_callloop_cmd_goal(_) :-
+	eval_cmdline_goal.
+
+c_callloop_query_loop(_) :-
+	repeat,
+	get_from_caller(Par,VarTerm,Command),
+	(\+integer(Command)
+	 ->	file_write(STDERR,'C command error; must be an integer; is '),
+		file_write(STDERR,Command),
+		file_nl(STDERR),
+		!,
+		fail
+	 ; Command =:= 0		/* call */
+	 ->	excess_vars(Par, [], [], VarList),
+		VarTerm =.. [ret|VarList],
+		do_pcall(Par,VarTerm)
+	 ; Command =:= 2	/* string_call */
+	 ->	string_to_term(Par,Goal),
+		excess_vars(Goal,[],[],VarList),
+		VarTerm =.. [ret|VarList],
+		do_pcall(Goal,VarTerm)
+	 ; Command =:= 1	/* quit */
+	 ->	!,fail
+	 ; fail
+	).
+
+get_from_caller(_,_,_) :- halt.		% halt returns to caller
+
+do_pcall(Call,VarTerm) :-
+	'_$call'(Call),
+	get_from_caller(Call,VarTerm,Command),
+	(Command =:= 0		/* next */
+	 ->	fail
+	 ; Command =:= 1	/* close query */
+	 ->	close_open_tables,
+		!,fail
+	).
+
+% hidden version of call
+'_$call'(Y) :- 
+	'_$savecp'(C), 
+	goal_cut_trans(Y,X,C),
+	call_expose(X).
+
+
+string_to_term(Atom,Goal) :-
+	stat_flag(STDERR_BUFFERED,StderrBuffered),
+	1 =:= StderrBuffered,						% If stdio is redirected and buffered we want to capture error messages
+	!,
+	file_open(Atom,sr,Fp),
+	file_read(Fp,Goal,_),
+	file_close(Fp).
+
+
+string_to_term(Atom,Goal) :-
+	file_open(Atom,sr,Fp),
+	file_read_foe(Fp,Goal,_),
+	file_close(Fp).
+
+
+eval_cmdline_goal :-
+	xsb_flag(goal, CmdGoal),
+	file_open(CmdGoal, sr, FileDes),
+	eval_cmdline_goal(FileDes).
+
+eval_cmdline_goal(FileDes) :-
+	file_read(FileDes, Goal),
+	(Goal \= end_of_file
+	 ->	(call(Goal) -> true ; true),
+		eval_cmdline_goal(FileDes)
+	 ;	file_close(FileDes)
+	).
+
+'_$keyboard_int'(_Call) :- 
+        abort.

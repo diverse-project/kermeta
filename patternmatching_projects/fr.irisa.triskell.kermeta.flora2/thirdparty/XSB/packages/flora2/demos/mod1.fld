@@ -1,0 +1,13 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'department',__newvar2).
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'professor',__newvar2).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'coursesOffered',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'faculty',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'flapply'('teaches',__newvar4,__newvar5),__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdsig)(__newvar1,'coursesOffered',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdsig)(__newvar1,'faculty',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdsig)(__newvar1,'flapply'('teaches',__newvar4,__newvar5),__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdcondef)(__newvar1,'coursesOffered',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(mvdcondef)(__newvar1,'faculty',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(mvdcondef)(__newvar1,'flapply'('teaches',__newvar5,__newvar6),__newvar2,__newvar3,__newvar4).

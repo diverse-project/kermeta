@@ -1,0 +1,8 @@
+_$_$_flora'dyn_newoid5560[$order->0].  // @bar
+_$_$_flora'dyn_newoid5560[bar->>_$_$_flora'dyn_newoid5563].  // @bar
+_$_$_flora'dyn_newoid5563[$order->1].  // @bar
+_$_$_flora'dyn_newoid5563[a->Major Mynah].  // @bar
+_$_$_flora'dyn_newoid5563[b->abc].  // @bar
+_$_$_flora'dyn_newoid5563[c->12].  // @bar
+_$_$_flora'dyn_newoid5563[d->foo bar     ugh].  // @bar
+_$_$_flora'dyn_newoid5560[$child(0)->_$_$_flora'dyn_newoid5563].  // @bar

@@ -1,0 +1,3 @@
+:- import flora_configuration/2 from flrregistry.
+?- assert(flora_configuration(standalone,yes)).
+?- assert(flora_configuration(installdir,'C:\XSB\packages\\flora2')).

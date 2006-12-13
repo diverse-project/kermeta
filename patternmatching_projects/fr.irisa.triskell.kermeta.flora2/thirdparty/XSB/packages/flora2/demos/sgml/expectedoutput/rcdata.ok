@@ -1,0 +1,20 @@
+_$_$_flora'dyn_newoid5830[$order->0].  // @rcdata
+_$_$_flora'dyn_newoid5830[doc->>_$_$_flora'dyn_newoid5833].  // @rcdata
+_$_$_flora'dyn_newoid5833[$order->1].  // @rcdata
+_$_$_flora'dyn_newoid5833[t->>_$_$_flora'dyn_newoid5834].  // @rcdata
+_$_$_flora'dyn_newoid5834[$order->2].  // @rcdata
+_$_$_flora'dyn_newoid5834[$text->>_$_$_flora'dyn_newoid5835].  // @rcdata
+_$_$_flora'dyn_newoid5835[$order->3].  // @rcdata
+_$_$_flora'dyn_newoid5835[$string->This is rcdata Hello & World Hello].  // @rcdata
+_$_$_flora'dyn_newoid5834[$child(0)->_$_$_flora'dyn_newoid5835].  // @rcdata
+_$_$_flora'dyn_newoid5833[$child(0)->_$_$_flora'dyn_newoid5834].  // @rcdata
+_$_$_flora'dyn_newoid5833[a->>_$_$_flora'dyn_newoid5836].  // @rcdata
+_$_$_flora'dyn_newoid5836[$order->4].  // @rcdata
+_$_$_flora'dyn_newoid5836[$text->>_$_$_flora'dyn_newoid5837].  // @rcdata
+_$_$_flora'dyn_newoid5837[$order->5].  // @rcdata
+_$_$_flora'dyn_newoid5837[$string->This is an a].  // @rcdata
+_$_$_flora'dyn_newoid5836[$child(0)->_$_$_flora'dyn_newoid5837].  // @rcdata
+_$_$_flora'dyn_newoid5833[$child(1)->_$_$_flora'dyn_newoid5836].  // @rcdata
+_$_$_flora'dyn_newoid5834[$rightsibling->_$_$_flora'dyn_newoid5836].  // @rcdata
+_$_$_flora'dyn_newoid5836[$leftsibling->_$_$_flora'dyn_newoid5834].  // @rcdata
+_$_$_flora'dyn_newoid5830[$child(0)->_$_$_flora'dyn_newoid5833].  // @rcdata

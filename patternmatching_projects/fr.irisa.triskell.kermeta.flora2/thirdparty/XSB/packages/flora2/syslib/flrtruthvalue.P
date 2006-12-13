@@ -1,0 +1,76 @@
+/* File:      flrtruthvalue.P
+**
+** Author(s): Michael Kifer
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2005
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** $Id: flrtruthvalue.P,v 1.6 2006/05/29 05:15:22 kifer Exp $
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_porting.flh"
+
+:- import get_residual/2 from tables.
+:- import flora_tnot/1 from flrnegation.
+:- import convert_to_head_literal/2 from flrcanon.
+
+%% TODO: get rid of the meta declaration for get_residual
+%% When compiling, make sure that the caller argument of Goal is bound
+%% This probably happens automatically when compiling as a goal,
+%% but not as a reified statement.
+%% get rid of get_residual in all demos/tests
+
+:- table flora_truthvalue_tabled_call/1.
+
+FLLIBTRUTHVALUE(Goal,FL_TRUE) :-
+	(flora_truthvalue_tabled_call(Goal), fail
+	;
+	    %% Using HGoal doesn't work with non-tabled predicates,
+	    %% so we wrap everything in flora_truthvalue_tabled_call/1
+	    %%convert_to_head_literal(Goal,HGoal),
+	    %%get_residual(HGoal,[])
+	    get_residual(flora_truthvalue_tabled_call(Goal),[])
+	),
+	flora_abolish_table_call(flora_truthvalue_tabled_call(_)).
+FLLIBTRUTHVALUE(Goal,FL_UNKNOWN) :-
+	(flora_truthvalue_tabled_call(Goal), fail
+	;
+	    %%convert_to_head_literal(Goal,HGoal),
+	    %%get_residual(HGoal,[_|_])
+	    get_residual(flora_truthvalue_tabled_call(Goal),[_|_])
+	),
+	flora_abolish_table_call(flora_truthvalue_tabled_call(_)).
+FLLIBTRUTHVALUE(Goal,FL_FALSE) :-
+	(flora_truthvalue_tabled_call(Goal), fail
+	;
+	    %%convert_to_head_literal(Goal,HGoal),
+	    %%(get_residual(HGoal,[_|_]) -> fail
+	    (get_residual(flora_truthvalue_tabled_call(Goal),[_|_]) -> fail
+	    ;
+		flora_tnot(Goal)
+	    )
+	),
+	flora_abolish_table_call(flora_truthvalue_tabled_call(_)).
+FLLIBTRUTHVALUE(Goal,FL_FAIL) :-  FLLIBTRUTHVALUE(Goal,FL_FALSE).
+
+flora_truthvalue_tabled_call(Call) :- call(Call).

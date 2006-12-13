@@ -1,0 +1,69 @@
+/* File:      flroptimize.P
+**
+** Author(s): Michael Kifer
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2004
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_porting.flh"
+
+:- import flora_optimizer_registry/2 from flrregistry.
+:- import
+	flora_storage_check_module_name/1
+   from flrstorageutils.
+
+%% List all valid optimization options here
+optimization_type(FLORA_LOCAL_OVERRIDE_OPTION).
+optimization_type(FLORA_CLASS_EXPRESSIONS).
+
+check_option(Option) :-
+	(optimization_type(Option), !
+        ; flora_abort(['Invalid FLORA-2 runtime optimization option, ', Option])
+	).
+
+flOptimize(Option) :-
+	check_option(Option),
+	(
+	    flora_optimizer_registry(Option,Module), var(Module), !
+	;   assert(flora_optimizer_registry(Option,_))
+	).
+	
+flOptimize(Option,Module) :-
+	check_option(Option),
+	flora_storage_check_module_name(Module),
+	(
+	    flora_optimizer_registry(Option,Module), !
+	;   assert(flora_optimizer_registry(Option,Module))
+	).
+    
+
+flOptimizeReset(Option) :-
+	check_option(Option),
+	retractall(flora_optimizer_registry(Option,_)).
+
+flOptimizeReset(Option,Module) :-
+	check_option(Option),
+	flora_storage_check_module_name(Module),
+	retractall(flora_optimizer_registry(Option,Module)).

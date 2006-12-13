@@ -1,0 +1,9 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'activeNode',__newvar2).
+FLORA_THIS_WORKSPACE(flapply)('edge',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(flapply)('show',__newvar1,__newvar2).
+FLORA_THIS_WORKSPACE(flapply)('writelist',__newvar1,__newvar2).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'reachableTo',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdsig)(__newvar1,'reachableTo',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdcondef)(__newvar1,'reachableTo',__newvar2,__newvar3,__newvar4).

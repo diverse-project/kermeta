@@ -1,0 +1,668 @@
+/* File:      flrdbop.P
+**
+** Author(s): Guizhen Yang 
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2001
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_porting.flh"
+#include "flora_exceptions.flh"
+
+
+:- import append/3 from basics.
+
+:- import
+	flora_fdb_storage_name/2,
+	flora_check_module_name/1,
+	flora_decode_module_name/2,
+	flora_is_flogic_wrapper/3,
+	flora_setup_flogic_fact_wrapper/1,
+	flora_flogic_fact_wrapper/2
+   from flrwrapper.
+
+:- import
+        flora_add_last/3
+   from flrtrim.
+
+:- import flora_list2conjunct/2 from flrutils.
+
+:- import
+	flora_storage_check_module_name/1,
+	flora_storage_check_deletepredicate/2,
+	flora_construct_delete_predicate/3,
+	flora_storage_convertlist/4,
+	flora_storage_is_negation_symbol/1,
+        flora_storage_check_existence/1
+   from flrstorageutils.
+
+:- import
+	flora_db_find_base/2,
+	flora_db_insert_base/2,
+	flora_db_delete_base/2
+   from flrstoragebase.
+
+:- import flora_module_registry/1 from flrregistry.
+
+:- import 
+	get_canonical_form/2,
+	convert_to_head_literal/2,
+        flora_check_dynmod_type_consistency/1
+   from flrcanon.
+
+:- import
+	flora_check_and_delete_rules/2
+   from usermod.
+
+:- import flora_refresh_tables/1 from flrtables.
+
+:- import flora_abort/0, flora_abort/1 from flrutils.
+:- import flora_decode_goal_as_atom/2 from flrdecode.
+
+:- import 
+        flora_check_export_registry/4,
+        flora_check_export_registry_internal/4
+   from flrexport.
+
+:- import P2H_PREDICATE/4 from prolog2hilog.
+
+/*********************************************************************
+  This file is for the following non-backtrackable FLORA database
+  operations: insert, insertall, delete, deleteall, erase, eraseall.
+*********************************************************************/
+
+
+/*****************************************************************************
+  fllibinsert(+List)
+*****************************************************************************/
+FLLIBINSERT(ThisModuleName,List) :- FLLIBINSERT(ThisModuleName,List,true).
+
+
+/*****************************************************************************
+  fllibinsert(+List,+Condition)
+*****************************************************************************/
+FLLIBINSERT(ThisModuleName,List,Condition) :-
+	call(Condition),
+	flora_storage_insertfacts(ThisModuleName, List).
+
+
+/*****************************************************************************
+  flora_storage_insertfacts(+List)
+*****************************************************************************/
+flora_storage_insertfacts(_ThisModuleName,[]) :- !.
+
+%% insert{X} where X is unbound
+flora_storage_insertfacts(_ThisModuleName,[P|_T]) :-
+	var(P),
+	!,
+	flora_abort('Uninstantiated argument in insert{...}').
+
+flora_storage_insertfacts(ThisModuleName,[FLSYSDBUPDATE(P,StorageName,Module)|T]) :-
+	!,
+        flora_storage_check_existence(Module),
+        flora_check_export_registry(ThisModuleName,Module,P,FLEXPORT_UPDATABLE),
+	flora_internal_db_insert(StorageName,P),
+	flora_storage_insertfacts(ThisModuleName, T).
+
+%% insert{X@M} where X is unbound
+flora_storage_insertfacts(_ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,Var,_ModuleName,_Caller)|_T]) :-
+        var(Var),
+        !,
+	flora_abort('Uninstantiated argument in insert{...}').
+
+%% insert{%X@M} where X is unbound
+flora_storage_insertfacts(_ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Var),_ModuleName,_Caller)|_T]) :-
+        var(Var),
+        !,
+	flora_abort('Uninstantiated argument in insert{...}').
+
+flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,(First,Rest),ModuleName1,Caller)|T]) :-
+	!,
+        flora_check_dynmod_type_consistency(FLLIBMODLIT(FL_LIBMOD,(First,Rest),ModuleName1,Caller)),
+        ( First = FLLIBMODOBJ(_F,_A,_MN,_C,O) ->
+            First,
+            ( O=FLLIBMODLIT(_,_,_,_) ->
+                flora_abort(['Uninstantiated predicate in an argument positition in insert{...}'])
+            ;
+                flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,Rest,ModuleName1,Caller)])
+            )
+        ;
+            First = ','(FLLIBMODOBJ(F,A,MN,C,O),MoreObj),
+            FLLIBMODOBJ(F,A,MN,C,O),
+            ( O=FLLIBMODLIT(_,_,_,_) ->
+                flora_abort(['Uninstantiated predicate in an argument positition in insert{...}'])
+            ;
+                flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,(MoreObj,Rest),ModuleName1,Caller)])
+            )
+        ),
+	flora_storage_insertfacts(ThisModuleName,T).
+
+flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(First,Rest),ModuleName1,Caller)|T]) :-
+	!,
+        flora_check_dynmod_type_consistency(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(First,Rest),ModuleName1,Caller)),
+        ( First = FLLIBMODOBJ(_F,_A,_MN,_C,O) ->
+            First,
+            ( O=FLLIBMODLIT(_,_,_,_) ->
+                flora_abort(['Uninstantiated predicate in an argument positition in insert{...}'])
+            ;
+                flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,Rest,ModuleName1,Caller)])
+            )
+        ;
+            First = ','(FLLIBMODOBJ(F,A,MN,C,O),MoreObj),
+            FLLIBMODOBJ(F,A,MN,C,O),
+            ( O=FLLIBMODLIT(_,_,_,_) ->
+                flora_abort(['Uninstantiated predicate in an argument positition in insert{...}'])
+            ;
+                flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,(MoreObj,Rest),ModuleName1,Caller)])
+            )
+        ),
+	flora_storage_insertfacts(ThisModuleName,T).
+
+flora_storage_insertfacts(ThisModuleName,[FLLIBMODLIT(F,Args,ModuleName1,Caller)|T]) :-
+	!,
+	P2H_CONVERSION(ModuleName,ModuleName1),
+	(get_canonical_form(FLLIBMODLIT(F,Args,ModuleName,Caller), FLCANON(_,_,NewMod,P,_)) ->
+	    flora_storage_check_module_name(NewMod)
+	;
+	    flora_decode_goal_as_atom(Args,AtomArgs),
+	    flora_abort(['A non-fact found in insert{...}, ', AtomArgs])
+	),
+        ( F == FL_LIBMOD -> 
+	    convert_to_head_literal(P,HeadP)
+        ;
+            HeadP = P
+        ),
+	( var(HeadP) ->
+	    flora_abort(['Uninstantiated module name in insert{...}'])
+	 ;
+	    flora_fdb_storage_name(NewMod,StorageName),
+	    flora_internal_db_insert(StorageName,HeadP),
+	    flora_storage_insertfacts(ThisModuleName,T)
+	).
+
+flora_storage_insertfacts(ThisModuleName,[FLLIBMODOBJ(F,Args,ModuleName1,Caller,O)|T]) :-
+	!,
+	P2H_CONVERSION(ModuleName,ModuleName1),
+	FLLIBMODOBJ(F,Args,ModuleName,Caller,O),
+        ( O=FLLIBMODLIT(_,_,_,_) ->
+            flora_abort(['Uninstantiated predicate in an argument positition in insert{...}'])
+        ;
+	    flora_storage_insertfacts(ThisModuleName,T)
+        ).
+
+flora_storage_insertfacts(ThisModuleName,[','(C1,C2)|T]) :-
+	!,
+	%% Break up conjunction, since insertion of conjunction is not
+	%% allowed in XSB.
+	flora_storage_insertfacts(ThisModuleName,[C1,C2|T]).
+
+flora_storage_insertfacts(ThisModuleName,[P|T]) :-
+	%% This is a meta programming feature, since a variable can appear
+	%% in the list of literals to be updated.
+	functor(P,F,N),
+	( flora_decode_module_name(P,ModuleName1) ->
+	    P2H_CONVERSION(ModuleName,ModuleName1),
+	    flora_storage_check_module_name(ModuleName),
+	    flora_fdb_storage_name(ModuleName,StorageName),
+	    convert_to_head_literal(P,HeadP),
+	    flora_internal_db_insert(StorageName,HeadP),
+	    flora_storage_insertfacts(ThisModuleName,T)
+
+	%% If we run into a rule in the list, use insertrule_z
+	; F == FLSYSRULEUPDATE ->
+	    flora_insert_rules(FLLIBINSERTRULE_Z, [P]),
+	    flora_storage_insertfacts(ThisModuleName,T)
+
+	; N == 2, F == ';' ->
+	    flora_decode_goal_as_atom(P,PA),
+	    flora_abort(['Insertion of disjunctive information is not allowed, ',
+			 PA])
+
+	; N == 1, flora_storage_is_negation_symbol(F) ->
+	    flora_decode_goal_as_atom(P,PA),
+	    flora_abort(['Insertion of negative information is not allowed, ',
+			 PA])
+	;
+	    flora_decode_goal_as_atom(P,PA),
+	    ( F == WRAP_HILOG ->
+		flora_abort(['Attempt to insert a HiLog term (non-fact), ',
+			     PA])
+	    ;
+		flora_abort(['Attempt to insert a Prolog term (non-fact), ',
+			     PA])
+	    )
+	).
+
+
+/*****************************************************************************
+  fllibinsertall(+List)
+*****************************************************************************/
+FLLIBINSERTALL(ThisModuleName,List) :- FLLIBINSERT(ThisModuleName,List). % same as FLLIBINSERTALL(List,true).
+
+
+/*****************************************************************************
+  fllibinsertall(+List,+Condition)
+*****************************************************************************/
+FLLIBINSERTALL(ThisModuleName,List,Condition) :-
+	findall(List,Condition,FsList),
+	!,
+	flora_insertall_facts(ThisModuleName,FsList).
+
+
+/*****************************************************************************
+  flora_insertall_facts(+FactsList)
+
+  Note: This predicate always succeeds.
+*****************************************************************************/
+flora_insertall_facts(_ThisModuleName,[]) :- !.
+
+flora_insertall_facts(ThisModuleName,[Fs|FL]) :-
+	flora_storage_insertfacts(ThisModuleName,Fs),
+	flora_insertall_facts(ThisModuleName,FL).
+
+
+/*****************************************************************************
+  fllibdelete(+List)
+*****************************************************************************/
+FLLIBDELETE(ThisModuleName,List) :- FLLIBDELETE(ThisModuleName,List,true).
+
+
+/*****************************************************************************
+  fllibdelete(+List,+Condition)
+
+  The semantics is such that all the literals in "List" must be base facts
+  in the storage to be deleted.
+*****************************************************************************/
+%% delete{X}, any predicate in any module
+FLLIBDELETE(ThisModuleName,[NP],true) :-
+        var(NP),
+        !,
+        flora_module_registry(ModuleName),
+	flora_fdb_storage_name(ModuleName,StorageName),
+        flora_check_export_registry_internal(ThisModuleName,ModuleName,P,FLEXPORT_UPDATABLE),
+        ( var(P) ->
+	    flora_db_find_base(StorageName,P),
+            flora_add_last(P,NP,ThisModuleName)
+        ;
+	    flora_db_find_base(StorageName,P),
+            NP = P
+        ),
+        !,
+	flora_internal_db_delete(StorageName,NP).
+
+FLLIBDELETE(ThisModuleName,[FLSYSDBUPDATE(P,StorageName,Module)],true) :-
+	!,
+        flora_storage_check_existence(Module),
+        flora_check_export_registry(ThisModuleName,Module,P,FLEXPORT_UPDATABLE),
+	flora_db_find_base(StorageName,P),
+	flora_internal_db_delete(StorageName,P).
+
+FLLIBDELETE(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,Var,ModuleName,_Caller)],true) :-
+        var(Var),
+        %% delete any tabled predicate in ModuleName
+        !,
+        flora_module_registry(ModuleName),
+	flora_fdb_storage_name(ModuleName,StorageName),
+        flora_check_export_registry_internal(ThisModuleName,ModuleName,P,FLEXPORT_UPDATABLE),
+        ( var(P) ->
+	    flora_db_find_base(StorageName,P),
+            flora_add_last(P,NP,ThisModuleName)
+        ;
+	    flora_db_find_base(StorageName,P),
+            NP = P
+        ),
+        get_canonical_form(NP,FLCANON(_,_,_,Var,FL_TABLED)),
+        !,
+	flora_internal_db_delete(StorageName,NP).
+
+FLLIBDELETE(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Var),ModuleName,_Caller)],true) :-
+        var(Var),
+        %% delete any non-tabled predicate ModuleName
+        !,
+        flora_module_registry(ModuleName),
+	flora_fdb_storage_name(ModuleName,StorageName),
+        flora_check_export_registry_internal(ThisModuleName,ModuleName,P,FLEXPORT_UPDATABLE),
+        ( var(P) ->
+	    flora_db_find_base(StorageName,P),
+            flora_add_last(P,NP,ThisModuleName)
+        ;
+	    flora_db_find_base(StorageName,P),
+            NP = P
+        ),
+        get_canonical_form(NP,FLCANON(_,_,_,Var,FL_NOTTABLED)),
+        !,
+	flora_internal_db_delete(StorageName,NP).
+
+FLLIBDELETE(ThisModuleName,List,Condition) :-
+	flora_storage_convertlist(ThisModuleName,List,CallList,FactList),
+	flora_list2conjunct([Condition|CallList],Goal),
+	!,
+	call(Goal),
+        !,
+	flora_storage_deletelist(ThisModuleName,FactList).
+
+
+/*****************************************************************************
+  flora_storage_deletelist(+List)
+*****************************************************************************/
+flora_storage_deletelist(_ThisModuleName,[]) :- !.
+
+flora_storage_deletelist(ThisModuleName,[R|L]) :-
+	functor(R,FLSYSRULEUPDATE,_N),
+	!,
+	flora_check_and_delete_rules(FLLIBDELETERULE,[R]),
+	flora_storage_deletelist(ThisModuleName,L).
+
+flora_storage_deletelist(ThisModuleName,[FLSYSDBUPDATE(P,StorageName)|L]) :-
+	!,
+	convert_to_head_literal(P,HeadP),
+	flora_internal_db_delete(StorageName,HeadP),
+	flora_storage_deletelist(ThisModuleName,L).
+
+flora_storage_deletelist(ThisModuleName,[H|L]) :-
+	!,
+	flora_storage_deletelist(ThisModuleName,H),
+	flora_storage_deletelist(ThisModuleName,L).
+
+
+/*****************************************************************************
+  flora_storage_deleteall(+Predicate,+StorageName)
+
+  Note: This predicate always succeeds.
+*****************************************************************************/
+flora_storage_deleteall(ThisModuleName,P,StorageName) :-
+	findall(FLSYSDBUPDATE(P,StorageName),flora_db_find_base(StorageName,P),L),
+	!,
+	flora_storage_deletelist(ThisModuleName,L).
+
+
+/*****************************************************************************
+  fllibdeleteall(+List)
+*****************************************************************************/
+FLLIBDELETEALL(ThisModuleName,List) :- FLLIBDELETEALL(ThisModuleName,List,true).
+
+
+/*****************************************************************************
+  fllibdeleteall(+List,+Condition)
+
+  The semantics is such that all the literals in "List" must be base facts
+  in the storage to be deleted. This call always succeeds.
+*****************************************************************************/
+%% deleteall{X}
+FLLIBDELETEALL(ThisModuleName,[Var],true) :-
+        var(Var),
+        !,
+        findall(FLSYSDBUPDATE(Var,Storage),(flora_construct_delete_predicate(ThisModuleName,ModuleName,Var),flora_fdb_storage_name(ModuleName,Storage)),FsList),
+	flora_storage_deletelist(ThisModuleName,FsList).
+
+FLLIBDELETEALL(ThisModuleName,[FLSYSDBUPDATE(P,StorageName,Module)],true) :-
+	!,
+        flora_storage_check_existence(Module),
+        flora_check_export_registry(ThisModuleName,Module,P,FLEXPORT_UPDATABLE),
+	flora_storage_deleteall(ThisModuleName,P,StorageName).
+
+FLLIBDELETEALL(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,Var,ModuleName,_Caller)],true) :-
+        var(Var),
+        %% delete all tabled predicate ModuleName
+        !,
+        findall(FLSYSDBUPDATE(Var,Storage),(flora_construct_delete_predicate(ThisModuleName,ModuleName,Var),flora_fdb_storage_name(ModuleName,Storage),get_canonical_form(Var,FLCANON(_,_,_,_,FL_TABLED))),FsList),
+	flora_storage_deletelist(ThisModuleName,FsList).
+
+FLLIBDELETEALL(ThisModuleName,[FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Var),ModuleName,_Caller)],true) :-
+        var(Var),
+        %% delete all non-tabled predicate in ModuleName
+        !,
+        findall(FLSYSDBUPDATE(Var,Storage),(flora_construct_delete_predicate(ThisModuleName,ModuleName,Var),flora_fdb_storage_name(ModuleName,Storage),get_canonical_form(Var,FLCANON(_,_,_,_,FL_NOTTABLED))),FsList),
+	flora_storage_deletelist(ThisModuleName,FsList).
+
+FLLIBDELETEALL(ThisModuleName,List,Condition) :-
+	flora_storage_convertlist(ThisModuleName,List,CallList,FactList),
+	flora_list2conjunct([Condition|CallList],Goal),
+	!,
+	findall(FactList,Goal,FsList),
+	flora_deleteall_facts(ThisModuleName,FsList).
+
+/*****************************************************************************
+  flora_deleteall_facts(+FactList,-DeletedFactList)
+
+  Note: This predicate always succeeds.
+*****************************************************************************/
+flora_deleteall_facts(_ThisModuleName,[]) :- !.
+
+flora_deleteall_facts(ThisModuleName,[Fs|FL]) :-
+	flora_storage_deletelist(ThisModuleName,Fs),
+	flora_deleteall_facts(ThisModuleName,FL).
+
+
+/*****************************************************************************
+  flliberase(+List)
+*****************************************************************************/
+FLLIBERASE(ThisModuleName,List) :- FLLIBERASE(ThisModuleName,List,true).
+
+
+/*****************************************************************************
+  flliberase(+List,+Condition)
+*****************************************************************************/
+FLLIBERASE(ThisModuleName,List,Condition) :-
+	flora_storage_convertlist(ThisModuleName,List,CallList,FactList),
+	flora_list2conjunct([Condition|CallList],Goal),
+	call(Goal),
+	flora_storage_deletelist(ThisModuleName,FactList),
+	flora_erase_facts(ThisModuleName,FactList).
+
+
+/*****************************************************************************
+  flora_erase_facts(+List)
+*****************************************************************************/
+flora_erase_facts(_ThisModuleName,[]) :- !.
+
+flora_erase_facts(ThisModuleName,[FLSYSDBUPDATE(P,StorageName)|Fs]) :-
+	!,
+	flora_decode_module_name(P,Module),
+        flora_check_export_registry(ThisModuleName,Module,P,FLEXPORT_UPDATABLE),
+	flora_erase_one_fact(ThisModuleName,P,StorageName),
+	flora_erase_facts(ThisModuleName,Fs).
+
+flora_erase_facts(ThisModuleName,[H|Fs]) :-
+	!,
+	flora_erase_facts(ThisModuleName,H),
+	flora_erase_facts(ThisModuleName,Fs).
+
+
+/*****************************************************************************
+  flora_erase_one_fact(+Fact,+StorageName)
+
+  Note: For an F-logic fact this predicate continues to trace links and
+        delete other F-logic facts. It always succeeds. Works for 
+        Flora user modules and system modules.
+*****************************************************************************/
+flora_erase_one_fact(ThisModuleName,Fact,StorageName) :-
+	Fact =.. [Funct|Args],
+	( flora_is_flogic_wrapper(Funct,ModuleName,Base) ->
+	    ( Base == WRAP_ISA     -> Args=[O,_C,_Caller]
+	    ; Base == WRAP_SUB     -> Args=[O,_C,_Caller]
+	    ; Base == WRAP_MVD     -> Args=[_S,_A,O,_Caller]
+	    ; Base == WRAP_IMVD    -> Args=[_S,_IA,O,_Caller]
+	    ; Base == WRAP_METH    -> Args=[O,_M,_Caller]
+	    ; Base == WRAP_IMETH   -> Args=[O,_IM,_Caller]
+	    ; Base == WRAP_EXISTS  -> Args=[O,_Caller]
+	    ; Base == WRAP_MVDDEF  -> Args=[O,_A,_Caller]
+	    ; Base == WRAP_IMVDDEF -> Args=[O,_IA,_Caller]
+	    ; Base == WRAP_TRAN    -> Args=[O,_T,_Caller]
+	    ; Base == WRAP_MVDSIG  -> Args=[_S,_AS,O,_Caller]
+	    ; Base == WRAP_IMVDSIG -> Args=[_S,_IAS,O,_Caller]
+	    ; Base == WRAP_BOOLSIG  -> Args=[O,_A,_Caller]
+	    ; Base == WRAP_IBOOLSIG -> Args=[O,_IA,_Caller]
+	    ; Base == WRAP_TRANSIG  -> Args=[O,_A,_Caller]
+	    ; Base == WRAP_ITRANSIG -> Args=[O,_IA,_Caller]
+	    ; Base == WRAP_MVDCONDEF  -> Args=[_S,_AS,O,_O2,_Caller]
+	    ; Base == WRAP_IMVDCONDEF -> Args=[_S,_IAS,O,_O2,_Caller]
+	    ; Base == WRAP_MVDCON  -> Args=[_S,_AS,O,_O2,_Caller]
+	    ; Base == WRAP_IMVDCON -> Args=[_S,_IAS,O,_O2,_Caller]
+	    )
+	;
+	  true
+        ),
+	!,
+	( var(O) ->
+	    true
+	;
+	  flora_setup_flogic_fact_wrapper(ModuleName),
+	  flora_erase_objects(ThisModuleName,[O],StorageName)
+	).
+
+
+/*****************************************************************************
+  flora_erase_objects(+ObjectList,+StorageName)
+*****************************************************************************/
+flora_erase_objects(_ThisModuleName,[],_StorageName) :- !.
+
+flora_erase_objects(ThisModuleName,[O|OList],StorageName) :-
+	!,
+	flora_flogic_fact_wrapper(WRAP_ISA,WSBisa),
+	flora_flogic_fact_wrapper(WRAP_SUB,WSBsub),
+	flora_flogic_fact_wrapper(WRAP_METH,WSBmeth),
+	flora_flogic_fact_wrapper(WRAP_IMETH,WSBimeth),
+	flora_flogic_fact_wrapper(WRAP_TRAN,WSBtran),
+	flora_flogic_fact_wrapper(WRAP_MVD,WSBmvd),
+	flora_flogic_fact_wrapper(WRAP_IMVD,WSBimvd),
+	flora_flogic_fact_wrapper(WRAP_MVDSIG,WSBmvdsig),
+	flora_flogic_fact_wrapper(WRAP_IMVDSIG,WSBimvdsig),
+	flora_flogic_fact_wrapper(WRAP_BOOLSIG,WSBboolsig),
+	flora_flogic_fact_wrapper(WRAP_IBOOLSIG,WSBiboolsig),
+	flora_flogic_fact_wrapper(WRAP_TRANSIG,WSBtransig),
+	flora_flogic_fact_wrapper(WRAP_ITRANSIG,WSBitransig),
+	flora_flogic_fact_wrapper(WRAP_MVDCONDEF,WSBmvdcondef),
+	flora_flogic_fact_wrapper(WRAP_IMVDCONDEF,WSBimvdcondef),
+	flora_flogic_fact_wrapper(WRAP_MVDCON,WSBmvdcon),
+	flora_flogic_fact_wrapper(WRAP_IMVDCON,WSBimvdcon),
+	flora_flogic_fact_wrapper(WRAP_EXISTS,WSBexists),
+	flora_flogic_fact_wrapper(WRAP_MVDDEF,WSBmvddef),
+	flora_flogic_fact_wrapper(WRAP_IMVDDEF,WSBimvddef),
+	Wmvd =.. [WSBmvd,O,_,X,_],
+	Wimvd =.. [WSBimvd,O,_,X,_],
+	Wmvdsig =.. [WSBmvdsig,O,_,X,_],
+	Wimvdsig =.. [WSBimvdsig,O,_,X,_],
+	Wmvdcondef =.. [WSBmvdcondef,O,_,X,_,_],
+	Wimvdcondef =.. [WSBimvdcondef,O,_,X,_,_],
+	Wmvdcon =.. [WSBmvdcon,O,_,X,_,_],
+	Wimvdcon =.. [WSBimvdcon,O,_,X,_,_],
+	findall(X,( flora_db_find_base(StorageName,Wmvd)
+                  ; flora_db_find_base(StorageName,Wimvd)
+                  ; flora_db_find_base(StorageName,Wmvdsig)
+                  ; flora_db_find_base(StorageName,Wimvdsig)
+                  ; flora_db_find_base(StorageName,Wmvdcondef)
+                  ; flora_db_find_base(StorageName,Wimvdcondef)
+                  ; flora_db_find_base(StorageName,Wmvdcon)
+                  ; flora_db_find_base(StorageName,Wimvdcon)
+	          ),
+                AddedOList
+               ),
+	append(OList,AddedOList,NewOList),
+	sort(NewOList,NextOList),
+	Pisa =.. [WSBisa,O,_,_],
+	Psub =.. [WSBsub,O,_,_],
+	Pmeth =.. [WSBmeth,O,_,_],
+	Pimeth =.. [WSBimeth,O,_,_],
+	Ptran =.. [WSBtran,O,_,_],
+	Pmvd =.. [WSBmvd,O,_,_,_],
+	Pimvd =.. [WSBimvd,O,_,_,_],
+	Pmvdsig =.. [WSBmvdsig,O,_,_,_],
+	Pimvdsig =.. [WSBimvdsig,O,_,_,_],
+	Pboolsig =.. [WSBboolsig,O,_,_],
+	Piboolsig =.. [WSBiboolsig,O,_,_],
+	Ptransig =.. [WSBtransig,O,_,_],
+	Pitransig =.. [WSBitransig,O,_,_],
+	Pmvdcondef =.. [WSBmvdcondef,O,_,_,_,_],
+	Pimvdcondef =.. [WSBimvdcondef,O,_,_,_,_],
+	Pmvdcon =.. [WSBmvdcon,O,_,_,_,_],
+	Pimvdcon =.. [WSBimvdcon,O,_,_,_,_],
+	Pexists =.. [WSBexists,O,_],
+	Pmvddef =.. [WSBmvddef,O,_,_],
+	Pimvddef =.. [WSBimvddef,O,_,_],
+	!,
+	flora_storage_deleteall(ThisModuleName,Pisa,StorageName),
+	flora_storage_deleteall(ThisModuleName,Psub,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pmeth,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pimeth,StorageName),
+	flora_storage_deleteall(ThisModuleName,Ptran,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pmvd,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pimvd,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pmvdsig,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pimvdsig,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pboolsig,StorageName),
+	flora_storage_deleteall(ThisModuleName,Piboolsig,StorageName),
+	flora_storage_deleteall(ThisModuleName,Ptransig,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pitransig,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pmvdcondef,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pimvdcondef,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pmvdcon,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pimvdcon,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pexists,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pmvddef,StorageName),
+	flora_storage_deleteall(ThisModuleName,Pimvddef,StorageName),
+	flora_erase_objects(ThisModuleName,NextOList,StorageName).
+
+
+/*****************************************************************************
+  flliberaseall(+List)
+*****************************************************************************/
+FLLIBERASEALL(ThisModuleName,List) :- FLLIBERASEALL(ThisModuleName,List,true).
+
+
+/*****************************************************************************
+  flliberaseall(+List,+Condition)
+*****************************************************************************/
+FLLIBERASEALL(ThisModuleName,List,Condition) :-
+	flora_storage_convertlist(ThisModuleName,List,CallList,FactList),
+	flora_list2conjunct([Condition|CallList],Goal),
+	findall(FactList,Goal,FsList),
+	!,
+	flora_deleteall_facts(ThisModuleName,FsList),
+	flora_eraseall_facts(ThisModuleName,FsList).
+
+
+/*****************************************************************************
+  flora_eraseall_facts(+FactList)
+
+  Note: This predicate always succeeds.
+*****************************************************************************/
+flora_eraseall_facts(_ThisModuleName,[]) :- !.
+
+flora_eraseall_facts(ThisModuleName,[Fs|FL]) :-
+	!,
+	flora_erase_facts(ThisModuleName,Fs),
+	flora_eraseall_facts(ThisModuleName,FL).
+
+/*****************************************************************************
+  flora_internal_db_insert(+Storage,+Predicate)
+  flora_internal_db_delete(+Storage,+Predicate)
+*****************************************************************************/
+flora_internal_db_insert(StorageName,Call) :-
+	flora_db_insert_base(StorageName,Call),
+	flora_refresh_tables(Call).
+
+flora_internal_db_delete(StorageName,Call) :-
+	flora_db_delete_base(StorageName,Call),
+	flora_refresh_tables(Call).

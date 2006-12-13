@@ -1,0 +1,33 @@
+
+Meaning of variables used:
+
+The following files are generated automatically by the makeflora script:
+
+    flora_settings.sh
+    flora_settings.bat
+
+Don't change these files!
+
+
+The files (for Windows and Unix, respectively)
+
+    windowsVariables.bat
+    unixVariables.sh
+
+Contain variables that might need to be changed. These variables are:
+
+JAVA_BIN    - The directory containing the javac and java binaries.
+              Normally doesn't need to be set on Unix,
+	      but has to be set on Windows.
+
+ENGINE      - Native or Subprocess engine. Tells InterProlog whether to use
+              the Native engine, based on JNI, or Subprocess engine, 
+	      based on sockets.
+
+PROTEGE_DIR - Protege installation directory. If not using Protege then this
+              variable doesn't need to be set.
+
+
+
+JARS     - DON'T change this variable! If contains the JAR files
+           needed by Protege.

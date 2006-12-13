@@ -1,0 +1,726 @@
+/* File:      flrpm.P
+**
+** Author(s): Vishal Chowdhary, Michael Kifer
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2006
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+**
+*/
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_exceptions.flh"
+#include "flora_porting.flh"
+
+#define  ODBC		odbc
+#define  COLUMN_PREFIX  'col'
+#define  DBHANDLE	dbhandle
+
+#define  TABLE_NAME_PREFIX   'tbl_'
+#define  CREATE_TABLE_PREFIX 'CREATE TABLE '
+#define  MAX_COL_LENGTH      7992
+#mode save
+#mode nostring "\!#'"
+#define  COLUMN_TYPE	     ' VARCHAR(MAX_COL_LENGTH) DEFAULT NULL'
+#mode restore
+
+#define  SELECT_STATEMENT_PREFIX ' SELECT * FROM '
+#define	 INSERT_TABLE_PREFIX 'INSERT INTO '
+#define	 DELETE_TABLE_PREFIX 'DELETE FROM '
+#define	 IS_TUPLE_PRESENT    'SELECT 1 FROM '
+
+%% query types for error messages.
+#define	 DB_CONNECT	'connect to data source '
+#define	 DB_CREATE	'create database '
+#define	 DB_INSERT	'insert into database '
+#define	 DB_DELETE	'delete from database '
+#define	 DB_SELECT	'query database '
+
+%% char prepended to numbers when they are saved as strings
+%% db driver converts such strings back to numbers
+#define TERM_CHAR '\255'
+
+
+:- import load_driver/1 from dbdrivers.
+:- import
+	db_connect/5,
+	db_disconnect/1,
+	db_query/4,
+	db_statement_close/1
+   from db_interface.
+:- import 
+	flora_user_module_predicate/4, 
+	flora_decode_predicate/7,
+	flora_module_name/3,
+  	flora_user_fdb_storage_name/2
+  from flrwrapper.
+
+:- import flora_decode_goal_as_atom/2 from flrdecode.
+
+:- import 
+        flora_abort/1
+   from flrutils.
+
+:- import
+	flora_db_find_base/2,
+	flora_storage_insert_fact/3
+   from flrstoragebase.
+:- import flora_refresh_tables/1 from flrtables.
+:- import
+	flora_concat_items/2,
+	flora_concat_atoms/2
+   from flrporting.
+
+:- import flora_add_hook/5 from flrhooks.
+
+:- import
+	append/3,
+	length/2,
+	ground/1
+   from basics.
+
+:- import gensym/2 from gensym.
+:- import flora_storage_check_existence/1 from flrstorageutils.
+
+:- export  fllibpm_connect/5,
+	   fllibpm_db_to_memory/1,
+	   fllibpm_disconnect/0,
+	   fllibpm_disconnect/1,
+	   fllibpm_create_db/4.
+
+%% flora_dbmodule_registry(ModuleName, Database, DSN, UserName, Password)
+:- dynamic flora_dbmodule_registry/5.
+%% flora_dbmodule_handle(DSN, UserName, Password, DBHandle)
+:- dynamic flora_dbmodule_handle/4.
+%% Modules whose db has been loaded in memory
+:- dynamic flora_dbmodule_inmemory/1.
+
+
+/****************************************************************************
+   Add hooks
+****************************************************************************/
+
+?- flora_add_hook(Module,INSERTFACT,after,0,insert_hook(_,_)).
+?- flora_add_hook(Module,DELETEFACT,after,0,delete_hook(_,_)).
+?- flora_add_hook(Module,FINDFACT,before,0,db_findfact_and_load_to_memory(_,_)).
+
+?- flora_add_hook(Module,EXITFLORA,before,0,db_disconnect_on_exit_hook(_,_)).
+?- flora_add_hook(Module,LOADTOMODULE,before,0,db_disconnect_on_load_hook(_,_)).
+
+/****************************************************************************
+ db_findfact_and_load_to_memory(+Module,+Term)
+
+ Is a particular Term present in its module? It is possible that the Term is 
+ not in memory but in the database. We assert the Term to the memory. If an 
+ entry corresponding to this module exists in the flora_dbmodule_inmemory,
+ then it implies we have retireved all database information for this module.
+****************************************************************************/
+db_findfact_and_load_to_memory(_Module,Term):-
+	%% If querying all facts, do nothing -- it is for internal use
+	%% called from aux_memory_to_db/1
+	var(Term),
+	!.
+
+%% module loaded in memory.
+db_findfact_and_load_to_memory(Module,_Term):-
+	flora_dbmodule_inmemory(Module),
+	!.
+
+db_findfact_and_load_to_memory(Module,Term):-
+        flora_dbmodule_registry(Module,_,_,_,_),
+	aux_consruct_query_string(Term,N,_Module,Wrapper,_,ColValList),
+	make_db_table_name(Module,Wrapper,N,TableName),
+	SQLSelQuery = [SELECT_STATEMENT_PREFIX, TableName,' '|ColValList],
+	aux_retrieve_db_info(Module,Wrapper,N,SQLSelQuery),
+        !.
+
+
+/****************************************************************************
+ fllibpm_connect(+DSN,+DataBase,+UserName,+Password,+ModuleName)
+
+ Sets up the database for the specified module and asserts the 
+ necessary information to the flora_dbmodule_registry.
+ If the tables already exists, it simply asserts to the registry.
+
+ Since in many installations users are not allowed to create their own
+ databases. One or more users may use the same database. Hence, the tables 
+ are suffixed with their module names.
+****************************************************************************/
+fllibpm_connect(DSN,Database,UserName,Password,ModuleName) :-
+	%% is the module loaded?
+	(atom(DSN), atom(UserName), atom(Password)
+	-> true
+	;
+	    flora_abort('DB connect: DSN, User name, and Password must all be atomic strings')
+	),
+	flora_storage_check_existence(ModuleName),
+	[dbdrivers],
+	load_driver(ODBC),
+	%% does a db handle exist for this DSN/UserName/Password?
+	( flora_dbmodule_handle(DSN,UserName,Password,DBHandle) -> true
+	;
+	    gensym(DBHANDLE,DBHandle),
+	    db_connect_internal(DBHandle,ODBC,DSN,UserName,Password),
+	    assert(flora_dbmodule_handle(DSN,UserName,Password,DBHandle)),
+	    aux_prepare_db(Database,DSN,ModuleName,DBHandle)
+	),
+	(flora_dbmodule_registry(ModuleName,Database,DSN,UserName,Password)
+	-> true
+	;
+	    assert(flora_dbmodule_registry(ModuleName,Database,DSN,UserName,Password))
+	),
+	aux_memory_to_db(ModuleName).
+
+
+/****************************************************************************
+ fllibpm_create_db(+DSN,+Database,+UserName,+Password)
+
+ Creates an empty database.
+****************************************************************************/
+fllibpm_create_db(DSN,Database,UserName,Password) :-
+	(atom(DSN), atom(Database), atom(UserName), atom(Password) -> true
+	;
+	    flora_abort('DB create: DSN, Database, User name, and Password must all be atomic strings')
+	),
+	[dbdrivers],
+	load_driver(ODBC),
+	%% does a db handle exist for this triplet?
+	(
+	  flora_dbmodule_handle(DSN,UserName,Password,DBHandle) -> true
+	;
+	  gensym(DBHANDLE,DBHandle),
+	  db_connect_internal(DBHandle,ODBC,DSN,UserName,Password),
+	  assert(flora_dbmodule_handle(DSN,UserName,Password,DBHandle))
+	),
+	DbCreateSQL = ['CREATE DATABASE ',Database],
+	catch(db_DDL_sql_internal(DBHandle,flora_db_qh_createdb,DbCreateSQL,[],
+				  DB_CREATE,Database),
+	      xsb_error(database(_Number), Mesg),
+	      flrdb_general_error_handler(['Could not create database ',
+					   Database,
+					   ' at DSN ', DSN,
+					   'The data source does not support this operation. Data source report: ',
+					   Mesg],
+				  flora_db_qh_createdb)),
+	db_statement_close_internal(flora_db_qh_createdb).
+
+
+/****************************************************************************
+ aux_prepare_db(+Database,+DSN,+ModuleName,+DBHandle)
+
+ Creates all the required tables. For each type of wrapper separate tables
+ are created. For HiLog wrappers, a table is created for each arity.
+
+ If Database is not a string, use the database in the DSN. So, DBMS
+ don't support the USE statement. In this case, an error is issued.
+****************************************************************************/
+aux_prepare_db(Database,DSN,ModuleName,DBHandle) :-
+	(atom(Database), Database \= []
+	->
+	    catch(db_DDL_sql_internal(DBHandle,flora_db_qh_use,
+				      ['USE ',Database],[],DB_CONNECT,Database),
+		  xsb_error(database(_Number), _Mesg),
+		  flrdb_general_error_handler(['Data source ',DSN,
+					       ' does not support USE DATABASE statement. Connect with an unbound "database" field and use the database given in the DSN.'],
+					      flora_db_qh_use)),
+	    db_statement_close_internal(flora_db_qh_use)
+	; var(Database) -> true
+	;
+	    flora_abort('DB connect: Argument #2 (the database) argument must be an atomic string or an unbound variable')
+	),
+	aux_create_tables(WRAP_LIST,ModuleName,DBHandle).
+
+
+
+/****************************************************************************
+ aux_create_tables(+WrapperSpecList,+ModuleName,+DBHandle)
+ 
+ Creates all tables for storing data in a particular module.
+****************************************************************************/
+aux_create_tables([H|T],ModuleName,DBHandle) :-
+	create_tables_for_wrapper(DBHandle,ModuleName,H),
+	aux_create_tables(T,ModuleName,DBHandle).
+
+aux_create_tables([],_ModuleName,_DBHandle).
+
+
+/*
+    Creates tables suitable for each wrapper spec.
+    If wrapper spec is Wrapper=Arity, then create only 1 table of that arity.
+    If the spec is Wrapper<Arity then create Arity-1 tables of arity
+    1,2,..., Arity-1.
+*/
+create_tables_for_wrapper(DBHandle, ModuleName, Wrapper<Arity) :-
+	Arity1 is Arity - 1,
+	(Arity1 == 0 -> true
+	;
+	    create_tables_for_wrapper(DBHandle, ModuleName, Wrapper=Arity1),
+	    create_tables_for_wrapper(DBHandle, ModuleName, Wrapper<Arity1)
+	).
+create_tables_for_wrapper(DBHandle, ModuleName, Wrapper=Arity) :-
+	make_db_table_name(ModuleName,Wrapper,Arity,TableName),
+	flora_concat_items([CREATE_TABLE_PREFIX,TableName], CreateStatPrefix),
+	make_column_list(Arity,ColList),
+	%% table may already be present. no error in that case.
+	%% however any other db-error is ignored. need to change this strategy.
+	catch(db_query(DBHandle,flora_db_qh_createtbl,[CreateStatPrefix,'(',ColList,')'],[]),
+	      xsb_error(database(Number), Mesg),
+	      flrdb_ignore_error(Number, Mesg)),
+	db_statement_close_internal(flora_db_qh_createtbl).
+
+/*
+    creates string of column specifications:
+     col1 VARCHAR(255) DEFAULT NULL, col2 VARCHAR(255) DEFAULT NULL, ... 
+    of length Arity
+*/
+make_column_list(Arity,ColList) :-
+	(Arity==1
+	-> flora_concat_items([COLUMN_PREFIX,Arity,COLUMN_TYPE],ColList)
+	;
+	    Arity1 is Arity - 1,
+	    make_column_list(Arity1,ColList1),
+	    flora_concat_items([ColList1,',',COLUMN_PREFIX,Arity,COLUMN_TYPE],
+			       ColList)
+	).
+
+make_db_table_name(ModuleName,Wrapper,Arity,TableName) :-
+	flora_concat_items([TABLE_NAME_PREFIX,Wrapper,'_',ModuleName,'_',Arity],
+			   TableName).
+
+
+
+/****************************************************************************
+ aux_memory_to_db(+ModuleName)
+ 
+ On the association of a module with the database, insert all
+ it's term present in the memory to the database.
+****************************************************************************/
+aux_memory_to_db(ModuleName) :-
+	flora_user_fdb_storage_name(ModuleName,StorageName),
+	%% get the facts for this module, which are found in memory.
+        findall(Call,flora_db_find_base(StorageName,Call),CallList),
+	insert_facts_from_memory(CallList).
+
+
+/****************************************************************************
+ insert_facts_from_memory(+TermList)
+ 
+ Inserts the termlist, from the memory, to the corresponding database table.
+****************************************************************************/
+insert_facts_from_memory([H|T]) :-
+	insert_hook_internal(H),
+	insert_facts_from_memory(T).
+
+insert_facts_from_memory([]) :- true.
+
+
+/****************************************************************************
+ fllibpm_db_to_memory(+ModuleName)
+
+ Since a potential database may be very large, we do not load
+everything inititially -- only when prompted by the user. The
+following predicate fetches all data for a Module from the database
+and loads it to the memory.
+****************************************************************************/
+fllibpm_db_to_memory(ModuleName) :-
+	(
+	  %% check for db association
+	  flora_dbmodule_registry(ModuleName,_,_,_,_)
+	;
+	  flora_db_module_not_connected_error(ModuleName)
+	),
+	abolish_all_tables,
+	!,
+	aux_add_tables_to_memory(WRAP_LIST,ModuleName),
+	%% indicate that all the db info for this module has been retrieved.
+	(flora_dbmodule_inmemory(ModuleName) -> true
+	; assert(flora_dbmodule_inmemory(ModuleName))
+	).
+
+
+/****************************************************************************
+ aux_add_tables_to_memory(+TableList,+ModuleName)
+
+ Retrieves the tuples/terms present in the database and asserts them to the
+ memory.
+****************************************************************************/
+aux_add_tables_to_memory([H|T],ModuleName) :-
+	get_tables_for_wrapper(ModuleName,H),
+	aux_add_tables_to_memory(T,ModuleName).
+
+aux_add_tables_to_memory([],_) :- true.
+
+get_tables_for_wrapper(ModuleName,Wrapper<Arity) :-
+	Arity1 is Arity-1,
+	(Arity1 == 0 -> true
+	;
+	    get_tables_for_wrapper(ModuleName,Wrapper=Arity1),
+	    get_tables_for_wrapper(ModuleName,Wrapper<Arity1)
+	).
+get_tables_for_wrapper(ModuleName,Wrapper=Arity) :-
+	make_db_table_name(ModuleName,Wrapper,Arity,TableName),
+	aux_retrieve_db_info(ModuleName,Wrapper,Arity,
+				       [SELECT_STATEMENT_PREFIX,TableName]).
+
+
+/****************************************************************************
+ aux_retrieve_db_info(+ModuleName,+Wrapper,+N,+SelectQuery)
+
+ Retrieves data from the database and asserts them to the memory.
+****************************************************************************/
+aux_retrieve_db_info(ModuleName,Wrapper,N,SelectQ) :-
+	aux_get_db_handle(ModuleName,DBHandle),
+	length(List,N),
+	findall(List,db_query(DBHandle,flora_db_qh_select,SelectQ,List),ReturnList),
+	db_statement_close_internal(flora_db_qh_select),
+	add_to_memory(ModuleName,Wrapper,ReturnList).
+
+
+/****************************************************************************
+ add_to_memory(+ModuleName,+Wrapper,+TermList)
+ 
+ Constructs an appropriate predicate and asserts it to the memory.
+****************************************************************************/
+add_to_memory(ModuleName,Wrapper,[H|T]) :-
+	flora_user_fdb_storage_name(ModuleName,StorageName),
+	flora_user_module_predicate(Wrapper,H,ModuleName,Predicate),
+	aux_assert_to_memory(StorageName,Predicate),
+	add_to_memory(ModuleName,Wrapper,T).
+
+add_to_memory(_,_,[]) :- true.
+
+
+/****************************************************************************
+ aux_assert_to_memory(+Module,+Predicate)
+
+ Does the actual insertion to the internal memory.
+****************************************************************************/
+aux_assert_to_memory(StorageName,Predicate):- 
+	flora_storage_insert_fact(StorageName,Predicate,_ResultFlag),
+	flora_refresh_tables(Predicate).
+
+
+/****************************************************************************
+ insert_hook(+Module,+Term)
+
+ Inserts Term into the database associated with the Term's module (if any).
+ Module is ignored -- it is required by the hooks mechanism
+****************************************************************************/
+insert_hook(_Module,Term) :-
+	insert_hook_internal(Term).
+
+insert_hook_internal(Term) :-
+	!,
+	aux_consruct_query_string(Term,N,ModuleName,Wrapper,ValueList,ColValList),
+	aux_get_db_handle(ModuleName,DBHandle),
+	make_column_string(N,ColString),
+	aux_insert_quotes(ValueList,ValueListQuoted),
+	aux_insert_commas(ValueListQuoted,ValListReady),
+	%% Subqueries inside insert are disallowed in some DBMS (eg MySQL).
+	%% So, we do it in two steps.
+	make_db_table_name(ModuleName,Wrapper,N,TableName),
+	SQLCheckQuery = [IS_TUPLE_PRESENT,TableName,' '| ColValList],
+	(
+	  %% if empty resultset, db_query fails and R is left unbound
+	  catch(db_query(DBHandle,flrdb_qa_chk_ins,SQLCheckQuery,[R]),
+		xsb_error(database(Number), Mesg),
+		flrdb_general_error_handler(['Data source error (',Number,'): ',
+					     Mesg],
+					    flrdb_qa_chk_ins))
+	;
+	  true
+	),
+	SQLInsertQuery1 = [INSERT_TABLE_PREFIX,
+			   TableName,
+			   '(',
+			   ColString,
+			   ') VALUES(' | ValListReady],
+	append(SQLInsertQuery1,[')'],SQLInsertQuery),
+	(var(R) ->
+	    db_DML_sql_internal(DBHandle,flrdb_qa_ins,
+				SQLInsertQuery,[],DB_INSERT,Term),
+	    db_statement_close_internal(flrdb_qa_ins)
+	;
+	    true
+	),
+	db_statement_close_internal(flrdb_qa_chk_ins).
+
+
+/****************************************************************************
+ make_column_string(+N,-ColumnList)
+ 
+ Creates a string col1,col2,col3...coln to be used with the insert command.
+****************************************************************************/
+make_column_string(N,ColumnList) :-
+	N > 0, N1 is N -1,
+	make_column_string(N1,TailColList),
+        (
+          N > 1,
+	  flora_concat_items([TailColList,',',COLUMN_PREFIX,N],ColumnList)
+        ;
+	  flora_concat_items([TailColList,COLUMN_PREFIX,N],ColumnList)
+        ).
+
+make_column_string(0,'') :- !.
+
+
+/****************************************************************************
+  aux_insert_quotes(+ValueList,-ProtectedValList)
+  Convert each number to a string prepended with TERM_CHAR.
+  On reading, DB driver would then convert such strings back to numbers
+  and thus will preserve their type. Atoms are just quoted.
+  Compound terms are not quotes, since they are handled by the DB driver..
+****************************************************************************/
+aux_insert_quotes([], []).
+aux_insert_quotes([H|T], [ProtectedH|T1]) :-
+	aux_protect_term(H, ProtectedH),
+	aux_insert_quotes(T,T1).
+
+aux_protect_term(T, ProtectedT) :-
+	(number(T) ->
+	    flora_concat_items(['''', TERM_CHAR, T, ''''], ProtectedT)
+	; atom(T), T \= [] ->
+	    flora_concat_items(['''', T, ''''], ProtectedT)
+	;
+	    ProtectedT = T
+	).
+
+
+/*************************************************************************
+    aux_insert_commas(+List, -CommaSeparatedList)
+    converts [a,b,c] into [a, ', ', b, ', ', c]
+*************************************************************************/
+
+aux_insert_commas([], []) :- !.
+aux_insert_commas([H], [H]) :- !.
+aux_insert_commas([H|T], [H, ', ' |T1]) :-
+	aux_insert_commas(T,T1).
+
+
+/****************************************************************************
+ delete_hook(+ModuleName,+Term)
+
+ Deletes the corresponding term from the database.
+ ModuleName is ignored -- it is required by hooks mechanism
+****************************************************************************/
+delete_hook(_Module,Term) :-
+	delete_hook_internal(Term).
+
+delete_hook_internal(Term) :-
+	aux_consruct_query_string(Term,N,ModuleName,Wrapper,_,ColValList),
+	aux_get_db_handle(ModuleName,DBHandle),
+	make_db_table_name(ModuleName,Wrapper,N,TableName),
+	SQLDelQuery = [DELETE_TABLE_PREFIX,TableName,' '|ColValList],
+	db_DML_sql_internal(DBHandle,flrdb_qa_del,SQLDelQuery,[],DB_DELETE,Term),
+	db_statement_close_internal(flrdb_qa_del).
+
+/****************************************************************************
+ aux_consruct_query_string(+Term,-N,-ModuleName,-Wrapper,-ValueList,-ColValList)
+
+ Is a generic predicate that parses a term and extracts information.
+****************************************************************************/
+aux_consruct_query_string(Term,N,ModuleName,Wrapper,ValueList,ColValList):-
+	flora_decode_predicate(Term,PredicateType,ModuleName,Wrapper,_WrapPrefix,PredicateSymbol,ArgsList),	
+	(
+	  PredicateType == FLOGIC -> ValueList is ArgsList
+	;
+	  ValueList = [PredicateSymbol|ArgsList]
+	),
+	length(ValueList,N),
+	aux_create_col_val_pairs(ValueList,ColValList1),
+	(ColValList1 == [] ->
+	    ColValList = ColValList1
+	;
+	    ColValList = [' WHERE ' | ColValList1]
+	).
+
+
+/****************************************************************************
+ aux_create_col_val_pairs(+Args,-ArgsList)
+ 
+ Converts a list [a1,a2,a3...an] to the form:
+ [c1 = ',a1,' AND c2 = ',a2,' AND c3 = ',a3,....,' AND cn = ',an,']
+ If some a_i is a variable - don't include that conjunct.
+****************************************************************************/
+aux_create_col_val_pairs(ValList,ColValList):-
+	aux_insert_quotes(ValList,ValListQuoted),
+	aux_create_col_val_pairs(ValListQuoted,1,start,ColValList).
+
+aux_create_col_val_pairs([H|T],ColNum,IsStart,Pairs) :-
+	ColNum1 is ColNum + 1,
+	(\+ ground(H) ->
+	    %% don't include attrs corresponding to nonground terms
+	    IsStart1 = IsStart,
+	    Pairs = RestPairs
+	;
+	    IsStart1 = continuation,
+	    flora_concat_items([COLUMN_PREFIX,ColNum,' = '],ColName),
+	    (
+	      IsStart == start ->  
+	      Pairs = [ColName,H | RestPairs]
+	    ;
+	      Pairs = [' AND ', ColName,H | RestPairs]
+	    )
+	),
+	aux_create_col_val_pairs(T,ColNum1,IsStart1,RestPairs).
+
+aux_create_col_val_pairs([],_,_,[]) :- !.
+
+
+/****************************************************************************
+ aux_get_db_handle(+ModuleName)
+
+ Obtain the database connect handle for the given FLORA-2 module.  If
+ a nonvar database name is associated with this module, use that
+ database. Otherwise, use the database specified in the DSN.
+****************************************************************************/
+aux_get_db_handle(ModuleName,DBHandle) :-
+	%% get the db info for the module.
+	flora_dbmodule_registry(ModuleName,Database,DSN,UserName,Password),
+	flora_dbmodule_handle(DSN,UserName,Password,DBHandle),
+	(nonvar(Database)
+	->
+	    db_DDL_sql_internal(DBHandle,flora_db_qh_use,['USE ',Database],
+				[],DB_CONNECT,Database),
+	    db_statement_close_internal(flora_db_qh_use)
+	;
+	    true
+	).
+
+
+/****************************************************************************
+ fllibpm_disconnect/0
+
+ Closes all open database connections.
+
+ fllibpm_disconnect(+Module)
+
+ Closes open connections of Module to the database
+****************************************************************************/
+fllibpm_disconnect :-
+	findall(DBHandle,flora_dbmodule_handle(_,_,_,DBHandle),DBHandleList),
+	retractall(flora_dbmodule_registry(_,_,_,_,_)),
+	aux_close_db_handles(DBHandleList).
+
+aux_close_db_handles([H|T]) :-
+	db_disconnect_internal(H),
+	aux_close_db_handles(T).
+
+aux_close_db_handles([]) :- true.
+
+fllibpm_disconnect(Module) :-
+	findall(DBHandle,
+		(flora_dbmodule_registry(Module,_Database,DSN,User,Password),
+		 flora_dbmodule_handle(DSN,User,Password,DBHandle)),
+		DBHandleList),
+	retractall(flora_dbmodule_registry(Module,_,_,_,_)),
+	aux_close_db_handles(DBHandleList).
+
+db_disconnect_on_exit_hook(_,_) :- fllibpm_disconnect.
+db_disconnect_on_load_hook(Module,_) :- fllibpm_disconnect(Module).
+
+
+/****************************************************************************
+ db_connect_internal(+Handle,+Driver=odbc,+DSN,+User,+Password)
+
+ Connect to DSN
+****************************************************************************/
+db_connect_internal(Handle,Driver,DSN,User,Password) :-
+	catch(db_connect(Handle,Driver,DSN,User,Password),
+	      xsb_error(database(_Number), Mesg),
+	      flrdb_general_error_handler(['Attempt to ', DB_CONNECT, DSN,
+					   ' failed. The data source reported: ',
+					   Mesg],
+					  _NoQueryHandle)
+	     ).
+
+%% ddl -> 'Data Definition Language'. Queries of the form CREATE TABLE.
+%% No predicate associated with this type of query. Object = db or table name
+db_DDL_sql_internal(Connhandle,QueryHandle,SQLQueryList,ReturnList,QueryType,Object) :-
+	catch(db_query(Connhandle, QueryHandle, SQLQueryList, ReturnList),
+	      xsb_error(database(_Number), Mesg),
+	      flrdb_general_error_handler(['Attempt to ', QueryType, Object,
+					   ' failed. The data source reported: ',
+					   Mesg],
+					  _NoQueryHandle)).
+
+
+%% Object = predicate, QueryType = insert/ delete
+db_DML_sql_internal(Connhandle,QueryHandle,SQLQueryList,ReturnList,QueryType,Object) :-
+	catch(db_query(Connhandle, QueryHandle, SQLQueryList, ReturnList),
+	      xsb_error(database(_Number), Mesg),
+	      flora_db_query_error(QueryType,Object,Mesg)).
+
+
+%% currently not being handled.
+db_statement_close_internal(QueryHandle) :-
+	catch(db_statement_close(QueryHandle),
+	      xsb_error(database(_Number), Mesg),
+	      flrdb_general_error_handler(['Error while closing query handle ',
+				   QueryHandle,
+				   '. The data source reported: ', Mesg],
+				  _NoQuryHandle)).
+db_disconnect_internal(Handle) :-
+	retractall(flora_dbmodule_handle(_,_,_,Handle)),
+	catch(db_disconnect(Handle),
+	      xsb_error(database(_Number), Mesg),
+	      flrdb_general_error_handler(['Error while disconnecting statement handle ',
+				   Handle,
+				   '. The data source reported: ', Mesg],
+				  _NoQuryHandle)).
+
+
+/*******************************************************************
+**  Error handlers                                                **
+*******************************************************************/
+flrdb_ignore_error(_N,_M) :- true.
+
+flrdb_general_error_handler(ErrMsgList,QueryHandle) :-
+	flora_concat_items(ErrMsgList,ErrorMsg),
+	(nonvar(QueryHandle)-> db_statement_close_internal(QueryHandle)
+	; true
+	),
+	flora_abort(FLORA_DB_EXCEPTION(ErrorMsg)).
+
+flora_db_module_not_connected_error(ModuleName) :-
+	flora_concat_items(['Module ', ModuleName,
+			    ' is not connected to a database.'],
+			   ErrorMsg),
+	flora_abort(FLORA_DB_EXCEPTION(ErrorMsg)).
+
+
+flora_db_query_error(QueryType,Predicate,SQLError):-
+	flora_decode_predicate(Predicate, _PType, MName,
+			       _Module,
+			       _WPrefix, _PSymbol, _AList),
+        flora_module_name(MName,ModuleType,ModuleName),
+	flora_decode_goal_as_atom(Predicate,PrintablePred),
+	flora_concat_atoms(['Attempt to ',QueryType,'the fact ',PrintablePred],
+			   QueryMsg),
+	( ModuleType==systemmodule ->
+	    flora_concat_atoms([QueryMsg, ' in system module ', ModuleName],
+			       ErrorMsg)
+	;
+	    flora_concat_atoms([QueryMsg, ' in user module ', ModuleName],
+			       ErrorMsg)
+	),
+	flora_concat_items([ErrorMsg,' failed because of the following: ',SQLError],SQLErrorMsg),
+	flora_abort(FLORA_DB_EXCEPTION(SQLErrorMsg)).
+

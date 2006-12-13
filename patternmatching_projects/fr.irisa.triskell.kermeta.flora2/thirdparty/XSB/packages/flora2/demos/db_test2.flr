@@ -1,0 +1,43 @@
+#include "db_test.flh"
+
+?- writeln('--Sanity test: To check all values got stored in database correctly.--')@prolog().
+
+?- writeln('load empty modules mod1, mod2, mod3 in memory')@prolog(),
+   [empty1>>mod1], [empty1>>mod2], [empty1>>mod3].
+
+?- write('test 20, associate modules with database')@prolog(),
+   flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod1'),
+   flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod2'),
+   flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod3'),
+   writeln('succeeded, as expected')@prolog().
+
+
+?- writeln('test 30, get answers for q(X): a,b,c,d')@prolog().
+
+?- q(?Z1)@mod1.
+?- q(?Z2)@mod2. 
+?- q(?Z3)@mod3.
+
+?- writeln('succeeded, as expected')@prolog().
+
+
+?- writeln('test 40, get answers for p(M,N): (a)a,b,c,d')@prolog().
+   
+?- p(?M1,?N1)@mod1.
+?- p(?M2,?N2)@mod2.
+?- p(?M3,?N3)@mod3.
+
+?- writeln('succeeded, as expected')@prolog().
+
+
+?- writeln('test 50, get answers for a[X->Y]. NOTE no answers for mod3...')@prolog().
+
+?- a[?X1->?Y1]@mod1.
+?- a[?X2->?Y2]@mod2. 
+?- a[?X3->?Y3]@mod3.
+
+?- writeln('succeeded, as expected')@prolog().
+
+?- flHalt.
+
+

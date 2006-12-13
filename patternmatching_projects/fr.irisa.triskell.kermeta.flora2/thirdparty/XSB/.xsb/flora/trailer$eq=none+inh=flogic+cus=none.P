@@ -1,0 +1,21 @@
+:- compiler_options([xpp_on]).
+
+/********** Trailer Control Variables ************/
+
+#define LOADABLETRAILER
+#define EQUALITYnone
+#define INHERITANCEflogic
+#define CUSTOMnone
+
+/************************************************************************
+  file: headerinc/flrtrailer_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrtrailer.flh"
+
+/***********************************************************************/
+

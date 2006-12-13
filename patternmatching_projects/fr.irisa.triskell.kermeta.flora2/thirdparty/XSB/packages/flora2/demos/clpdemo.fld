@@ -1,0 +1,3 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(t_flapply)('p',__newvar1,__newvar2).

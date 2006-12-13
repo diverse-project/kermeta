@@ -1,0 +1,223 @@
+/***************************************************************************
+  file: closure/flrnoeqltrailer.fli
+
+  Author(s): Guizhen Yang
+
+  Contact:   flora-users@lists.sourceforge.net
+
+  Copyright (C) The Research Foundation of SUNY, 1999-2004
+
+  This is a template file to generate the FLORA trailer that has no
+  equality maintenance and NO  behavioral inheritance.
+  Inheritance of signatures is still supported.
+
+***************************************************************************/
+
+
+#include "flora_wspredicates.flh"
+#include "flora_porting.flh"
+
+:- import flora_warning_line/2 from flrprint.
+:- import flora_funct_arity/2 from flrwrapper.
+
+
+/***************************************************************************
+  Note that all programs rules are translated with with a 'derived_' prefix.
+  These rules are bridged to the trailer using wrapper predicates with a
+  'inferred_' prefix.
+***************************************************************************/
+
+
+/***************************************************************************
+  closure rules for X::Y
+***************************************************************************/
+sub(X,Y,CallerInfo) :-
+	inferred_sub(X,Y,CallerInfo),
+	(X=Y,
+	    flora_warning_line('cycle in class hierarchy: ~w sub ~w', [X,Y])
+	; true).
+
+sub(X,Y,CallerInfo) :-
+	silent_sub(X,Z,CallerInfo),
+	inferred_sub(Z,Y,CallerInfo),
+	(X=Y,
+	    flora_warning_line('cycle in class hierarchy: ~w sub ~w sub ~w',[X,Z,Y])
+	; true).
+
+
+/***************************************************************************
+  closure rules for O:C
+***************************************************************************/
+%% isa/3
+isa(O,C,CallerInfo) :-
+	inferred_isa(O,C,CallerInfo).
+
+isa(O,C,CallerInfo) :-
+        nonvar(C), var(O),
+	!,
+	silent_sub(S,C,CallerInfo),
+	inferred_isa(O,S,CallerInfo).
+
+isa(O,C,CallerInfo) :-
+	(
+	    flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')
+	-> 
+	    silent_sub(S,C,CallerInfo),
+	    inferred_isa(O,S,CallerInfo)
+	;
+	   %% The order of inferred_isa/silent_sub is important. Otherwise, it
+	   %% won't return correct answers in cases like a:(b,c). ?- a:?X.
+	    inferred_isa(O,S,CallerInfo),
+	    silent_sub(S,C,CallerInfo)
+	).
+
+
+/*****************************************************************************
+  closure for X[Y->Z], X[Y*->Z], X[]
+*****************************************************************************/
+imvd(C,M,V,CallerInfo) :-
+	inferred_imvd(C,M,V,CallerInfo).
+
+mvd(O,M,V,CallerInfo) :-
+	inferred_mvd(O,M,V,CallerInfo).
+
+mvddef(O,M,CallerInfo) :-
+	inferred_mvddef(O,M,CallerInfo).
+
+mvddef(O,M,CallerInfo) :-
+	nonvar(M),
+	mvd(O,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+/*****************************************************************************
+  monotonic inheritance of binary attributes (tabled methods)
+*****************************************************************************/
+meth(O,M,CallerInfo) :-
+	inferred_meth(O,M,CallerInfo).
+
+imeth(C,M,CallerInfo) :-
+	inferred_imeth(C,M,CallerInfo).
+
+
+/*****************************************************************************
+  nontabled methods (transactions)
+*****************************************************************************/
+tran(O,T,CallerInfo) :-
+	inferred_tran(O,T,CallerInfo).
+
+
+/*****************************************************************************
+  monotonic inheritance of signatures
+*****************************************************************************/
+%% mvdsig/4
+mvdsig(O,M,R,CallerInfo) :-
+	inferred_mvdsig(O,M,R,CallerInfo).
+
+mvdsig(O,M,R,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imvdsig(C,M,R,CallerInfo).
+
+
+%% mvdcondef/5 
+mvdcondef(C,M,L,H,CallerInfo) :-
+	inferred_mvdcondef(C,M,L,H,CallerInfo).
+
+mvdcondef(O,M,L,H,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imvdcondef(C,M,L,H,CallerInfo).
+
+%% mvdsigdef/3
+mvdsigdef(O,M,CallerInfo) :-
+	inferred_mvdsigdef(O,M,CallerInfo).
+
+mvdsigdef(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imvdsigdef(C,M,CallerInfo).
+
+mvdsigdef(O,M,CallerInfo) :-
+	mvdsig(O,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+%% imvdsig/4
+imvdsig(C,M,R,CallerInfo) :-
+	inferred_imvdsig(C,M,R,CallerInfo).
+
+imvdsig(C,M,R,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imvdsig(S,M,R,CallerInfo).
+
+
+%% imvdcondef/5 
+imvdcondef(C,M,L,H,CallerInfo) :-
+	inferred_imvdcondef(C,M,L,H,CallerInfo).
+
+imvdcondef(C,M,L,H,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imvdcondef(S,M,L,H,CallerInfo).
+
+%% imvdsigdef/3
+imvdsigdef(C,M,CallerInfo) :-
+	inferred_imvdsigdef(C,M,CallerInfo).
+
+imvdsigdef(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imvdsigdef(S,M,CallerInfo).
+
+imvdsigdef(C,M,CallerInfo) :-
+	imvdsig(C,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+%% boolsig/3
+boolsig(O,M,CallerInfo) :-
+	inferred_boolsig(O,M,CallerInfo).
+
+boolsig(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	iboolsig(C,M,CallerInfo).
+
+
+%% iboolsig/3
+iboolsig(C,M,CallerInfo) :-
+	inferred_iboolsig(C,M,CallerInfo).
+
+iboolsig(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	iboolsig(S,M,CallerInfo).
+
+
+%% transig/3
+transig(O,M,CallerInfo) :-
+	inferred_transig(O,M,CallerInfo).
+
+transig(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	itransig(C,M,CallerInfo).
+
+
+%% itransig/3
+itransig(C,M,CallerInfo) :-
+	inferred_itransig(C,M,CallerInfo).
+
+itransig(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	itransig(S,M,CallerInfo).
+
+
+/*****************************************************************************
+  object existence
+*****************************************************************************/
+exists(X,CallerInfo) :-
+	inferred_exists(X,CallerInfo).
+
+
+/*****************************************************************************
+  equality maintenance
+  Here we just treat :=: as an ordinary relation.
+*****************************************************************************/
+%% Means X,Y are equal, but not identical
+diffobjeql(X,Y,CallerInfo) :-
+	inferred_objeql(X,Y,CallerInfo),
+	X \= Y.

@@ -1,0 +1,71 @@
+
+:- compiler_options([xpp_on]).
+
+#define OLD_TERM 1
+#define NEW_TERM 0
+
+
+:- import flora_query_registry/3 from flrregistry.
+:- import new_trie/1, trie_intern/5 from intern.
+
+:- dynamic flora_query_trie/1.
+
+?- \+ flora_query_trie(_),
+   new_trie(TrieRoot),
+   assert(flora_query_trie(TrieRoot)).
+
+%% all this needs to start using the flora_query conventions
+flora_compile_query(QHandle,Query) :-
+    flora_query_trie(TrieRoot),
+    trie_intern(Query,TrieRoot,QHandle,Flag,Skeleton),
+    (Flag == NEW_TERM ->
+	Skeleton =.. [_,VarList],
+	assert(flora_query_registry(QHandle,Query,VarList))
+    ;
+	true
+    ).
+
+flora_execute_query(QHandle,ArgList) :-
+    flora_query_registry(QHandle,Query,ArgList),
+    call(Query).
+
+
+/* The C part - to be refined
+char compile_query[1024]; // use extensible string
+char run_query[1024];
+void compile_and_run()
+{
+     inq qhandle = NULL;
+     // The test query.
+     char* query = "(append(X,Y,Z))";
+
+     // Consult the helper file.
+     xsb_command_string("consult('basics.P').");
+     xsb_command_string("consult('fltcallflora')."); // probably bootstrap
+
+     // Compile the test query.
+     sprintf(compile_query, "flora_compile_query(Handle,%s).", query);
+     xsb_query_string(compile_query);
+
+     // Retrieve the query handle.
+     qhandle = p2c_int(p2p_arg(reg_term(2),1));
+
+     xsb_close_query();
+
+     // Run the compiled query.
+     // Here we probably want to construct a term and use xsb-query()
+     sprintf(run_query, "flora_execute_query(%s, [X, Y, [1,2,3]]).", qhandle);
+     xsb_query_string_string(run_query, &answer_buf, "%");
+
+     // Print the results.
+     int done = 0;
+     while (!done)
+     {
+         printf("%s\n", answer_buf.string);
+         XSB_StrSet(&answer_buf, "");
+
+         done = xsb_next_string(&answer_buf, "%");
+     }
+}
+
+*/

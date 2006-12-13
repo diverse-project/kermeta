@@ -1,0 +1,55 @@
+
+\documentclass[11pt]{report}
+\usepackage{makeidx}
+\usepackage{url}
+\usepackage{a4wide}
+\usepackage{longtable}
+\usepackage{alltt,xspace}
+\usepackage{hyperref}
+\usepackage{subfigure,graphicx,epsfig,epsf,amsmath,amsfonts,float}
+
+
+\parskip5pt
+%%\makeindex 
+\parindent0pt
+\sloppy 
+\begin{document}
+\newcommand{\FLORA}{{\mbox{\sc ${\cal F}${lora}\rm\emph{-2}}}\xspace}
+\newcommand{\fl}{F-logic }
+
+\newcommand{\fd}{{\mbox{\tt \,->\,}}}                   % scalar
+\newcommand{\bfd}{{\mbox{\tt \,*->\,}}}            % " + inheritable
+\newcommand{\mvd}{{\mbox{\tt \,->\,}}}  % multivalued
+\newcommand{\bmvd}{{\mbox{\tt \,*->\,}}}              % " + inheritable
+\newcommand{\Fd}{{\mbox{\tt \,=>\,}}}                      % scalar signature
+\newcommand{\Mvd}{{\mbox{\tt \,=>\,}}}  % multivalued signature
+\newcommand{\bFd}{{\mbox{\tt \,*=>\,}}}                      % scalar signature
+\newcommand{\bMvd}{{\mbox{\tt \,*=>\,}}}  % multivalued signature
+
+\def\Protege{Prot\'{e}g\'{e} }
+\def\NoProtege{Prot\'{e}g\'{e}}
+
+\title{\bf A Guide to \FLORA Packages}
+
+
+\maketitle
+
+
+\thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+
+\pagenumbering{roman}
+\tableofcontents
+\newpage        % Just to avoid a silly LaTeX bug with \pagenumbering
+  
+\pagenumbering{arabic}
+
+\input{flora-persistence}
+\input{flora-flrxml}
+\input{flora-flrjava}
+%%\input{flora-protege}
+
+
+
+\end{document}

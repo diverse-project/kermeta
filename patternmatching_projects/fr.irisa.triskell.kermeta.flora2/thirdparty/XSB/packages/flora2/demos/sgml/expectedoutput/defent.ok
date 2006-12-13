@@ -1,0 +1,26 @@
+_$_$_flora'dyn_newoid5683[$order->0].  // @defent
+_$_$_flora'dyn_newoid5683[def->>_$_$_flora'dyn_newoid5686].  // @defent
+_$_$_flora'dyn_newoid5686[$order->1].  // @defent
+_$_$_flora'dyn_newoid5686[$text->>_$_$_flora'dyn_newoid5687].  // @defent
+_$_$_flora'dyn_newoid5687[$order->2].  // @defent
+_$_$_flora'dyn_newoid5687[$string->AB C@ D].  // @defent
+_$_$_flora'dyn_newoid5686[$child(0)->_$_$_flora'dyn_newoid5687].  // @defent
+_$_$_flora'dyn_newoid5686[$text->>_$_$_flora'dyn_newoid5688].  // @defent
+_$_$_flora'dyn_newoid5688[$order->3].  // @defent
+_$_$_flora'dyn_newoid5688[$string->sdata(?)].  // @defent
+_$_$_flora'dyn_newoid5686[$child(1)->_$_$_flora'dyn_newoid5688].  // @defent
+_$_$_flora'dyn_newoid5687[$rightsibling->_$_$_flora'dyn_newoid5688].  // @defent
+_$_$_flora'dyn_newoid5688[$leftsibling->_$_$_flora'dyn_newoid5687].  // @defent
+_$_$_flora'dyn_newoid5686[$text->>_$_$_flora'dyn_newoid5689].  // @defent
+_$_$_flora'dyn_newoid5689[$order->4].  // @defent
+_$_$_flora'dyn_newoid5689[$string->B].  // @defent
+_$_$_flora'dyn_newoid5686[$child(2)->_$_$_flora'dyn_newoid5689].  // @defent
+_$_$_flora'dyn_newoid5688[$rightsibling->_$_$_flora'dyn_newoid5689].  // @defent
+_$_$_flora'dyn_newoid5689[$leftsibling->_$_$_flora'dyn_newoid5688].  // @defent
+_$_$_flora'dyn_newoid5686[$text->>_$_$_flora'dyn_newoid5690].  // @defent
+_$_$_flora'dyn_newoid5690[$order->5].  // @defent
+_$_$_flora'dyn_newoid5690[$string->sdata(?)].  // @defent
+_$_$_flora'dyn_newoid5686[$child(3)->_$_$_flora'dyn_newoid5690].  // @defent
+_$_$_flora'dyn_newoid5689[$rightsibling->_$_$_flora'dyn_newoid5690].  // @defent
+_$_$_flora'dyn_newoid5690[$leftsibling->_$_$_flora'dyn_newoid5689].  // @defent
+_$_$_flora'dyn_newoid5683[$child(0)->_$_$_flora'dyn_newoid5686].  // @defent

@@ -1,0 +1,48 @@
+This Perl program converts from the old syntax of FLORA-2 to the new syntax
+where variables are prefixed with a ?, ->>, =>>, .., !! are eliminated, single-valued signatures are represented by {1:1}=> and {1:1}*=>,
+transactional methods start with a %, etc.
+
+******
+Usage: 
+******
+	cp -r DIRECTORY BACKUP_DIRECTORY
+	       Back up the directory to be converted.
+	       Otherwise the old version will be lost.
+	perl convert.pl OPTION DIRECTORY
+	       OPTION indicates the convertion to be performed
+		      -var_trans makes the changes (1) and (2) below.
+		      -single_multi does (3).
+		      -all does (1), (2), and (3)
+
+*******************
+Types of conversion
+*******************
+ convert.pl modifies all the .flr files in DIRECTORY and its subdirectories
+ as follows:
+
+ (1) Adds a '?' in front of every FLORA-2 variable (in the old syntax)
+
+ (2) Replaces '#' with '%' in procedural predicates and methods.
+
+ (3) Replaces "=>" with "{1:1}=>" and "*=>" with "{1:1}*=>";
+     Replaces "=>>" with "=>" and "->>" with "->";
+     Replaces "!!" with "!" and a..b with a.b.
+
+**********
+Limitations
+**********
+
+ (1) This program handles only .flr files.
+
+ (2) This program may add a '?' before user-defined macros (in #define
+     statements). All the '?'s right before macros should be deleted after
+     executing this program.
+
+ (3) This program doesn't add '?' in comments and quoted text. 
+ 
+ (4) There may be places where # was used other than for specifying
+     procedural predicates and terms. These #'s may have to be converted
+     back to %.
+
+ (5) There may be other limitations or bugs. If you find any, please contact: 
+     flora-development@lists.sourceforge.net 

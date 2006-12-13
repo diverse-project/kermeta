@@ -1,0 +1,107 @@
+/* File:      flrclause.P
+**
+** Author(s): Chang Zhao
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2002
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_exceptions.flh"
+
+:- import assert/3 from assert.
+:- import
+        flora_conjunct_libmodobj/2,
+        matching_rule_signature/4,
+        flora_rule_signature/6,
+        flora_build_pred_signature/2,
+        flora_preprocess_headlist/2,
+        convert_to_head_literal/2,
+        convert_to_body_literal/2
+    from flrcanon.
+
+:- import
+        flora_decode_predicate/6
+   from flrwrapper.
+
+:- import
+        flora_warning_line/2
+   from flrprint.
+
+:- import flora_decode_goal_as_atom/2 from flrdecode.
+
+
+/**********************************************************************
+ flora_clause_prefix(+Mode,-Prefix)
+************************************************************************/ 
+flora_clause_prefix(NULL, _Prefix).
+flora_clause_prefix(STATIC,FLHEADPREFIX).
+flora_clause_prefix(DYNA,FLDYNAPREFIX).
+flora_clause_prefix(DYNZ,FLDYNZPREFIX).
+flora_clause_prefix(DYNAMIC,FLDYNAPREFIX).
+flora_clause_prefix(DYNAMIC,FLDYNZPREFIX).
+
+
+/***********************************************************************
+ FLLIBCLAUSE(+Mode,+HeadList,?RuleBody)
+************************************************************************/ 
+FLLIBCLAUSE(Mode,HeadList,Body) :-
+        fllibclause_exec(Mode,HeadList,Body).
+
+fllibclause_exec(Mode,[Head],Body) :-
+        !,
+        flora_clause_prefix(Mode,Prefix),
+        matching_rule_signature(Prefix,Head,Body,_RuleSig).
+
+fllibclause_exec(Mode,[H|L],Body) :-
+        flora_clause_prefix(Mode,Prefix),
+        matching_rule_signature(Prefix,H,Body,_RuleSig),
+        flora_clause_list(Prefix,L,Body). 
+
+flora_clause_list(_Prefix,[],_Body) :- 
+        !.
+
+flora_clause_list(Prefix,[H|L],Body) :-
+        matching_rule_signature(Prefix,H,Body,_RuleSig),
+        flora_clause_list(Prefix,L,Body). 
+        
+/***********************************************************************
+ FLLIBINSRULESIG(+WS,+HeadList,+RuleBody,+Newpred)
+************************************************************************/ 
+FLLIBINSRULESIG(WS,HeadList,Body,Newpred) :-
+        is_list(HeadList),
+        !,
+        %% multiple atoms appear in the rule head
+        BridgeRule =.. [FL_IMPLYOP,Body,Newpred],
+        flora_insrulesig_list(WS,HeadList,Body,BridgeRule).
+
+FLLIBINSRULESIG(WS,Head,Body,_Newpred) :-
+        %% only a single atom appears in the rule head
+        flora_decode_goal_as_atom(Head,HeadCode),
+        catch(assert(flora_rule_signature(FLHEADPREFIX,WS,Head,Body,[],[]),3,1),_,(nl,flora_warning_line('Rule with head ~w too long: it can not be retrieved using clause{...}',[HeadCode]),nl)).
+        
+flora_insrulesig_list(_WS,[],_Body,_BridgeRule) :- !.
+flora_insrulesig_list(WS,[H|L],Body,BridgeRule) :- 
+        flora_decode_goal_as_atom(H,HCode),
+        catch(assert(flora_rule_signature(FLHEADPREFIX,WS,H,Body,[],[BridgeRule]),3,1),_,(nl,flora_warning_line('Rule with head ~w too long: it can not be retrieved using clause{...}',[HCode]),nl)),
+        flora_insrulesig_list(WS,L,Body,BridgeRule).

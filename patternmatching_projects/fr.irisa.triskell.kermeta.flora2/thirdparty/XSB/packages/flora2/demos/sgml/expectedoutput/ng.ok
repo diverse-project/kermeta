@@ -1,0 +1,7 @@
+_$_$_flora'dyn_newoid5761[$order->0].  // @ng
+_$_$_flora'dyn_newoid5761[test->>_$_$_flora'dyn_newoid5764].  // @ng
+_$_$_flora'dyn_newoid5764[$order->1].  // @ng
+_$_$_flora'dyn_newoid5764[or->a].  // @ng
+_$_$_flora'dyn_newoid5764[and->e].  // @ng
+_$_$_flora'dyn_newoid5764[seq->i].  // @ng
+_$_$_flora'dyn_newoid5761[$child(0)->_$_$_flora'dyn_newoid5764].  // @ng

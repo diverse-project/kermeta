@@ -1,0 +1,7 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(flapply)('edge','a','b',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('edge','b','c',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('edge','c','b',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvdsig)('string','reachableTo','string',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvdcondef)('string','reachableTo',0,'*',[_CallerModuleVar,_CallerModuleArgsVar]).

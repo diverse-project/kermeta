@@ -1,0 +1,16 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'a',__newvar2).
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'aaa',__newvar2).
+FLORA_THIS_WORKSPACE(imvdsig)(__newvar1,'b',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(imvdsig)(__newvar1,'b1',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(imvdsig)(__newvar1,'bs',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(imvdsig)(__newvar1,'bs1',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdsig)(__newvar1,'b',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvdsig)(__newvar1,'bs1',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(imvdcondef)(__newvar1,'b',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(imvdcondef)(__newvar1,'b1',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(imvdcondef)(__newvar1,'bs',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(imvdcondef)(__newvar1,'bs1',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(mvdcondef)(__newvar1,'b',__newvar2,__newvar3,__newvar4).
+FLORA_THIS_WORKSPACE(mvdcondef)(__newvar1,'bs1',__newvar2,__newvar3,__newvar4).

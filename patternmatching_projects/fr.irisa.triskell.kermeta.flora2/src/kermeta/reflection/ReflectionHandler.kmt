@@ -1,4 +1,4 @@
-/* $Id: ReflectionHandler.kmt,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+/* $Id: ReflectionHandler.kmt,v 1.2 2006-12-13 14:24:11 rodrigotex Exp $
  * Creation date: October 17, 2006
  * License:
  * Copyright:
@@ -17,6 +17,7 @@ using kermeta::utils
 
 class ReflectionHandler
 {
+   attribute debug : Boolean 
 	/* operation create was created because of problems with the basic method Object.get(Property)	
    with attribute with type Sequence.
    
@@ -26,21 +27,32 @@ class ReflectionHandler
        result := seqpro     
 	*/ 
 	operation getSequenceProperties ( obj : kermeta::standard::Object, pro : Property) : Sequence<kermeta::standard::Object> is do
+        // ### ------------------
+        debug := false
+        // ### ------------------	
+       if debug then stdio.writeln("...ReflectionHandler.getSequenceProperties("+pro.name+")")  end      	         
+
   	   var seqpro : Sequence<kermeta::standard::Object> init Sequence<kermeta::standard::Object>.new
-	 
-       var de : DynamicExpression init DynamicExpression.new
-       de.initializeDefaults
-       de.formalParameters.put("obj", kermeta::language::structure::Object)  
-       de.formalParameters.put("seqpro", Sequence<Object>)       
        if (pro.upper != 1) then       
+          if debug then stdio.writeln("...ReflectionHandler with upper != 1")  end      	        
+          
+	      var de : DynamicExpression init DynamicExpression.new
+	      de.initializeDefaults
+	      de.formalParameters.put("obj", kermeta::language::structure::Object)  
+          de.formalParameters.put("seqpro", Sequence<Object>)                      
           de.parse("do var target : "+obj.getMetaClass.typeDefinition.qualifiedName+" target ?= obj  target."+pro.name+".each{s| seqpro.add(s)} end") 
+          var params : Hashtable<String, kermeta::standard::Object> init Hashtable<String, kermeta::standard::Object>.new
+          params.put("obj", obj)
+          params.put("seqpro", seqpro)       
+          de.execute(void, params)	          
        else 
-          de.parse("do var target : "+obj.getMetaClass.typeDefinition.qualifiedName+" target ?= obj  seqpro.add(target."+pro.name+") end")        
+        if debug then stdio.writeln("...ReflectionHandler with upper = 1")  end      	               
+          if (not obj.get(pro).isVoid) then
+            seqpro.add(obj.get(pro))
+          end
+//        de.parse("do var target : "+obj.getMetaClass.typeDefinition.qualifiedName+" target ?= obj  seqpro.add(target."+pro.name+") end")        
        end          
-       var params : Hashtable<String, kermeta::standard::Object> init Hashtable<String, kermeta::standard::Object>.new
-       params.put("obj", obj)
-       params.put("seqpro", seqpro)       
-       de.execute(void, params)	
+        if debug then stdio.writeln("...ReflectionHandler.getSequenceProperties END")  end      	        
        result := seqpro
 	end
 	

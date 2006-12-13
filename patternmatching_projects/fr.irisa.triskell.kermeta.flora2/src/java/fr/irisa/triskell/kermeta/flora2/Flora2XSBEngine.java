@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.1 2006-11-09 15:18:51 rodrigotex Exp $
+/* $Id: Flora2XSBEngine.java,v 1.2 2006-12-13 14:23:42 rodrigotex Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -19,40 +19,19 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Iterator;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
 
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
  
-
-import java.util.Properties;
-
+import java.io.FileNotFoundException;
 import java.lang.String;
 /**
  * Implementation of input and output methods (see io.kmt)
  */
 public class Flora2XSBEngine {
-
-    private static FloraSession session;
-    
+   
     private static FloraSession getSession() {        
-        RuntimeMemory rm;
-        if (session == null ){            
-            java.lang.String configBin = System.getenv("XSB_BIN_DIRECTORY");
-            java.lang.String floraDir = System.getenv("FLORA_DIRECTORY");            
-            java.lang.String javaLibPath = System.getProperty("java.library.path");                           
-
-            System.setProperty("FLORADIR", floraDir);
-            System.setProperty("PROLOGDIR", configBin);
-            System.setProperty("ENGINE", "Subprocess");
-            //System.setProperty("ENGINE", "Native");            
-            System.setProperty("java.library.path", javaLibPath +";"+configBin);               
-            session = new FloraSession();             
-        }    
-        return session;
+        return fr.irisa.triskell.flora2.FloraSessionBuilder.getSession();
     }
     
     // Implementation of method write called as :

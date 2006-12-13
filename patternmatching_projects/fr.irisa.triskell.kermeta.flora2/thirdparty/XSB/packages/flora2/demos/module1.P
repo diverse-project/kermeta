@@ -1,0 +1,331 @@
+:- compiler_options([spec_off]).
+/************************************************************************
+  file: headerinc/flrheader_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrheader.flh"
+#include "flora_porting.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrheader2_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+  It includes files that must be included in the header and typically
+  contain some Prolog statements. Such files cannot appear
+  in flrheader.flh because flrheader.flh is included in various restricted
+  contexts where Prolog statements are not allowed.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrtable.flh"
+
+/***********************************************************************/
+
+
+/********** Trailer Control Variables ************/
+
+#define EQUALITYnone
+#define INHERITANCEflogic
+#define CUSTOMnone
+
+/************************************************************************
+  file: headerinc/flrdefinition_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrdefinition.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrtrailerregistry_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrtrailerregistry.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrrefreshtable_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrrefreshtable.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flrimportedcalls_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+%% Loads the file with all the import statements for predicates
+%% that must be known everywhere
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBIMPORTEDCALLS).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrindex_P_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrindex_P.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrpatch_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrexportcheck.flh"
+#include "flrpatch.flh"
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrdyna_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrdyna.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flranswer_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBANSWER).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flraggavg_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBAVG).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flraggcount_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBCOUNT).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flrload_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBLOAD).
+
+/***********************************************************************/
+
+/************************************************************************
+  file: syslibinc/flraggmax_inc.flh
+
+  Author(s): Guizhen Yang
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#mode standard Prolog
+
+#if !defined(FLORA_TERMS_FLH)
+#define FLORA_TERMS_FLH
+#include "flora_terms.flh"
+:- import flora_load_library/1 from flrlibman.
+#endif
+
+?- flora_load_library(FLLIBMAX).
+
+/***********************************************************************/
+
+#if !defined(FLORA_FDB_FILENAME)
+#if !defined(FLORA_LOADDYN_DATA)
+#define FLORA_LOADDYN_DATA
+:- import flora_loaddyn_data/3 from flrutils.
+#endif
+#define FLORA_FDB_FILENAME  'module1.fdb'
+?- flora_loaddyn_data(FLORA_FDB_FILENAME,FLORA_THIS_MODULE_NAME,'fdb').
+#else
+#if !defined(FLORA_READ_CANONICAL_AND_INSERT)
+#define FLORA_READ_CANONICAL_AND_INSERT
+:- import flora_read_canonical_and_insert/2 from flrutils.
+#endif
+?- flora_read_canonical_and_insert(FLORA_FDB_FILENAME,FLORA_THIS_FDB_STORAGE).
+#endif
+
+#if !defined(FLORA_FLD_FILENAME)
+#if !defined(FLORA_LOADDYN_DATA)
+#define FLORA_LOADDYN_DATA
+:- import flora_loaddyn_data/3 from flrutils.
+#endif
+#define FLORA_FLD_FILENAME  'module1.fld'
+?- flora_loaddyn_data(FLORA_FLD_FILENAME,FLORA_THIS_MODULE_NAME,'fld').
+#else
+#if !defined(FLORA_READ_CANONICAL_AND_INSERT)
+#define FLORA_READ_CANONICAL_AND_INSERT
+:- import flora_read_canonical_and_insert/2 from flrutils.
+#endif
+?- flora_read_canonical_and_insert(FLORA_FLD_FILENAME,FLORA_THIS_FLD_STORAGE).
+#endif
+
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('writeln'('Loading module2 ...'),'fllibload'(['>>'('module2','module2')],'C:\XSB\packages\\flora2\demos\module1.flr',FLORA_THIS_MODULE_NAME,[20,57])))),[])).
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('write'('Max John''s salary:'),','('fllibmax'(__X,[],FLORA_THIS_WORKSPACE(d_mvd)('john','flapply'('salary',__Year),__X,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),__newvar1),'='(__Z,__newvar1))))),['='('?Z',__Z),'='('?X',__X),'='('?Year',__Year)])).
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('write'('Max John''s salary before 1996:'),','('fllibmax'(__X,[],','(FLORA_THIS_WORKSPACE(d_mvd)('john','flapply'('salary',__Year),__X,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'<'(__Year,1996)),__newvar1),'='(__Z,__newvar1))))),['='('?Z',__Z),'='('?X',__X),'='('?Year',__Year)])).
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('write'('Max Mary''s salary:'),','('fllibmax'(__X,[],FLORA_USER_WORKSPACE(module2,d_mvd)('mary','flapply'('salary',__Year),__X,[FLORA_THIS_MODULE_NAME,'module2']),__newvar1),'='(__Z,__newvar1))))),['='('?Z',__Z),'='('?X',__X),'='('?Year',__Year)])).
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('write'('Number of years when John''s salary was less than max of the previous years:'),','('fllibcount'(__Year,[],','(','(FLORA_THIS_WORKSPACE(d_mvd)('john','flapply'('salary',__Year),__newvar1,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'fllibmax'(__X,[],','(FLORA_THIS_WORKSPACE(d_mvd)('john','flapply'('salary',__Y2),__X,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),'<'(__Y2,__Year)),__newvar2)),'<'(__newvar1,__newvar2)),__newvar3),'='(__Z,__newvar3))))),['='('?Z',__Z),'='('?Year',__Year),'='('?X',__X),'='('?Y2',__Y2)])).
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('write'('Number of years when John earned less than Mary:'),','('fllibcount'(__Year,[],','(','(FLORA_THIS_WORKSPACE(d_mvd)('john','flapply'('salary',__Year),__newvar1,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),FLORA_USER_WORKSPACE(module2,d_mvd)('mary','flapply'('salary',__Year),__newvar2,[FLORA_THIS_MODULE_NAME,'module2'])),'<'(__newvar1,__newvar2)),__newvar3),'='(__Z,__newvar3))))),['='('?Z',__Z),'='('?Year',__Year)])).
+?-('fllibprogramans'(','('_$_$_flora''silent_equal'(_CallerModuleVar,FLORA_THIS_MODULE_NAME),','('nl',','('write'('Avg salary per person:'),','('fllibavg'(__X,[__Who],';'(FLORA_THIS_WORKSPACE(d_mvd)(__Who,'flapply'('salary',__Year),__X,[FLORA_THIS_MODULE_NAME,FLORA_THIS_MODULE_NAME]),FLORA_USER_WORKSPACE(module2,d_mvd)(__Who,'flapply'('salary',__Year),__X,[FLORA_THIS_MODULE_NAME,'module2'])),__newvar1),'='(__Z,__newvar1))))),['='('?Z',__Z),'='('?X',__X),'='('?Who',__Who),'='('?Year',__Year)])).
+/************************************************************************
+  file: headerinc/flrtrailer_inc.flh
+
+  Author(s): Michael Kifer
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+#include "flrtrailer.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrdynz_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrdynz.flh"
+
+/***********************************************************************/
+
+/************************************************************************
+  file: headerinc/flrpreddef_inc.flh
+
+  Author(s): Chang Zhao
+
+  This file is automatically included by the FLORA compiler.
+************************************************************************/
+
+:- compiler_options([xpp_on]).
+
+#include "flrpreddef.flh"
+
+/***********************************************************************/
+

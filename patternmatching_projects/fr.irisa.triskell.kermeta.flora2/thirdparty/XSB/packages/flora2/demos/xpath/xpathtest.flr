@@ -1,0 +1,59 @@
+/*
+  This script invokes the FLORA-2 XPath parser on all the files in the 
+  XSB/examples/xpath/files/ subdirectory and on some remote URLs.
+
+  Invoke as flDemo('xpath/sgmltest') or load directly from this directory.
+*/
+
+?- 
+	[flrxml],
+	%xpathdir(?XpathDir),
+	flora_slash(?Slash)@prolog(flrporting),
+	nl@prolog(),
+	flora_set_counter('flrxml$debug$flag',7)@prolog(flrporting),	
+
+	%fmt_write_string(?TestPath, '%s', f(?XpathDir))@flora(io),
+	(flora_file_op(chdir, xpath)@prolog(flrporting), !; true),
+	
+	unless path_sysop(isdir, 'actualoutput')@prolog(file_io) do
+	path_sysop(mkdir, 'actualoutput')@prolog(file_io),
+
+	%fmt_write_string(?OutFile1, 'actualoutput%sgreeting.ok', f(?Slash))@flora(io),
+	?OutFile1[%tell]@flora(io),
+	%parse_xpath_xml(string('<greeting>Hi! My name is
+	<first>John</first>
+	<last>Smith</last>.</greeting>'),'/greeting','', ?W1,
+	'greeting')@flrxml,
+	%told@flora(io),
+
+        %fmt_write_string(?TestFile2, '%s%sexamples.xml',f(?TestPath,?Slash))@flora(io),
+	%fmt_write_string(?OutFile2, 'actualoutput%sexample1.ok', f(?Slash))@flora(io),
+	?OutFile2[%tell]@flora(io),
+        %parse_xpath_xml(file(?TestFile2),'/examples/example[@filename=''parse2.c'']','',?W2, 'example1')@flrxml,
+	%told@flora(io),
+
+	%fmt_write_string(?OutFile3, 'actualoutput%sexample2.ok', f(?Slash))@flora(io),
+	?OutFile3[%tell]@flora(io),
+       	%parse_xpath_xml(file(?TestFile2),'/examples/example[3]', '', ?W3, 'example2')@flrxml,
+	%told@flora(io),
+
+	%fmt_write_string(?OutFile4, 'actualoutput%sw3.ok', f(?Slash))@flora(io),
+	?OutFile4[%tell]@flora(io),
+       	%parse_xpath_xml(url('http://w3.org'),'/x:html/x:head/x:meta',
+	'x=http://www.w3.org/1999/xhtml', ?W4, 'w3')@flrxml,
+	%told@flora(io),
+
+	nl@prolog(),
+	nl@prolog(),
+	%writeln('***** Output is redirected to *.ok files in actualoutput directory')@flora(io),
+	%writeln('***** Compare them with *.ok files in expectedoutput directory')@flora(io),
+	%writeln('***** Note: The outputs will differ in their choice of anonymous OIDs')@flora(io),
+	nl@prolog().
+
+%xpathdir(?XpathDir) :-
+        xsb_configuration(install_dir, ?PackDir)@prolog(xsb_configuration),
+        slash(?Slash)@prolog(machine),
+        %fmt_write_string(?XpathDir, '%s%sexamples%sxpath%sfiles',
+        f(?PackDir, ?Slash, ?Slash, ?Slash))@flora(io).
+
+

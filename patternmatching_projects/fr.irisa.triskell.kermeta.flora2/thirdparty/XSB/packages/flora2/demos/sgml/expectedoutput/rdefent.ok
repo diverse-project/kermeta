@@ -1,0 +1,8 @@
+_$_$_flora'dyn_newoid5838[$order->0].  // @rdefent
+_$_$_flora'dyn_newoid5838[foo->>_$_$_flora'dyn_newoid5841].  // @rdefent
+_$_$_flora'dyn_newoid5841[$order->1].  // @rdefent
+_$_$_flora'dyn_newoid5841[$text->>_$_$_flora'dyn_newoid5842].  // @rdefent
+_$_$_flora'dyn_newoid5842[$order->2].  // @rdefent
+_$_$_flora'dyn_newoid5842[$string->_].  // @rdefent
+_$_$_flora'dyn_newoid5841[$child(0)->_$_$_flora'dyn_newoid5842].  // @rdefent
+_$_$_flora'dyn_newoid5838[$child(0)->_$_$_flora'dyn_newoid5841].  // @rdefent

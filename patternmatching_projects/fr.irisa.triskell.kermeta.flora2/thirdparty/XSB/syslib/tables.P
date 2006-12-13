@@ -1,0 +1,474 @@
+/* File:      tables.P
+** Author(s): Terry Swift, Prasad Rao, Kostis Sagonas, Ernie Johnson
+** Contact:   xsb-contact@cs.sunysb.edu
+** 
+** Copyright (C) The Research Foundation of SUNY, 1993-1998
+** 
+** XSB is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** XSB is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with XSB; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: tables.P,v 1.45 2004/03/11 18:11:44 dwarren Exp $
+** 
+*/
+
+
+/*----------------------------------------------------------------------*/
+/* NOTE: This file HAS TO be compiled with the "sysmod" option.         */
+/*----------------------------------------------------------------------*/
+
+:- compiler_options([sysmod,xpp_on]).
+
+#include "builtin.h"
+#include "table_status_defs.h"
+
+/*----------------------------------------------------------------------*/
+
+/* Change Evaluation Method for Tabled Predicate
+   --------------------------------------------- */
+use_variant_tabling(CommaList) :-
+	set_eval_method_for_comma(CommaList,VARIANT_EVAL_METHOD).
+
+use_subsumptive_tabling(CommaList) :-
+	set_eval_method_for_comma(CommaList,SUBSUMPTIVE_EVAL_METHOD).
+
+set_eval_method_for_comma((PS1,PS2),EvalMethod) :-
+	!, set_eval_method_for_comma(PS1,EvalMethod),
+	set_eval_method_for_comma(PS2,EvalMethod).
+set_eval_method_for_comma(PredSpec,EvalMethod) :-
+	set_tabled_eval_for_pred(PredSpec,EvalMethod).
+
+/*
+ * Setting of the evaluation method will fail if calls exist in the
+ * Call Trie.
+ */
+set_tabled_eval_for_pred(PredSpec,Method) :-
+	( PredSpec = P/N -> functor(Term,P,N); Term = PredSpec ),
+	( set_tabled_eval(Term,Method), fail; true ).
+
+set_tabled_eval(Predicate,EvalMethod) :-
+	set_tabled_eval(Predicate,EvalMethod).
+
+/*----------------------------------------------------------------------*/
+
+/*
+ * To obtain info about both subsumptive and variant predicates.
+ * See the file ../emu/builtin.c for a description of the valid
+ * combinations of values for PredType, CallType, and AnsSetStatus.
+ */
+
+table_state(Call, PredType, CallType, AnsSetStatus) :-
+	table_status(Call, PredTypeCode, CallTypeCode, AnsSetStatusCode),
+	predicate_type_code(PredTypeCode, PredType),
+	call_type_code(CallTypeCode, CallType),
+	answer_set_status_code(AnsSetStatusCode, AnsSetStatus).
+
+
+table_status(Call, PredType, CallType, AnsSetStatus) :-
+	table_status(Call, PredType, CallType, AnsSetStatus).
+
+predicate_type_code(UNTABLED_PREDICATE,      undefined).
+predicate_type_code(VARIANT_EVAL_METHOD,     variant).
+predicate_type_code(SUBSUMPTIVE_EVAL_METHOD, subsumptive).
+
+call_type_code(UNDEFINED_CALL, undefined).
+call_type_code(PRODUCER_CALL,  producer).
+call_type_code(SUBSUMED_CALL,  subsumed).
+call_type_code(NO_CALL_ENTRY,  no_entry).
+
+answer_set_status_code(UNDEFINED_ANSWER_SET,  undefined).
+answer_set_status_code(COMPLETED_ANSWER_SET,  complete).
+answer_set_status_code(INCOMPLETE_ANSWER_SET, incomplete).
+
+
+/*
+ * For [temporary] backward compatibility, redefine table_state/2 in
+ * terms of the newer table_state/4.
+ */
+
+table_state(Call, State) :-
+	table_state(Call, PredType, _CallType, AnsSetStatus),
+	(PredType == variant
+         -> ( AnsSetStatus == undefined
+             -> State = no_call_yet
+	     ;  State = AnsSetStatus )
+	 ; PredType == undefined -> State = undef
+        ).
+
+/*----------------------------------------------------------------------*/
+
+/*
+ * Builtins for supporting negation and suspensions.
+ */
+
+get_ptcp(PTCP) :- get_ptcp(PTCP).
+
+is_incomplete(_ProducerSubgoalFrame,_PTCP) :- '_$builtin'(IS_INCOMPLETE).
+
+slg_not(ProducerSF) :- slg_not(ProducerSF).
+
+lrd_success(ProducerSF,Subgoal) :- lrd_success(ProducerSF,Subgoal).
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+tfindall(T, Call, Result) :-
+	table_state(Call,PredType,_CallType,AnsSetStatus),
+	( PredType \== undefined ->
+	  ( AnsSetStatus == complete ->
+	      findall(T,Call,Result)
+          ; AnsSetStatus == undefined ->
+	      ( call(Call), fail ; tfindall(T,Call,Result) )
+	  ; AnsSetStatus == incomplete ->
+	      get_ptcp(PTCP),
+	      get_producer_call(Call,ProdSF,_CallAT),
+	      is_incomplete(ProdSF,PTCP),
+	      findall(T,Call,Result)
+	  )
+	; abort(['Illegal (untabled?) subgoal to tfindall/3: ', Call])
+	).
+
+
+tnot(Subgoal) :-
+	ground(Subgoal)
+	-> 't not'(Subgoal)
+	;   abort(['FLOUNDERING: tnot/1 used with a non-ground subgoal: ',
+		   Subgoal]).
+
+'t not'(Subgoal) :-
+	table_state(Subgoal,PredType,_CallType,AnsSetStatus),
+	( PredType \== undefined ->
+	    get_ptcp(PTCP),
+	    ( AnsSetStatus == undefined ->
+	        ( tcall(Subgoal), fail ; t_not(Subgoal,PredType,PTCP) )
+	    ; t_not(Subgoal,PredType,PTCP)
+	    )
+	; abort(['Illegal (untabled?) subgoal to ''t not''/1: ',Subgoal])
+	).
+
+t_not(Subgoal,PredType,PTCP) :-
+	get_producer_call(Subgoal,ProducerSF,AnswerTmplt),
+	is_incomplete(ProducerSF,PTCP),
+	( PredType == variant
+	  -> slg_not(ProducerSF)
+	  ;  fail_if(trie_get_return(ProducerSF,AnswerTmplt)),
+	     lrd_success(ProducerSF,Subgoal)
+	 ).
+
+
+%% skolemized tnot.  Variables temporarily changed to ground and tnot 
+%% call is made.  Should give existential semantics to nonground negative
+%% calls.  That is
+%%	...:- sk_not(p(X)),...
+%% is like
+%%	... :- tnot(pp),...
+%%	pp :- p(X).
+%% where pp is a new proposition.
+
+:- table tunnumcall/1.
+:- use_variant_tabling tunnumcall(_).
+
+sk_not(Goal) :-
+	copy_term(Goal,Goal1),
+	numbervars(Goal1,0,_),  % is now ground, so no check necessary
+	't not'(tunnumcall(Goal1)).
+
+tunnumcall(GGoal) :-
+	unnumbervars(GGoal,VGoal),
+	call(VGoal).
+
+
+/*----------------------------------------------------------------------*/
+/* Predicates to retrieve information out of tables.                    */
+/*----------------------------------------------------------------------*/
+
+/*
+ * get_call(+CallTerm, -TableEntryHandle, -ReturnTemplate)
+ *   Performs an interpretive traversal of a Call Trie in searching
+ *   for a VARIANT of CallTerm.  If the call is present, then a
+ *   reference to the subgoal frame is returned as a handle to the
+ *   call's table entry, and the Answer Template is constructed as a
+ *   ret/n term in ReturnTemplate.
+ */
+
+get_call(CallTerm, TableEntryHandle, ReturnTemplate) :-
+	get_call(CallTerm, TableEntryHandle, ReturnTemplate).
+
+
+/*
+ * get_producer_call(+CallTerm, -TableEntryHandle, -ReturnTemplate)
+ *   Performs an interpretive traversal of a Call Trie, using the
+ *   tabling strategy of the given predicate, in searching for CallTerm.
+ *   Under both tabling strategies, a producer entry is identified --
+ *   i.e., a subgoal which maintains its own answer set.  If such a call
+ *   is present, then a reference to the subgoal frame is returned as a
+ *   handle to the producer's table entry, and the Answer Template of
+ *   CallTerm with respect to this producer is constructed as a ret/n
+ *   term in ReturnTemplate.
+ */
+
+get_producer_call(CallTerm, ProducerTableEntry, ReturnTemplate) :-
+	get_producer_call(CallTerm, ProducerTableEntry, ReturnTemplate).
+
+
+/*
+ * get_calls(#CallTerm, -TableEntryHandle, -ReturnTemplate)
+ *   Backtrackable predicate for selecting calls which UNIFY with
+ *   CallTerm.  Selections are made via a trie-code-directed traversal
+ *   of the Call Trie.  Each successful unification returns a subgoal
+ *   frame reference which serves as a handle to the call's table
+ *   entry.  Additionally, a return template for the resulting
+ *   (unified) call is constructed in the third argument as a ret/n
+ *   term.
+ *   There is some complication with the inlining of builtins which
+ *   perform trie-code-directed traversals.  Hence get_calls/1 is not
+ *   inlined and we explicitly invoke the builtin call.
+ */
+
+
+'_$$get_calls'(CallTerm,Handle,Template) :-
+	get_calls(CallTerm),
+	get_lastnode_cs_retskel(CallTerm, _Leaf, Handle, Template).
+
+/* 
+ * the argument to the following findall is folded into the
+ * predicate above so that get_lastnode_cs_retskel is inlined,
+ * thus avoiding a GC between get_calls & get_lastnode_cs_retskel
+
+The semantics of get_calls can be understood as follows: You can
+assume that each call is stored in an "asserted" predicate, called
+get_calls/3 in the form:
+
+get_calls(Call,Ptr,VarsInCall)
+
+Then a call to get_calls simply retrieves from this "stored" table as
+usual.
+
+For example, if a call of p(1,X,Y,X) were made to a tabled predicate
+p/4, then there would be a fact in get_calls of:
+
+get_calls(p(1,X,Y,X),12345,ret(X,Y)).
+
+Now if we invoke get_calls(p(A,1,B,C),_,RET), it will succeed with
+A=1, C=1, and RET=ret(1,B).
+
+Not that if RET is most-general, then no variables in the current call
+were instantiated and so it subsumes the call in the table.
+
+ */
+
+get_calls(CallTerm, Handle, Template) :-
+	findall('_$get_calls'(CallTerm,Handle,Template),
+		'_$$get_calls'(CallTerm,Handle,Template),
+		List),
+	member('_$get_calls'(CallTerm,Handle,Template),List).
+
+
+get_calls(_CallTerm) :- '_$builtin'(TRIE_UNIFY_CALL).
+
+
+/*
+ * get_calls_for_table(+PredSpec,?Call)
+ *   The predicate information of PredSpec is used to identify the table
+ *   from which all calls are enumerated through backtracking and
+ *   unified with Call.  PredSpec can be the usual p/n form, or given as
+ *   a term: p(t1,...,tn).
+ */
+
+get_calls_for_table(PredSpec,Call) :-
+	( PredSpec = P/N
+	 ->	functor(Call,P,N)
+	 ;	term_psc(PredSpec,PSC),
+		term_new(PSC,Call)
+	        %% functor(PredSpec,P,N), functor(Call,P,N) ),
+	),
+	get_calls(Call, _CallStr, _RetSkel).
+
+
+/*
+ * get_returns(+TableEntryHandle,#ReturnTemplate)
+ * get_returns(+TableEntryHandle,#ReturnTemplate,-ReturnHandle)
+ *   Backtrackable predicate for selecting returns which UNIFY with
+ *   ReturnTemplate.  Selections are made via a trie-code-directed
+ *   traversal of the Answer Trie (representation of the answer set)
+ *   of the given table entry (subgoal frame reference).  For each
+ *   successful unification, a handle to the return (as an answer trie
+ *   node reference) is copied into the third argument.
+ *   There is some complication with the inlining of builtins which
+ *   perform trie-code-directed traversals.  Hence trie_get_return/2
+ *   is not inlined and we explicitly invoke the builtin call.
+ */
+
+get_returns(TableEntry, ReturnTemplate) :-
+	findall('_$get_returns'(TableEntry,ReturnTemplate),
+		trie_get_return(TableEntry,ReturnTemplate),
+		ReturnsList),
+	% As ReturnTemplate may contain attributed variables (from the
+	% call), which may have been changed in the answer, directly
+	% calling member/2 may trigger attv interrupts.  To avoid this,
+	% we need to change all attributed variables in ReturnTemplate
+	% to free regular variables.
+	change_attv_to_var(ReturnTemplate),
+	member('_$get_returns'(TableEntry,ReturnTemplate),ReturnsList).
+
+'_$$get_returns'(TableEntry,RetTmplt,RetLeaf) :-
+	trie_get_return(TableEntry,RetTmplt),
+	get_lastnode_cs_retskel(_,RetLeaf,_,_).
+	
+
+get_returns(TableEntry, RetTmplt, RetLeaf) :-
+	findall('_$get_returns'(TableEntry,RetTmplt,RetLeaf),
+		'_$$get_returns'(TableEntry,RetTmplt,RetLeaf),
+		ReturnsList),
+	member('_$get_returns'(TableEntry,RetTmplt,RetLeaf),ReturnsList).
+
+/*
+ * change_attv_to_var(+ReturnTemplate)
+ *   Changes all the attributed variables in ReturnTemplate (ret/n) to
+ *   regular variables.
+ */
+ 
+change_attv_to_var(ReturnTemplate) :-
+	ReturnTemplate =.. [ret|Vars],
+	change_attv_to_var1(Vars).
+
+change_attv_to_var1([]).
+change_attv_to_var1([V|Vs]) :-
+	(is_attv(V)
+	 ->	delete_attributes(V)
+	 ;	true
+	),
+	change_attv_to_var1(Vs).	
+
+
+trie_get_return(_TableEntryHandle,_ReturnTemplate) :-
+	'_$builtin'(TRIE_GET_RETURN).
+
+
+get_lastnode_cs_retskel(CallTerm, LastNode, SubgoalPtr, RetSkel) :-
+	get_lastnode_cs_retskel(CallTerm, LastNode, SubgoalPtr, RetSkel).
+
+
+/*
+ * get_returns_for_call(+CallTerm,?AnswerTerm)
+ *   Succeeds whenever CallTerm is a subgoal in the table and AnswerTerm
+ *   unifies with one of its answers.  Backtracks through all unifying
+ *   answers of CallTerm.
+ */
+
+get_returns_for_call(CallTerm,AnswerTerm) :-
+	copy_term(CallTerm,Call),
+	get_call(Call,SF,Return),	% vars of 'Call' are put into 'Return'
+	get_returns(SF,Return),		% instantiate vars of 'Return', and
+	AnswerTerm = Call.		%   hence of 'Call' as well
+
+
+/*
+ * get_residual(#CallTerm,?DelayList)
+ */
+
+get_residual(CallSkel, DelayList) :-
+	get_calls(CallSkel, S, R),
+	get_returns_and_dls(S, R, DLs),
+	( DLs == [] -> DelayList = []
+	; DLs = [DL] -> DelayList = DL
+	; member(DelayList, DLs)
+	).
+
+'_$$get_returns_and_dls'(CallStr,RetSkel,DLs) :-
+	trie_get_return(CallStr,RetSkel),
+	get_lastnode_cs_retskel(_,Leaf,_,_),
+	get_delay_lists(Leaf,DLs).
+	
+get_returns_and_dls(CallStr, RetSkel, DLs) :-
+	findall('_$get_returns_and_dls'(CallStr,RetSkel,DLs),
+		'_$$get_returns_and_dls'(CallStr,RetSkel,DLs),
+		List),
+	member('_$get_returns_and_dls'(CallStr,RetSkel,DLs),List).
+
+get_delay_lists(Leaf, DLs) :- get_delay_lists(Leaf, DLs).
+
+
+/*----------------------------------------------------------------------*/
+/* Predicates to remove information from tables.			*/
+/*----------------------------------------------------------------------*/
+
+abolish_all_tables :- abolish_table_info.
+
+
+abolish_table_pred(Spec) :-
+	( Spec = F/A -> functor(Term,F,A) ; Term = Spec ),
+	abolish_table_predicate(Term).
+
+abolish_table_predicate(Predicate) :- abolish_table_predicate(Predicate).
+
+:- dynamic invalidate_table_for/2.
+invalidate_tables_for(DynSkel,Mode) :-
+	invalidate_table_for(DynSkel,Mode),
+	fail.
+invalidate_tables_for(_DynSkel,_).
+
+abolish_module_tables(_Predicate) :-
+	'_$builtin'(ABOLISH_MODULE_TABLES).
+
+abolish_table_call(Call) :-
+	get_calls(Call,Handle,_Template),
+	table_state(Handle,PredType,_CallType,AnsSetStatus),
+	(   AnsSetStatus == undefined
+	->  throw(error(table_error(abolishing_undefined_call)))
+	;   AnsSetStatus == incomplete
+	->  throw(error(table_error(abolishing_incomplete_call)))
+	;   PredType == subsumptive
+	->  throw(error(table_error(abolishing_subsumptive_call)))
+	;   abolish_table_call_bi(Handle)
+	),
+	fail.
+abolish_table_call(_Call).
+
+abolish_table_call_bi(_Handle) :-
+	'_$builtin'(ABOLISH_TABLE_CALL).
+
+/*
+ * delete_return(+TableEntryHandle,+ReturnHandle)
+ *   Deletes the return, referenced as a leaf of an answer trie, from
+ *   the answer set in the table entry, referenced as a subgoal frame
+ *   pointer.
+ */
+
+delete_return(TableEntryHandle,ReturnHandle) :-
+	trie_delete_return(TableEntryHandle,ReturnHandle).
+
+trie_delete_return(SubgoalFrame,AnswerTrieLeaf) :-
+	trie_delete_return(SubgoalFrame,AnswerTrieLeaf).
+
+
+/*----------------------------------------------------------------------*/
+/* trie assert related predicates - I am not sure they are still needed */
+/* probably kept just for backwards compatibility - Kostis.             */
+/*----------------------------------------------------------------------*/
+
+trie_dynamic(X) :- dynamic(X), add_trie_index(X).
+trie_assert(Term) :- t_assert(Term, _Flag).
+trie_assert(Term,Flag) :- t_assert(Term,Flag).
+trie_retract(X) :- retract(X).
+trie_retract_nr(X) :- retract_nr(X).
+trie_retract_all(X) :- retractall(X).
+
+
+/*======================================================================*/
+/* builtins to get (and change) trie nodes - they belong somewhere else */
+/*======================================================================*/
+
+force_truth_value(AnsLeafNode,TruthValue) :-
+	force_truth_value(AnsLeafNode,TruthValue).
+
+/* ---------------------- end of file tables.P ------------------------ */

@@ -1,0 +1,41 @@
+#include "db_test.flh"
+
+?- writeln('--Insert and delete stuff from all three modules, with and w/o db association--')@prolog().
+
+?- writeln('Load and associate module: mod1')@prolog().
+?- [empty>>mod1].
+?- flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod1').
+?- writeln('Get answers for : mod1')@prolog().
+?- writeln('Answers: a,b,c,d')@prolog().
+?- q(?X)@mod1.
+
+?- writeln('Load modules mod1, mod2. NO database association.')@prolog().
+?- [empty>>mod2].
+?- [empty>>mod3].
+
+?- writeln('Since NO db is associated, the queries should return no answers.....')@prolog().
+?- q(?X)@mod2.
+?- q(?X)@mod3.
+
+?- writeln('Now associate mod2 with the database and ask a couple of queries.')@prolog().
+?- flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod2').
+?- writeln('Unification will succeed. Returns a,b,c,d for the first query and p-a:a,b,c,d for the other')@prolog().
+?- q(?W)@mod2.
+?- ?X(?Y,?Z)@mod2.
+
+?- writeln('Still no results for mod3.')@prolog().
+?- q(?X)@mod3.
+?- ?X(?Y,?Z)@mod3.
+
+?- writeln('Associate mod3 with the database.')@prolog().
+?- flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod3').
+?- writeln('delete all q(X) terms from mod3')@prolog().
+?- delete{q(a)@mod3,q(b)@mod3,q(c)@mod3,q(d)@mod3}.
+
+?- writeln('delete all p(_,_) terms from mod2')@prolog().
+?- delete{p(a,a)@mod2}.
+?- delete{p(a,b)@mod2,p(a,c)@mod2,p(a,d)@mod2}.
+
+?- writeln('Now re-run the sanity test (db_test2) to get a different set of results.')@prolog().
+?- flHalt.
+

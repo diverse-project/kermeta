@@ -1,0 +1,135 @@
+/* File:      flrsystem.flr
+**
+** Author(s): Hui Wan
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2001
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: flrtypeconstraint.flr,v 1.2 2006/05/05 19:52:13 hwan Exp $
+**
+*/
+
+/* @> is used to compare ?Count and ?High since ?High is probably '*' which stands for infinity */
+
+?Object[%CheckCardinality(?Method,'=>')] :-
+      caller{?Module},
+      ?Object[?Method {?Low:?High} => ?]@?Module,
+      ?Count = count{?V | ?Object[?Method->?V]@?Module},
+      (?Count < ?Low ; ?Count @> ?High).
+
+?Object[%CheckCardinality(?Method,'*=>')] :-
+      caller{?Module},
+      ?Object[?Method {?Low:?High} *=> ?]@?Module,
+      ?Count = count{?V | ?Object[?Method*->?V]@?Module},
+      (?Count < ?Low ; ?Count @> ?High).
+
+?Object[%CheckCardinality(?Module,?Method,'=>')] :-
+      ?Object[?Method {?Low:?High} => ?]@?Module,
+      ?Count = count{?V | ?Object[?Method->?V]@?Module},
+      (?Count < ?Low ; ?Count @> ?High).
+
+?Object[%CheckCardinality(?Module,?Method,'*=>')] :-
+      ?Object[?Method {?Low:?High} *=> ?]@?Module,
+      ?Count = count{?V | ?Object[?Method*->?V]@?Module},
+      (?Count < ?Low ; ?Count @> ?High).
+
+/*************************************************************************************************************************
+?Object[%CheckCardinality(?Method,-Low,-High,?MethodType)]
+?Object[%CheckCardinality(?Module,?Method,-Low,-High,?MethodType)]
+
+  ?LowBound and ?HighBound should be unbound variables in the input, they are used to signal which bound is violated.
+     If the lower bound is violated, then ?LowBound will be bound to the (violated) lower bound, otherwise bound to 'not_violated'
+     If the higher bound is violated, then ?HighBound will be bound to the (violated) lower bound, otherwise bound to 'not_violated'
+
+  ***********************************************************************************************************************/
+?Object[%CheckCardinality(?Method,?LowBound,?HighBound,'=>')] :-
+	if ?HighBound == ?LowBound  then
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?Low, ?High should be different with each other!')@flora(sys),
+	if not(var(?LowBound)) then  
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?Low should be unbound!')@flora(sys),
+	if not(var(?HighBound)) then 
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?High should be unbound!')@flora(sys),
+	caller{?Module},
+	?Object[?Method {?Low:?High} => ?]@?Module,
+	?Count = count{?V | ?Object[?Method->?V]@?Module},
+	(?Count < ?Low ; ?Count @> ?High),
+	if ?Count < ?Low then
+	    ?LowBound = ?Low // The lower bound is violated, bind ?LowBound to the violated lower bound.
+	    //else, bind ?LowBound to 'not_violated'.
+	else ?LowBound = 'not_violated',
+	if ?Count @> ?High then
+	    ?HighBound = ?High // The higher bound is violated, bind ?HighBound to the violated higher bound.
+	    // else, bind ?HighBound to 'not_violated'.
+	else ?HighBound = 'not_violated'.
+
+?Object[%CheckCardinality(?Method,?LowBound,?HighBound,'*=>')] :-
+	if ?HighBound == ?LowBound  then
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?Low, ?High should be different with each other!')@flora(sys),
+	if not(var(?LowBound)) then  
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?Low should be unbound!')@flora(sys),
+	if not(var(?HighBound)) then 
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?High should be unbound!')@flora(sys),
+	caller{?Module},
+	?Object[?Method {?Low:?High} *=> ?]@?Module,
+	?Count = count{?V | ?Object[?Method*->?V]@?Module},
+	(?Count < ?Low ; ?Count @> ?High),
+	if ?Count < ?Low then
+	    ?LowBound = ?Low // The lower bound is violated, bind ?LowBound to the violated lower bound.
+	    //else, bind ?LowBound to 'not_violated'.
+	else ?LowBound = 'not_violated',
+	if ?Count @> ?High then
+	    ?HighBound = ?High // The higher bound is violated, bind ?HighBound to the violated higher bound.
+	    // else, bind ?HighBound to 'not_violated'.
+	else ?HighBound = 'not_violated'.
+
+?Object[%CheckCardinality(?Module,?Method,?LowBound,?HighBound,'=>')] :-
+	if ?HighBound == ?LowBound  then
+	    %abort('Using %CheckCardinality(?Module,?Method,?Low,?High,?Type): ?Low, ?High should be different with each other!')@flora(sys),
+	if not(var(?LowBound)) then  
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?Low should be unbound!')@flora(sys),
+	if not(var(?HighBound)) then 
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?High should be unbound!')@flora(sys),
+	?Object[?Method {?Low:?High} => ?]@?Module,
+	?Count = count{?V | ?Object[?Method->?V]@?Module},
+	(?Count < ?Low ; ?Count @> ?High),
+	if ?Count < ?Low then
+	    ?LowBound = ?Low // The lower bound is violated, bind ?LowBound to the violated lower bound.
+	    //else, bind ?LowBound to 'not_violated'.
+	else ?LowBound = 'not_violated',
+	if ?Count @> ?High then
+	    ?HighBound = ?High // The higher bound is violated, bind ?HighBound to the violated higher bound.
+	    // else, bind ?HighBound to 'not_violated'.
+	else ?HighBound = 'not_violated'.
+
+?Object[%CheckCardinality(?Module,?Method,?LowBound,?HighBound,'*=>')] :-
+	if ?HighBound == ?LowBound  then
+	    %abort('Using %CheckCardinality(?Module,?Method,?Low,?High,?Type): ?Low, ?High should be different with each other!')@flora(sys),
+	if not(var(?LowBound)) then  
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?Low should be unbound!')@flora(sys),
+	if not(var(?HighBound)) then 
+	    %abort('Using %CheckCardinality(?Method,?Low,?High,?Type): ?High should be unbound!')@flora(sys),
+	?Object[?Method {?Low:?High} *=> ?]@?Module,
+	?Count = count{?V | ?Object[?Method*->?V]@?Module},
+	(?Count < ?Low ; ?Count @> ?High),
+	if ?Count < ?Low then
+	    ?LowBound = ?Low // The lower bound is violated, bind ?LowBound to the violated lower bound.
+	    //else, bind ?LowBound to 'not_violated'.
+	else ?LowBound = 'not_violated',
+	if ?Count @> ?High then
+	    ?HighBound = ?High // The higher bound is violated, bind ?HighBound to the violated higher bound.
+	    // else, bind ?HighBound to 'not_violated'. 
+	else ?HighBound = 'not_violated'.

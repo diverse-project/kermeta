@@ -1,0 +1,6 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(tran)(__newvar1,'flapply'('CheckCardinality',__newvar3,__newvar4),__newvar2).
+FLORA_THIS_WORKSPACE(tran)(__newvar1,'flapply'('CheckCardinality',__newvar3,__newvar4,__newvar5),__newvar2).
+FLORA_THIS_WORKSPACE(tran)(__newvar1,'flapply'('CheckCardinality',__newvar3,__newvar4,__newvar5,__newvar6),__newvar2).
+FLORA_THIS_WORKSPACE(tran)(__newvar1,'flapply'('CheckCardinality',__newvar3,__newvar4,__newvar5,__newvar6,__newvar7),__newvar2).

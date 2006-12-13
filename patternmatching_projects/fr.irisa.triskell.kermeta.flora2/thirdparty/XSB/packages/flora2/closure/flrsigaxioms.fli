@@ -1,0 +1,22 @@
+/***************************************************************************
+  file: closure/flrsigaxioms.fli
+
+  Author(s): Michael Kifer
+
+  Contact:   flora-users@lists.sourceforge.net
+
+  Copyright (C) The Research Foundation of SUNY, 2005
+
+***************************************************************************/
+
+/* Axioms for signatures */
+
+mvdsig(O,M,R1,CallerInfo) :-
+	mvdsig(O,M,R,CallerInfo),
+	sub(R,R1,CallerInfo).
+
+imvdsig(C,M,R1,CallerInfo) :-
+	imvdsig(C,M,R,CallerInfo),
+	sub(R,R1,CallerInfo).
+
+

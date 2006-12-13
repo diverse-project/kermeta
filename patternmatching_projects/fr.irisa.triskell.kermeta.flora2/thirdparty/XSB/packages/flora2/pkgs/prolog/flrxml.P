@@ -1,0 +1,88 @@
+/* File:      flrxml.P
+** Author(s): Rohan Shirwaikar
+** Contact:   flora-users@lists.sourceforge.net
+** 
+** Copyright (C) The Research Foundation of SUNY, 2005
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** 
+*/
+
+:-import (flImport)/1 from flora2.
+:-flImport '%'(flrelement)/4 as flrelement(_,_,_, _) from flrxml_aux >> flrxml.
+:-flImport '%'(flrattribute)/4 as flrattribute(_,_,_, _)
+	   from flrxml_aux >> flrxml.
+:-flImport '%'(flrnewoid)/1 as flrnewoid(_) from flrxml_aux >> flrxml.
+:-flImport '%'(flrattributefunc)/5 as flrattributefunc(_,_,_,_,_)
+	   from flrxml_aux >> flrxml.
+:-export xml_parse_doc/2.
+
+
+xml_parse_doc(D, M) :- 
+	flrnewoid(C), 
+	flrattribute(C, '$order', 0, M),  
+	xml_parse_root(C, D, leftmost, 1, _, 0, M).
+
+xml_parse_root(C, [X|Y], Left, Oin, Oout, Child, M) :- 
+	parse_xml_element(C, X, C1, Oin, Otemp, M),
+	flrattributefunc(C, '$child', Child, C1, M),
+	Child1 is Child + 1,	
+	(Left = leftmost ->  
+	    true 
+	;flrattribute(Left, '$rightsibling', C1, M),
+	    flrattribute(C1, '$leftsibling', Left, M)
+	),	
+	xml_parse_root(C, Y, C1, Otemp,  Oout, Child1, M). 
+
+xml_parse_root(_, [], _, Oin, Oin, _, _).
+
+parse_xml_element(C, element(X,Y,Z), C1, Oin, Oout, M):- 
+	\+is_list(Z),
+	\+is_element_text(Z), 
+	flrelement(C, X, C1, M),
+	flrattribute(C1, '$order', Oin, M),
+	Otemp is Oin + 1,
+	parse_xml_attribute(C1, Y, M),
+	flrattribute(C1, '$content', Z, M),
+	flrelement(C1, '$text', C2, M),
+	flrattributefunc(C1, '$child', 0, C2, M),
+	flrattribute(C2, '$order', Otemp, M),
+	Oout is Otemp+1,
+	flrattribute(C2, '$string', Z, M),
+	!.
+
+
+parse_xml_element(C, element(X,Y,Z), C1, Oin, Oout, M):- 
+	flrelement(C, X, C1, M),
+	flrattribute(C1, '$order', Oin, M),
+	Otemp is Oin + 1, 
+	parse_xml_attribute(C1, Y, M),  
+	xml_parse_root(C1, Z, leftmost, Otemp, Oout, 0, M),	!.
+
+is_element_text([element(_,_,_)]).
+
+parse_xml_element(C, X, C1, Oin, Oout, M) :- 
+	flrelement(C, '$text', C1, M),
+	flrattribute(C1, '$order', Oin, M),
+	Oout is Oin + 1,
+	flrattribute(C1, '$string', X, M).
+
+
+parse_xml_attribute(C1, [ =(X,Y) |Z], M):- 
+	flrattribute(C1, X, Y, M), 
+	parse_xml_attribute(C1, Z, M).
+
+parse_xml_attribute(_, [], _). 

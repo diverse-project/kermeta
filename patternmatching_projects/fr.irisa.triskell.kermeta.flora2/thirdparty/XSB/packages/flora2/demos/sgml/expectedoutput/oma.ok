@@ -1,0 +1,25 @@
+_$_$_flora'dyn_newoid5790[$order->0].  // @oma
+_$_$_flora'dyn_newoid5790[oma->>_$_$_flora'dyn_newoid5793].  // @oma
+_$_$_flora'dyn_newoid5793[$order->1].  // @oma
+_$_$_flora'dyn_newoid5793[foo->foo].  // @oma
+_$_$_flora'dyn_newoid5793[obo->>_$_$_flora'dyn_newoid5794].  // @oma
+_$_$_flora'dyn_newoid5794[$order->2].  // @oma
+_$_$_flora'dyn_newoid5794[bar->bar].  // @oma
+_$_$_flora'dyn_newoid5794[p->>_$_$_flora'dyn_newoid5795].  // @oma
+_$_$_flora'dyn_newoid5795[$order->3].  // @oma
+_$_$_flora'dyn_newoid5795[$text->>_$_$_flora'dyn_newoid5796].  // @oma
+_$_$_flora'dyn_newoid5796[$order->4].  // @oma
+_$_$_flora'dyn_newoid5796[$string->Hello world.].  // @oma
+_$_$_flora'dyn_newoid5795[$child(0)->_$_$_flora'dyn_newoid5796].  // @oma
+_$_$_flora'dyn_newoid5794[$child(0)->_$_$_flora'dyn_newoid5795].  // @oma
+_$_$_flora'dyn_newoid5794[p->>_$_$_flora'dyn_newoid5797].  // @oma
+_$_$_flora'dyn_newoid5797[$order->5].  // @oma
+_$_$_flora'dyn_newoid5797[$text->>_$_$_flora'dyn_newoid5798].  // @oma
+_$_$_flora'dyn_newoid5798[$order->6].  // @oma
+_$_$_flora'dyn_newoid5798[$string->Where did the attributes go?].  // @oma
+_$_$_flora'dyn_newoid5797[$child(0)->_$_$_flora'dyn_newoid5798].  // @oma
+_$_$_flora'dyn_newoid5794[$child(1)->_$_$_flora'dyn_newoid5797].  // @oma
+_$_$_flora'dyn_newoid5795[$rightsibling->_$_$_flora'dyn_newoid5797].  // @oma
+_$_$_flora'dyn_newoid5797[$leftsibling->_$_$_flora'dyn_newoid5795].  // @oma
+_$_$_flora'dyn_newoid5793[$child(0)->_$_$_flora'dyn_newoid5794].  // @oma
+_$_$_flora'dyn_newoid5790[$child(0)->_$_$_flora'dyn_newoid5793].  // @oma

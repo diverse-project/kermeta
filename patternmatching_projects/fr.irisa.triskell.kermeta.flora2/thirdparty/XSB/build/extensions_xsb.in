@@ -1,0 +1,47 @@
+/*  @configure_input@ 
+**
+**   This file defines all file extensions used in XSB
+**
+*/
+
+/* File:      extensions_xsb.h
+** Author(s): kifer
+** Contact:   xsb-contact@cs.sunysb.edu
+** 
+** Copyright (C) The Research Foundation of SUNY, 2002
+** 
+** XSB is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** XSB is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with XSB; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** 
+*/
+
+
+/* Info on the file extension used for XSB files */
+
+#define XSB_SRC_EXTENSION_STRING  "@xsb_src_extension@"
+#define XSB_OBJ_EXTENSION_STRING  "@xsb_obj_extension@"
+#define XSB_OBJ_EXTENSION_LENGTH  5
+
+#define XSB_OBJ_EXTENSION_ATOM    '@xsb_obj_extension@'
+#define XSB_SRC_EXTENSION_ATOM    '@xsb_src_extension@'
+#define XSB_HDR_EXTENSION_ATOM    '@xsb_hdr_extension@'
+#define XSB_ASM_EXTENSION_ATOM    '@xsb_asm_extension@'
+#define XSB_DCL_EXTENSION_ATOM    '@xsb_dcl_extension@'
+
+#define XSB_OBJ_EXTENSION_ATOM_SANS_DOT    '@xsb_obj_extension_sans_dot@'
+#define XSB_SRC_EXTENSION_ATOM_SANS_DOT    '@xsb_src_extension_sans_dot@'
+#define XSB_HDR_EXTENSION_ATOM_SANS_DOT    '@xsb_hdr_extension_sans_dot@'
+#define XSB_ASM_EXTENSION_ATOM_SANS_DOT    '@xsb_asm_extension_sans_dot@'
+#define XSB_DCL_EXTENSION_ATOM_SANS_DOT    '@xsb_dcl_extension_sans_dot@'

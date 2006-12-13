@@ -1,0 +1,68 @@
+_$_$_flora'dyn_newoid5843[$order->0].  // @rsre
+_$_$_flora'dyn_newoid5843[text->>_$_$_flora'dyn_newoid5846].  // @rsre
+_$_$_flora'dyn_newoid5846[$order->1].  // @rsre
+_$_$_flora'dyn_newoid5846[page->>_$_$_flora'dyn_newoid5847].  // @rsre
+_$_$_flora'dyn_newoid5847[$order->2].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5848].  // @rsre
+_$_$_flora'dyn_newoid5848[$order->3].  // @rsre
+_$_$_flora'dyn_newoid5848[$text->>_$_$_flora'dyn_newoid5849].  // @rsre
+_$_$_flora'dyn_newoid5849[$order->4].  // @rsre
+_$_$_flora'dyn_newoid5849[$string->SGML does NOT add record start characters at the beginning or].  // @rsre
+_$_$_flora'dyn_newoid5848[$child(0)->_$_$_flora'dyn_newoid5849].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(0)->_$_$_flora'dyn_newoid5848].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5850].  // @rsre
+_$_$_flora'dyn_newoid5850[$order->5].  // @rsre
+_$_$_flora'dyn_newoid5850[$text->>_$_$_flora'dyn_newoid5851].  // @rsre
+_$_$_flora'dyn_newoid5851[$order->6].  // @rsre
+_$_$_flora'dyn_newoid5851[$string->record end characters at the end of entities unless they are].  // @rsre
+_$_$_flora'dyn_newoid5850[$child(0)->_$_$_flora'dyn_newoid5851].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(1)->_$_$_flora'dyn_newoid5850].  // @rsre
+_$_$_flora'dyn_newoid5848[$rightsibling->_$_$_flora'dyn_newoid5850].  // @rsre
+_$_$_flora'dyn_newoid5850[$leftsibling->_$_$_flora'dyn_newoid5848].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5852].  // @rsre
+_$_$_flora'dyn_newoid5852[$order->7].  // @rsre
+_$_$_flora'dyn_newoid5852[$text->>_$_$_flora'dyn_newoid5853].  // @rsre
+_$_$_flora'dyn_newoid5853[$order->8].  // @rsre
+_$_$_flora'dyn_newoid5853[$string->already there.  In this document, there IS a record start].  // @rsre
+_$_$_flora'dyn_newoid5852[$child(0)->_$_$_flora'dyn_newoid5853].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(2)->_$_$_flora'dyn_newoid5852].  // @rsre
+_$_$_flora'dyn_newoid5850[$rightsibling->_$_$_flora'dyn_newoid5852].  // @rsre
+_$_$_flora'dyn_newoid5852[$leftsibling->_$_$_flora'dyn_newoid5850].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5854].  // @rsre
+_$_$_flora'dyn_newoid5854[$order->9].  // @rsre
+_$_$_flora'dyn_newoid5854[$text->>_$_$_flora'dyn_newoid5855].  // @rsre
+_$_$_flora'dyn_newoid5855[$order->10].  // @rsre
+_$_$_flora'dyn_newoid5855[$string->character for the first line of text and there IS a record end].  // @rsre
+_$_$_flora'dyn_newoid5854[$child(0)->_$_$_flora'dyn_newoid5855].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(3)->_$_$_flora'dyn_newoid5854].  // @rsre
+_$_$_flora'dyn_newoid5852[$rightsibling->_$_$_flora'dyn_newoid5854].  // @rsre
+_$_$_flora'dyn_newoid5854[$leftsibling->_$_$_flora'dyn_newoid5852].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5856].  // @rsre
+_$_$_flora'dyn_newoid5856[$order->11].  // @rsre
+_$_$_flora'dyn_newoid5856[$text->>_$_$_flora'dyn_newoid5857].  // @rsre
+_$_$_flora'dyn_newoid5857[$order->12].  // @rsre
+_$_$_flora'dyn_newoid5857[$string->character for the last line of text.  The #RS character reference].  // @rsre
+_$_$_flora'dyn_newoid5856[$child(0)->_$_$_flora'dyn_newoid5857].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(4)->_$_$_flora'dyn_newoid5856].  // @rsre
+_$_$_flora'dyn_newoid5854[$rightsibling->_$_$_flora'dyn_newoid5856].  // @rsre
+_$_$_flora'dyn_newoid5856[$leftsibling->_$_$_flora'dyn_newoid5854].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5858].  // @rsre
+_$_$_flora'dyn_newoid5858[$order->13].  // @rsre
+_$_$_flora'dyn_newoid5858[$text->>_$_$_flora'dyn_newoid5859].  // @rsre
+_$_$_flora'dyn_newoid5859[$order->14].  // @rsre
+_$_$_flora'dyn_newoid5859[$string->should match at the beginning of each line except possibly the].  // @rsre
+_$_$_flora'dyn_newoid5858[$child(0)->_$_$_flora'dyn_newoid5859].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(5)->_$_$_flora'dyn_newoid5858].  // @rsre
+_$_$_flora'dyn_newoid5856[$rightsibling->_$_$_flora'dyn_newoid5858].  // @rsre
+_$_$_flora'dyn_newoid5858[$leftsibling->_$_$_flora'dyn_newoid5856].  // @rsre
+_$_$_flora'dyn_newoid5847[line->>_$_$_flora'dyn_newoid5860].  // @rsre
+_$_$_flora'dyn_newoid5860[$order->15].  // @rsre
+_$_$_flora'dyn_newoid5860[$text->>_$_$_flora'dyn_newoid5861].  // @rsre
+_$_$_flora'dyn_newoid5861[$order->16].  // @rsre
+_$_$_flora'dyn_newoid5861[$string->first one, so we expect SEVEN (LINE) elements for this file.].  // @rsre
+_$_$_flora'dyn_newoid5860[$child(0)->_$_$_flora'dyn_newoid5861].  // @rsre
+_$_$_flora'dyn_newoid5847[$child(6)->_$_$_flora'dyn_newoid5860].  // @rsre
+_$_$_flora'dyn_newoid5858[$rightsibling->_$_$_flora'dyn_newoid5860].  // @rsre
+_$_$_flora'dyn_newoid5860[$leftsibling->_$_$_flora'dyn_newoid5858].  // @rsre
+_$_$_flora'dyn_newoid5846[$child(0)->_$_$_flora'dyn_newoid5847].  // @rsre
+_$_$_flora'dyn_newoid5843[$child(0)->_$_$_flora'dyn_newoid5846].  // @rsre

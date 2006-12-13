@@ -1,0 +1,152 @@
+/***************************************************************************
+  file: closure/flrcommon_inh.fli
+
+  Author(s): Guizhen Yang
+
+  Contact:   flora-users@lists.sourceforge.net
+
+  Copyright (C) The Research Foundation of SUNY, 1999-2004
+
+  Inheritance-specific part common to all trailers that support inheritance
+***************************************************************************/
+
+
+#include "flora_wspredicates.flh"
+#include "flora_porting.flh"
+
+
+/*****************************************************************************
+  inheritance book-keeping information for multivalued methods
+
+  Note that the argument "Class" here is considered as a class.
+  It is about inheritance from superclasses to subclasses.
+*****************************************************************************/
+override_class_imvd(C,MethSign,Class,CallerInfo) :-
+	sub(X,C,CallerInfo),
+	sub(Class,X,CallerInfo),
+	X \= C,
+	X \= Class,
+	local_imvd(X,MethSign,CallerInfo).
+
+
+candidate_class_imvd(C,MethSign,Class,CallerInfo) :-
+	var(MethSign),
+	!,
+	sub(Class,C,CallerInfo),
+	local_imvd(C,MethSign,CallerInfo),
+	C \= Class,
+	FLORA_TNOT(override_class_imvd(C,MethSign,Class,CallerInfo)).
+
+candidate_class_imvd(C,MethSign,Class,CallerInfo) :-
+	local_imvd(C,MethSign,CallerInfo),
+	sub(Class,C,CallerInfo),
+	C \= Class,
+	FLORA_TNOT(override_class_imvd(C,MethSign,Class,CallerInfo)).
+
+
+multiple_class_imvd(C,MethSign,Class,CallerInfo) :-
+	candidate_class_imvd(X,MethSign,Class,CallerInfo),
+	X \= C.
+
+
+/*****************************************************************************
+  inheritance book-keeping information for multivalued methods
+
+  Note that the argument "Object" here is considered as an object.
+  It is about inheritance from superclasses to instances/members.
+*****************************************************************************/
+override_object_imvd(C,MethSign,Object,CallerInfo) :-
+	sub(X,C,CallerInfo),
+	isa(Object,X,CallerInfo),
+	X \= C,
+	X \= Object,
+	local_imvd(X,MethSign,CallerInfo).
+
+
+candidate_object_imvd(C,MethSign,Object,CallerInfo) :-
+	var(MethSign),
+	!,
+	isa(Object,C,CallerInfo),
+	local_imvd(C,MethSign,CallerInfo),
+	C \= Object,
+	FLORA_TNOT(override_object_imvd(C,MethSign,Object,CallerInfo)).
+
+candidate_object_imvd(C,MethSign,Object,CallerInfo) :-
+	local_imvd(C,MethSign,CallerInfo),
+	isa(Object,C,CallerInfo),
+	C \= Object,
+	FLORA_TNOT(override_object_imvd(C,MethSign,Object,CallerInfo)).
+
+
+multiple_object_imvd(C,MethSign,Object,CallerInfo) :-
+	candidate_object_imvd(X,MethSign,Object,CallerInfo),
+	X \= C.
+
+
+/*****************************************************************************
+  inheritance book-keeping information for boolean tabled methods
+
+  Note that the argument "Class" here is considered as a class.
+  It is about inheritance from superclasses to subclasses.
+*****************************************************************************/
+override_class_imeth(C,MethSign,Class,CallerInfo) :-
+	sub(X,C,CallerInfo),
+	sub(Class,X,CallerInfo),
+	X \= C,
+	X \= Class,
+	local_imeth(X,MethSign,CallerInfo).
+
+
+candidate_class_imeth(C,MethSign,Class,CallerInfo) :-
+	var(MethSign),
+	!,
+	sub(Class,C,CallerInfo),
+	local_imeth(C,MethSign,CallerInfo),
+	C \= Class,
+	FLORA_TNOT(override_class_imeth(C,MethSign,Class,CallerInfo)).
+
+candidate_class_imeth(C,MethSign,Class,CallerInfo) :-
+	local_imeth(C,MethSign,CallerInfo),
+	sub(Class,C,CallerInfo),
+	C \= Class,
+	FLORA_TNOT(override_class_imeth(C,MethSign,Class,CallerInfo)).
+
+
+multiple_class_imeth(C,MethSign,Class,CallerInfo) :-
+	candidate_class_imeth(X,MethSign,Class,CallerInfo),
+	X \= C.
+
+
+/*****************************************************************************
+  inheritance book-keeping information for boolean tabled methods
+
+  Note that the argument "Object" here is considered as an object.
+  It is about inheritance from superclasses to instances/members.
+*****************************************************************************/
+override_object_imeth(C,MethSign,Object,CallerInfo) :-
+	sub(X,C,CallerInfo),
+	isa(Object,X,CallerInfo),
+	X \= C,
+	X \= Object,
+	local_imeth(X,MethSign,CallerInfo).
+
+
+candidate_object_imeth(C,MethSign,Object,CallerInfo) :-
+	var(MethSign),
+	!,
+	isa(Object,C,CallerInfo),
+	local_imeth(C,MethSign,CallerInfo),
+	C \= Object,
+	FLORA_TNOT(override_object_imeth(C,MethSign,Object,CallerInfo)).
+
+candidate_object_imeth(C,MethSign,Object,CallerInfo) :-
+	local_imeth(C,MethSign,CallerInfo),
+	isa(Object,C,CallerInfo),
+	C \= Object,
+	FLORA_TNOT(override_object_imeth(C,MethSign,Object,CallerInfo)).
+
+
+multiple_object_imeth(C,MethSign,Object,CallerInfo) :-
+	candidate_object_imeth(X,MethSign,Object,CallerInfo),
+	X \= C.
+

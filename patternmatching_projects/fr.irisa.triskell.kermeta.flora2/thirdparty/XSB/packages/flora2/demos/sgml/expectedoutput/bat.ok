@@ -1,0 +1,2 @@
+
+error(sgml(sgml_parser(140011560)@prolog(),/home/users/kifer/XSB/XSB/examples/sgml/files/bat.sgml,30,Syntax error: Bad attribute list, found "b=en en")@prolog())

@@ -1,0 +1,29 @@
+_$_$_flora'dyn_newoid5709[$order->0].  // @i
+_$_$_flora'dyn_newoid5709[test->>_$_$_flora'dyn_newoid5712].  // @i
+_$_$_flora'dyn_newoid5712[$order->1].  // @i
+_$_$_flora'dyn_newoid5712[$text->>_$_$_flora'dyn_newoid5713].  // @i
+_$_$_flora'dyn_newoid5713[$order->2].  // @i
+_$_$_flora'dyn_newoid5713[$string-><q>! Hello ].  // @i
+_$_$_flora'dyn_newoid5712[$child(0)->_$_$_flora'dyn_newoid5713].  // @i
+_$_$_flora'dyn_newoid5712[q->>_$_$_flora'dyn_newoid5714].  // @i
+_$_$_flora'dyn_newoid5714[$order->3].  // @i
+_$_$_flora'dyn_newoid5714[$text->>_$_$_flora'dyn_newoid5715].  // @i
+_$_$_flora'dyn_newoid5715[$order->4].  // @i
+_$_$_flora'dyn_newoid5715[$string->you there].  // @i
+_$_$_flora'dyn_newoid5714[$child(0)->_$_$_flora'dyn_newoid5715].  // @i
+_$_$_flora'dyn_newoid5712[$child(1)->_$_$_flora'dyn_newoid5714].  // @i
+_$_$_flora'dyn_newoid5713[$rightsibling->_$_$_flora'dyn_newoid5714].  // @i
+_$_$_flora'dyn_newoid5714[$leftsibling->_$_$_flora'dyn_newoid5713].  // @i
+_$_$_flora'dyn_newoid5712[$text->>_$_$_flora'dyn_newoid5716].  // @i
+_$_$_flora'dyn_newoid5716[$order->5].  // @i
+_$_$_flora'dyn_newoid5716[$string->, I'm ].  // @i
+_$_$_flora'dyn_newoid5712[$child(2)->_$_$_flora'dyn_newoid5716].  // @i
+_$_$_flora'dyn_newoid5714[$rightsibling->_$_$_flora'dyn_newoid5716].  // @i
+_$_$_flora'dyn_newoid5716[$leftsibling->_$_$_flora'dyn_newoid5714].  // @i
+_$_$_flora'dyn_newoid5712[$text->>_$_$_flora'dyn_newoid5717].  // @i
+_$_$_flora'dyn_newoid5717[$order->6].  // @i
+_$_$_flora'dyn_newoid5717[$string->sdata(special)].  // @i
+_$_$_flora'dyn_newoid5712[$child(3)->_$_$_flora'dyn_newoid5717].  // @i
+_$_$_flora'dyn_newoid5716[$rightsibling->_$_$_flora'dyn_newoid5717].  // @i
+_$_$_flora'dyn_newoid5717[$leftsibling->_$_$_flora'dyn_newoid5716].  // @i
+_$_$_flora'dyn_newoid5709[$child(0)->_$_$_flora'dyn_newoid5712].  // @i

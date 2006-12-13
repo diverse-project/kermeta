@@ -1,0 +1,62 @@
+/* File:      pkgs/persistentmodules.flr
+**
+** Author(s): Michael Kifer
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2006
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+**
+*/
+
+
+?- consult(flrpm)@prolog(consult).
+
+:- export
+	?[%attach(?,?,?,?)],
+	?[%attachNew(?,?,?,?)],
+	?[%detach],
+	?[%loadDB].
+
+
+// Module to an existing database
+?Module[%attach(?DSN,?DB,?User,?Password)] :-
+	checkModule(?Module,'Cannot attach database to module'),
+	fllibpm_connect(?DSN,?DB,?User,?Password,?Module)@prolog(flrpm).
+
+// create a new DB and attach Module to it
+?Module[%attachNew(?DSN,?DB,?User,?Password)] :-
+	fllibpm_create_db(?DSN,?DB,?User,?Password)@prolog(flrpm),
+	fllibpm_connect(?DSN,?DB,?User,?Password,?Module)@prolog(flrpm).
+
+?Module[%detach] :-
+	checkModule(?Module,'Cannot dettach database from module'),
+	fllibpm_disconnect(?Module)@prolog(flrpm).
+
+?Module[%loadDB] :-
+	checkModule(?Module,'Cannot load database facts for module'),
+	fllibpm_db_to_memory(?Module)@prolog(flrpm).
+
+
+checkModule(?Module,?ErrMsg) :-
+	(\+ atom(?Module) ; ?Module = []),
+	flora_abort([?ErrMsg, ': invalid module name ', ?Module])@prolog(flrutils).
+checkModule(?Module,?ErrMsg) :-
+	\+ flora_module_registry(?Module)@prolog(flrregistry),
+	flora_abort([?ErrMsg, ': module ', ?Module, ' is not loaded'])@prolog(flrutils).
+
+checkModule(?_Module,?_ErrMsg) :- true.

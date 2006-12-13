@@ -1,0 +1,113 @@
+/***************************************************************************
+  file: closure/flrtypes.fli
+
+  Author(s): Michael Kifer
+
+  Contact:   flora-users@lists.sourceforge.net
+
+  Copyright (C) The Research Foundation of SUNY, 2004
+***************************************************************************/
+
+
+%% We don't want the silent isa relationships to be shown by the debugger
+silent_isa(X,integer,_Caller) :- integer(X).
+silent_isa(X,float,_Caller) :- float(X).
+%% integer or float
+silent_isa(X,number,_Caller) :- number(X).
+silent_isa(X,symbol,_Caller) :- atom(X).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Type combinators
+%% Restrictions on C1, C2 are precautions against infinite loops
+%% due to things like (symbol,(symbol,(symbol,...)...))
+FLTRAILERPREFIX(isa)(X, (C1,C2),_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C1 \= (_,_), C1 \= (_;_), C1 \= (_-_) -> true ; ground(C1)),
+	    (C2 \= (_,_), C2 \= (_;_), C2 \= (_-_) -> true ; ground(C2)),
+	    isa(X,C1,_Caller),
+	    isa(X,C2,_Caller)
+	).
+
+%% The glb rule
+FLTRAILERPREFIX(sub)(X, (C1,C2),_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C1 \= (_,_), C1 \= (_;_), C1 \= (_-_) -> true ; ground(C1)),
+	    (C2 \= (_,_), C2 \= (_;_), C2 \= (_-_) -> true ; ground(C2)),
+	    sub(X,C1,_Caller),
+	    sub(X,C2,_Caller),
+	    X \= (C1,C2), X \= (C2,C1)
+	).
+
+FLTRAILERPREFIX(sub)((C1,C2),C1,_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C1 \= (_,_), C1 \= (_;_), C1 \= (_-_) -> true ; ground(C1))
+	).
+
+FLTRAILERPREFIX(sub)((C1,C2),C2,_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C2 \= (_,_), C2 \= (_;_), C2 \= (_-_) -> true ; ground(C2))
+	).
+
+%% Restrictions on C1, C2 are precautions against infinite loops
+%% due to things like (symbol,(symbol,(symbol,...)...))
+FLTRAILERPREFIX(isa)(X, (C1;C2),_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (
+		(C1 \= (_,_), C1 \= (_;_), C1 \= (_-_) -> true ; ground(C1)),
+	  	isa(X,C1,_Caller)
+	    ;
+		(C2 \= (_,_), C2 \= (_;_), C2 \= (_-_) -> true ; ground(C2)),
+	  	isa(X,C2,_Caller)
+	    )
+	).
+
+%% The lub rule
+FLTRAILERPREFIX(sub)((C1;C2),X,_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C1 \= (_;_), C1 \= (_,_), C1 \= (_-_) -> true ; ground(C1)),
+	    (C2 \= (_;_), C2 \= (_,_), C2 \= (_-_) -> true ; ground(C2)),
+	    sub(C1,X,_Caller),
+	    sub(C2,X,_Caller),
+	    X \= (C1;C2), X \= (C2;C1)
+	).
+
+FLTRAILERPREFIX(sub)(C1,(C1;C2),_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C1 \= (_;_), C1 \= (_,_), C1 \= (_-_) -> true ; ground(C1))
+	).
+
+FLTRAILERPREFIX(sub)(C2,(C1;C2),_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C2 \= (_;_), C2 \= (_,_), C2 \= (_-_) -> true ; ground(C2))
+	).
+
+
+%% C2 must be ground, since they are under NOT
+%% (semantics for non-ground NOT is NOT EXISTS)
+FLTRAILERPREFIX(isa)(X, (C1-C2),_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    ground(C2),
+	    isa(X,C1,_Caller),
+	    FLORA_TNOT(isa(X,C2,_Caller))
+	).
+
+FLTRAILERPREFIX(sub)((C1-C2),C1,_Caller) :-
+	(flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')->fail
+	;
+	    (C1 \= (_-_), C1 \= (_;_), C1 \= (_,_) -> true ; ground(C1))
+	).
+
+
+/********************* End of standard type definitions *******************/
+
+
+

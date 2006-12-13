@@ -1,0 +1,11 @@
+_$_$_flora'dyn_newoid5550[$order->0].  // @amp
+_$_$_flora'dyn_newoid5550[test->>_$_$_flora'dyn_newoid5553].  // @amp
+_$_$_flora'dyn_newoid5553[$order->1].  // @amp
+_$_$_flora'dyn_newoid5553[p->>_$_$_flora'dyn_newoid5554].  // @amp
+_$_$_flora'dyn_newoid5554[$order->2].  // @amp
+_$_$_flora'dyn_newoid5554[$text->>_$_$_flora'dyn_newoid5555].  // @amp
+_$_$_flora'dyn_newoid5555[$order->3].  // @amp
+_$_$_flora'dyn_newoid5555[$string->&].  // @amp
+_$_$_flora'dyn_newoid5554[$child(0)->_$_$_flora'dyn_newoid5555].  // @amp
+_$_$_flora'dyn_newoid5553[$child(0)->_$_$_flora'dyn_newoid5554].  // @amp
+_$_$_flora'dyn_newoid5550[$child(0)->_$_$_flora'dyn_newoid5553].  // @amp

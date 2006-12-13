@@ -1,0 +1,179 @@
+# DO NOT DELETE THIS LINE -- make  depend  depends  on it.
+
+SOURCE=$(INTDIR)\auxlry.c
+"$(OBJDIR)\auxlry.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h xsb_time.h
+
+SOURCE=$(INTDIR)\biassert.c
+"$(OBJDIR)\biassert.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_biassert.h setjmp_xsb.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h error_xsb.h export.h cinterf.h varstring_xsb.h memory_xsb.h heap_xsb.h heap_defs_xsb.h register.h flags_xsb.h deref.h inst_xsb.h token_xsb.h token_defs_xsb.h loader_xsb.h trie_internals.h struct_manager.h tries.h choice.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h tr_utils.h trassert.h thread_xsb.h thread_defs_xsb.h biassert_defs.h
+
+SOURCE=$(INTDIR)\builtin.c
+"$(OBJDIR)\builtin.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_delay.h context.h cell_def_xsb.h basictypes.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h wsipx.h auxlry.h basicdefs.h cell_xsb.h box_defines.h celltags_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h ubi_BinTree.h sys_include.h ubi_SplayTree.h hash_xsb.h tries.h choice.h deref.h memory_xsb.h heap_xsb.h heap_defs_xsb.h register.h varstring_xsb.h flags_xsb.h loader_xsb.h binding.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h builtin.h sig_xsb.h subp.h tr_utils.h trassert.h dynload.h cinterf.h residual.h tables.h trie_internals.h inst_xsb.h struct_manager.h rw_lock.h deadlock.h odbc_xsb.h odbc_def_xsb.h interprolog_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h storage_xsb.h storage_xsb_defs.h wind2unix.h system_xsb.h random_xsb.h thread_xsb.h thread_defs_xsb.h ptoc_tag_xsb_i.h term_psc_xsb_i.h conget_xsb_i.h io_builtins_xsb_i.h file_modes_xsb.h std_pred_xsb_i.h sp_unify_xsb_i.h call_xsb_i.h bineg_xsb_i.h std_cases_xsb_i.h odbc_xsb_i.h interprolog_xsb_i.h
+
+SOURCE=$(INTDIR)\cinterf.c
+"$(OBJDIR)\cinterf.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h memory_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h flags_xsb.h deref.h heap_xsb.h heap_defs_xsb.h binding.h tries.h choice.h subp.h emuloop.h cinterf.h error_xsb.h orient_xsb.h loader_xsb.h
+
+SOURCE=$(INTDIR)\conc_compl.c
+"$(OBJDIR)\conc_compl.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h
+
+SOURCE=$(INTDIR)\deadlock.c
+"$(OBJDIR)\deadlock.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h
+
+SOURCE=$(INTDIR)\debug_xsb.c
+"$(OBJDIR)\debug_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h binding.h memory_xsb.h flags_xsb.h register.h varstring_xsb.h deref.h trie_internals.h inst_xsb.h struct_manager.h tries.h choice.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h cinterf.h io_defs_xsb.h io_builtins_xsb.h token_xsb.h token_defs_xsb.h thread_defs_xsb.h thread_xsb.h
+
+SOURCE=$(INTDIR)\dis.c
+"$(OBJDIR)\dis.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h hash_xsb.h loader_xsb.h cell_xsb.h box_defines.h celltags_xsb.h inst_xsb.h builtin.h memory_xsb.h flags_xsb.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h
+
+SOURCE=$(INTDIR)\dynamic_stack.c
+"$(OBJDIR)\dynamic_stack.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tries.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h tst_aux.h debugs\debug_tables.h dynamic_stack.h error_xsb.h export.h psc_xsb.h psc_defs.h debug_xsb.h flags_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\dynload.c
+"$(OBJDIR)\dynload.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h
+
+SOURCE=$(INTDIR)\emuloop.c
+"$(OBJDIR)\emuloop.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h error_xsb.h inst_xsb.h deref.h memory_xsb.h heap_xsb.h heap_defs_xsb.h sig_xsb.h emudef.h debugs\debug_attv.h loader_xsb.h binding.h flags_xsb.h trie_internals.h struct_manager.h tries.h choice.h sw_envs.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h tables.h subinst.h scc_xsb.h subp.h tr_utils.h cut_xsb.h orient_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h unify_xsb.h emuloop_aux.h remove_unf.h thread_xsb.h thread_defs_xsb.h deadlock.h rw_lock.h hash_xsb.h builtin.h tr_delay.h tr_code_xsb_i.h schedrev_xsb_i.h complete_local.h slginsts_xsb_i.h complete_xsb_i.h tc_insts_xsb_i.h debugs\debug_tries.h
+
+SOURCE=$(INTDIR)\error_xsb.c
+"$(OBJDIR)\error_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h subp.h register.h varstring_xsb.h export.h error_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h cinterf.h memory_xsb.h tries.h choice.h inst_xsb.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h tr_utils.h binding.h cut_xsb.h flags_xsb.h term_psc_xsb_i.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\findall.c
+"$(OBJDIR)\findall.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h deref.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h memory_xsb.h error_xsb.h heap_xsb.h heap_defs_xsb.h binding.h subp.h flags_xsb.h loader_xsb.h cinterf.h findall.h thread_xsb.h thread_defs_xsb.h debug_xsb.h ptoc_tag_xsb_i.h
+
+SOURCE=$(INTDIR)\function.c
+"$(OBJDIR)\function.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h memory_xsb.h deref.h heap_xsb.h heap_defs_xsb.h binding.h
+
+SOURCE=$(INTDIR)\hash_xsb.c
+"$(OBJDIR)\hash_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h hash_xsb.h psc_xsb.h psc_defs.h flags_xsb.h memory_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\hashtable_xsb.c
+"$(OBJDIR)\hashtable_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h cinterf.h export.h varstring_xsb.h trie_internals.h inst_xsb.h struct_manager.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h error_xsb.h tr_utils.h flags_xsb.h memory_xsb.h heap_xsb.h heap_defs_xsb.h
+
+SOURCE=$(INTDIR)\heap_xsb.c
+"$(OBJDIR)\heap_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h memory_xsb.h inst_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h tries.h choice.h error_xsb.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h realloc.h flags_xsb.h heap_xsb.h heap_defs_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h subp.h binding.h thread_xsb.h thread_defs_xsb.h loader_xsb.h struct_manager.h hash_xsb.h gc_profile.h gc_mark.h gc_print.h gc_slide.h gc_copy.h
+
+SOURCE=$(INTDIR)\init_xsb.c
+"$(OBJDIR)\init_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h inst_xsb.h hash_xsb.h heap_xsb.h heap_defs_xsb.h memory_xsb.h register.h varstring_xsb.h tries.h choice.h flags_xsb.h loader_xsb.h extensions_xsb.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h tr_utils.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h timer_defs_xsb.h sig_xsb.h thread_xsb.h thread_defs_xsb.h struct_manager.h trie_internals.h
+
+SOURCE=$(INTDIR)\inst_xsb.c
+"$(OBJDIR)\inst_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h inst_xsb.h subinst.h xsb_inst_list.h
+
+SOURCE=$(INTDIR)\interprolog_callback.c
+"$(OBJDIR)\interprolog_callback.obj" : $(SOURCE) com_xsb_interprolog_NativeEngine.h ..\config\x86-pc-windows\xsb_config.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h memory_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h flags_xsb.h heap_xsb.h heap_defs_xsb.h subp.h cinterf.h error_xsb.h loader_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\io_builtins_xsb.c
+"$(OBJDIR)\io_builtins_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h setjmp_xsb.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h cinterf.h varstring_xsb.h memory_xsb.h heap_xsb.h heap_defs_xsb.h register.h flags_xsb.h inst_xsb.h loader_xsb.h subp.h tries.h choice.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h wind2unix.h binding.h deref.h findall.h ptoc_tag_xsb_i.h
+
+SOURCE=$(INTDIR)\loader_xsb.c
+"$(OBJDIR)\loader_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h loader_xsb.h extensions_xsb.h cell_xsb.h box_defines.h celltags_xsb.h heap_xsb.h heap_defs_xsb.h flags_xsb.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h error_xsb.h export.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h inst_xsb.h memory_xsb.h register.h varstring_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\main_xsb.c
+"$(OBJDIR)\main_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h wind2unix.h context.h cell_def_xsb.h basictypes.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h emuloop.h export.h orient_xsb.h basicdefs.h
+
+SOURCE=$(INTDIR)\memory_xsb.c
+"$(OBJDIR)\memory_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h binding.h box_defines.h cell_xsb.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h memory_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h tries.h choice.h error_xsb.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h thread_xsb.h thread_defs_xsb.h flags_xsb.h subp.h
+
+SOURCE=$(INTDIR)\odbc_xsb.c
+"$(OBJDIR)\odbc_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h cell_xsb.h cell_def_xsb.h basictypes.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h cinterf.h basicdefs.h export.h varstring_xsb.h deref.h error_xsb.h psc_xsb.h psc_defs.h register.h ptoc_tag_xsb_i.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h flags_xsb.h auxlry.h loader_xsb.h memory_xsb.h heap_xsb.h heap_defs_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\orastuff.c
+"$(OBJDIR)\orastuff.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h cinterf.h export.h varstring_xsb.h psc_xsb.h psc_defs.h flags_xsb.h error_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h
+
+SOURCE=$(INTDIR)\orient_xsb.c
+"$(OBJDIR)\orient_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h wind2unix.h export.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h psc_xsb.h psc_defs.h extensions_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\pathname_xsb.c
+"$(OBJDIR)\pathname_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h wind2unix.h export.h setjmp_xsb.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h context.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h cell_xsb.h box_defines.h celltags_xsb.h cinterf.h varstring_xsb.h error_xsb.h flags_xsb.h extensions_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\psc_xsb.c
+"$(OBJDIR)\psc_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h tries.h hash_xsb.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h loader_xsb.h flags_xsb.h sig_xsb.h inst_xsb.h memory_xsb.h register.h varstring_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\random_xsb.c
+"$(OBJDIR)\random_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h cell_xsb.h cell_def_xsb.h basictypes.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h cinterf.h basicdefs.h export.h varstring_xsb.h deref.h register.h psc_xsb.h psc_defs.h ptoc_tag_xsb_i.h error_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\remove_unf.c
+"$(OBJDIR)\remove_unf.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h register.h varstring_xsb.h
+
+SOURCE=$(INTDIR)\residual.c
+"$(OBJDIR)\residual.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_residual.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h memory_xsb.h psc_xsb.h psc_defs.h register.h varstring_xsb.h export.h heap_xsb.h heap_defs_xsb.h binding.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h error_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h flags_xsb.h
+
+SOURCE=$(INTDIR)\rw_lock.c
+"$(OBJDIR)\rw_lock.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h
+
+SOURCE=$(INTDIR)\scc_xsb.c
+"$(OBJDIR)\scc_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h scc_xsb.h
+
+SOURCE=$(INTDIR)\slgdelay.c
+"$(OBJDIR)\slgdelay.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_delay.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h register.h varstring_xsb.h export.h trie_internals.h inst_xsb.h struct_manager.h tries.h memory_xsb.h choice.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h tr_utils.h error_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\socket_xsb.c
+"$(OBJDIR)\socket_xsb.obj" : $(SOURCE) wind2unix.h xsb_time.h ..\config\x86-pc-windows\xsb_config.h wsipx.h ..\config\x86-pc-windows\xsb_debug.h socket_xsb.h socket_defs_xsb.h flags_xsb.h cell_xsb.h cell_def_xsb.h basictypes.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h thread_xsb.h thread_defs_xsb.h timer_xsb.h timer_defs_xsb.h auxlry.h basicdefs.h error_xsb.h export.h psc_xsb.h psc_defs.h cinterf.h varstring_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h register.h memory_xsb.h
+
+SOURCE=$(INTDIR)\storage_xsb.c
+"$(OBJDIR)\storage_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h cinterf.h export.h varstring_xsb.h trie_internals.h inst_xsb.h struct_manager.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h error_xsb.h tr_utils.h storage_xsb.h storage_xsb_defs.h flags_xsb.h
+
+SOURCE=$(INTDIR)\string_xsb.c
+"$(OBJDIR)\string_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h hash_xsb.h tries.h choice.h deref.h memory_xsb.h heap_xsb.h heap_defs_xsb.h register.h varstring_xsb.h flags_xsb.h binding.h builtin.h cinterf.h sp_unify_xsb_i.h string_xsb.h ptoc_tag_xsb_i.h
+
+SOURCE=$(INTDIR)\struct_manager.c
+"$(OBJDIR)\struct_manager.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h struct_manager.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h debug_xsb.h flags_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\sub_delete.c
+"$(OBJDIR)\sub_delete.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h trie_internals.h inst_xsb.h struct_manager.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h error_xsb.h export.h thread_xsb.h thread_defs_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\subp.c
+"$(OBJDIR)\subp.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_attv.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h debug_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h memory_xsb.h register.h varstring_xsb.h heap_xsb.h heap_defs_xsb.h deref.h flags_xsb.h binding.h trie_internals.h inst_xsb.h struct_manager.h tries.h trassert.h choice.h token_xsb.h token_defs_xsb.h sig_xsb.h macro_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h table_stats.h unify_xsb.h subp.h thread_xsb.h thread_defs_xsb.h hash_xsb.h trace_xsb.h
+
+SOURCE=$(INTDIR)\system_xsb.c
+"$(OBJDIR)\system_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h cinterf.h varstring_xsb.h syscall_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h wind2unix.h system_xsb.h system_defs_xsb.h register.h memory_xsb.h
+
+SOURCE=$(INTDIR)\table_stats.c
+"$(OBJDIR)\table_stats.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h table_stats.h struct_manager.h trie_internals.h inst_xsb.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h error_xsb.h export.h flags_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\tables.c
+"$(OBJDIR)\tables.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tables.h debugs\debug_delay.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h heap_xsb.h heap_defs_xsb.h memory_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h binding.h table_stats.h struct_manager.h trie_internals.h inst_xsb.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h error_xsb.h flags_xsb.h tst_utils.h loader_xsb.h tables.h thread_xsb.h thread_defs_xsb.h sub_tables_xsb_i.h tst_aux.h debugs\debug_tries.h dynamic_stack.h deref.h
+
+SOURCE=$(INTDIR)\thread_xsb.c
+"$(OBJDIR)\thread_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_debug.h ..\config\x86-pc-windows\xsb_config.h basictypes.h cell_def_xsb.h basicdefs.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h cinterf.h error_xsb.h flags_xsb.h deref.h ptoc_tag_xsb_i.h thread_xsb.h thread_defs_xsb.h rw_lock.h memory_xsb.h sig_xsb.h
+
+SOURCE=$(INTDIR)\timer_xsb.c
+"$(OBJDIR)\timer_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_debug.h ..\config\x86-pc-windows\xsb_config.h xsb_time.h cell_xsb.h cell_def_xsb.h basictypes.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h timer_xsb.h timer_defs_xsb.h thread_xsb.h thread_defs_xsb.h basicdefs.h
+
+SOURCE=$(INTDIR)\token_xsb.c
+"$(OBJDIR)\token_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h token_xsb.h token_defs_xsb.h psc_xsb.h psc_defs.h subp.h register.h varstring_xsb.h export.h error_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\tr_utils.c
+"$(OBJDIR)\tr_utils.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tries.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h cinterf.h export.h varstring_xsb.h binding.h psc_xsb.h psc_defs.h heap_xsb.h heap_defs_xsb.h memory_xsb.h register.h deref.h flags_xsb.h trie_internals.h inst_xsb.h struct_manager.h tries.h tst_aux.h debugs\debug_tables.h dynamic_stack.h cut_xsb.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h sw_envs.h choice.h error_xsb.h io_builtins_xsb.h io_defs_xsb.h token_xsb.h token_defs_xsb.h trassert.h tr_utils.h tst_utils.h subp.h rw_lock.h thread_xsb.h thread_defs_xsb.h storage_xsb.h storage_xsb_defs.h hash_xsb.h tables.h ptoc_tag_xsb_i.h term_psc_xsb_i.h
+
+SOURCE=$(INTDIR)\trace_xsb.c
+"$(OBJDIR)\trace_xsb.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h inst_xsb.h memory_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h table_stats.h struct_manager.h trie_internals.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h choice.h flags_xsb.h heap_xsb.h heap_defs_xsb.h thread_xsb.h thread_defs_xsb.h trace_xsb.h
+
+SOURCE=$(INTDIR)\trie_lookup.c
+"$(OBJDIR)\trie_lookup.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tries.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h deref.h table_stats.h struct_manager.h trie_internals.h inst_xsb.h tries.h tst_aux.h debugs\debug_tables.h dynamic_stack.h subp.h debug_xsb.h flags_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\trie_search.c
+"$(OBJDIR)\trie_search.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tries.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h deref.h trie_internals.h inst_xsb.h struct_manager.h tries.h tst_aux.h debugs\debug_tables.h dynamic_stack.h debug_xsb.h flags_xsb.h
+
+SOURCE=$(INTDIR)\tries.c
+"$(OBJDIR)\tries.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tries.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h inst_xsb.h psc_xsb.h psc_defs.h heap_xsb.h heap_defs_xsb.h flags_xsb.h deref.h memory_xsb.h register.h varstring_xsb.h export.h binding.h trie_internals.h struct_manager.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h choice.h cinterf.h error_xsb.h tr_utils.h rw_lock.h thread_xsb.h thread_defs_xsb.h subp.h term_psc_xsb_i.h ptoc_tag_xsb_i.h
+
+SOURCE=$(INTDIR)\tst_insert.c
+"$(OBJDIR)\tst_insert.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h debugs\debug_tries.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h inst_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h error_xsb.h deref.h table_stats.h struct_manager.h trie_internals.h tries.h tst_aux.h debugs\debug_tables.h dynamic_stack.h thread_xsb.h thread_defs_xsb.h memory_xsb.h
+
+SOURCE=$(INTDIR)\tst_retrv.c
+"$(OBJDIR)\tst_retrv.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h inst_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h memory_xsb.h error_xsb.h deref.h binding.h cut_xsb.h sw_envs.h subp.h table_stats.h struct_manager.h trie_internals.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h tst_aux.h debugs\debug_tables.h debugs\debug_tries.h dynamic_stack.h tst_utils.h flags_xsb.h thread_xsb.h thread_defs_xsb.h
+
+SOURCE=$(INTDIR)\tst_unify.c
+"$(OBJDIR)\tst_unify.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h register.h psc_xsb.h psc_defs.h varstring_xsb.h export.h memory_xsb.h binding.h deref.h subp.h table_stats.h struct_manager.h trie_internals.h inst_xsb.h tries.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h choice.h tst_aux.h debugs\debug_tables.h debugs\debug_tries.h dynamic_stack.h tst_utils.h error_xsb.h
+
+SOURCE=$(INTDIR)\tst_utils.c
+"$(OBJDIR)\tst_utils.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h ..\config\x86-pc-windows\xsb_debug.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h binding.h psc_xsb.h psc_defs.h register.h varstring_xsb.h export.h deref.h trie_internals.h inst_xsb.h struct_manager.h tries.h tst_aux.h debugs\debug_tables.h debugs\debug_tries.h dynamic_stack.h macro_xsb.h debug_xsb.h table_status_defs.h slgdelay.h debugs\debug_delay.h choice.h error_xsb.h
+
+SOURCE=$(INTDIR)\ubi_BinTree.c
+"$(OBJDIR)\ubi_BinTree.obj" : $(SOURCE) ubi_BinTree.h sys_include.h ..\config\x86-pc-windows\xsb_config.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h
+
+SOURCE=$(INTDIR)\ubi_SplayTree.c
+"$(OBJDIR)\ubi_SplayTree.obj" : $(SOURCE) ubi_SplayTree.h ubi_BinTree.h sys_include.h ..\config\x86-pc-windows\xsb_config.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h psc_xsb.h psc_defs.h
+
+SOURCE=$(INTDIR)\varstring.c
+"$(OBJDIR)\varstring.obj" : $(SOURCE) ..\config\x86-pc-windows\xsb_config.h wind2unix.h auxlry.h basicdefs.h basictypes.h cell_def_xsb.h cell_xsb.h box_defines.h celltags_xsb.h context.h setjmp_xsb.h flag_defs_xsb.h conc_compl.h hashtable_xsb.h memory_xsb.h error_xsb.h export.h psc_xsb.h psc_defs.h varstring_xsb.h
+

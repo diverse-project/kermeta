@@ -1,0 +1,2005 @@
+/* File:      flrcoder.P  -- The Flora Coder
+**
+** Author(s): Guizhen Yang
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2001
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: flrcoder.P,v 1.49 2006/06/19 21:38:20 hwan Exp $
+**
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_characters.flh"
+#include "flora_errors.flh"
+#include "flora_terms.flh"
+#include "flora_porting.flh"
+
+#include "standard.h"
+
+#define THISMODULE	thismodule
+#define USERMODULE	usermodule
+#define SYSTEMMODULE	systemmodule
+%% Variable name corresponding to the caller module.
+%% It a prefix '_', while program vars have the prefix '__',
+%% so name clash with a program variables is not a problem
+#define  FLORA_HEADLIT_CALLER_VAR_NAME  '_CallerModuleVar'
+#define  FLORA_DYNRULE_HEADLIT_CALLER_VAR_NAME  '_DynRuleCallerModuleVar'
+
+#define  FLORA_HEADLIT_CALLER_ARGS_VAR_NAME  '_CallerModuleArgsVar'
+#define  FLORA_DYNRULE_HEADLIT_CALLER_ARGS_VAR_NAME  '_DynRuleCallerModuleArgsVar'
+
+
+/****************************************************************************
+  utilities
+****************************************************************************/
+is_prrule(PRRULE(Head,Body),Head,Body).
+is_prfact(PRFACT(Head),Head).
+is_prquery(PRQUERY(Goal),Goal).
+is_prdirective(PRDIRECTIVE(Direct),Direct).
+
+is_prdynrule(PRDYNRULE(Head,Body,HVars,BVars),Head,Body,HVars,BVars).
+
+is_prreify(PRREIFY(Formula),Formula).
+
+is_primport(PRIMPORT(P,A,M),P,A,M).      % prolog's :- import (for output only)
+is_prcmpopt(PRCMPOPT(OptList),OptList).  % :- compiler_options/1 directive
+is_prignoredep(PRIGNOREDEP(PredList),PredList).
+is_prprefixdef(PRPREFIXDEF(PrefixName,PrefixStr),PrefixName,PrefixStr).
+
+is_prconstraint(PRCONSTRAINT(Constr),Constr).
+
+is_prthismodule(PRTHISMODULE(PRTHISMODULE)).
+is_prthisfdbstorage(PRTHISFDBSTORAGE(PRTHISFDBSTORAGE)) :- !.
+is_prthisfdbstorage(PRFDBSTORAGE(Spec)) :- is_prthismodule(Spec).
+%% debug trie
+is_prthisfldstorage(PRTHISFLDSTORAGE(PRTHISFLDSTORAGE)) :- !.
+
+%% Variable in a rule head, which represents the caller module
+is_prcallervar(PRCALLERVAR(PRCALLERVAR)).
+is_prdyncallervar(PRDYNCALLERVAR(PRDYNCALLERVAR)).
+
+is_prcallerargsterm(PRCALLERARGSTERM(ArgsTerm),ArgsTerm).
+is_prcallerargsvar(PRCALLERARGSVAR(PRCALLERARGSVAR)).
+is_prdyncallerargsvar(PRDYNCALLERARGSVAR(PRDYNCALLERARGSVAR)).
+
+is_prworkspaceterm(PRWORKSPACETERM(WSTerm),WSTerm).
+
+%% with textual information
+is_pratom(PRATOM(Atom,I),Atom,I).
+is_prnumber(PRNUMBER(Number,I),Number,I).
+is_prtransactionalnumber(PRTRANSACTIONALNUMBER(Number,I),Number,I).
+is_prvariable(PRVARIABLE(Name,I),Name,I).
+is_prtransactionalvariable(PRTRANSACTIONALVARIABLE(Name,I),Name,I).
+is_prstring(PRSTRING(String,I),String,I).
+is_pruri(PRURI(Uri,I),Uri,I).
+is_prurisq(PRURISQ(Prefix,Localname),Prefix,Localname).
+is_prlist(PRLIST(L,T,I),L,T,I).
+is_prfdbstorage(PRFDBSTORAGE(PRATOM(WS,I)),USERMODULE,WS,I).
+is_prfdbstorage(PRFDBSTORAGE(PRFLORALIB(PRATOM(WS,I))),SYSTEMMODULE,WS,I).
+
+is_prmvdcondef(PRMVDCONDEF(Object,Att,Lower,Upper,Caller),Object,Att,Lower,Upper,Caller).
+is_primvdcondef(PRIMVDCONDEF(Object,Att,Lower,Upper,Caller),Object,Att,Lower,Upper,Caller).
+
+%% with textual information
+is_prterm(PRTERM(FObj,N,ObjList),FObj,N,ObjList).
+
+is_goallogic(PRAND(Goal1,Goal2),',',2,[Goal1,Goal2]) :- !.
+is_goallogic(PROR(Goal1,Goal2),';',2,[Goal1,Goal2]) :- !.
+is_goallogic(PRNOT(Goal),not,1,[Goal]) :- !.
+is_goallogic(PRTNOT(Goal),FLORA_TNOT_PREDICATE,1,[Goal]) :- !.
+%%is_goallogic(PRCALL(Var),'call',1,[Var]) :- !.
+%% with textual information
+is_goallogic(PRCUT(_I),'!',0,[]) :- !.
+
+is_prcall(PRCALL(Var),Var).
+
+%% with textual information
+is_pratomlit(PRATOMLIT(List,I),List,I). % List is [Atom] or [Atom,Caller]
+is_prtransactionalatomlit(PRTRANSACTIONALATOMLIT(List,I),List,I).
+
+is_prtermlit(PRTERMLIT(FObj,N,ObjList),FObj,N,ObjList).
+is_prtransactionaltermlit(PRTRANSACTIONALTERMLIT(FObj,N,ObjList),FObj,N,ObjList).
+is_prworkspace(PRWORKSPACE(P,WS),P,WS).
+
+%% with textual information
+is_prfloralib(PRFLORALIB(PRATOM(WS,I)),WS,I).
+is_florasyslib(FLORASYSLIB(I,F,N,Args),F,N,Args,I).
+
+is_prologterm(PROLOGTERM(F,N,Args),F,N,Args).
+is_prologliblit(PROLOGLIBLIT(PROLOGTERM(F,N,Args)),F,N,Args).
+
+is_prnewpred(PRNEWPRED(Name,N,Vars),Name,N,Vars).
+
+%% with textual information
+is_prnewoid(PRNEWOID(Oid,I),Oid,I).
+
+%% Body literals
+is_flogic(PRISA(Obj1,Obj2,Caller),WRAP_D_ISA,3,[Obj1,Obj2,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRSUB(Obj1,Obj2,Caller),WRAP_D_SUB,3,[Obj1,Obj2,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMETH(Obj,Meth,Caller),WRAP_D_METH,3,[Obj,Meth,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMETH(Obj,IMeth,Caller),WRAP_D_IMETH,3,[Obj,IMeth,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVDSIG(Obj,Att,Val,Caller),WRAP_D_MVDSIG,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVDSIGDEF(Obj,Att,Caller),WRAP_D_MVDSIGDEF,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVDCON(Object,Att,Lower,Upper,Caller),WRAP_D_MVDCON,5,[Object,Att,Lower,Upper,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVDCON(Object,Att,Lower,Upper,Caller),WRAP_D_IMVDCON,5,[Object,Att,Lower,Upper,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVDSIG(Obj,Att,Val,Caller),WRAP_D_IMVDSIG,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRBOOLSIG(Obj,Att,Caller),WRAP_D_BOOLSIG,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIBOOLSIG(Obj,Att,Caller),WRAP_D_IBOOLSIG,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRTRANSIG(Obj,Att,Caller),WRAP_D_TRANSIG,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRITRANSIG(Obj,Att,Caller),WRAP_D_ITRANSIG,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVDSIGDEF(Obj,Att,Caller),WRAP_D_IMVDSIGDEF,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVD(Obj,Att,Val,Caller),WRAP_D_MVD,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVD(Obj,Att,Val,Caller),WRAP_D_IMVD,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVDINC(Obj,Att,Val,Caller),WRAP_D_MVDINC,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVDINC(Obj,Att,Val,Caller),WRAP_D_IMVDINC,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVDTOLIST(Obj,Att,Val,Caller),WRAP_D_MVDTOLIST,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVDTOLIST(Obj,Att,Val,Caller),WRAP_D_IMVDTOLIST,4,[Obj,Att,Val,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PREXISTS(Obj,Caller),WRAP_D_EXISTS,2,[Obj,Caller]) :-
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRMVDDEF(Obj,Att,Caller),WRAP_D_MVDDEF,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRIMVDDEF(Obj,Att,Caller),WRAP_D_IMVDDEF,3,[Obj,Att,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+is_flogic(PRTRAN(Obj,Tran,Caller),WRAP_D_TRAN,3,[Obj,Tran,Caller]) :- 
+	flora_get_counter(using_debug_prefix,1),
+	!.
+
+%% Head literals
+is_flogic(PRISA(Obj1,Obj2,Caller),WRAP_ISA,3,[Obj1,Obj2,Caller]) :- !.
+is_flogic(PRSUB(Obj1,Obj2,Caller),WRAP_SUB,3,[Obj1,Obj2,Caller]) :- !.
+is_flogic(PRMETH(Obj,Meth,Caller),WRAP_METH,3,[Obj,Meth,Caller]) :- !.
+is_flogic(PRIMETH(Obj,IMeth,Caller),WRAP_IMETH,3,[Obj,IMeth,Caller]) :- !.
+is_flogic(PRMVDSIG(Obj,Att,Val,Caller),WRAP_MVDSIG,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRMVDSIGDEF(Obj,Att,Caller),WRAP_MVDSIGDEF,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRMVDCON(Object,Att,Lower,Upper,Caller),WRAP_MVDCON,5,[Object,Att,Lower,Upper,Caller]) :- !.
+is_flogic(PRIMVDCON(Object,Att,Lower,Upper,Caller),WRAP_IMVDCON,5,[Object,Att,Lower,Upper,Caller]) :- !.
+is_flogic(PRMVDCONDEF(Object,Att,Lower,Upper,Caller),WRAP_MVDCONDEF,5,[Object,Att,Lower,Upper,Caller]) :- !.
+is_flogic(PRIMVDCONDEF(Object,Att,Lower,Upper,Caller),WRAP_IMVDCONDEF,5,[Object,Att,Lower,Upper,Caller]) :- !.
+is_flogic(PRIMVDSIG(Obj,Att,Val,Caller),WRAP_IMVDSIG,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRBOOLSIG(Obj,Att,Caller),WRAP_BOOLSIG,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRIBOOLSIG(Obj,Att,Caller),WRAP_IBOOLSIG,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRTRANSIG(Obj,Att,Caller),WRAP_TRANSIG,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRITRANSIG(Obj,Att,Caller),WRAP_ITRANSIG,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRIMVDSIGDEF(Obj,Att,Caller),WRAP_IMVDSIGDEF,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRMVD(Obj,Att,Val,Caller),WRAP_MVD,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRIMVD(Obj,Att,Val,Caller),WRAP_IMVD,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRMVDINC(Obj,Att,Val,Caller),WRAP_MVDINC,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRIMVDINC(Obj,Att,Val,Caller),WRAP_IMVDINC,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRMVDTOLIST(Obj,Att,Val,Caller),WRAP_MVDTOLIST,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PRIMVDTOLIST(Obj,Att,Val,Caller),WRAP_IMVDTOLIST,4,[Obj,Att,Val,Caller]) :- !.
+is_flogic(PREXISTS(Obj,Caller),WRAP_EXISTS,2,[Obj,Caller]) :- !.
+is_flogic(PRMVDDEF(Obj,Att,Caller),WRAP_MVDDEF,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRIMVDDEF(Obj,Att,Caller),WRAP_IMVDDEF,3,[Obj,Att,Caller]) :- !.
+is_flogic(PRTRAN(Obj,Tran,Caller),WRAP_TRAN,3,[Obj,Tran,Caller]) :- !.
+is_flogic(PROBJEQL(O1,O2,Caller),WRAP_OBJEQL,3,[O1,O2,Caller]) :- !.
+
+
+is_fllibdb(FLLIBINSERT) :- !.
+is_fllibdb(FLLIBINSERTALL) :- !.
+is_fllibdb(FLLIBDELETE) :- !.
+is_fllibdb(FLLIBDELETEALL) :- !.
+is_fllibdb(FLLIBERASE) :- !.
+is_fllibdb(FLLIBERASEALL) :- !.
+
+is_fllibdb(FLLIBREFRESH) :- !.
+
+is_fllibdb(FLLIBBTINSERT) :- !.
+is_fllibdb(FLLIBBTINSERTALL) :- !.
+is_fllibdb(FLLIBBTDELETE) :- !.
+is_fllibdb(FLLIBBTDELETEALL) :- !.
+is_fllibdb(FLLIBBTERASE) :- !.
+is_fllibdb(FLLIBBTERASEALL) :- !.
+
+is_ruleupdate(FLLIBINSERTRULE_A) :- !.
+is_ruleupdate(FLLIBINSERTRULE_Z) :- !.
+is_ruleupdate(FLLIBDELETERULE_A) :- !.
+is_ruleupdate(FLLIBDELETERULE_Z) :- !.
+is_ruleupdate(FLLIBDELETERULE) :- !.
+
+is_fllibclause(FLLIBCLAUSE) :- !.
+is_fllibinsrulesig(FLLIBINSRULESIG) :- !.
+
+/****************************************************************************
+  error and warning messages
+****************************************************************************/
+coding_error(Index,Msg,error(Index,Msg)).
+
+/****************************************************************************
+  flora_divide_program(+CompiledRuleList,-RuleList,-FactList)
+
+  This procedure takes a list of results from the Flora compiler and split
+  into a list of rules plus directives, and a list of facts. The list of
+  facts will be dumped into a separate file for loading into the storage trie.
+****************************************************************************/
+flora_divide_program([],[],[]) :- !.
+
+flora_divide_program([H|T],RuleList,[H|FactList]) :-
+	is_prfact(H,_HF),
+	!,
+	flora_divide_program(T,RuleList,FactList).
+
+flora_divide_program([H|T],[H|RuleList],[H|FactList]) :-
+	is_prdirective(H,D),
+	is_prprefixdef(D,_P,_L),
+	!,
+	flora_divide_program(T,RuleList,FactList).
+
+flora_divide_program([H|T],[H|RuleList],FactList) :-
+	flora_divide_program(T,RuleList,FactList).
+
+
+
+/****************************************************************************
+  flora_extern_code(+TermList,-Status)
+  dumps the output in canonical form.
+****************************************************************************/
+flora_extern_code(TermList,Status) :-
+	flora_set_counter(using_debug_prefix,1),
+	flora_write_codelist(TermList,Status),
+	retractall(flora_coder_prefixdef(_,_)),
+	flora_set_counter(using_debug_prefix,0),
+	!.
+
+%% This is for debugging.
+flora_extern_code(_TermList,[error(UNKNOWN_ERROR)]).
+
+
+/****************************************************************************
+  flora_intern_code(+TermList,+DefaultWorkspace,-Code,-Status)
+  converts a list of intermediate terms into a callable XSB code.
+****************************************************************************/
+flora_intern_code(TermList,DWS,Code,Status) :-
+	flora_set_counter(using_debug_prefix,1),
+	flora_build_codelist(TermList,DWS,Code,Status),
+	flora_set_counter(using_debug_prefix,0),
+	!.
+
+%% This is for debugging.
+flora_intern_code(_TermList,_DWS,_Code,[error(UNKNOWN_ERROR)]).
+
+
+/****************************************************************************
+  flora_write_codelist(+CodeList,-Status)
+****************************************************************************/
+flora_write_codelist([],[]) :- !.
+
+flora_write_codelist([T|L],Status) :-
+	flora_write_code(T,S),
+	( S == [] ->
+	    flora_write_codelist(L,Status)
+	;
+	  Status = S
+	).
+
+
+/****************************************************************************
+  flora_write_code(+Term,-Status)
+  dumps the output in canonical form.
+
+  Note: Function symbols by default are not associated with any workspace.
+        F-Logic constructs (path logic) are by default associated with the
+        "this" workspace, so are literals. Temporary predicates, Flora
+        system libraries and F-Logic constructs are not HiLog terms. They
+        are not supposed to unify with normal HiLog terms.
+****************************************************************************/
+flora_write_code(Term,Status) :-
+	( is_prrule(Term,Head,Body) ->
+	    flora_write_rule(Head,Body,Status)
+
+	; is_prfact(Term,Head) ->
+	    flora_write_fact(Head,Status)
+
+	; is_prquery(Term,Goal) ->
+	    flora_write_query(Goal,Status)
+
+	; is_prdirective(Term,Direct) ->
+	    flora_write_direct(Direct,Status)
+
+	).
+
+
+/****************************************************************************
+  flora_write_direct(+Term,-Status)
+****************************************************************************/
+flora_write_direct(Term,Status) :-
+        ( is_prignoredep(Term,_PredList) ->
+	    true,
+	    Status = []
+	
+	; is_prprefixdef(Term,_PrefixName,_PrefixStr) ->
+	    flora_write_struct(Term,FLBODYPREFIX,Status)
+
+	;
+	    flora_write_atom(':-('),
+	    flora_write_struct(Term,FLBODYPREFIX,Status),
+	    flora_write_atom(').'), nl
+        ).
+
+
+/****************************************************************************
+  flora_write_fact(+Term,-Status)
+****************************************************************************/
+flora_write_fact(Term,Status) :-
+	flora_set_counter(using_debug_prefix,0),
+	flora_write_struct(Term,FLBODYPREFIX,Status),
+	flora_set_counter(using_debug_prefix,1),
+	put(0'.), nl.
+
+
+/****************************************************************************
+  flora_write_rule(+Head,+Body,-Status)
+****************************************************************************/
+flora_write_rule(Head,Body,Status) :-
+	flora_write_atom(':-('),
+	flora_set_counter(using_debug_prefix,0),
+	flora_write_struct(Head,FLHEADPREFIX,HS),
+	( HS == [] ->
+	    flora_set_counter(using_debug_prefix,1),
+	    put(0',),
+	    flora_write_struct(Body,FLBODYPREFIX,Status),
+	    flora_write_atom(').'), nl
+	;
+	    Status = HS
+	).
+
+
+/****************************************************************************
+  flora_write_query(+Goal,-Status)
+****************************************************************************/
+flora_write_query(Goal,Status) :-
+	flora_write_atom('?-('),
+	flora_write_struct(Goal,FLBODYPREFIX,Status),
+	flora_write_atom(').'), nl.
+
+
+/****************************************************************************
+  flora_write_structlist(+TermList,+Prefix,-Status)
+  writes out a list of comma-seperated terms.
+****************************************************************************/
+flora_write_structlist([T],Prefix,Status) :-
+	!,
+	flora_write_struct(T,Prefix,Status).
+
+flora_write_structlist([T|L],Prefix,Status) :-
+	!,
+	flora_write_struct(T,Prefix,HS),
+	( HS == [] ->
+	    put(0',),
+	    flora_write_structlist(L,Prefix,Status)
+	;
+	  Status = HS
+	).
+
+
+/****************************************************************************
+  flora_write_struct(+Term,+Prefix,-Status)
+  writes out the Term constructed by Flora Compiler in canonical form.
+  Term may be a function term or a predicate term.
+
+  The object model of Flora includes atomic objects and HiLog objects.
+  Atomic objects include atoms, numbers, strings while HiLog objects consist
+  of a functor, which in turn is a Flora object, and a list of arguments.
+
+  Note that f is not the same as f() and these two do not unify. The former
+  is an atomic object whereas the latter is a HiLog object. Similarly,
+  f() and f()() do not unify either. This is reflected in the coding scheme.
+
+  Prefix is only prepended to F-logic wrappers.
+****************************************************************************/
+flora_write_struct(Term,_Prefix,[]) :-
+	is_pratom(Term,Atom,_Index),
+	!,
+	flora_write_quoted_atom(Atom).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_pruri(Term,Uri,_Index),
+	!,
+	flora_write_quoted_atom(FL_URI),
+	put(0'(),
+	flora_write_quoted_atom(Uri),
+	put(0')).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prnumber(Term,Number,_Index),
+	!,
+	write(Number).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prtransactionalnumber(Term,Number,_Index),
+	!,
+        flora_write_quoted_atom(FL_TRANSACTIONAL),
+        put(0'(),
+	write(Number),
+        put(0')).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prvariable(Term,Name,_Index),
+	!,
+	flora_write_variable(Name).
+
+flora_write_struct(Term,_Prefix,[]) :-
+        is_prtransactionalvariable(Term,Name,_Index),
+        !,
+        flora_write_quoted_atom(FL_TRANSACTIONAL),
+        put(0'(),
+	flora_write_variable(Name),
+        put(0')).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prcallervar(Term),
+	!,
+	flora_write_atom(FLORA_HEADLIT_CALLER_VAR_NAME).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prdyncallervar(Term),
+	!,
+	flora_write_atom(FLORA_DYNRULE_HEADLIT_CALLER_VAR_NAME).
+
+flora_write_struct(Term,_Prefix,Status) :-
+	is_prcallerargsterm(Term,CallerVars),
+	!,
+	flora_write_struct(CallerVars,FLBODYPREFIX,Status).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prcallerargsvar(Term),
+	!,
+	flora_write_atom(FLORA_HEADLIT_CALLER_ARGS_VAR_NAME).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prdyncallerargsvar(Term),
+	!,
+	flora_write_atom(FLORA_DYNRULE_HEADLIT_CALLER_ARGS_VAR_NAME).
+
+
+%% ascii list: "..."
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prstring(Term,String,_Index),
+	!,
+	write(String).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prlist(Term,L,T,_Index),
+	!,
+	( L == [] ->
+	    flora_write_atom('[]'),
+	    Status = []
+	;
+	  put(0'[),
+	  flora_write_structlist(L,Prefix,SL),
+	  ( ( T == []; SL \== []) ->
+	      Status = SL
+	  ;
+	    put(0'|),
+	    flora_write_struct(T,Prefix,Status)
+	  ),
+	  put(0'])
+        ).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prterm(Term,FObj,N,ObjList),
+	!,
+	( is_pratom(FObj,FAtom,_Index), flora_prlgdef(FAtom,N) ->
+	    flora_write_prolog(FAtom,N,ObjList,Prefix,Status)
+	;
+	  flora_write_hilog(FObj,N,ObjList,Prefix,Status)
+	).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_goallogic(Term,F,N,Args),
+	!,
+	flora_write_quoted_atom(F),
+	( N == 0 ->
+	    true,
+	    Status = []
+	;
+	  put(0'(),
+	  flora_write_structlist(Args,Prefix,Status),
+	  put(0'))
+        ).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prcall(Term,VarTerm),
+	!,
+	flora_write_struct(VarTerm,Prefix,Status).
+
+flora_write_struct(Term,Prefix,Status) :- 
+	is_pratomlit(Term,[A|CallerList],_Index),
+	!,
+	( flora_prlgdef(A,0) ->
+	    flora_write_quoted_atom(A),
+	    Status = []
+	;
+	    flora_write_atomlit(THISMODULE,_WS,[A|CallerList],Prefix,Status)
+	).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prtransactionalatomlit(Term,List,_Index),
+	!,
+	flora_write_transactionalatomlit(THISMODULE,_WS,List,Prefix,Status).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prtermlit(Term,FObj,N,ObjList),
+	!,
+	( is_pratom(FObj,FAtom,_Index), flora_prlgdef(FAtom,N) ->
+	    flora_write_prolog(FAtom,N,ObjList,Prefix,Status)
+	;
+	  flora_write_termlit(THISMODULE,_WS,FObj,N,ObjList,Prefix,Status)
+	).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prtransactionaltermlit(Term,FObj,N,ObjList),
+	!,
+	flora_write_transactionaltermlit(THISMODULE,_WS,FObj,N,ObjList,Prefix,Status).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prworkspace(Term,P,WS),
+	!,
+	( is_pratom(WS,WSAtom,_Index) ->
+	    %% a user module name
+	    flora_write_wsstruct(WSAtom,P,Prefix,Status)
+
+	;
+	  %% a Flora system module or this-module-spec
+	  flora_write_wsstruct(WS,P,Prefix,Status)
+	).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prnewpred(Term,F,N,Args),
+	!,
+	flora_write_newpred(F,N,Args,Prefix,Status).
+
+flora_write_struct(Term,_Prefix,Status) :-
+	is_prreify(Term,Term1),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,1),
+	flora_write_struct(Term1,FLBODYPREFIX,Status),
+	flora_set_counter(using_debug_prefix,OldDbgPref).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prnewoid(Term,Oid,_Index),
+	!,
+	flora_write_atom('FLORA_THIS_COMPILATION('),
+	flora_write_newoid(Oid),
+	put(0')).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_flogic(Term,F,N,Args),
+	!,
+	flora_concat_atoms([Prefix,F],NewF),
+	flora_write_wsliteral(THISMODULE,_WS,NewF,N,Args,Prefix,Status).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prologterm(Term,Funct,N,Args),
+	!,
+	is_pratom(Funct,F,_Index),
+	flora_write_prolog(F,N,Args,Prefix,Status).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_prologliblit(Term,Funct,N,Args),
+	!,
+	is_pratom(Funct,F,_Index),
+	flora_write_prolog(F,N,Args,Prefix,Status).
+
+flora_write_struct(Term,Prefix,Status) :-
+	is_florasyslib(Term,F,N,Args,_Index),
+	!,
+	flora_write_syslib(F,N,Args,Prefix,Status).
+
+%% reified rule
+flora_write_struct(Term,_Prefix,Status) :-
+	is_prdynrule(Term,_HeadList,_Body,_HVars,_BVars),
+	!,
+	flora_write_dynrulelist([Term],Status).
+
+%% This is used when calling X@flora(...)
+flora_write_struct(Term,Prefix,Status) :-
+	is_prfloralib(Term,Atom,Index),
+	!,
+	is_pratom(AtomStruct,Atom,Index),
+	flora_write_prolog(FL_FLORALIB,1,[AtomStruct],Prefix,Status).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prthismodule(Term),
+	!,
+	%% Atom is not quoted when written.
+	flora_write_atom('FLORA_THIS_MODULE_NAME').
+
+%% This is used in the body of a dynamic rule to indicate the calling module
+flora_write_struct(Term,Prefix,Status) :-
+	is_prworkspaceterm(Term,WSTerm),
+	!,
+	flora_write_struct(WSTerm,Prefix,Status).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prthisfdbstorage(Term),
+	!,
+	%% This is an encoded storage name.
+	%% Atom is not quoted when written.
+	flora_write_atom('FLORA_THIS_FDB_STORAGE').
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prthisfldstorage(Term),
+	!,
+	%% This is an encoded storage name.
+	%% Atom is not quoted when written.
+	flora_write_atom('FLORA_THIS_FLD_STORAGE').
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prfdbstorage(Term,StorageType,WSName,_Index),
+	!,
+	%% This refers to a Flora user module storage.
+	%% Atom is not quoted when written.
+	(StorageType==USERMODULE
+	-> flora_write_atom('FLORA_USER_FDB_STORAGE(')
+	; flora_write_atom('FLORA_SYSTEM_FDB_STORAGE(')
+	),
+	flora_write_modulename(WSName),
+	put(0')).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_primport(Term,P,A,M),
+	!,     
+	D=import(from(P/A,M)),
+	write_canonical(D).
+
+
+flora_write_struct(Term,_Prefix,[]) :-
+	is_prcmpopt(Term,OptList),
+	!,
+	flora_write_atom('compiler_options(['),
+	flora_write_atomlist(OptList),
+	flora_write_atom('])').
+
+
+flora_write_struct(Term,_Prefix,[]) :- 
+	is_prprefixdef(Term,PrefixName,PrefixBody),
+	!,
+	is_pratom(PrefixName,NameAtom,_Index1),
+	is_pratom(PrefixBody,BodyAtom,_Index2),
+	flora_concat_atoms(['flora_prefix_',NameAtom],PrefixCode),
+	(flora_coder_prefixdef(PrefixCode,_)->retract(flora_coder_prefixdef(PrefixCode,_));true),
+	assert(flora_coder_prefixdef(PrefixCode,BodyAtom)).
+	
+flora_write_struct(Term,_Prefix,Status) :- 
+	is_prurisq(Term,Prefix,Localname),
+	!,
+	is_pratom(Prefix,PrefixAtom,Index),
+	(is_prstring(Localname,LocalnameStr,_Index2),
+	 atom_codes(LocalAtom,LocalnameStr)
+	 ;
+	 is_pratom(Localname,LocalAtom,_Index2)
+	),
+	flora_concat_atoms(['flora_prefix_',PrefixAtom],PrefixCode),
+	(flora_coder_prefixdef(PrefixCode,PrefixBody)->
+	    flora_write_quoted_atom(FL_URI),
+	    put(0'(),
+	    flora_concat_atoms([PrefixBody,LocalAtom],SQName),
+	    flora_write_quoted_atom(SQName),
+	    put(0')),
+	    Status = []
+	   
+	;   coding_error(Index,FILE_NODEFPREFIX,Error),
+	    Status = [Error] 
+	).
+
+flora_write_struct(Term,_Prefix,Status) :-
+	is_prconstraint(Term,ConstrBody),
+	!,
+	write(FL_CONSTRAINT_START),
+	flora_write_struct(ConstrBody,_,Status),
+	write(FL_CONSTRAINT_END).
+
+flora_write_struct(Term,_Prefix,[]) :-
+	atomic(Term),
+	!,
+	write_canonical(Term).
+
+/****************************************************************************
+  flora_write_variable(+Name)
+
+  Note:  "Name" cannot be an underscore, since it should have been replaced
+         by a new unique explicitly named variable.
+****************************************************************************/
+flora_write_variable(Name) :-
+	put(CH_UNDERSCORE),
+	put(CH_UNDERSCORE),
+	flora_write_atom(Name).
+
+/****************************************************************************
+  flora_write_atomlist(+AtomList)
+
+  Note:  write a list of atoms
+****************************************************************************/
+flora_write_atomlist([]) :- !.
+flora_write_atomlist([H]) :- 
+	flora_write_atom(H),
+	!.
+flora_write_atomlist([H|L]) :-
+	flora_write_atom(H),
+	put(0',),
+	flora_write_atomlist(L).
+
+/****************************************************************************
+  flora_write_wsstruct(+Workspace,+Term,+Prefix,-Status)
+
+  Write out Term in the appropriate Workspace.
+  Note: Workspace is already reduced to an atom or PRFLORALIB(Atom)
+        by the compiler.
+****************************************************************************/
+flora_write_wsstruct(WS,Term,Prefix,Status) :-
+	( is_prfloralib(WS,WSAtom,_) ->
+	    %% a call to Flora system module
+	    flora_write_sysmod(WSAtom,Term,Prefix,Status)
+
+	%% If this module, then use the method for writing with THIS workspace
+	; is_prthismodule(WS) ->
+	    flora_write_struct(Term,Prefix,Status)
+
+	; is_pratomlit(Term,List,_Index) ->
+	    flora_write_atomlit(USERMODULE,WS,List,Prefix,Status)
+
+        ; is_prtransactionalatomlit(Term,List,_Index) ->
+            flora_write_transactionalatomlit(USERMODULE,WS,List,Prefix,Status)
+
+	; is_prtermlit(Term,FObj,N,ObjList) ->
+	    flora_write_termlit(USERMODULE,WS,FObj,N,ObjList,Prefix,Status)
+
+	; is_prtransactionaltermlit(Term,FObj,N,ObjList) ->
+	    flora_write_transactionaltermlit(USERMODULE,WS,FObj,N,ObjList,Prefix,Status)
+
+	; is_flogic(Term,F,N,Args) ->
+	    flora_concat_atoms([Prefix,F],NewF),
+	    flora_write_wsliteral(USERMODULE,WS,NewF,N,Args,Prefix,Status)
+	
+	; is_prologterm(Term,F,N,Args) ->
+	    is_pratom(F,FAtom,_Index),
+	    flora_write_prolog(FAtom,N,Args,Prefix,Status)
+
+	; is_prurisq(Term,PrefixName,Localname) ->
+	    is_pratom(PrefixName,PrefixAtom,Index),
+	    (is_prstring(Localname,LocalnameStr,_Index2),
+	     atom_codes(LocalAtom,LocalnameStr)	     
+	     ;
+	     is_pratom(Localname,LocalAtom,_Index2)
+	    ),
+	    flora_concat_atoms(['flora_prefix_',PrefixAtom],PrefixCode),
+	    (flora_shell_prefixdef(WS,PrefixCode,PrefixBody)->
+		flora_write_quoted_atom(FL_URI),
+		put(0'(),
+		flora_concat_atoms([PrefixBody,LocalAtom],SQName),
+		flora_write_quoted_atom(SQName),
+		put(0')),
+		Status = []
+	   
+	    ;   coding_error(Index,MOD_NODEFPREFIX,Error),
+		Status = [Error] 
+	    )
+	    
+        ).
+
+
+/****************************************************************************
+  flora_write_sysmod(+Workspace,+Term,+Prefix,-Status)
+
+  This procedure is to write a literal associated with a Flora system module.
+  Workspace is already reduced to an atom.
+****************************************************************************/
+flora_write_sysmod(WS,Term,Prefix,Status) :-
+	( is_pratomlit(Term,List,_Index) ->
+	    flora_write_atomlit(SYSTEMMODULE,WS,List,Prefix,Status)
+
+        ; is_prtransactionalatomlit(Term,List,_Index) ->
+            flora_write_transactionalatomlit(SYSTEMMODULE,WS,List,Prefix,Status)
+
+	; is_prtermlit(Term,FObj,N,ObjList) ->
+	    flora_write_termlit(SYSTEMMODULE,WS,FObj,N,ObjList,Prefix,Status)
+
+	; is_prtransactionaltermlit(Term,FObj,N,ObjList) ->
+	    flora_write_transactionaltermlit(SYSTEMMODULE,WS,FObj,N,ObjList,Prefix,Status)
+
+	; is_flogic(Term,F,N,Args) ->
+	    flora_concat_atoms([Prefix,F],NewF),
+	    flora_write_wsliteral(SYSTEMMODULE,WS,NewF,N,Args,Prefix,Status)
+	).
+
+
+/****************************************************************************
+  flora_write_atomlit(+Mode,+Workspace,[+Atom,+Caller],+Prefix,-Status)
+  flora_write_atomlit(+Mode,+Workspace,+Atom,+Prefix,-Status)
+****************************************************************************/
+flora_write_atomlit(Mode,WS,[A,Caller],Prefix,Status) :-
+	!,
+	flora_write_wsliteral(Mode,WS,WRAP_TABLED_HILOG,2,[A,Caller],Prefix,Status).
+%% This happens when atom is not an F-logic or Hilog atom
+flora_write_atomlit(_Mode,_WS,[A],_Prefix,[]) :-
+	flora_write_quoted_atom(A).
+%%flora_write_atomlit(Mode,WS,[A],Prefix) :-
+	%%flora_write_wsliteral(Mode,WS,WRAP_TABLED_HILOG,1,[A],Prefix).
+
+flora_write_transactionalatomlit(Mode,WS,List,Prefix,Status) :-
+	!,
+	flora_write_wsliteral(Mode,WS,WRAP_HILOG,2,List,Prefix,Status).
+
+/****************************************************************************
+  flora_write_termlit(+Mode,+WS,+Functor,+Arity,+Args,+Prefix,-Status)
+****************************************************************************/
+flora_write_termlit(Mode,WS,Funct,N,Args,Prefix,Status) :-
+	M is N+1,
+	flora_write_wsliteral(Mode,WS,WRAP_TABLED_HILOG,M,[Funct|Args],Prefix,Status).
+
+flora_write_transactionaltermlit(Mode,WS,Funct,N,Args,Prefix,Status) :-
+        M is N+1,
+	flora_write_wsliteral(Mode,WS,WRAP_HILOG,M,[Funct|Args],Prefix,Status).
+
+/****************************************************************************
+  flora_write_wsliteral(+Mode,+Workspace,+Funct,+Arity,+Args,+Prefix,-Status)
+****************************************************************************/
+flora_write_wsliteral(Mode,WS,Funct,N,Args,Prefix,Status) :-
+	flora_write_workspace(Mode,WS,Funct),
+	( N == 0 ->
+	    true,
+	    Status = []
+	;
+	  put(0'(),
+	  flora_write_structlist(Args,Prefix,Status),
+	  put(0'))
+        ).
+
+
+/****************************************************************************
+  flora_write_workspace(+Mode,+Workspace,+Funct)
+
+  (1) Mode == THISMODULE: write workspace Macro for "this" module.
+  (2) Mode == USERMODULE: write workspace Macro for a Flora user module.
+  (3) Mode == SYSTEMMODULE: write workspace Macro for a Flora system module.
+****************************************************************************/
+flora_write_workspace(THISMODULE,_WS,Funct) :-
+	!,
+	%% _WS is just a place holder.
+	%% Atom is not quoted when written.
+	flora_write_atom('FLORA_THIS_WORKSPACE('),
+	flora_write_modulename(Funct),
+	put(0')).
+
+flora_write_workspace(USERMODULE,WS,Funct) :-
+	!,
+	%% Atom is not quoted when written.
+	flora_write_atom('FLORA_USER_WORKSPACE('),
+	flora_write_modulename(WS),
+	put(0',),
+	flora_write_modulename(Funct),
+	put(0')).
+
+flora_write_workspace(SYSTEMMODULE,WS,Funct) :-
+	!,
+	%% Atom is not quoted when written.
+	flora_write_atom('FLORA_SYSTEM_WORKSPACE('),
+	flora_write_modulename(WS),
+	put(0',),
+	flora_write_modulename(Funct),
+	put(0')).
+
+
+/****************************************************************************
+  flora_write_modulename(+Atom)
+
+  It is for outputting a module name. For efficiency reasons, quotes are
+  not allowed in module names. 
+****************************************************************************/
+flora_write_modulename(A) :-
+	flora_write_atom(A).
+
+
+/****************************************************************************
+  flora_write_prolog(+F,+N,+Args,+Prefix,-Status)
+  writes out "Term" as a normal Prolog term. The functor F must be an atom.
+
+  Note: F-logic atoms inside literals are output as if they appeared
+        in a rule body.
+****************************************************************************/
+flora_write_prolog(F,N,Args,Prefix,Status) :-
+	%% This fix is to write -3 and +3 as they are,
+	%% but not in the term format like -(3) and +(3).
+	%% XSB recognizes negative numbers at the syntactic
+	%% level whereas Flora does not.
+	( N == 1, (F == (FL_MINUS); F == (FL_PLUS)) ->
+	    Args=[NTerm],
+	    ( is_prnumber(NTerm,Number,_Index) ->
+		write(F),
+		write(Number),
+		Status = []
+	    ;
+	      flora_write_normal_prolog(F,N,Args,Prefix,Status)
+	    )
+	;
+	  flora_write_normal_prolog(F,N,Args,Prefix,Status)
+	).
+
+flora_write_normal_prolog(F,N,Args,Prefix,Status) :-
+	flora_write_quoted_atom(F),
+	( N == 0 ->
+	    true,
+	    Status = []
+	;
+	  put(0'(),
+	  flora_write_structlist(Args,Prefix,Status),
+	  put(0'))
+        ).
+
+
+/****************************************************************************
+  flora_write_hilog(+F,+N,+Args,+Prefix,-Status)
+  writes out "Term" as a Hilog term.
+****************************************************************************/
+flora_write_hilog(F,N,Args,Prefix,Status) :-
+	M is N+1,
+	flora_write_prolog(WRAP_HILOG,M,[F|Args],Prefix,Status).
+
+
+/****************************************************************************
+  flora_write_syslib(+Lib,+N,+Args,+Prefix,-Status)
+  writes out a FLORA system call.
+****************************************************************************/
+flora_write_syslib(FLLIBANSWER,N,Args,Prefix,Status) :-
+	!,
+	flora_write_prolog(FLLIBPROGRAMANS,N,Args,Prefix,Status).
+
+flora_write_syslib(Lib,1,[List],_Prefix,Status) :-
+	is_fllibdb(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	write_canonical(Lib),
+	put(0'(),
+	flora_write_atom('FLORA_THIS_MODULE_NAME'),
+	put(0',),
+	flora_write_struct(List,FLBODYPREFIX,Status),
+	flora_set_counter(using_debug_prefix,OldDbgPref),
+	put(0')).
+
+flora_write_syslib(Lib,2,[List,Cond],_Prefix,Status) :-
+	is_fllibdb(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	write_canonical(Lib),
+	put(0'(),
+	flora_write_atom('FLORA_THIS_MODULE_NAME'),
+	put(0',),
+	flora_write_struct(List,FLBODYPREFIX,Status_List),
+	flora_set_counter(using_debug_prefix,OldDbgPref),
+	put(0',),
+	( Status_List == [] ->
+	    flora_write_struct(Cond,FLBODYPREFIX,Status)
+	;
+	  Status = Status_List
+	),
+	put(0')).
+
+flora_write_syslib(Lib,N,Args,Prefix,Status) :-
+	( Lib == FLLIBMODLIT, N == 3 ->
+	    Args=[P,WS,Caller]
+
+	; Lib == FLLIBMODOBJ, N == 4 ->
+	    Args=[P,WS,Caller,Object]
+	),
+	!,
+	%% These two structures are used to construct a dynamic call
+	%% to a Flora user module. They are used in a DB update or
+	%% a literal in a rule body.
+	( is_pratomlit(P,List,_Index) ->
+	    PF=WRAP_TABLED_HILOG,
+	    is_prlist(PArgs,List,[],_I)
+
+	; is_prtransactionalatomlit(P,List,_Index) ->
+	    PF=WRAP_HILOG,
+	    is_prlist(PArgs,List,[],_I)
+
+	; is_prtermlit(P,FObj,Arity,ObjList) ->
+	    PF=WRAP_TABLED_HILOG,
+	    is_prlist(PArgs,[FObj|ObjList],[],_I)
+
+        ; is_prtransactionaltermlit(P,FObj,Arity,ObjList) ->
+            PF=WRAP_HILOG,
+            is_prlist(PArgs,[FObj|ObjList],[],_I)
+
+	%% Case of X@Y, where X is a variable
+	; is_prvariable(P,_VarName,_Index) ->
+	    PArgs = P,
+	    PF=FL_LIBMOD  % this wrapper is ignored -- just a placeholder
+
+	; is_prtransactionalvariable(P,_VarName,_Index) ->
+	    PArgs = P,
+	    PF=FL_LIBMOD  % this wrapper is ignored -- just a placeholder
+
+	;
+	  is_flogic(P,Wrap,Arity,ObjList),
+	  flora_concat_atoms([Prefix,Wrap],PF),
+	  is_prlist(PArgs,ObjList,[],_I)
+	),
+	!,
+	( Lib == FLLIBMODLIT ->
+	    flora_write_prolog(FLLIBMODLIT,4,[PF,PArgs,WS,Caller],Prefix,Status)
+	;
+	    flora_write_prolog(FLLIBMODOBJ,5,[PF,PArgs,WS,Caller,Object],Prefix,Status)
+	).
+
+flora_write_syslib(Lib,1,[WrappedList],_Prefix,Status) :-
+        is_ruleupdate(Lib),
+	!,
+	write_canonical(Lib),
+	put(0'(),
+	flora_write_atom('FLORA_THIS_MODULE_NAME'),
+	put(0',),
+	put(0'[),
+	is_prlist(WrappedList,List,_T,_I),
+	flora_write_dynrulelist(List,Status),
+	put(0']),
+	put(0')).
+
+flora_write_syslib(Lib,3,[Mode,HeadList,Body],_Prefix,Status) :-
+        is_fllibclause(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	write_canonical(Lib),
+	put(0'(),
+	flora_write_struct(Mode,FLBODYPREFIX,Status_Mode),
+	( Status_Mode == [] ->
+	    put(0',),
+	    flora_write_struct(HeadList,FLBODYPREFIX,Status_Head),
+	    ( Status_Head == [] ->
+		flora_set_counter(using_debug_prefix,OldDbgPref),
+		put(0',),
+		flora_write_struct(Body,FLBODYPREFIX,Status),
+		put(0'))
+	    ;
+		Status = Status_Head
+	    )
+	;
+	    Status = Status_Mode
+	).
+
+flora_write_syslib(Lib,3,[HeadList,Body,Newpred],_Prefix,Status) :-
+        is_fllibinsrulesig(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	write_canonical(Lib),
+	put(0'(),
+	flora_write_struct(HeadList,FLBODYPREFIX,Status_Head),
+	( Status_Head == [] ->
+	    flora_set_counter(using_debug_prefix,OldDbgPref),
+	    put(0',),
+	    flora_write_struct(Body,FLBODYPREFIX,Status_Body),
+	    ( Status_Body == [] ->
+		put(0',),
+		flora_write_struct(Newpred,FLBODYPREFIX,Status),
+		put(0'))
+	    ;
+	      Status = Status_Body
+	    )
+	;
+	    Status = Status_Head
+	).
+
+flora_write_syslib(F,N,Args,Prefix,Status) :-
+	flora_write_prolog(F,N,Args,Prefix,Status).
+
+/****************************************************************************
+  flora_write_dynrulelist(+DynRuleList,-Status)
+  Dynrule is similar to rule but its head is a list
+****************************************************************************/
+flora_write_dynrulelist([],[]) :- !.
+
+flora_write_dynrulelist([Term|T],Status) :-
+	is_prvariable(Term,Name,_I),
+	!,
+	flora_write_variable(Name),
+	flora_write_dynrulelist(T,Status).
+
+flora_write_dynrulelist([Term],Status) :-
+	is_prdynrule(Term,HeadList,Body,HVars,BVars),
+	!,
+	flora_write_atom(FLSYSRULEUPDATE),
+	put(0'(),
+	flora_set_counter(using_debug_prefix,0),
+	is_prlist(HeadList,Head,_T,_I),
+	put(0'[),
+	%% don't use prefix
+	flora_write_structlist(Head,'',Status_Head),
+	( Status_Head == [] ->
+	  put(0']),
+	  flora_set_counter(using_debug_prefix,1),
+	  put(0',),
+	  flora_write_struct(Body,FLBODYPREFIX,Status_Body),
+	  ( Status_Body == [] ->
+	    put(0',),
+	    flora_write_struct(HVars,FLBODYPREFIX,Status_HVars),
+	    ( Status_HVars == [] ->
+	      put(0',),
+	      flora_write_struct(BVars,FLBODYPREFIX,Status),
+	      flora_write_atom(')')
+	    ;
+	      Status = Status_HVars
+	    )
+	  ;
+	    Status = Status_Body
+	  )
+	;
+	  Status = Status_Head
+	).
+
+
+flora_write_dynrulelist([H|L],Status) :-
+	flora_write_dynrulelist([H],SH),
+	( SH == [] ->
+	    put(0',),
+	    flora_write_dynrulelist(L,Status)
+	;
+	   Status = SH
+	).
+
+
+/****************************************************************************
+  flora_write_newpred(+F,+N,+Args,+Prefix,-Status)
+****************************************************************************/
+flora_write_newpred(F,N,Args,Prefix,Status) :-
+	flora_write_wsliteral(THISMODULE,_WS,F,N,Args,Prefix,Status).
+
+/****************************************************************************
+  flora_write_newoid(+Oid)
+****************************************************************************/
+flora_write_newoid(Oid) :-
+	format('FLORA_SYMBOL(''~w'')', [Oid]).
+
+
+/****************************************************************************
+  flora_build_codelist(+TermList,+DefaultWorkspace,-Code,-Status)
+
+  Note: TermList should not be an empty list.
+****************************************************************************/
+flora_build_codelist([T],DWS,Code,Status) :-
+	!,
+	flora_build_code(T,DWS,Code,Status).
+
+flora_build_codelist([T|L],DWS,Code,Status) :-
+	flora_build_code(T,DWS,C1,S1),
+	( S1 == [] ->
+	    flora_build_codelist(L,DWS,C2,Status),
+	    Code =.. [',',C1,C2]
+	;
+	    Status = S1
+	).
+
+
+/****************************************************************************
+  flora_build_code(+Term,+DefaultWorkspace,-Code,-Status)
+  converts a term into an XSB internal code.
+
+  Note: Function symbols by default are not associated with any workspace.
+        F-Logic constructs (path logic) are by default associated with the
+        "default" workspace, so are literals. Temporary predicates, Flora
+        system libraries and F-Logic constructs are not HiLog terms. They
+        are not supposed to unify with normal HiLog terms.
+
+        By default, it assumes the code is built for a Flora user module.
+****************************************************************************/
+flora_build_code(Term,DWS,Code,Status) :-
+	(
+	%% This case is impossible??
+	  is_prrule(Term,Head,Body) ->
+	    flora_build_rule(Head,Body,DWS,Code,Status)
+
+	%% This case is impossible??
+	; is_prfact(Term,Head) ->
+	    flora_build_fact(Head,DWS,Code,Status)
+
+	; is_prquery(Term,GoalTerm) ->
+	    flora_build_query(GoalTerm,DWS,Code,Status)
+
+	%% This case is impossible??
+	; is_prdirective(Term,Direct) ->
+	    flora_build_directive(Direct,DWS,Code,Status)
+	).
+
+
+/****************************************************************************
+  flora_build_directive(+Term,+DefaultWorkspace,-Code,-Status)
+
+  Builds XSB compiler directive to be dumped as Prolog code
+****************************************************************************/
+flora_build_directive(Term,DWS,Code,Status) :-
+	flora_build_struct(Term,DWS,FLBODYPREFIX,_VarList,Code,_CodeInd,Status).
+
+
+/****************************************************************************
+  flora_build_fact(+Term,+DefaultWorkspace,-Code,-Status)
+   This case is impossible??
+****************************************************************************/
+flora_build_fact(Term,DWS,Code,Status) :-
+	flora_set_counter(using_debug_prefix,0),
+	flora_build_struct(Term,DWS,FLBODYPREFIX,_VarList,Code,_CodeInd,Status),
+	flora_set_counter(using_debug_prefix,1).
+
+
+/****************************************************************************
+  flora_build_rule(+Head,+Body,+DefaultWorkspace,-Code,-Status)
+****************************************************************************/
+flora_build_rule(Head,Body,DWS,Code,Status) :-
+	flora_set_counter(using_debug_prefix,0),
+	flora_build_struct(Head,DWS,FLHEADPREFIX,VarList,HeadCode,_CodeInd,HS),
+	( HS == [] ->
+	    flora_set_counter(using_debug_prefix,1),
+	    flora_build_struct(Body,DWS,FLBODYPREFIX,VarList,BodyCode,_CodeInd,Status),
+	    Code =.. [(':-'),HeadCode,BodyCode]
+	;
+	    Status = HS
+	).
+	
+
+/****************************************************************************
+  flora_build_query(Term,+DefaulWorkspace,-Code,-Status)
+****************************************************************************/
+flora_build_query(Term,DWS,Code,Status) :-
+	flora_build_struct(Term,DWS,FLBODYPREFIX,_VarList,Code,_CodeInd,Status).
+
+
+/****************************************************************************
+  flora_build_structlist(+TermList,+DefaultWorkspace,+Prefix,?VarList,
+                         -CodeList,-IndexedCodeList,-Status)
+****************************************************************************/
+flora_build_structlist([],_DWS,_Prefix,_VarList,[],[],[]) :- !.
+
+flora_build_structlist([T|L],DWS,Prefix,VarList,[TCode|LCode],[TI|LI],Status) :-
+	!,
+	flora_build_struct(T,DWS,Prefix,VarList,TCode,TI,TS),
+	( TS == [] ->
+	    flora_build_structlist(L,DWS,Prefix,VarList,LCode,LI,Status)
+	;
+	    Status = TS,
+	    LCode = [],
+	    LI = []
+	).
+	    
+
+
+/****************************************************************************
+  flora_build_struct(+Term,+Workspace,+Prefix,?VarList,-Code,-IndexedCode,-Status)
+  Build at run time Term for Workspace
+****************************************************************************/
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(Code,Index),[]) :-
+	is_pratom(Term,Code,Index),
+	!.
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(Code,Index),[]) :-
+	is_pruri(Term,Uri,Index),
+	!,
+	Code = FL_URI(Uri).
+
+flora_build_struct(Term,DWS,_Prefix,_VarList,Code,(Code,Index),Status) :-
+ 	is_prurisq(Term,Prefix,Localname),
+	!,
+	is_pratom(Prefix,PrefixAtom,Index),
+	(is_prstring(Localname,LocalnameStr,_Index2),
+	 atom_codes(LocalAtom,LocalnameStr)
+	 ;
+	 is_pratom(Localname,LocalAtom,_Index2)
+	),
+	flora_concat_atoms(['flora_prefix_',PrefixAtom],PrefixCode),
+	((flora_shell_prefixdef(DWS,PrefixCode,PrefixBody);flora_depchk_prefixdef(DWS,PrefixCode,PrefixBody))->
+	    flora_concat_atoms([PrefixBody,LocalAtom],SQName),
+	    Code = FL_URI(SQName),
+	    Status = []
+
+	;   coding_error(Index,MOD_NODEFPREFIX,Error),
+	    Status = [Error]
+	).
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(Code,Index),[]) :-
+	is_prnumber(Term,Code,Index),
+	!.
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(Code,Index),[]) :-
+	is_prtransactionalnumber(Term,Num,Index),
+	!,
+        Code=FL_TRANSACTIONAL(Num).
+
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,(Code,Index),[]) :-
+	is_prvariable(Term,Name,Index),
+	!,
+	flora_build_variable(Name,VarList,Code).
+
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,(Code,Index),[]) :-
+	is_prtransactionalvariable(Term,Name,Index),
+	!,
+	flora_build_variable(Name,VarList,Var),
+        Code=FL_TRANSACTIONAL(Var).
+
+%% We don't display the value of the special caller variable in the shell.
+%% Instead, we bind all occurrences of this variable in a rule to the same var
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,(_V,NO_INDEX),[]) :-
+	is_prcallervar(Term),
+	!,
+	flora_build_variable(Term,VarList,Code).
+
+%% We don't display the value of the special caller variable in the shell.
+%% Instead, we bind all occurrences of this variable in a rule to the same var
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,(_V,NO_INDEX),[]) :-
+	is_prdyncallervar(Term),
+	!,
+	flora_build_variable(Term,VarList,Code).
+
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,_Index,Status) :-
+	is_prcallerargsterm(Term,CallerVars),
+	!,
+	flora_build_struct(CallerVars,_DWS,_Prefix,VarList,Code,_Index,Status).
+
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,(_V,NO_INDEX),[]) :-
+	is_prcallerargsvar(Term),
+	!,
+	flora_build_variable(Term,VarList,Code).
+
+flora_build_struct(Term,_DWS,_Prefix,VarList,Code,(_V,NO_INDEX),[]) :-
+	is_prdyncallerargsvar(Term),
+	!,
+	flora_build_variable(Term,VarList,Code).
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(string(Code),Index),[]) :-
+	is_prstring(Term,Code,Index),
+	!.
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,IndexCode,Status) :-
+	is_prworkspaceterm(Term,WS),
+	!,
+	flora_build_struct(WS,DWS,Prefix,VarList,Code,IndexCode,Status).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prlist(Term,L,T,Index),
+	!,
+	( L == [] ->
+	    Code=[],
+	    CodeInd=[],
+	    Status = []
+	;
+	  flora_build_structlist(L,DWS,Prefix,VarList,LCode,LCodeInd,SL),
+	  ( ( T == []; SL \== []) ->
+	      Code=LCode,
+	      CodeInd=LCodeInd,
+	      Status = SL
+
+	  ;
+	    flora_build_struct(T,DWS,Prefix,VarList,TCode,TCodeInd,Status),
+	    append(LCode,TCode,Code),
+	    append(LCodeInd,TCodeInd,CodeInd)
+	  )
+        ).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prterm(Term,FObj,N,ObjList),
+	!,
+	( is_pratom(FObj,FAtom,Index), flora_prlgdef(FAtom,N) ->
+	    flora_build_prolog(FAtom,N,ObjList,DWS,Prefix,VarList,Code,CodeInd,Status)
+	;
+	  flora_build_struct(FObj,DWS,Prefix,_NewVar,_FCode,(_,Index),_Status),
+	  flora_build_hilog(FObj,N,ObjList,DWS,Prefix,VarList,Code,CodeInd,Status)
+	).
+
+%% Boolean combo of subgoals
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,NO_INDEX),Status) :-
+	is_goallogic(Term,F,N,Args),
+	!,
+	( N == 0 ->
+	    Code=F,
+	    CodeInd=F,
+	    Status = []
+	;
+	  flora_build_structlist(Args,DWS,Prefix,VarList,ACode,ACodeInd,Status),
+	  Code =.. [F|ACode],
+	  CodeInd =.. [F|ACodeInd]
+        ).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,NO_INDEX),Status) :-
+	is_prcall(Term,VarTerm),
+	!,
+	flora_build_struct(VarTerm,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_pratomlit(Term,[A|CallerList],Index),
+	!,
+	( flora_prlgdef(A,0) ->
+	    Code=A,
+	    CodeInd=A,
+	    Status = []
+	;
+	    ( CallerList == [] ->
+		flora_build_atomlit(USERMODULE,(A,Index),DWS,Prefix,VarList,Code,CodeInd,Status)
+	    ; CallerList = [Caller] ->
+		flora_build_atomlit(USERMODULE,(A,Caller,Index),DWS,Prefix,VarList,Code,CodeInd,Status)
+	    )
+	).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prtransactionalatomlit(Term,[A,Caller],Index),
+	!,
+	flora_build_transactionalatomlit(USERMODULE,(A,Caller,Index),DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prtermlit(Term,FObj,N,ObjList),
+	!,
+	( is_pratom(FObj,FAtom,Index), flora_prlgdef(FAtom,N) ->
+	    flora_build_prolog(FAtom,N,ObjList,DWS,Prefix,VarList,Code,CodeInd,Status)
+	;
+	  flora_build_struct(FObj,DWS,Prefix,_NewVar,_FCode,(_,Index),_Status),
+	  flora_build_termlit(USERMODULE,FObj,N,ObjList,DWS,DWS,Prefix,VarList,Code,CodeInd,Status)
+	).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prtransactionaltermlit(Term,FObj,N,ObjList),
+	!,
+        flora_build_struct(FObj,DWS,Prefix,_NewVar,_FCode,(_,Index),_Status),
+	flora_build_transactionaltermlit(USERMODULE,FObj,N,ObjList,DWS,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prworkspace(Term,P,WS),
+	!,
+	( is_pratom(WS,WSAtom,Index) ->
+	    %% a user module name
+	    flora_build_wsstruct(P,WSAtom,DWS,Prefix,VarList,Code,CodeInd,Status)
+	;
+	  %% a Flora system module name
+	  (is_prfloralib(WS,_Atom,Index),!; Index=NO_INDEX),
+	  flora_build_wsstruct(P,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+	).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,NO_INDEX),Status) :-
+	is_prnewpred(Term,F,N,Args),
+	!,
+	flora_build_newpred(F,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,DWS,_Prefix,VarList,Code,Spec,Status) :-
+	is_prreify(Term,Term1),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,1),
+	flora_build_struct(Term1,DWS,FLBODYPREFIX,VarList,Code,Spec,Status),
+	flora_set_counter(using_debug_prefix,OldDbgPref).
+
+flora_build_struct(Term,DWS,_Prefix,_VarList,Code,(Code,Index),[]) :-
+	is_prnewoid(Term,Oid,Index),
+	!,
+	flora_build_newoid(Oid,DWS,Code).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_flogic(Term,F,N,Args),
+	!,
+	flora_concat_atoms([Prefix,F],NewF),
+	Args=[Obj|_Rest],
+	flora_build_struct(Obj,DWS,Prefix,_NewVar,_FCode,(_,Index),_Status),
+	flora_build_wsliteral(USERMODULE,NewF,N,Args,DWS,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prologterm(Term,Funct,N,Args),
+	!,
+	is_pratom(Funct,F,Index),
+	flora_build_prolog(F,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeIndList,Index),Status) :-
+	is_prologliblit(Term,Funct,_N,Args),
+	!,
+	is_pratom(Funct,F,Index),
+	flora_build_structlist(Args,DWS,Prefix,VarList,ArgsCodeList,CodeIndList,Status),
+	%% If p(a)@prolog(mod) is run from Flora shell, the code generated
+	%% must look like: X =.. [p,a], call(X).
+	%% due to XSB module design inconsistencies
+	Code=','('=..'(P,[F|ArgsCodeList]),call(P)).
+
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_florasyslib(Term,F,N,Args,Index),
+	!,
+	flora_build_syslib(F,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+%% reified rule
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,NO_INDEX),Status) :-
+	is_prdynrule(Term,_HeadList,_Body,_HVars,_BVars),
+	!,
+	flora_build_dynrulelist([Term],DWS,Prefix,VarList,Code1,CodeInd,Status),
+	%% Code is built as a list, but we need the head
+	Code1 = [Code].
+
+%% This is used when calling X@flora(...)
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(CodeInd,Index),Status) :-
+	is_prfloralib(Term,Atom,Index),
+	!,
+	is_pratom(AtomStruct,Atom,Index),
+	flora_build_prolog(FL_FLORALIB,1,[AtomStruct],DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(Code,NO_INDEX),[]) :-
+	is_primport(Term,P,A,M),
+	!,
+	Code=import(from(P/A,M)).
+
+%% Build constraint term: {}(...)
+flora_build_struct(Term,DWS,Prefix,VarList,Code,(_V,NO_INDEX),Status) :-
+	is_prconstraint(Term,ConstrBody),
+	!,
+	flora_build_struct(ConstrBody,DWS,Prefix,VarList,BodyCode,_BCInd,Status),
+	Code = '{}'(BodyCode).
+
+flora_build_struct(Term,DWS,_Prefix,_VarList,DWS,(DWS,NO_INDEX),[]) :-
+	is_prthismodule(Term),
+	!.
+
+flora_build_struct(Term,DWS,_Prefix,_VarList,Code,(Code,NO_INDEX),[]) :-
+	is_prthisfdbstorage(Term),
+	!,
+	flora_user_fdb_storage_name(DWS,Code).
+
+flora_build_struct(Term,DWS,_Prefix,_VarList,Code,(Code,NO_INDEX),[]) :-
+	is_prthisfldstorage(Term),
+	!,
+	%% debug storage
+	flora_user_fld_storage_name(DWS,Code).
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Code,(Code,NO_INDEX),[]) :-
+	is_prfdbstorage(Term,StorageType,WSName,_Index),
+	!,
+	(StorageType==USERMODULE
+	-> flora_user_fdb_storage_name(WSName,Code)
+	;  flora_system_fdb_storage_name(WSName,Code)
+	).
+
+flora_build_struct(Term,_DWS,_Prefix,_VarList,Term,(Term,NO_INDEX),[]) :-
+	atomic(Term),
+	!.
+
+
+/****************************************************************************
+  flora_build_variable(+Name,?VarList,-Code)
+
+  Note:  "Name" cannot be an underscore, since it should have been replaced
+         by a new unique explicitly named variable.
+****************************************************************************/
+flora_build_variable(Name,[Name=Code|_],Code) :- !.
+
+flora_build_variable(Name,[_|NVs],Code) :-
+	flora_build_variable(Name,NVs,Code).
+
+
+/****************************************************************************
+  flora_build_wsstruct(+Term,+Workspace,+DefaultWorkspace,+Prefix,?VarList,
+                       -Code,-IndexedCode,-Status)
+****************************************************************************/
+%%flora_build_wsstruct(Term,WS,DWS,Prefix,VarList,Code,(CodeInd,NO_INDEX)) :-
+flora_build_wsstruct(Term,WS,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	( is_prfloralib(WS,WSAtom,_) ->
+	    flora_build_sysmod(Term,WSAtom,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+	%% If this module, then use the method for writing with THIS workspace
+	; is_prthismodule(WS) ->
+	    flora_build_struct(Term,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_pratomlit(Term,[Atom],Index) ->
+	    flora_build_atomlit(USERMODULE,(Atom,Index),WS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_pratomlit(Term,[Atom,Caller],Index) ->
+	    flora_build_atomlit(USERMODULE,(Atom,Caller,Index),WS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_prtransactionalatomlit(Term,[Atom,Caller],Index) ->
+	    flora_build_transactionalatomlit(USERMODULE,(Atom,Caller,Index),WS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_prtermlit(Term,FObj,N,ObjList) ->
+	    flora_build_termlit(USERMODULE,FObj,N,ObjList,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_prtransactionaltermlit(Term,FObj,N,ObjList) ->
+	    flora_build_transactionaltermlit(USERMODULE,FObj,N,ObjList,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_flogic(Term,F,N,Args) ->
+	    flora_concat_atoms([Prefix,F],NewF),
+	    flora_build_wsliteral(USERMODULE,NewF,N,Args,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+	
+	; is_prologterm(Term,F,N,Args) ->
+	    is_pratom(F,FAtom,Index),
+	    flora_build_prolog(FAtom,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+ 	; is_prurisq(Term,PrefixName,Localname) ->
+	    is_pratom(PrefixName,PrefixAtom,Index),
+	    (is_prstring(Localname,LocalnameStr,_Index2),
+	     atom_codes(LocalAtom,LocalnameStr)
+	     ;
+	     is_pratom(Localname,LocalAtom,_Index2)
+	    ),
+	    flora_concat_atoms(['flora_prefix_',PrefixAtom],PrefixCode),
+	    ((flora_shell_prefixdef(WS,PrefixCode,PrefixBody);flora_depchk_prefixdef(WS,PrefixCode,PrefixBody))->
+		flora_concat_atoms([PrefixBody,LocalAtom],SQName),
+		Code = FL_URI(SQName),
+		Status = []
+	   
+	     ;  coding_error(Index,MOD_NODEFPREFIX,Error),
+		Status = [Error] 
+	    ),
+	    CodeInd=(Code,Index)
+
+        ).
+
+
+/****************************************************************************
+  flora_build_sysmod(+Term,+Workspace,+DefaultWorkspace,+Prefix,?VarList,-Code,-Status)
+****************************************************************************/
+flora_build_sysmod(Term,WS,DWS,Prefix,VarList,Code,(CodeInd,NO_INDEX),Status) :-
+	( is_pratomlit(Term,[Atom],Index) ->
+	    flora_build_atomlit(SYSTEMMODULE,(Atom,Index),WS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_pratomlit(Term,[Atom,Caller],Index) ->
+	    flora_build_atomlit(SYSTEMMODULE,(Atom,Caller,Index),WS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_prtransactionalatomlit(Term,[Atom,Caller],Index) ->
+	    flora_build_transactionalatomlit(SYSTEMMODULE,(Atom,Caller,Index),WS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_prtermlit(Term,FObj,N,ObjList) ->
+	    flora_build_termlit(SYSTEMMODULE,FObj,N,ObjList,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_prtransactionaltermlit(Term,FObj,N,ObjList) ->
+	    flora_build_transactionaltermlit(SYSTEMMODULE,FObj,N,ObjList,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+
+	; is_flogic(Term,F,N,Args) ->
+	    flora_concat_atoms([Prefix,F],NewF),
+	    flora_build_wsliteral(SYSTEMMODULE,NewF,N,Args,WS,DWS,Prefix,VarList,Code,CodeInd,Status)
+        ).
+
+
+/****************************************************************************
+  flora_build_wsliteral(+Mode,+Funct,+Arity,+Args,+WS,+DWS,+Prefix,?VarList,-Code,-Status)
+
+  (1) Mode == USERMODULE: build a predicate for a Flora user module.
+  (2) Mode == SYSTEMMODULE: build a predicate for a Flora system module.
+****************************************************************************/
+flora_build_wsliteral(Mode,F,_N,Args,WS,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	flora_build_structlist(Args,DWS,Prefix,VarList,ACodeList,AListInd,Status),
+	( Mode == USERMODULE ->
+	    flora_user_module_predicate(F,ACodeList,WS,Code),
+	    flora_user_module_predicate(F,AListInd,WS,CodeInd)
+
+	; Mode == SYSTEMMODULE ->
+	    flora_system_module_predicate(F,ACodeList,WS,Code),
+	    flora_system_module_predicate(F,AListInd,WS,CodeInd)
+	).
+
+
+/****************************************************************************
+  flora_build_atomlit(+Mode,+(Atom,Caller,Index),+WS,+Prefix,?VarList,-Code,-Index,-Status)
+  flora_build_atomlit(+Mode,+(Atom,Index),+WS,+Prefix,?VarList,-Code,-Index,-Status)
+****************************************************************************/
+flora_build_atomlit(Mode,(A,Caller,I),WS,Prefix,VarList,Code,CodeInd,Status) :-
+	!,
+	flora_build_wsliteral(Mode,WRAP_TABLED_HILOG,2,[PRATOM(A,I),Caller],WS,WS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_atomlit(_Mode,(A,_I),_WS,_Prefix,_VarList,Code,CodeInd,[]) :-
+	Code=A,
+	CodeInd=A.
+
+flora_build_transactionalatomlit(Mode,(A,Caller,I),WS,Prefix,VarList,Code,CodeInd,Status) :-
+	!,
+	flora_build_wsliteral(Mode,WRAP_HILOG,2,[PRATOM(A,I),Caller],WS,WS,Prefix,VarList,Code,CodeInd,Status).
+
+/****************************************************************************
+  flora_build_termlit(+Mode,+Functor,+Arity,+Args,+WS,+DWS,+Prefix,?VarList,-Code,-Status)
+****************************************************************************/
+flora_build_termlit(Mode,Funct,N,Args,WS,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+        M is N+1,
+        flora_build_wsliteral(Mode,WRAP_TABLED_HILOG,M,[Funct|Args],WS,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_transactionaltermlit(Mode,Funct,N,Args,WS,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+        M is N+1,
+        flora_build_wsliteral(Mode,WRAP_HILOG,M,[Funct|Args],WS,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+
+/****************************************************************************
+  flora_build_prolog(+F,+N,+Args,+DWS,Prefix,?VarList,-Code,-IndexedCode,-Status)
+****************************************************************************/
+flora_build_prolog(F,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	( N == 0 ->
+	    Code=F,
+	    CodeInd=F,
+	    Status = []
+	;
+	  ( N == 1, (F == (FL_MINUS); F == (FL_PLUS))) ->
+	      Args=[NTerm],
+	      ( is_prnumber(NTerm,Number,_Index) ->
+		  ((F== (FL_PLUS),Code = Number);(F== (FL_MINUS),Code is 0-Number)),
+		  CodeInd = Code,
+		  Status = []
+	       ;
+	          flora_build_structlist(Args,DWS,Prefix,VarList,ACode,ACodeInd,Status),
+	          Code =.. [F|ACode],
+	          CodeInd =.. [F|ACodeInd]
+	      )
+	;
+	    flora_build_structlist(Args,DWS,Prefix,VarList,ACode,ACodeInd,Status),
+	    Code =.. [F|ACode],
+	    CodeInd =.. [F|ACodeInd]
+        ).
+
+
+/****************************************************************************
+  flora_build_hilog(+F,+N,+Args,+DWS,+Prefix,?VarList,-Code,-IndexedCode,-Status)
+****************************************************************************/
+flora_build_hilog(F,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	M is N+1,
+	flora_build_prolog(WRAP_HILOG,M,[F|Args],DWS,Prefix,VarList,Code,CodeInd,Status).
+
+
+/****************************************************************************
+  flora_build_syslib(+Lib,+N,+Args,+DWS,+Prefix,?VarList,-Code,-IndexedCode,-Status)
+****************************************************************************/
+flora_build_syslib(FLLIBANSWER,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	!,
+	flora_build_prolog(FLLIBSHELLANS,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+flora_build_syslib(Lib,1,[List],DWS,_Prefix,VarList,Code,CodeInd,Status) :-
+	is_fllibdb(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	flora_build_struct(List,DWS,FLBODYPREFIX,VarList,ListCode,ListCodeInd,Status),
+	flora_set_counter(using_debug_prefix,OldDbgPref),
+	Code =.. [Lib,FLORA_DEFAULT_WORKSPACE,ListCode],
+	%% This is a structure that includes indexed positions
+	%% of the various components of the update command,
+	%% e.g., fllibinsert(([atomIndexList],???))
+	CodeInd =.. [Lib,ListCodeInd].
+
+flora_build_syslib(Lib,2,[List,Cond],DWS,_Prefix,VarList,Code,CodeInd,Status) :-
+	is_fllibdb(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	flora_build_struct(List,DWS,FLBODYPREFIX,VarList,ListCode,ListCodeInd,S_List),
+	( S_List == [] ->
+	    flora_set_counter(using_debug_prefix,OldDbgPref),
+	    flora_build_struct(Cond,DWS,FLBODYPREFIX,VarList,CondCode,CondCodeInd,Status),
+	    Code =.. [Lib,FLORA_DEFAULT_WORKSPACE,ListCode,CondCode],
+	    %% This is a structure that includes indexed positions
+	    %% of the various components of the update command,
+	    %% e.g., fllibinsert(([atomIndexList],???),ConditionIndex)
+	    CodeInd =.. [Lib,ListCodeInd,CondCodeInd]
+	;
+	    Status = S_List
+	). 
+
+flora_build_syslib(Lib,N,Args,DWS,Prefix,VarList,Code,CInd,Status) :-
+	( Lib == FLLIBMODLIT, N == 3 ->
+	    Args=[P,WS,Caller]
+
+	; Lib == FLLIBMODOBJ, N == 4 ->
+	    Args=[P,WS,Caller,Object]
+	),
+	!,
+	( is_pratomlit(P,[A],Ind) ->
+	      PF=WRAP_TABLED_HILOG,
+	      is_prlist(PArgs,[PRATOM(A,Ind)],[],NO_INDEX)
+
+	; is_pratomlit(P,[A,CallerVar],Ind) ->
+	      PF=WRAP_TABLED_HILOG,
+	      is_prlist(PArgs,[PRATOM(A,Ind),CallerVar],[],NO_INDEX)
+
+        ; is_prtransactionalatomlit(P,[A,CallerVar],Ind) ->
+              PF=WRAP_HILOG,
+              is_prlist(PArgs,[PRATOM(A,Ind),CallerVar],[],NO_INDEX)
+
+	; is_prtermlit(P,FObj,Arity,ObjList) ->
+	        PF=WRAP_TABLED_HILOG,
+	        is_prlist(PArgs,[FObj|ObjList],[],NO_INDEX)
+
+	; is_prtransactionaltermlit(P,FObj,Arity,ObjList) ->
+                PF=WRAP_HILOG,
+                is_prlist(PArgs,[FObj|ObjList],[],NO_INDEX)
+	
+	%% Case of X@Y, where X is a variable
+	; is_prvariable(P,_VarName,_Index) ->
+	    PArgs = P,
+	    %% this particular wrapper is ignored in fllibmodlit/4
+	    PF=FL_LIBMOD
+
+	; is_prtransactionalvariable(P,_VarName,_Index) ->
+	    PArgs = P,
+	    %% this particular wrapper is ignored in fllibmodlit/4
+	    PF=FL_LIBMOD
+
+	;
+	  is_flogic(P,Wrap,Arity,ObjList),
+	  flora_concat_atoms([Prefix,Wrap],PF),
+	  is_prlist(PArgs,ObjList,[],NO_INDEX)
+	),
+	!,
+	( Lib == FLLIBMODLIT ->
+	    flora_build_prolog(FLLIBMODLIT,4,[PF,PArgs,WS,Caller],DWS,Prefix,VarList,Code,CInd,Status)
+	;
+	    flora_build_prolog(FLLIBMODOBJ,5,[PF,PArgs,WS,Caller,Object],
+			       DWS,Prefix,VarList,Code,CInd,Status)
+	).
+
+flora_build_syslib(Lib,1,[WrappedList],DWS,Prefix,VarList,Code,CInd,Status) :-
+	is_ruleupdate(Lib),
+	!,
+	is_prlist(WrappedList,List,_T,NO_INDEX),
+	flora_build_dynrulelist(List,DWS,Prefix,VarList,RLCode,RLCInd,Status),
+	Code =.. [Lib,FLORA_DEFAULT_WORKSPACE,RLCode],
+	CInd =.. [Lib,RLCInd].
+
+flora_build_syslib(Lib,3,[Mode,HeadList,Body],DWS,_Prefix,VarList,Code,CodeInd,Status) :-
+	is_fllibclause(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	flora_build_struct(Mode,DWS,FLBODYPREFIX,VarList,ModeCode,ModeCodeInd,Status_Mode),
+	( Status_Mode == [] ->
+	    flora_build_struct(HeadList,DWS,FLBODYPREFIX,VarList,HeadListCode,HeadListCodeInd,Status_Head),
+	    ( Status_Head == [] ->
+		flora_set_counter(using_debug_prefix,OldDbgPref),
+		flora_build_struct(Body,DWS,FLBODYPREFIX,VarList,BodyCode,BodyCodeInd,Status),
+		Code =.. [Lib,ModeCode,HeadListCode,BodyCode],
+		CodeInd =.. [Lib,ModeCodeInd,HeadListCodeInd,BodyCodeInd]
+	    ;
+		Status = Status_Head
+	    )
+	;
+	    Status = Status_Mode
+	).
+
+flora_build_syslib(Lib,3,[HeadList,Body,Newpred],DWS,_Prefix,VarList,Code,CodeInd,Status) :-
+	is_fllibinsrulesig(Lib),
+	!,
+	flora_get_counter(using_debug_prefix,OldDbgPref),
+	flora_set_counter(using_debug_prefix,0),
+	flora_build_struct(HeadList,DWS,FLBODYPREFIX,VarList,HeadListCode,HeadListCodeInd,Status_Head),
+	( Status_Head == [] ->
+	    flora_set_counter(using_debug_prefix,OldDbgPref),
+	    flora_build_struct(Body,DWS,FLBODYPREFIX,VarList,BodyCode,BodyCodeInd,Status_Body),
+	    ( Status_Body == [] ->
+		flora_build_struct(Newpred,DWS,FLBODYPREFIX,VarList,NewpredCode,NewpredCodeInd,Status),
+		Code =.. [Lib,HeadListCode,BodyCode,NewpredCode],
+		CodeInd =.. [Lib,HeadListCodeInd,BodyCodeInd,NewpredCodeInd]
+	    ;
+		Status = Status_Body
+	    )
+	;
+	    Status = Status_Head
+	).
+
+flora_build_syslib(Lib,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	flora_build_prolog(Lib,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+
+/****************************************************************************
+  flora_build_dynrulelist(+List,+DWS,+Prefix,?VarList,-Code,-IndexedCode,-Status)
+****************************************************************************/
+flora_build_dynrulelist([],_DWS,_Prefix,_VarList,[],[],[]) :- !.
+
+flora_build_dynrulelist([Term|T],DWS,Prefix,VarList,[Code|TCode],[CInd|TCInd],Status) :-
+	%% Args to rule updates can be variables
+	is_prvariable(Term,Name,Index),
+	!,
+	flora_build_variable(Name,VarList,Code),
+	CInd = Index,
+	flora_build_dynrulelist(T,DWS,Prefix,VarList,TCode,TCInd,Status).
+
+flora_build_dynrulelist([Term],DWS,_Prefix,VarList,Code,CInd,Status) :-
+	is_prdynrule(Term,HeadList,Body,HVars,BVars),
+	!,
+	flora_set_counter(using_debug_prefix,0),
+	is_prlist(HeadList,Head,_T,NO_INDEX),
+	%% don't use any prefix
+	flora_build_structlist(Head,DWS,'',VarList,HCode,HICode,Status_Head),
+	( Status_Head == [] ->
+	    flora_set_counter(using_debug_prefix,1),
+	    flora_build_struct(Body,DWS,FLBODYPREFIX,VarList,BCode,BICode,Status_Body),
+	    ( Status_Body == [] ->
+		flora_build_struct(HVars,DWS,FLBODYPREFIX,VarList,HVCode,HVICode,Status_HVars), %_HVPCode should be [],
+		( Status_HVars == [] ->
+		    flora_build_struct(BVars,DWS,FLBODYPREFIX,VarList,BVCode,BVICode,Status),
+		    Code1 =.. [FLSYSRULEUPDATE,HCode,BCode,HVCode,BVCode],
+		    CInd1 =.. [FLSYSRULEUPDATE,HICode,BICode,HVICode,BVICode],
+		    Code = [Code1],
+		    CInd = [CInd1]
+		;
+		    Status = Status_HVars,
+		    Code = [],
+		    CInd = []
+		)
+	    ;
+		Status = Status_Body,
+		Code = [],
+		CInd = []
+	    )
+	;
+	  Status = Status_Head,
+	  Code = [],
+	  CInd = [] 
+	).
+
+flora_build_dynrulelist([Term|T],DWS,Prefix,VarList,Code,CInd,Status) :-
+	flora_build_dynrulelist([Term],DWS,Prefix,VarList,HCode,HCInd,HS),
+	( HS == [] ->
+	    flora_build_dynrulelist(T,DWS,Prefix,VarList,TCode,TCInd,Status),
+	    append(HCode,TCode,Code),
+	    append(HCInd,TCInd,CInd)
+	;
+	    Status = HS,
+	    Code = [],
+	    CInd = []
+	).
+/****************************************************************************
+  flora_build_newpred(+F,+N,+Args,+DWS,+Prefix,?VarList,-Code,-IndexedCode,-Status)
+****************************************************************************/
+flora_build_newpred(F,N,Args,DWS,Prefix,VarList,Code,CodeInd,Status) :-
+	flora_build_wsliteral(USERMODULE,F,N,Args,DWS,DWS,Prefix,VarList,Code,CodeInd,Status).
+
+/****************************************************************************
+  flora_build_newoid(+Oid,+DWS,-Code)
+****************************************************************************/
+flora_build_newoid(Oid,_DWS,Code) :-
+	flora_concat_atoms([FLORA_SYMBOL,'''',Oid],Code).
+

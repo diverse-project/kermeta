@@ -1,0 +1,538 @@
+/* File:      flrmetaops.P
+**
+** Author(s): kifer
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2001
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** $Id: flrmetaops.P,v 1.27 2006/03/09 08:58:18 hwan Exp $
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+#include "flora_terms.flh"
+
+:- import append/3, length/2 from basics.
+
+:- import
+       flora_module_predicate/4,
+       is_flora_callable_literal/1,
+       flora_decode_predicate/7
+   from flrwrapper.
+
+
+:- import
+	get_canonical_form/2,
+	convert_to_body_literal/2,
+        flora_is_tabled_predicate/1,
+        flora_is_nontabled_predicate/1,
+        flora_check_dynmod_type_consistency/1
+    from flrcanon.
+
+:- import
+	flora_generalize_last/2,
+	flora_add_last/3,
+	flora_trim_last/2
+   from flrtrim.
+
+:- import
+	flora_decode_goal_as_atom/2
+   from flrdecode.
+
+:- import flora_list2conjunct/2 from flrutils.
+
+
+/******************************************************************************
+ utilities for dealing with FLLIBMODOBJ
+******************************************************************************/
+collect_libmodobj(Var,Var,[]) :-
+        var(Var),
+        !.
+
+collect_libmodobj(','(A,B),P,O) :-
+        !,
+        collect_libmodobj(A,PA,OA),
+        collect_libmodobj(B,PB,OB),
+        ( PA == [] ->
+            P = PB
+        ; PB == [] ->
+            P = PA
+        ; P = ','(PA,PB)
+        ),
+        append(OA,OB,O).
+
+collect_libmodobj(FLLIBMODLIT(FL_LIBMOD,Args,M,Caller),FLLIBMODLIT(FL_LIBMOD,P,M,Caller),O) :-
+        nonvar(Args),
+        Args = ','(A,B),
+        !,
+        collect_libmodobj(A,PA,OA),
+        collect_libmodobj(B,PB,OB),
+        ( PA == [] ->
+            P = PB
+        ; PB == [] ->
+            P = PA
+        ; P = ','(PA,PB)
+        ),
+        append(OA,OB,O).
+
+collect_libmodobj(FLLIBMODLIT(FL_LIBMOD,Args,M,Caller),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(P),M,Caller),O) :-
+        nonvar(Args), Args = FL_TRANSACTIONAL(NA),
+        nonvar(NA), NA = ','(A,B),
+        !,
+        collect_libmodobj(A,PA,OA),
+        collect_libmodobj(B,PB,OB),
+        ( PA == [] ->
+            P = PB
+        ; PB == [] ->
+            P = PA
+        ; P = ','(PA,PB)
+        ),
+        append(OA,OB,O).
+
+
+collect_libmodobj(FLLIBMODOBJ(W,A,M,C,P),[],[FLLIBMODOBJ(W,A,M,C,P)]) :-
+        !.
+
+collect_libmodobj(P,P,[]).
+
+matching_libmodobj([],_) :- !.
+matching_libmodobj(_,[]) :- !.
+matching_libmodobj([FLLIBMODOBJ(W1,A1,M1,C1,P1)|L1],[FLLIBMODOBJ(W2,A2,M2,C2,P2)|L2]) :- 
+        ( P1==P2 ->
+            FLLIBUNIVEQFORM(FLLIBMODLIT(W1,A1,M1,C1),FLLIBMODLIT(W2,A2,M2,C2))
+        ;
+            true
+        ),
+        matching_libmodobj([FLLIBMODOBJ(W1,A1,M1,C1,P1)],L2),
+        matching_libmodobj(L1,L2). 
+
+checking_libmodobj([]) :- !.
+checking_libmodobj([FLLIBMODOBJ(W,A,M,C,P)|L]) :-
+        ( nonvar(P) ->
+            FLLIBUNIVEQFORM(FLLIBMODLIT(W,A,M,C),P)
+        ;
+            true
+        ),
+        checking_libmodobj(L).
+
+/******************************************************************************
+  FLLIBUNIVEQFORM(?X,?Y)
+  The meta predicate ~
+******************************************************************************/
+FLLIBUNIVEQFORM(X,X) :-
+	var(X),
+	!.
+
+FLLIBUNIVEQFORM(X,Y) :-
+	var(X),
+	!,
+        flora_check_dynmod_type_consistency(Y),
+        X = Y.
+
+FLLIBUNIVEQFORM(X,Y) :-
+	var(Y),
+	!,
+        flora_check_dynmod_type_consistency(X),
+        X = Y.
+
+%% speed up the case where X unifies with Y
+FLLIBUNIVEQFORM(X,Y) :-
+        atomic(X),
+        atomic(Y),
+        !,
+        X=Y.
+
+FLLIBUNIVEQFORM(FLSYSRULEUPDATE(H1,B1,HV,BV),FLSYSRULEUPDATE(H2,B2,HV,BV)) :-
+	!,
+	flora_list2conjunct(H1,H1C),
+	flora_list2conjunct(H2,H2C),
+	FLLIBUNIVEQFORM(H1C,H2C),
+	FLLIBUNIVEQFORM(B1,B2).
+
+FLLIBUNIVEQFORM(X,Y) :-
+        X \= FLLIBMODLIT(_,_,_,_), X \= ','(FLLIBMODLIT(_,_,_,_),_),
+        Y \= FLLIBMODLIT(_,_,_,_), Y \= ','(FLLIBMODLIT(_,_,_,_),_),
+        X=Y,
+        !.
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,M,_Caller1),FLLIBMODLIT(FL_LIBMOD,Y,M,_Caller2)) :-
+        var(X),
+        var(Y),
+        !,
+        X=Y.
+
+%% X ~ %Y fails if both variables are unbound
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,_M1,_Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Y),_M2,_Caller2)) :-
+        var(X),
+        var(Y),
+        !,
+        fail.
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),_M1,_Caller1),FLLIBMODLIT(FL_LIBMOD,Y,_M2,_Caller2)) :-
+        var(X),
+        var(Y),
+        !,
+        fail.
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),M,_Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Y),M,_Caller2)) :-
+        var(X),
+        var(Y),
+        !,
+        X=Y.
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,M,C1),FLLIBMODLIT(W,A,M2,C2)) :-
+        var(X),
+        !,
+        flora_check_dynmod_type_consistency(FLLIBMODLIT(W,A,M2,C2)),
+        get_canonical_form(FLLIBMODLIT(W,A,M2,C2),FLCANON(Wrap,Args,M,P,FL_TABLED)),
+        (var(M2) -> M2 = M; true),
+        (nonvar(P) -> X = P
+        ; var(Wrap) -> X = A
+        ; X=FLLIBMODLIT(Wrap,Args,M,C1)).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),M,C1),FLLIBMODLIT(W,A,M2,C2)) :-
+        var(X),
+        !,
+        flora_check_dynmod_type_consistency(FLLIBMODLIT(W,A,M2,C2)),
+        get_canonical_form(FLLIBMODLIT(W,A,M2,C2),FLCANON(Wrap,Args,M,P,FL_NOTTABLED)),
+        (var(M2) -> M2 = M; true),
+        (nonvar(P) -> X = P
+        ; var(Wrap) -> X = A
+        ; X=FLLIBMODLIT(Wrap,Args,M,C1)).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(W,A,M2,C2),FLLIBMODLIT(FL_LIBMOD,Y,M,C1)) :-
+        var(Y),
+        !,
+        flora_check_dynmod_type_consistency(FLLIBMODLIT(W,A,M2,C2)),
+        get_canonical_form(FLLIBMODLIT(W,A,M2,C2),FLCANON(Wrap,Args,M,P,FL_TABLED)),
+        (var(M2) -> M2 = M; true),
+        (nonvar(P) -> Y = P
+        ; var(Wrap) -> Y = A
+        ; Y=FLLIBMODLIT(Wrap,Args,M,C1)).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(W,A,M2,C2),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Y),M,C1)) :-
+        var(Y),
+        !,
+        flora_check_dynmod_type_consistency(FLLIBMODLIT(W,A,M2,C2)),
+        get_canonical_form(FLLIBMODLIT(W,A,M2,C2),FLCANON(Wrap,Args,M,P,FL_NOTTABLED)),
+        (var(M2) -> M2 = M; true),
+        (nonvar(P) -> Y = P
+        ; var(Wrap) -> Y = A
+        ; Y=FLLIBMODLIT(Wrap,Args,M,C1)).
+
+%% Now neither X nor Y are variables
+FLLIBUNIVEQFORM(X,Y) :-
+        collect_libmodobj(X,PX,OX),
+        collect_libmodobj(Y,PY,OY),
+        (OX \= []; OY \= []),
+        !,
+        FLLIBUNIVEQFORM(PX,PY),
+        matching_libmodobj(OX,OY),
+        checking_libmodobj(OX),
+        checking_libmodobj(OY).
+
+FLLIBUNIVEQFORM((X,XX),(Y,YY)) :-
+        !,
+	FLLIBUNIVEQFORM(X,Y),
+	FLLIBUNIVEQFORM(XX,YY).
+
+FLLIBUNIVEQFORM((X;XX),(Y;YY)) :-
+        !,
+	FLLIBUNIVEQFORM(X,Y),
+	FLLIBUNIVEQFORM(XX,YY).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,(X,XX),Mod,Caller),(Y,YY)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,XX,Mod,Caller),YY).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,(X;XX),Mod,Caller),(Y;YY)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,XX,Mod,Caller),YY).
+
+FLLIBUNIVEQFORM((Y,YY),FLLIBMODLIT(FL_LIBMOD,(X,XX),Mod,Caller)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,XX,Mod,Caller),YY).
+
+FLLIBUNIVEQFORM((Y;YY),FLLIBMODLIT(FL_LIBMOD,(X;XX),Mod,Caller)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,XX,Mod,Caller),YY).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,(X,XX),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,(Y,YY),Mod2,Caller2)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,Y,Mod2,Caller2)),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,XX,Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,YY,Mod2,Caller2)).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,(X;XX),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,(Y;YY),Mod2,Caller2)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,X,Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,Y,Mod2,Caller2)),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,XX,Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,YY,Mod2,Caller2)).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((X,XX)),Mod,Caller),(Y,YY)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(XX),Mod,Caller),YY).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((X;XX)),Mod,Caller),(Y;YY)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(XX),Mod,Caller),YY).
+
+FLLIBUNIVEQFORM((Y,YY),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((X,XX)),Mod,Caller)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(XX),Mod,Caller),YY).
+
+FLLIBUNIVEQFORM((Y;YY),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((X;XX)),Mod,Caller)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),Mod,Caller),Y),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(XX),Mod,Caller),YY).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((X,XX)),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((Y,YY)),Mod2,Caller2)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Y),Mod2,Caller2)),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(XX),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(YY),Mod2,Caller2)).
+
+FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((X;XX)),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL((Y;YY)),Mod2,Caller2)) :-
+        !,
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(X),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(Y),Mod2,Caller2)),
+	FLLIBUNIVEQFORM(FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(XX),Mod1,Caller1),FLLIBMODLIT(FL_LIBMOD,FL_TRANSACTIONAL(YY),Mod2,Caller2)).
+
+%% Speed up the case of  nonvar1@Var1 ~ nonvar2@Var2
+FLLIBUNIVEQFORM(FLLIBMODLIT(WrapX,X,MX,_Caller1),FLLIBMODLIT(WrapY,Y,MY,_Caller2)) :-
+	WrapX \== FL_LIBMOD,
+	WrapY \== FL_LIBMOD,
+        !,
+	WrapX = WrapY,
+        univeqform_list(X,Y),
+	MX=MY.
+
+%% lists of formulas. Note: [a,b] ~ [A,B] fails because [] means flload
+%% when reified
+FLLIBUNIVEQFORM([],[]).
+FLLIBUNIVEQFORM([H1|T1],[H2|T2]) :-
+	!,
+	FLLIBUNIVEQFORM(H1,H2),
+	FLLIBUNIVEQFORM(T1,T2).
+
+
+%% Speed up the case of nonvar1@nonvarmod1 ~ nonvar2@nonvarmod2
+FLLIBUNIVEQFORM(X,Y) :-
+	X \= FLLIBMODLIT(_,_,_,_),
+	Y \= FLLIBMODLIT(_,_,_,_),
+	!,
+        ( is_flora_callable_literal(X) ->
+            convert_to_body_literal(X,BX),
+            convert_to_body_literal(Y,BY),
+            flora_generalize_last(BX,GX),
+            flora_generalize_last(BY,GY)
+        ;
+            GX = X,
+            GY = Y
+        ),
+        GX =.. XList,
+        GY =.. YList,
+        univeqform_list(XList,YList).
+
+%% Common (expensive) case
+FLLIBUNIVEQFORM(X,Y) :-
+        flora_check_dynmod_type_consistency(X),
+        flora_check_dynmod_type_consistency(Y),
+	get_canonical_form(X,FLCANON(Wrap1,Args,Mod1,Callable1,TableFlag)),
+	get_canonical_form(Y,FLCANON(Wrap2,Args2,Mod2,Callable2,TableFlag)),
+        ( Mod1==FL_INVALIDMODULE ->
+            ( Mod2==FL_INVALIDMODULE -> true; Mod=Mod2)
+        ;
+            ( Mod2==FL_INVALIDMODULE -> Mod=Mod1; Mod=Mod1,Mod=Mod2)
+        ),
+        (nonvar(Args),nonvar(Args2) -> univeqform_list(Args,Args2);Args=Args2),
+        (nonvar(Args) -> Wrap1=Wrap2; true),
+	( var(Callable1),nonvar(Wrap1),nonvar(Args),nonvar(Mod)
+	-> flora_module_predicate(Wrap1,Args,Mod,Callable1); true),
+	( var(Callable2),nonvar(Wrap2),nonvar(Args),nonvar(Mod)
+	-> flora_module_predicate(Wrap2,Args,Mod,Callable2); true),
+	convert_to_body_literal(Callable1,Callable),
+	convert_to_body_literal(Callable2,Callable),
+	( var(Callable), nonvar(Wrap1), nonvar(Args)
+	%% Cases like a(X)@M ~ Y@Z where module stays unbound
+	-> Callable = FLLIBMODLIT(Wrap1,Args,Mod,_Caller)
+	;  var(Callable), nonvar(Wrap2), nonvar(Args)
+	%% Cases like Y@Z ~ a(X)@M where module stays unbound
+	-> Callable = FLLIBMODLIT(Wrap2,Args,Mod,_Caller)
+	;  true
+	).
+
+univeqform_list([],[]) :- !.
+univeqform_list([H1|L1], [H2|L2]) :-
+        FLLIBUNIVEQFORM(H1,H2),
+        univeqform_list(L1,L2).
+
+/******************************************************************************
+  FLLIBMETAUNIV(?X,?Y)
+  The meta predicate =..
+******************************************************************************/
+FLLIBMETAUNIV(X,Y) :-
+	nonvar(X),
+	!,
+	flora_decode_predicate(X,PredType,WS,Wrapper,Prefix,PredName,Args),
+	( PredType == (prolog)
+	-> (Wrapper==WRAP_HILOG
+	   -> Args = [RealPredName|RealArgs], Y = [WRAP_HILOG(hilog,RealPredName)|RealArgs]
+	   %% libraries like insert
+	   ; fllib_wrapper(Wrapper) -> fail
+	   %% Aggregates look like (fllibavg(...), ...)
+	   ; Args=[Head|_], nonvar(Head), Head=..[Library|_],
+	       fllib_wrapper(Library)
+	   -> fail
+	   ; Y = [PredName|Args]
+	   )
+	;
+	    PredType == (hilog)
+	->
+	    flora_trim_last(Args,ArgsTrimmed),
+	    (Prefix = 't_'
+	    -> Y = [WRAP_HILOG(hilog,PredName,WS)|ArgsTrimmed]
+	    ;  Y = [WRAP_HILOG('%hilog',PredName,WS)|ArgsTrimmed]
+	    )
+	;
+	    PredType == (flogic)
+	->
+	    flora_trim_last(Args,ArgsTrimmed),
+	    %% convert wrapper names to arrows
+	    flogic_wrapper(PredName,FlogicSymbol,_),
+	    Y = [WRAP_HILOG(flogic,FlogicSymbol,WS)|ArgsTrimmed] 
+	).
+
+FLLIBMETAUNIV(X,Y) :-
+	is_list(Y),
+	Y = [Head|Args],
+	(atom(Head)
+	-> X =.. Y
+	;
+	    Head = WRAP_HILOG(hilog,FunctName)
+	->
+	    X =.. [WRAP_HILOG,FunctName|Args]
+	;
+	    Head = WRAP_HILOG(hilog,PredName,WS)
+	->
+	    flora_add_last(Args,AugmentedArgs,[WS,_]),
+	    flora_module_predicate(WRAP_TABLED_HILOG,[PredName|AugmentedArgs],WS,X)
+	;
+	    Head = WRAP_HILOG('%hilog',PredName,WS)
+	->
+	    flora_add_last(Args,AugmentedArgs,[WS,_]),
+	    flora_module_predicate(WRAP_HILOG,[PredName|AugmentedArgs],WS,X)
+	;
+	    Head = WRAP_HILOG('%hilog',PredName)
+	->
+	    flora_decode_goal_as_atom(X,Xdecoded),
+	    flora_decode_goal_as_atom(Y,Ydecoded),
+	    flora_abort([Xdecoded,'=..',Ydecoded,
+			 ' :  wrong syntax to the right of =..'])
+	;
+	    Head = WRAP_HILOG(flogic,FlogicSymbol,WS)
+	->
+	    flogic_wrapper(Wrapper,FlogicSymbol,ArgNo),
+	    (length(Args,ArgNo) -> true
+	    ;
+		flora_decode_goal_as_atom(X,Xdecoded),
+		flora_decode_goal_as_atom(Y,Ydecoded),
+		flora_abort([Xdecoded,'=..',Ydecoded,
+			     ' :  wrong number of components to the right of =..'])
+	    ),
+	    flora_add_last(Args,AugmentedArgs,[WS,_]),
+	    flora_module_predicate(Wrapper,AugmentedArgs,WS,X)
+	;
+	    Head = WRAP_HILOG(flogic,_)
+	->
+	    flora_decode_goal_as_atom(X,Xdecoded),
+	    flora_decode_goal_as_atom(Y,Ydecoded),
+	    flora_abort([Xdecoded,'=..',Ydecoded,
+			 ' :  wrong syntax to the right of =..'])
+	).
+
+%% For now, this predicate fails for most of the wrong syntax
+
+
+%% Arguments: Flogic Wrapper, visual symbol, #of required arguments
+flogic_wrapper(WRAP_MVD, '->', 3).
+flogic_wrapper(WRAP_IMVD, '*->', 3).
+flogic_wrapper(WRAP_MVDSIG, '=>', 3).
+flogic_wrapper(WRAP_IMVDSIG, '*=>', 3).
+flogic_wrapper(WRAP_MVDCONDEF, '{:}', 4).
+flogic_wrapper(WRAP_IMVDCONDEF, '{:}*', 4).
+flogic_wrapper(WRAP_MVDINC, '+>', 3).
+flogic_wrapper(WRAP_IMVDINC, '*+>', 3).
+flogic_wrapper(WRAP_MVDTOLIST, '->->', 3).
+flogic_wrapper(WRAP_IMVDTOLIST, '*->->', 3).
+flogic_wrapper(WRAP_ISA, ':', 2).
+flogic_wrapper(WRAP_SUB, '::', 2).
+flogic_wrapper(WRAP_METH, 'boolean', 2).
+flogic_wrapper(WRAP_IMETH, '*boolean', 2).
+flogic_wrapper(WRAP_TRAN, '%boolean', 2).
+flogic_wrapper(WRAP_BOOLSIG, '=>boolean', 2).
+flogic_wrapper(WRAP_IBOOLSIG, '*=>boolean', 2).
+flogic_wrapper(WRAP_TRANSIG, '=>%boolean', 2).
+flogic_wrapper(WRAP_ITRANSIG, '*=>%boolean', 2).
+flogic_wrapper(WRAP_OBJEQL, ':=:', 2).
+flogic_wrapper(WRAP_EXISTS, '[]', 1).
+
+%% used to skip internal libraries in decomposition of prolog terms
+%% =.. simply fails on such libraries
+fllib_wrapper(FLLIBINSERT).
+fllib_wrapper(FLLIBINSERTALL).
+fllib_wrapper(FLLIBDELETE).
+fllib_wrapper(FLLIBDELETEALL).
+fllib_wrapper(FLLIBERASE).
+fllib_wrapper(FLLIBERASEALL).
+fllib_wrapper(FLLIBBTINSERT).
+fllib_wrapper(FLLIBBTDELETEALL).
+fllib_wrapper(FLLIBBTDELETEALL).
+fllib_wrapper(FLLIBBTERASE).
+fllib_wrapper(FLLIBBTERASEALL).
+
+fllib_wrapper(FLLIBREFRESH).
+fllib_wrapper(FLLIBINSERTRULE_A).
+fllib_wrapper(FLLIBINSERTRULE_Z).
+fllib_wrapper(FLLIBDELETERULE_A).
+fllib_wrapper(FLLIBDELETERULE_Z).
+fllib_wrapper(FLLIBDELETERULE).
+
+fllib_wrapper(FLLIBNEWMODULE).
+fllib_wrapper(FLLIBCLAUSE).
+fllib_wrapper(FLLIBNEWOID).
+fllib_wrapper(FLLIBCATCH).
+fllib_wrapper(FLLIBTHROW).
+
+fllib_wrapper(FLLIBIFTHENELSE).
+fllib_wrapper(FLLIBIFTHEN).
+fllib_wrapper(FLLIBUNLESSDO).
+fllib_wrapper(FLLIBWHILEDO).
+fllib_wrapper(FLLIBDOUNTIL).
+fllib_wrapper(FLLIBWHILELOOP).
+fllib_wrapper(FLLIBLOOPUNTIL).
+
+fllib_wrapper(FLLIBAVG).
+fllib_wrapper(FLLIBSUM).
+fllib_wrapper(FLLIBMAX).
+fllib_wrapper(FLLIBMIN).
+fllib_wrapper(FLLIBCOUNT).

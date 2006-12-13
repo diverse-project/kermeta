@@ -1,0 +1,593 @@
+/* File:      flrdynrule.P
+**
+** Author(s): Chang Zhao
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2002
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_exceptions.flh"
+
+:- import conset/2,conget/2 from gensym.
+:- import append/3,length/2 from basics.
+:- import assert/3 from assert.
+:- import put_attr/3,
+          get_attr/3,
+          install_verify_attribute_handler/4
+    from machine.
+
+:- import
+	flora_module_registry/1
+   from flrregistry.
+:- import
+        flora_warning_line/1,
+        flora_warning_line/2
+   from flrprint.
+:- import
+        flora_concat_items/2,
+        flora_concat_atoms/2
+   from flrporting.
+:- import 
+	flora_patch_full_filename/1,
+	flora_set_xpp_options_for_compile/1,
+	flora_add_xpp_options/1,
+	flora_clear_xpp_options/0,
+	flloadtrailer/2,
+        flora_abort/0,
+        flora_abort/1
+   from flrutils.
+
+:- import
+	flora_module_predicate/4,
+	flora_decode_predicate/6
+   from flrwrapper.
+:- import
+	flora_define_predicate/1
+   from flrundefined.
+:-import is_control/3 from flrdependency.
+:- import
+	flora_storage_check_module_name/1
+   from flrstorageutils.
+:- import
+	flora_abolish_table_call/1
+   from flrtables.
+:- import
+        conjunct_to_list/2,
+        flora_bind_libmodobj/2,
+        matching_rule_signature/4,
+        get_canonical_form/2,
+        flora_rule_signature/6,
+        flora_build_pred_signature/2,
+        convert_to_head_literal/2,
+        convert_to_body_literal/2
+   from flrcanon.
+:- import
+	flora_bind_last/2,
+        flora_generalize_last/2
+   from flrtrim.
+
+:- import flora_decode_goal_as_atom/2 from flrdecode.
+
+
+/***********************************************************************
+ attribute variable handler
+ ***********************************************************************/
+:- install_verify_attribute_handler(usermod,AttrValue,Target,usermod_handler(AttrValue,Target)).
+
+usermod_handler(Da,Target) :-
+        ( var(Target) ->
+            ( get_attr(Target,usermod,Db) ->
+                append(Da,Db,Dc),
+                put_attr(Target,usermod,Dc)
+            ;
+                put_attr(Target,usermod,Da)
+            )
+        ;
+            true
+        ).
+
+/***********************************************************************
+ FLLIBNEWMODULE(+ThisModuleName,+Module)
+ Create new module Module.
+ Make sure that Module is bound and no module
+ with the same name exists. If so, load the patch rules for the module.
+ Load the default trailer into the new module.
+************************************************************************/ 
+
+FLLIBNEWMODULE(_ThisModuleName,Module) :-
+	var(Module),
+	!,
+	flora_abort('uninstantiated module name').
+
+FLLIBNEWMODULE(_ThisModuleName,Module) :-
+	flora_module_registry(Module),
+	!,
+	flora_abort([Module,': Module already loaded']).
+
+FLLIBNEWMODULE(_ThisModuleName,Module) :-
+	flloadtrailer([],Module).
+	
+/***********************************************************************
+ FLLIBINSERTRULE_A(+CallerModule,+RuleList)
+ FLLIBINSERTRULE_Z(+CallerModule,+RuleList)
+************************************************************************/ 
+FLLIBINSERTRULE_A(_ThisModuleName,RuleList) :- 
+        flora_bind_libmodobj(RuleList,NewRuleList),
+	flora_insert_rules(FLLIBINSERTRULE_A,NewRuleList).
+FLLIBINSERTRULE_Z(_ThisModuleName,RuleList) :-
+        flora_bind_libmodobj(RuleList,NewRuleList),
+	flora_insert_rules(FLLIBINSERTRULE_Z,NewRuleList).
+
+/***********************************************************************
+ flora_insert_rules(+InsOp,+RuleList)
+ InsOp is FLLIBINSERTRULE_A or FLLIBINSERTRULE_Z
+ process each element ([HeadList] :- Body) in the rule list
+************************************************************************/ 
+flora_insert_rules(_InsOp,[]) :- !.
+flora_insert_rules(_InsOp,[H|_Tail]) :-
+	var(H),
+	!,
+	flora_abort('uninstantiated element in the rule list of insertrule{...}').
+flora_insert_rules(InsOp,[FLSYSRULEUPDATE(HeadList,Body,HV,BV)|L]) :-
+	!,
+	inst_body(Body,InstBody),
+        get_attr(HV,usermod,HVars),
+        get_attr(BV,usermod,BVars),
+        check_vars(HeadList,Body,HVars,BVars,Warns),
+        sort(Warns,SortedWarns),
+        show_warnings(SortedWarns),
+	flora_expand_and_ins_rules(InsOp,HeadList,InstBody),
+	flora_insert_rules(InsOp,L).
+
+%% conjunct of rules - convert to list
+flora_insert_rules(InsOp,[(R,L)|Rules]) :-
+	!,
+	conjunct_to_list((R,L),RuleList),
+	flora_insert_rules(InsOp,RuleList),
+	flora_insert_rules(InsOp,Rules).
+flora_insert_rules(_InsOp,[H|_Tail]) :-
+	!,
+	flora_decode_goal_as_atom(H,AtomH),
+	flora_abort(['non-rule element in the rule list of insertrule{...}, ',
+		     AtomH]).
+
+/***********************************************************************
+ flora_expand_and_ins_rules(+InsOp,+HeadList,+Body)
+ If there are more than one elements in the HeadList, create a new 
+ predicate with all vars in the body as the arguments, and assert
+ a rule with the new predicate as the head and Body as the body
+************************************************************************/ 
+flora_expand_and_ins_rules(_InsOp,[],_Body) :- !.
+flora_expand_and_ins_rules(InsOp,[Head],Body) :-
+	!,
+	flora_insert_rule(InsOp,Head,Body,Body,[]).
+flora_expand_and_ins_rules(InsOp,HeadList,Body) :-
+	HeadList=[H|_L],
+        ( var(H) ->
+            flora_abort('uninstantiated rule head')
+        ;
+	    ( H=FLLIBMODLIT(_F,_Args1,MName,_Caller) ->
+	        true
+	    ;
+	        flora_decode_predicate(H,Type,MName,_Prefix,_Pred,_Args),
+                (((Type==hilog);(Type==flogic)) ->
+		    %% This is no good. Should really be checking
+		    %% for dynamic rule heads
+                    true
+                ;
+                    flora_abort('invalid head in a dynamically inserted rule')
+                )
+	    )
+        ),
+	flora_storage_check_module_name(MName),
+	new_dynpredicate(NewF),
+	collect_vars(Body,BodyVars),
+	sort(BodyVars,SortedBodyVars),
+	flora_module_predicate(NewF,SortedBodyVars,MName,NewPred),
+	Bridge =.. [FL_IMPLYOP,NewPred,Body],
+	assert(Bridge,3,1),
+	flora_insert_rulelist(InsOp,HeadList,NewPred,Body,[Bridge]).
+
+/***********************************************************************
+ flora_insert_rulelist(+Op,+HeadList,+Body,+OrigBody,+BridgeRules)
+ For each element E in the HeadList, call flora_insert_rule(Op,E,Body)
+************************************************************************/ 
+flora_insert_rulelist(_InsOp,[],_Body,_OrigBody,_Bridge) :- !.
+flora_insert_rulelist(InsOp,[H|L],Body,OrigBody,Bridge) :-
+	flora_insert_rule(InsOp,H,Body,OrigBody,Bridge),
+	flora_insert_rulelist(InsOp,L,Body,OrigBody,Bridge).
+
+/***********************************************************************
+ flora_insert_rule(+InsOp,+Head,+Body,+OrigBody,+BridgeRules)
+ Assert a rule with the given Head and Body, refresh tables, and define
+ the head for undefinedness checking.
+ InsOp is FLLIBINSERTRULE_A or FLLIBINSERTRULE_Z
+ Head is not prefixed with HEADPREFIX or DYNAPREFIX or DYNZPREFIX. DYNA or
+ DYNZ prefix is added accordingly.
+************************************************************************/ 
+flora_insert_rule(_InsOp,Head,_Body,_OrigBody,_BridgeRule) :-
+        var(Head),
+        !,
+        flora_abort('uninstantiated rule head').
+
+flora_insert_rule(InsOp,Head,Body,OrigBody,BridgeRule) :-
+        ( Head=FLLIBMODLIT(_F,_A1,MName,_Caller) ->
+            get_canonical_form(Head,FLCANON(_Wrap,_A2,MName,InstHead,_)),
+            ( var(InstHead) ->
+                flora_abort('uninstantiated rule head')
+            ;
+                true
+            ),
+	    flora_storage_check_module_name(MName)
+	;
+	    InstHead=Head
+	),
+	flora_decode_predicate(InstHead,Type,Module,Prefix,Pred,Args),
+        ( (Type == hilog) ->
+            ( InsOp == FLLIBINSERTRULE_A ->
+                flora_concat_atoms([FLDYNAPREFIX,Prefix,WRAP_HILOG],Wrapper)
+            ;
+                flora_concat_atoms([FLDYNZPREFIX,Prefix,WRAP_HILOG],Wrapper)
+            ),
+            flora_module_predicate(Wrapper,[Pred|Args],Module,NewHead)
+        ; Type == flogic ->
+            ( is_invalid_flogic_head(Pred) ->
+                flora_abort('invalid rule head')
+            ;
+                true
+            ),
+            ( InsOp == FLLIBINSERTRULE_A ->
+                flora_concat_atoms([FLDYNAPREFIX,Pred],Wrapper)
+            ;
+                flora_concat_atoms([FLDYNZPREFIX,Pred],Wrapper)
+            ),
+            flora_module_predicate(Wrapper,Args,Module,NewHead)
+        ;
+            flora_abort('invalid rule head')
+        ),
+	flora_storage_check_module_name(Module),
+	NewRule =.. [FL_IMPLYOP,NewHead,Body],
+	assert(NewRule,3,1),
+        flora_decode_goal_as_atom(Head,HeadCode),
+        ( InsOp == FLLIBINSERTRULE_A ->
+            catch(assert(flora_rule_signature(FLDYNAPREFIX,Module,InstHead,OrigBody,[NewRule],BridgeRule),3,1),_,(nl,flora_warning_line('Rule with head ~w too long: it can not be retrieved using clause{...}',[HeadCode]),nl))
+        ;
+            catch(assert(flora_rule_signature(FLDYNZPREFIX,Module,InstHead,OrigBody,[NewRule],BridgeRule),3,1),_,(nl,flora_warning_line('Rule with head ~w too long: it can not be retrieved using clause{...}',[HeadCode]),nl))
+        ),
+	flora_abolish_table_call(InstHead),
+	(Pred==WRAP_OBJEQL ->
+	    ( flloadtrailer([FLOBJEQLDEF],Module), !; flora_abort)
+	;
+	    true
+	),
+        flora_define_predicate(InstHead).
+
+/***********************************************************************
+ FLLIBDELETERULE_A(+CallerModule,+RuleList)
+ FLLIBDELETERULE_Z(+CallerModule,+RuleList)
+ FLLIBDELETERULE(+CallerModule,+RuleList)
+************************************************************************/ 
+FLLIBDELETERULE_A(_ThisModuleName,RuleList) :-
+	flora_check_and_delete_rules(FLLIBDELETERULE_A,RuleList).
+FLLIBDELETERULE_Z(_ThisModuleName,RuleList) :-
+	flora_check_and_delete_rules(FLLIBDELETERULE_Z,RuleList).
+FLLIBDELETERULE(_ThisModuleName,RuleList) :-
+        flora_check_and_delete_rules(_DONOTCARE,RuleList).
+
+/***********************************************************************
+ flora_check_and_delete_rules(+DelOp,+RuleList)
+ InsOp is FLLIBDELETERULE_A or FLLIBDELETERULE_Z or unbound
+ check the existence of all rules and delete them
+************************************************************************/ 
+flora_check_and_delete_rules(DelOp,RuleList) :-
+        flora_check_rules(DelOp,RuleList,SigList,HeadList),
+        flora_delete_rules(SigList),
+        flora_bind_libmodobj(HeadList,BoundHeadList),
+        flora_refresh_ruleheads(BoundHeadList).
+
+/***********************************************************************
+ flora_refresh_ruleheads(+HeadList)
+ get rid of the possibly tabled calls to the head
+************************************************************************/ 
+flora_refresh_ruleheads([]) :- !.
+flora_refresh_ruleheads([H|L]) :-
+        flora_refresh_rulehead(H),
+        flora_refresh_ruleheads(L).
+
+flora_refresh_rulehead(Head) :-
+	flora_generalize_last(Head,GeneralizedHead), % head with no module arg
+	flora_abolish_table_call(GeneralizedHead).
+
+/***********************************************************************
+ flora_check_rules(+DelOp,+RuleList,-SigList,-HeadList)
+ check the existence and return matching rule signatures
+************************************************************************/ 
+flora_check_rules(_DelOp,[],[],[]) :- !.
+flora_check_rules(DelOp,[FLSYSRULEUPDATE(HeadList,Body,_HV,_BV)|L],SigList,HL) :-
+	!,
+	flora_check_rulelist(DelOp,HeadList,Body,HSigList,HHL),
+	flora_check_rules(DelOp,L,LSigList,LHL),
+        append(HSigList,LSigList,SigList),
+        append(HHL,LHL,HL).
+%% conjunct of rules - convert to list
+flora_check_rules(DelOp,[(R,L)|Rules],SigList,HL) :-
+	!,
+	conjunct_to_list((R,L),RuleList),
+	flora_check_rules(DelOp,RuleList,HSigList,HHL),
+	flora_check_rules(DelOp,Rules,RSigList,RHL),
+        append(HSigList,RSigList,SigList),
+        append(HHL,RHL,HL).
+flora_check_rules(_DelOp,[H|_Tail],_SigList,_HL) :-
+	!,
+	flora_decode_goal_as_atom(H,AtomH),
+	flora_abort(['non-rule element in the rule list of deleterule{...}, ',
+		     AtomH]).
+
+/***********************************************************************
+  flora_check_rulelist(+DelOp,+HeadList,+Body,-RuleSigList,-NewHeadList)
+***********************************************************************/
+flora_check_rulelist(_DelOp,[],_Body,[],[]) :- !.
+flora_check_rulelist(DelOp,[H|L],Body,[HSig|LSig],[HH|LH]) :-
+        flora_check_rule(DelOp,H,Body,HSig,HH),
+        flora_check_rulelist(DelOp,L,Body,LSig,LH).
+
+flora_check_rule(DelOp,Head,Body,RuleSig,BoundHead) :-
+        get_canonical_form(Head,FLCANON(_,_,_,P,_)),
+        (nonvar(P) -> 
+            convert_to_head_literal(P,HeadPred)
+        ;
+            Head = HeadPred
+        ), 
+        ( DelOp == FLLIBDELETERULE_A ->
+            flora_match_rule(FLDYNAPREFIX,HeadPred,Body,RuleSig)
+        ; DelOp == FLLIBDELETERULE_Z ->
+            flora_match_rule(FLDYNZPREFIX,HeadPred,Body,RuleSig)
+        ; flora_match_rule(_,HeadPred,Body,RuleSig)
+        ),
+        get_canonical_form(HeadPred,FLCANON(_,_,_,BoundHead,_)).
+
+flora_match_rule(DynPrefix,Head1,Body1,RuleSig) :-
+        matching_rule_signature(DynPrefix,Head1,Body1,RuleSig).
+
+/***********************************************************************
+  flora_delete_rules(+RuleSigList)
+***********************************************************************/
+flora_delete_rules([]) :- !.
+flora_delete_rules([(DynPrefix,Head,Body,RuleList,BridgeRule)|L]) :-
+        flora_retract_rulelist(RuleList),
+        flora_retract_signatures(flora_rule_signature(DynPrefix,_Mod,Head,Body,RuleList,BridgeRule)),
+        ( BridgeRule==[] ->
+            true
+        ;
+            ( flora_rule_signature(DynPrefix,_M,_H,_BS,_RL,BridgeRule) ->
+                true
+            ;
+                flora_retract_rulelist(BridgeRule)
+            )
+        ),
+        flora_delete_rules(L).
+
+flora_retract_rulelist(','(RL1,RL2)) :-
+        !,
+        flora_retract_rulelist(RL1),
+        flora_retract_rulelist(RL2).
+flora_retract_rulelist([]) :- !.
+flora_retract_rulelist([H|L]) :-
+        retract(H),
+        flora_retract_rulelist(L).
+
+flora_retract_signatures(flora_rule_signature(DynPrefix,Mod,','(H1,H2),Body,','(RL1,RL2),BridgeRule))
+        :- !,
+        flora_retract_signatures(flora_rule_signature(DynPrefix,Mod,H1,Body,RL1,BridgeRule)),
+        flora_retract_signatures(flora_rule_signature(DynPrefix,Mod,H2,Body,RL2,BridgeRule)).
+
+flora_retract_signatures(flora_rule_signature(DynPrefix,Mod,Head,Body,RuleList,BridgeRule)) :-
+        retract(flora_rule_signature(DynPrefix,Mod,Head,Body,RuleList,BridgeRule)).
+
+/***********************************************************************
+ inst_body(+Body,-InstBody)
+ get rid of fllibmodlit with module name already bound
+************************************************************************/ 
+inst_body(B,B) :-
+        var(B),
+        !.
+
+inst_body(','(B1,B2),','(NB1,NB2)) :-
+	!,
+	inst_body(B1,NB1),
+	inst_body(B2,NB2).
+
+inst_body(';'(B1,B2),';'(NB1,NB2)) :-
+	!,
+	inst_body(B1,NB1),
+	inst_body(B2,NB2).
+
+inst_body(not(B),not(NB)) :-
+	!,
+	inst_body(B,NB).
+
+inst_body(tnot(B),tnot(NB)) :-
+	!,
+	inst_body(B,NB).
+
+inst_body(Body,NB) :-
+	is_control(Body,Ctl,Branches),
+	!,
+	inst_list(Branches,InstBranches),
+	NB =.. [Ctl|InstBranches].
+
+inst_body(FLLIBMODLIT(F,Args,MName,Caller),Inst) :-
+        !,
+        get_canonical_form(FLLIBMODLIT(F,Args,MName,Caller),FLCANON(_W,_A,_M,Callable,_)),
+        (var(Callable) ->
+            Inst = FLLIBMODLIT(F,Args,MName,Caller)
+        ;
+	    flora_bind_last(Callable,Caller),
+	    Callable = Inst
+        ).
+
+inst_body(Body,Body).
+	
+inst_list([],[]) :- !.
+inst_list([H|L],[NH|NL]) :-
+	inst_body(H,NH),
+	inst_list(L,NL).
+
+/***********************************************************************
+ new_predicate(-NewPred)
+************************************************************************/ 
+new_dynpredicate(NewPred) :-
+	conget(flora_global_dynnewpredicate, N),
+	M is N+1,
+	conset(flora_global_dynnewpredicate, M),
+	flora_concat_items([dyn_newpredicate,N], NewPred).
+
+/***********************************************************************
+ collect_vars(+Term,-Vars)
+************************************************************************/ 
+collect_vars(Atom,[]) :- 
+	atomic(Atom),
+	!.
+
+collect_vars(Var,[Var]) :- 
+	var(Var),
+	!.
+
+collect_vars(Body,BodyVars) :-
+	Body =.. [_F|Args],
+	collect_var_list(Args,BodyVars).
+
+collect_var_list([],[]) :- !.
+collect_var_list([H|L], Vars) :-
+	collect_var_list(L,LV),
+	( atomic(H) ->
+	    Vars = LV
+	;
+	    ( var(H) ->
+		Vars = [H|LV]
+	    ;
+		H =.. [_F|Args],
+		collect_var_list(Args,HV),
+		append(HV,LV,Vars)
+	    )
+	).
+
+/***********************************************************************
+ check_vars(+HeadList,+Body,+NamedHeadVars,+NamedBodyVars,-Warnings)
+************************************************************************/ 
+check_vars(HeadList,Body,NamedHVars,NamedBVars,Warnings) :-
+        collect_var_list(HeadList,HVars),
+        collect_vars(Body,BVars),
+        append(HVars,BVars,Vars),
+        singleton_vars(Vars,Vars,SingletonVars),
+        singleton_warning(SingletonVars,NamedHVars,NamedBVars,SWarnings),
+        subtract_vars(HVars,BVars,UnboundVars),
+        unbound_warning(UnboundVars,NamedHVars,UWarnings),
+        append(SWarnings,UWarnings,Warnings).
+
+singleton_vars(_AllVars,[],[]) :- !.
+singleton_vars(AllVars,[H|L], [H|SL]) :-
+        is_singleton(AllVars,H,0),
+        !,
+        singleton_vars(AllVars,L,SL).
+singleton_vars(AllVars,[_H|L],SL) :-
+        singleton_vars(AllVars,L,SL).
+
+is_singleton([],_V,_Cnt) :- !.
+is_singleton([H|L],V,Cnt) :-
+        (H==V ->
+            (Cnt==1 ->
+                fail
+            ;
+                is_singleton(L,V,1)
+            )
+        ;
+            is_singleton(L,V,Cnt)
+        ).
+
+singleton_warning([],_NamedHVars,_NamedBVars,[]) :- !.
+singleton_warning([H|L],NamedHVars,NamedBVars,Warns) :-
+        ( get_var_name(H,NamedHVars,Name) ->
+            fmt_write_string(WarningStr,"Singleton variable `%s' in the head of dynamically inserted rule", args(Name)),
+            Warns=[WarningStr|RestWarns]
+        ;
+            ( get_var_name(H,NamedBVars,Name) ->
+                fmt_write_string(WarningStr,"Singleton variable `%s' in the body of dynamically inserted rule", args(Name)),
+                Warns=[WarningStr|RestWarns]
+            ;
+                Warns=RestWarns
+            )
+        ),
+        singleton_warning(L,NamedHVars,NamedBVars,RestWarns).
+
+get_var_name(H,[N=V|NVs],Name) :-
+        ( H==V ->
+            Name=N
+        ;
+            get_var_name(H,NVs,Name)
+        ).
+
+subtract_vars([],_BVars,[]) :- !.
+subtract_vars([H|L],BVars,LUV) :-
+        in_list(H,BVars),
+        !,
+        subtract_vars(L,BVars,LUV).
+subtract_vars([H|L],BVars,[H|LUV]) :-
+        subtract_vars(L,BVars,LUV).
+
+in_list(V,[H|L]) :-
+        ( H==V ->
+            true
+        ;
+            in_list(V,L)
+        ).
+
+unbound_warning([],_NamedHVars,[]) :- !.
+unbound_warning([H|L],NamedHVars,Warns) :-
+        ( get_var_name(H,NamedHVars,Name) ->
+            fmt_write_string(WarningStr,"Unbound variable `%s' in the head of dynamically inserted rule", args(Name)),
+            unbound_warning(L,NamedHVars,RestWarns),
+            Warns=[WarningStr|RestWarns]
+        ;
+            unbound_warning(L,NamedHVars,Warns)
+        ).
+
+
+/***********************************************************************
+ is_invalid_flogic_head(+Pred)
+************************************************************************/ 
+is_invalid_flogic_head(WRAP_MVDINC) :- !.
+is_invalid_flogic_head(WRAP_IMVDINC) :- !.
+is_invalid_flogic_head(WRAP_MVDTOLIST) :- !.
+is_invalid_flogic_head(WRAP_IMVDTOLIST) :- !.
+
+
+/***********************************************************************
+ show_warnings(+WarningList)
+ Returns the last argument, which is the caller.
+************************************************************************/ 
+show_warnings([]) :- !.
+show_warnings([H|L]) :-
+        flora_warning_line(H),
+        show_warnings(L).

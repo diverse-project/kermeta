@@ -1,0 +1,120 @@
+/* File:      flrxml_aux.flr
+** Author(s): Rohan Shirwaikar
+** Contact:   flora-users@lists.sourceforge.net
+** 
+** Copyright (C) The Research Foundation of SUNY, 2005
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** 
+*/
+
+:- export
+	%parse_xpath_xml(?_,?_,?_,?_,?_),
+	%parse_xpath_sgml(?_,?_,?_,?_,?_),
+	%parse_xpath_html(?_,?_,?_,?_,?_),
+	%parse_xpath_xhtml(?_,?_,?_,?_,?_),
+	%load_xml_structure(?_, ?_, ?_),
+	%load_sgml_structure(?_, ?_, ?_),
+	%load_html_structure(?_, ?_, ?_),
+	%load_xhtml_structure(?_, ?_, ?_),
+	%flrnewoid(?_),
+	%flrelement(?_,?_,?_,?_),
+	%flrattribute(?_,?_,?_,?_),
+	%flrattributefunc(?_,?_,?_,?_,?_).
+
+%flrnewoid(?X) :- newoid{?X}.
+
+%flrelement(?C, ?X, ?C1, ?M) :-
+	newoid{?C1}, 
+	if flLoadedModule(?M)  then true else  newmodule{?M}, 
+	insert{?C[?X->{?C1}]@?M},
+	if flora_get_counter('flrxml$debug$flag',7)@prolog(flrporting)
+	then format('~w[~w->~w].  // @~w~n', [?C,?X,?C1,?M])@prolog(format),
+	!.
+%flrattribute(?C, ?X, ?Y, ?M) :- 
+	if flLoadedModule(?M)  then true else  newmodule{?M}, 
+	insert{?C[?X->?Y]@?M},
+	if flora_get_counter('flrxml$debug$flag',7)@prolog(flrporting)
+	then format('~w[~w->~w].  // @~w~n', [?C,?X,?Y,?M])@prolog(format),
+	!.
+%flrattributefunc(?C, ?X, ?Y, ?Z, ?M):- 
+	if flLoadedModule(?M)  then true else  newmodule{?M}, 
+	insert{?C[?X(?Y)->?Z]@?M},
+	if flora_get_counter('flrxml$debug$flag',7)@prolog(flrporting)
+	then format('~w[~w(~w)->~w].  // @~w~n', [?C,?X,?Y,?Z,?M])@prolog(format),
+	!.
+
+%parse_xpath_xml(?X, ?Y, ?N, ?W, ?M) :-
+	parse_xpath(?X, ?Y, ?Z, ?N)@prologall(xpath),
+	%load_xml_structure(string(?Z), ?W, ?M).
+%parse_xpath_sgml(?X, ?Y, ?N, ?W, ?M) :-
+	parse_xpath(?X, ?Y, ?Z, ?N)@prologall(xpath),
+	%load_sgml_structure(string(?Z), ?W, ?M).
+
+%parse_xpath_html(?X, ?Y, ?N, ?W, ?M) :-
+	parse_xpath(?X, ?Y, ?Z, ?N)@prologall(xpath),
+	%load_html_structure(string(?Z), ?W, ?M).
+%parse_xpath_xhtml(?X, ?Y, ?N, ?W, ?M) :-
+	parse_xpath(?X, ?Y, ?Z, ?N)@prologall(xpath),
+	%load_xhtml_structure(string(?Z), ?W, ?M).
+
+%parse_xpath(?X, ?Y, ?N, ?O, ?W, ?M) :-
+	parse_xpath(?X, ?Y, ?Z, ?N)@prologall(xpath),
+	%load_structure(string(?Z), ?O, ?W, ?M).
+
+%load_xml_structure(?X, ?W, ?M) :-	%load_structure(?X, [dialect(xml)], ?W, ?M).
+
+%load_sgml_structure(?X, ?W, ?M) :- %load_structure(?X, [dialect(sgml)], ?W, ?M).
+
+%load_html_structure(?X, ?W, ?M) :-
+	dtd(html,?Dtd,?W)@prologall(sgml),
+	%load_structure(?X, [?Dtd, dialect(sgml)], ?W, ?M).
+
+%load_xhtml_structure(?X, ?W, ?M) :-
+	dtd(xhtml,?Dtd,?W)@prologall(sgml),
+	%load_structure(?X, [?Dtd, dialect(sgml)], ?W, ?M).
+
+%load_structure(?_, ?_, ?_, ?M) :- 
+	var(?M),
+	!,
+	%abort('[FLRXML]: Module name must be bound')@flora(sys).
+%load_structure(?X, ?Z, ?W, ?M) :-
+	load_structure(?X, ?Y, ?Z, ?W)@prologall(sgml),
+	xml_parse_doc(?Y, ?M)@prologall(flrxml),
+	insertrule_z{
+	    (?O1['$tag' -> ?Tag] :- ?_[?Tag->{?O1}])@?M,
+	    (?O2['$parent' -> ?O21] :- ?O21[?_->{?O2}])@?M,
+	    (?O3['$tag'(?N) -> ?Tag] :- ?O3['$child'(?N)->?_['$tag' -> ?Tag ]])@?M
+	},
+	insertrule_z{
+	    (?O4['$childrenList' -> ?ChildrenList]:-
+		?O4[?_->?_],
+		?ChildrenList = collectset{?Child|?O4['$child'(?_)->?Child]} )@?M
+	},
+	insertrule_z{
+	    (?O5['$tagList' -> ?TagList ] :- 
+		?O5[?_->?_], 
+		?TagList =
+	            collectset{?Tags|?O5['$child'(?_)->?_['$tag'-> ?Tags]]} )@?M
+	},
+	insertrule_z{
+	    (?O6['$childrenNum' -> ?Counter ]:- 
+		 ?O6[?_->?_],
+		 ?Counter = count{?Children|?O6['$child'(?_)->?Children]} )@?M
+	},
+	!.
+
+

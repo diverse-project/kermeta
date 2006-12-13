@@ -2,12 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libs/floraJavaAPI.jar"/>
-	<classpathentry kind="lib" path="libs/interprolog_new.zip"/>
-	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.interprter/dist/interpreter_kermeta.jar"/>
-	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="/fr.irisa.triskell.kermeta.interprter/lib/io_kermeta.jar"/>
-	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.interprter/lib/thirdparty/emfatic-core.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
-	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.interprter/lib/model_kermeta.jar" kind="lib" path="/fr.irisa.triskell.kermeta.interprter/lib/model_kermeta.jar"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin/java"/>
 </classpath>

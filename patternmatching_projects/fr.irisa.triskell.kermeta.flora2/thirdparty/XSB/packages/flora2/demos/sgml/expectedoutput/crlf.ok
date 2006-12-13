@@ -1,0 +1,20 @@
+_$_$_flora'dyn_newoid5675[$order->0].  // @crlf
+_$_$_flora'dyn_newoid5675[text->>_$_$_flora'dyn_newoid5678].  // @crlf
+_$_$_flora'dyn_newoid5678[$order->1].  // @crlf
+_$_$_flora'dyn_newoid5678[p->>_$_$_flora'dyn_newoid5679].  // @crlf
+_$_$_flora'dyn_newoid5679[$order->2].  // @crlf
+_$_$_flora'dyn_newoid5679[$text->>_$_$_flora'dyn_newoid5680].  // @crlf
+_$_$_flora'dyn_newoid5680[$order->3].  // @crlf
+_$_$_flora'dyn_newoid5680[$string->par 1].  // @crlf
+_$_$_flora'dyn_newoid5679[$child(0)->_$_$_flora'dyn_newoid5680].  // @crlf
+_$_$_flora'dyn_newoid5678[$child(0)->_$_$_flora'dyn_newoid5679].  // @crlf
+_$_$_flora'dyn_newoid5678[p->>_$_$_flora'dyn_newoid5681].  // @crlf
+_$_$_flora'dyn_newoid5681[$order->4].  // @crlf
+_$_$_flora'dyn_newoid5681[$text->>_$_$_flora'dyn_newoid5682].  // @crlf
+_$_$_flora'dyn_newoid5682[$order->5].  // @crlf
+_$_$_flora'dyn_newoid5682[$string->par 2].  // @crlf
+_$_$_flora'dyn_newoid5681[$child(0)->_$_$_flora'dyn_newoid5682].  // @crlf
+_$_$_flora'dyn_newoid5678[$child(1)->_$_$_flora'dyn_newoid5681].  // @crlf
+_$_$_flora'dyn_newoid5679[$rightsibling->_$_$_flora'dyn_newoid5681].  // @crlf
+_$_$_flora'dyn_newoid5681[$leftsibling->_$_$_flora'dyn_newoid5679].  // @crlf
+_$_$_flora'dyn_newoid5675[$child(0)->_$_$_flora'dyn_newoid5678].  // @crlf

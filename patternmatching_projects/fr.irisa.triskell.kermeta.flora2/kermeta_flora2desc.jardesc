@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jardesc>
-<jar path="C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.pattern/kermetapattern.jar"/>
-<options buildIfNeeded="true" compress="true" descriptionLocation="/fr.irisa.triskell.kermeta.pattern/kermetapatterndesc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+<jar path="C:/eclipse/eclipse_3.1.2/workspace/fr.irisa.triskell.kermeta.flora2/kermeta_flora2.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/fr.irisa.triskell.kermeta.flora2/kermeta_flora2desc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
 <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
 <selectedProjects/>
 <manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
@@ -11,6 +11,6 @@
 </sealing>
 </manifest>
 <selectedElements exportClassFiles="false" exportJavaFiles="false" exportOutputFolder="true">
-<folder path="/fr.irisa.triskell.kermeta.pattern/bin"/>
+<folder path="/fr.irisa.triskell.kermeta.flora2/bin"/>
 </selectedElements>
 </jardesc>

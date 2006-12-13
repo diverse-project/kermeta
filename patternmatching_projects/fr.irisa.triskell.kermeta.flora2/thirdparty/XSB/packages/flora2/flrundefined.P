@@ -1,0 +1,959 @@
+/* File:      flrundefined.P  -- Catcher of undefined predicates and methods
+**
+** Author(s): Chang Zhao
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 2002
+** 
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: flrundefined.P,v 1.32 2006/05/03 05:37:30 kifer Exp $
+**
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_exceptions.flh"
+#include "flora_porting.flh"
+
+
+/*********************************************************************
+  flora_debug_code(+CompileList)
+  Extract from facts and rule heads the skeletons that will be loaded
+  into fld storage and write them to File
+**********************************************************************/
+flora_debug_code(TermList, File) :-
+	retractall(term_seen(_)),
+	flora_build_debug_inter_codelist(TermList,CodeList),
+        sort(CodeList,SortedCodeList),
+        assert_term_seen(SortedCodeList),
+	telling(PreOut),
+	tell(File),
+	writeln('#include "flrheader.flh"'),
+	nl,
+	generate_patches,
+	told,
+	tell(PreOut).
+
+%% remove duplication
+assert_term_seen([]) :- !.
+assert_term_seen([H|L]) :-
+        ( term_seen(H) -> true; assert(term_seen(H))),
+         assert_term_seen(L).
+
+/*********************************************************************
+  flora_build_debug_inter_codelist(+CompilerCodeList,-SkeletonList)
+**********************************************************************/
+flora_build_debug_inter_codelist([],[]) :- !.
+
+flora_build_debug_inter_codelist([T|L],CodeList) :-
+	flora_build_debug_inter_code(T,TCode),
+	flora_build_debug_inter_codelist(L,LCode),
+        ( nonvar(TCode) ->
+            ( TCode = [Sub,Super] ->
+                %% only c1::c2 can produce 2 skeletons
+                CodeList = [Sub,Super|LCode]
+            ;
+                CodeList = [TCode|LCode]
+            )
+        ;
+            CodeList = LCode
+        ).
+
+flora_build_debug_inter_code(Term,Code) :-
+	(is_prrule(Term,Head,_) ; is_prfact(Term,Head)),
+        reset_newvar,
+	flora_build_debug_skeleton(Head,Code),
+        !.
+
+flora_build_debug_inter_code(_Term,_Code).
+
+/*********************************************************************
+  flora_build_debug_skeleton(+Term, -Code)
+  builds the intermediate form of the skeletons of all facts
+  and rule heads
+**********************************************************************/
+flora_build_debug_skeleton(Head,PRATOMLIT([A|NewCallerList],NO_INDEX)) :-
+        is_pratomlit(Head,[A|CallerList],_Index),
+	!,
+	( flora_prlgdef(A,0) ->
+	    fail
+        ;
+	    ( CallerList == [] ->
+		NewCallerList = []
+	    ;
+	        prvar_list(1,NewCallerList)
+	    )
+	).
+
+flora_build_debug_skeleton(Head,PRTRANSACTIONALATOMLIT([A,NewCaller],NO_INDEX)) :-
+        is_prtransactionalatomlit(Head,[A,_Caller],_Index),
+	!,
+	prvar_list(1,[NewCaller]).
+
+flora_build_debug_skeleton(Head,Sk) :-
+	is_prtermlit(Head,FObj,N,_ObjList),
+	!,
+	( is_pratom(FObj,FAtom,_Index), flora_prlgdef(FAtom, N) ->
+	    fail
+	;
+	    prvar_list(N,ObjListCode),
+	    flora_build_debug_term_skeleton(FObj,FCode),
+	    Sk = PRTERMLIT(FCode,N,ObjListCode)
+	).
+
+flora_build_debug_skeleton(Head,Sk) :-
+	is_prtransactionaltermlit(Head,FObj,N,_ObjList),
+	!,
+	( is_pratom(FObj,FAtom,_Index), flora_prlgdef(FAtom, N) ->
+	    fail
+	;
+	    prvar_list(N,ObjListCode),
+	    flora_build_debug_term_skeleton(FObj,FCode),
+	    Sk = PRTRANSACTIONALTERMLIT(FCode,N,ObjListCode)
+	).
+
+
+flora_build_debug_skeleton(Head,Sk) :-
+	flora_build_debug_skeleton_flogic(Head,Sk),
+        !.
+
+%% The remaining heads are all F-logic types
+%% The last new variable in templates below is for the Caller argument
+flora_build_debug_skeleton_flogic(Head,PRSUB(NV1,CCode,NV2)) :-
+	is_flogic(Head,WRAP_ISA,_Arity,[_Obj1,Obj2|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	prvarfree_noindex(Obj2,CCode).
+
+flora_build_debug_skeleton_flogic(Head,CCode) :-
+	is_flogic(Head,WRAP_SUB,_Arity,[Obj1,Obj2|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	( prvarfree_noindex(Obj1,Sk1) ->
+            ( prvarfree_noindex(Obj2,Sk2) ->
+                CCode = [PRSUB(NV1,Sk1,NV2),PRSUB(NV1,Sk2,NV2)]
+            ;
+                CCode = PRSUB(NV1,Sk1,NV2)
+            )
+        ;
+            ( prvarfree_noindex(Obj2,Sk2) ->
+                CCode = PRSUB(NV1,Sk2,NV2)
+            ;
+                fail
+            )
+        ).
+
+flora_build_debug_skeleton_flogic(Head,PRMETH(NV1,MCode,NV2)) :-
+	is_flogic(Head,WRAP_METH,_Arity,[_Obj1,Meth|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Meth,MCode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMETH(NV1,MCode,NV2)) :-
+	is_flogic(Head,WRAP_IMETH,_Arity,[_Obj1,IMeth|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(IMeth,MCode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVDDEF(NV1,ACode,NV2)) :-
+	is_flogic(Head,WRAP_MVDDEF,_Arity,[_Obj,Attr|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Attr,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVDDEF(NV1,ACode,NV2)) :-
+	is_flogic(Head,WRAP_IMVDDEF,_Arity,[_Obj,Attr|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Attr,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRTRAN(NV1,TCode,NV2)) :-
+	is_flogic(Head,WRAP_TRAN,_Arity,[_Obj,Tran|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Tran,TCode).
+
+flora_build_debug_skeleton_flogic(Head,PRBOOLSIG(NV1,ACode,NV2)) :-
+	is_flogic(Head,WRAP_BOOLSIG,_Arity,[_Obj,Att|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIBOOLSIG(NV1,ACode,NV2)) :-
+	is_flogic(Head,WRAP_IBOOLSIG,_Arity,[_Obj,Att|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRTRANSIG(NV1,ACode,NV2)) :-
+	is_flogic(Head,WRAP_TRANSIG,_Arity,[_Obj,Att|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRITRANSIG(NV1,ACode,NV2)) :-
+	is_flogic(Head,WRAP_ITRANSIG,_Arity,[_Obj,Att|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVDSIG(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_MVDSIG,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVDCON(NV1,ACode,NV2,NV3,NV4)) :-
+	is_flogic(Head,WRAP_MVDCON,_Arity,[_Obj,Att,_Lower,_Upper|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	new_varobj(NO_INDEX,NV4),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVDCONDEF(NV1,ACode,NV2,NV3,NV4)) :-
+	is_flogic(Head,WRAP_MVDCONDEF,_Arity,[_Obj,Att,_Lower,_Upper|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	new_varobj(NO_INDEX,NV4),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVDSIG(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_IMVDSIG,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVDCON(NV1,ACode,NV2,NV3,NV4)) :-
+	is_flogic(Head,WRAP_IMVDCON,_Arity,[_Obj,Att,_Lower,_Upper|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	new_varobj(NO_INDEX,NV4),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVDCONDEF(NV1,ACode,NV2,NV3,NV4)) :-
+	is_flogic(Head,WRAP_IMVDCONDEF,_Arity,[_Obj,Att,_Lower,_Upper|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	new_varobj(NO_INDEX,NV4),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVD(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_MVD,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVD(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_IMVD,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVDINC(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_MVDINC,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVDINC(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_IMVDINC,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRMVDTOLIST(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_MVDTOLIST,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+flora_build_debug_skeleton_flogic(Head,PRIMVDTOLIST(NV1,ACode,NV2,NV3)) :-
+	is_flogic(Head,WRAP_IMVDTOLIST,_Arity,[_Obj,Att,_Val|_]),
+	!,
+        new_varobj(NO_INDEX,NV1),
+        new_varobj(NO_INDEX,NV2),
+        new_varobj(NO_INDEX,NV3),
+	flora_build_debug_term_skeleton(Att,ACode).
+
+
+flora_build_debug_term_skeleton(Head,PRTERM(FCode,N,ObjListCode)) :-
+	%% HiLog term, but not predicate - don't lop off the last argument
+	is_prterm(Head,FObj,N,_ObjList),
+	!,
+	( is_pratom(FObj,FAtom,_Index), flora_prlgdef(FAtom,N) ->
+	    fail
+	;
+	    flora_build_debug_term_skeleton(FObj,FCode),
+	    prvar_list(N,ObjListCode)
+	).
+
+flora_build_debug_term_skeleton(Head,Sk) :-
+	prvarfree_noindex(Head,Sk).
+
+/*********************************************************************
+  prvar_list(+N,-VarList)
+  generate a list of N new variables
+**********************************************************************/
+prvar_list(0,[]) :- !.
+prvar_list(N,[NV|Rest]) :-
+        new_varobj(NO_INDEX,NV),
+	M is N-1,
+	prvar_list(M, Rest).
+
+/*********************************************************************
+  prvarfree_noindex(+Term,-NewTerm)
+  succeeds when Term does not contain any prvaraibles except those as
+  the Caller argument of a predicate.  In the mean time, indexes of
+  tokens in user programs are ignored in order to remove duplicates
+**********************************************************************/
+prvarfree_noindex(Term,PRATOM(Atom,NO_INDEX)) :-
+	is_pratom(Term,Atom,_Index),
+	!.
+
+prvarfree_noindex(Term,_Var) :-
+	is_prvariable(Term,_Name,_Index),
+	!,
+	fail.
+
+prvarfree_noindex(Term,_Var) :-
+	is_prtransactionalvariable(Term,_Name,_Index),
+	!,
+	fail.
+
+prvarfree_noindex(Term,PRATOMLIT([A|NewCallerList],NO_INDEX)) :-
+        is_pratomlit(Term,[A|CallerList],_Index),
+	!,
+        ( CallerList == [] ->
+	    NewCallerList = []
+	;
+	    prvar_list(1,NewCallerList)
+	).
+
+prvarfree_noindex(Term,PRTRANSACTIONALATOMLIT([A,NewCaller],NO_INDEX)) :-
+        is_prtransactionalatomlit(Term,[A,_Caller],_Index),
+	!,
+	prvar_list(1,[NewCaller]).
+
+prvarfree_noindex(Term,NewTerm) :-
+	is_prtermlit(Term,FObj,N,ObjList),
+	!,
+        flora_trim_last(ObjList,ObjListWOCaller),
+        prvarfree_noindex(FObj,NF),
+        prvarfree_noindex_list(ObjListWOCaller,NObjListWOCaller),
+        new_varobj(NO_INDEX,NV),
+        flora_add_last(NObjListWOCaller,NObjList,NV),
+        NewTerm = PRTERMLIT(NF,N,NObjList).
+
+prvarfree_noindex(Term,NewTerm) :-
+	is_prtransactionaltermlit(Term,FObj,N,ObjList),
+	!,
+        flora_trim_last(ObjList,ObjListWOCaller),
+        prvarfree_noindex(FObj,NF),
+        prvarfree_noindex_list(ObjListWOCaller,NObjListWOCaller),
+        new_varobj(NO_INDEX,NV),
+        flora_add_last(NObjListWOCaller,NObjList,NV),
+        NewTerm = PRTRANSACTIONALTERMLIT(NF,N,NObjList).
+
+prvarfree_noindex(Term,NewTerm) :-
+	is_flogic(Term,_FLogic,_Arity,_OL),
+	!,
+        Term =.. [Wrapper|ObjList],
+        flora_trim_last(ObjList,ObjListWOCaller),
+        prvarfree_noindex_list(ObjListWOCaller,NObjListWOCaller),
+        new_varobj(NO_INDEX,NV),
+        flora_add_last(NObjListWOCaller,NObjList,NV),
+        NewTerm =.. [Wrapper|NObjList]. 
+
+prvarfree_noindex(Term,NewTerm) :-
+        is_list(Term),
+        !,
+        prvarfree_noindex_list(Term,NewTerm).
+
+prvarfree_noindex(Term,NewTerm) :-
+	Term =.. [Func|L],
+	prvarfree_noindex_list(L,NL),
+	NewTerm =.. [Func|NL].
+
+prvarfree_noindex_list([],[]) :- !.
+
+prvarfree_noindex_list([H|L],[NH|NL]) :-
+	prvarfree_noindex(H,NH),
+	prvarfree_noindex_list(L,NL).
+
+/*********************************************************************
+  generate_patches
+**********************************************************************/
+generate_patches :-
+ 	term_seen(Term),
+        flora_write_struct(Term,FLBODYPREFIX,Status),
+	flora_coder_error(Status),
+        put(0'.),nl,
+	fail.
+
+generate_patches :- !.
+
+/*********************************************************************
+  utilities for flora_build_skeleton
+**********************************************************************/
+is_flogic_3params(WRAP_ISA) :- !.
+is_flogic_3params(WRAP_SUB) :- !.
+is_flogic_3params(WRAP_METH) :- !.
+is_flogic_3params(WRAP_IMETH) :- !.
+is_flogic_3params(WRAP_MVDDEF) :- !.
+is_flogic_3params(WRAP_IMVDDEF) :- !.
+is_flogic_3params(WRAP_BOOLSIG) :- !.
+is_flogic_3params(WRAP_IBOOLSIG) :- !.
+is_flogic_3params(WRAP_TRANSIG) :- !.
+is_flogic_3params(WRAP_ITRANSIG) :- !.
+is_flogic_3params(WRAP_TRAN) :- !.
+
+is_flogic_4params(WRAP_MVDSIG) :- !.
+is_flogic_4params(WRAP_IMVDSIG) :- !.
+is_flogic_4params(WRAP_MVDCONDEF) :- !.
+is_flogic_4params(WRAP_IMVDCONDEF) :- !.
+is_flogic_4params(WRAP_MVD) :- !.
+is_flogic_4params(WRAP_IMVD) :- !.
+is_flogic_4params(WRAP_MVDINC) :- !.
+is_flogic_4params(WRAP_IMVDINC) :- !.
+is_flogic_4params(WRAP_MVDTOLIST) :- !.
+is_flogic_4params(WRAP_IMVDTOLIST) :- !.
+
+/*********************************************************************
+  flora_build_skeleton(+Term, -Code)
+  builds the skeleton of Term
+  This is similar to flora_build_debug_skeleton, but the term is not
+  in intermediate form.
+  This predicate is called at run time (in the shell or to insert
+  skeletons for facts that were added to FDB storage)
+**********************************************************************/
+flora_build_skeleton([WRAP_HILOG,F|Arg],[WRAP_HILOG,FSkeleton|VList]) :-
+	!,
+	length(Arg,N),
+	var_list(N, VList),
+	flora_build_term_skeleton(F,FSkeleton).
+
+flora_build_skeleton([WRAP_TABLED_HILOG,F|Arg],[WRAP_TABLED_HILOG,FSkeleton|VList]) :-
+	!,
+	length(Arg,N),
+	var_list(N, VList),
+	flora_build_term_skeleton(F,FSkeleton).
+
+flora_build_skeleton([WRAP_ISA,_Obj1,Obj2,_Caller],[WRAP_SUB,_,OCode,_]) :-
+        !,
+        varfree(Obj2,OCode).
+
+flora_build_skeleton([WRAP_SUB,_Obj1,Obj2,_Caller],[WRAP_SUB,_,OCode,_]) :-
+        !,
+        varfree(Obj2,OCode).
+
+flora_build_skeleton([Wrap,_Obj1,Obj2,_Caller],[Wrap,_,CCode,_]) :-
+	is_flogic_3params(Wrap),
+	!,
+	flora_build_term_skeleton(Obj2,CCode).
+
+flora_build_skeleton([Wrap,_Obj,Att,_Val,_Caller],[Wrap,_,ACode,_,_]) :-
+	is_flogic_4params(Wrap),
+	!,
+	flora_build_term_skeleton(Att,ACode).
+
+flora_build_term_skeleton(Term,Term) :-
+        atomic(Term),
+        !.
+
+flora_build_term_skeleton(Term,_) :-
+        var(Term),
+        !,
+        fail.
+
+flora_build_term_skeleton(Term,NewTerm) :-
+        %% HiLog Term
+        functor(Term,WRAP_HILOG,N),
+        N>0,
+        !,
+        Term =.. [WRAP_HILOG,Funct|_Args],
+        M is N-1,
+        var_list(M,VList),
+        flora_build_term_skeleton(Funct,FCode),
+        NewTerm =.. [WRAP_HILOG,FCode|VList].
+
+flora_build_term_skeleton(Term,NewTerm) :-
+        varfree(Term,NewTerm).
+        
+varfree(Atom,Atom) :-
+        atomic(Atom),
+        !.
+
+varfree(Var,_) :-
+        var(Var),
+        !,
+        fail.
+
+varfree(Term,NewTerm) :-
+        is_flora_callable_literal(Term),
+        !,
+        %% take care of the Caller argument
+        flora_trim_last(Term,TrimedTerm),
+        TrimedTerm =.. [Func|Args],
+        varfree_list(Args,NewArgs),
+        NewTrimedTerm =.. [Func|NewArgs],
+        flora_add_last(NewTrimedTerm,NewTerm,_).
+
+varfree(Term,NewTerm) :-
+        Term =.. [Func|Args],
+        varfree_list(Args,NewArgs),
+        NewTerm =.. [Func|NewArgs].
+
+varfree_list([],[]) :- !.
+varfree_list([H|L],[NH|NL]) :-
+        varfree(H,NH),
+        varfree_list(L,NL).
+
+var_list(0, []) :- !.
+var_list(N, [_|Rest]) :-
+	M is N-1,
+	var_list(M, Rest).
+
+
+/*****************************************
+* flora_define_predicate(+Predicate)
+* compute the skeleton of Predicate and insert it to the corresponding trie
+* (for the heads of dynamically inserted rules)
+*****************************************/
+flora_define_predicate(Predicate) :-
+        flora_decode_predicate(Predicate,PType,MName,WPrefix,PSymbol,AList),
+	( (PType==hilog) ->
+            flora_concat_atoms([WPrefix,WRAP_HILOG],Wrapper),
+	    QCode = [Wrapper,PSymbol|AList]
+	;
+	    QCode = [PSymbol|AList],
+            ( PSymbol == WRAP_SUB ->
+                AList = [C1,_C2|Rest],
+                QCode1 = [PSymbol,_,C1|Rest]
+            ;
+                true
+            )
+	),
+        flora_fld_storage_name(MName,FldStorage),
+        ( flora_build_skeleton(QCode,QSkeleton) ->
+            QSkeleton = [QFunct|QArgs],
+	    flora_module_predicate(QFunct,QArgs,MName,Skeleton),
+	    flora_db_insert_base(FldStorage,Skeleton)
+        ;
+            true
+        ),
+        ( nonvar(QCode1), flora_build_skeleton(QCode1,QSkeleton1) ->
+            QSkeleton1 = [QFunct1|QArgs1],
+	    flora_module_predicate(QFunct1,QArgs1,MName,Skeleton1),
+	    flora_db_insert_base(FldStorage,Skeleton1)
+        ;
+            true
+        ).
+
+
+/*****************************************************************************
+*    flora_temp_protect_call(+Predicate,+Id)
+*    flora_temp_unprotect_call(+Id) :-
+* +Predicate is the call to be recorded as temporarily protected
+*            from the undefinedness check.
+* +Id is a unique Id that is used to delete the call from the registry.
+*
+* This is similar to flora_define_predicate/1 above.
+*
+* Compute the skeleton of Predcate and insert it to a temporary storage
+* to prevent signalling undefinedness errrors. This is used for calls
+* like Call@Var in flrdynmod.P, because when Var is a variable then
+* undefinedness check for Call doesn't make sense.
+*****************************************************************************/
+flora_temp_protect_call(Predicate,Id) :-
+        flora_decode_predicate(Predicate,PType,MName,WPrefix,PSymbol,AList),
+	%% We keep the list of predicates, which are stripped of the caller arg
+	( (PType==hilog) ->
+            flora_concat_atoms([WPrefix,WRAP_HILOG],Wrapper),
+	    QCode = [Wrapper,PSymbol|AList]
+	;
+	    QCode = [PSymbol|AList]
+	),
+        candidate_list([QCode],MName,[Skeleton]),
+	assert(flora_disabled_undefinedness_check_registry(MName,Id,Skeleton)).
+
+flora_temp_unprotect_call(Id) :-
+	retractall(flora_disabled_undefinedness_check_registry(_,Id,_)).
+
+%% Tell if call is protected
+temporarily_protected_call(PredicateSkel) :-
+	flora_disabled_undefinedness_check_registry(_Mod,_Id,PredicateSkel).
+
+
+/****************************************************************************
+**  defined_by(+What,-ByWhat)
+**  +What is a list that represents a query.
+**  -ByWhat is a representation of a rule head that might define the call.
+****************************************************************************/
+defined_by([WRAP_ISA,_X,Y,_],[WRAP_ISA,_,Y,_]).
+defined_by([WRAP_ISA,_X,Y,_],[WRAP_SUB,_,Y,_]).
+defined_by([WRAP_ISA,_X,Y,_],[WRAP_SUB,Y,_,_]).
+defined_by([WRAP_SUB,_X,Y,_],[WRAP_ISA,_,Y,_]).
+defined_by([WRAP_SUB,_X,Y,_],[WRAP_SUB,_,Y,_]).
+defined_by([WRAP_SUB,_X,Y,_],[WRAP_SUB,Y,_,_]).
+
+defined_by([WRAP_METH,X,Y,_],[WRAP_METH,X,Y,_]).
+defined_by([WRAP_METH,X,Y,_],[WRAP_IMETH,X,Y,_]).
+defined_by([WRAP_IMETH,X,Y,_],[WRAP_IMETH,X,Y,_]).
+defined_by([WRAP_MVD,X,Y,Z,_],[WRAP_MVD,X,Y,Z,_]).
+defined_by([WRAP_MVD,X,Y,Z,_],[WRAP_IMVD,X,Y,Z,_]).
+defined_by([WRAP_MVD,X,Y,_Z,_],[WRAP_MVDDEF,X,Y,_]).
+defined_by([WRAP_MVD,X,Y,_Z,_],[WRAP_IMVDDEF,X,Y,_]).
+defined_by([WRAP_IMVD,X,Y,Z,_],[WRAP_IMVD,X,Y,Z,_]).
+defined_by([WRAP_IMVD,X,Y,_Z,_],[WRAP_IMVDDEF,X,Y,_]).
+defined_by([WRAP_MVDDEF,X,Y,_],[WRAP_MVD,X,Y,_Z,_]).
+defined_by([WRAP_MVDDEF,X,Y,_],[WRAP_IMVD,X,Y,_Z,_]).
+defined_by([WRAP_MVDDEF,X,Y,_],[WRAP_MVDDEF,X,Y,_]).
+defined_by([WRAP_MVDDEF,X,Y,_],[WRAP_IMVDDEF,X,Y,_]).
+defined_by([WRAP_IMVDDEF,X,Y,_],[WRAP_IMVD,X,Y,_Z,_]).
+defined_by([WRAP_IMVDDEF,X,Y,_],[WRAP_IMVDDEF,X,Y,_]).
+defined_by([WRAP_MVDSIG,X,Y,Z,_],[WRAP_MVDSIG,X,Y,Z,_]).
+defined_by([WRAP_MVDSIG,X,Y,Z,_],[WRAP_IMVDSIG,X,Y,Z,_]).
+defined_by([WRAP_IMVDSIG,X,Y,Z,_],[WRAP_IMVDSIG,X,Y,Z,_]).
+defined_by([WRAP_BOOLSIG,X,Y,_],[WRAP_BOOLSIG,X,Y,_]).
+defined_by([WRAP_BOOLSIG,X,Y,_],[WRAP_IBOOLSIG,X,Y,_]).
+defined_by([WRAP_IBOOLSIG,X,Y,_],[WRAP_IBOOLSIG,X,Y,_]).
+defined_by([WRAP_TRANSIG,X,Y,_],[WRAP_TRANSIG,X,Y,_]).
+defined_by([WRAP_TRANSIG,X,Y,_],[WRAP_ITRANSIG,X,Y,_]).
+defined_by([WRAP_ITRANSIG,X,Y,_],[WRAP_ITRANSIG,X,Y,_]).
+defined_by([WRAP_MVDCONDEF,W,X,Y,Z,_],[WRAP_MVDCONDEF,W,X,Y,Z,_]).
+defined_by([WRAP_MVDCONDEF,W,X,Y,Z,_],[WRAP_IMVDCONDEF,W,X,Y,Z,_]).
+defined_by([WRAP_IMVDCONDEF,W,X,Y,Z,_],[WRAP_IMVDCONDEF,W,X,Y,Z,_]).
+defined_by([WRAP_MVDSIGDEF,X,Y,_],[WRAP_MVDSIGDEF,X,Y,_]).
+defined_by([WRAP_MVDSIGDEF,X,Y,_],[WRAP_IMVDSIGDEF,X,Y,_]).
+defined_by([WRAP_IMVDSIGDEF,X,Y,_],[WRAP_IMVDSIGDEF,X,Y,_]).
+defined_by([WRAP_MVDINC,X,Y,Z,_],[WRAP_MVD,X,Y,Z,_]).
+defined_by([WRAP_MVDINC,X,Y,Z,_],[WRAP_IMVD,X,Y,Z,_]).
+defined_by([WRAP_IMVDINC,X,Y,Z,_],[WRAP_IMVD,X,Y,Z,_]).
+defined_by([WRAP_MVDTOLIST,X,Y,Z,_],[WRAP_MVD,X,Y,Z,_]).
+defined_by([WRAP_MVDTOLIST,X,Y,Z,_],[WRAP_IMVD,X,Y,Z,_]).
+defined_by([WRAP_IMVDTOLIST,X,Y,Z,_],[WRAP_IMVD,X,Y,Z,_]).
+defined_by([WRAP_TRAN,X,Y,_],[WRAP_TRAN,X,Y,_]).
+
+%% Find the list of skeletons Q for the list of predicate codes (1st argument)
+candidate_list([],_MName,[]) :- !.
+candidate_list([QCode|Rest],MName,[QSk|CanRest]) :-
+        ( (QCode=[WRAP_ISA|Args]; QCode=[WRAP_SUB|Args]) ->
+            QSkeleton = QCode
+        ;
+            ( flora_build_skeleton(QCode,QSkeleton) -> true; QSkeleton=QCode )
+        ),
+	QSkeleton = [QFunct|QArgs],
+	flora_module_predicate(QFunct,QArgs,MName,QSk),
+        candidate_list(Rest,MName,CanRest).
+
+%% Check if any of the skeletons unify with the base facts. If so,
+%% consider the skeleton to be defined by the inserted facts
+check_candidate_list([QSk|L],FdbStorage,Q) :-
+	flora_db_find_base(FdbStorage,QSk),!,Q=QSk;
+        check_candidate_list(L,FdbStorage,Q).
+
+%% Check skeletons in the candidate list against temporarily protected calls
+%% Succeeds, if matches
+check_temporarily_protected_calls([QSk|L]) :-
+	temporarily_protected_call(QSk), !;
+	check_temporarily_protected_calls(L).
+
+flora_error_notexported(Predicate):-
+	flora_decode_predicate(Predicate, _PType, MName,
+			       _WPrefix, _PSymbol, _AList),
+        flora_module_name(MName,ModuleType,ModuleName),
+	flora_decode_goal_as_atom(Predicate,PrintablePred),
+	MainMessage = 'Call to unexported method/predicate or attempt to update a non-updatable method/predicate ',
+	( ModuleType==systemmodule ->
+	    flora_concat_items([MainMessage, PrintablePred,
+				' in system module ', ModuleName],
+			       ErrorMsg)
+	;
+	    flora_concat_items([MainMessage, PrintablePred,
+				' in user module ', ModuleName],
+			       ErrorMsg)
+	),
+	flora_abort(FLORA_NOT_EXPORTED_EXCEPTION(Predicate,ErrorMsg)).
+
+
+flora_error_invalid_export(Predicate) :-
+	flora_abort(FLORA_NOT_EXPORTED_EXCEPTION(Predicate,'Attempt to export from an invalid or uninstantiated module/term.')).
+
+
+/******************************************************************************
+* flora_error_undefined(+Predicate)
+* flora_error_undefined(+Predicate) is called when the skeleton of Predicate
+* is missing from the FLD storage. Because the skeleton of a fact is not 
+* inserted into the FLD storage when the fact is inserted into the FDB storage,
+* Predicate might have been defined by some inserted facts.
+* flora_error_undefined(+Predicate) searches the FDB storage to see whether
+* such a fact exists. If yes, the skeleton of the fact is inserted into the
+* FLD storage; otherwise, a FLORA_UNDEFINED_EXCEPTION is thrown.
+******************************************************************************/
+flora_error_undefined(Predicate) :-
+	flora_decode_predicate(Predicate,PType,MName,WPrefix, PSymbol, AList),
+        flora_fdb_storage_name(MName,FdbStorage),
+        flora_fld_storage_name(MName,FldStorage),
+	( (PType==hilog) ->
+            flora_concat_atoms([WPrefix,WRAP_HILOG],Wrapper),
+	    QCode = [Wrapper,PSymbol|AList],
+            candidate_list([QCode],MName,CanList)
+	;
+            findall(QCode,defined_by([PSymbol|AList],QCode),QCodeList),
+            candidate_list(QCodeList,MName,CanList)
+	),
+
+	( check_candidate_list(CanList,FdbStorage,QSk),
+	  flora_decode_predicate(QSk, _PT, _MN, _WPrefix, PS, FAList),
+	  ( (PType==hilog) ->
+	      FCode = [Wrapper,PSymbol|FAList]
+	  ;
+	      FCode = [PS|FAList],
+              ( PS == WRAP_SUB ->
+                FAList = [Class1,_Class2|Rest],
+                FCode1 = [PS,_,Class1|Rest]
+              ;
+                true
+              )
+	  ),
+   	  (flora_build_skeleton(FCode,FSkeleton); nonvar(FCode1),flora_build_skeleton(FCode1,FSkeleton1)) ->
+            ( nonvar(FSkeleton) ->
+	      FSkeleton = [_FFunct|FArgs],
+	      QSk =.. [QNewFunct|_QArgs],
+	      FSk =.. [QNewFunct|FArgs],
+	      flora_db_insert_base(FldStorage,FSk),
+              (nonvar(FCode1),flora_build_skeleton(FCode1,FSkeleton1) ->
+	          FSkeleton1 = [_FFunct1|FArgs1],
+	          FSk1 =.. [QNewFunct|FArgs1],
+	          flora_db_insert_base(FldStorage,FSk1)
+              ;
+                  true
+              )
+            ;
+	      FSkeleton1 = [_FFunct1|FArgs1],
+	      QSk =.. [QNewFunct|_QArgs],
+	      FSk1 =.. [QNewFunct|FArgs1],
+	      flora_db_insert_base(FldStorage,FSk1)
+            ),
+	    !,
+	    fail
+	; check_temporarily_protected_calls(CanList) -> fail
+
+	; %% composite type
+          PType == flogic, (PSymbol == WRAP_ISA;PSymbol == WRAP_SUB),
+          AList = [O,C|Rest], nonvar(C), 
+          ((C=(C1,C2)); (C=(C1;C2)); (C=(C1-C2))),
+          flora_module_predicate(PSymbol,[O,C1|Rest],MName,P1),
+          flora_module_predicate(PSymbol,[O,C2|Rest],MName,P2),
+          not flora_error_undefined(P1),
+          not flora_error_undefined(P2),
+          !,
+          fail
+        ;
+	    ( PType==flogic, (PSymbol==WRAP_ISA ; PSymbol==WRAP_SUB) ->
+	        predicate_msg(PSymbol, AList, PMsg),
+		TypeMsg = 'Undefined class'
+	    ; PType==flogic ->
+	        predicate_msg(PSymbol, AList, PMsg),
+	 	TypeMsg = 'Undefined method'
+	    ;
+	        hilog_predicate_msg(PSymbol, AList, PMsg1),
+                ( Wrapper == WRAP_HILOG ->
+                    flora_concat_atoms([FL_TRAN,PMsg1],PMsg)
+                ;
+                    PMsg=PMsg1
+                ),
+		TypeMsg = 'Undefined predicate'
+	    ),
+	    ( MName=FL_FLORALIB(Name) ->
+		flora_concat_items([TypeMsg,' ',PMsg,' in system module ',Name],
+				   ErrorMsg)
+	    ;
+		flora_concat_items([TypeMsg,' ',PMsg,' in user module ',MName],
+				   ErrorMsg)
+	    )
+	),
+	flora_abort(FLORA_UNDEFINED_EXCEPTION(Predicate,ErrorMsg)).
+
+/*********************************************************************
+  predicate_msg(+PredicateSymbol, +ArgList, -PMsg)
+  generate a string from the predicate which is
+  more readable to the user
+**********************************************************************/
+predicate_msg(Term,Term) :-
+	atom(Term),
+	!.
+
+predicate_msg(Term,'?') :-
+	var(Term),
+	!.
+
+predicate_msg(Term,TC) :-
+	number(Term),
+	!,
+	term_to_atom(Term,TC).
+        %%%fmt_write_string(TC,'%S',arg(Term)).
+
+predicate_msg(Term,PMsg) :-
+	Term =.. [WRAP_HILOG,MainFunct|ArgList],
+	!,
+	predicate_msg(MainFunct, FMsg),
+	( ArgList = [] ->
+	    PMsg = FMsg
+	;
+	    varlist_to_str(ArgList, VMsg),
+	    flora_concat_atoms([FMsg,'(',VMsg,')'],PMsg)
+	).
+predicate_msg(Reified,PMsg) :-
+        flora_decode_goal_as_atom(Reified,PMsg).
+
+predicate_msg(WRAP_ISA,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?:', O2Msg],PMsg).
+
+predicate_msg(WRAP_SUB,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?::', O2Msg],PMsg).
+
+predicate_msg(WRAP_METH,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?[',O2Msg,']'],PMsg).
+
+predicate_msg(WRAP_IMETH,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?[*',O2Msg,']'],PMsg).
+
+predicate_msg(WRAP_MVDDEF,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?.',O2Msg,'[]'],PMsg).
+
+predicate_msg(WRAP_IMVDDEF,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?!',O2Msg,'[]'],PMsg).
+
+predicate_msg(WRAP_TRAN,[_O1, O2,_], PMsg) :-
+	!,
+	predicate_msg(O2, O2Msg),
+	flora_concat_atoms(['?[%',O2Msg,']'],PMsg).
+
+predicate_msg(WRAP_BOOLSIG,[_Obj, Att,_], PMsg) :-
+	!,
+	predicate_msg(Att, AMsg),
+	flora_concat_atoms(['?[=>',AMsg,']'],PMsg).
+
+predicate_msg(WRAP_IBOOLSIG,[_Obj, Att,_], PMsg) :-
+	!,
+	predicate_msg(Att, AMsg),
+	flora_concat_atoms(['?[*=>',AMsg,']'],PMsg).
+
+predicate_msg(WRAP_TRANSIG,[_Obj, Att,_], PMsg) :-
+	!,
+	predicate_msg(Att, AMsg),
+	flora_concat_atoms(['?[=>%',AMsg,']'],PMsg).
+
+predicate_msg(WRAP_ITRANSIG,[_Obj, Att,_], PMsg) :-
+	!,
+	predicate_msg(Att, AMsg),
+	flora_concat_atoms(['?[*=>%',AMsg,']'],PMsg).
+
+predicate_msg(WRAP_MVDSIG, [_Obj, Att, _Val,_], PMsg) :- 
+	!,
+	predicate_msg(Att,AMsg),
+	flora_concat_atoms(['?[',AMsg,'=>?]'],PMsg).
+
+predicate_msg(WRAP_MVDCONDEF, [_Obj, Att, _Lower, _Upper,_], PMsg) :- 
+	!,
+	predicate_msg(Att,AMsg),
+	flora_concat_atoms(['?[',AMsg,'{?:?}=>?]'],PMsg).
+
+predicate_msg(WRAP_IMVDSIG, [_Obj, Att, _Val,_], PMsg) :- 
+	!,
+	predicate_msg(Att,AMsg),
+	flora_concat_atoms(['?[',AMsg,'*=>?]'],PMsg).
+
+predicate_msg(WRAP_IMVDCONDEF, [_Obj, Att, _Lower, _Upper,_], PMsg) :- 
+	!,
+	predicate_msg(Att,AMsg),
+	flora_concat_atoms(['?[',AMsg,'{?:?}*=>?]'],PMsg).
+
+predicate_msg(WRAP_MVD, [_Obj, Att, _Val,_], PMsg) :- 
+	!,
+	predicate_msg(Att,AMsg),
+	flora_concat_atoms(['?[',AMsg,'->?]'],PMsg).
+
+predicate_msg(WRAP_IMVD, [_Obj, Att, _Val,_], PMsg) :- 
+	!,
+	predicate_msg(Att,AMsg),
+	flora_concat_atoms(['?[',AMsg,'*->?]'],PMsg).
+
+hilog_predicate_msg(PredicateSymbol, ArgList, PMsg) :-
+	predicate_msg(PredicateSymbol, PredMsg),
+	length(ArgList, N),
+	N1 is N-1, % chop off the extra Caller argument
+	flora_concat_items([PredMsg,'/',N1],PMsg).
+
+/*****************************************************
+ * varlist_to_str(+List, -String)
+ * produce a string of ?'s separated by comma
+ * the number of ?'s is the same as the number
+ * of elements in the input list
+ *****************************************************/
+varlist_to_str([_], '?') :- !.
+varlist_to_str([_H|T], Str) :-
+	varlist_to_str(T, RestStr),
+	flora_concat_atoms(['?,',RestStr],Str).

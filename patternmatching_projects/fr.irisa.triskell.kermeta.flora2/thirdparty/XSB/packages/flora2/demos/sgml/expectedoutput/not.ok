@@ -1,0 +1,12 @@
+_$_$_flora'dyn_newoid5784[$order->0].  // @not
+_$_$_flora'dyn_newoid5784[not->>_$_$_flora'dyn_newoid5787].  // @not
+_$_$_flora'dyn_newoid5787[$order->1].  // @not
+_$_$_flora'dyn_newoid5787[formula->>_$_$_flora'dyn_newoid5788].  // @not
+_$_$_flora'dyn_newoid5788[$order->2].  // @not
+_$_$_flora'dyn_newoid5788[notation->tex].  // @not
+_$_$_flora'dyn_newoid5788[$text->>_$_$_flora'dyn_newoid5789].  // @not
+_$_$_flora'dyn_newoid5789[$order->3].  // @not
+_$_$_flora'dyn_newoid5789[$string->$$E = MC^2$$].  // @not
+_$_$_flora'dyn_newoid5788[$child(0)->_$_$_flora'dyn_newoid5789].  // @not
+_$_$_flora'dyn_newoid5787[$child(0)->_$_$_flora'dyn_newoid5788].  // @not
+_$_$_flora'dyn_newoid5784[$child(0)->_$_$_flora'dyn_newoid5787].  // @not

@@ -1,0 +1,250 @@
+\chapter{Debugging} \label{debugging}
+%====================================
+\index{debugger}
+
+\section{High-Level Tracing}
+%===========================
+\index{high-level tracing}
+\index{tracing!high-level}
+
+\ourprolog~ supports a version of the Byrd four-port debugger for debugging
+Prolog code.  In this release (\version), it does not work very well
+when debugging code involving tabled predicates.  If one only creeps
+(see below), the tracing can provide some useful information.  We do
+intend that future versions will have more complete debugging help for
+tabled evaluation.
+
+To turn on tracing, use {\tt trace/0}.  To turn tracing off, use {\tt
+notrace/0}.  
+\index{\texttt{notrace/0}}
+When tracing is on, the system will print a message each time a
+predicate is:
+\begin{enumerate} \index{debugger!ports}
+\item initially entered (Call), 
+\item successfully returned from (Exit), 
+\item failed back into (Redo), and
+\item completely failed out of (Fail).  
+\end{enumerate}
+At each port, a message is printed and the tracer stops and prompts
+for input.  (See the predicates {\tt show/1} and {\tt leash/1} described
+below to modify what is traced and when the user is prompted.)
+
+In addition to single-step tracing, the user can set spy points to influence
+how the tracing/debugging works.  A spy point is set using {\tt spy/1}.
+Spy points can be used to cause the system to enter the tracer when
+a particular predicate is entered. Also the tracer allows ``leaping'' from
+spy point to spy point during the debugging process.
+
+The debugger also has profiling capabilities, which can measure the cpu
+time spent in each call. The cpu time is measured only down to 0.0001-th
+of a second.
+
+When the tracer prompts for input, the user may enter a return, or a single
+character followed by a return, with the following meanings:
+\index{trace!options}
+\begin{description}
+\item[{\tt c, <CR>}: Creep] Causes the system to single-step to the next
+  port (i.e.\ either the entry to a traced predicate called by the executed
+  clause, or the success or failure exit from that clause).
+\item[{\tt a}: Abort]\index{abort!trace facility} Causes execution to abort
+  and control to return to the top level interpreter.
+\item[{\tt b}: Break] Calls the evaluable predicate {\em break}, thus
+  invoking recursively a new incarnation of the system interpreter.  The
+  command prompt at break level $n$ is
+  \begin{center}
+    {\tt $n$: \tt ?-}
+  \end{center}
+  The user may return to the previous break level by entering the system
+  end-of-file character (e.g.\ {\tt ctrl-D}), or typing in the atom 
+  {\tt end\_of\_file}; or to the top level interpreter by typing in
+  {\tt abort}.
+\item[{\tt f}: Fail] Causes execution to fail, thus transferring control to
+  the Fail port of the current execution.
+\item[{\tt h}: Help] Displays the table of debugging options.
+\item[{\tt l}: Leap] Causes the system to resume running the program, only
+  stopping when a spy-point is reached or the program terminates.  This
+  allows the user to follow the execution at a higher level than exhaustive
+  tracing.
+\item[{\tt n}: Nodebug] Turns off debug mode.
+\item[{\tt r}: Retry (fail)] Transfers to the Call port of the current
+  goal.  Note, however, that side effects, such as database modifications
+  etc., are not undone.
+\item[{\tt s}: Skip] Causes tracing to be turned off for the entire
+  execution of the procedure.  Thus, nothing is seen until control comes
+  back to that procedure, either at the Success or the Failure port.
+\item[{\tt q}: Quasi-skip] This is like Skip except that it does not mask
+  out spy points.
+\item[{\tt S}: Verbose skip] Similar to {\tt Skip} mode, but trace
+  continues to be printed. The user is prompted again when the current call
+  terminates with success or failure.  This can be used to obtain a full
+  trace to the point where an error occurred or for code profiling. (See
+  more about profiling below.)
+\item[{\tt e}: Exit] Causes immediate exit from \ourprolog\ back to the
+  operating system.
+\end{description}
+
+Other standard predicates that are useful in debugging are:
+
+\begin{description}
+\ouritem{spy(Preds)} \index{\texttt{spy/1}}
+%\predindex{spy/1~(L)}
+    where {\tt Preds} is a spy specification or a list of such
+    specifications, and must be instantiated. This predicate sets spy
+    points (conditional or unconditional) on predicates.  A spy
+    specification can be of several forms. Most simply, it is a term
+    of the form $P$/$N$, where $P$ is a predicate name and $N$ its
+    arity.  Optionally, only a predicate name can be provided, in
+    which case it refers to all predicates of any arity currently
+    defined in {\tt usermod}.  It may optionally may be prefixed by a
+    module name, e.g.  $ModName$:$P$/$N$. (Again, if the arity is
+    omitted, the specification refers to all predicates of any arity
+    with the given name currently defined in the given module.)  A spy
+    specification may also indicate a conditional spy point. A
+    conditional spy specification is a Prolog rule, the head
+    indicating the predicate to spy, and the body indicating
+    conditions under which to spy. For example, to spy the predicate
+    p/2 when the first argument is not a variable, one would write:
+    $spy (p(X,\_):-nonvar(X)).$ (Notice that the parentheses around
+    the rule are necessary). The body may be empty, i.e., the rule may
+    just be a fact.  The head of a rule may also be prefixed (using
+    $:$) with a module name. One should not put both conditional and
+    unconditional spy points on the same predicate.
+
+\ouritem{nospy(Preds)} \index{\texttt{nospy/1}}
+%\predindex{nospy/1~(L)}
+    where {\tt Preds} is a spy specification, or a list of such
+    specifications, and must be instantiated at the time of call.  What
+    constitutes a spy specification is described above under {\tt spy}.
+    {\tt nospy} removes spy points on the specified predicates. If a
+    specification is given in the form of a fact, all conditional spy points
+    whose heads match that fact are removed.
+
+\ouritem{debug} \index{\texttt{debug/0}} 
+%\predindex{debug/0~(L)}
+    Turns on debugging mode.
+    This causes subsequent execution of predicates with trace or spy
+    points to be traced, and is a no-op if there are no such predicates.
+    The predicates {\tt trace/1} and {\tt spy/1} cause debugging mode
+    to be turned on automatically.
+
+\ouritem{nodebug} \index{\texttt{nodebug/0}}
+%\predindex{nodebug/0~(L)}
+    Turns off debugging mode.  This causes trace and spy points to be ignored.
+
+\ouritem{debugging} \index{\texttt{debugging/0}}
+%\predindex{debugging/0~(L)}
+    Displays information about whether debug mode is on or not, and lists
+    predicates that have trace points or spy points set on them.
+
+\ouritem{debug\_ctl(option,value)} \index{\texttt{debug\_ctl/2}}
+   {\tt debug\_ctl/2} performs debugger control functions as described below.
+   These commands can be entered before starting a trace or inside the trace.
+   The latter can be done by responding with ``{\tt b}'' at the prompt,
+   which recursively invokes an XSB sub-session. At this point, you can
+   enter the debugger control commands and type \verb|end_of_file.| This
+   returns XSB back to the debugger prompt, but with new settings.
+   %%
+   \begin{enumerate}
+   \item {\tt debug\_ctl(prompt, off)} Set non-interactive mode globally.
+     This means that trace will be printed from start to end, and the user
+     will never be prompted during the trace.
+    \item {\tt debug\_ctl(prompt, on)} 
+      Make tracing/spying interactive.
+    \item {\tt debug\_ctl(profile, on)}  
+      Turns profiling on. This means that each time a call execution
+      reaches the {\tt Fail} or {\tt Exit} port, CPU time spent in that
+      call will be printed. The actual call can be identified by locating a
+      {\tt Call}  prompt that has the same number as the ``cpu time''
+      message.
+    \item {\tt debug\_ctl(profile, off)}  
+      Turns profiling off.
+    \item {\tt debug\_ctl(redirect, +File)} 
+      Redirects debugging output to a file. This also includes program output,
+      errors and warnings.
+      Note that usually you cannot see the contents of {\tt +File} until it
+      is closed, {\it i.e.}, until another redirect operation is performed
+      (usually {\tt debug\_ctl(redirect, tty)}, see next).
+    \item {\tt debug\_ctl(redirect, tty)}     
+      Attaches the previously redirected debugging, error, program output,
+      and warning streams back to the user terminal.
+    \item {\tt debug\_ctl(show, +PortList)}  
+      Allows the user to specify at which ports should trace messages be
+      printed. {\tt PortList} must be a list of port names, i.e., a sublist
+      of ['Call', 'Exit', 'Redo', 'Fail']. 
+    \item {\tt debug\_ctl(leash, +PortList)}  
+      Allows the user to specify at which ports the tracer should stop
+      and prompt the user for direction.  {\tt PortList} must be a list of
+      port names, i.e., a sublist of ['Call', 'Exit', 'Redo', 'Fail'].  Only
+      ports that are {\tt show}-n can be {\tt leash}-ed. 
+    \item {\tt debug\_ctl(hide, +PredArityPairList)}  
+      The list must be of the form {\tt [P1/A1, P2/A2, ...]}, {\it i.e.},
+      each either must specify a predicate-arity pair. Each predicate on
+      the list will become non-traceable. That is, during the trace, each
+      such predicate will be treated as an black-box procedure, and trace
+      will not go into it.
+    \item {\tt debug\_ctl(unhide, ?PredArityPairList)} If the list is a
+      predicate-arity list, every predicate on that list will become
+      traceable again. Items in the list can contain variables. For
+      instance, {\tt debug\_ctl(unhide, [\_/2])} will make all 2-ary that
+      were previously made untraceable traceable again.  As a special case,
+      if {\tt PredArityPairList} is a variable, all predicates previously
+      placed on the ``untraceable''-list will be taken off.
+    \item {\tt debug\_ctl(hidden, -List)}
+      This returns the list of predicates that the user said should not be
+      traced.
+   \end{enumerate}
+   %%
+\end{description}
+
+
+\section{Low-Level Tracing}
+%--------------------------------------------------
+\index{low-level tracing} \index{tracing!low-level}
+
+\ourprolog\ also provides a facility for low-level tracing of execution.
+This can be activated by invoking the emulator with the {\tt -T} option
+(see Section~\ref{sec:EmuOptions}), or through the predicate {\tt trace/0}.
+\index{\texttt{\$trace/0}} 
+It causes trace information to be printed out at every call (including
+those to system trap handlers).  The volume of such trace information
+can very become large very quickly, so this method of tracing is not
+recommended in general.
+
+XSB debugger also provides means for the low-level control of what must be
+traced. Normally, various low-level predicates are masked out from the
+trace, since these predicates do not make sense to the application programmer.
+However, if tracing below the application level is needed, you can retract
+some of the facts specified in the file {\tt syslib/debugger\_data.P}
+(and in some cases assert into them). All these predicates are documented
+in the header of that file. Here we only mention the four predicates that an
+XSB developer is more likely to need. To get more trace, you should retract
+from the first three predicates and assert into the last one.
+%%
+\begin{itemize}
+\item {\tt hide\_this\_show(Pred,Arity)}: specifies calls (predicate name and
+  arity) that the debugger should {\tt not} show at the prompt. However,
+  the evaluation of this hidden call {\tt is} traced.
+\item {\tt hide\_this\_hide(Pred,Arity)}: specifies calls to hide. Trace
+  remains off while evaluating those predicates. Once trace is off, there
+  is no way to resume it until the hidden predicate exits or fails.
+\item  {\tt show\_this\_hide(Pred,Arity)}: calls to show at the
+  prompt. However, trace is switched off right after that.
+\item  {\tt trace\_standard\_predicate(Pred,Arity)}: Normally trace doesn't
+  go inside standard predicates ({\it i.e.}, those specified in
+  {\tt syslib/std\_xsb.P}. If you need to trace some of those, you must
+  {\tt assert} into this predicate.
+\end{itemize}
+%%
+In principle, by retracting all facts from the first three predicates and
+asserting enough facts into the last one, it is possible to achieve the
+behavior that approximates the {\tt -T} option. However, unlike {\tt -T},
+debugging can be done interactively. This does not obviate {\tt -T},
+however. First, it is easier to use {\tt -T} than to issue multiple asserts
+and retracts. Second, {\tt -T} can be used when the error occurs early on,
+before the moment when XSB shows its first prompt.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "manual1"
+%%% End: 

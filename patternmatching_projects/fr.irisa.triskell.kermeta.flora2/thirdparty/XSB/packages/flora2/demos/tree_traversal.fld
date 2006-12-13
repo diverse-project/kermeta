@@ -1,0 +1,7 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'dfs',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'left',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'right',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'val',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(mvd)(__newvar1,'flapply'('cpu',__newvar4),__newvar2,__newvar3).

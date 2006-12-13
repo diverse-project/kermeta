@@ -1,0 +1,1116 @@
+\section{Information about the System State} \label{State}
+%========================================================
+\index{state of the system} \index{system, state of}
+
+Various aspects of the state of an instance of XSB --- information
+about what predicates, modules, or dynamic clauses have been loaded,
+their object files, along with other information can be inspected in
+ways similar to many Prolog systems.  However, because the atom-based
+module system of XSB may associate structures with particular modules,
+predicates are provided to inspect these elements as well.  The
+following descriptions of {\em state} predicates use the terms {\em
+predicate indicator}, {\em term indicator} and {\em current module} to
+mean the following:
+\index{predicate indicator}
+\index{term indicator}
+\begin{itemize}
+\item By {\em predicate indicator} \index{predicate indicator} we mean a
+      {\em compound term} of the form {\tt M:F/A} or simply {\tt F/A}.
+      When the predicate indicator is fully instantiated, {\tt M} and {\tt F}
+      are atoms representing the {\em module name} and the {\em functor} 
+      of the predicate respectively and {\tt A} is a non negative integer 
+      representing its {\em arity}.
+
+      Example: {\tt usermod:append/3}
+\item By {\em term indicator} \index{term indicator} we mean a predicate or
+      function symbol of arity N followed by a sequence of N variables
+      (enclosed in parentheses if N is greater than zero).  A term indicator
+      may optionally be prefixed by the module name, thus it can be of the
+      form {\tt M:Term}.
+
+      Example: {\tt usermod:append(\_,\_,\_)}
+\item A module {\tt M} becomes a {\em current (i.e. ``known'') module} as
+      soon as it is loaded in the system or when another module that is
+      loaded in the system imports some predicates from module {\tt M}.
+
+      Note that due to the dynamic loading of \ourprolog, a module can be 
+      current even if it has not been loaded, and that some predicates of 
+      that module may not be defined. In fact, a module can be current even
+      if it does not exist.  This situation occurs when a predicate is 
+      improperly imported from a non-existent module.  Despite this, 
+      a module can never lose the property of being {\em current}.
+\end{itemize}
+
+\begin{description}
+
+\ournewitem{current\_input(?Stream)}{ISO}\index{\texttt{current\_input/1}}
+    Succeeds iff stream {\tt Stream} is the current input stream, or 
+    procedurally unifies {\tt Stream} with the current input stream.
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Stream} is neither a variable nor a stream identifier
+\bi
+\item 	{\tt domain\_error(stream\_or\_variable,Stream))}
+\ei
+\ei
+
+\ournewitem{current\_output(?Stream)}{ISO}\index{\texttt{current\_output/1}}
+    Succeeds iff stream {\tt Stream} is the current output stream, or 
+    procedurally unifies {\tt Stream} with the current output stream.
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Stream} is neither a variable nor a stream identifier
+\bi
+\item 	{\tt domain\_error(stream\_or\_variable,Stream))}
+\ei
+\ei
+
+\ournewitem{current\_prolog\_flag(?Flag\_Name, ?Value)}{ISO}
+\index{\texttt{current\_prolog\_flag/2}}
+%
+{\tt current\_prolog\_flag/2} allows the user to examine both dynamic
+aspects of XSB along with certain non-changable ISO
+flags~\footnote{The ISO flags {\tt
+char\_conversion} and {\tt double\_quotes} are not yet
+implemented.}.  This predicate is based upon the predicate {\tt
+xsb\_flag/2}.
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Flag\_Name} is neither a variable nor an atom.
+\bi
+\item 	{\tt domain\_error(atom\_or\_variable,Flag\_Name)}
+\ei
+\ei
+
+\ournewitem{set\_prolog\_flag(?Flag\_Name, ?Value)}{ISO}
+\index{\texttt{set\_prolog\_flag/2}}
+%
+{\tt set\_prolog\_flag/2} allows the user to change settable prolog
+flags.  Currently the only settable flag is the {\tt unknown} flag.
+Setting the flag {\tt unknown} to {\tt fail} results in calls to
+undefined predicates to quietly fail.  Setting it to {\tt warning}
+causes calls to undefined predicates to generate a warning and then
+fail.  Setting it to {\tt error} (the default) causes calls to
+undefined predicates to throw an error.
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Flag\_Name} is neither a variable nor an atom.
+\bi
+\item 	{\tt domain\_error(settable\_flag,Flag\_Name)}
+\ei
+\ei
+
+\ournewitem{current\_predicate(?Predicate\_Indicator)}{ISO}
+\index{\texttt{current\_predicate/1}}
+%
+{\tt current\_predicate/1} can be used to backtrack through indicators
+for loaded user or system predicates.  If {\tt Predicate\_Indicator}
+unifies with {\tt Module:F/A} all loaded predicates unifying with this
+indicator is returned.  If {\tt Predicate\_indicator} is {\tt F/A},
+{\tt current\_predicate/1} behaves as if it were called with the form
+{\tt usermod:F/A}.  Unlike {\tt current\_functor/1} {\tt
+current\_predicate/1}does not return indicators for predicates that
+have been imported but not actually loaded into code space.  For more
+detailed analysis of predicate properties, the predicate {\tt
+predicate\_property/2} can be used.
+
+As an example to backtrack through all of the predicates defined and loaded in
+module {\tt blah}, regardless of whether {\tt blah} is a system or a
+user defined module, use:
+
+    \stuff{
+    \> \>	| ?- current\_predicate(blah:Predicate).
+    }
+
+    In this case {\tt Predicate} will have the form: {\tt Functor/Arity}.
+
+    To backtrack through all predicates defined and loaded in any current 
+    module, use:
+
+    \stuff{
+    \> \>	| ?- current\_predicate(Module:Functor/Arity).
+    }
+
+    This succeeds once for every predicate that is loaded in \ourprolog's 
+    database.
+
+    To find the predicates having arity 3 that are loaded in {\tt
+    usermod}, use:
+
+    \stuff{
+    \> \>	| ?- current\_predicate(usermod:Functor/3).
+    }
+
+    while to find all predicates loaded in the global modules of the system
+    regardless of their arity, use:
+
+    \stuff{
+    \> \>	| ?- current\_predicate(usermod:Predicate). \\
+    }
+
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Predicate\_indicator} is neither a variable nor a predicate indicator
+\bi
+\item 	{\tt type\_error(predicate\_indicator,Predicate\_indicator))}
+\ei
+\ei
+
+%-----------------------------------------------------------------------------------------------
+\comment{
+%TLS: I don't see that this gives us anything useful over
+%current_predicate/1, so why confuse the user?
+%\ouritem{current\_predicate(?Name, ?Term\_Indicator)}
+%\index{\texttt{current\_predicate/2}}
+%    Succeeds iff {\tt Term\_Indicator} is the most general term 
+%    corresponding to one of the predicates having functor {\tt Name} that are 
+%    defined and loaded in a particular module in the database. 
+%    (The module can be either system or user defined).
+%    Or procedurally, {\tt current\_predicate/2}
+%    unifies {\tt Name} with the name of a loaded predicate, and 
+%    {\tt Term\_Indicator} with the most general term corresponding to that
+%   predicate.  The flavours of this predicate are analogous to those of 
+%    {\tt current\_predicate/1} and behave according to whether 
+%    {\tt Term\_Indicator} has one of the following two forms:
+%    \begin{enumerate}
+%    \item{\tt Module:Term.}
+%    \item{\tt Term} (module is assumed to be usermod).
+%    \end{enumerate}
+%    If {\tt Term\_Indicator} is uninstantiated, then this predicate succeeds
+%    only for {\tt usermod}. Like {\tt current\_predicate/1} only 
+%    predicates that have a property in the following set:
+%    \begin{center}
+%    {\tt $\{$ loaded, dynamic, foreign $\}$ }
+%    \end{center}
+%    (see {\tt predicate\_property/2} below) are reported.
+%
+%    For example, if predicates {\tt foo/1} and {\tt foo/3} are defined and
+%    loaded into module {\tt blah}, the following query will return:
+%
+%    \stuff{
+%    \>	\>	| ?- current\_predicate(foo, blah:Term).\\
+%    \>  \>						\\
+%    \>	\>      Term = foo(\_638788,\_638792,\_638796);	\\
+%    \>  \>						\\
+%    \>	\>	Term = foo(\_638788);			\\
+%    \>  \>						\\
+%    \>	\>	no
+%    }
+%
+%    If a module is specified, {\tt current\_predicate/2} succeeds only for
+%    those predicates which are defined and loaded in that module. Unless 
+%    the module is one of the global modules, {\tt current\_predicate/2} fails
+%    for those predicates which are imported into that module.
+%
+%    On the other hand, the goal:
+%
+%    \stuff{
+%    \>	\>	| ?- current\_predicate(Name, Term).
+%    }
+%
+%    can be used to backtrack through every predicate that is loaded in the
+%    global modules of \ourprolog's database.
+%
+%    Note that the order of term generation is undetermined. Once again, 
+%    there are no error conditions associated with this predicate; if its
+%    argument is not what it should be, the predicate simply fails.
+%
+%\ouritem{current\_functor(?Name, ?Term\_Indicator)}
+%\index{\texttt{current\_functor/2}}
+%    Succeeds iff {\tt Term\_Indicator} is the most general term 
+%    corresponding to one of the currently known terms having {\tt Name} 
+%    as their functor appearing in a current module.  (Both system and user 
+%    defined modules are checked).  Or procedurally, 
+%    {\tt current\_functor/2} unifies {\tt Name} with the name of a functor 
+%    known to the database, and {\tt Term\_Indicator} with the most 
+%    general term corresponding to that functor. The flavours of this predicate 
+%    are analogous to the ones of {\tt current\_functor/1} according to 
+%    whether {\tt Term\_Indicator} has one of the following two forms:
+%    \begin{enumerate}
+%    \item{\tt Module:Term.}
+%    \item{\tt Term} (for global modules).
+%    \end{enumerate}
+%    If {\tt Term\_Indicator} is uninstantiated, then this predicate succeeds
+%    only for global modules.  
+%    As in {\tt current\_functor/1} even unloaded predicates are reported
+%    (if they have been imported and are are known to the database).
+%
+%    For example, if a predicate {\tt foo/2} and and a function symbol 
+%    {\tt foo/1} are defined into module {\tt blah}, the following query 
+%    will return:
+%
+%    \stuff{
+%    \>	\>	| ?- current\_functor(foo, blah:Term).	\\
+%    \>  \>						\\
+%    \>	\>      Term = foo(\_638788,\_638792);		\\
+%    \>  \>						\\
+%    \>	\>	Term = foo(\_638788);			\\
+%    \>  \>						\\
+%    \>	\>	no
+%    }
+%
+%    If a module is specified, {\tt current\_functor/2} succeeds only for
+%    those functors (function and predicate symbols) which are defined in 
+%    that module. Unless the module is one of the global modules, 
+%    {\tt current\_functor/2} fails for the predicates which are imported 
+%    into that module.
+%
+%    On the other hand, the goal:
+%
+%    \stuff{
+%    \>	\>	| ?- current\_functor(Name, Term).
+%    }
+%
+%    can be used to backtrack through every known term {\tt Term} in the global
+%    modules of \ourprolog's database that has {\tt Name} as its functor.
+%
+%    Note that the order of term generation is undetermined. Once again, 
+%    there are no error conditions associated with this predicate; if its
+%    arguments are inappropriate, the predicate simply fails.
+}
+%--------------------------------------------------------------------------------------------------
+
+\ouritem{current\_module(?Module)}\index{\texttt{current\_module/1}}
+    The standard predicate {\tt current\_module/1} allows the user to
+    check whether a given module is {\em current} or to generate
+    (through backtracking) all currently known modules.  Succeeds iff
+    {\tt Module} is one of the modules in the database. This includes
+    both user modules and system modules.  For more detailed analysis
+    of module properties, the predicate {\tt module\_property/2}
+    can be used.
+
+    Note that predicate {\tt current\_module/1} succeeds for a given
+    module even if that module does not export any predicates. There
+    are no error conditions associated with this predicate; if its
+    argument does not unify with one of the current modules, {\tt
+    current\_module/1} simply fails.
+
+\ouritem{current\_module(?Module, ?ObjectFile)}\index{\texttt{current\_module/2}}
+    Predicate {\tt current\_module/2} gives the relationship between
+    the modules and their associated object file names. The file name
+    {\tt ObjectFile} must be absolute and end with the object file
+    extension for the system (by default, {\tt .xwam}).
+%
+    It is possible for a current module to have no associated file
+    name (as is the case for {\tt "usermod"}), or for the system to be
+    unable to determine the file name of a current module. In both
+    cases, predicate {\tt current\_module/1} will succeed for this
+    module, while {\tt current\_module/2} will fail. The system is
+    unable to determine the file name of a given module if that module
+    is not in one of the directories of the search path (see
+    Section~\ref{LibPath}).  Once again, there are no error conditions
+    associated with this predicate; if the arguments of {\tt
+    current\_module/2} are not correct, or {\tt Module} has no
+    associated {\tt File}, the predicate will simply fail.
+
+\ouritem{current\_functor(?Predicate\_Indicator)}
+\index{\texttt{current\_functor/1}}
+{\tt current\_predicate/1} can be used to backtrack through indicators
+for all non-atomic terms occurring in loaded modules.  If {\tt
+Predicate\_Indicator} unifies with {\tt Module:F/A} all term
+indicators unifying with {\tt F/A} in a module unifying with {\tt
+Module} are returned.  If {\tt Predicate\_indicator} is {\tt F/A},
+{\tt current\_predicate/1} behaves as if it were called with the form
+{\tt usermod:F/A}.  Unlike {\tt current\_predicate/1} {\tt
+current\_functor/1} returns not only structures occurring in
+predicates but predicates that are imported into loaded modules but
+are not yet themselves loaded.
+
+As an example, to backtrack through all of the functors of positive
+arity (function and predicate symbols) that appear in the global
+modules of the system regardless of whether they are system or a user
+defined, use:
+
+    \stuff{
+    \> \>	| ?- current\_functor(Functor/Arity), Arity > 0.
+    }
+
+    There are no error conditions associated with this predicate; if its 
+    argument is not a predicate indicator the predicate simply fails.
+
+\ouritem{current\_index(Functor/Arity,IndexSpec)}
+\index{\texttt{current\_index/2}}
+%
+XSB has a variety of ways to index dynamic predicate including
+alternate argument indexing, multiple argument indexing,
+star-indexing, and tries, as discussed in Section~\ref{sec:assert}.
+In addition XSB allows a choice of which argument to index for
+compiled predicates as well.  {\tt current\_index/2} returns the index
+specification for each functor/arity pair unifying with {\tt
+Functor/Arity} and visible from the calling context of  {\tt current\_index/2}.
+
+\ouritem{current\_atom(?Atom\_Indicator)}\index{\texttt{current\_atom/1}}
+    Generates (through backtracking) all currently known atoms, and unifies
+    each in turn with {\tt Atom\_Indicator}. 
+
+%??? need to define visible.
+\label{PredProp}
+\ouritem{predicate\_property(?Term\_Indicator, ?Property)}
+\index{\texttt{predicate\_property/2}}
+    The standard predicate {\tt predicate\_property/2} can be used to find 
+    the properties of any predicate that is visible to a particular module.
+    Succeeds iff {\tt Term\_Indicator} is a term indicator for a current 
+    predicate whose principal functor is a predicate having {\tt Property} 
+    as one of its properties. Or procedurally, {\tt Property} is unified 
+    with the currently known properties of the predicate having 
+    {\tt Term\_Indicator} as its skeletal specification.
+    
+    A brief description of {\tt predicate\_property/2} is as follows:
+    \begin{itemize} 
+\item If {\tt Term\_Indicator} is not a variable, and is a structure
+	or atom, then {\tt Property} is successively unified with the
+	various properties associated with {\tt Term\_Indicator}.  If
+	{\tt Term\_Indicator} is not a known to the system, the call
+	succeeds with {\tt Property} successively unified to {\tt
+	exported} and {\tt unclassified}.  These properties can be
+	considered as a default for any structure or atom.
+\item If {\tt Property} is bound to a valid predicate property, then {\tt
+	predicate\_property/2} successively unifies {\tt
+	Term\_Indicator} with the skeletal specifications of all
+	predicates known to the system having the specified {\tt
+	Property}.  
+\item If {\tt Term\_Indicator} is a variable, then
+	it is unified (successively through backtracking) with the
+	most general term for a predicate whose known properties are
+	unified with {\tt Property}.  
+\item If {\tt Term\_Indicator}
+	is not a term indicator, or if {\tt Property} is not a valid
+	predicate property, the call fails.  
+\end{itemize} 
+\noindent
+For example, all the loaded predicate skeletal specifications in
+module {\tt "usermod"} may be enumerated using:
+
+    \stuff{
+    \>   \>	| ?- predicate\_property(Pred, loaded).
+    }
+
+    Also the following query finds all predicate skeletal specifications that 
+    are exported by module {\tt blah}:
+
+    \stuff{
+    \>   \>	| ?- predicate\_property(blah:Pred, exported).
+    }
+
+    Currently, the following properties are associated with predicates 
+    either implicitly or by declaration.  Double lines show property
+    categories, and a predicate can have at most one property of each
+    category.
+
+    \begin{center}
+    \begin{tabular}{||l|l||}               \hline 
+	{\em Property}		& {\em Explanation} \\ \hline \hline
+	{\tt unclassified}	& 
+		The predicate symbol is not yet classified according  \\
+	&	to this category. This property has various meanings. \\ 
+	&	Usually for exported predicate symbols in system or   \\
+	&	user defined modules it means that the predicate is   \\
+	&	yet unloaded (because it has not been used).	      \\
+	&	In {\tt usermod} it usually means that the predicate \\
+	&	is either a function symbol, or an unloaded predicate \\
+	&	symbol (including constants). \\ \hline
+	{\tt dynamic}	& 
+		The predicate is dynamic. \\ \hline
+	{\tt loaded}		& 
+		The predicate (including internal predicates) is a \\ 
+	&	Prolog predicate loaded into the module in question; \\
+	&	this is always the case for predicates in {\tt usermod}.\\ 
+		\hline
+	{\tt unloaded}		& 
+		The predicate is yet unloaded into the module \\
+	&	in question.\\ \hline
+	{\tt foreign}	& 
+		The predicate is a foreign predicate. This implies that  \\ 
+	&	the predicate is already loaded in the system, because	 \\
+	&	currently there is no way for XSB  to know that a \\
+	&	predicate is a foreign predicate until it is loaded in	 \\
+	&	the system.\\ \hline
+%	{\tt function}	& 
+%		The predicate symbol is declared as a function. \\ \hline
+	\hline
+	{\tt exported}	&
+		The predicate symbol is exported by the module in \\ 
+	&	question; in other words the predicate symbol is \\
+	&	visible to any other module in the system. \\ \hline
+	{\tt local}	& 
+		The predicate symbol is local to the module \\
+	&	in question. \\ \hline
+	{\tt imported\_from(Mod)}	& 
+		The predicate symbol is imported into the module in \\
+	&	question from module {\tt Mod}. \\ \hline
+	\hline
+	{\tt spied}		&
+		The predicate symbol has been declared spied \\
+	&	(either conditionally or unconditionally). \\ \hline
+	\hline
+	{\tt tabled}	& 
+		The predicate has been declared tabled. \\ \hline
+	\hline
+	{\tt shared}	& 
+		The predicate has been declared shared in the \\
+        &       multi-threaded engine.  This means that any dynamic \\
+        &       code or tables for this predicate will be shared among \\
+        &       threads, but it does not affect static, non-tabled code. \\ \hline
+	\hline
+	{\tt xsb\_standard\_pred}	& 
+		The predicate symbol has the same Functor and Arity as  \\
+	&	one of XSB's standard predicates, and is available to \\
+	&	the user without needing to load a file or import the \\
+	&	predicate from a module. \\ \hline
+    \end{tabular}
+    \end{center}
+
+    Finally, since {\tt dynamic} is usually declared as an operator with 
+    precedence greater than 999, writing the following:
+
+    \stuff{
+    \>   \>	| ?- predicate\_property(X, dynamic).
+    }
+
+    will cause a syntax error. The way to achieve the desired result is to
+    parenthesize the operator like in:
+
+    \stuff{
+    \>   \>	| ?- predicate\_property(X, (dynamic)).
+    }
+
+
+\ouritem{module\_property(?Module, ?Property)}\index{\texttt{module\_property/2}}
+    The standard predicate {\tt module\_property/2} can be used to find the
+    properties of any current module.
+    Succeeds iff {\tt Module} is the name of a current module having 
+    {\tt Property} as one of its properties. Or procedurally, {\tt Property}
+    is unified with the currently known properties of the module having 
+    {\tt Module} as its name.
+
+    Currently, the following properties are associated with modules 
+    implicitly 
+
+    \begin{center}
+    \begin{tabular}{||l|l||}               \hline 
+	{\em Property}		& {\em Explanation} \\ \hline \hline
+	{\tt unloaded}		& 
+		The module (including system modules) though it is \\
+	&	current, is yet unloaded in the system. \\ \hline
+	{\tt loaded}		& 
+		The module (including system modules) is loaded in the \\
+	&	system; this is always the case for {\tt usermod}.\\ \hline
+    \end{tabular}
+    \end{center}
+
+\ouritem{listing}\index{\texttt{listing/0}}
+    Lists in the current output stream the clauses for all dynamic
+    predicates found in module {\tt usermod}.  Note that {\tt listing/0}
+    does not list any compiled predicates unless they have the
+    {\tt dynamic} property (see {\tt predicate\_property/2}).  A
+    predicate gets the {\tt dynamic} property when it is explicitly
+    declared as {\tt dynamic}, or automatically acquires it when some
+    clauses for that predicate are asserted in the database.  In
+    cases where a predicate was compiled but converted to {\tt dynamic}
+    by asserting additional clauses for that predicate, {\tt listing/0}
+    will just display an indication that there exist compiled clauses
+    for that predicate and only the dynamically created clauses of the
+    predicate will be listed.  For example:
+
+    \stuff{ 
+    \>   \>     | ?- [user]. \\ 
+    \>   \>     [Compiling user] \\
+    \>   \>     a(X) :- b(X). \\
+    \>   \>     a(1). \\
+    \>   \>     [user compiled, cpu time used: 0.3 seconds] \\
+    \>   \>     [user loaded] \\
+    \>   \>     \\
+    \>   \>     yes \\
+    \>   \>     | ?- assert(a(3)). \\
+    \>   \>     \\
+    \>   \>     yes \\
+    \>   \>     | ?- listing. \\
+    \>   \>     \\
+    \>   \>     a(A) :- \\
+    \>   \>  \>    \$compiled. \\
+    \>   \>     a(3). \\
+    \>   \>     \\
+    \>   \>     yes \\
+    }
+
+    Predicate {\tt listing/0} always succeeds.  The query:
+
+    \stuff{
+    \>   \>     | ?- listing.
+    }
+
+    \noindent
+    is just a notational shorthand for the query:
+
+    \stuff{
+    \>   \>     | ?- listing(X).
+    }
+
+\ouritem{listing(+Predicate\_Indicator)}\index{\texttt{listing/1}}
+    If {\tt Predicate\_Indicator} is a variable then {\tt listing/1} is
+    equivalent to {\tt listing/0}.
+    If {\tt Predicate\_Indicator} is an atom, then {\tt listing/1} 
+    lists the dynamic clauses for all predicates of that name found in 
+    module {\tt usermod} of the database.
+    The argument {\tt Predicate\_Indicator} can also be a predicate 
+    indicator of the form {\tt Name/Arity} in which case only the 
+    clauses for the specified predicate are listed.
+    Finally, it is possible for {\tt Predicate\_Indicator}
+    to be a list of predicate indicators and/or atoms; e.g.
+
+    \stuff{
+    \>   \>     | ?- listing([foo/2, bar, blah/4]).
+    }
+
+    If {\tt Predicate\_Indicator} is not a variable, an atom or a predicate 
+    indicator (or list of predicate indicators) of the form {\tt Name/Arity}, 
+    predicate {\tt listing/1} will simply fail.
+
+    In future releases of \ourprolog, we intend to allow the user to
+    specify a predicate indicator of the form {\tt Module:Name/Arity} 
+    as argument of {\tt listing/1}.
+
+\ouritem{xsb\_configuration(Feature\_Name, ?Value)}
+\index{\texttt{xsb\_configuration/2}}
+    Succeeds iff the current value of the XSB  feature {\tt
+    Feature\_Name} is {\tt Value}.
+
+    This predicate provides information on a wide variety of features
+    related to how XSB was built, including the compiler used, the compiler
+    and loader flags, the machine and OS on which XSB was built, the
+    release number, the various directories that XSB uses to find its
+    libraries, etc.
+
+    To find all features and their values, ask the following query:
+
+    \stuff{
+    \>   \>	| ?- xsb\_configuration(FeatureName, Value), fail.
+    }
+
+    Here is how {\tt xsb\_configuration} might look like:
+
+\begin{verbatim}
+    xsb_configuration(architecture, 'i686-pc-linux-gnu').
+    %% configuration is usualy the same as architecture, but it can also
+    %% contain special tags, {\it e.g.}, i686-pc-linux-gnu-dbg, for a verion
+    %% built with debugging enabled.
+    xsb_configuration(configuration, 'i686-pc-linux-gnu-dbg').
+    xsb_configuration(host_os, 'linux-gnu').
+    xsb_configuration(os_version, '2.34').
+    xsb_configuration(os_type, 'linux-gnu').
+    xsb_configuration(host_vendor, 'pc').
+    xsb_configuration(host_cpu,  'i686').
+    xsb_configuration(compiler, 'gcc').
+    xsb_configuration(compiler_flags, '  -ansi -pedantic -Wall -g').
+    xsb_configuration(loader_flags, ' -lm -ldl -Wl,-export-dynamic').
+    xsb_configuration(compile_mode, 'debug').
+    %% The following is XSB release information
+    xsb_configuration(major_version, '1').
+    xsb_configuration(minor_version, '9').
+    xsb_configuration(beta_version, '3').
+    xsb_configuration(version, '1.9-b3').
+    xsb_configuration(codename, 'Code Breaker').
+    xsb_configuration(release_date, date(1998, 10, 17)).
+    %% XSB query evaluation directive
+    xsb_configuration(scheduling_strategy, '(batched)').
+    %% Support for other languages
+    xsb_configuration(perl_support, 'yes').
+    xsb_configuration(perl_archlib, '/usr/lib/perl5/i386-linux/5.00404').
+    xsb_configuration(perl_cc_compiler, 'cc').
+    xsb_configuration(perl_ccflags, '-Dbool=char -DHAS_BOOL -I/usr/local/include').
+    xsb_configuration(perl_libs, '-lnsl -lndbm -lgdbm -ldb -ldl -lm -lc -lposix -lcrypt').
+    xsb_configuration(javac, '/usr/bin/javac').
+    /* Tells where XSB is currently residing; can be moved */
+    xsb_configuration(install_dir, InstallDir) :- ...
+    /* User home directory. Usually HOME. If that is null, then it would
+       be the directory where XSB is currently residing.
+       This is where we expect to find the .xsb directory */
+    xsb_configuration(user_home, Home) :- ...
+    /* Where XSB invocation script is residing */
+    xsb_configuration(scriptdir, ScriptDir) :- ...
+    /* where are cmplib, syslib, lib, packages, etc live */
+    xsb_configuration(cmplibdir, CmplibDir) :- ...
+    xsb_configuration(libdir, LibDir) :- ...
+    xsb_configuration(syslibdir, SyslibDir) :- ...
+    xsb_configuration(packagesdir, PackDir) :-  ...
+    xsb_configuration(etcdir, EtcDir) :- ...
+    /* architecture and configuration specific directories */
+    xsb_configuration(config_dir, ConfigDir) :- ...
+    xsb_configuration(config_libdir, ConfigLibdir) :- ...
+    /* site-specific directories */
+    xsb_configuration(site_dir, '/usr/local/XSB/site').
+    xsb_configuration(site_libdir, SiteLibdir) :- ...
+    /* site and configuration-specific directories */
+    xsb_configuration(site_config_dir, SiteConfigDir) :- ...
+    xsb_configuration(site_config_libdir, SiteConfigLibdir) :- ...
+    /* Where user's arch-specific libraries are found by default. */
+    xsb_configuration(user_config_libdir, UserConfigLibdir) :- ...
+\end{verbatim}
+
+\ouritem{xsb\_flag(?Flag\_Name, ?Value)}\index{\texttt{xsb\_flag/2}}
+    Succeeds iff the current value of the XSB flag {\tt Flag\_Name} is 
+    {\tt Value}. So, one can enumerate all the flag names which the system
+    currently understands, together with their current values by using the
+    following query:
+
+    \stuff{
+    \>   \>	| ?- xsb\_flag(FlagName, Value), fail.
+    }
+
+    The flag names currently supported are:
+
+    \begin{center} 
+\begin{tabular}{||l|p{11cm}||} \hline 
+{\em Flag Name} & {\em Purpose} \\ \hline \hline 
+%
+{\tt backtrace\_on\_error} & {\tt on} iff system-handled errors
+automatically print out the trace of the execution stack where the
+error arose, {\tt off} otherwise. Default is {\tt on}.  In the
+multi-threaded engine, this flag is thread-specific and controls
+whether the backtrace for a current execution will be printed to {\tt
+  STDERR}.\\ \hline
+%
+{\tt dcg\_style} & the DCG style currently used; {\tt xsb} or {\tt
+  standard} (standard is used in Quintus, SICSTUS, etc.).  See
+Section~\ref{sec-dcg-differences} for more details. Default is {\tt
+  xsb}. This flag affects all threads in the process. \\ \hline
+%
+{\tt debugging} & {\tt on} iff debug mode is on; {\tt off} otherwise.
+This flag affects all threads in the process. \\ \hline
+%
+{\tt heap\_garbage\_collection} & {\tt indirection}, {\tt none}, {\tt
+  sliding}, or {\tt copying} depending on the heap garbage collection
+strategy that is currently being employed (see also
+Section~\ref{sec:EmuOptions}).  Default is {\tt indirection}.  This
+flag is private to each thread.  \\ \hline
+%
+{\tt clause\_garbage\_collection} & {\tt on} if garbage collection for
+retracted clauses is allowed, and off otherwise. Default is {\tt
+  on}.  This flag is private to each thread.  \\ \hline
+%
+{\tt goal} & the goal passed to XSB on command line with the
+`-e' switch; `{\tt true.}' if nothing is passed.  \\ \hline 
+%
+{\tt tracing} & {\tt on} iff trace mode is on; {\tt off}
+otherwise. This flag affects all threads in the process.  \\ \hline
+%
+{\tt write\_depth} & The depth to which a term is written by {\tt
+  write}-like predicates.  Default is 64.  This flag affects all
+threads in the process.  \\ \hline
+\end{tabular} 
+\end{center}
+    
+    Note that {\tt xsb\_flag} is used only for dynamic XSB settings, {\it
+      i.e.}, settings that might change between sessions or within the same
+    session. For static configuration information, the predicate {\tt
+      xsb\_configuration/2} is used. \index{\texttt{xsb\_configuration/2}} 
+
+\ouritem{set\_xsb\_flag(+Flag\_Name, +Value)}
+\index{\texttt{set\_xsb\_flag/2}}
+%
+Changes one of the dynamic XSB settings described for {\tt
+  xsb\_flag/2}.
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Flag\_Name} or {\tt Value} is a variable.
+\bi
+\item 	{\tt instantiation\_error}
+\ei
+%
+\item 	{\tt Flag\_Name} is not the name of a recognized XSB flag.
+\bi
+\item 	{\tt domain\_error(xsb\_flag,Flag\_Name)}
+\ei
+
+\ei
+
+
+\ouritem{hilog\_symbol(?Symbol)}\index{\texttt{hilog\_symbol/1}}
+    Succeeds iff {\tt Symbol} has been declared as a HiLog symbol, or 
+    procedurally unifies {\tt Symbol} with one of the currently known 
+    (because of a prior declaration) HiLog symbols. The HiLog symbols
+    are always atoms, but if the argument of {\tt hilog\_symbol},
+    though instantiated, is not an atom the predicate simply fails.
+    So, one can enumerate all the HiLog symbols by using the following
+    query:
+
+    \stuff{
+    \>   \>	| ?- hilog\_symbol(X).
+    }
+
+\ournewitem{current\_op(?Precedence, ?Specifier, ?Name)}{ISO}
+\index{\texttt{current\_op/3}}
+    This predicate is used to examine the set of operators currently
+    in force.  It succeeds when the atom {\tt Name} is currently an
+    operator of type {\tt Specifier} and precedence {\tt Precedence}.  None
+    of the arguments of {\tt current\_op/3} need to be instantiated at
+    the time of the call, but if they are, they must be of the
+    following types: 
+\begin{description}
+\item[{\tt Precedence}] must be an integer in the range from 1 to 1200.  
+\item[{\tt Specifier}] must be one of the atoms: 
+\begin{verbatim} 
+xfx xfy yfx fx fy hx hy xf yf 
+\end{verbatim} 
+\item[{\tt Name}] it must be an atom.
+\end{description}
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Precedence} is neither a variable nor an integer in the
+range from 1 to 1200. 
+\bi
+\item 	{\tt domain\_error(operator\_priority,Precedence)}
+\ei
+\item 	{\tt Specifier} is neither a variable nor an operator
+specifier of the types above.
+\bi
+\item 	{\tt domain\_error(operator\_specifier,Specifier)}
+\ei
+\item 	{\tt Name} is neither a variable nor an atom.
+\bi
+\item 	{\tt domain\_error(atom\_or\_variable,Name)}
+\ei
+\ei
+
+
+
+\ouritem{hilog\_op(?Precedence, ?Type, ?Name)}\index{\texttt{hilog\_op/3}}
+    This predicate has exactly the same behaviour as {\tt current\_op/3}
+    with the only difference that {\tt Type} can only have the values
+    {\tt hx} and {\tt hy}.
+\end{description}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "manual1"
+%%% End: 
+
+%======================================================
+
+\section{Execution State}\label{environmental}
+
+\begin{description}
+
+\ouritem{break}\index{\texttt{break/0}}
+    Causes the current execution to be suspended at the beginning of the next 
+    call.  The interpreter then enters break level 1 and is ready to accept
+    input as if it were at top level.  If another call to {\tt break/0} is 
+    encountered, it moves up to break level 2, and so on.  While execution 
+    is done at break level $n>0$ the prompt changes to {\tt $n$: ?-}.
+
+    To close a break level and resume the suspended execution, the user can 
+    type the the atom {\tt end\_of\_file} or the end-of-file character 
+    applicable on the system (usually {\tt CTRL-d} on UNIX systems).  
+    Predicate {\tt break/0} 
+    then succeeds (note in the following example that the calls to {\tt break/0}
+    do not succeed), and the execution of the interrupted program is resumed.  
+    Alternatively, the suspended execution can be abandoned by calling the 
+    standard predicate {\tt abort/0}, which causes a return to the top level.
+
+    An example of {\tt break/0} 's use is the following:
+
+    \stuff{
+        \>   \>     | ?- break. \\
+        \>   \>     [ Break (level 1) ] \\
+        \>   \>     1: ?- break. \\
+        \>   \>     [ Break (level 2) ] \\
+        \>   \>     2: ?- end\_of\_file. \\
+        \>   \>     [ End break (level 2) ] \\
+        \\
+        \>   \>     yes \\
+        \>   \>     1: ?-
+    }
+
+    Entering a break closes all incomplete tables (those which may not have a 
+    complete set of answers).  Closed tables are unaffected, even if 
+    the tables were created during the computation for which the break was
+    entered.
+
+\ournewitem{halt}{ISO}\index{\texttt{halt/0}}
+    Exits the XSB session regardless of the break level.  On exiting
+    the system cpu and elapsed time information is displayed.
+
+\ournewitem{halt(Code)}{ISO}\index{\texttt{halt/1}}
+%
+Exits the XSB session regardless of the break level, sending the
+integer {\tt Code} to the parent process.  Normally {\tt 0} is
+considered to indicate normal termination, while other exit codes are
+used to report various degrees of abnormality.
+
+{\bf Error Cases}
+\bi
+\item 	{\tt Code} is not an integer
+\bi
+\item 	{\tt type\_error(Integer,Code)}
+\ei
+\ei
+
+\ouritem{prompt(+NewPrompt, ?OldPrompt)}\index{\texttt{prompt/2}}
+    Sets the prompt of the top level interpreter to {\tt NewPrompt} and 
+    returns the old prompt in {\tt OldPrompt}.
+
+    An example of {\tt prompt/2} 's use is the following:
+
+    \stuff{
+        \>   \>     | ?- prompt('Yes master > ', P). \\
+        \\
+        \>   \>     P = | ?- ; \\
+        \\
+        \>   \>     no \\
+        \>   \>     Yes master > fail. \\
+        \\
+        \>   \>     no \\
+        \>   \>     Yes master >
+    }
+
+\ouritem{garbage\_collection(+Option)}\index{texttt{garbage\_collection/1}} 
+   Sets the system so that subsequent heap garbage collecting will be
+   done according to the specified {\tt Option}.  {\tt Option} may be
+   the atom \verb|none| indicating that heap garbage collection is
+   turned off; it may be the atom \verb|sliding| indicating that
+   sliding garbage collection will be done; the atom \verb|copying|
+   indicating that the copying garbage collector will be used; or it
+   may be the atom
+\verb|indirection| indicating that the indirect-sliding garbage
+collector will be used.
+ 
+\ouritem{cputime(-CPU\_Time)}\index{\texttt{cputime/1}} 
+%
+Returns the (process-level) {\tt CPU\_Time} at the time of the call in
+seconds.  The difference between results of successive calls to this
+predicate can measure the time spent in specific predicates.  Note
+that in the multi-threaded engine, {cputime/1} measures the time for
+all threads.
+
+\ouritem{walltime(-Time)}\index{\texttt{cputime/1}}
+%
+Returns the \texttt{Time}, in seconds, since execution started, or
+since the last call to \texttt{statistics(0)} by any thread.
+
+\ouritem{statistics}\index{\texttt{statistics/0}} 
+%
+Displays usage information on the current output stream, including: 
+\begin{itemize} 
+\item Process-level information about allocated memory excluding
+  execution stacks but including: 
+\begin{itemize}
+\item {\tt atom} Space used to maintain global information about
+  predicates and structures. 
+%
+\item {\tt string} Space used to maintain information about atomic
+  constants in XSB.
+%
+\item {\tt asserted} Space allocated for dynamic code.
+%
+\item {\tt asserted} Space allocated for static code.
+%
+\item {\tt foreign} Space allocated for foreign predicates.
+%
+\item {\tt table} Space allocated for XSB's tables.
+%
+\item {\tt findall} Space allocated for buffers to support {\tt
+  findall/3} and similar predicates.
+%
+\item {\tt mt-private} Private space used by threads.
+%
+\item {\tt profiling} Space used to maintain profiling information, if
+  XSB is called with profiling on.
+%
+\item {\tt gc temp} Temporary space for used for heap garbage
+  collector.
+%
+\item {\tt interprolog} space allocated for the Interprolog XSB/Java
+  interface.
+%
+\item {\tt thread} space allocated for the thread table
+%
+\item the space occupied by subgoal and answer tables (in the form of
+  tries) \cite{RRSSW98}.  In the multi-threaded configuration this
+  includes all private and shared tables.
+\end{itemize}
+
+\item Thread-specific information about allocation of memory
+  including the  
+\begin{itemize} 
+\item Global stack (heap) and local (environment) stack (see e.g.
+  \cite{AitK90}) for the calling thread. Memory for these two WAM
+  stacks is allocated as a single unit so that each stack grows
+  together; information is provided on the current allocation for the
+  stacks as well as on the stack sizes themselves.  (See
+  Section~\ref{sec:EmuOptions} for the memory re-allocation
+  algorithm).  
+%
+\item Trail and choice point stack (see e.g. \cite{AitK90}) for the
+  calling thread.  Memory for these two WAM stacks is allocated as a
+  single unit so that each stack grows together; information is
+  provided on the current allocation for the stacks as well as on the
+  stack sizes themselves.  The (re-)allocation follows the algorithm
+  sketched in Section~\ref{sec:EmuOptions}).  (See
+  Section~\ref{sec:EmuOptions} for the memory re-allocation
+  algorithm).  
+%
+\item SLG unification stack for the calling thread This stack is used
+  as a space to copy terms from the execution stacks into table space,
+  or back out.  This stack will not be reallocated unless extremely
+  large terms are tabled.
+%
+\item SLG completion stack for the calling thread.  The completion
+  stack is used to perform incremental completion for sets of mutually
+  dependant tabled subgoals.  One completion stack frame is allocated
+  per tabled subgoal \cite{SaSw98} but the size of these frames is
+  version-dependent.
+%
+\end{itemize}
+In XSB's single-threaded configuration, maximum space used by each of
+will be output if the {\tt '-s'} command-line option is used
+
+\item Information about the number of tabling operations performed in
+  the session by any thread.  Note that the statistics are divided up
+  between calls to predicates that use variant tabling and those that
+  use (call) subsumptive tabling (see
+  Section~\ref{sec:SimilarityMeasures} and \cite{TST99}).
+\begin{itemize}
+\item Call Subsumption Subgoal Operations.  For predicates that use
+subsumptive tabling, the total number of subsumptive subgoal calls is
+given, as is the number of new calls ({\tt producers}) and the number
+of repeated calls to non-completed tables ({\tt variants}).
+Furthermore, the number of properly subsumed calls to incomplete
+tables is given, along with the number of subsumed calls to completed
+tables.  Finally, the total number of subsumptive table entries
+overall is given, including all producer and consumer calls.
+%
+\item Call Subsumption Answer Operations.  In call subsumptive
+tabling, answer lists are copied from producer subgoals to subsumed
+consumer subgoals (this opration is not required in variant tabling).
+The number of {\tt answer ident} operations represents the number of
+times this copy is done.  In addition, the number of consumptions
+performed by all consuming subsumptive table entries is also given.
+%
+\item Call Variance Subgoal Operations.  For call variance the number
+of subgoal check/insert operations is given along with the unique
+number of subgoals encountered ({\tt generator}) and the number of
+redundant consumer encountered ({\tt consumer}).
+%
+\item Total Answer Operations.  For both variant and subsumptive
+tables, the number of answer check insert operations is given along
+with the number of answers actually inserted into the table and the
+number of redundant answers derived.
+\end{itemize}
+%
+\item Garbage Collection Information.  Time spent garbage collecting
+  by the calling thread and number of heap cells collected.
+
+\item Information about process CPU and clock time, as well as the
+  number of active threads.
+    \end{itemize}
+
+As mentioned above, if XSB is configured with the single-threaded
+engine and is invoked with the {\tt '-s'} option (see
+Section~\ref{sec:EmuOptions}), additional information is printed out
+about maximum use of each execution stack and table space.  However,
+the {\tt '-s'} option can substantially slow down the emulator so
+benchmarks of time should be performed separately from benchmarks of
+space.
+
+{\bf Example}: The following printout shows how the {\tt statistics/0}
+output looks if it is invoked with the {\tt '-s'} option (without it
+the {\tt Maximum stack used}, and {\tt Maximum table space used} lines
+are not shown).  Information about the allocation size is provided
+since the sizes can be changed through emulator options (see
+Section~\ref{sec:EmuOptions}).
+
+    {\footnotesize
+     \begin{verbatim}
+     | ?- statistics.
+
+Memory (total)         1941216 bytes:       238120 in use,      1703096 free
+  permanent space       237280 bytes:       237280 in use,            0 free
+  glob/loc space        786432 bytes:          524 in use,       785908 free
+    global                                     284 bytes
+    local                                      240 bytes
+  trail/cp space        786432 bytes:          316 in use,       786116 free
+    trail                                       24 bytes
+    choice point                               292 bytes
+  SLG unific. space      65536 bytes:            0 in use,        65536 free
+  SLG completion         65536 bytes:            0 in use,        65536 free
+  SLG table space            0 bytes:            0 in use,            0 free
+
+        Maximum stack used: global 224, local 1384, trail 240, cp 492,
+                            SLG completion 0 (0 subgoals)
+        Maximum table space used:  0 bytes
+
+Tabling Operations
+  Call Subsumption Subgoal Operations:
+            0 call check/insert ops: 0 producers, 0 variants,
+            0 properly subsumed. 0 used completed table, 
+            0 table entries overall.
+  Call Subsumption Answer Operations:
+            0 relevant answer ident ops.  0 consumptions via answer list.
+  Call Variance Subgoal Operations: 
+            0 call check/insert ops: 0 generators, 0 consumers.
+  Total Answer Operations: 
+            0 answer check/insert ops: 0 unique inserts, 0 redundant.
+
+{GC}    0 heap garbage collections by copying: collected 0 cells in 0.000000 millisecs
+
+      0.570 sec. cputime, 5.088 sec. elapsetime 
+\end{verbatim}} 
+
+%===================
+
+\ouritem{statistics(+Type)}\index{\texttt{statistics/1}} 
+%
+{\tt statistics/1} allows the user to output detailed statistical
+information about the atom and symbol tables, as well as about table
+space.  The following calls to {\tt statistics/1} are supported:
+%
+\begin{itemize}
+\item {\tt statistics(reset)}  Resets the CPU time as well as counts
+for various tabling operations. 
+%
+\item {\tt statistics(atom)} Outputs statistics about both the atom
+and symbol tables.  An example is: 
+%
+\begin{verbatim}
+| ?- statistics(8).
+
+Symbol table statistics:
+------------------------
+Table Size:	8191
+Total Symbols:	1188
+            used buckets:              1088  (range: [0, 8174])
+            unused buckets:            7103
+            maximum bucket size:       3  (#: 18)
+
+String table statistics:
+------------------------
+Table Size:	16381
+Total Strings:	1702
+            used buckets:              1598  (range: [0, 16373])
+            unused buckets:            14783
+            maximum bucket size:       3  (#: 2318)
+\end{verbatim}
+%
+\item {\tt statistics(table)} Outputs {\em very} detailed statistics
+about table space, including breakdowns into variant and subsumptive
+call- and answer- trie nodes and hash tables; as well as answer return
+list nodes (cf. \cite{SaSw98, RRSSW98, TST99}).  This option is not
+available in the multi-threaded configuration.
+\end{itemize}
+
+\end{description}
+
+%need op (just so we dont forget ???
+
+
+%=====================================================================
+
+

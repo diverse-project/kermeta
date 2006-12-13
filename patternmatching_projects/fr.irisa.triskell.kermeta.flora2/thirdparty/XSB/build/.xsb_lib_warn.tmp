@@ -1,0 +1,5 @@
+----------------- Warnings ------------------------
+While compiling XSB/lib:
+
+++Warning[XSB]: [Runtime/C] Extra-long token. Runaway string?
+-------------------- End --------------------------

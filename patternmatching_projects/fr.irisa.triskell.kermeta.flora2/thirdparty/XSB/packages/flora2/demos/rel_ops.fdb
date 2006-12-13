@@ -1,0 +1,12 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(flapply)('p','a','a',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('p','a','b',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('p','b','c',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('q','a','e',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('q','b','f',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('p','a',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('p','b',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('p','c',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('q','b',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('q','d',[_CallerModuleVar,_CallerModuleArgsVar]).

@@ -1,0 +1,178 @@
+\chapter[Persistent Modules]{Persistent Modules\\{by Vishal Chowdhary}}
+
+
+
+\newcommand{\psm}{\mbox{PM}\xspace}
+
+This chapter describes a \FLORA package that enables persistent modules.  A
+\emph{persistent module} (abbr., \psm) is like any other \FLORA module
+except that it is associated with a database. Any insertion or deletion of
+base facts in such a module results in a corresponding operation on the
+associated database. This data persists across \FLORA sessions, so the data
+that was present in such a module is restored when the system restarts and
+the module is reloaded.
+  
+
+\section{PM Interface}
+
+A module becomes persistent by executing a statement that associates the
+module with an ODBC data source. To start using the module persistence
+feature, first load the following package into some module. For instance:
+%% 
+\begin{verbatim}
+  ?- [persistentmodules>>pm].
+\end{verbatim}
+%% 
+The following API is available. Note that if you load {\tt
+  persistentmodules} into some other module, say {\tt foo}, then {\tt foo}
+should be used instead of {\tt pm}.    
+%%
+\begin{itemize}
+\item {\tt ?- ?Module[\%attach(?DSN,?DB,?User,?Password)]@pm.}\\
+  This action associates the data source described by an ODBC {\tt DSN}
+  with the module.  If {\tt ?DB} is a variable then the database is taken
+  from the DSN. If {\tt ?DB} is bound to an atomic string, then that particular
+  database is used. Not all DBMS support the operation of replacing the
+  DSN's database at run time. For instance, MS Access or PostgresSQL do not.
+  In this case, {\tt ?DB} must stay unbound or else an error will be issued.
+  For other DBMS, such as MySQL, SQL Server, and Oracle, {\tt ?DB} can be
+  bound. 
+
+  The {\tt ?User} and {\tt ?Password} are the user name and password being
+  used for connecting to the database.
+
+  The database specified by the DSN must already exist. Otherwise, an
+  exception of the form {\tt
+    FLORA\_ABORT(FLORA\_DB\_EXCEPTION(?ErrorMsg,?\_))} is thrown.
+  Although the database must exist prior to the execution of the above
+  statement, it should not have any tables in it or the tables should have
+  been created by an earlier execution of this statement.
+
+  Note that the same database can be associated with several different
+  modules. The package will not mix up the facts that belong to different
+  modules.
+\item {\tt ?- ?Module[\%attachNew(?DSN,?DB,?User,?Password)]@pm.}\\
+  Like {\tt \%attach}, but a new database is created as specified by {\tt
+    ?DSN}.  If the same database already exists, an exception of the form
+  {\tt FLORA\_DB\_EXCEPTION(?ErrorMsg)} is thrown.  (In a program, include
+  {\tt flora\_exceptions.flr} to define {\tt DB\_EXCEPTION}; in the shell,
+  use the symbol {\tt '\_\$flora\_db\_error'}.)  Note that this command
+  works only with database systems that understand the SQL command {\tt
+    CREATE DATABASE}. For instance, MS Access does not support this command
+  and will cause an error.
+\item {\tt ?- ?Module[\%detach]@pm.}\\
+  Detaches the module from its database. The module is no longer persistent
+  in the sense that subsequent changes are not reflected in any database.
+  However, the earlier data is not lost. It stays in the database and the
+  module can be reattached to that database.
+\item {\tt ?- ?Module[\%loadDB]@pm.}\\
+  On re-associating a module with a database (i.e., when {\tt
+    ?Module[\%attach(?DSN, ?DB,?User,?Password)]@pm} is called in a new
+  \FLORA session), database facts previously associated with the module are
+  loaded back into it.  However, since the database may be large, \FLORA
+  does not preload it into the main memory. Instead, facts are loaded
+  on-demand.  If it is desired to have all these facts in main
+  memory at once, the user can execute the above command. If no previous
+  association between the module and a database is found, an exception is
+  thrown.
+\end{itemize}
+
+
+
+Once a database is associated with the module, querying and insertion of
+the data into the module is done as in the case of regular (transient)
+modules.  Therefore \psm's provide a transparent and natural access to the
+database and every query or update may, in principle, involve a database
+operation.  For example, a query like {\tt ?- ?D[dept -> ped]@StonyBrook.}
+may invoke the SQL {\tt SELECT} operation if module {\tt StonyBrook} is
+associated with a database.  Similarly {\tt  insert\{a[b \fd
+  c]@stonyBrook\}} and {\tt delete\{a[e \fd f]@stonyBrook\}}  will invoke
+SQL {\tt INSERT} and {\tt DELETE} commands, respectively. Thus, \psm's provide
+a high-level abstraction over the external database.
+
+Note that if {\tt ?Module[\%loadDB]@pm} has been previously executed,
+querying a persistent module will \emph{not} result in database access,
+since \FLORA will use the in-memory cache instead. However, insertion and
+deletion of facts in such a module will still cause database
+operations.
+
+\section{Examples}
+
+Consider the following scenario sequence of operations.
+
+%%
+\begin{verbatim}
+// Create new modules mod, db_mod1, db_mod2.
+flora2 ?- newmodule{mod}, newmodule{db_mod1}, newmodule{db_mod2}.
+flora2 ?- [persistentmodules>>pm].
+
+// insert data into all three modules.
+flora2 ?- insert{q(a)@mod,q(b)@mod,p(a,a)@mod}.
+flora2 ?- insert{p(a,a)@db_mod1, p(a,b)@db_mod1}.
+flora2 ?- insert{q(a)@db_mod2,q(b)@db_mod2,q(c)@db_mod2}.
+
+//  Associate modules db_mod1, db_mod2 with an existing database db
+//  The data source is described by the DSN mydb.
+flora2 ?- db_mod1[%attach(mydb,db,user,pwd)]@pm.
+flora2 ?- db_mod2[%attach(mydb,db,user,pwd,db_mod2)]@pm.
+
+// insert more data into db_mod2 and mod.
+flora2 ?- insert{a(p(a,b,c),d)@db_mod2}.
+flora2 ?- insert{q(a)@mod,q(b)@mod,p(a,a)@mod}.
+
+// shut down FLORA-2
+flora2 ?- flHalt.
+\end{verbatim}
+%%
+
+\noindent
+Restart the \FLORA system.
+
+%%
+\begin{verbatim}
+// Create the same modules again
+flora2 ?- newmodule{mod}, newmodule{db_mod1}, newmodule{db_mod2}.
+
+// try to query the data in any of these modules.
+flora2 ?- q(?X)@mod.
+No.
+
+flora2 ?- p(?X,?Y)@db_mod1.
+No.
+
+//  Attach the earlier database to db_mod1.
+flora2 ?- [persistentmodules>>pm].
+flora2 ?- db_mod1[%attach(mydb,db,user,pwd,db_mod1)]@pm.
+
+// try querying again...
+
+// Module mod is still not associated with any database and nothing was
+// inserted there even transiently, we have:
+flora2 ?- q(?X)@mod.
+No.
+
+// But the following query retrieves data from the database associated
+// with db_mod1.
+flora2 ?- p(?X,?Y)@db_mod1.
+?X = a,
+?Y = a.
+
+?X = a,
+?Y = b.
+
+Yes.
+
+// Since db_mod2 was not re-attached to its database,
+// it still has no data, and the query fails.
+flora2 ?- q(?X)@db_mod2.
+
+No.
+\end{verbatim}
+%%
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "flora-packages"
+%%% End: 

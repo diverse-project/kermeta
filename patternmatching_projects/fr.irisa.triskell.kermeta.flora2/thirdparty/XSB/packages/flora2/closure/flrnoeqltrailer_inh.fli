@@ -1,0 +1,476 @@
+/***************************************************************************
+  file: closure/flrnoeqltrailer_inh.fli
+
+  Author(s): Guizhen Yang
+
+  Contact:   flora-users@lists.sourceforge.net
+
+  Copyright (C) The Research Foundation of SUNY, 1999-2004
+
+  This is a template file to generate the FLORA trailer that has no
+  equality maintenance but has inheritance
+
+***************************************************************************/
+
+
+#include "flora_wspredicates.flh"
+#include "flora_porting.flh"
+
+:- import flora_warning_line/2 from flrprint.
+:- import flora_funct_arity/2 from flrwrapper.
+:- import flora_optimizer_registry/2 from flrregistry.
+
+:- WRAP_COPY_UNQUOTED 'FLORA_THIS_MODULE_NAME'.
+
+#define IF_LOCAL_OVERRIDE_OPTIMIZATION(Test)  \
+   (flora_optimizer_registry(FLORA_LOCAL_OVERRIDE_OPTION,'FLORA_THIS_MODULE_NAME') \
+   -> Test ; true)
+#define IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(Test)  \
+   (flora_optimizer_registry(FLORA_LOCAL_OVERRIDE_OPTION,'FLORA_THIS_MODULE_NAME') \
+   -> true ; Test)
+	    
+/***************************************************************************
+  Note that all programs rules are translated with with a 'derived_' prefix.
+  These rules are bridged to the trailer using wrapper predicates with a
+  'inferred_' prefix.
+***************************************************************************/
+
+
+/***************************************************************************
+  closure rules for X::Y
+***************************************************************************/
+sub(X,Y,CallerInfo) :-
+	inferred_sub(X,Y,CallerInfo),
+	(X=Y,
+	    flora_warning_line('cycle in class hierarchy: ~w sub ~w', [X,Y])
+	; true).
+
+sub(X,Y,CallerInfo) :-
+	silent_sub(X,Z,CallerInfo),
+	inferred_sub(Z,Y,CallerInfo),
+	(X=Y,
+	    flora_warning_line('cycle in class hierarchy: ~w sub ~w sub ~w',[X,Z,Y])
+	; true).
+
+
+/***************************************************************************
+  closure rules for O:C
+***************************************************************************/
+%% isa/3
+isa(O,C,CallerInfo) :-
+	inferred_isa(O,C,CallerInfo).
+
+isa(O,C,CallerInfo) :-
+        nonvar(C), var(O),
+	!,
+	silent_sub(S,C,CallerInfo),
+	inferred_isa(O,S,CallerInfo).
+
+isa(O,C,CallerInfo) :-
+	(
+	    flora_optimizer_registry(FLORA_CLASS_EXPRESSIONS,'FLORA_THIS_MODULE_NAME')
+	-> 
+	    silent_sub(S,C,CallerInfo),
+	    inferred_isa(O,S,CallerInfo)
+	;
+	   %% The order of inferred_isa/silent_sub is important. Otherwise, it
+	   %% won't return correct answers in cases like a:(b,c). ?- a:?X.
+	    inferred_isa(O,S,CallerInfo),
+	    silent_sub(S,C,CallerInfo)
+	).
+
+
+/*****************************************************************************
+  inheritable methods that are locally defined
+
+  The argument "MethSign" is in the form of Funct/Arity/Type.
+*****************************************************************************/
+%% local_imvd/2
+local_imvd(S,MethSign,CallerInfo) :-
+	var(MethSign),
+	inferred_imvd(S,M,_V,CallerInfo),
+	%% Should have a cut here when XSB will allow
+	flora_funct_arity(M,MethSign).
+
+local_imvd(S,MethSign,CallerInfo) :-
+	var(MethSign),
+	!,
+	inferred_imvddef(S,M,CallerInfo),
+	flora_funct_arity(M,MethSign).
+
+local_imvd(S,MethSign,CallerInfo) :-
+	nonvar(MethSign), % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	inferred_imvd(S,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+local_imvd(S,MethSign,CallerInfo) :-
+	nonvar(MethSign), % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	inferred_imvddef(S,M,CallerInfo).
+
+
+%% local_mvd/2
+local_mvd(S,MethSign,CallerInfo) :-
+	var(MethSign),
+	inferred_mvd(S,M,_V,CallerInfo),
+	%% Should have a cut here when XSB will allow
+	flora_funct_arity(M,MethSign).
+
+local_mvd(S,MethSign,CallerInfo) :-
+	var(MethSign),
+	!,
+	inferred_mvddef(S,M,CallerInfo),
+	flora_funct_arity(M,MethSign).
+
+local_mvd(S,MethSign,CallerInfo) :-
+	nonvar(MethSign), % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	inferred_mvd(S,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+local_mvd(S,MethSign,CallerInfo) :-
+	nonvar(MethSign), % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	inferred_mvddef(S,M,CallerInfo).
+
+
+%% local_imeth/3
+local_imeth(S,MethSign,CallerInfo) :-
+	var(MethSign),
+	!,
+	inferred_imeth(S,M,CallerInfo),
+	%% Should have a cut here when XSB will allow
+	flora_funct_arity(M,MethSign).
+
+local_imeth(S,MethSign,CallerInfo) :-
+	nonvar(MethSign), % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	inferred_imeth(S,M,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+%% local_meth/3
+local_meth(S,MethSign,CallerInfo) :-
+	var(MethSign),
+	!,
+	inferred_meth(S,M,CallerInfo),
+	%% Should have a cut here when XSB will allow
+	flora_funct_arity(M,MethSign).
+
+local_meth(S,MethSign,CallerInfo) :-
+	nonvar(MethSign), % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	inferred_meth(S,M,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+/*****************************************************************************
+  closure for X[Y->Z], X[Y*->Z], X[]
+  nonmonotonic multiple inheritance of multivalued attributes
+  from superclasses to subclasses
+*****************************************************************************/
+imvd(C,M,V,CallerInfo) :-
+	inferred_imvd(C,M,V,CallerInfo).
+
+imvd(C,M,V,CallerInfo) :-
+	var(M),
+	!,
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	inheritance_sub(C,Super,CallerInfo),
+	inheritance_imvd(Super,M,V,CallerInfo),
+	flora_funct_arity(M,MethSign),
+	candidate_class_imvd(Super,MethSign,C,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_class_imvd(Super,MethSign,C,CallerInfo)).
+
+imvd(C,M,V,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	inheritance_sub(C,Super,CallerInfo), %% Optimization
+	candidate_class_imvd(Super,MethSign,C,CallerInfo),
+	inheritance_imvd(Super,M,V,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_class_imvd(Super,MethSign,C,CallerInfo)).
+
+
+imvddef(C,M,CallerInfo) :-
+	inferred_imvddef(C,M,CallerInfo).
+
+imvddef(C,M,CallerInfo) :-
+	var(M),
+	!,
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	inheritance_sub(C,Super,CallerInfo),
+	inheritance_imvddef(Super,M,CallerInfo),
+	flora_funct_arity(M,MethSign),
+	candidate_class_imvd(Super,MethSign,C,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_class_imvd(Super,MethSign,C,CallerInfo)).
+
+imvddef(C,M,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	inheritance_sub(C,Super,CallerInfo), %% Optimization
+	candidate_class_imvd(Super,MethSign,C,CallerInfo),
+	inheritance_imvddef(Super,M,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imvd(C,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_class_imvd(Super,MethSign,C,CallerInfo)).
+
+imvddef(C,M,CallerInfo) :-
+	imvd(C,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+/*****************************************************************************
+  nonmonotonic multiple inheritance of multivalued attributes
+  from superclasses to instances/members
+*****************************************************************************/
+mvd(O,M,V,CallerInfo) :-
+	inferred_mvd(O,M,V,CallerInfo).
+
+mvd(O,M,V,CallerInfo) :-
+	var(M),
+	!,
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	inheritance_isa(O,Super,CallerInfo),
+	inheritance_imvd(Super,M,V,CallerInfo),
+	flora_funct_arity(M,MethSign),
+	candidate_object_imvd(Super,MethSign,O,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_object_imvd(Super,MethSign,O,CallerInfo)).
+
+mvd(O,M,V,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	%% DON'T uncomment: causes infinite loop in pps.flr/dyn_pps.flr
+	%%(nonvar(O) -> inheritance_isa(O,Super,CallerInfo)  ; true),
+	candidate_object_imvd(Super,MethSign,O,CallerInfo),
+	inheritance_imvd(Super,M,V,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_object_imvd(Super,MethSign,O,CallerInfo)).
+
+
+mvddef(O,M,CallerInfo) :-
+	inferred_mvddef(O,M,CallerInfo).
+
+mvddef(O,M,CallerInfo) :-
+	var(M),
+	!,
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	inheritance_isa(O,Super,CallerInfo),
+	inheritance_imvddef(Super,M,CallerInfo),
+	flora_funct_arity(M,MethSign),
+	candidate_object_imvd(Super,MethSign,O,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_object_imvd(Super,MethSign,O,CallerInfo)).
+
+mvddef(O,M,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	%% DON'T uncomment: causes infinite loop in pps.flr/dyn_pps.flr
+	%%(nonvar(O) -> inheritance_isa(O,Super,CallerInfo) ; true),
+	candidate_object_imvd(Super,MethSign,O,CallerInfo),
+	inheritance_imvddef(Super,M,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_mvd(O,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_object_imvd(Super,MethSign,O,CallerInfo)).
+
+mvddef(O,M,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	mvd(O,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+/*****************************************************************************
+  monotonic inheritance of binary attributes (tabled methods)
+*****************************************************************************/
+meth(O,M,CallerInfo) :-
+	inferred_meth(O,M,CallerInfo).
+
+/*
+meth(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imeth(C,M,CallerInfo).
+*/
+
+meth(O,M,CallerInfo) :-
+	var(M),
+	!,
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_meth(O,MethSign,CallerInfo))),
+	inheritance_isa(O,Super,CallerInfo),
+	inheritance_imeth(Super,M,CallerInfo),
+	flora_funct_arity(M,MethSign),
+	candidate_object_imeth(Super,MethSign,O,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_meth(O,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_object_imeth(Super,MethSign,O,CallerInfo)).
+
+meth(O,M,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_meth(O,MethSign,CallerInfo))),
+	%% DON'T uncomment: causes infinite loop in pps.flr/dyn_pps.flr
+	%%(nonvar(O) -> inheritance_isa(O,Super,CallerInfo)  ; true),
+	candidate_object_imeth(Super,MethSign,O,CallerInfo),
+	inheritance_imeth(Super,M,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_meth(O,MethSign,CallerInfo))), /*was local_fd, typo?*/
+	FLORA_TNOT(multiple_object_imeth(Super,MethSign,O,CallerInfo)).
+
+
+%% imeth
+imeth(C,M,CallerInfo) :-
+	inferred_imeth(C,M,CallerInfo).
+
+/*
+imeth(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imeth(S,M,CallerInfo).
+*/
+
+imeth(C,M,CallerInfo) :-
+	var(M),
+	!,
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imeth(C,MethSign,CallerInfo))),
+	inheritance_sub(C,Super,CallerInfo),
+	inheritance_imeth(Super,M,CallerInfo),
+	flora_funct_arity(M,MethSign),
+	candidate_class_imeth(Super,MethSign,C,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imeth(C,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_class_imeth(Super,MethSign,C,CallerInfo)).
+
+imeth(C,M,CallerInfo) :-
+	nonvar(M),  % the cut above might not work under local scheduling
+	flora_funct_arity(M,MethSign),
+	IF_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imeth(C,MethSign,CallerInfo))),
+	inheritance_sub(C,Super,CallerInfo), %% Optimization
+	candidate_class_imeth(Super,MethSign,C,CallerInfo),
+	inheritance_imeth(Super,M,CallerInfo),
+	IF_NO_LOCAL_OVERRIDE_OPTIMIZATION(FLORA_TNOT(local_imeth(C,MethSign,CallerInfo))),
+	FLORA_TNOT(multiple_class_imeth(Super,MethSign,C,CallerInfo)).
+
+
+
+/*****************************************************************************
+  nontabled methods (transactions)
+*****************************************************************************/
+tran(O,T,CallerInfo) :-
+	inferred_tran(O,T,CallerInfo).
+
+
+/*****************************************************************************
+  monotonic inheritance of signatures
+*****************************************************************************/
+%% mvdsig/4
+mvdsig(O,M,R,CallerInfo) :-
+	inferred_mvdsig(O,M,R,CallerInfo).
+
+mvdsig(O,M,R,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imvdsig(C,M,R,CallerInfo).
+
+
+%% mvdcondef/5 
+mvdcondef(C,M,L,H,CallerInfo) :-
+	inferred_mvdcondef(C,M,L,H,CallerInfo).
+
+mvdcondef(O,M,L,H,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imvdcondef(C,M,L,H,CallerInfo).
+
+%% mvdsigdef/3
+mvdsigdef(O,M,CallerInfo) :-
+	inferred_mvdsigdef(O,M,CallerInfo).
+
+mvdsigdef(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	imvdsigdef(C,M,CallerInfo).
+
+mvdsigdef(O,M,CallerInfo) :-
+	mvdsig(O,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+%% imvdsig/4
+imvdsig(C,M,R,CallerInfo) :-
+	inferred_imvdsig(C,M,R,CallerInfo).
+
+imvdsig(C,M,R,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imvdsig(S,M,R,CallerInfo).
+
+
+%% imvdcondef/5 
+imvdcondef(C,M,L,H,CallerInfo) :-
+	inferred_imvdcondef(C,M,L,H,CallerInfo).
+
+imvdcondef(C,M,L,H,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imvdcondef(S,M,L,H,CallerInfo).
+
+%% imvdsigdef/3
+imvdsigdef(C,M,CallerInfo) :-
+	inferred_imvdsigdef(C,M,CallerInfo).
+
+imvdsigdef(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	imvdsigdef(S,M,CallerInfo).
+
+imvdsigdef(C,M,CallerInfo) :-
+	imvdsig(C,M,_V,CallerInfo).
+	%% Should have a cut here when XSB will allow
+
+
+%% boolsig/3
+boolsig(O,M,CallerInfo) :-
+	inferred_boolsig(O,M,CallerInfo).
+
+boolsig(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	iboolsig(C,M,CallerInfo).
+
+
+%% iboolsig/3
+iboolsig(C,M,CallerInfo) :-
+	inferred_iboolsig(C,M,CallerInfo).
+
+iboolsig(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	iboolsig(S,M,CallerInfo).
+
+
+%% transig/3
+transig(O,M,CallerInfo) :-
+	inferred_transig(O,M,CallerInfo).
+
+transig(O,M,CallerInfo) :-
+	isa(O,C,CallerInfo),
+	itransig(C,M,CallerInfo).
+
+
+%% itransig/3
+itransig(C,M,CallerInfo) :-
+	inferred_itransig(C,M,CallerInfo).
+
+itransig(C,M,CallerInfo) :-
+	inheritance_sub(C,S,CallerInfo),
+	itransig(S,M,CallerInfo).
+
+
+/*****************************************************************************
+  object existence
+*****************************************************************************/
+exists(X,CallerInfo) :-
+	inferred_exists(X,CallerInfo).
+
+
+/*****************************************************************************
+  equality maintenance
+  Here we just treat :=: as an ordinary relation.
+*****************************************************************************/
+%% Means X,Y are equal, but not identical
+diffobjeql(X,Y,CallerInfo) :-
+	inferred_objeql(X,Y,CallerInfo),
+	X \= Y.

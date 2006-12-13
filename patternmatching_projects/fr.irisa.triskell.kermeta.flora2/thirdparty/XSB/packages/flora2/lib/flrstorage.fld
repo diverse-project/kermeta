@@ -1,0 +1,5 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(flapply)(commit,__newvar1).
+FLORA_THIS_WORKSPACE(flapply)('commit',__newvar1,__newvar2).
+FLORA_THIS_WORKSPACE(flapply)('purgedb',__newvar1,__newvar2).

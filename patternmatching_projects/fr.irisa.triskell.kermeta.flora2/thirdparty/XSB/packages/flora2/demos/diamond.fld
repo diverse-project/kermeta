@@ -1,0 +1,7 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'c',__newvar2).
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'c1',__newvar2).
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'c2',__newvar2).
+FLORA_THIS_WORKSPACE(imvd)(__newvar1,'f',__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(imvd)(__newvar1,'flapply'('f',__newvar4),__newvar2,__newvar3).

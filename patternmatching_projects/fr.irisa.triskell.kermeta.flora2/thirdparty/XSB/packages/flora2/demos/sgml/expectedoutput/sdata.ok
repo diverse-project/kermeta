@@ -1,0 +1,14 @@
+_$_$_flora'dyn_newoid5862[$order->0].  // @sdata
+_$_$_flora'dyn_newoid5862[text->>_$_$_flora'dyn_newoid5865].  // @sdata
+_$_$_flora'dyn_newoid5865[$order->1].  // @sdata
+_$_$_flora'dyn_newoid5865[$text->>_$_$_flora'dyn_newoid5866].  // @sdata
+_$_$_flora'dyn_newoid5866[$order->2].  // @sdata
+_$_$_flora'dyn_newoid5866[$string->Van Alpha tot ].  // @sdata
+_$_$_flora'dyn_newoid5865[$child(0)->_$_$_flora'dyn_newoid5866].  // @sdata
+_$_$_flora'dyn_newoid5865[$text->>_$_$_flora'dyn_newoid5867].  // @sdata
+_$_$_flora'dyn_newoid5867[$order->3].  // @sdata
+_$_$_flora'dyn_newoid5867[$string->sdata(\Omega)].  // @sdata
+_$_$_flora'dyn_newoid5865[$child(1)->_$_$_flora'dyn_newoid5867].  // @sdata
+_$_$_flora'dyn_newoid5866[$rightsibling->_$_$_flora'dyn_newoid5867].  // @sdata
+_$_$_flora'dyn_newoid5867[$leftsibling->_$_$_flora'dyn_newoid5866].  // @sdata
+_$_$_flora'dyn_newoid5862[$child(0)->_$_$_flora'dyn_newoid5865].  // @sdata

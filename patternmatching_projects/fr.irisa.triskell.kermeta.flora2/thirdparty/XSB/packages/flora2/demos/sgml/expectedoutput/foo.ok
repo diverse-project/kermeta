@@ -1,0 +1,24 @@
+_$_$_flora'dyn_newoid5701[$order->0].  // @foo
+_$_$_flora'dyn_newoid5701[foo->>_$_$_flora'dyn_newoid5704].  // @foo
+_$_$_flora'dyn_newoid5704[$order->1].  // @foo
+_$_$_flora'dyn_newoid5704[name->>_$_$_flora'dyn_newoid5705].  // @foo
+_$_$_flora'dyn_newoid5705[$order->2].  // @foo
+_$_$_flora'dyn_newoid5705[title->Dr].  // @foo
+_$_$_flora'dyn_newoid5705[sex->M].  // @foo
+_$_$_flora'dyn_newoid5705[$text->>_$_$_flora'dyn_newoid5706].  // @foo
+_$_$_flora'dyn_newoid5706[$order->3].  // @foo
+_$_$_flora'dyn_newoid5706[$string->Neddie Seagoon].  // @foo
+_$_$_flora'dyn_newoid5705[$child(0)->_$_$_flora'dyn_newoid5706].  // @foo
+_$_$_flora'dyn_newoid5704[$child(0)->_$_$_flora'dyn_newoid5705].  // @foo
+_$_$_flora'dyn_newoid5704[name->>_$_$_flora'dyn_newoid5707].  // @foo
+_$_$_flora'dyn_newoid5707[$order->4].  // @foo
+_$_$_flora'dyn_newoid5707[title->Miss].  // @foo
+_$_$_flora'dyn_newoid5707[sex->F].  // @foo
+_$_$_flora'dyn_newoid5707[$text->>_$_$_flora'dyn_newoid5708].  // @foo
+_$_$_flora'dyn_newoid5708[$order->5].  // @foo
+_$_$_flora'dyn_newoid5708[$string->Minnie Bannister].  // @foo
+_$_$_flora'dyn_newoid5707[$child(0)->_$_$_flora'dyn_newoid5708].  // @foo
+_$_$_flora'dyn_newoid5704[$child(1)->_$_$_flora'dyn_newoid5707].  // @foo
+_$_$_flora'dyn_newoid5705[$rightsibling->_$_$_flora'dyn_newoid5707].  // @foo
+_$_$_flora'dyn_newoid5707[$leftsibling->_$_$_flora'dyn_newoid5705].  // @foo
+_$_$_flora'dyn_newoid5701[$child(0)->_$_$_flora'dyn_newoid5704].  // @foo

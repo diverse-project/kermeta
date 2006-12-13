@@ -1,0 +1,9 @@
+_$_$_flora'dyn_newoid5650[$order->0].  // @ce
+_$_$_flora'dyn_newoid5650[test->>_$_$_flora'dyn_newoid5653].  // @ce
+_$_$_flora'dyn_newoid5653[$order->1].  // @ce
+_$_$_flora'dyn_newoid5653[$text->>_$_$_flora'dyn_newoid5654].  // @ce
+_$_$_flora'dyn_newoid5654[$order->2].  // @ce
+_$_$_flora'dyn_newoid5654[$string->Test for handling character entities: A 
+].  // @ce
+_$_$_flora'dyn_newoid5653[$child(0)->_$_$_flora'dyn_newoid5654].  // @ce
+_$_$_flora'dyn_newoid5650[$child(0)->_$_$_flora'dyn_newoid5653].  // @ce

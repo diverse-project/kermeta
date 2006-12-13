@@ -1,0 +1,354 @@
+/* File:      flrdynmod.P
+**
+** Author(s): Guizhen Yang 
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2001
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flora_porting.flh"
+#include "flora_exceptions.flh"
+
+
+:- import append/3 from basics.
+
+:- import
+	flora_check_module_name/1,
+	flora_module_predicate/4,
+	flora_decode_predicate/7,
+	is_flora_callable_literal/1
+   from flrwrapper.
+
+:- import flora_increment_counter/4 from flrporting.
+
+:- import 
+        convert_to_body_literal/2,
+        flora_check_dynmod_type_consistency/1,
+        is_ws_distributive/3,
+        is_caller_distributive/3,
+        is_caller_distributive/4
+    from flrcanon.
+
+:- import FLLIBUNIVEQFORM/2 from usermod.
+
+:- import
+	flora_temp_protect_call/2,
+	flora_temp_unprotect_call/1
+    from flrundefined.
+
+:- import
+	flora_in_debug_mode/1,
+	flora_debug_module_registry/1
+   from flrregistry.
+
+:- import flora_abort/1 from flrutils.
+
+:- import
+	flora_add_last/3,
+	flora_replace_last/3,
+	flora_bind_last/2
+   from flrtrim.
+
+:- import flora_add_undef_export_call/2,
+	  flora_remove_undef_export_call/1
+   from flrexport.
+
+/*********************************************************************
+  This file is for the following dynamic module references:
+  FLLIBMODLIT and FLLIBMODOBJ.
+
+  FLLIBMODLIT is used when the compiler encounters literal@Variable
+  where literal is F-logic or HiLog
+  FLLIBMODOBJ is used when compiler finds term@Variable inside a predicate,
+  e.g., f(g@V)
+*********************************************************************/
+
+
+/*********************************************************************
+  FLLIBMODLIT(+Functor,+Args,+ModuleName,+CallerInfo)
+*********************************************************************/
+FLLIBMODLIT(F,Arg,ModuleName,CallerInfo) :-
+	%% If module is a variable, we must protect the call
+	%% from undefinedness checks
+	(var(ModuleName) -> ProtectCall = true ; true),
+	(
+          var(Arg) ->
+            (ModuleName==FL_INVALIDMODULE ->
+	        flora_abort([Arg,': Attempt to call uninstantiated literal'])
+            ;
+	        flora_abort([Arg,'@',ModuleName,': Attempt to call uninstantiated literal'])
+            )
+
+        ; Arg=FL_TRANSACTIONAL(NA), var(NA) ->
+            (ModuleName==FL_INVALIDMODULE ->
+	        flora_abort([CH_PERCENT,NA,': Attempt to call uninstantiated literal'])
+            ;
+	        flora_abort([CH_PERCENT,NA,'@',ModuleName,': Attempt to call uninstantiated literal'])
+            )
+
+	; flora_check_module_name(ModuleName),
+            flora_check_dynmod_type_consistency(FLLIBMODLIT(F,Arg,ModuleName,CallerInfo)),
+	    ( get_libmod_callable(F,Arg,ModuleName,CallerInfo,P) ->
+		%% Assign an Id to be used by both the export & the
+		%% undefinedness check.
+		(nonvar(ProtectCall) ->
+		    (
+		      %% New Id for protecting calls. Unique Id is used because
+		      %% several calls to the same method/predicate may be in
+		      %% progress at the same time, and we don't want to
+		      %% inadvertantly unprotect a call that might still
+		      %% need to be protected
+		      %% the same Id is also used for the export call.
+		      flora_increment_counter(FLORA_SYMBOL('protect_undef_call'),1,_,IdExport),
+		      flora_add_undef_export_call(P,IdExport),
+		      %% Protect call P from undefinedness check
+		      (  flora_in_debug_mode(_),
+			  flora_debug_module_registry(ModuleName)
+		      ->  IdUndef = IdExport,
+			  flora_temp_protect_call(P,IdUndef)
+		      ;   
+			  IdUndef = 0
+		      )
+		    )
+		;
+		    (
+		      IdExport = 0,
+		      IdUndef = 0
+		    )
+		),
+		%% Whether P succeeds or fails we must remove the temporary
+		%% skeleton from the set of facts protected from undefinedness
+		%% checking in flrundefined.P so that undefinedness could be
+		%% checked again for P.
+		%% Likewise remove the predicate from the export undef registry.
+		%% It can happen that Id is not equal to 0 but IdUndef is.
+		(
+		  (
+		    call(P), 
+		    (IdExport > 0 ->  flora_remove_undef_export_call(IdExport)
+		    ;   true
+		    ),
+		    (IdUndef > 0 ->  flora_temp_unprotect_call(IdUndef)
+		    ;   true
+		    )
+		  )
+		; 
+		  IdExport > 0, flora_remove_undef_export_call(IdExport), fail
+		; 
+		  IdUndef > 0, flora_temp_unprotect_call(IdUndef), fail
+		)
+	    )
+	).
+
+
+/*********************************************************************
+  FLLIBMODOBJ(+Functor,+Args,+ModuleName,+CallerInfo,-Predicate)
+*********************************************************************/
+FLLIBMODOBJ(F,Arg,ModuleName,CallerInfo,Pout) :-
+        (var(Arg)
+        ->
+            Pout = FLLIBMODLIT(F,Arg,ModuleName,CallerInfo)
+            %%flora_abort([Arg,'@',ModuleName,': Attempt to query uninstantiated literal'])
+        ; flora_check_module_name(ModuleName),
+            flora_check_dynmod_type_consistency(FLLIBMODLIT(F,Arg,ModuleName,CallerInfo)),
+            ( get_libmod_callable(F,Arg,ModuleName,CallerInfo,P) -> true ),
+            (P =FLLIBMODLIT(F,_NArg,ModuleName,CallerInfo) ->
+                Pout = FLLIBMODLIT(F,Arg,ModuleName,CallerInfo)
+            ;
+                convert_to_body_literal(P,Pout)
+            )
+        ).
+
+
+/*********************************************************************
+  get_libmod_callable(+Functor,+Args,+ModuleName,+CallerInfo,-Callable)
+
+  This is common part of FLLIBMODLIT and FLLIBMODOBJ. Takes a term and
+  a module and returns a callable structure (molecule or a predicate).
+  The input can also be already callable. In this case just return in.
+*********************************************************************/
+get_libmod_callable(F,FL_TRANSACTIONAL(Arg),ModuleName,CallerInfo,P) :-
+        (
+	is_libmodlit_control(Arg, [_Wrap,_A,PredModule,_C]), !,
+	  make_caller_info(CallerInfo,PredModule,RealCallerInfo),
+	  flora_bind_last(Arg, RealCallerInfo),
+	  Arg = P
+	%% is_caller_distributive/3
+        ; is_caller_distributive(Arg, _, _), !,
+	  apply_caller_info(Arg,CallerInfo,P)
+	%% is_caller_distributive/4
+        ; is_caller_distributive(Arg, _, _, _), !,
+	  apply_caller_info(Arg,CallerInfo,P)
+	%% is_ws_distributive/3
+        ; is_ws_distributive(Arg,Op,ArgList), !,
+	  distribute_workspace_with_tran(F,ArgList,ModuleName,CallerInfo,ArgListOut),
+	  is_ws_distributive(P,Op,ArgListOut)
+	; %% %Var@..., Var bound to compound
+	    flora_decode_predicate(Arg,_,PredModName,Wrapper,_,_,Args), !,
+	    ( %% if already a hilog or flogic predicate -- use it
+		nonvar(PredModName),
+		%% Arg is already a FLORA callable predicate,
+		%% so use *its* module name, NOT the one from CallerInfo
+		make_caller_info(CallerInfo,PredModName,RealCallerInfo),
+		%% Always replace the caller and replace whatever there is
+		%% with RealCallerInfo. Otherwise, general_tests/callReified.flr
+		%% won't work. The current caller info of X, where X is bound
+		%% to a reified formula may have been bound by a call from
+		%% another module and thus may be incorrect.
+		flora_replace_last(Arg,RealCallerInfo,ArgGen),
+                %% Do we need to check whether ArgGen is not tabled?
+		ArgGen = P,
+		!
+            ; ModuleName==FL_INVALIDMODULE,
+                Arg = P,
+                !
+	    ; %% else construct it
+                ( atom(Arg) ->
+		    flora_add_last([Arg],AugmentedArgs,CallerInfo),
+                    ( var(ModuleName) ->
+                        P = FLLIBMODLIT(WRAP_HILOG,AugmentedArgs,ModuleName,CallerInfo)
+                    ;
+		        flora_module_predicate(WRAP_HILOG,AugmentedArgs,ModuleName,P)
+                    )
+		; Wrapper == WRAP_HILOG ->
+		    flora_add_last(Args,AugmentedArgs,CallerInfo),
+                    ( var(ModuleName) ->
+                        P = FLLIBMODLIT(WRAP_HILOG,AugmentedArgs,ModuleName,CallerInfo)
+                    ;
+		        flora_module_predicate(WRAP_HILOG,AugmentedArgs,ModuleName,P)
+                    )
+		;
+		    %% %Var@... where Var bound to a prolog predicate
+		    Arg = P
+		)
+	    )
+	).
+	
+get_libmod_callable(F,Arg,ModuleName,CallerInfo,P) :-
+        (
+	  is_list(Arg), !,	% Term@X
+	    %% This case is compiled as FLLIBMODLIT(F,Args,WS,CallerInfo)
+	    %% so the caller is already accounted for
+	    %% P is now made into a Flora wrapper
+	    flora_module_predicate(F,Arg,ModuleName,P),
+	    make_caller_info(CallerInfo,ModuleName,RealCallerInfo),
+	    flora_bind_last(P, RealCallerInfo)
+	; is_libmodlit_control(Arg, [_Wrap,_A,PredModule,_C]), !,
+	  make_caller_info(CallerInfo,PredModule,RealCallerInfo),
+	  flora_bind_last(Arg, RealCallerInfo),
+	  Arg = P
+	%% is_caller_distributive/3
+        ; is_caller_distributive(Arg, _, _), !,
+	  apply_caller_info(Arg,CallerInfo,P)
+	%% is_caller_distributive/4
+        ; is_caller_distributive(Arg, _, _, _), !,
+	  apply_caller_info(Arg,CallerInfo,P)
+	%% is_ws_distributive/3
+        ; is_ws_distributive(Arg,Op,ArgList), !,
+	  distribute_workspace(F,ArgList,ModuleName,CallerInfo,ArgListOut),
+	  is_ws_distributive(P,Op,ArgListOut)
+	; %% Var@..., Var bound to compound
+	    flora_decode_predicate(Arg,_,PredModName,Wrapper,_,_,Args), !,
+	    ( %% if already a hilog or flogic predicate -- use it
+		nonvar(PredModName),
+		%% Arg is already a FLORA callable predicate,
+		%% so use *its* module name, NOT the one from CallerInfo
+		make_caller_info(CallerInfo,PredModName,RealCallerInfo),
+		%% Always replace the caller and replace whatever there is
+		%% with RealCallerInfo. Otherwise, general_tests/callReified.flr
+		%% won't work. The current caller info of X, where X is bound
+		%% to a reified formula may have been bound by a call from
+		%% another module and thus may be incorrect.
+		flora_replace_last(Arg,RealCallerInfo,ArgGen),
+		ArgGen = P,
+		!
+            ; ModuleName==FL_INVALIDMODULE,
+                Arg = P,
+                !
+	    ; %% else construct it
+                ( atom(Arg) ->
+                    flora_add_last([Arg],AugmentedArgs,CallerInfo),
+                    ( var(ModuleName) ->
+                        P = FLLIBMODLIT(WRAP_TABLED_HILOG,AugmentedArgs,ModuleName,CallerInfo)
+                    ;
+                        flora_module_predicate(WRAP_TABLED_HILOG,AugmentedArgs,ModuleName,P)
+                    )
+                ; Wrapper == WRAP_HILOG ->
+                    flora_add_last(Args,AugmentedArgs,CallerInfo),
+                    ( var(ModuleName) ->
+                        P = FLLIBMODLIT(WRAP_TABLED_HILOG,AugmentedArgs,ModuleName,CallerInfo)
+                    ;
+                        flora_module_predicate(WRAP_TABLED_HILOG,AugmentedArgs,ModuleName,P)
+                    )
+                ;
+                    %% Var@... where Var bound to a prolog predicate
+                    Arg = P
+                )
+	    )
+	).
+
+%% Specifically for FLLIBMODLIT
+is_libmodlit_control(FLLIBMODLIT(W,A,M,C), [W,A,M,C]).
+
+distribute_workspace(_F,[],_Mod,_CallerInfo,[]) :- !.
+distribute_workspace(F,[H|L],Mod,CallerInfo,[FLLIBMODLIT(F,H,Mod,CallerInfo)|NL]) :-
+        distribute_workspace(F,L,Mod,CallerInfo,NL).
+
+distribute_workspace_with_tran(_F,[],_Mod,_CallerInfo,[]) :- !.
+distribute_workspace_with_tran(F,[H|L],Mod,CallerInfo,[FLLIBMODLIT(F,FL_TRANSACTIONAL(H),Mod,CallerInfo)|NL]) :-
+        distribute_workspace_with_tran(F,L,Mod,CallerInfo,NL).
+
+distribute_caller_info([],_CallerInfo,[]) :- !.
+distribute_caller_info([H|OpArgList],CallerInfo,[Hout|OpArgListOut]) :-
+	apply_caller_info(H,CallerInfo,Hout),
+	distribute_caller_info(OpArgList,CallerInfo,OpArgListOut).
+
+apply_caller_info(Goal,CallerInfo,GoalOut) :-
+	is_ws_distributive(Goal,Op,GoalArgs),
+	!,
+	distribute_caller_info(GoalArgs,CallerInfo,ArgsOut),
+	is_ws_distributive(GoalOut,Op,ArgsOut).
+apply_caller_info(Goal,CallerInfo,GoalOut) :-
+	is_caller_distributive(Goal,Op,GoalArgs,OtherArgs),
+	!,
+	distribute_caller_info(GoalArgs,CallerInfo,ArgsOut),
+	is_caller_distributive(GoalOut,Op,ArgsOut,OtherArgs).
+apply_caller_info(Goal,CallerInfo,GoalOut) :-
+	is_caller_distributive(Goal,Op,GoalArgs),
+	!,
+	distribute_caller_info(GoalArgs,CallerInfo,ArgsOut),
+	is_caller_distributive(GoalOut,Op,ArgsOut).
+apply_caller_info(Goal,CallerInfo,GoalOut) :-
+	(flora_decode_predicate(Goal,_,Module,_,_,_,_), nonvar(Module)
+	->
+	    make_caller_info(CallerInfo,Module,RealCallerInfo),
+	    flora_bind_last(Goal,RealCallerInfo),
+	    GoalOut = Goal
+	; GoalOut = Goal
+	).
+
+%% make_caller_info(+DefaultCallerInfo,+RealModule,-RealCallerInfo)
+make_caller_info(DefaultCallerInfo,RealModule,RealCallerInfo) :-
+	DefaultCallerInfo = [Caller, _ | Rest],
+	RealCallerInfo = [Caller, RealModule | Rest].

@@ -1,0 +1,8 @@
+_$_$_flora'dyn_newoid5612[$order->0].  // @cdata
+_$_$_flora'dyn_newoid5612[test->>_$_$_flora'dyn_newoid5615].  // @cdata
+_$_$_flora'dyn_newoid5615[$order->1].  // @cdata
+_$_$_flora'dyn_newoid5615[$text->>_$_$_flora'dyn_newoid5616].  // @cdata
+_$_$_flora'dyn_newoid5616[$order->2].  // @cdata
+_$_$_flora'dyn_newoid5616[$string->[Ora Lassila]].  // @cdata
+_$_$_flora'dyn_newoid5615[$child(0)->_$_$_flora'dyn_newoid5616].  // @cdata
+_$_$_flora'dyn_newoid5612[$child(0)->_$_$_flora'dyn_newoid5615].  // @cdata

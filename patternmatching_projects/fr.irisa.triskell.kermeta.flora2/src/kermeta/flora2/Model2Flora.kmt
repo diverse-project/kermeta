@@ -1,4 +1,4 @@
-/* $Id: Model2Flora.kmt,v 1.3 2006-11-09 15:36:05 rodrigotex Exp $
+/* $Id: Model2Flora.kmt,v 1.4 2006-12-13 14:23:49 rodrigotex Exp $
  * Creation date: November 9, 2006
  * License:
  * Copyright:
@@ -6,7 +6,7 @@
  */
 
 
-
+  
 package kermeta::flora2;
 
 require "../../flora2/Flora2wVisitor.ecore"
@@ -53,7 +53,7 @@ class Model2Flora inherits Ecore2FloraBasicElements {
       // create a initial clause. Declaration will have Facts and Patterns Queries  
 	  clauses.add( createStandardClause(formula)) 	  
       // Adding type declaration ( obj : Class)
-	  formula.elements.add( createsInstanceClause(objTable.getTermId(obj), obj.getMetaClass.name))
+	  formula.elements.add( getInstanceExpression(objTable.getTermId(obj), obj.getMetaClass.name))
 	  
 	  var pendingClauses : OrderedSet <flora2::Clause> init OrderedSet<flora2::Clause>.new
 	  var pros : OrderedSet<Property> init OrderedSet<Property>.new
@@ -84,10 +84,9 @@ class Model2Flora inherits Ecore2FloraBasicElements {
             dataType ?= proType           
           
             term := getTermOfAnDataType(obj, pro, inst) 
-            clauses.add( createStandardClause( createsInstanceClause(term, dataType.name))) 
+            if (term != void) then clauses.add( createStandardClause( getInstanceExpression(term, dataType.name))) end
           end
 
-//             if not (PNamedElement.isInstance(obj) and inst.isVoid) then   
           if ( term != void) then formula.elements.add(createsDataClause(objTable.getTermId(obj), pro.name, term)) end
         end   
       end  
@@ -120,22 +119,45 @@ class Model2Flora inherits Ecore2FloraBasicElements {
         if proInstance.getMetaClass.name == "String" then
           var strTerm : flora2::String init flora2::String.new
           strTerm.strName ?= proInstance
-          term := strTerm
+          // WORKAROUND TO SOLVE A BUG OF KERMETA: All unassigned strings are lod in kermeta
+          // as empty string.
+          if strTerm.strName != "" then
+             term := strTerm
+          end
         else if proInstance.getMetaClass.name == "Integer" then
           var intTerm : flora2::Integer init flora2::Integer.new
           intTerm.intName ?= proInstance
           term := intTerm              
-        else if proInstance.getMetaClass.name == "Boolean" then                        
+        else if proInstance.getMetaClass.name == "Boolean" then
           // FIXME see how to represent it in Flora
-        end end end
+        else if proInstance.getMetaClass.name == "EnumerationLiteral" then
+          var literal : kermeta::language::structure::EnumerationLiteral          
+          literal ?= proInstance
+          var constTerm : flora2::Constant init flora2::Constant.new          
+          constTerm.symbolName := literal.name
+          term := constTerm          
+        else  
+          stdio.writeln("WARNING: UNKNOW DataType - '"+ proInstance.toString+"' : '"+proInstance.getMetaClass.name+"'")        
+          // try to cast to a NamedElement
+          var namedElem : kermeta::language::structure::NamedElement          
+          namedElem ?= proInstance
+          var constTerm : flora2::Constant init flora2::Constant.new          
+          constTerm.symbolName := namedElem.name   
+          term := constTerm                 
+        end end end end
        result := term   
 	end
 	
 	operation getTermOfPropertyInstance(objHost : Object, pro : Property, proInstance: Object) : flora2::Term is do
        result := objTable.getTermId(proInstance)	         
 	end 
-}
+	
 
+	operation getInstanceExpression (term: flora2::Term,  className : String) : flora2::Expression is do
+	  result := createsInstanceClause (term,  className)	  
+	end		
+}
+ 
 /* class that manages an unique id for each object */
 class IDTable {
 

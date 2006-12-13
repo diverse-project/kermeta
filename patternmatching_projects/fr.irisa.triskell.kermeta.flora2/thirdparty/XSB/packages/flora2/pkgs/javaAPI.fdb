@@ -1,0 +1,3 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(flapply)('callXOnList',___Op,[],___DataOrSign,[_CallerModuleVar,_CallerModuleArgsVar]).

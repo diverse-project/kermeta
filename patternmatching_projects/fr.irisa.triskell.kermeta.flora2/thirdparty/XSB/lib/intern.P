@@ -1,0 +1,173 @@
+/* File:      intern.P
+** Author(s): Prasad Rao
+** Contact:   xsb-contact@cs.sunysb.edu
+** 
+** Copyright (C) The Research Foundation of SUNY, 1993-1998
+** 
+** XSB is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** XSB is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with XSB; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+**
+** $Id: intern.P,v 1.16 2005/09/29 15:50:36 dwarren Exp $
+** 
+*/
+
+
+:- compiler_options([sysmod,xpp_on]).
+
+#include "builtin.h"
+
+
+% the i_ predicates are internal!
+
+/*--------------------------------------------------
+	new_trie(-Root)
+   	Root is a handle for a new trie 
+--------------------------------------------------*/
+
+new_trie(_Root) :-
+	 '_$builtin'(NEWTRIE).
+
+/*--------------------------------------------------
+trie_intern(+Term,+Root,-Leaf,-Flag,-Skel)
+	Term: term to be interned
+	Root: handle for the trie
+	Leaf: handle for the interned term
+	Flag: 1 -> Old term 0 -> New term
+	Skel: Variables in the interned term
+--------------------------------------------------*/
+
+trie_intern(Term,Root,Leaf,Flag,Skel) :-
+	i_trie_intern(Term,Root,Leaf,Flag),
+	get_lastnode_cs_retskel(_,_,_,Skel1), Skel = Skel1.
+
+/*--------------------------------------------------
+ version where flag is ignored 
+--------------------------------------------------*/
+
+trie_intern(Term,Root,Leaf,Skel) :- 
+	trie_intern(Term,Root,Leaf,_Flag,Skel). 
+
+/* --------------------------------------------------
+version which interns into a fixed trie 
+--------------------------------------------------*/
+
+trie_intern(Term,Leaf,Skel) :- 	trie_intern(Term,0,Leaf,Skel).
+
+/*--------------------------------------------------
+trie_interned(?Term,+Root,?Leaf,-Skel)
+	Term: term to be retrieved can be either (partially) bound
+		or free
+	Root: handle for the trie
+	Leaf: handle for the interned term
+	      can be bound or free
+	Skel: Variables in the interned term
+
+A call to this predicate will fail if there is no term
+in the trie whose handle is 'Root' that unifies with Term
+The behavior is unpredicable (seg fault etc if the Root and
+Leaf Parameters are incorrect)
+--------------------------------------------------*/
+
+trie_interned(Term,Root,Leaf,Skel) :-
+	(var(Leaf)
+	 ->	i_trie_interned(Term,Root,Leaf),
+		get_lastnode_cs_retskel(_,Leaf,_,Skel1)
+	 ;	integer(Leaf),
+		bottom_up_unify(Term1,Root,Leaf),
+		Term1 = Term,
+		get_lastnode_cs_retskel(_,_,_,Skel1)
+	),
+	Skel1 = Skel.
+
+/* --------------------------------------------------
+version which interns into a fixed trie 
+--------------------------------------------------*/
+
+trie_interned(Term,Leaf,Skel) :- 
+	trie_interned(Term,0,Leaf,Skel).
+
+
+/*--------------------------------------------------
+trie_set_last_int(+Leaf,+IntVal)
+Leaf must be a pointer to a Leaf node obtained from
+trie_intern(ed), and it must point to a term whose last
+atomic value is an integer (and must not have a sibling).
+This predicate resets that last integer to IntVal.
+(This should be moved to a builtin in C.)
+--------------------------------------------------*/
+trie_set_last_int(_Leaf,_Val) :-
+	abort('trie_set_last_int/2 is no longer available').
+/****	buff_word(Leaf,12,Par),
+	buff_word(Par,8,Child),
+	Child =:= Leaf,
+	buff_word(Leaf,16,TagVal),
+	(TagVal /\ 7) =:= 2,
+	NTagVal is (Val << 3) + 2,
+	buff_set_word(Leaf,16,NTagVal). ****/
+
+/*--------------------------------------------------
+trie_unintern(+Root,+Leaf)
+this predicate has to be called with care. Uninterning
+can be done only when the trie from which the term is
+being uninterned is not being actively accessed. 
+--------------------------------------------------*/
+
+trie_unintern(Root,Leaf) :- 
+	integer(Root),
+	integer(Leaf),
+	!,
+	trie_dispose(Root,Leaf).
+trie_unintern(R,L) :-
+	abort(('Incorrect Arguments to',trie_unintern(R,L))).
+
+/*--------------------------------------------------
+trie_unintern_nr(+Root, +Leaf)
+--------------------------------------------------*/
+trie_unintern_nr(Root,Leaf) :- 
+	integer(Root),
+	integer(Leaf),
+	trie_dispose_nr(Root,Leaf).
+
+/*--------------------------------------------------
+unmark_uninterned_nr(+Root, +Leaf)
+--------------------------------------------------*/
+unmark_uninterned_nr(Root,Leaf) :- 
+	integer(Root),
+	integer(Leaf),
+	trie_undispose(Root,Leaf).
+
+
+/*--------------------------------------------------
+delete_trie(+Root)
+--------------------------------------------------*/
+delete_trie(Root) :- delete_trie(Root,intern).
+
+
+/* reclaims nodes previously uninterned (but not deleted)
+   with trie_unintern_nr */
+trie_reclaim_uninterned_nr(_Root) :- '_$builtin'(RECLAIM_UNINTERNED_NR).
+
+
+/* builtin calls */
+i_trie_intern(_Term,_Root,_Leaf,_Flag) :- '_$builtin'(TRIE_INTERN).
+i_trie_interned(_Term,_Root,_Leaf) :- '_$builtin'(TRIE_INTERNED).
+trie_dispose(_Root,_Leaf) :- '_$builtin'(TRIE_DISPOSE).
+bottom_up_unify(_Term,_Root,_Leaf) :- '_$builtin'(BOTTOM_UP_UNIFY).
+delete_trie(_Root,_Usage) :- '_$builtin'(DELETE_TRIE).
+trie_dispose_nr(_Root, _Leaf) :- '_$builtin'(TRIE_DISPOSE_NR).
+trie_undispose(_Root,_Leaf) :- '_$builtin'(TRIE_UNDISPOSE).
+
+
+
+

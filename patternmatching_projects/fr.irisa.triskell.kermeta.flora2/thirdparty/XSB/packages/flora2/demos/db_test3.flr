@@ -1,0 +1,44 @@
+#include "db_test.flh"
+
+?- writeln('--Error Handling .--')@prolog().
+
+
+/****
+To be integrated with the new flora error handling mech.
+?- write('test 101, create an already existing database')@prolog(),
+   catch{flDBCreate(DSN,'ext_db',USER_NAME,PWD), FLORA_ABORT(FLORA_DB_EXCEPTION(ErrorMsg1),_), writeln(ErrorMsg1)@prolog()},
+   writeln('failed, as expected')@prolog().
+
+?- write('test 105, associate a module that is not loaded')@prolog(),
+   catch{flDBConnect(DSN,'ext_db',USER_NAME,PWD,'mod1'), FLORA_ABORT(ErrorMsg2,_), writeln(ErrorMsg2)@prolog()},
+   writeln('failed, as expected')@prolog().
+**/
+
+?- [empty>>mod1].
+
+/*****
+?- write('test 110, Try to get db stuff for a module that has no association.')@prolog(),
+   catch{flDBAddToMemory('mod1'), FLORA_ABORT(FLORA_DB_EXCEPTION(ErrorMsg3),_), writeln(ErrorMsg3)@prolog()},
+   writeln('failed, as expected')@prolog().
+****/
+
+?- flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod1').
+
+?- write('test 120, Insert stuff that are already present.')@prolog(),
+   insert{p(a,a)@mod1},insert{flora@mod1},
+   insert{a[d->b1]@mod1,a[s->b1]@mod1},
+   writeln('messages got as expected')@prolog().
+
+
+?- write('test 120, Delete stuff that are not present.')@prolog(),
+   delete{p1(a,a)@mod1},insert{flora1@mod1},
+   delete{a1[d->b1]@mod1,a[s2->b1]@mod1},
+   writeln('No messages got as expected')@prolog().
+
+?- writeln('--Sanity check--')@prolog().
+?- p(?M1,?N1)@mod1.
+?- a[?X->?Y]@mod1.
+?- xsb@mod1.
+
+?- flHalt.
+

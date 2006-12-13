@@ -1,0 +1,4 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'b',__newvar2).
+FLORA_THIS_WORKSPACE(sub)(__newvar1,'c',__newvar2).

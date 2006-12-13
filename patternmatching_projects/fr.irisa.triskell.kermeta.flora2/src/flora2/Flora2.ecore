@@ -1,69 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="flora2">
-  <eAnnotations source="There is a builin classes" references="//BuiltInClasses //PrimitiveClasses"/>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="flora2">
   <eClassifiers xsi:type="ecore:EClass" name="Program">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="clauses" upperBound="-1" eType="//Clause" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clauses" upperBound="-1"
+        eType="#//Clause" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Clause"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="//Clause">
-    <eAnnotations source="body is a conjunction of atoms"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="//AtomicFormula"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//Clause">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//AtomicFormula"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Expression"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AtomicFormula" abstract="true" eSuperTypes="//Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Query" eSuperTypes="//Clause">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicFormula" abstract="true" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Query" eSuperTypes="#//Clause">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//Expression"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataAtom" eSuperTypes="//FeatureAtom">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataAtom" eSuperTypes="#//FeatureAtom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Term"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true" eSuperTypes="//AtomicFormula">
-    <eAnnotations source="It is a HiLog Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Term" abstract="true" eSuperTypes="#//AtomicFormula">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="grounded"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="//IdTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="//DTSymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//IdTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="#//DTSymbol"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NonFunctionalTerm" abstract="true" eSuperTypes="//Term"/>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionalTerm" eSuperTypes="//Term">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" lowerBound="1" upperBound="-1" eType="//Term" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functor" lowerBound="1" eType="//IdTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NonFunctionalTerm" abstract="true" eSuperTypes="#//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalTerm" eSuperTypes="#//Term">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" lowerBound="1"
+        upperBound="-1" eType="#//Term" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functor" lowerBound="1"
+        eType="#//IdTerm"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SignatureAtom" eSuperTypes="//FeatureAtom">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SignatureAtom" eSuperTypes="#//FeatureAtom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="#//Term"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ISAAtom" abstract="true" eSuperTypes="//AtomicFormula">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1" eType="//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ISAAtom" abstract="true" eSuperTypes="#//AtomicFormula">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//Term"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureAtom" abstract="true" eSuperTypes="//AtomicFormula">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureAtom" abstract="true" eSuperTypes="#//AtomicFormula">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inheritable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="//Term"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="//Term"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="#//Term"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//Term"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ISAInstance" eSuperTypes="//ISAAtom">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ISAInstance" eSuperTypes="#//ISAAtom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" eType="#//Term"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ISASubclass" eSuperTypes="//ISAAtom">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="superclass" eType="//Term"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ISASubclass" eSuperTypes="#//ISAAtom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superclass" eType="#//Term"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="//NonFunctionalTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strName" eType="//DTString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="#//NonFunctionalTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strName" eType="#//DTString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="//NonFunctionalTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intName" eType="//DTInteger"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="#//NonFunctionalTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intName" eType="#//DTInteger"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="IdTerm" abstract="true" eSuperTypes="//NonFunctionalTerm"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdTerm" abstract="true" eSuperTypes="#//NonFunctionalTerm"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CompoundedFormula" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" lowerBound="2" upperBound="-1" eType="//Expression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//ConnectiveOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundedFormula" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" lowerBound="2"
+        upperBound="-1" eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//ConnectiveOp"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConnectiveOp">
     <eLiterals name="conjunctionOp" value="1"/>
     <eLiterals name="disjunctionOp" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Float" eSuperTypes="//NonFunctionalTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="floatName" eType="//DTFloat"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Float" eSuperTypes="#//NonFunctionalTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="floatName" eType="#//DTFloat"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveClasses">
     <eLiterals name="string" value="1"/>
@@ -71,20 +75,21 @@
     <eLiterals name="float" value="3"/>
     <eLiterals name="integer" value="4" literal="integer"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BuiltInClasses" eSuperTypes="//NonFunctionalTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="//PrimitiveClasses"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltInClasses" eSuperTypes="#//NonFunctionalTerm">
+    <eAnnotations/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="#//PrimitiveClasses"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="//IdTerm">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="//DTSymbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//IdTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" eType="#//DTSymbol"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DTString" instanceClassName="java.lang.String"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DTFloat" instanceClassName="java.lang.Integer"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DTInteger" instanceClassName="java.lang.Integer"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DTSymbol" instanceClassName="java.lang.String"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Fact" eSuperTypes="//Clause">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Fact" eSuperTypes="#//Clause">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"/>
   </eClassifiers>
 </ecore:EPackage>

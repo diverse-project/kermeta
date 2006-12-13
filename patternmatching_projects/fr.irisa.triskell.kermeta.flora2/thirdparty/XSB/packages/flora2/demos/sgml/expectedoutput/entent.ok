@@ -1,0 +1,8 @@
+_$_$_flora'dyn_newoid5691[$order->0].  // @entent
+_$_$_flora'dyn_newoid5691[oops->>_$_$_flora'dyn_newoid5694].  // @entent
+_$_$_flora'dyn_newoid5694[$order->1].  // @entent
+_$_$_flora'dyn_newoid5694[$text->>_$_$_flora'dyn_newoid5695].  // @entent
+_$_$_flora'dyn_newoid5695[$order->2].  // @entent
+_$_$_flora'dyn_newoid5695[$string-><snag attr=2>].  // @entent
+_$_$_flora'dyn_newoid5694[$child(0)->_$_$_flora'dyn_newoid5695].  // @entent
+_$_$_flora'dyn_newoid5691[$child(0)->_$_$_flora'dyn_newoid5694].  // @entent

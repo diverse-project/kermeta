@@ -1,0 +1,159 @@
+/* File:      flrcheckcard.P
+**
+** Author(s): Hui Wan
+**
+** Contact:   flora-users@lists.sourceforge.net
+**
+** Copyright (C) The Research Foundation of SUNY, 1999-2001
+**
+** FLORA-2 is free software; you can redistribute it and/or modify it under the
+** terms of the GNU Library General Public License as published by the Free
+** Software Foundation; either version 2 of the License, or (at your option)
+** any later version.
+** 
+** FLORA-2 is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+** FOR A PARTICULAR PURPOSE.  See the GNU Library General Public License for
+** more details.
+** 
+** You should have received a copy of the GNU Library General Public License
+** along with FLORA-2; if not, write to the Free Software Foundation,
+** Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+** 
+** 
+*/
+
+
+:- compiler_options([xpp_on]).
+
+#include "flora_terms.flh"
+#include "flrheader.flh"
+
+:- import FLLIBMODLIT/4 from usermod.
+:- import FLLIBCOUNT/4 from usermod.
+:- import flora_error_line/1 from flrprint.
+
+
+/*************************************************************************************************************************
+FLLIBCHECKCARD(?Mod,?Class,?Method,?MethodType)
+  Returns all the (unified-with-input) module-class-method triples whose cardinality constraints are violated.
+  ***********************************************************************************************************************/
+FLLIBCHECKCARD(Mod,Class,Method) :-
+	FLLIBMODLIT(d_mvdcon,[Class,Method,L,H,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+	FLLIBCOUNT(V,[Class],
+		   FLLIBMODLIT(d_mvd,[Class,Method,V,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+		   Count),
+	( H < Count ; L > Count ).
+
+FLLIBCHECKCARD(Mod,Class,Method) :-
+	FLLIBMODLIT(d_imvdcon,[Class,Method,L,H,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+	FLLIBMODLIT(d_isa,[O,Class,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+	FLLIBCOUNT( V,[O],
+		    FLLIBMODLIT(d_mvd,[O,Method,V,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+		    Count),
+	( H < Count ; L > Count ).
+
+
+/*************************************************************************************************************************
+FLLIBCHECKCARD(+Mod,+Class,+Method,-Low,-High,-MethodType) :-
+  Returns all the (unified-with-input) module-class-method triples whose cardinality constraints are violated.
+
+  Low and High should be unbound variables in the input, they are used to signal which bound is violated.
+     If the lower bound is violated, then Low will be bound to the (violated) lower bound, otherwise it will remain unbound.
+     If the higher bound is violated, then High will be bound to the (violated) lower bound, otherwise it will remain unbound.
+
+  ***********************************************************************************************************************/
+FLLIBCHECKCARD(Mod,Class,Method,Low,High,MethodType) :-
+	( (High==Low ; High==MethodType ; Low==MethodType) ->
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?L, ?H, ?T should be different with each other!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	FLLIBMODLIT(d_mvdcon,[Class,Method,L,H,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+	FLLIBCOUNT(V,[Class],
+		   FLLIBMODLIT(d_mvd,[Class,Method,V,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+		   Count),
+	( H < Count ; L > Count ), % The constraint IS violated.
+	( not(var(Low)) ->  
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?L should be unbound!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	( L > Count ->
+	    Low = L % The lower bound is violated. Bind Low to the higher bound.
+	;
+	    true % The lower bound is not violated. Leave Low unbound.
+	),
+	( not(var(High)) -> 
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?H should be unbound!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	( H < Count ->
+	    High = H % The higher bound is violated. Bind High to the higher bound.
+	;
+	    true % The higher bound is not violated. Leave High unbound.
+	),
+	( not(var(MethodType)) ->
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?T should be unbound!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	MethodType = '=>'.
+
+FLLIBCHECKCARD(Mod,Class,Method,Low,High,MethodType) :-
+	( (High==Low ; High==MethodType ; Low==MethodType) ->
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?L, ?H, ?T should be different with each other!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	FLLIBMODLIT(d_imvdcon,[Class,Method,L,H,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+	FLLIBMODLIT(d_isa,[O,Class,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+	FLLIBCOUNT( V,[O],
+		    FLLIBMODLIT(d_mvd,[O,Method,V,[FLORA_THIS_MODULE_NAME,Mod]],Mod,[FLORA_THIS_MODULE_NAME,Mod]),
+		    Count),
+	( H < Count ; L > Count ), % The constraint IS violated.
+	( not(var(Low)) ->  
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?L should be unbound!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	( L > Count ->
+	    Low = L % The lower bound is violated. Bind Low to the higher bound.
+	;
+	    true % The lower bound is not violated. Leave Low unbound.
+	),
+	( not(var(High)) -> 
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?H should be unbound!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	( H < Count ->
+	    High = H % The higher bound is violated. Bind High to the higher bound.
+	;
+	    true % The higher bound is not violated. Leave High unbound.
+	),
+	( not(var(MethodType)) ->
+	    flora_error_line('Using _CheckCardinality(?Mod,?C,?M,?L,?H,?T): ?T should be unbound!'),
+	    !,
+	    fail
+	;
+	    true
+	),
+	MethodType = '*=>'.
+
+	

@@ -1,0 +1,10 @@
+
+To build the java API code for FLORA-2, do the following:
+
+Unix/Linux:
+
+      ./build.sh
+
+Windows:
+
+      build.bat

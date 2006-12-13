@@ -1,0 +1,495 @@
+\chapter{Getting Started with XSB} \label{quick_start}
+%=====================================================
+
+This section describes the steps needed to install XSB under UNIX and
+under Windows.
+
+\section{Installing XSB under UNIX}
+%==================================
+\label{installation_options}
+
+If you are installing on a UNIX platform, the version of XSB that you
+received may not include all the object code files so that an
+installation will be necessary.  The easiest way to install XSB is to
+use the following procedure.
+
+\begin{enumerate}
+\item	Decide in which directory in your file system you want to install
+  XSB and copy or move XSB there.
+\item Make sure that after you have obtained XSB by anonymous ftp (using
+  the {\tt bin}ary option) or from the web, you have uncompressed it by
+  following the instructions found in the file {\tt README}.
+  
+\item Note that after you uncompress and untar the XSB tar file, a
+  subdirectory {\tt XSB} will be tacked on to the current directory. All
+  XSB files will be located in that subdirectory.
+  
+  In the rest of this manual, let us use {\tt \$XSB\_DIR} to refer to this
+  subdirectory.  Note the original directory structure of XSB must be
+  maintained, namely, the directory {\tt \$XSB\_DIR} should contain all the
+  subdirectories and files that came with the distribution. In particular,
+  the following directories are required for XSB to work: \verb'emu',
+  \verb'syslib', \verb'cmplib', \verb'lib', \verb'packages', \verb'build',
+  and \verb'etc'.
+
+\index{configuration}
+
+\item Change directory to {\tt \$XSB\_DIR/build} and then run these commands:
+  %%
+  \begin{quote}
+    \tt
+    configure\\
+    \tt
+    makexsb
+  \end{quote}
+  %%
+  %%$
+  This is it!
+  
+  In addition, it is now possible to install XSB in a shared directory
+  ({\it e.g.}, {\tt /usr/local}) for everyone to use.  In this situation,
+  you should use the following sequence of commands:
+  %%
+  \begin{quote}
+    \tt
+    configure --prefix=\$SHARED\_XSB\\
+    \tt
+    makexsb\\
+    \tt
+    makexsb install
+  \end{quote}
+  %%$
+  where {\tt \$SHARED\_XSB}  denotes the shared directory where XSB is
+  installed.  In all cases, XSB can be run using the script
+  %%$
+  \begin{quote}
+    \tt
+    \$XSB\_DIR/bin/xsb
+  \end{quote}
+  However, if XSB is installed in a central location, the script for
+  general use is:
+  \begin{quote}
+    \verb'<central-installation-directory>/<xsb-version>/bin/xsb'
+  \end{quote}
+\end{enumerate}
+  %%
+
+{\bf Important:} The XSB executable determines the location of the
+libraries it needs based on the full path name by which it was invoked.
+The ``smart script'' \verb|bin/xsb| also uses its full path name to
+determine the location of the various scripts that it needs in order to
+figure out the configuration of your machine.  Therefore, there are certain
+limitations on how XSB can be invoked.
+
+Here are some legal ways to invoke XSB:
+%%
+\begin{enumerate}
+\item  invoking the smart script \verb|bin/xsb| or the XSB executable using
+  their absolute or relative path name.
+\item using an alias for \verb|bin/xsb| or the executable.
+\item creating a new shell script that invokes either \verb|bin/xsb| or the
+  XSB executable using their {\em full\/} path names. 
+\end{enumerate}
+%%
+
+Here are some ways that are guaranteed to not work in some or all cases:
+%%
+\begin{enumerate}
+\item  creating a hard link to either \verb|bin/xsb| or the executable and
+  using {\it it\/} to invoke XSB. (Symbolic links should be ok.)
+\item changing the relative position of either \verb|bin/xsb| or the
+  XSB executable with respect to the rest of the XSB directory tree.
+\end{enumerate}
+%%
+
+The configuration script allows many different options to be
+specified.  A full listing can be obtained by typing {\tt
+\$XSB\_DIR/build/configure --help}.
+%%
+\begin{description}
+\item[Type of Machine.]  The configuration script automatically detects
+  your machine and OS type, and builds XSB accordingly. Moreover, you can
+  build XSB for different architectures while using the same tree and the
+  same installation directory provided, of course, that these machines are
+  sharing this directory, say using NFS or Samba. All you will have to do
+  is to login to a different machine with a different architecture or OS
+  type, and repeat the above sequence of comands.
+  
+  The configuration files for different architectures reside in different
+  directories, and there is no danger of an architecture conflict.
+  Moreover, you can keep using the same {\tt ./bin/xsb} script regardless
+  of the architecture. It will detect your configuration and will use the
+  right files for the right architecture! 
+
+  If XSB is being built on a machine running Windows in which Cygwin
+  is installed, Cygwin and Windows are treated as separate operating
+  systems, as their APIs are completely different.  If no previous
+  configuration has been made, the configure script will attempt to
+  use {\tt gcc} and other Unix facilities, and therefore will compile
+  the system under Cygwin.  If this behavior is not desired, the
+  option {\tt --with-wind} (equivalently, {\tt --with-os=wind}) uses a
+  Window compiler and API.  If a user wants to ensure the Cygwin
+  compiler is used (say after a previous configuration for Windows),
+  the option {\tt -without-wind} can be used.  See
+  Section~\ref{quick:DOS} for more details.
+
+\index{cc} \index{gcc} \index{acc}  
+\item[Choice of the C Compiler and Other options] \label{cc} The {\tt
+  configure} script will attempt to use {\tt gcc}, if it is available.
+  Otherwise, it will revert to {\tt cc} or {\tt acc}.  Some versions
+  of {\tt gcc} are broken for particular platforms, in which case you
+  would have to give {\tt configure} an additional directive {\tt
+    --with-cc} (or {\tt --with-acc}).  If you must use some special
+  compiler, use {\tt --with-cc=your-own-compiler}.  You can also use
+  the {\tt optimization-level} option to disable the default C
+  compiler optimization level.  (or {\tt --disable-optimization} to
+  disable all compiler optimizations).  {\tt --enable-debug}, and
+  there are many other options.  Finally, the {\tt force64} option
+  forces compilation to use 64 bit mode on 64-bit machines that
+  default to 32 bit compilation.  Type {\tt configure --help} to see
+  them all. Also see the file~\verb'$XSB_DIR/INSTALL' for more
+  details.
+
+\item[XSB and Site-specific Information] Using the option {\tt
+  --prefix=PREFIX} installs architecture-independent files in the
+  directory {\tt PREFIX}, e.g. {\tt /usr/local}, which can be useful
+  if XSB is to be shared at a site.  Using the option {\tt
+    --site-prefix=DIR} installs site-specific libraries in {\tt
+    DIR/site}.  Other options indicate directories in which to search
+  for site-specific static and dynamic libraries, and for include
+  files.
+
+\item[Multi-threading] \version{} of XSB is the first version that
+  supports multi-threading.  The multi-threaded engine is slightly
+  slower than the single-threaded engine, mostly due to its need for
+  concurrency control.  To obtain the benefits of multiple threads on
+  a platform that supports either Posix or Windows threads (i.e.
+  nearly all platforms) users must configure XSB with the directive
+  {\tt enable-mt}.  The multi-threaded engine works with other
+  configuration options, multi-threading can be compiled with batched
+  or local scheduling, with the ODBC or Interprolog interfaces, and so
+  on.
+
+%%$
+\index{InterProlog Interface}
+\index{Oracle Interface}
+\index{SModels Interface}
+\index{XASP}
+\index{ODBC Interface}
+\index{Tck/Tk}
+
+\item[Interfaces] Certain interfaces must be designated at
+configuration time, including those to Oracle, ODBC, Smodels, Tck/Tk,
+and Libwww.  However, the XSB-calling-C interface interface does not
+need to be specified at configuration time.  If you wish to use the
+InterProlog Java interface that is based on {\tt jni}, you must
+specify this at configuration time; otherwise if you wish to use the
+sockets-based Interprolog interface, it does not need to be specified
+at configuration time.  See Volume 2 and the InterProlog site {\tt
+www.declarativa.com} for details of specific interfaces
+
+While the XSB configuration mechanism can detect most include and
+library paths, use of certain interfaces may require information about
+particular directories.  In particular the {\tt
+--site-static-libraries} option might be needed if compiling with
+support for statically linked packages (such as Oracle) or if your
+standard C libraries are in odd places. Alternately, dynamic libraries
+on odd places may need to be speficied at configuation time using the
+{\tt --site-dynamic-libraries} option.  and finally, the {\tt
+--site-includes} option might be needed if your standard header files
+(or your {\tt jni.h} file) are in odd places, or if XSB is compiled
+with ODBC support.  Type {\tt configure --help} for more details.
+
+%%$
+\index{scheduling strategy}
+\item[Type of Scheduling Strategy.]  The ordering of operations within
+a tabled evaluation can drastically affect its performance.  XSB
+provides two scheduling strategies: Batched Evaluation and Local
+Evaluation.  Local Evaluation ensures that, whenever possible,
+subgoals are fully evaluated before there answers are returned, and
+provides superior behavior for programs in which tabled negation is
+used.  Batched Evaluation evaluates queries to reduce the time to the
+first answer of a query.  Both evaluation methods can be useful for
+different programs.  Since Version 2.4, Local Evaluation has been the
+default evaluation method for XSB.  Batched Evaluation can be chosen
+via the {\tt --enable-batched-scheduling} configure option.  Detailed
+explanations of the scheduling strategies can be found in
+\cite{JFLP-Scheduling}, and further experimentation in \cite{CaSW02}.
+
+%
+\end{description}
+
+Other options are of interest to advanced users who wish to experiment
+with XSB, or to use XSB for large-scale projects.  In general, however
+users need not concern themselves with these options.
+
+\subsection{Possible Installation Problems}
+
+
+\paragraph*{Lack of Space for Optimized Compilation of C Code}
+When making the optimized version of the emulator, the temporary space
+available to the C compiler for intermediate files is sometimes not
+sufficient. For example on one of our SPARCstations that had very
+little {\tt /tmp} space the {\tt "-O4"} option could not be used for
+the compilation of files {\tt emuloop.c}, and {\tt tries.c}, without
+changing the default {\tt tmp} directory and increasing the swap
+space.  Depending on your C compiler, the amount and nature of {\tt
+/tmp} and swap space of your machine you may or may not encounter
+problems.  If you are using the SUN C compiler, and have disk space in
+one of your directories, say {\tt dir}, add the following option to
+the entries of any files that cannot be compiled:
+
+\demo{       -temp=dir}
+
+\noindent
+If you are using the GNU C compiler, consult its manual pages
+to find out how you can change the default {\tt tmp} directory or how you
+can use pipes to avoid the use of temporary space during compiling.
+Usually changing the default directory can be done by declaring/modifying
+the {\tt TMPDIR} environment variable as follows:
+
+\demo{       setenv TMPDIR dir}
+
+\paragraph*{Missing XSB Object Files}
+When an object (*.xwam) file is missing from the {\tt lib} directories
+you can normally run the {\tt make} command in that directory to
+restore it (instructions for doing so are given in Chapter
+\ref{quick_start}).  However, to restore an object file in the
+directories {\tt syslib} and {\tt cmplib}, one needs to have a
+separate Prolog compiler accessible (such as a separate copy of
+XSB), because the XSB compiler uses most of the files in these
+two directories and hence will not function when some of them are
+missing.  For this reason, distributed versions normally include all
+the object files in {\tt syslib} and {\tt cmplib}.
+
+\section{Installing XSB under Windows}
+\subsection{Using Cygnus Software's \mbox{CygWin32}}
+\label{quick:cygwin}
+
+This is easy: just follow the Unix instructions. This is the preferred way to
+run XSB under Windows, because this ensures that all features of XSB are
+available.
+
+
+\subsection{Using Microsoft Visual C++}
+\label{quick:DOS}
+%==========================================
+
+\begin{enumerate}
+\item 
+   XSB will unpack into a subdirectory named {\tt xsb}.
+   Assuming that you have {\tt XSB.ZIP} in the {\tt \$XSB\_DIR} directory,
+   you can issue the command
+\begin{verbatim}
+   unzip386 xsb.zip
+\end{verbatim}
+   which will install XSB in the subdirectory {\tt xsb}.
+
+ \item If you decide to move XSB to some other place, make sure that the
+   entire directory tree is moved --- XSB executable looks for the files it
+   needs relatively to its current position in the file system.
+
+\end{enumerate}
+
+
+You can compile XSB under Microsoft Visual C++ compiler 
+to create a console-supported top loop or a DLL by following
+these steps:
+
+\begin{enumerate}
+
+\item
+   cd build
+
+\item
+  Type:\\
+  {\tt makexsb\_wind "CFG=option" ["DLL=yes"] ["ORACLE=yes"] ["SITE\_LIBS=libraries"]}
+  %%
+  \begin{itemize}
+  \item The items in square brackets are optional.
+  \item The options for {\tt CFG} are: \emph{release} or \emph{debug}.  The
+    latter is used when you want to compile XSB with debugging enabled.
+  \item The other parameters to {\tt makexsb\_wind} are optional. The {\tt DLL}
+    parameter tells Visual C++ to compile XSB as a DLL. The {\tt ORACLE}
+    parameter compiles XSB with support for Oracle DBMS. If {\tt ORACLE} is
+    specified, you {\bf must} also specify the necessary Oracle libraries
+    using the parameter {\tt SITE\_LIBS}.
+  \end{itemize}
+  %%
+   
+ \item The above command will compile XSB as requested and will put the XSB 
+   executable in:
+%%
+\[
+ \tt
+ \$XSB\_DIR\backslash config\backslash \mbox{\tt x86-pc-windows}\backslash bin
+ \backslash xsb.exe
+\]
+%%
+   If you requested to compile XSB as a DLL, then the DLL will be placed in
+%%
+\[
+ \tt
+ \$XSB\_DIR\backslash config\backslash \mbox{\tt x86-pc-windows}\backslash
+ bin \backslash xsb.dll
+\]
+%%
+\end{enumerate}
+%%
+{\bf Note}: the XSB executable and the DLL can coexist in the same source
+tree structure. However, if you first compiled  XSB as an executable and
+then want to compile it as a DLL (or vice versa), then you must run 
+%%
+\begin{verbatim}
+ makexsb_wind  clean  
+\end{verbatim}
+%%
+in between.
+
+
+\section{Invoking XSB}
+%=====================
+
+Under Unix, XSB can be invoked by the command:
+\begin{quote}
+       \tt \$XSB\_DIR/bin/xsb
+\end{quote}
+%%$
+if you have installed XSB in your private directory.
+If XSB is instaled in a shared directory ({\it e.g.}, \$SHARED\_XSB
+for the entire site (UNIX only), then you should use
+\begin{quote}
+       \tt \$SHARED\_XSB/bin/xsb
+\end{quote}
+%%
+In both cases, you will find yourself in the top level interpreter.  
+As mentioned above, this script automatically detects the system
+configuration you are running on and will use the right files and
+executables. (Of course, XSB should have been built for that architecture
+earlier.)
+
+Under Windows, you should invoke XSB by typing:
+\[
+ \tt
+ \$XSB\_DIR\backslash config\backslash \mbox{\tt x86-pc-windows}\backslash bin
+ \backslash xsb.exe
+\]
+%%
+
+
+You may want to make an alias such as {\tt \smallourprolog} to the above
+commands, for convenience, or you might want to put the directory where the
+XSB command is found in the {\tt \$PATH} environment variable. However, you
+should {\bf not} make hard links to this script or to the XSB executable.
+If you invoke XSB via such a hard link, XSB will likely be confused and will
+not find its libraries.  That said, you {\bf can} create other scripts and
+call the above script from there.
+
+Most of the ``standard'' Prolog predicates are supported by XSB, 
+so those of you who consider yourselves champion entomologists, can try
+to test them for bugs now.  Details are in Chapter~\ref{standard}.
+
+
+\section{Compiling XSB programs}
+%===============================
+
+All source programs should be in files whose names have the 
+suffix {\tt .P}.  One of the ways to compile a program from a file in 
+the current directory and load it into memory, is to type the query:
+\begin{verbatim}
+     [my_file].
+\end{verbatim}
+where \verb'my_file' is the name of the file, or preferably, the name
+of the module (obtained from the file name by deleting the suffix {\tt .P}).
+To find more about the module system of XSB see Section~\ref{Modules}.
+
+If you are eccentric (or you don't know how to use an editor) you can also 
+compile and load predicates input directly from the terminal by using the
+command:
+\begin{verbatim}
+     [user].
+\end{verbatim}
+A {\tt CTRL-d} or the atom \verb'end_of_file' followed by a period 
+terminates the input stream.
+
+
+\section{Sample XSB Programs}
+%============================
+
+If for some reason you don't feel like writing your own XSB programs, 
+there are several sample XSB programs in the directory: 
+{\tt \$XSB\_DIR/examples}.  All contain source code.
+
+The entry predicates of all the programs in that directory are given
+the names {\tt demo/0} (which prints out results) and {\tt go/0}
+(which does not print results).\footnote{
+  %%
+  This convention does not apply to the subdirectories of the examples
+  directory, which illustrate advanced features of XSB.
+  %%
+  }
+%%
+Hence, a sample session might look like
+(the actual times shown below may vary and some extra information is given
+using comments after the \% character):
+
+{\footnotesize
+ \begin{verbatim}
+my_favourite_prompt> cd $XSB_DIR/examples
+my_favourite_prompt> $XSB_DIR/bin/xsb
+XSB Version 2.0 (Gouden Carolus) of June 27, 1999
+[i586-pc-linux-gnu; mode: optimal; engine: slg-wam; scheduling: batched]
+| ?- [queens].
+[queens loaded]
+
+yes
+| ?- demo.
+
+% ...... output from queens program .......
+
+Time used: 0.4810 sec
+
+yes
+| ?- statistics.
+
+memory (total)         1906488 bytes:       203452 in use,      1703036 free
+  permanent space       202552 bytes
+  glob/loc space        786432 bytes:          432 in use,       786000 free
+    global                                     240 bytes
+    local                                      192 bytes
+  trail/cp space        786432 bytes:          468 in use,       785964 free
+    trail                                      132 bytes
+    choice point                               336 bytes
+  SLG subgoal space          0 bytes:            0 in use,            0 free
+  SLG unific. space      65536 bytes:            0 in use,        65536 free
+  SLG completion         65536 bytes:            0 in use,        65536 free
+  SLG trie space             0 bytes:            0 in use,            0 free
+   (call+ret. trie           0 bytes,     trie hash tables            0 bytes)
+
+      0 subgoals currently in tables
+      0 subgoal check/insert attempts inserted     0 subgoals in the tables
+      0 answer  check/insert attempts inserted     0 answers  in the tables
+
+       Time: 0.610 sec. cputime,  18.048 sec. elapsetime
+
+yes
+| ?- halt.          % I had enough !!!
+
+End XSB (cputime 1.19 secs, elapsetime 270.25 secs)
+my_favourite_prompt>
+ \end{verbatim}
+}
+
+
+\section{Exiting XSB}
+%====================
+
+If you want to exit XSB, issue the command \verb'halt.' or
+simply type \verb'CTRL-d' at the XSB prompt. To exit XSB while it is
+executing queries, strike \verb'CTRL-c' a number of times.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "manual1"
+%%% End: 

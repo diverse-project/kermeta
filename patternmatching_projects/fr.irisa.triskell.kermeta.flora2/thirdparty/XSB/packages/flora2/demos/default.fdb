@@ -1,0 +1,24 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(flapply)(times_flies_like_an_arrow,[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(exists)('fruit_flies_like_an_apple',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('e','a','b',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('e','b','a',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(flapply)('e','b','c',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(isa)('john','employee',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(sub)('employee','person',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvdsig)('person','age','integer',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvdcondef)('person','age',1,1,[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvdsig)('person','kids','person',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvdcondef)('person','kids',0,'*',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(isa)('mary','employee',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)('mary','age',29,[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)('mary','kids','leo',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)('mary','kids','tim',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)('mary','flapply'('salary',1998),'a_lot',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)('tim','hobbies','snowboard',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)('tim','hobbies','stamps',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(isa)('snowboard','dangerous_hobby',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(mvd)(___X,'self',___X,[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(imvd)('person','believes_in','something_else',[_CallerModuleVar,_CallerModuleArgsVar]).
+FLORA_THIS_WORKSPACE(imvd)('person','believes_in','something',[_CallerModuleVar,_CallerModuleArgsVar]).

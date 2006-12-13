@@ -1,0 +1,11 @@
+_$_$_flora'dyn_newoid5824[$order->0].  // @per
+_$_$_flora'dyn_newoid5824[per->>_$_$_flora'dyn_newoid5827].  // @per
+_$_$_flora'dyn_newoid5827[$order->1].  // @per
+_$_$_flora'dyn_newoid5827[jim->>_$_$_flora'dyn_newoid5828].  // @per
+_$_$_flora'dyn_newoid5828[$order->2].  // @per
+_$_$_flora'dyn_newoid5828[$text->>_$_$_flora'dyn_newoid5829].  // @per
+_$_$_flora'dyn_newoid5829[$order->3].  // @per
+_$_$_flora'dyn_newoid5829[$string->snark].  // @per
+_$_$_flora'dyn_newoid5828[$child(0)->_$_$_flora'dyn_newoid5829].  // @per
+_$_$_flora'dyn_newoid5827[$child(0)->_$_$_flora'dyn_newoid5828].  // @per
+_$_$_flora'dyn_newoid5824[$child(0)->_$_$_flora'dyn_newoid5827].  // @per

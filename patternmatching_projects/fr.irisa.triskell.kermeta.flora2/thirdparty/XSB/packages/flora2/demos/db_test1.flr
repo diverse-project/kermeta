@@ -1,0 +1,59 @@
+#include "db_test.flh"
+
+?- write('test 11, database create')@prolog(),
+   flDBCreate(?DSN,'ext_db',?USER_NAME,?PWD),
+   writeln('succeeded, as expected')@prolog().
+
+?- writeln('load empty module mod1 in memory')@prolog(),
+   [empty>>mod1].
+
+?- write('test 12, insert into mod1')@prolog(),
+   insert{p(a,a)@mod1},insert{flora@mod1,xsb@mod1},
+   insert{p(a,b)@mod1,p(a,c)@mod1,p(a,d)@mod1,a[d->b1]@mod1,a[s->b1]@mod1},
+   writeln('succeeded, as expected')@prolog().
+
+
+?- write('test 13, associate mod1 with database')@prolog(),
+   flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod1'),
+   writeln('succeeded, as expected')@prolog().
+
+?- write('test 14, insert more obj in mod1')@prolog(),
+   insert{q(a)@mod1,q(b)@mod1,q(c)@mod1,q(d)@mod1},
+   insert{a[d->b2]@mod1,a[s->b2]@mod1},
+   writeln('succeeded, as expected')@prolog().
+
+?- writeln('load empty modules mod2, mod3 in memory')@prolog(),
+   [empty>>mod2], [empty>>mod3].
+
+
+?- write('test 15, insert in mod2')@prolog(),
+   insert{q(a)@mod2,q(b)@mod2,q(c)@mod2,q(d)@mod2},
+   insert{a[d->b2]@mod2,a[s->b2]@mod2},
+   writeln('succeeded, as expected')@prolog().
+
+?- write('test 16, insert in mod3')@prolog(),
+   insert{q(a)@mod3,q(b)@mod3,q(c)@mod3,q(d)@mod3},
+   /*insert{a[d->b2]@mod3,a[s->b2]@mod3},*/
+   insert{p(a,a)@mod3},
+   insert{p(a,b)@mod3,p(a,c)@mod3,p(a,d)@mod3},
+   /*a[d->b1]@mod3,a[s->b1]@mod3},*/
+   writeln('succeeded, as expected')@prolog().
+
+?- write('test 17, associate mod1 with database')@prolog(),
+   flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod3'),
+   writeln('succeeded, as expected')@prolog().
+
+?- write('test 18, associate mod1 with database')@prolog(),
+   flDBConnect(?DSN,'ext_db',?USER_NAME,?PWD,'mod2'),
+   writeln('succeeded, as expected')@prolog().
+
+
+?- write('test 19, insert more obj in mod2')@prolog(),
+   insert{p(a,a)@mod2},
+   insert{p(a,b)@mod2,p(a,c)@mod2,p(a,d)@mod2,a[d->b1]@mod2,a[s->b1]@mod2},
+   writeln('succeeded, as expected')@prolog().
+
+?- flHalt.
+
+
+

@@ -1,0 +1,12 @@
+#include "flrheader.flh"
+
+FLORA_THIS_WORKSPACE(t_flapply)('ancestor',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('brother',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('child',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('father',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('mother',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('parent',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('sister',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(t_flapply)('spouse',__newvar1,__newvar2,__newvar3).
+FLORA_THIS_WORKSPACE(flapply)('female',__newvar1,__newvar2).
+FLORA_THIS_WORKSPACE(flapply)('male',__newvar1,__newvar2).
