@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.51 2006-10-25 08:30:14 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.52 2006-12-13 15:57:42 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -406,7 +406,17 @@ public class EMF2Runtime {
 	    					rovalue = createRuntimeObjectForEObject(rObject, (EObject)fvalue, feature);
 	    					rObject.getProperties().put(prop.getName(), rovalue);
 	    				}
-	    			} // equivalent test : fvalue instanceof EString, EInt, etc.
+	    			}
+	    			
+	    			// BEGIN EMF Patch
+	    			// A "null" instanceClassName property must correspond to a "void" RO property and not to an empty string.
+	    			// Empty string will raise an error during EMF saving.
+	    			else if(eObject instanceof EClassifier && feature.getName().equals("instanceClassName") && fvalue == null) {
+	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
+	    			}
+	    			// END EMF Patch	    			
+	    			
+	    			// equivalent test : fvalue instanceof EString, EInt, etc.
 	    			else if (EDataType.class.isInstance(feature_type))
 	    			{   // EJavaClass -> rovalue null
 	    				rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue, (EDataType)feature_type);
