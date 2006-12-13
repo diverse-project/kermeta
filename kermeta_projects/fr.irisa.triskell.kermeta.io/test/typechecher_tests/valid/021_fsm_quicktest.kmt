@@ -1,0 +1,30 @@
+/* $Id: 021_fsm_quicktest.kmt,v 1.1 2006-12-13 08:08:25 dvojtise Exp $
+ * Creation date: November 10, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::Main"
+@mainOperation "main"
+
+
+package fsm;
+require "021_minimization.kmt"
+require "021_mandstart_fsm_type.kmt"
+require "021_multstart_fsm_type.kmt"
+require "021_composite_fsm_type.kmt"
+require "021_finalstates_fsm_type.kmt"
+
+
+require kermeta
+class Main
+{
+    operation main() : Void is do 
+    	// the one which aren't commented should work
+		Minimizer<basic_fsm>.new.minimizeAll(basic_fsm.new)
+		//Minimizer<mandstart_fsm>.new.minimizeAll(mandstart_fsm.new)  // not conformant ???
+	    //Minimizer<multstart_fsm>.new.minimizeAll(multstart_fsm.new)  // not conformant ???
+		Minimizer<finalstates_fsm>.new.minimizeAll(finalstates_fsm.new)
+		Minimizer<composite_fsm>.new.minimizeAll(composite_fsm.new)
+    end
+}

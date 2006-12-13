@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.20 2006-12-07 08:47:48 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.21 2006-12-13 08:09:57 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -85,7 +85,36 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
+public void testvalid_021_basic_fsm_type() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_basic_fsm_type.kmt" );
+}
+
+public void testvalid_021_composite_fsm_type() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_composite_fsm_type.kmt" );
+}
+
+public void testvalid_021_finalstates_fsm_type() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_finalstates_fsm_type.kmt" );
+}
+
+public void testvalid_021_fsm_quicktest() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_fsm_quicktest.kmt" );
+}
+
+public void testvalid_021_mandstart_fsm_type() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_mandstart_fsm_type.kmt" );
+}
+
+public void testvalid_021_minimization() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_minimization.kmt" );
+}
+
+public void testvalid_021_multstart_fsm_type() throws Exception {
+testvalidFile("test/typechecher_tests/valid","021_multstart_fsm_type.kmt" );
+}
+
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
 }
@@ -176,6 +205,14 @@ testinvalidFile("test/typechecher_tests/invalid","013_kermetaSignature.kmt" );
 
 public void testinvalid_014_scopevisibility() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","014_scopevisibility.kmt" );
+}
+
+public void testinvalid_021_fsm_mustfail1() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","021_fsm_mustfail1.kmt" );
+}
+
+public void testinvalid_021_fsm_mustfail2() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","021_fsm_mustfail2.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {

@@ -1,0 +1,41 @@
+/* $Id: 021_mandstart_fsm_type.kmt,v 1.1 2006-12-13 08:08:25 dvojtise Exp $
+ * Creation date: November 10, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "fsm::Main"
+@mainOperation "main"
+
+
+package fsm;
+
+
+require kermeta
+using kermeta::standard
+
+modeltype mandstart_fsm {
+
+  class FSM {
+    attribute alphabet : set String[0..*]
+    attribute ownedState : oset State[0..*]#owningFSM
+    attribute ownedTransition : set Transition[0..*]
+    reference initialState : State[1]
+    reference finalState : set State[0..*]
+  }
+
+  class State {
+  	attribute name : String
+  	reference owningFSM : FSM#ownedState
+  	reference incomingTransition : Transition[0..*]#target
+  	reference outgoingTransition : Transition[0..*]#source
+  }
+
+  class Transition {
+    attribute input : String
+    attribute output : String
+    reference source : State#outgoingTransition
+    reference target : State#incomingTransition
+  }
+
+}
