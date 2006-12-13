@@ -1,3 +1,13 @@
+/* $Id: ParameterizedTypeChecker.java,v 1.3 2006-12-13 08:04:56 dvojtise Exp $
+ * Project : Kermeta io
+ * File : ParametrizedTypeChecker.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 18 Oct. 2006
+ * Authors : 
+ * 		Jim Steel
+ */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
@@ -70,7 +80,11 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided);
 						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						if (!match) {
-							unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+							String msg = "Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".";
+							if(matcher.getErrors().size() > 0){
+								msg += "\n   " + matcher.getErrors().get(0).getMessage();
+							}
+							unit.messages.addError(msg, codeContext);
 						} else {
 							//TODO Populate static bindings somehow to bind each required::virtual to its match
 							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
@@ -88,7 +102,11 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 						//match = TypeMatchChecker.match((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype(), new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
 						if (!match) {
-							unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+							String msg = "Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".";
+							if(matcher.getErrors().size() > 0){
+								msg += "\n   " + matcher.getErrors().get(0).getMessage();
+							}
+							unit.messages.addError(msg, codeContext);
 						} else {
 							//TODO Populate static bindings somehow to bind each required::virtual to its match
 							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
