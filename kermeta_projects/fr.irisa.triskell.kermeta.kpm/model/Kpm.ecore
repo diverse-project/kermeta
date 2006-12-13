@@ -78,8 +78,6 @@
         eType="#//Dependency"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="kpm" eType="#//KPM" eOpposite="#//KPM/units"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" upperBound="-1"
-        eType="#//Unit"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="#//Date"/>
   </eClassifiers>
@@ -187,7 +185,7 @@
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="filter" lowerBound="1"
-        eType="#//Filter" containment="true"/>
+        eType="#//Filter"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//AbstractExpression #//SuitedExpression"/>
