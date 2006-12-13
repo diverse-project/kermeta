@@ -1,4 +1,4 @@
-/* $Id: Model.java,v 1.2 2006-12-07 09:38:38 dvojtise Exp $
+/* $Id: Model.java,v 1.3 2006-12-13 07:55:17 dvojtise Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -10,12 +10,24 @@
  */
 package fr.irisa.triskell.kermeta.runtime.language;
 
+import java.util.ArrayList;
+
 import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 
 public class Model {
 	/** Implementation of method add called as :
-	 * extern fr::irisa::triskell::kermeta::runtime::language::Model.add(element)
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Model.add(self, element)
 	*/
 	public static RuntimeObject add(RuntimeObject self, RuntimeObject element) {
 		// There probably needs to be some sort of check here that the object being added
@@ -23,5 +35,87 @@ public class Model {
 		RuntimeObject contents_collection = self.getProperties().get("contents");
 		ReflectiveCollection.add(contents_collection, element);
 		return self.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	/** Implementation of method add called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Model.addAllCompatible(self, Collection<Object>)
+	*/
+	public static RuntimeObject addAllCompatible(RuntimeObject self, RuntimeObject elements) {
+		RuntimeObjectFactory factory = self.getFactory();
+		
+		// There probably needs to be some sort of check here that the object being added
+		// is an acceptable type for the model type.
+		//RuntimeObject contents_collection = self.getProperties().get("contents");
+		//ReflectiveCollection.add(contents_collection, element);
+		
+		// creates the collection for the result
+		// will contain a list of the objects that have been added
+		
+	    
+	    GenericTypeDefinition typeVarClassDef  = (GenericTypeDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::reflection::Object");
+	    fr.irisa.triskell.kermeta.language.structure.Class typeParam = factory.getMemory().getUnit().struct_factory.createClass();
+	    typeParam.setTypeDefinition(typeVarClassDef);
+		
+	    
+	    RuntimeObject result = Collection.create("kermeta::standard::Set", factory, typeParam);
+	    
+		
+		// For all elements in the input collection
+	    ArrayList elemArray = (ArrayList)elements.getData().get("CollectionArrayList");
+	    for(java.lang.Object elem : elemArray ){
+	    	RuntimeObject roElement = (RuntimeObject)elem;
+	    		 
+	    	RuntimeObject addedObject = Model.addCompatible(self, roElement);
+	    	// add the element in the result collection
+	    	if(!addedObject.equals(factory.getMemory().voidINSTANCE)){
+	    		Collection.add(result, addedObject);
+	    	}
+	    }    
+		
+		return result;
+	}
+	
+	/** Implementation of method add called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Model.addCompatible(self, Object)
+	 * returns the object if is was added, void otherwise
+	*/
+	public static RuntimeObject addCompatible(RuntimeObject model, RuntimeObject element) {
+		RuntimeObjectFactory factory = model.getFactory();
+		
+		// if this object is conform to one of the type of this model, add it
+		Type elementType = (Type)element.getMetaclass().getData().get("kcoreObject");
+
+		fr.irisa.triskell.kermeta.language.structure.ModelType modelType =
+			(fr.irisa.triskell.kermeta.language.structure.ModelType) ((RuntimeObject) model.getData().get("modelType")).getData().get("kcoreObject");
+		ModelTypeDefinition modelTypeDef = (ModelTypeDefinition)modelType.getTypeDefinition();
+		// for each of the type def of this model type def check if it is conformant
+		for(java.lang.Object oTypeDef : modelTypeDef.getOwnedTypeDefinition()){
+			Type requiredType = null; 
+			if(oTypeDef instanceof ClassDefinition){
+				fr.irisa.triskell.kermeta.language.structure.Class aclass = factory.getMemory().getUnit().struct_factory.createClass();
+				aclass.setTypeDefinition((ClassDefinition)oTypeDef);
+				if(!((ClassDefinition)oTypeDef).getTypeParameter().isEmpty()){
+					// TODO do not deal with Parametrized ClassDefinition
+					// must be done ...
+				}
+				requiredType =aclass;				
+			}
+			else if(oTypeDef instanceof ModelTypeDefinition){
+				fr.irisa.triskell.kermeta.language.structure.ModelType amodeltype = factory.getMemory().getUnit().struct_factory.createModelType();
+				amodeltype.setTypeDefinition((ClassDefinition)oTypeDef);
+				requiredType =amodeltype;
+			}
+			else if(oTypeDef instanceof DataType){
+				requiredType =(DataType)oTypeDef;
+			} 
+			if (requiredType != null){
+				if(TypeConformanceChecker.conforms(requiredType, elementType)){
+					// this element is compatible
+					Model.add(model, element);
+					return element;
+				}
+			}
+		}
+		return factory.getMemory().voidINSTANCE;
 	}
 }
