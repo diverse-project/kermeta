@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.11 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeConformanceChecker.java,v 1.12 2006-12-13 08:06:01 dvojtise Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
@@ -214,5 +215,9 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		}
 		//throw new Error("Type checker error: Model type conformance is not yet implemented! (incidentally " + result + ")");
 		return result;
+	}
+	
+	public Object visitDataType(DataType arg0){
+		throw new Error("Type checker error: Model type conformance is not yet implemented for DataType! (incidentally " + arg0 + ")");
 	}
 }
