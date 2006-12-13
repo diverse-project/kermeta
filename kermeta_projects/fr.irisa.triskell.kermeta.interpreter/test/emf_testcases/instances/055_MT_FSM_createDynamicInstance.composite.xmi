@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<composite_fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composite_fsm="platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/055_MT_FSM_composite_fsm_type.ecore#/" xsi:schemaLocation="platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/055_MT_FSM_composite_fsm_type.ecore#/ platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/055_MT_FSM_composite_fsm_type.ecore#//composite_fsm" name="myFSM" initialState="//@ownedState.1">
+  <ownedState xsi:type="composite_fsm:FSM" name="composite">
+    <ownedState name="B"/>
+    <ownedTransition input="b" output="a->b" source="//@ownedState.1" target="//@ownedState.0/@ownedState.0"/>
+  </ownedState>
+  <ownedState name="A"/>
+  <ownedTransition input="a" output="composite" source="//@ownedState.0" target="//@ownedState.1"/>
+  <ownedTransition input="composite" output="b-composite" source="//@ownedState.0/@ownedState.0" target="//@ownedState.0"/>
+</composite_fsm:FSM>

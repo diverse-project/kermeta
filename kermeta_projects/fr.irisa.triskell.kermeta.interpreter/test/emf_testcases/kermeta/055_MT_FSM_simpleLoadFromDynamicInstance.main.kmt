@@ -1,0 +1,230 @@
+/* $Id: 055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt,v 1.1 2006-12-13 07:57:29 dvojtise Exp $
+ * Creation date: November 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "simpleLoadFromDynamicInstance::SimpleLoader"
+@mainOperation "testBasicSimpleLoad"
+
+
+package simpleLoadFromDynamicInstance;
+
+require "055_MT_FSM_basic_fsm_type.kmt"
+//require "055_MT_FSM_minimization.kmt"
+require "055_MT_FSM_fsmLoaders.kmt"
+require "055_MT_FSM_fsmRunner.kmt"
+
+require kermeta
+using fsm
+
+
+class SimpleLoader inherits kermeta::kunit::TestCase
+{
+	/** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_basic_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
+	 */
+    operation testBasicSimpleLoad() : Void is do 
+        var myModel : basic_fsm init BasicFSMLoader.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.basic.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(basic_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(basic_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(basic_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        //myModel.filter(basic_fsm::FSM).each { f |
+        //	Runner<basic_fsm>.new.run(f)
+        //}
+    end 
+    
+    /** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_basic_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
+	 * this test use the Generic FSM loader based on addAllCompatible
+	 */
+    operation testBasicSimpleGenericFSMLoad() : Void is do 
+        var myModel : basic_fsm init GenericBasicFSMLoader.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.basic.xmi")
+        stdio.writeln("testBasicSimpleGenericLoad contents.size = " + myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(basic_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(basic_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(basic_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        //myModel.filter(basic_fsm::FSM).each { f |
+        //	Runner<basic_fsm>.new.run(f)
+        //}
+    end
+    
+    /** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_basic_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
+	 * this test use the Generic Model loader based on addAllCompatible
+	 */
+    operation testBasicSimpleGenericLoad() : Void is do 
+        var myModel : basic_fsm init GenericModelLoader<basic_fsm>.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.basic.xmi")
+        stdio.writeln("testBasicSimpleGenericLoad contents.size = " + myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(basic_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(basic_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(basic_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        //myModel.filter(basic_fsm::FSM).each { f |
+        //	Runner<basic_fsm>.new.run(f)
+        //}
+    end
+    
+    /** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_composite_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 2 FSM, 4 states and 3 transitions
+	 */
+    operation testCompositeSimpleLoad() : Void is do 
+        var myModel : composite_fsm init CompositeFSMLoader.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // 2 FSM
+        assertTrueWithMsg(myModel.filter(composite_fsm::FSM).size == 2, "didn't find 2 and only 2 FSM in the model")
+        
+        
+        // 5 States  (FSM inherit from State)
+        stdio.writeln(" number of States in composite model : " + myModel.filter(composite_fsm::State).size.toString)
+        assertTrueWithMsg(myModel.filter(composite_fsm::State).size == 4, "didn't find 4 and only 4 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(composite_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        
+    end
+    /** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_composite_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 2 FSM, 4 states and 3 transitions
+	 * this test use the Generic Model loader based on addAllCompatible
+	 */
+    operation testCompositeSimpleGenericLoad() : Void is do 
+        var myModel : composite_fsm init GenericModelLoader<composite_fsm>.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // 2 FSM
+        assertTrueWithMsg(myModel.filter(composite_fsm::FSM).size == 2, "didn't find 2 and only 2 FSM in the model")
+        
+        
+        // 5 States  (FSM inherit from State)
+        stdio.writeln(" number of States in composite model : " + myModel.filter(composite_fsm::State).size.toString)
+        assertTrueWithMsg(myModel.filter(composite_fsm::State).size == 4, "didn't find 4 and only 4 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(composite_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        
+    end
+    
+    /** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_finalstates_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
+	 */
+    operation testFinalStatesSimpleLoad() : Void is do 
+        var myModel : finalstates_fsm init FinalStateFSMLoader.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(finalstates_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(finalstates_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(finalstates_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+       
+    end
+    /** check that we can load a simple model created using the "create dynamic instance" on an ecore file
+	 *  this ecore file is obtained using kermeta to ecore on 055_MT_FSM_finalstates_fsm_type.kmt
+	 *  for the test, this file contains 7 objects : 1 FSM, 3 states and 3 transitions
+	 */
+    operation testFinalStatesSimpleGenericLoad() : Void is do 
+        var myModel : finalstates_fsm init GenericModelLoader<finalstates_fsm>.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(finalstates_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(finalstates_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(finalstates_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+       
+    end
+    //----------------------------------
+    // second serie 
+   //    load compatible model
+   /*
+   operation testBasicSimpleLoadFromCompositeModel() : Void is do 
+        var myModel : basic_fsm init BasicFSMLoader.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(basic_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(basic_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(basic_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        
+    end
+    
+    operation testBasicSimpleLoadFromFinalStatesModel() : Void is do 
+        var myModel : basic_fsm init BasicFSMLoader.new.loadFromFile("../test/emf_testcases/instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        //stdio.writeln(myModel.contents.size.toString)
+        assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
+        
+        // one FSM
+        assertTrueWithMsg(myModel.filter(basic_fsm::FSM).size == 1, "didn't find 1 and only 1 FSM in the model")
+        
+        
+        // 3 States
+        assertTrueWithMsg(myModel.filter(basic_fsm::State).size == 3, "didn't find 3 and only 3 State in the model")
+        
+        // 3 Transitions
+        assertTrueWithMsg(myModel.filter(basic_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
+        
+        
+    end*/
+    
+    // Third serie
+    /* same but load from a model from the classic FSM: ie. that doesn't have 2 packages in the qualified name*/
+}

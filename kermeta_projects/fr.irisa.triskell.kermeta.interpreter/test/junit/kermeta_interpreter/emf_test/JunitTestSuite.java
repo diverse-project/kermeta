@@ -1,14 +1,13 @@
-/* $Id: JunitTestSuite.java,v 1.5 2006-11-16 15:43:35 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2006-12-13 08:00:12 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : 27 janv. 2005
  * Authors : 
  * 		Franck FLEUREY (ffleurey@irisa.fr)
- * Description :  	
- * 	see class javadoc.	 
+ *      Didier Vojtisek	 
  */
 package kermeta_interpreter.emf_test;
 
@@ -27,7 +26,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 /**
- * Interpreter test suite.
+ * Interpreter test suite dedicated to model load and save using EMF.
  * @author Franck Fleurey
  */
 public class JunitTestSuite extends TestSuite {
@@ -87,6 +86,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","053_savingKM_2.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","054_pb_olivier1213.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
