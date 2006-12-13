@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.2 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeMatchChecker.java,v 1.3 2006-12-13 08:06:29 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -217,7 +217,6 @@ public class TypeMatchChecker {
 						Binding prop_type_binding = new Binding((Class) p_prop.getProperty().getType(), (Class) r_prop.getProperty().getType());
 						if (!candidates.contains(prop_type_binding)) {
 							fail = true;
-							candidates.contains(prop_type_binding); // DVK TO REMOVE
 						} else {
 							new_deps.add(new SimpleDependency(b, prop_type_binding));
 						}
