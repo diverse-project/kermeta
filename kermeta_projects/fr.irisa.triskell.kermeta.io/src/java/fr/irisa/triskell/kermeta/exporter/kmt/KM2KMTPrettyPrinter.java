@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.43 2006-12-12 16:45:21 jmottu Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.44 2006-12-13 10:26:22 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -156,6 +156,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
+	// It seems that this method is never called !!!!
 	public String ppPackageContents(Package p) {
 		root_pname = NamedElementHelper.getMangledQualifiedName(p);
 		String result = "";
@@ -366,6 +367,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
 		result += ppTags(node.getTag());
 		
+		if(! alreadyPrefixed) result += getPrefix();
+		
 		if (node.isIsAbstract()) result += "abstract ";
 		result += "class " + KMTHelper.getMangledIdentifier(node.getName());
 		if (node.getTypeParameter().size() > 0) {
@@ -378,12 +381,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			result += ppComaSeparatedNodes(node.getSuperType());
 		}
 		result += "\n" + getPrefix() + "{\n";
-		pushPrefix();
+
+		alreadyPrefixed = false;
 		
+		pushPrefix();
 		result += ppCRSeparatedNode(node.getInv());
 		result += ppCRSeparatedNode(node.getOwnedAttribute());
 		result += ppCRSeparatedNode(node.getOwnedOperation());
 		popPrefix();
+
 		result += getPrefix() + "}";		
 		
 		typedef = true;
@@ -474,6 +480,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			String result = "enumeration " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 			result += getPrefix() + "{\n";
 			pushPrefix();
+			alreadyPrefixed = false;
 			result += ppCRSeparatedNode(node.getOwnedLiteral());
 			popPrefix();
 			result += getPrefix() + "}";
@@ -692,6 +699,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		current_pname = NamedElementHelper.getMangledQualifiedName(node);
 		pushPrefix();
 		typedef = true;
+		alreadyPrefixed = false;
 		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
 		result += ppCRSeparatedNode(node.getNestedPackage());
 		popPrefix();
