@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.15 2006-12-07 09:39:08 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.16 2006-12-14 14:34:13 rdelamar Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -43,6 +43,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.runtime.language.Class;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 import fr.irisa.triskell.kermeta.typechecker.FTypePrettyPrinter;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
@@ -359,201 +361,194 @@ public class RuntimeObjectFactory {
 		return result;
 	}
 	
-	
+
+	/**
+	 * Look the class definition for a property
+	 * If not found, look in the supertypes
+	 */
+	private Property getProperty(ClassDefinition metaclass,String propertyName) {
+		Iterator it = metaclass.getOwnedAttribute().iterator();
+		while(it.hasNext()) {
+			Property property = (Property)it.next();
+			if(property.getName().equals(propertyName))
+				return property;
+		}
+		it = metaclass.getSuperType().iterator();
+		while(it.hasNext()) {
+			Property property = getProperty((ClassDefinition)((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition(),propertyName);
+			if(property!=null)
+				return property;
+		}
+		return null;
+	}
+
 	/**
 	 * Create a new RuntimeObject from another runtime object
-	 * Implement the "clone" feature. We do a "deep clone" for attribute and a "shallow clone" for references
-
+	 * Implement the "clone" feature. There is two step in the cloning process
+	 * First, all the attributes are cloned (but references are not handled)
+	 * Then, references are considered : those which reference an object that has been
+	 * cloned in the previous step are set to reference the clone.
+	 * 
 	 * @param meta_class the class of the object to clone
 	 * @param objectToClone the object we want to clone
 	 * @return the clone of the objectToClone 
 	 */
-	public RuntimeObject cloneRuntimeObjectFromObject(RuntimeObject meta_class, RuntimeObject objectToClone)
-	{    
-	    // Build a new empty object (default constructor) 
-	    RuntimeObject result = new RuntimeObject(this, meta_class);
-	    createRuntimeObjectFromClass_count++;
-	    
-	    // Check if it is a primitive type
-	    String theMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition().getName();
-		System.out.println("J'ai trouvé un : " + theMetaClassName);
-	 
-		if (theMetaClassName.equals("String") ){
+	public RuntimeObject cloneRuntimeObjectFromObject(RuntimeObject meta_class, RuntimeObject objectToClone)  {
+		// First we clone the attributes
+		RuntimeObject result = cloneAttributesFromRuntimeObject(objectToClone);
+
+		// Then we handle references
+		Enumeration<RuntimeObject> keys = cloneObjectTable.keys();
+		while(keys.hasMoreElements())
+			cloneReferencesFromRuntimeObject(keys.nextElement());
+
+		cloneObjectTable.clear();
+		return result;
+	}
+
+	/**
+	 * Create a new RuntimeObject by cloning the attributes of another RuntimeObject
+	 * 
+	 * @param objectToClone the object to clone
+	 * @return a RuntimeObject where the attributes of objectToClone have been cloned
+	 */
+	public RuntimeObject cloneAttributesFromRuntimeObject(RuntimeObject objectToClone) {
+		RuntimeObject meta_class = objectToClone.getMetaclass();
+		// Handles enumeration literal 
+		if (((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition().getName().equals("EnumerationLiteral"))
+			return objectToClone;
+
+		// Builds a new empty object (default constructor)
+		RuntimeObject result = createRuntimeObjectFromClass(meta_class);
+
+		// Handles primitive value data
+		if (objectToClone.getData().containsKey("StringValue"))
 			result.getData().put("StringValue", objectToClone.getData().get("StringValue"));
-	    
-		} else if ( theMetaClassName.equals("Integer") ) {
+		if (objectToClone.getData().containsKey("NumericValue"))
 			result.getData().put("NumericValue", objectToClone.getData().get("NumericValue"));
-		
-		} else if ( theMetaClassName.equals("Boolean") ) {
+		if (objectToClone.getData().containsKey("NumericValue"))
 			result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
+		if (objectToClone.getData().containsKey("CharacterValue"))
+			result.getData().put("CharacterValue", objectToClone.getData().get("CharacterValue"));
 		
-		} else if ( theMetaClassName.equals("Collection") || theMetaClassName.equals("OrderedCollection") ||
-					theMetaClassName.equals("Set") || theMetaClassName.equals("OrderedSet") || // tests if theMetaClassName is Set, Bag, OrderedSet or Sequence to fix bug #1550
-					theMetaClassName.equals("Bag") || theMetaClassName.equals("Sequence")) {
+		// Handles collections
+		if (objectToClone.getData().containsKey("CollectionArrayList")) {
 			ArrayList objectToCloneContents = (ArrayList) objectToClone.getData().get("CollectionArrayList");
 			ArrayList resultContents = new ArrayList();
-			
-			// we clone each value in the collection
+
+            // Clones each value in the collection
 			Iterator elementIterator = objectToCloneContents.iterator();
 			while ( elementIterator.hasNext() ){
 				RuntimeObject element = (RuntimeObject) elementIterator.next();
-				RuntimeObject elementMetaClass = element.getMetaclass();
-				resultContents.add(Class.cloneObject(elementMetaClass, element));
+				resultContents.add(cloneAttributesFromRuntimeObject(element));
 			}
 			result.getData().put("CollectionArrayList", resultContents);
-			
-		} else {				    						    		
-		
-		    // Get the list of attribute of the meta-class
-		    EList metaClassAttribute = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition()).getOwnedAttribute();
-		    
-		    // Foreach property of the meta-class, deep or shallow clone 
-		    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
-		    while ( metaClassAttributeIterator.hasNext() ) {
-		    	Property theMetaClassAttribute = (Property) metaClassAttributeIterator.next();
-			    	    	
-		    	String theAttributeName = theMetaClassAttribute.getName();
-			 
-		    	RuntimeObject theAttributeValue = (RuntimeObject) objectToClone.getProperties().get(theAttributeName);
-	    		
-		    	// If the property has no yet been used, then its does not exist !
-		    	if ( theAttributeValue != null ){
-	    		
-			    	RuntimeObject theAttributeMetaClass = theAttributeValue.getMetaclass();
-			    	System.out.println("J'ai trouvé un : " + theAttributeMetaClass);
-			    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getType());
-			    	
-			    	String theAttributeTypeName = null;
-			    	if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-		    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Class) theMetaClassAttribute.getType()).getTypeDefinition().getName();   		
-		    		} else if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Enumeration) { 
-		    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Enumeration) theMetaClassAttribute.getType()).getName();
-		    		} else {
-		    			System.err.println("-----------------------------------------------");
-		    			System.err.println("Err while cloning object : " + objectToClone);
-		    			System.err.println("Trying to clone a property on an unknown type ! ");
-		    			System.err.println("-----------------------------------------------");
-		    		}
-			    	
-			    	if ( theMetaClassAttribute.isIsComposite() ) { 	// ************ DEEP CLONE ************
-			    	
-			    		result.getProperties().put(theAttributeName, Class.cloneObject(theAttributeMetaClass, theAttributeValue));	
-	
-			    		String theAttributeMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) theAttributeMetaClass.getData().get("kcoreObject")).getTypeDefinition().getName();
-			    		
-			    		// For each element in the collection, we nee to add an opposite 
-			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") )
-			    		{	
-			    			// Build a new reflective Collection
-			    			RuntimeObject resultAttribute = new RuntimeObject(this, theAttributeMetaClass);
-			    			    		    			
-			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
-			    			ArrayList resultAttributeContents = new ArrayList();
-		    				
-			    			Property oppositeProperty = ((Property) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getOpposite(); 
-			    			String oppositeName = oppositeProperty.getName();
-			    			
-			    			// Manage opposite for each object contained in the reflective Collections
-			    			Iterator elementIterator = attributeContents.iterator();
-			    			while ( elementIterator.hasNext() ){
-			    				RuntimeObject element = (RuntimeObject) elementIterator.next();
-			    				RuntimeObject cloneElement = Class.cloneObject(element.getMetaclass(), element);
-			    				
-			    				// Get the opposite property and add the result of our current clone operation
-			    				RuntimeObject elementProperty = (RuntimeObject) cloneElement.getProperties().get(oppositeName);
-			    				
-			    				// test if the opposite is a Collection or an simple attribute
-			    				if (oppositeProperty.getUpper() == 1){
-									cloneElement.getProperties().put(oppositeName, result);
-								} else { 	
-									ArrayList elementPropertyCollection = ((ArrayList) elementProperty.getData().get("CollectionArrayList"));
-									elementPropertyCollection.add(result); 
-								}
-											    				
-			    				// Put the Object in the collection but cloning it before !
-			    				resultAttributeContents.add(cloneElement);
-			    			}
-			    			
-			    			resultAttribute.getData().put("CollectionArrayList", resultAttributeContents);
-	
-			    			result.getProperties().put(theAttributeName, resultAttribute);
-							
-			    		} else { 
-			    		
-			    			result.getProperties().put(theAttributeName, Class.cloneObject(theAttributeMetaClass,theAttributeValue));
-			    		}
-	
-			    		
-			    	} else { 
-			    		// ********* SHALLOW CLONE ***********
-			    		System.out.println("C'est une propriété reference");	
-	
-			    		String theAttributeMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) theAttributeMetaClass.getData().get("kcoreObject")).getTypeDefinition().getName();
-			    		
-			    		// For each element in the collection, we nee to add an opposite 
-			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") ) 
-			    		{			    			
-			    			// Build a new refelctive Collection
-			    			RuntimeObject resultAttribute = new RuntimeObject(this, theAttributeMetaClass);
-			    			    		    			
-			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
-			    			ArrayList resultAttributeContents = new ArrayList();
-		    				
-			    			Property oppositeProperty = ((Property) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getOpposite(); 
-			    			String oppositeName = oppositeProperty.getName();
-			    			
-			    			// Manage opposite for each object contains in the reflective Collections
-			    			Iterator elementIterator = attributeContents.iterator();
-			    			while ( elementIterator.hasNext() ){
-			    				RuntimeObject element = (RuntimeObject) elementIterator.next();
-			    				
-			    				// get the opposite property and add the result of our current clone operation
-			    				RuntimeObject elementProperty = (RuntimeObject) element.getProperties().get(oppositeName);
-			    				
-			    				// test if the opposite is a Collection or an simple attribute
-			    				if (oppositeProperty.getUpper() == 1){
-									element.getProperties().put(oppositeName, result);
-								} else { 	
-									ArrayList elementPropertyCollection = ((ArrayList) elementProperty.getData().get("CollectionArrayList"));
-									elementPropertyCollection.add(result); 
-								}
-			    							    				
-			    				// Put the Object in the collection without cloning it !
-			    				resultAttributeContents.add(element);
-			    			}
-			    			
-			    			resultAttribute.getData().put("CollectionArrayList", resultAttributeContents);
-	
-			    			result.getProperties().put(theAttributeName, resultAttribute);
-							
-			    		} else { 
-			    		
-			    			result.getProperties().put(theAttributeName, theAttributeValue);
-			    		
-			    		}
-			    		
-		    		} // if isComposite
-		    	
-		    	} // if the AttributeValue is Null
-		  
-		    }  
-		
-		} 
-		
+		}
+
+		Enumeration<String> objectToCloneProperties = objectToClone.getProperties().keys();
+		while(objectToCloneProperties.hasMoreElements()) {
+			String propertyName = objectToCloneProperties.nextElement();
+			RuntimeObject propertyValue = objectToClone.getProperties().get(propertyName);
+			String propertyMetaclassName = ((fr.irisa.triskell.kermeta.language.structure.Class) propertyValue.getMetaclass().getData().get("kcoreObject")).getTypeDefinition().getName();
+			Property property = getProperty((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition(), propertyName);
+			RuntimeObject roProperty = getMemory().getRuntimeObjectForFObject(property);
+			if (property.isIsComposite()) {
+				// Property is an attribute
+
+				// Handles reflective sequence and reflective collection
+				if (propertyMetaclassName.equals("ReflectiveSequence")) {
+					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence.createReflectiveSequence(result,roProperty);
+
+					// Handles each object in the reflective sequence
+					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					for(int i=0;elementIterator.hasNext();i++) {
+						RuntimeObject cloneElement = cloneAttributesFromRuntimeObject((RuntimeObject)elementIterator.next());
+						ReflectiveSequence.addAt(resultProperty, fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i,this), cloneElement);
+					}
+					fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, resultProperty, false);
+				}
+				else if (propertyMetaclassName.equals("ReflectiveCollection")) {
+					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.createReflectiveCollection(result,roProperty);
+
+					// Handles each object in the reflective collection
+					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					while(elementIterator.hasNext()) {
+						RuntimeObject cloneElement = cloneAttributesFromRuntimeObject((RuntimeObject) elementIterator.next());
+						ReflectiveCollection.add(resultProperty, cloneElement, true);
+					}
+					fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, resultProperty, false);
+				}
+				else {
+					RuntimeObject propertyClone = cloneAttributesFromRuntimeObject(propertyValue); 
+					fr.irisa.triskell.kermeta.runtime.language.Object.set(result, getMemory().getRuntimeObjectForFObject(property), propertyClone, true);
+				}
+			}
+		}
+		cloneObjectTable.put(objectToClone, result);
 		return result;
-	    
+	}
+
+	public void cloneReferencesFromRuntimeObject(RuntimeObject objectToClone) {
+		RuntimeObject result = cloneObjectTable.get(objectToClone);
+		RuntimeObject meta_class = objectToClone.getMetaclass();
+		
+		Enumeration<String> objectToCloneProperties = objectToClone.getProperties().keys();
+		while(objectToCloneProperties.hasMoreElements()) {
+			String propertyName = objectToCloneProperties.nextElement();
+			RuntimeObject propertyValue = objectToClone.getProperties().get(propertyName);
+			RuntimeObject propertyMetaclass = propertyValue.getMetaclass();
+			String propertyMetaclassName = ((fr.irisa.triskell.kermeta.language.structure.Class) propertyMetaclass.getData().get("kcoreObject")).getTypeDefinition().getName();
+			Property property = getProperty((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition(), propertyName);
+			RuntimeObject roProperty = getMemory().getRuntimeObjectForFObject(property);
+			if (!property.isIsComposite()) {
+				// Property is a reference 
+			
+				// Handles reflective sequence and reflective collection
+				if (propertyMetaclassName.equals("ReflectiveSequence")) {
+					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence.createReflectiveSequence(result,roProperty);
+
+					// Handles each object in the reflective sequence
+					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					for(int i=0;elementIterator.hasNext();i++) {
+						RuntimeObject element = (RuntimeObject) elementIterator.next();
+						if(cloneObjectTable.containsKey(element))
+							ReflectiveSequence.addAt(resultProperty, fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, this), cloneObjectTable.get(element));
+						else if(property.getOpposite() == null)
+							ReflectiveSequence.addAt(resultProperty, fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, this), element);
+					}
+					fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, resultProperty, false);
+				}
+				else if (propertyMetaclassName.equals("ReflectiveCollection")) {
+					RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.createReflectiveCollection(result, roProperty);
+
+					// Handles each object in the reflective collection
+					Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+					while(elementIterator.hasNext()) {
+						RuntimeObject element = (RuntimeObject) elementIterator.next();
+						if(cloneObjectTable.containsKey(element))
+							ReflectiveCollection.add(resultProperty, cloneObjectTable.get(element), true);
+						else if(property.getOpposite() == null)
+							ReflectiveCollection.add(resultProperty, element, true);
+					}
+					fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, resultProperty, false);
+				}
+				else {
+					if(cloneObjectTable.containsKey(propertyValue))
+						fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, cloneObjectTable.get(propertyValue),true);
+					else if(property.getOpposite() == null)
+						fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, propertyValue, true);
+				}
+			}
+		}
 	}
 	
 	
 	
-	
 	/**
-	 * This Hashtable is used bey the deepclone operation
-	 * It's allow to remeber which object have been already cloned. Avoid cycles in the deep cloning process
-	 * --> Key is the OID of the runtimeobject
-	 * --> Value is the runtimeObject (result of the clone operation)
+	 * This Hashtable is used by the clone and deepClone operations
+	 * It allows to remember which objects have been already cloned.
 	 */
-	public Hashtable cloneObjectTable = new Hashtable();
+	public Hashtable<RuntimeObject,RuntimeObject> cloneObjectTable = new Hashtable<RuntimeObject,RuntimeObject>();
 	
 	
 	/**
@@ -566,159 +561,79 @@ public class RuntimeObjectFactory {
 	 */
 	public RuntimeObject deepCloneRuntimeObjectFromObject(RuntimeObject meta_class, RuntimeObject objectToClone)
 	{    
-	    // Build a new empty object (default constructor) 
-	    RuntimeObject result = new RuntimeObject(this, meta_class);
-	    createRuntimeObjectFromClass_count++;
-	    
-	    // Check that we have not already clone this object
-	    if ( cloneObjectTable.containsKey(objectToClone.getOId()) )
-	    {
-	    	System.out.println(" Objet déjà cloné !!!");
-	    	
-	    	// Look in the hashtable to find the result ! 
-	    	result = (RuntimeObject) cloneObjectTable.get(objectToClone.getOId());
-	
-	    } else {
-	      	System.out.println("Je clone un nouvel objet : " + objectToClone.getOId());
-		    
-	      	// Remerer that we have cloned this object
-	    	cloneObjectTable.put(objectToClone.getOId(), result);
-	    
-	    	// And we clone it ...
-	    	
-		    // Check if it is a primitive type
-		    String theMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition().getName();
-			System.out.println("J'ai trouvé un : " + theMetaClassName);
-		 
-			if (theMetaClassName.equals("String") ){
-				result.getData().put("StringValue", objectToClone.getData().get("StringValue"));
-		    
-			} else if ( theMetaClassName.equals("Integer") ) {
-				result.getData().put("NumericValue", objectToClone.getData().get("NumericValue"));
-			
-			} else if ( theMetaClassName.equals("Boolean") ) {
-				result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
-			
-			} else if ( theMetaClassName.equals("Collection") || theMetaClassName.equals("OrderedCollection") ) {				    						    		
-				ArrayList objectToCloneContents = (ArrayList) objectToClone.getData().get("CollectionArrayList");
-				ArrayList resultContents = new ArrayList();
-				
-				// we clone each value in the collection
-				Iterator elementIterator = objectToCloneContents.iterator();
-				while ( elementIterator.hasNext() ){
-					RuntimeObject element = (RuntimeObject) elementIterator.next();
-					RuntimeObject elementMetaClass = element.getMetaclass();
-					resultContents.add(deepCloneRuntimeObjectFromObject(elementMetaClass, element));
-				}
-				result.getData().put("CollectionArrayList", resultContents);
-				
-			} else {				    						    		
-				// It doesn't be a primitive type
-				
-			    // Get the list of attribute of the meta-class
-			    EList metaClassAttribute = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition()).getOwnedAttribute();
-			    
-			    // Foreach property of found in the meta-class, do a deep clone 
-			    // We look in the meta-class to find the name of each properties
-			    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
-			    while ( metaClassAttributeIterator.hasNext() ) {
-			    	Property theMetaClassAttribute = (Property) metaClassAttributeIterator.next();
-				    	    	
-			    	String theAttributeName = theMetaClassAttribute.getName();
-			    	System.out.println(" ---> cloning property \"" + theAttributeName + "\"");
-				   	RuntimeObject theAttributeValue = (RuntimeObject) objectToClone.getProperties().get(theAttributeName);
-		    		
-			    	// If the property has no yet been used, then its does not exist !
-			    	if ( theAttributeValue != null ){
-		    		
-				    	RuntimeObject theAttributeMetaClass = theAttributeValue.getMetaclass();
-				    	System.out.println("J'ai trouvé un : " + theAttributeMetaClass);
-				    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getType());
-				    	
-				    	String theAttributeTypeName = null;
-				    	
-				    	// We get the name of the meta class of the attribute
-				    	if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-			    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Class) theMetaClassAttribute.getType()).getTypeDefinition().getName();   		
-			    		
-				    	} else if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Enumeration) { 
-			    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Enumeration) theMetaClassAttribute.getType()).getName();
-			    		
-			    		} else {
-			    			System.err.println("-----------------------------------------------");
-			    			System.err.println("Err while cloning object : " + objectToClone);
-			    			System.err.println("Trying to clone a property on an unknown type ! ");
-			    			System.err.println("-----------------------------------------------");
-			    		}
-				    	
-				    	
-				       	// If the attribute we clone is a ReflectiveSequence
-				    	String theAttributeMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) theAttributeMetaClass.getData().get("kcoreObject")).getTypeDefinition().getName();
-			    		// For each element in the collection, we need to add an opposite 
-			    		if ( theAttributeMetaClassName.equals("ReflectiveSequence") )
-			    		{	
-			    			
-			    			// Build a new reflective Collection
-			    			RuntimeObject resultAttribute = new RuntimeObject(this, theAttributeMetaClass);
-			    			    		    			
-			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
-			    			ArrayList resultAttributeContents = new ArrayList();
-		    				
-			    			Property oppositeProperty = ((Property) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getOpposite(); 
-			    			String oppositeName = oppositeProperty.getName();
-			    			
-			    			
-			    			Iterator elementIterator = attributeContents.iterator();
-			    			
-			    			// Manage each object contained in the reflective Colletion
-			    			while ( elementIterator.hasNext() )
-			    			{
-			    				RuntimeObject element = (RuntimeObject) elementIterator.next();
-			    				System.out.println(" Essai de cloner l'objet : " + element.getOId());
-			    				RuntimeObject clonedElement = deepCloneRuntimeObjectFromObject(element.getMetaclass(), element);
-			    				
-			    				// Manage opposite properties
-			    				// Get the opposite property of "cloned element" and set it with the result of our current clone operation
-			    				//RuntimeObject elementProperty = (RuntimeObject) clonedElement.getProperties().get(oppositeName);
-			    				
-			    				// test if the opposite is a Collection or a simple attribute
-			    				if (oppositeProperty.getUpper() == 1){
-									clonedElement.getProperties().put(oppositeName, result);
-									
-								} else { 	
-									ArrayList elementPropertyCollection = new ArrayList();
-									//elementProperty.getData().put("CollectionArrayList", elementPropertyCollection);
-									clonedElement.getData().put("CollectionArrayList", elementPropertyCollection);
-									elementPropertyCollection.add(result); 
-								}
-											    				
-			    				// Put the Object in the our new collection !
-			    				resultAttributeContents.add(clonedElement);
-			    			}
-			    			
-			    			resultAttribute.getData().put("CollectionArrayList", resultAttributeContents);
-			    			result.getProperties().put(theAttributeName, resultAttribute);
-						
-			    		} else {
-			    			// Here we faced a simple attribute
-			    			// Deep cloning the value of the attribute
-			    			result.getProperties().put(theAttributeName, deepCloneRuntimeObjectFromObject(theAttributeMetaClass, theAttributeValue));	
-			    		}
-			    	
-			    	} else {
-			    		
-			    		// if the AttributeValue is Null
-			    		System.out.println("\t warning : attribute has no value");
-			    	}
-			  
-			    }  
-			
-			} 
-			
-		} // HashTable contains ...
+		RuntimeObject metaClass = objectToClone.getMetaclass();
+		// Handles enumeration literal 
+		if (((fr.irisa.triskell.kermeta.language.structure.Class) metaClass.getData().get("kcoreObject")).getTypeDefinition().getName().equals("EnumerationLiteral"))
+			return objectToClone;
+
+		// if the object has already been cloned, then return the clone
+		if (cloneObjectTable.containsKey(objectToClone))
+			return cloneObjectTable.get(objectToClone);
+
+		// Builds a new empty object (default constructor)
+		RuntimeObject result = createRuntimeObjectFromClass(meta_class);
+		cloneObjectTable.put(objectToClone, result);
+
+		// Handles primitive value data
+		if (objectToClone.getData().containsKey("StringValue"))
+			result.getData().put("StringValue", objectToClone.getData().get("StringValue"));
+		if (objectToClone.getData().containsKey("NumericValue"))
+			result.getData().put("NumericValue", objectToClone.getData().get("NumericValue"));
+		if (objectToClone.getData().containsKey("NumericValue"))
+			result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
+		if (objectToClone.getData().containsKey("CharacterValue"))
+			result.getData().put("CharacterValue", objectToClone.getData().get("CharacterValue"));
 		
+		// Handles collections
+		if (objectToClone.getData().containsKey("CollectionArrayList")) {
+			ArrayList<RuntimeObject> resultContents = new ArrayList<RuntimeObject>();
+
+            // Clones each value in the collection
+			Iterator elementIterator = ((ArrayList) objectToClone.getData().get("CollectionArrayList")).iterator();
+			while ( elementIterator.hasNext() ){
+				RuntimeObject element = (RuntimeObject) elementIterator.next();
+				resultContents.add(deepCloneRuntimeObjectFromObject(element.getMetaclass(), element));
+			}
+			result.getData().put("CollectionArrayList", resultContents);
+		}
+
+		Enumeration<String> objectToCloneProperties = objectToClone.getProperties().keys();
+		while(objectToCloneProperties.hasMoreElements()) {
+			String propertyName = objectToCloneProperties.nextElement();
+			RuntimeObject propertyValue = objectToClone.getProperties().get(propertyName);
+			String propertyMetaclassName = ((fr.irisa.triskell.kermeta.language.structure.Class) propertyValue.getMetaclass().getData().get("kcoreObject")).getTypeDefinition().getName();
+			Property property = getProperty((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition(), propertyName);
+			RuntimeObject roProperty = getMemory().getRuntimeObjectForFObject(property);
+			
+			// Handles reflective sequence and reflective collection
+			if (propertyMetaclassName.equals("ReflectiveSequence")) {
+				RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence.createReflectiveSequence(result,roProperty);
+
+				// Handles each object in the reflective sequence
+				Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+				for(int i=0;elementIterator.hasNext();i++) {
+					RuntimeObject element = (RuntimeObject) elementIterator.next();
+					ReflectiveSequence.addAt(resultProperty, fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, this), deepCloneRuntimeObjectFromObject(element.getMetaclass(), element));
+				}
+				fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, resultProperty, false);
+			}
+			else if (propertyMetaclassName.equals("ReflectiveCollection")) {
+				RuntimeObject resultProperty = fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection.createReflectiveCollection(result, roProperty);
+
+				// Handles each object in the reflective collection
+				Iterator elementIterator = ((ArrayList) propertyValue.getData().get("CollectionArrayList")).iterator();
+				while(elementIterator.hasNext()) {
+					RuntimeObject element = (RuntimeObject) elementIterator.next();
+					ReflectiveCollection.add(resultProperty, deepCloneRuntimeObjectFromObject(element.getMetaclass(), element), true);
+				}
+				fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, resultProperty, false);
+			}
+			else {
+				fr.irisa.triskell.kermeta.runtime.language.Object.set(result, roProperty, deepCloneRuntimeObjectFromObject(propertyValue.getMetaclass(), propertyValue), true);
+			}
+		}
+
 		return result;
-	    
 	}
 	
 	/**
