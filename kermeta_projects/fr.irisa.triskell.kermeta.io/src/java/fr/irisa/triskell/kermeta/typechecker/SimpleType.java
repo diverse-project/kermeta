@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.10 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: SimpleType.java,v 1.11 2006-12-14 13:12:21 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -27,6 +27,8 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
+import fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
@@ -48,7 +50,15 @@ public class SimpleType extends Type {
 	 */
 	public SimpleType(fr.irisa.triskell.kermeta.language.structure.Type type) {
 		super();
-		this.type = type;
+		
+		// Maybe the type is an alias. If it is the case, the real type is instanceType object from type object.
+		// FIXME This may not be the place to check. But it works.
+		if ( (type instanceof PrimitiveTypeImpl) 
+				&&	( ((PrimitiveTypeImpl) type).getInstanceType() instanceof ClassImpl ) )
+			this.type = ((PrimitiveTypeImpl) type).getInstanceType();
+		else
+			this.type = type;
+		
 		this.setIsSemanticallyAbstract();
 	}
 	
