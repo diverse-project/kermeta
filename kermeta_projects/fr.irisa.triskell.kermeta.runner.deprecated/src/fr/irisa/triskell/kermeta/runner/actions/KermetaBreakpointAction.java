@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.8 2006-10-27 08:50:13 dvojtise Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.9 2006-12-15 15:19:44 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -62,7 +62,7 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 
 /**
@@ -282,9 +282,9 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 	 * @return
 	 */
 	private String getFunctionAboveLine(IDocument document, int lineNumber) {
-		if (!(textEditor instanceof Editor))
+		if (!(textEditor instanceof KMTEditor))
 			return null;
-		KMTUnit mcunit = (KMTUnit)((Editor)textEditor).getMcunit();
+		KMTUnit mcunit = (KMTUnit)((KMTEditor)textEditor).getMcunit();
 		// Copied from EditorTextHover class
 		if (mcunit != null && mcunit.getMctAST() != null) {
 		    CompUnit unit = mcunit.getMctAST();
@@ -296,7 +296,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
 		    if (astnode != null) {
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
-		        fr.irisa.triskell.kermeta.language.structure.Object fobj = ((Editor)textEditor).getFObjectForNode(astnode);
+		        fr.irisa.triskell.kermeta.language.structure.Object fobj = ((KMTEditor)textEditor).getFObjectForNode(astnode);
 
 		        // Notify other plugin of this event
 		        Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
