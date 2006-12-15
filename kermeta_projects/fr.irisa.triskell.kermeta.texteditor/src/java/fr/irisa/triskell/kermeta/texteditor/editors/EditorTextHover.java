@@ -50,7 +50,7 @@ import fr.irisa.triskell.kermeta.typechecker.Type;
  */
 public class EditorTextHover implements ITextHover, ITextHoverExtension, IInformationControlCreator {
 
-	private Editor editor;
+	private KMTEditor editor;
 	
 	///////////////////////////////////////////////////////////////////////
 	//
@@ -105,7 +105,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	/**
 	 * 
 	 */
-	public EditorTextHover(Editor editor) {
+	public EditorTextHover(KMTEditor editor) {
 		super();
 		this.editor = editor;
 		//IJavaEditorActionDefinitionIds.SHOW_JAVADOC;

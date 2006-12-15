@@ -32,9 +32,15 @@
       icon="src/java/fr/irisa/triskell/kermeta/texteditor/icons/kermeta.png"
       extensions="kmt"
       contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-      class="fr.irisa.triskell.kermeta.texteditor.editors.Editor"
+      class="fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor"
       id="org.eclipse.ui.editors.text.texteditor">
    </editor>
    </extension>
+    <extension
+          point="org.eclipse.core.filebuffers.documentSetup">
+       <participant
+             class="fr.irisa.triskell.kermeta.texteditor.editors.KMTDocumentSetupParticipant"
+             extensions="kmt"/>
+    </extension>
 
 </plugin>

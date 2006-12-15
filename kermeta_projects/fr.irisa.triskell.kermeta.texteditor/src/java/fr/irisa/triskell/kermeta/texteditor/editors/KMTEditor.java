@@ -40,7 +40,7 @@ import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class Editor extends TextEditor implements KermetaUnitInterest {
+public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 //public class Editor extends TextEditor {
 	
 	protected KermetaUnit mcunit; 
@@ -54,7 +54,7 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 	/**
 	 * Constructor
 	 */
-	public Editor() {
+	public KMTEditor() {
 		super();
 		
 		setSourceViewerConfiguration(new EditorConfiguration(this));
@@ -231,7 +231,7 @@ public class Editor extends TextEditor implements KermetaUnitInterest {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 
-		final Editor editor = this;
+		final KMTEditor editor = this;
 
 			Runnable r = new Runnable() {
 				public void run() {

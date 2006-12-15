@@ -33,12 +33,12 @@ import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
  */
 public class EditorConfiguration extends SourceViewerConfiguration {
 
-	private Editor editor;
+	private KMTEditor editor;
 	private EditorScanner scanner;
 	private EditorTextHover texthover;
 	public static Color DEFAULT_TAG_COLOR= new Color(Display.getCurrent(), new RGB(0, 0, 100));
 
-	public EditorConfiguration(Editor editor) {
+	public EditorConfiguration(KMTEditor editor) {
 		this.editor = editor;
 		scanner = new EditorScanner();
 		scanner.setDefaultReturnToken(new Token(new TextAttribute(DEFAULT_TAG_COLOR)));
@@ -52,7 +52,7 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(scanner);
-		reconciler.setDamager(new EditorPresentationDamager(), IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;
 	}
@@ -70,16 +70,7 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
 		return assistant;
 	}
-	
 
-	/**
-	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)
-	 */
-	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		MonoReconciler reconciler = new MonoReconciler(new EditorReconcilingStrategy(editor),false);
-		reconciler.setDelay(500);
-		return reconciler;
-	}
 	
 	/**
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getTextHover(ISourceViewer, String)

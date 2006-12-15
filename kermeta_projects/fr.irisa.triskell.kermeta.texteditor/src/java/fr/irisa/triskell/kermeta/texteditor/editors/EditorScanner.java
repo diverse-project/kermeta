@@ -9,12 +9,14 @@ import java.util.Iterator;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.EndOfLineRule;
+import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWhitespaceDetector;
 import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.PatternRule;
+import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
@@ -54,6 +56,7 @@ public class EditorScanner extends RuleBasedScanner {
 		// rule for keywords
 		createRuleForKeyWords();
 
+		//setRules((IRule[])rules.toArray(new IRule[rules.size()]));
 		setRules((IRule[])rules.toArray(new IRule[rules.size()]));
 	}
 	

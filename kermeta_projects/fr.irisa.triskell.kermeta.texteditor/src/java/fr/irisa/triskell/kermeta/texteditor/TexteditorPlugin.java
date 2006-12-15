@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.5 2005-11-11 07:18:20 dvojtise Exp $
+/* $Id: TexteditorPlugin.java,v 1.6 2006-12-15 15:16:23 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TextzditorPlugin.java
  * License : EPL
@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -33,7 +33,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	private ResourceBundle resourceBundle;
 	
 	// the current kermeta texteditor
-	private Editor editor;
+	private KMTEditor editor;
 	
 	/**
 	 * List of KermetaEditorEventListener that must be notified
@@ -98,7 +98,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 		return resourceBundle;
 	}
 	
-	public Editor getEditor()
+	public KMTEditor getEditor()
 	{
 		return editor;
 	}
@@ -106,7 +106,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	 * set The kermeta texteditor
 	 * @param newEditor
 	 */
-	public void setEditor(Editor newEditor)
+	public void setEditor(KMTEditor newEditor)
 	{
 		editor = newEditor;
 	}

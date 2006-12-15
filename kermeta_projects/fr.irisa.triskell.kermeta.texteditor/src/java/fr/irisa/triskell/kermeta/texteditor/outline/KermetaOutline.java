@@ -31,7 +31,7 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
 
@@ -45,7 +45,7 @@ public class KermetaOutline extends ContentOutlinePage {
 	protected OutlineContentProvider contentProvider;
 	protected OutlineLabelProvider labelProvider;
 
-	protected Editor editor;
+	protected KMTEditor editor;
 	
 	protected boolean _isDisposed = false;
 
@@ -54,7 +54,7 @@ public class KermetaOutline extends ContentOutlinePage {
 	/**
 	 * 
 	 */
-	public KermetaOutline(Editor editor) {
+	public KermetaOutline(KMTEditor editor) {
 		super();
 		this.editor = editor;
 		contentProvider = new OutlineContentProvider(this);

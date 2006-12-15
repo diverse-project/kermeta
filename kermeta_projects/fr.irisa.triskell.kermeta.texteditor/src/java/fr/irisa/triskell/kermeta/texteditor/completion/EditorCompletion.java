@@ -35,7 +35,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 //import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -54,10 +54,10 @@ import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
  */
 public class EditorCompletion implements IContentAssistProcessor {
 	
-	protected Editor editor;
+	protected KMTEditor editor;
 	protected boolean doubleColon;
 	
-	public EditorCompletion(Editor editor) {
+	public EditorCompletion(KMTEditor editor) {
 		super();
 		this.editor = editor;
 	}
