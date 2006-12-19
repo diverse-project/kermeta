@@ -1,3 +1,13 @@
+/* $Id: FloraSessionBuilder.java,v 1.4 2006-12-19 14:26:38 rodrigotex Exp $
+ * Project: fr.irisa.triskell.kermeta.flora2
+ * File: FloraSessionBuilder.java
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date: Nov, 2006
+ * Authors: rodrigotex
+ */
+
 package fr.irisa.triskell.flora2;
 
 import java.io.IOException;
@@ -12,11 +22,22 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
 import java.util.Properties;
- 
+
+/*
+ * This class creates a new FloraSession from a property file
+ */
 public class FloraSessionBuilder {
     
 	
     private static FloraSession session;
+
+    public static FloraSession getSession() {
+        if (session == null ){ 
+            initializeFloraProperties();
+            session = new FloraSession();             
+        }    
+        return session;
+    }
     
     private static void initializeFloraProperties(){
 	   try { 
@@ -97,30 +118,5 @@ public class FloraSessionBuilder {
         return path+File.separator+"config"+File.separator+arch+"-pc-"+osName+File.separator+"bin";
     }
     
-    public static FloraSession getSession() {
-        
-        if (session == null ){ 
-        	initializeFloraProperties();
-      /*      java.lang.String slash = java.io.File.separator;        
-            Platform.getInstallLocation();
-            
-            //  java.lang.String eclipseHome = System.getProperty("osgi.syspath")+slash+"..";               
-            //java.lang.String prologDir = eclipseHome+slash+"thirdpart"+slash+"XSB";
-            java.lang.String prologDir = "c:"+java.io.File.separator+"XSB";
-            java.lang.String configBin = prologDir+slash+"config"+slash+"x86-pc-windows"+slash+"bin";   
-            java.lang.String floraDir = prologDir+slash+"packages"+slash+"flora2";
-            java.lang.String javaLibPath = System.getProperty("java.library.path");
-        */
-       /* 	
-   		   System.setProperty("FLORADIR", "C:/eclipse/eclipse_3.1.2/pluginWorkpace/fr.irisa.triskell.kermeta.flora2/thirdparty/XSB/packages/flora2"); 
-           System.setProperty("PROLOGDIR", "C:\\eclipse\\eclipse_3.1.2\\pluginWorkpace\\fr.irisa.triskell.kermeta.flora2\\thirdparty\\XSB\\config\\x86-pc-windows\\bin");
-           System.setProperty("ENGINE", "Subprocess");
-           java.lang.String javaLibPath = System.getProperty("java.library.path");           
-           System.setProperty("java.library.path", javaLibPath +";"+"C:\\eclipse\\eclipse_3.1.2\\pluginWorkpace\\fr.irisa.triskell.kermeta.flora2\\thirdparty\\XSB\\config\\x86-pc-windows\\bin");
-        */
-           
-            session = new FloraSession();             
-        }    
-        return session;
-    }
+
 }

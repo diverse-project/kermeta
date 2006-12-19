@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.3 2006-12-19 13:00:40 rodrigotex Exp $
+/* $Id: Flora2XSBEngine.java,v 1.4 2006-12-19 14:26:38 rodrigotex Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -34,8 +34,7 @@ public class Flora2XSBEngine {
         return fr.irisa.triskell.flora2.FloraSessionBuilder.getSession();
     }
     
-    // Implementation of method write called as :
-    // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
+
     public static RuntimeObject executeCommand (RuntimeObject self, RuntimeObject command) {
             java.lang.String strCommand = java.lang.String.valueOf( command.getData().get("StringValue"));
            
@@ -43,8 +42,6 @@ public class Flora2XSBEngine {
             return self.getFactory().getMemory().voidINSTANCE;
     } 
 
-    // Implementation of method writeln called as :
-    // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)
     public static RuntimeObject executeQueryCommand(RuntimeObject self, RuntimeObject command) {
         java.lang.String strQuery = java.lang.String.valueOf( command.getData().get("StringValue"));
         java.util.Iterator ite = getSession().ExecuteQuery(strQuery);
@@ -60,12 +57,8 @@ public class Flora2XSBEngine {
         return iteresult;
     }
     
-    // Implementation of method writeln called as :
-    // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)
     public static RuntimeObject executeQueryCommand(RuntimeObject self, RuntimeObject command, RuntimeObject vars) {
         fr.irisa.triskell.kermeta.language.structure.Class clsString = 
-//          (fr.irisa.triskell.kermeta.language.structure.Class)
-          //self.getFactory().createObjectFromClassName("kermeta::standard::String").getMetaclass().getData().get("kcoreObject");
                    createParametrizedClass(self, "kermeta::standard::String", null);             
       
         fr.irisa.triskell.kermeta.language.structure.Class[] hashVariables = {clsString, clsString };
@@ -82,15 +75,15 @@ public class Flora2XSBEngine {
         while ( iteVars.hasNext()){
             String str = java.lang.String.valueOf( ((RuntimeObject) iteVars.next()).getData().get("StringValue"));
             vectorParams.add( str);
-            System.out.println("parameters= "+ str);            
+            //System.out.println("parameters= "+ str);            
         }
 
-        System.out.println("######################################");               
-        System.out.println("query = "+ strQuery);        
+        //System.out.println("######################################");               
+        //System.out.println("query = "+ strQuery);        
         java.util.Iterator ite = getSession().ExecuteQuery(strQuery, vectorParams); 
         while (ite.hasNext()) {
-            System.out.println("######################################");               
-            System.out.println("The query has responses ");            
+            //System.out.println("######################################");               
+            //System.out.println("The query has responses ");            
             java.util.HashMap hash = (java.util.HashMap) ite.next();
             RuntimeObject hashKermeta = createRuntimeObject(self, clsHashOfStrings);
             
@@ -98,8 +91,8 @@ public class Flora2XSBEngine {
             while (iteKeys.hasNext()) {
                java.lang.String varName = (java.lang.String) iteKeys.next();
                FloraObject value = (FloraObject) hash.get(varName);
-               System.out.println("######################################");               
-               System.out.println("I found "+ varName+" = "+ value.toString());
+               //System.out.println("######################################");               
+               //System.out.println("I found "+ varName+" = "+ value.toString());
                RuntimeObject keyKermeta = self.getFactory().createObjectFromClassName("kermeta::standard::String");
                fr.irisa.triskell.kermeta.runtime.basetypes.String.setValue(keyKermeta, varName);
                RuntimeObject valKermeta = self.getFactory().createObjectFromClassName("kermeta::standard::String");
@@ -162,12 +155,11 @@ public class Flora2XSBEngine {
     }
     
     public static void main( java.lang.String[] args){
-        System.out.println("Inicio");
         getSession();        
         System.out.println("exec sdf command");
           getSession().ExecuteCommand("insert{ A : B}.");
           Flora2XSBEngine.close();          
-          //System.out.println("Fim");
+          System.out.println("End");
       }    
 
 } 
