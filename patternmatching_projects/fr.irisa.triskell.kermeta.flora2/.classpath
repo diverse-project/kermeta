@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.interpreter/dist/interpreter_kermeta.jar"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="/fr.irisa.triskell.kermeta.interpreter/lib/io_kermeta.jar"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.interpreter/lib/model_kermeta.jar" kind="lib" path="/fr.irisa.triskell.kermeta.interpreter/lib/model_kermeta.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
 	<classpathentry kind="output" path="bin/java"/>
 </classpath>

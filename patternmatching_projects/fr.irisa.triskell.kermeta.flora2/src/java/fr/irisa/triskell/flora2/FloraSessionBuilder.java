@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
 import java.util.Properties;
-
+ 
 public class FloraSessionBuilder {
     
 	
