@@ -1,4 +1,4 @@
-/* $Id: ModelPattern2Flora.kmt,v 1.1 2006-11-09 15:19:30 rodrigotex Exp $
+/* $Id: ModelPattern2Flora.kmt,v 1.2 2006-12-19 12:37:57 rodrigotex Exp $
  * Creation date: October 4, 2006
  * License:
  * Copyright:
@@ -12,16 +12,16 @@ package kermeta::flora2::pattern;
 
 require kermeta
 
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/kermeta/flora2/Model2Flora.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.flora2/src/flora2/Flora2wVisitor.ecore"
 require "../pattern/metamodel/PatternFramework.ecore"
    
-using kermeta::standard 
+using kermeta::standard  
 using kermeta::reflection 
 using kermeta::persistence 
 using kermeta::interpreter
 using kermeta::utils
-
+ 
 using ecore
 //using flora2::visitors
 using patternframework
@@ -129,7 +129,26 @@ class ModelPattern2Flora inherits Model2Flora {
                     vars.add(objTable.getId( r.player))}}
        result := vars
 	end  
-
+	
+	method getInstanceExpression (term: flora2::Term,  className : String) : flora2::Expression is do
+/*	  var formula : flora2::CompoundedFormula init flora2::CompoundedFormula.new      
+	  formula.operator := flora2::ConnectiveOp.conjunctionOp      
+      formula.elements.add ( createsInstanceClause (term, "?_class"+term.oid().toString ))
+      
+      var isa_subclass : flora2::ISASubclass init flora2::ISASubclass.new 
+      var elementOid : flora2::Constant init flora2::Constant.new
+      elementOid.symbolName :=  "?_class"+term.oid().toString     
+      isa_subclass.element := elementOid
+      var superclassOid : flora2::Constant init flora2::Constant.new
+      superclassOid.symbolName := className        
+      isa_subclass.superclass := superclassOid
+                
+      formula.elements.add ( isa_subclass)
+	  result := formula	  
+*/
+      result := createsInstanceClause (term, className)
+	end	
+ 
 }
 
 
@@ -183,5 +202,8 @@ class IDTableWithVariable inherits IDTable {
 	  varTerm.symbolName := "?_obj"+obj.oid().toString
 	  result := varTerm		
 	end  
+
+
  
 }
+
