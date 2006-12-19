@@ -1,25 +1,25 @@
-/* $Id: FSMMatching.kmt,v 1.1 2006-12-19 12:45:39 rodrigotex Exp $
+/* $Id: V3StudioMatching.kmt,v 1.1 2006-12-19 14:10:12 rodrigotex Exp $
  * Creation date: October 19, 2006
  * License:
  * Copyright:
- * Authors: Rodrigo Ramos
+ * Authors:
  */
-@mainClass "fsm::FSMMatching"
+@mainClass "v3Studio::V3StudioMatching"
 @mainOperation "main"
 
-package fsm;
+package v3Studio;
  
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore"
-require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMMPattern.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodel.ecore"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"       
 require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMatching.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
- 
+
 require kermeta
 
-using kermeta::standard  
+using kermeta::standard   
 using kermeta::persistence 
 using kermeta::utils
 using ecore
@@ -27,11 +27,11 @@ using ecore
 using kermeta::pattern
 using kermeta::pattern::flora2
 
-class FSMMatching
+class V3StudioMatching
 {
     operation main() : Void is do 
-        var inputMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/models/FSMM.xmi"                              
-        var patternPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/models/FSMMPattern_frame.xmi"                               
+        var inputMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/models/Architecture.xmi"
+        var patternPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/models/patterns/V3StudioPattern_frame.xmi"                               
         
         executePatternMatching (inputMPath, patternPath )    
     end
@@ -42,14 +42,14 @@ class FSMMatching
         var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
         handler.initialize()        	 
 
-        var packageName : String init "FSM"
-        var inputMMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore"
+        var inputMMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodel.ecore"
         var patternFramePath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
      
-        stdio.writeln(" Loading models ...")
+        stdio.writeln(" Loading model...")
         var inputMetamodel : Sequence<EPackage> init handler.loadEcoreModel(repository, inputMMPath)    
-        var inputModel : Set<Object> init loadModel(repository, targetFsmURI, inputMMPath)
 
+        var inputModel : Set<Object> init loadModel(repository, targetFsmURI, inputMMPath)
+        stdio.writeln(" Loading pattern model ...")        
         var template : patternframework::ModelPattern 
         template ?= loadModel(repository, patternFSMURI, patternFramePath).one 
       
