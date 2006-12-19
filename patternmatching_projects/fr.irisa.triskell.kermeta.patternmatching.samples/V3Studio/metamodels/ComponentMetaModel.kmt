@@ -1,0 +1,84 @@
+
+package Component;
+
+require kermeta
+
+using kermeta::standard
+
+abstract class ComponentDefinition
+{
+	attribute name : String[1..1]
+}
+
+class ComplexComponentDefinition inherits ComponentDefinition
+{
+	attribute component : set ComponentTypeReference[2..*]
+	attribute binding : set Binding[1..*]#owner
+	attribute port : set DelegationPort[0..*]
+	property readonly behavior : StateMachine[1..1]
+}
+class SimpleComponentDefinition inherits ComponentDefinition
+{
+	attribute port : set AssemblyPort[1..*]
+	attribute behavior : StateMachine[1..1]
+}
+class Port
+{
+	attribute name : String[1..1]
+	reference required : set Interface[0..*]
+	reference provided : set Interface[0..*]	
+	attribute multiplicity : Multiplicity[1..1]
+}
+class DelegationPort inherits Port
+{
+}
+class AssemblyPort inherits Port
+{
+}
+
+class ComponentTypeReference
+{
+	attribute name : String[1..1]
+	reference type : ComponentDefinition[1..1]
+}
+
+class BindingEnd
+{
+	reference port : Port[1..1]
+	reference component : ComponentTypeReference[1..1]
+}
+
+class Binding
+{
+	attribute name : String[1..1]
+	reference owner : ComplexComponentDefinition[1..1]#binding
+	attribute endA : BindingEnd[1..1]
+	attribute endB : BindingEnd[1..1]
+}
+
+class Interface
+{
+	attribute name : String[1..1]
+	attribute service : set Service[1..*]
+	attribute protocol : StateMachine[0..1]
+}
+
+class Service
+{
+	attribute name : String[1..1]
+	attribute parameter : set Parameter[0..*]
+}
+class Parameter
+{
+	attribute name : String[1..1]
+	reference type : DataType[1..1]
+	reference activityParameter : Parameter [0..1]
+}
+class Multiplicity
+{
+	attribute lowerBound : kermeta::standard::Integer
+	attribute upperBound : kermeta::standard::Integer
+}
+
+abstract class StateMachine{}
+abstract class DataType{}

@@ -1,0 +1,145 @@
+/* $Id: CreatePattern1.kmt,v 1.1 2006-12-19 12:45:40 rodrigotex Exp $
+ * Creation date: November 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "v3studio::CreatePattern1"
+@mainOperation "main"
+
+
+package v3studio;
+
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+require kermeta
+ 
+using kermeta::standard 
+using kermeta::persistence 
+
+using pattern::upctriskell::Component
+using pattern::upctriskell::Statemachine
+using pattern::upctriskell::Activity
+
+class CreatePattern1
+{
+    operation main() : Void is do 
+        var patternTemplate : patternframework::ModelPattern init patternframework::ModelPattern.new
+//        template.constraints := pattern::PConstraint.new
+        patternTemplate.featureIdentifier.add("name")
+
+        var pmodel : patternframework::PModel init patternframework::PModel.new
+        patternTemplate.pattern := pmodel
+        pmodel.content := OrderedSet<patternframework::PObject>.new
+                
+        // Creating structural model
+
+        var beginService : Service init Service.new 
+        beginService.name := "begin"      
+        var commitService : Service init Service.new
+        commitService.name := "commit"        
+        var interTransation : Interface init Interface.new        
+        interTransation.name := "ITrans"
+        interTransation.service.add (beginService) 
+        interTransation.service.add (commitService)         
+        
+		var comClient : SimpleComponentDefinition init SimpleComponentDefinition.new
+		comClient.name := "Client"	
+		var portA : AssemblyPort init AssemblyPort.new 
+		portA.required.add( interTransation)
+		comClient.port.add(portA)
+		var portB : AssemblyPort init AssemblyPort.new 		
+		portB.required.add( interTransation)
+		comClient.port.add(portB)	
+			
+		var clientStateChart : StateMachine init StateMachine.new		
+		comClient.behavior := clientStateChart		
+		var topRegion : Region init Region.new
+		clientStateChart.name := void
+		topRegion.name := void		
+		clientStateChart.topRegion := topRegion
+
+		var beginState1 : State init State.new
+		beginState1.name := void
+		topRegion.vertex.add(beginState1)		
+		var beginActivity : ComplexActivity init ComplexActivity.new
+		beginActivity.name := void		
+		beginState1.doActivity := beginActivity
+		var callbegin1 : ServiceCall init ServiceCall.new
+		callbegin1.name := void			
+		callbegin1.service := beginService
+		callbegin1.requiredPort := portA	
+        beginActivity.activity.add( callbegin1)   
+        
+		var beginState2 : State init State.new
+		beginState2.name := void					
+		topRegion.vertex.add(beginState2)		
+		var beginActivity2 : ComplexActivity init ComplexActivity.new
+		beginActivity2.name := void					
+		beginState2.doActivity := beginActivity
+		var callbegin2 : ServiceCall init ServiceCall.new
+		callbegin2.name := void					
+		callbegin2.service := beginService
+		callbegin2.requiredPort := portB	
+        beginActivity.activity.add( callbegin2)           
+
+		
+		// Adding  elements to the structural part of the pattern
+		pmodel.content.add(interTransation)	
+		pmodel.content.add(comClient)
+		pmodel.content.add(beginActivity)		
+		pmodel.content.add(beginActivity2)				
+	
+		// Setting roles
+		var role1 : patternframework::PRole init patternframework::PRole.new
+		role1.name := "Client"
+		role1.player := comClient		
+		var role2 : patternframework::PRole init patternframework::PRole.new
+		role2.name := "portA"
+		role2.player := portA
+		var role3 : patternframework::PRole init patternframework::PRole.new
+		role3.name := "portB"
+		role3.player := portB		
+		var role4 : patternframework::PRole init patternframework::PRole.new
+		role4.name := "ITransaction"
+		role4.player := interTransation								
+		var role5 : patternframework::PRole init patternframework::PRole.new
+		role5.name := "StateA"
+		role5.player := beginState1								
+		var role6 : patternframework::PRole init patternframework::PRole.new
+		role6.name := "StateB"
+		role6.player := beginState2		
+		var role7 : patternframework::PRole init patternframework::PRole.new
+		role7.name := "CallBeginA"
+		role7.player := callbegin1		
+		var role8 : patternframework::PRole init patternframework::PRole.new
+		role8.name := "CallBeginB"
+		role8.player := callbegin2				
+											
+				
+		patternTemplate.pattern.roles.add(role1)
+		patternTemplate.pattern.roles.add(role2)		
+		patternTemplate.pattern.roles.add(role3)		
+		patternTemplate.pattern.roles.add(role4)
+		patternTemplate.pattern.roles.add(role5)
+		patternTemplate.pattern.roles.add(role6)
+		patternTemplate.pattern.roles.add(role7)
+		patternTemplate.pattern.roles.add(role8)								
+
+        // Persisting the model		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_structure.xmi ")
+		var repository : EMFRepository init EMFRepository.new
+		var resource1 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_structure.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore")
+        pmodel.content.each { o | resource1.instances.add(o) } 
+		resource1.save()			
+		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_frame.xmi ")		
+		var resource2 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_frame.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")		
+		resource2.instances.add(patternTemplate)
+
+		resource2.save()		
+    end
+}

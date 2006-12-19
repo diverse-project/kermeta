@@ -1,0 +1,587 @@
+package bigSd;
+
+//require "ecore.kmt"
+using kermeta::standard
+using kermeta::persistence
+//require "ecore.kmt"
+class SDModel
+{
+	attribute sds : SD[0..*]
+	attribute instances : Instance[0..*]
+	attribute bdsMorphisms : BSDMorphisms[0..*] 
+	
+
+  //  operation ask_dotprint() is do
+  //  	ask_emfmodel("Entrez un modele EMF de l'automate à 'dot-printer' : ").dotprint
+  //  end
+	
+}
+abstract class NamedElement
+{
+	attribute name : String[1..1]
+	operation browse(verbose : Boolean) : kermeta::standard::~Void is abstract
+		//abstract operation
+	
+}
+abstract class SD inherits NamedElement
+{
+}
+class BSD inherits SD
+{
+	attribute couples : EventCouple[0..*]
+	reference instances : Instance[0..*]
+	attribute events : Event[0..*]
+	
+	operation createInstance(name : String) : Instance is do
+    	result := Instance.new
+    	result.name := name
+    	self.instances.add(result)
+    end
+
+    operation copyInstances(instances : set Instance [*]) : Void is do
+    	instances.each{ i | 
+    		self.instances.add(i.copyInstance)
+    	}
+	end
+
+    operation copyEvents(events : set Event [*],instancesMappings : MyHashtable) : Void is do
+    	events.each{ e | 
+    		self.events.add(e.copyEvent(instancesMappings,self))
+    	}
+	end
+    operation copyEvents2(events : set Event [*],instancesMappings1 : MyHashtable,instancesMappings2 : MyHashtable) : Void is do
+    	events.each{ e | 
+    		self.events.add(e.copyEvent2(instancesMappings1,instancesMappings2,self))
+    	}
+    	var name: String init ""
+    	var ev:Event
+    	self.events.each{event|  
+    		name:= event.getCorrespondingEvent().name
+    		if SendEvent.isInstance(event) then
+    			var evt1:SendEvent
+    			evt1?=event
+    			ev:=self.events.detect{ev|ev.name==name}
+    			var evt: ReceiveEvent 
+				evt?=ev
+    			evt1.receiveEvent:=evt   
+    		else	
+    		    var evt1:ReceiveEvent
+    			evt1?=event	
+    			ev:=self.events.detect{ev|ev.name==name}
+    			var evt: SendEvent 
+				evt?=ev
+    			evt1.sendEvent:=evt     			
+    		end
+    	}
+    	
+	end
+    operation copyCouples(cples : set EventCouple [*],eventsMappings : MyHashtable) : Void is do
+    	cples.each{ c | 
+    		self.couples.add(c.copyEventCouple(eventsMappings,self))
+    	}
+	end
+    operation copyCouples2(cples : Collection<EventCouple>,eventsMappings1 : MyHashtable,eventsMappings2 : MyHashtable) : Void is do
+    	cples.each{ c | 
+    		self.couples.add(c.copyEventCouple2(eventsMappings1,eventsMappings2,self))
+    	}
+	end
+	operation addCouple(e1 : Event, e2: Event): Void is 
+	do
+		var c:EventCouple 
+		c:=EventCouple.new
+		c.event1:=e1
+		c.event2:=e2  
+		self.couples.add(c)
+	end
+	operation getMinEvents() : Sequence<Event> is do
+		var preEvents : Set<Event> init Set<Event>.new
+		var postEvents : Set<Event> init Set<Event>.new
+		self.couples.each{ c |
+			preEvents.add(c.event1)
+			postEvents.add(c.event2)
+		}
+//		result := preEvents.select{ e | (postEvents.detect{ e2 | e.name==e2.name } != void)}
+		result := preEvents.select{ e | e.notIncludedIn(postEvents) } 
+	end
+	operation getMaxEvents() : EventCollection is do
+		var preEvents : Set<Event> init Set<Event>.new
+		var postEvents : Set<Event> init Set<Event>.new
+		self.couples.each{ c |
+			preEvents.add(c.event1)
+			postEvents.add(c.event2)
+		}
+//		result := postEvents.select{ e | (preEvents.detect{ e2 | e.name==e2.name } != void)}
+		result := postEvents.select{ e | e.notIncludedIn(preEvents) }
+	end
+	
+	operation positionOnInstance(e: Event) : Integer is do
+		var  i : Integer init 0
+		var tmpEvent: Event init e
+		from var j : Integer init 0 
+		until getPredecessorsOnLifeLine(tmpEvent)==void
+		loop 
+		    tmpEvent:=getPredecessorsOnLifeLine(tmpEvent)
+		    i:=i+1
+		end
+		result:=i
+	end
+	
+	operation getPredecessors(evtsList : EventCollection) : EventCollection is do
+		//TODO: implement operation getPredecessors
+	end
+	operation getPredecessorsOfTheEvent(event : Event) : EventCollection is do
+		//result := EventCollection.new
+		var evts : Set<Event> init Set<Event>.new
+		//stdio.writeln("predd:"+event.name)
+		 self.couples.each{c|
+			if(c.event2==event)then
+			//	stdio.writeln("predd:"+event.name+"   "+c.event1.name)
+				evts.add(c.event1)	
+			end
+		}
+		result:=evts
+	end
+	operation getSuccessors(evtsList : EventCollection) : EventCollection is do
+		//TODO: implement operation getSuccessors
+	end
+		operation getSuccessorsOfTheEvent(event : Event) : EventCollection is do
+		//result := EventCollection.new
+		var evts : Set<Event> init Set<Event>.new
+		 self.couples.each{c|
+			if(c.event1==event)then
+				evts.add(c.event2)	
+			end
+		} 
+		result:=evts
+	end
+	operation getPredecessorsOnLifeLine(e : Event) : Event is do
+		var eventpred: EventCollection
+		//stdio.writeln("pred:"+e.name)
+		eventpred:=getPredecessorsOfTheEvent(e)
+		if eventpred!= void then
+			eventpred.each{ev| //stdio.writeln("pred: pas reslut:"+ev.name)
+									if ev.onInstance== e.onInstance then
+									//stdio.writeln("pred: reslut:"+ev.name)
+									result:=ev
+								end
+			}
+		end
+		//TODO: implement operation getPredecessorsOnLifeLine
+	end
+	operation getPredecessorsOnLifeLineN( name: String) : Event is do
+		var ev:Event init findEvent(name)
+		result:=getPredecessorsOnLifeLine( ev)
+		//TODO: implement operation getPredecessorsOnLifeLine
+	end
+	operation getSuccessorsOnLifeLine(e : Event) : Event is do
+		var eventsuc: EventCollection
+		var suc: Event 
+		eventsuc:=getSuccessorsOfTheEvent(e)
+		if eventsuc!= void then
+			eventsuc.each{ev| if ev.onInstance== e.onInstance then
+									suc:=ev
+								end
+			}
+		end
+		result:=suc
+		//TODO: implement operation getSuccessorsOnLifeLine
+	end
+		/**
+		create a message action from the instance ~from to the instance receive: 
+		add two events e1 and e2, and a coupleEvent(e1,e2)
+	 */
+	operation addMessage(action : String, ~from : Instance, sentUID : String, to : Instance, receivedUID : String) : kermeta::standard::~Void is do
+		//for the considered action build a SendEvenet and a ReceiveEvent supporting
+		//this action-transition going from "from" to "to"
+		
+		var sent : SendEvent init SendEvent.new
+		sent.action := action
+		sent.name := sentUID
+		sent.onInstance := ~from
+		var received : ReceiveEvent init ReceiveEvent.new
+		received.action := action
+		received.name := receivedUID
+		received.onInstance := to
+		
+		sent.receiveEvent := received
+		received.sendEvent := sent
+		
+		self.events.add(sent)
+		self.events.add(received)
+		var cple : EventCouple init EventCouple.new
+		cple.event1 := sent
+		cple.event2 := received
+		self.couples.add(cple)
+		
+	end
+	/*operation addLocalEvent(action : String, on : Instance, localUID : String) : kermeta::standard::~Void is do
+		//for the considered action build a LocalEvenet supporting
+		//this action on "on" instance
+		
+		var local : LocalEvent init LocalEvent.new
+		local.action := action
+		local.name := localUID
+		local.on := on
+		self.events.add(local)
+	end*/
+	
+	/** addGreaterThan(a,b) creates the CoupleEvent(a,b)*/
+	operation addGreaterThan(PreUID : String, PostUID : String) : Void is do
+		//add a greater relation PreUID event < Post UID event
+		
+		var pred : Event init findEvent(PreUID)
+		var poste : Event init findEvent(PostUID)
+		var cple : EventCouple init EventCouple.new
+		cple.event1 := pred
+		cple.event2 := poste
+		self.couples.add(cple)
+		
+	end
+/*	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		self.instances.each{ instance | 
+    		instance.browse(verbose)
+    	}
+    	stdio.writeln("")
+		self.events.each{ event | 
+    		event.browse(verbose)
+    	}
+    	stdio.writeln("")
+		self.couples.each{ couple | 
+    		couple.browse(verbose)
+    	}
+    	stdio.writeln("")
+    	stdio.writeln("")
+    	stdio.writeln("")
+    end*/
+    /** addGreaterThan(a,b,c) creates the CoupleEvents (a,b) and (b,c)*/
+	operation addIsBetween(PreUID: String, betweenUID : String, PostUID : String) : kermeta::standard::~Void is do
+		//add a greater relations PreUID event < betweenUID event < Post UID event
+		addGreaterThan(betweenUID,PostUID)
+		addGreaterThan(PreUID,betweenUID)
+	end
+	operation getFirstEvent(instance : Instance) : Event is do
+		//return first event on instance life-line
+    		var evts : Sequence<Event> init events.select{e| e.onInstance== instance and getPredecessorsOnLifeLine(e)== void}
+    		if evts ==void or evts.empty then 
+    			result:= void 
+    		else
+    			result:= evts.one() 
+    		end
+	end
+	operation getLastEvent(instance : Instance) : Event is do
+		//TODO: implement operation getLastEvent
+	end
+	operation findEvent(eventUID : String) : Event is do
+		result := self.events.detect{ e | e.name == eventUID }
+	end
+	operation getInstance(instanceName : String) : Instance is do
+		result := self.instances.detect{ e | e.name == instanceName }
+	end
+	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.writeln("BSD name: "+self.name)
+		self.instances.each{ instance | 
+    		instance.browse(verbose)
+    	}
+    	stdio.writeln("")
+		self.events.each{ event | 
+    		event.browse(verbose)
+    	}
+    	stdio.writeln("")
+		self.couples.each{ couple | 
+    		couple.browse(verbose)
+    	}
+    	stdio.writeln("")
+    	stdio.writeln("")
+    	stdio.writeln("")
+    end
+}
+class  Instance inherits NamedElement
+{
+
+	/*method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write(self.name+" ")
+		if verbose then
+			stdio.write(self.toString+" ")
+		end
+	end*/
+	operation copyInstance() : Instance is do
+    	result := Instance.new
+    	result.name := self.name 
+	end
+	operation resolveInstance(instancesMappings : MyHashtable,bsd : BSD) : Instance is do
+		var corresponding : String
+		if instancesMappings != void then
+			corresponding := instancesMappings.get(self.name)
+		end
+		if corresponding == void then
+			corresponding := self.name
+		end
+		result := bsd.instances.detect{ i | i.name == corresponding }
+	end
+	operation resolveInstance2(rinstancesMappings1 : MyHashtable,instancesMappings2 : MyHashtable,bsd : BSD) : Instance is do
+		var corresponding : String
+		if rinstancesMappings1 != void then 
+			corresponding := rinstancesMappings1.get(self.name)
+			corresponding := instancesMappings2.get(corresponding)
+			//stdio.writeln("**********"+corresponding+"")
+		end
+		if corresponding == void then
+			corresponding := self.name
+			//stdio.writeln("*****NoMap*****"+corresponding+"")
+		end
+		result := bsd.instances.detect{ i | i.name == corresponding }
+	end
+
+	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write(self.name+" ")
+		if verbose then
+			stdio.write(self.toString+" ")
+		end
+	end
+}
+abstract class Event inherits NamedElement
+{
+	attribute action : String[1..1]
+	reference onInstance : Instance[1..1]
+	
+	operation copyEvent(instancesMappings : MyHashtable, bsd : BSD) : Event is do
+	end
+	operation copyEvent2(instancesMappings1 : MyHashtable,instancesMappings2 : MyHashtable,bsd : BSD) : Event is do
+	end
+	
+	operation getCorrespondingEvent():Event is abstract
+	operation getType():String is abstract
+	operation resolveEvent(eventsMappings : MyHashtable, bsd : BSD) : Event is do
+		var corresponding : String
+		if eventsMappings != void then
+			corresponding := eventsMappings.get(self.name)
+		end
+		if corresponding == void then
+			corresponding := self.name
+		end
+		result := bsd.events.detect{ e | e.name == corresponding }
+	end
+	
+	operation resolveEvent2(eventsMappings1 : MyHashtable,eventsMappings2 : MyHashtable,bsd : BSD) : Event is do
+		var corresponding : String
+		if eventsMappings1 != void then
+			corresponding := eventsMappings1.get(self.name)
+			corresponding := eventsMappings2.get(corresponding)
+		end
+		if corresponding == void then
+			corresponding := self.name
+		end
+		result := bsd.events.detect{ e | e.name == corresponding }
+	end
+
+	operation notIncludedIn(events : EventCollection) : kermeta::standard::Boolean is do
+		result := true
+		if events!=void then
+			var found : Event init events.detect{ e | e.name==self.name }
+			if found != void then
+				result:=false
+			end
+		end
+	end
+	
+}
+class SendEvent inherits Event
+{
+	reference receiveEvent : ReceiveEvent[1..1]
+	
+/*	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write("sendEvent "+self.name+" "+self.action+" on "+self.on.name)
+		if verbose then
+			stdio.write(" "+self.toString+" ")
+		end
+		stdio.writeln("")
+	end*/
+
+	method getCorrespondingEvent():Event is do
+		result:=receiveEvent	
+	end
+	method getType():String is do
+		result:="S"
+	end
+	method copyEvent(instancesMappings : MyHashtable, bsd : BSD) : Event is do
+		var sent : SendEvent init SendEvent.new
+		sent.receiveEvent := self.receiveEvent
+		result := sent
+		result.name := self.name
+		result.action := self.action
+		result.onInstance:=self.onInstance.resolveInstance(instancesMappings,bsd)
+	end
+	method copyEvent2(rinstancesMappings1 : MyHashtable,instancesMappings2 : MyHashtable,bsd : BSD) : Event is do
+		var sent : SendEvent init SendEvent.new
+		sent.receiveEvent := self.receiveEvent
+		result := sent
+		result.name := self.name
+		result.action := self.action
+		result.onInstance:=self.onInstance.resolveInstance2(rinstancesMappings1,instancesMappings2,bsd)
+	end
+	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write("sendEvent "+self.name+" "+self.action+" on "+self.onInstance.name)
+		if verbose then
+			stdio.write(" "+self.toString+" ")
+		end
+		stdio.writeln("")
+	end	
+}
+class ReceiveEvent inherits Event
+{
+	reference sendEvent : SendEvent[1..1]
+	
+	method getCorrespondingEvent():Event is do
+		result:=sendEvent	
+	end
+	method getType():String is do
+		result:="R"
+	end
+	method copyEvent(instancesMappings : MyHashtable,bsd : BSD) : Event is do
+		var received : ReceiveEvent init ReceiveEvent.new
+		received.sendEvent := self.sendEvent
+		result := received
+		result.name := self.name
+		result.action := self.action
+		result.onInstance:=self.onInstance
+	end
+	method copyEvent2(rinstancesMappings1 : MyHashtable,instancesMappings2 : MyHashtable,bsd : BSD) : Event is do
+		var received : ReceiveEvent init ReceiveEvent.new
+		received.sendEvent := self.sendEvent
+		result := received
+		result.name := self.name
+		result.action := self.action
+		result.onInstance:=self.onInstance.resolveInstance2(rinstancesMappings1,instancesMappings2,bsd)
+	end
+	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write("receiveEvent "+self.name+" "+self.action+" on "+self.onInstance.name)
+		if verbose then
+			stdio.write(" "+self.toString+" ")
+		end
+		stdio.writeln("")
+	end	
+}
+class EventCouple
+{
+	reference event1 : Event[1..1]
+	reference event2 : Event[1..1]
+	
+/*	method browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write("( "+self.e1.name+","+self.e2.name+" ) ")
+		if verbose then
+			stdio.write("( "+self.e1.toString+","+self.e2.toString+" ) ")
+		end
+	end*/
+	operation copyEventCouple(eventsMappings : MyHashtable,bsd : BSD) : EventCouple is do
+		result := EventCouple.new
+		result.event1 := self.event1.resolveEvent(eventsMappings,bsd)
+		result.event2 := self.event2.resolveEvent(eventsMappings,bsd)
+	end
+
+	operation copyEventCouple2(eventsMappings1 : MyHashtable,eventsMappings2 : MyHashtable,bsd : BSD) : EventCouple is do
+		result := EventCouple.new
+		result.event1 := self.event1.resolveEvent2(eventsMappings1,eventsMappings2,bsd)
+		result.event2 := self.event2.resolveEvent2(eventsMappings1,eventsMappings2,bsd)
+	end
+	
+	operation browse(verbose : Boolean) : kermeta::standard::~Void is do
+		stdio.write("( "+self.event1.name+","+self.event2.name+" ) ")
+		if verbose then
+			stdio.writeln("( "+self.event1.toString+","+self.event2.toString+" ) ")
+		end
+	end
+}
+
+/**
+	BSDMorphisms classs : defines injective correspondances between a BSD and an interface
+	Hashtable of Instances mappings;
+	Hahstable of events mappings (names correspondances) 
+**/
+class BSDMorphisms
+{
+	attribute instancesMappings : MyHashtable //Mappings
+	attribute eventsMappings : MyHashtable //Mappings
+	
+	//reciproque
+	attribute rinstancesMappings : MyHashtable //Mappings
+	attribute reventsMappings : MyHashtable //Mappings
+}
+alias EventCollection : kermeta::standard::Collection<Event>; 
+alias Mappings : kermeta::utils::Hashtable<String,String>;
+class NoEventException
+{
+}
+
+class MyHashtable
+{	reference keys : String [0..*]
+	reference values : String [0..*]
+
+	operation put(key : String,valuee : String) : Void is do
+		self.keys.add(key)
+		self.values.add(valuee)
+	end
+	
+	method get(key : String) : String is do
+		result := void
+		var valueIt : kermeta::standard::Iterator<String> init self.values.iterator
+    	from var keyIt : kermeta::standard::Iterator<String> init self.keys.iterator
+    	until keyIt.isOff
+    	loop
+    		var k : String init keyIt.next
+    		var v : String init valueIt.next
+    		if (k == key) then
+    			result := v
+    		end  			
+		end	 
+	end
+}
+
+	
+class LoaderSaver
+{	
+    		/** 
+	 * Serialization helpers
+	 */  
+    operation saveEMFSd(repository : EMFRepository, a : SDModel, uri : String, mmuri : String) : SDModel is do
+		
+	    	var resource : Resource init repository.createResource(uri , mmuri)
+	    	resource.instances.add(a)
+	    	//a.stateSet.each { z | resource.instances.add(z)}
+	    	resource.save()
+    end
+     
+     operation loadEMFSd(repository : EMFRepository, uri : String, mmuri : String) : SDModel is do
+    	var resource : Resource init repository.createResource(uri , mmuri)
+    	resource.instances
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	result ?= instances.detect { e | SDModel.isInstance(e)}
+    end
+      
+    operation ask_emfmodel(prompt : String) : SDModel is do
+    	var file : String init stdio.read(prompt)
+    	var r : EMFRepository init EMFRepository.new
+    	stdio.writeln("lala: " + file)
+    	result := loadEMFSd(r, file, "../models/SD.ecore")
+    end
+    
+    operation loadfsm() : BSD is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : EMFResource 
+        resource ?= res.createResource("C:/Eclipse/workspace02/MSC/src/weavingExamples/base.xmi", "C:/Eclipse/workspace02/MSC/src/models/bigSd.ecore")
+        stdio.writeln("before loading")
+        resource.load()
+       	stdio.writeln("after loading")
+        var fsm1 : BSD
+        fsm1 ?= resource.instances.one  
+        result  := fsm1
+	end
+
+    operation saveSDModel(a : SDModel) :Void is do
+		var res : EMFRepository init EMFRepository.new
+        saveEMFSd(res, a , "C:/Eclipse/workspace02/MSC/src/models/test11.xmi","C:/Eclipse/workspace02/MSC/src/models/bigSd.ecore")
+	end
+
+	 
+}
+

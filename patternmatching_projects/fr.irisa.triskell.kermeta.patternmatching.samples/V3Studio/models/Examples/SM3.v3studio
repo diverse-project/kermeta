@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<V3Studio:SateMachine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:V3Studio="V3Studio" sMachineName="SM3">
+  <hasInternalTransitions transitionName="t1" source="//@hasInternalVertex.0" target="//@hasInternalVertex.2"/>
+  <hasInternalTransitions transitionName="t2" source="//@hasInternalVertex.2" target="//@hasInternalVertex.3"/>
+  <hasInternalTransitions transitionName="t3" source="//@hasInternalVertex.3" target="//@hasInternalVertex.1"/>
+  <hasInternalTransitions transitionName="t4" source="//@hasInternalVertex.2" target="//@hasInternalVertex.4"/>
+  <hasInternalTransitions transitionName="t5" source="//@hasInternalVertex.4" target="//@hasInternalVertex.3"/>
+  <hasInternalVertex xsi:type="V3Studio:InitialState"/>
+  <hasInternalVertex xsi:type="V3Studio:FinalState" stateName="FinalState">
+    <do xsi:type="V3Studio:FinalActivity" href="Activity2.v3studio#//@hasInternalActivities.1"/>
+  </hasInternalVertex>
+  <hasInternalVertex xsi:type="V3Studio:State" stateName="S1">
+    <do xsi:type="V3Studio:ComplexActivity" href="Activity1.v3studio#//@hasInternalActivities.1/@hasInternalActivities.2"/>
+  </hasInternalVertex>
+  <hasInternalVertex xsi:type="V3Studio:State" stateName="S2">
+    <do xsi:type="V3Studio:ComplexActivity" href="Activity1.v3studio#//@hasInternalActivities.1"/>
+  </hasInternalVertex>
+  <hasInternalVertex xsi:type="V3Studio:State" stateName="S3">
+    <do xsi:type="V3Studio:ComplexActivity" href="Activity2.v3studio#/"/>
+  </hasInternalVertex>
+</V3Studio:SateMachine>

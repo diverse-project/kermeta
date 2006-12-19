@@ -1,0 +1,116 @@
+/* $Id: CreatePattern3.kmt,v 1.1 2006-12-19 12:45:40 rodrigotex Exp $
+ * Creation date: November 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "v3studio::CreatePattern3"
+@mainOperation "main"
+
+
+package v3studio;
+
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+require kermeta
+ 
+using kermeta::standard 
+using kermeta::persistence 
+
+using pattern::upctriskell::Component
+using pattern::upctriskell::Statemachine
+using pattern::upctriskell::Activity
+
+class CreatePattern3
+{
+    operation main() : Void is do 
+        var patternTemplate : patternframework::ModelPattern init patternframework::ModelPattern.new
+//        template.constraints := pattern::PConstraint.new
+        patternTemplate.featureIdentifier.add("name")
+
+        var pmodel : patternframework::PModel init patternframework::PModel.new
+        patternTemplate.pattern := pmodel
+        pmodel.content := OrderedSet<patternframework::PObject>.new
+        
+        var falsepositivelmodel : patternframework::PModel init patternframework::PModel.new
+        patternTemplate.falsepositivepatterns  := OrderedSet<patternframework::PModel>.new             
+        patternTemplate.falsepositivepatterns.add( falsepositivelmodel)
+        falsepositivelmodel.content := OrderedSet<patternframework::PObject>.new        
+                
+        // Creating structural model
+
+		var stateA : State init State.new
+		stateA.name := void
+		var stateB : State init State.new
+		stateB.name := void		
+		var transition: Transition init Transition.new 
+		transition.name := void		
+		transition.source := stateA
+		transition.target := stateB		
+		transition.kind := TransitionKind.internal 
+
+
+		var stateC : State init State.new
+		stateC.name := void
+		var cyclicTransition: Transition init Transition.new 
+		cyclicTransition.name := void		
+		cyclicTransition.source := stateC
+		cyclicTransition.target := stateC		
+		cyclicTransition.kind := TransitionKind.internal 
+
+		 
+		// Adding  elements to the structural part of the pattern
+		pmodel.content.add(stateA)	
+		pmodel.content.add(stateB)	
+		pmodel.content.add(transition)	
+								
+		falsepositivelmodel.content.add(stateC)	
+		falsepositivelmodel.content.add(cyclicTransition)
+	
+		// Setting roles
+		var role1 : patternframework::PRole init patternframework::PRole.new
+		role1.name := "SourceState"
+		role1.player := stateA		
+		var role2 : patternframework::PRole init patternframework::PRole.new
+		role2.name := "transition"
+		role2.player := transition										
+		var role3 : patternframework::PRole init patternframework::PRole.new
+		role3.name := "TargetState"
+		role3.player := stateB				
+		var role4 : patternframework::PRole init patternframework::PRole.new
+		role4.name := "SameState"
+		role4.player := stateC			
+		var role5 : patternframework::PRole init patternframework::PRole.new
+		role5.name := "transition" 
+		role5.player := cyclicTransition								
+				
+		patternTemplate.pattern.roles.add(role1)		
+		patternTemplate.pattern.roles.add(role2)
+		patternTemplate.pattern.roles.add(role3)		
+		
+		falsepositivelmodel.roles.add(role4)
+		falsepositivelmodel.roles.add(role5)						
+
+        // Persisting the model		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_structure3.xmi ")
+		var repository : EMFRepository init EMFRepository.new
+		var resource1 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_structure3.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore")
+        pmodel.content.each { o | resource1.instances.add(o) } 
+		resource1.save()			
+		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_falsestructure3.xmi ")
+		var resource3 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_falsestructure3.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore")
+        falsepositivelmodel.content.each { o | resource3.instances.add(o) } 
+		resource3.save()					
+		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_frame3.xmi ")		
+		var resource2 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_frame3.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")		
+		resource2.instances.add(patternTemplate)
+
+		resource2.save()		
+    end
+}

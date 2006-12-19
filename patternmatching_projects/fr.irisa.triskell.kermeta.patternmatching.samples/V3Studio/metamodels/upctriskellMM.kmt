@@ -1,0 +1,268 @@
+/* $Id: upctriskellMM.kmt,v 1.1 2006-12-19 12:45:39 rodrigotex Exp $
+ * Creation date: September 5, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ 
+ TODO : add Multiplicity to Port
+ */
+
+
+package upctriskell;
+
+require kermeta
+
+using kermeta::standard
+
+class Architecture
+{
+	attribute name : String[1..1]
+	attribute component : upctriskell::component::ComponentDefinition[1..1]
+	attribute interface : set upctriskell::component::Interface[1..*]
+	attribute activity : set upctriskell::activity::Activity[1..*]
+	attribute dataType : set DataType[1..*]
+	attribute event : set Event[1..*]
+}
+class Event
+{
+	attribute name : String[1..1]
+}
+class DataType
+{
+	attribute name : String[1..1]
+}
+///////////////////////////////////////////////
+package component{
+abstract class ComponentDefinition
+{
+	attribute name : String[1..1]
+}
+
+class ComplexComponentDefinition inherits ComponentDefinition
+{
+	attribute component : set Component[2..*]
+	attribute binding : set PortLink[1..*]#owner
+	attribute port : set DelegationPort[0..*]
+}
+class SimpleComponentDefinition inherits ComponentDefinition
+{
+	attribute port : set AssemblyPort[1..*]
+	attribute behavior : upctriskell::statemachine::StateMachineDefinition[1..1]
+}
+class Component
+{
+	attribute name : String[1..1]
+	reference type : ComponentDefinition[1..1]
+	attribute statemachine : upctriskell::statemachine::StateMachine[0..1]
+}
+class Port
+{
+	attribute name : String[1..1]
+}
+class DelegationPort inherits Port
+{
+	attribute delegated : BindingEnd [1..1]
+}
+class AssemblyPort inherits Port
+{
+	reference requiredInterface : set Interface[0..*]
+	reference providedInterface : set Interface[0..*]
+}
+class PortLink
+{
+	attribute name : String[1..1]
+	reference owner : ComplexComponentDefinition[1..1]#binding
+	attribute endA : BindingEnd[1..1]
+	attribute endB : BindingEnd[1..1]
+}
+class BindingEnd
+{
+	reference port : Port[1..1]
+	reference component : Component[1..1]
+}
+class Interface
+{
+	attribute name : String[1..1]
+	attribute service : set Service[1..*]
+	attribute protocol : upctriskell::statemachine::StateMachineDefinition[0..1]
+}
+class Service
+{
+	attribute name : String[1..1]
+	attribute parameter : set ServiceParameter[0..*]
+}
+class ServiceParameter
+{
+	attribute name : String[1..1]
+	reference type : upctriskell::DataType[1..1]
+	reference activityParameter : upctriskell::activity::ActivityParameter [1..1]
+}
+/*class Multiplicity
+{
+	attribute lowerBound : kermeta::standard::Integer
+	attribute upperBound : kermeta::standard::Integer
+}*/
+}
+///////////////////////////////////////////////
+package statemachine{
+class StateMachine
+{
+	attribute name : String[1..1]
+	reference definition : StateMachineDefinition [1..1]
+	attribute binding : ActivityBinding[0..*]
+}
+class StateMachineDefinition
+{
+	attribute name : String[1..1]
+	attribute topRegion : Region[1..1]
+	attribute instanceActivity : set ActivityVariabilityPoint[0..*]
+}
+abstract class AbstractActivity{
+	attribute name : String[1..1]
+}
+class ActivityVariabilityPoint inherits AbstractActivity
+{
+}
+class ActivityBinding
+{
+	attribute name : String[1..1]
+	reference ~from : ActivityVariabilityPoint[1..1]
+	reference to : upctriskell::activity::Activity[1..1]
+}
+class Region
+{
+	attribute name : String[1..1]
+	attribute transition : set Transition[1..*]#owner
+	attribute vertex : set Vertex[2..*]#owner
+	reference owner : State[0..1]#region
+}
+class Transition
+{
+	attribute name : String[1..1]
+	reference target : Vertex[1..1]
+	reference source : Vertex[1..1]
+	reference effect : AbstractActivity[0..1]
+	attribute guard : Constraint[0..1]
+	attribute kind : TransitionKind[1..1]
+	reference trigger : upctriskell::Event[1..1]
+	reference owner : Region[1..1]#transition
+}
+abstract class Vertex
+{
+	attribute name : String[1..1]
+	reference owner : Region[1..1]#vertex
+}
+class State inherits Vertex
+{
+	reference doActivity : AbstractActivity[0..1]
+	reference entry : AbstractActivity[0..1]
+	reference exit : AbstractActivity[0..1]
+	attribute region : set Region[0..*]#owner
+	reference deferred : set upctriskell::Event[0..*]
+}
+class Pseudostate inherits Vertex
+{
+	attribute kind : PseudostateKind
+}
+enumeration PseudostateKind
+{
+	JoinState;
+	ForkState;
+	ChoiceState;
+	InitialState;
+	HistoryState;
+}
+class FinalState inherits State
+{
+}
+enumeration TransitionKind
+{
+	internal;
+	external;
+}
+class Constraint // ConditionalActivity???
+{
+	attribute name : String
+}
+}
+///////////////////////////////////////////////
+package activity{
+
+abstract class Activity inherits upctriskell::statemachine::AbstractActivity
+{	
+	attribute input : set ActivityParameter[0..*]
+	attribute output : set ActivityParameter[0..*]
+}
+class InitialActivity inherits Activity
+{
+}
+class FinalActivity inherits Activity
+{ 
+}
+class ActivityParameter
+{
+	attribute name : String
+	reference owner : Activity[1..1]
+	reference type : DataType[1..1]
+	reference serviceParameter : upctriskell::component::ServiceParameter [0..1]
+}
+class SimpleActivity inherits Activity
+{
+	attribute action : Action[1..1]
+	attribute link : set PinParamLink[2..*]
+}
+class ComplexActivity inherits Activity
+{	
+	attribute activity : set Activity[2..*]
+	attribute link : set ActivityLink[1..*]
+}
+class Action
+{
+	attribute name : String
+	attribute output : set Pin[0..*]
+	attribute input : set Pin[0..*]
+}
+class ServiceCall inherits Activity {
+	reference service : upctriskell::component::Service[1..1]
+}
+class ConstantActivity inherits Activity
+{
+	attribute ~value : Value
+} 
+class Pin
+{
+	attribute name : String[1..1]
+	reference type : DataType[1..1]
+	reference owner : Action[1..1]
+}
+class ActivityLink
+{
+	attribute name : String[1..1]
+	reference source : ActivityParameter[1..1]
+	reference target : ActivityParameter[1..1]
+}
+class Value
+{
+	//reference dataType : kermeta::standard::~Void[1..1]
+	reference type : DataType[1..1]
+}
+class PinParamLink
+{
+	attribute name : String[1..1]
+	reference endA : Pin[1..1]
+	reference endB : ActivityParameter[1..1]
+}
+class ConditionalActivity inherits ComplexActivity
+{
+	reference test : Activity[0..1]
+	reference body : Activity[0..1]
+}
+class LoopActivity inherits ComplexActivity
+{
+	reference test : Activity[0..1]
+	reference ~init : Activity[0..1]
+	reference body : Activity[0..1]
+
+}
+}
+

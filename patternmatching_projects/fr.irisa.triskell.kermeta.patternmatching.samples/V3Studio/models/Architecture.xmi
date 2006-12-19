@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ASCII"?>
+<upctriskell:Architecture xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Activity="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodel.ecore#//Activity" xmlns:Component="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodel.ecore#//Component" xmlns:Statemachine="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodel.ecore#//Statemachine" xmlns:upctriskell="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodel.ecore#//upctriskell" name="atmarchi" mainComponent="//@programComponent.0">
+  <programComponent xsi:type="Component:ComplexComponentDefinition" name="System">
+    <component name="Clien0" type="//@programComponent.1"/>
+    <component name="FrontEnd" type="//@programComponent.4"/>
+    <component name="BackEnd0" type="//@programComponent.2"/>
+    <component name="BakcEnd1" type="//@programComponent.3"/>
+    <binding name="b1">
+      <endA port="//@programComponent.1/@port.0" component="//@programComponent.0/@component.0"/>
+      <endB port="//@programComponent.4/@port.2" component="//@programComponent.0/@component.1"/>
+    </binding>
+    <binding name="b2">
+      <endA port="//@programComponent.4/@port.0" component="//@programComponent.0/@component.1"/>
+      <endB port="//@programComponent.2/@port.0" component="//@programComponent.0/@component.2"/>
+    </binding>
+    <binding name="b3">
+      <endA port="//@programComponent.4/@port.1" component="//@programComponent.0/@component.1"/>
+      <endB port="//@programComponent.3/@port.0" component="//@programComponent.0/@component.3"/>
+    </binding>
+  </programComponent>
+  <programComponent xsi:type="Component:SimpleComponentDefinition" name="Applet">
+    <port name="pclient" required="//@interface.0">
+      <multiplicity lowerBound="1" upperBound="1"/>
+    </port>
+    <behavior name="sm1">
+      <topRegion name="r4">
+        <transition name="T1" target="//@programComponent.1/@behavior/@topRegion/@vertex.1" source="//@programComponent.1/@behavior/@topRegion/@vertex.0" trigger="//@event.0"/>
+        <transition name="T2" target="//@programComponent.1/@behavior/@topRegion/@vertex.1" source="//@programComponent.1/@behavior/@topRegion/@vertex.1" trigger="//@event.1"/>
+        <transition name="T3" target="//@programComponent.1/@behavior/@topRegion/@vertex.3" source="//@programComponent.1/@behavior/@topRegion/@vertex.1" trigger="//@event.2"/>
+        <transition name="T4" target="//@programComponent.1/@behavior/@topRegion/@vertex.1" source="//@programComponent.1/@behavior/@topRegion/@vertex.2" trigger="//@event.3"/>
+        <transition name="T5" target="//@programComponent.1/@behavior/@topRegion/@vertex.2" source="//@programComponent.1/@behavior/@topRegion/@vertex.1" trigger="//@event.4"/>
+        <vertex xsi:type="Statemachine:InitialState" name="S0"/>
+        <vertex xsi:type="Statemachine:State" name="S1" entry="//@activity.2"/>
+        <vertex xsi:type="Statemachine:State" name="S2" entry="//@activity.3"/>
+        <vertex xsi:type="Statemachine:FinalState" name="S3"/>
+      </topRegion>
+    </behavior>
+  </programComponent>
+  <programComponent xsi:type="Component:SimpleComponentDefinition" name="Savings">
+    <port name="portb" provided="//@interface.1">
+      <multiplicity lowerBound="1" upperBound="1"/>
+    </port>
+    <behavior name="sm0">
+      <topRegion name="r1">
+        <transition name="t1" target="//@programComponent.2/@behavior/@topRegion/@vertex.1" source="//@programComponent.2/@behavior/@topRegion/@vertex.0" trigger="//@event.0"/>
+        <vertex xsi:type="Statemachine:InitialState" name="s0"/>
+        <vertex xsi:type="Statemachine:State" name="s1"/>
+        <vertex xsi:type="Statemachine:State" name="state s2"/>
+      </topRegion>
+    </behavior>
+  </programComponent>
+  <programComponent xsi:type="Component:SimpleComponentDefinition" name="Checkings">
+    <port name="porta" provided="//@interface.2">
+      <multiplicity lowerBound="1" upperBound="1"/>
+    </port>
+    <behavior name="sm3">
+      <topRegion name="r3">
+        <transition name="t1" target="//@programComponent.3/@behavior/@topRegion/@vertex.1" source="//@programComponent.3/@behavior/@topRegion/@vertex.0" trigger="//@event.0"/>
+        <vertex xsi:type="Statemachine:InitialState" name="s0"/>
+        <vertex xsi:type="Statemachine:State" name="s1"/>
+      </topRegion>
+    </behavior>
+  </programComponent>
+  <programComponent xsi:type="Component:SimpleComponentDefinition" name="Controller">
+    <port name="portsavings" required="//@interface.1">
+      <multiplicity lowerBound="1" upperBound="1"/>
+    </port>
+    <port name="portcheckings" required="//@interface.2">
+      <multiplicity lowerBound="1" upperBound="1"/>
+    </port>
+    <port name="pserver" provided="//@interface.0">
+      <multiplicity lowerBound="1" upperBound="1"/>
+    </port>
+    <behavior name="sm4">
+      <topRegion name="r2">
+        <transition name="t1" target="//@programComponent.4/@behavior/@topRegion/@vertex.1" source="//@programComponent.4/@behavior/@topRegion/@vertex.0" trigger="//@event.0"/>
+        <vertex xsi:type="Statemachine:InitialState" name="s0"/>
+        <vertex xsi:type="Statemachine:State" name="s1" doActivity="//@activity.1"/>
+      </topRegion>
+    </behavior>
+  </programComponent>
+  <interface name="IServer">
+    <service name="login">
+      <parameter name="user" type="//@dataType.0"/>
+      <parameter name="senha" type="//@dataType.0"/>
+    </service>
+    <service name="transfer"/>
+  </interface>
+  <interface name="ISavings">
+    <service name="begin"/>
+    <service name="commit1"/>
+    <service name="rollback"/>
+    <service name="credit"/>
+  </interface>
+  <interface name="ICheckings">
+    <service name="begin"/>
+    <service name="commit"/>
+    <service name="rollback"/>
+    <service name="debit"/>
+  </interface>
+  <activity xsi:type="Activity:ConstantActivity" name="activityconst2">
+    <value type="//@dataType.0"/>
+  </activity>
+  <activity xsi:type="Activity:ComplexActivity" name="DoTransfer">
+    <activity xsi:type="Activity:ServiceCall" name="BeginTransSavings" service="//@interface.1/@service.0" requiredPort="//@programComponent.4/@port.0"/>
+    <activity xsi:type="Activity:ServiceCall" name="BeginTransCheckings" service="//@interface.2/@service.0" requiredPort="//@programComponent.4/@port.1"/>
+    <activity xsi:type="Activity:ServiceCall" name="Debit" service="//@interface.2/@service.3" requiredPort="//@programComponent.4/@port.1"/>
+    <activity xsi:type="Activity:ServiceCall" name="Credit" service="//@interface.1/@service.3" requiredPort="//@programComponent.4/@port.1"/>
+    <activity xsi:type="Activity:ServiceCall" name="CommitSavings" service="//@interface.1/@service.1" requiredPort="//@programComponent.4/@port.0"/>
+    <activity xsi:type="Activity:ServiceCall" name="CommitCheckings" service="//@interface.2/@service.1" requiredPort="//@programComponent.4/@port.1"/>
+  </activity>
+  <activity xsi:type="Activity:SimpleActivity" name="Action1">
+    <action name="act1"/>
+  </activity>
+  <activity xsi:type="Activity:SimpleActivity" name="Action2">
+    <action name="act2"/>
+  </activity>
+  <dataType name="arbitraryDataType"/>
+  <event name="e1"/>
+  <event name="e2"/>
+  <event name="e3"/>
+  <event name="e4"/>
+  <event name="e5"/>
+</upctriskell:Architecture>

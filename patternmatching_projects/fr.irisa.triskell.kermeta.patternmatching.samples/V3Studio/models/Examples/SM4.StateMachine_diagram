@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:V3Studio="V3Studio" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.0/notation" xmi:id="_vLE9QH-yEduFu7-2EffJSw" type="V3Studio_StateMachine" name="SM4.StateMachine_diagram" measurementUnit="Pixel">
+  <styles xmi:type="notation:PageStyle" xmi:id="_vLE9QX-yEduFu7-2EffJSw"/>
+  <styles xmi:type="notation:GuideStyle" xmi:id="_vLE9Qn-yEduFu7-2EffJSw"/>
+  <styles xmi:type="notation:DescriptionStyle" xmi:id="_vLE9Q3-yEduFu7-2EffJSw"/>
+  <element xmi:type="V3Studio:SateMachine" href="SM4.v3studio#/"/>
+</notation:Diagram>

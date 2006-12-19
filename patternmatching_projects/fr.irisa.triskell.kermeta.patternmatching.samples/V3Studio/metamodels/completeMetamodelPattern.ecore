@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pattern" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore" nsPrefix="pattern">
+  <eSubpackages name="upctriskell" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell" nsPrefix="upctriskell">
+    <eClassifiers xsi:type="ecore:EClass" name="Architecture">
+      <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="programComponent" upperBound="-1" eType="//upctriskell/Component/ComponentDefinition" defaultValueLiteral="" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mainComponent" eType="//upctriskell/Component/ComplexComponentDefinition" defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interface" ordered="false" upperBound="-1" eType="//upctriskell/Component/Interface" defaultValueLiteral="" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="activity" ordered="false" upperBound="-1" eType="//upctriskell/Activity/Activity" defaultValueLiteral="" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" ordered="false" upperBound="-1" eType="//upctriskell/DataType" defaultValueLiteral="" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="event" ordered="false" upperBound="-1" eType="//upctriskell/Event" defaultValueLiteral="" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Event">
+      <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataType">
+      <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+        <eAnnotations source="kermeta">
+          <details key="isComposite" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+    <eSubpackages name="Component" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Component" nsPrefix="Component">
+      <eClassifiers xsi:type="ecore:EClass" name="ComponentDefinition">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ComplexComponentDefinition" eSuperTypes="//upctriskell/Component/ComponentDefinition">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="component" ordered="false" upperBound="-1" eType="//upctriskell/Component/ComponentTypeReference" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="binding" ordered="false" upperBound="-1" eType="//upctriskell/Component/Binding" defaultValueLiteral="" containment="true" eOpposite="//upctriskell/Component/Binding/owner"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="port" ordered="false" upperBound="-1" eType="//upctriskell/Component/DelegationPort" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="//upctriskell/Statemachine/StateMachine" changeable="false" volatile="true" transient="true" defaultValueLiteral="" derived="true" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SimpleComponentDefinition" eSuperTypes="//upctriskell/Component/ComponentDefinition">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="port" ordered="false" upperBound="-1" eType="//upctriskell/Component/AssemblyPort" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="//upctriskell/Statemachine/StateMachine" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Port">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="required" ordered="false" upperBound="-1" eType="//upctriskell/Component/Interface" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="provided" ordered="false" upperBound="-1" eType="//upctriskell/Component/Interface" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="//upctriskell/Component/Multiplicity" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DelegationPort" eSuperTypes="//upctriskell/Component/Port"/>
+      <eClassifiers xsi:type="ecore:EClass" name="AssemblyPort" eSuperTypes="//upctriskell/Component/Port"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ComponentTypeReference">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//upctriskell/Component/ComponentDefinition" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="BindingEnd">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="//upctriskell/Component/Port" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="//upctriskell/Component/ComponentTypeReference" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Binding">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//upctriskell/Component/ComplexComponentDefinition" defaultValueLiteral="" eOpposite="//upctriskell/Component/ComplexComponentDefinition/binding"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="endA" eType="//upctriskell/Component/BindingEnd" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="endB" eType="//upctriskell/Component/BindingEnd" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Interface">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="service" ordered="false" upperBound="-1" eType="//upctriskell/Component/Service" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="//upctriskell/Statemachine/StateMachine" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Service">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" ordered="false" upperBound="-1" eType="//upctriskell/Component/Parameter" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//upctriskell/DataType" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="activityParameter" eType="//upctriskell/Activity/Parameter" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Multiplicity">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="//upctriskell/Integer" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="//upctriskell/Integer" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Statemachine" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Statemachine" nsPrefix="Statemachine">
+      <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="topRegion" eType="//upctriskell/Statemachine/Region" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Region">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="transition" ordered="false" upperBound="-1" eType="//upctriskell/Statemachine/Transition" defaultValueLiteral="" containment="true" eOpposite="//upctriskell/Statemachine/Transition/owner"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="vertex" ordered="false" upperBound="-1" eType="//upctriskell/Statemachine/Vertex" defaultValueLiteral="" containment="true" eOpposite="//upctriskell/Statemachine/Vertex/owner"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//upctriskell/Statemachine/State" defaultValueLiteral="" eOpposite="//upctriskell/Statemachine/State/region"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Transition">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//upctriskell/Statemachine/Vertex" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//upctriskell/Statemachine/Vertex" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//upctriskell/Statemachine/Constraint" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="//upctriskell/Statemachine/TransitionKind" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="//upctriskell/Event" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//upctriskell/Statemachine/Region" defaultValueLiteral="" eOpposite="//upctriskell/Statemachine/Region/transition"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Vertex">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//upctriskell/Statemachine/Region" defaultValueLiteral="" eOpposite="//upctriskell/Statemachine/Region/vertex"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//upctriskell/Statemachine/Vertex">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="doActivity" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="entry" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="exit" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false" upperBound="-1" eType="//upctriskell/Statemachine/Region" defaultValueLiteral="" containment="true" eOpposite="//upctriskell/Statemachine/Region/owner"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="deferred" ordered="false" upperBound="-1" eType="//upctriskell/Event" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" eSuperTypes="//upctriskell/Statemachine/Vertex"/>
+      <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="//upctriskell/Statemachine/State"/>
+      <eClassifiers xsi:type="ecore:EClass" name="JoinState" eSuperTypes="//upctriskell/Statemachine/Pseudostate"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ForkState" eSuperTypes="//upctriskell/Statemachine/Pseudostate"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ChoiceState" eSuperTypes="//upctriskell/Statemachine/Pseudostate"/>
+      <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="//upctriskell/Statemachine/Pseudostate"/>
+      <eClassifiers xsi:type="ecore:EClass" name="HistoryState" eSuperTypes="//upctriskell/Statemachine/InitialState">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="history" eType="//upctriskell/Statemachine/State" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
+        <eLiterals name="internal" value="1" literal="internal"/>
+        <eLiterals name="external" value="2"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="Activity" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Activity" nsPrefix="Activity">
+      <eClassifiers xsi:type="ecore:EClass" name="Activity">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="input" ordered="false" upperBound="-1" eType="//upctriskell/Activity/Parameter" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="output" ordered="false" upperBound="-1" eType="//upctriskell/Activity/Parameter" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//upctriskell/DataType" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="serviceParameter" eType="//upctriskell/Component/Parameter" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SimpleActivity" eSuperTypes="//upctriskell/Activity/Activity">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="//upctriskell/Activity/Action" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false" upperBound="-1" eType="//upctriskell/Activity/DataTransfLink" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ComplexActivity" eSuperTypes="//upctriskell/Activity/Activity">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="activity" ordered="false" upperBound="-1" eType="//upctriskell/Activity/Activity" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false" upperBound="-1" eType="//upctriskell/Activity/ActivityLink" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Action">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="output" ordered="false" upperBound="-1" eType="//upctriskell/Activity/Pin" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="input" ordered="false" upperBound="-1" eType="//upctriskell/Activity/Pin" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ServiceCall" eSuperTypes="//upctriskell/Activity/Activity">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="//upctriskell/Component/Service" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="requiredPort" eType="//upctriskell/Component/Port" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ConstantActivity" eSuperTypes="//upctriskell/Activity/Activity">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//upctriskell/Activity/Value" defaultValueLiteral="" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Pin">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//upctriskell/DataType" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//upctriskell/Activity/Action" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ActivityLink">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//upctriskell/Activity/Parameter" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//upctriskell/Activity/Parameter" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Value">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//upctriskell/DataType" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DataTransfLink">
+        <eSuperTypes href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//@eClassifiers.2"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//upctriskell/String" defaultValueLiteral="">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="endA" eType="//upctriskell/Activity/Pin" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="endB" eType="//upctriskell/Activity/Parameter" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ConditionalActivity" eSuperTypes="//upctriskell/Activity/ComplexActivity">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="LoopActivity" eSuperTypes="//upctriskell/Activity/ComplexActivity">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="init" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//upctriskell/Activity/Activity" defaultValueLiteral=""/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

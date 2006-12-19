@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="upctriskell" nsURI="platform:/resource/Spain Directory/metamodels/upctriskellMM_4diagram.ecore" nsPrefix="upctriskell">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Architecture">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//ComponentDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface" ordered="false" lowerBound="1" upperBound="-1" eType="//Interface" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activity" ordered="false" lowerBound="1" upperBound="-1" eType="//Activity" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" ordered="false" lowerBound="1" upperBound="-1" eType="//DataType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" ordered="false" lowerBound="1" upperBound="-1" eType="//Event" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentDefinition" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexComponentDefinition" eSuperTypes="//ComponentDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" ordered="false" lowerBound="2" upperBound="-1" eType="//Component" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" ordered="false" lowerBound="1" upperBound="-1" eType="//PortLink" containment="true" eOpposite="//PortLink/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" ordered="false" upperBound="-1" eType="//DelegationPort" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleComponentDefinition" eSuperTypes="//ComponentDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" ordered="false" lowerBound="1" upperBound="-1" eType="//AssemblyPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" lowerBound="1" eType="//StateMachineDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//ComponentDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statemachine" eType="//StateMachine" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DelegationPort" eSuperTypes="//Port">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="delegated" lowerBound="1" eType="//BindingEnd" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssemblyPort" eSuperTypes="//Port">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredInterface" ordered="false" upperBound="-1" eType="//Interface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedInterface" ordered="false" upperBound="-1" eType="//Interface"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortLink">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//ComplexComponentDefinition" eOpposite="//ComplexComponentDefinition/binding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endA" lowerBound="1" eType="//BindingEnd" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endB" lowerBound="1" eType="//BindingEnd" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingEnd">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" lowerBound="1" eType="//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1" eType="//Component"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interface">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" ordered="false" lowerBound="1" upperBound="-1" eType="//Service" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="//StateMachineDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" ordered="false" upperBound="-1" eType="//ServiceParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activityParameter" lowerBound="1" eType="//ActivityParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1" eType="//StateMachineDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binding" upperBound="-1" eType="//ActivityBinding" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachineDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topRegion" lowerBound="1" eType="//Region" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceActivity" ordered="false" upperBound="-1" eType="//ActivityVariabilityPoint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractActivity" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityVariabilityPoint" eSuperTypes="//AbstractActivity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityBinding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="//ActivityVariabilityPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="//Activity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Region">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" ordered="false" lowerBound="1" upperBound="-1" eType="//Transition" containment="true" eOpposite="//Transition/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertex" ordered="false" lowerBound="2" upperBound="-1" eType="//Vertex" containment="true" eOpposite="//Vertex/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//State" eOpposite="//State/region"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="//AbstractActivity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="//TransitionKind">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" lowerBound="1" eType="//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//Region" eOpposite="//Region/transition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//Region" eOpposite="//Region/vertex"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//Vertex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="doActivity" eType="//AbstractActivity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entry" eType="//AbstractActivity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exit" eType="//AbstractActivity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false" upperBound="-1" eType="//Region" containment="true" eOpposite="//Region/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deferred" ordered="false" upperBound="-1" eType="//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" eSuperTypes="//Vertex">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="//PseudostateKind">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PseudostateKind">
+    <eLiterals name="JoinState" literal="JoinState"/>
+    <eLiterals name="ForkState" value="1" literal="ForkState"/>
+    <eLiterals name="ChoiceState" value="2" literal="ChoiceState"/>
+    <eLiterals name="InitialState" value="3" literal="InitialState"/>
+    <eLiterals name="HistoryState" value="4" literal="HistoryState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="//State"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
+    <eLiterals name="internal" literal="internal"/>
+    <eLiterals name="external" value="1" literal="external"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" abstract="true" eSuperTypes="//AbstractActivity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" ordered="false" upperBound="-1" eType="//ActivityParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" ordered="false" upperBound="-1" eType="//ActivityParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialActivity" eSuperTypes="//Activity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalActivity" eSuperTypes="//Activity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceParameter" eType="//ServiceParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleActivity" eSuperTypes="//Activity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1" eType="//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false" lowerBound="2" upperBound="-1" eType="//PinParamLink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexActivity" eSuperTypes="//Activity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activity" ordered="false" lowerBound="2" upperBound="-1" eType="//Activity" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" ordered="false" lowerBound="1" upperBound="-1" eType="//ActivityLink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" ordered="false" upperBound="-1" eType="//Pin" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" ordered="false" upperBound="-1" eType="//Pin" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceCall" eSuperTypes="//Activity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" lowerBound="1" eType="//Service"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstantActivity" eSuperTypes="//Activity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pin">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//Action"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityLink">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//ActivityParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//ActivityParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//DataType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PinParamLink">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endA" lowerBound="1" eType="//Pin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endB" lowerBound="1" eType="//ActivityParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalActivity" eSuperTypes="//ComplexActivity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//Activity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopActivity" eSuperTypes="//ComplexActivity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="init" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//Activity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

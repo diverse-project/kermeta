@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:V3Studio="V3Studio" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.0/notation" xmi:id="_nD8NQFcREduELc3q9fu4sA" type="V3Studio_StateMachine" name="SM3.StateMachine_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_zItmsFcREduH7qAPk0TGkQ" type="1002">
+    <styles xmi:type="notation:FontStyle" xmi:id="_zItmsVcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_zItmslcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_zItms1cREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_zItmtFcREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:InitialState" href="SM3.v3studio#//@hasInternalVertex.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zItmtVcREduH7qAPk0TGkQ" x="36" y="48"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_zlxWIFcREduH7qAPk0TGkQ" type="1001">
+    <styles xmi:type="notation:FontStyle" xmi:id="_zlxWIVcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_zlxWIlcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_zlxWI1cREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_zlxWJFcREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:FinalState" href="SM3.v3studio#//@hasInternalVertex.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zlxWJVcREduH7qAPk0TGkQ" x="299" y="143"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_0Ava4FcREduH7qAPk0TGkQ" type="1003">
+    <children xmi:type="notation:Node" xmi:id="_0A4k0FcREduH7qAPk0TGkQ" type="4001"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_0Ava4VcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_0Ava4lcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_0Ava41cREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_0Ava5FcREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:State" href="SM3.v3studio#//@hasInternalVertex.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0Ava5VcREduH7qAPk0TGkQ" x="138" y="45"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_0u79oFcREduH7qAPk0TGkQ" type="1003">
+    <children xmi:type="notation:Node" xmi:id="_0u79plcREduH7qAPk0TGkQ" type="4001"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_0u79oVcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_0u79olcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_0u79o1cREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_0u79pFcREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:State" href="SM3.v3studio#//@hasInternalVertex.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0u79pVcREduH7qAPk0TGkQ" x="192" y="144"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_lJi1wFcUEdu0uaHP_dXsRA" type="1003">
+    <children xmi:type="notation:Node" xmi:id="_lJi1xlcUEdu0uaHP_dXsRA" type="4001"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_lJi1wVcUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_lJi1wlcUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_lJi1w1cUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_lJi1xFcUEdu0uaHP_dXsRA" lineColor="17920"/>
+    <element xmi:type="V3Studio:State" href="SM3.v3studio#//@hasInternalVertex.4"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lJi1xVcUEdu0uaHP_dXsRA" x="240" y="48"/>
+  </children>
+  <styles xmi:type="notation:PageStyle" xmi:id="_nD8NQVcREduELc3q9fu4sA"/>
+  <styles xmi:type="notation:GuideStyle" xmi:id="_nD8NQlcREduELc3q9fu4sA"/>
+  <styles xmi:type="notation:DescriptionStyle" xmi:id="_nD8NQ1cREduELc3q9fu4sA"/>
+  <element xmi:type="V3Studio:SateMachine" href="SM3.v3studio#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_1qF-UFcREduH7qAPk0TGkQ" type="3001" source="_zItmsFcREduH7qAPk0TGkQ" target="_0Ava4FcREduH7qAPk0TGkQ">
+    <children xmi:type="notation:Node" xmi:id="_1qF-VVcREduH7qAPk0TGkQ" type="4002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_1qF-VlcREduH7qAPk0TGkQ" x="5" y="-10"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_1qF-UVcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1qF-UlcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_1qF-U1cREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:Transition" href="SM3.v3studio#//@hasInternalTransitions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1qF-VFcREduH7qAPk0TGkQ" points="[20, -8, -167, 69]$[167, -76, -20, 1]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_25qIwFcREduH7qAPk0TGkQ" type="3001" source="_0Ava4FcREduH7qAPk0TGkQ" target="_0u79oFcREduH7qAPk0TGkQ">
+    <children xmi:type="notation:Node" xmi:id="_25qIxVcREduH7qAPk0TGkQ" type="4002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_25qIxlcREduH7qAPk0TGkQ" x="-3" y="12"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_25qIwVcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_25qIwlcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_25qIw1cREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:Transition" href="SM3.v3studio#//@hasInternalTransitions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_25qIxFcREduH7qAPk0TGkQ" points="[-3, 20, 14, -89]$[-20, 129, -3, 20]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_37q_YFcREduH7qAPk0TGkQ" type="3001" source="_0u79oFcREduH7qAPk0TGkQ" target="_zlxWIFcREduH7qAPk0TGkQ">
+    <children xmi:type="notation:Node" xmi:id="_37q_ZVcREduH7qAPk0TGkQ" type="4002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_37q_ZlcREduH7qAPk0TGkQ" y="14"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_37q_YVcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_37q_YlcREduH7qAPk0TGkQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_37q_Y1cREduH7qAPk0TGkQ" lineColor="17920"/>
+    <element xmi:type="V3Studio:Transition" href="SM3.v3studio#//@hasInternalTransitions.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_37q_ZFcREduH7qAPk0TGkQ" points="[20, -3, -138, 24]$[138, -24, -20, 3]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_mdSVkFcUEdu0uaHP_dXsRA" type="3001" source="_0Ava4FcREduH7qAPk0TGkQ" target="_lJi1wFcUEdu0uaHP_dXsRA">
+    <children xmi:type="notation:Node" xmi:id="_mdSVlVcUEdu0uaHP_dXsRA" type="4002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_mdSVllcUEdu0uaHP_dXsRA" y="-13"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_mdSVkVcUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_mdSVklcUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_mdSVk1cUEdu0uaHP_dXsRA" lineColor="17920"/>
+    <element xmi:type="V3Studio:Transition" href="SM3.v3studio#//@hasInternalTransitions.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mdSVlFcUEdu0uaHP_dXsRA" points="[6, 20, -56, -183]$[82, 201, 20, -2]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_pWW0cFcUEdu0uaHP_dXsRA" type="3001" source="_lJi1wFcUEdu0uaHP_dXsRA" target="_0u79oFcREduH7qAPk0TGkQ">
+    <children xmi:type="notation:Node" xmi:id="_pWW0dVcUEdu0uaHP_dXsRA" type="4002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_pWW0dlcUEdu0uaHP_dXsRA" x="-11" y="-17"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_pWW0cVcUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_pWW0clcUEdu0uaHP_dXsRA"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_pWW0c1cUEdu0uaHP_dXsRA" lineColor="17920"/>
+    <element xmi:type="V3Studio:Transition" href="SM3.v3studio#//@hasInternalTransitions.4"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_pWW0dFcUEdu0uaHP_dXsRA" points="[-20, 20, 99, -98]$[-121, 138, -2, 20]"/>
+  </edges>
+</notation:Diagram>

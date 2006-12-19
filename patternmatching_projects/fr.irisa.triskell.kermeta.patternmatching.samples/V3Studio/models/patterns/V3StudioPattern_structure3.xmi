@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Statemachine="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Statemachine">
+  <Statemachine:State/>
+  <Statemachine:State/>
+  <Statemachine:Transition target="/1" source="/0" kind="internal"/>
+</xmi:XMI>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<V3Studio:ComplexActivity xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:V3Studio="V3Studio" activityName="Activity1">
+  <hasInternalActivities xsi:type="V3Studio:InitialActivity"/>
+  <hasInternalActivities xsi:type="V3Studio:ComplexActivity" activityName="CA1">
+    <hasInternalActivities xsi:type="V3Studio:InitialActivity"/>
+    <hasInternalActivities xsi:type="V3Studio:FinalActivity"/>
+    <hasInternalActivities xsi:type="V3Studio:ComplexActivity" activityName="CA2">
+      <hasInternalActivities xsi:type="V3Studio:InitialActivity"/>
+      <hasInternalActivities xsi:type="V3Studio:FinalActivity"/>
+      <hasInternalActivities xsi:type="V3Studio:SimpleActivity" activityName="SA2" activityCode="SA2 code"/>
+      <hasInternalLinks linkSource="//@hasInternalActivities.1/@hasInternalActivities.2/@hasInternalActivities.0" linkTarget="//@hasInternalActivities.1/@hasInternalActivities.2/@hasInternalActivities.2"/>
+      <hasInternalLinks linkSource="//@hasInternalActivities.1/@hasInternalActivities.2/@hasInternalActivities.2" linkTarget="//@hasInternalActivities.1/@hasInternalActivities.2/@hasInternalActivities.1"/>
+      <hasInternalLinks linkSource="//@hasInternalActivities.1/@hasInternalActivities.2" linkTarget="//@hasInternalActivities.1/@hasInternalActivities.3"/>
+    </hasInternalActivities>
+    <hasInternalActivities xsi:type="V3Studio:SimpleActivity" activityName="SA3" activityCode="SA3 code"/>
+    <hasInternalActivities xsi:type="V3Studio:SimpleActivity" activityName="SA4" activityCode="SA4 code"/>
+    <hasInternalLinks linkSource="//@hasInternalActivities.1" linkTarget="//@hasInternalActivities.3"/>
+    <hasInternalLinks linkSource="//@hasInternalActivities.1/@hasInternalActivities.3" linkTarget="//@hasInternalActivities.1/@hasInternalActivities.1"/>
+    <hasInternalLinks linkSource="//@hasInternalActivities.1/@hasInternalActivities.4" linkTarget="//@hasInternalActivities.1/@hasInternalActivities.2"/>
+    <hasInternalLinks linkSource="//@hasInternalActivities.1/@hasInternalActivities.0" linkTarget="//@hasInternalActivities.1/@hasInternalActivities.4"/>
+  </hasInternalActivities>
+  <hasInternalActivities xsi:type="V3Studio:FinalActivity"/>
+  <hasInternalActivities xsi:type="V3Studio:SimpleActivity" activityName="SA1" activityCode="SA1 code"/>
+  <hasInternalLinks linkSource="//@hasInternalActivities.0" linkTarget="//@hasInternalActivities.1"/>
+  <hasInternalLinks linkSource="//@hasInternalActivities.3" linkTarget="//@hasInternalActivities.2"/>
+</V3Studio:ComplexActivity>

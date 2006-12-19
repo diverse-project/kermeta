@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bigSd" nsURI="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/MSC/metamodel/bigSd.ecore" nsPrefix="bigSd">
+  <eClassifiers xsi:type="ecore:EClass" name="SDModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sds" upperBound="-1" eType="//SD" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1" eType="//Instance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bdsMorphisms" upperBound="-1" eType="//BSDMorphisms" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eOperations name="browse">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+      <eParameters name="verbose" eType="//Boolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SD" abstract="true" eSuperTypes="//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BSD" eSuperTypes="//SD">
+    <eOperations name="createInstance" eType="//Instance">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := bigSd::Instance.new&#xA;&#x9;result.name := name&#xA;&#x9;self.instances.add(result)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="name" eType="//String"/>
+    </eOperations>
+    <eOperations name="copyInstances">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;instances.each{i | self.instances.add(i.copyInstance)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instances" ordered="false" upperBound="-1" eType="//Instance"/>
+    </eOperations>
+    <eOperations name="copyEvents">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;events.each{e | self.events.add(e.copyEvent(instancesMappings, self))}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="events" ordered="false" upperBound="-1" eType="//Event"/>
+      <eParameters name="instancesMappings" eType="//MyHashtable"/>
+    </eOperations>
+    <eOperations name="copyEvents2">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;events.each{e | self.events.add(e.copyEvent2(instancesMappings1, instancesMappings2, self))}&#xA;&#x9;var name : kermeta::standard::String init &quot;&quot;&#xA;&#x9;var ev : bigSd::Event&#xA;&#x9;self.events.each{event | do&#xA;&#x9;&#x9;&#x9;name := event.getCorrespondingEvent.name&#xA;&#x9;&#x9;&#x9;if bigSd::SendEvent.isInstance(event) then&#xA;&#x9;&#x9;&#x9;&#x9;var evt1 : bigSd::SendEvent&#xA;&#x9;&#x9;&#x9;&#x9;evt1 ?= event&#xA;&#x9;&#x9;&#x9;&#x9;ev := self.events.detect{ev | ev.name.equals(name)}&#xA;&#x9;&#x9;&#x9;&#x9;var evt : bigSd::ReceiveEvent&#xA;&#x9;&#x9;&#x9;&#x9;evt ?= ev&#xA;&#x9;&#x9;&#x9;&#x9;evt1.receiveEvent := evt&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;var evt1 : bigSd::ReceiveEvent&#xA;&#x9;&#x9;&#x9;&#x9;evt1 ?= event&#xA;&#x9;&#x9;&#x9;&#x9;ev := self.events.detect{ev | ev.name.equals(name)}&#xA;&#x9;&#x9;&#x9;&#x9;var evt : bigSd::SendEvent&#xA;&#x9;&#x9;&#x9;&#x9;evt ?= ev&#xA;&#x9;&#x9;&#x9;&#x9;evt1.sendEvent := evt&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="events" ordered="false" upperBound="-1" eType="//Event"/>
+      <eParameters name="instancesMappings1" eType="//MyHashtable"/>
+      <eParameters name="instancesMappings2" eType="//MyHashtable"/>
+    </eOperations>
+    <eOperations name="copyCouples">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;cples.each{c | self.couples.add(c.copyEventCouple(eventsMappings, self))}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="cples" ordered="false" upperBound="-1" eType="//EventCouple"/>
+      <eParameters name="eventsMappings" eType="//MyHashtable"/>
+    </eOperations>
+    <eOperations name="copyCouples2">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;cples.each{c | self.couples.add(c.copyEventCouple2(eventsMappings1, eventsMappings2, self))}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="cples">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Collection"/>
+      </eParameters>
+      <eParameters name="eventsMappings1" eType="//MyHashtable"/>
+      <eParameters name="eventsMappings2" eType="//MyHashtable"/>
+    </eOperations>
+    <eOperations name="addCouple">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var c : bigSd::EventCouple&#xA;&#x9;c := bigSd::EventCouple.new&#xA;&#x9;c.event1 := e1&#xA;&#x9;c.event2 := e2&#xA;&#x9;self.couples.add(c)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="e1" eType="//Event"/>
+      <eParameters name="e2" eType="//Event"/>
+    </eOperations>
+    <eOperations name="getMinEvents">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var preEvents : kermeta::standard::Set&lt;bigSd::Event> init kermeta::standard::Set&lt;bigSd::Event>.new&#xA;&#x9;var postEvents : kermeta::standard::Set&lt;bigSd::Event> init kermeta::standard::Set&lt;bigSd::Event>.new&#xA;&#x9;self.couples.each{c | do&#xA;&#x9;&#x9;&#x9;preEvents.add(c.event1)&#xA;&#x9;&#x9;&#x9;postEvents.add(c.event2)&#xA;&#x9;&#x9;end}&#xA;&#x9;result := preEvents.~select{e | e.notIncludedIn(postEvents)}&#xA;end"/>
+      </eAnnotations>
+      <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//standard/Sequence"/>
+    </eOperations>
+    <eOperations name="getMaxEvents" eType="//EventCollection">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var preEvents : kermeta::standard::Set&lt;bigSd::Event> init kermeta::standard::Set&lt;bigSd::Event>.new&#xA;&#x9;var postEvents : kermeta::standard::Set&lt;bigSd::Event> init kermeta::standard::Set&lt;bigSd::Event>.new&#xA;&#x9;self.couples.each{c | do&#xA;&#x9;&#x9;&#x9;preEvents.add(c.event1)&#xA;&#x9;&#x9;&#x9;postEvents.add(c.event2)&#xA;&#x9;&#x9;end}&#xA;&#x9;result := postEvents.~select{e | e.notIncludedIn(preEvents)}&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="positionOnInstance" eType="//Integer">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;var tmpEvent : bigSd::Event init e&#xA;&#x9;from var j : kermeta::standard::Integer init 0&#xA;&#x9;until getPredecessorsOnLifeLine(tmpEvent).equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;tmpEvent := getPredecessorsOnLifeLine(tmpEvent)&#xA;&#x9;&#x9;i := i.plus(1)&#xA;&#x9;end&#xA;&#x9;result := i&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="getPredecessors" eType="//EventCollection">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="evtsList" eType="//EventCollection"/>
+    </eOperations>
+    <eOperations name="getPredecessorsOfTheEvent" eType="//EventCollection">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var evts : kermeta::standard::Set&lt;bigSd::Event> init kermeta::standard::Set&lt;bigSd::Event>.new&#xA;&#x9;self.couples.each{c | if c.event2.equals(event) then&#xA;&#x9;&#x9;&#x9;evts.add(c.event1)&#xA;&#xA;&#x9;&#x9;end}&#xA;&#x9;result := evts&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="event" eType="//Event"/>
+    </eOperations>
+    <eOperations name="getSuccessors" eType="//EventCollection">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="evtsList" eType="//EventCollection"/>
+    </eOperations>
+    <eOperations name="getSuccessorsOfTheEvent" eType="//EventCollection">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var evts : kermeta::standard::Set&lt;bigSd::Event> init kermeta::standard::Set&lt;bigSd::Event>.new&#xA;&#x9;self.couples.each{c | if c.event1.equals(event) then&#xA;&#x9;&#x9;&#x9;evts.add(c.event2)&#xA;&#xA;&#x9;&#x9;end}&#xA;&#x9;result := evts&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="event" eType="//Event"/>
+    </eOperations>
+    <eOperations name="getPredecessorsOnLifeLine" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var eventpred : bigSd::EventCollection&#xA;&#x9;eventpred := getPredecessorsOfTheEvent(e)&#xA;&#x9;if eventpred.isNotEqual(void) then&#xA;&#x9;&#x9;eventpred.each{ev | if ev.onInstance.equals(e.onInstance) then&#xA;&#x9;&#x9;&#x9;&#x9;result := ev&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="getPredecessorsOnLifeLineN" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var ev : bigSd::Event init findEvent(name)&#xA;&#x9;result := getPredecessorsOnLifeLine(ev)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="name" eType="//String"/>
+    </eOperations>
+    <eOperations name="getSuccessorsOnLifeLine" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var eventsuc : bigSd::EventCollection&#xA;&#x9;var suc : bigSd::Event&#xA;&#x9;eventsuc := getSuccessorsOfTheEvent(e)&#xA;&#x9;if eventsuc.isNotEqual(void) then&#xA;&#x9;&#x9;eventsuc.each{ev | if ev.onInstance.equals(e.onInstance) then&#xA;&#x9;&#x9;&#x9;&#x9;suc := ev&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := suc&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="e" eType="//Event"/>
+    </eOperations>
+    <eOperations name="addMessage">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var sent : bigSd::SendEvent init bigSd::SendEvent.new&#xA;&#x9;sent.action := action&#xA;&#x9;sent.name := sentUID&#xA;&#x9;sent.onInstance := ~from&#xA;&#x9;var received : bigSd::ReceiveEvent init bigSd::ReceiveEvent.new&#xA;&#x9;received.action := action&#xA;&#x9;received.name := receivedUID&#xA;&#x9;received.onInstance := to&#xA;&#x9;sent.receiveEvent := received&#xA;&#x9;received.sendEvent := sent&#xA;&#x9;self.events.add(sent)&#xA;&#x9;self.events.add(received)&#xA;&#x9;var cple : bigSd::EventCouple init bigSd::EventCouple.new&#xA;&#x9;cple.event1 := sent&#xA;&#x9;cple.event2 := received&#xA;&#x9;self.couples.add(cple)&#xA;end"/>
+        <details key="documentation" value="/**&#xA;  create a message action from the instance ~from to the instance receive: &#xA;  add two events e1 and e2, and a coupleEvent(e1,e2)&#xA;  */"/>
+      </eAnnotations>
+      <eParameters name="action" eType="//String"/>
+      <eParameters name="from" eType="//Instance"/>
+      <eParameters name="sentUID" eType="//String"/>
+      <eParameters name="to" eType="//Instance"/>
+      <eParameters name="receivedUID" eType="//String"/>
+    </eOperations>
+    <eOperations name="addGreaterThan">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var pred : bigSd::Event init findEvent(PreUID)&#xA;&#x9;var poste : bigSd::Event init findEvent(PostUID)&#xA;&#x9;var cple : bigSd::EventCouple init bigSd::EventCouple.new&#xA;&#x9;cple.event1 := pred&#xA;&#x9;cple.event2 := poste&#xA;&#x9;self.couples.add(cple)&#xA;end"/>
+        <details key="documentation" value="/** addGreaterThan(a,b) creates the CoupleEvent(a,b)*/"/>
+      </eAnnotations>
+      <eParameters name="PreUID" eType="//String"/>
+      <eParameters name="PostUID" eType="//String"/>
+    </eOperations>
+    <eOperations name="addIsBetween">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;addGreaterThan(betweenUID, PostUID)&#xA;&#x9;addGreaterThan(PreUID, betweenUID)&#xA;end"/>
+        <details key="documentation" value="/** addGreaterThan(a,b,c) creates the CoupleEvents (a,b) and (b,c)*/"/>
+      </eAnnotations>
+      <eParameters name="PreUID" eType="//String"/>
+      <eParameters name="betweenUID" eType="//String"/>
+      <eParameters name="PostUID" eType="//String"/>
+    </eOperations>
+    <eOperations name="getFirstEvent" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var evts : kermeta::standard::Sequence&lt;bigSd::Event> init events.~select{e | e.onInstance.equals(instance).~and(getPredecessorsOnLifeLine(e).equals(void))}&#xA;&#x9;if evts.equals(void).~or(evts.empty) then&#xA;&#x9;&#x9;result := void&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := evts.one&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instance" eType="//Instance"/>
+    </eOperations>
+    <eOperations name="getLastEvent" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instance" eType="//Instance"/>
+    </eOperations>
+    <eOperations name="findEvent" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.events.detect{e | e.name.equals(eventUID)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="eventUID" eType="//String"/>
+    </eOperations>
+    <eOperations name="getInstance" eType="//Instance">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := self.instances.detect{e | e.name.equals(instanceName)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instanceName" eType="//String"/>
+    </eOperations>
+    <eOperations name="browse">
+      <eAnnotations source="kermeta" references="//NamedElement/browse">
+        <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;BSD name: &quot;.plus(self.name))&#xA;&#x9;self.instances.each{instance | instance.browse(verbose)}&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;&#x9;self.events.each{event | event.browse(verbose)}&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;&#x9;self.couples.each{couple | couple.browse(verbose)}&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;end"/>
+        <details key="superOperation" value="bigSd::NamedElement"/>
+      </eAnnotations>
+      <eParameters name="verbose" eType="//Boolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="couples" upperBound="-1" eType="//EventCouple" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instances" upperBound="-1" eType="//Instance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1" eType="//Event" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instance" eSuperTypes="//NamedElement">
+    <eOperations name="copyInstance" eType="//Instance">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := bigSd::Instance.new&#xA;&#x9;result.name := self.name&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="resolveInstance" eType="//Instance">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var corresponding : kermeta::standard::String&#xA;&#x9;if instancesMappings.isNotEqual(void) then&#xA;&#x9;&#x9;corresponding := instancesMappings.get(self.name)&#xA;&#xA;&#x9;end&#xA;&#x9;if corresponding.equals(void) then&#xA;&#x9;&#x9;corresponding := self.name&#xA;&#xA;&#x9;end&#xA;&#x9;result := bsd.instances.detect{i | i.name.equals(corresponding)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instancesMappings" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="resolveInstance2" eType="//Instance">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var corresponding : kermeta::standard::String&#xA;&#x9;if rinstancesMappings1.isNotEqual(void) then&#xA;&#x9;&#x9;corresponding := rinstancesMappings1.get(self.name)&#xA;&#x9;&#x9;corresponding := instancesMappings2.get(corresponding)&#xA;&#xA;&#x9;end&#xA;&#x9;if corresponding.equals(void) then&#xA;&#x9;&#x9;corresponding := self.name&#xA;&#xA;&#x9;end&#xA;&#x9;result := bsd.instances.detect{i | i.name.equals(corresponding)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="rinstancesMappings1" eType="//MyHashtable"/>
+      <eParameters name="instancesMappings2" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="browse">
+      <eAnnotations source="kermeta" references="//NamedElement/browse">
+        <details key="body" value="do&#xA;&#x9;stdio.write(self.name.plus(&quot; &quot;))&#xA;&#x9;if verbose then&#xA;&#x9;&#x9;stdio.write(self.toString.plus(&quot; &quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
+        <details key="superOperation" value="bigSd::NamedElement"/>
+      </eAnnotations>
+      <eParameters name="verbose" eType="//Boolean"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="//NamedElement">
+    <eOperations name="copyEvent" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instancesMappings" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="copyEvent2" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="instancesMappings1" eType="//MyHashtable"/>
+      <eParameters name="instancesMappings2" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="getCorrespondingEvent" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getType" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isAbstract" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="resolveEvent" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var corresponding : kermeta::standard::String&#xA;&#x9;if eventsMappings.isNotEqual(void) then&#xA;&#x9;&#x9;corresponding := eventsMappings.get(self.name)&#xA;&#xA;&#x9;end&#xA;&#x9;if corresponding.equals(void) then&#xA;&#x9;&#x9;corresponding := self.name&#xA;&#xA;&#x9;end&#xA;&#x9;result := bsd.events.detect{e | e.name.equals(corresponding)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="eventsMappings" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="resolveEvent2" eType="//Event">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var corresponding : kermeta::standard::String&#xA;&#x9;if eventsMappings1.isNotEqual(void) then&#xA;&#x9;&#x9;corresponding := eventsMappings1.get(self.name)&#xA;&#x9;&#x9;corresponding := eventsMappings2.get(corresponding)&#xA;&#xA;&#x9;end&#xA;&#x9;if corresponding.equals(void) then&#xA;&#x9;&#x9;corresponding := self.name&#xA;&#xA;&#x9;end&#xA;&#x9;result := bsd.events.detect{e | e.name.equals(corresponding)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="eventsMappings1" eType="//MyHashtable"/>
+      <eParameters name="eventsMappings2" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="notIncludedIn" eType="//Boolean">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;if events.isNotEqual(void) then&#xA;&#x9;&#x9;var found : bigSd::Event init events.detect{e | e.name.equals(self.name)}&#xA;&#x9;&#x9;if found.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="events" eType="//EventCollection"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onInstance" lowerBound="1" eType="//Instance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SendEvent" eSuperTypes="//Event">
+    <eOperations name="getCorrespondingEvent" eType="//Event">
+      <eAnnotations source="kermeta" references="//Event/getCorrespondingEvent">
+        <details key="body" value="do&#xA;&#x9;result := receiveEvent&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getType" eType="//String">
+      <eAnnotations source="kermeta" references="//Event/getType">
+        <details key="body" value="do&#xA;&#x9;result := &quot;S&quot;&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="copyEvent" eType="//Event">
+      <eAnnotations source="kermeta" references="//Event/copyEvent">
+        <details key="body" value="do&#xA;&#x9;var sent : bigSd::SendEvent init bigSd::SendEvent.new&#xA;&#x9;sent.receiveEvent := self.receiveEvent&#xA;&#x9;result := sent&#xA;&#x9;result.name := self.name&#xA;&#x9;result.action := self.action&#xA;&#x9;result.onInstance := self.onInstance.resolveInstance(instancesMappings, bsd)&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+      <eParameters name="instancesMappings" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="copyEvent2" eType="//Event">
+      <eAnnotations source="kermeta" references="//Event/copyEvent2">
+        <details key="body" value="do&#xA;&#x9;var sent : bigSd::SendEvent init bigSd::SendEvent.new&#xA;&#x9;sent.receiveEvent := self.receiveEvent&#xA;&#x9;result := sent&#xA;&#x9;result.name := self.name&#xA;&#x9;result.action := self.action&#xA;&#x9;result.onInstance := self.onInstance.resolveInstance2(rinstancesMappings1, instancesMappings2, bsd)&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+      <eParameters name="rinstancesMappings1" eType="//MyHashtable"/>
+      <eParameters name="instancesMappings2" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="browse">
+      <eAnnotations source="kermeta" references="//NamedElement/browse">
+        <details key="body" value="do&#xA;&#x9;stdio.write(&quot;sendEvent &quot;.plus(self.name).plus(&quot; &quot;).plus(self.action).plus(&quot; on &quot;).plus(self.onInstance.name))&#xA;&#x9;if verbose then&#xA;&#x9;&#x9;stdio.write(&quot; &quot;.plus(self.toString).plus(&quot; &quot;))&#xA;&#xA;&#x9;end&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;end"/>
+        <details key="superOperation" value="bigSd::NamedElement"/>
+      </eAnnotations>
+      <eParameters name="verbose" eType="//Boolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receiveEvent" lowerBound="1" eType="//ReceiveEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReceiveEvent" eSuperTypes="//Event">
+    <eOperations name="getCorrespondingEvent" eType="//Event">
+      <eAnnotations source="kermeta" references="//Event/getCorrespondingEvent">
+        <details key="body" value="do&#xA;&#x9;result := sendEvent&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getType" eType="//String">
+      <eAnnotations source="kermeta" references="//Event/getType">
+        <details key="body" value="do&#xA;&#x9;result := &quot;R&quot;&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="copyEvent" eType="//Event">
+      <eAnnotations source="kermeta" references="//Event/copyEvent">
+        <details key="body" value="do&#xA;&#x9;var received : bigSd::ReceiveEvent init bigSd::ReceiveEvent.new&#xA;&#x9;received.sendEvent := self.sendEvent&#xA;&#x9;result := received&#xA;&#x9;result.name := self.name&#xA;&#x9;result.action := self.action&#xA;&#x9;result.onInstance := self.onInstance&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+      <eParameters name="instancesMappings" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="copyEvent2" eType="//Event">
+      <eAnnotations source="kermeta" references="//Event/copyEvent2">
+        <details key="body" value="do&#xA;&#x9;var received : bigSd::ReceiveEvent init bigSd::ReceiveEvent.new&#xA;&#x9;received.sendEvent := self.sendEvent&#xA;&#x9;result := received&#xA;&#x9;result.name := self.name&#xA;&#x9;result.action := self.action&#xA;&#x9;result.onInstance := self.onInstance.resolveInstance2(rinstancesMappings1, instancesMappings2, bsd)&#xA;end"/>
+        <details key="superOperation" value="bigSd::Event"/>
+      </eAnnotations>
+      <eParameters name="rinstancesMappings1" eType="//MyHashtable"/>
+      <eParameters name="instancesMappings2" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="browse">
+      <eAnnotations source="kermeta" references="//NamedElement/browse">
+        <details key="body" value="do&#xA;&#x9;stdio.write(&quot;receiveEvent &quot;.plus(self.name).plus(&quot; &quot;).plus(self.action).plus(&quot; on &quot;).plus(self.onInstance.name))&#xA;&#x9;if verbose then&#xA;&#x9;&#x9;stdio.write(&quot; &quot;.plus(self.toString).plus(&quot; &quot;))&#xA;&#xA;&#x9;end&#xA;&#x9;stdio.writeln(&quot;&quot;)&#xA;end"/>
+        <details key="superOperation" value="bigSd::NamedElement"/>
+      </eAnnotations>
+      <eParameters name="verbose" eType="//Boolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sendEvent" lowerBound="1" eType="//SendEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventCouple">
+    <eOperations name="copyEventCouple" eType="//EventCouple">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := bigSd::EventCouple.new&#xA;&#x9;result.event1 := self.event1.resolveEvent(eventsMappings, bsd)&#xA;&#x9;result.event2 := self.event2.resolveEvent(eventsMappings, bsd)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="eventsMappings" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="copyEventCouple2" eType="//EventCouple">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := bigSd::EventCouple.new&#xA;&#x9;result.event1 := self.event1.resolveEvent2(eventsMappings1, eventsMappings2, bsd)&#xA;&#x9;result.event2 := self.event2.resolveEvent2(eventsMappings1, eventsMappings2, bsd)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="eventsMappings1" eType="//MyHashtable"/>
+      <eParameters name="eventsMappings2" eType="//MyHashtable"/>
+      <eParameters name="bsd" eType="//BSD"/>
+    </eOperations>
+    <eOperations name="browse">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;stdio.write(&quot;( &quot;.plus(self.event1.name).plus(&quot;,&quot;).plus(self.event2.name).plus(&quot; ) &quot;))&#xA;&#x9;if verbose then&#xA;&#x9;&#x9;stdio.writeln(&quot;( &quot;.plus(self.event1.toString).plus(&quot;,&quot;).plus(self.event2.toString).plus(&quot; ) &quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="verbose" eType="//Boolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event1" lowerBound="1" eType="//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event2" lowerBound="1" eType="//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BSDMorphisms">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xA; BSDMorphisms classs : defines injective correspondances between a BSD and an interface&#xA; Hashtable of Instances mappings;&#xA; Hahstable of events mappings (names correspondances) &#xA;**/"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instancesMappings" eType="//MyHashtable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventsMappings" eType="//MyHashtable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rinstancesMappings" eType="//MyHashtable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reventsMappings" eType="//MyHashtable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EventCollection" instanceClassName="java.lang.Object">
+    <eAnnotations source="kermeta">
+      <details key="alias" value="kermeta::standard::Collection"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Mappings" instanceClassName="java.lang.Object">
+    <eAnnotations source="kermeta">
+      <details key="alias" value="kermeta::utils::Hashtable"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoEventException"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MyHashtable">
+    <eOperations name="put">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.keys.add(key)&#xA;&#x9;self.values.add(valuee)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="key" eType="//String"/>
+      <eParameters name="valuee" eType="//String"/>
+    </eOperations>
+    <eOperations name="get" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;result := void&#xA;&#x9;var valueIt : kermeta::standard::Iterator&lt;kermeta::standard::String> init self.values.iterator&#xA;&#x9;from var keyIt : kermeta::standard::Iterator&lt;kermeta::standard::String> init self.keys.iterator&#xA;&#x9;until keyIt.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;var k : kermeta::standard::String init keyIt.next&#xA;&#x9;&#x9;var v : kermeta::standard::String init valueIt.next&#xA;&#x9;&#x9;if k.equals(key) then&#xA;&#x9;&#x9;&#x9;result := v&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        <details key="superOperation" value="kermeta::reflection::Object"/>
+        <references href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//reflection/Object/get"/>
+      </eAnnotations>
+      <eParameters name="key" eType="//String"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keys" upperBound="-1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoaderSaver">
+    <eOperations name="saveEMFSd" eType="//SDModel">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var resource : kermeta::persistence::Resource init repository.createResource(uri, mmuri)&#xA;&#x9;resource.instances.add(a)&#xA;&#x9;resource.save&#xA;end"/>
+        <details key="documentation" value="/** &#xA;  * Serialization helpers&#xA;  */"/>
+      </eAnnotations>
+      <eParameters name="repository">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//persistence/EMFRepository"/>
+      </eParameters>
+      <eParameters name="a" eType="//SDModel"/>
+      <eParameters name="uri" eType="//String"/>
+      <eParameters name="mmuri" eType="//String"/>
+    </eOperations>
+    <eOperations name="loadEMFSd" eType="//SDModel">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var resource : kermeta::persistence::Resource init repository.createResource(uri, mmuri)&#xA;&#x9;resource.instances&#xA;&#x9;resource.load&#xA;&#x9;var instances : kermeta::standard::Set&lt;kermeta::standard::Object> init resource.instances&#xA;&#x9;result ?= instances.detect{e | bigSd::SDModel.isInstance(e)}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="repository">
+        <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//persistence/EMFRepository"/>
+      </eParameters>
+      <eParameters name="uri" eType="//String"/>
+      <eParameters name="mmuri" eType="//String"/>
+    </eOperations>
+    <eOperations name="ask_emfmodel" eType="//SDModel">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var file : kermeta::standard::String init stdio.read(prompt)&#xA;&#x9;var r : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;stdio.writeln(&quot;lala: &quot;.plus(file))&#xA;&#x9;result := loadEMFSd(r, file, &quot;../models/SD.ecore&quot;)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="prompt" eType="//String"/>
+    </eOperations>
+    <eOperations name="loadfsm" eType="//BSD">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;var resource : kermeta::persistence::EMFResource&#xA;&#x9;resource ?= res.createResource(&quot;C:/Eclipse/workspace02/MSC/src/weavingExamples/base.xmi&quot;, &quot;C:/Eclipse/workspace02/MSC/src/models/bigSd.ecore&quot;)&#xA;&#x9;stdio.writeln(&quot;before loading&quot;)&#xA;&#x9;resource.load&#xA;&#x9;stdio.writeln(&quot;after loading&quot;)&#xA;&#x9;var fsm1 : bigSd::BSD&#xA;&#x9;fsm1 ?= resource.instances.one&#xA;&#x9;result := fsm1&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="saveSDModel">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var res : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;saveEMFSd(res, a, &quot;C:/Eclipse/workspace02/MSC/src/models/test11.xmi&quot;, &quot;C:/Eclipse/workspace02/MSC/src/models/bigSd.ecore&quot;)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="a" eType="//SDModel"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+</ecore:EPackage>

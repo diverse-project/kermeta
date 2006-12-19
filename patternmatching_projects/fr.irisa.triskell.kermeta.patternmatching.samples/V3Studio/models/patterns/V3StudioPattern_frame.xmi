@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<patternframework:ModelPattern xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:patternframework="platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore">
+  <pattern>
+    <content href="V3StudioPattern_structure.xmi#/0"/>
+    <content href="V3StudioPattern_structure.xmi#/1"/>
+    <content href="V3StudioPattern_structure.xmi#/2"/>
+    <content href="V3StudioPattern_structure.xmi#/3"/>
+    <roles name="Client">
+      <player href="V3StudioPattern_structure.xmi#/1"/>
+    </roles>
+    <roles name="portA">
+      <player href="V3StudioPattern_structure.xmi#/1/@port.0"/>
+    </roles>
+    <roles name="portB">
+      <player href="V3StudioPattern_structure.xmi#/1/@port.1"/>
+    </roles>
+    <roles name="ITransaction">
+      <player href="V3StudioPattern_structure.xmi#/0"/>
+    </roles>
+    <roles name="StateA">
+      <player href="V3StudioPattern_structure.xmi#/1/@behavior/@topRegion/@vertex.0"/>
+    </roles>
+    <roles name="StateB">
+      <player href="V3StudioPattern_structure.xmi#/1/@behavior/@topRegion/@vertex.1"/>
+    </roles>
+    <roles name="CallBeginA">
+      <player href="V3StudioPattern_structure.xmi#/2/@activity.0"/>
+    </roles>
+    <roles name="CallBeginB">
+      <player href="V3StudioPattern_structure.xmi#/2/@activity.1"/>
+    </roles>
+  </pattern>
+  <featureIdentifier>name</featureIdentifier>
+</patternframework:ModelPattern>

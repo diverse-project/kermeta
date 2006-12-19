@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:V3Studio="V3Studio" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.0/notation" xmi:id="_lEvEkFYfEduuGYeBCWi55A" type="V3Studio_Activity" name="Activity2.ActivityDiagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_mPY50FYfEduuGYeBCWi55A" type="1003">
+    <styles xmi:type="notation:FontStyle" xmi:id="_mPY50VYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_mPY50lYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_mPY501YfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_mPY51FYfEduuGYeBCWi55A"/>
+    <element xmi:type="V3Studio:InitialActivity" href="Activity2.v3studio#//@hasInternalActivities.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mPY51VYfEduuGYeBCWi55A" x="26" y="43"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_nQgYkFYfEduuGYeBCWi55A" type="1004">
+    <styles xmi:type="notation:FontStyle" xmi:id="_nQgYkVYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_nQgYklYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_nQgYk1YfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_nQgYlFYfEduuGYeBCWi55A"/>
+    <element xmi:type="V3Studio:FinalActivity" href="Activity2.v3studio#//@hasInternalActivities.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nQgYlVYfEduuGYeBCWi55A" x="300" y="48"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_n5CYMFYfEduuGYeBCWi55A" type="1002">
+    <children xmi:type="notation:Node" xmi:id="_n5VTIFYfEduuGYeBCWi55A" type="4005"/>
+    <children xmi:type="notation:Node" xmi:id="_n5VTIVYfEduuGYeBCWi55A" type="4006"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_n5CYMVYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_n5CYMlYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_n5CYM1YfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_n5CYNFYfEduuGYeBCWi55A"/>
+    <element xmi:type="V3Studio:SimpleActivity" href="Activity2.v3studio#//@hasInternalActivities.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_n5CYNVYfEduuGYeBCWi55A" x="144" y="48" width="92"/>
+  </children>
+  <styles xmi:type="notation:PageStyle" xmi:id="_lEvEkVYfEduuGYeBCWi55A"/>
+  <styles xmi:type="notation:GuideStyle" xmi:id="_lEvEklYfEduuGYeBCWi55A"/>
+  <styles xmi:type="notation:DescriptionStyle" xmi:id="_lEvEk1YfEduuGYeBCWi55A"/>
+  <element xmi:type="V3Studio:ComplexActivity" href="Activity2.v3studio#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_2NdgEFYfEduuGYeBCWi55A" type="3001" source="_mPY50FYfEduuGYeBCWi55A" target="_n5CYMFYfEduuGYeBCWi55A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_2NdgEVYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_2NdgElYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_2NdgE1YfEduuGYeBCWi55A" lineColor="4272966"/>
+    <element xmi:type="V3Studio:ActivityLink" href="Activity2.v3studio#//@hasInternalLinks.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2NdgFFYfEduuGYeBCWi55A" points="[9, 2, -92, 0]$[87, 0, -14, -2]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2NmqAFYfEduuGYeBCWi55A" id="(0.775,0.475)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_2NmqAVYfEduuGYeBCWi55A" id="(0.1521739,0.4)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_6cEOgFYfEduuGYeBCWi55A" type="3001" source="_n5CYMFYfEduuGYeBCWi55A" target="_nQgYkFYfEduuGYeBCWi55A">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_6cEOgVYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_6cEOglYfEduuGYeBCWi55A"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_6cEOg1YfEduuGYeBCWi55A" lineColor="4272966"/>
+    <element xmi:type="V3Studio:ActivityLink" href="Activity2.v3studio#//@hasInternalLinks.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6cEOhFYfEduuGYeBCWi55A" points="[46, 4, -94, 4]$[170, 4, 30, 4]"/>
+  </edges>
+</notation:Diagram>

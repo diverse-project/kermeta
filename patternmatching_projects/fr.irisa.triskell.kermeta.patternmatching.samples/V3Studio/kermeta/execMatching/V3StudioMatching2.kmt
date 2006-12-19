@@ -1,0 +1,30 @@
+/* $Id: V3StudioMatching2.kmt,v 1.1 2006-12-19 12:45:40 rodrigotex Exp $
+ * Creation date: October 19, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "v3Studio::V3StudioMatching2"
+@mainOperation "main"
+ 
+package v3Studio;
+ 
+
+
+require kermeta
+
+require "./V3StudioMatching.kmt"
+
+using kermeta::standard   
+
+
+class V3StudioMatching2  inherits V3StudioMatching 
+{
+    operation main() : Void is do 
+        var inputMPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/models/Architecture.xmi"
+        var patternPath : String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/models/patterns/V3StudioPattern_frame3.xmi"                               
+        
+        executePatternMatching (inputMPath, patternPath )    
+    end
+    
+} 

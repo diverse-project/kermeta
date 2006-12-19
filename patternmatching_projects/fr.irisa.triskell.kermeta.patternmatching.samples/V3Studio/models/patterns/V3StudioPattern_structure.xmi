@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Activity="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Activity" xmlns:Component="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Component" xmlns:Statemachine="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore#/upctriskell#/Statemachine">
+  <Component:Interface name="ITrans">
+    <service name="begin"/>
+    <service name="commit"/>
+  </Component:Interface>
+  <Component:SimpleComponentDefinition name="Client">
+    <port required="/0"/>
+    <port required="/0"/>
+    <behavior>
+      <topRegion>
+        <vertex xsi:type="Statemachine:State" doActivity="/2"/>
+        <vertex xsi:type="Statemachine:State" doActivity="/2"/>
+      </topRegion>
+    </behavior>
+  </Component:SimpleComponentDefinition>
+  <Activity:ComplexActivity>
+    <activity xsi:type="Activity:ServiceCall" service="/0/@service.0" requiredPort="/1/@port.0"/>
+    <activity xsi:type="Activity:ServiceCall" service="/0/@service.0" requiredPort="/1/@port.1"/>
+  </Activity:ComplexActivity>
+  <Activity:ComplexActivity/>
+</xmi:XMI>

@@ -1,0 +1,78 @@
+/* $Id: CreatePattern2.kmt,v 1.1 2006-12-19 12:45:40 rodrigotex Exp $
+ * Creation date: November 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "v3studio::CreatePattern2"
+@mainOperation "main"
+
+
+package v3studio;
+
+
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+require kermeta
+ 
+using kermeta::standard 
+using kermeta::persistence 
+
+using pattern::upctriskell::Component
+using pattern::upctriskell::Statemachine
+using pattern::upctriskell::Activity
+
+class CreatePattern2
+{
+    operation main() : Void is do 
+        var patternTemplate : patternframework::ModelPattern init patternframework::ModelPattern.new
+//        template.constraints := pattern::PConstraint.new
+        patternTemplate.featureIdentifier.add("name")
+
+        var pmodel : patternframework::PModel init patternframework::PModel.new
+        patternTemplate.pattern := pmodel
+        pmodel.content := OrderedSet<patternframework::PObject>.new
+                
+        // Creating structural model
+
+
+		var stateA : State init State.new
+		stateA.name := void
+		var cyclicTransition: Transition init Transition.new 
+		cyclicTransition.name := void		
+		cyclicTransition.source := stateA
+		cyclicTransition.target := stateA		
+		cyclicTransition.kind := TransitionKind.internal 
+
+		 
+		// Adding  elements to the structural part of the pattern
+		pmodel.content.add(stateA)	
+		pmodel.content.add(cyclicTransition)
+	
+		// Setting roles
+		var role1 : patternframework::PRole init patternframework::PRole.new
+		role1.name := "SourceState"
+		role1.player := stateA		
+		var role2 : patternframework::PRole init patternframework::PRole.new
+		role2.name := "CyclicTransition"
+		role2.player := cyclicTransition										
+				
+		patternTemplate.pattern.roles.add(role1)
+		patternTemplate.pattern.roles.add(role2)		
+
+        // Persisting the model		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_structure2.xmi ")
+		var repository : EMFRepository init EMFRepository.new
+		var resource1 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_structure2.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/V3Studio/metamodels/completeMetamodelPattern.ecore")
+        pmodel.content.each { o | resource1.instances.add(o) } 
+		resource1.save()			
+		
+		stdio.writeln("Creating file ../../models/patterns/V3StudioPattern_frame2.xmi ")		
+		var resource2 : Resource init repository.createResource("../../models/patterns/V3StudioPattern_frame2.xmi",
+         "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore")		
+		resource2.instances.add(patternTemplate)
+
+		resource2.save()		
+    end
+}

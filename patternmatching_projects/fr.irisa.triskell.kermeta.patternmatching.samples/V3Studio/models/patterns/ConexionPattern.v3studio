@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<V3Studio:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:V3Studio="V3Studio">
+  <hasConnectors endA="//@hasComponents.0/@hasPorts.0" endB="//@hasComponents.1/@hasPorts.0"/>
+  <hasConnectors endA="//@hasComponents.3/@hasPorts.1" endB="//@hasComponents.4/@hasPorts.0"/>
+  <hasConnectors endA="//@hasComponents.2/@hasPorts.0" endB="//@hasComponents.3/@hasPorts.0"/>
+  <hasConnectors endA="//@hasComponents.2/@hasPorts.1" endB="//@hasComponents.3/@hasPorts.2"/>
+  <hasComponents componentName="A">
+    <hasPorts xsi:type="V3Studio:InPort" portName="portA"/>
+  </hasComponents>
+  <hasComponents componentName="B">
+    <hasPorts xsi:type="V3Studio:OutPort" portName="portB"/>
+  </hasComponents>
+  <hasComponents>
+    <hasPorts xsi:type="V3Studio:OutPort"/>
+    <hasPorts xsi:type="V3Studio:OutPort"/>
+  </hasComponents>
+  <hasComponents componentName="a">
+    <hasPorts xsi:type="V3Studio:InPort"/>
+    <hasPorts xsi:type="V3Studio:InPort"/>
+    <hasPorts xsi:type="V3Studio:InPort"/>
+    <hasPorts xsi:type="V3Studio:OutPort"/>
+  </hasComponents>
+  <hasComponents>
+    <hasPorts xsi:type="V3Studio:OutPort"/>
+  </hasComponents>
+  <hasComponents/>
+  <hasComponents/>
+</V3Studio:Root>

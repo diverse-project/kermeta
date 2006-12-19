@@ -1,0 +1,70 @@
+package StateMachine;
+
+require kermeta
+ 
+using kermeta::standard
+
+class StateMachine
+{
+	attribute name : String[1..1]
+	attribute topRegion : Region[1..1]
+}
+class Region
+{
+	attribute name : String[1..1]
+	attribute transition : set Transition[1..*]#owner
+	attribute vertex : set Vertex[2..*]#owner
+	reference owner : State[0..1]#region
+}
+class Transition
+{
+	attribute name : String[1..1]
+	reference target : Vertex[1..1]
+	reference source : Vertex[1..1]
+	reference effect : Activity[0..1]
+	attribute guard : Constraint[0..1]
+	attribute kind : TransitionKind[1..1]
+	reference trigger : Event[1..1]
+	reference owner : Region[1..1]#transition
+}
+abstract class Vertex
+{
+	attribute name : String[1..1]
+	reference owner : Region[1..1]#vertex
+}
+class State inherits Vertex
+{
+	reference doActivity : Activity[0..1]
+	reference entry : Activity[0..1]
+	reference exit : Activity[0..1]
+	attribute region : set Region[0..*]#owner
+	reference deferred : set Event[0..*]
+}
+class FinalState inherits State
+{
+}
+class Pseudostate inherits Vertex
+{
+	attribute kind : PseudostateKind
+}
+enumeration PseudostateKind
+{
+	JoinState;
+	ForkState;
+	ChoiceState;
+	InitialState;
+	HistoryState;
+}
+enumeration TransitionKind
+{
+	internal;
+	external;
+}
+class Constraint // ConditionalActivity???
+{
+	attribute name : String
+}
+
+abstract class Activity{}
+abstract class Event{}
+

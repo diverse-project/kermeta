@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:V3Studio="V3Studio" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.0/notation" xmi:id="_gX4KoFchEduVyoPlzbmsPw" type="V3Studio_Component" name="Component1.ComponentDiagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_gurhEFchEduVyoPlzbmsPw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_gurhFlchEduVyoPlzbmsPw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_gu0rAFchEduVyoPlzbmsPw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_n5CO8FchEduVyoPlzbmsPw" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_n5CO8VchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_n5CO8lchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_n5CO81chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_n5CO9FchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.0/@hasPorts.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_n5CO9VchEduVyoPlzbmsPw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_s1F5QFchEduVyoPlzbmsPw" type="2002">
+        <styles xmi:type="notation:FontStyle" xmi:id="_s1F5QVchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_s1F5QlchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_s1F5Q1chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_s1F5RFchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:OutPort" href="Component1.v3studio#//@hasComponents.0/@hasPorts.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_s1F5RVchEduVyoPlzbmsPw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_gu0rAVchEduVyoPlzbmsPw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_gu0rAlchEduVyoPlzbmsPw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_gu0rA1chEduVyoPlzbmsPw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_i6mmEFchEduVyoPlzbmsPw" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_i6mmEVchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_i6mmElchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_i6mmE1chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_i6mmFFchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.0/@hasPorts.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i6mmFVchEduVyoPlzbmsPw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wNc8MFchEduVyoPlzbmsPw" type="2002">
+        <styles xmi:type="notation:FontStyle" xmi:id="_wNc8MVchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_wNc8MlchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_wNc8M1chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_wNc8NFchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:OutPort" href="Component1.v3studio#//@hasComponents.0/@hasPorts.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wNc8NVchEduVyoPlzbmsPw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_gu0rBFchEduVyoPlzbmsPw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_gu0rBVchEduVyoPlzbmsPw"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_gurhEVchEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_gurhElchEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_gurhE1chEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_gurhFFchEduVyoPlzbmsPw"/>
+    <element xmi:type="V3Studio:Component" href="Component1.v3studio#//@hasComponents.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gurhFVchEduVyoPlzbmsPw" x="144" y="60"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_t444kFchEduVyoPlzbmsPw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_t444llchEduVyoPlzbmsPw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_t444l1chEduVyoPlzbmsPw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_u08RIFchEduVyoPlzbmsPw" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_u08RIVchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_u08RIlchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_u08RI1chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_u08RJFchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.1/@hasPorts.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_u08RJVchEduVyoPlzbmsPw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zxlxUFchEduVyoPlzbmsPw" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_zxlxUVchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_zxlxUlchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_zxlxU1chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_zxlxVFchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.1/@hasPorts.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zxlxVVchEduVyoPlzbmsPw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_t444mFchEduVyoPlzbmsPw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_t444mVchEduVyoPlzbmsPw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_t444mlchEduVyoPlzbmsPw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_AKSE8FclEdumR9_pEK4_WQ" type="2002">
+        <styles xmi:type="notation:FontStyle" xmi:id="_AKSE8VclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_AKSE8lclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_AKSE81clEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_AKSE9FclEdumR9_pEK4_WQ"/>
+        <element xmi:type="V3Studio:OutPort" href="Component1.v3studio#//@hasComponents.1/@hasPorts.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AKSE9VclEdumR9_pEK4_WQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XhwhsFclEdumR9_pEK4_WQ" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_XhwhsVclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_XhwhslclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_Xhwhs1clEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_XhwhtFclEdumR9_pEK4_WQ"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.1/@hasPorts.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XhwhtVclEdumR9_pEK4_WQ"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_t5CpkFchEduVyoPlzbmsPw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_t5CpkVchEduVyoPlzbmsPw"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_t444kVchEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_t444klchEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_t444k1chEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_t444lFchEduVyoPlzbmsPw"/>
+    <element xmi:type="V3Studio:Component" href="Component1.v3studio#//@hasComponents.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_t444lVchEduVyoPlzbmsPw" x="384" y="132"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_1r7XEFchEduVyoPlzbmsPw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_1r7XFlchEduVyoPlzbmsPw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_1r7XF1chEduVyoPlzbmsPw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_BbGT8FciEduVyoPlzbmsPw" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_BbGT8VciEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_BbGT8lciEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_BbGT81ciEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_BbGT9FciEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.2/@hasPorts.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BbGT9VciEduVyoPlzbmsPw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_1r7XGFchEduVyoPlzbmsPw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_1r7XGVchEduVyoPlzbmsPw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_1r7XGlchEduVyoPlzbmsPw" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_4TkHsFchEduVyoPlzbmsPw" type="2002">
+        <styles xmi:type="notation:FontStyle" xmi:id="_4TkHsVchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_4TkHslchEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_4TkHs1chEduVyoPlzbmsPw"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_4TkHtFchEduVyoPlzbmsPw"/>
+        <element xmi:type="V3Studio:OutPort" href="Component1.v3studio#//@hasComponents.2/@hasPorts.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4TkHtVchEduVyoPlzbmsPw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_1r7XG1chEduVyoPlzbmsPw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_1r7XHFchEduVyoPlzbmsPw"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_1r7XEVchEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_1r7XElchEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_1r7XE1chEduVyoPlzbmsPw"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_1r7XFFchEduVyoPlzbmsPw"/>
+    <element xmi:type="V3Studio:Component" href="Component1.v3studio#//@hasComponents.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1r7XFVchEduVyoPlzbmsPw" x="150" y="180"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_F2A4sFclEdumR9_pEK4_WQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_F2A4tlclEdumR9_pEK4_WQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_F2A4t1clEdumR9_pEK4_WQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_ONaogFclEdumR9_pEK4_WQ" type="2002">
+        <styles xmi:type="notation:FontStyle" xmi:id="_ONaogVclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_ONaoglclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_ONaog1clEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_ONaohFclEdumR9_pEK4_WQ"/>
+        <element xmi:type="V3Studio:OutPort" href="Component1.v3studio#//@hasComponents.3/@hasPorts.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ONaohVclEdumR9_pEK4_WQ"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_F2A4uFclEdumR9_pEK4_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_F2A4uVclEdumR9_pEK4_WQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_F2A4ulclEdumR9_pEK4_WQ" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_H1bLsFclEdumR9_pEK4_WQ" type="2001">
+        <styles xmi:type="notation:FontStyle" xmi:id="_H1bLsVclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:DescriptionStyle" xmi:id="_H1bLslclEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:FillStyle" xmi:id="_H1bLs1clEdumR9_pEK4_WQ"/>
+        <styles xmi:type="notation:LineStyle" xmi:id="_H1bLtFclEdumR9_pEK4_WQ"/>
+        <element xmi:type="V3Studio:InPort" href="Component1.v3studio#//@hasComponents.3/@hasPorts.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_H1bLtVclEdumR9_pEK4_WQ"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_F2A4u1clEdumR9_pEK4_WQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_F2A4vFclEdumR9_pEK4_WQ"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_F2A4sVclEdumR9_pEK4_WQ"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_F2A4slclEdumR9_pEK4_WQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_F2A4s1clEdumR9_pEK4_WQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_F2A4tFclEdumR9_pEK4_WQ"/>
+    <element xmi:type="V3Studio:Component" href="Component1.v3studio#//@hasComponents.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_F2A4tVclEdumR9_pEK4_WQ" x="384" y="48"/>
+  </children>
+  <styles xmi:type="notation:PageStyle" xmi:id="_gX4KoVchEduVyoPlzbmsPw"/>
+  <styles xmi:type="notation:GuideStyle" xmi:id="_gX4KolchEduVyoPlzbmsPw"/>
+  <styles xmi:type="notation:DescriptionStyle" xmi:id="_gX4Ko1chEduVyoPlzbmsPw"/>
+  <element xmi:type="V3Studio:Root" href="Component1.v3studio#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_yHC7EFchEduVyoPlzbmsPw" type="3001" source="_wNc8MFchEduVyoPlzbmsPw" target="_u08RIFchEduVyoPlzbmsPw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_yHC7EVchEduVyoPlzbmsPw" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_yHC7ElchEduVyoPlzbmsPw"/>
+    <element xmi:type="V3Studio:Connector" href="Component1.v3studio#//@hasConnectors.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_yHC7E1chEduVyoPlzbmsPw" points="[0, 20, -84, -12]$[0, 38, -84, 6]$[64, 38, -20, 6]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_9jcF4FchEduVyoPlzbmsPw" type="3001" source="_zxlxUFchEduVyoPlzbmsPw" target="_4TkHsFchEduVyoPlzbmsPw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_9jcF4VchEduVyoPlzbmsPw" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_9jcF4lchEduVyoPlzbmsPw"/>
+    <element xmi:type="V3Studio:Connector" href="Component1.v3studio#//@hasConnectors.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9jcF41chEduVyoPlzbmsPw" points="[-20, 1, 53, -7]$[-53, 1, 20, -7]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_JOYisFclEdumR9_pEK4_WQ" type="3001" source="_H1bLsFclEdumR9_pEK4_WQ" target="_AKSE8FclEdumR9_pEK4_WQ">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_JOYisVclEdumR9_pEK4_WQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_JOYislclEdumR9_pEK4_WQ"/>
+    <element xmi:type="V3Studio:Connector" href="Component1.v3studio#//@hasConnectors.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_JOYis1clEdumR9_pEK4_WQ" points="[-1, 26, 0, -52]$[-1, 58, 0, -20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JOhsoFclEdumR9_pEK4_WQ" id="(0.55,0.85)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_R7-k8FclEdumR9_pEK4_WQ" type="3001" source="_i6mmEFchEduVyoPlzbmsPw" target="_ONaogFclEdumR9_pEK4_WQ">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_R7-k8VclEdumR9_pEK4_WQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_R7-k8lclEdumR9_pEK4_WQ"/>
+    <element xmi:type="V3Studio:Connector" href="Component1.v3studio#//@hasConnectors.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_R7-k81clEdumR9_pEK4_WQ" points="[10, -4, -58, 5]$[65, 11, -3, 20]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_R7-k9FclEdumR9_pEK4_WQ" id="(0.75,0.175)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_bsfcwFclEdumR9_pEK4_WQ" type="3001" source="_XhwhsFclEdumR9_pEK4_WQ" target="_s1F5QFchEduVyoPlzbmsPw">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_bsfcwVclEdumR9_pEK4_WQ" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_bsfcwlclEdumR9_pEK4_WQ"/>
+    <element xmi:type="V3Studio:Connector" href="Component1.v3studio#//@hasConnectors.4"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bsfcw1clEdumR9_pEK4_WQ" points="[-2, 20, 396, 92]$[-2, 52, 396, 124]$[-461, 52, -63, 124]$[-461, -75, -63, -3]$[-418, -75, -20, -3]"/>
+  </edges>
+</notation:Diagram>

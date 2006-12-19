@@ -1,0 +1,80 @@
+package Activity;
+
+require kermeta
+
+using kermeta::standard
+
+abstract class Activity
+{
+	attribute name : String[1..1]
+	attribute input : set Parameter[0..*]
+	attribute output : set Parameter[0..*]
+}
+class Parameter
+{
+	attribute name : String
+	reference owner : Activity[1..1]
+	reference type : DataType[1..1]
+	reference serviceParameter : Parameter [0..1]
+}
+class SimpleActivity inherits Activity
+{
+	attribute action : Action[1..1]
+	attribute link : set DataTransfLink[2..*]
+}
+class ComplexActivity inherits Activity
+{	
+	attribute activity : set Activity[2..*]
+	attribute link : set ActivityLink[1..*]
+}
+class Action
+{
+	attribute name : String
+	attribute output : set Pin[0..*]
+	attribute input : set Pin[0..*]
+}
+class ServiceCall inherits Activity {
+	reference service : Service[1..1]
+}
+
+class ConstantActivity inherits Activity
+{
+	attribute ~value : Value
+} 
+class Pin
+{
+	attribute name : String[1..1]
+	reference type : DataType[1..1]
+	reference owner : Action[1..1]
+}
+class ActivityLink
+{
+	attribute name : String[1..1]
+	reference source : Parameter[1..1]
+	reference target : Parameter[1..1]
+}
+class Value
+{
+	//reference dataType : kermeta::standard::~Void[1..1]
+	reference type : DataType[1..1]
+}
+class DataTransfLink
+{
+	attribute name : String[1..1]
+	reference endA : Pin[1..1]
+	reference endB : Parameter[1..1]
+}
+class ConditionalActivity inherits ComplexActivity
+{
+	reference test : Activity[0..1]
+	reference body : Activity[0..1]
+}
+class LoopActivity inherits ComplexActivity
+{
+	reference test : Activity[0..1]
+	reference ~init : Activity[0..1]
+	reference body : Activity[0..1]
+}
+
+abstract class DataType{}
+abstract class Service{}

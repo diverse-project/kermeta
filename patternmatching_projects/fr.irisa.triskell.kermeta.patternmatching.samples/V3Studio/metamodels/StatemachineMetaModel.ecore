@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="StateMachine" nsURI="platform:/resource/Spain Directory/dev/metamodels/StatemachineMetaModel.ecore" nsPrefix="StateMachine">
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eOperations/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topRegion" lowerBound="1" eType="//Region" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Region">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" ordered="false" lowerBound="1" upperBound="-1" eType="//Transition" containment="true" eOpposite="//Transition/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertex" ordered="false" lowerBound="2" upperBound="-1" eType="//Vertex" containment="true" eOpposite="//Vertex/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="//State" eOpposite="//State/region"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="//TransitionKind">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" lowerBound="1" eType="//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//Region" eOpposite="//Region/transition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="//Region" eOpposite="//Region/vertex"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//Vertex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="doActivity" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entry" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exit" eType="//Activity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="region" ordered="false" upperBound="-1" eType="//Region" containment="true" eOpposite="//Region/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deferred" ordered="false" upperBound="-1" eType="//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" eSuperTypes="//Vertex"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
+    <eLiterals name="internal" literal="internal"/>
+    <eLiterals name="external" value="1" literal="external"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="//Pseudostate"/>
+</ecore:EPackage>

@@ -1,0 +1,46 @@
+<project name="name of project" default="registerMetamodel" basedir=".">
+
+  <property name="eclipse.home"      value="C:/eclipse/eclipse_3.1.2"/>
+  <property name="eclipse.workspace"      value="${eclipse.home}/workspace"/>  	
+  <property name="register.project.home"      value="${eclipse.workspace}/fr.irisa.triskell.kermeta.patternmatching.samples"/>  	
+	
+  <property name="register.library.src"      value="${register.project.home}/src/java"/>	
+  <property name="register.library.bin"      value="${register.project.home}/bin/java"/>		
+
+  <path id="eclipse.plugins.path">
+    <fileset dir="${eclipse.home}/plugins">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+	
+  <path id="kermeta.flora2.path">
+    <pathelement location="${eclipse.home}/fr.irisa.triskell.kermeta.flora2/kermeta_flora2.jar"/>  	
+
+    <fileset dir="${eclipse.home}/fr.irisa.triskell.kermeta.flora2/lib">
+        <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="compileEcoreRegisterLibrary">
+    <javac srcdir="${register.library.src}"
+           destdir="${register.library.bin}" >	
+        <classpath refid="eclipse.plugins.path"/>
+  	</javac>
+  </target>
+	
+  <target name="registerMetamodel" depends="compileEcoreRegisterLibrary"
+   description="Register ecore metamodel files in the RMF Resource">
+    <java classname="fr.irisa.triskell.util.RegisterEcoreFile">
+      <arg value="file:/${eclipse.workspace}/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMMPattern.ecore"/>
+      <classpath>
+        <pathelement location="${register.library.bin}"/>
+	    <fileset dir="${eclipse.home}/plugins">
+	      <include name="*.jar"/>
+	    </fileset>
+      </classpath>
+    </java>
+  </target>
+
+
+
+</project>
