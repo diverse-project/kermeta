@@ -5,7 +5,6 @@
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 /**
  * @author Franck Fleurey IRISA / University of rennes 1 Distributed under the
@@ -13,43 +12,33 @@ import java.util.Hashtable;
  */
 public class CathegorizedKWList {
 
-	protected static CathegorizedKWList instance = null;
+	/*
+	 * List of keywords table.
+	 */
+	public ArrayList <String> structKW = new ArrayList <String> ();
+	public ArrayList <String> controlKW = new ArrayList <String> ();
+	public ArrayList <String> typeKW = new ArrayList <String> ();
+	public ArrayList <String> literalKW = new ArrayList <String> ();
+	public ArrayList <String> operatorKW = new ArrayList <String> ();
+	public ArrayList <String> specialKW = new ArrayList <String> ();
+	public ArrayList <String> nonSpecialKW = new ArrayList <String> ();
+	//////////////////////////
+	//////////////////////////
+	//		Constructor		//
+	//////////////////////////
+	//////////////////////////
+	// Singleton instance
+	private static CathegorizedKWList instance = null;
 
+	// Singleton accessor
 	public static CathegorizedKWList getInstance() {
 		if (instance == null)
 			instance = new CathegorizedKWList();
 		return instance;
 	}
 
-	public ArrayList structKW;
-	public ArrayList controlKW;
-	public ArrayList typeKW;
-	public ArrayList literalKW;
-	public ArrayList operatorKW;
-	public ArrayList specialKW;
-
-	public ArrayList getNonSpacialKW() {
-		ArrayList result = new ArrayList();
-		result.addAll(structKW);
-		result.addAll(controlKW);
-		result.addAll(typeKW);
-		result.addAll(operatorKW);
-		result.addAll(literalKW);
-		return result;
-	}
-	
-	/**
-	 *  
-	 */
-	protected CathegorizedKWList() {
+	private CathegorizedKWList() {
 		super();
-		structKW = new ArrayList();
-		controlKW = new ArrayList();
-		typeKW = new ArrayList();
-		literalKW = new ArrayList();
-		operatorKW = new ArrayList();
-		specialKW = new ArrayList();
-		
 		addKeyword("package", structKW);
 		addKeyword("require", specialKW);
 		addKeyword("includeFilter", specialKW);
@@ -105,10 +94,27 @@ public class CathegorizedKWList {
 		addKeyword("void", literalKW);
 		addKeyword("result", literalKW);
 		addKeyword("value", literalKW);
-
+		calculateNonSpecialKW();
 	}
+	//////////////////////////////////
+	//////////////////////////////////
+	//		End of Constructor		//
+	//////////////////////////////////
+	//////////////////////////////////
 
-	public void addKeyword(String kw, ArrayList l) {
+	private void addKeyword(String kw, ArrayList <String> l) {
 		l.add(kw);
+	}
+	
+	private void calculateNonSpecialKW() {
+		nonSpecialKW.addAll(structKW);
+		nonSpecialKW.addAll(controlKW);
+		nonSpecialKW.addAll(typeKW);
+		nonSpecialKW.addAll(operatorKW);
+		nonSpecialKW.addAll(literalKW);
+	}
+	
+	public ArrayList <String> getNonSpecialKW() {
+		return nonSpecialKW;
 	}
 }

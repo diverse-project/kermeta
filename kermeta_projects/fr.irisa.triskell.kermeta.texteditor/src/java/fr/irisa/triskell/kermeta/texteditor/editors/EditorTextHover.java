@@ -51,76 +51,25 @@ import fr.irisa.triskell.kermeta.typechecker.Type;
 public class EditorTextHover implements ITextHover, ITextHoverExtension, IInformationControlCreator {
 
 	private KMTEditor editor;
-	
-	///////////////////////////////////////////////////////////////////////
-	//
-	// Begin "Generic" implementation for Text hover functionnality
-	//
-	//////////////////////////////////////////////////////////////////////
-	
-	/**
-	 * (Copied from JDT source)
-	 * Get the command to show kermeta doc. This command should have been defined in the plugin
-	 * (extension org.eclipse.ui.commands) 
-	 * @see AbstractJavaTextEditor
-	 */
-/*	private ICommand fCommand;
-	{
-		ICommandManager commandManager= PlatformUI.getWorkbench().getCommandSupport().getCommandManager();
-		fCommand= commandManager.getCommand(IKermetaEditorActionDefinitionIds.SHOW_KDOC);
-		if (!fCommand.isDefined())
-			fCommand= null;
-	}*/
-	
 
-	/**
-	 * (Copied from JDT source) 
-	 * Returns the array of valid key sequence bindings for the
-	 * show tool tip description command.
-	 * (F2) was defined in the plugin
-	 * @return the array with the {@link KeySequence}s
-	 * @see AbstractJavaTextEditor
-	 */
-/*	private KeySequence[] getKeySequences() {
-		if (fCommand != null) {
-			List list= fCommand.getKeySequenceBindings();
-			if (!list.isEmpty()) {
-				KeySequence[] keySequences= new KeySequence[list.size()];
-				for (int i= 0; i < keySequences.length; i++) {
-					keySequences[i]= ((IKeySequenceBinding) list.get(i)).getKeySequence();
-				}
-				return keySequences;
-			}		
-		}
-		return null;
-	}*/
-	
-	
-	///////////////////////////////////////////////////////////////////////
-	//
-	// End of "Generic" implementation for Text hover functionnality
-	//
-	//////////////////////////////////////////////////////////////////////
-	
-	/**
-	 * 
-	 */
+	//////////////////////////
+	//////////////////////////
+	//		Constructor		//
+	//////////////////////////
+	//////////////////////////
 	public EditorTextHover(KMTEditor editor) {
 		super();
-		this.editor = editor;
-		//IJavaEditorActionDefinitionIds.SHOW_JAVADOC;
-//		IJavaEditorActionDefinitionIds
-		// IInformationProvider
-		
+		this.editor = editor;		
 	}
-	
-	
+	//////////////////////////////////
+	//////////////////////////////////
+	//		End of Constructor		//
+	//////////////////////////////////
+	//////////////////////////////////
 
     public IInformationControlCreator getHoverControlCreator() {
         return this;
     }
-    
-    
     
     public IInformationControl createInformationControl(Shell parent) {
         KermetaInformationControl result = new KermetaInformationControl(parent);
@@ -169,7 +118,6 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        if (fobj instanceof Expression)
 		        {
 		            Expression fexp = (Expression)fobj;
-		            String result = "";
 		            // Find the tag of the CallFeature definition!
 		            if (fexp instanceof CallFeature)
 		            {
@@ -222,41 +170,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	    pptags = pptags.replaceAll("(\n)?[ \\t\\x0B\\f\\r]*\\*","$1");
 	    return pptags;
 	}
-	
-	/**
-     * 
-     
-    private FAssignement getFAssignement(KermetaASTNode astnode) {
-        KermetaASTNode result = astnode;
-        while(!(result instanceof FAssignement) && result != null) {
-            result = (KermetaASTNode)result.getParent();
-        }
-        return (FAssignement)result;
-    }
-    
-    private Expression getFObjectForExpression(FAssignement node) {
-        return (Expression)getFObjectForNode(node);
-    }
-    
-    private FObject getFObjectForNode(KermetaASTNode node) {
-        
-        KermetaASTNode currentNode = null;
-        FObject result = null;
-        
-        ArrayList to_visit = new ArrayList();
-        to_visit.add(node);
-        
-        while (result == null && to_visit.size()>0 ) {
-            currentNode = (KermetaASTNode)to_visit.get(0);
-            to_visit.remove(0);
-            for(int i=0; i< currentNode.getChildCount(); i++) {
-                to_visit.add(currentNode.getChild(i));
-            }
-            result = (FObject)editor.mcunit.getModelElementByNode(currentNode);
-        }
-        return result;
-    }
-    */
+
 	
 	/**
 	 * Get the definition of the CallFEature :

@@ -69,7 +69,7 @@ public class EditorScanner extends RuleBasedScanner {
 		IToken defaultToken = new Token(new TextAttribute(EditorConfiguration.DEFAULT_TAG_COLOR));
 		//KWDetector detector = new KWDetector();
 		WordRule wr = new WordRule(new IDDetector(), defaultToken);
-		Iterator e = CathegorizedKWList.getInstance().getNonSpacialKW().iterator();
+		Iterator e = CathegorizedKWList.getInstance().getNonSpecialKW().iterator();
 		while (e.hasNext()) {
 			String kw = e.next().toString().trim();
 			wr.addWord(kw, kwToken);
