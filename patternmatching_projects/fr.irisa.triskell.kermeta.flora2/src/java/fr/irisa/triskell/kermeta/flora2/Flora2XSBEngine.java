@@ -1,4 +1,4 @@
-/* $Id: Flora2XSBEngine.java,v 1.2 2006-12-13 14:23:42 rodrigotex Exp $
+/* $Id: Flora2XSBEngine.java,v 1.3 2006-12-19 13:00:40 rodrigotex Exp $
  * Project : Kermeta (First iteration)
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -18,18 +18,18 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Iterator;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
-
+ 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
  
 import java.io.FileNotFoundException;
 import java.lang.String;
-/**
+/** 
  * Implementation of input and output methods (see io.kmt)
  */
 public class Flora2XSBEngine {
-   
+    
     private static FloraSession getSession() {        
         return fr.irisa.triskell.flora2.FloraSessionBuilder.getSession();
     }
@@ -127,6 +127,7 @@ public class Flora2XSBEngine {
     }
     
     private static void close () {
+        FloraSession session = fr.irisa.triskell.flora2.FloraSessionBuilder.getSession();
         if (session != null) session.close();
         session = null;    
       }           

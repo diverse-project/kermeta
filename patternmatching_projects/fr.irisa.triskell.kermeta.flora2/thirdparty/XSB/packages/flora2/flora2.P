@@ -91,7 +91,7 @@
 
 /*****************************************************************************/
 
-?- search_module(flora2,Dir,_,_,_,_),
+/*?- search_module(flora2,Dir,_,_,_,_),
    (search_module(floraInstallMode,_,_,_,_,_)
    -> [floraInstallMode]
    ;
@@ -101,6 +101,7 @@
        asserta(library_directory(FloraDir)),
        [floraInstallMode]
    ).
+*/
 ?- current_predicate(flrregistry:flora_configuration/2),
    flora_configuration(standalone,no),
    flora_configuration(standalone,yes),
@@ -136,7 +137,7 @@ bootstrap_flora :-
 	assert(xpp_include_dir(GenIncludes)),
 	assert(flora_configuration(includedirs, [Closure,Includes,FlrIncludes,GenIncludes])),
 	flora_set_counter(flora_compile_id,0), % disambiguates _# in flAdd
-	[p2h_config].
+	['p2h_config'].
 
 bootstrap_flora.
 
