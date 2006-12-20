@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 //import fr.irisa.triskell.kermeta.kpm.resources.KermetaSimpleChangeListener;
+import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
 import fr.irisa.triskell.kermeta.kpm.helpers.*;
 import fr.irisa.triskell.kermeta.kpm.File;
 //import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
@@ -28,6 +29,11 @@ import fr.irisa.triskell.kermeta.kpm.File;
 //import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
+/**
+ * 
+ * @author François Tanguy
+ *
+ */
 public class KermetaWorkspace {
 
 	
@@ -57,6 +63,9 @@ public class KermetaWorkspace {
 	 */
 	private Hashtable <IFile, KermetaUnit> units = new Hashtable <IFile, KermetaUnit> ();
 	
+	/**
+	 * 
+	 */
 	private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
 	
 	/**
@@ -64,6 +73,11 @@ public class KermetaWorkspace {
 	 */
 	private Hashtable <String, String> kmtUnitsContent = new Hashtable <String, String> ();
 	
+	/**
+	 * 
+	 * @param unitURI
+	 * @return
+	 */
 	public String getContent(String unitURI) {
 		return kmtUnitsContent.get(unitURI);
 	}
@@ -95,18 +109,20 @@ public class KermetaWorkspace {
 			instance = new KermetaWorkspace();
 			instance.initialize();
 			instance.save();
-			//instance.typeCheckNecessaryFiles();
 		}
 		return instance;
 	}
 	
+	/**
+	 * Initialize the Kermeta workspace. Load or create the Kermeta Project Manager object,
+	 * and checks if new Kermeta Project have been added.
+	 *
+	 */
 	private void initialize() {
 		try {
 			initializeKpm();
-			initializeChangeListener();
 			initializeProjects();
 		} catch (CoreException exception) {
-			System.out.println("Exception during initialization of KermetaWorkspace : ");
 			exception.printStackTrace();
 		}
 	}
@@ -119,21 +135,9 @@ public class KermetaWorkspace {
 	private void initializeKpm() throws CoreException {
 		if ( ! doIHaveAKPMFile() ) {
 			kpm = KpmHelper.createKpm();
-			//save();
-			//kpm = KpmFactory.eINSTANCE.createKPM();
 		} else {
 			load();
-			//kpm.load();
 		}
-	}
-	
-	/**
-	 * 
-	 * @throws CoreException
-	 */
-	private void initializeChangeListener() throws CoreException {
-		//IResourceHelper.workspace.addResourceChangeListener( new KermetaSimpleChangeListener(kpm) );
-		//IResourceHelper.touchWorkspace();
 	}
 	
 	/**
@@ -145,43 +149,10 @@ public class KermetaWorkspace {
 	private void initializeProjects() throws CoreException {
 		IProject[] projects = IResourceHelper.getProjects();
 		for ( int index = 0; index < projects.length; index++ ) {
-			if ( IResourceHelper.isNatureKermeta(projects[index]) ) {
-				//KpmHelper.createProject(projects[index], kpm);
+			if ( IResourceHelper.isNatureKermeta(projects[index]) )
 				IResourceHelper.attachDefaultBuilderToKermetaProject(projects[index]);
-			}
 		}
 	}
-	
-	/**
-	 * 
-	 *
-	 */
-	/*private void typeCheckNecessaryFiles() {
-		Runnable r = new Runnable () {
-			
-			public void run() {
-				Iterator <Unit> itOnUnits = kpm.getUnits().iterator();
-				while ( itOnUnits.hasNext() ) {
-					Unit unit = itOnUnits.next();
-					if ( unit.isFile() )
-						unit.receiveEvent( "safe_typecheck" );
-				}
-				KermetaWorkspace.getInstance().save();
-			
-				try {
-					IResourceHelper.refreshWorkspace();
-				} catch (CoreException exception) {
-					exception.printStackTrace();
-				}
-			}
-			
-			
-		};
-		
-		Thread thread = new Thread(r);
-		thread.setPriority(3);
-		thread.start();
-	}*/
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Constructor		//
@@ -221,7 +192,7 @@ public class KermetaWorkspace {
 	
 	/**
 	 * 
-	 * @return
+	 * @return the Kermeta Project Manager object.
 	 */
 	public KPM getKpm() {
 		return kpm;
@@ -255,18 +226,15 @@ public class KermetaWorkspace {
 		if ( unit == null ) {
 			if ( IResourceHelper.couldFileBeTypechecked(file) )
 				unit = KermetaUnitHelper.typeCheckFile( file );
-			/*else {
-				File kpmFile = kpm.findFile(file);
-				if ( kpmFile != null ) {
-					HashSet <Dependency> dependencies = kpmFile.getDependencies("traduction");
-					if ( dependencies.size() != 0 )
-						unit = getKermetaUnit( (IFile) dependencies.iterator().next().getTo().getValue() );
-				}
-			}*/
 		}
 		return unit;
 	}
 	
+	/**
+	 * Finds a Kermeta Unit for the given file.
+	 * @param file
+	 * @return the corresponding Kermeta Unit if found or null otherwise.
+	 */
 	private KermetaUnit findKermetaUnit (IFile file) {
 		KermetaUnit unit = units.get(file);
 		if ( unit == null ) {
@@ -330,6 +298,9 @@ public class KermetaWorkspace {
 	//		Interest Mechanism		//
 	//////////////////////////////////
 	//////////////////////////////////
+	/**
+	 * 
+	 */
 	public void declareInterestThreading( final KermetaUnitInterest o, final IFile file ) {
 		
 		if ( kermetaUnitCalculation != null )
@@ -363,24 +334,22 @@ public class KermetaWorkspace {
 			interestedObjects.put(o, file);
 			// calculate the KermetaUnit if necessary
 			if ( units.get(file) == null ) {
-				//if ( getFile(file) != null )
-				//	getFile( file ).receiveEvent( "typecheck" );
-				//else {
-					KermetaUnit unit = getKermetaUnit(file);
-					units.put(file, unit);
-				//}
+				KermetaUnit unit = getKermetaUnit(file);
+				units.put(file, unit);
 			}
 			notifyInterestedObject(o, file);
 		}
 	}
 	
+	/**
+	 * 
+	 * @param unit
+	 */
 	private void addUnits( KermetaUnit unit ) {
 		unitList.add(unit);
 		for (KermetaUnit currentUnit : unit.importedUnits) {
-			
 			addUnits(currentUnit);
 			unitList.add(currentUnit);
-			
 		}
 	}
 	
@@ -426,31 +395,53 @@ public class KermetaWorkspace {
 	/**
 	 * 
 	 * @param file
-	 * @return
+	 * @return true or false wether an object is interested in the given file.
 	 */
 	public boolean isAnObjectInterestedInFile (File file) {
 		return interestedObjects.contains( IResourceHelper.getIFile(file) );
 	}
 	
+	/**
+	 * 
+	 * @param file
+	 * @return true or false wether an object is interested in the given file.
+	 */
 	public boolean isAnObjectInterestedInFile (IFile file) {
 		return interestedObjects.contains(file);
 	}
 	
-	
-	public void updateFile(IFile file) {
+	/**
+	 * 
+	 * @param file
+	 */
+	public void updateFile(final IFile file) {
 		String content = kmtUnitsContent.get( units.get(file).getUri() );
 		KermetaUnit unit = KermetaUnitHelper.typeCheckFile( file, content );
-		updateKermetaUnit(file, unit);
-	}
+		updateKermetaUnit(file, unit);				
+	}	
 	
+	/**
+	 * 
+	 * @param file
+	 */
 	public void updateFile(File file) {
 		updateFile( IResourceHelper.getIFile(file) );
 	}
 	
+	/**
+	 * 
+	 * @param file
+	 * @param unit
+	 */
 	public void updateKermetaUnit(File file, KermetaUnit unit) {
 		updateKermetaUnit( IResourceHelper.getIFile(file), unit);
 	}
 	
+	/**
+	 * Updating a Kermeta Unit for a file means notifying objects interested in the given file.
+	 * @param file
+	 * @param unit
+	 */
 	public void updateKermetaUnit(IFile file, KermetaUnit unit) {
 		
 		if ( units.size() == 0 ) {
@@ -460,28 +451,25 @@ public class KermetaWorkspace {
 		}
 		
 		units.put(file, unit);
-		//notifyInterestedObjects(file);
-		//		notifyInterestedObject(o, file)
 		
 		ArrayList <IFile> files = new ArrayList <IFile> ();
-		for ( IFile f : units.keySet() ) {
-			
+		for ( IFile f : units.keySet() ) {	
 			if ( units.get(f).getUri().equals( unit.getUri() ) )
 				files.add(f);
 		}
 		
 		for ( IFile f : files ) {
 		
+			// Getting the notification list
 			ArrayList <KermetaUnitInterest> objectsToNotify = new ArrayList<KermetaUnitInterest> ();
 			for ( KermetaUnitInterest o : interestedObjects.keySet() ) {
-			
 				if ( interestedObjects.get(o).equals(f) )
 					objectsToNotify.add(o);
 			}
 		
+			// Notify
 			for ( KermetaUnitInterest o : objectsToNotify ) {
 				units.put(f, unit);
-				//File kpmFile = getFile( f );
 				notifyInterestedObject(o, f );
 			}
 			
@@ -528,22 +516,6 @@ public class KermetaWorkspace {
 	public File getFile(String relativeFileName) {
 		return kpm.findFile(relativeFileName);
 	}
-	
-	/**
-	 * From an absolute name ("/udd/me/workspace/project/example.kmt"), this method searches
-	 * for a corresponding file in the Kermeta Project Manager.
-	 * @param absoluteName
-	 * @return Returns the found file or null if none.
-	 */
-	/*public File getAbsoluteFile(String absoluteName) {
-		File file = null;
-		String[] splits = absoluteName.split( workspace.getRoot().getLocation().toString() );
-		//String[] splits = absoluteName.split( kpm.findProject(splits[1]).getAbsolutePath());
-		if ( splits.length == 2 ) {
-			file = kpm.findFile(splits[1]);
-		}
-		return file;
-	}*/
 	
 	/**
 	 * 

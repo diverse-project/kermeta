@@ -33,7 +33,7 @@ public class MarkersHelper {
      */
     public static String getMarkerType()
     {
-        return "org.eclipse.core.resources.problemmarker";
+        return "fr.irisa.triskell.kermeta.kpm.kermetaMarker";
     }
 	
     /**
