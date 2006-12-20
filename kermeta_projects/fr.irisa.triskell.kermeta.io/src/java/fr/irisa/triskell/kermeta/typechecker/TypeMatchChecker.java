@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.3 2006-12-13 08:06:29 dvojtise Exp $
+/* $Id: TypeMatchChecker.java,v 1.4 2006-12-20 16:21:08 dvojtise Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
+
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
@@ -32,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * Evaluate whether a model type is a match for another, and determine the binding of their types.
@@ -45,6 +48,7 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
  */
 public class TypeMatchChecker {
 
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("TypeMatchChecker"); 
 	private Collection<Binding> candidates;
 	private Collection<Dependency> dependencies;
 	private ModelType required;
@@ -348,6 +352,15 @@ public class TypeMatchChecker {
 				errors.add(new TypeDoesNotMatchError("Model type '" + provided.getTypeDefinition().getName() + "' does not match model type '" + required.getTypeDefinition().getName() + "': no match for required class '" + req.getTypeDefinition().getName() + "'."));
 			} else if (match_count > 1) {
 				errors.add(new TypeDoesNotMatchError("Model type '" + provided.getTypeDefinition().getName() + "' does not match model type '" + required.getTypeDefinition().getName() + "': ambiguous match for required class '" + req.getTypeDefinition().getName() + "'."));
+				for (Binding b : candidates) {
+					internalLog.debug("Model type '" + provided.getTypeDefinition().getName() + "' does not match model type '" + required.getTypeDefinition().getName() + "': ambiguous match for required class '" + req.getTypeDefinition().getName() + "'.");					
+					Class c = b.getFrom();
+					SimpleType st = new SimpleType(c);
+					if (simp.equals(st)) {
+						internalLog.debug("req="+simp.getTypeDefinition().getName() + ", proposed binding: from " + st.getTypeDefinition().getName() + " to "+b.getTo().getTypeDefinition().getName());
+						match_count++;
+					}
+				}
 			}
 		}
 	}
@@ -507,26 +520,33 @@ public class TypeMatchChecker {
 		if ((required.getUpper() != 1) && (provided.getUpper() == 1)) {
 			return false;
 		}
-		// Unbounded means unbounded
+		// Unbounded means any smaller upper bound (except upper bound = 1) will fit
 		if (required.getUpper() == -1) {
-			if (provided.getUpper() != -1) {
+			if (provided.getUpper() == 1) {
+				// not accepted because in this case, code written for collection won't work
 				return false;
 			}
 		} else {
 			// If the required is upper-bounded, the provided must have a lesser bound (in order that the 'subtype' be a subset)
-			if ( (provided.getUpper() != -1) && (provided.getUpper() > required.getUpper()) ) {
-				return false;
+			if  (provided.getUpper() != -1) {
+				if (provided.getUpper() > required.getUpper())  {			
+					return false;
+				}			
 			}
+			else if (required.getUpper() != -1)
+				// if provided is unbound, only unbound required are ok
+				return false;
 		}
-		// TODO For the moment, insist on an identical lower bounds
+		// Higher lower bound is acceptable
 		if (provided.getLower() < required.getLower()) {
 			return false;
 		}
-		// TODO For the moment, insist on identical uniqueness and ordering
+		// insist on identical uniqueness
 		if (provided.isIsUnique() != required.isIsUnique()) {
 			return false;
 		}
-		if (provided.isIsOrdered() != required.isIsOrdered()) {
+		// an ordered provided can match an unordered required, other case are rejected	
+		if (required.isIsOrdered() && !provided.isIsOrdered()) {
 			return false;
 		}
 		return true;
