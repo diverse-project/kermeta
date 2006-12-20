@@ -1,0 +1,76 @@
+/* $Id: 024_mt_property_order.kmt,v 1.1 2006-12-20 14:25:55 dvojtise Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 		Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about property order  (ie. set, ordered set, bag etc)
+ */
+
+
+package mt_property_order;
+
+
+require kermeta
+using kermeta::standard
+
+// ---------------------
+modeltype mStandard {
+  class A {
+    reference aB : B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+class NeedsMStandard<MT : mStandard> { }
+
+// ---------------------
+modeltype mSet {
+  class A {
+    reference aB : set B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+class NeedsMSet<MT : mSet> { }
+
+// ---------------------
+modeltype mOSet {
+  class A {
+    reference aB : oset B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+class NeedsMOSet<MT : mOSet> { }
+
+
+// ---------------------
+modeltype mSeq {
+  class A {
+    reference aB : seq B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+class NeedsMSeq<MT : mSeq> { }
+
+// ---------------------
+modeltype mBag {
+  class A {
+    reference aB : bag B[0..*]#aA
+  }
+
+  class B {
+  	reference aA : A#aB
+  }
+}
+class NeedsMBag<MT : mBag> { }

@@ -1,0 +1,60 @@
+/* $Id: 024_mt_property_order_valid_tests.kmt,v 1.1 2006-12-20 14:25:55 dvojtise Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+
+
+package mt_property_order;
+
+
+require kermeta
+require "024_mt_property_order.kmt"
+using kermeta::standard
+
+class Tester{
+	operation testNeedsMStandard() : Void is do
+		NeedsMStandard<mStandard>.new
+		//NeedsMStandard<mSet>.new	// invalid see invalid testcase
+		NeedsMStandard<mOSet>.new	// invalid see invalid testcase
+		//NeedsMStandard<mSeq>.new	// invalid see invalid testcase
+		//NeedsMStandard<mBag>.new	// invalid see invalid testcase
+	end
+	operation testNeedsMSet() : Void is do		
+		//NeedsMSet<mStandard>.new	// invalid see invalid testcase
+		NeedsMSet<mSet>.new
+		//NeedsMSet<mOSet>.new	// invalid see invalid testcase
+		//NeedsMSet<mSeq>.new	// invalid see invalid testcase
+		//NeedsMSet<mBag>.new	// invalid see invalid testcase
+	end
+	
+	
+	operation testNeedsMOSet() : Void is do		
+		NeedsMOSet<mStandard>.new
+		//NeedsMOSet<mSet>.new	// invalid see invalid testcase
+		NeedsMOSet<mOSet>.new
+		//NeedsMOSet<mSeq>.new	// invalid see invalid testcase
+		//NeedsMOSet<mBag>.new	// invalid see invalid testcase
+	end
+	
+	operation testNeedsMSeq() : Void is do		
+		//NeedsMSeq<mStandard>.new	// invalid see invalid testcase
+		//NeedsMSeq<mSet>.new	// invalid see invalid testcase
+		//NeedsMSeq<mOSet>.new	// invalid see invalid testcase
+		NeedsMSeq<mSeq>.new
+		//NeedsMSeq<mBag>.new	// invalid see invalid testcase
+	end
+	
+	operation testNeedsMBag() : Void is do		
+		//NeedsMBag<mStandard>.new	// invalid see invalid testcase
+		//NeedsMBag<mSet>.new	// invalid see invalid testcase
+		//NeedsMBag<mOSet>.new	// invalid see invalid testcase
+		//NeedsMBag<mSeq>.new	// invalid see invalid testcase
+		NeedsMBag<mBag>.new
+	end
+
+}
+  

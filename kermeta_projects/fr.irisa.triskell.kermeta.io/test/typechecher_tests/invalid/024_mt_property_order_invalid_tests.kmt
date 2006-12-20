@@ -1,0 +1,88 @@
+/* $Id: 024_mt_property_order_invalid_tests.kmt,v 1.1 2006-12-20 14:25:55 dvojtise Exp $
+ * Creation date: November 10, 2006
+ * License: EPL
+ * Authors:
+ * 	Didier Vojtisek
+ * Description:
+ *		This verifies the various possibilities about reference multiplicities
+ */
+
+
+package mt_property_order;
+
+
+require kermeta
+require "../valid/024_mt_property_order.kmt"
+using kermeta::standard
+
+class Tester{
+	operation testNeedsMStandard_a() : Void is do
+		NeedsMStandard<mStandard>.new
+		NeedsMStandard<mSet>.new	// must fail here
+	end	
+	operation testNeedsMStandard_b() : Void is do
+		NeedsMStandard<mOSet>.new	
+		NeedsMStandard<mSeq>.new	// must fail here
+	end	
+	operation testNeedsMStandard_c() : Void is do
+		NeedsMStandard<mBag>.new	// must fail here
+	end
+	
+	//----------------------
+	operation testNeedsMSet_a() : Void is do		
+		NeedsMSet<mStandard>.new	// must fail here
+	end
+	operation testNeedsMSet_b() : Void is do
+		NeedsMSet<mSet>.new
+		NeedsMSet<mOSet>.new	// must fail here
+	end
+	operation testNeedsMSet_c() : Void is do
+		NeedsMSet<mSeq>.new		// must fail here
+	end
+	operation testNeedsMSet_d() : Void is do
+		NeedsMSet<mBag>.new		// must fail here
+	end
+	
+	
+	operation testNeedsMOSet_a() : Void is do		
+		NeedsMOSet<mStandard>.new
+		NeedsMOSet<mSet>.new	// must fail here
+	end
+	operation testNeedsMOSet_b() : Void is do	
+		NeedsMOSet<mOSet>.new
+		NeedsMOSet<mSeq>.new	// must fail here
+	end
+	operation testNeedsMOSet_c() : Void is do	
+		NeedsMOSet<mBag>.new	// must fail here
+	end
+	
+	operation testNeedsMSeq_a() : Void is do		
+		NeedsMSeq<mStandard>.new	// must fail here
+	end
+	operation testNeedsMSeq_b() : Void is do	
+		NeedsMSeq<mSet>.new	// must fail here
+	end
+	operation testNeedsMSeq_c() : Void is do	
+		NeedsMSeq<mOSet>.new	// must fail here
+	end
+	operation testNeedsMSeq_d() : Void is do	
+		NeedsMSeq<mSeq>.new
+		NeedsMSeq<mBag>.new	// must fail here
+	end
+	
+	operation testNeedsMBag_a() : Void is do		
+		NeedsMBag<mStandard>.new	// must fail here
+	end
+	operation testNeedsMBag_b() : Void is do		
+		NeedsMBag<mSet>.new	// must fail here
+	end
+	operation testNeedsMBag_c() : Void is do		
+		NeedsMBag<mOSet>.new	// must fail here
+	end
+	operation testNeedsMBag_d() : Void is do		
+		NeedsMBag<mSeq>.new	// must fail here
+		NeedsMBag<mBag>.new
+	end
+
+}
+  
