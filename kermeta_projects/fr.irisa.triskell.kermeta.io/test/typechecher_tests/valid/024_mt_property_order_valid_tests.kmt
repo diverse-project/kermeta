@@ -1,4 +1,4 @@
-/* $Id: 024_mt_property_order_valid_tests.kmt,v 1.1 2006-12-20 14:25:55 dvojtise Exp $
+/* $Id: 024_mt_property_order_valid_tests.kmt,v 1.2 2006-12-20 14:35:47 dvojtise Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -19,14 +19,14 @@ class Tester{
 	operation testNeedsMStandard() : Void is do
 		NeedsMStandard<mStandard>.new
 		//NeedsMStandard<mSet>.new	// invalid see invalid testcase
-		NeedsMStandard<mOSet>.new	// invalid see invalid testcase
+		NeedsMStandard<mOSet>.new
 		//NeedsMStandard<mSeq>.new	// invalid see invalid testcase
 		//NeedsMStandard<mBag>.new	// invalid see invalid testcase
 	end
 	operation testNeedsMSet() : Void is do		
-		//NeedsMSet<mStandard>.new	// invalid see invalid testcase
+		NeedsMSet<mStandard>.new	// ordered set should be a valid non ordered set  (it inherits from it)
 		NeedsMSet<mSet>.new
-		//NeedsMSet<mOSet>.new	// invalid see invalid testcase
+		NeedsMSet<mOSet>.new	// ordered set should be a valid non ordered set  (it inherits from it)
 		//NeedsMSet<mSeq>.new	// invalid see invalid testcase
 		//NeedsMSet<mBag>.new	// invalid see invalid testcase
 	end
@@ -52,7 +52,7 @@ class Tester{
 		//NeedsMBag<mStandard>.new	// invalid see invalid testcase
 		//NeedsMBag<mSet>.new	// invalid see invalid testcase
 		//NeedsMBag<mOSet>.new	// invalid see invalid testcase
-		//NeedsMBag<mSeq>.new	// invalid see invalid testcase
+		NeedsMBag<mSeq>.new	// a sequence should be a valid Bag (it inherits from it)
 		NeedsMBag<mBag>.new
 	end
 

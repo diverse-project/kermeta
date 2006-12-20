@@ -1,4 +1,4 @@
-/* $Id: 024_mt_property_order_invalid_tests.kmt,v 1.1 2006-12-20 14:25:55 dvojtise Exp $
+/* $Id: 024_mt_property_order_invalid_tests.kmt,v 1.2 2006-12-20 14:35:47 dvojtise Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -30,16 +30,12 @@ class Tester{
 	
 	//----------------------
 	operation testNeedsMSet_a() : Void is do		
-		NeedsMSet<mStandard>.new	// must fail here
-	end
-	operation testNeedsMSet_b() : Void is do
+		NeedsMSet<mStandard>.new	// ordered set should be a valid non ordered set  (it inherits from it)
 		NeedsMSet<mSet>.new
-		NeedsMSet<mOSet>.new	// must fail here
-	end
-	operation testNeedsMSet_c() : Void is do
+		NeedsMSet<mOSet>.new	// ordered set should be a valid non ordered set  (it inherits from it)
 		NeedsMSet<mSeq>.new		// must fail here
 	end
-	operation testNeedsMSet_d() : Void is do
+	operation testNeedsMSet_b() : Void is do
 		NeedsMSet<mBag>.new		// must fail here
 	end
 	
@@ -77,10 +73,8 @@ class Tester{
 		NeedsMBag<mSet>.new	// must fail here
 	end
 	operation testNeedsMBag_c() : Void is do		
-		NeedsMBag<mOSet>.new	// must fail here
-	end
-	operation testNeedsMBag_d() : Void is do		
-		NeedsMBag<mSeq>.new	// must fail here
+		NeedsMBag<mOSet>.new	// must fail here		
+		NeedsMBag<mSeq>.new		// a sequence should be a valid Bag (it inherits from it)
 		NeedsMBag<mBag>.new
 	end
 
