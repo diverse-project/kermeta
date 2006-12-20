@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.44 2006-12-13 10:26:22 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.45 2006-12-20 13:06:37 jmottu Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -595,10 +595,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitOperation(Operation node) {
 		setParent(node);
-		String result = "";
-		result += ppCRSeparatedNode(node.getPre());
-		result += ppCRSeparatedNode(node.getPost());
-		result += ppTags(node.getTag());
+		String result = ppTags(node.getTag());
 		
 		if(!alreadyPrefixed) result += getPrefix();
 		
@@ -632,19 +629,25 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
 		}
+		if (node.getPre().size() != 0 || node.getPost().size() != 0){
+			result += "\n";
+			pushPrefix();
+			result += ppCRSeparatedNode(node.getPre());
+			result += ppCRSeparatedNode(node.getPost());
+			popPrefix();
+			result += getPrefix() + "is\n";
+		}
+		else
+			result += " is\n";
 		
-		result += " is\n";
 		pushPrefix();
 		alreadyPrefixed = false;
-		// JMM result += ppCRSeparatedNode(node.getPre());
 		
 		if (node.getBody() != null) {
 			result += getPrefix() + this.accept(node.getBody()) + "\n";
-//			 JMM 	result += ppCRSeparatedNode(node.getPost());
 		}
 		else if (node.isIsAbstract()) {
 			result += getPrefix() + "abstract\n";
-//			 JMM 	result += ppCRSeparatedNode(node.getPost());
 		}
 		else {
 			result += getPrefix() + "do\n";

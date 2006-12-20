@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.24 2006-12-12 16:45:21 jmottu Exp $
+/* $Id: KMT2KMPass7.java,v 1.25 2006-12-20 13:06:37 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -115,32 +115,32 @@ public class KMT2KMPass7 extends KMT2KMPass {
             name = ((Operation)annNode).getName().getText();
             e = ClassDefinitionHelper.findOperationByName(builder.current_class, name);
             builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation) e;
-            Annotableassertion annotableassertionNode = (Annotableassertion) ((Operation)annNode).getAssertions().getFirstChild();
-            if (annotableassertionNode != null) {
-				Assertion assertionNode = annotableassertionNode.getAssertion();
-
-				fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
-				String nameAssertion = "";
-				if (assertionNode instanceof Precondition) {
-					nameAssertion = ((Precondition) assertionNode).getName()
-							.getText();
-					c = OperationHelper.findPreConditionByName(
-							builder.current_operation, nameAssertion);
-					builder.current_constraint = c;
-				} else if (assertionNode instanceof Postcondition) {
-					nameAssertion = ((Postcondition) assertionNode).getName()
-							.getText();
-					c = OperationHelper.findPostConditionByName(
-							builder.current_operation, nameAssertion);
-					builder.current_constraint = c;
-				}
-
-				if (c != null) { // we should have found the object
-									// however...
-					processAnnotations(annLst, c);
-					annLst = ((Operation) annNode).getAnnotations();
-				}
-			} 
+//            Annotableassertion annotableassertionNode = (Annotableassertion) ((Operation)annNode).getAssertions().getFirstChild();
+//            if (annotableassertionNode != null) {
+//				Assertion assertionNode = annotableassertionNode.getAssertion();
+//
+//				fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
+//				String nameAssertion = "";
+//				if (assertionNode instanceof Precondition) {
+//					nameAssertion = ((Precondition) assertionNode).getName()
+//							.getText();
+//					c = OperationHelper.findPreConditionByName(
+//							builder.current_operation, nameAssertion);
+//					builder.current_constraint = c;
+//				} else if (assertionNode instanceof Postcondition) {
+//					nameAssertion = ((Postcondition) assertionNode).getName()
+//							.getText();
+//					c = OperationHelper.findPostConditionByName(
+//							builder.current_operation, nameAssertion);
+//					builder.current_constraint = c;
+//				}
+//
+//				if (c != null) { // we should have found the object
+//									// however...
+//					processAnnotations(annLst, c);
+//					annLst = ((Operation) annNode).getAnnotations();
+//				}
+//			} 
             
         }
         else if (annNode instanceof Property)

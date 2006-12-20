@@ -50,7 +50,7 @@ protected KermetaParser(TokenBuffer tokenBuf, int k) {
 }
 
 public KermetaParser(TokenBuffer tokenBuf) {
-  this(tokenBuf,5);
+  this(tokenBuf,3);
 }
 
 protected KermetaParser(TokenStream lexer, int k) {
@@ -59,11 +59,11 @@ protected KermetaParser(TokenStream lexer, int k) {
 }
 
 public KermetaParser(TokenStream lexer) {
-  this(lexer,5);
+  this(lexer,3);
 }
 
 public KermetaParser(ParserSharedInputState state) {
-  super(state,5);
+  super(state,3);
   tokenNames = _tokenNames;
 }
 
@@ -105,14 +105,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		ImportStmt importStmt = null;
 		{
-		_loop3288:
+		_loop319:
 		do {
 			if ((LA(1)==LITERAL_require)) {
 				importStmt=importStmt();
 				retVal.addChild(importStmt);
 			}
 			else {
-				break _loop3288;
+				break _loop319;
 			}
 			
 		} while (true);
@@ -126,14 +126,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		UsingStmt usingStmt = null;
 		{
-		_loop3302:
+		_loop333:
 		do {
 			if ((LA(1)==LITERAL_using)) {
 				usingStmt=usingStmt();
 				retVal.addChild(usingStmt);
 			}
 			else {
-				break _loop3302;
+				break _loop333;
 			}
 			
 		} while (true);
@@ -147,14 +147,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		TopLevelDecl topLevelDecl = null;
 		{
-		_loop3306:
+		_loop337:
 		do {
-			if ((_tokenSet_0.member(LA(1))) && (_tokenSet_1.member(LA(2))) && (_tokenSet_2.member(LA(3))) && (_tokenSet_3.member(LA(4))) && (_tokenSet_4.member(LA(5)))) {
+			if ((_tokenSet_0.member(LA(1))) && (_tokenSet_1.member(LA(2))) && (_tokenSet_2.member(LA(3)))) {
 				topLevelDecl=topLevelDecl();
 				retVal.addChild(topLevelDecl);
 			}
 			else {
-				break _loop3306;
+				break _loop337;
 			}
 			
 		} while (true);
@@ -180,14 +180,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		Annotation annotation = null;
 		{
-		_loop3281:
+		_loop312:
 		do {
-			if ((LA(1)==AT||LA(1)==CONTEXT_MULTI_LINE_COMMENT) && (_tokenSet_5.member(LA(2))) && (_tokenSet_6.member(LA(3))) && (_tokenSet_7.member(LA(4))) && (_tokenSet_8.member(LA(5)))) {
+			if ((LA(1)==AT||LA(1)==CONTEXT_MULTI_LINE_COMMENT) && (_tokenSet_3.member(LA(2))) && (_tokenSet_4.member(LA(3)))) {
 				annotation=annotation();
 				retVal.addChild(annotation);
 			}
 			else {
-				break _loop3281;
+				break _loop312;
 			}
 			
 		} while (true);
@@ -206,7 +206,7 @@ public KermetaParser(ParserSharedInputState state) {
 		match(ID);
 		retVal.addChild(id1);
 		{
-		_loop3273:
+		_loop304:
 		do {
 			if ((LA(1)==COL_COL)) {
 				qidSeparator=qidSeparator();
@@ -215,7 +215,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(qidSeparator); retVal.addChild(idn);
 			}
 			else {
-				break _loop3273;
+				break _loop304;
 			}
 			
 		} while (true);
@@ -470,7 +470,7 @@ public KermetaParser(ParserSharedInputState state) {
 		f1=filter();
 		retVal.addChild(f1);
 		{
-		_loop3298:
+		_loop329:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -479,7 +479,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(fn);
 			}
 			else {
-				break _loop3298;
+				break _loop329;
 			}
 			
 		} while (true);
@@ -764,7 +764,7 @@ public KermetaParser(ParserSharedInputState state) {
 		tv1=typeVarDecl();
 		retVal.addChild(tv1);
 		{
-		_loop3326:
+		_loop357:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -773,7 +773,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(tvn);
 			}
 			else {
-				break _loop3326;
+				break _loop357;
 			}
 			
 		} while (true);
@@ -814,7 +814,7 @@ public KermetaParser(ParserSharedInputState state) {
 		t1=type();
 		retVal.addChild(t1);
 		{
-		_loop3323:
+		_loop354:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -823,7 +823,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(tn);
 			}
 			else {
-				break _loop3323;
+				break _loop354;
 			}
 			
 		} while (true);
@@ -837,14 +837,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		AnnotableClassMemberDecl annotableClassMemberDecl = null;
 		{
-		_loop3338:
+		_loop369:
 		do {
-			if ((_tokenSet_9.member(LA(1)))) {
+			if ((_tokenSet_5.member(LA(1)))) {
 				annotableClassMemberDecl=annotableClassMemberDecl();
 				retVal.addChild(annotableClassMemberDecl);
 			}
 			else {
-				break _loop3338;
+				break _loop369;
 			}
 			
 		} while (true);
@@ -929,14 +929,14 @@ public KermetaParser(ParserSharedInputState state) {
 		QualifiedID name = null; Typelst params = null;
 		name=qualifiedID();
 		{
-		if ((LA(1)==LT) && (_tokenSet_10.member(LA(2))) && (_tokenSet_11.member(LA(3))) && (_tokenSet_12.member(LA(4))) && (_tokenSet_13.member(LA(5)))) {
+		if ((LA(1)==LT) && (_tokenSet_6.member(LA(2))) && (_tokenSet_7.member(LA(3)))) {
 			lt = LT(1);
 			match(LT);
 			params=typelst();
 			gt = LT(1);
 			match(GT);
 		}
-		else if ((_tokenSet_14.member(LA(1))) && (_tokenSet_13.member(LA(2))) && (_tokenSet_15.member(LA(3))) && (_tokenSet_15.member(LA(4))) && (_tokenSet_15.member(LA(5)))) {
+		else if ((_tokenSet_8.member(LA(1))) && (_tokenSet_9.member(LA(2))) && (_tokenSet_10.member(LA(3)))) {
 		}
 		else {
 			throw new NoViableAltException(LT(1), getFilename());
@@ -1016,12 +1016,8 @@ public KermetaParser(ParserSharedInputState state) {
 			retVal=invariant();
 			break;
 		}
-		case AT:
-		case CONTEXT_MULTI_LINE_COMMENT:
 		case LITERAL_operation:
 		case LITERAL_method:
-		case LITERAL_pre:
-		case LITERAL_post:
 		{
 			retVal=operation();
 			break;
@@ -1074,9 +1070,7 @@ public KermetaParser(ParserSharedInputState state) {
 		Token  raises_KW = null;
 		Token  is_KW = null;
 		
-		Assertions assertions = null; Annotations annotations = null; OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; OperationBody operationBody = null;
-		assertions=assertions();
-		annotations=annotations();
+		OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; Assertions assertions = null; OperationBody operationBody = null;
 		operationKind=operationKind();
 		name = LT(1);
 		match(ID);
@@ -1133,9 +1127,13 @@ public KermetaParser(ParserSharedInputState state) {
 			typeRef=typeRef();
 			break;
 		}
+		case AT:
+		case CONTEXT_MULTI_LINE_COMMENT:
 		case LITERAL_is:
 		case LITERAL_from:
 		case LITERAL_raises:
+		case LITERAL_pre:
+		case LITERAL_post:
 		{
 			break;
 		}
@@ -1154,8 +1152,12 @@ public KermetaParser(ParserSharedInputState state) {
 			superSelection=qualifiedID();
 			break;
 		}
+		case AT:
+		case CONTEXT_MULTI_LINE_COMMENT:
 		case LITERAL_is:
 		case LITERAL_raises:
+		case LITERAL_pre:
+		case LITERAL_post:
 		{
 			break;
 		}
@@ -1174,7 +1176,11 @@ public KermetaParser(ParserSharedInputState state) {
 			exceptions=typelst();
 			break;
 		}
+		case AT:
+		case CONTEXT_MULTI_LINE_COMMENT:
 		case LITERAL_is:
+		case LITERAL_pre:
+		case LITERAL_post:
 		{
 			break;
 		}
@@ -1184,10 +1190,11 @@ public KermetaParser(ParserSharedInputState state) {
 		}
 		}
 		}
+		assertions=assertions();
 		is_KW = LT(1);
 		match(LITERAL_is);
 		operationBody=operationBody();
-		retVal = new Operation(assertions, annotations, operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody);
+		retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, assertions, is_KW, operationBody);
 		return retVal;
 	}
 	
@@ -1243,8 +1250,6 @@ public KermetaParser(ParserSharedInputState state) {
 		case LITERAL_getter:
 		case LITERAL_operation:
 		case LITERAL_method:
-		case LITERAL_pre:
-		case LITERAL_post:
 		{
 			break;
 		}
@@ -1270,8 +1275,6 @@ public KermetaParser(ParserSharedInputState state) {
 		case LITERAL_property:
 		case LITERAL_operation:
 		case LITERAL_method:
-		case LITERAL_pre:
-		case LITERAL_post:
 		{
 			break;
 		}
@@ -1369,10 +1372,10 @@ public KermetaParser(ParserSharedInputState state) {
 		}
 		reftype=type();
 		{
-		if ((LA(1)==LSQUARE) && (_tokenSet_16.member(LA(2))) && (_tokenSet_17.member(LA(3))) && (_tokenSet_18.member(LA(4))) && (_tokenSet_19.member(LA(5)))) {
+		if ((LA(1)==LSQUARE) && (_tokenSet_11.member(LA(2))) && (_tokenSet_12.member(LA(3)))) {
 			multiplicity=multiplicity();
 		}
-		else if ((_tokenSet_20.member(LA(1))) && (_tokenSet_21.member(LA(2))) && (_tokenSet_19.member(LA(3))) && (_tokenSet_22.member(LA(4))) && (_tokenSet_23.member(LA(5)))) {
+		else if ((_tokenSet_13.member(LA(1))) && (_tokenSet_14.member(LA(2))) && (_tokenSet_15.member(LA(3)))) {
 		}
 		else {
 			throw new NoViableAltException(LT(1), getFilename());
@@ -1405,8 +1408,6 @@ public KermetaParser(ParserSharedInputState state) {
 		case LITERAL_property:
 		case LITERAL_operation:
 		case LITERAL_method:
-		case LITERAL_pre:
-		case LITERAL_post:
 		{
 			break;
 		}
@@ -1452,27 +1453,6 @@ public KermetaParser(ParserSharedInputState state) {
 		return retVal;
 	}
 	
-	public final Assertions  assertions() throws RecognitionException, TokenStreamException {
-		 Assertions retVal = new Assertions() ;
-		
-		
-		Annotableassertion annotableassertion = null;
-		{
-		_loop3365:
-		do {
-			if ((_tokenSet_24.member(LA(1))) && (_tokenSet_25.member(LA(2))) && (_tokenSet_26.member(LA(3))) && (_tokenSet_27.member(LA(4))) && (_tokenSet_28.member(LA(5)))) {
-				annotableassertion=annotableassertion();
-				retVal.addChild(annotableassertion);
-			}
-			else {
-				break _loop3365;
-			}
-			
-		} while (true);
-		}
-		return retVal;
-	}
-	
 	public final OperationKind  operationKind() throws RecognitionException, TokenStreamException {
 		 OperationKind retVal = null ;
 		
@@ -1509,7 +1489,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=param();
 		retVal.addChild(p1);
 		{
-		_loop3377:
+		_loop408:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -1518,7 +1498,28 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop3377;
+				break _loop408;
+			}
+			
+		} while (true);
+		}
+		return retVal;
+	}
+	
+	public final Assertions  assertions() throws RecognitionException, TokenStreamException {
+		 Assertions retVal = new Assertions() ;
+		
+		
+		Annotableassertion annotableassertion = null;
+		{
+		_loop396:
+		do {
+			if ((_tokenSet_16.member(LA(1)))) {
+				annotableassertion=annotableassertion();
+				retVal.addChild(annotableassertion);
+			}
+			else {
+				break _loop396;
 			}
 			
 		} while (true);
@@ -1833,14 +1834,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		EnumLiteral enumLiteral = null;
 		{
-		_loop3394:
+		_loop425:
 		do {
 			if ((LA(1)==ID||LA(1)==AT||LA(1)==CONTEXT_MULTI_LINE_COMMENT)) {
 				enumLiteral=enumLiteral();
 				retVal.addChild(enumLiteral);
 			}
 			else {
-				break _loop3394;
+				break _loop425;
 			}
 			
 		} while (true);
@@ -1870,14 +1871,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		FExpression fExpression = null;
 		{
-		_loop3398:
+		_loop429:
 		do {
-			if ((_tokenSet_29.member(LA(1)))) {
+			if ((_tokenSet_17.member(LA(1)))) {
 				fExpression=fExpression();
 				retVal.addChild(fExpression);
 			}
 			else {
-				break _loop3398;
+				break _loop429;
 			}
 			
 		} while (true);
@@ -1904,13 +1905,13 @@ public KermetaParser(ParserSharedInputState state) {
 		annotations=annotations();
 		expression=logicalExpression();
 		{
-		if ((LA(1)==COLON||LA(1)==QMARK) && (LA(2)==EQUALS) && (_tokenSet_30.member(LA(3))) && (_tokenSet_31.member(LA(4))) && (_tokenSet_32.member(LA(5)))) {
+		if ((LA(1)==COLON||LA(1)==QMARK) && (LA(2)==EQUALS) && (_tokenSet_18.member(LA(3)))) {
 			assignementOp=assignementOp();
 			equals = LT(1);
 			match(EQUALS);
 			newvalue=logicalExpression();
 		}
-		else if ((_tokenSet_33.member(LA(1))) && (_tokenSet_34.member(LA(2))) && (_tokenSet_35.member(LA(3))) && (_tokenSet_36.member(LA(4))) && (_tokenSet_23.member(LA(5)))) {
+		else if ((_tokenSet_19.member(LA(1))) && (_tokenSet_20.member(LA(2))) && (_tokenSet_21.member(LA(3)))) {
 		}
 		else {
 			throw new NoViableAltException(LT(1), getFilename());
@@ -1929,15 +1930,15 @@ public KermetaParser(ParserSharedInputState state) {
 		exp1=relationalExpression();
 		retVal.addChild(exp1);
 		{
-		_loop3408:
+		_loop439:
 		do {
-			if ((LA(1)==LITERAL_and||LA(1)==LITERAL_or) && (_tokenSet_30.member(LA(2))) && (_tokenSet_31.member(LA(3))) && (_tokenSet_32.member(LA(4))) && (_tokenSet_37.member(LA(5)))) {
+			if ((LA(1)==LITERAL_and||LA(1)==LITERAL_or) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 				logicalOp=logicalOp();
 				expn=relationalExpression();
 				retVal.addChild(logicalOp); retVal.addChild(expn);
 			}
 			else {
-				break _loop3408;
+				break _loop439;
 			}
 			
 		} while (true);
@@ -1979,11 +1980,11 @@ public KermetaParser(ParserSharedInputState state) {
 		AdditiveExpression left = null; RelationalOp relationalOp = null; AdditiveExpression right = null;
 		left=additiveExpression();
 		{
-		if ((_tokenSet_38.member(LA(1))) && (_tokenSet_30.member(LA(2))) && (_tokenSet_31.member(LA(3))) && (_tokenSet_32.member(LA(4))) && (_tokenSet_37.member(LA(5)))) {
+		if ((_tokenSet_23.member(LA(1))) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 			relationalOp=relationalOp();
 			right=additiveExpression();
 		}
-		else if ((_tokenSet_33.member(LA(1))) && (_tokenSet_34.member(LA(2))) && (_tokenSet_35.member(LA(3))) && (_tokenSet_36.member(LA(4))) && (_tokenSet_23.member(LA(5)))) {
+		else if ((_tokenSet_19.member(LA(1))) && (_tokenSet_20.member(LA(2))) && (_tokenSet_21.member(LA(3)))) {
 		}
 		else {
 			throw new NoViableAltException(LT(1), getFilename());
@@ -2029,15 +2030,15 @@ public KermetaParser(ParserSharedInputState state) {
 		exp1=multiplicativeExpression();
 		retVal.addChild(exp1);
 		{
-		_loop3417:
+		_loop448:
 		do {
-			if ((LA(1)==PLUS||LA(1)==MINUS) && (_tokenSet_30.member(LA(2))) && (_tokenSet_31.member(LA(3))) && (_tokenSet_32.member(LA(4))) && (_tokenSet_37.member(LA(5)))) {
+			if ((LA(1)==PLUS||LA(1)==MINUS) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 				additiveOp=additiveOp();
 				expn=multiplicativeExpression();
 				retVal.addChild(additiveOp); retVal.addChild(expn);
 			}
 			else {
-				break _loop3417;
+				break _loop448;
 			}
 			
 		} while (true);
@@ -2100,15 +2101,15 @@ public KermetaParser(ParserSharedInputState state) {
 		exp1=unaryExpression();
 		retVal.addChild(exp1);
 		{
-		_loop3422:
+		_loop453:
 		do {
-			if ((LA(1)==STAR||LA(1)==DIV) && (_tokenSet_30.member(LA(2))) && (_tokenSet_31.member(LA(3))) && (_tokenSet_32.member(LA(4))) && (_tokenSet_37.member(LA(5)))) {
+			if ((LA(1)==STAR||LA(1)==DIV) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 				multiplicativeOp=multiplicativeOp();
 				expn=unaryExpression();
 				retVal.addChild(multiplicativeOp); retVal.addChild(expn);
 			}
 			else {
-				break _loop3422;
+				break _loop453;
 			}
 			
 		} while (true);
@@ -2350,14 +2351,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		Postfix postfix = null;
 		{
-		_loop3432:
+		_loop463:
 		do {
-			if ((LA(1)==LPAREN||LA(1)==LCURLY||LA(1)==DOT) && (_tokenSet_39.member(LA(2))) && (_tokenSet_40.member(LA(3))) && (_tokenSet_32.member(LA(4))) && (_tokenSet_37.member(LA(5)))) {
+			if ((LA(1)==LPAREN||LA(1)==LCURLY||LA(1)==DOT) && (_tokenSet_24.member(LA(2))) && (_tokenSet_25.member(LA(3)))) {
 				postfix=postfix();
 				retVal.addChild(postfix);
 			}
 			else {
-				break _loop3432;
+				break _loop463;
 			}
 			
 		} while (true);
@@ -2494,7 +2495,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=actualParameter();
 		retVal.addChild(p1);
 		{
-		_loop3440:
+		_loop471:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -2503,7 +2504,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop3440;
+				break _loop471;
 			}
 			
 		} while (true);
@@ -2530,7 +2531,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=lambdaPostfixParam();
 		retVal.addChild(p1);
 		{
-		_loop3445:
+		_loop476:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -2539,7 +2540,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop3445;
+				break _loop476;
 			}
 			
 		} while (true);
@@ -2829,6 +2830,7 @@ public KermetaParser(ParserSharedInputState state) {
 		case LSQUARE:
 		case LITERAL_Void:
 		case LITERAL_inv:
+		case LITERAL_is:
 		case LITERAL_attribute:
 		case LITERAL_reference:
 		case LITERAL_property:
@@ -2948,14 +2950,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		FRescue fRescue = null;
 		{
-		_loop3462:
+		_loop493:
 		do {
 			if ((LA(1)==LITERAL_rescue)) {
 				fRescue=fRescue();
 				retVal.addChild(fRescue);
 			}
 			else {
-				break _loop3462;
+				break _loop493;
 			}
 			
 		} while (true);
@@ -2972,7 +2974,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=fLambdaparam();
 		retVal.addChild(p1);
 		{
-		_loop3458:
+		_loop489:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -2981,7 +2983,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop3458;
+				break _loop489;
 			}
 			
 		} while (true);
@@ -3018,7 +3020,7 @@ public KermetaParser(ParserSharedInputState state) {
 		rescue_KW = LT(1);
 		match(LITERAL_rescue);
 		{
-		if ((LA(1)==LPAREN) && (LA(2)==ID) && (LA(3)==COLON) && (_tokenSet_41.member(LA(4))) && (_tokenSet_42.member(LA(5)))) {
+		if ((LA(1)==LPAREN) && (LA(2)==ID) && (LA(3)==COLON)) {
 			lparen = LT(1);
 			match(LPAREN);
 			varName = LT(1);
@@ -3029,7 +3031,7 @@ public KermetaParser(ParserSharedInputState state) {
 			rparen = LT(1);
 			match(RPAREN);
 		}
-		else if ((_tokenSet_43.member(LA(1))) && (_tokenSet_31.member(LA(2))) && (_tokenSet_32.member(LA(3))) && (_tokenSet_37.member(LA(4))) && (_tokenSet_44.member(LA(5)))) {
+		else if ((_tokenSet_26.member(LA(1))) && (_tokenSet_22.member(LA(2))) && (_tokenSet_27.member(LA(3)))) {
 		}
 		else {
 			throw new NoViableAltException(LT(1), getFilename());
@@ -3113,6 +3115,7 @@ public KermetaParser(ParserSharedInputState state) {
 		case LSQUARE:
 		case LITERAL_Void:
 		case LITERAL_inv:
+		case LITERAL_is:
 		case LITERAL_attribute:
 		case LITERAL_reference:
 		case LITERAL_property:
@@ -3329,214 +3332,129 @@ public KermetaParser(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_2 = new BitSet(mk_tokenSet_2());
 	private static final long[] mk_tokenSet_3() {
-		long[] data = { 108152485498849232L, 0L};
+		long[] data = { 126167983443683154L, 32284645L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_3 = new BitSet(mk_tokenSet_3());
 	private static final long[] mk_tokenSet_4() {
-		long[] data = { 108152622942062578L, 0L};
+		long[] data = { -146299102450325518L, 66060271L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_4 = new BitSet(mk_tokenSet_4());
 	private static final long[] mk_tokenSet_5() {
-		long[] data = { 126167983443683154L, 32284645L, 0L, 0L};
+		long[] data = { 13316546102784L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_5 = new BitSet(mk_tokenSet_5());
 	private static final long[] mk_tokenSet_6() {
-		long[] data = { -146299106745292814L, 66060271L, 0L, 0L};
+		long[] data = { 1210056768L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_6 = new BitSet(mk_tokenSet_6());
 	private static final long[] mk_tokenSet_7() {
-		long[] data = { -1128382398109710L, 66060271L, 0L, 0L};
+		long[] data = { 1214316736L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_7 = new BitSet(mk_tokenSet_7());
 	private static final long[] mk_tokenSet_8() {
-		long[] data = { -1128382397976590L, 66060287L, 0L, 0L};
+		long[] data = { -254383147701147806L, 67108863L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_8 = new BitSet(mk_tokenSet_8());
 	private static final long[] mk_tokenSet_9() {
-		long[] data = { 66093104236032L, 0L};
+		long[] data = { -2181431069677582L, 67108863L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_9 = new BitSet(mk_tokenSet_9());
 	private static final long[] mk_tokenSet_10() {
-		long[] data = { 1210056768L, 0L};
+		long[] data = { -169998L, 67108863L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_10 = new BitSet(mk_tokenSet_10());
 	private static final long[] mk_tokenSet_11() {
-		long[] data = { 1214316736L, 0L};
+		long[] data = { 33776997473714176L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_11 = new BitSet(mk_tokenSet_11());
 	private static final long[] mk_tokenSet_12() {
-		long[] data = { -254383147701147678L, 67108863L, 0L, 0L};
+		long[] data = { -253257248331176126L, 33554431L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_12 = new BitSet(mk_tokenSet_12());
 	private static final long[] mk_tokenSet_13() {
-		long[] data = { -2181431069677582L, 67108863L, 0L, 0L};
+		long[] data = { -254383148506454206L, 33554431L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_13 = new BitSet(mk_tokenSet_13());
 	private static final long[] mk_tokenSet_14() {
-		long[] data = { -254383147701147806L, 67108863L, 0L, 0L};
+		long[] data = { -2181715351214126L, 66060271L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_14 = new BitSet(mk_tokenSet_14());
 	private static final long[] mk_tokenSet_15() {
-		long[] data = { -169998L, 67108863L, 0L, 0L};
+		long[] data = { -1125908505335854L, 66060287L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_15 = new BitSet(mk_tokenSet_15());
 	private static final long[] mk_tokenSet_16() {
-		long[] data = { 33776997473714176L, 0L};
+		long[] data = { 52776558134784L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_16 = new BitSet(mk_tokenSet_16());
 	private static final long[] mk_tokenSet_17() {
-		long[] data = { -253257248331176126L, 33554431L, 0L, 0L};
+		long[] data = { 18015499231176512L, 32279525L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_17 = new BitSet(mk_tokenSet_17());
 	private static final long[] mk_tokenSet_18() {
-		long[] data = { -2181431883372590L, 67108863L, 0L, 0L};
+		long[] data = { 18015499231174976L, 32279525L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_18 = new BitSet(mk_tokenSet_18());
 	private static final long[] mk_tokenSet_19() {
-		long[] data = { -1125908505335854L, 66060287L, 0L, 0L};
+		long[] data = { -254385630997551294L, 32505839L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_19 = new BitSet(mk_tokenSet_19());
 	private static final long[] mk_tokenSet_20() {
-		long[] data = { -254383148506454206L, 33554431L, 0L, 0L};
+		long[] data = { -2183914374469678L, 66060271L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_20 = new BitSet(mk_tokenSet_20());
 	private static final long[] mk_tokenSet_21() {
-		long[] data = { -2181715351214126L, 66060271L, 0L, 0L};
+		long[] data = { -2183913569163310L, 66060287L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_21 = new BitSet(mk_tokenSet_21());
 	private static final long[] mk_tokenSet_22() {
-		long[] data = { -1126183374854190L, 66060287L, 0L, 0L};
+		long[] data = { -254385630997551166L, 66060271L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_22 = new BitSet(mk_tokenSet_22());
 	private static final long[] mk_tokenSet_23() {
-		long[] data = { -1125899907012654L, 67108863L, 0L, 0L};
+		long[] data = { -1152921504600555520L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_23 = new BitSet(mk_tokenSet_23());
 	private static final long[] mk_tokenSet_24() {
-		long[] data = { 52776558134784L, 0L};
+		long[] data = { 18015499231192896L, 32279525L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_24 = new BitSet(mk_tokenSet_24());
 	private static final long[] mk_tokenSet_25() {
-		long[] data = { 52776558134848L, 0L};
+		long[] data = { -254385630997551166L, 66060287L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_25 = new BitSet(mk_tokenSet_25());
 	private static final long[] mk_tokenSet_26() {
-		long[] data = { 52780853102528L, 0L};
+		long[] data = { 18015499231176512L, 32284645L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_26 = new BitSet(mk_tokenSet_26());
 	private static final long[] mk_tokenSet_27() {
-		long[] data = { 18068280084277184L, 32279525L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_27 = new BitSet(mk_tokenSet_27());
-	private static final long[] mk_tokenSet_28() {
-		long[] data = { -254386303160539200L, 65839087L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_28 = new BitSet(mk_tokenSet_28());
-	private static final long[] mk_tokenSet_29() {
-		long[] data = { 18015499231176512L, 32279525L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_29 = new BitSet(mk_tokenSet_29());
-	private static final long[] mk_tokenSet_30() {
-		long[] data = { 18015499231174976L, 32279525L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_30 = new BitSet(mk_tokenSet_30());
-	private static final long[] mk_tokenSet_31() {
-		long[] data = { -254385635292518462L, 66060271L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_31 = new BitSet(mk_tokenSet_31());
-	private static final long[] mk_tokenSet_32() {
 		long[] data = { -2183913569163310L, 66060271L, 0L, 0L};
 		return data;
 	}
-	public static final BitSet _tokenSet_32 = new BitSet(mk_tokenSet_32());
-	private static final long[] mk_tokenSet_33() {
-		long[] data = { -254385635292518590L, 32505839L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_33 = new BitSet(mk_tokenSet_33());
-	private static final long[] mk_tokenSet_34() {
-		long[] data = { -2183914374469678L, 66060271L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_34 = new BitSet(mk_tokenSet_34());
-	private static final long[] mk_tokenSet_35() {
-		long[] data = { -2183913569163310L, 66060287L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_35 = new BitSet(mk_tokenSet_35());
-	private static final long[] mk_tokenSet_36() {
-		long[] data = { -1128382398109742L, 66060287L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_36 = new BitSet(mk_tokenSet_36());
-	private static final long[] mk_tokenSet_37() {
-		long[] data = { -1128382406498350L, 66060287L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_37 = new BitSet(mk_tokenSet_37());
-	private static final long[] mk_tokenSet_38() {
-		long[] data = { -1152921504600555520L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_38 = new BitSet(mk_tokenSet_38());
-	private static final long[] mk_tokenSet_39() {
-		long[] data = { 18015499231192896L, 32279525L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_39 = new BitSet(mk_tokenSet_39());
-	private static final long[] mk_tokenSet_40() {
-		long[] data = { -254385635292518462L, 66060287L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_40 = new BitSet(mk_tokenSet_40());
-	private static final long[] mk_tokenSet_41() {
-		long[] data = { 1055532372721728L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_41 = new BitSet(mk_tokenSet_41());
-	private static final long[] mk_tokenSet_42() {
-		long[] data = { 1210073280L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_42 = new BitSet(mk_tokenSet_42());
-	private static final long[] mk_tokenSet_43() {
-		long[] data = { 18015499231176512L, 32284645L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_43 = new BitSet(mk_tokenSet_43());
-	private static final long[] mk_tokenSet_44() {
-		long[] data = { -1128382398109742L, 67108863L, 0L, 0L};
-		return data;
-	}
-	public static final BitSet _tokenSet_44 = new BitSet(mk_tokenSet_44());
+	public static final BitSet _tokenSet_27 = new BitSet(mk_tokenSet_27());
 	
 	}

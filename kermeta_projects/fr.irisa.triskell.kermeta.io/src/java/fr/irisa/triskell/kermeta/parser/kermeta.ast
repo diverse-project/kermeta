@@ -3,7 +3,7 @@
 language Kermeta;
 	
 options { 
-k=5;
+k=3;
 defaultErrorHandler=false;
 }
 
@@ -88,7 +88,7 @@ sequence propertyBody : getterBody (setterBody)? ;
 sequence getterBody : "getter" "is" getterbody = fExpression ;
 sequence setterBody : "setter" "is" setterbody = fExpression ;
 
-sequence operation :  assertions annotations operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" operationBody;
+sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? assertions "is" operationBody;
 token operationKind : "operation" | "method" ;
 
 list assertions : annotableassertion*;

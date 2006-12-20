@@ -9,7 +9,7 @@ import com.ibm.eclipse.ldt.core.parser.*;
 class KermetaParser extends Parser;
 
 options {
-  k=5;
+  k=3;
 
   defaultErrorHandler=false;
 
@@ -355,9 +355,9 @@ setterBody returns [ SetterBody retVal = null ]
 
 operation returns [ Operation retVal = null ]
 :
-{ Assertions assertions = null; Annotations annotations = null; OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; OperationBody operationBody = null; }
-  assertions=assertions annotations=annotations operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" operationBody=operationBody 
-{ retVal = new Operation(assertions, annotations, operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody); }
+{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; Assertions assertions = null; OperationBody operationBody = null; }
+  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? assertions=assertions is_KW:"is" operationBody=operationBody 
+{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, assertions, is_KW, operationBody); }
 ;
 
 operationKind returns [ OperationKind retVal = null ]
