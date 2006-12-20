@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.7 2006-11-06 14:01:07 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.8 2006-12-20 10:03:21 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -352,7 +352,7 @@ public class KermetaUtils {
 		// System.err.println("Found a typedef :"+ typedef.getName());
 		// Typedef is null when type is note Class or not TypeDefinition....
 		if (typedef_qname != null) {
-			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname) != null;// || type instanceof VoidType; // FIXME dirty patch
+			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname) != null || type instanceof VoidType; // Fix the bug #1809
 		}
 		
 		return isstandardtype;
