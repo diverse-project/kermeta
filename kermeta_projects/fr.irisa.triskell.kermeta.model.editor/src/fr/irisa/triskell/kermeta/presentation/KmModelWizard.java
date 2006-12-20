@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmModelWizard.java,v 1.4 2006-10-24 09:19:08 cfaucher Exp $
+ * $Id: KmModelWizard.java,v 1.5 2006-12-20 10:53:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -172,7 +172,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 	 * Returns the names of the types that can be created as the root object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected Collection getInitialObjectNames() {
 		if (initialObjectNames == null) {
@@ -186,6 +186,9 @@ public class KmModelWizard extends Wizard implements INewWizard {
 					}
 				}
 			}
+			// begin Adding at the generated code
+			initialObjectNames.add("Package");
+			// finish Adding at the generated code
 			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
 		}
 		return initialObjectNames;
