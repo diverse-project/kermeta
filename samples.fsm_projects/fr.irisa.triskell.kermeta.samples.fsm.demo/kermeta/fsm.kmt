@@ -129,15 +129,15 @@ class State {
 	
 	reference combination : Set<State>
 	
-	// Declaration of the pre-condition
-	pre notVoidInput is
-		c != void and c != ""
-	// Declaration of the post-condition
-	post notVoidOutput is
-		result != void and result != ""
 	// Go to the next state
-	operation step(c : String) : String raises FSMException is
-	do
+	operation step(c : String) : String raises FSMException
+		// Declaration of the pre-condition
+		pre notVoidInput is
+			c != void and c != ""
+		// Declaration of the post-condition
+		post notVoidOutput is
+			result != void and result != ""
+	is do
 		// Get the valid transitions
 		var validTransitions : Collection<Transition> 
 		validTransitions :=	outgoingTransition.select { t | t.input.equals(c) }
