@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmImageRegistry.java,v 1.2 2006-12-22 10:22:36 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor;
 
 import java.util.MissingResourceException;
@@ -21,19 +14,20 @@ import org.topcased.modeler.ImageRegistry;
 
 /**
  * Handle image
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public final class FsmImageRegistry {
 
-	/** the bundle id of the images */
+	/**
+	 * The bundle id of the image
+	 * @generated
+	 */
 	public static final String BUNDLE = "fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.images";
 
 	/**
 	 * The constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @generated
 	 */
 	private FsmImageRegistry() {
@@ -42,8 +36,7 @@ public final class FsmImageRegistry {
 
 	/**
 	 * Clients should not dispose the Image returned.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param key  the key (one of the constants defined in this class)
 	 * @return the Image associated with the given key
 	 * @generated
@@ -55,8 +48,7 @@ public final class FsmImageRegistry {
 
 	/**
 	 * Return the image location
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param key  the key
 	 * @return the Image location associated with the given key
 	 * @throws MissingResourceException if the image doesn't exist
@@ -69,8 +61,7 @@ public final class FsmImageRegistry {
 
 	/**
 	 * Build an image descriptor for the given key
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param key  the key
 	 * @return the ImageDescriptor associated with the given key
 	 * @generated
