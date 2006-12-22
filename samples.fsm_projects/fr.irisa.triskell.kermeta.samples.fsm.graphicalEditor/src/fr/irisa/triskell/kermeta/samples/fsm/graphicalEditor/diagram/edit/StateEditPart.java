@@ -1,26 +1,19 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id$
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.editpolicies.ResizableEditPolicy;
-import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
+import org.eclipse.gef.editpolicies.ResizableEditPolicy;
+import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 
@@ -33,15 +26,13 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.Tr
 
 /**
  * The State object controller
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class StateEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param obj the graph node
 	 * @generated
 	 */
@@ -51,8 +42,7 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -77,8 +67,6 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 * @generated
 	 */

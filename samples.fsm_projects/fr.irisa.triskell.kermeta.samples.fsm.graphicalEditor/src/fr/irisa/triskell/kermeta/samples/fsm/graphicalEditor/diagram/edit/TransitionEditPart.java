@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id$
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
@@ -40,9 +33,8 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmEdgeObje
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.TransitionFigure;
 
 /**
- * Transition controller <br>
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * Transition controller
+ *
  * @generated
  */
 public class TransitionEditPart extends EMFGraphEdgeEditPart {
@@ -55,8 +47,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param model the graph object
 	 * @generated
 	 */
@@ -65,9 +56,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 * @generated
 	 */
@@ -83,8 +71,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @return the Figure
 	 * @generated
 	 */
@@ -97,8 +83,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @param connection the PolylineConnection
 	 * @generated
 	 */
@@ -111,8 +95,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getEdgeObjectFigure(org.topcased.modeler.di.model.EdgeObject)
 	 * @generated
 	 */
@@ -125,8 +107,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#refreshEdgeObjects()
 	 * @generated
 	 */

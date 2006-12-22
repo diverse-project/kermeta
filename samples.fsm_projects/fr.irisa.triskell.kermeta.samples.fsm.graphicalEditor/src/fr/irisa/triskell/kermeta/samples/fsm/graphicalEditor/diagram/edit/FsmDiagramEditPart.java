@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmDiagramEditPart.java,v 1.3 2006-12-22 10:51:21 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
@@ -22,16 +15,13 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.Fsm
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.FsmDiagramLayoutEditPolicy;
 
 /**
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
  * @generated
  */
 public class FsmDiagramEditPart extends DiagramEditPart {
 
 	/**
 	 * The Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param model the root model element
 	 * @generated
 	 */
@@ -40,8 +30,6 @@ public class FsmDiagramEditPart extends DiagramEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.DiagramEditPart#getLayoutEditPolicy()
 	 * @generated
 	 */
@@ -50,15 +38,13 @@ public class FsmDiagramEditPart extends DiagramEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.DiagramEditPart#createBodyFigure()
 	 * @generated
 	 */
 	protected IFigure createBodyFigure() {
 		return new FsmDiagramFigure();
 	}
-
+	
 	/**
 	 * @generated NOT
 	 */
