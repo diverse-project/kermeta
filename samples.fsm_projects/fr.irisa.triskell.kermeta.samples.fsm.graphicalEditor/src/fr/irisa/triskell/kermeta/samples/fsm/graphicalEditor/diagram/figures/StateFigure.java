@@ -19,9 +19,9 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * @generated
  */
 public class StateFigure extends org.topcased.draw2d.figures.BorderedLabel {
-	
+
 	private static final int ROUND_CORNER = 10;
-	
+
 	/**
 	 * Constructor
 	 * @generated
@@ -30,19 +30,18 @@ public class StateFigure extends org.topcased.draw2d.figures.BorderedLabel {
 		super();
 	}
 
-    /**
-     * @see org.topcased.draw2d.figures.BorderedLabel#outlineShape(org.eclipse.draw2d.Graphics)
-     */
-    protected void outlineShape(Graphics graphics)
-    {
-        Rectangle r = getBounds();
+	/**
+	 * @see org.topcased.draw2d.figures.BorderedLabel#outlineShape(org.eclipse.draw2d.Graphics)
+	 */
+	protected void outlineShape(Graphics graphics) {
+		Rectangle r = getBounds();
 
-        Rectangle outer = Rectangle.SINGLETON;
-        outer.x = r.x + lineWidth / 2;
-        outer.y = r.y + lineWidth / 2;
-        outer.width = r.width - lineWidth;
-        outer.height = r.height - lineWidth;
+		Rectangle outer = Rectangle.SINGLETON;
+		outer.x = r.x + 1 / 2;
+		outer.y = r.y + 1 / 2;
+		outer.width = r.width - 1;
+		outer.height = r.height - 1;
 
-        graphics.drawRoundRectangle(outer, ROUND_CORNER, ROUND_CORNER);
-    }
+		graphics.drawRoundRectangle(outer, ROUND_CORNER, ROUND_CORNER);
+	}
 }

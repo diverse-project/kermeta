@@ -25,9 +25,6 @@ import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.edit.GraphNodeEditPart;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.samples.fsm.FSM;
-import fr.irisa.triskell.kermeta.samples.fsm.State;
-import fr.irisa.triskell.kermeta.samples.fsm.Transition;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.FSMEditPart;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.FsmDiagramEditPart;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.StateEditPart;
@@ -54,53 +51,129 @@ public class FsmEditPartFactory implements EditPartFactory {
 			final GraphNode node = (GraphNode) model;
 			EObject element = Utils.getElement(node);
 			if (element != null) {
-				Object editPart = new FsmSwitch() {
-					public Object caseFSM(FSM object) {
-						return new FSMEditPart(node);
-					}
+				Object editPart = null;
 
-					public Object caseState(State object) {
-						return new StateEditPart(node);
-					}
-
-					public Object defaultCase(EObject object) {
-						return new EMFGraphNodeEditPart(node);
-					}
-				}.doSwitch(element);
+				if ("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
+						.equals(element.eClass().getEPackage().getNsURI())) {
+					editPart = new NodeFsmSwitch(node).doSwitch(element);
+				}
 
 				return (EditPart) editPart;
 			}
 
 			if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
+				// Manage the Element that are not associated with a model object
 			}
 			return new GraphNodeEditPart(node);
 		} else if (model instanceof GraphEdge) {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);
 			if (element != null) {
-				Object editPart = new FsmSwitch() {
-					public Object caseTransition(Transition object) {
-						return new TransitionEditPart(edge);
-					}
+				Object editPart = null;
 
-					public Object defaultCase(EObject object) {
-						return new EMFGraphEdgeEditPart(edge);
-					}
-				}.doSwitch(element);
+				if ("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
+						.equals(element.eClass().getEPackage().getNsURI())) {
+					editPart = new EdgeFsmSwitch(edge).doSwitch(element);
+				}
 
 				return (EditPart) editPart;
 			}
 
 			if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
+				// Manage the Element that are not associated with a model object                    
 			}
 
-			return new GraphEdgeEditPart((GraphEdge) model);
+			return new GraphEdgeEditPart(edge);
 		}
 
 		throw new IllegalStateException(
 				"No edit part matches with the '"
 						+ model.getClass().getName()
 						+ "' model element. Check FsmEditPartFactory#createEditPart(EditPart,Object) class");
+	}
+
+	/**
+	 * @generated
+	 */
+	private class NodeFsmSwitch extends FsmSwitch {
+		/**
+		 * The graphical node
+		 * @generated
+		 */
+		private GraphNode node;
+
+		/**
+		 * Constructor
+		 * 
+		 * @param node the graphical node
+		 * @generated
+		 */
+		public NodeFsmSwitch(GraphNode node) {
+			this.node = node;
+		}
+
+		/**
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseFSM(fr.irisa.triskell.kermeta.samples.fsm.FSM)
+		 * @generated
+		 */
+		public Object caseFSM(fr.irisa.triskell.kermeta.samples.fsm.FSM object) {
+			return new FSMEditPart(node);
+		}
+
+		/**
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseState(fr.irisa.triskell.kermeta.samples.fsm.State)
+		 * @generated
+		 */
+		public Object caseState(
+				fr.irisa.triskell.kermeta.samples.fsm.State object) {
+			return new StateEditPart(node);
+		}
+
+		/**
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+		 * @generated
+		 */
+		public Object defaultCase(EObject object) {
+			return new EMFGraphNodeEditPart(node);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	private class EdgeFsmSwitch extends FsmSwitch {
+		/**
+		 * The graphical edge
+		 * @generated
+		 */
+		private GraphEdge edge;
+
+		/**
+		 * Constructor
+		 * 
+		 * @param edge the graphical edge
+		 * @generated
+		 */
+		public EdgeFsmSwitch(GraphEdge edge) {
+			this.edge = edge;
+		}
+
+		/**
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseTransition(fr.irisa.triskell.kermeta.samples.fsm.Transition)
+		 * @generated
+		 */
+		public Object caseTransition(
+				fr.irisa.triskell.kermeta.samples.fsm.Transition object) {
+			return new TransitionEditPart(edge);
+		}
+
+		/**
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+		 * @generated
+		 */
+		public Object defaultCase(EObject object) {
+			return new EMFGraphEdgeEditPart(edge);
+		}
 	}
 
 }

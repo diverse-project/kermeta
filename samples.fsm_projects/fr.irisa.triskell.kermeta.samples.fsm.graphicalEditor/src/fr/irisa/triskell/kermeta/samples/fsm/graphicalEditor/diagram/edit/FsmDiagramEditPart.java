@@ -15,7 +15,6 @@ package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
-
 import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.edit.DiagramEditPart;
 
@@ -59,7 +58,7 @@ public class FsmDiagramEditPart extends DiagramEditPart {
 	protected IFigure createBodyFigure() {
 		return new FsmDiagramFigure();
 	}
-	
+
 	/**
 	 * @generated NOT
 	 */

@@ -25,6 +25,7 @@ import org.topcased.modeler.requests.RestoreConnectionsRequest;
 
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.commands.FSMRestoreConnectionCommand;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.FSMFigure;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.FSMLayoutEditPolicy;
 
 /**
  * The FSM object controller
@@ -64,6 +65,7 @@ public class FSMEditPart extends EMFGraphNodeEditPart {
 		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
 				new ResizableEditPolicy());
 
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new FSMLayoutEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
 	}

@@ -16,5 +16,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi,
  fr.irisa.triskell.kermeta.samples.fsm,
  org.eclipse.emf.ecore,
- org.topcased.modeler;bundle-version="0.9.1"
+ org.topcased.modeler
 Eclipse-LazyStart: true

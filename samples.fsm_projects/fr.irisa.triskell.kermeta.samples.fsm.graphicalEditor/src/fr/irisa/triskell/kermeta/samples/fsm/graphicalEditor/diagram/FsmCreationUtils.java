@@ -21,8 +21,6 @@ import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.editor.AbstractCreationUtils;
 import org.topcased.modeler.graphconf.DiagramGraphConf;
 
-import fr.irisa.triskell.kermeta.samples.fsm.State;
-import fr.irisa.triskell.kermeta.samples.fsm.Transition;
 import fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch;
 
 /**
@@ -43,39 +41,53 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private class GraphicSwitch extends FsmSwitch {
-		/** The presentation of the graphical element */
+	private class GraphicFsmSwitch extends FsmSwitch {
+		/**
+		 * The presentation of the graphical element
+		 *
+		 * @generated
+		 */
 		private String presentation;
 
 		/**
 		 * Constructor
-		 * 
+		 *
 		 * @param presentation the presentation of the graphical element
+		 * @generated
 		 */
-		public GraphicSwitch(String presentation) {
+		public GraphicFsmSwitch(String presentation) {
 			this.presentation = presentation;
 		}
 
 		/**
 		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseState(fr.irisa.triskell.kermeta.samples.fsm.State)
+		 * @generated
 		 */
-		public Object caseState(State object) {
-			return createGraphElementState(object, presentation);
+		public Object caseState(
+				fr.irisa.triskell.kermeta.samples.fsm.State object) {
+			if ("default".equals(presentation)) {
+				return createGraphElementState(object, presentation);
+			}
+			return null;
 		}
 
 		/**
 		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseTransition(fr.irisa.triskell.kermeta.samples.fsm.Transition)
+		 * @generated
 		 */
-		public Object caseTransition(Transition object) {
-			return createGraphElementTransition(object, presentation);
+		public Object caseTransition(
+				fr.irisa.triskell.kermeta.samples.fsm.Transition object) {
+			if ("default".equals(presentation)) {
+				return createGraphElementTransition(object, presentation);
+			}
+			return null;
 		}
 
 		/**
 		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
+		 * @generated
 		 */
 		public Object defaultCase(EObject object) {
 			return null;
@@ -90,34 +102,36 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 	 * @generated
 	 */
 	public GraphElement createGraphElement(EObject obj, String presentation) {
-		Object graphElt = new GraphicSwitch(presentation).doSwitch(obj);
+		Object graphElt = null;
+
+		if ("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
+				.equals(obj.eClass().getEPackage().getNsURI())) {
+			graphElt = new GraphicFsmSwitch(presentation).doSwitch(obj);
+		}
+
 		return (GraphElement) graphElt;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementState(State element,
+	protected GraphElement createGraphElementState(
+			fr.irisa.triskell.kermeta.samples.fsm.State element,
 			String presentation) {
 		return createGraphNode(element, presentation);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @param element the model element
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	protected GraphElement createGraphElementTransition(Transition element,
+	protected GraphElement createGraphElementTransition(
+			fr.irisa.triskell.kermeta.samples.fsm.Transition element,
 			String presentation) {
 		GraphEdge graphEdge = createGraphEdge(element, presentation);
 		EdgeObjectOffset inputEdgeObjectOffset = DiagramInterchangeFactory.eINSTANCE
@@ -130,34 +144,6 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private class ModelSwitch extends FsmSwitch {
-		/**
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseState(fr.irisa.triskell.kermeta.samples.fsm.State)
-		 */
-		public Object caseState(State object) {
-			return createModelObjectState(object);
-		}
-
-		/**
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#caseTransition(fr.irisa.triskell.kermeta.samples.fsm.Transition)
-		 */
-		public Object caseTransition(Transition object) {
-			return createModelObjectTransition(object);
-		}
-
-		/**
-		 * @see fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch#defaultCase(org.eclipse.emf.ecore.EObject)
-		 */
-		public Object defaultCase(EObject object) {
-			return null;
-		}
-	}
-
-	/**
 	 * Create the ModelObject with its initial children
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -166,32 +152,7 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 	 * @generated
 	 */
 	public EObject createModelObject(EObject obj) {
-		Object eObject = new ModelSwitch().doSwitch(obj);
-		return (EObject) eObject;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param element the original model element
-	 * @return the complete Model Object
-	 * @generated
-	 */
-	protected State createModelObjectState(State element) {
-		return element;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param element the original model element
-	 * @return the complete Model Object
-	 * @generated
-	 */
-	protected Transition createModelObjectTransition(Transition element) {
-		return element;
+		return obj;
 	}
 
 }

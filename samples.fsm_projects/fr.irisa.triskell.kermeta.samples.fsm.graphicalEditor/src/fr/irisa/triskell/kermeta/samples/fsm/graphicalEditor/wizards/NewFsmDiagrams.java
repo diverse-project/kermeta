@@ -12,36 +12,24 @@
 
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.ide.IDE;
-import org.topcased.modeler.ModelerPlugin;
-import org.topcased.modeler.di.model.Diagram;
-import org.topcased.modeler.di.model.DiagramInterchangeFactory;
-import org.topcased.modeler.di.model.EMFSemanticModelBridge;
-import org.topcased.modeler.diagrams.model.Diagrams;
-import org.topcased.modeler.diagrams.model.DiagramsFactory;
 import org.topcased.modeler.extensions.Template;
 import org.topcased.modeler.extensions.TemplatesManager;
+import org.topcased.modeler.tools.DiagramFileInitializer;
 import org.topcased.modeler.wizards.DiagramsPage;
 
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmImageRegistry;
@@ -87,20 +75,57 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	public boolean performFinish() {
 		boolean result = true;
 		if (diagPage.isPageComplete()) {
-			result = result & createModelFile();
-			result = result & createDiagramFile();
-			if (createdFile != null && result) {
-				// Open the newly created model
-				try {
-					IDE.openEditor(FsmPlugin.getDefault().getWorkbench()
-							.getActiveWorkbenchWindow().getActivePage(),
-							createdFile, true);
-				} catch (PartInitException pie) {
-					FsmPlugin.log(pie);
+			if (diagPage.isNewModel()) {
+				result = result & createModelFile();
+				result = result & createDiagramFile();
+				if (createdFile != null && result) {
+					// Open the newly created model
+					try {
+						IDE.openEditor(FsmPlugin.getDefault().getWorkbench()
+								.getActiveWorkbenchWindow().getActivePage(),
+								createdFile, true);
+					} catch (PartInitException pie) {
+						FsmPlugin.log(pie);
+					}
 				}
+			} else {
+				createDiagramFromExistingModel();
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * @generated
+	 */
+	private boolean createDiagramFromExistingModel() {
+		WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
+			/**
+			 * @see org.eclipse.ui.actions.WorkspaceModifyOperation#execute(org.eclipse.core.runtime.IProgressMonitor)
+			 */
+			protected void execute(IProgressMonitor monitor)
+					throws CoreException, InvocationTargetException,
+					InterruptedException {
+				DiagramFileInitializer initializer = new DiagramFileInitializer();
+				try {
+					initializer.createDiagram(diagPage.getRootEObject(),
+							diagPage.getDiagramId(), diagPage.isInitialized(),
+							monitor);
+				} catch (IOException ioe) {
+					throw new InvocationTargetException(ioe);
+				}
+			}
+		};
+
+		try {
+			getContainer().run(false, true, op);
+			return true;
+		} catch (InvocationTargetException ite) {
+			FsmPlugin.log(ite);
+		} catch (InterruptedException ie) {
+			// Wizard stopped
+		}
+		return false;
 	}
 
 	/**
@@ -134,21 +159,19 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	private boolean createModelFile() {
-		if (diagPage.isNewModel()) {
-			try {
-				Template template = TemplatesManager.getInstance().find(
-						diagPage.getTemplateId()).getTemplateModel();
-				template.setDestination(diagPage.getSelectedIContainer());
-				template.addVariable("name", diagPage.getModelName());
+		try {
+			Template template = TemplatesManager.getInstance().find(
+					diagPage.getTemplateId()).getTemplateModel();
+			template.setDestination(diagPage.getSelectedIContainer());
+			template.addVariable("name", diagPage.getModelName());
 
-				template.generate(new NullProgressMonitor());
-			} catch (CoreException ce) {
-				FsmPlugin.log(ce);
-				ModelerPlugin.displayDialog(null,
-						"An error occured during the template generation.",
-						IStatus.ERROR);
-				return false;
-			}
+			template.generate(new NullProgressMonitor());
+		} catch (CoreException ce) {
+			FsmPlugin.log(ce);
+			FsmPlugin.displayDialog(null,
+					"An error occured during the template generation.",
+					IStatus.ERROR);
+			return false;
 		}
 		return true;
 	}
@@ -160,69 +183,19 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	private boolean createDiagramFile() {
-		if (diagPage.isNewModel()) {
-			try {
-				Template template = TemplatesManager.getInstance().find(
-						diagPage.getTemplateId()).getTemplateDI();
-				template.setDestination(diagPage.getSelectedIContainer());
-				template.addVariable("name", diagPage.getModelName());
+		try {
+			Template template = TemplatesManager.getInstance().find(
+					diagPage.getTemplateId()).getTemplateDI();
+			template.setDestination(diagPage.getSelectedIContainer());
+			template.addVariable("name", diagPage.getModelName());
 
-				createdFile = (IFile) template
-						.generate(new NullProgressMonitor());
-			} catch (CoreException ce) {
-				FsmPlugin.log(ce);
-				ModelerPlugin.displayDialog(null,
-						"An error occured during the template generation.",
-						IStatus.ERROR);
-				return false;
-			}
-		} else {
-			// retrieve the Diagrams and the DiagramInterchange factory singletons
-			DiagramsFactory factory = DiagramsFactory.eINSTANCE;
-			DiagramInterchangeFactory factory2 = DiagramInterchangeFactory.eINSTANCE;
-
-			// create the EObject of the diagram model
-			Diagrams diagrams = factory.createDiagrams();
-			Diagram rootDiagram = factory2.createDiagram();
-			EMFSemanticModelBridge emfSemanticModelBridge = factory2
-					.createEMFSemanticModelBridge();
-
-			// set the properties of the diagrams model
-			diagrams.setModel(diagPage.getRootEObject());
-			diagrams.getDiagrams().add(rootDiagram);
-
-			// set the properties of the Diagram
-			rootDiagram.setSize(new Dimension(100, 100));
-			rootDiagram.setViewport(new Point(0, 0));
-			rootDiagram.setPosition(new Point(0, 0));
-			rootDiagram.setName(diagPage.getModelName());
-			rootDiagram.setSemanticModel(emfSemanticModelBridge);
-
-			// set the properties of the SemanticModelBridge
-			emfSemanticModelBridge.setElement(diagPage.getDiagramEObject());
-			emfSemanticModelBridge.setPresentation(diagPage.getDiagramId());
-
-			// create the diagram file and add the created model into
-			createdFile = ResourcesPlugin.getWorkspace().getRoot().getFile(
-					new Path(diagPage.getSelectedIContainer().getFullPath()
-							.toString()
-							+ File.separator
-							+ diagPage.getModelName()
-							+ ".fsmdi"));
-			ResourceSet rsrcSet = new ResourceSetImpl();
-			URI uri = URI.createPlatformResourceURI(createdFile.getFullPath()
-					.toString());
-			Resource resource = rsrcSet.createResource(uri);
-			resource.getContents().add(diagrams);
-
-			// Save the resource contents to the file system.
-			try {
-				resource.save(Collections.EMPTY_MAP);
-			} catch (IOException e) {
-				FsmPlugin.log(e);
-				ModelerPlugin.displayDialog(null,
-						"The Diagram file could not be saved.", IStatus.ERROR);
-			}
+			createdFile = (IFile) template.generate(new NullProgressMonitor());
+		} catch (CoreException ce) {
+			FsmPlugin.log(ce);
+			FsmPlugin.displayDialog(null,
+					"An error occured during the template generation.",
+					IStatus.ERROR);
+			return false;
 		}
 		return true;
 	}

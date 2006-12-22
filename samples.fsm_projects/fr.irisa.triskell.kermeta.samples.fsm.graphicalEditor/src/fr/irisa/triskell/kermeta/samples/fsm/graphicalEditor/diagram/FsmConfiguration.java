@@ -14,7 +14,7 @@ package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 import java.net.URL;
 
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,8 +24,12 @@ import org.topcased.modeler.editor.IConfiguration;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.editor.IPaletteManager;
 import org.topcased.modeler.graphconf.DiagramGraphConf;
+import org.topcased.modeler.graphconf.exceptions.MissingGraphConfFileException;
 
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmPlugin;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.FSMEditPart;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.StateEditPart;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.TransitionEditPart;
 
 /**
  * A diagram configuration : manages Palette, EditPartFactory for this diagram.
@@ -48,6 +52,38 @@ public class FsmConfiguration implements IConfiguration {
 	private DiagramGraphConf diagramGraphConf;
 
 	/**
+	 * Constructor. Initialize Adapter factories.
+	 *
+	 * @generated
+	 */
+	public FsmConfiguration() {
+		registerAdapters();
+	}
+
+	/**
+	 * Registers the Adapter Factories for all the EditParts
+	 *
+	 * @generated
+	 */
+	private void registerAdapters() {
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(FSMEditPart.class,
+						fr.irisa.triskell.kermeta.samples.fsm.FSM.class),
+				FSMEditPart.class);
+		Platform.getAdapterManager().registerAdapters(
+				new EditPart2ModelAdapterFactory(StateEditPart.class,
+						fr.irisa.triskell.kermeta.samples.fsm.State.class),
+				StateEditPart.class);
+		Platform
+				.getAdapterManager()
+				.registerAdapters(
+						new EditPart2ModelAdapterFactory(
+								TransitionEditPart.class,
+								fr.irisa.triskell.kermeta.samples.fsm.Transition.class),
+						TransitionEditPart.class);
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getId()
@@ -55,7 +91,7 @@ public class FsmConfiguration implements IConfiguration {
 	 */
 	public String getId() {
 		return new String(
-				"fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor");
+				"fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram");
 	}
 
 	/**
@@ -130,10 +166,8 @@ public class FsmConfiguration implements IConfiguration {
 							.getContents().get(0);
 				}
 			} else {
-				FsmPlugin
-						.log(
-								"The *.diagramgraphconf file can not be retrieved. Check if the path is correct in the Configuration class of your diagram.",
-								IStatus.WARNING);
+				new MissingGraphConfFileException(
+						"The *.diagramgraphconf file can not be retrieved. Check if the path is correct in the Configuration class of your diagram.");
 			}
 		}
 

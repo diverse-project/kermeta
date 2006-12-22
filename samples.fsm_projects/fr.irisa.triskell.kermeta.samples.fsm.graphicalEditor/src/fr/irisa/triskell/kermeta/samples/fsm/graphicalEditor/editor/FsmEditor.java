@@ -40,7 +40,6 @@ public class FsmEditor extends Modeler {
 		List factories = new ArrayList();
 		factories
 				.add(new fr.irisa.triskell.kermeta.samples.fsm.provider.FsmItemProviderAdapterFactory());
-
 		factories
 				.add(new fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.providers.FsmModelerProviderAdapterFactory());
 

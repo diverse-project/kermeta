@@ -36,7 +36,7 @@ public class FsmDiagramsPage extends DiagramsPage {
 	 * @generated
 	 */
 	public FsmDiagramsPage(String pageName, IStructuredSelection selection) {
-		super(pageName, selection);
+		super(pageName, selection, true);
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class FsmDiagramsPage extends DiagramsPage {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getEditorID()
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getEditorID() {
 		return "fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditor";

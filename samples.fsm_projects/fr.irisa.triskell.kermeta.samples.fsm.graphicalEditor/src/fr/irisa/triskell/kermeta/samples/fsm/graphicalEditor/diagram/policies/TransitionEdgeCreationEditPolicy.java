@@ -109,7 +109,7 @@ public class TransitionEdgeCreationEditPolicy extends
 
 		if (sourceObject instanceof fr.irisa.triskell.kermeta.samples.fsm.State
 				&& targetObject instanceof fr.irisa.triskell.kermeta.samples.fsm.State) {
-			return new SourceTargetData(false, true, 1,
+			return new SourceTargetData(false, true, SourceTargetData.SOURCE,
 					"fr.irisa.triskell.kermeta.samples.fsm.State",
 					"outgoingTransition", "source", "target",
 					"outgoingTransition", null, "incomingTransition", null);

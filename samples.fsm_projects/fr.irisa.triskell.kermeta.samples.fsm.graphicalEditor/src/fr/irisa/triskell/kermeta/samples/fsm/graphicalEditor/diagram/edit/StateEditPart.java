@@ -13,7 +13,6 @@
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-//import org.eclipse.draw2d.Figure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
@@ -26,11 +25,10 @@ import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 
 import fr.irisa.triskell.kermeta.samples.fsm.State;
-
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmImageRegistry;
-import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.StateFigure;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmEditPolicyConstants;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.commands.StateRestoreConnectionCommand;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.StateFigure;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.TransitionEdgeCreationEditPolicy;
 
 /**
@@ -132,7 +130,6 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		return false;
 	}
 
-	
 	/**
 	 * @generated NOT
 	 */
@@ -140,7 +137,7 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	protected void refreshHeaderLabel() {
 		// TODO Auto-generated method stub
 		super.refreshHeaderLabel();
-		
+
 		String imageLabel = "NOTHING_STATE";
 		if (isInitial()) {
 			imageLabel = "INITIAL_STATE";
@@ -148,10 +145,10 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		if (isFinal()) {
 			imageLabel = "FINAL_STATE";
 		}
-		
+
 		StateFigure fig = (StateFigure) getFigure();
 		EditableLabel lbl = (EditableLabel) fig.getLabel();
-		
+
 		lbl.setIcon(FsmImageRegistry.getImage(imageLabel));
 	}
 
@@ -162,7 +159,7 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 	}
-	
+
 	/**
 	 * @return the model object
 	 * @generated NOT

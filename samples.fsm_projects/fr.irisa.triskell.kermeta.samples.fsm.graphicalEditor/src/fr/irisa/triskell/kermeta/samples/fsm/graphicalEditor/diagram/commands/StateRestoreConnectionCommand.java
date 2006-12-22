@@ -56,10 +56,10 @@ public class StateRestoreConnectionCommand extends
 	 */
 	protected void initializeCommands() {
 
-		GraphElement node = getGraphElement();
-		EObject nodeObject = Utils.getElement(node);
+		GraphElement elt = getGraphElement();
+		EObject eltObject = Utils.getElement(elt);
 
-		if (nodeObject instanceof State) {
+		if (eltObject instanceof State) {
 			Iterator itDiagContents = getModeler().getActiveDiagram()
 					.eAllContents();
 			while (itDiagContents.hasNext()) {
@@ -70,18 +70,18 @@ public class StateRestoreConnectionCommand extends
 								.getProperty(
 										(GraphElement) obj,
 										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID) == null) {
-					boolean autoRef = obj.equals(node);
-					GraphElement node2 = (GraphElement) obj;
-					EObject nodeObject2 = Utils.getElement(node2);
+					boolean autoRef = obj.equals(elt);
+					GraphElement elt2 = (GraphElement) obj;
+					EObject eltObject2 = Utils.getElement(elt2);
 
-					if (nodeObject2 instanceof State) {
+					if (eltObject2 instanceof State) {
 						if (autoRef) {
-							createTransitionFromStateToState(node, node);
+							createTransitionFromStateToState(elt, elt);
 						} else {
-							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-							createTransitionFromStateToState(node, node2);
-							// if node is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-							createTransitionFromStateToState(node2, node);
+							// if the elt is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+							createTransitionFromStateToState(elt, elt2);
+							// if elt is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+							createTransitionFromStateToState(elt2, elt);
 						}
 					}
 
@@ -97,10 +97,10 @@ public class StateRestoreConnectionCommand extends
 	 * @param targetNode the target node
 	 * @generated
 	 */
-	private void createTransitionFromStateToState(GraphElement srcNode,
-			GraphElement targetNode) {
-		State sourceObject = (State) Utils.getElement(srcNode);
-		State targetObject = (State) Utils.getElement(targetNode);
+	private void createTransitionFromStateToState(GraphElement srcElt,
+			GraphElement targetElt) {
+		State sourceObject = (State) Utils.getElement(srcElt);
+		State targetObject = (State) Utils.getElement(targetElt);
 
 		EList edgeObjectList = sourceObject.getOutgoingTransition();
 		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
@@ -114,7 +114,7 @@ public class StateRestoreConnectionCommand extends
 						&& targetObject.getIncomingTransition().contains(
 								edgeObject)) {
 					// check if the relation does not exists yet
-					List existing = getExistingEdges(srcNode, targetNode,
+					List existing = getExistingEdges(srcElt, targetElt,
 							Transition.class);
 					if (!isAlreadyPresent(existing, edgeObject)) {
 						ICreationUtils factory = getModeler()
@@ -124,9 +124,9 @@ public class StateRestoreConnectionCommand extends
 								.createGraphElement(edgeObject);
 						if (edge instanceof GraphEdge) {
 							TransitionEdgeCreationCommand cmd = new TransitionEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcNode,
+									getEditDomain(), (GraphEdge) edge, srcElt,
 									false);
-							cmd.setTarget(targetNode);
+							cmd.setTarget(targetElt);
 							add(cmd);
 						}
 					}

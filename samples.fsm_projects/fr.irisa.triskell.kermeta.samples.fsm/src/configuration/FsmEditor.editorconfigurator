@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/1.0" name="Fsm Graphical Editor" projectName="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor" pluginVersion="0.0.1" organizeImports="true">
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" name="Fsm Graphical Editor" projectName="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor" pluginVersion="0.0.2" provider="Topcased / IRISA-INRIA" forceOverwrite="true" copyrightText="IRISA-INRIA">
   <genModel href="../metamodels/fsm.genmodel#/"/>
 </editorconfigurator:EditorConfiguration>

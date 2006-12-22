@@ -24,7 +24,6 @@ import org.topcased.modeler.editor.palette.ModelerCreationToolEntry;
 import org.topcased.modeler.editor.palette.ModelerPaletteManager;
 
 import fr.irisa.triskell.kermeta.samples.fsm.FsmPackage;
-import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmImageRegistry;
 
 /**
  * Generated Palette Manager
@@ -84,24 +83,19 @@ public class FsmPaletteManager extends ModelerPaletteManager {
 		List entries = new ArrayList();
 
 		CreationFactory factory;
-		String newObjTxt;
 
-		ModelerCreationToolEntry objectTool;
-		ModelerConnectionCreationToolEntry connectionTool;
-
-		newObjTxt = "State";
 		factory = new GraphElementCreationFactory(creationUtils,
 				FsmPackage.eINSTANCE.getState(), "default");
-		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory, FsmImageRegistry.getImageDescriptor("STATE"), null);
-		entries.add(objectTool);
-		newObjTxt = "Transition";
+		entries.add(new ModelerCreationToolEntry("State", "State", factory,
+				FsmImageRegistry.getImageDescriptor("STATE"), FsmImageRegistry
+						.getImageDescriptor("STATE_LARGE")));
+
 		factory = new GraphElementCreationFactory(creationUtils,
 				FsmPackage.eINSTANCE.getTransition(), "default");
-		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
-				newObjTxt, factory, FsmImageRegistry
-						.getImageDescriptor("TRANSITION"), null);
-		entries.add(connectionTool);
+		entries.add(new ModelerConnectionCreationToolEntry("Transition",
+				"Transition", factory, FsmImageRegistry
+						.getImageDescriptor("TRANSITION"), FsmImageRegistry
+						.getImageDescriptor("TRANSITION_LARGE")));
 
 		objectsDrawer.addAll(entries);
 		getRoot().add(objectsDrawer);

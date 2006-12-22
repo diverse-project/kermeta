@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
   <model href="sample1.fsm#/"/>
   <diagrams position="0,0" size="100,100" name="sample1" viewport="0,0">
     <property key="pageFormatName" value="A4"/>
@@ -11,7 +11,7 @@
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
     <property key="orientation" value="portrait"/>
-    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor">
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram">
       <element href="sample1.fsm#/"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="35,45" size="50,50">
@@ -31,19 +31,16 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sample1.fsm#//@ownedState.0/@outgoingTransition.0"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-10,9"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-1,9"/>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sample1.fsm#//@ownedState.1/@outgoingTransition.0"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="8,-21"/>
-      <waypoints>[25, 3, 25, 3]</waypoints>
-      <waypoints>[87, 12, 87, 12]</waypoints>
-      <waypoints>[87, 51, 87, 51]</waypoints>
-      <waypoints>[87, 87, 87, 87]</waypoints>
-      <waypoints>[13, 87, 13, 87]</waypoints>
-      <waypoints>[3, 25, 3, 25]</waypoints>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="17,-21"/>
+      <waypoints>[49, 3, 49, 3]</waypoints>
+      <waypoints>[49, 43, 49, 43]</waypoints>
+      <waypoints>[3, 43, 3, 43]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

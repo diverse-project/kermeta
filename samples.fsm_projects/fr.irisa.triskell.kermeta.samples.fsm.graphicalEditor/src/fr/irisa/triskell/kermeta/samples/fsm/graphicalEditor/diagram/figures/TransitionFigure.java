@@ -13,6 +13,8 @@
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
 
 import org.eclipse.draw2d.Locator;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.handles.HandleBounds;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.topcased.modeler.edit.locators.EdgeObjectOffsetLocator;
 import org.topcased.modeler.figures.EdgeObjectOffsetEditableLabel;
@@ -26,7 +28,7 @@ import org.topcased.modeler.figures.IGraphEdgeFigure;
  * @generated
  */
 public class TransitionFigure extends PolylineConnectionEx implements
-		IGraphEdgeFigure {
+		IGraphEdgeFigure, HandleBounds {
 
 	private IEdgeObjectFigure inputEdgeObject;
 
@@ -64,7 +66,6 @@ public class TransitionFigure extends PolylineConnectionEx implements
 	 * @generated
 	 */
 	public Locator getLocator(IEdgeObjectFigure edgeObjectfigure) {
-
 		if (edgeObjectfigure == inputEdgeObject) {
 			return inputLocator;
 		}
@@ -72,4 +73,11 @@ public class TransitionFigure extends PolylineConnectionEx implements
 		return null;
 	}
 
+	/**
+	 * @see org.eclipse.gef.handles.HandleBounds#getHandleBounds()
+	 * @generated
+	 */
+	public Rectangle getHandleBounds() {
+		return getPoints().getBounds();
+	}
 }

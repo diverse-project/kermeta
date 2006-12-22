@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <graphconf:DiagramGraphConf xmlns:graphconf="http://www.topcased.org/1.0/graphconf"
-    id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor"
+    id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram"
     defaultBackgroundColor="255,255,255"
     defaultForegroundColor="0,0,0"
     defaultFont="Tahoma-regular-8">
@@ -16,15 +16,17 @@
         defaultForegroundColor="0,0,0"
         defaultFont="Tahoma-regular-8"
         lineWidth="1"
-        lineStyle="SOLID">
+        lineStyle="SOLID"
+        isWidthResizable="true"
+        isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
             <type href="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore#//FSM"/>
         </bridge>
     </node>
     <node
         presentation="default"
-        defaultHeight="25"
-        defaultWidth="55"
+        defaultHeight="40"
+        defaultWidth="60"
         minimumHeight="0"
         minimumWidth="0"
         maximumHeight="0"
@@ -33,9 +35,9 @@
         defaultForegroundColor="0,0,0"
         defaultFont="Tahoma-regular-8"
         lineWidth="1"
+        lineStyle="SOLID"
         isWidthResizable="true"
-        isHeightResizable="true"
-        lineStyle="SOLID">
+        isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
             <type href="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore#//State"/>
         </bridge>
