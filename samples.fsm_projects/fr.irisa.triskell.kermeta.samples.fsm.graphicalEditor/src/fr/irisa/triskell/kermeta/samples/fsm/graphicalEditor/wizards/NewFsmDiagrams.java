@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: NewFsmDiagrams.java,v 1.3 2006-12-22 10:38:52 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards;
 
 import java.io.IOException;
@@ -36,23 +29,28 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmImageRegistry;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmPlugin;
 
 /**
- * Generated wizard that offers the model creation facilities. <br>
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * Generated wizard that offers the model creation facilities.
+ *
  * @generated
  */
 public class NewFsmDiagrams extends Wizard implements INewWizard {
+	/**
+	 * @generated
+	 */
 	private IStructuredSelection selection;
 
+	/**
+	 * @generated
+	 */
 	private DiagramsPage diagPage;
 
+	/**
+	 * @generated
+	 */
 	private IFile createdFile;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
-	 *      org.eclipse.jface.viewers.IStructuredSelection)
+	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench, org.eclipse.jface.viewers.IStructuredSelection)
 	 * @generated
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection sel) {
@@ -67,8 +65,6 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.jface.wizard.IWizard#performFinish()
 	 * @generated
 	 */
@@ -129,8 +125,6 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 * @generated
 	 */
@@ -143,8 +137,6 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.jface.wizard.IWizard#canFinish()
 	 * @generated
 	 */
@@ -153,8 +145,6 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @return true if the model file was successfully created
 	 * @generated
 	 */
@@ -177,8 +167,6 @@ public class NewFsmDiagrams extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @return true if the diagram file was successfully created
 	 * @generated
 	 */

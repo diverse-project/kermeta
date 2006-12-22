@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmPreferencePage.java,v 1.2 2006-12-22 10:41:04 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.preferences;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -29,29 +22,31 @@ import org.topcased.modeler.preferences.ModelerPreferenceConstants;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmPlugin;
 
 /**
- * A preference page to configure all preferences of the Fsm editor.<br>
- *
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * A preference page to configure all preferences of the Fsm editor.
  *
  * @generated
  */
 public class FsmPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
+	/**
+	 * @generated
+	 */
 	private IPreferenceStore ps = FsmPlugin.getDefault().getPreferenceStore();
 
+	/**
+	 * @generated
+	 */
 	private BooleanFieldEditor deleteGraphElements;
 
+	/**
+	 * @generated
+	 */
 	private BooleanFieldEditor deleteModelElements;
 
 	/**
 	 * Creates this preference page contents.
 	 *
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
-	 * @param parent the parent composite
-	 * @return the created Control element
+	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
 	 * @generated
 	 */
 	protected Control createContents(Composite parent) {
@@ -75,9 +70,6 @@ public class FsmPreferencePage extends PreferencePage implements
 	/**
 	 * Initializes the HMI with preference values.
 	 *
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private void loadPreferences() {
@@ -88,9 +80,6 @@ public class FsmPreferencePage extends PreferencePage implements
 	/**
 	 * Stores the HMI values into the preference store.
 	 *
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private void storePreferences() {
@@ -101,9 +90,6 @@ public class FsmPreferencePage extends PreferencePage implements
 	/**
 	 * Initializes the HMI with default preference values.
 	 *
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private void loadDefaultPreferences() {
@@ -113,9 +99,6 @@ public class FsmPreferencePage extends PreferencePage implements
 
 	/**
 	 * Creates this preference page header.
-	 * 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 *
 	 * @param parent the parent composite
 	 * @generated
@@ -127,9 +110,6 @@ public class FsmPreferencePage extends PreferencePage implements
 	/**
 	 * Creates the group to configure the delete actions preferences.
 	 * 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 *
 	 * @param parent the parent composite
 	 * @generated
 	 */
@@ -157,9 +137,7 @@ public class FsmPreferencePage extends PreferencePage implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
+	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 * @generated
 	 */
 	public void init(IWorkbench workbench) {
@@ -167,8 +145,6 @@ public class FsmPreferencePage extends PreferencePage implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.jface.preference.IPreferencePage#performOk()
 	 * @generated
 	 */
@@ -178,8 +154,6 @@ public class FsmPreferencePage extends PreferencePage implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.jface.preference.PreferencePage#performDefaults()
 	 * @generated
 	 */

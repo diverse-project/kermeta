@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmEditPartFactory.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 import org.eclipse.emf.ecore.EObject;
@@ -33,14 +26,11 @@ import fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch;
 
 /**
  * Part Factory : associates a model object to its controller. <br>
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class FsmEditPartFactory implements EditPartFactory {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.eclipse.gef.EditPartFactory#createEditPart(org.eclipse.gef.EditPart,java.lang.Object)
 	 * @generated
 	 */

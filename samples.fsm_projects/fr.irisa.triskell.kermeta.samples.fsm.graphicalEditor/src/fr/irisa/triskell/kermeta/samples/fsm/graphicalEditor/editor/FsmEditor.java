@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmEditor.java,v 1.3 2006-12-22 10:41:27 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor;
 
 import java.util.ArrayList;
@@ -24,16 +17,13 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmPlugin;
 
 /**
  * Generated Model editor
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class FsmEditor extends Modeler {
 
 	/**
 	 * @see org.topcased.modeler.editor.Modeler#getAdapterFactories()
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected List getAdapterFactories() {
@@ -49,9 +39,8 @@ public class FsmEditor extends Modeler {
 	}
 
 	/**
-	 * Returns the Editor Id (used by the minibus)
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the Editor Id
+	 *
 	 * @return the String that identifies the Editor
 	 * @generated
 	 */
@@ -61,8 +50,6 @@ public class FsmEditor extends Modeler {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.Modeler#getAdapter(java.lang.Class)
 	 * @generated
 	 */
@@ -74,8 +61,6 @@ public class FsmEditor extends Modeler {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.Modeler#getPreferenceStore()
 	 * @generated
 	 */

@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmPlugin.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,18 +22,19 @@ import org.osgi.framework.BundleContext;
 
 /**
  * The main plugin class to be used in the desktop.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class FsmPlugin extends AbstractUIPlugin {
-	// The shared instance
+	/**
+	 * The shared instance
+	 * @generated
+	 */
 	private static FsmPlugin plugin;
 
 	/**
 	 * The constructor.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @generated
 	 */
 	public FsmPlugin() {
@@ -50,8 +44,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 
 	/**
 	 * This method is called upon plug-in activation
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @see org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext)
 	 * @generated
 	 */
@@ -61,8 +54,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 
 	/**
 	 * This method is called when the plug-in is stopped
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 * @generated
 	 */
@@ -73,8 +65,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @return the singleton
 	 * @generated
 	 */
@@ -83,8 +74,6 @@ public class FsmPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @return the Plugin Id
 	 * @generated
 	 */
@@ -94,8 +83,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Log a message with given level into the Eclipse log file
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param message the message to log
 	 * @param level the message priority
 	 * @generated
@@ -108,8 +96,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Log an exception into the Eclipse log file
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param e the exception to log
 	 * @generated
 	 */
@@ -128,8 +115,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Log an IStatus
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 *
 	 * @param status the status to log
 	 * @generated
 	 */

@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmConfiguration.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 import java.net.URL;
@@ -33,21 +26,28 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit.Transi
 
 /**
  * A diagram configuration : manages Palette, EditPartFactory for this diagram.
- * <br>
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class FsmConfiguration implements IConfiguration {
+	/**
+	 * @generated
+	 */
 	private FsmPaletteManager paletteManager;
 
+	/**
+	 * @generated
+	 */
 	private FsmEditPartFactory editPartFactory;
 
+	/**
+	 * @generated
+	 */
 	private FsmCreationUtils creationUtils;
 
 	/**
-	 * The DiagramGraphConf that contains graphical informations on the
-	 * configuration
+	 * The DiagramGraphConf that contains graphical informations on the configuration
+	 * @generated
 	 */
 	private DiagramGraphConf diagramGraphConf;
 
@@ -84,8 +84,6 @@ public class FsmConfiguration implements IConfiguration {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getId()
 	 * @generated
 	 */
@@ -95,8 +93,6 @@ public class FsmConfiguration implements IConfiguration {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getName()
 	 * @generated
 	 */
@@ -105,8 +101,6 @@ public class FsmConfiguration implements IConfiguration {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getEditPartFactory()
 	 * @generated
 	 */
@@ -118,8 +112,6 @@ public class FsmConfiguration implements IConfiguration {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getPaletteManager()
 	 * @generated
 	 */
@@ -131,8 +123,6 @@ public class FsmConfiguration implements IConfiguration {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getCreationUtils()
 	 * @generated
 	 */
@@ -144,8 +134,6 @@ public class FsmConfiguration implements IConfiguration {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.editor.IConfiguration#getDiagramGraphConf()
 	 * @generated
 	 */

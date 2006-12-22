@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmDiagramsPage.java,v 1.4 2006-12-22 10:38:52 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards;
 
 import java.util.ArrayList;
@@ -22,15 +15,10 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.topcased.modeler.wizards.DiagramsPage;
 
 /**
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
  * @generated
  */
 public class FsmDiagramsPage extends DiagramsPage {
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @param pageName
 	 * @param selection
 	 * @generated
@@ -40,20 +28,14 @@ public class FsmDiagramsPage extends DiagramsPage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getEditorID()
-	 * @generated NOT
+	 * @generated
 	 */
 	public String getEditorID() {
 		return "fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditor";
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getFileExtension()
 	 * @generated
 	 */
@@ -62,9 +44,6 @@ public class FsmDiagramsPage extends DiagramsPage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getAdapterFactory()
 	 * @generated
 	 */
@@ -79,9 +58,6 @@ public class FsmDiagramsPage extends DiagramsPage {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.wizards.DiagramsPage#getDefaultTemplateId()
 	 * @return String
 	 * @generated

@@ -1,15 +1,8 @@
 /*******************************************************************************
- * Copyright (c) 2005 AIRBUS FRANCE. All rights reserved. This program and the
- * accompanying materials are made available under the terms of the Eclipse
- * Public License v1.0 which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *   David Sciamma (Anyware Technologies), Mathieu Garcia (Anyware Technologies),
- *   Jacques Lescot (Anyware Technologies), Thomas Friol (Anyware Technologies),
- *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
+ * $Id: FsmCreationUtils.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
-
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 import org.eclipse.draw2d.geometry.Dimension;
@@ -25,16 +18,16 @@ import fr.irisa.triskell.kermeta.samples.fsm.util.FsmSwitch;
 
 /**
  * This utility class allows to create a GraphElement associated with a Model Object
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class FsmCreationUtils extends AbstractCreationUtils {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param diagramConf the Diagram Graphical Configuration
+	 * @generated
 	 */
 	public FsmCreationUtils(DiagramGraphConf diagramConf) {
 		super(diagramConf);
@@ -95,9 +88,6 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.editor.ICreationUtils#createGraphElement(org.eclipse.emf.ecore.EObject, java.lang.String)
 	 * @generated
 	 */
@@ -145,8 +135,7 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 
 	/**
 	 * Create the ModelObject with its initial children
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * 
 	 * @param obj the model object
 	 * @return the model object with its children
 	 * @generated
