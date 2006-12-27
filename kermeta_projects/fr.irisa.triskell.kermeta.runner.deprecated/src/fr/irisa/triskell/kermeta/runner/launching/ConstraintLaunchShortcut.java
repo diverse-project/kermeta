@@ -1,4 +1,4 @@
-/* $Id: ConstraintLaunchShortcut.java,v 1.2 2006-10-19 08:49:17 ftanguy Exp $
+/* $Id: ConstraintLaunchShortcut.java,v 1.3 2006-12-27 15:48:12 ftanguy Exp $
  * Project: Kermeta (Second iteration)
  * File: ConstraintLaunchShortcut.java
  * License: EPL
@@ -26,14 +26,5 @@ public class ConstraintLaunchShortcut extends KermetaLaunchShortcut {
     	launchManager	= 	DebugPlugin.getDefault().getLaunchManager();
     	configurationType = launchManager.getLaunchConfigurationType(ID_CONSTRAINT_APPLICATION);	
     }
-    
-	   /**
-     * Get the Kermeta configuration type (there is only one..)
-     * @return
-     */
-    protected ILaunchConfigurationType getKermetaLaunchConfigurationType()
-    {
-		ILaunchManager lm= DebugPlugin.getDefault().getLaunchManager();
-		return lm.getLaunchConfigurationType(ID_CONSTRAINT_APPLICATION);
-    }
+
 }
