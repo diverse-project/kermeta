@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.7 2006-12-27 12:08:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -628,17 +628,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUnit_Dependents() {
-		return (EReference)unitEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getUnit_Path() {
-		return (EAttribute)unitEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -647,7 +638,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * @generated
 	 */
 	public EAttribute getUnit_LastTimeModified() {
-		return (EAttribute)unitEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -958,7 +949,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(unitEClass, UNIT__DEPENDENCIES);
 		createEReference(unitEClass, UNIT__KPM);
 		createEAttribute(unitEClass, UNIT__NAME);
-		createEReference(unitEClass, UNIT__DEPENDENTS);
 		createEAttribute(unitEClass, UNIT__PATH);
 		createEAttribute(unitEClass, UNIT__LAST_TIME_MODIFIED);
 
@@ -1107,7 +1097,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEReference(getUnit_Dependencies(), this.getDependency(), null, "dependencies", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getUnit_Kpm(), this.getKPM(), this.getKPM_Units(), "kpm", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_Name(), this.getString(), "name", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnit_Dependents(), this.getUnit(), null, "dependents", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_Path(), this.getString(), "path", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_LastTimeModified(), this.getDate(), "lastTimeModified", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1215,7 +1204,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		addEParameter(op, this.getArrayList(), "dependents", 0, 1);
 
 		initEClass(abstractExpressionEClass, AbstractExpression.class, "AbstractExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractExpression_Filter(), this.getFilter(), null, "filter", null, 1, 1, AbstractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractExpression_Filter(), this.getFilter(), null, "filter", null, 1, 1, AbstractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractExpression_Id(), this.getString(), "id", null, 0, 1, AbstractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(abstractExpressionEClass, this.getboolean(), "evaluate", 0, 1);

@@ -1,7 +1,5 @@
 package fr.irisa.triskell.kermeta.kpm.helpers;
 
-import java.util.concurrent.Semaphore;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 
@@ -9,13 +7,9 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 public class KermetaUnitHelper {
-
-	final private static int MAX_AVAILABLE = 1;
-	static private final Semaphore kermetaUnitFactoryAvailable = new Semaphore(MAX_AVAILABLE, true);
 	
 	/**
 	 * Unload properly a KermetaUnit and call the garbage collector to free memory.
@@ -54,6 +48,9 @@ public class KermetaUnitHelper {
 		
 		URI fileURI = URI.createFileURI(absoluteFileName);
 		KMTUnit unit = (KMTUnit) KermetaUnitFactory.getDefaultLoader().createKermetaUnit(fileURI.toString());
+		if ( unit.isType_checked() )
+			return unit;
+
 		if ( unit != null ) {
 			if ( content != null )	
 				unit.parseString(content);

@@ -66,7 +66,7 @@ public class KermetaWorkspace {
 	/**
 	 * 
 	 */
-	private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
+	//private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
 	
 	/**
 	 * To improve performances, we keep in memory the content of kmt file. It parses much faster.
@@ -237,7 +237,7 @@ public class KermetaWorkspace {
 	 */
 	private KermetaUnit findKermetaUnit (IFile file) {
 		KermetaUnit unit = units.get(file);
-		if ( unit == null ) {
+		/*if ( unit == null ) {
 			Iterator <KermetaUnit> itOnUnits = unitList.iterator();
 			while ( (unit == null) && itOnUnits.hasNext() ) {
 				KermetaUnit currentUnit = itOnUnits.next();
@@ -245,9 +245,40 @@ public class KermetaWorkspace {
 				if ( relativeFileName.equals ( getFile(file).getPath()) )
 					unit = currentUnit;
 			}
-		}
+		}*/
+		if ( unit == null )
+			unit = findKermetaUnit(file.getLocationURI().toString());
 		return unit;
 	}
+	
+	/**
+	 * 
+	 * @param fileURI
+	 * @return
+	 */
+	public KermetaUnit findKermetaUnit(String fileURI) {
+		for (KermetaUnit currentUnit : units.values()) {
+			KermetaUnit u = findKermetaUnit(currentUnit, fileURI);
+			if ( u != null )
+				return u;
+		}
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param root
+	 * @param unitToFind
+	 * @return
+	 */
+	private KermetaUnit findKermetaUnit(KermetaUnit root, String fileURI) {
+		for ( KermetaUnit currentUnit : root.importedUnits ) {
+			if ( currentUnit.getUri().equals(fileURI))
+				return currentUnit;
+		}
+		return null;
+	}
+	
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Accessors		//
@@ -345,13 +376,13 @@ public class KermetaWorkspace {
 	 * 
 	 * @param unit
 	 */
-	private void addUnits( KermetaUnit unit ) {
+	/*private void addUnits( KermetaUnit unit ) {
 		unitList.add(unit);
 		for (KermetaUnit currentUnit : unit.importedUnits) {
 			addUnits(currentUnit);
 			unitList.add(currentUnit);
 		}
-	}
+	}*/
 	
 	/**
 	 * This method is called when an object implementing KermetaUnitInterest interface is not interested
@@ -446,7 +477,7 @@ public class KermetaWorkspace {
 		
 		if ( units.size() == 0 ) {
 			units.put(file, unit);
-			addUnits(unit);
+			//addUnits(unit);
 			return;
 		}
 		

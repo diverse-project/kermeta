@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractExpression.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: AbstractExpression.java,v 1.2 2006-12-27 12:08:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -31,26 +31,26 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AbstractExpression extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Filter</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Filter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Filter</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Filter</em>' containment reference.
+	 * @return the value of the '<em>Filter</em>' reference.
 	 * @see #setFilter(Filter)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getAbstractExpression_Filter()
-	 * @model containment="true" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	Filter getFilter();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter <em>Filter</em>}' containment reference.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter <em>Filter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Filter</em>' containment reference.
+	 * @param value the new value of the '<em>Filter</em>' reference.
 	 * @see #getFilter()
 	 * @generated
 	 */

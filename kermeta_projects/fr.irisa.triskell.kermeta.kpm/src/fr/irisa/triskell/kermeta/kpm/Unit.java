@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
+ * $Id: Unit.java,v 1.7 2006-12-27 12:08:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getPath <em>Path</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
  * </ul>
@@ -105,22 +104,6 @@ public interface Unit extends AbstractUnit {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Dependents</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Unit}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dependents</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependents</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependents()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Unit"
-	 * @generated
-	 */
-	EList getDependents();
 
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' attribute.

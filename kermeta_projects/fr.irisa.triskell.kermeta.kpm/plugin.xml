@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.5 2006-12-20 10:47:53 ftanguy Exp $
+ $Id: plugin.xml,v 1.6 2006-12-27 12:08:51 ftanguy Exp $
 -->
 
 <plugin>
@@ -23,7 +23,7 @@
   <extension
         id="kermetaProjectBuilder"
         point="org.eclipse.core.resources.builders">
-     <builder>
+     <builder >
         <run class="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
      </builder>
   </extension>
@@ -35,7 +35,7 @@
            objectClass="org.eclipse.core.resources.IFolder">
         <action
               class="fr.irisa.triskell.kermeta.kpm.actions.popup.MakeAFolderAnSrcFolder"
-              icon="images/kermeta.png"
+              icon="images/kermeta_logo.gif"
               id="fr.irisa.triskell.kermeta.kpm.srcAction"
               label="Add / Remove src property"/>
      </objectContribution>
@@ -50,12 +50,38 @@
            objectClass="org.eclipse.core.resources.IFolder"/>
   </extension>
   <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="false"
+           id="fr.irisa.triskell.kermeta.kpm.kermetaProjectContribution"
+           objectClass="org.eclipse.core.resources.IProject">
+        <menu
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions"/>
+        <action
+              class="fr.irisa.triskell.kermeta.kpm.actions.popup.OpenKPMEditor"
+              icon="images/kermeta_logo.gif"
+              id="fr.irisa.triskell.kermeta.kpm.openKPMEditor"
+              label="Kermeta Project Settings"
+              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+     </objectContribution>
+  </extension>
+  <extension
+        id="runner.kermetanature"
+        name="Kermeta Nature"
+        point="org.eclipse.core.resources.natures">
+     <runtime>
+        <run class="fr.irisa.triskell.kermeta.kpm.workspace.KermetaNature"/>
+     </runtime>
+     <builder id="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
+  </extension>
+  <extension
         id="kermetaMarker"
         name="Kermeta Problem"
         point="org.eclipse.core.resources.markers">
      <persistent value="true"/>
      <super type="org.eclipse.core.resources.problemmarker"/>
   </extension>
-
 </plugin>
 

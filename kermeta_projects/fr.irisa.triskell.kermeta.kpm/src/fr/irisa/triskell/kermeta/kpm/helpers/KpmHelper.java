@@ -74,15 +74,15 @@ public class KpmHelper {
 		Action action = KpmFactory.eINSTANCE.createAction();
 		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.KMT2KM" );
 		kpm.getActions().add( action );
-	
+
+		// KMT2Ecore action
+		action = KpmFactory.eINSTANCE.createAction();
+		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.KMT2Ecore" );
+		kpm.getActions().add( action );
+		
 		// TypecheckKMTFile action
 		action = KpmFactory.eINSTANCE.createAction();
 		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT" );
-		kpm.getActions().add( action );
-		
-		// TypecheckKMFile action
-		action = KpmFactory.eINSTANCE.createAction();
-		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.TypecheckKMFile" );
 		kpm.getActions().add( action );
 	}
 

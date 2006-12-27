@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractExpressionImpl.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: AbstractExpressionImpl.java,v 1.2 2006-12-27 12:08:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -41,7 +41,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public abstract class AbstractExpressionImpl extends EObjectImpl implements AbstractExpression {
 	/**
-	 * The cached value of the '{@link #getFilter() <em>Filter</em>}' containment reference.
+	 * The cached value of the '{@link #getFilter() <em>Filter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFilter()
@@ -94,6 +94,14 @@ public abstract class AbstractExpressionImpl extends EObjectImpl implements Abst
 	 * @generated
 	 */
 	public Filter getFilter() {
+		if (filter != null && filter.eIsProxy()) {
+			InternalEObject oldFilter = (InternalEObject)filter;
+			filter = (Filter)eResolveProxy(oldFilter);
+			if (filter != oldFilter) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.ABSTRACT_EXPRESSION__FILTER, oldFilter, filter));
+			}
+		}
 		return filter;
 	}
 
@@ -102,14 +110,8 @@ public abstract class AbstractExpressionImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFilter(Filter newFilter, NotificationChain msgs) {
-		Filter oldFilter = filter;
-		filter = newFilter;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.ABSTRACT_EXPRESSION__FILTER, oldFilter, newFilter);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public Filter basicGetFilter() {
+		return filter;
 	}
 
 	/**
@@ -118,17 +120,10 @@ public abstract class AbstractExpressionImpl extends EObjectImpl implements Abst
 	 * @generated
 	 */
 	public void setFilter(Filter newFilter) {
-		if (newFilter != filter) {
-			NotificationChain msgs = null;
-			if (filter != null)
-				msgs = ((InternalEObject)filter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.ABSTRACT_EXPRESSION__FILTER, null, msgs);
-			if (newFilter != null)
-				msgs = ((InternalEObject)newFilter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - KpmPackage.ABSTRACT_EXPRESSION__FILTER, null, msgs);
-			msgs = basicSetFilter(newFilter, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.ABSTRACT_EXPRESSION__FILTER, newFilter, newFilter));
+		Filter oldFilter = filter;
+		filter = newFilter;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.ABSTRACT_EXPRESSION__FILTER, oldFilter, filter));
 	}
 
 	/**
@@ -186,23 +181,11 @@ public abstract class AbstractExpressionImpl extends EObjectImpl implements Abst
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case KpmPackage.ABSTRACT_EXPRESSION__FILTER:
-				return basicSetFilter(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case KpmPackage.ABSTRACT_EXPRESSION__FILTER:
-				return getFilter();
+				if (resolve) return getFilter();
+				return basicGetFilter();
 			case KpmPackage.ABSTRACT_EXPRESSION__ID:
 				return getId();
 		}

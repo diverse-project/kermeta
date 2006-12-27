@@ -25,6 +25,7 @@ import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 //import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaNature;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 public class IResourceHelper {
@@ -90,7 +91,7 @@ public class IResourceHelper {
 		// To get the project description, it must be opened
 		if ( ! project.isOpen() ) 
 			return false;
-		return project.getDescription().hasNature("fr.irisa.triskell.kermeta.runner.kermetanature");
+		return project.getDescription().hasNature( KermetaNature.NATURE_ID );
 	}
 	
 	//////////////////////////////////
@@ -153,7 +154,7 @@ public class IResourceHelper {
 	//		Builder Mechanism		//
 	//////////////////////////////////
 	//////////////////////////////////
-	static private String builderID = "fr.irisa.triskell.kermeta.kpm.kermetaProjectBuilder";
+	static final public String builderID = "fr.irisa.triskell.kermeta.kpm.kermetaProjectBuilder";
 	
 	/**
 	 * Attach a builder to a KermetaProject. The builder will be instantiate
@@ -165,23 +166,36 @@ public class IResourceHelper {
 	 * @see org.eclipse.core.resources.IProjectDescription
 	 */
 	static public void attachBuilderToKermetaProject(String builderID, IProject project) throws CoreException {
+		
 		IProjectDescription description = project.getDescription();
-		ICommand command = description.newCommand();
 		
-		// preparing arguments for the builder.
-		// We put the KPM object so that the builder can use it
-		// to apply dependencies. This is EXTREMLY important.
-		Hashtable args = new Hashtable ();
-		args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
+		/*ICommand[] buildSpecs = description.getBuildSpec();
 		
-		command.setArguments(args);
-		command.setBuilderName(builderID);
-		// We consider only one builder for the moment.
-		// Then we erase the others.
-		ICommand[] newCommands = new ICommand[1];
-		newCommands[0] = command;
-		description.setBuildSpec(newCommands);
-		project.setDescription(description, null);		
+		boolean found = false;
+		int index = 0;
+		while ( (index < buildSpecs.length) && ! found ) {
+			if ( buildSpecs[index].getBuilderName().equals(builderID) )
+				found = true;
+			index++;
+		}
+		
+		if ( ! found ) {*/
+			ICommand command = description.newCommand();
+			// preparing arguments for the builder.
+			// We put the KPM object so that the builder can use it
+			// to apply dependencies. This is EXTREMLY important.
+			Hashtable args = new Hashtable ();
+			args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
+		
+			command.setArguments(args);
+			command.setBuilderName(builderID);
+			// We consider only one builder for the moment.
+			// Then we erase the others.
+			ICommand[] newCommands = new ICommand[1];
+			newCommands[0] = command;
+			description.setBuildSpec(newCommands);
+			project.setDescription(description, null);		
+		//}
 	}
 
 	static public void attachDefaultBuilderToKermetaProject(IProject project) throws CoreException {

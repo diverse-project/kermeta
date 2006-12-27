@@ -74,6 +74,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			
 		case IResource.PROJECT :
 			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) { 
+				IResourceHelper.attachDefaultBuilderToKermetaProject( (IProject) resource );
 				//kpm.createProjectIfNecessary( (IProject) resource );
 			} else mustContinue = false;
 			break;
@@ -147,6 +148,13 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			break;
 			
 		case IResource.PROJECT :
+			
+			if ( delta.getFlags() == IResourceDelta.OPEN ) {
+				if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
+					IResourceHelper.attachDefaultBuilderToKermetaProject( (IProject) resource );
+				}
+			}
+			
 			Project project = kpm.findProject( (IProject) resource );
 			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
 				if ( project != null )

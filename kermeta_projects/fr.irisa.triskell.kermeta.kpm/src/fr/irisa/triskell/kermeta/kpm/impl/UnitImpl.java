@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.6 2006-12-12 16:55:01 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.7 2006-12-27 12:08:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -47,7 +47,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependencies <em>Dependencies</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getName <em>Name</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependents <em>Dependents</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getPath <em>Path</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getLastTimeModified <em>Last Time Modified</em>}</li>
  * </ul>
@@ -85,16 +84,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDependents() <em>Dependents</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDependents()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList dependents = null;
 
 	/**
 	 * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
@@ -226,18 +215,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.UNIT__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList getDependents() {
-		if (dependents == null) {
-			dependents = new EObjectResolvingEList(Unit.class, this, KpmPackage.UNIT__DEPENDENTS);
-		}
-		return dependents;
 	}
 
 	/**
@@ -417,8 +394,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 				return getKpm();
 			case KpmPackage.UNIT__NAME:
 				return getName();
-			case KpmPackage.UNIT__DEPENDENTS:
-				return getDependents();
 			case KpmPackage.UNIT__PATH:
 				return getPath();
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:
@@ -443,10 +418,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 				return;
 			case KpmPackage.UNIT__NAME:
 				setName((String)newValue);
-				return;
-			case KpmPackage.UNIT__DEPENDENTS:
-				getDependents().clear();
-				getDependents().addAll((Collection)newValue);
 				return;
 			case KpmPackage.UNIT__PATH:
 				setPath((String)newValue);
@@ -474,9 +445,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 			case KpmPackage.UNIT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case KpmPackage.UNIT__DEPENDENTS:
-				getDependents().clear();
-				return;
 			case KpmPackage.UNIT__PATH:
 				setPath(PATH_EDEFAULT);
 				return;
@@ -500,8 +468,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 				return getKpm() != null;
 			case KpmPackage.UNIT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case KpmPackage.UNIT__DEPENDENTS:
-				return dependents != null && !dependents.isEmpty();
 			case KpmPackage.UNIT__PATH:
 				return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
 			case KpmPackage.UNIT__LAST_TIME_MODIFIED:

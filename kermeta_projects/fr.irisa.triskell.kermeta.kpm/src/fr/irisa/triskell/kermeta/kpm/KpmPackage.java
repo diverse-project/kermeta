@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.5 2006-12-12 16:55:01 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.6 2006-12-27 12:08:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -451,22 +451,13 @@ public interface KpmPackage extends EPackage {
 	int UNIT__NAME = ABSTRACT_UNIT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Dependents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT__DEPENDENTS = ABSTRACT_UNIT_FEATURE_COUNT + 3;
-
-	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__PATH = ABSTRACT_UNIT_FEATURE_COUNT + 4;
+	int UNIT__PATH = ABSTRACT_UNIT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
@@ -475,7 +466,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__LAST_TIME_MODIFIED = ABSTRACT_UNIT_FEATURE_COUNT + 5;
+	int UNIT__LAST_TIME_MODIFIED = ABSTRACT_UNIT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Unit</em>' class.
@@ -484,7 +475,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT_FEATURE_COUNT = ABSTRACT_UNIT_FEATURE_COUNT + 6;
+	int UNIT_FEATURE_COUNT = ABSTRACT_UNIT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FileImpl <em>File</em>}' class.
@@ -531,16 +522,6 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int FILE__NAME = UNIT__NAME;
-
-
-	/**
-	 * The feature id for the '<em><b>Dependents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__DEPENDENTS = UNIT__DEPENDENTS;
 
 
 	/**
@@ -624,15 +605,6 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int DIRECTORY__NAME = FILE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Dependents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__DEPENDENTS = FILE__DEPENDENTS;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -724,15 +696,6 @@ public interface KpmPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROJECT__NAME = UNIT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Dependents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__DEPENDENTS = UNIT__DEPENDENTS;
 
 	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -882,7 +845,7 @@ public interface KpmPackage extends EPackage {
 	int ABSTRACT_EXPRESSION = 17;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Filter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -929,7 +892,7 @@ public interface KpmPackage extends EPackage {
 	int AND = 18;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Filter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -966,7 +929,7 @@ public interface KpmPackage extends EPackage {
 	int OR = 19;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Filter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -993,7 +956,7 @@ public interface KpmPackage extends EPackage {
 	int OR_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Filter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1039,7 +1002,7 @@ public interface KpmPackage extends EPackage {
 	int SUITED_EXPRESSION = 21;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Filter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1488,17 +1451,6 @@ public interface KpmPackage extends EPackage {
 	EAttribute getUnit_Name();
 
 	/**
-	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dependents</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getDependents()
-	 * @see #getUnit()
-	 * @generated
-	 */
-	EReference getUnit_Dependents();
-
-	/**
 	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getPath <em>Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1680,10 +1632,10 @@ public interface KpmPackage extends EPackage {
 	EClass getAbstractExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter <em>Filter</em>}'.
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter <em>Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Filter</em>'.
+	 * @return the meta object for the reference '<em>Filter</em>'.
 	 * @see fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter()
 	 * @see #getAbstractExpression()
 	 * @generated
@@ -2107,14 +2059,6 @@ public interface KpmPackage extends EPackage {
 		EAttribute UNIT__NAME = eINSTANCE.getUnit_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Dependents</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UNIT__DEPENDENTS = eINSTANCE.getUnit_Dependents();
-
-		/**
 		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2263,7 +2207,7 @@ public interface KpmPackage extends EPackage {
 		EClass ABSTRACT_EXPRESSION = eINSTANCE.getAbstractExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Filter</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Filter</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
