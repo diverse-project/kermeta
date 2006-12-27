@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.9 2006-04-08 13:32:03 dvojtise Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.10 2006-12-27 14:38:41 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -52,7 +52,7 @@ import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 public class KermetaNewFileWizard extends  Wizard implements INewWizard {
     // TODO : move it in preference constants //
-    public final static String STD_TAB = "    ";
+    public final static String STD_TAB = "\t";
 
     public final static String STD_NL = "\r\n";
     
@@ -151,8 +151,6 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	        return false;
 	    }
 	    
-
-	    
 		return true;
 	}
 	
@@ -161,14 +159,7 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	 * file if missing or just replace its contents, and open
 	 * the editor on the newly created file.
 	 */
-
-	private void doFinish(
-		IPath containerPath,
-		String fileName,
-		IProgressMonitor monitor)
-		throws CoreException
-		
-	{
+	private void doFinish( IPath containerPath, String fileName, IProgressMonitor monitor) throws CoreException {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
@@ -260,24 +251,6 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		monitor.worked(1);
 	}
 	
-	
-	
-	
-	
-	/** Open the page */
-	private void _openPage(IWorkbench workbench)
-	{  
-	    IPerspectiveDescriptor pDesc = PlatformUI.getWorkbench().getPerspectiveRegistry().findPerspectiveWithId("kermetaPerspective");
-            try {
-            // FIXME : do not hardcode the strings
-   // page.setPerspective(pDesc);
-            workbench.openWorkbenchWindow("kermetaPerspective", ResourcesPlugin.getWorkspace());
-        } catch (WorkbenchException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-	}
-
 
 	/***
 	 * Create the template file according to the default
@@ -290,7 +263,7 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		Date d = new Date(System.currentTimeMillis());
 		
 	    String template_string = 
-	    	"/* $Id: KermetaNewFileWizard.java,v 1.9 2006-04-08 13:32:03 dvojtise Exp $\n"+ 
+	    	"/* $Id: KermetaNewFileWizard.java,v 1.10 2006-12-27 14:38:41 ftanguy Exp $\n"+ 
 	    	" * Creation date: " + DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(d)+ "\n"+
 	    	" * License:\n"+
 	    	" * Copyright:\n"+
@@ -309,10 +282,10 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	    return template_string;
 	}
 	
+	
 	/**
 	 * We will initialize file contents with a sample text.
 	 */
-
 	private InputStream openContentStream() {
 	    
 		String contents = createTemplate();
