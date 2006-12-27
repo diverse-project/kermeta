@@ -116,7 +116,7 @@
     <launchConfigurationType
           delegate="fr.irisa.triskell.kermeta.runner.launching.ConstraintLaunchConfiguration"
           id="ConstraintLaunchConfiguration"
-          modes="run"
+          modes="run, debug"
           name="Kermeta Constraint Application"
           public="true"
           sourceLocatorId="kermetaSourceLocator"/>
@@ -235,7 +235,30 @@
                </with>
             </enablement>
             </contextualLaunch>
-         </shortcut> 
+         </shortcut>
+         <shortcut
+               class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchShortcut"
+               icon="icons/kermeta_logo.gif"
+               id="fr.irisa.triskell.kermeta.runner.debugkermetashortcut"
+               label="Debug Kermeta App"
+               modes="debug">
+            <contextualLaunch>
+               <contextLabel
+                     label="Debug Kermeta App"
+                     mode="debug"/>
+               <enablement>
+                  <count value="1"/>
+                  <iterate operator="or">
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.kmt"/>
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.km"/>
+                  </iterate>
+               </enablement>
+            </contextualLaunch>
+         </shortcut>
       </extension>
       <extension
             point="org.eclipse.ui.newWizards">
