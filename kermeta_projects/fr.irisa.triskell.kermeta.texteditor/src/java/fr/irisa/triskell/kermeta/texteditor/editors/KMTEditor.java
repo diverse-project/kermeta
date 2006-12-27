@@ -196,14 +196,6 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	//////////////////////////////////
 	//////////////////////////////////
 	
-	
-	/*public void doSave(IProgressMonitor progressMonitor) {
-	if ( getKPMFile() != null )
-		getKPMFile().changed();
-	super.doSave(progressMonitor);	
-	//System.out.println("|************ " + getKPMFile().getRelativeName() + " has been saved. ************|");
-}*/
-	
 	public void updateKermetaUnit(KermetaUnit unit) {
 		setMcunit( (KMTUnit) unit);
 	}
@@ -218,30 +210,15 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
 		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getSourceViewer().getDocument().get() );
-		//try {
-			//if ( IResourceHelper.isNatureKermeta( getFile().getProject() ) )
-				KermetaWorkspace.getInstance().updateFile( getFile() );
-		//} catch (CoreException exception) {
-		//	exception.printStackTrace();
-		//}
+		KermetaWorkspace.getInstance().updateFile( getFile() );
 		super.performSave(overwrite, progressMonitor);
 	}
 	
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
-
 		final KMTEditor editor = this;
-
-			Runnable r = new Runnable() {
-				public void run() {
-						KermetaWorkspace.getInstance().declareInterestThreading(editor, getFile());
-
-				}
-			};
-			Thread thread = new Thread(r);
-			thread.start();
-		//}
+		KermetaWorkspace.getInstance().declareInterestThreading(editor, getFile());
 	}
 	
 }
