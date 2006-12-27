@@ -225,28 +225,6 @@
        /> 
   </extension>
    <extension
-         id="kermetaProjectBuilder"
-         name="Kermeta Project Builder"
-         point="org.eclipse.core.resources.builders">
-      <builder
-            hasNature="true">
-         <run class="fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder">
-            <parameter
-                  name="optimize"
-                  value="true"/>
-         </run>
-      </builder>
-   </extension>
-   <extension
-         id="runner.kermetanature"
-         name="Kermeta Nature"
-         point="org.eclipse.core.resources.natures">
-      <runtime>
-         <run class="fr.irisa.triskell.kermeta.builders.KermetaNature"/>
-      </runtime>
-      <builder id="fr.irisa.triskell.kermeta.kermetaProjectBuilder"/>
-   </extension>
-   <extension
          id="kermetaProblem"
          name="KermetaL Problem"
          point="org.eclipse.core.resources.markers">
