@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.15 2006-10-30 16:12:37 cfaucher Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.16 2006-12-27 12:18:02 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.KermetaMessages;
 
@@ -229,7 +230,10 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	 */
 	private void launchSelectedFile(IFile ifile, String mode) {
 		// Parse the file
-		KermetaUnit unit = KermetaRunHelper.parse(ifile);
+	//	KermetaUnit unit = KermetaRunHelper.parse(ifile);
+		
+		KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit(ifile);
+		
 		try {
 			// Get the @mainClass and @mainOperation tags (if they exist)
 			ArrayList point = KermetaRunHelper.findEntryPoint(unit);

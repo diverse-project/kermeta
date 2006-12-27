@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.7 2006-04-26 12:24:43 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.8 2006-12-27 12:18:02 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.runner.wizards;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Hashtable;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
@@ -35,6 +36,9 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder;
+import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaNature;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 /**
@@ -79,11 +83,16 @@ public class CreateKermetaProjectWizard extends Wizard {
         IWorkspace workspace = ResourcesPlugin.getWorkspace();
         final IProjectDescription description = workspace.newProjectDescription(newProjectHandle.getName());
         description.setLocation(newPath);
-        description.setNatureIds(new String[] {"fr.irisa.triskell.kermeta.runner.kermetanature"});
+        description.setNatureIds(new String[] { KermetaNature.NATURE_ID });
         // Set the command for project auto build
 		ICommand[] newCommands = new ICommand[1];
 		ICommand command = description.newCommand();
-		command.setBuilderName(KermetaProjectBuilder.BUILDER_ID);
+		//command.setBuilderName(KermetaProjectBuilder.BUILDER_ID);
+		Hashtable args = new Hashtable ();
+		args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
+	
+		command.setArguments(args);
+		command.setBuilderName(IResourceHelper.builderID);
 		newCommands[0] = command;
 		description.setBuildSpec(newCommands);
         
