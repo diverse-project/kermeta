@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.7 2006-08-21 08:56:01 zdrey Exp $
+/* $Id: String.java,v 1.8 2007-01-03 16:01:42 dtouzet Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -94,6 +94,15 @@ public class String {
 	public static RuntimeObject size(RuntimeObject self) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).length());
+		return result;
+	}
+	
+	/** Implementation of method replace called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::replace(str1, str2)
+	 */
+	public static RuntimeObject replace(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+		setValue(result, getValue(self).replace(getValue(param0), getValue(param1)));
 		return result;
 	}
 

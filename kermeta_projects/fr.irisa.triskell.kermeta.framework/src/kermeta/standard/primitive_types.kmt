@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.25 2006-10-13 11:12:16 ftanguy Exp $
+// $Id: primitive_types.kmt,v 1.26 2007-01-03 16:02:44 dtouzet Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -531,6 +531,10 @@ class String inherits ValueType, Comparable
 	
 	method toString() : String is do
 		result := self
+	end
+	
+	operation replace(str1 : String, str2 : String) : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.replace(self, str1, str2)
 	end
 }
 
