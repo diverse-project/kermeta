@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.helpers.StringHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 

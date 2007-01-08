@@ -1,37 +1,26 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Path;
-
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.KPM;
-import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.Unit;
-//import fr.irisa.triskell.kermeta.kpm.resources.KermetaSimpleChangeListener;
-import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
 import fr.irisa.triskell.kermeta.kpm.helpers.*;
 import fr.irisa.triskell.kermeta.kpm.File;
-//import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
-//import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-//import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * 
- * @author François Tanguy
+ * Kermeta Workspace is a singleton object which aim is to provide powerfull interfile dependencies mechanisms. 
+ * 
+ * 
+ * @author FranÁois Tanguy
  *
  */
 public class KermetaWorkspace {
@@ -48,7 +37,7 @@ public class KermetaWorkspace {
 	/**
 	 * This attribute is the location of the Kermeta Project Manager's save.
 	 */
-	static final private String relativeKpmFileName = "/kpm.xmi";
+	static final private String relativeKpmFileName = "/.metadata/.plugins/kpm.xmi";
 	
 	/**
 	 * This table keeps a trace of Object interested in a KermetaUnit of a File.
@@ -64,28 +53,34 @@ public class KermetaWorkspace {
 	private Hashtable <IFile, KermetaUnit> units = new Hashtable <IFile, KermetaUnit> ();
 	
 	/**
-	 * 
-	 */
-	//private ArrayList <KermetaUnit> unitList = new ArrayList<KermetaUnit> ();
-	
-	/**
-	 * To improve performances, we keep in memory the content of kmt file. It parses much faster.
+	 * When working with textual editor, it is more efficient to get the file content directly from the Eclipse editor
+	 * instead of opening the file and reading its content. Then to improve performances, we keep in memory 
+	 * the content of kmt file. It parses much faster.
 	 */
 	private Hashtable <String, String> kmtUnitsContent = new Hashtable <String, String> ();
 	
 	/**
-	 * 
+	 * Retrieve the content for the given file.
 	 * @param unitURI
-	 * @return
+	 * @return The string content or null if there is none.
 	 */
 	public String getContent(String unitURI) {
 		return kmtUnitsContent.get(unitURI);
 	}
 	
+	/**
+	 * Set the string content for the given file. 
+	 * @param unitURI
+	 * @param content
+	 */
 	public void setContent(String unitURI, String content) {
 		kmtUnitsContent.put(unitURI, content);
 	}
 	
+	/**
+	 * Remove the string content for the given file.
+	 * @param unitURI
+	 */
 	public void removeContent(String unitURI) {
 		kmtUnitsContent.remove(unitURI);
 	}
@@ -93,8 +88,9 @@ public class KermetaWorkspace {
 	//////////////////////////
 	//////////////////////////
 	//		Constructor		//
-	//////////////////////////
-	//////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////
+	// This code section contains the constructor and all the initialization methods. //
+	////////////////////////////////////////////////////////////////////////////////////
 	private KermetaWorkspace() {
 		super();
 	}
@@ -104,6 +100,10 @@ public class KermetaWorkspace {
 	 */
 	static private KermetaWorkspace instance = null;
 	
+	/**
+	 * Get the only Kermeta Workspace instance.
+	 * @return
+	 */
 	static public KermetaWorkspace getInstance() {
 		if ( instance == null ) {
 			instance = new KermetaWorkspace();
@@ -146,6 +146,7 @@ public class KermetaWorkspace {
 	 * If yes, create a KermetaProject.
 	 *
 	 */
+	// TODO check if projects already have a KermetaBuilder
 	private void initializeProjects() throws CoreException {
 		IProject[] projects = IResourceHelper.getProjects();
 		for ( int index = 0; index < projects.length; index++ ) {
@@ -171,6 +172,10 @@ public class KermetaWorkspace {
 	 */
 	private boolean doIHaveAKPMFile() {
 		return new java.io.File( getAbsoluteKPMFileName() ).exists();
+	}
+	
+	private boolean doesKermetaUnitCorrespondToFile(KermetaUnit unit, String fileURI) {
+		return unit.getUri().equals(fileURI);
 	}
 	//////////////////////////////
 	//////////////////////////////
@@ -237,27 +242,21 @@ public class KermetaWorkspace {
 	 */
 	private KermetaUnit findKermetaUnit (IFile file) {
 		KermetaUnit unit = units.get(file);
-		/*if ( unit == null ) {
-			Iterator <KermetaUnit> itOnUnits = unitList.iterator();
-			while ( (unit == null) && itOnUnits.hasNext() ) {
-				KermetaUnit currentUnit = itOnUnits.next();
-				String relativeFileName = StringHelper.getRelativeName(currentUnit.getUri());
-				if ( relativeFileName.equals ( getFile(file).getPath()) )
-					unit = currentUnit;
-			}
-		}*/
 		if ( unit == null )
 			unit = findKermetaUnit(file.getLocationURI().toString());
 		return unit;
 	}
 	
 	/**
-	 * 
+	 * Search for the KermetaUnit corresponding to the given file.
 	 * @param fileURI
-	 * @return
+	 * @return Returns null if no Kermeta Unit has been found for the given file or the corresponding Kermeta Unit.
 	 */
 	public KermetaUnit findKermetaUnit(String fileURI) {
+		// loop through all the units
 		for (KermetaUnit currentUnit : units.values()) {
+			if ( doesKermetaUnitCorrespondToFile(currentUnit, fileURI) )
+				return currentUnit;
 			KermetaUnit u = findKermetaUnit(currentUnit, fileURI);
 			if ( u != null )
 				return u;
@@ -266,14 +265,15 @@ public class KermetaWorkspace {
 	}
 	
 	/**
-	 * 
+	 * Given a Kermeta Unit, this method searches in the imported units if one of them
+	 * corresponds to the given file URI.
 	 * @param root
 	 * @param unitToFind
-	 * @return
+	 * @return It returns the Kermeta Unit if an imported unit corresponds to the given file or null if not.
 	 */
 	private KermetaUnit findKermetaUnit(KermetaUnit root, String fileURI) {
 		for ( KermetaUnit currentUnit : root.importedUnits ) {
-			if ( currentUnit.getUri().equals(fileURI))
+			if ( doesKermetaUnitCorrespondToFile(currentUnit, fileURI) )
 				return currentUnit;
 		}
 		return null;
@@ -298,8 +298,8 @@ public class KermetaWorkspace {
 	public void save() {
 		try {
 			XMIHelper.save(getAbsoluteKPMFileName(), kpm);
-		} catch (java.io.IOException e) {
-			System.out.println(e.getMessage());
+		} catch (IOException exception) {
+			exception.printStackTrace();
 		}
 	}
 	
@@ -311,8 +311,8 @@ public class KermetaWorkspace {
 	private void load() {
 		try {
 			kpm = (KPM) XMIHelper.load(getAbsoluteKPMFileName());
-		} catch (java.io.IOException exception) {
-			System.out.println(exception.getMessage());
+		} catch (IOException exception) {
+			exception.printStackTrace();
 		}
 	}
 	//////////////////////////////////
@@ -330,6 +330,12 @@ public class KermetaWorkspace {
 	//////////////////////////////////
 	//////////////////////////////////
 	/**
+	 * Declare an interest for a file by launching a thread to improve performances.
+	 */
+	/* This may be a hack.
+	 * 
+	 * For the moment it is used when two editors are opened in a closed time. As a Kermeta Unit takes a 
+	 * huge amount of memory space, only the last interest (the displayed one) is important. The others are cut down.
 	 * 
 	 */
 	public void declareInterestThreading( final KermetaUnitInterest o, final IFile file ) {
@@ -373,18 +379,6 @@ public class KermetaWorkspace {
 	}
 	
 	/**
-	 * 
-	 * @param unit
-	 */
-	/*private void addUnits( KermetaUnit unit ) {
-		unitList.add(unit);
-		for (KermetaUnit currentUnit : unit.importedUnits) {
-			addUnits(currentUnit);
-			unitList.add(currentUnit);
-		}
-	}*/
-	
-	/**
 	 * This method is called when an object implementing KermetaUnitInterest interface is not interested
 	 * anymore in the given file. First the object is unregistered. Then the method takes a look at the number 
 	 * of interest for the file. If the number is greater than 0 no action is performed, otherwise the KermetaUnit
@@ -416,12 +410,12 @@ public class KermetaWorkspace {
 	 * Kermeta Unit should be updated. 
 	 * @param file
 	 */
-	private void notifyInterestedObjects(File file) {
+	/*private void notifyInterestedObjects(File file) {
 		for (KermetaUnitInterest o : interestedObjects.keySet() ) {
 			if ( interestedObjects.get(o) == file )
 				o.updateKermetaUnit(units.get(file));
 		}
-	}
+	}*/
 	
 	/**
 	 * 
@@ -429,7 +423,7 @@ public class KermetaWorkspace {
 	 * @return true or false wether an object is interested in the given file.
 	 */
 	public boolean isAnObjectInterestedInFile (File file) {
-		return interestedObjects.contains( IResourceHelper.getIFile(file) );
+		return isAnObjectInterestedInFile( getIFile(file) );
 	}
 	
 	/**
@@ -456,7 +450,7 @@ public class KermetaWorkspace {
 	 * @param file
 	 */
 	public void updateFile(File file) {
-		updateFile( IResourceHelper.getIFile(file) );
+		updateFile( getIFile(file) );
 	}
 	
 	/**
@@ -465,7 +459,7 @@ public class KermetaWorkspace {
 	 * @param unit
 	 */
 	public void updateKermetaUnit(File file, KermetaUnit unit) {
-		updateKermetaUnit( IResourceHelper.getIFile(file), unit);
+		updateKermetaUnit( getIFile(file), unit);
 	}
 	
 	/**
@@ -517,9 +511,10 @@ public class KermetaWorkspace {
 
 	//////////////////////////////////
 	//////////////////////////////////
-	//		Extern Accessors		//
-	//////////////////////////////////
-	//////////////////////////////////
+	//		Basics Accessors		//
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Kermeta Workspace also provides some nice and usefull accessors to easily retrieve IResource or unit . //
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * 
 	 * @param fileName
@@ -620,26 +615,9 @@ public class KermetaWorkspace {
 	public Project getProject(String projectName) {
 		return kpm.findProject(projectName);
 	}
-	
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public IWorkspace workspace() {
-		return IResourceHelper.workspace;
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public IWorkspaceRoot workspaceRoot() {
-		return IResourceHelper.root;
-	}
 	//////////////////////////////////////
 	//////////////////////////////////////
-	//		End of Extern Accessors		//
+	//		End of Basics Accessors		//
 	//////////////////////////////////////
 	//////////////////////////////////////
 

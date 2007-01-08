@@ -1,7 +1,5 @@
 package fr.irisa.triskell.kermeta.kpm.helpers;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
@@ -20,17 +18,31 @@ import org.eclipse.core.runtime.Path;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
-import fr.irisa.triskell.kermeta.kpm.KPM;
-import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-//import fr.irisa.triskell.kermeta.kpm.builder.KermetaChangeListener;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaNature;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
+/**
+ * 
+ * This class should be accessed in a static way. It provides some usefull accessors
+ * regarding the eclipse filesystem especially the IResource system.
+ * 
+ * Providing a high abstraction makes the code of the project much more cleaner.
+ * 
+ * @author ftanguy
+ *
+ */
 public class IResourceHelper {
 
+	/**
+	 * The eclipse workspace.
+	 */
 	static final public IWorkspace workspace = ResourcesPlugin.getWorkspace();
+	
+	/**
+	 * The eclipse root (in fact the workspace root).
+	 */
 	static final public IWorkspaceRoot root = workspace.getRoot();
 	
 	//////////////////////////
@@ -38,6 +50,9 @@ public class IResourceHelper {
 	//		Accessors		//
 	//////////////////////////
 	//////////////////////////
+	/**
+	 * Get the eclipse root path. It means the absolute workspace path.
+	 */
 	static public String getAbsolutePath() {
 		return root.getLocation().toString();
 	}
@@ -52,33 +67,71 @@ public class IResourceHelper {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @param relativeName
+	 * @return
+	 */
 	static public IResource getIResource (String relativeName) {
 		Path path = new Path(relativeName);
 		IResource result = root.getFile(path);
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param file
+	 * @return
+	 */
 	static public IFile getIFile (File file) {
-		Path path = new Path(file.getPath());
-		return root.getFile(path);
+		return getIFile( file.getPath() );
 	}
 
+	/**
+	 * 
+	 * @param relativeName
+	 * @return
+	 */
 	static public IFile getIFile (String relativeName) {
 		Path path = new Path( relativeName );
 		return root.getFile(path);
 	}
 	
+	/**
+	 * 
+	 * @param fileName
+	 * @param filePath
+	 * @return
+	 */
 	static public IFile getIFile (String fileName, String filePath) {
 		return getIFile( filePath + "/" + fileName );
 	}
 	
+	/**
+	 * 
+	 * @param directory
+	 * @return
+	 */
 	static public IFolder getIFolder (Directory directory) {
 		Path path = new Path(directory.getPath());
 		return root.getFolder(path);
 	}
 	
+	/**
+	 * 
+	 * @param project
+	 * @return
+	 */
 	static public IProject getIProject (Project project) {
 		return root.getProject(project.getName());
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	static public IProject[] getProjects() {
+		return root.getProjects();
 	}
 	//////////////////////////////////
 	//////////////////////////////////	
@@ -87,6 +140,11 @@ public class IResourceHelper {
 	//////////////////////////////////
 	
 	
+	//////////////////////
+	//////////////////////
+	//		Testing		//
+	//////////////////////
+	//////////////////////
 	static public boolean isNatureKermeta(IProject project) throws CoreException {
 		// To get the project description, it must be opened
 		if ( ! project.isOpen() ) 
@@ -94,18 +152,27 @@ public class IResourceHelper {
 		return project.getDescription().hasNature( KermetaNature.NATURE_ID );
 	}
 	
+	static public boolean couldFileBeTypechecked(IFile file) {
+		boolean result = false;
+		String extension = file.getFileExtension();
+		if ( extension.equals("km") )
+			result = true;
+		else if ( extension.equals("kmt") )
+			result = true;
+		return result;
+	}
+	//////////////////////////////
+	//////////////////////////////
+	//		End of testing		//
+	//////////////////////////////
+	//////////////////////////////
+	
 	//////////////////////////////////
 	//////////////////////////////////
 	//		Workspace Mechanism		//
 	//////////////////////////////////
 	//////////////////////////////////
-	/**
-	 * 
-	 * @return
-	 */
-	static public IProject[] getProjects() {
-		return root.getProjects();
-	}
+
 	
 	/**
 	 * 
@@ -120,17 +187,6 @@ public class IResourceHelper {
 				kermetaProjects.add(projects[i]);
 		}
 		return kermetaProjects;
-	}
-	
-	/**
-	 * Touching the workspace makes every projects be sent a change event.
-	 * @throws CoreException
-	 */
-	static public void touchWorkspace() throws CoreException {
-		Set<IProject> kermetaProjects = getKermetaProjects();
-		for ( IProject project : kermetaProjects ) {
-			project.touch(null);
-		}
 	}
 	
 	/**
@@ -168,34 +224,21 @@ public class IResourceHelper {
 	static public void attachBuilderToKermetaProject(String builderID, IProject project) throws CoreException {
 		
 		IProjectDescription description = project.getDescription();
+		ICommand command = description.newCommand();
+		// preparing arguments for the builder.
+		// We put the KPM object so that the builder can use it
+		// to apply dependencies. This is EXTREMLY important.
+		Hashtable <Object, Object> args = new Hashtable <Object, Object> ();
+		args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
 		
-		/*ICommand[] buildSpecs = description.getBuildSpec();
-		
-		boolean found = false;
-		int index = 0;
-		while ( (index < buildSpecs.length) && ! found ) {
-			if ( buildSpecs[index].getBuilderName().equals(builderID) )
-				found = true;
-			index++;
-		}
-		
-		if ( ! found ) {*/
-			ICommand command = description.newCommand();
-			// preparing arguments for the builder.
-			// We put the KPM object so that the builder can use it
-			// to apply dependencies. This is EXTREMLY important.
-			Hashtable args = new Hashtable ();
-			args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
-		
-			command.setArguments(args);
-			command.setBuilderName(builderID);
-			// We consider only one builder for the moment.
-			// Then we erase the others.
-			ICommand[] newCommands = new ICommand[1];
-			newCommands[0] = command;
-			description.setBuildSpec(newCommands);
-			project.setDescription(description, null);		
-		//}
+		command.setArguments(args);
+		command.setBuilderName(builderID);
+		// We consider only one builder for the moment.
+		// Then we erase the others.
+		ICommand[] newCommands = new ICommand[1];
+		newCommands[0] = command;
+		description.setBuildSpec(newCommands);
+		project.setDescription(description, null);		
 	}
 
 	static public void attachDefaultBuilderToKermetaProject(IProject project) throws CoreException {
@@ -206,33 +249,6 @@ public class IResourceHelper {
 	//		End of Builder Mechanism		//
 	//////////////////////////////////////////
 	//////////////////////////////////////////
-	
-	
-	
-	
-	//////////////////////
-	//////////////////////
-	//		Testing		//
-	//////////////////////
-	//////////////////////
-	static public boolean couldFileBeTypechecked(IFile file) {
-		
-		boolean result = false;
-		
-		String extension = file.getFileExtension();
-		
-		if ( extension.equals("km") )
-			result = true;
-		else if ( extension.equals("kmt") )
-			result = true;
-		
-		return result;
-		
-	}
-	//////////////////////////////
-	//////////////////////////////
-	//		End of Testing		//
-	//////////////////////////////
-	//////////////////////////////
+
 	
 }

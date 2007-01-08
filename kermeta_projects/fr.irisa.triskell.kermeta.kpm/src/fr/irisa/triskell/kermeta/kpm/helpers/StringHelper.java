@@ -4,11 +4,7 @@ import java.net.URISyntaxException;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.filesystem.URIUtil;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 

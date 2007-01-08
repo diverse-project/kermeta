@@ -4,23 +4,18 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IDecoration;
-import org.eclipse.jface.viewers.ILabelDecorator;
-import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ILightweightLabelDecorator;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IDecoratorManager;
 
-import java.net.URI;
-
 import fr.irisa.triskell.kermeta.KermetaConstants;
+import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 public class SrcFolderDecorator extends LabelProvider implements ILightweightLabelDecorator {
 
@@ -31,7 +26,7 @@ public class SrcFolderDecorator extends LabelProvider implements ILightweightLab
 	
 			Directory directory = KermetaWorkspace.getInstance().getDirectory( (IFolder) element );
 			if ( directory != null ) {
-				Image image = KermetaPlugin.getKermetaIcons().get( KermetaConstants.KLOGO );
+				Image image = KermetaIcons.get( KermetaConstants.KLOGO );
 				ImageDescriptor overlay = ImageDescriptor.createFromImage( image );
 				decoration.addOverlay(overlay, IDecoration.TOP_RIGHT);
 			}

@@ -2,11 +2,16 @@ package fr.irisa.triskell.kermeta.kpm.actions;
 
 import java.util.ArrayList;
 
-import org.eclipse.emf.common.util.EList;
-
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+/**
+ * 
+ * This interface is the bridge between the model and
+ * actions which can be performed on that model.
+ * 
+ * @author ftanguy
+ *
+ */
 public interface IAction {
 
 	/**

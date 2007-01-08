@@ -5,8 +5,6 @@ import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-
 
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.And;
@@ -17,11 +15,9 @@ import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.File;
-import fr.irisa.triskell.kermeta.kpm.Filter;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
-import fr.irisa.triskell.kermeta.kpm.Project;
 
 public class KpmHelper {
 

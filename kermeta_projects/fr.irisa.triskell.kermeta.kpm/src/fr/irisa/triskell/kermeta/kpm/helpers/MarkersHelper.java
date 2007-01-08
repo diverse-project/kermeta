@@ -31,8 +31,7 @@ public class MarkersHelper {
      * in fr.irisa.triskell.kermeta/plugin.xml
      *  (super type="org.eclipse.core.resources.problemmarker")
      */
-    public static String getMarkerType()
-    {
+    public static String getMarkerType() {
         return "fr.irisa.triskell.kermeta.kpm.kermetaMarker";
     }
 	
@@ -61,7 +60,7 @@ public class MarkersHelper {
         try
         {
         	if ( ! findMarker(file, realMessage) ) {
-                HashMap map = new HashMap();
+                HashMap <String, Object> map = new HashMap <String, Object> ();
                 
                 int offset = 0;
                 int length = 1;
@@ -123,7 +122,7 @@ public class MarkersHelper {
      */
     private static void createMarkerForKMFile(IFile file, KMUnitMessage message, KMUnit unit)
     {
-        HashMap map = new HashMap();
+        HashMap <String, Object> map = new HashMap <String, Object> ();
         String realMessage = formatMessage(message.getMessage());
 
         try
@@ -192,7 +191,7 @@ public class MarkersHelper {
     
     private static void createMarker (IFile file, String message) {
     	
-    	HashMap map = new HashMap();
+    	HashMap <String, Object> map = new HashMap <String, Object> ();
     	map.put("message", formatMessage(message));
     	map.put("severity", new Integer(2));
         try

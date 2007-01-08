@@ -26,7 +26,6 @@ public class KermetaUnitHelper {
 	
 	static private void garbageCollect() {
 		Runtime r = Runtime.getRuntime();
-		
 		long freeMem = r.freeMemory();
 		System.out.println("free memory before running gc(): " + freeMem);
 		r.gc();
@@ -43,6 +42,19 @@ public class KermetaUnitHelper {
 		return typeCheckKMTFile(file.getLocation().toString(), content);
 	}
 	
+	/**
+	 * 
+	 * Intelligent typechecking operation. There are three steps :
+	 * 1) parsing
+	 * 2) loading
+	 * 3) typechecking
+	 * 
+	 *  If one of the step fails, the following steps are not processed. 
+	 * 
+	 * @param absoluteFileName
+	 * @param content
+	 * @return
+	 */
 	static private KMTUnit typeCheckKMTFile (String absoluteFileName, String content ) {
 		unloadKermetaUnit( null );
 		

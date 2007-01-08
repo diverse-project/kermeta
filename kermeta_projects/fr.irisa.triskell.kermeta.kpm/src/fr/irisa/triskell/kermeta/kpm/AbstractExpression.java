@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AbstractExpression.java,v 1.2 2006-12-27 12:08:51 ftanguy Exp $
+ * $Id: AbstractExpression.java,v 1.3 2007-01-08 17:15:33 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
-
-import java.util.ArrayList;
 
 import org.eclipse.core.resources.IResource;
 

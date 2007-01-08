@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.7 2006-12-27 12:08:51 ftanguy Exp $
+ * $Id: Unit.java,v 1.8 2007-01-08 17:15:33 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -12,7 +12,6 @@ import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->

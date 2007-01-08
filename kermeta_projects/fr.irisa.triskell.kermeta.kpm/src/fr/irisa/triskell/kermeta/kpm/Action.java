@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: Action.java,v 1.3 2007-01-08 17:15:33 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
 import java.util.ArrayList;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
 

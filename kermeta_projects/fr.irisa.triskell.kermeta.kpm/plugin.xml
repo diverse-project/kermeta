@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.6 2006-12-27 12:08:51 ftanguy Exp $
+ $Id: plugin.xml,v 1.7 2007-01-08 17:15:33 ftanguy Exp $
 -->
 
 <plugin>
@@ -45,9 +45,12 @@
      <decorator
            class="fr.irisa.triskell.kermeta.kpm.actions.popup.SrcFolderDecorator"
            id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
-           label="fr.irisa.triskell.kermeta.kpm.decorator1"
-           lightweight="true"
-           objectClass="org.eclipse.core.resources.IFolder"/>
+           label="Source Folder Decorator"
+           lightweight="true">
+        <enablement>
+           <objectClass name="org.eclipse.core.resources.IFolder"/>
+        </enablement>
+     </decorator>
   </extension>
   <extension
         point="org.eclipse.ui.popupMenus">
@@ -82,6 +85,14 @@
         point="org.eclipse.core.resources.markers">
      <persistent value="true"/>
      <super type="org.eclipse.core.resources.problemmarker"/>
+  </extension>
+  <extension
+        id="parsingMarker"
+        name="Parsing marker"
+        point="org.eclipse.core.resources.markers">
+     <persistent value="true"/>
+     <super type="kermetaMarker"/>
+     <attribute name="fr.irisa.triskell.kermeta.kpm.attribute2"/>
   </extension>
 </plugin>
 

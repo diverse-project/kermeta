@@ -1,18 +1,13 @@
 package fr.irisa.triskell.kermeta.kpm.actions.popup;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 
 import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
-import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
-import fr.irisa.triskell.kermeta.kpm.Project;
-import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
 public class DependencyVisitor implements IResourceVisitor {
 

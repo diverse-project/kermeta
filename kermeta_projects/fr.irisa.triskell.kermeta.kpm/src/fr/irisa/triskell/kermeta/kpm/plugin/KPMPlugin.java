@@ -1,7 +1,5 @@
 package fr.irisa.triskell.kermeta.kpm.plugin;
 
-import org.eclipse.core.runtime.Plugin;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.osgi.framework.BundleContext;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -36,6 +34,7 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 		System.out.println("[KPM Plugin started]");
 		
 		KermetaWorkspace.getInstance();
+
 	}
 
 	/*

@@ -6,7 +6,6 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
-import fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
 public class KermetaNature implements IProjectNature {
@@ -79,53 +78,5 @@ public class KermetaNature implements IProjectNature {
 	public void setProject(IProject project) {
 		this.project = project;
 	}
-	
-	/***
-	 * Checks for the presence of a builder in a project.  If the builder is
-	 * missing, it is added.  If it is already there, nothing happens.
-	 * @param project The project to check.
-	 * @param builder The builder to check for.
-	 */
-	private void checkBuilder(IProject project, String builder) throws CoreException
-	{
-		// get project description and then the associated build commands
-		IProjectDescription desc = project.getDescription();
-		ICommand[] commands = desc.getBuildSpec();
-		
-		// determine if builder already associated
-		boolean foundBuilder = false;
-		
-		for (int i = 0; i < commands.length; ++i)
-		{
-			if (commands[i].getBuilderName().equals(builder))
-			{
-				foundBuilder = true;
-				break;
-			}
-		}
-		// add builder if not already in project
-		if (!foundBuilder)
-		{
-			addBuilder(project, builder);
-		}
-		
-	}
-	
-	private static void addBuilder(IProject project, String builder) throws CoreException
-	    {
-	       IProjectDescription desc = project.getDescription();
-	       ICommand[] commands = desc.getBuildSpec();
-	       ICommand command = desc.newCommand();
-	       command.setBuilderName(builder);
-	       // create map with arguments specific to builder in project here
-	       // command.setArguments(Map args);
-	       ICommand[] newCommands = new ICommand[commands.length + 1];
-	 
-	       // Add it after other builders.
-	       System.arraycopy(commands, 0, newCommands, 1, commands.length);
-	       newCommands[0] = command;
-	       desc.setBuildSpec(newCommands);
-	       project.setDescription(desc, null);
-	    }
 
 }
