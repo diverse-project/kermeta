@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.16 2006-01-20 12:07:53 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.17 2007-01-08 17:20:04 ftanguy Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -20,25 +20,19 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.plugin.*;
-import org.eclipse.ui.views.IViewDescriptor;
 import org.osgi.framework.BundleContext;
 
-//import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 import java.io.ByteArrayOutputStream;
@@ -171,7 +165,7 @@ public class RunnerPlugin extends AbstractUIPlugin
 	 * This method shows the current perspective.
 	 * TODO : move it somewhere else
 	 */
-	private void __showPerspective()
+/*	private void __showPerspective()
 	{
 	    IWorkbenchPage page = getActivePage();
 	    try {
@@ -182,7 +176,7 @@ public class RunnerPlugin extends AbstractUIPlugin
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
-	}
+	}*/
 
 
     /**
