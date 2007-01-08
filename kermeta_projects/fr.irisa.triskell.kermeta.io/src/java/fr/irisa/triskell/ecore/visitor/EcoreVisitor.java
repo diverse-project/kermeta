@@ -18,7 +18,6 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.*;
-import org.eclipse.emf.ecore.impl.EcorePackageImpl;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -43,7 +42,6 @@ public class EcoreVisitor {
 			public Object accept(EObject node) {
 				Object result = null;
 				String cname="";
-				String methodName="";
 				try {
 					Class[] ptypes = new Class[1];
 					cname = node.getClass().getName();
@@ -58,7 +56,6 @@ public class EcoreVisitor {
 					cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "");
 					ptypes[0] = Class.forName(cname);
 					Method m = this.getClass().getMethod("visit", ptypes);
-					methodName = m.getName();
 					Object[] params = new Object[1];
 					params[0] = node;
 					result = m.invoke(this, params);
