@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.25 2006-12-11 14:31:35 cfaucher Exp $
+/* $Id: KMTUnit.java,v 1.26 2007-01-08 17:17:34 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -12,10 +12,10 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.eclipse.emf.common.util.URI;
@@ -25,10 +25,12 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.parser.KermetaParserHelper;
 
 
 /**
@@ -87,11 +89,14 @@ public class KMTUnit extends KermetaUnit {
 	}
 	
 	public void parseString(String document) {
-		KermetaParser p;
-		p = new KermetaParser(new KermetaLexer(new StringReader(document.replace('\t', ' '))));
+		//KermetaParser p;
+		//p = new KermetaParser(new KermetaLexer(new StringReader(document.replace('\t', ' '))));
 		//p = new KermetaParser(new KermetaLexer(new StringReader(document)));
 		try {
-			mctAST = p.compUnit();
+			
+			mctAST = KermetaParserHelper.parse(document);
+			
+			//mctAST = p.compUnit();
 		}
 		catch(Exception e) {
 			messages.addMessage(new KMUnitParseError(e));
@@ -163,4 +168,5 @@ public class KMTUnit extends KermetaUnit {
     public CompUnit getMctAST() {
         return mctAST;
     }
+    
 }
