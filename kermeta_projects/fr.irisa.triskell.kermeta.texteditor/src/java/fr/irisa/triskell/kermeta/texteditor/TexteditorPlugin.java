@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.6 2006-12-15 15:16:23 ftanguy Exp $
+/* $Id: TexteditorPlugin.java,v 1.7 2007-01-08 17:21:30 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TextzditorPlugin.java
  * License : EPL
@@ -38,7 +38,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	/**
 	 * List of KermetaEditorEventListener that must be notified
 	 */
-	public Vector kermetaEditorEventListeners = new Vector(); 
+	public Vector<KermetaEditorEventListener> kermetaEditorEventListeners = new Vector <KermetaEditorEventListener> (); 
 	
 	final static public Logger pluginLog = LogConfigurationHelper.getLogger("KermetaEditor");
 	

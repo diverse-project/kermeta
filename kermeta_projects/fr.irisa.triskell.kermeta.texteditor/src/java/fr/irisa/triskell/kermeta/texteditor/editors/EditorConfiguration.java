@@ -11,6 +11,9 @@ import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.reconciler.IReconciler;
+import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -20,6 +23,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
+import fr.irisa.triskell.kermeta.texteditor.completion.KermetaCompletionListener;
 
 /**
  * @author Franck Fleurey
@@ -36,6 +40,8 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	private EditorTextHover texthover;
 	public static Color DEFAULT_TAG_COLOR= new Color(Display.getCurrent(), new RGB(0, 0, 100));
 
+	static private EditorCompletion editorCompletion;
+	
 	public EditorConfiguration(KMTEditor editor) {
 		this.editor = editor;
 		scanner = new EditorScanner();
@@ -62,13 +68,22 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	 */
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
-		assistant.setContentAssistProcessor(new EditorCompletion(editor), IDocument.DEFAULT_CONTENT_TYPE);
+		editorCompletion = new EditorCompletion(editor);
+		assistant.addCompletionListener( new KermetaCompletionListener(editorCompletion) );
+		assistant.setContentAssistProcessor(editorCompletion, IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.enableAutoActivation(true);
-		assistant.setAutoActivationDelay(500);
+		assistant.setAutoActivationDelay(300);
 		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
 		return assistant;
 	}
 
+	
+	public IReconciler getReconciler(ISourceViewer sourceViewer) {
+		IReconcilingStrategy reconcilingStrategy = new ParsingStrategy( editor );
+		MonoReconciler reconciler = new MonoReconciler(reconcilingStrategy, false);
+		reconciler.setDelay(500);
+		return reconciler;
+	}
 	
 	/**
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getTextHover(ISourceViewer, String)
@@ -84,5 +99,9 @@ public class EditorConfiguration extends SourceViewerConfiguration {
     	return texthover;
     }
 	 
+   
+   static public EditorCompletion getEditorCompletion() {
+	   return editorCompletion;
+   }
 	 
 }

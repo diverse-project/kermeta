@@ -190,6 +190,10 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	public KermetaUnit getUnit() {
 		return mcunit;
 	}
+	
+	public String getContent() {
+		return getSourceViewer().getDocument().get();
+	}
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Accessors		//
@@ -209,7 +213,7 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
-		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getSourceViewer().getDocument().get() );
+		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getContent() );
 		KermetaWorkspace.getInstance().updateFile( getFile() );
 		super.performSave(overwrite, progressMonitor);
 	}

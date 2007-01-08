@@ -7,43 +7,30 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-//import java.util.Collections;
-import java.util.Iterator;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
-//import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.swt.graphics.Point;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-//import fr.irisa.triskell.kermeta.ast.KermetaTokenNode;
 import fr.irisa.triskell.kermeta.ast.ParamPostfix;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
-//import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
-import fr.irisa.triskell.kermeta.typechecker.ExpressionChecker;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
-import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 /**
  * @author Franck Fleurey
@@ -54,6 +41,20 @@ import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
  */
 public class EditorCompletion implements IContentAssistProcessor {
 	
+	/**
+	 * This field is an indicator for extern objects that want to know if the completion is active in order to
+	 * execute some actions.
+	 * See for instance ParsingStrategy.
+	 */
+	private boolean isCompleting = false;
+	
+	public boolean isCompleting() {
+		return isCompleting;
+	}
+	
+	public void setIsCompleting(boolean value) {
+		isCompleting = value;
+	}
 	protected KMTEditor editor;
 	protected boolean doubleColon;
 	
@@ -69,7 +70,6 @@ public class EditorCompletion implements IContentAssistProcessor {
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		
 		IDocument doc = viewer.getDocument();
-		Point selectedRange = viewer.getSelectedRange();
 		ArrayList propList = new ArrayList();
 		
 		if (editor.getMcunit() == null) return null;
@@ -84,12 +84,11 @@ public class EditorCompletion implements IContentAssistProcessor {
 		
 		// "::" -> should be followed by package or type definition 
 		if (doubleColon == true)
-		{
 			addProposalsForPackages(doc, offset, propList, qualifier);
-		}
-		else if (qualifier.startsWith(":") || qualifier.startsWith("<")) {
+
+		else if (qualifier.startsWith(":") || qualifier.startsWith("<"))
 		    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
-		}
+
 		// "." -> should be followed by call feature
 		else if (qualifier.startsWith(".")) {
 		    
@@ -135,8 +134,10 @@ public class EditorCompletion implements IContentAssistProcessor {
 		ICompletionProposal[] proposals = new ICompletionProposal[propList.size()];
 		// and fill with list elements
 		propList.toArray(proposals);
+		
 		// Return the proposals
 		return proposals;
+		
 	}
 	
 	/** Get the node at the specified offset */

@@ -18,9 +18,7 @@ import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
-import fr.irisa.triskell.kermeta.texteditor.icons.yellow.KermetaIconsYellow;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
 

@@ -1,4 +1,4 @@
-/* $Id: NamedElementCompletionItem.java,v 1.1 2006-09-26 09:57:46 zdrey Exp $
+/* $Id: NamedElementCompletionItem.java,v 1.2 2007-01-08 17:21:30 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCompletionItem.java
 * License : GPL
@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 import org.eclipse.swt.graphics.Image;
 
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * @author Franck Fleurey
