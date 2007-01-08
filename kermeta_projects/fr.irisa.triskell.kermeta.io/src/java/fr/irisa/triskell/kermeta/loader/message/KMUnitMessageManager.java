@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.1 2006-05-03 14:34:03 zdrey Exp $
+/* $Id: KMUnitMessageManager.java,v 1.2 2007-01-08 17:18:24 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -30,7 +30,7 @@ public class KMUnitMessageManager {
 	/**
 	 * The list of errors 
 	 */
-	protected ArrayList errors = new ArrayList();
+	protected ArrayList <KMUnitMessage> errors = new ArrayList <KMUnitMessage> ();
 	
 	/**
 	 * The list of warning. typically messages that don't stop the execution 
@@ -120,8 +120,8 @@ public class KMUnitMessageManager {
 	 * @return Returns the error from this unit. If there is an error in imported unit, 
 	 * 	only report the name of the unit that contain the error and the message of the first error
 	 */
-	public ArrayList getErrors() {
-	    ArrayList result = new ArrayList();
+	public ArrayList <KMUnitMessage> getErrors() {
+	    ArrayList <KMUnitMessage> result = new ArrayList <KMUnitMessage> ();
 	    //	  we may have a cycle in the require statements ...
 	    if(isCallinGetErrors) return result;
 	    isCallinGetErrors = true;
@@ -269,4 +269,26 @@ public class KMUnitMessageManager {
 		}
 		return result;
 	}
+	
+    /**
+     * Retrieve the parsing errors.
+     */
+    public ArrayList <KMUnitParseError> getParsingErrors() {
+    	ArrayList <KMUnitParseError> errorsList = new ArrayList <KMUnitParseError> ();
+    	for ( KMUnitMessage message : errors ) {
+    		if ( message instanceof KMUnitParseError )
+    			errors.add( (KMUnitParseError) message);
+    	}
+    	return errorsList;
+    }
+    
+    public void deleteParsingErrors() {
+    	ArrayList <KMUnitMessage> parsingErrors = new ArrayList <KMUnitMessage> ();
+    	for ( KMUnitMessage message : errors ) {
+    		if ( message instanceof KMUnitParseError )
+    			parsingErrors.add(message);
+    	}
+    	for ( KMUnitMessage message : parsingErrors )
+    		errors.remove(message);
+    }
 }
