@@ -1,3 +1,13 @@
+/*$Id: KermetaCommonUtils.java,v 1.3 2007-01-09 14:48:33 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.model
+* File : 	KermetaCommonUtils.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 17 oct. 06
+* Authors : cfaucher
+*/
+
 package fr.irisa.triskell.kermeta.util;
 
 import java.util.ArrayList;
@@ -15,9 +25,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 /**
  * KermetaCommonUtils contained some static methods used by the graphicaleditor
  * and model.edit
- * 
- * @author cfaucher
- * 
  */
 public class KermetaCommonUtils {
 
@@ -33,7 +40,6 @@ public class KermetaCommonUtils {
 	 * @param sourceClassDef
 	 * @param targetClassDef
 	 * @return
-	 * @generated NOT
 	 */
 	public static Type getTypeRepresentingAnInheritance(
 			ClassDefinition sourceClassDef, ClassDefinition targetClassDef) {
@@ -86,7 +92,6 @@ public class KermetaCommonUtils {
 	 * @param typedef
 	 *            the typedef from the package which we search the available
 	 *            types.
-	 * @generated NOT
 	 */
 	public static List<Type> getOwnedTypesForTypeDefinitions(
 			TypeDefinition typedef) {
@@ -117,7 +122,6 @@ public class KermetaCommonUtils {
 	 * Get all the types contained in all the package tree
 	 * 
 	 * @param pkg
-	 * @generated NOT
 	 */
 	private static void getAllTypesForAllPackages(Package pkg) {
 		getAllTypesForAPackage(pkg);
@@ -130,7 +134,6 @@ public class KermetaCommonUtils {
 	/**
 	 * 
 	 * @param pkg
-	 * @generated NOT
 	 */
 	private static void getAllTypesForAPackage(Package pkg) {
 		// Loop on the content of the current package : pkg
@@ -159,7 +162,6 @@ public class KermetaCommonUtils {
 	 * RootPackage stands for the uppermost containing package of the given
 	 * package.
 	 * 
-	 * @generated NOT
 	 */
 	private static Package getRootPackage(Package fpackage) {
 		if (fpackage.getNestingPackage() != null) {
