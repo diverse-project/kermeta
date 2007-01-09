@@ -22,7 +22,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.workbench.texteditor,
  org.eclipse.core.filesystem,
  org.eclipse.emf.edit,
- org.eclipse.emf.edit.ui,
- fr.irisa.triskell.kermeta.console
+ org.eclipse.emf.edit.ui
 Eclipse-LazyStart: true
 Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin
