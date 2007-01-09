@@ -1,6 +1,12 @@
-/**
- * 
- */
+/*$Id: KermetaView.java,v 1.2 2007-01-09 16:16:50 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta
+* File : 	KermetaView.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 2 aout 06
+* Authors : cfaucher
+*/
 package fr.irisa.triskell.kermeta.view;
 
 import java.util.Iterator;
@@ -26,7 +32,6 @@ import fr.irisa.triskell.kermeta.popup.actions.EMFRegisterAction;
 
 
 /**
- * @author cfaucher
  *
  */
 public class KermetaView extends ViewPart implements IViewPart {
