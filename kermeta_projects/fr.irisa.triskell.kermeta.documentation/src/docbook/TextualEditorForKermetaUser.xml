@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<article>
+  <title>Textual editor for Kermeta users</title>
+
+  <articleinfo>
+    <date>Build date: @BUILD.DATE@</date>
+
+    <author>
+      <surname>François Tanguy</surname>
+    </author>
+
+    <date>09/01/2007</date>
+
+    <keywordset>
+      <keyword>Kermeta</keyword>
+
+      <keyword>metemodelling</keyword>
+
+      <keyword>language</keyword>
+    </keywordset>
+
+    <bibliomisc>Licence EPL</bibliomisc>
+
+    <abstract>
+      <para>This document is a presentation of the Kermeta textual editor for
+      beginners.</para>
+    </abstract>
+
+    <publisher>
+      <publishername>INRIA</publishername>
+
+      <address><state>France</state><otheraddr><ulink url="???">
+www.inria.fr</ulink></otheraddr></address>
+    </publisher>
+  </articleinfo>
+
+  <section>
+    <title>The document</title>
+
+    <para>Nowadays a textual editor is not just an editable document. Many
+    informations have been provided to the user in order to get improved
+    editing performances. It is quite common to find textual editor with
+    coloring syntax, auto-completion and outline. These three items working
+    together usually makes a good textual editor. That is the reason why the
+    Kermeta platform provides such an editor. Below, you can find the global
+    view of the Kermeta editor.</para>
+
+    <figure>
+      <title>The Kermeta Textual Editor</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="TextualEditorForKermetaUser_figures/textualEditor.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title>Auto-completion</title>
+
+    <para>To develop faster and faster, some nice helpfull tools now are
+    usual. One of them is the auto-completion. According to a context, a list
+    of item will be proposed. Using the arrows key and the carriage return
+    key, you can select quickly and easily the item you want. The important
+    thing is that, the list of item is calculated in order to only propose
+    some relevant items. The figure below shows the auto-completion for
+    "stdio" which is a special class in Kermeta (as System for Java). The
+    typed point makes the system think that you want to call a method on
+    "stdio". Then all the callable methods are proposed and you can choose one
+    of them.</para>
+
+    <figure>
+      <title>Auto-Completion in the Kermeta Textual Editor</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="TextualEditorForKermetaUser_figures/autoCompletionSmall.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title>Outline</title>
+
+    <para>The outline is a strucutral view of your program. Code is not
+    visible in this view, but the structure that is to say packages, classes,
+    attributes and methods are visible in a tree hierarchy. Usually the
+    outline position is on the top right side of the Eclipse's window. You can
+    get advantages of the outline, when your program reaches a big size and
+    when it is difficult to get a good visibility on the program's strucutre.
+    Browsing the outline is much more faster than browsing the file. Moreover,
+    clicking on an item (packages, classes, attributes or methods) brings you
+    to that item in the file.</para>
+
+    <figure>
+      <title>The outline in Kermeta Text Editor</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="TextualEditorForKermetaUser_figures/outlineSmall.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title>Errors reporting</title>
+
+    <para>The textual editor is used to display extra pieces of information
+    than simple text. In the figure below, a parsing error is reporting
+    because of the semicolon which is not allowed in the language. The nice is
+    thing is that in the Eclipse's problems view, just by double clicking on
+    an error opens the errored file and make the cursor focusing on the
+    correct line.</para>
+
+    <figure>
+      <title>Error reporting</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="TextualEditorForKermetaUser_figures/errorReportingSmall.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title>Debugging information</title>
+
+    <para>Kermeta is meant an executable language. So, we may want to debug
+    programs because of their complexity. It is possible because Kermeta
+    platform includes a debugger. Like in a Java style, some breakpoints can
+    be added to the program by right clicking on the grey line at the left of
+    the editor (as in the figure below). The breakpoint will be added in front
+    the selected line. Afterwards, when running the debugger, the program will
+    halt at every breakpoint it goes through. At this moment, you will be able
+    to have a look at the variables' value and run step by step or step into
+    some methods.</para>
+
+    <figure>
+      <title>Debugging Information in the Kermeta Text Editor</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="TextualEditorForKermetaUser_figures/debuggingInformationSmall.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+</article>
