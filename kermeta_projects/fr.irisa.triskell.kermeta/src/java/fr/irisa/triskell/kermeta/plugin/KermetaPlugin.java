@@ -66,7 +66,6 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		/*note : be careful this method must not fail ! otherwise all the plugin that depends on it will fail too with a non explicit message !
 		 */
 		super.start(context);
-		kermetaIcons = new KermetaIcons(KermetaPlugin.getDefault().getBundle().getEntry("/"));
 		// initialize the log4j system using the configuration file contained in this plugin
 		try {
 			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
