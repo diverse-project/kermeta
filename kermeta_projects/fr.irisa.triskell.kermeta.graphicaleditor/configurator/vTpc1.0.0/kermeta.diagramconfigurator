@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor2" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.0.5" provider="IRISA/INRIA" samePluginAsEditor="true">
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.0.5" provider="IRISA/INRIA" samePluginAsEditor="true">
   <palette name="Palette">
     <paletteCategories name="Node">
       <items name="Package" part="//@parts.0"/>
@@ -14,7 +14,7 @@
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.0" defaultFont="Tahoma-regular-8" type="Package" childElements="//@parts.0 //@parts.1" defaultBackgroundColor="241,241,241" container="true" defaultWidth="20" maximumWidth="0" maximumHeight="0"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.1" defaultFont="Tahoma-regular-8" type="Class" childElements="//@parts.2 //@parts.3" defaultBackgroundColor="241,235,215" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="0" maximumHeight="-1"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.2" prefix="PropertyNode" type="Label"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.2" presentation="propertyNode" prefix="PropertyNode" type="Label"/>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.3" type="Label"/>
   <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.4" targetDecoration="TRIANGLE" defaultRouter="TreeRouter">
     <sourceTargetCouple sourceNode="//@parts.1" targetNode="//@parts.1">
