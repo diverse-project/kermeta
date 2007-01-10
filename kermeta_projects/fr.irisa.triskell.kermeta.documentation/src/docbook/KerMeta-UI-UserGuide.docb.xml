@@ -1,710 +1,1025 @@
-<?xml version="1.0"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <book lang="en-GB">
-<?ooogenerator OpenOffice.org 1.1.4 (Win32)?>
-<?oooversion 1.1.4?>
   <bookinfo>
-    <subtitle>How the workbench is able to help you in your metamodelling tasks</subtitle>
+    <subtitle>How the workbench is able to help you in your metamodelling
+    tasks</subtitle>
+
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+
     <author>
       <firstname>Didier</firstname>
-      <surname>Vojtisek </surname>
+
+      <surname>Vojtisek</surname>
+
       <authorblurb>
-        <para>A short description or note about the author</para>
+        <para>Engineer</para>
       </authorblurb>
     </author>
+
     <author>
       <firstname>Francois</firstname>
+
       <surname>Tanguy</surname>
+
       <authorblurb>
         <para>Engineer</para>
       </authorblurb>
     </author>
+
     <author>
       <firstname>Cyril</firstname>
+
       <surname>Faucher</surname>
+
       <authorblurb>
         <para>Engineer</para>
       </authorblurb>
     </author>
-    <date>$Date: 2007-01-10 16:34:32 $</date>
-    <confgroup/>
+
+    <date>$Date: 2007-01-10 16:43:52 $</date>
+
+    <confgroup></confgroup>
   </bookinfo>
+
   <chapter>
     <title>Introduction</title>
-    <para>
-      <emphasis role="strong">Kermeta is distributed with a workbench that provides many .</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">Current features in V0.3.3 are:</emphasis>
-    </para>
+
+    <para><emphasis role="strong">Kermeta is distributed with a workbench that
+    provides many .</emphasis></para>
+
+    <para><emphasis role="strong">Current features in V0.3.3
+    are:</emphasis></para>
+
     <itemizedlist>
       <listitem>
-        <para>
-          <emphasis role="strong">Text editor</emphasis>
-        </para>
+        <para><emphasis role="strong">Text editor</emphasis></para>
       </listitem>
     </itemizedlist>
+
     <itemizedlist>
       <listitem>
-        <para>
-          <emphasis role="strong">Outline view</emphasis>
-        </para>
+        <para><emphasis role="strong">Outline view</emphasis></para>
       </listitem>
     </itemizedlist>
+
     <itemizedlist>
       <listitem>
-        <para>
-          <emphasis role="strong">Problems view</emphasis>
-        </para>
+        <para><emphasis role="strong">Problems view</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Ecore Model Editor (provided by Eclipse/EMF)</emphasis>
-        </para>
+        <para><emphasis role="strong">Ecore Model Editor (provided by
+        Eclipse/EMF)</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Execution with an interpreter</emphasis>
-        </para>
+        <para><emphasis role="strong">Execution with an
+        interpreter</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Debugger</emphasis>
-        </para>
+        <para><emphasis role="strong">Debugger</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Transformations to and from Kermeta. (especially to Ecore)</emphasis>
-        </para>
+        <para><emphasis role="strong">Transformations to and from Kermeta.
+        (especially to Ecore)</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Other helper transformations like Ecore merge</emphasis>
-        </para>
+        <para><emphasis role="strong">Other helper transformations like Ecore
+        merge</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Help system</emphasis>
-        </para>
+        <para><emphasis role="strong">Help system</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Class TouchNavigator (alpha version in release 0.1.1)</emphasis>
-        </para>
+        <para><emphasis role="strong">Class TouchNavigator (alpha version in
+        release 0.1.1)</emphasis></para>
       </listitem>
     </itemizedlist>
-    <para>
-      <emphasis role="strong">Useful features needing the installation of an external tool:</emphasis>
-    </para>
+
+    <para><emphasis role="strong">Useful features needing the installation of
+    an external tool:</emphasis></para>
+
     <itemizedlist>
       <listitem>
-        <para>
-          <emphasis role="strong">Class diagram Ecore Model editor. This feature is provided by EclipseUML (Omondo) (a community edition is available)</emphasis>
-        </para>
+        <para><emphasis role="strong">Class diagram Ecore Model editor. This
+        feature is provided by EclipseUML (Omondo) (a community edition is
+        available)</emphasis></para>
       </listitem>
     </itemizedlist>
-    <para>
-      <emphasis role="strong">Planned features:</emphasis>
-    </para>
+
+    <para><emphasis role="strong">Planned features:</emphasis></para>
+
     <itemizedlist>
       <listitem>
-        <para>
-          <emphasis role="strong">Dedicated Graphic multiview editor</emphasis>
-        </para>
+        <para><emphasis role="strong">Dedicated Graphic multiview
+        editor</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">OCL support</emphasis>
-        </para>
+        <para><emphasis role="strong">OCL support</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Seamless integration of Java code</emphasis>
-        </para>
+        <para><emphasis role="strong">Seamless integration of Java
+        code</emphasis></para>
       </listitem>
+
       <listitem>
-        <para>
-          <emphasis role="strong">Object TouchNavigator</emphasis>
-        </para>
+        <para><emphasis role="strong">Object TouchNavigator</emphasis></para>
       </listitem>
     </itemizedlist>
-    <para>
-      <emphasis role="strong"/>
-    </para>
-    <para>
-      <emphasis role="strong">Here is a screenshot of a typical Kermeta workbench.</emphasis>
-    </para>
+
+    <para><emphasis role="strong"></emphasis></para>
+
+    <para><emphasis role="strong">Here is a screenshot of a typical Kermeta
+    workbench.</emphasis></para>
+
     <figure id="refIllustration0">
       <title>Kermeta workbench screenshoot (v0.0.4)</title>
+
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_worbench_screenshot.png" width="14.967cm" depth="10.234cm"/>
+          <imagedata depth=""
+                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_worbench_screenshot.png"
+                     width="" />
         </imageobject>
       </mediaobject>
     </figure>
-    <para/>
-    <warning><emphasis role="strong">Kermeta is an evolving software and d</emphasis><emphasis role="strong"><emphasis role="strong">espite that we put a lot of attention to this document, it may contain errors or not conform to the latest version. If you find any error or have some information that improves this document, please send it to us using the bugtracker in the forge:</emphasis></emphasis><ulink url="http://gforge.inria.fr/tracker/?group_id=32" type=""><emphasis role="strong"><emphasis role="strong"><emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis></emphasis></emphasis></ulink><ulink url="http://gforge.inria.fr/tracker/?group_id=32" type=""><emphasis role="strong"><emphasis role="strong"><emphasis role="strong"><emphasis role="strong"/></emphasis></emphasis></emphasis></ulink> Last check: v0.3.3</warning>
+
+    <para></para>
+
+    <warning>
+      <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
+
+      <emphasis role="strong">
+        <emphasis role="strong">espite that we put a lot of attention to this
+        document, it may contain errors or not conform to the latest version.
+        If you find any error or have some information that improves this
+        document, please send it to us using the bugtracker in the
+        forge:</emphasis>
+      </emphasis>
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis role="strong">
+          <emphasis role="strong">
+            <emphasis
+            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
+          </emphasis>
+        </emphasis>
+      </ulink>
+
+      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
+        <emphasis role="strong">
+          <emphasis role="strong">
+            <emphasis role="strong">
+              <emphasis role="strong" />
+            </emphasis>
+          </emphasis>
+        </emphasis>
+      </ulink>
+
+       Last check: v0.3.3
+    </warning>
   </chapter>
+
   <chapter>
-    <title>Text editor </title>
+    <title>Text editor</title>
+
     <para>Kermeta text editor provides the following features:</para>
+
     <itemizedlist>
       <listitem>
         <para>syntax highlighting.</para>
       </listitem>
+
       <listitem>
         <para>completion</para>
-        <para role="lineBreak">The typechecker is used to provide relevant code completion.</para>
+
+        <para role="lineBreak">The typechecker is used to provide relevant
+        code completion.</para>
       </listitem>
+
       <listitem>
         <para>error locatisation</para>
-        <para role="lineBreak">The errors are materialized directly in the text editor.</para>
+
+        <para role="lineBreak">The errors are materialized directly in the
+        text editor.</para>
       </listitem>
+
       <listitem>
         <para>code documentation hint</para>
-        <para role="lineBreak">Hovering the mouse over an element will show up the associated documentation as a hint.</para>
+
+        <para role="lineBreak">Hovering the mouse over an element will show up
+        the associated documentation as a hint.</para>
       </listitem>
     </itemizedlist>
-    <note>The usual &lt;ctrl&gt;+&lt;space&gt; keyboard shortcut is used to access the code completion</note>
+
+    <note>
+      The usual &lt;ctrl&gt;+&lt;space&gt; keyboard shortcut is used to access the code completion
+    </note>
+
     <para>Here is a screenshot:</para>
+
     <figure id="refIllustration1">
-      <title>Code completion, error and syntax higlighting sample (V0.0.4)</title>
+      <title>Code completion, error and syntax higlighting sample
+      (V0.0.4)</title>
+
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_error_n_syntaxhighlighting_screenshot.png" width="14.967cm" depth="11.12cm"/>
+          <imagedata depth=""
+                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_error_n_syntaxhighlighting_screenshot.png"
+                     width="" />
         </imageobject>
       </mediaobject>
     </figure>
-    <para/>
-    <para>Kermeta text editor is base on Eclipse text editor, so all the usual preferences can be used. Ex: show line number, quick diff, annotations, etc</para>
+
+    <para></para>
+
+    <para>Kermeta text editor is base on Eclipse text editor, so all the usual
+    preferences can be used. Ex: show line number, quick diff, annotations,
+    etc</para>
+
     <figure id="refIllustration2">
       <title>TextEditor preferences</title>
+
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/TextEditor_classic_preferences.png" width="14.967cm" depth="12.702cm"/>
+          <imagedata depth=""
+                     fileref="KerMeta-UI-UserGuide_figures/TextEditor_classic_preferences.png"
+                     width="" />
         </imageobject>
       </mediaobject>
     </figure>
-    <para/>
+
+    <para></para>
   </chapter>
+
   <chapter>
     <title>Outline</title>
-    <para>The file outline gives you a comprehensive abstract of the current Kermeta file (edited in the text editor).</para>
-    <para>The outline can be customized to display several kind of views. Outline features are:</para>
+
+    <para>The file outline gives you a comprehensive abstract of the current
+    Kermeta file (edited in the text editor).</para>
+
+    <para>The outline can be customized to display several kind of views.
+    Outline features are:</para>
+
     <itemizedlist>
       <listitem>
         <para>sort features</para>
-        <para role="lineBreak">The content of the outline is sorted alphabetically.</para>
+
+        <para role="lineBreak">The content of the outline is sorted
+        alphabetically.</para>
       </listitem>
+
       <listitem>
         <para>Show package hierachy</para>
       </listitem>
+
       <listitem>
         <para>Flatten inheritance</para>
-        <para role="lineBreak">Display all the features of your classes. The inherited features are displayed using a specific icon set.</para>
+
+        <para role="lineBreak">Display all the features of your classes. The
+        inherited features are displayed using a specific icon set.</para>
       </listitem>
+
       <listitem>
         <para>Show imported types</para>
-        <para role="lineBreak">Show all the classes that are declared using the <literal>require</literal> statement in this file.</para>
+
+        <para role="lineBreak">Show all the classes that are declared using
+        the <literal>require</literal> statement in this file.</para>
       </listitem>
     </itemizedlist>
-    <note>The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it.</note>
-    <warning>The &#x201C;Show imported types&#x201D; feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project.</warning>
+
+    <note>
+      The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it.
+    </note>
+
+    <warning>
+      The “Show imported types” feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project.
+    </warning>
   </chapter>
+
   <chapter>
     <title>Problems</title>
-    <para>Kermeta workbench use the classic eclipse &#x201C;Problems&#x201D; view to display the errors.</para>
+
+    <para>Kermeta workbench use the classic eclipse “Problems” view to display
+    the errors.</para>
   </chapter>
+
   <chapter>
     <title>Execution</title>
-    <para>Kermeta workbench allows to run your Kermeta code in several ways.</para>
+
+    <para>Kermeta workbench allows to run your Kermeta code in several
+    ways.</para>
+
     <section>
       <title>Using a Run configuration</title>
-      <para>For those who already know how to run Java applications, this is a similar approach but for Kermeta files.</para>
-      <para>You'll need to create a new run configuration from the &#x201C;<literal>Run/Run...</literal>&#x201D; menu.</para>
+
+      <para>For those who already know how to run Java applications, this is a
+      similar approach but for Kermeta files.</para>
+
+      <para>You'll need to create a new run configuration from the
+      “<literal>Run/Run...</literal>” menu.</para>
+
       <figure id="refIllustration3">
         <title>Run menu</title>
+
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfigurationMenu.png" width="14.891cm" depth="9.033cm"/>
+            <imagedata depth=""
+                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfigurationMenu.png"
+                       width="" />
           </imageobject>
         </mediaobject>
       </figure>
-      <para/>
-      <caution>The run menu is available only with some perspectives. If you don't see the run menu, switch to the Kermeta perspective.</caution>
-      <para>In the dialog, you selects the file, the main class and the main operation that must be run.</para>
-      <para>Search buttons will help you to find these elements in your files.</para>
-      <caution>The search button may not work properly if your file contains errors.</caution>
+
+      <para></para>
+
+      <caution>
+        The run menu is available only with some perspectives. If you don't see the run menu, switch to the Kermeta perspective.
+      </caution>
+
+      <para>In the dialog, you selects the file, the main class and the main
+      operation that must be run.</para>
+
+      <para>Search buttons will help you to find these elements in your
+      files.</para>
+
+      <caution>
+        The search button may not work properly if your file contains errors.
+      </caution>
+
       <figure id="refIllustration4">
         <title>Kermeta run configuration - main tab</title>
+
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfiguration.png" width="14.967cm" depth="11.878cm"/>
+            <imagedata depth=""
+                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfiguration.png"
+                       width="" />
           </imageobject>
         </mediaobject>
       </figure>
-      <para/>
-      <para>Two annotations in your Kermeta code allow you to save time while creating run configurations. The @mainClass and @mainOperation are used to fill field when creating a new configuration.</para>
+
+      <para></para>
+
+      <para>Two annotations in your Kermeta code allow you to save time while
+      creating run configurations. The @mainClass and @mainOperation are used
+      to fill field when creating a new configuration.</para>
+
       <para>Ex:</para>
-      <programlisting>@mainClass "automaton::Derterminization"@mainOperation "main"</programlisting>
-      <para>Then, once you have your configuration, you can run it by all the means provided by Eclipse. Ie. &#x201C;<literal>Run Last Launched</literal>&#x201D;, &#x201D; <literal>Run History</literal>&#x201D;, ... available in the menus or in the toolbars.</para>
-      <tip>A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The &#x201C;<literal>Run As/Kermeta App</literal>&#x201D; button runs an existing configuration and the &#x201C;<literal>Run As/Run...</literal>&#x201D; button opens the configuration dialog.</tip>
+
+      <programlisting>@mainClass "automaton::Derterminization"
+@mainOperation "main"</programlisting>
+
+      <para>Then, once you have your configuration, you can run it by all the
+      means provided by Eclipse. Ie. “<literal>Run Last Launched</literal>”, ”
+      <literal>Run History</literal>”, ... available in the menus or in the
+      toolbars.</para>
+
+      <tip>
+        A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The “
+
+        <literal>Run As/Kermeta App</literal>
+
+        ” button runs an existing configuration and the “
+
+        <literal>Run As/Run...</literal>
+
+        ” button opens the configuration dialog.
+      </tip>
+
       <figure id="refIllustration5">
         <title>Run shortcut to run configuration on the kmt files</title>
+
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_NewRunConfiguration.png" width="11.508cm" depth="11.335cm"/>
+            <imagedata depth=""
+                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_NewRunConfiguration.png"
+                       width="" />
           </imageobject>
         </mediaobject>
       </figure>
-      <para>The operation arguments field allow you to pass some strings as parameters of the operation you are launching.</para>
-      <para>Optionnaly, in the common Tab of the Kermeta run configuration, you can:</para>
+
+      <para>The operation arguments field allow you to pass some strings as
+      parameters of the operation you are launching.</para>
+
+      <para>Optionnaly, in the common Tab of the Kermeta run configuration,
+      you can:</para>
+
       <itemizedlist>
         <listitem>
-          <para>save your configuration in a file, so you can share it with other users: in "Common" tab button "Shared file"</para>
+          <para>save your configuration in a file, so you can share it with
+          other users: in "Common" tab button "Shared file"</para>
         </listitem>
+
         <listitem>
-          <para>specify where the stdio outputs must be sent. Typically, this can be in the Eclipse console or in a file.</para>
+          <para>specify where the stdio outputs must be sent. Typically, this
+          can be in the Eclipse console or in a file.</para>
         </listitem>
       </itemizedlist>
     </section>
+
     <section>
       <title>Run using a ant file</title>
-      <para>It is possible to run a Kermeta program from ant using the RunCommandLine.java from a java task.</para>
+
+      <para>It is possible to run a Kermeta program from ant using the
+      RunCommandLine.java from a java task.</para>
+
       <para>You'll have to correctly set the classpath and the argument</para>
+
       <para>[Give more details on that]</para>
-      <warning>This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update.</warning>
+
+      <warning>
+        This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update.
+      </warning>
     </section>
+
     <section>
       <title>Run the interpreter with a Java command line</title>
-      <para>The Interpreter provides different facades in order to run a Kermeta program. The RunCommandLine class allows to pass the name of: the Kermeta source file, and optionnaly the name of the class and the opertation to run.</para>
-      <para>You can create a Java application LaunchConfiguration that will run the interpreter with your Kermeta file.</para>
+
+      <para>The Interpreter provides different facades in order to run a
+      Kermeta program. The RunCommandLine class allows to pass the name of:
+      the Kermeta source file, and optionnaly the name of the class and the
+      opertation to run.</para>
+
+      <para>You can create a Java application LaunchConfiguration that will
+      run the interpreter with your Kermeta file.</para>
+
       <figure id="refIllustration6">
         <title>Java run configuration main tab</title>
+
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png" width="14.967cm" depth="9.312cm"/>
+            <imagedata depth=""
+                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png"
+                       width="" />
           </imageobject>
         </mediaobject>
       </figure>
-      <para/>
-      <para>Be careful, you must select &#x201C;Include external jars when searching for a main class&#x201D;.</para>
+
+      <para></para>
+
+      <para>Be careful, you must select “Include external jars when searching
+      for a main class”.</para>
+
       <figure id="refIllustration7">
         <title>Java run configuration arguments</title>
+
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png" width="14.967cm" depth="8.916cm"/>
+            <imagedata depth=""
+                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png"
+                       width="" />
           </imageobject>
         </mediaobject>
       </figure>
-      <para/>
-      <para>The output level of interpreter traces can be set using a log4j configuration file. The concrete file to use is set by the java property &#x201C;kermeta.log4j.configurationfile.name&#x201D;. A sample of log4j configuration file is located in the textEditor plugin. </para>
-      <para>Exemple add the following in the VM arguments box: -Dkermeta.log4j.configurationfile.name=&#x201D;../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml&#x201D; </para>
-      <para>The classpath must be carefully set using the jar of Kermeta, the jar of Ecore and of emf.</para>
+
+      <para></para>
+
+      <para>The output level of interpreter traces can be set using a log4j
+      configuration file. The concrete file to use is set by the java property
+      “kermeta.log4j.configurationfile.name”. A sample of log4j configuration
+      file is located in the textEditor plugin.</para>
+
+      <para>Exemple add the following in the VM arguments box:
+      -Dkermeta.log4j.configurationfile.name=”../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml”</para>
+
+      <para>The classpath must be carefully set using the jar of Kermeta, the
+      jar of Ecore and of emf.</para>
+
       <figure id="refIllustration8">
-        <title>Java run configuration classpath (using the interpreter jars in the texteditor)</title>
+        <title>Java run configuration classpath (using the interpreter jars in
+        the texteditor)</title>
+
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png" width="14.967cm" depth="8.916cm"/>
+            <imagedata depth=""
+                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png"
+                       width="" />
           </imageobject>
         </mediaobject>
       </figure>
-      <para/>
-      <tip>This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.</tip>
-      <warning>This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.</warning>
+
+      <para></para>
+
+      <tip>
+        This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
+      </tip>
+
+      <warning>
+        This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
+      </warning>
+
       <section>
         <title>Command line options</title>
-        <para>The command line needs several options to run properly a kermeta program.</para>
+
+        <para>The command line needs several options to run properly a kermeta
+        program.</para>
+
         <para>.</para>
+
         <itemizedlist>
           <listitem>
-            <para>-C : (takes 1 argument)  Qualified name of the class to run </para>
+            <para>-C : (takes 1 argument) Qualified name of the class to
+            run</para>
+
             <para>ex: myPackage::MyClass</para>
-            <para role="lineBreak">Note that it will not instanciate the class (ie. self will return void)</para>
+
+            <para role="lineBreak">Note that it will not instanciate the class
+            (ie. self will return void)</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-H : (takes 0 argument)  Display the help </para>
+            <para>-H : (takes 0 argument) Display the help</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-T : (takes 0 argument)  Run as a test suite </para>
+            <para>-T : (takes 0 argument) Run as a test suite</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-P : (takes 0 argument)  Display Profiling info </para>
+            <para>-P : (takes 0 argument) Display Profiling info</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-K : (takes 1 argument)  Location for kermeta standard unit(framerwork.km) (KermetaUnit.STD_LIB_URI variable) </para>
+            <para>-K : (takes 1 argument) Location for kermeta standard
+            unit(framerwork.km) (KermetaUnit.STD_LIB_URI variable)</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-O : (takes 1 argument)  Name of the operation to run</para>
+            <para>-O : (takes 1 argument) Name of the operation to run</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-U : (takes 1 argument)  URI of the unit file that must be loaded</para>
+            <para>-U : (takes 1 argument) URI of the unit file that must be
+            loaded</para>
           </listitem>
         </itemizedlist>
+
         <itemizedlist>
           <listitem>
-            <para>-M : (takes 1 argument)  Indicate a file containing URI_MAP (This is usefull to solve some model loading troubles)</para>
+            <para>-M : (takes 1 argument) Indicate a file containing URI_MAP
+            (This is usefull to solve some model loading troubles)</para>
           </listitem>
         </itemizedlist>
-        <para>Other values on the command line will be passed as string to the operation</para>
+
+        <para>Other values on the command line will be passed as string to the
+        operation</para>
+
         <para>Exemple of arguments for a kermeta program:</para>
+
         <programlisting>-P -U ../ModelEngineeringCourse/transfo/add_observer.kmt -C pattern_macros::Main -O main -K lib/framework.km ../models/needs_observer.ecore Compteur Afficheur </programlisting>
       </section>
+
       <section>
         <title>About the URI map</title>
-        <para>When you run a kermeta program outside of Eclipse, the uri of type platform:// are not correctly resolved.</para>
-        <para>This option allow to specify a file that contains mapping to help to resolve those uri. </para>
-        <para>This uri map file uses the syntax of java properties files.</para>
-        <para>Exemple of uri.map file which maps some platform:// urls into file:// urls</para>
-        <programlisting>#"platform:/plugin/fr.irisa.triskell.kermeta/"        "<ulink url="../../../../../../eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/" type="">file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/</ulink>""platform:/resource/fr.irisa.triskell.kermeta/"        "file:/C:/eclipse3.0.2/eclipse/workspace/fr.irisa.triskell.kermeta/"</programlisting>
+
+        <para>When you run a kermeta program outside of Eclipse, the uri of
+        type platform:// are not correctly resolved.</para>
+
+        <para>This option allow to specify a file that contains mapping to
+        help to resolve those uri.</para>
+
+        <para>This uri map file uses the syntax of java properties
+        files.</para>
+
+        <para>Exemple of uri.map file which maps some platform:// urls into
+        file:// urls</para>
+
+        <programlisting>#
+"platform:/plugin/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<ulink
+            type=""
+            url="../../../../../../eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/">file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/</ulink>"
+"platform:/resource/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.0.2/eclipse/workspace/fr.irisa.triskell.kermeta/"</programlisting>
       </section>
     </section>
   </chapter>
+
   <chapter>
     <title>Debugging</title>
-    <para>Since v0.1.0 Kermeta has a debugger. As any debugger, it proposes breakpoints step over, step into, run, resume, visualization of variables, etc</para>
+
+    <para>Since v0.1.0 Kermeta has a debugger. As any debugger, it proposes
+    breakpoints step over, step into, run, resume, visualization of variables,
+    etc</para>
   </chapter>
+
   <chapter>
     <title>Install\Update Kermeta workbench</title>
-    <para>Kermeta is easy to install and to update. It uses the Eclipse Install manager.</para>
+
+    <para>Kermeta is easy to install and to update. It uses the Eclipse
+    Install manager.</para>
+
     <section>
       <title>Install Kermeta</title>
-      <para>To install Kermeta plugins, point your Eclipse Update Manager at <ulink url="http://www.kermeta.org/update" type="">http://www.kermeta.org/update</ulink>. </para>
-      <para>Help </para>
-      <para>&gt; Software Updates </para>
-      <para>&gt; Find and Install... </para>
-      <para>&gt; Search for new features to install </para>
-      <para>&gt; Add Update Site... </para>
+
+      <para>To install Kermeta plugins, point your Eclipse Update Manager at
+      <ulink type=""
+      url="http://www.kermeta.org/update">http://www.kermeta.org/update</ulink>.</para>
+
+      <para>Help</para>
+
+      <para>&gt; Software Updates</para>
+
+      <para>&gt; Find and Install...</para>
+
+      <para>&gt; Search for new features to install</para>
+
+      <para>&gt; Add Update Site...</para>
+
       <itemizedlist>
         <listitem>
           <para>Name: Kermeta Update Manager Site for Eclipse</para>
         </listitem>
+
         <listitem>
-          <para>URL: <ulink url="http://www.kermeta.org/update" type="">http://www.kermeta.org/update</ulink></para>
+          <para>URL: <ulink type=""
+          url="http://www.kermeta.org/update">http://www.kermeta.org/update</ulink></para>
         </listitem>
       </itemizedlist>
-      <para>Accept all the license agreements, restart eclipse when asked...</para>
+
+      <para>Accept all the license agreements, restart eclipse when
+      asked...</para>
+
       <para>Then you can work with Kermeta !</para>
-      <para>A more detailed document on Kermeta installation is available at: <ulink url="http://www.kermeta.org/download/" type=""></ulink></para>
-      <para>A more detailled document on Eclipse plugin installation using the Install\Update manager is available here: <ulink url="http://eclipse.org/emf/docs.php?doc=docs/UsingUpdateManager/UsingUpdateManager.html" type="">http://eclipse.org/emf/docs.php?doc=docs/UsingUpdateManager/UsingUpdateManager.html</ulink> </para>
+
+      <para>A more detailed document on Kermeta installation is available at:
+      <ulink type="" url="http://www.kermeta.org/download/"></ulink></para>
+
+      <para>A more detailled document on Eclipse plugin installation using the
+      Install\Update manager is available here: <ulink type=""
+      url="http://eclipse.org/emf/docs.php?doc=docs/UsingUpdateManager/UsingUpdateManager.html">http://eclipse.org/emf/docs.php?doc=docs/UsingUpdateManager/UsingUpdateManager.html</ulink></para>
     </section>
+
     <section>
       <title>Update Kermeta</title>
-      <para>Updating your versions of Kermeta use the same dialog boxes. You simply don't have to add the update site and check for new versions.</para>
-      <tip>You can even ask Eclipse to notify you when a new version is available ! Check the options in the preferences menu.</tip>
+
+      <para>Updating your versions of Kermeta use the same dialog boxes. You
+      simply don't have to add the update site and check for new
+      versions.</para>
+
+      <tip>
+        You can even ask Eclipse to notify you when a new version is available ! Check the options in the preferences menu.
+      </tip>
     </section>
   </chapter>
-  
+
   <!-- begin - of the chapter about Help -->
+
   <chapter>
     <title>Help</title>
-    <para>The current help and many other documentation are available in the Eclipse Help system of your Eclipse installation.</para>
-    <para>Alternatively, an online version of all those documents is available at <ulink url="http://www.kermeta.org/documents" type="">http://www.kermeta.org/documents</ulink> </para>
+
+    <para>The current help and many other documentation are available in the
+    Eclipse Help system of your Eclipse installation.</para>
+
+    <para>Alternatively, an online version of all those documents is available
+    at <ulink type=""
+    url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink></para>
   </chapter>
+
   <!-- end - of the chapter about Help -->
-  
+
   <!-- begin - of the chapter about Transformations -->
+
   <chapter>
-    <title>
-      <emphasis role="strong">Transformations</emphasis>
-    </title>
-    <para>
-      <emphasis role="strong">The workbench provides several additional tools available directly on the files using the popup menu.</emphasis>
-    </para>
+    <title><emphasis role="strong">Transformations</emphasis></title>
+
+    <para><emphasis role="strong">The workbench provides several additional
+    tools available directly on the files using the popup
+    menu.</emphasis></para>
+
     <section>
-      <title>
-        <emphasis role="strong">Actions for Ecore files</emphasis>
-      </title>
+      <title><emphasis role="strong">Actions for Ecore
+      files</emphasis></title>
+
       <itemizedlist>
         <listitem>
-          <para>
-            <emphasis role="strong">Export functions: On ecore file you can export it into a KM (kermeta program in xmi format) or in kmt (Kermeta program using its textual syntax). As the ecore model may not be valid, the wizard provides some quick fixes. Those quick fixes will for example detect and propose a default solution for multiple operations with the same name.</emphasis>
-          </para>
+          <para><emphasis role="strong">Export functions: On ecore file you
+          can export it into a KM (kermeta program in xmi format) or in kmt
+          (Kermeta program using its textual syntax). As the ecore model may
+          not be valid, the wizard provides some quick fixes. Those quick
+          fixes will for example detect and propose a default solution for
+          multiple operations with the same name.</emphasis></para>
         </listitem>
       </itemizedlist>
-      <para>
-        <emphasis role="strong"/>
-      </para>
+
+      <para><emphasis role="strong"></emphasis></para>
+
       <itemizedlist>
         <listitem>
-          <para>
-            <emphasis role="strong">Merge function: You can merge several ecore files, simply select them and click &#x201C;merge&#x201D;. Its algorithm is base on the names of the packages and classes. </emphasis>
-          </para>
+          <para><emphasis role="strong">Merge function: You can merge several
+          ecore files, simply select them and click “merge”. Its algorithm is
+          base on the names of the packages and classes. </emphasis></para>
         </listitem>
       </itemizedlist>
     </section>
+
     <section>
-      <title>
-        <emphasis role="strong">Actions for kmt files</emphasis>
-      </title>
+      <title><emphasis role="strong">Actions for kmt files</emphasis></title>
+
       <itemizedlist>
         <listitem>
-          <para>
-            <emphasis role="strong">From a kmt files you can export it to an ecore file. Each of the kermeta notion that don't have a specific representation in ecore are stored into ecore annotations that will allow to roundtrip back to kermeta.</emphasis>
-          </para>
+          <para><emphasis role="strong">From a kmt files you can export it to
+          an ecore file. Each of the kermeta notion that don't have a specific
+          representation in ecore are stored into ecore annotations that will
+          allow to roundtrip back to kermeta.</emphasis></para>
         </listitem>
+
         <listitem>
-          <para><emphasis role="strong">The kmt file can also be exported into its model version (ie. Into a XMI file conformant to kermeta metamodel)</emphasis> This is usefull as this process also typecheck the model and thus allow to save some time when loading other file wich rely on the km version rather than the kmt version.</para>
+          <para><emphasis role="strong">The kmt file can also be exported into
+          its model version (ie. Into a XMI file conformant to kermeta
+          metamodel)</emphasis> This is usefull as this process also typecheck
+          the model and thus allow to save some time when loading other file
+          wich rely on the km version rather than the kmt version.</para>
         </listitem>
       </itemizedlist>
     </section>
+
     <section>
-      <title>
-        <emphasis role="strong">Actions for km files</emphasis>
-      </title>
+      <title><emphasis role="strong">Actions for km files</emphasis></title>
+
       <itemizedlist>
         <listitem>
-          <para><emphasis role="strong">From a km files you can export it to an ecore file. Each of the kermeta notion that don't have a specific representation in ecore are stored into ecore annotations</emphasis> that will allow to roundtrip back to kermeta.</para>
+          <para><emphasis role="strong">From a km files you can export it to
+          an ecore file. Each of the kermeta notion that don't have a specific
+          representation in ecore are stored into ecore annotations</emphasis>
+          that will allow to roundtrip back to kermeta.</para>
         </listitem>
       </itemizedlist>
+
       <itemizedlist>
         <listitem>
-          <para>You can also prettyprint this model representation of a kermeta program into the textual representation of this program.</para>
+          <para>You can also prettyprint this model representation of a
+          kermeta program into the textual representation of this
+          program.</para>
         </listitem>
       </itemizedlist>
     </section>
+
     <section>
-      <title>
-        <emphasis role="strong">Traceability</emphasis>
-      </title>
-      <para>
-        <emphasis role="strong">For many of those transformations, the wizard will propose you to store the traceability informations. </emphasis>
-      </para>
-      <para>
-        <emphasis role="strong">This is a special metamodel that stores a link between the sources elements and the target element so you can reuse it later. For example, it will help the debugger to retreive the correct line in the text version of the source file even if you are running the </emphasis>
-      </para>
-      <para>
-        <emphasis role="strong">km version.</emphasis>
-      </para>
-      <para>
-        <emphasis role="strong">This metamodel is very generic and can be used for any model.</emphasis>
-      </para>
+      <title><emphasis role="strong">Traceability</emphasis></title>
+
+      <para><emphasis role="strong">For many of those transformations, the
+      wizard will propose you to store the traceability informations.
+      </emphasis></para>
+
+      <para><emphasis role="strong">This is a special metamodel that stores a
+      link between the sources elements and the target element so you can
+      reuse it later. For example, it will help the debugger to retreive the
+      correct line in the text version of the source file even if you are
+      running the </emphasis></para>
+
+      <para><emphasis role="strong">km version.</emphasis></para>
+
+      <para><emphasis role="strong">This metamodel is very generic and can be
+      used for any model.</emphasis></para>
     </section>
   </chapter>
+
   <!-- end - of the chapter about Transformations -->
-   
+
   <!-- begin - of the chapter about the Class diagram Kermeta Model editor -->
+
   <chapter>
-    <title>
-      <emphasis role="strong">Class diagram Kermeta Model editor</emphasis>
-    </title>
-    <para>
-      <emphasis role="strong">The Kermeta Graphical Editor is a view of the Kermeta model as a class diagram. It is generated with the tool "Topcased"</emphasis>
-    </para>
+    <title><emphasis role="strong">Class diagram Kermeta Model
+    editor</emphasis></title>
+
+    <para><emphasis role="strong">The Kermeta Graphical Editor is a view of
+    the Kermeta model as a class diagram. It is generated with the tool
+    "Topcased"</emphasis></para>
+
     <figure id="refIllustration9">
       <title>Kermeta Class TouchNavigator</title>
+
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png" width="19.66cm" depth="12.801cm"/>
+          <imagedata depth=""
+                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"
+                     width="" />
         </imageobject>
       </mediaobject>
     </figure>
-    <para/>
+
+    <para></para>
+
     <tip>
-      <emphasis role="strong">It is in alpha stage, feel free to notify us what you found interresting or not in this view.</emphasis>
+      <emphasis role="strong">It is in alpha stage, feel free to notify us
+      what you found interresting or not in this view.</emphasis>
     </tip>
   </chapter>
+
   <!-- end - of the chapter about the Class diagram Kermeta Model editor -->
-  
+
   <!-- begin - of the chapter about the Kermeta Class TouchNavigator -->
+
   <chapter>
-    <title>
-      <emphasis role="strong">Kermeta Class TouchNavigator</emphasis>
-    </title>
-    <para>
-      <emphasis role="strong">The Kermeta Class TouchNavigator is a view that dynamically focuses on the element you are viewing in the editor or the outline.</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">With its damping animation, it proposes an original way to navigate and analyse your metamodel classes.</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">The color depends on the distance to the selected node.</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">Back and Forward button allow to navigate the history of seleted nodes.</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">It provides several lens for smarter vizualisation. For exemple you can zoom, rotate, set the locality (ie. How much nodes you display at once depending on the distance to the selection) or use the hyperbolic lens (Ie. Change the edge length depending on the distance).</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">If you leave your mouse over a class, it shows its documentation.</emphasis>
-    </para>
+    <title><emphasis role="strong">Kermeta Class
+    TouchNavigator</emphasis></title>
+
+    <para><emphasis role="strong">The Kermeta Class TouchNavigator is a view
+    that dynamically focuses on the element you are viewing in the editor or
+    the outline.</emphasis></para>
+
+    <para><emphasis role="strong">With its damping animation, it proposes an
+    original way to navigate and analyse your metamodel
+    classes.</emphasis></para>
+
+    <para><emphasis role="strong">The color depends on the distance to the
+    selected node.</emphasis></para>
+
+    <para><emphasis role="strong">Back and Forward button allow to navigate
+    the history of seleted nodes.</emphasis></para>
+
+    <para><emphasis role="strong">It provides several lens for smarter
+    vizualisation. For exemple you can zoom, rotate, set the locality (ie. How
+    much nodes you display at once depending on the distance to the selection)
+    or use the hyperbolic lens (Ie. Change the edge length depending on the
+    distance).</emphasis></para>
+
+    <para><emphasis role="strong">If you leave your mouse over a class, it
+    shows its documentation.</emphasis></para>
+
     <figure id="refIllustration9">
       <title>Kermeta Class TouchNavigator</title>
+
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png" width="19.66cm" depth="12.801cm"/>
+          <imagedata depth=""
+                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"
+                     width="" />
         </imageobject>
       </mediaobject>
     </figure>
-    <para/>
+
+    <para></para>
+
     <tip>
-      <emphasis role="strong">It is in alpha stage, feel free to notify us what you found interresting or not in this view.</emphasis>
+      <emphasis role="strong">It is in alpha stage, feel free to notify us
+      what you found interresting or not in this view.</emphasis>
     </tip>
   </chapter>
+
   <!-- end - of the chapter about the Kermeta Class TouchNavigator -->
-  
+
   <!-- begin - of the chapter about the Ecore Model Editor -->
+
   <chapter>
-    <title>
-      <emphasis role="strong">Ecore Model Editor</emphasis>
-    </title>
-    <para>
-      <emphasis role="strong">This Editor is provided by Eclipse in EMF.</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">Since Kermeta metamodel is an extension of EMOF, it is possible to use this editor to edit Kermeta programs.</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">This based on the Ecore2Kermeta and Kermeta2Ecore </emphasis>
-      <emphasis role="strong">
-        <emphasis role="strong">transformations.</emphasis>
-      </emphasis>
-    </para>
-    <para>
-      <emphasis role="strong">With the Ecore representation of your program, you can use the Ecore Model editor (from Eclipse\EMF) or any other Ecore tool (for example Omondo.graphic editor)</emphasis>
-    </para>
-    <para>
-      <emphasis role="strong"/>
-    </para>
-    <para>
-      <emphasis role="strong">This is described with more details in the EMF tutorial: </emphasis>
-      <ulink url="http://www.kermeta.org/docs/html.single/KermetaEMFTutorial/" type="">
-        <emphasis role="strong">http://www.kermeta.org/docs/html.single/KermetaEMFTutorial/</emphasis>
-      </ulink>
-      <emphasis role="strong"> </emphasis>
-    </para>
+    <title><emphasis role="strong">Ecore Model Editor</emphasis></title>
+
+    <para><emphasis role="strong">This Editor is provided by Eclipse in
+    EMF.</emphasis></para>
+
+    <para><emphasis role="strong">Since Kermeta metamodel is an extension of
+    EMOF, it is possible to use this editor to edit Kermeta
+    programs.</emphasis></para>
+
+    <para><emphasis role="strong">This based on the Ecore2Kermeta and
+    Kermeta2Ecore </emphasis> <emphasis role="strong"> <emphasis
+    role="strong">transformations.</emphasis> </emphasis></para>
+
+    <para><emphasis role="strong">With the Ecore representation of your
+    program, you can use the Ecore Model editor (from Eclipse\EMF) or any
+    other Ecore tool (for example Omondo.graphic editor)</emphasis></para>
+
+    <para><emphasis role="strong"></emphasis></para>
+
+    <para><emphasis role="strong">This is described with more details in the
+    EMF tutorial: </emphasis> <ulink type=""
+    url="http://www.kermeta.org/docs/html.single/KermetaEMFTutorial/">
+    <emphasis
+    role="strong">http://www.kermeta.org/docs/html.single/KermetaEMFTutorial/</emphasis>
+    </ulink> <emphasis role="strong"> </emphasis></para>
   </chapter>
+
   <!-- end - of the chapter about the Ecore Model Editor -->
-  
+
   <!-- begin - of the chapter about Tip and tricks -->
+
   <chapter>
     <title>Tip and tricks</title>
-    <tip>This section contains many useful information about how to use the Kermeta workbench.</tip>
+
+    <tip>
+      This section contains many useful information about how to use the Kermeta workbench.
+    </tip>
+
     <section>
       <title>Texteditor keyboard shortcuts</title>
+
       <informaltable>
         <tgroup cols="2">
-          <colspec colname="c1" colwidth="8.5cm"/>
-          <colspec colname="c2" colwidth="8.5cm"/>
+          <colspec colname="c1" colwidth="8.5cm" />
+
+          <colspec colname="c2" colwidth="8.5cm" />
+
           <thead>
             <row>
-              <entry>
-<?border-top 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-                <para>Keyboard shortcut</para>
-              </entry>
-              <entry align="center">
-<?border 0.002cm solid #000000?>
-                <para>Action</para>
-              </entry>
+              <entry><?border-top 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?> <para>Keyboard
+              shortcut</para></entry>
+
+              <entry align="center"><?border 0.002cm solid #000000?>
+              <para>Action</para></entry>
             </row>
           </thead>
+
           <tbody>
             <row>
-              <entry align="left">
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-                <para>&lt;CTRL&gt;+&lt;SPACE&gt;</para>
-              </entry>
-              <entry align="left">
-<?border-right 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-                <para>Pertinent code completion. This work for both in sevral places in the code.</para>
-              </entry>
+              <entry align="left"><?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?>
+              <para>&lt;CTRL&gt;+&lt;SPACE&gt;</para></entry>
+
+              <entry align="left"><?border-right 0.002cm solid #000000?>
+              <?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?>
+              <para>Pertinent code completion. This work for both in sevral
+              places in the code.</para></entry>
             </row>
+
             <row>
-              <entry>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
-              <entry>
-<?border-right 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
+              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+
+              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?></entry>
             </row>
+
             <row>
-              <entry>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
-              <entry>
-<?border-right 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
+              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+
+              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?></entry>
             </row>
+
             <row>
-              <entry>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
-              <entry>
-<?border-right 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
+              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+
+              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?></entry>
             </row>
+
             <row>
-              <entry>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
-              <entry>
-<?border-right 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
+              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+
+              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?></entry>
             </row>
+
             <row>
-              <entry>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
-              <entry>
-<?border-right 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-              </entry>
+              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+
+              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
+              <?border-left 0.002cm solid #000000?></entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
-      <para>[TODO check with the platform tip and tricks page which eclipse shortcut correctly work with Kermeta editor]</para>
+
+      <para>[TODO check with the platform tip and tricks page which eclipse
+      shortcut correctly work with Kermeta editor]</para>
     </section>
+
     <section>
       <title>Texteditor tips</title>
+
       <section>
         <title>Quickdiff</title>
-        <para>When working with CVS, the quickdiff is best used if it use the latest CVS revision as reference.</para>
+
+        <para>When working with CVS, the quickdiff is best used if it use the
+        latest CVS revision as reference.</para>
+
         <figure id="refIllustration10">
           <title>Quickdiff recommended preferences</title>
+
           <mediaobject>
             <imageobject>
-              <imagedata fileref="KerMeta-UI-UserGuide_figures/QuickDiff_preferences.png" width="14.967cm" depth="11.467cm"/>
+              <imagedata depth=""
+                         fileref="KerMeta-UI-UserGuide_figures/QuickDiff_preferences.png"
+                         width="" />
             </imageobject>
           </mediaobject>
         </figure>
-        <para/>
+
+        <para></para>
       </section>
     </section>
   </chapter>
+
   <!-- end - of the chapter about Tip and tricks -->
-  
 </book>
