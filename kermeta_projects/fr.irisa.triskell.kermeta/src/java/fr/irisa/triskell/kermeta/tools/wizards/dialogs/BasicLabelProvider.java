@@ -1,4 +1,4 @@
-/* $Id: BasicLabelProvider.java,v 1.2 2006-03-07 22:06:29 barais Exp $
+/* $Id: BasicLabelProvider.java,v 1.3 2007-01-10 13:51:35 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta (First iteration)
  * File      : EcoreFileLabelProvider.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 13, 2006
  * Authors       : zdrey
  */
-/* $Id: BasicLabelProvider.java,v 1.2 2006-03-07 22:06:29 barais Exp $
+/* $Id: BasicLabelProvider.java,v 1.3 2007-01-10 13:51:35 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EcoreFileLabelProvider.java
  * License   : EPL
@@ -27,8 +27,8 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
+import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.KermetaConstants;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**
  * @author zdrey
@@ -42,11 +42,11 @@ public class BasicLabelProvider implements ILabelProvider {
 	public Image getImage(Object element) {
 		Image result = null;
 		if (element instanceof IFolder)
-			result = KermetaPlugin.getKermetaIcons().get(KermetaConstants.FOLDER);
+			result = KermetaIcons.get(KermetaConstants.FOLDER);
 		else if (element instanceof IFile)
-			result = KermetaPlugin.getKermetaIcons().get(KermetaConstants.FILE);
+			result = KermetaIcons.get(KermetaConstants.FILE);
 		else if (element instanceof IProject)
-			result = KermetaPlugin.getKermetaIcons().get(KermetaConstants.PROJECT);
+			result = KermetaIcons.get(KermetaConstants.PROJECT);
 		return result;
 	}
 

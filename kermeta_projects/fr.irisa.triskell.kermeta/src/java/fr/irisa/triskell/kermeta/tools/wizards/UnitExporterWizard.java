@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.13 2006-08-04 15:31:50 zdrey Exp $
+/* $Id: UnitExporterWizard.java,v 1.14 2007-01-10 13:51:34 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -20,7 +20,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-// import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -28,13 +27,14 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
+import fr.irisa.triskell.kermeta.console.messages.ErrorMessage;
+import fr.irisa.triskell.kermeta.console.messages.ThrowableMessage;
+import fr.irisa.triskell.kermeta.console.messages.WarningMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
@@ -199,10 +199,9 @@ public class UnitExporterWizard extends Wizard {
 	 * @see org.eclipse.jface.wizard.IWizard#performFinish()
 	 */
 	public boolean performFinish() {
-		KermetaPlugin.getDefault().newConsole();
-		KermetaPlugin.getDefault().getConsoleStream().println(
-				"Loading " + inputFile.getName());
 
+		KermetaPlugin.getDefault().getConsole().println("Loading " + inputFile.getName());
+		
 		// DestFileWizardPage outputPage =
 		// (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
 		outputPage.getFileName();
@@ -221,11 +220,8 @@ public class UnitExporterWizard extends Wizard {
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors: "
 							+ unit.messages.getAllMessagesAsString());
-
-			MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole()
-					.newMessageStream();
-			mcs.setColor(new Color(null, 255, 0, 0));
-			mcs.println(unit.messages.getAllMessagesAsString());
+			ErrorMessage message = new ErrorMessage(unit.messages.getAllMessagesAsString());
+			KermetaPlugin.getDefault().getConsole().println(message);
 
 		} else {
 			try {
@@ -234,14 +230,12 @@ public class UnitExporterWizard extends Wizard {
 
 				// display eventual warnings
 				if (unit.messages.getAllWarnings().size() > 0) {
-					MessageConsoleStream mcs = KermetaPlugin.getDefault()
-							.getConsole().newMessageStream();
-					mcs.setColor(new Color(null, 255, 170, 0));
-					mcs.println(unit.messages.getAllMessagesAsString());
+					WarningMessage message = new WarningMessage(unit.messages.getAllMessagesAsString());
+					KermetaPlugin.getDefault().getConsole().println(message);
 				}
 
-				KermetaPlugin.getDefault().getConsoleStream().println(
-						"Writing " + outputFile.getName());
+				KermetaPlugin.getDefault().getConsole().println("Writing " + outputFile.getName());
+
 
 				writeUnit(unit, outputFile);
 				if (tracePage.enableFileDestinationButton.getSelection()) {
@@ -255,7 +249,7 @@ public class UnitExporterWizard extends Wizard {
 
 				e.printStackTrace();
 
-				KermetaPlugin.getDefault().consolePrintStackTrace(e);
+				KermetaPlugin.getDefault().getConsole().print( new ThrowableMessage(e) );
 			}
 		}
 

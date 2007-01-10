@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.3 2006-05-03 21:17:11 dvojtise Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.4 2007-01-10 13:51:34 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -29,6 +29,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.console.MessageConsoleStream;
 
+import fr.irisa.triskell.kermeta.console.messages.WarningMessage;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
@@ -122,9 +123,8 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 		exporter.exportPackage(builder.rootPackage);
 		//		 display eventual warnings
 		if(exporter.messages.getAllWarnings().size() > 0){
-			MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
-        	mcs.setColor(new Color(null, 255,170,0));
-        	mcs.println(exporter.messages.getAllMessagesAsString());        	
+			WarningMessage message = new WarningMessage( exporter.messages.getAllMessagesAsString() );
+			KermetaPlugin.getDefault().getConsole().println( message );
 		}
 		
 	    // Save Ecore structure	

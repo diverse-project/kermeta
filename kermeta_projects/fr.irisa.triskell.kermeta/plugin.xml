@@ -140,24 +140,6 @@
    		
       </objectContribution>
       <objectContribution
-            adaptable="true"
-            id="fr.irisa.triskell.kermeta.contribution1"
-            nameFilter="*"
-            objectClass="org.eclipse.core.resources.IProject">
-         <menu
-	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-	         label="Kermeta"
-	         path="additions">
-      		<separator name="kermetagroup2"/>
-      	 </menu>
-         <action
-               class="fr.irisa.triskell.kermeta.builders.ToggleNatureAction"
-               enablesFor="+"
-               id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
-               label="Add/Remove Kermeta Nature"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-      </objectContribution>
-      <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.ecore"
             id="fr.irisa.triskell.kermeta.contribution1">
@@ -260,4 +242,34 @@
             name="Kermeta samples"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
    </extension>
+ <extension
+       id="KermetaNature"
+       point="org.eclipse.core.resources.natures">
+    <runtime>
+       <run class="fr.irisa.triskell.kermeta.core.natures.KermetaNature"/>
+    </runtime>
+ </extension>
+ <extension
+       point="org.eclipse.ui.newWizards">
+    <category
+          id="fr.irisa.triskell.kermeta.KermetaCategory"
+          name="Kermeta"/>
+    <wizard
+          category="fr.irisa.triskell.kermeta.KermetaCategory"
+          class="fr.irisa.triskell.kermeta.tools.wizards.NewKermetaProjectWizard"
+          descriptionImage="icons/tree_package.gif"
+          icon="icons/tree_package.gif"
+          id="fr.irisa.triskell.kermeta.newProject"
+          name="New Kermeta Project"
+          project="true">
+       <selection class="org.ecilpse.core.resources.IProject"/>
+    </wizard>
+ </extension>
+ <extension
+       point="org.eclipse.ui.ide.projectNatureImages">
+    <image
+          icon="icons/kermetaproject.gif"
+          id="fr.irisa.triskell.kermeta.KermetaNatureImage"
+          natureId="fr.irisa.triskell.kermeta.KermetaNature"/>
+ </extension>
 </plugin>

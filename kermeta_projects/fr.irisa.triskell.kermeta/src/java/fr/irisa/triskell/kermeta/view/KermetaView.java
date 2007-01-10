@@ -1,37 +1,24 @@
-/*$Id: KermetaView.java,v 1.2 2007-01-09 16:16:50 cfaucher Exp $
-* Project : fr.irisa.triskell.kermeta
-* File : 	KermetaView.java
-* License : EPL
-* Copyright : IRISA / INRIA / Universite de Rennes 1
-* ----------------------------------------------------------------------------
-* Creation date : 2 aout 06
-* Authors : cfaucher
-*/
+/**
+ * 
+ */
 package fr.irisa.triskell.kermeta.view;
 
 import java.util.Iterator;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-
-import fr.irisa.triskell.kermeta.popup.actions.EMFRegisterAction;
 
 
 /**
+ * @author cfaucher
  *
  */
 public class KermetaView extends ViewPart implements IViewPart {

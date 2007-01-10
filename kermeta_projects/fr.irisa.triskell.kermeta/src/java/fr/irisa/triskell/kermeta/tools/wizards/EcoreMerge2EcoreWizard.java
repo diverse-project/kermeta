@@ -1,4 +1,4 @@
-/* $Id: EcoreMerge2EcoreWizard.java,v 1.2 2006-08-04 15:31:50 zdrey Exp $
+/* $Id: EcoreMerge2EcoreWizard.java,v 1.3 2007-01-10 13:51:34 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -35,6 +35,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
+import fr.irisa.triskell.kermeta.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.dev.model.PackageMerge;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
@@ -134,7 +135,6 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 	public void writeUnit(IFile ifile) throws Exception {
 		EPackage result = null;
 
-		PackageMerge pm = new PackageMerge();
 		ResourceSet resource_set = new ResourceSetImpl();
 		URI u = null;
 		for (IFile file : ecorefiles) {
@@ -184,9 +184,9 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 	 * @see org.eclipse.jface.wizard.IWizard#performFinish()
 	 */
 	public boolean performFinish() {
-		KermetaPlugin.getDefault().newConsole();
-		KermetaPlugin.getDefault().getConsoleStream().println(
-				"Loading " + inputFile.getName());
+		
+		KermetaPlugin.getDefault().getConsole().println("Loading " + inputFile.getName());
+		
 		// DestFileWizardPage outputPage =
 		// (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
 		outputPage.getFileName();
@@ -203,8 +203,7 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 
 			outputFile = outputPage.createNewFile();
 
-			KermetaPlugin.getDefault().getConsoleStream().println(
-					"Writing " + outputFile.getName());
+			KermetaPlugin.getDefault().getConsole().println("Writing " + outputFile.getName());
 
 			writeUnit(outputFile);
 			if (tracePage.enableFileDestinationButton.getSelection()) {
@@ -218,7 +217,7 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 
 			e.printStackTrace();
 
-			KermetaPlugin.getDefault().consolePrintStackTrace(e);
+			KermetaPlugin.getDefault().getConsole().print( new ThrowableMessage(e) );
 		}
 
 		return true;

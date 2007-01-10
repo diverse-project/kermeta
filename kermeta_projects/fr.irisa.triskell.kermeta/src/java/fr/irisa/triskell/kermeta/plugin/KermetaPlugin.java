@@ -14,10 +14,11 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.eclipse.ui.plugin.*;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.KermetaIcons;
+import fr.irisa.triskell.kermeta.console.KermetaMessageConsole;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -39,9 +40,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	// Logger for this plugin
 	protected static Logger pluginLog;
 	
-	public static final String PLUGIN_CONSOLE_NAME = "KerMeta.Plugin.Console";
-	protected MessageConsoleStream consoleStream = null;
-    
+	private KermetaMessageConsole console = new KermetaMessageConsole("Kermeta Console");
 	
 	/**
 	 * The constructor.
@@ -124,95 +123,15 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		return pluginLog;
 	}
 	
-	/**
-	 * get current MessageConsoleStream. Create a new one if it doesn't exist
-	 * @return MessageConsoleStream
-	 */
-	public MessageConsoleStream getConsoleStream() {
-
-		if(consoleStream == null)
-			this.newConsole();			
-	    return consoleStream;
-    }
 	
 	/**
 	 * get current MessageConsole. Create a new one if it doesn't exist
 	 * @return MessageConsole
 	 */
-	public MessageConsole getConsole() {
-
-		MessageConsole messageConsole = null;
-	    
-		IConsoleManager consoleManager = null;
-	    
-	    ConsolePlugin cplugin = ConsolePlugin.getDefault();
-	    consoleManager = cplugin.getConsoleManager();
-	    IConsole[] consoles = consoleManager.getConsoles();
-	    // retreives existing console
-	    for ( int i = 0; i < consoles.length; i++)
-	    {
-	    	if (consoles[i].getName().compareTo(PLUGIN_CONSOLE_NAME)==0)
-	    	{
-	    		messageConsole = (MessageConsole)consoles[i];
-	    	}
-	    }
-	    if (messageConsole == null)
-	    {
-	    	messageConsole = new MessageConsole(PLUGIN_CONSOLE_NAME, null);
-	    	consoleStream = messageConsole.newMessageStream();
-	        consoleManager.addConsoles( new IConsole[]{messageConsole});
-		    consoleManager.showConsoleView(messageConsole);
-	    }
-	    
-	    return messageConsole;
+	public KermetaMessageConsole getConsole() {
+	    return console;
     }
-	
-	/**
-	 * reset MessageConsole. 
-	 * @return MessageConsoleStream (for direct use)
-	 */
-	public MessageConsoleStream newConsole() {
 
-		MessageConsole messageConsole = null;
-	    
-		IConsoleManager consoleManager = null;
-	    
-	    ConsolePlugin cplugin = ConsolePlugin.getDefault();
-	    consoleManager = cplugin.getConsoleManager();
-	    IConsole[] consoles = consoleManager.getConsoles();
-	    // removes existing console
-	    for ( int i = 0; i < consoles.length; i++)
-	    {
-	    	if (consoles[i].getName().compareTo(PLUGIN_CONSOLE_NAME)==0)
-	    	{
-	    		consoleManager.removeConsoles(new IConsole[]{consoles[i]});
-	    	}
-	    }
-	    if (messageConsole == null)
-	    {
-	    	messageConsole = new MessageConsole(PLUGIN_CONSOLE_NAME, null);
-	    	consoleStream = messageConsole.newMessageStream();
-	        consoleManager.addConsoles( new IConsole[]{messageConsole});
-		    consoleManager.showConsoleView(messageConsole);
-	    }
-	    else
-	    {
-	    	consoleStream = messageConsole.newMessageStream();	        
-	    }
-	    return consoleStream;
-    }
-	
-	public void consolePrintStackTrace(Throwable e)
-	{
-		ByteArrayOutputStream oStream = new java.io.ByteArrayOutputStream();		
-		PrintWriter pw = new PrintWriter(oStream);			
-		e.printStackTrace(pw);
-		pw.flush();
-		MessageConsoleStream mcs = getConsole().newMessageStream();
-		consoleStream = mcs;
-    	mcs.setColor(new Color(null, 255,0,0));
-    	mcs.println(oStream.toString());
-	}
 	
 	/* ACCESSORS */
 	public static KermetaIcons getKermetaIcons() { return kermetaIcons; }

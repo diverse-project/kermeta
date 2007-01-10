@@ -87,7 +87,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			}
 		}
 		
-		KermetaPlugin.getDefault().getConsoleStream().println(pList);
+		KermetaPlugin.getDefault().getConsole().println(pList);
 	}
 	
 	
