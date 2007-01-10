@@ -32,6 +32,7 @@
    <import plugin="fr.irisa.triskell.kermeta"/>
    <import plugin="org.eclipse.ui.workbench.texteditor"/>
    <import plugin="org.eclipse.jface.text"/>
+   <import plugin="fr.irisa.triskell.kermeta.kpm"/>
    </requires>
       <extension
       
@@ -262,31 +263,16 @@
       </extension>
       <extension
             point="org.eclipse.ui.newWizards">
-         <category
-               name="Kermeta"
-               id="KermetaWizard"/>
          <wizard
                icon="icons/newkermetafile.png"
                class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
                finalPerspective="kermetaPerspective"
-               category="KermetaWizard"
+               category="fr.irisa.triskell.kermeta.KermetaCategory"
                descriptionImage="icons/kermeta.png"
                project="true"
                preferredPerspectives="org.eclipse.ui.resourcePerspective"
                name="New Kermeta file"
                id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
-         <wizard
-               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"
-               icon="icons/tree_package.gif"
-               finalPerspective="kermetaPerspective"
-               category="KermetaWizard"
-               descriptionImage="icons/tree_package.gif"
-               project="true"
-               preferredPerspectives="org.eclipse.ui.resourcePerspective"
-               name="New Kermeta project"
-               id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard">
-            <selection class="org.eclipse.core.resources.IProject"/>
-         </wizard>
       </extension>
       <extension
             point="org.eclipse.debug.core.sourceLocators">
@@ -299,20 +285,8 @@
      <extension
            point="org.eclipse.ui.importWizards">
      </extension>
-     <extension
-           point="org.eclipse.ui.ide.projectNatureImages">
-        <image
-              natureId="fr.irisa.triskell.kermeta.runner.kermetanature"
-              icon="icons/kermetaproject.gif"
-              id="fr.irisa.triskell.kermeta.runner.kermetaProject"/>
-     </extension>
      <!-- When Kermeta Project will be really "functionally" interesting, we will
           create a specific KermetaProject class -->
-     <extension
-           id="fr.irisa.triskell.kermeta.runner.kermetanature"
-           name="Kermeta Nature"
-           point="org.eclipse.core.resources.natures">
-     </extension>
      <extension
            point="org.eclipse.debug.core.watchExpressionDelegates">
         <watchExpressionDelegate
