@@ -5,6 +5,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 
+import fr.irisa.triskell.kermeta.core.markers.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
@@ -23,8 +24,8 @@ public class ParsingStrategy implements IReconcilingStrategy {
 			KMTUnit unit = (KMTUnit) KermetaWorkspace.getInstance().getKermetaUnit( editor.getFile() );
 			unit.messages.deleteParsingErrors();
 			KermetaParserHelper.parse( unit, editor.getContent() );
-			MarkersHelper.clearMarkers(editor.getFile());
-			MarkersHelper.createMarkers(editor.getFile(), unit);
+			KermetaMarkersHelper.clearMarkers(editor.getFile());
+			KermetaMarkersHelper.createMarkers(editor.getFile(), unit);
 		}
 	}
 

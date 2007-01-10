@@ -24,6 +24,7 @@ import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.core.markers.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
@@ -132,8 +133,8 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	 */
 	protected void setMcunit(KMTUnit mcunit) {
 		this.mcunit = mcunit;
-		MarkersHelper.clearMarkers( getFile() );	
-		MarkersHelper.createMarkers( getFile(), mcunit);
+		KermetaMarkersHelper.clearMarkers( getFile() );	
+		KermetaMarkersHelper.createMarkers( getFile(), mcunit);
 		if (outline != null)
 			outline.update();
 	}

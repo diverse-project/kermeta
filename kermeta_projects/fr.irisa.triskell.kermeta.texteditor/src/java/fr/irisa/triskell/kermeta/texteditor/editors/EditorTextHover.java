@@ -25,6 +25,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.core.markers.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
@@ -86,7 +87,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		
 	    try {
-			IMarker[] markers = editor.getFile().findMarkers(MarkersHelper.getMarkerType(), true, 2);
+			IMarker[] markers = editor.getFile().findMarkers(KermetaMarkersHelper.getMarkerType(), true, 2);
 			for (int i=0; i<markers.length; i++) {
 				int start = MarkerUtilities.getCharStart(markers[i]);
 				int end = MarkerUtilities.getCharEnd(markers[i]);
