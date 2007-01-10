@@ -6,8 +6,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
@@ -69,7 +69,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		try {
 			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
 			System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
-					Platform.asLocalURL(url).getFile());
+					FileLocator.toFileURL(url).getFile());
 		} catch (Exception e) {
 			System.out.print("Not able to retreive kermeta_log4j_configuration.xml in the kermeta plugin => using default log configuration");
 			// don't worry about that, the log4j will simply use its default configuration
