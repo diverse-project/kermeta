@@ -10,13 +10,18 @@
 	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
 	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\kermeta.org\\docs"/>
 	
-	<target name="all" depends="OOo2dbk, html.single, html.chunked ,pdf.fop">
+	<target name="all" depends="preparedbk, html.single, html.chunked ,pdf.fop">
 	</target>
 	
 
 	<target name="OOo2dbk">
 		<ant antfile="common_build.xml"
 		     target="OOo2dbk"/>
+	</target>
+
+	<target name="preparedbk">
+		<ant antfile="common_build.xml"
+		     target="preparedbk"/>
 	</target>
 	
 	<target name="html.single">
