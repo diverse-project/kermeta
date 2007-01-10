@@ -19,10 +19,15 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.topcased.modeler.diagrams.model.Diagrams;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
@@ -31,16 +36,20 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.actions.DeleteInheritanceEdgeAction;
 import fr.irisa.triskell.kermeta.graphicaleditor.actions.utils.StructureActionConstants;
-
-
-
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 /**
  * Generated Model editor
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureEditor extends Modeler {
+public class StructureEditor extends Modeler implements KermetaUnitInterest {
+
+	private KermetaUnit unit;
+	private IFile sourceFile;
 
 	/**
 	 * @see org.topcased.modeler.editor.Modeler#getAdapterFactories()
@@ -132,4 +141,22 @@ public class StructureEditor extends Modeler {
         registry.registerAction(action);
         getSelectionActions().add(action.getId());
     }
+    
+    protected EObject openFile(IFile file, boolean resolve) {
+    	Diagrams o = (Diagrams) super.openFile(file, resolve);
+    	/*this.sourceFile = file;
+    	KermetaWorkspace.getInstance().declareInterest(this, file);*/
+    	return o;
+    }
+    
+    public void doSave(IProgressMonitor monitor) {
+    	
+    	super.doSave(monitor);
+    	KermetaWorkspace.getInstance().updateFile( sourceFile );
+    	
+    }
+    
+	public void updateKermetaUnit(KermetaUnit unit) {
+		this.unit = unit;
+	}
 }

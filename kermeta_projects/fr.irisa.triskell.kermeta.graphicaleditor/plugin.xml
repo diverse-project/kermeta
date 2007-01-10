@@ -15,7 +15,7 @@
    
    <extension point="org.eclipse.ui.newWizards">
       <wizard
-            category="KermetaWizard"
+            category="fr.irisa.triskell.kermeta.KermetaWizard"
             class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
             finalPerspective="kermetaPerspective"
             icon="icons/Structure.png"
