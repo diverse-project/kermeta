@@ -77,4 +77,22 @@
 		</propertySections>
 	</extension>
 	
+	   <extension
+         point="org.eclipse.ui.popupMenus">
+      <viewerContribution
+            id="titi"
+            targetID="org.topcased.modeler">
+         <visibility>
+            <objectClass name="fr.irisa.triskell.kermeta.graphicaleditor.diag.edit.InheritanceEditPart"/>
+         </visibility>
+         <action
+               class="fr.irisa.triskell.kermeta.graphicaleditor.actions.DeleteInheritanceEdgeAction"
+               icon="icons/kermeta.png"
+               id="fr.irisa.triskell.kermeta.prototyper.newAction3"
+               label="Delete inheritance edge"
+               menubarPath="org.eclipse.gef.group.edit"
+               />
+      </viewerContribution>
+   </extension>
+	
 </plugin>

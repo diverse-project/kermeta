@@ -18,7 +18,7 @@
       <wizard
             icon="icons/FSM.png"
             class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmDiagrams"
-            category="KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
+            category="fr.irisa.triskell.kermeta.KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
             name="Fsm Diagram"
             id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>

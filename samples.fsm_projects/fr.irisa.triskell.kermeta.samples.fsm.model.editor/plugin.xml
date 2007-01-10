@@ -16,13 +16,13 @@
     <category
           id="fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
           name="FSM Sample"
-          parentCategory="KermetaWizard">
+          parentCategory="fr.irisa.triskell.kermeta.KermetaWizard">
     </category>
     <wizard
       id = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizardID"
       name = "%_UI_FsmModelWizard_label"
       class = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizard"
-      category = "KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
+      category = "fr.irisa.triskell.kermeta.KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
       icon = "icons/full/obj16/FsmModelFile.gif">
       <description>%_UI_FsmModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />

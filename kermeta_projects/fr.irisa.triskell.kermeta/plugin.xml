@@ -252,10 +252,10 @@
  <extension
        point="org.eclipse.ui.newWizards">
     <category
-          id="fr.irisa.triskell.kermeta.KermetaCategory"
+          id="fr.irisa.triskell.kermeta.KermetaWizard"
           name="Kermeta"/>
     <wizard
-          category="fr.irisa.triskell.kermeta.KermetaCategory"
+          category="fr.irisa.triskell.kermeta.KermetaWizard"
           class="fr.irisa.triskell.kermeta.tools.wizards.NewKermetaProjectWizard"
           descriptionImage="icons/tree_package.gif"
           icon="icons/tree_package.gif"
