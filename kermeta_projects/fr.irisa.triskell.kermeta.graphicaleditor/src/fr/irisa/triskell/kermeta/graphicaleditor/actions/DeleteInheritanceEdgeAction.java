@@ -19,6 +19,8 @@ import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.IWorkbenchPart;
+
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureRequestConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.actions.utils.StructureActionConstants;
 
@@ -86,6 +88,7 @@ public class DeleteInheritanceEdgeAction extends WorkbenchPartAction implements 
     {
         setId(StructureActionConstants.DELETE_INHERITANCE_EDGE);
         setText("Delete inheritance edge");
+        setImageDescriptor(StructureImageRegistry.getImageDescriptor("PROPERTY_EDGE"));
     }
     
     /**
