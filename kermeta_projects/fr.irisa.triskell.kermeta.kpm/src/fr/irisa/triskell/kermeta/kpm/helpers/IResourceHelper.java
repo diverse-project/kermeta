@@ -20,7 +20,7 @@ import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaNature;
+import fr.irisa.triskell.kermeta.core.natures.KermetaNature;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 /**
@@ -149,7 +149,7 @@ public class IResourceHelper {
 		// To get the project description, it must be opened
 		if ( ! project.isOpen() ) 
 			return false;
-		return project.getDescription().hasNature( KermetaNature.NATURE_ID );
+		return project.getDescription().hasNature( KermetaNature.ID );
 	}
 	
 	static public boolean couldFileBeTypechecked(IFile file) {
@@ -239,6 +239,9 @@ public class IResourceHelper {
 		newCommands[0] = command;
 		description.setBuildSpec(newCommands);
 		project.setDescription(description, null);		
+		
+		System.out.println( "Builder added to : " + project.getName() );
+
 	}
 
 	static public void attachDefaultBuilderToKermetaProject(IProject project) throws CoreException {

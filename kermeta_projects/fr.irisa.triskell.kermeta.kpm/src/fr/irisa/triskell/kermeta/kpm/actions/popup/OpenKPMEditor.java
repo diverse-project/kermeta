@@ -4,7 +4,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IActionDelegate;
 
-import fr.irisa.triskell.kermeta.console.KermetaIOConsole;
+//import fr.irisa.triskell.kermeta.console.KermetaIOConsole;
 
 public class OpenKPMEditor implements IActionDelegate {
 
@@ -13,9 +13,9 @@ public class OpenKPMEditor implements IActionDelegate {
 		Runnable r = new Runnable() {
 			
 			public void run() {
-				KermetaIOConsole console = new KermetaIOConsole("blah");
+				/*KermetaIOConsole console = new KermetaIOConsole("blah");
 				String value = console.promptAndRead("Integer value : ");
-				console.println(value);
+				console.println(value);*/
 			}
 			
 		};

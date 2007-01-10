@@ -30,7 +30,6 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		
 		System.out.println("[KPM Plugin started]");
 		
 		KermetaWorkspace.getInstance();

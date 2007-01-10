@@ -28,16 +28,6 @@ public class KermetaChangeListener implements IResourceChangeListener {
 			}
 			break;
 			
-		case IResourceChangeEvent.PRE_BUILD :
-			visitor = new KermetaDeltaVisitor(kpm);
-			try {
-				event.getDelta().accept(visitor);
-			} catch (CoreException exception) {
-				System.out.println("POST_CHANGE exception : ");
-				exception.printStackTrace();
-			}
-			break;
-			
 		default :
 			break;
 		

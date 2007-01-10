@@ -22,6 +22,10 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	private KPM kpm;
 	
 	
+	public KermetaProjectBuilder() {
+		
+	}
+	
 	//////////////////////////
 	//////////////////////////
 	//		Building		//

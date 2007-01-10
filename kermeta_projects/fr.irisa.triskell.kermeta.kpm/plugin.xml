@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.7 2007-01-08 17:15:33 ftanguy Exp $
+ $Id: plugin.xml,v 1.8 2007-01-10 13:43:54 ftanguy Exp $
 -->
 
 <plugin>
@@ -69,15 +69,22 @@
               label="Kermeta Project Settings"
               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
      </objectContribution>
-  </extension>
-  <extension
-        id="runner.kermetanature"
-        name="Kermeta Nature"
-        point="org.eclipse.core.resources.natures">
-     <runtime>
-        <run class="fr.irisa.triskell.kermeta.kpm.workspace.KermetaNature"/>
-     </runtime>
-     <builder id="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
+     <objectContribution
+           adaptable="true"
+           id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
+           objectClass="org.eclipse.core.resources.IProject">
+        <menu
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions">
+           <separator name="kermetagroup2"/>
+        </menu>
+       <action
+              class="fr.irisa.triskell.kermeta.kpm.workspace.ToggleNatureAction"
+              id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
+              label="Add/Remove Kermeta Nature"
+              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+     </objectContribution>
   </extension>
   <extension
         id="kermetaMarker"
@@ -85,14 +92,6 @@
         point="org.eclipse.core.resources.markers">
      <persistent value="true"/>
      <super type="org.eclipse.core.resources.problemmarker"/>
-  </extension>
-  <extension
-        id="parsingMarker"
-        name="Parsing marker"
-        point="org.eclipse.core.resources.markers">
-     <persistent value="true"/>
-     <super type="kermetaMarker"/>
-     <attribute name="fr.irisa.triskell.kermeta.kpm.attribute2"/>
   </extension>
 </plugin>
 
