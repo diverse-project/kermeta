@@ -86,6 +86,11 @@ class Hashtable<K, V>
 		keys.each { k | result.add(self.getValue(k)) }
 	end
 	
+	/** Tests if a key is present in the table */
+	operation containsKey(key : K) : Boolean is do
+		result := getValue(key) != void
+	end
+	
 	// TODO: complete this class
 	// The rest might be writable in metacore directly
 	
