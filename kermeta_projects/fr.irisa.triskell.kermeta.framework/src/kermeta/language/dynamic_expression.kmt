@@ -7,6 +7,7 @@ package kermeta::interpreter;
 require "../Standard.kmt"
 
 using kermeta::standard
+using kermeta::reflection
 using kermeta::utils
 
 /**
@@ -44,7 +45,7 @@ class DynamicExpression
 	/**
 	 * Formal parameters of the expression
 	 */
-	reference formalParameters : Hashtable<String, kermeta::language::structure::Type>
+	reference formalParameters : Hashtable<String, kermeta::reflection::Type>
 
 	/**
 	 * initialise the formalParameters with an empty set of parameters
