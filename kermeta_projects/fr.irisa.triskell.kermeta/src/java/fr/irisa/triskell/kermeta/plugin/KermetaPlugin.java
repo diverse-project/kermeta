@@ -30,7 +30,7 @@ import java.util.*;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class KermetaPlugin extends AbstractUIPlugin {
+public class KermetaPlugin extends ConsolePlugin {
 	//The shared instance.
 	private static KermetaPlugin plugin = null;
 	//Resource bundle.
@@ -40,7 +40,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	// Logger for this plugin
 	protected static Logger pluginLog;
 	
-	private KermetaMessageConsole console = new KermetaMessageConsole("Kermeta Console");
+	private KermetaMessageConsole console = null;
 	
 	/**
 	 * The constructor.
@@ -129,6 +129,8 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	 * @return MessageConsole
 	 */
 	public KermetaMessageConsole getConsole() {
+		if ( console == null )
+			console = new KermetaMessageConsole("Kermeta Console");
 	    return console;
     }
 

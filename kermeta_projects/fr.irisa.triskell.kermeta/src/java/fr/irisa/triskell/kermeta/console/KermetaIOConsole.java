@@ -67,9 +67,9 @@ public class KermetaIOConsole {
 	 *
 	 */
 	protected void initialize() {
-	//	KermetaPlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ console }); ;
-		//KermetaPlugin.getDefault().getConsoleManager().showConsoleView(console);
-		//console.activate();
+		KermetaPlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ console }); ;
+		KermetaPlugin.getDefault().getConsoleManager().showConsoleView(console);
+		console.activate();
 	}
 	//////////////////////////////////
 	//////////////////////////////////
