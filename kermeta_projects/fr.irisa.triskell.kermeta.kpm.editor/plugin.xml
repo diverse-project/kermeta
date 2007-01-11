@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2007-01-11 16:02:52 ftanguy Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kermeta.kpm.presentation.KpmModelWizardID"
+      name = "%_UI_KpmModelWizard_label"
+      class = "fr.irisa.triskell.kermeta.kpm.presentation.KpmModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/KpmModelFile.gif">
+      <description>%_UI_KpmModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kermeta.kpm.presentation.KpmEditorID"
+        name = "%_UI_KpmEditor_label"
+        icon = "icons/full/obj16/KpmModelFile.gif"
+        extensions = "kpm"
+        class = "fr.irisa.triskell.kermeta.kpm.presentation.KpmEditor" 
+        contributorClass="fr.irisa.triskell.kermeta.kpm.presentation.KpmActionBarContributor" >
+    </editor>
+  </extension>
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="false"
+           id="fr.irisa.triskell.kermeta.kpm.kermetaProjectContribution"
+           objectClass="org.eclipse.core.resources.IResource">
+        <action
+              class="fr.irisa.triskell.kermeta.kpm.editor.plugin.OpenKPMEditor"
+              icon="icons/kermetaproject.gif"
+              id="fr.irisa.triskell.kermeta.kpm.openKPMEditor"
+              label="Kermeta Project Settings"
+              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+        <menu
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions"/>
+     </objectContribution>
+  </extension>
+  <extension
+        point="org.eclipse.core.filesystem.filesystems">
+     <filesystem scheme="fr.irisa.triskell.kermeta.kpm.editor.filesystem1">
+        <run class="fr.irisa.triskell.kermeta.kpm.editor.FileSystem1"/>
+     </filesystem>
+  </extension>    
+</plugin>
