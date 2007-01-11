@@ -18,6 +18,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.KermetaIcons;
+import fr.irisa.triskell.kermeta.console.KermetaIOConsole;
 import fr.irisa.triskell.kermeta.console.KermetaMessageConsole;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -30,7 +31,7 @@ import java.util.*;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class KermetaPlugin extends ConsolePlugin {
+public class KermetaPlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static KermetaPlugin plugin = null;
 	//Resource bundle.
@@ -40,7 +41,7 @@ public class KermetaPlugin extends ConsolePlugin {
 	// Logger for this plugin
 	protected static Logger pluginLog;
 	
-	private KermetaMessageConsole console = null;
+	private KermetaIOConsole console = null;
 	
 	/**
 	 * The constructor.
@@ -128,9 +129,9 @@ public class KermetaPlugin extends ConsolePlugin {
 	 * get current MessageConsole. Create a new one if it doesn't exist
 	 * @return MessageConsole
 	 */
-	public KermetaMessageConsole getConsole() {
+	public KermetaIOConsole getConsole() {
 		if ( console == null )
-			console = new KermetaMessageConsole("Kermeta Console");
+			console = new KermetaIOConsole("Kermeta Console");
 	    return console;
     }
 

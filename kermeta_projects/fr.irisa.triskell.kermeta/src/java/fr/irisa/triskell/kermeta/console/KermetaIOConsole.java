@@ -4,9 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IOConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
+import org.eclipse.ui.console.IConsoleView;
 
 import fr.irisa.triskell.kermeta.console.messages.KermetaMessage;
 import fr.irisa.triskell.kermeta.console.messages.ObjectKermetaMessage;
@@ -67,8 +74,8 @@ public class KermetaIOConsole {
 	 *
 	 */
 	protected void initialize() {
-		KermetaPlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ console }); ;
-		KermetaPlugin.getDefault().getConsoleManager().showConsoleView(console);
+		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[]{ console });
+		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(console);
 		console.activate();
 	}
 	//////////////////////////////////
