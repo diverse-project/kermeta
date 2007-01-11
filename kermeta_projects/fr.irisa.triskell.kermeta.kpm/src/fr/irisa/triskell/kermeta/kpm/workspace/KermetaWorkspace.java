@@ -14,6 +14,7 @@ import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.helpers.*;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 
 /**
  * 
@@ -32,12 +33,15 @@ public class KermetaWorkspace {
 	/**
 	 * KPM object is the key part of the system. It contains dependencies between files.
 	 */
-	private KPM kpm;
+	//private KPM kpm;
 	
 	/**
 	 * This attribute is the location of the Kermeta Project Manager's save.
 	 */
 	static final private String relativeKpmFileName = "/.metadata/.plugins/kpm.xmi";
+	
+	
+	private Hashtable <IProject, KermetaProject> projects = new Hashtable <IProject, KermetaProject> ();
 	
 	/**
 	 * This table keeps a trace of Object interested in a KermetaUnit of a File.
@@ -120,7 +124,7 @@ public class KermetaWorkspace {
 	 */
 	private void initialize() {
 		try {
-			initializeKpm();
+			//initializeKpm();
 			initializeProjects();
 		} catch (CoreException exception) {
 			exception.printStackTrace();
@@ -132,13 +136,13 @@ public class KermetaWorkspace {
 	 * The KPM object is the key part of the Kermeta Project Manager.
 	 *
 	 */
-	private void initializeKpm() throws CoreException {
+	/*private void initializeKpm() throws CoreException {
 		if ( ! doIHaveAKPMFile() ) {
 			kpm = KpmHelper.createKpm();
 		} else {
 			load();
 		}
-	}
+	}*/
 	
 	/**
 	 * Creates KermetaProjects object. It lists the project of the
@@ -146,12 +150,14 @@ public class KermetaWorkspace {
 	 * If yes, create a KermetaProject.
 	 *
 	 */
-	// TODO check if projects already have a KermetaBuilder
 	private void initializeProjects() throws CoreException {
-		IProject[] projects = IResourceHelper.getProjects();
-		for ( int index = 0; index < projects.length; index++ ) {
-			if ( IResourceHelper.isNatureKermeta(projects[index]) )
-				IResourceHelper.attachDefaultBuilderToKermetaProject(projects[index]);
+		IProject[] iprojects = IResourceHelper.getProjects();
+		for ( int index = 0; index < iprojects.length; index++ ) {
+			if ( IResourceHelper.isNatureKermeta(iprojects[index]) ) {
+				KermetaProject project = new KermetaProject(iprojects[index]);
+				projects.put(iprojects[index], project);
+				IResourceHelper.attachDefaultBuilderToKermetaProject(project);
+			}
 		}
 	}
 	//////////////////////////////////
@@ -170,9 +176,9 @@ public class KermetaWorkspace {
 	 * Does the project have a file containing its Kermeta description ?
 	 * @result True or False depending the existency of the Kermeta Project Manager file.
 	 */
-	private boolean doIHaveAKPMFile() {
+	/*private boolean doIHaveAKPMFile() {
 		return new java.io.File( getAbsoluteKPMFileName() ).exists();
-	}
+	}*/
 	
 	private boolean doesKermetaUnitCorrespondToFile(KermetaUnit unit, String fileURI) {
 		return unit.getUri().equals(fileURI);
@@ -188,20 +194,37 @@ public class KermetaWorkspace {
 	//		Accessors		//
 	//////////////////////////
 	//////////////////////////
+	public KermetaProject addKermetaProject(IProject value) throws CoreException {
+		KermetaProject project = new KermetaProject(value);
+		IResourceHelper.attachDefaultBuilderToKermetaProject(project);
+		return project;
+	}
+	
+	public KermetaProject[] geProjects() {
+		return (KermetaProject[]) projects.values().toArray();
+	}
+	
+	public KermetaProject getKermetaProject(IProject value) {
+		return projects.get(value);
+	}
 	/**
 	 * @return This method returns the path of the Kermeta Project Manager file.
 	 */
-	private String getAbsoluteKPMFileName() {	
+	public String getAbsoluteKPMFileName() {	
 		return IResourceHelper.root.getLocation().toString() + relativeKpmFileName;
+	}
+	
+	public IFile getKpmFile() {
+		return IResourceHelper.getIFile( relativeKpmFileName );
 	}
 	
 	/**
 	 * 
 	 * @return the Kermeta Project Manager object.
 	 */
-	public KPM getKpm() {
+	/*public KPM getKpm() {
 		return kpm;
-	}
+	}*/
 	
 	/**
 	 * This method calculates the number of objects interested in the given file.
@@ -296,11 +319,13 @@ public class KermetaWorkspace {
 	 * Create the file if it does not exist.
 	 */
 	public void save() {
-		try {
+		for ( KermetaProject project : projects.values() )
+			project.save();
+		/*try {
 			XMIHelper.save(getAbsoluteKPMFileName(), kpm);
 		} catch (IOException exception) {
 			exception.printStackTrace();
-		}
+		}*/
 	}
 	
 	/**
@@ -308,13 +333,13 @@ public class KermetaWorkspace {
 	 * The file existency must have been checked before calling this method.
 	 *
 	 */
-	private void load() {
+	/*private void load() {
 		try {
 			kpm = (KPM) XMIHelper.load(getAbsoluteKPMFileName());
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
-	}
+	}*/
 	//////////////////////////////////
 	//////////////////////////////////
 	//	End of Saving / Loading		//
@@ -521,27 +546,27 @@ public class KermetaWorkspace {
 	 * @param filePath
 	 * @return
 	 */
-	public File getFile(String fileName, String filePath) {
+	/*public File getFile(String fileName, String filePath) {
 		return kpm.findFile(fileName, filePath);
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param file
 	 * @return
 	 */
-	public File getFile(IFile file) {
+	/*public File getFile(IFile file) {
 		return kpm.findFile(file);
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param absoluteFileName
 	 * @return
 	 */
-	public File getFile(String relativeFileName) {
+	/*public File getFile(String relativeFileName) {
 		return kpm.findFile(relativeFileName);
-	}
+	}*/
 	
 	/**
 	 * 
@@ -576,48 +601,67 @@ public class KermetaWorkspace {
 	 * @param directoryPath
 	 * @return
 	 */
-	public Directory getDirectory(String directoryName, String directoryPath) {
+	/*public Directory getDirectory(String directoryName, String directoryPath) {
 		return kpm.findDirectory(directoryName, directoryPath);
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param folder
 	 * @return
 	 */
-	public Directory getDirectory(IFolder folder) {
+	/*public Directory getDirectory(IFolder folder) {
 		return kpm.findDirectory(folder);
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param absoluteDirectoryName
 	 * @return
 	 */
-	public Directory getDirectory(String relativeDirectoryName) {
+	/*public Directory getDirectory(String relativeDirectoryName) {
 		return kpm.findDirectory(relativeDirectoryName);
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param folder
 	 * @return
 	 */
-	public Project getProject(IProject project) {
+	/*public Project getProject(IProject project) {
 		return kpm.findProject(project);
-	}
+	}*/
 	
 	/**
 	 * 
 	 * @param absoluteDirectoryName
 	 * @return
 	 */
-	public Project getProject(String projectName) {
+	/*public Project getProject(String projectName) {
 		return kpm.findProject(projectName);
-	}
+	}*/
 	//////////////////////////////////////
 	//////////////////////////////////////
 	//		End of Basics Accessors		//
+	//////////////////////////////////////
+	//////////////////////////////////////
+	
+	//////////////////////////////
+	//////////////////////////////
+	//		Finding Methods		//
+	//////////////////////////////
+	//////////////////////////////
+	/*public Directory findDirectory(IFolder folder) {
+		for ( KermetaProject project : projects.values() ) {
+			Directory directory = project.getKpm().findDirectory(folder);
+			if ( directory != null )
+				return directory;
+		}
+		return null;
+	}*/
+	//////////////////////////////////////
+	//////////////////////////////////////
+	//		End of Finding Methods		//
 	//////////////////////////////////////
 	//////////////////////////////////////
 

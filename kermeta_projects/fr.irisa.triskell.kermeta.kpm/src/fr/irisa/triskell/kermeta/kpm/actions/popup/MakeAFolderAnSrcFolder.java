@@ -20,7 +20,10 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 	
 	
 	public void run(IAction action) {
-		Directory directory = KermetaWorkspace.getInstance().getKpm().findDirectory( folder );
+		
+		KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( folder.getProject() );
+		
+		Directory directory = project.getKpm().findDirectory( folder );
 
 		try {
 
@@ -29,12 +32,12 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 				directory.remove();
 				
 			} else {
-		    	directory = KermetaWorkspace.getInstance().getKpm().createDirectory( folder );				
+		    	directory = project.getKpm().createDirectory( folder );				
 				SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.ADDING);
 				folder.accept(visitor);
 		
 			}
-			KermetaWorkspace.getInstance().save();
+			project.save();
 			
 			SrcFolderDecorator.getDecorator();
 			

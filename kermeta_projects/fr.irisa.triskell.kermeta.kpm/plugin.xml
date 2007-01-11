@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.8 2007-01-10 13:43:54 ftanguy Exp $
+ $Id: plugin.xml,v 1.9 2007-01-11 16:07:37 ftanguy Exp $
 -->
 
 <plugin>
@@ -54,21 +54,6 @@
   </extension>
   <extension
         point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="false"
-           id="fr.irisa.triskell.kermeta.kpm.kermetaProjectContribution"
-           objectClass="org.eclipse.core.resources.IProject">
-        <menu
-              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-              label="Kermeta"
-              path="additions"/>
-        <action
-              class="fr.irisa.triskell.kermeta.kpm.actions.popup.OpenKPMEditor"
-              icon="images/kermeta_logo.gif"
-              id="fr.irisa.triskell.kermeta.kpm.openKPMEditor"
-              label="Kermeta Project Settings"
-              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-     </objectContribution>
      <objectContribution
            adaptable="true"
            id="fr.irisa.triskell.kermeta.addRemoveNatureAction"

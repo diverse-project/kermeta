@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.core.natures.KermetaNature;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 /**
@@ -221,15 +222,17 @@ public class IResourceHelper {
 	 * @see org.eclipse.core.resources.IProject
 	 * @see org.eclipse.core.resources.IProjectDescription
 	 */
-	static public void attachBuilderToKermetaProject(String builderID, IProject project) throws CoreException {
+	static public void attachBuilderToKermetaProject(String builderID, KermetaProject project) throws CoreException {
 		
-		IProjectDescription description = project.getDescription();
+		IProject iproject = project.getValue();
+		IProjectDescription description = iproject.getDescription();
 		ICommand command = description.newCommand();
 		// preparing arguments for the builder.
 		// We put the KPM object so that the builder can use it
 		// to apply dependencies. This is EXTREMLY important.
 		Hashtable <Object, Object> args = new Hashtable <Object, Object> ();
-		args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
+		//args.put ( "kpm", KermetaWorkspace.getInstance().getKpm() );
+		args.put ( "kpm", project.getKpm() );
 		
 		command.setArguments(args);
 		command.setBuilderName(builderID);
@@ -238,13 +241,13 @@ public class IResourceHelper {
 		ICommand[] newCommands = new ICommand[1];
 		newCommands[0] = command;
 		description.setBuildSpec(newCommands);
-		project.setDescription(description, null);		
+		iproject.setDescription(description, null);		
 		
-		System.out.println( "Builder added to : " + project.getName() );
+		System.out.println( "Builder added to : " + iproject.getName() );
 
 	}
 
-	static public void attachDefaultBuilderToKermetaProject(IProject project) throws CoreException {
+	static public void attachDefaultBuilderToKermetaProject(KermetaProject project) throws CoreException {
 		attachBuilderToKermetaProject(builderID, project);
 	}
 	//////////////////////////////////////////

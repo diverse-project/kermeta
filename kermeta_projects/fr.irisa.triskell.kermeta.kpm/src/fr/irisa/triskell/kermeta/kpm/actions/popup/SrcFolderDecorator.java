@@ -15,6 +15,7 @@ import fr.irisa.triskell.kermeta.KermetaConstants;
 import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 public class SrcFolderDecorator extends LabelProvider implements ILightweightLabelDecorator {
@@ -23,8 +24,8 @@ public class SrcFolderDecorator extends LabelProvider implements ILightweightLab
 	public void decorate (Object element, IDecoration decoration ) {
 		
 		if ( element instanceof IFolder ) {
-	
-			Directory directory = KermetaWorkspace.getInstance().getDirectory( (IFolder) element );
+			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( ((IFolder) element).getProject() ); 
+			Directory directory = project.getDirectory( (IFolder) element );//KermetaWorkspace.getInstance().getDirectory( (IFolder) element );
 			if ( directory != null ) {
 				Image image = KermetaIcons.get( KermetaConstants.KLOGO );
 				ImageDescriptor overlay = ImageDescriptor.createFromImage( image );

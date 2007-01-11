@@ -48,7 +48,7 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	protected KermetaOutline outline;
 	
 	private File file = null;
-	//private KermetaProject project;
+	private KermetaProject project;
 	
 	private KermetaWorkspace workspace = KermetaWorkspace.getInstance();
 	
@@ -64,6 +64,12 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 		TexteditorPlugin.getDefault().setEditor(this);
 	}
 	
+	
+	private KermetaProject getProject() {
+		if ( project == null )
+			project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
+		return project;
+	}
 	
     public IFile getFile()
     {
@@ -179,7 +185,7 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	//////////////////////////
 	public File getKPMFile() {
 		if ( file == null) {
-			file = workspace.getFile(getFile());
+			file = getProject().getFile(getFile());
 		}
 		return file;
 	}

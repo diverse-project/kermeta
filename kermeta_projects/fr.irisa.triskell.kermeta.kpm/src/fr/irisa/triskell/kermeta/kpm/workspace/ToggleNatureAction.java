@@ -82,7 +82,8 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 		      public void run(IProgressMonitor monitor) throws CoreException {
 
 		    	  KermetaNatureHelper.addKermetaNature(project);
-		    	  IResourceHelper.attachDefaultBuilderToKermetaProject(project);
+		    	  KermetaWorkspace.getInstance().addKermetaProject(project);
+		    	 // IResourceHelper.attachDefaultBuilderToKermetaProject(project);
 		    	  
 		    	  /*		IProjectDescription description = project.getDescription();
 					//String[] natures = description.getNatureIds();

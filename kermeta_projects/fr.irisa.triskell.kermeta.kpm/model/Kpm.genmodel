@@ -5,7 +5,7 @@
     editDirectory="/fr.irisa.triskell.kermeta.kpm.edit/src" editorDirectory="/fr.irisa.triskell.kermeta.kpm.editor/src"
     modelPluginID="fr.irisa.triskell.kermeta.kpm" modelName="Kpm" editPluginClass="fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin"
     editorPluginClass="fr.irisa.triskell.kermeta.kpm.editor.plugin.KPMEditorPlugin"
-    importerID="org.eclipse.emf.importer.ecore">
+    testsDirectory="" importerID="org.eclipse.emf.importer.ecore">
   <foreignModel>Kpm.ecore</foreignModel>
   <genPackages prefix="Kpm" basePackage="fr.irisa.triskell.kermeta" disposableProviderFactory="true"
       ecorePackage="Kpm.ecore#/">
