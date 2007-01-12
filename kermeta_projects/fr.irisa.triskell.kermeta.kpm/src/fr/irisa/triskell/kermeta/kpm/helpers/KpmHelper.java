@@ -61,6 +61,11 @@ public class KpmHelper {
 		type.setName( "translation" );
 		kpm.getTypes().add( type );
 		
+		// Translation type
+		type = KpmFactory.eINSTANCE.createDependencyType();
+		type.setName( "synchro" );
+		kpm.getTypes().add( type );
+		
 	}
 
 	
@@ -79,6 +84,11 @@ public class KpmHelper {
 		// TypecheckKMTFile action
 		action = KpmFactory.eINSTANCE.createAction();
 		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT" );
+		kpm.getActions().add( action );
+		
+		// MarkDependents action
+		action = KpmFactory.eINSTANCE.createAction();
+		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.MarkDependents" );
 		kpm.getActions().add( action );
 	}
 
@@ -112,17 +122,17 @@ public class KpmHelper {
 	static private void addExpressions(KPM kpm) {
 		
 		Expression expression = KpmFactory.eINSTANCE.createExpression();
-		expression.setId("e1");
+		expression.setId("KMT expr");
 		expression.setFilter( kpm.getNameFilter(".+\\.kmt") );
 		kpm.getExpressions().add(expression);
 		
 		expression = KpmFactory.eINSTANCE.createExpression();
-		expression.setId("e2");
+		expression.setId("KM expr");
 		expression.setFilter( kpm.getNameFilter(".+\\.km") );
 		kpm.getExpressions().add(expression);
 		
 		expression = KpmFactory.eINSTANCE.createExpression();
-		expression.setId("ExistEcore");
+		expression.setId("Ecore expr");
 		expression.setFilter( kpm.getNameFilter(".+\\.ecore") );
 		And subexpression = KpmFactory.eINSTANCE.createAnd();
 		subexpression.setFilter(kpm.getExistFilter());
@@ -132,17 +142,29 @@ public class KpmHelper {
 	
 	static private void addDependencies(KPM kpm) {
 		
+		// d1
 		Dependency dependency = KpmFactory.eINSTANCE.createDependency();
 		dependency.setName( "d1" );
 		dependency.setEvent( kpm.getEvent("update") );
 		dependency.setType( kpm.getType("synchro") );
-		dependency.setIn( kpm.getExpression("e1") );
-		dependency.getOuts().add( kpm.getExpression("e2") );
-		dependency.getOuts().add( kpm.getExpression("ExistEcore") );
+		dependency.setIn( kpm.getExpression("KMT expr") );
+		dependency.getOuts().add( kpm.getExpression("KM expr") );
+		dependency.getOuts().add( kpm.getExpression("Ecore expr") );
 		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT"));
 		kpm.getDependencies().add(dependency);
 		
 
+		// d2
+		/*dependency = KpmFactory.eINSTANCE.createDependency();
+		dependency.setName( "d2" );
+		dependency.setEvent( kpm.getEvent("update") );
+		dependency.setType( kpm.getType("synchro") );
+		dependency.setIn( kpm.getExpression("KMT expr") );
+		dependency.getOuts().add( kpm.getExpression("KM expr") );
+		dependency.getOuts().add( kpm.getExpression("Ecore expr") );
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT"));
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.MarkDependents"));
+		kpm.getDependencies().add(dependency);*/
 
 	}
 
