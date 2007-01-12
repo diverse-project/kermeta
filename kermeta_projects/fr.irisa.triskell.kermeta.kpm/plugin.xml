@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.9 2007-01-11 16:07:37 ftanguy Exp $
+ $Id: plugin.xml,v 1.10 2007-01-12 15:01:09 ftanguy Exp $
 -->
 
 <plugin>
@@ -77,6 +77,22 @@
         point="org.eclipse.core.resources.markers">
      <persistent value="true"/>
      <super type="org.eclipse.core.resources.problemmarker"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.newWizards">
+     <category
+           id="fr.irisa.triskell.kermeta.KermetaWizard"
+           name="Kermeta"/>
+     <wizard
+           category="fr.irisa.triskell.kermeta.KermetaWizard"
+           class="fr.irisa.triskell.kermeta.kpm.wizards.NewKermetaProjectWizard"
+           descriptionImage="images/tree_package.gif"
+           icon="images/tree_package.gif"
+           id="fr.irisa.triskell.kermeta.newProject"
+           name="New Kermeta Project"
+           project="true">
+        <selection class="org.eclipse.core.resources.IProject"/>
+     </wizard>
   </extension>
 </plugin>
 
