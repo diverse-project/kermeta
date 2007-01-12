@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmEditor.java,v 1.1 2007-01-11 16:02:53 ftanguy Exp $
+ * $Id: KpmEditor.java,v 1.2 2007-01-12 14:59:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.presentation;
 
@@ -157,6 +157,8 @@ import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import fr.irisa.triskell.kermeta.kpm.provider.KpmItemProviderAdapterFactory;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 import fr.irisa.triskell.kermeta.kpm.editor.plugin.KPMEditorPlugin;
 
@@ -172,6 +174,20 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 public class KpmEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
+	
+	
+	/**
+	 * @generated NOT
+	 */
+	private KermetaProject project;
+	
+	/**
+	 * @generated NOT
+	 */
+	public void setProject(KermetaProject project) {
+		this.project = project;
+	}
+	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
 	 * <!-- begin-user-doc -->
@@ -672,7 +688,7 @@ public class KpmEditor
 	 */
 	public KpmEditor() {
 		super();
-
+		
 		// Create an adapter factory that yields item providers.
 		//
 		List factories = new ArrayList();
@@ -893,12 +909,15 @@ public class KpmEditor
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void createModel() {
 		// Assumes that the input is a file object.
 		//
 		IFileEditorInput modelFile = (IFileEditorInput)getEditorInput();
+		
+		project = KermetaWorkspace.getInstance().getKermetaProject( modelFile.getFile().getProject() );
+		
 		URI resourceURI = URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString());;
 		Exception exception = null;
 		Resource resource = null;
@@ -1389,7 +1408,7 @@ public class KpmEditor
 	 * This is for implementing {@link IEditorPart} and simply saves the model file.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void doSave(IProgressMonitor progressMonitor) {
 		// Do the work within an operation because this is a long running activity that modifies the workbench.
@@ -1436,6 +1455,7 @@ public class KpmEditor
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
+		project.reload();
 	}
 
 	/**

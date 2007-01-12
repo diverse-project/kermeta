@@ -32,7 +32,8 @@ public class OpenKPMEditor implements IActionDelegate {
 		
 		IWorkbenchPage page = KPMEditorPlugin.getPlugin().getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		try {
-			IDE.openEditor(page, file);
+			IDE.openEditor(page, file, "fr.irisa.triskell.kermeta.kpm.presentation.KpmEditorID");
+//			IDE.openEditor(page, file);
 		} catch (PartInitException exception) {
 			exception.printStackTrace();
 		}
