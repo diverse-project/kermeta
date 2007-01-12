@@ -177,7 +177,7 @@
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="Kpm.ecore#//AbstractExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Kpm.ecore#//AbstractExpression/filter"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference Kpm.ecore#//AbstractExpression/filter"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Kpm.ecore#//AbstractExpression/id"/>
       <genOperations ecoreOperation="Kpm.ecore#//AbstractExpression/evaluate">
         <genParameters ecoreParameter="Kpm.ecore#//AbstractExpression/evaluate/unit"/>
