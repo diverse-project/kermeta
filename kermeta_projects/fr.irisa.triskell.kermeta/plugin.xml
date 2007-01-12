@@ -256,22 +256,6 @@
     </runtime>
  </extension>
  <extension
-       point="org.eclipse.ui.newWizards">
-    <category
-          id="fr.irisa.triskell.kermeta.KermetaWizard"
-          name="Kermeta"/>
-    <wizard
-          category="fr.irisa.triskell.kermeta.KermetaWizard"
-          class="fr.irisa.triskell.kermeta.tools.wizards.NewKermetaProjectWizard"
-          descriptionImage="icons/tree_package.gif"
-          icon="icons/tree_package.gif"
-          id="fr.irisa.triskell.kermeta.newProject"
-          name="New Kermeta Project"
-          project="true">
-       <selection class="org.ecilpse.core.resources.IProject"/>
-    </wizard>
- </extension>
- <extension
        point="org.eclipse.ui.ide.projectNatureImages">
     <image
           icon="icons/kermetaproject.gif"
