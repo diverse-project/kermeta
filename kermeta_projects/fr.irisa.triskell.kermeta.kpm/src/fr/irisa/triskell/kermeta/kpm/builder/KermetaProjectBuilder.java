@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.kermeta.kpm.*;
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
 /**
@@ -46,6 +47,8 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 				KermetaDeltaVisitor visitor = new KermetaDeltaVisitor(kpm);
 				delta.accept(visitor);
 				project.refreshLocal(IResource.DEPTH_INFINITE, null);
+				KermetaProject kproject = KermetaWorkspace.getInstance().getKermetaProject(project);
+				kproject.save();
 			}
 			break;
 			
@@ -61,6 +64,8 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 				KermetaDeltaVisitor visitor = new KermetaDeltaVisitor(kpm);
 				delta.accept(visitor);
 				project.refreshLocal(IResource.DEPTH_INFINITE, null);
+				KermetaProject kproject = KermetaWorkspace.getInstance().getKermetaProject(project);
+				kproject.save();
 			}
 			//build();
 			break;
@@ -75,7 +80,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			
 		}
 		
-		KermetaWorkspace.getInstance().save();
+		//KermetaWorkspace.getInstance().save();
 		
 		return null;
 	}
