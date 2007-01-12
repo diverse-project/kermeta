@@ -38,7 +38,7 @@
       </authorblurb>
     </author>
 
-    <date>$Date: 2007-01-10 16:43:52 $</date>
+    <pubdate>$Date: 2007-01-12 12:06:33 $</pubdate>
 
     <confgroup></confgroup>
   </bookinfo>
@@ -49,7 +49,7 @@
     <para><emphasis role="strong">Kermeta is distributed with a workbench that
     provides many .</emphasis></para>
 
-    <para><emphasis role="strong">Current features in V0.3.3
+    <para><emphasis role="strong">Current features in v0.4.0
     are:</emphasis></para>
 
     <itemizedlist>
@@ -96,6 +96,10 @@
       <listitem>
         <para><emphasis role="strong">Help system</emphasis></para>
       </listitem>
+      
+      <listitem>
+        <para><emphasis role="strong">Dedicated Graphic editor</emphasis></para>
+      </listitem>
 
       <listitem>
         <para><emphasis role="strong">Class TouchNavigator (alpha version in
@@ -117,11 +121,6 @@
     <para><emphasis role="strong">Planned features:</emphasis></para>
 
     <itemizedlist>
-      <listitem>
-        <para><emphasis role="strong">Dedicated Graphic multiview
-        editor</emphasis></para>
-      </listitem>
-
       <listitem>
         <para><emphasis role="strong">OCL support</emphasis></para>
       </listitem>
@@ -146,9 +145,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata depth=""
-                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_worbench_screenshot.png"
-                     width="" />
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Workbench.png"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -185,7 +182,7 @@
         </emphasis>
       </ulink>
 
-       Last check: v0.3.3
+       Last check: v0.4.0
     </warning>
   </chapter>
 
@@ -233,9 +230,9 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata depth=""
+          <imagedata 
                      fileref="KerMeta-UI-UserGuide_figures/KerMeta_error_n_syntaxhighlighting_screenshot.png"
-                     width="" />
+                     />
         </imageobject>
       </mediaobject>
     </figure>
@@ -251,9 +248,9 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata depth=""
+          <imagedata 
                      fileref="KerMeta-UI-UserGuide_figures/TextEditor_classic_preferences.png"
-                     width="" />
+                     />
         </imageobject>
       </mediaobject>
     </figure>
@@ -302,14 +299,14 @@
     </note>
 
     <warning>
-      The “Show imported types” feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project.
+      The "Show imported types" feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project.
     </warning>
   </chapter>
 
   <chapter>
     <title>Problems</title>
 
-    <para>Kermeta workbench use the classic eclipse “Problems” view to display
+    <para>Kermeta workbench use the classic eclipse "Problems" view to display
     the errors.</para>
   </chapter>
 
@@ -326,16 +323,16 @@
       similar approach but for Kermeta files.</para>
 
       <para>You'll need to create a new run configuration from the
-      “<literal>Run/Run...</literal>” menu.</para>
+      "<literal>Run/Run...</literal>" menu.</para>
 
       <figure id="refIllustration3">
         <title>Run menu</title>
 
         <mediaobject>
           <imageobject>
-            <imagedata depth=""
+            <imagedata 
                        fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfigurationMenu.png"
-                       width="" />
+                       />
           </imageobject>
         </mediaobject>
       </figure>
@@ -361,9 +358,9 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata depth=""
+            <imagedata 
                        fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfiguration.png"
-                       width="" />
+                       />
           </imageobject>
         </mediaobject>
       </figure>
@@ -380,20 +377,20 @@
 @mainOperation "main"</programlisting>
 
       <para>Then, once you have your configuration, you can run it by all the
-      means provided by Eclipse. Ie. “<literal>Run Last Launched</literal>”, ”
-      <literal>Run History</literal>”, ... available in the menus or in the
+      means provided by Eclipse. Ie. "<literal>Run Last Launched</literal>", "
+      <literal>Run History</literal>", ... available in the menus or in the
       toolbars.</para>
 
       <tip>
-        A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The “
+        A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The "
 
         <literal>Run As/Kermeta App</literal>
 
-        ” button runs an existing configuration and the “
+        " button runs an existing configuration and the "
 
         <literal>Run As/Run...</literal>
 
-        ” button opens the configuration dialog.
+        " button opens the configuration dialog.
       </tip>
 
       <figure id="refIllustration5">
@@ -401,9 +398,9 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata depth=""
+            <imagedata 
                        fileref="KerMeta-UI-UserGuide_figures/KerMeta_NewRunConfiguration.png"
-                       width="" />
+                       />
           </imageobject>
         </mediaobject>
       </figure>
@@ -458,26 +455,26 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata depth=""
+            <imagedata 
                        fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png"
-                       width="" />
+                       />
           </imageobject>
         </mediaobject>
       </figure>
 
       <para></para>
 
-      <para>Be careful, you must select “Include external jars when searching
-      for a main class”.</para>
+      <para>Be careful, you must select "Include external jars when searching
+      for a main class".</para>
 
       <figure id="refIllustration7">
         <title>Java run configuration arguments</title>
 
         <mediaobject>
           <imageobject>
-            <imagedata depth=""
+            <imagedata 
                        fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png"
-                       width="" />
+                       />
           </imageobject>
         </mediaobject>
       </figure>
@@ -486,11 +483,11 @@
 
       <para>The output level of interpreter traces can be set using a log4j
       configuration file. The concrete file to use is set by the java property
-      “kermeta.log4j.configurationfile.name”. A sample of log4j configuration
+      "kermeta.log4j.configurationfile.name". A sample of log4j configuration
       file is located in the textEditor plugin.</para>
 
       <para>Exemple add the following in the VM arguments box:
-      -Dkermeta.log4j.configurationfile.name=”../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml”</para>
+      -Dkermeta.log4j.configurationfile.name="../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml"</para>
 
       <para>The classpath must be carefully set using the jar of Kermeta, the
       jar of Ecore and of emf.</para>
@@ -501,9 +498,9 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata depth=""
+            <imagedata 
                        fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png"
-                       width="" />
+                       />
           </imageobject>
         </mediaobject>
       </figure>
@@ -662,8 +659,9 @@
 
       <para>Then you can work with Kermeta !</para>
 
-      <para>A more detailed document on Kermeta installation is available at:
-      <ulink type="" url="http://www.kermeta.org/download/"></ulink></para>
+      <tip>A more detailed document and a Flash animation on Kermeta installation are available at:
+      <ulink type="" url="http://www.kermeta.org/download/"></ulink>
+      </tip>
 
       <para>A more detailled document on Eclipse plugin installation using the
       Install\Update manager is available here: <ulink type=""
@@ -689,11 +687,22 @@
     <title>Help</title>
 
     <para>The current help and many other documentation are available in the
-    Eclipse Help system of your Eclipse installation.</para>
+    Eclipse Help system of your Eclipse installation: open Help -> Help Contents</para>
 
-    <para>Alternatively, an online version of all those documents is available
+    <figure id="refIllustration9">
+      <title>Eclipse Help Contents for Kermeta</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_HelpContents.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <tip>Alternatively, an online version of all those documents is available
     at <ulink type=""
-    url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink></para>
+    url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink>
+    </tip>
   </chapter>
 
   <!-- end - of the chapter about Help -->
@@ -727,7 +736,7 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="strong">Merge function: You can merge several
-          ecore files, simply select them and click “merge”. Its algorithm is
+          ecore files, simply select them and click "merge". Its algorithm is
           base on the names of the packages and classes. </emphasis></para>
         </listitem>
       </itemizedlist>
@@ -807,14 +816,11 @@
     the Kermeta model as a class diagram. It is generated with the tool
     "Topcased"</emphasis></para>
 
-    <figure id="refIllustration9">
+    <figure id="refIllustration10">
       <title>Kermeta Class TouchNavigator</title>
-
       <mediaobject>
         <imageobject>
-          <imagedata depth=""
-                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"
-                     width="" />
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -858,14 +864,14 @@
     <para><emphasis role="strong">If you leave your mouse over a class, it
     shows its documentation.</emphasis></para>
 
-    <figure id="refIllustration9">
+    <figure id="refIllustration11">
       <title>Kermeta Class TouchNavigator</title>
 
       <mediaobject>
         <imageobject>
-          <imagedata depth=""
+          <imagedata 
                      fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"
-                     width="" />
+                     />
         </imageobject>
       </mediaobject>
     </figure>
@@ -1004,14 +1010,14 @@
         <para>When working with CVS, the quickdiff is best used if it use the
         latest CVS revision as reference.</para>
 
-        <figure id="refIllustration10">
+        <figure id="refIllustration12">
           <title>Quickdiff recommended preferences</title>
 
           <mediaobject>
             <imageobject>
-              <imagedata depth=""
+              <imagedata 
                          fileref="KerMeta-UI-UserGuide_figures/QuickDiff_preferences.png"
-                         width="" />
+                         />
             </imageobject>
           </mediaobject>
         </figure>
