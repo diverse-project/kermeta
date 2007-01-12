@@ -8,6 +8,7 @@ import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.StringHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -22,11 +23,17 @@ public class KMT2Ecore implements IAction {
 		
 		IFile file = IResourceHelper.getIFile( (File) unit );
 		
-		String s = dependents.get(0);
-		String absoluteName = IResourceHelper.root.getLocation().toString() + s;
-		KermetaUnit kunit = KermetaWorkspace.getInstance().getKermetaUnit(file);
-		KM2Ecore.writeEcore(kunit, absoluteName, true);
-		
+		for ( String s : dependents ) {
+			
+			String extension = StringHelper.getExtension( s );
+			
+			if ( extension.equals (".ecore") ) {
+				String absoluteName = IResourceHelper.root.getLocation().toString() + s;
+				KermetaUnit kunit = KermetaWorkspace.getInstance().getKermetaUnit(file);
+				if ( ! kunit.messages.hasError() )
+					KM2Ecore.writeEcore(kunit, absoluteName, true);
+			}
+		}
 	}
 
 }
