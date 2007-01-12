@@ -12,8 +12,10 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
@@ -21,6 +23,7 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.core.natures.KermetaNature;
+import fr.irisa.triskell.kermeta.core.natures.KermetaNatureHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
@@ -250,11 +253,40 @@ public class IResourceHelper {
 	static public void attachDefaultBuilderToKermetaProject(KermetaProject project) throws CoreException {
 		attachBuilderToKermetaProject(builderID, project);
 	}
+	
+	static public void removeKermetaBuilder(KermetaProject project) throws CoreException {
+		IProject iproject = project.getValue();
+		IProjectDescription description = iproject.getDescription();
+		description.setBuildSpec( new ICommand[] {} );
+		iproject.setDescription(description, null);
+	}
+	
+	static public void reattachKermetaBuilder(KermetaProject project) throws CoreException {
+		removeKermetaBuilder(project);
+		attachDefaultBuilderToKermetaProject(project);
+	}
 	//////////////////////////////////////////
 	//////////////////////////////////////////
 	//		End of Builder Mechanism		//
 	//////////////////////////////////////////
 	//////////////////////////////////////////
 
+	
+	static public void createKermetaProject(String projectName) throws CoreException {
+		final IProjectDescription description = ResourcesPlugin.getWorkspace().newProjectDescription(projectName);
+		 //description.setLocation( Platform.getLocation() );
+		description.setLocation( null );
+
+		 final IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		 IWorkspaceRunnable operation = new IWorkspaceRunnable() {
+			 public void run(IProgressMonitor monitor) throws CoreException {
+				 project.create(description, monitor);
+				 project.open(monitor);
+				 KermetaNatureHelper.addKermetaNature(project);
+				 KermetaWorkspace.getInstance().addKermetaProject(project);
+			 }
+		};
+		ResourcesPlugin.getWorkspace().run(operation, null);
+	}
 	
 }
