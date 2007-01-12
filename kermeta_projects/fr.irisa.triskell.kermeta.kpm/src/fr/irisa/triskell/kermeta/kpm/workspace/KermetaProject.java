@@ -9,12 +9,14 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Project;
+import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.XMIHelper;
 
@@ -28,7 +30,7 @@ public class KermetaProject {
 	
 	private KPM kpm;
 	
-	static private final String kpmFileName = ".kpm.xmi";
+	static private final String kpmFileName = ".project.kpm";
 	
 	public KermetaProject(IProject project) {
 		this.project = project;
@@ -52,6 +54,7 @@ public class KermetaProject {
 		IFile file = getKpmIFile();
 		if ( ! file.exists() ) {
 			kpm = KpmHelper.createKpm();
+			save();
 		} else {
 			load();
 		}
@@ -74,6 +77,15 @@ public class KermetaProject {
 		try {
 			kpm = (KPM) XMIHelper.load( getKpmFilePathString() );
 		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+	}
+	
+	public void reload() {
+		load();
+		try {
+			IResourceHelper.reattachKermetaBuilder(this);
+		} catch (CoreException exception) {
 			exception.printStackTrace();
 		}
 	}
