@@ -51,8 +51,8 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		
 		}
 		
-		if ( kpm != null )
-			KermetaWorkspace.getInstance().save();
+		//if ( kpm != null )
+		//	KermetaWorkspace.getInstance().save();
 		
 		return mustContinue;
 	}
