@@ -25,11 +25,13 @@ public class SrcFolderDecorator extends LabelProvider implements ILightweightLab
 		
 		if ( element instanceof IFolder ) {
 			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( ((IFolder) element).getProject() ); 
-			Directory directory = project.getDirectory( (IFolder) element );//KermetaWorkspace.getInstance().getDirectory( (IFolder) element );
-			if ( directory != null ) {
-				Image image = KermetaIcons.get( KermetaConstants.KLOGO );
-				ImageDescriptor overlay = ImageDescriptor.createFromImage( image );
-				decoration.addOverlay(overlay, IDecoration.TOP_RIGHT);
+			if ( project != null ) {
+				Directory directory = project.getDirectory( (IFolder) element );//KermetaWorkspace.getInstance().getDirectory( (IFolder) element );
+				if ( directory != null ) {
+					Image image = KermetaIcons.get( KermetaConstants.KLOGO );
+					ImageDescriptor overlay = ImageDescriptor.createFromImage( image );
+					decoration.addOverlay(overlay, IDecoration.TOP_RIGHT);
+				}
 			}
 		}
 		
