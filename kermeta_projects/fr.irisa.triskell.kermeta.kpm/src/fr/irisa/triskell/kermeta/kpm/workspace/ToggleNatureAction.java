@@ -20,7 +20,6 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import fr.irisa.triskell.kermeta.core.natures.KermetaNature;
 import fr.irisa.triskell.kermeta.core.natures.KermetaNatureHelper;
-import fr.irisa.triskell.kermeta.core.resources.KermetaResourcesHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
 public class ToggleNatureAction implements IObjectActionDelegate {

@@ -27,7 +27,6 @@ import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.core.markers.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.helpers.MarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.*;
 //import fr.irisa.triskell.kermeta.kpm.helpers.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;

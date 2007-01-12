@@ -154,9 +154,11 @@ public class KermetaWorkspace {
 		IProject[] iprojects = IResourceHelper.getProjects();
 		for ( int index = 0; index < iprojects.length; index++ ) {
 			if ( IResourceHelper.isNatureKermeta(iprojects[index]) ) {
-				KermetaProject project = new KermetaProject(iprojects[index]);
-				projects.put(iprojects[index], project);
-				IResourceHelper.attachDefaultBuilderToKermetaProject(project);
+				if ( iprojects[index].exists() ) {
+					KermetaProject project = new KermetaProject(iprojects[index]);
+					projects.put(iprojects[index], project);
+					IResourceHelper.attachDefaultBuilderToKermetaProject(project);
+				}
 			}
 		}
 	}
@@ -196,6 +198,7 @@ public class KermetaWorkspace {
 	//////////////////////////
 	public KermetaProject addKermetaProject(IProject value) throws CoreException {
 		KermetaProject project = new KermetaProject(value);
+		projects.put(value, project);
 		IResourceHelper.attachDefaultBuilderToKermetaProject(project);
 		return project;
 	}
