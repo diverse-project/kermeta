@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
   <model href="fsmStatic.ecore#/"/>
-  <diagrams position="0,0" size="100,100" name="fsmStatic" viewport="0,6">
+  <diagrams position="0,0" size="100,100" name="fsmStatic" viewport="0,93">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -43,6 +43,7 @@
           <element href="fsmStatic.ecore#//State"/>
         </semanticModel>
         <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <property key="font" value="-regular-8"/>
           <semanticModel xsi:type="di:EMFSemanticModelBridge">
             <element href="fsmStatic.ecore#//State/name"/>
           </semanticModel>
@@ -66,11 +67,13 @@
           <element href="fsmStatic.ecore#//Transition"/>
         </semanticModel>
         <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <property key="font" value="-regular-8"/>
           <semanticModel xsi:type="di:EMFSemanticModelBridge">
             <element href="fsmStatic.ecore#//Transition/input"/>
           </semanticModel>
         </contained>
         <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <property key="font" value="-regular-8"/>
           <semanticModel xsi:type="di:EMFSemanticModelBridge">
             <element href="fsmStatic.ecore#//Transition/output"/>
           </semanticModel>
@@ -84,95 +87,88 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <property key="font" value="-regular-8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//FSM/ownedState"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="4" vDistance="-4"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="7" vDistance="-2"/>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="4" vDistance="3"/>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <property key="router" value="Rectilinear"/>
+      <property key="font" value="-regular-8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//FSM/initialState"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="43" vDistance="-2"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10" vDistance="5"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="13" vDistance="-4"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" vDistance="5"/>
       <waypoints>[-55, 0, -56, -153]</waypoints>
       <waypoints>[-101, 0, -102, -153]</waypoints>
       <waypoints>[-101, 170, -102, 17]</waypoints>
       <waypoints>[-45, 170, -46, 17]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <property key="font" value="-regular-8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//FSM/finalState"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="27"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-4" vDistance="-13"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="14" vDistance="1"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-1" vDistance="-15"/>
       <waypoints>[-55, 20, -56, -133]</waypoints>
-      <waypoints>[-84, 31, -85, -122]</waypoints>
-      <waypoints>[-83, 31, -84, -122]</waypoints>
+      <waypoints>[-83, 32, -84, -121]</waypoints>
       <waypoints>[-83, 93, -84, -60]</waypoints>
       <waypoints>[-83, 93, -84, -60]</waypoints>
-      <waypoints>[-35, 127, -36, -26]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <property key="font" value="-regular-8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//State/owningFSM"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="17" vDistance="-5"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="4"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="17" vDistance="-2"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="15" vDistance="-21"/>
       <waypoints>[-1, -26, 0, 127]</waypoints>
       <waypoints>[-1, -133, 0, 20]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <property key="font" value="-regular-8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//State/outgoingTransition"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="2" vDistance="5"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="1" vDistance="-4"/>
-      <waypoints>[0, 25, 0, -116]</waypoints>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="2" vDistance="-3"/>
       <waypoints>[0, 75, 0, -66]</waypoints>
       <waypoints>[0, 106, 0, -35]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <property key="font" value="-regular-8"/>
+      <property key="router" value="Rectilinear"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//State/incomingTransition"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="3" vDistance="-2"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="32" vDistance="-3"/>
-      <waypoints>[45, 0, 45, -141]</waypoints>
-      <waypoints>[75, 0, 75, -141]</waypoints>
-      <waypoints>[75, 61, 75, -80]</waypoints>
-      <waypoints>[75, 142, 75, 1]</waypoints>
-      <waypoints>[72, 142, 72, 1]</waypoints>
-      <waypoints>[72, 142, 72, 1]</waypoints>
-      <waypoints>[72, 142, 72, 1]</waypoints>
-      <waypoints>[72, 141, 72, 0]</waypoints>
-      <waypoints>[48, 141, 48, 0]</waypoints>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="3" vDistance="5"/>
+      <waypoints>[88, 0, 88, -141]</waypoints>
+      <waypoints>[88, 141, 88, 0]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <property key="font" value="-regular-8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//Transition/source"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="24" vDistance="-8"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="21" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="3" vDistance="9"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="16" vDistance="5"/>
       <waypoints>[0, -35, 0, 106]</waypoints>
-      <waypoints>[0, -116, 0, 25]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <property key="font" value="-regular-8"/>
+      <property key="router" value="Rectilinear"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="fsmStatic.ecore#//Transition/target"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="7" vDistance="-5"/>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="2" vDistance="4"/>
-      <waypoints>[48, 0, 48, 141]</waypoints>
-      <waypoints>[75, 0, 75, 141]</waypoints>
-      <waypoints>[75, 0, 75, 141]</waypoints>
-      <waypoints>[75, 0, 75, 141]</waypoints>
-      <waypoints>[75, 0, 75, 141]</waypoints>
-      <waypoints>[75, 0, 75, 141]</waypoints>
-      <waypoints>[75, -141, 75, 0]</waypoints>
-      <waypoints>[45, -141, 45, 0]</waypoints>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="4" vDistance="1"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="3" vDistance="-7"/>
+      <waypoints>[88, 0, 88, 141]</waypoints>
+      <waypoints>[88, -141, 88, 0]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>
