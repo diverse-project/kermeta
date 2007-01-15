@@ -38,7 +38,7 @@
       </authorblurb>
     </author>
 
-    <pubdate>$Date: 2007-01-15 10:19:17 $</pubdate>
+    <pubdate>$Date: 2007-01-15 11:04:59 $</pubdate>
 
     <confgroup></confgroup>
   </bookinfo>
@@ -94,10 +94,6 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Help system</emphasis></para>
-      </listitem>
-
-      <listitem>
         <para><emphasis role="strong">Dedicated Graphic
         editor</emphasis></para>
       </listitem>
@@ -105,6 +101,10 @@
       <listitem>
         <para><emphasis role="strong">Class TouchNavigator (alpha version in
         release 0.1.1)</emphasis></para>
+      </listitem>
+      
+      <listitem>
+        <para><emphasis role="strong">Help system</emphasis></para>
       </listitem>
     </itemizedlist>
 
@@ -122,9 +122,6 @@
     <para><emphasis role="strong">Planned features:</emphasis></para>
 
     <itemizedlist>
-      <listitem>
-        <para><emphasis role="strong">OCL support</emphasis></para>
-      </listitem>
 
       <listitem>
         <para><emphasis role="strong">Seamless integration of Java
@@ -214,7 +211,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="TextualEditorForKermetaUser_figures/textualEditor.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/textualEditor.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -243,7 +240,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="TextualEditorForKermetaUser_figures/autoCompletionSmall.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/autoCompletionSmall.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -275,7 +272,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="TextualEditorForKermetaUser_figures/outlineSmall.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/outlineSmall.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -296,7 +293,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="TextualEditorForKermetaUser_figures/errorReportingSmall.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/errorReportingSmall.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -320,7 +317,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="TextualEditorForKermetaUser_figures/debuggingInformationSmall.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/debuggingInformationSmall.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -752,70 +749,6 @@
     </section>
   </chapter>
 
-  <chapter>
-    <title>Install\Update Kermeta workbench</title>
-
-    <para>Kermeta is easy to install and to update. It uses the Eclipse
-    Install manager.</para>
-
-    <section>
-      <title>Install Kermeta</title>
-
-      <para>To install Kermeta plugins, point your Eclipse Update Manager at
-      <ulink type=""
-      url="http://www.kermeta.org/update">http://www.kermeta.org/update</ulink>.</para>
-
-      <para>Help</para>
-
-      <para>&gt; Software Updates</para>
-
-      <para>&gt; Find and Install...</para>
-
-      <para>&gt; Search for new features to install</para>
-
-      <para>&gt; Add Update Site...</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>Name: Kermeta Update Manager Site for Eclipse</para>
-        </listitem>
-
-        <listitem>
-          <para>URL: <ulink type=""
-          url="http://www.kermeta.org/update">http://www.kermeta.org/update</ulink></para>
-        </listitem>
-      </itemizedlist>
-
-      <para>Accept all the license agreements, restart eclipse when
-      asked...</para>
-
-      <para>Then you can work with Kermeta !</para>
-
-      <tip>
-         A more detailed document and a Flash animation on Kermeta installation are available at: 
-
-        <ulink type="" url="http://www.kermeta.org/download/" />
-
-         
-      </tip>
-
-      <para>A more detailled document on Eclipse plugin installation using the
-      Install\Update manager is available here: <ulink type=""
-      url="http://eclipse.org/emf/docs.php?doc=docs/UsingUpdateManager/UsingUpdateManager.html">http://eclipse.org/emf/docs.php?doc=docs/UsingUpdateManager/UsingUpdateManager.html</ulink></para>
-    </section>
-
-    <section>
-      <title>Update Kermeta</title>
-
-      <para>Updating your versions of Kermeta use the same dialog boxes. You
-      simply don't have to add the update site and check for new
-      versions.</para>
-
-      <tip>
-         You can even ask Eclipse to notify you when a new version is available ! Check the options in the preferences menu. 
-      </tip>
-    </section>
-  </chapter>
 
   <!-- begin - of the chapter about Help -->
 
