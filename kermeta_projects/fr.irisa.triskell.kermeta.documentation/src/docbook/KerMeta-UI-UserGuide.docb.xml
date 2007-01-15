@@ -38,7 +38,7 @@
       </authorblurb>
     </author>
 
-    <pubdate>$Date: 2007-01-12 12:06:33 $</pubdate>
+    <pubdate>$Date: 2007-01-15 10:19:17 $</pubdate>
 
     <confgroup></confgroup>
   </bookinfo>
@@ -96,9 +96,10 @@
       <listitem>
         <para><emphasis role="strong">Help system</emphasis></para>
       </listitem>
-      
+
       <listitem>
-        <para><emphasis role="strong">Dedicated Graphic editor</emphasis></para>
+        <para><emphasis role="strong">Dedicated Graphic
+        editor</emphasis></para>
       </listitem>
 
       <listitem>
@@ -145,7 +146,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Workbench.png"/>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Workbench.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -153,7 +154,11 @@
     <para></para>
 
     <warning>
+       
+
       <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
+
+       
 
       <emphasis role="strong">
         <emphasis role="strong">espite that we put a lot of attention to this
@@ -163,6 +168,8 @@
         forge:</emphasis>
       </emphasis>
 
+       
+
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
         <emphasis role="strong">
           <emphasis role="strong">
@@ -171,6 +178,8 @@
           </emphasis>
         </emphasis>
       </ulink>
+
+       
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
         <emphasis role="strong">
@@ -182,132 +191,158 @@
         </emphasis>
       </ulink>
 
-       Last check: v0.4.0
+       Last check: v0.4.0 
     </warning>
   </chapter>
 
   <chapter>
-    <title>Text editor</title>
+    <title>The Text Editor</title>
 
-    <para>Kermeta text editor provides the following features:</para>
+    <section>
+      <title>The document</title>
 
-    <itemizedlist>
-      <listitem>
-        <para>syntax highlighting.</para>
-      </listitem>
+      <para>Nowadays a textual editor is not just an editable document. Many
+      informations have been provided to the user in order to get improved
+      editing performances. It is quite common to find textual editor with
+      coloring syntax, auto-completion and outline. These three items working
+      together usually makes a good textual editor. That is the reason why the
+      Kermeta platform provides such an editor. Below, you can find the global
+      view of the Kermeta editor.</para>
 
-      <listitem>
-        <para>completion</para>
+      <figure>
+        <title>The Kermeta Textual Editor</title>
 
-        <para role="lineBreak">The typechecker is used to provide relevant
-        code completion.</para>
-      </listitem>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="TextualEditorForKermetaUser_figures/textualEditor.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
 
-      <listitem>
-        <para>error locatisation</para>
+    <section>
+      <title>Auto-completion</title>
 
-        <para role="lineBreak">The errors are materialized directly in the
-        text editor.</para>
-      </listitem>
+      <para>To develop faster and faster, some nice helpfull tools now are
+      usual. One of them is the auto-completion. According to a context, a
+      list of item will be proposed. Using the arrows key and the carriage
+      return key, you can select quickly and easily the item you want. The
+      important thing is that, the list of item is calculated in order to only
+      propose some relevant items. The figure below shows the auto-completion
+      for "stdio" which is a special class in Kermeta (as System for Java).
+      The typed point makes the system think that you want to call a method on
+      "stdio". Then all the callable methods are proposed and you can choose
+      one of them.</para>
 
-      <listitem>
-        <para>code documentation hint</para>
+      <note>
+         The usual &lt;ctrl&gt;+&lt;space&gt; keyboard shortcut is used to access the code completion 
+      </note>
 
-        <para role="lineBreak">Hovering the mouse over an element will show up
-        the associated documentation as a hint.</para>
-      </listitem>
-    </itemizedlist>
+      <figure>
+        <title>Auto-Completion in the Kermeta Textual Editor</title>
 
-    <note>
-      The usual &lt;ctrl&gt;+&lt;space&gt; keyboard shortcut is used to access the code completion
-    </note>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="TextualEditorForKermetaUser_figures/autoCompletionSmall.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
 
-    <para>Here is a screenshot:</para>
+    <section>
+      <title>Outline</title>
 
-    <figure id="refIllustration1">
-      <title>Code completion, error and syntax higlighting sample
-      (V0.0.4)</title>
+      <para>The outline is a strucutral view of your program. Code is not
+      visible in this view, but the structure that is to say packages,
+      classes, attributes and methods are visible in a tree hierarchy. Usually
+      the outline position is on the top right side of the Eclipse's window.
+      You can get advantages of the outline, when your program reaches a big
+      size and when it is difficult to get a good visibility on the program's
+      strucutre. Browsing the outline is much more faster than browsing the
+      file. Moreover, clicking on an item (packages, classes, attributes or
+      methods) brings you to that item in the file.</para>
 
-      <mediaobject>
-        <imageobject>
-          <imagedata 
-                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_error_n_syntaxhighlighting_screenshot.png"
-                     />
-        </imageobject>
-      </mediaobject>
-    </figure>
+      <note>
+         The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it. 
+      </note>
 
-    <para></para>
+      <warning>
+         The "Show imported types" feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project. 
+      </warning>
 
-    <para>Kermeta text editor is base on Eclipse text editor, so all the usual
-    preferences can be used. Ex: show line number, quick diff, annotations,
-    etc</para>
+      <figure>
+        <title>The outline in Kermeta Text Editor</title>
 
-    <figure id="refIllustration2">
-      <title>TextEditor preferences</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="TextualEditorForKermetaUser_figures/outlineSmall.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
 
-      <mediaobject>
-        <imageobject>
-          <imagedata 
-                     fileref="KerMeta-UI-UserGuide_figures/TextEditor_classic_preferences.png"
-                     />
-        </imageobject>
-      </mediaobject>
-    </figure>
+    <section>
+      <title>Errors reporting</title>
 
-    <para></para>
-  </chapter>
+      <para>The textual editor is used to display extra pieces of information
+      than simple text. In the figure below, a parsing error is reporting
+      because of the semicolon which is not allowed in the language. The nice
+      is thing is that in the Eclipse's problems view, just by double clicking
+      on an error opens the errored file and make the cursor focusing on the
+      correct line.</para>
 
-  <chapter>
-    <title>Outline</title>
+      <figure>
+        <title>Error reporting</title>
 
-    <para>The file outline gives you a comprehensive abstract of the current
-    Kermeta file (edited in the text editor).</para>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="TextualEditorForKermetaUser_figures/errorReportingSmall.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
 
-    <para>The outline can be customized to display several kind of views.
-    Outline features are:</para>
+    <section>
+      <title>Debugging information</title>
 
-    <itemizedlist>
-      <listitem>
-        <para>sort features</para>
+      <para>Kermeta is meant an executable language. So, we may want to debug
+      programs because of their complexity. It is possible because Kermeta
+      platform includes a debugger. Like in a Java style, some breakpoints can
+      be added to the program by right clicking on the grey line at the left
+      of the editor (as in the figure below). The breakpoint will be added in
+      front the selected line. Afterwards, when running the debugger, the
+      program will halt at every breakpoint it goes through. At this moment,
+      you will be able to have a look at the variables' value and run step by
+      step or step into some methods.</para>
 
-        <para role="lineBreak">The content of the outline is sorted
-        alphabetically.</para>
-      </listitem>
+      <figure>
+        <title>Debugging Information in the Kermeta Text Editor</title>
 
-      <listitem>
-        <para>Show package hierachy</para>
-      </listitem>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="TextualEditorForKermetaUser_figures/debuggingInformationSmall.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
 
-      <listitem>
-        <para>Flatten inheritance</para>
+    <section>
+      <title>Editor preferences</title>
 
-        <para role="lineBreak">Display all the features of your classes. The
-        inherited features are displayed using a specific icon set.</para>
-      </listitem>
+      <para>You can customize your text editor by selecting Window from the
+      Eclipse main menu and then Preferences. The image below shows the page
+      configurator.</para>
 
-      <listitem>
-        <para>Show imported types</para>
+      <figure id="refIllustration2">
+        <title>TextEditor preferences</title>
 
-        <para role="lineBreak">Show all the classes that are declared using
-        the <literal>require</literal> statement in this file.</para>
-      </listitem>
-    </itemizedlist>
-
-    <note>
-      The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it.
-    </note>
-
-    <warning>
-      The "Show imported types" feature works on a per file basis and then it only shows the features declared using the require statement in this file and NOT all the files in your project.
-    </warning>
-  </chapter>
-
-  <chapter>
-    <title>Problems</title>
-
-    <para>Kermeta workbench use the classic eclipse "Problems" view to display
-    the errors.</para>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/TextEditor_classic_preferences.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
   </chapter>
 
   <chapter>
@@ -330,9 +365,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfigurationMenu.png"
-                       />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfigurationMenu.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -340,7 +373,7 @@
       <para></para>
 
       <caution>
-        The run menu is available only with some perspectives. If you don't see the run menu, switch to the Kermeta perspective.
+         The run menu is available only with some perspectives. If you don't see the run menu, switch to the Kermeta perspective. 
       </caution>
 
       <para>In the dialog, you selects the file, the main class and the main
@@ -350,7 +383,7 @@
       files.</para>
 
       <caution>
-        The search button may not work properly if your file contains errors.
+         The search button may not work properly if your file contains errors. 
       </caution>
 
       <figure id="refIllustration4">
@@ -358,9 +391,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfiguration.png"
-                       />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunConfiguration.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -382,15 +413,15 @@
       toolbars.</para>
 
       <tip>
-        A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The "
+         A shortcut allows you to quickly start a Kermeta run configuration. It is available in the popup menu of *.kmt files. The " 
 
         <literal>Run As/Kermeta App</literal>
 
-        " button runs an existing configuration and the "
+         " button runs an existing configuration and the " 
 
         <literal>Run As/Run...</literal>
 
-        " button opens the configuration dialog.
+         " button opens the configuration dialog. 
       </tip>
 
       <figure id="refIllustration5">
@@ -398,9 +429,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_NewRunConfiguration.png"
-                       />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_NewRunConfiguration.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -435,7 +464,7 @@
       <para>[Give more details on that]</para>
 
       <warning>
-        This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update.
+         This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse uses the version number as part of the directory name. You'll have to manually change your ant file in order to reflect the update. 
       </warning>
     </section>
 
@@ -455,9 +484,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png"
-                       />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine1.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -472,9 +499,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png"
-                       />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_arguments.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -498,9 +523,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png"
-                       />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_RunCommandLine_classpath.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -508,11 +531,11 @@
       <para></para>
 
       <tip>
-        This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine.
+         This RunCommandLine class or one of its sibling can also be used by any of your java programs.For more information please see the Javadoc reference of RunCommandLine. 
       </tip>
 
       <warning>
-        This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update.
+         This method need to know precisely which jar you use. If you update any of the required plugins (kermeta, emf, ecore , ...) the directory containing the jar will change because eclipse use the version number as part of the directory name. You'll have to manually change to ant file in order to reflect the update. 
       </warning>
 
       <section>
@@ -618,6 +641,115 @@
     <para>Since v0.1.0 Kermeta has a debugger. As any debugger, it proposes
     breakpoints step over, step into, run, resume, visualization of variables,
     etc</para>
+
+    <section>
+      <title>Global View</title>
+
+      <para>A debugger offers users the possibility to interprete Kermeta's
+      programs step by step, or stopping programs at one moment to check the
+      the programs' state. Above you can see the global view of the
+      editor.</para>
+
+      <figure>
+        <title>The Debugger global view</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/debug_perspective.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section>
+      <title>The Watch View</title>
+
+      <para>During programs execution, you may want to know variables' values.
+      For that purpose, you can use the watch view which displays all the
+      variables accessible in the current context and their values. Moreover
+      you can browse those vaiables to have a deeper look inside
+      variables.</para>
+
+      <figure>
+        <title>The Watch View</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/watch_page.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section>
+      <title>The Frame View</title>
+
+      <para>A frame is a context environment for a call method. That means
+      that for each method call, you have access to its context that is to say
+      the variables values. Obviously, it is strongly related to the watch
+      view. Clicking on one frame modifies the watch view. The frame view is
+      also nice to follow the execution. For instance, in the figure above, we
+      know that the run method has called the step method which has called the
+      fire method.</para>
+
+      <figure>
+        <title>The Frame View</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/frame_page.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section>
+      <title>The Editor View</title>
+
+      <para>When debugging, you surely want to know which line of code is
+      executed. That is the reason why the Kermeta text editor is displayed
+      with the outline. The current line of code is colored in green as in the
+      following figure. This green line is moving to the next instruction
+      depending your action.</para>
+
+      <figure>
+        <title>The Editor View</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/debug_editor.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section>
+      <title>Debugging actions</title>
+
+      <para>There are three kind of actions you can execute : </para>
+
+      <itemizedlist>
+        <listitem>
+          <para>F5 : pressing the F5 key makes the debugger entering in the
+          current operation.</para>
+        </listitem>
+
+        <listitem>
+          <para>F6 : pressing the F6 key makes the debugger stepping to the
+          next operation.</para>
+        </listitem>
+
+        <listitem>
+          <para>F8 : pressing the F8 key makes the debugger executing all the
+          operations to the next breakpoint, if there is some one.</para>
+        </listitem>
+      </itemizedlist>
+
+      <note>
+        <para>A nice feature is that you can add or remove breakpoints to your
+        Kermeta file during debugging.</para>
+      </note>
+    </section>
   </chapter>
 
   <chapter>
@@ -659,8 +791,12 @@
 
       <para>Then you can work with Kermeta !</para>
 
-      <tip>A more detailed document and a Flash animation on Kermeta installation are available at:
-      <ulink type="" url="http://www.kermeta.org/download/"></ulink>
+      <tip>
+         A more detailed document and a Flash animation on Kermeta installation are available at: 
+
+        <ulink type="" url="http://www.kermeta.org/download/" />
+
+         
       </tip>
 
       <para>A more detailled document on Eclipse plugin installation using the
@@ -676,7 +812,7 @@
       versions.</para>
 
       <tip>
-        You can even ask Eclipse to notify you when a new version is available ! Check the options in the preferences menu.
+         You can even ask Eclipse to notify you when a new version is available ! Check the options in the preferences menu. 
       </tip>
     </section>
   </chapter>
@@ -687,21 +823,26 @@
     <title>Help</title>
 
     <para>The current help and many other documentation are available in the
-    Eclipse Help system of your Eclipse installation: open Help -> Help Contents</para>
+    Eclipse Help system of your Eclipse installation: open Help -&gt; Help
+    Contents</para>
 
     <figure id="refIllustration9">
       <title>Eclipse Help Contents for Kermeta</title>
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_HelpContents.png"/>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_HelpContents.png" />
         </imageobject>
       </mediaobject>
     </figure>
 
-    <tip>Alternatively, an online version of all those documents is available
-    at <ulink type=""
-    url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink>
+    <tip>
+       Alternatively, an online version of all those documents is available at 
+
+      <ulink type=""
+      url="http://www.kermeta.org/documents">http://www.kermeta.org/documents</ulink>
+
+       
     </tip>
   </chapter>
 
@@ -818,9 +959,10 @@
 
     <figure id="refIllustration10">
       <title>Kermeta Class TouchNavigator</title>
+
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"/>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -869,9 +1011,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata 
-                     fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png"
-                     />
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -924,7 +1064,7 @@
     <title>Tip and tricks</title>
 
     <tip>
-      This section contains many useful information about how to use the Kermeta workbench.
+       This section contains many useful information about how to use the Kermeta workbench. 
     </tip>
 
     <section>
@@ -938,60 +1078,50 @@
 
           <thead>
             <row>
-              <entry><?border-top 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?> <para>Keyboard
+              <entry><?border-top 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><para>Keyboard
               shortcut</para></entry>
 
-              <entry align="center"><?border 0.002cm solid #000000?>
-              <para>Action</para></entry>
+              <entry align="center"><?border 0.002cm solid #000000?><para>Action</para></entry>
             </row>
           </thead>
 
           <tbody>
             <row>
-              <entry align="left"><?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?>
-              <para>&lt;CTRL&gt;+&lt;SPACE&gt;</para></entry>
+              <entry align="left"><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><para>&lt;CTRL&gt;+&lt;SPACE&gt;</para></entry>
 
-              <entry align="left"><?border-right 0.002cm solid #000000?>
-              <?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?>
-              <para>Pertinent code completion. This work for both in sevral
-              places in the code.</para></entry>
+              <entry align="left"><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><para>Pertinent
+              code completion. This work for both in sevral places in the
+              code.</para></entry>
             </row>
 
             <row>
-              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
 
-              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
             </row>
 
             <row>
-              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
 
-              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
             </row>
 
             <row>
-              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
 
-              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
             </row>
 
             <row>
-              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
 
-              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
             </row>
 
             <row>
-              <entry><?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
 
-              <entry><?border-right 0.002cm solid #000000?> <?border-bottom 0.002cm solid #000000?>
-              <?border-left 0.002cm solid #000000?></entry>
+              <entry><?border-right 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?></entry>
             </row>
           </tbody>
         </tgroup>
@@ -1015,9 +1145,7 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-UI-UserGuide_figures/QuickDiff_preferences.png"
-                         />
+              <imagedata fileref="KerMeta-UI-UserGuide_figures/QuickDiff_preferences.png" />
             </imageobject>
           </mediaobject>
         </figure>
