@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.3 2007-01-15 08:50:18 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -101,13 +101,21 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void execute(Unit unit, ArrayList dependents) {
+	public void execute(final Unit unit, final ArrayList dependents) {
 		try {
 			
 			Class c = Class.forName( getName() );
-			IAction a = (IAction) c.newInstance();
+			final IAction a = (IAction) c.newInstance();
 		
-			a.execute(unit, dependents);		
+			Runnable r = new Runnable() {
+				
+				public void run() {
+					a.execute(unit, dependents);
+				}
+				
+			};
+			Thread t = new Thread(r);
+			t.start();
 					
 		} catch (InstantiationException exception) {
 			System.out.println(exception.getMessage());
