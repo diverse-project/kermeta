@@ -3,18 +3,15 @@
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <book lang="en-US">
   <bookinfo>
+  
+  <title>Kermeta language</title>
+  
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <pubdate>$Date: 2007-01-16 14:07:33 $</pubdate>
 
     <author>
-      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril
-      Faucher</firstname>
-
-      <firstname></firstname>
+      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
     </author>
-
-    <title>Kermeta language</title>
-
-    <date>2006-10-13T15:39:55</date>
 
     <keywordset>
       <keyword>Kermeta</keyword>
@@ -27,8 +24,6 @@
     <subtitle>Reference manual</subtitle>
 
     <bibliomisc>Licence EPL</bibliomisc>
-
-    <date>19/07/2006</date>
 
     <abstract>
       <para>This manual presents the various aspects of the Kermeta language.
@@ -362,49 +357,45 @@
 
           <table id="refTable0">
             <title>Operation redefinition in Kermeta</title>
-
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="2.2inch" />
-
-              <colspec colname="c2" colwidth="4.5inch" />
-
+              <colspec colname="c1" colwidth="5.7cm"/>
+              <colspec colname="c2" colwidth="11.3cm"/>
               <tbody>
                 <row>
-                  <entry align="right"><?border-top 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <mediaobject>
+                  <entry align="right">
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                    <mediaobject>
                       <imageobject>
-                        <imagedata 
-                                   fileref="KerMeta-Manual_figures/operation_redefinition.png"
-                                    />
+                        <imagedata fileref="KerMeta-Manual_figures/operation_redefinition.png" width="2.29cm" depth="9.208cm"/>
                       </imageobject>
-                    </mediaobject> <para></para></entry>
-
-                  <entry><?border 0.0007inch solid #000000?> <programlisting><emphasis
-                        role="strong">class</emphasis> A
+                    </mediaobject>
+                    <para/>
+                  </entry>
+                  <entry>
+<?border 0.002cm solid #000000?>
+                    <programlisting><emphasis role="strong">class</emphasis> A
 {
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m1() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// Some behavior</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+     <emphasis role="strong">operation</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+         <emphasis>// Some behavior</emphasis>
+     <emphasis role="strong">end</emphasis>
 
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// operation m2 is abstract</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m2() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
+     <emphasis>// operation m2 is abstract</emphasis>
+     <emphasis role="strong">operation</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
 }
-</programlisting> <programlisting><emphasis role="strong">class</emphasis> B <emphasis
-                        role="strong">inherits</emphasis> A
-{&nbsp;&nbsp;&nbsp;&nbsp;
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// method m1 inherits operation m1 from A</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m1() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// Behavior redefinition</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> A
+{    
+     <emphasis>// method m1 inherits operation m1 from A</emphasis>
+     <emphasis role="strong">method</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+         <emphasis>// Behavior redefinition</emphasis>
+     <emphasis role="strong">end</emphasis>
 
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m2() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis> <emphasis>//</emphasis><emphasis> Implementation of the abstract method</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
-}</programlisting></entry>
+     <emphasis role="strong">method</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis> <emphasis>//</emphasis><emphasis> Implementation of the abstract method</emphasis>
+     <emphasis role="strong">end</emphasis>
+}</programlisting>
+                  </entry>
                 </row>
               </tbody>
             </tgroup>
@@ -529,57 +520,52 @@
 
           <table id="refTable1">
             <title>Explicit selection of super operation in Kermeta</title>
-
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="2.3inch" />
-
-              <colspec colname="c2" colwidth="4.4inch" />
-
+              <colspec colname="c1" colwidth="5.8cm"/>
+              <colspec colname="c2" colwidth="11.2cm"/>
               <tbody>
                 <row>
-                  <entry align="center"><?border-top 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <mediaobject>
+                  <entry align="center">
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                    <mediaobject>
                       <imageobject>
-                        <imagedata 
-                                   fileref="KerMeta-Manual_figures/superoperation_selection.png"
-                                    />
+                        <imagedata fileref="KerMeta-Manual_figures/superoperation_selection.png" width="5.636cm" depth="11.374cm"/>
                       </imageobject>
-                    </mediaobject> <para></para></entry>
-
-                  <entry><?border 0.0007inch solid #000000?> <programlisting><emphasis
-                        role="strong">class</emphasis> O
+                    </mediaobject>
+                    <para/>
+                  </entry>
+                  <entry>
+<?border 0.002cm solid #000000?>
+                    <programlisting><emphasis role="strong">class</emphasis> O
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
+    <emphasis role="strong">operation</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
 }
-</programlisting> <programlisting><emphasis role="strong">class</emphasis> A <emphasis
-                        role="strong">inherits</emphasis> O
+</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> A <emphasis role="strong">inherits</emphasis> O
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+        <emphasis>// [...]</emphasis>
+    <emphasis role="strong">end</emphasis>
 }
-</programlisting> <programlisting><emphasis role="strong">class</emphasis> B <emphasis
-                        role="strong">inherits</emphasis> O
+</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> O
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m() <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+        <emphasis>// [...]</emphasis>
+    <emphasis role="strong">end</emphasis>
 }
-</programlisting> <programlisting><emphasis role="strong">class</emphasis> C <emphasis
-                        role="strong">inherits</emphasis> A, B
+</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> C <emphasis role="strong">inherits</emphasis> A, B
 {
 <emphasis>// "from" : an explicit selection of the//implementation to inherit</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m() <emphasis
-                        role="strong">from</emphasis> A <emphasis
-                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">from</emphasis> A <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+        <emphasis>// [...]</emphasis>
+    <emphasis role="strong">end</emphasis>
 } 
-</programlisting></entry>
+</programlisting>
+                  </entry>
                 </row>
               </tbody>
             </tgroup>
@@ -872,11 +858,9 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <informaltable>
           <tgroup cols="3">
-            <colspec colname="c1" colwidth="1.1inch" />
-
-            <colspec colname="c2" colwidth="3inch" />
-
-            <colspec colname="c3" colwidth="1.8inch" />
+            <colspec colname="c1" colwidth="2.7cm"/>
+            <colspec colname="c2" colwidth="7.6cm"/>
+            <colspec colname="c3" colwidth="4.7cm"/>
 
             <thead>
               <row>
@@ -997,13 +981,10 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="0.8inch" />
-
-            <colspec colname="c2" colwidth="3.1inch" />
-
-            <colspec colname="c3" colwidth="1inch" />
-
-            <colspec colname="c4" colwidth="1inch" />
+            <colspec colname="c1" colwidth="2.1cm"/>
+            <colspec colname="c2" colwidth="7.9cm"/>
+            <colspec colname="c3" colwidth="2.5cm"/>
+            <colspec colname="c4" colwidth="2.5cm"/>
 
             <thead>
               <row>
@@ -1240,13 +1221,10 @@ myCol1.add(50)
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="0.6inch" />
-
-            <colspec colname="c2" colwidth="0.9inch" />
-
-            <colspec colname="c3" colwidth="1.2inch" />
-
-            <colspec colname="c4" colwidth="3.2inch" />
+            <colspec colname="c1" colwidth="1.4cm"/>
+            <colspec colname="c2" colwidth="2.5cm"/>
+            <colspec colname="c3" colwidth="3cm"/>
+            <colspec colname="c4" colwidth="8.1cm"/>
 
             <thead>
               <row>
@@ -1351,13 +1329,10 @@ myCol1.add(50)
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="0.6inch" />
-
-            <colspec colname="c2" colwidth="0.9inch" />
-
-            <colspec colname="c3" colwidth="1.2inch" />
-
-            <colspec colname="c4" colwidth="3.2inch" />
+            <colspec colname="c1" colwidth="1.4cm"/>
+            <colspec colname="c2" colwidth="2.5cm"/>
+            <colspec colname="c3" colwidth="3cm"/>
+            <colspec colname="c4" colwidth="8.1cm"/>
 
             <thead>
               <row>
@@ -1498,13 +1473,10 @@ myCol1.add(50)
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="0.6inch" />
-
-            <colspec colname="c2" colwidth="0.9inch" />
-
-            <colspec colname="c3" colwidth="1.2inch" />
-
-            <colspec colname="c4" colwidth="3.2inch" />
+            <colspec colname="c1" colwidth="1.4cm"/>
+            <colspec colname="c2" colwidth="2.5cm"/>
+            <colspec colname="c3" colwidth="3cm"/>
+            <colspec colname="c4" colwidth="8.1cm"/>
 
             <thead>
               <row>
@@ -2399,7 +2371,7 @@ a := A&lt;Integer&gt;.new
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">setter</emphasis> <emphasis
               role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period := length*width
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface := length*width
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }</programlisting>
 
@@ -2423,9 +2395,8 @@ a := A&lt;Integer&gt;.new
 
           <informaltable>
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="1.5inch" />
-
-              <colspec colname="c2" colwidth="5.2inch" />
+              <colspec colname="c1" colwidth="3.8cm"/>
+              <colspec colname="c2" colwidth="13.2cm"/>
 
               <thead>
                 <row>
@@ -2529,9 +2500,8 @@ assert(a6c.equals(a6))</programlisting></entry>
 
           <informaltable>
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="1.5inch" />
-
-              <colspec colname="c2" colwidth="5.2inch" />
+              <colspec colname="c1" colwidth="3.8cm"/>
+              <colspec colname="c2" colwidth="13.2cm"/>
 
               <thead>
                 <row>
@@ -4143,9 +4113,8 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
     <informaltable>
       <tgroup cols="2">
-        <colspec colname="c1" colwidth="3.3inch" />
-
-        <colspec colname="c2" colwidth="3.4inch" />
+        <colspec colname="c1" colwidth="8.5cm"/>
+        <colspec colname="c2" colwidth="8.5cm"/>
 
         <thead>
           <row>
