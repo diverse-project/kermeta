@@ -7,7 +7,7 @@
   <title>Kermeta language</title>
   
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-16 14:46:20 $</pubdate>
+    <pubdate>$Date: 2007-01-16 17:12:24 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
@@ -2246,7 +2246,7 @@ a := A&lt;Integer&gt;.new
             <mediaobject>
               <imageobject>
                 <imagedata 
-                           fileref="KerMeta-Manual_figures/properties.png"
+                           fileref="KerMeta-Manual_figures/properties2.png"
                             />
               </imageobject>
             </mediaobject>
@@ -2255,46 +2255,55 @@ a := A&lt;Integer&gt;.new
           <para><emphasis role="strong">Example 3</emphasis>: a set of
           attributes and references, with multiplicities and opposites.</para>
 
-          <programlisting><emphasis role="strong">package</emphasis> root;
-
-<emphasis role="strong">class</emphasis> A {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B[0..*] 
+          <programlisting><emphasis role="strong">package</emphasis> root;</programlisting>
+			
+			<programlisting>
+<emphasis role="strong">class</emphasis> A1 {
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B1[0..*] 
 }
-<emphasis role="strong">class</emphasis> B {}</programlisting>
+<emphasis role="strong">class</emphasis> B1 {}
+			</programlisting>
 
-          <programlisting><emphasis role="strong">class</emphasis> A2 {}
+          <programlisting>
+<emphasis role="strong">class</emphasis> A2 {}
 <emphasis role="strong">class</emphasis> B2 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A2 
-}</programlisting>
+}
+			</programlisting>
 
-          <programlisting><emphasis role="strong">class</emphasis> A3 {
+          <programlisting>
+<emphasis role="strong">class</emphasis> A3 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> b : B3#a
 }
 <emphasis role="strong">class</emphasis> B3 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A3#b
-}</programlisting>
-
-          <programlisting><emphasis role="strong">class</emphasis> A4 {}</programlisting>
-
-          <programlisting><emphasis role="strong">class</emphasis> A5 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B5#a
 }
-<emphasis role="strong">class</emphasis> B5 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A5[1..1]#b
+			</programlisting>
+
+          <programlisting>
+<emphasis role="strong">class</emphasis> A4 {
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A4[0..*]
+}</programlisting>
+          
+          <programlisting>
+<emphasis role="strong">class</emphasis> A5 {
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> ab : A5[0..*]#aa
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> aa : A5#ab
 }</programlisting>
 
-          <programlisting><emphasis role="strong">class</emphasis> A6 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B6[0..*]#a
+          <programlisting>
+<emphasis role="strong">class</emphasis> A6 {
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B6#a
 }
 <emphasis role="strong">class</emphasis> B6 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A6#b 
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A6[1..1]#b
 }</programlisting>
 
           <programlisting><emphasis role="strong">class</emphasis> A7 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B7#a 
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B7[0..*]#a
 }
 <emphasis role="strong">class</emphasis> B7 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A7[0..*]#b
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A7#b 
 }</programlisting>
 
           <programlisting><emphasis role="strong">class</emphasis> A8 {
@@ -2307,10 +2316,6 @@ a := A&lt;Integer&gt;.new
           <programlisting><emphasis role="strong">class</emphasis> A9 {}
 <emphasis role="strong">class</emphasis> B9 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A9[1..1]
-}</programlisting>
-
-          <programlisting><emphasis role="strong">class</emphasis> A4bis {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a4bis : A4bis#a4bis
 }</programlisting>
 
           <note>
