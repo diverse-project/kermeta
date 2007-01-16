@@ -7,7 +7,7 @@
   <title>Kermeta language</title>
   
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-16 14:07:33 $</pubdate>
+    <pubdate>$Date: 2007-01-16 14:46:20 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
@@ -144,7 +144,7 @@
         <mediaobject>
           <imageobject>
             <imagedata 
-                       fileref="KerMeta-Manual_figures/kermeta_positionning.png"
+                       fileref="KerMeta-Manual_figures/kermeta_positionning2.png"
                         />
           </imageobject>
         </mediaobject>
