@@ -872,8 +872,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <title>Primitive types</title>
 
         <para>Kermeta implements a few primitive types. By primitive types, we
-        mean types that are basic to any language, i.e integer, real,
-        characters, and that have a “literal” value. See below table.</para>
+        mean types that are basic to any language, i.e integer, and that have a “literal” value. See below table.</para>
 
         <informaltable>
           <tgroup cols="3">
@@ -917,36 +916,6 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
               <row>
                 <entry><?border-bottom 0.0007inch solid #000000?>
                 <?border-left 0.0007inch solid #000000?>
-                <para>Real</para></entry>
-
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents a
-                real numeric value like 3.14 («&nbsp;double&nbsp;» data type
-                in Java)</para></entry>
-
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>'3.14', '-345.456'</para></entry>
-              </row>
-
-              <row>
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
-                <para>Character</para></entry>
-
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents a
-                simple character variable like 'a', 'Z', or '$'
-                («&nbsp;char&nbsp;» data type in Java)</para></entry>
-
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>'a', 'b', 'Z', 'Y', '$', '!'</para></entry>
-              </row>
-
-              <row>
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
                 <para>String</para></entry>
 
                 <entry><?border-bottom 0.0007inch solid #000000?>
@@ -981,7 +950,6 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 <emphasis role="strong">var</emphasis> myVar1 : Integer <emphasis
             role="strong">init</emphasis> 10
 <emphasis role="strong">var</emphasis> myVar2 : Integer
-<emphasis role="strong">var</emphasis> myVar3 : Real <emphasis role="strong">init</emphasis> 3.14
 <emphasis role="strong">var</emphasis> myVar4 : String <emphasis role="strong">init</emphasis> "a new string value"
 <emphasis role="strong">var</emphasis> myVar5 : boolean</programlisting>
       </section>
@@ -1171,8 +1139,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         collections</para>
 
         <programlisting><emphasis>// Collection with multiplicities</emphasis><emphasis
-            role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]
-<emphasis role="strong">var</emphasis> myCol2 : <emphasis role="strong">oset</emphasis> Real[0..*] <emphasis>// At least 4 elements and never more than 20</emphasis>
+            role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]// At least 4 elements and never more than 6</emphasis>
 <emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">seq</emphasis> String[2..*] <emphasis>// At least two strings in the sequence</emphasis><emphasis
             role="strong">var</emphasis> myCol4 : <emphasis role="strong">set</emphasis> String[1..*]<emphasis> // An non empty set</emphasis><emphasis
             role="strong">var</emphasis> myCol5 : String[1..*]<emphasis> // If you don't specify any keyword, it is an ordered set</emphasis>
@@ -1180,7 +1147,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <programlisting><emphasis>// This way of declaring a variable is recommended</emphasis>
 <emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
-<emphasis role="strong">var</emphasis> myColB : Set&lt;Real&gt; <emphasis>// this is equivalent to saying set Real[0..*]</emphasis></programlisting>
+</programlisting>
 
         <para>There is currently no way to define a collection by extension
         like you can do in C or Java. You must initialize your collection
@@ -1203,8 +1170,8 @@ myCol1.add(50)
             role="strong">init</emphasis> kermeta::standard::OrderedSet&lt;String&gt;.new
 <emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">bag</emphasis> Boolean[0..*]&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
             role="strong">init</emphasis> kermeta::standard::Bag&lt;Boolean&gt;.new
-<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">seq</emphasis> Real[0..*]&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
-            role="strong">init</emphasis> kermeta::standard::Sequence&lt;Real&gt;.new
+<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">seq</emphasis> Integer[0..*]&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
+            role="strong">init</emphasis> kermeta::standard::Sequence&lt;Integer&gt;.new
 <emphasis>// if no keyword specified, and multiplicity is set, it is an OrderedSet</emphasis></programlisting>
 
         <programlisting><emphasis role="strong">var</emphasis> myCol4 : String[0..*]<emphasis
@@ -1218,7 +1185,7 @@ myCol1.add(50)
             role="strong">init</emphasis> myCol2
 <emphasis role="strong">var</emphasis> myCol3a : kermeta::standard::Bag&lt;Boolean&gt; <emphasis
             role="strong">init</emphasis> myCol3
-<emphasis role="strong">var</emphasis> myCol3a : kermeta::standard::Sequence&lt;Real&gt; <emphasis
+<emphasis role="strong">var</emphasis> myCol3a : kermeta::standard::Sequence&lt;Integer&gt; <emphasis
             role="strong">init</emphasis> myCol4</programlisting>
 
         <note>
@@ -1380,7 +1347,7 @@ myCol1.add(50)
         </informaltable>
 
         <para>Notice that most of these arithmetic operators are only defined
-        for numeric primitive types like Integer or Real. Except the +
+        for numeric primitive types like Integer. Except the +
         operator which is a concatenation operator for String, they are not
         applicable on String, Boolean nor collections</para>
 
@@ -2411,7 +2378,7 @@ a := A&lt;Integer&gt;.new
           <programlisting><emphasis>// readonly property : it has no setter</emphasis>
 <emphasis role="strong">class</emphasis> A 
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Real
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Integer
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> <emphasis
               role="strong">readonly</emphasis> frequency : Real <emphasis>// property : keyword for derived property</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">getter</emphasis> <emphasis
@@ -2423,7 +2390,7 @@ a := A&lt;Integer&gt;.new
 <emphasis>// modifiable property :</emphasis>
 <emphasis role="strong">class</emphasis> B 
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Real
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Integer
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> frequency : Real
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">getter</emphasis> <emphasis
               role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
@@ -2878,27 +2845,15 @@ class NewPrimitiveType {
               <listitem>
                 <para>Boolean</para>
               </listitem>
-            </itemizedlist>
-
-            <itemizedlist>
+   
               <listitem>
                 <para>Integer</para>
               </listitem>
-            </itemizedlist>
-
-            <itemizedlist>
-              <listitem>
-                <para>Real</para>
-              </listitem>
-            </itemizedlist>
-
-            <itemizedlist>
+      
               <listitem>
                 <para>Character</para>
               </listitem>
-            </itemizedlist>
 
-            <itemizedlist>
               <listitem>
                 <para>String</para>
               </listitem>
