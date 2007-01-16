@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.5 2006-12-07 08:08:24 dvojtise Exp $
+/* $Id: Ecore2KMPass1.java,v 1.6 2007-01-16 15:35:15 dvojtise Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -375,21 +375,6 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	 * @param node
 	 * @return
 	 */
-	public List<TypeVariable> createTypeParametersFromEAnnotation(EAnnotation node)
-	{
-		List<TypeVariable> params = new ArrayList<TypeVariable>();
-		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
-		{	
-			for (Object oname : node.getDetails().keySet())
-			{
-				String name = (String)oname;
-				TypeVariable tv = unit.struct_factory.createObjectTypeVariable();
-				tv.setName(name);
-				params.add(tv);
-			} 
-		}
-		return params;
-	}
 	
 	
 	/**
