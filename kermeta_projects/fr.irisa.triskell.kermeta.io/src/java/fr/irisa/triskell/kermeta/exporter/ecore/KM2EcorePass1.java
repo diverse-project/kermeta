@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.34 2006-12-07 08:40:19 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.35 2007-01-16 09:17:21 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EModelElement;
@@ -69,13 +70,16 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	
 	/** The name of the currently visited element */
 	protected String current_name;
+	
 	/** The path of the currently visited package. Used to set the nsUri of packages (ie "//foo/bar") */
 	protected String current_ppath;
+	
 	/** The enumeration that is currently visited */
 	protected EEnum current_eenum;
 	
 	
 	protected KM2Ecore ecoreExporter;
+	
 	protected KM2KMTPrettyPrinter prettyPrinter;
 	
 	
@@ -150,6 +154,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			Object o = accept((EObject)next);
 			if (o != null) {
 				if (o instanceof EClass) {
+					newEPackage.getEClassifiers().add(o);
+				} else if (o instanceof EDataType) {
 					newEPackage.getEClassifiers().add(o);
 				} else if (o instanceof EPackage) {
 					newEPackage.getESubpackages().add(o);
