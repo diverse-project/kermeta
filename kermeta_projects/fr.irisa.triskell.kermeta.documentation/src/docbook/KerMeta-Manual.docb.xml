@@ -7,7 +7,7 @@
   <title>Kermeta language</title>
   
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-16 17:12:24 $</pubdate>
+    <pubdate>$Date: 2007-01-16 17:58:46 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
@@ -3518,14 +3518,9 @@ and op.name.indexOf("All")==-1}
           a simple equality checking or a lambda expression. The Kermeta
           interpreter evaluates the body content like a boolean result</para>
 
-          <para>The "pre condition" is declared just after the operation
-          signature.</para>
+          <para>The "pre condition" are declared just before the "is" of the operation body</para>
 
-          <para>The "post condition" is declared just after the last "end" of
-          the operation body.</para>
-
-          <programlisting><emphasis role="strong">operation</emphasis> opName(c : String) : String <emphasis
-              role="strong">is</emphasis>
+          <programlisting><emphasis role="strong">operation</emphasis> opName(c : String) : String
 &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// Declaration of the pre-condition</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">pre</emphasis> notVoidInput <emphasis
@@ -3533,15 +3528,16 @@ and op.name.indexOf("All")==-1}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c != <emphasis role="strong">void</emphasis> and c != ""
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// operation body
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
-
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// Declaration of the post-condition</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">post</emphasis> notVoidOutput <emphasis
               role="strong">is</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">result</emphasis> != <emphasis
-              role="strong">void</emphasis> and <emphasis role="strong">result</emphasis> != ""</programlisting>
+              role="strong">void</emphasis> and <emphasis role="strong">result</emphasis> != ""
+
+<emphasis role="strong">is</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">do</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// operation body
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis></programlisting>
 
           <tip>
             If the body contains only one expression, the block declaration "do ... end" is not mandatory. If your block contains several instructions, the latest one will be evaluated as a boolean expression.
@@ -4140,7 +4136,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
             <entry align="left"><?border-right 0.0007inch solid #000000?>
             <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
             <para>Represents self before the call to this operation in the
-            scope of a post condiction</para></entry>
+            scope of a post condition</para></entry>
           </row>
 
           <row>
