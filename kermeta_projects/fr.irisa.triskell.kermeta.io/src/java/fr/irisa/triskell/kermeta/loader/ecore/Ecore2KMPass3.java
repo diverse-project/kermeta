@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.12 2006-12-07 08:08:24 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.13 2007-01-16 15:34:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -205,6 +205,12 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// hosted in the operation annotation can be parsed and type checked correctly.
 			unit.pushContext();
 			
+			// First visit the TypeParameter annotation in order to get type context for body parsing
+			EAnnotation tParam_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
+			if(tParam_Annot != null) {
+				visitTypeParameterAnnotation(tParam_Annot);
+			}
+			
 			// add type variable
 			for (Object next : exporter.current_op.getTypeParameter()) unit.addTypeVar((TypeVariable)next);
 			
@@ -215,8 +221,13 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
 			visitorPass1.isClassTypeOwner=false;
 			
-			// Visit the annotations
-			acceptList(node.getEAnnotations());
+			// Visit all other annotations
+			for (Object next : node.getEAnnotations()) {
+				EAnnotation annot = (EAnnotation) next;
+				if(! annot.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
+					visitOperationAnnotation(annot);
+				}
+			}
 			
 			unit.popContext();
 
