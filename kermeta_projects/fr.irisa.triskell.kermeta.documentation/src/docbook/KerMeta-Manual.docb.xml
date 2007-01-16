@@ -920,7 +920,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
                 <entry><?border-bottom 0.0007inch solid #000000?>
                 <?border-left 0.0007inch solid #000000?> <para>Represents a
-                string of characters like « helloworld&nbsp;»
+                string of like « helloworld&nbsp;»
                 («&nbsp;String&nbsp;» data type in Java)</para></entry>
 
                 <entry><?border-right 0.0007inch solid #000000?>
@@ -2848,10 +2848,6 @@ class NewPrimitiveType {
    
               <listitem>
                 <para>Integer</para>
-              </listitem>
-      
-              <listitem>
-                <para>Character</para>
               </listitem>
 
               <listitem>
