@@ -2,10 +2,6 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <book lang="en-US">
-  <?ooogenerator OpenOffice.org/2.0$Linux OpenOffice.org_project/680m5$Build-9011?>
-
-  <?oooversion ?>
-
   <bookinfo>
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
@@ -115,7 +111,7 @@
         </emphasis>
       </emphasis>
 
-      Last check: v0.2.1
+      Last check: v0.4.0
     </important>
 
     <tip>
@@ -152,9 +148,9 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata depth="4.7634inch"
+            <imagedata 
                        fileref="KerMeta-Manual_figures/kermeta_positionning.png"
-                       width="6.3898inch" />
+                        />
           </imageobject>
         </mediaobject>
       </figure>
@@ -265,9 +261,9 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="2.6217inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_emof_promotion.png"
-                         width="6.6925inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -279,9 +275,9 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="5.4953inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_structure_package.png"
-                         width="6.1189inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -311,9 +307,9 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="3.6717inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_behavior_package.png"
-                         width="7.578inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -378,9 +374,9 @@
                   <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
                   <mediaobject>
                       <imageobject>
-                        <imagedata depth="3.6252inch"
+                        <imagedata 
                                    fileref="KerMeta-Manual_figures/operation_redefinition.png"
-                                   width="0.9016inch" />
+                                    />
                       </imageobject>
                     </mediaobject> <para></para></entry>
 
@@ -545,9 +541,9 @@
                   <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
                   <mediaobject>
                       <imageobject>
-                        <imagedata depth="4.478inch"
+                        <imagedata 
                                    fileref="KerMeta-Manual_figures/superoperation_selection.png"
-                                   width="2.2189inch" />
+                                    />
                       </imageobject>
                     </mediaobject> <para></para></entry>
 
@@ -681,7 +677,7 @@
 </programlisting>
 
           <note>
-            Notice in that sample that even the “if” is an expression that can return a value that is assigned here to the special variable “result”.
+            Notice in that sample that even the "if" is an expression that can return a value that is assigned here to the special variable "result".
           </note>
         </section>
       </section>
@@ -701,7 +697,7 @@
 
         <para><emphasis role="strong">Example 1</emphasis>: the following code
         will build a collection of names of the operations that start with
-        “test”.</para>
+        "test".</para>
 
         <programlisting><emphasis role="strong">var</emphasis> names : Collection&lt;String&gt;
 names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ownedOperation
@@ -740,7 +736,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
     <title>Language Basics</title>
 
     <para>This section presents basic features of the Kermeta language such as
-    comments, types, or instructions ... A simple “Hello world” example
+    comments, types, or instructions ... A simple "Hello world" example
     concludes this first section. More complex object-oriented features are
     explained in section <link linkend="sec:oo-features">3</link>.</para>
 
@@ -758,7 +754,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <emphasis role="strong">or</emphasis>
 
-         @tag_name “tag value”) is translated into a MOF tag linked to structures described in the Kermeta model.
+         @tag_name "tag value") is translated into a MOF tag linked to structures described in the Kermeta model.
       </warning>
 
       <section>
@@ -777,7 +773,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
           <listitem>
             <para>multi-line comments, i.e text between /* */. Be careful with
             this notation : the opening syntax must not have juxtaposed stars
-            (“/**”), otherwise it will be considered as a linked comment (see
+            ("/**"), otherwise it will be considered as a linked comment (see
             section <link linkend="sec:linked-comments">2.1.2</link>, p.<link
             linkend="sec:linked-comments">18</link>), i.e a comment that is
             part of the Kermeta program as a model.</para>
@@ -802,7 +798,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         above which they are defined.</para>
 
         <para>To define a named annotation, you have to use a special symbol
-        “@”, whereas an anonymous annotation has to be written between /** and
+        "@", whereas an anonymous annotation has to be written between /** and
         */</para>
 
         <para><emphasis role="strong">Example 1:</emphasis> you can define an
@@ -872,7 +868,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <title>Primitive types</title>
 
         <para>Kermeta implements a few primitive types. By primitive types, we
-        mean types that are basic to any language, i.e integer, and that have a “literal” value. See below table.</para>
+        mean types that are basic to any language, i.e integer, and that have a "literal" value. See below table.</para>
 
         <informaltable>
           <tgroup cols="3">
@@ -958,7 +954,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <title>Enumeration types</title>
 
         <para>You can define enumeration types by using the following syntax.
-        Note that each enumeration literal must end with a “;”.</para>
+        Note that each enumeration literal must end with a ";".</para>
 
         <programlisting><emphasis role="strong">enumeration</emphasis> Size { small; normal; big; huge; } </programlisting>
 
@@ -1117,9 +1113,9 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="2.0071inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/collections.png"
-                         width="2.822inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -1138,15 +1134,17 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <para><emphasis role="strong">Example 1</emphasis>: how to declare
         collections</para>
 
-        <programlisting><emphasis>// Collection with multiplicities</emphasis><emphasis
-            role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]// At least 4 elements and never more than 6</emphasis>
-<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">seq</emphasis> String[2..*] <emphasis>// At least two strings in the sequence</emphasis><emphasis
-            role="strong">var</emphasis> myCol4 : <emphasis role="strong">set</emphasis> String[1..*]<emphasis> // An non empty set</emphasis><emphasis
-            role="strong">var</emphasis> myCol5 : String[1..*]<emphasis> // If you don't specify any keyword, it is an ordered set</emphasis>
+<programlisting>
+	<emphasis>// Collection with multiplicities</emphasis>
+	<emphasis role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]<emphasis> // At least 4 elements and never more than 6</emphasis>
+	<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">seq</emphasis> String[2..*]<emphasis> // At least two strings in the sequence</emphasis>
+	<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">set</emphasis> String[1..*]<emphasis> // An non empty set</emphasis>
+	<emphasis role="strong">var</emphasis> myCol5 : String[1..*]<emphasis> // If you don't specify any keyword, it is an ordered set</emphasis>
 </programlisting>
 
-        <programlisting><emphasis>// This way of declaring a variable is recommended</emphasis>
-<emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
+<programlisting>
+    <emphasis>// This way of declaring a variable is recommended</emphasis>
+	<emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
 </programlisting>
 
         <para>There is currently no way to define a collection by extension
@@ -1194,7 +1192,7 @@ myCol1.add(50)
       </section>
 
       <section>
-        <title>Local datatype using “alias”<phrase
+        <title>Local datatype using "alias"<phrase
         id="section_alias"></phrase></title>
 
         <para>In Kermeta, you can define your own datatype based on existing
@@ -1218,7 +1216,7 @@ myCol1.add(50)
         <para>This will create a new type String in your package with the
         behavior of String in the framework.</para>
 
-        <para>The definition of an alias is different from the use of “using”
+        <para>The definition of an alias is different from the use of "using"
         statement (as defined in section <link
         linkend="section_using">3.4.2</link>), when you write</para>
 
@@ -1710,7 +1708,7 @@ myCol1.add(50)
           this operation.</para>
 
           <para><emphasis role="strong">Example</emphasis>: 3 different kinds
-          of “runnable” operations</para>
+          of "runnable" operations</para>
 
           <programlisting><emphasis role="strong">class</emphasis> A{
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> main0() <emphasis
@@ -1789,9 +1787,9 @@ myCol1.add(50)
         section <link linkend="section_kermeta_metamodel">5</link>). As any
         expression in Kermeta, it can return a value. The return type of the
         <literal>if</literal> statement must be a super type of the values
-        “returned” by both <literal>then</literal> and <literal>else</literal>
+        "returned" by both <literal>then</literal> and <literal>else</literal>
         blocks (otherwise the type checker will send an error). The values
-        considered as the result of the evaluation (the “returned” values) of
+        considered as the result of the evaluation (the "returned" values) of
         the <literal>if</literal> statement are the last evaluated statement
         inside <literal>then</literal> or <literal>else</literal> block</para>
 
@@ -1842,7 +1840,7 @@ myCol1.add(50)
         <title>Exception handling</title>
 
         <para>Kermeta provides also an exception mechanism. You can define a
-        “rescue” block to manage errors occurring during the execution of
+        "rescue" block to manage errors occurring during the execution of
         another block. Exception mechanism is very close to the Java Exception
         mechanism.</para>
 
@@ -1853,7 +1851,7 @@ myCol1.add(50)
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> excep : Exception
 &nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;excep := Exception.new
-&nbsp;&nbsp;&nbsp;&nbsp;stdio.writeln(“Throwing an exception ! “)
+&nbsp;&nbsp;&nbsp;&nbsp;stdio.writeln("Throwing an exception ! ")
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">raise</emphasis> excep
 <emphasis role="strong">end</emphasis></programlisting>
 
@@ -1879,7 +1877,7 @@ myCol1.add(50)
         <title>Using Variables</title>
 
         <para>In the following example, we define 3 variables of type integer.
-        The first is initialized with the “14” literal value, the second is
+        The first is initialized with the "14" literal value, the second is
         initialized with an expression using v1. For the last variable, we use
         a multiplicity notation to specify an ordered set of integer.</para>
 
@@ -1937,7 +1935,7 @@ anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
 
           <orderedlist continuation="restarts">
             <listitem>
-              <para>Declaring and defining an “anonymous” function inside an
+              <para>Declaring and defining an "anonymous" function inside an
               operation body</para>
             </listitem>
           </orderedlist>
@@ -2139,7 +2137,7 @@ sequence := init_set.collect { element | element*10}</programlisting>
       <section>
         <title>Classes</title>
 
-        <para>As introduced in the “Hello world” example (see section <link
+        <para>As introduced in the "Hello world" example (see section <link
         linkend="section_first_program">1.2</link>), Kermeta is an
         object-oriented language and operations are part of classes. Kermeta
         provides all MOF concepts like properties, attributes, package.</para>
@@ -2275,9 +2273,9 @@ a := A&lt;Integer&gt;.new
 
             <mediaobject>
               <imageobject>
-                <imagedata depth="2.7752inch"
+                <imagedata 
                            fileref="KerMeta-Manual_figures/properties.png"
-                           width="7.6362inch" />
+                            />
               </imageobject>
             </mediaobject>
           </figure>
@@ -2378,28 +2376,30 @@ a := A&lt;Integer&gt;.new
           <programlisting><emphasis>// readonly property : it has no setter</emphasis>
 <emphasis role="strong">class</emphasis> A 
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Integer
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> length : Integer
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> width : Integer
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> <emphasis
-              role="strong">readonly</emphasis> frequency : Real <emphasis>// property : keyword for derived property</emphasis>
+              role="strong">readonly</emphasis> surface : Integer <emphasis>// property : keyword for derived property</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">getter</emphasis> <emphasis
               role="strong">is</emphasis> do
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
-              role="strong">result</emphasis> := 1/period
+              role="strong">result</emphasis> := length*width
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }
 <emphasis>// modifiable property :</emphasis>
 <emphasis role="strong">class</emphasis> B 
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Integer
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> frequency : Real
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> length : Integer
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> width : Integer
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> surface : Integer
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">getter</emphasis> <emphasis
               role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
-              role="strong">result</emphasis> := 1/period
+              role="strong">result</emphasis> := length*width
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">setter</emphasis> <emphasis
               role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period := 1/frequency
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period := length*width
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }</programlisting>
 
@@ -2475,7 +2475,7 @@ a6.b.add(b6)</programlisting></entry>
 
                   <entry><?border-right 0.0007inch solid #000000?>
                   <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use “remove” method</emphasis>
+                  <programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use "remove" method</emphasis>
 a6.b.removeAt(0)
 <emphasis>// Also valid : a6.b.remove(b6)</emphasis></programlisting></entry>
                 </row>
@@ -2682,16 +2682,16 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
           <para>As we saw in previous sections, properties can be defined as
           attribute or reference. An attribute cannot be shared between two or
           more objects whereas a reference can be. Let's consider a class
-          “<literal>Family</literal>” with a property
-          “<literal>father</literal>” (of type “<literal>Person</literal>”)
+          "<literal>Family</literal>" with a property
+          "<literal>father</literal>" (of type "<literal>Person</literal>")
           defined as an attribute. In the following example, we defined two
           objects of type <literal>Family</literal> and we want to define the
           <literal>father</literal> attribute of the second with the
           <literal>father</literal> of the first. To do that, we need to clone
           the object Person which represents the father of
-          “<literal>family1</literal>” because, as said in above subsection,
+          "<literal>family1</literal>" because, as said in above subsection,
           it could not be shared between the two objects, by definition of
-          attribute (in “technical” words, 2 containers cannot contain the
+          attribute (in "technical" words, 2 containers cannot contain the
           same object).</para>
 
           <programlisting><emphasis role="strong">class</emphasis> Person 
@@ -2726,13 +2726,13 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
  &nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }</programlisting>
 
-          <para>The “<literal>clone</literal>” method creates a copy of the
+          <para>The "<literal>clone</literal>" method creates a copy of the
           object that it receives as input. If it is a complex object, a deep
           clone is performed for each attribute of its meta-class and a
           shallow clone is performed for each reference.</para>
 
           <caution>
-            Reminder : be very careful with the use of the assignment operator on object. Most of the time, you need to use the “clone” feature. Using assignment on attributes break the previous link between objects. So, In the previous example, p1 has no more name after the assignment !There is one exception to this behavior : when the type of attributes are DataType, i.e, in Kermeta, String, Integer, Boolean, the assignment behaves as if those entities were defined as references.
+            Reminder : be very careful with the use of the assignment operator on object. Most of the time, you need to use the "clone" feature. Using assignment on attributes break the previous link between objects. So, In the previous example, p1 has no more name after the assignment !There is one exception to this behavior : when the type of attributes are DataType, i.e, in Kermeta, String, Integer, Boolean, the assignment behaves as if those entities were defined as references.
           </caution>
         </section>
 
@@ -2889,7 +2889,7 @@ end</programlisting>
       <section>
         <title>A first concrete example of a Kermeta model</title>
 
-        <para>MOF defines the concept of “Property” which generalizes the
+        <para>MOF defines the concept of "Property" which generalizes the
         notions of attributes, and associations (composite or not) that you
         can find in UML. Kermeta syntax also distinguishes these two notions
         as introduced in section <link linkend="sec:properties">3.1.2</link>,
@@ -2939,9 +2939,9 @@ end</programlisting>
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="2.2134inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/library.png"
-                         width="4.6571inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -2991,9 +2991,9 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="2.5862inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/person.png"
-                         width="3.5571inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3022,8 +3022,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">boolean</emphasis> healthy : Boolean
 }</programlisting>
 
-        <para>The above example defines a class “GrandFather” that inherits at
-        the same time the class “Parent”, and the class “Male”. Its graphical
+        <para>The above example defines a class "GrandFather" that inherits at
+        the same time the class "Parent", and the class "Male". Its graphical
         representation is shown in below figure.</para>
 
         <figure id="refIllustration8">
@@ -3031,9 +3031,9 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="1.6689inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/KMM_multiple_inheritance.png"
-                         width="4.3071inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3123,7 +3123,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 }</programlisting>
 
       <para>Here, classes A and B are defined in a package called
-      “MyNewPackage”. All classes defined in this file are under the scope of
+      "MyNewPackage". All classes defined in this file are under the scope of
       this package.</para>
 
       <para>You can also define explicitly sub-packages using braces (see the
@@ -3151,14 +3151,14 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 &nbsp;&nbsp;&nbsp;&nbsp;}
 }</programlisting>
 
-      <para>In this example, we define a main package called “MyPackage” which
-      contains 2 sub-packages “subPackage1” and “subPackage2”. The first one
+      <para>In this example, we define a main package called "MyPackage" which
+      contains 2 sub-packages "subPackage1" and "subPackage2". The first one
       contains the A class and the second one the B class.</para>
 
       <para>If you want, you can declare the same package in several files.
       You can also directly define subpackages in the package naming directive
       of your file (see example 1 above). In the following example, we define
-      a new sub-package of “MyPackage” called “subPackage3” directly in the
+      a new sub-package of "MyPackage" called "subPackage3" directly in the
       file. All features defined in this file will belong to this
       sub-package.</para>
 
@@ -3268,7 +3268,7 @@ params.put(<emphasis>"a"</emphasis>, <emphasis>"hello world!"</emphasis>)
 de.execute(void, params)</programlisting>
 
       <para>If you want to dynamically evaluate more than one statement, you
-      will have to surround your set of statements with “do.. end”
+      will have to surround your set of statements with "do.. end"
       block:</para>
 
       <para role="lineBreak"><emphasis role="strong">Example 2</emphasis>: yet
@@ -3316,7 +3316,7 @@ and op.name.indexOf("All")==-1}
 }</programlisting>
 
       <caution>
-        You cannot use “self” inside a dynamic expression
+        You cannot use "self" inside a dynamic expression
       </caution>
     </section>
 
@@ -3332,9 +3332,9 @@ and op.name.indexOf("All")==-1}
 
         <mediaobject>
           <imageobject>
-            <imagedata depth="3.4043inch"
+            <imagedata 
                        fileref="KerMeta-Manual_figures/cs_ecore.gif"
-                       width="2.8098inch" />
+                        />
           </imageobject>
         </mediaobject>
       </figure>
@@ -3358,7 +3358,7 @@ and op.name.indexOf("All")==-1}
         generated EMF reflexive editors.</para>
 
         <para>Once you created the ECore meta-model, please check that you
-        correctly filled the property “<literal>Ns URI”</literal> of the root
+        correctly filled the property "<literal>Ns URI"</literal> of the root
         package of the Ecore meta-model, otherwise the resource load will
         fail. This NsURI must equal the real path of your metamodel. (You can
         modify this property through the Properties View of your
@@ -3374,14 +3374,14 @@ and op.name.indexOf("All")==-1}
         <orderedlist continuation="restarts">
           <listitem>
             <para>At the top of the source code where you will access your
-            model, don't forget to add <literal>require “your_metamodel.ecore”
+            model, don't forget to add <literal>require "your_metamodel.ecore"
             </literal>so that you can access your metamodel in Kermeta.</para>
 
             <para>Alternatively, you can use the Kermeta version of your
             metamodel using</para>
 
-            <para>require “your_metamodel.kmt” or require
-            “your_metamodel.km”.</para>
+            <para>require "your_metamodel.kmt" or require
+            "your_metamodel.km".</para>
 
             <para role="lineBreak">In this case, be careful that your kmt
             required metamodel is strictly equivalent to the ecore version of
@@ -3402,14 +3402,14 @@ and op.name.indexOf("All")==-1}
           </listitem>
         </orderedlist>
 
-        <programlisting><emphasis role="strong">@mainClass</emphasis> “root::TestCSLoading”
+        <programlisting><emphasis role="strong">@mainClass</emphasis> "root::TestCSLoading"
 
-<emphasis role="strong">@mainOperation</emphasis> “main”
+<emphasis role="strong">@mainOperation</emphasis> "main"
 
 
 <emphasis role="strong">package</emphasis> root;
 <emphasis role="strong">require</emphasis> kermeta
-<emphasis role="strong">require</emphasis> “cs.ecore”
+<emphasis role="strong">require</emphasis> "cs.ecore"
 <emphasis role="strong">using</emphasis> kermeta::standard
 
 <emphasis role="strong">class</emphasis> TestCSLoading
@@ -3433,7 +3433,7 @@ and op.name.indexOf("All")==-1}
             <para>Once you loaded your EMF resource, you can get its attribute
             <literal>instances</literal>, that contains all the objects that
             you created through your EMF generated reflexive editor. Now you
-            can “visit” your instances, provided you “visit” them according to
+            can "visit" your instances, provided you "visit" them according to
             their types. In the simplest way, you can make very basic tests to
             display your instances content, as in the following example, which
             visit the objects of resource instances which types are
@@ -3508,7 +3508,7 @@ and op.name.indexOf("All")==-1}
 </programlisting>
 
       <para><emphasis role="strong">Example 2</emphasis>: sample of Java code
-      (“wrapper”) called by the Kermeta extern:</para>
+      ("wrapper") called by the Kermeta extern:</para>
 
       <programlisting><emphasis>/** Implementation of input and output methods */</emphasis><emphasis
           role="strong">public</emphasis> <emphasis role="strong">class</emphasis> StdIO{ // Implementation of method write called as : // extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output) <emphasis
@@ -3530,8 +3530,8 @@ and op.name.indexOf("All")==-1}
     <section>
       <title>Design by contract (pre, post, inv contraints)</title>
 
-      <para>In Kermeta, a contract is specified by “pre” and “post” conditions
-      and by the “invariant” constraint too.</para>
+      <para>In Kermeta, a contract is specified by "pre" and "post" conditions
+      and by the "invariant" constraint too.</para>
 
       <section>
         <title>Writing a contract</title>
@@ -3543,10 +3543,10 @@ and op.name.indexOf("All")==-1}
           a simple equality checking or a lambda expression. The Kermeta
           interpreter evaluates the body content like a boolean result</para>
 
-          <para>The “pre condition” is declared just after the operation
+          <para>The "pre condition" is declared just after the operation
           signature.</para>
 
-          <para>The “post condition” is declared just after the last “end” of
+          <para>The "post condition" is declared just after the last "end" of
           the operation body.</para>
 
           <programlisting><emphasis role="strong">operation</emphasis> opName(c : String) : String <emphasis
@@ -3569,7 +3569,7 @@ and op.name.indexOf("All")==-1}
               role="strong">void</emphasis> and <emphasis role="strong">result</emphasis> != ""</programlisting>
 
           <tip>
-            If the body contains only one expression, the block declaration “do ... end” is not mandatory. If your block contains several instructions, the latest one will be evaluated as a boolean expression.
+            If the body contains only one expression, the block declaration "do ... end" is not mandatory. If your block contains several instructions, the latest one will be evaluated as a boolean expression.
           </tip>
         </section>
 
@@ -3599,7 +3599,7 @@ and op.name.indexOf("All")==-1}
 }</programlisting>
 
           <tip>
-            If the body contains only one instruction, the block declaration “do ... end” is not mandatory.
+            If the body contains only one instruction, the block declaration "do ... end" is not mandatory.
           </tip>
 
           <programlisting><emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
@@ -3632,7 +3632,7 @@ and op.name.indexOf("All")==-1}
           depends of the run configuration, see the Kermeta UI user guide for
           more information.</para>
 
-          <para>If the boolean statement is evaluated to “false” then the pre
+          <para>If the boolean statement is evaluated to "false" then the pre
           or post condition is violated and an exception
           <literal>ConstraintViolatedPre</literal> or
           <literal>ConstraintViolatedPost</literal> is raised.</para>
@@ -3661,7 +3661,7 @@ and op.name.indexOf("All")==-1}
           <programlisting>theModelElement.checkAllInvariants</programlisting>
 
           <para>If the boolean statement is evaluated to
-          “<literal>false</literal>” then the invariant constraint is violated
+          "<literal>false</literal>" then the invariant constraint is violated
           and an exception <literal>ConstraintViolatedInv</literal> is raised.
           This exception can be handled by a <literal>rescue</literal>
           call.</para>
@@ -3702,7 +3702,7 @@ and op.name.indexOf("All")==-1}
 
       <para>First, the ecore file kermeta_java.ecore is available in the lib
       folder of Kermeta main plugin.It is used when saving a Kermeta program
-      in XMI (“Compile to XMI” function on *.kmt files). You can then load
+      in XMI ("Compile to XMI" function on *.kmt files). You can then load
       Kermeta program as a model, typically to transform it.</para>
 
       <warning>
@@ -3730,9 +3730,9 @@ and op.name.indexOf("All")==-1}
 
         <mediaobject>
           <imageobject>
-            <imagedata depth="5.4953inch"
+            <imagedata 
                        fileref="KerMeta-Manual_figures/kermeta_structure_package.png"
-                       width="7.8634inch" />
+                        />
           </imageobject>
         </mediaobject>
       </figure>
@@ -3757,9 +3757,9 @@ and op.name.indexOf("All")==-1}
 
         <mediaobject>
           <imageobject>
-            <imagedata depth="2.848inch"
+            <imagedata 
                        fileref="KerMeta-Manual_figures/kermeta_behavior_package.png"
-                       width="5.7717inch" />
+                        />
           </imageobject>
         </mediaobject>
       </figure>
@@ -3779,9 +3779,9 @@ and op.name.indexOf("All")==-1}
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="3.8953inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_control_struct.png"
-                         width="6.6661inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3797,9 +3797,9 @@ and op.name.indexOf("All")==-1}
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="2.428inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_var_expressions.png"
-                         width="3.6717inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3815,9 +3815,9 @@ and op.name.indexOf("All")==-1}
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="2.9898inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_call_expressions.png"
-                         width="4.5453inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3937,9 +3937,9 @@ myvar := callvar </programlisting>
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="1.678inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_assign_expressions.png"
-                         width="3.1516inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3988,9 +3988,9 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
           <mediaobject>
             <imageobject>
-              <imagedata depth="3.498inch"
+              <imagedata 
                          fileref="KerMeta-Manual_figures/kermeta_lambda_expressions.png"
-                         width="3.5862inch" />
+                          />
             </imageobject>
           </mediaobject>
         </figure>
