@@ -46,9 +46,9 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			if ( delta != null ) {
 				KermetaDeltaVisitor visitor = new KermetaDeltaVisitor(kpm);
 				delta.accept(visitor);
-				project.refreshLocal(IResource.DEPTH_INFINITE, null);
 				KermetaProject kproject = KermetaWorkspace.getInstance().getKermetaProject(project);
 				kproject.save();
+				project.refreshLocal(IResource.DEPTH_INFINITE, null);
 			}
 			break;
 			
@@ -63,9 +63,9 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			if ( delta != null ) {
 				KermetaDeltaVisitor visitor = new KermetaDeltaVisitor(kpm);
 				delta.accept(visitor);
-				project.refreshLocal(IResource.DEPTH_INFINITE, null);
 				KermetaProject kproject = KermetaWorkspace.getInstance().getKermetaProject(project);
 				kproject.save();
+				project.refreshLocal(IResource.DEPTH_INFINITE, null);
 			}
 			//build();
 			break;
