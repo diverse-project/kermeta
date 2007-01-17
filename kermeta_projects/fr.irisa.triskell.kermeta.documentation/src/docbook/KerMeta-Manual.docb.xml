@@ -7,7 +7,7 @@
   <title>Kermeta language</title>
   
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-16 17:58:46 $</pubdate>
+    <pubdate>$Date: 2007-01-17 09:44:37 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
@@ -205,11 +205,11 @@
 
 <emphasis role="strong">class</emphasis> HelloworldExample
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> sayHello() <emphasis
+    <emphasis role="strong">operation</emphasis> sayHello() <emphasis
           role="strong">is</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stdio.writeln("Hello world, ...")
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+    <emphasis role="strong">do</emphasis>
+        stdio.writeln("Hello world, ...")
+    <emphasis role="strong">end</emphasis>
 }</programlisting>
     </section>
 
@@ -1803,9 +1803,7 @@ myCol1.add(50)
 &nbsp;&nbsp;&nbsp;&nbsp;i := i + 1
 <emphasis role="strong">end</emphasis></programlisting>
 
-        <note>
-          There is no exit or continue function in current version of Kermeta, nor a proper way to make an infinite loop
-        </note>
+        <note>Unlike Java, there is no exit, break or continue function in Kermeta.</note>
       </section>
 
       <section>
@@ -1887,39 +1885,35 @@ myCol1.add(50)
 
           <orderedlist continuation="restarts">
             <listitem>
-              <para>Signature of an operation defined as a function:</para>
-            </listitem>
-          </orderedlist>
-
-          <programlisting><emphasis>// With one parameter</emphasis>
+              <para>Signature of an operation defined as a function:</para><programlisting><emphasis>// With one parameter</emphasis>
 <emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;TYPE-&gt;RETURN_TYPE&gt; )
 <emphasis>// With many parameters</emphasis>
 <emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;[TYPE_1, TYPE_2, ...]-&gt;RETURN_TYPE&gt; )</programlisting>
-
-          <orderedlist continuation="restarts">
-            <listitem>
-              <para>Call of a function:</para>
             </listitem>
           </orderedlist>
 
-          <programlisting>anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
+          
+
+          <orderedlist continuation="continues">
+            <listitem>
+              <para>Call of a function:</para><programlisting>anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
 anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
-
-          <orderedlist continuation="restarts">
-            <listitem>
-              <para>Declaring and defining an "anonymous" function inside an
-              operation body</para>
             </listitem>
           </orderedlist>
 
-          <programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis
-              role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
+          
 
-<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis
-              role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
+          <orderedlist continuation="continues">
+            <listitem>
+              <para>Declaring and defining an "anonymous" function inside an operation body</para><programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
 
-          <para>Next in this section, you will find many examples of
-          declarations, definitions, and uses of functions.</para>
+<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
+            </listitem>
+          </orderedlist>
+
+          
+
+          <para>In the following sections, you will find many examples of declarations, definitions, and uses of functions.</para>
         </section>
 
         <section>
@@ -2181,9 +2175,7 @@ a := A&lt;Integer&gt;.new
               role="strong">attribute</emphasis> x : <emphasis role="strong">set</emphasis> X[0..*] } 
 <emphasis role="strong">class</emphasis> X {}</programlisting>
 
-          <note>
-            NOTE : a bi-composition is not valid in MOF. So, only one entity can be the component of the other.
-          </note>
+          <note>Composition notion also relates to containment notion. So, there are some restriction about valid  model. For example, in an association, only one end can be an attribute, otherwise this means that we have an association with a diamond on both end and we cannot say who is the container of the other.</note>
 
           <orderedlist continuation="restarts">
             <listitem>
@@ -3986,114 +3978,95 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
     </tip>
 
     <para>Currently, it provides the following packages :</para>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::interpreter</emphasis></para>
-
-        <para role="lineBreak">This package defines some classes related to
+    <variablelist><title>Packages in Kermeta framework</title>
+		<varlistentry><term>
+	<emphasis role="strong"><filename role="strong">kermeta::interpreter</filename></emphasis>
+	</term>
+			<listitem>
+				<para>
+				This package defines some classes related to
         Kermeta interpreter and also to Kermeta surface syntax. Some uses of
         this package are illustrated in section <link
-        linkend="dynamic_expression">4.1</link>.</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::persistence</emphasis></para>
-
-        <para role="lineBreak">This package defines the notion required to
+        linkend="dynamic_expression">4.1</link>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry><term>
+	<emphasis role="strong"><filename>kermeta::persistence</filename></emphasis>
+	</term>
+			<listitem>
+				<para>
+				This package defines the notion required to
         serialize and deserialize models. This is illustrated in section <link
         linkend="Loading_Models_with_kermeta">4.2</link> and in the EMF
         tutorial document ( <ulink type=""
         url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/</ulink>
-        )</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::kunit</emphasis></para>
-
-        <para role="lineBreak">This is a basic support for unitary tests (like
-        Junit but for Kermeta).</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis
-        role="strong">kermeta::language::structure</emphasis></para>
-
-        <para role="lineBreak">It contains the classes of Kermeta structure.
+        )
+				</para>
+			</listitem>
+		</varlistentry>
+		
+		
+		<varlistentry><term><filename>kermeta::kunit</filename></term>
+			<listitem>
+				<para>This is a basic support for unitary tests (like Junit but for Kermeta).</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><filename>kermeta::language::structure</filename></term>
+			<listitem>
+				<para>It contains the classes of Kermeta structure.
         Note that it slightly differs from the kermeta_java.ecore due to an
         inheritance to the classes in Kermeta::reflexion. However, it proposes
         the very same functionalities.</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis
-        role="strong">kermeta::language::behavior</emphasis></para>
-
-        <para role="lineBreak">It contains the classes for the behavior of
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><filename>kermeta::language::behavior</filename></term>
+			<listitem>
+				<para>It contains the classes for the behavior of
         Kermeta.</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::exceptions</emphasis></para>
-
-        <para role="lineBreak">It defines various exceptions that you can use
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><filename>kermeta::exceptions</filename></term>
+			<listitem>
+				<para>It defines various exceptions that you can use
         in Kermeta. Inheriting from kermeta::exceptions::Exception allows to
         give more information to the end user because it will also provide a
         stack trace (which would not be available otherwise).</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::io</emphasis></para>
-
-        <para role="lineBreak">This package provides basic support for
+			</listitem>
+		</varlistentry>
+		
+		<varlistentry><term><filename>kermeta::io</filename></term>
+			<listitem>
+				<para>This package provides basic support for
         input/output with Kermeta. It is voluntary minimal because that not
         the main role of Kermeta to provide such primitives. In the future,
         this package may even disappear and be replaced by the ability to
         directly call Java libraries.</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::reflection</emphasis></para>
-
-        <para role="lineBreak">This package contains all the abstract classes
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><filename>kermeta::reflection</filename></term>
+			<listitem>
+				<para>This package contains all the abstract classes
         needed for the reflexivity of Kermeta. The concrete implementation are
         in kermeta::standard or kermeta::structure.</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::utils</emphasis></para>
-
-        <para role="lineBreak">This package defines various tool classes that
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><filename>kermeta::utils</filename></term>
+			<listitem>
+				<para>This package defines various tool classes that
         cannot be part of the core of the language, but are important enough
         to be part of the framework.</para>
-      </listitem>
-    </orderedlist>
-
-    <orderedlist continuation="restarts">
-      <listitem>
-        <para><emphasis role="strong">kermeta::standard</emphasis></para>
-
-        <para role="lineBreak">This package defines all the basic objects
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><filename>kermeta::standard</filename></term>
+			<listitem>
+				<para>This package defines all the basic objects
         needed for a typical Kermeta application. For example, it defines data
         types, collections, etc.</para>
-      </listitem>
-    </orderedlist>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+
 
     <note>
       For more details about the content of these packages, please look at the generated documentation available on line : 
