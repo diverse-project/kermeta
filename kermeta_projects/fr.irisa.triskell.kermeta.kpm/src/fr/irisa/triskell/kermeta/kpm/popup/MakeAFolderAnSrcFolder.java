@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.kpm.actions.popup;
+package fr.irisa.triskell.kermeta.kpm.popup;
 
 import java.util.Iterator;
 

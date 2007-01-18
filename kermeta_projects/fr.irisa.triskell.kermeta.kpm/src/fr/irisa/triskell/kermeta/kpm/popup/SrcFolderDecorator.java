@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.kpm.actions.popup;
+package fr.irisa.triskell.kermeta.kpm.popup;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;

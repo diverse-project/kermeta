@@ -1,15 +1,15 @@
-package fr.irisa.triskell.kermeta.kpm.actions.popup;
+package fr.irisa.triskell.kermeta.kpm.popup;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 
-import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
-import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.KPM;
+import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
 
-public class DependencyVisitor implements IResourceVisitor {
+public class SrcDirectoryVisitor implements IResourceVisitor {
 
 	private KPM kpm;
 	
@@ -18,12 +18,12 @@ public class DependencyVisitor implements IResourceVisitor {
 	
 	private int mode;
 	
-	public DependencyVisitor(KPM kpm) {
+	public SrcDirectoryVisitor(KPM kpm) {
 		this.kpm = kpm;
 		mode = ADDING;
 	}
 	
-	public DependencyVisitor(KPM kpm, int mode) {
+	public SrcDirectoryVisitor(KPM kpm, int mode) {
 		this.kpm = kpm;
 		this.mode = mode;
 	}
@@ -47,13 +47,12 @@ public class DependencyVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			File file = kpm.findFile( (IFile) resource );
-			if ( file == null )
-				KpmHelper.createKMTFile( (IFile) resource, kpm);
+			KpmHelper.createKMTFile( (IFile) resource, kpm);
+			mustContinue = false;
 			break;
 			
 		case IResource.FOLDER :
-		//	kpm.createDirectoryIfNecessary( (IFolder) resource );
+			KpmHelper.createDirectory( (IFolder) resource, kpm);
 			break;
 			
 		case IResource.PROJECT :
@@ -77,13 +76,11 @@ public class DependencyVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			File file = kpm.findFile( (IFile) resource );
-			if ( file != null )
-				kpm.removeFile( file );
+			kpm.removeFile( (IFile) resource );
 			break;
 			
 		case IResource.FOLDER :
-			//kpm.removeDirectory( (IFolder) resource );
+			kpm.removeDirectory( (IFolder) resource );
 			break;
 			
 		case IResource.PROJECT :
@@ -99,5 +96,5 @@ public class DependencyVisitor implements IResourceVisitor {
 		}
 		return mustContinue;
 	}
-	 
+	
 }

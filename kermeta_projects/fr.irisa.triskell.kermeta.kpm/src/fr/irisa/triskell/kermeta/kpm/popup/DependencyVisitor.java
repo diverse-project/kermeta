@@ -1,15 +1,15 @@
-package fr.irisa.triskell.kermeta.kpm.actions.popup;
+package fr.irisa.triskell.kermeta.kpm.popup;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 
-import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
+import fr.irisa.triskell.kermeta.kpm.File;
+import fr.irisa.triskell.kermeta.kpm.KPM;
 
-public class SrcDirectoryVisitor implements IResourceVisitor {
+public class DependencyVisitor implements IResourceVisitor {
 
 	private KPM kpm;
 	
@@ -18,12 +18,12 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 	
 	private int mode;
 	
-	public SrcDirectoryVisitor(KPM kpm) {
+	public DependencyVisitor(KPM kpm) {
 		this.kpm = kpm;
 		mode = ADDING;
 	}
 	
-	public SrcDirectoryVisitor(KPM kpm, int mode) {
+	public DependencyVisitor(KPM kpm, int mode) {
 		this.kpm = kpm;
 		this.mode = mode;
 	}
@@ -47,11 +47,13 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			KpmHelper.createKMTFile( (IFile) resource, kpm);
+			File file = kpm.findFile( (IFile) resource );
+			if ( file == null )
+				KpmHelper.createKMTFile( (IFile) resource, kpm);
 			break;
 			
 		case IResource.FOLDER :
-			KpmHelper.createDirectory( (IFolder) resource, kpm);
+		//	kpm.createDirectoryIfNecessary( (IFolder) resource );
 			break;
 			
 		case IResource.PROJECT :
@@ -75,11 +77,13 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			kpm.removeFile( (IFile) resource );
+			File file = kpm.findFile( (IFile) resource );
+			if ( file != null )
+				kpm.removeFile( file );
 			break;
 			
 		case IResource.FOLDER :
-			kpm.removeDirectory( (IFolder) resource );
+			//kpm.removeDirectory( (IFolder) resource );
 			break;
 			
 		case IResource.PROJECT :
@@ -95,5 +99,5 @@ public class SrcDirectoryVisitor implements IResourceVisitor {
 		}
 		return mustContinue;
 	}
-	
+	 
 }
