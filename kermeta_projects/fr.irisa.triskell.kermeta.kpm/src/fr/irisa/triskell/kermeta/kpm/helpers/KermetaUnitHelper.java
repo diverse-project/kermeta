@@ -7,6 +7,7 @@ import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 public class KermetaUnitHelper {
@@ -107,6 +108,10 @@ public class KermetaUnitHelper {
 		
 		if ( extension.equals(".kmt") ) {
 			unit = typeCheckKMTFile(file, content);
+		} else if ( extension.equals(".km") ) {
+			URI fileURI = URI.createFileURI(file.getLocation().toString());
+			unit = (KMUnit) KermetaUnitFactory.getDefaultLoader().createKermetaUnit(fileURI.toString());
+			unit.load();
 		}
 		
 		return unit;
