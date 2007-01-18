@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         id="kmt2ecore"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action
+            class="fr.irisa.triskell.kermeta.kpm.actions.KMT2Ecore"/>
+   </extension>
+   <extension
+         id="kmt2km"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.KMT2KM"/>
+   </extension>
+   <extension
+         id="markdependents"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.MarkDependents"/>
+   </extension>
+
+</plugin>
