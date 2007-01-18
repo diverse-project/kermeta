@@ -38,7 +38,7 @@
       </authorblurb>
     </author>
 
-    <pubdate>$Date: 2007-01-15 11:04:59 $</pubdate>
+    <pubdate>$Date: 2007-01-18 13:29:24 $</pubdate>
 
     <confgroup></confgroup>
   </bookinfo>
@@ -102,7 +102,7 @@
         <para><emphasis role="strong">Class TouchNavigator (alpha version in
         release 0.1.1)</emphasis></para>
       </listitem>
-      
+
       <listitem>
         <para><emphasis role="strong">Help system</emphasis></para>
       </listitem>
@@ -122,7 +122,6 @@
     <para><emphasis role="strong">Planned features:</emphasis></para>
 
     <itemizedlist>
-
       <listitem>
         <para><emphasis role="strong">Seamless integration of Java
         code</emphasis></para>
@@ -258,6 +257,27 @@
       strucutre. Browsing the outline is much more faster than browsing the
       file. Moreover, clicking on an item (packages, classes, attributes or
       methods) brings you to that item in the file.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>sort features : The content of the outline is sorted
+          alphabetically. </para>
+        </listitem>
+
+        <listitem>
+          <para>Flatten inheritance : Show package hierachy</para>
+        </listitem>
+
+        <listitem>
+          <para>Display all the features of your classes. The inherited
+          features are displayed using a specific icon set.</para>
+        </listitem>
+
+        <listitem>
+          <para> Show imported types : Show all the classes that are declared
+          using the require statement in this file.</para>
+        </listitem>
+      </itemizedlist>
 
       <note>
          The Flatten inheritance also display the features of the Object class as all the Kermeta classes inherit from it. 
@@ -723,7 +743,7 @@
     <section>
       <title>Debugging actions</title>
 
-      <para>There are three kind of actions you can execute : </para>
+      <para>There are three kind of actions you can execute :</para>
 
       <itemizedlist>
         <listitem>
@@ -748,7 +768,6 @@
       </note>
     </section>
   </chapter>
-
 
   <!-- begin - of the chapter about Help -->
 
