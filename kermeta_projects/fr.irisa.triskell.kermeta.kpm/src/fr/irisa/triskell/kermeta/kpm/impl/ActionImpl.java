@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.3 2007-01-15 08:50:18 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.4 2007-01-18 13:06:39 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -12,11 +12,13 @@ import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.actions.IAction;
+import fr.irisa.triskell.kermeta.kpm.workspace.IAction;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -102,26 +104,23 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * @generated NOT
 	 */
 	public void execute(final Unit unit, final ArrayList dependents) {
-		try {
+
+		IExtension extension = Platform.getExtensionRegistry().getExtension( getName() );
+		IConfigurationElement[] elements = extension.getConfigurationElements();
 			
-			Class c = Class.forName( getName() );
-			final IAction a = (IAction) c.newInstance();
-		
+		try {	
+			final IAction action = (IAction) elements[0].createExecutableExtension("class");
+				
 			Runnable r = new Runnable() {
-				
 				public void run() {
-					a.execute(unit, dependents);
+					action.execute(unit, dependents);
 				}
-				
 			};
+			
 			Thread t = new Thread(r);
 			t.start();
-					
-		} catch (InstantiationException exception) {
-			System.out.println(exception.getMessage());
-		} catch (IllegalAccessException exception) {
-			System.out.println(exception.getMessage());
-		} catch (ClassNotFoundException exception) {
+				
+		} catch ( CoreException exception ) {
 			exception.printStackTrace();
 		}
 	}

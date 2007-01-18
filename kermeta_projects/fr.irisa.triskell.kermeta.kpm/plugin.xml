@@ -5,10 +5,11 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.10 2007-01-12 15:01:09 ftanguy Exp $
+ $Id: plugin.xml,v 1.11 2007-01-18 13:06:39 ftanguy Exp $
 -->
 
 <plugin>
+   <extension-point id="actions" name="KPM actions" schema="schema/actions.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -34,7 +35,7 @@
            id="fr.irisa.triskell.kermeta.kpm.srcFolderContribution"
            objectClass="org.eclipse.core.resources.IFolder">
         <action
-              class="fr.irisa.triskell.kermeta.kpm.actions.popup.MakeAFolderAnSrcFolder"
+              class="fr.irisa.triskell.kermeta.kpm.popup.MakeAFolderAnSrcFolder"
               icon="images/kermeta_logo.gif"
               id="fr.irisa.triskell.kermeta.kpm.srcAction"
               label="Add / Remove src property"/>
@@ -43,7 +44,7 @@
   <extension
         point="org.eclipse.ui.decorators">
      <decorator
-           class="fr.irisa.triskell.kermeta.kpm.actions.popup.SrcFolderDecorator"
+           class="fr.irisa.triskell.kermeta.kpm.popup.SrcFolderDecorator"
            id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
            label="Source Folder Decorator"
            lightweight="true">

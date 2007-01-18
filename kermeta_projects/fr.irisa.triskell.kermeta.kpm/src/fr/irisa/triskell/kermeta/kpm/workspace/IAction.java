@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.kpm.actions;
+package fr.irisa.triskell.kermeta.kpm.workspace;
 
 import java.util.ArrayList;
 

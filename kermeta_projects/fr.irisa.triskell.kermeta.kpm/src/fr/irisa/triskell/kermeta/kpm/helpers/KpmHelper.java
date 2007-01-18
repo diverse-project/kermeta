@@ -73,22 +73,22 @@ public class KpmHelper {
 		
 		// KMT2KM action
 		Action action = KpmFactory.eINSTANCE.createAction();
-		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.KMT2KM" );
+		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.kmt2km" );
 		kpm.getActions().add( action );
 
 		// KMT2Ecore action
 		action = KpmFactory.eINSTANCE.createAction();
-		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.KMT2Ecore" );
+		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore" );
 		kpm.getActions().add( action );
 		
 		// TypecheckKMTFile action
-		action = KpmFactory.eINSTANCE.createAction();
+		/*action = KpmFactory.eINSTANCE.createAction();
 		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT" );
-		kpm.getActions().add( action );
+		kpm.getActions().add( action );*/
 		
 		// MarkDependents action
 		action = KpmFactory.eINSTANCE.createAction();
-		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.MarkDependents" );
+		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.markdependents" );
 		kpm.getActions().add( action );
 	}
 
@@ -150,7 +150,10 @@ public class KpmHelper {
 		dependency.setIn( kpm.getExpression("KMT expr") );
 		dependency.getOuts().add( kpm.getExpression("KM expr") );
 		dependency.getOuts().add( kpm.getExpression("Ecore expr") );
-		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT"));
+		//dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT"));
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore"));
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2km"));
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.markdependents"));
 		kpm.getDependencies().add(dependency);
 		
 
