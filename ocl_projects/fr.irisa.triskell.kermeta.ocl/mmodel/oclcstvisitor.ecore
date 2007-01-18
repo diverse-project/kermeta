@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cst" nsURI="http://www.eclipse.org/OCL2/1.0.0/ocl/cst" nsPrefix="ocl.cst">
+  <eClassifiers xsi:type="ecore:EClass" name="CSTNode" instanceClassName="" abstract="true" eSuperTypes="//visitors/Visitable">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitCSTNode(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCSTNode(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startOffset" eType="//RealLiteralExpCS" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endOffset" eType="//RealLiteralExpCS" defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitPackageDeclarationCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitPackageDeclarationCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" eType="//PathNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDecls" upperBound="-1" eType="//ContextDeclCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDeclCS" instanceClassName="" abstract="true" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitContextDeclCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitContextDeclCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyContextCS" instanceClassName="" eSuperTypes="//ContextDeclCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitPropertyContextCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitPropertyContextCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" eType="//PathNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeCS" eType="//TypeCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initOrDerValueCS" eType="//InitOrDerValueCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassifierContextDeclCS" instanceClassName="" eSuperTypes="//ContextDeclCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitClassifierContextDeclCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitClassifierContextDeclCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" eType="//PathNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invOrDefCS" eType="//InvOrDefCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationContextDeclCS" instanceClassName="" eSuperTypes="//ContextDeclCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitOperationContextDeclCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitOperationContextDeclCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationCS" eType="//OperationCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prePostOrBodyDecls" lowerBound="1" upperBound="-1" eType="//PrePostOrBodyDeclCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrePostOrBodyDeclCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitPrePostOrBodyDeclCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitPrePostOrBodyDeclCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="//PrePostOrBodyEnum" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionCS" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="oclExpressionCS"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrePostOrBodyEnum">
+    <eLiterals name="pre" value="1"/>
+    <eLiterals name="post" value="2"/>
+    <eLiterals name="body" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitOperationCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitOperationCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" eType="//PathNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//VariableCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeCS" eType="//TypeCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitOrDerValueCS" instanceClassName="" abstract="true" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitInitOrDerValueCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitInitOrDerValueCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initOrDerValueCS" eType="//InitOrDerValueCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionCS" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="oclExpressionCS"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DerValueCS" instanceClassName="" eSuperTypes="//InitOrDerValueCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitDerValueCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitDerValueCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitValueCS" instanceClassName="" eSuperTypes="//InitOrDerValueCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitInitValueCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitInitValueCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvOrDefCS" instanceClassName="" abstract="true" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitInvOrDefCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitInvOrDefCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invOrDefCS" eType="//InvOrDefCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvCS" instanceClassName="" eSuperTypes="//InvOrDefCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitInvCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitInvCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionCS" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="oclExpressionCS"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefCS" instanceClassName="" eSuperTypes="//InvOrDefCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitDefCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitDefCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defExpressionCS" eType="//DefExpressionCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefExpressionCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitDefExpressionCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitDefExpressionCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationCS" eType="//OperationCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableCS" eType="//VariableCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionCS" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="oclExpressionCS"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathNameCS" instanceClassName="" eSuperTypes="//TypeCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitPathNameCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitPathNameCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequenceOfNames" upperBound="-1" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableExpCS" instanceClassName="" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitVariableExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitVariableExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1" eType="//OCLExpressionCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isMarkedPreCS" eType="//IsMarkedPreCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleNameCS" instanceClassName="" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitSimpleNameCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitSimpleNameCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="//SimpleTypeEnum" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SimpleTypeEnum">
+    <eLiterals name="identifier" value="1"/>
+    <eLiterals name="self" value="2"/>
+    <eLiterals name="Integer" value="3"/>
+    <eLiterals name="String" value="4"/>
+    <eLiterals name="Real" value="5"/>
+    <eLiterals name="Boolean" value="6"/>
+    <eLiterals name="OclAny" value="7"/>
+    <eLiterals name="OclVoid" value="8"/>
+    <eLiterals name="Invalid" value="9"/>
+    <eLiterals name="OclMessage" value="10"/>
+    <eLiterals name="keyword" value="11"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeCS" instanceClassName="" abstract="true" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitTypeCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitTypeCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeCS" instanceClassName="" eSuperTypes="//SimpleNameCS //TypeCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitPrimitiveTypeCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitPrimitiveTypeCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TupleTypeCS" instanceClassName="" eSuperTypes="//TypeCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitTupleTypeCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitTupleTypeCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" lowerBound="1" upperBound="-1" eType="//VariableCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionTypeCS" instanceClassName="" eSuperTypes="//TypeCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitCollectionTypeCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCollectionTypeCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collectionTypeIdentifier" eType="//CollectionTypeIdentifierEnum" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeCS" eType="//TypeCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CollectionTypeIdentifierEnum">
+    <eLiterals name="Set" value="1"/>
+    <eLiterals name="Bag" value="2"/>
+    <eLiterals name="Sequence" value="3"/>
+    <eLiterals name="Collection" value="4"/>
+    <eLiterals name="OrderedSet" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLExpressionCS" instanceClassName="" abstract="true" eSuperTypes="//CSTNode">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="OclExpressionCS"/>
+    </eAnnotations>
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitOCLExpressionCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitOCLExpressionCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LetExpCS" instanceClassName="" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitLetExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitLetExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" lowerBound="1" upperBound="-1" eType="//VariableCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inExpression" eType="//OCLExpressionCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfExpCS" instanceClassName="" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitIfExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitIfExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thenExpression" lowerBound="1" eType="//OCLExpressionCS" defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseExpression" lowerBound="1" eType="//OCLExpressionCS" defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="//OCLExpressionCS" defaultValueLiteral="" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageExpCS" instanceClassName="" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitMessageExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitMessageExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//OCLExpressionCS" defaultValueLiteral="" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="//MessageExpKind" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1" eType="//OCLMessageArgCS" defaultValueLiteral="" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLMessageArgCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="OclMessageArgCS"/>
+    </eAnnotations>
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitOCLMessageArgCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitOCLMessageArgCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeCS" eType="//TypeCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="oclExpression"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitVariableCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitVariableCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeCS" eType="//TypeCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initExpression" eType="//OCLExpressionCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralExpCS" instanceClassName="" abstract="true" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralExpCS" instanceClassName="" eSuperTypes="//LiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitEnumLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitEnumLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" eType="//PathNameCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralExpCS" instanceClassName="" eSuperTypes="//LiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitCollectionLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCollectionLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collectionType" eType="//CollectionTypeIdentifierEnum" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionLiteralParts" upperBound="-1" eType="//CollectionLiteralPartCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralExpCS" instanceClassName="" eSuperTypes="//LiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitTupleLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitTupleLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1" eType="//VariableCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExpCS" instanceClassName="" eSuperTypes="//LiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitPrimitiveLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitPrimitiveLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExpCS" instanceClassName="" eSuperTypes="//PrimitiveLiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitIntegerLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitIntegerLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerSymbol" eType="//StringLiteralExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExpCS" instanceClassName="" eSuperTypes="//PrimitiveLiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitRealLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitRealLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="realSymbol" eType="//VariableCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExpCS" instanceClassName="" eSuperTypes="//PrimitiveLiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitStringLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitStringLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringSymbol" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExpCS" instanceClassName="" eSuperTypes="//PrimitiveLiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitBooleanLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitBooleanLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanSymbol" eType="//PrimitiveTypeCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullLiteralExpCS" instanceClassName="" eSuperTypes="//LiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitNullLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitNullLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvalidLiteralExpCS" instanceClassName="" eSuperTypes="//LiteralExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitInvalidLiteralExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitInvalidLiteralExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitCollectionLiteralPartCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCollectionLiteralPartCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionCS" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="oclExpressionCS"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionRangeCS" instanceClassName="" eSuperTypes="//CollectionLiteralPartCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitCollectionRangeCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCollectionRangeCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lastExpressionCS" eType="//OCLExpressionCS" defaultValueLiteral="">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="lastOclExpressionCS"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CallExpCS" instanceClassName="" eSuperTypes="//OCLExpressionCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitCallExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitCallExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//OCLExpressionCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessor" eType="//DotOrArrowEnum" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleNameCS" eType="//SimpleNameCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopExpCS" instanceClassName="" eSuperTypes="//CallExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitLoopExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitLoopExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable1" eType="//VariableCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable2" eType="//VariableCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//OCLExpressionCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IteratorExpCS" instanceClassName="" eSuperTypes="//LoopExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitIteratorExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitIteratorExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IterateExpCS" instanceClassName="" eSuperTypes="//LoopExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitIterateExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitIterateExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExpCS" instanceClassName="" eSuperTypes="//CallExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitFeatureCallExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitFeatureCallExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1" eType="//OCLExpressionCS" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isMarkedPreCS" eType="//IsMarkedPreCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DotOrArrowEnum">
+    <eLiterals name="none" value="1"/>
+    <eLiterals name="dot" value="2"/>
+    <eLiterals name="arrow" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationCallExpCS" instanceClassName="" eSuperTypes="//FeatureCallExpCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitOperationCallExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitOperationCallExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsMarkedPreCS" instanceClassName="" eSuperTypes="//CSTNode">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitIsMarkedPreCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitIsMarkedPreCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pre" eType="//TypeCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateExpCS" instanceClassName="" eSuperTypes="//TypeCS">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visitStateExpCS(this);"/>
+      </eAnnotations>
+      <eAnnotations source="kermeta">
+        <details key="body" value="result := visitor.visitStateExpCS(self)"/>
+      </eAnnotations>
+      <eParameters name="visitor" eType="//visitors/Visitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequenceOfNames" upperBound="-1" eType="//FeatureCallExpCS" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MessageExpKind">
+    <eLiterals name="hasSent" value="1"/>
+    <eLiterals name="sent" value="2"/>
+  </eClassifiers>
+  <eSubpackages name="visitors">
+    <eClassifiers xsi:type="ecore:EClass" name="Visitable" abstract="true" interface="true">
+      <eOperations name="accept">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitor" eType="//visitors/Visitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Visitor" abstract="true">
+      <eOperations name="visit">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//visitors/Visitable"/>
+      </eOperations>
+      <eOperations name="visitCSTNode">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CSTNode"/>
+      </eOperations>
+      <eOperations name="visitPackageDeclarationCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//PackageDeclarationCS"/>
+      </eOperations>
+      <eOperations name="visitContextDeclCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//ContextDeclCS"/>
+      </eOperations>
+      <eOperations name="visitPropertyContextCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//PropertyContextCS"/>
+      </eOperations>
+      <eOperations name="visitClassifierContextDeclCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//ClassifierContextDeclCS"/>
+      </eOperations>
+      <eOperations name="visitOperationContextDeclCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//OperationContextDeclCS"/>
+      </eOperations>
+      <eOperations name="visitPrePostOrBodyDeclCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//PrePostOrBodyDeclCS"/>
+      </eOperations>
+      <eOperations name="visitOperationCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//OperationCS"/>
+      </eOperations>
+      <eOperations name="visitInitOrDerValueCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//InitOrDerValueCS"/>
+      </eOperations>
+      <eOperations name="visitDerValueCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//DerValueCS"/>
+      </eOperations>
+      <eOperations name="visitInitValueCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//InitValueCS"/>
+      </eOperations>
+      <eOperations name="visitInvOrDefCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//InvOrDefCS"/>
+      </eOperations>
+      <eOperations name="visitInvCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//InvCS"/>
+      </eOperations>
+      <eOperations name="visitDefCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//DefCS"/>
+      </eOperations>
+      <eOperations name="visitDefExpressionCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//DefExpressionCS"/>
+      </eOperations>
+      <eOperations name="visitPathNameCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//PathNameCS"/>
+      </eOperations>
+      <eOperations name="visitVariableExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//VariableExpCS"/>
+      </eOperations>
+      <eOperations name="visitSimpleNameCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//SimpleNameCS"/>
+      </eOperations>
+      <eOperations name="visitTypeCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//TypeCS"/>
+      </eOperations>
+      <eOperations name="visitPrimitiveTypeCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//PrimitiveTypeCS"/>
+      </eOperations>
+      <eOperations name="visitTupleTypeCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//TupleTypeCS"/>
+      </eOperations>
+      <eOperations name="visitCollectionTypeCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CollectionTypeCS"/>
+      </eOperations>
+      <eOperations name="visitOCLExpressionCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//OCLExpressionCS"/>
+      </eOperations>
+      <eOperations name="visitLetExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//LetExpCS"/>
+      </eOperations>
+      <eOperations name="visitIfExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//IfExpCS"/>
+      </eOperations>
+      <eOperations name="visitMessageExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//MessageExpCS"/>
+      </eOperations>
+      <eOperations name="visitOCLMessageArgCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//OCLMessageArgCS"/>
+      </eOperations>
+      <eOperations name="visitVariableCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//VariableCS"/>
+      </eOperations>
+      <eOperations name="visitLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//LiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitEnumLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//EnumLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitCollectionLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CollectionLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitTupleLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//TupleLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitPrimitiveLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//PrimitiveLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitIntegerLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//IntegerLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitRealLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//RealLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitStringLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//StringLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitBooleanLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//BooleanLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitNullLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//NullLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitInvalidLiteralExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//InvalidLiteralExpCS"/>
+      </eOperations>
+      <eOperations name="visitCollectionLiteralPartCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CollectionLiteralPartCS"/>
+      </eOperations>
+      <eOperations name="visitCollectionRangeCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CollectionRangeCS"/>
+      </eOperations>
+      <eOperations name="visitCallExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//CallExpCS"/>
+      </eOperations>
+      <eOperations name="visitLoopExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//LoopExpCS"/>
+      </eOperations>
+      <eOperations name="visitIteratorExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//IteratorExpCS"/>
+      </eOperations>
+      <eOperations name="visitIterateExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//IterateExpCS"/>
+      </eOperations>
+      <eOperations name="visitFeatureCallExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//FeatureCallExpCS"/>
+      </eOperations>
+      <eOperations name="visitOperationCallExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//OperationCallExpCS"/>
+      </eOperations>
+      <eOperations name="visitIsMarkedPreCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//IsMarkedPreCS"/>
+      </eOperations>
+      <eOperations name="visitStateExpCS">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="visitable" eType="//StateExpCS"/>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
