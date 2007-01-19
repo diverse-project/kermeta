@@ -1,0 +1,216 @@
+/* $Id: OCLHelper.kmt,v 1.1 2007-01-19 15:15:09 bitterjug Exp $
+ * File : EcoreHelper.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ * 
+ */
+//@mainClass "OCLHelpers::OCLHelper"
+//@mainOperation "main"
+
+
+package OCLHelpers;
+
+require kermeta
+require "../../mmodel/oclcstvisitor.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+//using ecore
+using ocl::cst
+using ocl::cst::visitors
+using kermeta::standard
+
+/** This class provides some helper methods to load/save Ecore models
+    Plus some other useful navigation methods
+ */
+class OCLHelper
+{
+	attribute ecoreMetamodel : String
+	attribute repository: EMFRepository
+	attribute modelURI: String
+
+	operation initialize() is 
+	do
+		ecoreMetamodel := "../../mmodel/OCLCST.ecore"
+		modelURI :="../../speedsOCL1.xmi"
+		repository := EMFRepository.new
+	end
+	
+    operation main(): Void is
+    do
+     	initialize
+     	var context: ocl::cst::ClassifierContextDeclCS
+		context ?=   loadOCLModel(repository, modelURI).detect{o|
+		     	   var classContext: ocl::cst::ClassifierContextDeclCS
+		     	   classContext ?= o
+		     	   classContext != void
+		     	}
+     	stdio.writeln("got: "+ context.toString)
+    end
+    
+    operation loadOCLModel(repository : EMFRepository, modelUri : String) : Set<Object> is 
+    do
+    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	result := instances
+    end
+    
+    operation visit(visitable : Visitable) : kermeta::standard::~Void is
+			abstract
+
+		operation visitCSTNode(visitable : CSTNode) : kermeta::standard::~Void is
+			abstract
+
+		operation visitPackageDeclarationCS(visitable : PackageDeclarationCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitContextDeclCS(visitable : ContextDeclCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitPropertyContextCS(visitable : PropertyContextCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitOperationContextDeclCS(visitable : OperationContextDeclCS) : kermeta::standard::~Void is
+			abstract
+  
+		operation visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitOperationCS(visitable : OperationCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitInitOrDerValueCS(visitable : InitOrDerValueCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitDerValueCS(visitable : DerValueCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitInitValueCS(visitable : InitValueCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitInvOrDefCS(visitable : InvOrDefCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitInvCS(visitable : InvCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitDefCS(visitable : DefCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitDefExpressionCS(visitable : DefExpressionCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitPathNameCS(visitable : PathNameCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitVariableExpCS(visitable : VariableExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitSimpleNameCS(visitable : SimpleNameCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitTypeCS(visitable : TypeCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitTupleTypeCS(visitable : TupleTypeCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitCollectionTypeCS(visitable : CollectionTypeCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitOCLExpressionCS(visitable : OCLExpressionCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitLetExpCS(visitable : LetExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitIfExpCS(visitable : IfExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitMessageExpCS(visitable : MessageExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitOCLMessageArgCS(visitable : OCLMessageArgCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitVariableCS(visitable : VariableCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitLiteralExpCS(visitable : LiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitTupleLiteralExpCS(visitable : TupleLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitPrimitiveLiteralExpCS(visitable : PrimitiveLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitIntegerLiteralExpCS(visitable : IntegerLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitRealLiteralExpCS(visitable : RealLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitStringLiteralExpCS(visitable : StringLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitBooleanLiteralExpCS(visitable : BooleanLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitNullLiteralExpCS(visitable : NullLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitInvalidLiteralExpCS(visitable : InvalidLiteralExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitCollectionLiteralPartCS(visitable : CollectionLiteralPartCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitCollectionRangeCS(visitable : CollectionRangeCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitCallExpCS(visitable : CallExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitLoopExpCS(visitable : LoopExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitIteratorExpCS(visitable : IteratorExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitIterateExpCS(visitable : IterateExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitFeatureCallExpCS(visitable : FeatureCallExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitOperationCallExpCS(visitable : OperationCallExpCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitIsMarkedPreCS(visitable : IsMarkedPreCS) : kermeta::standard::~Void is
+			abstract
+
+		operation visitStateExpCS(visitable : StateExpCS) : kermeta::standard::~Void is
+			abstract
+
+	}
+	
+        

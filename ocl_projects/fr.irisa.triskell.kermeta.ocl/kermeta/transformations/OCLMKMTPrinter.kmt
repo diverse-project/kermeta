@@ -1,0 +1,50 @@
+/* $Id: OCLMKMTPrinter.kmt,v 1.1 2007-01-19 15:15:09 bitterjug Exp $
+ * File : Visitors.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 28, 2006
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ *  Vincent Mah�	<vmahe@irisa.fr>
+ * 
+ */
+
+/* This package contains operations code for Visitor Patterns
+ You should use Patterns4Ecore.kmt operations for applying Patterns */
+package OCLKMTPrinter;
+
+require kermeta
+//require "../ecore.kmt"
+require "../helpers/OCLHelper.kmt"
+require "../../mmodel/oclcstvisitor.kmt"
+//require "Tools.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+
+using ocl::cst
+
+class OCLKMTPrinter inherits ocl::cst::visitors::Visitor
+{ 
+    
+    reference helper : OCLHelpers::OCLHelper
+    
+
+    
+
+    	
+    operation initialize() is do
+		helper := OCLHelpers::OCLHelper.new
+    	helper.initialize
+		helper.loadOCLModel(EMFRepository.new, "../../essai.xmi")
+    	 
+	end
+
+	// TODO : write the official comment .....
+	/* --------------- Visitor -------------------------------*/
+
+    
+   
+}
