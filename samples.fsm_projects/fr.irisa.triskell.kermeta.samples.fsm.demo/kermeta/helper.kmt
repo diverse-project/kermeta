@@ -1,8 +1,9 @@
 /* $Id: KermetaNewFileWizard.java,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
  * Creation date: June 9, 2006
- * License:
- * Copyright:
- * Authors:
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors: dvojtise, zdrey, cfaucher
+ * Description: Some help methods for the fsm sample
  */
 package help;
 
@@ -16,8 +17,8 @@ using kermeta::reflection
 
 class Helper
 {
-	// @deprecated
 	// Method body to design the checkAllInvariants method
+	/** @deprecated */
 	method checkAllInvariants(obj : kermeta::reflection::Object) is do
 	
 		if(obj!=void) then
