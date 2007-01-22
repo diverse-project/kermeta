@@ -7,7 +7,7 @@
   <title>Kermeta language</title>
   
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-17 09:44:37 $</pubdate>
+    <pubdate>$Date: 2007-01-22 18:52:41 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
@@ -2238,7 +2238,7 @@ a := A&lt;Integer&gt;.new
             <mediaobject>
               <imageobject>
                 <imagedata 
-                           fileref="KerMeta-Manual_figures/properties2.png"
+                           fileref="KerMeta-Manual_figures/properties.png"
                             />
               </imageobject>
             </mediaobject>
