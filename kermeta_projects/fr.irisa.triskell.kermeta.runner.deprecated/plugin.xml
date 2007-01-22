@@ -402,6 +402,16 @@
          initializerClass="fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable"
          name="fr.irisa.triskell.kermeta.runner.variable2"/>
 </extension>
+<extension
+      point="org.eclipse.ui.console.consolePageParticipants">
+   <consolePageParticipant
+         class="fr.irisa.triskell.kermeta.runner.console.ConsolePageParticipant"
+         id="fr.irisa.triskell.kermeta.runner.consolePageParticipant">
+      <enablement>
+  	    <instanceof value="fr.irisa.triskell.kermeta.runner.console.InternalIOConsole"/>
+  	  </enablement>
+   </consolePageParticipant>
+</extension>
 
    
    
