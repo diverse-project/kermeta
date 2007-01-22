@@ -3,44 +3,15 @@
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <book lang="en-GB">
   <bookinfo>
-    <subtitle>How the workbench is able to help you in your metamodelling
-    tasks</subtitle>
+    <title>How the workbench is able to help you in your metamodelling
+    tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <pubdate>$Date: 2007-01-22 19:02:33 $</pubdate>
 
     <author>
-      <firstname>Didier</firstname>
-
-      <surname>Vojtisek</surname>
-
-      <authorblurb>
-        <para>Engineer</para>
-      </authorblurb>
+      <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
     </author>
-
-    <author>
-      <firstname>Francois</firstname>
-
-      <surname>Tanguy</surname>
-
-      <authorblurb>
-        <para>Engineer</para>
-      </authorblurb>
-    </author>
-
-    <author>
-      <firstname>Cyril</firstname>
-
-      <surname>Faucher</surname>
-
-      <authorblurb>
-        <para>Engineer</para>
-      </authorblurb>
-    </author>
-
-    <pubdate>$Date: 2007-01-18 13:29:24 $</pubdate>
-
-    <confgroup></confgroup>
   </bookinfo>
 
   <chapter>
@@ -102,7 +73,7 @@
         <para><emphasis role="strong">Class TouchNavigator (alpha version in
         release 0.1.1)</emphasis></para>
       </listitem>
-
+      
       <listitem>
         <para><emphasis role="strong">Help system</emphasis></para>
       </listitem>
@@ -122,6 +93,7 @@
     <para><emphasis role="strong">Planned features:</emphasis></para>
 
     <itemizedlist>
+
       <listitem>
         <para><emphasis role="strong">Seamless integration of Java
         code</emphasis></para>
@@ -743,7 +715,7 @@
     <section>
       <title>Debugging actions</title>
 
-      <para>There are three kind of actions you can execute :</para>
+      <para>There are three kind of actions you can execute: </para>
 
       <itemizedlist>
         <listitem>
@@ -768,6 +740,7 @@
       </note>
     </section>
   </chapter>
+
 
   <!-- begin - of the chapter about Help -->
 
@@ -822,7 +795,25 @@
           fixes will for example detect and propose a default solution for
           multiple operations with the same name.</emphasis></para>
         </listitem>
-      </itemizedlist>
+      </itemizedlist>  
+      
+      <figure>
+        <title>Ecore to Km transformation</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_ecore2km.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+      
+      <figure>
+        <title>Ecore to Kmt transformation</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_ecore2kmt.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
 
       <para><emphasis role="strong"></emphasis></para>
 
@@ -832,7 +823,20 @@
           ecore files, simply select them and click "merge". Its algorithm is
           base on the names of the packages and classes. </emphasis></para>
         </listitem>
+        <listitem>
+          <para><emphasis role="strong">Register/Unregister EPackages function: You can register or unregister in the EMF registry the EPackages defined in an Ecore model,
+           simply select them and right-click "Register" or "Unregister".</emphasis></para>
+        </listitem>
       </itemizedlist>
+      
+      <figure>
+        <title>Actions on ecore model</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_ActionsOnEcoreModel.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
     </section>
 
     <section>
@@ -845,7 +849,17 @@
           representation in ecore are stored into ecore annotations that will
           allow to roundtrip back to kermeta.</emphasis></para>
         </listitem>
-
+     </itemizedlist>
+      <figure>
+        <title>Kmt to Ecore transformation</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_kmt2ecore.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+      
+	<itemizedlist>
         <listitem>
           <para><emphasis role="strong">The kmt file can also be exported into
           its model version (ie. Into a XMI file conformant to kermeta
@@ -853,7 +867,16 @@
           the model and thus allow to save some time when loading other file
           wich rely on the km version rather than the kmt version.</para>
         </listitem>
-      </itemizedlist>
+    </itemizedlist>
+      <figure>
+        <title>Kmt to Km transformation</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_kmt2km.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+      
     </section>
 
     <section>
@@ -867,6 +890,15 @@
           that will allow to roundtrip back to kermeta.</para>
         </listitem>
       </itemizedlist>
+      
+      <figure>
+        <title>Km to Ecore transformation</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_km2ecore.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
 
       <itemizedlist>
         <listitem>
@@ -876,6 +908,15 @@
         </listitem>
       </itemizedlist>
     </section>
+    
+    <figure>
+        <title>Km to Kmt transformation</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_km2kmt.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
 
     <section>
       <title><emphasis role="strong">Traceability</emphasis></title>
@@ -905,26 +946,100 @@
     <title><emphasis role="strong">Class diagram Kermeta Model
     editor</emphasis></title>
 
+<section>
+      <title><emphasis role="strong">Overview</emphasis></title>
+
     <para><emphasis role="strong">The Kermeta Graphical Editor is a view of
     the Kermeta model as a class diagram. It is generated with the tool
-    "Topcased"</emphasis></para>
+    "Topcased".
+    The file containing the presentation informations is a *.kmdi.
+    The *.kmdi is associated with a *.km file. The *.kmdi and *.km files must be in the same folder.
+    </emphasis></para>
 
-    <figure id="refIllustration10">
-      <title>Kermeta Class TouchNavigator</title>
-
+    <figure>
+      <title>Class diagram Kermeta Model editor - overview</title>
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_Class_TouchNavigator_View.png" />
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_KGEOverview.png" />
         </imageobject>
       </mediaobject>
     </figure>
+    </section>
+    
+    <section>
+      <title><emphasis role="strong">Opening of a Kermeta class diagram</emphasis></title>
+    
+    <para><emphasis role="strong">
+    We can open it, simply select and right-click "Open with / Kermeta class diagram"</emphasis></para>
 
-    <para></para>
+    <figure>
+      <title>Opening of a Kermeta class diagram</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_OpenWithKGE.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    </section>
+    
+    <section>
+      <title><emphasis role="strong">Creating of a Kermeta class diagram</emphasis></title>
+    
+    <para><emphasis role="strong">In order to create a Kermeta class diagram you have 2 ways.</emphasis></para>
 
-    <tip>
-      <emphasis role="strong">It is in alpha stage, feel free to notify us
-      what you found interresting or not in this view.</emphasis>
-    </tip>
+	<itemizedlist>
+        <listitem>
+          <para><emphasis role="strong">Create a class diagram and the Kermeta model from scratch.
+          Select the project or the folder where you want create the class diagram and right-click "New / Other / Kermeta / New Kermeta class diagram".
+          Change the model name if you want.</emphasis>
+          </para>
+        </listitem>
+      </itemizedlist>
+
+    <figure>
+      <title>Creating of a Kermeta class diagram from scratch - 1rst step</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_CreateKGEFromANewModelS1.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <figure>
+      <title>Creating of a Kermeta class diagram from scratch - 2nd step</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_CreateKGEFromANewModelS2.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    
+    <itemizedlist>
+        <listitem>
+          <para><emphasis role="strong">Create a class diagram from an existing Kermeta model.
+          Select the existing km file and right-click "New / Other / Kermeta / New Kermeta class diagram".</emphasis>
+          </para>
+        </listitem>
+      </itemizedlist>
+
+    <figure>
+      <title>Creating of a Kermeta class diagram from an existing Kermeta model - 1rst step</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_CreateKGEFromAnExistingModelS1.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    <figure>
+      <title>Creating of a Kermeta class diagram from an existing Kermeta model - 2nd step</title>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_CreateKGEFromAnExistingModelS2.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+    </section>
+
   </chapter>
 
   <!-- end - of the chapter about the Class diagram Kermeta Model editor -->
