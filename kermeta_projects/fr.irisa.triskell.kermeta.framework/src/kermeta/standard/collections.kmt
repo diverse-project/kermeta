@@ -9,11 +9,11 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id :$
+ * $Id: collections.kmt,v 1.25 2007-01-23 15:23:31 dvojtise Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
- * Distributed under the terms of the GPL licence
+ * Distributed under the terms of the EPL licence
  *
  * Implementation of Kermeta collection types.
  *************************************************** */
