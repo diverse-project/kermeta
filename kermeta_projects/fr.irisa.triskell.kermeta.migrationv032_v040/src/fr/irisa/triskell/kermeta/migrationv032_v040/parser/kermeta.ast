@@ -1,0 +1,207 @@
+// $Id: kermeta.ast,v 1.1 2007-01-23 15:04:13 dvojtise Exp $
+
+language Kermeta;
+	
+options { 
+k=3; 
+defaultErrorHandler=false;
+}
+
+sequence scompUnit : packageDecl importStmts usingStmts topLevelDecls  ;
+
+abstract compUnit [entry] : scompUnit (postAnnotations=annotations);
+
+sequence packageDecl : annotations "package" name=qualifiedID SEMI ;
+
+list qualifiedID : id1=ID (qidSeparator idn=ID)* ;
+token qidSeparator : COL_COL ;
+
+abstract stringLiteralOrQualifiedID : stringLiteralContainer | qualifiedID ;
+sequence stringLiteralContainer : STRING_LITERAL ;
+
+list annotations : annotation* ;
+abstract annotation : tag | contextMultiLineComment; 
+
+sequence tag : AT name=qualifiedID val=STRING_LITERAL ;
+
+sequence contextMultiLineComment : CONTEXT_MULTI_LINE_COMMENT ;
+
+//sequence annotation : AT source=stringLiteralOrQualifiedID LPAREN keyEqualsValueList RPAREN ;
+//list keyEqualsValueList : kv1=keyEqualsValue (COMMA kvn=keyEqualsValue)* ;
+//sequence keyEqualsValue : key=stringLiteralOrQualifiedID EQUALS value=stringLiteralOrQualifiedID ;
+
+list importStmts : importStmt* ;
+sequence importStmt : "require" uri=stringLiteralOrQualifiedID (excludeFilter)? (includeFilter)?;
+
+sequence excludeFilter : "excludeFilter" LPAREN (filters)? RPAREN;
+sequence includeFilter : "includeFilter" LPAREN (filters)? RPAREN;
+list filters : f1=filter (COMMA fn=filter)*;
+sequence filter : STRING_LITERAL;
+
+list usingStmts : usingStmt* ;
+sequence usingStmt : "using" name=qualifiedID ;
+
+list topLevelDecls : topLevelDecl* ;
+
+sequence topLevelDecl : annotations annotableElement ;
+
+abstract annotableElement : subPackageDecl | modelTypeDecl | classDecl | enumDecl | dataTypeDecl; // mapEntryDecl ;
+
+
+sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY;
+sequence modelTypeDecl : "modeltype" name=ID (LT typeVarDecllst GT)? LCURLY topLevelDecls RCURLY;
+sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY; 
+//(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
+token classKind : "class" ; //| "interface" ;
+token abstractModifier : "abstract" ;
+list typelst : t1=type (COMMA tn=type)* ;
+list typeVarDecllst : tv1=typeVarDecl (COMMA tvn=typeVarDecl)*;
+
+sequence typeVarDecl : name=ID (COLON supertype=type)? ;
+abstract type : basictype | functype | prodtype | voidType; // | selftype
+
+sequence basictype :  name=qualifiedID (LT params=typelst GT)? ;
+sequence prodtype : LSQUARE typelst RSQUARE ;
+sequence functype : LT left=type MINUS_GT right=type GT;
+//sequence selftype : "Self" ;
+sequence voidType : "Void" ;
+
+list classMemberDecls : annotableClassMemberDecl * ;
+
+sequence annotableClassMemberDecl : annotations classMemberDecl;
+
+abstract classMemberDecl : operation | property | invariant; //attribute | reference | operation ;
+
+sequence invariant : "inv" name=ID "is" body=fExpression ;
+
+//sequence attribute : MINUS modifiers typeRef name=ID (EQUALS defaultValueExpr)? SEMI ;
+//abstract property : normalProperty | derivedProperty;
+sequence property : propertyKind  (readOnlyModifier)? name=ID COLON typeRef (HASH oppositeName=ID)? (propertyBody)?;
+//sequence derivedProperty : derivedPropertyKind (readOnlyModifier)? name=ID COLON typeRef propertyBody;
+//token referenceKind : MINUS_GT | LT_GT | GT_LT ;
+
+token propertyKind : "attribute" | "reference" | "property";
+token readOnlyModifier : "readonly" ;
+
+sequence propertyBody : getterBody (setterBody)? ;
+
+sequence getterBody : "getter" "is" getterbody = fExpression ;
+sequence setterBody : "setter" "is" setterbody = fExpression ;
+
+sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" preconditions operationBody postconditions;
+token operationKind : "operation" | "method" ;
+
+list preconditions : precondition*;
+list postconditions : postcondition*;
+sequence precondition : annotations "pre" name=ID "is" body=fExpression ;
+sequence postcondition : annotations "post" name=ID "is" body=fExpression ;
+
+abstract operationBody : operationEmptyBody | operationExpressionBody  ;
+sequence operationExpressionBody : bodyAnnotations=annotations fExpression ;
+sequence  operationEmptyBody : "abstract" ;
+
+list params : p1=param (COMMA pn=param)*;
+//sequence param : leadingAnnotations=annotations modifiers typeRef name=ID trailingAnnotations=annotations ;
+sequence param : annotations  name=ID COLON typeRef;
+
+sequence typeRef : (collectionType)? reftype=type (multiplicity)? ;
+token collectionType : "bag" | "set"| "seq" | "oset";
+
+sequence multiplicity : LSQUARE (multiplicityExpr)? RSQUARE ;
+
+sequence multiplicityExpr : lowerBound=simpleMultiplicityExpr (DOT_DOT upperBound=simpleMultiplicityExpr)? ;
+token simpleMultiplicityExpr : STAR | PLUS | QMARK | INT_LITERAL ;
+
+// "transient" means !serializable
+sequence dataTypeDecl : "alias" name=ID COLON instanceClass=type SEMI ;
+
+sequence enumDecl : "enumeration" name=ID LCURLY enumLiterals RCURLY ;
+list enumLiterals : enumLiteral* ;
+sequence enumLiteral : annotations name=ID SEMI ; // (EQUALS val=INT_LITERAL)? postAnnotations=annotations 
+
+//sequence mapEntryDecl : "mapentry" name=ID COLON key=typeRef MINUS_GT value=typeRef SEMI ;
+
+
+//abstract fStatement : fBlock | fExpression | fLoop | fConditional | fRaiseException | fVariableDecl | fAssignement;
+
+list fExpressionLst : fExpression* ;
+
+sequence asingleExpression : fExpression ;
+abstract fExpression : fAssignement ;
+			
+sequence fAssignement : annotations expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
+token assignementOp : COLON | QMARK ;
+//token assignementOp : CASTEQ | ASSIGNEQ ; // wrong
+
+list logicalExpression : exp1=relationalExpression (logicalOp expn=relationalExpression )* ;
+token logicalOp : "and" | "or" ;
+
+sequence relationalExpression : left=additiveExpression (relationalOp right=additiveExpression )? ;
+token relationalOp : EQEQ | NEQ | GT | LT | GTE | LTE ;
+
+list additiveExpression : exp1=multiplicativeExpression ( additiveOp expn=multiplicativeExpression )* ;
+token additiveOp : PLUS | MINUS ;
+
+list multiplicativeExpression : exp1=unaryExpression (multiplicativeOp expn=unaryExpression )* ;
+token multiplicativeOp : STAR | DIV ;
+
+sequence unaryExpression : (unaryOp)? postfixExp ;
+token unaryOp : "not" | MINUS ;
+
+sequence postfixExp : target=primitiveExpression postfixlst ;
+
+list postfixlst : postfix* ;
+abstract postfix : callPostfix | lambdaPostfix | paramPostfix;
+
+sequence callPostfix : DOT name=ID ;
+sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN ;
+list actualParameterList : p1=actualParameter (COMMA pn=actualParameter)* ;
+sequence actualParameter : expression=fExpression ;
+sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpressionLst RCURLY ;
+list lambdaPostfixParamLst : p1=lambdaPostfixParam (COMMA pn=lambdaPostfixParam)* ;
+sequence lambdaPostfixParam : name=ID;
+
+// the indexer postfix should be added here
+
+
+abstract primitiveExpression : fLiteral | parentExp | fSelfCall | fSuperCall | resultCall |
+			fJavaStaticCall | fBlock | fConditional | fRaiseException | 
+			fVariableDecl | fLambdaExpression | fLoop | valueCall ;
+
+
+sequence parentExp : LPAREN fExpression RPAREN ;
+
+sequence fSelfCall  : "self" ;
+sequence fSuperCall : "super" ;
+sequence resultCall : "result" ;
+sequence valueCall  : "value" ;
+
+sequence fBlock : "do" annotations fExpressionLst fRescueLst "end" ;
+
+sequence fLambdaExpression : "function" LCURLY params=fLambdaparamlst PIPE expression=fExpressionLst RCURLY ;
+list fLambdaparamlst : p1=fLambdaparam (COMMA pn=fLambdaparam)* ;
+sequence fLambdaparam : name=ID COLON typeRef ;
+
+list fRescueLst : fRescue* ;
+sequence fRescue : "rescue"  (LPAREN varName=ID COLON exTypeRef=typeRef RPAREN)?  rescstmts=fExpressionLst ;
+
+sequence fLoop : "from" init=fExpression "until" condition=fExpression "loop" body=fExpressionLst "end" ;
+
+sequence fConditional : "if" condition=fExpression "then" ifblock=fExpressionLst ("else" elseblock=fExpressionLst)? "end" ;
+
+sequence fRaiseException : "raise" fExpression ;
+
+sequence fVariableDecl : "var" name=ID COLON typeRef=typeRef ("init" init=fExpression)? ; 
+
+sequence fJavaStaticCall : "extern" cname=qualifiedID DOT mname=ID LPAREN (parameters=actualParameterList)? RPAREN ;
+
+abstract fLiteral : fStringLiteral | fBooleanLiteral | fIntegerLiteral | fVoidLiteral | fTypeOrVarLiteral;
+
+sequence fBooleanLiteral : trueOrFalse ;
+token trueOrFalse : "true" | "false" ;
+sequence fIntegerLiteral : INT_LITERAL ;
+sequence fStringLiteral : STRING_LITERAL;
+sequence fVoidLiteral : "void" ;
+
+sequence fTypeOrVarLiteral : literal=type (atp = atpreOp)?; // this can be a variable a method or an attribute !!!!!!
+token atpreOp : ATPRE;

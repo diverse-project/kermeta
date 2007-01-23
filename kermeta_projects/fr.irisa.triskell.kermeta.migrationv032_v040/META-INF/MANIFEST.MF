@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KMT migration tool (v0.3.x to v0.4.0) Plug-in
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.migrationv032_v040;singleton:=true
+Bundle-Version: 0.4.0
+Bundle-Activator: fr.irisa.triskell.kermeta.migrationv032_v040.Activator
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.console,
+ fr.irisa.triskell.kermeta
+Eclipse-LazyStart: true
+Bundle-ClassPath: lib/model_kermeta.jar,
+ .,
+ lib/log4j.jar,
+ lib/antlr.jar,
+ lib/emfatic-core.jar,
+ lib/ldt-core.jar,
+ lib/traceability.jar
+Bundle-Vendor: IRISA/INRIA
