@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessage.java,v 1.1 2006-05-03 14:34:03 zdrey Exp $
+/* $Id: KMUnitMessage.java,v 1.2 2007-01-23 15:26:15 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMUnitMessage.java
  * License : EPL
@@ -12,6 +12,8 @@
 package fr.irisa.triskell.kermeta.loader.message;
 
 
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
+
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 
@@ -24,9 +26,9 @@ public class KMUnitMessage {
 	
 	protected String message;
 	protected fr.irisa.triskell.kermeta.language.structure.Object node;
-	protected KermetaASTNode astn;
+	protected ASTNode astn;
 	
-	public KMUnitMessage(String message, fr.irisa.triskell.kermeta.language.structure.Object node, KermetaASTNode astnode) {
+	public KMUnitMessage(String message, fr.irisa.triskell.kermeta.language.structure.Object node, ASTNode astnode) {
 		this.message = message;
 		this.node = node;
 		this.astn = astnode;
@@ -36,7 +38,7 @@ public class KMUnitMessage {
 		this.node = node;
 	}
 
-	public KMUnitMessage(String message, KermetaASTNode node) {
+	public KMUnitMessage(String message, ASTNode node) {
 		this.message = message;
 		this.astn = node;
 	}
@@ -57,7 +59,7 @@ public class KMUnitMessage {
 	/**
 	 * @return Returns the Astnode.
 	 */
-	public KermetaASTNode getAstNode() {
+	public ASTNode getAstNode() {
 		return astn;
 	}
 }

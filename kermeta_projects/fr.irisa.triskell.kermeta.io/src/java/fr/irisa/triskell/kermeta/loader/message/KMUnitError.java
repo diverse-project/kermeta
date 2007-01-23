@@ -4,6 +4,8 @@
  */
 package fr.irisa.triskell.kermeta.loader.message;
 
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
+
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 ;
@@ -26,7 +28,7 @@ public class KMUnitError extends KMUnitMessage {
 	 * @param message
 	 * @param astnode
 	 */
-	public KMUnitError(String message, KermetaASTNode node) {
+	public KMUnitError(String message, ASTNode node) {
 		super(message, node);
 	}
 	/**
@@ -34,7 +36,7 @@ public class KMUnitError extends KMUnitMessage {
 	 * @param node
 	 * @param astnode
 	 */
-	public KMUnitError(String message, fr.irisa.triskell.kermeta.language.structure.Object node, KermetaASTNode astnode) {
+	public KMUnitError(String message, fr.irisa.triskell.kermeta.language.structure.Object node, ASTNode astnode) {
 		super(message, node, astnode);
 	}
 }
