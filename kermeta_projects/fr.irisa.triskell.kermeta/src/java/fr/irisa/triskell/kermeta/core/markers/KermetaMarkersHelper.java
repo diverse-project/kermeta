@@ -8,6 +8,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
+
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -81,7 +83,7 @@ public class KermetaMarkersHelper {
                     }
                 }
                 else if(message.getAstNode() != null) {
-                    KermetaASTNode astn = message.getAstNode();
+                    ASTNode astn = message.getAstNode();
                     offset = astn.getRangeStart();
                     length = astn.getRangeLength();
                 }
