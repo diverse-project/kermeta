@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.45 2006-12-20 13:06:37 jmottu Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.46 2007-01-23 09:30:50 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -631,6 +631,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		if (node.getPre().size() != 0 || node.getPost().size() != 0){
 			result += "\n";
+			alreadyPrefixed = false;
 			pushPrefix();
 			result += ppCRSeparatedNode(node.getPre());
 			result += ppCRSeparatedNode(node.getPost());
