@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.15 2006-10-27 08:50:38 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.16 2007-01-23 16:35:11 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -35,7 +35,7 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaGLNavigateUI;
@@ -57,10 +57,10 @@ public class KermetaGLPanel extends GLPanel
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Editor previousEditor = null;
+	private KMTEditor previousEditor = null;
 	private KermetaUnit previousUnit = null;
 
-	public Editor currentEditor = null;
+	public KMTEditor currentEditor = null;
 	
 	/** used to know if we must build the graph when receiving events */
 	private boolean isGraphBuiltOnce = false; 
@@ -127,7 +127,7 @@ public class KermetaGLPanel extends GLPanel
 	 * Action when a kermetaEditor unit was changed
 	 * @see fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener#unitChanged()
 	 */
-	public void unitGotFocus(Editor editor) {
+	public void unitGotFocus(KMTEditor editor) {
 		// do it in a thread so it will not slow down the opening of the file
 		boolean doIt = false;
 		if(editor != null){
