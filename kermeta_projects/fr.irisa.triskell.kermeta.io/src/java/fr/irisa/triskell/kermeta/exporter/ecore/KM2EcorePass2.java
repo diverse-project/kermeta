@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.28 2006-12-08 13:11:31 ftanguy Exp $
+/* $Id: KM2EcorePass2.java,v 1.29 2007-01-23 16:38:16 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -54,12 +55,14 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -116,9 +119,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object exportPackage(Package root_package) {
 		root_p = root_package;
-		return accept(root_package);
+		return accept(KermetaUnit.getRootPackageForSerialization(root_p));
 	}
-	
+
 	/** 
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
