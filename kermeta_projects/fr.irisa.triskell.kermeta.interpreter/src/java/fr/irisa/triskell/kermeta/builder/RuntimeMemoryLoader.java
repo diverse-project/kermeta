@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.16 2006-12-07 10:04:23 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.17 2007-01-23 09:34:52 dtouzet Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -12,9 +12,12 @@ package fr.irisa.triskell.kermeta.builder;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -22,6 +25,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -182,6 +186,8 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 		// set the container
 		run_obj.setContainer( getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)kcoreObject.eContainer()) );
 		
+		EClass cl = kcoreObject.eClass();
+		
 		// set properties
 		for (Object next : kcoreObject.eClass().getEAllAttributes())
 		{
@@ -192,14 +198,43 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    String property_name = normalizePropertyname(att);
 				    Object value = kcoreObject.eGet(att);
 				    // Map primitive types
-				    if (value instanceof Boolean) {
+				    if (value instanceof java.lang.Boolean) {
 				        run_obj.getProperties().put(property_name, memory.getRuntimeObjectForBoolean(((Boolean)value).booleanValue()));
 				    }
-				    else if (kcoreObject.eGet(att) instanceof java.lang.Integer) {
+				    //else if (kcoreObject.eGet(att) instanceof java.lang.Integer) {
+				    else if (value instanceof java.lang.Integer) {
 				        run_obj.getProperties().put(property_name, Integer.create(((java.lang.Integer)value).intValue(), memory.getROFactory()));
 				    }
-				    else if (kcoreObject.eGet(att) instanceof java.lang.String) {
+				    //else if (kcoreObject.eGet(att) instanceof java.lang.String) {
+				    else if (value instanceof java.lang.String) {
 				        run_obj.getProperties().put(property_name, fr.irisa.triskell.kermeta.runtime.basetypes.String.create( (java.lang.String)value, memory.getROFactory() ));
+				    }
+				    else if (value instanceof org.eclipse.emf.common.util.AbstractEnumerator){
+				    	
+				    	// we should retreive the enumeration in the memory
+				    		// get the property type, this should be an enumeration 				    		
+				    		// get the property type
+				    		EClassifier eEnum = att.getEType();
+				    		String qnameEnum = getEQualifiedName(eEnum);
+				    		RuntimeObject roEnum = memory.getTypeDefinitionAsRuntimeObject(qnameEnum);
+				    	// then retreive the value in this enumeration and affect it to the property
+			    	    	// get the correct value (enumeration literal) from the enumeration
+				    		RuntimeObject roEnumLitCollection = roEnum.getProperties().get("ownedLiteral");
+				    		Iterator it = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(roEnumLitCollection).iterator();
+				    		RuntimeObject roEnumLit=null;
+				    		while(it.hasNext()){
+				    			RuntimeObject roLit = (RuntimeObject)it.next();
+				    			String litName = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(roLit.getProperties().get("name"));
+				    			org.eclipse.emf.common.util.AbstractEnumerator enumerator = (org.eclipse.emf.common.util.AbstractEnumerator)value;
+				    			if(litName.equals(enumerator.getLiteral())){
+				    				roEnumLit = roLit;
+				    			}
+				    		}
+				    	// set this value to the property
+				    		// DVK : I'm not sure we can directly assign this, is it a kind of singleton in memory ?
+				    		run_obj.getProperties().put(property_name, roEnumLit);
+				    	//throw new Error("Kermeta loader error : mapping of enumeration " + value.getClass() + " not implemented");
+				    	
 				    }
 				    else {
 				        throw new Error("Kermeta loader error : mapping of primitive type " + value.getClass() + " not implemented");
