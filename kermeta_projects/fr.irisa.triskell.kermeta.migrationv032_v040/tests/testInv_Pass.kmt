@@ -1,0 +1,57 @@
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+using kermeta::standard
+using kermeta::exceptions
+
+class Main inherits superMain, superMain2
+{
+    inv titi is  do str == "titi" end
+    inv toto is do true end
+
+	reference str : String 
+
+    operation main() : Void is 
+     do
+        str := "titi"
+        superstr := "supertiti"
+        superstr2 := "supertiti2"
+		do
+        stdio.writeln(self.checkInvariants.toString) 
+        rescue (err : ConstraintViolatedInv)
+        	stdio.writeln(err.toString)
+        	stdio.writeln(err.message)
+        end
+        
+        
+        do
+        stdio.writeln(self.checkInvariants.toString)
+        rescue (err : ConstraintViolatedInv)
+        	stdio.writeln(err.toString)
+        	stdio.writeln(err.message)
+        end
+        
+              
+        do
+        	self.checkInvariants
+        end
+        stdio.writeln("test")
+    end
+}
+
+class superMain
+{
+	reference superstr : String
+	
+	inv superMainInv is superstr == "supertiti"
+}
+
+class superMain2
+{
+	reference superstr2 : String
+	
+	inv superMain2Inv is do superstr2 == "supertiti2" end
+}

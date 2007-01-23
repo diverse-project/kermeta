@@ -1,0 +1,25 @@
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "toBeRequired.kmt"
+using kermeta::standard
+using kermeta::exceptions
+
+class Main
+{	
+    operation main() : Void is do 
+        var m : MainToBeRequired init MainToBeRequired.new
+        
+        m.strRequired := "trucRequiredPre"
+        m.b := true
+        
+        m.truc("not trucRequiredPost")
+        		 
+        m.checkInvariants
+    end
+}
