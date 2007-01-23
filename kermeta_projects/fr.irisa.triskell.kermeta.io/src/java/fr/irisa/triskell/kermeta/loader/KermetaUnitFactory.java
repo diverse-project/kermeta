@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.22 2006-10-25 08:25:45 dvojtise Exp $
+/* $Id: KermetaUnitFactory.java,v 1.23 2007-01-23 15:26:54 dvojtise Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -206,5 +206,9 @@ public class KermetaUnitFactory {
         throw new Error("Unload units is NOT IMPLEMENTED");
     	//if (loadedUnits.containsKey(uri))  loadedUnits.remove(uri);
     }
+
+	protected Hashtable<String, KermetaLoaderModule> getLoadModules() {
+		return loadModules;
+	}
 
 }
