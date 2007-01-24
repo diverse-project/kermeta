@@ -1,4 +1,4 @@
-/* $Id: OpenWithEMFTouchGraphAction.java,v 1.1 2007-01-24 08:24:35 dvojtise Exp $
+/* $Id: OpenWithEMFTouchGraphAction.java,v 1.2 2007-01-24 10:14:54 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Ecore2kmtAction.java
  * License    : EPL
@@ -89,13 +89,13 @@ public class OpenWithEMFTouchGraphAction implements IObjectActionDelegate, IActi
 		}
 	}
 
-
+/*
 	public Object getAdapter(Class adapter) {
         if (adapter == IActionFilter.class) {
                 return EMFLoadableFilter.getSingleton();
         }
         return null;
     }
-	
+	*/
 	
 }
