@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.9 2007-01-24 13:40:51 dvojtise Exp $ -->
 <book lang="en-GB">
   <bookinfo>
     <title>How the workbench is able to help you in your metamodelling
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-22 19:02:33 $</pubdate>
+    <pubdate>$Date: 2007-01-24 13:40:51 $</pubdate>
 
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
@@ -17,97 +18,96 @@
   <chapter>
     <title>Introduction</title>
 
-    <para><emphasis role="strong">Kermeta is distributed with a workbench that
-    provides many .</emphasis></para>
+    <para>Kermeta is distributed with a workbench that
+    provides many .</para>
 
-    <para><emphasis role="strong">Current features in v0.4.0
-    are:</emphasis></para>
+    <para>Current features in v0.4.0
+    are:</para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="strong">Text editor</emphasis></para>
+        <para>Text editor</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="strong">Outline view</emphasis></para>
+        <para>Outline view</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="strong">Problems view</emphasis></para>
+        <para>Problems view</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Ecore Model Editor (provided by
-        Eclipse/EMF)</emphasis></para>
+        <para>Ecore Model Editor (provided by
+        Eclipse/EMF)</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Execution with an
-        interpreter</emphasis></para>
+        <para>Execution with an
+        interpreter</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Debugger</emphasis></para>
+        <para>Debugger</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Transformations to and from Kermeta.
-        (especially to Ecore)</emphasis></para>
+        <para>Transformations to and from Kermeta.
+        (especially to Ecore)</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Other helper transformations like Ecore
-        merge</emphasis></para>
+        <para>Other helper transformations like Ecore
+        merge</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Dedicated Graphic
-        editor</emphasis></para>
+        <para>Dedicated Graphic
+        editor</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Class TouchNavigator (alpha version in
-        release 0.1.1)</emphasis></para>
+        <para>Class TouchNavigator (alpha version in
+        release 0.1.1</para>
       </listitem>
       
       <listitem>
-        <para><emphasis role="strong">Help system</emphasis></para>
+        <para>Help system</para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="strong">Useful features needing the installation of
-    an external tool:</emphasis></para>
+    <para>Useful features needing the installation of
+    an external tool:</para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="strong">Class diagram Ecore Model editor. This
+        <para>Class diagram Ecore Model editor. This
         feature is provided by EclipseUML (Omondo) (a community edition is
-        available)</emphasis></para>
+        available)</para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="strong">Planned features:</emphasis></para>
+    <para>Planned features:</para>
 
     <itemizedlist>
 
       <listitem>
-        <para><emphasis role="strong">Seamless integration of Java
-        code</emphasis></para>
+        <para>Seamless integration of Java
+        code</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="strong">Object TouchNavigator</emphasis></para>
+        <para>Object TouchNavigator</para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="strong"></emphasis></para>
 
-    <para><emphasis role="strong">Here is a screenshot of a typical Kermeta
-    workbench.</emphasis></para>
+    <para>Here is a screenshot of a typical Kermeta
+    workbench.</para>
 
     <figure id="refIllustration0">
       <title>Kermeta workbench screenshoot (v0.0.4)</title>
@@ -119,44 +119,18 @@
       </mediaobject>
     </figure>
 
-    <para></para>
 
     <warning>
-       
-
-      <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
-
-       
-
-      <emphasis role="strong">
-        <emphasis role="strong">espite that we put a lot of attention to this
+       Kermeta is an evolving software and despite that we put a lot of attention to this
         document, it may contain errors or not conform to the latest version.
         If you find any error or have some information that improves this
         document, please send it to us using the bugtracker in the
-        forge:</emphasis>
-      </emphasis>
+        forge:
 
        
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
-        <emphasis role="strong">
-          <emphasis role="strong">
-            <emphasis
-            role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
-          </emphasis>
-        </emphasis>
-      </ulink>
-
-       
-
-      <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
-        <emphasis role="strong">
-          <emphasis role="strong">
-            <emphasis role="strong">
-              <emphasis role="strong" />
-            </emphasis>
-          </emphasis>
-        </emphasis>
+        http://gforge.inria.fr/tracker/?group_id=32
       </ulink>
 
        Last check: v0.4.0 
@@ -299,7 +273,7 @@
       platform includes a debugger. Like in a Java style, some breakpoints can
       be added to the program by right clicking on the grey line at the left
       of the editor (as in the figure below). The breakpoint will be added in
-      front the selected line. Afterwards, when running the debugger, the
+      front of the selected line. Afterwards, when running the debugger, the
       program will halt at every breakpoint it goes through. At this moment,
       you will be able to have a look at the variables' value and run step by
       step or step into some methods.</para>
@@ -501,7 +475,7 @@
       file is located in the textEditor plugin.</para>
 
       <para>Exemple add the following in the VM arguments box:
-      -Dkermeta.log4j.configurationfile.name="../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml"</para>
+      -Dkermeta.log4j.configurationfile.name= "../../plugins/fr.irisa.triskell.kermeta.texteditor_0.0.4/kermeta_log4j_configuration.xml"</para>
 
       <para>The classpath must be carefully set using the jar of Kermeta, the
       jar of Ecore and of emf.</para>
@@ -616,9 +590,7 @@
         file:// urls</para>
 
         <programlisting>#
-"platform:/plugin/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"<ulink
-            type=""
-            url="../../../../../../eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/">file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/</ulink>"
+"platform:/plugin/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/"
 "platform:/resource/fr.irisa.triskell.kermeta/"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"file:/C:/eclipse3.0.2/eclipse/workspace/fr.irisa.triskell.kermeta/"</programlisting>
       </section>
     </section>
@@ -776,24 +748,23 @@
   <!-- begin - of the chapter about Transformations -->
 
   <chapter>
-    <title><emphasis role="strong">Transformations</emphasis></title>
+    <title>Transformations</title>
 
-    <para><emphasis role="strong">The workbench provides several additional
+    <para>The workbench provides several additional
     tools available directly on the files using the popup
-    menu.</emphasis></para>
+    menu.</para>
 
     <section>
-      <title><emphasis role="strong">Actions for Ecore
-      files</emphasis></title>
+      <title>Actions for Ecore files</title>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="strong">Export functions: On ecore file you
+          <para><emphasis role="strong">Export functions:</emphasis> On ecore file you
           can export it into a KM (kermeta program in xmi format) or in kmt
           (Kermeta program using its textual syntax). As the ecore model may
           not be valid, the wizard provides some quick fixes. Those quick
           fixes will for example detect and propose a default solution for
-          multiple operations with the same name.</emphasis></para>
+          multiple operations with the same name.</para>
         </listitem>
       </itemizedlist>  
       
@@ -815,17 +786,16 @@
         </mediaobject>
       </figure>
 
-      <para><emphasis role="strong"></emphasis></para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="strong">Merge function: You can merge several
+          <para><emphasis role="strong">Merge function:</emphasis> You can merge several
           ecore files, simply select them and click "merge". Its algorithm is
-          base on the names of the packages and classes. </emphasis></para>
+          base on the names of the packages and classes. </para>
         </listitem>
         <listitem>
-          <para><emphasis role="strong">Register/Unregister EPackages function: You can register or unregister in the EMF registry the EPackages defined in an Ecore model,
-           simply select them and right-click "Register" or "Unregister".</emphasis></para>
+          <para><emphasis role="strong">Register/Unregister EPackages function:</emphasis> You can register or unregister in the EMF registry the EPackages defined in an Ecore model,
+           simply select them and right-click "Register" or "Unregister".</para>
         </listitem>
       </itemizedlist>
       
@@ -840,14 +810,14 @@
     </section>
 
     <section>
-      <title><emphasis role="strong">Actions for kmt files</emphasis></title>
+      <title>Actions for kmt files</title>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="strong">From a kmt files you can export it to
+          <para>From a kmt files you can export it to
           an ecore file. Each of the kermeta notion that don't have a specific
           representation in ecore are stored into ecore annotations that will
-          allow to roundtrip back to kermeta.</emphasis></para>
+          allow to roundtrip back to kermeta.</para>
         </listitem>
      </itemizedlist>
       <figure>
@@ -861,9 +831,9 @@
       
 	<itemizedlist>
         <listitem>
-          <para><emphasis role="strong">The kmt file can also be exported into
+          <para>The kmt file can also be exported into
           its model version (ie. Into a XMI file conformant to kermeta
-          metamodel)</emphasis> This is usefull as this process also typecheck
+          metamodel). This is usefull as this process also typecheck
           the model and thus allow to save some time when loading other file
           wich rely on the km version rather than the kmt version.</para>
         </listitem>
@@ -880,13 +850,13 @@
     </section>
 
     <section>
-      <title><emphasis role="strong">Actions for km files</emphasis></title>
+      <title>Actions for km files</title>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="strong">From a km files you can export it to
+          <para>From a km files you can export it to
           an ecore file. Each of the kermeta notion that don't have a specific
-          representation in ecore are stored into ecore annotations</emphasis>
+          representation in ecore are stored into ecore annotations
           that will allow to roundtrip back to kermeta.</para>
         </listitem>
       </itemizedlist>
@@ -919,22 +889,20 @@
       </figure>
 
     <section>
-      <title><emphasis role="strong">Traceability</emphasis></title>
+      <title>Traceability</title>
 
-      <para><emphasis role="strong">For many of those transformations, the
+      <para>For many of those transformations, the
       wizard will propose you to store the traceability informations.
-      </emphasis></para>
+      </para>
 
-      <para><emphasis role="strong">This is a special metamodel that stores a
+      <para>This is a special metamodel that stores a
       link between the sources elements and the target element so you can
       reuse it later. For example, it will help the debugger to retreive the
       correct line in the text version of the source file even if you are
-      running the </emphasis></para>
+      running the km version.</para>
 
-      <para><emphasis role="strong">km version.</emphasis></para>
-
-      <para><emphasis role="strong">This metamodel is very generic and can be
-      used for any model.</emphasis></para>
+      <para>This metamodel is very generic and can be
+      used for any model.</para>
     </section>
   </chapter>
 
@@ -943,18 +911,17 @@
   <!-- begin - of the chapter about the Class diagram Kermeta Model editor -->
 
   <chapter>
-    <title><emphasis role="strong">Class diagram Kermeta Model
-    editor</emphasis></title>
+    <title>Class diagram Kermeta Model editor</title>
 
 <section>
-      <title><emphasis role="strong">Overview</emphasis></title>
+      <title>Overview</title>
 
-    <para><emphasis role="strong">The Kermeta Graphical Editor is a view of
+    <para>The Kermeta Graphical Editor is a view of
     the Kermeta model as a class diagram. It is generated with the tool
     "Topcased".
     The file containing the presentation informations is a *.kmdi.
     The *.kmdi is associated with a *.km file. The *.kmdi and *.km files must be in the same folder.
-    </emphasis></para>
+    </para>
 
     <figure>
       <title>Class diagram Kermeta Model editor - overview</title>
@@ -967,10 +934,10 @@
     </section>
     
     <section>
-      <title><emphasis role="strong">Opening of a Kermeta class diagram</emphasis></title>
+      <title>Opening of a Kermeta class diagram</title>
     
-    <para><emphasis role="strong">
-    We can open it, simply select and right-click "Open with / Kermeta class diagram"</emphasis></para>
+    <para>
+    We can open it, simply select and right-click "Open with / Kermeta class diagram"</para>
 
     <figure>
       <title>Opening of a Kermeta class diagram</title>
@@ -983,15 +950,15 @@
     </section>
     
     <section>
-      <title><emphasis role="strong">Creating of a Kermeta class diagram</emphasis></title>
+      <title>Creating of a Kermeta class diagram</title>
     
-    <para><emphasis role="strong">In order to create a Kermeta class diagram you have 2 ways.</emphasis></para>
+    <para>In order to create a Kermeta class diagram you have 2 ways.</para>
 
 	<itemizedlist>
         <listitem>
-          <para><emphasis role="strong">Create a class diagram and the Kermeta model from scratch.
+          <para>Create a class diagram and the Kermeta model from scratch.
           Select the project or the folder where you want create the class diagram and right-click "New / Other / Kermeta / New Kermeta class diagram".
-          Change the model name if you want.</emphasis>
+          Change the model name if you want.
           </para>
         </listitem>
       </itemizedlist>
@@ -1016,8 +983,8 @@
     
     <itemizedlist>
         <listitem>
-          <para><emphasis role="strong">Create a class diagram from an existing Kermeta model.
-          Select the existing km file and right-click "New / Other / Kermeta / New Kermeta class diagram".</emphasis>
+          <para>Create a class diagram from an existing Kermeta model.
+          Select the existing km file and right-click "New / Other / Kermeta / New Kermeta class diagram".
           </para>
         </listitem>
       </itemizedlist>
@@ -1047,31 +1014,30 @@
   <!-- begin - of the chapter about the Kermeta Class TouchNavigator -->
 
   <chapter>
-    <title><emphasis role="strong">Kermeta Class
-    TouchNavigator</emphasis></title>
+    <title>Kermeta Class TouchNavigator</title>
 
-    <para><emphasis role="strong">The Kermeta Class TouchNavigator is a view
+    <para>The Kermeta Class TouchNavigator is a view
     that dynamically focuses on the element you are viewing in the editor or
-    the outline.</emphasis></para>
+    the outline.</para>
 
-    <para><emphasis role="strong">With its damping animation, it proposes an
+    <para>With its damping animation, it proposes an
     original way to navigate and analyse your metamodel
-    classes.</emphasis></para>
+    classes.</para>
 
-    <para><emphasis role="strong">The color depends on the distance to the
-    selected node.</emphasis></para>
+    <para>>The color depends on the distance to the
+    selected node.</para>
 
-    <para><emphasis role="strong">Back and Forward button allow to navigate
-    the history of seleted nodes.</emphasis></para>
+    <para>Back and Forward button allow to navigate
+    the history of seleted nodes.</para>
 
-    <para><emphasis role="strong">It provides several lens for smarter
+    <para>It provides several lens for smarter
     vizualisation. For exemple you can zoom, rotate, set the locality (ie. How
     much nodes you display at once depending on the distance to the selection)
     or use the hyperbolic lens (Ie. Change the edge length depending on the
-    distance).</emphasis></para>
+    distance).</para>
 
-    <para><emphasis role="strong">If you leave your mouse over a class, it
-    shows its documentation.</emphasis></para>
+    <para>If you leave your mouse over a class, it
+    shows its documentation.</para>
 
     <figure id="refIllustration11">
       <title>Kermeta Class TouchNavigator</title>
@@ -1086,8 +1052,8 @@
     <para></para>
 
     <tip>
-      <emphasis role="strong">It is in alpha stage, feel free to notify us
-      what you found interresting or not in this view.</emphasis>
+      It is in alpha stage, feel free to notify us
+      what you found interresting or not in this view.
     </tip>
   </chapter>
 
@@ -1096,31 +1062,29 @@
   <!-- begin - of the chapter about the Ecore Model Editor -->
 
   <chapter>
-    <title><emphasis role="strong">Ecore Model Editor</emphasis></title>
+    <title>Ecore Model Editor</title>
 
-    <para><emphasis role="strong">This Editor is provided by Eclipse in
-    EMF.</emphasis></para>
+    <para>This Editor is provided by Eclipse in
+    EMF.</para>
 
-    <para><emphasis role="strong">Since Kermeta metamodel is an extension of
+    <para>Since Kermeta metamodel is an extension of
     EMOF, it is possible to use this editor to edit Kermeta
-    programs.</emphasis></para>
+    programs.</para>
 
-    <para><emphasis role="strong">This based on the Ecore2Kermeta and
-    Kermeta2Ecore </emphasis> <emphasis role="strong"> <emphasis
-    role="strong">transformations.</emphasis> </emphasis></para>
+    <para>This based on the Ecore2Kermeta and
+    Kermeta2Ecore  transformations.</para>
 
-    <para><emphasis role="strong">With the Ecore representation of your
+    <para>With the Ecore representation of your
     program, you can use the Ecore Model editor (from Eclipse\EMF) or any
-    other Ecore tool (for example Omondo.graphic editor)</emphasis></para>
+    other Ecore tool (for example Omondo.graphic editor)</para>
 
-    <para><emphasis role="strong"></emphasis></para>
 
-    <para><emphasis role="strong">This is described with more details in the
-    EMF tutorial: </emphasis> <ulink type=""
+    <para>This is described with more details in the
+    EMF tutorial:  <ulink type=""
     url="http://www.kermeta.org/docs/html.single/KermetaEMFTutorial/">
     <emphasis
     role="strong">http://www.kermeta.org/docs/html.single/KermetaEMFTutorial/</emphasis>
-    </ulink> <emphasis role="strong"> </emphasis></para>
+    </ulink> </para>
   </chapter>
 
   <!-- end - of the chapter about the Ecore Model Editor -->
