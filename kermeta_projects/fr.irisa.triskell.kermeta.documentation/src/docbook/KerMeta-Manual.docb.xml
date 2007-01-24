@@ -3,14 +3,15 @@
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <book lang="en-US">
   <bookinfo>
-  
-  <title>Kermeta language</title>
-  
+    <title>Kermeta language</title>
+
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-22 18:52:41 $</pubdate>
+
+    <pubdate>$Date: 2007-01-24 09:07:09 $</pubdate>
 
     <author>
-      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher</firstname>
+      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril
+      Faucher</firstname>
     </author>
 
     <keywordset>
@@ -68,7 +69,11 @@
     framework. </emphasis></para>
 
     <important>
+       
+
       <emphasis role="strong">Kermeta is an evolving software and d</emphasis>
+
+       
 
       <emphasis role="strong">
         <emphasis role="strong">espite that we put a lot of attention to this
@@ -77,6 +82,8 @@
         document, please send it to us using the bug tracker in the
         forge:</emphasis>
       </emphasis>
+
+       
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
         <emphasis role="strong">
@@ -87,11 +94,15 @@
         </emphasis>
       </ulink>
 
+       
+
       <emphasis role="strong">
         <emphasis role="strong">
           <emphasis role="strong" />
         </emphasis>
       </emphasis>
+
+       
 
       <emphasis role="strong">
         <emphasis role="strong">
@@ -100,22 +111,24 @@
         </emphasis>
       </emphasis>
 
+       
+
       <emphasis role="strong">
         <emphasis role="strong">
           <emphasis role="strong" />
         </emphasis>
       </emphasis>
 
-      Last check: v0.4.0
+       Last check: v0.4.0 
     </important>
 
     <tip>
-      The most update version of this document is available on line from 
+       The most update version of this document is available on line from 
 
       <ulink type=""
       url="http://www.kermeta.org/">http://www.kermeta.org</ulink>
 
-       .
+       . 
     </tip>
   </preface>
 
@@ -143,9 +156,7 @@
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-Manual_figures/kermeta_positionning2.png"
-                        />
+            <imagedata fileref="KerMeta-Manual_figures/kermeta_positionning2.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -256,9 +267,7 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_emof_promotion.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_emof_promotion.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -270,9 +279,7 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_structure_package.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_structure_package.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -302,9 +309,7 @@
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_behavior_package.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_behavior_package.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -357,45 +362,49 @@
 
           <table id="refTable0">
             <title>Operation redefinition in Kermeta</title>
+
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="5.7cm"/>
-              <colspec colname="c2" colwidth="11.3cm"/>
+              <colspec colname="c1" colwidth="5.7cm" />
+
+              <colspec colname="c2" colwidth="11.3cm" />
+
               <tbody>
                 <row>
-                  <entry align="right">
-<?border-top 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-                    <mediaobject>
+                  <entry align="right"><?border-top 0.002cm solid #000000?>
+                  <?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?>
+                  <mediaobject>
                       <imageobject>
-                        <imagedata fileref="KerMeta-Manual_figures/operation_redefinition.png" width="2.29cm" depth="9.208cm"/>
+                        <imagedata depth="9.208cm"
+                                   fileref="KerMeta-Manual_figures/operation_redefinition.png"
+                                   width="2.29cm" />
                       </imageobject>
-                    </mediaobject>
-                    <para/>
-                  </entry>
-                  <entry>
-<?border 0.002cm solid #000000?>
-                    <programlisting><emphasis role="strong">class</emphasis> A
+                    </mediaobject> <para></para></entry>
+
+                  <entry><?border 0.002cm solid #000000?> <programlisting><emphasis
+                        role="strong">class</emphasis> A
 {
-     <emphasis role="strong">operation</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-         <emphasis>// Some behavior</emphasis>
-     <emphasis role="strong">end</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m1() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// Some behavior</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 
-     <emphasis>// operation m2 is abstract</emphasis>
-     <emphasis role="strong">operation</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// operation m2 is abstract</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m2() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
 }
-</programlisting>
-                    <programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> A
-{    
-     <emphasis>// method m1 inherits operation m1 from A</emphasis>
-     <emphasis role="strong">method</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-         <emphasis>// Behavior redefinition</emphasis>
-     <emphasis role="strong">end</emphasis>
+</programlisting> <programlisting><emphasis role="strong">class</emphasis> B <emphasis
+                        role="strong">inherits</emphasis> A
+{&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// method m1 inherits operation m1 from A</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m1() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// Behavior redefinition</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 
-     <emphasis role="strong">method</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis> <emphasis>//</emphasis><emphasis> Implementation of the abstract method</emphasis>
-     <emphasis role="strong">end</emphasis>
-}</programlisting>
-                  </entry>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m2() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis> <emphasis>//</emphasis><emphasis> Implementation of the abstract method</emphasis>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+}</programlisting></entry>
                 </row>
               </tbody>
             </tgroup>
@@ -404,13 +413,15 @@
           <orderedlist continuation="restarts"></orderedlist>
 
           <note>
-            Notice in that sample that method redefinition uses the 
+             Notice in that sample that method redefinition uses the 
 
             <literal>method</literal>
 
              keyword instead of 
 
             <literal>operation.</literal>
+
+             
           </note>
         </section>
 
@@ -520,52 +531,57 @@
 
           <table id="refTable1">
             <title>Explicit selection of super operation in Kermeta</title>
+
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="5.8cm"/>
-              <colspec colname="c2" colwidth="11.2cm"/>
+              <colspec colname="c1" colwidth="5.8cm" />
+
+              <colspec colname="c2" colwidth="11.2cm" />
+
               <tbody>
                 <row>
-                  <entry align="center">
-<?border-top 0.002cm solid #000000?>
-<?border-bottom 0.002cm solid #000000?>
-<?border-left 0.002cm solid #000000?>
-                    <mediaobject>
+                  <entry align="center"><?border-top 0.002cm solid #000000?>
+                  <?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?>
+                  <mediaobject>
                       <imageobject>
-                        <imagedata fileref="KerMeta-Manual_figures/superoperation_selection.png" width="5.636cm" depth="11.374cm"/>
+                        <imagedata depth="11.374cm"
+                                   fileref="KerMeta-Manual_figures/superoperation_selection.png"
+                                   width="5.636cm" />
                       </imageobject>
-                    </mediaobject>
-                    <para/>
-                  </entry>
-                  <entry>
-<?border 0.002cm solid #000000?>
-                    <programlisting><emphasis role="strong">class</emphasis> O
+                    </mediaobject> <para></para></entry>
+
+                  <entry><?border 0.002cm solid #000000?> <programlisting><emphasis
+                        role="strong">class</emphasis> O
 {
-    <emphasis role="strong">operation</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>
 }
-</programlisting>
-                    <programlisting><emphasis role="strong">class</emphasis> A <emphasis role="strong">inherits</emphasis> O
+</programlisting> <programlisting><emphasis role="strong">class</emphasis> A <emphasis
+                        role="strong">inherits</emphasis> O
 {
-    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis>// [...]</emphasis>
-    <emphasis role="strong">end</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }
-</programlisting>
-                    <programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> O
+</programlisting> <programlisting><emphasis role="strong">class</emphasis> B <emphasis
+                        role="strong">inherits</emphasis> O
 {
-    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis>// [...]</emphasis>
-    <emphasis role="strong">end</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m() <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }
-</programlisting>
-                    <programlisting><emphasis role="strong">class</emphasis> C <emphasis role="strong">inherits</emphasis> A, B
+</programlisting> <programlisting><emphasis role="strong">class</emphasis> C <emphasis
+                        role="strong">inherits</emphasis> A, B
 {
 <emphasis>// "from" : an explicit selection of the//implementation to inherit</emphasis>
-    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">from</emphasis> A <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-        <emphasis>// [...]</emphasis>
-    <emphasis role="strong">end</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m() <emphasis
+                        role="strong">from</emphasis> A <emphasis
+                        role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 } 
-</programlisting>
-                  </entry>
+</programlisting></entry>
                 </row>
               </tbody>
             </tgroup>
@@ -663,7 +679,7 @@
 </programlisting>
 
           <note>
-            Notice in that sample that even the "if" is an expression that can return a value that is assigned here to the special variable "result".
+             Notice in that sample that even the "if" is an expression that can return a value that is assigned here to the special variable "result". 
           </note>
         </section>
       </section>
@@ -730,17 +746,17 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
       <title>Comments and keywords</title>
 
       <warning>
-        Comments are a little bit particular in the Kermeta language because they are not all ignored by the interpreter. There are two kinds of comments: the first (syntax : // foo , /* bar 
+         Comments are a little bit particular in the Kermeta language because they are not all ignored by the interpreter. There are two kinds of comments: the first (syntax : // foo , /* bar 
 
         <emphasis role="strong">/) is only associated to the text editor view
         in which the user edits his Kermeta file, and the second one(syntax
         :</emphasis>
 
-        /** foo */ 
+         /** foo */ 
 
         <emphasis role="strong">or</emphasis>
 
-         @tag_name "tag value") is translated into a MOF tag linked to structures described in the Kermeta model.
+         @tag_name "tag value") is translated into a MOF tag linked to structures described in the Kermeta model. 
       </warning>
 
       <section>
@@ -854,73 +870,70 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <title>Primitive types</title>
 
         <para>Kermeta implements a few primitive types. By primitive types, we
-        mean types that are basic to any language, i.e integer, and that have a "literal" value. See below table.</para>
+        mean types that are basic to any language, i.e integer, and that have
+        a "literal" value. See below table.</para>
 
         <informaltable>
           <tgroup cols="3">
-            <colspec colname="c1" colwidth="2.7cm"/>
-            <colspec colname="c2" colwidth="7.6cm"/>
-            <colspec colname="c3" colwidth="4.7cm"/>
+            <colspec colname="c1" colwidth="2.7cm" />
+
+            <colspec colname="c2" colwidth="7.6cm" />
+
+            <colspec colname="c3" colwidth="4.7cm" />
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Name</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Description</para></entry>
 
-                <entry><?border 0.0007inch solid #000000?> <para>Literal
+                <entry><?border 0.0007inch solid #000000?><para>Literal
                 Example</para></entry>
               </row>
             </thead>
 
             <tbody>
               <row>
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Integer</para></entry>
 
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents
-                integer numeric value like 10 or 12. («&nbsp;int&nbsp;» data
-                type in Java)</para></entry>
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents integer numeric value like 10 or 12.
+                («&nbsp;int&nbsp;» data type in Java)</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>'101', '12', '14, '-45', '-123'</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>'101', '12',
+                '14, '-45', '-123'</para></entry>
               </row>
 
               <row>
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>String</para></entry>
 
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents a
-                string of like « helloworld&nbsp;»
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents a string of like « helloworld&nbsp;»
                 («&nbsp;String&nbsp;» data type in Java)</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>"helloworld", "this is a string !!!"</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>"helloworld",
+                "this is a string !!!"</para></entry>
               </row>
 
               <row>
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Boolean</para></entry>
 
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents a
-                true/false value. («&nbsp;boolean&nbsp;» data type in
-                Java)</para></entry>
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents a true/false value. («&nbsp;boolean&nbsp;»
+                data type in Java)</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>true, false</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>true,
+                false</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -952,7 +965,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 <emphasis role="strong">end</emphasis></programlisting>
 
         <note>
-          Enumeration are concept of the same level as classes, they must be defined in a package.
+           Enumeration are concept of the same level as classes, they must be defined in a package. 
         </note>
       </section>
 
@@ -981,108 +994,99 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="2.1cm"/>
-            <colspec colname="c2" colwidth="7.9cm"/>
-            <colspec colname="c3" colwidth="2.5cm"/>
-            <colspec colname="c4" colwidth="2.5cm"/>
+            <colspec colname="c1" colwidth="2.1cm" />
+
+            <colspec colname="c2" colwidth="7.9cm" />
+
+            <colspec colname="c3" colwidth="2.5cm" />
+
+            <colspec colname="c4" colwidth="2.5cm" />
 
             <thead>
               <row>
-                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Name</para></entry>
 
-                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Description</para></entry>
 
-                <entry nameend="c4" namest="c3"><?border 0.0007inch solid #000000?>
-                <para>Constraints</para></entry>
+                <entry nameend="c4" namest="c3"><?border 0.0007inch solid #000000?><para>Constraints</para></entry>
               </row>
 
               <row>
-                <entry><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Unique</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Ordered</para></entry>
               </row>
             </thead>
 
             <tbody>
               <row>
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>set</para></entry>
 
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents an
-                unordered collection of objects with no doublet
-                (Set)</para></entry>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents an unordered collection of objects with no
+                doublet (Set)</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>True</para></entry>
 
-                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>False</para></entry>
               </row>
 
               <row>
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>oset</para></entry>
 
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents an
-                ordered collection of objects with no doublet
-                (OrderedSet)</para></entry>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents an ordered collection of objects with no
+                doublet (OrderedSet)</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>True</para></entry>
 
-                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>True</para></entry>
               </row>
 
               <row>
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>seq</para></entry>
 
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents an
-                ordered collection of objects (Sequence) </para></entry>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents an ordered collection of objects (Sequence)
+                </para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>False</para></entry>
 
-                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>True</para></entry>
               </row>
 
               <row>
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>bag</para></entry>
 
-                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Represents a
-                basic collection of objects (Bag)</para></entry>
+                <entry valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Represents a basic collection of objects
+                (Bag)</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>False</para></entry>
 
-                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>False</para></entry>
               </row>
             </tbody>
@@ -1094,9 +1098,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/collections.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/collections.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -1115,7 +1117,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <para><emphasis role="strong">Example 1</emphasis>: how to declare
         collections</para>
 
-<programlisting>
+        <programlisting>
 	<emphasis>// Collection with multiplicities</emphasis>
 	<emphasis role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]<emphasis> // At least 4 elements and never more than 6</emphasis>
 	<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">seq</emphasis> String[2..*]<emphasis> // At least two strings in the sequence</emphasis>
@@ -1123,7 +1125,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 	<emphasis role="strong">var</emphasis> myCol5 : String[1..*]<emphasis> // If you don't specify any keyword, it is an ordered set</emphasis>
 </programlisting>
 
-<programlisting>
+        <programlisting>
     <emphasis>// This way of declaring a variable is recommended</emphasis>
 	<emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
 </programlisting>
@@ -1168,7 +1170,7 @@ myCol1.add(50)
             role="strong">init</emphasis> myCol4</programlisting>
 
         <note>
-          Conclusion : in most cases, you don't need to use this special syntax, you can simply use the generic collection names (Set&lt;Something&gt;, OrderedSet&lt;Something&gt;, etc.) available in Kermeta framework. Moreover, lower and upper bounds aren’t checked yet by Kermeta type checker and interpreter.
+           Conclusion : in most cases, you don't need to use this special syntax, you can simply use the generic collection names (Set&lt;Something&gt;, OrderedSet&lt;Something&gt;, etc.) available in Kermeta framework. Moreover, lower and upper bounds aren’t checked yet by Kermeta type checker and interpreter. 
         </note>
       </section>
 
@@ -1212,7 +1214,7 @@ myCol1.add(50)
         definition from another package if needed.</para>
 
         <tip>
-          It is interesting to redefine your own datatype for all the standard type you use in your metamodel, so when you convert the file into ecore in order to have serialisation, you won't have any dependency to framework.ecore (which is the ecore version of the framework where kermeta standard type) This allow a lazy coupling of the type definitions.
+           It is interesting to redefine your own datatype for all the standard type you use in your metamodel, so when you convert the file into ecore in order to have serialisation, you won't have any dependency to framework.ecore (which is the ecore version of the framework where kermeta standard type) This allow a lazy coupling of the type definitions. 
         </tip>
       </section>
 
@@ -1221,251 +1223,218 @@ myCol1.add(50)
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="1.4cm"/>
-            <colspec colname="c2" colwidth="2.5cm"/>
-            <colspec colname="c3" colwidth="3cm"/>
-            <colspec colname="c4" colwidth="8.1cm"/>
+            <colspec colname="c1" colwidth="1.4cm" />
+
+            <colspec colname="c2" colwidth="2.5cm" />
+
+            <colspec colname="c3" colwidth="3cm" />
+
+            <colspec colname="c4" colwidth="8.1cm" />
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Priority</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Operator</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Operand types</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Operand
+                types</para></entry>
 
-                <entry><?border 0.0007inch solid #000000?>
-                <para>Semantic</para></entry>
+                <entry><?border 0.0007inch solid #000000?><para>Semantic</para></entry>
               </row>
             </thead>
 
             <tbody>
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>1</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>+</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>+</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>Numeric</para>
-                <para>String</para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para>Numeric</para> <para>String</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Add two numeric values</para> <para>Concatenate two
-                strings</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Add two numeric
+                values</para> <para>Concatenate two strings</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>1</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>-</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>-</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Subtract two numerous values</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Subtract two
+                numerous values</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>2</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>*</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>*</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Multiply two numeric values</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Multiply two
+                numeric values</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>2</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>/</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>/</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Divide the first operand by the second</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Divide the
+                first operand by the second</para></entry>
               </row>
             </tbody>
           </tgroup>
         </informaltable>
 
         <para>Notice that most of these arithmetic operators are only defined
-        for numeric primitive types like Integer. Except the +
-        operator which is a concatenation operator for String, they are not
-        applicable on String, Boolean nor collections</para>
+        for numeric primitive types like Integer. Except the + operator which
+        is a concatenation operator for String, they are not applicable on
+        String, Boolean nor collections</para>
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="1.4cm"/>
-            <colspec colname="c2" colwidth="2.5cm"/>
-            <colspec colname="c3" colwidth="3cm"/>
-            <colspec colname="c4" colwidth="8.1cm"/>
+            <colspec colname="c1" colwidth="1.4cm" />
+
+            <colspec colname="c2" colwidth="2.5cm" />
+
+            <colspec colname="c3" colwidth="3cm" />
+
+            <colspec colname="c4" colwidth="8.1cm" />
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Priority</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Operators</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Operand Types</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Operand
+                Types</para></entry>
 
-                <entry><?border 0.0007inch solid #000000?>
-                <para>Semantics</para></entry>
+                <entry><?border 0.0007inch solid #000000?><para>Semantics</para></entry>
               </row>
             </thead>
 
             <tbody>
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>3</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>==</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>==</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Primitives</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True, if op1 value's is the same that op2
-                value's</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True, if op1
+                value's is the same that op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>3</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>!=</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>!=</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Primitives</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op1 value's is different of op2
-                value's</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if op1
+                value's is different of op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>3</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>&lt;</literal> </para></entry>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>&lt;</literal> </para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op1value's is strictly smaller than op2
-                value's</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if
+                op1value's is strictly smaller than op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>3</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>&lt;=</literal> </para></entry>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>&lt;=</literal> </para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op1 value's is smaller or equals than op2
-                value's</para></entry>
+                <entry valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if op1
+                value's is smaller or equals than op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>3</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>&gt;</literal> </para></entry>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>&gt;</literal> </para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op1 value's is strictly greater than op2
-                value's</para></entry>
+                <entry valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if op1
+                value's is strictly greater than op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>3</para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>&gt;=</literal> </para></entry>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>&gt;=</literal> </para></entry>
 
-                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="middle"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Numeric</para></entry>
 
-                <entry valign="middle"><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op1 value's is greater or equals than op2
-                value's</para></entry>
+                <entry valign="middle"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if op1
+                value's is greater or equals than op2 value's</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -1473,84 +1442,76 @@ myCol1.add(50)
 
         <informaltable>
           <tgroup cols="4">
-            <colspec colname="c1" colwidth="1.4cm"/>
-            <colspec colname="c2" colwidth="2.5cm"/>
-            <colspec colname="c3" colwidth="3cm"/>
-            <colspec colname="c4" colwidth="8.1cm"/>
+            <colspec colname="c1" colwidth="1.4cm" />
+
+            <colspec colname="c2" colwidth="2.5cm" />
+
+            <colspec colname="c3" colwidth="3cm" />
+
+            <colspec colname="c4" colwidth="8.1cm" />
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Priority</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?>
                 <para>Operators</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>Operands Types</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>Operands
+                Types</para></entry>
 
-                <entry><?border 0.0007inch solid #000000?>
-                <para>Semantics</para></entry>
+                <entry><?border 0.0007inch solid #000000?><para>Semantics</para></entry>
               </row>
             </thead>
 
             <tbody>
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>4</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para> <literal>and
-                </literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>and </literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Boolean</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op1 and op2 are evaluated to true</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if op1 and
+                op2 are evaluated to true</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>4</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para>
-                <literal>or</literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>or</literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Boolean</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if one of the operators is evaluated to
-                true</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if one of
+                the operators is evaluated to true</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center" valign="bottom"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>4</para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?> <para> <literal>not
-                </literal> </para></entry>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                <para> <literal>not </literal> </para></entry>
 
-                <entry align="center"><?border-bottom 0.0007inch solid #000000?>
-                <?border-left 0.0007inch solid #000000?>
+                <entry align="center"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
                 <para>Boolean</para></entry>
 
-                <entry><?border-right 0.0007inch solid #000000?>
-                <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                <para>True if op is false.</para></entry>
+                <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                <?border-left 0.0007inch solid #000000?> <para>True if op is
+                false.</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -1653,7 +1614,7 @@ myCol1.add(50)
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis></programlisting>
 
           <note>
-            This is different of the 
+             This is different of the 
 
             <literal>return</literal>
 
@@ -1661,7 +1622,7 @@ myCol1.add(50)
 
             <literal>result</literal>
 
-             assignment.
+             assignment. 
           </note>
         </section>
 
@@ -1803,7 +1764,9 @@ myCol1.add(50)
 &nbsp;&nbsp;&nbsp;&nbsp;i := i + 1
 <emphasis role="strong">end</emphasis></programlisting>
 
-        <note>Unlike Java, there is no exit, break or continue function in Kermeta.</note>
+        <note>
+          Unlike Java, there is no exit, break or continue function in Kermeta.
+        </note>
       </section>
 
       <section>
@@ -1870,11 +1833,11 @@ myCol1.add(50)
         for implementing OCL-like functions.</para>
 
         <note>
-          Limitations of lambda expressions usage:An operation with a function as parameter : if you define an operation which has a function as a parameter ( ex: 
+           Limitations of lambda expressions usage:An operation with a function as parameter : if you define an operation which has a function as a parameter ( ex: 
 
           <literal>operation op( func : &lt;Integer-&gt;Object&gt;)</literal>
 
-           ), then you cannot put more parameters : only one parameter is allowed in such a case.
+           ), then you cannot put more parameters : only one parameter is allowed in such a case. 
         </note>
 
         <section>
@@ -1885,35 +1848,39 @@ myCol1.add(50)
 
           <orderedlist continuation="restarts">
             <listitem>
-              <para>Signature of an operation defined as a function:</para><programlisting><emphasis>// With one parameter</emphasis>
+              <para>Signature of an operation defined as a function:</para>
+
+              <programlisting><emphasis>// With one parameter</emphasis>
 <emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;TYPE-&gt;RETURN_TYPE&gt; )
 <emphasis>// With many parameters</emphasis>
 <emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;[TYPE_1, TYPE_2, ...]-&gt;RETURN_TYPE&gt; )</programlisting>
             </listitem>
           </orderedlist>
 
-          
-
           <orderedlist continuation="continues">
             <listitem>
-              <para>Call of a function:</para><programlisting>anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
+              <para>Call of a function:</para>
+
+              <programlisting>anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
 anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
             </listitem>
           </orderedlist>
 
-          
-
           <orderedlist continuation="continues">
             <listitem>
-              <para>Declaring and defining an "anonymous" function inside an operation body</para><programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
+              <para>Declaring and defining an "anonymous" function inside an
+              operation body</para>
 
-<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
+              <programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis
+                  role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
+
+<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis
+                  role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
             </listitem>
           </orderedlist>
 
-          
-
-          <para>In the following sections, you will find many examples of declarations, definitions, and uses of functions.</para>
+          <para>In the following sections, you will find many examples of
+          declarations, definitions, and uses of functions.</para>
         </section>
 
         <section>
@@ -2175,7 +2142,9 @@ a := A&lt;Integer&gt;.new
               role="strong">attribute</emphasis> x : <emphasis role="strong">set</emphasis> X[0..*] } 
 <emphasis role="strong">class</emphasis> X {}</programlisting>
 
-          <note>Composition notion also relates to containment notion. So, there are some restriction about valid  model. For example, in an association, only one end can be an attribute, otherwise this means that we have an association with a diamond on both end and we cannot say who is the container of the other.</note>
+          <note>
+            Composition notion also relates to containment notion. So, there are some restriction about valid model. For example, in an association, only one end can be an attribute, otherwise this means that we have an association with a diamond on both end and we cannot say who is the container of the other.
+          </note>
 
           <orderedlist continuation="restarts">
             <listitem>
@@ -2200,7 +2169,7 @@ a := A&lt;Integer&gt;.new
           is mutually the opposite property of the entity of type A.</para>
 
           <caution>
-            A property whose type is a DataType (i.e String, Boolean, Integer) cannot have an opposite!
+             A property whose type is a DataType (i.e String, Boolean, Integer) cannot have an opposite! 
           </caution>
 
           <para><emphasis role="strong">Example 1</emphasis>: definition of an
@@ -2237,9 +2206,7 @@ a := A&lt;Integer&gt;.new
 
             <mediaobject>
               <imageobject>
-                <imagedata 
-                           fileref="KerMeta-Manual_figures/properties.png"
-                            />
+                <imagedata fileref="KerMeta-Manual_figures/properties.png" />
               </imageobject>
             </mediaobject>
           </figure>
@@ -2248,8 +2215,8 @@ a := A&lt;Integer&gt;.new
           attributes and references, with multiplicities and opposites.</para>
 
           <programlisting><emphasis role="strong">package</emphasis> root;</programlisting>
-			
-			<programlisting>
+
+          <programlisting>
 <emphasis role="strong">class</emphasis> A1 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> b : B1[0..*] 
 }
@@ -2276,7 +2243,7 @@ a := A&lt;Integer&gt;.new
 <emphasis role="strong">class</emphasis> A4 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">reference</emphasis> a : A4[0..*]
 }</programlisting>
-          
+
           <programlisting>
 <emphasis role="strong">class</emphasis> A5 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> ab : A5[0..*]#aa
@@ -2311,19 +2278,19 @@ a := A&lt;Integer&gt;.new
 }</programlisting>
 
           <note>
-            For every case where the upper bound of a property is upper to 1, the type of the property is 
+             For every case where the upper bound of a property is upper to 1, the type of the property is 
 
             <literal>OrderedSet</literal>
 
-            . The reader will refer to the Language basics chapter 
+             . The reader will refer to the Language basics chapter 
 
             <link linkend="sec:collections">2.2.3</link>
 
-            , p.
+             , p. 
 
             <link linkend="sec:collections">20</link>
 
-             (except the bag type) to have the available types for a [m..n](n&gt;1) multiplicity property.
+             (except the bag type) to have the available types for a [m..n](n&gt;1) multiplicity property. 
           </note>
         </section>
 
@@ -2392,29 +2359,29 @@ a := A&lt;Integer&gt;.new
 
           <informaltable>
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="3.8cm"/>
-              <colspec colname="c2" colwidth="13.2cm"/>
+              <colspec colname="c1" colwidth="3.8cm" />
+
+              <colspec colname="c2" colwidth="13.2cm" />
 
               <thead>
                 <row>
-                  <entry><?border-top 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                  <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?>
                   <para>Access</para></entry>
 
-                  <entry><?border 0.0007inch solid #000000?> <para>Kermeta
+                  <entry><?border 0.0007inch solid #000000?><para>Kermeta
                   expression</para></entry>
                 </row>
               </thead>
 
               <tbody>
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Get the
-                  attribute of an instance</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Get the attribute of an instance</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a6 : A6 <emphasis
                         role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : OrderedSet&lt;B6&gt;
 <emphasis>// get the b attribute</emphasis>
@@ -2422,14 +2389,13 @@ b6 := a6.b</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Add an
-                  element to a property with multiplicity [m..n],
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Add an element to a property with multiplicity [m..n],
                   n&gt;1</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a6 : A6 init A6.new
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a6 : A6 init A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 init B6.new
 <emphasis>// add b6 to the attribute b of A.</emphasis> 
 <emphasis>// </emphasis><emphasis>Note : you don’t have to initialize b! done through A6.new</emphasis>
@@ -2437,25 +2403,22 @@ a6.b.add(b6)</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Remove an
-                  element from a property</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Remove an element from a property</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use "remove" method</emphasis>
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use "remove" method</emphasis>
 a6.b.removeAt(0)
 <emphasis>// Also valid : a6.b.remove(b6)</emphasis></programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Get the
-                  opposite of a property</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Get the opposite of a property</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a6 : A6 init A6.new
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a6 : A6 init A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 init B6.new
 a6.b.add(b6)
 <emphasis>// this assertion is true. Moreover, any instance in a6.b will// have a6 as their opposite since b is a collection</emphasis>
@@ -2463,13 +2426,12 @@ assert(b6.a == a6)</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Get the
-                  container of a property</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Get the container of a property</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a6 : A6 <emphasis
                         role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 <emphasis role="strong">init</emphasis> B6.new
 <emphasis>// add ab6 to the attribute "b"</emphasis>
@@ -2497,29 +2459,29 @@ assert(a6c.equals(a6))</programlisting></entry>
 
           <informaltable>
             <tgroup cols="2">
-              <colspec colname="c1" colwidth="3.8cm"/>
-              <colspec colname="c2" colwidth="13.2cm"/>
+              <colspec colname="c1" colwidth="3.8cm" />
+
+              <colspec colname="c2" colwidth="13.2cm" />
 
               <thead>
                 <row>
-                  <entry><?border-top 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+                  <entry><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?>
                   <para>Access</para></entry>
 
-                  <entry><?border 0.0007inch solid #000000?> <para>Kermeta
+                  <entry><?border 0.0007inch solid #000000?><para>Kermeta
                   expression</para></entry>
                 </row>
               </thead>
 
               <tbody>
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Get the
-                  attribute of an instance</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Get the attribute of an instance</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a5 : A5 <emphasis
                         role="strong">init</emphasis> A5.new
 <emphasis role="strong">var</emphasis> b5 : B5
 <emphasis>// get the b attribute</emphasis>
@@ -2527,36 +2489,33 @@ b5 := a5.b</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Set a
-                  property (with multiplicity [m..1], m≤1)</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Set a property (with multiplicity [m..1],
+                  m≤1)</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a5 : A5 init A5.new
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a5 : A5 init A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 init B5.new
 <emphasis>// set b5 to the attribute b of A.</emphasis>
 a5.b := b5</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Unset a
-                  property</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Unset a property</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting>a5.b := void</programlisting></entry>
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting>a5.b := void</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Get the
-                  opposite of a property</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Get the opposite of a property</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a5 : A5 init A5.new
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a5 : A5 init A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 init B5.new
 a5.b := b5
 <emphasis>// this assertion is true.</emphasis>
@@ -2564,13 +2523,12 @@ assert(b5.a == a5)</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry><?border-bottom 0.0007inch solid #000000?>
-                  <?border-left 0.0007inch solid #000000?> <para>Get the
-                  container of a property</para></entry>
+                  <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+                  <para>Get the container of a property</para></entry>
 
-                  <entry><?border-right 0.0007inch solid #000000?>
-                  <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-                  <programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis
+                  <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+                  <?border-left 0.0007inch solid #000000?> <programlisting><emphasis
+                        role="strong">var</emphasis> a5 : A5 <emphasis
                         role="strong">init</emphasis> A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 <emphasis role="strong">init</emphasis> B5.new
 <emphasis>// add b5 to the attribute "b"</emphasis>
@@ -2631,7 +2589,7 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
               role="strong">class</emphasis> B {<emphasis role="strong"> reference</emphasis> c2 : String }aA.c1 := "Robert"aB.c2 := aA.c1 // aB.c2 == aA.c1 == "Robert"</programlisting>
 
           <note>
-            The assignment into a 
+             The assignment into a 
 
             <literal>variable</literal>
 
@@ -2639,7 +2597,7 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
 
             <literal>reference</literal>
 
-             is not a problem because it doesn't change the owner of the assigned object.
+             is not a problem because it doesn't change the owner of the assigned object. 
           </note>
         </section>
 
@@ -2699,7 +2657,7 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
           shallow clone is performed for each reference.</para>
 
           <caution>
-            Reminder : be very careful with the use of the assignment operator on object. Most of the time, you need to use the "clone" feature. Using assignment on attributes break the previous link between objects. So, In the previous example, p1 has no more name after the assignment !There is one exception to this behavior : when the type of attributes are DataType, i.e, in Kermeta, String, Integer, Boolean, the assignment behaves as if those entities were defined as references.
+             Reminder : be very careful with the use of the assignment operator on object. Most of the time, you need to use the "clone" feature. Using assignment on attributes break the previous link between objects. So, In the previous example, p1 has no more name after the assignment !There is one exception to this behavior : when the type of attributes are DataType, i.e, in Kermeta, String, Integer, Boolean, the assignment behaves as if those entities were defined as references. 
           </caution>
         </section>
 
@@ -2716,11 +2674,11 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
           <section>
             <title>isSameAs method</title>
 
-            <para>We said in introduction that the operator
-            <emphasis>==</emphasis> is mapped to <emphasis>isSameAs</emphasis>
-            method. This method compares two references. If they are the same,
-            <emphasis>isSameAs</emphasis> returns true (false otherwise).
-            Then, both pieces of code below behaves EXACTLY the same.</para>
+            <para>The operator <emphasis>==</emphasis> is mapped to
+            <emphasis>isSameAs</emphasis> method. This method compares two
+            references. If they are the same, <emphasis>isSameAs</emphasis>
+            returns true (false otherwise). Then, both pieces of code below
+            behaves EXACTLY the same.</para>
 
             <programlisting>// assuming class A has been declared
 var a1 : A init A.new
@@ -2812,7 +2770,7 @@ class NewPrimitiveType {
               <listitem>
                 <para>Boolean</para>
               </listitem>
-   
+
               <listitem>
                 <para>Integer</para>
               </listitem>
@@ -2849,6 +2807,64 @@ assert (i3 == i4)</programlisting>
   // instead of comparing references, let us compare the values !
   result := self.equals(element)
 end</programlisting>
+          </section>
+
+          <section>
+            <title>Collection comparison</title>
+
+            <para>Method equals exists for the collections. The generic
+            behavior is the following : for two collections a and b, if all
+            elements of a are contained in b and vice-versa, then it returns
+            true, false otherwise. This behavior is little bit different for
+            ordered collection which takes into account the order of elements.
+            Have a look to the following pieces of code : </para>
+
+            <programlisting>operation test_try1() : Void is do
+   var os : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
+   os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+   var os2 : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
+   os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5) os2.add(6)
+
+   assert (os.equals(os2) )
+end
+
+operation test_try2() : Void is do
+   var os : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
+   os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+   var os2 : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
+   os2.add(1) os2.add(2) os2.add(3) os2.add(4) os2.add(5)
+
+   assert ( not os.equals(os2) )
+end
+
+/**
+ * An ordered set takes care about the order.
+ */
+operation test_try3() : Void is do
+   var os : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
+   os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+   var os2 : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
+   os2.add(4) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os2.add(2)
+
+   assert ( not os.equals(os2) )
+end
+
+/**
+ * A set does not care about the order.
+ */
+operation test_try4() : Void is do
+   var os : Set&lt;Integer&gt; init Set&lt;Integer&gt;.new
+   os.add(1) os.add(2) os.add(3) os.add(4) os.add(5) os.add(6)
+
+   var os2 : Set&lt;Integer&gt; init Set&lt;Integer&gt;.new
+   os2.add(4) os2.add(6) os2.add(3) os2.add(1) os2.add(5) os2.add(2)
+
+   assert ( os.equals(os2) )
+end
+</programlisting>
           </section>
         </section>
       </section>
@@ -2906,9 +2922,7 @@ end</programlisting>
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/library.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/library.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -2958,9 +2972,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/person.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/person.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -2998,9 +3010,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/KMM_multiple_inheritance.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/KMM_multiple_inheritance.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3017,7 +3027,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
         you will have to use the <literal>method</literal> keyword.</para>
 
         <note>
-          In the sample,Person and adopt are abstract, but this has no influence on the operation-method keywords rule, it would have been the same even if Person was not abstract or if adopt had a behavior in this class.
+           In the sample,Person and adopt are abstract, but this has no influence on the operation-method keywords rule, it would have been the same even if Person was not abstract or if adopt had a behavior in this class. 
         </note>
 
         <programlisting><emphasis role="strong">abstract class</emphasis> Person
@@ -3192,11 +3202,11 @@ class Female <emphasis role="strong">inherits</emphasis> Person
         conterpart in kermeta metamodel.</para>
 
         <note>
-          The using statement is different from the definition of a local datatype with an alias. (See section 
+           The using statement is different from the definition of a local datatype with an alias. (See section 
 
           <link linkend="section_alias">2.2.4</link>
 
-          )
+           ) 
         </note>
       </section>
     </section>
@@ -3283,7 +3293,7 @@ and op.name.indexOf("All")==-1}
 }</programlisting>
 
       <caution>
-        You cannot use "self" inside a dynamic expression
+         You cannot use "self" inside a dynamic expression 
       </caution>
     </section>
 
@@ -3299,15 +3309,13 @@ and op.name.indexOf("All")==-1}
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-Manual_figures/cs_ecore.gif"
-                        />
+            <imagedata fileref="KerMeta-Manual_figures/cs_ecore.gif" />
           </imageobject>
         </mediaobject>
       </figure>
 
       <note>
-        Loading and saving model has it own tutorial. It provides more information in a step by step approach. See the EMF tutorial at 
+         Loading and saving model has it own tutorial. It provides more information in a step by step approach. See the EMF tutorial at 
 
         <ulink type=""
         url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/</ulink>
@@ -3490,7 +3498,7 @@ and op.name.indexOf("All")==-1}
           role="strong">return</emphasis> result; }</programlisting>
 
       <tip>
-        This method is used to implement Kermeta framework. You'll find much more code samples of extern call in its sources.
+         This method is used to implement Kermeta framework. You'll find much more code samples of extern call in its sources. 
       </tip>
     </section>
 
@@ -3510,7 +3518,8 @@ and op.name.indexOf("All")==-1}
           a simple equality checking or a lambda expression. The Kermeta
           interpreter evaluates the body content like a boolean result</para>
 
-          <para>The "pre condition" are declared just before the "is" of the operation body</para>
+          <para>The "pre condition" are declared just before the "is" of the
+          operation body</para>
 
           <programlisting><emphasis role="strong">operation</emphasis> opName(c : String) : String
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -3532,7 +3541,7 @@ and op.name.indexOf("All")==-1}
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis></programlisting>
 
           <tip>
-            If the body contains only one expression, the block declaration "do ... end" is not mandatory. If your block contains several instructions, the latest one will be evaluated as a boolean expression.
+             If the body contains only one expression, the block declaration "do ... end" is not mandatory. If your block contains several instructions, the latest one will be evaluated as a boolean expression. 
           </tip>
         </section>
 
@@ -3562,7 +3571,7 @@ and op.name.indexOf("All")==-1}
 }</programlisting>
 
           <tip>
-            If the body contains only one instruction, the block declaration "do ... end" is not mandatory.
+             If the body contains only one instruction, the block declaration "do ... end" is not mandatory. 
           </tip>
 
           <programlisting><emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
@@ -3655,7 +3664,7 @@ and op.name.indexOf("All")==-1}
     too.</para>
 
     <note>
-      All the code samples in this section are for illustration of the given concepts.
+       All the code samples in this section are for illustration of the given concepts. 
     </note>
 
     <section>
@@ -3669,7 +3678,7 @@ and op.name.indexOf("All")==-1}
       Kermeta program as a model, typically to transform it.</para>
 
       <warning>
-        You should not try to execute operations on kermeta models you've just dynamically created unless you froze it. This is a feature which has not been completly tested.
+         You should not try to execute operations on kermeta models you've just dynamically created unless you froze it. This is a feature which has not been completly tested. 
       </warning>
 
       <para>Another typical way to access to a Kermeta model and Kermeta
@@ -3693,9 +3702,7 @@ and op.name.indexOf("All")==-1}
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-Manual_figures/kermeta_structure_package.png"
-                        />
+            <imagedata fileref="KerMeta-Manual_figures/kermeta_structure_package.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -3720,9 +3727,7 @@ and op.name.indexOf("All")==-1}
 
         <mediaobject>
           <imageobject>
-            <imagedata 
-                       fileref="KerMeta-Manual_figures/kermeta_behavior_package.png"
-                        />
+            <imagedata fileref="KerMeta-Manual_figures/kermeta_behavior_package.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -3742,9 +3747,7 @@ and op.name.indexOf("All")==-1}
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_control_struct.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_control_struct.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3760,9 +3763,7 @@ and op.name.indexOf("All")==-1}
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_var_expressions.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_var_expressions.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3778,9 +3779,7 @@ and op.name.indexOf("All")==-1}
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_call_expressions.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_call_expressions.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3900,9 +3899,7 @@ myvar := callvar </programlisting>
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_assign_expressions.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_assign_expressions.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3951,9 +3948,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
           <mediaobject>
             <imageobject>
-              <imagedata 
-                         fileref="KerMeta-Manual_figures/kermeta_lambda_expressions.png"
-                          />
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_lambda_expressions.png" />
             </imageobject>
           </mediaobject>
         </figure>
@@ -3970,109 +3965,133 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
     functionalities for metamodel engineering.</para>
 
     <tip>
-      When you write 
+       When you write 
 
       <literal>require kermeta</literal>
 
-       at the head of your file, you are importing the file framework.km located in the Kermeta plugin.
+       at the head of your file, you are importing the file framework.km located in the Kermeta plugin. 
     </tip>
 
     <para>Currently, it provides the following packages :</para>
-    <variablelist><title>Packages in Kermeta framework</title>
-		<varlistentry><term>
-	<emphasis role="strong"><filename role="strong">kermeta::interpreter</filename></emphasis>
-	</term>
-			<listitem>
-				<para>
-				This package defines some classes related to
-        Kermeta interpreter and also to Kermeta surface syntax. Some uses of
-        this package are illustrated in section <link
-        linkend="dynamic_expression">4.1</link>.
-				</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term>
-	<emphasis role="strong"><filename>kermeta::persistence</filename></emphasis>
-	</term>
-			<listitem>
-				<para>
-				This package defines the notion required to
-        serialize and deserialize models. This is illustrated in section <link
-        linkend="Loading_Models_with_kermeta">4.2</link> and in the EMF
-        tutorial document ( <ulink type=""
-        url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/</ulink>
-        )
-				</para>
-			</listitem>
-		</varlistentry>
-		
-		
-		<varlistentry><term><filename>kermeta::kunit</filename></term>
-			<listitem>
-				<para>This is a basic support for unitary tests (like Junit but for Kermeta).</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term><filename>kermeta::language::structure</filename></term>
-			<listitem>
-				<para>It contains the classes of Kermeta structure.
-        Note that it slightly differs from the kermeta_java.ecore due to an
-        inheritance to the classes in Kermeta::reflexion. However, it proposes
-        the very same functionalities.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term><filename>kermeta::language::behavior</filename></term>
-			<listitem>
-				<para>It contains the classes for the behavior of
-        Kermeta.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term><filename>kermeta::exceptions</filename></term>
-			<listitem>
-				<para>It defines various exceptions that you can use
-        in Kermeta. Inheriting from kermeta::exceptions::Exception allows to
-        give more information to the end user because it will also provide a
-        stack trace (which would not be available otherwise).</para>
-			</listitem>
-		</varlistentry>
-		
-		<varlistentry><term><filename>kermeta::io</filename></term>
-			<listitem>
-				<para>This package provides basic support for
-        input/output with Kermeta. It is voluntary minimal because that not
-        the main role of Kermeta to provide such primitives. In the future,
-        this package may even disappear and be replaced by the ability to
-        directly call Java libraries.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term><filename>kermeta::reflection</filename></term>
-			<listitem>
-				<para>This package contains all the abstract classes
-        needed for the reflexivity of Kermeta. The concrete implementation are
-        in kermeta::standard or kermeta::structure.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term><filename>kermeta::utils</filename></term>
-			<listitem>
-				<para>This package defines various tool classes that
-        cannot be part of the core of the language, but are important enough
-        to be part of the framework.</para>
-			</listitem>
-		</varlistentry>
-		<varlistentry><term><filename>kermeta::standard</filename></term>
-			<listitem>
-				<para>This package defines all the basic objects
-        needed for a typical Kermeta application. For example, it defines data
-        types, collections, etc.</para>
-			</listitem>
-		</varlistentry>
-	</variablelist>
 
+    <variablelist>
+      <title>Packages in Kermeta framework</title>
+
+      <varlistentry>
+        <term><emphasis role="strong"><filename
+        role="strong">kermeta::interpreter</filename></emphasis></term>
+
+        <listitem>
+          <para>This package defines some classes related to Kermeta
+          interpreter and also to Kermeta surface syntax. Some uses of this
+          package are illustrated in section <link
+          linkend="dynamic_expression">4.1</link>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis
+        role="strong"><filename>kermeta::persistence</filename></emphasis></term>
+
+        <listitem>
+          <para>This package defines the notion required to serialize and
+          deserialize models. This is illustrated in section <link
+          linkend="Loading_Models_with_kermeta">4.2</link> and in the EMF
+          tutorial document ( <ulink type=""
+          url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/</ulink>
+          )</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::kunit</filename></term>
+
+        <listitem>
+          <para>This is a basic support for unitary tests (like Junit but for
+          Kermeta).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::language::structure</filename></term>
+
+        <listitem>
+          <para>It contains the classes of Kermeta structure. Note that it
+          slightly differs from the kermeta_java.ecore due to an inheritance
+          to the classes in Kermeta::reflexion. However, it proposes the very
+          same functionalities.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::language::behavior</filename></term>
+
+        <listitem>
+          <para>It contains the classes for the behavior of Kermeta.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::exceptions</filename></term>
+
+        <listitem>
+          <para>It defines various exceptions that you can use in Kermeta.
+          Inheriting from kermeta::exceptions::Exception allows to give more
+          information to the end user because it will also provide a stack
+          trace (which would not be available otherwise).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::io</filename></term>
+
+        <listitem>
+          <para>This package provides basic support for input/output with
+          Kermeta. It is voluntary minimal because that not the main role of
+          Kermeta to provide such primitives. In the future, this package may
+          even disappear and be replaced by the ability to directly call Java
+          libraries.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::reflection</filename></term>
+
+        <listitem>
+          <para>This package contains all the abstract classes needed for the
+          reflexivity of Kermeta. The concrete implementation are in
+          kermeta::standard or kermeta::structure.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::utils</filename></term>
+
+        <listitem>
+          <para>This package defines various tool classes that cannot be part
+          of the core of the language, but are important enough to be part of
+          the framework.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><filename>kermeta::standard</filename></term>
+
+        <listitem>
+          <para>This package defines all the basic objects needed for a
+          typical Kermeta application. For example, it defines data types,
+          collections, etc.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
 
     <note>
-      For more details about the content of these packages, please look at the generated documentation available on line : 
+       For more details about the content of these packages, please look at the generated documentation available on line : 
 
       <ulink type=""
       url="http://www.kermeta.org/docs/KermetaFramework/framework.km.html">http://www.kermeta.org/docs/KermetaFramework/framework.km.html</ulink>
+
+       
     </note>
   </chapter>
 
@@ -4082,477 +4101,476 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
     <para>The following keywords are used by Kermeta textual syntax.</para>
 
     <note>
-      If you want to name some class or property using those names, you'll need to escape them using the ~ (tilda).Ex: class ~class {}
+       If you want to name some class or property using those names, you'll need to escape them using the ~ (tilda).Ex: class ~class {} 
     </note>
 
     <informaltable>
       <tgroup cols="2">
-        <colspec colname="c1" colwidth="8.5cm"/>
-        <colspec colname="c2" colwidth="8.5cm"/>
+        <colspec colname="c1" colwidth="8.5cm" />
+
+        <colspec colname="c2" colwidth="8.5cm" />
 
         <thead>
           <row>
-            <entry align="left"><?border-top 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry align="left"><?border-top 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?>
             <para>Keyword</para></entry>
 
-            <entry align="left"><?border 0.0007inch solid #000000?>
-            <para>Usage</para></entry>
+            <entry align="left"><?border 0.0007inch solid #000000?><para>Usage</para></entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>@pre</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Represents self before the call to this operation in the
-            scope of a post condition</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Represents self
+            before the call to this operation in the scope of a post
+            condition</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>abstract</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Modifier for class or operation</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Modifier for class
+            or operation</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>alias</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Defintion of a
             primitive type</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>and</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Boolean
             expression</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>attribute</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Definition of an
             attribute</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>bag</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>See <link linkend="array_and_collection">2.2.3</link> about
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>See <link
+            linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>class</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Defintion of a class</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Defintion of a
+            class</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>do</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Beginning of a block</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Beginning of a
+            block</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>else</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Else part of a conditional instruction</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Else part of a
+            conditional instruction</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>end</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>End of a block</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>End of a
+            block</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>enumeration</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Definition of an
             enumeration</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>extern</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Call of a java static operation</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Call of a java
+            static operation</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>false</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Boolean
             literal</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>from</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Loop instruction</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Loop
+            instruction</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>function</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declares a local function</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declares a local
+            function</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>getter</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declaration of a
             property getter</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>if</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Conditional instruction</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Conditional
+            instruction</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>inherits</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declartion of the super classes of the class</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declartion of the
+            super classes of the class</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>init</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Initialization of a
             variable</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>is</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?></entry>
           </row>
 
           <row>
-            <entry align="left"><?border-bottom 0.0007inch solid #000000?>
-            <?border-left 0.0007inch solid #000000?> <para>inv</para></entry>
+            <entry align="left"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+            <para>inv</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declaration of an invariant</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declaration of an
+            invariant</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>loop</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Loop instruction</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Loop
+            instruction</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>method</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Redefinition of an operation</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Redefinition of an
+            operation</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>not</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Boolean
             expression</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>operation</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declaration of an operation</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declaration of an
+            operation</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>or</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Boolean
             expression</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>oset</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>See <link linkend="array_and_collection">2.2.3</link> about
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>See <link
+            linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>package</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declaration of
             package</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>post</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declaration of a
             postcondition</para></entry>
           </row>
 
           <row>
-            <entry align="left"><?border-bottom 0.0007inch solid #000000?>
-            <?border-left 0.0007inch solid #000000?> <para>pre</para></entry>
+            <entry align="left"><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
+            <para>pre</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declaration of a precondition</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declaration of a
+            precondition</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>property</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declarion of a
             derived property</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>raise</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Throw an exception</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Throw an
+            exception</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>raises</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declares the
             exception that an operation can throw</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>readonly</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Modifier for
             properties</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>reference</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declaration of a reference</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declaration of a
+            reference</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>require</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Declaration of a required file</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Declaration of a
+            required file</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>rescue</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Catch an excetion</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Catch an
+            excetion</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>setter</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declaration of
             property setter</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>self</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Special varaible representing this instances</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Special varaible
+            representing this instances</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>set </para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>See <link linkend="array_and_collection">2.2.3</link> about
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>See <link
+            linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>seq</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>See <link linkend="array_and_collection">2.2.3</link> about
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>See <link
+            linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>super </para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Call to the super operation</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Call to the super
+            operation</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>then</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Then part of a conditional instruction</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Then part of a
+            conditional instruction</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>true</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Boolean literal</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Boolean
+            literal</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>until</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Loop condition</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Loop
+            condition</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>using</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Shortcut used to
             avoid to write the full qualified name</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>value</para></entry>
 
-            <entry align="left"><?border-right 0.0007inch solid #000000?>
-            <?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
-            <para>Special variable used in getter and setter to represent the
-            actual value of the property</para></entry>
+            <entry align="left"><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
+            <?border-left 0.0007inch solid #000000?> <para>Special variable
+            used in getter and setter to represent the actual value of the
+            property</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>var</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Declaration of a
             variable</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>void</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Void
             literal</para></entry>
           </row>
 
           <row>
-            <entry><?border-bottom 0.0007inch solid #000000?> <?border-left 0.0007inch solid #000000?>
+            <entry><?border-bottom 0.0007inch solid #000000?><?border-left 0.0007inch solid #000000?>
             <para>result</para></entry>
 
-            <entry><?border-right 0.0007inch solid #000000?> <?border-bottom 0.0007inch solid #000000?>
+            <entry><?border-right 0.0007inch solid #000000?><?border-bottom 0.0007inch solid #000000?>
             <?border-left 0.0007inch solid #000000?> <para>Special variable
             used for the return value of an operation</para></entry>
           </row>
