@@ -41,33 +41,59 @@
          </view>
       </perspectiveExtension>
    </extension>
-   <extension
+   
+   <extension point="org.eclipse.core.runtime.contentTypes">
+		<content-type
+        base-type="org.eclipse.core.runtime.xml"
+        describer="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.XMLContentDescriber"
+        file-extensions="km"
+        id="myxmlcontenttypeid"
+        name="myxmlcontenttypeid"
+        priority="high">
+		</content-type>
+   </extension>
+   <extension point="org.eclipse.core.runtime.contentTypes">
+		<file-association
+        content-type="org.eclipse.core.runtime.xml"
+        file-extensions="xmi"/>
+		
+   </extension>
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+		<file-association
+        content-type="org.eclipse.core.runtime.xml"
+        file-extensions="xmi"/>
+		
+   </extension>
+<!--   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="true"
             id="fr.irisa.triskell.kermeta.contribution13"
             nameFilter="*.*"
             objectClass="org.eclipse.core.resources.IFile">
+            -->
          <!--<menu
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
 	         label="KerMeta"
 	         path="additions">
       		<separator name="kermetagroup1"/>
 		</menu>-->
-        <action
+<!--        <action
                enablesFor="1"
                label="Open with EMF touchgraph"
                icon="icons/kermeta_touchgraph.png"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
                class="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.OpenWithEMFTouchGraphAction"
                id="fr.irisa.triskell.kermeta.touchgraph.openemftouchgraph"/>
+-->               
       <!--  <filter
               name="iscompatible"
               value="true"/>
        -->
-      </objectContribution>
+<!--      </objectContribution>
    </extension>
-   <extension
+   -->
+ <!--  <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="true"
@@ -89,13 +115,5 @@
               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
        
       </objectContribution>
-   </extension>
-   <extension
-         point="org.eclipse.core.runtime.adapters">
-      <factory
-            adaptableType="org.eclipse.core.resources.IFile"
-            class="fr.irisa.triskell.kermeta.touchnavigator.FileAdapterFactory">
-         <adapter type="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.EMFLoadableFilter"/>
-      </factory>
-   </extension>
+   </extension>-->
 </plugin>
