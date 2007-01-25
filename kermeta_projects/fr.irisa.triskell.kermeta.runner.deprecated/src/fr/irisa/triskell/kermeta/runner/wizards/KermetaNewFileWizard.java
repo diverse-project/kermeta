@@ -1,7 +1,7 @@
-/* $Id: KermetaNewFileWizard.java,v 1.10 2006-12-27 14:38:41 ftanguy Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.11 2007-01-25 13:52:19 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 19, 2005
@@ -11,32 +11,39 @@
  */
 package fr.irisa.triskell.kermeta.runner.wizards;
 
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.INewWizard;
-import org.eclipse.ui.IPerspectiveDescriptor;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.WorkbenchException;
-import org.eclipse.core.runtime.*;
-import org.eclipse.core.resources.*;
-import org.eclipse.core.runtime.CoreException;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.eclipse.ui.*;
-//import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IWorkbenchWizard;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.dialogs.DialogUtil;
-//import org.eclipse.ui.internal.dialogs.NewWizard;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 /**
@@ -263,7 +270,8 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		Date d = new Date(System.currentTimeMillis());
 		
 	    String template_string = 
-	    	"/* $Id: KermetaNewFileWizard.java,v 1.10 2006-12-27 14:38:41 ftanguy Exp $\n"+ 
+	    	"/* $Id: " + 
+	    	"$\n"+ 
 	    	" * Creation date: " + DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(d)+ "\n"+
 	    	" * License:\n"+
 	    	" * Copyright:\n"+
