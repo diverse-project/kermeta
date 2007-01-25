@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.6 2006-10-25 08:30:54 dvojtise Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.7 2007-01-25 08:32:36 dvojtise Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -23,6 +23,8 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.topcased.modeler.editor.Modeler;
+
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
@@ -137,7 +139,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
             }
         }
         else if(message.getAstNode() != null) {
-            KermetaASTNode astn = message.getAstNode();
+            ASTNode astn = message.getAstNode();
             offset = astn.getRangeStart();
             length = astn.getRangeLength();
         }
