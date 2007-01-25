@@ -267,7 +267,7 @@
                icon="icons/newkermetafile.png"
                class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
                finalPerspective="kermetaPerspective"
-               category="fr.irisa.triskell.kermeta.KermetaCategory"
+               category="fr.irisa.triskell.kermeta.KermetaWizard"
                descriptionImage="icons/kermeta.png"
                project="true"
                preferredPerspectives="org.eclipse.ui.resourcePerspective"
