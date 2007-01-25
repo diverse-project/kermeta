@@ -76,7 +76,7 @@
 			</propertySection>
 		</propertySections>
 	</extension>
-	
+	<!--
 	   <extension
          point="org.eclipse.ui.popupMenus">
       <viewerContribution
@@ -94,5 +94,5 @@
                />
       </viewerContribution>
    </extension>
-	
+	-->
 </plugin>
