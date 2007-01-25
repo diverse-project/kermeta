@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.6 2006-10-27 08:49:59 dvojtise Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.7 2007-01-25 13:41:34 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -20,15 +20,17 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -209,34 +211,40 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	{
 		StringBuffer result = new StringBuffer();
 		
-		result.append("<body>"); // +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
+		result.append("\n<body>\n"); // +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
 
-		result.append("<div id=\"body\">");
+		result.append("<div id=\"body\">\n");
 		result.append("<div id=\"header\">&nbsp;");
-		result.append("</div>");
-		result.append("<div id=\"content\">");
-		result.append("<h1 style=\"margin:0;\">Kermeta API Documentation</h1>");
-		result.append("<!-- body -->");
-		result.append("<div id='modules'>");
-		result.append("  <!-- packages-snip -->");
+		result.append("</div>\n");
+		result.append("<div id=\"content\">\n");
+		result.append("<table width=100%><tr><td><h1 style=\"margin:0;\">Kermeta API Documentation</h1></td>\n");
+		Locale locale = Locale.ENGLISH;
+		Date d = new Date();
+		DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
+		result.append("<td align=right valign=bottom >Generation date: ");
+		result.append(dateFormat.format(d));
+		result.append("</td></tr></table> ");
+		result.append("<!-- body -->\n");
+		result.append("<div id='modules'>\n");
+		result.append("  <!-- packages-snip -->\n");
 		result.append(packages);
-		result.append("  <!-- packages-snip -->");
-		result.append("  <div id='descriptions'>");
-		result.append("  <!-- descriptions-snip -->");
+		result.append("  <!-- packages-snip -->\n");
+		result.append("  <div id='descriptions'>\n");
+		result.append("  <!-- descriptions-snip -->\n");
 		result.append(descriptions);
-		result.append("  <!-- descriptions-snip -->");
-		result.append("  </div>");
-		result.append("</div>");
-		result.append("<div id='api'><!-- main element will be displayed here --></div>");
-		result.append("<div id='hidden'>");
-		result.append("<!-- hidden-snip -->");
+		result.append("  <!-- descriptions-snip -->\n");
+		result.append("  </div>\n");
+		result.append("</div>\n");
+		result.append("<div id='api'><!-- main element will be displayed here --></div>\n");
+		result.append("<div id='hidden'>\n");
+		result.append("<!-- hidden-snip -->\n");
 		result.append(content);
-		result.append("</div>");
-		result.append("<!-- hidden-snip -->");
-		result.append("<!-- hidden nodes will be moved here -->");
-		result.append("</div>"); // close <div id=body>
-		result.append("</div>");
-		result.append("</body>");
+		result.append("</div>\n");
+		result.append("<!-- hidden-snip -->\n");
+		result.append("<!-- hidden nodes will be moved here -->\n");
+		result.append("</div>\n"); // close <div id=body>
+		result.append("</div>\n");
+		result.append("</body>\n");
 		result.append("</html>");
 		return result.toString();
 	}
