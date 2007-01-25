@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.35 2007-01-16 09:17:21 ftanguy Exp $
+/* $Id: KM2EcorePass1.java,v 1.36 2007-01-25 15:26:59 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -46,6 +46,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
@@ -82,11 +83,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	
 	protected KM2KMTPrettyPrinter prettyPrinter;
 	
-	
 	/** The resource to populate */
 	protected Resource ecoreResource = null;
 	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> km2ecoremapping;
-	
+
 	/**
 	 * @param resource : the resource to populate
 	 * @param mapping : Hastable containing the newly created object mapping
@@ -99,7 +99,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// annotation since ecore metamodel does not contains a behavior.
 		prettyPrinter = new KM2KMTPrettyPrinter( ecoreExporter.kermetaUnit.getUri() );
 	}
-	
+
+
 	/**
 	 * Exports the given package into an ecore ressource
 	 * @param root_package
@@ -120,7 +121,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		ecoreResource.getContents().add(epackage);
 		return epackage;
 	}
-	
+
+
 	/**
 	 * Convert kermeta Package into ecore EPackage, and the nested packages of given
 	 * package as well.
@@ -136,6 +138,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
 		newEPackage.setName( KMTHelper.getUnescapedIdentifier(current_name) );
+		
+		// Add the created EPackage to km2ecoremapping
+		km2ecoremapping.put(node,newEPackage);
 		
 		if (ecoreExporter.tracer != null)
 		    ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
@@ -165,11 +170,15 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		// Visit the tags of package and convert them into EAnnotations
 		setTagAnnotations(node, newEPackage);
+		
 		// Add the created EPackage to km2ecoremapping
-		km2ecoremapping.put(node,newEPackage);
+		//km2ecoremapping.put(node,newEPackage);
+		
 		loggerTabs.decrement();
 		return newEPackage;
 	}
+
+
 	/**
 	 * Convert model type definitions into EPackages
 	 * @param node
@@ -213,6 +222,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		return newEPackage;
 	}
 	
+
 	/** 
 	 * Converts a kermeta ClassDefinition into EClass
 	 */
@@ -297,6 +307,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		return newEClass;
 	}
 	
+
 	/**
 	 * Convert Enumeration into EEnumeration.
 	 * 
@@ -322,6 +333,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		return newEEnum;
 	}
 	
+
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitEnumerationLiteral(fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral)
 	 */
@@ -462,12 +474,24 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			else
 				throw new KM2ECoreConversionException("A tag in '"+node.getName() + "' could not be resolved");				
 		}
+
+		// In case type of the parameter is a TypeVariable, create the TypeVariable alias
+		// to handle the parameter type in the Ecore file
+		if(node.getType() instanceof TypeVariable) {
+			// TypeVariable alias is created only once for all properties/parameters
+			// that have a TypeVariable as type
+			if(ecoreExporter.typeVariableAlias == null) {
+				initTypeVariableAlias((Package) node.eContainer().eContainer());
+			}
+		}
+
 		setTagAnnotations(node, newEOperation);
 		km2ecoremapping.put(node,newEOperation);
 		loggerTabs.decrement();
 		return newEOperation;
 	}
 
+	
 	/**
 	 * Convert Parameter into EParameter
 	 */
@@ -484,12 +508,23 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEParameter.setUpperBound(node.getUpper());
 		newEParameter.setOrdered(node.isIsOrdered());
 		newEParameter.setUnique(node.isIsUnique());
+
+		// In case type of the parameter is a TypeVariable, create the TypeVariable alias
+		// to handle the parameter type in the Ecore file
+		if(node.getType() instanceof TypeVariable) {
+			// TypeVariable alias is created only once for all properties/parameters
+			// that have a TypeVariable as type
+			if(ecoreExporter.typeVariableAlias == null) {
+				initTypeVariableAlias((Package) node.eContainer().eContainer().eContainer());
+			}
+		}
 		
 		km2ecoremapping.put(node,newEParameter);
 		loggerTabs.decrement();
 		return newEParameter;
 	}
 	
+
 	/**
 	 * Convert Property into an EStructuralFeature. More specifically, 
 	 * if the Propety type is a primitive type, the ecore converted element will
@@ -560,12 +595,23 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// newEStructuralFeature.setDefaultValue() -> no default value
 		setTagAnnotations(node, newEStructuralFeature);
 		
+		// In case type of the property is a TypeVariable, create the TypeVariable alias
+		// to handle the property type in the Ecore file
+		if(node.getType() instanceof TypeVariable) {
+			// TypeVariable alias is created only once for all properties/parameters
+			// that have a TypeVariable as type
+			if(ecoreExporter.typeVariableAlias == null) {
+				initTypeVariableAlias((Package) node.eContainer().eContainer());
+			}
+		}
+		
 		km2ecoremapping.put(node,newEStructuralFeature);
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
 
-     /**
+
+	/**
      * Tag is a special model element that we should have
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.Tag)
      */
@@ -634,6 +680,19 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 					null);
 			
 		}
-		
+	}
+
+
+	/**
+	 * This method allocates and initializes the TypeVariableAlias datatype in order to
+	 * represent the type of properties/parameters that have a TypeVariable as type.
+	 * @param pack the package that will contain the newly allocated DataType 
+	 */
+	protected void initTypeVariableAlias(Package pack) {
+		ecoreExporter.typeVariableAlias = EcoreFactory.eINSTANCE.createEDataType(); 
+		ecoreExporter.typeVariableAlias.setName("_TypeVariableAlias_");
+		ecoreExporter.typeVariableAlias.setInstanceClassName("java.lang.Object");
+		EPackage crtEPack = (EPackage) km2ecoremapping.get(pack);
+		crtEPack.getEClassifiers().add(ecoreExporter.typeVariableAlias);
 	}
 }

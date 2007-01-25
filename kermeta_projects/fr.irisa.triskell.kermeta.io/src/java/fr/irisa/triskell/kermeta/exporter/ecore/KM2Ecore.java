@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.28 2006-12-08 13:11:31 ftanguy Exp $
+/* $Id: KM2Ecore.java,v 1.29 2007-01-25 15:26:59 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -89,6 +90,13 @@ public class KM2Ecore {
 	 * used to simplify the process in pass2
 	 */
 	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> km2ecoremapping =  new Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject>();
+
+	/** This datatype is used as an extra datatype to represent (in the built Ecore file)
+	 *  the type of elements (properties and parameters) that have a TypeVariable as type.
+	 *  Such properties/parameters will have this DataType as type, as well as an annotation
+	 *  that contains the name of the TypeVariable 
+	 */
+	protected EDataType typeVariableAlias = null;
 	
 	/** this map is used to determine the java object corresponding to a kermeta primitive type */ 
     public static Hashtable<String,String> primitive_types_mapping;
@@ -123,6 +131,8 @@ public class KM2Ecore {
     //  => Properties
     public final static String ANNOTATION_DERIVEDPROPERTY_GETTER = 	ANNOTATION + "derivedProp.getter";
     public final static String ANNOTATION_DERIVEDPROPERTY_SETTER = 	ANNOTATION + "derivedProp.setter";
+    //  => Properties, Parameters
+    public final static String ANNOTATION_TYPEVARIABLE = ANNOTATION + ".typeVariable";
     
     // Available static keys for the "kermeta" EAnnotation, along with the type of elements
     // these entries relate to:

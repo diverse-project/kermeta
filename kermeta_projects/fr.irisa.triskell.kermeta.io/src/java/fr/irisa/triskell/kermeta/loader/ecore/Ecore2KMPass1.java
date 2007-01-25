@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.6 2007-01-16 15:35:15 dvojtise Exp $
+/* $Id: Ecore2KMPass1.java,v 1.7 2007-01-25 15:27:00 dtouzet Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -10,11 +10,12 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Stack;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -26,8 +27,10 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
@@ -261,19 +264,24 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	
 	/** Create a primitive type for given datatype */
     public Object visit(EDataType node) {
+    	// Special case of datatype used to represent type for TypeVariable:
+    	// no corresponding datatype in the KM representation
+    	if(node.getName().equals("_TypeVariableAlias_")) return null;
+    	
     	// Create a primitive type
         PrimitiveType result = createPrimitiveTypeForEDataType(node);
         current_primitivetype = result;
+
         // BEGIN HORRIBLE TEMPORARY PATCH (the if)
         // This condition is used because we use the visitor for the definition of the type of model
         // elements, and sometimes, current package is null
-        if (getTopPackage()!=null)
-        {
+        if (getTopPackage()!=null) {
         	getTopPackage().getOwnedTypeDefinition().add(result);
         }
     	unit.typeDefs.put(Ecore2KM.getQualifiedName(node), result);
         // END HORRIBLE TEMPORARY PATCH
-        return result;
+
+    	return result;
     }
 	
 	/**
@@ -394,6 +402,73 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		if (etype == null) { 
 			def = StdLibKermetaUnitHelper.getKermetaUnit().typeDefinitionLookup("kermeta::standard::Void");
 		}
+		// Special case of the "TypeVariableAlias" datatype that aims to represent, in the  Ecore file,
+		// type of elements that are typed by a type variable:
+		else if(etype.getName().equals("_TypeVariableAlias_")) {
+			// Get the name of the type variable from node annotation
+			EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE);
+			String tVarName = ((EStringToStringMapEntryImpl) eAnnot.getDetails().get(0)).getTypedKey();
+			
+			boolean notFound = true;
+			TypeVariable tVar = null;
+			EList tVars = new BasicEList();
+			String node_str = null;
+			
+			// Build list of visible type variables according to the type of node:
+			// EStructuralFeature, EOperation or EParameter
+			if(node instanceof EStructuralFeature) {
+				// For an EStructuralFeature, visible TypeVariables are those declared by its
+				// containing class
+				EClass eCls = (EClass) node.eContainer();
+				ClassDefinition cDef = (ClassDefinition) eclassifier_typedefinition_map.get(eCls);
+				tVars.addAll(cDef.getTypeParameter());
+				
+				node_str = "property";
+			}
+			else if(node instanceof EOperation) {
+				// For an EOperation, visible TypeVariables are those declared: 1) by the operation
+				// itself, 2) by the containing class (order is important)
+				Operation op = (Operation) operations.get(node);
+				tVars.addAll(op.getTypeParameter());
+				
+				EClass eCls = (EClass) node.eContainer();
+				ClassDefinition cDef = (ClassDefinition) eclassifier_typedefinition_map.get(eCls);
+				tVars.addAll(cDef.getTypeParameter());
+				
+				node_str = "operation";
+			}
+			else if(node instanceof EParameter) {
+				// For an EParameter, visible TypeVariables are those declared: 1) by the containing
+				// operation, 2) by the containing class (order is important)
+				EOperation eOp = (EOperation) node.eContainer();
+				Operation op = (Operation) operations.get(eOp);
+				tVars.addAll(op.getTypeParameter());
+				
+				EClass eCls = (EClass) node.eContainer().eContainer();
+				ClassDefinition cDef = (ClassDefinition) eclassifier_typedefinition_map.get(eCls);
+				tVars.addAll(cDef.getTypeParameter());
+				
+				node_str = "parameter";
+			}
+
+			// Iterate over collection of visible TypeVariables to find the first one which name
+			// matches the name stored into the node annotation (tVarName)
+			Iterator<TypeVariable> op_it = tVars.iterator();
+			while(op_it.hasNext() && notFound) {
+				tVar = op_it.next();
+				if(tVar.getName().equals(tVarName))	notFound = false;
+			}
+
+			if(notFound) {
+				// No matching type variable found: raise an exception
+				throw new KM2ECoreConversionException(
+						"Internal error of Ecore2KM conversion: no TypeVariable found for "
+						+ node_str + " '" + node.getName() + "'.");
+			}
+			else {
+				return tVar;
+			}
+		}
 		else {
 			def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
 		}
@@ -419,7 +494,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 
 		if (def == null)
-			throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+			throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion: type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
 
 		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
 		if (def instanceof Type) {
@@ -438,11 +513,10 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 		// Type should never be null
 		if (result == null) {
-			throw new Error("Internal error of ecore2kermeta transfo : type " +
+			throw new Error("Internal error of ecore2kermeta transfo: type " +
 					"of '" + node.getName() + node.eClass().getName() + ":" + etype.getName() + "' not found " +
 							"in Kermeta side");
 		}
 		return result;
 	}
-
 }

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.29 2007-01-23 16:38:16 dtouzet Exp $
+/* $Id: KM2EcorePass2.java,v 1.30 2007-01-25 15:26:59 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -55,14 +54,12 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
@@ -97,6 +94,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> kmt2ecoremapping;
 	/** Contains the list of ClassDefinition that "have passed" pass 2*/
 	protected ArrayList<ClassDefinition> pass2done_mapping;
+
+	
 	/**
 	 * @param resource : the resource to populate
 	 * @param mapping : the hashtable that contains the { Object, EObject } mappings
@@ -112,6 +111,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		pass2done_mapping = new ArrayList<ClassDefinition>();
 	}
 	
+
 	/**
 	 * Exports the given package into an ecore ressource
 	 * @param root_package
@@ -121,6 +121,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		root_p = root_package;
 		return accept(KermetaUnit.getRootPackageForSerialization(root_p));
 	}
+
 
 	/** 
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
@@ -142,7 +143,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		}
 			// Visit TypeParameters - One annotation per type parameter
 		for ( Object tv : node.getTypeParameter() ) {
-			setTypeVariableAnnotation((TypeVariable)tv, newEClass);
+			setTypeParameterAnnotation((TypeVariable)tv, newEClass);
 		}
 		// Visit owned attributes
 		for (Object next : node.getOwnedAttribute() ) { accept((EObject)next); }
@@ -154,6 +155,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return newEClass;
 	}
 	
+
 	/**
 	 * @see KermetaOptimizedVisitor#visitOperation(Operation)
 	 */
@@ -172,11 +174,23 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		for ( Object next : node.getOwnedParameter() ) { this.accept((EObject)next); }
 		
 		// Return type (it can be null)
-		if(node.getType() != null) {
-			newEOperation.setEType((EClassifier)this.accept((EObject)node.getType()));
+		if(node.getType() instanceof TypeVariable) {
+			// If type of operation is a TypeVariable, set its type to the "_TypeVariableAlias_" 
+			// datatype created during first pass
+			newEOperation.setEType(ecoreExporter.typeVariableAlias);
+
+			// Add TypeVariable EAnnotation to EOperation
+			setTypeVariableAnnotation(((TypeVariable) node.getType()).getName(), newEOperation);
 		}
+		else {
+			if(node.getType() != null) {
+				newEOperation.setEType((EClassifier)this.accept((EObject)node.getType()));
+			}
+		}
+
 		
-		// -------------- Create annotations for Kermeta elements that are not ECORE-compatibles
+		//////////////////////////////////////////////////////////////////////////////////
+		// ------- Create annotations for Kermeta elements that are not Ecore-compatibles
 		
 		// Superoperation
 		if (node.getSuperOperation() != null)
@@ -192,28 +206,45 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		// TypeParameters : create one annotation per type parameter 
 		for ( Object next : node.getTypeParameter() )
 		{
-			setTypeVariableAnnotation((TypeVariable)next, newEOperation);			
+			setTypeParameterAnnotation((TypeVariable)next, newEOperation);			
 		}
 		
 		loggerTabs.decrement();
 		return newEOperation;
 	}
 	
+
 	/**
 	 * @see KermetaOptimizedVisitor#visitParameter(Parameter)
 	 */
 	public Object visitParameter(Parameter node) {
 		// Search the EParameter from previous pass 1, then set its type
 		EParameter newEParameter = getEObjectForParameter(node);
-		EClassifier type = (EClassifier)accept(node.getType());
-		if (type == null ) // null type forbidden for parameter type
-			throw new KM2ECoreConversionException( 
-			"Problem : type not found for a parameter '"+ node.getName()+ "' in operation : " +
-			NamedElementHelper.getQualifiedName(node.getOperation()));
+		
+		EClassifier type = null; 
+
+		if(node.getType() instanceof TypeVariable) {
+			// If type of parameter is a TypeVariable, set its type to the "_TypeVariableAlias_" 
+			// datatype created during first pass
+			type = ecoreExporter.typeVariableAlias; 
+
+			// Add TypeVariable EAnnotation to EParameter
+			setTypeVariableAnnotation(((TypeVariable) node.getType()).getName(), newEParameter);
+		}
+		else {
+			type = (EClassifier)accept(node.getType());
+			if (type == null ) // null type forbidden for parameter type
+				throw new KM2ECoreConversionException( 
+				"Problem : type not found for a parameter '"+ node.getName()+ "' in operation : " +
+				NamedElementHelper.getQualifiedName(node.getOperation()));
+			
+		}
+
 		newEParameter.setEType(type);
 		return newEParameter;
 	}
 	
+
 	/**
 	 * @see KermetaOptimizedVisitor#visitClass(fr.irisa.triskell.kermeta.language.structure.Class)
 	 */
@@ -256,6 +287,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return newEClassifier;
 	}
 	
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
@@ -296,16 +328,30 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			setDerivedPropertyAnnotation(node, newEStructuralFeature, getterBody, setterBody);
 		}
 		
-		EClassifier type = (EClassifier)accept(node.getType());
-		if (type == null ) // null type forbidden for parameter type
-			throw new KM2ECoreConversionException( 
-			"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
-			NamedElementHelper.getQualifiedName(node.getOwningClass()));
+		EClassifier type = null;
+
+		if(node.getType() instanceof TypeVariable) {
+			// If type of parameter is a TypeVariable, set its type to the "_TypeVariableAlias_" 
+			// datatype created during first pass
+			type = ecoreExporter.typeVariableAlias; 
+
+			// Add TypeVariable EAnnotation to EStructuralFeature
+			setTypeVariableAnnotation(((TypeVariable) node.getType()).getName(), newEStructuralFeature);
+		}
+		else {
+			type = (EClassifier)accept(node.getType());
+			if (type == null ) // null type forbidden for parameter type
+				throw new KM2ECoreConversionException( 
+				"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
+				NamedElementHelper.getQualifiedName(node.getOwningClass()));
+		}
+
 		newEStructuralFeature.setEType(type);
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
 	
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
@@ -313,6 +359,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return node.getValue(); 
 	}
 	
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
 	 */
@@ -320,6 +367,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return this.accept(node.getTyperef());
 	}
 	
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
@@ -327,6 +375,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return this.accept(node.getType());
 	}
 	
+
 	/**
 	 * TODO!
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFunctionType(fr.irisa.triskell.kermeta.language.structure.FunctionType)
@@ -335,6 +384,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return this.accept(node.getRight());
 	}
 	
+
 	/**
 	 * TODO!
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitTypeVariable(fr.irisa.triskell.kermeta.language.structure.TypeVariable)
@@ -343,11 +393,11 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return getEObjectForQualifiedName("kermeta::standard::Object","kermeta::standard::Object");
 	}
 
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
 	public Object visitVoidType(VoidType node) { return null; }
-	
 	
 	
 	/**
@@ -360,6 +410,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return result;
 	}
 
+
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitEnumeration(fr.irisa.triskell.kermeta.language.structure.Enumeration)
 	 */
@@ -370,6 +421,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return eenum ;
 	}
 	
+
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitPrimitiveType(PrimitiveType)
 	 */
@@ -395,6 +447,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return newEClassifier;
 	}
 	
+
 	/**
 	 * Find the EClassifier of the specified <code>enode</code>
 	 */
@@ -411,6 +464,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return (EClassifier)getEObjectForQualifiedName(qtype,qtype);
 	}
 	
+
 	/**
 	 * @param node the node from Kermeta for which we want the corresponding Ecore mapping (usually,
 	 * we look for a Type or an Operation -- NamedElement) 
@@ -426,6 +480,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 					NamedElementHelper.getMangledQualifiedName(node.getOwningClass()));
 	}
 	
+
 	protected EStructuralFeature getEObjectForProperty(Property node)
 	{
 		if (kmt2ecoremapping.containsKey(node))
@@ -436,6 +491,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 					NamedElementHelper.getMangledQualifiedName(node.getOwningClass()));
 	}
 	
+
 	protected EParameter getEObjectForParameter(Parameter node)
 	{
 		if (kmt2ecoremapping.containsKey(node))
@@ -445,6 +501,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 					NamedElementHelper.getMangledQualifiedName(node),
 					NamedElementHelper.getMangledQualifiedName(node.getOperation().getOwningClass()));
 	}
+
 
 	/**
 	 * @param object_qname the qualified name (in kermeta::format) of the object we are looking for 
@@ -546,7 +603,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @param overwrite overxrite file if already exists
 	 * @return the resource that hosts the wanted ecore file
 	 */
-	
 	// FIXME (François) I am not sure that this method should be here. I copied this method in KM2Ecore class as a
 	// a static class.
 	public Resource writeEcore(KermetaUnit builder, String file, boolean overwrite)
@@ -575,6 +631,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return resource;
 	}
 	
+
 	/** 
 	 * @param name the name of the derived property
 	 * @param acc_type the type  of the accessor ("getter"/"setter") 
@@ -587,6 +644,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		"end";
 	}
 	
+
 	/*
 	 * 
 	 *  HELPER METHODS THAT SET THE ANNOTATIONS
@@ -627,7 +685,12 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				null);
 	}
 	
-	
+
+	/**
+	 * 
+	 * @param superOperation
+	 * @param newEOperation
+	 */
 	public void setSuperOperationAnnotation(Operation superOperation, EOperation newEOperation) {
 		ecoreExporter.addAnnotation( 
 				newEOperation,
@@ -652,12 +715,13 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				exceptionEClassifier);		
 	}
 
+
 	/**
 	 * Visit type parameters
 	 * @param tv
 	 * @param newEObject EClass or EOperation (thone only types concerned by type parameters)
 	 */
-	protected void setTypeVariableAnnotation(TypeVariable tv, EModelElement newEObject) {
+	protected void setTypeParameterAnnotation(TypeVariable tv, EModelElement newEObject) {
 		String typeParameterString = tv.getName();			
 		if (tv.getSupertype() != null) 
 			typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getSupertype());
@@ -667,5 +731,20 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				tv.getName(),
 				typeParameterString,
 				null);					
+	}
+
+
+	/**
+	 * @param tVarName
+	 * @param newEObject
+	 */
+	protected void setTypeVariableAnnotation(String tVarName, EModelElement newEObject) {
+		ecoreExporter.addAnnotation( 
+				newEObject,
+				KM2Ecore.ANNOTATION_TYPEVARIABLE,
+				tVarName,
+				tVarName,
+				null);
+		
 	}
 }

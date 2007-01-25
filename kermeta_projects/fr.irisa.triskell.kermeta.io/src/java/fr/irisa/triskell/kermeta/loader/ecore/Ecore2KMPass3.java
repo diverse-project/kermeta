@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.13 2007-01-16 15:34:12 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.14 2007-01-25 15:27:00 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -190,10 +190,14 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		
 		if (isTypeSettingMode == true)
 		{
+			// First visit the TypeParameter annotation in order to get type context for body parsing
+			EAnnotation tParam_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
+			if(tParam_Annot != null) {
+				visitTypeParameterAnnotation(tParam_Annot);
+			}
+
 			// Set the type of the operation
-			if (node.getEType() != null) 
-			{
-				//Type t = createTypeForEClassifier(node.getEType(), node);
+			if (node.getEType() != null) {
 				Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 				exporter.current_op.setType(t);
 			}
@@ -205,15 +209,9 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// hosted in the operation annotation can be parsed and type checked correctly.
 			unit.pushContext();
 			
-			// First visit the TypeParameter annotation in order to get type context for body parsing
-			EAnnotation tParam_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
-			if(tParam_Annot != null) {
-				visitTypeParameterAnnotation(tParam_Annot);
-			}
-			
 			// add type variable
 			for (Object next : exporter.current_op.getTypeParameter()) unit.addTypeVar((TypeVariable)next);
-			
+
 			// add parameters
 			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
 		
@@ -230,7 +228,6 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			}
 			
 			unit.popContext();
-
 		}
 		else
 		{	// Super operation can only be defined once the super types of all the ClassDefinitions
@@ -283,7 +280,6 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	public Property visitEStructuralFeature(EStructuralFeature node) {
 		exporter.current_prop = (Property)visitorPass1.properties.get(Ecore2KM.getQualifiedName(node));
 		// Set the type of this property
-		//Type t = createTypeForEClassifier(node.getEType(), node);
 		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 		exporter.current_prop.setType(t);
 		// Get the derived properties bodies and other stuffs
@@ -308,8 +304,8 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		param.setUpper(node.getUpperBound());
 		param.setLower(node.getLowerBound());
 		param.setOperation(exporter.current_op);
+
 		// Set its type
-		//Type t = createTypeForEClassifier(node.getEType(), node);
 		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 		param.setType(t);
 		exporter.current_op.getOwnedParameter().add(param);
