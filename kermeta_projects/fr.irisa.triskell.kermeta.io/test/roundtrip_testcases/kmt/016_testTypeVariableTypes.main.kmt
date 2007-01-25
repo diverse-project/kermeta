@@ -1,0 +1,22 @@
+
+package test;
+
+require kermeta
+using kermeta::standard
+
+
+class Main<G> {
+	attribute parametrizedAttr : G
+
+	operation test_op1(elt : G) is do
+	end
+
+	operation test_op2<F>(elt: F) is do
+	end
+
+	operation test_op3() : G is do
+	end
+
+	operation test_op4<F>() : F is do
+	end
+}
