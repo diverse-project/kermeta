@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.11 2007-01-18 13:06:39 ftanguy Exp $
+ $Id: plugin.xml,v 1.12 2007-01-26 13:14:50 cfaucher Exp $
 -->
 
 <plugin>
@@ -88,12 +88,22 @@
            category="fr.irisa.triskell.kermeta.KermetaWizard"
            class="fr.irisa.triskell.kermeta.kpm.wizards.NewKermetaProjectWizard"
            descriptionImage="images/tree_package.gif"
+           finalPerspective="kermetaPerspective"
            icon="images/tree_package.gif"
            id="fr.irisa.triskell.kermeta.newProject"
            name="New Kermeta Project"
            project="true">
         <selection class="org.eclipse.core.resources.IProject"/>
      </wizard>
+  </extension>
+  <extension
+        point="org.eclipse.ui.perspectiveExtensions">
+     <perspectiveExtension targetID="kermetaPerspective">
+        <newWizardShortcut id="fr.irisa.triskell.kermeta.newProject"/>
+     </perspectiveExtension>
+     <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+        <newWizardShortcut id="fr.irisa.triskell.kermeta.newProject"/>
+     </perspectiveExtension>
   </extension>
 </plugin>
 

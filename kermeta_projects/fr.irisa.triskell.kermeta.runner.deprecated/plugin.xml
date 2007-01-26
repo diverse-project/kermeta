@@ -49,7 +49,6 @@
             point="org.eclipse.ui.perspectiveExtensions">
          <perspectiveExtension targetID="kermetaPerspective">
             <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
-            <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"/>
             <actionSet id="org.eclipse.debug.ui.launchActionSet"/>
     <!--        <actionSet id="kermetaActionSet"/> -->
         <showInPart
