@@ -1,0 +1,38 @@
+/* $Id: testParamPostFailed.kmt,v 1.1 2007-01-26 15:24:32 dvojtise Exp $
+ * Creation date: January 23, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+
+class Main
+{
+	reference str : String
+	
+    operation main() : Void is do 
+        truc("bidule")
+    end
+    
+    
+    method truc(param : String)  : String is
+    pre lapre is param != "machin"
+     do   	
+        stdio.writeln("test")
+        str := param
+        
+        // to make the execution fail:
+        str := "not param's value"
+     end
+     post lapost is do str == param end
+}
