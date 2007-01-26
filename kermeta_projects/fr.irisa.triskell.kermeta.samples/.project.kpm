@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore">
+  <events name="update"/>
+  <events name="typecheck"/>
+  <dependencies type="//@types.1" event="//@events.0" actions="//@actions.1 //@actions.0 //@actions.2" in="//@expressions.0" outs="//@expressions.1 //@expressions.2" name="d1"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.markdependents"/>
+  <filters xsi:type="kpm:NameFilter" regexIn=".+\.kmt" regexOut="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regexIn=".+\.km" regexOut="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regexIn=".+\.ecore" regexOut="*.ecore"/>
+  <filters xsi:type="kpm:ExistFilter"/>
+  <types name="translation"/>
+  <types name="synchro"/>
+  <expressions filter="//@filters.0" id="KMT expr"/>
+  <expressions filter="//@filters.1" id="KM expr"/>
+  <expressions filter="//@filters.2" id="Ecore expr">
+    <subExpressions xsi:type="kpm:And" filter="//@filters.3"/>
+  </expressions>
+</kpm:KPM>
