@@ -6,10 +6,47 @@
 
 <body>
 <!--
-$Id: history.html,v 1.18 2006-11-03 13:29:51 dvojtise Exp $
+$Id: history.html,v 1.19 2007-01-26 12:04:01 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V0.4.0 (28/01/2007)</h2>
+
+<h3>New features</h3>
+<ul>
+	<li>Kermeta project nature is now useful: It supports a workbench rule engine for running automated task. 
+		So, whenever a file change it can activate some rules. Typically, it will be used to produce a km or an ecore corresponding to a kmt file.
+		The rules can be customized through the kpm model (Kermeta Project Manager)
+		You can even provide your own rules using Eclipse extension points. (In future release you'll be able to run kermeta transformations)</li>	
+   	
+	<li>#1411; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1411&group_id=32&atid=208">add a test that check that java5 is used</a></li>
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>Textual syntax for pre and post has been enhanced. The previous version wasn't user friendly. If you want more details about the 
+		pre/post new syntax please look this page : <a href="http://www.kermeta.org/download/migration_changes/syntax_v032_v040">http://www.kermeta.org/download/migration_changes/syntax_v032_v040</a>.
+		In order to migrate your files that use the old syntax, we provide a migration tool. (You need to use it only if you have pre and post condition in your kmt files)
+	</li>
+	<li>#699; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=699&group_id=32&atid=205">syntaxic colorization problem with special characters in String chains</a></li>	
+	<li>#846; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=846&group_id=32&atid=205">bug in method kermeta::language::structure::Class.equals()</a></li>	
+	<li>#1085; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1085&group_id=32&atid=208">Kermeta "new file" tabs should be tabs, not spaces !!</a></li>
+	<li>#1165; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1165&group_id=32&atid=205">Kermeta textual editor has problems with comments</a></li>	
+	<li>#1213; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1213&group_id=32&atid=205">Managing model dependencies when saving a km files</a></li>	
+	<li>#1265; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1265&group_id=32&atid=205">Run a km file</a></li>	
+	<li>#1319; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1319&group_id=32&atid=205">kmt 2 km incorrect transformation</a></li>	
+	<li>#1463; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1463&group_id=32&atid=205">Error in the method: EMFRepository.load . It sets all EClassinstanceClassName := ""</a></li>	
+	<li>#1575; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1575&group_id=32&atid=205">Documentation : Incorrect diagrams in part 3.1.2.2</a></li>	
+	<li>#1589; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1589&group_id=32&atid=205">Pb with Resource "contents" and "allContents" properties</a></li>	
+	<li>#1675; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1675&group_id=32&atid=205">Pb when using alias types for initializing newly allocated Class elements</a></li>	
+	<li>#1678; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1678&group_id=32&atid=205">A Class created at runtime (c := Class.new) is not created correctly</a></li>	
+	<li>#1746; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1746&group_id=32&atid=205">Texteditor bad Performances when text size increasing</a></li>	
+	<li>#1809; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1809&group_id=32&atid=205">Graphical Editor : Restore connection failed with the KermetaStdLib</a></li>	
+	<li>#1846; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1846&group_id=32&atid=205">KM2Ecore regression</a></li>	
+	<li>#1896; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1896&group_id=32&atid=205">Kmt2Ecore: problem with nested packages</a></li>	
+	<li>#1906; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1906&group_id=32&atid=205">Km2Ecore: elts typed by a TypeVariable have no type in Ecore files</a></li>	
+	
+	
+</ul>
 <h2 class="Heading">V0.3.2 (03/11/2006)</h2>
 
 <h3>New features</h3>
