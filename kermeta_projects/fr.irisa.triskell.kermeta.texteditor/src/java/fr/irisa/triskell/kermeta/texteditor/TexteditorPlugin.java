@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.7 2007-01-08 17:21:30 ftanguy Exp $
+/* $Id: TexteditorPlugin.java,v 1.8 2007-01-26 10:08:23 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TextzditorPlugin.java
  * License : EPL
@@ -34,6 +34,8 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	
 	// the current kermeta texteditor
 	private KMTEditor editor;
+	
+	final static public String KMT_PARTITIONING = "_KMT_PARTITIONING_";
 	
 	/**
 	 * List of KermetaEditorEventListener that must be notified

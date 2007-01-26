@@ -42,15 +42,15 @@ public class EditorScanner extends RuleBasedScanner {
 	public static final Color RED = new Color(Display.getCurrent(), new RGB(150, 0, 0));
 	public static final Color FUSHIA = new Color(Display.getCurrent(), new RGB(127, 0, 85));
 
-	protected ArrayList rules;
+	protected ArrayList<Object> rules;
 	
 	public EditorScanner() {
 		// The list of rules
-		rules = new ArrayList();
+		rules = new ArrayList <Object> ();
 		// rule for white space
 		//rules.add(new WhitespaceRule(new WhitespaceDetector()));
 		// rule for comments
-		createRuleForComments();
+		//createRuleForComments();
 		// rule for literals
 		createRuleForLiterals();
 		// rule for keywords
