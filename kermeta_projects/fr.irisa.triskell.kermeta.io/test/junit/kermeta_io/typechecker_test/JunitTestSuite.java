@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.21 2006-12-13 08:09:57 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.22 2007-01-26 09:49:23 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -86,6 +86,8 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_021_basic_fsm_type() throws Exception {
 testvalidFile("test/typechecher_tests/valid","021_basic_fsm_type.kmt" );
@@ -113,6 +115,30 @@ testvalidFile("test/typechecher_tests/valid","021_minimization.kmt" );
 
 public void testvalid_021_multstart_fsm_type() throws Exception {
 testvalidFile("test/typechecher_tests/valid","021_multstart_fsm_type.kmt" );
+}
+
+public void testvalid_022_mt_multiplicity() throws Exception {
+testvalidFile("test/typechecher_tests/valid","022_mt_multiplicity.kmt" );
+}
+
+public void testvalid_022_mt_multiplicity_valid_tests() throws Exception {
+testvalidFile("test/typechecher_tests/valid","022_mt_multiplicity_valid_tests.kmt" );
+}
+
+public void testvalid_023_mt_att_ref() throws Exception {
+testvalidFile("test/typechecher_tests/valid","023_mt_att_ref.kmt" );
+}
+
+public void testvalid_023_mt_att_ref_valid_tests() throws Exception {
+testvalidFile("test/typechecher_tests/valid","023_mt_att_ref_valid_tests.kmt" );
+}
+
+public void testvalid_024_mt_property_order() throws Exception {
+testvalidFile("test/typechecher_tests/valid","024_mt_property_order.kmt" );
+}
+
+public void testvalid_024_mt_property_order_valid_tests() throws Exception {
+testvalidFile("test/typechecher_tests/valid","024_mt_property_order_valid_tests.kmt" );
 }
 
 public void testvalid_1_ClassSubTyping_1() throws Exception {
@@ -207,12 +233,20 @@ public void testinvalid_014_scopevisibility() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","014_scopevisibility.kmt" );
 }
 
-public void testinvalid_021_fsm_mustfail1() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","021_fsm_mustfail1.kmt" );
+public void testinvalid_021_fsm_mustfail() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","021_fsm_mustfail.kmt" );
 }
 
-public void testinvalid_021_fsm_mustfail2() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","021_fsm_mustfail2.kmt" );
+public void testinvalid_022_mt_multiplicity_invalid_tests() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","022_mt_multiplicity_invalid_tests.kmt" );
+}
+
+public void testinvalid_023_mt_att_ref_invalid_tests() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","023_mt_att_ref_invalid_tests.kmt" );
+}
+
+public void testinvalid_024_mt_property_order_invalid_tests() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","024_mt_property_order_invalid_tests.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {

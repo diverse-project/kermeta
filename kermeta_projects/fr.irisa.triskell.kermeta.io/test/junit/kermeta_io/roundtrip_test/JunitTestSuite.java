@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2006-10-27 08:26:30 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2007-01-26 09:46:30 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -183,6 +183,10 @@ testkmtFile("test/roundtrip_testcases/kmt","014_testParameterizedClass.main.kmt"
 
 public void testkmt_015_testEnumerationAsProperty() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","015_testEnumerationAsProperty.main.kmt" );
+}
+
+public void testkmt_016_testTypeVariableTypes() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
