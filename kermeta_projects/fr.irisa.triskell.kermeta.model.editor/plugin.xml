@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.7 2007-01-10 13:45:42 ftanguy Exp $
+ $Id: plugin.xml,v 1.8 2007-01-26 14:51:01 dvojtise Exp $
 -->
 
 <plugin>
@@ -36,6 +36,12 @@
         class = "fr.irisa.triskell.kermeta.presentation.KmEditor" 
         contributorClass="fr.irisa.triskell.kermeta.presentation.KmActionBarContributor" >
     </editor>
+  </extension>
+  <extension
+        point="org.eclipse.ui.perspectiveExtensions">
+     <perspectiveExtension targetID="kermetaPerspective">
+        <newWizardShortcut id="fr.irisa.triskell.kermeta.presentation.KmModelWizardID"/>
+     </perspectiveExtension>
   </extension>    
 
 <!--
