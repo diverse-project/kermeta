@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Actions Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.kpm.actions;singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 0.4.0
 Bundle-Activator: fr.irisa.triskell.kermeta.kpm.actions.plugin.KPMActionsPlugin
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
@@ -10,3 +10,4 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta.kpm,
  org.eclipse.core.resources
 Eclipse-LazyStart: true
+Bundle-Vendor: IRISA/INRIA

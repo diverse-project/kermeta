@@ -6,22 +6,23 @@
          point="org.eclipse.ui.views">
       <category
             name="Kermeta"
-            id="fr.irisa.triskell.kermeta.touchnavigator">
+            id="fr.irisa.triskell.kermeta.viewcategory">
       </category>
       <view
             name="Kermeta TouchNavigator View"
             icon="icons/touchgraph.gif"
-            category="fr.irisa.triskell.kermeta.touchnavigator"
+            category="fr.irisa.triskell.kermeta.viewcategory"
             class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView"
             id="fr.irisa.triskell.kermeta.touchnavigator.views.KermetaTouchView">
       </view>
-      <view
+ <!--     <view
             name="EMF Model TouchNavigator View"
             icon="icons/touchgraph.gif"
-            category="fr.irisa.triskell.kermeta.touchnavigator"
+            category="fr.irisa.triskell.kermeta.viewcategory"
             class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchEMFModelView"
             id="fr.irisa.triskell.kermeta.touchnavigator.views.EMFModelTouchView">
       </view>
+      -->
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -33,16 +34,16 @@
                relationship="right"
                id="fr.irisa.triskell.kermeta.touchnavigator.views.KermetaTouchView">
          </view>
-         <view
+     <!--    <view
                ratio="0.5"
                relative="org.eclipse.ui.views.TaskList"
                relationship="right"
                id="fr.irisa.triskell.kermeta.touchnavigator.views.EMFModelTouchView">
-         </view>
+         </view> -->
       </perspectiveExtension>
    </extension>
    
-   <extension point="org.eclipse.core.runtime.contentTypes">
+ <!--  <extension point="org.eclipse.core.runtime.contentTypes">
 		<content-type
         base-type="org.eclipse.core.runtime.xml"
         describer="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.XMLContentDescriber"
@@ -64,6 +65,7 @@
         file-extensions="xmi"/>
 		
    </extension>
+   -->
 <!--   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution

@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.texteditor"
    name="Kermeta Text Editor"
-   version="0.3.2"
+   version="0.4.0"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin">
 

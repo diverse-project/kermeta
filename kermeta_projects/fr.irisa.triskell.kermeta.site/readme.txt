@@ -59,3 +59,4 @@ backup this new version on the web site
 - create a news on the forge
 - create a dummy product in the files section of the forge
 - update the donwload counter script so that it will trace the donwload of the new version and transmit them to the dummy product
+- do a copy of the junit test of tha last night for traceability of the old version versus the new version
