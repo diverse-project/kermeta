@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta Graphical Editor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor;singleton:=true
-Bundle-Version: 0.0.5
+Bundle-Version: 0.4.0
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin
-Bundle-Vendor: Topcased - IRISA/INRIA
+Bundle-Vendor: IRISA/INRIA - Topcased
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit.ui,

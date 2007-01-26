@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta.graphical.feature"
       label="Kermeta Graphical Editor"
-      version="0.3.2"
+      version="0.4.0"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/">
@@ -14,8 +14,9 @@
 the terms of the EPL licence.
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="Kermeta workbench and most of its plugins are distributed under">
+      Kermeta workbench and most of its plugins are distributed under
+the terms of the EPL licence.
    </license>
 
    <url>
@@ -23,7 +24,6 @@ the terms of the EPL licence.
    </url>
 
    <requires>
-      <import feature="fr.irisa.triskell.kermeta" version="0.2.1"/>
       <import feature="fr.irisa.triskell.kermeta" version="0.2.1"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.edit.ui"/>

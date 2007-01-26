@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta"
    name="Kermeta Workbench"
-   version="0.3.2"
+   version="0.4.0"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
    <runtime>
@@ -223,13 +223,14 @@
          point="org.eclipse.ui.views">
       <category
             name="Kermeta"
-            id="fr.irisa.triskell.kermeta.touchnavigator">
+            id="fr.irisa.triskell.kermeta.viewcategory">
       </category>
       <view
             allowMultiple="false"
             class="fr.irisa.triskell.kermeta.view.KermetaView"
-            id="fr.irisa.triskell.kermeta.view1"
-            name="Kermeta"/>
+            category="fr.irisa.triskell.kermeta.viewcategory"
+            id="fr.irisa.triskell.kermeta.viewregisteredpackages"
+            name="EMF registered packages"/>
    </extension>
 	<extension
          point="org.eclipse.ui.newWizards">

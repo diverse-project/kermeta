@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <?eclipse version="3.0"?>
-<plugin name="KerMeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="0.3.2" provider-name="IRISA/INRIA">
+<plugin name="KerMeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="0.4.0" provider-name="IRISA/INRIA">
    <requires>
       <import plugin="fr.irisa.triskell.kermeta" export="false"/>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
@@ -16,5 +16,10 @@
     <toc file="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
     <toc file="build/eclipse.help/KermetaEMFTutorial/toc.xml" />
     <toc file="build/eclipse.help/KerMeta-Manual/toc.xml"/>
+    
+    <toc file="build/eclipse.help/KerMeta-The-FSM-example/toc.xml" />
+    <toc file="build/eclipse.help/KerMeta-How-to-create-a-metamodel/toc.xml" />
+    <toc file="build/eclipse.help/KerMeta-How-to-add-behavior-to-a-metamodel/toc.xml" />
+    <toc file="build/eclipse.help/KerMeta-How-to-use-run-configuration/toc.xml"/>
   </extension>
 </plugin>
