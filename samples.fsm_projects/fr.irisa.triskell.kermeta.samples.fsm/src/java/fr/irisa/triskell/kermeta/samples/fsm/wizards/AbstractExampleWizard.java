@@ -7,12 +7,15 @@ import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
@@ -149,6 +152,9 @@ public abstract class AbstractExampleWizard extends Wizard
 		}
 		
 		try {
+			
+			
+			
 			// We make sure that the project is created from this point forward.
 			project.create(monitor);
 			
@@ -196,8 +202,13 @@ public abstract class AbstractExampleWizard extends Wizard
 				zipFileStream.closeEntry();
 				zipEntry = zipFileStream.getNextEntry();
 			}
-			
+	
 			project.open(monitor);
+			
+			IProjectDescription description = project.getDescription();
+			description.setBuildSpec( new ICommand[] {} );
+			project.setDescription(description, null);		
+				
 			project.refreshLocal(IFile.DEPTH_INFINITE, monitor);
 		} catch (IOException e) {
 			FsmPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, FsmPlugin.getDefault().getBundle().getSymbolicName(),IStatus.ERROR, e.getMessage(),e));
