@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.6 2005-11-22 10:38:57 zdrey Exp $
+/* $Id: KermetaPerspective.java,v 1.7 2007-01-29 12:43:18 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: GPL
@@ -12,14 +12,12 @@ package fr.irisa.triskell.kermeta.runner.perspective;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
-import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveFactory;
-import org.eclipse.ui.IPerspectiveRegistry;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.console.IConsoleConstants;
 
 /**
- * 
+ * Implements the Kermeta perspective.
+ * It initialises it programmatically  in order have the correct views when openeing this perspective
  */
 public class KermetaPerspective implements IPerspectiveFactory {
 
@@ -58,9 +56,10 @@ public class KermetaPerspective implements IPerspectiveFactory {
         // editors are placed for free.
         String editorArea = layout.getEditorArea();
      
-        // place navigator to the left (of editor area)
+        // place navigator and package explorer to the left (of editor area)
         IFolderLayout left = layout.createFolder("left", IPageLayout.LEFT, (float) 0.25, editorArea);
         left.addView(IPageLayout.ID_RES_NAV);
+        left.addView(org.eclipse.jdt.ui.JavaUI.ID_PACKAGES);
         
         // problem view at the bottom (of editor area)
         IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, (float) 0.75, editorArea);
