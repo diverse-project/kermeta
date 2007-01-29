@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore">
+  <events href="#//@events.0"/>
+  <events href="#//@events.1"/>
+  <dependencies href="#//@dependencies.0"/>
+  <actions href="#//@actions.0"/>
+  <actions href="#//@actions.1"/>
+  <actions href="#//@actions.2"/>
+  <actions href="#//@actions.3"/>
+  <filters xsi:type="kpm:NameFilter" href="#//@filters.0"/>
+  <filters xsi:type="kpm:NameFilter" href="#//@filters.1"/>
+  <filters xsi:type="kpm:NameFilter" href="#//@filters.2"/>
+  <filters xsi:type="kpm:ExistFilter" href="#//@filters.3"/>
+  <types href="#//@types.0"/>
+  <types href="#//@types.1"/>
+  <expressions href="#//@expressions.0"/>
+  <expressions href="#//@expressions.1"/>
+  <expressions href="#//@expressions.2"/>
+</kpm:KPM>
