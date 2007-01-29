@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.35 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.36 2007-01-29 16:38:31 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -50,6 +50,7 @@ import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
@@ -863,9 +864,28 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	public Object visitSelfExpression(SelfExpression expression) {
 	    preVisit();
 		Type result = context.getSelfType();
+		
+		/*
+		 	[#1586] Type inference failure on type of 'self'
+		 	Due to this bug, we now bind self type.
+		 */
+		fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) result.getFType();
+		ClassDefinition tf = (ClassDefinition) cl.getTypeDefinition();
+		
+		Iterator <TypeVariable> itOnTypeVariable = tf.getTypeParameter().iterator();
+		while ( itOnTypeVariable.hasNext() ) {
+			TypeVariable tv = itOnTypeVariable.next();
+			TypeVariableBinding tvb = StructureFactory.eINSTANCE.createTypeVariableBinding();
+			tvb.setType(tv);
+			tvb.setVariable(tv);
+			cl.getTypeParamBinding().add(tvb);
+		}
+		
+		result = new SimpleType(cl);
+		
 		// Return type
 		expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+		expression.setStaticType(cl);
 		return result;
 	}
 	
