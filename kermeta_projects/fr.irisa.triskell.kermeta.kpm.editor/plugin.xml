@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.3 2007-01-12 14:59:59 ftanguy Exp $
+ $Id: plugin.xml,v 1.4 2007-01-29 08:51:27 ftanguy Exp $
 -->
 
 <plugin>
@@ -43,7 +43,7 @@
      <objectContribution
            adaptable="false"
            id="fr.irisa.triskell.kermeta.kpm.kermetaProjectContribution"
-           objectClass="org.eclipse.core.resources.IResource">
+           objectClass="org.eclipse.core.resources.IProject">
         <action
               class="fr.irisa.triskell.kermeta.kpm.editor.plugin.OpenKPMEditor"
               icon="icons/kermetaproject.gif"
