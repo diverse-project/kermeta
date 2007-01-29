@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.8 2006-12-20 10:03:21 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.9 2007-01-29 12:04:51 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -59,7 +60,6 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
  * the framework need to be done using the names of the types. (what a
  * pity...but I don't know yet how to get rid of that)
  * 
- * @generated NOT
  */
 public class KermetaUtils {
 	
@@ -333,30 +333,34 @@ public class KermetaUtils {
 	 * @return
 	 */
 	public boolean isStandardType(Type type) {
-		Boolean isstandardtype = false;
-		TypeDefinition typedef = null;
-		String typedef_qname = "";
 
+		// FIXME : it is possible to improve the retrieval method of the ClassDefinition
+		//corresponding with "kermeta::standard::ValueType", may be with a cache (a class variable)
 		if (type instanceof Class) {
-			typedef = ((Class) type).getTypeDefinition();
-			typedef_qname = NamedElementHelper.getMangledQualifiedName(typedef);
-		} else if (!(type instanceof VoidType)) {
-			// do not throw an error but just print a message in a dialog box
-			// throw new Error("Not implemented exception : a model element has
-			// an unhandled type yet : " + type);
-		}
-		// FIXME : this does not seem to work!! seems to be 2 frameworks loaded
-		// in memory, but
-		// where???
-		// if (getStdLibTypeDefinitions().contains(typedef))
-		// System.err.println("Found a typedef :"+ typedef.getName());
-		// Typedef is null when type is note Class or not TypeDefinition....
-		if (typedef_qname != null) {
-			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname) != null || type instanceof VoidType; // Fix the bug #1809
+			TypeDefinition valueTypeTypeDef = null;
+			
+			boolean hasFound = false;
+			for(Iterator it = type.eResource().getResourceSet().getAllContents(); it.hasNext()&& hasFound==false;) {
+				Object aResourceElt = (Object) it.next();
+				if(aResourceElt instanceof ClassDefinition)
+				{
+					ClassDefinition aClassDef = (ClassDefinition) aResourceElt;
+					if(NamedElementHelper.getQualifiedName(aClassDef).equals("kermeta::standard::ValueType")) {
+						valueTypeTypeDef = aClassDef;
+						hasFound = true;
+					}
+					
+				}
+			}
+			
+			if(((Class) type).getTypeDefinition().getTypeParameter().size()==0) {
+				if(! ClassDefinitionHelper.isSuperClassOf((ClassDefinition) valueTypeTypeDef,(ClassDefinition) ((Class) type).getTypeDefinition())) {
+					return false;
+				}
+			}
 		}
 		
-		return isstandardtype;
-		//return false;
+		return true;
 	}
 
 	/**
