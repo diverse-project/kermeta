@@ -13,11 +13,11 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.providers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EAttribute;
-import org.topcased.modeler.providers.IDeletePartnerProvider;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -26,8 +26,6 @@ import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
-
-import java.util.Iterator;
 
 /**
  * This is the item provider adpater for a
@@ -38,8 +36,7 @@ import java.util.Iterator;
  */
 
 public class ClassDefinitionModelerProvider extends
-		TypeContainerModelerProvider implements ILabelFeatureProvider,
-		IDeletePartnerProvider {
+		TypeContainerModelerProvider implements ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -65,6 +62,8 @@ public class ClassDefinitionModelerProvider extends
 
 	/**
 	 * @see org.topcased.modeler.providers.IDeletePartnerProvider#getDeletePartners(java.lang.Object)
+	 * @generated NOT
+	 * fully added
 	 */
 	public List getDeletePartners(Object object) {
 		ArrayList deletelist = new ArrayList();
@@ -72,15 +71,16 @@ public class ClassDefinitionModelerProvider extends
 		ClassDefinition theClassDef = (ClassDefinition) object;
 
 		// Get the types that refer the cuurent ClassDefinition
-		for (Iterator itLinks = KermetaCommonUtils.getOwnedTypesForTypeDefinitions(
-				theClassDef).iterator(); itLinks.hasNext();) {
-			
+		for (Iterator itLinks = KermetaCommonUtils
+				.getOwnedTypesForTypeDefinitions(theClassDef).iterator(); itLinks
+				.hasNext();) {
+
 			Object objType = itLinks.next();
 			if (objType instanceof ParameterizedType) {
 				ParameterizedType paramType = (ParameterizedType) objType;
 				// Give the TypeDefinition that references the ParameterizedType
 				GenericTypeDefinition refObj = paramType.getTypeDefinition();
-				
+
 				if (refObj instanceof ClassDefinition) {
 					// If the referenced ClassDefinition is the same than the current
 					// => this ParameterizedType must be deleted
@@ -90,7 +90,7 @@ public class ClassDefinitionModelerProvider extends
 						// and if it is an instance of Property, then
 						// it will be deleted because it is the case
 						// when we delete a property/reference
-						if(paramType.eContainer() instanceof Property) {
+						if (paramType.eContainer() instanceof Property) {
 							deletelist.add(paramType.eContainer());
 						}
 					}
