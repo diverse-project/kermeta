@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.0.5" provider="IRISA/INRIA" samePluginAsEditor="true">
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.4.1" provider="IRISA/INRIA" samePluginAsEditor="true">
   <palette name="Palette">
     <paletteCategories name="Node">
       <items name="Package" part="//@parts.0"/>
@@ -9,7 +9,7 @@
     </paletteCategories>
     <paletteCategories name="Edge">
       <items name="Inheritance link" part="//@parts.4"/>
-      <items name="Reference" part="//@parts.5"/>
+      <items name="Property" part="//@parts.5"/>
     </paletteCategories>
   </palette>
   <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.0" defaultFont="Tahoma-regular-8" type="Package" childElements="//@parts.0 //@parts.1" defaultBackgroundColor="241,241,241" container="true" defaultWidth="20" maximumWidth="0" maximumHeight="0"/>
