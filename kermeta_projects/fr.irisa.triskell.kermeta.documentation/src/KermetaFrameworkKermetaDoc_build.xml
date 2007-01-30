@@ -49,6 +49,10 @@
        	<copy todir="${KermetaFramework.output}" >
        		<fileset file="../src/html/screen.css"></fileset>
 		</copy>
+
+		<copy todir="${KermetaFramework.output}/figures">
+			<fileset dir="../src/figures"/>
+		</copy>
     </target>
 
 	
