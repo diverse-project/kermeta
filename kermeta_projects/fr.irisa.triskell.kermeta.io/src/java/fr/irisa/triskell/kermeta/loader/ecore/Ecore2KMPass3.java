@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.14 2007-01-25 15:27:00 dtouzet Exp $
+/* $Id: Ecore2KMPass3.java,v 1.15 2007-02-02 16:19:12 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
@@ -36,11 +38,12 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
@@ -131,9 +134,17 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		addSymbolContext( exporter.current_classdef );
 		
 		// Order important here! annotation above all.
-		acceptList(((EClass)node).getEAnnotations());
-		acceptList(((EClass)node).getEStructuralFeatures());
-		acceptList(((EClass)node).getEOperations());
+		// 1- Visit all non already visited annotations
+		for (Object next : node.getEAnnotations()) {
+			EAnnotation annot = (EAnnotation) next;
+			// KM2Ecore.ANNOTATION_TYPEPARAMETER annotation already visited in Pass_2
+			if(! annot.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
+				accept(annot);
+			}
+		}
+		// 2- Visit StructuralFeatures / Operations
+		acceptList(node.getEStructuralFeatures());
+		acceptList(node.getEOperations());
 		
 		// Pop previously pushed context
 		unit.popContext();
@@ -164,6 +175,14 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			Operation p = (Operation) it.next();
 			unit.addSymbol( new KMSymbolOperation(p) );
 		}
+
+		// Adding the type variable names to the symbol table
+		l = cDef.getTypeParameter();
+		it = l.iterator();
+		while(it.hasNext()) {
+			TypeVariable tv = (TypeVariable) it.next();
+			unit.addTypeVar(tv);
+		}
 		
 		// Adding context inherited from superclasses
 		l = cDef.getSuperType();
@@ -193,13 +212,18 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// First visit the TypeParameter annotation in order to get type context for body parsing
 			EAnnotation tParam_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
 			if(tParam_Annot != null) {
-				visitTypeParameterAnnotation(tParam_Annot);
+				visitorPass1.visitTypeParameterAnnotation(tParam_Annot);
 			}
 
 			// Set the type of the operation
 			if (node.getEType() != null) {
 				Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 				exporter.current_op.setType(t);
+				
+				EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
+				if(eAnnot != null) {
+					buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), visitorPass1.getVisibleTypeVariables(node));
+				}
 			}
 
 			// Set the parameters
@@ -214,7 +238,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 
 			// add parameters
 			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
-		
+			
 			// Is operation abstract? : we can know it already if the given operation contains no annotation
 			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
 			visitorPass1.isClassTypeOwner=false;
@@ -282,6 +306,12 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		// Set the type of this property
 		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 		exporter.current_prop.setType(t);
+		
+		EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
+		if(eAnnot != null) {
+			buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), visitorPass1.getVisibleTypeVariables(node));
+		}
+		
 		// Get the derived properties bodies and other stuffs
 		acceptList(node.getEAnnotations());
 		
@@ -308,6 +338,12 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		// Set its type
 		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 		param.setType(t);
+		
+		EAnnotation eAnnot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS);
+		if(eAnnot != null) {
+			buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), visitorPass1.getVisibleTypeVariables(node));
+		}
+		
 		exporter.current_op.getOwnedParameter().add(param);
 		return param;
 	}
@@ -425,15 +461,15 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	 */
 	protected Object visitClassAnnotation(EAnnotation node) {
 		// node.getSource() == "kermeta"
-		if (node.getSource().equals(KM2Ecore.ANNOTATION)) {
+		if(node.getSource().equals(KM2Ecore.ANNOTATION)) {
 			visitStandardAnnotation(node);
 		}
 		// node.getSource() == "http://www.eclipse.org/emf/2002/GenModel"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
 			visitGenModelAnnotation(node);
 		}
 		// node.getSource() == "kermeta.inv"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_INV)) {
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_INV)) {
 			// "node.getDetails()" should contain a single element
 			for ( Object inv_name : node.getDetails().keySet() ) { 
 				Constraint inv = unit.struct_factory.createConstraint();
@@ -447,8 +483,12 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			}
 		}
 		// node.getSource() == "kermeta.typeParameters"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
-			visitTypeParameterAnnotation(node);
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
+			visitorPass1.visitTypeParameterAnnotation(node);
+		}
+		// node.getSource() == "kermeta.typeVariableBindings"
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS)) {
+			visitSuperClassesTypeVariableBindings(node);
 		}
 		return null;
 	}
@@ -504,7 +544,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		}
 		// node.getSource() == "kermeta.typeParameters"
 		else if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
-			visitTypeParameterAnnotation(node);
+			visitorPass1.visitTypeParameterAnnotation(node);
 		}
 		// node.getSource() == "kermeta.raisedExceptions"
 		else if (node.getSource().equals(KM2Ecore.ANNOTATION_RAISEDEXCEPTION)) {
@@ -556,41 +596,41 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	}
 	
 	
-	/**
-	 * Visit a TypeParameter ('kermeta.typeParameter') EAnnotation.
-	 * Such EAnnotation is supposed to be attached to either an Eclass or an EOperation.
-	 * @param node
-	 * @return
-	 */
-	protected Object visitTypeParameterAnnotation(EAnnotation node) {
-		List<TypeVariable> params = new ArrayList<TypeVariable>();
-		for (Object next :  node.getDetails().keySet()) {
-			String name = (String)next;
-			TypeVariable tv = unit.struct_factory.createObjectTypeVariable(); 
-			tv.setName(name);
-			// detail can be " A : Anothertype" -> means that A must inherit Anothertype
-			String detail = (String)node.getDetails().get(name); 
-			if (detail.indexOf(":")>0) {
-				detail = detail.replaceAll(" ", ""); // strip spaces
-				String str_cdef = detail.substring(detail.indexOf(":")+1);
-				ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(str_cdef);
-				fr.irisa.triskell.kermeta.language.structure.Class type = 
-					StructureFactory.eINSTANCE.createClass();
-		        type.setTypeDefinition((ClassDefinition)cdef);
-				tv.setSupertype(type);
-			}
-			params.add(tv);
-		} 
-		// for current_class - add the parameter to the class
-		if (visitorPass1.isClassTypeOwner) {
-			exporter.current_classdef.getTypeParameter().addAll(params);
-		}
-		// for current_op
-		else {
-			exporter.current_op.getTypeParameter().addAll(params);
-		}
-		return null;
-	}
+//	/**
+//	 * Visit a TypeParameter ('kermeta.typeParameter') EAnnotation.
+//	 * Such EAnnotation is supposed to be attached to either an EClass or an EOperation.
+//	 * @param node
+//	 * @return
+//	 */
+//	protected Object visitTypeParameterAnnotation(EAnnotation node) {
+//		List<TypeVariable> params = new ArrayList<TypeVariable>();
+//		for (Object next :  node.getDetails().keySet()) {
+//			String name = (String)next;
+//			TypeVariable tv = unit.struct_factory.createObjectTypeVariable(); 
+//			tv.setName(name);
+//			// detail can be " A : Anothertype" -> means that A must inherit Anothertype
+//			String detail = (String)node.getDetails().get(name); 
+//			if (detail.indexOf(":")>0) {
+//				detail = detail.replaceAll(" ", ""); // strip spaces
+//				String str_cdef = detail.substring(detail.indexOf(":")+1);
+//				ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(str_cdef);
+//				fr.irisa.triskell.kermeta.language.structure.Class type = 
+//					StructureFactory.eINSTANCE.createClass();
+//		        type.setTypeDefinition((ClassDefinition)cdef);
+//				tv.setSupertype(type);
+//			}
+//			params.add(tv);
+//		} 
+//		// for current_class - add the parameter to the class
+//		if (visitorPass1.isClassTypeOwner) {
+//			exporter.current_classdef.getTypeParameter().addAll(params);
+//		}
+//		// for current_op
+//		else {
+//			exporter.current_op.getTypeParameter().addAll(params);
+//		}
+//		return null;
+//	}
 	
 	
 	/**
@@ -663,5 +703,108 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			}
 		}
 		return result;
+	}
+
+
+	/**
+	 * This method visits an EClass TypeVariableAnnotation annotation and completes the
+	 * existing inheritance type structure with type variable binding information.
+	 * @param node - TypeVariableBinding annotation of an EClass element
+	 */
+	protected void visitSuperClassesTypeVariableBindings(EAnnotation node) {
+		// Iterate over all supertypes of the currently visited class
+		for (Object next : exporter.current_classdef.getSuperType()) {
+			Type t = (Type) next;
+			buildSuperTypeBindings(
+					t,
+					node.getDetails(),
+					visitorPass1.getVisibleTypeVariables((EClass) node.getEModelElement()));
+		}
+	}
+
+
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// TYPE VARIABLE BINDINGS specific methods:
+	//   - buildTypeVariableBindings
+	//   - buildSuperTypeBindings
+	///////////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * This method builds the type variable bindings structure of the provided class from
+	 * the map of the class type variable bindings and the list of visible type variables. 
+	 * @param cl    - targeted class
+	 * @param map   - map containing the list of type variable bindings of the class
+	 * @param tVars - list of visible type variables
+	 */
+	protected void buildTypeVariableBindings(
+			fr.irisa.triskell.kermeta.language.structure.Class cl,
+			EMap map,
+			ArrayList tVars) {
+
+		TypeVariableBinding tvBinding = null;
+		int i = 0;
+		for(Object next : map) {
+			EStringToStringMapEntryImpl entry = (EStringToStringMapEntryImpl) next;
+			String qName = entry.getTypedValue();
+			
+			tvBinding = unit.struct_factory.createTypeVariableBinding();
+			
+			// Set binding variable
+			TypeVariable tVar = (TypeVariable) cl.getTypeDefinition().getTypeParameter().get(i);
+			tvBinding.setVariable(tVar);
+			
+			// Set binding type
+			tvBinding.setType( visitorPass1.getTypeHierarchyFromQualifiedName(qName, tVars) );
+			
+			// Add binding to bindings list
+			cl.getTypeParamBinding().add(tvBinding);
+			i++;
+		}
+	}
+
+
+	/**
+	 * This method completes the description of a supertype of currently visited class by
+	 * adding type variable bindings structure if the supertype is parameterized.  
+	 * @param supertype  - a supertype of the class
+	 * @param map        - map containing all parameterized supertypes of the class
+	 * @param tVars      - list of visible type variables
+	 */
+	protected void buildSuperTypeBindings(Type supertype, EMap map, ArrayList<TypeVariable> tVars) {
+		// Iterate over all annotation entries - each entry corresponds to a parameterized
+		// supertype of currently visited class
+		for(Object nextEntry : map) {
+			// 1- Get qualified name of current parameterized supertype
+			EStringToStringMapEntryImpl entry = (EStringToStringMapEntryImpl) nextEntry;
+			String qName = entry.getTypedValue();
+			
+			// 2- Get Type from qName (a class cannot inheritate from a TypeVariable)
+			ArrayList<String> params = new ArrayList<String>();
+			Type t = visitorPass1.analyseQualifiedName(qName, tVars, params);
+			
+			// 3- Compare with supertype in parameter in case it is a ParameterizedType
+			// (otherwise, it can't have any TypeVariableBinding)
+			if(t instanceof ParameterizedType) {
+				ParameterizedType pType = (ParameterizedType) supertype;
+				if(pType.getTypeDefinition() == ((ParameterizedType) t).getTypeDefinition()) {
+					TypeVariableBinding tvBinding = null;
+					int i = 0;
+					for(Object next : params) {
+						String tVarName = (String) next;
+						tvBinding = unit.struct_factory.createTypeVariableBinding();
+					
+						// Set binding variable
+						tvBinding.setVariable( (TypeVariable) pType.getTypeDefinition().getTypeParameter().get(i) );
+					
+						// Set binding type
+						tvBinding.setType(visitorPass1.getTypeHierarchyFromQualifiedName(tVarName, tVars));
+					
+						// Add binding to bindings list
+						pType.getTypeParamBinding().add(tvBinding);
+						i++;
+					}
+				}
+			}
+		}
 	}
 }

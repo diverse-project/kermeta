@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.12 2006-10-25 08:27:12 dvojtise Exp $
+/* $Id: Ecore2KMPass2.java,v 1.13 2007-02-02 16:19:12 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -11,6 +11,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -105,17 +106,23 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	/**
 	 * Construct the Class corresponding to given EClass:
 	 *  - its super types
-	 *  
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EClass)
 	 */
 	public Object visit(EClass node)
 	{
 		exporter.current_classdef = (ClassDefinition)visitorPass1.eclassifier_typedefinition_map.get(node);
 		visitorPass1.isClassTypeOwner = true;
-		// First of all, set the super types
+
+		// Visit the TypeParameter annotations
+		// (they have to be set for type variable bindings process in Pass_3)
+		EAnnotation typeVar_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
+		if(typeVar_Annot != null) {
+			visitorPass1.visitTypeParameterAnnotation(typeVar_Annot);
+		}
+
+		// Set the super types
 		for (Object next : ((EClass)node).getESuperTypes()) {
 			EClassifier st = (EClassifier)next;
-			//Type t = createTypeForEClassifier(st, node);
 			Type t = visitorPass1.createTypeForEClassifier(st, node);
 			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				throw new KM2ECoreConversionException(
@@ -152,67 +159,4 @@ public class Ecore2KMPass2 extends EcoreVisitor {
         if (type==null) throw new KM2ECoreConversionException("Ecore2KM exception : instance type is null for '" + type.getName() + "'");
         return iType;
 	}
-
-
-	/**
-	 * Get the kermeta type corresponding to this EType
-	 * @param node is only used to get the node for which this class were called 
-	 * */
-	/*
-	protected Type createTypeForEClassifier(EClassifier etype, ENamedElement node) {
-		Type result = null;
-		TypeDefinition def = null;
-		if (etype == null)
-		{ 
-			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
-		}
-		else def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
-
-//		if (def == null) {
-//			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
-//			// does not reflect a real path in the user file system. We will handle it separately
-//			// Try to find the given element in the loaded kermeta units
-//			// If not found, load a kermeta unit for the resource of the given element
-//			if (etype.eResource() != resource)
-//			{
-//				String etype_qname = Ecore2KM.getQualifiedName(etype);
-//				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
-//				// this unit is not related to a real file in the user file system
-//				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
-//				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
-//				dep_unit.load();
-//				unit.importedUnits.add(dep_unit);
-//				def = dep_unit.typeDefs.get(etype_qname);
-//			}
-//			else
-//				def = (TypeDefinition)visitorPass1.eclassifier_typedefinition_map.get(etype)!=null?
-//						visitorPass1.eclassifier_typedefinition_map.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
-//		}
-//		
-//		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
-
-		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
-		if (def instanceof Type)
-			result = (Type)def;
-		else
-		{
-			// Otherwise it is always a ClassDefinition
-			ClassDefinition cd = (ClassDefinition)def;
-			fr.irisa.triskell.kermeta.language.structure.Class fc = visitorPass1.classes.get(cd);
-			if (fc == null) {
-				fc = unit.struct_factory.createClass();
-				fc.setTypeDefinition(cd);
-				visitorPass1.classes.put(cd, fc);
-			}
-			result = fc;
-		}
-		// Type should never be null
-		if (result == null) {
-			throw new Error("Internal error of ecore2kermeta transfo : type " +
-					"of '" + node.getName() + node.eClass().getName() + ":" + etype.getName() + "' not found " +
-							"in Kermeta side");
-		}
-		return result;
-	}
-	*/
 }
