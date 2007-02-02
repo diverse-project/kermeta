@@ -185,7 +185,7 @@ public class StructureCreationNodeUtils extends AbstractCreationUtils {
 		// Check if the type of the property is a StandardType or a
 		// PrimitiveType
 		// => then it appears like a node else like an edge
-		if (element.getType() == null || KermetaUtils.getDefault().isStandardType(element.getType())) {
+		if (element.getType() == null || (KermetaUtils.getDefault().isStandardType(element.getType()) || KermetaUtils.getDefault().isPrimitiveType(element.getType()))) {
 			return createGraphNode(element, presentation);
 		}
 		return null;

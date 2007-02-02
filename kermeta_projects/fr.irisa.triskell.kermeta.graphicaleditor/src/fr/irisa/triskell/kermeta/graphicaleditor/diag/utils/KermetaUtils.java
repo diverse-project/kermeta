@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.9 2007-01-29 12:04:51 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.10 2007-02-02 15:06:25 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 
@@ -60,12 +61,13 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
  * the framework need to be done using the names of the types. (what a
  * pity...but I don't know yet how to get rid of that)
  * 
+ * @generated NOT
  */
 public class KermetaUtils {
-	
-	/** Logger to get the error of this launcher */
-    //final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.GraphicalEditor"); 
 
+	/** Logger to get the error of this launcher */
+	// final static public Logger internalLog =
+	// LogConfigurationHelper.getLogger("KMT.GraphicalEditor");
 	/** Standard unit */
 	protected KermetaUnit standardUnit;
 
@@ -86,7 +88,7 @@ public class KermetaUtils {
 		super();
 		standardUnit = loadStdLib();
 		System.out.println("Debug - Standard Lib: " + standardUnit.toString());
-		
+
 		typeFixer = new TypeContainementFixer();
 		prettyPrinter = new KM2KMTPrettyPrinter();
 	}
@@ -97,14 +99,14 @@ public class KermetaUtils {
 		}
 		return kermetaUtils;
 	}
-	
+
 	/**
 	 * A method that loads the Kermeta standard library. This should be called
 	 * only once, when the editor is launched. Standard Lib is not intended to
 	 * dynamically change, so we did not consider this eventuality.
 	 */
 	public KermetaUnit loadStdLib() { // KermetaUnit.STD_LIB_URI =
-										// "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+		// "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
 		return StdLibKermetaUnitHelper.getKermetaUnit();
 	}
 
@@ -334,32 +336,30 @@ public class KermetaUtils {
 	 */
 	public boolean isStandardType(Type type) {
 
-		// FIXME : it is possible to improve the retrieval method of the ClassDefinition
-		//corresponding with "kermeta::standard::ValueType", may be with a cache (a class variable)
+		// FIXME : it is possible to improve the retrieval method of the
+		// ClassDefinition
+		// corresponding with "kermeta::standard::ValueType", may be with a
+		// cache (a class variable)
 		if (type instanceof Class) {
-			TypeDefinition valueTypeTypeDef = null;
-			
-			boolean hasFound = false;
-			for(Iterator it = type.eResource().getResourceSet().getAllContents(); it.hasNext()&& hasFound==false;) {
-				Object aResourceElt = (Object) it.next();
-				if(aResourceElt instanceof ClassDefinition)
-				{
-					ClassDefinition aClassDef = (ClassDefinition) aResourceElt;
-					if(NamedElementHelper.getQualifiedName(aClassDef).equals("kermeta::standard::ValueType")) {
-						valueTypeTypeDef = aClassDef;
-						hasFound = true;
-					}
-					
-				}
-			}
-			
-			if(((Class) type).getTypeDefinition().getTypeParameter().size()==0) {
-				if(! ClassDefinitionHelper.isSuperClassOf((ClassDefinition) valueTypeTypeDef,(ClassDefinition) ((Class) type).getTypeDefinition())) {
+			TypeDefinition valueTypeTypeDef = getTypeDefinitionFromResourceSet(type.eResource(),"kermeta::standard::ValueType");
+
+			/*System.out.println(((Class) type).getTypeDefinition().getName()
+					+ ": 1");*/
+
+			if (((Class) type).getTypeDefinition().getTypeParameter().size() == 0) {
+				/*System.out.println(((Class) type).getTypeDefinition().getName()
+						+ ": 2");*/
+				if (!ClassDefinitionHelper.isSuperClassOf(
+						(ClassDefinition) valueTypeTypeDef,
+						(ClassDefinition) ((Class) type).getTypeDefinition())) {
+					/*System.out.println(((Class) type).getTypeDefinition()
+							.getName()
+							+ ": 3");*/
 					return false;
 				}
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -369,9 +369,56 @@ public class KermetaUtils {
 	 * 
 	 * @param type
 	 * @return
+	 * 
+	 * @generated NOT
 	 */
 	public boolean isPrimitiveType(Type type) {
-		return type instanceof PrimitiveType;
+
+		if (type instanceof Class) {
+			
+			TypeDefinition primitiveTypeTypeDef = getTypeDefinitionFromResourceSet(type.eResource(),"kermeta::standard::PrimitiveType");
+
+			if (((Class) type).getTypeDefinition().getTypeParameter().size() == 0) {
+				/*System.out.println(((Class) type).getTypeDefinition().getName()
+						+ ": 2");*/
+				if (!ClassDefinitionHelper.isSuperClassOf(
+						(ClassDefinition) primitiveTypeTypeDef,
+						(ClassDefinition) ((Class) type).getTypeDefinition())) {
+					/*System.out.println(((Class) type).getTypeDefinition()
+							.getName()
+							+ ": 3");*/
+					return false;
+				}
+			}
+		}
+
+		return true;
+
+		// return type instanceof PrimitiveType;
 	}
 	
+	/**
+	 * @param resource EMF Resource
+	 * @param qualifiedName Qualified name of the searched TypeDefinition
+	 * Get the TypeDefinition by QualifiedName from a loaded framework.km in an EMF ResourceSet
+	 * @return
+	 * 
+	 * @generated NOT
+	 */
+	public TypeDefinition getTypeDefinitionFromResourceSet(Resource resource, String qualifiedName) {
+		TypeDefinition typeDef = null;
+		boolean hasFound = false;
+		for (Iterator it = resource.getResourceSet()
+				.getAllContents(); it.hasNext() && hasFound == false;) {
+			Object aResourceElt = (Object) it.next();
+			if (aResourceElt instanceof ClassDefinition) {
+				ClassDefinition aClassDef = (ClassDefinition) aResourceElt;
+				if (NamedElementHelper.getQualifiedName(aClassDef).equals(qualifiedName)) {
+					typeDef = aClassDef;
+					hasFound = true;
+				}
+			}
+		}
+		return typeDef;
+	}
 }

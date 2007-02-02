@@ -175,7 +175,8 @@ public class ClassDefinitionRestoreConnectionCommand extends
 				Property edgeObject = (Property) obj;
 
 				if (!KermetaUtils.getDefault().isStandardType(
-						edgeObject.getType())) {
+						edgeObject.getType()) && !KermetaUtils.getDefault().isPrimitiveType(
+								edgeObject.getType())) {
 
 					// Change : edgeObject.getType()
 					if (targetObject.equals(((ParameterizedType) edgeObject
