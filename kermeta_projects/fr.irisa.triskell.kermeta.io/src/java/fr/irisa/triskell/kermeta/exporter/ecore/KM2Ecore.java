@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.29 2007-01-25 15:26:59 dtouzet Exp $
+/* $Id: KM2Ecore.java,v 1.30 2007-02-02 16:17:33 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -91,12 +91,14 @@ public class KM2Ecore {
 	 */
 	public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> km2ecoremapping =  new Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject>();
 
-	/** This datatype is used as an extra datatype to represent (in the built Ecore file)
-	 *  the type of elements (properties and parameters) that have a TypeVariable as type.
-	 *  Such properties/parameters will have this DataType as type, as well as an annotation
-	 *  that contains the name of the TypeVariable 
+	/**
+	 * This datatype is used as an extra datatype to represent (in the built Ecore file)
+	 * the type of elements (properties/parameters/operations) that have a kermeta specific
+	 * type (TypeVariable/FunctionType) as type.
+	 * Such properties/parameters/operations will have this DataType as type, as well as an
+	 * annotation that contains the name of this specific type. 
 	 */
-	protected EDataType typeVariableAlias = null;
+	protected EDataType kermetaTypesAlias = null;
 	
 	/** this map is used to determine the java object corresponding to a kermeta primitive type */ 
     public static Hashtable<String,String> primitive_types_mapping;
@@ -110,8 +112,10 @@ public class KM2Ecore {
     	primitive_types_mapping.put("kermeta::standard::String",	"java.lang.String");
     	primitive_types_mapping.put("kermeta::standard::Object",	"java.lang.Object");
     	primitive_types_mapping.put("kermeta::standard::UnlimitedNatural",	"java.lang.Integer");
-    	
     }
+    
+    //
+    public final static String KERMETA_TYPES = "_KermetaSpecialTypesAlias_";
  
     // Supported EAnnotation names, along with the type of elements they can be associated with:
     //  => All annotated elements
@@ -119,20 +123,22 @@ public class KM2Ecore {
     public final static String ANNOTATION_DOCUMENTATION = "http://www.eclipse.org/emf/2002/GenModel";
     //  => Packages
     public final static String ANNOTATION_REQUIRE = ANNOTATION + ".req";
-    //  => ClassDefs 
-    public final static String ANNOTATION_INV = ANNOTATION + ".inv";
     //  => Operations
     public final static String ANNOTATION_PRE = ANNOTATION + ".pre";
     public final static String ANNOTATION_POST = ANNOTATION + ".post";
     public final static String ANNOTATION_RAISEDEXCEPTION = ANNOTATION + ".raisedExceptions";
-    //  => ClassDefs, Operations
-    public final static String ANNOTATION_NESTED_DOC = ANNOTATION_INV + ".doc";
-    public final static String ANNOTATION_TYPEPARAMETER = ANNOTATION + ".typeParameters";
     //  => Properties
     public final static String ANNOTATION_DERIVEDPROPERTY_GETTER = 	ANNOTATION + "derivedProp.getter";
     public final static String ANNOTATION_DERIVEDPROPERTY_SETTER = 	ANNOTATION + "derivedProp.setter";
-    //  => Properties, Parameters
+    //  => Properties, Parameters, Operations
     public final static String ANNOTATION_TYPEVARIABLE = ANNOTATION + ".typeVariable";
+    public final static String ANNOTATION_TYPEVARIABLE_BINDINGS = ANNOTATION + ".typeVariableBindings";
+    public final static String ANNOTATION_FUNCTIONTYPE = ANNOTATION + ".functionType";
+    //  => ClassDefs 
+    public final static String ANNOTATION_INV = ANNOTATION + ".inv";
+    //  => ClassDefs, Operations
+    public final static String ANNOTATION_NESTED_DOC = ANNOTATION_INV + ".doc";
+    public final static String ANNOTATION_TYPEPARAMETER = ANNOTATION + ".typeParameters";
     
     // Available static keys for the "kermeta" EAnnotation, along with the type of elements
     // these entries relate to:

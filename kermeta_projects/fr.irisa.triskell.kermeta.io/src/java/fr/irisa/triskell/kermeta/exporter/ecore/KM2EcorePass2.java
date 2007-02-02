@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.30 2007-01-25 15:26:59 dtouzet Exp $
+/* $Id: KM2EcorePass2.java,v 1.31 2007-02-02 16:17:32 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,15 +47,19 @@ import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
@@ -127,31 +132,42 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
-		EClass newEClass=null;
+		EClass newEClass = null;
 		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ node.getName());
 		loggerTabs.increment();
 		
 		// Search the Eclass from the pass 1
-		newEClass = (EClass)kmt2ecoremapping.get(node);
+		newEClass = (EClass) kmt2ecoremapping.get(node);
 		
 		// Search the super types of EClass
-		for ( Object next : node.getSuperType()) {
-			Object o = accept((Type)next); 
-			if (o != null) newEClass.getESuperTypes().add(o);
-			else // FIXME When this case does occur?
-				throw new KM2ECoreConversionException( "Problem : accept of a getFSuperType on '"+ node.getName()+ "' returned null -- " + next);
+		for(Object next : node.getSuperType()) {
+			Type t = (Type) next;
+			Object o = accept(t); 
+			if(o != null) {
+				// ...
+				newEClass.getESuperTypes().add(o);
+
+				// ...
+				if(t instanceof ParameterizedType) {
+					setSuperclassTypeVariableBindingsAnnotation((ParameterizedType) t, newEClass);
+				}
+			}
+			else
+				// FIXME When this case does occur?
+				throw new KM2ECoreConversionException( "Problem : accept of a getSuperType on '"+ node.getName()+ "' returned null -- " + next);
 		}
-			// Visit TypeParameters - One annotation per type parameter
-		for ( Object tv : node.getTypeParameter() ) {
+
+		// Visit TypeParameters - One annotation per type parameter
+		for(Object tv : node.getTypeParameter()) {
 			setTypeParameterAnnotation((TypeVariable)tv, newEClass);
 		}
+
 		// Visit owned attributes
-		for (Object next : node.getOwnedAttribute() ) { accept((EObject)next); }
+		for(Object next : node.getOwnedAttribute()) { accept((EObject)next); }
 		// Visit owned operations
-		for (Object next : node.getOwnedOperation() ) { accept((EObject)next); }
+		for(Object next : node.getOwnedOperation()) { accept((EObject)next); }
 		
 		loggerTabs.decrement();
-		
 		return newEClass;
 	}
 	
@@ -172,19 +188,31 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 					+ NamedElementHelper.getQualifiedName(node));
 		// Parameters
 		for ( Object next : node.getOwnedParameter() ) { this.accept((EObject)next); }
-		
-		// Return type (it can be null)
-		if(node.getType() instanceof TypeVariable) {
-			// If type of operation is a TypeVariable, set its type to the "_TypeVariableAlias_" 
-			// datatype created during first pass
-			newEOperation.setEType(ecoreExporter.typeVariableAlias);
 
-			// Add TypeVariable EAnnotation to EOperation
-			setTypeVariableAnnotation(((TypeVariable) node.getType()).getName(), newEOperation);
+
+		///////////////////////////////////////////////////////////////////////////////////
+		// Return type (it can be null)
+		Type opType = node.getType();
+		if(opType instanceof TypeVariable || opType instanceof FunctionType) {
+			// If type of operation is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
+			// datatype created during first pass
+			newEOperation.setEType(ecoreExporter.kermetaTypesAlias);
+
+			// Add specific EAnnotation to EOperation
+			if(opType instanceof TypeVariable) {
+				setTypeVariableAnnotation(((TypeVariable) opType).getName(), newEOperation);
+			}
+			else {
+				setFunctionTypeAnnotation((FunctionType) opType, newEOperation);
+			}
 		}
 		else {
-			if(node.getType() != null) {
-				newEOperation.setEType((EClassifier)this.accept((EObject)node.getType()));
+			if(opType != null) {
+				newEOperation.setEType((EClassifier) this.accept((EObject) opType));
+				
+				if(opType instanceof ParameterizedType) {
+					setTypeVariableBindingsAnnotation((ParameterizedType) opType, newEOperation);
+				}
 			}
 		}
 
@@ -223,23 +251,40 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		EClassifier type = null; 
 
-		if(node.getType() instanceof TypeVariable) {
-			// If type of parameter is a TypeVariable, set its type to the "_TypeVariableAlias_" 
+		
+		///////////////////////////////////////////////////////////////////////////////////
+		// Return type (it can NOT be null)
+		Type paramType = node.getType(); 
+		if(paramType instanceof TypeVariable || paramType instanceof FunctionType) {
+			// If type of parameter is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
 			// datatype created during first pass
-			type = ecoreExporter.typeVariableAlias; 
+			type = ecoreExporter.kermetaTypesAlias; 
 
-			// Add TypeVariable EAnnotation to EParameter
-			setTypeVariableAnnotation(((TypeVariable) node.getType()).getName(), newEParameter);
+			// Add specific EAnnotation to EParameter
+			if(paramType instanceof TypeVariable) {
+				setTypeVariableAnnotation(((TypeVariable) paramType).getName(), newEParameter);
+			}
+			else {
+				setFunctionTypeAnnotation((FunctionType) paramType , newEParameter);
+			}
 		}
 		else {
-			type = (EClassifier)accept(node.getType());
-			if (type == null ) // null type forbidden for parameter type
+			type = (EClassifier)accept(paramType);
+
+			if (type == null ) { 
+				// null type forbidden for parameter type
 				throw new KM2ECoreConversionException( 
 				"Problem : type not found for a parameter '"+ node.getName()+ "' in operation : " +
 				NamedElementHelper.getQualifiedName(node.getOperation()));
-			
+			}
+			else {
+				if(paramType instanceof ParameterizedType) {
+					setTypeVariableBindingsAnnotation((ParameterizedType) paramType, newEParameter);
+				}
+			}
 		}
 
+		
 		newEParameter.setEType(type);
 		return newEParameter;
 	}
@@ -330,22 +375,39 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		EClassifier type = null;
 
-		if(node.getType() instanceof TypeVariable) {
-			// If type of parameter is a TypeVariable, set its type to the "_TypeVariableAlias_" 
+		
+		///////////////////////////////////////////////////////////////////////////////////
+		// Return type (it can NOT be null)
+		Type propType = node.getType();
+		if(propType instanceof TypeVariable || propType instanceof FunctionType) {
+			// If type of property is a kermeta special type, set its type to the "_KermataSpecialTypesAlias_" 
 			// datatype created during first pass
-			type = ecoreExporter.typeVariableAlias; 
+			type = ecoreExporter.kermetaTypesAlias; 
 
-			// Add TypeVariable EAnnotation to EStructuralFeature
-			setTypeVariableAnnotation(((TypeVariable) node.getType()).getName(), newEStructuralFeature);
+			// Add specific EAnnotation to EStructuralFeature
+			if(propType instanceof TypeVariable) {
+				setTypeVariableAnnotation(((TypeVariable) propType).getName(), newEStructuralFeature);
+			}
+			else {
+				setFunctionTypeAnnotation((FunctionType) propType, newEStructuralFeature);
+			}
 		}
 		else {
-			type = (EClassifier)accept(node.getType());
-			if (type == null ) // null type forbidden for parameter type
+			type = (EClassifier)accept(propType);
+			if (type == null ) {
+				// null type forbidden for parameter type
 				throw new KM2ECoreConversionException( 
 				"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
 				NamedElementHelper.getQualifiedName(node.getOwningClass()));
+			}
+			else {
+				if(propType instanceof ParameterizedType) {
+					setTypeVariableBindingsAnnotation((ParameterizedType) propType, newEStructuralFeature);
+				}
+			}
 		}
 
+		
 		newEStructuralFeature.setEType(type);
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
@@ -687,7 +749,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	
 
 	/**
-	 * 
 	 * @param superOperation
 	 * @param newEOperation
 	 */
@@ -733,18 +794,139 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				null);					
 	}
 
+	
+	/**
+	 * This method aims to add a type variable annotation to a ETypedElement (EStructuralFeature/
+	 * EOperation/EParameter) which kermeta type is a type variable.
+	 * It saves the qualified name of type variable.
+	 * @param qName  - qualified name of the kermeta specific type
+	 * @param newElt - newly allocated element corresponding to this type
+	 */
+	protected void setTypeVariableAnnotation(String qName, ETypedElement newElt) {
+		ecoreExporter.addAnnotation( 
+				newElt,
+				KM2Ecore.ANNOTATION_TYPEVARIABLE,
+				qName,
+				qName,
+				null);
+	}
+
 
 	/**
-	 * @param tVarName
-	 * @param newEObject
+	 * This method aims to add a function type annotation to a ETypedElement (EStructuralFeature/
+	 * EOperation/EParameter) which kermeta type is a function type.
+	 * It saves the signature of the function type.
+	 * @param fType  - function type to be saved
+	 * @param newElt - newly allocated element corresponding to this type
 	 */
-	protected void setTypeVariableAnnotation(String tVarName, EModelElement newEObject) {
-		ecoreExporter.addAnnotation( 
-				newEObject,
-				KM2Ecore.ANNOTATION_TYPEVARIABLE,
-				tVarName,
-				tVarName,
-				null);
+	protected void setFunctionTypeAnnotation(FunctionType fType, ETypedElement newElt) {
+		Type leftType = fType.getLeft();
+		Type rightType = fType.getRight();
 		
+		// Build list of function parameters
+		ArrayList<Type> params = new ArrayList<Type>(); 
+		if(leftType instanceof ProductType) {
+			params.addAll( ((ProductType) leftType).getType() );
+		}
+		else {
+			params.add(leftType);
+		}
+		
+		int i = 0;
+		String qName = null;
+		
+		// Save function parameters intio annotation
+		Type t = null;
+		for(Object next : params) {
+			t = (Type) next;
+			qName = (String) new KM2KMTPrettyPrinter().accept(t);
+			
+			ecoreExporter.addAnnotation( 
+					newElt,
+					KM2Ecore.ANNOTATION_FUNCTIONTYPE,
+					String.valueOf(i),
+					qName,
+					null);
+			
+			i++;
+		}
+		
+		// Save function return type into annotation
+		qName = (String) new KM2KMTPrettyPrinter().accept(rightType);
+		ecoreExporter.addAnnotation( 
+				newElt,
+				KM2Ecore.ANNOTATION_FUNCTIONTYPE,
+				String.valueOf(i),
+				qName,
+				null);
+	}
+
+
+	/**
+	 * This method adds the type variable bindings annotation to the generated ETypedElement
+	 * (EStructuralFeature/EOperation/EParameter).
+	 *  The annotation details map will contain an entry for each binding of the typed
+	 *  element.
+	 * @param paramType - parameterized type
+	 * @param newElt    - newly allocated element corresponding to this type
+	 */
+	protected void setTypeVariableBindingsAnnotation(ParameterizedType paramType, ETypedElement newElt) {
+		String qName = null;
+		Type bindingType = null;
+		
+		// Counter used to fill in the key field of the annotation details map
+		int i = 0;
+		
+		// Iterate over bindings of the type
+		for(Object next : paramType.getTypeParamBinding()) {
+			TypeVariableBinding binding = (TypeVariableBinding) next;
+			
+			bindingType = binding.getType(); 
+			
+			// Get qualified name of binding type according to its type
+			// Binding type is a parameterized type (=> a class)
+			if(bindingType instanceof ParameterizedType) {
+				qName = (String) new KM2KMTPrettyPrinter().accept((ParameterizedType) binding.getType());
+			}
+			// Binding type is a data type (=> a primitive type)
+			else if(bindingType instanceof DataType) {
+				qName = ((DataType) bindingType).getName();
+			}
+			// Binding type is a parameterized type variable
+			else if(bindingType instanceof TypeVariable) {
+				qName = ((TypeVariable) bindingType).getName();
+			}
+			
+			// Add annotation for current binding
+			ecoreExporter.addAnnotation(
+					newElt,
+					KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS,
+					String.valueOf(i),
+					qName,
+					null);
+			
+			// Increment counter
+			i++;
+		}
+	}
+
+
+	/**
+	 * This method adds the current EClass a TypeVariableBinding annotation that saves
+	 * information about the 'ptype' parameterized supertype of the class.   
+	 * @param pType     - parameterized supertype of visited class
+	 * @param newEClass - newly generated EClass
+	 */
+	protected void setSuperclassTypeVariableBindingsAnnotation(ParameterizedType pType, EClass newEClass) {
+		// Get qualified name of supertype
+		String qName = (String) new KM2KMTPrettyPrinter().accept(pType);
+		
+		// Add supertype binding annotation
+		ecoreExporter.addAnnotation(
+				newEClass,
+				KM2Ecore.ANNOTATION_TYPEVARIABLE_BINDINGS,
+				qName,
+				qName,
+				null);
 	}
 }

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.36 2007-01-25 15:26:59 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.37 2007-02-02 16:17:33 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -475,13 +476,13 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 				throw new KM2ECoreConversionException("A tag in '"+node.getName() + "' could not be resolved");				
 		}
 
-		// In case type of the parameter is a TypeVariable, create the TypeVariable alias
-		// to handle the parameter type in the Ecore file
-		if(node.getType() instanceof TypeVariable) {
-			// TypeVariable alias is created only once for all properties/parameters
-			// that have a TypeVariable as type
-			if(ecoreExporter.typeVariableAlias == null) {
-				initTypeVariableAlias((Package) node.eContainer().eContainer());
+		// In case type of the operation has a kermeta special type, create the KermetaSpecialTypes
+		// alias to handle the operation type in the Ecore file
+		if(node.getType() instanceof TypeVariable || node.getType() instanceof FunctionType) {
+			// KermetaSpecialTypes alias is created only once for all properties/parameters/operations
+			// that have a kermeta special type as type
+			if(ecoreExporter.kermetaTypesAlias == null) {
+				initKermetaTypesAlias((Package) node.eContainer().eContainer());
 			}
 		}
 
@@ -509,13 +510,13 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEParameter.setOrdered(node.isIsOrdered());
 		newEParameter.setUnique(node.isIsUnique());
 
-		// In case type of the parameter is a TypeVariable, create the TypeVariable alias
-		// to handle the parameter type in the Ecore file
-		if(node.getType() instanceof TypeVariable) {
-			// TypeVariable alias is created only once for all properties/parameters
-			// that have a TypeVariable as type
-			if(ecoreExporter.typeVariableAlias == null) {
-				initTypeVariableAlias((Package) node.eContainer().eContainer().eContainer());
+		// In case type of the parameter has a kermeta special type, create the KermetaSpecialTypes
+		// alias to handle the parameter type in the Ecore file
+		if(node.getType() instanceof TypeVariable  || node.getType() instanceof FunctionType) {
+			// KermetaSpecialTypes alias is created only once for all properties/parameters/operations
+			// that have a kermeta special type as type
+			if(ecoreExporter.kermetaTypesAlias == null) {
+				initKermetaTypesAlias((Package) node.eContainer().eContainer().eContainer());
 			}
 		}
 		
@@ -595,13 +596,13 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// newEStructuralFeature.setDefaultValue() -> no default value
 		setTagAnnotations(node, newEStructuralFeature);
 		
-		// In case type of the property is a TypeVariable, create the TypeVariable alias
-		// to handle the property type in the Ecore file
-		if(node.getType() instanceof TypeVariable) {
-			// TypeVariable alias is created only once for all properties/parameters
-			// that have a TypeVariable as type
-			if(ecoreExporter.typeVariableAlias == null) {
-				initTypeVariableAlias((Package) node.eContainer().eContainer());
+		// In case type of the property has a kermeta special type, create the KermetaSpecialTypes
+		// alias to handle the property type in the Ecore file
+		if(node.getType() instanceof TypeVariable  || node.getType() instanceof FunctionType) {
+			// KermetaSpecialTypes alias is created only once for all properties/parameters/operations
+			// that have a kermeta special type as type
+			if(ecoreExporter.kermetaTypesAlias == null) {
+				initKermetaTypesAlias((Package) node.eContainer().eContainer());
 			}
 		}
 		
@@ -684,15 +685,16 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 
 
 	/**
-	 * This method allocates and initializes the TypeVariableAlias datatype in order to
-	 * represent the type of properties/parameters that have a TypeVariable as type.
+	 * This method allocates and initializes the KermetaSpecialTypesAlias datatype in order
+	 * to represent the type of properties/parameters/operations that have a kermeta special
+	 * type (TypeVariable/FunctionType) as type.
 	 * @param pack the package that will contain the newly allocated DataType 
 	 */
-	protected void initTypeVariableAlias(Package pack) {
-		ecoreExporter.typeVariableAlias = EcoreFactory.eINSTANCE.createEDataType(); 
-		ecoreExporter.typeVariableAlias.setName("_TypeVariableAlias_");
-		ecoreExporter.typeVariableAlias.setInstanceClassName("java.lang.Object");
+	protected void initKermetaTypesAlias(Package pack) {
+		ecoreExporter.kermetaTypesAlias = EcoreFactory.eINSTANCE.createEDataType(); 
+		ecoreExporter.kermetaTypesAlias.setName(KM2Ecore.KERMETA_TYPES);
+		ecoreExporter.kermetaTypesAlias.setInstanceClassName("java.lang.Object");
 		EPackage crtEPack = (EPackage) km2ecoremapping.get(pack);
-		crtEPack.getEClassifiers().add(ecoreExporter.typeVariableAlias);
+		crtEPack.getEClassifiers().add(ecoreExporter.kermetaTypesAlias);
 	}
 }
