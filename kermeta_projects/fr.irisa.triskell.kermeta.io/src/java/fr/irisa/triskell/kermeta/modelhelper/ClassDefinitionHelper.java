@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.2 2006-12-07 08:05:35 dvojtise Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.3 2007-02-05 13:42:26 cfaucher Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -191,6 +191,22 @@ public class ClassDefinitionHelper {
 		for(Object stype : cls.getSuperType()) {
 			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
 			if (supercls == scls) return true;
+			else if(isSuperClassOf(supercls, scls)) return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Return true if supercls is a super class of cls, retrieval by name
+	 * @param supercls the Super class to which we compare cls
+	 * @param cls the class to compare to the super class
+	 * @return
+	 * FIXME CF: this method is very ugly, it is a temp patch related to the restore connection in the graphical editor
+	 */
+	public static boolean isSuperClassOfByName(ClassDefinition supercls, ClassDefinition cls) {
+		for(Object stype : cls.getSuperType()) {
+			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
+			if (supercls.getName().equals(scls.getName())) return true;
 			else if(isSuperClassOf(supercls, scls)) return true;
 		}
 		return false;

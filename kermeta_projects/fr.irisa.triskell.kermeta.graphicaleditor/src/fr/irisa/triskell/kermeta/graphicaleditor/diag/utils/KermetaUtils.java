@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.10 2007-02-02 15:06:25 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.11 2007-02-05 13:42:29 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -343,18 +343,12 @@ public class KermetaUtils {
 		if (type instanceof Class) {
 			TypeDefinition valueTypeTypeDef = getTypeDefinitionFromResourceSet(type.eResource(),"kermeta::standard::ValueType");
 
-			/*System.out.println(((Class) type).getTypeDefinition().getName()
-					+ ": 1");*/
-
 			if (((Class) type).getTypeDefinition().getTypeParameter().size() == 0) {
-				/*System.out.println(((Class) type).getTypeDefinition().getName()
-						+ ": 2");*/
-				if (!ClassDefinitionHelper.isSuperClassOf(
+				
+				// FIXME CF: the uses of the method isSuperClassOfByName is very ugly, it is a temp patch related to the restore connection in the graphical editor
+				if (!ClassDefinitionHelper.isSuperClassOfByName(
 						(ClassDefinition) valueTypeTypeDef,
 						(ClassDefinition) ((Class) type).getTypeDefinition())) {
-					/*System.out.println(((Class) type).getTypeDefinition()
-							.getName()
-							+ ": 3");*/
 					return false;
 				}
 			}
@@ -379,14 +373,11 @@ public class KermetaUtils {
 			TypeDefinition primitiveTypeTypeDef = getTypeDefinitionFromResourceSet(type.eResource(),"kermeta::standard::PrimitiveType");
 
 			if (((Class) type).getTypeDefinition().getTypeParameter().size() == 0) {
-				/*System.out.println(((Class) type).getTypeDefinition().getName()
-						+ ": 2");*/
-				if (!ClassDefinitionHelper.isSuperClassOf(
+				
+				// FIXME CF: the uses of the method isSuperClassOfByName is very ugly, it is a temp patch related to the restore connection in the graphical editor
+				if (!ClassDefinitionHelper.isSuperClassOfByName(
 						(ClassDefinition) primitiveTypeTypeDef,
 						(ClassDefinition) ((Class) type).getTypeDefinition())) {
-					/*System.out.println(((Class) type).getTypeDefinition()
-							.getName()
-							+ ": 3");*/
 					return false;
 				}
 			}
