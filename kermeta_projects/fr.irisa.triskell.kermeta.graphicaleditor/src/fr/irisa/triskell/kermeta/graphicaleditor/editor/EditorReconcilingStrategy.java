@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.7 2007-01-25 08:32:36 dvojtise Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.8 2007-02-06 17:45:46 cfaucher Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -15,30 +15,26 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.ui.texteditor.MarkerUtilities;
-import org.topcased.modeler.editor.Modeler;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**

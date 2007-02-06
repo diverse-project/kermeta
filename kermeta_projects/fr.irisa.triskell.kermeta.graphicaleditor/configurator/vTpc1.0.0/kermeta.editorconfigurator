@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" name="Kermeta class diagram" projectName="fr.irisa.triskell.kermeta.graphicaleditor" pluginVersion="0.4.1" provider="IRISA/INRIA" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1">
+<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" name="Kermeta class diagram" projectName="fr.irisa.triskell.kermeta.graphicaleditor" pluginVersion="0.4.0" provider="IRISA/INRIA" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1">
   <genModel href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#/"/>
 </editorconfigurator:EditorConfiguration>

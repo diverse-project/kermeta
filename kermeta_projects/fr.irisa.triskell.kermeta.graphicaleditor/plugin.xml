@@ -1,72 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-<extension point="org.eclipse.ui.editors">
+
+   <extension point="org.eclipse.ui.editors">
       <editor
-            class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
+            class="fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor"
             icon="icons/Km.png"
             default="true"
-            name="Kermeta class diagram"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
-            contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureEditorActionBarContributor"
+            name="%editor.name.0"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor"
+            contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.KmEditorActionBarContributor"
             extensions="kmdi">
       </editor>
    </extension>
    
    <extension point="org.eclipse.ui.newWizards">
       <wizard
-            category="fr.irisa.triskell.kermeta.KermetaWizard"
-            class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
-            finalPerspective="kermetaPerspective"
             icon="icons/Km.png"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
-            name="New Kermeta class diagram"
-            preferredPerspectives="org.eclipse.ui.resourcePerspective">
+			category="fr.irisa.triskell.kermeta.KermetaWizard"
+            class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"
+            name="%wizard.name.0"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
    
-   <extension
-         name="Kermeta graphical editor"
-         point="org.eclipse.ui.perspectiveExtensions">
+   <extension point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension targetID="org.topcased.modeler.perspective">
-         <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"/>
+         <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"/>
       </perspectiveExtension>
    </extension>
-   <extension
-         name="Kermeta metamodeler"
-         point="org.eclipse.ui.perspectiveExtensions">
+	<extension point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension targetID="kermetaPerspective">
-         <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"/>
+         <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"/>
       </perspectiveExtension>
    </extension>
    
    <extension point="org.eclipse.ui.preferencePages">
       <page
             category="org.topcased.modeler.preferences.ModelerPreferencePage"
-            class="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
-            name="Structure"/>
+            class="fr.irisa.triskell.kermeta.graphicaleditor.preferences.KmPreferencePage"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.preferences.KmPreferencePage"
+            name="%page.name.0"/>
    </extension>
+   
    <extension point="org.topcased.modeler.templates">
       <template
-            di="templates/diag/%name%.kmdi"
-            model="templates/diag/%name%.km"
+            di="templates/cd/%name%.kmdi"
+            model="templates/cd/%name%.km"
             name="Km - Kermeta class diagram"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.templates.diag"
-            editorId="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"/>
+            id="fr.irisa.triskell.kermeta.graphicaleditor.templates.cd"
+            editorId="fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor"/>
    </extension>
    
    <extension point="org.topcased.modeler.diagrams">
       <diagram
-            configuration="fr.irisa.triskell.kermeta.graphicaleditor.diag.StructureConfiguration"
-            id="fr.irisa.triskell.kermeta.graphicaleditor"
+            configuration="fr.irisa.triskell.kermeta.graphicaleditor.cd.KmConfiguration"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.cd"
             name="Kermeta class diagram">
          <enableFor class="fr.irisa.triskell.kermeta.language.structure.Package"/>
       </diagram>
 	</extension>
    
-	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
     	<propertySections contributorId="org.topcased.modeler.editor.Modeler">
 	    	<propertySection
 	        	id="fr.irisa.triskell.kermeta.graphicaleditor.NameSection"

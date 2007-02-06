@@ -1,7 +1,6 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.editor.properties.sections;
 
 import org.eclipse.emf.ecore.EAttribute;
-
 import org.topcased.tabbedproperties.sections.AbstractStringPropertySection;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
