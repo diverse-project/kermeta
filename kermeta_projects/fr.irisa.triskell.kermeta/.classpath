@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/java"/>
-	<classpathentry exported="true" kind="lib" path="lib/thirdparty/antlr.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/emfatic-core.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/ldt-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/thirdparty/log4j.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/traceability.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/interpreter_kermeta.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/io_kermeta.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/model_kermeta.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/cu_kermeta.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/junit.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- $Id: kermeta_log4j_configuration.xml,v 1.4 2005-08-23 11:17:35 zdrey Exp $ -->
+<!-- $Id: kermeta_log4j_configuration.xml,v 1.1 2007-02-06 15:06:27 ftanguy Exp $ -->
 <!-- Description: This is the configuration file for log4j it allows to tune the level of log you will receive 
 	it also allows to tune where you will receive them. -->
 

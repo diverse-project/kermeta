@@ -34,8 +34,7 @@ import java.util.*;
 public class KermetaPlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static KermetaPlugin plugin = null;
-	//Resource bundle.
-	private ResourceBundle resourceBundle;
+
 	//Icons "registry"
 	protected static KermetaIcons kermetaIcons;
 	// Logger for this plugin
@@ -47,15 +46,8 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	 * The constructor.
 	 */
 	public KermetaPlugin() {
-		/*note : be careful this method must not fail ! otherwise all the plugin that depends on it will fail too with a non explicit message !
-		 */
 		super();
 		plugin = this;
-		try {
-			resourceBundle = ResourceBundle.getBundle("fr.irisa.triskell.kermeta.KermetaPluginResources");
-		} catch (MissingResourceException x) {
-			resourceBundle = null;
-		}
 	}
 
 	/**
@@ -67,15 +59,15 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		 */
 		super.start(context);
 		// initialize the log4j system using the configuration file contained in this plugin
-		try {
+	/*	try {
 			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
 			System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 					FileLocator.toFileURL(url).getFile());
 		} catch (Exception e) {
 			System.out.print("Not able to retreive kermeta_log4j_configuration.xml in the kermeta plugin => using default log configuration");
 			// don't worry about that, the log4j will simply use its default configuration
-		}
-		if(StdLibKermetaUnitHelper.STD_LIB_URI == null) StdLibKermetaUnitHelper.setURItoDefault();
+		}*/
+		//if(StdLibKermetaUnitHelper.STD_LIB_URI == null) StdLibKermetaUnitHelper.setURItoDefault();
 		
 		// check the compatibility of dependent  stuff ... 
 		new CompatibilityChecker().check();
@@ -93,26 +85,6 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	 */
 	public static KermetaPlugin getDefault() {
 		return plugin;
-	}
-
-	/**
-	 * Returns the string from the plugin's resource bundle,
-	 * or 'key' if not found.
-	 */
-	public static String getResourceString(String key) {
-		ResourceBundle bundle = KermetaPlugin.getDefault().getResourceBundle();
-		try {
-			return (bundle != null) ? bundle.getString(key) : key;
-		} catch (MissingResourceException e) {
-			return key;
-		}
-	}
-
-	/**
-	 * Returns the plugin's resource bundle,
-	 */
-	public ResourceBundle getResourceBundle() {
-		return resourceBundle;
 	}
 	
 	/**	 

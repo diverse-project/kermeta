@@ -6,28 +6,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: plugin.xml,v 1.7 2006-09-13 17:03:22 cfaucher Exp $
+ * $Id: plugin.xml,v 1.8 2007-02-06 15:06:27 ftanguy Exp $
  */
 -->
 
-<plugin
-    name = "%pluginName"
-    id = "fr.irisa.triskell.kermeta.model"
-    version = "0.0.1"
-    provider-name = "%providerName">
-
-  <requires>
-    <import plugin="org.eclipse.core.runtime" />
-    <import plugin="org.eclipse.emf.ecore" export="true"/>
-    <import plugin="org.eclipse.emf.ecore.xmi"/>
-    <import plugin="org.eclipse.emf.common.ui"/>
-  </requires>
-
-  <runtime>
-     <library name="dist/model_kermeta.jar">
-        <export name="*"/>
-     </library>
-  </runtime>
+<plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

@@ -4,7 +4,7 @@
 <extension point="org.eclipse.ui.editors">
       <editor
             class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
-            icon="icons/Structure.png"
+            icon="icons/Km.png"
             default="true"
             name="Kermeta class diagram"
             id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
@@ -18,7 +18,7 @@
             category="fr.irisa.triskell.kermeta.KermetaWizard"
             class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
             finalPerspective="kermetaPerspective"
-            icon="icons/Structure.png"
+            icon="icons/Km.png"
             id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
             name="New Kermeta class diagram"
             preferredPerspectives="org.eclipse.ui.resourcePerspective">

@@ -1,64 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="fr.irisa.triskell.kermeta"
-   name="Kermeta Workbench"
-   version="0.4.0"
-   provider-name="IRISA/INRIA"
-   class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
-   <runtime>
-      <library name="lib/thirdparty/antlr.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/emfatic-core.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/ldt-core.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/log4j.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/traceability.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/interpreter_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/io_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="kermeta_plugin.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/model_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/cu_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/junit.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-   <requires>
-     <import plugin="org.eclipse.ui" optional="true"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.ui.intro"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.team.core"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.jdt.ui"/>
-      <import plugin="org.eclipse.ui.views.properties.tabbed"/>
-      <import plugin="org.eclipse.emf.validation" optional="true"/>
-   </requires>
-   <extension
+<plugin>
+     <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
