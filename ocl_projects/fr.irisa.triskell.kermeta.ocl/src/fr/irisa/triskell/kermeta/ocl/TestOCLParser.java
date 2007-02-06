@@ -15,6 +15,7 @@ import org.eclipse.emf.ocl.internal.parser.OCLLexer;
 import org.eclipse.emf.ocl.parser.EcoreEnvironmentFactory;
 import org.eclipse.emf.ocl.parser.EnvironmentFactory;
 import org.eclipse.emf.ocl.parser.ParserException;
+import java.io.*;
 
 public class TestOCLParser {
 	Resource resource;
@@ -69,15 +70,70 @@ public class TestOCLParser {
 		"     self.mycontext.type().oclAsType(Record).field->includes(self.field) " +
 	    " endpackage";
 
+	public static final String oclInputFileName = "AllSpeeds.ocl";
+	
+	  /**
+	  * Fetch the entire contents of a text file, and return it in a String.
+	  * This style of implementation does not throw Exceptions to the caller.
+	  *
+	  * @param aFile is a file which already exists and can be read.
+	  */
+	  static public String getContents(File aFile) {
+	    //...checks on aFile are elided
+	    StringBuffer contents = new StringBuffer();
+
+	    //declared here only to make visible to finally clause
+	    BufferedReader input = null;
+	    try {
+	      //use buffering, reading one line at a time
+	      //FileReader always assumes default encoding is OK!
+	      input = new BufferedReader( new FileReader(aFile) );
+	      String line = null; //not declared within while loop
+	      /*
+	      * readLine is a bit quirky :
+	      * it returns the content of a line MINUS the newline.
+	      * it returns null only for the END of the stream.
+	      * it returns an empty String if two newlines appear in a row.
+	      */
+	      while (( line = input.readLine()) != null){
+	        contents.append(line);
+	        contents.append(System.getProperty("line.separator"));
+	      }
+	    }
+	    catch (FileNotFoundException ex) {
+	      ex.printStackTrace();
+	    }
+	    catch (IOException ex){
+	      ex.printStackTrace();
+	    }
+	    finally {
+	      try {
+	        if (input!= null) {
+	          //flush and close both "input" and its underlying FileReader
+	          input.close();
+	        }
+	      }
+	      catch (IOException ex) {
+	        ex.printStackTrace();
+	      }
+	    }
+	    return contents.toString();
+	  }
 	
 	public static void main(String[] args) {
 		TestOCLParser oclp = new TestOCLParser();
+		URI oclSourceURI = URI.createFileURI(oclInputFileName);
+		File oclSourceFile = new File("/home/mskipper/runtime-EclipseApplication//fr.irisa.triskell.kermeta.ocl/ocl/allSpeeds.ocl");
+		
+		String oclSource =  getContents(oclSourceFile);
+		//System.out.println(oclSource);
 		//oclp.run(trivial, "essai.xmi");
 		//oclp.run(speeds1, "speedsOCL1.xmi");
 		//oclp.run(speeds2, "speedsOCL2.xmi");
 		//oclp.run(speeds3, "speedsOCL3.xmi");
 		//oclp.run(speeds4, "speedsOCL4.xmi");
-		oclp.run(speeds5, "speedsOCL5.xmi");
+		//oclp.run(speeds5, "speedsOCL5.xmi");
+		oclp.run(oclSource, "model/allSpeedsOCL.xmi");
 	}
 
 	private static MyOCLParser createParser(String text) {
