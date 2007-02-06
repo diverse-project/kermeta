@@ -128,33 +128,9 @@
             extension="ecore"
             type="text"/>
    </extension>
-   <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://kermeta/kermeta.ecore" 
-       class = "fr.irisa.triskell.kermeta.KmPackage"
-       /> 
-  </extension>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://kermeta/kermeta.ecore//language" 
-       class = "fr.irisa.triskell.kermeta.language.LanguagePackage"
-       /> 
-  </extension>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://kermeta/kermeta.ecore//language/behavior" 
-       class = "fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage"
-       /> 
-  </extension>
 
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://kermeta/kermeta.ecore//language/structure" 
-       class = "fr.irisa.triskell.kermeta.language.structure.StructurePackage"
-       /> 
-  </extension>
    <extension
          id="kermetaProblem"
          name="KermetaL Problem"
