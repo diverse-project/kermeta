@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
   <model href="OCLCST.ecore#/"/>
-  <diagrams position="0,0" size="100,100" name="No name" viewport="1571,48">
-    <property key="pageFormatName" value="A1"/>
-    <property key="diagramWidth" value="2376"/>
-    <property key="diagramHeight" value="3364"/>
+  <diagrams position="0,0" size="100,100" name="No name" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
     <property key="pageMarginName" value="Small Margin"/>
     <property key="diagramTopMargin" value="20"/>
     <property key="diagramBottomMargin" value="20"/>
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
-    <property key="orientation" value="landscape"/>
+    <property key="orientation" value="portrait"/>
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
       <element href="OCLCST.ecore#/"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="2285,27" size="126,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.4 //@diagrams.0/@contained.13 //@diagrams.0/@contained.16 //@diagrams.0/@contained.19 //@diagrams.0/@contained.27 //@diagrams.0/@contained.35 //@diagrams.0/@contained.44 //@diagrams.0/@contained.90 //@diagrams.0/@contained.95 //@diagrams.0/@contained.123 //@diagrams.0/@contained.150"/>
+    <contained xsi:type="di:GraphNode" position="282,3" size="140,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.4 //@diagrams.0/@contained.8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/CSTNode"/>
       </semanticModel>
@@ -42,29 +42,29 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="2112,288" size="140,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.5 //@diagrams.0/@contained.39"/>
+    <contained xsi:type="di:GraphNode" position="156,160" size="148,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.12 //@diagrams.0/@contained.17 //@diagrams.0/@contained.19 //@diagrams.0/@contained.20"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PackageDeclarationCS"/>
+        <element href="OCLCST.ecore#//cst/OCLExpressionCS"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="19"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PackageDeclarationCS"/>
+          <element href="OCLCST.ecore#//cst/OCLExpressionCS"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="9"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PackageDeclarationCS"/>
+          <element href="OCLCST.ecore#//cst/OCLExpressionCS"/>
         </semanticModel>
       </contained>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="2391,296" size="105,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.7 //@diagrams.0/@contained.9 //@diagrams.0/@contained.11"/>
+    <contained xsi:type="di:GraphNode" position="638,132" size="131,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.6"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/ContextDeclCS"/>
       </semanticModel>
@@ -84,36 +84,8 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PackageDeclarationCS/contextDecls"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2375,463" size="127,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.20 //@diagrams.0/@contained.40 //@diagrams.0/@contained.53 //@diagrams.0/@contained.60"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PropertyContextCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PropertyContextCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PropertyContextCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2188,451" size="148,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.9 //@diagrams.0/@contained.28 //@diagrams.0/@contained.41"/>
+    <contained xsi:type="di:GraphNode" position="609,221" size="186,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.9 //@diagrams.0/@contained.22"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/ClassifierContextDeclCS"/>
       </semanticModel>
@@ -130,176 +102,12 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.8/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="2543,456" size="153,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.11 //@diagrams.0/@contained.14 //@diagrams.0/@contained.17"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationContextDeclCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OperationContextDeclCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OperationContextDeclCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2904,243" size="198,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.13 //@diagrams.0/@contained.14 //@diagrams.0/@contained.45 //@diagrams.0/@contained.54"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PrePostOrBodyDeclCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PrePostOrBodyDeclCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/PrePostOrBodyDeclCS/kind"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PrePostOrBodyDeclCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationContextDeclCS/prePostOrBodyDecls"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1204,223" size="94,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.16 //@diagrams.0/@contained.17 //@diagrams.0/@contained.36 //@diagrams.0/@contained.42 //@diagrams.0/@contained.55 //@diagrams.0/@contained.61 //@diagrams.0/@contained.96"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OperationCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OperationCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationContextDeclCS/operationCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2650,255" size="116,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.19 //@diagrams.0/@contained.20 //@diagrams.0/@contained.21 //@diagrams.0/@contained.23 //@diagrams.0/@contained.25 //@diagrams.0/@contained.46"/>
-      <anchorage graphEdge="//@diagrams.0/@contained.21"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InitOrDerValueCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/InitOrDerValueCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/InitOrDerValueCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.18/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PropertyContextCS/initOrDerValueCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="42"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.18/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.1">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InitOrDerValueCS/initOrDerValueCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="9" vDistance="8"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2698,596" size="88,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.23"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/DerValueCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/DerValueCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/DerValueCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.22/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -53, 102, 248]</waypoints>
-      <waypoints>[-102, -53, 0, 248]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2478,605" size="88,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.25"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InitValueCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/InitValueCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/InitValueCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.24/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -65, -118, 245]</waypoints>
-      <waypoints>[118, -65, 0, 245]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1973,448" size="91,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.27 //@diagrams.0/@contained.28 //@diagrams.0/@contained.29 //@diagrams.0/@contained.31 //@diagrams.0/@contained.33 //@diagrams.0/@contained.56"/>
-      <anchorage graphEdge="//@diagrams.0/@contained.29"/>
+    <contained xsi:type="di:GraphNode" position="469,223" size="111,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.10 //@diagrams.0/@contained.13 //@diagrams.0/@contained.15"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.10"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/InvOrDefCS"/>
       </semanticModel>
@@ -316,25 +124,28 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.26/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.8/@anchorage.0 //@diagrams.0/@contained.26/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/ClassifierContextDeclCS/invOrDefCS"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="9" vDistance="-6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.26/@anchorage.0 //@diagrams.0/@contained.26/@anchorage.1">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.7/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/InvOrDefCS/invOrDefCS"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="16" vDistance="6"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="38" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="56" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="27"/>
+      <waypoints>[69, -19, 69, -19]</waypoints>
+      <waypoints>[69, -78, 69, -78]</waypoints>
+      <waypoints>[28, -78, 28, -78]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" position="1956,691" size="85,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.31 //@diagrams.0/@contained.47"/>
+    <contained xsi:type="di:GraphNode" position="403,324" size="111,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.12 //@diagrams.0/@contained.13"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/InvCS"/>
       </semanticModel>
@@ -351,11 +162,21 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.30/@anchorage.0 //@diagrams.0/@contained.26/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+        <element href="OCLCST.ecore#//cst/InvCS/expressionCS"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="31" vDistance="-7"/>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <waypoints>[-24, -164, 204, 0]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" position="2097,688" size="85,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.33 //@diagrams.0/@contained.37"/>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -53, -56, 57]</waypoints>
+      <waypoints>[55, -53, -1, 57]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="519,324" size="111,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/DefCS"/>
       </semanticModel>
@@ -372,245 +193,13 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.32/@anchorage.0 //@diagrams.0/@contained.26/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.14/@anchorage.0 //@diagrams.0/@contained.7/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -107, 125, 136]</waypoints>
-      <waypoints>[-125, -107, 0, 136]</waypoints>
+      <waypoints>[0, -55, 72, 56]</waypoints>
+      <waypoints>[-72, -55, 0, 56]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" position="2285,689" size="115,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.35 //@diagrams.0/@contained.36 //@diagrams.0/@contained.37 //@diagrams.0/@contained.48 //@diagrams.0/@contained.97"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/DefExpressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/DefExpressionCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/DefExpressionCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.34/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.34/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/DefExpressionCS/operationCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="40" vDistance="13"/>
-      <waypoints>[449, -56, -426, 358]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.32/@anchorage.0 //@diagrams.0/@contained.34/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/DefCS/defExpressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1830,1027" size="205,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.39 //@diagrams.0/@contained.40 //@diagrams.0/@contained.41 //@diagrams.0/@contained.42 //@diagrams.0/@contained.62 //@diagrams.0/@contained.106"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PathNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PathNameCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/PathNameCS/sequenceOfNames"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PathNameCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.38/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PackageDeclarationCS/pathNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="44" vDistance="2"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.38/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PropertyContextCS/pathNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="-21" vDistance="-85"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.8/@anchorage.0 //@diagrams.0/@contained.38/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/ClassifierContextDeclCS/pathNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="63" vDistance="23"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-124, 217, 206, -364]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.38/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationCS/pathNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1665,212" size="118,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.44 //@diagrams.0/@contained.45 //@diagrams.0/@contained.46 //@diagrams.0/@contained.47 //@diagrams.0/@contained.48 //@diagrams.0/@contained.50 //@diagrams.0/@contained.51 //@diagrams.0/@contained.57 //@diagrams.0/@contained.63 //@diagrams.0/@contained.78 //@diagrams.0/@contained.79 //@diagrams.0/@contained.81 //@diagrams.0/@contained.82 //@diagrams.0/@contained.83 //@diagrams.0/@contained.84 //@diagrams.0/@contained.86 //@diagrams.0/@contained.87 //@diagrams.0/@contained.91 //@diagrams.0/@contained.98 //@diagrams.0/@contained.103 //@diagrams.0/@contained.124 //@diagrams.0/@contained.127 //@diagrams.0/@contained.130 //@diagrams.0/@contained.131 //@diagrams.0/@contained.134 //@diagrams.0/@contained.143"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OCLExpressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OCLExpressionCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OCLExpressionCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.43/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PrePostOrBodyDeclCS/expressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.18/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InitOrDerValueCS/expressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.30/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InvCS/expressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.34/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/DefExpressionCS/expressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1145,547" size="102,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.50 //@diagrams.0/@contained.51 //@diagrams.0/@contained.58 //@diagrams.0/@contained.151"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/VariableExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/VariableExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.49/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableExpCS/arguments"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-68, -440, -202, 0]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.49/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1147,685" size="178,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.53 //@diagrams.0/@contained.54 //@diagrams.0/@contained.55 //@diagrams.0/@contained.56 //@diagrams.0/@contained.57 //@diagrams.0/@contained.58 //@diagrams.0/@contained.65 //@diagrams.0/@contained.88 //@diagrams.0/@contained.107 //@diagrams.0/@contained.132"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/SimpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/SimpleNameCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/SimpleNameCS/value"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/SimpleNameCS/type"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/SimpleNameCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PropertyContextCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PrePostOrBodyDeclCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="21" vDistance="6"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="6" vDistance="-18"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.26/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InvOrDefCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="11" vDistance="48"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.52/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.49/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableExpCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="39" vDistance="29"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1408,506" size="84,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.60 //@diagrams.0/@contained.61 //@diagrams.0/@contained.62 //@diagrams.0/@contained.63 //@diagrams.0/@contained.66 //@diagrams.0/@contained.68 //@diagrams.0/@contained.70 //@diagrams.0/@contained.71 //@diagrams.0/@contained.92 //@diagrams.0/@contained.99 //@diagrams.0/@contained.148"/>
+    <contained xsi:type="di:GraphNode" position="69,383" size="111,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.17 //@diagrams.0/@contained.23"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/TypeCS"/>
       </semanticModel>
@@ -627,259 +216,11 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PropertyContextCS/typeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationCS/typeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.38/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -100, 512, 432]</waypoints>
-      <waypoints>[-512, -100, 0, 432]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.59/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="1052,965" size="110,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.65 //@diagrams.0/@contained.66"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PrimitiveTypeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PrimitiveTypeCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PrimitiveTypeCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.64/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.64/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -98, -298, 342]</waypoints>
-      <waypoints>[298, -98, 0, 342]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1255,965" size="96,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.68 //@diagrams.0/@contained.100"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/TupleTypeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/TupleTypeCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/TupleTypeCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.67/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -134, -122, 344]</waypoints>
-      <waypoints>[122, -134, 0, 344]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1391,963" size="358,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.70 //@diagrams.0/@contained.71"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionTypeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionTypeCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/CollectionTypeCS/collectionTypeIdentifier"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionTypeCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.69/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionTypeCS/typeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.69/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -144, 154, 342]</waypoints>
-      <waypoints>[-154, -144, 0, 342]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1193,1231" size="132,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.74 //@diagrams.0/@contained.76 //@diagrams.0/@contained.104 //@diagrams.0/@contained.118 //@diagrams.0/@contained.119"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/PrimitiveLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PrimitiveLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/PrimitiveLiteralExpCS/symbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/PrimitiveLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1417,1463" size="220,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.74"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IntegerLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IntegerLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/IntegerLiteralExpCS/integerSymbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IntegerLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.73/@anchorage.0 //@diagrams.0/@contained.72/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1690,1462" size="206,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.76"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/RealLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/RealLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/RealLiteralExpCS/realSymbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/RealLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.75/@anchorage.0 //@diagrams.0/@contained.72/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1461,417" size="84,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.78 //@diagrams.0/@contained.79 //@diagrams.0/@contained.101"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LetExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/LetExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/LetExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.77/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LetExpCS/inExpression"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.77/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1597,417" size="84,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.81 //@diagrams.0/@contained.82 //@diagrams.0/@contained.83 //@diagrams.0/@contained.84"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IfExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IfExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IfExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.80/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IfExpCS/thenExpression"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.80/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IfExpCS/elseExpression"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.80/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IfExpCS/condition"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.80/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="839,705" size="176,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.86 //@diagrams.0/@contained.87 //@diagrams.0/@contained.88 //@diagrams.0/@contained.93"/>
+    <contained xsi:type="di:GraphNode" position="203,376" size="181,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.19 //@diagrams.0/@contained.20"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/MessageExpCS"/>
       </semanticModel>
@@ -901,663 +242,50 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.85/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.18/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
         <element href="OCLCST.ecore#//cst/MessageExpCS/target"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-98, -394, -926, 60]</waypoints>
+      <waypoints>[44, -207, 107, 14]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.85/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.18/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.85/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
+    <contained xsi:type="di:GraphNode" position="14,475" size="216,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.22 //@diagrams.0/@contained.23"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/MessageExpCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="693,519" size="124,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.90 //@diagrams.0/@contained.91 //@diagrams.0/@contained.92 //@diagrams.0/@contained.93"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OCLMessageArgCS"/>
+        <element href="OCLCST.ecore#//cst/PathNameCS"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="19"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OCLMessageArgCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OCLMessageArgCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.89/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.89/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OCLMessageArgCS/expression"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.89/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OCLMessageArgCS/typeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.85/@anchorage.0 //@diagrams.0/@contained.89/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/MessageExpCS/arguments"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="433,245" size="122,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.95 //@diagrams.0/@contained.96 //@diagrams.0/@contained.97 //@diagrams.0/@contained.98 //@diagrams.0/@contained.99 //@diagrams.0/@contained.100 //@diagrams.0/@contained.101 //@diagrams.0/@contained.116 //@diagrams.0/@contained.135 //@diagrams.0/@contained.136"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/VariableCS"/>
+          <element href="OCLCST.ecore#//cst/PathNameCS"/>
         </semanticModel>
         <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/VariableCS/name"/>
+            <element href="OCLCST.ecore#//cst/PathNameCS/sequenceOfNames"/>
           </semanticModel>
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="9"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/VariableCS"/>
+          <element href="OCLCST.ecore#//cst/PathNameCS"/>
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.94/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationCS/parameters"/>
+        <element href="OCLCST.ecore#//cst/ClassifierContextDeclCS/pathNameCS"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-971, -80, 1752, -55]</waypoints>
+      <waypoints>[0, 259, 580, 0]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.34/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/DefExpressionCS/variableCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.94/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableCS/initExpression"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.94/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableCS/typeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.67/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/TupleTypeCS/variables"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.77/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LetExpCS/variables"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="533,919" size="92,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.103 //@diagrams.0/@contained.104 //@diagrams.0/@contained.108 //@diagrams.0/@contained.110 //@diagrams.0/@contained.117 //@diagrams.0/@contained.120 //@diagrams.0/@contained.121"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/LiteralExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/LiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.102/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.21/@anchorage.0 //@diagrams.0/@contained.16/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -684, -982, 90]</waypoints>
-      <waypoints>[982, -684, 0, 90]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.72/@anchorage.0 //@diagrams.0/@contained.102/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="396,1272" size="118,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.106 //@diagrams.0/@contained.107 //@diagrams.0/@contained.108"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/EnumLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/EnumLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/EnumLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.105/@anchorage.0 //@diagrams.0/@contained.38/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/EnumLiteralExpCS/pathNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.105/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/EnumLiteralExpCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[266, -237, -496, 467]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.105/@anchorage.0 //@diagrams.0/@contained.102/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="491,1073" size="308,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.110 //@diagrams.0/@contained.125"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/CollectionLiteralExpCS/collectionType"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.109/@anchorage.0 //@diagrams.0/@contained.102/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="829,1241" size="118,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.116 //@diagrams.0/@contained.117"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/TupleLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/TupleLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/TupleLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="932,1462" size="166,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.118"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/StringLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/StringLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/StringLiteralExpCS/stringSymbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/StringLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1121,1462" size="240,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.119"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/BooleanLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/BooleanLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/BooleanLiteralExpCS/booleanSymbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/BooleanLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1381,1229" size="132,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.120"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/NullLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/NullLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/NullLiteralExpCS/symbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/NullLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1633,1231" size="132,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.121"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/InvalidLiteralExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/InvalidLiteralExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/InvalidLiteralExpCS/symbol"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/InvalidLiteralExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.111/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/TupleLiteralExpCS/variables"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.111/@anchorage.0 //@diagrams.0/@contained.102/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.112/@anchorage.0 //@diagrams.0/@contained.72/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.113/@anchorage.0 //@diagrams.0/@contained.72/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.114/@anchorage.0 //@diagrams.0/@contained.102/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.115/@anchorage.0 //@diagrams.0/@contained.102/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="45,436" size="140,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.123 //@diagrams.0/@contained.124 //@diagrams.0/@contained.125 //@diagrams.0/@contained.128"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionLiteralPartCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionLiteralPartCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionLiteralPartCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.122/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, -64, -2222, 106]</waypoints>
-      <waypoints>[2222, -64, 0, 106]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.122/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionLiteralPartCS/expressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.109/@anchorage.0 //@diagrams.0/@contained.122/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionLiteralExpCS/collectionLiteralParts"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="63,780" size="122,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.127 //@diagrams.0/@contained.128"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionRangeCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionRangeCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CollectionRangeCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.126/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CollectionRangeCS/lastExpressionCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="7" vDistance="36"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.126/@anchorage.0 //@diagrams.0/@contained.122/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1731,406" size="204,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.130 //@diagrams.0/@contained.131 //@diagrams.0/@contained.132 //@diagrams.0/@contained.137 //@diagrams.0/@contained.144"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CallExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CallExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/CallExpCS/accessor"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/CallExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.129/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CallExpCS/source"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-44, -206, 18, 246]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.129/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.129/@anchorage.0 //@diagrams.0/@contained.52/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/CallExpCS/simpleNameCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1762,709" size="86,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.134 //@diagrams.0/@contained.135 //@diagrams.0/@contained.136 //@diagrams.0/@contained.137 //@diagrams.0/@contained.139 //@diagrams.0/@contained.141"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LoopExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/LoopExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/LoopExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.133/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LoopExpCS/body"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-112, -126, -96, 488]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.133/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LoopExpCS/variable1"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.133/@anchorage.0 //@diagrams.0/@contained.94/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/LoopExpCS/variable2"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.133/@anchorage.0 //@diagrams.0/@contained.129/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1673,844" size="102,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.139"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IteratorExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IteratorExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IteratorExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.138/@anchorage.0 //@diagrams.0/@contained.133/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1874,835" size="98,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.141"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IterateExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IterateExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IterateExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.140/@anchorage.0 //@diagrams.0/@contained.133/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-      <waypoints>[0, 25, 100, 91]</waypoints>
-      <waypoints>[-99, 25, 1, 91]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2297,893" size="118,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.143 //@diagrams.0/@contained.144 //@diagrams.0/@contained.146 //@diagrams.0/@contained.152"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/FeatureCallExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/FeatureCallExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/FeatureCallExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.142/@anchorage.0 //@diagrams.0/@contained.43/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/FeatureCallExpCS/arguments"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-      <waypoints>[-187, -224, 413, 413]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.142/@anchorage.0 //@diagrams.0/@contained.129/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="2219,1109" size="128,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.146"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/OperationCallExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OperationCallExpCS"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/OperationCallExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.145/@anchorage.0 //@diagrams.0/@contained.142/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="1431,781" size="204,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.148"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/StateExpCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/StateExpCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/StateExpCS/sequenceOfNames"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/StateExpCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.147/@anchorage.0 //@diagrams.0/@contained.59/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="3127,393" size="124,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.150 //@diagrams.0/@contained.151 //@diagrams.0/@contained.152"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/IsMarkedPreCS"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="19"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IsMarkedPreCS"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-            <element href="OCLCST.ecore#//cst/IsMarkedPreCS/pre"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="9"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-          <element href="OCLCST.ecore#//cst/IsMarkedPreCS"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.149/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.49/@anchorage.0 //@diagrams.0/@contained.149/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/VariableExpCS/isMarkedPreCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.142/@anchorage.0 //@diagrams.0/@contained.149/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-        <element href="OCLCST.ecore#//cst/FeatureCallExpCS/isMarkedPreCS"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
-      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

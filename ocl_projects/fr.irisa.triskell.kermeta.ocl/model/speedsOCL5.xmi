@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ocl.cst="http://www.eclipse.org/OCL2/1.0.0/ocl/cst">
+  <ocl.cst:PackageDeclarationCS endOffset="128" pathNameCS="/1" contextDecls="/2"/>
+  <ocl.cst:PathNameCS startOffset="8" endOffset="9">
+    <sequenceOfNames>p2</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:ClassifierContextDeclCS startOffset="16" endOffset="116" pathNameCS="/3" invOrDefCS="/4"/>
+  <ocl.cst:PathNameCS startOffset="24" endOffset="39">
+    <sequenceOfNames>RecordNavigation</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="41" endOffset="116" expressionCS="/5"/>
+  <ocl.cst:OperationCallExpCS startOffset="50" endOffset="116" source="/6" accessor="arrow" simpleNameCS="/24" arguments="/25" isMarkedPreCS="/31"/>
+  <ocl.cst:FeatureCallExpCS startOffset="50" endOffset="94" source="/7" accessor="dot" simpleNameCS="/22" isMarkedPreCS="/23"/>
+  <ocl.cst:OperationCallExpCS startOffset="50" endOffset="88" source="/8" accessor="dot" simpleNameCS="/17" arguments="/18" isMarkedPreCS="/21"/>
+  <ocl.cst:OperationCallExpCS startOffset="50" endOffset="70" source="/9" accessor="dot" simpleNameCS="/15" isMarkedPreCS="/16"/>
+  <ocl.cst:FeatureCallExpCS startOffset="50" endOffset="63" source="/10" accessor="dot" simpleNameCS="/13" isMarkedPreCS="/14"/>
+  <ocl.cst:VariableExpCS startOffset="50" endOffset="53" simpleNameCS="/11" isMarkedPreCS="/12"/>
+  <ocl.cst:SimpleNameCS startOffset="50" endOffset="53" value="self" type="self"/>
+  <ocl.cst:IsMarkedPreCS startOffset="54" endOffset="54"/>
+  <ocl.cst:SimpleNameCS startOffset="55" endOffset="63" value="mycontext"/>
+  <ocl.cst:IsMarkedPreCS startOffset="64" endOffset="64"/>
+  <ocl.cst:SimpleNameCS startOffset="65" endOffset="68" value="type"/>
+  <ocl.cst:IsMarkedPreCS startOffset="69" endOffset="69"/>
+  <ocl.cst:SimpleNameCS startOffset="72" endOffset="80" value="oclAsType" type="keyword"/>
+  <ocl.cst:VariableExpCS startOffset="82" endOffset="87" simpleNameCS="/19" isMarkedPreCS="/20"/>
+  <ocl.cst:SimpleNameCS startOffset="82" endOffset="87" value="Record"/>
+  <ocl.cst:IsMarkedPreCS startOffset="88" endOffset="88"/>
+  <ocl.cst:IsMarkedPreCS startOffset="81" endOffset="81"/>
+  <ocl.cst:SimpleNameCS startOffset="90" endOffset="94" value="field"/>
+  <ocl.cst:IsMarkedPreCS startOffset="95" endOffset="96"/>
+  <ocl.cst:SimpleNameCS startOffset="97" endOffset="104" value="includes"/>
+  <ocl.cst:FeatureCallExpCS startOffset="106" endOffset="115" source="/26" accessor="dot" simpleNameCS="/29" isMarkedPreCS="/30"/>
+  <ocl.cst:VariableExpCS startOffset="106" endOffset="109" simpleNameCS="/27" isMarkedPreCS="/28"/>
+  <ocl.cst:SimpleNameCS startOffset="106" endOffset="109" value="self" type="self"/>
+  <ocl.cst:IsMarkedPreCS startOffset="110" endOffset="110"/>
+  <ocl.cst:SimpleNameCS startOffset="111" endOffset="115" value="field"/>
+  <ocl.cst:IsMarkedPreCS startOffset="116" endOffset="116"/>
+  <ocl.cst:IsMarkedPreCS startOffset="105" endOffset="105"/>
+</xmi:XMI>

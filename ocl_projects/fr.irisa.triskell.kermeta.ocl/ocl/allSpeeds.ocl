@@ -1,0 +1,481 @@
+package SPEEDS
+
+context ActionSpecification 
+    def: involves(as : ActionSpecification) : Boolean = false 
+
+context Assignment inv:
+    value.conformsTo( target.type() ) 
+
+-- --%  context Assignment def: 
+-- --%    involvesInteraction() : Boolean = 
+-- --%      let f : NavigableFeature = target.navigatedFeature() 
+-- --%      in 
+-- --%        f.oclIsKindOf(Pin) or f.oclIsKindOf(Port)
+-- --% 
+
+context IfAction inv:
+    condition.type().isBoolean() 
+
+context InitializationCall inv:
+    not initializer().oclIsUndefined() 
+
+context InitializationCall inv:
+    initializer().owner.part->includes(self.target) 
+
+ context InitializationCall inv:
+     actualParameter->size() = initializer().parameter->size() 
+ 
+context InitializationCall inv:
+     actualParameter->forAll( ap | 
+         let fp : Parameter = 
+           initializer().parameter->at( actualParameter->indexOf(ap) )
+        in  
+           ap.conformsTo(fp.type)
+       ) 
+
+-- context InitializationCall def: 
+--     initializer() : Initializer =
+--       Initializer.allInstances()->any( i | i.SPEEDSbody.involves(self) ) 
+-- 
+-- context InitializationCall def:
+--     callee() : OclAny =
+--       self.initializer() 
+-- 
+-- context LoopAction inv:
+--     self.condition.type().isBoolean() 
+-- 
+-- context SwitchAction inv:
+--     let dt : DataType = self.switchExpression.type() 
+--     in
+--       self.case.value->forAll(ex | ex.conformsTo(dt)) 
+-- 
+-- context BlockPin def:
+--     type() : DataType = self.type 
+-- 
+-- context CompositeBlock inv:
+--     kind = CompositeKind::negation
+--       implies 
+--         subBlock->size() = 1 
+-- 
+-- context Contract inv:
+--     promise.richComponent = self.richComponent
+--     and
+--     assumption.richComponent = self.richComponent 
+-- 
+-- context Implementation inv:
+--     artifact->size() + block->size() = 1 
+-- 
+-- context Implementation inv:
+--     richComponent.block->includes(self.block) 
+-- 
+-- context PinLink inv:
+--    self.pin->forAll( p | 
+--       p.oclIsKindOf(BlockPin) 
+--         implies  
+--           p.oclAsType(BlockPin).block = self.block 
+--           or 
+--           p.oclAsType(BlockPin).block.owner = self.block
+--     ) 
+-- 
+-- context PinLink inv:
+--     pin->forAll( p1, p2 |
+--         p1.oclIsKindOf(BlockPin) and
+--         p2.oclIsKindOf(BlockPin) and
+--         p1.oclAsType(BlockPin).block = p2.oclAsType(BlockPin).block 
+--           implies
+--             p1 = p2
+--       ) 
+-- 
+-- context PinLink inv:
+--     self.pin->select( p | p.oclIsKindOf(ReferencePin) )->size() <= 1 
+-- 
+-- context PinLink inv:
+--    self.owner->notEmpty() 
+--      implies 
+--        self.pin->select( p | p.oclIsKind(ReferencePin) )->size() = 1
+--        and 
+--        self.owner.pin->includesAll( 
+--            self.pin->select( p | p.oclIsKindOf(ReferencePin) )
+--          ) 
+-- 
+-- context PinLink inv:
+--     self.block->notEmpty() 
+--       implies 
+--         self.pin->select( p | p.oclIsKindOf(BlockPin) )->size() = 2 
+-- 
+-- context ProbabilisticBlock inv:
+--     pin->size() = 2 and
+--     pin->one( p | 
+--         p.oclAsType( BlockPin ).direction = DirectionKind::SPEEDSin
+--       ) and
+--     pin->one( p | 
+--         p.oclAsType( BlockPin ).direction = DirectionKind::out
+--       ) 
+-- 
+-- context ReferencePin def:
+--     type() : DataType = self.flow.type 
+-- 
+-- context ArrayInstance inv:
+--     self.type().oclIsKindOf(Array) 
+-- 
+-- context ArrayInstance inv:
+--     let elementType : DataType =
+--        self.type().oclAsType(Array).elementType in
+--     self.value->forAll(conformsTo(elementType)) 
+-- 
+-- context ArrayNavigation inv: 
+--     self.index.type().isInteger() 
+-- 
+-- context ArrayNavigation inv: 
+--     self.owner.type().oclIsKindOf(Array) 
+-- 
+-- context ArrayNavigation def: 
+--     type() : DataType =
+--       self.owner.type().oclAsType(Array).elementType 
+-- 
+-- context BinaryExpression inv:
+--     self.binaryOperatorsForNumbersOnly()->includes(self.operator)
+--       implies
+--         self.left.type().isNumber() and 
+--         self.right.type().isNumber() 
+-- 
+-- context BinaryExpression inv:
+--     self.operator = BinaryOperator::modulus
+--       implies
+--         self.left.type().isInteger() and 
+--         self.right.type().isInteger() 
+-- 
+-- context BinaryExpression inv:
+--     Set { BinaryOperator::bitwise_left,
+--           BinaryOperator::bitwise_right }->includes(self.operator)
+--       implies 
+--         self.right.type().isInteger() 
+-- 
+-- context BinaryExpression inv:
+--     self.binaryOperatorsForBooleansOnly()->includes(self.operator)
+--       implies
+--         self.left.type().isBoolean() and 
+--         self.right.type().isBoolean() 
+-- 
+-- context BinaryExpression def: 
+--     binaryOperatorsForNumbersOnly() : Set(BinaryOperator) =
+--       Set { BinaryOperator::addition,
+--             BinaryOperator::substraction,
+--             BinaryOperator::multiplication,
+--             BinaryOperator::division,
+--             BinaryOperator::modulus,
+--             BinaryOperator::bitwise_left,
+--             BinaryOperator::bitwise_right,
+--             BinaryOperator::bitwise_and,
+--             BinaryOperator::bitwise_or,
+--             BinaryOperator::less_than,
+--             BinaryOperator::greater_than,
+--             BinaryOperator::less_than_or_equal,
+--             BinaryOperator::greater_than_or_equal
+--       } 
+-- 
+-- context BinaryExpression def: 
+--     binaryOperatorsForBooleansOnly() : Set(BinaryOperator) =
+--       Set { BinaryOperator::logical_and,
+--             BinaryOperator::logical_or,
+--             BinaryOperator::logical_implication
+--       } 
+-- 
+-- context BinaryExpression def: 
+--     binaryBooleanOperators() : Set(BinaryOperator) =
+--       self.binaryOperatorsForBooleansOnly()->union(
+--            Set { BinaryOperator::less_than,
+--                  BinaryOperator::greater_than,
+--                  BinaryOperator::less_than_or_equal,
+--                  BinaryOperator::greater_than_or_equal,
+--                  BinaryOperator::equality,
+--                  BinaryOperator::inequality
+--            }
+--         ) 
+-- 
+-- context BinaryExpression def: 
+--     type() : DataType =
+--       if (self.binaryBooleanOperators()->includes(self.operator)) then
+--          --The type is boolean
+--          PrimitiveType.allInstances()->any(isBoolean())
+--       else
+--          --Operator yielding number values
+--          if (self.right.type().isReal() or self.left.type().isReal()) then
+--             --A real is involved so the type is Real
+--             PrimitiveType.allInstances()->any(isReal())
+--          else
+--             --Only integers are involved so the type is Integer
+--             PrimitiveType.allInstances()->any(isInteger())
+--          endif
+--       endif 
+-- 
+-- context BooleanLiteral def: 
+--     type() : DataType =
+--       PrimitiveType.allInstances()->any(isBoolean()) 
+-- 
+-- context Call def: 
+--     callee() : OclAny = OclUndefined 
+-- 
+-- context EnumerationLiteral def: 
+--     type() : DataType =
+--       self.enumerationElement.enumeration 
+-- 
+-- context Expression def: 
+--     type() : DataType = OclUndefined 
+-- 
+-- context Expression def: 
+--     conformsTo(dt : DataType) : Boolean =
+--       self.type() = dt 
+-- 
+-- context FeatureNavigation inv:
+--     self.path->excluding(self.path->first())->forAll(rcp |
+--       let previous : RichComponentProperty =
+--         self.path->at(self.path->indexOf(rcp) - 1) in
+--       previous.type.part->includes(rcp)) 
+-- 
+-- context FeatureNavigation def: 
+--     type() : DataType =
+--       feature.type() 
+-- 
+-- context FunctionCall inv:
+--     self.actualParameter->size() = self.function.parameter->size() 
+-- 
+-- context FunctionCall inv:
+--     actualParameter->forAll( ap | 
+--         let fp : Parameter = 
+--           function.parameter->at( actualParameter->indexOf(ap) ) 
+--         in ap.conformsTo(fp.type)
+--       ) 
+-- 
+-- context FunctionCall def: 
+--     type() : DataType =
+--       self.function.returnType 
+-- 
+-- context FunctionCall def: 
+--     callee() : OclAny =
+--       self.function 
+-- 
+-- --%context InstanceSpecification def: type() : DataType =
+-- --%let assignmentOwner : Assignment = Assignment.allInstances()->
+-- --%   any(value = self) in
+-- --%if (not assignmentOwner.oclIsUndefined()) then
+-- --%   --Assignment: the type is that of the target
+-- --%   assignmentOwner.target.type()
+-- --%else
+-- --%   --Call: the type is that of the corresponding parameter
+-- --%   let call : Call = Call.allInstances()->
+-- --%      any(actualParameter->includes(self)) in
+-- --%   --call cannot be undefined
+-- --%   let callee : OclAny = call.callee() in
+-- --%   let pList : OrderedSet(Parameter) = 
+-- --%      if (callee.oclIsKindOf(Function)) then
+-- --%         callee.oclAsType(Function).parameter
+-- --%      else
+-- --%         callee.oclAsType(Initializer).parameter
+-- --%      endif in
+-- --%   let matchingParam : Parameter = pList->
+-- --%      at(call.actualParameter->indexOf(self)) in
+-- --%   matchingParam.type
+-- --%endif
+-- --% 
+-- 
+-- context IntegerLiteral def: 
+--     type() : DataType =
+--       PrimitiveType.allInstances()->any(isInteger()) 
+-- 
+-- context NavigableFeature def:
+--     type() : DataType = OclUndefined 
+-- 
+-- context RealLiteral def: 
+--     type() : DataType =
+--       PrimitiveType.allInstances()->any(isReal()) 
+-- 
+-- context RecordInstance inv:
+--     self.type().oclIsKindOf(Record) 
+-- 
+-- context RecordInstance inv:
+--     let rec : Record = self.type().oclAsType(Record) in
+--     rec.field->forAll(f | self.slot->one(s | s.field = f)) 
+-- 
+-- context RecordNavigation inv:
+--     self.owner.type().oclIsKindOf(Record) 
+-- 
+-- context RecordNavigation inv:
+--     self.owner.type().oclAsType(Record).field->includes(self.field) 
+-- 
+-- context RecordNavigation def: 
+--     type() : DataType =
+--       self.field.type 
+-- 
+-- context RecordSlot inv:
+--     let rec : Record = self.recordInstance.type().oclAsType(Record) 
+--     in  rec.field->includes(self.field) 
+-- 
+-- context RecordSlot inv:
+--     self.value.conformsTo(self.field.type) 
+-- 
+-- context StringLiteral def: 
+--     type() : DataType =
+--       PrimitiveType.allInstances()->any(isString()) 
+-- 
+-- context UnaryExpression inv:
+--     if (self.unaryOperatorsForNumbersOnly()->includes(self.operator)) then
+--        self.operand.type().isNumber()
+--     else 
+--       if (self.operator = UnaryOperator::logical_not) then
+--         self.operand.type().isBoolean()
+--       else --operator is 'present'
+--          self.operand.oclIsKindOf(NavigationExpression)
+--       endif
+--     endif 
+-- 
+-- context UnaryExpression def: 
+--     unaryOperatorsForNumbersOnly() : Set(UnaryOperator) =
+--       Set { UnaryOperator::negative,
+--             UnaryOperator::positive,
+--             UnaryOperator::bitwise_complement,
+--             UnaryOperator::derivative
+--       } 
+-- 
+-- context UnaryExpression def: 
+--     type() : DataType =
+--       if (self.unaryOperatorsForNumbersOnly()->includes(self.operator)) then
+--          --With numbers, the type of the expression is the type of the operand
+--          self.operand.type()
+--       else
+--          --Operator is logical_not or present, so the type is Boolean
+--          PrimitiveType.allInstances()->any(isBoolean())
+--       endif 
+-- 
+-- context VoidLiteral def: 
+--     type() : DataType =
+--       PrimitiveType.allInstances()->any(isVoid()) 
+-- 
+-- context State inv:
+--     self.submachine.oclIsUndefined() 
+--     or 
+--     self.stateInvariant.oclIsUndefined() 
+-- 
+-- context State inv:
+--      not stateInvariant.oclIsUndefined()
+--        implies 
+--          stateInvariant.type().isBoolean() 
+-- 
+-- context StateMachine inv:
+--   self.block.oclIsUndefined() xor self.owningState.oclIsUndefined() 
+-- 
+-- context StateMachine inv:
+--     self.state->includes(self.initialState) 
+-- 
+-- context Transition inv:
+--     self.stateMachine = self.source.stateMachine 
+-- 
+-- context Transition inv:
+--     not self.guard.oclIsUndefined()
+--       implies 
+--         self.guard.type().isBoolean() 
+-- 
+-- context Binding inv:
+--    end->select( e | e.role->notEmpty() )->size >= 1 
+-- 
+-- context Binding inv:
+--     end->forAll( e | 
+--          e.role->notEmpty() 
+--            implies 
+--              e.role.owner = self.owner
+--       ) 
+-- 
+-- context Binding inv:
+--      end->forAll( e | 
+--          e.role->notEmpty() and 
+--          e.role.owner = self.owner 
+--          or
+--          e.role->isEmpty()  and 
+--          e.port.owner = self.owner
+--      ) 
+-- 
+-- context BindingEnd inv: 
+--     role->notEmpty() 
+--       implies  
+--         port.owner = role.owner 
+-- 
+-- context BindingEnd inv:
+--     role->isEmpty() 
+--       implies 
+--         port.owner = binding.owner 
+-- 
+-- context BindingEnd inv:
+--     port.type.flow->includes(self.flow) 
+-- 
+-- context Function inv:
+--     self.parameter->isUnique(name) 
+-- 
+-- context HRCModel inv:
+--     root->notEmpty() 
+--       implies
+--         richComponent->includes(root) 
+-- 
+-- context HRCModel inv:
+--     root->notEmpty() and root.initializer->notEmpty()
+--       implies
+--         root.initializer.parameter->size() = 0 
+-- 
+-- context RichComponent inv:
+--     self.part->forAll( type <> self ) 
+-- 
+-- context RichComponent inv:
+--     self.pin->forAll( p1, p2 | 
+--                        p1.port = p2.port and
+--                        p1.flow = p2.flow and
+--                        p1.role = p2.role 
+--                         implies 
+--                           p1 = p2
+--                     ) 
+-- 
+-- context Variable def:
+--     type() : DataType = self.type 
+-- 
+-- context Array inv:
+--     self.size.type().isInteger() 
+-- 
+-- context DataType def: isBoolean() : Boolean = false 
+-- 
+-- context DataType def: isNumber() : Boolean =
+-- self.isInteger() or self.isReal() 
+-- 
+-- context Enumeration inv:
+--   self.element->isUnique(name) 
+-- 
+-- context PrimitiveType inv:
+--     let pt : Set(PrimitiveType) = PrimitiveType.allInstances() 
+--     in  pt->size() = 5
+--         and pt->one(name = 'Boolean')
+--         and pt->one(name = 'Integer')
+--         and pt->one(name = 'Real')
+--         and pt->one(name = 'String')
+--         and pt->one(name = 'Void') 
+-- 
+-- context PrimitiveType def: 
+--   isBoolean() : Boolean =
+--     self.name = 'Boolean' 
+-- 
+-- context PrimitiveType def: 
+--     isInteger() : Boolean =
+--       self.name = 'Integer' 
+-- 
+-- context PrimitiveType def: 
+--     isReal() : Boolean =
+--     self.name = 'Real' 
+-- 
+-- context PrimitiveType def: 
+--     isString() : Boolean =
+--       self.name = 'String' 
+-- 
+-- context PrimitiveType def: 
+--     isVoid() : Boolean =
+--       self.name = 'Void' 
+-- 
+-- context Record inv:
+--     self.field->isUnique(name) 
+-- 
+endpackage

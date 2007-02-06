@@ -1,4 +1,4 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.1 2007-01-19 15:15:09 bitterjug Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.2 2007-02-06 12:48:35 bitterjug Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -19,32 +19,42 @@ require kermeta
 //require "../ecore.kmt"
 require "../helpers/OCLHelper.kmt"
 require "../../mmodel/oclcstvisitor.kmt"
+require "ocl2kmtVisitor.kmt"
 //require "Tools.kmt"
 
 using kermeta::standard
 using kermeta::persistence
-
 using ocl::cst
+using ocl2kmt
 
-class OCLKMTPrinter inherits ocl::cst::visitors::Visitor
+class OCLKMTPrinter
 { 
-    
-    reference helper : OCLHelpers::OCLHelper
-    
+	attribute repository: EMFRepository
+	attribute modelURI: String
 
-    
-
-    	
-    operation initialize() is do
+	operation initialize() is 
+	do
+		modelURI :="../../model/speedsOCL1.xmi"
+		modelURI :="../../model/speedsOCL2.xmi"
+		modelURI :="../../model/speedsOCL3.xmi"
+		modelURI :="../../model/speedsOCL4.xmi"
+		modelURI :="../../model/speedsOCL5.xmi"
+		modelURI :="../../model/allSpeedsOCL.xmi"		
+		repository := EMFRepository.new
 		helper := OCLHelpers::OCLHelper.new
     	helper.initialize
-		helper.loadOCLModel(EMFRepository.new, "../../essai.xmi")
-    	 
+		helper.loadOCLModel(EMFRepository.new, modelURI)
 	end
-
-	// TODO : write the official comment .....
-	/* --------------- Visitor -------------------------------*/
-
+	   
+    reference helper : OCLHelpers::OCLHelper
     
-   
+    operation main(): Void is
+    do
+    	initialize
+     	var visitor : Ocl2kmtVisitor init Ocl2kmtVisitor.new
+     	var model : Set<Object> init helper.loadOCLModel(repository, modelURI)
+		helper.getPackageDeclaration(model).accept(visitor)
+    end
+ 
+
 }

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ocl.cst="http://www.eclipse.org/OCL2/1.0.0/ocl/cst">
+  <ocl.cst:PackageDeclarationCS endOffset="14805" pathNameCS="/1" contextDecls="/2 /12 /27 /39 /51 /72 /93"/>
+  <ocl.cst:PathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>SPEEDS</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:ClassifierContextDeclCS startOffset="16" endOffset="105" pathNameCS="/3" invOrDefCS="/4"/>
+  <ocl.cst:PathNameCS startOffset="24" endOffset="42">
+    <sequenceOfNames>ActionSpecification</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:DefCS startOffset="49" endOffset="105" defExpressionCS="/5"/>
+  <ocl.cst:DefExpressionCS startOffset="54" endOffset="105" operationCS="/6" expressionCS="/11"/>
+  <ocl.cst:OperationCS startOffset="54" endOffset="97" simpleNameCS="/7" parameters="/8" typeCS="/10"/>
+  <ocl.cst:SimpleNameCS startOffset="54" endOffset="61" value="involves"/>
+  <ocl.cst:VariableCS startOffset="63" endOffset="86" name="as" typeCS="/9"/>
+  <ocl.cst:PathNameCS startOffset="68" endOffset="86">
+    <sequenceOfNames>ActionSpecification</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:PrimitiveTypeCS startOffset="91" endOffset="97" value="Boolean" type="Boolean"/>
+  <ocl.cst:BooleanLiteralExpCS startOffset="101" endOffset="105" symbol="false" booleanSymbol="false"/>
+  <ocl.cst:ClassifierContextDeclCS startOffset="109" endOffset="169" pathNameCS="/13" invOrDefCS="/14"/>
+  <ocl.cst:PathNameCS startOffset="117" endOffset="126">
+    <sequenceOfNames>Assignment</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="128" endOffset="169" expressionCS="/15"/>
+  <ocl.cst:OperationCallExpCS startOffset="137" endOffset="169" source="/16" accessor="dot" simpleNameCS="/19" arguments="/20" isMarkedPreCS="/26"/>
+  <ocl.cst:VariableExpCS startOffset="137" endOffset="141" simpleNameCS="/17" isMarkedPreCS="/18"/>
+  <ocl.cst:SimpleNameCS startOffset="137" endOffset="141" value="value"/>
+  <ocl.cst:IsMarkedPreCS startOffset="142" endOffset="142"/>
+  <ocl.cst:SimpleNameCS startOffset="143" endOffset="152" value="conformsTo"/>
+  <ocl.cst:OperationCallExpCS startOffset="155" endOffset="167" source="/21" accessor="dot" simpleNameCS="/24" isMarkedPreCS="/25"/>
+  <ocl.cst:VariableExpCS startOffset="155" endOffset="160" simpleNameCS="/22" isMarkedPreCS="/23"/>
+  <ocl.cst:SimpleNameCS startOffset="155" endOffset="160" value="target"/>
+  <ocl.cst:IsMarkedPreCS startOffset="161" endOffset="161"/>
+  <ocl.cst:SimpleNameCS startOffset="162" endOffset="165" value="type"/>
+  <ocl.cst:IsMarkedPreCS startOffset="166" endOffset="166"/>
+  <ocl.cst:IsMarkedPreCS startOffset="153" endOffset="153"/>
+  <ocl.cst:ClassifierContextDeclCS startOffset="398" endOffset="451" pathNameCS="/28" invOrDefCS="/29"/>
+  <ocl.cst:PathNameCS startOffset="406" endOffset="413">
+    <sequenceOfNames>IfAction</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="415" endOffset="451" expressionCS="/30"/>
+  <ocl.cst:OperationCallExpCS startOffset="424" endOffset="451" source="/31" accessor="dot" simpleNameCS="/37" isMarkedPreCS="/38"/>
+  <ocl.cst:OperationCallExpCS startOffset="424" endOffset="439" source="/32" accessor="dot" simpleNameCS="/35" isMarkedPreCS="/36"/>
+  <ocl.cst:VariableExpCS startOffset="424" endOffset="432" simpleNameCS="/33" isMarkedPreCS="/34"/>
+  <ocl.cst:SimpleNameCS startOffset="424" endOffset="432" value="condition"/>
+  <ocl.cst:IsMarkedPreCS startOffset="433" endOffset="433"/>
+  <ocl.cst:SimpleNameCS startOffset="434" endOffset="437" value="type"/>
+  <ocl.cst:IsMarkedPreCS startOffset="438" endOffset="438"/>
+  <ocl.cst:SimpleNameCS startOffset="441" endOffset="449" value="isBoolean"/>
+  <ocl.cst:IsMarkedPreCS startOffset="450" endOffset="450"/>
+  <ocl.cst:ClassifierContextDeclCS startOffset="455" endOffset="524" pathNameCS="/40" invOrDefCS="/41"/>
+  <ocl.cst:PathNameCS startOffset="463" endOffset="480">
+    <sequenceOfNames>InitializationCall</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="482" endOffset="524" expressionCS="/42"/>
+  <ocl.cst:OperationCallExpCS startOffset="491" endOffset="524" source="/43" simpleNameCS="/49" isMarkedPreCS="/50"/>
+  <ocl.cst:OperationCallExpCS startOffset="495" endOffset="524" source="/44" accessor="dot" simpleNameCS="/47" isMarkedPreCS="/48"/>
+  <ocl.cst:OperationCallExpCS startOffset="495" endOffset="507" simpleNameCS="/45" isMarkedPreCS="/46"/>
+  <ocl.cst:SimpleNameCS startOffset="495" endOffset="505" value="initializer"/>
+  <ocl.cst:IsMarkedPreCS startOffset="506" endOffset="506"/>
+  <ocl.cst:SimpleNameCS startOffset="509" endOffset="522" value="oclIsUndefined" type="keyword"/>
+  <ocl.cst:IsMarkedPreCS startOffset="523" endOffset="523"/>
+  <ocl.cst:SimpleNameCS startOffset="491" endOffset="493" value="not" type="String"/>
+  <ocl.cst:IsMarkedPreCS/>
+  <ocl.cst:ClassifierContextDeclCS startOffset="528" endOffset="610" pathNameCS="/52" invOrDefCS="/53"/>
+  <ocl.cst:PathNameCS startOffset="536" endOffset="553">
+    <sequenceOfNames>InitializationCall</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="555" endOffset="610" expressionCS="/54"/>
+  <ocl.cst:OperationCallExpCS startOffset="564" endOffset="610" source="/55" accessor="arrow" simpleNameCS="/64" arguments="/65" isMarkedPreCS="/71"/>
+  <ocl.cst:FeatureCallExpCS startOffset="564" endOffset="587" source="/56" accessor="dot" simpleNameCS="/62" isMarkedPreCS="/63"/>
+  <ocl.cst:FeatureCallExpCS startOffset="564" endOffset="582" source="/57" accessor="dot" simpleNameCS="/60" isMarkedPreCS="/61"/>
+  <ocl.cst:OperationCallExpCS startOffset="564" endOffset="576" simpleNameCS="/58" isMarkedPreCS="/59"/>
+  <ocl.cst:SimpleNameCS startOffset="564" endOffset="574" value="initializer"/>
+  <ocl.cst:IsMarkedPreCS startOffset="575" endOffset="575"/>
+  <ocl.cst:SimpleNameCS startOffset="578" endOffset="582" value="owner"/>
+  <ocl.cst:IsMarkedPreCS startOffset="583" endOffset="583"/>
+  <ocl.cst:SimpleNameCS startOffset="584" endOffset="587" value="part"/>
+  <ocl.cst:IsMarkedPreCS startOffset="588" endOffset="589"/>
+  <ocl.cst:SimpleNameCS startOffset="590" endOffset="597" value="includes"/>
+  <ocl.cst:FeatureCallExpCS startOffset="599" endOffset="609" source="/66" accessor="dot" simpleNameCS="/69" isMarkedPreCS="/70"/>
+  <ocl.cst:VariableExpCS startOffset="599" endOffset="602" simpleNameCS="/67" isMarkedPreCS="/68"/>
+  <ocl.cst:SimpleNameCS startOffset="599" endOffset="602" value="self" type="self"/>
+  <ocl.cst:IsMarkedPreCS startOffset="603" endOffset="603"/>
+  <ocl.cst:SimpleNameCS startOffset="604" endOffset="609" value="target"/>
+  <ocl.cst:IsMarkedPreCS startOffset="610" endOffset="610"/>
+  <ocl.cst:IsMarkedPreCS startOffset="598" endOffset="598"/>
+  <ocl.cst:ClassifierContextDeclCS startOffset="615" endOffset="708" pathNameCS="/73" invOrDefCS="/74"/>
+  <ocl.cst:PathNameCS startOffset="623" endOffset="640">
+    <sequenceOfNames>InitializationCall</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="642" endOffset="708" expressionCS="/75"/>
+  <ocl.cst:OperationCallExpCS startOffset="652" endOffset="708" source="/76" simpleNameCS="/82" arguments="/83" isMarkedPreCS="/92"/>
+  <ocl.cst:OperationCallExpCS startOffset="652" endOffset="674" source="/77" accessor="arrow" simpleNameCS="/80" isMarkedPreCS="/81"/>
+  <ocl.cst:VariableExpCS startOffset="652" endOffset="666" simpleNameCS="/78" isMarkedPreCS="/79"/>
+  <ocl.cst:SimpleNameCS startOffset="652" endOffset="666" value="actualParameter"/>
+  <ocl.cst:IsMarkedPreCS startOffset="667" endOffset="668"/>
+  <ocl.cst:SimpleNameCS startOffset="669" endOffset="672" value="size"/>
+  <ocl.cst:IsMarkedPreCS startOffset="673" endOffset="673"/>
+  <ocl.cst:SimpleNameCS startOffset="676" endOffset="676" value="=" type="String"/>
+  <ocl.cst:OperationCallExpCS startOffset="678" endOffset="708" source="/84" accessor="arrow" simpleNameCS="/90" isMarkedPreCS="/91"/>
+  <ocl.cst:FeatureCallExpCS startOffset="678" endOffset="700" source="/85" accessor="dot" simpleNameCS="/88" isMarkedPreCS="/89"/>
+  <ocl.cst:OperationCallExpCS startOffset="678" endOffset="690" simpleNameCS="/86" isMarkedPreCS="/87"/>
+  <ocl.cst:SimpleNameCS startOffset="678" endOffset="688" value="initializer"/>
+  <ocl.cst:IsMarkedPreCS startOffset="689" endOffset="689"/>
+  <ocl.cst:SimpleNameCS startOffset="692" endOffset="700" value="parameter"/>
+  <ocl.cst:IsMarkedPreCS startOffset="701" endOffset="702"/>
+  <ocl.cst:SimpleNameCS startOffset="703" endOffset="706" value="size"/>
+  <ocl.cst:IsMarkedPreCS startOffset="707" endOffset="707"/>
+  <ocl.cst:IsMarkedPreCS/>
+  <ocl.cst:ClassifierContextDeclCS startOffset="713" endOffset="937" pathNameCS="/94" invOrDefCS="/95"/>
+  <ocl.cst:PathNameCS startOffset="721" endOffset="738">
+    <sequenceOfNames>InitializationCall</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:InvCS startOffset="740" endOffset="937" expressionCS="/96"/>
+  <ocl.cst:IteratorExpCS startOffset="750" endOffset="937" source="/97" accessor="arrow" simpleNameCS="/100" variable1="/101" body="/102"/>
+  <ocl.cst:VariableExpCS startOffset="750" endOffset="764" simpleNameCS="/98" isMarkedPreCS="/99"/>
+  <ocl.cst:SimpleNameCS startOffset="750" endOffset="764" value="actualParameter"/>
+  <ocl.cst:IsMarkedPreCS startOffset="765" endOffset="766"/>
+  <ocl.cst:SimpleNameCS startOffset="767" endOffset="772" value="forAll" type="keyword"/>
+  <ocl.cst:VariableCS startOffset="775" endOffset="776" name="ap"/>
+  <ocl.cst:LetExpCS startOffset="790" endOffset="928" variables="/103" inExpression="/123"/>
+  <ocl.cst:VariableCS startOffset="794" endOffset="881" name="fp" typeCS="/104" initExpression="/105"/>
+  <ocl.cst:PathNameCS startOffset="799" endOffset="807">
+    <sequenceOfNames>Parameter</sequenceOfNames>
+  </ocl.cst:PathNameCS>
+  <ocl.cst:OperationCallExpCS startOffset="823" endOffset="881" source="/106" accessor="arrow" simpleNameCS="/112" arguments="/113" isMarkedPreCS="/122"/>
+  <ocl.cst:FeatureCallExpCS startOffset="823" endOffset="845" source="/107" accessor="dot" simpleNameCS="/110" isMarkedPreCS="/111"/>
+  <ocl.cst:OperationCallExpCS startOffset="823" endOffset="835" simpleNameCS="/108" isMarkedPreCS="/109"/>
+  <ocl.cst:SimpleNameCS startOffset="823" endOffset="833" value="initializer"/>
+  <ocl.cst:IsMarkedPreCS startOffset="834" endOffset="834"/>
+  <ocl.cst:SimpleNameCS startOffset="837" endOffset="845" value="parameter"/>
+  <ocl.cst:IsMarkedPreCS startOffset="846" endOffset="847"/>
+  <ocl.cst:SimpleNameCS startOffset="848" endOffset="849" value="at"/>
+  <ocl.cst:OperationCallExpCS startOffset="852" endOffset="879" source="/114" accessor="arrow" simpleNameCS="/117" arguments="/118" isMarkedPreCS="/121"/>
+  <ocl.cst:VariableExpCS startOffset="852" endOffset="866" simpleNameCS="/115" isMarkedPreCS="/116"/>
+  <ocl.cst:SimpleNameCS startOffset="852" endOffset="866" value="actualParameter"/>
+  <ocl.cst:IsMarkedPreCS startOffset="867" endOffset="868"/>
+  <ocl.cst:SimpleNameCS startOffset="869" endOffset="875" value="indexOf"/>
+  <ocl.cst:VariableExpCS startOffset="877" endOffset="878" simpleNameCS="/119" isMarkedPreCS="/120"/>
+  <ocl.cst:SimpleNameCS startOffset="877" endOffset="878" value="ap"/>
+  <ocl.cst:IsMarkedPreCS startOffset="879" endOffset="879"/>
+  <ocl.cst:IsMarkedPreCS startOffset="876" endOffset="876"/>
+  <ocl.cst:IsMarkedPreCS startOffset="850" endOffset="850"/>
+  <ocl.cst:OperationCallExpCS startOffset="907" endOffset="928" source="/124" accessor="dot" simpleNameCS="/127" arguments="/128" isMarkedPreCS="/134"/>
+  <ocl.cst:VariableExpCS startOffset="907" endOffset="908" simpleNameCS="/125" isMarkedPreCS="/126"/>
+  <ocl.cst:SimpleNameCS startOffset="907" endOffset="908" value="ap"/>
+  <ocl.cst:IsMarkedPreCS startOffset="909" endOffset="909"/>
+  <ocl.cst:SimpleNameCS startOffset="910" endOffset="919" value="conformsTo"/>
+  <ocl.cst:FeatureCallExpCS startOffset="921" endOffset="927" source="/129" accessor="dot" simpleNameCS="/132" isMarkedPreCS="/133"/>
+  <ocl.cst:VariableExpCS startOffset="921" endOffset="922" simpleNameCS="/130" isMarkedPreCS="/131"/>
+  <ocl.cst:SimpleNameCS startOffset="921" endOffset="922" value="fp"/>
+  <ocl.cst:IsMarkedPreCS startOffset="923" endOffset="923"/>
+  <ocl.cst:SimpleNameCS startOffset="924" endOffset="927" value="type"/>
+  <ocl.cst:IsMarkedPreCS startOffset="928" endOffset="928"/>
+  <ocl.cst:IsMarkedPreCS startOffset="920" endOffset="920"/>
+</xmi:XMI>
