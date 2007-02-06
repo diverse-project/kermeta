@@ -6,12 +6,14 @@
 	<classpathentry kind="lib" path="lib/thirdparty/antlr.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/emfatic-core.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/ldt-core.jar"/>
-	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="lib/io_kermeta.jar"/>
-	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
-	<classpathentry kind="lib" path="lib/traceability.jar"/>
-	<classpathentry kind="lib" path="lib/interpreter_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/junit.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/fr.irisa.triskell.kermeta.io"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/fr.irisa.triskell.kermeta.model"/>
+	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf_2.2.0.v200609210005.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/fr.irisa.triskell.kermeta.interpreter"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>
