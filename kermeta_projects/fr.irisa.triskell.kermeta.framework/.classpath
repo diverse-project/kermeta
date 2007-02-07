@@ -8,12 +8,6 @@
 	<classpathentry kind="lib" path="lib/thirdparty/ldt-core.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/junit.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/fr.irisa.triskell.kermeta.io"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/fr.irisa.triskell.kermeta.model"/>
-	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf_2.2.0.v200609210005.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
-	<classpathentry exported="true" kind="lib" path="/Applications/Development/Eclipse/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/fr.irisa.triskell.kermeta.interpreter"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>
