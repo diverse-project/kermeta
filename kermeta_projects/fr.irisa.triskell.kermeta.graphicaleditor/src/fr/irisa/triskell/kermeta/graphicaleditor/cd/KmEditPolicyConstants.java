@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditPolicyConstants.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: KmEditPolicyConstants.java,v 1.2 2007-02-07 14:11:55 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -47,11 +47,5 @@ public interface KmEditPolicyConstants {
 	 * @generated
 	 */
 	String PROPERTY_EDITPOLICY = "Property EditPolicy";
-
-	/**
-	 * The key used to install an <i>Delete Inheritance Edge</i> EditPolicy.
-	 * @generated NOT
-	 */
-	String DELETE_INHERITANCE_EDGE_EDITPOLICY = "Delete Inheritance Edge EditPolicy";
 
 }

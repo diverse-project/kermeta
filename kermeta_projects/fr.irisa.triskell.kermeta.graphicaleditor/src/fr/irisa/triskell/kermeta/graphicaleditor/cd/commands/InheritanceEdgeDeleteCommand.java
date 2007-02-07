@@ -211,6 +211,7 @@ public class InheritanceEdgeDeleteCommand extends Command
      * Get the sourceNode of the link
      * 
      * @return the sourceNode
+     * @generated NOT
      */
     public GraphNode getSource()
     {

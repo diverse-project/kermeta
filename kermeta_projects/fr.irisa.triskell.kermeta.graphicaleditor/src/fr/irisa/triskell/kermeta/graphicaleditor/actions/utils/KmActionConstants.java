@@ -17,10 +17,7 @@ package fr.irisa.triskell.kermeta.graphicaleditor.actions.utils;
  * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  */
 public interface KmActionConstants
-{
-    /** The "deleteInheritanceEdge" action identifier */
-    String DELETE_INHERITANCE_EDGE = "deleteInheritanceEdge";
-    
+{ 
     /** Public constant defining the Validate action id. */
 	//public static final String VALIDATE = "fr.irisa.triskell.kermeta.graphicaleditor.validate";
 	

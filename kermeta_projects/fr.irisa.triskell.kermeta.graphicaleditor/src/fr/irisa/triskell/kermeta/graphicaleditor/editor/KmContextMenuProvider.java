@@ -50,12 +50,6 @@ public class KmContextMenuProvider extends ModelerContextMenuProvider
     public void buildContextMenu(IMenuManager manager)
     {
         super.buildContextMenu(manager);
-        
-        IAction action;
-        
-        action = getActionRegistry().getAction(KmActionConstants.DELETE_INHERITANCE_EDGE);
-        if (action.isEnabled())
-            manager.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
     }
     
 }

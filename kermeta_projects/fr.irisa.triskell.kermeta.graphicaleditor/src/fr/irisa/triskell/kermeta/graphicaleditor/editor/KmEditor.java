@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.2 2007-02-07 14:11:55 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -20,7 +21,6 @@ import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.actions.utils.KmActionConstants;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.actions.DeleteInheritanceEdgeAction;
 
 /**
  * Generated Model editor
@@ -88,39 +88,10 @@ public class KmEditor extends Modeler {
 	}
 
 	/**
-     * @see org.topcased.modeler.editor.Modeler#getContextMenuProvider(org.topcased.modeler.editor.ModelerGraphicalViewer)
+     * 
      * @generated NOT
      */
-    protected ContextMenuProvider getContextMenuProvider(ModelerGraphicalViewer viewer)
-    {
-        return new KmContextMenuProvider(viewer, getActionRegistry());
-    }
-    
-    /**
-     * @see org.topcased.modeler.editor.Modeler#configureGraphicalViewer()
-     * @generated NOT
-     */
-    protected void configureGraphicalViewer()
-    {
-        super.configureGraphicalViewer();
-        
-        IAction deleteImplementLinkAction = getActionRegistry().getAction(KmActionConstants.DELETE_INHERITANCE_EDGE);
-        getGraphicalViewer().addSelectionChangedListener((ISelectionChangedListener) deleteImplementLinkAction);
-    }
-    
-    /**
-     * @see org.topcased.modeler.editor.Modeler#createActions()
-     * @generated NOT
-     */
-    protected void createActions()
-    {
-        super.createActions();
-        
-        ActionRegistry registry = getActionRegistry();
-        IAction action;
-        
-        action = new DeleteInheritanceEdgeAction(this);
-        registry.registerAction(action);
-        getSelectionActions().add(action.getId());
+    public CommandStack getCommandStack() {
+    	return super.getCommandStack();
     }
 }

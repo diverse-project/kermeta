@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: InheritanceEditPart.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: InheritanceEditPart.java,v 1.2 2007-02-07 14:11:55 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -15,7 +15,6 @@ import org.topcased.modeler.edit.GraphEdgeEditPart;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.KmEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.InheritanceFigure;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.InheritanceEdgeDeleteEditPolicy;
 
 /**
  * Inheritance controller
@@ -36,17 +35,13 @@ public class InheritanceEditPart extends GraphEdgeEditPart {
 
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
-	 * @generated NOT
-	 * added DELETE_INHERITANCE_EDGE_EDITPOLICY
+	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
 		installEditPolicy(ModelerEditPolicyConstants.CHANGE_FONT_EDITPOLICY,
 				null);
-		installEditPolicy(
-				KmEditPolicyConstants.DELETE_INHERITANCE_EDGE_EDITPOLICY,
-				new InheritanceEdgeDeleteEditPolicy());
 	}
 
 	/**
