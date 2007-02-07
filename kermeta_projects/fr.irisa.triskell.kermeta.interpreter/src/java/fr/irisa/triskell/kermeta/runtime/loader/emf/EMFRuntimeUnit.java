@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.31 2006-12-12 09:30:46 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.32 2007-02-07 14:11:50 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -498,16 +498,26 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	String packageQualifiedName = this.nsUri_QualifiedName_map.get(nsuri);
 	    	if( packageQualifiedName == null)
 	    	{   // optimization failed, need to load the metamodel and retreive the qualified name
-	    		// internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() + " || "+ obj.toString() );
-		    	// lazy load of the metamodel 	
-		    	loadMetaModelResource(metamodel_uri);
-		    	// look into the mm if the given object can be retreived, then get its real qualified name
-		    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
-		    	if (mmPackage != null)
-		    	{
-		    		result = getEQualifiedName(mmPackage);
-		    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
-		    	}
+	    		if(!metamodel_uri.equals("")){	    			
+	    			// internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() + " || "+ obj.toString() );	    			
+			    	// lazy load of the metamodel 	
+			    	loadMetaModelResource(metamodel_uri);
+			    	// look into the mm if the given object can be retreived, then get its real qualified name
+			    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
+			    	if (mmPackage != null)
+			    	{
+			    		result = getEQualifiedName(mmPackage);
+			    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
+			    	}
+	    		}
+	    		else{
+	    			// metamodel uri is not set cannot patch, let's hope there is no package hierachy
+	    			internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
+	    					" || "+ obj.toString() );
+	    			internalLog.warn("Cannot retreive the metamodel. If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");
+	    			result = obj.getName();
+	    			this.nsUri_QualifiedName_map.put(nsuri,result);
+	    		}
 	    	}
 	    	else
 	    		result = packageQualifiedName;
