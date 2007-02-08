@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.8 2007-02-06 17:45:46 cfaucher Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.9 2007-02-08 17:10:19 cfaucher Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -24,6 +24,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
@@ -55,7 +56,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     public static KermetaUnit parse(Resource resource)
     {
     	StdLibKermetaUnitHelper.setURItoDefault();
-    	org.eclipse.core.resources.IFile file = KermetaPlugin.getIFileFromString(resource.getURI().toString());
+    	org.eclipse.core.resources.IFile file = ResourceHelper.getIFile(resource.getURI().toString());
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMUnit result = null;

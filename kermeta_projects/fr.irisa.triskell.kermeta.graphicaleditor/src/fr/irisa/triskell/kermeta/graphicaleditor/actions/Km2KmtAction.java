@@ -1,4 +1,4 @@
-/* $Id: Km2KmtAction.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+/* $Id: Km2KmtAction.java,v 1.2 2007-02-08 17:10:19 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -31,6 +31,7 @@ import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.graphicaleditor.KmActionConstants;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -145,8 +146,7 @@ public class Km2KmtAction extends WorkbenchPartAction {
 		IStructuredSelection selection = null;
 		
 		System.err.println("ModelURI : " + getModelURI());
-		IFile file = KermetaPlugin.getIFileFromString(this.getModelURI()
-				.toString());
+		IFile file = ResourceHelper.getIFile(this.getModelURI().toString());
 		System.err.println("file : " + file);
 		if (file != null)
 			selection = new StructuredSelection(file);

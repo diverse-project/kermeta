@@ -1,3 +1,8 @@
+/*******************************************************************************
+ * $Id: DeleteInheritanceEdgeAction.java,v 1.3 2007-02-08 17:10:19 cfaucher Exp $
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ ******************************************************************************/
 package fr.irisa.triskell.kermeta.graphicaleditor.cd.actions;
 
 import org.eclipse.jface.action.IAction;
@@ -13,36 +18,48 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.commands.InheritanceEdgeDele
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.InheritanceEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor;
 
+/**
+ * 
+ * @generated NOT
+ */
 public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 
 	/**
      * The model/figure object
+     * @generated NOT
      */
     private Object template;
     
     /**
      * The EditPart object
+     * @generated NOT
      */
     private IEditorPart targetEditor;
     
     /**
      * The WorkbenchPart object
+     * @generated NOT
      */
     private IWorkbenchPart targetPart;
 
 	/**
-	 * Constructor for Action1.
+	 * Constructor for DeleteInheritanceEdgeAction
+	 * @generated NOT
 	 */
 	public DeleteInheritanceEdgeAction() {
 		super();
 	}
 	
+	/**
+	 * @generated NOT
+	 */
 	public void setActiveEditor(IAction action, IEditorPart targetEditor) {
 		this.targetEditor = targetEditor;
 	}
 
 	/**
 	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
+	 * @generated NOT
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 		this.targetPart = targetPart;
@@ -50,6 +67,7 @@ public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 
 	/**
 	 * @see IActionDelegate#run(IAction)
+	 * @generated NOT
 	 */
 	public void run(IAction action) {
 		if(this.template != null) {
@@ -64,6 +82,7 @@ public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 
 	/**
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
+	 * @generated NOT
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		

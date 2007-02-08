@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.2 2007-02-07 14:11:55 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.3 2007-02-08 17:10:19 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -88,7 +88,7 @@ public class KmEditor extends Modeler {
 	}
 
 	/**
-     * 
+     * Returns the command stack for activating the notification like with DeleteInheritanceEdgeAction
      * @generated NOT
      */
     public CommandStack getCommandStack() {
