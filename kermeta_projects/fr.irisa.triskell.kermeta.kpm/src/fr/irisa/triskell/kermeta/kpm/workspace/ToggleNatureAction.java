@@ -1,11 +1,8 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
-import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -18,9 +15,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import fr.irisa.triskell.kermeta.core.natures.KermetaNature;
-import fr.irisa.triskell.kermeta.core.natures.KermetaNatureHelper;
-import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
+import fr.irisa.triskell.eclipse.resources.NatureHelper;
+import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 public class ToggleNatureAction implements IObjectActionDelegate {
 
@@ -80,7 +76,7 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 		IWorkspaceRunnable operation = new IWorkspaceRunnable() {
 		      public void run(IProgressMonitor monitor) throws CoreException {
 
-		    	  KermetaNatureHelper.addKermetaNature(project);
+		    	  NatureHelper.addNatureToProject(project, KermetaNature.ID);
 		    	  KermetaWorkspace.getInstance().addKermetaProject(project);
 		    	 // IResourceHelper.attachDefaultBuilderToKermetaProject(project);
 		    	  

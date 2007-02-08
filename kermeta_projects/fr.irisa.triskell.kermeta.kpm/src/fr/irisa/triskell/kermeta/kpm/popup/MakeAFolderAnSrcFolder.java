@@ -10,6 +10,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 
 import fr.irisa.triskell.kermeta.kpm.Directory;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.workspace.*;
 
 public class MakeAFolderAnSrcFolder implements IActionDelegate {
@@ -35,7 +36,12 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 		    	directory = project.getKpm().createDirectory( folder );				
 				SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.ADDING);
 				folder.accept(visitor);
-		
+				
+				Iterator<Unit> itOnUnits = directory.getContents().iterator();
+				while ( itOnUnits.hasNext() ) {
+					itOnUnits.next().changed(KermetaWorkspace.getInstance().changer(), null);
+				}
+				
 			}
 			project.save();
 			

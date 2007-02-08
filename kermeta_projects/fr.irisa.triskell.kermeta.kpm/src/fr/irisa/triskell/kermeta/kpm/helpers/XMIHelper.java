@@ -1,6 +1,7 @@
 package fr.irisa.triskell.kermeta.kpm.helpers;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
@@ -19,7 +20,7 @@ public class XMIHelper {
 	 * @param root
 	 * @throws java.io.IOException
 	 */
-	static public void save(String fileName, String filePath, Object root) throws java.io.IOException {
+	static public void save(String fileName, String filePath, EObject root) throws java.io.IOException {
 		save(filePath + "/" + fileName, root);
 	}
 	
@@ -29,7 +30,7 @@ public class XMIHelper {
 	 * @param root
 	 * @throws java.io.IOException
 	 */
-	static public void save(String absoluteFileName, Object root) throws java.io.IOException {
+	static public void save(String absoluteFileName, EObject root) throws java.io.IOException {
 		save(URI.createFileURI(absoluteFileName), root);
 	}
 	
@@ -39,7 +40,7 @@ public class XMIHelper {
 	 * @param root
 	 * @throws java.io.IOException
 	 */
-	static public void save(URI fileURI, Object root) throws java.io.IOException {
+	static public void save(URI fileURI, EObject root) throws java.io.IOException {
 		Resource res = new XMIResourceImpl(fileURI);
 		res.getContents().add(root);
 		res.save(null);		

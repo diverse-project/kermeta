@@ -2,13 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.8 2007-01-08 17:15:33 ftanguy Exp $
+ * $Id: Unit.java,v 1.9 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
+
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
 
 import java.util.ArrayList;
 
 import java.util.Date;
+
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -159,10 +165,10 @@ public interface Unit extends AbstractUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model eventNameDataType="fr.irisa.triskell.kermeta.kpm.String"
+	 * @model eventNameDataType="fr.irisa.triskell.kermeta.kpm.String" paramsDataType="fr.irisa.triskell.kermeta.kpm.Hashtable" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void receiveEvent(String eventName);
+	void receiveEvent(String eventName, Hashtable params, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -199,10 +205,10 @@ public interface Unit extends AbstractUnit {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model changerDataType="fr.irisa.triskell.kermeta.kpm.KermetaUnitInterest" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void changed();
+	void changed(KermetaUnitInterest changer, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -2,11 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.3 2007-01-08 17:15:33 ftanguy Exp $
+ * $Id: Action.java,v 1.4 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
 import java.util.ArrayList;
+
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -56,9 +60,9 @@ public interface Action extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dependentsDataType="fr.irisa.triskell.kermeta.kpm.ArrayList"
+	 * @model dependentsDataType="fr.irisa.triskell.kermeta.kpm.ArrayList" paramsDataType="fr.irisa.triskell.kermeta.kpm.Hashtable" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void execute(Unit unit, ArrayList dependents);
+	void execute(Unit unit, ArrayList dependents, Hashtable params, IProgressMonitor monitor);
 
 } // Action

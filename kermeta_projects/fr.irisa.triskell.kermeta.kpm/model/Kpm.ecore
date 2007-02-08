@@ -25,6 +25,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Dependency">
     <eOperations name="process">
       <eParameters name="unit" eType="#//Unit"/>
+      <eParameters name="params" eType="#//Hashtable"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="isExecutable" eType="#//boolean">
       <eParameters name="unit" eType="#//Unit"/>
@@ -65,6 +67,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Unit" abstract="true" eSuperTypes="#//AbstractUnit">
     <eOperations name="receiveEvent">
       <eParameters name="eventName" eType="#//String"/>
+      <eParameters name="params" eType="#//Hashtable"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="getDependenciesWithEvent" eType="#//ArrayList">
       <eParameters name="eventName" eType="#//String"/>
@@ -72,7 +76,10 @@
     <eOperations name="isFile" eType="#//boolean"/>
     <eOperations name="isDirectory" eType="#//boolean"/>
     <eOperations name="isProject" eType="#//boolean"/>
-    <eOperations name="changed"/>
+    <eOperations name="changed">
+      <eParameters name="changer" eType="#//KermetaUnitInterest"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eOperations name="remove"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
         eType="#//Dependency"/>
@@ -171,6 +178,8 @@
     <eOperations name="execute">
       <eParameters name="unit" eType="#//Unit"/>
       <eParameters name="dependents" eType="#//ArrayList"/>
+      <eParameters name="params" eType="#//Hashtable"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
   </eClassifiers>
@@ -202,4 +211,7 @@
   <eClassifiers xsi:type="ecore:EDataType" name="IProject" instanceClassName="org.eclipse.core.resources.IProject"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Date" instanceClassName="java.util.Date"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IResource" instanceClassName="org.eclipse.core.resources.IResource"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="KermetaUnitInterest" instanceClassName="fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Hashtable" instanceClassName="java.util.Hashtable"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
 </ecore:EPackage>

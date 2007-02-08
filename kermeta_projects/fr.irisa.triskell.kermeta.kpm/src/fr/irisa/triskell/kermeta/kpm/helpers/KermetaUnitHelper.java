@@ -67,8 +67,8 @@ public class KermetaUnitHelper {
 		if ( unit != null ) {
 			if ( content != null )	
 				unit.parseString(content);
-			else if ( KermetaWorkspace.getInstance().getContent(unit.getUri()) != null )
-				unit.parseString( KermetaWorkspace.getInstance().getContent(unit.getUri()) );
+			//else if ( KermetaWorkspace.getInstance().getContent(unit.getUri()) != null )
+				//unit.parseString( KermetaWorkspace.getInstance().getContent(unit.getUri()) );
 			else
 				unit.parse();
 		    if ( ! unit.messages.hasError() ) {

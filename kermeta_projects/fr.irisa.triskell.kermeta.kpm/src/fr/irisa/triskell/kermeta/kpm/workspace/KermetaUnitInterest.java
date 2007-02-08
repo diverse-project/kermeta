@@ -1,5 +1,7 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
+import org.eclipse.core.resources.IFile;
+
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -16,5 +18,9 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public interface KermetaUnitInterest {
 
 	public void updateKermetaUnit(KermetaUnit unit);
+	
+	public IFile getFile();
+	
+	public String getFileContent();
 	
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.7 2006-12-27 12:08:51 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.8 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -14,9 +14,15 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import java.util.Iterator;
 
@@ -264,15 +270,16 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void receiveEvent(String eventName) {
+	public void receiveEvent(String eventName, Hashtable params, IProgressMonitor monitor) {
 		ArrayList <Dependency> dependencies = getDependenciesWithEvent(eventName);
-		
+				
 		for ( Dependency d : dependencies ) {
 			
-			d.process(this );
+			d.process(this,params, monitor);
 			
 		}
 	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -324,9 +331,12 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void changed() {
+	public void changed(KermetaUnitInterest changer, IProgressMonitor monitor) {
 		setLastTimeModified( new Date() );
-		receiveEvent("update");
+		Hashtable params = new Hashtable();
+		if ( changer != null )
+			params.put("changer", changer);
+		receiveEvent("update", params, monitor);
 	}
 
 	/**

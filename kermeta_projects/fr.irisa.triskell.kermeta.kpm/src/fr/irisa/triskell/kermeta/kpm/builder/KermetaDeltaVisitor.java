@@ -7,7 +7,9 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 
+import fr.irisa.triskell.eclipse.resources.NatureHelper;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
@@ -15,6 +17,7 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.KpmHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 
@@ -23,9 +26,12 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 	 */
 	private KPM kpm;
 
+	private IProgressMonitor monitor;
+
 	
-	public KermetaDeltaVisitor(KPM kpm) {
+	public KermetaDeltaVisitor(KPM kpm, IProgressMonitor monitor) {
 		this.kpm = kpm;
+		this.monitor = monitor;
 	}
 	
 	public boolean visit(IResourceDelta delta) throws CoreException {
@@ -65,7 +71,8 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE :
-			KpmHelper.createKMTFile( (IFile) resource, kpm);
+			File file = KpmHelper.createKMTFile( (IFile) resource, kpm);
+			file.changed( KermetaWorkspace.getInstance().changer(), monitor );
 			break;
 			
 		case IResource.FOLDER :
@@ -73,7 +80,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			break;
 			
 		case IResource.PROJECT :
-			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) { 
+			if ( NatureHelper.doesProjectHaveNature( (IProject) resource, KermetaNature.ID ) ) { 
 			//	IResourceHelper.attachDefaultBuilderToKermetaProject( (IProject) resource );
 				//kpm.createProjectIfNecessary( (IProject) resource );
 			} else mustContinue = false;
@@ -107,7 +114,7 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			break;
 			
 		case IResource.PROJECT :
-			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
+			if ( NatureHelper.doesProjectHaveNature( (IProject) resource, KermetaNature.ID ) ) {
 				//kpm.removeProject( (IProject) resource );
 			} else mustContinue = false;
 			break;
@@ -137,28 +144,28 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 			if ( delta.getFlags() == IResourceDelta.CONTENT ) {
 				File file = kpm.findFile( (IFile) resource);
 				if ( file != null )
-					file.changed();
+					file.changed(KermetaWorkspace.getInstance().changer(), monitor);
 			}
 			break;
 			
 		case IResource.FOLDER :
 			Directory directory = kpm.findDirectory( (IFolder) resource );
 			if ( directory != null )
-				directory.changed();
+				directory.changed(KermetaWorkspace.getInstance().changer(), monitor);
 			break;
 			
 		case IResource.PROJECT :
 			
 			if ( delta.getFlags() == IResourceDelta.OPEN ) {
-				if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
+				if ( NatureHelper.doesProjectHaveNature( (IProject) resource, KermetaNature.ID ) ) {
 					//IResourceHelper.attachDefaultBuilderToKermetaProject( (IProject) resource );
 				}
 			}
 			
 			Project project = kpm.findProject( (IProject) resource );
-			if ( IResourceHelper.isNatureKermeta( (IProject) resource ) ) {
+			if ( NatureHelper.doesProjectHaveNature( (IProject) resource, KermetaNature.ID ) ) {
 				if ( project != null )
-					project.changed();
+					project.changed(KermetaWorkspace.getInstance().changer(), monitor);
 			}
 			break;
 			

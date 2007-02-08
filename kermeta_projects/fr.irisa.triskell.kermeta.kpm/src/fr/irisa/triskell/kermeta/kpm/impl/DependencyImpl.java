@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyImpl.java,v 1.2 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: DependencyImpl.java,v 1.3 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -18,6 +18,12 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
+
 import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -303,15 +309,20 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void process(Unit unit) {
-
+	public void process(Unit unit, Hashtable params, IProgressMonitor monitor) {
 		if ( isExecutable(unit) ) {
 			ArrayList <Unit> dependents = getDependents(unit);
 			Iterator <Action> itOnActions = getActions().iterator();
-			while ( itOnActions.hasNext() ) 
-				itOnActions.next().execute(unit, dependents);
+			while ( itOnActions.hasNext() ) {
+				if ( monitor == null )
+					monitor = new NullProgressMonitor();
+				else
+					monitor = new SubProgressMonitor(monitor, 1);
+				itOnActions.next().execute(unit, dependents, params, monitor);
+			}
 		}
 	}
+
 
 	public ArrayList getDependents(Unit unit) {
 		

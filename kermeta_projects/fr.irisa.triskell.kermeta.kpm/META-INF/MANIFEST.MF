@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.filesystem,
  org.eclipse.emf.edit.ui,
  org.eclipse.ui.ide,
- fr.irisa.triskell.kermeta;visibility:=reexport,
- fr.irisa.triskell.kermeta.io;visibility:=reexport
+ fr.irisa.triskell.kermeta.io;visibility:=reexport,
+ fr.irisa.triskell.eclipse.util;visibility:=reexport,
+ fr.irisa.triskell.kermeta;visibility:=reexport
 Eclipse-LazyStart: true
 Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin

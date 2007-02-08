@@ -5,6 +5,7 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -31,6 +32,8 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		System.out.println("[KPM Plugin started]");
+		
+	//	if(StdLibKermetaUnitHelper.STD_LIB_URI == null) StdLibKermetaUnitHelper.setURItoDefault();
 		
 		KermetaWorkspace.getInstance();
 

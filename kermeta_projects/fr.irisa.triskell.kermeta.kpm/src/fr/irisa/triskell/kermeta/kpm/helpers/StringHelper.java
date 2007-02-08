@@ -206,20 +206,36 @@ public final class StringHelper {
 	static public String getName(String in, String regularExpression) {
 
 		String[] inSegments = in.split( "/" );
-		String inLastSegment = inSegments[inSegments.length-1];
-
+		String inLastSegment = "";
+		if ( inSegments.length > 0 )
+			inLastSegment = inSegments[inSegments.length-1];
+			
+		String[] outSegments = regularExpression.split( "/" );
+		/*String outLastSegment = "";
+		if ( outSegments.length > 0 )
+			outLastSegment = outSegments[outSegments.length-1];*/
+		
 		String[] regularExpressionSegments = regularExpression.split( "/" );
-		String regularExpressionSegmentsLastSegment = regularExpressionSegments[regularExpressionSegments.length-1];
+		String regularExpressionSegmentsLastSegment = "";
+		if ( regularExpressionSegments.length > 0 )
+			regularExpressionSegmentsLastSegment = regularExpressionSegments[regularExpressionSegments.length-1];
 	
 		String[] bodyAndExtensionOut = regularExpressionSegmentsLastSegment.split ( "\\." );
 		String[] bodyAndExtensionIn = inLastSegment.split ( "\\." );
-	
-		String newName = bodyAndExtensionIn[0] + "." + bodyAndExtensionOut[bodyAndExtensionOut.length-1];
+		String newName = "";
+		
+		for (int i = 0; i < bodyAndExtensionIn.length-1; i++)
+			newName = newName + bodyAndExtensionIn[i] + ".";
+		
+		newName = newName + bodyAndExtensionOut[bodyAndExtensionOut.length-1];
 	
 		String result = "";
 		
 		for (int index = 0; index < inSegments.length -1; index++)
 			result += inSegments[index] + "/";
+		
+		for (int index = 0; index < outSegments.length -1; index++)
+			result += outSegments[index] + "/";
 		
 		return result + newName;
 	}

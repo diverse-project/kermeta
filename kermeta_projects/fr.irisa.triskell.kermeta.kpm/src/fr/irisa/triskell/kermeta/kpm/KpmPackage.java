@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.6 2006-12-27 12:08:51 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.7 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -1114,6 +1114,39 @@ public interface KpmPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '<em>Kermeta Unit Interest</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getKermetaUnitInterest()
+	 * @generated
+	 */
+	int KERMETA_UNIT_INTEREST = 30;
+
+
+	/**
+	 * The meta object id for the '<em>Hashtable</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Hashtable
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getHashtable()
+	 * @generated
+	 */
+	int HASHTABLE = 31;
+
+
+	/**
+	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.core.runtime.IProgressMonitor
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProgressMonitor()
+	 * @generated
+	 */
+	int IPROGRESS_MONITOR = 32;
+
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractFile <em>Abstract File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1751,6 +1784,39 @@ public interface KpmPackage extends EPackage {
 	EDataType getIResource();
 
 	/**
+	 * Returns the meta object for data type '{@link fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest <em>Kermeta Unit Interest</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Kermeta Unit Interest</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest
+	 * @model instanceClass="fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest"
+	 * @generated
+	 */
+	EDataType getKermetaUnitInterest();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Hashtable <em>Hashtable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Hashtable</em>'.
+	 * @see java.util.Hashtable
+	 * @model instanceClass="java.util.Hashtable"
+	 * @generated
+	 */
+	EDataType getHashtable();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IProgress Monitor</em>'.
+	 * @see org.eclipse.core.runtime.IProgressMonitor
+	 * @model instanceClass="org.eclipse.core.runtime.IProgressMonitor"
+	 * @generated
+	 */
+	EDataType getIProgressMonitor();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2310,6 +2376,36 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IRESOURCE = eINSTANCE.getIResource();
+
+		/**
+		 * The meta object literal for the '<em>Kermeta Unit Interest</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getKermetaUnitInterest()
+		 * @generated
+		 */
+		EDataType KERMETA_UNIT_INTEREST = eINSTANCE.getKermetaUnitInterest();
+
+		/**
+		 * The meta object literal for the '<em>Hashtable</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Hashtable
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getHashtable()
+		 * @generated
+		 */
+		EDataType HASHTABLE = eINSTANCE.getHashtable();
+
+		/**
+		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.core.runtime.IProgressMonitor
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProgressMonitor()
+		 * @generated
+		 */
+		EDataType IPROGRESS_MONITOR = eINSTANCE.getIProgressMonitor();
 
 	}
 

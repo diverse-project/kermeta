@@ -8,6 +8,7 @@ import java.io.IOException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
@@ -32,7 +33,7 @@ public class KermetaProject {
 	
 	static private final String kpmFileName = ".project.kpm";
 	
-	public KermetaProject(IProject project) {
+	public KermetaProject(IProject project) throws CoreException {
 		this.project = project;
 		initialize();
 	}
@@ -41,16 +42,16 @@ public class KermetaProject {
 		return project.getLocation().toString() + "/" + kpmFileName;
 	}
 	
-	private Path getKpmFilePath() {
+	/*private Path getKpmFilePath() {
 		return new Path(getKpmFilePathString());
-	}
+	}*/
 	
 	public IFile getKpmIFile() {
 		Path path = new Path( project.getFullPath().toString() + "/" + kpmFileName );
 		return ResourcesPlugin.getWorkspace().getRoot().getFile( path );
 	}
 	
-	private void initialize() {
+	private void initialize() throws CoreException {
 		IFile file = getKpmIFile();
 		if ( ! file.exists() ) {
 			kpm = KpmHelper.createKpm();
@@ -94,9 +95,10 @@ public class KermetaProject {
 	 * Save the KPM object into an xmi file.
 	 * Create the file if it does not exist.
 	 */
-	public void save() {
+	public void save() throws CoreException {
 		try {
 			XMIHelper.save( getKpmFilePathString(), kpm);
+			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}

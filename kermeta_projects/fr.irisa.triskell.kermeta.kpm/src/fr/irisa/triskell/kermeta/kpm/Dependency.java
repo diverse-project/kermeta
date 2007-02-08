@@ -2,9 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Dependency.java,v 1.2 2006-12-12 16:06:11 ftanguy Exp $
+ * $Id: Dependency.java,v 1.3 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
+
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -171,10 +175,10 @@ public interface Dependency extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model paramsDataType="fr.irisa.triskell.kermeta.kpm.Hashtable" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void process(Unit unit);
+	void process(Unit unit, Hashtable params, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->

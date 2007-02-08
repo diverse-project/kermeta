@@ -2,21 +2,27 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.3 2006-12-12 16:55:01 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.4 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.*;
 
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
+
 import java.util.ArrayList;
 
 import java.util.Date;
+
+import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 
 import org.eclipse.core.resources.IResource;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -115,6 +121,12 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 				return createDateFromString(eDataType, initialValue);
 			case KpmPackage.IRESOURCE:
 				return createIResourceFromString(eDataType, initialValue);
+			case KpmPackage.KERMETA_UNIT_INTEREST:
+				return createKermetaUnitInterestFromString(eDataType, initialValue);
+			case KpmPackage.HASHTABLE:
+				return createHashtableFromString(eDataType, initialValue);
+			case KpmPackage.IPROGRESS_MONITOR:
+				return createIProgressMonitorFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +155,12 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 				return convertDateToString(eDataType, instanceValue);
 			case KpmPackage.IRESOURCE:
 				return convertIResourceToString(eDataType, instanceValue);
+			case KpmPackage.KERMETA_UNIT_INTEREST:
+				return convertKermetaUnitInterestToString(eDataType, instanceValue);
+			case KpmPackage.HASHTABLE:
+				return convertHashtableToString(eDataType, instanceValue);
+			case KpmPackage.IPROGRESS_MONITOR:
+				return convertIProgressMonitorToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -459,6 +477,60 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * @generated
 	 */
 	public String convertIResourceToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public KermetaUnitInterest createKermetaUnitInterestFromString(EDataType eDataType, String initialValue) {
+		return (KermetaUnitInterest)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertKermetaUnitInterestToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Hashtable createHashtableFromString(EDataType eDataType, String initialValue) {
+		return (Hashtable)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertHashtableToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IProgressMonitor createIProgressMonitorFromString(EDataType eDataType, String initialValue) {
+		return (IProgressMonitor)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertIProgressMonitorToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

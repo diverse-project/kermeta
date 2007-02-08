@@ -2,11 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.4 2007-01-18 13:06:39 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.5 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import java.util.ArrayList;
+
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
@@ -103,17 +107,22 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void execute(final Unit unit, final ArrayList dependents) {
-
+	public void execute(final Unit unit, final ArrayList dependents, final Hashtable params, final IProgressMonitor monitor) {
 		IExtension extension = Platform.getExtensionRegistry().getExtension( getName() );
 		IConfigurationElement[] elements = extension.getConfigurationElements();
 			
-		try {	
+		try {
+			IAction action = (IAction) elements[0].createExecutableExtension("class");
+			action.execute(unit, dependents, params, monitor);
+		} catch (CoreException exception) {
+			exception.printStackTrace();
+		}
+		/*try {	
 			final IAction action = (IAction) elements[0].createExecutableExtension("class");
 				
 			Runnable r = new Runnable() {
 				public void run() {
-					action.execute(unit, dependents);
+					action.execute(unit, dependents, params, monitor);
 				}
 			};
 			
@@ -122,7 +131,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 				
 		} catch ( CoreException exception ) {
 			exception.printStackTrace();
-		}
+		}*/
 	}
 
 	/**

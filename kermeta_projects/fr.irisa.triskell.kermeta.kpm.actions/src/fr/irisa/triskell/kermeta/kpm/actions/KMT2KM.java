@@ -1,9 +1,12 @@
 package fr.irisa.triskell.kermeta.kpm.actions;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
@@ -14,22 +17,30 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 public class KMT2KM implements IAction {
 
-	public void execute(Unit unit, ArrayList<String> dependents) {
+	public void execute(Unit unit, ArrayList<String> dependents, Hashtable params, IProgressMonitor monitor) {
 		
-		IFile file = IResourceHelper.getIFile( (File) unit );
-		
-		for ( String s : dependents ) {
+		try {
 			
-			String extension = StringHelper.getExtension( s );
-			
-			if ( extension.equals (".km") ) {
-				String absoluteName = IResourceHelper.root.getLocation().toString() + s;
-				KermetaUnit kunit = KermetaWorkspace.getInstance().getKermetaUnit(file);
-				if ( ! kunit.messages.hasError() )
-					kunit.saveAsXMIModel(absoluteName);
-			}
-		}
+			IFile file = IResourceHelper.getIFile( (File) unit );
 
+			monitor.subTask("Converting " + file.getName() + " into a KM file");
+			
+			for ( String s : dependents ) {
+				
+				String extension = StringHelper.getExtension( s );
+				
+				if ( extension.equals (".km") ) {
+					String absoluteName = ResourceHelper.root.getLocation().toString() + s;
+					KermetaUnit kunit = KermetaWorkspace.getInstance().getKermetaUnit(file);
+					if ( ! kunit.messages.hasError() )
+						kunit.saveAsXMIModel(absoluteName);
+				}
+			}
+			
+			monitor.worked(1);
+		} finally {
+			monitor.done();
+		}
 	}
 
 }

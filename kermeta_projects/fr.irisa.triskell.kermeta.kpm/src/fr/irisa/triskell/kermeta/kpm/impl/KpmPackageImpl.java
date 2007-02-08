@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.7 2006-12-27 12:08:51 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.8 2007-02-08 15:37:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -22,6 +22,7 @@ import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Filter;
+import fr.irisa.triskell.kermeta.kpm.workspace.IAction;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
@@ -31,15 +32,21 @@ import fr.irisa.triskell.kermeta.kpm.SuitedExpression;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
+
 import java.util.ArrayList;
 
 import java.util.Date;
+
+import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 
 import org.eclipse.core.resources.IResource;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -266,6 +273,27 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * @generated
 	 */
 	private EDataType iResourceEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType kermetaUnitInterestEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType hashtableEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iProgressMonitorEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -880,6 +908,33 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getKermetaUnitInterest() {
+		return kermetaUnitInterestEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getHashtable() {
+		return hashtableEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getIProgressMonitor() {
+		return iProgressMonitorEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public KpmFactory getKpmFactory() {
 		return (KpmFactory)getEFactoryInstance();
 	}
@@ -986,6 +1041,9 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		iProjectEDataType = createEDataType(IPROJECT);
 		dateEDataType = createEDataType(DATE);
 		iResourceEDataType = createEDataType(IRESOURCE);
+		kermetaUnitInterestEDataType = createEDataType(KERMETA_UNIT_INTEREST);
+		hashtableEDataType = createEDataType(HASHTABLE);
+		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
 	}
 
 	/**
@@ -1064,6 +1122,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		op = addEOperation(dependencyEClass, null, "process");
 		addEParameter(op, this.getUnit(), "unit", 0, 1);
+		addEParameter(op, this.getHashtable(), "params", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
 
 		op = addEOperation(dependencyEClass, this.getboolean(), "isExecutable", 0, 1);
 		addEParameter(op, this.getUnit(), "unit", 0, 1);
@@ -1102,6 +1162,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		op = addEOperation(unitEClass, null, "receiveEvent");
 		addEParameter(op, this.getString(), "eventName", 0, 1);
+		addEParameter(op, this.getHashtable(), "params", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
 
 		op = addEOperation(unitEClass, this.getArrayList(), "getDependenciesWithEvent", 0, 1);
 		addEParameter(op, this.getString(), "eventName", 0, 1);
@@ -1112,7 +1174,9 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		addEOperation(unitEClass, this.getboolean(), "isProject", 0, 1);
 
-		addEOperation(unitEClass, null, "changed");
+		op = addEOperation(unitEClass, null, "changed");
+		addEParameter(op, this.getKermetaUnitInterest(), "changer", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
 
 		addEOperation(unitEClass, null, "remove");
 
@@ -1202,6 +1266,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(actionEClass, null, "execute");
 		addEParameter(op, this.getUnit(), "unit", 0, 1);
 		addEParameter(op, this.getArrayList(), "dependents", 0, 1);
+		addEParameter(op, this.getHashtable(), "params", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
 
 		initEClass(abstractExpressionEClass, AbstractExpression.class, "AbstractExpression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAbstractExpression_Filter(), this.getFilter(), null, "filter", null, 1, 1, AbstractExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1234,6 +1300,9 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		initEDataType(iProjectEDataType, IProject.class, "IProject", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dateEDataType, Date.class, "Date", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iResourceEDataType, IResource.class, "IResource", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(kermetaUnitInterestEDataType, KermetaUnitInterest.class, "KermetaUnitInterest", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(hashtableEDataType, Hashtable.class, "Hashtable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

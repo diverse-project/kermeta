@@ -18,14 +18,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 
+import fr.irisa.triskell.eclipse.resources.NatureHelper;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.core.natures.KermetaNature;
-import fr.irisa.triskell.kermeta.core.natures.KermetaNatureHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
 /**
  * 
@@ -38,16 +39,6 @@ import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
  *
  */
 public class IResourceHelper {
-
-	/**
-	 * The eclipse workspace.
-	 */
-	static final public IWorkspace workspace = ResourcesPlugin.getWorkspace();
-	
-	/**
-	 * The eclipse root (in fact the workspace root).
-	 */
-	static final public IWorkspaceRoot root = workspace.getRoot();
 	
 	//////////////////////////
 	//////////////////////////
@@ -58,7 +49,7 @@ public class IResourceHelper {
 	 * Get the eclipse root path. It means the absolute workspace path.
 	 */
 	static public String getAbsolutePath() {
-		return root.getLocation().toString();
+		return ResourceHelper.root.getLocation().toString();
 	}
 
 	static public IResource getIResource (Unit unit) {
@@ -77,8 +68,7 @@ public class IResourceHelper {
 	 * @return
 	 */
 	static public IResource getIResource (String relativeName) {
-		Path path = new Path(relativeName);
-		IResource result = root.getFile(path);
+		IResource result = ResourceHelper.getIFile(relativeName);
 		return result;
 	}
 	
@@ -88,54 +78,23 @@ public class IResourceHelper {
 	 * @return
 	 */
 	static public IFile getIFile (File file) {
-		return getIFile( file.getPath() );
+		return ResourceHelper.getIFile( file.getPath() );
 	}
-
-	/**
-	 * 
-	 * @param relativeName
-	 * @return
-	 */
-	static public IFile getIFile (String relativeName) {
-		Path path = new Path( relativeName );
-		return root.getFile(path);
-	}
-	
-	/**
-	 * 
-	 * @param fileName
-	 * @param filePath
-	 * @return
-	 */
-	static public IFile getIFile (String fileName, String filePath) {
-		return getIFile( filePath + "/" + fileName );
-	}
-	
-	/**
-	 * 
-	 * @param directory
-	 * @return
-	 */
-	static public IFolder getIFolder (Directory directory) {
-		Path path = new Path(directory.getPath());
-		return root.getFolder(path);
-	}
-	
-	/**
-	 * 
-	 * @param project
-	 * @return
-	 */
-	static public IProject getIProject (Project project) {
-		return root.getProject(project.getName());
-	}
-	
+		
 	/**
 	 * 
 	 * @return
 	 */
 	static public IProject[] getProjects() {
-		return root.getProjects();
+		return ResourceHelper.root.getProjects();
+	}
+
+	static public IFolder getIFolder(Directory directory) {
+		return ResourceHelper.getIFolder( directory.getPath() );
+	}
+	
+	static public IProject getIProject(Project project) {
+		return ResourceHelper.getIProject(project.getName());
 	}
 	//////////////////////////////////
 	//////////////////////////////////	
@@ -149,13 +108,6 @@ public class IResourceHelper {
 	//		Testing		//
 	//////////////////////
 	//////////////////////
-	static public boolean isNatureKermeta(IProject project) throws CoreException {
-		// To get the project description, it must be opened
-		if ( ! project.isOpen() ) 
-			return false;
-		return project.getDescription().hasNature( KermetaNature.ID );
-	}
-	
 	static public boolean couldFileBeTypechecked(IFile file) {
 		boolean result = false;
 		String extension = file.getFileExtension();
@@ -184,10 +136,10 @@ public class IResourceHelper {
 	 * @throws CoreException
 	 */
 	static public Set<IProject> getKermetaProjects() throws CoreException {
-		IProject[] projects = root.getProjects();
+		IProject[] projects = ResourceHelper.root.getProjects();
 		HashSet <IProject> kermetaProjects = new HashSet <IProject> ();
 		for (int i = 0; i < projects.length; i++) {
-			if ( isNatureKermeta(projects[i]) )
+			if ( NatureHelper.doesProjectHaveNature(projects[i], KermetaNature.ID) )
 				kermetaProjects.add(projects[i]);
 		}
 		return kermetaProjects;
@@ -199,9 +151,9 @@ public class IResourceHelper {
 	 * specifics actions.
 	 * @throws CoreException
 	 */
-	static public void refreshWorkspace() throws CoreException {
+	/*static public void refreshWorkspace() throws CoreException {
 		root.refreshLocal(IResource.DEPTH_INFINITE, null);
-	}
+	}*/
 	//////////////////////////////////////////
 	//////////////////////////////////////////
 	//		End of Workspace Mechanism		//
@@ -282,7 +234,8 @@ public class IResourceHelper {
 			 public void run(IProgressMonitor monitor) throws CoreException {
 				 project.create(description, monitor);
 				 project.open(monitor);
-				 KermetaNatureHelper.addKermetaNature(project);
+				 NatureHelper.addNatureToProject(project, KermetaNature.ID);
+				 //KermetaNatureHelper.addKermetaNature(project);
 				 KermetaWorkspace.getInstance().addKermetaProject(project);
 			 }
 		};

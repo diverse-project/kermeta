@@ -17,5 +17,10 @@
          point="fr.irisa.triskell.kermeta.kpm.actions">
       <Action class="fr.irisa.triskell.kermeta.kpm.actions.MarkDependents"/>
    </extension>
+   <extension
+         id="typecheck"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.Typecheck"/>
+   </extension>
 
 </plugin>

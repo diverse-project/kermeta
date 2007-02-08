@@ -48,7 +48,7 @@ public class KpmHelper {
 		
 		// typecheck event
 		event = KpmFactory.eINSTANCE.createDependencyEvent();
-		event.setName( "typecheck" );
+		event.setName( "open" );
 		kpm.getEvents().add( event );
 		
 	}
@@ -70,9 +70,14 @@ public class KpmHelper {
 
 	
 	static private void addActions(KPM kpm) {
+
+		// Typecheck action
+		Action action = KpmFactory.eINSTANCE.createAction();
+		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.typecheck" );
+		kpm.getActions().add( action );
 		
 		// KMT2KM action
-		Action action = KpmFactory.eINSTANCE.createAction();
+		action = KpmFactory.eINSTANCE.createAction();
 		action.setName( "fr.irisa.triskell.kermeta.kpm.actions.kmt2km" );
 		kpm.getActions().add( action );
 
@@ -151,12 +156,21 @@ public class KpmHelper {
 		dependency.getOuts().add( kpm.getExpression("KM expr") );
 		dependency.getOuts().add( kpm.getExpression("Ecore expr") );
 		//dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.UpdateKMT"));
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.typecheck"));
 		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore"));
 		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2km"));
 		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.markdependents"));
 		kpm.getDependencies().add(dependency);
 		
 
+		// d2
+		dependency = KpmFactory.eINSTANCE.createDependency();
+		dependency.setName( "d2" );
+		dependency.setEvent( kpm.getEvent("open") );
+		dependency.setIn( kpm.getExpression("KMT expr") );
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.typecheck") );
+		kpm.getDependencies().add( dependency );
+		
 		// d2
 		/*dependency = KpmFactory.eINSTANCE.createDependency();
 		dependency.setName( "d2" );
@@ -183,32 +197,43 @@ public class KpmHelper {
 		
 	}*/
 	
-	static public void createKMTFile(IFile ifile, KPM kpm) {
-		
-		if ( kpm.findFile(ifile) != null )
-			return;
-
-		String containerPath = ifile.getFullPath().removeLastSegments(1).toString();
-		Directory container = kpm.findDirectory(containerPath);
-		if ( container == null )
-			return;
+	static public File addFileWithOpenDependency(IFile ifile, KPM kpm) {
+		Dependency dependency = kpm.getDependency("d2");
+		File file = KpmFactory.eINSTANCE.createFile();
+		file.setName( ifile.getName() );
+		file.setPath( ifile.getFullPath().toString() );
+		file.setKpm(kpm);
+		file.getDependencies().add( dependency );
+		file.setLastTimeModified( new Date() );
+		kpm.getUnits().add( file );
+		return file;
+	}
+	
+	static public File createKMTFile(IFile ifile, KPM kpm) {
 		
 		Dependency dependency = kpm.getDependency("d1");
 		
-		File file = KpmFactory.eINSTANCE.createFile();
+		String containerPath = ifile.getFullPath().removeLastSegments(1).toString();
+		Directory container = kpm.findDirectory(containerPath);
+		if ( container == null )
+			return null;
 		
-		file.setName( ifile.getName() );
-		file.setPath( ifile.getFullPath().toString() );
-		
-		if ( dependency.couldBeExecutable(file) ) {
+		File file = kpm.findFile(ifile);
+		if ( file == null ) {
+			file = KpmFactory.eINSTANCE.createFile();
+			file.setName( ifile.getName() );
+			file.setPath( ifile.getFullPath().toString() );
 			file.setKpm(kpm);
-			file.getDependencies().add( dependency );
 			file.setLastTimeModified( new Date() );
-			container.getContents().add(file);
-			file.setContainer(container);
 			kpm.getUnits().add( file );
 		}
-		
+
+		if ( dependency.couldBeExecutable(file) ) {
+			file.getDependencies().add( dependency );
+			container.getContents().add(file);
+			file.setContainer(container);
+		}
+		return file;
 	}
 	
 	

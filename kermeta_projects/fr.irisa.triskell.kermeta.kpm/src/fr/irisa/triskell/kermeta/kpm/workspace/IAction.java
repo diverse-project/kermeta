@@ -1,6 +1,9 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+
+import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
@@ -18,6 +21,6 @@ public interface IAction {
 	 * Please do NOT send event to any units.
 	 * @param dependency
 	 */
-	public void execute (Unit unit, ArrayList <String> dependents);
+	public void execute (Unit unit, ArrayList <String> dependents, Hashtable params, IProgressMonitor monitor);
 	
 }
