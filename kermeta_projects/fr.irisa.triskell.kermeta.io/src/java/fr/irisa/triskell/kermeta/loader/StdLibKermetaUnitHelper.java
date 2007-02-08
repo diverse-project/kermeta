@@ -1,4 +1,4 @@
-/* $Id: StdLibKermetaUnitHelper.java,v 1.3 2007-02-06 15:06:55 ftanguy Exp $
+/* $Id: StdLibKermetaUnitHelper.java,v 1.4 2007-02-08 14:52:17 cfaucher Exp $
  * Project   : Kermeta 
  * File      : KermetaUnitSharedData.java
  * License   : EPL
@@ -22,10 +22,7 @@ public class StdLibKermetaUnitHelper  {
 
 	public static String STD_LIB_URI = null;//"platform:/resource/fr.irisa.triskell.kermeta.io/lib/framework.km";
 	
-	//public static final String STD_LIB_URI_DEFAULT = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-	
-	public static final String STD_LIB_URI_DEFAULT = "platform:/plugin/fr.irisa.triskell.kermeta.io/lib/framework.km";
-	
+	public static final String STD_LIB_URI_DEFAULT = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
 	
     public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
 	

@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.16 2007-02-06 15:09:11 ftanguy Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.17 2007-02-08 14:52:21 cfaucher Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse_dir" location="/Applications/Development/Eclipse"/>
+	<property name="eclipse_dir" location="C:/kermetadev/eclipse3.2.1"/>
 	
 	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
@@ -36,7 +36,7 @@
 		description="deploy the jar file">
 		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta/lib/"/>
 		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
-		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
+		<!--copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.io/lib/"/-->
 		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
 	</target>
 	
