@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.26 2006-10-27 08:28:10 dvojtise Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.27 2007-02-08 15:33:58 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -54,6 +54,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
@@ -206,7 +207,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		{
 		    storedPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
             "");
-		    selectedFile = KermetaPlugin.getIFileFromString(storedPath);
+		    selectedFile = ResourceHelper.getIFile(storedPath);
 		    
 		    getProjectLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME,
 		    		currentProjectPath));
@@ -504,7 +505,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     protected void handleOperationNameButtonSelected()
     {
     	try{
-	        IFile selectedFile = KermetaPlugin.getIFileFromString(fileLocationText.getText());
+	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
 	        // Recompile kermeta source code
 	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
 	        
@@ -576,7 +577,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     protected void parseFileAndUpdateFields(String currentPath)
     {
-        IFile file = KermetaPlugin.getIFileFromString(currentPath);
+        IFile file = ResourceHelper.getIFile(currentPath);
         KermetaUnit selectedUnit = KermetaRunHelper.parse(file);
 	    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
 	    selectedClassString = (String)point.get(0);
@@ -673,7 +674,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     {
     	try{
 	        // Reparse the selected file
-	        IFile selectedFile = KermetaPlugin.getIFileFromString(fileLocationText.getText());
+	        IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());
 	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
 	        
 	        // Get classes of root package, and recursively of child packages
@@ -770,7 +771,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      * NOTE : do not put UI changes, otherwise, canSave() method will be called undefinitely
      */
     protected boolean validateFileLocation() {
-    	IFile selectedFile = KermetaPlugin.getIFileFromString(fileLocationText.getText());		
+    	IFile selectedFile = ResourceHelper.getIFile(fileLocationText.getText());		
     	if (selectedFile == null)
     	{
     		setErrorMessage(KermetaMessages.getString("ArgTab.INVALIDFILEERROR"));    			
