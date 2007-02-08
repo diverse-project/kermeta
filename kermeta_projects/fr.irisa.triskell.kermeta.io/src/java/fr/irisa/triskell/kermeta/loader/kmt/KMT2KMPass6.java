@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.12 2006-12-12 16:45:21 jmottu Exp $
+/* $Id: KMT2KMPass6.java,v 1.13 2007-02-08 14:41:15 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -15,27 +15,29 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.ast.Annotations;
+import org.apache.log4j.Logger;
+
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.GetterBody;
 import fr.irisa.triskell.kermeta.ast.Invariant;
+import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationEmptyBody;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.ast.Postcondition;
 import fr.irisa.triskell.kermeta.ast.Precondition;
 import fr.irisa.triskell.kermeta.ast.SetterBody;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
-//import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
-//import fr.irisa.triskell.kermeta.language.structure.FProperty;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
 /**
@@ -44,6 +46,14 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  */
 public class KMT2KMPass6 extends KMT2KMPass {
 
+
+	/** used to say if the currentclass is an aspect, this info cannot be stored 
+	 * directly in the class since the aspect comes from another kmt file
+	 */
+	private boolean currentClassIsAnAspect = false;
+
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2KMPass6");
+	
 	/**
 	 * 
 	 */
@@ -58,6 +68,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
 		builder.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
+		currentClassIsAnAspect = KermetaASTHelper.isAnAspect(classDecl);
+		
 		builder.pushContext();
 		// add type variable
 		Iterator tvs = builder.current_class.getTypeParameter().iterator();
@@ -111,7 +123,13 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationEmptyBody)
 	 */
 	public boolean beginVisit(OperationEmptyBody operationEmptyBody) {
-		builder.current_operation.setIsAbstract(true);
+		if(currentClassIsAnAspect){
+			// this is an update of the current definition, don't change anything
+			internalLog.debug("ok, body is abstract for the aspect operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
+					" from " +builder.getUri());
+		}
+		else // normal behavior
+			builder.current_operation.setIsAbstract(true);
 		return false;
 	}
 	
@@ -119,6 +137,30 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationExpressionBody)
 	 */
 	public boolean beginVisit(OperationExpressionBody operationExpressionBody) {
+		internalLog.debug("checking operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
+				" from " +builder.getUri());
+		if(currentClassIsAnAspect){
+
+			internalLog.debug("checking aspect operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
+					" from " +builder.getUri());
+			// this is an update of the current definition, this is valid only if the previous defintion was abstract
+			
+			if(builder.current_operation.isIsAbstract() || builder.current_operation.getBody()==null ){
+				// ok lets update the body
+				builder.current_operation.setIsAbstract(false);				
+			}
+			else {
+				// this is an error !
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 6 : Operation '"+builder.current_class.getName()+"." + builder.current_operation.getName() +
+						"' - Operations can be weaved using aspects if only one of those operation is concrete, all other operations must be abstract.",operationExpressionBody));
+				
+				return false;
+			}
+		}
+		else
+			internalLog.debug("normal operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
+					" from " +builder.getUri());
+		// normal behavior
 		String qname = NamedElementHelper.getQualifiedName(builder.current_operation);
 		if (builder.operation_bodies.containsKey(qname)) {
 			builder.current_operation.setBody(ExpressionParser.parse(builder, (String)builder.operation_bodies.get(qname)));
@@ -126,6 +168,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		else {
 			builder.current_operation.setBody(KMT2KMExperessionBuilder.process(operationExpressionBody.getFExpression(), builder));
 		}
+		builder.current_operation.setIsAbstract(false);
 		return false;
 	}
 	

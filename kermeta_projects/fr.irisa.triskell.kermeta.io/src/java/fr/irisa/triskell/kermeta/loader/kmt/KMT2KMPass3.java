@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.11 2006-12-07 08:08:03 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.12 2007-02-08 14:41:15 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
@@ -23,6 +24,7 @@ import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
+import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
@@ -50,7 +52,10 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
+
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
 /**
@@ -67,6 +72,14 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
  */
 public class KMT2KMPass3 extends KMT2KMPass {
 	
+	/** used to say if the currentclass is an aspect, this info cannot be stored 
+	 * directly in the class since the aspect comes from another kmt file
+	 */
+	private boolean currentClassIsAspect = false;
+	
+
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2KMPass3");
+
 	/**
 	 * @param builder
 	 */
@@ -93,6 +106,8 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	public boolean beginVisit(ClassDecl classDecl) {
 		builder.pushContext();
 		builder.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
+		currentClassIsAspect = KermetaASTHelper.isAnAspect(classDecl);
+		internalLog.debug(builder.current_class.getName() + " isAspect="+currentClassIsAspect + " from " +builder.getUri());
 //		 add type variables to the context
 		Iterator tvs = builder.current_class.getTypeParameter().iterator();
 		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
@@ -184,10 +199,26 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			// lower :
 			builder.current_operation.setLower(getLower(operation.getTypeRef()));
 		}
+		internalLog.debug("visiting operation " +operation.getName());
 		// checks that the class do not have an op with the same name yet
 		if (ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation));
-			return false;
+			//if the operation is from an aspect class and its signature is the same, we need to continue 
+			if(currentClassIsAspect){
+				// if they have the same signature
+				if(haveSameTypeSignature(operation, ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName()))){
+					return super.beginVisit(operation);
+				}
+				else{
+//					 otherwise this is an error
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definitions of operation '"+builder.current_operation.getName()+"' with different signatures.",operation ));
+					return false;
+				}
+			}
+			else {
+				// otherwise this is an error
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation));
+				return false;
+			}
 		}
 		if (ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_operation.getName()) != null) {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_operation.getName()+"'.",operation));
@@ -199,6 +230,35 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		return super.beginVisit(operation);
 	}
 	
+	/**
+	 * Check that the propose operation have the same signature
+	 * 
+	 * @param astOperation
+	 * @param modelOperation
+	 * @return
+	 */
+	private boolean haveSameTypeSignature(Operation astOperation, fr.irisa.triskell.kermeta.language.structure.Operation modelOperation) {
+		// check return type
+		// DVK: maybe I should use the type equality checker insead of a simple name comparison ...
+		if(!TypeHelper.getName(getFType(astOperation.getTypeRef())).equals(TypeHelper.getName(modelOperation.getType())))
+		{
+			return false;
+		}
+		// check parameters
+		int nbParameters = astOperation.getParams() != null ? astOperation.getParams().getChildCount() : 0;
+		if(nbParameters != modelOperation.getOwnedParameter().size()) return false;
+		for(int i = 0; i < nbParameters; i++){
+			Param param = (Param)astOperation.getParams().getChild(i);
+			fr.irisa.triskell.kermeta.language.structure.Type astParamType = getFType(param.getTypeRef());
+			//Type type  = getFType(astOperation.getParams().getChild(i));
+			Parameter modelParam = (Parameter)modelOperation.getOwnedParameter().get(i);
+			if(!TypeHelper.getName(astParamType).equals(TypeHelper.getName(modelParam.getType()))){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.Operation)
 	 */
@@ -340,8 +400,17 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		builder.current_property.setIsReadOnly(false);
 		
 		if (ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of property '"+builder.current_property.getName()+"'.",property));
-			return false;
+			//	if the property is from an aspect class and its signature is the same, we should continue but reuse the existing one 
+			if(currentClassIsAspect &&
+					haveSameTypeSignature(property, ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()))){
+					return super.beginVisit(property);
+				}
+				else{
+					//	 otherwise this is an error
+			
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of property '"+builder.current_property.getName()+"'.",property));
+					return false;
+			}
 		}
 		
 		// checks that the class do not have an op with the same name yet
@@ -353,6 +422,23 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		// owningClass
 		builder.current_class.getOwnedAttribute().add(builder.current_property);
 		return super.beginVisit(property);
+	}
+
+	/**
+	 * Check that the propose operation have the same signature
+	 * 
+	 * @param astOperation
+	 * @param modelOperation
+	 * @return
+	 */
+	private boolean haveSameTypeSignature(Property astProperty, fr.irisa.triskell.kermeta.language.structure.Property modelProperty) {
+		// check return type
+		// DVK: maybe I should use the type equality checker insead of a simple name comparison ...
+		if(!TypeHelper.getName(getFType(astProperty.getTypeRef())).equals(TypeHelper.getName(modelProperty.getType())))
+		{
+			return false;
+		}		
+		return true;
 	}
 	
 	/**
