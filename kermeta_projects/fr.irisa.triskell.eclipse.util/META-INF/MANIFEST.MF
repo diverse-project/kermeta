@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Util Plug-in
+Bundle-SymbolicName: fr.irisa.triskell.eclipse.util;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.console,
+ org.eclipse.ui,
+ org.eclipse.emf.ecore
+Export-Package: fr.irisa.triskell.eclipse.console,
+ fr.irisa.triskell.eclipse.console.messages,
+ fr.irisa.triskell.eclipse.resources
