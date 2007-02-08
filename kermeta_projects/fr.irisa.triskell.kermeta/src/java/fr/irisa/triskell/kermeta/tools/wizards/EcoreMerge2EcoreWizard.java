@@ -1,4 +1,4 @@
-/* $Id: EcoreMerge2EcoreWizard.java,v 1.3 2007-01-10 13:51:34 ftanguy Exp $
+/* $Id: EcoreMerge2EcoreWizard.java,v 1.4 2007-02-08 15:32:42 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -35,7 +35,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
-import fr.irisa.triskell.kermeta.console.messages.ThrowableMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.kermeta.dev.model.PackageMerge;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;

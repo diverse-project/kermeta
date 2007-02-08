@@ -6,7 +6,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import fr.irisa.triskell.kermeta.core.resources.KermetaResourcesHelper;
+import fr.irisa.triskell.kermeta.resources.KermetaResourceHelper;
 
 public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 
@@ -19,7 +19,7 @@ public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			KermetaResourcesHelper.createKermetaProject( page.getProjectName() );
+			KermetaResourceHelper.createKermetaProject( page.getProjectName() );
 		} catch (CoreException exception) {
 			exception.printStackTrace();
 			return false;

@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.14 2007-01-10 13:51:34 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.15 2007-02-08 15:32:42 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -32,9 +32,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
-import fr.irisa.triskell.kermeta.console.messages.ErrorMessage;
-import fr.irisa.triskell.kermeta.console.messages.ThrowableMessage;
-import fr.irisa.triskell.kermeta.console.messages.WarningMessage;
+import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
+import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
+import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
@@ -110,7 +111,7 @@ public class UnitExporterWizard extends Wizard {
 		
 		// use the input file name with a xmi extension as default
 		IFile kmtfile;
-		kmtfile = KermetaPlugin.getIFileFromString(inputFile.getFullPath()
+		kmtfile = ResourceHelper.getIFile(inputFile.getFullPath()
 				.removeFileExtension().addFileExtension(defaultOutputExtension)
 				.toString());
 		

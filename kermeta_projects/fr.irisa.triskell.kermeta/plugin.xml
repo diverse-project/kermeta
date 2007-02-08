@@ -172,7 +172,7 @@
        id="KermetaNature"
        point="org.eclipse.core.resources.natures">
     <runtime>
-       <run class="fr.irisa.triskell.kermeta.core.natures.KermetaNature"/>
+       <run class="fr.irisa.triskell.kermeta.resources.KermetaNature"/>
     </runtime>
  </extension>
  <extension

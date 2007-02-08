@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.4 2007-01-10 13:51:34 ftanguy Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.5 2007-02-08 15:32:42 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -24,12 +24,8 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.console.MessageConsoleStream;
 
-import fr.irisa.triskell.kermeta.console.messages.WarningMessage;
+import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
