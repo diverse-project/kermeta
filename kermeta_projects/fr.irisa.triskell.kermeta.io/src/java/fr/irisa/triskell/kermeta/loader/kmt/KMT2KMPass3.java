@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.12 2007-02-08 14:41:15 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.13 2007-02-08 16:18:25 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -75,8 +75,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	/** used to say if the currentclass is an aspect, this info cannot be stored 
 	 * directly in the class since the aspect comes from another kmt file
 	 */
-	private boolean currentClassIsAspect = false;
-	
+	private boolean currentClassIsAspect = false;	
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2KMPass3");
 
@@ -201,11 +200,15 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		}
 		internalLog.debug("visiting operation " +operation.getName());
 		// checks that the class do not have an op with the same name yet
-		if (ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName()) != null) {
+		fr.irisa.triskell.kermeta.language.structure.Operation existingOperation =  ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName());
+		if (existingOperation != null) {
 			//if the operation is from an aspect class and its signature is the same, we need to continue 
 			if(currentClassIsAspect){
 				// if they have the same signature
-				if(haveSameTypeSignature(operation, ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName()))){
+				if(haveSameTypeSignature(operation, existingOperation)){
+					// register the existing operation with this astnode
+					builder.storeTrace(existingOperation, operation);
+					aspectNodes.add(operation);
 					return super.beginVisit(operation);
 				}
 				else{
@@ -334,6 +337,11 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Param)
 	 */
 	public boolean beginVisit(Param param) {
+		if(aspectNodes.contains(param.getParent().getParent())){
+			// the operation defining these parameters is an aspect
+			// simply ignore these param
+			return false;
+		}
 		// Create the parameter and adds it to the current op
 		Parameter parameter = builder.struct_factory.createParameter();
 		builder.storeTrace(parameter, param);
