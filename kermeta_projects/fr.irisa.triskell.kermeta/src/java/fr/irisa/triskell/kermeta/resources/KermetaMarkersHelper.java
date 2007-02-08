@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.core.markers;
+package fr.irisa.triskell.kermeta.resources;
 
 import java.util.HashMap;
 
@@ -42,8 +42,10 @@ public class KermetaMarkersHelper {
      */
     public static void createMarkers(IFile file, KermetaUnit unit)
     {
-    	for (Object next : unit.messages.getErrors()) createMarkerForKMTFile(file, (KMUnitMessage)next, (KMTUnit)unit);
-    	for (Object next : unit.messages.getWarnings()) createMarkerForKMTFile(file, (KMUnitMessage)next, (KMTUnit)unit);
+    	for (Object next : unit.messages.getErrors()) 
+    		createMarkerForKMTFile(file, (KMUnitMessage)next, (KMTUnit)unit);
+    	for (Object next : unit.messages.getWarnings()) 
+    		createMarkerForKMTFile(file, (KMUnitMessage)next, (KMTUnit)unit);
     }
 
     /**

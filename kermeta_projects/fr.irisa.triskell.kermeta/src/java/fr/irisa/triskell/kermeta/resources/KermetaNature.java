@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.core.natures;
+package fr.irisa.triskell.kermeta.resources;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectNature;
