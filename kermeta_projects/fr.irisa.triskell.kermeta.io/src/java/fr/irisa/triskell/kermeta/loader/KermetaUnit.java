@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.78 2006-12-07 08:39:47 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.79 2007-02-08 14:39:51 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -815,13 +815,13 @@ public abstract class KermetaUnit {
 			if (doneLoadTypeDefinitions) return;
 			loading = true;
 			
-			doneLoadTypeDefinitions = true;
 			// load imported units
 			for(int i=0; i<importedUnits.size(); i++) {
 				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 				if (!iu.loading) iu.loadAllTypeDefinitions();
 			}
 			loadTypeDefinitions();
+			doneLoadTypeDefinitions = true;
 			loading = false;
 		}
 	    catch(Throwable t) {
@@ -838,12 +838,13 @@ public abstract class KermetaUnit {
 			if (doneLoadStructuralFeatures) return;
 			loading = true;
 			// load imported units
-			loadStructuralFeatures();
-			doneLoadStructuralFeatures = true;
 			for(int i=0; i<importedUnits.size(); i++) {
 				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 				if (!iu.loading) iu.loadAllStructuralFeatures();
 			}
+			// load the features of this unit
+			loadStructuralFeatures();
+			doneLoadStructuralFeatures = true;
 			loading = false;
 		}
 	    catch(Throwable t) {
@@ -860,12 +861,13 @@ public abstract class KermetaUnit {
 			if (doneLoadOppositeProperties) return;
 			loading = true;
 			// load imported units
-			loadOppositeProperties();
-			doneLoadOppositeProperties = true;
 			for(int i=0; i<importedUnits.size(); i++) {
 				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 				if (!iu.loading) iu.loadAllOppositeProperties();
 			}
+			// load the opposites prop of this unit
+			loadOppositeProperties();
+			doneLoadOppositeProperties = true;
 			loading = false;
 		}
 	    catch(Throwable t) {
@@ -882,11 +884,11 @@ public abstract class KermetaUnit {
 			if (doneLoadBodies) return;
 			loading = true;
 			// load imported units
-			loadBodies();
-			doneLoadBodies = true;
 			for(KermetaUnit iu : importedUnits)
 				if (!iu.loading) iu.loadAllBodies();
-			
+
+			loadBodies();
+			doneLoadBodies = true;
 			loading = false;
 		}
 	    catch(Throwable t) {
@@ -903,10 +905,11 @@ public abstract class KermetaUnit {
 			// package in particular, they are loaded twice if no "doneLoadAnnotation test" is done 
 			if (doneLoadAnnotations) return;
 		    loading = true;
-		    loadAnnotations();
-		    doneLoadAnnotations = true;
 		    for(KermetaUnit iu : importedUnits)
 		        if (!iu.loading) iu.loadAllAnnotations();
+
+		    loadAnnotations();
+		    doneLoadAnnotations = true;
 		    loading = false;
 		}
 	    catch(Throwable t) {
