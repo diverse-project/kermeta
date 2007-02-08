@@ -25,7 +25,6 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.core.markers.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
@@ -36,6 +35,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
+import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;

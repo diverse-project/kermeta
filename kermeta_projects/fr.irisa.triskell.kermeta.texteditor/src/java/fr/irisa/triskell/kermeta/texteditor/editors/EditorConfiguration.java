@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Display;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.completion.KermetaCompletionListener;
-//import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCodeScanner;
+import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCodeScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCommentScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTTagScanner;
 
@@ -79,9 +79,19 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
 
 		
-		/*DefaultDamagerRepairer dr = new DefaultDamagerRepairer( new KMTCodeScanner() );
+	/*	DefaultDamagerRepairer dr = new DefaultDamagerRepairer( new KMTCodeScanner(editor.getUnit()) );
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);*/
+		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		
+		
+		//PresentationReconciler reconciler = new PresentationReconciler();
+		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(scanner);
+		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		
+		dr = new DefaultDamagerRepairer( new KMTTagScanner() );
+		reconciler.setDamager(dr, KMTRuleBasedPartitionScanner.KMT_Comment );
+		reconciler.setRepairer(dr, KMTRuleBasedPartitionScanner.KMT_Comment );*/
 		
 		dr = new DefaultDamagerRepairer( new KMTTagScanner() );
 		reconciler.setDamager(dr, KMTPartitionScanner.KMT_TAG);
@@ -91,16 +101,6 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		reconciler.setDamager(dr, KMTPartitionScanner.KMT_COMMENT);
 		reconciler.setRepairer(dr, KMTPartitionScanner.KMT_COMMENT);
 		
-		
-		/*PresentationReconciler reconciler = new PresentationReconciler();
-		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(scanner);
-		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		
-		dr = new DefaultDamagerRepairer( new KMTTagScanner() );
-		reconciler.setDamager(dr, KMTRuleBasedPartitionScanner.KMT_Comment );
-		reconciler.setRepairer(dr, KMTRuleBasedPartitionScanner.KMT_Comment );
-		*/
 		return reconciler;
 	}
 	

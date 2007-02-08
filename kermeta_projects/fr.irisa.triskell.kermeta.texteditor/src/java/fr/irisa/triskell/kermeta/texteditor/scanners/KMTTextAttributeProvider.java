@@ -10,8 +10,8 @@ import org.eclipse.swt.widgets.Display;
 
 
 public class KMTTextAttributeProvider {
-
 	
+	public static final Color ROYAL_BLUE 	= 	new Color(Display.getCurrent(), new RGB(24, 116, 205));
 	public static final Color LIGHT_BLUE 	= 	new Color(Display.getCurrent(), new RGB(63, 95, 190));
 	public static final Color BLUE_GREEN 	= 	new Color(Display.getCurrent(),	new RGB(65, 130, 90));
 	public static final Color BLUE 			= 	new Color(Display.getCurrent(), new RGB(0, 0, 100));
@@ -33,6 +33,8 @@ public class KMTTextAttributeProvider {
 	public static final String TYPE_ATTRIBUTE 		= 	"__kmt_type_attribute";
 	public static final String SPECIAL_ATTRIBUTE 	= 	"__kmt_special_attribute";	
 	public static final String LITERAL_ATTRIBUTE 	= 	"__kmt_literal_attribute";	
+	public static final String OPERATOR_ATTRIBUTE 	= 	"__kmt_operator_attribute";	
+	public static final String STRING_ATTRIBUTE 	= 	"__kmt_string_attribute";	
 	
 	
 	private Map <String, TextAttribute> attributes = new HashMap <String, TextAttribute> ();
@@ -47,10 +49,12 @@ public class KMTTextAttributeProvider {
 			instance.attributes.put(	TAG_ATTRIBUTE, 			new TextAttribute(LIGHT_BLUE)			);
 			instance.attributes.put(	UNDEFINED_ATTRIBUTE, 	new TextAttribute( BLACK )				);
 			instance.attributes.put(	KEYWORD_ATTRIBUTE, 		new TextAttribute( BLUE, null, 3 )		);
-			instance.attributes.put(	CONTROL_ATTRIBUTE, 		new TextAttribute( FUSHIA, null, 3 )	);
-			instance.attributes.put(	TYPE_ATTRIBUTE, 		new TextAttribute( BLACK )				);
-			instance.attributes.put(	LITERAL_ATTRIBUTE, 		new TextAttribute( SEASHELL, null, 3 )	);
+			instance.attributes.put(	CONTROL_ATTRIBUTE, 		new TextAttribute( BLUE, null, 3 )	);
+			instance.attributes.put(	TYPE_ATTRIBUTE, 		new TextAttribute( BLACK, null, 1 )		);
+			instance.attributes.put(	LITERAL_ATTRIBUTE, 		new TextAttribute( FUSHIA, null, 3 )	);
 			instance.attributes.put(	SPECIAL_ATTRIBUTE, 		new TextAttribute( RED, null, 1 )		);
+			instance.attributes.put(	OPERATOR_ATTRIBUTE, 	new TextAttribute( BLACK, null, 1 )		);
+			instance.attributes.put(	STRING_ATTRIBUTE, 		new TextAttribute( ROYAL_BLUE )			);
 		}
 		return instance;
 	}

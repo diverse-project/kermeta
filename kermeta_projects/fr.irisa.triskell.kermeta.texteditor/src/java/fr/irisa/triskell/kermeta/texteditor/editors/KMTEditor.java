@@ -4,34 +4,41 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.Vector;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.IVerticalRuler;
+import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
+import org.eclipse.jface.text.source.projection.ProjectionSupport;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.jface.wizard.ProgressMonitorPart;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.core.markers.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.*;
-//import fr.irisa.triskell.kermeta.kpm.helpers.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 
@@ -41,7 +48,6 @@ import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
  * Distributed under the terms of the GPL license
  */
 public class KMTEditor extends TextEditor implements KermetaUnitInterest {
-//public class Editor extends TextEditor {
 	
 	protected KermetaUnit mcunit; 
 	protected KermetaOutline outline;
@@ -50,19 +56,40 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	private KermetaProject project;
 	
 	private KermetaWorkspace workspace = KermetaWorkspace.getInstance();
+	private ProjectionSupport projectionSupport;
+	public ProjectionAnnotationModel annotationModel;
 	
 	/**
 	 * Constructor
 	 */
 	public KMTEditor() {
 		super();
-		
 		setSourceViewerConfiguration(new EditorConfiguration(this));
-		
-		// store this editor in the plugin so other plugin may be able to retreive it
-		TexteditorPlugin.getDefault().setEditor(this);
 	}
 	
+	
+	public void createPartControl(Composite parent) {
+	    super.createPartControl(parent);
+	    ProjectionViewer viewer =(ProjectionViewer)getSourceViewer();
+
+	    projectionSupport = new ProjectionSupport(viewer,getAnnotationAccess(),getSharedColors());
+	    projectionSupport.install();
+
+	    //turn projection mode on
+	    viewer.doOperation(ProjectionViewer.TOGGLE);
+
+	    annotationModel = viewer.getProjectionAnnotationModel();
+	}
+	
+	public ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
+		ISourceViewer viewer = new ProjectionViewer(parent, ruler,
+					getOverviewRuler(), isOverviewRulerVisible(), styles);
+
+	   // ensure decoration support has been created and configured.
+	   getSourceViewerDecorationSupport(viewer);
+
+	   return viewer;
+	}
 	
 	private KermetaProject getProject() {
 		if ( project == null )
@@ -112,21 +139,7 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 		
 	}
 
-	
-	/**
-	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#initializeEditor()
-	 *
-	protected void doSetInput(IEditorInput input) throws CoreException {
-		
-		super.doSetInput(input);
-		try {
-			System.out.println(getEditorInput().getName());
-		} catch (RuntimeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	*/
+
 	/**
 	 * @return Returns the mcunit.
 	 */
@@ -182,23 +195,26 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	//		Accessors		//
 	//////////////////////////
 	//////////////////////////
-	public File getKPMFile() {
+	/*public File getKPMFile() {
 		if ( file == null) {
 			file = getProject().getFile(getFile());
 		}
 		return file;
-	}
+	}*/
 	
-	public KermetaWorkspace getWorkspace() {
+	/*public KermetaWorkspace getWorkspace() {
 		return workspace;
-	}
+	}*/
 	
 	public KermetaUnit getUnit() {
 		return mcunit;
 	}
 	
-	public String getContent() {
-		return getSourceViewer().getDocument().get();
+	public String getFileContent() {
+		if ( getSourceViewer() == null )
+			return null;
+		else
+			return getSourceViewer().getDocument().get();	
 	}
 	//////////////////////////////////
 	//////////////////////////////////
@@ -214,21 +230,19 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	public void dispose() {
 		super.dispose();
 		KermetaWorkspace.getInstance().undeclareInterest(this);
-		KermetaWorkspace.getInstance().removeContent( mcunit.getUri() );
 	}
 
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
-		KermetaWorkspace.getInstance().setContent( mcunit.getUri(), getContent() );
-		KermetaWorkspace.getInstance().updateFile( getFile() );
+		KermetaWorkspace.getInstance().changer( this );
 		super.performSave(overwrite, progressMonitor);
 	}
 	
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
-		final KMTEditor editor = this;
-		KermetaWorkspace.getInstance().declareInterestThreading(editor, getFile());
+		KMTEditor editor = this;
+		KermetaWorkspace.getInstance().declareInterest(editor);
 	}
 	
 }
