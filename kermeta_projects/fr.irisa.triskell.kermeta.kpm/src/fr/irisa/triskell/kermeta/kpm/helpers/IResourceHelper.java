@@ -111,6 +111,7 @@ public class IResourceHelper {
 	static public boolean couldFileBeTypechecked(IFile file) {
 		boolean result = false;
 		String extension = file.getFileExtension();
+		if(extension == null) return false;
 		if ( extension.equals("km") )
 			result = true;
 		else if ( extension.equals("kmt") )
