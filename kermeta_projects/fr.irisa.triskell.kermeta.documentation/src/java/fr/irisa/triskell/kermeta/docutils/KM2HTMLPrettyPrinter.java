@@ -1,7 +1,7 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.7 2007-01-25 13:41:34 dvojtise Exp $
- * Project    : fr.irisa.triskell.kermeta.io
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.8 2007-02-09 09:02:22 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLPrettyPrinter.java
- * License    : EPL
+ * License    : GPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : May 15, 2006
