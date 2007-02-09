@@ -1,4 +1,4 @@
-/* $Id: TexteditorPlugin.java,v 1.9 2007-02-08 15:38:50 ftanguy Exp $
+/* $Id: TexteditorPlugin.java,v 1.10 2007-02-09 10:41:45 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TextzditorPlugin.java
  * License : EPL
@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -28,6 +29,17 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	private static TexteditorPlugin plugin;
 	
 	final static public String KMT_PARTITIONING = "_KMT_PARTITIONING_";
+	
+	// the current kermeta texteditor
+	private KMTEditor editor;
+	
+	public KMTEditor getEditor() {
+		return editor;
+	}
+	
+	public void setEditor(KMTEditor newEditor) {
+		editor = newEditor;
+	}
 	
 	/**
 	 * List of KermetaEditorEventListener that must be notified
@@ -65,4 +77,11 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	
+	public void registerListener(KermetaEditorEventListener listener) {
+		kermetaEditorEventListeners.add(listener);
+	}
+	public void unregisterListener(KermetaEditorEventListener listener) {
+		kermetaEditorEventListeners.remove(listener);
+	}
 }

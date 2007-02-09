@@ -65,6 +65,7 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	public KMTEditor() {
 		super();
 		setSourceViewerConfiguration(new EditorConfiguration(this));
+		TexteditorPlugin.getDefault().setEditor(this);
 	}
 	
 	
