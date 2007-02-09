@@ -97,7 +97,12 @@ public class KermetaProject {
 	 */
 	public void save() throws CoreException {
 		try {
-			XMIHelper.save( getKpmFilePathString(), kpm);
+			if ( getKpmIFile().exists() )
+				XMIHelper.save( getKpmFilePathString(), kpm);
+			else {
+				kpm = KpmHelper.createKpm();
+				XMIHelper.save( getKpmFilePathString(), kpm);
+			}
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (IOException exception) {
 			exception.printStackTrace();
