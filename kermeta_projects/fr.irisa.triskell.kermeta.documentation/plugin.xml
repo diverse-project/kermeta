@@ -6,6 +6,7 @@
       <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.help"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="fr.irisa.triskell.kermeta.io"/>
    </requires>
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>
