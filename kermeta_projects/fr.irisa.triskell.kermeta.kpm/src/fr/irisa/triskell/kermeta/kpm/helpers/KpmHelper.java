@@ -198,15 +198,19 @@ public class KpmHelper {
 	}*/
 	
 	static public File addFileWithOpenDependency(IFile ifile, KPM kpm) {
-		Dependency dependency = kpm.getDependency("d2");
 		File file = KpmFactory.eINSTANCE.createFile();
 		file.setName( ifile.getName() );
 		file.setPath( ifile.getFullPath().toString() );
 		file.setKpm(kpm);
-		file.getDependencies().add( dependency );
 		file.setLastTimeModified( new Date() );
 		kpm.getUnits().add( file );
+		addOpenDependencyToFile(file, kpm);
 		return file;
+	}
+	
+	static public void addOpenDependencyToFile(File file, KPM kpm) {
+		Dependency dependency = kpm.getDependency("d2");
+		file.getDependencies().add( dependency );
 	}
 	
 	static public File createKMTFile(IFile ifile, KPM kpm) {

@@ -340,10 +340,11 @@ public class KermetaWorkspace {
 
 	private void declareInterestIntern(KermetaUnitInterest o, KermetaProject project) {
 		File file = project.getFile( o.getFile() );
-		if ( file == null ) {
+		if ( file == null )
 			file = KpmHelper.addFileWithOpenDependency(o.getFile(), project.getKpm());
-		}
-
+		else if ( file.getDependenciesWithEvent("open").size() == 0 )
+			KpmHelper.addOpenDependencyToFile(file, project.getKpm());
+		
 		final Hashtable params = new Hashtable();
 		params.put("changer", o);
 		final File realFile = file;
