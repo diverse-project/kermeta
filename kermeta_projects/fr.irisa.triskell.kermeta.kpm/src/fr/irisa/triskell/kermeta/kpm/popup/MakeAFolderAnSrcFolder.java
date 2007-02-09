@@ -4,6 +4,11 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -37,10 +42,24 @@ public class MakeAFolderAnSrcFolder implements IActionDelegate {
 				SrcDirectoryVisitor visitor = new SrcDirectoryVisitor( directory.getKpm(), SrcDirectoryVisitor.ADDING);
 				folder.accept(visitor);
 				
-				Iterator<Unit> itOnUnits = directory.getContents().iterator();
-				while ( itOnUnits.hasNext() ) {
-					itOnUnits.next().changed(KermetaWorkspace.getInstance().changer(), null);
-				}
+				final Directory d = directory;
+				
+				Job job = new Job("Building Directory " + d.getName()) {
+					
+					public IStatus run(IProgressMonitor monitor) {
+						Iterator<Unit> itOnUnits = d.getContents().iterator();
+						while ( itOnUnits.hasNext() ) {
+							if ( ! monitor.isCanceled() )
+								itOnUnits.next().changed(KermetaWorkspace.getInstance().changer(), new SubProgressMonitor(monitor, 1));
+							else
+								return Status.CANCEL_STATUS;
+						}
+						return Status.OK_STATUS;
+					}
+					
+				};
+				
+				job.schedule();
 				
 			}
 			project.save();
