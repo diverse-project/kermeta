@@ -243,7 +243,7 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		KMTEditor editor = this;
-		KermetaWorkspace.getInstance().declareInterest(editor);
+		KermetaWorkspace.getInstance().declareInterestThreading(editor);
 	}
 	
 }
