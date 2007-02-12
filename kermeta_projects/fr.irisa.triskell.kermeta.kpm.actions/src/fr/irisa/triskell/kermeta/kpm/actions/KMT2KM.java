@@ -32,11 +32,11 @@ public class KMT2KM implements IAction {
 				if ( extension.equals (".km") ) {
 					String absoluteName = ResourceHelper.root.getLocation().toString() + s;
 					KermetaUnit kunit = KermetaWorkspace.getInstance().getKermetaUnit(file);
-					if ( ! kunit.messages.hasError() )
+					if ( (kunit != null) && ! kunit.messages.hasError() )
 						kunit.saveAsXMIModel(absoluteName);
 				}
 			}
-			
+		
 			monitor.worked(1);
 		} finally {
 			monitor.done();

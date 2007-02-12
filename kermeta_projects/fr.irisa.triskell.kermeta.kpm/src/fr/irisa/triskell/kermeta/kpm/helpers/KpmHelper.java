@@ -171,6 +171,15 @@ public class KpmHelper {
 		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.typecheck") );
 		kpm.getDependencies().add( dependency );
 		
+		// update
+		dependency = KpmFactory.eINSTANCE.createDependency();
+		dependency.setName( "updateEditor" );
+		dependency.setEvent( kpm.getEvent("update") );
+		dependency.setIn( kpm.getExpression("KMT expr") );
+		dependency.setType( kpm.getType("synchro") );
+		dependency.getActions().add( kpm.getAction("fr.irisa.triskell.kermeta.kpm.actions.typecheck") );
+		kpm.getDependencies().add( dependency );
+		
 		// d2
 		/*dependency = KpmFactory.eINSTANCE.createDependency();
 		dependency.setName( "d2" );
@@ -205,11 +214,17 @@ public class KpmHelper {
 		file.setLastTimeModified( new Date() );
 		kpm.getUnits().add( file );
 		addOpenDependencyToFile(file, kpm);
+		addUpdateDependencyToFile(file, kpm);
 		return file;
 	}
 	
 	static public void addOpenDependencyToFile(File file, KPM kpm) {
 		Dependency dependency = kpm.getDependency("d2");
+		file.getDependencies().add( dependency );
+	}
+	
+	static public void addUpdateDependencyToFile(File file, KPM kpm) {
+		Dependency dependency = kpm.getDependency("updateEditor");
 		file.getDependencies().add( dependency );
 	}
 	

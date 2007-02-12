@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
+import java.util.Date;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
@@ -300,12 +301,14 @@ public class KermetaWorkspace {
 	}
 
 
-	private void declareInterestIntern(KermetaUnitInterest o, KermetaProject project, boolean threading) {
+	private void declareInterestIntern(KermetaUnitInterest o, final KermetaProject project, boolean threading) {
 		File file = project.getFile( o.getFile() );
 		if ( file == null )
 			file = KpmHelper.addFileWithOpenDependency(o.getFile(), project.getKpm());
-		else if ( file.getDependenciesWithEvent("open").size() == 0 )
+		else if ( file.getDependenciesWithEvent("open").size() == 0 ) {
 			KpmHelper.addOpenDependencyToFile(file, project.getKpm());
+			KpmHelper.addUpdateDependencyToFile(file, project.getKpm());
+		}
 		
 		final Hashtable params = new Hashtable();
 		params.put("changer", o);
@@ -322,7 +325,12 @@ public class KermetaWorkspace {
 						monitor.worked(1);
 					} finally {
 						monitor.done();
-					}			
+					}	
+					try {
+						project.save();
+					} catch (CoreException exception) {
+						exception.printStackTrace();
+					}
 					return Status.OK_STATUS;
 				}
 			
@@ -357,14 +365,21 @@ public class KermetaWorkspace {
 	}
 	
 	public void updateKermetaUnit(KermetaUnitInterest o) {
-		KermetaUnit newUnit = calculateKermetaUnit(o);
-		units.put(o, newUnit);
-		for ( KermetaUnitInterest current : units.keySet() ) {
-			KermetaUnit currentUnit = units.get(current);
-			if ( doesKermetaUnitCorrespondToFile(currentUnit, o.getFile().getLocationURI().toString()) )
-				units.put(current, newUnit);
+		
+		IFile ifile = o.getFile();
+		File file = getFile(ifile);
+		
+		if ( ifile.getLocalTimeStamp() > file.getLastTimeModified().getTime() ) {
+			KermetaUnit newUnit = calculateKermetaUnit(o);
+			units.put(o, newUnit);
+			for ( KermetaUnitInterest current : units.keySet() ) {
+				KermetaUnit currentUnit = units.get(current);
+				if ( doesKermetaUnitCorrespondToFile(currentUnit, o.getFile().getLocationURI().toString()) )
+					units.put(current, newUnit);
+			}
+			file.setLastTimeModified( new Date(ifile.getLocalTimeStamp()) );
+			o.updateKermetaUnit(newUnit);
 		}
-		o.updateKermetaUnit(newUnit);
 	}
 	//////////////////////////////////////////
 	//////////////////////////////////////////

@@ -25,7 +25,7 @@ public class Typecheck implements IAction {
 			KermetaUnitInterest changer = (KermetaUnitInterest) params.get("changer");
 			
 			if ( changer != null )
-				KermetaWorkspace.getInstance().updateFile(changer);
+				KermetaWorkspace.getInstance().updateKermetaUnit(changer);
 
 			monitor.worked(1);
 						

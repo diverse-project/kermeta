@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.9 2007-02-12 08:25:08 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.10 2007-02-12 10:26:31 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -339,7 +339,6 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 		if ( changer != null )
 			params.put("changer", changer);
 		receiveEvent("update", params, monitor);
-		setLastTimeModified( new Date() );
 		/*IResource resource = IResourceHelper.getIResource(getPath());
 		try {
 			resource.setLocalTimeStamp(getLastTimeModified().getTime());
