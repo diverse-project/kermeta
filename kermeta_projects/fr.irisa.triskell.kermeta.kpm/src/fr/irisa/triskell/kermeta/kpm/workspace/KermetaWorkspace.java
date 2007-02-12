@@ -369,7 +369,7 @@ public class KermetaWorkspace {
 		IFile ifile = o.getFile();
 		File file = getFile(ifile);
 		
-		if ( ifile.getLocalTimeStamp() > file.getLastTimeModified().getTime() ) {
+		if ( (units.get(o) == null) || (ifile.getLocalTimeStamp() > file.getLastTimeModified().getTime()) ) {
 			KermetaUnit newUnit = calculateKermetaUnit(o);
 			units.put(o, newUnit);
 			for ( KermetaUnitInterest current : units.keySet() ) {
