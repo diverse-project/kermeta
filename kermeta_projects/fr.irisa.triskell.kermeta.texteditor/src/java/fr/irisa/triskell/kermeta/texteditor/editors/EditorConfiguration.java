@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.completion.KermetaCompletionListener;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCodeScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCommentScanner;
+import fr.irisa.triskell.kermeta.texteditor.scanners.KMTStringScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTTagScanner;
 
 /**
@@ -74,10 +75,6 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		PresentationReconciler reconciler= new PresentationReconciler();
 		reconciler.setDocumentPartitioning( getConfiguredDocumentPartitioning(sourceViewer) );
 
-		DefaultDamagerRepairer dr = new DefaultDamagerRepairer( new EditorScanner() );
-		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
-
 		
 	/*	DefaultDamagerRepairer dr = new DefaultDamagerRepairer( new KMTCodeScanner(editor.getUnit()) );
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
@@ -93,6 +90,22 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		reconciler.setDamager(dr, KMTRuleBasedPartitionScanner.KMT_Comment );
 		reconciler.setRepairer(dr, KMTRuleBasedPartitionScanner.KMT_Comment );*/
 		
+		/*DefaultDamagerRepairer dr = new DefaultDamagerRepairer( new KMTTagScanner() );
+		reconciler.setDamager(dr, KMTPartitionScanner.KMT_TAG);
+		reconciler.setRepairer(dr, KMTPartitionScanner.KMT_TAG);
+		
+		dr = new DefaultDamagerRepairer( new KMTCommentScanner() );
+		reconciler.setDamager(dr, KMTPartitionScanner.KMT_COMMENT);
+		reconciler.setRepairer(dr, KMTPartitionScanner.KMT_COMMENT);*/
+		
+		DefaultDamagerRepairer dr = new DefaultDamagerRepairer( new EditorScanner() );
+		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+	
+		dr = new DefaultDamagerRepairer( new KMTStringScanner() );
+		reconciler.setDamager(dr, KMTPartitionScanner.KMT_STRING);
+		reconciler.setRepairer(dr, KMTPartitionScanner.KMT_STRING);
+		
 		dr = new DefaultDamagerRepairer( new KMTTagScanner() );
 		reconciler.setDamager(dr, KMTPartitionScanner.KMT_TAG);
 		reconciler.setRepairer(dr, KMTPartitionScanner.KMT_TAG);
@@ -103,8 +116,7 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		
 		return reconciler;
 	}
-	
-	
+		
 	/**
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getContentAssistant(org.eclipse.jface.text.source.ISourceViewer)
 	 * Set the editor completion manager

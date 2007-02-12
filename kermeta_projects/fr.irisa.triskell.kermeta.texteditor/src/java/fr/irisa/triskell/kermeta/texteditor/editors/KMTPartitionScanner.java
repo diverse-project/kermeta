@@ -21,6 +21,8 @@ public class KMTPartitionScanner extends RuleBasedPartitionScanner {
 	static public String KMT_COMMENT = "__KMT_COMMENT__";
 	static public String KMT_TAG = "__KMT_TAG__";
 	
+	static public String KMT_STRING = "__KMT_STRING__";
+	
 	static public String KMT_Code = "__KMT_CODE__";
 	
 	
@@ -36,19 +38,22 @@ public class KMTPartitionScanner extends RuleBasedPartitionScanner {
 
 		Token comment = new Token ( KMT_COMMENT );
 		Token tag = new Token ( KMT_TAG );
+		Token literal = new Token ( KMT_STRING );
 		
-		IPredicateRule[] predicateRules = new IPredicateRule[3];
+		IPredicateRule[] predicateRules = new IPredicateRule[4];
 		
 		predicateRules[0] = new MultiLineRule("/**", "*/", tag);
 		predicateRules[1] = new MultiLineRule("/*", "*/", comment);
 		predicateRules[2] = new EndOfLineRule("//", comment);
+		
+		predicateRules[3] = new MultiLineRule("\"", "\"", literal);
 		
 		return predicateRules;
 		
 	}
 	
 	static public String[] getLegalContentTypes() {
-		return new String[] { KMT_COMMENT, KMT_TAG };
+		return new String[] { KMT_COMMENT, KMT_TAG, KMT_STRING };
 	}
 	
 }

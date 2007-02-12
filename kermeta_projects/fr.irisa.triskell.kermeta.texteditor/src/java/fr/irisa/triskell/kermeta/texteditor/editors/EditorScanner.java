@@ -52,7 +52,7 @@ public class EditorScanner extends RuleBasedScanner {
 		// rule for comments
 		//createRuleForComments();
 		// rule for literals
-		createRuleForLiterals();
+		//createRuleForLiterals();
 		// rule for keywords
 		createRuleForKeyWords();
 
@@ -85,10 +85,11 @@ public class EditorScanner extends RuleBasedScanner {
 	/**
 	 * 
 	 */
-	private void createRuleForLiterals() {
+	/*private void createRuleForLiterals() {
 		IToken stringToken = new Token(new TextAttribute(LIGHT_BLUE));
-		rules.add(new PatternRule("\"", "\"", stringToken, '\\', true));
-	}
+		//rules.add(new PatternRule("\"", "\"", stringToken, '\\', true));
+		rules.add(new PatternRule("\"", "\"", stringToken, '\n', true));
+	}*/
 
 	/**
 	 * 

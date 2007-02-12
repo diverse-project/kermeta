@@ -54,7 +54,7 @@ public class KMTTextAttributeProvider {
 			instance.attributes.put(	LITERAL_ATTRIBUTE, 		new TextAttribute( FUSHIA, null, 3 )	);
 			instance.attributes.put(	SPECIAL_ATTRIBUTE, 		new TextAttribute( RED, null, 1 )		);
 			instance.attributes.put(	OPERATOR_ATTRIBUTE, 	new TextAttribute( BLACK, null, 1 )		);
-			instance.attributes.put(	STRING_ATTRIBUTE, 		new TextAttribute( ROYAL_BLUE )			);
+			instance.attributes.put(	STRING_ATTRIBUTE, 		new TextAttribute( LIGHT_BLUE )			);
 		}
 		return instance;
 	}
