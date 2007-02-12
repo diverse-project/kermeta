@@ -1,6 +1,6 @@
 
 
-/*$Id: NatureHelper.java,v 1.1 2007-02-08 15:30:03 ftanguy Exp $
+/*$Id: NatureHelper.java,v 1.2 2007-02-12 09:28:52 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	NatureHelper.java
 * License : EPL
@@ -52,11 +52,47 @@ public class NatureHelper {
 		      public void run(IProgressMonitor monitor) throws CoreException {
 		    	  if ( ! doesProjectHaveNature(project, natureID) ) {
 		    		  IProjectDescription description = project.getDescription();
-		    		  description.setNatureIds( new String[] {natureID} );
+		    		  
+		    		  String[] natures = description.getNatureIds();
+		    		  String[] newNatures = new String[natures.length+1];
+		    		  
+		    		  for (int i=0; i<natures.length; i++)
+		    			  newNatures[i] = natures[i];
+		    		  
+		    		  newNatures[natures.length] = natureID;
+		    		  
+		    		  description.setNatureIds( newNatures );
 		    		  project.setDescription(description, null);
 		    	  }
 		      }
 		};
+		ResourcesPlugin.getWorkspace().run(operation, null);
+	}
+	
+	
+	static public void removeNatureFromProject(final IProject project, final String natureID) throws CoreException {
+		IWorkspaceRunnable operation = new IWorkspaceRunnable() {
+			
+			public void run(IProgressMonitor monitor) throws CoreException {
+				IProjectDescription description = project.getDescription();
+	    		String[] natures = description.getNatureIds();
+	    		
+	    		if ( (natures.length -1) == 0 ) {
+	    			description.setNatureIds( new String[0] );
+	    		} else {
+		    		String[] newNatures = new String[natures.length-1];
+		    		int j = 0;
+		    		for (int i=0; i< natures.length; i++) {
+		    			if ( natures[i] != natureID )
+		    				newNatures[j++] = natures[i];
+		    		}	
+		    		description.setNatureIds( newNatures );
+	    		}
+	    		project.setDescription(description, monitor);
+			}
+			
+		};
+		
 		ResourcesPlugin.getWorkspace().run(operation, null);
 	}
 	

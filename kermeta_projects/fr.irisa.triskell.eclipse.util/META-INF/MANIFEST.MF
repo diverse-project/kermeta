@@ -4,7 +4,7 @@ Bundle-Name: Util Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.eclipse.util;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.core.resources,
+Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.ui.console,
  org.eclipse.ui,

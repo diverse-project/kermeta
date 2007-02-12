@@ -74,10 +74,17 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 	private void toggleNature(final IProject project) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IWorkspaceRunnable operation = new IWorkspaceRunnable() {
-		      public void run(IProgressMonitor monitor) throws CoreException {
+		     
+			
+			public void run(IProgressMonitor monitor) throws CoreException {
 
-		    	  NatureHelper.addNatureToProject(project, KermetaNature.ID);
-		    	  KermetaWorkspace.getInstance().addKermetaProject(project);
+				if ( ! project.hasNature(KermetaNature.ID) ) {
+					NatureHelper.addNatureToProject(project, KermetaNature.ID);
+			    	KermetaWorkspace.getInstance().addKermetaProject(project);	
+				} else {
+					NatureHelper.removeNatureFromProject(project, KermetaNature.ID);
+				}
+				
 		    	 // IResourceHelper.attachDefaultBuilderToKermetaProject(project);
 		    	  
 		    	  /*		IProjectDescription description = project.getDescription();
