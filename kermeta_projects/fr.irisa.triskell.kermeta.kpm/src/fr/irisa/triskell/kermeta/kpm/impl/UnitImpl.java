@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.8 2007-02-08 15:37:03 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.9 2007-02-12 08:25:08 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -14,6 +14,7 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
+import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.Date;
 
 import java.util.Hashtable;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import java.util.Iterator;
@@ -332,11 +335,17 @@ public abstract class UnitImpl extends AbstractUnitImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void changed(KermetaUnitInterest changer, IProgressMonitor monitor) {
-		setLastTimeModified( new Date() );
 		Hashtable params = new Hashtable();
 		if ( changer != null )
 			params.put("changer", changer);
 		receiveEvent("update", params, monitor);
+		setLastTimeModified( new Date() );
+		/*IResource resource = IResourceHelper.getIResource(getPath());
+		try {
+			resource.setLocalTimeStamp(getLastTimeModified().getTime());
+		} catch (CoreException exception) {
+			exception.printStackTrace();
+		}*/
 	}
 
 	/**

@@ -1,6 +1,5 @@
 package fr.irisa.triskell.kermeta.kpm.workspace;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IFile;
@@ -10,14 +9,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.ProgressBar;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -38,15 +30,6 @@ import fr.irisa.triskell.kermeta.resources.KermetaNature;
  */
 public class KermetaWorkspace {
 
-	
-	static private Thread kermetaUnitCalculation = null;
-	
-	
-	/**
-	 * KPM object is the key part of the system. It contains dependencies between files.
-	 */
-	//private KPM kpm;
-	
 	/**
 	 * This attribute is the location of the Kermeta Project Manager's save.
 	 */
@@ -176,79 +159,51 @@ public class KermetaWorkspace {
 		return ResourceHelper.getIFile( relativeKpmFileName );
 	}
 	
-	/**
-	 * This method calculates the Kermeta Unit for the given file.
-	 * Pay attention, the calculated unit is not stored in the workspace.
-	 * If you want to store a Kermeta Unit in the workspace, you must use the
-	 * interest mechanism.
-	 * This method guarantees that the value returned is a KermetaUnit object if and only if
-	 * the file is well known format from Kermeta.
-	 * @param file
-	 */
-	public KermetaUnit getKermetaUnit( IFile file ) {
-		KermetaUnit unit = findKermetaUnit(file);
-		if ( unit == null ) {
-			if ( IResourceHelper.couldFileBeTypechecked(file) )
-				unit = KermetaUnitHelper.typeCheckFile( file );
-		}
-		return unit;
-	}
-	
-	/**
-	 * Finds a Kermeta Unit for the given file.
-	 * @param file
-	 * @return the corresponding Kermeta Unit if found or null otherwise.
-	 */
-	private KermetaUnit findKermetaUnit (KermetaUnitInterest o) {
-		KermetaUnit unit = units.get(o);
-		if ( unit == null )
-			unit = findKermetaUnit(o.getFile().getLocationURI().toString());
-		return unit;
-	}
-
-	private KermetaUnit findKermetaUnit (IFile file) {
+	private KermetaUnit findKermetaUnitRecursively(KermetaUnit root, String fileURI) {
 		
-		for (KermetaUnitInterest o : units.keySet() ) {
-			if ( o.getFile().equals(file) )
-				return units.get(o);
-		}
-		
-		return null;
-	}
-	
-	
-	/**
-	 * Search for the KermetaUnit corresponding to the given file.
-	 * @param fileURI
-	 * @return Returns null if no Kermeta Unit has been found for the given file or the corresponding Kermeta Unit.
-	 */
-	public KermetaUnit findKermetaUnit(String fileURI) {
-		// loop through all the units
-		for (KermetaUnit currentUnit : units.values()) {
-			if ( doesKermetaUnitCorrespondToFile(currentUnit, fileURI) )
-				return currentUnit;
-			KermetaUnit u = findKermetaUnit(currentUnit, fileURI);
-			if ( u != null )
-				return u;
-		}
-		return null;
-	}
-	
-	/**
-	 * Given a Kermeta Unit, this method searches in the imported units if one of them
-	 * corresponds to the given file URI.
-	 * @param root
-	 * @param unitToFind
-	 * @return It returns the Kermeta Unit if an imported unit corresponds to the given file or null if not.
-	 */
-	private KermetaUnit findKermetaUnit(KermetaUnit root, String fileURI) {
 		for ( KermetaUnit currentUnit : root.importedUnits ) {
 			if ( doesKermetaUnitCorrespondToFile(currentUnit, fileURI) )
 				return currentUnit;
 		}
+		
+		for ( KermetaUnit currentUnit : root.importedUnits ) {
+			KermetaUnit foundUnit = findKermetaUnitRecursively(currentUnit, fileURI);
+			if ( foundUnit != null )
+				return foundUnit;
+		}
+		return null;
+	}
+
+	private KermetaUnit findKermetaUnit(String fileURI) {
+		for ( KermetaUnit currentUnit : units.values() ) {
+			if ( doesKermetaUnitCorrespondToFile(currentUnit, fileURI) )
+				return currentUnit;
+			KermetaUnit foundUnit = findKermetaUnitRecursively(currentUnit, fileURI );
+			if ( foundUnit != null )
+				return foundUnit;
+		}
 		return null;
 	}
 	
+	public KermetaUnit getKermetaUnit(IFile file) {
+		return findKermetaUnit("file:" + file.getLocation().toString());
+	}
+	
+	private KermetaUnit calculateKermetaUnit(KermetaUnitInterest o) {
+		if ( IResourceHelper.couldFileBeTypechecked( o.getFile() ) )
+			return KermetaUnitHelper.typeCheckFile( o.getFile() );
+		return null;
+	}
+	
+	/**
+	 * This method updates the kermeta unit of the interested object.
+	 * The kermeta unit should have been calculated before calling this method.
+	 * @param unit
+	 */
+	public void updateInterestedObject(KermetaUnitInterest o) {
+		KermetaUnit unit = units.get(o);
+		o.updateKermetaUnit(unit);
+	}	
 	//////////////////////////////////
 	//////////////////////////////////
 	//		End of Accessors		//
@@ -320,7 +275,14 @@ public class KermetaWorkspace {
 	 * @param file The interesting file.
 	 */
 	public void declareInterest( KermetaUnitInterest o ) {
-		
+		__declareInteret(o, false);
+	}
+	
+	public void declareInterestThreading( KermetaUnitInterest o ) {
+		__declareInteret(o, true);
+	}
+	
+	public void __declareInteret( KermetaUnitInterest o, boolean threading ) {
 		if ( o != null ) {
 			//interestedObjects.put(o, file);
 			// calculate the KermetaUnit if necessary
@@ -332,13 +294,13 @@ public class KermetaWorkspace {
 				if ( project == null )
 					declareInterestExtern(o);
 				else
-					declareInterestIntern(o, project);		
+					declareInterestIntern(o, project, threading);		
 			}
 		}
 	}
 
 
-	private void declareInterestIntern(KermetaUnitInterest o, KermetaProject project) {
+	private void declareInterestIntern(KermetaUnitInterest o, KermetaProject project, boolean threading) {
 		File file = project.getFile( o.getFile() );
 		if ( file == null )
 			file = KpmHelper.addFileWithOpenDependency(o.getFile(), project.getKpm());
@@ -349,28 +311,32 @@ public class KermetaWorkspace {
 		params.put("changer", o);
 		final File realFile = file;
 		
-		Job job = new Job("Declaring Interest") {
-			
-			public IStatus run(IProgressMonitor monitor) {
-				try {
-					monitor.beginTask("Waiting for the outline", 2);
-					realFile.receiveEvent("open", params, monitor );	
-					monitor.worked(1);
-				} finally {
-					monitor.done();
-				}			
-				return Status.OK_STATUS;
-			}
-			
-		};
+		if ( threading ) {
 		
-		job.schedule();
+			Job job = new Job("Declaring Interest") {
+				
+				public IStatus run(IProgressMonitor monitor) {
+					try {
+						monitor.beginTask("Waiting for the outline", 2);
+						realFile.receiveEvent("open", params, monitor );	
+						monitor.worked(1);
+					} finally {
+						monitor.done();
+					}			
+					return Status.OK_STATUS;
+				}
+			
+			};
+		
+			job.schedule();
+		} else 
+			realFile.receiveEvent("open", params, null );
 	}
 	
 	private void declareInterestExtern(final KermetaUnitInterest o) {
 		Runnable r = new Runnable() {
 			public void run() {
-				updateFile(o);
+				updateKermetaUnit(o);
 			}
 		};
 		Thread t = new Thread(r);
@@ -389,77 +355,16 @@ public class KermetaWorkspace {
 		if ( units.containsKey(o) )
 			units.remove(o);
 	}
-
-	/**
-	 * This method is used to notify a specific object that the 
-	 * Kermeta Unit it is interested in has changed. 
-	 * @param o
-	 * @param file
-	 */
-	private void notifyInterestedObject( KermetaUnitInterest o ) {
-		o.updateKermetaUnit( findKermetaUnit(o) );
-	}
 	
-	/**
-	 * 
-	 * @param file
-	 */
-	public void updateFile(final KermetaUnitInterest o) {
-		KermetaUnit unit = null;
-		String content = o.getFileContent();
-		if ( content == null )
-			unit = KermetaUnitHelper.typeCheckFile( o.getFile() );
-		else 
-			unit = KermetaUnitHelper.typeCheckFile( o.getFile(), content );
-		updateKermetaUnit(o, unit);				
-	}	
-	
-	/**
-	 * Updating a Kermeta Unit for a file means notifying objects interested in the given file.
-	 * @param file
-	 * @param unit
-	 */
-	public void updateKermetaUnit(KermetaUnitInterest changer, KermetaUnit unit) {
-		
-		changer.updateKermetaUnit(unit);
-		
-		for ( KermetaUnitInterest o : units.keySet() ) {
-			if ( o.getFile().equals(changer.getFile()) )
-				units.put(o, unit);
+	public void updateKermetaUnit(KermetaUnitInterest o) {
+		KermetaUnit newUnit = calculateKermetaUnit(o);
+		units.put(o, newUnit);
+		for ( KermetaUnitInterest current : units.keySet() ) {
+			KermetaUnit currentUnit = units.get(current);
+			if ( doesKermetaUnitCorrespondToFile(currentUnit, o.getFile().getLocationURI().toString()) )
+				units.put(current, newUnit);
 		}
-		
-		/*if ( units.size() == 0 ) {
-			units.put(file, unit);
-			//addUnits(unit);
-			return;
-		}
-		
-		units.put(file, unit);
-		
-		ArrayList <IFile> files = new ArrayList <IFile> ();
-		for ( IFile f : units.keySet() ) {	
-			if ( units.get(f).getUri().equals( unit.getUri() ) )
-				files.add(f);
-		}
-		
-		for ( IFile f : files ) {
-		
-			// Getting the notification list
-			ArrayList <KermetaUnitInterest> objectsToNotify = new ArrayList<KermetaUnitInterest> ();
-			for ( KermetaUnitInterest o : interestedObjects.keySet() ) {
-				if ( interestedObjects.get(o).equals(f) )
-					objectsToNotify.add(o);
-			}
-		
-			// Notify
-			for ( KermetaUnitInterest o : objectsToNotify ) {
-				units.put(f, unit);
-				notifyInterestedObject(o, f );
-			}
-			
-		}*/
-		
-
+		o.updateKermetaUnit(newUnit);
 	}
 	//////////////////////////////////////////
 	//////////////////////////////////////////
@@ -503,11 +408,26 @@ public class KermetaWorkspace {
 	}
 
 	
+	public File getFile(IFile file) {
+		for ( KermetaProject p : projects.values() ) {
+			File f = p.getFile(file);
+			if ( f != null )
+				return f;
+		}
+		return null;
+	}
+	
 	
 	private KermetaUnitInterest changer = null;
 	
 	public void changer(KermetaUnitInterest o) {
 		changer = o;
+		File file = getFile(o.getFile());
+		if ( file == null ) {
+			KermetaUnit unit = KermetaUnitHelper.typeCheckFile(o.getFile(), o.getFileContent());
+			o.updateKermetaUnit(unit);
+		}
+			
 	}
 
 	public KermetaUnitInterest changer() {

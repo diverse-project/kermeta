@@ -69,6 +69,10 @@ public class IResourceHelper {
 	 */
 	static public IResource getIResource (String relativeName) {
 		IResource result = ResourceHelper.getIFile(relativeName);
+		/*if ( ! result.exists() )
+			result = ResourceHelper.getIFolder(relativeName);
+		if ( ! result.exists() )
+			result = ResourceHelper.getIProject(relativeName);*/
 		return result;
 	}
 	

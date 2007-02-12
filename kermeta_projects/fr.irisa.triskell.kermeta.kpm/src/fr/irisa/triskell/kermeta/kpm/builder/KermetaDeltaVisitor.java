@@ -72,7 +72,8 @@ public class KermetaDeltaVisitor implements IResourceDeltaVisitor {
 		
 		case IResource.FILE :
 			File file = KpmHelper.createKMTFile( (IFile) resource, kpm);
-			file.changed( KermetaWorkspace.getInstance().changer(), monitor );
+			if ( file != null )
+				file.changed( KermetaWorkspace.getInstance().changer(), monitor );
 			break;
 			
 		case IResource.FOLDER :
