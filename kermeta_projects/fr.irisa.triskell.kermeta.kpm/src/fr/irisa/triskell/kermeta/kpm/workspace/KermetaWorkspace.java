@@ -422,12 +422,13 @@ public class KermetaWorkspace {
 	
 	public void changer(KermetaUnitInterest o) {
 		changer = o;
-		File file = getFile(o.getFile());
-		if ( file == null ) {
-			KermetaUnit unit = KermetaUnitHelper.typeCheckFile(o.getFile(), o.getFileContent());
-			o.updateKermetaUnit(unit);
-		}
-			
+		if ( changer != null ) {
+			File file = getFile(o.getFile());
+			if ( file == null ) {
+				KermetaUnit unit = KermetaUnitHelper.typeCheckFile(o.getFile(), o.getFileContent());
+				o.updateKermetaUnit(unit);
+			}
+		}	
 	}
 
 	public KermetaUnitInterest changer() {
