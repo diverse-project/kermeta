@@ -9,7 +9,6 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.SubProgressMonitor;
 
 import fr.irisa.triskell.kermeta.kpm.*;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
@@ -42,7 +41,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 		switch ( kind ) {
 		
 		case IncrementalProjectBuilder.AUTO_BUILD :
-			System.out.println("auto_build");
 			IProject project = getProject();
 			IResourceDelta delta = getDelta( project );
 			if ( delta != null ) {		
@@ -66,11 +64,9 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			break;
 			
 		case IncrementalProjectBuilder.CLEAN_BUILD :
-			System.out.println("Clean_build");
 			break;
 		
 		case IncrementalProjectBuilder.FULL_BUILD :
-			System.out.println("full_build");
 			project = getProject();
 			delta = getDelta( project );
 			if ( delta != null ) {
@@ -89,7 +85,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			break;
 			
 		case IncrementalProjectBuilder.INCREMENTAL_BUILD :
-			System.out.println("incremental_build");
 			//build();
 			break;
 		

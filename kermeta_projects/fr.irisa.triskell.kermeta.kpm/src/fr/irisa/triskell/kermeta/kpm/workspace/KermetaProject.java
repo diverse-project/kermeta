@@ -27,10 +27,19 @@ import fr.irisa.triskell.kermeta.kpm.helpers.XMIHelper;
  */
 public class KermetaProject {
 
+	/**
+	 * The corresponding eclipse resource.
+	 */
 	private IProject project;
 	
+	/**
+	 * The KPM object used for the depencies.
+	 */
 	private KPM kpm;
 	
+	/**
+	 * Constant for the KPM file name.
+	 */
 	static private final String kpmFileName = ".project.kpm";
 	
 	public KermetaProject(IProject project) throws CoreException {
@@ -38,19 +47,29 @@ public class KermetaProject {
 		initialize();
 	}
 	
+	/**
+	 * 
+	 * @return The full path plus name of the KPM file.
+	 */
 	private String getKpmFilePathString() {
 		return project.getLocation().toString() + "/" + kpmFileName;
 	}
-	
-	/*private Path getKpmFilePath() {
-		return new Path(getKpmFilePathString());
-	}*/
-	
+
+	/**
+	 * 
+	 * @return Returns an Eclipse resource on the KPM file.
+	 */
 	public IFile getKpmIFile() {
 		Path path = new Path( project.getFullPath().toString() + "/" + kpmFileName );
 		return ResourcesPlugin.getWorkspace().getRoot().getFile( path );
 	}
 	
+	/**
+	 * Initialize the Kermeta Project.
+	 * Try to load the KPM file and restore the depdencies if the file exist.
+	 * If the file does not exist, a default one is created and loaded.
+	 * @throws CoreException
+	 */
 	private void initialize() throws CoreException {
 		IFile file = getKpmIFile();
 		if ( ! file.exists() ) {
@@ -61,10 +80,18 @@ public class KermetaProject {
 		}
 	}
 	
+	/**
+	 * Get the KPM object.
+	 * @return
+	 */
 	public KPM getKpm() {
 		return kpm;
 	}
 	
+	/**
+	 * 
+	 * @return Returns the eclipse resource corresponding to the current Kermeta Project.
+	 */
 	public IProject getValue() {
 		return project;
 	}

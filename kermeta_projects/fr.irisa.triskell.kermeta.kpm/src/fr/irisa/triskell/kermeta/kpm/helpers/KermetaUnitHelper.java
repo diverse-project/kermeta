@@ -4,7 +4,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 
 import fr.irisa.triskell.kermeta.kpm.File;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -28,10 +28,10 @@ public class KermetaUnitHelper {
 	static private void garbageCollect() {
 		Runtime r = Runtime.getRuntime();
 		long freeMem = r.freeMemory();
-		System.out.println("free memory before running gc(): " + freeMem);
+		KPMPlugin.log.info("free memory before running gc(): " + freeMem);
 		r.gc();
 		freeMem = r.freeMemory();
-		System.out.println("free memory after running gc(): " + freeMem);
+		KPMPlugin.log.info("free memory after running gc(): " + freeMem);
 	}
 	
 	//////////////////////////////////////
@@ -94,13 +94,8 @@ public class KermetaUnitHelper {
 	 * @return The method returns the Kermeta unit used.
 	 */
 	static public KermetaUnit typeCheckFile(IFile file, String content) {
-	
-		System.out.println();
-		System.out.println();
-		System.out.println("TYPECHECKING " + file.getLocation().toString() );
-		System.out.println();
-		System.out.println();
-	
+
+		KPMPlugin.log.info( "TYPECHECKING " + file.getLocation().toString() );
 		
 		KermetaUnit unit = null;
 		

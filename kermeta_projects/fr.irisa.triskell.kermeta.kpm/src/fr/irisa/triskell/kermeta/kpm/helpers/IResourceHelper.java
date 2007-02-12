@@ -10,13 +10,10 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -24,6 +21,7 @@ import fr.irisa.triskell.kermeta.kpm.Directory;
 import fr.irisa.triskell.kermeta.kpm.File;
 import fr.irisa.triskell.kermeta.kpm.Project;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
@@ -203,8 +201,7 @@ public class IResourceHelper {
 		description.setBuildSpec(newCommands);
 		iproject.setDescription(description, null);		
 		
-		System.out.println( "Builder added to : " + iproject.getName() );
-
+		KPMPlugin.log.info("Builder added to : " + iproject.getName());
 	}
 
 	static public void attachDefaultBuilderToKermetaProject(KermetaProject project) throws CoreException {

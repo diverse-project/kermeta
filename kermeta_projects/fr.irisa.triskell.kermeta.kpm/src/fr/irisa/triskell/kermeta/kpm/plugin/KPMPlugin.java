@@ -1,11 +1,12 @@
 package fr.irisa.triskell.kermeta.kpm.plugin;
 
 import org.osgi.framework.BundleContext;
+import org.apache.log4j.Logger;
 import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -17,6 +18,8 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 
 	// The shared instance
 	private static KPMPlugin plugin;
+	
+	final static public Logger log = LogConfigurationHelper.getLogger("KPM");
 	
 	/**
 	 * The constructor
@@ -31,12 +34,8 @@ public class KPMPlugin extends AbstractUIPlugin implements IStartup {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		System.out.println("[KPM Plugin started]");
-		
-	//	if(StdLibKermetaUnitHelper.STD_LIB_URI == null) StdLibKermetaUnitHelper.setURItoDefault();
-		
+		log.info("[KPM Plugin started]");
 		KermetaWorkspace.getInstance();
-
 	}
 
 	/*

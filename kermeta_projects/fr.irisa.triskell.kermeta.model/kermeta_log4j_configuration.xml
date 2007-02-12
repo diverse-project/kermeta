@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- $Id: kermeta_log4j_configuration.xml,v 1.1 2007-02-06 15:06:27 ftanguy Exp $ -->
+<!-- $Id: kermeta_log4j_configuration.xml,v 1.2 2007-02-12 16:40:41 ftanguy Exp $ -->
 <!-- Description: This is the configuration file for log4j it allows to tune the level of log you will receive 
 	it also allows to tune where you will receive them. -->
 
@@ -102,6 +102,9 @@
  	</logger>-->
 	<logger name="KMT2Ecore">
 		<level value="DEBUG"/>
+	</logger>
+		<logger name="KMT">
+		<level value="INFO"/>
 	</logger>
   
   <!-- define here which appender you want to use -->

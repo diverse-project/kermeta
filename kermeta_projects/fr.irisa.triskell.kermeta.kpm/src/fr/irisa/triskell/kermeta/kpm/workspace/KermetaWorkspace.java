@@ -36,7 +36,9 @@ public class KermetaWorkspace {
 	 */
 	static final private String relativeKpmFileName = "/.metadata/.plugins/kpm.xmi";
 	
-	
+	/**
+	 * Keep trace of all projects with kermeta nature.
+	 */
 	private Hashtable <IProject, KermetaProject> projects = new Hashtable <IProject, KermetaProject> ();
 	
 	/**
@@ -67,8 +69,8 @@ public class KermetaWorkspace {
 	static public KermetaWorkspace getInstance() {
 		if ( instance == null ) {
 			instance = new KermetaWorkspace();
-			instance.initialize();
 			try {
+				instance.initialize();
 				instance.save();
 			} catch (CoreException exception) {
 				exception.printStackTrace();
@@ -82,12 +84,8 @@ public class KermetaWorkspace {
 	 * and checks if new Kermeta Project have been added.
 	 *
 	 */
-	private void initialize() {
-		try {
-			initializeProjects();
-		} catch (CoreException exception) {
-			exception.printStackTrace();
-		}
+	private void initialize() throws CoreException {
+		initializeProjects();
 	}
 	
 	/**
@@ -142,10 +140,19 @@ public class KermetaWorkspace {
 		return project;
 	}
 	
+	/**
+	 * 
+	 * @return It returns all the projects with kermeta nature.
+	 */
 	public KermetaProject[] geProjects() {
 		return (KermetaProject[]) projects.values().toArray();
 	}
 	
+	/**
+	 * Get the kermeta project associated with the given resource.
+	 * @param value
+	 * @return
+	 */
 	public KermetaProject getKermetaProject(IProject value) {
 		return projects.get(value);
 	}
@@ -160,6 +167,13 @@ public class KermetaWorkspace {
 		return ResourceHelper.getIFile( relativeKpmFileName );
 	}
 	
+	/**
+	 * Look for a kermeta unit which corresponds to the given file.
+	 * Kermeta unit are visited to check if one of its imported units is the one. 
+	 * @param root
+	 * @param fileURI
+	 * @return
+	 */
 	private KermetaUnit findKermetaUnitRecursively(KermetaUnit root, String fileURI) {
 		
 		for ( KermetaUnit currentUnit : root.importedUnits ) {
@@ -175,6 +189,11 @@ public class KermetaWorkspace {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param fileURI
+	 * @return
+	 */
 	private KermetaUnit findKermetaUnit(String fileURI) {
 		for ( KermetaUnit currentUnit : units.values() ) {
 			if ( doesKermetaUnitCorrespondToFile(currentUnit, fileURI) )
@@ -190,6 +209,11 @@ public class KermetaWorkspace {
 		return findKermetaUnit("file:" + file.getLocation().toString());
 	}
 	
+	/**
+	 * 
+	 * @param o
+	 * @return Returns null if the file cannot be typechecked. Returns the corresponding kermeta unit otherwise.
+	 */
 	private KermetaUnit calculateKermetaUnit(KermetaUnitInterest o) {
 		if ( IResourceHelper.couldFileBeTypechecked( o.getFile() ) )
 			return KermetaUnitHelper.typeCheckFile( o.getFile() );
@@ -241,33 +265,6 @@ public class KermetaWorkspace {
 	//////////////////////////////////
 	//////////////////////////////////
 	/**
-	 * Declare an interest for a file by launching a thread to improve performances.
-	 */
-	/* This may be a hack.
-	 * 
-	 * For the moment it is used when two editors are opened in a closed time. As a Kermeta Unit takes a 
-	 * huge amount of memory space, only the last interest (the displayed one) is important. The others are cut down.
-	 * 
-	 */
-	/*public void declareInterestThreading( final KermetaUnitInterest o, final IProgressMonitor monitor ) {
-		
-		if ( kermetaUnitCalculation != null )
-			kermetaUnitCalculation = null;
-		
-		IRunnableWithProgress r = new IRunnableWithProgress() {
-			
-			public void run(IProgressMonitor monitor) {
-				declareInterest(o, monitor);
-			}
-			
-		};
-		
-		kermetaUnitCalculation = new Thread(r);
-		kermetaUnitCalculation.start();
-		
-	}*/
-	
-	/**
 	 * This method handles an interest formulated by an object implementing
 	 * KermetaUnitInterest interface. First the object is registered as an interested object 
 	 * for the given file. Then the KermetaUnit is calculated and finally the interested object
@@ -283,15 +280,16 @@ public class KermetaWorkspace {
 		__declareInteret(o, true);
 	}
 	
+	/**
+	 * 
+	 * @param o
+	 * @param threading
+	 */
 	public void __declareInteret( KermetaUnitInterest o, boolean threading ) {
 		if ( o != null ) {
-			//interestedObjects.put(o, file);
-			// calculate the KermetaUnit if necessary
 			if ( units.get(o) == null ) {
-				
 				IFile ifile = o.getFile();
 				KermetaProject project = getKermetaProject( ifile.getProject() );
-				
 				if ( project == null )
 					declareInterestExtern(o);
 				else
@@ -300,7 +298,12 @@ public class KermetaWorkspace {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @param o
+	 * @param project
+	 * @param threading
+	 */
 	private void declareInterestIntern(KermetaUnitInterest o, final KermetaProject project, boolean threading) {
 		File file = project.getFile( o.getFile() );
 		if ( file == null )
@@ -341,6 +344,10 @@ public class KermetaWorkspace {
 			realFile.receiveEvent("open", params, null );
 	}
 	
+	/**
+	 * This method is used when an object interested in a resource from a non kermeta project wants to declare an interest.
+	 * @param o
+	 */
 	private void declareInterestExtern(final KermetaUnitInterest o) {
 		Runnable r = new Runnable() {
 			public void run() {
