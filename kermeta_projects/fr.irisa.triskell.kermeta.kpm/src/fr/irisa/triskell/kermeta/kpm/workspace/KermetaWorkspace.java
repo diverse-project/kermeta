@@ -384,7 +384,8 @@ public class KermetaWorkspace {
 				if ( doesKermetaUnitCorrespondToFile(currentUnit, o.getFile().getLocationURI().toString()) )
 					units.put(current, newUnit);
 			}
-			file.setLastTimeModified( new Date(ifile.getLocalTimeStamp()) );
+			if ( file != null )
+				file.setLastTimeModified( new Date(ifile.getLocalTimeStamp()) );
 			o.updateKermetaUnit(newUnit);
 		}
 	}

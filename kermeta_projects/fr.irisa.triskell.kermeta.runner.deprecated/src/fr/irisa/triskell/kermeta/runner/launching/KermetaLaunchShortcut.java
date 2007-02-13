@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.16 2006-12-27 12:18:02 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.17 2007-02-13 08:08:12 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
+import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.KermetaMessages;
@@ -42,19 +43,32 @@ import fr.irisa.triskell.kermeta.KermetaMessages;
  * a given method, from a given class and package.
  * A launch method cannot have any parameter in this iteration yet.
  */
-public class KermetaLaunchShortcut implements ILaunchShortcut {
+public class KermetaLaunchShortcut implements ILaunchShortcut, KermetaUnitInterest {
 	
     private static final String ID_KERMETA_APPLICATION = "KermetaLaunchConfiguration";
-    //private String ID_GROUP = "KermetaLaunchGroup"; commented because it is of no use. See launchSelectedFile method.
 	
-	
-    ILaunchManager launchManager;
-    ILaunchConfigurationType configurationType;
+    protected ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
     
-    public KermetaLaunchShortcut()
-    {
-    	launchManager	= 	DebugPlugin.getDefault().getLaunchManager();
-    	configurationType = launchManager.getLaunchConfigurationType(ID_KERMETA_APPLICATION);	
+    protected ILaunchConfigurationType configurationType;
+    
+    private KermetaUnit unit = null;
+    
+    public void updateKermetaUnit(KermetaUnit unit) {
+    	this.unit = unit;
+    }
+    
+    private IFile selectedFile = null;
+    
+    public IFile getFile() {
+    	return selectedFile;
+    }
+    
+    public String getFileContent() {
+    	return "";
+    }
+    
+    public KermetaLaunchShortcut() {
+      	configurationType = launchManager.getLaunchConfigurationType(ID_KERMETA_APPLICATION);	
     }
 	
     /**
@@ -232,7 +246,10 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		// Parse the file
 	//	KermetaUnit unit = KermetaRunHelper.parse(ifile);
 		
-		KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit(ifile);
+		selectedFile = ifile;
+		KermetaWorkspace.getInstance().declareInterest(this);
+		
+		//KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit(ifile);
 		
 		try {
 			// Get the @mainClass and @mainOperation tags (if they exist)
@@ -284,10 +301,11 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 
 			}
 			// Thrown by findEntryPoint
-		} catch (Throwable e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			MessageDialog.openError(new Shell(), "Kermeta interpreter error", e
 					.getMessage());
 		}
+		KermetaWorkspace.getInstance().undeclareInterest(this);
 	}
 }
