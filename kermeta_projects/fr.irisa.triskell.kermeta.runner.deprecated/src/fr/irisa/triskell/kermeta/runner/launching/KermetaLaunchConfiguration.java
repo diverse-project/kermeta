@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.23 2006-09-19 14:39:48 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.24 2007-02-13 09:20:53 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -18,6 +18,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -90,22 +91,18 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 
 	            launch.removeDebugTarget(target);
 	            DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
-	        }
-	        else
-	        {
+	        } else {
 	            target = new KermetaDebugTarget(launch);	            
 	            // start the debug (target is added to launch through this method call)
 	            target.start();
 	        } 
-	    }
-	    catch (KermetaInterpreterError e)
-	    {
-	        MessageDialog.openError(new Shell(), "Kermeta interpreter error", e.getMessage());
-	    }
-	    catch (Exception e)
-	    {
+	    } catch (KermetaInterpreterError e) {
+	    	RunnerPlugin.errorDialog(e.getMessage());
+	    	RunnerPlugin.pluginLog.error("There is a plugin error: '(" + e);	
+	    } catch (Exception e) {
+	    	RunnerPlugin.log(e);
 	    	RunnerPlugin.pluginLog.error("There is a plugin error: '(" + e);
-	        e.printStackTrace();
+	        //e.printStackTrace();
 	    }
 	    System.gc();
 	    monitor.done();

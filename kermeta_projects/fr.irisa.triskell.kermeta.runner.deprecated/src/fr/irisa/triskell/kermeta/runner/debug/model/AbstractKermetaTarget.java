@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.18 2006-09-20 07:40:59 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.19 2007-02-13 09:20:53 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -37,6 +37,7 @@ import org.eclipse.debug.core.model.IStepFilters;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
@@ -93,11 +94,9 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 	 * [EPIC inspired] Initialize the path of the Kermeta program to Launch
 	 *
 	 */
-	public void initPath()
-	{
+	public void initPath() throws KermetaInterpreterError {
 
-		try
-		{
+		try {
 			startFile =
 				launch.getLaunchConfiguration().getAttribute(
 					KermetaLaunchConfiguration.KM_FILENAME,
@@ -120,14 +119,16 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 			javaClassPathAttribute = launch.getLaunchConfiguration().getAttribute(IJavaLaunchConfigurationConstants.ATTR_CLASSPATH, //"org.eclipse.jdt.launching.CLASSPATH"
 					new java.util.ArrayList());
 
-		} catch (Exception ce)
-		{
+		} catch (Exception ce) {
 			ce.printStackTrace();
 		    //RunnerPlugin.logError("Problem loading LaunchConfiguration attributes.",ce);
 		}
 		
 		// The IPath for this file
 		path = getIPathFromString(startFile);
+		if ( path == null )
+			throw new KermetaInterpreterError("File Path from Launch Configuration is invalid. Please correct it before running the file.");
+		
 		projectName = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getProject().getName();
 		workingDir = path.removeLastSegments(1);
 		//startFile = path.lastSegment();
