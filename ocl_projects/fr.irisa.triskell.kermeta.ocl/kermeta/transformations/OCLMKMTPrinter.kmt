@@ -1,4 +1,4 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.2 2007-02-06 12:48:35 bitterjug Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.3 2007-02-13 13:06:44 bitterjug Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -10,7 +10,7 @@
  *  Vincent Mah�	<vmahe@irisa.fr>
  * 
  */
-
+ 
 /* This package contains operations code for Visitor Patterns
  You should use Patterns4Ecore.kmt operations for applying Patterns */
 package OCLKMTPrinter;
@@ -34,11 +34,11 @@ class OCLKMTPrinter
 
 	operation initialize() is 
 	do
-		modelURI :="../../model/speedsOCL1.xmi"
-		modelURI :="../../model/speedsOCL2.xmi"
-		modelURI :="../../model/speedsOCL3.xmi"
-		modelURI :="../../model/speedsOCL4.xmi"
-		modelURI :="../../model/speedsOCL5.xmi"
+//		modelURI :="../../model/speedsOCL1.xmi"
+//		modelURI :="../../model/speedsOCL2.xmi"
+//		modelURI :="../../model/speedsOCL3.xmi"
+//		modelURI :="../../model/speedsOCL4.xmi"
+//		modelURI :="../../model/speedsOCL5.xmi"
 		modelURI :="../../model/allSpeedsOCL.xmi"		
 		repository := EMFRepository.new
 		helper := OCLHelpers::OCLHelper.new
@@ -55,6 +55,5 @@ class OCLKMTPrinter
      	var model : Set<Object> init helper.loadOCLModel(repository, modelURI)
 		helper.getPackageDeclaration(model).accept(visitor)
     end
- 
 
 }
