@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 
 import fr.irisa.triskell.kermeta.kpm.*;
+import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 
@@ -36,7 +37,16 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
-		kpm = (KPM) args.get("kpm");
+		
+		/*
+		 * Kind of hack to avoid getting an old kpm memory object not accessible anymore.
+		 */
+		Object o = args.get("kpm");
+		if ( o instanceof String ) {
+			IResourceHelper.attachDefaultBuilderToKermetaProject( KermetaWorkspace.getInstance().getKermetaProject(getProject()) );
+			return null;
+		} else
+			kpm = (KPM) o;
 
 		switch ( kind ) {
 		
