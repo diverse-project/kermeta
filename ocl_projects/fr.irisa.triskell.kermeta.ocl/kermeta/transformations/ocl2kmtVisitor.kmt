@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.1 2007-02-06 12:48:35 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.2 2007-02-14 19:16:25 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -34,6 +34,7 @@ class Writer {
  class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor, Writer{
   
   		attribute __varName : Integer
+  		attribute __invariantName : Integer
   		
 		operation nextVarName() : String is
 			do
@@ -43,6 +44,16 @@ class Writer {
 				__varName := __varName + 1
 				result := "variable" + __varName.toString
 			end     
+
+		operation nextInvariantName() : String is
+			do
+				if __invariantName == void then
+					__invariantName := 0
+				end
+				__invariantName := __invariantName + 1
+				result := "inv" + __invariantName.toString
+			end     
+
   
 	    operation visit(visitable : Visitable) : Void is
 			do
@@ -56,7 +67,6 @@ class Writer {
 
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
 			do
-				//visit(visitable)
 				write("package ")
 				visitable.pathNameCS.accept(self)
 				write(";\n\n")
@@ -77,7 +87,7 @@ class Writer {
 
 		method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : Void is
 			do
-				//visit(visitable)
+				write("@aspect \"true\" \n")
 				write("class ")
 				visitable.pathNameCS.accept(self)
 				writeln("\n{")
@@ -97,7 +107,6 @@ class Writer {
 
 		method visitOperationCS(visitable : OperationCS) : Void is
 			do
-				//visit(visitable)
 				write("operation ")
 				visitable.simpleNameCS.accept(self)
 				write("(")
@@ -106,7 +115,6 @@ class Writer {
 					}
 				write("):")
 				visitable.typeCS.accept(self)
-				
 			end
 
 		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
@@ -131,20 +139,18 @@ class Writer {
 
 		method visitInvCS(visitable : InvCS) : Void is
 			do
-				//visit(visitable)			
-				write("inv\n  ")
+				write("inv  " + nextInvariantName + " is \n do\n " )
 				visitable.expressionCS.accept(self)
+				write("\nend \n" )
 			end
 
 		method visitDefCS(visitable : DefCS) : Void is
 			do
-				 //visit(visitable)
 				 visitable.defExpressionCS.accept(self)
 			end
 
 		method visitDefExpressionCS(visitable : DefExpressionCS) : Void is
 			do
-				//visit(visitable)
 				visitable.operationCS.accept(self)
 				write(" is\ndo\n")
 				write("  result := ")
@@ -154,7 +160,6 @@ class Writer {
 
 		method visitPathNameCS(visitable : PathNameCS) : Void is
 			do
-				// visit(visitable)
 				visitable.sequenceOfNames.each{o| 
 					if o != void then
 						write( o.toString)
@@ -167,13 +172,11 @@ class Writer {
 
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
-				//visit(visitable)			
 				visitable.simpleNameCS.accept(self)
 			end
 
 		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
 			do
-				//visit(visitable)			
 				write(visitable.~value.toString)
 			end
 
@@ -184,8 +187,11 @@ class Writer {
 
 		method visitPrimitiveTypeCS(visitable : PrimitiveTypeCS) : Void is
 			do
-				//visit(visitable)
-				visitSimpleNameCS(visitable)
+				if visitable.~value.toString.equals("OclAny") then
+					write("Object")
+				else
+					visitSimpleNameCS(visitable)
+				end
 			end
 
 		method visitTupleTypeCS(visitable : TupleTypeCS) : Void is
@@ -195,7 +201,10 @@ class Writer {
 
 		method visitCollectionTypeCS(visitable : CollectionTypeCS) : Void is
 			do
-				visit(visitable)
+				write(visitable.collectionTypeIdentifier.name)
+				write("<")
+				visitable.typeCS.accept(self)
+				write(">")
 			end
 
 		method visitOCLExpressionCS(visitable : OCLExpressionCS) : Void is
@@ -205,7 +214,6 @@ class Writer {
 
 		method visitLetExpCS(visitable : LetExpCS) : Void is
 			do
-				//visit(visitable)
 				write(" do ")
 				//variables
 				visitable.variables.each{ v |
@@ -235,7 +243,6 @@ class Writer {
 
 		method visitVariableCS(visitable : VariableCS) : Void is
 			do
-				//visit(visitable)
 				write(visitable.name.toString)
 				//visitable.name.accept(self)
 				if visitable.typeCS != void then
@@ -255,12 +262,26 @@ class Writer {
 
 		method visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : Void is
 			do
-				visit(visitable)
+				visitable.pathNameCS.accept(self)
+				write("::")
+				visitable.simpleNameCS.accept(self)
 			end
 
 		method visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : Void is
 			do
-				visit(visitable)			
+				var varName :  String init nextVarName
+				//TODO: do we have to infer the element type here?
+				var type : String init visitable.collectionType.name +"<" + "????????" +">"
+				write("do\n")
+				write("var " + varName + " : " + type)
+				write("init " + type + ".new\n")
+				visitable.collectionLiteralParts.each{ clp |
+						write(varName + ".add(")
+						clp.accept(self)
+						write(")\n")
+					}
+				write(varName)
+			    write("\nend")
 			end
 
 		method visitTupleLiteralExpCS(visitable : TupleLiteralExpCS) : Void is
@@ -270,13 +291,12 @@ class Writer {
 
 		method visitPrimitiveLiteralExpCS(visitable : PrimitiveLiteralExpCS) : Void is
 			do
-				//visit(visitable)			
-				write(visitable.symbol)
+  	 	 	    write(visitable.symbol)
 			end
 
 		method visitIntegerLiteralExpCS(visitable : IntegerLiteralExpCS) : Void is
 			do
-				visit(visitable)			
+				write(visitable.symbol)
 			end
 
 		method visitRealLiteralExpCS(visitable : RealLiteralExpCS) : Void is
@@ -286,12 +306,11 @@ class Writer {
 
 		method visitStringLiteralExpCS(visitable : StringLiteralExpCS) : Void is
 			do
-				visit(visitable)			
+				write(visitable.symbol)
 			end
 
 		method visitBooleanLiteralExpCS(visitable : BooleanLiteralExpCS) : Void is
 			do
-				//visit(visitable)			
 				visitPrimitiveLiteralExpCS(visitable)
 			end
 
@@ -307,7 +326,7 @@ class Writer {
 
 		method visitCollectionLiteralPartCS(visitable : CollectionLiteralPartCS) : Void is
 			do
-				visit(visitable)			
+				visitable.expressionCS.accept(self)
 			end
 
 		method visitCollectionRangeCS(visitable : CollectionRangeCS) : Void is
@@ -341,10 +360,10 @@ class Writer {
         				var sameName: IteratorPolicy init SimpleIteratorIP.new
         				var functionWithSameName : IteratorPolicy init FunctionIP.new
         				addIterator("exists", sameName)
-        				addIterator("forAll", SimpleIteratorIP.new.withName("forall"))
+        				addIterator("forAll", SimpleIteratorIP.new.withName("forAll"))
         				addIterator("isUnique", functionWithSameName)
         				addIterator("any", FunctionIP.new.withName("detect"))
-        				addIterator("one", functionWithSameName)
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size == 1"))
         				addIterator("collect", doNothing)
         				addIterator("collectNested", doNothing)
         				addIterator("sortedBy", doNothing)
@@ -355,7 +374,6 @@ class Writer {
         		
 		method visitIteratorExpCS(visitable : IteratorExpCS) : Void is
 			do
-				//visit(visitable)			
 				// <source> <accessor> <simpleNameCS>( <body> )
 				// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 				// why can't I compare the enumerations normally
@@ -400,7 +418,7 @@ class Writer {
 					loop
 						it.next.accept(self)
 						if  it.hasNext then
-							write(", ") // TODO: dont put final comma
+							write(", ") 
 						end
 					end
 					write(")")
@@ -604,7 +622,15 @@ class IteratorPolicy inherits Writer {
 	    	name := functionName
 	    	result := self
 	    end
-
+	    
+   	attribute suffix: String
+	
+    operation withSuffix(theSuffix: String): IteratorPolicy is
+	    do
+	    	suffix := theSuffix
+	    	result := self
+	    end
+	    
 	operation generate(oclIterator: IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 		 	writeln("\n Unimplemented policy: " + oclIterator.simpleNameCS.~value.toString)
@@ -627,8 +653,13 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			write(" | ")
 			oclIterator.body.accept(visitor)
 			write("}")
+			if suffix != void then
+				write(suffix)
+			end
 		 end
 }
+
+
 
 class FunctionIP inherits IteratorPolicy {
     
