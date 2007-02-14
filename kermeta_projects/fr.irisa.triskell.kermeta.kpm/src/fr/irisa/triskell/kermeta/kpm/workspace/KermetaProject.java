@@ -129,6 +129,7 @@ public class KermetaProject {
 			else {
 				kpm = KpmHelper.createKpm();
 				XMIHelper.save( getKpmFilePathString(), kpm);
+				reload();
 			}
 			project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (IOException exception) {
