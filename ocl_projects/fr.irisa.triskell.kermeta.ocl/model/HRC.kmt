@@ -1,0 +1,558 @@
+package hrc;
+
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+		abstract class ActionSpecification
+		{
+		}
+		class CompositeAction inherits ActionSpecification
+		{
+			attribute content : ActionSpecification[0..*]
+
+			attribute declaredVariable :  Variable[0..*]
+
+			attribute declaredDataType : DataType[0..*]
+
+		}
+		abstract class ControlFlowAction inherits ActionSpecification
+		{
+		}
+		abstract class JumpAction inherits ControlFlowAction
+		{
+		}
+		class IfAction inherits ConditionalAction
+		{
+			attribute condition : Expression[1..1]
+
+			attribute ifCase : ActionSpecification[1..1]
+
+			attribute elseCase : ActionSpecification
+
+		}
+		abstract class LoopAction inherits ControlFlowAction
+		{
+			attribute condition : Expression[1..1]
+
+			attribute content : ActionSpecification[1..1]
+
+		}
+		class SwitchAction inherits ConditionalAction
+		{
+			attribute defaultAction : ActionSpecification
+
+			attribute switchExpression : Expression[1..1]
+
+			attribute case : SwitchCase[0..*]
+
+		}
+		class WhileDoAction inherits LoopAction
+		{
+		}
+		class ForAction inherits LoopAction
+		{
+			attribute iteration : ActionSpecification[1..1]
+
+			attribute initialization : ActionSpecification[1..1]
+
+		}
+		abstract class ConditionalAction inherits ActionSpecification, ControlFlowAction
+		{
+		}
+		class SwitchCase
+		{
+			attribute ~value : Expression[1..1]
+
+			attribute caseAction : ActionSpecification[1..1]
+
+		}
+		class Assignment inherits ActionSpecification
+		{
+			attribute ~value : Expression[1..1]
+
+			attribute target : NavigationExpression[1..1]
+
+		}
+		class Break inherits JumpAction
+		{
+		}
+		class Continue inherits JumpAction
+		{
+		}
+		class DoWhileAction inherits LoopAction
+		{
+		}
+		class InitializationCall inherits Call, ActionSpecification
+		{
+			reference target :  RichComponentProperty[1..1]
+
+		}
+		class StateMachine
+		{
+			attribute state : State[1..*]#stateMachine
+
+			attribute transition : Transition[0..*]#stateMachine
+
+			reference initialState : State[1..1]
+
+			reference block : HybridAutomatonBlock#behavior
+
+			reference owningState : State#submachine
+
+		}
+		class State inherits  NamedElement
+		{
+			reference stateMachine : StateMachine[1..1]#state
+
+			reference outgoing : Transition[0..*]#source
+
+			reference incoming : Transition[0..*]#target
+
+			attribute stateInvariant : Expression
+
+			attribute submachine : StateMachine#owningState
+
+		}
+		class Transition
+		{
+			reference stateMachine : StateMachine[1..1]#transition
+
+			reference source : State[1..1]#outgoing
+
+			reference target : State[1..1]#incoming
+
+			attribute effect : ActionSpecification
+
+			attribute guard : Expression
+
+		}
+		abstract class HRCBlock inherits  NamedElement
+		{
+			reference owner : CompositeBlock#subBlock
+
+			reference assumingContract : Contract#assumption
+
+			reference promisingContract : Contract#promise
+
+			reference context :  RichComponent[1..1]#block
+
+			attribute pin : BlockPin[1..*]#block
+
+			attribute variable :  Variable[0..*]#block
+
+			reference implementation : Implementation#block
+
+		}
+		class CompositeBlock inherits HRCBlock
+		{
+			attribute kind : CompositionKind
+
+			attribute pinLink : PinLink[0..*]#block
+
+			attribute subBlock : HRCBlock[1..*]#owner
+
+		}
+		class Contract inherits  NamedElement
+		{
+			reference assumption : HRCBlock[1..1]#assumingContract
+
+			reference promise : HRCBlock[1..1]#promisingContract
+
+			reference context :  RichComponent[1..1]#contract
+
+		}
+		enumeration CompositionKind
+		{
+			conjunction;
+			disjunction;
+			parallel;
+			negation;
+		}
+		class Implementation
+		{
+			reference context :  RichComponent[1..1]#implementation
+
+			reference block : HRCBlock#implementation
+
+			attribute artifact : Artifact#implementation
+
+		}
+		abstract class Pin inherits  NamedElement, NavigableFeature
+		{
+			reference pinLink : PinLink[0..*]#pin
+
+		}
+		class BlockPin inherits Pin
+		{
+			attribute direction :  DirectionKind
+
+			attribute kind :  FlowKind
+
+			reference block : HRCBlock[1..1]#pin
+
+			reference type : DataType[1..1]
+
+		}
+		class ReferencePin inherits Pin
+		{
+			reference port :  Port[1..1]
+
+			reference flow :  Flow[1..1]
+
+			reference context :  RichComponent[1..1]#pin
+
+			reference role :  RichComponentProperty
+
+		}
+		class ProbabilisticBlock inherits HRCBlock
+		{
+			attribute probability : FunctionCall[1..1]#block
+
+		}
+		class PinLink
+		{
+			reference block : CompositeBlock#pinLink
+
+			reference pin : Pin[2..2]#pinLink
+
+			reference context :  RichComponent#pinLink
+
+		}
+		class HybridAutomatonBlock inherits HRCBlock
+		{
+			attribute behavior : StateMachine[1..1]#block
+
+		}
+		class Artifact
+		{
+			attribute filename : ecore::EString
+
+			reference implementation : Implementation[1..1]#artifact
+
+		}
+		abstract class BuiltinExpression inherits Expression
+		{
+		}
+		/**boolean-value*/
+		class BooleanLiteral inherits LiteralSpecification
+		{
+			attribute ~value : ecore::EBooleanObject
+
+		}
+		/**integer-value*/
+		class IntegerLiteral inherits LiteralSpecification
+		{
+			attribute ~value : ecore::EIntegerObject
+
+		}
+		/**real-value*/
+		class RealLiteral inherits LiteralSpecification
+		{
+			attribute ~value : ecore::EString
+
+		}
+		/**constant-expression*/
+		abstract class LiteralSpecification inherits Expression
+		{
+		}
+		/**string-value*/
+		class StringLiteral inherits LiteralSpecification
+		{
+			attribute ~value : ecore::EString
+
+		}
+		/**expression*/
+		abstract class Expression
+		{
+		}
+		/**Operator: .*/
+		class RecordNavigation inherits DataNavigation
+		{
+			reference field : Field[1..1]
+
+		}
+		/**Operator: []*/
+		class ArrayNavigation inherits DataNavigation
+		{
+			attribute index : Expression[1..1]
+
+		}
+		/**Relates access operators for composite types*/
+		abstract class NavigationExpression inherits Expression
+		{
+		}
+		class UnaryExpression inherits BuiltinExpression
+		{
+			attribute operator : UnaryOperator
+
+			attribute operand : Expression[1..1]
+
+		}
+		class BinaryExpression inherits BuiltinExpression
+		{
+			attribute operator : BinaryOperator
+
+			attribute left : Expression[1..1]
+
+			attribute right : Expression[1..1]
+
+		}
+		enumeration UnaryOperator
+		{
+			negative;
+			positive;
+			bitwise_complement;
+			logical_not;
+			derivative;
+			defined;
+		}
+		enumeration BinaryOperator
+		{
+			addition;
+			substraction;
+			multiplication;
+			division;
+			modulus;
+			bitwise_left;
+			bitwise_right;
+			bitwise_and;
+			bitwise_or;
+			equality;
+			inequality;
+			less_than;
+			greater_than;
+			less_than_or_equal;
+			greater_than_or_equal;
+			logical_and;
+			logical_or;
+			logical_implication;
+		}
+		class Field inherits  NamedElement
+		{
+			reference type : DataType[1..1]
+
+			reference record : Record[1..1]#field
+
+		}
+		class Record inherits DataType
+		{
+			attribute field : Field[0..*]#record
+
+		}
+		class PrimitiveType inherits DataType
+		{
+		}
+		/**Added constraint: self.ownedLiteral->notEmpty()*/
+		class Enumeration inherits DataType
+		{
+			attribute literal : EnumerationLiteral[1..*]#~enumeration
+
+		}
+		/**Ignored: inherits from InstanceSpecification -> PackageableElement*/
+		class EnumerationLiteral inherits  NamedElement, LiteralSpecification
+		{
+			reference ~enumeration : Enumeration[1..1]#literal
+
+		}
+		abstract class DataType inherits  NamedElement
+		{
+		}
+		class Array inherits DataType
+		{
+			reference type : DataType[1..1]
+
+			attribute size : Expression[1..1]
+
+		}
+		class RecordInstance inherits InstanceSpecification
+		{
+			attribute slot : RecordSlot[1..*]#recordInstance
+
+		}
+		class ArrayInstance inherits InstanceSpecification
+		{
+			attribute ~value : Expression[1..*]
+
+		}
+		class RecordSlot
+		{
+			reference field : Field[1..1]
+
+			reference recordInstance : RecordInstance[1..1]#slot
+
+			attribute ~value : Expression[1..1]
+
+		}
+		abstract class DataNavigation inherits NavigationExpression
+		{
+			attribute context : NavigationExpression[1..1]
+
+		}
+		abstract class NavigableFeature inherits NavigationExpression
+		{
+		}
+		abstract class InstanceSpecification inherits Expression
+		{
+		}
+		class FunctionCall inherits Call, Expression
+		{
+			reference block :  ProbabilisticBlock#probability
+
+			reference ~function : Function[1..1]
+
+		}
+		abstract class Call
+		{
+			attribute argument : Expression[0..*]
+
+		}
+		class Function inherits  NamedElement
+		{
+			reference model :  HRCModel[1..1]#~function
+
+			attribute parameter :  Parameter[0..*]#~function
+
+			reference returnType : DataType[1..1]
+
+		} 
+		class Port inherits NamedElement
+		{
+			attribute isConjugated : ecore::EBooleanObject
+
+			reference context : RichComponent[1..1]#port
+
+			reference type : PortSpecification[1..1]
+
+			reference bindingEnd : BindingEnd[0..*]#port
+
+		}
+		abstract class NamedElement
+		{
+			attribute name : ecore::EString
+
+		}
+		class RichComponent inherits NamedElement
+		{
+			attribute contract :  Contract[0..*]#context
+
+			attribute implementation :  Implementation#context
+
+			attribute block :  HRCBlock[0..*]#context
+
+			attribute pinLink :  PinLink[0..*]#context
+
+			attribute pin :  ReferencePin[0..*]#context
+
+			attribute initializer : Initializer#context
+
+			attribute port : Port[0..*]#context
+
+			attribute innerBinding : Binding[0..*]#context
+
+			attribute ~attribute : Variable[0..*]#richComponent
+
+			attribute part : RichComponentProperty[0..*]#context
+
+			reference refinedComponent : RichComponent[0..*]#refiningComponent
+
+			reference refiningComponent : RichComponent[0..*]#refinedComponent
+
+			reference model : HRCModel[1..1]#richComponent
+
+		}
+		enumeration DirectionKind
+		{
+			in;
+			out;
+			inout;
+		}
+		enumeration FlowKind
+		{
+			discrete;
+			continuous;
+			event;
+		}
+		class Initializer
+		{
+			reference context : RichComponent[1..1]#initializer
+
+			attribute parameter : Parameter[0..*]#initializer
+
+			attribute body : ActionSpecification[1..1]
+
+		}
+		class Binding
+		{
+			attribute ~end : BindingEnd[2..*]#binding
+
+			reference context : RichComponent[1..1]#innerBinding
+ 
+		}
+		class BindingEnd
+		{
+			reference binding : Binding[1..1]#~end
+
+			reference role : RichComponentProperty#bindingEnd
+
+			reference flow : Flow[1..1]#bindingEnd
+
+			reference port : Port[1..1]#bindingEnd
+
+		}
+		class Flow inherits NamedElement
+		{
+			attribute direction : DirectionKind
+
+			attribute kind : FlowKind
+
+			reference portSpecification : PortSpecification[1..1]#flow
+
+			reference type : DataType[1..1]
+
+			reference bindingEnd : BindingEnd[0..*]#flow
+
+		}
+		class Variable inherits NamedElement, NavigableFeature
+		{
+			reference block :  HRCBlock#variable
+
+			reference richComponent : RichComponent#~attribute
+
+			reference type : DataType[1..1]
+
+		}
+		class RichComponentProperty inherits NamedElement
+		{
+			reference context : RichComponent[1..1]#part
+
+			reference bindingEnd : BindingEnd[0..*]#role
+
+			reference type : RichComponent[1..1]
+
+		}
+		class PortSpecification inherits NamedElement
+		{
+			attribute flow : Flow[1..*]#portSpecification
+
+			reference model : HRCModel[1..1]#portSpecification
+
+		}
+		class Parameter inherits NamedElement
+		{
+			reference ~function : Function#parameter
+
+			reference initializer : Initializer#parameter
+
+			reference type : DataType[1..1]
+
+		} 
+		class HRCModel inherits NamedElement
+		{
+			attribute ~function : Function[0..*]#model
+
+			attribute portSpecification : PortSpecification[0..*]#model
+
+			attribute richComponent : RichComponent[1..*]#model
+
+			reference root : RichComponent
+
+		}
+
