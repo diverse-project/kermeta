@@ -52,23 +52,11 @@ public class TestOCLParser {
 		}
 	}
 
-	public static final String trivial = "package p1 \n \n context  Test inv : \n 2 > 1 endpackage";   
-	public static final String speeds1 = "package p1 \n \n context Function inv: \n  self.parameter->isUnique(name) \n endpackage";
-	public static final String speeds2 = "package p1 \n \n context BindingEnd inv: \n  role->isEmpty() implies port.end = binding.end \n endpackage";
-	public static final String speeds3 = "package p2 \n \n " +
-		"context SwitchAction inv:     let dt : DataType = self.switchExpression.type()" +
-		" in    self.case.value->forAll(ex | ex.conformsTo(dt))  endpackage";
-	public static final String speeds4 = "package p2 \n \n " +
-		"context PinLink inv: " +
-		"   self.pin->forAll( p | " + 
-		"      p.oclIsKindOf(BlockPin)" + 
-		"       implies" +  
-		"          p.oclAsType(BlockPin).block = self.block   or " +
-		"			p.oclAsType(BlockPin).block.compositeBlock = self.block   ) endpackage";
-	public static final String speeds5 = "package p2 \n \n " +
-		" context RecordNavigation inv:" +
-		"     self.mycontext.type().oclAsType(Record).field->includes(self.field) " +
-	    " endpackage";
+   // This is the example that causes output of invalid xmi file with 
+	public static final String iftest = "package p \n \n " +
+	" context Thing inv:" +
+	"         if true and true then true else true endif " +
+    " endpackage";
 
 	public static final String oclInputFileName = "AllSpeeds.ocl";
 	
@@ -123,19 +111,17 @@ public class TestOCLParser {
 	public static void main(String[] args) {
 		TestOCLParser oclp = new TestOCLParser();
 		URI oclSourceURI = URI.createFileURI(oclInputFileName);
+		// TODO: nasty absolute path name here, dont know how to use the Eclipse URI library to get relative ones.
 		File oclSourceFile = new File("/home/mskipper/runtime-EclipseApplication//fr.irisa.triskell.kermeta.ocl/ocl/allSpeeds.ocl");
-		
 		String oclSource =  getContents(oclSourceFile);
-		//System.out.println(oclSource);
-		//oclp.run(trivial, "essai.xmi");
-		//oclp.run(speeds1, "speedsOCL1.xmi");
-		//oclp.run(speeds2, "speedsOCL2.xmi");
-		//oclp.run(speeds3, "speedsOCL3.xmi");
-		//oclp.run(speeds4, "speedsOCL4.xmi");
-		//oclp.run(speeds5, "speedsOCL5.xmi");
 		oclp.run(oclSource, "model/allSpeedsOCL.xmi");
 	}
 
+	public static void ifTest() {
+		TestOCLParser oclp = new TestOCLParser();
+		oclp.run(iftest, "model/iftest.xmi");
+	}
+	
 	private static MyOCLParser createParser(String text) {
 		OCLLexer lexer = new OCLLexer((text).toCharArray());
 		MyOCLParser result = new MyOCLParser(lexer);
