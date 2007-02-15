@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.15 2007-02-02 16:19:12 dtouzet Exp $
+/* $Id: Ecore2KMPass3.java,v 1.16 2007-02-15 17:10:44 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
+import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -49,6 +50,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -239,8 +241,13 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// add parameters
 			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
 			
-			// Is operation abstract? : we can know it already if the given operation contains no annotation
-			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
+			// If the given operation contain no abstract or body annotation then we must create a body with a raise of NotImplemented Exception
+			// and add the overloadble tag to the operation
+			if(!isBodySpecified(node)){
+				exporter.current_op.setBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
+				TagHelper.createNonExistingTagFromNameAndValue(exporter.current_op, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+			}
+			
 			visitorPass1.isClassTypeOwner=false;
 			
 			// Visit all other annotations
@@ -283,6 +290,29 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		return exporter.current_op;
 	}
 
+	/**
+	 * tells if a body is defined or if the abstract modifier is set
+	 * @param node
+	 * @return
+	 */
+	private boolean isBodySpecified(EOperation node){
+		for (Object next : node.getEAnnotations()) {
+			EAnnotation annot = (EAnnotation) next;
+			if(annot.getSource().equals(KM2Ecore.ANNOTATION)) {
+				// Visit all details EAnnotation entries
+				for (Object next2 :  annot.getDetails().keySet()) {
+					String key = (String) next2;						
+					if (key.equals(KM2Ecore.ANNOTATION_BODY_DETAILS)) {	
+						return true;
+					}
+					else if (key.equals(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS)) {	
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAttribute)
