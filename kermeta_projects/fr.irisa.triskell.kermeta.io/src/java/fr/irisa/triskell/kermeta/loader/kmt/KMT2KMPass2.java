@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.10 2007-02-08 14:41:15 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.11 2007-02-15 15:29:44 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -17,22 +17,14 @@ import java.util.Stack;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 
-import fr.irisa.triskell.kermeta.ast.AnnotableClassMemberDecl;
-import fr.irisa.triskell.kermeta.ast.AnnotableElement;
-import fr.irisa.triskell.kermeta.ast.Annotation;
-import fr.irisa.triskell.kermeta.ast.Annotations;
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.ClassMemberDecls;
 import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
-import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
-import fr.irisa.triskell.kermeta.ast.Tag;
-import fr.irisa.triskell.kermeta.ast.TopLevelDecl;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -44,6 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
@@ -101,6 +94,14 @@ public class KMT2KMPass2 extends KMT2KMPass {
 				builder.current_class = (ClassDefinition)typeDef;
 				builder.storeTrace(builder.current_class, node); // the trace is used to retreive this element in following passes
 			}
+			else if(TagHelper.findTagFromNameAndValue((ClassDefinition)typeDef,KermetaASTHelper.TAGNAME_ASPECT, "true")!= null){
+				// previous class was an aspect we can reopen it
+				internalLog.debug("no aspect tag found but previous definition was an aspect: reopening the class " + node.getName().getText()+ " from " +builder.getUri());
+				builder.current_class = (ClassDefinition)typeDef;
+				builder.storeTrace(builder.current_class, node); // the trace is used to retreive this element in following passes
+				// since are now loading the base, the class shouldn't be tagged as aspect anymore 
+				TagHelper.findTagFromNameAndValue(builder.current_class,KermetaASTHelper.TAGNAME_ASPECT, "true").setValue("false");
+			}
 			else{
 				// This is an error : the type already exists
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
@@ -109,6 +110,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			}
 		}
 		else {
+			// first time we see this classdefinition
 			internalLog.debug("class " + node.getName().getText()+ " from " +builder.getUri());
 			
 			builder.current_class = builder.struct_factory.createClassDefinition();
@@ -116,6 +118,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			current_package().getOwnedTypeDefinition().add(builder.current_class);
 			builder.typeDefs.put(qname, builder.current_class);
 			builder.storeTrace(builder.current_class, node);
+			if(KermetaASTHelper.isAnAspect(node))
+			{
+				TagHelper.createNonExistingTagFromNameAndValue(builder.current_class, KermetaASTHelper.TAGNAME_ASPECT, "true");
+			}
 		}
 		return super.beginVisit(node);
 	}

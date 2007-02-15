@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.25 2006-12-20 13:06:37 jmottu Exp $
+/* $Id: KMT2KMPass7.java,v 1.26 2007-02-15 15:29:44 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -36,13 +36,12 @@ import fr.irisa.triskell.kermeta.ast.AnnotableElement;
 import fr.irisa.triskell.kermeta.ast.Annotableassertion;
 import fr.irisa.triskell.kermeta.ast.Annotation;
 import fr.irisa.triskell.kermeta.ast.Annotations;
-import fr.irisa.triskell.kermeta.ast.Assertion;
-import fr.irisa.triskell.kermeta.ast.ClassMemberDecl;
 import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
 import fr.irisa.triskell.kermeta.ast.FAssignement;
 import fr.irisa.triskell.kermeta.ast.FBlock;
 import fr.irisa.triskell.kermeta.ast.Invariant;
+import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
@@ -422,6 +421,9 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    					if (existingTag.getName().equals(tagName)) foundSpecialTag = true;
 	    				}
 	    			}
+	    			// also ignore special tags "overloadable" and "aspect" which are used during the parsing
+	    			if (	tagName.equals(KermetaASTHelper.TAGNAME_OVERLOADABLE) ||
+	    					tagName.equals(KermetaASTHelper.TAGNAME_ASPECT) ) foundSpecialTag = true;
 	    		}
 	    		
 	    		if ( ! foundSpecialTag ) {

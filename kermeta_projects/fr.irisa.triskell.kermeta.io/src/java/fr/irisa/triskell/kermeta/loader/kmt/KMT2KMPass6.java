@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.14 2007-02-15 13:53:50 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.15 2007-02-15 15:29:44 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -21,7 +21,6 @@ import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.GetterBody;
 import fr.irisa.triskell.kermeta.ast.Invariant;
 import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationEmptyBody;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
@@ -144,7 +143,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 
 			internalLog.debug("checking aspect operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
 					" from " +builder.getUri());
-			// this is an update of the current definition, this is valid only if the previous defintion was abstract
+			// this is an update of the current definition, this is valid only if the previous definition was abstract 
+			// or if the overloadable tag is correctly set
 			
 			if(builder.current_operation.isIsAbstract() || builder.current_operation.getBody()==null ){
 				// ok lets update the body and changes it to be concrete
