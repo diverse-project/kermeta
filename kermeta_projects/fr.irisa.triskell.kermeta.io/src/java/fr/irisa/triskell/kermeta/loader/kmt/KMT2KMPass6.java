@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.13 2007-02-08 14:41:15 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.14 2007-02-15 13:53:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
@@ -146,18 +147,32 @@ public class KMT2KMPass6 extends KMT2KMPass {
 			// this is an update of the current definition, this is valid only if the previous defintion was abstract
 			
 			if(builder.current_operation.isIsAbstract() || builder.current_operation.getBody()==null ){
-				// ok lets update the body
+				// ok lets update the body and changes it to be concrete
 				builder.current_operation.setIsAbstract(false);				
+			}
+			else if(TagHelper.findTagFromNameAndValue(builder.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
+				// if the previous operation is tagged with overloadable = true then we can replace it by this one
+				internalLog.debug("overloading operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
+						" with version from " +builder.getUri());
+				if(!KermetaASTHelper.isOverloadable(operationExpressionBody)) {
+					// change tag value to false so it is not overloadable anymore
+					fr.irisa.triskell.kermeta.language.structure.Tag tag = TagHelper.findTagFromNameAndValue(builder.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+					tag.setValue("false");
+				}
+			}
+			else if(KermetaASTHelper.isOverloadable(operationExpressionBody)){
+				// previous operation is not overloadable but this one is, so we can safely ignore this body a keep the original one
+				return false;
 			}
 			else {
 				// this is an error !
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 6 : Operation '"+builder.current_class.getName()+"." + builder.current_operation.getName() +
-						"' - Operations can be weaved using aspects if only one of those operation is concrete, all other operations must be abstract.",operationExpressionBody));
+						"' - Operations can be weaved using aspects if only one of those operation is concrete, all other operations must be abstract or tagged as overloadable.",operationExpressionBody));
 				
 				return false;
 			}
 		}
-		else
+		else 
 			internalLog.debug("normal operation " +builder.current_class.getName()+"." + builder.current_operation.getName() +
 					" from " +builder.getUri());
 		// normal behavior
@@ -169,6 +184,13 @@ public class KMT2KMPass6 extends KMT2KMPass {
 			builder.current_operation.setBody(KMT2KMExperessionBuilder.process(operationExpressionBody.getFExpression(), builder));
 		}
 		builder.current_operation.setIsAbstract(false);
+		// if the operation has a tag overloadble true, then add the info in the annotation
+		// DVK : the normal tag process in pass 7 must take care that we have already added the tag to the element
+		// don't add that tag if it already exist, even with a value to false
+		if(KermetaASTHelper.isOverloadable(operationExpressionBody) && 
+				TagHelper.findTagFromName(builder.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE) == null) {
+			TagHelper.createNonExistingTagFromNameAndValue(builder.current_operation, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+		}
 		return false;
 	}
 	

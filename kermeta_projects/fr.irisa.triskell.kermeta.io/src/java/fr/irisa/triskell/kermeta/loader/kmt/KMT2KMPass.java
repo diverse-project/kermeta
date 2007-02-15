@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.8 2007-02-08 16:18:25 dvojtise Exp $
+/* $Id: KMT2KMPass.java,v 1.9 2007-02-15 13:53:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -63,6 +63,11 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * contain a list of nodes that are an aspect of another
 	 */
 	protected Collection<KermetaASTNode> aspectNodes = new HashSet<KermetaASTNode>();
+	
+	/**
+	 * contain a list of operation that can be overloaded
+	 */
+//	protected Collection<fr.irisa.triskell.kermeta.language.structure.Operation> overloadableOperations = new HashSet<fr.irisa.triskell.kermeta.language.structure.Operation>();
 	
 	// the constructor
 	public KMT2KMPass(KermetaUnit builder) {
