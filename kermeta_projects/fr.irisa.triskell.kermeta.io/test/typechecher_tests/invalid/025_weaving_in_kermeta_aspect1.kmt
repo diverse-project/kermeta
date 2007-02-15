@@ -1,0 +1,85 @@
+/* $Id: 025_weaving_in_kermeta_aspect1.kmt,v 1.1 2007-02-15 15:56:11 dvojtise Exp $ */
+
+// Type checking on simple control stucts
+
+package weavinginvalidtest1;
+
+//------------------------------
+// Base classes
+//------------------------------
+class A {
+
+
+}
+
+class B inherits A {}
+class C inherits kermeta::kunit::Assert{
+
+	inv originv is true
+	operation test0(param : A) : Void
+	pre origPre is true
+	is do
+		a == b
+	end
+		
+	
+	attribute a : A
+	attribute b : B
+	operation returnString() : kermeta::standard::String is do
+		result := "a string"
+	end
+	
+	@overloadable "true"
+	operation overload1() : Void is do
+		// will be overloaded
+		stdio.writeln("will be overloaded")
+		assertTrueWithMsg(false,"overload1 from base should have been overloaded !")
+	end
+	
+	operation overload2() : Void is do
+		// will be overloaded
+		stdio.writeln("will not be overloaded")
+	end
+
+}
+
+//------------------------------
+// Aspect classes
+//------------------------------
+@aspect "true"
+@anothertag "othertagvalue"
+class A {
+
+
+}
+
+@aspect "true"
+class B {}
+
+
+@aspect "true"
+class C {
+
+	 operation returnString() : kermeta::standard::Object is do // invalid because this is not of the return type as the original
+		result := "a string"
+	end 
+	operation test1(param : A) : Void is do
+		a == b
+		a == d
+	end
+	
+	operation test0(param : A) : Void 
+	pre mypre is true
+	post mypost is true
+	is abstract
+		
+	attribute a : A
+	attribute c : A
+	attribute d : B
+
+}
+
+@aspect "false"
+class D{
+}
+/* END OF FILE */

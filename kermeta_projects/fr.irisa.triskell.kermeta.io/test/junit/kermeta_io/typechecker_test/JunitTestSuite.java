@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.22 2007-01-26 09:49:23 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.23 2007-02-15 15:56:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -65,29 +65,6 @@ public class JunitTestSuite extends TestCase {
 	}
 	*/
 	// do not modify this comment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_021_basic_fsm_type() throws Exception {
 testvalidFile("test/typechecher_tests/valid","021_basic_fsm_type.kmt" );
@@ -139,6 +116,14 @@ testvalidFile("test/typechecher_tests/valid","024_mt_property_order.kmt" );
 
 public void testvalid_024_mt_property_order_valid_tests() throws Exception {
 testvalidFile("test/typechecher_tests/valid","024_mt_property_order_valid_tests.kmt" );
+}
+
+public void testvalid_025_weaving_in_kermeta_aspect1() throws Exception {
+testvalidFile("test/typechecher_tests/valid","025_weaving_in_kermeta_aspect1.kmt" );
+}
+
+public void testvalid_026_weaving_in_kermeta_mixed_base_aspect() throws Exception {
+testvalidFile("test/typechecher_tests/valid","026_weaving_in_kermeta_mixed_base_aspect.kmt" );
 }
 
 public void testvalid_1_ClassSubTyping_1() throws Exception {
@@ -247,6 +232,22 @@ testinvalidFile("test/typechecher_tests/invalid","023_mt_att_ref_invalid_tests.k
 
 public void testinvalid_024_mt_property_order_invalid_tests() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","024_mt_property_order_invalid_tests.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect1() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect1.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect2() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect2.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect3() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect3.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect4() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect4.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
