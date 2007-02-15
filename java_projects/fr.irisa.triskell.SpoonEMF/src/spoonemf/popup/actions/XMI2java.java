@@ -18,14 +18,14 @@ import org.eclipse.ui.PlatformUI;
 
 
 
-public class Java2XMI implements IObjectActionDelegate {
+public class XMI2java implements IObjectActionDelegate {
 
 	
 	protected StructuredSelection currentSelection;
 	/**
 	 * Constructor for Action1.
 	 */
-	public Java2XMI() {
+	public XMI2java() {
 		super();
 	}
 
@@ -41,11 +41,11 @@ public class Java2XMI implements IObjectActionDelegate {
 	public void run(IAction action) {
 		Shell shell = new Shell();
 		   
-    	JavaFolderExporterWizard wizard =  new JavaFolderExporterWizard();
-    	wizard.defaultOutputExtension = "java5";
+    	Java5ExporterWizard wizard =  new Java5ExporterWizard();
+    	wizard.defaultOutputExtension = "";
     	wizard.init(PlatformUI.getWorkbench(),currentSelection);
     	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,wizard);
-    	wizDialog.setTitle("Create XMI files from Java folder(s)");
+    	wizDialog.setTitle("Create Java source files from a xmi file");
     	wizDialog.open();
 		
 		

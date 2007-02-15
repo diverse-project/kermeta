@@ -31,6 +31,7 @@ import emf.spoon.SpoonPackage;
 import emf.spoon.factory.EMFFactory;
 import emf.spoon.reflect.declaration.CtPackage;
 import emf.spoon.reflect.declaration.impl.CtClassImpl;
+import emf.spoon.reflect.declaration.impl.ext.EmfClassImpl;
 
 /**
  * @author Barais Olivier -- Projet Triskell IRISA
@@ -52,6 +53,14 @@ public class Java2XMIHelper {
 	private ResourceSet resourceSet = new ResourceSetImpl();
 	
 	private  String outputSpoonFolder ="";
+	
+	protected void initSpoon( ) {
+		Environment env = new StandardEnvironment();
+
+		env.setVerbose(true);
+		env.setDebug(true);
+		factory = new Factory(new  EMFFactory(resource),  env);
+	}
 	
 	protected void initSpoon( List<String> 		folderToParse) {
 		Environment env = new StandardEnvironment();
@@ -93,38 +102,50 @@ public class Java2XMIHelper {
 
 	public void processXMIFiles(String outputSpoonFolder, String inputXMIFiles) {
 		
+		this.outputSpoonFolder = outputSpoonFolder;
+		
 		// Register the default resource factory -- only needed for stand-alone!
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
 				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 						new XMIResourceFactoryImpl());
 
+		System.err.println("ok1");
+		
 		// Get the URI of the model file.
 		Registry registry = resourceSet.getPackageRegistry();// new
+		System.err.println("ok2");
 		// EPackageRegistryImpl();
-		registry.put("//emf.spoon.reflect", SpoonPackage.eINSTANCE);
+		registry.put("http://spoon", SpoonPackage.eINSTANCE);
+		
 		resourceSet.setPackageRegistry(registry);
-
+		System.err.println("ok3");
 	   
 		
-		//URI fileURI = URI.createFileURI(new File(inputXMIFiles)
-		//		.getAbsolutePath());
-		URI fileURI = URI.createURI(inputXMIFiles, true);
+		URI fileURI = URI.createFileURI(new File(inputXMIFiles)
+				.getAbsolutePath());
+		//URI fileURI = URI.createURI(inputXMIFiles, true);
 		
 		//fileURI = this.resolveURI(inputXMIFiles, "");
-		System.out.println(fileURI);
-		resource = resourceSet.getResource(fileURI, true);
-		//TODO improve that
-		initSpoon(null);
+		//System.out.println(fileURI);
+		System.err.println("ok4" + fileURI);
 		
+		resource = resourceSet.getResource(fileURI, true);
+		System.err.println("ok5");
+		initSpoon();
+		System.err.println("ok6");
 
 		try {
 			resource.load(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		System.err.println("ok6");
 		// set the factory
 		this.updateFactory();
+		
+		System.err.println("ok7");
+		
+		printJavaFiles();
 		
 		factory.getEnvironment().reportEnd();
 
@@ -230,15 +251,19 @@ public class Java2XMIHelper {
 		JavaOutputProcessor printer = new JavaOutputProcessor(new File(
 				outputSpoonFolder));
 
-		printer.getProcessedElementTypes().add(CtClassImpl.class);
+		printer.getProcessedElementTypes().add(EmfClassImpl.class);
 
 		processing.addProcessor(printer);
 		processing.process();
 
 		System.out.println("end saving java code");
+		
+		
 	}
 
+	
 
+	
 	public void printJavaFiles(Resource resource){
 		this.replaceResource(resource);
 		this.printJavaFiles();

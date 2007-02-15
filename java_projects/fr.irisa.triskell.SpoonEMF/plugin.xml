@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2007-02-14 20:38:05 barais Exp $
+ $Id: plugin.xml,v 1.2 2007-02-15 11:26:41 barais Exp $
 -->
 
 <plugin>
@@ -88,6 +88,24 @@
               id="SpoonEMF.newAction1"
               label="Create XMI files from Java Folder(s)"
               menubarPath="SpoonEMF.menu2/group2"/>
+     </objectContribution>
+     <objectContribution
+           id="SpoonEMF.contribution3"
+           nameFilter="*.java5"
+           objectClass="org.eclipse.core.resources.IFile">
+        <menu
+              id="SpoonEMF.menu3"
+              label="SpoonEMF"
+              path="additions">
+           <separator name="group3"/>
+        </menu>
+        <action
+              class="spoonemf.popup.actions.XMI2java"
+              enablesFor="1"
+              icon="icons/spoon.gif"
+              id="SpoonEMF.newAction3"
+              label="Create Java source  files from XMI"
+              menubarPath="SpoonEMF.menu3/group3"/>
      </objectContribution>
   </extension>
   <extension
