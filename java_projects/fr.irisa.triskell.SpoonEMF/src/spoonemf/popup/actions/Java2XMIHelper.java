@@ -109,16 +109,13 @@ public class Java2XMIHelper {
 				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 						new XMIResourceFactoryImpl());
 
-		System.err.println("ok1");
 		
 		// Get the URI of the model file.
 		Registry registry = resourceSet.getPackageRegistry();// new
-		System.err.println("ok2");
 		// EPackageRegistryImpl();
 		registry.put("http://spoon", SpoonPackage.eINSTANCE);
 		
 		resourceSet.setPackageRegistry(registry);
-		System.err.println("ok3");
 	   
 		
 		URI fileURI = URI.createFileURI(new File(inputXMIFiles)
@@ -127,23 +124,18 @@ public class Java2XMIHelper {
 		
 		//fileURI = this.resolveURI(inputXMIFiles, "");
 		//System.out.println(fileURI);
-		System.err.println("ok4" + fileURI);
 		
 		resource = resourceSet.getResource(fileURI, true);
-		System.err.println("ok5");
 		initSpoon();
-		System.err.println("ok6");
 
 		try {
 			resource.load(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.err.println("ok6");
 		// set the factory
 		this.updateFactory();
 		
-		System.err.println("ok7");
 		
 		printJavaFiles();
 		

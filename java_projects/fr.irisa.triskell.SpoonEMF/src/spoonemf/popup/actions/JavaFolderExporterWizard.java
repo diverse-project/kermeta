@@ -1,4 +1,4 @@
-/* $Id: JavaFolderExporterWizard.java,v 1.1 2007-02-15 11:26:40 barais Exp $
+/* $Id: JavaFolderExporterWizard.java,v 1.2 2007-02-15 11:30:09 barais Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -73,7 +73,8 @@ public class JavaFolderExporterWizard extends Wizard {
 
 		DestFileWizardPage newfilepage = new DestFileWizardPage(
 				OUTPUTFILE_PAGENAME, selection);
-		newfilepage.setTitle("Export to Java5(XMI) / Destination file selection");
+		newfilepage
+				.setTitle("Export to Java5(XMI) / Destination file selection");
 		newfilepage
 				.setDescription("This wizard exports your package into a Java5(XMI) file.\nPlease specify the output file name.");
 
@@ -101,44 +102,32 @@ public class JavaFolderExporterWizard extends Wizard {
 				+ "outputfile " + outputfile);
 		Java2XMIHelper.eInstance.processJavaFolder(this.foldertoparse,
 				outputfile);
-//		outputPage.createNewFile();
+		// outputPage.createNewFile();
 		System.err.println(outputPage.getContainerFullPath());
 		IContainer f = null;
-		IPath test = outputPage.getContainerFullPath().removeFirstSegments(1);
-		System.err.println(test);
-		if ( test.isRoot())
-			System.err.println("root" + test);
-		test = outputPage.getContainerFullPath().makeRelative();
-		System.err.println(test);
-		if ( test.isRoot())
-			System.err.println("root" + test);
-		
-		
-		
-		if (!outputPage.getContainerFullPath().removeFirstSegments(1).toString().equals(""))
-				{
-			System.err.println("ok1");
-			f = ResourcesPlugin.getWorkspace().getRoot().getFolder(outputPage.getContainerFullPath());
-			System.err.println("ok3 " + f);
-			
-		}
-		else{
-			System.err.println("ok2");
 
-			 f = ResourcesPlugin.getWorkspace().getRoot().getProject(outputPage.getContainerFullPath().makeRelative().toString());			
-				System.err.println("ok4 " + f);
+		if (!outputPage.getContainerFullPath().removeFirstSegments(1)
+				.toString().equals("")) {
+			f = ResourcesPlugin.getWorkspace().getRoot().getFolder(
+					outputPage.getContainerFullPath());
+
+		} else {
+
+			f = ResourcesPlugin.getWorkspace().getRoot()
+					.getProject(
+							outputPage.getContainerFullPath().makeRelative()
+									.toString());
 
 		}
-		
-		
+
 		try {
-			if (f!= null)
-				f.refreshLocal(IFolder.DEPTH_INFINITE,null);
+			if (f != null)
+				f.refreshLocal(IFolder.DEPTH_INFINITE, null);
 			else
 				System.err.println("f est encore null");
 		} catch (CoreException e) {
 			System.err.println("CoreExceptionl");
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return true;
 	}
