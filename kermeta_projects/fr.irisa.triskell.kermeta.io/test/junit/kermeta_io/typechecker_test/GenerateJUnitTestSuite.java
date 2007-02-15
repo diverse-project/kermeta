@@ -46,7 +46,7 @@ public class GenerateJUnitTestSuite {
 		//System.out.println("result "+ tcs);
 		String result = getFileContent(junitfile);
 		String begin = result.substring(0, result.indexOf("/*** BEGIN GENERATED TESTS ***/"));
-		begin += "\n" + "/*** BEGIN GENERATED TESTS ***/\n" + tcs + result.substring(result.indexOf("/*** END GENERATED TESTS ***/"));
+		begin += "/*** BEGIN GENERATED TESTS ***/\n" + tcs + result.substring(result.indexOf("/*** END GENERATED TESTS ***/"));
 		result = begin;
 		
 		try {
