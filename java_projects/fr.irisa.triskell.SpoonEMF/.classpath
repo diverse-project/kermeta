@@ -7,6 +7,5 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/ant.jar"/>
 	<classpathentry kind="lib" path="lib/JSAP-2.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/spoon"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
