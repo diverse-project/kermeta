@@ -1,0 +1,39 @@
+/* $Id: 025_weaving_in_kermeta_aspect5.kmt,v 1.1 2007-02-16 07:42:36 dvojtise Exp $ */
+
+// Type checking of kermeta weavinf
+
+package weavinginvalidtest5;
+
+using kermeta::standard
+//------------------------------
+// Base classes
+//------------------------------
+class A {
+
+
+}
+
+class B inherits A {}
+class C inherits kermeta::kunit::Assert{
+
+	attribute a : A
+	attribute b : B
+
+}
+
+//------------------------------
+// Aspect classes
+//------------------------------
+
+@aspect "true"
+class C {
+
+
+		
+	reference a : A // invalid, should fail because this is not an attribute like it is defined in the base ...
+	attribute c : A
+	attribute d : B
+
+}
+
+/* END OF FILE */
