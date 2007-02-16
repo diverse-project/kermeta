@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.23 2007-02-15 15:56:11 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.24 2007-02-16 08:29:18 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -248,6 +248,18 @@ testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect3
 
 public void testinvalid_025_weaving_in_kermeta_aspect4() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect4.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect5() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect5.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect6() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect6.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect7() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect7.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
