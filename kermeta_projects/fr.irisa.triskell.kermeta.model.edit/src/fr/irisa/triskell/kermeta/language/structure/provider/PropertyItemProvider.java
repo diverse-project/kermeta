@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.12 2006-10-26 16:18:30 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.13 2007-02-16 10:43:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -122,18 +122,22 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 									.getOwningClass();
 							// Get the target of this property, thus a
 							// ClassDefinition
-							ClassDefinition eOppositeReferenceType = (ClassDefinition) ((Class) eOpposite
-									.getType()).getTypeDefinition();
-							if (eOppositeContainingClass == null
-									|| ClassDefinitionHelper.isSuperClassOf(
-											eOppositeContainingClass,
-											eReferenceType)
-									|| eOppositeContainingClass != eReferenceType
-									|| ClassDefinitionHelper.isSuperClassOf(
-											eContainingClass,
-											eOppositeReferenceType)
-									|| eContainingClass != eOppositeReferenceType) {
-								i.remove();
+							// Fixing the bug #2044
+							if(eOpposite.getType() instanceof Class) {
+								ClassDefinition eOppositeReferenceType = (ClassDefinition) ((Class) eOpposite
+										.getType()).getTypeDefinition();
+								if (eOppositeContainingClass == null
+										|| ClassDefinitionHelper.isSuperClassOf(
+												eOppositeContainingClass,
+												eReferenceType)
+										|| eOppositeContainingClass != eReferenceType
+										|| ClassDefinitionHelper.isSuperClassOf(
+												eContainingClass,
+												eOppositeReferenceType)
+										|| eContainingClass != eOppositeReferenceType) {
+									// FIXME We must remove from the list all classes that are typed as Primitive or ValueType
+									i.remove();
+								}
 							}
 						}
 					}
