@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.32 2007-02-07 14:11:50 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.33 2007-02-19 10:38:00 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -506,7 +506,11 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
 			    	if (mmPackage != null)
 			    	{
-			    		result = getEQualifiedName(mmPackage);
+			    		// Avoid infinite recursive loop when looking for ecore package. 
+			    		if(nsuri.equals("http://www.eclipse.org/emf/2002/Ecore")){
+			    			result = mmPackage.getName();
+			    		}
+			    		else result = getEQualifiedName(mmPackage);
 			    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
 			    	}
 	    		}
