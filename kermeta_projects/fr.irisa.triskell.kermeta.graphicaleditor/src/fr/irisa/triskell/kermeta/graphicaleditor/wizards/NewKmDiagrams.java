@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: NewKmDiagrams.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: NewKmDiagrams.java,v 1.2 2007-02-19 18:04:53 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -155,7 +156,7 @@ public class NewKmDiagrams extends Wizard implements INewWizard {
 			template.setDestination(diagPage.getSelectedIContainer());
 			template.addVariable("name", diagPage.getModelName());
 
-			template.generate(new NullProgressMonitor());
+			IResource res = template.generate(new NullProgressMonitor());
 		} catch (CoreException ce) {
 			KmPlugin.log(ce);
 			KmPlugin.displayDialog(null,

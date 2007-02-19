@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: DeleteInheritanceEdgeAction.java,v 1.3 2007-02-08 17:10:19 cfaucher Exp $
+ * $Id: DeleteInheritanceEdgeAction.java,v 1.4 2007-02-19 18:04:53 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -8,10 +8,11 @@ package fr.irisa.triskell.kermeta.graphicaleditor.cd.actions;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-
 import org.topcased.modeler.di.model.GraphElement;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.commands.InheritanceEdgeDeleteCommand;

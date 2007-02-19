@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.3 2007-02-08 17:10:19 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.4 2007-02-19 18:04:53 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -8,19 +8,18 @@ package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.commands.CommandStack;
-import org.eclipse.gef.ui.actions.ActionRegistry;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
-import org.topcased.modeler.editor.ModelerGraphicalViewer;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin;
-import fr.irisa.triskell.kermeta.graphicaleditor.actions.utils.KmActionConstants;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 /**
  * Generated Model editor
@@ -94,4 +93,26 @@ public class KmEditor extends Modeler {
     public CommandStack getCommandStack() {
     	return super.getCommandStack();
     }
+
+    /**
+     * Before the opening of the file framework.ecore is loaded
+     * @generated NOT
+     * Added full method
+     */
+	@Override
+	protected EObject openFile(IFile file) {
+
+		URI frameworkURI = URI.createURI(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT);
+		try {
+			// Load the framework.km through the editing domain.
+			// Force the loading of framework.km when we open a km file
+			this.getResourceSet().getResource(frameworkURI, true);
+		}
+		catch (Exception e) {
+			getResourceSet().getResource(frameworkURI, false);
+		}
+		
+		return super.openFile(file);
+	}
+    
 }

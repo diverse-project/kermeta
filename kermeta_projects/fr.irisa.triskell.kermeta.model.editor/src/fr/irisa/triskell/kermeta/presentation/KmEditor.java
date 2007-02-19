@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.3 2006-10-24 09:19:08 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.4 2007-02-19 18:04:48 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -33,6 +34,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -103,6 +105,7 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStack;
@@ -156,6 +159,7 @@ import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
+import fr.irisa.triskell.eclipse.resources.URIHelper;
 import fr.irisa.triskell.kermeta.provider.KmItemProviderAdapterFactory;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProviderAdapterFactory;
@@ -163,6 +167,7 @@ import fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProvider
 import fr.irisa.triskell.kermeta.language.provider.LanguageItemProviderAdapterFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -900,23 +905,29 @@ public class KmEditor
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void createModel() {
 		// Assumes that the input is a file object.
 		//
 		IFileEditorInput modelFile = (IFileEditorInput)getEditorInput();
-		URI resourceURI = URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString());;
+		URI resourceURI = URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString());
 		Exception exception = null;
 		Resource resource = null;
+		
+		URI frameworkURI = URI.createURI(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT);
 		try {
 			// Load the resource through the editing domain.
 			//
 			resource = editingDomain.getResourceSet().getResource(resourceURI, true);
+			// Added CF in order to force the loading of framework.km when we open a km file
+			editingDomain.getResourceSet().getResource(frameworkURI, true);
 		}
 		catch (Exception e) {
 			exception = e;
 			resource = editingDomain.getResourceSet().getResource(resourceURI, false);
+			// Added CF
+			editingDomain.getResourceSet().getResource(frameworkURI, false);
 		}
 
 		Diagnostic diagnostic = analyzeResourceProblems(resource, exception);

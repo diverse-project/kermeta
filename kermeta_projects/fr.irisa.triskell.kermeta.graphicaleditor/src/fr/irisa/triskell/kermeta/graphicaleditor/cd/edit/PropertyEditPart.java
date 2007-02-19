@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyEditPart.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: PropertyEditPart.java,v 1.2 2007-02-19 18:04:53 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -155,7 +155,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected void refreshEdgeObjects() {
 		super.refreshEdgeObjects();
-		
+
 		updateSourceDecoration();
 		updateTargetDecoration();
 		updateNameLabel();
@@ -212,9 +212,9 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 			targetCount.setToolTip(hoverLbl);
 			// targetCount.setIcon(StructureImageRegistry.getImage("ERROR"));
 
-			IStatus status = new Status(IStatus.ERROR, KmPlugin
-					.getDefault().getBundle().getSymbolicName(), IStatus.ERROR,
-					e.getMessage(), null);
+			IStatus status = new Status(IStatus.ERROR, KmPlugin.getDefault()
+					.getBundle().getSymbolicName(), IStatus.ERROR, e
+					.getMessage(), null);
 			ResourcesPlugin.getPlugin().getLog().log(status);
 		}
 	}
@@ -331,7 +331,6 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 		return (PolylineConnection) getFigure();
 	}
 
-	
 	// Addition of features for the DirectEdit
 
 	/**

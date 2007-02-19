@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.9 2007-02-08 17:10:19 cfaucher Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.10 2007-02-19 18:04:53 cfaucher Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -36,7 +36,6 @@ import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**
  * @author Franck Fleurey

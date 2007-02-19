@@ -1,4 +1,4 @@
-/* $Id: Km2KmtAction.java,v 1.2 2007-02-08 17:10:19 cfaucher Exp $
+/* $Id: Km2KmtAction.java,v 1.3 2007-02-19 18:04:53 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -35,7 +35,6 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.graphicaleditor.KmActionConstants;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
 /**

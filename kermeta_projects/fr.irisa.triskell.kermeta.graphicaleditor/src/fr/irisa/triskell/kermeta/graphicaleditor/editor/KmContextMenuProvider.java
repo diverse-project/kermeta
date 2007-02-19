@@ -13,12 +13,8 @@ package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.ui.actions.ActionRegistry;
-import org.eclipse.gef.ui.actions.GEFActionConstants;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.topcased.modeler.editor.ModelerContextMenuProvider;
-
-import fr.irisa.triskell.kermeta.graphicaleditor.actions.utils.KmActionConstants;
 
 /**
  * Provide a Context Menu for the Ecore Editor with customized actions

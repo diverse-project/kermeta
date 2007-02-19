@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.13 2007-02-16 10:43:52 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.14 2007-02-19 18:04:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -135,7 +135,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 												eContainingClass,
 												eOppositeReferenceType)
 										|| eContainingClass != eOppositeReferenceType) {
-									// FIXME We must remove from the list all classes that are typed as Primitive or ValueType
+									// FIXME We must remove from the list all classes that are typed as PrimitiveType or ValueType
 									i.remove();
 								}
 							}
