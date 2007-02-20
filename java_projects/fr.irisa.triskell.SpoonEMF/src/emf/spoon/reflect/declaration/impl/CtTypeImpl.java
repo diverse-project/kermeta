@@ -2,10 +2,23 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CtTypeImpl.java,v 1.1 2007-02-14 20:38:03 barais Exp $
+ * $Id: CtTypeImpl.java,v 1.2 2007-02-20 09:08:18 barais Exp $
  */
 package emf.spoon.reflect.declaration.impl;
 
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+
+import spoon.reflect.declaration.CtModifiable;
+import spoon.reflect.declaration.CtNamedElement;
+import spoon.reflect.declaration.ModifierKind;
 import emf.spoon.factory.EmfSet;
 import emf.spoon.reflect.declaration.CtElement;
 import emf.spoon.reflect.declaration.CtField;
@@ -15,31 +28,8 @@ import emf.spoon.reflect.declaration.CtSimpleType;
 import emf.spoon.reflect.declaration.CtType;
 import emf.spoon.reflect.declaration.DeclarationPackage;
 import emf.spoon.reflect.declaration.SourcePosition;
-
 import emf.spoon.reflect.reference.CtReference;
 import emf.spoon.reflect.reference.CtTypeReference;
-
-import java.util.Collection;
-import java.util.List;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.ModifierKind;
 
 /**
  * <!-- begin-user-doc -->

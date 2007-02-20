@@ -46,7 +46,20 @@ public class EmfSet implements Set, List, InternalEList, EList {
 	}
 
 	public boolean add(Object o) {
-		return value.add(o);
+		//value.addUnique(object)
+		boolean res =true;
+		System.err.println("size " +((org.eclipse.emf.common.notify.impl.NotifyingListImpl)value).size());
+		try {
+			//Thread.currentThread().sleep(500);
+			res = value.add(o);
+
+			Thread.currentThread().sleep(300);
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
 	}
 
 	public boolean remove(Object o) {

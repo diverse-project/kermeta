@@ -209,5 +209,10 @@ public class EmfExecutableReferenceImpl extends CtExecutableReferenceImpl {
 		return true;
 	}
 
+
+	public boolean isConstructor() {
+		return getSimpleName().equals("<init>");
+	}
+
 	
 }

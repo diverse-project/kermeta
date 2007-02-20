@@ -30,7 +30,6 @@ import spoon.support.builder.SpoonBuildingManager;
 import emf.spoon.SpoonPackage;
 import emf.spoon.factory.EMFFactory;
 import emf.spoon.reflect.declaration.CtPackage;
-import emf.spoon.reflect.declaration.impl.CtClassImpl;
 import emf.spoon.reflect.declaration.impl.ext.EmfClassImpl;
 
 /**

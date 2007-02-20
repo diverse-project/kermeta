@@ -4,9 +4,9 @@ Bundle-Name: SpoonEMF
 Bundle-SymbolicName: fr.irisa.triskell.SpoonEMF;singleton:=true
 Bundle-Version: 1.0.7
 Bundle-ClassPath: bin/,
- lib/junit-4.0.jar,
- lib/org.eclipse.jdt.core_3.2.0.v_666.jar,
- lib/spoon.jar
+ lib/spoon.jar,
+ lib/ant.jar,
+ lib/JSAP-2.1.jar
 Bundle-Vendor: Olivier Barais
 Bundle-Localization: plugin
 Export-Package: emf.spoon,

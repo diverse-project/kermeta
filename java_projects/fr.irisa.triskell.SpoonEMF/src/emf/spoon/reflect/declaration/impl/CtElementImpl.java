@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CtElementImpl.java,v 1.1 2007-02-14 20:38:03 barais Exp $
+ * $Id: CtElementImpl.java,v 1.2 2007-02-20 09:08:18 barais Exp $
  */
 package emf.spoon.reflect.declaration.impl;
 
@@ -15,10 +15,12 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import spoon.reflect.Factory;
 import spoon.reflect.reference.CtTypeReference;
@@ -411,6 +413,19 @@ public abstract class  CtElementImpl extends EObjectImpl implements CtElement {
 	public void setImplicit(boolean implicit) {
 		this.implicit = implicit;
 	}
+	
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+
+		return msgs;
+	}
+	protected NotificationChain eDynamicInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	  {
+	   // EStructuralFeature.Internal feature = (EStructuralFeature.Internal)eClass().getEStructuralFeature(featureID);
+	   // return feature.getSettingDelegate().dynamicInverseRemove(this, eSettings(), featureID - eStaticFeatureCount(), otherEnd, msgs);
+		return msgs;
+	  }
+	
+				
 	
 
 } //CtElementImpl
