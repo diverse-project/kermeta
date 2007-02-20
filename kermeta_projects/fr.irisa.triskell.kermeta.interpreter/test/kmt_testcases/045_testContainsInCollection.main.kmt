@@ -1,7 +1,22 @@
-@mainClass "root::Main" 
+/*****************************************************************************
+ * $Id: 045_testContainsInCollection.main.kmt,v 1.2 2007-02-20 14:10:33 dvojtise Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testHashtable.kmt
+ * 		
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Creation date : Apr 18 11:13:24 2005
+ * Author : 
+ * Description : 
+ *		test of the method contains in collections ...
+ ***************************************************************************
+ */
+ 
+@mainClass "testContainsInCollection::Main" 
 @mainOperation "op2" 
 
-package root;
+package testContainsInCollection;
 
 require kermeta
 
@@ -33,7 +48,7 @@ class Main inherits TestCase
 	operation testOp3Type() : Void is
 	do
 		var coll : kermeta::standard::Set<kermeta::standard::Object> init kermeta::standard::Set<kermeta::standard::Object>.new
-		var a1 : Type init Type.new
+		var a1 : Type init Class.new  // Type is semantically abstract => create a Class
 		coll.add(a1)
 		assert(contains(coll, a1)==true)
 	end
