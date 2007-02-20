@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.12 2007-01-24 16:09:24 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.13 2007-02-20 08:29:44 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-01-24 16:09:24 $</pubdate>
+    <pubdate>$Date: 2007-02-20 08:29:44 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril
@@ -57,36 +57,25 @@
 
     <title>Preface</title>
 
-    <para>Kermeta is a Domain Specific Language
-    dedicated to metamodel engineering. It fills the gap let by MOF which
-    defines only the structure of meta-models, by adding a way to specify
-    static semantic (similar to OCL) and dynamic semantic (using operational
-    semantic in the operation of the metamodel). 
-    Kermeta uses the object-oriented
-    paradigm like Java or Eiffel. This document presents various aspects of the language,
-    including the textual syntax, the metamodel (which can be viewed as the
-    abstract syntax) and some more advanced features typically included in its
-    framework. </para>
+    <para>Kermeta is a Domain Specific Language dedicated to metamodel
+    engineering. It fills the gap let by MOF which defines only the structure
+    of meta-models, by adding a way to specify static semantic (similar to
+    OCL) and dynamic semantic (using operational semantic in the operation of
+    the metamodel). Kermeta uses the object-oriented paradigm like Java or
+    Eiffel. This document presents various aspects of the language, including
+    the textual syntax, the metamodel (which can be viewed as the abstract
+    syntax) and some more advanced features typically included in its
+    framework.</para>
 
     <important>
-       
+       Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
 
-      Kermeta is an evolving software and despite that we put a lot of attention to this
-        document, it may contain errors (more likely in the code samples). If
-        you find any error or have some information that improves this
-        document, please send it to us using the bug tracker in the
-        forge:
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
-        <emphasis role="strong">
-          http://gforge.inria.fr/tracker/?group_id=32
-        </emphasis>
+        <emphasis
+        role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
-      or using the developer mailing list
-          (kermeta-developers@lists.gforge.inria.fr)
 
-       
-
-       Last check: v0.4.0 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.4.0 
     </important>
 
     <tip>
@@ -131,18 +120,27 @@
       <para></para>
 
       <para>In a nutshell, Kermeta is :</para>
+
       <itemizedlist>
-      	<listitem>
-              <para>MOF compliant (EMOF compliant to be precise)</para>
-            </listitem><listitem>
-              <para>Model oriented</para>
-            </listitem><listitem>
-              <para>Imperative</para>
-            </listitem><listitem>
-              <para>Object-Oriented</para>
-            </listitem><listitem>
-              <para>Statically Typed (100% typesafe)</para>
-            </listitem>
+        <listitem>
+          <para>MOF compliant (EMOF compliant to be precise)</para>
+        </listitem>
+
+        <listitem>
+          <para>Model oriented</para>
+        </listitem>
+
+        <listitem>
+          <para>Imperative</para>
+        </listitem>
+
+        <listitem>
+          <para>Object-Oriented</para>
+        </listitem>
+
+        <listitem>
+          <para>Statically Typed (100% typesafe)</para>
+        </listitem>
       </itemizedlist>
 
       <para>In addition to these characteristics, it includes some typically
@@ -199,11 +197,14 @@
         <para>Kermeta has been designed to be fully compatible with the OMG
         standard meta-data language EMOF. The metamodel of Kermeta is divided
         into two packages :</para>
+
         <itemizedlist>
-        	<listitem>
+          <listitem>
             <para><emphasis>structure</emphasis> which corresponds to
             EMOF</para>
-          </listitem><listitem>
+          </listitem>
+
+          <listitem>
             <para><emphasis>behavior</emphasis> which corresponds to the
             actions. This section gives an overview of these two packages and
             their relationships.</para>
@@ -321,9 +322,8 @@
 
               <tbody>
                 <row>
-                  <entry align="right"><?border-top 0.002cm solid #000000?>
-                  <?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?>
-                  <mediaobject>
+                  <entry align="right"><?border-top 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?>
+                  <?border-left 0.002cm solid #000000?> <mediaobject>
                       <imageobject>
                         <imagedata depth="9.208cm"
                                    fileref="KerMeta-Manual_figures/operation_redefinition.png"
@@ -331,7 +331,7 @@
                       </imageobject>
                     </mediaobject> <para></para></entry>
 
-                  <entry><?border 0.002cm solid #000000?> <programlisting><emphasis
+                  <entry><?border 0.002cm solid #000000?><programlisting><emphasis
                         role="strong">class</emphasis> A
 {
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m1() <emphasis
@@ -446,11 +446,14 @@
           <para>This is also a classical problem that has been solved in
           several OO languages. There are mainly two kinds of conflicts when a
           class inherits features from several super-classes:</para>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para>Several features with the same name might be inherited
               from different super classes causing a name clash.</para>
-            </listitem><listitem>
+            </listitem>
+
+            <listitem>
               <para>Several implementations of a single operation could be
               inherited from different super classes.</para>
             </listitem>
@@ -485,9 +488,8 @@
 
               <tbody>
                 <row>
-                  <entry align="center"><?border-top 0.002cm solid #000000?>
-                  <?border-bottom 0.002cm solid #000000?> <?border-left 0.002cm solid #000000?>
-                  <mediaobject>
+                  <entry align="center"><?border-top 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?>
+                  <?border-left 0.002cm solid #000000?> <mediaobject>
                       <imageobject>
                         <imagedata depth="11.374cm"
                                    fileref="KerMeta-Manual_figures/superoperation_selection.png"
@@ -495,7 +497,7 @@
                       </imageobject>
                     </mediaobject> <para></para></entry>
 
-                  <entry><?border 0.002cm solid #000000?> <programlisting><emphasis
+                  <entry><?border 0.002cm solid #000000?><programlisting><emphasis
                         role="strong">class</emphasis> O
 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m() <emphasis
@@ -708,16 +710,20 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
 
         <para>Like in many languages, Kermeta provides two ways to add
         comments in your models:</para>
+
         <itemizedlist>
-        	<listitem>
+          <listitem>
             <para>simple line comments, i.e text line beginning with //</para>
 
             <programlisting>// This is a single line comment</programlisting>
-          </listitem><listitem>
+          </listitem>
+
+          <listitem>
             <para>multi-line comments, i.e text between /* */. Be careful with
             this notation : the opening syntax must not have juxtaposed stars
             ("/**"), otherwise it will be considered as a linked comment (see
-            section <link linkend="sec:linked-comments">2.1.2</link>, p.<link linkend="sec:linked-comments">18</link>), i.e a comment that is
+            section <link linkend="sec:linked-comments">2.1.2</link>, p.<link
+            linkend="sec:linked-comments">18</link>), i.e a comment that is
             part of the Kermeta program as a model.</para>
 
             <programlisting>/* This a multi line comment
@@ -784,7 +790,7 @@ this line too. */</programlisting>
         <para>This example is valid:</para>
 
         <programlisting><emphasis role="strong">require </emphasis>"./ecore.ecore"
-<emphasis  role="strong">class</emphasis> ~class {
+<emphasis role="strong">class</emphasis> ~class {
     <emphasis role="strong">attribute</emphasis> ~attribute : Ecore::Attribute
 }</programlisting>
       </section>
@@ -822,13 +828,9 @@ this line too. */</programlisting>
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Name</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Name</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Description</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Description</para></entry>
 
                 <entry><?border 0.0007inch solid #000000?><para>Literal
                 Example</para></entry>
@@ -837,42 +839,31 @@ this line too. */</programlisting>
 
             <tbody>
               <row>
-                <entry>
-                <para>Integer</para></entry>
+                <entry><para>Integer</para></entry>
 
-                <entry>
-                <para>Represents integer numeric value like 10 or 12.
+                <entry><para>Represents integer numeric value like 10 or 12.
                 («&nbsp;int&nbsp;» data type in Java)</para></entry>
 
-                <entry>
-                 <para>'101', '12',
-                '14, '-45', '-123'</para></entry>
+                <entry><para>'101', '12', '14, '-45', '-123'</para></entry>
               </row>
 
               <row>
-                <entry>
-                <para>String</para></entry>
+                <entry><para>String</para></entry>
 
-                <entry>
-                <para>Represents a string of like « helloworld&nbsp;»
+                <entry><para>Represents a string of like « helloworld&nbsp;»
                 («&nbsp;String&nbsp;» data type in Java)</para></entry>
 
-                <entry>
-                 <para>"helloworld",
-                "this is a string !!!"</para></entry>
+                <entry><para>"helloworld", "this is a string
+                !!!"</para></entry>
               </row>
 
               <row>
-                <entry>
-                <para>Boolean</para></entry>
+                <entry><para>Boolean</para></entry>
 
-                <entry>
-                <para>Represents a true/false value. («&nbsp;boolean&nbsp;»
-                data type in Java)</para></entry>
+                <entry><para>Represents a true/false value.
+                («&nbsp;boolean&nbsp;» data type in Java)</para></entry>
 
-                <entry>
-                 <para>true,
-                false</para></entry>
+                <entry><para>true, false</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -918,11 +909,14 @@ this line too. */</programlisting>
         combination of the constraints <emphasis
         role="strong">unique</emphasis> and <emphasis
         role="strong">ordered</emphasis>.</para>
+
         <itemizedlist>
-        	<listitem>
+          <listitem>
             <para>Unique specifies a collection type that cannot contain
             doublet</para>
-          </listitem><listitem>
+          </listitem>
+
+          <listitem>
             <para>Ordered specifies a collection type where the position of an
             object inside the collection can be modified.</para>
           </listitem>
@@ -940,90 +934,71 @@ this line too. */</programlisting>
 
             <thead>
               <row>
-                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?>
-                
-                <para>Name</para></entry>
+                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?><para>Name</para></entry>
 
-                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?>
-                
-                <para>Description</para></entry>
+                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?><para>Description</para></entry>
 
                 <entry nameend="c4" namest="c3"><?border 0.0007inch solid #000000?><para>Constraints</para></entry>
               </row>
 
               <row>
-                <entry>
-                <para>Unique</para></entry>
+                <entry><para>Unique</para></entry>
 
-                <entry>
-                
-                <para>Ordered</para></entry>
+                <entry><para>Ordered</para></entry>
               </row>
             </thead>
 
             <tbody>
               <row>
-                <entry valign="middle">
-                <para>set</para></entry>
+                <entry valign="middle"><para>set</para></entry>
 
-                <entry valign="middle">
-                <para>Represents an unordered collection of objects with no
-                doublet (Set)</para></entry>
+                <entry valign="middle"><para>Represents an unordered
+                collection of objects with no doublet (Set)</para></entry>
 
-                <entry align="center" valign="middle">
-                <para>True</para></entry>
+                <entry align="center"
+                valign="middle"><para>True</para></entry>
 
-                <entry align="center" valign="middle">
-                
-                <para>False</para></entry>
+                <entry align="center"
+                valign="middle"><para>False</para></entry>
               </row>
 
               <row>
-                <entry valign="middle">
-                <para>oset</para></entry>
+                <entry valign="middle"><para>oset</para></entry>
 
-                <entry valign="middle">
-                <para>Represents an ordered collection of objects with no
-                doublet (OrderedSet)</para></entry>
+                <entry valign="middle"><para>Represents an ordered collection
+                of objects with no doublet (OrderedSet)</para></entry>
 
-                <entry align="center" valign="middle">
-                <para>True</para></entry>
+                <entry align="center"
+                valign="middle"><para>True</para></entry>
 
-                <entry align="center" valign="middle">
-                
-                <para>True</para></entry>
+                <entry align="center"
+                valign="middle"><para>True</para></entry>
               </row>
 
               <row>
-                <entry valign="middle">
-                <para>seq</para></entry>
+                <entry valign="middle"><para>seq</para></entry>
 
-                <entry valign="middle">
-                <para>Represents an ordered collection of objects (Sequence)
-                </para></entry>
+                <entry valign="middle"><para>Represents an ordered collection
+                of objects (Sequence) </para></entry>
 
-                <entry align="center" valign="middle">
-                <para>False</para></entry>
+                <entry align="center"
+                valign="middle"><para>False</para></entry>
 
-                <entry align="center" valign="middle">
-                
-                <para>True</para></entry>
+                <entry align="center"
+                valign="middle"><para>True</para></entry>
               </row>
 
               <row>
-                <entry valign="middle">
-                <para>bag</para></entry>
+                <entry valign="middle"><para>bag</para></entry>
 
-                <entry valign="middle">
-                <para>Represents a basic collection of objects
-                (Bag)</para></entry>
+                <entry valign="middle"><para>Represents a basic collection of
+                objects (Bag)</para></entry>
 
-                <entry align="center" valign="middle">
-                <para>False</para></entry>
+                <entry align="center"
+                valign="middle"><para>False</para></entry>
 
-                <entry align="center" valign="middle">
-                
-                <para>False</para></entry>
+                <entry align="center"
+                valign="middle"><para>False</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -1169,16 +1144,11 @@ myCol1.add(50)
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Priority</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Priority</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Operator</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Operator</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                 <para>Operand
+                <entry><?border-top 0.0007inch solid #000000?><para>Operand
                 types</para></entry>
 
                 <entry><?border 0.0007inch solid #000000?><para>Semantic</para></entry>
@@ -1187,63 +1157,50 @@ myCol1.add(50)
 
             <tbody>
               <row>
-                <entry align="center" valign="bottom">
-                <para>1</para></entry>
+                <entry align="center" valign="bottom"><para>1</para></entry>
 
-                <entry align="center">
-                <para> <literal>+</literal> </para></entry>
+                <entry align="center"><para> <literal>+</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Numeric</para> <para>String</para></entry>
+                <entry align="center"><para>Numeric</para>
+                <para>String</para></entry>
 
-                <entry>
-                 <para>Add two numeric
-                values</para> <para>Concatenate two strings</para></entry>
+                <entry><para>Add two numeric values</para> <para>Concatenate
+                two strings</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom">
-                <para>1</para></entry>
+                <entry align="center" valign="bottom"><para>1</para></entry>
 
-                <entry align="center">
-                <para> <literal>-</literal> </para></entry>
+                <entry align="center"><para> <literal>-</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Numeric</para></entry>
+                <entry align="center"><para>Numeric</para></entry>
 
-                <entry>
-                 <para>Subtract two
-                numerous values</para></entry>
+                <entry><para>Subtract two numerous values</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom">
-                <para>2</para></entry>
+                <entry align="center" valign="bottom"><para>2</para></entry>
 
-                <entry align="center">
-                <para> <literal>*</literal> </para></entry>
+                <entry align="center"><para> <literal>*</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Numeric</para></entry>
+                <entry align="center"><para>Numeric</para></entry>
 
-                <entry>
-                 <para>Multiply two
-                numeric values</para></entry>
+                <entry><para>Multiply two numeric values</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom">
-                <para>2</para></entry>
+                <entry align="center" valign="bottom"><para>2</para></entry>
 
-                <entry align="center">
-                <para> <literal>/</literal> </para></entry>
+                <entry align="center"><para> <literal>/</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Numeric</para></entry>
+                <entry align="center"><para>Numeric</para></entry>
 
-                <entry>
-                 <para>Divide the
-                first operand by the second</para></entry>
+                <entry><para>Divide the first operand by the
+                second</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -1266,16 +1223,11 @@ myCol1.add(50)
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Priority</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Priority</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Operators</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Operators</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                 <para>Operand
+                <entry><?border-top 0.0007inch solid #000000?><para>Operand
                 Types</para></entry>
 
                 <entry><?border 0.0007inch solid #000000?><para>Semantics</para></entry>
@@ -1284,93 +1236,79 @@ myCol1.add(50)
 
             <tbody>
               <row>
-                <entry align="center" valign="bottom">
-                <para>3</para></entry>
+                <entry align="center" valign="bottom"><para>3</para></entry>
 
-                <entry align="center">
-                <para> <literal>==</literal> </para></entry>
+                <entry align="center"><para> <literal>==</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Primitives</para></entry>
+                <entry align="center"><para>Primitives</para></entry>
 
-                <entry>
-                 <para>True, if op1
-                value's is the same that op2 value's</para></entry>
+                <entry><para>True, if op1 value's is the same that op2
+                value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom">
-                <para>3</para></entry>
+                <entry align="center" valign="bottom"><para>3</para></entry>
 
-                <entry align="center">
-                <para> <literal>!=</literal> </para></entry>
+                <entry align="center"><para> <literal>!=</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Primitives</para></entry>
+                <entry align="center"><para>Primitives</para></entry>
 
-                <entry>
-                 <para>True if op1
-                value's is different of op2 value's</para></entry>
+                <entry><para>True if op1 value's is different of op2
+                value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle">
-                <para>3</para></entry>
+                <entry align="center" valign="middle"><para>3</para></entry>
 
-                <entry align="center" valign="middle">
-                <para> <literal>&lt;</literal> </para></entry>
+                <entry align="center" valign="middle"><para>
+                <literal>&lt;</literal> </para></entry>
 
-                <entry align="center" valign="middle">
-                <para>Numeric</para></entry>
+                <entry align="center"
+                valign="middle"><para>Numeric</para></entry>
 
-                <entry>
-                 <para>True if
-                op1value's is strictly smaller than op2 value's</para></entry>
+                <entry><para>True if op1value's is strictly smaller than op2
+                value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle">
-                <para>3</para></entry>
+                <entry align="center" valign="middle"><para>3</para></entry>
 
-                <entry align="center" valign="middle">
-                <para> <literal>&lt;=</literal> </para></entry>
+                <entry align="center" valign="middle"><para>
+                <literal>&lt;=</literal> </para></entry>
 
-                <entry align="center" valign="middle">
-                <para>Numeric</para></entry>
+                <entry align="center"
+                valign="middle"><para>Numeric</para></entry>
 
-                <entry valign="middle">
-                 <para>True if op1
-                value's is smaller or equals than op2 value's</para></entry>
+                <entry valign="middle"><para>True if op1 value's is smaller or
+                equals than op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle">
-                <para>3</para></entry>
+                <entry align="center" valign="middle"><para>3</para></entry>
 
-                <entry align="center" valign="middle">
-                <para> <literal>&gt;</literal> </para></entry>
+                <entry align="center" valign="middle"><para>
+                <literal>&gt;</literal> </para></entry>
 
-                <entry align="center" valign="middle">
-                <para>Numeric</para></entry>
+                <entry align="center"
+                valign="middle"><para>Numeric</para></entry>
 
-                <entry valign="middle">
-                 <para>True if op1
-                value's is strictly greater than op2 value's</para></entry>
+                <entry valign="middle"><para>True if op1 value's is strictly
+                greater than op2 value's</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="middle">
-                <para>3</para></entry>
+                <entry align="center" valign="middle"><para>3</para></entry>
 
-                <entry align="center" valign="middle">
-                <para> <literal>&gt;=</literal> </para></entry>
+                <entry align="center" valign="middle"><para>
+                <literal>&gt;=</literal> </para></entry>
 
-                <entry align="center" valign="middle">
-                <para>Numeric</para></entry>
+                <entry align="center"
+                valign="middle"><para>Numeric</para></entry>
 
-                <entry valign="middle">
-                 <para>True if op1
-                value's is greater or equals than op2 value's</para></entry>
+                <entry valign="middle"><para>True if op1 value's is greater or
+                equals than op2 value's</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -1388,16 +1326,11 @@ myCol1.add(50)
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Priority</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Priority</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                
-                <para>Operators</para></entry>
+                <entry><?border-top 0.0007inch solid #000000?><para>Operators</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?>
-                 <para>Operands
+                <entry><?border-top 0.0007inch solid #000000?><para>Operands
                 Types</para></entry>
 
                 <entry><?border 0.0007inch solid #000000?><para>Semantics</para></entry>
@@ -1406,48 +1339,38 @@ myCol1.add(50)
 
             <tbody>
               <row>
-                <entry align="center" valign="bottom">
-                <para>4</para></entry>
+                <entry align="center" valign="bottom"><para>4</para></entry>
 
-                <entry align="center">
-                <para> <literal>and </literal> </para></entry>
+                <entry align="center"><para> <literal>and </literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Boolean</para></entry>
+                <entry align="center"><para>Boolean</para></entry>
 
-                <entry>
-                 <para>True if op1 and
-                op2 are evaluated to true</para></entry>
+                <entry><para>True if op1 and op2 are evaluated to
+                true</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom">
-                <para>4</para></entry>
+                <entry align="center" valign="bottom"><para>4</para></entry>
 
-                <entry align="center">
-                <para> <literal>or</literal> </para></entry>
+                <entry align="center"><para> <literal>or</literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Boolean</para></entry>
+                <entry align="center"><para>Boolean</para></entry>
 
-                <entry>
-                 <para>True if one of
-                the operators is evaluated to true</para></entry>
+                <entry><para>True if one of the operators is evaluated to
+                true</para></entry>
               </row>
 
               <row>
-                <entry align="center" valign="bottom">
-                <para>4</para></entry>
+                <entry align="center" valign="bottom"><para>4</para></entry>
 
-                <entry align="center">
-                <para> <literal>not </literal> </para></entry>
+                <entry align="center"><para> <literal>not </literal>
+                </para></entry>
 
-                <entry align="center">
-                <para>Boolean</para></entry>
+                <entry align="center"><para>Boolean</para></entry>
 
-                <entry>
-                 <para>True if op is
-                false.</para></entry>
+                <entry><para>True if op is false.</para></entry>
               </row>
             </tbody>
           </tgroup>
@@ -1701,7 +1624,7 @@ myCol1.add(50)
 <emphasis role="strong">end</emphasis></programlisting>
 
         <note>
-          Unlike Java, there is no exit, break or continue function in Kermeta.
+           Unlike Java, there is no exit, break or continue function in Kermeta. 
         </note>
       </section>
 
@@ -1781,26 +1704,33 @@ myCol1.add(50)
 
           <para>Here is a definition of function syntax (this is not a formal
           representation)</para>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para>Signature of an operation defined as a function:</para>
 
               <programlisting><emphasis>// With one parameter</emphasis>
 <emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;TYPE-&gt;RETURN_TYPE&gt; )
 <emphasis>// With many parameters</emphasis>
 <emphasis role="strong">operation</emphasis> FUNCTION_NAME ( LAMBDA_NAME : &lt;[TYPE_1, TYPE_2, ...]-&gt;RETURN_TYPE&gt; )</programlisting>
-            </listitem><listitem>
+            </listitem>
+
+            <listitem>
               <para>Call of a function:</para>
 
               <programlisting>anInstance.FUNCTION_NAME ( TYPE | SOME_CODE )
 anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
-            </listitem><listitem>
+            </listitem>
+
+            <listitem>
               <para>Declaring and defining an "anonymous" function inside an
               operation body</para>
 
-              <programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
+              <programlisting><emphasis role="strong">var</emphasis> f : &lt;TYPE -&gt; RETURN_TYPE&gt;<emphasis
+                  role="strong"></emphasis>f := <emphasis role="strong">function</emphasis> { VAR_NAME : TYPE | SOME_CODE_WITH_RETURN_TYPE_RESULT }
 
-<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
+<emphasis role="strong">var</emphasis> f : &lt;[ TYPE_1, TYPE_2,... ] -&gt; RETURN_TYPE&gt;f := <emphasis
+                  role="strong">function</emphasis> { VAR_NAME_1 : TYPE_1, VAR_NAME_2 : TYPE_2,... | SOME_CODE_WITH_RETURN_TYPE_RESULT }</programlisting>
             </listitem>
           </itemizedlist>
 
@@ -1914,8 +1844,9 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
 
           <para>You can also define lambda expression as variable. This can be
           useful if you don't want to ( or can't) modify the class.</para>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para>A basic lambda expression</para>
             </listitem>
           </itemizedlist>
@@ -1927,8 +1858,9 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
 aLambdaExp := <emphasis role="strong">function</emphasis> { i : Integer | i.plus(4) }
 <emphasis>// aLambdaResult equals 7</emphasis>
 aLambdaResult := aLambdaExp(3)</programlisting>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para>A lambda expression with several parameters</para>
             </listitem>
           </itemizedlist>
@@ -1938,8 +1870,9 @@ aLambdaResult := aLambdaExp(3)</programlisting>
 aLambdaExp := <emphasis role="strong">function</emphasis> { i : Integer, j : Integer | i * j }
 <emphasis>// aLambdaResult equals 12</emphasis>
 aLambdaResult := aLambdaExp(3, 4)</programlisting>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para>A lambda expression on a collection</para>
             </listitem>
           </itemizedlist>
@@ -2050,8 +1983,9 @@ a := A&lt;Integer&gt;.new
 
           <para>We introduce here the 2 first cases, which are relationships
           between two concrete entities.</para>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para><emphasis>attribute</emphasis>: an attribute defines a
               <emphasis>composition </emphasis>(e.g the black diamond) between
               two entities. The diamond-ed association end is navigable by
@@ -2064,10 +1998,11 @@ a := A&lt;Integer&gt;.new
 <emphasis role="strong">class</emphasis> X {}</programlisting>
 
           <note>
-            Composition notion also relates to containment notion. So, there are some restriction about valid model. For example, in an association, only one end can be an attribute, otherwise this means that we have an association with a diamond on both end and we cannot say who is the container of the other.
+             Composition notion also relates to containment notion. So, there are some restriction about valid model. For example, in an association, only one end can be an attribute, otherwise this means that we have an association with a diamond on both end and we cannot say who is the container of the other. 
           </note>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para><emphasis>reference</emphasis>: a reference defines an
               association between two entities.</para>
             </listitem>
@@ -2109,8 +2044,7 @@ a := A&lt;Integer&gt;.new
           <programlisting><emphasis role="strong">var</emphasis> a1 : A <emphasis
               role="strong">init</emphasis> A.new
 a1.name := "a1"
-<emphasis role="strong">var</emphasis> b1 : B <emphasis
-              role="strong">init</emphasis> C.new
+<emphasis role="strong">var</emphasis> b1 : B <emphasis role="strong">init</emphasis> C.new
 a1.b := b1
 stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emphasis></programlisting>
 
@@ -2281,9 +2215,7 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 
               <thead>
                 <row>
-                  <entry><?border-top 0.0007inch solid #000000?>
-                  
-                  <para>Access</para></entry>
+                  <entry><?border-top 0.0007inch solid #000000?><para>Access</para></entry>
 
                   <entry><?border 0.0007inch solid #000000?><para>Kermeta
                   expression</para></entry>
@@ -2292,12 +2224,9 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 
               <tbody>
                 <row>
-                  <entry>
-                  <para>Get the attribute of an instance</para></entry>
+                  <entry><para>Get the attribute of an instance</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a6 : A6 <emphasis
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis
                         role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : OrderedSet&lt;B6&gt;
 <emphasis>// get the b attribute</emphasis>
@@ -2305,13 +2234,10 @@ b6 := a6.b</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Add an element to a property with multiplicity [m..n],
-                  n&gt;1</para></entry>
+                  <entry><para>Add an element to a property with multiplicity
+                  [m..n], n&gt;1</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a6 : A6 init A6.new
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a6 : A6 init A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 init B6.new
 <emphasis>// add b6 to the attribute b of A.</emphasis> 
 <emphasis>// </emphasis><emphasis>Note : you don’t have to initialize b! done through A6.new</emphasis>
@@ -2319,22 +2245,18 @@ a6.b.add(b6)</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Remove an element from a property</para></entry>
+                  <entry><para>Remove an element from a
+                  property</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use "remove" method</emphasis>
+                  <entry><programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use "remove" method</emphasis>
 a6.b.removeAt(0)
 <emphasis>// Also valid : a6.b.remove(b6)</emphasis></programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Get the opposite of a property</para></entry>
+                  <entry><para>Get the opposite of a property</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a6 : A6 init A6.new
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a6 : A6 init A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 init B6.new
 a6.b.add(b6)
 <emphasis>// this assertion is true. Moreover, any instance in a6.b will// have a6 as their opposite since b is a collection</emphasis>
@@ -2342,12 +2264,9 @@ assert(b6.a == a6)</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Get the container of a property</para></entry>
+                  <entry><para>Get the container of a property</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a6 : A6 <emphasis
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis
                         role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 <emphasis role="strong">init</emphasis> B6.new
 <emphasis>// add ab6 to the attribute "b"</emphasis>
@@ -2381,9 +2300,7 @@ assert(a6c.equals(a6))</programlisting></entry>
 
               <thead>
                 <row>
-                  <entry><?border-top 0.0007inch solid #000000?>
-                  
-                  <para>Access</para></entry>
+                  <entry><?border-top 0.0007inch solid #000000?><para>Access</para></entry>
 
                   <entry><?border 0.0007inch solid #000000?><para>Kermeta
                   expression</para></entry>
@@ -2392,12 +2309,9 @@ assert(a6c.equals(a6))</programlisting></entry>
 
               <tbody>
                 <row>
-                  <entry>
-                  <para>Get the attribute of an instance</para></entry>
+                  <entry><para>Get the attribute of an instance</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a5 : A5 <emphasis
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis
                         role="strong">init</emphasis> A5.new
 <emphasis role="strong">var</emphasis> b5 : B5
 <emphasis>// get the b attribute</emphasis>
@@ -2405,33 +2319,25 @@ b5 := a5.b</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Set a property (with multiplicity [m..1],
+                  <entry><para>Set a property (with multiplicity [m..1],
                   m≤1)</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a5 : A5 init A5.new
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a5 : A5 init A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 init B5.new
 <emphasis>// set b5 to the attribute b of A.</emphasis>
 a5.b := b5</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Unset a property</para></entry>
+                  <entry><para>Unset a property</para></entry>
 
-                  <entry>
-                   <programlisting>a5.b := void</programlisting></entry>
+                  <entry><programlisting>a5.b := void</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Get the opposite of a property</para></entry>
+                  <entry><para>Get the opposite of a property</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a5 : A5 init A5.new
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a5 : A5 init A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 init B5.new
 a5.b := b5
 <emphasis>// this assertion is true.</emphasis>
@@ -2439,12 +2345,9 @@ assert(b5.a == a5)</programlisting></entry>
                 </row>
 
                 <row>
-                  <entry>
-                  <para>Get the container of a property</para></entry>
+                  <entry><para>Get the container of a property</para></entry>
 
-                  <entry>
-                   <programlisting><emphasis
-                        role="strong">var</emphasis> a5 : A5 <emphasis
+                  <entry><programlisting><emphasis role="strong">var</emphasis> a5 : A5 <emphasis
                         role="strong">init</emphasis> A5.new
 <emphasis role="strong">var</emphasis> b5 : B5 <emphasis role="strong">init</emphasis> B5.new
 <emphasis>// add b5 to the attribute "b"</emphasis>
@@ -2733,7 +2636,7 @@ end</programlisting>
             elements of a are contained in b and vice-versa, then it returns
             true, false otherwise. This behavior is little bit different for
             ordered collection which takes into account the order of elements.
-            Have a look to the following pieces of code : </para>
+            Have a look to the following pieces of code :</para>
 
             <programlisting>operation test_try1() : Void is do
    var os : OrderedSet&lt;Integer&gt; init OrderedSet&lt;Integer&gt;.new
@@ -3068,6 +2971,245 @@ class Female <emphasis role="strong">inherits</emphasis> Person
     </section>
 
     <section>
+      <title>Weaving kermeta code</title>
+
+      <para>Since version 0.4.1, it is possible to write Kermeta code using a
+      simplified Aspect Oriented approach.</para>
+
+      <para>Technically, you can declare classes as "aspects" that will
+      contribute features (attributes, references, properties, operations,
+      constraints) to an existing classes. In such situation, the definition
+      of two classes that have the same qualified name will be merged into a
+      single class in the interpreter memory.</para>
+
+      <para>This is a great help when you want to separate the concerns into
+      several files. For example, you may have one file the strictly conforms
+      to the structural part of your metamodel, one file containing the
+      constraints for a given purpose and another file containing the
+      operation and special extension to the metamodel for an
+      interpreter.</para>
+
+      <para>Obviously, the merge will be successful only if there is no
+      conflict between all the declared features.</para>
+
+      <section>
+        <title>textual syntax for merging</title>
+
+        <para>The merge is driven by the qualified name of the element to
+        merge. Two classes will be merged if they have exactly the same
+        qualified name (packages names + class name) </para>
+
+        <para>In order to keep the compatibility with previous behaviour, the
+        merge is allowed only if you add some tags: </para>
+
+        <variablelist>
+          <varlistentry>
+            <term>@aspect "true"</term>
+
+            <listitem>
+              <para>is placed on a class, it indicates that this class is an
+              aspect of another one. This allows to complement a class with the features of the aspect class.</para>
+
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>@overloadable "true"</term>
+
+            <listitem>
+              <para>is placed on an operation, it indicates that the body of the operation can be overloaded 
+              by another definition of the same operation in an aspect class. This is useful in some situation 
+              were the code expect to be overloaded.</para>
+
+            </listitem>
+          </varlistentry>
+        </variablelist>
+		<note>When using overloadable tag, for a given set of definition, the operation that is not tagged 
+		overlodable will overload all other definitions. If all the declaration declare to be overloadable, then
+		the declaration order is important. The last declared will be used by the interpreter.</note>
+      </section>
+
+      <section>         
+        <title>Example 1: Simple Class merge</title>
+
+         In this sample, writting : 
+
+        <programlisting>
+// aspect1.kmt
+// this is the first aspect of class A
+@aspect "true"
+class A {
+	attribute decorations : Decoration[0..*]
+}
+// this aspect also declares a new class, visible only when requiring this aspect
+class Decoration{
+	attribute val : kermeta::standard::String
+}
+      	</programlisting>
+
+         
+
+        <programlisting>
+// base.kmt
+// this is the base class
+class A {
+	attribute name : kermeta::standard::String
+	
+	 // operation in this context have access only to the base's features 
+	operation getName() : kermeta::standard::String is do
+		result := name
+	end
+}
+      	</programlisting>
+
+         
+
+        <programlisting>
+// aspect2.kmt
+require "base.kmt"
+require "aspect1.kmt"
+
+// is this context we have access to all the features of class A : from base, aspect1 and aspect2
+@aspect "true"
+class A {
+	attribute id : kermeta::standard::Integer
+	operation getFullSpecification() : kermeta::standard::String is do
+		result := name
+		result := "(" + id.toString + ")"
+		decorations.each{ decoration | result := result + "&lt;" + decoration.val+ "&gt;" }
+	end
+}
+      </programlisting>
+
+         
+
+        <note>Please note that the visibility of the features is
+        respected. In base.kmt, class A doesn't know about attributes id or decorators...</note>
+
+         
+
+        <para>from the point of view of aspect2.kmt (ie. any file that
+        requires aspect2.kmt) is equivalent to write :</para>
+
+         
+
+        <programlisting>
+class A {
+	attribute name : kermeta::standard::String
+	attribute decorations : Decoration[0..*]	
+	attribute id : kermeta::standard::Integer
+	
+	 // operation in this context have access only to the base's features 
+	operation getName() : kermeta::standard::String is do
+		result := name
+	end
+	operation getFullSpecification() : kermeta::standard::String is do
+		result := name
+		result := "(" + id.toString + ")"
+		decorations.each{ decoration | result := result + "&lt;" + decoration.val+ "&gt;" }
+	end
+}
+class Decoration{
+	attribute val : kermeta::standard::String
+}
+      </programlisting>
+
+         
+
+        <note>When there is no conflict like in this sample, the order used to
+        declare the features doesn't changes the final behavior of the
+        code.</note>
+
+         
+      </section>
+      <section>         
+        <title>Example 2: merge with feature redefinition</title>
+        <para>
+       	This sample shows that if the signature are strictly equivalent, then you can redefine the same structural feature 
+       	(attribute, reference) in several aspect class.
+        </para>
+        <para>
+		In addition, if an operation is declared abstract, it can be an aspect of another one which is concrete. This is useful
+		in order to add pre or post conditions to a given operation.
+        </para>
+        <para>
+		Currently, (v0.4.1) the properties cannot be redefined in several aspect classes.
+        </para>
+        <programlisting>
+@aspect "true"        
+class A {
+	//the feature is equivalent to the one define in the base class, so this is legal
+	attribute name : kermeta::standard::String	
+	
+	// the operation has the same signature and is abstract, so this is legal
+	operation getQualifiedName() : kermeta::standard::String 
+		post notVoid is not result == Void
+		is abstract
+} 
+
+      	</programlisting>
+      	<programlisting>
+class A {
+
+	attribute name : kermeta::standard::String
+	operation getQualifiedName() : kermeta::standard::String is do
+		result := name
+	end
+}
+      	</programlisting>
+      </section>
+      <section>         
+        <title>Example 3: merge with operation overload</title>
+        <para>
+       	This sample shows the use of the overloadable tag
+        </para>        
+        <programlisting>
+@aspect "true"        
+class A {
+	
+	@overloadable "true"
+	operation getQualifiedName() : kermeta::standard::String 
+		post notVoid is not result == Void
+		is abstract
+}        
+      	</programlisting>
+      	<programlisting>
+@aspect "true"        
+class A {
+	
+	@overloadable "true"
+	operation getQualifiedName() : kermeta::standard::String is do
+		raise kermeta::exceptions::NotImplementedException.new
+	end
+}
+      	</programlisting>
+      	<programlisting>
+class A {
+
+	attribute name : kermeta::standard::String
+	operation getQualifiedName() : kermeta::standard::String is do
+		result := name
+	end
+}
+      	</programlisting>
+      	<para>
+       	In this sample, the first declaration of the operation is adds a post condition 
+       	to the operation. As it is abstract, it isn't in conflict with the other declarations.
+        </para>
+        <para>
+       	The second declaration, has a body. It implements a kind of default behavior for the operation that will be used
+       	if no other body is declared for this operation. this is useful when converting ecore models into kermeta for example.
+        </para>
+        <para>
+        The last definition is the one that will be used in this context.
+        </para>
+        <para>
+        
+        </para>
+      </section>
+       
+    </section>
+
+    <section>
       <title>File dependency</title>
 
       <section>
@@ -3258,8 +3400,9 @@ and op.name.indexOf("All")==-1}
 
         <para>In the current version of the EMF resource loader, you have to
         prepare your EMF Resource following these rules :</para>
+
         <itemizedlist>
-        	<listitem>
+          <listitem>
             <para>At the top of the source code where you will access your
             model, don't forget to add <literal>require "your_metamodel.ecore"
             </literal>so that you can access your metamodel in Kermeta.</para>
@@ -3273,13 +3416,15 @@ and op.name.indexOf("All")==-1}
             <para role="lineBreak">In this case, be careful that your kmt
             required metamodel is strictly equivalent to the ecore version of
             your metamodel that is used in createResource method.</para>
-          </listitem><listitem>
+          </listitem>
+
+          <listitem>
             <para>Then, create a repository and the resource that will contain
             the model instance that you want to load. In the following code
             example, <literal>uri</literal> stands for the uri (as relative or
             absolute path<footnote id="ftn2">
-                <para>in this case, don't forget to put the protocol,
-                i.e. platform:/, file:/, etc.</para>
+                <para>in this case, don't forget to put the protocol, i.e.
+                platform:/, file:/, etc.</para>
               </footnote>) of the model instance, and
             <literal>mm_uri</literal> is the uri of the meta-model of the
             model instance.</para>
@@ -3311,8 +3456,9 @@ and op.name.indexOf("All")==-1}
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Get the loaded __root__ instances (a Set&lt;Object&gt;) */</emphasis>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">result</emphasis> := resource.instances
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis></programlisting>
+
         <itemizedlist>
-        	<listitem>
+          <listitem>
             <para>Once you loaded your EMF resource, you can get its attribute
             <literal>instances</literal>, that contains all the objects that
             you created through your EMF generated reflexive editor. Now you
@@ -3777,11 +3923,14 @@ myvar := callvar </programlisting>
 
         <section>
           <title>CallFeature and SelfExpression</title>
+
           <itemizedlist>
-          	<listitem>
+            <listitem>
               <para>The type of <emphasis>self</emphasis> is a
               SelfExpression!</para>
-            </listitem><listitem>
+            </listitem>
+
+            <listitem>
               <para>The type of <emphasis>attr</emphasis> in the body of the
               operation myoperation is
               <emphasis>CallFeature</emphasis><emphasis role="strong">
@@ -4030,8 +4179,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
         <thead>
           <row>
-            <entry align="left">
-            <para>Keyword</para></entry>
+            <entry align="left"><para>Keyword</para></entry>
 
             <entry align="left"><para>Usage</para></entry>
           </row>
@@ -4039,463 +4187,336 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
         <tbody>
           <row>
-            <entry>
-            <para>@pre</para></entry>
+            <entry><para>@pre</para></entry>
 
-            <entry align="left">
-             <para>Represents self
-            before the call to this operation in the scope of a post
-            condition</para></entry>
+            <entry align="left"><para>Represents self before the call to this
+            operation in the scope of a post condition</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>abstract</para></entry>
+            <entry><para>abstract</para></entry>
 
-            <entry align="left">
-             <para>Modifier for class
-            or operation</para></entry>
+            <entry align="left"><para>Modifier for class or
+            operation</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>alias</para></entry>
+            <entry><para>alias</para></entry>
 
-            <entry>
-             <para>Defintion of a
-            primitive type</para></entry>
+            <entry><para>Defintion of a primitive type</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>and</para></entry>
+            <entry><para>and</para></entry>
 
-            <entry>
-             <para>Boolean
-            expression</para></entry>
+            <entry><para>Boolean expression</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>attribute</para></entry>
+            <entry><para>attribute</para></entry>
 
-            <entry>
-             <para>Definition of an
-            attribute</para></entry>
+            <entry><para>Definition of an attribute</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>bag</para></entry>
+            <entry><para>bag</para></entry>
 
-            <entry align="left">
-             <para>See <link
+            <entry align="left"><para>See <link
             linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>class</para></entry>
+            <entry><para>class</para></entry>
 
-            <entry align="left">
-             <para>Defintion of a
+            <entry align="left"><para>Defintion of a class</para></entry>
+          </row>
+
+          <row>
+            <entry><para>do</para></entry>
+
+            <entry align="left"><para>Beginning of a block</para></entry>
+          </row>
+
+          <row>
+            <entry><para>else</para></entry>
+
+            <entry align="left"><para>Else part of a conditional
+            instruction</para></entry>
+          </row>
+
+          <row>
+            <entry><para>end</para></entry>
+
+            <entry align="left"><para>End of a block</para></entry>
+          </row>
+
+          <row>
+            <entry><para>enumeration</para></entry>
+
+            <entry><para>Definition of an enumeration</para></entry>
+          </row>
+
+          <row>
+            <entry><para>extern</para></entry>
+
+            <entry align="left"><para>Call of a java static
+            operation</para></entry>
+          </row>
+
+          <row>
+            <entry><para>false</para></entry>
+
+            <entry><para>Boolean literal</para></entry>
+          </row>
+
+          <row>
+            <entry><para>from</para></entry>
+
+            <entry align="left"><para>Loop instruction</para></entry>
+          </row>
+
+          <row>
+            <entry><para>function</para></entry>
+
+            <entry align="left"><para>Declares a local function</para></entry>
+          </row>
+
+          <row>
+            <entry><para>getter</para></entry>
+
+            <entry><para>Declaration of a property getter</para></entry>
+          </row>
+
+          <row>
+            <entry><para>if</para></entry>
+
+            <entry align="left"><para>Conditional instruction</para></entry>
+          </row>
+
+          <row>
+            <entry><para>inherits</para></entry>
+
+            <entry align="left"><para>Declartion of the super classes of the
             class</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>do</para></entry>
+            <entry><para>init</para></entry>
 
-            <entry align="left">
-             <para>Beginning of a
-            block</para></entry>
+            <entry><para>Initialization of a variable</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>else</para></entry>
-
-            <entry align="left">
-             <para>Else part of a
-            conditional instruction</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>end</para></entry>
-
-            <entry align="left">
-             <para>End of a
-            block</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>enumeration</para></entry>
-
-            <entry>
-             <para>Definition of an
-            enumeration</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>extern</para></entry>
-
-            <entry align="left">
-             <para>Call of a java
-            static operation</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>false</para></entry>
-
-            <entry>
-             <para>Boolean
-            literal</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>from</para></entry>
-
-            <entry align="left">
-             <para>Loop
-            instruction</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>function</para></entry>
-
-            <entry align="left">
-             <para>Declares a local
-            function</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>getter</para></entry>
-
-            <entry>
-             <para>Declaration of a
-            property getter</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>if</para></entry>
-
-            <entry align="left">
-             <para>Conditional
-            instruction</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>inherits</para></entry>
-
-            <entry align="left">
-             <para>Declartion of the
-            super classes of the class</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>init</para></entry>
-
-            <entry>
-             <para>Initialization of a
-            variable</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>is</para></entry>
+            <entry><para>is</para></entry>
 
             <entry align="left"></entry>
           </row>
 
           <row>
-            <entry align="left">
-            <para>inv</para></entry>
+            <entry align="left"><para>inv</para></entry>
 
-            <entry align="left">
-             <para>Declaration of an
+            <entry align="left"><para>Declaration of an
             invariant</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>loop</para></entry>
+            <entry><para>loop</para></entry>
 
-            <entry align="left">
-             <para>Loop
-            instruction</para></entry>
+            <entry align="left"><para>Loop instruction</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>method</para></entry>
+            <entry><para>method</para></entry>
 
-            <entry align="left">
-             <para>Redefinition of an
-            operation</para></entry>
-          </row>
-		  <row>
-            <entry>
-            <para>modeltype</para></entry>
-
-            <entry align="left">
-             <para>reserved for a future use</para></entry>
-          </row>
-          <row>
-            <entry>
-            <para>not</para></entry>
-
-            <entry>
-             <para>Boolean
-            expression</para></entry>
-          </row>
-
-          <row>
-            <entry>
-            <para>operation</para></entry>
-
-            <entry align="left">
-             <para>Declaration of an
+            <entry align="left"><para>Redefinition of an
             operation</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>or</para></entry>
+            <entry><para>modeltype</para></entry>
 
-            <entry>
-             <para>Boolean
-            expression</para></entry>
+            <entry align="left"><para>reserved for a future use</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>oset</para></entry>
+            <entry><para>not</para></entry>
 
-            <entry align="left">
-             <para>See <link
+            <entry><para>Boolean expression</para></entry>
+          </row>
+
+          <row>
+            <entry><para>operation</para></entry>
+
+            <entry align="left"><para>Declaration of an
+            operation</para></entry>
+          </row>
+
+          <row>
+            <entry><para>or</para></entry>
+
+            <entry><para>Boolean expression</para></entry>
+          </row>
+
+          <row>
+            <entry><para>oset</para></entry>
+
+            <entry align="left"><para>See <link
             linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>package</para></entry>
+            <entry><para>package</para></entry>
 
-            <entry>
-             <para>Declaration of
-            package</para></entry>
+            <entry><para>Declaration of package</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>post</para></entry>
+            <entry><para>post</para></entry>
 
-            <entry>
-             <para>Declaration of a
-            postcondition</para></entry>
+            <entry><para>Declaration of a postcondition</para></entry>
           </row>
 
           <row>
-            <entry align="left">
-            <para>pre</para></entry>
+            <entry align="left"><para>pre</para></entry>
 
-            <entry align="left">
-             <para>Declaration of a
+            <entry align="left"><para>Declaration of a
             precondition</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>property</para></entry>
+            <entry><para>property</para></entry>
 
-            <entry>
-             <para>Declarion of a
-            derived property</para></entry>
+            <entry><para>Declarion of a derived property</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>raise</para></entry>
+            <entry><para>raise</para></entry>
 
-            <entry align="left">
-             <para>Throw an
-            exception</para></entry>
+            <entry align="left"><para>Throw an exception</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>raises</para></entry>
+            <entry><para>raises</para></entry>
 
-            <entry>
-             <para>Declares the
-            exception that an operation can throw</para></entry>
+            <entry><para>Declares the exception that an operation can
+            throw</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>readonly</para></entry>
+            <entry><para>readonly</para></entry>
 
-            <entry>
-             <para>Modifier for
-            properties</para></entry>
+            <entry><para>Modifier for properties</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>reference</para></entry>
+            <entry><para>reference</para></entry>
 
-            <entry align="left">
-             <para>Declaration of a
+            <entry align="left"><para>Declaration of a
             reference</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>require</para></entry>
+            <entry><para>require</para></entry>
 
-            <entry align="left">
-             <para>Declaration of a
-            required file</para></entry>
+            <entry align="left"><para>Declaration of a required
+            file</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>rescue</para></entry>
+            <entry><para>rescue</para></entry>
 
-            <entry align="left">
-             <para>Catch an
-            excetion</para></entry>
+            <entry align="left"><para>Catch an excetion</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>setter</para></entry>
+            <entry><para>setter</para></entry>
 
-            <entry>
-             <para>Declaration of
-            property setter</para></entry>
+            <entry><para>Declaration of property setter</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>self</para></entry>
+            <entry><para>self</para></entry>
 
-            <entry align="left">
-             <para>Special varaible
-            representing this instances</para></entry>
+            <entry align="left"><para>Special varaible representing this
+            instances</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>set </para></entry>
+            <entry><para>set </para></entry>
 
-            <entry align="left">
-             <para>See <link
+            <entry align="left"><para>See <link
             linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>seq</para></entry>
+            <entry><para>seq</para></entry>
 
-            <entry align="left">
-             <para>See <link
+            <entry align="left"><para>See <link
             linkend="array_and_collection">2.2.3</link> about
             collections</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>super </para></entry>
+            <entry><para>super </para></entry>
 
-            <entry align="left">
-             <para>Call to the super
+            <entry align="left"><para>Call to the super
             operation</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>then</para></entry>
+            <entry><para>then</para></entry>
 
-            <entry align="left">
-             <para>Then part of a
-            conditional instruction</para></entry>
+            <entry align="left"><para>Then part of a conditional
+            instruction</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>true</para></entry>
+            <entry><para>true</para></entry>
 
-            <entry align="left">
-             <para>Boolean
-            literal</para></entry>
+            <entry align="left"><para>Boolean literal</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>until</para></entry>
+            <entry><para>until</para></entry>
 
-            <entry align="left">
-             <para>Loop
-            condition</para></entry>
+            <entry align="left"><para>Loop condition</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>using</para></entry>
+            <entry><para>using</para></entry>
 
-            <entry>
-             <para>Shortcut used to
-            avoid to write the full qualified name</para></entry>
+            <entry><para>Shortcut used to avoid to write the full qualified
+            name</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>value</para></entry>
+            <entry><para>value</para></entry>
 
-            <entry align="left">
-             <para>Special variable
-            used in getter and setter to represent the actual value of the
+            <entry align="left"><para>Special variable used in getter and
+            setter to represent the actual value of the
             property</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>var</para></entry>
+            <entry><para>var</para></entry>
 
-            <entry>
-             <para>Declaration of a
-            variable</para></entry>
+            <entry><para>Declaration of a variable</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>void</para></entry>
+            <entry><para>void</para></entry>
 
-            <entry>
-             <para>Void
-            literal</para></entry>
+            <entry><para>Void literal</para></entry>
           </row>
 
           <row>
-            <entry>
-            <para>result</para></entry>
+            <entry><para>result</para></entry>
 
-            <entry>
-             <para>Special variable
-            used for the return value of an operation</para></entry>
+            <entry><para>Special variable used for the return value of an
+            operation</para></entry>
           </row>
         </tbody>
       </tgroup>
