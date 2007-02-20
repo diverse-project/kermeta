@@ -1,13 +1,22 @@
+
+
+/*$Id: Typecheck.java,v 1.3 2007-02-20 14:25:01 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
+* File : 	sdfg.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
 package fr.irisa.triskell.kermeta.kpm.actions;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.wizard.ProgressMonitorPart;
 
 import fr.irisa.triskell.kermeta.kpm.workspace.IAction;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
