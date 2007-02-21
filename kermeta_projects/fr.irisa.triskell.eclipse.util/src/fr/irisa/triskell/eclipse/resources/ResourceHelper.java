@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceHelper.java,v 1.1 2007-02-08 15:30:03 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.2 2007-02-21 15:16:16 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -64,7 +64,11 @@ public class ResourceHelper {
 	static public IFile getIFile(String filePath) {
 		String cleanPath = cleanIfNecessaryPath(filePath);
 		Path path = new Path(cleanPath);
-		return root.getFile(path);
+		try {
+			return root.getFile(path);
+		} catch (java.lang.IllegalArgumentException exception) {
+			return null;
+		}
 	}
 	
 	/**
@@ -91,7 +95,11 @@ public class ResourceHelper {
 	static public IFolder getIFolder(String folderPath) {
 		String cleanPath = cleanIfNecessaryPath(folderPath);
 		Path path = new Path(cleanPath);
-		return root.getFolder(path);	
+		try {
+			return root.getFolder(path);	
+		} catch (java.lang.IllegalArgumentException exception) {
+			return null;
+		}
 	}
 	
 	/**
