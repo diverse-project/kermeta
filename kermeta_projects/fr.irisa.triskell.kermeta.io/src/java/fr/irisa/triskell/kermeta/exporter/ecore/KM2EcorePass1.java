@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.37 2007-02-02 16:17:33 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.38 2007-02-22 12:45:20 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -114,10 +114,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// If the root package corresponds in fact to a sub package (for example, when it comes
 		// from a KMT file which package "declaration" is "package foo::bar;", we have to precreate
 		// its sup-packages?
-		Object epackage = accept(KermetaUnit.getRootPackageForSerialization(root_p));
+		EPackage epackage = (EPackage) accept(KermetaUnit.getRootPackageForSerialization(root_p));
 		
 		// Save the unit dependencies as EAnnotations of the root package
-		setUnitDependencies((EPackage) epackage);
+		setUnitDependencies(epackage);
 		
 		ecoreResource.getContents().add(epackage);
 		return epackage;
@@ -150,7 +150,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		for (Object p : node.getNestedPackage()) {
 			Package next = (Package)p;
 			current_ppath += "/" + next.getName();
-			newEPackage.getESubpackages().add(accept(next));
+			newEPackage.getESubpackages().add((EPackage) accept(next));
 			int cl = current_ppath.length();
 			current_ppath = current_ppath.substring(0, cl - next.getName().length()-1);
 		}
@@ -160,11 +160,11 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			Object o = accept((EObject)next);
 			if (o != null) {
 				if (o instanceof EClass) {
-					newEPackage.getEClassifiers().add(o);
+					newEPackage.getEClassifiers().add((EClass) o);
 				} else if (o instanceof EDataType) {
-					newEPackage.getEClassifiers().add(o);
+					newEPackage.getEClassifiers().add((EClassifier) o);
 				} else if (o instanceof EPackage) {
-					newEPackage.getESubpackages().add(o);
+					newEPackage.getESubpackages().add((EPackage) o);
 				}
 			} else
 				throw new KM2ECoreConversionException("A type definition in package '"+node.getName() + "' could not be resolved (" + ((TypeDefinition) next).getName() + ")");
@@ -203,7 +203,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		for (Object next : node.getOwnedTypeDefinition()) {
 			Object o = accept((EObject) next);
 			if (o != null)
-				newEPackage.getEClassifiers().add(o);
+				newEPackage.getEClassifiers().add((EClassifier) o);
 			else
 				throw new KM2ECoreConversionException("A type definition in model type '" + node.getName() + "' could not be resolved (" + o + ")");
 		}
@@ -251,7 +251,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			for (Object next : node.getOwnedAttribute()) {
 				Object o = accept((EObject)next);
 				if (o != null)
-					newEClass.getEStructuralFeatures().add(o);
+					newEClass.getEStructuralFeatures().add((EStructuralFeature) o);
 				else
 					throw new KM2ECoreConversionException("An attribute in class definition '"+node.getName() + "' could not be resolved");
 			}
@@ -260,7 +260,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			for (Object next : node.getOwnedOperation()) {
 				Object o = accept((EObject)next);
 				if (o != null)
-					newEClass.getEOperations().add(o);
+					newEClass.getEOperations().add((EOperation) o);
 				else
 					throw new KM2ECoreConversionException("An operation in package '"+node.getName() + "' could not be resolved");				
 			}
@@ -471,7 +471,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		{
 			Object o = accept((EObject)next);
 			if (o != null)
-				newEOperation.getEParameters().add(o);
+				newEOperation.getEParameters().add((EParameter) o);
 			else
 				throw new KM2ECoreConversionException("A tag in '"+node.getName() + "' could not be resolved");				
 		}

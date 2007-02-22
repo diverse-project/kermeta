@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.32 2007-02-05 08:59:05 dtouzet Exp $
+/* $Id: KM2EcorePass2.java,v 1.33 2007-02-22 12:45:20 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -145,7 +145,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			Object o = accept(t); 
 			if(o != null) {
 				// Add type to supertypes list
-				newEClass.getESuperTypes().add(o);
+				newEClass.getESuperTypes().add((EClass) o);
 
 				// In case type has type variable bindings, add a superclass bindings annotation
 				// to generated EClass

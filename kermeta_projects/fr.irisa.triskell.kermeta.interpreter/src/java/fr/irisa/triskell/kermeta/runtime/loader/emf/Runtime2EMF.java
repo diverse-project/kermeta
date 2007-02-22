@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.47 2006-11-16 14:10:16 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.48 2007-02-22 12:51:56 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -138,7 +138,7 @@ public class Runtime2EMF {
 		// Note: emfObject2 entry is only used for eObject retrieval during the
 		// save process!
 		for (RuntimeObject o : instances)
-		{	resource.getContents().add(o.getData().get("r2e.emfObject")); }	
+		{	resource.getContents().add((EObject) o.getData().get("r2e.emfObject")); }	
 	}
 
 	/**

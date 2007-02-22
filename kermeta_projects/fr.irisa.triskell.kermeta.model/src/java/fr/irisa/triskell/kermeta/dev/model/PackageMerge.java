@@ -130,8 +130,7 @@ public class PackageMerge {
 			other = (EClassifier)classes.get(i);
 			mine = (EClassifier)findbyName(result.getEClassifiers(), other.getName());
 			if ( mine == null || !mine.eClass().getName().equals(other.eClass().getName())) {
-				EObject new_copy = EcoreUtil.copy(other);
-				result.getEClassifiers().add(new_copy);
+				result.getEClassifiers().add((EClassifier) EcoreUtil.copy(other));
 			}
 			else {
 				mergeClassifiers(mine, other);
@@ -144,7 +143,7 @@ public class PackageMerge {
 			ops = (EPackage)packs.get(i);
 			mps = (EPackage)findbyName(result.getESubpackages(), ops.getName());
 			if (mps == null) {
-				result.getESubpackages().add(EcoreUtil.copy(ops));
+				result.getESubpackages().add((EPackage) EcoreUtil.copy(ops));
 			}
 			else {
 				merge(mps, ops, false);
@@ -186,7 +185,7 @@ public class PackageMerge {
 			oas = (EStructuralFeature)atts.get(i);
 			mas = (EStructuralFeature)findbyName(result.getEStructuralFeatures(), oas.getName());
 			if (mas == null) {
-				result.getEStructuralFeatures().add(EcoreUtil.copy(oas));
+				result.getEStructuralFeatures().add((EStructuralFeature) EcoreUtil.copy(oas));
 			}
 			else {
 				// attribute is in both model
@@ -201,7 +200,7 @@ public class PackageMerge {
 			oop = (EOperation)ops.get(i);
 			mop = (EOperation)findbyName(result.getEOperations(), oop.getName());
 			if (mop == null) {
-				result.getEOperations().add(EcoreUtil.copy(oop));
+				result.getEOperations().add((EOperation) EcoreUtil.copy(oop));
 			}
 			else {
 				System.err.println("MERGE WARNING : found two operation named'" + oop.getName() + "' in class '" + result.getName() +"', kept only one.");
@@ -219,7 +218,7 @@ public class PackageMerge {
 			ols = (EEnumLiteral)lits.get(i);
 			mls = (EEnumLiteral)findbyName(result.getELiterals(), ols.getName());
 			if (mls == null) {
-				result.getELiterals().add(EcoreUtil.copy(ols));
+				result.getELiterals().add((EEnumLiteral) EcoreUtil.copy(ols));
 			}
 			else {
 				// attribute is in both model
