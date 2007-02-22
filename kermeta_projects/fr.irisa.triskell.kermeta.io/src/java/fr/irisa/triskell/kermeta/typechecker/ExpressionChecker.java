@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.36 2007-01-29 16:38:31 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.37 2007-02-22 14:28:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -267,6 +267,19 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		        result = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)result).type));
 		   
 	    }
+	    
+	    /* ********************************************************* */
+	    /* HERE STARTS THE IMPLEMENTATION FOR TYPING SPECIAL METHODS */
+	    /* ********************************************************* */
+	   
+	    // THE METHOD ISTYPE ON OBJECT (The OCL like cast)
+	    if (op.getOperation() == TypeCheckerContext.getObjectAsTypeOperation()) {
+	    	// the operation has one Class parameter; 
+	    	// if this parameter is a TypeLitteral then the return type of the operation corresponds to that type litteral
+	    	Expression asType_param = (Expression)exp.getParameters().get(0);
+	    	if (asType_param instanceof TypeLiteral)
+	    		result = getTypeFromTypeLiteral((TypeLiteral)asType_param);
+	    }
 	
 	    // THE METHOD NEW ON CLASS
 	    if (op.getOperation() == TypeCheckerContext.getClassNewOperation()) {
@@ -277,6 +290,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	                unit.messages.addError("TYPE-CHECKER : [Semantically] abstract class "+ result +" should not be instanciated.", (Expression)exp);
 	        }
 	    }
+	    
+	    // THE OPERATION NEW ON MODELTYPE
 	    if ((op.getOperation() == TypeCheckerContext.getModelTypeNewOperation())
 	    		|| (op.getOperation() == TypeCheckerContext.getModelTypeVariableNewOperation())
 	    		|| (op.getOperation() == TypeCheckerContext.getObjectTypeVariableNewOperation())) {
@@ -313,6 +328,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    		unit.messages.addError("TYPE-CHECKER : clone() may only be called on a type literal.", exp);
 	    	}
 	    }
+	    
 	    // THE FILTER OPERATION ON MODEL
 	    if (op.getOperation() == TypeCheckerContext.getModelFilterOperation()) {
 	    	//Can only filter on one of the classes belonging to the model type or virtual types belonging to the model type variable
@@ -348,6 +364,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    	}
 	    	
 	    }
+	    
 	    //The add operation on Model
 	    if (op.getOperation() == TypeCheckerContext.getModelAddOperation()) {
 	    	// The type of the parameter must be a subtype of one of the types contained by the model-type of the receiver
@@ -376,6 +393,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    	    unit.messages.addError("TYPE-CHECKER : Add operation takes only one parameter", (Expression)exp);
 	    	}
 	    }
+	    
 	    //The remove operation on Model
 	    if (op.getOperation() == TypeCheckerContext.getModelRemoveOperation()) {
 	    	// The type of the parameter must be a subtype of one of the types contained by the model-type of the receiver

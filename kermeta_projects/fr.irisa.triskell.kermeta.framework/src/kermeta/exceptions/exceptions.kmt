@@ -7,7 +7,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.10 2006-12-07 08:55:47 dvojtise Exp $
+ * $Id: exceptions.kmt,v 1.11 2007-02-22 14:28:10 ffleurey Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -67,6 +67,11 @@ class RuntimeError inherits Exception {
  * Occurs when a feature is called on void
  */
 class CallOnVoidTarget inherits RuntimeError {}
+
+/**
+ * Occurs when a cast (Object::asType operation) fails
+ */
+class TypeCastError inherits RuntimeError {}
 
 /**
  * Use this exception whenyou want to forbid the access to an unimplemented operation 

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.27 2006-12-07 10:05:15 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.28 2007-02-22 14:28:06 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -148,6 +148,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","043_testUML2km.main.kmt" );
 
+		testWithFile("test/kmt_testcases","045_testContainsInCollection.main.kmt" );
+
 		testWithFile("test/kmt_testcases","046_testClassEquals.main.kmt" );
 
 		testWithFile("test/kmt_testcases","051_scopeVisibility.main.kmt" );
@@ -163,6 +165,16 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","057_testIsNotSameAs.main.kmt" );
 
 		testWithFile("test/kmt_testcases","058_testEqualsOnCollection.main.kmt" );
+
+		testWithFile("test/kmt_testcases","059_testFreezeOnNewClass.main.kmt" );
+
+		testWithFile("test/kmt_testcases","060_testNewOnModelTypeClass.main.kmt" );
+
+		testWithFile("test/kmt_testcases","061_weaving_in_kermeta_aspect1.main.kmt" );
+
+		testWithFile("test/kmt_testcases","62_testIsInstanceOf.main.kmt" );
+
+		testWithFile("test/kmt_testcases","63_testAsType.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

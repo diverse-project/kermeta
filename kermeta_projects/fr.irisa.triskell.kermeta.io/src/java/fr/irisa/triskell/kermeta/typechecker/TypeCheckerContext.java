@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.17 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeCheckerContext.java,v 1.18 2007-02-22 14:28:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -44,7 +44,8 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 public class TypeCheckerContext {
 
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
-	    classNew = null;
+	    objectAsType = null;
+		classNew = null;
 	    classClone = null;
 	    modelTypeNew = null;
 	    objectTypeVariableNew = null;
@@ -88,6 +89,20 @@ public class TypeCheckerContext {
 		    KermetaUnit.internalLog.info("Type checker initialized.");
 		}
 		
+	}
+	
+	protected static Operation getObjectAsTypeOperation() {
+	    if (objectAsType == null) {
+	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ObjectType).type).getTypeDefinition()).getOwnedOperation().iterator();
+	       while(it.hasNext()) {
+	           Operation op = (Operation)it.next();
+	           if (op.getName().equals("asType")) {
+	        	   objectAsType = op;
+	               break;
+	           }
+	       }
+	    }
+	    return objectAsType;
 	}
 	
 	protected static Operation getClassNewOperation() {
@@ -255,6 +270,8 @@ public class TypeCheckerContext {
 	protected static Type StringType;
 	protected static Type BooleanType;
 	protected static Type StdIOType;
+	
+	protected static Operation objectAsType;
 	
 	protected static Operation classNew;
 	protected static Operation classClone;

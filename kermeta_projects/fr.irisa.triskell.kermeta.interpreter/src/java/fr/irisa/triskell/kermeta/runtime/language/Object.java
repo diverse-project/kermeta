@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.14 2006-12-12 14:13:39 dtouzet Exp $
+/* $Id: Object.java,v 1.15 2007-02-22 14:28:06 ffleurey Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -6,7 +6,7 @@
  * ----------------------------------------------------------------------------
  * Creation date : Jul 7, 2005
  * Authors       : 
- *		Zoé Drey <zdrey@irisa.fr>
+ *		Zoï¿½ Drey <zdrey@irisa.fr>
  * Description : 
  * 		Implementation of Kermeta base type Object
  */
@@ -19,6 +19,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
@@ -41,6 +42,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 /**
  *  Implementation of Kermeta base type Object
  *  This act as a wrapper to the concrete java runtime object in memory 
@@ -60,6 +62,34 @@ public class Object {
 	public static RuntimeObject container(RuntimeObject self) {
 		if (self.getContainer() == null) return self.getFactory().getMemory().voidINSTANCE;
 		return self.getContainer();
+	}
+	
+	/** Implementation of method isInstanceOf called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type) */
+	public static RuntimeObject isInstanceOf(RuntimeObject self, RuntimeObject cls) {
+
+		fr.irisa.triskell.kermeta.language.structure.Class param_class = null;
+		fr.irisa.triskell.kermeta.language.structure.Class actual_class = null;
+
+		// Get the class for the given parameter :
+		if(cls.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+			param_class = (fr.irisa.triskell.kermeta.language.structure.Class) cls.getData().get("kcoreObject");
+
+		// Get the class of self :
+		if(getMetaClass(self).getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+			actual_class = (fr.irisa.triskell.kermeta.language.structure.Class) getMetaClass(self).getData().get("kcoreObject");
+		
+		// This is just for robusness, it should never occur
+		if (actual_class == null)
+			throw new KermetaInterpreterError("Error while executing operation isInstanceOf on type Object : The class corresponding to self type could not be determined");
+		if (param_class == null)
+			throw new KermetaInterpreterError("Error while executing operation isInstanceOf on type Object : The class corresponding to parameter type could not be determined");
+		
+		// Check type conformance and return the result :
+		if (TypeConformanceChecker.conforms(param_class, actual_class))
+			return self.getFactory().getMemory().trueINSTANCE;
+		else 
+			return self.getFactory().getMemory().falseINSTANCE;
 	}
 	
     /** Implementation of method checkInvariants called as :
