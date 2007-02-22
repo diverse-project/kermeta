@@ -1,6 +1,6 @@
 
 
-/*$Id: KermetaWorkspace.java,v 1.25 2007-02-20 14:24:01 ftanguy Exp $
+/*$Id: KermetaWorkspace.java,v 1.26 2007-02-22 08:12:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -302,7 +302,7 @@ public class KermetaWorkspace {
 				IFile ifile = o.getFile();
 				KermetaProject project = getKermetaProject( ifile.getProject() );
 				if ( project == null )
-					declareInterestExtern(o);
+					declareInterestExtern(o, threading);
 				else
 					declareInterestIntern(o, project, threading);		
 			}
@@ -359,14 +359,18 @@ public class KermetaWorkspace {
 	 * This method is used when an object interested in a resource from a non kermeta project wants to declare an interest.
 	 * @param o
 	 */
-	private void declareInterestExtern(final KermetaUnitInterest o) {
-		Runnable r = new Runnable() {
-			public void run() {
-				updateKermetaUnit(o);
-			}
-		};
-		Thread t = new Thread(r);
-		t.start();
+	private void declareInterestExtern(final KermetaUnitInterest o, boolean threading) {
+		if ( ! threading )
+			updateKermetaUnit(o);
+		else {
+			Runnable r = new Runnable() {
+				public void run() {
+					updateKermetaUnit(o);
+				}
+			};
+			Thread t = new Thread(r);
+			t.start();
+		}
 	}
 	
 	/**
