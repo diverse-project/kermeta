@@ -27,11 +27,15 @@ public class ParsingStrategy implements IReconcilingStrategy {
 	public void reconcile(IRegion partition) {	
 		if ( ! EditorConfiguration.getEditorCompletion().isCompleting() ) {
 			KMTUnit unit = (KMTUnit) KermetaWorkspace.getInstance().getKermetaUnit( editor.getFile() );
-			unit.messages.deleteParsingErrors();
-			KermetaParserHelper.parse( unit, editor.getFileContent() );
-			KermetaMarkersHelper.clearMarkers(editor.getFile());
-			KermetaMarkersHelper.createMarkers(editor.getFile(), unit);
 			
+			if ( unit != null ) {
+			
+				unit.messages.deleteParsingErrors();
+				KermetaParserHelper.parse( unit, editor.getFileContent() );
+				KermetaMarkersHelper.clearMarkers(editor.getFile());
+				KermetaMarkersHelper.createMarkers(editor.getFile(), unit);
+			
+			}
 		/*	
 			ASTNode root = unit.getMctAST().getRoot();
 			
