@@ -8,12 +8,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ocl.expressions.ExpressionsFactory;
-import org.eclipse.emf.ocl.expressions.OCLExpression;
-import org.eclipse.emf.ocl.expressions.impl.ExpressionsFactoryImpl;
+//import org.eclipse.emf.ocl.expressions.ExpressionsFactory;
+//import org.eclipse.emf.ocl.expressions.OCLExpression;
+//import org.eclipse.emf.ocl.expressions.impl.ExpressionsFactoryImpl;
 import org.eclipse.emf.ocl.internal.parser.OCLLexer;
-import org.eclipse.emf.ocl.parser.EcoreEnvironmentFactory;
-import org.eclipse.emf.ocl.parser.EnvironmentFactory;
+//import org.eclipse.emf.ocl.parser.EcoreEnvironmentFactory;
+//import org.eclipse.emf.ocl.parser.EnvironmentFactory;
 import org.eclipse.emf.ocl.parser.ParserException;
 import java.io.*;
 
@@ -28,6 +28,11 @@ public class TestOCLParser {
 		}
 	}
 
+	public static void parseOcl(String oclSource, String uri){
+		TestOCLParser oclp = new TestOCLParser();
+		oclp.run(oclSource, uri);
+	}
+	
 	public void run(String ocltext, String uri) {
 		MyOCLParser parser = createParser(ocltext); //$NON-NLS-1$
 		EObject constraint = null;
@@ -58,7 +63,7 @@ public class TestOCLParser {
 	"         if true and true then true else true endif " +
     " endpackage";
 
-	public static final String oclInputFileName = "AllSpeeds.ocl";
+	//public static final String oclInputFileName = "AllSpeeds.ocl";
 	
 	  /**
 	  * Fetch the entire contents of a text file, and return it in a String.
@@ -109,12 +114,12 @@ public class TestOCLParser {
 	  }
 	
 	public static void main(String[] args) {
-		TestOCLParser oclp = new TestOCLParser();
-		URI oclSourceURI = URI.createFileURI(oclInputFileName);
+		//TestOCLParser oclp = new TestOCLParser();
+		//URI oclSourceURI = URI.createFileURI(oclInputFileName);
 		// TODO: nasty absolute path name here, dont know how to use the Eclipse URI library to get relative ones.
 		File oclSourceFile = new File("/home/mskipper/runtime-EclipseApplication//fr.irisa.triskell.kermeta.ocl/ocl/allSpeeds.ocl");
 		String oclSource =  getContents(oclSourceFile);
-		oclp.run(oclSource, "model/allSpeedsOCL.xmi");
+		parseOcl(oclSource, "model/allSpeedsOCL.xmi");
 	}
 
 	public static void ifTest() {

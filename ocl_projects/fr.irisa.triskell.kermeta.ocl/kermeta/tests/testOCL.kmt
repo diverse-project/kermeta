@@ -1,0 +1,29 @@
+/* $Id: testOCL.kmt,v 1.1 2007-02-22 13:56:40 bitterjug Exp $
+ * Creation date: February 19, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "oclTests::Main"
+@mainOperation "main"
+
+
+package oclTests;
+
+
+require kermeta
+require "../../../someUnit/src/newUnit.kmt"
+require "oclTests.kmt"
+
+using newUnit
+
+class Main
+{
+	operation main() : Void is 
+	  do 
+		    var testRunner : TestRunner init TestRunner.new
+		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(OclTests)
+    		testRunner.run(suite)
+            testRunner.printLogs
+  	  end
+}
