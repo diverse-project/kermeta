@@ -1,13 +1,9 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.3 2007-02-13 13:06:44 bitterjug Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.4 2007-02-22 18:56:10 bitterjug Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : Mar 28, 2006
- * Authors : 
- *  Didier Vojtisek <dvojtise@irisa.fr>
- *  Damien Pollet   <dpollet@irisa.fr>
- *  Vincent Mah�	<vmahe@irisa.fr>
+ * Authors :  Olivier Brais, Mark Skipper
  * 
  */
  
@@ -31,29 +27,19 @@ class OCLKMTPrinter
 { 
 	attribute repository: EMFRepository
 	attribute modelURI: String
-
-	operation initialize() is 
-	do
-//		modelURI :="../../model/speedsOCL1.xmi"
-//		modelURI :="../../model/speedsOCL2.xmi"
-//		modelURI :="../../model/speedsOCL3.xmi"
-//		modelURI :="../../model/speedsOCL4.xmi"
-//		modelURI :="../../model/speedsOCL5.xmi"
-		modelURI :="../../model/allSpeedsOCL.xmi"		
-		repository := EMFRepository.new
-		helper := OCLHelpers::OCLHelper.new
-    	helper.initialize
-		helper.loadOCLModel(EMFRepository.new, modelURI)
-	end
-	   
     reference helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute model : Set<Object> 
     
     operation main(): Void is
-    do
-    	initialize
-     	var visitor : Ocl2kmtVisitor init Ocl2kmtVisitor.new
-     	var model : Set<Object> init helper.loadOCLModel(repository, modelURI)
-		helper.getPackageDeclaration(model).accept(visitor)
-    end
+		do
+			modelURI := "../../model/allSpeeds.xmi"		
+			repository := EMFRepository.new
+			helper := OCLHelpers::OCLHelper.new
+	    	helper.initialize
+	     	visitor := Ocl2kmtVisitor.new
+	     	model  := helper.loadOCLModel(repository, modelURI)
+			helper.getPackageDeclaration(model).accept(visitor)
+	    end
 
 }

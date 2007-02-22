@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.2 2007-02-14 19:16:25 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.3 2007-02-22 18:56:10 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -15,23 +15,70 @@ require "../../mmodel/oclcstvisitor.kmt"
 require "../../mmodel/Ecore.ecore"
 
 using kermeta::standard
+using kermeta::exceptions
 using ocl::cst
 using ocl::cst::visitors
 using kermeta::utils
+using kermeta::io
 
-class Writer {
-    operation write(s: String) : Void is
-	    do
-	    	stdio.write(s)
-	    end
-    
-    operation writeln(s: String): Void is
-	    do
-	    	stdio.writeln(s)
-	    end
+class StringWriter inherits StdIO
+{
+
+	reference s: String
+
+	method write(object: String) is
+		do
+			if s == void then
+				s := object
+			else
+				s := s + object
+			end
+		end
+		
+	method writeln(object: String) is
+		do
+			self.write(object)
+			self.write(" ")
+		end
+		
+	method read(prompt: String): String is
+		do
+			var e: Exception init Exception.new
+			e.message := "Sorry, you can't read from a writer"
+			raise e
+		end
 }
 
- class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor, Writer{
+ class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor {
+
+		reference  __io: StdIO 
+		
+		operation getIo(): StdIO is
+			do
+				if __io == void then
+					__io := stdio
+				end
+				result := __io
+			end
+		
+		/**
+		 * Use this to set a string writer to get the generated source as a string
+		 */
+		operation setIo(newio: StdIO) is
+			do
+				self.__io := newio
+			end
+		
+	    operation write(s: String) : Void is
+		    do
+		    	getIo.write(s)
+		    end
+    
+	    operation writeln(s: String): Void is
+		    do
+		    	getIo.writeln(s)
+		    end
+
   
   		attribute __varName : Integer
   		attribute __invariantName : Integer
@@ -69,7 +116,8 @@ class Writer {
 			do
 				write("package ")
 				visitable.pathNameCS.accept(self)
-				write(";\n\n")
+				writeln("")
+				writeln("")
 				visitable.contextDecls.each{ c |
 						c.accept(self)
 					}
@@ -87,12 +135,12 @@ class Writer {
 
 		method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : Void is
 			do
-				write("@aspect \"true\" \n")
+				writeln("@aspect \"true\"")
 				write("class ")
 				visitable.pathNameCS.accept(self)
-				writeln("\n{")
+				writeln("{")
 				visitable.invOrDefCS.accept(self)
-		      	writeln("\n} ")
+		      	writeln("} ")
 			end
 
 		method visitOperationContextDeclCS(visitable : OperationContextDeclCS) : Void is
@@ -139,9 +187,11 @@ class Writer {
 
 		method visitInvCS(visitable : InvCS) : Void is
 			do
-				write("inv  " + nextInvariantName + " is \n do\n " )
+				writeln("inv  " + nextInvariantName + " is ")
+				writeln("do" )
 				visitable.expressionCS.accept(self)
-				write("\nend \n" )
+				writeln("")
+				writeln("end" )
 			end
 
 		method visitDefCS(visitable : DefCS) : Void is
@@ -152,10 +202,12 @@ class Writer {
 		method visitDefExpressionCS(visitable : DefExpressionCS) : Void is
 			do
 				visitable.operationCS.accept(self)
-				write(" is\ndo\n")
+				writeln(" is")
+				writeln("do")
 				write("  result := ")
 				visitable.expressionCS.accept(self)
-				write("\nend")
+				writeln("")
+				write("end")
 			end
 
 		method visitPathNameCS(visitable : PathNameCS) : Void is
@@ -175,9 +227,15 @@ class Writer {
 				visitable.simpleNameCS.accept(self)
 			end
 
+       
+          
 		method visitSimpleNameCS(visitable : SimpleNameCS) : Void is
 			do
-				write(visitable.~value.toString)
+			    var name : String init visitable.~value.toString
+			    if isKermetaKeyword(name) then
+			    	write("~")
+			    end
+				write(name)
 			end
 
 		method visitTypeCS(visitable : TypeCS) : Void is
@@ -217,13 +275,15 @@ class Writer {
 				write(" do ")
 				//variables
 				visitable.variables.each{ v |
-						write("\n var " )
+						writeln("")
+						write("var " )
 						v.accept(self)
 					}
-				write("\n")
+				writeln("")
 				//body
 				visitable.inExpression.accept(self)
-				write("\nend ")
+				writeln("")
+				writeln("end")
 			end
 
 		method visitIfExpCS(visitable : IfExpCS) : Void is
@@ -272,16 +332,16 @@ class Writer {
 				var varName :  String init nextVarName
 				//TODO: do we have to infer the element type here?
 				var type : String init visitable.collectionType.name +"<" + "????????" +">"
-				write("do\n")
+				writeln("do")
 				write("var " + varName + " : " + type)
-				write("init " + type + ".new\n")
+				writeln("init " + type + ".new")
 				visitable.collectionLiteralParts.each{ clp |
 						write(varName + ".add(")
 						clp.accept(self)
-						write(")\n")
+						writeln(")")
 					}
-				write(varName)
-			    write("\nend")
+				writeln(varName)
+			    write("end")
 			end
 
 		method visitTupleLiteralExpCS(visitable : TupleLiteralExpCS) : Void is
@@ -364,6 +424,7 @@ class Writer {
         				addIterator("isUnique", functionWithSameName)
         				addIterator("any", FunctionIP.new.withName("detect"))
         				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size == 1"))
+        				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", doNothing)
         				addIterator("collectNested", doNothing)
         				addIterator("sortedBy", doNothing)
@@ -455,6 +516,15 @@ class Writer {
           				__operators.put("oclAsType", CastOp.new)          				
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
           				__operators.put("not", PrefixOp.new.withName("not"))          				
+          				__operators.put("notEmpty", FunctionCallOp.new.withName("size").withSuffix(" > 0"))          		
+          				__operators.put("isEmpty", FunctionCallOp.new.withName("size").withSuffix(" = 0"))          		          				
+           				__operators.put("includesAll", FunctionCallOp.new.withName("size").withSuffix(" = 0"))          		          				
+           				__operators.put("union", FunctionCallOp.new)          		          				
+           				__operators.put("intersection", FunctionCallOp.new)          		          				
+           				__operators.put("incluiding", UnimplementedOp.new)  // these need type inference
+           				__operators.put("excluding", UnimplementedOp.new)  // or something clever with types
+           				// TODO: set difference in OCL is "-", this might take some detecting
+          				__operators.put("symmetricDifference", UnimplementedOp.new)
           			end
           			result := __operators
 				end
@@ -481,11 +551,70 @@ class Writer {
 				visit(visitable)			
 			end
 
+ operation isKermetaKeyword(word: String): Boolean is
+          do
+          		result :=	word.equals("package") or
+							word.equals("require") or
+							word.equals("includeFilter") or
+							word.equals("excludeFilter") or
+							word.equals("using") or
+							word.equals("inherits") or
+							word.equals("class") or
+							//word.equals("@pre" ) or
+							word.equals("pre") or
+							word.equals("post") or
+							word.equals("inv") or
+							word.equals("abstract") or
+							word.equals("Self") or
+							word.equals("Void") or
+							word.equals("attribute") or
+							word.equals("reference") or
+							word.equals("property") or
+							word.equals("readonly") or
+							word.equals("getter") or
+							word.equals("is") or
+							word.equals("setter") or
+							word.equals("raises") or
+							word.equals("select") or
+							word.equals("operation") or
+							word.equals("method") or
+							word.equals("bag") or
+							word.equals("set") or
+							word.equals("seq") or
+							word.equals("oset") or
+							word.equals("alias") or
+							word.equals("enumeration") or
+							word.equals("and") or
+							word.equals("or") or
+							word.equals("not") or
+							//word.equals("self") or
+							word.equals("super") or
+							word.equals("do") or
+							word.equals("end") or
+							word.equals("function") or
+							word.equals("rescue") or
+							word.equals("from") or
+							word.equals("until") or
+							word.equals("loop") or
+							word.equals("if") or
+							word.equals("then") or
+							word.equals("else") or
+							word.equals("raise") or
+							word.equals("var") or
+							word.equals("init") or
+							word.equals("extern") or
+							word.equals("true") or
+							word.equals("false") or
+							word.equals("void") or
+							word.equals("result") or
+							word.equals("value") 
+          end
+
 	}
 	
 
 
-class OperatorPolicy inherits Writer {
+class OperatorPolicy  {
 
 	attribute name: String
 	
@@ -495,10 +624,39 @@ class OperatorPolicy inherits Writer {
 			result := self
 		end
 		
+	attribute suffix: String
+	
+    operation withSuffix(theSuffix: String): OperatorPolicy is
+	    do
+	    	suffix := theSuffix
+	    	result := self
+	    end
+	    
+		
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-	 do
-	 	writeln("\n Unimplemented policy: " + oclOp.simpleNameCS.~value.toString)
-	 end
+	  do
+		 	var e : Exception  init Exception.new
+		 	e.message := "Unimplemented policy: " + oclOp.simpleNameCS.~value.toString
+		 	raise e
+	  end
+	  
+	operation getPrefix():String is
+	  do
+	  		if suffix != void then
+	  		  	result := "("
+	  		 else
+	  		 	result := ""
+	  		end
+	  end
+	  
+ 	operation getSuffix(): String is
+   	  do
+   	  		if suffix != void then
+   	  			result := suffix + ")"
+   	  		else
+   	  			result := ""
+   	  		end
+   	  end
 
 }
 
@@ -507,13 +665,13 @@ class SimpleOP inherits OperatorPolicy {
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 				oclOp.source.accept(visitor)		
-				write(" ")
+				visitor.write(" ")
 				if name != void then
-					write(name)
+					visitor.write(name)
 				else
 					oclOp.simpleNameCS.accept(visitor)
 				end
-				write(" ")
+				visitor.write(" ")
 				// TODO: assert: visitable.arguments.size == 1 ??? 
 				oclOp.arguments.each{ arg |
 						arg.accept(visitor)
@@ -525,14 +683,24 @@ class ImpliesOP inherits OperatorPolicy {
 
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
-			write("not (")
+			visitor.write("not (")
 			oclOp.source.accept(visitor)
-			write(") or ( ")
+			visitor.write(") or ( ")
 			// TODO: assert: visitable.arguments.size == 1 ??? 
 			oclOp.arguments.each{ arg |
 				arg.accept(visitor)
 		  	}
-  			writeln(")")
+  			visitor.writeln(")")
+		 end
+}
+
+class UnimplementedOp inherits OperatorPolicy {
+
+	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+			var e: Exception init Exception.new
+			e.message := "Unimplemented Operation type: " + oclOp.simpleNameCS.~value.toString
+			raise e
 		 end
 }
 
@@ -540,21 +708,21 @@ class CastOp inherits OperatorPolicy {
 
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
-			write("do")
-			write(" var ")
+			visitor.write("do")
+			visitor.write(" var ")
 			var localVarName : String init visitor.nextVarName
-			write(localVarName)			
-			write(" : ")
+			visitor.write(localVarName)			
+			visitor.write(" : ")
 			// TODO: assert: visitable.arguments.size == 1 ??? 
 			// TODO: assert: the unique parameter is a type name ??? 
 			oclOp.arguments.each{ arg |
 				arg.accept(visitor)
 		  	}
-		  	write(" init ")
+		  	visitor.write(" init ")
 			oclOp.source.accept(visitor)			
-			write( "  ")
-			write(localVarName)			
-  			write( " end ")
+			visitor.write( "  ")
+			visitor.write(localVarName)			
+  			visitor.write( " end ")
 		 end
 	
 }
@@ -564,7 +732,7 @@ class NotNullOp inherits OperatorPolicy {
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		do
 			oclOp.source.accept(visitor)
-			write (" == void")
+			visitor.write (" == void")
 		end
 		
 }
@@ -573,10 +741,10 @@ class PrefixOp inherits OperatorPolicy {
 
 	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
 		do
-			write(name)
-			write(" (")
+			visitor.write(name)
+			visitor.write(" (")
 			oclOp.source.accept(visitor)			
-			write(")")
+			visitor.write(")")
 		end
 		
 }
@@ -589,32 +757,34 @@ class FunctionCallOp inherits OperatorPolicy {
 		 do
 		 // TODO: only if the accessor type is 'arrow', 
 		// if its not arrow, should treat is as a normal operation call if thats possible from here
+		    visitor.write(getPrefix)
 			oclOp.source.accept(visitor)
-			write(".")
+			visitor.write(".")
 			if name != void then
-				write(name)
+				visitor.write(name)
 			else
 				oclOp.simpleNameCS.accept(visitor)
 			end
-			write("(")
+			visitor.write("(")
 			from
 				var it : Iterator<OCLExpressionCS> init oclOp.arguments.iterator
 			until
 				it.isOff
 			loop
-				write(" ")
+				visitor.write(" ")
 				it.next.accept(visitor)
 				if  it.hasNext then
-					write(",") 
+					visitor.write(",") 
 				else
-					write(" ")
+					visitor.write(" ")
 				end
 			end
-  			write(")")
+  			visitor.write(")")
+  			visitor.write(getSuffix)
 		 end
 }
 
-class IteratorPolicy inherits Writer {
+class IteratorPolicy {
 	attribute name: String
 	
     operation withName(functionName: String): IteratorPolicy is
@@ -633,7 +803,9 @@ class IteratorPolicy inherits Writer {
 	    
 	operation generate(oclIterator: IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
-		 	writeln("\n Unimplemented policy: " + oclIterator.simpleNameCS.~value.toString)
+		 	var e : Exception init Exception.new
+		 	e.message := " Unimplemented policy: " + oclIterator.simpleNameCS.~value.toString
+		 	raise e
 		 end
 }
 
@@ -642,19 +814,19 @@ class SimpleIteratorIP inherits IteratorPolicy {
 	operation generate(oclIterator: IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 			oclIterator.source.accept(visitor)
-			write(".")
+			visitor.write(".")
 			if name == void then
-				write(oclIterator.simpleNameCS.~value.toString )
+				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
-				write(name)
+				visitor.write(name)
 			end
-			write("{ ")
+			visitor.write("{ ")
 			oclIterator.variable1.accept(visitor)
-			write(" | ")
+			visitor.write(" | ")
 			oclIterator.body.accept(visitor)
-			write("}")
+			visitor.write("}")
 			if suffix != void then
-				write(suffix)
+				visitor.write(suffix)
 			end
 		 end
 }
@@ -666,14 +838,14 @@ class FunctionIP inherits IteratorPolicy {
 	operation generate(oclIterator: IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
 		 	if name == void then
-				write(oclIterator.simpleNameCS.~value.toString )
+				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
-				writeln(name)
+				visitor.writeln(name)
 			end
-			write("( ")
+			visitor.write("( ")
 			oclIterator.source.accept(visitor)
-			write(", \"")
+			visitor.write(", \"")
 			oclIterator.body.accept(visitor)
-			write("\")")
+			visitor.write("\")")
 		 end
 }					

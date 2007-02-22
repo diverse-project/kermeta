@@ -1,4 +1,4 @@
-/* $Id: oclTests.kmt,v 1.1 2007-02-22 13:56:40 bitterjug Exp $
+/* $Id: oclTests.kmt,v 1.2 2007-02-22 18:56:09 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -14,7 +14,7 @@ require kermeta
 require "../../../someUnit/src/newUnit.kmt"
 //require "file://home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/fr.irisa.triskell.kermeta.ocl.jar"
 require "file://home/mskipper/runtime-EclipseApplication/holder/fr.irisa.triskell.kermeta.ocl.jar"
-require "oclTests.kmt"
+//require "oclTests.kmt"
 //require "file://home/mskipper/runtime-EclipseApplication/lib/net.sourceforge.lpg.lpgjavaruntime_1.0.0.200612060942.jar" includeFilter ("someting")
 //require "file://home/mskipper/runtime-EclipseApplication/lib/org.eclipse.emf.ocl_1.0.1.v200611161546.jar" includeFilter ("someting")
 //require "file://home/mskipper/runtime-EclipseApplication/lib/org.eclipse.emf.ocl_1.1.0.v200612211659.jar" includeFilter ("someting")

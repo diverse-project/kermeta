@@ -1,7 +1,7 @@
 package fr.irisa.triskell.kermeta.ocl;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.*;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -28,10 +28,7 @@ public class TestOCLParser {
 		}
 	}
 
-	public static void parseOcl(String oclSource, String uri){
-		TestOCLParser oclp = new TestOCLParser();
-		oclp.run(oclSource, uri);
-	}
+		
 	
 	public void run(String ocltext, String uri) {
 		MyOCLParser parser = createParser(ocltext); //$NON-NLS-1$
@@ -113,13 +110,29 @@ public class TestOCLParser {
 	    return contents.toString();
 	  }
 	
+	 public static List<String> filenames = new ArrayList(); 
+	 static {
+		 filenames.add("allSpeeds");
+		 filenames.add("01-booleanLiterals");
+		 filenames.add("02-logicalConjunction");
+	 }
+	 
 	public static void main(String[] args) {
-		//TestOCLParser oclp = new TestOCLParser();
-		//URI oclSourceURI = URI.createFileURI(oclInputFileName);
-		// TODO: nasty absolute path name here, dont know how to use the Eclipse URI library to get relative ones.
-		File oclSourceFile = new File("/home/mskipper/runtime-EclipseApplication//fr.irisa.triskell.kermeta.ocl/ocl/allSpeeds.ocl");
-		String oclSource =  getContents(oclSourceFile);
-		parseOcl(oclSource, "model/allSpeedsOCL.xmi");
+		new TestOCLParser().generateAllXmi();
+		//ifTest();
+	}
+	
+	public void generateAllXmi(){
+		String baseDir = "/home/mskipper/runtime-EclipseApplication//fr.irisa.triskell.kermeta.ocl/";
+		System.out.println("Processing: OCL SOURCE" );
+		for (String fn: filenames){
+			String oclSourceFileName = baseDir + "ocl/" + fn + ".ocl";
+			String xmiOutputFileName = "model/" + fn + ".xmi";
+			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
+			File oclSourceFile = new File(oclSourceFileName);
+			String oclSource =  getContents(oclSourceFile);
+			new TestOCLParser().run(oclSource, xmiOutputFileName);
+		}
 	}
 
 	public static void ifTest() {

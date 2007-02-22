@@ -221,11 +221,11 @@ context Expression def:
     conformsTo(dt : DataType) : Boolean =
       self.type() = dt 
 
-context FeatureNavigation inv:
-    self.path->excluding(self.path->first())->forAll(rcp |
-      let previous : RichComponentProperty =
-        self.path->at(self.path->indexOf(rcp) - 1) in
-      previous.type.part->includes(rcp)) 
+-- context FeatureNavigation inv:
+--     self.path->excluding(self.path->first())->forAll(rcp |
+--       let previous : RichComponentProperty =
+--         self.path->at(self.path->indexOf(rcp) - 1) in
+--       previous.type.part->includes(rcp)) 
 
 context FeatureNavigation def: 
     type() : DataType =

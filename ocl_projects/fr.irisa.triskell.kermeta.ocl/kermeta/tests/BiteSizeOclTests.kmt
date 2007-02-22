@@ -1,0 +1,57 @@
+/* $Id: BiteSizeOclTests.kmt,v 1.1 2007-02-22 18:56:09 bitterjug Exp $
+ * Creation date: February 22, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package oclTests;
+
+require kermeta
+require "../../../someUnit/src/newUnit.kmt"
+require "../transformations/ocl2kmtVisitor.kmt"
+require "../helpers/OCLHelper.kmt"
+
+using newUnit
+using kermeta::standard
+using kermeta::persistence
+using ocl2kmt
+
+class  BiteSizeOclTests  inherits TestCase
+{
+
+	attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute model : Set<Object> 
+
+				    
+	method setUp() is
+		do
+			repository := EMFRepository.new		
+			helper := OCLHelpers::OCLHelper.new
+	    	helper.initialize
+	     	visitor := Ocl2kmtVisitor.new
+		end
+		
+	operation visitOclXmi(filename: String): String is
+		do
+			var sourceFileName : String init "../../model/" + filename + ".xmi"
+			var io : StringWriter init StringWriter.new
+			visitor.setIo(io)
+	     	model  := helper.loadOCLModel(repository, sourceFileName)
+			helper.getPackageDeclaration(model).accept(visitor)
+			result := io.s
+		end
+
+	operation testSimpleOCLExpression(): Void is
+		do
+			var kmt : String  init  visitOclXmi("01-booleanLiterals")
+			var expected : String init "package p  @aspect \"true\" class X{ inv  inv1 is  do true end }  @aspect \"true\" class Y{ inv  inv2 is  do false end }  "
+			assertWithMsg(kmt.equals(expected), "\n[" + expected + "] != \n[" + kmt + "]")
+		end
+	  
+}
