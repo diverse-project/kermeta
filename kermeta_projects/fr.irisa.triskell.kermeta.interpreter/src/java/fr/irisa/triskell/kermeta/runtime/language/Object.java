@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.15 2007-02-22 14:28:06 ffleurey Exp $
+/* $Id: Object.java,v 1.16 2007-02-23 10:06:35 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -6,7 +6,7 @@
  * ----------------------------------------------------------------------------
  * Creation date : Jul 7, 2005
  * Authors       : 
- *		Zoï¿½ Drey <zdrey@irisa.fr>
+ *		Zoé Drey <zdrey@irisa.fr>
  * Description : 
  * 		Implementation of Kermeta base type Object
  */
@@ -17,8 +17,6 @@ package fr.irisa.triskell.kermeta.runtime.language;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
-
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
@@ -28,8 +26,6 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
-import fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage;
-import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
@@ -39,7 +35,6 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
@@ -160,13 +155,6 @@ public class Object {
 	}
 
 	
-	/** Implementation of method isSameAs called as :
-	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.isSameAs(element) */
-	public static RuntimeObject isSameAs(RuntimeObject self, RuntimeObject param0) {
-		if(self.getOId() == param0.getOId()) return self.getFactory().getMemory().trueINSTANCE;
-		else return self.getFactory().getMemory().falseINSTANCE;
-	}
-	
 
 	/** Implementation of method get called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property) */
@@ -267,6 +255,12 @@ public class Object {
 		return Integer.create((int)self.getOId(), self.getFactory());
 	}
 
+	/** Implementation of method container called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode() */
+	public static RuntimeObject hashcode(RuntimeObject self) {
+		return Integer.create((int)self.hashCode(), self.getFactory());
+	}
+	
 	/** Implementation of method container called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze() */
 	public static RuntimeObject freeze(RuntimeObject self) {
@@ -450,5 +444,6 @@ public class Object {
 		else
 			return "";
 	}
+	
 }
 /* END OF FILE */
