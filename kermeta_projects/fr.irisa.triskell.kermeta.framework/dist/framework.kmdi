@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@diagrams.0">
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/0.11" activeDiagram="//@subdiagrams.8/@diagrams.0">
   <model href="framework.km#/0"/>
   <diagrams position="0,0" size="100,100" name="No name" viewport="0,0">
     <property key="pageFormatName" value="A4"/>
@@ -11,7 +11,7 @@
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
     <property key="orientation" value="portrait"/>
-    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
       <element href="framework.km#/0"/>
     </semanticModel>
   </diagrams>
@@ -27,7 +27,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="landscape"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.8"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="584,42" size="-1,-1">
@@ -439,7 +439,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="portrait"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.7"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="27,27" size="-1,-1">
@@ -588,7 +588,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="landscape"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.6"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="115,42" size="-1,-1">
@@ -938,7 +938,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="landscape"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.3"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="104,157" size="-1,-1">
@@ -1279,13 +1279,13 @@
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.3/@diagrams.0/@contained.2/@anchorage.0 //@subdiagrams.3/@diagrams.0/@contained.1/@anchorage.0">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -44, 55, 101]</waypoints>
-        <waypoints>[0, -44, 55, 101]</waypoints>
+        <waypoints>[0, -45, 55, 100]</waypoints>
+        <waypoints>[-55, -45, 0, 100]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.3/@diagrams.0/@contained.3/@anchorage.0 //@subdiagrams.3/@diagrams.0/@contained.2/@anchorage.0">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
-        <waypoints>[0, -56, 217, 68]</waypoints>
-        <waypoints>[-217, -56, 0, 68]</waypoints>
+        <waypoints>[0, -56, 205, 68]</waypoints>
+        <waypoints>[-205, -56, 0, 68]</waypoints>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.3/@diagrams.0/@contained.5/@anchorage.0 //@subdiagrams.3/@diagrams.0/@contained.2/@anchorage.0">
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
@@ -1397,7 +1397,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="landscape"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.1/@nestedPackage.0"/>
       </semanticModel>
     </diagrams>
@@ -1414,7 +1414,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="portrait"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.5"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="40,44" size="-1,-1">
@@ -1453,10 +1453,123 @@
   </subdiagrams>
   <subdiagrams>
     <model href="framework.km#/0/@nestedPackage.4"/>
+    <diagrams position="0,0" size="100,100" name="Package view" viewport="0,0">
+      <property key="pageFormatName" value="A5"/>
+      <property key="diagramWidth" value="592"/>
+      <property key="diagramHeight" value="840"/>
+      <property key="pageMarginName" value="Small Margin"/>
+      <property key="diagramTopMargin" value="20"/>
+      <property key="diagramBottomMargin" value="20"/>
+      <property key="diagramLeftMargin" value="20"/>
+      <property key="diagramRightMargin" value="20"/>
+      <property key="orientation" value="portrait"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
+        <element href="framework.km#/0/@nestedPackage.4"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" position="36,25" size="-1,-1">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.3"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.4"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.5"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.6"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.7"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.8"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@ownedOperation.9"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="223,23" size="-1,-1">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+    </diagrams>
   </subdiagrams>
   <subdiagrams>
     <model href="framework.km#/0/@nestedPackage.2"/>
-    <diagrams position="0,0" size="100,100" name="Hierarchy and containment view" zoom="0.75" viewport="659,396">
+    <diagrams position="0,0" size="100,100" name="Hierarchy and containment view" viewport="0,0">
       <property key="pageFormatName" value="A1"/>
       <property key="diagramWidth" value="2376"/>
       <property key="diagramHeight" value="3364"/>
@@ -1466,7 +1579,7 @@
       <property key="diagramLeftMargin" value="20"/>
       <property key="diagramRightMargin" value="20"/>
       <property key="orientation" value="portrait"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
         <element href="framework.km#/0/@nestedPackage.2"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="474,32" size="-1,-1">
@@ -2772,5 +2885,423 @@
   </subdiagrams>
   <subdiagrams>
     <model href="framework.km#/0/@nestedPackage.0"/>
+    <diagrams position="0,0" size="100,100" name="Kermeta framework collections" viewport="0,0">
+      <property key="pageFormatName" value="A5"/>
+      <property key="diagramWidth" value="592"/>
+      <property key="diagramHeight" value="840"/>
+      <property key="pageMarginName" value="Small Margin"/>
+      <property key="diagramTopMargin" value="20"/>
+      <property key="diagramBottomMargin" value="20"/>
+      <property key="diagramLeftMargin" value="20"/>
+      <property key="diagramRightMargin" value="20"/>
+      <property key="orientation" value="portrait"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd">
+        <element href="framework.km#/0/@nestedPackage.0"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" position="188,10" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.8/@diagrams.0/@contained.7 //@subdiagrams.8/@diagrams.0/@contained.9 //@subdiagrams.8/@diagrams.0/@contained.11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.3"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.4"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.5"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.6"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.7"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.8"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.9"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.10"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.11"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.12"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.13"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.14"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.15"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.16"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.17"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.18"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13/@ownedOperation.19"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="7,386" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.8/@diagrams.0/@contained.7 //@subdiagrams.8/@diagrams.0/@contained.8"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.3"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.4"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.5"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.6"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="372,386" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.8/@diagrams.0/@contained.9 //@subdiagrams.8/@diagrams.0/@contained.10"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.3"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.4"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.5"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.15/@ownedOperation.6"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="202,417" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.8/@diagrams.0/@contained.11 //@subdiagrams.8/@diagrams.0/@contained.12 //@subdiagrams.8/@diagrams.0/@contained.13"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.3"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.4"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.5"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@ownedOperation.6"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="57,626" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.8/@diagrams.0/@contained.8 //@subdiagrams.8/@diagrams.0/@contained.12"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.17/@ownedOperation.3"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="319,626" size="-1,-1">
+        <anchorage graphEdge="//@subdiagrams.8/@diagrams.0/@contained.10 //@subdiagrams.8/@diagrams.0/@contained.13"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.18/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="425,10" size="-1,-1">
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="6"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="7"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19"/>
+          </semanticModel>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19/@ownedOperation.0"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19/@ownedOperation.1"/>
+            </semanticModel>
+          </contained>
+          <contained xsi:type="di:GraphNode" position="0,0" size="20,20">
+            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+              <element href="framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19/@ownedOperation.2"/>
+            </semanticModel>
+          </contained>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.1/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.4/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.1/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -97, 73, 120]</waypoints>
+        <waypoints>[-73, -97, 0, 120]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.2/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.5/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.2/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -66, -32, 136]</waypoints>
+        <waypoints>[32, -66, 0, 136]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.3/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.0/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.4/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.3/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -85, -134, 89]</waypoints>
+        <waypoints>[134, -85, 0, 89]</waypoints>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.8/@diagrams.0/@contained.5/@anchorage.0 //@subdiagrams.8/@diagrams.0/@contained.3/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+        <waypoints>[0, -64, 200, 116]</waypoints>
+        <waypoints>[-200, -64, 0, 116]</waypoints>
+      </contained>
+    </diagrams>
   </subdiagrams>
 </diagrams:Diagrams>
