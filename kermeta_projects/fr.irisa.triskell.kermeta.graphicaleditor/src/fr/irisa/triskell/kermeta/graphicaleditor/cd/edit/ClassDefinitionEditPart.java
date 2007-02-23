@@ -1,9 +1,11 @@
 /*******************************************************************************
- * $Id: ClassDefinitionEditPart.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: ClassDefinitionEditPart.java,v 1.2 2007-02-23 09:28:43 dvojtise Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
 package fr.irisa.triskell.kermeta.graphicaleditor.cd.edit;
+
+import java.util.Iterator;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
@@ -32,9 +34,11 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.ClassDefinitionFigur
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.ClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.InheritanceEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PropertyEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 /**
  * The ClassDefinition object controller
@@ -125,9 +129,20 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 		ComposedLabel lbl = (ComposedLabel) fig.getLabel();
 
 		if (getClassDefinition() != null
-				&& getClassDefinition().getName() != null)
-			lbl.setMain(getClassDefinition().getName());
-
+				&& getClassDefinition().getName() != null){
+			ClassDefinition cd = getClassDefinition();
+			String typeParameterString ="";
+			if(!cd.getTypeParameter().isEmpty()){
+				typeParameterString="<";
+				Iterator it = cd.getTypeParameter().iterator();
+				while(it.hasNext()){
+					typeParameterString+=KermetaUtils.getDefault().getLabelForType((Type)it.next());
+					if(it.hasNext()) typeParameterString+=", ";
+				}
+				typeParameterString+=">";
+			}
+			lbl.setMain(cd.getName()+typeParameterString);
+		}
 		String imageLabel = "";
 		if (getClassDefinition().isIsAbstract()) {
 			imageLabel = "CLASSDEFINITION_ABSTRACT";
