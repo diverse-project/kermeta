@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.1 2007-02-22 18:56:09 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.2 2007-02-23 16:48:38 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -13,7 +13,7 @@ package oclTests;
 require kermeta
 require "../../../someUnit/src/newUnit.kmt"
 require "../transformations/ocl2kmtVisitor.kmt"
-require "../helpers/OCLHelper.kmt"
+require "../helpers/OCLHelper.kmt" 
 
 using newUnit
 using kermeta::standard
@@ -22,7 +22,6 @@ using ocl2kmt
 
 class  BiteSizeOclTests  inherits TestCase
 {
-
 	attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
@@ -43,15 +42,113 @@ class  BiteSizeOclTests  inherits TestCase
 			var io : StringWriter init StringWriter.new
 			visitor.setIo(io)
 	     	model  := helper.loadOCLModel(repository, sourceFileName)
-			helper.getPackageDeclaration(model).accept(visitor)
+//			helper.getPackageDeclaration(model).accept(visitor)
+			helper.getInvExpression(model).accept(visitor)
 			result := io.s
 		end
 
-	operation testSimpleOCLExpression(): Void is
+	operation assertEqual(expected: String, actual: String): Void is
 		do
-			var kmt : String  init  visitOclXmi("01-booleanLiterals")
-			var expected : String init "package p  @aspect \"true\" class X{ inv  inv1 is  do true end }  @aspect \"true\" class Y{ inv  inv2 is  do false end }  "
-			assertWithMsg(kmt.equals(expected), "\n[" + expected + "] != \n[" + kmt + "]")
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+		end
+		
+	operation test01(): Void is
+		do
+			var kmt : String  init  visitOclXmi("01-booleanLiteralTrue")
+			assertEqual("true", kmt)
+		end
+
+	operation test02(): Void is
+		do
+			var kmt : String  init  visitOclXmi("02-booleanLiteralFalse")
+			assertEqual("false", kmt)
+		end
+		
+	operation test03(): Void is
+		do
+			var kmt : String  init  visitOclXmi("03-logicalConjunction")
+			assertEqual("true.~and(true)", kmt)
 		end
 	  
+	operation test04(): Void is
+		do
+			var kmt : String  init  visitOclXmi("04-logicalDisjunction")
+			assertEqual("true.~or(true)", kmt)
+		end
+		
+	operation test05(): Void is
+		do
+			var kmt : String  init  visitOclXmi("05-equality")
+			assertEqual("true.equals(true)", kmt)
+		end
+
+	operation test06(): Void is
+		do
+			var kmt : String  init  visitOclXmi("06-integerLiteral")
+			assertEqual("5.uminus", kmt)
+		end
+
+	operation test07(): Void is
+		do
+			var kmt : String  init  visitOclXmi("07-integerAddition")
+			assertEqual("3.plus(4)", kmt)
+
+		end
+
+	operation test08(): Void is
+		do
+			var kmt : String  init  visitOclXmi("08-integerSubtraction")
+			assertEqual("3.minus(4)", kmt)
+		end
+
+	operation test09(): Void is
+		// xor
+		do
+			var kmt : String  init  visitOclXmi("09") 
+			assertEqual("true.xor(true)", kmt)
+		end
+
+	operation test10(): Void is
+ 		// implies
+		do
+			var kmt : String  init  visitOclXmi("10") 
+			assertEqual("true.~not.~or(true) ", kmt)
+		end
+		
+	operation test11(): Void is
+ 		// not
+		do
+			var kmt : String  init  visitOclXmi("11") 
+			assertEqual("true.~not", kmt)
+		end
+
+	operation test12(): Void is
+		do
+			var kmt : String  init  visitOclXmi("12") 
+			assertEqual("3.isGreater(4)", kmt)
+		end
+
+	operation test13(): Void is
+		do
+			var kmt : String  init  visitOclXmi("13") 
+			assertEqual("3.isGreaterOrEqual(4)", kmt)
+		end
+
+	operation test14(): Void is
+		do
+			var kmt : String  init  visitOclXmi("14") 
+			assertEqual("3.isLower(4)", kmt)
+		end
+
+	operation test15(): Void is
+		do
+			var kmt : String  init  visitOclXmi("15") 
+			assertEqual("3.isLowerOrEqual(4)", kmt)
+		end
+		
+	operation test16(): Void is
+		do
+			var kmt : String  init  visitOclXmi("16") 
+			assertEqual("3.equals(4).~not", kmt)
+		end
 }

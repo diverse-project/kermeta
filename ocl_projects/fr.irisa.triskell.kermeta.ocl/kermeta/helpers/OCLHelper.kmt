@@ -1,4 +1,4 @@
-/* $Id: OCLHelper.kmt,v 1.4 2007-02-13 13:06:44 bitterjug Exp $
+/* $Id: OCLHelper.kmt,v 1.5 2007-02-23 16:48:38 bitterjug Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -54,6 +54,17 @@ class OCLHelper
 		     	   packageDeclaration != void
 	    		}
 	    end
+	    
+	operation getInvExpression(os: Set<Object>): ocl::cst::OCLExpressionCS is
+		do
+			var invariant : InvCS 
+			invariant ?= os.detect{ o |
+				var expression : ocl::cst::InvCS
+				expression ?= o
+				expression != void
+			}
+			result := invariant.expressionCS
+		end
 
   }
   

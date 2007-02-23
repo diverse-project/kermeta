@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.3 2007-02-22 18:56:10 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.4 2007-02-23 16:48:38 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -13,6 +13,7 @@ package ocl2kmt;
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "../../mmodel/Ecore.ecore"
+require "OperatorPolicies.kmt"  
 
 using kermeta::standard
 using kermeta::exceptions
@@ -492,30 +493,30 @@ class StringWriter inherits StdIO
 			getter is 
 				do
           			if __operators == void then
-          			    var impliesOp : OperatorPolicy init ImpliesOP.new
+          			    var functionCall : OperatorPolicy init FunctionCallOp.new
           			    var simpleOp : OperatorPolicy init SimpleOP.new
           				__operators := Hashtable<String, OperatorPolicy>.new
-          				__operators.put("implies", impliesOp)
-          				__operators.put("and", simpleOp)
-          				__operators.put("or", simpleOp)
-          				__operators.put("xor", simpleOp)
-          				__operators.put("=", SimpleOP.new.withName("=="))
-          				__operators.put("<", simpleOp)
-          				__operators.put("<=", simpleOp)
-          				__operators.put(">", simpleOp)
-          				__operators.put(">=", simpleOp)
-          				__operators.put("<>", SimpleOP.new.withName("!="))
-          				__operators.put("+", simpleOp)
-          				__operators.put("-", simpleOp)
-          				__operators.put("*", simpleOp)
-          				__operators.put("/", simpleOp)
+          				__operators.put("implies", ImpliesOP.new)
+          				__operators.put("and", functionCall)
+          				__operators.put("or", functionCall)
+          				__operators.put("xor", functionCall)
+          				__operators.put("=", FunctionCallOp.new.withName("equals"))
+          				__operators.put("<", FunctionCallOp.new.withName("isLower"))
+          				__operators.put("<=", FunctionCallOp.new.withName("isLowerOrEqual"))
+          				__operators.put(">",  FunctionCallOp.new.withName("isGreater"))
+          				__operators.put(">=",  FunctionCallOp.new.withName("isGreaterOrEqual"))
+          				__operators.put("<>",  FunctionCallOp.new.withName("equals").withSuffix(".~not"))
+          				__operators.put("+",  FunctionCallOp.new.withName("plus"))
+          				__operators.put("-", MinusSignOp.new)
+          				__operators.put("*",  FunctionCallOp.new.withName("mult"))
+          				__operators.put("/",  FunctionCallOp.new.withName("div"))
           				__operators.put("includes", FunctionCallOp.new.withName("contains"))
           				__operators.put("size", FunctionCallOp.new)
           				__operators.put("at", FunctionCallOp.new.withName("elementAt"))
           				__operators.put("indexOf", FunctionCallOp.new)
           				__operators.put("oclAsType", CastOp.new)          				
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
-          				__operators.put("not", PrefixOp.new.withName("not"))          				
+          				__operators.put("not", functionCall)          				
           				__operators.put("notEmpty", FunctionCallOp.new.withName("size").withSuffix(" > 0"))          		
           				__operators.put("isEmpty", FunctionCallOp.new.withName("size").withSuffix(" = 0"))          		          				
            				__operators.put("includesAll", FunctionCallOp.new.withName("size").withSuffix(" = 0"))          		          				
@@ -587,7 +588,7 @@ class StringWriter inherits StdIO
 							word.equals("and") or
 							word.equals("or") or
 							word.equals("not") or
-							//word.equals("self") or
+							word.equals("self") or
 							word.equals("super") or
 							word.equals("do") or
 							word.equals("end") or
@@ -612,177 +613,6 @@ class StringWriter inherits StdIO
 
 	}
 	
-
-
-class OperatorPolicy  {
-
-	attribute name: String
-	
-	operation withName(opName: String): OperatorPolicy is
-		do
-			name := opName
-			result := self
-		end
-		
-	attribute suffix: String
-	
-    operation withSuffix(theSuffix: String): OperatorPolicy is
-	    do
-	    	suffix := theSuffix
-	    	result := self
-	    end
-	    
-		
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-	  do
-		 	var e : Exception  init Exception.new
-		 	e.message := "Unimplemented policy: " + oclOp.simpleNameCS.~value.toString
-		 	raise e
-	  end
-	  
-	operation getPrefix():String is
-	  do
-	  		if suffix != void then
-	  		  	result := "("
-	  		 else
-	  		 	result := ""
-	  		end
-	  end
-	  
- 	operation getSuffix(): String is
-   	  do
-   	  		if suffix != void then
-   	  			result := suffix + ")"
-   	  		else
-   	  			result := ""
-   	  		end
-   	  end
-
-}
-
-class SimpleOP inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
-				oclOp.source.accept(visitor)		
-				visitor.write(" ")
-				if name != void then
-					visitor.write(name)
-				else
-					oclOp.simpleNameCS.accept(visitor)
-				end
-				visitor.write(" ")
-				// TODO: assert: visitable.arguments.size == 1 ??? 
-				oclOp.arguments.each{ arg |
-						arg.accept(visitor)
-			  	}
-		 end
-}
-
-class ImpliesOP inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
-			visitor.write("not (")
-			oclOp.source.accept(visitor)
-			visitor.write(") or ( ")
-			// TODO: assert: visitable.arguments.size == 1 ??? 
-			oclOp.arguments.each{ arg |
-				arg.accept(visitor)
-		  	}
-  			visitor.writeln(")")
-		 end
-}
-
-class UnimplementedOp inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
-			var e: Exception init Exception.new
-			e.message := "Unimplemented Operation type: " + oclOp.simpleNameCS.~value.toString
-			raise e
-		 end
-}
-
-class CastOp inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
-			visitor.write("do")
-			visitor.write(" var ")
-			var localVarName : String init visitor.nextVarName
-			visitor.write(localVarName)			
-			visitor.write(" : ")
-			// TODO: assert: visitable.arguments.size == 1 ??? 
-			// TODO: assert: the unique parameter is a type name ??? 
-			oclOp.arguments.each{ arg |
-				arg.accept(visitor)
-		  	}
-		  	visitor.write(" init ")
-			oclOp.source.accept(visitor)			
-			visitor.write( "  ")
-			visitor.write(localVarName)			
-  			visitor.write( " end ")
-		 end
-	
-}
-
-class NotNullOp inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		do
-			oclOp.source.accept(visitor)
-			visitor.write (" == void")
-		end
-		
-}
-
-class PrefixOp inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		do
-			visitor.write(name)
-			visitor.write(" (")
-			oclOp.source.accept(visitor)			
-			visitor.write(")")
-		end
-		
-}
-
-
-
-class FunctionCallOp inherits OperatorPolicy {
-
-	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
-		 do
-		 // TODO: only if the accessor type is 'arrow', 
-		// if its not arrow, should treat is as a normal operation call if thats possible from here
-		    visitor.write(getPrefix)
-			oclOp.source.accept(visitor)
-			visitor.write(".")
-			if name != void then
-				visitor.write(name)
-			else
-				oclOp.simpleNameCS.accept(visitor)
-			end
-			visitor.write("(")
-			from
-				var it : Iterator<OCLExpressionCS> init oclOp.arguments.iterator
-			until
-				it.isOff
-			loop
-				visitor.write(" ")
-				it.next.accept(visitor)
-				if  it.hasNext then
-					visitor.write(",") 
-				else
-					visitor.write(" ")
-				end
-			end
-  			visitor.write(")")
-  			visitor.write(getSuffix)
-		 end
-}
 
 class IteratorPolicy {
 	attribute name: String
