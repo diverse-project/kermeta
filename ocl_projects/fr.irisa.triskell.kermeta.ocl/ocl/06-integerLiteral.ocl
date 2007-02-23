@@ -1,0 +1,6 @@
+package p
+
+context Y inv:
+	-5
+
+endpackage

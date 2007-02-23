@@ -1,0 +1,6 @@
+package p
+-- 11: not
+context Y inv:
+	not true
+
+endpackage

@@ -1,0 +1,6 @@
+package p
+-- xor
+context Y inv:
+	true xor true
+
+endpackage

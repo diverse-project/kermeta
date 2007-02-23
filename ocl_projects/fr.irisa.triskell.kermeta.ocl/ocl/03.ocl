@@ -1,0 +1,5 @@
+package p
+
+context Thing inv:
+	true and true
+endpackage

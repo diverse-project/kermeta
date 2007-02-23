@@ -1,0 +1,6 @@
+package p
+-- 13: greater or equals
+context Y inv:
+	3 >= 4
+
+endpackage

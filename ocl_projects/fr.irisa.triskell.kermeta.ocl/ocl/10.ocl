@@ -1,0 +1,6 @@
+package p
+-- implies
+context Y inv:
+	true implies true
+
+endpackage

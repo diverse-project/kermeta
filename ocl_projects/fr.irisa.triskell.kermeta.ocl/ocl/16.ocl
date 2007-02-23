@@ -1,0 +1,6 @@
+package p
+-- 16: not equals
+context Y inv:
+	3 <> 4
+
+endpackage
