@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.25 2007-01-23 15:23:31 dvojtise Exp $
+ * $Id: collections.kmt,v 1.26 2007-02-23 09:53:13 dvojtise Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -22,24 +22,34 @@ using kermeta::exceptions
  
 /**
  * Collection is the root abstract class for all kermeta collections
+ * <img src="./figures/collections_view.png">
  */
 abstract class Collection<G>
 {
 	/**
 	 * Add an element in the collection
+	 * default implementation : no check for duplicates
 	 */
 	operation add(element : G) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)
 	end
 	
 	/**
-	 * Remove an element from the collection
+	 * Removes element from the collection
+	 * default implementation : 
+	 * if the collection contains more than one object that is equals to element, they are all removed
+	 * Do nothing if the element is not in the collection
 	 */
-	operation remove(element : G) : Void is do
-		var elem : G init self.detect { e | e == element }
-		if (elem != void) then
-			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
-		end
+	operation remove(element : G) : Void 
+		post doesntContainsElementAnymore is not contains(element)
+	is do
+		var elem : G
+		from elem := self.detect { e | e == element }
+        until elem == void
+        loop
+        	extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+            elem := self.detect { e | e == element }
+        end
 	end
 	
 	/**
@@ -58,6 +68,11 @@ abstract class Collection<G>
 	
 	/**
 	 * returns true if the collection contains element
+	 * note that it is based on G equals() (semantic equals), which means that it will check  
+	 * mycollection.exists{ e | e.equals(myValue) }
+	 * Depending on the concrete type of the collection, it may contain duplicates.
+	 * If you wish to check if a physical element is contained by the collection you must use the oid()
+	 * ex:  mycollection.exists{e | e.oid == myvalue.oid }
 	 */
 	operation contains(element : G) : Boolean is do
 		result := false
@@ -170,8 +185,9 @@ abstract class Collection<G>
     end
 	
 	/**
-	 * returns a new Collection with the results of running collector 
+	 * returns a new Collection with the results of running collector function 
 	 * once for every element in self.
+	 * 
 	 */
 	operation collect<T> (collector : <G -> T>) : Sequence<T> is do
 		result := Sequence<T>.new
@@ -183,7 +199,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Passes each element of the collection to detector. 
+	 * Passes each element of the collection to detector function. 
 	 * Returns the first element for which detector is not false. 
 	 * Returns void if no object matches.
 	 */
@@ -199,7 +215,7 @@ abstract class Collection<G>
 	end
 		
 	/**
-	 * Passes each element of the collection to selector. 
+	 * Passes each element of the collection to selector function. 
 	 * returns a Collection for all elements for which selector is true
 	 */
 	operation select(selector : <G -> Boolean>) : Sequence<G>  is do
@@ -214,7 +230,7 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * Passes each element of the collection to rejector. 
+	 * Passes each element of the collection to rejector function. 
 	 * returns a Collection for all elements for which rejector is false
 	 */
 	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
@@ -231,20 +247,34 @@ abstract class Collection<G>
 
 /**
  * A Set is a collection that contains distinct elements
+ * The notion of "distinct" element is based on the equals operation. Be careful if your overwrite it for your type G.
+ * A set is not ordered
  */
 class Set<G> inherits Collection<G>
 {
 	/**
 	 * The method 'add' adds the element in the Set
 	 * only if it is not yet in the set
+	 * if the element is already in the set it simply does nothing
 	 */
 	method add(element : G) : Void is do
 		if not self.contains(element) then
 			super(element)
 		end
-		// TODO : should it raise an exception otherwise ?
+	end
+	/**
+	 * remove the element
+	 * 
+	 * This method redefines the operation from Collection in order to improve performances since there is no duplicates in Set
+	 */
+	method remove(element : G) : Void is do
+		var elem : G init self.detect { e | e == element }
+		if (elem != void) then
+			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+		end
 	end
 
+	// DVK: weird implementation of equals !?
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		var collection : Collection<G>
@@ -307,6 +337,8 @@ class Set<G> inherits Collection<G>
 
 /**
  * A Bag is a concrete implementation of a Collection
+ * A bag can contains duplicates.
+ * A bag is not ordered
  */
 class Bag<G> inherits Collection<G>
 {
@@ -367,6 +399,33 @@ class Bag<G> inherits Collection<G>
 			if self.contains(elem) then
 				result.add(elem)
 			end
+		end
+	end
+	
+	/**
+	 * Removes an element from the collection using the oid
+	 * This method is provided because the standard remove operation is based on the equals operation 
+	 * and removes all occurences equal to the parameter
+	 */
+	operation removeFromOid(elementOid : Integer) : Void 
+		post doesntContainsElementAnymore is not exists{e | e.oid == elementOid}
+	is do
+		var elem : G init self.detect { e | e.oid == elementOid }
+		if (elem != void) then
+			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
+		end
+	end
+	
+	/**
+	 * Removes one element from the bag
+	 * This method is provided because the standard remove operation is based on the equals operation 
+	 * and removes all occurences equal to the parameter. This one, will remove only the one of them.
+	 */
+	operation removeOne(element : G) : Void 
+	is do
+		var elem : G init self.detect { e | e == element }
+		if (elem != void) then
+			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
 		end
 	end
 }
@@ -466,8 +525,8 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 }
 
 /**
- * an OrderedSet is a Set that contained ordered distinct elements, accessible by
- * their index. (see AddAt method)
+ * an OrderedSet is a Set that contained ordered distinct elements
+ * As it is ordered it is accessible by their index. (see AddAt method)
  */
 class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 {
@@ -505,13 +564,14 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 
 /**
  * A Sequence is an ordered collection of elements
+ * It allows duplicates
  */
 class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 {
 	method equals(element : Object) : Boolean from OrderedCollection is do
 		result := super(element)
 	end
-
+	
 	operation subSequence(min : Integer, max : Integer) : Sequence<G> is do
 		result := Sequence<G>.new
 		if(min >= 0 and max <= self.size) then
@@ -526,7 +586,8 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 }
 
 /**
- * Iterator
+ * Iterator to be used with Collection
+ * see also getIterator() on Collection
  */
 class Iterator<G>
 {
