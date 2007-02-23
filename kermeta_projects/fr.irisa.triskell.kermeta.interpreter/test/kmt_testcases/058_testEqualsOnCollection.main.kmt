@@ -1,6 +1,19 @@
-
-@mainClass "CollectionTest::Test"
-@mainOperation "main"
+/*****************************************************************************
+ * $Id: 035_testHashtable.main.kmt,v 1.10 2006/12/06 16:00:05 dvojtise Exp $
+ * Project : Kermeta interpreter
+ * 		
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Creation date : Oct 2006
+ * Authors : dvojtise
+ * Description : 
+ *		test the equals on two collections
+ *		check on the various type of collections
+ * 		TODO it currentlmy test only with Integer ! must also check with various kind on content 
+ *				(normal classes, classes that redefine equals ...)
+ ****************************************************************************/
+@mainClass "CollectionTest::TestEqualsOnCollection"
+@mainOperation "mainTest"
 
 package CollectionTest;
 
@@ -11,9 +24,14 @@ using kermeta::utils
 using kermeta::language::structure
 using kermeta::kunit
 
-class Test inherits kermeta::kunit::TestCase {
+class TestEqualsOnCollection inherits kermeta::kunit::TestCase {
 
-	operation main() : Boolean is do	
+	/** used to manually start the test
+	 */
+	operation mainTest() is do
+        var testRunner : TestRunner init TestRunner.new
+		testRunner.run(TestEqualsOnCollection)
+		testRunner.printTestResult()
 	end
 	
 	operation test_try1() : Void is do
