@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.2 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: CacheTypeData.java,v 1.3 2007-02-23 09:59:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -25,8 +25,8 @@ import fr.irisa.triskell.kermeta.typechecker.Type;
  */
 public class CacheTypeData {
 
-	protected Hashtable callableOperationsCached = new Hashtable();
-	protected Hashtable callablePropertiesCached = new Hashtable();
+	protected Hashtable<String,CallableOperation> callableOperationsCached = new Hashtable<String,CallableOperation>();
+	protected Hashtable<String,CallableProperty> callablePropertiesCached = new Hashtable<String,CallableProperty>();
 	
 	/**
 	 * Constructor
