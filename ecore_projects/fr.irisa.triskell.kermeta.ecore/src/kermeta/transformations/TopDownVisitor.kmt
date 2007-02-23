@@ -1,4 +1,4 @@
-/* $Id: TopDownVisitor.kmt,v 1.5 2006-08-28 06:59:39 vmahe Exp $
+/* $Id: TopDownVisitor.kmt,v 1.6 2007-02-23 09:37:51 ftanguy Exp $
  * File : TopDownVisitor.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -33,6 +33,7 @@ class TopDownVisitorPattern inherits VisitorPattern
 	method initialize() is do
 		super()
 		keyWordList := kermeta::language::KeyWordList.new
+		keyWordList.initialize
 	end
 	
 	// the main method to be rewrited from Visitor class
