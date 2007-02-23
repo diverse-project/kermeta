@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.2 2007-02-19 18:04:53 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.3 2007-02-23 09:38:03 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
@@ -263,10 +264,16 @@ public class KermetaUtils {
 	/** Returns a "printable name" for the given type */
 	public String getLabelForType(Type type) {
 		String type_name = "";
-		if (type instanceof Class)
+		if (type instanceof Class){
 			type_name = ((Class) type).getTypeDefinition().getName();
-		// type_name =
-		// KMTHelper.getQualifiedName(((Class)type).getTypeDefinition());
+			//String type_name2 = KMTHelper.getQualifiedName(((Class)type).getTypeDefinition());
+		}
+		else if (type instanceof TypeVariable){
+			type_name = ((TypeVariable)type).getName();
+		}
+		else if (type instanceof FunctionType) {
+			type_name = "<" + getLabelForType(((FunctionType) type).getLeft()) + "->" +getLabelForType(((FunctionType) type).getRight())+ ">";
+		}
 		else if (type instanceof ProductType) // TODO : map!
 			type_name = type.toString();
 		else if (type instanceof DataType)
