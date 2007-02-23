@@ -1,6 +1,7 @@
 /**
  * Contains a set of classes whose function is to evaluate a kermeta 
  * expression written as a string.
+ * <img src="./figures/interpreter_package.png">
  */
 package kermeta::interpreter;
 

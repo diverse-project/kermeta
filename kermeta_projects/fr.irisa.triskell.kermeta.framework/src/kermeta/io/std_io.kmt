@@ -19,6 +19,7 @@ using kermeta::language::structure
  
 /**
  * An implementation of StdIO : standard input/output
+ * <img src="./figures/io_package.png">
  */
 class StdIO
 {
