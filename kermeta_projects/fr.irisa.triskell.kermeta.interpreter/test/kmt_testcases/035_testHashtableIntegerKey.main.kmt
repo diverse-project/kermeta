@@ -1,10 +1,10 @@
 /*****************************************************************************
- * $Id: 035_testHashtable.main.kmt,v 1.10 2006-12-06 16:00:05 dvojtise Exp $
+ * $Id: 035_testHashtableIntegerKey.main.kmt,v 1.1 2007-02-23 10:01:11 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testHashtable.kmt
  * 		
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * Creation date : Apr 18 11:13:24 2005
  * Author : zdrey
@@ -14,13 +14,14 @@
  */
 
 @testOperation "yes"
-@mainClass "testHashtable::TestHashtable"
-@mainOperation "setUp"
+@mainClass "testHashtableIntegerKey::TestHashtable"
+@mainOperation "mainTest"
 
-package testHashtable;
+package testHashtableIntegerKey;
 
 require kermeta
 
+using kermeta::kunit
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
 
@@ -30,7 +31,17 @@ class TestHashtable inherits kermeta::kunit::TestCase
 	
 	reference hashtable : kermeta::utils::Hashtable<Integer, String>
 	
-	// initialize things
+	/** used to manually start the test
+	 */
+	operation mainTest() is do
+        var testRunner : TestRunner init TestRunner.new
+		testRunner.run(TestHashtable)
+		testRunner.printTestResult()
+	end
+	
+	/** initialize things 
+	 * automatically called by the test runner
+	 */
 	method setUp() : Void is do
 		hashtable := kermeta::utils::Hashtable<Integer, String>.new
 		hashtable.put(1,"one")
@@ -102,15 +113,16 @@ class TestHashtable inherits kermeta::kunit::TestCase
 	    setUp
 		hashtable.clear()
 		assert(hashtable.size == 0)
+		assert(hashtable.getValue(1).isVoid)
 	end
 	
 //	/** test that the values() method contains the values of the hashtable */ 
 	operation testValues() : Void is do 
 	    setUp
 		assert(hashtable.values.size == hashtable.size) 
-		assert(hashtable.values.contains(hashtable.getValue(1)))
-		assert(hashtable.values.contains(hashtable.getValue(2)))
-		assert(hashtable.values.contains(hashtable.getValue(3)))
+		assert(hashtable.values.contains("one"))
+		assert(hashtable.values.contains("two"))
+		assert(hashtable.values.contains("three"))
 	end
 	/** test that the keys() method contains the values of the hashtable */
 	operation testKeys() : Void is do
