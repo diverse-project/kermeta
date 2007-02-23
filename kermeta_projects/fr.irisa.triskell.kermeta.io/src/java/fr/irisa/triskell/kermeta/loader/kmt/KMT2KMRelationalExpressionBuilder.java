@@ -1,4 +1,6 @@
-/*
+/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.5 2007-02-23 09:56:08 dvojtise Exp $
+ * Licence : EPL
+ * Copyright : IRISA / INRIA / University of rennes 1
  * Created on 6 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -18,10 +20,6 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
  * sequence relationalExpression : left=additiveExpression (relationalOp right=additiveExpression )? ;
  * token relationalOp : EQEQ | NEQ | GT | LT | GTE | LTE ;
  * 
@@ -36,16 +34,16 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 		return visitor.result;
 	}
 	
-	protected static Hashtable operators;
+	protected static Hashtable<String,String> operators;
 	static {
 		// Maping operator -> method
-		operators = new Hashtable();
-		operators.put("==", "isSameAs");
-		operators.put(">", "isGreater");
-		operators.put("<", "isLower");
+		operators = new Hashtable<String,String>();
+		operators.put("==", "equals");
+		operators.put(">",  "isGreater");
+		operators.put("<",  "isLower");
 		operators.put("<=", "isLowerOrEqual");
 		operators.put(">=", "isGreaterOrEqual");
-		operators.put("!=", "isNotSameAs");
+		operators.put("!=", "isNotEqual");
 	}
 	
 	protected Expression result;
@@ -56,7 +54,6 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 	 */
 	public KMT2KMRelationalExpressionBuilder(KermetaUnit builder) {
 		super(builder);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public boolean beginVisit(RelationalExpression node) {
