@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.28 2007-02-22 14:28:06 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.29 2007-02-23 10:25:42 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -128,7 +128,13 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","034_testFrameworkToString.main.kmt" );
 
-		testWithFile("test/kmt_testcases","035_testHashtable.main.kmt" );
+		testWithFile("test/kmt_testcases","035_testHashtableIntegerKey.main.kmt" );
+
+		testWithFile("test/kmt_testcases","035_testHashtableObjectEqualsKey.main.kmt" );
+
+		testWithFile("test/kmt_testcases","035_testHashtableObjectKey.main.kmt" );
+
+		testWithFile("test/kmt_testcases","035_testHashtableStringKey.main.kmt" );
 
 		testWithFile("test/kmt_testcases","036_testIterator.main.kmt" );
 
@@ -159,10 +165,6 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","053_testCollection.main.kmt" );
 
 		testWithFile("test/kmt_testcases","054_testIsKindOf.main.kmt" );
-
-		testWithFile("test/kmt_testcases","056_testIsSameAs.main.kmt" );
-
-		testWithFile("test/kmt_testcases","057_testIsNotSameAs.main.kmt" );
 
 		testWithFile("test/kmt_testcases","058_testEqualsOnCollection.main.kmt" );
 
