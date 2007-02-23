@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.32 2007-02-22 14:28:10 ffleurey Exp $
+/* $Id: reflection.kmt,v 1.33 2007-02-23 09:48:27 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zoï¿½ Drey <zdrey@irisa.fr>
+ *		Zoé Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
  
@@ -33,12 +33,19 @@ abstract class Object
 	operation container() : Object is abstract
 	operation checkInvariants() : Void is abstract
 	operation checkAllInvariants() : Void is abstract
+	/** semantic equality,
+	 * if you wish to test for object identity you need to use the method oid
+	 * ex: x.oid == y.oid
+	 * by default, (ie. if not overloaded), the equals method for class Object implements 
+	 * the most discriminating possible equivalence relation on objects; that is, for any non-null 
+	 * reference values x and y, this method returns true if and only if x and y refer to the same 
+	 * object (x.oid == y.oid has the value true). 
+	 *
+	 * note1: the operator == is mapped to this 
+	 * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it
+	 */
 	operation equals(element : Object) : Boolean is abstract
-	operation isNotEqual(element : Object) : Boolean is abstract
-	
-	/** isSameAs operation checks if both objects have the same id */ 
-	operation isSameAs(element : Object) : Boolean is abstract
-	operation isNotSameAs(element : Object) : Boolean is abstract
+	operation isNotEqual(element : Object) : Boolean is abstract	
 	
 	/** Check if the current object is an instance of the given class.*/
 	operation isKindOf(cl : Class) : Boolean is abstract
@@ -79,6 +86,12 @@ abstract class Object
 	operation isFrozen() : Boolean is abstract
 	operation freeze() : Void is abstract
 	operation isVoid() : Boolean is abstract
+	/**
+	 * code used in hashtable in order to identify an object in the hashtable keys
+	 * This system is similar to the hashcode used in java. Please refer to java documentation
+	 * for more information about hashcode
+	 */
+	operation hashcode() : Integer is abstract
 }
 
 /** Alias for kermeta::standard::Boolean */

@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.35 2007-02-22 14:28:10 ffleurey Exp $
+/* $Id: structure.kmt,v 1.36 2007-02-23 09:48:27 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -65,15 +65,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	
 	method isNotEqual(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
 		result := not equals(element)
-	end
-	
-	method isSameAs(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSameAs(self, element)
-	end
-	
-	method isNotSameAs(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
-		result := not isSameAs(element)
-	end
+	end		
 	
 	method isKindOf(cl : kermeta::reflection::Class) : Boolean is do
 		result := (self.getMetaClass.equals(cl))
@@ -109,6 +101,12 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	
 	method isVoid() : Boolean is do
 		result := false
+	end
+	
+	method hashcode() : Integer is do		
+		// usually this method is not called when using hashtable because it directly tries the method hashcode in the RuntimeObject.java
+		// which fall back here only if the method is not redefined
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.hashcode(self)
 	end
 	
 	method freeze() : Void is do
