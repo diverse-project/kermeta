@@ -490,6 +490,18 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 			 "uuid", "11491501338091"
 		   });		
 		addAnnotation
+		  ((EOperation)fsmEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] {
+			 "uuid", "11546805632096"
+		   });		
+		addAnnotation
+		  ((EOperation)fsmEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] {
+			 "uuid", "11546805632097"
+		   });		
+		addAnnotation
 		  (getFSM_OwnedState(), 
 		   source, 
 		   new String[] {

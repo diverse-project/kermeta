@@ -122,7 +122,7 @@ public interface FSM extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model annotation="http://www.topcased.org/uuid uuid='11546805632096'"
 	 * @generated
 	 */
 	void run();
@@ -130,7 +130,7 @@ public interface FSM extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model annotation="http://www.topcased.org/uuid uuid='11546805632097'"
 	 * @generated
 	 */
 	void reset();

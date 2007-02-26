@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmConfiguration.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * $Id: FsmConfiguration.java,v 1.4 2007-02-26 14:19:59 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -105,8 +105,9 @@ public class FsmConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	public EditPartFactory getEditPartFactory() {
-		if (editPartFactory == null)
+		if (editPartFactory == null) {
 			editPartFactory = new FsmEditPartFactory();
+		}
 
 		return editPartFactory;
 	}
@@ -116,8 +117,9 @@ public class FsmConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	public IPaletteManager getPaletteManager() {
-		if (paletteManager == null)
+		if (paletteManager == null) {
 			paletteManager = new FsmPaletteManager(getCreationUtils());
+		}
 
 		return paletteManager;
 	}
@@ -127,8 +129,9 @@ public class FsmConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	public ICreationUtils getCreationUtils() {
-		if (creationUtils == null)
+		if (creationUtils == null) {
 			creationUtils = new FsmCreationUtils(getDiagramGraphConf());
+		}
 
 		return creationUtils;
 	}

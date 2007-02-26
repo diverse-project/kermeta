@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/diagram/%name%.fsmdi"
+            model="templates/diagram/%name%.fsm"
+            name="Fsm Diagram"
+            id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.templates.diagram"
+            editorId="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmConfiguration"
+            id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram"
+            name="Fsm Diagram">
+         <enableFor class="fr.irisa.triskell.kermeta.samples.fsm.FSM"/>
+      </diagram>
+	</extension>
+   
+</plugin>

@@ -6,12 +6,13 @@
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
 
 import org.eclipse.draw2d.Graphics;
+import org.topcased.draw2d.figures.BorderedLabel;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
- * @generated
+ * @generated NOT
  */
-public class StateFigure extends org.topcased.draw2d.figures.BorderedLabel {
+public class StateFigure extends BorderedLabel {
 	
 	private static final int ROUND_CORNER = 10;
 	
@@ -26,6 +27,7 @@ public class StateFigure extends org.topcased.draw2d.figures.BorderedLabel {
 
 	/**
 	 * @see org.topcased.draw2d.figures.BorderedLabel#outlineShape(org.eclipse.draw2d.Graphics)
+	 * @generated NOT
 	 */
 	protected void outlineShape(Graphics graphics) {
 		Rectangle r = getBounds();

@@ -43,7 +43,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	 * The DirectEditManager
 	 * @generated
 	 */
-	protected DirectEditManager manager;
+	private DirectEditManager manager;
 
 	/**
 	 * Constructor
@@ -172,8 +172,7 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 				.getInputEdgeObjectFigure();
 		if (inputName != null) {
 			inputName.translateToRelative(requestLoc);
-			if (inputName.containsPoint(requestLoc))
-				return true;
+			return inputName.containsPoint(requestLoc);
 		}
 		return false;
 	}
