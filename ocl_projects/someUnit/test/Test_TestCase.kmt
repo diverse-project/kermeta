@@ -1,0 +1,538 @@
+/* $Id: Test_TestCase.kmt,v 1.1 2007-02-26 16:12:01 bitterjug Exp $
+ * Creation date: February 19, 2007
+ * License:
+ * Copyright:
+ * Authors:  Franck Chauvel, Mark Skipper, Harry Lime
+ */
+@mainClass "testNewUnit::Main"
+@mainOperation "main"
+
+
+package testNewUnit;
+
+
+require kermeta
+require "../src/newUnit.kmt"
+ 
+using kermeta::standard
+using kermeta
+
+class NewTestCase inherits newUnit::TestCase 
+{
+
+	attribute count: Integer
+	attribute setUpCalled: Integer
+    attribute tearDownCalled: Integer
+    attribute testCalled: Integer
+    attribute anAttribute : Boolean
+    
+	method setUp() is
+		do
+			if count != void then
+				setUpCalled := count
+				count := count + 1
+			end
+			anAttribute := true
+	 	end
+	  
+	operation testNothing(): Void is 
+		do
+			testCalled := count
+			count := count + 1
+		end
+
+	operation testFailure(): Void is 
+		do
+			assert(false)
+		end
+		
+	operation testManyFailures():Void is
+		do
+			assert(false)
+			assertWithMsg(false,"F2")
+		end
+
+	operation testNotFirstAssertFailure():Void is
+		do
+			assert(true)
+			assert(false)
+		end
+
+    operation testAccessibilityThroughoutTest(): Void is
+    	do
+    		assert(anAttribute == true)
+    	end
+    	
+	method tearDown() is
+		do
+			if count != void then
+				tearDownCalled := count
+				count := count + 1
+			end
+	 	end
+		
+}
+
+class ExceptionalTestCase inherits newUnit::TestCase 
+{
+
+    attribute setUpExplodes : Boolean
+    attribute testExplodes : Boolean
+    attribute tearDownExplodes : Boolean
+    attribute testWasRun: Boolean
+    attribute tearDownWasRun: Boolean
+                
+    operation create(): Void is
+    	do
+			setUpExplodes := false
+			testExplodes := false
+			tearDownExplodes := false
+			testWasRun := false
+			tearDownWasRun := false
+    	end
+    	
+   	method setUp():Void is
+   		do
+   			if setUpExplodes then
+   				var e : exceptions::Exception init exceptions::Exception.new
+   				e.message := "1"
+   				raise e
+   			end
+   		end
+   		
+   	operation testException(): Void is
+   		do
+   			testWasRun := true
+   		   	if testExplodes then
+   				var e : exceptions::Exception init exceptions::Exception.new
+   				e.message := "2"
+   				raise e
+   			end
+   		end
+   		
+   	method tearDown():Void is
+   		do
+   			tearDownWasRun := true
+   			if tearDownExplodes then
+   				var e : exceptions::Exception init exceptions::Exception.new
+   				e.message := "3"
+   				raise e
+   			end
+   		end
+}
+
+class SuiteTestCase inherits newUnit::TestCase
+{
+
+	attribute evidence : String
+	
+	operation testFoo(): Void is 
+		do
+			evidence := "foo"
+			assert(true)
+		end
+		
+	operation testBar(): Void is
+		do
+  			evidence :=  "bar"
+			assert(true)
+		end
+}
+
+
+class ToutDeSuite inherits newUnit::TestCase
+{
+	operation testToto(): Void is
+		do
+			assert(true)
+		end
+}
+
+class AllFailTestCaseSet inherits newUnit::TestCase
+{
+	operation testToto(): Void is
+		do
+			assert(false)
+		end
+
+	operation testTiti(): Void is
+		do
+			assert(false)
+		end
+}
+
+class InterestingTestCaseSet inherits newUnit::TestCase
+{
+
+	operation testSuccess(): Void is
+		do
+			assert(true)
+		end
+
+	operation testFail(): Void is
+		do
+			assert(false)
+		end
+
+	operation testFail2(): Void is
+		do
+			assert(true)
+			assert(false)
+			assertWithMsg(true, "You won't see me")
+			assertWithMsg(false, "You should see me")
+		end
+
+	operation testError(): Void is
+		do
+			var e: exceptions::Exception init exceptions::Exception.new
+			e.message := "It's all gone horribly wrong!"
+			raise e
+		end
+				
+	operation testError1(): Void is
+		do
+			1/0
+		end
+		
+	operation testErrors2(): Void is
+		do
+			assertWithMsg(false, "Before the excption")
+			raise exceptions::Exception.new
+			assertWithMsg(false, "After the excption")
+		end
+		
+	operation testErrors3(): Void is
+		do
+			raiseException
+		end		
+
+	operation raiseException(): Void is
+		do
+			var   e: exceptions::Exception init exceptions::Exception.new
+			e.message := "Exception from nested function call."
+			raise e
+		end			
+					
+}
+
+class SetUpBreaks inherits newUnit::TestCase
+{
+
+	method setUp(): Void is
+		do
+			raise exceptions::Exception.new
+		end
+		
+	operation testNothing(): Void is
+		do
+		end
+}
+
+class TearDownBreaks inherits newUnit::TestCase
+{
+
+	method tearDown(): Void is
+		do
+			raise exceptions::Exception.new
+		end
+		
+	operation testNothing(): Void is
+		do
+		end
+}
+		
+
+class Test_TestCase inherits kermeta::kunit::TestCase
+{
+	/**
+	 * The test case, together with setUp and tearDown, set a flag to show they 
+	 * have been called
+	 */
+	operation testRun():Void is
+	  do
+	  		var ntc : NewTestCase init NewTestCase.new
+	  		ntc.count := 1
+	  		ntc.setTestMethodName("testNothing" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run
+	  		assertTrueWithMsg(ntc.setUpCalled != void, "setUp not called")
+	  		assertTrueWithMsg(ntc.testCalled != void, "test method not called")
+	  		assertTrueWithMsg(ntc.tearDownCalled != void, "tearDown not called")
+	  		assertTrueWithMsg(ntc.setUpCalled == 1, "setUp not called first")
+	  		assertTrueWithMsg(ntc.testCalled == 2, "test method not called second")
+	  		assertTrueWithMsg(ntc.tearDownCalled == 3, "tearDown not called third")
+	  		assertTrueWithMsg(log.failures.empty, "Failure caused unnecessarily")
+	  		assertTrueWithMsg(log.errors.empty, "Error caused unnecessarily")
+	  end
+	
+	/**
+	 * The test case requires a value set in the setUp method, we test that:
+	 *  - no errors or failures are reported from this execution
+	 */  
+	operation testAccessibility(): Void is
+		do
+	  		var ntc : NewTestCase init NewTestCase.new
+	  		ntc.setTestMethodName( "testAccessibilityThroughoutTest" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run
+	  		assertTrueWithMsg(log.failures.empty, "Failure caused unnecessarily")
+	  		assertTrueWithMsg(log.errors.empty, "Error caused unnecessarily")
+			assertTrueWithMsg(log.harnessErrors.empty, "Harness error caused unnecessarily")
+		end
+	  
+	/**
+	 * The test case has an assertion that fails. We test that:
+	 * - the failure has been recorded in the log
+	 * - that no errors were recorded
+	 */
+	operation testAssertionFailure():Void is
+	  do
+	  		var ntc : NewTestCase init NewTestCase.new
+	  		ntc.setTestMethodName( "testFailure" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run
+	  		assertTrueWithMsg(log.failures.size == 1, "Failure was not recorded")
+	  		assertTrueWithMsg(log.errors.size == 0, "Error caused unnecessarily")
+	  end	  
+	  
+	 /**
+	  * The test case has two assertions that will fail.  We test that:
+	  *  - both of them are included in the test results
+	  * -  that the correct number of failures is reported
+	  * - messages from assertions are included in the log
+	  */
+    operation testManyAssertionFailures(): Void is
+	do
+	  		var ntc : NewTestCase init NewTestCase.new
+	  		ntc.setTestMethodName("testManyFailures" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run
+	  		assertTrueWithMsg(log.failures.size == 2, "Failure was not recorded")
+	  		assertTrueWithMsg(log.errors.size == 0, "Error caused unnecessarily")	
+	  		assertTrueWithMsg(log.failures.exists{f| f.message.indexOf("F2")>0},"")
+	  		assertTrueWithMsg(log.failures.exists{f| f.message.indexOf("number 1")>0},"")
+	  		assertTrueWithMsg(log.failures.exists{f| f.message.indexOf("number 2")>0},"")
+	end
+
+	 /**
+	  * The test case has two assertions, the first succeeds; the second fails.  We test that:
+	  *  - the failure is recorded
+	  * -  the number of the recorded failure is correct
+	  */
+    operation testNotFirstAssertFails(): Void is
+	do
+	  		var ntc : NewTestCase init NewTestCase.new
+	  		ntc.setTestMethodName("testNotFirstAssertFailure" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run
+	  		assertTrueWithMsg(log.failures.size == 1, "Failure was not recorded")
+	  		assertTrueWithMsg(log.errors.size == 0, "Error caused unnecessarily")	
+	  		assertTrueWithMsg(log.failures.exists{f| f.message.indexOf("number 2")>0},"")
+	end
+
+	 /**
+	  * The test should not run because the setUp method will throw an exception.  We test that:
+	  *  - a setUpError is reported in the harnessErrors
+	  *  - if setUp throws an exception, neither test nor tearDown should be run
+	  */
+    operation testSetUpThrows(): Void is
+	do
+	  		var ntc : ExceptionalTestCase  init ExceptionalTestCase.new
+	  		ntc.create
+	  		ntc.setUpExplodes := true
+	  		ntc.setTestMethodName( "testException" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run 
+	  		assertTrueWithMsg(log.harnessErrors.size == 1, "No harness error detected")
+	  		assertTrueWithMsg(log.harnessErrors.first.kind == newUnit::ErrorKind.setUpError,"Wrong kind of harness error detected")
+	  		assertFalseWithMsg(ntc.testWasRun, "Test run despite setUp exception")
+	  		assertFalseWithMsg(ntc.tearDownWasRun, "TearDown run despite setUp exception")	  		
+	end
+
+	 /**
+	  * The test should not run because the setUp method will throw an exception.  We test that:
+	  *  - a setUpError is reported in the harnessErrors
+	  * - if the test thows an exception, tearDown should still be run
+	  */
+    operation testTestThrows(): Void is
+	do
+	  		var ntc : ExceptionalTestCase  init ExceptionalTestCase.new
+	  		ntc.create
+	  		ntc.testExplodes := true
+	  		ntc.setTestMethodName( "testException" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run 
+	  		assertTrueWithMsg(log.errors.size == 1, "No error detected")
+	  		assertTrueWithMsg(log.failures.empty, "Failures stupidly detected")
+	  		assertTrueWithMsg(log.errors.first.kind == newUnit::ErrorKind.testError,"Wrong kind of harness error detected")
+	  		assertTrueWithMsg(log.harnessErrors.empty, "Harness errors detected stupidly")
+	  		assertTrueWithMsg(ntc.tearDownWasRun, "TearDown has not run after test exception")	  		
+	end
+
+	 /**
+	  * The test should not run because the setUp method will throw an exception.  We test that:
+	  *  - a setUpError is reported in the harnessErrors
+	  */
+    operation testTearDownThrows(): Void is
+	do
+	  		var ntc : ExceptionalTestCase  init ExceptionalTestCase.new
+	  		ntc.create
+	  		ntc.tearDownExplodes := true
+	  		ntc.setTestMethodName("testException" )
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		ntc.setLog(log)
+	  		ntc.run 
+	  		assertTrueWithMsg(log.harnessErrors.size == 1, "No harness error detected")
+	  		assertTrueWithMsg(log.harnessErrors.first.kind == newUnit::ErrorKind.tearDownError,"Wrong kind of harness error detected")
+	end
+
+	/**
+	 * When a suite is run, all its contained tests are also run.
+	 */
+	 operation testNiceSuite(): Void is
+	 	do
+	 		var t1 : newUnit::TestCase init SuiteTestCase.new
+	 		t1.setTestMethodName("testFoo" )
+	 		var t2 : newUnit::TestCase init SuiteTestCase.new
+	 		t2.setTestMethodName( "testBar")
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new
+	 		suite.tests.add(t1)
+	 		suite.tests.add(t2)	 		
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		suite.setLog(log)
+	  		suite.run()
+	  		assertTrueWithMsg(not suite.tests.empty ,"somebody stole the tests!")	  		
+	  		assertTrueWithMsg(suite.tests.forAll{ t | 
+	  		    var stc : SuiteTestCase 
+	  		    stc ?= t
+	  		    stc.evidence != void } ,"some test wasn't run")
+	 	end
+
+	/**
+	 * When a structured suite is run, all its contained tests are also run.
+	 */
+	 operation testStructuredSuite(): Void is
+	 	do
+	 		var t1 : newUnit::TestCase init SuiteTestCase.new
+	 		t1.setTestMethodName( "testFoo" )
+	 		var t2 : newUnit::TestCase init SuiteTestCase.new
+	 		t2.setTestMethodName("testBar")
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new
+	 		suite.tests.add(t1)
+	 		suite.tests.add(t2)	 	
+	 		var t3 : newUnit::TestCase init ToutDeSuite.new
+	 		t3.setTestMethodName( "testToto"	)
+	 		var suite2 : newUnit::TestSuite init newUnit::TestSuite.new
+	 		suite2.tests.add(t3)
+	 		suite2.tests.add(suite)
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		suite2.setLog(log)
+	  		suite2.run()
+	  		assertTrueWithMsg(log.runtests == 3 ,"Funny number of tests")	  		
+	 	end
+	 	
+	 /**
+	  * If you try to give a test case a testMethodName that does not correspond
+	  * to the name of one of its methods, it will complain (very loudly)
+	  */
+	 operation testTestCaseNameValidity(): Void is
+	 	do
+	 		var tc : newUnit::TestCase init ToutDeSuite.new
+	 		do
+		 		tc.setTestMethodName ( "somethingTerrible")
+		 		assertTrueWithMsg(false, "Something terrible happened.")
+		 	rescue (ine: newUnit::InvalidTestCaseNameException)
+		 		// I'm happy! 
+		 	end
+	 	end
+
+	/**
+	 * We create a test suite automatically from a test case class with many test methods.
+	 * we test that:
+	 *  - the resulting suite has the correct number of tests cases
+	 *  - each test case corresponds to a different method
+	 */
+	 operation testBuildTestSuiteFromClass(): Void is
+	 	do
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new.addAllTestCasesFrom(SuiteTestCase)
+	 		assertTrueWithMsg(suite.tests.size == 2, "Wrong number of test cases")
+	 		assertTrueWithMsg(suite.tests.forAll{tc| SuiteTestCase.isInstance(tc)}, "Wrong kind of test case generated")
+	 		assertTrueWithMsg(suite.tests.forAll{tc| 
+	 			var stc : SuiteTestCase
+	 			stc ?= tc
+	 			stc.getTestMethodName != void
+	 			}, "Bad names in generated test cases")
+	 	end
+	 	
+	 /**
+	  * If you try to make a suite from something other than a TestCase class we
+	  *  will complain (very loudly)
+	  */
+	 operation testCannotBuildSuiteFromNonTestCaseClass() : Void is
+	 	do
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new.addAllTestCasesFrom(Boolean)
+	 	rescue (e: newUnit::InvalidParameterException) 
+	 		// I'm happy
+	 	end
+	 	
+	 operation testRunSuite(): Void is
+	 	do
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new.addAllTestCasesFrom(SuiteTestCase)
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		suite.setLog(log)
+	  		suite.run
+	  		assertTrueWithMsg(log.runtests == 2, "Wrong number of tests run")
+	  		assertTrueWithMsg(log.failures.empty, "Something failed")
+	  		assertTrueWithMsg(log.errors.empty, "Something caused an error")	  		
+	  		assertTrueWithMsg(log.harnessErrors.empty, "Something failed in the harness")	  			  		
+	 	end
+	 	
+	 operation testSuiteAllFailures(): Void is 
+	  	do 
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new.addAllTestCasesFrom(AllFailTestCaseSet)
+	  		var log : newUnit::Log init newUnit::Log.new
+	  		suite.setLog(log)
+	  		suite.run
+	  		assertTrueWithMsg(log.runtests == 2, "Wrong number of tests run")
+	  		assertTrueWithMsg(log.failures.size == 2, "Wrong number of failures")
+	  		assertTrueWithMsg(log.errors.empty, "Something caused an error")	  		
+	  		assertTrueWithMsg(log.harnessErrors.empty, "Something failed in the harness")	 
+	  		assertTrueWithMsg(log.failures.exists{f | 
+	  			var tc : newUnit::TestCase
+	  			tc ?= f.failure
+	  			tc.getTestMethodName.equals("testToto")
+	  			}	, "Cant find testToto failure")
+	  		assertTrueWithMsg(log.failures.exists{f | 
+	  			var tc : newUnit::TestCase
+	  			tc ?= f.failure
+	  			tc.getTestMethodName.equals("testTiti")
+	  			}	, "Cant find testTiti failure")
+ 	 	end
+
+	operation testPrintLogs(): Void is
+		do
+	 		var suite : newUnit::TestSuite init newUnit::TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)						
+	 		suite.addAllTestCasesFrom(SetUpBreaks)
+	 		suite.addAllTestCasesFrom(TearDownBreaks)
+	 		var runner : newUnit::TestRunner init newUnit::TestRunner.new
+	 		runner.run(suite)
+	 		runner.printLogs
+		end
+
+}
+
+class Main
+{
+	operation main() : Void is do 
+	 	var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+ 	   testRunner.run(Test_TestCase)
+ 	   testRunner.printTestResult
+	end
+}

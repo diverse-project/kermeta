@@ -1,0 +1,444 @@
+/* $Id: newUnit.kmt,v 1.1 2007-02-26 16:12:00 bitterjug Exp $
+ * Creation date: February 19, 2007
+ * License:
+ * Copyright:
+ * Authors:  Franck Chauvel, Mark Skipper, Harry Lime
+ */
+ 
+package newUnit;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta
+using kermeta::reflection
+
+/**
+ * See if you can guess what this is for
+ */
+class InvalidTestCaseNameException inherits exceptions::Exception{}
+
+/**
+ * This is for when we try to build a suite from a class that isn't a TestCase
+ */
+class InvalidParameterException inherits exceptions::Exception{}
+
+/**
+ * This is represents the aspect of tests that they may go wrong.
+ * it defines the ability to define the conditions for success
+ * (assertions) and the mechanism for recording that those 
+ * conditions have not been met.
+ */
+abstract class Fallible
+{
+
+  attribute rank : Integer
+  
+  operation  getLog(): Log  
+  	post logDefined is result != void 
+  	is abstract
+    
+  operation number(): Integer is
+  	do
+	 	if rank.isVoid then 
+	 		rank := 0 
+	 	end
+	 	rank := rank + 1
+	 	result := rank
+  	end
+  	
+  operation assert(condition: Boolean):Void is
+  	do
+	  	var number : Integer init self.number()
+  		if not condition then
+  			getLog.addFailure(self, "assertion number " + number.toString + " failed")			
+  		end
+  	end
+  	
+  operation assertWithMsg(condition: Boolean, msg: String):Void 	is
+  	do
+	  	var number : Integer init self.number()
+  		if not condition then
+  			getLog.addFailure(self, "assertion number " + number.toString + " failed: " + msg)			
+  		end
+  	end
+
+}
+
+
+/**
+ * Log is a log of failures and errors that happened to fallibles since start was called
+ */
+class Log
+{
+	/** number of test that were run */
+	attribute runtests : Integer
+	/**  list of detected assertion failures */
+	reference failures : Failure[*]
+	/** list of detected test errors */
+	reference errors : Error[*]
+	/** list of detected errors with the test harness */
+	reference harnessErrors :  Error[*]
+		
+	/** Increments the runtests counter */
+	operation newAttempt() : Void is 
+		do
+			if runtests == void then
+			  runtests := 0
+			end
+			runtests := 1 + runtests
+		end
+	
+	/** Adds a failed test to the list of failed tests */
+	operation addFailure(test : Fallible, msg: String) : Void is do
+		failures.add(Failure.new.initFrom(test, msg)) 
+	end
+	
+	operation addTestError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
+		do
+			errors.add(Error.new.initFrom(test,e))
+		end
+
+	operation addSetUpError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
+		do
+			harnessErrors.add(Error.new.initFrom(test,e).makeSetUp)
+		end
+
+	operation addTearDownError(test : Fallible, e : kermeta::exceptions::Exception) : Void is 
+		do
+			harnessErrors.add(Error.new.initFrom(test,e).makeTearDown)
+		end
+	
+}
+
+/**
+ * Failure represents an assertion failure stored in a failure log
+ */
+class Failure
+{
+	reference failure : Fallible
+	reference message : String
+	
+	operation initFrom(fallible: Fallible, msg: String): Failure is
+	 	do
+	 		failure := fallible
+	 		message := msg
+	 		result :=  self
+	 	end
+	 	
+	method toString(): String is 
+		do 
+			result := failure.toString + " " + message
+//			.getMetaClass.name + "::"
+//				+ failure.name + ": "+ message
+		end
+}
+
+
+enumeration ErrorKind
+{
+	setUpError;
+	testError;
+	tearDownError;
+}
+
+/**
+ * Error represents an occurrence of an exception in setUp, tearDown or a test
+ * and is stored in a failure log
+ */
+class Error
+{
+	reference error : Fallible
+	reference exception : kermeta::exceptions::Exception
+	attribute kind : ErrorKind
+	
+	/**
+	 * Sets up a new error with failable object and the exception that occurred
+	 * by default it will be a test error. Use makeSetUp or makeTearDown to
+	 * change its type
+	 */
+	operation initFrom(error: Fallible, e: kermeta::exceptions::Exception): Error is
+	 	do
+	 		self.error  := error
+	 		exception := e
+	 		kind := ErrorKind.testError
+	 		result :=  self
+	 	end
+	 	
+	/**
+	 * Changes the type of an error to SetUpError, the best way to use
+	 * this method is to call it after the init from line:
+	 * var e : Error init Error.new.initFrom(f, e).makeSetUp
+	 */
+	operation makeSetUp():Error is
+		do	
+			kind := ErrorKind.setUpError
+			result := self
+		end
+
+	/**
+	 * Changes the type of an error to makeTearDownError, the best way to use
+	 * this method is to call it after the init from line:
+	 * var e : Error init Error.new.initFrom(f, e).makeTearDown
+	 */		
+	operation makeTearDown():Error is
+		do	
+			kind := ErrorKind.tearDownError
+			result := self
+		end
+		
+	method toString(): String is 
+		do 
+			if kind.equals(ErrorKind.testError) then
+				result := error.toString 
+			else
+				result := error.getMetaClass.name + "."
+				if kind.equals(ErrorKind.setUpError) then
+					result := result + "setUp()"
+				else
+					result := result + "tearDown()"
+				end
+			end
+			result := result	+ " raised " + exception.getMetaClass.name
+			// .getMetaClass.name + "::"+ test.name 
+			if exception.message != void then
+				result := result + "\n    Caused by: "+ exception.message
+			else
+				result := result + "\n    (no message)"
+			end
+			if exception.stackTrace != void then
+				result := result	+ "\n    Stack Trace:\n" + exception.stackTrace
+			else
+				result := result + "\n    (no stack trace)"
+			end
+		end
+	
+}
+
+/**
+ * The abstact notion of a test which is runnable and which has a log
+ * in which it can keep note of failures
+ */
+abstract class Test 
+{
+	reference log: Log 
+	
+	operation setLog(log: Log): Void 
+		pre paramNotVoid is log != void
+		post logNotVoid is self.log != void
+		is do
+			self.log := log
+		end
+		
+	operation run():Void 
+		pre logNotVoid is self.log != void
+		is  abstract
+}
+
+
+/**
+ * A TestSuite is a structured collection of tests, using the
+ * composite pattern, all tests are runnable and have a log
+ * In addition a suite can be populated automatically from a
+ * test case class with one test case object for each test
+ * method in the class.
+ *  You can make a suite and populate it manually like this:
+ *
+ *  var suite : TestSuite init TestSuite.new.
+ *  suite.tests.add(t1)
+ *
+ *  Alternatively you can populate a suite automatically from
+ *  a class that inherits TestCase and whic has several methods
+ *  called test:
+ *
+ *  var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
+ */
+class TestSuite inherits Test
+{
+
+	reference tests: Test[*]
+	
+	/** 
+	 * Run all the tests in the test suite
+	 */
+	method run() is
+	  do
+			tests.each{ t | 
+				t.setLog(log) 
+				t.run() 
+			}
+	  end
+	  
+	 /**
+	  * Add to this suite, a set of test cases of type c, one for each
+	  * test method in class c. C must be a descendent of TestCase
+	  */
+   	operation addAllTestCasesFrom(c: Class): TestSuite 
+   		pre cIsATestCase is c.superClass.contains(TestCase) 
+   		is
+ 		do
+ 			if not c.superClass.exists{ sc | sc.equals(TestCase)} then
+ 				var e :exceptions:: Exception init InvalidParameterException.new
+ 				e.message :="Cannot build a suite from class: " + c.name
+ 				raise e
+ 			end
+			c.ownedOperation.select { o |  
+				o.name.size>=4 and o.name.substring(0, 4)== "test"
+			}.each { o | 
+			    var testCase : TestCase
+				testCase ?= c.new
+				testCase.setTestMethodName(o.name)
+				self.tests.add(testCase)
+			}
+			result := self
+ 		end
+	   
+}
+
+/**
+ * A test case comprises one or more test methods plus
+ * setUp and tearDown that build and destroy their test harness.
+ * An instance of a subclass of TestCase should have its
+ * testMethodName set to the name of one of its operations
+ * which should be called whe the test is run. You can do this
+ * yourself:
+ *
+ * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName("testSomething")
+ *
+ * Alternatively if your TestCase Class has many methods whose
+ * name begins with 'test' you can create a set of instaces already
+ * set up with their testMethodName using the addAllTestCasesFrom
+ * operation on TestSuite
+ */
+abstract class TestCase inherits Test, Fallible
+{
+
+	attribute __testMethodName : String
+	
+	operation getTestMethodName(): String is
+		do
+			result := __testMethodName
+		end
+		
+	operation setTestMethodName(name: String): TestCase is 
+		do
+			if self.getMetaClass.ownedOperation.exists{o| o.name.equals(name)} then
+				__testMethodName := name
+			else	
+				var e :  InvalidTestCaseNameException init InvalidTestCaseNameException.new
+				e.message := name + " is not a valid method name for class " + self.getMetaClass.name
+				raise e
+			end
+			result := self
+		end
+	
+	method getLog(): Log is
+		do
+			result := self.log
+		end
+		
+	operation setUp():Void  is 
+		do
+		end
+	
+	operation tearDown():Void is 
+		do
+		end
+	
+	method run() is
+		do
+			getLog.newAttempt
+			do
+				setUp
+				do
+					var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
+					de.initializeDefaults
+					de.selfClass ?=  self.getMetaClass.typeDefinition
+					de.parse("self." + self.getTestMethodName )
+					de.execute(self, Hashtable<String, kermeta::standard::Object>.new)
+					do
+						tearDown
+					rescue (e : exceptions::Exception)
+						getLog.addTearDownError(self, e)
+					end
+				rescue (e1 : exceptions::Exception)
+					if e1 == void then stdio.writeln("void exception!!!!!") end
+					getLog.addTestError(self,e1)
+					do
+						tearDown
+					rescue (e : exceptions::Exception)
+						getLog.addTearDownError(self, e)
+					end
+				end
+			rescue (e : exceptions::Exception)
+				getLog.addSetUpError(self, e)
+			end
+		end
+
+	method toString(): String is
+		do
+			result := self.getMetaClass.name + "." + getTestMethodName + "()"
+		end
+
+}
+
+/**
+ * Create and use a test runner to run one or more tests and print the failure log. E.g.:
+ * do
+ *	     var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)
+ *	     var runner : TestRunner init TestRunner.new
+ *	     runner.run(suite)
+ *	     runner.printLogs
+ * end
+ *
+ * Where InterestingTestCaseSet is a subclass of TestCase and contains several test... methods
+ */
+class TestRunner
+{
+	attribute log : Log
+
+	/**
+	 * Use this to run a test case or a test suite.
+	 * If you want to run all the test.... methods in a TestCase class,
+	 *  you can populate a suite with TestSuite.addAllTestCasesFrom
+	 */
+	operation run(test: Test): Void 
+		pre testNotVoid is test != void
+		post logNotVoid is log != void
+		is
+		do
+			log := Log.new
+			test.setLog(log)
+			test.run()
+		end
+		
+	/**
+	 * Prints the log or errors and failures from a test run.
+	 * Run some tests first.
+	 */
+	operation printLogs() is do
+		stdio.writeln(
+		"\n---------------------------------------------  TEST RESULTS-----------------------------------------------\n")
+
+		if not log.failures.empty then
+			stdio.writeln("\nFailures: ")
+			log.failures.each { f | stdio.writeln("   " + f.toString) 	}
+		end
+		if not log.errors.empty then
+			stdio.writeln("\nErrors: ")	
+			log.errors.each { e | 
+			stdio.writeln("   " + e.toString) 	}
+		end
+		if not log.harnessErrors.empty then
+			stdio.writeln("\nErrors from setUp or tearDown : ")	
+			log.harnessErrors.each { e | stdio.writeln("   " + e.toString) 	}
+		end
+		stdio.writeln("\n Summary: ")
+		stdio.writeln("   Number of launched tests : " + log.runtests.toString)
+		stdio.writeln("   Number of failures : " + log.failures.size.toString)
+		stdio.writeln("   Number of errors : " +  log.errors.size.toString)
+		stdio.writeln("   Number of errors in setUp or tearDown: " +  log.harnessErrors.size.toString)
+		stdio.writeln("\n-------------------------------------------------------------------------------------------------------------------------------\n")
+	end
+}

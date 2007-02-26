@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore">
+  <events name="update"/>
+  <events name="open"/>
+  <dependencies type="//@types.1" event="//@events.0" actions="//@actions.0 //@actions.2 //@actions.1 //@actions.3" in="//@expressions.0" outs="//@expressions.1 //@expressions.2" name="d1"/>
+  <dependencies event="//@events.1" actions="//@actions.0" in="//@expressions.0" name="d2"/>
+  <dependencies type="//@types.1" event="//@events.0" actions="//@actions.0" in="//@expressions.0" name="updateEditor"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore"/>
+  <actions name="fr.irisa.triskell.kermeta.kpm.actions.markdependents"/>
+  <filters xsi:type="kpm:NameFilter" regexIn=".+\.kmt" regexOut="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regexIn=".+\.km" regexOut="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regexIn=".+\.ecore" regexOut="*.ecore"/>
+  <filters xsi:type="kpm:ExistFilter"/>
+  <types name="translation"/>
+  <types name="synchro"/>
+  <expressions filter="//@filters.0" id="KMT expr"/>
+  <expressions filter="//@filters.1" id="KM expr"/>
+  <expressions filter="//@filters.2" id="Ecore expr">
+    <subExpressions xsi:type="kpm:And" filter="//@filters.3"/>
+  </expressions>
+  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="newUnit.kmt" path="/someUnit/src/newUnit.kmt" lastTimeModified="2007-02-21T18:49:46.000+0100"/>
+  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="Test_TestCase.kmt" path="/someUnit/test/Test_TestCase.kmt" lastTimeModified="2007-02-21T18:01:11.000+0100"/>
+</kpm:KPM>
