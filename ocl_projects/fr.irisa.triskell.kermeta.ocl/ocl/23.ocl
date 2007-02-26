@@ -1,0 +1,6 @@
+package p
+-- 23: isUnique
+context Y inv:
+	s->isUnique( a | a.name )
+
+endpackage

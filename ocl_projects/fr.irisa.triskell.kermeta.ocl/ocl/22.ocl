@@ -1,0 +1,6 @@
+package p
+-- 22: collect
+context Y inv:
+	s->collect( a | a.getSomething )
+
+endpackage

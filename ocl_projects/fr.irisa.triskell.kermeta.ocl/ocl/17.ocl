@@ -1,0 +1,6 @@
+package p
+-- 17: forAll (explicit variables)
+context Y inv:
+	s->forAll( a | a.isSomething )
+
+endpackage

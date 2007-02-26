@@ -113,8 +113,55 @@ public class TestOCLParser {
 	 public static List<String> filenames = new ArrayList(); 
 	 static {
 		 filenames.add("allSpeeds");
-		 filenames.add("01-booleanLiterals");
-		 filenames.add("02-logicalConjunction");
+		 filenames.add("01-booleanLiteralTrue");
+		 filenames.add("02-booleanLiteralFalse");
+		 filenames.add("03-logicalConjunction");
+		 filenames.add("04-logicalDisjunction");
+		 filenames.add("05-equality");
+		 filenames.add("06-integerLiteral");
+		 filenames.add("07-integerAddition");
+		 filenames.add("08-integerSubtraction");
+		 filenames.add("09");
+		 filenames.add("10");
+		 filenames.add("11");
+		 filenames.add("12");
+		 filenames.add("13");
+		 filenames.add("14");
+		 filenames.add("15");
+		 filenames.add("16");
+		 filenames.add("17");
+		 filenames.add("18");
+		 filenames.add("19");
+		 filenames.add("20");
+		 filenames.add("21");
+		 filenames.add("22");
+		 filenames.add("23");
+		 filenames.add("24");
+		 filenames.add("25");
+		 filenames.add("26");
+		 filenames.add("27");
+		 filenames.add("28");
+		 filenames.add("29");
+		 filenames.add("30");
+		 filenames.add("31");
+		 filenames.add("32");
+		 filenames.add("34");
+		 filenames.add("35");
+		 filenames.add("36");
+		 filenames.add("37");
+		 filenames.add("38");
+		 filenames.add("39");
+		 filenames.add("40");
+		 filenames.add("41");
+		 filenames.add("42");
+		 filenames.add("43");
+		 filenames.add("44");
+		 filenames.add("45");
+		 filenames.add("46");
+		 filenames.add("47");
+/*		 filenames.add("48");
+		 filenames.add("49");
+		 filenames.add("50"); */
 	 }
 	 
 	public static void main(String[] args) {

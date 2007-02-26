@@ -1,0 +1,6 @@
+package p
+-- 21: reject
+context Y inv:
+	s->reject( a | a.isSomething )
+
+endpackage

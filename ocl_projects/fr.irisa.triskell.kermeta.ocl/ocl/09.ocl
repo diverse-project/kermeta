@@ -1,5 +1,5 @@
 package p
--- xor
+-- 09: xor
 context Y inv:
 	true xor true
 

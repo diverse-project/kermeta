@@ -1,0 +1,6 @@
+package p
+-- 18 : 
+context Y inv:
+	s->any( a | a.isSomething )
+
+endpackage

@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.2 2007-02-23 16:48:38 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.3 2007-02-26 16:26:21 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -6,7 +6,6 @@
  */
 @mainClass "root_package::Main"
 @mainOperation "main"
-
 
 package oclTests;
 
@@ -52,42 +51,50 @@ class  BiteSizeOclTests  inherits TestCase
 			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
 		end
 		
+  // boolean literal true
 	operation test01(): Void is
 		do
 			var kmt : String  init  visitOclXmi("01-booleanLiteralTrue")
 			assertEqual("true", kmt)
 		end
 
+  // boolean literal false
 	operation test02(): Void is
 		do
 			var kmt : String  init  visitOclXmi("02-booleanLiteralFalse")
 			assertEqual("false", kmt)
 		end
 		
+  // logical and
 	operation test03(): Void is
 		do
 			var kmt : String  init  visitOclXmi("03-logicalConjunction")
 			assertEqual("true.~and(true)", kmt)
 		end
 	  
+
+  // logical or
 	operation test04(): Void is
 		do
 			var kmt : String  init  visitOclXmi("04-logicalDisjunction")
 			assertEqual("true.~or(true)", kmt)
 		end
 		
+  // euqality
 	operation test05(): Void is
 		do
 			var kmt : String  init  visitOclXmi("05-equality")
 			assertEqual("true.equals(true)", kmt)
 		end
 
+  // unary minus, integer literal
 	operation test06(): Void is
 		do
 			var kmt : String  init  visitOclXmi("06-integerLiteral")
 			assertEqual("5.uminus", kmt)
 		end
 
+  // addition
 	operation test07(): Void is
 		do
 			var kmt : String  init  visitOclXmi("07-integerAddition")
@@ -95,12 +102,14 @@ class  BiteSizeOclTests  inherits TestCase
 
 		end
 
+  // subtraction
 	operation test08(): Void is
 		do
 			var kmt : String  init  visitOclXmi("08-integerSubtraction")
 			assertEqual("3.minus(4)", kmt)
 		end
 
+  // xor
 	operation test09(): Void is
 		// xor
 		do
@@ -108,47 +117,341 @@ class  BiteSizeOclTests  inherits TestCase
 			assertEqual("true.xor(true)", kmt)
 		end
 
+  // implies
 	operation test10(): Void is
- 		// implies
 		do
 			var kmt : String  init  visitOclXmi("10") 
 			assertEqual("true.~not.~or(true) ", kmt)
 		end
 		
+  // not
 	operation test11(): Void is
- 		// not
 		do
 			var kmt : String  init  visitOclXmi("11") 
 			assertEqual("true.~not", kmt)
 		end
 
+  // >
 	operation test12(): Void is
 		do
 			var kmt : String  init  visitOclXmi("12") 
 			assertEqual("3.isGreater(4)", kmt)
 		end
 
+  // >=
 	operation test13(): Void is
 		do
 			var kmt : String  init  visitOclXmi("13") 
 			assertEqual("3.isGreaterOrEqual(4)", kmt)
 		end
 
+  // <
 	operation test14(): Void is
 		do
 			var kmt : String  init  visitOclXmi("14") 
 			assertEqual("3.isLower(4)", kmt)
 		end
 
+  // <=
 	operation test15(): Void is
 		do
 			var kmt : String  init  visitOclXmi("15") 
 			assertEqual("3.isLowerOrEqual(4)", kmt)
 		end
 		
+  // <>,not equals
 	operation test16(): Void is
 		do
 			var kmt : String  init  visitOclXmi("16") 
 			assertEqual("3.equals(4).~not", kmt)
 		end
+
+
+  // exists
+	operation test17(): Void is
+		do
+			var kmt : String  init  visitOclXmi("17") 
+			assertEqual("s.forAll{ a | a.isSomething}", kmt)
+		end
+
+  // any
+	operation test18(): Void is
+		do
+			var kmt : String  init  visitOclXmi("18") 
+			assertEqual("s.detect{ a | a.isSomething}", kmt)
+		end
+
+  // one
+	operation test19(): Void is
+		do
+			var kmt : String  init  visitOclXmi("19") 
+			assertEqual("s.select{ a | a.isSomething}.equals(1)", kmt)
+		end
+
+  // select
+	operation test20(): Void is
+		do
+			var kmt : String  init  visitOclXmi("20") 
+			assertEqual("s.select{ a | a.isSomething}", kmt)
+		end
+
+  // reject
+	operation test21(): Void is
+		do
+			var kmt : String  init  visitOclXmi("21") 
+			assertEqual("s.reject{ a | a.isSomething}", kmt)
+		end
+
+  // collect
+	operation test22(): Void is
+		do
+			var kmt : String  init  visitOclXmi("22") 
+			assertEqual("s.collect{ a | a.getSomething}", kmt)
+		end
+
+  // isUnique
+	operation test23(): Void is
+		do
+			var kmt : String  init  visitOclXmi("23") 
+			assertEqual("s.select{ a | a.name}.asSet.size.equals(s.size)", kmt)
+		end
+
+  // let expressions
+ 	operation test24(): Void is
+		do
+			var kmt : String  init  visitOclXmi("24") 
+			assertEqual("do var v : Integer init 1 v end", kmt)
+		end
+
+  // null literal
+ 	operation test25(): Void is
+		do
+			var kmt : String  init  visitOclXmi("25") 
+			assertEqual("void", kmt)
+		end
+
+  // real literals
+ 	operation test26(): Void is
+		do
+			var kmt : String  init  visitOclXmi("26") 
+			assertEqual("3.14", kmt)
+		end
+
+  // string literals
+ 	operation test27(): Void is
+		do
+			var kmt : String  init  visitOclXmi("27") 
+			assertEqual("\"foo\"", kmt)
+		end
+
+  // enum literal
+ 	operation test28(): Void is
+		do
+			var kmt : String  init  visitOclXmi("28") 
+			assertEqual("Foo.bar", kmt)
+		end
+
+  // operation call with arguments
+ 	operation test29(): Void is
+		do
+			var kmt : String  init  visitOclXmi("29") 
+			assertEqual("self.foo(2, true)", kmt)
+		end
+
+  // collection literal 
+ 	operation test30(): Void is
+		do
+			var kmt : String  init  visitOclXmi("30") 
+			assertEqual("do var var1 init Bag.new var1.add(1) var1.add(1) var1 end", kmt)
+		end
+
+  // last
+ 	operation test31(): Void is
+		do
+			var kmt : String  init  visitOclXmi("31") 
+			assertEqual("s.last", kmt)
+		end
+
+  // first
+ 	operation test32(): Void is
+		do
+			var kmt : String  init  visitOclXmi("32") 
+			assertEqual("s.first", kmt)
+		end
+
+  // at
+ 	operation test33(): Void is
+		do
+			var kmt : String  init  visitOclXmi("33") 
+			assertEqual("s.elementAt(1)", kmt)
+		end
+
+  // indexOf
+ 	operation test34(): Void is
+		do
+			var kmt : String  init  visitOclXmi("34") 
+			assertEqual("s.indexOf(1)", kmt)
+		end
+
+  // asSequence
+ 	operation test35(): Void is
+		do
+			var kmt : String  init  visitOclXmi("35") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+  // asBag
+ 	operation test36(): Void is
+		do
+			var kmt : String  init  visitOclXmi("36") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+  // asOrderedSet
+ 	operation test37(): Void is
+		do
+			var kmt : String  init  visitOclXmi("37") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+  // notEmpty ()
+ 	operation test38(): Void is
+		do
+			var kmt : String  init  visitOclXmi("38") 
+			assertEqual("s.empty.not", kmt)
+		end
+
+  // isEmpty()
+ 	operation test39(): Void is
+		do
+			var kmt : String  init  visitOclXmi("39") 
+			assertEqual("s.empty", kmt)
+		end
+
+  // includesAll
+ 	operation test40(): Void is
+		do
+			var kmt : String  init  visitOclXmi("40") 
+			assertEqual("s1.containsAll(s2)", kmt)
+		end
+
+  // excludesAll
+ 	operation test41(): Void is
+		do
+			var kmt : String  init  visitOclXmi("41") 
+			assertEqual("s1.excludesAll(s2)", kmt)
+		end
+
+  // union
+ 	operation test42(): Void is
+		do
+			var kmt : String  init  visitOclXmi("42") 
+			assertEqual("s1.union(s2)", kmt)
+		end
+
+  // intersection
+ 	operation test43(): Void is
+		do
+			var kmt : String  init  visitOclXmi("43") 
+			assertEqual("s1.intersection(s2)", kmt)
+		end
+
+  // subtract (-)
+ 	operation test44(): Void is
+		do
+			var kmt : String  init  visitOclXmi("44") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+	// includes
+ 	operation test45(): Void is
+		do
+			var kmt : String  init  visitOclXmi("45") 
+			assertEqual("s.contains(e)", kmt)
+		end
+
+	// excludes
+ 	operation test46(): Void is
+		do
+			var kmt : String  init  visitOclXmi("46") 
+			assertEqual("s.excludes(e)", kmt)
+		end
+
+	//self
+ 	operation test47(): Void is
+		do
+			var kmt : String  init  visitOclXmi("47") 
+			assertEqual("self", kmt)
+		end
+
+/*
+ 	operation test48(): Void is
+		do
+			var kmt : String  init  visitOclXmi("48") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+ 	operation test49(): Void is
+		do
+			var kmt : String  init  visitOclXmi("49") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+ 	operation test50(): Void is
+		do
+			var kmt : String  init  visitOclXmi("50") 
+			assertEqual("UNDEFINED", kmt)
+		end
+
+*/
+
+  // sortedBy
+  // forAll,  implicit variable
+  // implicit collect
+  // OclInvalid and invalid literal
+  // tuple literals ()
+  // context
+  // context invariant
+  // context pre
+  // context post
+  // definition
+  // if exp with non trivial condition
+  // type names
+  // including
+  // excluding
+  // subSequence
+  // prepend
+  // insertAt
+  // append
+  // flatten
+  // count 
+  // symmetricDifference
+  // product
+  // string toInteger
+  // string toReal
+  // substring
+  // concatenate
+  // string size
+  // absolute
+  // Integer operations:
+  // div
+  // mod
+  // max
+  // min
+  // covert to real
+  // / 
+  // * + - (infix) 
+  // floor (real)
+  // round (real)
+  // allInstances
+  // oclIsInState
+  // oclIsKindOf
+  // oclIsTypeOf
+  // oclAsType
+  // oclIsInvalid
+  // oclIsUndefined
+  // oclIsNew
+  // OCLAny
+  
+  // 
 }

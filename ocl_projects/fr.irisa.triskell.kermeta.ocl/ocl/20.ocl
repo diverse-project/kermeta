@@ -1,0 +1,6 @@
+package p
+-- 20: select
+context Y inv:
+	s->select( a | a.isSomething )
+
+endpackage
