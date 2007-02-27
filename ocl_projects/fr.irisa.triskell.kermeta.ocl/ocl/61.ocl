@@ -1,0 +1,8 @@
+package p
+-- 61: concatenate
+context Y inv:
+	"foo".concatenate("bar")
+
+endpackage
+
+

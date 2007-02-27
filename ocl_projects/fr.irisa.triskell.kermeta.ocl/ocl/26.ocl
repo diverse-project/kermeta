@@ -1,0 +1,6 @@
+package p
+-- 26: real literals
+context Y inv:
+	3.14
+
+endpackage

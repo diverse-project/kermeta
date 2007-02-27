@@ -1,0 +1,6 @@
+package p
+-- 25: null literal
+context Y inv:
+	null
+
+endpackage

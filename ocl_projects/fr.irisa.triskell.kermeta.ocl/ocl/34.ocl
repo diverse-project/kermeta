@@ -1,0 +1,9 @@
+package p
+-- 34: indexOf
+context Y inv:
+	s->indexOf(1)
+
+endpackage
+
+
+

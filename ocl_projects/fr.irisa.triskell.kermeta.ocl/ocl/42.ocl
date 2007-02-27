@@ -1,0 +1,9 @@
+package p
+-- 42: union
+context Y inv:
+	s1->union(s2)
+
+endpackage
+
+
+

@@ -1,0 +1,6 @@
+package p
+-- 29: Operation call with arguments
+context Y inv:
+	self.foo(2, true)
+
+endpackage

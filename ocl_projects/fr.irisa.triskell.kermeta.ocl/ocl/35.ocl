@@ -1,0 +1,8 @@
+package p
+-- 35: asSequence
+context Y inv:
+	s->asSequence()
+
+endpackage
+
+

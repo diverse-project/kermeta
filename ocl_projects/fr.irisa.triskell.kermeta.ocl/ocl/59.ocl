@@ -1,0 +1,8 @@
+package p
+-- 59: String: toReal
+context Y inv:
+	"3.14".toReal()
+
+endpackage
+
+

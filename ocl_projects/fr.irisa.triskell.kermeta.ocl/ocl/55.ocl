@@ -1,0 +1,9 @@
+package p
+-- 55: count
+context Y inv:
+	s->count(5)
+
+endpackage
+
+
+

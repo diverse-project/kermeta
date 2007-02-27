@@ -1,0 +1,6 @@
+package p
+-- 50: excluding
+context Y inv:
+	s1->excluding(s2)
+
+endpackage

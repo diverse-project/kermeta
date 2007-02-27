@@ -1,0 +1,7 @@
+package p
+-- 39: is empty
+context Y inv:
+	s->isEmpty()
+
+endpackage
+

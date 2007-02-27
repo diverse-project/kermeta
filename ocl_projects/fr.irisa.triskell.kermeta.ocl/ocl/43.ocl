@@ -1,0 +1,10 @@
+package p
+-- 43: intersection
+context Y inv:
+	s1->intersection(s2)
+
+endpackage
+
+
+
+

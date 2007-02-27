@@ -1,0 +1,7 @@
+package p
+-- 32: first
+context Y inv:
+	s->first()
+
+endpackage
+

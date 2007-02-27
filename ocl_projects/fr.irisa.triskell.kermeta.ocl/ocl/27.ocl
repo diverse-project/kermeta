@@ -1,0 +1,6 @@
+package p
+-- 27: String literals
+context Y inv:
+	"foo"
+
+endpackage

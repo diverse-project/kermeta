@@ -1,0 +1,6 @@
+package p
+-- 52: prepend
+context Y inv:
+	s->prepend(o)
+
+endpackage

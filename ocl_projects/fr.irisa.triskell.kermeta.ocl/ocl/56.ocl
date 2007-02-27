@@ -1,0 +1,6 @@
+package p
+-- 56: flatten
+context Y inv:
+	s->flatten()
+
+endpackage

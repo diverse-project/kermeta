@@ -1,0 +1,11 @@
+package p
+-- 49: including
+context Y inv:
+	s1->including(s2)
+
+endpackage
+
+
+
+
+

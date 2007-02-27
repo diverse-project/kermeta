@@ -1,0 +1,9 @@
+package p
+-- 37:as ordered set
+context Y inv:
+	s->asOrderedSet()
+
+endpackage
+
+
+

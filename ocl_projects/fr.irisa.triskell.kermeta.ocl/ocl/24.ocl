@@ -1,0 +1,6 @@
+package p
+-- 24: let expressions
+context Y inv:
+	let v : Integer = 1 in v
+
+endpackage

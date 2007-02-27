@@ -1,0 +1,8 @@
+package p
+-- 48: sortedBy
+context Y inv:
+	s->sortedBy(i| i.uminus)
+
+endpackage
+
+

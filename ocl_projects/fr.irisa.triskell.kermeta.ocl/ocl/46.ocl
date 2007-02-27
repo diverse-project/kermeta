@@ -1,0 +1,9 @@
+package p
+-- 46: excludes
+context Y inv:
+	s->excludes(e)
+
+endpackage
+
+
+

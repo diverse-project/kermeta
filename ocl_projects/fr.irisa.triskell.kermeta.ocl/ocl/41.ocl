@@ -1,0 +1,8 @@
+package p
+-- 38: not empty
+context Y inv:
+	s1->excludesAll(s2)
+
+endpackage
+
+

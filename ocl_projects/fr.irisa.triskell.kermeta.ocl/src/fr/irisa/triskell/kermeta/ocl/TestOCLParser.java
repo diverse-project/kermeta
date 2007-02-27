@@ -159,9 +159,21 @@ public class TestOCLParser {
 		 filenames.add("45");
 		 filenames.add("46");
 		 filenames.add("47");
-/*		 filenames.add("48");
+		 filenames.add("48");
 		 filenames.add("49");
-		 filenames.add("50"); */
+		 filenames.add("50");
+		 filenames.add("51");
+		 filenames.add("52"); 
+		 filenames.add("53"); 
+		 filenames.add("54"); 
+		 filenames.add("55"); 
+		 filenames.add("56");
+		 filenames.add("57"); 
+		 filenames.add("58"); 
+		 filenames.add("59");
+		 filenames.add("60");
+		 filenames.add("61"); 
+		 filenames.add("62"); 
 	 }
 	 
 	public static void main(String[] args) {

@@ -1,0 +1,6 @@
+package p
+-- 30: collection literal
+context Y inv:
+	Bag{1, 1}
+
+endpackage

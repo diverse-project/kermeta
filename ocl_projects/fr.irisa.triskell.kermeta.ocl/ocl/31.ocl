@@ -1,0 +1,6 @@
+package p
+-- 31: Operation call with arguments
+context Y inv:
+	s->last()
+
+endpackage

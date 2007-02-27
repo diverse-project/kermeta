@@ -1,0 +1,8 @@
+package p
+-- 45: includes
+context Y inv:
+	s->includes(e)
+
+endpackage
+
+

@@ -1,0 +1,6 @@
+package p
+-- 51: subSequence
+context Y inv:
+	s->subSequence(lower, upper)
+
+endpackage

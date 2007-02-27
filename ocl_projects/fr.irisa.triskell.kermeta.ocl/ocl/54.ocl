@@ -1,0 +1,8 @@
+package p
+-- 54: append
+context Y inv:
+	s->append(5)
+
+endpackage
+
+

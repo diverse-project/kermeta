@@ -1,0 +1,9 @@
+package p
+-- 36: asBag
+context Y inv:
+	s->asBag()
+
+endpackage
+
+
+

@@ -1,0 +1,7 @@
+package p
+-- 57: symmetricdifference
+context Y inv:
+	s1->symmetricDifference(s2)
+
+endpackage
+

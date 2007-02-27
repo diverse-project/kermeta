@@ -1,0 +1,6 @@
+package p
+-- 28: Enumeration Literal
+context Y inv:
+	Foo::bar
+
+endpackage

@@ -1,0 +1,8 @@
+package p
+-- 33: at
+context Y inv:
+	s->at(1)
+
+endpackage
+
+

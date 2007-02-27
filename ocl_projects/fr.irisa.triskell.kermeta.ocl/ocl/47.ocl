@@ -1,0 +1,10 @@
+package p
+-- 47: self
+context Y inv:
+	self
+
+endpackage
+
+
+
+

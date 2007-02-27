@@ -1,0 +1,7 @@
+package p
+-- 53: insertAt
+context Y inv:
+	s->insertAt(1, true)
+
+endpackage
+
