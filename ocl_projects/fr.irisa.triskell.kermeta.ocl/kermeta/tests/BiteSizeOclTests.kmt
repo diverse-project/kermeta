@@ -1,38 +1,42 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.3 2007-02-26 16:26:21 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.4 2007-02-27 14:32:57 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::Main"
+@mainClass "oclTests::BiteSizeOclTests"
 @mainOperation "main"
 
 package oclTests;
 
 require kermeta
 require "../../../someUnit/src/newUnit.kmt"
-require "../transformations/ocl2kmtVisitor.kmt"
+require "../transformations/ocl2kmtVisitor.kmt" 
 require "../helpers/OCLHelper.kmt" 
 
 using newUnit
 using kermeta::standard
 using kermeta::persistence
+using kermeta::interpreter 
 using ocl2kmt
 
 class  BiteSizeOclTests  inherits TestCase
 {
-	attribute repository: EMFRepository
+		attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
     attribute model : Set<Object> 
+		attribute de : DynamicExpression 
 
 				    
 	method setUp() is
 		do
 			repository := EMFRepository.new		
 			helper := OCLHelpers::OCLHelper.new
-	    	helper.initialize
-	     	visitor := Ocl2kmtVisitor.new
+	    helper.initialize
+	    visitor := Ocl2kmtVisitor.new
+			de := DynamicExpression.new
+			de.initializeDefaults
 		end
 		
 	operation visitOclXmi(filename: String): String is
@@ -40,8 +44,7 @@ class  BiteSizeOclTests  inherits TestCase
 			var sourceFileName : String init "../../model/" + filename + ".xmi"
 			var io : StringWriter init StringWriter.new
 			visitor.setIo(io)
-	     	model  := helper.loadOCLModel(repository, sourceFileName)
-//			helper.getPackageDeclaration(model).accept(visitor)
+	    model  := helper.loadOCLModel(repository, sourceFileName)
 			helper.getInvExpression(model).accept(visitor)
 			result := io.s
 		end
@@ -291,34 +294,54 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			var kmt : String  init  visitOclXmi("34") 
 			assertEqual("s.indexOf(1)", kmt)
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // asSequence
  	operation test35(): Void is
 		do
 			var kmt : String  init  visitOclXmi("35") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s.asSequence", kmt)
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // asBag
  	operation test36(): Void is
 		do
 			var kmt : String  init  visitOclXmi("36") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s.asBag", kmt)
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // asOrderedSet
  	operation test37(): Void is
 		do
 			var kmt : String  init  visitOclXmi("37") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s.asOrderedSet", kmt)
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // notEmpty ()
  	operation test38(): Void is
 		do
 			var kmt : String  init  visitOclXmi("38") 
-			assertEqual("s.empty.not", kmt)
+			assertEqual("s.empty.~not", kmt)
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // isEmpty()
@@ -333,6 +356,11 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			var kmt : String  init  visitOclXmi("40") 
 			assertEqual("s1.containsAll(s2)", kmt)
+			de.formalParameters.put("s1", Set<Integer>)
+			de.formalParameters.put("s2", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // excludesAll
@@ -340,6 +368,11 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			var kmt : String  init  visitOclXmi("41") 
 			assertEqual("s1.excludesAll(s2)", kmt)
+			de.formalParameters.put("s1", Set<Integer>)
+			de.formalParameters.put("s2", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
   // union
@@ -356,11 +389,16 @@ class  BiteSizeOclTests  inherits TestCase
 			assertEqual("s1.intersection(s2)", kmt)
 		end
 
-  // subtract (-)
+  // subtract (-) (not currently defined on sets in Kermeta)
  	operation test44(): Void is
 		do
 			var kmt : String  init  visitOclXmi("44") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s1.minus(s2)", kmt)
+			de.formalParameters.put("s1", Set<Integer>)
+			de.formalParameters.put("s2", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
 	// includes
@@ -368,6 +406,11 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			var kmt : String  init  visitOclXmi("45") 
 			assertEqual("s.contains(e)", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+			de.formalParameters.put("e", Integer)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
 	// excludes
@@ -375,6 +418,11 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			var kmt : String  init  visitOclXmi("46") 
 			assertEqual("s.excludes(e)", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+			de.formalParameters.put("e", Integer)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
 	//self
@@ -384,54 +432,188 @@ class  BiteSizeOclTests  inherits TestCase
 			assertEqual("self", kmt)
 		end
 
-/*
+  // sortedBy
  	operation test48(): Void is
 		do
 			var kmt : String  init  visitOclXmi("48") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s.sortedBy{ i | i.uminus}", kmt)
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
+
+  // including
  	operation test49(): Void is
 		do
 			var kmt : String  init  visitOclXmi("49") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s1.including(s2)", kmt)
+			de.formalParameters.put("s1", Set<Integer>)
+			de.formalParameters.put("s2", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
+  // excluding
  	operation test50(): Void is
 		do
 			var kmt : String  init  visitOclXmi("50") 
-			assertEqual("UNDEFINED", kmt)
+			assertEqual("s1.excluding(s2)", kmt)
+			de.formalParameters.put("s1", Set<Integer>)
+			de.formalParameters.put("s2", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
 		end
 
-*/
+  // subSequence
+ 	operation test51(): Void is
+		do
+			var kmt : String  init  visitOclXmi("51") 
+			assertEqual("s.subSequence(lower, upper)", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+			de.formalParameters.put("lower", Integer)
+			de.formalParameters.put("upper", Integer)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
 
-  // sortedBy
+  // prepend
+ 	operation test52(): Void is
+		do
+			var kmt : String  init  visitOclXmi("52") 
+			assertEqual("s.prepend(o)", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+			de.formalParameters.put("o", Integer)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // insertAt
+ 	operation test53(): Void is
+		do
+			var kmt : String  init  visitOclXmi("53") 
+			assertEqual("s.insertAt(1, true)", kmt)
+			de.formalParameters.put("s", Set<Boolean>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // append
+ 	operation test54(): Void is
+		do
+			var kmt : String  init  visitOclXmi("54") 
+			assertEqual("s.append(5)", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // count 
+ 	operation test55(): Void is
+		do
+			var kmt : String  init  visitOclXmi("55") 
+			assertEqual("s.count(5)", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // flatten
+ 	operation test56(): Void is
+		do
+			var kmt : String  init  visitOclXmi("56") 
+			assertEqual("s.flatten", kmt)
+			de.formalParameters.put("s", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // symmetricDifference
+ 	operation test57(): Void is
+		do
+			var kmt : String  init  visitOclXmi("57") 
+			assertEqual("s1.symmetricDifference(s2)", kmt)
+			de.formalParameters.put("s1", Set<Integer>)
+			de.formalParameters.put("s2", Set<Integer>)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // string toInteger
+ 	operation test58(): Void is
+		do
+			var kmt : String  init  visitOclXmi("58") 
+			assertEqual("\"10\".toInteger", kmt)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // string toReal
+ 	operation test59(): Void is
+		do
+			var kmt : String  init  visitOclXmi("59") 
+			assertEqual("\"3.14\".toReal", kmt)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // substring
+ 	operation test60(): Void is
+		do
+			var kmt : String  init  visitOclXmi("60") 
+			assertEqual("\"foobar\".substring(4, 8)", kmt)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // concatenate
+ 	operation test61(): Void is
+		do
+			var kmt : String  init  visitOclXmi("61") 
+			assertEqual("\"foo\".concatenate(\"bar\")", kmt)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
+  // string size
+ 	operation test62(): Void is
+		do
+			var kmt : String  init  visitOclXmi("62") 
+			assertEqual("\"foo\".size", kmt)
+ 			de.parse(kmt)
+		rescue (e: DynamicExpressionException)
+			fail(e.message) 
+		end
+
   // forAll,  implicit variable
   // implicit collect
   // OclInvalid and invalid literal
+  // product -- requires tuples
   // tuple literals ()
+
   // context
   // context invariant
   // context pre
   // context post
+
   // definition
+
   // if exp with non trivial condition
-  // type names
-  // including
-  // excluding
-  // subSequence
-  // prepend
-  // insertAt
-  // append
-  // flatten
-  // count 
-  // symmetricDifference
-  // product
-  // string toInteger
-  // string toReal
-  // substring
-  // concatenate
-  // string size
+
   // absolute
   // Integer operations:
   // div
@@ -453,5 +635,11 @@ class  BiteSizeOclTests  inherits TestCase
   // oclIsNew
   // OCLAny
   
-  // 
+	operation main() : Void is 
+	  do 
+			var testRunner : TestRunner init TestRunner.new
+			self.setTestMethodName("test60")
+			testRunner.run(self)
+			testRunner.printLogs
+  	end
 }
