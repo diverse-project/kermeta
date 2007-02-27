@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.18 2007-02-23 10:16:15 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.19 2007-02-27 10:43:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -195,7 +195,6 @@ public class RuntimeObject {
 					// Resolve this operation call
 					RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
 					result = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roResult);
-					System.err.println("equals = " + result);
 					// After operation has been evaluated, pop its context
 				} finally {
 					interpretercontext.popCallFrame();
