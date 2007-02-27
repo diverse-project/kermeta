@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.19 2007-02-27 10:43:50 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.20 2007-02-27 17:26:42 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -170,13 +170,25 @@ public class RuntimeObject {
     public boolean equals(Object arg0) {
         if (arg0 instanceof RuntimeObject) {
             RuntimeObject other = (RuntimeObject)arg0;
-            if (getData().containsKey("StringValue") && other.getData().containsKey("StringValue")) {
-                return getData().get("StringValue").equals(other.getData().get("StringValue"));
+            if (getData().containsKey("StringValue") || other.getData().containsKey("StringValue")) {
+            	if (getData().containsKey("StringValue") && other.getData().containsKey("StringValue")) {
+                    return getData().get("StringValue").equals(other.getData().get("StringValue"));
+                }
+            	else return false;
             }
-            if (getData().containsKey("NumericValue") && other.getData().containsKey("NumericValue")) {
-                return getData().get("NumericValue").equals(other.getData().get("NumericValue"));
+            if (getData().containsKey("NumericValue") || other.getData().containsKey("NumericValue")) {
+            	if (getData().containsKey("NumericValue") && other.getData().containsKey("NumericValue")) {
+                    return getData().get("NumericValue").equals(other.getData().get("NumericValue"));
+                }
+            	else return false;
             }
-        
+            if (getData().containsKey("BooleanValue") || other.getData().containsKey("BooleanValue")) {
+            	if (getData().containsKey("BooleanValue") && other.getData().containsKey("BooleanValue")) {
+                    return getData().get("BooleanValue").equals(other.getData().get("BooleanValue"));
+                }
+            	else return false;
+            }
+            
 	//      if the object defines a equals method (other than the default one defined on object), use it
 	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
 	        SimpleType target_type = new SimpleType(t_target);
@@ -195,6 +207,9 @@ public class RuntimeObject {
 					// Resolve this operation call
 					RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
 					result = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roResult);
+
+					if(!result) 
+						System.err.println(this + " " + other);
 					// After operation has been evaluated, pop its context
 				} finally {
 					interpretercontext.popCallFrame();
