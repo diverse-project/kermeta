@@ -147,4 +147,32 @@ GPL license.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="fr.irisa.triskell.eclipse.util"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.interpreter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.io"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
