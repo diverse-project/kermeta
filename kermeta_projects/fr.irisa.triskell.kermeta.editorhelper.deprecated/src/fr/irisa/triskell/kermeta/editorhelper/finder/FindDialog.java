@@ -1,4 +1,15 @@
-/*$Id: FindDialog.java,v 1.1 2007-02-28 09:41:57 cfaucher Exp $*/
+/*$Id: FindDialog.java,v 1.2 2007-02-28 09:55:25 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.editorfinder
+* File : 	FindDialog.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 28, 2007
+* Authors : cfaucher
+* Adaptation in order to select specific object type: in Kermeta ClassDefinition + Package, in Ecore EClass + EPackage
+* The original source of this file is the 1.1 version
+*/
+
 /*******************************************************************************
  * Copyright (c) 2007 Ecliptical Software Inc. and others.
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +19,6 @@
  * 
  * Contributors:
  *     Ecliptical Software Inc. - initial API and implementation
- *     http://www.eclipticalsoftware.com - http://www.eclipticalsoftware.com/emf/
  *******************************************************************************/
 package fr.irisa.triskell.kermeta.editorhelper.finder;
 
@@ -17,6 +27,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.ui.viewer.IViewerProvider;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -45,6 +57,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorPart;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+
 public class FindDialog extends TrayDialog {
 	
 	public static final int FIND_ID = IDialogConstants.CLIENT_ID;
@@ -58,6 +73,16 @@ public class FindDialog extends TrayDialog {
 	private Button caseSensitiveButton;
 	
 	private Button wrapButton;
+	
+	// Added for Kermeta
+	// Kermeta buttons
+	private Button classDefButton;
+	private Button packageButton;
+	
+	// Added for Kermeta
+	// Ecore buttons
+	private Button eClassButton;
+	private Button ePackageButton;
 	
 	private Label messageLabel;
 	
@@ -84,7 +109,8 @@ public class FindDialog extends TrayDialog {
 	
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Find");
+		// Modified for Kermeta
+		newShell.setText("Find model object");
 	}
 
 	protected Control createDialogArea(Composite parent) {
@@ -126,6 +152,22 @@ public class FindDialog extends TrayDialog {
 		wrapButton = new Button(optionsGroup, SWT.CHECK);
 		wrapButton.setText("Wra&p Search");
 		
+		// Added for Kermeta
+		classDefButton = new Button(optionsGroup, SWT.CHECK);
+		classDefButton.setText("Only Class Definition");
+		
+		// Added for Kermeta
+		packageButton = new Button(optionsGroup, SWT.CHECK);
+		packageButton.setText("Only Package Kermeta");
+		
+		// Added for Kermeta
+		eClassButton = new Button(optionsGroup, SWT.CHECK);
+		eClassButton.setText("Only EClass");
+		
+		// Added for Kermeta
+		ePackageButton = new Button(optionsGroup, SWT.CHECK);
+		ePackageButton.setText("Only EPackage");
+		
     	messageLabel = new Label(composite, SWT.LEFT);
     	messageLabel.setLayoutData(new GridData(SWT.FILL, SWT.END, true, false, 2, 1));
 
@@ -142,6 +184,14 @@ public class FindDialog extends TrayDialog {
     	
     	caseSensitiveButton.setSelection(settings.getBoolean("caseSensitive"));
     	wrapButton.setSelection(settings.getBoolean("wrapSearch"));
+    	
+    	// Added for Kermeta
+    	classDefButton.setSelection(settings.getBoolean("onlyClassDef"));
+    	packageButton.setSelection(settings.getBoolean("onlyPackage"));
+    	
+    	// Added for Kermeta
+    	eClassButton.setSelection(settings.getBoolean("onlyEClass"));
+    	ePackageButton.setSelection(settings.getBoolean("onlyEPackage"));
 		
     	return contents;
 	}
@@ -185,6 +235,15 @@ public class FindDialog extends TrayDialog {
 		ILabelProvider labelProvider = (ILabelProvider) viewer.getLabelProvider();
 		String searchString = searchText.getText().trim();
 		boolean caseSensitive = caseSensitiveButton.getSelection();
+		
+		// Added for Kermeta
+		boolean onlyClassDef = classDefButton.getSelection();
+		boolean onlyPackage = packageButton.getSelection();
+		
+		// Added for Kermeta
+		boolean onlyEClass = eClassButton.getSelection();
+		boolean onlyEPackage = ePackageButton.getSelection();
+		
 		if (!caseSensitive)
 			searchString = searchString.toLowerCase();
 		
@@ -203,14 +262,80 @@ public class FindDialog extends TrayDialog {
 				
 				selection = item;
 				String label = labelProvider.getText(selection);
+				
+				// Added for Kermeta
+				boolean search_ok = true;
+				
+				// Added for Kermeta
+				if(onlyClassDef) {
+					if(!(selection instanceof ClassDefinition)) {
+						search_ok = false;
+					} else {
+						search_ok = true;
+					}
+				}
+				
+				// Added for Kermeta
+				if(onlyPackage) {
+					if(selection instanceof Package) {
+						search_ok = true;
+					}
+					else {
+						search_ok = false;
+					}
+					
+				}
+				
+				// Added for Kermeta
+				if(onlyClassDef && onlyPackage) {
+					if(selection instanceof ClassDefinition || selection instanceof Package) {
+						search_ok = true;
+					} else {
+						search_ok = false;
+					}
+				}
+				
+				// Added for Kermeta
+				if(onlyEClass) {
+					if(!(selection instanceof EClass)) {
+						search_ok = false;
+					} else {
+						search_ok = true;
+					}
+				}
+				
+				// Added for Kermeta
+				if(onlyEPackage) {
+					if(selection instanceof EPackage) {
+						search_ok = true;
+					}
+					else {
+						search_ok = false;
+					}
+					
+				}
+				
+				// Added for Kermeta
+				if(onlyEClass && onlyEPackage) {
+					if(selection instanceof EClass || selection instanceof EPackage) {
+						search_ok = true;
+					} else {
+						search_ok = false;
+					}
+				}
+				
 				if (!caseSensitive)
 					label = label.toLowerCase();
 				
-				if (match(label, searchString)) {
-					if (viewer instanceof StructuredViewer)
+				// Modified for Kermeta
+				if (search_ok && match(label, searchString)) {
+					
+					if (viewer instanceof StructuredViewer) {
 						((StructuredViewer) viewer).reveal(selection);
+					}
 					
 					viewer.setSelection(new StructuredSelection(selection), true);
+					
 					return;
 				}
 			}
@@ -264,6 +389,14 @@ public class FindDialog extends TrayDialog {
 		settings.put("searchText", searchString);
 		settings.put("caseSensitive", caseSensitiveButton.getSelection());
 		settings.put("wrapSearch", wrapButton.getSelection());
+		
+		// Added for Kermeta
+		settings.put("onlyClassDef", classDefButton.getSelection());
+		settings.put("onlyPackage", packageButton.getSelection());
+		
+		// Added for Kermeta
+		settings.put("onlyEClass", eClassButton.getSelection());
+		settings.put("onlyEPackage", ePackageButton.getSelection());
 	}
 	
 	protected boolean match(String label, String searchString) {

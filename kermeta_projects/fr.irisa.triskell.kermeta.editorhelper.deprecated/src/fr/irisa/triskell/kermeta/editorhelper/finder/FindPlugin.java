@@ -1,4 +1,15 @@
-/*$Id: FindPlugin.java,v 1.1 2007-02-28 09:41:57 cfaucher Exp $*/
+/*$Id: FindPlugin.java,v 1.2 2007-02-28 09:55:25 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.editorfinder
+* File : 	FindPlugin.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 28, 2007
+* Authors : cfaucher
+* Adaptation in order to enable this finder in the Kermeta reflexive editor
+* The original source of this file is the 1.1 version
+*/
+
 /*******************************************************************************
  * Copyright (c) 2007 Ecliptical Software Inc. and others.
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +19,6 @@
  * 
  * Contributors:
  *     Ecliptical Software Inc. - initial API and implementation
- *     http://www.eclipticalsoftware.com - http://www.eclipticalsoftware.com/emf/
  *******************************************************************************/
 package fr.irisa.triskell.kermeta.editorhelper.finder;
 
@@ -40,7 +50,8 @@ import org.osgi.framework.BundleContext;
 public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowListener, IPageListener, IPartListener2 {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "ca.ecliptical.emf.find";
+	// Modified for Kermeta
+	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.editorhelper";
 
 	// The shared instance
 	private static FindPlugin plugin;
@@ -53,6 +64,8 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 		editorIds.add("org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
 		editorIds.add("org.eclipse.emf.ecore.presentation.XMLReflectiveEditorID");
 		editorIds.add("org.eclipse.emf.codegen.ecore.genmodel.presentation.GenModelEditorID");
+		// Added for Kermeta
+		editorIds.add("fr.irisa.triskell.kermeta.presentation.KmEditorID");
 		EDITOR_IDS = Collections.unmodifiableSet(editorIds);
 	}
 	
