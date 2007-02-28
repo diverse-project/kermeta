@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.46 2007-01-23 09:30:50 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.47 2007-02-28 15:21:59 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -794,7 +794,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
 	public Object visitStringLiteral(StringLiteral node) {
-		return "\"" + node.getValue() +"\""; //TODO : escape characters ?
+		return "\"" + node.getValue().replace("\"", "\\\"") +"\"";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
