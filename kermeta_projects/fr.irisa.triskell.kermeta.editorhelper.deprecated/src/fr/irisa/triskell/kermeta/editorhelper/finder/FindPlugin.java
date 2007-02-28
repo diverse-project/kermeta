@@ -1,4 +1,4 @@
-/*$Id: FindPlugin.java,v 1.2 2007-02-28 09:55:25 cfaucher Exp $
+/*$Id: FindPlugin.java,v 1.3 2007-02-28 15:30:33 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.editorfinder
 * File : 	FindPlugin.java
 * License : EPL
@@ -59,7 +59,8 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 	private static final Collection EDITOR_IDS;
 	
 	static {
-		HashSet editorIds = new HashSet(4);
+		// Modified for Kermeta
+		HashSet editorIds = new HashSet(5);
 		editorIds.add("org.eclipse.emf.ecore.presentation.EcoreEditorID");
 		editorIds.add("org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
 		editorIds.add("org.eclipse.emf.ecore.presentation.XMLReflectiveEditorID");

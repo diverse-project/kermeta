@@ -3,7 +3,8 @@
 <plugin>
    <extension
          point="org.eclipse.ui.startup">
-      <startup></startup>
+      <startup
+            class="fr.irisa.triskell.kermeta.editorhelper.finder.FindPlugin"></startup>
    </extension>
 
 </plugin>
