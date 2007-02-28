@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.48 2007-02-22 12:51:56 cfaucher Exp $
+/* $Id: Runtime2EMF.java,v 1.49 2007-02-28 17:25:49 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -22,17 +22,21 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 //import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -161,8 +165,29 @@ public class Runtime2EMF {
 				// ie. that where loaded and typechecked => they should not be changed dynamicaly
 				// this greatly improve the performance of the save ...
 				if (kcoreObject.eResource() != null){
-					internalLog.debug("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getData().get("kcoreObject")).eClass().getName());
+					internalLog.info("     Ignoring update of Kermeta interpreter internal ClassDefinition EObject : "+((EObject)rObject.getData().get("kcoreObject")).eClass().getName());
 					return;
+				}
+			}
+			EObject emfObject = (EObject)rObject.getData().get("emfObject");
+			if(emfObject != null){
+				if(emfObject.eResource() != null){
+					// has been registered in emf ? we cannot modify/update it !!!
+					// espacillay we should not update http://www.eclipse.org/emf/2002/Ecore
+					if(EMFRegistryHelper.isRegistered(emfObject.eResource().getURI())){
+						internalLog.info("Ignoring update of object " + ((EObject)rObject.getData().get("emfObject")).eClass().getName() + " that comes from an ecore registered package: "+emfObject.eResource().getURI().toString());
+						return;
+					}
+					if("http://www.eclipse.org/emf/2002/Ecore".equals(emfObject.eResource().getURI().toString())){
+						// we really don't want to modify the metameta model we are working on ...
+						internalLog.info("     Ignoring update of Ecore internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
+						EMFRegistryHelper.isRegistered(emfObject.eResource().getURI());
+						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
+					}/* DVK : this suppose that framework.ecore should be registered ...
+					if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore".equals(emfObject.eResource().getURI().toString())){
+						internalLog.debug("     Ignoring update of kermeta framework internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
+						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
+					}*/
 				}
 			}
 			runtimeObjects.add(rObject);
@@ -311,8 +336,18 @@ public class Runtime2EMF {
 		// (serializable: false))
 		else if (feature.getEType() instanceof EDataType) {
 			result = rProperty.getData().get("r2e.emfObject");
-		} else {
-			String msg = "could not convert : " + rProperty
+			
+		
+		} 
+		else if(feature.getEType() == null){
+			String ownerString = feature.eContainer() instanceof ENamedElement ? ((ENamedElement)(feature.eContainer())).getName() : feature.eContainer().toString();
+			String msg = "problem with property : " + rProperty
+				+ "; the corresponding feature in your emf metamodel ("+ ownerString + "." +feature.getName()+ ") has no EType, please check your metamodel" ;
+			unit.throwKermetaRaisedExceptionOnSave(msg, null);
+		} 
+		else {			
+		
+			String msg = "cannot convert : " + rProperty
 					+ " into an EMF type. (classifier : " + feature.getEType()
 					+ ")";
 			unit.throwKermetaRaisedExceptionOnSave(msg, null);
@@ -369,7 +404,10 @@ public class Runtime2EMF {
 				{
 					String enum_name = (String) rObject.getProperties().get("name").getData().get("StringValue");
 					result = getEEnumFromQualifiedName(enum_name, p_resource);
-					rObject.getData().put("r2e.emfObject", result);
+					if(result == null){
+						internalLog.warn("Problem with enumerations need to fix that !!!");
+					}
+					else rObject.getData().put("r2e.emfObject", result);
 				}
 			} 
 			else if( rObject.getData().containsKey("emfObject")){
