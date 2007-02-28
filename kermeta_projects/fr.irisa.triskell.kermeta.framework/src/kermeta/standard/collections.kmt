@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.26 2007-02-23 09:53:13 dvojtise Exp $
+ * $Id: collections.kmt,v 1.27 2007-02-28 14:03:18 dtouzet Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -277,14 +277,20 @@ class Set<G> inherits Collection<G>
 	// DVK: weird implementation of equals !?
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
-		var collection : Collection<G>
-		collection ?= element
-		if (self.size() == collection.size()) then
-			var temp : Set<G> init Set<G>.new
-			temp.addAll(collection)
-			temp.addAll(self)
-			if (temp.size() == self.size()) then
-				isEqual := true
+		if(not element.isVoid) then
+			var collection : Collection<G>
+			collection ?= element
+			if(self.size() == collection.size()) then
+				var elem : G
+				var ok : Boolean init true
+				from var it : Iterator<G> init self.iterator
+				until (it.isOff or not ok) loop
+					elem := it.next
+					if not collection.contains(elem) then
+						ok := false
+					end
+				end
+				isEqual := ok
 			end
 		end
 		result := isEqual
@@ -482,22 +488,26 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	end
 
 	method equals(element : Object) : Boolean is do
-		var collection : Collection<G>
-		collection ?= element
-		if (self.size() != collection.size()) then
+		if(element == void) then
 			result := false
 		else
-			var selfIterator : Iterator<G> init self.iterator()
-			var collectionIterator : Iterator<G> init collection.iterator()
-			var difference : Boolean init false
-			from "void"
-			until (	selfIterator.isOff() or collectionIterator.isOff() or difference	)
-			loop
-				if (	not (selfIterator.next == collectionIterator.next)	) then
-					difference := true
+			var collection : Collection<G>
+			collection ?= element
+			if (self.size() != collection.size()) then
+				result := false
+			else
+				var selfIterator : Iterator<G> init self.iterator()
+				var collectionIterator : Iterator<G> init collection.iterator()
+				var difference : Boolean init false
+				from "void"
+				until (	selfIterator.isOff() or collectionIterator.isOff() or difference	)
+				loop
+					if (	not (selfIterator.next == collectionIterator.next)	) then
+						difference := true
+					end
 				end
+				result := not difference
 			end
-			result := not difference
 		end
 	end
 	
