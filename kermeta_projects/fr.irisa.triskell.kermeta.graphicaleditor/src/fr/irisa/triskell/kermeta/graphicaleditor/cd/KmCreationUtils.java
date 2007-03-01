@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmCreationUtils.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: KmCreationUtils.java,v 1.2 2007-03-01 17:06:10 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -232,6 +232,7 @@ public class KmCreationUtils extends AbstractCreationUtils {
 		if ("http://kermeta/kermeta.ecore//language/structure".equals(obj
 				.eClass().getEPackage().getNsURI())) {
 			
+			// Switch according to the property type
 			if(obj instanceof Property) {
 				Property prop = (Property) obj;
 				if(prop.eContainer()!=null) {
@@ -316,7 +317,7 @@ public class KmCreationUtils extends AbstractCreationUtils {
 	 * @param presentation the presentation of the graphical element
 	 * @return the complete GraphElement
 	 * @generated NOT
-	 * changed setUDistance 0 to 10 or -10
+	 * changed setUDistance 0 to 8 or -8
 	 */
 	protected GraphElement createGraphElementProperty(
 			fr.irisa.triskell.kermeta.language.structure.Property element,
@@ -325,15 +326,15 @@ public class KmCreationUtils extends AbstractCreationUtils {
 		EdgeObjectUV nameEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE
 				.createEdgeObjectUV();
 		nameEdgeObjectUV.setId(KmEdgeObjectConstants.NAME_EDGE_OBJECT_ID);
-		nameEdgeObjectUV.setUDistance(10);
-		nameEdgeObjectUV.setVDistance(10);
+		nameEdgeObjectUV.setUDistance(8);
+		nameEdgeObjectUV.setVDistance(8);
 		graphEdge.getContained().add(nameEdgeObjectUV);
 		EdgeObjectUV multiplicityEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE
 				.createEdgeObjectUV();
 		multiplicityEdgeObjectUV
 				.setId(KmEdgeObjectConstants.MULTIPLICITY_EDGE_OBJECT_ID);
-		multiplicityEdgeObjectUV.setUDistance(10);
-		multiplicityEdgeObjectUV.setVDistance(-10);
+		multiplicityEdgeObjectUV.setUDistance(8);
+		multiplicityEdgeObjectUV.setVDistance(-8);
 		graphEdge.getContained().add(multiplicityEdgeObjectUV);
 		return graphEdge;
 	}
