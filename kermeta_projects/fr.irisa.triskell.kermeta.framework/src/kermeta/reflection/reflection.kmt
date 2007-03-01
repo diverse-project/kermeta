@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.33 2007-02-23 09:48:27 dvojtise Exp $
+/* $Id: reflection.kmt,v 1.34 2007-03-01 13:15:23 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -387,7 +387,7 @@ abstract class FunctionType inherits TypeContainer, Type
  */
 abstract class Type inherits Object
 {
-	reference typeContainer : TypeContainer[1..1]#containedType
+	reference typeContainer : TypeContainer[0..1]#containedType
 	operation isInstance(element : Object) : Boolean is abstract
 	operation isSubType(element : Type) : Boolean is abstract
 }
