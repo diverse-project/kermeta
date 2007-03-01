@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.18 2007-02-22 14:28:03 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.19 2007-03-01 13:19:50 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -45,6 +45,7 @@ public class TypeCheckerContext {
 
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
 	    objectAsType = null;
+	    robjectAsType = null;
 		classNew = null;
 	    classClone = null;
 	    modelTypeNew = null;
@@ -58,6 +59,7 @@ public class TypeCheckerContext {
 		// TODO : Assign Basic types and classdefinition here
 	    KermetaUnit.internalLog.info("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
+	    RObjectType = createTypeForClassDefinition("kermeta::reflection::Object", std_lib);
 	    ModelType = createTypeForClassDefinition("kermeta::language::structure::Model", std_lib);
 	    
 	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
@@ -103,6 +105,20 @@ public class TypeCheckerContext {
 	       }
 	    }
 	    return objectAsType;
+	}
+	
+	protected static Operation getRObjectAsTypeOperation() {
+	    if (robjectAsType == null) {
+	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)RObjectType).type).getTypeDefinition()).getOwnedOperation().iterator();
+	       while(it.hasNext()) {
+	           Operation op = (Operation)it.next();
+	           if (op.getName().equals("asType")) {
+	        	   robjectAsType = op;
+	               break;
+	           }
+	       }
+	    }
+	    return robjectAsType;
 	}
 	
 	protected static Operation getClassNewOperation() {
@@ -256,6 +272,7 @@ public class TypeCheckerContext {
 	
 	// The base types
 	protected static Type ObjectType;
+	protected static Type RObjectType;
 	protected static Type ModelType;
 	//protected static Type ReflectionObject;
 	protected static Type ClassType;
@@ -272,6 +289,7 @@ public class TypeCheckerContext {
 	protected static Type StdIOType;
 	
 	protected static Operation objectAsType;
+	protected static Operation robjectAsType;
 	
 	protected static Operation classNew;
 	protected static Operation classClone;

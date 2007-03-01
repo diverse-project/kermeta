@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.37 2007-02-22 14:28:03 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.38 2007-03-01 13:19:50 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -273,7 +273,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    /* ********************************************************* */
 	   
 	    // THE METHOD ISTYPE ON OBJECT (The OCL like cast)
-	    if (op.getOperation() == TypeCheckerContext.getObjectAsTypeOperation()) {
+	    if (op.getOperation() == TypeCheckerContext.getObjectAsTypeOperation() || op.getOperation() == TypeCheckerContext.getRObjectAsTypeOperation()) {
 	    	// the operation has one Class parameter; 
 	    	// if this parameter is a TypeLitteral then the return type of the operation corresponds to that type litteral
 	    	Expression asType_param = (Expression)exp.getParameters().get(0);

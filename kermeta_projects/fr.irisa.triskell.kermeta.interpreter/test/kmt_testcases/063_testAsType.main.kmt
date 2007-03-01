@@ -70,4 +70,11 @@ class TestAsType inherits kermeta::kunit::TestCase {
 		o.asType(String) + "titi"
 	end
 	
+	operation testAsType6() : Boolean is do
+		var c : ClassDefinition
+		c := "toto".getMetaClass.typeDefinition.asType(ClassDefinition)
+		var p : Package
+		p := c.container.asType(Package)
+	end
+	
 }
