@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.11 2006-12-14 13:12:21 ftanguy Exp $
+/* $Id: SimpleType.java,v 1.12 2007-03-01 10:34:01 dtouzet Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -113,7 +113,7 @@ public class SimpleType extends Type {
 		}
 	}
 	
-	public ArrayList callableOperations() {
+	public ArrayList<CallableOperation> callableOperations() {
 		// Try to get a FClass
 		fr.irisa.triskell.kermeta.language.structure.Type resolved = PrimitiveTypeResolver.getResolvedType(type);
 		if (resolved instanceof VirtualType) {
@@ -143,11 +143,14 @@ public class SimpleType extends Type {
 			result = InheritanceSearch.callableOperations(model);
 			return result;
 		}
+		else if(resolved instanceof fr.irisa.triskell.kermeta.language.structure.FunctionType) {
+			return InheritanceSearch.callableOperations((fr.irisa.triskell.kermeta.language.structure.FunctionType)resolved);
+		}
 		else {
-			return new ArrayList();
+			return new ArrayList<CallableOperation>();
 		}
 	}
-	public ArrayList callableProperties() {
+	public ArrayList<CallableProperty> callableProperties() {
 		// Try to get a FClass
 		fr.irisa.triskell.kermeta.language.structure.Type resolved = PrimitiveTypeResolver.getResolvedType(type);
 		if (resolved instanceof VirtualType) {
@@ -178,7 +181,7 @@ public class SimpleType extends Type {
 			return result;
 		}
 		else {
-			return new ArrayList();
+			return new ArrayList<CallableProperty>();
 		}
 	}
 	

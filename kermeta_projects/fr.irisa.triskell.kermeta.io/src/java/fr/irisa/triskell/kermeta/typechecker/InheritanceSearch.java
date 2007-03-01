@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.10 2006-09-29 13:29:04 zdrey Exp $
+/* $Id: InheritanceSearch.java,v 1.11 2007-03-01 10:34:01 dtouzet Exp $
 * Project : Kermeta 0.3.0
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -13,9 +13,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -66,7 +64,6 @@ public class InheritanceSearch {
 	 * @return
 	 */
 	public static ArrayList getDirectSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
-	    
 		fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
 	    ArrayList result = new ArrayList();
 	    // The class Object is the Root Class
@@ -93,10 +90,10 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */	
-	public static ArrayList callableOperations(fr.irisa.triskell.kermeta.language.structure.Class c) {
-		ArrayList result = new ArrayList();
-		Hashtable found_ops = new Hashtable();
-		ArrayList toVisit = new ArrayList();
+	public static ArrayList<CallableOperation> callableOperations(fr.irisa.triskell.kermeta.language.structure.Class c) {
+		ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
+		Hashtable<String, Operation> found_ops = new Hashtable<String, Operation>();
+		ArrayList<fr.irisa.triskell.kermeta.language.structure.Class> toVisit = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Class>();
 		toVisit.add(c);
 		
 		while(!toVisit.isEmpty()) {
@@ -123,10 +120,28 @@ public class InheritanceSearch {
 		
 		return result;
 	}
+
+	
+	/**
+	 * @param ft
+	 * @return
+	 */
+	public static ArrayList<CallableOperation> callableOperations(fr.irisa.triskell.kermeta.language.structure.FunctionType ft) {
+		ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
+		
+		// Add all operations defined by class Object
+		fr.irisa.triskell.kermeta.language.structure.Class objectClass = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
+	    for (Object next_op : ((ClassDefinition) objectClass.getTypeDefinition()).getOwnedOperation()) {
+	    	Operation op = (Operation) next_op;
+    		result.add(new CallableOperation(op, objectClass));
+	    }
+
+		return result;
+	}
 	
 	
 	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method) {		
-		ArrayList toVisit = new ArrayList();
+		ArrayList<fr.irisa.triskell.kermeta.language.structure.Class> toVisit = new ArrayList<fr.irisa.triskell.kermeta.language.structure.Class>();
 		toVisit.add(c);
 		
 		while(!toVisit.isEmpty()) {
@@ -176,10 +191,10 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c) {
+	public static ArrayList<CallableProperty> callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c) {
 	    ArrayList allTypes = allSuperTypes(c);
-		ArrayList result = new ArrayList();
-		Hashtable found_properties = new Hashtable();
+		ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
+		Hashtable<Property, Property> found_properties = new Hashtable<Property, Property>();
 		
 		for (Object next_t : allTypes) {
 			fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)next_t;
