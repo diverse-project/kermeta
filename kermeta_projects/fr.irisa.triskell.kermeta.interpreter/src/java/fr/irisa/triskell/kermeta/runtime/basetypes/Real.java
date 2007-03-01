@@ -3,9 +3,25 @@
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class Real {
 
+	/** Implementation of method compareTo called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::compareTo(other)*/
+	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+		Integer.setValue(result, ((java.lang.Double)self.getData().get("NumericValue")).compareTo((java.lang.Double)param0.getData().get("NumericValue")));
+		return result;
+	}
+	
+	/** Implementation of method equals called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::equals(element) */
+	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self)==getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
 	// Implementation of method plus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::plus(other)
 	public static RuntimeObject plus(RuntimeObject self, RuntimeObject param0) {
@@ -42,7 +58,7 @@ public class Real {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Real::toInteger()
 	public static RuntimeObject toInteger(RuntimeObject self) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		setValue(result, (int)getValue(self));
+		Integer.setValue(result, (int)getValue(self));
 		return result;
 	}
 	
@@ -57,10 +73,16 @@ public class Real {
 	}
 	
 	public static double getValue(RuntimeObject real) {
+		if (real.getData().get("NumericValue") == null) setValue(real, 0);
 		return ((Double)real.getData().get("NumericValue")).doubleValue();
 	}
 	
-	
+	public static RuntimeObject create(double value, RuntimeObjectFactory factory)
+	{
+	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::Real");
+	    setValue(result, value);
+	    return result;
+	}
 
 }
 /* END OF FILE */

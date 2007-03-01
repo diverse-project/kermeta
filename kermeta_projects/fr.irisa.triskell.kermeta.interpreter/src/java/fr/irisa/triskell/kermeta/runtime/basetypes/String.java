@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.8 2007-01-03 16:01:42 dtouzet Exp $
+/* $Id: String.java,v 1.9 2007-03-01 13:25:42 ffleurey Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -103,6 +103,44 @@ public class String {
 	public static RuntimeObject replace(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).replace(getValue(param0), getValue(param1)));
+		return result;
+	}
+	
+	/** Implementation of method toBoolean called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::toBoolean()
+	 */
+	public static RuntimeObject toBoolean(RuntimeObject self) {
+		java.lang.String val = getValue(self).trim().toLowerCase();
+		if (val.equals("true")) return self.getFactory().getMemory().trueINSTANCE;
+		else if (val.equals("false")) return self.getFactory().getMemory().falseINSTANCE;
+		else return self.getFactory().getMemory().voidINSTANCE;
+	}
+	
+	/** Implementation of method toInteger called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::toInteger()
+	 */
+	public static RuntimeObject toInteger(RuntimeObject self) {
+		RuntimeObject result;
+		try {
+			int val = java.lang.Integer.parseInt(getValue(self).trim());
+			result = Integer.create(val, self.getFactory());
+		} catch (NumberFormatException e) {
+			result = self.getFactory().getMemory().voidINSTANCE;
+		}
+		return result;
+	}
+	
+	/** Implementation of method toReal called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::String::toReal()
+	 */
+	public static RuntimeObject toReal(RuntimeObject self) {
+		RuntimeObject result;
+		try {
+			double val = java.lang.Double.parseDouble(getValue(self).trim());
+			result = Real.create(val, self.getFactory());
+		} catch (NumberFormatException e) {
+			result = self.getFactory().getMemory().voidINSTANCE;
+		}
 		return result;
 	}
 

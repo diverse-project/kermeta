@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.8 2006-08-21 08:56:01 zdrey Exp $ 
+/* $Id: Integer.java,v 1.9 2007-03-01 13:25:42 ffleurey Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -128,6 +128,7 @@ public class Integer {
 	}
 	
 	public static int getValue(RuntimeObject integer) {
+		if (integer.getData().get("NumericValue") == null) setValue(integer, 0);
 	    return ((java.lang.Integer)integer.getData().get("NumericValue")).intValue();
 	}
 	

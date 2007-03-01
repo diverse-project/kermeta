@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.29 2007-02-23 10:25:42 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.30 2007-03-01 13:25:42 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -64,6 +64,7 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
+		/*
 		testWithFile("test/kmt_testcases","001_testAssignment.main.kmt" );
 
 		testWithFile("test/kmt_testcases","002_testArithm.main.kmt" );
@@ -127,15 +128,9 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","033_testBooleanResults.main.kmt" );
 
 		testWithFile("test/kmt_testcases","034_testFrameworkToString.main.kmt" );
-
-		testWithFile("test/kmt_testcases","035_testHashtableIntegerKey.main.kmt" );
-
-		testWithFile("test/kmt_testcases","035_testHashtableObjectEqualsKey.main.kmt" );
-
-		testWithFile("test/kmt_testcases","035_testHashtableObjectKey.main.kmt" );
-
-		testWithFile("test/kmt_testcases","035_testHashtableStringKey.main.kmt" );
-
+*/
+		testWithFile("test/kmt_testcases","064_testReals.main.kmt" );
+/*
 		testWithFile("test/kmt_testcases","036_testIterator.main.kmt" );
 
 		testWithFile("test/kmt_testcases","037_testLambda.main.kmt" );
@@ -166,6 +161,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","054_testIsKindOf.main.kmt" );
 
+		testWithFile("test/kmt_testcases","035_testHashtableObjectKey.main.kmt" );
+
 		testWithFile("test/kmt_testcases","058_testEqualsOnCollection.main.kmt" );
 
 		testWithFile("test/kmt_testcases","059_testFreezeOnNewClass.main.kmt" );
@@ -173,10 +170,16 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","060_testNewOnModelTypeClass.main.kmt" );
 
 		testWithFile("test/kmt_testcases","061_weaving_in_kermeta_aspect1.main.kmt" );
+*/
+		testWithFile("test/kmt_testcases","063_testAsType.main.kmt" );
+/*
+		testWithFile("test/kmt_testcases","035_testHashtableIntegerKey.main.kmt" );
 
-		testWithFile("test/kmt_testcases","62_testIsInstanceOf.main.kmt" );
+		testWithFile("test/kmt_testcases","035_testHashtableObjectEqualsKey.main.kmt" );
 
-		testWithFile("test/kmt_testcases","63_testAsType.main.kmt" );
+		testWithFile("test/kmt_testcases","035_testHashtableStringKey.main.kmt" );
+*/
+		testWithFile("test/kmt_testcases","062_testIsInstanceOf.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

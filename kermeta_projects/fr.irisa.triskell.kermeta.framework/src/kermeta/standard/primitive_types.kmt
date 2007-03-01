@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.27 2007-02-23 09:50:25 dvojtise Exp $
+// $Id: primitive_types.kmt,v 1.28 2007-03-01 13:25:39 ffleurey Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -71,28 +71,28 @@ abstract class Comparable {
 	 * return true if self > other
 	 */
 	operation isGreater(other : Object) : Boolean is do
-		self.compareTo(other) > 0
+		result := self.compareTo(other) > 0
 	end
 	
 	/**
 	 * return true if self < other
 	 */
 	operation isLower(other : Object) : Boolean is do
-		self.compareTo(other) < 0
+		result := self.compareTo(other) < 0
 	end
 	
 	/**
 	 * return true if self <= other
 	 */
 	operation isLowerOrEqual(other : Object) : Boolean is do
-		self.compareTo(other) <= 0
+		result := self.compareTo(other) <= 0
 	end
 	
 	/**
 	 * return true if self >= other
 	 */
 	operation isGreaterOrEqual(other : Object) : Boolean is do
-		self.compareTo(other) >= 0
+		result := self.compareTo(other) >= 0
 	end
 } // Comparable
 
@@ -196,7 +196,12 @@ class Integer inherits Numeric
 	 */
 	method compareTo(other : Object) : Integer is do
 		if other.getMetaClass != Integer then
-			raise NotComparableException.new
+			// allow comparing with reals
+			if other.getMetaClass == Real then
+				result := self.toReal.compareTo(other)
+			else
+				raise NotComparableException.new
+			end
 		else
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.compareTo(self,other)
 		end
@@ -204,7 +209,12 @@ class Integer inherits Numeric
 	
 	method equals(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
-			result := false
+			// allow comparing with reals
+			if other.getMetaClass == Real then
+				result := self.toReal.equals(other)
+			else
+				result := false
+			end
 		else
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)
 		end
@@ -214,7 +224,7 @@ class Integer inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Integer) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self,other)
         end
 	end
@@ -223,7 +233,7 @@ class Integer inherits Numeric
 	 * returns self - other
 	 */
 	operation minus(other : Integer) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.minus(self,other)
         end
 	end
@@ -232,7 +242,7 @@ class Integer inherits Numeric
 	 * returns self * other
 	 */
 	operation mult(other : Integer) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.times(self,other)
         end
 	end
@@ -242,7 +252,7 @@ class Integer inherits Numeric
 	 */
 	operation div(other : Integer) : Integer is do
 		if other == 0 then raise DivisionByZero.new end
-		if other == void then raise CallOnVoidTarget.new else
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self,other)
         end
 	end
@@ -252,7 +262,9 @@ class Integer inherits Numeric
 	 */
 	operation mod(other : Integer) : Integer is do
 		if other == 0 then raise DivisionByZero.new end
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.mod(self,other)
+		end
 	end
 	
 	/**
@@ -274,7 +286,12 @@ class Integer inherits Numeric
 	 */
 	method isGreater(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
-			result := false
+			// allow comparing with reals
+			if other.getMetaClass == Real then
+				result := self.toReal.isGreater(other)
+			else
+				result := false
+			end
 		else
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreater(self, other)
 		end
@@ -285,7 +302,12 @@ class Integer inherits Numeric
 	 */
 	method isLower(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
-			result := false
+			// allow comparing with reals
+			if other.getMetaClass == Real then
+				result := self.toReal.isLower(other)
+			else
+				result := false
+			end
 		else
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLower(self, other)
 		end
@@ -296,7 +318,12 @@ class Integer inherits Numeric
 	 */
 	method isLowerOrEqual(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
-			result := false
+			// allow comparing with reals
+			if other.getMetaClass == Real then
+				result := self.toReal.isLowerOrEqual(other)
+			else
+				result := false
+			end
 		else
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLowerOrEqual(self, other)
 		end
@@ -307,7 +334,12 @@ class Integer inherits Numeric
 	 */
 	method isGreaterOrEqual(other : Object) : Boolean is do
 		if other.getMetaClass != Integer then
-			result := false
+			// allow comparing with reals
+			if other.getMetaClass == Real then
+				result := self.toReal.isGreaterOrEqual(other)
+			else
+				result := false
+			end
 		else
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreaterOrEqual(self, other)
 		end
@@ -328,8 +360,8 @@ class Real inherits Numeric
 	/**
 	 * returns self + other
 	 */
-	operation plus(other : Numeric) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+	operation plus(other : Real) : Real is do
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)
         end
 	end
@@ -337,8 +369,8 @@ class Real inherits Numeric
 	/**
 	 * returns self - other
 	 */
-	operation minus(other : Numeric) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+	operation minus(other : Real) : Real is do
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.minus(self, other)
         end
 	end
@@ -346,8 +378,8 @@ class Real inherits Numeric
 	/**
 	 * returns self * other
 	 */
-	operation mult(other : Numeric) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+	operation mult(other : Real) : Real is do
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(self, other)
         end
 	end
@@ -355,23 +387,53 @@ class Real inherits Numeric
 	/**
 	 * returns self / other
 	 */
-	operation div(other : Numeric) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else
+	operation div(other : Real) : Real is do
+		if other == 0 then raise DivisionByZero.new end
+		if other == void then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.div(self, other)
         end
 	end
 	
 	/**
-	 * Convert self as a Real
+	 * Convert self as an Integer
 	 */
 	operation toInteger() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toInteger(self)
 	end
 	
 	/**
+	 * Comparison
+	 */
+	method compareTo(other : Object) : Integer is do
+		if other.getMetaClass != Real then
+			// allow comparing with integers
+			if other.getMetaClass == Integer then
+				result := self.compareTo(other.asType(Integer).toReal)
+			else
+				raise NotComparableException.new
+			end
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.compareTo(self,other)
+		end
+	end
+	
+	method equals(other : Object) : Boolean is do
+		if other.getMetaClass != Real then
+			// allow comparing with integers
+			if other.getMetaClass == Integer then
+				result := self.equals(other.asType(Integer).toReal)
+			else
+				result := false
+			end
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.equals(self, other)
+		end
+	end
+	
+	/**
 	 * returns -self
 	 */
-	operation uminus() : Numeric is do
+	operation uminus() : Real is do
 		result := 0.toReal - self
 	end
 	
@@ -480,17 +542,54 @@ class String inherits ValueType, Comparable
 		end
 	end
 	
+	/**
+	 * returns the number of characters in the current String
+	 */
 	operation size() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.size(self)
 	end
 	
+	/**
+	 * returns the string itself
+	 */
 	method toString() : String is do
 		result := self
 	end
 	
+	/**
+	 * Replaces all occurances of str1 in the current string by the string str2
+	 */
 	operation replace(str1 : String, str2 : String) : String is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.replace(self, str1, str2)
 	end
+	
+	/**
+	 * Parses the current string and returns true if the string is "true" and false if the string is "false"
+	 * The parsing is not case sensitive and if no boolean value is recognized then a StringFormatException is raised.
+	 */
+	operation toBoolean() : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toBoolean(self)
+		if result == void then raise StringFormatException.new end
+	end
+	
+	/**
+	 * Parses the current string into an integer.
+	 * if no integer value is recognized then a StringFormatException is raised.
+	 */
+	operation toInteger() : Integer is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toInteger(self)
+		if result == void then raise StringFormatException.new end
+	end
+
+	/**
+	 * Parses the current string into a real.
+	 * if no real value is recognized then a StringFormatException is raised.
+	 */
+	operation toReal() : Real is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toReal(self)
+		if result == void then raise StringFormatException.new end
+	end
+	
 }
 
 /**
