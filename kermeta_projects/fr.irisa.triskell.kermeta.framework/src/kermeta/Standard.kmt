@@ -24,6 +24,8 @@ require "utils/stack.kmt"
 
 require "io/std_io.kmt"
 
+require "io/file_io.kmt"
+
 require "exceptions/exceptions.kmt"
 
 require "language/dynamic_expression.kmt"

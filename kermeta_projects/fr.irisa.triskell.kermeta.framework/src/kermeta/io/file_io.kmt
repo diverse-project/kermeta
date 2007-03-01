@@ -1,0 +1,50 @@
+/**
+ * Contains Input/Output related classes. 
+ */
+package kermeta::io;
+
+require "../Standard.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::exceptions
+
+/* *************************************************
+ * Franck FLEUREY - 01/03/2007
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the EPL licence
+ *
+ * Implementation of Kermeta File Helper.
+ *************************************************** */
+ 
+/**
+ * Implementation of simple helpers to read ans write text files
+ */
+class FileIO
+{
+	/**
+	 * Write a string in a text file
+	 */ 
+	operation writeTextFile(filename : String, text : String) : Void is do
+		if filename == void then raise FileNotFoundException.new end
+		extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.writeTextFile(filename, text)
+	end
+	
+	/**
+	 * Read a text file
+	 */ 
+	operation readTextFile(filename : String) : String is do
+		if filename == void then raise FileNotFoundException.new end
+		var exists : Boolean
+		var isdirectory : Boolean
+		exists ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileExists(filename)
+		isdirectory ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.fileIsDirectory(filename)
+		if not exists or isdirectory then raise FileNotFoundException.new end
+		result ?= extern fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO.readTextFile(filename)
+	end
+	
+	
+} // FileIO
+
+

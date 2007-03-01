@@ -8,7 +8,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.13 2007-03-01 13:25:40 ffleurey Exp $
+ * $Id: exceptions.kmt,v 1.14 2007-03-01 16:24:01 ffleurey Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -118,6 +118,13 @@ class IndexOutOfBound inherits Exception {}
 class EmptyCollection inherits Exception {}
 
 class IteratorIsOff inherits Exception {}
+
+/*
+ * File Related Errors
+ */
+
+class IOException inherits Exception {}
+class FileNotFoundException inherits IOException {}
 
 /* ****************************************************************************
  * 4-Constraints related errors 

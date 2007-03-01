@@ -1,0 +1,42 @@
+/* $Id: TextFileIOSample.kmt,v 1.1 2007-03-01 16:24:07 ffleurey Exp $
+ * Creation date: March 1, 2007
+ * License: EPL
+ * Copyright: IRISA - Rennes
+ * Authors: Franck Fleurey
+ */
+@mainClass "kermeta::sample::Main"
+@mainOperation "main"
+
+package kermeta::sample;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::io
+
+/**
+ * This sample shows how to read and write text files in kermeta
+ * using the kermeta::io::FileIO class helper.
+ */
+class Main
+{
+	operation main() : Void is do
+	
+		var filename : String init "myFile.txt"
+	
+		// Instantiate the file IO helper (Class kermeta::io::FileIO)
+		// This class contains simple operation to read and write text files
+		var ioHelper : FileIO init FileIO.new
+		
+		// 1 - Write a string to a file
+		ioHelper.writeTextFile(filename, "Hello world !")
+		
+		// 2 - Read back the file
+		var text : String
+		text := ioHelper.readTextFile(filename)
+		
+		// Print the text :
+		stdio.writeln(text)
+		
+	end
+}
