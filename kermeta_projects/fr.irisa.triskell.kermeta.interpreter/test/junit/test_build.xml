@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.14 2007-03-02 13:45:40 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.15 2007-03-02 13:52:08 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -27,7 +27,7 @@
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta.model\@dot"/>
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\@dot"/>
 	<property name="triskell.eclipse.util.jar" location="..\..\..\fr.irisa.triskell.eclipse.util\@dot"/>
-	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\traceability.jar"/>
+	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\lib\traceability.jar"/>
 	
 	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\log4j.jar"/>
 	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\lib\thirdparty\antlr.jar"/>
