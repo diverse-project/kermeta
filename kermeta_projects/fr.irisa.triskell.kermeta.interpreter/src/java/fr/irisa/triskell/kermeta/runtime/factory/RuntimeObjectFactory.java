@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.16 2006-12-14 14:34:13 rdelamar Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.17 2007-03-02 15:46:02 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -110,6 +110,11 @@ public class RuntimeObjectFactory {
 	 * @param classdef the ClassDefinition corresponding to this class
 	 */
 	public void setClassClassFromFClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
+		
+		// I (Franck F) think bug #2157 comes from here.
+		// The class definition for the class class should be assigned
+		// not sure how to get it from here
+		
 		class_class = new RuntimeObject(this, null);
 		class_class.setMetaclass(class_class);
 		class_class.setData(new Hashtable());

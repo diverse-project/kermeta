@@ -8,7 +8,7 @@ using kermeta::standard
 using kermeta::utils
 
 /* ****************************************************************************
- * $Id: exceptions.kmt,v 1.14 2007-03-01 16:24:01 ffleurey Exp $
+ * $Id: exceptions.kmt,v 1.15 2007-03-02 15:45:58 ffleurey Exp $
  * Project : Kermeta framework
  * Creation date :  
  * File : exception.kmt
@@ -92,6 +92,12 @@ class UpperBoundReachedError inherits RuntimeError {}
  * out to be abstract.
  */
 class AbstractClassInstantiationError inherits RuntimeError {}
+
+/**
+ * Raised by the Object::set operation if the type of the 
+ * Object to set has an incompatible type.
+ */
+class IncompatibleTypeError inherits RuntimeError {}
 
 /* ****************************************************************************
  * 3-Standard library related errors

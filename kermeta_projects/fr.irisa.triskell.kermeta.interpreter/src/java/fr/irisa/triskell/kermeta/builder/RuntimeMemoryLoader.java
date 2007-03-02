@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.17 2007-01-23 09:34:52 dtouzet Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.18 2007-03-02 15:46:02 ffleurey Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -181,6 +181,8 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
         // set the class definition
         RuntimeObject classdef = getConcreteTypeDefinitionByName(kcoreObject);
 		// set the meta-class
+        
+               
 		run_obj.setMetaclass( memory.getROFactory().getClassForClassDefinition(classdef) );
 		
 		// set the container

@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.16 2007-02-23 10:06:35 dvojtise Exp $
+/* $Id: Object.java,v 1.17 2007-03-02 15:46:03 ffleurey Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -6,7 +6,7 @@
  * ----------------------------------------------------------------------------
  * Creation date : Jul 7, 2005
  * Authors       : 
- *		Zoé Drey <zdrey@irisa.fr>
+ *		Zoï¿½ Drey <zdrey@irisa.fr>
  * Description : 
  * 		Implementation of Kermeta base type Object
  */
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
@@ -159,18 +160,27 @@ public class Object {
 	/** Implementation of method get called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property) */
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
+		Property property = (Property)param0.getData().get("kcoreObject");
 		RuntimeObject result;
-		result = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
-		if (getPropertyUpper(param0) == 1) {
-			if (result == null) result = self.getFactory().getMemory().voidINSTANCE;
+		
+		if (property.isIsDerived()) {
+			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+			ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
+			result = interp.getterDerivedProperty(new CallableProperty(property, cls), self, null);
 		}
 		else {
-			if (result == null) {
-				// TODO : Find something to manage uniqueness of properties
-				// Note : uniqueness of properties with upper>1 is checked in ReflectiveCollection
-				if (!isPropertyOrdered(param0)) result =  ReflectiveCollection.createReflectiveCollection(self, param0);
-				else result =  ReflectiveSequence.createReflectiveSequence(self, param0);
-				self.getProperties().put(getPropertyName(param0), result);
+			result = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
+			if (getPropertyUpper(param0) == 1) {
+				if (result == null) result = self.getFactory().getMemory().voidINSTANCE;
+			}
+			else {
+				if (result == null) {
+					// TODO : Find something to manage uniqueness of properties
+					// Note : uniqueness of properties with upper>1 is checked in ReflectiveCollection
+					if (!isPropertyOrdered(param0)) result =  ReflectiveCollection.createReflectiveCollection(self, param0);
+					else result =  ReflectiveSequence.createReflectiveSequence(self, param0);
+					self.getProperties().put(getPropertyName(param0), result);
+				}
 			}
 		}
 		return result;
@@ -187,32 +197,40 @@ public class Object {
 	}
 	
 	public static void set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1, boolean handle_opposite) {
-	    
-		// Unset first if there is an object
-		if (isSet(self, param0) == self.getFactory().getMemory().trueINSTANCE)  unSet(self, param0);
-
-		if (param1 == self.getFactory().getMemory().voidINSTANCE) return;
+		//setDerivedProperty
+		Property property = (Property)param0.getData().get("kcoreObject");
 		
-		// set the new object
-		self.getProperties().put(getPropertyName(param0), param1);
-		// set containement
-		if (isPropertyContainment(param0)) {
-		    // if param1 is already contained by an object it should be removed
-		    
-		    if (param1.getContainer() != null) {
-		        removeObjectFromItsContainer(param1);
-		    }
-		    
-		    param1.setContainer(self);
+		if (property.isIsDerived()) {
+			fr.irisa.triskell.kermeta.language.structure.Class cls = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+			ExpressionInterpreter interp = self.getFactory().getMemory().getCurrentInterpreter();
+			interp.setDerivedProperty(self, new CallableProperty(property, cls), param1, null);
 		}
-		// handle opposite
-		if(handle_opposite) {
-			RuntimeObject oproperty = getPropertyOpposite(param0);
-			if (oproperty != null) {
-				handleOppositeProperySet(param1, oproperty, self);
+		else {
+			// Unset first if there is an object
+			if (isSet(self, param0) == self.getFactory().getMemory().trueINSTANCE)  unSet(self, param0);
+	
+			if (param1 == self.getFactory().getMemory().voidINSTANCE) return;
+			
+			// set the new object
+			self.getProperties().put(getPropertyName(param0), param1);
+			// set containement
+			if (isPropertyContainment(param0)) {
+			    // if param1 is already contained by an object it should be removed
+			    
+			    if (param1.getContainer() != null) {
+			        removeObjectFromItsContainer(param1);
+			    }
+			    
+			    param1.setContainer(self);
+			}
+			// handle opposite
+			if(handle_opposite) {
+				RuntimeObject oproperty = getPropertyOpposite(param0);
+				if (oproperty != null) {
+					handleOppositeProperySet(param1, oproperty, self);
+				}
 			}
 		}
-		
 	}
 	
 	/**

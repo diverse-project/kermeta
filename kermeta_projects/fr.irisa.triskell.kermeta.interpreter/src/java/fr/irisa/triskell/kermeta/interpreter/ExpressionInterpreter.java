@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.51 2006-12-07 09:55:46 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.52 2007-03-02 15:46:02 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -310,7 +310,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 				// **** THIS IS NOT TYPE SAFE ****
 				// IT SHOULD BE USED WITH CAUTION
 				// AND IT SHOULD BE REMOVED AS SOON AS 
-				// BUG N°112 IS FIXED
+				// BUG Nï¿½112 IS FIXED
 			}
 			
 			/******************************/
@@ -408,17 +408,21 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
                     // Else, compute it
                     else
                     {   // no parameter in a property -> "null" below
-                        interpreterContext.pushOperationCallFrame(ro_target, property, null, callfeature);
-                        interpreterContext.peekCallFrame().setCallValueResult(rhs_value);
-                        // Get the setter body
-                        this.accept(fproperty.getSetterBody());
-                        interpreterContext.popCallFrame();
+                    	setDerivedProperty(ro_target, property, rhs_value, callfeature);
                     }
                 }
             }
 		}
 		
 		return rhs_value;
+	}
+	
+	public void setDerivedProperty(RuntimeObject ro_target, CallableProperty property, RuntimeObject rhs_value, CallExpression exp) {
+		interpreterContext.pushOperationCallFrame(ro_target, property, null, exp);
+        interpreterContext.peekCallFrame().setCallValueResult(rhs_value);
+        // Get the setter body
+        this.accept(property.getProperty().getSetterBody());
+        interpreterContext.popCallFrame();
 	}
 	
 	

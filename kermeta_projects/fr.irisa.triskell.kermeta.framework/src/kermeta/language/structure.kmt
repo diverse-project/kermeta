@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.36 2007-02-23 09:48:27 dvojtise Exp $
+/* $Id: structure.kmt,v 1.37 2007-03-02 15:45:59 ffleurey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -76,7 +76,11 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method ~set(~property : kermeta::reflection::Property, element : kermeta::reflection::Object) : Void from kermeta::reflection::Object is do
-		extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
+		if ~property.type.isInstanceOf(Class) and element.isInstanceOf(~property.type.asType(Class)) then
+			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
+		else
+			raise kermeta::exceptions::IncompatibleTypeError.new
+		end
 	end
 	
 	method isSet(~property : kermeta::reflection::Property) : Boolean from kermeta::reflection::Object is do
