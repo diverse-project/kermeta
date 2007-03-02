@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.27 2007-02-28 14:03:18 dtouzet Exp $
+ * $Id: collections.kmt,v 1.28 2007-03-02 14:43:47 dtouzet Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -278,19 +278,21 @@ class Set<G> inherits Collection<G>
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if(not element.isVoid) then
-			var collection : Collection<G>
-			collection ?= element
-			if(self.size() == collection.size()) then
-				var elem : G
-				var ok : Boolean init true
-				from var it : Iterator<G> init self.iterator
-				until (it.isOff or not ok) loop
-					elem := it.next
-					if not collection.contains(elem) then
-						ok := false
+			if(Collection<G>.isInstance(element)) then
+				var collection : Collection<G>
+				collection ?= element
+				if(self.size() == collection.size()) then
+					var elem : G
+					var ok : Boolean init true
+					from var it : Iterator<G> init self.iterator
+					until (it.isOff or not ok) loop
+						elem := it.next
+						if(not collection.contains(elem)) then
+							ok := false
+						end
 					end
+					isEqual := ok
 				end
-				isEqual := ok
 			end
 		end
 		result := isEqual
@@ -355,10 +357,16 @@ class Bag<G> inherits Collection<G>
 	end
 
 	method equals(element : Object) : Boolean is do
-		var collection : Bag<G>
-		collection ?= element
-		var selfAsSet : Set<G> init self.asSet()
-		result := selfAsSet.equals(collection.asSet())
+		var isEqual : Boolean init false
+		if(not element.isVoid) then
+			if(Collection<G>.isInstance(element)) then
+				var collection : Bag<G>
+				collection ?= element
+				var selfAsSet : Set<G> init self.asSet()
+				result := selfAsSet.equals(collection.asSet())
+			end
+		end
+		result := isEqual
 	end
 
 	/** returns the union of elements and the Bag */
@@ -488,27 +496,27 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	end
 
 	method equals(element : Object) : Boolean is do
-		if(element == void) then
-			result := false
-		else
-			var collection : Collection<G>
-			collection ?= element
-			if (self.size() != collection.size()) then
-				result := false
-			else
-				var selfIterator : Iterator<G> init self.iterator()
-				var collectionIterator : Iterator<G> init collection.iterator()
-				var difference : Boolean init false
-				from "void"
-				until (	selfIterator.isOff() or collectionIterator.isOff() or difference	)
-				loop
-					if (	not (selfIterator.next == collectionIterator.next)	) then
-						difference := true
+		var isEqual : Boolean init false
+		if(not element.isVoid) then
+			if(OrderedCollection<G>.isInstance(element)) then
+				var collection : Collection<G>
+				collection ?= element
+				if(self.size() == collection.size()) then
+					var selfIterator : Iterator<G> init self.iterator()
+					var collectionIterator : Iterator<G> init collection.iterator()
+					var difference : Boolean init false
+					from "void"
+					until (selfIterator.isOff() or collectionIterator.isOff() or difference)
+					loop
+						if(not (selfIterator.next == collectionIterator.next)) then
+							difference := true
+						end
 					end
+					isEqual := not difference
 				end
-				result := not difference
 			end
 		end
+		result := isEqual
 	end
 	
 	/** returns the index of the first element instance in the OrderedCollection */
