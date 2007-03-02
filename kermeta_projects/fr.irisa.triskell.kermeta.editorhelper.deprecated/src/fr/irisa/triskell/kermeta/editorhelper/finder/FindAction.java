@@ -1,4 +1,13 @@
-/*$Id: FindAction.java,v 1.1 2007-02-28 09:41:57 cfaucher Exp $*/
+/*$Id: FindAction.java,v 1.2 2007-03-02 13:26:01 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
+* File : 	sdfg.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
+
 /*******************************************************************************
  * Copyright (c) 2007 Ecliptical Software Inc. and others.
  * All rights reserved. This program and the accompanying materials
@@ -14,16 +23,21 @@ package fr.irisa.triskell.kermeta.editorhelper.finder;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 
 public class FindAction extends Action {
 	
 	private final IEditorPart editor;
 	
-	public FindAction(IEditorPart editor) {
+	// Added for Kermeta
+	private final String editorID;
+	
+	public FindAction(IEditorPart editor, String editorID) {
 		this.editor = editor;
+		this.editorID = editorID;
 	}
 	
 	public void run() {
-		FindPlugin.getDefault().openFindDialog(editor);
+		FindPlugin.getDefault().openFindDialog(editor, editorID);
 	}
 }

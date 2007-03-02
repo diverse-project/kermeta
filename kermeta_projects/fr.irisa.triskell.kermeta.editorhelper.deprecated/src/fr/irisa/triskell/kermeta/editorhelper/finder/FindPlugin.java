@@ -1,4 +1,4 @@
-/*$Id: FindPlugin.java,v 1.3 2007-02-28 15:30:33 cfaucher Exp $
+/*$Id: FindPlugin.java,v 1.4 2007-03-02 13:26:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.editorfinder
 * File : 	FindPlugin.java
 * License : EPL
@@ -22,10 +22,11 @@
  *******************************************************************************/
 package fr.irisa.triskell.kermeta.editorhelper.finder;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
+import java.util.Hashtable;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Display;
@@ -55,20 +56,6 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 
 	// The shared instance
 	private static FindPlugin plugin;
-	
-	private static final Collection EDITOR_IDS;
-	
-	static {
-		// Modified for Kermeta
-		HashSet editorIds = new HashSet(5);
-		editorIds.add("org.eclipse.emf.ecore.presentation.EcoreEditorID");
-		editorIds.add("org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
-		editorIds.add("org.eclipse.emf.ecore.presentation.XMLReflectiveEditorID");
-		editorIds.add("org.eclipse.emf.codegen.ecore.genmodel.presentation.GenModelEditorID");
-		// Added for Kermeta
-		editorIds.add("fr.irisa.triskell.kermeta.presentation.KmEditorID");
-		EDITOR_IDS = Collections.unmodifiableSet(editorIds);
-	}
 	
 	private FindDialog findDialog;
 	
@@ -112,9 +99,9 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 	}
 
 	private void doStop() {
-		if (findDialog != null) {
-			findDialog.close();
-			findDialog = null;
+		if (getDefault().findDialog != null) {
+			getDefault().findDialog.close();
+			getDefault().findDialog = null;
 		}
 		
 		stopListening();
@@ -129,7 +116,39 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 		return plugin;
 	}
 
+	// Added for Kermeta
+	private HashSet <String> editorIDs = new HashSet <String> ();
+	private Hashtable <String, IConfigurationElement> editorContributor = new Hashtable <String, IConfigurationElement> ();
+
+	// Added for Kermeta
+	private void initialize() {
+		
+		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("fr.irisa.triskell.kermeta.editorhelper", "emfSearch");
+		for (int i = 0; i < elements.length; i++) {
+			
+			getDefault().editorIDs.add( elements[i].getAttribute("id") );
+			getDefault().editorContributor.put(elements[i].getAttribute("id"), elements[i]);
+			
+		}
+		
+	}
+	
+	static public String getClass(String editorID) {
+		IConfigurationElement element = getDefault().editorContributor.get(editorID);
+		return element.getAttribute("class");
+	}
+	
+	static public IConfigurationElement getConfigurationElement(String editorID) {
+		return getDefault().editorContributor.get(editorID);
+	}
+	
+	static public boolean isEditorExtended(String editorID) {
+		return getDefault().editorIDs.contains( editorID );
+	}
+	
+	
 	public void earlyStartup() {
+		initialize();
 		getWorkbench().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				startListening();
@@ -201,8 +220,8 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 	public void partActivated(IWorkbenchPartReference partRef) {
 		if (partRef instanceof IEditorReference)
 			editorActivated((IEditorReference) partRef);
-		else if (findDialog != null)
-			findDialog.setEditor(null);
+		else if (getDefault().findDialog != null)
+			getDefault().findDialog.setEditor(null);
 	}
 	
 	public void partDeactivated(IWorkbenchPartReference partRef) {
@@ -236,29 +255,29 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 
 	private void editorActivated(IEditorReference partRef) {
 		IEditorPart editor = null;
-		if (EDITOR_IDS.contains(partRef.getId())) {
+		if (getDefault().editorIDs.contains(partRef.getId())) {
 			editor = ((IEditorReference) partRef).getEditor(false);
 			if (editor != null) {
 				IActionBars bars = editor.getEditorSite().getActionBars();
 				if (bars.getGlobalActionHandler(ActionFactory.FIND.getId()) == null) {
-					bars.setGlobalActionHandler(ActionFactory.FIND.getId(), new FindAction(editor));
+					bars.setGlobalActionHandler(ActionFactory.FIND.getId(), new FindAction(editor, ((IEditorReference) partRef).getId()));
 					bars.updateActionBars();
 				}
 			}
 		}
 
-		if (findDialog != null)
-			findDialog.setEditor(editor);
+		if (getDefault().findDialog != null)
+			getDefault().findDialog.setEditor(editor);
 	}
 	
 	private void editorClosed(IEditorReference partRef) {
-		if (EDITOR_IDS.contains(partRef.getId())) {
+		if (getDefault().editorIDs.contains(partRef.getId())) {
 			IEditorPart editor = ((IEditorReference) partRef).getEditor(false);
 			if (editor == null)
 				return;
 			
-			if (findDialog != null && editor == findDialog.getEditor())
-				findDialog.setEditor(null);
+			if (getDefault().findDialog != null && editor == getDefault().findDialog.getEditor())
+				getDefault().findDialog.setEditor(null);
 			
 			IActionBars bars = editor.getEditorSite().getActionBars();
 			if (bars.getGlobalActionHandler(ActionFactory.FIND.getId()) instanceof FindAction) {
@@ -268,18 +287,19 @@ public class FindPlugin extends AbstractUIPlugin implements IStartup, IWindowLis
 		}
 	}
 	
-	void openFindDialog(IEditorPart editor) {
-		if (findDialog == null) {
-			findDialog = new FindDialog(editor.getSite().getShell());
-			findDialog.create();
-			findDialog.getShell().addDisposeListener(new DisposeListener() {
+	void openFindDialog(IEditorPart editorPart, String editorID) {
+		if (getDefault().findDialog == null) {
+			getDefault().findDialog = new FindDialog(editorPart.getSite().getShell());
+			getDefault().findDialog.setEditorID(editorID);
+			getDefault().findDialog.setEditor(editorPart);
+			getDefault().findDialog.create();
+			getDefault().findDialog.getShell().addDisposeListener(new DisposeListener() {
 				public void widgetDisposed(DisposeEvent e) {
-					findDialog = null;
+					getDefault().findDialog = null;
 				}
 			});
 		}
 
-		findDialog.setEditor(editor);
-		findDialog.open();
+		getDefault().findDialog.open();
 	}
 }
