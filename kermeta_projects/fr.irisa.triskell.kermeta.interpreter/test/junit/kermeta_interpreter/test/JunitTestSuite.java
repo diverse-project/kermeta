@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.31 2007-03-02 13:39:09 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.32 2007-03-02 14:08:07 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -174,9 +174,11 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","061_weaving_in_kermeta_aspect1.main.kmt" );
 
-		testWithFile("test/kmt_testcases","62_testIsInstanceOf.main.kmt" );
+		testWithFile("test/kmt_testcases","062_testIsInstanceOf.main.kmt" );
 
-		testWithFile("test/kmt_testcases","63_testAsType.main.kmt" );
+		testWithFile("test/kmt_testcases","063_testAsType.main.kmt" );
+
+		testWithFile("test/kmt_testcases","064_testReals.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
