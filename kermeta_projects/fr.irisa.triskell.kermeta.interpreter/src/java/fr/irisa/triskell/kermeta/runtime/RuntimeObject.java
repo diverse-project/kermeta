@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.20 2007-02-27 17:26:42 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.21 2007-03-02 14:38:35 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -149,7 +149,7 @@ public class RuntimeObject {
 				// Resolve this operation call
 				RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
 				result = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(roResult);
-				System.err.println("hascode = " + result);
+				//System.err.println("hascode = " + result);
 				// After operation has been evaluated, pop its context
 			} finally {
 				interpretercontext.popCallFrame();
@@ -189,7 +189,7 @@ public class RuntimeObject {
             	else return false;
             }
             
-	//      if the object defines a equals method (other than the default one defined on object), use it
+            // if the object defines a equals method (other than the default one defined on object), use it
 	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
 	        SimpleType target_type = new SimpleType(t_target);
 	        ExpressionInterpreter interpreter = getFactory().getMemory().getCurrentInterpreter();
@@ -199,7 +199,7 @@ public class RuntimeObject {
 	        if(!name.equals("kermeta::language::structure::Object")){
 	        	
 	        	// Create a context for this operation call, setting self object to ro_target
-	        	ArrayList parameters = new ArrayList();
+	        	ArrayList<RuntimeObject> parameters = new ArrayList<RuntimeObject>();
 	        	parameters.add(other);
 	        	interpretercontext.pushOperationCallFrame(this, op, parameters, null);
 	        	boolean result = false;
@@ -208,8 +208,7 @@ public class RuntimeObject {
 					RuntimeObject roResult = (RuntimeObject)interpreter.accept(op.getOperation());
 					result = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(roResult);
 
-					if(!result) 
-						System.err.println(this + " " + other);
+					//if(!result) System.err.println(this + " " + other);
 					// After operation has been evaluated, pop its context
 				} finally {
 					interpretercontext.popCallFrame();
