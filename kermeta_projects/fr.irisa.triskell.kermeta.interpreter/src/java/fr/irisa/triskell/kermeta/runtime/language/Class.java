@@ -58,10 +58,18 @@ public class Class {
 		// TypeEqualityChecker is not able to test it, since it is based on the underlying model representation
 		// (RuntimeObject.getData().get("kcoreObject"), which refers to a model element).
 		// Though, an instance (M1 level :)) has no model element associatied to it.
+
 		if (self == other) return self.getFactory().getMemory().trueINSTANCE;
 		
 		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
-		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)other.getData().get("kcoreObject");
+		
+		fr.irisa.triskell.kermeta.language.structure.Object obj = (fr.irisa.triskell.kermeta.language.structure.Object)other.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class pro = null;
+		if(obj instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+			pro = (fr.irisa.triskell.kermeta.language.structure.Class) obj;
+		else
+			return self.getFactory().getMemory().falseINSTANCE;
+		
 		
 		if (pro == null || req == null) return self.getFactory().getMemory().falseINSTANCE;
 		
