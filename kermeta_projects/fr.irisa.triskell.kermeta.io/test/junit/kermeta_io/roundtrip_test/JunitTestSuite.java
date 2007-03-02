@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2007-01-26 09:46:30 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2007-03-02 14:54:45 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -54,7 +54,7 @@ public class JunitTestSuite extends TestCase {
 		super(arg0);
 		
 		 // SET THE STD LIB
-		StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "../fr.irisa.triskell.kermeta/lib/framework.km";
 		printer = new KM2KMTPrettyPrinter();
 	    // INIT TYPE CHECKER
 	  //  TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
