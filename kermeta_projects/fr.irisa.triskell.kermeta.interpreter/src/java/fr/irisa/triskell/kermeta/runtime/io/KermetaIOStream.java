@@ -1,4 +1,4 @@
-/* $Id: KermetaIOStream.java,v 1.6 2006-09-19 14:44:42 zdrey Exp $
+/* $Id: KermetaIOStream.java,v 1.7 2007-03-05 15:55:33 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaIOStream.java
  * License: GPL
@@ -19,7 +19,7 @@ public interface KermetaIOStream {
 	
     public abstract void print(Object outputString);
     
-    public abstract Object read(String prompt);
+    public abstract String read(String prompt);
     
     /** Disconnect the console */
     public abstract void dispose();

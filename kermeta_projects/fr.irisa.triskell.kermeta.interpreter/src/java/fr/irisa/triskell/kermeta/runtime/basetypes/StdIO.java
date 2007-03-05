@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.9 2007-03-05 12:57:32 cfaucher Exp $
+/* $Id: StdIO.java,v 1.10 2007-03-05 15:55:33 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -42,9 +42,7 @@ public class StdIO {
 	    java.lang.String input = null;
 		if (String.getValue(prompt).length()>0)
 		    prompt.getFactory().getKermetaIOStream().print(String.getValue(prompt));
-		// FIXME : dirty cast.. read returns a String or could return smthg else?
-		input = (java.lang.String)prompt.getFactory().getKermetaIOStream().read(
-		        String.getValue(prompt));
+		input = prompt.getFactory().getKermetaIOStream().read(String.getValue(prompt));
 		
 		RuntimeObject result = String.create(input, prompt.getFactory());
 		return result;

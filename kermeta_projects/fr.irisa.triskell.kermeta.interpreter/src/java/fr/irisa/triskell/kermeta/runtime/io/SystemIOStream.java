@@ -1,4 +1,4 @@
-/* $Id: SystemIOStream.java,v 1.4 2006-09-19 14:44:42 zdrey Exp $
+/* $Id: SystemIOStream.java,v 1.5 2007-03-05 15:55:33 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SystemIOStream.java
  * License: GPL
@@ -33,8 +33,7 @@ public class SystemIOStream implements KermetaIOStream {
         System.out.print(outputObject);
     }
     
-    // FIXME : Object->String
-    public Object read(String prompt)
+    public String read(String prompt)
     {
         String input = null;
         System.out.print(prompt+" ");
@@ -67,11 +66,12 @@ public class SystemIOStream implements KermetaIOStream {
 		kermetaInterpreter = kInterpreter;
 	}
 
-	public KermetaInterpreter getKermetaInterpreter() { return kermetaInterpreter; }
+	public KermetaInterpreter getKermetaInterpreter() {
+		return kermetaInterpreter;
+	}
 
 	public void setKermetaInterpreter() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 }

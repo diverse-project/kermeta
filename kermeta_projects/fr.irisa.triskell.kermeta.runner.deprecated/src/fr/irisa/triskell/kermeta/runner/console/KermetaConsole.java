@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.22 2006-09-19 14:35:01 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.23 2007-03-05 15:55:30 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -103,7 +103,7 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
 	    /*stream.setColor(new Color(null, 120, 5, 100));*/
     }
     
-    public Object read(String prompt)
+    public String read(String prompt)
     {
 		String result = "";
     	try
