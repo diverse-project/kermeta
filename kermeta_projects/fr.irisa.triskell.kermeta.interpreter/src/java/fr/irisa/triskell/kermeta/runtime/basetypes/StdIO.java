@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.8 2006-08-21 08:56:01 zdrey Exp $
+/* $Id: StdIO.java,v 1.9 2007-03-05 12:57:32 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -35,8 +35,8 @@ public class StdIO {
 		return output.getFactory().getMemory().voidINSTANCE;
 	}
 	
-	// Implementation of method writeln called as :
-	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read(output)
+	// Implementation of method read called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read(prompt)
 	public static RuntimeObject read(RuntimeObject prompt)
 	{
 	    java.lang.String input = null;
