@@ -1,6 +1,6 @@
 /* $Id$
- * Project    : fr.irisa.triskell.samples.fsm
- * File       : fsmmodel.kmt
+ * Project    : fr.irisa.triskell.kermeta.samples.fsm.demo
+ * File       : fsm.kmt
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
@@ -239,8 +239,7 @@ class AutomatonHelper
 		if AutomatonHelper.new.conformityChecker(a) == true then 
 	    	var resource : Resource init repository.createResource(uri , mmuri)
 	    	resource.instances.add(a)
-	    	//a.stateSet.each { z | resource.instances.add(z)}
-	    	resource.save()
+	    	resource.save
 	    else
 	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
 	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
