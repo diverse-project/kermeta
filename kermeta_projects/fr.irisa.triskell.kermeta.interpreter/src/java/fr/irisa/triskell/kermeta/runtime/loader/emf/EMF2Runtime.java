@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.52 2006-12-13 15:57:42 dtouzet Exp $
+/* $Id: EMF2Runtime.java,v 1.53 2007-03-06 16:20:57 ffleurey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -383,7 +383,7 @@ public class EMF2Runtime {
 	    	// Note : if it is not found, this method throws a KermetaRaisedException.
 	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature, eclass);
 	    	// Means that prop does not exist in kermeta side, so do nothing
-	    	if (prop != null)
+	    	if (prop != null && !prop.isIsDerived())
 	    	{	
 	    		RuntimeObject roprop = unit.getRuntimeMemory().getRuntimeObjectForFObject(prop);
 	    		// eGet can return an elist of features
