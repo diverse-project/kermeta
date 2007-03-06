@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.13 2006-09-28 12:51:55 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.14 2007-03-06 13:26:30 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -44,6 +44,7 @@ public class ExpressionContext {
     
     /** @deprecated */
     public Expression expression;
+    
     /** The last evaluated statement in the interpretation process.
      *  Used to interrupt the stepOver command in the debug mode after each
      *  statement evaluation. */
@@ -124,6 +125,7 @@ public class ExpressionContext {
     /**
      * Set the expression associated to this context
      * Useful for the debug mode
+     * FIXME not used and expression is deprecated, maybe this method will be deprecated
      * @param exp
      */
     public void setExpression(Expression exp)
@@ -131,6 +133,9 @@ public class ExpressionContext {
     	expression = exp;
     }
 
+    /**
+     * FIXME not used and expression is deprecated, maybe this method will be deprecated
+     */
 	public Expression getExpression() {
 		return expression;
 	}
