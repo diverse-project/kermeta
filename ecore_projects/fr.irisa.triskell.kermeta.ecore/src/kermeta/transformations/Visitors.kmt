@@ -1,4 +1,4 @@
-/* $Id: Visitors.kmt,v 1.4 2007-02-23 13:36:37 vmahe Exp $
+/* $Id: Visitors.kmt,v 1.5 2007-03-07 14:02:23 dvojtise Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -135,7 +135,7 @@ class VisitorPattern
 		if self.generateJavaCode then
 			// add the java code for the implementation
 			helper.addAnnotation(visitOp,"http://www.eclipse.org/emf/2002/GenModel","body",
-				"do end")
+				"")
 		end
 		if self.generateKermetaCode then
 			// add the kermeta code for the implementation
@@ -196,7 +196,7 @@ class VisitorPattern
 	        		var acceptOp : EOperation init addAcceptOperation(eClass, abstractVisitor, visitReturnType)
 	        		if self.generateJavaCode then
 	        			var returnCode : String init ""
-	        			if not visitReturnType.isVoid then returnCode := "return := " end
+	        			if not visitReturnType.isVoid then returnCode := "return " end
 						// add the java code for the implementation
 						helper.addAnnotation(acceptOp,"http://www.eclipse.org/emf/2002/GenModel","body",
 							returnCode + "visitor.visit" + eClass.name + "(this);")
