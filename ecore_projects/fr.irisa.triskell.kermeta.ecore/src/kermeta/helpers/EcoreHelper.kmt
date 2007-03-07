@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.1 2006-03-12 13:10:21 dvojtise Exp $
+/* $Id: EcoreHelper.kmt,v 1.2 2007-03-07 09:59:37 dvojtise Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -76,7 +76,7 @@ class EcoreHelper
 
 	operation askIfNecessary(prompt : String, currentValue : String) : String is do
 		result := currentValue
-		if result == "" then
+		if result.isVoid then
 			result := stdio.read(prompt)
 		end
 	end
