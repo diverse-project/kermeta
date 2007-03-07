@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.21 2006-10-25 08:29:16 dvojtise Exp $
+/* $Id: KermetaLauncher.java,v 1.22 2007-03-07 10:01:32 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -216,11 +216,19 @@ public class KermetaLauncher
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
             ArrayList interpreter_params =  new ArrayList();
             
-            String[] params_table = argsString.split(" ");
-            
-            for (int i=0; i<params_table.length; i++) { 
-            	interpreter_params.add(
-            			fr.irisa.triskell.kermeta.runtime.basetypes.String.create(params_table[i],interpreter.getMemory().getROFactory()));
+            if(!argsString.equals("")){
+            	// add only params if they are defined in the runconfiguratio
+            	// DVK: maybe we should think to a better user interface that allows to set argument with other types than String ...
+	            String[] params_table = argsString.split(" ");
+	            
+	            for (int i=0; i<params_table.length; i++) { 
+	            	interpreter_params.add(
+	            			fr.irisa.triskell.kermeta.runtime.basetypes.String.create(params_table[i],interpreter.getMemory().getROFactory()));
+	            }
+            }
+            // we don't want to crash with an internal error, simply give Void for all the argument that were not set
+            while( interpreter_params.size() < interpreter.getEntryOperation().getOwnedParameter().size()){
+            	interpreter_params.add(interpreter.getMemory().voidINSTANCE);
             }
             interpreter.setEntryParameters(interpreter_params);
 
