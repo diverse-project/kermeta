@@ -1,7 +1,7 @@
-/* $Id: Resource.java,v 1.9 2006-11-16 14:05:50 dvojtise Exp $
+/* $Id: Resource.java,v 1.10 2007-03-08 14:16:37 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 6, 2005

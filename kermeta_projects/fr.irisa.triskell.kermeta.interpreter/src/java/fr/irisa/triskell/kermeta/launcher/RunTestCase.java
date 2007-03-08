@@ -1,7 +1,7 @@
-/* $Id: RunTestCase.java,v 1.9 2006-07-21 06:59:40 dvojtise Exp $
+/* $Id: RunTestCase.java,v 1.10 2007-03-08 14:16:37 cfaucher Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005

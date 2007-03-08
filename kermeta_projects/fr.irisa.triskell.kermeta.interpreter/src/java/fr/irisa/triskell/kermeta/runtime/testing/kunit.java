@@ -1,7 +1,7 @@
-/* $Id: kunit.java,v 1.2 2005-05-25 17:43:31 ffleurey Exp $
+/* $Id: kunit.java,v 1.3 2007-03-08 14:16:37 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.framework
  * File       : kunit.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 19 avr. 2005

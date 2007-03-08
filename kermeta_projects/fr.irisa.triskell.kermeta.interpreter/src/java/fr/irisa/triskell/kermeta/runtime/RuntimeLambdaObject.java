@@ -1,7 +1,7 @@
-/* $Id: RuntimeLambdaObject.java,v 1.6 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.7 2007-03-08 14:16:37 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: Apr 21, 2005

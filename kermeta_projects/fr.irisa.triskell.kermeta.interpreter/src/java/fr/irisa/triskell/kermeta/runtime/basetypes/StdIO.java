@@ -1,7 +1,7 @@
-/* $Id: StdIO.java,v 1.10 2007-03-05 15:55:33 cfaucher Exp $
+/* $Id: StdIO.java,v 1.11 2007-03-08 14:16:37 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 4, 2005

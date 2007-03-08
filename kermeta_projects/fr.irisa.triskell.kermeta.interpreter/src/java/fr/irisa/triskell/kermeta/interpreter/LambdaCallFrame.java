@@ -1,7 +1,7 @@
-/* $Id: LambdaCallFrame.java,v 1.10 2006-05-23 13:30:49 jmottu Exp $
+/* $Id: LambdaCallFrame.java,v 1.11 2007-03-08 14:16:36 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 16 mai 2005
@@ -24,7 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class LambdaCallFrame extends CallFrame {
 

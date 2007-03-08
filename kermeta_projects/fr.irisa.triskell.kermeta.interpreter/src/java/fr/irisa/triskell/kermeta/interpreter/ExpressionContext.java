@@ -1,7 +1,7 @@
-/* $Id: ExpressionContext.java,v 1.14 2007-03-06 13:26:30 cfaucher Exp $
+/* $Id: ExpressionContext.java,v 1.15 2007-03-08 14:16:36 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 16, 2005
@@ -17,7 +17,6 @@ import java.util.Hashtable;
 
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -40,10 +39,6 @@ public class ExpressionContext {
      * key : the name of the variable (String)
      * value : the variable itself (Variable) */
     protected Hashtable<String, Variable> variables;
-    
-    
-    /** @deprecated */
-    public Expression expression;
     
     /** The last evaluated statement in the interpretation process.
      *  Used to interrupt the stepOver command in the debug mode after each
@@ -121,24 +116,6 @@ public class ExpressionContext {
     public Hashtable<String, Variable> getVariables() {
         return variables;
     }
-
-    /**
-     * Set the expression associated to this context
-     * Useful for the debug mode
-     * FIXME not used and expression is deprecated, maybe this method will be deprecated
-     * @param exp
-     */
-    public void setExpression(Expression exp)
-    {
-    	expression = exp;
-    }
-
-    /**
-     * FIXME not used and expression is deprecated, maybe this method will be deprecated
-     */
-	public Expression getExpression() {
-		return expression;
-	}
     
     public void setStatement(EObject p_statement) {
     	statement = p_statement;

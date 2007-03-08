@@ -1,7 +1,7 @@
-/* $Id: SystemIOStream.java,v 1.5 2007-03-05 15:55:33 cfaucher Exp $
+/* $Id: SystemIOStream.java,v 1.6 2007-03-08 14:16:36 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: SystemIOStream.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 18, 2005

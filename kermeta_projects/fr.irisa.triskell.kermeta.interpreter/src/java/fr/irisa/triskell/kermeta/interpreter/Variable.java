@@ -1,7 +1,7 @@
-/* $Id: Variable.java,v 1.8 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: Variable.java,v 1.9 2007-03-08 14:16:36 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : Variable.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 16, 2005
@@ -13,18 +13,12 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
-import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
  * 
  */
 public class Variable {
-
-    /**
-     * @deprecated The declaration in kermeta that correspond to this Variable
-     */
-    protected VariableDecl declaration;
 
     /**
      * The value of the variable
@@ -45,27 +39,7 @@ public class Variable {
     }
 
     /**
-     * @return Returns the declaration.
-     * 
-     * @uml.property name="declaration"
-     */
-    public VariableDecl getDeclaration() {
-        return declaration;
-    }
-
-    /**
-     * @param declaration The declaration to set.
-     * 
-     * @uml.property name="declaration"
-     */
-    public void setDeclaration(VariableDecl declaration) {
-        this.declaration = declaration;
-    }
-
-    /**
      * @return Returns the name.
-     * 
-     * @uml.property name="name"
      */
     public String getName() {
         return name;
@@ -73,8 +47,6 @@ public class Variable {
 
     /**
      * @param name The name to set.
-     * 
-     * @uml.property name="name"
      */
     public void setName(String name) {
         this.name = name;

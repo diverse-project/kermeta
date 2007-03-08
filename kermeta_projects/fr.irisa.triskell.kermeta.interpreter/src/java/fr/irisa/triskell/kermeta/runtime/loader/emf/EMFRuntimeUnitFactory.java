@@ -1,7 +1,7 @@
-/* $Id: EMFRuntimeUnitFactory.java,v 1.5 2006-02-09 13:03:50 zdrey Exp $
+/* $Id: EMFRuntimeUnitFactory.java,v 1.6 2007-03-08 14:16:37 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnitFactory.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 6, 2005

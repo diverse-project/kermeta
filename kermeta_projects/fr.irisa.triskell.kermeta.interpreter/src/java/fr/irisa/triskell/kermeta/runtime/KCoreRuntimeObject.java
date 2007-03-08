@@ -1,7 +1,7 @@
-/* $Id: KCoreRuntimeObject.java,v 1.3 2006-11-16 14:10:16 dvojtise Exp $
+/* $Id: KCoreRuntimeObject.java,v 1.4 2007-03-08 14:16:37 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KCoreRuntimeObject.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 7 juin 2005
@@ -18,7 +18,7 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
  */
 public class KCoreRuntimeObject extends RuntimeObject {
 

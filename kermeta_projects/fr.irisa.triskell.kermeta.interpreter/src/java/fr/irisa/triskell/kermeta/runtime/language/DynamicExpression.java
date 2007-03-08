@@ -1,7 +1,7 @@
-/* $Id: DynamicExpression.java,v 1.6 2006-10-06 12:19:50 ftanguy Exp $
+/* $Id: DynamicExpression.java,v 1.7 2007-03-08 14:16:37 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 8 juin 2005

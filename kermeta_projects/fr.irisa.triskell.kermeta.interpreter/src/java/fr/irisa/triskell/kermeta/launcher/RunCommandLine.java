@@ -1,7 +1,7 @@
-/* $Id: RunCommandLine.java,v 1.12 2006-10-25 08:30:14 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.13 2007-03-08 14:16:37 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 27 avr. 2005

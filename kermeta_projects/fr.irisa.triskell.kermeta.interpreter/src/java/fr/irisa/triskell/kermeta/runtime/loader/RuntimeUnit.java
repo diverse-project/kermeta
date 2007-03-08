@@ -1,7 +1,7 @@
-/* $Id: RuntimeUnit.java,v 1.6 2006-11-16 14:06:12 dvojtise Exp $
+/* $Id: RuntimeUnit.java,v 1.7 2007-03-08 14:16:37 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 6, 2005

@@ -1,7 +1,7 @@
-/* $Id: KermetaInterpreterError.java,v 1.1 2005-04-18 09:09:08 dvojtise Exp $
+/* $Id: KermetaInterpreterError.java,v 1.2 2007-03-08 14:16:37 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : KermetaInterpreterError.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 14 avr. 2005

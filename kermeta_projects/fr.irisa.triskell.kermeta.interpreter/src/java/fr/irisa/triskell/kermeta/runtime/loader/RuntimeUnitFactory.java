@@ -1,7 +1,7 @@
-/* $Id: RuntimeUnitFactory.java,v 1.3 2006-02-09 12:04:57 zdrey Exp $
+/* $Id: RuntimeUnitFactory.java,v 1.4 2007-03-08 14:16:37 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnitFactory.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 6, 2005

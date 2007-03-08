@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.13 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RuntimeMemory.java,v 1.14 2007-03-08 14:16:37 cfaucher Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -41,8 +41,6 @@ public class RuntimeMemory {
 	
 	public RuntimeObject voidINSTANCE;
 	public RuntimeObject stdioINSTANCE;
-	/** To be deprecated..*/
-	public fr.irisa.triskell.kermeta.language.structure.Class stdioFClass=null;
 	
 	protected KermetaUnit unit;
 
@@ -95,7 +93,9 @@ public class RuntimeMemory {
         return memoryLoader.getNumberOfObjectCached();
     }
     
-    /** @return the hashtable of runtime objects available in memory */
+    /** 
+     * @return the hashtable of runtime objects available in memory 
+     */
     public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject> getRuntimeObjects()
     {
         return memoryLoader.getRuntimeObjects();

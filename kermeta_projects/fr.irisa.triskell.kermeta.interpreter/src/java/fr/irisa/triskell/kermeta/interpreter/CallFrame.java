@@ -1,7 +1,7 @@
-/* $Id: CallFrame.java,v 1.20 2006-09-28 12:52:27 zdrey Exp $
+/* $Id: CallFrame.java,v 1.21 2007-03-08 14:16:36 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 16, 2005
