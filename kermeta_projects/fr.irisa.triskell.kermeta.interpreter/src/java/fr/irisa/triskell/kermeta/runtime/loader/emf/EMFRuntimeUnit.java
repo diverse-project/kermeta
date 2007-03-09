@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.33 2007-02-19 10:38:00 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.34 2007-03-09 14:29:23 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -83,12 +83,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     /** { EObject : RuntimeObject } */
     private Hashtable<EObject, RuntimeObject> runtime_objects_map;
     
-    /** this hashtable is used to store the qualified name of the element with the given nsuri.
-     * used only on the metamodel via getEQualifiedName()
-     * a user may improve the performances if he directly set these values for his metamodel. 
-     * This will allow to not load the metamodel in case of generated java class and bug#632
-     */
-    public Hashtable<String,String> nsUri_QualifiedName_map = new Hashtable<String,String>();
+    
     
 
     /** Mandatory attribute used to store the metamodel
@@ -98,6 +93,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      * Not used, if the model plugin is not deployed (fully reflective)
      */
     protected Resource metaModelResource;
+    
+    /**
+     * instance of the patcher : do not reuse metaModelResource because in some situation
+     * we cannot garantee that it use a real ecore file instead of a registered generated java
+     */
+    protected QualifiedNamePatcher qualifiedNamePatcher;
 
     /** Logger to get the error of this launcher */
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.EMFRuntime");
@@ -493,38 +494,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
 	    }
 	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
-	    	// optimization : use of an hashtable
-	    	String nsuri = ((EPackage)obj).getNsURI();
-	    	String packageQualifiedName = this.nsUri_QualifiedName_map.get(nsuri);
-	    	if( packageQualifiedName == null)
-	    	{   // optimization failed, need to load the metamodel and retreive the qualified name
-	    		if(!metamodel_uri.equals("")){	    			
-	    			// internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() + " || "+ obj.toString() );	    			
-			    	// lazy load of the metamodel 	
-			    	loadMetaModelResource(metamodel_uri);
-			    	// look into the mm if the given object can be retreived, then get its real qualified name
-			    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
-			    	if (mmPackage != null)
-			    	{
-			    		// Avoid infinite recursive loop when looking for ecore package. 
-			    		if(nsuri.equals("http://www.eclipse.org/emf/2002/Ecore")){
-			    			result = mmPackage.getName();
-			    		}
-			    		else result = getEQualifiedName(mmPackage);
-			    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
-			    	}
-	    		}
-	    		else{
-	    			// metamodel uri is not set cannot patch, let's hope there is no package hierachy
-	    			internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
-	    					" || "+ obj.toString() );
-	    			internalLog.warn("Cannot retreive the metamodel. If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");
-	    			result = obj.getName();
-	    			this.nsUri_QualifiedName_map.put(nsuri,result);
-	    		}
-	    	}
-	    	else
-	    		result = packageQualifiedName;
+	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
+	    	result = qualifiedNamePatcher.getGeneratedPackageQualifiedName(obj);
 	    }
 	    return result;
 	}
@@ -566,10 +537,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	return u;
 	}
 
-	public void loadMetaModelResource(String mm_uri){
-		if(metaModelResource == null)
-			metaModelResource = this.loadMetaModelAsEcore(this.metamodel_uri);
-	}
 	public Resource getMetaModelResource() {
 		if(metaModelResource!= null) return metaModelResource;
 		if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
@@ -592,29 +559,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	public void setMetaModelResource(Resource metaModelResource) {
 		this.metaModelResource = metaModelResource;
 	}
-	
-	/**
-     * Get the EPackge corresponding to the given nsuri 
-     * @param nsuri the nsuri of which we look for the corresponding in Ecore meta-model
-     * @return the EPackage in the ecore meta-model given by the user for serialization of its model
-     */
-    protected EPackage getEPackageFromNsUri(String nsuri)
-    {
-    	EPackage result = null;
-        TreeIterator it = null; 
-       
-        it = metaModelResource.getAllContents();            
-        while (it.hasNext() && result == null)
-        {
-            EObject obj = (EObject)it.next();
-			if (obj instanceof EPackage)
-			{
-				if (((EPackage)obj).getNsURI().equals(nsuri))
-				    result = (EPackage)obj;
-			}
-        }
-        return result;
-    }
     
 	/**
 	 * returns the list of resources that are linked to the elements of this resources
