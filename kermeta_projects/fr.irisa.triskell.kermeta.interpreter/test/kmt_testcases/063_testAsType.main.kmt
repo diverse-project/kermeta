@@ -8,6 +8,7 @@ require kermeta
 using kermeta::standard
 using kermeta::utils
 using kermeta::language::structure
+using kermeta::kunit
 
 class A {}
 
@@ -21,7 +22,10 @@ class E inherits D<String>, B {}
 
 class TestAsType inherits kermeta::kunit::TestCase {
 
-	operation main() : Void is do
+	operation main() : Void is do	
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestAsType)
+		tr.printTestResult
 	end
 	
 	operation testAsType1() : Boolean is do
