@@ -6,7 +6,7 @@
          <meta.schema plugin="fr.irisa.triskell.kermeta.editorhelper" id="emfSearch" name="emfSearch"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         Enable the search use inside an EMF reflexive editor
       </documentation>
    </annotation>
 
@@ -81,7 +81,7 @@
          <meta.section type="since"/>
       </appInfo>
       <documentation>
-         [Enter the first release in which this extension point appears.]
+         0.4.1
       </documentation>
    </annotation>
 
@@ -90,7 +90,16 @@
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
-         [Enter extension point usage example here.]
+         Following is an example of how an EMF reflexive editor can be registered in order to enable the search use:
+&lt;pre&gt;
+  &lt;extension
+         point=&quot;fr.irisa.triskell.kermeta.editorhelper.emfSearch&quot;&gt;
+      &lt;editor id=&quot;org.eclipse.emf.ecore.presentation.EcoreEditorID&quot;&gt;
+         &lt;Type displayedName=&quot;EClass&quot; name=&quot;org.eclipse.emf.ecore.EClass&quot;/&gt;
+         &lt;Type displayedName=&quot;EPackage&quot; name=&quot;org.eclipse.emf.ecore.Package&quot;/&gt;
+      &lt;/editor&gt;
+  &lt;/extension&gt;
+&lt;/pre&gt;
       </documentation>
    </annotation>
 
