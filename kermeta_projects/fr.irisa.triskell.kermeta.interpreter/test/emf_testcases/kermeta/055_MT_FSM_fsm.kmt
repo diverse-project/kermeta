@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_fsm.kmt,v 1.1 2006-12-13 07:57:29 dvojtise Exp $
+/* $Id: 055_MT_FSM_fsm.kmt,v 1.2 2007-03-14 16:02:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.samples.fsm
  * File       : fsmmodel.kmt
  * License    : EPL
@@ -130,13 +130,14 @@ class State {
 	reference combination : Set<State>
 	
 	// Go to the next state
-	operation step(c : String) : String raises FSMException is
-	
-	// Declaration of the pre-condition
-	pre notVoidInput is
-		c != void and c != ""
-		
-	do
+	operation step(c : String) : String raises FSMException	
+		// Declaration of the pre-condition
+		pre notVoidInput is
+			c != void and c != ""
+		// Declaration of the post-condition
+		post notVoidOutput is
+			result != void and result != ""	
+	 is do
 		// Get the valid transitions
 		var validTransitions : Collection<Transition> 
 		validTransitions :=	outgoingTransition.select { t | t.input.equals(c) }
@@ -148,9 +149,6 @@ class State {
 		result := validTransitions.one.fire
 	end
 		
-	// Declaration of the post-condition
-	post notVoidOutput is
-		result != void and result != ""
 	
 	// Create a new state from self state
 	operation copy() : State is do

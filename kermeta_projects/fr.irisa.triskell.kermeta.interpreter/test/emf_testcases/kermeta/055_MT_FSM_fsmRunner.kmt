@@ -65,13 +65,14 @@ class Runner<MT : basic_fsm> {
 	end
 
 	// Go to the next state
-	operation step(s : MT::State, c : String) : String raises FSMException is
-	
+	operation step(s : MT::State, c : String) : String raises FSMException 
 	// Declaration of the pre-condition
 	pre notVoidInput is
-		c != void and c != ""
-		
-	do
+		c != void and c != ""	
+	// Declaration of the post-condition
+	post notVoidOutput is
+		result != void and result != ""
+	is	do
 		// Get the valid transitions
 		var validTransitions : Collection<MT::Transition> 
 		validTransitions := s.outgoingTransition.select { t | t.input.equals(c) }
@@ -84,9 +85,6 @@ class Runner<MT : basic_fsm> {
 		result := fire(validTransitions.one)
 	end
 		
-	// Declaration of the post-condition
-	post notVoidOutput is
-		result != void and result != ""
 	
 	// Create a new state from self state
 	operation fire(transition : MT::Transition) : String is
