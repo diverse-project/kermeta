@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.1 2007-03-15 13:50:44 dvojtise Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.2 2007-03-15 13:51:25 dvojtise Exp $
  * Creation date: November 14, 2006
  * License:
  * Copyright:
@@ -24,15 +24,15 @@ class Main inherits kermeta::kunit::TestCase
 {
 
 	operation main () : Void is do
-		/*
+		
 		var tr : TestRunner init TestRunner.new
 		tr.run(Main)
 		tr.printTestResult
-		*/
+		/*
 		var testClass : Main init Main.new
 		testClass.setUp
 		//testClass.testLoadSaveEcoreFileUsingAnotherResource 
-		testClass.testLoadSaveFileUsingAnotherResource 
+		testClass.testLoadSaveFileUsingAnotherResource */
 		stdio.writeln("--- load_and_save_in_another_location END ---")
 	end
 	
