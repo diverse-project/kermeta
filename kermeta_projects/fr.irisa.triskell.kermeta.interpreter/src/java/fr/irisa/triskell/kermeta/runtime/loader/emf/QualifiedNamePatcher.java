@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.2 2007-03-15 16:19:55 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.3 2007-03-15 17:03:50 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -152,16 +152,20 @@ public class QualifiedNamePatcher {
 		    	}
 				// convert the uri into a file:/ protocol 
 		    	// maybe this is done by a map entry
-				URIConverter c = new URIConverterImpl();
-				platformURI = c.normalize(URI.createURI(mm_uri));
+				if(!platformURI.scheme().equals("file")){
+					URIConverter c = new URIConverterImpl();
+					platformURI = c.normalize(URI.createURI(mm_uri));
+				}
 				URL fileURL;
 				//if OSGI is started then let's try a toFileURL
 				if(org.eclipse.core.internal.runtime.Activator.getDefault() != null){
 					fileURL = FileLocator.toFileURL(new URL(platformURI.toString()));
 				}
 				else {
-					if(platformURI.scheme().equals("file"))
+					if(platformURI.scheme().equals("file")){
 						fileURL = new URL(platformURI.toString());
+						//if (u.isRelative())
+					}
 					else {
 						EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. cannot resolve " +platformURI.toString() +" into a physical file:/ scheme" );
 						fileURL = new URL(platformURI.toString());
