@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.1 2007-03-09 14:29:23 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.2 2007-03-15 16:19:55 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -23,8 +23,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * This class is used to help to pacth the EMF problem about empty packages 
@@ -118,7 +123,7 @@ public class QualifiedNamePatcher {
     {
     	EPackage result = null;
         TreeIterator it = null; 
-       
+        if(metaModelResource ==  null) return result;
         it = metaModelResource.getAllContents();            
         while (it.hasNext() && result == null)
         {
@@ -138,9 +143,33 @@ public class QualifiedNamePatcher {
 			try {
 				// create an uri, enventually relative to the user model
 				URI platformURI = emfRuntimeUnit.createURI(mm_uri);
+				if(EMFRuntimeUnit.ENABLE_EMF_DIAGNOSTIC)
+		    	{
+			    	String msg = "EMF current URI_MAP entries :\n";
+			    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
+			    		msg += "    "+o + "; " + URIConverterImpl.URI_MAP.get(o) + "\n";
+			    	EMFRuntimeUnit.internalLog.debug(msg);
+		    	}
 				// convert the uri into a file:/ protocol 
-				URL fileURL = FileLocator.toFileURL(new URL(platformURI.toString()));				
+		    	// maybe this is done by a map entry
+				URIConverter c = new URIConverterImpl();
+				platformURI = c.normalize(URI.createURI(mm_uri));
+				URL fileURL;
+				//if OSGI is started then let's try a toFileURL
+				if(org.eclipse.core.internal.runtime.Activator.getDefault() != null){
+					fileURL = FileLocator.toFileURL(new URL(platformURI.toString()));
+				}
+				else {
+					if(platformURI.scheme().equals("file"))
+						fileURL = new URL(platformURI.toString());
+					else {
+						EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. cannot resolve " +platformURI.toString() +" into a physical file:/ scheme" );
+						fileURL = new URL(platformURI.toString());
+					}
+		            
+				}
 				URI fileURI = URI.createURI(fileURL.toString());
+				EMFRuntimeUnit.internalLog.debug("loading Metamodel from physical location : " + fileURI.toString());
 				
 		        // Load resource
 		    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
