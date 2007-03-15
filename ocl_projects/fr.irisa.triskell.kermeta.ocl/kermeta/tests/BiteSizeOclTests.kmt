@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.4 2007-02-27 14:32:57 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.5 2007-03-15 16:39:14 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -22,19 +22,19 @@ using ocl2kmt
 
 class  BiteSizeOclTests  inherits TestCase
 {
-		attribute repository: EMFRepository
+	attribute repository: EMFRepository
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
     attribute model : Set<Object> 
-		attribute de : DynamicExpression 
+	attribute de : DynamicExpression 
 
 				    
 	method setUp() is
 		do
 			repository := EMFRepository.new		
 			helper := OCLHelpers::OCLHelper.new
-	    helper.initialize
-	    visitor := Ocl2kmtVisitor.new
+	    	helper.initialize
+	    	visitor := Ocl2kmtVisitor.new
 			de := DynamicExpression.new
 			de.initializeDefaults
 		end
@@ -44,7 +44,7 @@ class  BiteSizeOclTests  inherits TestCase
 			var sourceFileName : String init "../../model/" + filename + ".xmi"
 			var io : StringWriter init StringWriter.new
 			visitor.setIo(io)
-	    model  := helper.loadOCLModel(repository, sourceFileName)
+			model  := helper.loadOCLModel(repository, sourceFileName)
 			helper.getInvExpression(model).accept(visitor)
 			result := io.s
 		end
@@ -305,7 +305,7 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			var kmt : String  init  visitOclXmi("35") 
 			assertEqual("s.asSequence", kmt)
-			de.formalParameters.put("s", Sequence<Integer>)
+			de.formalParameters.put("s", Set<Integer>)
  			de.parse(kmt)
 		rescue (e: DynamicExpressionException)
 			fail(e.message) 

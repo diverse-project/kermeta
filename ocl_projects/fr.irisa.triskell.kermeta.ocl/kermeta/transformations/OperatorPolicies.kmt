@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.1 2007-02-23 16:48:38 bitterjug Exp $
+/* $Id: OperatorPolicies.kmt,v 1.2 2007-03-15 16:39:15 bitterjug Exp $
  * Creation date: February 23, 2007
  * License:
  * Copyright:
@@ -142,7 +142,7 @@ class CastOp inherits OperatorPolicy {
 		 do
 			visitor.write("do")
 			visitor.write(" var ")
-			var localVarName : String init visitor.nextVarName
+			var localVarName : String init visitor.nextName("variable")
 			visitor.write(localVarName)			
 			visitor.write(" : ")
 			// TODO: assert: visitable.arguments.size == 1 ??? 

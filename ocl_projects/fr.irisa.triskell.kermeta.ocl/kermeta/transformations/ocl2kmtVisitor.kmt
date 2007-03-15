@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.4 2007-02-23 16:48:38 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.5 2007-03-15 16:39:15 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -81,28 +81,17 @@ class StringWriter inherits StdIO
 		    end
 
   
-  		attribute __varName : Integer
-  		attribute __invariantName : Integer
+  		attribute __name : Integer
   		
-		operation nextVarName() : String is
+		operation nextName(root: String) : String is
 			do
-				if __varName == void then
-					__varName := 0
+				if __name == void then
+					__name := 0
 				end
-				__varName := __varName + 1
-				result := "variable" + __varName.toString
+				__name := __name + 1
+				result := root + __name.toString
 			end     
 
-		operation nextInvariantName() : String is
-			do
-				if __invariantName == void then
-					__invariantName := 0
-				end
-				__invariantName := __invariantName + 1
-				result := "inv" + __invariantName.toString
-			end     
-
-  
 	    operation visit(visitable : Visitable) : Void is
 			do
 				write( visitable.toString)
@@ -117,7 +106,6 @@ class StringWriter inherits StdIO
 			do
 				write("package ")
 				visitable.pathNameCS.accept(self)
-				writeln("")
 				writeln("")
 				visitable.contextDecls.each{ c |
 						c.accept(self)
@@ -141,17 +129,41 @@ class StringWriter inherits StdIO
 				visitable.pathNameCS.accept(self)
 				writeln("{")
 				visitable.invOrDefCS.accept(self)
-		      	writeln("} ")
+		      	writeln("}")
 			end
 
 		method visitOperationContextDeclCS(visitable : OperationContextDeclCS) : Void is
 			do
-				visit(visitable)
+				writeln("@aspect \"true\"")
+				write("class ")
+				visitable.operationCS.pathNameCS.accept(self)
+				writeln("{")
+				writeln("@overloadable \"true\"")
+				visitable.operationCS.accept(self)
+				writeln("")
+				visitable.prePostOrBodyDecls.each{ ppbd |
+					ppbd.accept(self)
+				}
+				writeln("is")
+				writeln("do")
+				writeln("var e: Exception init NotImplementedException.new")
+				write("e.message := \"OCL pre/post/body: " )
+				visitable.operationCS.pathNameCS.accept(self)
+				write(".")
+				visitable.operationCS.simpleNameCS.accept(self)
+				writeln("\"")
+				writeln("raise e")
+				writeln("end")
+				writeln("}")
 			end
   
 		method visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : Void is
 			do
-				visit(visitable)
+				write(visitable.kind.name.toString)
+				writeln(" " + nextName(visitable.kind.name.toString ))
+				writeln("is do")
+				visitable.expressionCS.accept(self)
+				writeln(" end")
 			end
 
 		method visitOperationCS(visitable : OperationCS) : Void is
@@ -188,7 +200,7 @@ class StringWriter inherits StdIO
 
 		method visitInvCS(visitable : InvCS) : Void is
 			do
-				writeln("inv  " + nextInvariantName + " is ")
+				writeln("inv  " + nextName("invariant") + " is ")
 				writeln("do" )
 				visitable.expressionCS.accept(self)
 				writeln("")
@@ -205,7 +217,7 @@ class StringWriter inherits StdIO
 				visitable.operationCS.accept(self)
 				writeln(" is")
 				writeln("do")
-				write("  result := ")
+				write("result := ")
 				visitable.expressionCS.accept(self)
 				writeln("")
 				write("end")
@@ -273,7 +285,7 @@ class StringWriter inherits StdIO
 
 		method visitLetExpCS(visitable : LetExpCS) : Void is
 			do
-				write(" do ")
+				write("do")
 				//variables
 				visitable.variables.each{ v |
 						writeln("")
@@ -284,7 +296,7 @@ class StringWriter inherits StdIO
 				//body
 				visitable.inExpression.accept(self)
 				writeln("")
-				writeln("end")
+				write("end")
 			end
 
 		method visitIfExpCS(visitable : IfExpCS) : Void is
@@ -324,13 +336,13 @@ class StringWriter inherits StdIO
 		method visitEnumLiteralExpCS(visitable : EnumLiteralExpCS) : Void is
 			do
 				visitable.pathNameCS.accept(self)
-				write("::")
+				write(".")
 				visitable.simpleNameCS.accept(self)
 			end
 
 		method visitCollectionLiteralExpCS(visitable : CollectionLiteralExpCS) : Void is
 			do
-				var varName :  String init nextVarName
+				var varName :  String init nextName("variable")
 				//TODO: do we have to infer the element type here?
 				var type : String init visitable.collectionType.name +"<" + "????????" +">"
 				writeln("do")
@@ -362,7 +374,7 @@ class StringWriter inherits StdIO
 
 		method visitRealLiteralExpCS(visitable : RealLiteralExpCS) : Void is
 			do
-				visit(visitable)			
+				write(visitable.symbol.toString)	
 			end
 
 		method visitStringLiteralExpCS(visitable : StringLiteralExpCS) : Void is
@@ -377,7 +389,7 @@ class StringWriter inherits StdIO
 
 		method visitNullLiteralExpCS(visitable : NullLiteralExpCS) : Void is
 			do
-				visit(visitable)			
+				write("void")		
 			end
 
 		method visitInvalidLiteralExpCS(visitable : InvalidLiteralExpCS) : Void is
@@ -421,15 +433,15 @@ class StringWriter inherits StdIO
         				var sameName: IteratorPolicy init SimpleIteratorIP.new
         				var functionWithSameName : IteratorPolicy init FunctionIP.new
         				addIterator("exists", sameName)
-        				addIterator("forAll", SimpleIteratorIP.new.withName("forAll"))
-        				addIterator("isUnique", functionWithSameName)
-        				addIterator("any", FunctionIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size == 1"))
+        				addIterator("forAll", sameName)
+        				addIterator("isUnique", UniqueIP.new)
+        				addIterator("any", SimpleIteratorIP.new.withName("detect"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
-        				addIterator("collect", doNothing)
+        				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
-        				addIterator("sortedBy", doNothing)
-        				addIterator("reject", doNothing)
+        				addIterator("sortedBy", sameName)
+        				addIterator("reject", sameName)
         			end
         			result := __iterators
         		end
@@ -467,6 +479,9 @@ class StringWriter inherits StdIO
 				if visitable.source != void then
 					visitable.source.accept(self)		
 					if visitable.accessor.name == "dot" then
+					   write(".")
+					end
+					if visitable.accessor.name == "arrow" then
 					   write(".")
 					end
 				end
@@ -511,21 +526,20 @@ class StringWriter inherits StdIO
           				__operators.put("*",  FunctionCallOp.new.withName("mult"))
           				__operators.put("/",  FunctionCallOp.new.withName("div"))
           				__operators.put("includes", FunctionCallOp.new.withName("contains"))
+           				__operators.put("includesAll", FunctionCallOp.new.withName("containsAll"))
           				__operators.put("size", FunctionCallOp.new)
           				__operators.put("at", FunctionCallOp.new.withName("elementAt"))
           				__operators.put("indexOf", FunctionCallOp.new)
-          				__operators.put("oclAsType", CastOp.new)          				
+          				__operators.put("oclAsType", CastOp.new)   
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
-          				__operators.put("not", functionCall)          				
-          				__operators.put("notEmpty", FunctionCallOp.new.withName("size").withSuffix(" > 0"))          		
-          				__operators.put("isEmpty", FunctionCallOp.new.withName("size").withSuffix(" = 0"))          		          				
-           				__operators.put("includesAll", FunctionCallOp.new.withName("size").withSuffix(" = 0"))          		          				
-           				__operators.put("union", FunctionCallOp.new)          		          				
-           				__operators.put("intersection", FunctionCallOp.new)          		          				
-           				__operators.put("incluiding", UnimplementedOp.new)  // these need type inference
-           				__operators.put("excluding", UnimplementedOp.new)  // or something clever with types
-           				// TODO: set difference in OCL is "-", this might take some detecting
-          				__operators.put("symmetricDifference", UnimplementedOp.new)
+          				__operators.put("not", functionCall) 
+          				__operators.put("notEmpty", FunctionCallOp.new.withName("empty").withSuffix(".~not"))
+          				__operators.put("isEmpty", FunctionCallOp.new.withName("empty"))
+           				__operators.put("union", FunctionCallOp.new)
+           				__operators.put("intersection", FunctionCallOp.new) 
+           				__operators.put("including", functionCall)  
+           				__operators.put("excluding", functionCall)  
+          				__operators.put("symmetricDifference", functionCall)
           			end
           			result := __operators
 				end
@@ -588,7 +602,7 @@ class StringWriter inherits StdIO
 							word.equals("and") or
 							word.equals("or") or
 							word.equals("not") or
-							word.equals("self") or
+							//word.equals("self") or
 							word.equals("super") or
 							word.equals("do") or
 							word.equals("end") or
@@ -661,7 +675,17 @@ class SimpleIteratorIP inherits IteratorPolicy {
 		 end
 }
 
+class UniqueIP inherits SimpleIteratorIP {
 
+	method generate(oclIterator: IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+			name := "select"
+			super(oclIterator, visitor)
+			visitor.write(".asSet.size.equals(")
+			oclIterator.source.accept(visitor)
+			visitor.write(".size)")			
+		 end
+}
 
 class FunctionIP inherits IteratorPolicy {
     

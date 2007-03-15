@@ -1,0 +1,87 @@
+/* $Id: StructurealOclTests.kmt,v 1.1 2007-03-15 16:39:14 bitterjug Exp $
+ * Creation date: March 6, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+ 
+@mainClass "oclTests::StructuralOclTests"
+@mainOperation "main"
+
+package oclTests;
+
+require kermeta
+require "../../../someUnit/src/newUnit.kmt"
+require "../transformations/ocl2kmtVisitor.kmt" 
+require "../helpers/OCLHelper.kmt" 
+
+using newUnit
+using kermeta::standard
+using kermeta::persistence
+using kermeta::interpreter 
+using ocl2kmt
+
+class  StructuralOclTests  inherits TestCase
+{
+	attribute repository: EMFRepository
+    attribute helper : OCLHelpers::OCLHelper
+    attribute visitor :Ocl2kmtVisitor 
+    attribute model : Set<Object> 
+	attribute de : DynamicExpression 
+
+	operation assertEqual(expected: String, actual: String): Void is
+		do
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+		end
+				    
+	method setUp() is
+		do
+			repository := EMFRepository.new		
+			helper := OCLHelpers::OCLHelper.new
+	    	helper.initialize
+	    	visitor := Ocl2kmtVisitor.new
+			de := DynamicExpression.new
+			de.initializeDefaults
+		end
+		
+	operation visitOclXmi(filename: String): String is
+		do
+			var sourceFileName : String init "../../model/" + filename + ".xmi"
+			var io : StringWriter init StringWriter.new
+			visitor.setIo(io)
+			model  := helper.loadOCLModel(repository, sourceFileName)
+			helper.getPackageDeclaration(model).accept(visitor)
+			result := io.s
+		end		
+		
+	operation test01(): Void is
+	// test class @aspect class { ... inv ... } generation
+		do
+			var kmt : String  init  visitOclXmi("01-booleanLiteralTrue")
+			assertEqual("package p @aspect \"true\" class Y{ inv  invariant1 is  do true end } ", kmt)
+		end
+		
+	operation test02(): Void is
+	// test class @aspect class { operation def } generation
+		do
+			var kmt : String  init  visitOclXmi("definition")
+			assertEqual("package p @aspect \"true\" class Y{ operation test():Boolean is do result := true end} ", kmt)
+		end
+
+	operation test03(): Void is
+	// test pre and post generation
+		do
+			var kmt : String  init  visitOclXmi("preAndPost")
+			assertEqual("package p @aspect \"true\" class Y{ @overloadable \"true\" operation foo(i : Integer):Boolean pre pre1 is do i.isGreater(0) end pre pre2 is do true end post post3 is do ~result.equals(false) end is do var e: Exception init NotImplementedException.new e.message := \"OCL pre/post/body: Y.foo\" raise e end } ", kmt)
+		end
+		
+	operation main() : Void is 
+	  do 
+			var testRunner : TestRunner init TestRunner.new
+			var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(StructuralOclTests)
+			// self.setTestMethodName("test01")
+			//testRunner.run(self)
+			testRunner.run(suite)
+			testRunner.printLogs
+  	end
+}
