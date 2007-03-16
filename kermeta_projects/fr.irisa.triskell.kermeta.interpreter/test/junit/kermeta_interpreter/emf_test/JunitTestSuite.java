@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2006-12-13 08:00:12 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2007-03-16 15:26:58 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -88,6 +88,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","054_pb_olivier1213.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","056_load_and_save_in_another_location.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
