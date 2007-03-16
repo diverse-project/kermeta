@@ -42,7 +42,7 @@ class Main inherits kermeta::kunit::TestCase
    		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
    		resource.load()      */
    		var resource : Resource 
-		resource ?= repository.getResource(	"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/049_simplemodel_C1.xmi")
+		resource := repository.getResource(	"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/049_simplemodel_C1.xmi")
        
        	result := Set<P1::C1>.new
        	from var it : Iterator<Object> init resource.instances.iterator
