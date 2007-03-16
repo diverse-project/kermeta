@@ -113,6 +113,8 @@ public class TestOCLParser {
 	 public static List<String> filenames = new ArrayList(); 
 	 static {
 		 filenames.add("allSpeeds");
+		 filenames.add("definition");
+		 filenames.add("preAndPost");
 		 filenames.add("01-booleanLiteralTrue");
 		 filenames.add("02-booleanLiteralFalse");
 		 filenames.add("03-logicalConjunction");
@@ -173,7 +175,8 @@ public class TestOCLParser {
 		 filenames.add("59");
 		 filenames.add("60");
 		 filenames.add("61"); 
-		 filenames.add("62"); 
+		 filenames.add("62");
+		 filenames.add("longPath"); 
 	 }
 	 
 	public static void main(String[] args) {
