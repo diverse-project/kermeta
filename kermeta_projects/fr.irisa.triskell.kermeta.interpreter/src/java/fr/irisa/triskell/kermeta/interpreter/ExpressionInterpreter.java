@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.53 2007-03-16 16:18:46 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.54 2007-03-16 16:47:06 barais Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -790,10 +790,11 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    else {
 	        ro_target = (RuntimeObject)this.accept(node.getTarget());
 	    }
+	    KM2KMTPrettyPrinter pp  = new KM2KMTPrettyPrinter();
 	    
 	    if (ro_target == null) {
 	        internalLog.error("INTERPRETER INTERNAL ERROR : Call on a null target");
-	        throw new Error("INTERPRETER INTERNAL ERROR : Call on a null target");
+	        throw new Error("INTERPRETER INTERNAL ERROR : Call on a null target while executing : " + pp.accept(node) );
 	    }
 	    
 	    // Get The type of the Object
@@ -872,12 +873,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
 		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getName() +"' property on a void target. Exception raised. ");
-		        KM2KMTPrettyPrinter pp  = new KM2KMTPrettyPrinter();
+		        //KM2KMTPrettyPrinter pp  = new KM2KMTPrettyPrinter(); 
 		        internalLog.debug(" >>    node prettyprint: "+ pp.accept(node));
 		        internalLog.debug(" >>    container prettyprint: "+ pp.accept(node.eContainer()));
 		        raiseCallOnVoidTargetException(node,"");
 		    }
-		    
+		     
 //		  This should never happen is the type checker has checked the program
 			if (property == null) {
 				String err = "INTERPRETER INTERNAL ERROR : unable to find a feature : '" + node.getName() + "' in type : " + target_type;
