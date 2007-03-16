@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.17 2007-03-02 15:46:03 ffleurey Exp $
+/* $Id: Object.java,v 1.18 2007-03-16 16:22:58 ffleurey Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -64,16 +64,16 @@ public class Object {
 	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type) */
 	public static RuntimeObject isInstanceOf(RuntimeObject self, RuntimeObject cls) {
 
-		fr.irisa.triskell.kermeta.language.structure.Class param_class = null;
-		fr.irisa.triskell.kermeta.language.structure.Class actual_class = null;
+		fr.irisa.triskell.kermeta.language.structure.Type param_class = null;
+		fr.irisa.triskell.kermeta.language.structure.Type actual_class = null;
 
 		// Get the class for the given parameter :
-		if(cls.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class)
-			param_class = (fr.irisa.triskell.kermeta.language.structure.Class) cls.getData().get("kcoreObject");
+		if(cls.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Type)
+			param_class = (fr.irisa.triskell.kermeta.language.structure.Type) cls.getData().get("kcoreObject");
 
 		// Get the class of self :
-		if(getMetaClass(self).getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class)
-			actual_class = (fr.irisa.triskell.kermeta.language.structure.Class) getMetaClass(self).getData().get("kcoreObject");
+		if(getMetaClass(self).getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Type)
+			actual_class = (fr.irisa.triskell.kermeta.language.structure.Type) getMetaClass(self).getData().get("kcoreObject");
 		
 		// This is just for robusness, it should never occur
 		if (actual_class == null)
