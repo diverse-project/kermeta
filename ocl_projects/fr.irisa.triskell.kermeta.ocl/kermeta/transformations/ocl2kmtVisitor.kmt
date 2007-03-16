@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.5 2007-03-15 16:39:15 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.6 2007-03-16 14:30:57 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -475,7 +475,6 @@ class StringWriter inherits StdIO
 		
 		method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : Void is
 			do
-				//visit(visitable)	
 				if visitable.source != void then
 					visitable.source.accept(self)		
 					if visitable.accessor.name == "dot" then
