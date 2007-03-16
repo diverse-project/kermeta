@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.29 2007-03-16 16:22:35 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.30 2007-03-16 16:45:56 barais Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -100,6 +100,21 @@ abstract class Comparable {
 	end
 } // Comparable
 
+
+/**
+ * The abstract class Summable defines a set of operation
+ * to sum instances of a class.
+ * Sub-classes only has to implement abstract operation plus.
+  */
+abstract class Summable<G> {
+	
+
+	operation plus(other : G) : G is abstract
+	
+	
+} // Summable
+
+
 class NotComparableException inherits kermeta::exceptions::Exception {
 	// raized when two objects are not comparable  
 }
@@ -180,7 +195,7 @@ abstract class Numeric inherits Comparable, ValueType
 /**
  * The class Integer
  */
-class Integer inherits Numeric
+class Integer inherits Numeric, Summable<Integer>
 {
 
 	/**
@@ -227,7 +242,7 @@ class Integer inherits Numeric
 	/**
 	 * returns self + other
 	 */
-	operation plus(other : Integer) : Integer is do
+	method plus(other : Integer) : Integer is do
 		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self,other)
         end
@@ -358,13 +373,13 @@ class Integer inherits Numeric
 /**
  * class Real
  */
-class Real inherits Numeric
+class Real inherits Numeric, Summable<Real>
 {
 
 	/**
 	 * returns self + other
 	 */
-	operation plus(other : Real) : Real is do
+		method plus(other : Real) : Real is do
 		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)
         end
@@ -477,7 +492,7 @@ class Character inherits ValueType, Comparable
 /**
  * The class String
  */
-class String inherits ValueType, Comparable 
+class String inherits ValueType, Comparable, Summable<String>
 {
 
 	/**
@@ -500,7 +515,7 @@ class String inherits ValueType, Comparable
 	/**
 	 * returns a new string self + other
 	 */
-	operation plus(other : String) : String is do
+	method plus(other : String) : String is do
 		if other.isVoid then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self,other)
         end

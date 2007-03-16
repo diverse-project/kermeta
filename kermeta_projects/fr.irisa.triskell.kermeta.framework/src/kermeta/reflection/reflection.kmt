@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.35 2007-03-16 16:22:35 ffleurey Exp $
+/* $Id: reflection.kmt,v 1.36 2007-03-16 16:45:56 barais Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -92,6 +92,11 @@ abstract class Object
 	 * for more information about hashcode
 	 */
 	operation hashcode() : Integer is abstract
+	
+	/*operation collect<T> (collector : <Object -> T>) :  kermeta::standard::Sequence<T> is do
+	*	result := kermeta::standard::Sequence<T>.new
+	*		result.add( collector(self) )
+	* end*/
 }
 
 /** Alias for kermeta::standard::Boolean */

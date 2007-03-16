@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.29 2007-03-16 16:22:35 ffleurey Exp $
+ * $Id: collections.kmt,v 1.30 2007-03-16 16:45:56 barais Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -24,8 +24,15 @@ using kermeta::exceptions
  * Collection is the root abstract class for all kermeta collections
  * <img src="./figures/collections_view.png">
  */
-abstract class Collection<G>
+abstract class Collection<G> 
 {
+
+	operation asBag() : Bag<G> is abstract
+	operation asSet() : Set<G> is abstract
+	operation asOrderedSet() : OrderedSet<G> is abstract
+	operation asSequence() : Sequence<G> is abstract
+	
+	
 	/**
 	 * Add an element in the collection
 	 * default implementation : no check for duplicates
@@ -84,6 +91,13 @@ abstract class Collection<G>
 	end
 	
 	/**
+	* OCL API alignement
+	*/
+	operation includes(element :G): Boolean is do
+		result := self.contains(element)
+	end
+	
+	/**
 	 * returns true if the collection contains all elements
 	 */
 	operation containsAll(elements : Collection<G>) : Boolean is do
@@ -94,6 +108,15 @@ abstract class Collection<G>
 			result := self.contains(it.next)
 		end
 	end
+	
+	/**
+	* OCL API alignement
+	*/
+	operation includesAll(elements : Collection<G>) : Boolean is do
+		result := self.containsAll(elements)
+	end
+	
+	
 	
 	/**
 	 * Returns true if the collection does not contain element
@@ -129,6 +152,20 @@ abstract class Collection<G>
 	end
 	
 	/**
+	 * OCL alignement API
+	 */
+	operation isEmpty() : Boolean is do
+		result := self.empty
+	end
+	
+	/**
+	 * OCL alignement API
+	 */
+	operation isNotEmpty() : Boolean is do
+		result := not self.empty
+	end
+	
+	/**
 	 * returns an iterator on the collection
 	 */
 	operation iterator() : Iterator<G> is do
@@ -140,6 +177,12 @@ abstract class Collection<G>
 	 * if the collection is empty
 	 */
 	operation one() : G is do
+		if size == 0 then raise EmptyCollection.new end
+		var it : Iterator<G> init iterator
+		result := it.next
+	end
+
+	operation any() : G is do
 		if size == 0 then raise EmptyCollection.new end
 		var it : Iterator<G> init iterator
 		result := it.next
@@ -168,8 +211,9 @@ abstract class Collection<G>
         	test := test and func(it.next)
         end
         result := test
+        
     end
-    
+     
     /**
 	 * checks that the condition is true for at least one element of the collection
 	 * returns false if the collection is empty
@@ -195,6 +239,24 @@ abstract class Collection<G>
 		until it.isOff
 		loop
 			result.add( collector(it.next) )
+		end
+	end
+	
+	/**
+	 * Results in true if body evaluates to a different value for each element in the source collection; otherwise, result is false.	 * 
+	 */
+	operation isUnique<T> (collector : <G -> T>) : Boolean is do
+		result := true
+		var s : Sequence<T> init Sequence<T>.new
+		from var it : Iterator<G> init iterator
+		until it.isOff or not result
+		loop
+			var t : T init collector(it.next)
+			if (s.contains(t)) then
+				result := false
+			else
+				s.add(t)
+			end
 		end
 	end
 	
@@ -243,7 +305,36 @@ abstract class Collection<G>
 	operation count(element : G) : Integer is do
 		result := self.select{e | e == element}.size()
 	end
+	
+	/**
+	* sum the element if they are summable
+	*/
+	operation sum(): G is do
+		var res : G 
+		var tmp : Summable<G>
+		var o : Object
+		o:= self.one
+		tmp ?= o
+		result := void
+		if (tmp != void) then
+		
+		self.each{ elem  | 
+		o := elem
+		tmp ?= o
+		if (tmp != void) then
+			res := tmp + res 
+			end
+			}
+			end
+	result := res		
+			
+	end
+	
+//	operation product(c2: Collection<T2>)) : Set( Tuple( first: T, second: T2) ) is do
+//end
 }
+
+
 
 /**
  * A Set is a collection that contains distinct elements
@@ -341,6 +432,106 @@ class Set<G> inherits Collection<G>
 			end
 		end
 	end
+	
+	/**
+	* 
+	*/
+	method asSet() : Set<G> is do
+		var s : Set<G> init Set<G>.new
+		s.addAll(self)
+		result := s
+	end
+	
+	/**
+	* 
+	*/
+	method asOrderedSet() : OrderedSet<G> is do
+		var s : OrderedSet<G> init OrderedSet<G>.new
+		s.addAll(self)
+		result := s
+	end
+	/**
+	* 
+	*/
+	method asBag() : Bag<G> is do
+		var s : Bag<G> init Bag<G>.new
+		s.addAll(self)
+		result := s
+	end
+	/**
+	* 
+	*/
+	method asSequence() : Sequence<G> is do
+		var s : Sequence<G> init Sequence<G>.new
+		s.addAll(self)
+		result := s
+	end
+	
+	operation symmetricDifference(s : Set<G>) : Set<G> is do
+		var res : Set<G> init s.minus(self)
+		result := self.minus(s).addAll(res)
+		
+	
+	end
+	
+	operation flatten() : Set<Object> is do
+		
+		var res: Set<Object> init Set<Object>.new
+		
+		if (G.isKindOf(Collection<Object>)) then
+			var col : Collection<Object>
+			var o : Object 
+			self.each{e| o:= e
+			col ?= o
+			res.addAll(col)}
+		end
+		result :=  res
+		
+		
+	end
+	
+	operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet<G>  is do
+		 
+		result := quickSort(self.asOrderedSet, comparator) 
+	end
+	
+	operation quickSort(q :OrderedSet<G>, comparator : <[G, G] -> Integer>) : OrderedSet<G> is do
+		 var less : OrderedSet<G> init OrderedSet<G>.new
+		 var pivotList : OrderedSet<G> init OrderedSet<G>.new
+		 var greater : OrderedSet<G> init OrderedSet<G>.new
+		   
+		 
+     if (q.size <= 1) then   
+     	result := q
+     else
+     	var pivot : G init q.one
+     	q.each{x| 
+     		if (comparator(x,pivot) == 1) then
+     	 		less.add(x)
+     	 	end
+     	 	if (comparator(x,pivot) == 0) then
+     	 		pivotList.add(x)
+     	 	end
+     	 	if (comparator(x,pivot) == -1) then
+     	 		greater.add(x)
+     	 	end
+     	 	}
+     
+       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
+		
+	end	
+	end
+	
+	operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>): OrderedSet<G> is do
+	result := OrderedSet<G>.new
+	result.addAll(less)
+	result.addAll(pivot)
+	result.addAll(greater)
+	
+	end
+	
+	
+	
 }
 
 /**
@@ -350,11 +541,6 @@ class Set<G> inherits Collection<G>
  */
 class Bag<G> inherits Collection<G>
 {
-	operation asSet() : Set<G> is do
-		var s : Set<G> init Set<G>.new
-		s.addAll(self)
-		result := s
-	end
 
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
@@ -442,6 +628,117 @@ class Bag<G> inherits Collection<G>
 			extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)
 		end
 	end
+	
+		/**
+	* 
+	*/
+	method asSet() : Set<G> is do
+		var s : Set<G> init Set<G>.new
+		s.addAll(self)
+		result := s
+	end
+	
+	/**
+	* 
+	*/
+	method asOrderedSet() : OrderedSet<G> is do
+		var s : OrderedSet<G> init OrderedSet<G>.new
+		s.addAll(self)
+		result := s
+	end
+	/**
+	* 
+	*/
+	method asBag() : Bag<G> is do
+		var s : Bag<G> init Bag<G>.new
+		s.addAll(self)
+		result := s
+	end
+	/**
+	* 
+	*/
+	method asSequence() : Sequence<G> is do
+		var s : Sequence<G> init Sequence<G>.new
+		s.addAll(self)
+		result := s
+	end
+	
+	
+	operation including(object :G) : Bag<G> is do
+		var s : Bag<G> init Bag<G>.new
+		s.addAll(self)
+		s.add(object)
+		result := s	
+		
+	end
+
+	operation excluding(object :G) : Bag<G> is do
+		var s : Bag<G> init Bag<G>.new
+		s.addAll(self)
+		s.remove(object)
+		result := s	
+		
+	end
+	
+	operation flatten() : Bag<Object> is do
+		
+		var res: Bag<Object> init Bag<Object>.new
+		
+		if (G.isKindOf(Collection<Object>)) then
+			var col : Collection<Object>
+			var o : Object 
+			self.each{e| o:= e
+			col ?= o
+			res.addAll(col)}
+		end
+		result :=  res
+		
+		
+	end
+	
+	
+	operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence<G>  is do
+		 
+		result := quickSort(self.asSequence, comparator) 
+	end
+	
+	operation quickSort(q :Sequence<G>, comparator : <[G, G] -> Integer>) : Sequence<G> is do
+		 var less : Sequence<G> init Sequence<G>.new
+		 var pivotList : Sequence<G> init Sequence<G>.new
+		 var greater : Sequence<G> init Sequence<G>.new
+		   
+		 
+     if (q.size <= 1) then   
+     	result := q
+     else
+     	var pivot : G init q.one
+     	q.each{x| 
+     		if (comparator(x,pivot) == 1) then
+     	 		less.add(x)
+     	 	end
+     	 	if (comparator(x,pivot) == 0) then
+     	 		pivotList.add(x)
+     	 	end
+     	 	if (comparator(x,pivot) == -1) then
+     	 		greater.add(x)
+     	 	end
+     	 	}
+     
+       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
+		
+	end	
+	end
+	
+	operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>): Sequence<G> is do
+	result := Sequence<G>.new
+	result.addAll(less)
+	result.addAll(pivot)
+	result.addAll(greater)
+	
+	end
+	
+	
+	
 }
 
 /**
@@ -578,6 +875,47 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 			}
 		end
 	end
+	operation append(subject : G ) : OrderedSet<G> is do
+		result := OrderedSet<G>.new
+		result.addAll(self)
+		result.add(subject)
+	end
+	
+	operation preppend(subject : G ) : OrderedSet<G> is do
+		result := OrderedSet<G>.new
+		result.add(subject)
+		result.addAll(self)
+		
+	end
+	
+	operation insertAt(index : Integer, subject : G ) : OrderedSet<G> is do
+		result := OrderedSet<G>.new
+		result.addAll(self)
+		result.addAt(index, subject)
+	end
+	
+	operation subOrderedSet(lower : Integer, upper : Integer ) : OrderedSet<G> is do
+		result := OrderedSet<G>.new
+		
+		from var i : Integer init lower until i<= upper
+		loop
+			result.add(self.at(i))
+		end
+
+	end
+
+	operation at(index : Integer) : G is do
+	
+		if(index >= 0 and index <= self.size) then
+			self.each{e |
+				var i : Integer init self.indexOf(e)
+				if (i == index) then 
+					result := e
+				end				
+			}
+		end
+	end	
+	
 }
 
 /**
@@ -601,6 +939,42 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 			}
 		end
 	end
+	
+	operation append(subject : G ) : Sequence<G> is do
+		result := Sequence<G>.new
+		result.addAll(self)
+		result.add(subject)
+	end
+	
+	operation preppend(subject : G ) : Sequence<G> is do
+		result := Sequence<G>.new
+		result.add(subject)
+		result.addAll(self)
+		
+	end
+	
+	operation insertAt(index : Integer, subject : G ) : Sequence<G> is do
+		result := Sequence<G>.new
+		result.addAll(self)
+		result.addAt(index, subject)
+	end
+	
+	
+	operation at(index : Integer) : G is do
+	
+		if(index >= 0 and index <= self.size) then
+			self.each{e |
+				var i : Integer init self.indexOf(e)
+				if (i == index) then 
+					result := e
+				end				
+			}
+		end
+	end	
+	
+	
+
+	
 }
 
 /**
