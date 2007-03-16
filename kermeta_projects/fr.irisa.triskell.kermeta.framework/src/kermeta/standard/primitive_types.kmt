@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.28 2007-03-01 13:25:39 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.29 2007-03-16 16:22:35 ffleurey Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -27,6 +27,10 @@ class ~Void {
 
 	method toString() : String is do
 		result := "<void>"
+	end
+	
+	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
+		result := true
 	end
 }
 
@@ -224,7 +228,7 @@ class Integer inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Integer) : Integer is do
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self,other)
         end
 	end
@@ -233,7 +237,7 @@ class Integer inherits Numeric
 	 * returns self - other
 	 */
 	operation minus(other : Integer) : Integer is do
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.minus(self,other)
         end
 	end
@@ -242,7 +246,7 @@ class Integer inherits Numeric
 	 * returns self * other
 	 */
 	operation mult(other : Integer) : Integer is do
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.times(self,other)
         end
 	end
@@ -252,7 +256,7 @@ class Integer inherits Numeric
 	 */
 	operation div(other : Integer) : Integer is do
 		if other == 0 then raise DivisionByZero.new end
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self,other)
         end
 	end
@@ -262,7 +266,7 @@ class Integer inherits Numeric
 	 */
 	operation mod(other : Integer) : Integer is do
 		if other == 0 then raise DivisionByZero.new end
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.mod(self,other)
 		end
 	end
@@ -361,7 +365,7 @@ class Real inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Real) : Real is do
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)
         end
 	end
@@ -370,7 +374,7 @@ class Real inherits Numeric
 	 * returns self - other
 	 */
 	operation minus(other : Real) : Real is do
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.minus(self, other)
         end
 	end
@@ -379,7 +383,7 @@ class Real inherits Numeric
 	 * returns self * other
 	 */
 	operation mult(other : Real) : Real is do
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(self, other)
         end
 	end
@@ -389,7 +393,7 @@ class Real inherits Numeric
 	 */
 	operation div(other : Real) : Real is do
 		if other == 0 then raise DivisionByZero.new end
-		if other == void then raise VoidOperandError.new else
+		if other.isVoid then raise VoidOperandError.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.div(self, other)
         end
 	end
@@ -452,7 +456,7 @@ class Character inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Object) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else	
+		if other.isVoid then raise CallOnVoidTarget.new else	
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self,other)
         end
 	end
@@ -480,7 +484,7 @@ class String inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Object) : Integer is do
-		if other == void then raise CallOnVoidTarget.new else		
+		if other.isVoid then raise CallOnVoidTarget.new else		
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
         end
 	end
@@ -497,7 +501,7 @@ class String inherits ValueType, Comparable
 	 * returns a new string self + other
 	 */
 	operation plus(other : String) : String is do
-		if other == void then raise CallOnVoidTarget.new else
+		if other.isVoid then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self,other)
         end
 	end
@@ -506,7 +510,7 @@ class String inherits ValueType, Comparable
 	 * Appends other at the end of self
 	 */
 	operation append(other : String) : Void is do
-		if other == void then raise CallOnVoidTarget.new else
+		if other.isVoid then raise CallOnVoidTarget.new else
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self,other)
 		end
 	end
@@ -569,7 +573,7 @@ class String inherits ValueType, Comparable
 	 */
 	operation toBoolean() : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toBoolean(self)
-		if result == void then raise StringFormatException.new end
+		if result.isVoid then raise StringFormatException.new end
 	end
 	
 	/**
@@ -578,7 +582,7 @@ class String inherits ValueType, Comparable
 	 */
 	operation toInteger() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toInteger(self)
-		if result == void then raise StringFormatException.new end
+		if result.isVoid then raise StringFormatException.new end
 	end
 
 	/**
@@ -587,7 +591,7 @@ class String inherits ValueType, Comparable
 	 */
 	operation toReal() : Real is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.toReal(self)
-		if result == void then raise StringFormatException.new end
+		if result.isVoid then raise StringFormatException.new end
 	end
 	
 }

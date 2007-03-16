@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.28 2007-03-02 14:43:47 dtouzet Exp $
+ * $Id: collections.kmt,v 1.29 2007-03-16 16:22:35 ffleurey Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -497,15 +497,15 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
-		if(not element.isVoid) then
-			if(OrderedCollection<G>.isInstance(element)) then
+		if (not element.isVoid) then
+			if (OrderedCollection<G>.isInstance(element) ) then
 				var collection : Collection<G>
 				collection ?= element
 				if(self.size() == collection.size()) then
 					var selfIterator : Iterator<G> init self.iterator()
 					var collectionIterator : Iterator<G> init collection.iterator()
 					var difference : Boolean init false
-					from "void"
+					from void
 					until (selfIterator.isOff() or collectionIterator.isOff() or difference)
 					loop
 						if(not (selfIterator.next == collectionIterator.next)) then

@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.34 2007-03-01 13:15:23 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.35 2007-03-16 16:22:35 ffleurey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zoé Drey <zdrey@irisa.fr>
+ *		Zoï¿½ Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
  
@@ -51,7 +51,7 @@ abstract class Object
 	operation isKindOf(cl : Class) : Boolean is abstract
 	
 	/** Check if the current object conforms to the given type */
-	operation isInstanceOf(type : Class) : Boolean is abstract
+	operation isInstanceOf(type : Type) : Boolean is abstract
 	
 	/** Implementation of OCL like cast. It returns self if the object object conforms to the type givent as parameter. */
 	operation asType(type : Class) : Object is abstract

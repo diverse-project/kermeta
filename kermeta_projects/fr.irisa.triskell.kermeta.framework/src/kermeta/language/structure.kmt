@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.37 2007-03-02 15:45:59 ffleurey Exp $
+/* $Id: structure.kmt,v 1.38 2007-03-16 16:22:35 ffleurey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -76,10 +76,12 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method ~set(~property : kermeta::reflection::Property, element : kermeta::reflection::Object) : Void from kermeta::reflection::Object is do
-		if ~property.type.isInstanceOf(Class) and element.isInstanceOf(~property.type.asType(Class)) then
+		if element.isInstanceOf(~property.type) then
 			extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
 		else
-			raise kermeta::exceptions::IncompatibleTypeError.new
+			var e : kermeta::exceptions::IncompatibleTypeError init kermeta::exceptions::IncompatibleTypeError.new
+			e.message := "IncompatibleTypeError : Cannot set property " + ~property.name + " of object " + self.toString + " to " + element.toString + "."
+			raise e
 		end
 	end
 	
@@ -123,7 +125,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 		end
 	end
 	
-	method isInstanceOf(type : kermeta::reflection::Class) : Boolean is do
+	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
 	end
 	
@@ -173,11 +175,11 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
 	end
-	
+	/*
 	method isInstance(object : kermeta::reflection::Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
 	end 
-	
+	*/
 	method isSubType(object : kermeta::reflection::Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isSubType(self, object)
 	end
@@ -373,11 +375,11 @@ class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 
 	operation deepClone (objectToClone : Object) : Object is abstract
 
-/*
-	method isInstance(element : Object) : Boolean from kermeta::reflection::Type is do
-		//TODO: implement operation isInstance
+
+	method isInstance(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Type is do
+		result := element.isInstanceOf(self)
 	end
-*/
+
 
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
