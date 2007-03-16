@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.14 2006-12-07 09:55:46 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.15 2007-03-16 16:18:46 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -211,6 +211,8 @@ public class KermetaRaisedException extends Error {
 			RuntimeMemory memory,
 			Throwable javaCause)
     {
+    	if (exceptionMessage == null) exceptionMessage = "<no message>";
+    	
     	RuntimeObjectFactory rofactory = memory.getROFactory();
     	
     	RuntimeObject raised_object = rofactory.createObjectFromClassName(kermetaExceptionName);

@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.52 2007-03-02 15:46:02 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.53 2007-03-16 16:18:46 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -626,7 +626,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	public Object visitConditional(Conditional node) {
 		if (node!=null) setParent(node);
 	    // The result returned by the visit
-	    RuntimeObject result = null;
+	    RuntimeObject result = memory.voidINSTANCE;
 		// Stops the interpretation.
 	    shouldTerminate();
 	    
@@ -645,8 +645,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
             cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
         else
         {
+        	KM2KMTPrettyPrinter pp  = new KM2KMTPrettyPrinter(); 
         	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
-            		"cannot evaluate the condition",
+            		"Cannot evaluate the condition "+ pp.accept(cond) +" : expecting a boolean and got " + cond_result.toString(),
     				this,
     				memory,
     				cond,
