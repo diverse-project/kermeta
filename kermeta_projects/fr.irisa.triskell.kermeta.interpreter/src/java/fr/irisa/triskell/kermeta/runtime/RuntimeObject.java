@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.22 2007-03-16 13:32:34 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.23 2007-03-16 15:29:10 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
  * @author Franck Fleurey
@@ -198,6 +199,24 @@ public class RuntimeObject {
             }
             if(other == voidInstance){
             	return this == voidInstance;
+            }
+            // if this is the class Class 
+            // 		do not fall to kermeta and directly use the typeequality checker
+            if(getData().get("emfObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+            	if (this == other) return true;
+        		
+        		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)this.getData().get("kcoreObject");
+        		
+        		fr.irisa.triskell.kermeta.language.structure.Object obj = (fr.irisa.triskell.kermeta.language.structure.Object)other.getData().get("kcoreObject");
+        		fr.irisa.triskell.kermeta.language.structure.Class pro = null;
+        		if(obj instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+        			pro = (fr.irisa.triskell.kermeta.language.structure.Class) obj;
+        		else
+        			return false;        		
+        		
+        		if (pro == null || req == null) return false;
+        		
+        		return TypeEqualityChecker.equals(req, pro);
             }
             // if the object defines a equals method (other than the default one defined on object), use it
 	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
