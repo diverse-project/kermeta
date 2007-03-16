@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.3 2007-03-15 17:03:50 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.4 2007-03-16 12:46:36 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.Hashtable;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -142,33 +143,39 @@ public class QualifiedNamePatcher {
 		if(metaModelResource == null && canLoadMetaModelResource){
 			try {
 				// create an uri, enventually relative to the user model
-				URI platformURI = emfRuntimeUnit.createURI(mm_uri);
-				if(EMFRuntimeUnit.ENABLE_EMF_DIAGNOSTIC)
-		    	{
-			    	String msg = "EMF current URI_MAP entries :\n";
-			    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
-			    		msg += "    "+o + "; " + URIConverterImpl.URI_MAP.get(o) + "\n";
-			    	EMFRuntimeUnit.internalLog.debug(msg);
-		    	}
-				// convert the uri into a file:/ protocol 
-		    	// maybe this is done by a map entry
-				if(!platformURI.scheme().equals("file")){
-					URIConverter c = new URIConverterImpl();
-					platformURI = c.normalize(URI.createURI(mm_uri));
-				}
+				URI platformURI = emfRuntimeUnit.createURI(mm_uri);				
+				// convert the uri into a file:/ protocol
 				URL fileURL;
 				//if OSGI is started then let's try a toFileURL
-				if(org.eclipse.core.internal.runtime.Activator.getDefault() != null){
+				if(Platform.isRunning()){
+				//if(org.eclipse.core.internal.runtime.Activator.getDefault() != null){ // alternative method to check if osgi is running ?
+					// OSGI is started, use the filelocator
 					fileURL = FileLocator.toFileURL(new URL(platformURI.toString()));
 				}
 				else {
 					if(platformURI.scheme().equals("file")){
 						fileURL = new URL(platformURI.toString());
-						//if (u.isRelative())
 					}
 					else {
-						EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. cannot resolve " +platformURI.toString() +" into a physical file:/ scheme" );
-						fileURL = new URL(platformURI.toString());
+						//	maybe this is done by a map entry
+						if(EMFRuntimeUnit.ENABLE_EMF_DIAGNOSTIC)
+				    	{
+					    	String msg = "EMF current URI_MAP entries :\n";
+					    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
+					    		msg += "    "+o + "; " + URIConverterImpl.URI_MAP.get(o) + "\n";
+					    	EMFRuntimeUnit.internalLog.debug(msg);
+				    	}
+						URIConverter c = new URIConverterImpl();
+						platformURI = c.normalize(URI.createURI(mm_uri));
+						if(platformURI.scheme().equals("file")){
+							fileURL = new URL(platformURI.toString());
+						}
+						else {
+							// still not a file url ... 
+							EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. cannot resolve " +platformURI.toString() +" into a physical file:/ scheme" );
+							fileURL = new URL(platformURI.toString());
+						}
+						
 					}
 		            
 				}
