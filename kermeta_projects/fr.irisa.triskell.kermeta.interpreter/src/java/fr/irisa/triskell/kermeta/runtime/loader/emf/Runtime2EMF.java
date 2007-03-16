@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.49 2007-02-28 17:25:49 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.50 2007-03-16 14:37:18 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -15,6 +15,7 @@
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -59,7 +60,7 @@ public class Runtime2EMF {
 	final static public String KERMETA_NSURI = "http://kermeta/kermeta.ecore";
 
 	// Put in this list all the RuntimeObject that were already updated
-	protected ArrayList<RuntimeObject> runtimeObjects;
+	protected HashSet<RuntimeObject> runtimeObjects;
 
 	protected EMFRuntimeUnit unit;
 
@@ -103,7 +104,7 @@ public class Runtime2EMF {
 	 *            empty...
 	 */
 	public Runtime2EMF(EMFRuntimeUnit p_unit, Resource p_resource) {
-		this.runtimeObjects = new ArrayList<RuntimeObject>();
+		this.runtimeObjects = new HashSet<RuntimeObject>();
 		this.unit = p_unit;
 		this.resource = p_resource;
 		this.eenum_map = new Hashtable<String, EEnum>();
