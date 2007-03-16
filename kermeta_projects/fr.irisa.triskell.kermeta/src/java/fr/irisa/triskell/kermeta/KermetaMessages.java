@@ -1,7 +1,7 @@
-/* $Id: KermetaMessages.java,v 1.1 2005-08-26 15:52:50 zdrey Exp $
+/* $Id: KermetaMessages.java,v 1.2 2007-03-16 14:03:45 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : Messages.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jun 10, 2005
