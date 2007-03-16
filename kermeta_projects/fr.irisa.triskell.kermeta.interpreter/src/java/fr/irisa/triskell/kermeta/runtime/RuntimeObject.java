@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.21 2007-03-02 14:38:35 dtouzet Exp $
+/* $Id: RuntimeObject.java,v 1.22 2007-03-16 13:32:34 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -170,6 +170,8 @@ public class RuntimeObject {
     public boolean equals(Object arg0) {
         if (arg0 instanceof RuntimeObject) {
             RuntimeObject other = (RuntimeObject)arg0;
+            
+            // optimisation : do not use the kermeta version of equals on some types ...
             if (getData().containsKey("StringValue") || other.getData().containsKey("StringValue")) {
             	if (getData().containsKey("StringValue") && other.getData().containsKey("StringValue")) {
                     return getData().get("StringValue").equals(other.getData().get("StringValue"));
@@ -189,6 +191,14 @@ public class RuntimeObject {
             	else return false;
             }
             
+            // if any of the element is void the other must be void too
+            RuntimeObject voidInstance = getFactory().getMemory().voidINSTANCE;
+            if(this == voidInstance){
+            	return other == voidInstance;
+            }
+            if(other == voidInstance){
+            	return this == voidInstance;
+            }
             // if the object defines a equals method (other than the default one defined on object), use it
 	        fr.irisa.triskell.kermeta.language.structure.Class t_target =(fr.irisa.triskell.kermeta.language.structure.Class)(getMetaclass()).getData().get("kcoreObject");
 	        SimpleType target_type = new SimpleType(t_target);
