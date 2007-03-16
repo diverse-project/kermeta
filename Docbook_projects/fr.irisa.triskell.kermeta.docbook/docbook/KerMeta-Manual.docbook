@@ -1,0 +1,1501 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
+<book lang="en-US">
+<?ooogenerator OpenOffice.org 1.1.4 (Win32)?>
+<?oooversion 1.1.4?>
+  <bookinfo>
+    <pubdate>Build date: @BUILD.DATE@</pubdate>
+    <author>
+      <firstname>Franck Fleurey,
+Zo&#xE9; Drey,
+Didier Vojtisek</firstname>
+      <firstname> </firstname>
+    </author>
+    <title>Kermeta</title>
+    <date>2006-02-06T21:20:34</date>
+    <keywordset>
+      <keyword>Kermeta</keyword>
+      <keyword>metamodeling</keyword>
+      <keyword>language</keyword>
+    </keywordset>
+    <subtitle>Reference manual</subtitle>
+    <bibliomisc>Licence EPL</bibliomisc>
+    <date>16/05/2005</date>
+    <abstract>
+      <para>This manual presents the various aspects of the KerMeta language. It intends to be a reference manual for anybody who want to use KerMeta. </para>
+    </abstract>
+    <publisher>
+      <publishername>INRIA</publishername>
+      <address>
+        <state>France</state>
+        <otheraddr>
+          <ulink url="http://www.inria.fr">http://www.inria.fr</ulink>
+        </otheraddr>
+      </address>
+    </publisher>
+    <confgroup>
+      <conftitle>title</conftitle>
+      <confnum>Reference</confnum>
+      <confsponsor>sponsor</confsponsor>
+    </confgroup>
+  </bookinfo>
+  <preface>
+<?print-orientation portrait?>
+    <title>Preface</title>
+    <para>
+      <emphasis role="strong">Kermeta is a language dedicated to build executable meta-models as MOF is defined to build meta-data models. So the aim of this short document is to present the textual syntax of Kermeta. Kermeta is an simple object-oriented language like Java or Eiffel. To be short we could say Kermeta, is an object oriented meta-language.</emphasis>
+    </para>
+    <para>
+      <emphasis role="strong">Kermeta, is an object oriented meta-language.</emphasis>
+    </para>
+    <important><emphasis role="strong">Kermeta is an evolving software and d</emphasis><emphasis role="strong"><emphasis role="strong">espite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bugtracker in the forge: </emphasis></emphasis><ulink url="http://gforge.inria.fr/tracker/?group_id=32" type=""><emphasis role="strong"><emphasis role="strong"><emphasis role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis></emphasis></emphasis></ulink><emphasis role="strong"><emphasis role="strong"><emphasis role="strong"> </emphasis></emphasis></emphasis>Last check: v0.1.0</important>
+    <tip>The most uptodate version of this document is available online from <ulink url="http://www.kermeta.org/" type="">http://www.kermeta.org</ulink> .</tip>
+  </preface>
+  <chapter>
+<?print-orientation portrait?>
+    <title>Introduction to Kermeta</title>
+    <section>
+      <title>Presentation</title>
+      <para>Kermeta is a metamodeling language which allows describing both the structure and the behavior of models. It has been designed to be fully compliant with the OMG metamodeling language EMOF (part of the MOF 2.0 specification) and provides an action language for specifying the behavior of models.</para>
+      <para>Kermeta is intended to be used as the core language of a model oriented platform. It has been designed to be a common basis to implement Metadata languages, action languages, constraint languages or transformation language.</para>
+      <figure id="refIllustration0">
+        <title>Kermeta positionning</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-Manual_figures/kermeta_positionning.png" width="16.231cm" depth="12.1cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+      <para>In a nutshell, Kermeta is :</para>
+      <itemizedlist>
+        <listitem>
+          <itemizedlist>
+            <listitem>
+              <para>MOF compliant (EMOF compliant to be precise)</para>
+            </listitem>
+            <listitem>
+              <para>Model oriented</para>
+            </listitem>
+            <listitem>
+              <para>Imperative</para>
+            </listitem>
+            <listitem>
+              <para>Object-Oriented </para>
+            </listitem>
+            <listitem>
+              <para>Statically Typed (100% typesafe)</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+      <para>In addition to these characteristics, it includes some typically model-oriented concepts like associations, multiplicities or object containment management. </para>
+      <para>This document is presents the main features of the kermeta language. Section 2 presents the general properies of the language, section 3 details the concrete and abstarct syntax of the language and finally section 4 provides some simple programs in kermeta.</para>
+    </section>
+    <section>
+      <title>First Program<phrase id="section_first_program"/> </title>
+      <para>Here is the traditional &#xAB;&#xA0;Hello world&#xA0;&#xBB; example you can found in every programming book.</para>
+      <programlisting>@mainClass "helloworld::HelloworldExample"@mainOperation "sayHello"package helloworld;require kermetausing kermeta::standardclass HelloworldExample{    operation sayHello() is    do        stdio.writeln("Hello world, ...")    end}</programlisting>
+    </section>
+    <section>
+      <title>Global view</title>
+      <para>The goal of the Kermeta language is to provide an action language for MOF models. The idea is to start from MOF, which provides the structure of the language, and to add an action model. Using the MOF to define the structure of the Kermeta language has an important impact on the language. In fact, as MOF concepts are Object-Oriented concepts, Kermeta includes most of the classical Object-Oriented mechanisms. Yet, MOF only defines structures, and the operational semantic corresponding to MOF concepts has to be defined in Kermeta. For instance MOF does not provide a semantic for behavior inheritance (concepts like method redefinition, abstract method, ... does not have any sense in the MOF).</para>
+      <section>
+        <title>Architecture</title>
+        <para>Kermeta has been designed to be fully compatible with the OMG standard meta-data language EMOF. The metamodel of Kermeta is divided into two packages : <emphasis>structure</emphasis> which corresponds to EMOF and <emphasis>behavior</emphasis> which corresponds to the actions. This section gives an overview of these two packages and their relationships.</para>
+        <para>Thanks to this reuse, Kermeta is fully compatible with EMOF. This is usefull in the promotion of Kermeta as a metalanguage.</para>
+        <figure id="refIllustration16">
+          <title>EMOF extension and Kermeta promotion</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_emof_promotion.png" width="16.999cm" depth="6.66cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+        <figure id="refIllustration2">
+          <title>Package kermeta::language::structure</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_structure_package.png" width="15.543cm" depth="13.959cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+        <para>Figure <link linkend="refIllustration3">4</link> presents the main classes of the structure package. To design this package, we started from EMOF and completed it to build the Kermeta language. The choice of EMOF is motivated by two main reasons : firstly it is standardized by the OMG and secondly is is well-suported by tools such as Eclipse/EMF.</para>
+        <para>As MOF is not initialy designed to be executable, several concepts has to be completed to build an executable language. The first and most important modification is to add the ability to define the behavior of operations. To achieve this we define an action language in the package <emphasis>behavior </emphasis>of Kermeta. The class hierarchy of the package behavior is presented on Figure . In practice, Kermeta expressions have been designed by adding model modification capabilities (like assignement of properties for instance) to OCL expressions.</para>
+        <figure id="refIllustration3">
+          <title>Package kermeta::language::behavior</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_behavior_package.png" width="19.249cm" depth="9.327cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+        <para>The link between structure and behavior is made throught the property &#xAB;&#xA0;body&#xA0;&#xBB; of class Operation which allows defining the behavior of an operation using a Kermeta expression. </para>
+        <para>A more detailled description of the architecture of Kermeta is presented in section <link linkend="section_kermeta_metamodel">5</link>.</para>
+      </section>
+      <section>
+        <title>Object-Oriented features</title>
+        <para>A MOF class can have operations but MOF does not provide any way to describe the behavior of these operations. Furthermore MOF does not provide any semantics neither for operation call nor for operation inheritance and redefinition. This section investigates how, while weaving actions into MOF, MOF semantics can be extended to support behavior definition and extension mechanisms provided by the action language. This implies answering several questions concerning redefinition and dispatch. </para>
+        <section>
+          <title>Operation redefinition</title>
+          <para>MOF does not specify the notion of overriding an operation because from a structural point of view it does not make any sense. To stick to MOF structure one can argue that redefinition should be forbidden in an executable MOF. This is the simplest solution as it also solves the problem of the dynamic dispatch since a simple static binding policy can be used</para>
+          <para>.</para>
+          <para>However, operation redefinition is one of the key features of Object-Oriented (OO) languages. The OO paradigm has demonstrated that operation redefinition is a useful and powerful mechanism to define the behavior of objects and allow for variability. This would be very convenient to properly model dynamic semantic variation points existing in e.g. UML state-charts. For this reason we believe that an important feature of an executable MOF is to provide a precise behavior redefinition mechanism. The choice of the operation overriding mechanism must take into account the usual problem of redefinition such as method specialization and conflicting redefinitions related to multiple inheritance.</para>
+          <table id="refTable0">
+            <title>Operation redefinition in Kermeta</title>
+            <tgroup cols="2">
+              <colspec colname="c1" colwidth="5.7cm"/>
+              <colspec colname="c2" colwidth="11.3cm"/>
+              <tbody>
+                <row>
+                  <entry align="right">
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                    <mediaobject>
+                      <imageobject>
+                        <imagedata fileref="KerMeta-Manual_figures/operation_redefinition.png" width="2.291cm" depth="9.209cm"/>
+                      </imageobject>
+                    </mediaobject>
+                    <para/>
+                  </entry>
+                  <entry>
+<?border 0.002cm solid #000000?>
+                    <programlisting><emphasis role="strong">class</emphasis> A{    <emphasis role="strong">operation</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// Some behavior</emphasis>    <emphasis role="strong">end</emphasis>        <emphasis>// method m2 is abstract</emphasis>    <emphasis role="strong">operation</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>}</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> A{    <emphasis role="strong">method</emphasis> m1() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// Behavior redefinition</emphasis>    <emphasis role="strong">end</emphasis>        <emphasis role="strong">method</emphasis> m2() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// Implementation of the abstract method</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
+                  </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+          <orderedlist continuation="restarts"/>
+          <note>Notice in that sample that method redefinition uses another keyword than operation declaration.</note>
+        </section>
+        <section>
+          <title>Operation specialization</title>
+          <para>The issue of choosing semantics for operation overriding has been widely studied for the design of OO languages ( cf. M. Abadi and L. Cardelli, A therory of objects, Springer). However, OO languages have not adopted a unique solution to this problem. In this context, any language that defines an operation overriding mechanism should define precisly the solution it implements.</para>
+          <para>The simplest approach to overriding is to require that an overriding method has exactly the same signature as the overridden method. That is that both the type of the parameters and the return type of the operation should be <emphasis>invariant</emphasis> among the implementations of an operation. For the sake of simplicity this is the solution we have chosen for the current version of Kermeta.</para>
+          <para>However, this condition can be relaxed to allow method <emphasis>specialization,</emphasis> i.e. specialization on the types of parameters or/and return type of the operation. On one hand, the return type of the overriding method can be a sub-type of the return type of the overridden method. Method specialization is said to be <emphasis>covariant</emphasis> for the return types. On the other hand, the types of parameters of the overriding method might be super types of the parameters of the overridden methods. Method specialization is thus <emphasis>contravariant</emphasis> for the parameters. </para>
+          <para>In practice languages can allow method specialization only on the return type (this is the case of Java 1.5) or both on parameters and return type (this is the case of Eiffel). Among these solutions, we may choose a less restrictive policy then strict invariance for future versions of Kermeta in order to improve the static type checking of Kermeta programs.</para>
+        </section>
+        <section>
+          <title>Operation overloading</title>
+          <para>Overloading allows multiple operations taking different types of parameters to be defined with the same name. For each call, depending on the type of the actual parameters, the compiler or interpreter automatically calls the right one. This provides convenient way for writing operation whose behaviors differs depending on the static type of the parameters. Overloading is extensively used is some functional languages such as Haskell and has been implemented in OO languages such as Java or C#. However it causes numerous problems in an OO context due to inheritance and even multiple inheritance in our case [REF?]. It is not implemented in some OO languages such as Eiffel for this reason, and that is why we have chosen to exclude overloading from Kermeta.</para>
+          <programlisting><emphasis role="strong">class</emphasis> A{    <emphasis role="strong">method</emphasis> m(i : Integer) <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// [...]</emphasis>    <emphasis role="strong">end method </emphasis>m(s : String)<emphasis role="strong"> is do // this is not allowed in Kermeta !!!</emphasis><emphasis>// [...]</emphasis><emphasis role="strong">end</emphasis>}</programlisting>
+        </section>
+        <section>
+          <title>Conflicts related to multiple inheritance</title>
+          <para>This is also a classical problem that has been solved in several OO languages. There are mainly two kinds of conflicts when a class inherits features from several super-classes: </para>
+          <itemizedlist>
+            <listitem>
+              <para>Several features with the same might be inherited from different super classes causing a name clash. </para>
+            </listitem>
+            <listitem>
+              <para>Several implementations of a single operation could be inherited from different super classes.</para>
+            </listitem>
+          </itemizedlist>
+          <para>There are two kinds of solution to resolve these conflicts. The first one is to have an implicit resolution mechanism which arbitrarily chooses the method to inherit according to an arbitrary policy. The second one is to include in the language constructions that allow the programmer to explicitly resolve conflicts. In Eiffel, for instance, the programmer can rename features in order to avoid name clashes and can select the method to inherit if several redefinition of an operation are inherited from parent classes.</para>
+          <para>In the current version of Kermeta, we have chosen to include a minimal selection mechanism that allows the user to explicitly select the inherited method to override if several implementations of an operation are inherited. This mechanism does not allow resolving some name clashes and thus reject some ambiguous programs. For the future version of Kermeta we plan to include a more general mechanism such as <emphasis>traits</emphasis> proposed by Sch&#xE4;rli et al. In any case we believe the conflict resolution mechanism should be explicit for the programmer.</para>
+          <table id="refTable1">
+            <title>Explicit selection of super operation in Kermeta</title>
+            <tgroup cols="2">
+              <colspec colname="c1" colwidth="5.8cm"/>
+              <colspec colname="c2" colwidth="11.2cm"/>
+              <tbody>
+                <row>
+                  <entry align="center">
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                    <mediaobject>
+                      <imageobject>
+                        <imagedata fileref="KerMeta-Manual_figures/superoperation_selection.png" width="5.637cm" depth="11.375cm"/>
+                      </imageobject>
+                    </mediaobject>
+                    <para/>
+                  </entry>
+                  <entry>
+<?border 0.002cm solid #000000?>
+                    <programlisting><emphasis role="strong">class</emphasis> O{    <emphasis role="strong">operation</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">abstract</emphasis>}</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> A <emphasis role="strong">inherits</emphasis> O{    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// [...]</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> B <emphasis role="strong">inherits</emphasis> O{    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// [...]</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
+                    <programlisting><emphasis role="strong">class</emphasis> C <emphasis role="strong">inherits</emphasis> A, B{    <emphasis>// Explicit selection of the implementation// to inherit</emphasis>    <emphasis role="strong">method</emphasis> m() <emphasis role="strong">from</emphasis> A <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// [...]</emphasis>    <emphasis role="strong">end</emphasis>} </programlisting>
+                  </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+          <orderedlist continuation="continues"/>
+        </section>
+      </section>
+      <section>
+        <title>Kermeta type system</title>
+        <para>One of the core charateristics of kermeta is to be statically typed. In order to allow static typing of OCL-like expression, a few modifications had to be made to the EMOF type system (Please refer to paper Weaving Executability into Object-Oriented Meta-Languages by P.A. Muller et al., to be presented at the Models05 conference). </para>
+        <para>As a result to these modification genericity support has been added into Kermeta. Like Eiffel and Java 5 Kermeta supports generic classes and generic operations. This section gives on overview of these concepts in kermeta.</para>
+        <section>
+          <title>Generic classes</title>
+          <para>In kermeta classes can have a set of type parameters. These type variables can be used in the implementation of the class as any other type. By default a type variable can take as value any type but a type variable can be constraind by a type, in that case, the type variable can only be substituted by a sub-type of this type. The following code demonstrate how to create generic classes.</para>
+          <programlisting><emphasis role="strong">class</emphasis> Queue&lt;G&gt;{    <emphasis role="strong">reference</emphasis> elements : oset G[*]     <emphasis role="strong">operation</emphasis> enqueue(e : G) : <emphasis role="strong">Void</emphasis> <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>          elements.add(e)     <emphasis role="strong">end</emphasis>          <emphasis role="strong">operation</emphasis> dequeue() : G <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>         <emphasis role="strong">result</emphasis> := elements.first         elements.removeAt(0)     <emphasis role="strong">end</emphasis>}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> SortedQueue&lt;C : Comparable&gt; <emphasis role="strong">inherits</emphasis> Queue&lt;C&gt; {        <emphasis role="strong">method</emphasis> enqueue(e : C) : <emphasis role="strong">Void</emphasis> <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis role="strong">var</emphasis> i : Integer        <emphasis role="strong">from</emphasis> i := 0        <emphasis role="strong">until</emphasis> i == elements.size <emphasis role="strong">or</emphasis> e &gt; elements.elementAt(i)        <emphasis role="strong">loop</emphasis>            i := i + 1        <emphasis role="strong">end</emphasis>        elements.addAt(i, e)    <emphasis role="strong">end</emphasis>}</programlisting>
+        </section>
+        <section>
+          <title>Generic operations</title>
+          <para>Kermeta operations can contain type parameters. Like for classes these type parameters can be constrained by a super type. However, unlike for classes for which the bindigs to these type parameters is explicit, for operations the actual type to bound to the variable is statically infered for each call according to the type of the actual parameters. </para>
+          <programlisting><emphasis role="strong">class</emphasis> Utils {    <emphasis role="strong">operation</emphasis> max&lt;T : Comparable&gt;(a : T, b : T) : T <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis role="strong">result</emphasis> := <emphasis role="strong">if</emphasis> a &gt; b <emphasis role="strong">then</emphasis> a <emphasis role="strong">else</emphasis> b <emphasis role="strong">end</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
+          <note>Notice in that sample that even the &#x201C;if&#x201D; is an expression that can return a value that is assigned here to a the special variable &#x201C;result&#x201D;.</note>
+        </section>
+      </section>
+      <section>
+        <title>Functions in kermeta</title>
+        <para>In order to implement and statically type check OCL-like iterators, kermeta includes some limited functional features by implementing lambda expressions.</para>
+        <para>This is typically used on Collection which then provides functions like : each, select, foreach; detect, ... </para>
+        <para>For example, the following code will build a collection of names of the operations that start with &#x201C;test&#x201D;.</para>
+        <programlisting><emphasis role="strong">var</emphasis> names : Collection&lt;String&gt;names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ownedOperation            .select{ op | op.name.indexOf("test") == 0}            .collect{ op | op.name }</programlisting>
+        <para>or on Integer which provides a time function.</para>
+        <para>For example Integer defines the following function :</para>
+        <programlisting><emphasis role="strong">operation</emphasis> times(body : &lt;Integer-&gt;Object&gt;) : Void <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>    <emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> i : Integer <emphasis role="strong">init</emphasis> 0    <emphasis role="strong">until</emphasis> i == <emphasis role="strong">self</emphasis>    <emphasis role="strong">loop</emphasis>        body(i)        i := i + 1    <emphasis role="strong">end</emphasis><emphasis role="strong">end</emphasis> </programlisting>
+        <para>which allow to write code like :</para>
+        <programlisting><emphasis role="strong">var</emphasis> res : Integer10.times { i | res + i }</programlisting>
+        <para>See sections <link linkend="section_lambda_expression">2.3.7</link> and <link linkend="section_lambda_expression_mm">5.2.6</link> for detailed informations.</para>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Language Basics </title>
+    <para>This section presents basic features of the Kermeta language such as comments, types, or instructions ... A simple &#x201C;Hello world&#x201D; example concludes this first section. More complex object-oriented features are explained in section <link linkend="sec:oo-features">3</link>.</para>
+    <section>
+      <title>Comments and keywords</title>
+      <warning>Comments are a little bit particular in the Kermeta language because they are not all ignored by the interpreter. There are two kinds of comments: the first is only associated to the text editor view in which the user edits his Kermeta file, and the second one is translated into MOF tags linked to structures described in the Kermeta model.</warning>
+      <section>
+        <title>Simple and multi-line comments</title>
+        <para>Like many languages, Kermeta provides two ways to add comments in your models. You can add some simple line, or multi-line comments in Java-like syntax. If the user does not want his multi-line comment to be stored as MOF tags, he should be careful about the notation : the opening syntax must not have juxtaposed stars (&#x201C;/**&#x201D;).</para>
+        <programlisting>// a simple line comment/* This a multi line comment    all these lines are comments    this line too. */</programlisting>
+      </section>
+      <section>
+        <title>Linked comments</title>
+        <para>Kermeta provides a way to define named annotation. For that, you can use a special symbol &#x201C;@&#x201D;. For example you can define an annotation to describe the role of a variable. </para>
+        <programlisting>@usage count the number of ...<emphasis role="strong">var</emphasis> myCounter : Integer <emphasis role="strong">init</emphasis> 12 </programlisting>
+        <para>Each comment is linked to a Kermeta structure. It might be a class, an operation, a package, or an instruction as in the previous example. Those comments are always attached to the structure that follows it, and not the preceding one. In the following example, the first anonymous comment will be attached to the declaration like the &#x201C;role&#x201D; annotation.</para>
+        <programlisting><emphasis role="strong">@role</emphasis> variable is an example for annotation<emphasis role="strong">var</emphasis> myVar : Integer <emphasis role="strong">init</emphasis> 12</programlisting>
+        <programlisting><emphasis>/** * This is a documentation tag for the class "myClass" */</emphasis><emphasis role="strong">class</emphasis> MyClass {    <emphasis>/** This is a documentation tag for myOperation */</emphasis>    <emphasis role="strong">operation</emphasis> myOperation() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>// Unlinked comment</emphasis>    <emphasis role="strong">end</emphasis>    <emphasis role="strong">@desc</emphasis> "This is a named annotation for thisOperation"    <emphasis role="strong">operation</emphasis> thisOperation() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>/* This is an unlinked comment */</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
+        <para/>
+      </section>
+      <section>
+        <title>Keywords</title>
+        <para>Kermeta textual syntax uses several keywords like <literal>class</literal>, <literal>attribute</literal>, <literal>reference</literal>, <literal>result</literal>, ...</para>
+        <para>This doesn't mean you cannot use these words for your own model. Moreover, this is only a textual syntax limitation.</para>
+        <para>So Kermeta syntax allow you to use the word you want, you simply have to prefix it with a tilda ~.</para>
+        <para>This example is valid:</para>
+        <programlisting><emphasis role="strong">require </emphasis>"./ecore.ecore"<emphasis role="strong">class</emphasis> ~class {    <emphasis role="strong">attribute</emphasis> ~attribute : Ecore::Attribute}</programlisting>
+      </section>
+    </section>
+    <section>
+      <title>Types and variables<phrase id="sec:types-and-variables"/></title>
+      <para>A variable is defined by a name and by a datatype which determines the domain and operations we can apply on the variable.</para>
+      <programlisting>NAME:    ( '~' )?         ( 'a'..'z' | 'A'..'Z' | '_' )         ( 'a'..'z' | 'A'..'Z' | '_' | DIGIT )* </programlisting>
+      <section>
+        <title>Primitives types</title>
+        <informaltable>
+          <tgroup cols="3">
+            <colspec colname="c1" colwidth="2.7cm"/>
+            <colspec colname="c2" colwidth="7.6cm"/>
+            <colspec colname="c3" colwidth="4.7cm"/>
+            <thead>
+              <row>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Name</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Description</para>
+                </entry>
+                <entry>
+<?border 0.002cm solid #000000?>
+                  <para>Literal Example</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Integer</para>
+                </entry>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents integer numeric value like 10 or 12. (&#xAB;&#xA0;int&#xA0;&#xBB; data type in Java)</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>'101', '12', '14, '-45', '-123'</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Real</para>
+                </entry>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a real numeric value like 3.14 (&#xAB;&#xA0;double&#xA0;&#xBB; data type in Java)</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>'3.14', '-345.456'</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Character</para>
+                </entry>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a simple character variable like 'a', 'Z', or '$' (&#xAB;&#xA0;char&#xA0;&#xBB; data type in Java)</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>'a', 'b', 'Z', 'Y', '$', '!'</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>String</para>
+                </entry>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a string of characters like &#xAB; helloworld&#xA0;&#xBB; (&#xAB;&#xA0;String&#xA0;&#xBB; data type in Java)</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>"helloworld", "this is a string !!!"</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Boolean</para>
+                </entry>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a true/false value. (&#xAB;&#xA0;boolean&#xA0;&#xBB; data type in Java)</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>true, false</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <programlisting><emphasis>// Simple datatypes examples</emphasis><emphasis role="strong">var</emphasis> myVar1 : Integer <emphasis role="strong">init</emphasis> 10<emphasis role="strong">var</emphasis> myVar2 : Integer<emphasis role="strong">var</emphasis> myVar3 : Real <emphasis role="strong">init</emphasis> 3.14<emphasis role="strong">var</emphasis> myVar4 : String <emphasis role="strong">init</emphasis> "a new string value"<emphasis role="strong">var</emphasis> myVar5 : boolean</programlisting>
+      </section>
+      <section>
+        <title>Enumeration types</title>
+        <para>You can also define enumeration types by using the following syntax. Note that each enumeration literal is separated from the following by a &#x201C;;&#x201D;.</para>
+        <programlisting><emphasis role="strong">enumeration</emphasis> Size { small; normal; big; huge} </programlisting>
+        <para>You can manipulate enumerated variables and literals with classical operators such as in the following example.</para>
+        <programlisting><emphasis role="strong">var</emphasis> mySize : Size<emphasis role="strong">if</emphasis> ( mySize == Size.small ) <emphasis role="strong">then</emphasis>     stdio.writeln("This is small !") <emphasis role="strong">end</emphasis></programlisting>
+        <note>Enumeration are concept of the same level as classes, they must be defined in a package.</note>
+      </section>
+      <section>
+        <title>Arrays and Collections</title>
+        <para>Kermeta define some collection data types handling sets of values. Collection result of a combinaison of constraints &#xAB;&#xA0;unique&#xA0;&#xBB; and &#xAB;&#xA0;ordered&#xA0;&#xBB;. Unique specify a collection cannot contains doublet and ordered specify the position of the object inside the collection can be modify.</para>
+        <informaltable>
+          <tgroup cols="4">
+            <colspec colname="c1" colwidth="2.7cm"/>
+            <colspec colname="c2" colwidth="7.3cm"/>
+            <colspec colname="c3" colwidth="2.5cm"/>
+            <colspec colname="c4" colwidth="2.5cm"/>
+            <thead>
+              <row>
+                <entry morerows="1" valign="middle">
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Name</para>
+                </entry>
+                <entry morerows="1" valign="middle">
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Description</para>
+                </entry>
+                <entry namest="c3" nameend="c4">
+<?border 0.002cm solid #000000?>
+                  <para>Constraints</para>
+                </entry>
+              </row>
+              <row>
+                <entry>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Unique</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Ordered</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>set</para>
+                </entry>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a set not ordered with no doublet</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>False</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>oset</para>
+                </entry>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a ordered set with possibly doublet</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>seq</para>
+                </entry>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents any ordered sequences of object</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>False</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>bag</para>
+                </entry>
+                <entry valign="middle">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Represents a not ordered sequence with doublet</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>False</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>False</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <para>An other way to define set of object is to use arrays. In fact, Kermeta does not define explicitly the concept of array, but it provides a multiplicity concept which can be use instead. Multiplicities are a way to define a lower and upper bound on a collection. Syntactically, lower and upper bounds are defined between brackets and are separated by two dots. Bounds can be an integer literal value or a star to explicitly specify there's no upper bound.</para>
+        <programlisting><emphasis role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]<emphasis role="strong">var</emphasis> myCol2 : <emphasis role="strong">oset</emphasis> Real[0..*]</programlisting>
+        <para>There is currently no way to define a collection by extension like you can do in C or Java. You can just initialize by copy a set with another collection.</para>
+        <programlisting><emphasis>// Collection dataTypes examples</emphasis><phrase id="DDE_LINK1"/><emphasis role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[0..*]    <emphasis role="strong">init</emphasis> kermeta::standard::Set&lt;Integer&gt;.new<emphasis role="strong">var</emphasis> myCol2 : <emphasis role="strong">oset</emphasis> String[0..*]    <emphasis role="strong">init</emphasis> kermeta::standard::OrderedSet&lt;String&gt;.new<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">bag</emphasis> Boolean[0..*]    <emphasis role="strong">init</emphasis> kermeta::standard::Bag&lt;Boolean&gt;.new<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">seq</emphasis> Real[0..*]    <emphasis role="strong">init</emphasis> kermeta::standard::Sequence&lt;Real&gt;.new<emphasis>// Collection with multiplicities</emphasis><emphasis role="strong">var</emphasis> myCol5 : <emphasis role="strong">seq</emphasis> String[2..*] <emphasis>// At least two strings in the sequence</emphasis><emphasis role="strong">var</emphasis> myCol6 : <emphasis role="strong">set</emphasis> String[1..*] <emphasis>// An non empty set</emphasis><emphasis role="strong">var</emphasis> myCol7 : <emphasis role="strong">set</emphasis> Real[4..20] <emphasis>// this set will contain at least 4 elements and never more than 20 elements</emphasis></programlisting>
+        <note>In most cases, you don't need to use this special syntax, you simply use the generic collections from the framework</note>
+      </section>
+      <section>
+        <title>Operators</title>
+        <informaltable>
+          <tgroup cols="4">
+            <colspec colname="c1" colwidth="1.4cm"/>
+            <colspec colname="c2" colwidth="2.5cm"/>
+            <colspec colname="c3" colwidth="3cm"/>
+            <colspec colname="c4" colwidth="8.1cm"/>
+            <thead>
+              <row>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Priority</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Operator</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Operand types</para>
+                </entry>
+                <entry>
+<?border 0.002cm solid #000000?>
+                  <para>Semantic</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>1</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>+</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                  <para>String</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Add two numeric values</para>
+                  <para>Concat two strings</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>1</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>-</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Subtract two numerous values</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>2</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>*</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Multiply two numeric values</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>2</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>/</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Divide the first operand by the second</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <para>Notice that most of these arithmetic operators are only defined for numeric primitive types like Integer or Float. Except the + operator which is a concat operator for String, they are not applicable on String or Boolean and on collections </para>
+        <informaltable>
+          <tgroup cols="4">
+            <colspec colname="c1" colwidth="1.4cm"/>
+            <colspec colname="c2" colwidth="2.5cm"/>
+            <colspec colname="c3" colwidth="3cm"/>
+            <colspec colname="c4" colwidth="8.1cm"/>
+            <thead>
+              <row>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Priority</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Operators</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Operand Types</para>
+                </entry>
+                <entry>
+<?border 0.002cm solid #000000?>
+                  <para>Semantics</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>3</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>==</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Primitives</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True, if op1 value's is the same that op2 value's</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>3</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>!=</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Primitives</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op1 value's is different of op2 value's</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>3</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>&lt;</literal>
+                  </para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op1value's is strictly smaller than op2 value's</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>3</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>&lt;=</literal>
+                  </para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry valign="middle">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op1 value's is smaller or equals than op2 value's</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>3</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>&gt;</literal>
+                  </para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry valign="middle">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op1 value's is strictly greater than op2 value's</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>3</para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>&gt;=</literal>
+                  </para>
+                </entry>
+                <entry valign="middle" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Numeric</para>
+                </entry>
+                <entry valign="middle">
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op1 value's is greater or equals than op2 value's</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <informaltable>
+          <tgroup cols="4">
+            <colspec colname="c1" colwidth="1.4cm"/>
+            <colspec colname="c2" colwidth="2.5cm"/>
+            <colspec colname="c3" colwidth="3cm"/>
+            <colspec colname="c4" colwidth="8.1cm"/>
+            <thead>
+              <row>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Priority</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Operators</para>
+                </entry>
+                <entry>
+<?border-top 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Operands Types</para>
+                </entry>
+                <entry>
+<?border 0.002cm solid #000000?>
+                  <para>Semantics</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>4</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>and </literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Boolean</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op1 and op2 are evaluated to true</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>4</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>or</literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Boolean</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if one of the operators is evaluated to true</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="bottom" align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>4</para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>
+                    <literal>not </literal>
+                  </para>
+                </entry>
+                <entry align="center">
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>Boolean</para>
+                </entry>
+                <entry>
+<?border-right 0.002cm solid #000000?>
+<?border-bottom 0.002cm solid #000000?>
+<?border-left 0.002cm solid #000000?>
+                  <para>True if op is false.</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </section>
+    </section>
+    <section>
+      <title>Basic instructions</title>
+      <section>
+        <title>Defining operations</title>
+        <para>Kermeta provides a way to add operational semantics to your meta-models. For that, you can define operations with their body. You can also specify abstract operations (they have no body.) Kermeta requires that every class where there is an abstract operation must be declared as an abstract class.</para>
+        <para>There are some limitations in regards to Java. For example, you cannot define nested classes in Kermeta. Kermeta offers the same structural concepts than MOF language. </para>
+        <programlisting><emphasis role="strong">class</emphasis> Inventory {    <emphasis role="strong">operation</emphasis> visitLibrary(l : Library) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        writeln("Inventory : ");        l.books.each(b : Book | b.accept(visitor))        writeln("----")    <emphasis role="strong">end</emphasis>    <emphasis role="strong">operation</emphasis> visitBook(b : Book) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        stdio.write("Book : ", b.title, " by ")        b.authors.each(a : Author | a.accept(visitor))    <emphasis role="strong">end</emphasis>    <emphasis role="strong">operation</emphasis> visitAuthor(a : Author) <emphasis role="strong">is</emphasis>     <emphasis role="strong">do</emphasis>        stdio.write(a.name, " ", a.lastName)    <emphasis role="strong">end</emphasis>}<emphasis role="strong">class</emphasis> Library {    // ...    <emphasis role="strong">operation</emphasis> accept(visitor : Inventory) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        visitor.visitLibrary(self)    <emphasis role="strong">end</emphasis>}<emphasis role="strong">class</emphasis> Book{    // ...    <emphasis role="strong">operation</emphasis> accept(visitor : Inventory) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        visitor.visitBook(self)    <emphasis role="strong">end</emphasis>}<emphasis role="strong">class</emphasis> Author{    // ...    <emphasis role="strong">operation</emphasis> accept(visitor : Inventory) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        visitor.visitAuthor(self)    <emphasis role="strong">end</emphasis>}</programlisting>
+        <para>In this small example we define an &#x201C;Inventory&#x201D; class which can go over the library structure and print books informations. For that, we apply the visitor GoF pattern's on the library structure defining an &#x201C;accept&#x201D; method in every library structures.</para>
+        <section>
+          <title>Result</title>
+          <para>The special variable <emphasis>result</emphasis> is used to store the value that will be returned by the operation. </para>
+          <para>Ex:</para>
+          <programlisting><emphasis role="strong">operation</emphasis> getName() : String<emphasis role="strong"> is</emphasis>    <emphasis role="strong">do</emphasis>        <emphasis role="strong">result</emphasis> := <emphasis role="strong">self</emphasis>.name    <emphasis role="strong">end</emphasis></programlisting>
+          <note>This is different of the <literal>return</literal> in java, since it doesn't end the block. Other instruction can be used after the <literal>result</literal> assigment.</note>
+        </section>
+        <section>
+          <title>Operations as main entry point.</title>
+          <para>When you run a Kermeta program you'll start from an operation. You can pass any number of String as parameters of those operations.</para>
+          <para>For example:</para>
+          <programlisting><emphasis role="strong">class</emphasis> A{    <emphasis role="strong">operation</emphasis> main0() <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        // do something    <emphasis role="strong">end</emphasis>    <emphasis role="strong">operation</emphasis> main1( arg1 : String) <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        // do something with 1rst argument    <emphasis role="strong">end</emphasis>    <emphasis role="strong">operation</emphasis> main3( arg1 : String, arg2 : String) <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        // do something with 1<superscript>st</superscript> and 2nd arguments    <emphasis role="strong">end</emphasis>    // ...}</programlisting>
+          <note>Obviously, you'll have to take care to not use any reference or attribute of the enclosing class since the corresponding object hasn't been initialized yet. (Ie. <literal>self == void</literal>)</note>
+        </section>
+      </section>
+      <section>
+        <title>Block statement</title>
+        <para>Kermeta provides a block notion to manage scope of variable. Instruction of the block have to be inserted between &#x201C;do&#x201D; and &#x201C;end&#x201D; keywords. This two keywords may be omitted for the conditional and for the loop structure.</para>
+        <para>A variable could only be access in the block where it was defined and in its sub block (See the following example). </para>
+        <programlisting><emphasis role="strong">do</emphasis>    <emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 3    <emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 2    <emphasis role="strong">do</emphasis>        <emphasis role="strong">var</emphasis> v3 : Integer        v3 := v1 + v2    <emphasis role="strong">end</emphasis>    <emphasis role="strong">var</emphasis> v4 : Integer <emphasis role="strong">init</emphasis> v3 <emphasis>// error : v3 is unknown here</emphasis><emphasis role="strong">end</emphasis></programlisting>
+      </section>
+      <section>
+        <title>Conditional statement</title>
+        <para>Kermeta's conditional statement is composed of at least two elements : a boolean expression and an block to execute if the boolean is evaluated to &#x201C;true&#x201D;. To be more precise you can add another function that will execute if the boolean is evaluated to false.</para>
+        <programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 2<emphasis role="strong">var</emphasis> v2 : String <emphasis role="strong">init</emphasis> "blah"<emphasis role="strong">if</emphasis> v1 &gt; 5 <emphasis role="strong">then</emphasis> v1 := v1-5<emphasis role="strong">if</emphasis> v1 == 2 <emphasis role="strong">then</emphasis>    v2 := v1    v1 := v2 + v1<emphasis role="strong">else</emphasis>    v1 := 0<emphasis role="strong">end</emphasis></programlisting>
+        <para>The <literal>if</literal> statement is in fact an expression (see section <link linkend="section_kermeta_metamodel">5</link>). As any expression in Kermeta, it can return a value. In the case of the <literal>if</literal>, the return type is the one of both the <literal>then</literal> and <literal>else</literal> blocks</para>
+        <para>Example:</para>
+        <programlisting><emphasis role="strong">var</emphasis> s : String    s := <emphasis role="strong">if false then</emphasis> "a" <emphasis role="strong">else</emphasis> "b" <emphasis role="strong">end</emphasis></programlisting>
+      </section>
+      <section>
+        <title>Loop Statement</title>
+        <para>Here is a sample of a typical loop in Kermeta.</para>
+        <programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 3<emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 6<emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> i : Integer <emphasis role="strong">init</emphasis> 0<emphasis role="strong">until</emphasis> i == 10<emphasis role="strong">loop</emphasis>    i := i + 1<emphasis role="strong">end</emphasis></programlisting>
+      </section>
+      <section>
+        <title>Exception handling</title>
+        <para>Kermeta provides also an exception mechanism. You can define a &#x201C;rescue&#x201D; bloc to manage errors occurring during the execution of another block. Exception mechanism is very close to the Java Exception mechanism (See the following example).</para>
+        <programlisting><emphasis role="strong">do</emphasis>    <emphasis role="strong">var</emphasis> excep : Exception        excep := Exception.new    stdio.writeln(&#x201C;Throwing an exception ! &#x201C;)    <emphasis role="strong">raise</emphasis> excep<emphasis role="strong">end</emphasis></programlisting>
+        <para>Any block can then rescue exceptions.</para>
+        <programlisting><emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 2<emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 3<emphasis role="strong">do</emphasis>    var v3 : Integer    v3 := v1 + v2<emphasis role="strong">rescue</emphasis> (myError : Exception)    // something with myError    // ...<emphasis role="strong">end</emphasis></programlisting>
+      </section>
+      <section>
+        <title>Using Variables</title>
+        <programlisting><emphasis role="strong">do</emphasis>    <emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 14    <emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 145 * v1    <emphasis role="strong">var</emphasis> tab : Integer[0..*]    v1 := v2/v1<emphasis role="strong">end</emphasis></programlisting>
+        <para>In the previous example, we define 3 variables of type integer. The first in initialized with the &#x201C;14&#x201D; litteral value, the second is initialized with an expression using v1. For the last variable, we use a multiplicity notation to specifiy an ordered set of integer.</para>
+        <itemizedlist/>
+      </section>
+      <section>
+        <title>Lambda Expressions and functions<phrase id="section_lambda_expression"/> </title>
+        <section>
+          <title>Some existing useful functions</title>
+          <para>The collections in Kermeta implement several functions based on lambda expression. These ones are very useful for model navigation. Here are some examples:</para>
+          <programlisting>aCollection.each { e |     <emphasis>// do something with each of element e of this collection</emphasis>}</programlisting>
+          <programlisting>aBoolean := aCollection.forall { e | <emphasis>/* a condition */</emphasis>} <emphasis>// return true if the condition is true for all elements in the collection.</emphasis></programlisting>
+          <programlisting>aCollection2 := aCollection.select { e | <emphasis>/* a condition that returns true for elements that must be included in the resulting Collection */</emphasis>}</programlisting>
+          <programlisting>aCollection2 := aCollection.reject { e | <emphasis>/* a condition that returns true for elements that must be exclude in the resulting Collection */</emphasis>}</programlisting>
+          <programlisting>aCollection2 := aCollection.collect { e | <emphasis>/* an expression, for example e.name */</emphasis>} <emphasis>// return a new collection containing as much element as in the original collection but with the result of the expression.</emphasis></programlisting>
+          <programlisting>aBoolean := aCollection.detect { e | <emphasis>/* a condition */</emphasis>} // returns the first element that fullfil the condition.</programlisting>
+          <programlisting>aBoolean := aCollection.exist { e | <emphasis>/* a condition */</emphasis>} // returns true if at least one element fulfill the condition.</programlisting>
+          <para>Another useful function is defined on Integer : the function times</para>
+          <para>ex:</para>
+          <programlisting>10.times { i | stdio.writeln(i.toString) } <emphasis>// prints 0 to 9</emphasis> </programlisting>
+          <para>Notice that you can write some complex code in the function, using internal variables, etc.</para>
+          <para>Ex:</para>
+        </section>
+        <section>
+          <title>Defining new functions in a class</title>
+          <para>You can also define your own functions, simply declare a parameter as a function using the following syntax.</para>
+          <para>For example the each and the forAll functions are declared like this:</para>
+          <programlisting><emphasis role="strong">abstract</emphasis> <emphasis role="strong">class</emphasis> Collection&lt;G&gt;{    ...    <emphasis>/** * runs func on each element of the collection */</emphasis>    <emphasis role="strong">operation</emphasis> each(func : &lt;G -&gt; Object&gt;) : Void <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> it : Iterator&lt;G&gt; <emphasis role="strong">init</emphasis> iterator        <emphasis role="strong">until</emphasis> it.isOff        <emphasis role="strong">loop</emphasis>            func(it.next)        <emphasis role="strong">end</emphasis>    <emphasis role="strong">end</emphasis>        <emphasis>/** * checks that the condition is true on all the element of the collection * returns true if the collection is empty */</emphasis>    <emphasis role="strong">operation</emphasis> forAll(func : &lt;G -&gt; Boolean&gt;) : Boolean <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis role="strong">var</emphasis> test : Boolean <emphasis role="strong">init</emphasis> true        <emphasis role="strong">from</emphasis> <emphasis role="strong">var</emphasis> it : Iterator&lt;G&gt; init iterator        until it.isOff        loop            test := test <emphasis role="strong">and</emphasis> func(it.next)        <emphasis role="strong">end</emphasis>        <emphasis role="strong">result</emphasis> := test    <emphasis role="strong">end</emphasis>.</programlisting>
+        </section>
+        <section>
+          <title>Defining lambda expression variables</title>
+          <para>You can also define lambda expression as variable. This can be useful if you don't want ( or can't) to modify the class.</para>
+          <itemizedlist>
+            <listitem>
+              <para>A basic lambda expression</para>
+            </listitem>
+          </itemizedlist>
+          <para>With one Integer argument and returning an Integer.</para>
+          <programlisting><emphasis role="strong">var</emphasis> aLambdaExp : &lt;Integer-&gt;Integer&gt;<emphasis role="strong">var</emphasis> aLambdaResult : IntegeraLambdaExp := <emphasis role="strong">function</emphasis> { i : Integer | i.plus(4) }<emphasis>// aLambdaResult equals 7</emphasis>aLambdaResult := aLambdaExp(3)</programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>A lambda expression with several parameters</para>
+            </listitem>
+          </itemizedlist>
+          <programlisting><emphasis role="strong">var</emphasis> aLambdaExp : &lt;[Integer, Integer]-&gt;Integer&gt;<emphasis role="strong">var</emphasis> aLambdaResult : IntegeraLambdaExp := <emphasis role="strong">function</emphasis> { i : Integer, j : Integer | i * j }<emphasis>// aLambdaResult equals 12</emphasis>aLambdaResult := aLambdaExp(3, 4)</programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>A lambda expression on a collection</para>
+            </listitem>
+          </itemizedlist>
+          <programlisting><emphasis role="strong">var</emphasis> sequence : Sequence&lt;Integer&gt; <emphasis role="strong">init</emphasis> Sequence<emphasis role="strong">var</emphasis> init_set : Set&lt;Integer&gt; <emphasis role="strong">init</emphasis> Set&lt;Integer&gt;.newinit_set.add(32)init_set.add(23)init_set.add(41)<emphasis>// This sequence equals : [320, 230, 41]</emphasis>sequence := init_set.collect { element | element*10}</programlisting>
+          <para>The code within the function can be as complex as you want, using internal variables, etc.</para>
+          <programlisting>    <emphasis role="strong">var</emphasis> factoExp : &lt;Integer-&gt;Integer&gt;    factoExp := <emphasis role="strong">function</emphasis> { n : Integer |         <emphasis role="strong">var</emphasis> fact : Integer <emphasis role="strong">init</emphasis> 1        <emphasis role="strong">from</emphasis> var x : Integer <emphasis role="strong">init</emphasis> 1         <emphasis role="strong">until</emphasis> x &gt; n         <emphasis role="strong">loop</emphasis>            fact := fact * x             x:=x+1        <emphasis role="strong">end</emphasis>        fact <emphasis>// return fact as the result of the function</emphasis>        <emphasis>//shorter alternative ;-)... if n&lt;=1 then 1 else factoExp(n -1) * n end</emphasis>    }    <emphasis role="strong">var</emphasis> cnkExp : &lt;[Integer, Integer]-&gt;Integer&gt;    cnkExp := <emphasis role="strong">function</emphasis> { n : Integer, k : Integer |        factoExp(n) / (factoExp(k) * factoExp(n-k))    }</programlisting>
+        </section>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>More object-oriented features<phrase id="sec:oo-features"/></title>
+    <section>
+      <title>Classes, properties and methods</title>
+      <section>
+        <title>Classes</title>
+        <para>As introduced in the &#x201C;Hello world&#x201D; example (see section <link linkend="section_first_program">1.2</link>), Kermeta is an object-oriented language and operations are part of classes. Kermeta provides all MOF concepts like Properties, attributes, package.</para>
+        <para>Classes and abstract classes can be defined in a Java-like way. Class definition must be placed into brackets as it is in the following example.</para>
+        <programlisting>// an empty simple class<emphasis role="strong">class</emphasis> myFirstClass {}// a simple abstract class<emphasis role="strong">abstract</emphasis> <emphasis role="strong">class</emphasis> MyAbstractClass{}</programlisting>
+        <para>Additionnaly, for better code robustness, classes can use the genericity mecanisms.</para>
+        <programlisting>// This is a parametric class<emphasis role="strong">class</emphasis> A&lt;G&gt; {}// This is the type variable binding : G is binded with Integer<emphasis role="strong">var</emphasis> a : A&lt;Integer&gt;a := A&lt;Integer&gt;.new</programlisting>
+      </section>
+      <section>
+        <title>Properties</title>
+        <para>A property can be expressed in three ways : as a property (which is derivated or calculated), as an attribute, or as a reference.</para>
+        <section>
+          <title>Attributes and references</title>
+          <para>We introduce here the 2 last cases, which are relationships between two concrete entities.</para>
+          <itemizedlist>
+            <listitem>
+              <para><emphasis>attribute</emphasis>: an attribute defines a <emphasis>composition </emphasis>(e.g the black diamond) between two entities. The diamond-ed association end is navigable by definition</para>
+            </listitem>
+          </itemizedlist>
+          <note>NOTE : a bi-composition is not valid in MOF. So, only one entity can be the component of the other.</note>
+          <itemizedlist>
+            <listitem>
+              <para><emphasis>reference</emphasis>: a reference defines a association between two entities.</para>
+            </listitem>
+            <listitem>
+              <para><emphasis>opposite</emphasis>: the opposite [property] of a property is expressed by a sharp #. The following example means that container is the opposite property of the entity of type Contained3 and referenced by the name <emphasis>contained</emphasis>. </para>
+              <para><emphasis role="strong">class</emphasis> A {</para>
+              <para><emphasis role="strong">reference</emphasis> b : B#a</para>
+              <para>}</para>
+              <para><emphasis role="strong">class</emphasis> B {</para>
+              <para><emphasis role="strong">reference</emphasis> a : A#b</para>
+              <para role="lineBreak">}</para>
+            </listitem>
+          </itemizedlist>
+          <para>The following section shows a set of examples of attributes and references.</para>
+          <figure id="refIllustration4">
+            <title>Attributes and references</title>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="KerMeta-Manual_figures/properties.png" width="19.397cm" depth="7.05cm"/>
+              </imageobject>
+            </mediaobject>
+          </figure>
+          <para/>
+          <programlisting><emphasis role="strong">package</emphasis> root;<emphasis role="strong">class</emphasis> A {    <emphasis role="strong">attribute</emphasis> b : B[0..*] }<emphasis role="strong">class</emphasis> B {}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A2 {}<emphasis role="strong">class</emphasis> B2 {    <emphasis role="strong">reference</emphasis> a : A2 }</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A3 {    <emphasis role="strong">reference</emphasis> b : B3#a}<emphasis role="strong">class</emphasis> B3 {    <emphasis role="strong">reference</emphasis> a : A3#b}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A4 {}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A5 {    <emphasis role="strong">attribute</emphasis> b : B5#a}<emphasis role="strong">class</emphasis> B5 {    <emphasis role="strong">reference</emphasis> a : A5[1..1]#b}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A6 {    <emphasis role="strong">attribute</emphasis> b : B6[0..*]#a}<emphasis role="strong">class</emphasis> B6 {    <emphasis role="strong">reference</emphasis> a : A6#b }</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A7 {    <emphasis role="strong">attribute</emphasis> b : B7#a }<emphasis role="strong">class</emphasis> B7 {    <emphasis role="strong">reference</emphasis> a : A7[0..*]#b}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A8 {    <emphasis role="strong">attribute</emphasis> b : B8[1..1]#a}<emphasis role="strong">class</emphasis> B8 {    <emphasis role="strong">reference</emphasis> a : A8#b}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A9 {}<emphasis role="strong">class</emphasis> B9 {    <emphasis role="strong">reference</emphasis> a : A9[1..1]}</programlisting>
+          <programlisting><emphasis role="strong">class</emphasis> A4bis {    <emphasis role="strong">reference</emphasis> a4bis : A4bis#a4bis}</programlisting>
+          <note>For every cases where the upper bound is upper to 1, the type of the reference is OrderedSet. The reader will refer to the Language basics chapter (except the bag type) to have the available types for a [m..n](n&gt;1) multiplicity property.</note>
+        </section>
+        <section>
+          <title>How to access and control the properties in Kermeta</title>
+          <para>let's take the example with A6 and B6 :</para>
+          <programlisting>class A6 {     <emphasis role="strong">attribute</emphasis> b : B6[0..*]#a}</programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>Get the attribute of an instance:</para>
+            </listitem>
+          </itemizedlist>
+          <programlisting><emphasis role="strong">var</emphasis> a6 : A6 <emphasis role="strong">init</emphasis> A6.new<emphasis role="strong">var</emphasis> b6 : Set&lt;B6&gt;// get the b attribute (if b6 was a 1-multiplicity element, its type // would have been "B6")b6 := a6.b</programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>Add/remove an element to a property with a [m..n] multiplicity</para>
+            </listitem>
+          </itemizedlist>
+          <programlisting><emphasis role="strong">var</emphasis> aa6 : A6 <emphasis role="strong">init</emphasis> A6.new<emphasis role="strong">var</emphasis> ab6 : B6 <emphasis role="strong">init</emphasis> B6.new<emphasis>// add ab6 to the attribute "b"</emphasis>aa6.b.add(ab6)<emphasis>// remove ab6 : telling the index of the element to remove.</emphasis>aa6.b.remove(0)</programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>Get the opposite of a property</para>
+            </listitem>
+          </itemizedlist>
+          <para>Let's take a simple class:</para>
+          <programlisting><emphasis role="strong">class</emphasis> A {    <emphasis role="strong">reference</emphasis> refb : B#refa}<emphasis role="strong">class</emphasis> B {    <emphasis role="strong">reference</emphasis> refa : A}</programlisting>
+          <para> We access the opposite of b following this way:</para>
+          <programlisting><emphasis role="strong">var</emphasis> vara : A <emphasis role="strong">init</emphasis> A.new<emphasis role="strong">var</emphasis> varb : B <emphasis role="strong">init</emphasis> B.new// add b to the attribute "b"vara.refb := varb// this assertion is true.assert(varb.refa == vara)</programlisting>
+          <para>It is not different with references that have a [m..n] (m&gt;n and n&gt;1) multiplicity:</para>
+          <programlisting><emphasis role="strong">class</emphasis> A {    <emphasis role="strong">reference</emphasis> refb : B[0..*]#refa}<emphasis role="strong">class</emphasis> B {    <emphasis role="strong">reference</emphasis> refa : A}</programlisting>
+          <para>We access the opposite of b following this way:</para>
+          <programlisting><emphasis role="strong">var</emphasis> vara : A <emphasis role="strong">init</emphasis> A.new<emphasis role="strong">var</emphasis> varb : B <emphasis role="strong">init</emphasis> B.new// add b to the attribute "b"vara.refb.add(varb)// this assertion is true.assert(varb.refa == vara)</programlisting>
+          <itemizedlist>
+            <listitem>
+              <para>Get the container of a property</para>
+            </listitem>
+          </itemizedlist>
+          <programlisting><emphasis role="strong">var</emphasis> aa6 : A6 <emphasis role="strong">init</emphasis> A6.new<emphasis role="strong">var</emphasis> ab6 : B6// add ab6 to the attribute "b"aa6.b.add(ab6)</programlisting>
+          <programlisting><emphasis role="strong">var</emphasis> a6cont : A6a6cont := ab6.container()assert(a6cont.equals(aa6))</programlisting>
+        </section>
+        <section>
+          <title>Attribute and Reference assignment difference</title>
+          <para>Attribute and reference have one main behavior difference.</para>
+          <para>Attribute has a notion of containment that reference hasn't.</para>
+          <para>This has some implication of the behavior of the assignment because an attribute cannot be owned by more than one object at a time.</para>
+          <para>For example :</para>
+          <programlisting><emphasis role="strong">class</emphasis> A {    <emphasis role="strong">attribute</emphasis> c1 : C}<emphasis role="strong">class</emphasis> B {    <emphasis role="strong">attribute</emphasis> c2 : C}<emphasis role="strong">class</emphasis> C {}aA.c1 := C.newaB.c2 := aA.c1    <emphasis>// now aA.c1 == void !!!</emphasis></programlisting>
+          <note>The assignment into a variable or a reference is not a problem because it doesn't change the owner of the assigned object.</note>
+        </section>
+        <section>
+          <title>The property <emphasis>property</emphasis></title>
+          <para>The specific property defined by the keyword property is a derived property. This means that it does not reference to a concrete entity : it is indeed calculated, through the accessor operations getter and setter.</para>
+          <para>Let's take the following class definitions :</para>
+          <programlisting><emphasis>// readonly property : it has no setter</emphasis><emphasis role="strong">class</emphasis> A {    <emphasis role="strong">attribute</emphasis> period : Real    <emphasis role="strong">property</emphasis> <emphasis role="strong">readonly</emphasis> frequency : Real        <emphasis role="strong">getter</emphasis> <emphasis role="strong">is</emphasis> do            <emphasis role="strong">result</emphasis> := 1/period        <emphasis role="strong">end</emphasis>}<emphasis>// modifiable property :</emphasis><emphasis role="strong">class</emphasis> A {    <emphasis role="strong">attribute</emphasis> period : Real    <emphasis role="strong">property</emphasis> frequency : Real :        <emphasis role="strong">getter</emphasis> <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>            <emphasis role="strong">result</emphasis> := 1/period        <emphasis role="strong">end</emphasis>        <emphasis role="strong">setter</emphasis> <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>            period := 1/value        <emphasis role="strong">end</emphasis>}</programlisting>
+        </section>
+      </section>
+      <section>
+        <title>Cloning objects</title>
+        <para>As we see in previous sections, properties can be defined as attribute or reference. An attribute property cannot be shared between two or more object whereas a reference can be. Let's consider a class &#x201C;Person&#x201D; with a property &#x201C;name&#x201D; defined as an attribute. In the following example, we defined two objects of type Person and we try to defined the name of the second with the name of the first. To do that, we need to clone the object String which represent the name of &#x201C;p1&#x201D; because, it could not be shared between two objects.</para>
+        <programlisting><emphasis role="strong">class</emphasis> Person {    <emphasis role="strong">attribute</emphasis> name : String}<emphasis role="strong">class</emphasis> Main{    <emphasis role="strong">operation</emphasis> run() <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        <emphasis role="strong">var</emphasis> p1 : Person <emphasis role="strong">init</emphasis> Person.new        p1.name := "Robert"        <emphasis role="strong">var</emphasis> P2 : Person <emphasis role="strong">init</emphasis> Person.new        // ERR p2.name := p1.name        p2.name := String.clone(p1.name)    <emphasis role="strong">end</emphasis>}</programlisting>
+        <para>&#x201C;Clone&#x201D; create a copy of the object it receive as input. If it is a complex object, a deep clone is performed for each attribute of its meta-class and a shalow clone is performed for each reference.</para>
+        <caution>Be very careful with the use of the assignement operator on object. Most of the time, you need to use the &#x201C;clone&#x201D; feature. Using assignement on attributes break the previous link between objects. So, In the previous example, p1 has no more name after the assignment !</caution>
+      </section>
+      <section>
+        <title>A concrete example</title>
+        <para>MOF defines the concept of &#xAB;&#xA0;Properties&#xA0;&#xBB; which generalizes the notions of attributes and associations you can found in UML. Kermeta syntax distinguish also this to notions and so you can define it with a dedicated syntax.</para>
+        <para>The &#xAB;&#xA0;attribute&#xA0;&#xBB; keyword defines a link with containment whereas the &#xAB;&#xA0;reference&#xA0;&#xBB; keyword just defines an association. Attribute declarations are very close to variable declarations presented in the previous section (see section <link linkend="sec:types-and-variables">2.2</link>). Each reference may be explicitly linked to another reference (its opposite in MOF terminology).</para>
+        <programlisting>class Library{    attribute books : set Book[0..*]}class Book{    attribute title : String    attribute subtitle : String    reference authors : oset Author[1..*]#works}class Author{    attribute name : String    attribute lastName : String        reference works : set Books[0..*]#authors}</programlisting>
+        <para>If we represent our Kermeta model in a graphical syntax we obtain the following diagram.</para>
+        <figure id="refIllustration5">
+          <title>A concrete example : a library</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/library.png" width="11.829cm" depth="5.623cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+      </section>
+    </section>
+    <section>
+      <title>Inheritance</title>
+      <section>
+        <title>Using simple inheritance</title>
+        <programlisting><emphasis role="strong">abstract</emphasis> <emphasis role="strong">class</emphasis> Person{    <emphasis role="strong">attribute</emphasis> name : string    <emphasis role="strong">attribute</emphasis> lastName : string    <emphasis role="strong">reference</emphasis> father : Male#children     <emphasis role="strong">reference</emphasis> mother : Female#children}<emphasis role="strong">class</emphasis> Male <emphasis role="strong">inherits</emphasis> Person{    <emphasis role="strong">reference</emphasis> children : oset Person[0..*]#father    <emphasis role="strong">reference</emphasis> wife : set Female[0..1]#husband}class Female <emphasis role="strong">inherits</emphasis> Person{    <emphasis role="strong">reference</emphasis> children : oset Person[0..*]#mother    <emphasis role="strong">reference</emphasis> husband : set Male[0..1]#wife}</programlisting>
+        <para>In this example, we define a simple model which represent simples family trees. Here, persons are defined by their name and last name. Each person have a father and mother and respectively might have children. The figure </para>
+        <figure id="refIllustration6">
+          <title>A simple family tree model</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/person.png" width="9.035cm" depth="6.57cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+      </section>
+      <section>
+        <title>Overriding behavior with methods</title>
+        <programlisting><emphasis role="strong">abstract</emphasis> <emphasis role="strong">class</emphasis> Person{        // ...    <emphasis role="strong">operation</emphasis> adopt(child : Person) is abstract}<emphasis role="strong">class</emphasis> Male <emphasis role="strong">inherits</emphasis> Person {    // ...    <emphasis role="strong">method</emphasis> adopt(child : Person) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        children.add(child)        <emphasis role="strong">if</emphasis> <emphasis role="strong">not</emphasis> wife.children.contains(child) <emphasis role="strong">then</emphasis>            child.father := self            wife.adopt(child)            <emphasis role="strong">end</emphasis>    <emphasis role="strong">end</emphasis>}<emphasis role="strong">class</emphasis> Female <emphasis role="strong">inherits</emphasis> Person{    // ...    <emphasis role="strong">method</emphasis> adopt(child : Person) <emphasis role="strong">is</emphasis>    <emphasis role="strong">do</emphasis>        children.add(child)        <emphasis role="strong">if</emphasis> <emphasis role="strong">not</emphasis> husband.children.contains(child) <emphasis role="strong">then</emphasis>            child.mother := self                husband.adopt(child)        <emphasis role="strong">end</emphasis>    <emphasis role="strong">end</emphasis>}</programlisting>
+      </section>
+    </section>
+    <section>
+      <title>Using Packages</title>
+      <para>Kermeta provides package to structure models. So you can define packages and sub-package as deep as you want. There are two main ways to do this. If you want to define some classes in a package you may define it in a specific file and start this file with a package naming directive like in the following example.</para>
+      <programlisting>// My file<emphasis role="strong">package</emphasis> MyNewPackage;<emphasis role="strong">class</emphasis> A {     // ... }</programlisting>
+      <programlisting><emphasis role="strong">class</emphasis> B {    // ... }</programlisting>
+      <para>Here, classes A and B are defined in a package called &#x201C;MyNewPackage&#x201D;. All classes defined in this file are under the scope of this package.</para>
+      <para>You can define explicitly sub-packages using a simple notation (see the following example).</para>
+      <programlisting>// file : MyPackage-part1.kmtpackage MyPackage;package subPackage1 {    class A     {        // ...    }}package subPackage2{    class B    {        // ...    }}</programlisting>
+      <para>In this example, we define a main package called &#x201C;MyPackage&#x201D; which contains 2 sub-packages &#x201C;subpackage1&#x201D; and &#x201C;subpackage2&#x201D;. The first contains the A class and the second the B class.</para>
+      <para>If you want, you can define a package in several file. In the following example, we define a new sub-package called &#x201C;subPackage3&#x201D; directly in the file. All features defined in this file will belong to this sub-package.</para>
+      <programlisting>// file : subPackage3.kmtpackage MyPackage::subPackage3;class C {    // ...}</programlisting>
+      <para>When you need to refer explicitly another entity defined in another file, you can use the &#x201C;require&#x201D; primitive. &#x201C;require&#x201D; primitive allows loading definitions of an other Kermeta file when file is processed. In the following example, we define a class C which inherits from the A class previously defined.</para>
+      <programlisting>// file : MaPackage-part2.kmtpackage MyPackage;</programlisting>
+      <programlisting>require &#x201C;MaPackage-part1.kmt&#x201D;</programlisting>
+      <programlisting>class C inherits subPackage1::A {    // ...}</programlisting>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Advanced features</title>
+    <para>Here is a presentation of some of the additional features that Kermeta provides.</para>
+    <para>For many use cases, the Kermeta framework will help you in your tasks.</para>
+    <para>Additional information are also provided directly within the framework itself.</para>
+    <section>
+      <title>Dynamic evaluation of Kermeta expressions</title>
+      <para>Kermeta allow you to evaluate dynamically a Kermeta Expression with a specific context. </para>
+      <programlisting><emphasis role="strong">var</emphasis> de : DynamicExpression <emphasis role="strong">init</emphasis> DynamicExpression.newde.initializeDefaultsde.formalParameters.put(<emphasis>"a"</emphasis>, String)de.parse(<emphasis>"stdio.writeln(a)"</emphasis>)<emphasis role="strong">var</emphasis> params : Hashtable&lt;String, Object&gt; <emphasis role="strong">init</emphasis> Hashtable&lt;String, Object&gt;.newparams.put(<emphasis>"a"</emphasis>, <emphasis>"hello world!"</emphasis>)de.execute(void, params)</programlisting>
+    </section>
+    <section>
+      <title>How to load an EMF model in Kermeta</title>
+      <para>This section explains how to load an EMF model in Kermeta. For this purpose, we will use the following small example :</para>
+      <figure id="refIllustration7">
+        <title>cs.ecore sample metamodel</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-Tutorial_figures/cs_ecore.gif" width="7.14cm" depth="8.65cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <note>Loading and saving model has it own tutorial. It provides more information in a step by step approach. See the EMF tutorial at <ulink url="http://www.kermeta.org/documents/emfTutorial/" type="">http://www.kermeta.org/documents/emfTutorial/</ulink> </note>
+      <section>
+        <title>Prepare a model</title>
+        <para>The user will refer to eclipse documentation for the creation of an EMF model from its ECore meta-model. We suggest to use the Wizard samples to create, at the first hand, an ECore meta-model, and then, at the second hand, instances of this ECore meta-model, using the generated EMF reflexive editors.</para>
+        <para>Once you created the ECore meta-model, please check that you correctly filled the property <literal>Ns URI</literal> of the root package of the Ecore meta-model, otherwise the resource load will fail. (You can modify this property through the Properties View of your meta-model)</para>
+      </section>
+      <section>
+        <title>Load a model from an EMF Resource</title>
+        <para>In the current version of the EMF resource loader, you have to prepare your EMF Resource following these rules :</para>
+        <itemizedlist>
+          <listitem>
+            <para>At the top of the source code where you will access your model, don't forget to add </para>
+            <para role="lineBreak"> <literal>require &#x201C;your_metamodel.ecore&#x201D;</literal>so that you can access your metamodel in Kermeta.</para>
+            <para>Alternatively, you can use the kermeta version of your metamodel using</para>
+            <para role="lineBreak">require &#x201C;your_metamodel.kmt&#x201D; or require &#x201C;your_metamodel.km&#x201D;</para>
+          </listitem>
+          <listitem>
+            <para>Then, create a repository and the resource that will contain the model instance that you want to load. In the following code example, <literal>uri</literal> stands for the uri (as relative or absolute path<footnote id="ftn1"><para>in the latter case, don't forget to put the protocol, i.e platform:/, <ulink url="file://./" type="">file:/, etc.</ulink></para></footnote>) of the model instance, and <literal>mm_uri</literal> is the uri of the meta-model of the model instance.</para>
+          </listitem>
+        </itemizedlist>
+        <programlisting><emphasis role="strong">@mainClass</emphasis> &#x201C;root::TestCSLoading&#x201D;<emphasis role="strong">@mainOperation</emphasis> &#x201C;main&#x201D;<emphasis role="strong">package</emphasis> root;<emphasis role="strong">require</emphasis> kermeta<emphasis role="strong">require</emphasis> &#x201C;cs.ecore&#x201D;<emphasis role="strong">using</emphasis> kermeta::standard<emphasis role="strong">class</emphasis> TestCSLoading{    <emphasis role="strong">operation</emphasis> initialize(uri : String, mm_uri : String) : Set&lt;Object&gt; <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis>/* Initialize the EMF repository */</emphasis>        <emphasis role="strong">var</emphasis> repository     : EMFRepository init EMFRepository.new        <emphasis>/* Create an EMF Resource */</emphasis>        <emphasis role="strong">var</emphasis> resource : EMFResource init repository.createResource(uri, mm_uri)        <emphasis>/* Load the resource : this loads all the instances contained in the EMF model */</emphasis>        resource.load()        <emphasis>/* Get the loaded instances (a Set&lt;Object&gt;) */</emphasis>        <emphasis role="strong">result</emphasis> := resource.instances    <emphasis role="strong">end</emphasis></programlisting>
+        <itemizedlist>
+          <listitem>
+            <para>Once you loaded your EMF resource, you can get its attribute <literal>instances</literal>, that contains all the objects that you created through your EMF generated reflexive editor. Now you can &#x201C;visit&#x201D; your instances, provided you &#x201C;visit&#x201D; them according to their types. In the simplest way, you can make very basic tests to display your instances content, as in the following example, which visit the objects of resource instances which types are <literal>cs::Template</literal> and <literal>cs::Decision.</literal></para>
+          </listitem>
+        </itemizedlist>
+        <programlisting>    <emphasis role="strong">operation</emphasis> main() <emphasis role="strong">is do</emphasis>        <emphasis role="strong">var</emphasis> instances : = self.initialize("./test.cs", "./cs.ecore")        <emphasis role="strong">from var</emphasis> it : Iterator&lt;Object&gt; <emphasis role="strong">init</emphasis> instances.iterator        <emphasis role="strong">until</emphasis> it.isOff        <emphasis role="strong">loop</emphasis>            <emphasis role="strong">var</emphasis> o : Object            o := it.next            <emphasis role="strong">if</emphasis> (o == void) <emphasis role="strong">then</emphasis> stdio.writeln("object vide!!!")            <emphasis role="strong">else</emphasis>                stdio.writeln("---------------------------------")                stdio.writeln("Objet : " +                    o.getMetaClass.classDefinition.qualifiedName                    + " ( " +.getMetaClass.classDefinition.ownedAttributes.size.toString+ "attr.)" )            <emphasis role="strong">var</emphasis> template : cs::Template            <emphasis>// Print instances which type is cs::Template</emphasis>            <emphasis role="strong">if</emphasis> (cs::Template.isInstance(o)) <emphasis role="strong">then</emphasis>                template ?= o                stdio.writeln("    name : " + template.name)                stdio.writeln("    decision : " + template.decision.toString)                stdio.writeln("    content : " + template.content)                stdio.writeln("    referer : " + template.referer.toString)            <emphasis role="strong">end</emphasis>            <emphasis>// Print instances which type is cs::Decision</emphasis>            <emphasis role="strong">var</emphasis> decision : cs::Decision            <emphasis role="strong">if</emphasis> (cs::Decision.isInstance(o)) <emphasis role="strong">then</emphasis>                decision ?= o                stdio.writeln("    name : " + decision.name)            <emphasis role="strong">end</emphasis>        <emphasis role="strong">endend</emphasis>} </programlisting>
+      </section>
+    </section>
+    <section>
+      <title>Reusing existing java code in Kermeta</title>
+      <para>If you have existing code that you want to run in a Kermeta program, you can use the extern call mechanism. </para>
+      <para>The extern allows you to call a java static method from Kermeta. Then, from this method you can access all your java libraries. One task of the static method will be to convert the basic types like Integer or String.</para>
+      <para>You'll need to refer to the Javadoc of the interpreter in order to know how to access the internal RuntimeObject of Kermeta.</para>
+      <para>Sample of Kermeta code using extern (io.kmt):</para>
+      <programlisting><emphasis>/** * An implementation of a StdIO class in Kermeta using existing Java: standard input/output */</emphasis><emphasis role="strong">class</emphasis> StdIO{    <emphasis>/** * write the object to standard output */</emphasis>     <emphasis role="strong">operation</emphasis> write(object : Object) : Void <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        <emphasis role="strong">result</emphasis> ?= <emphasis role="strong">extern</emphasis>fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)    <emphasis role="strong">end</emphasis>        <emphasis>/** * writeln the object to standard output */</emphasis>     <emphasis role="strong">operation</emphasis> writeln(object : Object) : Void <emphasis role="strong">is do</emphasis>        <emphasis role="strong">result</emphasis> ?= <emphasis role="strong">extern</emphasis>fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)    <emphasis role="strong">end</emphasis>        <emphasis>/** * read an object from standard input */</emphasis>     <emphasis role="strong">operation</emphasis> read(prompt : String) : String <emphasis role="strong">is do</emphasis>        <emphasis role="strong">result</emphasis> ?= <emphasis role="strong">extern</emphasis>fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)    <emphasis role="strong">end</emphasis>    } </programlisting>
+      <para>Sample of Java code called by the Kermeta extern:</para>
+      <programlisting><emphasis>/** * Implementation of input and output methods (see io.kmt) */</emphasis><emphasis role="strong">public class</emphasis> StdIO {         <emphasis>// Implementation of method write called as :// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)</emphasis>    <emphasis role="strong">public static</emphasis> RuntimeObject write(RuntimeObject output) {        FClassDefinition classDef=((FClass)output.getMetaclass().etData().get("kcoreObject")).getFClassDefinition();        <emphasis role="strong">if</emphasis> (classDef.getFName().equals("Integer"))            stdio.print(output.getData().get"NumericValue"));        <emphasis role="strong">else if</emphasis> (classDef.getFName().equals("String"))             stdio.print(output.getData().get"StringValue"));        <emphasis role="strong">else</emphasis> stdio.print(output);        <emphasis role="strong">return</emphasis> Void.VOID;    }    <emphasis>// Implementation of method writeln called as :// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)</emphasis>    <emphasis role="strong">public static</emphasis> RuntimeObject writeln(RuntimeObject output) {        write(output);        stdio.println();        <emphasis role="strong">return</emphasis> Void.VOID;    }    <emphasis>// Implementation of method read_prompt called as :// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read_promptprompt)</emphasis>    <emphasis role="strong">public static</emphasis> RuntimeObject read_prompt(RuntimeObject self,RuntimeObject prompt) {         java.lang.String input = null;        <emphasis role="strong">if</emphasis> (String.getValue(prompt).length()&gt;0)             stdio.print(String.getValue(prompt));        <emphasis>// open up standard input</emphasis>        BufferedReader br = new BufferedReader(newInputStreamReader(System.in));        <emphasis>// read data from standard input</emphasis>        <emphasis role="strong">try</emphasis> {             input = br.readLine();        } <emphasis role="strong">catch</emphasis> (IOException ioe) {             stdio.println("JavaStaticCall error : IO errortrying to read from input");                     }        RuntimeObject result = String.create(input,self.getFactory());        <emphasis role="strong">return</emphasis> result;    }}</programlisting>
+      <tip>This method is used to implement Kermeta framework. You'll find much more code samples of extern call in its sources.</tip>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Metamodel<phrase id="section_kermeta_metamodel"/> </title>
+    <para>As Kermeta is designed to be used in a model driven environment, its structure is given as a model. This section presents the metamodel of Kermeta.</para>
+    <para>This metamodel may be useful for many use cases. For example, you can use it to manipulate your Kermeta code for analysis or even generate some Kermeta code. This may be useful to understand how Kermeta works too.</para>
+    <note>All the code samples in this section are for illustration of the given concepts.</note>
+    <section>
+      <title>Structure package</title>
+      <figure id="refIllustration8">
+        <title>Structure package</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-Manual_figures/kermeta_structure_package.png" width="19.971cm" depth="13.959cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+      <para>This represents the static part of the metamodels.</para>
+      <para>The structure of Kermeta is in fact the same as EMOF from the OMG. During the build process, we merge and connect it with the behavior part.</para>
+      <para>So all the meaning of those metaclasses are the same as those described in the OMG standard specification.</para>
+    </section>
+    <section>
+      <title>Behavior package</title>
+      <figure id="refIllustration9">
+        <title>Behavior package</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-Manual_figures/kermeta_behavior_package.png" width="14.663cm" depth="7.235cm"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+      <para/>
+      <section>
+        <title>Control Structures </title>
+        <para>Kermeta provides basic control structures : block, conditionnal branch, loop, and execption handling. Here there an exerpt of the Meta-model describing control structures. Each basic control structures derives from the Expression concept.</para>
+        <figure id="refIllustration10">
+          <title>Control structure</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images\img001.png" width="16.933cm" depth="9.895cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+      </section>
+      <section>
+        <title>Variables</title>
+        <figure id="refIllustration11">
+          <title>Use of variables</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_var_expressions.png" width="9.327cm" depth="6.168cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+      </section>
+      <section>
+        <title>Call Expressions</title>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="KerMeta-MetaModel_figures/kermeta_call_expressions.png" width="11.853cm" depth="7.595cm"/>
+          </imageobject>
+        </mediaobject>
+        <figure id="refIllustration12">
+          <title>use of exceptions</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_call_expressions.png" width="11.548cm" depth="7.595cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+        <section>
+          <title>CallSuperOperation</title>
+          <para>In the following example, the type of <emphasis>super(element)</emphasis> is <emphasis>CallSuperOperation</emphasis>:</para>
+          <programlisting><emphasis role="strong">class</emphasis> ParentClass {    <emphasis role="strong">operation</emphasis> op(element : Integer) : Integer <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        result := element + 1    <emphasis role="strong">end</emphasis>}<emphasis role="strong">class</emphasis> ChildClass {    <emphasis role="strong">method</emphasis> op(element : Integer) : Integer <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>        result := super(element)    <emphasis role="strong">end</emphasis>}</programlisting>
+        </section>
+        <section>
+          <title>CallVariable </title>
+          <para>The type of <emphasis>callvar</emphasis><emphasis role="strong">,</emphasis> below, is <emphasis>CallVariable</emphasis><emphasis role="strong"> :</emphasis></para>
+          <programlisting>var myvar : Integervar callvar : Integer init 4// myvar := callvar </programlisting>
+          <para>A special case, when calling a lambda expression : the type of <emphasis>lf</emphasis> in the assignment of res, is <emphasis>CallVariable</emphasis></para>
+          <programlisting>var lf : &lt;Integer-&gt;Integer&gt;var res : Integerlf := function { i : Integer | i.plus(1) }// The type of <emphasis role="strong">lf,</emphasis> below, is <emphasis role="strong">CallVariable</emphasis>res := lf(4)</programlisting>
+        </section>
+        <section>
+          <title>CallResult</title>
+          <para>The type of <emphasis>result</emphasis> is <emphasis>CallResult</emphasis></para>
+          <programlisting>operation op() : Integer is do    result := 61end</programlisting>
+        </section>
+        <section>
+          <title>CallFeature and SelfExpression</title>
+          <itemizedlist>
+            <listitem>
+              <para>The type of <emphasis>self</emphasis> is a SelfExpression!</para>
+            </listitem>
+            <listitem>
+              <para>The type of <emphasis>attr</emphasis> in the body of the operation myoperation is <emphasis>CallFeature</emphasis><emphasis role="strong"> </emphasis>(a callfeature on <emphasis>self</emphasis>), and so is the type of <emphasis>myoperation(4)</emphasis> (a callfeature on <emphasis role="strong">a</emphasis>).</para>
+            </listitem>
+          </itemizedlist>
+          <programlisting>class A {    attribute attr : Integer    operation myoperation(param : Integer) : Integer is do        result := self.attr + param    end}class B {    operation anotheroperation() : Integer is do        var a : A        result := a.myoperation(4)    end}</programlisting>
+        </section>
+      </section>
+      <section>
+        <title>Assignment</title>
+        <figure id="refIllustration13">
+          <title>Kermeta assignment expression</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_assign_expressions.png" width="8.005cm" depth="4.263cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+        <para>In the following example, <emphasis>thetarget</emphasis> is of type <emphasis>CallExpression </emphasis>and <emphasis>thevalue</emphasis> is of type <emphasis>Expression</emphasis>.</para>
+        <programlisting>var num : Numericvar thetarget : Integervar thevalue : Integer// assignment : <emphasis role="strong">thetarget-&gt;</emphasis><emphasis>target</emphasis>, <emphasis role="strong">thevalue-&gt;</emphasis><emphasis>value</emphasis>thetarget := thevalue// casting : <emphasis role="strong">a</emphasis> is casted into the type of <emphasis role="strong">num</emphasis> which is Numeric.num ?= a</programlisting>
+      </section>
+      <section>
+        <title>Literals </title>
+        <figure id="refIllustration14">
+          <title>Kermeta Litteral Expression</title>
+          <mediaobject/>
+        </figure>
+        <para/>
+        <programlisting><emphasis role="strong">var</emphasis> i : Integeri := 5    <emphasis>// 5 is a IntegerLiteral</emphasis><emphasis role="strong">var</emphasis> s : String s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis></programlisting>
+      </section>
+      <section>
+        <title>Lambda Expression<phrase id="section_lambda_expression_mm"/> </title>
+        <figure id="refIllustration15">
+          <title>Kermeta lambda expressions</title>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_lambda_expressions.png" width="9.112cm" depth="8.886cm"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+        <para/>
+      </section>
+    </section>
+  </chapter>
+  <chapter>
+    <title>Kermeta framework reference</title>
+    <para>[INCLUDE_GENERATED_FRAMEWORK_REFERENCE_HERE]</para>
+  </chapter>
+</book>
