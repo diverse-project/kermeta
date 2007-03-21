@@ -20,6 +20,6 @@
   <expressions filter="//@filters.2" id="Ecore expr">
     <subExpressions xsi:type="kpm:And" filter="//@filters.3"/>
   </expressions>
-  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="newUnit.kmt" path="/someUnit/src/newUnit.kmt" lastTimeModified="2007-02-21T18:49:46.000+0100"/>
-  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="Test_TestCase.kmt" path="/someUnit/test/Test_TestCase.kmt" lastTimeModified="2007-02-21T18:01:11.000+0100"/>
+  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="newUnit.kmt" path="/someUnit/src/newUnit.kmt" lastTimeModified="2007-03-21T17:59:38.000+0100"/>
+  <units xsi:type="kpm:File" typeName="File" dependencies="//@dependencies.1 //@dependencies.2" name="Test_TestCase.kmt" path="/someUnit/test/Test_TestCase.kmt" lastTimeModified="2007-03-21T18:04:48.000+0100"/>
 </kpm:KPM>

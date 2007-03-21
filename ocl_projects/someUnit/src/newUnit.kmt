@@ -1,4 +1,4 @@
-/* $Id: newUnit.kmt,v 1.1 2007-02-26 16:12:00 bitterjug Exp $
+/* $Id: newUnit.kmt,v 1.2 2007-03-21 17:10:13 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -40,30 +40,59 @@ abstract class Fallible
   	is abstract
     
   operation number(): Integer is
-  	do
-	 	if rank.isVoid then 
-	 		rank := 0 
-	 	end
-	 	rank := rank + 1
-	 	result := rank
-  	end
+	  	do
+		 	if rank.isVoid then 
+		 		rank := 0 
+		 	end
+		 	rank := rank + 1
+		 	result := rank
+	  	end
   	
   operation assert(condition: Boolean):Void is
-  	do
-	  	var number : Integer init self.number()
-  		if not condition then
-  			getLog.addFailure(self, "assertion number " + number.toString + " failed")			
-  		end
-  	end
+	  	do
+		  	var number : Integer init self.number()
+	  		if not condition then
+	  			getLog.addFailure(self, "assertion number " + number.toString + " failed")			
+	  		end
+	  	end
   	
   operation assertWithMsg(condition: Boolean, msg: String):Void 	is
-  	do
-	  	var number : Integer init self.number()
-  		if not condition then
-  			getLog.addFailure(self, "assertion number " + number.toString + " failed: " + msg)			
-  		end
-  	end
+	  	do
+		  	var number : Integer init self.number()
+	  		if not condition then
+	  			getLog.addFailure(self, "assertion number " + number.toString + " failed: " + msg)			
+	  		end
+	  	end
 
+	operation fail(msg: String): Void is
+		 do
+			getLog.addFailure(self, "explicit failure: " + msg)
+		 end
+		 
+	operation assertTrue(condition: Boolean): Void is
+		do
+			assert(condition)
+		end
+		
+	operation assertTrueWithMsg(condition: Boolean, message: String): Void is
+		do
+			assertWithMsg(condition, message)
+		end
+	
+	operation assertFalse(condition: Boolean): Void is
+		do	
+			assert(not condition)
+		end
+		
+	operation assertFalseWithMsg(condition: Boolean, message: String): Void is
+		do
+			assertWithMsg(not condition, message)
+		end
+		 
+ 	operation assertEqual(expected: String, actual: String): Void is
+		do	
+			assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
+		end
 }
 
 
@@ -274,20 +303,20 @@ class TestSuite inherits Test
 	  * Add to this suite, a set of test cases of type c, one for each
 	  * test method in class c. C must be a descendent of TestCase
 	  */
-   	operation addAllTestCasesFrom(c: Class): TestSuite 
-   		pre cIsATestCase is c.superClass.contains(TestCase) 
+   	operation addAllTestCasesFrom(testCaseClass: Class): TestSuite 
+   		pre testCaseClassIsATestCase is testCaseClass.superClass.contains(TestCase) 
    		is
  		do
- 			if not c.superClass.exists{ sc | sc.equals(TestCase)} then
+ 			if not testCaseClass.superClass.exists{ sc | sc.equals(TestCase)} then
  				var e :exceptions:: Exception init InvalidParameterException.new
- 				e.message :="Cannot build a suite from class: " + c.name
+ 				e.message :="Cannot build a suite from class: " + testCaseClass.name
  				raise e
  			end
-			c.ownedOperation.select { o |  
+			testCaseClass.ownedOperation.select { o |  
 				o.name.size>=4 and o.name.substring(0, 4)== "test"
 			}.each { o | 
 			    var testCase : TestCase
-				testCase ?= c.new
+				testCase ?= testCaseClass.new
 				testCase.setTestMethodName(o.name)
 				self.tests.add(testCase)
 			}
@@ -403,7 +432,7 @@ class TestRunner
 	 * If you want to run all the test.... methods in a TestCase class,
 	 *  you can populate a suite with TestSuite.addAllTestCasesFrom
 	 */
-	operation run(test: Test): Void 
+	 operation runTest(test:Test): Void 
 		pre testNotVoid is test != void
 		post logNotVoid is log != void
 		is
@@ -411,6 +440,17 @@ class TestRunner
 			log := Log.new
 			test.setLog(log)
 			test.run()
+		end
+	 
+	 /**
+	  * For backwards compatibility with old kunit, this takes a test case class
+	  * and creates the necessary suite, and runs it. DEPRECATED
+	  */
+	operation run(testCaseClass: Class): Void 
+		pre cIsATestCase is testCaseClass.superClass.contains(TestCase) 
+		is
+		do
+			runTest(TestSuite.new.addAllTestCasesFrom(testCaseClass))
 		end
 		
 	/**
@@ -423,16 +463,16 @@ class TestRunner
 
 		if not log.failures.empty then
 			stdio.writeln("\nFailures: ")
-			log.failures.each { f | stdio.writeln("   " + f.toString) 	}
+			log.failures.each { f | stdio.writeln("\n   " + f.toString) 	}
 		end
 		if not log.errors.empty then
 			stdio.writeln("\nErrors: ")	
 			log.errors.each { e | 
-			stdio.writeln("   " + e.toString) 	}
+			stdio.writeln("\n   " + e.toString) 	}
 		end
 		if not log.harnessErrors.empty then
 			stdio.writeln("\nErrors from setUp or tearDown : ")	
-			log.harnessErrors.each { e | stdio.writeln("   " + e.toString) 	}
+			log.harnessErrors.each { e | stdio.writeln("\n   " + e.toString) 	}
 		end
 		stdio.writeln("\n Summary: ")
 		stdio.writeln("   Number of launched tests : " + log.runtests.toString)
