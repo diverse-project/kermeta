@@ -1,0 +1,8 @@
+package p
+ -- simple if
+context X inv:
+   if true then true else true endif
+
+
+
+endpackage

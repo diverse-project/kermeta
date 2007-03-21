@@ -1,0 +1,6 @@
+package p
+ -- simple if
+context X inv:
+   a.b.c
+
+endpackage

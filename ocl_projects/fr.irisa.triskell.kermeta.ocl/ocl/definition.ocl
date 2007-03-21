@@ -1,0 +1,6 @@
+package p
+
+context Y def:
+ 	test(): Boolean = true
+
+endpackage

@@ -1,0 +1,8 @@
+package p
+ -- nested if
+context X inv:
+   if if false then false else false endif then true else true endif
+
+
+
+endpackage
