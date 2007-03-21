@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.6 2007-03-16 14:30:57 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.7 2007-03-21 10:15:44 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -301,7 +301,13 @@ class StringWriter inherits StdIO
 
 		method visitIfExpCS(visitable : IfExpCS) : Void is
 			do
-				visit(visitable)
+				write("if ")
+				visitable.condition.accept(self)
+				write(" then ")
+				visitable.thenExpression.accept(self)
+				write(" else ")
+				visitable.elseExpression.accept(self)
+				write(" endif")
 			end
 
 		method visitMessageExpCS(visitable : MessageExpCS) : Void is
@@ -471,8 +477,6 @@ class StringWriter inherits StdIO
 				visit(visitable)			
 			end
 
-
-		
 		method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : Void is
 			do
 				if visitable.source != void then
@@ -501,6 +505,46 @@ class StringWriter inherits StdIO
 			  	end
 			  	
 			end
+
+
+/*
+	  operation featureCall(visitable: FeatureCallExpCS): Void is
+			do
+				visitable.simpleNameCS.accept(self)
+				if visitable.arguments.size > 0 then
+					write("(")
+					from
+						var it : Iterator<OCLExpressionCS> init visitable.arguments.iterator
+					until
+						it.isOff
+					loop
+						it.next.accept(self)
+						if  it.hasNext then
+							write(", ") 
+						end
+					end
+					write(")")
+			  	end
+			end
+		
+		method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : Void is
+			do
+				if visitable.source != void then
+					visitable.source.accept(self)		
+					if visitable.accessor.name == "dot" then
+						var variableName : String init nextName("variable")
+					  write(".collect{" + variableName + " | ")
+						write(variableName + ".")
+						featureCall(visitable)
+						write("}")
+					end
+					if visitable.accessor.name == "arrow" then
+					   write(".")
+						 featureCall(visitable)
+					end
+				end
+			end
+			*/
 
 	   attribute __operators: Hashtable<String, OperatorPolicy>
         property readonly operators: Hashtable<String, OperatorPolicy>
