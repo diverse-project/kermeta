@@ -176,7 +176,9 @@ public class TestOCLParser {
 		 filenames.add("60");
 		 filenames.add("61"); 
 		 filenames.add("62");
-		 filenames.add("longPath"); 
+		 filenames.add("63");
+		 filenames.add("64");
+		 filenames.add("65");
 	 }
 	 
 	public static void main(String[] args) {

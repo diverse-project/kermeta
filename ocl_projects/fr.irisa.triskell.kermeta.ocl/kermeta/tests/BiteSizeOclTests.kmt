@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.5 2007-03-15 16:39:14 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.6 2007-03-21 10:18:37 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -599,22 +599,45 @@ class  BiteSizeOclTests  inherits TestCase
 			fail(e.message) 
 		end
 
+  // implicit collect
+ 	operation test63(): Void is
+		do
+			var kmt : String  init  visitOclXmi("longPath") 
+			assertEqual("a.collect{variable1 | variable1.b}.collect{variable2 | variable2.c}", kmt)
+		end
+
+  // simple if
+ 	operation test64(): Void is
+		do
+			var kmt : String  init  visitOclXmi("64") 
+			assertEqual("if true then true else true endif", kmt)
+		end
+
+
+  // non trivial if
+ 	operation test65(): Void is
+		do
+		//	var kmt : String  init  visitOclXmi("65") 
+		//	assertEqual("if 1.isGreater(2) then 3 else 4 endif", kmt)
+		end
+
+  // nested if
+ 	operation test66(): Void is
+		do
+		//	var kmt : String  init  visitOclXmi("66") 
+		//	assertEqual("", kmt)
+		end
+		
   // forAll,  implicit variable
   // implicit collect
   // OclInvalid and invalid literal
   // product -- requires tuples
   // tuple literals ()
 
-  // context
-  // context invariant
-  // context pre
-  // context post
-
   // definition
-
   // if exp with non trivial condition
 
-  // absolute
+  // absolutec}
   // Integer operations:
   // div
   // mod
@@ -638,7 +661,7 @@ class  BiteSizeOclTests  inherits TestCase
 	operation main() : Void is 
 	  do 
 			var testRunner : TestRunner init TestRunner.new
-			self.setTestMethodName("test60")
+			self.setTestMethodName("test65")
 			testRunner.run(self)
 			testRunner.printLogs
   	end
