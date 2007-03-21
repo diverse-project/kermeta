@@ -1,4 +1,4 @@
-/* $Id: StructuralOclTests.kmt,v 1.1 2007-03-21 10:18:37 bitterjug Exp $
+/* $Id: StructuralOclTests.kmt,v 1.2 2007-03-21 17:13:39 bitterjug Exp $
  * Creation date: March 6, 2007
  * License:
  * Copyright:
@@ -81,7 +81,7 @@ class  StructuralOclTests  inherits TestCase
 			var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(StructuralOclTests)
 			// self.setTestMethodName("test01")
 			//testRunner.run(self)
-			testRunner.run(suite)
+			testRunner.runTest(suite)
 			testRunner.printLogs
   	end
 }

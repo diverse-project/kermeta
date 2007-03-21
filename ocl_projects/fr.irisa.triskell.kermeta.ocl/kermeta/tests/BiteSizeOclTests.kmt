@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.6 2007-03-21 10:18:37 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.7 2007-03-21 17:13:39 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -661,8 +661,8 @@ class  BiteSizeOclTests  inherits TestCase
 	operation main() : Void is 
 	  do 
 			var testRunner : TestRunner init TestRunner.new
-			self.setTestMethodName("test65")
-			testRunner.run(self)
+			self.setTestMethodName("test03")
+			testRunner.runTest(self)
 			testRunner.printLogs
   	end
 }

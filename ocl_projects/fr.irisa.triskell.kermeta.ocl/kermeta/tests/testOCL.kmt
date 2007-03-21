@@ -1,4 +1,4 @@
-/* $Id: testOCL.kmt,v 1.4 2007-03-21 10:26:15 bitterjug Exp $
+/* $Id: testOCL.kmt,v 1.5 2007-03-21 17:13:39 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -23,10 +23,10 @@ class Main
 	operation main() : Void is 
 	  do 
 		    var testRunner : TestRunner init TestRunner.new
-		    var suite : TestSuite init TestSuite.new
-		    suite.addAllTestCasesFrom(BiteSizeOclTests)
+		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
+		    stdio.write(suite.tests.size.toString)
 		    suite.addAllTestCasesFrom(StructuralOclTests)
-    		testRunner.run(suite)
+    		testRunner.runTest(suite)
             testRunner.printLogs
   	  end
 }
