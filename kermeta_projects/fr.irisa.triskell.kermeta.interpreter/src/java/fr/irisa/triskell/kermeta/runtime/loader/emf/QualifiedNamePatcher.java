@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.4 2007-03-16 12:46:36 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.5 2007-03-26 16:19:29 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -67,7 +67,7 @@ public class QualifiedNamePatcher {
     }
     
 	public String getGeneratedPackageQualifiedName(ENamedElement obj){
-		String result="";
+		String result=obj.getName();
 //		 optimization : use of an hashtable
     	String nsuri = ((EPackage)obj).getNsURI();
     	if(nsuri ==  null){
