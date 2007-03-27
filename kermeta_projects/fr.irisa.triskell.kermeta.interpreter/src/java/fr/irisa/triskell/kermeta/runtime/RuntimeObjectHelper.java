@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.3 2006-10-25 08:30:14 dvojtise Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.4 2007-03-27 15:08:22 dvojtise Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
@@ -86,6 +87,20 @@ public class RuntimeObjectHelper {
 		if (coll_cd.equals(c.getTypeDefinition()))
 			b = true;
 		return b;
+	}
+	
+	/**
+	 * retrieves the ROproperty for this object
+	 * very useful before using fr.irisa.triskell.kermeta.runtime.language.Object.set or fr.irisa.triskell.kermeta.runtime.language.Object.get
+	 * on a runtimeObject
+	 * @param robject
+	 * @param propertyName
+	 * @return
+	 */
+	public static RuntimeObject getPropertyByName(RuntimeObject robject, String propertyName){
+		Property property = ClassDefinitionHelper.findPropertyByName((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) robject.getMetaclass().getData().get("kcoreObject")).getTypeDefinition(), propertyName);
+		RuntimeObject roProperty = robject.getFactory().getMemory().getRuntimeObjectForFObject(property);
+		return roProperty;
 	}
 
 }
