@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.30 2007-02-02 16:17:33 dtouzet Exp $
+/* $Id: KM2Ecore.java,v 1.31 2007-03-27 14:51:24 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -139,6 +139,12 @@ public class KM2Ecore {
     //  => ClassDefs, Operations
     public final static String ANNOTATION_NESTED_DOC = ANNOTATION_INV + ".doc";
     public final static String ANNOTATION_TYPEPARAMETER = ANNOTATION + ".typeParameters";
+    
+    public final static String ANNOTATION_EXTENDEDMETADATA = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
+    public final static String ANNOTATION_EXTENDEDMETADATA_KIND = "kind";
+    public final static String ANNOTATION_EXTENDEDMETADATA_GROUP = "group";
+    public final static String ANNOTATION_EXTENDEDMETADATA_NAME = "name";
+    
     
     // Available static keys for the "kermeta" EAnnotation, along with the type of elements
     // these entries relate to:

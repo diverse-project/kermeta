@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.16 2007-02-15 17:10:44 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.17 2007-03-27 14:51:24 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -37,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
@@ -51,6 +52,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -345,6 +347,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		// Get the derived properties bodies and other stuffs
 		acceptList(node.getEAnnotations());
 		
+		
 		return exporter.current_prop;
 	}
 
@@ -620,6 +623,63 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			if (setter != null) {
 				Expression exp = ExpressionParser.parse(unit, setter);
 				exporter.current_prop.setSetterBody(exp);
+			}
+		}
+		// node.getSource() == "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"
+		// used in ecore files generated from xsd
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)) {
+			String element = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+			EStructuralFeature prop = (EStructuralFeature)node.getEModelElement();
+			if (element != null && element.equals("element") && prop.isDerived()) {
+				// this is a generated getter for special featuremap
+					//DVK this implementation is probably too simple regarding to EMF use of these annotation 
+					// but I have very few data about how it actually works ...
+					// typically put into the mixed concrete attribute ..
+				
+				String typeName = Ecore2KM.getQualifiedName(prop.getEType());
+				String collection = prop.isUnique() ? "kermeta::standard::OrderedSet" : "kermeta::standard::Sequence";
+				String group = "mixed";	// by default the group is the mixed
+				String groupId = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_GROUP);
+				if(groupId != null){
+					// this property belong to a specific group
+					// retreive it and use it for this feature
+					EClass containerClass =(EClass)prop.eContainer();
+					Iterator attIt = containerClass.getEAttributes().iterator();
+					while(attIt.hasNext()){
+						EAttribute att = (EAttribute)attIt.next();
+						Iterator annIt = att.getEAnnotations().iterator();						
+						while(annIt.hasNext()){
+							EAnnotation currAnn = (EAnnotation)annIt.next();
+							if(currAnn.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)){
+								String attIsGroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+								if(attIsGroup != null && attIsGroup.equals("group")) {
+									// we have found a group
+									String possiblegroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);
+									if(groupId.equals(possiblegroup)){
+										// this is the good group, use the attribute name
+										group = att.getName();
+									}
+								}								
+							}
+						}
+					}
+				}
+				
+				// let's writte the getter body using all those data
+				String body = //"kermeta::standard::OrderedSet<Docbook::BookType>.new"
+					"do result := " +collection+ "<" +typeName+ ">.new" +
+"			self." +group+ ".each{fme |"+ 
+"				if fme.eStructuralFeatureName == \"" +element+ "\" then"+ 
+"					var val : "+typeName+""+
+"					val ?= fme.~value"+
+"					result.add(val) "+
+"				end"+
+"			} end";
+				//body = "raise kermeta::exceptions::NotImplementedException.new ";
+				Expression exp = ExpressionParser.parse(unit, body);
+				exporter.current_prop.setGetterBody(exp);
+					// it seem that in this case the setter is a nonsense
+				exporter.current_prop.setIsReadOnly( Boolean.valueOf(true));
 			}
 		}
 		return null;
