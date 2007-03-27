@@ -417,7 +417,16 @@ alias EDoubleObject : kermeta::language::structure::Object;
 alias EEList : kermeta::language::structure::Object;
 alias EEnumerator : kermeta::language::structure::Object;
 alias EFeatureMap : kermeta::language::structure::Object;
-alias EFeatureMapEntry : kermeta::language::structure::Object;
+
+/**
+ * Kermeta representation of EMF EFeatureMapEntry
+ * it contains the name of the required feature and the actual value
+ */
+class EFeatureMapEntry
+{
+	attribute eStructuralFeatureName : EString
+	attribute ~value : kermeta::language::structure::Object
+}
 alias EFloat : kermeta::language::structure::Object;
 alias EFloatObject : kermeta::language::structure::Object;
 alias EInt : kermeta::standard::Integer;
