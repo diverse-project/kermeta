@@ -11,12 +11,12 @@
         </ownedAttribute>
         <ownedAttribute name="heading" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute name="penUp" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation name="reset">
@@ -47,16 +47,15 @@
               <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
               <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="clear">
               <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings"/>
-              <value xsi:type="kermeta_language_behavior:VoidLiteral"/>
             </statement>
           </body>
         </ownedOperation>
         <ownedOperation name="setPenUp">
           <ownedParameter name="b" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.5"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block">
@@ -69,7 +68,7 @@
         <ownedOperation name="rotate">
           <ownedParameter name="angle" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block">
@@ -115,12 +114,12 @@
         <ownedOperation name="move">
           <ownedParameter name="dx" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="dy" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block">
@@ -192,7 +191,7 @@
         <ownedOperation name="forward">
           <ownedParameter name="steps" type="/0/@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block">
@@ -203,7 +202,7 @@
                   <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
               </condition>
@@ -215,7 +214,7 @@
                   <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
               </condition>
@@ -229,7 +228,7 @@
                   </parameters>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="180"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
               </condition>
@@ -243,7 +242,7 @@
                   <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="270"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
               </condition>
@@ -254,24 +253,24 @@
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Point">
         <ownedAttribute name="x" type="/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute name="y" type="/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation name="getDelta" type="/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.1"/>
           <ownedParameter name="dx" type="/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
           </ownedParameter>
           <ownedParameter name="dy" type="/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
           </ownedParameter>
           <body xsi:type="kermeta_language_behavior:Block">
@@ -307,7 +306,7 @@
         </ownedOperation>
         <ownedOperation name="toString" type="/0/@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
           </containedType>
           <body xsi:type="kermeta_language_behavior:Block">
             <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -486,7 +485,7 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.1/@ownedTypeDefinition.9"/>
         <ownedAttribute name="operator" type="/0/@nestedPackage.1/@ownedTypeDefinition.10/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute name="lhs" type="/0/@nestedPackage.1/@ownedTypeDefinition.10/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
@@ -511,7 +510,7 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.1/@ownedTypeDefinition.9"/>
         <ownedAttribute name="myValue" type="/0/@nestedPackage.1/@ownedTypeDefinition.11/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation name="traverse" superOperation="/0/@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
@@ -550,7 +549,7 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.1/@ownedTypeDefinition.0"/>
         <ownedAttribute name="name" type="/0/@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
           </containedType>
         </ownedAttribute>
         <ownedAttribute name="args" type="/0/@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
@@ -658,7 +657,7 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.1/@ownedTypeDefinition.9"/>
         <ownedAttribute name="name" type="/0/@nestedPackage.1/@ownedTypeDefinition.19/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation name="traverse" superOperation="/0/@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
@@ -773,7 +772,7 @@
         </ownedAttribute>
         <ownedAttribute name="accumulator" type="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
           </containedType>
         </ownedAttribute>
         <ownedOperation name="initialize">
@@ -916,7 +915,7 @@
             <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="left">
               <type type="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.8/@body/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
                 <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
                 </containedType>
               </type>
             </statement>
@@ -946,7 +945,7 @@
                   </value>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="+"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -963,7 +962,7 @@
                   </value>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="-"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -980,7 +979,7 @@
                   </value>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="*"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -997,7 +996,7 @@
                   </value>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="/"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -1019,13 +1018,13 @@
                       <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                     </statement>
                   </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
                   </condition>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="="/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -1053,7 +1052,7 @@
                   </condition>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="&lt;"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -1081,7 +1080,7 @@
                   </condition>
                 </statement>
               </thenBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=">"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
@@ -1142,7 +1141,7 @@
                 <initialization xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                 <type type="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.10/@body/@statement.3/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
                   <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
                   </containedType>
                 </type>
               </initialization>
@@ -1262,7 +1261,7 @@
                   </target>
                 </statement>
               </elseBody>
-              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotSameAs">
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
               </condition>
@@ -1285,7 +1284,7 @@
                 <initialization xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
                 <type type="/0/@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.14/@body/@statement.1/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
                   <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
                   </containedType>
                 </type>
               </initialization>
@@ -1337,7 +1336,7 @@
                   </target>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isSameAs">
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
                 <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
               </stopCondition>
@@ -1666,13 +1665,13 @@
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeParamBinding type="/0/@nestedPackage.2/@ownedTypeDefinition.3/@containedType.0/@typeParamBinding.0/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
             </containedType>
             <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0"/>
           </typeParamBinding>
           <typeParamBinding type="/0/@nestedPackage.2/@ownedTypeDefinition.3/@containedType.0/@typeParamBinding.1/@containedType.0">
             <containedType xsi:type="kermeta_language_structure:Class">
-              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.7"/>
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.8"/>
             </containedType>
             <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1"/>
           </typeParamBinding>
@@ -2266,10 +2265,10 @@
                 <type type="/0/@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.3/@body/@statement.5/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
                   <containedType xsi:type="kermeta_language_structure:Class">
                     <typeParamBinding>
-                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19/@typeParameter.0"/>
-                      <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                      <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.20/@typeParameter.0"/>
+                      <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
                     </typeParamBinding>
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.19"/>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.20"/>
                   </containedType>
                 </type>
               </initialization>
@@ -2279,7 +2278,7 @@
                     <target xsi:type="kermeta_language_behavior:CallVariable" name="it"/>
                   </initialization>
                   <type isOrdered="true" upper="1">
-                    <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.12"/>
+                    <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
                   </type>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:Conditional">

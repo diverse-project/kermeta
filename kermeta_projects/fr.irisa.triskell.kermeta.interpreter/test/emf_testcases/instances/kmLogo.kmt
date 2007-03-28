@@ -34,7 +34,7 @@ package semanticDomain
 			position.x := 0
 			position.y := 0
 			heading := 0
-			drawings := void
+			drawings.clear
 		end
 		operation setPenUp(b : Boolean) is do
 			penUp := b
