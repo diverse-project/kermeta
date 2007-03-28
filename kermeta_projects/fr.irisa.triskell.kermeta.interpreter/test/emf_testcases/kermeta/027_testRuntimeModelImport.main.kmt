@@ -1,3 +1,6 @@
+/* $Id:$
+ *
+ */
 @mainClass "RuntimeModelImportTests::Main"
 @mainOperation "testmain"
 
@@ -11,6 +14,11 @@ using kermeta::language::structure
 using kermeta::language::behavior
 using kermeta::standard
 
+/**
+ * Test loading a km model
+ * note: sometime it may raise error when the framework was changed, this is due to the adress shift of element in the xmi 
+ *  in this case, regenerate the km from the kmt using the latest framework.km
+ */
 class Main inherits kermeta::kunit::TestCase
 {
     operation testmain() : Void is do 
@@ -45,9 +53,10 @@ class Main inherits kermeta::kunit::TestCase
        // one of its feature must be "accumulator" of type "Integer"
        var accFProp : Property 
        accFProp ?= classClassTypeDef.ownedAttribute.detect{ k | k.name.compareTo("accumulator") == 0 }
+       assertTrueWithMsg(not accFProp.isVoid,"didn't find accumulator feature in the loaded file")       
        var propClassType : Class
        propClassType ?= accFProp.type
-       assert(propClassType.typeDefinition.name.compareTo("Integer") == 0)
+       assertTrueWithMsg(propClassType.typeDefinition.name.compareTo("Integer") == 0,"didn't find accumulator feature of type Integer in the loaded file; was of type " + propClassType.typeDefinition.name + " " + propClassType.typeDefinition.toString)
        stdio.write(propClassType.typeDefinition.toString)
        stdio.write("\nEnd")       
         
