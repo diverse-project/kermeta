@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.30 2007-03-16 16:45:56 barais Exp $
+ * $Id: collections.kmt,v 1.31 2007-03-30 09:44:49 ffleurey Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -169,7 +169,8 @@ abstract class Collection<G>
 	 * returns an iterator on the collection
 	 */
 	operation iterator() : Iterator<G> is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self)
+		result := Iterator<G>.new
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)
 	end
 	
 	/**

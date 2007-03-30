@@ -1,4 +1,4 @@
-/* $Id: Collection.java,v 1.8 2006-12-07 09:39:48 dvojtise Exp $
+/* $Id: Collection.java,v 1.9 2007-03-30 09:44:46 ffleurey Exp $
  * Project : Kermeta interpreter
  * File : Collection.java
  * License : EPL
@@ -58,8 +58,8 @@ public class Collection {
 
 	// Implementation of method iterator called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::iterator()
-	public static RuntimeObject iterator(RuntimeObject self) {
-		
+	public static RuntimeObject iterator(RuntimeObject self, RuntimeObject result) {
+		/*
 		fr.irisa.triskell.kermeta.language.structure.Class it_class = self.getFactory().getMemory().getUnit().struct_factory.createClass();
 	    
 	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
@@ -70,12 +70,13 @@ public class Collection {
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
+	    
 	    binding.setType(((TypeVariableBinding)self_class.getTypeParamBinding().get(0)).getType());
 	    
 	    it_class.getTypeParamBinding().add(binding);
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
-		
+		*/
 		Iterator.setValue(result, ((ArrayList)getArrayList(self).clone()).iterator());
 		return result;
 	}
