@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.31 2007-03-30 09:44:49 ffleurey Exp $
+ * $Id: collections.kmt,v 1.32 2007-04-02 15:23:42 dtouzet Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -178,9 +178,12 @@ abstract class Collection<G>
 	 * if the collection is empty
 	 */
 	operation one() : G is do
-		if size == 0 then raise EmptyCollection.new end
-		var it : Iterator<G> init iterator
-		result := it.next
+		if size == 0 then
+			result := void
+		else
+			var it : Iterator<G> init iterator
+			result := it.next
+		end
 	end
 
 	operation any() : G is do
@@ -188,6 +191,7 @@ abstract class Collection<G>
 		var it : Iterator<G> init iterator
 		result := it.next
 	end
+
 	
 	/**
 	 * runs func on each element of the collection
