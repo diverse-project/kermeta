@@ -4,23 +4,19 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Hashtable;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
-import org.eclipse.jface.text.source.projection.ProjectionSupport;
-import org.eclipse.jface.text.source.projection.ProjectionViewer;
-import org.eclipse.jface.wizard.ProgressMonitorPart;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -33,31 +29,42 @@ import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.kpm.File;
-import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.workspace.*;
+import fr.irisa.triskell.kermeta.extension.Interest;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
+import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
+
+import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class KMTEditor extends TextEditor implements KermetaUnitInterest {
+public class KMTEditor extends TextEditor implements Interest {
 	
 	protected KermetaUnit mcunit; 
 	protected KermetaOutline outline;
 	
-	private File file = null;
-	private KermetaProject project;
+	public KermetaProject project;
 	
-	private KermetaWorkspace workspace = KermetaWorkspace.getInstance();
-	private ProjectionSupport projectionSupport;
 	public ProjectionAnnotationModel annotationModel;
+	
+	private Unit unit = null;
+	
+	private String savedContent = "";
+	private String currentContent = "";
+	
+	public void setCurrentContent(String value) {
+		currentContent = value;
+	}
 	
 	/**
 	 * Constructor
@@ -68,34 +75,40 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 		TexteditorPlugin.getDefault().setEditor(this);
 	}
 	
-	
+	@Override
 	public void createPartControl(Composite parent) {
-	    super.createPartControl(parent);
-	    ProjectionViewer viewer =(ProjectionViewer)getSourceViewer();
-
-	    projectionSupport = new ProjectionSupport(viewer,getAnnotationAccess(),getSharedColors());
-	    projectionSupport.install();
-
-	    //turn projection mode on
-	    viewer.doOperation(ProjectionViewer.TOGGLE);
-
-	    annotationModel = viewer.getProjectionAnnotationModel();
+		super.createPartControl(parent);
+		//getSourceViewer().addTextInputListener( new KMTTextInputListener() );
+		getSourceViewer().addTextListener( new KMTTextListener(this) );
 	}
 	
-	public ISourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler, int styles) {
-		ISourceViewer viewer = new ProjectionViewer(parent, ruler,
-					getOverviewRuler(), isOverviewRulerVisible(), styles);
-
-	   // ensure decoration support has been created and configured.
-	   getSourceViewerDecorationSupport(viewer);
-
-	   return viewer;
+	private boolean mustBeTypechecked = false;
+	
+	synchronized public void setMustBeTypechecked(boolean value) {
+		if ( value && (unit != null) )
+			unit.setLastTimeModified( new Date() );			
+		mustBeTypechecked = value;
 	}
 	
-	private KermetaProject getProject() {
-		if ( project == null )
-			project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
-		return project;
+	synchronized public boolean getMustBeTypechecked() {
+		return mustBeTypechecked;
+	}
+	
+	private void initializeInterest() {
+		
+		unit = project.getKpm().findUnit(getFile().getFullPath().toString()); 
+
+		KermetaUnitHelper.unloadAllKermetaUnit();
+		KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
+
+		setMcunit(kermetaUnit);
+		KermetaUnitHost.getInstance().declareInterest(this, unit, kermetaUnit);
+		
+		KPMHelper.addOpenDependencyOnKMTFile(project.getKpm(), unit);
+		KPMHelper.addUpdateDependencyOnKMTFile(project.getKpm(), unit);
+		KPMHelper.addCloseDependencyOnKMTFile(project.getKpm(), unit);
+		
+		project.save();
 	}
 	
     public IFile getFile()
@@ -152,8 +165,6 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	 */
 	protected void setMcunit(KMTUnit mcunit) {
 		this.mcunit = mcunit;
-		KermetaMarkersHelper.clearMarkers( getFile() );	
-		KermetaMarkersHelper.createMarkers( getFile(), mcunit);
 		if (outline != null)
 			outline.update();
 	}
@@ -161,11 +172,6 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	public void setFocus() {
 		super.setFocus();
 		
-		
-		
-		//Shell theShell = new Shell();
-    	//MessageDialog.openInformation(theShell,"setFocus","setFocus");
-    	
 		Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
 		while(it.hasNext())
 		{
@@ -196,26 +202,21 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	//		Accessors		//
 	//////////////////////////
 	//////////////////////////
-	/*public File getKPMFile() {
-		if ( file == null) {
-			file = getProject().getFile(getFile());
-		}
-		return file;
-	}*/
-	
-	/*public KermetaWorkspace getWorkspace() {
-		return workspace;
-	}*/
-	
-	public KermetaUnit getUnit() {
-		return mcunit;
+	public Unit getUnit() {
+		return unit;
 	}
 	
 	public String getFileContent() {
 		if ( getSourceViewer() == null )
-			return null;
+			return "";
+		else if (getSourceViewer().getDocument() != null )
+			return getSourceViewer().getDocument().get();
 		else
-			return getSourceViewer().getDocument().get();	
+			return "";
+	}
+	
+	public String getSavedContent() {
+		return savedContent;
 	}
 	//////////////////////////////////
 	//////////////////////////////////
@@ -223,27 +224,106 @@ public class KMTEditor extends TextEditor implements KermetaUnitInterest {
 	//////////////////////////////////
 	//////////////////////////////////
 	
-	public void updateKermetaUnit(KermetaUnit unit) {
-		setMcunit( (KMTUnit) unit);
+	public void updateValue(Object newValue) {
+		setMcunit( (KMTUnit) newValue );
 	}
 	
 	@Override
 	public void dispose() {
+		if ( project == null ) {
+			if ( ! savedContent.equals( currentContent ) ) {
+				KermetaUnitHelper.unloadAllKermetaUnit();
+				KermetaMarkersHelper.clearMarkers(getFile());
+				KMTUnit kermetaUnit = null;
+				if ( ! savedContent.equals("") )
+					kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile(), savedContent );
+				else
+					kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
+				KermetaMarkersHelper.createMarkers(getFile(), kermetaUnit);
+			}
+		} else {
+			KermetaUnitHost.getInstance().undeclareInterest(this, unit);
+			mcunit = null;
+			if ( ! savedContent.equals( currentContent ) ) {
+				final Interest interest = this;
+				Job job = new Job("Building Workspace") {
+					
+					public IStatus run(IProgressMonitor monitor) {
+			
+						KermetaUnitHelper.abortTypechecking( getFile() );
+	
+						KermetaUnitHelper.unloadAllKermetaUnit();
+						//KermetaUnitHelper.unloadKermetaUnit( getMcunit() );
+						
+						Unit unit = getUnit();
+						KermetaUnitHost.getInstance().declareInterest(interest, unit);
+						
+						HashMap<String, Object> args = new HashMap<String, Object>();
+						if ( ! savedContent.equals("") )
+							args.put("content", savedContent);
+						else
+							args.put("forceTypechecking", true);
+						
+						unit.receiveSynchroneEvent("update", args, monitor);
+	
+						KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
+						return Status.OK_STATUS;
+					}
+					
+				};
+				
+				job.setPriority(Job.LONG);
+				job.setUser(true);
+				job.schedule();
+				
+				if ( PlatformUI.getWorkbench().isClosing() ) {
+					try {
+						job.join();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 		super.dispose();
-		KermetaWorkspace.getInstance().undeclareInterest(this);
 	}
-
+	
 	@Override
 	protected void performSave(boolean overwrite, IProgressMonitor progressMonitor) {
-		KermetaWorkspace.getInstance().changer( this );
+		savedContent = currentContent;
 		super.performSave(overwrite, progressMonitor);
 	}
 	
 	@Override
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
-		KMTEditor editor = this;
-		KermetaWorkspace.getInstance().declareInterestThreading(editor);
+
+		Job job = new Job("Opening File") {
+			
+			public IStatus run(IProgressMonitor monitor) {
+				try {
+					monitor.beginTask("Waiting for the Outline", 100);
+				
+					project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
+					if ( project != null ) {
+						monitor.subTask("Initializing Interest");
+						initializeInterest();
+					} else {
+						KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
+						setMcunit(kermetaUnit);
+						KermetaMarkersHelper.clearMarkers(getFile());
+						KermetaMarkersHelper.createMarkers(getFile(), kermetaUnit);
+					}
+					monitor.worked(100);
+				} finally {
+					monitor.done();
+				}
+					return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
+		
 	}
 	
 }

@@ -4,6 +4,7 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.TextAttribute;
@@ -46,6 +47,9 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	public static Color DEFAULT_TAG_COLOR= new Color(Display.getCurrent(), new RGB(0, 0, 100));
 
 	static private EditorCompletion editorCompletion;
+
+	private IPreferenceStore preferences = TexteditorPlugin.getDefault().getPreferenceStore();
+	
 	
 	public EditorConfiguration(KMTEditor editor) {
 		this.editor = editor;
@@ -127,16 +131,26 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		assistant.addCompletionListener( new KermetaCompletionListener(editorCompletion) );
 		assistant.setContentAssistProcessor(editorCompletion, IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.enableAutoActivation(true);
-		assistant.setAutoActivationDelay(300);
+		int value = preferences.getInt("contentAssistantActivation");
+		if ( value == 0 ) {
+			preferences.setValue("contentAssistantActivation", 300);
+			value = 300;
+		}
+		assistant.setAutoActivationDelay(value);
 		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
 		return assistant;
 	}
 
 	
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
-		IReconcilingStrategy reconcilingStrategy = new ParsingStrategy( editor );
+		IReconcilingStrategy reconcilingStrategy = new TypecheckingStrategy( editor );
 		MonoReconciler reconciler = new MonoReconciler(reconcilingStrategy, false);
-		reconciler.setDelay(500);
+		int value = preferences.getInt("reconcilingActivation");
+		if ( value == 0 ) {
+			preferences.setValue("reconcilingActivation", 600);
+			value = 600;
+		}
+		reconciler.setDelay(value);
 		return reconciler;
 	}
 	
