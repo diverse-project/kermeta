@@ -62,11 +62,11 @@ public class KermetaMarkersHelper {
 
         try
         {
-        	if ( ! findMarker(file, realMessage) ) {
+        	if ( findMarker(file, realMessage) == null ) {
                 HashMap <String, Object> map = new HashMap <String, Object> ();
                 
                 int offset = 0;
-                int length = 1;
+                int length = -1;
                 
                 if (message instanceof KMUnitParseError) {
                 	KMUnitParseError pe = (KMUnitParseError)message;
@@ -93,19 +93,33 @@ public class KermetaMarkersHelper {
                 
                 if (offset > 0) offset--;
                 
-                map.put("message", realMessage);
-                if(message instanceof KMUnitError)
-                    map.put("severity", new Integer(2));
-                else
-                if(message instanceof KMUnitWarning)
-                    map.put("severity", new Integer(1));
-                else
-                    map.put("severity", new Integer(0));
-                map.put("charStart", new Integer(offset));
-                map.put("charEnd", new Integer(offset + length));
-                //map.put("transient", new Boolean(true));        		
-        		MarkerUtilities.createMarker(file, map, getMarkerType());
+                if ( length != -1 ) {
+                
+                	map.put("message", realMessage);
+                	if(message instanceof KMUnitError)
+                		map.put("severity", new Integer(2));
+                	else
+                		if(message instanceof KMUnitWarning)
+                			map.put("severity", new Integer(1));
+                		else
+                			map.put("severity", new Integer(0));
+                	map.put("charStart", new Integer(offset));
+                	map.put("charEnd", new Integer(offset + length));        		
+                	MarkerUtilities.createMarker(file, map, getMarkerType());
         		//MarkerUtilities.createMarker(file, null, getMarkerType());
+                } else {
+                	map.put("message", "One of required file is errored.");
+                	if(message instanceof KMUnitError)
+                		map.put("severity", new Integer(2));
+                	else
+                		if(message instanceof KMUnitWarning)
+                			map.put("severity", new Integer(1));
+                		else
+                			map.put("severity", new Integer(0));
+                	map.put("charStart", 0);
+                	map.put("charEnd", 0);        		
+                	MarkerUtilities.createMarker(file, map, getMarkerType());
+                }
         	}
             
         }
@@ -131,7 +145,7 @@ public class KermetaMarkersHelper {
 
         try
         {
-        	if ( ! findMarker(file, realMessage) ) {
+        	if ( findMarker(file, realMessage) == null ) {
                 map.put("message", realMessage);
                 if(message instanceof KMUnitError)
                     map.put("severity", new Integer(2));
@@ -188,34 +202,59 @@ public class KermetaMarkersHelper {
         }
     }
     
-    
+    /**
+     * @deprecated
+     * @param file
+     * @param message
+     */
     public static void createMarker (IFile file, String message) {
+    	createMarker(file, message, 2);
+    }
+    
+    public static void createError (IFile file, String message) {
+    	createMarker(file, message, 2);
+    }
+    
+    public static void createMarker (IFile file, String message, int kind) {
     	
     	HashMap <String, Object> map = new HashMap <String, Object> ();
     	map.put("message", formatMessage(message));
-    	map.put("severity", new Integer(2));
+    	
+    	map.put("severity", new Integer(kind));
+    	
+        map.put("charStart", 0);
+        map.put("charEnd", 0);
+    	
         try
         {	
-        	if ( ! findMarker(file, message) ) {
+        	if ( findMarker(file, message) == null ) {
         		MarkerUtilities.createMarker(file, map, getMarkerType());
         	}
         }
-        catch(CoreException ex)
-        {
-            //ex.printStackTrace();
-        }
+        catch(CoreException ex) {}
     }
     
-    static private boolean findMarker( IResource resource, String message ) throws CoreException {
+    public static void createWarning(IFile file, String message) {
+    	createMarker(file, message, 1);
+    }
+    
+    static private IMarker findMarker( IResource resource, String message ) throws CoreException {
     	IMarker[] markers = resource.findMarkers(getMarkerType(), false, IResource.DEPTH_ZERO);
-    	boolean foundMarker = false;
+    	IMarker foundMarker = null;
     	for (int index = 0; index < markers.length; index++ ) {
-    		String currentMessage = (String) markers[index].getAttribute("message");
+    		String currentMessage = ((String) markers[index].getAttribute("message")).replace("\n", "");
     		if ( currentMessage.equals(message) )
-    			foundMarker = true;
+    			foundMarker = markers[index];
     	}
     	return foundMarker;
     }
 
+    static public void removeMarker( IResource resource, String message ) {
+		try {
+			IMarker marker = findMarker(resource, message);
+	    	if ( marker != null )
+	    		marker.delete();
+		} catch (CoreException e) {}
+    }
     
 }
