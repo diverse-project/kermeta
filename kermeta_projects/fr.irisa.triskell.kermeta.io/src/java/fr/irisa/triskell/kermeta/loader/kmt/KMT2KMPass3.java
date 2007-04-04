@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.13 2007-02-08 16:18:25 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.14 2007-04-04 14:00:22 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -529,7 +529,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(UsingStmt usingStmt) {
 		String u = qualifiedIDAsString(usingStmt.getName());
-		if (builder.getPackages().containsKey(u) == false) {
+		if (builder.containsPackage(u) == false) {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Wrong using - package '"+u+"' does not exist", usingStmt));
 			return false;
 		}
