@@ -6,24 +6,14 @@ import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 
-import sun.tools.tree.AndExpression;
-
-import fr.irisa.triskell.kermeta.kpm.ANDExpression;
-import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.Dependency;
-import fr.irisa.triskell.kermeta.kpm.Event;
-import fr.irisa.triskell.kermeta.kpm.ExistFilter;
-import fr.irisa.triskell.kermeta.kpm.Filter;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
-import fr.irisa.triskell.kermeta.kpm.NullExpression;
 import fr.irisa.triskell.kermeta.kpm.Out;
-import fr.irisa.triskell.kermeta.kpm.SimpleExpression;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 
 public class KPMHelper {
 
