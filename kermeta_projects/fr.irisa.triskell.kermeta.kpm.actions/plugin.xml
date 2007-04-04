@@ -2,25 +2,34 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         id="kmt2ecore"
+         id="openProject"
          point="fr.irisa.triskell.kermeta.kpm.actions">
-      <Action
-            class="fr.irisa.triskell.kermeta.kpm.actions.KMT2Ecore"/>
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.open.OpenProject"/>
    </extension>
    <extension
-         id="kmt2km"
+         id="addMarkers"
          point="fr.irisa.triskell.kermeta.kpm.actions">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.KMT2KM"/>
-   </extension>
-   <extension
-         id="markdependents"
-         point="fr.irisa.triskell.kermeta.kpm.actions">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.MarkDependents"/>
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.marker.AddMarkers"/>
    </extension>
    <extension
          id="typecheck"
          point="fr.irisa.triskell.kermeta.kpm.actions">
-      <Action class="fr.irisa.triskell.kermeta.kpm.actions.Typecheck"/>
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.typecheck.Typecheck"/>
+   </extension>
+   <extension
+         id="createDependentDependencies"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.dependents.CreateDependentDependencies"/>
+   </extension>
+   <extension
+         id="removeDependentDependencies"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.dependents.RemoveDependentDependencies"/>
+   </extension>
+   <extension
+         id="kmt2km"
+         point="fr.irisa.triskell.kermeta.kpm.actions">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.transformation.KMT2KM"/>
    </extension>
 
 </plugin>
