@@ -1,8 +1,8 @@
-/* $Id: SimpleFunctions.kmt,v 1.6 2006-02-22 16:20:59 jsteel Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.7 2007-04-04 13:55:59 ftanguy Exp $ */
 
 // Some simple lambda expressions
 
-package kermeta;
+package SimpleFunction;
 
 require kermeta
 
