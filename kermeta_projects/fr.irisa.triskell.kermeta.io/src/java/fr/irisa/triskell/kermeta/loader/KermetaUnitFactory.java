@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.23 2007-01-23 15:26:54 dvojtise Exp $
+/* $Id: KermetaUnitFactory.java,v 1.24 2007-04-04 13:58:28 ftanguy Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.loader;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -97,7 +98,7 @@ public class KermetaUnitFactory {
     public KermetaUnit createKermetaUnit(String uri) {
         Hashtable packages;
         if (StdLibKermetaUnitHelper.STD_LIB_URI != null) {
-            packages = StdLibKermetaUnitHelper.getKermetaUnit().packages;
+            packages = (Hashtable) StdLibKermetaUnitHelper.getKermetaUnit().packages.clone();
         }
         else {
             packages = new Hashtable();
@@ -115,7 +116,7 @@ public class KermetaUnitFactory {
         KermetaUnit.internalLog.debug("ASK UNIT " + uri);
     	
     	// TODO : reslove URI if it is not
-    	KermetaUnit result = null;
+    	//KermetaUnit result = null;
     	
     	// resolve the URI if it is in the KMPath
     	if (kmPath.containsKey(uri)) uri = (String)kmPath.get(uri);
@@ -178,8 +179,21 @@ public class KermetaUnitFactory {
             KermetaLoaderError klerr = new KermetaLoaderError("Invalid require : '"+u + "' is not a valid use for require");
     	    throw klerr;
         }
-        result = loader.createKermetaUnit(u.toString(), packages);
-        loadedUnits.put(u.toString(), result);
+        
+        KermetaUnit result = null;
+        
+        if ( uri.equals("kermeta") || uri.equals(StdLibKermetaUnitHelper.STD_LIB_URI) || uri.equals(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT) ) {
+            result = loader.createKermetaUnit(u.toString(), packages);
+        	loadedUnits.put(u.toString(), result);
+        } else {
+        	KermetaUnit unit = loader.createKermetaUnit(u.toString(), packages);
+            WeakReference reference = new WeakReference(unit);
+            loadedUnits.put(u.toString(), unit);
+            result = (KermetaUnit) reference.get();
+        } 
+        
+ //       result = loader.createKermetaUnit(u.toString(), packages);
+  //      loadedUnits.put(u.toString(), result);
         //if (std) standard_lib = result;
     	return result;
     }
@@ -197,10 +211,25 @@ public class KermetaUnitFactory {
      * 
      */
     public void unloadAll() {
-    	StdLibKermetaUnitHelper.unloadStdLib();
+    	
+    	System.out.println("Number of Kermeta Unit Unloaded : " + loadedUnits.size());
+    	
     	loadedUnits.clear();
     	KMUnit.clearRessourceSet();
+    	KermetaUnit unit = StdLibKermetaUnitHelper.getKermetaUnit();
+    	loadedUnits.put(unit.getUri(), unit);
+    	garbageCollect();
     }
+    
+	static private void garbageCollect() {
+		Runtime r = Runtime.getRuntime();
+		long freeMem = r.freeMemory();
+		System.out.println("free memory before running gc(): " + freeMem);
+		r.gc();
+		r.runFinalization();
+		freeMem = r.freeMemory();
+		System.out.println("free memory after running gc(): " + freeMem);
+	}
     
     public void unload(String uri) {
         throw new Error("Unload units is NOT IMPLEMENTED");
