@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Dependency.java,v 1.3 2007-02-08 15:37:03 ftanguy Exp $
+ * $Id: Dependency.java,v 1.4 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -22,12 +22,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getEvent <em>Event</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getActions <em>Actions</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getIn <em>In</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getEvent <em>Event</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getOuts <em>Outs</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,6 +35,104 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Dependency extends EObject {
+	/**
+	 * Returns the value of the '<em><b>In</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.In#getDependency <em>Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>In</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>In</em>' containment reference.
+	 * @see #setIn(In)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_In()
+	 * @see fr.irisa.triskell.kermeta.kpm.In#getDependency
+	 * @model opposite="dependency" containment="true"
+	 * @generated
+	 */
+	In getIn();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getIn <em>In</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>In</em>' containment reference.
+	 * @see #getIn()
+	 * @generated
+	 */
+	void setIn(In value);
+
+	/**
+	 * Returns the value of the '<em><b>Event</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Event</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Event</em>' reference.
+	 * @see #setEvent(Event)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Event()
+	 * @model required="true"
+	 * @generated
+	 */
+	Event getEvent();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getEvent <em>Event</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Event</em>' reference.
+	 * @see #getEvent()
+	 * @generated
+	 */
+	void setEvent(Event value);
+
+	/**
+	 * Returns the value of the '<em><b>Outs</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Out}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Out#getDependency <em>Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Outs</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Outs</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Outs()
+	 * @see fr.irisa.triskell.kermeta.kpm.Out#getDependency
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Out" opposite="dependency" containment="true"
+	 * @generated
+	 */
+	EList getOuts();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -63,137 +160,43 @@ public interface Dependency extends EObject {
 	void setType(DependencyType value);
 
 	/**
-	 * Returns the value of the '<em><b>Event</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Event</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event</em>' reference.
-	 * @see #setEvent(DependencyEvent)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Event()
-	 * @model required="true"
-	 * @generated
-	 */
-	DependencyEvent getEvent();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getEvent <em>Event</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Event</em>' reference.
-	 * @see #getEvent()
+	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void setEvent(DependencyEvent value);
-
-	/**
-	 * Returns the value of the '<em><b>Actions</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Action}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Actions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actions</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Actions()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Action"
-	 * @generated
-	 */
-	EList getActions();
-
-	/**
-	 * Returns the value of the '<em><b>In</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>In</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>In</em>' reference.
-	 * @see #setIn(Expression)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_In()
-	 * @model required="true"
-	 * @generated
-	 */
-	Expression getIn();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getIn <em>In</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>In</em>' reference.
-	 * @see #getIn()
-	 * @generated
-	 */
-	void setIn(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Outs</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Outs</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Outs</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Outs()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Expression"
-	 * @generated
-	 */
-	EList getOuts();
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependency_Name()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
+	void process(Unit unit, boolean synchrone, Map args, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model paramsDataType="fr.irisa.triskell.kermeta.kpm.Hashtable" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @model
 	 * @generated
 	 */
-	void process(Unit unit, Hashtable params, IProgressMonitor monitor);
+	void setEvent(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.boolean"
+	 * @model
 	 * @generated
 	 */
-	boolean isExecutable(Unit unit);
+	void setType(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.boolean"
+	 * @model
 	 * @generated
 	 */
-	boolean couldBeExecutable(Unit unit);
+	Out findOut(String actionId);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void removeOut(String actionId);
 
 } // Dependency

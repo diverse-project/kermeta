@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FilterImpl.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: FilterImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -10,8 +10,6 @@ import fr.irisa.triskell.kermeta.kpm.Filter;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
-
-import org.eclipse.core.resources.IResource;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -50,18 +48,7 @@ public abstract class FilterImpl extends EObjectImpl implements Filter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean apply(Unit unit) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean apply(IResource resource) {
+	public boolean matches(Unit unit) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();

@@ -2,13 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPM.java,v 1.4 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: KPM.java,v 1.5 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -22,13 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getEvents <em>Events</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencies <em>Dependencies</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getActions <em>Actions</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getFilters <em>Filters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getTypes <em>Types</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getExpressions <em>Expressions</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getEvents <em>Events</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencyTypes <em>Dependency Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,240 +33,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface KPM extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Units</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Unit}.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Units</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Units()
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getKpm
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Unit" opposite="kpm" containment="true"
-	 * @generated
-	 */
-	EList getUnits();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model regexDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	NameFilter getNameFilter(String regex);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Action getAction(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	DependencyEvent getEvent(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Expression getExpression(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Dependency getDependency(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model relativeNameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	File findFile(String relativeName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String" pathDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	File findFile(String name, String path);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model ifileDataType="fr.irisa.triskell.kermeta.kpm.IFile"
-	 * @generated
-	 */
-	File findFile(IFile ifile);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model relativeNameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Directory findDirectory(String relativeName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String" pathDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Directory findDirectory(String name, String path);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model ifolderDataType="fr.irisa.triskell.kermeta.kpm.IFolder"
-	 * @generated
-	 */
-	Directory findDirectory(IFolder ifolder);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model relativeNameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Project findProject(String relativeName);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String" pathDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	Project findProject(String name, String path);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model iprojectDataType="fr.irisa.triskell.kermeta.kpm.IProject"
-	 * @generated
-	 */
-	Project findProject(IProject iproject);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeFile(File unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeDirectory(Directory unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void removeProject(Project unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unitDataType="fr.irisa.triskell.kermeta.kpm.IFile"
-	 * @generated
-	 */
-	void removeFile(IFile unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unitDataType="fr.irisa.triskell.kermeta.kpm.IFolder"
-	 * @generated
-	 */
-	void removeDirectory(IFolder unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model unitDataType="fr.irisa.triskell.kermeta.kpm.IProject"
-	 * @generated
-	 */
-	void removeProject(IProject unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model ifolderDataType="fr.irisa.triskell.kermeta.kpm.IFolder"
-	 * @generated
-	 */
-	Directory createDirectory(IFolder ifolder);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model nameDataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	DependencyType getType(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	ExistFilter getExistFilter();
-
-	/**
-	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyEvent}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Events</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Events()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyEvent" containment="true"
-	 * @generated
-	 */
-	EList getEvents();
-
-	/**
-	 * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependencies</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Dependencies()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency" containment="true"
-	 * @generated
-	 */
-	EList getDependencies();
-
 	/**
 	 * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Action}.
@@ -305,7 +67,7 @@ public interface KPM extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyType}.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
@@ -314,25 +76,161 @@ public interface KPM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Types</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Types()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyType" containment="true"
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Type" containment="true"
 	 * @generated
 	 */
 	EList getTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Expression}.
+	 * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expressions</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Expressions()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Expression" containment="true"
+	 * @return the value of the '<em>Dependencies</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Dependencies()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency" containment="true"
 	 * @generated
 	 */
-	EList getExpressions();
+	EList getDependencies();
+
+	/**
+	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Event}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Events</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Events</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Events()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Event" containment="true"
+	 * @generated
+	 */
+	EList getEvents();
+
+	/**
+	 * Returns the value of the '<em><b>Units</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Unit}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Units</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Units</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Units()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Unit" containment="true"
+	 * @generated
+	 */
+	EList getUnits();
+
+	/**
+	 * Returns the value of the '<em><b>Dependency Types</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dependency Types</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dependency Types</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_DependencyTypes()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyType" containment="true"
+	 * @generated
+	 */
+	EList getDependencyTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Action createAction(String extensionPoint);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Action findAction(String extensionPoint);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Event findEvent(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	NameFilter createNameFilter(String regex);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	NameFilter findNameFilter(String regex);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	ExistFilter getExistFilter();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyType findDependencyType(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyType getDependencyType(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Dependency findDependency(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Event getEvent(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Unit findUnit(String name);
 
 } // KPM

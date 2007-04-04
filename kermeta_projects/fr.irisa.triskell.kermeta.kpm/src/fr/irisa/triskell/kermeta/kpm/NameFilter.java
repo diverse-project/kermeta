@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NameFilter.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: NameFilter.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -15,8 +15,7 @@ package fr.irisa.triskell.kermeta.kpm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexIn <em>Regex In</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexOut <em>Regex Out</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegex <em>Regex</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,55 +25,29 @@ package fr.irisa.triskell.kermeta.kpm;
  */
 public interface NameFilter extends Filter {
 	/**
-	 * Returns the value of the '<em><b>Regex In</b></em>' attribute.
+	 * Returns the value of the '<em><b>Regex</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Regex In</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Regex</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Regex In</em>' attribute.
-	 * @see #setRegexIn(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getNameFilter_RegexIn()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.String"
+	 * @return the value of the '<em>Regex</em>' attribute.
+	 * @see #setRegex(String)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getNameFilter_Regex()
+	 * @model
 	 * @generated
 	 */
-	String getRegexIn();
+	String getRegex();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexIn <em>Regex In</em>}' attribute.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegex <em>Regex</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Regex In</em>' attribute.
-	 * @see #getRegexIn()
+	 * @param value the new value of the '<em>Regex</em>' attribute.
+	 * @see #getRegex()
 	 * @generated
 	 */
-	void setRegexIn(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Regex Out</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Regex Out</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Regex Out</em>' attribute.
-	 * @see #setRegexOut(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getNameFilter_RegexOut()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	String getRegexOut();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexOut <em>Regex Out</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Regex Out</em>' attribute.
-	 * @see #getRegexOut()
-	 * @generated
-	 */
-	void setRegexOut(String value);
+	void setRegex(String value);
 
 } // NameFilter

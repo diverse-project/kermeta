@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyTypeImpl.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: DependencyTypeImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 

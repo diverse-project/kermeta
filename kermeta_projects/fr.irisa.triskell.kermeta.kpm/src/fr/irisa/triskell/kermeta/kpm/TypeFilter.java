@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilter.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: TypeFilter.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -28,17 +28,17 @@ public interface TypeFilter extends Filter {
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(AbstractUnit)
+	 * @see #setType(Type)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getTypeFilter_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	AbstractUnit getType();
+	Type getType();
 
 	/**
 	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.TypeFilter#getType <em>Type</em>}' reference.
@@ -48,6 +48,6 @@ public interface TypeFilter extends Filter {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(AbstractUnit value);
+	void setType(Type value);
 
 } // TypeFilter

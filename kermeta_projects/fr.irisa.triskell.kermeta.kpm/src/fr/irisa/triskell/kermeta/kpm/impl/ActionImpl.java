@@ -2,26 +2,21 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.5 2007-02-08 15:37:03 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.6 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
-
-import java.util.ArrayList;
-
-import java.util.Hashtable;
-
-import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.kermeta.kpm.Action;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.workspace.IAction;
 
-import org.eclipse.core.runtime.CoreException;
+import java.util.Map;
+
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -36,7 +31,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.ActionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.ActionImpl#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,24 +39,24 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  */
 public class ActionImpl extends EObjectImpl implements Action {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The default value of the '{@link #getExtensionPoint() <em>Extension Point</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getExtensionPoint()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String EXTENSION_POINT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getExtensionPoint() <em>Extension Point</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getExtensionPoint()
 	 * @generated
 	 * @ordered
 	 */
-	protected String name = NAME_EDEFAULT;
+	protected String extensionPoint = EXTENSION_POINT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,8 +81,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public String getExtensionPoint() {
+		return extensionPoint;
 	}
 
 	/**
@@ -95,11 +90,11 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
+	public void setExtensionPoint(String newExtensionPoint) {
+		String oldExtensionPoint = extensionPoint;
+		extensionPoint = newExtensionPoint;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.ACTION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.ACTION__EXTENSION_POINT, oldExtensionPoint, extensionPoint));
 	}
 
 	/**
@@ -107,31 +102,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void execute(final Unit unit, final ArrayList dependents, final Hashtable params, final IProgressMonitor monitor) {
-		IExtension extension = Platform.getExtensionRegistry().getExtension( getName() );
-		IConfigurationElement[] elements = extension.getConfigurationElements();
-			
-		try {
-			IAction action = (IAction) elements[0].createExecutableExtension("class");
-			action.execute(unit, dependents, params, monitor);
-		} catch (CoreException exception) {
-			exception.printStackTrace();
-		}
-		/*try {	
-			final IAction action = (IAction) elements[0].createExecutableExtension("class");
-				
-			Runnable r = new Runnable() {
-				public void run() {
-					action.execute(unit, dependents, params, monitor);
-				}
-			};
-			
-			Thread t = new Thread(r);
-			t.start();
-				
-		} catch ( CoreException exception ) {
-			exception.printStackTrace();
-		}*/
+	public void execute(Unit unit, IProgressMonitor monitor, Map args) {
+		IConfigurationElement[] element = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPoint);
+		System.out.println();
 	}
 
 	/**
@@ -141,8 +114,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.ACTION__NAME:
-				return getName();
+			case KpmPackage.ACTION__EXTENSION_POINT:
+				return getExtensionPoint();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -154,8 +127,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.ACTION__NAME:
-				setName((String)newValue);
+			case KpmPackage.ACTION__EXTENSION_POINT:
+				setExtensionPoint((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -168,8 +141,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.ACTION__NAME:
-				setName(NAME_EDEFAULT);
+			case KpmPackage.ACTION__EXTENSION_POINT:
+				setExtensionPoint(EXTENSION_POINT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -182,8 +155,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.ACTION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case KpmPackage.ACTION__EXTENSION_POINT:
+				return EXTENSION_POINT_EDEFAULT == null ? extensionPoint != null : !EXTENSION_POINT_EDEFAULT.equals(extensionPoint);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -197,8 +170,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (extensionPoint: ");
+		result.append(extensionPoint);
 		result.append(')');
 		return result.toString();
 	}

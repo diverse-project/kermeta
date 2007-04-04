@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackage.java,v 1.7 2007-02-08 15:37:03 ftanguy Exp $
+ * $Id: KpmPackage.java,v 1.8 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -42,7 +42,7 @@ public interface KpmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore";
+	String eNS_URI = "http://kpm";
 
 	/**
 	 * The package namespace name.
@@ -61,174 +61,6 @@ public interface KpmPackage extends EPackage {
 	KpmPackage eINSTANCE = fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractUnitImpl <em>Abstract Unit</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractUnitImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractUnit()
-	 * @generated
-	 */
-	int ABSTRACT_UNIT = 5;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_UNIT__TYPE_NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Abstract Unit</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_UNIT_FEATURE_COUNT = 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractFileImpl <em>Abstract File</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractFileImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractFile()
-	 * @generated
-	 */
-	int ABSTRACT_FILE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_FILE__TYPE_NAME = ABSTRACT_UNIT__TYPE_NAME;
-
-	/**
-	 * The number of structural features of the '<em>Abstract File</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_FILE_FEATURE_COUNT = ABSTRACT_UNIT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractDirectoryImpl <em>Abstract Directory</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractDirectoryImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractDirectory()
-	 * @generated
-	 */
-	int ABSTRACT_DIRECTORY = 1;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DIRECTORY__TYPE_NAME = ABSTRACT_UNIT__TYPE_NAME;
-
-	/**
-	 * The number of structural features of the '<em>Abstract Directory</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DIRECTORY_FEATURE_COUNT = ABSTRACT_UNIT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractProjectImpl <em>Abstract Project</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractProjectImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractProject()
-	 * @generated
-	 */
-	int ABSTRACT_PROJECT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_PROJECT__TYPE_NAME = ABSTRACT_UNIT__TYPE_NAME;
-
-	/**
-	 * The number of structural features of the '<em>Abstract Project</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_PROJECT_FEATURE_COUNT = ABSTRACT_UNIT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterImpl <em>Filter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.FilterImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFilter()
-	 * @generated
-	 */
-	int FILTER = 3;
-
-	/**
-	 * The number of structural features of the '<em>Filter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILTER_FEATURE_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl <em>Name Filter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNameFilter()
-	 * @generated
-	 */
-	int NAME_FILTER = 4;
-
-	/**
-	 * The feature id for the '<em><b>Regex In</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_FILTER__REGEX_IN = FILTER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Regex Out</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_FILTER__REGEX_OUT = FILTER_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Name Filter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_FILTER_FEATURE_COUNT = FILTER_FEATURE_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl <em>Dependency</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -236,16 +68,16 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependency()
 	 * @generated
 	 */
-	int DEPENDENCY = 6;
+	int DEPENDENCY = 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The feature id for the '<em><b>In</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY__TYPE = 0;
+	int DEPENDENCY__IN = 0;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' reference.
@@ -257,31 +89,13 @@ public interface KpmPackage extends EPackage {
 	int DEPENDENCY__EVENT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Actions</b></em>' reference list.
+	 * The feature id for the '<em><b>Outs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY__ACTIONS = 2;
-
-	/**
-	 * The feature id for the '<em><b>In</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENCY__IN = 3;
-
-	/**
-	 * The feature id for the '<em><b>Outs</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENCY__OUTS = 4;
+	int DEPENDENCY__OUTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -290,7 +104,16 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY__NAME = 5;
+	int DEPENDENCY__NAME = 3;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY__TYPE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Dependency</em>' class.
@@ -299,82 +122,342 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_FEATURE_COUNT = 6;
+	int DEPENDENCY_FEATURE_COUNT = 5;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl <em>Dependency Type</em>}' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractEntityImpl <em>Abstract Entity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyType()
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractEntityImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractEntity()
 	 * @generated
 	 */
-	int DEPENDENCY_TYPE = 7;
+	int ABSTRACT_ENTITY = 12;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEPENDENCY_TYPE__NAME = 0;
-
-	/**
-	 * The number of structural features of the '<em>Dependency Type</em>' class.
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_TYPE_FEATURE_COUNT = 1;
+	int ABSTRACT_ENTITY__EXPRESSION = 0;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyEventImpl <em>Dependency Event</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyEventImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyEvent()
-	 * @generated
-	 */
-	int DEPENDENCY_EVENT = 8;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The number of structural features of the '<em>Abstract Entity</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_EVENT__NAME = 0;
+	int ABSTRACT_ENTITY_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of structural features of the '<em>Dependency Event</em>' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.InImpl <em>In</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.InImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIn()
+	 * @generated
+	 */
+	int IN = 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_EVENT_FEATURE_COUNT = 1;
+	int IN__EXPRESSION = ABSTRACT_ENTITY__EXPRESSION;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl <em>Exist Filter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExistFilter()
-	 * @generated
-	 */
-	int EXIST_FILTER = 9;
-
-	/**
-	 * The number of structural features of the '<em>Exist Filter</em>' class.
+	 * The feature id for the '<em><b>Dependency</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXIST_FILTER_FEATURE_COUNT = FILTER_FEATURE_COUNT + 0;
+	int IN__DEPENDENCY = ABSTRACT_ENTITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>In</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IN_FEATURE_COUNT = ABSTRACT_ENTITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ActionImpl <em>Action</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.ActionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAction()
+	 * @generated
+	 */
+	int ACTION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Extension Point</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__EXTENSION_POINT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Action</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl <em>Out</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.OutImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getOut()
+	 * @generated
+	 */
+	int OUT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUT__EXPRESSION = ABSTRACT_ENTITY__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Action</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUT__ACTION = ABSTRACT_ENTITY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Dependency</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUT__DEPENDENCY = ABSTRACT_ENTITY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Independant</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUT__INDEPENDANT = ABSTRACT_ENTITY_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Out</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUT_FEATURE_COUNT = ABSTRACT_ENTITY_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterImpl <em>Filter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.FilterImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFilter()
+	 * @generated
+	 */
+	int FILTER = 4;
+
+	/**
+	 * The number of structural features of the '<em>Filter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExpression()
+	 * @generated
+	 */
+	int EXPRESSION = 5;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl <em>Nested Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNestedExpression()
+	 * @generated
+	 */
+	int NESTED_EXPRESSION = 6;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_EXPRESSION__EXPRESSION = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Nested Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NESTED_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ORExpressionImpl <em>OR Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.ORExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getORExpression()
+	 * @generated
+	 */
+	int OR_EXPRESSION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR_EXPRESSION__EXPRESSION = NESTED_EXPRESSION__EXPRESSION;
+
+	/**
+	 * The number of structural features of the '<em>OR Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR_EXPRESSION_FEATURE_COUNT = NESTED_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ANDExpressionImpl <em>AND Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.ANDExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getANDExpression()
+	 * @generated
+	 */
+	int AND_EXPRESSION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND_EXPRESSION__EXPRESSION = NESTED_EXPRESSION__EXPRESSION;
+
+	/**
+	 * The number of structural features of the '<em>AND Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND_EXPRESSION_FEATURE_COUNT = NESTED_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.SimpleExpressionImpl <em>Simple Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.SimpleExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getSimpleExpression()
+	 * @generated
+	 */
+	int SIMPLE_EXPRESSION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_EXPRESSION__SUB_EXPRESSION = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Simple Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterExpressionImpl <em>Filter Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.FilterExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFilterExpression()
+	 * @generated
+	 */
+	int FILTER_EXPRESSION = 9;
+
+	/**
+	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_EXPRESSION__SUB_EXPRESSION = SIMPLE_EXPRESSION__SUB_EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Filter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_EXPRESSION__FILTER = SIMPLE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Filter Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FILTER_EXPRESSION_FEATURE_COUNT = SIMPLE_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.TypeFilterImpl <em>Type Filter</em>}' class.
@@ -405,41 +488,98 @@ public interface KpmPackage extends EPackage {
 	int TYPE_FILTER_FEATURE_COUNT = FILTER_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl <em>Unit</em>}' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl <em>Name Filter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.UnitImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUnit()
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNameFilter()
 	 * @generated
 	 */
-	int UNIT = 14;
+	int NAME_FILTER = 11;
 
 	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Regex</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__TYPE_NAME = ABSTRACT_UNIT__TYPE_NAME;
+	int NAME_FILTER__REGEX = FILTER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Dependencies</b></em>' reference list.
+	 * The number of structural features of the '<em>Name Filter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__DEPENDENCIES = ABSTRACT_UNIT_FEATURE_COUNT + 0;
+	int NAME_FILTER_FEATURE_COUNT = FILTER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Kpm</b></em>' container reference.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.TypeImpl <em>Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.TypeImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getType()
+	 * @generated
+	 */
+	int TYPE = 13;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__KPM = ABSTRACT_UNIT_FEATURE_COUNT + 1;
+	int TYPE__VALUE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NullExpressionImpl <em>Null Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.NullExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNullExpression()
+	 * @generated
+	 */
+	int NULL_EXPRESSION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Sub Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_EXPRESSION__SUB_EXPRESSION = SIMPLE_EXPRESSION__SUB_EXPRESSION;
+
+	/**
+	 * The number of structural features of the '<em>Null Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_EXPRESSION_FEATURE_COUNT = SIMPLE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.EventImpl <em>Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.EventImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getEvent()
+	 * @generated
+	 */
+	int EVENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -448,281 +588,16 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__NAME = ABSTRACT_UNIT_FEATURE_COUNT + 2;
+	int EVENT__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * The number of structural features of the '<em>Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT__PATH = ABSTRACT_UNIT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT__LAST_TIME_MODIFIED = ABSTRACT_UNIT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Unit</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNIT_FEATURE_COUNT = ABSTRACT_UNIT_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FileImpl <em>File</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.FileImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFile()
-	 * @generated
-	 */
-	int FILE = 11;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__TYPE_NAME = UNIT__TYPE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Dependencies</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__DEPENDENCIES = UNIT__DEPENDENCIES;
-
-	/**
-	 * The feature id for the '<em><b>Kpm</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__KPM = UNIT__KPM;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__NAME = UNIT__NAME;
-
-
-	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__PATH = UNIT__PATH;
-
-	/**
-	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__LAST_TIME_MODIFIED = UNIT__LAST_TIME_MODIFIED;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE__CONTAINER = UNIT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>File</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FILE_FEATURE_COUNT = UNIT_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DirectoryImpl <em>Directory</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.DirectoryImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDirectory()
-	 * @generated
-	 */
-	int DIRECTORY = 12;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__TYPE_NAME = FILE__TYPE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Dependencies</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__DEPENDENCIES = FILE__DEPENDENCIES;
-
-	/**
-	 * The feature id for the '<em><b>Kpm</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__KPM = FILE__KPM;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__NAME = FILE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__PATH = FILE__PATH;
-
-	/**
-	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__LAST_TIME_MODIFIED = FILE__LAST_TIME_MODIFIED;
-
-	/**
-	 * The feature id for the '<em><b>Container</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__CONTAINER = FILE__CONTAINER;
-
-	/**
-	 * The feature id for the '<em><b>Contents</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY__CONTENTS = FILE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Directory</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIRECTORY_FEATURE_COUNT = FILE_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getProject()
-	 * @generated
-	 */
-	int PROJECT = 13;
-
-	/**
-	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__TYPE_NAME = UNIT__TYPE_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Dependencies</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__DEPENDENCIES = UNIT__DEPENDENCIES;
-
-	/**
-	 * The feature id for the '<em><b>Kpm</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__KPM = UNIT__KPM;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__NAME = UNIT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__PATH = UNIT__PATH;
-
-	/**
-	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT__LAST_TIME_MODIFIED = UNIT__LAST_TIME_MODIFIED;
-
-	/**
-	 * The number of structural features of the '<em>Project</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROJECT_FEATURE_COUNT = UNIT_FEATURE_COUNT + 0;
+	int EVENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl <em>KPM</em>}' class.
@@ -732,25 +607,7 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getKPM()
 	 * @generated
 	 */
-	int KPM = 15;
-
-	/**
-	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KPM__EVENTS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int KPM__DEPENDENCIES = 1;
+	int KPM = 17;
 
 	/**
 	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -759,7 +616,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPM__ACTIONS = 2;
+	int KPM__ACTIONS = 0;
 
 	/**
 	 * The feature id for the '<em><b>Filters</b></em>' containment reference list.
@@ -768,7 +625,7 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPM__FILTERS = 3;
+	int KPM__FILTERS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
@@ -777,16 +634,25 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPM__TYPES = 4;
+	int KPM__TYPES = 2;
 
 	/**
-	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KPM__EXPRESSIONS = 5;
+	int KPM__DEPENDENCIES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPM__EVENTS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
@@ -795,7 +661,16 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int KPM__UNITS = 6;
+	int KPM__UNITS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Dependency Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KPM__DEPENDENCY_TYPES = 6;
 
 	/**
 	 * The number of structural features of the '<em>KPM</em>' class.
@@ -806,15 +681,34 @@ public interface KpmPackage extends EPackage {
 	 */
 	int KPM_FEATURE_COUNT = 7;
 
+
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ActionImpl <em>Action</em>}' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl <em>Unit</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.ActionImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAction()
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.UnitImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUnit()
 	 * @generated
 	 */
-	int ACTION = 16;
+	int UNIT = 18;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT__TYPE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Dependencies</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT__DEPENDENCIES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -823,317 +717,137 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION__NAME = 0;
+	int UNIT__NAME = 2;
 
 	/**
-	 * The number of structural features of the '<em>Action</em>' class.
+	 * The feature id for the '<em><b>Last Time Modified</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 1;
+	int UNIT__LAST_TIME_MODIFIED = 3;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractExpressionImpl <em>Abstract Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractExpressionImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractExpression()
-	 * @generated
-	 */
-	int ABSTRACT_EXPRESSION = 17;
-
-	/**
-	 * The feature id for the '<em><b>Filter</b></em>' reference.
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_EXPRESSION__FILTER = 0;
+	int UNIT__VALUE = 4;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Depends On Units</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_EXPRESSION__ID = 1;
+	int UNIT__DEPENDS_ON_UNITS = 5;
 
 	/**
-	 * The number of structural features of the '<em>Abstract Expression</em>' class.
+	 * The feature id for the '<em><b>Dependent Units</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_EXPRESSION_FEATURE_COUNT = 2;
+	int UNIT__DEPENDENT_UNITS = 6;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl <em>Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExpression()
-	 * @generated
-	 */
-	int EXPRESSION = 20;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AndImpl <em>And</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.AndImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAnd()
-	 * @generated
-	 */
-	int AND = 18;
-
-	/**
-	 * The feature id for the '<em><b>Filter</b></em>' reference.
+	 * The number of structural features of the '<em>Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AND__FILTER = ABSTRACT_EXPRESSION__FILTER;
+	int UNIT_FEATURE_COUNT = 7;
+
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl <em>Exist Filter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExistFilter()
+	 * @generated
+	 */
+	int EXIST_FILTER = 19;
+
+	/**
+	 * The number of structural features of the '<em>Exist Filter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AND__ID = ABSTRACT_EXPRESSION__ID;
+	int EXIST_FILTER_FEATURE_COUNT = FILTER_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>And</em>' class.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl <em>Dependency Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyType()
+	 * @generated
+	 */
+	int DEPENDENCY_TYPE = 20;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AND_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
+	int DEPENDENCY_TYPE__NAME = 0;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.OrImpl <em>Or</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.OrImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getOr()
-	 * @generated
-	 */
-	int OR = 19;
-
-	/**
-	 * The feature id for the '<em><b>Filter</b></em>' reference.
+	 * The number of structural features of the '<em>Dependency Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OR__FILTER = ABSTRACT_EXPRESSION__FILTER;
+	int DEPENDENCY_TYPE_FEATURE_COUNT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyEntryImpl <em>Dependency Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyEntryImpl
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyEntry()
+	 * @generated
+	 */
+	int DEPENDENCY_ENTRY = 21;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OR__ID = ABSTRACT_EXPRESSION__ID;
+	int DEPENDENCY_ENTRY__TYPE = 0;
 
 	/**
-	 * The number of structural features of the '<em>Or</em>' class.
+	 * The feature id for the '<em><b>Unit</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OR_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
+	int DEPENDENCY_ENTRY__UNIT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Filter</b></em>' reference.
+	 * The number of structural features of the '<em>Dependency Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__FILTER = ABSTRACT_EXPRESSION__FILTER;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__ID = ABSTRACT_EXPRESSION__ID;
-
-	/**
-	 * The feature id for the '<em><b>Sub Expressions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION__SUB_EXPRESSIONS = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.kpm.impl.SuitedExpressionImpl <em>Suited Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.SuitedExpressionImpl
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getSuitedExpression()
-	 * @generated
-	 */
-	int SUITED_EXPRESSION = 21;
-
-	/**
-	 * The feature id for the '<em><b>Filter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUITED_EXPRESSION__FILTER = ABSTRACT_EXPRESSION__FILTER;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUITED_EXPRESSION__ID = ABSTRACT_EXPRESSION__ID;
-
-	/**
-	 * The number of structural features of the '<em>Suited Expression</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUITED_EXPRESSION_FEATURE_COUNT = ABSTRACT_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '<em>String</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getString()
-	 * @generated
-	 */
-	int STRING = 22;
-
-
-	/**
-	 * The meta object id for the '<em>Array List</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.ArrayList
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getArrayList()
-	 * @generated
-	 */
-	int ARRAY_LIST = 23;
-
-
-	/**
-	 * The meta object id for the '<em>boolean</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getboolean()
-	 * @generated
-	 */
-	int BOOLEAN = 24;
-
-
-	/**
-	 * The meta object id for the '<em>IFile</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.core.resources.IFile
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIFile()
-	 * @generated
-	 */
-	int IFILE = 25;
-
-	/**
-	 * The meta object id for the '<em>IFolder</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.core.resources.IFolder
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIFolder()
-	 * @generated
-	 */
-	int IFOLDER = 26;
-
-	/**
-	 * The meta object id for the '<em>IProject</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.core.resources.IProject
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProject()
-	 * @generated
-	 */
-	int IPROJECT = 27;
-
-
-	/**
-	 * The meta object id for the '<em>Date</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Date
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDate()
-	 * @generated
-	 */
-	int DATE = 28;
-
-
-	/**
-	 * The meta object id for the '<em>IResource</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.core.resources.IResource
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIResource()
-	 * @generated
-	 */
-	int IRESOURCE = 29;
-
-
-	/**
-	 * The meta object id for the '<em>Kermeta Unit Interest</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getKermetaUnitInterest()
-	 * @generated
-	 */
-	int KERMETA_UNIT_INTEREST = 30;
-
-
-	/**
-	 * The meta object id for the '<em>Hashtable</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.util.Hashtable
-	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getHashtable()
-	 * @generated
-	 */
-	int HASHTABLE = 31;
-
+	int DEPENDENCY_ENTRY_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '<em>IProgress Monitor</em>' data type.
@@ -1143,101 +857,19 @@ public interface KpmPackage extends EPackage {
 	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProgressMonitor()
 	 * @generated
 	 */
-	int IPROGRESS_MONITOR = 32;
+	int IPROGRESS_MONITOR = 22;
 
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractFile <em>Abstract File</em>}'.
+	 * The meta object id for the '<em>List</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract File</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractFile
+	 * @see java.util.List
+	 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getList()
 	 * @generated
 	 */
-	EClass getAbstractFile();
+	int LIST = 23;
 
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractDirectory <em>Abstract Directory</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Directory</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractDirectory
-	 * @generated
-	 */
-	EClass getAbstractDirectory();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractProject <em>Abstract Project</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Project</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractProject
-	 * @generated
-	 */
-	EClass getAbstractProject();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Filter <em>Filter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Filter</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Filter
-	 * @generated
-	 */
-	EClass getFilter();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.NameFilter <em>Name Filter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Name Filter</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.NameFilter
-	 * @generated
-	 */
-	EClass getNameFilter();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexIn <em>Regex In</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Regex In</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexIn()
-	 * @see #getNameFilter()
-	 * @generated
-	 */
-	EAttribute getNameFilter_RegexIn();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexOut <em>Regex Out</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Regex Out</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.NameFilter#getRegexOut()
-	 * @see #getNameFilter()
-	 * @generated
-	 */
-	EAttribute getNameFilter_RegexOut();
-
-	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractUnit <em>Abstract Unit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Unit</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractUnit
-	 * @generated
-	 */
-	EClass getAbstractUnit();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.AbstractUnit#getTypeName <em>Type Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type Name</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractUnit#getTypeName()
-	 * @see #getAbstractUnit()
-	 * @generated
-	 */
-	EAttribute getAbstractUnit_TypeName();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Dependency <em>Dependency</em>}'.
@@ -1250,15 +882,15 @@ public interface KpmPackage extends EPackage {
 	EClass getDependency();
 
 	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getIn <em>In</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getType()
+	 * @return the meta object for the containment reference '<em>In</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getIn()
 	 * @see #getDependency()
 	 * @generated
 	 */
-	EReference getDependency_Type();
+	EReference getDependency_In();
 
 	/**
 	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getEvent <em>Event</em>}'.
@@ -1272,32 +904,10 @@ public interface KpmPackage extends EPackage {
 	EReference getDependency_Event();
 
 	/**
-	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getActions <em>Actions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getOuts <em>Outs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Actions</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getActions()
-	 * @see #getDependency()
-	 * @generated
-	 */
-	EReference getDependency_Actions();
-
-	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getIn <em>In</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>In</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getIn()
-	 * @see #getDependency()
-	 * @generated
-	 */
-	EReference getDependency_In();
-
-	/**
-	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getOuts <em>Outs</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Outs</em>'.
+	 * @return the meta object for the containment reference list '<em>Outs</em>'.
 	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getOuts()
 	 * @see #getDependency()
 	 * @generated
@@ -1316,56 +926,182 @@ public interface KpmPackage extends EPackage {
 	EAttribute getDependency_Name();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.DependencyType <em>Dependency Type</em>}'.
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Dependency Type</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.DependencyType
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getType()
+	 * @see #getDependency()
 	 * @generated
 	 */
-	EClass getDependencyType();
+	EReference getDependency_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.DependencyType#getName <em>Name</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.In <em>In</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.DependencyType#getName()
-	 * @see #getDependencyType()
+	 * @return the meta object for class '<em>In</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.In
 	 * @generated
 	 */
-	EAttribute getDependencyType_Name();
+	EClass getIn();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.DependencyEvent <em>Dependency Event</em>}'.
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.kpm.In#getDependency <em>Dependency</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Dependency Event</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.DependencyEvent
+	 * @return the meta object for the container reference '<em>Dependency</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.In#getDependency()
+	 * @see #getIn()
 	 * @generated
 	 */
-	EClass getDependencyEvent();
+	EReference getIn_Dependency();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.DependencyEvent#getName <em>Name</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Action <em>Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.DependencyEvent#getName()
-	 * @see #getDependencyEvent()
+	 * @return the meta object for class '<em>Action</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Action
 	 * @generated
 	 */
-	EAttribute getDependencyEvent_Name();
+	EClass getAction();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.ExistFilter <em>Exist Filter</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Action#getExtensionPoint <em>Extension Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Exist Filter</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.ExistFilter
+	 * @return the meta object for the attribute '<em>Extension Point</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Action#getExtensionPoint()
+	 * @see #getAction()
 	 * @generated
 	 */
-	EClass getExistFilter();
+	EAttribute getAction_ExtensionPoint();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Out <em>Out</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Out</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Out
+	 * @generated
+	 */
+	EClass getOut();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Out#getAction <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Action</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Out#getAction()
+	 * @see #getOut()
+	 * @generated
+	 */
+	EReference getOut_Action();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.kpm.Out#getDependency <em>Dependency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Dependency</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Out#getDependency()
+	 * @see #getOut()
+	 * @generated
+	 */
+	EReference getOut_Dependency();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Out#isIndependant <em>Independant</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Independant</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Out#isIndependant()
+	 * @see #getOut()
+	 * @generated
+	 */
+	EAttribute getOut_Independant();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Filter <em>Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Filter</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Filter
+	 * @generated
+	 */
+	EClass getFilter();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Expression
+	 * @generated
+	 */
+	EClass getExpression();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.NestedExpression <em>Nested Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Nested Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.NestedExpression
+	 * @generated
+	 */
+	EClass getNestedExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link fr.irisa.triskell.kermeta.kpm.NestedExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.NestedExpression#getExpression()
+	 * @see #getNestedExpression()
+	 * @generated
+	 */
+	EReference getNestedExpression_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.ORExpression <em>OR Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>OR Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.ORExpression
+	 * @generated
+	 */
+	EClass getORExpression();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.ANDExpression <em>AND Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>AND Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.ANDExpression
+	 * @generated
+	 */
+	EClass getANDExpression();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.FilterExpression <em>Filter Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Filter Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.FilterExpression
+	 * @generated
+	 */
+	EClass getFilterExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.FilterExpression#getFilter <em>Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Filter</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.FilterExpression#getFilter()
+	 * @see #getFilterExpression()
+	 * @generated
+	 */
+	EReference getFilterExpression_Filter();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.TypeFilter <em>Type Filter</em>}'.
@@ -1389,121 +1125,119 @@ public interface KpmPackage extends EPackage {
 	EReference getTypeFilter_Type();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.File <em>File</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.NameFilter <em>Name Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>File</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.File
+	 * @return the meta object for class '<em>Name Filter</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.NameFilter
 	 * @generated
 	 */
-	EClass getFile();
+	EClass getNameFilter();
 
 	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.File#getContainer <em>Container</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.NameFilter#getRegex <em>Regex</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Container</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.File#getContainer()
-	 * @see #getFile()
+	 * @return the meta object for the attribute '<em>Regex</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.NameFilter#getRegex()
+	 * @see #getNameFilter()
 	 * @generated
 	 */
-	EReference getFile_Container();
+	EAttribute getNameFilter_Regex();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Directory <em>Directory</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractEntity <em>Abstract Entity</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Directory</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Directory
+	 * @return the meta object for class '<em>Abstract Entity</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractEntity
 	 * @generated
 	 */
-	EClass getDirectory();
+	EClass getAbstractEntity();
 
 	/**
-	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Directory#getContents <em>Contents</em>}'.
+	 * Returns the meta object for the containment reference '{@link fr.irisa.triskell.kermeta.kpm.AbstractEntity#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Contents</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Directory#getContents()
-	 * @see #getDirectory()
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.AbstractEntity#getExpression()
+	 * @see #getAbstractEntity()
 	 * @generated
 	 */
-	EReference getDirectory_Contents();
+	EReference getAbstractEntity_Expression();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Project <em>Project</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Project</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Project
+	 * @return the meta object for class '<em>Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Type
 	 * @generated
 	 */
-	EClass getProject();
+	EClass getType();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Unit <em>Unit</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Type#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Unit</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Type#getValue()
+	 * @see #getType()
 	 * @generated
 	 */
-	EClass getUnit();
+	EAttribute getType_Value();
 
 	/**
-	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.NullExpression <em>Null Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Dependencies</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getDependencies()
-	 * @see #getUnit()
+	 * @return the meta object for class '<em>Null Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.NullExpression
 	 * @generated
 	 */
-	EReference getUnit_Dependencies();
+	EClass getNullExpression();
 
 	/**
-	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Event <em>Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Kpm</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getKpm()
-	 * @see #getUnit()
+	 * @return the meta object for class '<em>Event</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Event
 	 * @generated
 	 */
-	EReference getUnit_Kpm();
+	EClass getEvent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Event#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getName()
-	 * @see #getUnit()
+	 * @see fr.irisa.triskell.kermeta.kpm.Event#getName()
+	 * @see #getEvent()
 	 * @generated
 	 */
-	EAttribute getUnit_Name();
+	EAttribute getEvent_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getPath <em>Path</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.SimpleExpression <em>Simple Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Path</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getPath()
-	 * @see #getUnit()
+	 * @return the meta object for class '<em>Simple Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.SimpleExpression
 	 * @generated
 	 */
-	EAttribute getUnit_Path();
+	EClass getSimpleExpression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}'.
+	 * Returns the meta object for the containment reference '{@link fr.irisa.triskell.kermeta.kpm.SimpleExpression#getSubExpression <em>Sub Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Last Time Modified</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified()
-	 * @see #getUnit()
+	 * @return the meta object for the containment reference '<em>Sub Expression</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.SimpleExpression#getSubExpression()
+	 * @see #getSimpleExpression()
 	 * @generated
 	 */
-	EAttribute getUnit_LastTimeModified();
+	EReference getSimpleExpression_SubExpression();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.KPM <em>KPM</em>}'.
@@ -1514,39 +1248,6 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getKPM();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Units</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getUnits()
-	 * @see #getKPM()
-	 * @generated
-	 */
-	EReference getKPM_Units();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getEvents <em>Events</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Events</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getEvents()
-	 * @see #getKPM()
-	 * @generated
-	 */
-	EReference getKPM_Events();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencies <em>Dependencies</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Dependencies</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getDependencies()
-	 * @see #getKPM()
-	 * @generated
-	 */
-	EReference getKPM_Dependencies();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getActions <em>Actions</em>}'.
@@ -1582,228 +1283,198 @@ public interface KpmPackage extends EPackage {
 	EReference getKPM_Types();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getExpressions <em>Expressions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencies <em>Dependencies</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getExpressions()
+	 * @return the meta object for the containment reference list '<em>Dependencies</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getDependencies()
 	 * @see #getKPM()
 	 * @generated
 	 */
-	EReference getKPM_Expressions();
+	EReference getKPM_Dependencies();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Action <em>Action</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getEvents <em>Events</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Action</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Action
+	 * @return the meta object for the containment reference list '<em>Events</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getEvents()
+	 * @see #getKPM()
 	 * @generated
 	 */
-	EClass getAction();
+	EReference getKPM_Events();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Action#getName <em>Name</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Units</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getUnits()
+	 * @see #getKPM()
+	 * @generated
+	 */
+	EReference getKPM_Units();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencyTypes <em>Dependency Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Dependency Types</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getDependencyTypes()
+	 * @see #getKPM()
+	 * @generated
+	 */
+	EReference getKPM_DependencyTypes();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Unit <em>Unit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Unit</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit
+	 * @generated
+	 */
+	EClass getUnit();
+
+	/**
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.Unit#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getType()
+	 * @see #getUnit()
+	 * @generated
+	 */
+	EReference getUnit_Type();
+
+	/**
+	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Dependencies</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getDependencies()
+	 * @see #getUnit()
+	 * @generated
+	 */
+	EReference getUnit_Dependencies();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Action#getName()
-	 * @see #getAction()
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getName()
+	 * @see #getUnit()
 	 * @generated
 	 */
-	EAttribute getAction_Name();
+	EAttribute getUnit_Name();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Expression <em>Expression</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expression</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Expression
+	 * @return the meta object for the attribute '<em>Last Time Modified</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified()
+	 * @see #getUnit()
 	 * @generated
 	 */
-	EClass getExpression();
+	EAttribute getUnit_LastTimeModified();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Expression#getSubExpressions <em>Sub Expressions</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Sub Expressions</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Expression#getSubExpressions()
-	 * @see #getExpression()
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getValue()
+	 * @see #getUnit()
 	 * @generated
 	 */
-	EReference getExpression_SubExpressions();
+	EAttribute getUnit_Value();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.And <em>And</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependsOnUnits <em>Depends On Units</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>And</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.And
+	 * @return the meta object for the containment reference list '<em>Depends On Units</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getDependsOnUnits()
+	 * @see #getUnit()
 	 * @generated
 	 */
-	EClass getAnd();
+	EReference getUnit_DependsOnUnits();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.Or <em>Or</em>}'.
+	 * Returns the meta object for the containment reference list '{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependentUnits <em>Dependent Units</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Or</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.Or
+	 * @return the meta object for the containment reference list '<em>Dependent Units</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.Unit#getDependentUnits()
+	 * @see #getUnit()
 	 * @generated
 	 */
-	EClass getOr();
+	EReference getUnit_DependentUnits();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression <em>Abstract Expression</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.ExistFilter <em>Exist Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Abstract Expression</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractExpression
+	 * @return the meta object for class '<em>Exist Filter</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.ExistFilter
 	 * @generated
 	 */
-	EClass getAbstractExpression();
+	EClass getExistFilter();
 
 	/**
-	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter <em>Filter</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.DependencyType <em>Dependency Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Filter</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractExpression#getFilter()
-	 * @see #getAbstractExpression()
+	 * @return the meta object for class '<em>Dependency Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyType
 	 * @generated
 	 */
-	EReference getAbstractExpression_Filter();
+	EClass getDependencyType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.AbstractExpression#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.kpm.DependencyType#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.AbstractExpression#getId()
-	 * @see #getAbstractExpression()
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyType#getName()
+	 * @see #getDependencyType()
 	 * @generated
 	 */
-	EAttribute getAbstractExpression_Id();
+	EAttribute getDependencyType_Name();
 
 	/**
-	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.SuitedExpression <em>Suited Expression</em>}'.
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.kpm.DependencyEntry <em>Dependency Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Suited Expression</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.SuitedExpression
+	 * @return the meta object for class '<em>Dependency Entry</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyEntry
 	 * @generated
 	 */
-	EClass getSuitedExpression();
+	EClass getDependencyEntry();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.DependencyEntry#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>String</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyEntry#getType()
+	 * @see #getDependencyEntry()
 	 * @generated
 	 */
-	EDataType getString();
+	EReference getDependencyEntry_Type();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.ArrayList <em>Array List</em>}'.
+	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.kpm.DependencyEntry#getUnit <em>Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Array List</em>'.
-	 * @see java.util.ArrayList
-	 * @model instanceClass="java.util.ArrayList"
+	 * @return the meta object for the reference '<em>Unit</em>'.
+	 * @see fr.irisa.triskell.kermeta.kpm.DependencyEntry#getUnit()
+	 * @see #getDependencyEntry()
 	 * @generated
 	 */
-	EDataType getArrayList();
-
-	/**
-	 * Returns the meta object for data type '<em>boolean</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>boolean</em>'.
-	 * @model instanceClass="boolean"
-	 * @generated
-	 */
-	EDataType getboolean();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.resources.IFile <em>IFile</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>IFile</em>'.
-	 * @see org.eclipse.core.resources.IFile
-	 * @model instanceClass="org.eclipse.core.resources.IFile"
-	 * @generated
-	 */
-	EDataType getIFile();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.resources.IFolder <em>IFolder</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>IFolder</em>'.
-	 * @see org.eclipse.core.resources.IFolder
-	 * @model instanceClass="org.eclipse.core.resources.IFolder"
-	 * @generated
-	 */
-	EDataType getIFolder();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.resources.IProject <em>IProject</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>IProject</em>'.
-	 * @see org.eclipse.core.resources.IProject
-	 * @model instanceClass="org.eclipse.core.resources.IProject"
-	 * @generated
-	 */
-	EDataType getIProject();
-
-	/**
-	 * Returns the meta object for data type '{@link java.util.Date <em>Date</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Date</em>'.
-	 * @see java.util.Date
-	 * @model instanceClass="java.util.Date"
-	 * @generated
-	 */
-	EDataType getDate();
-
-	/**
-	 * Returns the meta object for data type '{@link org.eclipse.core.resources.IResource <em>IResource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>IResource</em>'.
-	 * @see org.eclipse.core.resources.IResource
-	 * @model instanceClass="org.eclipse.core.resources.IResource"
-	 * @generated
-	 */
-	EDataType getIResource();
-
-	/**
-	 * Returns the meta object for data type '{@link fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest <em>Kermeta Unit Interest</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Kermeta Unit Interest</em>'.
-	 * @see fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest
-	 * @model instanceClass="fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest"
-	 * @generated
-	 */
-	EDataType getKermetaUnitInterest();
-
-	/**
-	 * Returns the meta object for data type '{@link java.util.Hashtable <em>Hashtable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Hashtable</em>'.
-	 * @see java.util.Hashtable
-	 * @model instanceClass="java.util.Hashtable"
-	 * @generated
-	 */
-	EDataType getHashtable();
+	EReference getDependencyEntry_Unit();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IProgressMonitor <em>IProgress Monitor</em>}'.
@@ -1815,6 +1486,17 @@ public interface KpmPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getIProgressMonitor();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.List <em>List</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>List</em>'.
+	 * @see java.util.List
+	 * @model instanceClass="java.util.List"
+	 * @generated
+	 */
+	EDataType getList();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1839,90 +1521,6 @@ public interface KpmPackage extends EPackage {
 	 */
 	interface Literals  {
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractFileImpl <em>Abstract File</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractFileImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractFile()
-		 * @generated
-		 */
-		EClass ABSTRACT_FILE = eINSTANCE.getAbstractFile();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractDirectoryImpl <em>Abstract Directory</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractDirectoryImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractDirectory()
-		 * @generated
-		 */
-		EClass ABSTRACT_DIRECTORY = eINSTANCE.getAbstractDirectory();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractProjectImpl <em>Abstract Project</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractProjectImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractProject()
-		 * @generated
-		 */
-		EClass ABSTRACT_PROJECT = eINSTANCE.getAbstractProject();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterImpl <em>Filter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.FilterImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFilter()
-		 * @generated
-		 */
-		EClass FILTER = eINSTANCE.getFilter();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl <em>Name Filter</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNameFilter()
-		 * @generated
-		 */
-		EClass NAME_FILTER = eINSTANCE.getNameFilter();
-
-		/**
-		 * The meta object literal for the '<em><b>Regex In</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAME_FILTER__REGEX_IN = eINSTANCE.getNameFilter_RegexIn();
-
-		/**
-		 * The meta object literal for the '<em><b>Regex Out</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAME_FILTER__REGEX_OUT = eINSTANCE.getNameFilter_RegexOut();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractUnitImpl <em>Abstract Unit</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractUnitImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractUnit()
-		 * @generated
-		 */
-		EClass ABSTRACT_UNIT = eINSTANCE.getAbstractUnit();
-
-		/**
-		 * The meta object literal for the '<em><b>Type Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ABSTRACT_UNIT__TYPE_NAME = eINSTANCE.getAbstractUnit_TypeName();
-
-		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl <em>Dependency</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1933,12 +1531,12 @@ public interface KpmPackage extends EPackage {
 		EClass DEPENDENCY = eINSTANCE.getDependency();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>In</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEPENDENCY__TYPE = eINSTANCE.getDependency_Type();
+		EReference DEPENDENCY__IN = eINSTANCE.getDependency_In();
 
 		/**
 		 * The meta object literal for the '<em><b>Event</b></em>' reference feature.
@@ -1949,23 +1547,7 @@ public interface KpmPackage extends EPackage {
 		EReference DEPENDENCY__EVENT = eINSTANCE.getDependency_Event();
 
 		/**
-		 * The meta object literal for the '<em><b>Actions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPENDENCY__ACTIONS = eINSTANCE.getDependency_Actions();
-
-		/**
-		 * The meta object literal for the '<em><b>In</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DEPENDENCY__IN = eINSTANCE.getDependency_In();
-
-		/**
-		 * The meta object literal for the '<em><b>Outs</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Outs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1981,50 +1563,158 @@ public interface KpmPackage extends EPackage {
 		EAttribute DEPENDENCY__NAME = eINSTANCE.getDependency_Name();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl <em>Dependency Type</em>}' class.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyType()
 		 * @generated
 		 */
-		EClass DEPENDENCY_TYPE = eINSTANCE.getDependencyType();
+		EReference DEPENDENCY__TYPE = eINSTANCE.getDependency_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.InImpl <em>In</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.InImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIn()
 		 * @generated
 		 */
-		EAttribute DEPENDENCY_TYPE__NAME = eINSTANCE.getDependencyType_Name();
+		EClass IN = eINSTANCE.getIn();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyEventImpl <em>Dependency Event</em>}' class.
+		 * The meta object literal for the '<em><b>Dependency</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyEventImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyEvent()
 		 * @generated
 		 */
-		EClass DEPENDENCY_EVENT = eINSTANCE.getDependencyEvent();
+		EReference IN__DEPENDENCY = eINSTANCE.getIn_Dependency();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ActionImpl <em>Action</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.ActionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAction()
 		 * @generated
 		 */
-		EAttribute DEPENDENCY_EVENT__NAME = eINSTANCE.getDependencyEvent_Name();
+		EClass ACTION = eINSTANCE.getAction();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl <em>Exist Filter</em>}' class.
+		 * The meta object literal for the '<em><b>Extension Point</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExistFilter()
 		 * @generated
 		 */
-		EClass EXIST_FILTER = eINSTANCE.getExistFilter();
+		EAttribute ACTION__EXTENSION_POINT = eINSTANCE.getAction_ExtensionPoint();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl <em>Out</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.OutImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getOut()
+		 * @generated
+		 */
+		EClass OUT = eINSTANCE.getOut();
+
+		/**
+		 * The meta object literal for the '<em><b>Action</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OUT__ACTION = eINSTANCE.getOut_Action();
+
+		/**
+		 * The meta object literal for the '<em><b>Dependency</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OUT__DEPENDENCY = eINSTANCE.getOut_Dependency();
+
+		/**
+		 * The meta object literal for the '<em><b>Independant</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OUT__INDEPENDANT = eINSTANCE.getOut_Independant();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterImpl <em>Filter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.FilterImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFilter()
+		 * @generated
+		 */
+		EClass FILTER = eINSTANCE.getFilter();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl <em>Nested Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.NestedExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNestedExpression()
+		 * @generated
+		 */
+		EClass NESTED_EXPRESSION = eINSTANCE.getNestedExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NESTED_EXPRESSION__EXPRESSION = eINSTANCE.getNestedExpression_Expression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ORExpressionImpl <em>OR Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.ORExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getORExpression()
+		 * @generated
+		 */
+		EClass OR_EXPRESSION = eINSTANCE.getORExpression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ANDExpressionImpl <em>AND Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.ANDExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getANDExpression()
+		 * @generated
+		 */
+		EClass AND_EXPRESSION = eINSTANCE.getANDExpression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FilterExpressionImpl <em>Filter Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.FilterExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFilterExpression()
+		 * @generated
+		 */
+		EClass FILTER_EXPRESSION = eINSTANCE.getFilterExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Filter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FILTER_EXPRESSION__FILTER = eINSTANCE.getFilterExpression_Filter();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.TypeFilterImpl <em>Type Filter</em>}' class.
@@ -2045,76 +1735,78 @@ public interface KpmPackage extends EPackage {
 		EReference TYPE_FILTER__TYPE = eINSTANCE.getTypeFilter_Type();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.FileImpl <em>File</em>}' class.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl <em>Name Filter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.FileImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getFile()
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.NameFilterImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNameFilter()
 		 * @generated
 		 */
-		EClass FILE = eINSTANCE.getFile();
+		EClass NAME_FILTER = eINSTANCE.getNameFilter();
 
 		/**
-		 * The meta object literal for the '<em><b>Container</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Regex</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FILE__CONTAINER = eINSTANCE.getFile_Container();
+		EAttribute NAME_FILTER__REGEX = eINSTANCE.getNameFilter_Regex();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DirectoryImpl <em>Directory</em>}' class.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractEntityImpl <em>Abstract Entity</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.DirectoryImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDirectory()
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractEntityImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractEntity()
 		 * @generated
 		 */
-		EClass DIRECTORY = eINSTANCE.getDirectory();
+		EClass ABSTRACT_ENTITY = eINSTANCE.getAbstractEntity();
 
 		/**
-		 * The meta object literal for the '<em><b>Contents</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DIRECTORY__CONTENTS = eINSTANCE.getDirectory_Contents();
+		EReference ABSTRACT_ENTITY__EXPRESSION = eINSTANCE.getAbstractEntity_Expression();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl <em>Project</em>}' class.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.TypeImpl <em>Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.ProjectImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getProject()
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.TypeImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getType()
 		 * @generated
 		 */
-		EClass PROJECT = eINSTANCE.getProject();
+		EClass TYPE = eINSTANCE.getType();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl <em>Unit</em>}' class.
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.UnitImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUnit()
 		 * @generated
 		 */
-		EClass UNIT = eINSTANCE.getUnit();
+		EAttribute TYPE__VALUE = eINSTANCE.getType_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Dependencies</b></em>' reference list feature.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.NullExpressionImpl <em>Null Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.NullExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getNullExpression()
 		 * @generated
 		 */
-		EReference UNIT__DEPENDENCIES = eINSTANCE.getUnit_Dependencies();
+		EClass NULL_EXPRESSION = eINSTANCE.getNullExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Kpm</b></em>' container reference feature.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.EventImpl <em>Event</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.EventImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getEvent()
 		 * @generated
 		 */
-		EReference UNIT__KPM = eINSTANCE.getUnit_Kpm();
+		EClass EVENT = eINSTANCE.getEvent();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2122,23 +1814,25 @@ public interface KpmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute UNIT__NAME = eINSTANCE.getUnit_Name();
+		EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.SimpleExpressionImpl <em>Simple Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.SimpleExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getSimpleExpression()
+		 * @generated
+		 */
+		EClass SIMPLE_EXPRESSION = eINSTANCE.getSimpleExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute UNIT__PATH = eINSTANCE.getUnit_Path();
-
-		/**
-		 * The meta object literal for the '<em><b>Last Time Modified</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute UNIT__LAST_TIME_MODIFIED = eINSTANCE.getUnit_LastTimeModified();
+		EReference SIMPLE_EXPRESSION__SUB_EXPRESSION = eINSTANCE.getSimpleExpression_SubExpression();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl <em>KPM</em>}' class.
@@ -2149,30 +1843,6 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EClass KPM = eINSTANCE.getKPM();
-
-		/**
-		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KPM__UNITS = eINSTANCE.getKPM_Units();
-
-		/**
-		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KPM__EVENTS = eINSTANCE.getKPM_Events();
-
-		/**
-		 * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference KPM__DEPENDENCIES = eINSTANCE.getKPM_Dependencies();
 
 		/**
 		 * The meta object literal for the '<em><b>Actions</b></em>' containment reference list feature.
@@ -2190,6 +1860,7 @@ public interface KpmPackage extends EPackage {
 		 */
 		EReference KPM__FILTERS = eINSTANCE.getKPM_Filters();
 
+
 		/**
 		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
@@ -2199,22 +1870,62 @@ public interface KpmPackage extends EPackage {
 		EReference KPM__TYPES = eINSTANCE.getKPM_Types();
 
 		/**
-		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KPM__EXPRESSIONS = eINSTANCE.getKPM_Expressions();
+		EReference KPM__DEPENDENCIES = eINSTANCE.getKPM_Dependencies();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ActionImpl <em>Action</em>}' class.
+		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.ActionImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAction()
 		 * @generated
 		 */
-		EClass ACTION = eINSTANCE.getAction();
+		EReference KPM__EVENTS = eINSTANCE.getKPM_Events();
+
+		/**
+		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPM__UNITS = eINSTANCE.getKPM_Units();
+
+		/**
+		 * The meta object literal for the '<em><b>Dependency Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KPM__DEPENDENCY_TYPES = eINSTANCE.getKPM_DependencyTypes();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl <em>Unit</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.UnitImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getUnit()
+		 * @generated
+		 */
+		EClass UNIT = eINSTANCE.getUnit();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNIT__TYPE = eINSTANCE.getUnit_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Dependencies</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNIT__DEPENDENCIES = eINSTANCE.getUnit_Dependencies();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2222,180 +1933,93 @@ public interface KpmPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ACTION__NAME = eINSTANCE.getAction_Name();
+		EAttribute UNIT__NAME = eINSTANCE.getUnit_Name();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl <em>Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.ExpressionImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExpression()
-		 * @generated
-		 */
-		EClass EXPRESSION = eINSTANCE.getExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Sub Expressions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Last Time Modified</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION__SUB_EXPRESSIONS = eINSTANCE.getExpression_SubExpressions();
+		EAttribute UNIT__LAST_TIME_MODIFIED = eINSTANCE.getUnit_LastTimeModified();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AndImpl <em>And</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.AndImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAnd()
-		 * @generated
-		 */
-		EClass AND = eINSTANCE.getAnd();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.OrImpl <em>Or</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.OrImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getOr()
-		 * @generated
-		 */
-		EClass OR = eINSTANCE.getOr();
-
-		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.AbstractExpressionImpl <em>Abstract Expression</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.AbstractExpressionImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getAbstractExpression()
-		 * @generated
-		 */
-		EClass ABSTRACT_EXPRESSION = eINSTANCE.getAbstractExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Filter</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_EXPRESSION__FILTER = eINSTANCE.getAbstractExpression_Filter();
+		EAttribute UNIT__VALUE = eINSTANCE.getUnit_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Depends On Units</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ABSTRACT_EXPRESSION__ID = eINSTANCE.getAbstractExpression_Id();
+		EReference UNIT__DEPENDS_ON_UNITS = eINSTANCE.getUnit_DependsOnUnits();
 
 		/**
-		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.SuitedExpressionImpl <em>Suited Expression</em>}' class.
+		 * The meta object literal for the '<em><b>Dependent Units</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.SuitedExpressionImpl
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getSuitedExpression()
 		 * @generated
 		 */
-		EClass SUITED_EXPRESSION = eINSTANCE.getSuitedExpression();
+		EReference UNIT__DEPENDENT_UNITS = eINSTANCE.getUnit_DependentUnits();
 
 		/**
-		 * The meta object literal for the '<em>String</em>' data type.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl <em>Exist Filter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getString()
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.ExistFilterImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getExistFilter()
 		 * @generated
 		 */
-		EDataType STRING = eINSTANCE.getString();
+		EClass EXIST_FILTER = eINSTANCE.getExistFilter();
 
 		/**
-		 * The meta object literal for the '<em>Array List</em>' data type.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl <em>Dependency Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.util.ArrayList
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getArrayList()
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyType()
 		 * @generated
 		 */
-		EDataType ARRAY_LIST = eINSTANCE.getArrayList();
+		EClass DEPENDENCY_TYPE = eINSTANCE.getDependencyType();
 
 		/**
-		 * The meta object literal for the '<em>boolean</em>' data type.
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getboolean()
 		 * @generated
 		 */
-		EDataType BOOLEAN = eINSTANCE.getboolean();
+		EAttribute DEPENDENCY_TYPE__NAME = eINSTANCE.getDependencyType_Name();
 
 		/**
-		 * The meta object literal for the '<em>IFile</em>' data type.
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyEntryImpl <em>Dependency Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.core.resources.IFile
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIFile()
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.DependencyEntryImpl
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDependencyEntry()
 		 * @generated
 		 */
-		EDataType IFILE = eINSTANCE.getIFile();
+		EClass DEPENDENCY_ENTRY = eINSTANCE.getDependencyEntry();
 
 		/**
-		 * The meta object literal for the '<em>IFolder</em>' data type.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.core.resources.IFolder
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIFolder()
 		 * @generated
 		 */
-		EDataType IFOLDER = eINSTANCE.getIFolder();
+		EReference DEPENDENCY_ENTRY__TYPE = eINSTANCE.getDependencyEntry_Type();
 
 		/**
-		 * The meta object literal for the '<em>IProject</em>' data type.
+		 * The meta object literal for the '<em><b>Unit</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.core.resources.IProject
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIProject()
 		 * @generated
 		 */
-		EDataType IPROJECT = eINSTANCE.getIProject();
-
-		/**
-		 * The meta object literal for the '<em>Date</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Date
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getDate()
-		 * @generated
-		 */
-		EDataType DATE = eINSTANCE.getDate();
-
-		/**
-		 * The meta object literal for the '<em>IResource</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.core.resources.IResource
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getIResource()
-		 * @generated
-		 */
-		EDataType IRESOURCE = eINSTANCE.getIResource();
-
-		/**
-		 * The meta object literal for the '<em>Kermeta Unit Interest</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getKermetaUnitInterest()
-		 * @generated
-		 */
-		EDataType KERMETA_UNIT_INTEREST = eINSTANCE.getKermetaUnitInterest();
-
-		/**
-		 * The meta object literal for the '<em>Hashtable</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.util.Hashtable
-		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getHashtable()
-		 * @generated
-		 */
-		EDataType HASHTABLE = eINSTANCE.getHashtable();
+		EReference DEPENDENCY_ENTRY__UNIT = eINSTANCE.getDependencyEntry_Unit();
 
 		/**
 		 * The meta object literal for the '<em>IProgress Monitor</em>' data type.
@@ -2406,6 +2030,16 @@ public interface KpmPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType IPROGRESS_MONITOR = eINSTANCE.getIProgressMonitor();
+
+		/**
+		 * The meta object literal for the '<em>List</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.List
+		 * @see fr.irisa.triskell.kermeta.kpm.impl.KpmPackageImpl#getList()
+		 * @generated
+		 */
+		EDataType LIST = eINSTANCE.getList();
 
 	}
 

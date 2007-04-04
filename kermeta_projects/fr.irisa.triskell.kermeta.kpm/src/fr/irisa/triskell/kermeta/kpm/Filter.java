@@ -2,11 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Filter.java,v 1.1 2006-12-12 16:06:11 ftanguy Exp $
+ * $Id: Filter.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
-
-import org.eclipse.core.resources.IResource;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -24,17 +22,9 @@ public interface Filter extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.boolean"
+	 * @model
 	 * @generated
 	 */
-	boolean apply(Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.boolean" resourceDataType="fr.irisa.triskell.kermeta.kpm.IResource"
-	 * @generated
-	 */
-	boolean apply(IResource resource);
+	boolean matches(Unit unit);
 
 } // Filter

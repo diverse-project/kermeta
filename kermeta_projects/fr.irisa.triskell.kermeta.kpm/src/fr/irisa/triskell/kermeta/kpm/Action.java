@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Action.java,v 1.4 2007-02-08 15:37:03 ftanguy Exp $
+ * $Id: Action.java,v 1.5 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
-import java.util.ArrayList;
-
-import java.util.Hashtable;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -22,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Action#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Action#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,37 +30,37 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Action extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Extension Point</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Extension Point</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getAction_Name()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.String"
+	 * @return the value of the '<em>Extension Point</em>' attribute.
+	 * @see #setExtensionPoint(String)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getAction_ExtensionPoint()
+	 * @model
 	 * @generated
 	 */
-	String getName();
+	String getExtensionPoint();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Action#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Action#getExtensionPoint <em>Extension Point</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Extension Point</em>' attribute.
+	 * @see #getExtensionPoint()
 	 * @generated
 	 */
-	void setName(String value);
+	void setExtensionPoint(String value);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dependentsDataType="fr.irisa.triskell.kermeta.kpm.ArrayList" paramsDataType="fr.irisa.triskell.kermeta.kpm.Hashtable" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
 	 * @generated
 	 */
-	void execute(Unit unit, ArrayList dependents, Hashtable params, IProgressMonitor monitor);
+	void execute(Unit unit, IProgressMonitor monitor, Map args);
 
 } // Action

@@ -2,18 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilterImpl.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: TypeFilterImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.kermeta.kpm.AbstractUnit;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
-import fr.irisa.triskell.kermeta.kpm.Unit;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -42,7 +39,7 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 	 * @generated
 	 * @ordered
 	 */
-	protected AbstractUnit type = null;
+	protected Type type = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,10 +64,10 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractUnit getType() {
+	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (AbstractUnit)eResolveProxy(oldType);
+			type = (Type)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.TYPE_FILTER__TYPE, oldType, type));
@@ -84,7 +81,7 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AbstractUnit basicGetType() {
+	public Type basicGetType() {
 		return type;
 	}
 
@@ -93,8 +90,8 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(AbstractUnit newType) {
-		AbstractUnit oldType = type;
+	public void setType(Type newType) {
+		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.TYPE_FILTER__TYPE, oldType, type));
@@ -122,7 +119,7 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.TYPE_FILTER__TYPE:
-				setType((AbstractUnit)newValue);
+				setType((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,7 +133,7 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.TYPE_FILTER__TYPE:
-				setType((AbstractUnit)null);
+				setType((Type)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -155,21 +152,4 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean apply(Unit unit) {
-		return unit.getTypeName().equals(type.value);
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean apply(IResource resource) {
-		return true;
-	}
 } //TypeFilterImpl

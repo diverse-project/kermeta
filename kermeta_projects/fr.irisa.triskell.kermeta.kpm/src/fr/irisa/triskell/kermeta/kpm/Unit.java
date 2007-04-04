@@ -2,22 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.9 2007-02-08 15:37:03 ftanguy Exp $
+ * $Id: Unit.java,v 1.10 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
-
-import java.util.ArrayList;
-
 import java.util.Date;
 
-import java.util.Hashtable;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,19 +24,47 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getType <em>Type</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getPath <em>Path</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependsOnUnits <em>Depends On Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependentUnits <em>Dependent Units</em>}</li>
  * </ul>
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit()
- * @model abstract="true"
+ * @model
  * @generated
  */
-public interface Unit extends AbstractUnit {
+public interface Unit extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(Type)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Type()
+	 * @model
+	 * @generated
+	 */
+	Type getType();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getType <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(Type value);
+
 	/**
 	 * Returns the value of the '<em><b>Dependencies</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
@@ -57,34 +82,6 @@ public interface Unit extends AbstractUnit {
 	EList getDependencies();
 
 	/**
-	 * Returns the value of the '<em><b>Kpm</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Kpm</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Kpm</em>' container reference.
-	 * @see #setKpm(KPM)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Kpm()
-	 * @see fr.irisa.triskell.kermeta.kpm.KPM#getUnits
-	 * @model opposite="units"
-	 * @generated
-	 */
-	KPM getKpm();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getKpm <em>Kpm</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kpm</em>' container reference.
-	 * @see #getKpm()
-	 * @generated
-	 */
-	void setKpm(KPM value);
-
-	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -95,7 +92,7 @@ public interface Unit extends AbstractUnit {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Name()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.String"
+	 * @model
 	 * @generated
 	 */
 	String getName();
@@ -111,32 +108,6 @@ public interface Unit extends AbstractUnit {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Path</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path</em>' attribute.
-	 * @see #setPath(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Path()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.String"
-	 * @generated
-	 */
-	String getPath();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getPath <em>Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path</em>' attribute.
-	 * @see #getPath()
-	 * @generated
-	 */
-	void setPath(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Last Time Modified</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -147,7 +118,7 @@ public interface Unit extends AbstractUnit {
 	 * @return the value of the '<em>Last Time Modified</em>' attribute.
 	 * @see #setLastTimeModified(Date)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_LastTimeModified()
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.Date"
+	 * @model
 	 * @generated
 	 */
 	Date getLastTimeModified();
@@ -163,52 +134,62 @@ public interface Unit extends AbstractUnit {
 	void setLastTimeModified(Date value);
 
 	/**
+	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model eventNameDataType="fr.irisa.triskell.kermeta.kpm.String" paramsDataType="fr.irisa.triskell.kermeta.kpm.Hashtable" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(String)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Value()
+	 * @model
 	 * @generated
 	 */
-	void receiveEvent(String eventName, Hashtable params, IProgressMonitor monitor);
+	String getValue();
 
 	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.kpm.ArrayList" eventNameDataType="fr.irisa.triskell.kermeta.kpm.String"
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
 	 * @generated
 	 */
-	ArrayList getDependenciesWithEvent(String eventName);
+	void setValue(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Depends On Units</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Depends On Units</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
+	 * @return the value of the '<em>Depends On Units</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_DependsOnUnits()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyEntry" containment="true"
 	 * @generated
 	 */
-	boolean isFile();
+	EList getDependsOnUnits();
 
 	/**
+	 * Returns the value of the '<em><b>Dependent Units</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dependent Units</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
+	 * @return the value of the '<em>Dependent Units</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_DependentUnits()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyEntry" containment="true"
 	 * @generated
 	 */
-	boolean isDirectory();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="fr.irisa.triskell.kermeta.kpm.boolean"
-	 * @generated
-	 */
-	boolean isProject();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model changerDataType="fr.irisa.triskell.kermeta.kpm.KermetaUnitInterest" monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
-	 * @generated
-	 */
-	void changed(KermetaUnitInterest changer, IProgressMonitor monitor);
+	EList getDependentUnits();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -216,6 +197,110 @@ public interface Unit extends AbstractUnit {
 	 * @model
 	 * @generated
 	 */
-	void remove();
+	void changed();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @generated
+	 */
+	void receiveEvent(String event, boolean synchrone, Map args, IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	boolean hasDependencyNamed(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void receiveSynchroneEvent(String event, Map args);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void receiveAsynchroneEvent(String event, Map args);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void beDependentOf(Unit unit, DependencyType type);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void getFree(DependencyType type, Unit unit);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyEntry findDependentUnit(DependencyType type, Unit unit);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyEntry findUnitIDependOn(DependencyType type, Unit unit);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyEntry findUnitIDependOn(String type, Unit unit);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyEntry findDependentUnit(String type, Unit unit);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @generated
+	 */
+	void receiveSynchroneEvent(String event, Map args, IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Dependency findDependency(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void beDependentOf(Unit unit, Dependency dependency);
 
 } // Unit

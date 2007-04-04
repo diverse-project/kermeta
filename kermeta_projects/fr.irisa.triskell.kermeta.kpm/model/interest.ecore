@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interest"
+    nsURI="http://interest" nsPrefix="interest">
+  <eClassifiers xsi:type="ecore:EDataType" name="Interest" instanceClassName="fr.irisa.triskell.kermeta.extension.Interest"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterestKey">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="declaringObject" lowerBound="1"
+        eType="#//Interest"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" lowerBound="1" eType="ecore:EClass kpm.ecore#//Unit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterestEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="#//InterestKey"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterestHost">
+    <eOperations name="declareInterest">
+      <eParameters name="declaringObject" eType="#//Interest"/>
+      <eParameters name="key" eType="ecore:EClass kpm.ecore#//Unit"/>
+    </eOperations>
+    <eOperations name="declareInterest">
+      <eParameters name="declaringObject" eType="#//Interest"/>
+      <eParameters name="key" eType="ecore:EClass kpm.ecore#//Unit"/>
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="findInterestEntry" eType="#//InterestEntry">
+      <eParameters name="key" eType="ecore:EClass kpm.ecore#//Unit"/>
+      <eParameters name="declaringObject" eType="#//Interest"/>
+    </eOperations>
+    <eOperations name="update">
+      <eParameters name="key" eType="ecore:EClass kpm.ecore#//Unit"/>
+      <eParameters name="newValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="undeclareInterest">
+      <eParameters name="declaringObject" eType="#//Interest"/>
+      <eParameters name="key" eType="ecore:EClass kpm.ecore#//Unit"/>
+    </eOperations>
+    <eOperations name="getValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eParameters name="key" eType="ecore:EClass kpm.ecore#//Unit"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
+        eType="#//InterestEntry" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

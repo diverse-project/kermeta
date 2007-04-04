@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.kermeta.kpm/src"
+    modelPluginID="fr.irisa.triskell.kermeta.kpm" modelName="Kpm" testsDirectory=""
+    testSuiteClass="" importerID="org.eclipse.emf.importer.ecore">
+  <foreignModel>kpm.ecore</foreignModel>
+  <genPackages prefix="Kpm" basePackage="fr.irisa.triskell.kermeta" disposableProviderFactory="true"
+      ecorePackage="kpm.ecore#/">
+    <genClasses ecoreClass="kpm.ecore#//Dependency">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/in"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/outs"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//In"/>
+    <genClasses ecoreClass="kpm.ecore#//Action"/>
+    <genClasses ecoreClass="kpm.ecore#//Out">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Out/actions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kpm.ecore#//Filter"/>
+    <genClasses image="false" ecoreClass="kpm.ecore#//Expression"/>
+    <genClasses image="false" ecoreClass="kpm.ecore#//NestedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//NestedExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//ORExpression"/>
+    <genClasses ecoreClass="kpm.ecore#//ANDExpression"/>
+    <genClasses ecoreClass="kpm.ecore#//FilterExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//FilterExpression/filter"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//TypeFilter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//TypeFilter/type"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//NameFilter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//NameFilter/regex"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kpm.ecore#//AbstractEntity">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//AbstractEntity/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Type/value"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//NullExpression"/>
+    <genClasses ecoreClass="kpm.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Event/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kpm.ecore#//SimpleExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//SimpleExpression/subExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//KPM">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/filters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/types"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/dependencies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/events"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -5,105 +5,40 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.12 2007-01-26 13:14:50 cfaucher Exp $
+ $Id: plugin.xml,v 1.13 2007-04-04 13:43:55 ftanguy Exp $
 -->
 
 <plugin>
-   <extension-point id="actions" name="KPM actions" schema="schema/actions.exsd"/>
+   <extension-point id="actions" name="KPMAction" schema="extension/actions.exsd"/>
+   <extension-point id="registeredFile" name="RegisteredFile" schema="extension/registeredFile.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore" 
+       uri = "http://kpm" 
        class = "fr.irisa.triskell.kermeta.kpm.KpmPackage"
-       genModel = "model/Kpm.genmodel" /> 
+       genModel = "model/kpm.genmodel" /> 
   </extension>
-  <extension
-        id="fr.irisa.triskell.kermeta.kpm.startup"
-        point="org.eclipse.ui.startup">
-  </extension>
-  <extension
+<!--  <extension
         id="kermetaProjectBuilder"
         point="org.eclipse.core.resources.builders">
-     <builder >
+     <builder>
         <run class="fr.irisa.triskell.kermeta.kpm.builder.KermetaProjectBuilder"/>
      </builder>
+  </extension>-->
+  <extension
+        point="org.eclipse.ui.startup">
+     <startup class="fr.irisa.triskell.kermeta.kpm.plugin.KPMStartup"/>
   </extension>
   <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="false"
-           id="fr.irisa.triskell.kermeta.kpm.srcFolderContribution"
-           objectClass="org.eclipse.core.resources.IFolder">
-        <action
-              class="fr.irisa.triskell.kermeta.kpm.popup.MakeAFolderAnSrcFolder"
-              icon="images/kermeta_logo.gif"
-              id="fr.irisa.triskell.kermeta.kpm.srcAction"
-              label="Add / Remove src property"/>
-     </objectContribution>
+        point="org.eclipse.ui.preferencePages">
+     <page
+           category="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+           class="fr.irisa.triskell.kermeta.kpm.preferences.KPMPreferencePage"
+           id="fr.irisa.triskell.kermeta.kpm.preferencePage"
+           name="KPM"/>
   </extension>
-  <extension
-        point="org.eclipse.ui.decorators">
-     <decorator
-           class="fr.irisa.triskell.kermeta.kpm.popup.SrcFolderDecorator"
-           id="fr.irisa.triskell.kermeta.kpm.srcFolderDecorator"
-           label="Source Folder Decorator"
-           lightweight="true">
-        <enablement>
-           <objectClass name="org.eclipse.core.resources.IFolder"/>
-        </enablement>
-     </decorator>
-  </extension>
-  <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="true"
-           id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
-           objectClass="org.eclipse.core.resources.IProject">
-        <menu
-              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-              label="Kermeta"
-              path="additions">
-           <separator name="kermetagroup2"/>
-        </menu>
-       <action
-              class="fr.irisa.triskell.kermeta.kpm.workspace.ToggleNatureAction"
-              id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
-              label="Add/Remove Kermeta Nature"
-              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-     </objectContribution>
-  </extension>
-  <extension
-        id="kermetaMarker"
-        name="Kermeta Problem"
-        point="org.eclipse.core.resources.markers">
-     <persistent value="true"/>
-     <super type="org.eclipse.core.resources.problemmarker"/>
-  </extension>
-  <extension
-        point="org.eclipse.ui.newWizards">
-     <category
-           id="fr.irisa.triskell.kermeta.KermetaWizard"
-           name="Kermeta"/>
-     <wizard
-           category="fr.irisa.triskell.kermeta.KermetaWizard"
-           class="fr.irisa.triskell.kermeta.kpm.wizards.NewKermetaProjectWizard"
-           descriptionImage="images/tree_package.gif"
-           finalPerspective="kermetaPerspective"
-           icon="images/tree_package.gif"
-           id="fr.irisa.triskell.kermeta.newProject"
-           name="New Kermeta Project"
-           project="true">
-        <selection class="org.eclipse.core.resources.IProject"/>
-     </wizard>
-  </extension>
-  <extension
-        point="org.eclipse.ui.perspectiveExtensions">
-     <perspectiveExtension targetID="kermetaPerspective">
-        <newWizardShortcut id="fr.irisa.triskell.kermeta.newProject"/>
-     </perspectiveExtension>
-     <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
-        <newWizardShortcut id="fr.irisa.triskell.kermeta.newProject"/>
-     </perspectiveExtension>
-  </extension>
+
+
+
 </plugin>
 

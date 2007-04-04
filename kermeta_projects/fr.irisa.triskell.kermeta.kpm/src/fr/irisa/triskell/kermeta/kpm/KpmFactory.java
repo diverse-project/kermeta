@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactory.java,v 1.2 2006-12-12 16:06:11 ftanguy Exp $
+ * $Id: KpmFactory.java,v 1.3 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -26,42 +26,6 @@ public interface KpmFactory extends EFactory {
 	KpmFactory eINSTANCE = fr.irisa.triskell.kermeta.kpm.impl.KpmFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Abstract File</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract File</em>'.
-	 * @generated
-	 */
-	AbstractFile createAbstractFile();
-
-	/**
-	 * Returns a new object of class '<em>Abstract Directory</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract Directory</em>'.
-	 * @generated
-	 */
-	AbstractDirectory createAbstractDirectory();
-
-	/**
-	 * Returns a new object of class '<em>Abstract Project</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Abstract Project</em>'.
-	 * @generated
-	 */
-	AbstractProject createAbstractProject();
-
-	/**
-	 * Returns a new object of class '<em>Name Filter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Name Filter</em>'.
-	 * @generated
-	 */
-	NameFilter createNameFilter();
-
-	/**
 	 * Returns a new object of class '<em>Dependency</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -71,76 +35,13 @@ public interface KpmFactory extends EFactory {
 	Dependency createDependency();
 
 	/**
-	 * Returns a new object of class '<em>Dependency Type</em>'.
+	 * Returns a new object of class '<em>In</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dependency Type</em>'.
+	 * @return a new object of class '<em>In</em>'.
 	 * @generated
 	 */
-	DependencyType createDependencyType();
-
-	/**
-	 * Returns a new object of class '<em>Dependency Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dependency Event</em>'.
-	 * @generated
-	 */
-	DependencyEvent createDependencyEvent();
-
-	/**
-	 * Returns a new object of class '<em>Exist Filter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Exist Filter</em>'.
-	 * @generated
-	 */
-	ExistFilter createExistFilter();
-
-	/**
-	 * Returns a new object of class '<em>Type Filter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Filter</em>'.
-	 * @generated
-	 */
-	TypeFilter createTypeFilter();
-
-	/**
-	 * Returns a new object of class '<em>File</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>File</em>'.
-	 * @generated
-	 */
-	File createFile();
-
-	/**
-	 * Returns a new object of class '<em>Directory</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Directory</em>'.
-	 * @generated
-	 */
-	Directory createDirectory();
-
-	/**
-	 * Returns a new object of class '<em>Project</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Project</em>'.
-	 * @generated
-	 */
-	Project createProject();
-
-	/**
-	 * Returns a new object of class '<em>KPM</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KPM</em>'.
-	 * @generated
-	 */
-	KPM createKPM();
+	In createIn();
 
 	/**
 	 * Returns a new object of class '<em>Action</em>'.
@@ -152,31 +53,130 @@ public interface KpmFactory extends EFactory {
 	Action createAction();
 
 	/**
-	 * Returns a new object of class '<em>Expression</em>'.
+	 * Returns a new object of class '<em>Out</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression</em>'.
+	 * @return a new object of class '<em>Out</em>'.
 	 * @generated
 	 */
-	Expression createExpression();
+	Out createOut();
 
 	/**
-	 * Returns a new object of class '<em>And</em>'.
+	 * Returns a new object of class '<em>OR Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>And</em>'.
+	 * @return a new object of class '<em>OR Expression</em>'.
 	 * @generated
 	 */
-	And createAnd();
+	ORExpression createORExpression();
 
 	/**
-	 * Returns a new object of class '<em>Or</em>'.
+	 * Returns a new object of class '<em>AND Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Or</em>'.
+	 * @return a new object of class '<em>AND Expression</em>'.
 	 * @generated
 	 */
-	Or createOr();
+	ANDExpression createANDExpression();
+
+	/**
+	 * Returns a new object of class '<em>Filter Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Filter Expression</em>'.
+	 * @generated
+	 */
+	FilterExpression createFilterExpression();
+
+	/**
+	 * Returns a new object of class '<em>Type Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Filter</em>'.
+	 * @generated
+	 */
+	TypeFilter createTypeFilter();
+
+	/**
+	 * Returns a new object of class '<em>Name Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Name Filter</em>'.
+	 * @generated
+	 */
+	NameFilter createNameFilter();
+
+	/**
+	 * Returns a new object of class '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type</em>'.
+	 * @generated
+	 */
+	Type createType();
+
+	/**
+	 * Returns a new object of class '<em>Null Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Expression</em>'.
+	 * @generated
+	 */
+	NullExpression createNullExpression();
+
+	/**
+	 * Returns a new object of class '<em>Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event</em>'.
+	 * @generated
+	 */
+	Event createEvent();
+
+	/**
+	 * Returns a new object of class '<em>KPM</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>KPM</em>'.
+	 * @generated
+	 */
+	KPM createKPM();
+
+	/**
+	 * Returns a new object of class '<em>Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Unit</em>'.
+	 * @generated
+	 */
+	Unit createUnit();
+
+	/**
+	 * Returns a new object of class '<em>Exist Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Exist Filter</em>'.
+	 * @generated
+	 */
+	ExistFilter createExistFilter();
+
+	/**
+	 * Returns a new object of class '<em>Dependency Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dependency Type</em>'.
+	 * @generated
+	 */
+	DependencyType createDependencyType();
+
+	/**
+	 * Returns a new object of class '<em>Dependency Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dependency Entry</em>'.
+	 * @generated
+	 */
+	DependencyEntry createDependencyEntry();
 
 	/**
 	 * Returns the package supported by this factory.

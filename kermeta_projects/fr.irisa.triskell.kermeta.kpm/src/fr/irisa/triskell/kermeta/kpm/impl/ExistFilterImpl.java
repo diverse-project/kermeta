@@ -2,16 +2,16 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExistFilterImpl.java,v 1.1 2006-12-12 16:06:12 ftanguy Exp $
+ * $Id: ExistFilterImpl.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.IResourceHelper;
 
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -47,16 +47,9 @@ public class ExistFilterImpl extends FilterImpl implements ExistFilter {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean apply(Unit unit) {
-		return IResourceHelper.getIResource(unit).exists();
+	public boolean matches(Unit unit) {
+		IFile file = ResourceHelper.getIFile(unit.getValue());
+		return file.exists();
 	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean apply(IResource resource) {
-		return resource.exists();
-	}
+
 } //ExistFilterImpl

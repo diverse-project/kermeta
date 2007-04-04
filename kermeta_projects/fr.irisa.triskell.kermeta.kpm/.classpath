@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="fr/irisa/triskell/kermeta/kpm/helpers/MarkersHelper.java" kind="src" path="src"/>
+	<classpathentry excluding="fr/irisa/triskell/kermeta/kpm/helpers/StringHelper.java|fr/irisa/triskell/kermeta/kpm/helpers/KpmHelper.java|fr/irisa/triskell/kermeta/kpm/workspace/KermetaWorkspace.java|fr/irisa/triskell/kermeta/kpm/workspace/IAction.java|fr/irisa/triskell/kermeta/kpm/helpers/InterestHelper.java|fr/irisa/triskell/kermeta/kpm/builder/KermetaDeltaVisitor.java|fr/irisa/triskell/kermeta/kpm/builder/KermetaProjectBuilder.java|fr/irisa/triskell/kermeta/kpm/helpers/IResourceHelper.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
