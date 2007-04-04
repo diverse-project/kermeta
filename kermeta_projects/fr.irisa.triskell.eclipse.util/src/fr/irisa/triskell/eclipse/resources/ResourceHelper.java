@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceHelper.java,v 1.2 2007-02-21 15:16:16 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.3 2007-04-04 13:27:31 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -15,6 +15,7 @@
  */
 package fr.irisa.triskell.eclipse.resources;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -83,6 +84,10 @@ public class ResourceHelper {
 	}
 	
 	
+	static public IFile getIFileFromAbsoluteName(String absoluteName) {
+		String relativeName = absoluteName.replaceFirst( "file:" + root.getLocation().toString(), "");
+		return getIFile(relativeName);
+	}
 	
 	
 	/**
@@ -132,6 +137,10 @@ public class ResourceHelper {
 		IFile file = getIFile(filePath);
 		return file.getFileExtension();
 	}
+
+	/*static public IContainer getIContainer(String containerPath) {
+		return root.getContainerForLocation( new Path(containerPath) );
+	}*/
 	
 }
 
