@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.54 2007-03-27 14:53:35 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.55 2007-04-04 15:32:22 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -349,6 +349,9 @@ public class EMF2Runtime {
         {
 	    	String errmsg = "EMF loading error : could not find a class (" + type_name + ") " +
 	    			"in loaded libraries. Please check your require statements.\n";
+	    	if(type_name.startsWith("null::")){
+	    		errmsg += "EMF had trouble finding the package ("+ type_name +"), this typically occurs when the uri used in the model is not correctly registered. You must either : register your metamodel, or use a nsuri that correspond to a physical location ex: platform:/resource/yourproject/yourmm.ecore";
+	    	}
 	    	// Stop after the first error
         	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
         }
