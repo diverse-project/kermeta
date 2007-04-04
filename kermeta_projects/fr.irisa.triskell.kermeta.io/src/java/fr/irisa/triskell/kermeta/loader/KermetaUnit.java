@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.79 2007-02-08 14:39:51 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.80 2007-04-04 13:56:55 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -221,6 +221,18 @@ public abstract class KermetaUnit {
 	 * The Package objects by qualified names
 	 */
 	public Hashtable<String,Package> packages = new Hashtable<String,Package>();
+	
+	
+	public boolean containsPackage(String packageName) {
+		ArrayList<Package> packages = getAllPackages();
+		for ( Package p : packages ) {
+			String qualifiedName = NamedElementHelper.getQualifiedName(p);
+			if ( qualifiedName.equals(packageName) )
+				return true;
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * Pre loaded operation bodies as strings
@@ -662,7 +674,7 @@ public abstract class KermetaUnit {
 		        resource_tags = fixPackageTags(p, resource_tags);
 	        }
 	    }
-	        	
+
 	    // Add the tags registered in tags list to the resource
 	    this.addFTagsToResource(resource, resource_tags);
 	    try {
