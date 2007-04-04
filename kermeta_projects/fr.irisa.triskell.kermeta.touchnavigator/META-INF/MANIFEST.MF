@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.ui,
  fr.irisa.triskell.kermeta,
  org.eclipse.emf.ecore,
  org.eclipse.emf.edit.ui,
- org.eclipse.core.resources
+ org.eclipse.core.resources,
+ fr.irisa.triskell.kermeta.io
 Eclipse-AutoStart: true
 Bundle-Vendor: IRISA/INRIA
