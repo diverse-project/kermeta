@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+  <extension
+        point="org.eclipse.ui.popupMenus">
+     <objectContribution
+           adaptable="true"
+           id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
+           objectClass="org.eclipse.core.resources.IProject">
+        <menu
+              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+              label="Kermeta"
+              path="additions">
+           <separator name="kermetagroup2"/>
+        </menu>
+       <action
+              class="fr.irisa.triskell.kermeta.actions.ToggleNatureAction"
+              id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
+              label="Add/Remove Kermeta Nature"
+              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+     </objectContribution>
+     <objectContribution
+           adaptable="false"
+           id="fr.irisa.triskell.kermeta.ui.viewFileDependencies"
+           nameFilter="*.kmt"
+           objectClass="org.eclipse.core.resources.IFile">
+        <action
+              class="fr.irisa.triskell.kermeta.actions.ShowFileDependencies"
+              icon="images/down.png"
+              id="fr.irisa.triskell.kermeta.ui.action2"
+              label="See File Dependencies"
+              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+     </objectContribution>
+     <objectContribution
+           adaptable="false"
+           id="fr.irisa.triskell.kermeta.ui.viewDependentFiles"
+           nameFilter="*.kmt"
+           objectClass="org.eclipse.core.resources.IFile">
+        <action
+              class="fr.irisa.triskell.kermeta.actions.ShowDependentFiles"
+              icon="images/up.png"
+              id="fr.irisa.triskell.kermeta.ui.action3"
+              label="See Dependent Files"
+              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+     </objectContribution>
+  </extension>
+  
+    <extension
+        point="org.eclipse.ui.newWizards">
+     <category
+           id="fr.irisa.triskell.kermeta.KermetaWizard"
+           name="Kermeta"/>
+     <wizard
+           category="fr.irisa.triskell.kermeta.KermetaWizard"
+           class="fr.irisa.triskell.kermeta.wizards.NewKermetaProjectWizard"
+           descriptionImage="images/tree_package.gif"
+           finalPerspective="kermetaPerspective"
+           icon="images/tree_package.gif"
+           id="fr.irisa.triskell.kermeta.ui.wizards.newProject"
+           name="New Kermeta Project"
+           project="true">
+        <selection class="org.eclipse.core.resources.IProject"/>
+     </wizard>
+  </extension>
+    <extension
+          point="org.eclipse.ui.preferencePages">
+       <page
+             class="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+             id="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
+             name="Kermeta"/>
+    </extension>
+    <extension
+          point="org.eclipse.ui.perspectiveExtensions">
+       <perspectiveExtension targetID="fr.irisa.triskell.kermeta.ui.perspective">
+          <newWizardShortcut id="fr.irisa.triskell.kermeta.ui.wizards.newProject"/>
+          <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
+          <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"/>
+          <newWizardShortcut id="fr.irisa.triskell.kermeta.presentation.KmModelWizardID"/>
+          <newWizardShortcut id="org.eclipse.ui.wizards.new.folder"/>
+          <newWizardShortcut id="org.eclipse.ui.wizards.new.file"/>
+       </perspectiveExtension>
+    </extension>
+    <extension
+          point="org.eclipse.ui.perspectives">
+       <perspective
+             class="fr.irisa.triskell.kermeta.ui.perspective.KermetaPerspective"
+             icon="images/kermeta_logo.gif"
+             id="fr.irisa.triskell.kermeta.ui.perspective"
+             name="Kermeta"/>
+    </extension>
+    <extension
+          point="org.eclipse.ui.viewActions">
+       <viewContribution
+             id="fr.irisa.triskell.kermeta.ui.viewContribution1"
+             targetID="org.eclipse.ui.views.ResourceNavigator">
+          <action
+                class="fr.irisa.triskell.kermeta.actions.FreeMemory"
+                id="fr.irisa.triskell.kermeta.ui.action1"
+                label="Free Memory"
+                menubarPath="additions"
+                style="push"
+                toolbarPath="additions"/>
+       </viewContribution>
+    </extension>
+    <extension
+          point="org.eclipse.ui.views">
+       <view
+             allowMultiple="true"
+             category="fr.irisa.triskell.kermeta.view"
+             class="fr.irisa.triskell.kermeta.ui.views.FileDependenciesViewPart"
+             icon="images/down.png"
+             id="fr.irisa.triskell.kermeta.ui.views.fileDependencies"
+             name="File Dependencies"/>
+       <view
+             category="fr.irisa.triskell.kermeta.view"
+             class="fr.irisa.triskell.kermeta.ui.views.DependentFilesViewPart"
+             icon="images/up.png"
+             id="fr.irisa.triskell.kermeta.ui.view.dependentFiles"
+             name="Dependent Files"/>
+    </extension>
+
+</plugin>

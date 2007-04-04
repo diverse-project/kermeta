@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui Plug-in
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.ui;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: fr.irisa.triskell.kermeta.ui.KermetaUIPlugin
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.eclipse.util,
+ fr.irisa.triskell.kermeta.kpm,
+ org.eclipse.ui.ide,
+ fr.irisa.triskell.kermeta.runner,
+ org.eclipse.jdt.ui,
+ org.eclipse.ui.console,
+ org.eclipse.debug.ui
+Eclipse-LazyStart: true

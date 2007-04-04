@@ -1,0 +1,38 @@
+package fr.irisa.triskell.kermeta.ui.views;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
+
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
+import fr.irisa.triskell.kermeta.ui.TreeItem;
+
+public class DependenciesDoubleClickListener implements IDoubleClickListener {
+
+	public void doubleClick(DoubleClickEvent event) {
+		
+		TreeSelection treeSelection = (TreeSelection) event.getSelection();
+		TreeItem item = (TreeItem) treeSelection.getFirstElement();
+		Unit unit = (Unit) item.getValue();
+		IFile file = ResourceHelper.getIFile( unit.getValue() );
+		
+		IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
+		try {
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
+			      new FileEditorInput(file),
+			      desc.getId());
+		} catch (PartInitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		
+	}
+
+}
