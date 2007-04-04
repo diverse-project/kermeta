@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.34 2007-03-09 14:29:23 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.35 2007-04-04 15:35:12 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -351,8 +351,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					
 					String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
 					RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-	        		getConcreteFactory("EMF").
-	        				createRuntimeUnit("", mm_uri, roResource.getProperties().get("instances")) ;
+	        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
 					runtime_unit.associatedResource = roResource;
 					Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
 					r2emf.updateEMFModel();					
@@ -365,6 +364,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         if(useInterpreterInternalResources) rsManager.addStdLibResource();
         // And save the created resource!
         try { 
+        	if(res.getContents().size() == 0){
+        		throwKermetaRaisedExceptionOnSave("Error saving EMF model '" + this.getUriAsString() + "': There is nothing to save in the resource", null);
+        	}
         	res.save(null);
             if(mustValidate) validateWithEMF(res);
         }
