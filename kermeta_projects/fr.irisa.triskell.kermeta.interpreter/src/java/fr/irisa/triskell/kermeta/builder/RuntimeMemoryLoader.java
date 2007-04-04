@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.18 2007-03-02 15:46:02 ffleurey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.19 2007-04-04 13:52:09 ftanguy Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -113,10 +113,13 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
      * Pre-create runtime objects for type definitions
      */
     private void _1_loadTypes() {
-        for (Package p : unit.packages.values()) {
+       for ( Package p : unit.getAllPackages() )
+    	   loadTypesForTypeDefContainer(p);
+    	
+    	/* for (Package p : unit.packages.values()) {
             // For each type definition, create the associated RuntimeObject
         	loadTypesForTypeDefContainer(p);
-        }
+        }*/
     }
     
     private void loadTypesForTypeDefContainer(TypeDefinitionContainer td_cont) {
@@ -165,9 +168,11 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
      * Create all runtime objects and fill correspondance table
      */
     private void _3_createRuntimeObjects() {
-        for (Object next : unit.packages.values()) {
+    	for ( Package p : unit.getAllPackages() )
+    		getOrCreateRuntimeObject( p );
+    	/*  for (Object next : unit.packages.values()) {
             getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)next);
-        }
+        }*/
     }
     
     public void loadKCoreRuntimeObject(KCoreRuntimeObject run_obj) {
