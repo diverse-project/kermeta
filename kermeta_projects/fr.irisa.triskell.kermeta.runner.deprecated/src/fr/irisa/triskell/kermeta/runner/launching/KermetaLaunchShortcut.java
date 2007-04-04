@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.17 2007-02-13 08:08:12 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.18 2007-04-04 13:48:08 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -31,9 +31,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaUnitInterest;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
 
 /**
@@ -43,7 +42,7 @@ import fr.irisa.triskell.kermeta.KermetaMessages;
  * a given method, from a given class and package.
  * A launch method cannot have any parameter in this iteration yet.
  */
-public class KermetaLaunchShortcut implements ILaunchShortcut, KermetaUnitInterest {
+public class KermetaLaunchShortcut implements ILaunchShortcut {
 	
     private static final String ID_KERMETA_APPLICATION = "KermetaLaunchConfiguration";
 	
@@ -247,9 +246,11 @@ public class KermetaLaunchShortcut implements ILaunchShortcut, KermetaUnitIntere
 	//	KermetaUnit unit = KermetaRunHelper.parse(ifile);
 		
 		selectedFile = ifile;
-		KermetaWorkspace.getInstance().declareInterest(this);
+		//KermetaWorkspace.getInstance().declareInterest(this);
 		
 		//KermetaUnit unit = KermetaWorkspace.getInstance().getKermetaUnit(ifile);
+		
+		unit = KermetaUnitHelper.typecheckFile(selectedFile);
 		
 		try {
 			// Get the @mainClass and @mainOperation tags (if they exist)
@@ -306,6 +307,6 @@ public class KermetaLaunchShortcut implements ILaunchShortcut, KermetaUnitIntere
 			MessageDialog.openError(new Shell(), "Kermeta interpreter error", e
 					.getMessage());
 		}
-		KermetaWorkspace.getInstance().undeclareInterest(this);
+	//	KermetaWorkspace.getInstance().undeclareInterest(this);
 	}
 }

@@ -2,17 +2,6 @@
 <?eclipse version="3.0"?>
 <plugin>
 
-     <extension
-      
-            id="KermetaPerspectives"
-            name="kermetaPerspectives"
-            point="org.eclipse.ui.perspectives">
-         <perspective
-               class="fr.irisa.triskell.kermeta.runner.perspective.KermetaPerspective"
-               icon="icons/kermeta_logo.gif"
-               name="Kermeta Metamodeling"
-               id="kermetaPerspective"/>
-      </extension>
       <extension
             point="org.eclipse.ui.perspectiveExtensions">
          <perspectiveExtension targetID="kermetaPerspective">
@@ -233,7 +222,6 @@
          <wizard
                icon="icons/newkermetafile.png"
                class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
-               finalPerspective="kermetaPerspective"
                category="fr.irisa.triskell.kermeta.KermetaWizard"
                descriptionImage="icons/kermeta.png"
                project="true"
