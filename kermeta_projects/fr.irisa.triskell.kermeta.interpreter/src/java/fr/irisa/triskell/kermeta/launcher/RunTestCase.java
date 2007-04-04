@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.10 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: RunTestCase.java,v 1.11 2007-04-04 13:51:43 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -58,7 +58,7 @@ public class RunTestCase extends TestCase {
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
-            interpreter = new KermetaInterpreter(containerTestSuite.root_unit);
+            interpreter = new KermetaInterpreter(containerTestSuite.unit);
             System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         

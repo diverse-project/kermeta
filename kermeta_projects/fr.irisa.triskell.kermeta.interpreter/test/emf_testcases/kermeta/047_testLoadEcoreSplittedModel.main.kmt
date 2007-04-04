@@ -49,8 +49,8 @@ class Main inherits kermeta::kunit::TestCase
    		var repository : EMFRepository init EMFRepository.new             
    		// the ".." path represents "fr.irisa.triskell.kermeta.interpreter" directory!
    		var resource : Resource init repository.createResource(
-   		"../test/emf_testcases/instances/047_crossreference1.ecore",
-   		"../test/emf_testcases/instances/Ecore.ecore")
+   		"../instances/047_crossreference1.ecore",
+   		"../instances/Ecore.ecore")
    		resource.load()      
        
        	result := Set<EPackage>.new

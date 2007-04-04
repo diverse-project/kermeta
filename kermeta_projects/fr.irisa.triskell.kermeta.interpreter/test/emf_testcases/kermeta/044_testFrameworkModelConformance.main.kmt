@@ -161,7 +161,7 @@ class Main inherits kermeta::kunit::TestCase
      */
     operation loadClassModel() : Set<EPackage> is do             
    		var repository : EMFRepository init EMFRepository.new       
-   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","../test/emf_testcases/instances/Ecore.ecore")
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","../instances/Ecore.ecore")
    		resource.load()      
        
        	result := Set<EPackage>.new

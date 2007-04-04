@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.2 2007-03-15 13:51:25 dvojtise Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.3 2007-04-04 13:51:43 ftanguy Exp $
  * Creation date: November 14, 2006
  * License:
  * Copyright:
@@ -26,6 +26,7 @@ class Main inherits kermeta::kunit::TestCase
 	operation main () : Void is do
 		
 		var tr : TestRunner init TestRunner.new
+		
 		tr.run(Main)
 		tr.printTestResult
 		/*
@@ -49,11 +50,21 @@ class Main inherits kermeta::kunit::TestCase
 	 */
     operation testLoadSaveEcoreFileUsingSaveAsNewURI() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
+		stdio.writeln(repository.toString)
+		
+		stdio.writeln(1.toString)
+		
 		// load
 		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" , ecoreMetamodel)
     	resource.load
+    	stdio.writeln(resource.toString)
+      	stdio.writeln(resource.instances.toString)
+      	stdio.writeln(resource.instances.size.toString)
     	var nbInstances : Integer init resource.instances.size
+    	stdio.writeln("avant assert")
     	assertTrueWithMsg(nbInstances >= 1, "testLoadSaveEcoreFileUsingSaveAsNewURI didn't find at least one element in the model")
+        
+        stdio.writeln("avant le load")
         
 		// save
 	    resource.saveWithNewURI("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingSaveAsNewURI.ecore")
@@ -64,15 +75,16 @@ class Main inherits kermeta::kunit::TestCase
     end
     
     
-	/** 
+	/*
 	 * load and save in another location just reusing the same resource but changing the URI of the resource
 	 */
-    operation testLoadSaveEcoreFileChangingTheURI() : Void is do 
+   /* operation testLoadSaveEcoreFileChangingTheURI() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		// load
 		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" , ecoreMetamodel)
     	resource.load
     	var nbInstances : Integer init resource.instances.size
+    	
     	assertTrueWithMsg(nbInstances >= 1, "testLoadSaveEcoreFileChangingTheURI didn't find at least one element in the model")
         
 		// save
@@ -82,13 +94,13 @@ class Main inherits kermeta::kunit::TestCase
 	    checkEcoreSavedFile("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileChangingTheURI.ecore",
 	    					nbInstances,
 	    					"testLoadSaveEcoreFileChangingTheURI")
-    end
+    end*/
     
-    /** 
+    /*
    	 * load and save in another location by moving the model element to another resource
    	 * bug #2256
 	 */
-    operation testLoadSaveEcoreFileUsingAnotherResource() : Void is do 
+   /* operation testLoadSaveEcoreFileUsingAnotherResource() : Void is do 
     	
 		// load
 		var resource1 : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" ,
@@ -108,7 +120,7 @@ class Main inherits kermeta::kunit::TestCase
 	    checkEcoreSavedFile("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/out/fsm.testLoadSaveEcoreFileUsingAnotherResource.ecore",
 	    	nbInstances,
 	    	"testLoadSaveEcoreFileUsingAnotherResource")
-    end
+    end*/
     
     operation checkEcoreSavedFile(fileName : String, numberOfInstances : Integer, testName : String) : Void is do
     	var resource : Resource init repository.createResource(fileName, ecoreMetamodel)
@@ -124,7 +136,7 @@ class Main inherits kermeta::kunit::TestCase
     /*---------------*/
     /* same test but using another metamodel */
     
-    operation testLoadSaveFileUsingAnotherResource() is do
+   /* operation testLoadSaveFileUsingAnotherResource() is do
 		var rep : EMFRepository init EMFRepository.new
 		var res1 : EMFResource
 		var res2 : EMFResource
@@ -152,7 +164,7 @@ class Main inherits kermeta::kunit::TestCase
     	res3.load
     	assertTrueWithMsg(res3.instances.size >=1, "testLoadSaveFileUsingAnotherResource didn't save the expected number of element in the target model")
         
-	end
+	end*/
  
 }
 

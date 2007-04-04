@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.7 2007-03-16 15:26:58 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.8 2007-04-04 13:51:43 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -47,7 +47,7 @@ public class JunitTestSuite extends TestSuite {
 		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
         	"../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
 		
-		StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
+		StdLibKermetaUnitHelper.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
 		
 		File file = new File("uri.map");
 		if (file.exists())

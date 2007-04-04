@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.17 2006-10-25 08:30:14 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.18 2007-04-04 13:51:43 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -42,7 +42,7 @@ public class RunJunitFactory implements Test {
     
    // private String unit_uri;
     
-    public KermetaUnit root_unit;
+    public KermetaUnit unit;
     
     /**
      * 
@@ -60,7 +60,7 @@ public class RunJunitFactory implements Test {
     public Test addTestsForUnit(String unit_uri) {
 
         
-        if(root_unit == null) {
+       /* if(root_unit == null) {
         	StdLibKermetaUnitHelper.unloadStdLib();
         	KermetaUnitFactory.resetDefaultLoader();
             root_unit = StdLibKermetaUnitHelper.getKermetaUnit();
@@ -69,10 +69,11 @@ public class RunJunitFactory implements Test {
         //KermetaUnitFactory.resetDefaultLoader(); // each test must be run in its own environment
         //KermetaUnitFactory.
         KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
-
+**/
         
-        
-        
+    	unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
+    	TypeCheckerContext.initializeTypeChecker(unit);
+    	
         try {
             
             unit.load();
@@ -80,7 +81,7 @@ public class RunJunitFactory implements Test {
         
             // copy imported unit to the root unit
             // DVK: needed to make sure the seamlaess java works ...
-            root_unit.importedUnits.addAll(unit.importedUnits);
+           //StdLibKermetaUnitHelper.getKermetaUnit().importedUnits.addAll(unit.importedUnits);
             
             if (unit.messages.hasError()) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
