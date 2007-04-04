@@ -18,5 +18,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.editors,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.model.editor,
- org.eclipse.ui
+ org.eclipse.ui,
+ fr.irisa.triskell.kermeta.io
 Eclipse-LazyStart: true
