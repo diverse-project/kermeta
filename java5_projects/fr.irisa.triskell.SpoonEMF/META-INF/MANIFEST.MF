@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SpoonEMF
-Bundle-SymbolicName: SpoonEMFTest;singleton:=true
+Bundle-SymbolicName: fr.irisa.triskell.SpoonEMF;singleton:=true
 Bundle-Version: 1.0.8
 Bundle-ClassPath: bin/,
  lib/spoon.jar,
