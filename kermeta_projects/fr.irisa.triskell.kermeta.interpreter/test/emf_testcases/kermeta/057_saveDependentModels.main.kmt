@@ -1,0 +1,106 @@
+@mainClass "save_DependentModels::Main"
+@mainOperation "main"
+
+package save_DependentModels;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelA.ecore"
+require "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelB.ecore"
+//require "057_ModelA.ecore"
+//require "057_ModelB.ecore"
+
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+using modelA
+using modelB
+
+
+class Main inherits TestCase {
+	attribute aMMdlUri : String
+	attribute bMMdlUri : String
+	attribute aMdlUri : String
+	attribute bMdlUri : String
+
+	/**
+	 *
+	 */
+	operation main() is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		stdio.writeln("--- save_dependent_models END ---")
+	end
+
+	/**
+	 *
+	 */
+	operation setUp() is do
+		aMMdlUri := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelA.ecore"
+		bMMdlUri := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelB.ecore"
+		aMdlUri  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/057_a.xmi"
+		bMdlUri  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/057_b.xmi"
+
+		//aMMdlUri := "057_ModelA.ecore"
+		//bMMdlUri := "057_ModelB.ecore"
+		//aMdlUri := "057_a.xmi"
+		//bMdlUri := "057_b.xmi"
+	end
+
+
+	/**
+	 *
+	 */
+	operation testSaveDependentModels() is do
+		var emfRep1 : EMFRepository init EMFRepository.new
+
+		// Create ModelA resource
+		stdio.writeln("Create ModelA resource")
+		var res_a : EMFResource
+		res_a ?= emfRep1.createResource(aMdlUri, aMMdlUri)
+
+		// Create ModelB resource
+		stdio.writeln("Create ModelB resource")
+		var res_b : EMFResource
+		res_b ?= emfRep1.createResource(bMdlUri, bMMdlUri)
+
+		// Create ModelB
+		stdio.writeln("Create ModelB")
+		var mdl_b : ModelB init ModelB.new
+		mdl_b.name := "test_model_b"
+		res_b.instances.add(mdl_b)
+
+		// Create ModelA
+		stdio.writeln("Create ModelA")
+		var mdl_a : ModelA init ModelA.new
+		mdl_a.name := "test_model_a"
+		mdl_a.b_ref := mdl_b
+		res_a.instances.add(mdl_a)
+
+		// Save ModelB
+		stdio.writeln("Save ModelB")
+		res_b.save
+
+		// Save ModelA
+		stdio.writeln("Save ModelA")
+		res_a.save
+
+
+		// Create new resource
+		var emfRep2 : EMFRepository init EMFRepository.new
+		mdl_a := void
+		var newRes_a : EMFResource
+		newRes_a ?= emfRep2.createResource(aMdlUri, aMMdlUri)
+
+		// Load ModelA
+		newRes_a.load
+		mdl_a ?= newRes_a.instances.one
+		stdio.writeln("ModelA loaded as " + mdl_a.toString)
+
+		// Check equality
+		assert( mdl_a.b_ref.name == "test_model_b" )
+	end
+}
+
