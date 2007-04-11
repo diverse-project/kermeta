@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceHelper.java,v 1.3 2007-04-04 13:27:31 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.4 2007-04-11 16:03:29 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -85,7 +85,14 @@ public class ResourceHelper {
 	
 	
 	static public IFile getIFileFromAbsoluteName(String absoluteName) {
-		String relativeName = absoluteName.replaceFirst( "file:" + root.getLocation().toString(), "");
+		String relativeName = "";
+		// Windows compatibility... grrrrrrr
+		absoluteName.contains("file:/" + root.getLocation().toString());
+		if ( absoluteName.matches("file:/.:/.+") ) {
+			String rootPath = "file:/" + root.getLocation().toString().replaceAll(" ", "%20");
+			relativeName = absoluteName.replaceFirst(rootPath, "");
+		} else
+			relativeName = absoluteName.replaceFirst( "file:" + root.getLocation().toString(), "");
 		return getIFile(relativeName);
 	}
 	
