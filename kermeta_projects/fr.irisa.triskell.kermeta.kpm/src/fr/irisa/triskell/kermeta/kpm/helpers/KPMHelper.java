@@ -1,6 +1,7 @@
 package fr.irisa.triskell.kermeta.kpm.helpers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -171,6 +172,7 @@ public class KPMHelper {
 		}
 		Unit newUnit = KpmFactory.eINSTANCE.createUnit();
 		newUnit.setValue(value);
+		newUnit.setLastTimeModified( new Date(0) );
 		kpm.getUnits().add(newUnit);
 		return newUnit;
 	}

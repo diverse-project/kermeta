@@ -74,9 +74,6 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor {
 		case IResource.FILE:
 			if ( (resource.getFileExtension() != null) && resource.getFileExtension().equals("kmt") ) {
 				Unit unit = KPMHelper.getOrCreateUnit(currentProject.getKpm(), resource.getFullPath().toString());
-				unit.setValue(resource.getFullPath().toString());
-				unit.setLastTimeModified( new Date(0) );
-				currentProject.getKpm().getUnits().add(unit);
 				KPMHelper.addCloseDependencyOnKMTFile(currentProject.getKpm(), unit);
 				KPMHelper.addOpenDependencyOnKMTFile(currentProject.getKpm(), unit);
 				KPMHelper.addUpdateDependencyOnKMTFile(currentProject.getKpm(), unit);
