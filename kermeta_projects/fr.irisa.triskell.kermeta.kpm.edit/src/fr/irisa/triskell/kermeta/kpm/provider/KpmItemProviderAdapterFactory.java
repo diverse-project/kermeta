@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmItemProviderAdapterFactory.java,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ * $Id: KpmItemProviderAdapterFactory.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -76,94 +76,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.AbstractFile} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AbstractFileItemProvider abstractFileItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.AbstractFile}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createAbstractFileAdapter() {
-		if (abstractFileItemProvider == null) {
-			abstractFileItemProvider = new AbstractFileItemProvider(this);
-		}
-
-		return abstractFileItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.AbstractDirectory} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AbstractDirectoryItemProvider abstractDirectoryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.AbstractDirectory}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createAbstractDirectoryAdapter() {
-		if (abstractDirectoryItemProvider == null) {
-			abstractDirectoryItemProvider = new AbstractDirectoryItemProvider(this);
-		}
-
-		return abstractDirectoryItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.AbstractProject} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AbstractProjectItemProvider abstractProjectItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.AbstractProject}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createAbstractProjectAdapter() {
-		if (abstractProjectItemProvider == null) {
-			abstractProjectItemProvider = new AbstractProjectItemProvider(this);
-		}
-
-		return abstractProjectItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.NameFilter} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected NameFilterItemProvider nameFilterItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.NameFilter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createNameFilterAdapter() {
-		if (nameFilterItemProvider == null) {
-			nameFilterItemProvider = new NameFilterItemProvider(this);
-		}
-
-		return nameFilterItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Dependency} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -186,179 +98,25 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.DependencyType} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.In} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DependencyTypeItemProvider dependencyTypeItemProvider;
+	protected InItemProvider inItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.In}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createDependencyTypeAdapter() {
-		if (dependencyTypeItemProvider == null) {
-			dependencyTypeItemProvider = new DependencyTypeItemProvider(this);
+	public Adapter createInAdapter() {
+		if (inItemProvider == null) {
+			inItemProvider = new InItemProvider(this);
 		}
 
-		return dependencyTypeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.DependencyEvent} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DependencyEventItemProvider dependencyEventItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyEvent}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createDependencyEventAdapter() {
-		if (dependencyEventItemProvider == null) {
-			dependencyEventItemProvider = new DependencyEventItemProvider(this);
-		}
-
-		return dependencyEventItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.ExistFilter} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ExistFilterItemProvider existFilterItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.ExistFilter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createExistFilterAdapter() {
-		if (existFilterItemProvider == null) {
-			existFilterItemProvider = new ExistFilterItemProvider(this);
-		}
-
-		return existFilterItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.TypeFilter} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeFilterItemProvider typeFilterItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.TypeFilter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createTypeFilterAdapter() {
-		if (typeFilterItemProvider == null) {
-			typeFilterItemProvider = new TypeFilterItemProvider(this);
-		}
-
-		return typeFilterItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.File} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FileItemProvider fileItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.File}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createFileAdapter() {
-		if (fileItemProvider == null) {
-			fileItemProvider = new FileItemProvider(this);
-		}
-
-		return fileItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Directory} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DirectoryItemProvider directoryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Directory}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createDirectoryAdapter() {
-		if (directoryItemProvider == null) {
-			directoryItemProvider = new DirectoryItemProvider(this);
-		}
-
-		return directoryItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Project} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ProjectItemProvider projectItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Project}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createProjectAdapter() {
-		if (projectItemProvider == null) {
-			projectItemProvider = new ProjectItemProvider(this);
-		}
-
-		return projectItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.KPM} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected KPMItemProvider kpmItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.KPM}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createKPMAdapter() {
-		if (kpmItemProvider == null) {
-			kpmItemProvider = new KPMItemProvider(this);
-		}
-
-		return kpmItemProvider;
+		return inItemProvider;
 	}
 
 	/**
@@ -384,69 +142,311 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.And} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Out} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AndItemProvider andItemProvider;
+	protected OutItemProvider outItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.And}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Out}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createAndAdapter() {
-		if (andItemProvider == null) {
-			andItemProvider = new AndItemProvider(this);
+	public Adapter createOutAdapter() {
+		if (outItemProvider == null) {
+			outItemProvider = new OutItemProvider(this);
 		}
 
-		return andItemProvider;
+		return outItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Or} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.ORExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OrItemProvider orItemProvider;
+	protected ORExpressionItemProvider orExpressionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Or}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.ORExpression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createOrAdapter() {
-		if (orItemProvider == null) {
-			orItemProvider = new OrItemProvider(this);
+	public Adapter createORExpressionAdapter() {
+		if (orExpressionItemProvider == null) {
+			orExpressionItemProvider = new ORExpressionItemProvider(this);
 		}
 
-		return orItemProvider;
+		return orExpressionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Expression} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.ANDExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExpressionItemProvider expressionItemProvider;
+	protected ANDExpressionItemProvider andExpressionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Expression}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.ANDExpression}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createExpressionAdapter() {
-		if (expressionItemProvider == null) {
-			expressionItemProvider = new ExpressionItemProvider(this);
+	public Adapter createANDExpressionAdapter() {
+		if (andExpressionItemProvider == null) {
+			andExpressionItemProvider = new ANDExpressionItemProvider(this);
 		}
 
-		return expressionItemProvider;
+		return andExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.FilterExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FilterExpressionItemProvider filterExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.FilterExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createFilterExpressionAdapter() {
+		if (filterExpressionItemProvider == null) {
+			filterExpressionItemProvider = new FilterExpressionItemProvider(this);
+		}
+
+		return filterExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.TypeFilter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeFilterItemProvider typeFilterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.TypeFilter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createTypeFilterAdapter() {
+		if (typeFilterItemProvider == null) {
+			typeFilterItemProvider = new TypeFilterItemProvider(this);
+		}
+
+		return typeFilterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.NameFilter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NameFilterItemProvider nameFilterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.NameFilter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createNameFilterAdapter() {
+		if (nameFilterItemProvider == null) {
+			nameFilterItemProvider = new NameFilterItemProvider(this);
+		}
+
+		return nameFilterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Type} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeItemProvider typeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Type}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createTypeAdapter() {
+		if (typeItemProvider == null) {
+			typeItemProvider = new TypeItemProvider(this);
+		}
+
+		return typeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.NullExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NullExpressionItemProvider nullExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.NullExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createNullExpressionAdapter() {
+		if (nullExpressionItemProvider == null) {
+			nullExpressionItemProvider = new NullExpressionItemProvider(this);
+		}
+
+		return nullExpressionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Event} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EventItemProvider eventItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Event}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createEventAdapter() {
+		if (eventItemProvider == null) {
+			eventItemProvider = new EventItemProvider(this);
+		}
+
+		return eventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.KPM} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected KPMItemProvider kpmItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.KPM}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createKPMAdapter() {
+		if (kpmItemProvider == null) {
+			kpmItemProvider = new KPMItemProvider(this);
+		}
+
+		return kpmItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Unit} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UnitItemProvider unitItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Unit}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createUnitAdapter() {
+		if (unitItemProvider == null) {
+			unitItemProvider = new UnitItemProvider(this);
+		}
+
+		return unitItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.ExistFilter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExistFilterItemProvider existFilterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.ExistFilter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createExistFilterAdapter() {
+		if (existFilterItemProvider == null) {
+			existFilterItemProvider = new ExistFilterItemProvider(this);
+		}
+
+		return existFilterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.DependencyType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DependencyTypeItemProvider dependencyTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createDependencyTypeAdapter() {
+		if (dependencyTypeItemProvider == null) {
+			dependencyTypeItemProvider = new DependencyTypeItemProvider(this);
+		}
+
+		return dependencyTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DependencyEntryItemProvider dependencyEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createDependencyEntryAdapter() {
+		if (dependencyEntryItemProvider == null) {
+			dependencyEntryItemProvider = new DependencyEntryItemProvider(this);
+		}
+
+		return dependencyEntryItemProvider;
 	}
 
 	/**
@@ -545,23 +545,23 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * @generated
 	 */
 	public void dispose() {
-		if (abstractFileItemProvider != null) abstractFileItemProvider.dispose();
-		if (abstractDirectoryItemProvider != null) abstractDirectoryItemProvider.dispose();
-		if (abstractProjectItemProvider != null) abstractProjectItemProvider.dispose();
-		if (nameFilterItemProvider != null) nameFilterItemProvider.dispose();
 		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
-		if (dependencyTypeItemProvider != null) dependencyTypeItemProvider.dispose();
-		if (dependencyEventItemProvider != null) dependencyEventItemProvider.dispose();
-		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
-		if (typeFilterItemProvider != null) typeFilterItemProvider.dispose();
-		if (fileItemProvider != null) fileItemProvider.dispose();
-		if (directoryItemProvider != null) directoryItemProvider.dispose();
-		if (projectItemProvider != null) projectItemProvider.dispose();
-		if (kpmItemProvider != null) kpmItemProvider.dispose();
+		if (inItemProvider != null) inItemProvider.dispose();
 		if (actionItemProvider != null) actionItemProvider.dispose();
-		if (andItemProvider != null) andItemProvider.dispose();
-		if (orItemProvider != null) orItemProvider.dispose();
-		if (expressionItemProvider != null) expressionItemProvider.dispose();
+		if (outItemProvider != null) outItemProvider.dispose();
+		if (orExpressionItemProvider != null) orExpressionItemProvider.dispose();
+		if (andExpressionItemProvider != null) andExpressionItemProvider.dispose();
+		if (filterExpressionItemProvider != null) filterExpressionItemProvider.dispose();
+		if (typeFilterItemProvider != null) typeFilterItemProvider.dispose();
+		if (nameFilterItemProvider != null) nameFilterItemProvider.dispose();
+		if (typeItemProvider != null) typeItemProvider.dispose();
+		if (nullExpressionItemProvider != null) nullExpressionItemProvider.dispose();
+		if (eventItemProvider != null) eventItemProvider.dispose();
+		if (kpmItemProvider != null) kpmItemProvider.dispose();
+		if (unitItemProvider != null) unitItemProvider.dispose();
+		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
+		if (dependencyTypeItemProvider != null) dependencyTypeItemProvider.dispose();
+		if (dependencyEntryItemProvider != null) dependencyEntryItemProvider.dispose();
 	}
 
 }

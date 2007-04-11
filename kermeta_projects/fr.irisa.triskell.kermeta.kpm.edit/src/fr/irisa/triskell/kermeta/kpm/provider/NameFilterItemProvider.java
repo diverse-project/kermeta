@@ -2,15 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NameFilterItemProvider.java,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ * $Id: NameFilterItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
-
-import fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -63,48 +61,25 @@ public class NameFilterItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRegexInPropertyDescriptor(object);
-			addRegexOutPropertyDescriptor(object);
+			addRegexPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Regex In feature.
+	 * This adds a property descriptor for the Regex feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRegexInPropertyDescriptor(Object object) {
+	protected void addRegexPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_NameFilter_regexIn_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NameFilter_regexIn_feature", "_UI_NameFilter_type"),
-				 KpmPackage.Literals.NAME_FILTER__REGEX_IN,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Regex Out feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRegexOutPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_NameFilter_regexOut_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_NameFilter_regexOut_feature", "_UI_NameFilter_type"),
-				 KpmPackage.Literals.NAME_FILTER__REGEX_OUT,
+				 getString("_UI_NameFilter_regex_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NameFilter_regex_feature", "_UI_NameFilter_type"),
+				 KpmPackage.Literals.NAME_FILTER__REGEX,
 				 true,
 				 false,
 				 false,
@@ -130,7 +105,7 @@ public class NameFilterItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((NameFilter)object).getRegexIn();
+		String label = ((NameFilter)object).getRegex();
 		return label == null || label.length() == 0 ?
 			getString("_UI_NameFilter_type") :
 			getString("_UI_NameFilter_type") + " " + label;
@@ -147,8 +122,7 @@ public class NameFilterItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(NameFilter.class)) {
-			case KpmPackage.NAME_FILTER__REGEX_IN:
-			case KpmPackage.NAME_FILTER__REGEX_OUT:
+			case KpmPackage.NAME_FILTER__REGEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -173,7 +147,7 @@ public class NameFilterItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KPMEditPlugin.INSTANCE;
+		return KpmEditPlugin.INSTANCE;
 	}
 
 }

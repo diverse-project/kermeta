@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMItemProvider.java,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ * $Id: KPMItemProvider.java,v 1.2 2007-04-11 07:19:56 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -10,8 +10,6 @@ package fr.irisa.triskell.kermeta.kpm.provider;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-
-import fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -80,13 +78,13 @@ public class KPMItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.KPM__EVENTS);
-			childrenFeatures.add(KpmPackage.Literals.KPM__DEPENDENCIES);
 			childrenFeatures.add(KpmPackage.Literals.KPM__ACTIONS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__FILTERS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__TYPES);
-			childrenFeatures.add(KpmPackage.Literals.KPM__EXPRESSIONS);
+			childrenFeatures.add(KpmPackage.Literals.KPM__DEPENDENCIES);
+			childrenFeatures.add(KpmPackage.Literals.KPM__EVENTS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__UNITS);
+			childrenFeatures.add(KpmPackage.Literals.KPM__DEPENDENCY_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -134,13 +132,13 @@ public class KPMItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(KPM.class)) {
-			case KpmPackage.KPM__EVENTS:
-			case KpmPackage.KPM__DEPENDENCIES:
 			case KpmPackage.KPM__ACTIONS:
 			case KpmPackage.KPM__FILTERS:
 			case KpmPackage.KPM__TYPES:
-			case KpmPackage.KPM__EXPRESSIONS:
+			case KpmPackage.KPM__DEPENDENCIES:
+			case KpmPackage.KPM__EVENTS:
 			case KpmPackage.KPM__UNITS:
+			case KpmPackage.KPM__DEPENDENCY_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -159,18 +157,13 @@ public class KPMItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.KPM__EVENTS,
-				 KpmFactory.eINSTANCE.createDependencyEvent()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__DEPENDENCIES,
-				 KpmFactory.eINSTANCE.createDependency()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(KpmPackage.Literals.KPM__ACTIONS,
 				 KpmFactory.eINSTANCE.createAction()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.KPM__FILTERS,
+				 KpmFactory.eINSTANCE.createTypeFilter()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -184,33 +177,28 @@ public class KPMItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.KPM__FILTERS,
-				 KpmFactory.eINSTANCE.createTypeFilter()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(KpmPackage.Literals.KPM__TYPES,
+				 KpmFactory.eINSTANCE.createType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.KPM__DEPENDENCIES,
+				 KpmFactory.eINSTANCE.createDependency()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.KPM__EVENTS,
+				 KpmFactory.eINSTANCE.createEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.KPM__UNITS,
+				 KpmFactory.eINSTANCE.createUnit()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.KPM__DEPENDENCY_TYPES,
 				 KpmFactory.eINSTANCE.createDependencyType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__EXPRESSIONS,
-				 KpmFactory.eINSTANCE.createExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__UNITS,
-				 KpmFactory.eINSTANCE.createFile()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__UNITS,
-				 KpmFactory.eINSTANCE.createDirectory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.KPM__UNITS,
-				 KpmFactory.eINSTANCE.createProject()));
 	}
 
 	/**
@@ -220,7 +208,7 @@ public class KPMItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KPMEditPlugin.INSTANCE;
+		return KpmEditPlugin.INSTANCE;
 	}
 
 }

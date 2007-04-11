@@ -2,13 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: NestedExpressionItemProvider.java,v 1.1 2007-04-11 07:19:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
-import fr.irisa.triskell.kermeta.kpm.Action;
+import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NestedExpression;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,24 +19,21 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.Action} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.NestedExpression} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ActionItemProvider
-	extends ItemProviderAdapter
+public class NestedExpressionItemProvider
+	extends ExpressionItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -48,7 +46,7 @@ public class ActionItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ActionItemProvider(AdapterFactory adapterFactory) {
+	public NestedExpressionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,41 +60,24 @@ public class ActionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addExtensionPointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Extension Point feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addExtensionPointPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Action_extensionPoint_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Action_extensionPoint_feature", "_UI_Action_type"),
-				 KpmPackage.Literals.ACTION__EXTENSION_POINT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns Action.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Action"));
+	public Collection getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(KpmPackage.Literals.NESTED_EXPRESSION__EXPRESSION);
+		}
+		return childrenFeatures;
 	}
 
 	/**
@@ -106,10 +87,7 @@ public class ActionItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((Action)object).getExtensionPoint();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Action_type") :
-			getString("_UI_Action_type") + " " + label;
+		return getString("_UI_NestedExpression_type");
 	}
 
 	/**
@@ -122,9 +100,9 @@ public class ActionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Action.class)) {
-			case KpmPackage.ACTION__EXTENSION_POINT:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+		switch (notification.getFeatureID(NestedExpression.class)) {
+			case KpmPackage.NESTED_EXPRESSION__EXPRESSION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -139,6 +117,16 @@ public class ActionItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__EXPRESSION,
+				 KpmFactory.eINSTANCE.createFilterExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.NESTED_EXPRESSION__EXPRESSION,
+				 KpmFactory.eINSTANCE.createNullExpression()));
 	}
 
 	/**

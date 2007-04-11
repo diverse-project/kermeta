@@ -5,14 +5,14 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ $Id: plugin.xml,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
 -->
 
 <plugin>
     
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
-       uri = "plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore" 
+       uri = "http://kpm" 
        class = "fr.irisa.triskell.kermeta.kpm.provider.KpmItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

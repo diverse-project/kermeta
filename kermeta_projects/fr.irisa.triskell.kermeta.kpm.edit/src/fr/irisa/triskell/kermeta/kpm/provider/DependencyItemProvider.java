@@ -2,15 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyItemProvider.java,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ * $Id: DependencyItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
 import fr.irisa.triskell.kermeta.kpm.Dependency;
+import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-
-import fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,6 +18,8 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -64,36 +65,11 @@ public class DependencyItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTypePropertyDescriptor(object);
 			addEventPropertyDescriptor(object);
-			addActionsPropertyDescriptor(object);
-			addInPropertyDescriptor(object);
-			addOutsPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Type feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Dependency_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_type_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -110,72 +86,6 @@ public class DependencyItemProvider
 				 getString("_UI_Dependency_event_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_event_feature", "_UI_Dependency_type"),
 				 KpmPackage.Literals.DEPENDENCY__EVENT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Actions feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addActionsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Dependency_actions_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_actions_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__ACTIONS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the In feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Dependency_in_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_in_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__IN,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Outs feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOutsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Dependency_outs_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_outs_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__OUTS,
 				 true,
 				 false,
 				 true,
@@ -204,6 +114,57 @@ public class DependencyItemProvider
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Dependency_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_type_feature", "_UI_Dependency_type"),
+				 KpmPackage.Literals.DEPENDENCY__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Collection getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(KpmPackage.Literals.DEPENDENCY__IN);
+			childrenFeatures.add(KpmPackage.Literals.DEPENDENCY__OUTS);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -243,6 +204,10 @@ public class DependencyItemProvider
 			case KpmPackage.DEPENDENCY__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.DEPENDENCY__OUTS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -256,6 +221,16 @@ public class DependencyItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.DEPENDENCY__IN,
+				 KpmFactory.eINSTANCE.createIn()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(KpmPackage.Literals.DEPENDENCY__OUTS,
+				 KpmFactory.eINSTANCE.createOut()));
 	}
 
 	/**
@@ -265,7 +240,7 @@ public class DependencyItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KPMEditPlugin.INSTANCE;
+		return KpmEditPlugin.INSTANCE;
 	}
 
 }

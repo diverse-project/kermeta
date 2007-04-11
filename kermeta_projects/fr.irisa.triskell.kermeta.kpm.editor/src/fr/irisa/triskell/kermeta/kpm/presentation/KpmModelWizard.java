@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmModelWizard.java,v 1.1 2007-01-11 16:02:53 ftanguy Exp $
+ * $Id: KpmModelWizard.java,v 1.2 2007-04-11 07:21:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.presentation;
 
@@ -73,10 +73,8 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin;
+import fr.irisa.triskell.kermeta.kpm.provider.KpmEditPlugin;
 
-
-import fr.irisa.triskell.kermeta.kpm.editor.plugin.KPMEditorPlugin;
 
 import org.eclipse.core.runtime.Path;
 
@@ -161,8 +159,8 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
-		setWindowTitle(KPMEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(KPMEditorPlugin.INSTANCE.getImage("full/wizban/NewKpm")));
+		setWindowTitle(KpmEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(KpmEditorPlugin.INSTANCE.getImage("full/wizban/NewKpm")));
 	}
 
 	/**
@@ -244,7 +242,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 							resource.save(options);
 						}
 						catch (Exception exception) {
-							KPMEditorPlugin.INSTANCE.log(exception);
+							KpmEditorPlugin.INSTANCE.log(exception);
 						}
 						finally {
 							progressMonitor.done();
@@ -277,14 +275,14 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 					 workbench.getEditorRegistry().getDefaultEditor(modelFile.getFullPath().toString()).getId());
 			}
 			catch (PartInitException exception) {
-				MessageDialog.openError(workbenchWindow.getShell(), KPMEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
+				MessageDialog.openError(workbenchWindow.getShell(), KpmEditorPlugin.INSTANCE.getString("_UI_OpenEditorError_label"), exception.getMessage());
 				return false;
 			}
 
 			return true;
 		}
 		catch (Exception exception) {
-			KPMEditorPlugin.INSTANCE.log(exception);
+			KpmEditorPlugin.INSTANCE.log(exception);
 			return false;
 		}
 	}
@@ -316,10 +314,10 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".kpm".
 				//
-				String requiredExt = KPMEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension");
+				String requiredExt = KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension");
 				String enteredExt = new Path(getFileName()).getFileExtension();
 				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
-					setErrorMessage(KPMEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
+					setErrorMessage(KpmEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
 					return false;
 				}
 				else {
@@ -401,7 +399,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 
 			Label containerLabel = new Label(composite, SWT.LEFT);
 			{
-				containerLabel.setText(KPMEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
+				containerLabel.setText(KpmEditorPlugin.INSTANCE.getString("_UI_ModelObject"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -427,7 +425,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 
 			Label encodingLabel = new Label(composite, SWT.LEFT);
 			{
-				encodingLabel.setText(KPMEditorPlugin.INSTANCE.getString("_UI_XMLEncoding"));
+				encodingLabel.setText(KpmEditorPlugin.INSTANCE.getString("_UI_XMLEncoding"));
 
 				GridData data = new GridData();
 				data.horizontalAlignment = GridData.FILL;
@@ -526,10 +524,10 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		 */
 		protected String getLabel(String typeName) {
 			try {
-				return KPMEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
+				return KpmEditPlugin.INSTANCE.getString("_UI_" + typeName + "_type");
 			}
 			catch(MissingResourceException mre) {
-				KPMEditorPlugin.INSTANCE.log(mre);
+				KpmEditorPlugin.INSTANCE.log(mre);
 			}
 			return typeName;
 		}
@@ -542,7 +540,7 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		protected Collection getEncodings() {
 			if (encodings == null) {
 				encodings = new ArrayList();
-				for (StringTokenizer stringTokenizer = new StringTokenizer(KPMEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
+				for (StringTokenizer stringTokenizer = new StringTokenizer(KpmEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}
 			}
@@ -560,9 +558,9 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 		// Create a page, set the title, and the initial model file name.
 		//
 		newFileCreationPage = new KpmModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(KPMEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_label"));
-		newFileCreationPage.setDescription(KPMEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_description"));
-		newFileCreationPage.setFileName(KPMEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase") + "." + KPMEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension"));
+		newFileCreationPage.setTitle(KpmEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_label"));
+		newFileCreationPage.setDescription(KpmEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_description"));
+		newFileCreationPage.setFileName(KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase") + "." + KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension"));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -588,8 +586,8 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = KPMEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = KPMEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension");
+					String defaultModelBaseFilename = KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameDefaultBase");
+					String defaultModelFilenameExtension = KpmEditorPlugin.INSTANCE.getString("_UI_KpmEditorFilenameExtension");
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
@@ -599,8 +597,8 @@ public class KpmModelWizard extends Wizard implements INewWizard {
 			}
 		}
 		initialObjectCreationPage = new KpmModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(KPMEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_label"));
-		initialObjectCreationPage.setDescription(KPMEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
+		initialObjectCreationPage.setTitle(KpmEditorPlugin.INSTANCE.getString("_UI_KpmModelWizard_label"));
+		initialObjectCreationPage.setDescription(KpmEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}
 

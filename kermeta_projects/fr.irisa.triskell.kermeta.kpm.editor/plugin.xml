@@ -5,13 +5,13 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.5 2007-01-29 10:15:44 dvojtise Exp $
+ $Id: plugin.xml,v 1.6 2007-04-11 07:21:10 ftanguy Exp $
 -->
 
 <plugin>
 
 
- <!--  <extension
+  <extension
     point = "org.eclipse.ui.newWizards">
     <category
       id = "org.eclipse.emf.ecore.Wizard.category.ID"
@@ -26,7 +26,7 @@
       <description>%_UI_KpmModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
     </wizard>
-  </extension>-->
+  </extension>
 
   <extension point = "org.eclipse.ui.editors">
     <editor
@@ -37,27 +37,5 @@
         class = "fr.irisa.triskell.kermeta.kpm.presentation.KpmEditor" 
         contributorClass="fr.irisa.triskell.kermeta.kpm.presentation.KpmActionBarContributor" >
     </editor>
-  </extension>
-  <extension
-        point="org.eclipse.ui.popupMenus">
-     <objectContribution
-           adaptable="false"
-           id="fr.irisa.triskell.kermeta.kpm.kermetaProjectContribution"
-           objectClass="org.eclipse.core.resources.IProject">
-        <action
-              class="fr.irisa.triskell.kermeta.kpm.editor.plugin.OpenKPMEditor"
-              icon="icons/kermetaproject.gif"
-              id="fr.irisa.triskell.kermeta.kpm.openKPMEditor"
-              label="Kermeta Project Settings"
-              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1">
-        </action>
-        <menu
-              id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-              label="Kermeta"
-              path="additions"/>
-        <filter
-              name="projectNature"
-              value="fr.irisa.triskell.kermeta.KermetaNature"/>
-     </objectContribution>
-  </extension>
+  </extension>    
 </plugin>

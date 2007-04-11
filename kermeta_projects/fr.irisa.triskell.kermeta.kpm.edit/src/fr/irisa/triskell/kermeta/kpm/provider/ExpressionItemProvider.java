@@ -2,16 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionItemProvider.java,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ * $Id: ExpressionItemProvider.java,v 1.2 2007-04-11 07:19:56 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
-
-import fr.irisa.triskell.kermeta.kpm.Expression;
-import fr.irisa.triskell.kermeta.kpm.KpmFactory;
-import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-
-import fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,7 +20,7 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
  * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.Expression} object.
@@ -35,7 +29,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ExpressionItemProvider
-	extends AbstractExpressionItemProvider
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -67,32 +61,13 @@ public class ExpressionItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Collection getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.EXPRESSION__SUB_EXPRESSIONS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((Expression)object).getId();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Expression_type") :
-			getString("_UI_Expression_type") + " " + label;
+		return getString("_UI_Expression_type");
 	}
 
 	/**
@@ -104,12 +79,6 @@ public class ExpressionItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(Expression.class)) {
-			case KpmPackage.EXPRESSION__SUB_EXPRESSIONS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -122,16 +91,6 @@ public class ExpressionItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.EXPRESSION__SUB_EXPRESSIONS,
-				 KpmFactory.eINSTANCE.createAnd()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.EXPRESSION__SUB_EXPRESSIONS,
-				 KpmFactory.eINSTANCE.createOr()));
 	}
 
 	/**
@@ -141,7 +100,7 @@ public class ExpressionItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KPMEditPlugin.INSTANCE;
+		return KpmEditPlugin.INSTANCE;
 	}
 
 }

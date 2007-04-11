@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmEditor.java,v 1.2 2007-01-12 14:59:59 ftanguy Exp $
+ * $Id: KpmEditor.java,v 1.3 2007-04-11 07:21:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.presentation;
 
@@ -157,10 +157,6 @@ import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import fr.irisa.triskell.kermeta.kpm.provider.KpmItemProviderAdapterFactory;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.workspace.KermetaWorkspace;
-
-import fr.irisa.triskell.kermeta.kpm.editor.plugin.KPMEditorPlugin;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -174,20 +170,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 public class KpmEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
-	
-	
-	/**
-	 * @generated NOT
-	 */
-	private KermetaProject project;
-	
-	/**
-	 * @generated NOT
-	 */
-	public void setProject(KermetaProject project) {
-		this.project = project;
-	}
-	
 	/**
 	 * This keeps track of the editing domain that is used to track all changes to the model.
 	 * <!-- begin-user-doc -->
@@ -536,7 +518,7 @@ public class KpmEditor
 						}
 					}
 					catch (CoreException exception) {
-						KPMEditorPlugin.INSTANCE.log(exception);
+						KpmEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			}
@@ -648,7 +630,7 @@ public class KpmEditor
 					showTabs();
 				}
 				catch (PartInitException exception) {
-					KPMEditorPlugin.INSTANCE.log(exception);
+					KpmEditorPlugin.INSTANCE.log(exception);
 				}
 			}
 
@@ -659,7 +641,7 @@ public class KpmEditor
 						markerHelper.createMarkers(diagnostic);
 					}
 					catch (CoreException exception) {
-						KPMEditorPlugin.INSTANCE.log(exception);
+						KpmEditorPlugin.INSTANCE.log(exception);
 					}
 				}
 			}
@@ -688,7 +670,7 @@ public class KpmEditor
 	 */
 	public KpmEditor() {
 		super();
-		
+
 		// Create an adapter factory that yields item providers.
 		//
 		List factories = new ArrayList();
@@ -909,15 +891,12 @@ public class KpmEditor
 	 * This is the method called to load a resource into the editing domain's resource set based on the editor's input.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public void createModel() {
 		// Assumes that the input is a file object.
 		//
 		IFileEditorInput modelFile = (IFileEditorInput)getEditorInput();
-		
-		project = KermetaWorkspace.getInstance().getKermetaProject( modelFile.getFile().getProject() );
-		
 		URI resourceURI = URI.createPlatformResourceURI(modelFile.getFile().getFullPath().toString());;
 		Exception exception = null;
 		Resource resource = null;
@@ -1408,7 +1387,7 @@ public class KpmEditor
 	 * This is for implementing {@link IEditorPart} and simply saves the model file.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public void doSave(IProgressMonitor progressMonitor) {
 		// Do the work within an operation because this is a long running activity that modifies the workbench.
@@ -1451,11 +1430,10 @@ public class KpmEditor
 		catch (Exception exception) {
 			// Something went wrong that shouldn't.
 			//
-			KPMEditorPlugin.INSTANCE.log(exception);
+			KpmEditorPlugin.INSTANCE.log(exception);
 		}
 		updateProblemIndication = true;
 		updateProblemIndication();
-		project.reload();
 	}
 
 	/**
@@ -1542,7 +1520,7 @@ public class KpmEditor
 			}
 		}
 		catch (CoreException exception) {
-			KPMEditorPlugin.INSTANCE.log(exception);
+			KpmEditorPlugin.INSTANCE.log(exception);
 		}
 	}
 
@@ -1663,7 +1641,7 @@ public class KpmEditor
 	 * @generated
 	 */
 	private static String getString(String key) {
-		return KPMEditorPlugin.INSTANCE.getString(key);
+		return KpmEditorPlugin.INSTANCE.getString(key);
 	}
 
 	/**
@@ -1673,7 +1651,7 @@ public class KpmEditor
 	 * @generated
 	 */
 	private static String getString(String key, Object s1) {
-		return KPMEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
+		return KpmEditorPlugin.INSTANCE.getString(key, new Object [] { s1 });
 	}
 
 	/**

@@ -2,12 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FilterItemProvider.java,v 1.1 2007-01-11 16:05:00 ftanguy Exp $
+ * $Id: FilterItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
-
-import fr.irisa.triskell.kermeta.kpm.edit.plugin.KPMEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -102,7 +100,7 @@ public class FilterItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KPMEditPlugin.INSTANCE;
+		return KpmEditPlugin.INSTANCE;
 	}
 
 }
