@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<editorconfigurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:editorconfigurator="http://www.topcased.org/editorconfigurator/0.10" name="Super kpm editor" projectName="fr.irisa.triskell.kermeta.kpm.graphicaleditor" pluginVersion="0.0.1" provider="Irisa / INRIA" forceOverwrite="true" copyrightText="Irisa / INRIA">
-  <genModel href="Kpm.genmodel#/"/>
-</editorconfigurator:EditorConfiguration>
