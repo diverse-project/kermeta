@@ -86,7 +86,6 @@ public class KPMPreferencePage extends PreferencePage implements
 			KermetaProject project = (KermetaProject) selection.getFirstElement();
 			QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "applyRequireDependencies");
 			project.getValue().setPersistentProperty(key, String.valueOf(newValue) );
-		
 			
 			newValue = generateKM.getSelection();
 			selection = (IStructuredSelection) listViewer.getSelection();
@@ -107,6 +106,7 @@ public class KPMPreferencePage extends PreferencePage implements
 						}
 					}
 				}
+				project.getProjectUnit().receiveAsynchroneEvent("open", null);	
 			}
 				
 			else {
