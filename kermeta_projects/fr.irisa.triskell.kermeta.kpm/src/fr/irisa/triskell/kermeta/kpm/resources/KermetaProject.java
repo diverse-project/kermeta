@@ -81,7 +81,6 @@ public class KermetaProject {
 			kpm = KPMHelper.getDefaultKPM(project);
 			//kpm = KpmFactory.eINSTANCE.createKPM();
 			save();
-			file.refreshLocal(0, null);
 		} else {
 			load();
 		}
