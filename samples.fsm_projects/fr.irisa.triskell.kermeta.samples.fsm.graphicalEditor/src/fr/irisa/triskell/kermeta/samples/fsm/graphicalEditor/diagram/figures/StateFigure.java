@@ -6,16 +6,16 @@
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
 
 import org.eclipse.draw2d.Graphics;
-import org.topcased.draw2d.figures.BorderedLabel;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.topcased.draw2d.figures.BorderedLabel;
 
 /**
  * @generated NOT
  */
 public class StateFigure extends BorderedLabel {
-	
+
 	private static final int ROUND_CORNER = 10;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -40,4 +40,14 @@ public class StateFigure extends BorderedLabel {
 
 		graphics.drawRoundRectangle(outer, ROUND_CORNER, ROUND_CORNER);
 	}
+	
+    /**
+     * @see org.eclipse.draw2d.Shape#fillShape(org.eclipse.draw2d.Graphics)
+     * @generated NOT
+     */
+    protected void fillShape(Graphics graphics)
+    {
+        graphics.fillRoundRectangle(getBounds(), ROUND_CORNER, ROUND_CORNER);
+    }
+
 }
