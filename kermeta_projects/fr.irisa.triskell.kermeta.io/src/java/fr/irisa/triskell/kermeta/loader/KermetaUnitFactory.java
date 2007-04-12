@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.24 2007-04-04 13:58:28 ftanguy Exp $
+/* $Id: KermetaUnitFactory.java,v 1.25 2007-04-12 10:54:12 ftanguy Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -214,6 +214,10 @@ public class KermetaUnitFactory {
     	
     	System.out.println("Number of Kermeta Unit Unloaded : " + loadedUnits.size());
     	
+    	for (KermetaUnit unit : loadedUnits.values()) {
+    		if ( unit != StdLibKermetaUnitHelper.getKermetaUnit() )
+    			unit.unload();
+    	}
     	loadedUnits.clear();
     	KMUnit.clearRessourceSet();
     	KermetaUnit unit = StdLibKermetaUnitHelper.getKermetaUnit();
