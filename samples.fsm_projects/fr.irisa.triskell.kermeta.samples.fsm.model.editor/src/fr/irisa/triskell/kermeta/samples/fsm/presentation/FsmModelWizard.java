@@ -95,6 +95,13 @@ import org.eclipse.ui.PartInitException;
  */
 public class FsmModelWizard extends Wizard implements INewWizard {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

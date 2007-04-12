@@ -54,6 +54,13 @@ public class FsmActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * This keeps track of the active editor.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

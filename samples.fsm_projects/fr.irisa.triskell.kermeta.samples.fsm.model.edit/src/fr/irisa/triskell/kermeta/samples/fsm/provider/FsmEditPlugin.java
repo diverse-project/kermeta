@@ -18,6 +18,13 @@ import org.eclipse.emf.common.util.ResourceLocator;
  */
 public final class FsmEditPlugin extends EMFPlugin {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
