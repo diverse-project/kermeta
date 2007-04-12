@@ -11,9 +11,22 @@ require "../metamodels/050_MM_with_no_containment_tree.ecore"
 using kermeta::persistence
 using kermeta::standard
 using test_MM_with_no_containment_tree
+using kermeta::kunit
 
 class Main inherits kermeta::kunit::TestCase
 {
+
+	operation main () : Void is do
+		
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+		
+	end
+	
+	/**
+	 * test that it correctly load all the dependent element and that they are accessible from each other
+	 */
     operation testmain() : Void is do 
         var inputModel : Set<C1> init loadClassModel
         
@@ -69,9 +82,28 @@ class Main inherits kermeta::kunit::TestCase
        	end     
    end
    
-   
-   operation createSplittedModel() is do
-      var repository : EMFRepository init EMFRepository.new
+   /**
+    * Test that when loading each dependent file is loaded in resources that are visible in the 
+    * repository
+    * related to bug#3106
+    */
+   operation testResourceCreationwhenLoadingSplittedModel() is do
+      	var repository : EMFRepository init EMFRepository.new
+      	var resource : Resource init repository.createResource(
+   		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk1.xmi",
+   		"platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/050_MM_with_no_containment_tree.ecore")
+   		
+   		resource.load()      
+       
+        // this resource is dependent of 2 other resources
+        
+       	assertTrueWithMsg(repository.resources.size == 3,"found only "+ repository.resources.size.toString + " resource in repository instead of 3")
+       	assertTrueWithMsg(repository.resources.exists{res | res.uri == "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk1.xmi" },
+       		"didn't found resource platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk1.xmi in repository")
+       	assertTrueWithMsg(repository.resources.exists{res | res.uri == "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk2.xmi" },
+       		"didn't found resource platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_ModelChunk2.xmi in repository")
+       	assertTrueWithMsg(repository.resources.exists{res | res.uri == "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_C3_alone.xmi" },
+       		"didn't found resource platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/050_C3_alone.xmi in repository")
    end
     
 }
