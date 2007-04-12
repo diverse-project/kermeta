@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmPlugin.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * $Id: FsmPlugin.java,v 1.4 2007-04-12 13:56:26 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -131,8 +131,7 @@ public class FsmPlugin extends AbstractUIPlugin {
 	 * @param level message level
 	 * @generated
 	 */
-	public static void displayDialog(final String title, final String message,
-			final int level) {
+	public static void displayDialog(final String title, final String message, int level) {
 		if (level == IStatus.INFO) {
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {

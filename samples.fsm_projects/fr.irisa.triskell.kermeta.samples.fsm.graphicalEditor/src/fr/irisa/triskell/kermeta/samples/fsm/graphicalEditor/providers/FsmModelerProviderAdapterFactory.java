@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmModelerProviderAdapterFactory.java,v 1.2 2006-12-22 10:52:44 cfaucher Exp $
+ * $Id: FsmModelerProviderAdapterFactory.java,v 1.3 2007-04-12 13:56:26 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -33,21 +33,21 @@ public class FsmModelerProviderAdapterFactory extends FsmAdapterFactory
 	 * 
 	 * @generated
 	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+	private ComposedAdapterFactory parentAdapterFactory;
 
 	/**
 	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
 	 * 
 	 * @generated
 	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	private IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
 	 * 
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	private Collection supportedTypes = new ArrayList();
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.samples.fsm.FSM} instances.
@@ -310,20 +310,27 @@ public class FsmModelerProviderAdapterFactory extends FsmAdapterFactory
 	 * @generated
 	 */
 	public void dispose() {
-		if (fsmModelerProvider != null)
+		if (fsmModelerProvider != null) {
 			fsmModelerProvider.dispose();
-		if (stateModelerProvider != null)
+		}
+		if (stateModelerProvider != null) {
 			stateModelerProvider.dispose();
-		if (transitionModelerProvider != null)
+		}
+		if (transitionModelerProvider != null) {
 			transitionModelerProvider.dispose();
-		if (fsmexceptionModelerProvider != null)
+		}
+		if (fsmexceptionModelerProvider != null) {
 			fsmexceptionModelerProvider.dispose();
-		if (nondeterminismModelerProvider != null)
+		}
+		if (nondeterminismModelerProvider != null) {
 			nondeterminismModelerProvider.dispose();
-		if (notransitionModelerProvider != null)
+		}
+		if (notransitionModelerProvider != null) {
 			notransitionModelerProvider.dispose();
-		if (noinitialstateexceptionModelerProvider != null)
+		}
+		if (noinitialstateexceptionModelerProvider != null) {
 			noinitialstateexceptionModelerProvider.dispose();
+		}
 	}
 
 }

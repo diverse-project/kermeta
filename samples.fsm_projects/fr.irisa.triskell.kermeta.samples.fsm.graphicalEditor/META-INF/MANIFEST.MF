@@ -8,13 +8,13 @@ Bundle-Vendor: Topcased / IRISA-INRIA
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,
- org.eclipse.emf.edit.ui,
- fr.irisa.triskell.kermeta.samples.fsm.edit,
  org.eclipse.ui.ide,
- org.eclipse.emf.edit,
- org.eclipse.core.resources,
- org.eclipse.emf.ecore.xmi,
- fr.irisa.triskell.kermeta.samples.fsm,
+ org.eclipse.emf.edit.ui,
  org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.edit,
+ fr.irisa.triskell.kermeta.samples.fsm,
+ org.eclipse.core.resources,
+ fr.irisa.triskell.kermeta.samples.fsm.edit,
  org.topcased.modeler
 Eclipse-LazyStart: true
