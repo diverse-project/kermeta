@@ -40,9 +40,7 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 		t.start();*/
 	}
 
-	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
-	System.out.println();
-	}
+	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {}
 
 	public void setDocument(IDocument document) {
 	}

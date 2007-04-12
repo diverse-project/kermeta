@@ -98,7 +98,11 @@ public class KMTEditor extends TextEditor implements Interest {
 	private void initializeInterest() {
 		
 		unit = project.getKpm().findUnit(getFile().getFullPath().toString()); 
-
+		if ( unit == null ) {
+			unit = KPMHelper.getOrCreateUnit(project.getKpm(), getFile().getFullPath().toString());
+			project.save();
+		}
+			
 		KermetaUnitHelper.unloadAllKermetaUnit();
 		KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
 
