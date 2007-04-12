@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
@@ -310,6 +311,7 @@ public class KMTEditor extends TextEditor implements Interest {
 						monitor.subTask("Initializing Interest");
 						initializeInterest();
 					} else {
+						KermetaUnitHelper.unloadAllKermetaUnit();
 						KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
 						setMcunit(kermetaUnit);
 						KermetaMarkersHelper.clearMarkers(getFile());
