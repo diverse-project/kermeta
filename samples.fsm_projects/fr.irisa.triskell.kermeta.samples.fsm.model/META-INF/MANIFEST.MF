@@ -10,5 +10,6 @@ Export-Package: fr.irisa.triskell.kermeta.samples.fsm,
  fr.irisa.triskell.kermeta.samples.fsm.impl,
  fr.irisa.triskell.kermeta.samples.fsm.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi
 Eclipse-LazyStart: true

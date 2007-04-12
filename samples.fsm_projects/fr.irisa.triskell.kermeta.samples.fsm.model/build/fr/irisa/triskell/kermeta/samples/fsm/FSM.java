@@ -26,10 +26,17 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM()
- * @model annotation="http://www.topcased.org/uuid uuid='11491501338091'"
+ * @model
  * @generated
  */
 public interface FSM extends EObject {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 	/**
 	 * Returns the value of the '<em><b>Owned State</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.samples.fsm.State}.
@@ -44,7 +51,6 @@ public interface FSM extends EObject {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_OwnedState()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.State#getOwningFSM
 	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.State" opposite="owningFSM" containment="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='11491501338094'"
 	 * @generated
 	 */
 	EList getOwnedState();
@@ -61,7 +67,6 @@ public interface FSM extends EObject {
 	 * @see #setInitialState(State)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_InitialState()
 	 * @model required="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='11491501338095'"
 	 * @generated
 	 */
 	State getInitialState();
@@ -87,7 +92,7 @@ public interface FSM extends EObject {
 	 * @return the value of the '<em>Current State</em>' reference.
 	 * @see #setCurrentState(State)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_CurrentState()
-	 * @model annotation="http://www.topcased.org/uuid uuid='11491501338096'"
+	 * @model
 	 * @generated
 	 */
 	State getCurrentState();
@@ -114,7 +119,6 @@ public interface FSM extends EObject {
 	 * @return the value of the '<em>Final State</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_FinalState()
 	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.State" required="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='11491501338097'"
 	 * @generated
 	 */
 	EList getFinalState();
@@ -122,7 +126,7 @@ public interface FSM extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.topcased.org/uuid uuid='11546805632096'"
+	 * @model
 	 * @generated
 	 */
 	void run();
@@ -130,7 +134,7 @@ public interface FSM extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.topcased.org/uuid uuid='11546805632097'"
+	 * @model
 	 * @generated
 	 */
 	void reset();

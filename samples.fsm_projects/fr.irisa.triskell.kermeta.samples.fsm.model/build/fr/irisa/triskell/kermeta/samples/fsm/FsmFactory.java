@@ -18,6 +18,13 @@ import org.eclipse.emf.ecore.EFactory;
  */
 public interface FsmFactory extends EFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
+	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

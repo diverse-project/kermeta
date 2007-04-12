@@ -28,6 +28,13 @@ public class FSMExceptionImpl extends EObjectImpl implements FSMException {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected FSMExceptionImpl() {
 		super();
 	}

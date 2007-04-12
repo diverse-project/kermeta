@@ -47,6 +47,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class StateImpl extends EObjectImpl implements State {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

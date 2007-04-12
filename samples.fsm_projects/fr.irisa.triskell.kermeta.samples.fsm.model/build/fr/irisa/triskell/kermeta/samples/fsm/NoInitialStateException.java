@@ -14,8 +14,15 @@ package fr.irisa.triskell.kermeta.samples.fsm;
  *
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getNoInitialStateException()
- * @model annotation="http://www.topcased.org/uuid uuid='114915013382424'"
+ * @model
  * @generated
  */
 public interface NoInitialStateException extends FSMException {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 } // NoInitialStateException

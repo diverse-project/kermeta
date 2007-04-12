@@ -39,6 +39,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class TransitionImpl extends EObjectImpl implements Transition {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

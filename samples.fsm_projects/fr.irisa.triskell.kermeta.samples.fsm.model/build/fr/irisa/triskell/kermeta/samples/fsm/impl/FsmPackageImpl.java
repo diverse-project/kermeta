@@ -37,6 +37,13 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass fsmEClass = null;
 
 	/**
@@ -463,176 +470,6 @@ public class FsmPackageImpl extends EPackageImpl implements FsmPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://www.topcased.org/uuid
-		createUuidAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.topcased.org/uuid</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createUuidAnnotations() {
-		String source = "http://www.topcased.org/uuid";		
-		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501337930"
-		   });		
-		addAnnotation
-		  (fsmEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338091"
-		   });		
-		addAnnotation
-		  ((EOperation)fsmEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "uuid", "11546805632096"
-		   });		
-		addAnnotation
-		  ((EOperation)fsmEClass.getEOperations().get(1), 
-		   source, 
-		   new String[] {
-			 "uuid", "11546805632097"
-		   });		
-		addAnnotation
-		  (getFSM_OwnedState(), 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338094"
-		   });		
-		addAnnotation
-		  (getFSM_InitialState(), 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338095"
-		   });		
-		addAnnotation
-		  (getFSM_CurrentState(), 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338096"
-		   });		
-		addAnnotation
-		  (getFSM_FinalState(), 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338097"
-		   });		
-		addAnnotation
-		  (stateEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338098"
-		   });		
-		addAnnotation
-		  ((EOperation)stateEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "uuid", "11491501338099"
-		   });		
-		addAnnotation
-		  ((EParameter)((EOperation)stateEClass.getEOperations().get(0)).getEParameters().get(0), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013380910"
-		   });		
-		addAnnotation
-		  (getState_OwningFSM(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013380911"
-		   });		
-		addAnnotation
-		  (getState_Name(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382412"
-		   });		
-		addAnnotation
-		  (getState_OutgoingTransition(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382413"
-		   });		
-		addAnnotation
-		  (getState_IncomingTransition(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382414"
-		   });		
-		addAnnotation
-		  (transitionEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382415"
-		   });		
-		addAnnotation
-		  ((EOperation)transitionEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382416"
-		   });		
-		addAnnotation
-		  (getTransition_Source(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382417"
-		   });		
-		addAnnotation
-		  (getTransition_Target(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382418"
-		   });		
-		addAnnotation
-		  (getTransition_Input(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382419"
-		   });		
-		addAnnotation
-		  (getTransition_Output(), 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382420"
-		   });		
-		addAnnotation
-		  (fsmExceptionEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382421"
-		   });		
-		addAnnotation
-		  (nonDeterminismEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382422"
-		   });		
-		addAnnotation
-		  (noTransitionEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382423"
-		   });		
-		addAnnotation
-		  (noInitialStateExceptionEClass, 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013382424"
-		   });		
-		addAnnotation
-		  (stringEDataType, 
-		   source, 
-		   new String[] {
-			 "uuid", "114915013384025"
-		   });
 	}
 
 } //FsmPackageImpl

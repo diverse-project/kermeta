@@ -12,8 +12,14 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore" 
+       uri = "http://kermeta/samples/fsm.ecore" 
        class = "fr.irisa.triskell.kermeta.samples.fsm.FsmPackage" />
+  </extension>
+  <extension
+        point="org.eclipse.emf.ecore.extension_parser">
+     <parser
+           class="fr.irisa.triskell.kermeta.samples.fsm.util.FsmResourceFactoryImpl"
+           type="fsm"/>
   </extension>
 
 </plugin>

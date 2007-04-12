@@ -26,6 +26,13 @@ public class NonDeterminismImpl extends FSMExceptionImpl implements NonDetermini
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected NonDeterminismImpl() {
 		super();
 	}

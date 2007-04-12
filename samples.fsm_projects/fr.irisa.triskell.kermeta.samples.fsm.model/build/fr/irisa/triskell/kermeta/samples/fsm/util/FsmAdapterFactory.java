@@ -25,6 +25,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class FsmAdapterFactory extends AdapterFactoryImpl {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

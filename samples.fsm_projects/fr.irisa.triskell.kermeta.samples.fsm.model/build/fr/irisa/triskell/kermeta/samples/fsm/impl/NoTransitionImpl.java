@@ -26,6 +26,13 @@ public class NoTransitionImpl extends FSMExceptionImpl implements NoTransition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected NoTransitionImpl() {
 		super();
 	}

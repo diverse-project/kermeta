@@ -14,8 +14,15 @@ package fr.irisa.triskell.kermeta.samples.fsm;
  *
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getNonDeterminism()
- * @model annotation="http://www.topcased.org/uuid uuid='114915013382422'"
+ * @model
  * @generated
  */
 public interface NonDeterminism extends FSMException {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 } // NonDeterminism

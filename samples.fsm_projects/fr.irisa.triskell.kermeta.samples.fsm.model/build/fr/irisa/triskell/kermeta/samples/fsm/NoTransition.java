@@ -14,8 +14,15 @@ package fr.irisa.triskell.kermeta.samples.fsm;
  *
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getNoTransition()
- * @model annotation="http://www.topcased.org/uuid uuid='114915013382423'"
+ * @model
  * @generated
  */
 public interface NoTransition extends FSMException {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 } // NoTransition

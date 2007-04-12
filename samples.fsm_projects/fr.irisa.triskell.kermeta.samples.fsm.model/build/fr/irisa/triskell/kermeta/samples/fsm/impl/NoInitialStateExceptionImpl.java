@@ -26,6 +26,13 @@ public class NoInitialStateExceptionImpl extends FSMExceptionImpl implements NoI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected NoInitialStateExceptionImpl() {
 		super();
 	}

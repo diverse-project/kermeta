@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class FSMImpl extends EObjectImpl implements FSM {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * The cached value of the '{@link #getOwnedState() <em>Owned State</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -26,10 +26,17 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState()
- * @model annotation="http://www.topcased.org/uuid uuid='11491501338098'"
+ * @model
  * @generated
  */
 public interface State extends EObject {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 	/**
 	 * Returns the value of the '<em><b>Owning FSM</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.samples.fsm.FSM#getOwnedState <em>Owned State</em>}'.
@@ -44,7 +51,6 @@ public interface State extends EObject {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_OwningFSM()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FSM#getOwnedState
 	 * @model opposite="ownedState" required="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013380911'"
 	 * @generated
 	 */
 	FSM getOwningFSM();
@@ -71,7 +77,6 @@ public interface State extends EObject {
 	 * @see #setName(String)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_Name()
 	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382412'"
 	 * @generated
 	 */
 	String getName();
@@ -100,7 +105,6 @@ public interface State extends EObject {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_OutgoingTransition()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.Transition#getSource
 	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.Transition" opposite="source" containment="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382413'"
 	 * @generated
 	 */
 	EList getOutgoingTransition();
@@ -119,7 +123,6 @@ public interface State extends EObject {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_IncomingTransition()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.Transition#getTarget
 	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.Transition" opposite="target"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382414'"
 	 * @generated
 	 */
 	EList getIncomingTransition();
@@ -128,8 +131,6 @@ public interface State extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String" cDataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 *        cAnnotation="http://www.topcased.org/uuid uuid='114915013380910'"
-	 *        annotation="http://www.topcased.org/uuid uuid='11491501338099'"
 	 * @generated
 	 */
 	String step(String c);

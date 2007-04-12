@@ -24,10 +24,17 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getTransition()
- * @model annotation="http://www.topcased.org/uuid uuid='114915013382415'"
+ * @model
  * @generated
  */
 public interface Transition extends EObject {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.samples.fsm.State#getOutgoingTransition <em>Outgoing Transition</em>}'.
@@ -42,7 +49,6 @@ public interface Transition extends EObject {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getTransition_Source()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.State#getOutgoingTransition
 	 * @model opposite="outgoingTransition" required="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382417'"
 	 * @generated
 	 */
 	State getSource();
@@ -71,7 +77,6 @@ public interface Transition extends EObject {
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getTransition_Target()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.State#getIncomingTransition
 	 * @model opposite="incomingTransition" required="true"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382418'"
 	 * @generated
 	 */
 	State getTarget();
@@ -98,7 +103,6 @@ public interface Transition extends EObject {
 	 * @see #setInput(String)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getTransition_Input()
 	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382419'"
 	 * @generated
 	 */
 	String getInput();
@@ -125,7 +129,6 @@ public interface Transition extends EObject {
 	 * @see #setOutput(String)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getTransition_Output()
 	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382420'"
 	 * @generated
 	 */
 	String getOutput();
@@ -144,7 +147,6 @@ public interface Transition extends EObject {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model dataType="fr.irisa.triskell.kermeta.samples.fsm.String"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013382416'"
 	 * @generated
 	 */
 	String fire();

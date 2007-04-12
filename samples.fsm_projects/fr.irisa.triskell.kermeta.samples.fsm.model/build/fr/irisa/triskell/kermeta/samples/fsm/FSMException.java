@@ -15,8 +15,15 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSMException()
- * @model annotation="http://www.topcased.org/uuid uuid='114915013382421'"
+ * @model
  * @generated
  */
 public interface FSMException extends EObject {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 } // FSMException
