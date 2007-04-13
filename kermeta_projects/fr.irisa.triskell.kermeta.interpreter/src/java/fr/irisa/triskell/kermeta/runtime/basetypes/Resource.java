@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.10 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: Resource.java,v 1.11 2007-04-13 12:43:58 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
+import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 
 // Get the namespace
@@ -55,7 +56,8 @@ public class Resource {
      *  Implementation of method load called as :
      * extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(uri, type)
      * This creates a RuntimeUnit adapted to the given type (we are expecting from type "EMF", "MDR"),
-     * Which "handles" a Collection of instances, represented as a RuntimeObject    
+     * Which "handles" a Collection of instances, represented as a RuntimeObject  
+     * @param self the resource itself  
      * @param uri the uri of the EMF model to load
      * @param mmUri the uri of the Ecore meta-model of which EMF model is an 
      *        instance; it can be an empty string. In such a case, the meta model uri
@@ -68,6 +70,7 @@ public class Resource {
      * @return The emptyMap, filled in.
      */
     public static RuntimeObject load(
+    		RuntimeObject self,
     		RuntimeObject uri,
     		RuntimeObject mmUri, 
     		RuntimeObject resourceType, RuntimeObject emptyMap)
@@ -77,6 +80,11 @@ public class Resource {
         	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyMap);
         // 
         runtime_unit.load();
+        // after a load, even if mmUri was not set, the load was able to infer it
+        if(runtime_unit instanceof EMFRuntimeUnit){
+        	self.getProperties().put("metaModelURI",String.create(((EMFRuntimeUnit)runtime_unit).metamodel_uri,
+        			self.getFactory()));
+        }
         return runtime_unit.getContentMap();
     }
     
