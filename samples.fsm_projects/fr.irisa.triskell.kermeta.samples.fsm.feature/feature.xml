@@ -23,31 +23,18 @@
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.topcased.modeler"/>
+      <import plugin="org.eclipse.ui"/>
       <import feature="fr.irisa.triskell.kermeta" version="0.4.0"/>
+      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
    </requires>
-
-   <plugin
-         id="fr.irisa.triskell.kermeta.samples.fsm"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.irisa.triskell.kermeta.samples.fsm.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.samples.fsm.edit"
@@ -65,6 +52,20 @@
 
    <plugin
          id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.samples.fsm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.samples.fsm.model"
          download-size="0"
          install-size="0"
          version="0.0.0"
