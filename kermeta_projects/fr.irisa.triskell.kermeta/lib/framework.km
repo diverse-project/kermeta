@@ -11702,13 +11702,16 @@
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.4"/>
               <value xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.1/@body/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Resource" jmethod="load">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.1"/>
+                </parameters>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" name="uri" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.0"/>
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" name="metaModelURI" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.1"/>
                 <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5/@getterBody/@statement.0/@value/@parameters.0/@containedType.0" value="EMF"/>
-                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.3/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.4">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.4/@containedType.0" name="contentMap" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.4">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.4/@ownedTypeDefinition.0">
                     <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0" type="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.4/@containedType.0/@typeParamBinding.0/@containedType.0"/>
-                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.3/@containedType.0/@typeParamBinding.1/@containedType.0">
+                    <typeParamBinding variable="/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1" type="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.4/@containedType.0/@typeParamBinding.1/@containedType.0">
                       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.0/@ownedTypeDefinition.15">
                         <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.15/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
                       </containedType>
@@ -11754,9 +11757,7 @@
               </condition>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.6/@containedType.0" name="clear" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.6">
-              <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.3/@target/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@nestedPackage.8/@ownedTypeDefinition.1"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.0/@containedType.0"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.7/@containedType.0" name="addAll" staticOperation="/0/@nestedPackage.0/@ownedTypeDefinition.14/@ownedOperation.7">
               <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.4/@parameters.0/@containedType.0" name="rootContents" staticProperty="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedAttribute.5">
@@ -11764,7 +11765,7 @@
                   <typeParamBinding variable="/0/@nestedPackage.0/@ownedTypeDefinition.15/@typeParameter.0" type="/0/@nestedPackage.0/@ownedTypeDefinition.13"/>
                 </containedType>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.3/@target/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.4/@body/@statement.1/@value/@parameters.0/@containedType.0"/>
             </statement>
           </body>
         </ownedOperation>
@@ -12482,7 +12483,7 @@
   <kermeta_language_structure:Tag name="documentation" value="/** Save a resource in a file referenced by this new uri. &#xD;&#xA;     This allows to save the result of a transformation without changing the original file. */" object="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.2"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Save a resource in a file referenced by this new uri. &#xD;&#xA;     This allows to save the result of a transformation without changing the original file. */" object="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.2"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Loads a resource. Once loaded, you'll be able to query the resource for its content.  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.3"/>
-  <kermeta_language_structure:Tag name="documentation" value="/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.3"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  &#xD;&#xA;  * even if the metamodelURI was not set, (for exemple the registered packages are enough) after a succesful load&#xD;&#xA;  * the attribute metamodelURI will be filled with the nsuri&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.0/@ownedOperation.3"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA; * Extension of the Resource class definition that is specific to EMF Repository.&#xD;&#xA; * User is not supposed to directly create it. Otherwise it will not be correctly initialized&#xD;&#xA; * You must To create one &#xD;&#xA; */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1"/>
   <kermeta_language_structure:Tag name="documentation" value="/** &#xD;&#xA;  * Create an hashtable with appropriates keys and empty collections. This method &#xD;&#xA;  * should not be called by the end-user&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.0"/>
   <kermeta_language_structure:Tag name="documentation" value="/** save and check the resource using the EMF validation function&#xD;&#xA;  * apply the validate on all the object in the root of this resource&#xD;&#xA;  * returns true if the validation reports no error&#xD;&#xA;  * otherwise raises exceptions&#xD;&#xA;  */" object="/0/@nestedPackage.8/@ownedTypeDefinition.1/@ownedOperation.3"/>
