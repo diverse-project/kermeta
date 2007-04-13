@@ -1,3 +1,12 @@
+/*$Id: KPMPlugin.java,v 1.9 2007-04-13 14:45:12 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
+* File : 	sdfg.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
 package fr.irisa.triskell.kermeta.kpm.plugin;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
