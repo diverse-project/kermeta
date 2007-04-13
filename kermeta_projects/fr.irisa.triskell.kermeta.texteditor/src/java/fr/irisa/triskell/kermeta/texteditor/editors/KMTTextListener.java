@@ -13,8 +13,8 @@ public class KMTTextListener implements ITextListener {
 	}
 	
 	public void textChanged(TextEvent event) {
-		/*editor.setCurrentContent( editor.getFileContent() );
-		if ( ! editor.getMustBeTypechecked() ) {
+		editor.setCurrentContent( editor.getFileContent() );
+		/*if ( ! editor.getMustBeTypechecked() ) {
 			if (event.getText().equals(" ") || event.getText().equals("\n") || event.getText().equals("\t") || event.getText().equals("") ) {
 				int offset = event.getOffset();
 				int before = offset - 1;
