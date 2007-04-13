@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.5 2007-03-26 16:19:29 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.6 2007-04-13 13:47:18 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -150,7 +150,14 @@ public class QualifiedNamePatcher {
 				if(Platform.isRunning()){
 				//if(org.eclipse.core.internal.runtime.Activator.getDefault() != null){ // alternative method to check if osgi is running ?
 					// OSGI is started, use the filelocator
-					fileURL = FileLocator.toFileURL(new URL(platformURI.toString()));
+					URL oldURL = new URL(platformURI.toString());
+					fileURL = FileLocator.toFileURL(oldURL);
+					if(oldURL == fileURL){
+						canLoadMetaModelResource = false;
+			            EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that some packages are really toplevel..." );
+			            EMFRuntimeUnit.internalLog.warn("Cannot retreive the metamodel. "+ mm_uri + " If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");
+			            return;
+					}
 				}
 				else {
 					if(platformURI.scheme().equals("file")){
