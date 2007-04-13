@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.4 2007-04-04 14:52:26 dvojtise Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.5 2007-04-13 12:53:12 dvojtise Exp $
  * Creation date: November 14, 2006
  * License: EPL
  * Authors: dvojtise
@@ -46,7 +46,7 @@ class Main inherits kermeta::kunit::TestCase
 	/** 
 	 * load and save in another location just reusing the same resource but using the SaveAsNewURI function
 	 */
-    operation testLoadSaveEcoreFileUsingSaveAsNewURI() : Void is do 
+ /*   operation testLoadSaveEcoreFileUsingSaveAsNewURI() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		// load
 		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" , ecoreMetamodel)
@@ -62,11 +62,11 @@ class Main inherits kermeta::kunit::TestCase
 	    					"testLoadSaveEcoreFileUsingSaveAsNewURI")
     end
     
-    
+   */ 
 	/** 
 	 * load and save in another location just reusing the same resource but changing the URI of the resource
 	 */
-    operation testLoadSaveEcoreFileChangingTheURI() : Void is do 
+ /*   operation testLoadSaveEcoreFileChangingTheURI() : Void is do 
 		var repository : EMFRepository init EMFRepository.new
 		// load
 		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" , ecoreMetamodel)
@@ -82,12 +82,12 @@ class Main inherits kermeta::kunit::TestCase
 	    					nbInstances,
 	    					"testLoadSaveEcoreFileChangingTheURI")
     end
-    
+   */ 
     /** 
    	 * load and save in another location by moving the model element to another resource
    	 * bug #2256
 	 */
-    operation testLoadSaveEcoreFileUsingAnotherResource() : Void is do 
+/*    operation testLoadSaveEcoreFileUsingAnotherResource() : Void is do 
     	
 		// load
 		var resource1 : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" ,
@@ -108,12 +108,12 @@ class Main inherits kermeta::kunit::TestCase
 	    	nbInstances,
 	    	"testLoadSaveEcoreFileUsingAnotherResource")
     end
-    
+*/    
         /** 
    	 * load and save in another location by moving the model element to another resource
    	 * bug #2256
 	 */
-    operation testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository() : Void is do 
+/*    operation testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository() : Void is do 
     	
 		// load
 		var resource1 : Resource init EMFRepository.new.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" ,
@@ -134,7 +134,7 @@ class Main inherits kermeta::kunit::TestCase
 	    	nbInstances,
 	    	"testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository")
     end
-    
+  */  
     operation checkEcoreSavedFile(fileName : String, numberOfInstances : Integer, testName : String) : Void is do
     	var resource : Resource init repository.createResource(fileName, ecoreMetamodel)
     	resource.load
@@ -175,7 +175,9 @@ class Main inherits kermeta::kunit::TestCase
     	res2.save
     	//stdio.writeln("Model saved")
     	do 
-	    	res3 ?= EMFRepository.new.createResource(outputMdlUri, inputMMMdlUri)
+	    	//res3 ?= EMFRepository.new.createResource(outputMdlUri, inputMMMdlUri)
+	    	res3 ?= rep.createResource(outputMdlUri, inputMMMdlUri)
+	    	
 	    	res3.load
 	    	assertTrueWithMsg(res3.instances.size >=1, "testLoadSaveFileUsingAnotherResource didn't save the expected number of element in the target model")
     	rescue (e : kermeta::persistence::ResourceLoadException)
@@ -196,7 +198,8 @@ class Main inherits kermeta::kunit::TestCase
 
    		stdio.writeln("Loading model at " + inputMdlUri + " using " + inputMMMdlUri)
     	res1 ?= rep.getResource(inputMdlUri)
-    	res1.load
+    	res1.load // note : this load is useless since getResource silently load it ...
+    	assertTrueWithMsg(res1.metaModelURI != "", "resource created using a getResource must have metamodelUri after a succesfull load")
     	//stdio.writeln("Model loaded")
     	
     	var root : A
