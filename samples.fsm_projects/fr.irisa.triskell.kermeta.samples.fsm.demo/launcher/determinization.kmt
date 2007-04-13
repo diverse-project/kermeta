@@ -43,7 +43,8 @@ class Determinization
 		helper := AutomatonHelper.new 
 		 
 		// The input automaton to determinize
-		input :=  helper.loadEMFAutomaton(repository, input_automaton, "../metamodels/fsm.ecore")
+		input :=  helper.loadEMFAutomaton(repository, input_automaton)
+		
 		output_path := input_automaton.substring(0, input_automaton.size-3)+"det.fsm"
 
 	   	output.initialize(input.initialState, true)
@@ -62,7 +63,7 @@ class Determinization
     	output.ownedState.each { e | e.combination.clear } 
     	helper.dotprint(output)
     	// Save the automaton
-    	helper.saveEMFAutomaton(repository, output, output_path, "../metamodels/fsm.ecore")
+    	helper.saveEMFAutomaton(EMFRepository.new, output, output_path, "http://kermeta/samples/fsm.ecore")
 
     end
     

@@ -20,7 +20,7 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore#//FSM"/>
+            <type href="http://kermeta/samples/fsm.ecore#//FSM"/>
         </bridge>
     </node>
     <node
@@ -39,7 +39,7 @@
         isWidthResizable="true"
         isHeightResizable="true">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore#//State"/>
+            <type href="http://kermeta/samples/fsm.ecore#//State"/>
         </bridge>
     </node>
     <edge
@@ -50,7 +50,7 @@
         lineWidth="1"
         lineStyle="SOLID">
         <bridge xsi:type="graphconf:EMFBridge">
-            <type href="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore#//Transition"/>
+            <type href="http://kermeta/samples/fsm.ecore#//Transition"/>
         </bridge>
     </edge>
 </graphconf:DiagramGraphConf>

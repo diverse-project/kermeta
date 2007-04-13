@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmEditPartFactory.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * $Id: FsmEditPartFactory.java,v 1.4 2007-04-13 16:56:08 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -43,8 +43,8 @@ public class FsmEditPartFactory implements EditPartFactory {
 			if (element != null) {
 				Object editPart = null;
 
-				if ("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
-						.equals(element.eClass().getEPackage().getNsURI())) {
+				if ("http://kermeta/samples/fsm.ecore".equals(element.eClass()
+						.getEPackage().getNsURI())) {
 					editPart = new NodeFsmSwitch(node).doSwitch(element);
 				}
 
@@ -61,8 +61,8 @@ public class FsmEditPartFactory implements EditPartFactory {
 			if (element != null) {
 				Object editPart = null;
 
-				if ("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
-						.equals(element.eClass().getEPackage().getNsURI())) {
+				if ("http://kermeta/samples/fsm.ecore".equals(element.eClass()
+						.getEPackage().getNsURI())) {
 					editPart = new EdgeFsmSwitch(edge).doSwitch(element);
 				}
 

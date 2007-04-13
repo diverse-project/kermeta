@@ -16,6 +16,7 @@
 package fsm;
 
 require kermeta
+require "../kermeta/fsm.kmt"
 require "fsmLauncher.kmt"
 
 using fsm
@@ -26,14 +27,8 @@ using kermeta::persistence
 class InvariantChecker
 {
     operation main(input_automaton : String) : Void is do 
-        var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(input_automaton, "../metamodels/fsm.ecore")
-        // *.fsm
-        stdio.writeln("before loading")
-        resource.load()
-       	stdio.writeln("after loading")
-        var theFSM : FSM
-        theFSM ?= resource.instances.one  
+        var rep : EMFRepository init EMFRepository.new
+        var theFSM : FSM init AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton)
         
         // Uncomment to check the invariant properties : WFR
         // To check all contained elements by "theFSM"

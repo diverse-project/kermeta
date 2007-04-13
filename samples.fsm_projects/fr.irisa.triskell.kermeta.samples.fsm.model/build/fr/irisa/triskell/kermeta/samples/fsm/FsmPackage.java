@@ -25,10 +25,16 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmFactory
  * @model kind="package"
- *        annotation="http://www.topcased.org/uuid uuid='11491501337930'"
  * @generated
  */
 public interface FsmPackage extends EPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA/INRIA";
+
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -43,7 +49,7 @@ public interface FsmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore";
+	String eNS_URI = "http://kermeta/samples/fsm.ecore";
 
 	/**
 	 * The package namespace name.
@@ -522,7 +528,6 @@ public interface FsmPackage extends EPackage {
 	 * @return the meta object for data type '<em>String</em>'.
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
-	 *        annotation="http://www.topcased.org/uuid uuid='114915013384025'" 
 	 * @generated
 	 */
 	EDataType getString();
@@ -548,7 +553,7 @@ public interface FsmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals {
+	interface Literals  {
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl <em>FSM</em>}' class.
 		 * <!-- begin-user-doc -->

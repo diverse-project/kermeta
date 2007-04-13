@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmCreationUtils.java,v 1.3 2006-12-22 10:36:16 cfaucher Exp $
+ * $Id: FsmCreationUtils.java,v 1.4 2007-04-13 16:56:08 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -94,11 +94,11 @@ public class FsmCreationUtils extends AbstractCreationUtils {
 	public GraphElement createGraphElement(EObject obj, String presentation) {
 		Object graphElt = null;
 
-		if ("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
-				.equals(obj.eClass().getEPackage().getNsURI())) {
+		if ("http://kermeta/samples/fsm.ecore".equals(obj.eClass()
+				.getEPackage().getNsURI())) {
 			graphElt = new GraphicFsmSwitch(presentation).doSwitch(obj);
 		}
-
+		
 		return (GraphElement) graphElt;
 	}
 

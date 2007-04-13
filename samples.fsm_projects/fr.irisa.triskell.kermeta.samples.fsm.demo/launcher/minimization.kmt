@@ -69,7 +69,7 @@ class Minimization
     	// We do not want to store combination
     	output.ownedState.each { s | s.combination.clear } 
 		helper.dotprint(output)
-		helper.saveEMFAutomaton(kermeta::persistence::EMFRepository.new, output, output_path, "../metamodels/fsm.ecore" )
+		helper.saveEMFAutomaton(kermeta::persistence::EMFRepository.new, output, output_path, "http://kermeta/samples/fsm.ecore")
     end
 
 

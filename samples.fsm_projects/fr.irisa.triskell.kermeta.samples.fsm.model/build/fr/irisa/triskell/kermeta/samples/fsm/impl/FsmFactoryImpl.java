@@ -25,6 +25,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA/INRIA";
+
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -32,7 +39,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 */
 	public static FsmFactory init() {
 		try {
-			FsmFactory theFsmFactory = (FsmFactory)EPackage.Registry.INSTANCE.getEFactory("platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"); 
+			FsmFactory theFsmFactory = (FsmFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/samples/fsm.ecore"); 
 			if (theFsmFactory != null) {
 				return theFsmFactory;
 			}

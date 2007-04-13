@@ -235,8 +235,9 @@ class AutomatonHelper
 	/** 
 	 * Serialization helpers
 	 */  
-    operation saveEMFAutomaton(repository : EMFRepository, a : FSM, uri : String, mmuri : String) : FSM is do
+    operation saveEMFAutomaton(repository_old : EMFRepository, a : FSM, uri : String, mmuri : String) : FSM is do
 		if AutomatonHelper.new.conformityChecker(a) == true then 
+	    	var repository : EMFRepository init EMFRepository.new
 	    	var resource : Resource init repository.createResource(uri , mmuri)
 	    	resource.instances.add(a)
 	    	resource.save
@@ -246,9 +247,12 @@ class AutomatonHelper
 	    end
     end
     
-     operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FSM is do
-    	var resource : Resource init repository.createResource(uri , mmuri)
+    /** Load an automaton and return a FSM instance */
+    operation loadEMFAutomaton(repository : EMFRepository, uri : String) : FSM is do
+    	var resource : Resource init repository.getResource(uri)
+    	stdio.writeln("before loading")
     	resource.load
+    	stdio.writeln("after loading")
     	var roots : Set<Object> init resource.rootContents
     	result ?= roots.one
     end
@@ -279,7 +283,7 @@ class AutomatonHelper
     	var file : String init stdio.read(prompt)
     	stdio.writeln("\n"+file)
     	var r : EMFRepository init EMFRepository.new
-    	result := loadEMFAutomaton(r, file, "../metamodels/fsm.ecore")
+    	result := loadEMFAutomaton(r, file)
     end
     
     /** Operation that tries to check the validity of the given automaton 

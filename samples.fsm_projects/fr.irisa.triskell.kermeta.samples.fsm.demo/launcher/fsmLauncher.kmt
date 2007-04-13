@@ -39,16 +39,8 @@ class Main
 	 * "../models/sample1.fsm"
 	 */
 	operation loadfsm(input_automaton : String) : FSM is do
-		var res : EMFRepository init EMFRepository.new
-        var resource : Resource init res.createResource(input_automaton, "../metamodels/fsm.ecore")
-        
-        stdio.writeln("before loading")
-        // loading
-        resource.load()
-       	stdio.writeln("after loading")
-        var theFSM : FSM
-        theFSM ?= resource.instances.one  
-        result  := theFSM
+		var rep : EMFRepository init EMFRepository.new
+		result := AutomatonHelper.new.loadEMFAutomaton(rep, input_automaton)
         
         // Uncomment to check the invariant properties : WFR
         // To check all contained elements by "result"

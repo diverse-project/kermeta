@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore" initialState="//@ownedState.0" finalState="//@ownedState.2 //@ownedState.3 //@ownedState.1">
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://kermeta/samples/fsm.ecore" initialState="//@ownedState.0" finalState="//@ownedState.2 //@ownedState.3 //@ownedState.1">
   <ownedState name="a" incomingTransition="//@ownedState.4/@outgoingTransition.0 //@ownedState.1/@outgoingTransition.1">
     <outgoingTransition target="//@ownedState.4" input="z" output=""/>
     <outgoingTransition target="//@ownedState.1" input="a" output=""/>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.kermeta.samples.fsm.model/build"
-    modelPluginID="fr.irisa.triskell.kermeta.samples.fsm" modelName="Fsm" testsDirectory=""
-    importerID="org.eclipse.emf.importer.ecore">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="IRISA/INRIA"
+    modelDirectory="/fr.irisa.triskell.kermeta.samples.fsm.model/build" modelPluginID="fr.irisa.triskell.kermeta.samples.fsm"
+    modelName="Fsm" testsDirectory="" importerID="org.eclipse.emf.importer.ecore">
   <foreignModel>fsm.ecore</foreignModel>
-  <genPackages prefix="Fsm" basePackage="fr.irisa.triskell.kermeta.samples" disposableProviderFactory="true"
-      ecorePackage="fsm.ecore#/">
+  <genPackages prefix="Fsm" basePackage="fr.irisa.triskell.kermeta.samples" resource="XMI"
+      disposableProviderFactory="true" ecorePackage="fsm.ecore#/">
     <genDataTypes ecoreDataType="fsm.ecore#//String"/>
     <genClasses ecoreClass="fsm.ecore#//FSM">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fsm.ecore#//FSM/ownedState"/>

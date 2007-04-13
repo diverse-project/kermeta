@@ -1,68 +1,73 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure" name="fsm">
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FSM">
-    <ownedAttribute name="ownedState" type="//@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="//@ownedTypeDefinition.1/@ownedAttribute.0" isComposite="true">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedAttribute name="initialState" type="//@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedAttribute name="currentState" type="//@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedAttribute name="finalState" type="//@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0" isOrdered="true" lower="1" upper="-1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedOperation name="run" type="//@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+  <kermeta_language_structure:Package name="fsm">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/1" name="FSM">
+      <ownedAttribute name="ownedState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.0" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="initialState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="currentState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="finalState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0" isOrdered="true" lower="1" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedOperation name="run" type="/0/@ownedTypeDefinition.0/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+      </ownedOperation>
+      <ownedOperation name="reset" type="/0/@ownedTypeDefinition.0/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/2" name="State">
+      <ownedAttribute name="owningFSM" type="/0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.0/@ownedAttribute.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="name" type="/0/@ownedTypeDefinition.7" isOrdered="true" upper="1" isComposite="true"/>
+      <ownedAttribute name="outgoingTransition" type="/0/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="-1" opposite="/0/@ownedTypeDefinition.2/@ownedAttribute.0" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="incomingTransition" type="/0/@ownedTypeDefinition.1/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="-1" opposite="/0/@ownedTypeDefinition.2/@ownedAttribute.1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedOperation name="step" type="/0/@ownedTypeDefinition.7" isOrdered="true" upper="1" isAbstract="true">
+        <ownedParameter name="c" type="/0/@ownedTypeDefinition.7" isOrdered="true" upper="1"/>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/3" name="Transition">
+      <ownedAttribute name="source" type="/0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.2">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="target" type="/0/@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.3">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="input" type="/0/@ownedTypeDefinition.7" isOrdered="true" upper="1" isComposite="true"/>
+      <ownedAttribute name="output" type="/0/@ownedTypeDefinition.7" isOrdered="true" upper="1" isComposite="true"/>
+      <ownedOperation name="fire" type="/0/@ownedTypeDefinition.7" isOrdered="true" upper="1" isAbstract="true"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FSMException"/>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NonDeterminism" superType="/0/@ownedTypeDefinition.4/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NoTransition" superType="/0/@ownedTypeDefinition.5/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NoInitialStateException" superType="/0/@ownedTypeDefinition.6/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.3"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="String" instanceType="/0/@ownedTypeDefinition.7/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class">
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
       </containedType>
-    </ownedOperation>
-    <ownedOperation name="reset" type="//@ownedTypeDefinition.0/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
-      <containedType xsi:type="kermeta_language_structure:Class">
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
-      </containedType>
-    </ownedOperation>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="State">
-    <ownedAttribute name="owningFSM" type="//@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="//@ownedTypeDefinition.0/@ownedAttribute.0">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.0"/>
-    </ownedAttribute>
-    <ownedAttribute name="name" type="//@ownedTypeDefinition.7" isOrdered="true" upper="1" isComposite="true"/>
-    <ownedAttribute name="outgoingTransition" type="//@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="-1" opposite="//@ownedTypeDefinition.2/@ownedAttribute.0" isComposite="true">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.2"/>
-    </ownedAttribute>
-    <ownedAttribute name="incomingTransition" type="//@ownedTypeDefinition.1/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="-1" opposite="//@ownedTypeDefinition.2/@ownedAttribute.1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.2"/>
-    </ownedAttribute>
-    <ownedOperation name="step" type="//@ownedTypeDefinition.7" isOrdered="true" upper="1" isAbstract="true">
-      <ownedParameter name="c" type="//@ownedTypeDefinition.7" isOrdered="true" upper="1"/>
-    </ownedOperation>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Transition">
-    <ownedAttribute name="source" type="//@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="//@ownedTypeDefinition.1/@ownedAttribute.2">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedAttribute name="target" type="//@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="//@ownedTypeDefinition.1/@ownedAttribute.3">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedAttribute name="input" type="//@ownedTypeDefinition.7" isOrdered="true" upper="1" isComposite="true"/>
-    <ownedAttribute name="output" type="//@ownedTypeDefinition.7" isOrdered="true" upper="1" isComposite="true"/>
-    <ownedOperation name="fire" type="//@ownedTypeDefinition.7" isOrdered="true" upper="1" isAbstract="true"/>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FSMException"/>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NonDeterminism" superType="//@ownedTypeDefinition.4/@containedType.0">
-    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.3"/>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NoTransition" superType="//@ownedTypeDefinition.5/@containedType.0">
-    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.3"/>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NoInitialStateException" superType="//@ownedTypeDefinition.6/@containedType.0">
-    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.3"/>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="String" instanceType="//@ownedTypeDefinition.7/@containedType.0">
-    <containedType xsi:type="kermeta_language_structure:Class">
-      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../../../plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.10"/>
-    </containedType>
-  </ownedTypeDefinition>
-</kermeta_language_structure:Package>
+    </ownedTypeDefinition>
+  </kermeta_language_structure:Package>
+  <kermeta_language_structure:Tag name="isSemanticallyAbstract" value="run" object="/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Tag name="isSemanticallyAbstract" value="step" object="/0/@ownedTypeDefinition.1"/>
+  <kermeta_language_structure:Tag name="isSemanticallyAbstract" value="fire" object="/0/@ownedTypeDefinition.2"/>
+</xmi:XMI>
