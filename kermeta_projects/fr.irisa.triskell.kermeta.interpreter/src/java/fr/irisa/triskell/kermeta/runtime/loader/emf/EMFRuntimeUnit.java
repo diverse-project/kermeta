@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.35 2007-04-04 15:35:12 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.36 2007-04-13 12:48:41 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
@@ -162,6 +163,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	try {
             // visit the metamodel
             resource.load(null);
+            EcoreUtil.UnresolvedProxyCrossReferencer.find(resource); // ?? force to resolve every proxies, so the getAllContent will be more reliable
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -221,8 +223,24 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	
 	    	// Try to create the resource specified by "u"
     		resource = 	(XMLResource)resourceset.createResource(u);
-    		if(resource != null)
+    		if(resource != null){
     			resource.load(options);
+    			if(metamodel_uri.equals("")){
+    				// the model was correctly loaded even if the uri was not provided
+    				// this mean that the metamodel is a registered package
+    				// if we want to save this loaded resource (or save another resource relative to this one) 
+    				// then we need to infer the metamodel nsuri
+    				//resource.XML_SCHEMA_URI;
+    				// get one element in the resource, the first is good enough
+    				EObject eo = (EObject)resource.getContents().get(0);
+    				if(eo != null){
+    					//find root package of the metamodel
+    					EPackage rootpack = (EPackage)eo.eClass().eContainer();
+    					while(rootpack.eContainer() != null) rootpack = (EPackage)rootpack.eContainer();
+    					metamodel_uri = rootpack.getNsURI();
+    				}
+    			}
+    		}
     		else
     			throwKermetaRaisedExceptionOnLoad(
     			"Not able to create a resource for URI: "+ u + "\n  failing on resource = 	(XMLResource)resourceset.createResource(u);  \n" + logEMFRegistryContent(), null);
@@ -329,18 +347,36 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         else {
         	// ok, let's try to find in memory what are the other resources in the same repository that may need to be updated now
         	// getOrCreate the resource for this runtimeobject resource, deal with an eventual change in the uri
-        	res = updateEMFResource(associatedResource,u);    		
+        		// current resource
+        	res = updateEMFResource(associatedResource,u);
+        	RuntimeObject roRepository = (RuntimeObject) associatedResource.getProperties().get("repository");
+			RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
+			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
+			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
+			//	for each of the resources in the repository (other than the current one)
+        	for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
+			{
+				RuntimeObject roResource = (RuntimeObject) next;
+				if (roResource != associatedResource){
+					// get orcreate an emf resource for this Resource
+					String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("uri"));						
+					Resource res2 = updateEMFResource(roResource, createURI(res_uri));
+					
+					String mm_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));
+					RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+	        			getConcreteFactory("EMF").createRuntimeUnit("", mm_uri, roResource) ;
+					runtime_unit.associatedResource = roResource;
+					Runtime2EMF r2emf = new Runtime2EMF((EMFRuntimeUnit)runtime_unit, res2);
+					r2emf.updateEMFModel();					
+				}
+			}
 
     		Runtime2EMF r2e = new Runtime2EMF(this, res);
 	        r2e.updateEMFModel();
 	        res = r2e.getResource();
     		
-        	// for each of the resources in the repository (other than the current one)
-    		RuntimeObject roRepository = (RuntimeObject) associatedResource.getProperties().get("repository");
-			RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
-			RuntimeObject rouseInterpreterInternalResources = (RuntimeObject) roRepository.getProperties().get("useInterpreterInternalResources");
-			useInterpreterInternalResources = rouseInterpreterInternalResources != null ? fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(rouseInterpreterInternalResources) : false;		
-	        
+        	// for each of the resources in the repository (other than the current one)    		
+			// update the models
 			for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
 			{
 				RuntimeObject roResource = (RuntimeObject) next;
@@ -418,6 +454,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * @return
 	 */
    private Resource createEMFResource(RuntimeObject roResource, URI uri) {
+	   ResourceSet resource_set = getOrCreateRepositoryResourceSetForResource(roResource);
+		
+		Resource res = resource_set.createResource(uri); 
+		// associate this resource to kermesta ressource runtime object
+		roResource.getData().put("r2e.emfResource", res);
+		return res;
+	}
+
+   public ResourceSet getOrCreateRepositoryResourceSetForResource(RuntimeObject roResource){
 	   ResourceSet resource_set;
 		RuntimeObject roRepository = (RuntimeObject) roResource.getProperties().get("repository");
 		resource_set = (ResourceSet)roRepository.getData().get("r2e.emfResourceset");
@@ -426,12 +471,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			resource_set = new ResourceSetImpl();
 			roRepository.getData().put("r2e.emfResourceset", resource_set);
 		}
-		Resource res = resource_set.createResource(uri); 
-		// associate this resource to keremta ressource runtime object
-		roResource.getData().put("r2e.emfResource", res);
-		return res;
-	}
-
+		return resource_set;
+   }
 /*
     * ACCESSORS
     *
