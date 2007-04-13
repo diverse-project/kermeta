@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.8 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.9 2007-04-13 15:40:39 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -530,9 +530,16 @@ public class KPMImpl extends EObjectImpl implements KPM {
 		return super.eIsSet(featureID);
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList getTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		if (types == null) {
+			types = new EObjectContainmentEList(Type.class, this, KpmPackage.KPM__TYPES);
+		}
+		return types;
 	}
 
 } //KPMImpl
