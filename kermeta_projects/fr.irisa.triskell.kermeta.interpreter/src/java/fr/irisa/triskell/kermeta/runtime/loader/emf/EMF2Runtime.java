@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.55 2007-04-04 15:32:22 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.56 2007-04-13 12:45:59 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -344,6 +344,11 @@ public class EMF2Runtime {
 	    	{
 	    	    ftype = ((PrimitiveType)etype_cdef).getInstanceType();
 	    	}
+	    }
+	    if (ftype == null && type_name.equals("ecore::EObject"))
+	    {
+	    	// we were probably using ecore::EObject as the "Any", in kermeta this is Object that must be used
+	    	ftype = getTypeFromName("kermeta::language::structure::Object");
 	    }
         if (ftype == null)
         {
