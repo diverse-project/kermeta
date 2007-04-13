@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.27 2007-04-04 15:33:58 dvojtise Exp $
+ * $Id: resource.kmt,v 1.28 2007-04-13 12:40:10 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -165,11 +165,14 @@ class EMFResource inherits Resource
 		)
 	end
 	
-	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  */
+	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  
+	 * even if the metamodelURI was not set, (for example the registered packages are enough) after a succesful load
+	 * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource
+	 */
 	method load() : Void is do
 		var e : ResourceLoadException init ResourceLoadException.new
 		contentMap ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
-			uri, metaModelURI, "EMF", contentMap
+		    self, uri, metaModelURI, "EMF", contentMap
 		)
 		// If load failed
 		if (contentMap.getValue("allRootContents").size == 0) then
