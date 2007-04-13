@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.50 2007-03-16 14:37:18 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.51 2007-04-13 12:49:28 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -17,7 +17,6 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -35,6 +34,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
 
 //import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
@@ -143,7 +143,9 @@ public class Runtime2EMF {
 		// Note: emfObject2 entry is only used for eObject retrieval during the
 		// save process!
 		for (RuntimeObject o : instances)
-		{	resource.getContents().add((EObject) o.getData().get("r2e.emfObject")); }	
+		{	
+			resource.getContents().add((EObject) o.getData().get("r2e.emfObject"));
+		}	
 	}
 
 	/**
@@ -376,7 +378,38 @@ public class Runtime2EMF {
 	 * @return the eObject corresponding to this rObject
 	 */
 	public EObject createEObjectFromRuntimeObject(RuntimeObject rObject) {
-		return createEObjectFromRuntimeObjectWithResource(rObject, unit.getMetaModelResource());
+		// maybe the object to create is not from this resource
+		// fall back to this resource only if we cannot find it for this runtime object
+		Resource res = unit.getMetaModelResource();
+		// find the resource that should create 
+		EObject result = createEObjectFromRuntimeObjectWithResource(rObject, res);
+		if(result != null) return result;
+		
+		internalLog.debug("not able to create an EObject from " + rObject + " using resource " + res.toString() + "; let's try the other resources of the repository.");		
+		// was not able to create the object using the definition in the Resource metamodel
+		// maybe it need to try definitions of metamodel from the other resources of the repository
+			// retreives the repository
+		RuntimeObject roRepository = (RuntimeObject) unit.associatedResource.getProperties().get("repository");
+		RuntimeObject roResources = (RuntimeObject) roRepository.getProperties().get("resources");
+		for (Object next : ((ArrayList) roResources.getData().get("CollectionArrayList"))) 
+		{
+			RuntimeObject roResource = (RuntimeObject) next;
+			if (roResource != unit.associatedResource){ // ignore the main resource metamodel
+				String res_uri = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) roResource.getProperties().get("metaModelURI"));						
+				res = unit.loadMetaModelAsEcore(res_uri);
+				
+				result = createEObjectFromRuntimeObjectWithResource(rObject, res);
+				if(result != null){ 
+					internalLog.debug("   finally able to create an EObject from " + rObject + " using resource " + res.toString() );
+					return result; // if it worked, don't try other resources				
+				}
+				internalLog.debug("   still not able to create an EObject from " + rObject + " using resource " + res.toString() + "...");		
+				
+			}
+		}
+		
+		return result;
+		
 	}
 
 	/** 
@@ -421,11 +454,33 @@ public class Runtime2EMF {
 			else
 			{
 				EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);
+				if(eclass == null && kqname.equals("ecore::EFeatureMapEntry")){
+					// special case of EFeatureMapEntry
+					// this is because some model may be dependent of ecore only for this reason
+					// retreive the EStructuralFeature
+					EStructuralFeature structFeat;
+					// retreive the object
+					//result = FeatureMapUtil.createEntry(structFeat,);
+					rObject.getData().put("r2e.emfObject", result);
+					// TODO DVK deal with FeatureMap when saving files
+				}
+				else if (eclass == null){
+					// maybe the metaclass is not in this metamodel
+					// this occurs when a metamodel uses references of type EObject, 
+					// or when EMF fails to load the dependent part of the metamodel (and then the getAllContent doesn't traverse it
+					// so let' try the other metamodel resources of the other resource in the same Repository
+					// TODO
+				}
 				if (eclass != null)
 				{
 					result = EcoreUtil.create(eclass);
 					rObject.getData().put("r2e.emfObject", result);
 				}
+				else {
+					// this is an error, we haven't been able to create the object because we haven't retreived its metaclass
+				
+				}
+				
 			}
 			// if (rObject.getData().get("r2e.emfObject") == null)
 			// else : null eclass occurs when the object type is a primitive
@@ -479,8 +534,10 @@ public class Runtime2EMF {
 		while (it.hasNext() && result == null) {
 			EObject obj = (EObject) it.next();
 			if (obj instanceof EClass) {
-				if (unit.getEQualifiedName((EClass) obj).equals(kqname))
+				if (unit.getEQualifiedName((EClass) obj).equals(kqname)){
 					result = (EClass) obj;
+					return result; // do not continue visiting the resource if we have found it
+				}
 			}
 		}
 		// If it was not found, maybe it is an Ecore Type? (like EEnum,
