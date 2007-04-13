@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: UnitItemProvider.java,v 1.3 2007-04-13 15:58:14 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -230,10 +230,16 @@ public class UnitItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((Unit)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Unit_type") :
-			getString("_UI_Unit_type") + " " + label;
+		String text = getString("_UI_Unit_type");
+		String name = ((Unit)object).getName();
+		text = (name == null || name.length() == 0 ?
+						text :
+						text + " " + name);
+		String value = ((Unit)object).getValue();
+		text = (value == null || value.length() == 0 ?
+				text :
+				text + " " + value);
+		return text;
 	}
 
 	/**

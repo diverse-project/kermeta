@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NameFilterItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: NameFilterItemProvider.java,v 1.3 2007-04-13 15:58:14 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -108,7 +108,7 @@ public class NameFilterItemProvider
 		String label = ((NameFilter)object).getRegex();
 		return label == null || label.length() == 0 ?
 			getString("_UI_NameFilter_type") :
-			getString("_UI_NameFilter_type") + " " + label;
+			getString("_UI_NameFilter_type") + "= " + label;
 	}
 
 	/**
