@@ -1,3 +1,12 @@
+/*$Id: KMT2KM.java,v 1.2 2007-04-13 14:46:52 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
+* File : 	sdfg.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
 package fr.irisa.triskell.kermeta.kpm.actions.transformation;
 
 import java.util.Map;
@@ -17,7 +26,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public class KMT2KM implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-
+			
 		/*
 		 * 
 		 * Getting the path (relative to the workspace) of the output file.
@@ -40,13 +49,14 @@ public class KMT2KM implements IAction {
 		/*
 		 * 
 		 * Getting the Kermeta Unit.
+		 * The kermeta unit can be null if there is no need to regenerate the km.
 		 * 
 		 * 
 		 */
 		KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
 		
 		if ( kermetaUnit == null )
-			System.out.println();
+			return;
 		
 		/*
 		 * 
@@ -56,15 +66,15 @@ public class KMT2KM implements IAction {
 		 * 
 		 */
 		if ( ! kermetaUnit.messages.hasError() ) {
-			IFile file = ResourceHelper.getIFile( outputString );
-			kermetaUnit.saveAsXMIModel( file.getLocation().toString() );
+			IFile outputFile = ResourceHelper.getIFile( outputString );
+			kermetaUnit.saveAsXMIModel( outputFile.getLocation().toString() );
 			/*
 			 * 
 			 * Refereshing the workspace to display the new file.
 			 * 
 			 */
 			try {
-				file.refreshLocal(0, monitor);
+				outputFile.refreshLocal(0, monitor);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
