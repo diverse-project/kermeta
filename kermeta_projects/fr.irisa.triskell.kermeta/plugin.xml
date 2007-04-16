@@ -9,7 +9,7 @@
             id="fr.irisa.triskell.kermeta.contribution1">
          <menu
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-	         label="KerMeta"
+	         label="Kermeta"
 	         path="additions">
       		<separator name="kermetagroup1"/>
 		</menu>
@@ -94,7 +94,7 @@
             id="fr.irisa.triskell.kermeta.contribution1">
          <menu
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-	         label="KerMeta"
+	         label="Kermeta"
 	         path="additions">
       		<separator name="kermetagroup1"/>
 		</menu>
@@ -142,12 +142,12 @@
          point="org.eclipse.ui.views">
       <category
             name="Kermeta"
-            id="fr.irisa.triskell.kermeta.viewcategory">
+            id="fr.irisa.triskell.kermeta.view">
       </category>
       <view
             allowMultiple="false"
-            class="fr.irisa.triskell.kermeta.view.KermetaView"
-            category="fr.irisa.triskell.kermeta.viewcategory"
+            class="fr.irisa.triskell.kermeta.view.RegisteredPackageView"
+            category="fr.irisa.triskell.kermeta.view"
             id="fr.irisa.triskell.kermeta.viewregisteredpackages"
             name="EMF registered packages"/>
    </extension>
