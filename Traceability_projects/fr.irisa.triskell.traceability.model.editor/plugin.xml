@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2007-04-17 08:50:39 dvojtise Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.traceability.presentation.TraceabilityModelWizardID"
+      name = "%_UI_TraceabilityModelWizard_label"
+      class = "fr.irisa.triskell.traceability.presentation.TraceabilityModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/TraceabilityModelFile.gif">
+      <description>%_UI_TraceabilityModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.traceability.presentation.TraceabilityEditorID"
+        name = "%_UI_TraceabilityEditor_label"
+        icon = "icons/full/obj16/TraceabilityModelFile.gif"
+        extensions = "traceability"
+        class = "fr.irisa.triskell.traceability.presentation.TraceabilityEditor" 
+        contributorClass="fr.irisa.triskell.traceability.presentation.TraceabilityActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>
