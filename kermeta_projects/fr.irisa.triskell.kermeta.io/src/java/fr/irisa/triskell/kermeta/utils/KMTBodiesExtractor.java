@@ -1,7 +1,7 @@
-/* $Id: KMTBodiesExtractor.java,v 1.6 2006-10-27 08:26:16 dvojtise Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.7 2007-04-17 15:50:24 cfaucher Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
- * License : GPL
+ * License : EPL
  * Description : 
  * 		contains the BodyExtractor which extracts the operations/properties
  * 		and their body and write them into an external file

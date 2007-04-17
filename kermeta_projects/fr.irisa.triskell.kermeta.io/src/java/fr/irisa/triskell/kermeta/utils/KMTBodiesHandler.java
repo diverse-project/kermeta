@@ -1,20 +1,15 @@
-/* $Id: KMTBodiesHandler.java,v 1.6 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KMTBodiesHandler.java,v 1.7 2007-04-17 15:50:24 cfaucher Exp $
  * Created on Feb 21, 2005
  * Author : zdrey
+ * License : EPL
  * Description : describe here your class role
  * TODO : 
  * move KMTBodies*.java in io.loader package
  */
 package fr.irisa.triskell.kermeta.utils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.util.Hashtable;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -56,7 +51,7 @@ public class KMTBodiesHandler {
      */
     public void extractAndInjectForPackageFromFiles(String source_kmt, String target_kmt, String pkg_str)
     {
-        // get the kermeta mmodel from file spec. by source_kmt
+        // get the kermeta model from file spec. by source_kmt
         KermetaUnit source_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(source_kmt, new Hashtable());
         source_unit.load();
         // get the kermeta model in which we want to inject
