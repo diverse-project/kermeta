@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.29 2007-03-02 14:20:43 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.30 2007-04-17 11:52:55 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -463,7 +463,7 @@ public void testWithFile(String dir, String file) throws Exception {
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
 			if (iu.rootPackage != builder.rootPackage) {
-				URI baseURI = UserDirURI.createURI(dir + "/output/", null, true);
+				//URI baseURI = UserDirURI.createURI(dir + "/output/", null, true);
 				if (iu instanceof KMTUnit || iu instanceof KMUnit)
 					w.write("require \"" + iu.getUri() + "\"\n");
 				else {
