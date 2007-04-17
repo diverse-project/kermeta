@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="ASCII"?>
+<tester:A xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:tester="platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/056_test_MdlSave.ecore" name="myTestObject"/>
