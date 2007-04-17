@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.25 2007-04-12 10:54:12 ftanguy Exp $
+/* $Id: KermetaUnitFactory.java,v 1.26 2007-04-17 10:02:02 cfaucher Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -215,8 +215,12 @@ public class KermetaUnitFactory {
     	System.out.println("Number of Kermeta Unit Unloaded : " + loadedUnits.size());
     	
     	for (KermetaUnit unit : loadedUnits.values()) {
-    		if ( unit != StdLibKermetaUnitHelper.getKermetaUnit() )
-    			unit.unload();
+    		if ( unit != StdLibKermetaUnitHelper.getKermetaUnit() ) {
+    			// FIXME 2007-04-17 CF The use of this method call is discouraged for the moment because it occurs
+    			// some failures during the Km2Ecore transformation. We must study the optimization mechanism
+    			// in order to cover all the derived use cases
+    			//unit.unload();
+    		}
     	}
     	loadedUnits.clear();
     	KMUnit.clearRessourceSet();
