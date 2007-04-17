@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.81 2007-04-12 10:54:12 ftanguy Exp $
+/* $Id: KermetaUnit.java,v 1.82 2007-04-17 06:42:34 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -17,7 +17,6 @@ import java.util.Hashtable;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -87,7 +86,7 @@ public abstract class KermetaUnit {
 
     public void unload() {
     	for (TypeDefinition typeDefinition : typeDefs.values())
-    		((Package) typeDefinition.eContainer()).getOwnedTypeDefinition().remove(typeDefinition);
+    		((TypeDefinitionContainer) typeDefinition.eContainer()).getOwnedTypeDefinition().remove(typeDefinition);
     }
     
     public KermetaUnit(String uri, Hashtable packages) {
