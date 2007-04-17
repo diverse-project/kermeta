@@ -1,4 +1,4 @@
-/*$Id: FindAction.java,v 1.2 2007-03-02 13:26:01 ftanguy Exp $
+/*$Id: FindAction.java,v 1.3 2007-04-17 07:55:44 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -23,7 +23,6 @@ package fr.irisa.triskell.kermeta.editorhelper.finder;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
 
 public class FindAction extends Action {
 	
