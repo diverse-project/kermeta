@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceHelper.java,v 1.5 2007-04-12 13:03:17 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.6 2007-04-17 13:12:28 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -15,7 +15,6 @@
  */
 package fr.irisa.triskell.eclipse.resources;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -92,6 +91,15 @@ public class ResourceHelper {
 			rootPath = "file:/" + root.getLocation().toString().replaceAll(" ", "%20");
 		else
 			rootPath = "file:" + root.getLocation().toString();
+		
+		// FIXME 2007-04-17 CF Very, very, very ugly patch to fixe Windows compatibility
+		// Francois, please check this problem
+		if ( absoluteName.matches("C:/.+") ) {
+			rootPath = root.getLocation().toString().replaceAll(" ", "%20");
+		}
+		if ( absoluteName.matches("D:/.+") ) {
+			rootPath = root.getLocation().toString().replaceAll(" ", "%20");
+		}
 		relativeName = absoluteName.replace(rootPath, "");
 		return getIFile(relativeName);
 	}
