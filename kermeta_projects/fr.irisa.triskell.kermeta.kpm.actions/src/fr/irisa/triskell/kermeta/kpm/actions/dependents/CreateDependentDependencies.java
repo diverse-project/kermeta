@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.3 2007-04-17 11:29:23 dvojtise Exp $
+/*$Id: CreateDependentDependencies.java,v 1.4 2007-04-17 11:42:32 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Status;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
@@ -25,7 +24,6 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.InOutHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
@@ -70,13 +68,8 @@ public class CreateDependentDependencies implements IAction {
 				if ( ! importedKermetaUnit.getUri().equals(StdLibKermetaUnitHelper.STD_LIB_URI) ) {
 		
 					IFile importedFile = ResourceHelper.getIFileFromAbsoluteName(importedKermetaUnit.getUri());
-					if(importedFile == null){
-							KPMPlugin.getDefault().getLog().log(new Status(Status.WARNING, "fr.irisa.triskell.kermeta.kpm.actions",
-			                    Status.OK, 
-			                    "ignoring imported unit : " +importedKermetaUnit.getUri()+ " (cannot find it); was imported from " + kermetaUnit.getUri(), 
-			                    null));
-					}
-					else {
+						// the uri may be an incorrect path, ignore it (the typecheckec will do its job to report the error
+					if(importedFile != null){							
 						Unit importedUnit = kpm.findUnit(importedFile.getFullPath().toString());
 						
 						/*
