@@ -1,6 +1,6 @@
 package testCallExp;
 
-require "../../lib/framework.km"
+require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
 
 class String {}
 class Integer {}

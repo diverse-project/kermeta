@@ -1,6 +1,6 @@
 package testEnum;
 
-require "../../lib/framework.km"
+require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
 
 using kermeta::standard
 

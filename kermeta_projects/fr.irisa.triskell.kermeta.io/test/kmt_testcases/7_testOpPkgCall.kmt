@@ -1,6 +1,6 @@
 package testOpPackage;
 
-require "../../lib/framework.km"
+require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
 require "7_testInterPackageCall.kmt"
 
 // This test calls an operation of another package, which itself calls an operation

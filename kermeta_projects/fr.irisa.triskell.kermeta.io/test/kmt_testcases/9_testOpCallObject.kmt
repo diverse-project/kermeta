@@ -1,6 +1,6 @@
 package testOpCallObject;
 
-require "../../lib/framework.km"
+require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
 
 // Creation of an object
 class MyObject {

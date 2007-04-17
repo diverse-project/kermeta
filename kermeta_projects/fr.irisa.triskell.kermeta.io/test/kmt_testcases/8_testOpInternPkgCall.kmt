@@ -1,6 +1,6 @@
 package testOpInternPkgCall;
 
-require "../../lib/framework.km"
+require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
 
 package test_package1 
 {
