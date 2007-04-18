@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.24 2006-09-19 14:46:00 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.25 2007-04-18 15:22:39 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -60,7 +60,7 @@ public class KermetaInterpreter {
 	// The entry Operation
 	private Operation entryOperation;
 	// The parameters as a list of RuntimeObjects
-	private ArrayList entryParameters;
+	private ArrayList<RuntimeObject> entryParameters;
 	
 	// The kermeta unit
 	private KermetaUnit unit=null;
@@ -245,7 +245,7 @@ public class KermetaInterpreter {
 	 * Set the actual parameter for the "main" method
 	 * @param actual_parameters
 	 */
-	public void setEntryParameters(ArrayList actual_parameters) {
+	public void setEntryParameters(ArrayList<RuntimeObject> actual_parameters) {
 	    entryParameters = actual_parameters;
 	}
 	

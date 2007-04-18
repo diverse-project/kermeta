@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.13 2006-12-12 12:14:19 dvojtise Exp $
+/* $Id: OperationCallFrame.java,v 1.14 2007-04-18 15:22:39 ffleurey Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -7,7 +7,7 @@
 * Creation date : 16 mai 2005
 * Authors : 
 * 		Franck Fleurey
-* 		Zoé Drey
+* 		Zoï¿½ Drey
 * 		Didier Vojtisek
 * 		Jim Steel
 */ 
@@ -66,7 +66,7 @@ public class OperationCallFrame extends CallFrame {
      * @param pOperation
      * @param pParameters
      */
-    public OperationCallFrame(InterpreterContext pContext, CallableElement pCallable, RuntimeObject pSelf,  ArrayList pParameters, CallExpression expression) {
+    public OperationCallFrame(InterpreterContext pContext, CallableElement pCallable, RuntimeObject pSelf,  ArrayList<RuntimeObject> pParameters, CallExpression expression) {
         super(pContext);
         if (pCallable instanceof CallableOperation)
         {
@@ -102,13 +102,13 @@ public class OperationCallFrame extends CallFrame {
         
     }
     
-    protected void initialize(ArrayList pParameters) {
+    protected void initialize(ArrayList<RuntimeObject> pParameters) {
         pushExpressionContext();
         Iterator it = operation.getOwnedParameter().iterator();
         int i=0;
         while (it.hasNext()) {
             Parameter fparam = (Parameter)it.next();
-            peekExpressionContext().defineVariable(fparam.getName(), (RuntimeObject)pParameters.get(i));
+            peekExpressionContext().defineVariable(fparam.getName(), pParameters.get(i));
             i++;
         }
     }

@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.54 2007-03-16 16:47:06 barais Exp $
+/* $Id: ExpressionInterpreter.java,v 1.55 2007-04-18 15:22:40 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -127,7 +127,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @param arguments
 	 * @return
 	 */
-	public Object invoke(RuntimeObject ro_target,Operation foperation,ArrayList arguments) {
+	public Object invoke(RuntimeObject ro_target,Operation foperation, ArrayList<RuntimeObject> arguments) {
 		RuntimeObject result=null;
 		setCurrentState(DEBUG_RESUME);
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
