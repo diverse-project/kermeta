@@ -1,6 +1,4 @@
-
-
-/*$Id: ResourceHelper.java,v 1.6 2007-04-17 13:12:28 cfaucher Exp $
+/*$Id: ResourceHelper.java,v 1.7 2007-04-18 09:05:57 dvojtise Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -15,13 +13,19 @@
  */
 package fr.irisa.triskell.eclipse.resources;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 /**
  * @author ftanguy
@@ -41,7 +45,7 @@ public class ResourceHelper {
 	
 	
 	/**
-	 * The resource's path may contain annoying extras schemes like platform:/resource
+	 * The resource's path may contain annoying extras schemes like platform:/resource or file:/${workspacelocation}
 	 * This method checks if the existency of such schemes and remove them.
 	 * @param resourcePath
 	 * @return It returns the clean path.
@@ -50,15 +54,30 @@ public class ResourceHelper {
 		String cleanPath = resourcePath;
 		if ( resourcePath.matches("platform:/resource.*") )
 			cleanPath = URIHelper.getPathFromPlatformURI(resourcePath);
+		if ( resourcePath.matches("file:/.*") ){
+			String rootPath = ""; // path of the workspace root that we will remove from the resource path			
+			// deal with windows C:/ path
+			if ( resourcePath.matches("file:/.:/.+") )
+				rootPath = "file:/" + root.getLocation().toString().replaceAll(" ", "%20");
+			else
+				rootPath = "file:" + root.getLocation().toString();
+				
+			cleanPath = resourcePath.replace(rootPath, "");
+		}
 		return cleanPath;
 	}
 	
 	
 	/**
-	 * This methods gives an IFile resource corresponding to the file path.
+	 * This methods gives an IFile resource corresponding to the file path in the workspace.
 	 * No control is done. It means that even if the file does not exist, you will be given a resource.
+	 * Note: it cannot retreive IFile outside of the workspace
 	 * @see org.eclipse.core.resources.IFile
-	 * @param filePath The path of the file relative to the workspace root directory (ex: /myProject/myDir/myFile). 
+	 * @param filePath The path of the file. It accepts several formats:
+	 * 		- relative to the workspace root directory (ex: /myProject/myDir/myFile).
+	 * 		- platform:/resource url (ex: platform:/resource/myProject/mydir/myFile).
+	 * 		- file:/ url (ex: file:/C:/eclipse/workspace/myProject/mydir/myFile or file:/udd/userName/eclipse/workspace/myProject/mydir/myFile
+	 * 			note that in this case it will work only if the file is really in the workspace 
 	 * @return The method returns an IFile resource.
 	 */
 	static public IFile getIFile(String filePath) {
@@ -80,30 +99,7 @@ public class ResourceHelper {
 	 */
 	static public IFile getIFile(String filePath, String fileName) {
 		return getIFile( filePath + "/" + fileName );
-	}
-	
-	
-	static public IFile getIFileFromAbsoluteName(String absoluteName) {
-		String relativeName = "";
-		// Windows compatibility... grrrrrrr
-		String rootPath = "";
-		if ( absoluteName.matches("file:/.:/.+") )
-			rootPath = "file:/" + root.getLocation().toString().replaceAll(" ", "%20");
-		else
-			rootPath = "file:" + root.getLocation().toString();
-		
-		// FIXME 2007-04-17 CF Very, very, very ugly patch to fixe Windows compatibility
-		// Francois, please check this problem
-		if ( absoluteName.matches("C:/.+") ) {
-			rootPath = root.getLocation().toString().replaceAll(" ", "%20");
-		}
-		if ( absoluteName.matches("D:/.+") ) {
-			rootPath = root.getLocation().toString().replaceAll(" ", "%20");
-		}
-		relativeName = absoluteName.replace(rootPath, "");
-		return getIFile(relativeName);
-	}
-	
+	}	
 	
 	/**
 	 * This methods gives an IFolder resource corresponding to the folder path.
@@ -157,6 +153,52 @@ public class ResourceHelper {
 		return root.getContainerForLocation( new Path(containerPath) );
 	}*/
 	
+	/**
+     * Calculate the linenumber for a given offset in a IFile
+     * doesn't crashes, simply returns 1 if it cannot find the file (+ a stack trace on the console)
+     * @param charnum	position in the file 
+     * @param file
+     * @return
+     */
+    public static int calculateLineNumber(int charnum, IFile file)
+    {
+    	int linenum = 1;int c; int charcount = 0;
+        try
+        {
+            InputStream in = file.getContents();
+            while ((c = in.read()) != -1 && charcount<=charnum) {
+                charcount += 1;
+                if (c=='\n') linenum += 1;
+            }
+            in.close();
+        } 
+        catch (IOException e) { e.printStackTrace(); return -1;}
+        catch (CoreException e){ e.printStackTrace(); return -1;}
+        return linenum;
+    }
+    /**
+     * Calculate the linenumber for a given offset in a file
+     * doesn't crashes, simply returns 1 if it cannot find the file (+ a stack trace on the console)
+     * this version is a little bit more permissive than  calculateLineNumber(int charnum, IFile file) since it can open file outside of the workspace
+     * @param charnum	position in the file 
+     * @param fileuri	URI of the file
+     * @return
+     */
+    public static int calculateLineNumber(int charnum, String fileuri)
+    {
+    	int linenum = 1;int c; int charcount = 0;
+        try
+        {
+            InputStream in = new URIConverterImpl( ).createInputStream(URI.createURI(fileuri));
+            while ((c = in.read()) != -1 && charcount<=charnum) {
+                charcount += 1;
+                if (c=='\n') linenum += 1;
+            }
+            in.close();
+        } 
+        catch (IOException e) { e.printStackTrace(); return -1;}
+        return linenum;
+    }
 }
 
 

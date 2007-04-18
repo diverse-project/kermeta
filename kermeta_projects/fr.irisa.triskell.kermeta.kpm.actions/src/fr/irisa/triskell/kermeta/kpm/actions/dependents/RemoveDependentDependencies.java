@@ -1,6 +1,6 @@
-/*$Id: RemoveDependentDependencies.java,v 1.2 2007-04-13 14:46:10 ftanguy Exp $
-* Project : fr.irisa.triskell.kermeta.kpm
-* File : 	sdfg.java
+/*$Id: RemoveDependentDependencies.java,v 1.3 2007-04-18 09:05:55 dvojtise Exp $
+* Project : fr.irisa.triskell.kermeta.kpm.actions
+* File : 	RemoveDependentDependencies.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -88,7 +88,7 @@ public class RemoveDependentDependencies implements IAction {
 
 	private boolean findImportedUnit(KermetaUnit kermetaUnit, Unit unitToFind) {
 		for ( KermetaUnit currentKermetaUnit : kermetaUnit.importedUnits ) {
-			IFile currentFile = ResourceHelper.getIFileFromAbsoluteName(currentKermetaUnit.getUri());
+			IFile currentFile = ResourceHelper.getIFile(currentKermetaUnit.getUri());
 			if ( currentFile.getFullPath().toString().equals(unitToFind.getValue()) )
 				return true;
 		}

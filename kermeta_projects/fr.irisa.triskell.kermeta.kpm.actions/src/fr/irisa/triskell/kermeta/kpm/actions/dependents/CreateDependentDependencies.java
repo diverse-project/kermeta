@@ -1,6 +1,6 @@
-/*$Id: CreateDependentDependencies.java,v 1.4 2007-04-17 11:42:32 dvojtise Exp $
-* Project : fr.irisa.triskell.kermeta.kpm
-* File : 	sdfg.java
+/*$Id: CreateDependentDependencies.java,v 1.5 2007-04-18 09:05:55 dvojtise Exp $
+* Project : fr.irisa.triskell.kermeta.kpm.actions
+* File : 	CreateDependentDependencies.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -67,7 +67,7 @@ public class CreateDependentDependencies implements IAction {
 				
 				if ( ! importedKermetaUnit.getUri().equals(StdLibKermetaUnitHelper.STD_LIB_URI) ) {
 		
-					IFile importedFile = ResourceHelper.getIFileFromAbsoluteName(importedKermetaUnit.getUri());
+					IFile importedFile = ResourceHelper.getIFile(importedKermetaUnit.getUri());
 						// the uri may be an incorrect path, ignore it (the typecheckec will do its job to report the error
 					if(importedFile != null){							
 						Unit importedUnit = kpm.findUnit(importedFile.getFullPath().toString());
