@@ -1,3 +1,12 @@
+/*$Id: AddMarkers.java,v 1.2 2007-04-18 09:25:21 dvojtise Exp $
+* Project : fr.irisa.triskell.kermeta.kpm.actions
+* File : 	AddMarkers.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
 package fr.irisa.triskell.kermeta.kpm.actions.marker;
 
 import java.util.ArrayList;
@@ -20,8 +29,6 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
-import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
@@ -126,7 +133,7 @@ public class AddMarkers implements IAction, Interest {
 			
 			/*
 			 * 
-			 * If file does contain error, then dependent files must also be marked as errored.
+			 * If file does contain error, then dependent files must also be marked as erroneous.
 			 * 
 			 * 
 			 */
