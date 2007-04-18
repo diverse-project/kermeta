@@ -1,10 +1,11 @@
 /*******************************************************************************
- * $Id: DeleteInheritanceEdgeAction.java,v 1.4 2007-02-19 18:04:53 cfaucher Exp $
+ * $Id: DeleteInheritanceEdgeAction.java,v 1.5 2007-04-18 16:02:13 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
 package fr.irisa.triskell.kermeta.graphicaleditor.cd.actions;
 
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -76,7 +77,7 @@ public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 			cmd.setPartToBeDeleted(this.template);
 			if(targetEditor instanceof KmEditor) {
 				KmEditor myKmEditor = (KmEditor) targetEditor;
-				myKmEditor.getCommandStack().execute(cmd);
+				((CommandStack) myKmEditor.getAdapter(CommandStack.class)).execute(cmd);
 			}
 		}
 	}

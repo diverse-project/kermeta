@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.4 2007-02-19 18:04:53 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.5 2007-04-18 16:00:42 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -11,7 +11,6 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
@@ -85,14 +84,6 @@ public class KmEditor extends Modeler {
 	public IPreferenceStore getPreferenceStore() {
 		return KmPlugin.getDefault().getPreferenceStore();
 	}
-
-	/**
-     * Returns the command stack for activating the notification like with DeleteInheritanceEdgeAction
-     * @generated NOT
-     */
-    public CommandStack getCommandStack() {
-    	return super.getCommandStack();
-    }
 
     /**
      * Before the opening of the file framework.ecore is loaded
