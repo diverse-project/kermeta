@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.52 2007-04-16 13:45:13 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.53 2007-04-18 15:20:04 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -278,8 +278,10 @@ public class Runtime2EMF {
 				if (property.getData().get("CollectionArrayList")!=null)
 				{
 					// For each feature of the collection of features
-					for (Object rcoll : ((ArrayList) property.getData().get("CollectionArrayList")))
+					ArrayList colArr = (ArrayList) property.getData().get("CollectionArrayList");
+					for(int i = colArr.size()-1; i >= 0 ; i--)
 					{
+						Object rcoll = colArr.get(i);
 						Object p_o = getOrCreatePropertyFromRuntimeObject((RuntimeObject) rcoll, feature);
 						if (p_o != null) { ((EList) eObject.eGet(feature)).add(0,p_o); }
 					}
