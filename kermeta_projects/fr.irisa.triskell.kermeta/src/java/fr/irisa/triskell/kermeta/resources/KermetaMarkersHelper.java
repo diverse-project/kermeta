@@ -1,3 +1,12 @@
+/*$Id: KermetaMarkersHelper.java,v 1.3 2007-04-19 14:30:50 dvojtise Exp $
+* Project : fr.irisa.triskell.kermeta
+* File : 	KermetaMarkersHelper.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 7, 2007
+* Authors : ftanguy, dvojtise
+*/
 package fr.irisa.triskell.kermeta.resources;
 
 import java.util.HashMap;
@@ -10,6 +19,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -19,7 +29,10 @@ import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
-
+/**
+ * This class provides helper functions to create and manage the Eclipse markers when used with Kermeta
+ *
+ */
 public class KermetaMarkersHelper {
 
 	private final static int LINE_MAX_SIZE = 80;
@@ -37,7 +50,7 @@ public class KermetaMarkersHelper {
     }
 	
     /**
-     *  Create markers for showing to the user the elements that are errored, or
+     *  Create markers for showing to the user the elements that are erroneous, or
      *  that are subjects to warnings.
      */
     public static void createMarkers(IFile file, KermetaUnit unit)
@@ -49,7 +62,7 @@ public class KermetaMarkersHelper {
     }
 
     /**
-     *  Create a marker for showing to the user the elements that are errored, or
+     *  Create a marker for showing to the user the elements that are erroneous, or
      *  that are subjects to warnings.
      *  @param file the file currently edited
      *  @param message contains the message/warning/error, and the node that 
@@ -104,11 +117,15 @@ public class KermetaMarkersHelper {
                 		else
                 			map.put("severity", new Integer(0));
                 	map.put("charStart", new Integer(offset));
-                	map.put("charEnd", new Integer(offset + length));        		
+                	map.put("charEnd", new Integer(offset + length)); 
+                	int lineNumber = new Integer(ResourceHelper.calculateLineNumber(offset,file));
+                	if(lineNumber != -1){
+                		map.put("lineNumber", new Integer(lineNumber));
+                	}
                 	MarkerUtilities.createMarker(file, map, getMarkerType());
         		//MarkerUtilities.createMarker(file, null, getMarkerType());
                 } else {
-                	map.put("message", "One of required file is errored.");
+                	map.put("message", "One of required file is erroneous. " + message.getMessage());
                 	if(message instanceof KMUnitError)
                 		map.put("severity", new Integer(2));
                 	else
@@ -128,7 +145,7 @@ public class KermetaMarkersHelper {
             ex.printStackTrace();
         }
     }
-    
+        
     
     /**
      *  Create a marker for showing to the user the elements that are errored, or
