@@ -1,4 +1,4 @@
-/*$Id: KPMConstants.java,v 1.1 2007-04-19 15:34:01 dvojtise Exp $
+/*$Id: KPMConstants.java,v 1.2 2007-04-19 15:50:10 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KPMConstants.java
 * License : EPL
@@ -21,7 +21,7 @@ public class KPMConstants {
 	// customisation of default KPM model
 	// maybe in the future we may put that in a general preference
 	public static boolean GENERATEKM_DEFAULTVALUE = false;
-	public static boolean APPLYREQUIREDEPENDENCIES_DEFAULTVALUE = false;
+	public static boolean APPLYREQUIREDEPENDENCIES_DEFAULTVALUE = true;
 	
 	// Preferences default values
 	public static String KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE = GENERATEKM_DEFAULTVALUE ? "true" : "false";
