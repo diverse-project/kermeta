@@ -219,15 +219,21 @@
       </extension>
       <extension
             point="org.eclipse.ui.newWizards">
+         
+     	 <category
+           id="fr.irisa.triskell.kermeta.KermetaWizard"
+           name="Kermeta"/>
          <wizard
                icon="icons/newkermetafile.png"
                class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
                category="fr.irisa.triskell.kermeta.KermetaWizard"
                descriptionImage="icons/kermeta.png"
-               project="true"
+               project="false"
                preferredPerspectives="org.eclipse.ui.resourcePerspective"
                name="New Kermeta file"
-               id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
+               id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard">
+            <selection class="org.eclipse.core.resources.IFile"/>
+        </wizard>
       </extension>
       <extension
             point="org.eclipse.debug.core.sourceLocators">
