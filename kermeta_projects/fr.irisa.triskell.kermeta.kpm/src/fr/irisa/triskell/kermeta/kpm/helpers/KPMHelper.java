@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.9 2007-04-19 08:48:20 dvojtise Exp $
+/*$Id: KPMHelper.java,v 1.10 2007-04-19 15:34:01 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.preferences.KPMConstants;
 
 public class KPMHelper {
 
@@ -118,10 +119,15 @@ public class KPMHelper {
 	}
 	
 	static public void addUpdateDependencyForKMTFile(KPM kpm) {
+		
+		ArrayList<Out> outs = new ArrayList<Out> ();
+		
 		In in = InOutHelper.createInWithNameFilter(kpm, "*.kmt");
 		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out1);
 		
 		//Out out2 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
+		//outs.add(out2);
 		
 		
 		/*FilterExpression outExpression = KpmFactory.eINSTANCE.createFilterExpression();
@@ -139,23 +145,18 @@ public class KPMHelper {
 		out3.setAction( kpm.findAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore") );*/
 
 		Out out3 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
+		outs.add(out3);
 		
 		Out out4 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
+		outs.add(out4);
 		
 		Out out5 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
-
-		// DVK: in v0.4.1, by default, do not generate the km unless the user clearly specify it
-		// in a future version we should use a general configuration/preference to drive the default action when creating a keremta project
-		//Out out6 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
-		
-		
-		ArrayList<Out> outs = new ArrayList<Out> ();
-		outs.add(out1);
-		//outs.add(out2);
-		outs.add(out3);
-		outs.add(out4);
 		outs.add(out5);
-		//outs.add(out6);
+		
+		if(KPMConstants.GENERATEKM_DEFAULTVALUE){ // depending on default configuration
+			Out out6 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
+			outs.add(out6);
+		}
 		
 		DependencyHelper.createDependency(kpm, "Update KMT File", "normal", "update", in, outs);
 	}

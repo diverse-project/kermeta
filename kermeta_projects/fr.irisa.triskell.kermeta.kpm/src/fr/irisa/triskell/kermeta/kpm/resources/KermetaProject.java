@@ -18,15 +18,14 @@ import fr.irisa.triskell.eclipse.ecore.XMIHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.preferences.KPMConstants;
 
 /**
  * @author ftanguy
  *
  */
 public class KermetaProject {
-
-	public static String KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE = "false";
-	public static String KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE = "true";
+	
 	/**
 	 * The corresponding eclipse resource.
 	 */
@@ -94,9 +93,9 @@ public class KermetaProject {
 	
 	private void initializeConstants() throws CoreException {
 		QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "applyRequireDependencies");
-		project.setPersistentProperty(key, KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE);
+		project.setPersistentProperty(key, KPMConstants.KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE);
 		key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "generateKM");
-		project.setPersistentProperty(key, KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE);
+		project.setPersistentProperty(key, KPMConstants.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE);
 		key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "forceOpening");
 		project.setPersistentProperty(key, "true");
 	}

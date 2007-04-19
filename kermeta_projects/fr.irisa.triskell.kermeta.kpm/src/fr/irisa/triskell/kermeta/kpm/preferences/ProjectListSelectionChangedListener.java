@@ -27,16 +27,16 @@ public class ProjectListSelectionChangedListener implements
 			QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "applyRequireDependencies");
 			String value = project.getValue().getPersistentProperty(key);
 			if ( value == null ) {
-				project.getValue().setPersistentProperty(key, KermetaProject.KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE);
-				value = "true";
+				project.getValue().setPersistentProperty(key, KPMConstants.KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE);
+				value = KPMConstants.KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE;
 			} else
 				page.applyRequireDependencies.setSelection( Boolean.parseBoolean(value) );
 			
 			key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "generateKM");
 			value = project.getValue().getPersistentProperty(key);
 			if ( value == null ) {
-				project.getValue().setPersistentProperty(key, KermetaProject.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE);
-				value = KermetaProject.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE;
+				project.getValue().setPersistentProperty(key, KPMConstants.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE);
+				value = KPMConstants.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE;
 			} else
 				page.generateKM.setSelection( Boolean.parseBoolean(value) );
 			
