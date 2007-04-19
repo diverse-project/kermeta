@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PackageEditPart.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: PackageEditPart.java,v 1.2 2007-04-19 15:17:05 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.commands.PackageRestoreConne
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.PackageFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PackageLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * The Package object controller
@@ -105,7 +106,7 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 								.getSemanticModel().getGraphElement())) {
 			if (getModelPackage().getNestingPackage().getName() != null) {
 				lbl.setSuffix("from "
-						+ getModelPackage().getNestingPackage().getName());
+						+ NamedElementHelper.getMangledQualifiedName(getModelPackage().getNestingPackage()));
 			}
 		} else {
 			lbl.setSuffix("");

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionEditPart.java,v 1.2 2007-02-23 09:28:43 dvojtise Exp $
+ * $Id: ClassDefinitionEditPart.java,v 1.3 2007-04-19 15:17:05 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -37,8 +37,8 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PropertyEdgeCreatio
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * The ClassDefinition object controller
@@ -175,17 +175,9 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 							.getElement(((GraphElement) getParent().getModel())
 									.getSemanticModel().getGraphElement())) {
 				if (owningPackage.getName() != null) {
-					lbl.setSuffix("from " + owningPackage.getName());
+					lbl.setSuffix("from " + NamedElementHelper.getMangledQualifiedName(owningPackage));
 				}
-				String qname = NamedElementHelper
-						.getMangledQualifiedName(getClassDefinition());
-				System.err.println("Debug - qname: " + qname);
-				/*
-				 * if (getClassDefinition().getName() != null) qname =
-				 * qname.substring(0,
-				 * qname.lastIndexOf(getModelClassDefinition() .getName()) - 2);
-				 * lbl.setSuffix(qname);
-				 */
+				
 			} else {
 				lbl.setSuffix("");
 			}
