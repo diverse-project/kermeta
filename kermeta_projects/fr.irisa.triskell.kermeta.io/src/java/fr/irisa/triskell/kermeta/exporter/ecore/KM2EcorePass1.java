@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.38 2007-02-22 12:45:20 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.39 2007-04-19 14:24:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -98,7 +98,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		ecoreExporter = anEcoreExporter;
 		// PrettyPrinter that will convert the operation body into a String that will be stored as an Ecore
 		// annotation since ecore metamodel does not contains a behavior.
-		prettyPrinter = new KM2KMTPrettyPrinter( ecoreExporter.kermetaUnit.getUri() );
+		prettyPrinter = new KM2KMTPrettyPrinter();
 	}
 
 
