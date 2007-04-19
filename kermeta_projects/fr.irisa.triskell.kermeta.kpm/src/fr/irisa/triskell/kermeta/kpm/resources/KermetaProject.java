@@ -25,6 +25,8 @@ import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
  */
 public class KermetaProject {
 
+	public static String KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE = "false";
+	public static String KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE = "true";
 	/**
 	 * The corresponding eclipse resource.
 	 */
@@ -92,9 +94,9 @@ public class KermetaProject {
 	
 	private void initializeConstants() throws CoreException {
 		QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "applyRequireDependencies");
-		project.setPersistentProperty(key, "true");
+		project.setPersistentProperty(key, KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE);
 		key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "generateKM");
-		project.setPersistentProperty(key, "true");
+		project.setPersistentProperty(key, KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE);
 		key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "forceOpening");
 		project.setPersistentProperty(key, "true");
 	}
