@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2007-03-02 14:54:45 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2007-04-19 14:29:16 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -437,7 +437,6 @@ testkmtFile("test/roundtrip_testcases/kmt","016_testTypeVariableTypes.main.kmt" 
 	    Resource resource = resource_set.createResource(u);
 	    // KMT2ECORE
 	    KM2Ecore exporter;
-	    KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    exporter = new KM2Ecore(resource, builder,ofile.substring(0, ofile.lastIndexOf("/"))+"/dep/",null);
 	    exporter.setEcoreGenDirectory(ofile.substring(0, ofile.lastIndexOf("/"))+"/dep/");
 		exporter.exportPackage(builder.rootPackage);

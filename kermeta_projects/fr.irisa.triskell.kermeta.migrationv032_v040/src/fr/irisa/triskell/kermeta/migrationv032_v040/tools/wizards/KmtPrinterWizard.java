@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.1 2007-01-23 15:04:13 dvojtise Exp $
+/* $Id: KmtPrinterWizard.java,v 1.2 2007-04-19 14:29:32 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -71,7 +71,7 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
 	    
-		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( builder.getUri() );
+		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( );
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(ifile.getLocation().toFile()));
 		String pkg_name = "package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n";
