@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.82 2007-04-17 06:42:34 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.83 2007-04-19 14:27:56 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -11,7 +11,6 @@ package fr.irisa.triskell.kermeta.loader;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Stack;
@@ -26,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
@@ -84,9 +84,14 @@ public abstract class KermetaUnit {
     	internalLog.debug("Finalise kermeta unit " + this + " " + uri);
     }
 
+    /**
+     * When unloading kermeta units from the memory, remove type definitions defined in the unit.
+     *
+     */
     public void unload() {
-    	for (TypeDefinition typeDefinition : typeDefs.values())
-    		((TypeDefinitionContainer) typeDefinition.eContainer()).getOwnedTypeDefinition().remove(typeDefinition);
+    	for (TypeDefinition typeDefinition : typeDefs.values()){    		
+    		((TypeDefinitionContainer) typeDefinition.eContainer()).getOwnedTypeDefinition().remove(typeDefinition);    		
+    	}
     }
     
     public KermetaUnit(String uri, Hashtable packages) {
@@ -263,38 +268,14 @@ public abstract class KermetaUnit {
 			KermetaASTNode astNode = (KermetaASTNode)node;
 			astNode.getRangeStart();
 			tracer.addTextInputTrace(this.uri, 
-					getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
+					ResourceHelper.calculateLineNumber(astNode.getRangeStart(),this.uri),//getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
 					astNode.getRangeStart(),
 					astNode.getRangeStart()+ astNode.getRangeLength(), 
 					model_element, 
 					traceDefaultShortDescription + astNode.getTypeName() );
 			
 		}
-	}
-	
-	/** *
-	 * Method copied from Traceback class in interpreter project; counts the new lines
-	 * in the given file until the given node is found. (getKMTLineNumber)
-	 * Should it be moved else where?
-	 * @param node
-	 * @param unit_struri
-	 * @return the line number as a String
-	 */
-    protected int getLineNumber(KermetaASTNode node, String unit_struri)
-    {
-    	int linenum = 1;int c; int charcount = 0;
-        int charnum = node.getRangeStart();
-        try
-        {
-            InputStream in = new URIConverterImpl( ).createInputStream(URI.createURI(unit_struri));
-            while ((c = in.read()) != -1 && charcount<=charnum) {
-                charcount += 1;
-                if (c=='\n') linenum += 1;
-            }
-            in.close();
-        } catch (IOException e) { e.printStackTrace(); }
-        return linenum;
-    }
+	}	
 	
 	/**
 	 * Helper method that looks into all the imported unit to find the researched 
