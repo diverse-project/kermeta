@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NameFilterItemProvider.java,v 1.3 2007-04-13 15:58:14 dvojtise Exp $
+ * $Id: NameFilterItemProvider.java,v 1.4 2007-04-19 06:51:51 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -102,7 +102,7 @@ public class NameFilterItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
 		String label = ((NameFilter)object).getRegex();

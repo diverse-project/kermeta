@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutItemProvider.java,v 1.1 2007-04-11 07:19:56 ftanguy Exp $
+ * $Id: OutItemProvider.java,v 1.2 2007-04-19 06:51:51 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Out;
 
 import java.util.Collection;
@@ -125,11 +126,14 @@ public class OutItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
 		Out out = (Out)object;
-		return getString("_UI_Out_type") + " " + out.isIndependant();
+		String label = out.getAction() != null ? out.getAction().getExtensionPoint() : null;
+		return label == null || label.length() == 0 ?
+				getString("_UI_Out_type") :
+				getString("_UI_Out_type") + " => " + label;
 	}
 
 	/**

@@ -2,12 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyEntryItemProvider.java,v 1.1 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: DependencyEntryItemProvider.java,v 1.2 2007-04-19 06:51:51 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
+import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import java.util.Collection;
 import java.util.List;
@@ -123,10 +125,19 @@ public class DependencyEntryItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		return getString("_UI_DependencyEntry_type");
+		String text = getString("_UI_DependencyEntry_type");
+		String depType = ((DependencyEntry)object).getType().getName();
+		text = (depType == null || depType.length() == 0 ?
+						text :
+						text + "=" + depType);
+		String value = ((DependencyEntry)object).getUnit().getValue();
+		text = (value == null || value.length() == 0 ?
+				text :
+				text + " " + value);
+		return text;
 	}
 
 	/**
