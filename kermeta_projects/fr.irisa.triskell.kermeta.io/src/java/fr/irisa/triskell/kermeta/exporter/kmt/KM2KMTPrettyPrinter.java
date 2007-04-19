@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.47 2007-02-28 15:21:59 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.48 2007-04-19 14:25:23 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -69,8 +69,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -103,28 +101,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
 	
-	
+	/**
+	 * Create a new PrettyPrinter
+	 * Use a new one whenever you whish to make sure that several prettyprint doesn't conflict with each other
+	 */
 	public KM2KMTPrettyPrinter() {
 	}
-	
-	/**
-	 * 
-	 */
-	public KM2KMTPrettyPrinter(String uri) {
-	    KermetaUnitFactory.getDefaultLoader().unloadAll();
-
-	    // LOAD THE UNIT
-	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-		try {
-			builder.load();
-		}
-		catch(Exception e ) {
-			//if (builder.messages.getErrors().size() == 0) throw e;
-		};
-
-		builder.typeCheck(null);
-	}
-	
 	
 	public void ppPackage(Package p, File file) {
 		try {
