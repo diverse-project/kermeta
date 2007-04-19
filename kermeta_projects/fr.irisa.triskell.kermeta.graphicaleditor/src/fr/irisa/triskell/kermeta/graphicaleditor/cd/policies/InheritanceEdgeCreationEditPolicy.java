@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: InheritanceEdgeCreationEditPolicy.java,v 1.2 2007-03-01 17:06:35 cfaucher Exp $
+ * $Id: InheritanceEdgeCreationEditPolicy.java,v 1.3 2007-04-19 15:00:05 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -151,8 +151,9 @@ public class InheritanceEdgeCreationEditPolicy extends
 				.isUnique()) {
 			// check if an inheritance relation always exists between the 2
 			// given classes
-			if (KermetaCommonUtils.isSuperType(sourceClassDef, targetClassDef))
+			if(ClassDefinitionHelper.isSuperClassOfByName(targetClassDef,sourceClassDef)) {
 				isvalid = false;
+			}
 		}
 		return isvalid;
 	}
