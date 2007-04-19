@@ -56,7 +56,7 @@
            class="fr.irisa.triskell.kermeta.wizards.NewKermetaProjectWizard"
            descriptionImage="images/tree_package.gif"
            finalPerspective="kermetaPerspective"
-           icon="images/tree_package.gif"
+           icon="images/new_kermeta_project.gif"
            id="fr.irisa.triskell.kermeta.ui.wizards.newProject"
            name="New Kermeta Project"
            project="true">
