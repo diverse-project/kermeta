@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.8 2007-04-13 14:44:56 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.9 2007-04-19 08:48:20 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -144,7 +144,9 @@ public class KPMHelper {
 		
 		Out out5 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
 
-		Out out6 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
+		// DVK: in v0.4.1, by default, do not generate the km unless the user clearly specify it
+		// in a future version we should use a general configuration/preference to drive the default action when creating a keremta project
+		//Out out6 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
 		
 		
 		ArrayList<Out> outs = new ArrayList<Out> ();
@@ -153,7 +155,7 @@ public class KPMHelper {
 		outs.add(out3);
 		outs.add(out4);
 		outs.add(out5);
-		outs.add(out6);
+		//outs.add(out6);
 		
 		DependencyHelper.createDependency(kpm, "Update KMT File", "normal", "update", in, outs);
 	}
