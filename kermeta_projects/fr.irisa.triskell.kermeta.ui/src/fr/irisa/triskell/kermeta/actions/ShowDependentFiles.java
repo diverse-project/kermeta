@@ -1,4 +1,4 @@
-/*$Id: ShowDependentFiles.java,v 1.2 2007-04-13 14:47:55 ftanguy Exp $
+/*$Id: ShowDependentFiles.java,v 1.3 2007-04-23 11:58:54 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -18,8 +18,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.ui.views.DependentFilesViewPart;
-import fr.irisa.triskell.kermeta.ui.views.FileDependenciesViewPart;
 
 public class ShowDependentFiles implements IObjectActionDelegate {
 
@@ -59,6 +60,18 @@ public class ShowDependentFiles implements IObjectActionDelegate {
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
+		if ( selection instanceof TreeSelection ) {
+			
+			TreeSelection treeSelection = (TreeSelection) selection;
+			IFile file = (IFile) treeSelection.getFirstElement();
+			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
+			if ( project == null )
+				action.setEnabled(false);
+			else
+				action.setEnabled(true);
+			
+		} else
+			action.setEnabled(false);
 	}
 
 	/*
