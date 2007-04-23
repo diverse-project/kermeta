@@ -109,6 +109,7 @@ public class OpenProject implements IAction, Interest {
 						KermetaUnitHelper.unloadAllKermetaUnit();
 						
 						KermetaUnitHost.getInstance().declareInterest(this, currentUnit);
+						map.put("forceTypechecking", true);
 						currentUnit.receiveSynchroneEvent("update", map, new SubProgressMonitor(monitor, 0) );
 						KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(currentUnit);
 						if ( kermetaUnit != null )
