@@ -30,7 +30,7 @@ public class ProjectListSelectionChangedListener implements
 				project.getValue().setPersistentProperty(key, KPMConstants.KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE);
 				value = KPMConstants.KERMETAPROJECT_PREF_APPLYREQUIREDEPENDENCIES_DEFAULTVALUE;
 			} else
-				page.applyRequireDependencies.setSelection( Boolean.parseBoolean(value) );
+				page.setApplyRequireValue(value);
 			
 			key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "generateKM");
 			value = project.getValue().getPersistentProperty(key);
@@ -38,10 +38,9 @@ public class ProjectListSelectionChangedListener implements
 				project.getValue().setPersistentProperty(key, KPMConstants.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE);
 				value = KPMConstants.KERMETAPROJECT_PREF_GENERATEKM_DEFAULTVALUE;
 			} else
-				page.generateKM.setSelection( Boolean.parseBoolean(value) );
+				page.setGenerateKMValue(value);
 			
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.kpm.preferences;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.eclipse.core.runtime.CoreException;
@@ -31,8 +32,31 @@ public class KPMPreferencePage extends PreferencePage implements
 
 	public ListViewer listViewer;
 	
-	public Button applyRequireDependencies;
-	public Button generateKM;
+	private Button generateKM;
+	private boolean generateKMValue;
+	
+	public void setGenerateKMValue(String value) {
+		generateKM.setSelection( Boolean.parseBoolean(value) );
+		generateKMValue = Boolean.parseBoolean(value);
+	}
+	
+	
+	private Button applyRequire;	
+	private boolean applyRequireValue;
+	
+	public void setApplyRequireValue(String value) {
+		applyRequire.setSelection( Boolean.parseBoolean(value) );
+		applyRequireValue = Boolean.parseBoolean(value);
+	}
+	
+	
+	/**
+	 * 
+	 * Boolean that is used when performs apply or ok to make the changes if it needs to be done.
+	 * 
+	 */
+	private boolean changesDone = false;
+	
 	
 	
 	public KPMPreferencePage() {
@@ -43,12 +67,10 @@ public class KPMPreferencePage extends PreferencePage implements
 
 	public KPMPreferencePage(String title) {
 		super(title);
-		// TODO Auto-generated constructor stub
 	}
 
 	public KPMPreferencePage(String title, ImageDescriptor image) {
 		super(title, image);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -63,8 +85,8 @@ public class KPMPreferencePage extends PreferencePage implements
 			listViewer.add(project);
 		}
 		
-		applyRequireDependencies = new Button(parent, SWT.CHECK);
-		applyRequireDependencies.setText("Apply Require Dependencies");
+		applyRequire = new Button(parent, SWT.CHECK);
+		applyRequire.setText("Apply Require Dependencies");
 		
 		generateKM = new Button(parent, SWT.CHECK);
 		generateKM.setText("Generate a KM file for each KMT file");
@@ -72,61 +94,82 @@ public class KPMPreferencePage extends PreferencePage implements
 		return parent;
 	}
 
-	public void init(IWorkbench workbench) {
-		// TODO Auto-generated method stub
-
-	}
+	public void init(IWorkbench workbench) {}
 	
-	
-	@Override
-	protected void performApply() {
+	private void makeChanges() {
 		try {
-			boolean newValue = applyRequireDependencies.getSelection();
-			IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();
-			KermetaProject project = (KermetaProject) selection.getFirstElement();
-			QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "applyRequireDependencies");
-			project.getValue().setPersistentProperty(key, String.valueOf(newValue) );
 			
-			newValue = generateKM.getSelection();
-			selection = (IStructuredSelection) listViewer.getSelection();
-			project = (KermetaProject) selection.getFirstElement();
-			key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "generateKM");
-			project.getValue().setPersistentProperty(key, String.valueOf(newValue) );
-			if ( newValue ) {
-				Iterator<Unit> iterator = project.getKpm().getUnits().iterator();
-				while ( iterator.hasNext() ) {
+			IStructuredSelection selection = (IStructuredSelection) listViewer.getSelection();			
+			KermetaProject project = (KermetaProject) selection.getFirstElement();
+			
+			boolean applyRequireNewValue = applyRequire.getSelection();
+			if ( applyRequireNewValue != applyRequireValue ) {
+				QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "applyRequireDependencies");
+				project.getValue().setPersistentProperty(key, String.valueOf(applyRequireNewValue) );
+				applyRequireValue = applyRequireNewValue;
+				changesDone = false;
+			}
+			
+			boolean generateKMNewValue = generateKM.getSelection();
+			
+			if ( generateKMValue != generateKMNewValue ) {
+				QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "generateKM");
+				project.getValue().setPersistentProperty(key, String.valueOf(generateKMNewValue) );
+				generateKMValue = generateKMNewValue;
+				changesDone = false;
+			}
+			
+			if ( ! changesDone ) {		
+			
+				if ( generateKMValue ) {
+					Iterator<Unit> iterator = project.getKpm().getUnits().iterator();
+					while ( iterator.hasNext() ) {
 					
-					Unit currentUnit = iterator.next();
-					Dependency dependency = currentUnit.findDependency("update");
-					if ( dependency != null ) {
-						Out out = dependency.findOut("fr.irisa.triskell.kermeta.kpm.actions.kmt2km");
-						if ( out == null ) {
-							out = InOutHelper.createOutWithNameFilter(project.getKpm(), "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
-							dependency.getOuts().add(out);
+						Unit currentUnit = iterator.next();
+						Dependency dependency = currentUnit.findDependency("update");
+						if ( dependency != null ) {
+							Out out = dependency.findOut("fr.irisa.triskell.kermeta.kpm.actions.kmt2km");
+							if ( out == null ) {
+								out = InOutHelper.createOutWithNameFilter(project.getKpm(), "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
+								dependency.getOuts().add(out);
+							}
 						}
 					}
-				}
-				project.getProjectUnit().receiveAsynchroneEvent("open", null);	
-			}
-				
-			else {
-				Iterator<Unit> iterator = project.getKpm().getUnits().iterator();
-				while ( iterator.hasNext() ) {
+				} else {
+					Iterator<Unit> iterator = project.getKpm().getUnits().iterator();
+					while ( iterator.hasNext() ) {
 					
-					Unit currentUnit = iterator.next();
-					Dependency dependency = currentUnit.findDependency("update");
-					if ( dependency != null )
-						dependency.removeOut( "fr.irisa.triskell.kermeta.kpm.actions.kmt2km" );
-					
+						Unit currentUnit = iterator.next();
+						Dependency dependency = currentUnit.findDependency("update");
+						if ( dependency != null )
+							dependency.removeOut( "fr.irisa.triskell.kermeta.kpm.actions.kmt2km" );	
+					}
 				}
-			}
 		
+				if ( applyRequireValue ) {
+					HashMap args = new HashMap();
+					args.put("forceOpening", true);
+					project.getProjectUnit().receiveAsynchroneEvent("open", args);				
+				}
+			}
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		super.performApply();
+		changesDone = true;
+		
+	}
+	
+	@Override
+	public boolean performOk() {
+		makeChanges();
+		return true;
+	}
+	
+	@Override
+	protected void performApply() {
+		makeChanges();
 	}
 
 }
