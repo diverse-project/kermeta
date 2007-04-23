@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.26 2007-04-17 10:02:02 cfaucher Exp $
+/* $Id: KermetaUnitFactory.java,v 1.27 2007-04-23 12:08:20 dvojtise Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -140,7 +140,14 @@ public class KermetaUnitFactory {
     	URI u = URI.createURI(uri);
     	if (u.isRelative()) {
     		URIConverter c = new URIConverterImpl();
-    		u = u.resolve(c.normalize(URI.createURI(".")));    			
+    		try{
+    			u = u.resolve(c.normalize(URI.createURI(".")));
+    		}
+    		catch(Exception e){
+    			KermetaLoaderError klerr = new KermetaLoaderError("invalid URI "+u + " (cannot resolve : file or registered URI not found)");
+	    	    KermetaUnit.internalLog.error("invalid URI "+u + " (cannot resolve : file or registered URI not found)", klerr);
+	    	    throw klerr;
+    		}
     	}
     	 
     
@@ -212,14 +219,13 @@ public class KermetaUnitFactory {
      */
     public void unloadAll() {
     	
-    	System.out.println("Number of Kermeta Unit Unloaded : " + loadedUnits.size());
+    	KermetaUnit.internalLog.debug("Potential number of Kermeta Unit to unload : " + loadedUnits.size());
     	
     	for (KermetaUnit unit : loadedUnits.values()) {
     		if ( unit != StdLibKermetaUnitHelper.getKermetaUnit() ) {
-    			// FIXME 2007-04-17 CF The use of this method call is discouraged for the moment because it occurs
-    			// some failures during the Km2Ecore transformation. We must study the optimization mechanism
-    			// in order to cover all the derived use cases
-    			//unit.unload();
+    			KermetaUnit.internalLog.debug("    Unit Unloaded : " + unit.uri + " " + unit);
+    	    	// unload needed because othewise we may reopen existing unit in a wrong way
+    			unit.unload();
     		}
     	}
     	loadedUnits.clear();
