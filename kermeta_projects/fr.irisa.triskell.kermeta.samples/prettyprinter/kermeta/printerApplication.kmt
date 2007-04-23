@@ -2,33 +2,22 @@
 @mainOperation "main"
 
 package ptpr;
-require "../../kmlogo/kermeta/kmLogo.kmt"
+
 require "printer.kmt"
-using kermeta::standard
 using kermeta::utils
 class Main
 {
 
-	
     operation main() : Void is do 
         // The basic pretty printer
-       var bpp : BasicPrettyPrinter init BasicPrettyPrinter.new
+        var bpp : BasicPrettyPrinter init BasicPrettyPrinter.new
         bpp.initialize()
         
         // The class to visit
         var kmlogo : AClass init AClass.new
-    //    var kmlogo : kmLogo::semanticDomain::Turtle init kmLogo::semanticDomain::Turtle.new
-		// parameters not displayed...
-     //   var kmlogo : kmLogo::actions::Main init kmLogo::actions::Main.new
- //       var kmlogo : kmLogo::actions::PrettyPrinter init kmLogo::actions::PrettyPrinter.new
-
-        // The class do visit
-        // var visitable : AClass init AClass.new
 
 		// Print a package content?
-		var p : kermeta::language::structure::Package
-		p := kermeta::language::structure::Package.new
-
+		var p : kermeta::language::structure::Package init kermeta::language::structure::Package.new
 
 		// Print a class definition
 		var c : kermeta::language::structure::ClassDefinition 
@@ -36,34 +25,24 @@ class Main
 	    mc ?= kmlogo.getMetaClass  
 	    c ?= mc.typeDefinition
 	    
-//		p ?= c.container
+	    // Set the package such as it is the reference of the c's container
+		p ?= c.container
 		
-		stdio.write(c.acceptKMStructureVisitor(bpp, 0))
-		 
-/*		var res : kermeta::standard::String init bpp.visitClassDefinition(c,"")
-		stdio.writeln(res)*/
+		stdio.write(p.acceptKMStructureVisitor(bpp, 0))
+
     end
     
 }
 
-
-/** A visitable class 
-class VisitableClass inherits kermeta::language::structure::KMStructureVisitable
-{
-	method acceptKMStructureVisitor<String, String>(v : BasicPrettyPrinter, s : String) : String is do
-	end
-}*/
-
- 
 /** Comment for 'aclass' */
 class AClass  inherits AbstractAClass
 {
 	attribute a : kermeta::standard::String
-	/** dsfsdf*/
+	/** An annotation */
 	operation initialize() is do
 		a :=  "initialized a"
-		if (a == "toto") then	
-			stdio.writeln("salut toto")
+		if (a == "Hello world") then
+			stdio.writeln("Hello world")
 		end
 	end
 	

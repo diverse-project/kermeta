@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.6 2006-12-12 10:00:57 cfaucher Exp $
+/* $Id: printer.kmt,v 1.7 2007-04-23 12:16:24 cfaucher Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : EPL
@@ -37,7 +37,6 @@ class BasicPrettyPrinter inherits
 {
 	/** self.is a print helper */
  	attribute pp : PrintHelper
- 	attribute aset : set TypeVariable[0..*]
  	attribute indent : String
  	attribute typedef : Boolean
  	attribute current_pname : String
@@ -182,6 +181,8 @@ class BasicPrettyPrinter inherits
 	    var a : String
 		result := ""
 
+		result.append(self.indent)
+		
 	    if (node.isAbstract) then 
 			result.append("abstract ")
 		end
@@ -269,7 +270,7 @@ class BasicPrettyPrinter inherits
 	method visitPackage(node : Package, context : Integer) : String is do
 		result := "package " + node.qualifiedName // TODO : the ppIdentifier of the Java KM2KMTPrettyPrinter
 
-		result.append( indent + "{\n")
+		result.append( indent + " {\n")
 		var old_cname : String init current_pname
 		var current_pname : String init node.qualifiedName
 		pushIndent()
@@ -282,7 +283,7 @@ class BasicPrettyPrinter inherits
 		end
 		popIndent()
 		current_pname := old_cname
-		result.append( indent + "}\n")
+		result.append( indent + "\n}")
 		
 	end
 	
