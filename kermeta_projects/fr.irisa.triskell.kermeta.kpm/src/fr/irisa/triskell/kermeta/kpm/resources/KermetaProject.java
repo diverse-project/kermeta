@@ -13,12 +13,15 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.QualifiedName;
+import org.eclipse.core.runtime.Status;
 
 import fr.irisa.triskell.eclipse.ecore.XMIHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.preferences.KPMConstants;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**
  * @author ftanguy
@@ -155,17 +158,31 @@ public class KermetaProject {
 	private void load() throws CoreException {
 		try {
 			kpm = (KPM) XMIHelper.load( getKpmFilePathString() );
-		} catch (IOException exception) {
-			// If loading fails, it means that the metamodel has changed.
-			// The current KPM file is no longer supported.
-			// A default one is created.
-			kpm = KPMHelper.getDefaultKPM(project);
-			initializeConstants();
+		} 
+		catch (IOException exception) {
+			rescueLoad();
+		}
+		catch (java.lang.IllegalArgumentException exception){
+			rescueLoad();
 		}
 	}
 	
-	private void rescueLoad() {
-		
+	/**
+	 * used to rescue a load that has failed
+	 * @throws CoreException
+	 */
+	private void rescueLoad() throws CoreException {
+		//	If loading fails, it means that the metamodel has changed.
+		// The current KPM file is no longer supported.
+		// A default one is created.
+		kpm = KPMHelper.getDefaultKPM(project);
+		initializeConstants();
+		KPMPlugin.getDefault().getLog().log(new Status(Status.WARNING, "fr.irisa.triskell.kermeta.kpm",
+                Status.OK, 
+                "Not able to load the .project.kpm; of project " + project.getName() + " it has been reinitilized", 
+                null));
+		KPMPlugin.internalLog.warn("Not able to load the .project.kpm; of project " + project.getName() + " it has been reinitilized");
+		save();
 	}
 	
 	/*public void reload() {
