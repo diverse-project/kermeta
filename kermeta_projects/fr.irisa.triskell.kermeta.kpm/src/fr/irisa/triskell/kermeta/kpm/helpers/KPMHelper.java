@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.11 2007-04-24 12:39:39 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.12 2007-04-24 13:35:40 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -126,8 +126,8 @@ public class KPMHelper {
 		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
 		outs.add(out1);
 		
-		//Out out2 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
-		//outs.add(out2);
+		Out out2 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
+		outs.add(out2);
 		
 		
 		/*FilterExpression outExpression = KpmFactory.eINSTANCE.createFilterExpression();

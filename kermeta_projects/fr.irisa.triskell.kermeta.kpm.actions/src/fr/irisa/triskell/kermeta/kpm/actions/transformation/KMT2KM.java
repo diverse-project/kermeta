@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.2 2007-04-13 14:46:52 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.3 2007-04-24 13:35:38 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
+import fr.irisa.triskell.eclipse.resources.PropertyNotFoundException;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
@@ -34,6 +35,7 @@ public class KMT2KM implements IAction {
 		 * 
 		 */
 		String outputString = NameFilterHelper.getOuputString(unit, out);
+		IFile outputFile = ResourceHelper.getIFile( outputString );
 		
 		/*
 		 * 
@@ -44,6 +46,20 @@ public class KMT2KM implements IAction {
 		 */
 		if ( outputString.equals("") )
 			return;
+		
+		/*
+		 * 
+		 * Check if the out has been disabled.
+		 * 
+		 */
+		IFile inputFile = ResourceHelper.getIFile( unit.getValue() );
+		try {
+			String value = ResourceHelper.getProperty(inputFile, "fr.irisa.triskell.kermeta.kpm.generateKM");
+			if ( ! Boolean.parseBoolean(value) )
+				return;
+		} catch (PropertyNotFoundException e1) {
+			return;
+		}
 		
 		
 		/*
@@ -66,7 +82,6 @@ public class KMT2KM implements IAction {
 		 * 
 		 */
 		if ( ! kermetaUnit.messages.hasError() ) {
-			IFile outputFile = ResourceHelper.getIFile( outputString );
 			kermetaUnit.saveAsXMIModel( outputFile.getLocation().toString() );
 			/*
 			 * 

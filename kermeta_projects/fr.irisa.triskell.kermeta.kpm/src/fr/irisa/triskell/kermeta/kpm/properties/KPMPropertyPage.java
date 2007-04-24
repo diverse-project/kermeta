@@ -1,4 +1,4 @@
-/*$Id: KPMPropertyPage.java,v 1.1 2007-04-24 12:39:39 ftanguy Exp $
+/*$Id: KPMPropertyPage.java,v 1.2 2007-04-24 13:35:40 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -145,14 +145,13 @@ public class KPMPropertyPage extends PropertyPage {
 		
 		if (mustChange) {
 
-			KermetaProject project = KermetaWorkspace.getInstance()
-					.getKermetaProject(resource.getProject());
+			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject(resource.getProject());
 
-			if (generateKMValue)
+			/*if (generateKMValue)
 				setKMGenerationDependency(resource, project.getKpm(), true);
 			else
 				setKMGenerationDependency(resource, project.getKpm(), false);
-
+*/
 			if (applyRequireValue || generateKMValue) {
 				HashMap args = new HashMap();
 				args.put("forceOpening", true);
@@ -161,7 +160,7 @@ public class KPMPropertyPage extends PropertyPage {
 		}
 	}
 
-	private Collection<IFile> setKMGenerationDependency(IResource resource, final KPM kpm, final boolean adding) {
+/*	private Collection<IFile> setKMGenerationDependency(IResource resource, final KPM kpm, final boolean adding) {
 
 		final Set<IFile> files = new HashSet<IFile>();
 		IResourceVisitor visitor = new IResourceVisitor() {
@@ -214,13 +213,13 @@ public class KPMPropertyPage extends PropertyPage {
 		}
 		return files;
 	}
-	
+	*/
 	
 	static public void setOptionsForResource(final boolean generateKMFile, final boolean applyRequire, IResource resource) {
 		IResourceVisitor visitor = new IResourceVisitor() {
 
 			public boolean visit(IResource resource) throws CoreException {
-				boolean result = false;
+				boolean result = true;
 				switch ( resource.getType() ) {
 				
 				case IResource.FILE :
