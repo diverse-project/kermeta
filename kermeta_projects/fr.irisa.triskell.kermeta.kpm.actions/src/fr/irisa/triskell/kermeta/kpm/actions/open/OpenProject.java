@@ -1,7 +1,6 @@
 package fr.irisa.triskell.kermeta.kpm.actions.open;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,16 +13,15 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.extension.Interest;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 
 public class OpenProject implements IAction, Interest {
@@ -87,7 +85,7 @@ public class OpenProject implements IAction, Interest {
 				 * 
 				 * 
 				 */
-				Dependency updateDependency = currentUnit.findDependency("update");
+				Rule updateRule = currentUnit.findRule("update");
 
 				
 				/*
@@ -99,7 +97,7 @@ public class OpenProject implements IAction, Interest {
 				 * 
 				 */
 				if ( forceOpening ||
-					(updateDependency != null) && ! isUpdateDependencySatisfied(updateDependency, currentUnit) ) {
+					(updateRule != null) && ! isUpdateDependencySatisfied(updateRule, currentUnit) ) {
 					
 					if ( ! updatedUnits.contains(currentUnit) ) {
 					
@@ -141,7 +139,7 @@ public class OpenProject implements IAction, Interest {
 	}
 
 	
-	private boolean isUpdateDependencySatisfied(Dependency dependency, Unit unit) {
+	private boolean isUpdateDependencySatisfied(Rule rule, Unit unit) {
 		boolean satisfied = true;
 		/*
 		 * 
@@ -150,7 +148,7 @@ public class OpenProject implements IAction, Interest {
 		 * 
 		 * 
 		 */
-		Iterator<Out> iterator = dependency.getOuts().iterator();
+		Iterator<Out> iterator = rule.getOuts().iterator();
 		while ( satisfied && iterator.hasNext() ) {
 			Out currentOut = iterator.next();
 			String outputString = NameFilterHelper.getOuputString(unit,currentOut);

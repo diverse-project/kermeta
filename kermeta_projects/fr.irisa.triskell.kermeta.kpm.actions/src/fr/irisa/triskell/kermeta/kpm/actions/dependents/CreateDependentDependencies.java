@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.5 2007-04-18 09:05:55 dvojtise Exp $
+/*$Id: CreateDependentDependencies.java,v 1.6 2007-04-24 12:40:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -16,12 +16,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.helpers.DependencyHelper;
+import fr.irisa.triskell.kermeta.kpm.helpers.RuleHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.InOutHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -94,10 +94,10 @@ public class CreateDependentDependencies implements IAction {
 	private void createRequireDependency(KPM kpm, Unit unit, Unit importedUnit) {
 		In in = InOutHelper.createIn();
 		Out out2 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.update");
-		Dependency dependency = DependencyHelper.createDependency(kpm, 
+		Rule rule = RuleHelper.createRule(kpm, 
 			"require " + importedUnit.getValue(), 
 			"require", "update", in, out2);
-		unit.beDependentOf(importedUnit, dependency.getType());		
+		unit.beDependentOf(importedUnit, rule.getType());		
 	}
 
 	

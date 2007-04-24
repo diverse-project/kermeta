@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.2 2007-04-18 09:25:21 dvojtise Exp $
+/*$Id: AddMarkers.java,v 1.3 2007-04-24 12:40:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -200,7 +200,7 @@ public class AddMarkers implements IAction, Interest {
 	}
 	
 	private void markOuts(Out out, Unit unit, String message, boolean adding) {
-		Iterator<Out> iterator = out.getDependency().getOuts().iterator();
+		Iterator<Out> iterator = out.getRule().getOuts().iterator();
 		while ( iterator.hasNext() ) {
 			Out currentOut = iterator.next();
 			String outputString = NameFilterHelper.getOuputString(unit, currentOut);
