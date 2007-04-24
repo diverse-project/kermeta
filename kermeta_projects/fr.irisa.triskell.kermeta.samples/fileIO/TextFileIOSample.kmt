@@ -1,4 +1,4 @@
-/* $Id: TextFileIOSample.kmt,v 1.1 2007-03-01 16:24:07 ffleurey Exp $
+/* $Id: TextFileIOSample.kmt,v 1.2 2007-04-24 14:17:29 cfaucher Exp $
  * Creation date: March 1, 2007
  * License: EPL
  * Copyright: IRISA - Rennes
@@ -22,7 +22,7 @@ class Main
 {
 	operation main() : Void is do
 	
-		var filename : String init "myFile.txt"
+		var filename : String init "C:/myFile.txt" // choose the location of the file C:/myFile.txt ; /tmp/myFile.txt
 	
 		// Instantiate the file IO helper (Class kermeta::io::FileIO)
 		// This class contains simple operation to read and write text files
