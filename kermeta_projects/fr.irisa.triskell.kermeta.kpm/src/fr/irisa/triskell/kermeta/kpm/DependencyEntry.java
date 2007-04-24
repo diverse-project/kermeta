@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyEntry.java,v 1.1 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: DependencyEntry.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -35,12 +35,12 @@ public interface DependencyEntry extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(DependencyType)
+	 * @see #setType(RuleType)
 	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependencyEntry_Type()
 	 * @model required="true"
 	 * @generated
 	 */
-	DependencyType getType();
+	RuleType getType();
 
 	/**
 	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.DependencyEntry#getType <em>Type</em>}' reference.
@@ -50,7 +50,7 @@ public interface DependencyEntry extends EObject {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(DependencyType value);
+	void setType(RuleType value);
 
 	/**
 	 * Returns the value of the '<em><b>Unit</b></em>' reference.

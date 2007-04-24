@@ -18,9 +18,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.InOutHelper;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
@@ -126,12 +125,12 @@ public class KPMPreferencePage extends PreferencePage implements
 					while ( iterator.hasNext() ) {
 					
 						Unit currentUnit = iterator.next();
-						Dependency dependency = currentUnit.findDependency("update");
-						if ( dependency != null ) {
-							Out out = dependency.findOut("fr.irisa.triskell.kermeta.kpm.actions.kmt2km");
+						Rule rule = currentUnit.findRule("update");
+						if ( rule != null ) {
+							Out out = rule.findOut("fr.irisa.triskell.kermeta.kpm.actions.kmt2km");
 							if ( out == null ) {
 								out = InOutHelper.createOutWithNameFilter(project.getKpm(), "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
-								dependency.getOuts().add(out);
+								rule.getOuts().add(out);
 							}
 						}
 					}
@@ -140,9 +139,9 @@ public class KPMPreferencePage extends PreferencePage implements
 					while ( iterator.hasNext() ) {
 					
 						Unit currentUnit = iterator.next();
-						Dependency dependency = currentUnit.findDependency("update");
-						if ( dependency != null )
-							dependency.removeOut( "fr.irisa.triskell.kermeta.kpm.actions.kmt2km" );	
+						Rule rule = currentUnit.findRule("update");
+						if ( rule != null )
+							rule.removeOut( "fr.irisa.triskell.kermeta.kpm.actions.kmt2km" );	
 					}
 				}
 		

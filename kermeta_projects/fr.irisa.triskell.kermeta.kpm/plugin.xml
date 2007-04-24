@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.13 2007-04-04 13:43:55 ftanguy Exp $
+ $Id: plugin.xml,v 1.14 2007-04-24 12:39:40 ftanguy Exp $
 -->
 
 <plugin>
@@ -36,6 +36,13 @@
            class="fr.irisa.triskell.kermeta.kpm.preferences.KPMPreferencePage"
            id="fr.irisa.triskell.kermeta.kpm.preferencePage"
            name="KPM"/>
+  </extension>
+  <extension
+        point="org.eclipse.ui.propertyPages">
+     <page
+           class="fr.irisa.triskell.kermeta.kpm.properties.KPMPropertyPage"
+           id="fr.irisa.triskell.kermeta.kpm.page1"
+           name="Kermeta"/>
   </extension>
 
 

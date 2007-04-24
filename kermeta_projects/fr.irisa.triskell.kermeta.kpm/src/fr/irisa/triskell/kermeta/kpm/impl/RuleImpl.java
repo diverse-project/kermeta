@@ -2,33 +2,32 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyImpl.java,v 1.4 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: RuleImpl.java,v 1.1 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
-import fr.irisa.triskell.kermeta.kpm.DependencyType;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Out;
-
+import fr.irisa.triskell.kermeta.kpm.Rule;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -45,22 +44,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Dependency</b></em>'.
+ * An implementation of the model object '<em><b>Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getIn <em>In</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getEvent <em>Event</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getOuts <em>Outs</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getName <em>Name</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.RuleImpl#getIn <em>In</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.RuleImpl#getEvent <em>Event</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.RuleImpl#getOuts <em>Outs</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.RuleImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.RuleImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DependencyImpl extends EObjectImpl implements Dependency {
+public class RuleImpl extends EObjectImpl implements Rule {
 	/**
 	 * The cached value of the '{@link #getIn() <em>In</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -119,14 +118,14 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated
 	 * @ordered
 	 */
-	protected DependencyType type = null;
+	protected RuleType type = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DependencyImpl() {
+	protected RuleImpl() {
 		super();
 	}
 
@@ -136,7 +135,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return KpmPackage.Literals.DEPENDENCY;
+		return KpmPackage.Literals.RULE;
 	}
 
 	/**
@@ -157,7 +156,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 		In oldIn = in;
 		in = newIn;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__IN, oldIn, newIn);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, KpmPackage.RULE__IN, oldIn, newIn);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -172,14 +171,14 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 		if (newIn != in) {
 			NotificationChain msgs = null;
 			if (in != null)
-				msgs = ((InternalEObject)in).eInverseRemove(this, KpmPackage.IN__DEPENDENCY, In.class, msgs);
+				msgs = ((InternalEObject)in).eInverseRemove(this, KpmPackage.IN__RULE, In.class, msgs);
 			if (newIn != null)
-				msgs = ((InternalEObject)newIn).eInverseAdd(this, KpmPackage.IN__DEPENDENCY, In.class, msgs);
+				msgs = ((InternalEObject)newIn).eInverseAdd(this, KpmPackage.IN__RULE, In.class, msgs);
 			msgs = basicSetIn(newIn, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__IN, newIn, newIn));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.RULE__IN, newIn, newIn));
 	}
 
 	/**
@@ -193,7 +192,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 			event = (Event)eResolveProxy(oldEvent);
 			if (event != oldEvent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__EVENT, oldEvent, event));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.RULE__EVENT, oldEvent, event));
 			}
 		}
 		return event;
@@ -217,7 +216,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 		Event oldEvent = event;
 		event = newEvent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__EVENT, oldEvent, event));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.RULE__EVENT, oldEvent, event));
 	}
 
 	/**
@@ -227,7 +226,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public EList getOuts() {
 		if (outs == null) {
-			outs = new EObjectContainmentWithInverseEList(Out.class, this, KpmPackage.DEPENDENCY__OUTS, KpmPackage.OUT__DEPENDENCY);
+			outs = new EObjectContainmentWithInverseEList(Out.class, this, KpmPackage.RULE__OUTS, KpmPackage.OUT__RULE);
 		}
 		return outs;
 	}
@@ -250,7 +249,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.RULE__NAME, oldName, name));
 	}
 
 	/**
@@ -258,13 +257,13 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyType getType() {
+	public RuleType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (DependencyType)eResolveProxy(oldType);
+			type = (RuleType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY__TYPE, oldType, type));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.RULE__TYPE, oldType, type));
 			}
 		}
 		return type;
@@ -275,7 +274,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyType basicGetType() {
+	public RuleType basicGetType() {
 		return type;
 	}
 
@@ -284,59 +283,56 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(DependencyType newType) {
-		DependencyType oldType = type;
+	public void setType(RuleType newType) {
+		RuleType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.RULE__TYPE, oldType, type));
 	}
-
+	 
 	/**
 	 * 
 	 * @generated NOT
 	 */
-	HashMap<Unit, Boolean> mustStop = new HashMap<Unit, Boolean> ();
-
+	HashMap<Unit, Boolean> mustStop = new HashMap<Unit, Boolean>();
 
 	/**
 	 * 
 	 * @generated NOT
 	 */
 	public void processAsSynchrone(Unit unit, Map args, IProgressMonitor monitor) {
-		
+
 		boolean stop = false;
-		
-		synchronized(mustStop) {
+
+		synchronized (mustStop) {
 			stop = mustStop.get(unit);
 		}
-		
+
 		Iterator<Out> iterator = getOuts().iterator();
-		while ( ! stop && iterator.hasNext() ) {
-			/*try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
+		while (!stop && iterator.hasNext()) {
+			/*
+			 * try { Thread.sleep(100); } catch (InterruptedException e) { //
+			 * TODO Auto-generated catch block e.printStackTrace(); }
+			 */
 			Out currentOut = iterator.next();
-			if ( ! currentOut.isIndependant() ) {
-				if ( monitor == null )
-					currentOut.process(unit, new NullProgressMonitor(), args );
+			if (!currentOut.isIndependant()) {
+				if (monitor == null)
+					currentOut.process(unit, new NullProgressMonitor(), args);
 				else
 					currentOut.process(unit, monitor, args);
 			} else {
-				
-				/*Job subJob = new Job("Processing Independant Out") {
-				
-					public IStatus run(IProgressMonitor monitor) {
-						out.process(monitor);
-						return Status.OK_STATUS;
-					}
-				
-				};
-				subJob.schedule();*/			
+
+				/*
+				 * Job subJob = new Job("Processing Independant Out") {
+				 * 
+				 * 
+				 * public IStatus run(IProgressMonitor monitor) {
+				 * out.process(monitor); return Status.OK_STATUS; }
+				 * 
+				 *  }; subJob.schedule();
+				 */
 			}
-			synchronized(mustStop) {
+			synchronized (mustStop) {
 				stop = mustStop.get(unit);
 			}
 		}
@@ -348,7 +344,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated NOT
 	 */
 	private HashMap<Unit, Job> jobs = new HashMap<Unit, Job>();
-	
+
 	/**
 	 * 
 	 * @param unit
@@ -357,62 +353,62 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * 
 	 * @generated NOT
 	 */
-	public void processAsAsynchrone(Unit unit, Map args, IProgressMonitor monitor) {
+	public void processAsAsynchrone(Unit unit, Map args,
+			IProgressMonitor monitor) {
 		Job job;
-		synchronized(jobs) {
+		synchronized (jobs) {
 			job = jobs.get(unit);
 		}
-		if ( job != null )
+		if (job != null)
 			job.cancel();
 		final Unit finalUnit = unit;
 		final Map finalArgs = args;
 		job = new Job("Processing Dependency " + getName()) {
-				
-			public IStatus run(IProgressMonitor monitor) {
-				
-				for ( Out out : (List<Out>) getOuts() ) {
 
-				/*	try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}*/
-					
-					if ( ! out.isIndependant() ) {
+			public IStatus run(IProgressMonitor monitor) {
+
+				for (Out out : (List<Out>) getOuts()) {
+
+					/*
+					 * try { Thread.sleep(100); } catch (InterruptedException e) { //
+					 * TODO Auto-generated catch block e.printStackTrace(); }
+					 */
+
+					if (!out.isIndependant()) {
 						out.process(finalUnit, monitor, finalArgs);
 					} else {
-						
-						/*Job subJob = new Job("Processing Independant Out") {
-						
-							public IStatus run(IProgressMonitor monitor) {
-								out.process(monitor);
-								return Status.OK_STATUS;
-							}
-						
-						};
-						subJob.schedule();*/			
+
+						/*
+						 * Job subJob = new Job("Processing Independant Out") {
+						 * 
+						 * 
+						 * public IStatus run(IProgressMonitor monitor) {
+						 * out.process(monitor); return Status.OK_STATUS; }
+						 * 
+						 *  }; subJob.schedule();
+						 */
 					}
 				}
 				jobs.remove(finalUnit);
-				//list.remove(finalUnit);
+				// list.remove(finalUnit);
 				return Status.OK_STATUS;
-			}	
+			}
 		};
 		jobs.put(unit, job);
-		job.schedule();	
+		job.schedule();
 	}
-	
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
-	public void process(Unit unit, boolean synchrone, Map args, IProgressMonitor monitor) {
-		
-		if ( synchrone ) {
+	public void process(Unit unit, boolean synchrone, Map args,
+			IProgressMonitor monitor) {
+
+		if (synchrone) {
 			synchronized (list) {
-				if ( list.contains(unit) )
+				if (list.contains(unit))
 					mustStop.put(unit, true);
 				else {
 					mustStop.put(unit, false);
@@ -422,93 +418,69 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 			processAsSynchrone(unit, args, monitor);
 		} else
 			processAsAsynchrone(unit, args, monitor);
-		
-		
-		
-		/*synchronized(list) {			
-			while ( list.contains(unit) ) {
-				try {
-					Thread.sleep(500);
-					System.out.println("Dependency " + getName() + " waiting. Unit : " + unit.getValue());
-					System.out.println(list);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			list.add(unit);
-		}
-		
-		if ( ! getIn().evaluate(unit) ) {
-			list.remove(unit);
-		} else {
-			if ( ! synchrone ) {
-				final Unit finalUnit = unit;
-				final Map finalArgs = args;
-				Job job = new Job("Processing Dependency " + getName()) {
-						
-					public IStatus run(IProgressMonitor monitor) {
-						
-						for ( Out out : (List<Out>) getOuts() ) {
-	
-							if ( ! out.isIndependant() ) {
-								out.process(finalUnit, monitor, finalArgs);
-							} else {
-								
-								/*Job subJob = new Job("Processing Independant Out") {
-								
-									public IStatus run(IProgressMonitor monitor) {
-										out.process(monitor);
-										return Status.OK_STATUS;
-									}
-								
-								};
-								subJob.schedule();		
-							}
-						}
-						list.remove(finalUnit);
-						return Status.OK_STATUS;
-					}	
-				};
-				job.schedule();	
-			} else {
-				for ( Out out : (List<Out>) getOuts() ) {
-	
-					if ( ! out.isIndependant() ) {
-						if ( monitor == null )
-							out.process(unit, new NullProgressMonitor(), args );
-						else
-							out.process(unit, monitor, args);
-					} else {
-						
-						/*Job subJob = new Job("Processing Independant Out") {
-						
-							public IStatus run(IProgressMonitor monitor) {
-								out.process(monitor);
-								return Status.OK_STATUS;
-							}
-						
-						};
-						subJob.schedule();			
-					}
-				}
-				list.remove(unit);
-				System.out.println("ending processing dependency");
-			}
-		}*/
+
+		/*
+		 * synchronized(list) { while ( list.contains(unit) ) { try {
+		 * Thread.sleep(500); System.out.println("Dependency " + getName() + "
+		 * waiting. Unit : " + unit.getValue()); System.out.println(list); }
+		 * catch (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } } list.add(unit); }
+		 * 
+		 * 
+		 * if ( ! getIn().evaluate(unit) ) { list.remove(unit); } else { if ( !
+		 * synchrone ) { final Unit finalUnit = unit; final Map finalArgs =
+		 * args; Job job = new Job("Processing Dependency " + getName()) {
+		 * 
+		 * 
+		 * public IStatus run(IProgressMonitor monitor) {
+		 * 
+		 * 
+		 * for ( Out out : (List<Out>) getOuts() ) {
+		 * 
+		 * 
+		 * if ( ! out.isIndependant() ) { out.process(finalUnit, monitor,
+		 * finalArgs); } else {
+		 * 
+		 * 
+		 * /*Job subJob = new Job("Processing Independant Out") {
+		 * 
+		 * 
+		 * public IStatus run(IProgressMonitor monitor) { out.process(monitor);
+		 * return Status.OK_STATUS; }
+		 * 
+		 *  }; subJob.schedule(); } } list.remove(finalUnit); return
+		 * Status.OK_STATUS; } }; job.schedule(); } else { for ( Out out : (List<Out>)
+		 * getOuts() ) {
+		 * 
+		 * 
+		 * if ( ! out.isIndependant() ) { if ( monitor == null )
+		 * out.process(unit, new NullProgressMonitor(), args ); else
+		 * out.process(unit, monitor, args); } else {
+		 * 
+		 * 
+		 * /*Job subJob = new Job("Processing Independant Out") {
+		 * 
+		 * 
+		 * public IStatus run(IProgressMonitor monitor) { out.process(monitor);
+		 * return Status.OK_STATUS; }
+		 * 
+		 *  }; subJob.schedule(); } } list.remove(unit);
+		 * System.out.println("ending processing dependency"); } }
+		 */
 	}
 
 	final private HashSet<Unit> list = new HashSet<Unit>();
-	
+
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	public void process(Unit unit, boolean synchrone, Map args) {
-		
-		synchronized(list) {			
-			while ( list.contains(unit) ) {
+
+		synchronized (list) {
+			while (list.contains(unit)) {
 				try {
 					Thread.currentThread().sleep(500);
 				} catch (InterruptedException e) {
@@ -517,62 +489,64 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 				}
 			}
 		}
-			
+
 		list.add(unit);
-		if ( getIn().evaluate(unit) ) {
-		
-			if ( ! synchrone ) {
+		if (getIn().evaluate(unit)) {
+
+			if (!synchrone) {
 				final Unit finalUnit = unit;
 				final Map finalArgs = args;
 				Job job = new Job("Processing Dependency " + getName()) {
-						
+
 					public IStatus run(IProgressMonitor monitor) {
-						
-						for ( Out out : (List<Out>) getOuts() ) {
-	
-							if ( ! out.isIndependant() ) {
+
+						for (Out out : (List<Out>) getOuts()) {
+
+							if (!out.isIndependant()) {
 								out.process(finalUnit, monitor, finalArgs);
 							} else {
-								
-								/*Job subJob = new Job("Processing Independant Out") {
-								
-									public IStatus run(IProgressMonitor monitor) {
-										out.process(monitor);
-										return Status.OK_STATUS;
-									}
-								
-								};
-								subJob.schedule();*/			
+
+								/*
+								 * Job subJob = new Job("Processing Independant
+								 * Out") {
+								 * 
+								 * 
+								 * public IStatus run(IProgressMonitor monitor) {
+								 * out.process(monitor); return
+								 * Status.OK_STATUS; }
+								 * 
+								 *  }; subJob.schedule();
+								 */
 							}
 						}
 						list.remove(finalUnit);
 						return Status.OK_STATUS;
-					}	
+					}
 				};
-				job.schedule();	
+				job.schedule();
 			} else {
-				for ( Out out : (List<Out>) getOuts() ) {
-	
-					if ( ! out.isIndependant() ) {
-						out.process(unit, new NullProgressMonitor(), args );
+				for (Out out : (List<Out>) getOuts()) {
+
+					if (!out.isIndependant()) {
+						out.process(unit, new NullProgressMonitor(), args);
 					} else {
-						
-						/*Job subJob = new Job("Processing Independant Out") {
-						
-							public IStatus run(IProgressMonitor monitor) {
-								out.process(monitor);
-								return Status.OK_STATUS;
-							}
-						
-						};
-						subJob.schedule();*/			
+
+						/*
+						 * Job subJob = new Job("Processing Independant Out") {
+						 * 
+						 * 
+						 * public IStatus run(IProgressMonitor monitor) {
+						 * out.process(monitor); return Status.OK_STATUS; }
+						 * 
+						 *  }; subJob.schedule();
+						 */
 					}
 				}
 				list.remove(unit);
 				System.out.println("ending processing dependency");
 			}
 		}
-		
+
 	}
 
 	/**
@@ -590,7 +564,7 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 * @generated NOT
 	 */
 	public void setType(String name) {
-		setType( ((KPM) eContainer()).getDependencyType(name) );
+		setType( ((KPM) eContainer()).getRuleType(name) );
 	}
 
 	/**
@@ -626,11 +600,11 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.RULE__IN:
 				if (in != null)
-					msgs = ((InternalEObject)in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.DEPENDENCY__IN, null, msgs);
+					msgs = ((InternalEObject)in).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - KpmPackage.RULE__IN, null, msgs);
 				return basicSetIn((In)otherEnd, msgs);
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__OUTS:
 				return ((InternalEList)getOuts()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -643,9 +617,9 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.RULE__IN:
 				return basicSetIn(null, msgs);
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__OUTS:
 				return ((InternalEList)getOuts()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -658,16 +632,16 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.RULE__IN:
 				return getIn();
-			case KpmPackage.DEPENDENCY__EVENT:
+			case KpmPackage.RULE__EVENT:
 				if (resolve) return getEvent();
 				return basicGetEvent();
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__OUTS:
 				return getOuts();
-			case KpmPackage.DEPENDENCY__NAME:
+			case KpmPackage.RULE__NAME:
 				return getName();
-			case KpmPackage.DEPENDENCY__TYPE:
+			case KpmPackage.RULE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
 		}
@@ -681,21 +655,21 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.RULE__IN:
 				setIn((In)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__EVENT:
+			case KpmPackage.RULE__EVENT:
 				setEvent((Event)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__OUTS:
 				getOuts().clear();
 				getOuts().addAll((Collection)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__NAME:
+			case KpmPackage.RULE__NAME:
 				setName((String)newValue);
 				return;
-			case KpmPackage.DEPENDENCY__TYPE:
-				setType((DependencyType)newValue);
+			case KpmPackage.RULE__TYPE:
+				setType((RuleType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -708,20 +682,20 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.RULE__IN:
 				setIn((In)null);
 				return;
-			case KpmPackage.DEPENDENCY__EVENT:
+			case KpmPackage.RULE__EVENT:
 				setEvent((Event)null);
 				return;
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__OUTS:
 				getOuts().clear();
 				return;
-			case KpmPackage.DEPENDENCY__NAME:
+			case KpmPackage.RULE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case KpmPackage.DEPENDENCY__TYPE:
-				setType((DependencyType)null);
+			case KpmPackage.RULE__TYPE:
+				setType((RuleType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -734,15 +708,15 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY__IN:
+			case KpmPackage.RULE__IN:
 				return in != null;
-			case KpmPackage.DEPENDENCY__EVENT:
+			case KpmPackage.RULE__EVENT:
 				return event != null;
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__OUTS:
 				return outs != null && !outs.isEmpty();
-			case KpmPackage.DEPENDENCY__NAME:
+			case KpmPackage.RULE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case KpmPackage.DEPENDENCY__TYPE:
+			case KpmPackage.RULE__TYPE:
 				return type != null;
 		}
 		return super.eIsSet(featureID);
@@ -763,4 +737,4 @@ public class DependencyImpl extends EObjectImpl implements Dependency {
 		return result.toString();
 	}
 
-} //DependencyImpl
+} //RuleImpl

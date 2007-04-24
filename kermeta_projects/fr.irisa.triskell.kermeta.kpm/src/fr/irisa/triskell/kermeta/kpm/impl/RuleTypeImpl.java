@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyTypeImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: RuleTypeImpl.java,v 1.1 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.kermeta.kpm.DependencyType;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
 
 import org.eclipse.emf.common.notify.Notification;
 
@@ -18,18 +18,18 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Dependency Type</b></em>'.
+ * An implementation of the model object '<em><b>Rule Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.DependencyTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.RuleTypeImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
+public class RuleTypeImpl extends EObjectImpl implements RuleType {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DependencyTypeImpl() {
+	protected RuleTypeImpl() {
 		super();
 	}
 
@@ -65,7 +65,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return KpmPackage.Literals.DEPENDENCY_TYPE;
+		return KpmPackage.Literals.RULE_TYPE;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY_TYPE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.RULE_TYPE__NAME, oldName, name));
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY_TYPE__NAME:
+			case KpmPackage.RULE_TYPE__NAME:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -109,7 +109,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY_TYPE__NAME:
+			case KpmPackage.RULE_TYPE__NAME:
 				setName((String)newValue);
 				return;
 		}
@@ -123,7 +123,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY_TYPE__NAME:
+			case KpmPackage.RULE_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -137,7 +137,7 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case KpmPackage.DEPENDENCY_TYPE__NAME:
+			case KpmPackage.RULE_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
@@ -158,4 +158,4 @@ public class DependencyTypeImpl extends EObjectImpl implements DependencyType {
 		return result.toString();
 	}
 
-} //DependencyTypeImpl
+} //RuleTypeImpl

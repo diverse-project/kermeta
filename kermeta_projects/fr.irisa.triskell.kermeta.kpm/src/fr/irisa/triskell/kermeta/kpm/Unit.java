@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.10 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: Unit.java,v 1.11 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getType <em>Type</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}</li>
@@ -66,20 +66,20 @@ public interface Unit extends EObject {
 	void setType(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Dependencies</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
+	 * Returns the value of the '<em><b>Rules</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Rule}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependencies</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Rules</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependencies</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependencies()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency"
+	 * @return the value of the '<em>Rules</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Rules()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Rule"
 	 * @generated
 	 */
-	EList getDependencies();
+	EList getRules();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -213,7 +213,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	boolean hasDependencyNamed(String name);
+	boolean hasRuleNamed(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -237,7 +237,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void beDependentOf(Unit unit, DependencyType type);
+	void beDependentOf(Unit unit, RuleType type);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,7 +245,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	void getFree(DependencyType type, Unit unit);
+	void beDependentOf(Unit unit, Rule dependency);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -253,7 +253,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyEntry findDependentUnit(DependencyType type, Unit unit);
+	void getFree(RuleType type, Unit unit);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,7 +261,15 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyEntry findUnitIDependOn(DependencyType type, Unit unit);
+	DependencyEntry findDependentUnit(RuleType type, Unit unit);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	DependencyEntry findUnitIDependOn(RuleType type, Unit unit);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -293,14 +301,6 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	Dependency findDependency(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void beDependentOf(Unit unit, Dependency dependency);
+	Rule findRule(String name);
 
 } // Unit

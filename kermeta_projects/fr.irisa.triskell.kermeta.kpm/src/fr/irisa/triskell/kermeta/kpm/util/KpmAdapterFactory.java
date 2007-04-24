@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmAdapterFactory.java,v 1.4 2007-04-04 13:43:56 ftanguy Exp $
+ * $Id: KpmAdapterFactory.java,v 1.5 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -70,9 +70,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected KpmSwitch modelSwitch =
 		new KpmSwitch() {
-			public Object caseDependency(Dependency object) {
-				return createDependencyAdapter();
-			}
 			public Object caseIn(In object) {
 				return createInAdapter();
 			}
@@ -124,14 +121,17 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 			public Object caseKPM(KPM object) {
 				return createKPMAdapter();
 			}
+			public Object caseRule(Rule object) {
+				return createRuleAdapter();
+			}
 			public Object caseUnit(Unit object) {
 				return createUnitAdapter();
 			}
 			public Object caseExistFilter(ExistFilter object) {
 				return createExistFilterAdapter();
 			}
-			public Object caseDependencyType(DependencyType object) {
-				return createDependencyTypeAdapter();
+			public Object caseRuleType(RuleType object) {
+				return createRuleTypeAdapter();
 			}
 			public Object caseDependencyEntry(DependencyEntry object) {
 				return createDependencyEntryAdapter();
@@ -153,20 +153,6 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 		return (Adapter)modelSwitch.doSwitch((EObject)target);
 	}
 
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Dependency <em>Dependency</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency
-	 * @generated
-	 */
-	public Adapter createDependencyAdapter() {
-		return null;
-	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.In <em>In</em>}'.
@@ -407,6 +393,20 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Rule <em>Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.kpm.Rule
+	 * @generated
+	 */
+	public Adapter createRuleAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.Unit <em>Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -435,16 +435,16 @@ public class KpmAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.DependencyType <em>Dependency Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.kpm.RuleType <em>Rule Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.kpm.DependencyType
+	 * @see fr.irisa.triskell.kermeta.kpm.RuleType
 	 * @generated
 	 */
-	public Adapter createDependencyTypeAdapter() {
+	public Adapter createRuleTypeAdapter() {
 		return null;
 	}
 

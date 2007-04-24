@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.5 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.6 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -64,7 +64,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 */
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case KpmPackage.DEPENDENCY: return createDependency();
 			case KpmPackage.IN: return createIn();
 			case KpmPackage.ACTION: return createAction();
 			case KpmPackage.OUT: return createOut();
@@ -77,9 +76,10 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.NULL_EXPRESSION: return createNullExpression();
 			case KpmPackage.EVENT: return createEvent();
 			case KpmPackage.KPM: return createKPM();
+			case KpmPackage.RULE: return createRule();
 			case KpmPackage.UNIT: return createUnit();
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
-			case KpmPackage.DEPENDENCY_TYPE: return createDependencyType();
+			case KpmPackage.RULE_TYPE: return createRuleType();
 			case KpmPackage.DEPENDENCY_ENTRY: return createDependencyEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -116,16 +116,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Dependency createDependency() {
-		DependencyImpl dependency = new DependencyImpl();
-		return dependency;
 	}
 
 	/**
@@ -253,6 +243,16 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Rule createRule() {
+		RuleImpl rule = new RuleImpl();
+		return rule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Unit createUnit() {
 		UnitImpl unit = new UnitImpl();
 		return unit;
@@ -273,9 +273,9 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyType createDependencyType() {
-		DependencyTypeImpl dependencyType = new DependencyTypeImpl();
-		return dependencyType;
+	public RuleType createRuleType() {
+		RuleTypeImpl ruleType = new RuleTypeImpl();
+		return ruleType;
 	}
 
 	/**

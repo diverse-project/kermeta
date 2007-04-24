@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.10 2007-04-19 15:34:01 dvojtise Exp $
+/*$Id: KPMHelper.java,v 1.11 2007-04-24 12:39:39 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -16,13 +16,13 @@ import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.In;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.preferences.KPMConstants;
 
@@ -43,8 +43,8 @@ public class KPMHelper {
 		kpm.getEvent("update");
 		kpm.getEvent("close");
 		
-		kpm.getDependencyType("require");
-		kpm.getDependencyType("normal");
+		kpm.getRuleType("require");
+		kpm.getRuleType("normal");
 		
 		kpm.createNameFilter("*.kmt");
 		kpm.createNameFilter("*.km");
@@ -54,7 +54,7 @@ public class KPMHelper {
 		/* project */
 		In in = InOutHelper.createIn();
 		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.openProject");
-		Dependency openDependency = DependencyHelper.createDependency(kpm, "Open Project", "normal", "open", in, out);
+		Rule rule = RuleHelper.createRule(kpm, "Open Project", "normal", "open", in, out);
 		
 		/*in = InOutHelper.createIn();
 		out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.closeProject");
@@ -62,7 +62,7 @@ public class KPMHelper {
 			
 		Unit unit = KpmFactory.eINSTANCE.createUnit();
 		unit.setValue( project.getFullPath().toString() );
-		unit.getDependencies().add(openDependency);
+		unit.getRules().add(rule);
 		//unit.getDependencies().add(closeDependency);
 		
 		kpm.getUnits().add(unit);
@@ -111,9 +111,9 @@ public class KPMHelper {
 		In in = InOutHelper.createIn();
 		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.openProject");
 		
-		Dependency dependency = DependencyHelper.createDependency(kpm, "Open Project", "normal", "open", in, out);
+		Rule rule = RuleHelper.createRule(kpm, "Open Project", "normal", "open", in, out);
 		
-		unit.getDependencies().add(dependency);
+		unit.getRules().add(rule);
 		
 		kpm.getUnits().add(unit);
 	}
@@ -158,13 +158,13 @@ public class KPMHelper {
 			outs.add(out6);
 		}
 		
-		DependencyHelper.createDependency(kpm, "Update KMT File", "normal", "update", in, outs);
+		RuleHelper.createRule(kpm, "Update KMT File", "normal", "update", in, outs);
 	}
 	
 	static public void addCloseKMTFileDependency(KPM kpm) {
 		In in = InOutHelper.createInWithNameFilter(kpm, "*.kmt");
 		Out out = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
-		DependencyHelper.createDependency(kpm, "Close KMT File", "normal", "close", in, out);
+		RuleHelper.createRule(kpm, "Close KMT File", "normal", "close", in, out);
 	}
 	
 	
@@ -178,15 +178,22 @@ public class KPMHelper {
 	
 	
 	static public Unit getOrCreateUnit(KPM kpm, String value) {
+		Unit unit = getUnit(kpm, value);
+		if (unit == null) {
+			unit = KpmFactory.eINSTANCE.createUnit();
+			unit.setValue(value);
+			unit.setLastTimeModified( new Date(0) );
+			kpm.getUnits().add(unit);
+		}
+		return unit;
+	}
+	
+	static public Unit getUnit(KPM kpm, String value) {
 		for ( Unit currentUnit : (List<Unit>) kpm.getUnits() ) {
 			if ( currentUnit.getValue().equals(value) )
 				return currentUnit;
 		}
-		Unit newUnit = KpmFactory.eINSTANCE.createUnit();
-		newUnit.setValue(value);
-		newUnit.setLastTimeModified( new Date(0) );
-		kpm.getUnits().add(newUnit);
-		return newUnit;
+		return null;
 	}
 	
 	static public void addOpenDependencyOnKMTFile(KPM kpm, Unit unit) {
@@ -202,12 +209,12 @@ public class KPMHelper {
 		addDependency(kpm, unit, "Close KMT File");
 	}
 	
-	static public void addDependency(KPM kpm, Unit unit, String dependencyName) {
-		Iterator <Dependency> iterator = (Iterator<Dependency>) kpm.getDependencies().iterator();
+	static public void addDependency(KPM kpm, Unit unit, String ruleName) {
+		Iterator <Rule> iterator = (Iterator<Rule>) kpm.getRules().iterator();
 		while ( iterator.hasNext() ) {
-			Dependency currentDependency = iterator.next();
-			if ( currentDependency.getName().equals(dependencyName) && ! unit.hasDependencyNamed(dependencyName) )
-				unit.getDependencies().add(currentDependency);
+			Rule currentRule = iterator.next();
+			if ( currentRule.getName().equals(ruleName) && ! unit.hasRuleNamed(ruleName) )
+				unit.getRules().add(currentRule);
 		}
 	}
 }

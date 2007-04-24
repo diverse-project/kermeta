@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: In.java,v 1.1 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: In.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -15,7 +15,7 @@ package fr.irisa.triskell.kermeta.kpm;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.In#getDependency <em>Dependency</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.In#getRule <em>Rule</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,31 +25,31 @@ package fr.irisa.triskell.kermeta.kpm;
  */
 public interface In extends AbstractEntity {
 	/**
-	 * Returns the value of the '<em><b>Dependency</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getIn <em>In</em>}'.
+	 * Returns the value of the '<em><b>Rule</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Rule#getIn <em>In</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependency</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Rule</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependency</em>' container reference.
-	 * @see #setDependency(Dependency)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getIn_Dependency()
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getIn
+	 * @return the value of the '<em>Rule</em>' container reference.
+	 * @see #setRule(Rule)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getIn_Rule()
+	 * @see fr.irisa.triskell.kermeta.kpm.Rule#getIn
 	 * @model opposite="in" required="true"
 	 * @generated
 	 */
-	Dependency getDependency();
+	Rule getRule();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.In#getDependency <em>Dependency</em>}' container reference.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.In#getRule <em>Rule</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dependency</em>' container reference.
-	 * @see #getDependency()
+	 * @param value the new value of the '<em>Rule</em>' container reference.
+	 * @see #getRule()
 	 * @generated
 	 */
-	void setDependency(Dependency value);
+	void setRule(Rule value);
 
 } // In

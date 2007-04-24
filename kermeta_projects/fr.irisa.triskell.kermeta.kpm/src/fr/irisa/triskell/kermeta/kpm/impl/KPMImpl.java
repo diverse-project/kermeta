@@ -2,13 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.9 2007-04-13 15:40:39 dvojtise Exp $
+ * $Id: KPMImpl.java,v 1.10 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
-import fr.irisa.triskell.kermeta.kpm.DependencyType;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Filter;
@@ -16,6 +14,8 @@ import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.NameFilter;
+import fr.irisa.triskell.kermeta.kpm.Rule;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Type;
 
 import fr.irisa.triskell.kermeta.kpm.Unit;
@@ -48,10 +48,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getFilters <em>Filters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getTypes <em>Types</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getUnits <em>Units</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getDependencyTypes <em>Dependency Types</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.KPMImpl#getRuleTypes <em>Rule Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,14 +89,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	protected EList types = null;
 
 	/**
-	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
+	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDependencies()
+	 * @see #getRules()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList dependencies = null;
+	protected EList rules = null;
 
 	/**
 	 * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
@@ -119,14 +119,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	protected EList units = null;
 
 	/**
-	 * The cached value of the '{@link #getDependencyTypes() <em>Dependency Types</em>}' containment reference list.
+	 * The cached value of the '{@link #getRuleTypes() <em>Rule Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDependencyTypes()
+	 * @see #getRuleTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList dependencyTypes = null;
+	protected EList ruleTypes = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,18 +175,6 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getDependencies() {
-		if (dependencies == null) {
-			dependencies = new EObjectContainmentEList(Dependency.class, this, KpmPackage.KPM__DEPENDENCIES);
-		}
-		return dependencies;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList getEvents() {
 		if (events == null) {
 			events = new EObjectContainmentEList(Event.class, this, KpmPackage.KPM__EVENTS);
@@ -211,11 +199,11 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getDependencyTypes() {
-		if (dependencyTypes == null) {
-			dependencyTypes = new EObjectContainmentEList(DependencyType.class, this, KpmPackage.KPM__DEPENDENCY_TYPES);
+	public EList getRuleTypes() {
+		if (ruleTypes == null) {
+			ruleTypes = new EObjectContainmentEList(RuleType.class, this, KpmPackage.KPM__RULE_TYPES);
 		}
-		return dependencyTypes;
+		return ruleTypes;
 	}
 
 	/**
@@ -314,10 +302,10 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DependencyType findDependencyType(String name) {
-		Iterator <DependencyType> iterator = getDependencyTypes().iterator();
+	public RuleType findRuleType(String name) {
+		Iterator <RuleType> iterator = getRuleTypes().iterator();
 		while ( iterator.hasNext() ) {
-			DependencyType currentType = iterator.next();
+			RuleType currentType = iterator.next();
 			if ( currentType.getName().equals(name) ) 
 				return currentType;
 		}
@@ -329,14 +317,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DependencyType getDependencyType(String name) {
-		DependencyType type = findDependencyType(name);
-		if ( type == null ) {
-			type = KpmFactory.eINSTANCE.createDependencyType();
-			type.setName(name);
-			getDependencyTypes().add(type);
+	public Rule findRule(String name) {
+		Iterator <Rule> iterator = getRules().iterator();
+		while ( iterator.hasNext() ) {
+			Rule currentRule = iterator.next();
+			if ( currentRule.getName().equals(name) ) 
+				return currentRule;
 		}
-		return type;
+		return null;
 	}
 
 	/**
@@ -344,14 +332,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public Dependency findDependency(String name) {
-		Iterator <Dependency> iterator = getDependencies().iterator();
-		while ( iterator.hasNext() ) {
-			Dependency currentDependency = iterator.next();
-			if ( currentDependency.getName().equals(name) ) 
-				return currentDependency;
+	public RuleType getRuleType(String name) {
+		RuleType type = findRuleType(name);
+		if ( type == null ) {
+			type = KpmFactory.eINSTANCE.createRuleType();
+			type.setName(name);
+			getRuleTypes().add(type);
 		}
-		return null;
+		return type;
 	}
 
 	/**
@@ -397,14 +385,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return ((InternalEList)getFilters()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__TYPES:
 				return ((InternalEList)getTypes()).basicRemove(otherEnd, msgs);
-			case KpmPackage.KPM__DEPENDENCIES:
-				return ((InternalEList)getDependencies()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__RULES:
+				return ((InternalEList)getRules()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__EVENTS:
 				return ((InternalEList)getEvents()).basicRemove(otherEnd, msgs);
 			case KpmPackage.KPM__UNITS:
 				return ((InternalEList)getUnits()).basicRemove(otherEnd, msgs);
-			case KpmPackage.KPM__DEPENDENCY_TYPES:
-				return ((InternalEList)getDependencyTypes()).basicRemove(otherEnd, msgs);
+			case KpmPackage.KPM__RULE_TYPES:
+				return ((InternalEList)getRuleTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -422,14 +410,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return getFilters();
 			case KpmPackage.KPM__TYPES:
 				return getTypes();
-			case KpmPackage.KPM__DEPENDENCIES:
-				return getDependencies();
+			case KpmPackage.KPM__RULES:
+				return getRules();
 			case KpmPackage.KPM__EVENTS:
 				return getEvents();
 			case KpmPackage.KPM__UNITS:
 				return getUnits();
-			case KpmPackage.KPM__DEPENDENCY_TYPES:
-				return getDependencyTypes();
+			case KpmPackage.KPM__RULE_TYPES:
+				return getRuleTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -453,9 +441,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				getTypes().clear();
 				getTypes().addAll((Collection)newValue);
 				return;
-			case KpmPackage.KPM__DEPENDENCIES:
-				getDependencies().clear();
-				getDependencies().addAll((Collection)newValue);
+			case KpmPackage.KPM__RULES:
+				getRules().clear();
+				getRules().addAll((Collection)newValue);
 				return;
 			case KpmPackage.KPM__EVENTS:
 				getEvents().clear();
@@ -465,9 +453,9 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				getUnits().clear();
 				getUnits().addAll((Collection)newValue);
 				return;
-			case KpmPackage.KPM__DEPENDENCY_TYPES:
-				getDependencyTypes().clear();
-				getDependencyTypes().addAll((Collection)newValue);
+			case KpmPackage.KPM__RULE_TYPES:
+				getRuleTypes().clear();
+				getRuleTypes().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -489,8 +477,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			case KpmPackage.KPM__TYPES:
 				getTypes().clear();
 				return;
-			case KpmPackage.KPM__DEPENDENCIES:
-				getDependencies().clear();
+			case KpmPackage.KPM__RULES:
+				getRules().clear();
 				return;
 			case KpmPackage.KPM__EVENTS:
 				getEvents().clear();
@@ -498,8 +486,8 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			case KpmPackage.KPM__UNITS:
 				getUnits().clear();
 				return;
-			case KpmPackage.KPM__DEPENDENCY_TYPES:
-				getDependencyTypes().clear();
+			case KpmPackage.KPM__RULE_TYPES:
+				getRuleTypes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -518,14 +506,14 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return filters != null && !filters.isEmpty();
 			case KpmPackage.KPM__TYPES:
 				return types != null && !types.isEmpty();
-			case KpmPackage.KPM__DEPENDENCIES:
-				return dependencies != null && !dependencies.isEmpty();
+			case KpmPackage.KPM__RULES:
+				return rules != null && !rules.isEmpty();
 			case KpmPackage.KPM__EVENTS:
 				return events != null && !events.isEmpty();
 			case KpmPackage.KPM__UNITS:
 				return units != null && !units.isEmpty();
-			case KpmPackage.KPM__DEPENDENCY_TYPES:
-				return dependencyTypes != null && !dependencyTypes.isEmpty();
+			case KpmPackage.KPM__RULE_TYPES:
+				return ruleTypes != null && !ruleTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -540,6 +528,18 @@ public class KPMImpl extends EObjectImpl implements KPM {
 			types = new EObjectContainmentEList(Type.class, this, KpmPackage.KPM__TYPES);
 		}
 		return types;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getRules() {
+		if (rules == null) {
+			rules = new EObjectContainmentEList(Rule.class, this, KpmPackage.KPM__RULES);
+		}
+		return rules;
 	}
 
 } //KPMImpl

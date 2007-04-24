@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyEntryImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: DependencyEntryImpl.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
-import fr.irisa.triskell.kermeta.kpm.DependencyType;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -42,7 +42,7 @@ public class DependencyEntryImpl extends EObjectImpl implements DependencyEntry 
 	 * @generated
 	 * @ordered
 	 */
-	protected DependencyType type = null;
+	protected RuleType type = null;
 
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' reference.
@@ -77,10 +77,10 @@ public class DependencyEntryImpl extends EObjectImpl implements DependencyEntry 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyType getType() {
+	public RuleType getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = (DependencyType)eResolveProxy(oldType);
+			type = (RuleType)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, KpmPackage.DEPENDENCY_ENTRY__TYPE, oldType, type));
@@ -94,7 +94,7 @@ public class DependencyEntryImpl extends EObjectImpl implements DependencyEntry 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyType basicGetType() {
+	public RuleType basicGetType() {
 		return type;
 	}
 
@@ -103,8 +103,8 @@ public class DependencyEntryImpl extends EObjectImpl implements DependencyEntry 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(DependencyType newType) {
-		DependencyType oldType = type;
+	public void setType(RuleType newType) {
+		RuleType oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.DEPENDENCY_ENTRY__TYPE, oldType, type));
@@ -173,7 +173,7 @@ public class DependencyEntryImpl extends EObjectImpl implements DependencyEntry 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY_ENTRY__TYPE:
-				setType((DependencyType)newValue);
+				setType((RuleType)newValue);
 				return;
 			case KpmPackage.DEPENDENCY_ENTRY__UNIT:
 				setUnit((Unit)newValue);
@@ -190,7 +190,7 @@ public class DependencyEntryImpl extends EObjectImpl implements DependencyEntry 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case KpmPackage.DEPENDENCY_ENTRY__TYPE:
-				setType((DependencyType)null);
+				setType((RuleType)null);
 				return;
 			case KpmPackage.DEPENDENCY_ENTRY__UNIT:
 				setUnit((Unit)null);

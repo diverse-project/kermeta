@@ -2,16 +2,16 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.1 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Out;
+import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 
 
@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getAction <em>Action</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getDependency <em>Dependency</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.OutImpl#isIndependant <em>Independant</em>}</li>
  * </ul>
  * </p>
@@ -141,9 +141,9 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Dependency getDependency() {
-		if (eContainerFeatureID != KpmPackage.OUT__DEPENDENCY) return null;
-		return (Dependency)eContainer();
+	public Rule getRule() {
+		if (eContainerFeatureID != KpmPackage.OUT__RULE) return null;
+		return (Rule)eContainer();
 	}
 
 	/**
@@ -151,8 +151,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDependency(Dependency newDependency, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDependency, KpmPackage.OUT__DEPENDENCY, msgs);
+	public NotificationChain basicSetRule(Rule newRule, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newRule, KpmPackage.OUT__RULE, msgs);
 		return msgs;
 	}
 
@@ -161,20 +161,20 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDependency(Dependency newDependency) {
-		if (newDependency != eInternalContainer() || (eContainerFeatureID != KpmPackage.OUT__DEPENDENCY && newDependency != null)) {
-			if (EcoreUtil.isAncestor(this, newDependency))
+	public void setRule(Rule newRule) {
+		if (newRule != eInternalContainer() || (eContainerFeatureID != KpmPackage.OUT__RULE && newRule != null)) {
+			if (EcoreUtil.isAncestor(this, newRule))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newDependency != null)
-				msgs = ((InternalEObject)newDependency).eInverseAdd(this, KpmPackage.DEPENDENCY__OUTS, Dependency.class, msgs);
-			msgs = basicSetDependency(newDependency, msgs);
+			if (newRule != null)
+				msgs = ((InternalEObject)newRule).eInverseAdd(this, KpmPackage.RULE__OUTS, Rule.class, msgs);
+			msgs = basicSetRule(newRule, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.OUT__DEPENDENCY, newDependency, newDependency));
+			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.OUT__RULE, newRule, newRule));
 	}
 
 	/**
@@ -229,10 +229,10 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 */
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.OUT__DEPENDENCY:
+			case KpmPackage.OUT__RULE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetDependency((Dependency)otherEnd, msgs);
+				return basicSetRule((Rule)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -244,8 +244,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.OUT__DEPENDENCY:
-				return basicSetDependency(null, msgs);
+			case KpmPackage.OUT__RULE:
+				return basicSetRule(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -257,8 +257,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 	 */
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
-			case KpmPackage.OUT__DEPENDENCY:
-				return eInternalContainer().eInverseRemove(this, KpmPackage.DEPENDENCY__OUTS, Dependency.class, msgs);
+			case KpmPackage.OUT__RULE:
+				return eInternalContainer().eInverseRemove(this, KpmPackage.RULE__OUTS, Rule.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -273,8 +273,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 			case KpmPackage.OUT__ACTION:
 				if (resolve) return getAction();
 				return basicGetAction();
-			case KpmPackage.OUT__DEPENDENCY:
-				return getDependency();
+			case KpmPackage.OUT__RULE:
+				return getRule();
 			case KpmPackage.OUT__INDEPENDANT:
 				return isIndependant() ? Boolean.TRUE : Boolean.FALSE;
 		}
@@ -291,8 +291,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 			case KpmPackage.OUT__ACTION:
 				setAction((Action)newValue);
 				return;
-			case KpmPackage.OUT__DEPENDENCY:
-				setDependency((Dependency)newValue);
+			case KpmPackage.OUT__RULE:
+				setRule((Rule)newValue);
 				return;
 			case KpmPackage.OUT__INDEPENDANT:
 				setIndependant(((Boolean)newValue).booleanValue());
@@ -311,8 +311,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 			case KpmPackage.OUT__ACTION:
 				setAction((Action)null);
 				return;
-			case KpmPackage.OUT__DEPENDENCY:
-				setDependency((Dependency)null);
+			case KpmPackage.OUT__RULE:
+				setRule((Rule)null);
 				return;
 			case KpmPackage.OUT__INDEPENDANT:
 				setIndependant(INDEPENDANT_EDEFAULT);
@@ -330,8 +330,8 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 		switch (featureID) {
 			case KpmPackage.OUT__ACTION:
 				return action != null;
-			case KpmPackage.OUT__DEPENDENCY:
-				return getDependency() != null;
+			case KpmPackage.OUT__RULE:
+				return getRule() != null;
 			case KpmPackage.OUT__INDEPENDANT:
 				return independant != INDEPENDANT_EDEFAULT;
 		}

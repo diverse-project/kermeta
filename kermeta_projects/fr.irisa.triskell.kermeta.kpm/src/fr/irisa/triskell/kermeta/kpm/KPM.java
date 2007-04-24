@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPM.java,v 1.5 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: KPM.java,v 1.6 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getActions <em>Actions</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getFilters <em>Filters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getTypes <em>Types</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getRules <em>Rules</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getEvents <em>Events</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getUnits <em>Units</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getDependencyTypes <em>Dependency Types</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.KPM#getRuleTypes <em>Rule Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,20 +82,20 @@ public interface KPM extends EObject {
 	EList getTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
+	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Rule}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependencies</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Dependencies()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency" containment="true"
+	 * @return the value of the '<em>Rules</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_Rules()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Rule" containment="true"
 	 * @generated
 	 */
-	EList getDependencies();
+	EList getRules();
 
 	/**
 	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
@@ -130,20 +130,20 @@ public interface KPM extends EObject {
 	EList getUnits();
 
 	/**
-	 * Returns the value of the '<em><b>Dependency Types</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyType}.
+	 * Returns the value of the '<em><b>Rule Types</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.RuleType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependency Types</em>' reference isn't clear,
+	 * If the meaning of the '<em>Rule Types</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependency Types</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_DependencyTypes()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyType" containment="true"
+	 * @return the value of the '<em>Rule Types</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getKPM_RuleTypes()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.RuleType" containment="true"
 	 * @generated
 	 */
-	EList getDependencyTypes();
+	EList getRuleTypes();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -199,7 +199,7 @@ public interface KPM extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyType findDependencyType(String name);
+	RuleType findRuleType(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -207,7 +207,7 @@ public interface KPM extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyType getDependencyType(String name);
+	RuleType getRuleType(String name);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -215,7 +215,7 @@ public interface KPM extends EObject {
 	 * @model
 	 * @generated
 	 */
-	Dependency findDependency(String name);
+	Rule findRule(String name);
 
 	/**
 	 * <!-- begin-user-doc -->

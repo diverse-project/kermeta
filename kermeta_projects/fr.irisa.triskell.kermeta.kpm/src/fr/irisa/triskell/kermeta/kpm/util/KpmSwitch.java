@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmSwitch.java,v 1.4 2007-04-04 13:43:56 ftanguy Exp $
+ * $Id: KpmSwitch.java,v 1.5 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -87,12 +87,6 @@ public class KpmSwitch {
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case KpmPackage.DEPENDENCY: {
-				Dependency dependency = (Dependency)theEObject;
-				Object result = caseDependency(dependency);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KpmPackage.IN: {
 				In in = (In)theEObject;
 				Object result = caseIn(in);
@@ -209,6 +203,12 @@ public class KpmSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KpmPackage.RULE: {
+				Rule rule = (Rule)theEObject;
+				Object result = caseRule(rule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case KpmPackage.UNIT: {
 				Unit unit = (Unit)theEObject;
 				Object result = caseUnit(unit);
@@ -222,9 +222,9 @@ public class KpmSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.DEPENDENCY_TYPE: {
-				DependencyType dependencyType = (DependencyType)theEObject;
-				Object result = caseDependencyType(dependencyType);
+			case KpmPackage.RULE_TYPE: {
+				RuleType ruleType = (RuleType)theEObject;
+				Object result = caseRuleType(ruleType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,21 +236,6 @@ public class KpmSwitch {
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Dependency</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Dependency</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseDependency(Dependency object) {
-		return null;
 	}
 
 	/**
@@ -509,6 +494,21 @@ public class KpmSwitch {
 	}
 
 	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseRule(Rule object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpretting the object as an instance of '<em>Unit</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -539,17 +539,17 @@ public class KpmSwitch {
 	}
 
 	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Dependency Type</em>'.
+	 * Returns the result of interpretting the object as an instance of '<em>Rule Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Dependency Type</em>'.
+	 * @return the result of interpretting the object as an instance of '<em>Rule Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public Object caseDependencyType(DependencyType object) {
+	public Object caseRuleType(RuleType object) {
 		return null;
 	}
 

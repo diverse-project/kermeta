@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyType.java,v 1.2 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: RuleType.java,v 1.1 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -10,21 +10,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Dependency Type</b></em>'.
+ * A representation of the model object '<em><b>Rule Type</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.DependencyType#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.RuleType#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependencyType()
+ * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getRuleType()
  * @model
  * @generated
  */
-public interface DependencyType extends EObject {
+public interface RuleType extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -35,14 +35,14 @@ public interface DependencyType extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getDependencyType_Name()
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getRuleType_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.DependencyType#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.RuleType#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -51,4 +51,4 @@ public interface DependencyType extends EObject {
 	 */
 	void setName(String value);
 
-} // DependencyType
+} // RuleType

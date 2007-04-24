@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactory.java,v 1.3 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: KpmFactory.java,v 1.4 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -24,15 +24,6 @@ public interface KpmFactory extends EFactory {
 	 * @generated
 	 */
 	KpmFactory eINSTANCE = fr.irisa.triskell.kermeta.kpm.impl.KpmFactoryImpl.init();
-
-	/**
-	 * Returns a new object of class '<em>Dependency</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dependency</em>'.
-	 * @generated
-	 */
-	Dependency createDependency();
 
 	/**
 	 * Returns a new object of class '<em>In</em>'.
@@ -143,6 +134,15 @@ public interface KpmFactory extends EFactory {
 	KPM createKPM();
 
 	/**
+	 * Returns a new object of class '<em>Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule</em>'.
+	 * @generated
+	 */
+	Rule createRule();
+
+	/**
 	 * Returns a new object of class '<em>Unit</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -161,13 +161,13 @@ public interface KpmFactory extends EFactory {
 	ExistFilter createExistFilter();
 
 	/**
-	 * Returns a new object of class '<em>Dependency Type</em>'.
+	 * Returns a new object of class '<em>Rule Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dependency Type</em>'.
+	 * @return a new object of class '<em>Rule Type</em>'.
 	 * @generated
 	 */
-	DependencyType createDependencyType();
+	RuleType createRuleType();
 
 	/**
 	 * Returns a new object of class '<em>Dependency Entry</em>'.

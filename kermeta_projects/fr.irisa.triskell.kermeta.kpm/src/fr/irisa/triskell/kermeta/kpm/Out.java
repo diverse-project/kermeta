@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Out.java,v 1.1 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: Out.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getAction <em>Action</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getDependency <em>Dependency</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#getRule <em>Rule</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Out#isIndependant <em>Independant</em>}</li>
  * </ul>
  * </p>
@@ -57,32 +57,32 @@ public interface Out extends AbstractEntity {
 	void setAction(Action value);
 
 	/**
-	 * Returns the value of the '<em><b>Dependency</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Dependency#getOuts <em>Outs</em>}'.
+	 * Returns the value of the '<em><b>Rule</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.kpm.Rule#getOuts <em>Outs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependency</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Rule</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependency</em>' container reference.
-	 * @see #setDependency(Dependency)
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getOut_Dependency()
-	 * @see fr.irisa.triskell.kermeta.kpm.Dependency#getOuts
+	 * @return the value of the '<em>Rule</em>' container reference.
+	 * @see #setRule(Rule)
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getOut_Rule()
+	 * @see fr.irisa.triskell.kermeta.kpm.Rule#getOuts
 	 * @model opposite="outs"
 	 * @generated
 	 */
-	Dependency getDependency();
+	Rule getRule();
 
 	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Out#getDependency <em>Dependency</em>}' container reference.
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.kpm.Out#getRule <em>Rule</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dependency</em>' container reference.
-	 * @see #getDependency()
+	 * @param value the new value of the '<em>Rule</em>' container reference.
+	 * @see #getRule()
 	 * @generated
 	 */
-	void setDependency(Dependency value);
+	void setRule(Rule value);
 
 	/**
 	 * Returns the value of the '<em><b>Independant</b></em>' attribute.
