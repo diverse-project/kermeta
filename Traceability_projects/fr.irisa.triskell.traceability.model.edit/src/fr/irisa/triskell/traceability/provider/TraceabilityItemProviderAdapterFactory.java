@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityItemProviderAdapterFactory.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
+ * $Id: TraceabilityItemProviderAdapterFactory.java,v 1.3 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -76,6 +76,28 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.traceability.TraceModel} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceModelItemProvider traceModelItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.traceability.TraceModel}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createTraceModelAdapter() {
+		if (traceModelItemProvider == null) {
+			traceModelItemProvider = new TraceModelItemProvider(this);
+		}
+
+		return traceModelItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.traceability.Trace} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,28 +117,6 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 		}
 
 		return traceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.traceability.Model} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ModelItemProvider modelItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.traceability.Model}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createModelAdapter() {
-		if (modelItemProvider == null) {
-			modelItemProvider = new ModelItemProvider(this);
-		}
-
-		return modelItemProvider;
 	}
 
 	/**
@@ -164,25 +164,25 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.traceability.ExternalReference} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.traceability.ModelReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExternalReferenceItemProvider externalReferenceItemProvider;
+	protected ModelReferenceItemProvider modelReferenceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.traceability.ExternalReference}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.traceability.ModelReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createExternalReferenceAdapter() {
-		if (externalReferenceItemProvider == null) {
-			externalReferenceItemProvider = new ExternalReferenceItemProvider(this);
+	public Adapter createModelReferenceAdapter() {
+		if (modelReferenceItemProvider == null) {
+			modelReferenceItemProvider = new ModelReferenceItemProvider(this);
 		}
 
-		return externalReferenceItemProvider;
+		return modelReferenceItemProvider;
 	}
 
 	/**
@@ -303,12 +303,12 @@ public class TraceabilityItemProviderAdapterFactory extends TraceabilityAdapterF
 	 * @generated
 	 */
 	public void dispose() {
+		if (traceModelItemProvider != null) traceModelItemProvider.dispose();
+		if (messageItemProvider != null) messageItemProvider.dispose();
 		if (traceItemProvider != null) traceItemProvider.dispose();
-		if (modelItemProvider != null) modelItemProvider.dispose();
 		if (textReferenceItemProvider != null) textReferenceItemProvider.dispose();
 		if (xmlReferenceItemProvider != null) xmlReferenceItemProvider.dispose();
-		if (externalReferenceItemProvider != null) externalReferenceItemProvider.dispose();
-		if (messageItemProvider != null) messageItemProvider.dispose();
+		if (modelReferenceItemProvider != null) modelReferenceItemProvider.dispose();
 	}
 
 }

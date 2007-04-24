@@ -1,0 +1,132 @@
+/* $Id: Traceability.kmt $
+ * Creation date: October 06, 2006
+ * License:   EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors:
+ * 		Didier Vojtisek
+ *		David Touzet
+ */
+
+package traceability;
+
+require kermeta
+using kermeta::standard
+
+
+/**
+ * This class represents a trace model.
+ * This is a set of traces, references and messages.
+ */
+class TraceModel {
+	/** Set of traces contained by the trace model */
+	attribute traces : set Trace[0..*]#traceMdl
+
+	/** Set of references to the traced objects of the trace model */
+	attribute references : set Reference[0..*]#traceMdl
+
+	/** Set of messages contained by the trace model */
+	attribute messages : set Message[0..*]#traceMdl
+}
+
+
+/**
+ * This class represents a trace message, used to add some information to traces.
+ * Typically, in order to known what had generated a given trace or provide a user
+ * friendly message to the user.
+ */
+class Message {
+	/** Language of the message (english, french, etc.) */
+	attribute language : String[0..1]
+
+	/** Message kind */
+	attribute type : String[0..1]
+
+	/** Contents of the message */
+	attribute ~value : String[1..1]
+
+	/** Link to the traces the message is associated with */
+	reference traces : Trace[0..*]#description
+
+	/** Link to the containing trace model */
+	reference traceMdl : TraceModel[1..1]#messages
+}
+
+
+/**
+ * This class represents a trace element
+ */
+class Trace {
+	/** Link to the references to the trace incoming elements */
+	reference sourceReferences : Reference[0..*]#targetTraces
+
+	/** Link to the references to the trace outgoing elements */
+	reference targetReferences : Reference[0..*]#sourceTraces
+
+	/** Link to the messages describing the trace */
+	reference description : Message[0..*]#traces
+
+	/** Link to the containing trace model */
+	reference traceMdl : TraceModel[1..1]#traces
+}
+
+
+/**
+ * This abstract class represents a reference to a concrete object
+ */
+abstract class Reference {
+	/** Link to the reference target traces */
+	reference targetTraces : Trace[0..*]#sourceReferences
+
+	/** Link to the reference source traces */
+	reference sourceTraces : Trace[0..*]#targetReferences
+
+	/** Link to the containing trace model */
+	reference traceMdl : TraceModel[1..1]#references
+}
+
+
+/**
+ * This class represents a reference to a concrete object contained by a file
+ */
+abstract class FileReference inherits Reference {
+	/** URI of the file containing the referred concrete object */
+	attribute fileURI : String[1..1]
+}
+
+
+/**
+ * This class represents a reference to a textual file concrete object
+ */
+class TextReference inherits FileReference {
+	inv validTextRef is do
+		lineEndAt > lineBeginAt or
+		(lineBeginAt == lineEndAt and charEndAt >= charBeginAt)
+	end
+
+	/** Starting line number */
+	attribute lineBeginAt : Integer[1..1]
+	/** Starting character number */
+	attribute charBeginAt : Integer[1..1]
+	/** Ending line number */
+	attribute lineEndAt : Integer[1..1]
+	/** Ending character number */
+	attribute charEndAt : Integer[1..1]
+}
+
+
+/**
+ * This class represents a reference to a XML concrete object
+ */
+class XMLReference inherits FileReference {
+	/** XML link to the referred XML concrete object */
+	attribute xPointer : String[1..1]
+}
+
+
+/**
+ * This class represents a reference to a model element
+ */
+class ModelReference inherits Reference {
+	/** Link to the referred model element */
+	reference refObject : Object[1..1]
+}

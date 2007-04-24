@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ReferenceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
+ * $Id: ReferenceItemProvider.java,v 1.3 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -59,26 +59,26 @@ public class ReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTargetTracePropertyDescriptor(object);
-			addSourceTracePropertyDescriptor(object);
+			addTargetTracesPropertyDescriptor(object);
+			addSourceTracesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Target Trace feature.
+	 * This adds a property descriptor for the Target Traces feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTargetTracePropertyDescriptor(Object object) {
+	protected void addTargetTracesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Reference_targetTrace_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_targetTrace_feature", "_UI_Reference_type"),
-				 TraceabilityPackage.Literals.REFERENCE__TARGET_TRACE,
+				 getString("_UI_Reference_targetTraces_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_targetTraces_feature", "_UI_Reference_type"),
+				 TraceabilityPackage.Literals.REFERENCE__TARGET_TRACES,
 				 true,
 				 false,
 				 true,
@@ -88,19 +88,19 @@ public class ReferenceItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Source Trace feature.
+	 * This adds a property descriptor for the Source Traces feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSourceTracePropertyDescriptor(Object object) {
+	protected void addSourceTracesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Reference_sourceTrace_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_sourceTrace_feature", "_UI_Reference_type"),
-				 TraceabilityPackage.Literals.REFERENCE__SOURCE_TRACE,
+				 getString("_UI_Reference_sourceTraces_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Reference_sourceTraces_feature", "_UI_Reference_type"),
+				 TraceabilityPackage.Literals.REFERENCE__SOURCE_TRACES,
 				 true,
 				 false,
 				 true,

@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
+ * $Id: TraceItemProvider.java,v 1.3 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
 
-import fr.irisa.triskell.traceability.ExternalReference;
-import fr.irisa.triskell.traceability.Model;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TraceModel;
 import fr.irisa.triskell.traceability.Reference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.Trace;
@@ -162,8 +162,8 @@ public class TraceItemProvider
 		Iterator it = t.getSourceReferences().iterator();
 		while(it.hasNext()){
 			Object o = it.next();
-			if (o instanceof ExternalReference){
-				msg.append(" ").append(((ExternalReference)o).getRefObject().eClass().getName());
+			if (o instanceof ModelReference){
+				msg.append(" ").append(((ModelReference)o).getRefObject().eClass().getName());
 			}
 			if (o instanceof TextReference){
 				msg.append(" Text");
@@ -174,8 +174,8 @@ public class TraceItemProvider
 		if(it.hasNext()) msg.append(" --> ");
 		while(it.hasNext()){
 			Object o = it.next();
-			if (o instanceof ExternalReference){
-				msg.append(" ").append(((ExternalReference)o).getRefObject().eClass().getName());
+			if (o instanceof ModelReference){
+				msg.append(" ").append(((ModelReference)o).getRefObject().eClass().getName());
 			}
 			if (o instanceof TextReference){
 				msg.append(" Text");

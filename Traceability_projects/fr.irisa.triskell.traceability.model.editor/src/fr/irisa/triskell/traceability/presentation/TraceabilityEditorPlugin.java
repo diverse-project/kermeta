@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityEditorPlugin.java,v 1.1 2007-04-17 08:50:39 dvojtise Exp $
+ * $Id: TraceabilityEditorPlugin.java,v 1.2 2007-04-24 12:39:45 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.presentation;
 

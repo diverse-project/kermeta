@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TextReferenceItemProvider.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: TextReferenceItemProvider.java,v 1.2 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -34,7 +34,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class TextReferenceItemProvider
-	extends InternalReferenceItemProvider
+	extends FileReferenceItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -61,50 +61,28 @@ public class TextReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addFileURIPropertyDescriptor(object);
-			addLinePropertyDescriptor(object);
+			addLineBeginAtPropertyDescriptor(object);
 			addCharBeginAtPropertyDescriptor(object);
+			addLineEndAtPropertyDescriptor(object);
 			addCharEndAtPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the File URI feature.
+	 * This adds a property descriptor for the Line Begin At feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addFileURIPropertyDescriptor(Object object) {
+	protected void addLineBeginAtPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TextReference_fileURI_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TextReference_fileURI_feature", "_UI_TextReference_type"),
-				 TraceabilityPackage.Literals.TEXT_REFERENCE__FILE_URI,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Line feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addLinePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TextReference_line_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TextReference_line_feature", "_UI_TextReference_type"),
-				 TraceabilityPackage.Literals.TEXT_REFERENCE__LINE,
+				 getString("_UI_TextReference_lineBeginAt_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TextReference_lineBeginAt_feature", "_UI_TextReference_type"),
+				 TraceabilityPackage.Literals.TEXT_REFERENCE__LINE_BEGIN_AT,
 				 true,
 				 false,
 				 false,
@@ -127,6 +105,28 @@ public class TextReferenceItemProvider
 				 getString("_UI_TextReference_charBeginAt_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TextReference_charBeginAt_feature", "_UI_TextReference_type"),
 				 TraceabilityPackage.Literals.TEXT_REFERENCE__CHAR_BEGIN_AT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Line End At feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLineEndAtPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TextReference_lineEndAt_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TextReference_lineEndAt_feature", "_UI_TextReference_type"),
+				 TraceabilityPackage.Literals.TEXT_REFERENCE__LINE_END_AT,
 				 true,
 				 false,
 				 false,
@@ -191,9 +191,9 @@ public class TextReferenceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TextReference.class)) {
-			case TraceabilityPackage.TEXT_REFERENCE__FILE_URI:
-			case TraceabilityPackage.TEXT_REFERENCE__LINE:
+			case TraceabilityPackage.TEXT_REFERENCE__LINE_BEGIN_AT:
 			case TraceabilityPackage.TEXT_REFERENCE__CHAR_BEGIN_AT:
+			case TraceabilityPackage.TEXT_REFERENCE__LINE_END_AT:
 			case TraceabilityPackage.TEXT_REFERENCE__CHAR_END_AT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

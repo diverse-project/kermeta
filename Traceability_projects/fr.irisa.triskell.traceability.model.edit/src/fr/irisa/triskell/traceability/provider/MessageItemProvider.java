@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MessageItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
+ * $Id: MessageItemProvider.java,v 1.3 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -63,10 +63,10 @@ public class MessageItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addLanguagePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
-			addLanguagePropertyDescriptor(object);
-			addTracePropertyDescriptor(object);
+			addTracesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -116,6 +116,28 @@ public class MessageItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Traces feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTracesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Message_traces_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Message_traces_feature", "_UI_Message_type"),
+				 TraceabilityPackage.Literals.MESSAGE__TRACES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Language feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -133,28 +155,6 @@ public class MessageItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Trace feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTracePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Message_trace_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Message_trace_feature", "_UI_Message_type"),
-				 TraceabilityPackage.Literals.MESSAGE__TRACE,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -193,9 +193,9 @@ public class MessageItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Message.class)) {
+			case TraceabilityPackage.MESSAGE__LANGUAGE:
 			case TraceabilityPackage.MESSAGE__TYPE:
 			case TraceabilityPackage.MESSAGE__VALUE:
-			case TraceabilityPackage.MESSAGE__LANGUAGE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

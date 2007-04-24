@@ -2,10 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InternalReferenceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
+ * $Id: ModelReferenceItemProvider.java,v 1.1 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
+
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TraceabilityPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,19 +18,22 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.traceability.InternalReference} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.traceability.ModelReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class InternalReferenceItemProvider
+public class ModelReferenceItemProvider
 	extends ReferenceItemProvider
 	implements	
 		IEditingDomainItemProvider,	
@@ -41,7 +47,7 @@ public class InternalReferenceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InternalReferenceItemProvider(AdapterFactory adapterFactory) {
+	public ModelReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -55,8 +61,41 @@ public class InternalReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addRefObjectPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Ref Object feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRefObjectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelReference_refObject_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelReference_refObject_feature", "_UI_ModelReference_type"),
+				 TraceabilityPackage.Literals.MODEL_REFERENCE__REF_OBJECT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns ModelReference.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelReference"));
 	}
 
 	/**
@@ -66,7 +105,7 @@ public class InternalReferenceItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		return getString("_UI_InternalReference_type");
+		return getString("_UI_ModelReference_type");
 	}
 
 	/**

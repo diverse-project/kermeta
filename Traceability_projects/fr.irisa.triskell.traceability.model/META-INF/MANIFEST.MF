@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Plug-in
+Bundle-SymbolicName: fr.irisa.triskell.traceability
+Bundle-Version: 0.0.4
+Bundle-ClassPath: model.jar
+Bundle-Activator: fr.irisa.triskell.traceability.model.ModelPlugin
+Bundle-Vendor: INRIA/IRISA
+Bundle-Localization: plugin
+Export-Package: fr.irisa.triskell.traceability,
+ fr.irisa.triskell.traceability.helper,
+ fr.irisa.triskell.traceability.impl,
+ fr.irisa.triskell.traceability.model,
+ fr.irisa.triskell.traceability.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf;visibility:=reexport,
+ org.eclipse.emf.common;visibility:=reexport,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport
+Eclipse-LazyStart: true

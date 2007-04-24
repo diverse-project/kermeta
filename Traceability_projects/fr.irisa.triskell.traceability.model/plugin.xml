@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-<plugin
-   id="fr.irisa.triskell.traceability"
-   name="Model Plug-in"
-   version="0.0.4"
-   provider-name="INRIA/IRISA"
-   class="fr.irisa.triskell.traceability.model.ModelPlugin">
+<plugin>
 
-   <runtime>
-      <library name="model.jar">
-         <export name="*"/>
-      </library>
-   </runtime>
-
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf" export="true"/>
-      <import plugin="org.eclipse.emf.common" export="true"/>
-      <import plugin="org.eclipse.emf.ecore" export="true"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" export="true"/>
-   </requires>
-
+    
 </plugin>

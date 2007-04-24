@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XMLReferenceItemProvider.java,v 1.1 2006-10-06 13:00:14 dvojtise Exp $
+ * $Id: XMLReferenceItemProvider.java,v 1.2 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
@@ -34,7 +34,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class XMLReferenceItemProvider
-	extends TextReferenceItemProvider
+	extends FileReferenceItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	

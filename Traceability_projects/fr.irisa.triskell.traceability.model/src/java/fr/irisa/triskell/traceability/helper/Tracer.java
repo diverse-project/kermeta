@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.3 2005-12-01 18:32:01 zdrey Exp $
+/* $Id: Tracer.java,v 1.4 2007-04-24 12:39:48 dtouzet Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.traceability.ExternalReference;
-import fr.irisa.triskell.traceability.InternalReference;
-import fr.irisa.triskell.traceability.Model;
+import fr.irisa.triskell.traceability.FileReference;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TraceModel;
 import fr.irisa.triskell.traceability.Reference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.Trace;
@@ -44,7 +44,7 @@ public class Tracer {
 	 */
 	public boolean tracesActivated = true;
 	
-	protected Model modelTrace = null;
+	protected TraceModel modelTrace = null;
 	
 	/**
 	 * Constructor
@@ -57,9 +57,9 @@ public class Tracer {
 		while (it.hasNext())
 		{
 			Object o = it.next();
-			if(o instanceof Model)
+			if(o instanceof TraceModel)
 			{
-				modelTrace = (Model)o;
+				modelTrace = (TraceModel)o;
 			}
 		}
 	}	
@@ -82,8 +82,7 @@ public class Tracer {
 	
 	public void newModelTrace()
 	{
-		modelTrace = TraceabilityFactory.eINSTANCE.createModel();
-		modelTrace.setOptimizedReferencesOnly(true); // new empty model are optimized :-) 
+		modelTrace = TraceabilityFactory.eINSTANCE.createTraceModel();
 		traceResource.getContents().add(modelTrace);
 	}
 	
@@ -96,10 +95,10 @@ public class Tracer {
 		}
 		
 		// get or create reference objects for each of the source and target		
-		ExternalReference sourceExtRef = getExternalReference(source);
+		ModelReference sourceExtRef = getModelReference(source);
 		if (sourceExtRef == null)
 		{
-			sourceExtRef = TraceabilityFactory.eINSTANCE.createExternalReference();
+			sourceExtRef = TraceabilityFactory.eINSTANCE.createModelReference();
 			sourceExtRef.setRefObject(source);
 			traceResource.getContents().add(sourceExtRef);
 		}
@@ -119,7 +118,8 @@ public class Tracer {
 		TextReference sourceTextRef = TraceabilityFactory.eINSTANCE.createTextReference();
 		//		 create reference objects for each of the source and target
 		sourceTextRef.setFileURI(fileURI);
-		sourceTextRef.setLine(line);
+		sourceTextRef.setLineBeginAt(line);
+		sourceTextRef.setLineEndAt(line);
 		sourceTextRef.setCharBeginAt(charBeginAt);
 		sourceTextRef.setCharBeginAt(charEndAt);
 		traceResource.getContents().add(sourceTextRef);		
@@ -134,7 +134,7 @@ public class Tracer {
 	protected ArrayList getRecursiveSourceTextReferences(Reference eref, ArrayList result)
 	{	
 		// get the list sourceTrace
-		EList sourceTraces = eref.getSourceTrace();
+		EList sourceTraces = eref.getSourceTraces();
 		Iterator sourceIt = sourceTraces.iterator();
 		// get, for each sourceTrace, the list of sourceReferences
 		while (sourceIt.hasNext())
@@ -152,7 +152,7 @@ public class Tracer {
 				}
 				// Else
 				// We assume that we have ExternalReference or TextReference (and no direct "Reference" type)
-				if (r.getSourceTrace().size()>0)
+				if (r.getSourceTraces().size()>0)
 				{
 					getRecursiveSourceTextReferences(r, result);
 				}
@@ -169,7 +169,7 @@ public class Tracer {
 	public ArrayList getAllSourceTextReferences(EObject target)
 	{
 		ArrayList result = new ArrayList();
-		ExternalReference eref = getExternalReference(target);
+		ModelReference eref = getModelReference(target);
 		result.addAll(getRecursiveSourceTextReferences(eref, result));
 		return result;
 	}
@@ -182,10 +182,10 @@ public class Tracer {
 	public TextReference getFirstTextReference(EObject target)
 	{
 		TextReference result = null;
-		ExternalReference eref = getExternalReference(target);
+		ModelReference eref = getModelReference(target);
 		if (eref != null)
 		{
-			EList sourceTraces = eref.getSourceTrace();
+			EList sourceTraces = eref.getSourceTraces();
 			Iterator sourceIt = sourceTraces.iterator();
 			// get, for each sourceTrace, the list of sourceReferences
 			while (sourceIt.hasNext())
@@ -214,10 +214,10 @@ public class Tracer {
 	private void addTargetTrace(EObject target, String message,Reference sourceRef) {
 		
 		// get or create the reference
-		ExternalReference targetExtRef = getExternalReference(target);
+		ModelReference targetExtRef = getModelReference(target);
 		if (targetExtRef == null)
 		{
-			targetExtRef = TraceabilityFactory.eINSTANCE.createExternalReference();
+			targetExtRef = TraceabilityFactory.eINSTANCE.createModelReference();
 			targetExtRef.setRefObject(target);
 			traceResource.getContents().add(targetExtRef);
 		}
@@ -242,7 +242,7 @@ public class Tracer {
 		modelTrace.getReferences().add(targetExtRef);
 	}
 	
-	public ExternalReference getExternalReference(EObject referedObject)
+	public ModelReference getModelReference(EObject referedObject)
 	{
 		if (modelTrace ==  null)
 		{
@@ -252,9 +252,9 @@ public class Tracer {
 		while (it.hasNext())
 		{
 			Object o = it.next();
-			if(o instanceof ExternalReference)
+			if(o instanceof ModelReference)
 			{
-				ExternalReference eref = (ExternalReference)o;
+				ModelReference eref = (ModelReference)o;
 
 				if(eref.getRefObject() == referedObject)
 					return eref;
@@ -289,7 +289,7 @@ public class Tracer {
 		while (itRef1.hasNext())
 		{
 			Reference ref1 = (Reference)itRef1.next();
-			if((ref1.getSourceTrace().size() != 0 ) && (ref1.getTargetTrace().size() != 0))
+			if((ref1.getSourceTraces().size() != 0 ) && (ref1.getTargetTraces().size() != 0))
 			{
 				unlinkIntermediateReference(ref1);
 				refToRemove.add(ref1);
@@ -307,24 +307,24 @@ public class Tracer {
 	/** don't work ...!!! */
 	private void unlinkIntermediateReference(Reference ref)
 	{
-		EList sourceTraces = new BasicEList(ref.getSourceTrace());
-		EList targetTraces = new BasicEList(ref.getTargetTrace());
+		EList sourceTraces = new BasicEList(ref.getSourceTraces());
+		EList targetTraces = new BasicEList(ref.getTargetTraces());
 		
-		Iterator it = ref.getSourceTrace().iterator();
+		Iterator it = ref.getSourceTraces().iterator();
 		while(it.hasNext())
 		{
 			Trace t = (Trace)it.next();
 			//t.getTargetReferences().remove(ref);
 			
 		}
-		it = ref.getTargetTrace().iterator();
+		it = ref.getTargetTraces().iterator();
 		while(it.hasNext())
 		{
 			Trace t = (Trace)it.next();
 			//t.getSourceReferences().remove(ref);
 		}
-		ref.getTargetTrace().clear();
-		ref.getSourceTrace().clear();
+		ref.getTargetTraces().clear();
+		ref.getSourceTraces().clear();
 		
 		// add sourceTrace.target to the sources of TargetTraces
 		it = targetTraces.iterator();

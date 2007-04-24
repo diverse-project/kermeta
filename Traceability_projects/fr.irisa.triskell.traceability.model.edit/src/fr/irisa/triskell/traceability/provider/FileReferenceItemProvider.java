@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExternalReferenceItemProvider.java,v 1.2 2006-11-07 10:38:22 dvojtise Exp $
+ * $Id: FileReferenceItemProvider.java,v 1.1 2007-04-24 12:39:52 dtouzet Exp $
  */
 package fr.irisa.triskell.traceability.provider;
 
 
-import fr.irisa.triskell.traceability.ExternalReference;
+import fr.irisa.triskell.traceability.FileReference;
 import fr.irisa.triskell.traceability.TraceabilityPackage;
 
 import java.util.Collection;
@@ -24,15 +24,16 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.traceability.ExternalReference} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.traceability.FileReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ExternalReferenceItemProvider
+public class FileReferenceItemProvider
 	extends ReferenceItemProvider
 	implements	
 		IEditingDomainItemProvider,	
@@ -46,7 +47,7 @@ public class ExternalReferenceItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExternalReferenceItemProvider(AdapterFactory adapterFactory) {
+	public FileReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -60,51 +61,44 @@ public class ExternalReferenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addRefObjectPropertyDescriptor(object);
+			addFileURIPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Ref Object feature.
+	 * This adds a property descriptor for the File URI feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addRefObjectPropertyDescriptor(Object object) {
+	protected void addFileURIPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_ExternalReference_refObject_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ExternalReference_refObject_feature", "_UI_ExternalReference_type"),
-				 TraceabilityPackage.Literals.EXTERNAL_REFERENCE__REF_OBJECT,
+				 getString("_UI_FileReference_fileURI_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FileReference_fileURI_feature", "_UI_FileReference_type"),
+				 TraceabilityPackage.Literals.FILE_REFERENCE__FILE_URI,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
-	}
-
-	/**
-	 * This returns ExternalReference.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ExternalReference"));
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public String getText(Object object) {
-		return getString("_UI_ExternalReference_type") + " to a " +((ExternalReference)object).getRefObject().eClass().getName();
+		String label = ((FileReference)object).getFileURI();
+		return label == null || label.length() == 0 ?
+			getString("_UI_FileReference_type") :
+			getString("_UI_FileReference_type") + " " + label;
 	}
 
 	/**
@@ -116,6 +110,12 @@ public class ExternalReferenceItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(FileReference.class)) {
+			case TraceabilityPackage.FILE_REFERENCE__FILE_URI:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

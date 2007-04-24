@@ -1,0 +1,300 @@
+/* $Id: Traceability.kmt $
+ * Creation date: October 06, 2006
+ * License:   EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors:
+ * 		Didier Vojtisek
+ *		David Touzet
+ */
+
+package traceability;
+
+require kermeta
+require "Traceability.kmt"
+
+using kermeta::standard
+
+
+/**
+ * This class represents a trace model.
+ * This is a set of traces, references and messages.
+ */
+@aspect "true"
+class TraceModel {
+	/** Boolean stating whether contained references are optimized */
+	property readonly optimizedReferences : Boolean getter is do
+		result := true
+
+		var crtID : String
+		var refIDs : set String[0..*] init Set<String>.new
+
+		from var it : Iterator<Reference> init references.iterator
+		until (not result or it.isOff) loop
+			crtID := it.next.toString
+			if(refIDs.contains(crtID)) then
+				result := false
+			else
+				refIDs.add(crtID)
+			end
+		end
+	end
+
+
+	/**
+	 * This operation adds a new trace to the trace model with references duplication,
+	 * which breaks the trace model optimized status
+	 */
+	operation addTrace(trc : Trace) is do
+		messages.addAll(trc.description)
+		references.addAll(trc.sourceReferences)
+		references.addAll(trc.targetReferences)
+		traces.add(trc)
+	end
+
+	/**
+	 * This operation adds a new trace to the trace model with references optimization
+	 */
+	operation addOptimizedTrace(trc: Trace) is do
+		messages.addAll(trc.description)
+
+		var srcRefs : set Reference[0..*] init Set<Reference>.new
+		trc.sourceReferences.each{r |
+			var crtRef : Reference init findReference(r)
+			if(crtRef == void) then
+				references.add(r)
+				crtRef := r
+			end
+			srcRefs.add(crtRef)
+		}
+
+		var tgtRefs : set Reference[0..*] init Set<Reference>.new
+		trc.targetReferences.each{r |
+			var crtRef : Reference init findReference(r)
+			if(crtRef == void) then
+				references.add(r)
+				crtRef := r
+			end
+			tgtRefs.add(crtRef)
+		}
+
+		trc.sourceReferences.clear
+		trc.targetReferences.clear
+		trc.sourceReferences.addAll(srcRefs)
+		trc.targetReferences.addAll(tgtRefs)
+
+		traces.add(trc)
+	end
+
+	/**
+	 * This operation searches a reference among the set of references already
+	 * contained by the trace model.
+	 * Search is based on the isSameAs operation implemented by reference elements
+	 */
+	operation findReference(ref: Reference) : Reference is do
+		result := void
+
+		var found : Boolean init false
+		from var ref_It : Iterator<Reference> init references.iterator
+		until found or ref_It.isOff loop
+			var crtRef : Reference init ref_It.next
+			if(crtRef.isSameAs(ref)) then
+				found := true
+				result := crtRef
+			end
+		end
+	end
+
+	/**
+	 * This operation optimizes the set of contained references my merging simlar
+	 * references into a single one.
+	 * Concerned traces are updated consequently
+	 */
+	operation optimizeReferences() is do
+		// Get the set of reference IDs
+		var refIDs : set String[0..*] init Set<String>.new
+		references.each{r | refIDs.add(r.toString)}
+
+		// Get set of references sets according to their ID
+		var refColls : set Set<Reference>[0..*] init Set<Set<Reference>>.new
+		refIDs.each{rID |
+			refColls.add(
+				references.select{r | r.toString == rID}.asSet
+			)
+		}
+
+		// Get list of new references
+		var newRefs : set Reference[0..*] init Set<Reference>.new
+		refColls.each{coll |
+			var aRef : Reference init coll.one
+			var newRef : Reference
+			newRef ?= aRef.getMetaClass.new
+			
+			if(aRef.getMetaClass == TextReference) then
+				var txtRef : TextReference
+				var newTxtRef : TextReference
+				txtRef ?= aRef
+				newTxtRef ?= newRef
+				newTxtRef.fileURI := txtRef.fileURI
+				newTxtRef.lineBeginAt := txtRef.lineBeginAt
+				newTxtRef.charBeginAt := txtRef.charBeginAt
+				newTxtRef.lineEndAt := txtRef.lineEndAt
+				newTxtRef.charEndAt := txtRef.charEndAt
+
+			else if(aRef.getMetaClass == XMLReference) then
+				var xmlRef : XMLReference
+				var newXmlRef : XMLReference
+				xmlRef ?= aRef
+				newXmlRef ?= newRef
+				newXmlRef.fileURI := xmlRef.fileURI
+				newXmlRef.xPointer := xmlRef.xPointer
+
+			else if(aRef.getMetaClass == ModelReference) then
+				var mdlRef : ModelReference
+				var newMdlRef : ModelReference
+				mdlRef ?= aRef
+				newMdlRef ?= newRef
+				newMdlRef.refObject := mdlRef.refObject
+			end end end
+
+			newRefs.add(newRef)
+		}
+
+		// Update links from traces to references
+		var refs : set Reference[0..*]
+		traces.each{t |
+			// Update trace source references
+			refs := Set<Reference>.new
+			t.sourceReferences.each{r1 |
+				refs.add(
+					newRefs.select{r2 | r2.toString == r1.toString}.one
+				)
+			}
+			t.sourceReferences.clear
+			t.sourceReferences.addAll(refs)
+
+			// Update trace target references
+			refs := Set<Reference>.new
+			t.targetReferences.each{r1 |
+				refs.add(
+					newRefs.select{r2 | r2.toString == r1.toString}.one
+				)
+			}
+			t.targetReferences.clear
+			t.targetReferences.addAll(refs)
+		}
+
+		// Replace existing references by normalized references
+		references.clear
+		references.addAll(newRefs)
+	end
+}
+
+
+/**
+ * This abstract class represents a reference to a concrete object
+ */
+@aspect "true"
+abstract class Reference {
+	/**
+	 * This abstract operation allows testing reference equivalence
+	 */
+	operation isSameAs(obj: Object) : Boolean is abstract
+}
+
+
+/**
+ * This class represents a reference to a concrete object contained by a file
+ */
+@aspect "true"
+abstract class FileReference /*inherits Reference*/ {
+	/**
+	 * This operation defines equivalency between FileReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean is do
+		result := false
+		if(obj != void and FileReference.isInstance(obj)) then
+			var fileRef : FileReference
+			fileRef ?= obj
+			result := self.fileURI == fileRef.fileURI
+		end
+	end
+}
+
+
+/**
+ * This class represents a reference to a textual file concrete object
+ */
+@aspect "true"
+class TextReference /*inherits FileReference*/ {
+	/**
+	 * This operation defines equivalency between TextReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean from traceability::FileReference is do
+		result := false
+		if(obj != void and obj.getMetaClass == TextReference) then
+			var txtRef : TextReference
+			txtRef ?= obj
+			result := super(obj) and
+				self.lineBeginAt == txtRef.lineBeginAt and
+				self.lineEndAt == txtRef.lineEndAt and
+				self.charBeginAt == txtRef.charBeginAt and
+				self.charEndAt == txtRef.charEndAt
+		end
+	end
+
+	/** This method returns a string representation of the TextReference */
+	method toString() : String is do
+		result := fileURI + "#" + lineBeginAt.toString
+			+ "#" + charBeginAt.toString
+			+ "#" + lineEndAt.toString
+			+ "#" + charEndAt.toString
+	end
+}
+
+
+/**
+ * This class represents a reference to a XML concrete object
+ */
+@aspect "true"
+class XMLReference /*inherits FileReference*/ {
+	/**
+	 * This operation defines equivalency between XMLReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean from traceability::FileReference is do
+		result := false
+		if(obj != void and obj.getMetaClass == XMLReference) then
+			var xmlRef : XMLReference
+			xmlRef ?= obj
+			result := super(obj) and self.xPointer == xmlRef.xPointer
+		end
+	end
+
+	/** This method returns a string representation of the XMLReference */
+	method toString() : String is do
+		result := fileURI + "#" + xPointer
+	end
+}
+
+
+/**
+ * This class represents a reference to a model element
+ */
+@aspect "true"
+class ModelReference /*inherits Reference*/ {
+	/**
+	 * This operation defines equivalency between ModelReference elements
+	 */
+	method isSameAs(obj: Object) : Boolean is do
+		result := false
+		if(obj != void and obj.getMetaClass == ModelReference) then
+			var mdlRef : ModelReference
+			mdlRef ?= obj
+			result := self.refObject == mdlRef.refObject
+		end
+	end
+
+	/** This method returns a string representation of the ModelReference */
+	method toString() : String is do
+		result := refObject.toString
+	end
+}
