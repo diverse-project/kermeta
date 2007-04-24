@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ui Plug-in
+Bundle-Name: %pluginName
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.ui;singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: fr.irisa.triskell.kermeta.ui.KermetaUIPlugin
@@ -16,3 +16,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.console,
  org.eclipse.debug.ui
 Eclipse-LazyStart: true
+Bundle-Vendor: %providerName
+Export-Package: fr.irisa.triskell.kermeta.actions,
+ fr.irisa.triskell.kermeta.ui,
+ fr.irisa.triskell.kermeta.ui.impl,
+ fr.irisa.triskell.kermeta.ui.perspective,
+ fr.irisa.triskell.kermeta.ui.preferences,
+ fr.irisa.triskell.kermeta.ui.provider,
+ fr.irisa.triskell.kermeta.ui.util,
+ fr.irisa.triskell.kermeta.ui.views,
+ fr.irisa.triskell.kermeta.wizards

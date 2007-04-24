@@ -182,4 +182,5 @@
           id="fr.irisa.triskell.kermeta.KermetaNatureImage"
           natureId="fr.irisa.triskell.kermeta.KermetaNature"/>
  </extension>
+ 
 </plugin>
