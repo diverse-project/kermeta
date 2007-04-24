@@ -1,6 +1,6 @@
 
 
-/*$Id: ResourceHelper.java,v 1.8 2007-04-24 11:32:06 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.9 2007-04-24 13:33:53 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -172,9 +172,7 @@ public class ResourceHelper {
 			result = resource.getPersistentProperty(key);
 			if ( result == null )
 				throw new PropertyNotFoundException(resource, qualifiedProperyName);
-		} catch (CoreException e) {
-			e.printStackTrace();
-		}
+		} catch (CoreException e) {}
 		return result;
 	}
 	
