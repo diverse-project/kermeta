@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.ui;resolution:=optional,
  org.eclipse.ui.workbench.texteditor,
  org.eclipse.jface.text,
  fr.irisa.triskell.kermeta.interpreter,
- fr.irisa.triskell.kermeta
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.traceability
 Eclipse-LazyStart: true
 Export-Package: fr.irisa.triskell.kermeta.runner.wizards,
  fr.irisa.triskell.kermeta.runner.perspective,

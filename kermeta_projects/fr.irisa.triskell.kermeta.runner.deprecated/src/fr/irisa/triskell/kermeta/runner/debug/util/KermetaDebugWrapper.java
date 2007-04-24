@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.18 2006-10-27 08:50:13 dvojtise Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.19 2007-04-24 12:45:36 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -116,11 +116,11 @@ public class KermetaDebugWrapper {
 					int current_line = 0;
 					String file_uri = "";
 					if ( node_ref != null ) { 
-						current_line = node_ref.getLine();
+						current_line = node_ref.getLineBeginAt();
 						file_uri = node_ref.getFileURI();
 					}
 					else if ( ref != null ) { 
-						current_line = ref.getLine();
+						current_line = ref.getLineBeginAt();
 						file_uri = ref.getFileURI();
 					}
 					

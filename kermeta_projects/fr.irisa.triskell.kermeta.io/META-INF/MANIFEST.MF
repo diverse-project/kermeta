@@ -7,8 +7,7 @@ Bundle-ClassPath: .,
  lib/thirdparty/antlr.jar,
  lib/thirdparty/emfatic-core.jar,
  lib/thirdparty/junit.jar,
- lib/thirdparty/ldt-core.jar,
- lib/traceability.jar
+ lib/thirdparty/ldt-core.jar
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -17,7 +16,8 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  fr.irisa.triskell.kermeta.model;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
- fr.irisa.triskell.eclipse.util
+ fr.irisa.triskell.eclipse.util,
+ fr.irisa.triskell.traceability
 Eclipse-LazyStart: true
 Bundle-Activator: fr.irisa.triskell.kermeta.io.plugin.IOPlugin
 Export-Package: antlr,
@@ -63,10 +63,5 @@ Export-Package: antlr,
  fr.irisa.triskell.kermeta.modelhelper,
  fr.irisa.triskell.kermeta.parser,
  fr.irisa.triskell.kermeta.typechecker,
- fr.irisa.triskell.kermeta.utils,
- fr.irisa.triskell.traceability,
- fr.irisa.triskell.traceability.helper,
- fr.irisa.triskell.traceability.impl,
- fr.irisa.triskell.traceability.model,
- fr.irisa.triskell.traceability.util
+ fr.irisa.triskell.kermeta.utils
 Bundle-Vendor: IRISA/INRIA

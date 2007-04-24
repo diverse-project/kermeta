@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.10 2006-03-03 15:23:35 dvojtise Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.11 2007-04-24 12:45:36 dtouzet Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -170,7 +170,7 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 							}
 							else if (txt_ref != null)
 							{
-								found_line = txt_ref.getLine();
+								found_line = txt_ref.getLineBeginAt();
 							}
 							
 							if (found_line == l) {
