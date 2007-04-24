@@ -1,20 +1,86 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="plugin:/resource/fr.irisa.triskell.kermeta.kpm/model/Kpm.ecore">
+<kpm:KPM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpm="http://kpm">
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.openProject"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.addMarkers"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.typecheck"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies"/>
+  <actions extensionPoint="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.kmt"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.km"/>
+  <filters xsi:type="kpm:NameFilter" regex="*.ecore"/>
+  <dependencies event="//@events.0" name="Open Project" type="//@dependencyTypes.1">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs action="//@actions.0">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </dependencies>
+  <dependencies event="//@events.1" name="Update KMT File" type="//@dependencyTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.2">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.3">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.4">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </dependencies>
+  <dependencies event="//@events.2" name="Close KMT File" type="//@dependencyTypes.1">
+    <in>
+      <expression xsi:type="kpm:FilterExpression" filter="//@filters.0"/>
+    </in>
+    <outs action="//@actions.1">
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </dependencies>
+  <dependencies event="//@events.1" name="require /fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printer.kmt" type="//@dependencyTypes.0">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs>
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </dependencies>
+  <dependencies event="//@events.1" name="require /fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/printer.kmt" type="//@dependencyTypes.0">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs>
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </dependencies>
+  <events name="open"/>
   <events name="update"/>
-  <events name="typecheck"/>
-  <dependencies type="//@types.1" event="//@events.0" actions="//@actions.1 //@actions.0 //@actions.2" in="//@expressions.0" outs="//@expressions.1 //@expressions.2" name="d1"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2km"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore"/>
-  <actions name="fr.irisa.triskell.kermeta.kpm.actions.markdependents"/>
-  <filters xsi:type="kpm:NameFilter" regexIn=".+\.kmt" regexOut="*.kmt"/>
-  <filters xsi:type="kpm:NameFilter" regexIn=".+\.km" regexOut="*.km"/>
-  <filters xsi:type="kpm:NameFilter" regexIn=".+\.ecore" regexOut="*.ecore"/>
-  <filters xsi:type="kpm:ExistFilter"/>
-  <types name="translation"/>
-  <types name="synchro"/>
-  <expressions filter="//@filters.0" id="KMT expr"/>
-  <expressions filter="//@filters.1" id="KM expr"/>
-  <expressions filter="//@filters.2" id="Ecore expr">
-    <subExpressions xsi:type="kpm:And" filter="//@filters.3"/>
-  </expressions>
+  <events name="close"/>
+  <units dependencies="//@dependencies.0" value="/fr.irisa.triskell.kermeta.samples"/>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2007-04-20T18:27:52.734+0200" value="/fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printer.kmt">
+    <dependentUnits type="//@dependencyTypes.0" unit="//@units.3"/>
+  </units>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2007-03-01T17:24:07.000+0100" value="/fr.irisa.triskell.kermeta.samples/fileIO/TextFileIOSample.kmt"/>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2007-04-23T14:11:44.974+0200" value="/fr.irisa.triskell.kermeta.samples/prettyprinter/kermeta/printerApplication.kmt">
+    <dependsOnUnits type="//@dependencyTypes.0" unit="//@units.1"/>
+  </units>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/arabic2roman/kermeta/arab2roman.kmt"/>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/dotGenerator.kmt"/>
+  <units dependencies="//@dependencies.2 //@dependencies.1" lastTimeModified="2007-04-20T18:27:52.734+0200" value="/fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/printer.kmt">
+    <dependentUnits type="//@dependencyTypes.0" unit="//@units.7"/>
+  </units>
+  <units dependencies="//@dependencies.2 //@dependencies.1" lastTimeModified="2007-04-20T18:11:38.531+0200" value="/fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/printerApplication.kmt">
+    <dependsOnUnits type="//@dependencyTypes.0" unit="//@units.6"/>
+  </units>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/transfo/Class2RDBMS.kmt"/>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2006-12-22T17:52:11.000+0100" value="/fr.irisa.triskell.kermeta.samples/class2RDBMS/metamodels/ClassMM.kmt"/>
+  <units dependencies="//@dependencies.1 //@dependencies.2" lastTimeModified="2006-06-26T16:58:20.000+0200" value="/fr.irisa.triskell.kermeta.samples/kermeta2doc/kermeta/kermeta2docbook.kmt"/>
+  <units dependencies="//@dependencies.2 //@dependencies.1" lastTimeModified="2007-04-20T18:23:00.078+0200" value="/fr.irisa.triskell.kermeta.samples/km2ecore/kermeta/KM2EcorePass1.kmt"/>
+  <dependencyTypes name="require"/>
+  <dependencyTypes name="normal"/>
 </kpm:KPM>
