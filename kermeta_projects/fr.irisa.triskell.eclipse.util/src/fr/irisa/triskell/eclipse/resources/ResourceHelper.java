@@ -1,4 +1,6 @@
-/*$Id: ResourceHelper.java,v 1.7 2007-04-18 09:05:57 dvojtise Exp $
+
+
+/*$Id: ResourceHelper.java,v 1.8 2007-04-24 11:32:06 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -15,17 +17,23 @@ package fr.irisa.triskell.eclipse.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Hashtable;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+
 
 /**
  * @author ftanguy
@@ -149,10 +157,106 @@ public class ResourceHelper {
 		return file.getFileExtension();
 	}
 
-	/*static public IContainer getIContainer(String containerPath) {
-		return root.getContainerForLocation( new Path(containerPath) );
-	}*/
+	//////////////////////////////////
+	//////////////////////////////////
+	//		Property Mechanism		//
+	//////////////////////////////////
+	//////////////////////////////////
+	static public String getProperty(IResource resource, String qualifiedProperyName) throws PropertyNotFoundException {
+		int index = qualifiedProperyName.lastIndexOf(".");
+		String qualifer = qualifiedProperyName.substring(0, index);
+		String localName = qualifiedProperyName.substring(index+1);
+		QualifiedName key = new QualifiedName(qualifer, localName);
+		String result = "";
+		try {
+			result = resource.getPersistentProperty(key);
+			if ( result == null )
+				throw new PropertyNotFoundException(resource, qualifiedProperyName);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
+	static public void setProperty(IResource resource, String qualifiedProperyName, boolean value) {
+		int index = qualifiedProperyName.lastIndexOf(".");
+		String qualifer = qualifiedProperyName.substring(0, index);
+		String localName = qualifiedProperyName.substring(index+1);
+		QualifiedName key = new QualifiedName(qualifer, localName);
+		try {
+			resource.setPersistentProperty(key, String.valueOf(value));
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	static public void setPropertyRecursively(IResource resource, final String qualifiedName, final boolean value) {
+		IResourceVisitor visitor = new IResourceVisitor() {
+			public boolean visit(IResource resource) throws CoreException {
+				boolean result = false;
+				switch ( resource.getType() ) {
+				
+				case IResource.FILE :
+					ResourceHelper.setProperty(resource, qualifiedName, value);
+					break;
+					
+				case IResource.FOLDER :
+					result = true;
+					ResourceHelper.setProperty(resource, qualifiedName, value);
+					break;
+					
+				case IResource.PROJECT :
+					result = true;
+					ResourceHelper.setProperty(resource, qualifiedName, value);
+					break;
+				}
+				return result;
+			}
+			 
+		 };
+		 try {
+			resource.accept( visitor );
+		} catch (CoreException e) {}
+	}
+	
+	static public void setPropertyRecursively(IResource resource, final Hashtable<String, Boolean> qualifiedNames) {
+		IResourceVisitor visitor = new IResourceVisitor() {
+			public boolean visit(IResource resource) throws CoreException {
+				boolean result = false;
+				switch ( resource.getType() ) {
+				
+				case IResource.FILE :
+					for ( String s : qualifiedNames.keySet() )
+						ResourceHelper.setProperty(resource, s, qualifiedNames.get(s) );
+					break;
+					
+				case IResource.FOLDER :
+					result = true;
+					for ( String s : qualifiedNames.keySet() )
+						ResourceHelper.setProperty(resource, s, qualifiedNames.get(s) );
+					break;
+					
+				case IResource.PROJECT :
+					result = true;
+					for ( String s : qualifiedNames.keySet() )
+						ResourceHelper.setProperty(resource, s, qualifiedNames.get(s) );
+					break;
+				}
+				return result;
+			}
+			 
+		 };
+		 try {
+			resource.accept( visitor );
+		} catch (CoreException e) {}
+		
+	}
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+	//		End of Property Mechanism		//
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+
 	/**
      * Calculate the linenumber for a given offset in a IFile
      * doesn't crashes, simply returns 1 if it cannot find the file (+ a stack trace on the console)
