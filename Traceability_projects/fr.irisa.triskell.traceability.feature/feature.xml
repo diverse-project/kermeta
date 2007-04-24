@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="fr.irisa.triskell.traceability.feature"
-      label="Traceability Framework"
-      version="0.0.3"
-      provider-name="INRIA/IRISA">
+      id="fr.irisa.triskell.traceability"
+      label="Kermeta MDK for Traceability"
+      version="0.0.4"
+      provider-name="IRISA/INRIA">
    <install-handler/>
 
    <description url="[Enter Feature URL here.]">
@@ -44,7 +44,7 @@ License (&quot;EPL&quot;).
    </license>
 
    <url>
-      <update label="UmlautNG update site" url="http://modelware.inria.fr/umlautng_update"/>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
       <discovery label="UmlautNG discovery site" url="http://modelware.inria.fr/umlautng_update"/>
    </url>
 
@@ -64,18 +64,21 @@ License (&quot;EPL&quot;).
          id="fr.irisa.triskell.traceability"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.traceability.edit"
+         id="fr.irisa.triskell.traceability.model.edit"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.traceability.editor"
+         id="fr.irisa.triskell.traceability.model.editor"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
