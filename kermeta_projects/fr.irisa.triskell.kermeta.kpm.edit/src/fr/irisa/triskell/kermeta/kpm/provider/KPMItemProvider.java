@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMItemProvider.java,v 1.2 2007-04-11 07:19:56 ftanguy Exp $
+ * $Id: KPMItemProvider.java,v 1.3 2007-04-24 12:40:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -81,10 +81,10 @@ public class KPMItemProvider
 			childrenFeatures.add(KpmPackage.Literals.KPM__ACTIONS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__FILTERS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__TYPES);
-			childrenFeatures.add(KpmPackage.Literals.KPM__DEPENDENCIES);
+			childrenFeatures.add(KpmPackage.Literals.KPM__RULES);
 			childrenFeatures.add(KpmPackage.Literals.KPM__EVENTS);
 			childrenFeatures.add(KpmPackage.Literals.KPM__UNITS);
-			childrenFeatures.add(KpmPackage.Literals.KPM__DEPENDENCY_TYPES);
+			childrenFeatures.add(KpmPackage.Literals.KPM__RULE_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -135,10 +135,10 @@ public class KPMItemProvider
 			case KpmPackage.KPM__ACTIONS:
 			case KpmPackage.KPM__FILTERS:
 			case KpmPackage.KPM__TYPES:
-			case KpmPackage.KPM__DEPENDENCIES:
+			case KpmPackage.KPM__RULES:
 			case KpmPackage.KPM__EVENTS:
 			case KpmPackage.KPM__UNITS:
-			case KpmPackage.KPM__DEPENDENCY_TYPES:
+			case KpmPackage.KPM__RULE_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -182,8 +182,8 @@ public class KPMItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.KPM__DEPENDENCIES,
-				 KpmFactory.eINSTANCE.createDependency()));
+				(KpmPackage.Literals.KPM__RULES,
+				 KpmFactory.eINSTANCE.createRule()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -197,8 +197,8 @@ public class KPMItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.KPM__DEPENDENCY_TYPES,
-				 KpmFactory.eINSTANCE.createDependencyType()));
+				(KpmPackage.Literals.KPM__RULE_TYPES,
+				 KpmFactory.eINSTANCE.createRuleType()));
 	}
 
 	/**

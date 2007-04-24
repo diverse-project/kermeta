@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyTypeItemProvider.java,v 1.2 2007-04-11 07:19:56 ftanguy Exp $
+ * $Id: RuleTypeItemProvider.java,v 1.1 2007-04-24 12:40:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
-import fr.irisa.triskell.kermeta.kpm.DependencyType;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.RuleType;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,12 +29,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyType} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.RuleType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DependencyTypeItemProvider
+public class RuleTypeItemProvider
 	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
@@ -48,7 +48,7 @@ public class DependencyTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyTypeItemProvider(AdapterFactory adapterFactory) {
+	public RuleTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -78,9 +78,9 @@ public class DependencyTypeItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DependencyType_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DependencyType_name_feature", "_UI_DependencyType_type"),
-				 KpmPackage.Literals.DEPENDENCY_TYPE__NAME,
+				 getString("_UI_RuleType_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RuleType_name_feature", "_UI_RuleType_type"),
+				 KpmPackage.Literals.RULE_TYPE__NAME,
 				 true,
 				 false,
 				 false,
@@ -90,13 +90,13 @@ public class DependencyTypeItemProvider
 	}
 
 	/**
-	 * This returns DependencyType.gif.
+	 * This returns RuleType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DependencyType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RuleType"));
 	}
 
 	/**
@@ -106,10 +106,10 @@ public class DependencyTypeItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((DependencyType)object).getName();
+		String label = ((RuleType)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_DependencyType_type") :
-			getString("_UI_DependencyType_type") + " " + label;
+			getString("_UI_RuleType_type") :
+			getString("_UI_RuleType_type") + " " + label;
 	}
 
 	/**
@@ -122,8 +122,8 @@ public class DependencyTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DependencyType.class)) {
-			case KpmPackage.DEPENDENCY_TYPE__NAME:
+		switch (notification.getFeatureID(RuleType.class)) {
+			case KpmPackage.RULE_TYPE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

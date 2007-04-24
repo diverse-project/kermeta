@@ -2,14 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyItemProvider.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: RuleItemProvider.java,v 1.1 2007-04-24 12:40:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
-import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
+import fr.irisa.triskell.kermeta.kpm.Rule;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,12 +32,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.Dependency} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.Rule} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DependencyItemProvider
+public class RuleItemProvider
 	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
@@ -51,7 +51,7 @@ public class DependencyItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyItemProvider(AdapterFactory adapterFactory) {
+	public RuleItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -83,9 +83,9 @@ public class DependencyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Dependency_event_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_event_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__EVENT,
+				 getString("_UI_Rule_event_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_event_feature", "_UI_Rule_type"),
+				 KpmPackage.Literals.RULE__EVENT,
 				 true,
 				 false,
 				 true,
@@ -105,9 +105,9 @@ public class DependencyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Dependency_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_name_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__NAME,
+				 getString("_UI_Rule_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_name_feature", "_UI_Rule_type"),
+				 KpmPackage.Literals.RULE__NAME,
 				 true,
 				 false,
 				 false,
@@ -127,9 +127,9 @@ public class DependencyItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Dependency_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_type_feature", "_UI_Dependency_type"),
-				 KpmPackage.Literals.DEPENDENCY__TYPE,
+				 getString("_UI_Rule_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Rule_type_feature", "_UI_Rule_type"),
+				 KpmPackage.Literals.RULE__TYPE,
 				 true,
 				 false,
 				 true,
@@ -149,8 +149,8 @@ public class DependencyItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.DEPENDENCY__IN);
-			childrenFeatures.add(KpmPackage.Literals.DEPENDENCY__OUTS);
+			childrenFeatures.add(KpmPackage.Literals.RULE__IN);
+			childrenFeatures.add(KpmPackage.Literals.RULE__OUTS);
 		}
 		return childrenFeatures;
 	}
@@ -168,13 +168,13 @@ public class DependencyItemProvider
 	}
 
 	/**
-	 * This returns Dependency.gif.
+	 * This returns Rule.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Dependency"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Rule"));
 	}
 
 	/**
@@ -184,10 +184,10 @@ public class DependencyItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		String label = ((Dependency)object).getName();
+		String label = ((Rule)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Dependency_type") :
-			getString("_UI_Dependency_type") + " " + label;
+			getString("_UI_Rule_type") :
+			getString("_UI_Rule_type") + " " + label;
 	}
 
 	/**
@@ -200,12 +200,12 @@ public class DependencyItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Dependency.class)) {
-			case KpmPackage.DEPENDENCY__NAME:
+		switch (notification.getFeatureID(Rule.class)) {
+			case KpmPackage.RULE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case KpmPackage.DEPENDENCY__IN:
-			case KpmPackage.DEPENDENCY__OUTS:
+			case KpmPackage.RULE__IN:
+			case KpmPackage.RULE__OUTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -224,12 +224,12 @@ public class DependencyItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.DEPENDENCY__IN,
+				(KpmPackage.Literals.RULE__IN,
 				 KpmFactory.eINSTANCE.createIn()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(KpmPackage.Literals.DEPENDENCY__OUTS,
+				(KpmPackage.Literals.RULE__OUTS,
 				 KpmFactory.eINSTANCE.createOut()));
 	}
 

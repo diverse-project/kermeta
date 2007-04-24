@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmItemProviderAdapterFactory.java,v 1.2 2007-04-11 07:19:57 ftanguy Exp $
+ * $Id: KpmItemProviderAdapterFactory.java,v 1.3 2007-04-24 12:40:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -73,28 +73,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);		
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Dependency} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DependencyItemProvider dependencyItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createDependencyAdapter() {
-		if (dependencyItemProvider == null) {
-			dependencyItemProvider = new DependencyItemProvider(this);
-		}
-
-		return dependencyItemProvider;
 	}
 
 	/**
@@ -362,6 +340,28 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Rule} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RuleItemProvider ruleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Rule}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createRuleAdapter() {
+		if (ruleItemProvider == null) {
+			ruleItemProvider = new RuleItemProvider(this);
+		}
+
+		return ruleItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Unit} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -406,25 +406,25 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.DependencyType} instances.
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.RuleType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DependencyTypeItemProvider dependencyTypeItemProvider;
+	protected RuleTypeItemProvider ruleTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyType}.
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.RuleType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Adapter createDependencyTypeAdapter() {
-		if (dependencyTypeItemProvider == null) {
-			dependencyTypeItemProvider = new DependencyTypeItemProvider(this);
+	public Adapter createRuleTypeAdapter() {
+		if (ruleTypeItemProvider == null) {
+			ruleTypeItemProvider = new RuleTypeItemProvider(this);
 		}
 
-		return dependencyTypeItemProvider;
+		return ruleTypeItemProvider;
 	}
 
 	/**
@@ -545,7 +545,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * @generated
 	 */
 	public void dispose() {
-		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
 		if (inItemProvider != null) inItemProvider.dispose();
 		if (actionItemProvider != null) actionItemProvider.dispose();
 		if (outItemProvider != null) outItemProvider.dispose();
@@ -558,9 +557,10 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (nullExpressionItemProvider != null) nullExpressionItemProvider.dispose();
 		if (eventItemProvider != null) eventItemProvider.dispose();
 		if (kpmItemProvider != null) kpmItemProvider.dispose();
+		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (unitItemProvider != null) unitItemProvider.dispose();
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
-		if (dependencyTypeItemProvider != null) dependencyTypeItemProvider.dispose();
+		if (ruleTypeItemProvider != null) ruleTypeItemProvider.dispose();
 		if (dependencyEntryItemProvider != null) dependencyEntryItemProvider.dispose();
 	}
 

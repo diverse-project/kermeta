@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitItemProvider.java,v 1.4 2007-04-19 06:51:51 dvojtise Exp $
+ * $Id: UnitItemProvider.java,v 1.5 2007-04-24 12:40:51 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -66,7 +66,7 @@ public class UnitItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addDependenciesPropertyDescriptor(object);
+			addRulesPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addLastTimeModifiedPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
@@ -97,19 +97,19 @@ public class UnitItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Dependencies feature.
+	 * This adds a property descriptor for the Rules feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addDependenciesPropertyDescriptor(Object object) {
+	protected void addRulesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Unit_dependencies_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_dependencies_feature", "_UI_Unit_type"),
-				 KpmPackage.Literals.UNIT__DEPENDENCIES,
+				 getString("_UI_Unit_rules_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_rules_feature", "_UI_Unit_type"),
+				 KpmPackage.Literals.UNIT__RULES,
 				 true,
 				 false,
 				 true,
