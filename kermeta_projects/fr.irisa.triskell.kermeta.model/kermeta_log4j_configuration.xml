@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- $Id: kermeta_log4j_configuration.xml,v 1.2 2007-02-12 16:40:41 ftanguy Exp $ -->
+<!-- $Id: kermeta_log4j_configuration.xml,v 1.3 2007-04-24 12:15:46 dvojtise Exp $ -->
 <!-- Description: This is the configuration file for log4j it allows to tune the level of log you will receive 
 	it also allows to tune where you will receive them. -->
 
@@ -103,7 +103,17 @@
 	<logger name="KMT2Ecore">
 		<level value="DEBUG"/>
 	</logger>
-		<logger name="KMT">
+	<logger name="KMT">
+		<level value="INFO"/>
+	</logger>
+	
+	<logger name="KMT2KMPass2">
+		<level value="INFO"/>
+	</logger>
+	<logger name="KMT2KMPass3">
+		<level value="INFO"/>
+	</logger>
+	<logger name="KMT2KMPass6">
 		<level value="INFO"/>
 	</logger>
   
