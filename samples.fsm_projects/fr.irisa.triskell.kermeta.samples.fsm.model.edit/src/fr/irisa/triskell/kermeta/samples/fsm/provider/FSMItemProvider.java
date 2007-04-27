@@ -6,7 +6,6 @@
  */
 package fr.irisa.triskell.kermeta.samples.fsm.provider;
 
-
 import fr.irisa.triskell.kermeta.samples.fsm.FSM;
 import fr.irisa.triskell.kermeta.samples.fsm.FsmFactory;
 import fr.irisa.triskell.kermeta.samples.fsm.FsmPackage;
@@ -172,10 +171,19 @@ public class FSMItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		return getString("_UI_FSM_type");
+		
+		String initialState = " [an initial state is required]";
+		if(object instanceof FSM && ((FSM) object).getInitialState()!=null) {
+			initialState = " [initial state = " + ((FSM) object).getInitialState().getName() + "]";
+		}
+		String finalState = " - [at least one final state is required]";
+		if(object instanceof FSM && ((FSM) object).getFinalState().size()>0) {
+			finalState = "";
+		}
+		return getString("_UI_FSM_type") + initialState + finalState;
 	}
 
 	/**
@@ -183,7 +191,7 @@ public class FSMItemProvider
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
@@ -191,6 +199,10 @@ public class FSMItemProvider
 		switch (notification.getFeatureID(FSM.class)) {
 			case FsmPackage.FSM__OWNED_STATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+			case FsmPackage.FSM__INITIAL_STATE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			case FsmPackage.FSM__FINAL_STATE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);

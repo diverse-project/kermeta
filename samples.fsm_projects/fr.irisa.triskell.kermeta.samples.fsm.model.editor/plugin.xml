@@ -23,7 +23,7 @@
       name = "%_UI_FsmModelWizard_label"
       class = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizard"
       category = "fr.irisa.triskell.kermeta.KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
-      icon = "icons/full/obj16/FsmModelFile.gif">
+      icon = "icons/fsm.gif">
       <description>%_UI_FsmModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
     </wizard>
@@ -33,7 +33,7 @@
     <editor
         id = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmEditorID"
         name = "%_UI_FsmEditor_label"
-        icon = "icons/full/obj16/FsmModelFile.gif"
+        icon = "icons/fsm.gif"
         extensions = "fsm"
         class = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmEditor" 
         contributorClass="fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmActionBarContributor" >

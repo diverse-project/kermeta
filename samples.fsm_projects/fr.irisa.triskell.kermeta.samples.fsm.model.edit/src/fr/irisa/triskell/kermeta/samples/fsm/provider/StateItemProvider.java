@@ -19,6 +19,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -164,7 +165,7 @@ public class StateItemProvider
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
@@ -172,6 +173,7 @@ public class StateItemProvider
 		switch (notification.getFeatureID(State.class)) {
 			case FsmPackage.STATE__NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				fireNotifyChanged(new ViewerNotification(notification, ((EObject) notification.getNotifier()).eContainer(), false, true));
 				return;
 			case FsmPackage.STATE__OUTGOING_TRANSITION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

@@ -5,7 +5,7 @@
    <extension point="org.eclipse.ui.editors">
       <editor
             class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditor"
-            icon="icons/FSM.png"
+            icon="icons/FSM.gif"
             default="true"
             name="Fsm Graphical Editor"
             id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditor"
@@ -16,7 +16,7 @@
    
    <extension point="org.eclipse.ui.newWizards">
       <wizard
-            icon="icons/FSM.png"
+            icon="icons/FSM.gif"
             class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmDiagrams"
             category="fr.irisa.triskell.kermeta.KermetaWizard/fr.irisa.triskell.kermeta.samples.fsm.Wizard.category.ID"
             name="Fsm Diagram"
@@ -51,6 +51,7 @@
    <extension point="org.topcased.modeler.diagrams">
       <diagram
             configuration="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmConfiguration"
+            icon="icons/FSM.gif"
             id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram"
             name="Fsm Diagram">
          <enableFor class="fr.irisa.triskell.kermeta.samples.fsm.FSM"/>
