@@ -1,4 +1,4 @@
-/* $Id: EMFModelGLPanel.java,v 1.2 2007-01-24 10:14:54 dvojtise Exp $
+/* $Id: EMFModelGLPanel.java,v 1.3 2007-04-27 17:51:10 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -73,6 +73,8 @@ public class EMFModelGLPanel extends GLPanel {
 	
 
 	public Resource currentResource = null;
+	/** last loaded model mapping, used when updating the same model */
+    public ModelGraphMapping currentModelGraphMapping;
 	
 	/** used to know if we must build the graph when receiving events */
 	private boolean isGraphBuiltOnce = false; 
@@ -137,13 +139,34 @@ public class EMFModelGLPanel extends GLPanel {
         tgUIManager.addUI(navigateUI,"Navigate");
         tgUIManager.activate("Navigate");
     }
+    
+    /**
+     * load a graph for the given resource
+     * @param resSet
+     * @param res
+     */
     public void loadGraph(ResourceSet resSet, Resource res){
+    	
+    	boolean isModelUpdate = false;
+    	if(currentResource != null && isSameResource(currentResource, res))
+			isModelUpdate = true;
+
     	this.currentResource = res;
     	buildEMFModelGraphThread = new BuildEMFModelGraphThread();
-		System.err.println("Building EMF Model graph will start");
+    	TouchNavigatorPlugin.internalLog.debug("Building EMF Model graph will start");
+		buildEMFModelGraphThread.isModelUpdate = isModelUpdate;
+
 		buildEMFModelGraphThread.resource = res;
 		buildEMFModelGraphThread.resourceSet = resSet;
 		buildEMFModelGraphThread.start();
+    }
+    
+    public boolean isSameResource(Resource res1, Resource res2){
+    	if(res1.getURI().toString().equals(res2.getURI().toString())){
+    		return true;
+    	}
+    	
+    	return false;
     }
 	/** 
 	 * Action when a kermetaEditor unit was changed
@@ -227,6 +250,8 @@ public class EMFModelGLPanel extends GLPanel {
 		
 		public ResourceSet resourceSet;
 		public Resource resource;
+		public boolean isModelUpdate = false;
+
 		
 		synchronized public void stopBuild() throws InterruptedException{
 			mustStop = true;
@@ -289,20 +314,24 @@ public class EMFModelGLPanel extends GLPanel {
             	try {
             		//String msg = "Nb nodes(1): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		//System.err.println(msg);
-            		EMFModelGLPanel.this.tgPanel.clearAll();
+            		if(!isModelUpdate) EMFModelGLPanel.this.tgPanel.clearAll();
                     EMFModelGLPanel.this.tgPanel.tgLayout.resetDamper();
         			yield();yield();yield();yield();
             		//msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		//System.err.println(msg);
         			emGraphBuilder = new EMFModelGraphBuilder(tgPanel, resource);
+        			// if previous build was about the same resource, then set the modelMapping for an update
+        			if(isModelUpdate) emGraphBuilder.setModelGraphMapping(currentModelGraphMapping);
             		//System.err.println("kcGraphBuilder = "+kcGraphBuilder);
             		//System.err.println("currentEditor = "+currentEditor);
         			emGraphBuilder.buildGraph();
+        			// retreives mapping for an eventual update of the resource later
+        			currentModelGraphMapping = emGraphBuilder.getModelGraphMapping();
                 	String msg = "Nb nodes(3): "+EMFModelGLPanel.this.tgPanel.getNodeCount();
                 	TouchNavigatorPlugin.internalLog.debug(msg);
                 	
             		if (mustStop){ 
-            			System.err.println("BuildKermetaClassGraphThread stopped by muststop");
+            			TouchNavigatorPlugin.internalLog.info("BuildKermetaClassGraphThread stopped by muststop");
             			readyLock.setValue(true);
             			/*synchronized (building){
             				building = Boolean.FALSE;

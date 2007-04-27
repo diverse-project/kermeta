@@ -1,4 +1,4 @@
-/* $Id: TouchEMFModelView.java,v 1.1 2007-01-24 08:24:35 dvojtise Exp $
+/* $Id: TouchEMFModelView.java,v 1.2 2007-04-27 17:51:09 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TouchClassView.java
  * License : GPL
@@ -51,6 +51,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 //import fr.irisa.triskell.kermeta.touchnavigator.actions.ConfigureAction;
+import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.EMFModelGLPanel;
 import fr.irisa.triskell.utils.BooleanLock;
 
@@ -367,6 +368,8 @@ public class TouchEMFModelView extends ViewPart {
 		catch (Exception e) {
 			resource = editingDomain.getResourceSet().getResource(resourceURI, false);
 		}
+		TouchNavigatorPlugin.internalLog.debug("loadFile " + resourceLocation);
+		
 		modelGLPanel.loadGraph(editingDomain.getResourceSet(),resource);
 	}
 	
