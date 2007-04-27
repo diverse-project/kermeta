@@ -13,7 +13,7 @@
             class="fr.irisa.triskell.kermeta.samples.fsm.wizards.FsmSampleExampleWizard"
             finalPerspective="kermetaPerspective"
             hasPages="false"
-            icon="icons/newkermetafile.png"
+            icon="icons/FSM.gif"
             id="fr.irisa.triskell.kermeta.samples.fsm.wizard"
             name="FSM Demo"
             preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
