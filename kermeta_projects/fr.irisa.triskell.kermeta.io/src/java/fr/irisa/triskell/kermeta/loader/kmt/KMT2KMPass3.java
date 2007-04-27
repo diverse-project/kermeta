@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.14 2007-04-04 14:00:22 ftanguy Exp $
+/* $Id: KMT2KMPass3.java,v 1.15 2007-04-27 09:09:32 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -198,7 +198,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			// lower :
 			builder.current_operation.setLower(getLower(operation.getTypeRef()));
 		}
-		internalLog.debug("visiting operation " +operation.getName());
+		internalLog.debug("visiting operation " +getTextForID(operation.getName()));
 		// checks that the class do not have an op with the same name yet
 		fr.irisa.triskell.kermeta.language.structure.Operation existingOperation =  ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName());
 		if (existingOperation != null) {
