@@ -1,6 +1,4 @@
-
-
-/*$Id: ResourceHelper.java,v 1.9 2007-04-24 13:33:53 ftanguy Exp $
+/*$Id: ResourceHelper.java,v 1.10 2007-04-27 14:38:12 cfaucher Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -19,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -301,6 +298,20 @@ public class ResourceHelper {
         catch (IOException e) { e.printStackTrace(); return -1;}
         return linenum;
     }
+    
+    /**
+	 * This methods removes an IProject resource corresponding to the project name.
+	 * @param projectName The name of the project relative to the workspace root directory
+	 * @param force a flag controlling whether resources that are not
+	 * in sync with the local file system will be tolerated
+	 */
+	static public void deleteIProject(String projectName, boolean force) {
+		try {
+			getIProject(projectName).delete(force, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 
