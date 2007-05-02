@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.sintaks.feature"
       label="Sintaks for models"
-      version="0.0.1"
+      version="0.0.2"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org">
@@ -24,7 +24,17 @@ the terms of the EPL licence.
    </url>
 
    <requires>
-      <import feature="fr.irisa.triskell.kermeta" version="0.3.0"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.console"/>
    </requires>
 
    <plugin
