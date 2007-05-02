@@ -232,6 +232,8 @@
                preferredPerspectives="org.eclipse.ui.resourcePerspective"
                name="New Kermeta file"
                id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard">
+            <selection class="org.eclipse.core.resources.IProject"/>
+            <selection class="org.eclipse.core.resources.IFolder"/>
             <selection class="org.eclipse.core.resources.IFile"/>
         </wizard>
       </extension>
