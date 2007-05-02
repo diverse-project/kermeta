@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="fr.irisa.triskell.sintaks.feature"
+      id="fr.irisa.triskell.sintaks"
       label="Sintaks for models"
       version="0.0.2"
       provider-name="IRISA/INRIA">
 
-   <description url="http://www.kermeta.org">
-      TO DO : enter a description
+   <description url="http://www.kermeta.org/sintaks">
+      Sintaks tool enables to define bridges between concrete (textual files) and abstract syntax (models).
+A bridge consists in a Sintaks model (&quot;.sts&quot; extension) that defines the way to:
+
+    * parse a text in order to get the corresponding model (with respect to a given metamodel);
+    * explore a model for pretty printing its textual representation.
+
+Both functionnalities are available as entries of the KerMeta contextual menu:
+
+    * on &quot;.txt&quot; files for the Model2Text transformation;
+    * on &quot;.xmi&quot; files for the Text2Model transformation.
    </description>
 
    <copyright url="Sintaks for models is distributed under">
@@ -20,6 +29,7 @@ the terms of the EPL licence.
    </license>
 
    <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
       <discovery label="Kermeta update site" url="http://www.kermeta.org/update"/>
    </url>
 
