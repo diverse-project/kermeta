@@ -47,34 +47,6 @@ public class ParserIteration implements IParser {
 			
 		IParser separatorParser = ParserRule.findParser (iteration.getSeparator(), subject);
 
-		/*
-		boolean ok = true;
-		boolean loop=true;
-		int state=1;
-		while (loop) {
-            long position = lexer.getPosition();
-			switch (state) {
-			case 1 :
-				if (ruleParser.parse(lexer)) {
-					accept ();
-					state=2;
-				} else {
-					loop=false;
-					ok = false;
-                    reject (lexer, position);
-				}
-				break;
-			case 2 :
-				if (separatorParser.parse(lexer)) {
-					state=1;
-				} else {
-					loop=false;
-                    reject (lexer, position);
-				}
-				break;
-			}
-		}
-		*/
 		boolean ok = true;
 		boolean loop = true;
 		long position = lexer.getPosition();
