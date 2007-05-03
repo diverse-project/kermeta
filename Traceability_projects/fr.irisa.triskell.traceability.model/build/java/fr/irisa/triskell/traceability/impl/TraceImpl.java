@@ -1,0 +1,314 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: TraceImpl.java,v 1.1 2007-05-03 07:40:06 dvojtise Exp $
+ */
+package fr.irisa.triskell.traceability.impl;
+
+import fr.irisa.triskell.traceability.Message;
+import fr.irisa.triskell.traceability.Reference;
+import fr.irisa.triskell.traceability.Trace;
+import fr.irisa.triskell.traceability.TraceModel;
+import fr.irisa.triskell.traceability.TraceabilityPackage;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Trace</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link fr.irisa.triskell.traceability.impl.TraceImpl#getSourceReferences <em>Source References</em>}</li>
+ *   <li>{@link fr.irisa.triskell.traceability.impl.TraceImpl#getTargetReferences <em>Target References</em>}</li>
+ *   <li>{@link fr.irisa.triskell.traceability.impl.TraceImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link fr.irisa.triskell.traceability.impl.TraceImpl#getTraceMdl <em>Trace Mdl</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class TraceImpl extends EObjectImpl implements Trace {
+	/**
+	 * The cached value of the '{@link #getSourceReferences() <em>Source References</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList sourceReferences = null;
+
+	/**
+	 * The cached value of the '{@link #getTargetReferences() <em>Target References</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTargetReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList targetReferences = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList description = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TraceImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EClass eStaticClass() {
+		return TraceabilityPackage.Literals.TRACE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getSourceReferences() {
+		if (sourceReferences == null) {
+			sourceReferences = new EObjectWithInverseResolvingEList.ManyInverse(Reference.class, this, TraceabilityPackage.TRACE__SOURCE_REFERENCES, TraceabilityPackage.REFERENCE__TARGET_TRACES);
+		}
+		return sourceReferences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getTargetReferences() {
+		if (targetReferences == null) {
+			targetReferences = new EObjectWithInverseResolvingEList.ManyInverse(Reference.class, this, TraceabilityPackage.TRACE__TARGET_REFERENCES, TraceabilityPackage.REFERENCE__SOURCE_TRACES);
+		}
+		return targetReferences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getDescription() {
+		if (description == null) {
+			description = new EObjectWithInverseResolvingEList.ManyInverse(Message.class, this, TraceabilityPackage.TRACE__DESCRIPTION, TraceabilityPackage.MESSAGE__TRACES);
+		}
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceModel getTraceMdl() {
+		if (eContainerFeatureID != TraceabilityPackage.TRACE__TRACE_MDL) return null;
+		return (TraceModel)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTraceMdl(TraceModel newTraceMdl, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newTraceMdl, TraceabilityPackage.TRACE__TRACE_MDL, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTraceMdl(TraceModel newTraceMdl) {
+		if (newTraceMdl != eInternalContainer() || (eContainerFeatureID != TraceabilityPackage.TRACE__TRACE_MDL && newTraceMdl != null)) {
+			if (EcoreUtil.isAncestor(this, newTraceMdl))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newTraceMdl != null)
+				msgs = ((InternalEObject)newTraceMdl).eInverseAdd(this, TraceabilityPackage.TRACE_MODEL__TRACES, TraceModel.class, msgs);
+			msgs = basicSetTraceMdl(newTraceMdl, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TraceabilityPackage.TRACE__TRACE_MDL, newTraceMdl, newTraceMdl));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TraceabilityPackage.TRACE__SOURCE_REFERENCES:
+				return ((InternalEList)getSourceReferences()).basicAdd(otherEnd, msgs);
+			case TraceabilityPackage.TRACE__TARGET_REFERENCES:
+				return ((InternalEList)getTargetReferences()).basicAdd(otherEnd, msgs);
+			case TraceabilityPackage.TRACE__DESCRIPTION:
+				return ((InternalEList)getDescription()).basicAdd(otherEnd, msgs);
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetTraceMdl((TraceModel)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TraceabilityPackage.TRACE__SOURCE_REFERENCES:
+				return ((InternalEList)getSourceReferences()).basicRemove(otherEnd, msgs);
+			case TraceabilityPackage.TRACE__TARGET_REFERENCES:
+				return ((InternalEList)getTargetReferences()).basicRemove(otherEnd, msgs);
+			case TraceabilityPackage.TRACE__DESCRIPTION:
+				return ((InternalEList)getDescription()).basicRemove(otherEnd, msgs);
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				return basicSetTraceMdl(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				return eInternalContainer().eInverseRemove(this, TraceabilityPackage.TRACE_MODEL__TRACES, TraceModel.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case TraceabilityPackage.TRACE__SOURCE_REFERENCES:
+				return getSourceReferences();
+			case TraceabilityPackage.TRACE__TARGET_REFERENCES:
+				return getTargetReferences();
+			case TraceabilityPackage.TRACE__DESCRIPTION:
+				return getDescription();
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				return getTraceMdl();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case TraceabilityPackage.TRACE__SOURCE_REFERENCES:
+				getSourceReferences().clear();
+				getSourceReferences().addAll((Collection)newValue);
+				return;
+			case TraceabilityPackage.TRACE__TARGET_REFERENCES:
+				getTargetReferences().clear();
+				getTargetReferences().addAll((Collection)newValue);
+				return;
+			case TraceabilityPackage.TRACE__DESCRIPTION:
+				getDescription().clear();
+				getDescription().addAll((Collection)newValue);
+				return;
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				setTraceMdl((TraceModel)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case TraceabilityPackage.TRACE__SOURCE_REFERENCES:
+				getSourceReferences().clear();
+				return;
+			case TraceabilityPackage.TRACE__TARGET_REFERENCES:
+				getTargetReferences().clear();
+				return;
+			case TraceabilityPackage.TRACE__DESCRIPTION:
+				getDescription().clear();
+				return;
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				setTraceMdl((TraceModel)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case TraceabilityPackage.TRACE__SOURCE_REFERENCES:
+				return sourceReferences != null && !sourceReferences.isEmpty();
+			case TraceabilityPackage.TRACE__TARGET_REFERENCES:
+				return targetReferences != null && !targetReferences.isEmpty();
+			case TraceabilityPackage.TRACE__DESCRIPTION:
+				return description != null && !description.isEmpty();
+			case TraceabilityPackage.TRACE__TRACE_MDL:
+				return getTraceMdl() != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+} //TraceImpl
