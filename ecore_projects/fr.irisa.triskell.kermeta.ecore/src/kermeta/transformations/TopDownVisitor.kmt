@@ -1,11 +1,11 @@
-/* $Id: TopDownVisitor.kmt,v 1.6 2007-02-23 09:37:51 ftanguy Exp $
+/* $Id: TopDownVisitor.kmt,v 1.7 2007-05-03 14:28:21 barais Exp $
  * File : TopDownVisitor.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Apr 3, 2006
  * Authors : 
- *  Vincent Mahé	<vmahe@irisa.fr>
+ *  Vincent Mahï¿½	<vmahe@irisa.fr>
  * 
  */
 
@@ -13,14 +13,13 @@
  You should use it through Patterns4Ecore.kmt 'addTopDownVisitor' operation */
 package TopDownVisitor;
 
-require "Visitors.kmt"
+
 require kermeta
-require "../ecore.kmt"
-require "../keyword_list.kmt"
+require "Visitors.kmt"
 require "../helpers/EcoreHelper.kmt"
 require "Tools.kmt"
-
-using kermeta::standard
+require "../keyword_list.kmt" 
+using kermeta::standard 
 using ecore
 
 using EcoreVisitors
@@ -28,11 +27,11 @@ using EcoreVisitors
 class TopDownVisitorPattern inherits VisitorPattern
 {
 	reference mainVisitor : EClass
-	reference keyWordList : kermeta::language::KeyWordList
-	
+	reference keyWordList : kermeta::language::key::KeyWordList
+	 
 	method initialize() is do
 		super()
-		keyWordList := kermeta::language::KeyWordList.new
+		keyWordList := kermeta::language::key::KeyWordList.new
 		keyWordList.initialize
 	end
 	

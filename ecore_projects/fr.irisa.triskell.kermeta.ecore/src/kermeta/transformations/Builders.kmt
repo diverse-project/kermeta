@@ -1,4 +1,4 @@
-/* $Id: Builders.kmt,v 1.2 2006-04-12 07:28:40 vmahe Exp $
+/* $Id: Builders.kmt,v 1.3 2007-05-03 14:28:21 barais Exp $
  * File : Builders.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Authors : 
  *  Didier Vojtisek <dvojtise@irisa.fr>
  *  Damien Pollet   <dpollet@irisa.fr>
- *  Vincent Mahé	<vmahe@irisa.fr>
+ *  Vincent Mahï¿½	<vmahe@irisa.fr>
  * 
  */
 
@@ -17,7 +17,6 @@
 package EcoreBuilders;
 
 require kermeta
-require "../ecore.kmt"
 require "../helpers/EcoreHelper.kmt"
 require "Tools.kmt"
 
@@ -83,7 +82,7 @@ class BuilderPattern
 		var builOp : EOperation init EOperation.new
 		builOp.name := "create" + eClass.name
 //		builOp.eType := eClass		// overided by the next line
-		builOp.eType := helper.getEcoreClassifierByName("ecore::EObject")
+		builOp.eType := helper.getEcoreClassifierByQualifiedName("ecore::EObject")
 		helper.addAnnotation(builOp,"kermeta","isAbstract","true")
 		abstractfactory.eOperations.add(builOp)
     end

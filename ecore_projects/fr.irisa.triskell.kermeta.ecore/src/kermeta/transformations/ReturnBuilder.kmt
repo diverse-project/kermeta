@@ -1,11 +1,11 @@
-/* $Id: ReturnBuilder.kmt,v 1.1 2006-04-12 07:28:40 vmahe Exp $
+/* $Id: ReturnBuilder.kmt,v 1.2 2007-05-03 14:28:21 barais Exp $
  * File : ReturnBuilder.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Apr 11, 2006
  * Authors : 
- *  Vincent Mahé	<vmahe@irisa.fr>
+ *  Vincent Mahï¿½	<vmahe@irisa.fr>
  * 
  */
 
@@ -15,10 +15,9 @@ package ReturnBuilder;
 
 require "Builders.kmt"
 require kermeta
-require "../ecore.kmt"
 require "../helpers/EcoreHelper.kmt"
 require "Tools.kmt"
-
+ 
 using kermeta::standard
 using ecore
 

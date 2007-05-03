@@ -1,16 +1,16 @@
-/* $Id: keyword_list.kmt,v 1.1 2006-08-28 06:59:52 vmahe Exp $
+/* $Id: keyword_list.kmt,v 1.2 2007-05-03 14:28:21 barais Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
  * Authors:	Vincent MAHÉ vmahe@irisa.fr
  */
 
-package kermeta::language;
+package kermeta::language::key;
 
 
 require kermeta
 
-using kermeta::standard
+using kermeta::standard 
 
 class KeyWordList
 {

@@ -1,4 +1,4 @@
-/* $Id: Patterns4Ecore.kmt,v 1.5 2006-04-12 07:28:40 vmahe Exp $
+/* $Id: Patterns4Ecore.kmt,v 1.6 2007-05-03 14:28:21 barais Exp $
  * File : Patterns4Ecore.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,7 @@
  * Authors : 
  *  Didier Vojtisek <dvojtise@irisa.fr>
  *  Damien Pollet   <dpollet@irisa.fr>
- *	Vincent Mahé	<vmahe@irisa.fr>
+ *	Vincent Mahï¿½	<vmahe@irisa.fr>
  * 
  */
 //@mainClass "EcorePattern::Patterns"
@@ -17,14 +17,14 @@
 package EcoreTransformations;
 
 require kermeta
-require "../ecore.kmt"
-require "../helpers/EcoreHelper.kmt"
+
+require "../helpers/EcoreHelper.kmt" 
 require "TopDownVisitor.kmt"
 require "Visitors.kmt"
 require "Builders.kmt"
 require "ReturnBuilder.kmt"
 require "Observers.kmt"
-
+  
 using kermeta::standard
 using ecore
 using EcoreVisitors
