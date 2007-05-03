@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.17 2007-03-27 14:51:24 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.18 2007-05-03 14:04:54 barais Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -315,6 +315,25 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		}
 		return false;
 	}
+	
+	/*private boolean isBodySpecified(EStructuralFeature node){
+		for (Object next : node.getEAnnotations()) {
+			EAnnotation annot = (EAnnotation) next;
+			if(annot.getSource().equals(KM2Ecore.ANNOTATION)) {
+				// Visit all details EAnnotation entries
+				for (Object next2 :  annot.getDetails().keySet()) {
+					String key = (String) next2;						
+					if (key.equals(KM2Ecore.ANNOTATION_BODY_DETAILS)) {	
+						return true;
+					}
+					else if (key.equals(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS)) {	
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}*/
 
 	/**
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAttribute)
@@ -346,6 +365,21 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		
 		// Get the derived properties bodies and other stuffs
 		acceptList(node.getEAnnotations());
+		
+		//TODO, add the getter and setter 
+		if (node.isDerived() && exporter.current_prop.getSetterBody() == null){
+			
+				exporter.current_prop.setSetterBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
+				TagHelper.createNonExistingTagFromNameAndValue(exporter.current_prop, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+			}
+		if (node.isDerived() && exporter.current_prop.getGetterBody() == null){
+			
+			exporter.current_prop.setGetterBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
+			TagHelper.createNonExistingTagFromNameAndValue(exporter.current_prop, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+		}
+			
+			
+		
 		
 		
 		return exporter.current_prop;

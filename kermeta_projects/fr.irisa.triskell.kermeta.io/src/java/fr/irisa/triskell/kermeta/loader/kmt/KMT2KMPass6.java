@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.15 2007-02-15 15:29:44 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.16 2007-05-03 14:04:54 barais Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.ast.Postcondition;
 import fr.irisa.triskell.kermeta.ast.Precondition;
 import fr.irisa.triskell.kermeta.ast.SetterBody;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
@@ -249,8 +250,15 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.GetterBody)
 	 */
 	public boolean beginVisit(GetterBody getterBody) {
+		if(TagHelper.findTagFromNameAndValue(builder.current_property, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true") != null) {			
+			// if the previous operation is tagged with overloadable = true then we can replace it by this one
+			internalLog.debug("overloading derived property " +builder.current_class.getName()+"." + builder.current_property.getName() +
+					" with version from " +builder.getUri());
+		}
 		if (builder.current_property.isIsDerived()) {
-			builder.current_property.setGetterBody(KMT2KMExperessionBuilder.process(getterBody.getGetterbody(), builder));
+			Expression e =KMT2KMExperessionBuilder.process(getterBody.getGetterbody(), builder);
+			//builder.current_property.setGetterBody();
+			ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()).setGetterBody(e);
 		}
 		else {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 6 : getters should only be defined for derived attributes (property).", getterBody));
@@ -264,11 +272,15 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	public boolean beginVisit(SetterBody setterBody) {
 		if (builder.current_property.isIsDerived() && !builder.current_property.isIsReadOnly()) {
 		    builder.pushContext();
-			builder.current_property.setSetterBody(KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder));
+			//builder.current_property.setSetterBody(KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder));
+		    Expression e =KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder);
+			ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()).setSetterBody(e);
+
 			builder.popContext();
 		}
 		else {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 6 : setters should only be defined for non readonly derived attributes (property).", setterBody));
+			
 		}
 		return false;
 	}
