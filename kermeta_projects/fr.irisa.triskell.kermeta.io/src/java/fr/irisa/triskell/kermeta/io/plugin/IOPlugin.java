@@ -1,6 +1,6 @@
 
 
-/*$Id: IOPlugin.java,v 1.3 2007-05-04 13:53:39 dvojtise Exp $
+/*$Id: IOPlugin.java,v 1.4 2007-05-04 16:31:31 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	IOPlugin.java
 * License : EPL
@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.traceability.model.ModelPlugin;
+import fr.irisa.triskell.traceability.model.TraceModelPlugin;
 
 public class IOPlugin extends Plugin {
 	
@@ -69,7 +69,7 @@ public class IOPlugin extends Plugin {
 	 * or 'key' if not found.
 	 */
 	public static String getResourceString(String key) {
-		ResourceBundle bundle = ModelPlugin.getDefault().getResourceBundle();
+		ResourceBundle bundle = TraceModelPlugin.getDefault().getResourceBundle();
 		try {
 			return (bundle != null) ? bundle.getString(key) : key;
 		} catch (MissingResourceException e) {
