@@ -5,16 +5,16 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.6 2007-04-24 14:43:15 dvojtise Exp $
+ $Id: plugin.xml,v 1.7 2007-05-04 15:58:27 dtouzet Exp $
 -->
 
 <plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://modelware.inria.fr/Traceability" 
+       uri = "http://www.kermeta.org/Traceability" 
        class = "fr.irisa.triskell.traceability.TraceabilityPackage"
-       genModel = "src/ecore/traceability.genmodel" /> 
+       genModel = "model/ecore/traceability.genmodel" /> 
   </extension>
 
 </plugin>
