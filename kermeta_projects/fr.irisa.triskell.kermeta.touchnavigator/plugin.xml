@@ -6,7 +6,7 @@
          point="org.eclipse.ui.views">
       <category
             name="Kermeta"
-            id="fr.irisa.triskell.kermeta.viewcategory">
+            id="fr.irisa.triskell.kermeta.view">
       </category>
       <view
             name="Kermeta TouchNavigator View"
