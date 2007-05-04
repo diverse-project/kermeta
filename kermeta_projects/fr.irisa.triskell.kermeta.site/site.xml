@@ -3,22 +3,22 @@
    <description url="http://www.kermeta.org/update">
       Kermeta eclipse update site
    </description>
-   <feature url="features/org.topcased.dependencies_0.8.0.jar" id="org.topcased.dependencies" version="0.8.0">
-      <category name="Topcased"/>
-   </feature>
-   <feature url="features/fr.irisa.triskell.sintaks.feature_0.0.1.jar" id="fr.irisa.triskell.sintaks.feature" version="0.0.1">
+   <feature url="features/fr.irisa.triskell.sintaks_0.0.2.jar" id="fr.irisa.triskell.sintaks" version="0.0.2">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta_0.4.0.jar" id="fr.irisa.triskell.kermeta" version="0.4.0">
+   <feature url="features/fr.irisa.triskell.kermeta_0.4.1.jar" id="fr.irisa.triskell.kermeta" version="0.4.1">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.graphical.feature_0.4.0.jar" id="fr.irisa.triskell.kermeta.graphical.feature" version="0.4.0">
+   <feature url="features/fr.irisa.triskell.kermeta.graphical_0.4.1.jar" id="fr.irisa.triskell.kermeta.graphical" version="0.4.1">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.traceability.feature_0.0.3.jar" id="fr.irisa.triskell.traceability.feature" version="0.0.3">
+   <feature url="features/fr.irisa.triskell.traceability_0.0.4.jar" id="fr.irisa.triskell.traceability" version="0.0.4">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm.feature_0.0.3.jar" id="fr.irisa.triskell.kermeta.samples.fsm.feature" version="0.0.3">
+   <feature url="features/fr.irisa.triskell.kermeta.samples.fsm_0.0.4.jar" id="fr.irisa.triskell.kermeta.samples.fsm" version="0.0.4">
+      <category name="Kermeta"/>
+   </feature>
+   <feature url="features/fr.irisa.triskell.kermeta.ecore_0.0.1.jar" id="fr.irisa.triskell.kermeta.ecore" version="0.0.1">
       <category name="Kermeta"/>
    </feature>
    <category-def name="Kermeta" label="Kermeta and its MDKs">

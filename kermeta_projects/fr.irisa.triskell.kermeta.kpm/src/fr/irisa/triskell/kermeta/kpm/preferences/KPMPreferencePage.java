@@ -61,7 +61,7 @@ public class KPMPreferencePage extends PreferencePage implements
 	public KPMPreferencePage() {
 		super();
 		setPreferenceStore(KPMPlugin.getDefault().getPreferenceStore());
-		setDescription("Configure the politics action for Kermeta Projects");
+		setDescription("Configure the default actions for Kermeta projects (applied to the whole project)");
 	}
 
 	public KPMPreferencePage(String title) {
@@ -85,7 +85,7 @@ public class KPMPreferencePage extends PreferencePage implements
 		}
 		
 		applyRequire = new Button(parent, SWT.CHECK);
-		applyRequire.setText("Apply Require Dependencies");
+		applyRequire.setText("Automatically update if a dependent resource is updated");
 		
 		generateKM = new Button(parent, SWT.CHECK);
 		generateKM.setText("Generate a KM file for each KMT file");

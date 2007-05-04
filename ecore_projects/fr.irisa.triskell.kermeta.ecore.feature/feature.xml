@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="fr.irisa.triskell.kermeta.ecore.feature"
+      id="fr.irisa.triskell.kermeta.ecore"
       label="Kermeta MDK for Ecore"
-      version="0.4.1"
+      version="0.0.1"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.example.com/description">
@@ -17,6 +17,10 @@
       [Enter License Description here.]
    </license>
 
+   <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
+   </url>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import feature="fr.irisa.triskell.kermeta" version="0.4.1"/>
@@ -29,6 +33,7 @@
          id="fr.irisa.triskell.kermeta.ecore"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

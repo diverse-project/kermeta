@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Model Plug-in
+Bundle-Name: Traceability Model Plug-in
 Bundle-SymbolicName: fr.irisa.triskell.traceability;singleton:=true
 Bundle-Version: 0.0.4
 Bundle-ClassPath: .

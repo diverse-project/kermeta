@@ -6,10 +6,66 @@
 
 <body>
 <!--
-$Id: history.html,v 1.21 2007-02-20 08:42:47 dvojtise Exp $
+$Id: history.html,v 1.22 2007-05-04 13:57:06 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V0.4.1 (04/05/2007)</h2>
+<h3>New features</h3>
+<ul>
+	<li>Metamodel weaving : thanks to the special annotation @aspect it is now possible to separate concerns in several files.
+	It allows to add feature to an existing class.
+	For example you can directly require the original ecore and use aspects to add the behavior or constraints to it. If
+	your behavior needs some additional feature in your class, no problem, add it in the aspect. 
+	(#120; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=120&group_id=32&atid=208">Kermeta PackageMerge</a>)
+	</li>	
+   	
+	<li>#277; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=277&group_id=32&atid=208">An OCL like syntax for casting.</a> You can now use something like : myObj.asType(String)</li>
+	<li>#971;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=971&group_id=32&atid=208">Getting (numerical) value from a string</a></li>
+	<li>#1493;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1493&group_id=32&atid=208">Need for new operations on Kermeta collections.</a>A number of new operations are now available:
+Collection.count();
+OrderedCollection.indexOf();
+Set.intersection(Collection) : Set;
+Set.union(Set) : Set;
+Set.unionWithBag(Bag) : Set;
+Set.minus(Set) : Set;
+Bag.union(Collection) : Bag;
+Bag.intersection(Bag) : Bag;
+Bag.intersection(Set) : Set</li>
+	<li>#1933;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1933&group_id=32&atid=208">add new folder button in kermeta perspective</a></li>
+	<li>#1981;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1981&group_id=32&atid=208">when kpm is running it should display it progress in eclipse progress bar</a></li>
+	<li>#2009;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2009&group_id=32&atid=208">Error message should be displayed when kermeta can not launch a file</a></li>
+	<li>#2146;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2146&group_id=32&atid=208">Helpers for reading and writing text files</a></li>	
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>The graphical editor has evolved a little. To improve the abilities of the Kermeta graphical editor, we have modified the presentation parameter of the EMFSemanticModelBridge in *.kmdi file: fr.irisa.triskell.kermeta.graphicaleditor to fr.irisa.triskell.kermeta.graphicaleditor.cd
+Also, for upgrading your *.kmdi file to the new version: v0.4.0 to v0.4.1, you must edit your old file and replace all the fields:
+<semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+by
+<semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd"> </li>
+	<li>#110; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=110&group_id=32&atid=205">method isInstance on Type not implemented</a></li>
+	<li>#501; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=501&group_id=32&atid=205">kmt2ecore doesn't save attribute generic type and function type into the ecore annotations</a></li>	
+	<li>#1127; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1127&group_id=32&atid=205">Reflection does not work for derived properties</a></li>	
+	<li>#1586; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1586&group_id=32&atid=208">Type inference failure on type of 'self'</a></li>
+	<li>#1614; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1614&group_id=32&atid=205">parser pb with post and annotations</a></li>	
+	<li>#1811; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1811&group_id=32&atid=205">Java error with inherited collections</a></li>	
+	<li>#1815; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1815&group_id=32&atid=205">Pb with function variable: no access to Object interface</a></li>	
+	<li>#1893; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1893&group_id=32&atid=205">moving an element from a resource to another doesn't work</a></li>	
+	<li>#1910; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1910&group_id=32&atid=205">can not load and save an simple ecore model</a></li>	
+	<li>#1932; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1932&group_id=32&atid=205">generic parameters are not displayed correctly in the graphical editor</a></li>	
+	<li>#1945; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1945&group_id=32&atid=205">Ecore2Km: pb with string constants</a></li>	
+	<li>#2008; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2008&group_id=32&atid=205">Kermeta Samples do not run due to bad launch configurations</a></li>	
+	<li>#2112; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2112&group_id=32&atid=205">Reals are impossible to use</a></li>		
+	<li>#2114; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2114&group_id=32&atid=205">Error when comparing a collection to void</a></li>	
+	<li>#2154; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2154&group_id=32&atid=205">cyclic inheritance</a></li>	
+	<li>#2183; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2183&group_id=32&atid=205">internal error if the runconfiguration doesn't provide the expected parameters</a></li>	
+	<li>#2198; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2198&group_id=32&atid=205">Infinite loop when saving a model whose MM is available only as generated java</a></li>	
+	<li>#2256; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2256&group_id=32&atid=205">Saving a model into a different resource fails</a></li>	
+	<li>#2280; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=2280&group_id=32&atid=205">Incorrect return value for IF statements</a></li>
+
+	
+</ul>
 <h2 class="Heading">V0.4.0 (28/01/2007)</h2>
 
 <h3>New features</h3>

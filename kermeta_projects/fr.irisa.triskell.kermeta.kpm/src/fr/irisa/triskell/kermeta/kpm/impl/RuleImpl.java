@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleImpl.java,v 1.1 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: RuleImpl.java,v 1.2 2007-05-04 13:54:13 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -363,7 +363,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 			job.cancel();
 		final Unit finalUnit = unit;
 		final Map finalArgs = args;
-		job = new Job("Processing Dependency " + getName()) {
+		job = new Job("Processing Rule " + getName()) {
 
 			public IStatus run(IProgressMonitor monitor) {
 
@@ -496,7 +496,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 			if (!synchrone) {
 				final Unit finalUnit = unit;
 				final Map finalArgs = args;
-				Job job = new Job("Processing Dependency " + getName()) {
+				Job job = new Job("Processing Rule " + getName()) {
 
 					public IStatus run(IProgressMonitor monitor) {
 

@@ -7,20 +7,70 @@
   <foreignModel>kpm.ecore</foreignModel>
   <genPackages prefix="Kpm" basePackage="fr.irisa.triskell.kermeta" disposableProviderFactory="true"
       ecorePackage="kpm.ecore#/">
+    <genDataTypes ecoreDataType="kpm.ecore#//IProgressMonitor"/>
+    <genDataTypes ecoreDataType="kpm.ecore#//List"/>
     <genClasses ecoreClass="kpm.ecore#//Dependency">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/in"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/event"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/outs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Dependency/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Dependency/type"/>
+      <genOperations ecoreOperation="kpm.ecore#//Dependency/process">
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/process/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/process/synchrone"/>
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/process/args"/>
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/process/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Dependency/setEvent">
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/setEvent/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Dependency/setType">
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/setType/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Dependency/findOut">
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/findOut/actionId"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Dependency/removeOut">
+        <genParameters ecoreParameter="kpm.ecore#//Dependency/removeOut/actionId"/>
+      </genOperations>
     </genClasses>
-    <genClasses ecoreClass="kpm.ecore#//In"/>
-    <genClasses ecoreClass="kpm.ecore#//Action"/>
+    <genClasses ecoreClass="kpm.ecore#//In">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kpm.ecore#//In/dependency"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Action/extensionPoint"/>
+      <genOperations ecoreOperation="kpm.ecore#//Action/execute">
+        <genParameters ecoreParameter="kpm.ecore#//Action/execute/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//Action/execute/monitor"/>
+        <genParameters ecoreParameter="kpm.ecore#//Action/execute/args"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Out">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Out/actions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Out/action"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kpm.ecore#//Out/dependency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Out/independant"/>
+      <genOperations ecoreOperation="kpm.ecore#//Out/process">
+        <genParameters ecoreParameter="kpm.ecore#//Out/process/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//Out/process/monitor"/>
+        <genParameters ecoreParameter="kpm.ecore#//Out/process/args"/>
+      </genOperations>
     </genClasses>
-    <genClasses image="false" ecoreClass="kpm.ecore#//Filter"/>
+    <genClasses image="false" ecoreClass="kpm.ecore#//Filter">
+      <genOperations ecoreOperation="kpm.ecore#//Filter/matches">
+        <genParameters ecoreParameter="kpm.ecore#//Filter/matches/unit"/>
+      </genOperations>
+    </genClasses>
     <genClasses image="false" ecoreClass="kpm.ecore#//Expression"/>
     <genClasses image="false" ecoreClass="kpm.ecore#//NestedExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//NestedExpression/expression"/>
+      <genOperations ecoreOperation="kpm.ecore#//NestedExpression/evaluateIn">
+        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateIn/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateIn/value"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//NestedExpression/evaluateOut">
+        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateOut/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//NestedExpression/evaluateOut/value"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//ORExpression"/>
     <genClasses ecoreClass="kpm.ecore#//ANDExpression"/>
@@ -35,6 +85,9 @@
     </genClasses>
     <genClasses image="false" ecoreClass="kpm.ecore#//AbstractEntity">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//AbstractEntity/expression"/>
+      <genOperations ecoreOperation="kpm.ecore#//AbstractEntity/evaluate">
+        <genParameters ecoreParameter="kpm.ecore#//AbstractEntity/evaluate/unit"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Type/value"/>
@@ -42,9 +95,21 @@
     <genClasses ecoreClass="kpm.ecore#//NullExpression"/>
     <genClasses ecoreClass="kpm.ecore#//Event">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Event/name"/>
+      <genOperations ecoreOperation="kpm.ecore#//Event/equals">
+        <genParameters ecoreParameter="kpm.ecore#//Event/equals/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Event/equals.1">
+        <genParameters ecoreParameter="kpm.ecore#//Event/equals.1/event"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="kpm.ecore#//SimpleExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//SimpleExpression/subExpression"/>
+      <genOperations ecoreOperation="kpm.ecore#//SimpleExpression/evaluateIn">
+        <genParameters ecoreParameter="kpm.ecore#//SimpleExpression/evaluateIn/unit"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//SimpleExpression/evaluateOut">
+        <genParameters ecoreParameter="kpm.ecore#//SimpleExpression/evaluateOut/unit"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="kpm.ecore#//KPM">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/actions"/>
@@ -52,6 +117,110 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/types"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/dependencies"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/events"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/units"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//KPM/dependencyTypes"/>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/createAction">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/createAction/extensionPoint"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/findAction">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/findAction/extensionPoint"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/findEvent">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/findEvent/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/createNameFilter">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/createNameFilter/regex"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/findNameFilter">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/findNameFilter/regex"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getExistFilter"/>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/findDependencyType">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/findDependencyType/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getDependencyType">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/getDependencyType/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/findDependency">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/findDependency/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/getEvent">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/getEvent/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//KPM/findUnit">
+        <genParameters ecoreParameter="kpm.ecore#//KPM/findUnit/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//Unit">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependencies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/lastTimeModified"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//Unit/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependsOnUnits"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpm.ecore#//Unit/dependentUnits"/>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/changed"/>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveEvent">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/event"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/synchrone"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/args"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveEvent/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/hasDependencyNamed">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/hasDependencyNamed/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveSynchroneEvent">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent/event"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent/args"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveAsynchroneEvent">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveAsynchroneEvent/event"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveAsynchroneEvent/args"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/beDependentOf">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf/type"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/beDependentOf.1">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf.1/unit"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/beDependentOf.1/dependency"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/getFree">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/getFree/type"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/getFree/unit"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/findDependentUnit">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findDependentUnit/type"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findDependentUnit/unit"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/findUnitIDependOn">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findUnitIDependOn/type"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findUnitIDependOn/unit"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/findUnitIDependOn.1">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findUnitIDependOn.1/type"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findUnitIDependOn.1/unit"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/findDependentUnit.1">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findDependentUnit.1/type"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findDependentUnit.1/unit"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/receiveSynchroneEvent.1">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent.1/event"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent.1/args"/>
+        <genParameters ecoreParameter="kpm.ecore#//Unit/receiveSynchroneEvent.1/monitor"/>
+      </genOperations>
+      <genOperations ecoreOperation="kpm.ecore#//Unit/findDependency">
+        <genParameters ecoreParameter="kpm.ecore#//Unit/findDependency/name"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//ExistFilter"/>
+    <genClasses ecoreClass="kpm.ecore#//DependencyType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpm.ecore#//DependencyType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kpm.ecore#//DependencyEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//DependencyEntry/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kpm.ecore#//DependencyEntry/unit"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

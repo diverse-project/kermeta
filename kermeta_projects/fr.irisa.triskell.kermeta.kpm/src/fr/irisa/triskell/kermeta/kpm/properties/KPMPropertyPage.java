@@ -1,4 +1,4 @@
-/*$Id: KPMPropertyPage.java,v 1.2 2007-04-24 13:35:40 ftanguy Exp $
+/*$Id: KPMPropertyPage.java,v 1.3 2007-05-04 13:54:13 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -60,7 +60,7 @@ public class KPMPropertyPage extends PropertyPage {
 	public KPMPropertyPage() {
 		super();
 		setPreferenceStore(KPMPlugin.getDefault().getPreferenceStore());
-		setDescription("Configure the politics action for Kermeta Projects");
+		setDescription("Configure the default actions for the resource (and included resources)");
 	}
 	
 	@Override
@@ -98,7 +98,7 @@ public class KPMPropertyPage extends PropertyPage {
 		});
 		
 		applyRequire = new Button(parent, SWT.CHECK);
-		applyRequire.setText("Apply Require Dependencies");
+		applyRequire.setText("Automatically update if a dependent resource is updated");
 		
 		generateKM = new Button(parent, SWT.CHECK);
 		generateKM.setText("Generate a KM file for each KMT file");
