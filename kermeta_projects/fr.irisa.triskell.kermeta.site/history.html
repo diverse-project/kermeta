@@ -6,7 +6,7 @@
 
 <body>
 <!--
-$Id: history.html,v 1.22 2007-05-04 13:57:06 dvojtise Exp $
+$Id: history.html,v 1.23 2007-05-09 16:09:06 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
@@ -41,9 +41,9 @@ Bag.intersection(Set) : Set</li>
 <ul>
 	<li>The graphical editor has evolved a little. To improve the abilities of the Kermeta graphical editor, we have modified the presentation parameter of the EMFSemanticModelBridge in *.kmdi file: fr.irisa.triskell.kermeta.graphicaleditor to fr.irisa.triskell.kermeta.graphicaleditor.cd
 Also, for upgrading your *.kmdi file to the new version: v0.4.0 to v0.4.1, you must edit your old file and replace all the fields:
-<semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor">
+&lt;semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor"&gt;
 by
-<semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd"> </li>
+&lt;semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.graphicaleditor.cd"&gt; </li>
 	<li>#110; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=110&group_id=32&atid=205">method isInstance on Type not implemented</a></li>
 	<li>#501; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=501&group_id=32&atid=205">kmt2ecore doesn't save attribute generic type and function type into the ecore annotations</a></li>	
 	<li>#1127; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1127&group_id=32&atid=205">Reflection does not work for derived properties</a></li>	
@@ -51,6 +51,7 @@ by
 	<li>#1614; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1614&group_id=32&atid=205">parser pb with post and annotations</a></li>	
 	<li>#1811; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1811&group_id=32&atid=205">Java error with inherited collections</a></li>	
 	<li>#1815; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1815&group_id=32&atid=205">Pb with function variable: no access to Object interface</a></li>	
+	<li>#1818; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1818&group_id=32&atid=205">Comparison of objects hashcode in hashtables</a></li>	
 	<li>#1893; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1893&group_id=32&atid=205">moving an element from a resource to another doesn't work</a></li>	
 	<li>#1910; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1910&group_id=32&atid=205">can not load and save an simple ecore model</a></li>	
 	<li>#1932; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1932&group_id=32&atid=205">generic parameters are not displayed correctly in the graphical editor</a></li>	
