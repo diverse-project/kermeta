@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.53 2007-04-18 15:20:04 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.54 2007-05-09 11:52:17 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -140,7 +140,7 @@ public class Runtime2EMF {
 		
 		
 		// Add the root elements to the XMI resource
-		// Note: emfObject2 entry is only used for eObject retrieval during the
+		// Note: r2e.emfObject entry is only used for eObject retrieval during the
 		// save process!
 		for (RuntimeObject o : instances)
 		{	
