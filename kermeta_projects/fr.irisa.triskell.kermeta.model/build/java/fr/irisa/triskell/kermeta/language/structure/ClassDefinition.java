@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.4 2006-12-06 16:22:58 dvojtise Exp $
+ * $Id: ClassDefinition.java,v 1.5 2007-05-09 08:56:17 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
+public interface ClassDefinition extends TypeContainer, GenericTypeDefinition {
 	/**
 	 * Returns the value of the '<em><b>Inv</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.

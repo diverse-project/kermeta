@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableItemProvider.java,v 1.7 2006-12-11 08:59:21 dvojtise Exp $
+ * $Id: TypeVariableItemProvider.java,v 1.8 2007-05-09 08:56:04 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -111,6 +111,16 @@ public class TypeVariableItemProvider
 				 null,
 				 null,
 				 null));
+	}
+
+	/**
+	 * This returns TypeVariable.gif.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object getImage(Object object) {
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeVariable"));
 	}
 
 	/**

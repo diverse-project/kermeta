@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionItemProvider.java,v 1.7 2006-12-11 08:58:20 dvojtise Exp $
+ * $Id: ExpressionItemProvider.java,v 1.8 2007-05-09 08:56:04 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -161,32 +161,12 @@ public class ExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelTypeVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createVirtualType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -202,6 +182,26 @@ public class ExpressionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createVoidType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createModelTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createVirtualType()));
 	}
 
 	/**

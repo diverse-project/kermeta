@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.4 2006-12-06 16:23:09 dvojtise Exp $
+ * $Id: StructureFactoryImpl.java,v 1.5 2007-05-09 08:56:17 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -89,13 +89,10 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 		switch (eClass.getClassifierID()) {
 			case StructurePackage.CLASS: return createClass();
 			case StructurePackage.OBJECT: return createObject();
-			case StructurePackage.MODEL: return createModel();
-			case StructurePackage.MODEL_TYPE: return createModelType();
 			case StructurePackage.OPERATION: return createOperation();
 			case StructurePackage.PROPERTY: return createProperty();
 			case StructurePackage.TYPE: return createType();
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
-			case StructurePackage.TYPE_VARIABLE_BINDING: return createTypeVariableBinding();
 			case StructurePackage.MULTIPLICITY_ELEMENT: return createMultiplicityElement();
 			case StructurePackage.ENUMERATION: return createEnumeration();
 			case StructurePackage.PACKAGE: return createPackage();
@@ -104,14 +101,17 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.TAG: return createTag();
 			case StructurePackage.CONSTRAINT: return createConstraint();
 			case StructurePackage.CLASS_DEFINITION: return createClassDefinition();
-			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
-			case StructurePackage.MODEL_TYPE_DEFINITION: return createModelTypeDefinition();
-			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
-			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			case StructurePackage.PRODUCT_TYPE: return createProductType();
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
+			case StructurePackage.TYPE_VARIABLE_BINDING: return createTypeVariableBinding();
 			case StructurePackage.TYPE_DEFINITION: return createTypeDefinition();
 			case StructurePackage.VOID_TYPE: return createVoidType();
+			case StructurePackage.MODEL_TYPE_DEFINITION: return createModelTypeDefinition();
+			case StructurePackage.MODEL_TYPE: return createModelType();
+			case StructurePackage.MODEL: return createModel();
+			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
+			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
+			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

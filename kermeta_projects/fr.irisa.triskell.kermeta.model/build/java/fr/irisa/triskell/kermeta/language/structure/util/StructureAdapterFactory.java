@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureAdapterFactory.java,v 1.2 2006-12-06 16:23:27 dvojtise Exp $
+ * $Id: StructureAdapterFactory.java,v 1.3 2007-05-09 08:56:17 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -107,12 +107,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
 				return createObjectAdapter();
 			}
-			public Object caseModel(Model object) {
-				return createModelAdapter();
-			}
-			public Object caseModelType(ModelType object) {
-				return createModelTypeAdapter();
-			}
 			public Object caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
@@ -127,9 +121,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseEnumerationLiteral(EnumerationLiteral object) {
 				return createEnumerationLiteralAdapter();
-			}
-			public Object caseTypeVariableBinding(TypeVariableBinding object) {
-				return createTypeVariableBindingAdapter();
 			}
 			public Object caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
@@ -164,23 +155,44 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseClassDefinition(ClassDefinition object) {
 				return createClassDefinitionAdapter();
 			}
-			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
-				return createGenericTypeDefinitionAdapter();
+			public Object caseTypeVariable(TypeVariable object) {
+				return createTypeVariableAdapter();
 			}
-			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
-				return createTypeDefinitionContainerAdapter();
+			public Object caseProductType(ProductType object) {
+				return createProductTypeAdapter();
+			}
+			public Object caseFunctionType(FunctionType object) {
+				return createFunctionTypeAdapter();
+			}
+			public Object caseTypeVariableBinding(TypeVariableBinding object) {
+				return createTypeVariableBindingAdapter();
+			}
+			public Object caseTypeDefinition(TypeDefinition object) {
+				return createTypeDefinitionAdapter();
+			}
+			public Object caseVoidType(VoidType object) {
+				return createVoidTypeAdapter();
 			}
 			public Object caseParameterizedType(ParameterizedType object) {
 				return createParameterizedTypeAdapter();
 			}
-			public Object caseTypeVariable(TypeVariable object) {
-				return createTypeVariableAdapter();
-			}
-			public Object caseObjectTypeVariable(ObjectTypeVariable object) {
-				return createObjectTypeVariableAdapter();
+			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
+				return createGenericTypeDefinitionAdapter();
 			}
 			public Object caseModelTypeDefinition(ModelTypeDefinition object) {
 				return createModelTypeDefinitionAdapter();
+			}
+			public Object caseModelType(ModelType object) {
+				return createModelTypeAdapter();
+			}
+			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
+				return createTypeDefinitionContainerAdapter();
+			}
+			public Object caseModel(Model object) {
+				return createModelAdapter();
+			}
+			public Object caseObjectTypeVariable(ObjectTypeVariable object) {
+				return createObjectTypeVariableAdapter();
 			}
 			public Object caseVirtualTypeContainer(VirtualTypeContainer object) {
 				return createVirtualTypeContainerAdapter();
@@ -190,18 +202,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseVirtualType(VirtualType object) {
 				return createVirtualTypeAdapter();
-			}
-			public Object caseProductType(ProductType object) {
-				return createProductTypeAdapter();
-			}
-			public Object caseFunctionType(FunctionType object) {
-				return createFunctionTypeAdapter();
-			}
-			public Object caseTypeDefinition(TypeDefinition object) {
-				return createTypeDefinitionAdapter();
-			}
-			public Object caseVoidType(VoidType object) {
-				return createVoidTypeAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();

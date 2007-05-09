@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.4 2006-12-06 16:23:09 dvojtise Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.5 2007-05-09 08:56:17 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -44,7 +44,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getContainedType <em>Contained Type</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getTypeParameter <em>Type Parameter</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getInv <em>Inv</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
@@ -55,16 +56,36 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements ClassDefinition {
+public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefinition {
 	/**
-	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContainedType()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList containedType = null;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParameter()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList typeParameter = null;
 
 	/**
 	 * The cached value of the '{@link #getInv() <em>Inv</em>}' containment reference list.
@@ -149,11 +170,32 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getContainedType() {
-		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList.Resolving(Type.class, this, StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.CLASS_DEFINITION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getTypeParameter() {
+		if (typeParameter == null) {
+			typeParameter = new EObjectContainmentEList.Resolving(TypeVariable.class, this, StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER);
 		}
-		return containedType;
+		return typeParameter;
 	}
 
 	/**
@@ -232,8 +274,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 */
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__INV:
 				return ((InternalEList)getInv()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
@@ -251,8 +291,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				return ((InternalEList)getTypeParameter()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__INV:
 				return ((InternalEList)getInv()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
@@ -270,8 +310,10 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return getContainedType();
+			case StructurePackage.CLASS_DEFINITION__NAME:
+				return getName();
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				return getTypeParameter();
 			case StructurePackage.CLASS_DEFINITION__INV:
 				return getInv();
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
@@ -293,9 +335,12 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
+			case StructurePackage.CLASS_DEFINITION__NAME:
+				setName((String)newValue);
+				return;
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				getTypeParameter().clear();
+				getTypeParameter().addAll((Collection)newValue);
 				return;
 			case StructurePackage.CLASS_DEFINITION__INV:
 				getInv().clear();
@@ -327,8 +372,11 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				getContainedType().clear();
+			case StructurePackage.CLASS_DEFINITION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				getTypeParameter().clear();
 				return;
 			case StructurePackage.CLASS_DEFINITION__INV:
 				getInv().clear();
@@ -356,8 +404,10 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
+			case StructurePackage.CLASS_DEFINITION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				return typeParameter != null && !typeParameter.isEmpty();
 			case StructurePackage.CLASS_DEFINITION__INV:
 				return inv != null && !inv.isEmpty();
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
@@ -378,9 +428,20 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 */
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+				case StructurePackage.CLASS_DEFINITION__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeDefinition.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericTypeDefinition.class) {
+			switch (derivedFeatureID) {
+				case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER: return StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
 				default: return -1;
 			}
 		}
@@ -393,9 +454,20 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 */
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE;
+				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.CLASS_DEFINITION__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TypeDefinition.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == GenericTypeDefinition.class) {
+			switch (baseFeatureID) {
+				case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER: return StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER;
 				default: return -1;
 			}
 		}
@@ -411,7 +483,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isAbstract: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", isAbstract: ");
 		result.append(isAbstract);
 		result.append(')');
 		return result.toString();

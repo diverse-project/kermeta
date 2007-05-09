@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageItemProvider.java,v 1.8 2006-12-11 08:59:21 dvojtise Exp $
+ * $Id: PackageItemProvider.java,v 1.9 2007-05-09 08:56:04 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -189,12 +189,12 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createTypeDefinition()));
+				 StructureFactory.eINSTANCE.createClassDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createClassDefinition()));
+				 StructureFactory.eINSTANCE.createTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter

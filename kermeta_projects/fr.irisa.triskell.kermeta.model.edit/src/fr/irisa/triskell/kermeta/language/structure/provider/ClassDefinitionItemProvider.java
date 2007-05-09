@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionItemProvider.java,v 1.8 2006-12-11 08:59:21 dvojtise Exp $
+ * $Id: ClassDefinitionItemProvider.java,v 1.9 2007-05-09 08:56:04 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class ClassDefinitionItemProvider
-	extends GenericTypeDefinitionItemProvider
+	extends TypeContainerItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -66,10 +66,33 @@ public class ClassDefinitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamePropertyDescriptor(object);
 			addIsAbstractPropertyDescriptor(object);
 			addSuperTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -127,7 +150,7 @@ public class ClassDefinitionItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
+			childrenFeatures.add(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
 			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__INV);
 			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__OWNED_ATTRIBUTE);
 			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__OWNED_OPERATION);
@@ -181,10 +204,11 @@ public class ClassDefinitionItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ClassDefinition.class)) {
+			case StructurePackage.CLASS_DEFINITION__NAME:
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
 			case StructurePackage.CLASS_DEFINITION__INV:
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
@@ -206,58 +230,18 @@ public class ClassDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createClass()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createModelType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createEnumeration()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
 				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
 				 StructureFactory.eINSTANCE.createModelTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
 				 StructureFactory.eINSTANCE.createVirtualType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createProductType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createFunctionType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createVoidType()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -286,8 +270,8 @@ public class ClassDefinitionItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER ||
-			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE;
+			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE ||
+			childFeature == StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
 
 		if (qualify) {
 			return getString
