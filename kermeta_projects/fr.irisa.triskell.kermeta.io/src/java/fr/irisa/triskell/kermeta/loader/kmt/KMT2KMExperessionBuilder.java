@@ -25,14 +25,14 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	    
 		if (node == null) return null;
 		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder);
-		int old_errs = builder.messages.getErrors().size();
+		int old_errs = builder.messages.nbErrors();
 		try {
 			node.accept(visitor);
 		}
 		catch(IllegalArgumentException e) {
 			// just catch the exeption if an error has been reported
 			// otherwise trow the exception to the caller
-			if (!(builder.messages.getErrors().size() > old_errs)) throw e;
+			if (!(builder.messages.nbErrors() > old_errs)) throw e;
 		}
 		return visitor.result;
 	}

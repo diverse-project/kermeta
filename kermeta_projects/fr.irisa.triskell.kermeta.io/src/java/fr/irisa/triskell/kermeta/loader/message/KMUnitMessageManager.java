@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.3 2007-04-19 14:28:23 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.4 2007-05-11 15:33:20 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -44,6 +44,7 @@ public class KMUnitMessageManager {
 	// in case of cycle in the require statements
 	protected boolean isCallinGetWarnings=false;
 	protected boolean isCallinGetErrors=false;
+	protected boolean isCallinNbErrors=false;
 	
 	/**
 	 * Constructor
@@ -144,6 +145,33 @@ public class KMUnitMessageManager {
 		return result;
 	}
 
+	/**
+	 * calculate in a relatively efficient way how many errors there are
+	 * this is more efficient on large amount of error  than calling getErrors().size()
+	 * @return numbers of errors as if calling getErrors().size()
+	 */
+	public int nbErrors(){
+		//return getErrors().size();
+		
+		int result = 0;
+		if(isCallinNbErrors) return 0;
+	    isCallinNbErrors = true;
+	    // do the job
+	    result = errors.size();
+	    for (int i=0; i<unit.importedUnits.size(); i++) {
+	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
+	        if (iu.messages.hasError()) {
+	        	int indirectErrors = iu.messages.nbErrors();
+	        	if(indirectErrors > 0)
+	        	{		        			        	
+	        		result += 1;
+	        	}
+	        }
+	    }
+	    isCallinNbErrors=false;
+		return result;
+		
+	}
 	/**
 	 * @return Returns the warnings from this unit. If there is an warning in imported unit, 
 	 * 	only report the name of the unit that contain the warning

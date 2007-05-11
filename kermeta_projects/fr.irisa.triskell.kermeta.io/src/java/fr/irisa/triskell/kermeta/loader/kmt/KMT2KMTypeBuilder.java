@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.13 2006-12-07 08:08:03 dvojtise Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.14 2007-05-11 15:33:20 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -45,9 +45,9 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	public static fr.irisa.triskell.kermeta.language.structure.Type process(Type node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMTypeBuilder visitor = new KMT2KMTypeBuilder(builder);
-		int nb_err = builder.messages.getErrors().size();
+		int nb_err = builder.messages.nbErrors();
 		node.accept(visitor);
-		if (visitor.result == null && builder.messages.getErrors().size() == nb_err) {
+		if (visitor.result == null && builder.messages.nbErrors() == nb_err) {
 			builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve type '" + node.getText() + "'.",node));
 		}
 		return visitor.result;

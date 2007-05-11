@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.84 2007-05-09 08:56:01 cfaucher Exp $
+/* $Id: KermetaUnit.java,v 1.85 2007-05-11 15:33:20 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -82,7 +82,7 @@ public abstract class KermetaUnit {
 	public ArrayList<String> includeFilters = new ArrayList<String>();	
 	
     protected void finalize() throws Throwable {
-    	internalLog.debug("Finalise kermeta unit " + this + " " + uri);
+    	//internalLog.debug("Finalise kermeta unit " + this + " " + uri);
     }
 
     /**
@@ -261,6 +261,8 @@ public abstract class KermetaUnit {
 	protected Hashtable traceM2T = new Hashtable();
 	
 	public void storeTrace(fr.irisa.triskell.kermeta.language.structure.Object model_element, Object node) {
+		
+		 
 		traceM2T.put(model_element, node);
 		traceT2M.put(node, model_element);
 		
@@ -276,6 +278,7 @@ public abstract class KermetaUnit {
 					traceDefaultShortDescription + astNode.getTypeName() );
 			
 		}
+		
 	}	
 	
 	/**
@@ -782,6 +785,7 @@ public abstract class KermetaUnit {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
 	            messages.addError("Unexpected load error : "+ t.getClass().getName()+ " " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
@@ -806,6 +810,7 @@ public abstract class KermetaUnit {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
 	            messages.addError("Unexpected load error : " + t.getClass().getName()+" " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
@@ -827,8 +832,9 @@ public abstract class KermetaUnit {
 		}
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
-	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            KermetaUnit.internalLog.error("Unexpected load error (loadAllTypeDefinitions)", t);
 	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
@@ -850,8 +856,9 @@ public abstract class KermetaUnit {
 		}
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
-	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            KermetaUnit.internalLog.error("Unexpected load error (loadAllStructuralFeatures)", t);
 	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
@@ -873,8 +880,9 @@ public abstract class KermetaUnit {
 		}
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
-	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            KermetaUnit.internalLog.error("Unexpected load error (loadAllOppositeProperties)", t);
 	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
@@ -894,8 +902,9 @@ public abstract class KermetaUnit {
 		}
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
-	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            KermetaUnit.internalLog.error("Unexpected load error (loadAllBodies)", t);
 	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
@@ -915,8 +924,9 @@ public abstract class KermetaUnit {
 		}
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
-	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            KermetaUnit.internalLog.error("Unexpected load error (loadAllAnnotations)", t);
 	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
+	            t.printStackTrace();
 	        }
 	    }
 	}
