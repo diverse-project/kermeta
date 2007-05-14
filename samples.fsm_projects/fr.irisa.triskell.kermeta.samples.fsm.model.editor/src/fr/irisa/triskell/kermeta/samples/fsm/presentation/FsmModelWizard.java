@@ -387,7 +387,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @generated
+		 * @generated NOT
 		 */
 		public void createControl(Composite parent) {
 			Composite composite = new Composite(parent, SWT.NONE);
@@ -455,6 +455,9 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 
 			setPageComplete(validatePage());
 			setControl(composite);
+			
+			// Added to set automatically the Combox item to FSM
+			initialObjectField.setText("FSM");
 		}
 
 		/**
