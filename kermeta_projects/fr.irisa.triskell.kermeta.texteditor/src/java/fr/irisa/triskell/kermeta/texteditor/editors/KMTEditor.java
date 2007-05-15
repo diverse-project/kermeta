@@ -312,7 +312,7 @@ public class KMTEditor extends TextEditor implements Interest {
 				
 					project = KermetaWorkspace.getInstance().getKermetaProject( getFile().getProject() );
 					if ( project != null ) {
-						monitor.subTask("Initializing Interest");
+						monitor.subTask("Initializing Interest for " + getFile().getName());
 						initializeInterest();
 					} else {
 						KermetaUnitHelper.unloadAllKermetaUnit();
