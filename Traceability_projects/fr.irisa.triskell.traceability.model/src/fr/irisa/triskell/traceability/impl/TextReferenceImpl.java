@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TextReferenceImpl.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: TextReferenceImpl.java,v 1.2 2007-05-15 09:05:41 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.TraceabilityPackage;
 
@@ -132,10 +133,19 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * use a lazy way to calculate the value
+	 * it is calculated only on demand
+	 * if it is -1, this means that it was not calculated yet
+	 * if it is -2, this means that it failed to calculate it 
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Integer getLineBeginAt() {
+		if(lineBeginAt == -1){
+			lineBeginAt = ResourceHelper.calculateLineNumber(this.charBeginAt,this.fileURI);
+			if(lineBeginAt == -1) lineBeginAt = -2; // still to -1, goes to error mode do not try again 
+		}
+		//else if(lineBeginAt == -2) // cannot be calculated
 		return lineBeginAt;
 	}
 
