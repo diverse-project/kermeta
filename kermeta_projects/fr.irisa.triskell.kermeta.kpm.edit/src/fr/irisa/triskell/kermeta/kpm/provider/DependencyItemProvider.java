@@ -2,14 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DependencyEntryItemProvider.java,v 1.2 2007-04-19 06:51:51 dvojtise Exp $
+ * $Id: DependencyItemProvider.java,v 1.4 2007-05-15 15:22:50 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
 
-import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
-import fr.irisa.triskell.kermeta.kpm.Unit;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,12 +27,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.kpm.Dependency} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class DependencyEntryItemProvider
+public class DependencyItemProvider
 	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
@@ -47,7 +46,7 @@ public class DependencyEntryItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DependencyEntryItemProvider(AdapterFactory adapterFactory) {
+	public DependencyItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,7 +61,8 @@ public class DependencyEntryItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addUnitPropertyDescriptor(object);
+			addFromPropertyDescriptor(object);
+			addToPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -78,9 +78,9 @@ public class DependencyEntryItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DependencyEntry_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DependencyEntry_type_feature", "_UI_DependencyEntry_type"),
-				 KpmPackage.Literals.DEPENDENCY_ENTRY__TYPE,
+				 getString("_UI_Dependency_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_type_feature", "_UI_Dependency_type"),
+				 KpmPackage.Literals.DEPENDENCY__TYPE,
 				 true,
 				 false,
 				 true,
@@ -90,19 +90,19 @@ public class DependencyEntryItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Unit feature.
+	 * This adds a property descriptor for the From feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addUnitPropertyDescriptor(Object object) {
+	protected void addFromPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DependencyEntry_unit_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DependencyEntry_unit_feature", "_UI_DependencyEntry_type"),
-				 KpmPackage.Literals.DEPENDENCY_ENTRY__UNIT,
+				 getString("_UI_Dependency_from_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_from_feature", "_UI_Dependency_type"),
+				 KpmPackage.Literals.DEPENDENCY__FROM,
 				 true,
 				 false,
 				 true,
@@ -112,13 +112,35 @@ public class DependencyEntryItemProvider
 	}
 
 	/**
-	 * This returns DependencyEntry.gif.
+	 * This adds a property descriptor for the To feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addToPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Dependency_to_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Dependency_to_feature", "_UI_Dependency_type"),
+				 KpmPackage.Literals.DEPENDENCY__TO,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns Dependency.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/DependencyEntry"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Dependency"));
 	}
 
 	/**
@@ -128,16 +150,8 @@ public class DependencyEntryItemProvider
 	 * @generated NOT
 	 */
 	public String getText(Object object) {
-		String text = getString("_UI_DependencyEntry_type");
-		String depType = ((DependencyEntry)object).getType().getName();
-		text = (depType == null || depType.length() == 0 ?
-						text :
-						text + "=" + depType);
-		String value = ((DependencyEntry)object).getUnit().getValue();
-		text = (value == null || value.length() == 0 ?
-				text :
-				text + " " + value);
-		return text;
+		Dependency dependency = (Dependency) object;
+		return getString("_UI_Dependency_type") + " from " + dependency.getFrom().getValue() + " to " + dependency.getTo().getValue();
 	}
 
 	/**

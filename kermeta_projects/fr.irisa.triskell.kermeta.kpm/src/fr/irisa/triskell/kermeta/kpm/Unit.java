@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.11 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: Unit.java,v 1.12 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getLastTimeModified <em>Last Time Modified</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getValue <em>Value</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependsOnUnits <em>Depends On Units</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependentUnits <em>Dependent Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.Unit#getDependents <em>Dependents</em>}</li>
  * </ul>
  * </p>
  *
@@ -160,36 +160,36 @@ public interface Unit extends EObject {
 	void setValue(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Depends On Units</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry}.
+	 * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Depends On Units</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Depends On Units</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_DependsOnUnits()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyEntry" containment="true"
+	 * @return the value of the '<em>Dependencies</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependencies()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency" containment="true"
 	 * @generated
 	 */
-	EList getDependsOnUnits();
+	EList getDependencies();
 
 	/**
-	 * Returns the value of the '<em><b>Dependent Units</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry}.
+	 * Returns the value of the '<em><b>Dependents</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Dependent Units</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Dependents</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dependent Units</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_DependentUnits()
-	 * @model type="fr.irisa.triskell.kermeta.kpm.DependencyEntry" containment="true"
+	 * @return the value of the '<em>Dependents</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.kpm.KpmPackage#getUnit_Dependents()
+	 * @model type="fr.irisa.triskell.kermeta.kpm.Dependency"
 	 * @generated
 	 */
-	EList getDependentUnits();
+	EList getDependents();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -261,7 +261,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyEntry findDependentUnit(RuleType type, Unit unit);
+	Dependency findDependentUnit(RuleType type, Unit unit);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -269,7 +269,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyEntry findUnitIDependOn(RuleType type, Unit unit);
+	Dependency findUnitIDependOn(RuleType type, Unit unit);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -277,7 +277,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyEntry findUnitIDependOn(String type, Unit unit);
+	Dependency findUnitIDependOn(String type, Unit unit);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -285,7 +285,7 @@ public interface Unit extends EObject {
 	 * @model
 	 * @generated
 	 */
-	DependencyEntry findDependentUnit(String type, Unit unit);
+	Dependency findDependentUnit(String type, Unit unit);
 
 	/**
 	 * <!-- begin-user-doc -->

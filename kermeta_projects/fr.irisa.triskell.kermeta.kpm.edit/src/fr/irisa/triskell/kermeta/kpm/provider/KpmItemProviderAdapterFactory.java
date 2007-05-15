@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmItemProviderAdapterFactory.java,v 1.3 2007-04-24 12:40:51 ftanguy Exp $
+ * $Id: KpmItemProviderAdapterFactory.java,v 1.4 2007-05-15 15:22:50 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -73,6 +73,28 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);		
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.Dependency} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DependencyItemProvider dependencyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.Dependency}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createDependencyAdapter() {
+		if (dependencyItemProvider == null) {
+			dependencyItemProvider = new DependencyItemProvider(this);
+		}
+
+		return dependencyItemProvider;
 	}
 
 	/**
@@ -428,28 +450,6 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DependencyEntryItemProvider dependencyEntryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.kpm.DependencyEntry}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createDependencyEntryAdapter() {
-		if (dependencyEntryItemProvider == null) {
-			dependencyEntryItemProvider = new DependencyEntryItemProvider(this);
-		}
-
-		return dependencyEntryItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -545,6 +545,7 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 	 * @generated
 	 */
 	public void dispose() {
+		if (dependencyItemProvider != null) dependencyItemProvider.dispose();
 		if (inItemProvider != null) inItemProvider.dispose();
 		if (actionItemProvider != null) actionItemProvider.dispose();
 		if (outItemProvider != null) outItemProvider.dispose();
@@ -557,11 +558,10 @@ public class KpmItemProviderAdapterFactory extends KpmAdapterFactory implements 
 		if (nullExpressionItemProvider != null) nullExpressionItemProvider.dispose();
 		if (eventItemProvider != null) eventItemProvider.dispose();
 		if (kpmItemProvider != null) kpmItemProvider.dispose();
-		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (unitItemProvider != null) unitItemProvider.dispose();
 		if (existFilterItemProvider != null) existFilterItemProvider.dispose();
+		if (ruleItemProvider != null) ruleItemProvider.dispose();
 		if (ruleTypeItemProvider != null) ruleTypeItemProvider.dispose();
-		if (dependencyEntryItemProvider != null) dependencyEntryItemProvider.dispose();
 	}
 
 }

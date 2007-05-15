@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmFactoryImpl.java,v 1.6 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: KpmFactoryImpl.java,v 1.7 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -64,6 +64,7 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	 */
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case KpmPackage.DEPENDENCY: return createDependency();
 			case KpmPackage.IN: return createIn();
 			case KpmPackage.ACTION: return createAction();
 			case KpmPackage.OUT: return createOut();
@@ -76,11 +77,10 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			case KpmPackage.NULL_EXPRESSION: return createNullExpression();
 			case KpmPackage.EVENT: return createEvent();
 			case KpmPackage.KPM: return createKPM();
-			case KpmPackage.RULE: return createRule();
 			case KpmPackage.UNIT: return createUnit();
 			case KpmPackage.EXIST_FILTER: return createExistFilter();
+			case KpmPackage.RULE: return createRule();
 			case KpmPackage.RULE_TYPE: return createRuleType();
-			case KpmPackage.DEPENDENCY_ENTRY: return createDependencyEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -116,6 +116,16 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Dependency createDependency() {
+		DependencyImpl dependency = new DependencyImpl();
+		return dependency;
 	}
 
 	/**
@@ -276,16 +286,6 @@ public class KpmFactoryImpl extends EFactoryImpl implements KpmFactory {
 	public RuleType createRuleType() {
 		RuleTypeImpl ruleType = new RuleTypeImpl();
 		return ruleType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DependencyEntry createDependencyEntry() {
-		DependencyEntryImpl dependencyEntry = new DependencyEntryImpl();
-		return dependencyEntry;
 	}
 
 	/**

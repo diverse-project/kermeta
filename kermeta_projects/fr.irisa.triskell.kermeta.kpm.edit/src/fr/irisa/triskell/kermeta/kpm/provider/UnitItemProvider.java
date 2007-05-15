@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitItemProvider.java,v 1.5 2007-04-24 12:40:51 ftanguy Exp $
+ * $Id: UnitItemProvider.java,v 1.6 2007-05-15 15:22:50 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.provider;
 
@@ -70,6 +70,8 @@ public class UnitItemProvider
 			addNamePropertyDescriptor(object);
 			addLastTimeModifiedPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
+			addDependenciesPropertyDescriptor(object);
+			addDependentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -185,32 +187,47 @@ public class UnitItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Dependencies feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Collection getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(KpmPackage.Literals.UNIT__DEPENDS_ON_UNITS);
-			childrenFeatures.add(KpmPackage.Literals.UNIT__DEPENDENT_UNITS);
-		}
-		return childrenFeatures;
+	protected void addDependenciesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Unit_dependencies_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_dependencies_feature", "_UI_Unit_type"),
+				 KpmPackage.Literals.UNIT__DEPENDENCIES,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
+	 * This adds a property descriptor for the Dependents feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
+	protected void addDependentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Unit_dependents_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Unit_dependents_feature", "_UI_Unit_type"),
+				 KpmPackage.Literals.UNIT__DEPENDENTS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -258,10 +275,6 @@ public class UnitItemProvider
 			case KpmPackage.UNIT__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case KpmPackage.UNIT__DEPENDS_ON_UNITS:
-			case KpmPackage.UNIT__DEPENDENT_UNITS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -275,38 +288,6 @@ public class UnitItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.UNIT__DEPENDS_ON_UNITS,
-				 KpmFactory.eINSTANCE.createDependencyEntry()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(KpmPackage.Literals.UNIT__DEPENDENT_UNITS,
-				 KpmFactory.eINSTANCE.createDependencyEntry()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == KpmPackage.Literals.UNIT__DEPENDS_ON_UNITS ||
-			childFeature == KpmPackage.Literals.UNIT__DEPENDENT_UNITS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

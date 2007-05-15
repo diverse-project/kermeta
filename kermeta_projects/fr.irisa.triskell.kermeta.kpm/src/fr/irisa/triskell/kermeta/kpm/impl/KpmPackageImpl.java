@@ -2,14 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.10 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.11 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
 import fr.irisa.triskell.kermeta.kpm.ANDExpression;
 import fr.irisa.triskell.kermeta.kpm.AbstractEntity;
 import fr.irisa.triskell.kermeta.kpm.Action;
-import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Event;
 import fr.irisa.triskell.kermeta.kpm.ExistFilter;
 import fr.irisa.triskell.kermeta.kpm.Expression;
@@ -55,6 +55,13 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * @generated
  */
 public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dependencyEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -207,13 +214,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass dependencyEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType iProgressMonitorEDataType = null;
 
 	/**
@@ -289,6 +289,42 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		theKpmPackage.freeze();
 
 		return theKpmPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDependency() {
+		return dependencyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDependency_Type() {
+		return (EReference)dependencyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDependency_From() {
+		return (EReference)dependencyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDependency_To() {
+		return (EReference)dependencyEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -737,7 +773,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUnit_DependsOnUnits() {
+	public EReference getUnit_Dependencies() {
 		return (EReference)unitEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -746,7 +782,7 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getUnit_DependentUnits() {
+	public EReference getUnit_Dependents() {
 		return (EReference)unitEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -775,33 +811,6 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 	 */
 	public EAttribute getRuleType_Name() {
 		return (EAttribute)ruleTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDependencyEntry() {
-		return dependencyEntryEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDependencyEntry_Type() {
-		return (EReference)dependencyEntryEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDependencyEntry_Unit() {
-		return (EReference)dependencyEntryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -850,6 +859,11 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		dependencyEClass = createEClass(DEPENDENCY);
+		createEReference(dependencyEClass, DEPENDENCY__TYPE);
+		createEReference(dependencyEClass, DEPENDENCY__FROM);
+		createEReference(dependencyEClass, DEPENDENCY__TO);
+
 		inEClass = createEClass(IN);
 		createEReference(inEClass, IN__RULE);
 
@@ -904,6 +918,17 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEReference(kpmEClass, KPM__UNITS);
 		createEReference(kpmEClass, KPM__RULE_TYPES);
 
+		unitEClass = createEClass(UNIT);
+		createEReference(unitEClass, UNIT__TYPE);
+		createEReference(unitEClass, UNIT__RULES);
+		createEAttribute(unitEClass, UNIT__NAME);
+		createEAttribute(unitEClass, UNIT__LAST_TIME_MODIFIED);
+		createEAttribute(unitEClass, UNIT__VALUE);
+		createEReference(unitEClass, UNIT__DEPENDENCIES);
+		createEReference(unitEClass, UNIT__DEPENDENTS);
+
+		existFilterEClass = createEClass(EXIST_FILTER);
+
 		ruleEClass = createEClass(RULE);
 		createEReference(ruleEClass, RULE__IN);
 		createEReference(ruleEClass, RULE__EVENT);
@@ -911,23 +936,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		createEAttribute(ruleEClass, RULE__NAME);
 		createEReference(ruleEClass, RULE__TYPE);
 
-		unitEClass = createEClass(UNIT);
-		createEReference(unitEClass, UNIT__TYPE);
-		createEReference(unitEClass, UNIT__RULES);
-		createEAttribute(unitEClass, UNIT__NAME);
-		createEAttribute(unitEClass, UNIT__LAST_TIME_MODIFIED);
-		createEAttribute(unitEClass, UNIT__VALUE);
-		createEReference(unitEClass, UNIT__DEPENDS_ON_UNITS);
-		createEReference(unitEClass, UNIT__DEPENDENT_UNITS);
-
-		existFilterEClass = createEClass(EXIST_FILTER);
-
 		ruleTypeEClass = createEClass(RULE_TYPE);
 		createEAttribute(ruleTypeEClass, RULE_TYPE__NAME);
-
-		dependencyEntryEClass = createEClass(DEPENDENCY_ENTRY);
-		createEReference(dependencyEntryEClass, DEPENDENCY_ENTRY__TYPE);
-		createEReference(dependencyEntryEClass, DEPENDENCY_ENTRY__UNIT);
 
 		// Create data types
 		iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
@@ -971,6 +981,11 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		existFilterEClass.getESuperTypes().add(this.getFilter());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(dependencyEClass, Dependency.class, "Dependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDependency_Type(), this.getRuleType(), null, "type", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDependency_From(), this.getUnit(), null, "from", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDependency_To(), this.getUnit(), null, "to", null, 1, 1, Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(inEClass, In.class, "In", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIn_Rule(), this.getRule(), this.getRule_In(), "rule", null, 1, 1, In.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1078,6 +1093,12 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 
 		addEOperation(kpmEClass, this.getExistFilter(), "getExistFilter", 0, 1);
 
+		op = addEOperation(kpmEClass, this.getEvent(), "getEvent", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
+
+		op = addEOperation(kpmEClass, this.getUnit(), "findUnit", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
+
 		op = addEOperation(kpmEClass, this.getRuleType(), "findRuleType", 0, 1);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
 
@@ -1087,11 +1108,71 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(kpmEClass, this.getRule(), "findRule", 0, 1);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
 
-		op = addEOperation(kpmEClass, this.getEvent(), "getEvent", 0, 1);
+		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getUnit_Type(), this.getType(), null, "type", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnit_Rules(), this.getRule(), null, "rules", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_Name(), ecorePackage.getEString(), "name", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_LastTimeModified(), ecorePackage.getEDate(), "lastTimeModified", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_Value(), ecorePackage.getEString(), "value", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnit_Dependencies(), this.getDependency(), null, "dependencies", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnit_Dependents(), this.getDependency(), null, "dependents", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(unitEClass, null, "changed");
+
+		op = addEOperation(unitEClass, null, "receiveEvent");
+		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
+		addEParameter(op, ecorePackage.getEBoolean(), "synchrone", 0, 1);
+		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
+
+		op = addEOperation(unitEClass, null, "receiveSynchroneEvent");
+		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
+		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
+
+		op = addEOperation(unitEClass, null, "receiveAsynchroneEvent");
+		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
+		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
+
+		op = addEOperation(unitEClass, null, "beDependentOf");
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+		addEParameter(op, this.getRuleType(), "type", 0, 1);
+
+		op = addEOperation(unitEClass, null, "beDependentOf");
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+		addEParameter(op, this.getRule(), "dependency", 0, 1);
+
+		op = addEOperation(unitEClass, null, "getFree");
+		addEParameter(op, this.getRuleType(), "type", 0, 1);
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+
+		op = addEOperation(unitEClass, this.getDependency(), "findDependentUnit", 0, 1);
+		addEParameter(op, this.getRuleType(), "type", 0, 1);
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+
+		op = addEOperation(unitEClass, this.getDependency(), "findUnitIDependOn", 0, 1);
+		addEParameter(op, this.getRuleType(), "type", 0, 1);
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+
+		op = addEOperation(unitEClass, this.getDependency(), "findUnitIDependOn", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "type", 0, 1);
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+
+		op = addEOperation(unitEClass, this.getDependency(), "findDependentUnit", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "type", 0, 1);
+		addEParameter(op, this.getUnit(), "unit", 0, 1);
+
+		op = addEOperation(unitEClass, null, "receiveSynchroneEvent");
+		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
+		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
+
+		op = addEOperation(unitEClass, ecorePackage.getEBoolean(), "hasRuleNamed", 0, 1);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
 
-		op = addEOperation(kpmEClass, this.getUnit(), "findUnit", 0, 1);
+		op = addEOperation(unitEClass, this.getRule(), "findRule", 0, 1);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
+
+		initEClass(existFilterEClass, ExistFilter.class, "ExistFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRule_In(), this.getIn(), this.getIn_Rule(), "in", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1118,78 +1199,8 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(ruleEClass, null, "removeOut");
 		addEParameter(op, ecorePackage.getEString(), "actionId", 0, 1);
 
-		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnit_Type(), this.getType(), null, "type", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnit_Rules(), this.getRule(), null, "rules", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getUnit_Name(), ecorePackage.getEString(), "name", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getUnit_LastTimeModified(), ecorePackage.getEDate(), "lastTimeModified", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getUnit_Value(), ecorePackage.getEString(), "value", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnit_DependsOnUnits(), this.getDependencyEntry(), null, "dependsOnUnits", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnit_DependentUnits(), this.getDependencyEntry(), null, "dependentUnits", null, 0, -1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(unitEClass, null, "changed");
-
-		op = addEOperation(unitEClass, null, "receiveEvent");
-		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
-		addEParameter(op, ecorePackage.getEBoolean(), "synchrone", 0, 1);
-		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
-
-		op = addEOperation(unitEClass, ecorePackage.getEBoolean(), "hasRuleNamed", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
-
-		op = addEOperation(unitEClass, null, "receiveSynchroneEvent");
-		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
-		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
-
-		op = addEOperation(unitEClass, null, "receiveAsynchroneEvent");
-		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
-		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
-
-		op = addEOperation(unitEClass, null, "beDependentOf");
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-		addEParameter(op, this.getRuleType(), "type", 0, 1);
-
-		op = addEOperation(unitEClass, null, "beDependentOf");
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-		addEParameter(op, this.getRule(), "dependency", 0, 1);
-
-		op = addEOperation(unitEClass, null, "getFree");
-		addEParameter(op, this.getRuleType(), "type", 0, 1);
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-
-		op = addEOperation(unitEClass, this.getDependencyEntry(), "findDependentUnit", 0, 1);
-		addEParameter(op, this.getRuleType(), "type", 0, 1);
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-
-		op = addEOperation(unitEClass, this.getDependencyEntry(), "findUnitIDependOn", 0, 1);
-		addEParameter(op, this.getRuleType(), "type", 0, 1);
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-
-		op = addEOperation(unitEClass, this.getDependencyEntry(), "findUnitIDependOn", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "type", 0, 1);
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-
-		op = addEOperation(unitEClass, this.getDependencyEntry(), "findDependentUnit", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "type", 0, 1);
-		addEParameter(op, this.getUnit(), "unit", 0, 1);
-
-		op = addEOperation(unitEClass, null, "receiveSynchroneEvent");
-		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
-		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
-		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
-
-		op = addEOperation(unitEClass, this.getRule(), "findRule", 0, 1);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
-
-		initEClass(existFilterEClass, ExistFilter.class, "ExistFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(ruleTypeEClass, RuleType.class, "RuleType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRuleType_Name(), ecorePackage.getEString(), "name", null, 0, 1, RuleType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(dependencyEntryEClass, DependencyEntry.class, "DependencyEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDependencyEntry_Type(), this.getRuleType(), null, "type", null, 1, 1, DependencyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDependencyEntry_Unit(), this.getUnit(), null, "unit", null, 1, 1, DependencyEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -2,13 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FileDependencyTreeItemImpl.java,v 1.1 2007-04-04 13:25:29 ftanguy Exp $
+ * $Id: FileDependencyTreeItemImpl.java,v 1.2 2007-05-15 15:22:48 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.ui.impl;
 
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.ui.FileDependencyTreeItem;
 import fr.irisa.triskell.kermeta.ui.UiFactory;
@@ -54,11 +54,11 @@ public class FileDependencyTreeItemImpl extends TreeItemImpl implements FileDepe
 		if ( getChildren().size() == 0 ) {
 			
 			Unit unit = (Unit) getValue();
-			Iterator<DependencyEntry> iterator = unit.getDependsOnUnits().iterator();
+			Iterator<Dependency> iterator = unit.getDependencies().iterator();
 			while ( iterator.hasNext() ) {
-				DependencyEntry currentEntry = iterator.next();
+				Dependency currentDependency = iterator.next();
 				FileDependencyTreeItem item = UiFactory.eINSTANCE.createFileDependencyTreeItem();
-				item.setValue( currentEntry.getUnit() );
+				item.setValue( currentDependency.getTo() );
 				item.setParent(this);
 				getChildren().add( item );
 			}

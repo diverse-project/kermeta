@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleImpl.java,v 1.2 2007-05-04 13:54:13 dvojtise Exp $
+ * $Id: RuleImpl.java,v 1.3 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -289,7 +289,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, KpmPackage.RULE__TYPE, oldType, type));
 	}
-	 
+
 	/**
 	 * 
 	 * @generated NOT

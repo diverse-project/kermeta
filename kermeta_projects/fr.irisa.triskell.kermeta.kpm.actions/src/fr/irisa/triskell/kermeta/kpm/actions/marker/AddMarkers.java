@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.3 2007-04-24 12:40:26 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.4 2007-05-15 15:22:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.QualifiedName;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.extension.Interest;
-import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
@@ -107,9 +107,9 @@ public class AddMarkers implements IAction, Interest {
 			 */
 			if ( ! kermetaUnit.messages.hasError() ) {
 				
-				Iterator<DependencyEntry> iterator = unit.getDependentUnits().iterator();
+				Iterator<Dependency> iterator = unit.getDependents().iterator();
 				while ( iterator.hasNext() ) {
-					Unit currentUnit = iterator.next().getUnit();
+					Unit currentUnit = iterator.next().getFrom();
 					if ( ! updatedUnits.contains(currentUnit) ) {
 						KermetaUnitHost.getInstance().declareInterest(this, currentUnit);
 						map.put("forceTypechecking", true);
@@ -167,10 +167,10 @@ public class AddMarkers implements IAction, Interest {
 		markOuts(out, unit, message, adding);
 		markedUnits.add(unit);
 		
-		Iterator<DependencyEntry> iterator = unit.getDependentUnits().iterator();
+		Iterator<Dependency> iterator = unit.getDependents().iterator();
 		while ( iterator.hasNext() ) {
-			DependencyEntry entry = iterator.next();
-			markDependent(out, first, top, entry.getUnit(), markedUnits, adding);
+			Dependency dependency = iterator.next();
+			markDependent(out, first, top, dependency.getFrom(), markedUnits, adding);
 		}
 		
 		

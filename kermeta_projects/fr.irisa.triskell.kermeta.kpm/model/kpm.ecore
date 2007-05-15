@@ -191,19 +191,19 @@
       <eParameters name="type" eType="#//RuleType"/>
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
-    <eOperations name="findDependentUnit" eType="#//DependencyEntry">
+    <eOperations name="findDependentUnit" eType="#//Dependency">
       <eParameters name="type" eType="#//RuleType"/>
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
-    <eOperations name="findUnitIDependOn" eType="#//DependencyEntry">
+    <eOperations name="findUnitIDependOn" eType="#//Dependency">
       <eParameters name="type" eType="#//RuleType"/>
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
-    <eOperations name="findUnitIDependOn" eType="#//DependencyEntry">
+    <eOperations name="findUnitIDependOn" eType="#//Dependency">
       <eParameters name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
-    <eOperations name="findDependentUnit" eType="#//DependencyEntry">
+    <eOperations name="findDependentUnit" eType="#//Dependency">
       <eParameters name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="unit" eType="#//Unit"/>
     </eOperations>
@@ -221,19 +221,20 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeModified" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependsOnUnits" upperBound="-1"
-        eType="#//DependencyEntry" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dependentUnits" upperBound="-1"
-        eType="#//DependencyEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Dependency" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependents" upperBound="-1"
+        eType="#//Dependency"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExistFilter" eSuperTypes="#//Filter"/>
   <eClassifiers xsi:type="ecore:EClass" name="RuleType">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DependencyEntry">
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//RuleType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" lowerBound="1" eType="#//Unit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Unit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Unit"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List"/>
 </ecore:EPackage>

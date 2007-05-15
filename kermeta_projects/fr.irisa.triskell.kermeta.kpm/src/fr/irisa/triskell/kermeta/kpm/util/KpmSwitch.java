@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmSwitch.java,v 1.5 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: KpmSwitch.java,v 1.6 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.util;
 
@@ -87,6 +87,12 @@ public class KpmSwitch {
 	 */
 	protected Object doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case KpmPackage.DEPENDENCY: {
+				Dependency dependency = (Dependency)theEObject;
+				Object result = caseDependency(dependency);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case KpmPackage.IN: {
 				In in = (In)theEObject;
 				Object result = caseIn(in);
@@ -203,12 +209,6 @@ public class KpmSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.RULE: {
-				Rule rule = (Rule)theEObject;
-				Object result = caseRule(rule);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case KpmPackage.UNIT: {
 				Unit unit = (Unit)theEObject;
 				Object result = caseUnit(unit);
@@ -222,20 +222,35 @@ public class KpmSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case KpmPackage.RULE: {
+				Rule rule = (Rule)theEObject;
+				Object result = caseRule(rule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case KpmPackage.RULE_TYPE: {
 				RuleType ruleType = (RuleType)theEObject;
 				Object result = caseRuleType(ruleType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case KpmPackage.DEPENDENCY_ENTRY: {
-				DependencyEntry dependencyEntry = (DependencyEntry)theEObject;
-				Object result = caseDependencyEntry(dependencyEntry);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Dependency</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Dependency</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseDependency(Dependency object) {
+		return null;
 	}
 
 	/**
@@ -550,21 +565,6 @@ public class KpmSwitch {
 	 * @generated
 	 */
 	public Object caseRuleType(RuleType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Dependency Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Dependency Entry</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseDependencyEntry(DependencyEntry object) {
 		return null;
 	}
 

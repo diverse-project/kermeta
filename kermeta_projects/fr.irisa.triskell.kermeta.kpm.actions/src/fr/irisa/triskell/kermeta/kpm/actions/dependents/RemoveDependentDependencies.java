@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.3 2007-04-18 09:05:55 dvojtise Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.4 2007-05-15 15:22:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
-import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -62,12 +62,12 @@ public class RemoveDependentDependencies implements IAction {
 			 * 
 			 * 
 			 */
-			ArrayList<DependencyEntry> entriesToRemove = new ArrayList<DependencyEntry> ();
-			Iterator<DependencyEntry> iterator = unit.getDependsOnUnits().iterator();
+			ArrayList<Dependency> entriesToRemove = new ArrayList<Dependency> ();
+			Iterator<Dependency> iterator = unit.getDependencies().iterator();
 			while ( iterator.hasNext() ) {
-				DependencyEntry currentDependencyEntry = iterator.next();
-				if ( ! findImportedUnit(kermetaUnit, currentDependencyEntry.getUnit()) )
-					entriesToRemove.add(currentDependencyEntry);
+				Dependency currentDependency = iterator.next();
+				if ( ! findImportedUnit(kermetaUnit, currentDependency.getTo()) )
+					entriesToRemove.add(currentDependency);
 			}
 			
 			
@@ -77,10 +77,9 @@ public class RemoveDependentDependencies implements IAction {
 			 * 
 			 * 
 			 */
-			for ( DependencyEntry currentDependencyEntry : entriesToRemove ) {
-				unit.getDependsOnUnits().remove(currentDependencyEntry);
-				DependencyEntry entryToRemove = currentDependencyEntry.getUnit().findDependentUnit("require", unit);
-				currentDependencyEntry.getUnit().getDependentUnits().remove(entryToRemove);	
+			for ( Dependency currentDependency : entriesToRemove ) {
+				currentDependency.getTo().getDependents().remove(currentDependency);
+				unit.getDependents().remove(currentDependency);
 			}
 			
 

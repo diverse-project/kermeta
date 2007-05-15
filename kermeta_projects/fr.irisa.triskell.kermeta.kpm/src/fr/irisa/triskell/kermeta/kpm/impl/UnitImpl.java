@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.12 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.13 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
-import fr.irisa.triskell.kermeta.kpm.DependencyEntry;
+import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.KpmFactory;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
@@ -54,8 +54,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getLastTimeModified <em>Last Time Modified</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getValue <em>Value</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependsOnUnits <em>Depends On Units</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependentUnits <em>Dependent Units</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.kpm.impl.UnitImpl#getDependents <em>Dependents</em>}</li>
  * </ul>
  * </p>
  *
@@ -143,24 +143,24 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	protected String value = VALUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDependsOnUnits() <em>Depends On Units</em>}' containment reference list.
+	 * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDependsOnUnits()
+	 * @see #getDependencies()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList dependsOnUnits = null;
+	protected EList dependencies = null;
 
 	/**
-	 * The cached value of the '{@link #getDependentUnits() <em>Dependent Units</em>}' containment reference list.
+	 * The cached value of the '{@link #getDependents() <em>Dependents</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDependentUnits()
+	 * @see #getDependents()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList dependentUnits = null;
+	protected EList dependents = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -300,11 +300,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getDependsOnUnits() {
-		if (dependsOnUnits == null) {
-			dependsOnUnits = new EObjectContainmentEList(DependencyEntry.class, this, KpmPackage.UNIT__DEPENDS_ON_UNITS);
+	public EList getDependencies() {
+		if (dependencies == null) {
+			dependencies = new EObjectContainmentEList(Dependency.class, this, KpmPackage.UNIT__DEPENDENCIES);
 		}
-		return dependsOnUnits;
+		return dependencies;
 	}
 
 	/**
@@ -312,11 +312,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getDependentUnits() {
-		if (dependentUnits == null) {
-			dependentUnits = new EObjectContainmentEList(DependencyEntry.class, this, KpmPackage.UNIT__DEPENDENT_UNITS);
+	public EList getDependents() {
+		if (dependents == null) {
+			dependents = new EObjectResolvingEList(Dependency.class, this, KpmPackage.UNIT__DEPENDENTS);
 		}
-		return dependentUnits;
+		return dependents;
 	}
 
 	/**
@@ -377,14 +377,12 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void beDependentOf(Unit unit, RuleType type) {
-		DependencyEntry dependOn = KpmFactory.eINSTANCE.createDependencyEntry();
-		dependOn.setUnit(unit);
-		dependOn.setType(type);
-		DependencyEntry dependentUnit = KpmFactory.eINSTANCE.createDependencyEntry();
-		dependentUnit.setUnit(this);
-		dependentUnit.setType(type);
-		getDependsOnUnits().add(dependOn);
-		unit.getDependentUnits().add(dependentUnit);
+		Dependency dependency = KpmFactory.eINSTANCE.createDependency();
+		dependency.setFrom(this);
+		dependency.setTo(unit);
+		dependency.setType(type);
+		getDependencies().add(dependency);
+		unit.getDependents().add(dependency);
 	}
 
 	/**
@@ -393,11 +391,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void getFree(RuleType type, Unit unit) {
-		DependencyEntry entry = unit.findDependentUnit(type, this);
-		if ( entry != null ) {
-			unit.getDependentUnits().remove(entry);
-			entry = findUnitIDependOn(type, unit);
-			getDependsOnUnits().remove(entry);
+		Dependency dependency = unit.findDependentUnit(type, this);
+		if ( dependency != null ) {
+			unit.getDependents().remove(dependency);
+			getDependencies().remove(dependency);
 		}
 	}
 
@@ -406,15 +403,15 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DependencyEntry findUnitIDependOn(RuleType type, Unit unit) {
-		DependencyEntry foundEntry = null;
-		Iterator <DependencyEntry> iterator = getDependsOnUnits().iterator();
-		while ( (foundEntry == null) && (iterator.hasNext()) ) {
-			DependencyEntry currentEntry = iterator.next();
-			if ( currentEntry.getType().equals(type) && currentEntry.getUnit().equals(unit) )
-				foundEntry = currentEntry;
+	public Dependency findUnitIDependOn(RuleType type, Unit unit) {
+		Dependency dependency = null;
+		Iterator <Dependency> iterator = getDependencies().iterator();
+		while ( (dependency == null) && (iterator.hasNext()) ) {
+			Dependency currentDependency = iterator.next();
+			if ( currentDependency.getType().equals(type) && currentDependency.getTo().equals(unit) )
+				dependency = currentDependency;
 		}
-		return foundEntry;
+		return dependency;
 	}
 
 	/**
@@ -422,7 +419,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DependencyEntry findUnitIDependOn(String type, Unit unit) {
+	public Dependency findUnitIDependOn(String type, Unit unit) {
 		return findUnitIDependOn(
 				((KPM) eContainer()).findRuleType(type),
 				unit);
@@ -433,7 +430,7 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DependencyEntry findDependentUnit(String type, Unit unit) {
+	public Dependency findDependentUnit(String type, Unit unit) {
 		return findDependentUnit(
 				((KPM) eContainer()).findRuleType(type),
 				unit);
@@ -483,15 +480,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void beDependentOf(Unit unit, Rule dependency) {
-		DependencyEntry dependOn = KpmFactory.eINSTANCE.createDependencyEntry();
-		dependOn.setUnit(unit);
-		dependOn.setType(dependency.getType());
-		DependencyEntry dependentUnit = KpmFactory.eINSTANCE.createDependencyEntry();
-		dependentUnit.setUnit(this);
-		dependentUnit.setType(dependency.getType());
-		getDependsOnUnits().add(dependOn);
-		unit.getDependentUnits().add(dependentUnit);
+	public void beDependentOf(Unit unit, Rule rule) {
+		beDependentOf(unit, rule.getType());
 	}
 
 	/**
@@ -499,15 +489,15 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public DependencyEntry findDependentUnit(RuleType type, Unit unit) {
-		DependencyEntry foundEntry = null;
-		Iterator <DependencyEntry> iterator = getDependentUnits().iterator();
-		while ( (foundEntry == null) && (iterator.hasNext()) ) {
-			DependencyEntry currentEntry = iterator.next();
-			if ( currentEntry.getType().equals(type) && currentEntry.getUnit().equals(unit) )
-				foundEntry = currentEntry;
+	public Dependency findDependentUnit(RuleType type, Unit unit) {
+		Dependency dependency = null;
+		Iterator <Dependency> iterator = getDependents().iterator();
+		while ( (dependency == null) && (iterator.hasNext()) ) {
+			Dependency currentDependency = iterator.next();
+			if ( currentDependency.getType().equals(type) && currentDependency.getFrom().equals(unit) )
+				dependency = currentDependency;
 		}
-		return foundEntry;
+		return dependency;
 	}
 
 	/**
@@ -517,10 +507,8 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case KpmPackage.UNIT__DEPENDS_ON_UNITS:
-				return ((InternalEList)getDependsOnUnits()).basicRemove(otherEnd, msgs);
-			case KpmPackage.UNIT__DEPENDENT_UNITS:
-				return ((InternalEList)getDependentUnits()).basicRemove(otherEnd, msgs);
+			case KpmPackage.UNIT__DEPENDENCIES:
+				return ((InternalEList)getDependencies()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -543,10 +531,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return getLastTimeModified();
 			case KpmPackage.UNIT__VALUE:
 				return getValue();
-			case KpmPackage.UNIT__DEPENDS_ON_UNITS:
-				return getDependsOnUnits();
-			case KpmPackage.UNIT__DEPENDENT_UNITS:
-				return getDependentUnits();
+			case KpmPackage.UNIT__DEPENDENCIES:
+				return getDependencies();
+			case KpmPackage.UNIT__DEPENDENTS:
+				return getDependents();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -574,13 +562,13 @@ public class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__VALUE:
 				setValue((String)newValue);
 				return;
-			case KpmPackage.UNIT__DEPENDS_ON_UNITS:
-				getDependsOnUnits().clear();
-				getDependsOnUnits().addAll((Collection)newValue);
+			case KpmPackage.UNIT__DEPENDENCIES:
+				getDependencies().clear();
+				getDependencies().addAll((Collection)newValue);
 				return;
-			case KpmPackage.UNIT__DEPENDENT_UNITS:
-				getDependentUnits().clear();
-				getDependentUnits().addAll((Collection)newValue);
+			case KpmPackage.UNIT__DEPENDENTS:
+				getDependents().clear();
+				getDependents().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -608,11 +596,11 @@ public class UnitImpl extends EObjectImpl implements Unit {
 			case KpmPackage.UNIT__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
-			case KpmPackage.UNIT__DEPENDS_ON_UNITS:
-				getDependsOnUnits().clear();
+			case KpmPackage.UNIT__DEPENDENCIES:
+				getDependencies().clear();
 				return;
-			case KpmPackage.UNIT__DEPENDENT_UNITS:
-				getDependentUnits().clear();
+			case KpmPackage.UNIT__DEPENDENTS:
+				getDependents().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -635,10 +623,10 @@ public class UnitImpl extends EObjectImpl implements Unit {
 				return LAST_TIME_MODIFIED_EDEFAULT == null ? lastTimeModified != null : !LAST_TIME_MODIFIED_EDEFAULT.equals(lastTimeModified);
 			case KpmPackage.UNIT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case KpmPackage.UNIT__DEPENDS_ON_UNITS:
-				return dependsOnUnits != null && !dependsOnUnits.isEmpty();
-			case KpmPackage.UNIT__DEPENDENT_UNITS:
-				return dependentUnits != null && !dependentUnits.isEmpty();
+			case KpmPackage.UNIT__DEPENDENCIES:
+				return dependencies != null && !dependencies.isEmpty();
+			case KpmPackage.UNIT__DEPENDENTS:
+				return dependents != null && !dependents.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

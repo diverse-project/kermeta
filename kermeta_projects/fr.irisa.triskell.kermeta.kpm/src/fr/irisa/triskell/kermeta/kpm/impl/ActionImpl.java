@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.6 2007-04-04 13:43:54 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.7 2007-05-15 15:22:53 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -99,6 +99,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * TODO safely remove this piece of code
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
