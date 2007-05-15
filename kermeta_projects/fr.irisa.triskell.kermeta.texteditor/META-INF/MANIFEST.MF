@@ -25,5 +25,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.editor,
  fr.irisa.triskell.kermeta.kpm;visibility:=reexport,
  fr.irisa.triskell.kermeta.io,
- fr.irisa.triskell.kermeta
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.traceability
 Eclipse-LazyStart: true
