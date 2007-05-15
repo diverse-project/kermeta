@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.24 2007-05-09 11:52:17 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.25 2007-05-15 09:13:10 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -296,6 +296,7 @@ public class RuntimeObject {
 	 *   (Collection&lt;RuntimeObject&gt;)   
 	 *   - <b>r2e.emfResource</b> : used to store an EMF Resource in a RuntimeObject representing a Kermeta EMFResource
 	 *   Typically used while loading a model
+	 *   - <b>r2e.emfResourceset</b> : used to store EMF ResourceSet in the kermeta RuntimeObject representing an EMFRepository
 	 *   - <b>emfObject</b> : used to store the EObject that this RuntimeObject represents; may not be present if the object was created from kermeta
 	 *   in this case, the Runtime2EMF class is in charge to fill it when saving the Runtime Object
 	 *   - <b>r2e.emfObject</b> : used when serializing RuntimeObject to EObject: As far as I know it is used only in Runtime2EMF class, but I am not able to explain its full purpose :-(
