@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+/* $Id: Tracer.java,v 1.2 2007-05-15 09:06:29 dvojtise Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -48,6 +48,7 @@ public class Tracer {
 	
 	/**
 	 * Constructor
+	 * provides a Resource : allows to save the trace at the end 
 	 */
 	public Tracer(Resource newTraceResource) {
 		traceResource = newTraceResource;
@@ -63,8 +64,15 @@ public class Tracer {
 			}
 		}
 	}	
+	
+	/**
+	 * Constructor
+	 * this is a memory tracer, by default nothing is done to serialize the generated traces
+	 * 
+	 *
+	 */
 	public Tracer() {
-		tracesActivated= false;
+		tracesActivated= true;
 	}
 	
 	/**
@@ -83,7 +91,7 @@ public class Tracer {
 	public void newModelTrace()
 	{
 		modelTrace = TraceabilityFactory.eINSTANCE.createTraceModel();
-		traceResource.getContents().add(modelTrace);
+		if(traceResource != null) traceResource.getContents().add(modelTrace);
 	}
 	
 	public void addMappingTrace(EObject source, EObject target, String message)
@@ -121,8 +129,8 @@ public class Tracer {
 		sourceTextRef.setLineBeginAt(line);
 		sourceTextRef.setLineEndAt(line);
 		sourceTextRef.setCharBeginAt(charBeginAt);
-		sourceTextRef.setCharBeginAt(charEndAt);
-		traceResource.getContents().add(sourceTextRef);		
+		sourceTextRef.setCharEndAt(charEndAt);
+		//traceResource.getContents().add(sourceTextRef);		
 		addTargetTrace(target, message, sourceTextRef);
 	}
 	
@@ -183,27 +191,8 @@ public class Tracer {
 	{
 		TextReference result = null;
 		ModelReference eref = getModelReference(target);
-		if (eref != null)
-		{
-			EList sourceTraces = eref.getSourceTraces();
-			Iterator sourceIt = sourceTraces.iterator();
-			// get, for each sourceTrace, the list of sourceReferences
-			while (sourceIt.hasNext())
-			{
-				Trace t = (Trace)sourceIt.next();
-				EList refs = t.getSourceReferences();
-				Iterator refsIt = refs.iterator();
-				while (refsIt.hasNext())
-				{
-					Reference r = (Reference)refsIt.next();
-					if (r instanceof TextReference)
-					{
-						result = (TextReference)r;
-					}
-				}
-			}
-		}
-		return result;
+		
+		return ModelReferenceHelper.getFirstTextReference(eref);
 	}
 	
 	/**
@@ -219,7 +208,7 @@ public class Tracer {
 		{
 			targetExtRef = TraceabilityFactory.eINSTANCE.createModelReference();
 			targetExtRef.setRefObject(target);
-			traceResource.getContents().add(targetExtRef);
+			//traceResource.getContents().add(targetExtRef);
 		}
 		
 		// create message
@@ -227,14 +216,14 @@ public class Tracer {
 		tmessage.setValue(message);
 		tmessage.setType("Mapping");
 		tmessage.setLanguage("english");
-		traceResource.getContents().add(tmessage);
+		//traceResource.getContents().add(tmessage);
 		
 		// create trace
 		Trace trace = TraceabilityFactory.eINSTANCE.createTrace();
 		trace.getSourceReferences().add(sourceRef);
 		trace.getTargetReferences().add(targetExtRef);
 		trace.getDescription().add(tmessage);
-		traceResource.getContents().add(trace);
+		//traceResource.getContents().add(trace);
 		
 		modelTrace.getTraces().add(trace);
 		modelTrace.getMessages().add(tmessage);
