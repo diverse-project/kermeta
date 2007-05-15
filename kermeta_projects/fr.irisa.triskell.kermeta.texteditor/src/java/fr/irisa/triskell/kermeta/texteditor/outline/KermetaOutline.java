@@ -12,6 +12,7 @@ import java.util.Iterator;
 //import org.eclipse.jface.action.IMenuManager;
 //import org.eclipse.jface.action.IStatusLineManager;
 //import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
@@ -34,6 +35,9 @@ import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 
 /**
  * @author Franck Fleurey
@@ -147,11 +151,13 @@ public class KermetaOutline extends ContentOutlinePage {
             try
             {
                 IStructuredSelection ssel = (IStructuredSelection)selection;
-                KermetaASTNode node = (KermetaASTNode)editor.getMcunit().getNodeByModelElement(((OutlineItem)ssel.getFirstElement()).modelElement);
-                editor.setHighlightRange(node.getRangeStart()-1,0 ,true);
+                ModelReference mr = editor.getMcunit().tracer.getModelReference((EObject)(((OutlineItem)ssel.getFirstElement()).modelElement));
+                TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+                if(tr != null)
+                	editor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);
                 
                 //              Now notify other plugins
-                fr.irisa.triskell.kermeta.language.structure.Object fobj = editor.getFObjectForNode(node);
+                fr.irisa.triskell.kermeta.language.structure.Object fobj = (fr.irisa.triskell.kermeta.language.structure.Object)(((OutlineItem)ssel.getFirstElement()).modelElement);
                 if(fobj != null){
 	                Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
 	    			while(it.hasNext())
