@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.1 2007-01-23 15:04:12 dvojtise Exp $
+/* $Id: KMTUnit.java,v 1.2 2007-05-15 09:16:15 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -166,5 +166,8 @@ public class KMTUnit extends KermetaUnit {
     public CompUnit getMctAST() {
         return mctAST;
     }
+
+	@Override
+	public void postLoad() {}
     
 }
