@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.12 2006-09-28 13:06:12 zdrey Exp $
+/* $Id: Traceback.java,v 1.13 2007-05-15 09:13:43 dvojtise Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -24,6 +24,9 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 
 /**
  * This class contains a set of methods that handle the stack trace created when 
@@ -101,17 +104,24 @@ public class Traceback {
     {
         String info = " ";
         KermetaUnit kunit = interpreter.getMemory().getUnit();
-        // TODO : instead of this patch unit finder, use the Tracer tools
-        // in order to get directly the URI of an elemeent
+        
         KermetaUnit u = kunit.findUnitForModelElement(fobject);
         if (u!=null && fobject!=null) // I have not figured out why fobject given in parameters could be null
         {
             Object fo_source = u.getNodeByModelElement(fobject);
             info += getTextInfoForNode(fobject, fo_source, u, frame);
         }
-        else if (frame != null) // it's in a KMUnit (which does not store a trace)
-        {
-            info += "    " + frame.toString() + "\n";
+        else {
+        	 // use the Tracer tools in order to get directly the URI of an elemeent
+        	ModelReference mr = kunit.findModelReferenceToModelElement(fobject);
+        	if(mr != null){
+        		TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+        		info += getTextInfoForNode(fobject, tr, u, frame);
+        	}
+	        else if (frame != null) // it's in a KMUnit (which does not store a trace)
+	        {
+	            info += "    " + frame.toString() + "\n";
+	        }
         }
         return info;
     }
@@ -133,12 +143,10 @@ public class Traceback {
         String[] infos = new String[4];
         Object fo_source = null;
         KermetaUnit kunit = interpreter.getMemory().getUnit();
-        // TODO : instead of this patch unit finder, use the Tracer tools
-        // in order to get directly the URI of an elemeent
-        KermetaUnit u = kunit.findUnitForModelElement(fobject);
-        if (u!=null)
-            fo_source = u.getNodeByModelElement(fobject);
-        infos = getInfoForNode(fobject, fo_source, u, frame);
+        ModelReference mr = kunit.findModelReferenceToModelElement(fobject);
+        if(mr != null)
+        	fo_source = ModelReferenceHelper.getFirstTextReference(mr);        
+        infos = getInfoForNode(fobject, fo_source, kunit, frame);
         return infos;
     }
     
@@ -156,6 +164,15 @@ public class Traceback {
         if (frame != null)
             info += ", in '" + infos[2] + "'";
         info += " ( " + infos[3] + " )";
+        return info;
+    }
+    
+    private String getTextInfoForTextReference(fr.irisa.triskell.kermeta.language.structure.Object fobject,TextReference tr, CallFrame frame)
+    {
+        String info = "file '" + tr.getFileURI() + "'" + ", line "+ tr.getLineBeginAt();
+        if (frame != null)
+            info += ", in '" + frame.toString() + "'";
+        info += " ( " + getCodeForFObject(fobject) + " )";
         return info;
     }
     
@@ -177,6 +194,7 @@ public class Traceback {
      * @param source_object the source_object (text, graphic, or model element) 
      * 		  from which the fobject (as model element) is generated
      *        (got from trace hashtables in KermetaUnits with fobject as key)
+     *        or a TextReference from the traceability
      * @param unit
      * @param frame
      * @return information according to the type of the source_object
@@ -187,7 +205,9 @@ public class Traceback {
     	if (source_object instanceof KermetaASTNode)
     		info += "-> " + getTextInfoForKMTASTNode(fobject, (KermetaASTNode)source_object, unit, frame) + "\n";
     	else if (source_object instanceof fr.irisa.triskell.kermeta.language.structure.Object) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
-    		info += getTextInfoForKMNode(unit, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, frame);
+    		info += "   " + getTextInfoForKMNode(unit, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, frame);
+    	else if (source_object instanceof TextReference)
+    		info += "   " + getTextInfoForTextReference(fobject, (TextReference)source_object, frame)+ "\n";
     	return info;
     }
     
@@ -196,9 +216,11 @@ public class Traceback {
     	String[] infos = new String[4];
     	if (source_object instanceof KermetaASTNode)
     		infos = getInfoForKMTASTNodeAsArray(fobject, (KermetaASTNode)source_object, unit, frame);
-    	// if source_object is not a KermetaASTNode, than it would come from a km file
-    	// and so, it would be equals to "fobject"!
+    	// if source_object is not a KermetaASTNode, then it probably comes from a km file
+    	// and so, it should be equal to "fobject"!
     	// anyway, source_object could be later a object from a graphical view!
+    	else if (source_object instanceof TextReference)
+    		infos = getTextInfoForTextReferenceAsArray(fobject, (TextReference)source_object, frame);
     	else if (source_object instanceof fr.irisa.triskell.kermeta.language.structure.Object || source_object == null)
     		infos = getInfoForKMNodeAsArray(fobject, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, unit, frame);
     	return infos;
@@ -244,6 +266,15 @@ public class Traceback {
 		infos[2] = (frame!=null)?frame.toString():":";
         infos[3] = getCodeForFObject(fobject);
     	return infos;
+    }
+    private String[] getTextInfoForTextReferenceAsArray(fr.irisa.triskell.kermeta.language.structure.Object fobject, TextReference textRef, CallFrame frame)
+    {
+    	String[] infos = new String[4];
+    	infos[0] = textRef.getFileURI();
+    	infos[1] = textRef.getLineBeginAt().toString();
+    	infos[2] = (frame!=null)?frame.toString():":";
+        infos[3] = getCodeForFObject(fobject);
+        return infos;
     }
     
     /**
