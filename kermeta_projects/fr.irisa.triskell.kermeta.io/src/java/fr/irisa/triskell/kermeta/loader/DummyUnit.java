@@ -1,4 +1,4 @@
-/* $Id: DummyUnit.java,v 1.1 2006-08-01 15:15:26 dvojtise Exp $
+/* $Id: DummyUnit.java,v 1.2 2007-05-15 09:08:59 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : DummyUnit.java
  * License : EPL
@@ -55,6 +55,12 @@ public class DummyUnit extends KermetaUnit {
 	@Override
 	public void loadBodies() {
 
+	}
+
+	@Override
+	public void postLoad() {
+		// Nothing to do
+		
 	}
 
 }

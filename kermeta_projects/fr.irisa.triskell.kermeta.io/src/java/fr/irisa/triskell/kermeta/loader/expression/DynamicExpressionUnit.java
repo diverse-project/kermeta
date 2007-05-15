@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.8 2006-10-06 12:19:01 ftanguy Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.9 2007-05-15 09:10:36 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -202,4 +202,9 @@ public class DynamicExpressionUnit extends KermetaUnit {
     public ArrayList getVariables() {
         return variables;
     }
+
+	@Override
+	public void postLoad() {
+		
+	}
 }

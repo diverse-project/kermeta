@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.26 2007-01-08 17:17:34 ftanguy Exp $
+/* $Id: KMTUnit.java,v 1.27 2007-05-15 09:10:36 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -46,9 +46,17 @@ public class KMTUnit extends KermetaUnit {
 	 */
 	public KMTUnit(String uri, Hashtable packages) {
 		super(uri, packages);
+		// KMTUnit needs the traces during build time
+		needASTTraces = true;
 	}
 	
-	public void discardTraceabilityInfo() {
+	
+	/**
+	 * AST traces are very usefull during parsing
+	 * and may be used be some appiclation (for ex, the code completion of the current unit)
+	 * however, it is not recommended to keep these information alive since it consummes a lot of memory 	 
+	 */
+	public void discardASTTraces() {
 	    KermetaUnit.internalLog.info("Clearing traceability from text to model in order to free memory");
 	    mctAST = null;
 	    traceM2T.clear();
@@ -83,8 +91,7 @@ public class KMTUnit extends KermetaUnit {
 			mctAST = p.compUnit();
 		}
 		catch(Exception e) {
-		    messages.addMessage(new KMUnitParseError(e));
-		    return;
+		    messages.addMessage(new KMUnitParseError(e));		    
 		}
 	}
 	
@@ -100,7 +107,6 @@ public class KMTUnit extends KermetaUnit {
 		}
 		catch(Exception e) {
 			messages.addMessage(new KMUnitParseError(e));
-		    return;
 		}
 	}
 	
@@ -168,5 +174,14 @@ public class KMTUnit extends KermetaUnit {
     public CompUnit getMctAST() {
         return mctAST;
     }
+
+
+	@Override
+	public void postLoad() {
+		// after loading we should not use AST traces anymore
+		// only the tracer should remain
+		this.discardASTTraces();
+		
+	}
     
 }

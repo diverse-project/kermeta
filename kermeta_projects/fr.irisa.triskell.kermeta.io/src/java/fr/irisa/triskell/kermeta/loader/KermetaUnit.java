@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.85 2007-05-11 15:33:20 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.86 2007-05-15 09:08:45 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -54,11 +54,13 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
+import fr.irisa.triskell.kermeta.loader.message.KermetaUnitTraceHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.KmResourceFactoryImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
+import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
@@ -256,22 +258,38 @@ public abstract class KermetaUnit {
 	/**
 	 * This tables store the mapping between Metacore model elements
 	 * and AST nodes in both directions.
+	 * This is intensely used during the parsing but should be discarded after 
+	 * because it creates references to the whole ast, and java cannot claim to get all this memory back
 	 */
 	protected Hashtable traceT2M = new Hashtable();
 	protected Hashtable traceM2T = new Hashtable();
 	
+	/**
+	 * tells wheter we must store traces to the AST
+	 * typically KMTUnit and EmfaticUnit that rely on these data must set it to true
+	 * other kind of unit should leave it to false
+	 * useful because some unit may parse some text without any link to the ast ...
+	 */
+	protected boolean needASTTraces = false;
+	
 	public void storeTrace(fr.irisa.triskell.kermeta.language.structure.Object model_element, Object node) {
 		
-		 
-		traceM2T.put(model_element, node);
-		traceT2M.put(node, model_element);
+		if(needASTTraces){
+			// only unit related to text using ASt need this kind of trace 
+			
+			traceM2T.put(model_element, node);
+			traceT2M.put(node, model_element);
 		
-		if(tracer !=  null)			
-		{	
+			if(tracer ==  null)			
+			{	// if there is no tracer defined create a memory tracer
+				// useful because at the end of the build the AST will be discarded to free the memory
+				// only the tracer will remain (but it has a smaller memory footprint
+				tracer = new Tracer();
+			}
+		   
 			KermetaASTNode astNode = (KermetaASTNode)node;
-			astNode.getRangeStart();
 			tracer.addTextInputTrace(this.uri, 
-					ResourceHelper.calculateLineNumber(astNode.getRangeStart(),this.uri),//getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
+					-1,// this cost too much, this computation is done only on demand, ResourceHelper.calculateLineNumber(astNode.getRangeStart(),this.uri),//getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
 					astNode.getRangeStart(),
 					astNode.getRangeStart()+ astNode.getRangeLength(), 
 					model_element, 
@@ -280,6 +298,26 @@ public abstract class KermetaUnit {
 		}
 		
 	}	
+	
+	/**
+	 * retreives the ModelRefence (ie. a trace ref) to this object
+	 * also looks into imported units's tracers
+	 * @param object
+	 * @return
+	 */
+	public ModelReference findModelReferenceToModelElement(fr.irisa.triskell.kermeta.language.structure.Object object)
+	{
+		ModelReference result = tracer.getModelReference(object);
+	    if (result != null) return result;
+	    // try imported unit tracer
+	    ArrayList iulist = getAllImportedUnits();
+	    for (int i=0; i<iulist.size(); i++) {	        
+	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        if(iu.tracer != null) result = iu.tracer.getModelReference(object);
+		    if (result != null) return result;
+	    }
+	    return result;
+	}
 	
 	/**
 	 * Helper method that looks into all the imported unit to find the researched 
@@ -780,6 +818,7 @@ public abstract class KermetaUnit {
 	        loadAllOppositeProperties();
 	        loadAllBodies();
 	        loadAllAnnotations();
+	        postLoad();
 	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
@@ -969,6 +1008,12 @@ public abstract class KermetaUnit {
 	 */
 	public abstract void loadBodies();
 	private boolean doneLoadBodies = false;
+	
+
+	/**
+	 * Any post-load action like clearing memory for instance
+	 */
+	public abstract void postLoad();
 	
 	/**
 	 * @return Returns the uri.

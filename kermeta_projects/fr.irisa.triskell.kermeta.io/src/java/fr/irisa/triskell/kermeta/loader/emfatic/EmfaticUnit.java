@@ -1,4 +1,4 @@
-/* $Id: EmfaticUnit.java,v 1.6 2006-05-03 15:03:17 zdrey Exp $
+/* $Id: EmfaticUnit.java,v 1.7 2007-05-15 09:09:37 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : EmfaticUnit.java
  * License : EPL
@@ -37,7 +37,8 @@ public class EmfaticUnit extends KermetaUnit {
 	 */
 	public EmfaticUnit(String uri, Hashtable packages) {
 		super(uri, packages);
-		// TODO Auto-generated constructor stub
+		// EmfaticUnit needs the traces during build time
+		needASTTraces = true;
 	}
 	
 	public void parse() {
@@ -116,6 +117,12 @@ public class EmfaticUnit extends KermetaUnit {
 	public void loadBodies() {
 		// NOTHING
 
+	}
+
+	@Override
+	public void postLoad() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

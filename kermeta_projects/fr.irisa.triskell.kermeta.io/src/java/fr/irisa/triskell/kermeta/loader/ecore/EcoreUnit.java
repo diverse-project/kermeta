@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.9 2006-07-11 17:33:37 zdrey Exp $
+/* $Id: EcoreUnit.java,v 1.10 2007-05-15 09:09:37 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -102,6 +102,12 @@ public class EcoreUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadBodies()
      */
     public void loadBodies() {}
+
+	@Override
+	public void postLoad() {
+		// nothing to do
+		
+	}
     
     
 

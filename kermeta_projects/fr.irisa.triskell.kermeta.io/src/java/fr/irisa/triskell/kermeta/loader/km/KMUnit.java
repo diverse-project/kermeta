@@ -1,4 +1,4 @@
-/* $Id: KMUnit.java,v 1.14 2006-11-16 13:52:48 dvojtise Exp $
+/* $Id: KMUnit.java,v 1.15 2007-05-15 09:10:36 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : 	KMUnit.java
 * License : EPL
@@ -162,4 +162,10 @@ public class KMUnit extends KermetaUnit {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void postLoad() {
+		// TODO Auto-generated method stub
+		
+	}
 }

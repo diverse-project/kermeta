@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.8 2006-08-24 11:51:09 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.9 2007-05-15 09:10:36 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 /**
  * KermetaUnit dedicated to handle java a Jar as a Unit
@@ -56,6 +57,10 @@ public class JarUnit extends KermetaUnit {
      */
     public JarUnit(String uri, Hashtable packages) {
         super(uri, packages);
+        // a jarUnit depends on Kermeta
+        // Actually, it depends only on some types : NotImplementedException
+        // TODO split kermeta standard in order to not have to require it completely
+       // importedUnits.add(StdLibKermetaUnitHelper.getKermetaUnit());
     }    
 
     /**
@@ -155,6 +160,11 @@ public class JarUnit extends KermetaUnit {
 			if (tag.getName().equals(Jar2KMPass.IS_PROXY_FOR_JAVA_TYPE)) return tag.getValue();
 		}
 		return "";
+	}
+
+	@Override
+	public void postLoad() {
+		// nothing to do
 	}
 	
     
