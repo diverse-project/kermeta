@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.17 2007-02-08 14:52:21 cfaucher Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.18 2007-05-16 08:26:30 cfaucher Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse_dir" location="C:/kermetadev/eclipse3.2.1"/>
+	<property name="eclipse_dir" location="C:/eclipse"/>
 	
 	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
@@ -13,6 +13,7 @@
 		<pathelement location="build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.io/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
+	  	<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
 	  	<pathelement location="lib/thirdparty/log4j.jar"/>
 	  	<pathelement location="lib/thirdparty/antlr.jar"/>
