@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.8 2007-05-16 09:24:47 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.9 2007-05-16 09:42:22 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -707,7 +707,12 @@ class SimpleIteratorIP inherits IteratorPolicy {
 				visitor.write(name)
 			end
 			visitor.write("{ ")
-			oclIterator.variable1.accept(visitor)
+			if (oclIterator.variable1 != void) then
+				oclIterator.variable1.accept(visitor)
+			else
+				visitor.write(" e ")
+				//TODO Check that mark
+			end
 			visitor.write(" | ")
 			oclIterator.body.accept(visitor)
 			visitor.write("}")
