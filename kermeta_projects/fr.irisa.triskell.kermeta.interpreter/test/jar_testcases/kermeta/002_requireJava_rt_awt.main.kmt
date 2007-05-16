@@ -1,4 +1,4 @@
-/* $Id: 002_requireJava_rt_awt.main.kmt,v 1.1 2007-05-16 15:48:00 dvojtise Exp $
+/* $Id: 002_requireJava_rt_awt.main.kmt,v 1.2 2007-05-16 15:54:08 dvojtise Exp $
  * Creation date: April 24, 2006
  * License:
  * Copyright:
@@ -34,7 +34,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
         var f : Frame init Frame.new()
         f.initialize
         f.setVisible(true)
-        
+        f.setSize_IntegerInteger(100,100)
         /*
 		Rectangle bounds = gc.getBounds();
 		w.setLocation(10 + bounds.x, 10 + bounds.y);
