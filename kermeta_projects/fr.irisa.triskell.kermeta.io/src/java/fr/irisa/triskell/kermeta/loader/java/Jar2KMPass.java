@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.7 2006-08-24 11:51:09 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.8 2007-05-16 13:44:26 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -34,8 +34,11 @@ public abstract class Jar2KMPass {
 	final static public String JARUNIT_TAG_NAME = "IsProxyForJar";
 	final static public String INITOPERATION_TAG_NAME = "IsInitOperation";
 	final static public String JAVAOPERATION_TAG_NAME = "IsJavaOperation";
+	final static public String JAVAMETHODINDEX_TAG_NAME = "JavaMethodIndex";
+	final static public String JAVACONSTRUCTORINDEX_TAG_NAME = "JavaConstructorIndex";
 	final static public String IS_PROXY_FOR_JAVA_TYPE = "IsProxyForJavaType";
 	
+	public int processedJavaClasses = 0; // used to get user feedback in case of OutOfMemory crash ...
 	
 	/** the constructor */
 	public Jar2KMPass(JarUnit builder) {

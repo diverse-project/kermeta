@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.10 2006-10-27 11:58:15 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.11 2007-05-16 13:44:26 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -10,6 +10,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.java;
 
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -31,6 +32,9 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.modelhelper.PrimitiveTypeHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
@@ -62,6 +66,15 @@ public class Jar2KMPass3 extends Jar2KMPass {
 	public void process() {
 		if (builder.cl==null) return;	// load has failed : do nothing
     	Enumeration<String> typeQualifiedNames = builder.typeDefs.keys();
+    	processedJavaClasses = 0;
+    	int nbJavaClassesToProcess = builder.typeDefs.size();
+    	int stoponcount = 300;
+    	/*try {
+			System.in.read();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
     	while(typeQualifiedNames.hasMoreElements()){
     		String typeQualifiedName = typeQualifiedNames.nextElement();
     		String javaQualifiedName = typeQualifiedName.replaceAll("::",".");
@@ -73,6 +86,17 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				processAttributes(currentClassDef, currentClass);
 				processOperations(currentClassDef, currentClass);
 				processConstructors(currentClassDef, currentClass);
+				internalLog.debug("processed java classes : " + processedJavaClasses++ +"/"+nbJavaClassesToProcess);
+				if(processedJavaClasses%200 == 0) System.gc();
+			/*	try {
+					if(processedJavaClasses>stoponcount)	{
+						System.in.read(); 
+						stoponcount+=50;
+					}
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}*/
 			} catch (ClassNotFoundException e) {
 				internalLog.error("ClassNotFound in jar "+builder.platformURI.toFileString() +" looking for "+javaQualifiedName ,e);
 				
@@ -131,7 +155,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 						Operation conflictingOp = conlictingOpIt.next();
 						if(conflictingOp.getOwnedParameter().size()>0){
 							if(conflictingOp.getName().contains("_")){
-								internalLog.debug("strange renaming an operation allready containing _");
+								internalLog.debug("strange renaming an operation allready containing _ ; will rename " + conflictingOp.getOwningClass().getName() + "."  + conflictingOp.getName());
 
 								HashSet<Operation> conflictingOperations_bis = findConflictingOperations(op, null);
 							}
@@ -230,10 +254,22 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				if (!result.contains(testedOp)) result.add(testedOp);
 			}
 		}
-		Iterator<fr.irisa.triskell.kermeta.language.structure.Class> superClassesIt = cd.getSuperType().iterator();
+		Iterator<fr.irisa.triskell.kermeta.language.structure.Type> superClassesIt = cd.getSuperType().iterator();
 		while(superClassesIt.hasNext()){
-			ClassDefinition superClassDef = (ClassDefinition)superClassesIt.next().getTypeDefinition();
-			result.addAll(findConflictingOperations(topOperation, superClassDef));
+			Type superType = (Type)(superClassesIt.next());
+			superType = PrimitiveTypeHelper.resolvePrimitiveType(superType);
+
+			if(superType instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+				TypeDefinition superTypeDef = ((fr.irisa.triskell.kermeta.language.structure.Class)superType).getTypeDefinition();
+				if(superTypeDef instanceof ClassDefinition)
+					result.addAll(findConflictingOperations(topOperation, (ClassDefinition)superTypeDef));
+				else{
+					internalLog.debug("don't know what to do with unsupported TypeDefinition " + superTypeDef.getName());
+				}
+			}
+			else{
+				internalLog.debug("don't know what to do with unsupported Type " + superType);
+			}
 		}
 		return result;
 	}
@@ -316,10 +352,14 @@ public class Jar2KMPass3 extends Jar2KMPass {
 						Iterator<Parameter> itParam1 = op.getOwnedParameter().iterator();
 						Iterator<Parameter> itParam2 = newOp.getOwnedParameter().iterator();
 						while(itParam1.hasNext()){
-							Type t1 = itParam1.next().getType();
-							Type t2 = itParam2.next().getType();
-							if(!TypeEqualityChecker.equals(t1,t2)) 
-								allParamsAreTheSame= false;
+							Parameter param1 = itParam1.next();
+							Parameter param2 =itParam2.next();
+							Type t1 = param1.getType();
+							Type t2 = param2.getType();
+							if(!(t1 == null && t2 == null)){
+								if(!TypeEqualityChecker.equals(t1,t2)) 
+									allParamsAreTheSame= false;
+							}
 							// TODO check the special case of UnknownJavaClass
 						}
 					} else allParamsAreTheSame= false;
@@ -333,9 +373,16 @@ public class Jar2KMPass3 extends Jar2KMPass {
 		else cd = op.getOwningClass();
 		if(! found){
 			// try in the parents
-			Iterator<fr.irisa.triskell.kermeta.language.structure.Class> superClassesIt = cd.getSuperType().iterator();
+			
+			Object cdef;
+			Iterator<fr.irisa.triskell.kermeta.language.structure.Type> superClassesIt = cd.getSuperType().iterator();
 			while(superClassesIt.hasNext()){
-				result = findSuperOperation(op, (ClassDefinition)superClassesIt.next().getTypeDefinition());
+				fr.irisa.triskell.kermeta.language.structure.Type type = superClassesIt.next();
+				if(type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+					// ignore primitive types
+					cdef = ((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition();
+					result = findSuperOperation(op, (ClassDefinition)cdef);
+				}
 			}
 		}
 		return result;
@@ -367,7 +414,9 @@ public class Jar2KMPass3 extends Jar2KMPass {
 			if(Modifier.isPublic(fields[i].getModifiers())){
 				//	Create the Property:
 				Property res = builder.struct_factory.createProperty();
-				builder.cachedJavaFields.put(res, fields[i]);
+				
+				builder.jarCache.putField(res, fields[i],i);
+				
 				// name :
 				res.setName(fields[i].getName());
 				// default : (no default for a reference)
@@ -427,7 +476,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				// duplicate operation name treatment will be done during next pass 
 				builder.current_operation.setName("initialize");
 				
-				builder.cachedJavaConstructors.put(builder.current_operation, constructors[i]);
+				builder.jarCache.putConstructor(builder.current_operation, constructors[i],i);
 			
 				//	 return type : the type of the class itself in order to ease the writing
 				builder.current_operation.setIsOrdered(false);
@@ -441,7 +490,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				allOperations.add(builder.current_operation);
 				
 				// intialize the body to a dummy expression, the interpreter must know how to deal with this kind of Java object
-				builder.current_operation.setBody(ExpressionParser.parse(builder, "        raise kermeta::exceptions::NotImplementedException.new"));
+				// DVK builder.current_operation.setBody(ExpressionParser.parse(builder, "        raise kermeta::exceptions::NotImplementedException.new"));				
 				
 //				 ownedParameter added while visiting  containement
 				java.lang.reflect.Type[] paramTypes = constructors[i].getGenericParameterTypes();
@@ -473,14 +522,12 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					builder.current_operation.getOwnedParameter().add(res);
 				}
 				//	this is a constructor add a tag so the interpreter can recognize it and work with it
-				Tag tag = builder.struct_factory.createTag();
-				tag.setName(INITOPERATION_TAG_NAME);
-				tag.setValue(c.getName());
-				builder.current_operation.getTag().add(tag);
-				tag = builder.struct_factory.createTag();
-				tag.setName(JAVAOPERATION_TAG_NAME);
-				tag.setValue(c.getName());
-				builder.current_operation.getTag().add(tag);
+				TagHelper.createNonExistingTagFromNameAndValue(builder.current_operation, 
+						INITOPERATION_TAG_NAME, 
+						c.getName()); 
+				TagHelper.createNonExistingTagFromNameAndValue(builder.current_operation, 
+						JAVAOPERATION_TAG_NAME, 
+						c.getName());
 			}
 		}
 	}
@@ -532,7 +579,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				builder.current_operation = builder.struct_factory.createOperation();
 				//builder.storeTrace(builder.current_operation, node);
 				
-				builder.cachedJavaMethods.put(builder.current_operation, methods[i]);
+				builder.jarCache.putMethod(builder.current_operation, methods[i],i);
 				
 				// Name
 				// duplicate operation name treatment will be done during next pass 
@@ -573,7 +620,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					builder.current_operation.setIsAbstract(false);
 					// not abstract but no behavior in kermeta, fill it with a dummy body
 					// that raises a NotImplemented exception
-					builder.current_operation.setBody(ExpressionParser.parse(builder, "        raise kermeta::exceptions::NotImplementedException.new"));
+					// DVK builder.current_operation.setBody(ExpressionParser.parse(builder, "        raise kermeta::exceptions::NotImplementedException.new"));
 				}
 					
 				// Exceptions
@@ -616,11 +663,12 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					}
 					// Operation:
 					builder.current_operation.getOwnedParameter().add(res);
-					Tag tag = builder.struct_factory.createTag();
-					tag.setName(JAVAOPERATION_TAG_NAME);
-					tag.setValue(methods[i].getName());
-					builder.current_operation.getTag().add(tag);
+					
 				}
+				// tag the operation with the java name
+				TagHelper.createNonExistingTagFromNameAndValue(builder.current_operation, 
+						JAVAOPERATION_TAG_NAME, 
+						methods[i].getName());
 			}
 		}
 	}

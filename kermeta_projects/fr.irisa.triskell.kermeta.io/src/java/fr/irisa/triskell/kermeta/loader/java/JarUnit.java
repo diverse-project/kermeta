@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.9 2007-05-15 09:10:36 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.10 2007-05-16 13:44:26 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -31,6 +31,8 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 
 /**
  * KermetaUnit dedicated to handle java a Jar as a Unit
@@ -44,12 +46,8 @@ public class JarUnit extends KermetaUnit {
 	public URI platformURI;
 	public URI localURI;    // localized version of the URI	
 	
-	// structure used to optimize the retreival of java methods from a kermeta operation
-	public Hashtable<Operation,Method> cachedJavaMethods = new Hashtable<Operation,Method>();
-	// structure used to optimize the retreival of java methods from a kermeta operation
-	public Hashtable<Operation,Constructor> cachedJavaConstructors =  new Hashtable<Operation,Constructor>();
-	// structure used to optimize the retreival of java fields from a kermeta property
-	public Hashtable<Property,Field> cachedJavaFields =  new Hashtable<Property,Field>();
+	//	 The cache structure are there but will be filled only on request due to the memory required to keep it	
+	public JarCache jarCache = new JarCache(this);	
 	
     /**
      * @param uri
@@ -113,6 +111,7 @@ public class JarUnit extends KermetaUnit {
     public void loadTypeDefinitions() {
     	Jar2KMPass pass = new Jar2KMPass2(this);
 		pass.process();
+		jarCache.setPlannedNbClasses(typeDefs.size());
     }
 
     /* (non-Javadoc)
@@ -120,7 +119,18 @@ public class JarUnit extends KermetaUnit {
      */
     public void loadStructuralFeatures() {
     	Jar2KMPass pass3 = new Jar2KMPass3(this);
-		pass3.process();
+		try{
+	    	pass3.process();
+    	}
+    	catch(java.lang.OutOfMemoryError e){
+    		packages.clear();
+    		String msg = "Not enough memory to process your " + this.typeDefs.size() + " java classes (stopped on the " + pass3.processedJavaClasses + "th); ";
+    		msg += "\nplease consider using includeFilter and excludeFilter or increase the memory allocated to your jvm";
+    		
+    		internalLog.error(msg,e);
+    		messages.addError(msg,null);
+    		typeDefs.clear();
+    	}
     }
 
     /* (non-Javadoc)
