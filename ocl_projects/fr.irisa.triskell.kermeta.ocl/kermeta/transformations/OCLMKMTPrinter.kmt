@@ -1,4 +1,4 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.4 2007-02-22 18:56:10 bitterjug Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.5 2007-05-16 09:24:47 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -33,12 +33,15 @@ class OCLKMTPrinter
     
     operation main(): Void is
 		do
-			modelURI := "../../model/allSpeeds.xmi"		
+			//modelURI := "../../model/allSpeeds.xmi"		
+			modelURI := "../../model/65.xmi"		
+			
 			repository := EMFRepository.new
 			helper := OCLHelpers::OCLHelper.new
 	    	helper.initialize
 	     	visitor := Ocl2kmtVisitor.new
 	     	model  := helper.loadOCLModel(repository, modelURI)
+	     	stdio.writeln("model loaded")
 			helper.getPackageDeclaration(model).accept(visitor)
 	    end
 

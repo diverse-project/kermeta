@@ -1,498 +1,395 @@
 package ocl;
 
-require "Ecore.ecore"
- 
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "OCLCST.ecore" 
+  
 package cst
 {
+	@aspect "true"
 	abstract class CSTNode inherits cst::visitors::Visitable
 	{
-		attribute startOffset : ecore::EInt
-
-		attribute endOffset : ecore::EInt
 
 		operation accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void is
 			result := visitor.visitCSTNode(self)
 
 	}
-	class PackageDeclarationCS inherits CSTNode
+	@aspect "true"
+	class PackageDeclarationCS 
 	{
-		reference pathNameCS : PathNameCS
-
-		reference contextDecls : ContextDeclCS[0..*]
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitPackageDeclarationCS(self)
 
 	}
-	abstract class ContextDeclCS inherits CSTNode
+	@aspect "true"
+	abstract class ContextDeclCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitContextDeclCS(self)
 
 	}
-	class PropertyContextCS inherits ContextDeclCS
+	@aspect "true"
+	class PropertyContextCS 
 	{
-		reference pathNameCS : PathNameCS
-
-		reference simpleNameCS : SimpleNameCS
-
-		reference typeCS : TypeCS
-
-		reference initOrDerValueCS : InitOrDerValueCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::ContextDeclCS is
 			result := visitor.visitPropertyContextCS(self)
 
 	}
-	class ClassifierContextDeclCS inherits ContextDeclCS
+	@aspect "true"
+	class ClassifierContextDeclCS
 	{
-		reference pathNameCS : PathNameCS
-
-		reference invOrDefCS : InvOrDefCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::ContextDeclCS is
 			result := visitor.visitClassifierContextDeclCS(self)
 
 	}
-	class OperationContextDeclCS inherits ContextDeclCS
+	@aspect "true"
+	class OperationContextDeclCS 
 	{
-		reference operationCS : OperationCS
 
-		reference prePostOrBodyDecls : PrePostOrBodyDeclCS[1..*]
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::ContextDeclCS is
 			result := visitor.visitOperationContextDeclCS(self)
 
 	}
-	class PrePostOrBodyDeclCS inherits CSTNode
+	@aspect "true"
+	class PrePostOrBodyDeclCS
 	{
-		attribute kind : PrePostOrBodyEnum
-
-		reference simpleNameCS : SimpleNameCS
-
-		reference expressionCS : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitPrePostOrBodyDeclCS(self)
 
 	}
-	enumeration PrePostOrBodyEnum
+
+	@aspect "true"
+	class OperationCS 
 	{
-		~pre;
-		~post;
-		body;
-	}
-	class OperationCS inherits CSTNode
-	{
-		reference pathNameCS : PathNameCS
 
-		reference simpleNameCS : SimpleNameCS
-
-		reference parameters : VariableCS[0..*]
-
-		reference typeCS : TypeCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitOperationCS(self)
 
 	}
-	abstract class InitOrDerValueCS inherits CSTNode
-	{
-		reference initOrDerValueCS : InitOrDerValueCS
-
-		reference expressionCS : OCLExpressionCS
+	@aspect "true"
+	abstract class InitOrDerValueCS
+{
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitInitOrDerValueCS(self)
 
 	}
-	class DerValueCS inherits InitOrDerValueCS
+	@aspect "true"
+	class DerValueCS 
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InitOrDerValueCS is
 			result := visitor.visitDerValueCS(self)
 
 	}
-	class InitValueCS inherits InitOrDerValueCS
+	@aspect "true"
+	class InitValueCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InitOrDerValueCS is
 			result := visitor.visitInitValueCS(self)
 
 	}
-	abstract class InvOrDefCS inherits CSTNode
+	@aspect "true"
+	abstract class InvOrDefCS
 	{
-		reference simpleNameCS : SimpleNameCS
-
-		reference invOrDefCS : InvOrDefCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitInvOrDefCS(self)
 
 	}
-	class InvCS inherits InvOrDefCS
+	@aspect "true"
+	class InvCS 
 	{
-		reference expressionCS : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InvOrDefCS is
 			result := visitor.visitInvCS(self)
 
 	}
-	class DefCS inherits InvOrDefCS
+	@aspect "true"
+	class DefCS 
 	{
-		reference defExpressionCS : DefExpressionCS
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::InvOrDefCS is
 			result := visitor.visitDefCS(self)
 
 	}
-	class DefExpressionCS inherits CSTNode
+	@aspect "true" class DefExpressionCS
 	{
-		reference operationCS : OperationCS
-
-		reference variableCS : VariableCS
-
-		reference expressionCS : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitDefExpressionCS(self)
 
 	}
-	class PathNameCS inherits TypeCS
+	@aspect "true" class PathNameCS
 	{
-		attribute sequenceOfNames : ecore::EString[0..*]
+	
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
 			result := visitor.visitPathNameCS(self)
 
 	}
-	class VariableExpCS inherits OCLExpressionCS
+	@aspect "true" class VariableExpCS
 	{
-		reference arguments : OCLExpressionCS[0..*]
 
-		reference simpleNameCS : SimpleNameCS
-
-		reference isMarkedPreCS : IsMarkedPreCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitVariableExpCS(self)
 
 	}
-	class SimpleNameCS inherits OCLExpressionCS
+	@aspect "true" class SimpleNameCS 
 	{
-		attribute ~value : ecore::EString
 
-		attribute type : SimpleTypeEnum
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitSimpleNameCS(self)
 
 	}
-	enumeration SimpleTypeEnum
-	{
-		identifier;
-		~self;
-		Integer;
-		String;
-		Real;
-		Boolean;
-		OclAny;
-		OclVoid;
-		Invalid;
-		OclMessage;
-		keyword;
-	}
-	abstract class TypeCS inherits OCLExpressionCS
+
+	 @aspect "true"
+	abstract class TypeCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitTypeCS(self)
 
 	}
-	class PrimitiveTypeCS inherits SimpleNameCS, TypeCS
+	@aspect "true" class PrimitiveTypeCS 
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::SimpleNameCS is
 			result := visitor.visitPrimitiveTypeCS(self)
 
 	}
-	class TupleTypeCS inherits TypeCS
+	@aspect "true" class TupleTypeCS 
 	{
-		reference variables : VariableCS[1..*]
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
 			result := visitor.visitTupleTypeCS(self)
 
 	}
-	class CollectionTypeCS inherits TypeCS
+	@aspect "true" class CollectionTypeCS
 	{
-		attribute collectionTypeIdentifier : CollectionTypeIdentifierEnum
-
-		reference typeCS : TypeCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
 			result := visitor.visitCollectionTypeCS(self)
 
 	}
-	enumeration CollectionTypeIdentifierEnum
-	{
-		Set;
-		Bag;
-		Sequence;
-		Collection;
-		OrderedSet;
-	}
-	abstract class OCLExpressionCS inherits CSTNode
+
+	@aspect "true"
+	abstract  class OCLExpressionCS 
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitOCLExpressionCS(self)
 
 	}
-	class LetExpCS inherits OCLExpressionCS
+	@aspect "true" class LetExpCS
 	{
-		reference variables : VariableCS[1..*]
-
-		reference inExpression : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitLetExpCS(self)
 
 	}
-	class IfExpCS inherits OCLExpressionCS
+	@aspect "true" class IfExpCS 
 	{
-		attribute thenExpression : OCLExpressionCS[1..1]
-
-		attribute elseExpression : OCLExpressionCS[1..1]
-
-		attribute condition : OCLExpressionCS[1..1]
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitIfExpCS(self)
 
 	}
-	class MessageExpCS inherits OCLExpressionCS
+	@aspect "true" class MessageExpCS
 	{
-		attribute target : OCLExpressionCS
-
-		attribute kind : MessageExpKind
-
-		reference simpleNameCS : SimpleNameCS
-
-		attribute arguments : OCLMessageArgCS[0..*]
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitMessageExpCS(self)
 
 	}
-	class OCLMessageArgCS inherits CSTNode
+	@aspect "true" class OCLMessageArgCS
 	{
-		reference typeCS : TypeCS
-
-		reference expression : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitOCLMessageArgCS(self)
 
 	}
-	class VariableCS inherits CSTNode
+	@aspect "true" class VariableCS
 	{
-		attribute name : ecore::EString
-
-		reference typeCS : TypeCS
-
-		reference initExpression : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitVariableCS(self)
 
 	}
-	abstract class LiteralExpCS inherits OCLExpressionCS
+	@aspect "true"
+	abstract  class LiteralExpCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitLiteralExpCS(self)
 
 	}
-	class EnumLiteralExpCS inherits LiteralExpCS
+	@aspect "true" class EnumLiteralExpCS 
 	{
-		reference pathNameCS : PathNameCS
 
-		reference simpleNameCS : SimpleNameCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
 			result := visitor.visitEnumLiteralExpCS(self)
 
 	}
-	class CollectionLiteralExpCS inherits LiteralExpCS
+	@aspect "true" class CollectionLiteralExpCS 
 	{
-		attribute collectionType : CollectionTypeIdentifierEnum
 
-		reference collectionLiteralParts : CollectionLiteralPartCS[0..*]
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
 			result := visitor.visitCollectionLiteralExpCS(self)
 
 	}
-	class TupleLiteralExpCS inherits LiteralExpCS
+	@aspect "true" class TupleLiteralExpCS 
 	{
-		reference variables : VariableCS[0..*]
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
 			result := visitor.visitTupleLiteralExpCS(self)
 
 	}
-	class PrimitiveLiteralExpCS inherits LiteralExpCS
+	@aspect "true" class PrimitiveLiteralExpCS
 	{
-		attribute symbol : ecore::EString
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
 			result := visitor.visitPrimitiveLiteralExpCS(self)
 
 	}
-	class IntegerLiteralExpCS inherits PrimitiveLiteralExpCS
+	@aspect "true" class IntegerLiteralExpCS
 	{
-		attribute integerSymbol : ecore::EIntegerObject
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
 			result := visitor.visitIntegerLiteralExpCS(self)
 
 	}
-	class RealLiteralExpCS inherits PrimitiveLiteralExpCS
+	@aspect "true" class RealLiteralExpCS
 	{
-		attribute realSymbol : ecore::EDoubleObject
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
 			result := visitor.visitRealLiteralExpCS(self)
 
 	}
-	class StringLiteralExpCS inherits PrimitiveLiteralExpCS
+	@aspect "true" class StringLiteralExpCS
 	{
-		attribute stringSymbol : ecore::EString
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
 			result := visitor.visitStringLiteralExpCS(self)
 
 	}
-	class BooleanLiteralExpCS inherits PrimitiveLiteralExpCS
+	@aspect "true" class BooleanLiteralExpCS
 	{
-		attribute booleanSymbol : ecore::EBooleanObject
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::PrimitiveLiteralExpCS is
 			result := visitor.visitBooleanLiteralExpCS(self)
 
 	}
-	class NullLiteralExpCS inherits LiteralExpCS
+	@aspect "true" class NullLiteralExpCS
 	{
-		attribute symbol : ecore::EString
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
 			result := visitor.visitNullLiteralExpCS(self)
 
 	}
-	class InvalidLiteralExpCS inherits LiteralExpCS
-	{
-		attribute symbol : ecore::EString
+	@aspect "true" class InvalidLiteralExpCS {
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LiteralExpCS is
 			result := visitor.visitInvalidLiteralExpCS(self)
 
 	}
-	class CollectionLiteralPartCS inherits CSTNode
+	@aspect "true" class CollectionLiteralPartCS
 	{
-		reference expressionCS : OCLExpressionCS
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitCollectionLiteralPartCS(self)
 
 	}
-	class CollectionRangeCS inherits CollectionLiteralPartCS
+	@aspect "true" class CollectionRangeCS
 	{
-		reference lastExpressionCS : OCLExpressionCS
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CollectionLiteralPartCS is
 			result := visitor.visitCollectionRangeCS(self)
 
 	}
-	class CallExpCS inherits OCLExpressionCS
+	@aspect "true" class CallExpCS
 	{
-		reference source : OCLExpressionCS
 
-		attribute accessor : DotOrArrowEnum
-
-		reference simpleNameCS : SimpleNameCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::OCLExpressionCS is
 			result := visitor.visitCallExpCS(self)
 
 	}
-	class LoopExpCS inherits CallExpCS
+	@aspect "true" class LoopExpCS
 	{
-		reference variable1 : VariableCS
 
-		reference variable2 : VariableCS
-
-		reference body : OCLExpressionCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CallExpCS is
 			result := visitor.visitLoopExpCS(self)
 
 	}
-	class IteratorExpCS inherits LoopExpCS
+	@aspect "true" class IteratorExpCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LoopExpCS is
 			result := visitor.visitIteratorExpCS(self)
 
 	}
-	class IterateExpCS inherits LoopExpCS
+	@aspect "true" class IterateExpCS
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::LoopExpCS is
 			result := visitor.visitIterateExpCS(self)
 
 	}
-	class FeatureCallExpCS inherits CallExpCS
+	@aspect "true" class FeatureCallExpCS
 	{
-		reference arguments : OCLExpressionCS[0..*]
 
-		reference isMarkedPreCS : IsMarkedPreCS
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CallExpCS is
 			result := visitor.visitFeatureCallExpCS(self)
 
 	}
-	enumeration DotOrArrowEnum
-	{
-		none;
-		dot;
-		arrow;
-	}
-	class OperationCallExpCS inherits FeatureCallExpCS
+
+	@aspect "true" class OperationCallExpCS 
 	{
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::FeatureCallExpCS is
 			result := visitor.visitOperationCallExpCS(self)
 
 	}
-	class IsMarkedPreCS inherits CSTNode
+	@aspect "true" class IsMarkedPreCS 
 	{
-		attribute ~pre : ecore::EBoolean
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::CSTNode is
 			result := visitor.visitIsMarkedPreCS(self)
 
 	}
-	class StateExpCS inherits TypeCS
+	@aspect "true" class StateExpCS 
 	{
-		attribute sequenceOfNames : ecore::EString[0..*]
+
 
 		method accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void from ocl::cst::TypeCS is
 			result := visitor.visitStateExpCS(self)
 
 	}
-	enumeration MessageExpKind
-	{
-		hasSent;
-		sent;
-	}
+
 	package visitors
 	{
+	 @aspect "true"
 		abstract class Visitable
 		{
 		}
-		abstract class Visitor
+		@aspect "true"
+		abstract  class Visitor
 		{
 			operation visitCSTNode(visitable : cst::CSTNode) : kermeta::standard::~Void is
 				abstract

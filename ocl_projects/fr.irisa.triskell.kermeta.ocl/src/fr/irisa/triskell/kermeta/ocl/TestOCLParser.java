@@ -8,13 +8,18 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ocl.parser.EnvironmentFactory;
+import org.eclipse.emf.ocl.parser.EvaluationEnvironment;
 //import org.eclipse.emf.ocl.expressions.ExpressionsFactory;
 //import org.eclipse.emf.ocl.expressions.OCLExpression;
 //import org.eclipse.emf.ocl.expressions.impl.ExpressionsFactoryImpl;
-import org.eclipse.emf.ocl.internal.parser.OCLLexer;
+//import org.eclipse.emf.ocl.internal.parser.OCLLexer;
 //import org.eclipse.emf.ocl.parser.EcoreEnvironmentFactory;
 //import org.eclipse.emf.ocl.parser.EnvironmentFactory;
-import org.eclipse.emf.ocl.parser.ParserException;
+import org.eclipse.ocl.Environment;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.internal.parser.OCLLexer;
+
 import java.io.*;
 
 public class TestOCLParser {
@@ -187,7 +192,7 @@ public class TestOCLParser {
 	}
 	
 	public void generateAllXmi(){
-		String baseDir = "/home/mskipper/runtime-EclipseApplication//fr.irisa.triskell.kermeta.ocl/";
+		String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
 		System.out.println("Processing: OCL SOURCE" );
 		for (String fn: filenames){
 			String oclSourceFileName = baseDir + "ocl/" + fn + ".ocl";
@@ -206,7 +211,7 @@ public class TestOCLParser {
 	
 	private static MyOCLParser createParser(String text) {
 		OCLLexer lexer = new OCLLexer((text).toCharArray());
-		MyOCLParser result = new MyOCLParser(lexer);
+		MyOCLParser result = new MyOCLParser(lexer, new MyEnvironement<Object, Object, Object, Object, Object, Object, Object, Object,Object,Object,Object,Object>());
 		return result;
 	}
 

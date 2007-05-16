@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.7 2007-03-21 10:15:44 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.8 2007-05-16 09:24:47 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -12,7 +12,6 @@ package ocl2kmt;
 
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
-require "../../mmodel/Ecore.ecore"
 require "OperatorPolicies.kmt"  
 
 using kermeta::standard

@@ -1,24 +1,26 @@
 package fr.irisa.triskell.kermeta.ocl;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ocl.internal.cst.CSTNode;
-import org.eclipse.emf.ocl.internal.l10n.OCLMessages;
-import org.eclipse.emf.ocl.internal.parser.OCLLexer;
-import org.eclipse.emf.ocl.internal.parser.OCLParser;
-import org.eclipse.emf.ocl.parser.ParserException;
+import org.eclipse.ocl.Environment;
+import org.eclipse.ocl.ParserException;
+import org.eclipse.ocl.internal.cst.CSTNode;
+import org.eclipse.ocl.internal.l10n.OCLMessages;
+import org.eclipse.ocl.internal.parser.OCLLexer;
+import org.eclipse.ocl.internal.parser.OCLParser;
 
+ 
 public class MyOCLParser extends OCLParser {
 
 	protected String errorString=""; 
 	
 	private int errorReportLineOffset = 0;
 	
-	public MyOCLParser(OCLLexer lexStream) {
-		super(lexStream);
+	public MyOCLParser(OCLLexer lexStream,Environment e) {
+		super(lexStream,e);
 	}
 
 	
-	public EObject parse() throws ParserException {
+	public EObject parse() throws  org.eclipse.ocl.ParserException {
 		EObject cstNode = parser();
 		this.setTraceFlag(true);
 		if (errorString.length() > 0) {

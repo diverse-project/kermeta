@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="70">
+  <pathNameCS startOffset="8" endOffset="8">
+    <sequenceOfNames>p</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="36" endOffset="58">
+    <pathNameCS startOffset="44" endOffset="44">
+      <sequenceOfNames>Y</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="46" endOffset="58">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="52" endOffset="58">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="52" endOffset="53">
+          <simpleNameCS startOffset="52" endOffset="53" value="s1"/>
+          <isMarkedPreCS startOffset="55" endOffset="55"/>
+        </source>
+        <simpleNameCS startOffset="55" endOffset="55" value="-" type="String"/>
+        <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="57" endOffset="58">
+          <simpleNameCS startOffset="57" endOffset="58" value="s2"/>
+          <isMarkedPreCS startOffset="61" endOffset="70"/>
+        </arguments>
+        <isMarkedPreCS/>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

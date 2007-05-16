@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="84">
+  <pathNameCS startOffset="8" endOffset="8">
+    <sequenceOfNames>p</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="25" endOffset="70">
+    <pathNameCS startOffset="33" endOffset="33">
+      <sequenceOfNames>X</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="35" endOffset="70">
+      <expressionCS xsi:type="ocl.cst:IfExpCS" startOffset="43" endOffset="70">
+        <thenExpression xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="57" endOffset="57" symbol="3" integerSymbol="3"/>
+        <elseExpression xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="64" endOffset="64" symbol="4" integerSymbol="4"/>
+        <condition xsi:type="ocl.cst:OperationCallExpCS" startOffset="46" endOffset="50">
+          <source xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="46" endOffset="46" symbol="1" integerSymbol="1"/>
+          <simpleNameCS startOffset="48" endOffset="48" value=">" type="String"/>
+          <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="50" endOffset="50" symbol="2" integerSymbol="2"/>
+          <isMarkedPreCS/>
+        </condition>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

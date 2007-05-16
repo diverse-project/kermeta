@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="102">
+  <pathNameCS startOffset="8" endOffset="8">
+    <sequenceOfNames>p</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="45" endOffset="90">
+    <pathNameCS startOffset="53" endOffset="53">
+      <sequenceOfNames>Y</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="55" endOffset="90">
+      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="61" endOffset="90" accessor="arrow">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="61" endOffset="61">
+          <simpleNameCS startOffset="61" endOffset="61" value="s"/>
+          <isMarkedPreCS startOffset="62" endOffset="63"/>
+        </source>
+        <simpleNameCS startOffset="64" endOffset="69" value="forAll" type="keyword"/>
+        <variable1 startOffset="72" endOffset="72" name="a"/>
+        <body xsi:type="ocl.cst:FeatureCallExpCS" startOffset="76" endOffset="88" accessor="dot">
+          <source xsi:type="ocl.cst:VariableExpCS" startOffset="76" endOffset="76">
+            <simpleNameCS startOffset="76" endOffset="76" value="a"/>
+            <isMarkedPreCS startOffset="77" endOffset="77"/>
+          </source>
+          <simpleNameCS startOffset="78" endOffset="88" value="isSomething"/>
+          <isMarkedPreCS startOffset="90" endOffset="90"/>
+        </body>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>
