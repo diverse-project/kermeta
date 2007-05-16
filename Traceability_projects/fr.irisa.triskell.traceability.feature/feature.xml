@@ -81,4 +81,11 @@ License (&quot;EPL&quot;).
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="fr.irisa.triskell.eclipse.util"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
