@@ -1,6 +1,6 @@
 
 
-/*$Id: SintaksModelSelectionDialog.java,v 1.1 2007-05-21 09:22:31 ftanguy Exp $
+/*$Id: SintaksModelSelectionDialog.java,v 1.2 2007-05-21 11:34:05 ftanguy Exp $
 * Project : fr.irisa.triskell.sintaks
 * File : 	SyntaksModelSelectionDialog.java
 * License : EPL
@@ -26,7 +26,6 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -134,11 +133,9 @@ public class SintaksModelSelectionDialog extends ResourceSelectionDialog {
 		for ( int i=0; i<extensions.length; i++) {
 			IConfigurationElement[] elements = extensions[i].getConfigurationElements();
 			for ( int j=0; j<elements.length; j++ ) {
-				String filePath = elements[j].getAttribute( "FilePath" );
+				String filePath = "platform:/plugin/fr.irisa.triskell.sintaks/" + elements[j].getAttribute( "File" );
 				String documentation = elements[j].getAttribute( "Documentation" );
-				//IFile file = ResourceHelper.getIFile(filePath);
-				//if ( file.exists() )
-					stsFilesRegistered.add( new SintaksFile(filePath, documentation) );
+				stsFilesRegistered.add( new SintaksFile(filePath, documentation) );
 			}
 		}
 		

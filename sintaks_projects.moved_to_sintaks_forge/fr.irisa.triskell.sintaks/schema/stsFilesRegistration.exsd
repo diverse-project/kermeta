@@ -44,11 +44,14 @@
 
    <element name="StsFile">
       <complexType>
-         <attribute name="FilePath" type="string" use="required">
+         <attribute name="File" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
+               <appInfo>
+                  <meta.attribute kind="resource"/>
+               </appInfo>
             </annotation>
          </attribute>
          <attribute name="Documentation" type="string" use="required">
