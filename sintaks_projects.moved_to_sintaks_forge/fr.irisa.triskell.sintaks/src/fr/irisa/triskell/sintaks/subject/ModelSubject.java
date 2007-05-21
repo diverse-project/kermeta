@@ -311,7 +311,7 @@ public class ModelSubject {
         stack.add(o);
     }
 
-    public void load (IFile inputFile) {
+    public void load (String inputFile) {
     	mmSubject.load(inputFile);
 		initialize();
     	setModel ( (EObject) mmSubject.getRoot());

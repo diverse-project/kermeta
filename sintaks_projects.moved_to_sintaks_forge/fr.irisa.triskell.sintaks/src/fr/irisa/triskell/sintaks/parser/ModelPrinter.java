@@ -1,5 +1,5 @@
 /*
- * Created on 4 févr. 2006
+ * Created on 4 fï¿½vr. 2006
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
@@ -11,8 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import org.eclipse.core.resources.IFile;
 
 import fr.irisa.triskell.sintaks.printer.IPrinter;
 import fr.irisa.triskell.sintaks.printer.PrinterAbstract;
@@ -47,7 +45,7 @@ public class ModelPrinter {
         }
     }
 
-    public void print (IFile ruleFile, String outputFilename) {
+    public void print (String ruleFile, String outputFilename) {
         Rule startSymbol = mmParser.getStartSymbol(ruleFile);
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
         	SintaksPlugin.getDefault().debug ("startSymbol=");

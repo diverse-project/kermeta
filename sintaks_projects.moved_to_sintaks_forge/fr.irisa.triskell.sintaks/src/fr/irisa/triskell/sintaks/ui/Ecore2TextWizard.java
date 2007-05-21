@@ -29,7 +29,15 @@ public class Ecore2TextWizard extends SintaksWizard {
 	@Override
 	public void writeUnit(IFile targetFile) throws Exception {
 		Master m = new Master();
-		m.getTextFromModel(inputFile, targetFile, outputPage.getSMdlFile());
+		/*
+		 * 
+		 * Modify the path of the rules file wheter it comes from the plugin directory or not.
+		 * 
+		 */
+		String ruleFile = outputPage.getSMdlText();
+		if ( ! ruleFile.matches("platform:/plugin/.+") )
+			ruleFile = "platform:/resource" + ruleFile;
+		m.getTextFromModel(inputFile, targetFile, ruleFile );
 	}
 	
 	

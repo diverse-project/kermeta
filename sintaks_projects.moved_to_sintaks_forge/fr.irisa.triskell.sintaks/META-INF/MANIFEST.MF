@@ -12,7 +12,9 @@ Require-Bundle: fr.irisa.triskell.sintaks.model,
  org.eclipse.jface,
  org.eclipse.ui,
  org.eclipse.ui.ide,
- org.eclipse.ui.console
+ org.eclipse.ui.console,
+ fr.irisa.triskell.eclipse.util,
+ org.eclipse.jface.text
 Export-Package: fr.irisa.triskell.sintaks.main
 Bundle-Activator: fr.irisa.triskell.sintaks.SintaksPlugin
 Bundle-Vendor: IRISA/INRIA

@@ -13,8 +13,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.sintaks.SintaksPlugin;
 
 
@@ -46,7 +46,7 @@ public abstract class SintaksWizard extends Wizard {
 		
 		outputPage.getFileName();
 		
-		outputFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(outputPage.getContainerFullPath().append(outputPage.getFileName()));
+		outputFile = ResourceHelper.getIFile( outputPage.getContainerFullPath().append(outputPage.getFileName()).toOSString() );
 
 		SintaksPlugin.getDefault().getOptionManager().setSyntacticModel(outputPage.getSMdlText());
 		try {
@@ -102,7 +102,7 @@ public abstract class SintaksWizard extends Wizard {
 		newfilepage.setSMdlText (SintaksPlugin.getDefault().getOptionManager().getSyntacticModel());
 		
 		// Use the input file name with the xmi extension as default
-		IFile kmtfile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(inputFile.getFullPath().removeFileExtension().addFileExtension(defaultOutputExtension));		
+		IFile kmtfile = ResourceHelper.getIFile( inputFile.getFullPath().removeFileExtension().addFileExtension(defaultOutputExtension).toOSString() );		
 		newfilepage.setFileName(kmtfile.getName());
 		outputPage = newfilepage;
 		

@@ -1,5 +1,5 @@
 /*
- * Created on 4 févr. 2006
+ * Created on 4 fï¿½vr. 2006
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
@@ -51,13 +51,13 @@ public class ModelParser {
      * @param inputFile
      * @return
      */
-    private ILexer getLexer (IFile inputFile, IFile ruleFile) {
+    private ILexer getLexer (IFile inputFile, String ruleFile) {
         try {
             String fullName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/" + inputFile.getFullPath().toString();
         	File f = new File(fullName);
             Reader r = new BufferedReader(new FileReader(fullName), (int) f.length());
             
-            URI fileURI = URI.createURI("platform:/resource" + ruleFile.getFullPath().toString());
+            URI fileURI = URI.createURI( ruleFile );
     		ResourceSet rs = new ResourceSetImpl();
     		Resource res = rs.getResource(fileURI, true);
     		
@@ -89,7 +89,7 @@ public class ModelParser {
      * @param inputFile
      * @return
      */
-    public boolean parse (IFile ruleFile, IFile inputFile) {
+    public boolean parse (String ruleFile, IFile inputFile) {
         Rule startSymbol = mmParser.getStartSymbol(ruleFile);
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
         	SintaksPlugin.getDefault().debug ("startSymbol=");

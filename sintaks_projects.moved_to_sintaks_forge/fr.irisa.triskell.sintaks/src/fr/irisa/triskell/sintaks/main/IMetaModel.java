@@ -1,5 +1,5 @@
 /*
- * Created on 7 févr. 2006
+ * Created on 7 fï¿½vr. 2006
  *
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
@@ -14,7 +14,7 @@ public interface IMetaModel {
 
 	public void registers (String ext);
 
-	public void load (IFile file);
+	public void load (String file);
 	
 	public void store (IFile file);
 

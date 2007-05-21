@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.sintaks.SintaksPlugin;
 
 /**
@@ -94,10 +95,15 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 		sMdlSelectGrp.setFont(font);
 		sMdlSelectGrp.setText("Syntactic model selection:");
 		
-		sMdlLbl = new Label(sMdlSelectGrp, SWT.NULL);
+		//sMdlLbl = new Label(sMdlSelectGrp, SWT.NULL);
+		sMdlLbl = new Label(sMdlSelectGrp, SWT.LEFT);
 		sMdlLbl.setText("Syntactic model: ");
+		
 		sMdlText = new Text(sMdlSelectGrp, SWT.SINGLE | SWT.BORDER);
 		sMdlText.setText(syntacticModel);
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		sMdlText.setLayoutData( gridData );
+		
 		sMdlSelectBtn = new Button(sMdlSelectGrp, SWT.PUSH);
 		sMdlSelectBtn.setText("Browse");
 		sMdlSelectBtn.setAlignment(SWT.RIGHT);
@@ -118,11 +124,17 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 	protected String handleBrowseButtonSelect() {
 		String resultFile = null;
 		
-		ResourceSelectionDialog rsDlg =
+		/*ResourceSelectionDialog rsDlg =
 			new ResourceSelectionDialog(
 					getShell(),
 					ResourcesPlugin.getWorkspace().getRoot(),
-					null);
+					null);*/
+		
+		SintaksModelSelectionDialog rsDlg =
+		new SintaksModelSelectionDialog(
+				getShell(),
+				ResourcesPlugin.getWorkspace().getRoot(),
+				null);
 		
 		if (rsDlg.open() == ResourceSelectionDialog.OK)	{
 			Object[] results = rsDlg.getResult();
@@ -130,6 +142,8 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 			    // Get only the first selected file / TODO : forbid multi-selection
 			    if (results[0] instanceof IFile)
 			        resultFile = ((IFile) results[0]).getFullPath().toOSString();
+			    else if ( results[0] instanceof SintaksFile )
+			    	resultFile = ((SintaksFile) results[0]).getFilePath(); 
 			}
 		}
 		return resultFile;

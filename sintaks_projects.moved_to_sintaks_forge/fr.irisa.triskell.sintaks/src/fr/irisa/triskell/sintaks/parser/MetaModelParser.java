@@ -21,7 +21,7 @@ public class MetaModelParser extends MetaModel {
 		registers("sts");
 	}
 
-	public void load (IFile file) {
+	public void load (String file) {
 		super.load(file);
 	}
 	
@@ -29,7 +29,7 @@ public class MetaModelParser extends MetaModel {
 		super.store(file);
 	}
 	
-	public Rule getStartSymbol (IFile file) {
+	public Rule getStartSymbol (String file) {
 		load (file);
 		Root root = (Root) getRoot();
 		return root.getStart();

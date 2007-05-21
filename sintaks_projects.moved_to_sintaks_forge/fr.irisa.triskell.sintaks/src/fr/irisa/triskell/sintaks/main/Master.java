@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -51,7 +52,7 @@ public class Master {
 	 * @param inputFile
 	 * @return
 	 */
-	private boolean parse (IFile ruleFile, IFile inputFile) {
+	private boolean parse (String ruleFile, IFile inputFile) {
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
         	SintaksPlugin.getDefault().debugln("Parsing file: " + inputFile.getName());
         boolean ok = parser.parse(ruleFile, inputFile);
@@ -65,7 +66,7 @@ public class Master {
 	 * @param ruleFile
 	 * @param inputFile
 	 */
-	private void print (IFile ruleFile, IFile inputFile) {
+	private void print (String ruleFile, IFile inputFile) {
 		String realName =
 			ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()
 			+ inputFile.getFullPath().toString();
@@ -84,7 +85,7 @@ public class Master {
 	private void load (IFile inputFile) {
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
         	SintaksPlugin.getDefault().debugln("Loading file: " + inputFile.getName());
-        subject.load(inputFile);
+        subject.load( "platform:/resource" + inputFile.getFullPath().toOSString() );
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
         	SintaksPlugin.getDefault().debugln("Load finished");
 	}
@@ -130,7 +131,7 @@ public class Master {
      * @param outputFile
      * @param ruleFile
      */
-    public void getModelFromText(IFile inputFile, IFile outputFile, IFile ruleFile) {
+    public void getModelFromText(IFile inputFile, IFile outputFile, String ruleFile) {
     	
     	this.subject = new ModelSubject (new MetaModel(resSet));
 		this.parser  = new ModelParser (new MetaModelParser(resSet), subject);
@@ -152,7 +153,7 @@ public class Master {
      * @param outputFile
      * @param ruleFile
      */
-    public void getTextFromModel(IFile inputFile, IFile outputFile, IFile ruleFile) {
+    public void getTextFromModel(IFile inputFile, IFile outputFile, String ruleFile) {
 
     	this.subject = new ModelSubject (new MetaModel(resSet));
         this.printer = new ModelPrinter (new MetaModelParser(resSet), subject);
@@ -173,33 +174,44 @@ public class Master {
     		}
  		}
 		catch (Exception e) {
+			
+			/*
+			 * 
+			 * If the rules file does not exit, let's dispay an error message.
+			 * 
+			 */
+			if ( e.getCause() instanceof CoreException )
+	   		    MessageDialog.openWarning(
+	    		    	new Shell(),
+	    				"Error",
+	    				e.getMessage() 
+	    			);
 			e.printStackTrace();
 			SintaksPlugin.log(e);
 		}
     }
     
-    
     /**
-     * @param inputFile
-     * @param ruleFile
+     * 
+     * @param inputFile inputFile must be of the form platform:/resource/*
+     * @param ruleFile ruleFile must be of the form platform/resource/* or platform:/plugin/*
      * @return
      */
-    private boolean checkMetamodelUnicity(IFile inputFile, IFile ruleFile) {
-    	
+    private boolean checkMetamodelUnicity(String inputFile, String ruleFile) {
     	URI fileURI = null;
     	EPackage p = null;
     	EPackage inputPack = null;
     	EPackage rulePack = null;
     	
     	// Step1:
-    	fileURI = URI.createURI("platform:/resource" + inputFile.getFullPath().toString());
+    	fileURI = URI.createURI( inputFile );
     	Resource inputRes = resSet.getResource(fileURI, true);
 		EObject e = (EObject) inputRes.getContents().get(0);
     	p = (EPackage) e.eClass().eContainer();
     	inputPack = getRootPackage(p);
     	
     	// Step2:
-    	fileURI = URI.createURI("platform:/resource" + ruleFile.getFullPath().toString());
+    	fileURI = URI.createURI( ruleFile );
     	Resource ruleRes = resSet.getResource(fileURI, true);
     	TreeIterator i = ruleRes.getAllContents();
     	boolean loop = true;
@@ -217,6 +229,11 @@ public class Master {
     	return (inputPack == rulePack);
     }
     
+    
+    private boolean checkMetamodelUnicity(IFile inputFile, String ruleFile) {
+    	String inputFileString = "platform:/resource" + inputFile.getFullPath().toString();
+    	return checkMetamodelUnicity(inputFileString, ruleFile);
+    }    
     
     /**
      * @param p
