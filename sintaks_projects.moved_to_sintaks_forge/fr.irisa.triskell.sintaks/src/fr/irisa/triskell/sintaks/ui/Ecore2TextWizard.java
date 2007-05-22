@@ -37,8 +37,6 @@ public class Ecore2TextWizard extends SintaksWizard {
 		String ruleFile = outputPage.getSMdlText();
 		if ( ! ruleFile.matches("platform:/plugin/.+") )
 			ruleFile = "platform:/resource" + ruleFile;
-		if ( ! ruleFile.matches("platform:\\plugin\\.+") )
-			ruleFile = "platform:\\resource" + ruleFile;
 		m.getTextFromModel(inputFile, targetFile, ruleFile );
 	}
 	

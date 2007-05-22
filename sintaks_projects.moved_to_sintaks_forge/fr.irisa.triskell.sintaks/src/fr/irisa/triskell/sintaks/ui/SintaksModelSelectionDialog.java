@@ -1,6 +1,6 @@
 
 
-/*$Id: SintaksModelSelectionDialog.java,v 1.4 2007-05-22 12:31:11 ftanguy Exp $
+/*$Id: SintaksModelSelectionDialog.java,v 1.5 2007-05-22 13:45:20 ftanguy Exp $
 * Project : fr.irisa.triskell.sintaks
 * File : 	SyntaksModelSelectionDialog.java
 * License : EPL
@@ -135,17 +135,9 @@ public class SintaksModelSelectionDialog extends ResourceSelectionDialog {
 			for ( int j=0; j<elements.length; j++ ) {
 				
 				String file = elements[j].getAttribute( "File" );
-				
-				if ( file.matches(".+\\.+") ) {	
-					String filePath = "platform:\\plugin\\" + extensions[i].getContributor().getName() + "\\" + file;
-					String documentation = elements[j].getAttribute( "Documentation" );
-					stsFilesRegistered.add( new SintaksFile(filePath, documentation) );
-					
-				} else {
-					String filePath = "platform:/plugin/" + extensions[i].getContributor().getName() + "/" + file;
-					String documentation = elements[j].getAttribute( "Documentation" );
-					stsFilesRegistered.add( new SintaksFile(filePath, documentation) );
-				}
+				String filePath = "platform:/plugin/" + extensions[i].getContributor().getName() + "/" + file;
+				String documentation = elements[j].getAttribute( "Documentation" );
+				stsFilesRegistered.add( new SintaksFile(filePath, documentation) );
 			}
 		}
 		

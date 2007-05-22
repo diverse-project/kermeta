@@ -141,7 +141,7 @@ public class SintaksDestFileWizardPage extends DestFileWizardPage {
 			if (results != null) {
 			    // Get only the first selected file / TODO : forbid multi-selection
 			    if (results[0] instanceof IFile)
-			        resultFile = ((IFile) results[0]).getFullPath().toOSString();
+			        resultFile = ((IFile) results[0]).getFullPath().toString();
 			    else if ( results[0] instanceof SintaksFile )
 			    	resultFile = ((SintaksFile) results[0]).getFilePath(); 
 			}

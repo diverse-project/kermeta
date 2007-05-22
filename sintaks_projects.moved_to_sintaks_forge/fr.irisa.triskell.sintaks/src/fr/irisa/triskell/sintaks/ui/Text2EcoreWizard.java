@@ -28,9 +28,7 @@ public class Text2EcoreWizard extends SintaksWizard {
 	@Override
 	public void writeUnit(IFile targetFile) throws Exception {
 		Master m = new Master();
-		String ruleFile = outputPage.getSMdlText();
-		if ( ! ruleFile.matches("platform:\\plugin\\.+") )
-			ruleFile = "platform:\\resource" + ruleFile;		
+		String ruleFile = outputPage.getSMdlText();	
 		if ( ! ruleFile.matches("platform:/plugin/.+") )
 			ruleFile = "platform:/resource" + ruleFile;
 		m.getModelFromText(inputFile, targetFile, ruleFile );

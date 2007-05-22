@@ -85,7 +85,7 @@ public class Master {
 	private void load (IFile inputFile) {
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
         	SintaksPlugin.getDefault().debugln("Loading file: " + inputFile.getName());
-        subject.load( "platform:/resource" + inputFile.getFullPath().toOSString() );
+        subject.load( "platform:/resource" + inputFile.getFullPath().toString() );
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess())
         	SintaksPlugin.getDefault().debugln("Load finished");
 	}
