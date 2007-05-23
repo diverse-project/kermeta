@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.11 2007-05-16 13:44:26 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.12 2007-05-23 07:02:29 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -13,9 +13,12 @@ package fr.irisa.triskell.kermeta.loader.java;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -514,6 +517,18 @@ public class Jar2KMPass3 extends Jar2KMPass {
 							// TODO deal with typeargument
 						}
 					}
+					else if(paramTypes[j] instanceof GenericArrayType){					
+						//internalLog.debug("must deal with GenericArrayType");
+						GenericArrayType returnType = (GenericArrayType)paramTypes[j];
+						res.setIsOrdered(true);
+						res.setIsUnique(false);
+						res.setUpper(-1);
+						res.setLower(0);
+						// type :		
+						String typeName = getQualifiedName(returnType.getGenericComponentType());
+						// TODO deal with TypeVariable
+						res.setType(getTypeByID(typeName));
+					}
 					else{
 						// TODO must deal with GenericArrayType, TypeVariable<D>, WildcardType
 						assert(false);
@@ -610,8 +625,32 @@ public class Jar2KMPass3 extends Jar2KMPass {
 						builder.current_operation.setType(getTypeByID(getQualifiedName(returnType)));
 					}
 				}
-				else{
-					//TODO must deal with GenericArrayType, ParameterizedType, TypeVariable<D>, WildcardType
+				else if(t instanceof GenericArrayType){					
+					//internalLog.debug("must deal with GenericArrayType");
+					GenericArrayType returnType = (GenericArrayType)t;
+					builder.current_operation.setIsOrdered(true);
+					builder.current_operation.setIsUnique(false);
+					builder.current_operation.setUpper(-1);
+					builder.current_operation.setLower(0);
+					// type :		
+					String typeName = getQualifiedName(returnType.getGenericComponentType());
+					// TODO deal with TypeVariable
+					builder.current_operation.setType(getTypeByID(typeName));
+				}
+				else if(t instanceof ParameterizedType){
+					//	TODO must deal with ParameterizedType
+					internalLog.warn("must deal with ParameterizedType");
+				}
+				else if(t instanceof TypeVariable){
+					//	TODO must deal with TypeVariable<D>
+					internalLog.warn("must deal with TypeVariable");
+				}
+				else if(t instanceof WildcardType){
+					//	TODO must deal with WildcardType
+					internalLog.warn("must deal with WildcardType");
+				}
+				else {
+					internalLog.error("don't know how to deal with unexpected type");
 				}
 				if(Modifier.isAbstract(methods[i].getModifiers())){
 					builder.current_operation.setIsAbstract(true);
@@ -620,7 +659,9 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					builder.current_operation.setIsAbstract(false);
 					// not abstract but no behavior in kermeta, fill it with a dummy body
 					// that raises a NotImplemented exception
-					// DVK builder.current_operation.setBody(ExpressionParser.parse(builder, "        raise kermeta::exceptions::NotImplementedException.new"));
+					// DVK not necessary because I've fixed the interpreter to automatically raise this exception in this situation ...
+					//		this save precious memory when loading large jar
+					// builder.current_operation.setBody(ExpressionParser.parse(builder, "        raise kermeta::exceptions::NotImplementedException.new"));
 				}
 					
 				// Exceptions
@@ -656,6 +697,18 @@ public class Jar2KMPass3 extends Jar2KMPass {
 						//	res.getContainedType().add();
 							// TODO deal with typeargument
 						}
+					}
+					else if(paramTypes[j] instanceof GenericArrayType){					
+						//internalLog.debug("must deal with GenericArrayType");
+						GenericArrayType returnType = (GenericArrayType)paramTypes[j];
+						res.setIsOrdered(true);
+						res.setIsUnique(false);
+						res.setUpper(-1);
+						res.setLower(0);
+						// type :		
+						String typeName = getQualifiedName(returnType.getGenericComponentType());
+						// TODO deal with TypeVariable
+						res.setType(getTypeByID(typeName));
 					}
 					else{
 						// TODO must deal with GenericArrayType, TypeVariable<D>, WildcardType

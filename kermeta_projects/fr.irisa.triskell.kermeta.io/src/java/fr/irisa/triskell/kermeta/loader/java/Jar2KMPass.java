@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.8 2007-05-16 13:44:26 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.9 2007-05-23 07:02:29 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -10,6 +10,10 @@
  */
 package fr.irisa.triskell.kermeta.loader.java;
 
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 import java.util.Hashtable;
 import java.util.jar.JarEntry;
 
@@ -90,6 +94,30 @@ public abstract class Jar2KMPass {
     		c.getCanonicalName();
     	}
     	return cname.replaceAll("\\.","::");
+    }
+    
+    public String getQualifiedName(java.lang.reflect.Type t){
+    	if(t instanceof Class) return getQualifiedName((Class) t);
+    	else if(t instanceof GenericArrayType){
+			GenericArrayType gatType = (GenericArrayType)t;
+			// type :		
+			return getQualifiedName(gatType.getGenericComponentType());
+		}
+	/*	else if(t instanceof ParameterizedType){
+			ParameterizedType ptType = (ParameterizedType)t;
+			ptType.
+		}*/
+		else if(t instanceof TypeVariable){
+			TypeVariable tvType = (TypeVariable)t;
+			// tvType.getName(); we should use that when we will be able to get parametrized classe 
+
+			return "kermeta::standard::Object";
+		}
+		else if(t instanceof WildcardType){
+			WildcardType wtType = (WildcardType)t;
+			return "kermeta::standard::Object";
+		}
+    	return "<unknown>";
     }
     
     protected Type getTypeByID(String name) {
