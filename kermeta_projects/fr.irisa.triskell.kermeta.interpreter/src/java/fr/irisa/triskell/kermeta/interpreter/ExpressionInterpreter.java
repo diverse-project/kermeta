@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.55 2007-04-18 15:22:40 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.56 2007-05-23 07:00:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -66,6 +66,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
+import fr.irisa.triskell.kermeta.loader.DummyUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.java.JarUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
@@ -78,6 +79,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.ExpressionChecker;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
@@ -734,8 +736,16 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getBody());
 	    try {
 		    // Interpret body
-		    this.accept(node.getBody());
-		    
+	    	if(node.getBody() != null)
+	    		this.accept(node.getBody());
+	    	else {// replace an empty body by a raise kermeta::exceptions::NotImplementedException.new	    		
+	    		throw KermetaRaisedException.createKermetaException("kermeta::exceptions::NotImplementedException",
+	            		"the operation " + node.getName() +" has not body",
+	    				this,
+	    				memory,
+	    				node,
+	    				null);
+	    	}
 		    // Set the result
 		    result = interpreterContext.peekCallFrame().getOperationResult();
 	    }
@@ -979,6 +989,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    		// this is a creation
 	    		// retreives the constructor
 	    		Constructor constructor = getJavaConstructor(node);
+	    		if(constructor == null){
+	    			throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	    	        		"Failed to retrieve the java constructor associated to the Kermeta operation; probably a problem with the JarCache",
+	    					this, memory, node,
+	    					null);
+	    		}
 	    		// build the parameters
 	    		Object[] args = buildJavaArgs(pParameters, constructor.getParameterTypes());
 	    		Object newInstance = constructor.newInstance(args);
@@ -997,7 +1013,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    			result = convertJavaObjectToRuntimeObject(node,returnedObject);
 	    		}
 	    		else{
-	    			// this is in fact an operation defined on Object
+	    			// this is probably an operation defined on Object
+	    			// DVK : or this is a problem with JarCache, must deal with this situation ?
+	    			getJavaMethod(node);
 	    			result = (RuntimeObject)this.accept(node);
 	    		}
 	    	}
@@ -1111,7 +1129,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     	for (KermetaUnit unit : memory.getUnit().getAllImportedUnits()){
     		if(unit instanceof JarUnit){
     			JarUnit jarunit = (JarUnit)unit;
-    			constructor = jarunit.cachedJavaConstructors.get(operation);
+    			constructor = jarunit.jarCache.getConstructor(operation);
     			if (constructor != null ) return constructor;
     		}
     	}
@@ -1128,7 +1146,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		for (KermetaUnit unit : memory.getUnit().getAllImportedUnits() ){
     		if(unit instanceof JarUnit){
     			JarUnit jarunit = (JarUnit)unit;
-    			method = jarunit.cachedJavaMethods.get(operation);
+    			method = jarunit.jarCache.getMethod(operation);
     			if (method != null ) return method;
     		}
     	}
@@ -1144,7 +1162,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		for (KermetaUnit unit : memory.getUnit().getAllImportedUnits() ) {
     		if(unit instanceof JarUnit){
     			JarUnit jarunit = (JarUnit)unit;
-    			field = jarunit.cachedJavaFields.get(prop);
+    			field = jarunit.jarCache.getField(prop);
     			if (field != null ) return field;
     		}
     	}
