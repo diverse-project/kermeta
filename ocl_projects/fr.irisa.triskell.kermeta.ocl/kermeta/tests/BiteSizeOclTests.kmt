@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.7 2007-03-21 17:13:39 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.8 2007-05-23 16:13:18 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -10,7 +10,7 @@
 package oclTests;
 
 require kermeta
-require "../../../someUnit/src/newUnit.kmt"
+require "../../../someUnit/src/newUnit.kmt" 
 require "../transformations/ocl2kmtVisitor.kmt" 
 require "../helpers/OCLHelper.kmt" 
 
@@ -436,9 +436,9 @@ class  BiteSizeOclTests  inherits TestCase
  	operation test48(): Void is
 		do
 			var kmt : String  init  visitOclXmi("48") 
-			assertEqual("s.sortedBy{ i | i.uminus}", kmt)
-			de.formalParameters.put("s", Sequence<Integer>)
- 			de.parse(kmt)
+			//assertEqual("s.sortedBy{ i | i.uminus}", kmt)
+			//de.formalParameters.put("s", Sequence<Integer>)
+ 			//de.parse(kmt)
 		rescue (e: DynamicExpressionException)
 			fail(e.message) 
 		end
@@ -599,11 +599,11 @@ class  BiteSizeOclTests  inherits TestCase
 			fail(e.message) 
 		end
 
-  // implicit collect
+  // implicit collect (relative to sample.ecore metamodel)
  	operation test63(): Void is
 		do
-			var kmt : String  init  visitOclXmi("longPath") 
-			assertEqual("a.collect{variable1 | variable1.b}.collect{variable2 | variable2.c}", kmt)
+			var kmt : String  init  visitOclXmi("63") 
+			assertEqual("b.collect{ v | v.y }", kmt)
 		end
 
   // simple if
@@ -626,6 +626,13 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 		//	var kmt : String  init  visitOclXmi("66") 
 		//	assertEqual("", kmt)
+		end
+		
+    // long implicit collect
+	operation test67():Void is
+		do
+			var kmt : String  init  visitOclXmi("67") 
+			assertEqual("b.collect{o| o.c}.collect{o | o.z}", kmt)
 		end
 		
   // forAll,  implicit variable
@@ -658,11 +665,47 @@ class  BiteSizeOclTests  inherits TestCase
   // oclIsNew
   // OCLAny
   
-	operation main() : Void is 
-	  do 
+  
+  
+
+  	
+  	operation runOneTest(testRunner: TestRunner, nn:String) is
+  	do
+  		var oneOff : Boolean init false
+  		if testRunner == void then
+  			testRunner : =TestRunner.new
+  			oneOff := true
+  		end
+  		stdio.writeln("testing no " + nn)
+		self.setTestMethodName("test" +nn)
+		testRunner.runTest(self)
+		if oneOff then
+				testRunner.printLogs
+		end
+  	end
+  	
+	operation oneAtATime() : Void is 
+	  do
 			var testRunner : TestRunner init TestRunner.new
-			self.setTestMethodName("test03")
-			testRunner.runTest(self)
+			from
+				var i : Integer init 49
+			until
+				i > 66
+			loop
+				var s : String init i.toString
+				if i <= 9 then
+					s := "0" + s
+				end
+				runOneTest(testRunner,s)
+				i := i + 1
+			end
 			testRunner.printLogs
   	end
+  	
+  		operation main() : Void is 
+		  do
+//		  	oneAtATime()
+				runOneTest(void,"63")
+	  	 end	
+  	
 }
