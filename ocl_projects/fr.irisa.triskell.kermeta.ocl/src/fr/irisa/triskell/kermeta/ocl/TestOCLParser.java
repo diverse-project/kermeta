@@ -184,6 +184,8 @@ public class TestOCLParser {
 		 filenames.add("63");
 		 filenames.add("64");
 		 filenames.add("65");
+		 //filenames.add("66");
+		 filenames.add("67");
 	 }
 	 
 	public static void main(String[] args) {
@@ -192,7 +194,8 @@ public class TestOCLParser {
 	}
 	
 	public void generateAllXmi(){
-		String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
+		//String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
+		String baseDir = "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/";
 		System.out.println("Processing: OCL SOURCE" );
 		for (String fn: filenames){
 			String oclSourceFileName = baseDir + "ocl/" + fn + ".ocl";
