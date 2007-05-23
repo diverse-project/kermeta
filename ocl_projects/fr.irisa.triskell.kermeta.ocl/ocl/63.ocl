@@ -1,6 +1,6 @@
 package p
- -- simple if
-context X inv:
-   a.b.c
+ -- implicit collect (relative to the 'sample.ecore' metamodel)
+context sample::A inv:
+   b.y
 
 endpackage

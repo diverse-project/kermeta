@@ -1,0 +1,6 @@
+package p
+ -- long implicit collect (relative to sample::A in the 'sample.ecore' metamodel)
+context sample::A inv:
+   b.c.z
+
+endpackage
