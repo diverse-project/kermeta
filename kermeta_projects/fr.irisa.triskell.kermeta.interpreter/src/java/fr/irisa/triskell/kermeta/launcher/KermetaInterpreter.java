@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.25 2007-04-18 15:22:39 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.26 2007-05-24 11:56:06 jmottu Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -253,7 +253,7 @@ public class KermetaInterpreter {
 	 * Create the entry object and launch the interpreter
 	 * plus, run eventual setUp and tearDown method if we this launch is a test
 	 */
-	public void launch() {
+	public RuntimeObject launch() {
 	    // Create the expression interpreter
 		
 		ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
@@ -263,9 +263,11 @@ public class KermetaInterpreter {
 	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "setUp");
 	    
 	    // Execute the operation
-	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	    RuntimeObject result = (RuntimeObject) exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	    
-	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "tearDown");	    
+	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "tearDown");
+	    
+	    return result;
 	}
 
 	/** call the given operation 
@@ -281,7 +283,7 @@ public class KermetaInterpreter {
 	/**
 	 * Create the entry object and launch the interpreter with the verification of the pre and post conditions
 	 */
-	public void launchConstraint() {
+	public RuntimeObject launchConstraint() {
 	    // Create the expression interpreter
 		
 		System.err.println("launch_constraint");
@@ -289,7 +291,7 @@ public class KermetaInterpreter {
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
 	    // Execute the operation
-	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	    return (RuntimeObject) exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	}
 	
 	public void launch_debug() {
