@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.9 2007-05-16 09:42:22 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.10 2007-05-24 14:53:39 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -13,7 +13,8 @@ package ocl2kmt;
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "OperatorPolicies.kmt"  
-
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+ 
 using kermeta::standard
 using kermeta::exceptions
 using ocl::cst
@@ -51,6 +52,8 @@ class StringWriter inherits StdIO
 
  class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor {
 
+ 
+		reference ecoreHelper : EcoreHelpers::EcoreHelper
 		reference  __io: StdIO 
 		
 		operation getIo(): StdIO is
@@ -103,14 +106,32 @@ class StringWriter inherits StdIO
 
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
 			do
+			
+				self.pathExpression := String.new
+				self.previousIsMultiple := false
+				pathContextCounter :=0
+				currentPackagename :=""
+				visitable.pathNameCS.sequenceOfNames.each{ e | currentPackagename := currentPackagename + "::"+e}
+				currentPackagename:=currentPackagename.substring(2,currentPackagename.size)
 				write("package ")
 				visitable.pathNameCS.accept(self)
-				writeln("")
+				writeln(";\n")
+				write("require kermeta \n")
+				write("require \"")
+				visitable.pathNameCS.accept(self)
+				write(".ecore\"\n")
+				
+				write("using kermeta::standard \n")
+				
 				visitable.contextDecls.each{ c |
 						c.accept(self)
 					}
 			end
 
+		reference currentPackagename : String
+		reference currentClassifiername : String
+		reference currentOperationname : String
+		
 		method visitContextDeclCS(visitable : ContextDeclCS) : Void is
 			do
 				visit(visitable)
@@ -123,6 +144,10 @@ class StringWriter inherits StdIO
 
 		method visitClassifierContextDeclCS(visitable : ClassifierContextDeclCS) : Void is
 			do
+				currentClassifiername :=""
+				visitable.pathNameCS.sequenceOfNames.each{ e | currentClassifiername := currentClassifiername + "::"+e}
+				currentClassifiername:=currentClassifiername.substring(2,currentClassifiername.size)
+				//writeln(currentClassifiername )
 				writeln("@aspect \"true\"")
 				write("class ")
 				visitable.pathNameCS.accept(self)
@@ -130,9 +155,16 @@ class StringWriter inherits StdIO
 				visitable.invOrDefCS.accept(self)
 		      	writeln("}")
 			end
+			attribute currentContextClassifier : ecore::EClassifier
 
 		method visitOperationContextDeclCS(visitable : OperationContextDeclCS) : Void is
 			do
+			
+				currentClassifiername :=""
+				currentOperationname :=""
+				visitable.operationCS.pathNameCS.sequenceOfNames.each{ e | currentClassifiername := currentClassifiername + "::"+e}
+				currentClassifiername:=currentClassifiername.substring(2,currentClassifiername.size)
+				
 				writeln("@aspect \"true\"")
 				write("class ")
 				visitable.operationCS.pathNameCS.accept(self)
@@ -165,8 +197,11 @@ class StringWriter inherits StdIO
 				writeln(" end")
 			end
 
+		
 		method visitOperationCS(visitable : OperationCS) : Void is
 			do
+				currentOperationname := visitable.simpleNameCS.~value
+				
 				write("operation ")
 				visitable.simpleNameCS.accept(self)
 				write("(")
@@ -236,7 +271,25 @@ class StringWriter inherits StdIO
 
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
-				visitable.simpleNameCS.accept(self)
+				pathExpression := pathExpression + visitable.simpleNameCS.~value+"."
+				
+				//self.currentPackagename + "::" + self.currentClassifiername
+				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
+				//writeln(pathExpression.substring(0, pathExpression.size -1))
+				
+				var isMultiple : Boolean init self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+				//writeln(isMultiple.toString)
+				
+				if (previousIsMultiple) then
+					write("collect{e | e.")
+					write( visitable.simpleNameCS.~value)
+					write("}")					
+				else
+					write( visitable.simpleNameCS.~value)
+				end
+				
+				previousIsMultiple:=isMultiple
+				//visitable.simpleNameCS.accept(self)
 			end
 
        
@@ -476,8 +529,15 @@ class StringWriter inherits StdIO
 				visit(visitable)			
 			end
 
+		attribute pathExpression : String
+
+		attribute previousIsMultiple : Boolean 
+		
+		attribute pathContextCounter : Integer 
+
 		method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : Void is
 			do
+				pathContextCounter := pathContextCounter+1
 				if visitable.source != void then
 					visitable.source.accept(self)		
 					if visitable.accessor.name == "dot" then
@@ -486,8 +546,30 @@ class StringWriter inherits StdIO
 					if visitable.accessor.name == "arrow" then
 					   write(".")
 					end
+				//else
+				//	last := true					
 				end
-				visitable.simpleNameCS.accept(self)
+				//visitable.simpleNameCS.accept(self)
+				pathExpression := pathExpression + visitable.simpleNameCS.~value+"."
+				
+				//self.currentPackagename + "::" + self.currentClassifiername
+				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
+				//writeln(pathExpression.substring(0, pathExpression.size -1))
+				
+				var isMultiple : Boolean init self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+				
+				if (previousIsMultiple) then
+					write("collect{e | e.")
+					write( visitable.simpleNameCS.~value)
+					write("}")					
+				else
+					write( visitable.simpleNameCS.~value)
+				end
+				
+				previousIsMultiple:=isMultiple
+				
+				//writeln(isMultiple.toString)
+				
 				if visitable.arguments.size > 0 then
 					write("(")
 					from
@@ -501,6 +583,14 @@ class StringWriter inherits StdIO
 						end
 					end
 					write(")")
+			  	end
+			  	
+			  	pathContextCounter := pathContextCounter-1
+			  	
+			  	
+			  	if (pathContextCounter==0) then
+			  		previousIsMultiple:=false
+			  		pathExpression := ""
 			  	end
 			  	
 			end
@@ -518,7 +608,7 @@ class StringWriter inherits StdIO
 						it.isOff
 					loop
 						it.next.accept(self)
-						if  it.hasNext then
+						if  it.hasNext the
 							write(", ") 
 						end
 					end
@@ -574,9 +664,11 @@ class StringWriter inherits StdIO
           				__operators.put("indexOf", FunctionCallOp.new)
           				__operators.put("oclAsType", CastOp.new)   
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
-          				__operators.put("not", functionCall) 
-          				__operators.put("notEmpty", FunctionCallOp.new.withName("empty").withSuffix(".~not"))
-          				__operators.put("isEmpty", FunctionCallOp.new.withName("empty"))
+          				__operators.put("not", functionCall)  
+          				__operators.put("notEmpty", EmptyCallOp.new.withName("empty").withSuffix(".~not"))
+          				__operators.put("isEmpty", EmptyCallOp.new.withName("empty"))
+           				__operators.put("oclIsTypeOf", FunctionCallOp.new.withName("isKindOf"))
+           				__operators.put("oclIsKindOf", FunctionCallOp.new.withName("isInstanceOf"))
            				__operators.put("union", FunctionCallOp.new)
            				__operators.put("intersection", FunctionCallOp.new) 
            				__operators.put("including", functionCall)  

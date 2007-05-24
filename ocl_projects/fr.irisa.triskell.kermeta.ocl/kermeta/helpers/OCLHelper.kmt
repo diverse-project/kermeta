@@ -1,4 +1,4 @@
-/* $Id: OCLHelper.kmt,v 1.6 2007-05-16 09:24:48 barais Exp $
+/* $Id: OCLHelper.kmt,v 1.7 2007-05-24 14:53:39 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -17,6 +17,7 @@ package OCLHelpers;
  
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt" 
+ require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
  
 using ocl::cst
 using kermeta::standard
@@ -28,19 +29,23 @@ using kermeta::exceptions
  */
 class OCLHelper
 {
+	attribute ecoreOCLMetamodel : String
 	attribute ecoreMetamodel : String
-
-	operation initialize(): Void is
+	
+	operation initialize(eMetamodel:String): Void is
 		do
+			if ecoreOCLMetamodel == void then
+				ecoreOCLMetamodel := "../../mmodel/OCLCST.ecore"
+			end
 			if ecoreMetamodel == void then
-				ecoreMetamodel := "../../mmodel/OCLCST.ecore"
+				ecoreMetamodel := eMetamodel
 			end
 		end
     
     operation loadOCLModel(repository : EMFRepository, modelUri : String) : Set<Object> is 
 	    do
-	    	initialize
-	    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
+	    	//initialize
+	    	var resource : Resource init repository.createResource(modelUri , ecoreOCLMetamodel)
 	    	resource.load
 	    	var instances : Set<Object> init resource.instances
 	    	result := instances
@@ -64,6 +69,15 @@ class OCLHelper
 				expression != void
 			}
 			result := invariant.expressionCS
+		end
+		
+		operation loadMetaModel() : EcoreHelpers::EcoreHelper is do 
+			var  ecoreMetamodelHelper : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new
+			ecoreMetamodelHelper.initialize
+			ecoreMetamodelHelper.loadMetaModel(ecoreMetamodel)
+			result := ecoreMetamodelHelper
+//			ecoreMetamodelHelper.
+			
 		end
 
   }

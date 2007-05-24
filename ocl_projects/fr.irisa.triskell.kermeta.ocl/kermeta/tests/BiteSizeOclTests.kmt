@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.8 2007-05-23 16:13:18 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.9 2007-05-24 14:53:38 barais Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -6,14 +6,14 @@
  */
 @mainClass "oclTests::BiteSizeOclTests"
 @mainOperation "main"
-
+  
 package oclTests;
 
 require kermeta
 require "../../../someUnit/src/newUnit.kmt" 
 require "../transformations/ocl2kmtVisitor.kmt" 
 require "../helpers/OCLHelper.kmt" 
-
+   
 using newUnit
 using kermeta::standard
 using kermeta::persistence
@@ -33,7 +33,7 @@ class  BiteSizeOclTests  inherits TestCase
 		do
 			repository := EMFRepository.new		
 			helper := OCLHelpers::OCLHelper.new
-	    	helper.initialize
+	    	helper.initialize("../../mmodel/sysML.ecore")
 	    	visitor := Ocl2kmtVisitor.new
 			de := DynamicExpression.new
 			de.initializeDefaults

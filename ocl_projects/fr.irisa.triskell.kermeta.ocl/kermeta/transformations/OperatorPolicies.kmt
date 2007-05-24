@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.2 2007-03-15 16:39:15 bitterjug Exp $
+/* $Id: OperatorPolicies.kmt,v 1.3 2007-05-24 14:53:39 barais Exp $
  * Creation date: February 23, 2007
  * License:
  * Copyright:
@@ -17,7 +17,7 @@ using kermeta::exceptions
 using ocl::cst
 using ocl::cst::visitors
 
-
+ 
 class OperatorPolicy  {
 
 	attribute name: String
@@ -217,3 +217,38 @@ class FunctionCallOp inherits OperatorPolicy {
   			visitor.write(getSuffix)
 		 end
 }
+class EmptyCallOp inherits OperatorPolicy {
+
+	operation generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is
+		 do
+		 // TODO: only if the accessor type is 'arrow', 
+		// if its not arrow, should treat is as a normal operation call if thats possible from here
+		    visitor.write(getPrefix)
+			oclOp.source.accept(visitor)
+			visitor.write(".")
+			if name != void then
+				visitor.write(name)
+			else
+				oclOp.simpleNameCS.accept(visitor)
+			end
+			if not oclOp.arguments.empty then
+				visitor.write("(")
+				from
+					var it : Iterator<OCLExpressionCS> init oclOp.arguments.iterator
+				until
+					it.isOff
+				loop
+	//				visitor.write(" ")
+					it.next.accept(visitor)
+					if  it.hasNext then
+						visitor.write(",") 
+					else
+	//					visitor.write(" ")
+					end
+				end
+	  			visitor.write(")")
+	  		end
+  			visitor.write(getSuffix)
+		 end
+}
+

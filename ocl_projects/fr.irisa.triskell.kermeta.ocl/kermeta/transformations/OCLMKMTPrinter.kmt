@@ -1,4 +1,4 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.6 2007-05-16 09:42:22 barais Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.7 2007-05-24 14:53:39 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -16,7 +16,7 @@ require kermeta
 require "../helpers/OCLHelper.kmt"
 require "../../mmodel/oclcstvisitor.kmt"
 require "ocl2kmtVisitor.kmt"
-//require "Tools.kmt"
+//require "Tools.kmt"  
 
 using kermeta::standard
 using kermeta::persistence
@@ -28,20 +28,24 @@ class OCLKMTPrinter
 	attribute repository: EMFRepository
 	attribute modelURI: String
     reference helper : OCLHelpers::OCLHelper
+    reference mhelper : EcoreHelpers::EcoreHelper
     attribute visitor :Ocl2kmtVisitor 
     attribute model : Set<Object> 
     
     operation main(): Void is
 		do
-			modelURI := "../../model/allSpeeds.xmi"		
+			modelURI := "../../model/67.xmi"		
 			//modelURI := "../../model/63.xmi"		
 			
 			repository := EMFRepository.new
 			helper := OCLHelpers::OCLHelper.new
-	    	helper.initialize
+	    	helper.initialize("../../ocl/sample.ecore")
 	     	visitor := Ocl2kmtVisitor.new
 	     	model  := helper.loadOCLModel(repository, modelURI)
 	     	stdio.writeln("model loaded")
+	     	mhelper  := helper.loadMetaModel()
+	     	 visitor.ecoreHelper := mhelper
+	     	stdio.writeln("metamodel loaded")
 			helper.getPackageDeclaration(model).accept(visitor)
 	    end
 
