@@ -3,9 +3,11 @@
  */
 package fr.irisa.triskell.sintaks.ui;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.sintaks.main.Master;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Path;
 
 /**
  * @author dtouzet
@@ -29,6 +31,10 @@ public class Text2EcoreWizard extends SintaksWizard {
 	public void writeUnit(IFile targetFile) throws Exception {
 		Master m = new Master();
 		String ruleFile = outputPage.getSMdlText();	
+		
+		/*IFile file = ResourceHelper.getIFile( ruleFile );
+		file.exists();file.getLocation()*/
+		
 		if ( ! ruleFile.matches("platform:/plugin/.+") )
 			ruleFile = "platform:/resource" + ruleFile;
 		m.getModelFromText(inputFile, targetFile, ruleFile );
