@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.19 2007-05-03 08:57:32 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.20 2007-05-24 13:09:45 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -41,6 +41,7 @@
 	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.2.0.v20060601.jar"/>
 	<property name="osgi.jar" location="${eclipse.home}/plugins/org.eclipse.osgi_3.2.0.v20060601.jar"/>	
 	<property name="core.runtime.jar" location="${eclipse.home}/plugins/org.eclipse.core.runtime_3.2.0.v20060603.jar"/>
+	<property name="core.resources.jar" location="${eclipse.home}/plugins/org.eclipse.core.resources_3.2.1.R32x_v20060914.jar"/>
 	<path id="interpreter.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${kermeta.io.jar}"/>
@@ -55,6 +56,7 @@
 	    <pathelement location="${equinox.registry.jar}"/>
 	    <pathelement location="${osgi.jar}"/>
 	    <pathelement location="${core.runtime.jar}"/>
+		<pathelement location="${core.resources.jar}"/>
 	    <pathelement location="${log4j.jar}"/>
 	    <pathelement location="${antlr.jar}"/>
 	    <pathelement location="${ldt-core.jar}"/>
