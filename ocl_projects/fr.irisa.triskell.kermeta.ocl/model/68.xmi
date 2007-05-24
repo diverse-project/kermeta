@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="108">
+  <pathNameCS startOffset="8" endOffset="8">
+    <sequenceOfNames>p</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="68" endOffset="96">
+    <pathNameCS startOffset="76" endOffset="84">
+      <sequenceOfNames>sample</sequenceOfNames>
+      <sequenceOfNames>A</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="86" endOffset="96">
+      <expressionCS xsi:type="ocl.cst:FeatureCallExpCS" startOffset="94" endOffset="96" accessor="dot">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="94" endOffset="94">
+          <simpleNameCS startOffset="94" endOffset="94" value="b"/>
+          <isMarkedPreCS startOffset="95" endOffset="95"/>
+        </source>
+        <simpleNameCS startOffset="96" endOffset="96" value="c"/>
+        <isMarkedPreCS startOffset="99" endOffset="108"/>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>
