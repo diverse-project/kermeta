@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TextReferenceImpl.java,v 1.2 2007-05-15 09:05:41 dvojtise Exp $
+ * $Id: TextReferenceImpl.java,v 1.3 2007-05-24 13:45:00 dvojtise Exp $
  */
 package fr.irisa.triskell.traceability.impl;
 
@@ -142,8 +142,13 @@ public class TextReferenceImpl extends FileReferenceImpl implements TextReferenc
 	 */
 	public Integer getLineBeginAt() {
 		if(lineBeginAt == -1){
-			lineBeginAt = ResourceHelper.calculateLineNumber(this.charBeginAt,this.fileURI);
-			if(lineBeginAt == -1) lineBeginAt = -2; // still to -1, goes to error mode do not try again 
+			try{
+				lineBeginAt = ResourceHelper.calculateLineNumber(this.charBeginAt,this.fileURI);
+				if(lineBeginAt == -1) lineBeginAt = -2; // still to -1, goes to error mode do not try again
+			}catch(Throwable e){
+				// it must be fail safe
+				lineBeginAt = -2;
+			}
 		}
 		//else if(lineBeginAt == -2) // cannot be calculated
 		return lineBeginAt;
