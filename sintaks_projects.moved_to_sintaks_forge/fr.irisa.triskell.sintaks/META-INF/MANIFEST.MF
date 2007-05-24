@@ -15,7 +15,8 @@ Require-Bundle: fr.irisa.triskell.sintaks.model,
  org.eclipse.ui.console,
  fr.irisa.triskell.eclipse.util,
  org.eclipse.jface.text
-Export-Package: fr.irisa.triskell.sintaks.main
+Export-Package: fr.irisa.triskell.sintaks.main,
+ fr.irisa.triskell.sintaks.registering
 Bundle-Activator: fr.irisa.triskell.sintaks.SintaksPlugin
 Bundle-Vendor: IRISA/INRIA
 Eclipse-LazyStart: true

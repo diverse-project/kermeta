@@ -23,7 +23,6 @@
       </objectContribution>
       <objectContribution
             id="fr.irisa.triskell.kermeta.objectContribution2"
-            nameFilter="*.txt"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
                id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"

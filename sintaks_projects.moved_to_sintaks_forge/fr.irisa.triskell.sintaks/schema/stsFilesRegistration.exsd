@@ -6,7 +6,7 @@
          <meta.schema plugin="fr.irisa.triskell.sintaks" id="stsFilesRegistration" name="Registration Of Synatks File"/>
       </appInfo>
       <documentation>
-         [Enter description of this extension point.]
+         This extension point allow the registering of sintaks files. This gives the ability to retrieve sintaks files stored in plugins at runtime (in the workbench) and to create automatically an textual editor for this sintaks file.
       </documentation>
    </annotation>
 
@@ -47,7 +47,7 @@
          <attribute name="File" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The sintaks file you want to register.
                </documentation>
                <appInfo>
                   <meta.attribute kind="resource"/>
@@ -57,7 +57,14 @@
          <attribute name="Documentation" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Some documentation on the sintaks registered file.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="Extension" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A file extension allowing the association between the sintaks text editor and files with the given extension.
                </documentation>
             </annotation>
          </attribute>
