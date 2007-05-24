@@ -47,6 +47,60 @@ public class Master {
 	}
 	
 	
+	
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+	//		Transformation Mechanism		//
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+
+    /**
+     * @param inputFile
+     * @param outputFile
+     * @param ruleFile
+     */
+    public EObject getModelFromText(String text, String ruleFile) {
+    	this.subject = new ModelSubject (new MetaModel(resSet));
+		this.parser  = new ModelParser (new MetaModelParser(resSet), subject);
+		try {
+			boolean ok = this.parse(ruleFile, text);
+            if ( ! ok ) 
+            	return null;
+ 
+            this.relink();
+            return subject.getModel();
+ 		}
+		catch (Exception e) {
+			e.printStackTrace();
+			SintaksPlugin.log(e);
+		}
+		return null;
+    }
+	
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+	//		End of Transformation Mechanism		//
+	//////////////////////////////////////////////
+	//////////////////////////////////////////////
+
+    
+    
+    //////////////////////////////////
+    //////////////////////////////////
+    //		Parsing Mechanism		//
+    //////////////////////////////////
+    //////////////////////////////////
+
+	/**
+	 * @param ruleFile
+	 * @param inputFile
+	 * @return
+	 */
+	private boolean parse (String ruleFile, String text) {
+        boolean ok = parser.parse(ruleFile, text);
+        return ok;
+	}
+
 	/**
 	 * @param ruleFile
 	 * @param inputFile
@@ -60,6 +114,11 @@ public class Master {
         	SintaksPlugin.getDefault().debugln("Parse finished");
         return ok;
 	}
+    //////////////////////////////////////////
+    //////////////////////////////////////////
+    //		End of Parsing Mechanism		//
+    //////////////////////////////////////////
+    //////////////////////////////////////////
 
 	
 	/**

@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.File;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,59 +48,86 @@ public class ModelParser {
     }
 
     
+    //////////////////////////////
+    //////////////////////////////
+    //		Lexer Mechanism		//
+    //////////////////////////////
+    //////////////////////////////
+    
+    private ILexer getLexer(Reader reader, String ruleFile) {
+		URI fileURI = URI.createURI(ruleFile);
+		ResourceSet rs = new ResourceSetImpl();
+		Resource res = rs.getResource(fileURI, true);
+
+		List<String> terminals = new ArrayList<String>();
+		List<String> separators = new ArrayList<String>();
+		TreeIterator i = res.getAllContents();
+		while (i.hasNext()) {
+			Object o = i.next();
+			if (o instanceof Terminal) {
+				Terminal terminal = (Terminal) o;
+				terminals.add(terminal.getTerminal());
+				if (terminal.isLexicalSeparator())
+					separators.add(terminal.getTerminal());
+			}
+		}
+		ILexer lexer = new Lexer(reader, terminals, separators);
+
+		return lexer;
+	}
+
+	/**
+	 * @param inputFile
+	 * @return
+	 */
+	private ILexer getLexer(String text, String ruleFile) {
+		Reader r = new BufferedReader(new StringReader(text), text.length());
+		return getLexer(r, ruleFile);
+	}
+    
     /**
-     * @param inputFile
-     * @return
-     */
+	 * @param inputFile
+	 * @return
+	 */
     private ILexer getLexer (IFile inputFile, String ruleFile) {
         try {
             String fullName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/" + inputFile.getFullPath().toString();
         	File f = new File(fullName);
             Reader r = new BufferedReader(new FileReader(fullName), (int) f.length());
-            
-            URI fileURI = URI.createURI( ruleFile );
-    		ResourceSet rs = new ResourceSetImpl();
-    		Resource res = rs.getResource(fileURI, true);
-    		
-    		List<String> terminals = new ArrayList<String> ();
-    		List<String> separators = new ArrayList<String> ();
-    		TreeIterator i = res.getAllContents();
-    		while(i.hasNext()) {
-    			Object o = i.next();
-    			if(o instanceof Terminal) {
-    				Terminal terminal = (Terminal) o;
-    				terminals.add(terminal.getTerminal());
-    				if(terminal.isLexicalSeparator())
-    					separators.add(terminal.getTerminal());
-    			}
-    		}
-            ILexer lexer = new Lexer (r, terminals, separators);
-            
-            return lexer;
+            return getLexer(r, ruleFile);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
     }
+    //////////////////////////////////////
+    //////////////////////////////////////
+    //		End of Lexer Mechanism		//
+    //////////////////////////////////////
+    //////////////////////////////////////
 
     
-    /**
-     * @param ruleFile
-     * @param inputFile
-     * @return
-     */
-    public boolean parse (String ruleFile, IFile inputFile) {
+
+
+    
+    //////////////////////////////////
+    //////////////////////////////////
+    //		Parsing Mechanism		//
+    //////////////////////////////////
+    //////////////////////////////////
+
+    private IParser getParser(String ruleFile) {
         Rule startSymbol = mmParser.getStartSymbol(ruleFile);
         if (SintaksPlugin.getDefault().getOptionManager().isDebugProcess()) {
         	SintaksPlugin.getDefault().debug ("startSymbol=");
         	SintaksPlugin.getDefault().debug (startSymbol.toString());
         	SintaksPlugin.getDefault().debugln ("");
         }
-        
-        IParser parser = new ParserAbstract (startSymbol, subject);
-        ILexer lexer = getLexer(inputFile, ruleFile);
-
+        return new ParserAbstract (startSymbol, subject);
+    }
+    
+    private boolean basicParse(IParser parser, ILexer lexer) {
         boolean r1 = false;
         boolean r2 = false;
         if (parser != null && lexer != null) {
@@ -125,4 +153,32 @@ public class ModelParser {
         
         return r1 & r2;
     }
+    
+    /**
+     * @param ruleFile
+     * @param inputFile
+     * @return
+     */
+    public boolean parse (String ruleFile, String text) {
+        IParser parser = getParser(ruleFile);
+        ILexer lexer = getLexer(text, ruleFile);
+        return basicParse(parser, lexer);
+    }
+    
+    /**
+     * @param ruleFile
+     * @param inputFile
+     * @return
+     */
+    public boolean parse (String ruleFile, IFile inputFile) {
+        IParser parser = getParser(ruleFile);
+        ILexer lexer = getLexer(inputFile, ruleFile);
+        return basicParse(parser, lexer);
+    }
+    //////////////////////////////////////
+    //////////////////////////////////////
+    //		End Parsing Mechanism		//
+    //////////////////////////////////////
+    //////////////////////////////////////
+
 }
