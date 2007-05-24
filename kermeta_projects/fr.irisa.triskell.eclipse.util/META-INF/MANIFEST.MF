@@ -14,5 +14,6 @@ Export-Package: fr.irisa.triskell.eclipse.console,
  fr.irisa.triskell.eclipse.console.messages,
  fr.irisa.triskell.eclipse.ecore,
  fr.irisa.triskell.eclipse.emf,
- fr.irisa.triskell.eclipse.resources
+ fr.irisa.triskell.eclipse.resources,
+ fr.irisa.triskell.eclipse.wizard
 Bundle-Vendor: IRISA/INRIA

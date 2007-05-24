@@ -1,0 +1,48 @@
+
+
+/*$Id: WizardHelper.java,v 1.1 2007-05-24 08:49:53 ftanguy Exp $
+* Project : fr.irisa.triskell.eclipse.util
+* File : 	WizardHelper.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 16 mai 07
+* Authors : paco
+*/
+
+package fr.irisa.triskell.eclipse.wizard;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IWorkbenchWizard;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.wizards.IWizardDescriptor;
+
+public class WizardHelper {
+
+	/**
+	 * Find a wizard with the given id.
+	 * 
+	 * @param id the id to search for
+	 * @return the wizard descriptor matching the given id or <code>null</code>
+	 */
+	public static IWizardDescriptor getWizardDescriptor(String wizardId) {
+		return PlatformUI.getWorkbench().getNewWizardRegistry().findWizard( wizardId );
+	}
+	
+	/**
+	 * Create a wizard with the given id.
+	 * 
+	 * @param id the id to search for
+	 * @return the workbench wizard matching the given id or <code>null</code>
+	 */
+	public static IWorkbenchWizard createWizard(String wizardId) throws CoreException {
+		IWizardDescriptor descriptor = getWizardDescriptor(wizardId);
+		if ( descriptor == null )
+			return null;
+		return descriptor.createWizard();
+	}
+	
+}
+
+
