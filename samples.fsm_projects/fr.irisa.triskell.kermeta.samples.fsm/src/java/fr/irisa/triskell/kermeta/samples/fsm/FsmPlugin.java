@@ -12,6 +12,10 @@ public class FsmPlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static FsmPlugin plugin;
 	
+	public static String FSM_WIAZRD_ID = "fr.irisa.triskell.kermeta.samples.fsm.wizard";
+	
+	public static String PROJECT_NAME = "fr.irisa.triskell.kermeta.samples.fsm";
+	
 	/**
 	 * The constructor.
 	 */

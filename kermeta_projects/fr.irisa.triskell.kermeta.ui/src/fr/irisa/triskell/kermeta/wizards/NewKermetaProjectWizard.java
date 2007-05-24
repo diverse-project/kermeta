@@ -1,6 +1,6 @@
 
 
-/*$Id: NewKermetaProjectWizard.java,v 1.1 2007-04-04 13:25:30 ftanguy Exp $
+/*$Id: NewKermetaProjectWizard.java,v 1.2 2007-05-24 08:48:24 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -34,6 +34,10 @@ public class NewKermetaProjectWizard extends Wizard implements INewWizard {
 		addPage( page );
 	}
 
+	public NewKermetaProjectWizardPage getPage() {
+		return page;
+	}
+	
 	@Override
 	public boolean performFinish() {
 		try {

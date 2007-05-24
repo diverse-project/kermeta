@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import fr.irisa.triskell.kermeta.samples.fsm.FsmPlugin;
+
 
 public class FsmSampleExampleWizard
 	extends AbstractExampleWizard {
@@ -14,7 +16,7 @@ public class FsmSampleExampleWizard
 		// We need the statements example to be unzipped along with the
 		// EMF library example model, edit and editor examples
 		List projects = new ArrayList(1);
-		projects.add(new ProjectDescriptor("fr.irisa.triskell.kermeta.samples.fsm", "zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip", "fr.irisa.triskell.kermeta.samples.fsm.demo"));
+		projects.add(new ProjectDescriptor(FsmPlugin.PROJECT_NAME, "zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip", "fr.irisa.triskell.kermeta.samples.fsm.demo"));
 		return projects;
 	}
 }

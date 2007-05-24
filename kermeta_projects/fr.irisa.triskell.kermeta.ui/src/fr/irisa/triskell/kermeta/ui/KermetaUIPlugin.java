@@ -19,6 +19,8 @@ public class KermetaUIPlugin extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.ui";
 
+	public static String NEWP_ROJECT_WIZARD_ID = "fr.irisa.triskell.kermeta.ui.wizards.newProject";
+	
 	// The shared instance
 	private static KermetaUIPlugin plugin;
 	
