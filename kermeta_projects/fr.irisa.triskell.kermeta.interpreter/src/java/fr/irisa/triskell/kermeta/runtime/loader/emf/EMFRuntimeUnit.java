@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.36 2007-04-13 12:48:41 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.37 2007-05-24 11:57:50 jmottu Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -457,6 +457,18 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	   ResourceSet resource_set = getOrCreateRepositoryResourceSetForResource(roResource);
 		
 		Resource res = resource_set.createResource(uri); 
+		if(res == null){
+			// the extension wasn't registered; register it by default as a xmi
+			// this typically occurs when running kermeta as a standalone application outside of Eclipse
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(uri.fileExtension(),new XMIResourceFactoryImpl());
+			res = resource_set.createResource(uri); 
+			if(res == null){
+				// DVK: still doesn't work, need more investigation ...
+				String msg = "Error saving EMF model '" + this.getUriAsString() + "'" +  
+					" :\n Error : \n    did not succeded to create EMF resource for URI : "+ uri.toFileString() + ";\n    maybe there is no factory registered for this extension";
+				throwKermetaRaisedExceptionOnSave(msg, null);
+			}
+		}
 		// associate this resource to kermesta ressource runtime object
 		roResource.getData().put("r2e.emfResource", res);
 		return res;
