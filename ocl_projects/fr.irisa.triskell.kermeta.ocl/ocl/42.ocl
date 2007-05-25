@@ -1,7 +1,7 @@
-package p
+package sample
 -- 42: union
-context Y inv:
-	s1->union(s2)
+context A inv:
+	b->union(b)
 
 endpackage
 

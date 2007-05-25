@@ -1,6 +1,6 @@
-package p
+package sample
 -- 22: collect
-context Y inv:
-	s->collect( a | a.getSomething )
+context A inv:
+	b->collect( o | o.y )
 
 endpackage

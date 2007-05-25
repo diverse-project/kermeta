@@ -1,6 +1,6 @@
-package p
+package sample
 -- 61: concatenate
-context Y inv:
+context A inv:
 	"foo".concatenate("bar")
 
 endpackage

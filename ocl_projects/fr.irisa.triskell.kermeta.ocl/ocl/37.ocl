@@ -1,7 +1,7 @@
-package p
+package sample
 -- 37:as ordered set
-context Y inv:
-	s->asOrderedSet()
+context A inv:
+	b->asOrderedSet()
 
 endpackage
 

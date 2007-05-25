@@ -1,6 +1,6 @@
-package p
+package sample
 -- 28: Enumeration Literal
-context Y inv:
+context A inv:
 	Foo::bar
 
 endpackage

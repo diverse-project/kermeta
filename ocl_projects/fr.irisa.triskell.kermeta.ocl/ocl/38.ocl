@@ -1,6 +1,6 @@
-package p
+package sample
 -- 38: not empty
-context Y inv:
-	s->notEmpty()
+context A inv:
+	b->notEmpty()
 
 endpackage

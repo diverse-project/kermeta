@@ -1,6 +1,6 @@
-package p
+package sample
 -- 18 : 
-context Y inv:
-	s->any( a | a.isSomething )
+context A inv:
+  	b->any( o | true)
 
 endpackage

@@ -1,6 +1,6 @@
-package p
+package sample
 -- 17: forAll (explicit variables)
-context Y inv:
-	s->forAll( a | a.isSomething )
+context A inv:
+	b->forAll( a | true )
 
 endpackage

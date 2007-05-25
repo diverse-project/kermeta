@@ -1,6 +1,6 @@
-package p
+package sample
 -- 29: Operation call with arguments
-context Y inv:
-	self.foo(2, true)
+context A inv:
+	self.getB(2, true)
 
 endpackage

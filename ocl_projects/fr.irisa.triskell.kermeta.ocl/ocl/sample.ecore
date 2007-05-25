@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sample">
   <eClassifiers xsi:type="ecore:EClass" name="A">
+    <eOperations name="getB" eType="//B">
+      <eParameters name="a">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eParameters>
+      <eParameters name="b">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eParameters>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="x">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="b" upperBound="-1" eType="//B"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="d" lowerBound="1" eType="//D"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="B">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="y">
@@ -16,5 +26,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="z">
       <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="D">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="w">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Foo">
+    <eLiterals name="bar"/>
+    <eLiterals name="bash" value="1"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -1,5 +1,5 @@
-package p
+package sample
 
-context Thing inv:
+context A inv:
 	true or true
 endpackage

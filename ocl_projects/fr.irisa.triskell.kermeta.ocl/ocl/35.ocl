@@ -1,7 +1,7 @@
-package p
+package sample
 -- 35: asSequence
-context Y inv:
-	s->asSequence()
+context A inv:
+	b->asSequence()
 
 endpackage
 

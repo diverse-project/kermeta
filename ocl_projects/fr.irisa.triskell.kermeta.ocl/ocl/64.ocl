@@ -1,6 +1,6 @@
-package p
+package sample
  -- simple if
-context X inv:
+context A inv:
    if true then true else true endif
 
 

@@ -1,6 +1,6 @@
-package p
+package sample
 -- 56: flatten
-context Y inv:
-	s->flatten()
+context A inv:
+	b->flatten()
 
 endpackage

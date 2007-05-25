@@ -1,6 +1,6 @@
-package p
+package sample
 -- 14: less than
-context Y inv:
+context A inv:
 	3 < 4
 
 endpackage

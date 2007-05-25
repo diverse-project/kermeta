@@ -1,6 +1,6 @@
-package p
+package sample
 -- implies
-context Y inv:
+context A inv:
 	true implies true
 
 endpackage

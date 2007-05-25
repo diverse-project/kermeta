@@ -1,6 +1,6 @@
-package p
+package sample
 -- 50: excluding
-context Y inv:
-	s1->excluding(s2)
+context A inv:
+	b->excluding(b->first())
 
 endpackage

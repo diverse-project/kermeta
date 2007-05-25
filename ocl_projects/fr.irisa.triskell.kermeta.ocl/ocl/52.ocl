@@ -1,6 +1,6 @@
-package p
+package sample
 -- 52: prepend
-context Y inv:
-	s->prepend(o)
+context A inv:
+	b->prepend(b->first())
 
 endpackage

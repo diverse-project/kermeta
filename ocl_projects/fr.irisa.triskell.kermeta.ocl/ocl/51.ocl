@@ -1,6 +1,6 @@
-package p
+package sample
 -- 51: subSequence
-context Y inv:
-	s->subSequence(lower, upper)
+context A inv:
+	b->subSequence(1, 2)
 
 endpackage

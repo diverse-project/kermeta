@@ -1,6 +1,6 @@
-package p
+package sample
 -- 62: size
-context Y inv:
+context A inv:
 	"foo".size()
 
 endpackage

@@ -1,6 +1,6 @@
-package p
+package sample
 -- 23: isUnique
-context Y inv:
-	s->isUnique( a | a.name )
+context A inv:
+	b->isUnique( o | o.y )
 
 endpackage

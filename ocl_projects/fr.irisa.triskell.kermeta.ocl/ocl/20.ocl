@@ -1,6 +1,6 @@
-package p
+package sample
 -- 20: select
-context Y inv:
-	s->select( a | a.isSomething )
+context A inv:
+	b->select( o | true )
 
 endpackage

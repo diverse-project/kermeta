@@ -1,6 +1,6 @@
-package p
+package sample
  -- implicit collect (relative to the 'sample.ecore' metamodel)
-context sample::A inv:
+context A inv:
    b.y
 
 endpackage

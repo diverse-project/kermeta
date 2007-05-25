@@ -1,0 +1,6 @@
+package p
+ -- no collect (relative to the 'sample.ecore' metamodel)
+context A inv:
+   d.w
+
+endpackage

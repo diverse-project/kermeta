@@ -1,6 +1,6 @@
-package p
+package sample
 -- 33: at
-context Y inv:
+context A inv:
 	s->at(1)
 
 endpackage
