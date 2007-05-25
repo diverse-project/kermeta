@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.3 2007-05-03 14:28:21 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.4 2007-05-25 09:21:15 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -90,24 +90,34 @@ class EcoreHelper
 		
 		 var context : EClass 
 		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
-		 var splitpath: OrderedSet<String> init self.splitString(path,token)
-		 var feature : EStructuralFeature
+		 if (context != void) then
 		 
-		 from var it : Iterator<String> init splitpath.iterator
-		 until (it.isOff) loop
-		 var s : String init it.next
+			 var splitpath: OrderedSet<String> init self.splitString(path,token)
+			 var feature : EStructuralFeature
 		 
-		 feature := context.eAllStructuralFeatures.detect{e|e.name == s}
-		 context ?= feature.eType
-		 end
-		 if (feature != void) then
-		 	if (feature.upperBound >1 or feature.upperBound == -1 ) then
-		 		result := true
-		 	else
-		 		result:= false
-		 	end	
+			 from var it : Iterator<String> init splitpath.iterator
+		 		until (it.isOff) loop
+		 		var s : String init it.next
+		 
+			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
+			if (feature == void) then
+				//stdio.writeln("context" + s)
+		 		raise InvalidPathName.new
+		 	end
+			 	
+			 	context ?= feature.eType
+		 	end
+		 	if (feature != void) then
+		 		if (feature.upperBound >1 or feature.upperBound == -1 ) then
+		 			result := true
+		 		else
+		 			result:= false
+			 	end	
+			else
+		 		raise InvalidPathName.new
+		 	end
 		 else
-		 	raise InvalidPathName.new
+		 	raise InvalidContextName.new
 		 end
 	end
 
@@ -232,6 +242,10 @@ class EcoreHelper
 
 class InvalidPathName inherits Exception{
 }
+
+class InvalidContextName inherits Exception{
+}
+
 
 class MetaModelNotLoaded inherits Exception{
 }
