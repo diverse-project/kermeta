@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.4 2007-05-25 09:21:15 barais Exp $
+/* $Id: EcoreHelper.kmt,v 1.5 2007-05-25 17:38:45 bitterjug Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -53,14 +53,14 @@ class EcoreHelper
 	attribute packages : Sequence<EPackage>
 
 	/** load an ECore model */
-    operation loadMetaModel(modelUri : String) : Void is do
+    operation loadMetamodel(metamodelUri : String) : Void is do
     	var repository : EMFRepository init EMFRepository.new 
-    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
+    	var resource : Resource init repository.createResource(metamodelUri , ecoreMetamodel)
     	resource.load
     	var instances : Set<Object> init resource.instances
     	// retreives only the packages
     	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
-    	pack ?= p}
+    	    	pack ?= p}
     end
 
 
