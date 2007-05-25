@@ -1,4 +1,4 @@
-/* $Id: testOCL.kmt,v 1.6 2007-05-24 14:53:38 barais Exp $
+/* $Id: testOCL.kmt,v 1.7 2007-05-25 18:14:06 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -15,7 +15,7 @@ require kermeta
 require "../../../someUnit/src/newUnit.kmt"
 require "BiteSizeOclTests.kmt" 
 require "StructuralOclTests.kmt"  
-    
+     
 using newUnit
 
 class Main
@@ -24,8 +24,8 @@ class Main
 	  do 
 		    var testRunner : TestRunner init TestRunner.new
 		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
+		    //suite.addAllTestCasesFrom(StructuralOclTests)
 		    stdio.write(suite.tests.size.toString)
-		    suite.addAllTestCasesFrom(StructuralOclTests)
     		testRunner.runTest(suite)
             testRunner.printLogs
   	  end

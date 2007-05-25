@@ -1,4 +1,4 @@
-/* $Id: StructuralOclTests.kmt,v 1.3 2007-05-24 14:53:38 barais Exp $
+/* $Id: StructuralOclTests.kmt,v 1.4 2007-05-25 18:14:07 bitterjug Exp $
  * Creation date: March 6, 2007
  * License:
  * Copyright:
@@ -38,21 +38,22 @@ class  StructuralOclTests  inherits TestCase
 		do
 			repository := EMFRepository.new		
 			helper := OCLHelpers::OCLHelper.new
-	    	helper.initialize("../../mmodel/sysML.ecore")
 	    	visitor := Ocl2kmtVisitor.new
 			de := DynamicExpression.new
 			de.initializeDefaults
 		end
 		
-	operation visitOclXmi(filename: String): String is
-		do
-			var sourceFileName : String init "../../model/" + filename + ".xmi"
-			var io : StringWriter init StringWriter.new
-			visitor.setIo(io)
-			model  := helper.loadOCLModel(repository, sourceFileName)
-			helper.getPackageDeclaration(model).accept(visitor)
-			result := io.s
-		end		
+	 operation visitOclXmi(filename: String): String is
+        do
+            var sourceFileName : String init "../../model/" + filename + ".xmi"
+            var io : StringWriter init StringWriter.new
+            visitor.setIo(io)
+		    visitor.setMetamodelURI("../../ocl/sample.ecore")
+            model  := helper.loadOCLModel(repository, sourceFileName)
+            helper.getPackageDeclaration(model).accept(visitor)
+            result := io.s
+        end
+		
 		
 	operation test01(): Void is
 	// test class @aspect class { ... inv ... } generation
