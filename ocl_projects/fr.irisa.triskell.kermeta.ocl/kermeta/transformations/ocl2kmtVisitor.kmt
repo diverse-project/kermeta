@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.10 2007-05-24 14:53:39 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.11 2007-05-25 18:11:24 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -53,7 +53,25 @@ class StringWriter inherits StdIO
  class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor {
 
  
-		reference ecoreHelper : EcoreHelpers::EcoreHelper
+		reference __ecoreHelper : EcoreHelpers::EcoreHelper
+		
+		operation setMetamodelURI(metamodelURI: String) is
+			do
+				__ecoreHelper := EcoreHelpers::EcoreHelper.new
+				__ecoreHelper.loadMetamodel(metamodelURI) 
+			end
+			
+		operation ecoreHelper(): EcoreHelpers::EcoreHelper is
+			do
+				if __ecoreHelper == void then
+					var e : Exception init Exception.new
+					e.message := "Metamodel URI must be set before visiting"
+					raise e
+				else
+					result := __ecoreHelper
+				end
+			end
+					
 		reference  __io: StdIO 
 		
 		operation getIo(): StdIO is
@@ -276,7 +294,7 @@ class StringWriter inherits StdIO
 				//self.currentPackagename + "::" + self.currentClassifiername
 				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
 				//writeln(pathExpression.substring(0, pathExpression.size -1))
-				
+
 				var isMultiple : Boolean init self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
 				//writeln(isMultiple.toString)
 				
@@ -494,7 +512,7 @@ class StringWriter inherits StdIO
         				addIterator("forAll", sameName)
         				addIterator("isUnique", UniqueIP.new)
         				addIterator("any", SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".equals(1)"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
