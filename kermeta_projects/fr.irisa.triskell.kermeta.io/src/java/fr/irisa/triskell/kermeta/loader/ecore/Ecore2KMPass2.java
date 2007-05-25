@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.13 2007-02-02 16:19:12 dtouzet Exp $
+/* $Id: Ecore2KMPass2.java,v 1.14 2007-05-25 15:11:08 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -83,7 +84,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		if (type_name == null || type_name.equals(""))
 		{
 			unit.messages.addWarning("Instance class seems to be unset for EDatatype '" + 
-					Ecore2KM.getQualifiedName((EDataType)node) + "' : replaced by Object", null);
+					EcoreHelper.getQualifiedName((EDataType)node) + "' : replaced by Object", null);
 			type = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
 		}
 		else
@@ -95,7 +96,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			// Not the best way to process. Idea: annotate Kermeta alias with an extern "instanceClassName"?
 			if (type == null) {
 				unit.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + 
-						Ecore2KM.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
+						EcoreHelper.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
 				type = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();// get kermeta::language::structure::Object 
 			}
 		}
@@ -127,7 +128,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				throw new KM2ECoreConversionException(
 						"Internal error of ecore2kermeta :" +
-						" supertypes of class " + Ecore2KM.getQualifiedName((EClass)node) + " : "+ Ecore2KM.getQualifiedName(st) +" not found");
+						" supertypes of class " + EcoreHelper.getQualifiedName((EClass)node) + " : "+ EcoreHelper.getQualifiedName(st) +" not found");
 			}
 			exporter.current_classdef.getSuperType().add(t);
 		}

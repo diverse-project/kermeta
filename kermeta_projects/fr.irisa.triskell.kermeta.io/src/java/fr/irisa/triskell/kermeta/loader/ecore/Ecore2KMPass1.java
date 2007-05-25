@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.8 2007-02-02 16:19:12 dtouzet Exp $
+/* $Id: Ecore2KMPass1.java,v 1.9 2007-05-25 15:11:08 ftanguy Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -107,7 +108,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	/** Visit EPackage : visit the owned classifiers and the sub packages */
 	public Object visit(EPackage node) 
 	{
-		Package pack = unit.packageLookup(Ecore2KM.getQualifiedName(node));
+		Package pack = unit.packageLookup( EcoreHelper.getQualifiedName(node));
 		
 		if (pack == null) {
 			pack = unit.struct_factory.createPackage();
@@ -118,7 +119,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			// Was : pack.setUri(node.getNsURI());
 			// node.getNsURI() is not always valid, so by default, we will take unit.getUri();
 			pack.setUri(unit.getUri());
-			unit.packages.put(Ecore2KM.getQualifiedName(node), pack);
+			unit.packages.put(EcoreHelper.getQualifiedName(node), pack);
 		}
 
 		if (getTopPackage() != null) pack.setNestingPackage(getTopPackage());
@@ -140,14 +141,14 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		isClassTypeOwner = true;
 		exporter.current_classdef = createClassDefinitionForEClass(node);
 		
-		TypeDefinition td = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(node));
+		TypeDefinition td = unit.typeDefinitionLookup(EcoreHelper.getQualifiedName(node));
 		
 		// Return a typedef if the element is not contained in ecore metamodel.
 		isEcoreType = ((ENamedElement)node.eContainer()).getName().equals("ecore");
 		if (td != null && isEcoreType) {
 			// Ignore duplicate definition due to the ecore reflexivity
 			exporter.current_classdef = (ClassDefinition)td;
-			unit.messages.addWarning("Ignore duplicate definition of ecore Type " + Ecore2KM.getQualifiedName(node), td);
+			unit.messages.addWarning("Ignore duplicate definition of ecore Type " + EcoreHelper.getQualifiedName(node), td);
 			return td;
 		}
 		
@@ -155,7 +156,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		getTopPackage().getOwnedTypeDefinition().add(exporter.current_classdef);
 
 		// Add the type defs in the unit 
-		unit.typeDefs.put(Ecore2KM.getQualifiedName(node), exporter.current_classdef);
+		unit.typeDefs.put(EcoreHelper.getQualifiedName(node), exporter.current_classdef);
 
 		acceptList(((EClass)node).getEStructuralFeatures());
 		acceptList(((EClass)node).getEOperations());
@@ -194,10 +195,10 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		prop.setIsComposite(node.isContainment());
 		// Set the opposite of this property
 		if (node.getEOpposite() != null) {
-			Property oprop = (Property)properties.get(Ecore2KM.getQualifiedName(node.getEOpposite()));
+			Property oprop = (Property)properties.get(EcoreHelper.getQualifiedName(node.getEOpposite()));
 			if ( oprop == null) {
 				oprop = unit.struct_factory.createProperty();
-				properties.put(Ecore2KM.getQualifiedName(node.getEOpposite()), oprop);
+				properties.put(EcoreHelper.getQualifiedName(node.getEOpposite()), oprop);
 			}
 			prop.setOpposite(oprop);
 		}
@@ -208,10 +209,10 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 	 * all the properties of the resulting node, including the type. */
 	protected Property createPropertyFromEStructuralFeature(EStructuralFeature node)
 	{
-		Property prop = (Property)properties.get(Ecore2KM.getQualifiedName(node));
+		Property prop = (Property)properties.get(EcoreHelper.getQualifiedName(node));
 		if (prop == null) {
 			prop = unit.struct_factory.createProperty();
-			properties.put(Ecore2KM.getQualifiedName(node), prop);
+			properties.put(EcoreHelper.getQualifiedName(node), prop);
 		}
 		exporter.current_prop = prop;
 		
@@ -258,7 +259,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		
 		getTopPackage().getOwnedTypeDefinition().add(current_enum);
 		acceptList(node.getELiterals());
-		unit.typeDefs.put(Ecore2KM.getQualifiedName(node), current_enum);
+		unit.typeDefs.put(EcoreHelper.getQualifiedName(node), current_enum);
 		return current_enum;
 	}
 	
@@ -285,7 +286,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
         if (getTopPackage()!=null) {
         	getTopPackage().getOwnedTypeDefinition().add(result);
         }
-    	unit.typeDefs.put(Ecore2KM.getQualifiedName(node), result);
+    	unit.typeDefs.put(EcoreHelper.getQualifiedName(node), result);
         // END HORRIBLE TEMPORARY PATCH
 
     	return result;
@@ -477,7 +478,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			}
 		}
 		else {
-			def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
+			def = unit.typeDefinitionLookup(EcoreHelper.getQualifiedName(etype));
 		}
 		
 		if (def == null) {
@@ -486,7 +487,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 			// Try to find the given element in the loaded kermeta units
 			// If not found, load a kermeta unit for the resource of the given element
 			if (etype.eResource() != resource) {
-				String etype_qname = Ecore2KM.getQualifiedName(etype);
+				String etype_qname = EcoreHelper.getQualifiedName(etype);
 				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
 				// this unit is not related to a real file in the user file system
 				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
@@ -501,7 +502,7 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		}
 
 		if (def == null)
-			throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion: type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+			throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion: type '" + EcoreHelper.getQualifiedName(etype) + "' not found." );
 
 		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
 		if (def instanceof Type) {

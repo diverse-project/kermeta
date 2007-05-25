@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.18 2007-05-03 14:04:54 barais Exp $
+/* $Id: Ecore2KMPass3.java,v 1.19 2007-05-25 15:11:08 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
@@ -353,7 +354,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	 * @return
 	 */
 	public Property visitEStructuralFeature(EStructuralFeature node) {
-		exporter.current_prop = (Property)visitorPass1.properties.get(Ecore2KM.getQualifiedName(node));
+		exporter.current_prop = (Property)visitorPass1.properties.get(EcoreHelper.getQualifiedName(node));
 		// Set the type of this property
 		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 		exporter.current_prop.setType(t);
@@ -670,7 +671,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 					// but I have very few data about how it actually works ...
 					// typically put into the mixed concrete attribute ..
 				
-				String typeName = Ecore2KM.getQualifiedName(prop.getEType());
+				String typeName = EcoreHelper.getQualifiedName(prop.getEType());
 				String collection = prop.isUnique() ? "kermeta::standard::OrderedSet" : "kermeta::standard::Sequence";
 				String group = "mixed";	// by default the group is the mixed
 				String groupId = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_GROUP);

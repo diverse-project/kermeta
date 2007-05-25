@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.9 2006-09-27 15:58:23 dtouzet Exp $
+/* $Id: Ecore2KM.java,v 1.10 2007-05-25 15:11:08 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -103,10 +103,4 @@ public class Ecore2KM {
 		}
 	}
 	
-	/** Return a kermeta qualified name for the given named element */
-	public static String getQualifiedName(ENamedElement e) {
-		if (e.eContainer()!=null && e.eContainer() instanceof ENamedElement) 
-			return getQualifiedName((ENamedElement)e.eContainer()) + "::" + e.getName();
-		else return e.getName();
-	}
 }
