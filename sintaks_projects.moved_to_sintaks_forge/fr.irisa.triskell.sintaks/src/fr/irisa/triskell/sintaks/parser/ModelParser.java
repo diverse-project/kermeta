@@ -91,7 +91,8 @@ public class ModelParser {
 	 */
     private ILexer getLexer (IFile inputFile, String ruleFile) {
         try {
-            String fullName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/" + inputFile.getFullPath().toString();
+            //String fullName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString() + "/" + inputFile.getFullPath().toString();
+        	String fullName = inputFile.getLocation().toString();
         	File f = new File(fullName);
             Reader r = new BufferedReader(new FileReader(fullName), (int) f.length());
             return getLexer(r, ruleFile);
