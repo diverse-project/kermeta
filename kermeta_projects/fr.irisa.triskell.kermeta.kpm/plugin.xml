@@ -5,12 +5,11 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.15 2007-05-02 12:54:42 dvojtise Exp $
+ $Id: plugin.xml,v 1.16 2007-05-25 15:04:39 ftanguy Exp $
 -->
 
 <plugin>
    <extension-point id="actions" name="KPMAction" schema="extension/actions.exsd"/>
-   <extension-point id="registeredFile" name="RegisteredFile" schema="extension/registeredFile.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -28,14 +27,6 @@
   <extension
         point="org.eclipse.ui.startup">
      <startup class="fr.irisa.triskell.kermeta.kpm.plugin.KPMStartup"/>
-  </extension>
-  <extension
-        point="org.eclipse.ui.preferencePages">
-     <page
-           category="fr.irisa.triskell.kermeta.ui.preferences.KermetaPreferencePage"
-           class="fr.irisa.triskell.kermeta.kpm.preferences.KPMPreferencePage"
-           id="fr.irisa.triskell.kermeta.kpm.preferencePage"
-           name="KPM"/>
   </extension>
   <extension
         point="org.eclipse.ui.propertyPages">

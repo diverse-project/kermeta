@@ -1,4 +1,4 @@
-/*$Id: KPMConstants.java,v 1.2 2007-04-19 15:50:10 dvojtise Exp $
+/*$Id: KPMConstants.java,v 1.1 2007-05-25 15:04:39 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	KPMConstants.java
 * License : EPL
@@ -9,7 +9,7 @@
 *     dvojtise <dvojtise@irisa.fr>
 */
 
-package fr.irisa.triskell.kermeta.kpm.preferences;
+package fr.irisa.triskell.kermeta.kpm.properties;
 
 /**
  * Constants and default values for KPM preferences / default configuration

@@ -25,7 +25,6 @@ Export-Package: fr.irisa.triskell.kermeta.extension,
  fr.irisa.triskell.kermeta.kpm.interest.impl,
  fr.irisa.triskell.kermeta.kpm.interest.util,
  fr.irisa.triskell.kermeta.kpm.plugin,
- fr.irisa.triskell.kermeta.kpm.preferences,
  fr.irisa.triskell.kermeta.kpm.resources,
  fr.irisa.triskell.kermeta.kpm.util
 Bundle-Activator: fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin

@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.12 2007-04-24 13:35:40 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.13 2007-05-25 15:04:39 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -24,7 +24,7 @@ import fr.irisa.triskell.kermeta.kpm.NameFilter;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.kpm.preferences.KPMConstants;
+import fr.irisa.triskell.kermeta.kpm.properties.KPMConstants;
 
 public class KPMHelper {
 

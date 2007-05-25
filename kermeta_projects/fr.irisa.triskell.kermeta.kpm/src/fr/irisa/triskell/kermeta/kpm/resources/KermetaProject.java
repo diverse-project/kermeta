@@ -1,6 +1,12 @@
-/**
- * 
- */
+/*$Id: KermetaProject.java,v 1.6 2007-05-25 15:04:38 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
+* File : 	sdfg.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
 package fr.irisa.triskell.kermeta.kpm.resources;
 
 import java.io.IOException;
@@ -16,12 +22,12 @@ import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
 
 import fr.irisa.triskell.eclipse.ecore.XMIHelper;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
-import fr.irisa.triskell.kermeta.kpm.preferences.KPMConstants;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.kpm.properties.KPMConstants;
 
 /**
  * @author ftanguy
@@ -35,7 +41,7 @@ public class KermetaProject {
 	private IProject project;
 	
 	/**
-	 * The KPM object used for the depencies.
+	 * The KPM object used for the dependencies.
 	 */
 	private KPM kpm;
 	
@@ -49,6 +55,11 @@ public class KermetaProject {
 	 */
 	static private final String kpmFileName = ".project.kpm";
 	
+	/**
+	 * Constructor
+	 * @param project
+	 * @throws CoreException
+	 */
 	public KermetaProject(IProject project) throws CoreException {
 		this.project = project;
 		initialize();
@@ -67,8 +78,7 @@ public class KermetaProject {
 	 * @return Returns an Eclipse resource on the KPM file.
 	 */
 	public IFile getKpmIFile() {
-		Path path = new Path( project.getFullPath().toString() + "/" + kpmFileName );
-		return ResourcesPlugin.getWorkspace().getRoot().getFile( path );
+		return ResourceHelper.getIFile( project.getFullPath().toString() + "/" + kpmFileName );
 	}
 	
 	/**
@@ -185,15 +195,6 @@ public class KermetaProject {
 		save();
 	}
 	
-	/*public void reload() {
-		load();
-		try {
-			IResourceHelper.reattachKermetaBuilder(this);
-		} catch (CoreException exception) {
-			exception.printStackTrace();
-		}
-	}*/
-	
 	/**
 	 * Save the KPM object into an xmi file.
 	 * Create the file if it does not exist.
@@ -201,12 +202,9 @@ public class KermetaProject {
 	public void save() {
 		try {
 			XMIHelper.save( getKpmFilePathString(), kpm);
-			//project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (IOException exception) {
 			exception.printStackTrace();
-		} /*catch (CoreException exception) {
-			exception.printStackTrace();	
-		}*/
+		} 
 	}
 	
 	public void reinitialize() throws CoreException {
@@ -217,81 +215,5 @@ public class KermetaProject {
 	public String getName() {
 		return project.getName();
 	}
-	
-	
-	
-	
-	/**
-	 * 
-	 * @param fileName
-	 * @param filePath
-	 * @return
-	 */
-/*	public File getFile(String fileName, String filePath) {
-		return kpm.findFile(fileName, filePath);
-	}*/
-	
-	/**
-	 * 
-	 * @param file
-	 * @return
-	 */
-/*	public File getFile(IFile file) {
-		return kpm.findFile(file);
-	}*/
-	
-	/**
-	 * 
-	 * @param absoluteFileName
-	 * @return
-	 */
-	/*public File getFile(String relativeFileName) {
-		return kpm.findFile(relativeFileName);
-	}*/
-	
-	/**
-	 * 
-	 * @param directoryName
-	 * @param directoryPath
-	 * @return
-	 */
-/*	public Directory getDirectory(String directoryName, String directoryPath) {
-		return kpm.findDirectory(directoryName, directoryPath);
-	}*/
-	
-	/**
-	 * 
-	 * @param folder
-	 * @return
-	 */
-/*	public Directory getDirectory(IFolder folder) {
-		return kpm.findDirectory(folder);
-	}*/
-	
-	/**
-	 * 
-	 * @param absoluteDirectoryName
-	 * @return
-	 */
-/*	public Directory getDirectory(String relativeDirectoryName) {
-		return kpm.findDirectory(relativeDirectoryName);
-	}*/
-	
-	/**
-	 * 
-	 * @param folder
-	 * @return
-	 */
-	/*public Project getProject(IProject project) {
-		return kpm.findProject(project);
-	}*/
-	
-	/**
-	 * 
-	 * @param absoluteDirectoryName
-	 * @return
-	 */
-	/*public Project getProject(String projectName) {
-		return kpm.findProject(projectName);
-	}*/
+
 }

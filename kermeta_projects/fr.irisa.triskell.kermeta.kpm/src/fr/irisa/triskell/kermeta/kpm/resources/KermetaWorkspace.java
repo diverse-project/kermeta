@@ -1,26 +1,38 @@
+/*$Id: KermetaWorkspace.java,v 1.2 2007-05-25 15:04:38 ftanguy Exp $
+* Project : fr.irisa.triskell.kermeta.kpm
+* File : 	sdfg.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : Feb 20, 2007
+* Authors : ftanguy
+*/
 package fr.irisa.triskell.kermeta.kpm.resources;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
-import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.resources.KermetaNature;
 
+/**
+ * 
+ * This class is used as a singleton.
+ * 
+ * 
+ * @author paco
+ *
+ */
 public class KermetaWorkspace {
 	
 	/**
 	 * Keep trace of all projects with kermeta nature.
 	 */
 	private Hashtable <IProject, KermetaProject> projects = new Hashtable <IProject, KermetaProject> ();
-	
-	private List<Unit> units = new ArrayList <Unit> ();
 	
 	/**
 	 * Kermeta Workspace is a singleton. 
@@ -29,7 +41,7 @@ public class KermetaWorkspace {
 	
 	/**
 	 * Get the only Kermeta Workspace instance.
-	 * @return
+	 * @return The only instance.
 	 */
 	static public KermetaWorkspace getInstance() {
 		if ( instance == null ) {
@@ -59,30 +71,33 @@ public class KermetaWorkspace {
 	 *
 	 */
 	private void initializeProjects() throws CoreException {
-		IProject[] iprojects = ResourceHelper.root.getProjects();;
+		IProject[] iprojects = ResourceHelper.root.getProjects();
 		for ( int index = 0; index < iprojects.length; index++ ) {
 			if ( NatureHelper.doesProjectHaveNature( iprojects[index], KermetaNature.ID ) ) {
 				if ( iprojects[index].exists() ) {
 					KermetaProject project = new KermetaProject(iprojects[index]);
 					projects.put(iprojects[index], project);
-					//IResourceHelper.attachDefaultBuilderToKermetaProject(project);
 				}
 			}
 		}
 	}
-	//////////////////////////////////
-	//////////////////////////////////
-	//		End of Constructor		//
-	//////////////////////////////////
-	//////////////////////////////////
 		
+	/**
+	 * Add a new Kermeta project to the kermeta workspace.
+	 * @param value
+	 * @return
+	 * @throws CoreException
+	 */
 	public KermetaProject addKermetaProject(IProject value) throws CoreException {
 		KermetaProject project = new KermetaProject(value);
 		projects.put(value, project);
-		//IResourceHelper.attachDefaultBuilderToKermetaProject(project);
 		return project;
 	}
 	
+	/**
+	 * Remove a kermeta project from the kermeta workspace.
+	 * @param value
+	 */
 	public void removeKermetaProject(IProject value) {
 		projects.remove(value);
 	}
@@ -93,23 +108,26 @@ public class KermetaWorkspace {
 	 * @return
 	 */
 	public KermetaProject getKermetaProject(IProject value) {
+		assert( value != null );
 		return projects.get(value);
 	}
 	
+	/**
+	 * Getting the kermeta project thanks to the name of the project.
+	 * @param projectName
+	 * @return
+	 */
 	public KermetaProject getKermetaProject(String projectName) {
 		IProject project = ResourceHelper.getIProject(projectName);
 		return getKermetaProject(project);
 	}
 	
+	/**
+	 * Getting the list of kermeta projects.
+	 * @return
+	 */
 	public Collection<KermetaProject> getKermetaProjects() {
 		return projects.values();
 	}
-	
-	public Unit foundUnit(String value) {
-		for ( Unit currentUnit : units ) {
-			if ( currentUnit.getValue().equals(value) )
-				return currentUnit;
-		}
-		return null;
-	}
+
 }
