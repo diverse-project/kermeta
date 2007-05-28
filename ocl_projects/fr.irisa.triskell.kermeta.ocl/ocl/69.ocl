@@ -1,6 +1,6 @@
 package sample
  -- no collect (relative to the 'sample.ecore' metamodel)
 context A inv:
-   d.w
+   b->collect(e|e.c.z)
 
 endpackage

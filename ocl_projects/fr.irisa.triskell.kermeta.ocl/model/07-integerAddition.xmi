@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="43">
-  <pathNameCS startOffset="8" endOffset="8">
-    <sequenceOfNames>p</sequenceOfNames>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="48">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="11" endOffset="31">
-    <pathNameCS startOffset="19" endOffset="19">
-      <sequenceOfNames>Y</sequenceOfNames>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="16" endOffset="36">
+    <pathNameCS startOffset="24" endOffset="24">
+      <sequenceOfNames>A</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="21" endOffset="31">
-      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="27" endOffset="31">
-        <source xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="27" endOffset="27" symbol="3" integerSymbol="3"/>
-        <simpleNameCS startOffset="29" endOffset="29" value="+" type="String"/>
-        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="31" endOffset="31" symbol="4" integerSymbol="4"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="26" endOffset="36">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="32" endOffset="36">
+        <source xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="32" endOffset="32" symbol="3" integerSymbol="3"/>
+        <simpleNameCS startOffset="34" endOffset="34" value="+" type="String"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="36" endOffset="36" symbol="4" integerSymbol="4"/>
         <isMarkedPreCS/>
       </expressionCS>
     </invOrDefCS>

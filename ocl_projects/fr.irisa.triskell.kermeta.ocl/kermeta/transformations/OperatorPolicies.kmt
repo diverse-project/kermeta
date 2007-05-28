@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.4 2007-05-28 08:25:59 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.5 2007-05-28 13:04:24 barais Exp $
  * Creation date: February 23, 2007
  * License:
  * Copyright:
@@ -11,7 +11,7 @@ package ocl2kmt;
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "ocl2kmtVisitor.kmt"
- 
+  
 using kermeta::standard
 using kermeta::exceptions
 using ocl::cst

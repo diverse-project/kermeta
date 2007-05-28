@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.17 2007-05-28 10:24:57 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.18 2007-05-28 13:04:24 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -53,12 +53,13 @@ class StringWriter inherits StdIO
  class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor {
 
  		operation initialize() : Void is do
- 			self.pathExpression := String.new
+ 			self.pathExpression := ""
 			self.previousIsMultiple := false
 			pathContextCounter :=0
 			currentPackagename :=""
 			visibleVariable := kermeta::utils::Hashtable<String,ecore::EClassifier>.new
 			visibleVariableMultiplicities := kermeta::utils::Hashtable<String,Boolean>.new
+			self.pathExpressionStack := kermeta::utils::Stack<String>.new
   		end 
  
  
@@ -332,38 +333,7 @@ class StringWriter inherits StdIO
 				    }
 			end
 
-		reference currentClassifier : ecore::EClassifier
-		method visitVariableExpCS(visitable : VariableExpCS) : Void is
-			do
-				//self.currentPackagename + "::" + self.currentClassifiername
-				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
-				//writeln(pathExpression.substring(0, pathExpression.size -1))
-				//if (contextPathExpression != void and contextVariable == visitable.simpleNameCS.~value) then
-				 currentClassifier := self.visibleVariable.getValue( visitable.simpleNameCS.~value)
-				
-					//previousIsMultiple := false
-					//contextPathExpression := void	
-				//else
-					pathExpression := pathExpression + visitable.simpleNameCS.~value+"."
-				
-				//var isMultiple : Boolean
-				previousIsMultiple :=  self.visibleVariableMultiplicities.getValue( visitable.simpleNameCS.~value)
-				
-				
-					 	
-				//writeln(isMultiple.toString)
-				
-				/*if (previousIsMultiple) then
-					write("collect{e | e.")
-					write( visitable.simpleNameCS.~value)
-					write("}")					
-				else*/
-				write( visitable.simpleNameCS.~value)
-				/*end*/
-				
-				//end	
-				//visitable.simpleNameCS.accept(self)
-			end
+		
 
        
           
@@ -448,33 +418,7 @@ class StringWriter inherits StdIO
 		//reference contextPathExpression : String
 		//reference contextVariable : String
 
-		reference visibleVariable : kermeta::utils::Hashtable<String,ecore::EClassifier>
-		reference visibleVariableMultiplicities : kermeta::utils::Hashtable<String,Boolean>
-
-		method visitVariableCS(visitable : VariableCS) : Void is
-			do
-				var classifier : ecore::EClassifier init self.ecoreHelper.getClassifierFromPath(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
-				if (classifier!= void) then
-					visibleVariable.put(visitable.name.toString,classifier)
-					visibleVariableMultiplicities.put(visitable.name.toString, self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),"."))
-				else
-					writeln("no cache for variable " + visitable.name)
-				end
-				write(visitable.name.toString)
-				//contextPathExpression := pathExpression
-				//contextVariable := visitable.name.toString
-				//writeln("toto" + pathExpression)
-				//visitable.name.accept(self)
-				if visitable.typeCS != void then
-					write(" : ")
-					visitable.typeCS.accept(self)
-				end
-				if visitable.initExpression != void then
-					write(" init ")
-					visitable.initExpression.accept(self)
-				end
-			end
-
+		
 		method visitLiteralExpCS(visitable : LiteralExpCS) : Void is
 			do
 				visit(visitable)			
@@ -583,7 +527,7 @@ class StringWriter inherits StdIO
         				addIterator("forAll", sameName)
         				addIterator("isUnique", UniqueIP.new)
         				addIterator("any", SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
@@ -619,11 +563,84 @@ class StringWriter inherits StdIO
 			end
 
 		attribute pathExpression : String
-
+		attribute pathExpressionStack : kermeta::utils::Stack<String>
 		attribute previousIsMultiple : Boolean 
-		
 		attribute pathContextCounter : Integer 
-
+		reference visibleVariable : kermeta::utils::Hashtable<String,ecore::EClassifier>
+		reference visibleVariableMultiplicities : kermeta::utils::Hashtable<String,Boolean>
+		reference currentClassifier : ecore::EClassifier
+		reference currentVariableName : String
+		method visitVariableExpCS(visitable : VariableExpCS) : Void is
+			do
+				//self.currentPackagename + "::" + self.currentClassifiername
+				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
+				//writeln(pathExpression.substring(0, pathExpression.size -1))
+				//if (contextPathExpression != void and contextVariable == visitable.simpleNameCS.~value) then
+				 currentClassifier := self.visibleVariable.getValue( visitable.simpleNameCS.~value)
+				
+					//previousIsMultiple := false
+					//contextPathExpression := void	
+				//else
+				pathExpressionStack.push(pathExpression)
+				pathExpression := ""//pathExpression + visitable.simpleNameCS.~value+"."
+				pathContextCounter := 0
+				//var isMultiple : Boolean
+				previousIsMultiple :=  self.visibleVariableMultiplicities.getValue( visitable.simpleNameCS.~value)
+				 
+				
+					 	
+				//writeln(isMultiple.toString)
+				
+				/*if (previousIsMultiple) then
+					write("collect{e | e.")
+					write( visitable.simpleNameCS.~value)
+					write("}")					
+				else*/
+				write( visitable.simpleNameCS.~value)
+				/*end*/
+				
+				//end	
+				//visitable.simpleNameCS.accept(self)
+			end
+		
+		method visitVariableCS(visitable : VariableCS) : Void is
+			do
+			
+				var classifier : ecore::EClassifier 
+				if (pathExpression.size == 0) then
+					classifier := currentClassifier
+					if (classifier!= void) then
+						visibleVariable.put(visitable.name.toString,classifier)
+						visibleVariableMultiplicities.put(visitable.name.toString,false)
+					end	
+				else
+					classifier := self.ecoreHelper.getClassifierFromPath(
+						self.currentPackagename + "::" + self.currentClassifiername,
+						 pathExpression.substring(0, pathExpression.size -1),".")
+					
+				if (classifier!= void) then
+					visibleVariable.put(visitable.name.toString,classifier)
+					visibleVariableMultiplicities.put(visitable.name.toString, self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),"."))
+				else
+					writeln("no cache for variable " + visitable.name)
+				end
+				end
+				write(visitable.name.toString)
+				//contextPathExpression := pathExpression
+				currentVariableName := visitable.name.toString
+				//writeln("toto" + pathExpression)
+				//visitable.name.accept(self)
+				if visitable.typeCS != void then
+					write(" : ")
+					visitable.typeCS.accept(self)
+				end
+				if visitable.initExpression != void then
+					write(" init ")
+					visitable.initExpression.accept(self)
+				end
+			end
+		
+		
 		method visitFeatureCallExpCS(visitable : FeatureCallExpCS) : Void is
 			do
 				pathContextCounter := pathContextCounter+1
@@ -645,8 +662,8 @@ class StringWriter inherits StdIO
 				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
 				//writeln(pathExpression.substring(0, pathExpression.size -1))
 				var isMultiple : Boolean 
-				do 
-				isMultiple:= self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+				do 	
+					isMultiple:= self.ecoreHelper.isMultiple(ecoreHelper.getClassifierQualifiedName(self.currentClassifier) , pathExpression.substring(0, pathExpression.size -1),".")
 								
 				
 				
@@ -691,6 +708,11 @@ class StringWriter inherits StdIO
 				if (pathContextCounter==0) then
 			  		previousIsMultiple:=false
 			  		pathExpression := ""
+			  		pathExpression:=pathExpressionStack.pop
+			  		
+			  		visibleVariable.remove(currentVariableName)
+			  		visibleVariableMultiplicities.remove(currentVariableName)
+			  		
 			  	end
 			  	
 			  	

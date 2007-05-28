@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="61">
-  <pathNameCS startOffset="8" endOffset="8">
-    <sequenceOfNames>p</sequenceOfNames>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="66">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="30" endOffset="49">
-    <pathNameCS startOffset="38" endOffset="38">
-      <sequenceOfNames>Y</sequenceOfNames>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="35" endOffset="54">
+    <pathNameCS startOffset="43" endOffset="43">
+      <sequenceOfNames>A</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="40" endOffset="49">
-      <expressionCS xsi:type="ocl.cst:NullLiteralExpCS" startOffset="46" endOffset="49" symbol="null"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="45" endOffset="54">
+      <expressionCS xsi:type="ocl.cst:NullLiteralExpCS" startOffset="51" endOffset="54" symbol="null"/>
     </invOrDefCS>
   </contextDecls>
 </ocl.cst:PackageDeclarationCS>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="53">
-  <pathNameCS startOffset="8" endOffset="8">
-    <sequenceOfNames>p</sequenceOfNames>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="54">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="11" endOffset="42">
-    <pathNameCS startOffset="19" endOffset="23">
-      <sequenceOfNames>Thing</sequenceOfNames>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="16" endOffset="43">
+    <pathNameCS startOffset="24" endOffset="24">
+      <sequenceOfNames>A</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="25" endOffset="42">
-      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="31" endOffset="42">
-        <source xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="31" endOffset="34" symbol="true" booleanSymbol="true"/>
-        <simpleNameCS startOffset="36" endOffset="37" value="or" type="String"/>
-        <arguments xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="39" endOffset="42" symbol="true" booleanSymbol="true"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="26" endOffset="43">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="32" endOffset="43">
+        <source xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="32" endOffset="35" symbol="true" booleanSymbol="true"/>
+        <simpleNameCS startOffset="37" endOffset="38" value="or" type="String"/>
+        <arguments xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="40" endOffset="43" symbol="true" booleanSymbol="true"/>
         <isMarkedPreCS/>
       </expressionCS>
     </invOrDefCS>

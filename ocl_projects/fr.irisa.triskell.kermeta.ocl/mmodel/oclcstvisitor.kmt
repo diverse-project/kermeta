@@ -11,7 +11,7 @@ package cst
 
 		operation accept(visitor : cst::visitors::Visitor) : kermeta::standard::~Void is
 			result := visitor.visitCSTNode(self)
-
+ 
 	}
 	@aspect "true"
 	class PackageDeclarationCS 

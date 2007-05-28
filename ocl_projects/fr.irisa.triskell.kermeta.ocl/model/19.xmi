@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="75">
-  <pathNameCS startOffset="8" endOffset="8">
-    <sequenceOfNames>p</sequenceOfNames>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="70">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="21" endOffset="63">
-    <pathNameCS startOffset="29" endOffset="29">
-      <sequenceOfNames>Y</sequenceOfNames>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="26" endOffset="58">
+    <pathNameCS startOffset="34" endOffset="34">
+      <sequenceOfNames>A</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="31" endOffset="63">
-      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="37" endOffset="63" accessor="arrow">
-        <source xsi:type="ocl.cst:VariableExpCS" startOffset="37" endOffset="37">
-          <simpleNameCS startOffset="37" endOffset="37" value="s"/>
-          <isMarkedPreCS startOffset="38" endOffset="39"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="36" endOffset="58">
+      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="42" endOffset="58" accessor="arrow">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="42" endOffset="42">
+          <simpleNameCS startOffset="42" endOffset="42" value="b"/>
+          <isMarkedPreCS startOffset="43" endOffset="44"/>
         </source>
-        <simpleNameCS startOffset="40" endOffset="42" value="one" type="keyword"/>
-        <variable1 startOffset="45" endOffset="45" name="a"/>
-        <body xsi:type="ocl.cst:FeatureCallExpCS" startOffset="49" endOffset="61" accessor="dot">
-          <source xsi:type="ocl.cst:VariableExpCS" startOffset="49" endOffset="49">
-            <simpleNameCS startOffset="49" endOffset="49" value="a"/>
-            <isMarkedPreCS startOffset="50" endOffset="50"/>
-          </source>
-          <simpleNameCS startOffset="51" endOffset="61" value="isSomething"/>
-          <isMarkedPreCS startOffset="63" endOffset="63"/>
-        </body>
+        <simpleNameCS startOffset="45" endOffset="47" value="one" type="keyword"/>
+        <variable1 startOffset="50" endOffset="50" name="o"/>
+        <body xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="54" endOffset="57" symbol="true" booleanSymbol="true"/>
       </expressionCS>
     </invOrDefCS>
   </contextDecls>

@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="84">
-  <pathNameCS startOffset="8" endOffset="8">
-    <sequenceOfNames>p</sequenceOfNames>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="81">
+  <pathNameCS startOffset="8" endOffset="13">
+    <sequenceOfNames>sample</sequenceOfNames>
   </pathNameCS>
-  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="29" endOffset="72">
-    <pathNameCS startOffset="37" endOffset="37">
-      <sequenceOfNames>Y</sequenceOfNames>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="34" endOffset="69">
+    <pathNameCS startOffset="42" endOffset="42">
+      <sequenceOfNames>A</sequenceOfNames>
     </pathNameCS>
-    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="39" endOffset="72">
-      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="45" endOffset="72" accessor="arrow">
-        <source xsi:type="ocl.cst:VariableExpCS" startOffset="45" endOffset="45">
-          <simpleNameCS startOffset="45" endOffset="45" value="s"/>
-          <isMarkedPreCS startOffset="46" endOffset="47"/>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="44" endOffset="69">
+      <expressionCS xsi:type="ocl.cst:OperationCallExpCS" startOffset="50" endOffset="69" accessor="arrow">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="50" endOffset="50">
+          <simpleNameCS startOffset="50" endOffset="50" value="b"/>
+          <isMarkedPreCS startOffset="51" endOffset="52"/>
         </source>
-        <simpleNameCS startOffset="48" endOffset="58" value="subSequence"/>
-        <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="60" endOffset="64">
-          <simpleNameCS startOffset="60" endOffset="64" value="lower"/>
-          <isMarkedPreCS startOffset="65" endOffset="65"/>
-        </arguments>
-        <arguments xsi:type="ocl.cst:VariableExpCS" startOffset="67" endOffset="71">
-          <simpleNameCS startOffset="67" endOffset="71" value="upper"/>
-          <isMarkedPreCS startOffset="72" endOffset="72"/>
-        </arguments>
-        <isMarkedPreCS startOffset="59" endOffset="59"/>
+        <simpleNameCS startOffset="53" endOffset="63" value="subSequence"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="65" endOffset="65" symbol="1" integerSymbol="1"/>
+        <arguments xsi:type="ocl.cst:IntegerLiteralExpCS" startOffset="68" endOffset="68" symbol="2" integerSymbol="2"/>
+        <isMarkedPreCS startOffset="64" endOffset="64"/>
       </expressionCS>
     </invOrDefCS>
   </contextDecls>
