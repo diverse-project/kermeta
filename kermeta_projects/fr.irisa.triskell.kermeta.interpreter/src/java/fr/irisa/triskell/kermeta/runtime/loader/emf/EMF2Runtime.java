@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.57 2007-05-25 15:10:45 ftanguy Exp $
+/* $Id: EMF2Runtime.java,v 1.58 2007-05-28 09:43:31 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -311,10 +310,8 @@ public class EMF2Runtime {
 	{
 	    Type ftype = null;
 	    // Find type definition for the given name, and get or create a type for it
-	    String eclassifierName = EcoreHelper.getQualifiedName(eclassifier);
-	    	    
-	   // String eclassifier_name = unit.getEQualifiedName(eclassifier);
-	    ftype = getTypeFromName(eclassifierName);
+	    String eclassifier_name = unit.getEQualifiedName(eclassifier);
+	    ftype = getTypeFromName(eclassifier_name);
         return ftype; 
 	}
 	
@@ -380,10 +377,9 @@ public class EMF2Runtime {
 	    EClass eclass = eObject.eClass();
 	    // Get the Type corresponding to the given class. If it is an ecore type to convert (EEnum, EEnumLiteral, EAnnotation)
 	    // then, convert it in its kermeta compliant version (Enumeration, EnumerationLiteral, Tag) 
-	    String eClassQualifiedName = EcoreHelper.getQualifiedName(eclass);
-	    if (getEcoreKermetaMap().containsKey(eClassQualifiedName) && !unit.isFromEcoreMetaModel())
+	    if (getEcoreKermetaMap().containsKey(unit.getEQualifiedName(eclass)) && !unit.isFromEcoreMetaModel())
 	    {
-	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(eClassQualifiedName);
+	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(unit.getEQualifiedName(eclass));
 	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromName(kermeta_metaclass_name);
 	    }
 	    else
@@ -720,12 +716,11 @@ public class EMF2Runtime {
 	public RuntimeObject getRuntimeObjectForMetaClass(EClass metaclass)
 	{
 	    RuntimeObject result = null;
-	    //String metaclass_name = unit.getEQualifiedName(metaclass);
-	    String metaclassQualifiedName = EcoreHelper.getQualifiedName(metaclass);
+	    String metaclass_name = unit.getEQualifiedName(metaclass);
 	    // If the given metaclass is an EEnum (ecore), we have to "convert" it in Enumeration (kermeta)
-	    if (getEcoreKermetaMap().containsKey(metaclassQualifiedName) && !unit.isFromEcoreMetaModel()) 
+	    if (getEcoreKermetaMap().containsKey(metaclass_name) && !unit.isFromEcoreMetaModel()) 
 	    {
-	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(metaclassQualifiedName);
+	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(metaclass_name);
 	    	if (this.type_cache.containsKey(kermeta_metaclass_name)) 
 		        result = (RuntimeObject)this.type_cache.get(kermeta_metaclass_name);
 	    	else
@@ -733,19 +728,19 @@ public class EMF2Runtime {
 	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
 	    		fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	    		result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
-	    		this.type_cache.put(metaclassQualifiedName, result);
+	    		this.type_cache.put(metaclass_name, result);
 	    	}
 	    }
-	    else if (this.type_cache.containsKey(metaclassQualifiedName)) 
+	    else if (this.type_cache.containsKey(metaclass_name)) 
 	    {
-	        result = (RuntimeObject)this.type_cache.get(metaclassQualifiedName);
+	        result = (RuntimeObject)this.type_cache.get(metaclass_name);
 	    }
 	    else
 	    {   
 	    	Type ftype = this.getTypeFromEClassifier(metaclass);
 	        fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	        result = unit.getRuntimeMemory().getROFactory().createMetaClass(fclass);
-	        this.type_cache.put(metaclassQualifiedName, result);
+	        this.type_cache.put(metaclass_name, result);
 	    }
 	    return result;
 	}

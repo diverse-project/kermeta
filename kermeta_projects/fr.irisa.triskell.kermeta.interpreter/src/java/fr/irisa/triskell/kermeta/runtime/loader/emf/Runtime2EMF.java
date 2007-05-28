@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.55 2007-05-25 15:10:45 ftanguy Exp $
+/* $Id: Runtime2EMF.java,v 1.56 2007-05-28 09:43:31 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -37,7 +37,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 
 //import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -253,7 +252,7 @@ public class Runtime2EMF {
 			String eprop_name = prop_name;
 			// Special handling -> convert kermeta-Enumeration in ecore-EEnum
 			RuntimeObject property = (RuntimeObject) rObject.getProperties().get(prop_name);
-			if (getKermetaEcoreMap().containsValue(EcoreHelper.getQualifiedName(eObject.eClass())))
+			if (getKermetaEcoreMap().containsValue(unit.getEQualifiedName(eObject.eClass())))
 				eprop_name = getKermetaEcoreMap().get(prop_name);
 
 			// The feature corresponding to the name of the property
@@ -537,7 +536,7 @@ public class Runtime2EMF {
 		while (it.hasNext() && result == null) {
 			EObject obj = (EObject) it.next();
 			if (obj instanceof EClass) {
-				if ( EcoreHelper.getQualifiedName( (ENamedElement) obj ).equals(kqname)){
+				if (unit.getEQualifiedName((EClass) obj).equals(kqname)){
 					result = (EClass) obj;
 					return result; // do not continue visiting the resource if we have found it
 				}

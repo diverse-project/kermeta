@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.7 2007-05-25 15:10:45 ftanguy Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.8 2007-05-28 09:43:31 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -92,8 +91,7 @@ public class QualifiedNamePatcher {
 		    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
 		    	if (mmPackage != null)
 		    	{
-		    		result = EcoreHelper.getQualifiedName(mmPackage);
-		    		//result = emfRuntimeUnit.getEQualifiedName(mmPackage);
+		    		result = emfRuntimeUnit.getEQualifiedName(mmPackage);
 		    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
 		    	}
 		    	else{

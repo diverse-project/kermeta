@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.38 2007-05-25 15:10:45 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.39 2007-05-28 09:43:31 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -514,7 +514,50 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	String unit_uri_path = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
         return this.resolveURI(this.getUriAsString(), unit_uri_path);
     }
+	
+	/**
+	 * (Helper)
+	 * Get the qualified name of the given ENamedElement in a Kermeta representation.
+	 * This is a recursive method,
+	 * that parses the successive containers of an element and return their qualified names.
+	 * This method is uncomplete! : TODO :
+	 *    - handle EEnum type
+	 *    - handle EDataTypes that contains links to java type that have no equivalence in Kermeta
+	 *    (ex: EBigDecimal, EJavaClass, etc.)
+	 * @param obj
+	 * @return the qualified name of the given object
+	 */
+	public String getEQualifiedName(ENamedElement obj) {
+	    String result = obj.getName();
+	    EObject cont = obj.eContainer();
+	    // Special case: if obj is a EDataType, refering to a java type (like String), 
+	    // search the equivalent type in kermeta.
+	    if (obj instanceof EDataType)
+	    {
+	    	String icn = ((EDataType)obj).getInstanceClassName();
+	    	if (icn != null && primitive_types_mapping.containsKey(icn)) 
+	    		result = primitive_types_mapping.get(icn);
+	    	else // Throw an error? --> For Ecore metamodel, we need to accept types...
+	    	{
+	    		String msg = "Sorry, your model probably won't be saved properly : it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
+	    		//msg += "\n - Please mail kermeta-users list with your metamodel and instance :) )";
+	    		result = primitive_types_mapping.get("java.lang.Object");
+	        	// throwKermetaRaisedExceptionOnSave(msg, null);
+	    	}
+	    }
+	    else if (cont != null &&cont instanceof ENamedElement) {
+	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
+	    }
+	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
+	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
+	    	result = qualifiedNamePatcher.getGeneratedPackageQualifiedName(obj);
+	    }
+	    return result;
+	}
 
+
+    
+	
 	/**
 	 * Get the contentMapEntry which key is the RuntimeObject representing the given string.
 	 * contentMap is the RuntimeObject that is passed to Kermeta side, and that contains a hashtable
