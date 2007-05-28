@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.20 2007-05-28 13:37:05 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.21 2007-05-28 13:44:26 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -670,23 +670,8 @@ class StringWriter inherits StdIO
 				
 				previousIsMultiple:=isMultiple
 				
-				
 				//writeln(isMultiple.toString)
 				
-				if visitable.arguments.size > 0 then
-					write("(")
-					from
-						var it : Iterator<OCLExpressionCS> init visitable.arguments.iterator
-					until
-						it.isOff
-					loop
-						it.next.accept(self)
-						if  it.hasNext then
-							write(", ") 
-						end
-					end
-					write(")")
-			  	end
 			  	
 			  
 			  	pathContextCounter := pathContextCounter-1
@@ -700,8 +685,6 @@ class StringWriter inherits StdIO
 			  		visibleVariableMultiplicities.remove(currentVariableName)
 			  		
 			  	end
-			  	
-			  	
 			  	
 			end
 
@@ -799,8 +782,25 @@ class StringWriter inherits StdIO
 				if policy != void then
 					policy.generate(visitable, self)
 				else
-					visitFeatureCallExpCS(visitable)
+					write("Manage Operation Call")
+					if visitable.arguments.size > 0 then
+						write("(")
+						from
+							var it : Iterator<OCLExpressionCS> init visitable.arguments.iterator
+						until
+							it.isOff
+						loop
+							it.next.accept(self)
+							if  it.hasNext then
+								write(", ") 
+							end
+						end
+						write(")")
+			  		end
+					
+					//visitFeatureCallExpCS(visitable)
 				end
+				
 			end
 
 		method visitIsMarkedPreCS(visitable : IsMarkedPreCS) : Void is
