@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.14 2007-05-28 09:26:33 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.15 2007-05-28 09:48:12 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -138,6 +138,7 @@ class StringWriter inherits StdIO
 				currentPackagename:=currentPackagename.substring(2,currentPackagename.size)
 				write("package ")
 				visitable.pathNameCS.accept(self)
+				writeln(";")
 				writeln("require kermeta")
 				write("require \"")
 				visitable.pathNameCS.accept(self)
@@ -296,7 +297,7 @@ class StringWriter inherits StdIO
 
 		method visitInvCS(visitable : InvCS) : Void is
 			do
-				writeln("inv  " + nextName("invariant") + " is ")
+				writeln("inv " + nextName("invariant") + " is")
 				writeln("do" )
 				visitable.expressionCS.accept(self)
 				writeln("")
