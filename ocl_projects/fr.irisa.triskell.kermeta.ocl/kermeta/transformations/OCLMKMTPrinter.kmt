@@ -1,4 +1,4 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.8 2007-05-25 18:11:25 bitterjug Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.9 2007-05-28 08:25:59 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -13,9 +13,9 @@ package OCLKMTPrinter;
 
 require kermeta
 //require "../ecore.kmt"
-require "../helpers/OCLHelper.kmt" 
+require "../helpers/OCLHelper.kmt"
 require "../../mmodel/oclcstvisitor.kmt"
-require "ocl2kmtVisitor.kmt"  
+require "ocl2kmtVisitor.kmt"
 //require "Tools.kmt"  
 
 using kermeta::standard
@@ -34,19 +34,19 @@ class OCLKMTPrinter
     
     operation main(): Void is
 		do
-			modelURI := "../../model/19.xmi"		
-			
+			//modelURI := "../../model/17.xmi"		
+			modelURI := "../../model/67.xmi"		
+			 
 			repository := EMFRepository.new
 			helper := OCLHelpers::OCLHelper.new
+	    	helper.initialize("../../ocl/sample.ecore")
+	     	visitor := Ocl2kmtVisitor.new
+	     	visitor.initialize
 	     	model  := helper.loadOCLModel(repository, modelURI)
-	     	
 	     	stdio.writeln("model loaded")
-
-	     	visitor := Ocl2kmtVisitor.new	     	
-	     	visitor.setMetamodelURI("../../ocl/sample.ecore") 
-	     	
-	     	stdio.writeln("visitor initialized")
-	     	
+	     	mhelper  := helper.loadMetaModel()
+	     	 visitor.ecoreHelper := mhelper
+	     	stdio.writeln("metamodel loaded")
 			helper.getPackageDeclaration(model).accept(visitor)
 	    end
 

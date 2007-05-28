@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.11 2007-05-25 18:11:24 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.12 2007-05-28 08:25:59 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -12,13 +12,13 @@ package ocl2kmt;
 
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
-require "OperatorPolicies.kmt"  
+require "OperatorPolicies.kmt"   
 require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
- 
+
 using kermeta::standard
 using kermeta::exceptions
 using ocl::cst
-using ocl::cst::visitors
+using ocl::cst::visitors 
 using kermeta::utils
 using kermeta::io
 
@@ -52,26 +52,17 @@ class StringWriter inherits StdIO
 
  class Ocl2kmtVisitor inherits ocl::cst::visitors::Visitor {
 
+ 		operation initialize() : Void is do
+ 			self.pathExpression := String.new
+			self.previousIsMultiple := false
+			pathContextCounter :=0
+			currentPackagename :=""
+			visibleVariable := kermeta::utils::Hashtable<String,ecore::EClassifier>.new
+			visibleVariableMultiplicities := kermeta::utils::Hashtable<String,Boolean>.new
+  		end 
  
-		reference __ecoreHelper : EcoreHelpers::EcoreHelper
-		
-		operation setMetamodelURI(metamodelURI: String) is
-			do
-				__ecoreHelper := EcoreHelpers::EcoreHelper.new
-				__ecoreHelper.loadMetamodel(metamodelURI) 
-			end
-			
-		operation ecoreHelper(): EcoreHelpers::EcoreHelper is
-			do
-				if __ecoreHelper == void then
-					var e : Exception init Exception.new
-					e.message := "Metamodel URI must be set before visiting"
-					raise e
-				else
-					result := __ecoreHelper
-				end
-			end
-					
+ 
+		reference ecoreHelper : EcoreHelpers::EcoreHelper
 		reference  __io: StdIO 
 		
 		operation getIo(): StdIO is
@@ -125,10 +116,6 @@ class StringWriter inherits StdIO
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
 			do
 			
-				self.pathExpression := String.new
-				self.previousIsMultiple := false
-				pathContextCounter :=0
-				currentPackagename :=""
 				visitable.pathNameCS.sequenceOfNames.each{ e | currentPackagename := currentPackagename + "::"+e}
 				currentPackagename:=currentPackagename.substring(2,currentPackagename.size)
 				write("package ")
@@ -165,6 +152,25 @@ class StringWriter inherits StdIO
 				currentClassifiername :=""
 				visitable.pathNameCS.sequenceOfNames.each{ e | currentClassifiername := currentClassifiername + "::"+e}
 				currentClassifiername:=currentClassifiername.substring(2,currentClassifiername.size)
+				//var classifier : ecore::EClassifier init self.ecoreHelper.getClassifierFromPath(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+				
+				
+				visibleVariable.clear
+				var classifier : ecore::EClass
+				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
+				
+				if (classifier!= void) then
+					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e.eType)
+					if (e.upperBound >1 or e.upperBound == -1 ) then
+		 				visibleVariableMultiplicities.put(e.name.toString,true)
+		 			else
+		 				visibleVariableMultiplicities.put(e.name.toString,false)
+			 		end	
+					}
+				else
+					writeln("no cache for allAttributes of  " + currentClassifiername)
+				end
+				
 				//writeln(currentClassifiername )
 				writeln("@aspect \"true\"")
 				write("class ")
@@ -182,6 +188,8 @@ class StringWriter inherits StdIO
 				currentOperationname :=""
 				visitable.operationCS.pathNameCS.sequenceOfNames.each{ e | currentClassifiername := currentClassifiername + "::"+e}
 				currentClassifiername:=currentClassifiername.substring(2,currentClassifiername.size)
+				
+				
 				
 				writeln("@aspect \"true\"")
 				write("class ")
@@ -219,6 +227,25 @@ class StringWriter inherits StdIO
 		method visitOperationCS(visitable : OperationCS) : Void is
 			do
 				currentOperationname := visitable.simpleNameCS.~value
+				
+				visibleVariable.clear
+				var classifier : ecore::EClass
+				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
+				
+				if (classifier!= void) then
+					var currops : ecore::EOperation init classifier.eAllOperations.select{e| e.name == currentOperationname}.one
+					currops.eParameters.each{ e |  visibleVariable.put(e.name.toString,e.eType)
+					if (e.upperBound >1 or e.upperBound == -1 ) then
+		 				visibleVariableMultiplicities.put(e.name.toString,true)
+		 			else
+		 				visibleVariableMultiplicities.put(e.name.toString,false)
+			 		end	
+					
+					
+					}
+				else
+					writeln("no cache for allAttributes of  " + currentClassifiername)
+				end
 				
 				write("operation ")
 				visitable.simpleNameCS.accept(self)
@@ -287,26 +314,36 @@ class StringWriter inherits StdIO
 				    }
 			end
 
+		reference currentClassifier : ecore::EClassifier
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
-				pathExpression := pathExpression + visitable.simpleNameCS.~value+"."
-				
 				//self.currentPackagename + "::" + self.currentClassifiername
 				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
 				//writeln(pathExpression.substring(0, pathExpression.size -1))
-
-				var isMultiple : Boolean init self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+				//if (contextPathExpression != void and contextVariable == visitable.simpleNameCS.~value) then
+				 currentClassifier := self.visibleVariable.getValue( visitable.simpleNameCS.~value)
+				
+					//previousIsMultiple := false
+					//contextPathExpression := void	
+				//else
+					pathExpression := pathExpression + visitable.simpleNameCS.~value+"."
+				
+				//var isMultiple : Boolean
+				previousIsMultiple :=  self.visibleVariableMultiplicities.getValue( visitable.simpleNameCS.~value)
+				
+				
+					 	
 				//writeln(isMultiple.toString)
 				
-				if (previousIsMultiple) then
+				/*if (previousIsMultiple) then
 					write("collect{e | e.")
 					write( visitable.simpleNameCS.~value)
 					write("}")					
-				else
-					write( visitable.simpleNameCS.~value)
-				end
+				else*/
+				write( visitable.simpleNameCS.~value)
+				/*end*/
 				
-				previousIsMultiple:=isMultiple
+				//end	
 				//visitable.simpleNameCS.accept(self)
 			end
 
@@ -390,9 +427,25 @@ class StringWriter inherits StdIO
 				visit(visitable)
 			end
 
+		//reference contextPathExpression : String
+		//reference contextVariable : String
+
+		reference visibleVariable : kermeta::utils::Hashtable<String,ecore::EClassifier>
+		reference visibleVariableMultiplicities : kermeta::utils::Hashtable<String,Boolean>
+
 		method visitVariableCS(visitable : VariableCS) : Void is
 			do
+				var classifier : ecore::EClassifier init self.ecoreHelper.getClassifierFromPath(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+				if (classifier!= void) then
+					visibleVariable.put(visitable.name.toString,classifier)
+					visibleVariableMultiplicities.put(visitable.name.toString, self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),"."))
+				else
+					writeln("no cache for variable " + visitable.name)
+				end
 				write(visitable.name.toString)
+				//contextPathExpression := pathExpression
+				//contextVariable := visitable.name.toString
+				//writeln("toto" + pathExpression)
 				//visitable.name.accept(self)
 				if visitable.typeCS != void then
 					write(" : ")
@@ -512,7 +565,7 @@ class StringWriter inherits StdIO
         				addIterator("forAll", sameName)
         				addIterator("isUnique", UniqueIP.new)
         				addIterator("any", SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
@@ -573,8 +626,11 @@ class StringWriter inherits StdIO
 				//self.currentPackagename + "::" + self.currentClassifiername
 				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
 				//writeln(pathExpression.substring(0, pathExpression.size -1))
+				var isMultiple : Boolean 
+				do 
+				isMultiple:= self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
+								
 				
-				var isMultiple : Boolean init self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),".")
 				
 				if (previousIsMultiple) then
 					write("collect{e | e.")
@@ -583,8 +639,16 @@ class StringWriter inherits StdIO
 				else
 					write( visitable.simpleNameCS.~value)
 				end
+				previousIsMultiple:=isMultiple
+				
+				rescue (errPre : EcoreHelpers::InvalidPathName) 
+					isMultiple:= false
+					write("/*INVALIDPATH"+ pathExpression.substring(0, pathExpression.size -1)+"*/"+ visitable.simpleNameCS.~value)
+				
+				end
 				
 				previousIsMultiple:=isMultiple
+				
 				
 				//writeln(isMultiple.toString)
 				
@@ -603,13 +667,15 @@ class StringWriter inherits StdIO
 					write(")")
 			  	end
 			  	
+			  
 			  	pathContextCounter := pathContextCounter-1
-			  	
-			  	
-			  	if (pathContextCounter==0) then
+					
+				if (pathContextCounter==0) then
 			  		previousIsMultiple:=false
 			  		pathExpression := ""
 			  	end
+			  	
+			  	
 			  	
 			end
 
