@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.19 2007-05-28 13:26:10 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.20 2007-05-28 13:37:05 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -783,6 +783,9 @@ class StringWriter inherits StdIO
            				__operators.put("intersection", FunctionCallOp.new) 
            				__operators.put("including", functionCall)  
            				__operators.put("excluding", functionCall)  
+           				__operators.put("last", functionCall)  
+           				__operators.put("first", functionCall)  
+           				
           				__operators.put("symmetricDifference", functionCall)
           			end
           			result := __operators
