@@ -338,11 +338,10 @@
 <emphasis role="strong">var</emphasis> repository : EMFRepository init EMFRepository.new
 
 /* Create an EMF Resource, given model and metamodel URIs as String */
-<emphasis role="strong">var</emphasis> resource : EMFResource
-resource ?= repository.createResource(myModelURI, itsMetamodelURI)
+<emphasis role="strong">var</emphasis> resource : Resource init repository.createResource(myModelURI, itsMetamodelURI)
 
 /* Load the resource */
-resource.load()</programlisting>
+resource.load</programlisting>
 
         <para>In the same way, you can serialize a model, or load, change and
         save an existing model.</para>
@@ -1928,30 +1927,29 @@ class Female <emphasis role="strong">inherits</emphasis> Person
         </itemizedlist>
 
         <programlisting><emphasis role="strong">@mainClass</emphasis> "root::TestCSLoading"
-
 <emphasis role="strong">@mainOperation</emphasis> "main"
 
-
 <emphasis role="strong">package</emphasis> root;
+
 <emphasis role="strong">require</emphasis> kermeta
-<emphasis role="strong">require</emphasis> "cs.ecore"
+
 <emphasis role="strong">using</emphasis> kermeta::standard
+<emphasis role="strong">using</emphasis> kermeta::persistence
 
 <emphasis role="strong">class</emphasis> TestCSLoading
-
 {
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> initialize(uri : String, mm_uri : String) : Set&lt;Object&gt; <emphasis
             role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Initialize the EMF repository */</emphasis>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> repository &nbsp;&nbsp;&nbsp;&nbsp;: EMFRepository init EMFRepository.new
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Create an EMF Resource */</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> resource : EMFResource 
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource ?= repository.createResource(uri, mm_uri)
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> resource : Resource init repository.createResource(uri, mm_uri)
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Load the resource */</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.load()
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.load
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Get the loaded __root__ instances (a Set&lt;Object&gt;) */</emphasis>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">result</emphasis> := resource.instances
- &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis></programlisting>
+ &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
+ }</programlisting>
 
         <itemizedlist>
           <listitem>
@@ -2546,30 +2544,28 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
         <programlisting><emphasis>// readonly property : it has no setter</emphasis>
 <emphasis role="strong">class</emphasis> A 
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> length : Integer
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> width : Integer
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Real
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> <emphasis
-            role="strong">readonly</emphasis> surface : Integer <emphasis>// property : keyword for derived property</emphasis>
+            role="strong">readonly</emphasis> frequency : Real <emphasis>// property : keyword for derived property</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">getter</emphasis> <emphasis
             role="strong">is</emphasis> do
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
-            role="strong">result</emphasis> := length*width
+            role="strong">result</emphasis> := 1/period
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }
 <emphasis>// modifiable property :</emphasis>
 <emphasis role="strong">class</emphasis> B 
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> length : Integer
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> width : Integer
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> surface : Integer
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">attribute</emphasis> period : Real
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">property</emphasis> frequency : Real
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">getter</emphasis> <emphasis
             role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis
-            role="strong">result</emphasis> := length*width
+            role="strong">result</emphasis> result := 1/period
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">setter</emphasis> <emphasis
             role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface := length*width
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;period := 1/frequency
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }</programlisting>
 
