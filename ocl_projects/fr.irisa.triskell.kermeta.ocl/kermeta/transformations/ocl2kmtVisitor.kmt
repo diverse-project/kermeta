@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.16 2007-05-28 10:24:13 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.17 2007-05-28 10:24:57 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -583,7 +583,7 @@ class StringWriter inherits StdIO
         				addIterator("forAll", sameName)
         				addIterator("isUnique", UniqueIP.new)
         				addIterator("any", SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix("size.equals(1)"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
