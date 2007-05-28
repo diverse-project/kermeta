@@ -1,0 +1,33 @@
+/* $Id: dynamicParserBug.kmt,v 1.1 2007-05-28 08:37:16 bitterjug Exp $
+ * Creation date: May 21, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+require kermeta
+
+
+using kermeta::standard
+using kermeta::interpreter 
+
+
+class Main
+{
+
+ 	operation main(): Void is
+		do
+			var de : DynamicExpression init DynamicExpression.new
+			de.initializeDefaults
+			var kmt : String  init  "s.sortedBy{ x | x  }"
+			de.formalParameters.put("s", Sequence<Integer>)
+ 			de.parse(kmt)
+		end
+		
+
+}

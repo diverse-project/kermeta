@@ -1,4 +1,4 @@
-/* $Id: OCLHelper.kmt,v 1.9 2007-05-28 08:25:59 barais Exp $
+/* $Id: OCLHelper.kmt,v 1.10 2007-05-28 08:37:16 bitterjug Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -29,26 +29,23 @@ using kermeta::exceptions
  */
 class OCLHelper
 {
-	attribute ecoreOCLMetamodel : String
-	attribute ecoreMetamodel : String
+	attribute __ecoreOCLMetamodel : String
+
 	
-	operation initialize(eMetamodel:String): Void is
+	/* Get ecore OCL metamodel URI with default value */
+	operation ecoreOCLMetamodelURI():String is
 		do
-			if ecoreOCLMetamodel == void then
-				ecoreOCLMetamodel := "../../mmodel/OCLCST.ecore"
+			if __ecoreOCLMetamodel == void then
+				__ecoreOCLMetamodel := "../../mmodel/OCLCST.ecore"
 			end
-			if ecoreMetamodel == void then
-				ecoreMetamodel := eMetamodel
-			end
+			result := __ecoreOCLMetamodel
 		end
-    
+		
     operation loadOCLModel(repository : EMFRepository, modelUri : String) : Set<Object> is 
 	    do
-	    	//initialize
-	    	var resource : Resource init repository.createResource(modelUri , ecoreOCLMetamodel)
+	    	var resource : Resource init repository.createResource(modelUri , ecoreOCLMetamodelURI)
 	    	resource.load
-	    	var instances : Set<Object> init resource.instances
-	    	result := instances
+	    	result := resource.instances
 	    end
     
     operation getPackageDeclaration(os : Set<Object>): ocl::cst::PackageDeclarationCS is
@@ -63,22 +60,16 @@ class OCLHelper
 	operation getInvExpression(os: Set<Object>): ocl::cst::OCLExpressionCS is
 		do
 			var invariant : InvCS 
-			invariant ?= os.detect{ o |
-				var expression : ocl::cst::InvCS
-				expression ?= o
-				expression != void
-			}
+			invariant ?= os.detect{ o | 
+				o.isKindOf(PackageDeclarationCS)
+			}.asType(PackageDeclarationCS).contextDecls.detect{ o |
+				o.isKindOf(ClassifierContextDeclCS)
+			}.asType(ClassifierContextDeclCS).invOrDefCS
+			// TODO: check for null invariant here and throw exception						
 			result := invariant.expressionCS
 		end
 		
-		operation loadMetaModel() : EcoreHelpers::EcoreHelper is do 
-			var  ecoreMetamodelHelper : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new
-			ecoreMetamodelHelper.initialize
-			ecoreMetamodelHelper.loadMetaModel(ecoreMetamodel)
-			result := ecoreMetamodelHelper
-//			ecoreMetamodelHelper.
-			
-		end
+	
 
   }
   
