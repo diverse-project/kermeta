@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.13 2007-05-28 08:44:23 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.14 2007-05-28 09:26:33 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -138,13 +138,12 @@ class StringWriter inherits StdIO
 				currentPackagename:=currentPackagename.substring(2,currentPackagename.size)
 				write("package ")
 				visitable.pathNameCS.accept(self)
-				writeln(";\n")
-				write("require kermeta \n")
+				writeln("require kermeta")
 				write("require \"")
 				visitable.pathNameCS.accept(self)
-				write(".ecore\"\n")
+				writeln(".ecore\"")
 				
-				write("using kermeta::standard \n")
+				writeln("using kermeta::standard")
 				
 				visitable.contextDecls.each{ c |
 						c.accept(self)
