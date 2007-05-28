@@ -152,6 +152,7 @@ public class TestOCLParser {
 		 filenames.add("30");
 		 filenames.add("31");
 		 filenames.add("32");
+		 filenames.add("33");
 		 filenames.add("34");
 		 filenames.add("35");
 		 filenames.add("36");

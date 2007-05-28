@@ -1,4 +1,4 @@
-/* $Id: OperatorPolicies.kmt,v 1.5 2007-05-28 13:04:24 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.6 2007-05-28 20:32:19 barais Exp $
  * Creation date: February 23, 2007
  * License:
  * Copyright:
@@ -11,7 +11,7 @@ package ocl2kmt;
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "ocl2kmtVisitor.kmt"
-  
+   
 using kermeta::standard
 using kermeta::exceptions
 using ocl::cst
@@ -181,6 +181,81 @@ class PrefixOp inherits OperatorPolicy {
 		
 }
 
+class functionCollectionCall inherits FunctionCallOp{
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is do
+		    visitor.write(getPrefix)
+			oclOp.source.accept(visitor)
+			if (not visitor.currentClassifier.many) then
+				visitor.write("/*cannot call this operation in this context*/")
+			end
+			
+			visitor.write(".")
+			if name != void then
+				visitor.write(name)
+			else
+				oclOp.simpleNameCS.accept(visitor)
+			end
+			if not oclOp.arguments.empty then
+				visitor.write("(")
+				from
+					var it : Iterator<OCLExpressionCS> init oclOp.arguments.iterator
+				until
+					it.isOff
+				loop
+	//				visitor.write(" ")
+					it.next.accept(visitor)
+					if  it.hasNext then
+						visitor.write(",") 
+					else
+	//					visitor.write(" ")
+					end
+				end
+	  			visitor.write(")")
+	  		end
+  			visitor.write(getSuffix)
+//  			visitor.previousIsMultiple := false
+		
+		
+	end
+
+}
+
+class functionOrderedCollectionCall inherits FunctionCallOp{
+	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is do
+		    visitor.write(getPrefix)
+			oclOp.source.accept(visitor)
+			if (not (visitor.currentClassifier.ordered and visitor.currentClassifier.many)) then
+				visitor.write("/*cannot call this operation in this context*/")
+			end
+			
+			visitor.write(".")
+			if name != void then
+				visitor.write(name)
+			else
+				oclOp.simpleNameCS.accept(visitor)
+			end
+			if not oclOp.arguments.empty then
+				visitor.write("(")
+				from
+					var it : Iterator<OCLExpressionCS> init oclOp.arguments.iterator
+				until
+					it.isOff
+				loop
+	//				visitor.write(" ")
+					it.next.accept(visitor)
+					if  it.hasNext then
+						visitor.write(",") 
+					else
+	//					visitor.write(" ")
+					end
+				end
+	  			visitor.write(")")
+	  		end
+  			visitor.write(getSuffix)
+  			visitor.previousIsMultiple := false		
+	end
+
+}
 
 
 class FunctionCallOp inherits OperatorPolicy {
@@ -215,6 +290,7 @@ class FunctionCallOp inherits OperatorPolicy {
 	  			visitor.write(")")
 	  		end
   			visitor.write(getSuffix)
+//  			visitor.previousIsMultiple := false
 		 end
 }
 class EmptyCallOp inherits OperatorPolicy {

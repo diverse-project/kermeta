@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.21 2007-05-28 13:44:26 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.22 2007-05-28 20:32:19 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -57,8 +57,8 @@ class StringWriter inherits StdIO
 			self.previousIsMultiple := false
 			pathContextCounter :=0
 			currentPackagename :=""
-			visibleVariable := kermeta::utils::Hashtable<String,ecore::EClassifier>.new
-			visibleVariableMultiplicities := kermeta::utils::Hashtable<String,Boolean>.new
+			visibleVariable := kermeta::utils::Hashtable<String,ecore::ETypedElement>.new
+			//visibleVariableMultiplicities := kermeta::utils::Hashtable<String,Boolean>.new
 			self.pathExpressionStack := kermeta::utils::Stack<String>.new
   		end 
  
@@ -176,16 +176,17 @@ class StringWriter inherits StdIO
 				
 				visibleVariable.clear
 				var classifier : ecore::EClass
-				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
+				classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
 				
 				if (classifier!= void) then
-					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e.eType)
-					if (e.upperBound >1 or e.upperBound == -1 ) then
-		 				visibleVariableMultiplicities.put(e.name.toString,true)
-		 			else
-		 				visibleVariableMultiplicities.put(e.name.toString,false)
-			 		end	
-					}
+					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e)}
+					var tmp : ecore::EAttribute init ecore::EAttribute.new
+					tmp.eType:=classifier
+					tmp.name := "self"
+					tmp.ordered := false
+					tmp.lowerBound:=0
+					tmp.upperBound:=1
+					visibleVariable.put(tmp.name.toString,tmp)
 				else
 					writeln("no cache for allAttributes of  " + currentClassifiername)
 				end
@@ -252,13 +253,21 @@ class StringWriter inherits StdIO
 				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
 				
 				if (classifier!= void) then
+					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e)}
+					var tmp : ecore::EAttribute init ecore::EAttribute.new
+					tmp.eType:=classifier
+					tmp.name := "self"
+					tmp.ordered := false
+					tmp.lowerBound:=0
+					tmp.upperBound:=1
+					visibleVariable.put(tmp.name.toString,tmp)
 					var currops : ecore::EOperation init classifier.eAllOperations.select{e| e.name == currentOperationname}.one
-					currops.eParameters.each{ e |  visibleVariable.put(e.name.toString,e.eType)
-					if (e.upperBound >1 or e.upperBound == -1 ) then
+					currops.eParameters.each{ e |  visibleVariable.put(e.name.toString,e)
+					/*if (e.upperBound >1 or e.upperBound == -1 ) then
 		 				visibleVariableMultiplicities.put(e.name.toString,true)
 		 			else
 		 				visibleVariableMultiplicities.put(e.name.toString,false)
-			 		end	
+			 		end*/	
 					
 					
 					}
@@ -402,7 +411,7 @@ class StringWriter inherits StdIO
 				visitable.thenExpression.accept(self)
 				write(" else ")
 				visitable.elseExpression.accept(self)
-				write(" endif")
+				write(" end")
 			end
 
 		method visitMessageExpCS(visitable : MessageExpCS) : Void is
@@ -566,47 +575,56 @@ class StringWriter inherits StdIO
 		attribute pathExpressionStack : kermeta::utils::Stack<String>
 		attribute previousIsMultiple : Boolean 
 		attribute pathContextCounter : Integer 
-		reference visibleVariable : kermeta::utils::Hashtable<String,ecore::EClassifier>
-		reference visibleVariableMultiplicities : kermeta::utils::Hashtable<String,Boolean>
-		reference currentClassifier : ecore::EClassifier
+		reference visibleVariable : kermeta::utils::Hashtable<String,ecore::ETypedElement>
+		//reference visibleVariableMultiplicities : kermeta::utils::Hashtable<String,Boolean>
+		reference currentClassifier : ecore::ETypedElement
 		reference currentVariableName : String
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
-				 currentClassifier := self.visibleVariable.getValue( visitable.simpleNameCS.~value)
+				var isNotAccessible:Boolean init false
+				currentClassifier := self.visibleVariable.getValue( visitable.simpleNameCS.~value)
 				
 				pathExpressionStack.push(pathExpression)
 				pathExpression := ""//pathExpression + visitable.simpleNameCS.~value+"."
 				pathContextCounter := 0
 				//var isMultiple : Boolean
-				previousIsMultiple :=  self.visibleVariableMultiplicities.getValue( visitable.simpleNameCS.~value)
-				 
+				do 
+					previousIsMultiple :=  self.visibleVariable.getValue( visitable.simpleNameCS.~value).many
+				rescue (e: kermeta::exceptions::CallOnVoidTarget)
+					isNotAccessible := true
+					//write("/*Variable "+  visitable.simpleNameCS.~value + " is not accessible*/")
+					previousIsMultiple := false
+				end 
 				if (visitable.simpleNameCS.~value.size == visitable.simpleNameCS.endOffset - visitable.simpleNameCS.startOffset +1 ) then
+					if (isNotAccessible) then
+						write("/*Variable "+  visitable.simpleNameCS.~value + " is not accessible*/")
+					end
 					write( visitable.simpleNameCS.~value)
 				else
 					write("\"" +  visitable.simpleNameCS.~value+"\"")
-				
 				end
+				
 				
 			end
 		
 		method visitVariableCS(visitable : VariableCS) : Void is
 			do
 			
-				var classifier : ecore::EClassifier 
+				var classifier : ecore::ETypedElement 
 				if (pathExpression.size == 0) then
-					classifier := currentClassifier
+					classifier :=  currentClassifier
 					if (classifier!= void) then
 						visibleVariable.put(visitable.name.toString,classifier)
-						visibleVariableMultiplicities.put(visitable.name.toString,false)
+						//visibleVariableMultiplicities.put(visitable.name.toString,false)
 					end	
 				else
-					classifier := self.ecoreHelper.getClassifierFromPath(
+					classifier := self.ecoreHelper.getETypedElementFromPath(
 						self.currentPackagename + "::" + self.currentClassifiername,
 						 pathExpression.substring(0, pathExpression.size -1),".")
 					
 				if (classifier!= void) then
 					visibleVariable.put(visitable.name.toString,classifier)
-					visibleVariableMultiplicities.put(visitable.name.toString, self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),"."))
+					//visibleVariableMultiplicities.put(visitable.name.toString, self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),"."))
 				else
 					writeln("no cache for variable " + visitable.name)
 				end
@@ -649,10 +667,11 @@ class StringWriter inherits StdIO
 				//writeln(pathExpression.substring(0, pathExpression.size -1))
 				var isMultiple : Boolean 
 				do 	
-					isMultiple:= self.ecoreHelper.isMultiple(ecoreHelper.getClassifierQualifiedName(self.currentClassifier) , pathExpression.substring(0, pathExpression.size -1),".")
-								
-				
-				
+		 			if (self.currentClassifier == void) then 
+		 				isMultiple :=false
+		 			else
+		 				isMultiple := self.ecoreHelper.getETypedElementFromPath(ecoreHelper.getClassifierQualifiedName(self.currentClassifier.eType) , pathExpression.substring(0, pathExpression.size -1),".").many
+					end
 				if (previousIsMultiple) then
 					write("collect{e | e.")
 					write( visitable.simpleNameCS.~value)
@@ -664,14 +683,27 @@ class StringWriter inherits StdIO
 				
 				rescue (errPre : EcoreHelpers::InvalidPathName) 
 					isMultiple:= false
-					write("/*INVALIDPATH"+ pathExpression.substring(0, pathExpression.size -1)+"*/"+ visitable.simpleNameCS.~value)
+					write("/*INVALIDPATH"+ pathExpression.substring(0, pathExpression.size -1) + " " + currentClassifier.eType.name +"*/"+ visitable.simpleNameCS.~value )
 				
 				end
 				
 				previousIsMultiple:=isMultiple
 				
 				//writeln(isMultiple.toString)
-				
+					if visitable.arguments.size > 0 then
+						write("(")
+						from
+							var it : Iterator<OCLExpressionCS> init visitable.arguments.iterator
+						until
+							it.isOff
+						loop
+							it.next.accept(self)
+							if  it.hasNext then
+								write(", ") 
+							end
+						end
+						write(")")
+			  		end				
 			  	
 			  
 			  	pathContextCounter := pathContextCounter-1
@@ -682,7 +714,7 @@ class StringWriter inherits StdIO
 			  		pathExpression:=pathExpressionStack.pop
 			  		
 			  		visibleVariable.remove(currentVariableName)
-			  		visibleVariableMultiplicities.remove(currentVariableName)
+			  		//visibleVariableMultiplicities.remove(currentVariableName)
 			  		
 			  	end
 			  	
@@ -750,11 +782,14 @@ class StringWriter inherits StdIO
           				__operators.put("-", MinusSignOp.new)
           				__operators.put("*",  FunctionCallOp.new.withName("mult"))
           				__operators.put("/",  FunctionCallOp.new.withName("div"))
-          				__operators.put("includes", FunctionCallOp.new.withName("contains"))
-           				__operators.put("includesAll", FunctionCallOp.new.withName("containsAll"))
-          				__operators.put("size", FunctionCallOp.new)
-          				__operators.put("at", FunctionCallOp.new.withName("elementAt"))
-          				__operators.put("indexOf", FunctionCallOp.new)
+          				__operators.put("includes", functionCollectionCall.new)
+           				__operators.put("includesAll", functionCollectionCall.new)
+          				__operators.put("excludes", functionCollectionCall.new)
+           				__operators.put("excludesAll", functionCollectionCall.new)
+          				
+          				__operators.put("size", functionCollectionCall.new)
+          				__operators.put("at", functionCollectionCall.new.withName("elementAt"))
+          				__operators.put("indexOf", functionCollectionCall.new)
           				__operators.put("oclAsType", CastOp.new)   
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
           				__operators.put("not", functionCall)  
@@ -762,12 +797,22 @@ class StringWriter inherits StdIO
           				__operators.put("isEmpty", EmptyCallOp.new.withName("empty"))
            				__operators.put("oclIsTypeOf", FunctionCallOp.new.withName("isKindOf"))
            				__operators.put("oclIsKindOf", FunctionCallOp.new.withName("isInstanceOf"))
-           				__operators.put("union", FunctionCallOp.new)
-           				__operators.put("intersection", FunctionCallOp.new) 
-           				__operators.put("including", functionCall)  
-           				__operators.put("excluding", functionCall)  
-           				__operators.put("last", functionCall)  
-           				__operators.put("first", functionCall)  
+           				__operators.put("union", functionCollectionCall.new)
+           				__operators.put("intersection", functionCollectionCall.new) 
+           				__operators.put("including", functionCollectionCall.new)   
+           				__operators.put("excluding", functionCollectionCall.new)  
+           				__operators.put("last", functionOrderedCollectionCall.new)  
+           				__operators.put("first", functionOrderedCollectionCall.new)  
+           				__operators.put("count", functionCollectionCall.new)  
+           				__operators.put("asBag", functionCollectionCall.new)  
+           				__operators.put("asSet", functionCollectionCall.new)  
+           				__operators.put("asOrderedSet", functionCollectionCall.new)  
+           				__operators.put("asSequence", functionCollectionCall.new)  
+           				__operators.put("subSequence", functionCollectionCall.new)  
+           				__operators.put("prepend", functionCollectionCall.new)  
+           				__operators.put("insertAt", functionCollectionCall.new)  
+           				__operators.put("append", functionCollectionCall.new)  
+           				__operators.put("flatten", functionCollectionCall.new)  
            				
           				__operators.put("symmetricDifference", functionCall)
           			end
@@ -782,23 +827,10 @@ class StringWriter inherits StdIO
 				if policy != void then
 					policy.generate(visitable, self)
 				else
-					write("Manage Operation Call")
-					if visitable.arguments.size > 0 then
-						write("(")
-						from
-							var it : Iterator<OCLExpressionCS> init visitable.arguments.iterator
-						until
-							it.isOff
-						loop
-							it.next.accept(self)
-							if  it.hasNext then
-								write(", ") 
-							end
-						end
-						write(")")
-			  		end
+					//write("Manage Operation Call")
+
 					
-					//visitFeatureCallExpCS(visitable)
+					visitFeatureCallExpCS(visitable)
 				end
 				
 			end
