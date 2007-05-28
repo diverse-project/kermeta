@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.3 2007-04-19 14:30:50 dvojtise Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.4 2007-05-28 12:51:41 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -20,7 +20,6 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
@@ -29,6 +28,9 @@ import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 /**
  * This class provides helper functions to create and manage the Eclipse markers when used with Kermeta
  *
@@ -91,11 +93,15 @@ public class KermetaMarkersHelper {
                 	length = ((KMTUnitLoadError)message).getAstNode().getRangeLength();	
                 }
                 else if(message.getNode() != null) {
-                    KermetaASTNode astn = unit.getKMTAstNodeForModelElement(message.getNode());
-                    if (astn != null) {
-                        offset = astn.getRangeStart();
-                        length = astn.getRangeLength();	
+                	ModelReference mr = unit.tracer.getModelReference(message.getNode());
+                    TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+                    if(tr != null){
+                    	if(tr.getFileURI().equals(file.getLocationURI().toString())){
+                    		offset = tr.getCharBeginAt();
+                    		length = tr.getCharEndAt()-offset;	
+                    	}
                     }
+                    
                 }
                 else if(message.getAstNode() != null) {
                     ASTNode astn = message.getAstNode();
@@ -106,7 +112,7 @@ public class KermetaMarkersHelper {
                 
                 if (offset > 0) offset--;
                 
-                if ( length != -1 ) {
+                if ( length != -1 ) {  
                 
                 	map.put("message", realMessage);
                 	if(message instanceof KMUnitError)
@@ -125,7 +131,7 @@ public class KermetaMarkersHelper {
                 	MarkerUtilities.createMarker(file, map, getMarkerType());
         		//MarkerUtilities.createMarker(file, null, getMarkerType());
                 } else {
-                	map.put("message", "One of required file is erroneous. " + message.getMessage());
+                	map.put("message", "Cannot locate error in file, maybe one of required file is erroneous. " + message.getMessage());
                 	if(message instanceof KMUnitError)
                 		map.put("severity", new Integer(2));
                 	else
