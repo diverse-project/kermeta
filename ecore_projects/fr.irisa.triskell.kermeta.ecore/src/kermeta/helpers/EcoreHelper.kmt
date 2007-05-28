@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.5 2007-05-25 17:38:45 bitterjug Exp $
+/* $Id: EcoreHelper.kmt,v 1.6 2007-05-28 08:37:41 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -53,14 +53,14 @@ class EcoreHelper
 	attribute packages : Sequence<EPackage>
 
 	/** load an ECore model */
-    operation loadMetamodel(metamodelUri : String) : Void is do
+    operation loadMetaModel(modelUri : String) : Void is do
     	var repository : EMFRepository init EMFRepository.new 
-    	var resource : Resource init repository.createResource(metamodelUri , ecoreMetamodel)
+    	var resource : Resource init repository.createResource(modelUri , ecoreMetamodel)
     	resource.load
     	var instances : Set<Object> init resource.instances
     	// retreives only the packages
     	packages := instances.select { e | EPackage.isInstance(e) }.collect{p | var pack : EPackage
-    	    	pack ?= p}
+    	pack ?= p}
     end
 
 
@@ -78,7 +78,7 @@ class EcoreHelper
 
 	
 	/** retreives the qualified name of a class */
-	operation getClassQualifiedName(c : EClass) : String is do
+	operation getClassifierQualifiedName(c : EClassifier) : String is do
 		if (c.ePackage != void) then
 			result := getPackageQualifiedName(c.ePackage) + "::" + c.name			
 		else
@@ -120,6 +120,38 @@ class EcoreHelper
 		 	raise InvalidContextName.new
 		 end
 	end
+	
+		operation getClassifierFromPath(contextQualifiedName : String, path : String, token : String) : EClassifier raises InvalidPathName,MetaModelNotLoaded is do
+		
+		 var context : EClass 
+		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
+		 if (context != void) then
+		 
+			 var splitpath: OrderedSet<String> init self.splitString(path,token)
+			 var feature : EStructuralFeature
+		 
+			 from var it : Iterator<String> init splitpath.iterator
+		 		until (it.isOff) loop
+		 		var s : String init it.next
+		 
+			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
+			if (feature == void) then
+				//stdio.writeln("context" + s)
+		 		raise InvalidPathName.new
+		 	end
+			 	
+			 	context ?= feature.eType
+		 	end
+		 	if (feature != void) then
+		 		result := feature.eType
+			else
+		 		raise InvalidPathName.new
+		 	end
+		 else
+		 	raise InvalidContextName.new
+		 end
+	end
+	
 
 
 	operation test():Void is do
