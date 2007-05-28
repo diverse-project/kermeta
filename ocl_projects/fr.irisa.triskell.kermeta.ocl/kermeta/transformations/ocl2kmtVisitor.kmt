@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.12 2007-05-28 08:25:59 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.13 2007-05-28 08:44:23 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -62,7 +62,25 @@ class StringWriter inherits StdIO
   		end 
  
  
-		reference ecoreHelper : EcoreHelpers::EcoreHelper
+				reference __ecoreHelper : EcoreHelpers::EcoreHelper
+		
+		operation setMetamodelURI(metamodelURI: String) is
+			do
+				__ecoreHelper := EcoreHelpers::EcoreHelper.new
+				__ecoreHelper.loadMetamodel(metamodelURI)  
+			end
+			
+		operation ecoreHelper(): EcoreHelpers::EcoreHelper is
+			do
+				if __ecoreHelper == void then
+					var e : Exception init Exception.new
+					e.message := "Metamodel URI must be set before visiting"
+					raise e
+				else
+					result := __ecoreHelper
+				end
+			end
+			
 		reference  __io: StdIO 
 		
 		operation getIo(): StdIO is
