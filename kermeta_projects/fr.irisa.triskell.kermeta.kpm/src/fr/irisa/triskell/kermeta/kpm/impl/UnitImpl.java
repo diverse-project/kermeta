@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnitImpl.java,v 1.13 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: UnitImpl.java,v 1.14 2007-05-28 12:16:19 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
 
 import java.util.Iterator;
 import java.util.List;
@@ -334,9 +336,19 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 * @generated NOT
 	 */
 	public void receiveEvent(String event, boolean synchrone, Map args, IProgressMonitor monitor) {
-		for ( Rule currentRule : (List <Rule>) getRules() ) {
-			if ( currentRule.getEvent().equals(event) )
-				currentRule.process(this, synchrone, args, monitor);
+		
+		if ( monitor == null )
+			monitor = new NullProgressMonitor();
+		
+		try {
+			monitor.beginTask("Processing Rules", getRules().size());
+		
+			for ( Rule currentRule : (List <Rule>) getRules() )
+				if ( currentRule.getEvent().equals(event) )
+					currentRule.process(this, synchrone, args, new SubProgressMonitor(monitor, 1) );
+				
+		} finally {
+			monitor.done();
 		}
 	}
 
@@ -351,24 +363,6 @@ public class UnitImpl extends EObjectImpl implements Unit {
 			if ( iterator.next().getName().equals(name) )
 				return true;
 		return false;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void receiveSynchroneEvent(String event, Map args) {
-		receiveEvent(event, true, args, null);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void receiveAsynchroneEvent(String event, Map args) {
-		receiveEvent(event, false, args, null);
 	}
 
 	/**
@@ -443,6 +437,15 @@ public class UnitImpl extends EObjectImpl implements Unit {
 	 */
 	public void receiveSynchroneEvent(String event, Map args, IProgressMonitor monitor) {
 		receiveEvent(event, true, args, monitor);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void receiveAsynchroneEvent(String event, Map args, IProgressMonitor monitor) {
+		receiveEvent(event, false, args, monitor);
 	}
 
 	/**

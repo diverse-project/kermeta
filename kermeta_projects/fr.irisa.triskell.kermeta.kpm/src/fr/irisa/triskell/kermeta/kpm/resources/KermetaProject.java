@@ -1,4 +1,4 @@
-/*$Id: KermetaProject.java,v 1.6 2007-05-25 15:04:38 ftanguy Exp $
+/*$Id: KermetaProject.java,v 1.7 2007-05-28 12:16:19 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -126,10 +126,10 @@ public class KermetaProject {
 				if ( value.equals("true") ) {
 					HashMap map = new HashMap();
 					map.put("forceOpening", true);
-					currentUnit.receiveAsynchroneEvent( "open", map );
+					currentUnit.receiveAsynchroneEvent( "open", map, null );
 					project.setPersistentProperty(key, "false");
 				} else
-					currentUnit.receiveAsynchroneEvent( "open", null );
+					currentUnit.receiveAsynchroneEvent( "open", null, null );
 			}
 		}
 	}

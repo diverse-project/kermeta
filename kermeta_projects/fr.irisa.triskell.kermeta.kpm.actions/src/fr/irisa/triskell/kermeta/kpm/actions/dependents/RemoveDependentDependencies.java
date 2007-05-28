@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.4 2007-05-15 15:22:45 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.5 2007-05-28 12:16:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -29,13 +29,14 @@ public class RemoveDependentDependencies implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
 			
-			if ( monitor.isCanceled() )
-				return;
-			
+		if ( monitor.isCanceled() )
+			return;
+		
+		try {
+		
+			monitor.beginTask("", 1);
 			monitor.subTask("Removing Dependent Dependencies for " + unit.getValue());
-			
-			
-			
+									
 			/*
 			 * 
 			 * Getting the Kermeta Unit.
@@ -82,6 +83,13 @@ public class RemoveDependentDependencies implements IAction {
 				unit.getDependents().remove(currentDependency);
 			}
 			
+			monitor.worked(1);
+			
+		} finally {
+			
+			monitor.done();
+			
+		}
 
 	}
 

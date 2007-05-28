@@ -1,4 +1,4 @@
-/*$Id: KMT2KM.java,v 1.3 2007-04-24 13:35:38 ftanguy Exp $
+/*$Id: KMT2KM.java,v 1.4 2007-05-28 12:16:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -28,72 +28,96 @@ public class KMT2KM implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
 			
-		/*
-		 * 
-		 * Getting the path (relative to the workspace) of the output file.
-		 * 
-		 * 
-		 */
-		String outputString = NameFilterHelper.getOuputString(unit, out);
-		IFile outputFile = ResourceHelper.getIFile( outputString );
 		
-		/*
-		 * 
-		 * If empty string, out is obviously corrupted.
-		 * We quit.
-		 * 
-		 * 
-		 */
-		if ( outputString.equals("") )
+		if ( monitor.isCanceled() )
 			return;
 		
-		/*
-		 * 
-		 * Check if the out has been disabled.
-		 * 
-		 */
-		IFile inputFile = ResourceHelper.getIFile( unit.getValue() );
 		try {
-			String value = ResourceHelper.getProperty(inputFile, "fr.irisa.triskell.kermeta.kpm.generateKM");
-			if ( ! Boolean.parseBoolean(value) )
-				return;
-		} catch (PropertyNotFoundException e1) {
-			return;
-		}
-		
-		
-		/*
-		 * 
-		 * Getting the Kermeta Unit.
-		 * The kermeta unit can be null if there is no need to regenerate the km.
-		 * 
-		 * 
-		 */
-		KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
-		
-		if ( kermetaUnit == null )
-			return;
-		
-		/*
-		 * 
-		 * The transformation is processed if and only if the Kermeta Unit
-		 * has no erors.
-		 * 
-		 * 
-		 */
-		if ( ! kermetaUnit.messages.hasError() ) {
-			kermetaUnit.saveAsXMIModel( outputFile.getLocation().toString() );
+			
 			/*
 			 * 
-			 * Refereshing the workspace to display the new file.
+			 * Getting the path (relative to the workspace) of the output file.
+			 * 
 			 * 
 			 */
+			String outputString = NameFilterHelper.getOuputString(unit, out);
+			IFile outputFile = ResourceHelper.getIFile( outputString );
+			
+			/*
+			 * 
+			 * If empty string, out is obviously corrupted.
+			 * We quit.
+			 * 
+			 * 
+			 */
+			if ( outputString.equals("") )
+				return;
+			
+			/*
+			 * 
+			 * Check if the out has been disabled.
+			 * 
+			 */
+			IFile inputFile = ResourceHelper.getIFile( unit.getValue() );
 			try {
-				outputFile.refreshLocal(0, monitor);
-			} catch (CoreException e) {
-				e.printStackTrace();
+				String value = ResourceHelper.getProperty(inputFile, "fr.irisa.triskell.kermeta.kpm.generateKM");
+				if ( ! Boolean.parseBoolean(value) )
+					return;
+			} catch (PropertyNotFoundException e1) {
+				return;
 			}
+			
+
+			/*
+			 * 
+			 * Display information to the user.
+			 * 
+			 */
+			monitor.beginTask("", 1);
+			monitor.subTask(inputFile.getName().toString() + " converted to " + outputFile.getName().toString());
+			
+			
+			/*
+			 * 
+			 * Getting the Kermeta Unit.
+			 * The kermeta unit can be null if there is no need to regenerate the km.
+			 * 
+			 * 
+			 */
+			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
+			
+			if ( kermetaUnit == null )
+				return;
+			
+			/*
+			 * 
+			 * The transformation is processed if and only if the Kermeta Unit
+			 * has no erors.
+			 * 
+			 * 
+			 */
+			if ( ! kermetaUnit.messages.hasError() ) {
+				kermetaUnit.saveAsXMIModel( outputFile.getLocation().toString() );
+				/*
+				 * 
+				 * Refereshing the workspace to display the new file.
+				 * 
+				 */
+				try {
+					outputFile.refreshLocal(0, monitor);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			monitor.worked(1);
+			
+		} finally {
+			
+			monitor.done();
+			
 		}
+
 	}
 
 }

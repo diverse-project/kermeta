@@ -1,4 +1,4 @@
-/*$Id: Typecheck.java,v 1.2 2007-04-13 14:47:11 ftanguy Exp $
+/*$Id: Typecheck.java,v 1.3 2007-05-28 12:16:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -27,10 +27,13 @@ public class Typecheck implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
 			
-			if ( monitor.isCanceled() )
-				return;
+		if ( monitor.isCanceled() )
+			return;
+		
+		try {
 			
-			monitor.subTask("Typechecking " + unit.getValue());
+			monitor.beginTask("", 1);
+			monitor.subTask( "Typechecking " + unit.getValue() );
 			
 			/*
 			 * 
@@ -108,6 +111,14 @@ public class Typecheck implements IAction {
 			 * 
 			 */
 			KermetaUnitHost.getInstance().update(unit, kermetaUnit);
+			
+			monitor.worked(1);
+			
+		} finally {
+			
+			monitor.done();
+			
+		}
 
 	}
 

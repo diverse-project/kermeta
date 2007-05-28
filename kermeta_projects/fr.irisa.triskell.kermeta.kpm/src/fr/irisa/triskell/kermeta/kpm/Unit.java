@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Unit.java,v 1.12 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: Unit.java,v 1.13 2007-05-28 12:16:19 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -210,26 +210,26 @@ public interface Unit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @generated
+	 */
+	void receiveSynchroneEvent(String event, Map args, IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
+	 * @generated
+	 */
+	void receiveAsynchroneEvent(String event, Map args, IProgressMonitor monitor);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
 	boolean hasRuleNamed(String name);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void receiveSynchroneEvent(String event, Map args);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	void receiveAsynchroneEvent(String event, Map args);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -286,14 +286,6 @@ public interface Unit extends EObject {
 	 * @generated
 	 */
 	Dependency findDependentUnit(String type, Unit unit);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model monitorDataType="fr.irisa.triskell.kermeta.kpm.IProgressMonitor"
-	 * @generated
-	 */
-	void receiveSynchroneEvent(String event, Map args, IProgressMonitor monitor);
 
 	/**
 	 * <!-- begin-user-doc -->

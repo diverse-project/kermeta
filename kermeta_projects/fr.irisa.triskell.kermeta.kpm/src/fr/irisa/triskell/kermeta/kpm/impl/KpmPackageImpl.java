@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.11 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.12 2007-05-28 12:16:19 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -1128,10 +1128,12 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		op = addEOperation(unitEClass, null, "receiveSynchroneEvent");
 		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
 		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
 
 		op = addEOperation(unitEClass, null, "receiveAsynchroneEvent");
 		addEParameter(op, ecorePackage.getEString(), "event", 0, 1);
 		addEParameter(op, ecorePackage.getEMap(), "args", 0, 1);
+		addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1);
 
 		op = addEOperation(unitEClass, null, "beDependentOf");
 		addEParameter(op, this.getUnit(), "unit", 0, 1);

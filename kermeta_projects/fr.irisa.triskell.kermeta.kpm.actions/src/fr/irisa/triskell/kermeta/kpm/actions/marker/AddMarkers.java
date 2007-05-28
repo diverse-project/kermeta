@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.4 2007-05-15 15:22:45 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.5 2007-05-28 12:16:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -36,12 +36,14 @@ public class AddMarkers implements IAction, Interest {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
 		
-			if ( monitor.isCanceled() )
-				return;
-			
+		if ( monitor.isCanceled() )
+			return;
+		
+		try {
+		
+			monitor.beginTask("", 1);
 			monitor.subTask("Adding Markers to " + unit.getValue());
-			
-			
+						
 			/*
 			 * 
 			 * Getting the Kermeta Unit.
@@ -142,6 +144,14 @@ public class AddMarkers implements IAction, Interest {
 				markedUnits.clear();
 				//markDependent(out, file, unit, unit, markedUnits, true);				
 			}
+			
+			monitor.worked(1);
+			
+		} finally {
+			
+			monitor.done();
+			
+		}
 			
 
 	}

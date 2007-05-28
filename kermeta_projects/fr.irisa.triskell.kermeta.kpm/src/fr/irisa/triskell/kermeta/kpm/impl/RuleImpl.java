@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleImpl.java,v 1.3 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: RuleImpl.java,v 1.4 2007-05-28 12:16:19 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.Job;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -403,22 +404,27 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * 
 	 * @generated NOT
 	 */
-	public void process(Unit unit, boolean synchrone, Map args,
-			IProgressMonitor monitor) {
-
-		if (synchrone) {
-			synchronized (list) {
-				if (list.contains(unit))
-					mustStop.put(unit, true);
-				else {
-					mustStop.put(unit, false);
-					list.add(unit);
+	public void process(Unit unit, boolean synchrone, Map args, IProgressMonitor monitor) {
+	
+		try {
+		
+			monitor.beginTask("", 1);
+			
+			if (synchrone) {
+				synchronized (list) {
+					if (list.contains(unit))
+						mustStop.put(unit, true);
+					else {
+						mustStop.put(unit, false);
+						list.add(unit);
+					}
 				}
-			}
-			processAsSynchrone(unit, args, monitor);
-		} else
-			processAsAsynchrone(unit, args, monitor);
-
+				processAsSynchrone(unit, args, new SubProgressMonitor(monitor, 1) );
+			} else
+				processAsAsynchrone(unit, args, new SubProgressMonitor(monitor, 1) );
+		} finally {
+			monitor.done();
+		}
 		/*
 		 * synchronized(list) { while ( list.contains(unit) ) { try {
 		 * Thread.sleep(500); System.out.println("Dependency " + getName() + "

@@ -1,4 +1,4 @@
-/*$Id: KPMPropertyPage.java,v 1.3 2007-05-04 13:54:13 dvojtise Exp $
+/*$Id: KPMPropertyPage.java,v 1.4 2007-05-28 12:16:19 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -155,7 +155,7 @@ public class KPMPropertyPage extends PropertyPage {
 			if (applyRequireValue || generateKMValue) {
 				HashMap args = new HashMap();
 				args.put("forceOpening", true);
-				project.getProjectUnit().receiveAsynchroneEvent("open", args);
+				project.getProjectUnit().receiveAsynchroneEvent("open", args, null);
 			}
 		}
 	}

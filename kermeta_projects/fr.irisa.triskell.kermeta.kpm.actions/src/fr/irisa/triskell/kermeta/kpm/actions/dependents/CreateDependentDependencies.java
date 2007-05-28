@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.6 2007-04-24 12:40:26 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.7 2007-05-28 12:16:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -30,12 +30,13 @@ import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 public class CreateDependentDependencies implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
-			if ( monitor.isCanceled() )
-				return;
+		if ( monitor.isCanceled() )
+			return;
 			
+		try {
+		
+			monitor.beginTask("", 1);
 			monitor.subTask("Creating Dependent Dependencies for " + unit.getValue());
-			
-			
 			
 			/*
 			 * 
@@ -87,6 +88,14 @@ public class CreateDependentDependencies implements IAction {
 					}
 				}
 			}
+			
+			monitor.worked(1);
+			
+		} finally {
+			
+			monitor.done();
+			
+		}
 		
 	}
 

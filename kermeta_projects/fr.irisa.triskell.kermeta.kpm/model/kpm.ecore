@@ -174,10 +174,12 @@
     <eOperations name="receiveSynchroneEvent">
       <eParameters name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="args" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="receiveAsynchroneEvent">
       <eParameters name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="args" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="beDependentOf">
       <eParameters name="unit" eType="#//Unit"/>

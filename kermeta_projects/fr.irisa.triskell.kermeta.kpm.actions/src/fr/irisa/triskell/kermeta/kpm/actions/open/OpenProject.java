@@ -29,11 +29,10 @@ public class OpenProject implements IAction, Interest {
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
 
 		try {
-			
-			
+						
 			KPM kpm = (KPM) unit.eContainer();	
-			monitor.beginTask("Opening Kermeta Project " + unit.getValue(), kpm.getUnits().size() );
-			
+			monitor.beginTask("", kpm.getUnits().size() );
+			monitor.subTask("Opening Kermeta Project " + unit.getValue());
 			
 			/*
 			 * 
@@ -129,8 +128,6 @@ public class OpenProject implements IAction, Interest {
 			 */
 			KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject(unit.getValue());
 			project.save();
-			
-			
 			
 		} finally {
 			monitor.done();
