@@ -1,4 +1,4 @@
-/* $Id: EcoreHelper.kmt,v 1.7 2007-05-28 08:44:25 bitterjug Exp $
+/* $Id: EcoreHelper.kmt,v 1.8 2007-05-28 20:33:43 barais Exp $
  * File : EcoreHelper.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -86,23 +86,26 @@ class EcoreHelper
 		end
 	end
 	
-	operation isMultiple(contextQualifiedName : String, path : String, token : String) : Boolean raises InvalidPathName,MetaModelNotLoaded is do
+	/*operation isMultiple(contextQualifiedName : String, path : String, token : String) : Boolean raises InvalidPathName,MetaModelNotLoaded is do
 		
 		 var context : EClass 
 		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
 		 if (context != void) then
 		 
 			 var splitpath: OrderedSet<String> init self.splitString(path,token)
-			 var feature : EStructuralFeature
+			 var feature : ETypedElement
 		 
 			 from var it : Iterator<String> init splitpath.iterator
 		 		until (it.isOff) loop
 		 		var s : String init it.next
 		 
 			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
+			 	
 			if (feature == void) then
-				//stdio.writeln("context" + s)
-		 		raise InvalidPathName.new
+				feature := context.eAllOperations.detect{e|e.name == s}
+				if (feature == void) then
+			 		raise InvalidPathName.new
+				end
 		 	end
 			 	
 			 	context ?= feature.eType
@@ -119,33 +122,30 @@ class EcoreHelper
 		 else
 		 	raise InvalidContextName.new
 		 end
-	end
+	end*/
 	
-		operation getClassifierFromPath(contextQualifiedName : String, path : String, token : String) : EClassifier raises InvalidPathName,MetaModelNotLoaded is do
+		operation getETypedElementFromPath(contextQualifiedName : String, path : String, token : String) : ETypedElement raises InvalidPathName,MetaModelNotLoaded is do
 		
 		 var context : EClass 
 		 context ?= self.getEcoreClassifierByQualifiedName(contextQualifiedName)
 		 if (context != void) then
 		 
 			 var splitpath: OrderedSet<String> init self.splitString(path,token)
-			 var feature : EStructuralFeature
-		 
+			 var feature : ETypedElement 
 			 from var it : Iterator<String> init splitpath.iterator
 		 		until (it.isOff) loop
 		 		var s : String init it.next
-		 
+		 		//stdio.writeln("s = " +s)
 			 	feature := context.eAllStructuralFeatures.detect{e|e.name == s}
-			if (feature == void) then
-				//stdio.writeln("context" + s)
-		 		raise InvalidPathName.new
-		 	end
-			 	
-			 	context ?= feature.eType
-		 	end
-		 	if (feature != void) then
-		 		result := feature.eType
-			else
-		 		raise InvalidPathName.new
+				
+				if (feature == void) then
+					feature := context.eAllOperations.detect{e|e.name == s}
+					if (feature == void) then
+			 			raise InvalidPathName.new
+					end
+				end			 	
+				result := feature
+			 	context?= feature.eType
 		 	end
 		 else
 		 	raise InvalidContextName.new
@@ -160,8 +160,8 @@ class EcoreHelper
 		self.initialize
 		self.loadEcoreAsModel()
 		stdio.writeln(self.getEcoreClassifierByQualifiedName("ecore::EPackage").name)		
-		stdio.writeln(self.isMultiple("ecore::EPackage", "eSubpackages.eClassifiers",".").toString)
-		stdio.writeln(self.isMultiple("ecore::EClass", "ePackage",".").toString)
+		//stdio.writeln(self.isMultiple("ecore::EPackage", "eSubpackages.eClassifiers",".").toString)
+		//stdio.writeln(self.isMultiple("ecore::EClass", "ePackage",".").toString)
 
 	end
 
@@ -200,6 +200,9 @@ class EcoreHelper
 		 	var s : String init it.next
 			pack := pack.eSubpackages.detect{e|e.name == s}
 		end
+		if (pack== void) then
+			stdio.writeln("ERROR")
+			end
 		result := pack.eClassifiers.detect{e|e.name == ClassifierName}
 	end
 

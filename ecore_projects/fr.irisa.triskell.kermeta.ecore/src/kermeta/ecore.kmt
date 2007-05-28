@@ -1,10 +1,10 @@
-/* $Id: ecore.kmt,v 1.10 2007-05-03 14:28:21 barais Exp $
+/* $Id: ecore.kmt,v 1.11 2007-05-28 20:33:43 barais Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
  * 	Implementation of ECORE metamodel in Kermeta
  * Authors:	
- *	Vincent MAHÉ vmahe@irisa.fr
+ *	Vincent MAHï¿½ vmahe@irisa.fr
  */
 package ecore;
 
@@ -357,7 +357,11 @@ abstract class ETypedElement
 	property many : EBoolean
 		getter is do
 			//TODO: implement getter for derived property many
-			raise kermeta::exceptions::NotImplementedException.new 
+			if (self.upperBound >1 or self.upperBound == -1 ) then
+		 			result := true
+		 		else
+		 			result:= false
+			 	end	
 		end
 		setter is do
 			//TODO: implement getter for derived property many
