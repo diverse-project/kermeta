@@ -1,4 +1,4 @@
-/* $Id: NamedElementHelper.java,v 1.2 2006-10-27 11:58:15 dvojtise Exp $
+/* $Id: NamedElementHelper.java,v 1.3 2007-05-28 14:42:43 cfaucher Exp $
  * Project   : Kermeta 
  * File      : NamedElementHelper.java
  * License   : EPL
@@ -17,6 +17,10 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
  *
  */
 public class NamedElementHelper {
+	
+	public static final String doublePointSeparator = "::";
+	
+	public static final String simplePointSeparator = ".";
 
 	/**
 	 * Get the fully qualified name of a NamedElement
@@ -24,14 +28,24 @@ public class NamedElementHelper {
 	 * This is usefull when dealing with textual syntax of kermeta
 	 */
 	public static String getMangledQualifiedName(NamedElement element) {
+		return getMangledQualifiedName(element, doublePointSeparator);
+	}
+	
+	/**
+	 * Get the fully qualified name of a NamedElement
+	 * Apply a mangling if necessary (ie. add a leading ~ before keywords)
+	 * This is usefull when dealing with textual syntax of kermeta
+	 */
+	public static String getMangledQualifiedName(NamedElement element, String separator) {
 		if (element == null) return "";
 		if (element.eContainer() != null
 				&& element.eContainer() instanceof NamedElement)
-			return getMangledQualifiedName((NamedElement) element.eContainer()) + "::"
+			return getMangledQualifiedName((NamedElement) element.eContainer(), separator) + separator
 					+ KMTHelper.getMangledIdentifier(element.getName());
 		else
 			return KMTHelper.getMangledIdentifier(element.getName());
 	}
+	
 	/**
 	 * Get the fully qualified name of a NamedElement
 	 * (no mangling)
@@ -42,4 +56,5 @@ public class NamedElementHelper {
 			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + element.getName();
 		else return element.getName();
 	}
+   
 }
