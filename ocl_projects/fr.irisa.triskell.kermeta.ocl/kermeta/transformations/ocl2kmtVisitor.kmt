@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.18 2007-05-28 13:04:24 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.19 2007-05-28 13:26:10 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -470,7 +470,7 @@ class StringWriter inherits StdIO
 
 		method visitStringLiteralExpCS(visitable : StringLiteralExpCS) : Void is
 			do
-				write(visitable.symbol)
+				write("\"" + visitable.symbol + "\"")
 			end
 
 		method visitBooleanLiteralExpCS(visitable : BooleanLiteralExpCS) : Void is
@@ -572,35 +572,21 @@ class StringWriter inherits StdIO
 		reference currentVariableName : String
 		method visitVariableExpCS(visitable : VariableExpCS) : Void is
 			do
-				//self.currentPackagename + "::" + self.currentClassifiername
-				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
-				//writeln(pathExpression.substring(0, pathExpression.size -1))
-				//if (contextPathExpression != void and contextVariable == visitable.simpleNameCS.~value) then
 				 currentClassifier := self.visibleVariable.getValue( visitable.simpleNameCS.~value)
 				
-					//previousIsMultiple := false
-					//contextPathExpression := void	
-				//else
 				pathExpressionStack.push(pathExpression)
 				pathExpression := ""//pathExpression + visitable.simpleNameCS.~value+"."
 				pathContextCounter := 0
 				//var isMultiple : Boolean
 				previousIsMultiple :=  self.visibleVariableMultiplicities.getValue( visitable.simpleNameCS.~value)
 				 
-				
-					 	
-				//writeln(isMultiple.toString)
-				
-				/*if (previousIsMultiple) then
-					write("collect{e | e.")
+				if (visitable.simpleNameCS.~value.size == visitable.simpleNameCS.endOffset - visitable.simpleNameCS.startOffset +1 ) then
 					write( visitable.simpleNameCS.~value)
-					write("}")					
-				else*/
-				write( visitable.simpleNameCS.~value)
-				/*end*/
+				else
+					write("\"" +  visitable.simpleNameCS.~value+"\"")
 				
-				//end	
-				//visitable.simpleNameCS.accept(self)
+				end
+				
 			end
 		
 		method visitVariableCS(visitable : VariableCS) : Void is
