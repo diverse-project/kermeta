@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.15 2007-02-08 15:32:42 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.16 2007-05-29 13:03:55 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -215,6 +215,7 @@ public class UnitExporterWizard extends Wizard {
 						tracePage.getFileName()));
 		unit = createUnit();
 		unit.load();
+		unit.typeCheck(null);
 
 		if (unit.messages.hasError()) {
 			Shell theShell = this.getContainer().getShell();
