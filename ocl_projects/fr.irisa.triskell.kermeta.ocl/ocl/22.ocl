@@ -1,6 +1,6 @@
 package sample
 -- 22: collect
 context A inv:
-	b->collect( o | o.y )
+	b->collect( o | true )
 
 endpackage

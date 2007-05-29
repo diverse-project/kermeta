@@ -1,6 +1,6 @@
 package sample
 -- 21: reject
 context A inv:
-	b->reject( o | o.y = 1 )
+	b->reject( o | true )
 
 endpackage

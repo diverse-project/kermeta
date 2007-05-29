@@ -1,6 +1,6 @@
 package sample
 -- 50: excluding
 context A inv:
-	b->excluding(b->first())
+	b->excluding(ab)
 
 endpackage

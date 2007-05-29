@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sample">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sample" nsURI="http://sample" nsPrefix="sample">
   <eClassifiers xsi:type="ecore:EClass" name="A">
     <eOperations name="getB" eType="//B">
       <eParameters name="a">
@@ -14,7 +14,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="b" upperBound="-1" eType="//B"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="d" lowerBound="1" eType="//D"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ab" lowerBound="1" eType="//B"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="B">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="y">

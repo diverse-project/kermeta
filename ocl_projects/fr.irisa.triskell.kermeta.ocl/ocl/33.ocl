@@ -1,7 +1,7 @@
 package sample
 -- 33: at
 context A inv:
-	s->at(1)
+	b->at(1)
 
 endpackage
 

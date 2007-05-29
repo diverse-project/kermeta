@@ -1,6 +1,6 @@
 package sample
 -- 52: prepend
 context A inv:
-	b->prepend(b->first())
+	b->prepend(ab)
 
 endpackage
