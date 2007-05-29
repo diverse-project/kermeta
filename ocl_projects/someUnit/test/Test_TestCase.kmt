@@ -1,4 +1,4 @@
-/* $Id: Test_TestCase.kmt,v 1.4 2007-05-29 09:04:19 bitterjug Exp $
+/* $Id: Test_TestCase.kmt,v 1.5 2007-05-29 12:23:59 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -261,8 +261,8 @@ class DidiersTestSuite inherits newUnit::TestCase {
 	operation testSomethingThatMightFail() : Void is
 		do
 			DidiersExample.new.doSomething
-		rescue (afe:  assert::AssertionFailedError)
-			fail(afe.message + "\nstack trace:\n" +  afe.stackTrace)
+  			//rescue (afe:  assert::AssertionFailedError)
+			//fail(afe.message + "\nstack trace:\n" +  afe.stackTrace)
 		end
 }
 

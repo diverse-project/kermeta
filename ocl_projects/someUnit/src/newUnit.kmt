@@ -1,4 +1,4 @@
-/* $Id: newUnit.kmt,v 1.3 2007-05-29 09:03:58 bitterjug Exp $
+/* $Id: newUnit.kmt,v 1.4 2007-05-29 12:23:59 bitterjug Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -424,6 +424,8 @@ abstract class TestCase inherits Test, Fallible
 					rescue (e : exceptions::Exception)
 						getLog.addTearDownError(self, e)
 					end
+				rescue (afe:  assert::AssertionFailedError)
+					getLog.addFailure(self, afe.message + "\nstack trace:\n" +  afe.stackTrace)
 				rescue (e1 : exceptions::Exception)
 					getLog.addTestError(self,e1)
 					do
