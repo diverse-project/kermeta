@@ -1932,6 +1932,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 <emphasis role="strong">package</emphasis> root;
 
 <emphasis role="strong">require</emphasis> kermeta
+<emphasis role="strong">require</emphasis> "cs.ecore"
 
 <emphasis role="strong">using</emphasis> kermeta::standard
 <emphasis role="strong">using</emphasis> kermeta::persistence
