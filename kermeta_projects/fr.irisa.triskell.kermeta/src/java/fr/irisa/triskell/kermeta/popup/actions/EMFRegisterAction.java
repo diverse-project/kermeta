@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.jface.action.IAction;
@@ -15,8 +16,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.view.RegisteredPackageView;
 
 /**
  * @author dtouzet
@@ -70,6 +74,18 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 	 * 
 	 */
 	protected void displayRegisteredPackages() {
+		try {
+			RegisteredPackageView view;
+			view = (RegisteredPackageView)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView( RegisteredPackageView.ID );
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().bringToTop(view);
+			view.refresh();
+		} catch (PartInitException e) {
+			KermetaPlugin.getDefault().getLog().log(new Status(Status.WARNING, "fr.irisa.triskell.kermeta",
+                    Status.OK, 
+                    "not able to open Registered Package View : \""+RegisteredPackageView.ID+"\"", 
+                    e));
+		}
+		/* old way, using the console
 		String pList = "Registered packages:\n";
 		String uri = null;
 		EPackage p = null;
@@ -88,6 +104,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 		}
 		
 		KermetaPlugin.getDefault().getConsole().println(pList);
+		*/
 	}
 	
 	

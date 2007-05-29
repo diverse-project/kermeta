@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.action.IAction;
 
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+
 
 /**
  * @author dtouzet
@@ -47,6 +49,7 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 			ecoreFile = (IFile) it.next();
 			
 			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); 
+			KermetaPlugin.getLogger().debug("Unregistering file : " +strURI);
 			mmURI = URI.createURI(strURI);
 			res = rs.getResource(mmURI, true);
 			
@@ -55,6 +58,7 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 		}
 		
 		displayRegisteredPackages();
+				
 	}
 
 	
@@ -72,6 +76,7 @@ public class EcoreUnregisteringAction extends EMFRegisterAction {
 		}
 		
 		Registry.INSTANCE.remove(pack.getNsURI());
+		KermetaPlugin.getLogger().debug("   Unregistering NsURI : " +pack.getNsURI());
 	}
 
 }

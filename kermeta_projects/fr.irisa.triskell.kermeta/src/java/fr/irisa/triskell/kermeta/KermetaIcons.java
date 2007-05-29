@@ -1,4 +1,4 @@
-/* $Id: KermetaIcons.java,v 1.3 2007-01-09 09:17:12 ftanguy Exp $
+/* $Id: KermetaIcons.java,v 1.4 2007-05-29 16:17:47 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta (First iteration)
  * File      : KermetaIcons.java
  * License   : EPL
@@ -61,10 +61,14 @@ public class KermetaIcons {
 			Image icon_file = ImageDescriptor.createFromURL(new URL(pluginURL, "/images/kermeta.png")).createImage();			
 			Image icon_project = ImageDescriptor.createFromURL(new URL(pluginURL, "/images/project.gif")).createImage();
 			Image icon_logo = ImageDescriptor.createFromURL(new URL(pluginURL, "/images/kermeta_logo.gif")).createImage();
+			Image icon_ecoreModelFile = ImageDescriptor.createFromURL(new URL(pluginURL, "/images/EcoreModelFile.gif")).createImage();
+			Image icon_generatedPackage = ImageDescriptor.createFromURL(new URL(pluginURL, "/images/generated_package.gif")).createImage();
 			icons.put(KermetaConstants.FOLDER, icon_folder); // instance
 			icons.put(KermetaConstants.FILE, icon_file);
 			icons.put(KermetaConstants.PROJECT, icon_project);
 			icons.put(KermetaConstants.KLOGO, icon_logo);
+			icons.put(KermetaConstants.IMG_ECORE_FILE, icon_ecoreModelFile);
+			icons.put(KermetaConstants.IMG_GENERATED_PACKAGE, icon_generatedPackage);
 		} catch (MalformedURLException e) { 
 			e.printStackTrace(); 
 		}	
