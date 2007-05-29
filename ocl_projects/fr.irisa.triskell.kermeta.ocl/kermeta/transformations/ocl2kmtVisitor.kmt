@@ -1,4 +1,4 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.24 2007-05-29 15:50:13 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.25 2007-05-29 15:52:11 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -787,10 +787,10 @@ class StringWriter inherits StdIO
           				__operators.put("oclIsTypeOf", FunctionCallOp.new.withName("isKindOf"))
            				__operators.put("oclIsKindOf", FunctionCallOp.new.withName("isInstanceOf"))
           				
+          				__operators.put("size", FunctionCallOp.new)
           				
           				
           				//Standard library : Colllection operation
-          				__operators.put("size", functionCollectionCall.new)
           				__operators.put("includes", functionCollectionCall.new)
            				__operators.put("excludes", functionCollectionCall.new)
            				__operators.put("count", functionCollectionCall.new)  
