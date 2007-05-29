@@ -1,4 +1,4 @@
-/* $Id: OCLMKMTPrinter.kmt,v 1.13 2007-05-29 15:50:13 barais Exp $
+/* $Id: OCLMKMTPrinter.kmt,v 1.14 2007-05-29 20:30:03 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -39,8 +39,8 @@ class OCLKMTPrinter
 			//modelURI := "../../model/17.xmi"		
 			//modelURI := "../../model/67.xmi"		
 			modelURI := "../../model/55.xmi"		
-			modelURI := "../../model/65.xmi"		
-			   
+			modelURI := "../../model/48.xmi"		
+			    
 			repository := EMFRepository.new
 			helper := OCLHelpers::OCLHelper.new
 	    	//helper.__ecoreOCLMetamodel :="../../ocl/sample.ecore"

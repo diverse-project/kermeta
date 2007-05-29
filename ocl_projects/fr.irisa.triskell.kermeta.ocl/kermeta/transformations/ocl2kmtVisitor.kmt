@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.26 2007-05-29 17:36:28 bitterjug Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.26 2007-05-29 17:36:28 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.27 2007-05-29 20:26:09 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.27 2007-05-29 20:26:09 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -61,6 +61,7 @@ class StringWriter inherits StdIO
 			visibleVariable := kermeta::utils::Hashtable<String,ecore::ETypedElement>.new
 			//visibleVariableMultiplicities := kermeta::utils::Hashtable<String,Boolean>.new
 			self.pathExpressionStack := kermeta::utils::Stack<String>.new
+			iteratorVariable := false
   		end 
  
  
@@ -402,6 +403,13 @@ class StringWriter inherits StdIO
 				visitable.inExpression.accept(self)
 				writeln("")
 				write("end")
+				visitable.variables.each{ v |
+						//writeln("")
+						//write("var " )
+						//v.accept(self)
+						visibleVariable.remove(v.name.toString)
+					}
+				
 			end
 
 		method visitIfExpCS(visitable : IfExpCS) : Void is
@@ -525,27 +533,6 @@ class StringWriter inherits StdIO
         	__iterators.put(oclIteratorName, policy)
         end
         
-        property readonly iterators : Hashtable<String, IteratorPolicy>
-        	getter is
-        		do
-        			if __iterators == void then
-        				__iterators := Hashtable<String, IteratorPolicy>.new
-        				var doNothing : IteratorPolicy init IteratorPolicy.new
-        				var sameName: IteratorPolicy init SimpleIteratorIP.new
-        				var functionWithSameName : IteratorPolicy init FunctionIP.new
-        				addIterator("exists", sameName)
-        				addIterator("forAll", sameName)
-        				addIterator("isUnique", UniqueIP.new)
-        				addIterator("any", SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
-        				addIterator("select", SimpleIteratorIP.new.withName("select"))
-        				addIterator("collect", sameName)
-        				addIterator("collectNested", doNothing)
-        				addIterator("sortedBy", sameName)
-        				addIterator("reject", sameName)
-        			end
-        			result := __iterators
-        		end
         		
 		method visitIteratorExpCS(visitable : IteratorExpCS) : Void is
 			do
@@ -591,6 +578,8 @@ class StringWriter inherits StdIO
 				//var isMultiple : Boolean
 				do 
 					previousIsMultiple :=  self.visibleVariable.getValue( visitable.simpleNameCS.~value).many
+					//writeln("variable name "+visitable.simpleNameCS.~value)
+				 
 				rescue (e: kermeta::exceptions::CallOnVoidTarget)
 					isNotAccessible := true
 					//write("/*Variable "+  visitable.simpleNameCS.~value + " is not accessible*/")
@@ -608,27 +597,52 @@ class StringWriter inherits StdIO
 				
 			end
 		
+		reference iteratorVariable :Boolean
+		
 		method visitVariableCS(visitable : VariableCS) : Void is
 			do
-			
 				var classifier : ecore::ETypedElement 
 				if (pathExpression.size == 0) then
+					//writeln("passe pas la")
 					classifier :=  currentClassifier
-					if (classifier!= void) then
+					if (classifier!= void  and iteratorVariable.~not) then							
 						visibleVariable.put(visitable.name.toString,classifier)
 						//visibleVariableMultiplicities.put(visitable.name.toString,false)
-					end	
+					else 
+						if (classifier!= void) then
+							var tmp : ecore::EAttribute init ecore::EAttribute.new
+							tmp.name := visitable.name.toString
+							tmp.eType := classifier.eType
+							tmp.upperBound := 1
+							visibleVariable.put(tmp.name,tmp)
+							iteratorVariable:=false
+						else
+							//writeln("no cache for variable " + visitable.name)
+							
+						end
+						
+					end
+						
 				else
 					classifier := self.ecoreHelper.getETypedElementFromPath(
 						self.currentPackagename + "::" + self.currentClassifiername,
 						 pathExpression.substring(0, pathExpression.size -1),".")
 					
-				if (classifier!= void) then
-					visibleVariable.put(visitable.name.toString,classifier)
+					if (classifier!= void) then
+						if (iteratorVariable.~not) then
+							var tmp : ecore::EAttribute init ecore::EAttribute.new
+							tmp.name := visitable.name.toString
+							tmp.eType := classifier.eType
+							tmp.upperBound := 1
+							visibleVariable.put(tmp.name,tmp)
+							iteratorVariable:=false
+						else
+							visibleVariable.put(visitable.name.toString,classifier)
+						end
 					//visibleVariableMultiplicities.put(visitable.name.toString, self.ecoreHelper.isMultiple(self.currentPackagename + "::" + self.currentClassifiername, pathExpression.substring(0, pathExpression.size -1),"."))
-				else
-					writeln("no cache for variable " + visitable.name)
-				end
+					else
+						//writeln("no cache for variable " + visitable.name)
+					end
 				end
 				write(visitable.name.toString)
 				//contextPathExpression := pathExpression
@@ -638,6 +652,14 @@ class StringWriter inherits StdIO
 				if visitable.typeCS != void then
 					write(" : ")
 					visitable.typeCS.accept(self)
+					var tmp : ecore::EAttribute init ecore::EAttribute.new
+					tmp.name := visitable.name.toString
+					var type :ecore::EDataType init ecore::EDataType.new 
+					type.name:=visitable.typeCS.toString
+					tmp.eType := type
+					tmp.upperBound := 1
+					visibleVariable.put(tmp.name,tmp)
+							
 				end
 				if visitable.initExpression != void then
 					write(" init ")
@@ -677,7 +699,7 @@ class StringWriter inherits StdIO
 					var variableName : String init nextName("variable")
 					write("collect{ " + variableName + " | " + variableName + ".")
 					write( visitable.simpleNameCS.~value)
-					write("}")					
+					write("}")
 				else
 					write( visitable.simpleNameCS.~value)
 				end
@@ -936,6 +958,29 @@ class StringWriter inherits StdIO
 				visit(visitable)			
 			end
 
+        property readonly iterators : Hashtable<String, IteratorPolicy>
+        	getter is
+        		do
+        			if __iterators == void then
+        				__iterators := Hashtable<String, IteratorPolicy>.new
+        				var doNothing : IteratorPolicy init IteratorPolicy.new
+        				var sameName: IteratorPolicy init SimpleIteratorIP.new
+        				var functionWithSameName : IteratorPolicy init FunctionIP.new
+        				addIterator("exists", sameName)
+        				addIterator("forAll", sameName)
+        				addIterator("isUnique", UniqueIP.new)
+        				addIterator("any", sameName)//SimpleIteratorIP.new.withName("detect"))
+        				addIterator("one", sameName)//SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
+        				addIterator("select", SimpleIteratorIP.new.withName("select"))
+        				addIterator("collect", sameName)
+        				addIterator("collectNested", doNothing)
+        				addIterator("sortedBy", sameName)
+        				addIterator("reject", sameName)
+        			end
+        			result := __iterators
+        		end
+
+
  operation isKermetaKeyword(word: String): Boolean is
           do
           		result :=	word.equals("package") or
@@ -1027,6 +1072,9 @@ class SimpleIteratorIP inherits IteratorPolicy {
 
 	operation generate(oclIterator: IteratorExpCS, visitor: Ocl2kmtVisitor): Void is
 		 do
+		 	
+ 			visitor.iteratorVariable := true 
+		 	
 			oclIterator.source.accept(visitor)
 			visitor.write(".")
 			if name == void then
@@ -1034,6 +1082,7 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			else
 				visitor.write(name)
 			end
+
 			visitor.write("{ ")
 			if (oclIterator.variable1 != void) then
 				oclIterator.variable1.accept(visitor)
@@ -1043,12 +1092,13 @@ class SimpleIteratorIP inherits IteratorPolicy {
 				//TODO Check that mark
 			end
 			visitor.write(" | ")
+			//visitor.write(oclIterator.body.getMetaClass.toString)
+ 					 	
 			oclIterator.body.accept(visitor)
 			visitor.write("}")
 			if suffix != void then
 				visitor.write(suffix)
 			end
-			visitor.previousIsMultiple := false 
 		 end
 }
 
