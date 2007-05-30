@@ -1,0 +1,29 @@
+/* $Id: LogoInterpreter.kmt,v 1.1 2007-05-30 14:56:17 jezequel Exp $
+ * Creation date: May 30, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "kmlogo::ASM::Main"
+@mainOperation "main"
+
+
+package kmLogo::ASM;
+
+require "ASMLogo.ecore"
+require kermeta
+using kermeta::standard
+class Main
+{
+	operation main() : Void is do 
+		// TODO: implement 'main' operation
+	end
+}
+
+@aspect "true"
+class Instruction
+{
+operation eval() : Integer is do 
+		// TODO: implement 'main' operation
+	end 
+}

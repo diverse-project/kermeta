@@ -1,0 +1,7 @@
+package kmLogo::ASM
+
+context Instruction : 
+inv test :
+true
+
+end package
