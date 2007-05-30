@@ -190,6 +190,10 @@ public class TestOCLParser {
 		 filenames.add("68");
 		 filenames.add("69");
 		 filenames.add("70");
+		 filenames.add("c01");
+		 filenames.add("c02");
+		 filenames.add("c03");
+		 filenames.add("c04");
 	 }
 	 
 	public static void main(String[] args) {

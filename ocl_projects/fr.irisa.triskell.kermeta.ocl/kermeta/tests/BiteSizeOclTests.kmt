@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.13 2007-05-29 17:38:40 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.14 2007-05-30 16:55:42 bitterjug Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -28,7 +28,7 @@ class  BiteSizeOclTests  inherits TestCase
     attribute helper : OCLHelpers::OCLHelper
     attribute visitor :Ocl2kmtVisitor 
     attribute model : Set<Object> 
-    attribute de : DynamicExpression 
+    //attribute de : DynamicExpression 
                     
     method setUp() is
         do
@@ -36,8 +36,8 @@ class  BiteSizeOclTests  inherits TestCase
             helper := OCLHelpers::OCLHelper.new
             visitor := Ocl2kmtVisitor.new
             visitor.initialize
-            de := DynamicExpression.new
-            de.initializeDefaults
+            //de := DynamicExpression.new
+            //de.initializeDefaults
         end
         
         
@@ -68,11 +68,11 @@ class  BiteSizeOclTests  inherits TestCase
             result := io.s
         end
 
-    operation assertEqual(expected: String, actual: String): Void is
+  /*  operation assertEqual(expected: String, actual: String): Void is
         do
             assertWithMsg(expected.equals(actual), "\nexpected\t:[" + expected + "] != \nactual\t:[" + actual + "]")
         end
-        
+     */   
   // boolean literal true
     operation test01(): Void is
         do
@@ -634,7 +634,7 @@ class  BiteSizeOclTests  inherits TestCase
 	operation test69(): Void is
 		do
             var kmt : String  init  visitOclXmi("69") 
-            assertEqual( expect("b.collect{ e | e.c.collect{ variable2 | variable2.z} }"), kmt)
+            assertEqual( expect("b.collect{ e | e.c.collect{ variable2 | variable2.z}}"), kmt)
 		end
 
     // no implicit collect
@@ -713,17 +713,11 @@ class  BiteSizeOclTests  inherits TestCase
       
       operation main() : Void is 
       do
-//              oneAtATime()
-        runOneTest(void,"58")
-	/*
-         repository := EMFRepository.new        
-        helper := OCLHelpers::OCLHelper.new
-        
-        visitor := Ocl2kmtVisitor.new
-        visitor.setMetamodelURI("../../ocl/sample.ecore")
-        model  := helper.loadOCLModel(repository,  "../../model/19.xmi")
-        helper.getPackageDeclaration(model).accept(visitor)
-        */
+            var testRunner : TestRunner init TestRunner.new
+		    var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(BiteSizeOclTests)
+    		testRunner.runTest(suite)
+            testRunner.printLogs
+//        runOneTest(void,"58")
       end    
       
 }

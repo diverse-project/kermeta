@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.27 2007-05-29 20:26:09 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.27 2007-05-29 20:26:09 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.28 2007-05-30 16:55:42 bitterjug Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.28 2007-05-30 16:55:42 bitterjug Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -334,14 +334,16 @@ class StringWriter inherits StdIO
 
 		method visitPathNameCS(visitable : PathNameCS) : Void is
 			do
-				visitable.sequenceOfNames.each{o| 
-					if o != void then
-						write( o.toString)
-					else
-						write("[void path name]")
+				from
+					var it : Iterator<String> init visitable.sequenceOfNames.iterator
+				until
+					it.isOff
+				loop
+					write( it.next.toString)
+					if it.hasNext then
+						write("::")
 					end
-				    //o.accept(self) 
-				    }
+				end
 			end
 
 		
