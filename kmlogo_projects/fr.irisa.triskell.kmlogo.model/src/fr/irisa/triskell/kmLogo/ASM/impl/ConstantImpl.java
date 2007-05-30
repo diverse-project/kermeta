@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstantImpl.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ConstantImpl.java,v 1.2 2007-05-30 14:44:03 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -37,7 +37,7 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INTEGER_VALUE_EDEFAULT = null;
+	protected static final int INTEGER_VALUE_EDEFAULT = 0;
 
 	/**
 	 * The cached value of the '{@link #getIntegerValue() <em>Integer Value</em>}' attribute.
@@ -47,7 +47,7 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	 * @generated
 	 * @ordered
 	 */
-	protected String integerValue = INTEGER_VALUE_EDEFAULT;
+	protected int integerValue = INTEGER_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -72,7 +72,7 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIntegerValue() {
+	public int getIntegerValue() {
 		return integerValue;
 	}
 
@@ -81,8 +81,8 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIntegerValue(String newIntegerValue) {
-		String oldIntegerValue = integerValue;
+	public void setIntegerValue(int newIntegerValue) {
+		int oldIntegerValue = integerValue;
 		integerValue = newIntegerValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ASMPackage.CONSTANT__INTEGER_VALUE, oldIntegerValue, integerValue));
@@ -96,7 +96,7 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case ASMPackage.CONSTANT__INTEGER_VALUE:
-				return getIntegerValue();
+				return new Integer(getIntegerValue());
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,7 +109,7 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ASMPackage.CONSTANT__INTEGER_VALUE:
-				setIntegerValue((String)newValue);
+				setIntegerValue(((Integer)newValue).intValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,7 +137,7 @@ public class ConstantImpl extends ExpressionImpl implements Constant {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ASMPackage.CONSTANT__INTEGER_VALUE:
-				return INTEGER_VALUE_EDEFAULT == null ? integerValue != null : !INTEGER_VALUE_EDEFAULT.equals(integerValue);
+				return integerValue != INTEGER_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

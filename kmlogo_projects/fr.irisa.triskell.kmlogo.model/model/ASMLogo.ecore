@@ -37,7 +37,7 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//ASM/Expression">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="#//Integer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProcCall" eSuperTypes="#//ASM/Instruction">
       <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1"

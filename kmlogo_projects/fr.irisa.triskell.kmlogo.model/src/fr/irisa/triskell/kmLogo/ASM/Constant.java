@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Constant.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: Constant.java,v 1.2 2007-05-30 14:44:03 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -33,12 +33,12 @@ public interface Constant extends Expression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Integer Value</em>' attribute.
-	 * @see #setIntegerValue(String)
+	 * @see #setIntegerValue(int)
 	 * @see fr.irisa.triskell.kmLogo.ASM.ASMPackage#getConstant_IntegerValue()
-	 * @model dataType="fr.irisa.triskell.kmLogo.String"
+	 * @model dataType="fr.irisa.triskell.kmLogo.Integer"
 	 * @generated
 	 */
-	String getIntegerValue();
+	int getIntegerValue();
 
 	/**
 	 * Sets the value of the '{@link fr.irisa.triskell.kmLogo.ASM.Constant#getIntegerValue <em>Integer Value</em>}' attribute.
@@ -48,6 +48,6 @@ public interface Constant extends Expression {
 	 * @see #getIntegerValue()
 	 * @generated
 	 */
-	void setIntegerValue(String value);
+	void setIntegerValue(int value);
 
 } // Constant
