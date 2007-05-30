@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.38 2007-03-16 16:22:35 ffleurey Exp $
+/* $Id: structure.kmt,v 1.39 2007-05-30 11:34:42 jsteel Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -142,7 +142,7 @@ abstract class ParameterizedType inherits Type, kermeta::reflection::Parameteriz
 		end
 
 }
-class ModelType inherits ParameterizedType, kermeta::reflection::ModelType, KMStructureVisitable
+class ModelType inherits Type, TypeDefinition, kermeta::reflection::ModelType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
@@ -268,13 +268,6 @@ class ClassDefinition inherits TypeContainer, GenericTypeDefinition, kermeta::re
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitClassDefinition(self, context)
-		end
-}
-class ModelTypeDefinition inherits GenericTypeDefinition, TypeDefinitionContainer, kermeta::reflection::ModelTypeDefinition, KMStructureVisitable
-{
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitModelTypeDefinition(self, context)
 		end
 }
 class TypedElement inherits TypeContainer, NamedElement, kermeta::reflection::TypedElement, KMStructureVisitable
@@ -521,7 +514,6 @@ abstract class KMStructureVisitor<ContextType, ResultType>
 	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is do end
 	operation visitParameter(node : Parameter, context : ContextType) : ResultType is do end
 	operation visitGenericTypeDefinition(node : GenericTypeDefinition, context : ContextType) : ResultType is do end
-	operation visitModelTypeDefinition(node : ModelTypeDefinition, context : ContextType) : ResultType is do end
 	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is do end
 	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do end
 	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do end

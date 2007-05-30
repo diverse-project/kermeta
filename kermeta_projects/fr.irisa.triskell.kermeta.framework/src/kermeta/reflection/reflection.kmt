@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.36 2007-03-16 16:45:56 barais Exp $
+/* $Id: reflection.kmt,v 1.37 2007-05-30 11:34:42 jsteel Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -168,15 +168,10 @@ abstract class Class inherits ParameterizedType
 		result := self.typeDefinition.name
 	end
 }
-/** Type corresponding to the <b>use</b> of a ModelTypeDefinition */
-abstract class ModelType inherits ParameterizedType
+/** Type of a model, consisting of a set of included type definitions */
+abstract class ModelType inherits Type, TypeDefinition
 {
-	property readonly ownedTypeDefinition : set TypeDefinition[0..*]
-		getter is do
-			var mtDef : ModelTypeDefinition
-			mtDef ?= typeDefinition
-			result := mtDef.ownedTypeDefinition
-		end
+	reference includedTypeDefinition : set TypeDefinition[0..*]
 	operation new() : Model is abstract
 	operation isModelTypeOf(model : Model) : Boolean is abstract
 }
@@ -328,11 +323,6 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 				}
 			}
 		end
-}
-
-/** Definition for a model type */
-abstract class ModelTypeDefinition inherits GenericTypeDefinition, TypeDefinitionContainer
-{
 }
 
 /** Abstraction of the notion of typed element : each element 
