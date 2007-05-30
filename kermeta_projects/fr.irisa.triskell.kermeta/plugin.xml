@@ -146,8 +146,9 @@
       </category>
       <view
             allowMultiple="false"
-            class="fr.irisa.triskell.kermeta.view.RegisteredPackageView"
             category="fr.irisa.triskell.kermeta.view"
+            class="fr.irisa.triskell.kermeta.view.RegisteredPackageView"
+            icon="images/RegisteredEPackage.gif"
             id="fr.irisa.triskell.kermeta.viewregisteredpackages"
             name="EMF registered packages"/>
    </extension>
