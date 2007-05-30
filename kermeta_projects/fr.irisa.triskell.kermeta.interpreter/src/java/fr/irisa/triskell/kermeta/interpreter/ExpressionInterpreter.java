@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.56 2007-05-23 07:00:47 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.57 2007-05-30 11:55:37 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -193,16 +193,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        }    
 	        result = memory.getROFactory().createMetaClass(c);
         } else if (t instanceof ModelType) {
-        	ModelType mt = (ModelType) t;
-        	// FIXME : substitution of variables for parameterized model types.
-        	result = memory.getROFactory().createModelType(mt);
+        	result = memory.getRuntimeObjectForFObject(t);
     	} else if (t instanceof TypeVariable) {
         	// Find the bound type for this variable
         	fr.irisa.triskell.kermeta.language.structure.Type boundType = (Type) interpreterContext.peekCallFrame().getTypeParameters().get(t);
         	result = memory.getRuntimeObjectForFObject(boundType);
         }
         else {
-            // It is an ennumeration
+            // It is an enumeration
             result = memory.getRuntimeObjectForFObject(t);
         }
         
@@ -237,7 +235,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    // Get the runtime object in the memory correspondance table
 	    RuntimeObject result = memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	    
-	    // DEBUG : This should never happend
+	    // DEBUG : This should never happen
 	    if (result == null) {
 	        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find runtime object for property " + propertyName + " in type " + target);
 	        throw new Error("INTERPRETER INTERNAL ERROR : unable to find runtime object for property " + propertyName + " in type " + target);
@@ -289,7 +287,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			    }
 			}
 			/******************************/
-			/* BEGINING OF HORRIBLE THING */
+			/* BEGINNING OF HORRIBLE THING */
 			/******************************/
 			// Type collection of object
 			fr.irisa.triskell.kermeta.language.structure.Class coll_class = memory.getUnit().struct_factory.createClass();    
