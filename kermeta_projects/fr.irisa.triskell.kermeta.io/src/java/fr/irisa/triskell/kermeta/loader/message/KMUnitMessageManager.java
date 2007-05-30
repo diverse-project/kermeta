@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.4 2007-05-11 15:33:20 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.5 2007-05-30 11:28:46 jsteel Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -259,7 +259,13 @@ public class KMUnitMessageManager {
 	public String getMessagesAsString() {
 		String result = "";
 		Iterator it = getMessages().iterator();
-		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		while(it.hasNext()) {
+			KMUnitMessage kmumessage = (KMUnitMessage)it.next();
+			result += kmumessage.getMessage() + "\n";
+			if(kmumessage.getNode() != null)
+				result += "->   " + KermetaUnitTraceHelper.getLocationAsString(kmumessage.getNode(), unit) + "\n";
+			//result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		}
 		return result;
 	}
 	

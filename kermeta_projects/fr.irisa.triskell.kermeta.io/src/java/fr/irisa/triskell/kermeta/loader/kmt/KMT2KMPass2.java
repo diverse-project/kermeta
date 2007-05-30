@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.11 2007-02-15 15:29:44 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.12 2007-05-30 11:28:45 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -29,7 +29,8 @@ import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+//import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -138,11 +139,12 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		ObjectTypeVariable tv = builder.struct_factory.createObjectTypeVariable();
 		tv.setName(name);
 		// check that another param with the same name does not exist yet
-		GenericTypeDefinition context;
+		GenericTypeDefinition context = null;
 		if (builder.current_class != null) { // if we're inside a generic class def
 			context = builder.current_class;
 		} else { // otherwise we're inside a generic model type def
-			context = (ModelTypeDefinition) current_package();
+//			context = (ModelTypeDefinition) current_package();
+//			This should never happen!
 		}
 		EList other_params = context.getTypeParameter();
 		for (int i=0; i<other_params.size(); i++) {
@@ -209,18 +211,23 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		}
 		else {
-			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();
-			newMTypeDef.setName(getTextForID(node.getName()));
-			current_package().getOwnedTypeDefinition().add(newMTypeDef);
-			builder.typeDefs.put(qname, newMTypeDef);
-			builder.storeTrace(newMTypeDef, node);
-			pkgs.push(newMTypeDef);
+			ModelType newMT = builder.struct_factory.createModelType();
+			newMT.setName(getTextForID(node.getName()));
+			current_package().getOwnedTypeDefinition().add(newMT);
+			builder.typeDefs.put(qname, newMT);
+			builder.storeTrace(newMT, node);
+//			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();
+//			newMTypeDef.setName(getTextForID(node.getName()));
+//			current_package().getOwnedTypeDefinition().add(newMTypeDef);
+//			builder.typeDefs.put(qname, newMTypeDef);
+//			builder.storeTrace(newMTypeDef, node);
+//			pkgs.push(newMTypeDef);
 		}
 		return super.beginVisit(node);
 	}
 	
 	public void endVisit(ModelTypeDecl arg0) {
-		pkgs.pop();
+//		pkgs.pop();
 		super.endVisit(arg0);
 	}
 

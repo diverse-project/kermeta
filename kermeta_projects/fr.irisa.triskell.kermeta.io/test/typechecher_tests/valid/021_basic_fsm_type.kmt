@@ -1,4 +1,4 @@
-/* $Id: 021_basic_fsm_type.kmt,v 1.1 2006-12-13 08:08:25 dvojtise Exp $
+/* $Id: 021_basic_fsm_type.kmt,v 1.2 2007-05-30 11:28:44 jsteel Exp $
  * Creation date: June 27, 2006
  * License:
  * Copyright:
@@ -14,7 +14,7 @@ package fsm;
 require kermeta
 using kermeta::standard
 
-modeltype basic_fsm {
+package basic_fsm {
 
   class FSM {
     attribute alphabet : set String[0..*]
@@ -39,6 +39,7 @@ modeltype basic_fsm {
   }
 
 }
+modeltype basic_fsmT { basic_fsm::FSM, basic_fsm::State, basic_fsm::Transition }
 
 abstract class FSMException {}
 class NonDeterminism inherits FSMException {}

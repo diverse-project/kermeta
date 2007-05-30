@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.9 2007-02-15 13:53:50 dvojtise Exp $
+/* $Id: KMT2KMPass.java,v 1.10 2007-05-30 11:28:45 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -36,7 +36,6 @@ import fr.irisa.triskell.kermeta.ast.TypeRef;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 //import fr.irisa.triskell.kermeta.language.structure.FProperty;
@@ -256,7 +255,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ModelTypeDecl)
 	 */
 	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
-		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
+//		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
 		return super.beginVisit(modelTypeDecl);
 	}
 	
@@ -298,7 +297,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	}
 	
 	public void endVisit(ModelTypeDecl modelTypeDecl) {
-		builder.current_modeltype = null;
+//		builder.current_modeltype = null;
 		super.endVisit(modelTypeDecl);
 	}
 	

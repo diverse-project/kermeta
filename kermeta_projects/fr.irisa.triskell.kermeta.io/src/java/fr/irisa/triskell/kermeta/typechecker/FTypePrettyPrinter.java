@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.9 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.10 2007-05-30 11:28:44 jsteel Exp $
 * Project : Kermeta io
 * File : FTypePrettyPrinter.java
 * License : EPL
@@ -93,15 +93,15 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     }
     
     public Object visitModelType(ModelType arg0) {
-        String result = NamedElementHelper.getMangledQualifiedName(arg0.getTypeDefinition());
-        if (arg0.getTypeParamBinding().size() > 0) {
-            result += "<";
-	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-		        result += this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType());
-		        if (i != arg0.getTypeParamBinding().size()-1) result += ", ";
-			}
-	        result += ">";
-        }
+        String result = NamedElementHelper.getMangledQualifiedName(arg0);
+//        if (arg0.getTypeParamBinding().size() > 0) {
+//            result += "<";
+//	        for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+//		        result += this.accept(((TypeVariableBinding)arg0.getTypeParamBinding().get(i)).getType());
+//		        if (i != arg0.getTypeParamBinding().size()-1) result += ", ";
+//			}
+//	        result += ">";
+//        }
         return result;
     }
     

@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.7 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.8 2007-05-30 11:28:44 jsteel Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -103,43 +103,45 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	}
 	
 	public Object visitModelType(ModelType arg0) {
-		ModelType result;
-		if (arg0.getTypeParamBinding().isEmpty()) {
-			result = arg0;
-		} else {
-			result = struct_factory.createModelType();
-			result.setTypeDefinition(arg0.getTypeDefinition());
-			for (Object tpb : arg0.getTypeParamBinding()) {
-				TypeVariableBinding provided = (TypeVariableBinding) tpb;
-				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
-				bind.setVariable(provided.getVariable());
-				bind.setType(getBoundType(provided.getType(), bindings));
-				result.getTypeParamBinding().add(bind);
-			}
-		}
-		return result;
+//		ModelType result;
+//		if (arg0.getTypeParamBinding().isEmpty()) {
+//			result = arg0;
+//		} else {
+//			result = struct_factory.createModelType();
+//			result.setTypeDefinition(arg0.getTypeDefinition());
+//			for (Object tpb : arg0.getTypeParamBinding()) {
+//				TypeVariableBinding provided = (TypeVariableBinding) tpb;
+//				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+//				bind.setVariable(provided.getVariable());
+//				bind.setType(getBoundType(provided.getType(), bindings));
+//				result.getTypeParamBinding().add(bind);
+//			}
+//		}
+//		return result;
+		return arg0;
 	}
 	
 	public Object visitFModelType(ModelType arg0) {
-		ModelType result;
-		if ( arg0.getTypeParamBinding().size() == 0) {
-			result = arg0;
-		}
-		else {
-			result = struct_factory.createModelType();
-			result.setTypeDefinition(arg0.getTypeDefinition());
-			Iterator it = arg0.getTypeParamBinding().iterator();
-			while (it.hasNext()) {
-				TypeVariableBinding provided = (TypeVariableBinding) it.next();
-				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
-				bind.setVariable(provided.getVariable());
-				bind.setType(getBoundType(provided.getType(), bindings));
-				result.getTypeParamBinding().add(bind);
-			}
-		}
-		//FIXME: Need to descend down into the contained Classes and substitute their
-		// bound types too?
-		return result;
+//		ModelType result;
+//		if ( arg0.getTypeParamBinding().size() == 0) {
+//			result = arg0;
+//		}
+//		else {
+//			result = struct_factory.createModelType();
+//			result.setTypeDefinition(arg0.getTypeDefinition());
+//			Iterator it = arg0.getTypeParamBinding().iterator();
+//			while (it.hasNext()) {
+//				TypeVariableBinding provided = (TypeVariableBinding) it.next();
+//				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+//				bind.setVariable(provided.getVariable());
+//				bind.setType(getBoundType(provided.getType(), bindings));
+//				result.getTypeParamBinding().add(bind);
+//			}
+//		}
+//		//FIXME: Need to descend down into the contained Classes and substitute their
+//		// bound types too?
+//		return result;
+		return arg0;
 	}
 	
 	public Object visitEnumeration(Enumeration arg0) {

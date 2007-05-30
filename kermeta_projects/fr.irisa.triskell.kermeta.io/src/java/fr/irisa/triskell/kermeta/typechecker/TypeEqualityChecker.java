@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.8 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeEqualityChecker.java,v 1.9 2007-05-30 11:28:44 jsteel Exp $
 * Project : Kermeta io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -103,22 +103,24 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 	}	
 
 	public Object visitModelType(ModelType arg0) {
-		Boolean result = new Boolean(false);
-		if (provided instanceof ModelType) {
-			ModelType p = (ModelType)provided;
-			if (p.getTypeDefinition() == arg0.getTypeDefinition()) {
-				result = new Boolean(true);
-				for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
-					fr.irisa.triskell.kermeta.language.structure.Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
-					fr.irisa.triskell.kermeta.language.structure.Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
-					if (!TypeEqualityChecker.equals(t1, t2)) {
-						result = new Boolean(false);
-						break;
-					}
-				}
-			}
-		}
-		return result;
+		// TODO Are model types equal if they have the same set of included types? Probably!
+		return new Boolean(provided == arg0);
+//		Boolean result = new Boolean(false);
+//		if (provided instanceof ModelType) {
+//			ModelType p = (ModelType)provided;
+//			if (p.getTypeDefinition() == arg0.getTypeDefinition()) {
+//				result = new Boolean(true);
+//				for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+//					fr.irisa.triskell.kermeta.language.structure.Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
+//					fr.irisa.triskell.kermeta.language.structure.Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
+//					if (!TypeEqualityChecker.equals(t1, t2)) {
+//						result = new Boolean(false);
+//						break;
+//					}
+//				}
+//			}
+//		}
+//		return result;
 	}	
 
 

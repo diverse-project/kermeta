@@ -1,4 +1,4 @@
-/* $Id: 021_minimization.kmt,v 1.1 2006-12-13 08:08:25 dvojtise Exp $
+/* $Id: 021_minimization.kmt,v 1.2 2007-05-30 11:28:44 jsteel Exp $
  * Creation date: June 27, 2006
  * License:
  * Copyright:
@@ -19,7 +19,7 @@ using kermeta::standard
 using kermeta::utils
 //using help
 
-class Minimizer<MT : basic_fsm>
+class Minimizer<MT : basic_fsmT>
 {
 	reference equivalent_pairs : set Pair<MT::State>[0..*]  // The initial pairSet of the equivalence relation { F \ Q }²^ F²
 	reference all_input_pairs : set Pair<MT::State>[0..*]       // The QxQ set of possible pairs, where Q is the stateSet
@@ -277,7 +277,7 @@ class Helper
     
 }
 
-class AutomatonHelper<T : basic_fsm> {
+class AutomatonHelper<T : basic_fsmT> {
 
     operation createTransition( s : T::State, t : T::State, l : String) : T::Transition is do
     	result := T::Transition.new

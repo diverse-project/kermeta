@@ -1,4 +1,4 @@
-/* $Id: 021_multstart_fsm_type.kmt,v 1.1 2006-12-13 08:08:25 dvojtise Exp $
+/* $Id: 021_multstart_fsm_type.kmt,v 1.2 2007-05-30 11:28:44 jsteel Exp $
  * Creation date: November 10, 2006
  * License:
  * Copyright:
@@ -14,7 +14,7 @@ package fsm;
 require kermeta
 using kermeta::standard
 
-modeltype multstart_fsm {
+package multstart_fsm {
 
   class FSM {
     attribute alphabet : set String[0..*]
@@ -39,3 +39,5 @@ modeltype multstart_fsm {
   }
 
 }
+
+modeltype multstart_fsmT { multstart_fsm::FSM, multstart_fsm::State, multstart_fsm::Transition }

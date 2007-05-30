@@ -1,4 +1,4 @@
-/* $Id: TypeVirtualizer.java,v 1.3 2006-12-12 16:45:21 jmottu Exp $
+/* $Id: TypeVirtualizer.java,v 1.4 2007-05-30 11:28:44 jsteel Exp $
 * Project : Kermeta io
 * File : TypeVirtualizer.java
 * License : EPL
@@ -18,7 +18,6 @@ import java.util.Iterator;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -75,14 +74,14 @@ public class TypeVirtualizer extends KermetaOptimizedVisitor {
 			}
 		}
 		if (res == null) {
-			ModelTypeDefinition mtdef = null;
+			ModelType mtdef = null;
 			// There is not yet a virtual type. Does there need to be?
 			if (modeltype_context instanceof ModelTypeVariable) {
-				mtdef = (ModelTypeDefinition) ((ModelType) ((ModelTypeVariable) modeltype_context).getSupertype()).getTypeDefinition();
+				mtdef = (ModelType) ((ModelTypeVariable) modeltype_context).getSupertype();
 			} else if (modeltype_context instanceof ModelType) {
-				mtdef = (ModelTypeDefinition) ((ModelType) modeltype_context).getTypeDefinition();
+				mtdef = (ModelType) modeltype_context;
 			}
-			if (mtdef.getOwnedTypeDefinition().contains(cdef)) {
+			if (mtdef.getIncludedTypeDefinition().contains(cdef)) {
 				//Need to create a virtual type
 				VirtualType newVirt = struct_factory.createVirtualType();
 				newVirt.setName(cdef.getName());

@@ -1,4 +1,4 @@
-/* $Id: 021_fsm_mustfail.kmt,v 1.1 2006-12-20 16:53:37 dvojtise Exp $
+/* $Id: 021_fsm_mustfail.kmt,v 1.2 2007-05-30 11:28:45 jsteel Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -21,10 +21,10 @@ require kermeta
 class Main
 {
     operation testmain() : Void is do 
-		Minimizer<basic_fsm>.new.minimizeAll(basic_fsm.new)
-		//Minimizer<mandstart_fsm>.new.minimizeAll(mandstart_fsm.new)
-	    Minimizer<multstart_fsm>.new.minimizeAll(multstart_fsm.new)
-		Minimizer<finalstates_fsm>.new.minimizeAll(finalstates_fsm.new)
-		Minimizer<composite_fsm>.new.minimizeAll(composite_fsm.new)
+		Minimizer<basic_fsmT>.new.minimizeAll(basic_fsmT.new)
+		//Minimizer<mandstart_fsmT>.new.minimizeAll(mandstart_fsmT.new)
+	    Minimizer<multstart_fsmT>.new.minimizeAll(multstart_fsmT.new)
+		Minimizer<finalstates_fsmT>.new.minimizeAll(finalstates_fsmT.new)
+		Minimizer<composite_fsmT>.new.minimizeAll(composite_fsmT.new)
     end
 }

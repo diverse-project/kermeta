@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.2 2006-12-07 08:05:56 dvojtise Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.3 2007-05-30 11:28:45 jsteel Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -19,7 +19,7 @@ import fr.irisa.triskell.kermeta.ast.Basictype;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
@@ -46,17 +46,17 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	/**
 	 * Keep stock of 
 	 */
-	private Stack<ModelTypeDefinition> mtdefs = new Stack<ModelTypeDefinition>();
-	private ModelTypeDefinition current_mtdef() {
-		return (ModelTypeDefinition)mtdefs.peek();
-	}
+//	private Stack<ModelTypeDefinition> mtdefs = new Stack<ModelTypeDefinition>();
+//	private ModelTypeDefinition current_mtdef() {
+//		return (ModelTypeDefinition)mtdefs.peek();
+//	}
 	
 	/**
 	 * Build up the namespace stack in order to be able to track the container
 	 * of the type variables
 	 */
 	public boolean beginVisit(ModelTypeDecl mtdef) {
-		mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
+//		mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
 		return super.beginVisit(mtdef);
 	}
 	
@@ -64,7 +64,7 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * Pop the mtdef from the namespace stack
 	 */
 	public void endVisit(ModelTypeDecl mtdef) {
-		mtdefs.pop();
+//		mtdefs.pop();
 		super.endVisit(mtdef);
 	}
 	
@@ -84,23 +84,17 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 		// this can be a class, and enum or a type variable.
 		TypeDefinition superdef = builder.getTypeDefinitionByName(qname);
 		//Type supertype = KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder);
-		if (superdef instanceof ModelTypeDefinition) {
+		if (superdef instanceof ModelType) {
 			ModelTypeVariable mtv = builder.struct_factory.createModelTypeVariable();
 			mtv.setName(tv.getName());
 			GenericTypeDefinition context;
-			if (builder.current_class != null) {
-				// We are parameterizing a model type definition
 				context = builder.current_class;
-			} else {
-				// Otherwise it is a class
-				context = (ModelTypeDefinition) current_mtdef();
-			}
 			context.getTypeParameter().set(context.getTypeParameter().indexOf(tv), mtv);
 			builder.storeTrace(mtv, typeVarDecl);
 			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(bsuper, builder);
 			mtv.setSupertype(supertype);
 			// this supertype is contained by the ModeltypeVariable
-			mtv.getContainedType().add(supertype);
+			//mtv.getContainedType().add(supertype);
 		} else {
 			// Set the supertype while we're here
 			//tv.setSupertype(supertype);

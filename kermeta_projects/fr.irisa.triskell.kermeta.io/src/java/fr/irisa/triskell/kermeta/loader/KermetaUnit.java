@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.86 2007-05-15 09:08:45 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.87 2007-05-30 11:28:46 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -40,7 +40,7 @@ import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -216,7 +216,6 @@ public abstract class KermetaUnit {
 	public BehaviorFactory behav_factory;
 	
 	public Package current_package;
-	public ModelTypeDefinition current_modeltype;
 	public ClassDefinition current_class;
 	public Operation current_operation;
 	public Property current_property;
@@ -489,25 +488,25 @@ public abstract class KermetaUnit {
 	    String tname = fully_qualified_name.substring(fully_qualified_name.lastIndexOf("::") + 2);
 	    
 	    TypeDefinitionContainer tdef_container = packageLookup(tdef_container_name);
-	    if (tdef_container == null) {
-	    	// Maybe its inside a model type definition
-    		if (tdef_container_name.lastIndexOf("::") < 0) return null;
-	    	String pkg_name = tdef_container_name.substring(0, tdef_container_name.lastIndexOf("::"));
-	    	Package pack = packageLookup(pkg_name);
-	    	if (pack ==  null) {
-	    		return null;
-	    	} else {
-	    		// OK, the package exists, see if it has a model type def inside it corresponding to the
-	    		// second-last piece of the qualified name
-	    		String mt_name = tdef_container_name.substring(tdef_container_name.lastIndexOf("::") + 2);
-	    		for (Object tdefnext : pack.getOwnedTypeDefinition())
-	    		{
-	    			TypeDefinition td = (TypeDefinition)tdefnext;
-	    			if ((td instanceof ModelTypeDefinition) && td.getName().equals(mt_name))
-	    				tdef_container = (ModelTypeDefinition) td;
-	    		}
-	    	}
-	    }	    
+//	    if (tdef_container == null) {
+//	    	// Maybe its inside a model type definition
+//    		if (tdef_container_name.lastIndexOf("::") < 0) return null;
+//	    	String pkg_name = tdef_container_name.substring(0, tdef_container_name.lastIndexOf("::"));
+//	    	Package pack = packageLookup(pkg_name);
+//	    	if (pack ==  null) {
+//	    		return null;
+//	    	} else {
+//	    		// OK, the package exists, see if it has a model type def inside it corresponding to the
+//	    		// second-last piece of the qualified name
+//	    		String mt_name = tdef_container_name.substring(tdef_container_name.lastIndexOf("::") + 2);
+//	    		for (Object tdefnext : pack.getOwnedTypeDefinition())
+//	    		{
+//	    			TypeDefinition td = (TypeDefinition)tdefnext;
+//	    			if ((td instanceof ModelType) && td.getName().equals(mt_name))
+//	    				tdef_container = (ModelType) td;
+//	    		}
+//	    	}
+//	    }	    
 	    
 	    if (tdef_container == null) return null;
 
@@ -529,7 +528,7 @@ public abstract class KermetaUnit {
 	public TypeDefinition getTypeDefinitionByName(String name) {
 	    //System.out.println("\nXXXXXX   getTypeDefinitionByName " + name + "" );
 		TypeDefinition result = typeDefinitionLookup(name);
-		if (result == null && current_modeltype != null) result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(current_modeltype) + "::" + name);
+//		if (result == null && current_modeltype != null) result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(current_modeltype) + "::" + name);
 		if (result == null && current_package != null) result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(current_package) + "::" + name);
 		if (result == null)	result = typeDefinitionLookup(NamedElementHelper.getQualifiedName(rootPackage) + "::" + name);
 		for(int i=0; i<usings.size() && result == null; i++) {

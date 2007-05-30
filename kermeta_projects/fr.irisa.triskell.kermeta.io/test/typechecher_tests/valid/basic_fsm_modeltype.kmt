@@ -3,7 +3,7 @@ package testModelTypes;
 
 using kermeta::standard
 
-modeltype basic_fsm {
+package basic_fsm {
 
   class FSM {
     property alphabet : set String[0..*]
@@ -24,3 +24,5 @@ modeltype basic_fsm {
   }
 
 }
+
+modeltype basic_fsmT { basic_fsm::FSM, basic_fsm::State, basic_fsm::Transition }

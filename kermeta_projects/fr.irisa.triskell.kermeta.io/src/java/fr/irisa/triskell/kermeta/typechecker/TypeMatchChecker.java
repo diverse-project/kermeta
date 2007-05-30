@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.4 2006-12-20 16:21:08 dvojtise Exp $
+/* $Id: TypeMatchChecker.java,v 1.5 2007-05-30 11:28:44 jsteel Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -25,7 +25,6 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -138,7 +137,7 @@ public class TypeMatchChecker {
 				for (Entry<Class, Class> ent : initialBindings.entrySet()) {
 					if (TypeEqualityChecker.equals(ent.getKey(), req)) {
 						if (bound) {
-							throw new Error("Duplicate initial binding for " + ent.getKey().getName() + " in model type match of " + provided.getTypeDefinition().getName() + " against " + required.getTypeDefinition().getName());
+							throw new Error("Duplicate initial binding for " + ent.getKey().getName() + " in model type match of " + provided.getName() + " against " + required.getName());
 						}
 						bound = true;
 						boolean found = false;
@@ -152,7 +151,7 @@ public class TypeMatchChecker {
 							}
 						}
 						if (!found) {
-							throw new Error("Unable to find type binding " + ((Class) ent.getValue()).getName() + " in model type match of " + provided.getTypeDefinition().getName() + " against " + required.getTypeDefinition().getName());
+							throw new Error("Unable to find type binding " + ((Class) ent.getValue()).getName() + " in model type match of " + provided.getName() + " against " + required.getName());
 						}
 					}
 				}
@@ -349,11 +348,11 @@ public class TypeMatchChecker {
 				}
 			}
 			if (match_count == 0) {
-				errors.add(new TypeDoesNotMatchError("Model type '" + provided.getTypeDefinition().getName() + "' does not match model type '" + required.getTypeDefinition().getName() + "': no match for required class '" + req.getTypeDefinition().getName() + "'."));
+				errors.add(new TypeDoesNotMatchError("Model type '" + provided.getName() + "' does not match model type '" + required.getName() + "': no match for required class '" + req.getTypeDefinition().getName() + "'."));
 			} else if (match_count > 1) {
-				errors.add(new TypeDoesNotMatchError("Model type '" + provided.getTypeDefinition().getName() + "' does not match model type '" + required.getTypeDefinition().getName() + "': ambiguous match for required class '" + req.getTypeDefinition().getName() + "'."));
+				errors.add(new TypeDoesNotMatchError("Model type '" + provided.getName() + "' does not match model type '" + required.getName() + "': ambiguous match for required class '" + req.getTypeDefinition().getName() + "'."));
 				for (Binding b : candidates) {
-					internalLog.debug("Model type '" + provided.getTypeDefinition().getName() + "' does not match model type '" + required.getTypeDefinition().getName() + "': ambiguous match for required class '" + req.getTypeDefinition().getName() + "'.");					
+					internalLog.debug("Model type '" + provided.getName() + "' does not match model type '" + required.getName() + "': ambiguous match for required class '" + req.getTypeDefinition().getName() + "'.");					
 					Class c = b.getFrom();
 					SimpleType st = new SimpleType(c);
 					if (simp.equals(st)) {
@@ -567,16 +566,16 @@ public class TypeMatchChecker {
 		// Get a handle on how the model type is type-parameterized, in order to pass the bindings down
 		// to any parameterized classes that use the same bindings...
 		// TODO This part is dodgy, and we all hope it never gets used.
-		Hashtable<ObjectTypeVariable, Type> mtbinding = TypeVariableEnforcer.getTypeVariableBinding(mtype);
-		Hashtable<String,ObjectTypeVariable> mtvarnames = new Hashtable<String,ObjectTypeVariable>();
-		Iterator<ObjectTypeVariable> mtvars = mtbinding.keySet().iterator();
-		while (mtvars.hasNext()) {
-			ObjectTypeVariable mtvar = mtvars.next();
-			mtvarnames.put(mtvar.getName(), mtvar);
-		}
+//		Hashtable<ObjectTypeVariable, Type> mtbinding = TypeVariableEnforcer.getTypeVariableBinding(mtype);
+//		Hashtable<String,ObjectTypeVariable> mtvarnames = new Hashtable<String,ObjectTypeVariable>();
+//		Iterator<ObjectTypeVariable> mtvars = mtbinding.keySet().iterator();
+//		while (mtvars.hasNext()) {
+//			ObjectTypeVariable mtvar = mtvars.next();
+//			mtvarnames.put(mtvar.getName(), mtvar);
+//		}
 		StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
 		
-		Iterator<TypeDefinition> tdefs = ((ModelTypeDefinition) mtype.getTypeDefinition()).getOwnedTypeDefinition().iterator();
+		Iterator<TypeDefinition> tdefs = mtype.getIncludedTypeDefinition().iterator();
 		while (tdefs.hasNext()) {
 			TypeDefinition tdef = tdefs.next();
 			if (tdef instanceof DataType) {
@@ -586,25 +585,28 @@ public class TypeMatchChecker {
 				ClassDefinition cdef = (ClassDefinition) tdef;
 				fr.irisa.triskell.kermeta.language.structure.Class new_class = struct_factory.createClass();
 				new_class.setTypeDefinition(cdef);
-				Hashtable cbinding = new Hashtable<ObjectTypeVariable, Type>();
-				Iterator<ObjectTypeVariable> cdefvars = cdef.getTypeParameter().iterator();
-				while (cdefvars.hasNext()) {
-					ObjectTypeVariable ctvar = cdefvars.next();
-					//find the model type definition's variable with the same name
-					ObjectTypeVariable mtvar = mtvarnames.get(ctvar.getName());
-					if (mtvar == null) {
-						throw new Error("Unbound type variable on class " + cdef.getName() + " in model type " + mtype.getTypeDefinition().getName());
-					}
-					cbinding.put(ctvar, mtbinding.get(mtvar));
-					TypeVariableBinding pbinding = struct_factory.createTypeVariableBinding();
-					pbinding.setVariable(ctvar);
-					// FIXME: Do I need to call getBoundType here?
-					pbinding.setType(mtbinding.get(mtvar));
-					new_class.getTypeParamBinding().add(pbinding);
+				if (!cdef.getTypeParameter().isEmpty()) {
+					throw new Error("Generic class " + cdef.getName() + " found in model type " + mtype.getName());
 				}
+//				Hashtable cbinding = new Hashtable<ObjectTypeVariable, Type>();
+//				Iterator<ObjectTypeVariable> cdefvars = cdef.getTypeParameter().iterator();
+//				while (cdefvars.hasNext()) {
+//					ObjectTypeVariable ctvar = cdefvars.next();
+//					//find the model type definition's variable with the same name
+//					ObjectTypeVariable mtvar = mtvarnames.get(ctvar.getName());
+//					if (mtvar == null) {
+//						throw new Error("Unbound type variable on class " + cdef.getName() + " in model type " + mtype.getName());
+//					}
+//					cbinding.put(ctvar, mtbinding.get(mtvar));
+//					TypeVariableBinding pbinding = struct_factory.createTypeVariableBinding();
+//					pbinding.setVariable(ctvar);
+//					// FIXME: Do I need to call getBoundType here?
+//					pbinding.setType(mtbinding.get(mtvar));
+//					new_class.getTypeParamBinding().add(pbinding);
+//				}
 				result.add(new_class);
 			} else {
-				throw new Error("Unrecognised TypeDefinition " + tdef.getName() + " in model type " + mtype.getTypeDefinition().getName());
+				throw new Error("Unrecognised TypeDefinition " + tdef.getName() + " in model type " + mtype.getName());
 			}
 		}
 		return result;

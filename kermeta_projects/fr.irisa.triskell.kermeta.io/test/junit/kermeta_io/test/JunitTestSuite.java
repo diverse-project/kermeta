@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.30 2007-04-17 11:52:55 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.31 2007-05-30 11:28:46 jsteel Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -61,17 +61,18 @@ public class JunitTestSuite extends TestCase {
 	// do not modify this comment
 
 
-/*** BEGIN GENERATED TESTS ***/
-public void testpuzzle() throws Exception {
-testWithFile("test/ecore_testcases","puzzle.ecore" );
-}
 
+/*** BEGIN GENERATED TESTS ***/
 public void testSimple() throws Exception {
 testWithFile("test/ecore_testcases","Simple.ecore" );
 }
 
 public void testUML2() throws Exception {
 testWithFile("test/ecore_testcases","UML2.ecore" );
+}
+
+public void testpuzzle() throws Exception {
+testWithFile("test/ecore_testcases","puzzle.ecore" );
 }
 
 public void testemof() throws Exception {
@@ -194,6 +195,10 @@ public void testtestExtractOperation() throws Exception {
 testWithFile("test/kmt_testcases","testExtractOperation.kmt" );
 }
 
+public void testtestGenericClass() throws Exception {
+testWithFile("test/kmt_testcases","testGenericClass.kmt" );
+}
+
 public void testtestImportAlias() throws Exception {
 testWithFile("test/kmt_testcases","testImportAlias.kmt" );
 }
@@ -244,6 +249,10 @@ testWithFile("test/kmt_testcases","testMCommentMiddleOfLoop.kmt" );
 
 public void testtestModelType() throws Exception {
 testWithFile("test/kmt_testcases","testModelType.kmt" );
+}
+
+public void testtestModelTypesStateMachines() throws Exception {
+testWithFile("test/kmt_testcases","testModelTypesStateMachines.kmt" );
 }
 
 public void testtestOperation() throws Exception {
@@ -332,6 +341,10 @@ testWithFile("test/kmt_testcases","testSCommentMiddleOfLoop.kmt" );
 
 public void testtestSimpleAnnotations() throws Exception {
 testWithFile("test/kmt_testcases","testSimpleAnnotations.kmt" );
+}
+
+public void testtestSimpleAnnotations2() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleAnnotations2.kmt" );
 }
 
 public void testtestSimpleCond() throws Exception {

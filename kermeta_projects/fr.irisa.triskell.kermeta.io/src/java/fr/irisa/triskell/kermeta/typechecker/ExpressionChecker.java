@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.38 2007-03-01 13:19:50 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.39 2007-05-30 11:28:44 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -45,7 +45,6 @@ import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
@@ -339,8 +338,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    				if (!(provided.getFType() instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 	    					unit.messages.addError("TYPE-CHECKER : The model '" + ((CallFeature)exp).getTarget() + "' may only be filtered by a class present in its type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "', not by '" + provided + "'.", exp);
 	    				} else {
-		    				ModelTypeDefinition targetTypeDef = (ModelTypeDefinition) ((ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType()).getTypeDefinition();
-		    				if ( !targetTypeDef.getOwnedTypeDefinition().contains(((fr.irisa.triskell.kermeta.language.structure.Class)provided.getFType()).getTypeDefinition()) ) {
+		    				ModelType targetTypeDef = (ModelType) getTypeOfExpression(((CallFeature) exp).getTarget()).getFType();
+		    				if ( !targetTypeDef.getIncludedTypeDefinition().contains(((fr.irisa.triskell.kermeta.language.structure.Class)provided.getFType()).getTypeDefinition()) ) {
 		    					unit.messages.addError("TYPE-CHECKER : The model '" + ((CallFeature)exp).getTarget() + "' may only be filtered by a class present in its type '" + getTypeOfExpression(((CallFeature) exp).getTarget()) + "', not by '" + provided + "'.", exp);
 		    				}
 	    				}

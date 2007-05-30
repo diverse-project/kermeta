@@ -1,4 +1,4 @@
-/* $Id: 023_mt_att_ref_valid_tests.kmt,v 1.1 2006-12-19 12:00:49 dvojtise Exp $
+/* $Id: 023_mt_att_ref_valid_tests.kmt,v 1.2 2007-05-30 11:28:44 jsteel Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -19,12 +19,12 @@ using kermeta::standard
 
 class Tester{
 	operation testNeedsMRef() : Void is do
-		NeedsMRef<mRef>.new
-		//NeedsMRef<mAtt>.new	// invalid see invalid testcase
+		NeedsMRef<mRefT>.new
+		//NeedsMRef<mAttT>.new	// invalid see invalid testcase
 	end
 	operation testNeedsMAtt() : Void is do
-		//NeedsMAtt<mRef>.new		// note: should fail ?  the restriction is not used when running, but used by serialisation
-		NeedsMAtt<mAtt>.new
+		//NeedsMAtt<mRefT>.new		// note: should fail ?  the restriction is not used when running, but used by serialisation
+		NeedsMAtt<mAttT>.new
 	end
 
 }

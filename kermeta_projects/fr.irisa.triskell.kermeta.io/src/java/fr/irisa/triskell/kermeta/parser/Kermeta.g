@@ -198,9 +198,16 @@ subPackageDecl returns [ SubPackageDecl retVal = null ]
 
 modelTypeDecl returns [ ModelTypeDecl retVal = null ]
 :
-{ TypeVarDecllst typeVarDecllst = null; TopLevelDecls topLevelDecls = null; }
-  modeltype_KW:"modeltype" name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
-{ retVal = new ModelTypeDecl(modeltype_KW, name, lt, typeVarDecllst, gt, lcurly, topLevelDecls, rcurly); }
+{ QualifiedIDlst included = null; }
+  modeltype_KW:"modeltype" name:ID lcurly:LCURLY included=qualifiedIDlst rcurly:RCURLY 
+{ retVal = new ModelTypeDecl(modeltype_KW, name, lcurly, included, rcurly); }
+;
+
+qualifiedIDlst returns [ QualifiedIDlst retVal = new QualifiedIDlst() ]
+:
+{ QualifiedID id1 = null; QualifiedID idn = null; }
+  id1=qualifiedID { retVal.addChild(id1); } 
+  ( comma:COMMA idn=qualifiedID { retVal.addChild(comma); retVal.addChild(idn); } )*
 ;
 
 classDecl returns [ ClassDecl retVal = null ]

@@ -1,4 +1,4 @@
-/* $Id: 024_mt_property_order.kmt,v 1.1 2006-12-20 14:25:55 dvojtise Exp $
+/* $Id: 024_mt_property_order.kmt,v 1.2 2007-05-30 11:28:44 jsteel Exp $
  * Creation date: November 10, 2006
  * License: EPL
  * Authors:
@@ -15,7 +15,7 @@ require kermeta
 using kermeta::standard
 
 // ---------------------
-modeltype mStandard {
+package mStandard {
   class A {
     reference aB : B[0..*]#aA
   }
@@ -24,10 +24,11 @@ modeltype mStandard {
   	reference aA : A#aB
   }
 }
-class NeedsMStandard<MT : mStandard> { }
+modeltype mStandardT { mStandard::A, mStandard::B }
+class NeedsMStandard<MT : mStandardT> { }
 
 // ---------------------
-modeltype mSet {
+package mSet {
   class A {
     reference aB : set B[0..*]#aA
   }
@@ -36,10 +37,11 @@ modeltype mSet {
   	reference aA : A#aB
   }
 }
-class NeedsMSet<MT : mSet> { }
+modeltype mSetT { mSet::A, mSet::B }
+class NeedsMSet<MT : mSetT> { }
 
 // ---------------------
-modeltype mOSet {
+package mOSet {
   class A {
     reference aB : oset B[0..*]#aA
   }
@@ -48,11 +50,12 @@ modeltype mOSet {
   	reference aA : A#aB
   }
 }
-class NeedsMOSet<MT : mOSet> { }
+modeltype mOSetT { mOSet::A, mOSet::B }
+class NeedsMOSet<MT : mOSetT> { }
 
 
 // ---------------------
-modeltype mSeq {
+package mSeq {
   class A {
     reference aB : seq B[0..*]#aA
   }
@@ -61,10 +64,11 @@ modeltype mSeq {
   	reference aA : A#aB
   }
 }
-class NeedsMSeq<MT : mSeq> { }
+modeltype mSeqT { mSeq::A, mSeq::B }
+class NeedsMSeq<MT : mSeqT> { }
 
 // ---------------------
-modeltype mBag {
+package mBag {
   class A {
     reference aB : bag B[0..*]#aA
   }
@@ -73,4 +77,5 @@ modeltype mBag {
   	reference aA : A#aB
   }
 }
-class NeedsMBag<MT : mBag> { }
+modeltype mBagT { mBag::A, mBag::B }
+class NeedsMBag<MT : mBagT> { }

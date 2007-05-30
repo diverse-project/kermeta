@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.3 2006-12-13 08:04:56 dvojtise Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.4 2007-05-30 11:28:44 jsteel Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -130,72 +130,72 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 		return new Boolean(false);
 	}
 	
-	public Object visitModelType(fr.irisa.triskell.kermeta.language.structure.ModelType arg0) {
-		if (arg0.getTypeParamBinding().isEmpty()) {
-			return new Boolean(false);
-		}
-		Iterator tvb_iter = arg0.getTypeParamBinding().iterator();
-		while (tvb_iter.hasNext()) {
-			TypeVariableBinding current_tvb = (TypeVariableBinding) tvb_iter.next();
-			fr.irisa.triskell.kermeta.language.structure.Type provided = current_tvb.getType();
-			//First descend into the actual type parameters to see whether they might have any problems
-			this.accept(provided);
-			//Check whether actual type params conform to any supertype constraints on the type variable declaration
-			TypeVariable var = current_tvb.getVariable();
-			fr.irisa.triskell.kermeta.language.structure.Type required = var.getSupertype();
-			if (null != required) {
-				//This smells like a hack. Need to initialize the type checker context
-				//TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
-				if (var instanceof ObjectTypeVariable) {
-					if (!TypeConformanceChecker.conforms(required, provided)) {
-						unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
-					}
-				} else if (var instanceof ModelTypeVariable) {
-					if (provided instanceof ModelType) {
-						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided);
-						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
-						if (!match) {
-							unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
-						} else {
-							//TODO Populate static bindings somehow to bind each required::virtual to its match
-							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
-								//Find (or more probably create) the virtual type corresponding to the class
-								VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
-								//Now create a binding
-								TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
-								new_tvb.setVariable(vt);
-								new_tvb.setType(matcher.getResultMatch().get(e));
-								arg0.getVirtualTypeBinding().add(new_tvb);
-							}
-						}
-					} else if (provided instanceof ModelTypeVariable) {
-						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype());
-						//match = TypeMatchChecker.match((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype(), new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
-						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
-						if (!match) {
-							unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
-						} else {
-							//TODO Populate static bindings somehow to bind each required::virtual to its match
-							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
-								//Find (or more probably create) the virtual type corresponding to the class
-								VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
-								//The provided is also an MTV, so we need to convert its classes back to Virtual Types, too
-								VirtualType target_vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) provided, (ClassDefinition) matcher.getResultMatch().get(e).getTypeDefinition());
-								//Now create a binding
-								TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
-								new_tvb.setVariable(vt);
-								new_tvb.setType(target_vt);
-								arg0.getVirtualTypeBinding().add(new_tvb);
-							}
-						}
-					} else {
-						unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
-					}
-				}
-			}
-		}
-		return new Boolean(false);
-	}
+//	public Object visitModelType(fr.irisa.triskell.kermeta.language.structure.ModelType arg0) {
+//		if (arg0.getTypeParamBinding().isEmpty()) {
+//			return new Boolean(false);
+//		}
+//		Iterator tvb_iter = arg0.getTypeParamBinding().iterator();
+//		while (tvb_iter.hasNext()) {
+//			TypeVariableBinding current_tvb = (TypeVariableBinding) tvb_iter.next();
+//			fr.irisa.triskell.kermeta.language.structure.Type provided = current_tvb.getType();
+//			//First descend into the actual type parameters to see whether they might have any problems
+//			this.accept(provided);
+//			//Check whether actual type params conform to any supertype constraints on the type variable declaration
+//			TypeVariable var = current_tvb.getVariable();
+//			fr.irisa.triskell.kermeta.language.structure.Type required = var.getSupertype();
+//			if (null != required) {
+//				//This smells like a hack. Need to initialize the type checker context
+//				//TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
+//				if (var instanceof ObjectTypeVariable) {
+//					if (!TypeConformanceChecker.conforms(required, provided)) {
+//						unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+//					}
+//				} else if (var instanceof ModelTypeVariable) {
+//					if (provided instanceof ModelType) {
+//						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) provided);
+//						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
+//						if (!match) {
+//							unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+//						} else {
+//							//TODO Populate static bindings somehow to bind each required::virtual to its match
+//							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
+//								//Find (or more probably create) the virtual type corresponding to the class
+//								VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
+//								//Now create a binding
+//								TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
+//								new_tvb.setVariable(vt);
+//								new_tvb.setType(matcher.getResultMatch().get(e));
+//								arg0.getVirtualTypeBinding().add(new_tvb);
+//							}
+//						}
+//					} else if (provided instanceof ModelTypeVariable) {
+//						TypeMatchChecker matcher = new TypeMatchChecker((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype());
+//						//match = TypeMatchChecker.match((ModelType) required, (ModelType) ((ModelTypeVariable) provided).getSupertype(), new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
+//						boolean match = matcher.matches(new Hashtable<fr.irisa.triskell.kermeta.language.structure.Class, fr.irisa.triskell.kermeta.language.structure.Class>());
+//						if (!match) {
+//							unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+//						} else {
+//							//TODO Populate static bindings somehow to bind each required::virtual to its match
+//							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
+//								//Find (or more probably create) the virtual type corresponding to the class
+//								VirtualType vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) var, (ClassDefinition) e.getTypeDefinition());
+//								//The provided is also an MTV, so we need to convert its classes back to Virtual Types, too
+//								VirtualType target_vt = ModelTypeVariableHelper.getVirtualTypeByClassDefinition((ModelTypeVariable) provided, (ClassDefinition) matcher.getResultMatch().get(e).getTypeDefinition());
+//								//Now create a binding
+//								TypeVariableBinding new_tvb = struct_factory.createTypeVariableBinding();
+//								new_tvb.setVariable(vt);
+//								new_tvb.setType(target_vt);
+//								arg0.getVirtualTypeBinding().add(new_tvb);
+//							}
+//						}
+//					} else {
+//						unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+//					}
+//				}
+//			}
+//		}
+//		return new Boolean(false);
+//	}
 
 	
 	public Object visitFunctionType(FunctionType arg0) {

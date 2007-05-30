@@ -3,7 +3,7 @@ package virtualTypeInheritance_test;
 
 using kermeta::standard
 
-modeltype base {
+package base {
 	abstract class Exp {
 		operation accept(v : Visitor) : Integer is abstract
 	}
@@ -18,8 +18,9 @@ modeltype base {
 		operation visitNum(n : Num) : Integer is abstract
 	}
 }
+modeltype baseT { base::Exp, base::Num, base::Visitor }
 
-class BaseEval<MT : base> inherits MT::Visitor {
+class BaseEval<MT : baseT> inherits MT::Visitor {
 
 	operation evaluate(e : MT::Exp) : Integer is
 	do
@@ -37,6 +38,6 @@ class Main {
 	do
 		var num : base::Num init base::Num.new
 		num.val := 3
-		stdio.writeln(BaseEval<base>.evaluate(num).toString)
+		stdio.writeln(BaseEval<baseT>.evaluate(num).toString)
 	end
 }

@@ -1,34 +1,25 @@
 package testPackage;
 
-modeltype mtype1 { }
+modeltype mtype1 { c2 }
 
 class c2 { }
 
-modeltype mtype2<G> {
-}
+class mt3c1 { }
 
-modeltype mtype3 {
-  class mt3c1 { }
-}
+modeltype mtype3 { mt3c1 }
 
-modeltype mtype4 {
   alias PClass1 : testPackage::c2;
   class mt4c1 {
     attribute mt4c1p1 : PClass1
   }
-}
+modeltype mtype4 { PClass1, mt4c1 }
 
-modeltype mtype5 {
-  class mt3c1 { }
+
+  class mt5c1 { }
   class mt5c2 { }
-}
+modeltype mtype5 { mt5c1, mt5c2 }
 
-modeltype mtype6<H> {
-  class mt6c1<H> {
-    operation getMe() : H is abstract
-    operation setMe(newMe : H) : Void is abstract
-  }
-}
+
 
 class User {
   // model-typed property
@@ -39,6 +30,5 @@ class User {
     // model-typed variable
   	var x : mtype3
   	// parameterised model type
-  	var y : mtype6<User>
   end
 }

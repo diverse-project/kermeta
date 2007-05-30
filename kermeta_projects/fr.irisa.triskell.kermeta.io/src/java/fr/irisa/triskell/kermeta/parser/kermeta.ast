@@ -49,7 +49,11 @@ abstract annotableElement : subPackageDecl | modelTypeDecl | classDecl | enumDec
 
 
 sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY;
-sequence modelTypeDecl : "modeltype" name=ID (LT typeVarDecllst GT)? LCURLY topLevelDecls RCURLY;
+//sequence modelTypeDecl : "modeltype" name=ID (LT typeVarDecllst GT)? LCURLY topLevelDecls RCURLY;
+sequence modelTypeDecl : "modeltype" name=ID LCURLY included=qualifiedIDlst RCURLY;
+
+list qualifiedIDlst : id1=qualifiedID (COMMA idn=qualifiedID)*;
+
 sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY; 
 //(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
 token classKind : "class" ; //| "interface" ;

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.15 2007-04-27 09:09:32 ffleurey Exp $
+/* $Id: KMT2KMPass3.java,v 1.16 2007-05-30 11:28:45 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -34,6 +34,7 @@ import fr.irisa.triskell.kermeta.ast.Param;
 import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.ast.PropertyBody;
 import fr.irisa.triskell.kermeta.ast.PropertyKind;
+import fr.irisa.triskell.kermeta.ast.QualifiedID;
 import fr.irisa.triskell.kermeta.ast.ReadOnlyModifier;
 import fr.irisa.triskell.kermeta.ast.Type;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
@@ -43,11 +44,12 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
@@ -158,17 +160,34 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * *******************************************************
 	 */
 	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
-		builder.pushContext();
-		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
-//		 add type variables to the context
-		Iterator tvs = builder.current_modeltype.getTypeParameter().iterator();
-		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
+		ModelType thisMT = (ModelType) builder.getModelElementByNode(modelTypeDecl);
+		ASTNode[] included = modelTypeDecl.getIncluded().getChildren();
+		for (int i=0; i < included.length ; i++) {
+			if (included[i] instanceof QualifiedID) {
+				String qid = this.qualifiedIDAsString((QualifiedID) included[i]);
+				TypeDefinition referredTD = builder.getTypeDefinitionByName(qid);
+				if (null == referredTD) {
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Type definition not found : " + qid, (KermetaASTNode) included[i]));
+					return false;
+				}
+				if ((referredTD instanceof GenericTypeDefinition) && !((GenericTypeDefinition) referredTD).getTypeParameter().isEmpty()) {
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Generic type definitions are not permitted in model types", (KermetaASTNode) included[i]));
+					return false;
+				} else {
+					thisMT.getIncludedTypeDefinition().add(referredTD);
+				}
+			}
+		}
+//		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
+////		 add type variables to the context
+//		Iterator tvs = builder.current_modeltype.getTypeParameter().iterator();
+//		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
 		
 		return super.beginVisit(modelTypeDecl);
 	}
 	
 	public void endVisit(ModelTypeDecl modelTypeDecl) {
-		builder.popContext();
+		//builder.popContext();
 		super.endVisit(modelTypeDecl);
 	}
 	

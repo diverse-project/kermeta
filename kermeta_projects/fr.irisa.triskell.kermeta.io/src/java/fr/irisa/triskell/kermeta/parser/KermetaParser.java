@@ -105,14 +105,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		ImportStmt importStmt = null;
 		{
-		_loop319:
+		_loop919:
 		do {
 			if ((LA(1)==LITERAL_require)) {
 				importStmt=importStmt();
 				retVal.addChild(importStmt);
 			}
 			else {
-				break _loop319;
+				break _loop919;
 			}
 			
 		} while (true);
@@ -126,14 +126,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		UsingStmt usingStmt = null;
 		{
-		_loop333:
+		_loop933:
 		do {
 			if ((LA(1)==LITERAL_using)) {
 				usingStmt=usingStmt();
 				retVal.addChild(usingStmt);
 			}
 			else {
-				break _loop333;
+				break _loop933;
 			}
 			
 		} while (true);
@@ -147,14 +147,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		TopLevelDecl topLevelDecl = null;
 		{
-		_loop337:
+		_loop937:
 		do {
 			if ((_tokenSet_0.member(LA(1))) && (_tokenSet_1.member(LA(2))) && (_tokenSet_2.member(LA(3)))) {
 				topLevelDecl=topLevelDecl();
 				retVal.addChild(topLevelDecl);
 			}
 			else {
-				break _loop337;
+				break _loop937;
 			}
 			
 		} while (true);
@@ -180,14 +180,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		Annotation annotation = null;
 		{
-		_loop312:
+		_loop912:
 		do {
 			if ((LA(1)==AT||LA(1)==CONTEXT_MULTI_LINE_COMMENT) && (_tokenSet_3.member(LA(2))) && (_tokenSet_4.member(LA(3)))) {
 				annotation=annotation();
 				retVal.addChild(annotation);
 			}
 			else {
-				break _loop312;
+				break _loop912;
 			}
 			
 		} while (true);
@@ -206,7 +206,7 @@ public KermetaParser(ParserSharedInputState state) {
 		match(ID);
 		retVal.addChild(id1);
 		{
-		_loop304:
+		_loop904:
 		do {
 			if ((LA(1)==COL_COL)) {
 				qidSeparator=qidSeparator();
@@ -215,7 +215,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(qidSeparator); retVal.addChild(idn);
 			}
 			else {
-				break _loop304;
+				break _loop904;
 			}
 			
 		} while (true);
@@ -470,7 +470,7 @@ public KermetaParser(ParserSharedInputState state) {
 		f1=filter();
 		retVal.addChild(f1);
 		{
-		_loop329:
+		_loop929:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -479,7 +479,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(fn);
 			}
 			else {
-				break _loop329;
+				break _loop929;
 			}
 			
 		} while (true);
@@ -590,43 +590,20 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		Token  modeltype_KW = null;
 		Token  name = null;
-		Token  lt = null;
-		Token  gt = null;
 		Token  lcurly = null;
 		Token  rcurly = null;
 		
-		TypeVarDecllst typeVarDecllst = null; TopLevelDecls topLevelDecls = null;
+		QualifiedIDlst included = null;
 		modeltype_KW = LT(1);
 		match(LITERAL_modeltype);
 		name = LT(1);
 		match(ID);
-		{
-		switch ( LA(1)) {
-		case LT:
-		{
-			lt = LT(1);
-			match(LT);
-			typeVarDecllst=typeVarDecllst();
-			gt = LT(1);
-			match(GT);
-			break;
-		}
-		case LCURLY:
-		{
-			break;
-		}
-		default:
-		{
-			throw new NoViableAltException(LT(1), getFilename());
-		}
-		}
-		}
 		lcurly = LT(1);
 		match(LCURLY);
-		topLevelDecls=topLevelDecls();
+		included=qualifiedIDlst();
 		rcurly = LT(1);
 		match(RCURLY);
-		retVal = new ModelTypeDecl(modeltype_KW, name, lt, typeVarDecllst, gt, lcurly, topLevelDecls, rcurly);
+		retVal = new ModelTypeDecl(modeltype_KW, name, lcurly, included, rcurly);
 		return retVal;
 	}
 	
@@ -755,25 +732,25 @@ public KermetaParser(ParserSharedInputState state) {
 		return retVal;
 	}
 	
-	public final TypeVarDecllst  typeVarDecllst() throws RecognitionException, TokenStreamException {
-		 TypeVarDecllst retVal = new TypeVarDecllst() ;
+	public final QualifiedIDlst  qualifiedIDlst() throws RecognitionException, TokenStreamException {
+		 QualifiedIDlst retVal = new QualifiedIDlst() ;
 		
 		Token  comma = null;
 		
-		TypeVarDecl tv1 = null; TypeVarDecl tvn = null;
-		tv1=typeVarDecl();
-		retVal.addChild(tv1);
+		QualifiedID id1 = null; QualifiedID idn = null;
+		id1=qualifiedID();
+		retVal.addChild(id1);
 		{
-		_loop357:
+		_loop945:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
 				match(COMMA);
-				tvn=typeVarDecl();
-				retVal.addChild(comma); retVal.addChild(tvn);
+				idn=qualifiedID();
+				retVal.addChild(comma); retVal.addChild(idn);
 			}
 			else {
-				break _loop357;
+				break _loop945;
 			}
 			
 		} while (true);
@@ -805,6 +782,32 @@ public KermetaParser(ParserSharedInputState state) {
 		return retVal;
 	}
 	
+	public final TypeVarDecllst  typeVarDecllst() throws RecognitionException, TokenStreamException {
+		 TypeVarDecllst retVal = new TypeVarDecllst() ;
+		
+		Token  comma = null;
+		
+		TypeVarDecl tv1 = null; TypeVarDecl tvn = null;
+		tv1=typeVarDecl();
+		retVal.addChild(tv1);
+		{
+		_loop959:
+		do {
+			if ((LA(1)==COMMA)) {
+				comma = LT(1);
+				match(COMMA);
+				tvn=typeVarDecl();
+				retVal.addChild(comma); retVal.addChild(tvn);
+			}
+			else {
+				break _loop959;
+			}
+			
+		} while (true);
+		}
+		return retVal;
+	}
+	
 	public final Typelst  typelst() throws RecognitionException, TokenStreamException {
 		 Typelst retVal = new Typelst() ;
 		
@@ -814,7 +817,7 @@ public KermetaParser(ParserSharedInputState state) {
 		t1=type();
 		retVal.addChild(t1);
 		{
-		_loop354:
+		_loop956:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -823,7 +826,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(tn);
 			}
 			else {
-				break _loop354;
+				break _loop956;
 			}
 			
 		} while (true);
@@ -837,14 +840,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		AnnotableClassMemberDecl annotableClassMemberDecl = null;
 		{
-		_loop369:
+		_loop971:
 		do {
 			if ((_tokenSet_5.member(LA(1)))) {
 				annotableClassMemberDecl=annotableClassMemberDecl();
 				retVal.addChild(annotableClassMemberDecl);
 			}
 			else {
-				break _loop369;
+				break _loop971;
 			}
 			
 		} while (true);
@@ -1489,7 +1492,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=param();
 		retVal.addChild(p1);
 		{
-		_loop408:
+		_loop1010:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -1498,7 +1501,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop408;
+				break _loop1010;
 			}
 			
 		} while (true);
@@ -1512,14 +1515,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		Annotableassertion annotableassertion = null;
 		{
-		_loop396:
+		_loop998:
 		do {
 			if ((_tokenSet_16.member(LA(1)))) {
 				annotableassertion=annotableassertion();
 				retVal.addChild(annotableassertion);
 			}
 			else {
-				break _loop396;
+				break _loop998;
 			}
 			
 		} while (true);
@@ -1834,14 +1837,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		EnumLiteral enumLiteral = null;
 		{
-		_loop425:
+		_loop1027:
 		do {
 			if ((LA(1)==ID||LA(1)==AT||LA(1)==CONTEXT_MULTI_LINE_COMMENT)) {
 				enumLiteral=enumLiteral();
 				retVal.addChild(enumLiteral);
 			}
 			else {
-				break _loop425;
+				break _loop1027;
 			}
 			
 		} while (true);
@@ -1871,14 +1874,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		FExpression fExpression = null;
 		{
-		_loop429:
+		_loop1031:
 		do {
 			if ((_tokenSet_17.member(LA(1)))) {
 				fExpression=fExpression();
 				retVal.addChild(fExpression);
 			}
 			else {
-				break _loop429;
+				break _loop1031;
 			}
 			
 		} while (true);
@@ -1930,7 +1933,7 @@ public KermetaParser(ParserSharedInputState state) {
 		exp1=relationalExpression();
 		retVal.addChild(exp1);
 		{
-		_loop439:
+		_loop1041:
 		do {
 			if ((LA(1)==LITERAL_and||LA(1)==LITERAL_or) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 				logicalOp=logicalOp();
@@ -1938,7 +1941,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(logicalOp); retVal.addChild(expn);
 			}
 			else {
-				break _loop439;
+				break _loop1041;
 			}
 			
 		} while (true);
@@ -2030,7 +2033,7 @@ public KermetaParser(ParserSharedInputState state) {
 		exp1=multiplicativeExpression();
 		retVal.addChild(exp1);
 		{
-		_loop448:
+		_loop1050:
 		do {
 			if ((LA(1)==PLUS||LA(1)==MINUS) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 				additiveOp=additiveOp();
@@ -2038,7 +2041,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(additiveOp); retVal.addChild(expn);
 			}
 			else {
-				break _loop448;
+				break _loop1050;
 			}
 			
 		} while (true);
@@ -2101,7 +2104,7 @@ public KermetaParser(ParserSharedInputState state) {
 		exp1=unaryExpression();
 		retVal.addChild(exp1);
 		{
-		_loop453:
+		_loop1055:
 		do {
 			if ((LA(1)==STAR||LA(1)==DIV) && (_tokenSet_18.member(LA(2))) && (_tokenSet_22.member(LA(3)))) {
 				multiplicativeOp=multiplicativeOp();
@@ -2109,7 +2112,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(multiplicativeOp); retVal.addChild(expn);
 			}
 			else {
-				break _loop453;
+				break _loop1055;
 			}
 			
 		} while (true);
@@ -2351,14 +2354,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		Postfix postfix = null;
 		{
-		_loop463:
+		_loop1065:
 		do {
 			if ((LA(1)==LPAREN||LA(1)==LCURLY||LA(1)==DOT) && (_tokenSet_24.member(LA(2))) && (_tokenSet_25.member(LA(3)))) {
 				postfix=postfix();
 				retVal.addChild(postfix);
 			}
 			else {
-				break _loop463;
+				break _loop1065;
 			}
 			
 		} while (true);
@@ -2495,7 +2498,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=actualParameter();
 		retVal.addChild(p1);
 		{
-		_loop471:
+		_loop1073:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -2504,7 +2507,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop471;
+				break _loop1073;
 			}
 			
 		} while (true);
@@ -2531,7 +2534,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=lambdaPostfixParam();
 		retVal.addChild(p1);
 		{
-		_loop476:
+		_loop1078:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -2540,7 +2543,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop476;
+				break _loop1078;
 			}
 			
 		} while (true);
@@ -2950,14 +2953,14 @@ public KermetaParser(ParserSharedInputState state) {
 		
 		FRescue fRescue = null;
 		{
-		_loop493:
+		_loop1095:
 		do {
 			if ((LA(1)==LITERAL_rescue)) {
 				fRescue=fRescue();
 				retVal.addChild(fRescue);
 			}
 			else {
-				break _loop493;
+				break _loop1095;
 			}
 			
 		} while (true);
@@ -2974,7 +2977,7 @@ public KermetaParser(ParserSharedInputState state) {
 		p1=fLambdaparam();
 		retVal.addChild(p1);
 		{
-		_loop489:
+		_loop1091:
 		do {
 			if ((LA(1)==COMMA)) {
 				comma = LT(1);
@@ -2983,7 +2986,7 @@ public KermetaParser(ParserSharedInputState state) {
 				retVal.addChild(comma); retVal.addChild(pn);
 			}
 			else {
-				break _loop489;
+				break _loop1091;
 			}
 			
 		} while (true);

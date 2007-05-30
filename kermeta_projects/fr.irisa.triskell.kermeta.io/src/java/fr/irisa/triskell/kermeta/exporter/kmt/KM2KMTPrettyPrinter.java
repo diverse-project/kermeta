@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.48 2007-04-19 14:25:23 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.49 2007-05-30 11:28:46 jsteel Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -53,7 +53,6 @@ import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
@@ -65,6 +64,7 @@ import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
@@ -294,12 +294,25 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	public Object visitModelType(ModelType node) {
-		String qname = NamedElementHelper.getMangledQualifiedName(node.getTypeDefinition());
-		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
+		String qname = NamedElementHelper.getMangledQualifiedName(node);
+		String name = KMTHelper.getMangledIdentifier(node.getName());
 		String result = ppTypeName(qname, name);
-		if (node.getTypeParamBinding().size() > 0) {
-			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
+//		if (node.getTypeParamBinding().size() > 0) {
+//			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
+//		}
+		result += "\n" + getPrefix() + "{\n";
+		pushPrefix();
+
+		Iterator included = node.getIncludedTypeDefinition().iterator();
+		while (included.hasNext()) {
+			TypeDefinition tdef = (TypeDefinition) included.next();
+			result += NamedElementHelper.getMangledQualifiedName(tdef);
+			if (included.hasNext()) {
+				result += ", ";
+			}
 		}
+		popPrefix();
+		result += getPrefix() + "}\n";
 		return result;
 	}
 	
@@ -551,26 +564,26 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
-	public Object visitModelTypeDefinition(ModelTypeDefinition node) {
-		String result = ppTags(node.getTag());
-		result += "modeltype " + KMTHelper.getMangledIdentifier(node.getName());
-		if (node.getTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getTypeParameter());
-			result += ">";
-		}
-		result += "\n" + getPrefix() + "{\n";
-		String old_cname = current_pname;
-		current_pname = NamedElementHelper.getMangledQualifiedName(node);
-		pushPrefix();
-		typedef = true;
-		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
-		typedef = false;
-		popPrefix();
-		current_pname = old_cname;
-		result += getPrefix() + "}\n";
-		return result;
-	}
+//	public Object visitModelTypeDefinition(ModelTypeDefinition node) {
+//		String result = ppTags(node.getTag());
+//		result += "modeltype " + KMTHelper.getMangledIdentifier(node.getName());
+//		if (node.getTypeParameter().size() > 0) {
+//			result += "<";
+//			result += ppTypeVariableDeclaration(node.getTypeParameter());
+//			result += ">";
+//		}
+//		result += "\n" + getPrefix() + "{\n";
+//		String old_cname = current_pname;
+//		current_pname = NamedElementHelper.getMangledQualifiedName(node);
+//		pushPrefix();
+//		typedef = true;
+//		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
+//		typedef = false;
+//		popPrefix();
+//		current_pname = old_cname;
+//		result += getPrefix() + "}\n";
+//		return result;
+//	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)

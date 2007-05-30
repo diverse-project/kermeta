@@ -1,4 +1,4 @@
-/* $Id: ModelTypeVariableHelper.java,v 1.2 2006-12-07 08:05:05 dvojtise Exp $
+/* $Id: ModelTypeVariableHelper.java,v 1.3 2007-05-30 11:28:45 jsteel Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -14,7 +14,6 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -47,8 +46,8 @@ public class ModelTypeVariableHelper {
 	}
 	public static VirtualType getVirtualTypeByName(ModelTypeVariable mtvar, String name) {
 		VirtualType result = null;
-		ModelTypeDefinition mtdef = (ModelTypeDefinition) ((ModelType) mtvar.getSupertype()).getTypeDefinition();
-		Iterator tdef_iter = mtdef.getOwnedTypeDefinition().iterator();
+		ModelType mtdef = (ModelType) mtvar.getSupertype();
+		Iterator tdef_iter = mtdef.getIncludedTypeDefinition().iterator();
 		while ((null == result) && tdef_iter.hasNext()) {
 			TypeDefinition tdef = (TypeDefinition) tdef_iter.next();
 			if (tdef.getName().equals(name)) {

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.14 2007-05-11 15:33:20 dvojtise Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.15 2007-05-30 11:28:45 jsteel Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -25,7 +25,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -34,6 +33,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
@@ -100,7 +100,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				if ((prefix != null) && (builder.typeVariableLookup(prefix) instanceof ModelTypeVariable)) {
 					ModelTypeVariable mtv = (ModelTypeVariable) builder.typeVariableLookup(prefix);
 					String vtypename = qname.substring(qname.lastIndexOf("::")+2);
-					ModelTypeDefinition mtdef = (ModelTypeDefinition) ((ModelType) mtv.getSupertype()).getTypeDefinition();
+					ModelType mtdef = (ModelType) mtv.getSupertype();
 					// If it already exists we just grab the existing one.
 					Iterator vt_iter = (mtv).getVirtualType().iterator();
 					while (vt_iter.hasNext()) {
@@ -111,7 +111,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 					}
 					// If there isn't already one, do some checks and then create one
 					if (result == null) {
-						ClassDefinition vtclsdef = (ClassDefinition) builder.getTypeDefinitionByName(NamedElementHelper.getQualifiedName(mtdef) + "::" + vtypename);
+						//ClassDefinition vtclsdef = (ClassDefinition) builder.getTypeDefinitionByName(NamedElementHelper.getQualifiedName(mtdef) + "::" + vtypename);
+						ClassDefinition vtclsdef = (ClassDefinition) ModelTypeHelper.getTypeDefinitionByName(mtdef, vtypename);
 						if (null == vtclsdef) {
 							builder.messages.addMessage(new KMTUnitLoadError("Unable to find class '" + vtypename + "' in model type definition '" + NamedElementHelper.getQualifiedName(mtdef) + "'.",basictype));
 							return false;
@@ -147,13 +148,20 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				return false;
 			}
 		}
+		else if (def instanceof ModelType) {
+			result = (fr.irisa.triskell.kermeta.language.structure.Type)def;
+			if (basictype.getParams() != null) {
+				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for model type'" + qname + "'.",basictype));
+				return false;
+			}
+		}
 		else if (def instanceof GenericTypeDefinition) {
 			GenericTypeDefinition gtdef = (GenericTypeDefinition) def;
 			ParameterizedType res = null;
 			if (gtdef instanceof ClassDefinition) {
 				res = builder.struct_factory.createClass();
-			} else if (gtdef instanceof ModelTypeDefinition) {
-				res = builder.struct_factory.createModelType();
+//			} else if (gtdef instanceof ModelTypeDefinition) {
+//				res = builder.struct_factory.createModelType();
 			}
 			builder.storeTrace(res, basictype);
 			result = res;
