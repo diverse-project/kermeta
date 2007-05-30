@@ -1,11 +1,13 @@
-/*$Id: RegisteredPackageView.java,v 1.3 2007-05-30 07:26:21 dvojtise Exp $
+/*$Id: RegisteredPackageView.java,v 1.4 2007-05-30 07:28:36 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	RegisteredPackageView.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 01 jan. 07
-* Authors : cfaucher
+* Authors : 
+* 		cfaucher 
+* 		dvojtise
 */
 
 package fr.irisa.triskell.kermeta.view;
@@ -44,7 +46,11 @@ import fr.irisa.triskell.kermeta.KermetaConstants;
 import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.popup.actions.EcoreUnregisterPackageAction;
 
-
+/**
+ * View that displays the EMF registry and allows to unregistrer the EPackage 
+ * that have been manually registered by the user
+ *
+ */
 public class RegisteredPackageView extends ViewPart {
 
 	private TableTreeViewer viewer;
