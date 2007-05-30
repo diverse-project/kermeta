@@ -7,8 +7,8 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
   <eSubpackages name="ASM" nsURI="http://kmLogo.ecore/ASM" nsPrefix="ASM">
-    <eClassifiers xsi:type="ecore:EClass" name="Instruction"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="#//ASM/Instruction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Primitive" abstract="true" eSuperTypes="#//ASM/Instruction"/>
     <eClassifiers xsi:type="ecore:EClass" name="Back" eSuperTypes="#//ASM/Primitive">
       <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1"
           eType="#//ASM/Expression" containment="true"/>
@@ -28,9 +28,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="PenDown" eSuperTypes="#//ASM/Primitive"/>
     <eClassifiers xsi:type="ecore:EClass" name="PenUp" eSuperTypes="#//ASM/Primitive"/>
     <eClassifiers xsi:type="ecore:EClass" name="Clear" eSuperTypes="#//ASM/Primitive"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//ASM/Instruction"/>
-    <eClassifiers xsi:type="ecore:EClass" name="BinaryExp" eSuperTypes="#//ASM/Expression">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//ASM/Instruction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BinaryExp" abstract="true" eSuperTypes="#//ASM/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="#//ASM/Expression"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="#//ASM/Expression"
@@ -39,7 +38,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//ASM/Expression">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="#//Integer"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ProcCall" eSuperTypes="#//ASM/Instruction">
+    <eClassifiers xsi:type="ecore:EClass" name="ProcCall" eSuperTypes="#//ASM/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1"
           eType="#//ASM/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1"
@@ -83,5 +82,12 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
           eType="#//ASM/Parameter"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#//ASM/BinaryExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Lower" eSuperTypes="#//ASM/BinaryExp"/>
   </eSubpackages>
 </ecore:EPackage>

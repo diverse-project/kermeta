@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMSwitch.java,v 1.1 2007-05-30 13:23:35 ffleurey Exp $
+ * $Id: ASMSwitch.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.util;
 
@@ -182,6 +182,7 @@ public class ASMSwitch {
 			case ASMPackage.PROC_CALL: {
 				ProcCall procCall = (ProcCall)theEObject;
 				Object result = caseProcCall(procCall);
+				if (result == null) result = caseExpression(procCall);
 				if (result == null) result = caseInstruction(procCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -242,6 +243,69 @@ public class ASMSwitch {
 				Object result = caseParameterCall(parameterCall);
 				if (result == null) result = caseExpression(parameterCall);
 				if (result == null) result = caseInstruction(parameterCall);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.PLUS: {
+				Plus plus = (Plus)theEObject;
+				Object result = casePlus(plus);
+				if (result == null) result = caseBinaryExp(plus);
+				if (result == null) result = caseExpression(plus);
+				if (result == null) result = caseInstruction(plus);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.MINUS: {
+				Minus minus = (Minus)theEObject;
+				Object result = caseMinus(minus);
+				if (result == null) result = caseBinaryExp(minus);
+				if (result == null) result = caseExpression(minus);
+				if (result == null) result = caseInstruction(minus);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.MULT: {
+				Mult mult = (Mult)theEObject;
+				Object result = caseMult(mult);
+				if (result == null) result = caseBinaryExp(mult);
+				if (result == null) result = caseExpression(mult);
+				if (result == null) result = caseInstruction(mult);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.DIV: {
+				Div div = (Div)theEObject;
+				Object result = caseDiv(div);
+				if (result == null) result = caseBinaryExp(div);
+				if (result == null) result = caseExpression(div);
+				if (result == null) result = caseInstruction(div);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.EQUALS: {
+				Equals equals = (Equals)theEObject;
+				Object result = caseEquals(equals);
+				if (result == null) result = caseBinaryExp(equals);
+				if (result == null) result = caseExpression(equals);
+				if (result == null) result = caseInstruction(equals);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.GREATER: {
+				Greater greater = (Greater)theEObject;
+				Object result = caseGreater(greater);
+				if (result == null) result = caseBinaryExp(greater);
+				if (result == null) result = caseExpression(greater);
+				if (result == null) result = caseInstruction(greater);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ASMPackage.LOWER: {
+				Lower lower = (Lower)theEObject;
+				Object result = caseLower(lower);
+				if (result == null) result = caseBinaryExp(lower);
+				if (result == null) result = caseExpression(lower);
+				if (result == null) result = caseInstruction(lower);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -561,6 +625,111 @@ public class ASMSwitch {
 	 * @generated
 	 */
 	public Object caseParameterCall(ParameterCall object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Plus</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Plus</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object casePlus(Plus object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Minus</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Minus</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseMinus(Minus object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Mult</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Mult</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseMult(Mult object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Div</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Div</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseDiv(Div object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Equals</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Equals</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseEquals(Equals object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Greater</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Greater</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseGreater(Greater object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpretting the object as an instance of '<em>Lower</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpretting the object as an instance of '<em>Lower</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public Object caseLower(Lower object) {
 		return null;
 	}
 

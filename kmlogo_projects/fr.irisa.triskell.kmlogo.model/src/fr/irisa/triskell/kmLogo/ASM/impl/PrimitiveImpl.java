@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveImpl.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: PrimitiveImpl.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class PrimitiveImpl extends InstructionImpl implements Primitive {
+public abstract class PrimitiveImpl extends InstructionImpl implements Primitive {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

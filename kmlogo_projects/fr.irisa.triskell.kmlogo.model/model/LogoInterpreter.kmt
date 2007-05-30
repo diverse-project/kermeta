@@ -1,4 +1,4 @@
-/* $Id: LogoInterpreter.kmt,v 1.2 2007-05-30 16:14:08 jezequel Exp $
+/* $Id: LogoInterpreter.kmt,v 1.3 2007-05-30 22:18:11 ffleurey Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
@@ -8,93 +8,134 @@
 @mainOperation "main"
 
 
-package kmLogo::ASM;
+package kmLogo;
 
+require kermeta
 require "ASMLogo.ecore"
 require "VMLogo.ecore"
-require kermeta
+
+
 using kermeta::standard
 using kermeta::utils
-	class Interpreter 
-	{
-		//reference turtle : VMLogo::VM::Turtle
-		attribute context : Context
-		operation initialize() is do
-			//turtle := VMLogo::VM::Turtle.new()
-			context := Context.new()
-		end
-		operation main() is
-		do
-		end
-		}
-	class Bindings inherits Hashtable<String,Integer>   
-	{
-	}
-	class Context inherits Stack<Bindings>   
-	{
-	}
 
-
-@aspect "true"
-class Instruction 
+class Interpreter 
 {
-operation eval(context : Context) : Integer is do
-	result := 0
+	reference turtle : VM::Turtle
+	attribute context : Context
+	
+	operation initialize() is do
+		turtle := VM::Turtle.new
+		context := Context.new()
+	end
+	
+	operation main() is
+	do
 	end
 }
 
-@aspect "true"
-class Constant
-{
-operation eval(context : Context) : Integer is do 
-		result := integerValue
-	end 
-}
+class Bindings inherits Hashtable<String,Integer> {}
 
-@aspect "true"
-class ParameterCall
-{
-operation eval(context : Context) : Integer is do 
-		result := context.first.getValue(parameter.name)
-	end 
-}
+class Context inherits Stack<Bindings> {}
 
 
+/**
+ * Implemenation of the Abstract Syntactic Model
+ */
+package ASM {
 
-@aspect "true"
-class BinaryExp
-{
-operation eval(context : Context) : Integer is do 
-// should probably be a switch on the char representing the operator
-			result := lhs.eval(context) 
-			if operator == "+" then result := result + rhs.eval(context)
-			else if operator == "-" then result := result - rhs.eval(context)
-			else if operator == "*" then result := result * rhs.eval(context)
-			else if operator == "/" then result := result / rhs.eval(context)
-			else if operator == "=" then 
-				if result == rhs.eval(context) then result := 1 else result := 0 end
-			else if operator == "<" then 
-				if result < rhs.eval(context) then result := 1 else result := 0 end
-			else if operator == ">" then 
-				if result > rhs.eval(context) then result := 1 else result := 0 end
-			end end end end end end end
-	end 
-}
-
-
-@aspect "true"
-class Block
-{
-operation eval(context : Context) : Integer is do 
-		instructions.each{instruction  | result := instruction.eval(context)}
-	end 
-}
-
-
-@aspect "true"
-class ProcCall
-{
-operation eval(context : Context) : Integer is do 
+	@aspect "true"
+	class Instruction 
+	{
+		operation eval(context : Context) : Integer is do
+			result := 0
+		end
+	}
+	
+	@aspect "true"
+	class Constant
+	{
+		operation eval(context : Context) : Integer is do 
+			result := integerValue
+		end 
+	}
+	
+	@aspect "true"
+	class ParameterCall
+	{
+		operation eval(context : Context) : Integer is do 
+			result := context.first.getValue(parameter.name)
+		end 
+	}
+	
+	@aspect "true"
+	class Plus
+	{
+		operation eval(context : Context) : Integer is do 
+			result := lhs.eval(context) + rhs.eval(context)
+		end
+	}
+	
+	@aspect "true"
+	class Minus
+	{
+		operation eval(context : Context) : Integer is do 
+			result := lhs.eval(context) - rhs.eval(context)
+		end
+	}
+	
+	@aspect "true"
+	class Mult
+	{
+		operation eval(context : Context) : Integer is do 
+			result := lhs.eval(context) * rhs.eval(context)
+		end
+	}
+	
+	@aspect "true"
+	class Div
+	{
+		operation eval(context : Context) : Integer is do 
+			result := lhs.eval(context) / rhs.eval(context)
+		end
+	}
+	
+	@aspect "true"
+	class Equals
+	{
+		operation eval(context : Context) : Integer is do 
+			result := if lhs.eval(context) == rhs.eval(context) then 1 else 0 end
+		end
+	}
+	
+	@aspect "true"
+	class Greater
+	{
+		operation eval(context : Context) : Integer is do 
+			result := if lhs.eval(context) > rhs.eval(context) then 1 else 0 end
+		end
+	}
+	
+	@aspect "true"
+	class Lower
+	{
+		operation eval(context : Context) : Integer is do 
+			result := if lhs.eval(context) < rhs.eval(context) then 1 else 0 end
+		end
+	}
+	
+	@aspect "true"
+	class Block
+	{
+		operation eval(context : Context) : Integer is do 
+			instructions.each{instruction  | result := instruction.eval(context)}
+		end 
+	}
+	
+	
+	@aspect "true"
+	class ProcCall
+	{
+		operation eval(context : Context) : Integer is do 
 			// create a new stack frame
 			var frame : Bindings init Bindings.new
 			// push it on the stack
@@ -106,51 +147,51 @@ operation eval(context : Context) : Integer is do
 				var actualValue : Integer init actualArgs.elementAt(i).eval(context) 
 				frame.put(declaration.args.elementAt(i).name, actualValue)
 				i := i + 1
-				
 			end
 			// transfert control to procedure body
 			result := declaration.block.eval(context)
 			// pop stack frame
 			context.pop
 		end
-
-}
-
-
-@aspect "true"
-class If
-{
-operation eval(context : Context) : Integer is do 
-		if condition.eval(context) != 0 then
+	
+	}
+	
+	
+	@aspect "true"
+	class If
+	{
+		operation eval(context : Context) : Integer is do 
+			if condition.eval(context) != 0 then
 				result := thenPart.eval(context)
 			else
 				result := elsePart.eval(context)
 			end						
-	end 
-}
-
-@aspect "true"
-class While
-{
-operation eval(context : Context) : Integer is do 
-		var cond : Integer
+		end 
+	}
+	
+	@aspect "true"
+	class While
+	{
+		operation eval(context : Context) : Integer is do 
+			var cond : Integer
 			from cond := condition.eval(context)
 			until cond == 0
 			loop
 				result := block.eval(context)
 				cond := condition.eval(context)
 			end			
-	end 
-}
-@aspect "true"
-class Repeat
-{
-operation eval(context : Context) : Integer is do 
+		end 
+	}
+	@aspect "true"
+	class Repeat
+	{
+		operation eval(context : Context) : Integer is do 
 			from var i : Integer init condition.eval(context)
 			until i < 1
 			loop
 				result := block.eval(context)
 				i := i - 1
 			end
-	end 
+		end 
+	}
 }

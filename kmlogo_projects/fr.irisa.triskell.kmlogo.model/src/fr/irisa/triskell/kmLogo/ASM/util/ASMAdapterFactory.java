@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMAdapterFactory.java,v 1.1 2007-05-30 13:23:35 ffleurey Exp $
+ * $Id: ASMAdapterFactory.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.util;
 
@@ -132,6 +132,27 @@ public class ASMAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseParameterCall(ParameterCall object) {
 				return createParameterCallAdapter();
+			}
+			public Object casePlus(Plus object) {
+				return createPlusAdapter();
+			}
+			public Object caseMinus(Minus object) {
+				return createMinusAdapter();
+			}
+			public Object caseMult(Mult object) {
+				return createMultAdapter();
+			}
+			public Object caseDiv(Div object) {
+				return createDivAdapter();
+			}
+			public Object caseEquals(Equals object) {
+				return createEqualsAdapter();
+			}
+			public Object caseGreater(Greater object) {
+				return createGreaterAdapter();
+			}
+			public Object caseLower(Lower object) {
+				return createLowerAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -442,6 +463,104 @@ public class ASMAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Plus <em>Plus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Plus
+	 * @generated
+	 */
+	public Adapter createPlusAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Minus <em>Minus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Minus
+	 * @generated
+	 */
+	public Adapter createMinusAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Mult <em>Mult</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Mult
+	 * @generated
+	 */
+	public Adapter createMultAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Div <em>Div</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Div
+	 * @generated
+	 */
+	public Adapter createDivAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Equals <em>Equals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Equals
+	 * @generated
+	 */
+	public Adapter createEqualsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Greater <em>Greater</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Greater
+	 * @generated
+	 */
+	public Adapter createGreaterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kmLogo.ASM.Lower <em>Lower</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Lower
+	 * @generated
+	 */
+	public Adapter createLowerAdapter() {
 		return null;
 	}
 

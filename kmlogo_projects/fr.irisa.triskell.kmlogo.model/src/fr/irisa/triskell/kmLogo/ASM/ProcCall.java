@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProcCall.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ProcCall.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ProcCall extends Instruction {
+public interface ProcCall extends Expression {
 	/**
 	 * Returns the value of the '<em><b>Actual Args</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kmLogo.ASM.Expression}.

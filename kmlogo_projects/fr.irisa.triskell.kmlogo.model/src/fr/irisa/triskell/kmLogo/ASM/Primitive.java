@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Primitive.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: Primitive.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -14,7 +14,7 @@ package fr.irisa.triskell.kmLogo.ASM;
  *
  *
  * @see fr.irisa.triskell.kmLogo.ASM.ASMPackage#getPrimitive()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Primitive extends Instruction {

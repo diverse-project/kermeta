@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProcCallImpl.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ProcCallImpl.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -40,7 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class ProcCallImpl extends InstructionImpl implements ProcCall {
+public class ProcCallImpl extends ExpressionImpl implements ProcCall {
 	/**
 	 * The cached value of the '{@link #getActualArgs() <em>Actual Args</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

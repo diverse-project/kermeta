@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BinaryExp.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: BinaryExp.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -15,43 +15,16 @@ package fr.irisa.triskell.kmLogo.ASM;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kmLogo.ASM.BinaryExp#getOperator <em>Operator</em>}</li>
  *   <li>{@link fr.irisa.triskell.kmLogo.ASM.BinaryExp#getLhs <em>Lhs</em>}</li>
  *   <li>{@link fr.irisa.triskell.kmLogo.ASM.BinaryExp#getRhs <em>Rhs</em>}</li>
  * </ul>
  * </p>
  *
  * @see fr.irisa.triskell.kmLogo.ASM.ASMPackage#getBinaryExp()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface BinaryExp extends Expression {
-	/**
-	 * Returns the value of the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Operator</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operator</em>' attribute.
-	 * @see #setOperator(String)
-	 * @see fr.irisa.triskell.kmLogo.ASM.ASMPackage#getBinaryExp_Operator()
-	 * @model dataType="fr.irisa.triskell.kmLogo.String"
-	 * @generated
-	 */
-	String getOperator();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kmLogo.ASM.BinaryExp#getOperator <em>Operator</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Operator</em>' attribute.
-	 * @see #getOperator()
-	 * @generated
-	 */
-	void setOperator(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Lhs</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Instruction.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: Instruction.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see fr.irisa.triskell.kmLogo.ASM.ASMPackage#getInstruction()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Instruction extends EObject {

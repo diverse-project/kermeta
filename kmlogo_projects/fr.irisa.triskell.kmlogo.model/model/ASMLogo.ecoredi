@@ -17,7 +17,7 @@
   </diagrams>
   <subdiagrams>
     <model href="ASMLogo.ecore#//ASM"/>
-    <diagrams position="0,0" size="100,100" name="unnamed" viewport="994,283">
+    <diagrams position="0,0" size="100,100" name="unnamed" viewport="353,294">
       <property key="pageFormatName" value="A3"/>
       <property key="diagramWidth" value="1188"/>
       <property key="diagramHeight" value="1680"/>
@@ -31,7 +31,7 @@
         <element href="ASMLogo.ecore#//ASM"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode" position="240,59" size="132,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.2 //@subdiagrams.0/@diagrams.0/@contained.18 //@subdiagrams.0/@diagrams.0/@contained.28 //@subdiagrams.0/@diagrams.0/@contained.31 //@subdiagrams.0/@diagrams.0/@contained.34 //@subdiagrams.0/@diagrams.0/@contained.35 //@subdiagrams.0/@diagrams.0/@contained.41"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.2 //@subdiagrams.0/@diagrams.0/@contained.18 //@subdiagrams.0/@diagrams.0/@contained.31 //@subdiagrams.0/@diagrams.0/@contained.34 //@subdiagrams.0/@diagrams.0/@contained.35 //@subdiagrams.0/@diagrams.0/@contained.41"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="ASMLogo.ecore#//ASM/Instruction"/>
         </semanticModel>
@@ -219,7 +219,7 @@
         <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
       </contained>
       <contained xsi:type="di:GraphNode" position="673,196" size="108,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.18 //@subdiagrams.0/@diagrams.0/@contained.19 //@subdiagrams.0/@diagrams.0/@contained.20 //@subdiagrams.0/@diagrams.0/@contained.22 //@subdiagrams.0/@diagrams.0/@contained.23 //@subdiagrams.0/@diagrams.0/@contained.24 //@subdiagrams.0/@diagrams.0/@contained.26 //@subdiagrams.0/@diagrams.0/@contained.29 //@subdiagrams.0/@diagrams.0/@contained.42 //@subdiagrams.0/@diagrams.0/@contained.51 //@subdiagrams.0/@diagrams.0/@contained.53 //@subdiagrams.0/@diagrams.0/@contained.54 //@subdiagrams.0/@diagrams.0/@contained.57"/>
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.18 //@subdiagrams.0/@diagrams.0/@contained.19 //@subdiagrams.0/@diagrams.0/@contained.20 //@subdiagrams.0/@diagrams.0/@contained.22 //@subdiagrams.0/@diagrams.0/@contained.23 //@subdiagrams.0/@diagrams.0/@contained.24 //@subdiagrams.0/@diagrams.0/@contained.26 //@subdiagrams.0/@diagrams.0/@contained.29 //@subdiagrams.0/@diagrams.0/@contained.42 //@subdiagrams.0/@diagrams.0/@contained.51 //@subdiagrams.0/@diagrams.0/@contained.53 //@subdiagrams.0/@diagrams.0/@contained.54 //@subdiagrams.0/@diagrams.0/@contained.57 //@subdiagrams.0/@diagrams.0/@contained.28"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="ASMLogo.ecore#//ASM/Expression"/>
         </semanticModel>
@@ -254,8 +254,8 @@
         <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
         <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
       </contained>
-      <contained xsi:type="di:GraphNode" position="585,438" size="150,-1">
-        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.22 //@subdiagrams.0/@diagrams.0/@contained.23 //@subdiagrams.0/@diagrams.0/@contained.24"/>
+      <contained xsi:type="di:GraphNode" position="527,455" size="150,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.22 //@subdiagrams.0/@diagrams.0/@contained.23 //@subdiagrams.0/@diagrams.0/@contained.24 //@subdiagrams.0/@diagrams.0/@contained.66 //@subdiagrams.0/@diagrams.0/@contained.67 //@subdiagrams.0/@diagrams.0/@contained.68 //@subdiagrams.0/@diagrams.0/@contained.69 //@subdiagrams.0/@diagrams.0/@contained.70 //@subdiagrams.0/@diagrams.0/@contained.71 //@subdiagrams.0/@diagrams.0/@contained.72"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="ASMLogo.ecore#//ASM/BinaryExp"/>
         </semanticModel>
@@ -264,11 +264,6 @@
           <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
             <element href="ASMLogo.ecore#//ASM/BinaryExp"/>
           </semanticModel>
-          <contained xsi:type="di:GraphNode" position="0,0" size="-1,-1">
-            <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
-              <element href="ASMLogo.ecore#//ASM/BinaryExp/operator"/>
-            </semanticModel>
-          </contained>
         </contained>
         <contained xsi:type="di:GraphNode">
           <property key="eStructuralFeatureID" value="9"/>
@@ -320,7 +315,7 @@
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.25/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.17/@anchorage.0">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
       </contained>
-      <contained xsi:type="di:GraphNode" position="1350,358" size="132,-1">
+      <contained xsi:type="di:GraphNode" position="1304,489" size="132,-1">
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.28 //@subdiagrams.0/@diagrams.0/@contained.29 //@subdiagrams.0/@diagrams.0/@contained.32 //@subdiagrams.0/@diagrams.0/@contained.55"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="ASMLogo.ecore#//ASM/ProcCall"/>
@@ -338,7 +333,7 @@
           </semanticModel>
         </contained>
       </contained>
-      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.27/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.0/@anchorage.0">
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.27/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.17/@anchorage.0">
         <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
       </contained>
       <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.27/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.17/@anchorage.0">
@@ -347,8 +342,9 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
         <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+        <waypoints>[-572, -240, 117, -78]</waypoints>
       </contained>
-      <contained xsi:type="di:GraphNode" position="1392,193" size="146,-1">
+      <contained xsi:type="di:GraphNode" position="1435,186" size="146,-1">
         <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.31 //@subdiagrams.0/@diagrams.0/@contained.32 //@subdiagrams.0/@diagrams.0/@contained.36 //@subdiagrams.0/@diagrams.0/@contained.52 //@subdiagrams.0/@diagrams.0/@contained.55"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
           <element href="ASMLogo.ecore#//ASM/ProcDeclaration"/>
@@ -630,6 +626,153 @@
         </semanticModel>
         <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="20" vDistance="20"/>
         <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="353,558" size="83,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.66"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Plus"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Plus"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Plus"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="462,558" size="86,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.67"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Minus"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Minus"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Minus"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="571,558" size="83,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.68"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Mult"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Mult"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Mult"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="686,556" size="77,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.69"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Div"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Div"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Div"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="407,607" size="92,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.72"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Equals"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Equals"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Equals"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="515,608" size="90,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.71"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Greater"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Greater"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Greater"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" position="623,606" size="98,-1">
+        <anchorage graphEdge="//@subdiagrams.0/@diagrams.0/@contained.70"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+          <element href="ASMLogo.ecore#//ASM/Lower"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="19"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Lower"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode">
+          <property key="eStructuralFeatureID" value="9"/>
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="default">
+            <element href="ASMLogo.ecore#//ASM/Lower"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.59/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.60/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.61/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.62/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.65/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.64/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
+      </contained>
+      <contained xsi:type="di:GraphEdge" anchor="//@subdiagrams.0/@diagrams.0/@contained.63/@anchorage.0 //@subdiagrams.0/@diagrams.0/@contained.21/@anchorage.0">
+        <semanticModel xsi:type="di:SimpleSemanticModelElement" presentation="default" typeInfo="Inheritance"/>
       </contained>
     </diagrams>
   </subdiagrams>

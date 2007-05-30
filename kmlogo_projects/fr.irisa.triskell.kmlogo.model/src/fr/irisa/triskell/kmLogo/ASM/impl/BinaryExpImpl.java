@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BinaryExpImpl.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: BinaryExpImpl.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kmLogo.ASM.impl.BinaryExpImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link fr.irisa.triskell.kmLogo.ASM.impl.BinaryExpImpl#getLhs <em>Lhs</em>}</li>
  *   <li>{@link fr.irisa.triskell.kmLogo.ASM.impl.BinaryExpImpl#getRhs <em>Rhs</em>}</li>
  * </ul>
@@ -33,27 +32,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
-	/**
-	 * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperator()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String OPERATOR_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOperator()
-	 * @generated
-	 * @ordered
-	 */
-	protected String operator = OPERATOR_EDEFAULT;
-
+public abstract class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
 	/**
 	 * The cached value of the '{@link #getLhs() <em>Lhs</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -90,27 +69,6 @@ public class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
 	 */
 	protected EClass eStaticClass() {
 		return ASMPackage.Literals.BINARY_EXP;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getOperator() {
-		return operator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOperator(String newOperator) {
-		String oldOperator = operator;
-		operator = newOperator;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ASMPackage.BINARY_EXP__OPERATOR, oldOperator, operator));
 	}
 
 	/**
@@ -221,8 +179,6 @@ public class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
 	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ASMPackage.BINARY_EXP__OPERATOR:
-				return getOperator();
 			case ASMPackage.BINARY_EXP__LHS:
 				return getLhs();
 			case ASMPackage.BINARY_EXP__RHS:
@@ -238,9 +194,6 @@ public class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ASMPackage.BINARY_EXP__OPERATOR:
-				setOperator((String)newValue);
-				return;
 			case ASMPackage.BINARY_EXP__LHS:
 				setLhs((Expression)newValue);
 				return;
@@ -258,9 +211,6 @@ public class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ASMPackage.BINARY_EXP__OPERATOR:
-				setOperator(OPERATOR_EDEFAULT);
-				return;
 			case ASMPackage.BINARY_EXP__LHS:
 				setLhs((Expression)null);
 				return;
@@ -278,29 +228,12 @@ public class BinaryExpImpl extends ExpressionImpl implements BinaryExp {
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ASMPackage.BINARY_EXP__OPERATOR:
-				return OPERATOR_EDEFAULT == null ? operator != null : !OPERATOR_EDEFAULT.equals(operator);
 			case ASMPackage.BINARY_EXP__LHS:
 				return lhs != null;
 			case ASMPackage.BINARY_EXP__RHS:
 				return rhs != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (operator: ");
-		result.append(operator);
-		result.append(')');
-		return result.toString();
 	}
 
 } //BinaryExpImpl

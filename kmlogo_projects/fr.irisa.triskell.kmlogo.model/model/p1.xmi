@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<ASM:Block xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ASM="http://kmLogo.ecore/ASM" xsi:schemaLocation="http://kmLogo.ecore/ASM ASMLogo.ecore#//ASM">
-  <instructions xsi:type="ASM:Clear"/>
-  <instructions xsi:type="ASM:Forward">
-    <steps xsi:type="ASM:Constant" integerValue="10"/>
-  </instructions>
-</ASM:Block>

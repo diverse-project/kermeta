@@ -2,33 +2,31 @@
  * <copyright>
  * </copyright>
  *
- * $Id: InstructionImpl.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
+ * $Id: MinusImpl.java,v 1.1 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
 import fr.irisa.triskell.kmLogo.ASM.ASMPackage;
-import fr.irisa.triskell.kmLogo.ASM.Instruction;
+import fr.irisa.triskell.kmLogo.ASM.Minus;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Instruction</b></em>'.
+ * An implementation of the model object '<em><b>Minus</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public abstract class InstructionImpl extends EObjectImpl implements Instruction {
+public class MinusImpl extends BinaryExpImpl implements Minus {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InstructionImpl() {
+	protected MinusImpl() {
 		super();
 	}
 
@@ -38,7 +36,7 @@ public abstract class InstructionImpl extends EObjectImpl implements Instruction
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return ASMPackage.Literals.INSTRUCTION;
+		return ASMPackage.Literals.MINUS;
 	}
 
-} //InstructionImpl
+} //MinusImpl

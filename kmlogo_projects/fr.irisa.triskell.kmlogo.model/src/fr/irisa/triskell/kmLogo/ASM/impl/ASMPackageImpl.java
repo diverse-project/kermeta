@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMPackageImpl.java,v 1.2 2007-05-30 14:44:03 ffleurey Exp $
+ * $Id: ASMPackageImpl.java,v 1.3 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -14,15 +14,22 @@ import fr.irisa.triskell.kmLogo.ASM.Block;
 import fr.irisa.triskell.kmLogo.ASM.Clear;
 import fr.irisa.triskell.kmLogo.ASM.Constant;
 import fr.irisa.triskell.kmLogo.ASM.ControlStructure;
+import fr.irisa.triskell.kmLogo.ASM.Div;
+import fr.irisa.triskell.kmLogo.ASM.Equals;
 import fr.irisa.triskell.kmLogo.ASM.Expression;
 import fr.irisa.triskell.kmLogo.ASM.Forward;
+import fr.irisa.triskell.kmLogo.ASM.Greater;
 import fr.irisa.triskell.kmLogo.ASM.If;
 import fr.irisa.triskell.kmLogo.ASM.Instruction;
 import fr.irisa.triskell.kmLogo.ASM.Left;
+import fr.irisa.triskell.kmLogo.ASM.Lower;
+import fr.irisa.triskell.kmLogo.ASM.Minus;
+import fr.irisa.triskell.kmLogo.ASM.Mult;
 import fr.irisa.triskell.kmLogo.ASM.Parameter;
 import fr.irisa.triskell.kmLogo.ASM.ParameterCall;
 import fr.irisa.triskell.kmLogo.ASM.PenDown;
 import fr.irisa.triskell.kmLogo.ASM.PenUp;
+import fr.irisa.triskell.kmLogo.ASM.Plus;
 import fr.irisa.triskell.kmLogo.ASM.Primitive;
 import fr.irisa.triskell.kmLogo.ASM.ProcCall;
 import fr.irisa.triskell.kmLogo.ASM.ProcDeclaration;
@@ -194,6 +201,55 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * @generated
 	 */
 	private EClass parameterCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass plusEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass minusEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass multEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass divEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass equalsEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass greaterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lowerEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -408,17 +464,8 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBinaryExp_Operator() {
-		return (EAttribute)binaryExpEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getBinaryExp_Lhs() {
-		return (EReference)binaryExpEClass.getEStructuralFeatures().get(1);
+		return (EReference)binaryExpEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -427,7 +474,7 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * @generated
 	 */
 	public EReference getBinaryExp_Rhs() {
-		return (EReference)binaryExpEClass.getEStructuralFeatures().get(2);
+		return (EReference)binaryExpEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -660,6 +707,69 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPlus() {
+		return plusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMinus() {
+		return minusEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMult() {
+		return multEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDiv() {
+		return divEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEquals() {
+		return equalsEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGreater() {
+		return greaterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLower() {
+		return lowerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ASMFactory getASMFactory() {
 		return (ASMFactory)getEFactoryInstance();
 	}
@@ -708,7 +818,6 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		expressionEClass = createEClass(EXPRESSION);
 
 		binaryExpEClass = createEClass(BINARY_EXP);
-		createEAttribute(binaryExpEClass, BINARY_EXP__OPERATOR);
 		createEReference(binaryExpEClass, BINARY_EXP__LHS);
 		createEReference(binaryExpEClass, BINARY_EXP__RHS);
 
@@ -746,6 +855,20 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 
 		parameterCallEClass = createEClass(PARAMETER_CALL);
 		createEReference(parameterCallEClass, PARAMETER_CALL__PARAMETER);
+
+		plusEClass = createEClass(PLUS);
+
+		minusEClass = createEClass(MINUS);
+
+		multEClass = createEClass(MULT);
+
+		divEClass = createEClass(DIV);
+
+		equalsEClass = createEClass(EQUALS);
+
+		greaterEClass = createEClass(GREATER);
+
+		lowerEClass = createEClass(LOWER);
 	}
 
 	/**
@@ -786,7 +909,7 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		expressionEClass.getESuperTypes().add(this.getInstruction());
 		binaryExpEClass.getESuperTypes().add(this.getExpression());
 		constantEClass.getESuperTypes().add(this.getExpression());
-		procCallEClass.getESuperTypes().add(this.getInstruction());
+		procCallEClass.getESuperTypes().add(this.getExpression());
 		procDeclarationEClass.getESuperTypes().add(this.getInstruction());
 		blockEClass.getESuperTypes().add(this.getInstruction());
 		ifEClass.getESuperTypes().add(this.getControlStructure());
@@ -794,11 +917,18 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 		repeatEClass.getESuperTypes().add(this.getControlStructure());
 		whileEClass.getESuperTypes().add(this.getControlStructure());
 		parameterCallEClass.getESuperTypes().add(this.getExpression());
+		plusEClass.getESuperTypes().add(this.getBinaryExp());
+		minusEClass.getESuperTypes().add(this.getBinaryExp());
+		multEClass.getESuperTypes().add(this.getBinaryExp());
+		divEClass.getESuperTypes().add(this.getBinaryExp());
+		equalsEClass.getESuperTypes().add(this.getBinaryExp());
+		greaterEClass.getESuperTypes().add(this.getBinaryExp());
+		lowerEClass.getESuperTypes().add(this.getBinaryExp());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(instructionEClass, Instruction.class, "Instruction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(primitiveEClass, Primitive.class, "Primitive", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(primitiveEClass, Primitive.class, "Primitive", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(backEClass, Back.class, "Back", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBack_Steps(), this.getExpression(), null, "steps", null, 1, 1, Back.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -818,10 +948,9 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 
 		initEClass(clearEClass, Clear.class, "Clear", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(binaryExpEClass, BinaryExp.class, "BinaryExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBinaryExp_Operator(), theKmLogoPackage.getString(), "operator", null, 0, 1, BinaryExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(binaryExpEClass, BinaryExp.class, "BinaryExp", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBinaryExp_Lhs(), this.getExpression(), null, "lhs", null, 1, 1, BinaryExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBinaryExp_Rhs(), this.getExpression(), null, "rhs", null, 1, 1, BinaryExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -859,6 +988,20 @@ public class ASMPackageImpl extends EPackageImpl implements ASMPackage {
 
 		initEClass(parameterCallEClass, ParameterCall.class, "ParameterCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterCall_Parameter(), this.getParameter(), null, "parameter", null, 1, 1, ParameterCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(minusEClass, Minus.class, "Minus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(multEClass, Mult.class, "Mult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(divEClass, Div.class, "Div", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(equalsEClass, Equals.class, "Equals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(greaterEClass, Greater.class, "Greater", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(lowerEClass, Lower.class, "Lower", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 	}
 
 } //ASMPackageImpl

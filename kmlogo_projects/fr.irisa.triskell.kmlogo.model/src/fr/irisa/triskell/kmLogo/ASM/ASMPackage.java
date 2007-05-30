@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMPackage.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ASMPackage.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -296,22 +296,13 @@ public interface ASMPackage extends EPackage {
 	int BINARY_EXP = 10;
 
 	/**
-	 * The feature id for the '<em><b>Operator</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BINARY_EXP__OPERATOR = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BINARY_EXP__LHS = EXPRESSION_FEATURE_COUNT + 1;
+	int BINARY_EXP__LHS = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
@@ -320,7 +311,7 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINARY_EXP__RHS = EXPRESSION_FEATURE_COUNT + 2;
+	int BINARY_EXP__RHS = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Binary Exp</em>' class.
@@ -329,7 +320,7 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BINARY_EXP_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+	int BINARY_EXP_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.ConstantImpl <em>Constant</em>}' class.
@@ -376,7 +367,7 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROC_CALL__ACTUAL_ARGS = INSTRUCTION_FEATURE_COUNT + 0;
+	int PROC_CALL__ACTUAL_ARGS = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' reference.
@@ -385,7 +376,7 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROC_CALL__DECLARATION = INSTRUCTION_FEATURE_COUNT + 1;
+	int PROC_CALL__DECLARATION = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Proc Call</em>' class.
@@ -394,7 +385,7 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROC_CALL_FEATURE_COUNT = INSTRUCTION_FEATURE_COUNT + 2;
+	int PROC_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.ProcDeclarationImpl <em>Proc Declaration</em>}' class.
@@ -685,6 +676,266 @@ public interface ASMPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl <em>Plus</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPlus()
+	 * @generated
+	 */
+	int PLUS = 21;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUS__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUS__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Plus</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLUS_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.MinusImpl <em>Minus</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.MinusImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMinus()
+	 * @generated
+	 */
+	int MINUS = 22;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MINUS__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MINUS__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Minus</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MINUS_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.MultImpl <em>Mult</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.MultImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMult()
+	 * @generated
+	 */
+	int MULT = 23;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULT__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULT__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Mult</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MULT_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.DivImpl <em>Div</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.DivImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getDiv()
+	 * @generated
+	 */
+	int DIV = 24;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIV__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIV__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Div</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIV_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.EqualsImpl <em>Equals</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.EqualsImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getEquals()
+	 * @generated
+	 */
+	int EQUALS = 25;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUALS__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUALS__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Equals</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EQUALS_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.GreaterImpl <em>Greater</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.GreaterImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getGreater()
+	 * @generated
+	 */
+	int GREATER = 26;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GREATER__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GREATER__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Greater</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GREATER_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.LowerImpl <em>Lower</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LowerImpl
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getLower()
+	 * @generated
+	 */
+	int LOWER = 27;
+
+	/**
+	 * The feature id for the '<em><b>Lhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOWER__LHS = BINARY_EXP__LHS;
+
+	/**
+	 * The feature id for the '<em><b>Rhs</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOWER__RHS = BINARY_EXP__RHS;
+
+	/**
+	 * The number of structural features of the '<em>Lower</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOWER_FEATURE_COUNT = BINARY_EXP_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Instruction <em>Instruction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -837,17 +1088,6 @@ public interface ASMPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBinaryExp();
-
-	/**
-	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kmLogo.ASM.BinaryExp#getOperator <em>Operator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Operator</em>'.
-	 * @see fr.irisa.triskell.kmLogo.ASM.BinaryExp#getOperator()
-	 * @see #getBinaryExp()
-	 * @generated
-	 */
-	EAttribute getBinaryExp_Operator();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link fr.irisa.triskell.kmLogo.ASM.BinaryExp#getLhs <em>Lhs</em>}'.
@@ -1137,6 +1377,76 @@ public interface ASMPackage extends EPackage {
 	EReference getParameterCall_Parameter();
 
 	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Plus <em>Plus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Plus</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Plus
+	 * @generated
+	 */
+	EClass getPlus();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Minus <em>Minus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Minus</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Minus
+	 * @generated
+	 */
+	EClass getMinus();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Mult <em>Mult</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mult</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Mult
+	 * @generated
+	 */
+	EClass getMult();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Div <em>Div</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Div</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Div
+	 * @generated
+	 */
+	EClass getDiv();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Equals <em>Equals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Equals</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Equals
+	 * @generated
+	 */
+	EClass getEquals();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Greater <em>Greater</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Greater</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Greater
+	 * @generated
+	 */
+	EClass getGreater();
+
+	/**
+	 * Returns the meta object for class '{@link fr.irisa.triskell.kmLogo.ASM.Lower <em>Lower</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Lower</em>'.
+	 * @see fr.irisa.triskell.kmLogo.ASM.Lower
+	 * @generated
+	 */
+	EClass getLower();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1157,7 +1467,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals {
+	interface Literals  {
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.InstructionImpl <em>Instruction</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -1299,14 +1609,6 @@ public interface ASMPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BINARY_EXP = eINSTANCE.getBinaryExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BINARY_EXP__OPERATOR = eINSTANCE.getBinaryExp_Operator();
 
 		/**
 		 * The meta object literal for the '<em><b>Lhs</b></em>' containment reference feature.
@@ -1543,6 +1845,76 @@ public interface ASMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAMETER_CALL__PARAMETER = eINSTANCE.getParameterCall_Parameter();
+
+			/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl <em>Plus</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPlus()
+		 * @generated
+		 */
+		EClass PLUS = eINSTANCE.getPlus();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.MinusImpl <em>Minus</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.MinusImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMinus()
+		 * @generated
+		 */
+		EClass MINUS = eINSTANCE.getMinus();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.MultImpl <em>Mult</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.MultImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMult()
+		 * @generated
+		 */
+		EClass MULT = eINSTANCE.getMult();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.DivImpl <em>Div</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.DivImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getDiv()
+		 * @generated
+		 */
+		EClass DIV = eINSTANCE.getDiv();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.EqualsImpl <em>Equals</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.EqualsImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getEquals()
+		 * @generated
+		 */
+		EClass EQUALS = eINSTANCE.getEquals();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.GreaterImpl <em>Greater</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.GreaterImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getGreater()
+		 * @generated
+		 */
+		EClass GREATER = eINSTANCE.getGreater();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.LowerImpl <em>Lower</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LowerImpl
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getLower()
+		 * @generated
+		 */
+		EClass LOWER = eINSTANCE.getLower();
 
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMFactoryImpl.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ASMFactoryImpl.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
@@ -59,8 +59,6 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 	 */
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ASMPackage.INSTRUCTION: return createInstruction();
-			case ASMPackage.PRIMITIVE: return createPrimitive();
 			case ASMPackage.BACK: return createBack();
 			case ASMPackage.FORWARD: return createForward();
 			case ASMPackage.LEFT: return createLeft();
@@ -68,8 +66,6 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 			case ASMPackage.PEN_DOWN: return createPenDown();
 			case ASMPackage.PEN_UP: return createPenUp();
 			case ASMPackage.CLEAR: return createClear();
-			case ASMPackage.EXPRESSION: return createExpression();
-			case ASMPackage.BINARY_EXP: return createBinaryExp();
 			case ASMPackage.CONSTANT: return createConstant();
 			case ASMPackage.PROC_CALL: return createProcCall();
 			case ASMPackage.PROC_DECLARATION: return createProcDeclaration();
@@ -80,29 +76,16 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 			case ASMPackage.WHILE: return createWhile();
 			case ASMPackage.PARAMETER: return createParameter();
 			case ASMPackage.PARAMETER_CALL: return createParameterCall();
+			case ASMPackage.PLUS: return createPlus();
+			case ASMPackage.MINUS: return createMinus();
+			case ASMPackage.MULT: return createMult();
+			case ASMPackage.DIV: return createDiv();
+			case ASMPackage.EQUALS: return createEquals();
+			case ASMPackage.GREATER: return createGreater();
+			case ASMPackage.LOWER: return createLower();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Instruction createInstruction() {
-		InstructionImpl instruction = new InstructionImpl();
-		return instruction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Primitive createPrimitive() {
-		PrimitiveImpl primitive = new PrimitiveImpl();
-		return primitive;
 	}
 
 	/**
@@ -173,26 +156,6 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 	public Clear createClear() {
 		ClearImpl clear = new ClearImpl();
 		return clear;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BinaryExp createBinaryExp() {
-		BinaryExpImpl binaryExp = new BinaryExpImpl();
-		return binaryExp;
 	}
 
 	/**
@@ -293,6 +256,76 @@ public class ASMFactoryImpl extends EFactoryImpl implements ASMFactory {
 	public ParameterCall createParameterCall() {
 		ParameterCallImpl parameterCall = new ParameterCallImpl();
 		return parameterCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Plus createPlus() {
+		PlusImpl plus = new PlusImpl();
+		return plus;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Minus createMinus() {
+		MinusImpl minus = new MinusImpl();
+		return minus;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Mult createMult() {
+		MultImpl mult = new MultImpl();
+		return mult;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Div createDiv() {
+		DivImpl div = new DivImpl();
+		return div;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Equals createEquals() {
+		EqualsImpl equals = new EqualsImpl();
+		return equals;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Greater createGreater() {
+		GreaterImpl greater = new GreaterImpl();
+		return greater;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Lower createLower() {
+		LowerImpl lower = new LowerImpl();
+		return lower;
 	}
 
 	/**

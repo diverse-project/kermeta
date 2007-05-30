@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMFactory.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ASMFactory.java,v 1.2 2007-05-30 22:18:11 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -24,24 +24,6 @@ public interface ASMFactory extends EFactory {
 	 * @generated
 	 */
 	ASMFactory eINSTANCE = fr.irisa.triskell.kmLogo.ASM.impl.ASMFactoryImpl.init();
-
-	/**
-	 * Returns a new object of class '<em>Instruction</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instruction</em>'.
-	 * @generated
-	 */
-	Instruction createInstruction();
-
-	/**
-	 * Returns a new object of class '<em>Primitive</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Primitive</em>'.
-	 * @generated
-	 */
-	Primitive createPrimitive();
 
 	/**
 	 * Returns a new object of class '<em>Back</em>'.
@@ -105,24 +87,6 @@ public interface ASMFactory extends EFactory {
 	 * @generated
 	 */
 	Clear createClear();
-
-	/**
-	 * Returns a new object of class '<em>Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression</em>'.
-	 * @generated
-	 */
-	Expression createExpression();
-
-	/**
-	 * Returns a new object of class '<em>Binary Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Binary Exp</em>'.
-	 * @generated
-	 */
-	BinaryExp createBinaryExp();
 
 	/**
 	 * Returns a new object of class '<em>Constant</em>'.
@@ -213,6 +177,69 @@ public interface ASMFactory extends EFactory {
 	 * @generated
 	 */
 	ParameterCall createParameterCall();
+
+	/**
+	 * Returns a new object of class '<em>Plus</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Plus</em>'.
+	 * @generated
+	 */
+	Plus createPlus();
+
+	/**
+	 * Returns a new object of class '<em>Minus</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Minus</em>'.
+	 * @generated
+	 */
+	Minus createMinus();
+
+	/**
+	 * Returns a new object of class '<em>Mult</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mult</em>'.
+	 * @generated
+	 */
+	Mult createMult();
+
+	/**
+	 * Returns a new object of class '<em>Div</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Div</em>'.
+	 * @generated
+	 */
+	Div createDiv();
+
+	/**
+	 * Returns a new object of class '<em>Equals</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Equals</em>'.
+	 * @generated
+	 */
+	Equals createEquals();
+
+	/**
+	 * Returns a new object of class '<em>Greater</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Greater</em>'.
+	 * @generated
+	 */
+	Greater createGreater();
+
+	/**
+	 * Returns a new object of class '<em>Lower</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Lower</em>'.
+	 * @generated
+	 */
+	Lower createLower();
 
 	/**
 	 * Returns the package supported by this factory.
