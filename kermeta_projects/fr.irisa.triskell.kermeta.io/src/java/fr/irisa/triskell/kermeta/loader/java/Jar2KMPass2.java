@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.4 2006-10-27 08:26:16 dvojtise Exp $
+/* $Id: Jar2KMPass2.java,v 1.5 2007-05-30 11:45:56 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -75,7 +75,7 @@ public class Jar2KMPass2 extends Jar2KMPass {
 		    					}
 		    					else {
 		    						// select only those in the include filter
-		    						if(isInFilter(pqname, builder.includeFilters)) {
+		    						if(isInFilter(pqname, builder.includeFilters) || isInFilter(qname, builder.includeFilters)) {
 					    				internalLog.debug("JAR : file "+jentry.getName());
 		    							addClass(jentry, pqname, qname);
 		    						}
@@ -83,13 +83,13 @@ public class Jar2KMPass2 extends Jar2KMPass {
 		    				}
 		    				else {
 		    					//	select only those not in the exclude filter
-	    						if(! isInFilter(pqname, builder.excludeFilters)) {
+	    						if(! (isInFilter(pqname, builder.excludeFilters)|| isInFilter(qname, builder.includeFilters))) {
 				    				internalLog.debug("JAR : file "+jentry.getName());
 	    							addClass(jentry, pqname, qname);
 	    						}
 	    						else if(builder.includeFilters.size() != 0){
 		    						// if it is in the include filter it may rescued and added
-		    						if(isInFilter(pqname, builder.includeFilters)) {
+		    						if(isInFilter(pqname, builder.includeFilters)|| isInFilter(qname, builder.includeFilters)) {
 					    				internalLog.debug("JAR : file "+jentry.getName());
 		    							addClass(jentry, pqname, qname);
 		    						}
