@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureSwitch.java,v 1.4 2007-05-09 08:56:17 cfaucher Exp $
+ * $Id: StructureSwitch.java,v 1.5 2007-05-30 11:17:44 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -133,6 +133,23 @@ public class StructureSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StructurePackage.MODEL: {
+				Model model = (Model)theEObject;
+				Object result = caseModel(model);
+				if (result == null) result = caseObject(model);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL_TYPE: {
+				ModelType modelType = (ModelType)theEObject;
+				Object result = caseModelType(modelType);
+				if (result == null) result = caseType(modelType);
+				if (result == null) result = caseTypeDefinition(modelType);
+				if (result == null) result = caseObject(modelType);
+				if (result == null) result = caseNamedElement(modelType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case StructurePackage.OPERATION: {
 				Operation operation = (Operation)theEObject;
 				Object result = caseOperation(operation);
@@ -174,6 +191,14 @@ public class StructureSwitch {
 				Object result = caseEnumerationLiteral(enumerationLiteral);
 				if (result == null) result = caseNamedElement(enumerationLiteral);
 				if (result == null) result = caseObject(enumerationLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.TYPE_VARIABLE_BINDING: {
+				TypeVariableBinding typeVariableBinding = (TypeVariableBinding)theEObject;
+				Object result = caseTypeVariableBinding(typeVariableBinding);
+				if (result == null) result = caseTypeContainer(typeVariableBinding);
+				if (result == null) result = caseObject(typeVariableBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -274,71 +299,11 @@ public class StructureSwitch {
 			case StructurePackage.CLASS_DEFINITION: {
 				ClassDefinition classDefinition = (ClassDefinition)theEObject;
 				Object result = caseClassDefinition(classDefinition);
-				if (result == null) result = caseTypeContainer(classDefinition);
 				if (result == null) result = caseGenericTypeDefinition(classDefinition);
-				if (result == null) result = caseObject(classDefinition);
+				if (result == null) result = caseTypeContainer(classDefinition);
 				if (result == null) result = caseTypeDefinition(classDefinition);
+				if (result == null) result = caseObject(classDefinition);
 				if (result == null) result = caseNamedElement(classDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_VARIABLE: {
-				TypeVariable typeVariable = (TypeVariable)theEObject;
-				Object result = caseTypeVariable(typeVariable);
-				if (result == null) result = caseTypeContainer(typeVariable);
-				if (result == null) result = caseType(typeVariable);
-				if (result == null) result = caseNamedElement(typeVariable);
-				if (result == null) result = caseObject(typeVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PRODUCT_TYPE: {
-				ProductType productType = (ProductType)theEObject;
-				Object result = caseProductType(productType);
-				if (result == null) result = caseTypeContainer(productType);
-				if (result == null) result = caseType(productType);
-				if (result == null) result = caseObject(productType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.FUNCTION_TYPE: {
-				FunctionType functionType = (FunctionType)theEObject;
-				Object result = caseFunctionType(functionType);
-				if (result == null) result = caseTypeContainer(functionType);
-				if (result == null) result = caseType(functionType);
-				if (result == null) result = caseObject(functionType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_VARIABLE_BINDING: {
-				TypeVariableBinding typeVariableBinding = (TypeVariableBinding)theEObject;
-				Object result = caseTypeVariableBinding(typeVariableBinding);
-				if (result == null) result = caseTypeContainer(typeVariableBinding);
-				if (result == null) result = caseObject(typeVariableBinding);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_DEFINITION: {
-				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
-				Object result = caseTypeDefinition(typeDefinition);
-				if (result == null) result = caseNamedElement(typeDefinition);
-				if (result == null) result = caseObject(typeDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.VOID_TYPE: {
-				VoidType voidType = (VoidType)theEObject;
-				Object result = caseVoidType(voidType);
-				if (result == null) result = caseType(voidType);
-				if (result == null) result = caseObject(voidType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PARAMETERIZED_TYPE: {
-				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
-				Object result = caseParameterizedType(parameterizedType);
-				if (result == null) result = caseType(parameterizedType);
-				if (result == null) result = caseObject(parameterizedType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -351,38 +316,21 @@ public class StructureSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.MODEL_TYPE_DEFINITION: {
-				ModelTypeDefinition modelTypeDefinition = (ModelTypeDefinition)theEObject;
-				Object result = caseModelTypeDefinition(modelTypeDefinition);
-				if (result == null) result = caseGenericTypeDefinition(modelTypeDefinition);
-				if (result == null) result = caseTypeDefinitionContainer(modelTypeDefinition);
-				if (result == null) result = caseTypeDefinition(modelTypeDefinition);
-				if (result == null) result = caseNamedElement(modelTypeDefinition);
-				if (result == null) result = caseObject(modelTypeDefinition);
+			case StructurePackage.PARAMETERIZED_TYPE: {
+				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
+				Object result = caseParameterizedType(parameterizedType);
+				if (result == null) result = caseType(parameterizedType);
+				if (result == null) result = caseObject(parameterizedType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.MODEL_TYPE: {
-				ModelType modelType = (ModelType)theEObject;
-				Object result = caseModelType(modelType);
-				if (result == null) result = caseParameterizedType(modelType);
-				if (result == null) result = caseType(modelType);
-				if (result == null) result = caseObject(modelType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_DEFINITION_CONTAINER: {
-				TypeDefinitionContainer typeDefinitionContainer = (TypeDefinitionContainer)theEObject;
-				Object result = caseTypeDefinitionContainer(typeDefinitionContainer);
-				if (result == null) result = caseNamedElement(typeDefinitionContainer);
-				if (result == null) result = caseObject(typeDefinitionContainer);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.MODEL: {
-				Model model = (Model)theEObject;
-				Object result = caseModel(model);
-				if (result == null) result = caseObject(model);
+			case StructurePackage.TYPE_VARIABLE: {
+				TypeVariable typeVariable = (TypeVariable)theEObject;
+				Object result = caseTypeVariable(typeVariable);
+				if (result == null) result = caseTypeContainer(typeVariable);
+				if (result == null) result = caseType(typeVariable);
+				if (result == null) result = caseNamedElement(typeVariable);
+				if (result == null) result = caseObject(typeVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -424,6 +372,48 @@ public class StructureSwitch {
 				if (result == null) result = caseType(virtualType);
 				if (result == null) result = caseNamedElement(virtualType);
 				if (result == null) result = caseObject(virtualType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.TYPE_DEFINITION: {
+				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+				Object result = caseTypeDefinition(typeDefinition);
+				if (result == null) result = caseNamedElement(typeDefinition);
+				if (result == null) result = caseObject(typeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PRODUCT_TYPE: {
+				ProductType productType = (ProductType)theEObject;
+				Object result = caseProductType(productType);
+				if (result == null) result = caseTypeContainer(productType);
+				if (result == null) result = caseType(productType);
+				if (result == null) result = caseObject(productType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.FUNCTION_TYPE: {
+				FunctionType functionType = (FunctionType)theEObject;
+				Object result = caseFunctionType(functionType);
+				if (result == null) result = caseTypeContainer(functionType);
+				if (result == null) result = caseType(functionType);
+				if (result == null) result = caseObject(functionType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.VOID_TYPE: {
+				VoidType voidType = (VoidType)theEObject;
+				Object result = caseVoidType(voidType);
+				if (result == null) result = caseType(voidType);
+				if (result == null) result = caseObject(voidType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.TYPE_DEFINITION_CONTAINER: {
+				TypeDefinitionContainer typeDefinitionContainer = (TypeDefinitionContainer)theEObject;
+				Object result = caseTypeDefinitionContainer(typeDefinitionContainer);
+				if (result == null) result = caseNamedElement(typeDefinitionContainer);
+				if (result == null) result = caseObject(typeDefinitionContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -848,21 +838,6 @@ public class StructureSwitch {
 	 * @generated
 	 */
 	public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpretting the object as an instance of '<em>Model Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpretting the object as an instance of '<em>Model Type Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public Object caseModelTypeDefinition(ModelTypeDefinition object) {
 		return null;
 	}
 

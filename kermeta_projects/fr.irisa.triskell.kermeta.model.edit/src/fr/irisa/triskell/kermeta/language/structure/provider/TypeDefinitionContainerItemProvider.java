@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerItemProvider.java,v 1.8 2007-05-09 08:56:04 cfaucher Exp $
+ * $Id: TypeDefinitionContainerItemProvider.java,v 1.9 2007-05-30 11:21:45 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -126,6 +126,11 @@ public class TypeDefinitionContainerItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
+				 StructureFactory.eINSTANCE.createModelType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
@@ -136,17 +141,12 @@ public class TypeDefinitionContainerItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createClassDefinition()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
-				 StructureFactory.eINSTANCE.createModelTypeDefinition()));
+				 StructureFactory.eINSTANCE.createClassDefinition()));
 	}
 
 	/**

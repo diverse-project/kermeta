@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.6 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: BehaviorPackage.java,v 1.7 2007-05-30 11:17:44 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -118,6 +118,76 @@ public interface BehaviorPackage extends EPackage {
 	int ASSIGNMENT = 0;
 
 	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallExpressionImpl <em>Call Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallExpressionImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallExpression()
+	 * @generated
+	 */
+	int CALL_EXPRESSION = 2;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BlockImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
+	 * @generated
+	 */
+	int BLOCK = 3;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+	 * @generated
+	 */
+	int CALL_VARIABLE = 4;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
+	 * @generated
+	 */
+	int CALL_FEATURE = 5;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallSuperOperation()
+	 * @generated
+	 */
+	int CALL_SUPER_OPERATION = 6;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallResult()
+	 * @generated
+	 */
+	int CALL_RESULT = 7;
+
+	/**
+	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl <em>Call Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl
+	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallValue()
+	 * @generated
+	 */
+	int CALL_VALUE = 8;
+
+	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,16 +249,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGNMENT_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallExpressionImpl <em>Call Expression</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallExpressionImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallExpression()
-	 * @generated
-	 */
-	int CALL_EXPRESSION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -254,16 +314,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BlockImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
-	 * @generated
-	 */
-	int BLOCK = 3;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -316,16 +366,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int BLOCK_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
-	 * @generated
-	 */
-	int CALL_VARIABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -389,16 +429,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_VARIABLE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
-	 * @generated
-	 */
-	int CALL_FEATURE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -509,16 +539,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallSuperOperation()
-	 * @generated
-	 */
-	int CALL_SUPER_OPERATION = 6;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -582,16 +602,6 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_SUPER_OPERATION_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallResult()
-	 * @generated
-	 */
-	int CALL_RESULT = 7;
-
-	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -653,16 +663,6 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_RESULT_FEATURE_COUNT = CALL_VARIABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl <em>Call Value</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl
-	 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallValue()
-	 * @generated
-	 */
-	int CALL_VALUE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -2434,7 +2434,7 @@ public interface BehaviorPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals {
+	interface Literals  {
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.AssignmentImpl <em>Assignment</em>}' class.
 		 * <!-- begin-user-doc -->

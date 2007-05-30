@@ -2,14 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeItemProvider.java,v 1.7 2006-12-11 08:59:21 dvojtise Exp $
+ * $Id: ModelTypeItemProvider.java,v 1.8 2007-05-30 11:21:45 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
-import fr.irisa.triskell.kermeta.language.structure.Model;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
@@ -22,11 +20,14 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelType} object.
@@ -35,7 +36,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class ModelTypeItemProvider
-	extends ParameterizedTypeItemProvider
+	extends TypeItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -62,8 +63,54 @@ public class ModelTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamePropertyDescriptor(object);
+			addIncludedTypeDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedElement_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Included Type Definition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIncludedTypeDefinitionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_ModelType_includedTypeDefinition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ModelType_includedTypeDefinition_feature", "_UI_ModelType_type"),
+				 StructurePackage.Literals.MODEL_TYPE__INCLUDED_TYPE_DEFINITION,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -80,24 +127,13 @@ public class ModelTypeItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public String getText(Object object) {		
-		//		We get the label of the model definition that is refered by the given
-		// class
-		// a '->' is added to show the "reference" semantic
-		String label = "";
-	       if (object instanceof ModelType && ((ModelType) object).getTypeDefinition().getName() != null) {
-	           label = " -> " + ((ModelType) object).getTypeDefinition().getName();
-	       }
-	             String parent = "";
-	             if (object instanceof ModelType && ((ModelType) object).eContainer() instanceof NamedElement && ((NamedElement) ((ModelType) object).eContainer()).getName() != null) {
-	           parent = " owned by "
-	                   + ((NamedElement) ((ModelType) object).eContainer()).getName();
-	       }
-
-	       return label == null || label.length() == 0 ? getString("_UI_ModelType_type")
-	               : getString("_UI_ModelType_type") + label + parent; 
+	public String getText(Object object) {
+		String label = ((ModelType)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ModelType_type") :
+			getString("_UI_ModelType_type") + " " + label;
 	}
 
 	/**
@@ -109,6 +145,12 @@ public class ModelTypeItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(ModelType.class)) {
+			case StructurePackage.MODEL_TYPE__NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -121,28 +163,6 @@ public class ModelTypeItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING ||
-			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

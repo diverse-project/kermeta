@@ -140,11 +140,12 @@
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1" eType="//language/structure/Object" changeable="false"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="//language/structure/ParameterizedType">
+      <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="//language/structure/Type //language/structure/TypeDefinition">
         <eOperations name="_new" eType="//language/structure/Model"/>
         <eOperations name="isModelTypeOf" eType="//language/structure/Boolean">
           <eParameters name="model" eType="//language/structure/Model"/>
         </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition" upperBound="-1" eType="//language/structure/TypeDefinition"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
       <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//language/structure/MultiplicityElement">
@@ -245,9 +246,6 @@
       <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" abstract="true" eSuperTypes="//language/structure/TypeDefinition">
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1" eType="//language/structure/TypeVariable" containment="true"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" abstract="true" eSuperTypes="//language/structure/NamedElement">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeDefinition" upperBound="-1" eType="//language/structure/TypeDefinition" containment="true"/>
-      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true" eSuperTypes="//language/structure/Type">
         <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true"/>
@@ -257,7 +255,6 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="//language/structure/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="//language/structure/TypeVariable"/>
-      <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinition" eSuperTypes="//language/structure/GenericTypeDefinition //language/structure/TypeDefinitionContainer"/>
       <eClassifiers xsi:type="ecore:EClass" name="VirtualTypeContainer" abstract="true">
         <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1" eType="//language/structure/VirtualType" containment="true" eOpposite="//language/structure/VirtualType/modelType"/>
       </eClassifiers>
@@ -267,6 +264,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1" eType="//language/structure/VirtualTypeContainer" eOpposite="//language/structure/VirtualTypeContainer/virtualType"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="//language/structure/NamedElement"/>
       <eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="//language/structure/TypeContainer //language/structure/Type">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" unique="false" upperBound="-1" eType="//language/structure/Type"/>
       </eClassifiers>
@@ -274,8 +272,10 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="//language/structure/Type"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="//language/structure/Type"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="//language/structure/NamedElement"/>
       <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="//language/structure/Type"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" abstract="true" eSuperTypes="//language/structure/NamedElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeDefinition" upperBound="-1" eType="//language/structure/TypeDefinition" containment="true"/>
+      </eClassifiers>
     </eSubpackages>
   </eSubpackages>
 </ecore:EPackage>

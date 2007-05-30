@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureAdapterFactory.java,v 1.3 2007-05-09 08:56:17 cfaucher Exp $
+ * $Id: StructureAdapterFactory.java,v 1.4 2007-05-30 11:17:44 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -107,6 +107,12 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
 				return createObjectAdapter();
 			}
+			public Object caseModel(Model object) {
+				return createModelAdapter();
+			}
+			public Object caseModelType(ModelType object) {
+				return createModelTypeAdapter();
+			}
 			public Object caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
@@ -121,6 +127,9 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseEnumerationLiteral(EnumerationLiteral object) {
 				return createEnumerationLiteralAdapter();
+			}
+			public Object caseTypeVariableBinding(TypeVariableBinding object) {
+				return createTypeVariableBindingAdapter();
 			}
 			public Object caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
@@ -155,41 +164,14 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseClassDefinition(ClassDefinition object) {
 				return createClassDefinitionAdapter();
 			}
-			public Object caseTypeVariable(TypeVariable object) {
-				return createTypeVariableAdapter();
-			}
-			public Object caseProductType(ProductType object) {
-				return createProductTypeAdapter();
-			}
-			public Object caseFunctionType(FunctionType object) {
-				return createFunctionTypeAdapter();
-			}
-			public Object caseTypeVariableBinding(TypeVariableBinding object) {
-				return createTypeVariableBindingAdapter();
-			}
-			public Object caseTypeDefinition(TypeDefinition object) {
-				return createTypeDefinitionAdapter();
-			}
-			public Object caseVoidType(VoidType object) {
-				return createVoidTypeAdapter();
+			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
+				return createGenericTypeDefinitionAdapter();
 			}
 			public Object caseParameterizedType(ParameterizedType object) {
 				return createParameterizedTypeAdapter();
 			}
-			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
-				return createGenericTypeDefinitionAdapter();
-			}
-			public Object caseModelTypeDefinition(ModelTypeDefinition object) {
-				return createModelTypeDefinitionAdapter();
-			}
-			public Object caseModelType(ModelType object) {
-				return createModelTypeAdapter();
-			}
-			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
-				return createTypeDefinitionContainerAdapter();
-			}
-			public Object caseModel(Model object) {
-				return createModelAdapter();
+			public Object caseTypeVariable(TypeVariable object) {
+				return createTypeVariableAdapter();
 			}
 			public Object caseObjectTypeVariable(ObjectTypeVariable object) {
 				return createObjectTypeVariableAdapter();
@@ -202,6 +184,21 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseVirtualType(VirtualType object) {
 				return createVirtualTypeAdapter();
+			}
+			public Object caseTypeDefinition(TypeDefinition object) {
+				return createTypeDefinitionAdapter();
+			}
+			public Object caseProductType(ProductType object) {
+				return createProductTypeAdapter();
+			}
+			public Object caseFunctionType(FunctionType object) {
+				return createFunctionTypeAdapter();
+			}
+			public Object caseVoidType(VoidType object) {
+				return createVoidTypeAdapter();
+			}
+			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
+				return createTypeDefinitionContainerAdapter();
 			}
 			public Object defaultCase(EObject object) {
 				return createEObjectAdapter();
@@ -610,20 +607,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGenericTypeDefinitionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition <em>Model Type Definition</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition
-	 * @generated
-	 */
-	public Adapter createModelTypeDefinitionAdapter() {
 		return null;
 	}
 

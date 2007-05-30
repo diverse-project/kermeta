@@ -7,7 +7,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
     <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/GenericTypeDefinition"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" upperBound="-1"
           eType="#//structure/TypeVariableBinding" containment="true"/>
@@ -15,11 +14,12 @@
     <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" eSuperTypes="#//structure/TypeVariable"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinition" eSuperTypes="#//structure/GenericTypeDefinition #//structure/TypeDefinitionContainer"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//structure/ParameterizedType">
+    <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//structure/Type #//structure/TypeDefinition">
       <eOperations name="isModelTypeOf" eType="#//structure/Boolean">
         <eParameters name="model" eType="#//structure/Model"/>
       </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition"
+          upperBound="-1" eType="#//structure/TypeDefinition"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VirtualTypeContainer" abstract="true">
       <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" upperBound="-1"
@@ -49,5 +49,6 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition"/>
   </eSubpackages>
 </ecore:EPackage>

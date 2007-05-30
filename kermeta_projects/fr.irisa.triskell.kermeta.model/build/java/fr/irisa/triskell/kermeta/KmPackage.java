@@ -108,7 +108,7 @@ public interface KmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals {
+	interface Literals  {
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.impl.DummyClassImpl <em>Dummy Class</em>}' class.
 		 * <!-- begin-user-doc -->

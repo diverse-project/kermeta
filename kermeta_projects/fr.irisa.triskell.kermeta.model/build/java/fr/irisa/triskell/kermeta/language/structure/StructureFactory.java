@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.3 2006-12-06 16:22:58 dvojtise Exp $
+ * $Id: StructureFactory.java,v 1.4 2007-05-30 11:17:43 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -213,15 +213,6 @@ public interface StructureFactory extends EFactory {
 	 * @generated
 	 */
 	VoidType createVoidType();
-
-	/**
-	 * Returns a new object of class '<em>Model Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Type Definition</em>'.
-	 * @generated
-	 */
-	ModelTypeDefinition createModelTypeDefinition();
 
 	/**
 	 * Returns a new object of class '<em>Model Type Variable</em>'.

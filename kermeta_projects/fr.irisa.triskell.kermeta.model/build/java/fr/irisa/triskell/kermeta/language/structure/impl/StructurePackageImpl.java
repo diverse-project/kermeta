@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.12 2007-05-09 08:56:17 cfaucher Exp $
+ * $Id: StructurePackageImpl.java,v 1.13 2007-05-30 11:17:43 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -266,13 +266,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * @generated
 	 */
 	private EClass genericTypeDefinitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass modelTypeDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1263,15 +1256,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getModelTypeDefinition() {
-		return modelTypeDefinitionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getVirtualTypeContainer() {
 		return virtualTypeContainerEClass;
 	}
@@ -1337,6 +1321,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 */
 	public EClass getModelType() {
 		return modelTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelType_IncludedTypeDefinition() {
+		return (EReference)modelTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1449,6 +1442,12 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		objectEClass = createEClass(OBJECT);
 		createEReference(objectEClass, OBJECT__TAG);
 
+		modelEClass = createEClass(MODEL);
+		createEReference(modelEClass, MODEL__CONTENTS);
+
+		modelTypeEClass = createEClass(MODEL_TYPE);
+		createEReference(modelTypeEClass, MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
+
 		operationEClass = createEClass(OPERATION);
 		createEAttribute(operationEClass, OPERATION__IS_ABSTRACT);
 		createEReference(operationEClass, OPERATION__RAISED_EXCEPTION);
@@ -1479,6 +1478,10 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		enumerationLiteralEClass = createEClass(ENUMERATION_LITERAL);
 		createEReference(enumerationLiteralEClass, ENUMERATION_LITERAL__ENUMERATION);
+
+		typeVariableBindingEClass = createEClass(TYPE_VARIABLE_BINDING);
+		createEReference(typeVariableBindingEClass, TYPE_VARIABLE_BINDING__VARIABLE);
+		createEReference(typeVariableBindingEClass, TYPE_VARIABLE_BINDING__TYPE);
 
 		multiplicityElementEClass = createEClass(MULTIPLICITY_ELEMENT);
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__IS_ORDERED);
@@ -1528,41 +1531,16 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(classDefinitionEClass, CLASS_DEFINITION__OWNED_OPERATION);
 		createEReference(classDefinitionEClass, CLASS_DEFINITION__SUPER_TYPE);
 
-		typeVariableEClass = createEClass(TYPE_VARIABLE);
-		createEReference(typeVariableEClass, TYPE_VARIABLE__SUPERTYPE);
-
-		productTypeEClass = createEClass(PRODUCT_TYPE);
-		createEReference(productTypeEClass, PRODUCT_TYPE__TYPE);
-
-		functionTypeEClass = createEClass(FUNCTION_TYPE);
-		createEReference(functionTypeEClass, FUNCTION_TYPE__LEFT);
-		createEReference(functionTypeEClass, FUNCTION_TYPE__RIGHT);
-
-		typeVariableBindingEClass = createEClass(TYPE_VARIABLE_BINDING);
-		createEReference(typeVariableBindingEClass, TYPE_VARIABLE_BINDING__VARIABLE);
-		createEReference(typeVariableBindingEClass, TYPE_VARIABLE_BINDING__TYPE);
-
-		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-
-		voidTypeEClass = createEClass(VOID_TYPE);
+		genericTypeDefinitionEClass = createEClass(GENERIC_TYPE_DEFINITION);
+		createEReference(genericTypeDefinitionEClass, GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
 
 		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__TYPE_DEFINITION);
 
-		genericTypeDefinitionEClass = createEClass(GENERIC_TYPE_DEFINITION);
-		createEReference(genericTypeDefinitionEClass, GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
-
-		modelTypeDefinitionEClass = createEClass(MODEL_TYPE_DEFINITION);
-
-		modelTypeEClass = createEClass(MODEL_TYPE);
-
-		typeDefinitionContainerEClass = createEClass(TYPE_DEFINITION_CONTAINER);
-		createEReference(typeDefinitionContainerEClass, TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
-
-		modelEClass = createEClass(MODEL);
-		createEReference(modelEClass, MODEL__CONTENTS);
+		typeVariableEClass = createEClass(TYPE_VARIABLE);
+		createEReference(typeVariableEClass, TYPE_VARIABLE__SUPERTYPE);
 
 		objectTypeVariableEClass = createEClass(OBJECT_TYPE_VARIABLE);
 
@@ -1575,6 +1553,20 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__CLASS_DEFINITION);
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__MODEL_TYPE);
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_PARAM_BINDING);
+
+		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+
+		productTypeEClass = createEClass(PRODUCT_TYPE);
+		createEReference(productTypeEClass, PRODUCT_TYPE__TYPE);
+
+		functionTypeEClass = createEClass(FUNCTION_TYPE);
+		createEReference(functionTypeEClass, FUNCTION_TYPE__LEFT);
+		createEReference(functionTypeEClass, FUNCTION_TYPE__RIGHT);
+
+		voidTypeEClass = createEClass(VOID_TYPE);
+
+		typeDefinitionContainerEClass = createEClass(TYPE_DEFINITION_CONTAINER);
+		createEReference(typeDefinitionContainerEClass, TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 
 		// Create enums
 		constraintLanguageEEnum = createEEnum(CONSTRAINT_LANGUAGE);
@@ -1615,11 +1607,16 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		// Add supertypes to classes
 		classEClass.getESuperTypes().add(this.getParameterizedType());
+		modelEClass.getESuperTypes().add(this.getObject());
+		modelTypeEClass.getESuperTypes().add(this.getType());
+		modelTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		operationEClass.getESuperTypes().add(this.getMultiplicityElement());
 		propertyEClass.getESuperTypes().add(this.getMultiplicityElement());
 		typeEClass.getESuperTypes().add(this.getObject());
 		typeContainerEClass.getESuperTypes().add(this.getObject());
 		enumerationLiteralEClass.getESuperTypes().add(this.getNamedElement());
+		typeVariableBindingEClass.getESuperTypes().add(this.getTypeContainer());
+		typeVariableBindingEClass.getESuperTypes().add(this.getObject());
 		multiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
@@ -1634,30 +1631,24 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typedElementEClass.getESuperTypes().add(this.getNamedElement());
 		tagEClass.getESuperTypes().add(this.getObject());
 		constraintEClass.getESuperTypes().add(this.getNamedElement());
-		classDefinitionEClass.getESuperTypes().add(this.getTypeContainer());
 		classDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
+		classDefinitionEClass.getESuperTypes().add(this.getTypeContainer());
+		genericTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
+		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getTypeContainer());
 		typeVariableEClass.getESuperTypes().add(this.getType());
 		typeVariableEClass.getESuperTypes().add(this.getNamedElement());
-		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
-		productTypeEClass.getESuperTypes().add(this.getType());
-		functionTypeEClass.getESuperTypes().add(this.getTypeContainer());
-		functionTypeEClass.getESuperTypes().add(this.getType());
-		typeVariableBindingEClass.getESuperTypes().add(this.getTypeContainer());
-		typeVariableBindingEClass.getESuperTypes().add(this.getObject());
-		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
-		voidTypeEClass.getESuperTypes().add(this.getType());
-		parameterizedTypeEClass.getESuperTypes().add(this.getType());
-		genericTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinition());
-		modelTypeDefinitionEClass.getESuperTypes().add(this.getGenericTypeDefinition());
-		modelTypeDefinitionEClass.getESuperTypes().add(this.getTypeDefinitionContainer());
-		modelTypeEClass.getESuperTypes().add(this.getParameterizedType());
-		typeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
-		modelEClass.getESuperTypes().add(this.getObject());
 		objectTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		modelTypeVariableEClass.getESuperTypes().add(this.getVirtualTypeContainer());
 		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
+		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
+		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
+		productTypeEClass.getESuperTypes().add(this.getType());
+		functionTypeEClass.getESuperTypes().add(this.getTypeContainer());
+		functionTypeEClass.getESuperTypes().add(this.getType());
+		voidTypeEClass.getESuperTypes().add(this.getType());
+		typeDefinitionContainerEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(classEClass, fr.irisa.triskell.kermeta.language.structure.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1696,6 +1687,26 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		addEOperation(objectEClass, null, "checkAllInvariants");
 
+		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModel_Contents(), this.getObject(), null, "contents", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(modelEClass, this.getObject(), "filter", 0, -1);
+		addEParameter(op, this.getType(), "typeName", 0, 1);
+
+		op = addEOperation(modelEClass, null, "add");
+		addEParameter(op, this.getObject(), "obj", 0, 1);
+
+		op = addEOperation(modelEClass, null, "remove");
+		addEParameter(op, this.getObject(), "obj", 0, 1);
+
+		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getModelType_IncludedTypeDefinition(), this.getTypeDefinition(), null, "includedTypeDefinition", null, 0, -1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(modelTypeEClass, this.getModel(), "_new", 0, 1);
+
+		op = addEOperation(modelTypeEClass, this.getBoolean(), "isModelTypeOf", 0, 1);
+		addEParameter(op, this.getModel(), "model", 0, 1);
+
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_IsAbstract(), this.getBoolean(), "isAbstract", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperation_RaisedException(), this.getType(), null, "raisedException", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1729,6 +1740,10 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 
 		initEClass(enumerationLiteralEClass, EnumerationLiteral.class, "EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumerationLiteral_Enumeration(), this.getEnumeration(), this.getEnumeration_OwnedLiteral(), "enumeration", null, 0, 1, EnumerationLiteral.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeVariableBindingEClass, TypeVariableBinding.class, "TypeVariableBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeVariableBinding_Variable(), this.getTypeVariable(), null, "variable", null, 1, 1, TypeVariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeVariableBinding_Type(), this.getType(), null, "type", null, 1, 1, TypeVariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(multiplicityElementEClass, MultiplicityElement.class, "MultiplicityElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMultiplicityElement_IsOrdered(), this.getBoolean(), "isOrdered", "false", 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1778,55 +1793,16 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getClassDefinition_OwnedOperation(), this.getOperation(), this.getOperation_OwningClass(), "ownedOperation", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDefinition_SuperType(), this.getType(), null, "superType", null, 0, -1, ClassDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeVariableEClass, TypeVariable.class, "TypeVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeVariable_Supertype(), this.getType(), null, "supertype", null, 0, 1, TypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(productTypeEClass, ProductType.class, "ProductType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getProductType_Type(), this.getType(), null, "type", null, 0, -1, ProductType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(functionTypeEClass, FunctionType.class, "FunctionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionType_Left(), this.getType(), null, "left", null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionType_Right(), this.getType(), null, "right", null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeVariableBindingEClass, TypeVariableBinding.class, "TypeVariableBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeVariableBinding_Variable(), this.getTypeVariable(), null, "variable", null, 1, 1, TypeVariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeVariableBinding_Type(), this.getType(), null, "type", null, 1, 1, TypeVariableBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(genericTypeDefinitionEClass, GenericTypeDefinition.class, "GenericTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGenericTypeDefinition_TypeParameter(), this.getTypeVariable(), null, "typeParameter", null, 0, -1, GenericTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterizedTypeEClass, ParameterizedType.class, "ParameterizedType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterizedType_VirtualTypeBinding(), this.getTypeVariableBinding(), null, "virtualTypeBinding", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_TypeParamBinding(), this.getTypeVariableBinding(), null, "typeParamBinding", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParameterizedType_TypeDefinition(), this.getGenericTypeDefinition(), null, "typeDefinition", null, 1, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(genericTypeDefinitionEClass, GenericTypeDefinition.class, "GenericTypeDefinition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGenericTypeDefinition_TypeParameter(), this.getTypeVariable(), null, "typeParameter", null, 0, -1, GenericTypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(modelTypeDefinitionEClass, ModelTypeDefinition.class, "ModelTypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		addEOperation(modelTypeEClass, this.getModel(), "_new", 0, 1);
-
-		op = addEOperation(modelTypeEClass, this.getBoolean(), "isModelTypeOf", 0, 1);
-		addEParameter(op, this.getModel(), "model", 0, 1);
-
-		initEClass(typeDefinitionContainerEClass, TypeDefinitionContainer.class, "TypeDefinitionContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeDefinitionContainer_OwnedTypeDefinition(), this.getTypeDefinition(), null, "ownedTypeDefinition", null, 0, -1, TypeDefinitionContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModel_Contents(), this.getObject(), null, "contents", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		op = addEOperation(modelEClass, this.getObject(), "filter", 0, -1);
-		addEParameter(op, this.getType(), "typeName", 0, 1);
-
-		op = addEOperation(modelEClass, null, "add");
-		addEParameter(op, this.getObject(), "obj", 0, 1);
-
-		op = addEOperation(modelEClass, null, "remove");
-		addEParameter(op, this.getObject(), "obj", 0, 1);
+		initEClass(typeVariableEClass, TypeVariable.class, "TypeVariable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeVariable_Supertype(), this.getType(), null, "supertype", null, 0, 1, TypeVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(objectTypeVariableEClass, ObjectTypeVariable.class, "ObjectTypeVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1839,6 +1815,20 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getVirtualType_ClassDefinition(), this.getClassDefinition(), null, "classDefinition", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualType_ModelType(), this.getVirtualTypeContainer(), this.getVirtualTypeContainer_VirtualType(), "modelType", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualType_TypeParamBinding(), this.getTypeVariableBinding(), null, "typeParamBinding", null, 0, -1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(productTypeEClass, ProductType.class, "ProductType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProductType_Type(), this.getType(), null, "type", null, 0, -1, ProductType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(functionTypeEClass, FunctionType.class, "FunctionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionType_Left(), this.getType(), null, "left", null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFunctionType_Right(), this.getType(), null, "right", null, 0, 1, FunctionType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(typeDefinitionContainerEClass, TypeDefinitionContainer.class, "TypeDefinitionContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeDefinitionContainer_OwnedTypeDefinition(), this.getTypeDefinition(), null, "ownedTypeDefinition", null, 0, -1, TypeDefinitionContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintLanguageEEnum, ConstraintLanguage.class, "ConstraintLanguage");

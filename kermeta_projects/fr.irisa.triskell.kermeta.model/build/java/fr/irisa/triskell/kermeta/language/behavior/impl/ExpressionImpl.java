@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: ExpressionImpl.java,v 1.5 2007-05-30 11:17:43 jsteel Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -11,6 +11,8 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl;
+
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 
 import fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl;
