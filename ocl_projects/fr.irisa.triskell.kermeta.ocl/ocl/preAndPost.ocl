@@ -1,9 +1,9 @@
-package p
+package sample
 
-context Y::foo(i: Integer):Boolean
-	pre: i > 0
+context A::getB(a: Integer, b: Boolean):B
+	pre: a > 0
 	pre: true
-	post: result = false
+	post: result = self.ab
 
 endpackage
 
