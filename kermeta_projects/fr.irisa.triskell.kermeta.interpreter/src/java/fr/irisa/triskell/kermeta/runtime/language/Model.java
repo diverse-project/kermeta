@@ -1,4 +1,4 @@
-/* $Id: Model.java,v 1.3 2006-12-13 07:55:17 dvojtise Exp $
+/* $Id: Model.java,v 1.4 2007-05-30 11:42:51 jsteel Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -87,9 +87,9 @@ public class Model {
 
 		fr.irisa.triskell.kermeta.language.structure.ModelType modelType =
 			(fr.irisa.triskell.kermeta.language.structure.ModelType) ((RuntimeObject) model.getData().get("modelType")).getData().get("kcoreObject");
-		ModelTypeDefinition modelTypeDef = (ModelTypeDefinition)modelType.getTypeDefinition();
+		//ModelTypeDefinition modelTypeDef = (ModelTypeDefinition)modelType.getTypeDefinition();
 		// for each of the type def of this model type def check if it is conformant
-		for(java.lang.Object oTypeDef : modelTypeDef.getOwnedTypeDefinition()){
+		for(java.lang.Object oTypeDef : modelType.getIncludedTypeDefinition()){
 			Type requiredType = null; 
 			if(oTypeDef instanceof ClassDefinition){
 				fr.irisa.triskell.kermeta.language.structure.Class aclass = factory.getMemory().getUnit().struct_factory.createClass();
@@ -100,10 +100,8 @@ public class Model {
 				}
 				requiredType =aclass;				
 			}
-			else if(oTypeDef instanceof ModelTypeDefinition){
-				fr.irisa.triskell.kermeta.language.structure.ModelType amodeltype = factory.getMemory().getUnit().struct_factory.createModelType();
-				amodeltype.setTypeDefinition((ClassDefinition)oTypeDef);
-				requiredType =amodeltype;
+			else if(oTypeDef instanceof fr.irisa.triskell.kermeta.language.structure.ModelType) {
+				requiredType = (fr.irisa.triskell.kermeta.language.structure.ModelType) oTypeDef;
 			}
 			else if(oTypeDef instanceof DataType){
 				requiredType =(DataType)oTypeDef;

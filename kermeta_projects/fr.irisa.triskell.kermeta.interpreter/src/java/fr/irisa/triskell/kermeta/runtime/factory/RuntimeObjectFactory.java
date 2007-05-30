@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.17 2007-03-02 15:46:02 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.18 2007-05-30 11:42:51 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -180,7 +180,7 @@ public class RuntimeObjectFactory {
 	}
 	
 	private Hashtable non_parametric_metaclass_cache = new Hashtable();
-	private Hashtable<TypeDefinition, RuntimeObject> non_parametric_modeltype_cache = new Hashtable();
+	private Hashtable<TypeDefinition, RuntimeObject> modeltype_cache = new Hashtable();
 
 	public RuntimeObject createMetaClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
 	    
@@ -215,7 +215,7 @@ public class RuntimeObjectFactory {
 	        if (binding_type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
 	            ro_type = createMetaClass((fr.irisa.triskell.kermeta.language.structure.Class)binding_type);
 	        } else if (binding_type instanceof ModelType) {
-	        	ro_type = createModelType((ModelType) binding_type);
+	        	ro_type = memory.getRuntimeObjectForFObject(binding_type);
 	        }
 	        else {
 	            // it is an enum
@@ -236,51 +236,21 @@ public class RuntimeObjectFactory {
 	    return meta_class;
 	}
 	
+	
+	/**
+	 * This should never be called, if I guess correctly.
+	 * @param fModelType
+	 * @return
+	 */
 	public RuntimeObject createModelType(ModelType fModelType) {
-		if (fModelType.getTypeParamBinding().isEmpty()) {
-			RuntimeObject result = (RuntimeObject) non_parametric_modeltype_cache.get(fModelType.getTypeDefinition());
-			if (result != null) return result;
-		}
-		
-		if (fModelType.getTypeParamBinding().size() != fModelType.getTypeDefinition().getTypeParameter().size()) {
-			throw new Error("INTERNAL ERROR : invalid Model Type : all type variables should be bound.");
-		}
-		
+		RuntimeObject result = (RuntimeObject) modeltype_cache.get(fModelType);
+		if (result != null) return result;
+				
 		RuntimeObject model_type = new RuntimeObject(this, getModelTypeClass());
 		model_type.getData().put("kcoreObject", fModelType);
-		model_type.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fModelType.getTypeDefinition()));
+		//model_type.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fModelType.getTypeDefinition()));		
 		
-		RuntimeObject ro_bindings = new RuntimeObject(this, getClassReflectiveSequenceOtTypeParamBinding());
-		model_type.getProperties().put("typeParamBinding", ro_bindings);
-		
-		for (int i=0; i<fModelType.getTypeParamBinding().size(); i++) {
-			TypeVariableBinding binding = (TypeVariableBinding) fModelType.getTypeParamBinding().get(i);
-			
-			Type binding_type = binding.getType();
-			while (binding_type instanceof PrimitiveType) {
-				binding_type = ((PrimitiveType) binding_type).getInstanceType();
-			}
-			
-			RuntimeObject ro_var = (RuntimeObject) memory.getRuntimeObjectForFObject((TypeVariable)fModelType.getTypeDefinition().getTypeParameter().get(i));
-			RuntimeObject ro_type = null;
-			if (binding_type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-				ro_type = createMetaClass((fr.irisa.triskell.kermeta.language.structure.Class)binding_type);
-			} else if (binding_type instanceof ModelType) {
-				ro_type = createModelType((ModelType) binding_type);
-			} else {
-				ro_type = memory.getRuntimeObjectForFObject(binding_type);
-			}
-			
-			RuntimeObject ro_binding = createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
-			ro_binding.getData().put("kcoreObject", binding);
-			ro_binding.getProperties().put("variable", ro_var);
-			ro_binding.getProperties().put("type", ro_type);
-			Collection.getArrayList(ro_bindings).add(ro_binding);
-		}
-		
-		if (fModelType.getTypeParamBinding().isEmpty()) {
-			non_parametric_modeltype_cache.put(fModelType.getTypeDefinition(), model_type);
-		}
+		modeltype_cache.put(fModelType, model_type);
 		
 		return model_type;
 	}

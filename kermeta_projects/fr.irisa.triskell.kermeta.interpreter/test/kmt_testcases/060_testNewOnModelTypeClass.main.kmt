@@ -1,5 +1,5 @@
 /* ****************************************************************************
- * $Id: 060_testNewOnModelTypeClass.main.kmt,v 1.1 2007-01-26 15:20:07 dvojtise Exp $
+ * $Id: 060_testNewOnModelTypeClass.main.kmt,v 1.2 2007-05-30 11:42:51 jsteel Exp $
  * Project : Kermeta interpreter
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -21,7 +21,7 @@ using kermeta::standard
 using kermeta::kunit
 using kermeta::exceptions
 
-modeltype MainMT {
+package MainMT_p {
 	class C1 {
 		attribute name : String
 		attribute aC2 : C2#aC1
@@ -30,12 +30,14 @@ modeltype MainMT {
 		reference aC1 : C1#aC2
 	}
 }
+modeltype MainMT { MainMT_p::C1, MainMT_p::C2}
 
-modeltype MiniMT {
+package MiniMT_p {
 	class COne {
 		attribute name : String
 	}
 }
+modeltype MiniMT { MiniMT_p::COne }
 
 class Test inherits kermeta::kunit::TestCase {
 
@@ -46,9 +48,9 @@ class Test inherits kermeta::kunit::TestCase {
 		miniMTTester.newMiniMT(mainMT)
 		
 		// verify that despite the operation deal with MiniMT::COne it has correctly created a MainMT::C1
-		var elt : testNewOnModelType::MainMT::C1
+		var elt : testNewOnModelType::MainMT_p::C1
 		elt ?= mainMT.contents.one
-		assert( elt.isKindOf(MainMT::C1)  )
+		assert( elt.isKindOf(MainMT_p::C1)  )
 		assert(elt.name == "hello")
 		stdio.writeln(elt.toString)
 	end
