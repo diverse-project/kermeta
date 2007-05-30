@@ -1,0 +1,4 @@
+Loading test1.txt
+Writing test1.xmi
+State	Parser=atend	Lexer=pending character(s)
+Acceptable : false
