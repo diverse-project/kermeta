@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kmLogo" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore" nsPrefix="kmLogo">
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Real" instanceClassName="java.lang.Integer"/>
+  <eSubpackages name="VM" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore#//semanticDomain" nsPrefix="semanticDomain">
+    <eClassifiers xsi:type="ecore:EClass" name="Turtle">
+      <eOperations name="reset" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.position := kmLogo::semanticDomain::Point.new&#xA;&#x9;self.position.x := 0&#xA;&#x9;self.position.y := 0&#xA;&#x9;self.heading := 0&#xA;&#x9;self.drawings := void&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="rotate" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.heading := self.heading.plus(angle)&#xA;&#x9;if self.heading.isLower(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.heading := self.heading.plus(360)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.isGreater(360) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.heading := self.heading.minus(360)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="angle" eType="//Real"/>
+      </eOperations>
+      <eOperations name="goto" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var newPos : kmLogo::semanticDomain::Point&#xA;&#x9;newPos := self.position.getDelta(dx, dy)&#xA;&#x9;if self.penUp then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Tortue se deplace en &quot;.plus(newPos.toString))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Tortue trace vers &quot;.plus(newPos.toString))&#xA;&#x9;&#x9;&#x9;var trace : kmLogo::semanticDomain::Segment init kmLogo::semanticDomain::Segment.new&#xA;&#x9;&#x9;&#x9;trace.make(self.position, newPos)&#xA;&#x9;&#x9;&#x9;self.drawings.add(trace)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;self.position := newPos&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="dest" eType="//VM/Point"/>
+      </eOperations>
+      <eOperations name="forward" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;if self.heading.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(0, steps)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.equals(90) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(steps, 0)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.equals(180) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(0, steps.uminus)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.equals(270) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(steps.uminus, 0)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="steps" eType="//Real"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="position" eType="//VM/Point"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="drawings" upperBound="-1" eType="//VM/Segment" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="heading" eType="//Real"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="penUp" eType="//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="points" upperBound="-1" eType="//VM/Point" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Point">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="//Real"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="//Real"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Segment">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1" eType="//VM/Point"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1" eType="//VM/Point"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

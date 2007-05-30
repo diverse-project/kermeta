@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.kmlogo.model; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: fr.irisa.triskell.kmLogo,
+ fr.irisa.triskell.kmLogo.ASM,
+ fr.irisa.triskell.kmLogo.ASM.impl,
+ fr.irisa.triskell.kmLogo.ASM.util,
+ fr.irisa.triskell.kmLogo.impl
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Eclipse-LazyStart: true
