@@ -1,32 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://sts" start="//@fragments.5">
-  <fragments xsi:type="sts:Template" id="Instruction">
-    <metaclass href="http://kmLogo.ecore#//ASM/Instruction"/>
-    <rule xsi:type="sts:Alternative">
-      <conditions xsi:type="sts:PolymorphicCond" value="">
-        <subRule xsi:type="sts:RuleRef" id="@Forward" ref="//@fragments.1"/>
-        <metaclass href="http://kmLogo.ecore#//ASM/Forward"/>
-      </conditions>
-      <conditions xsi:type="sts:PolymorphicCond">
-        <subRule xsi:type="sts:RuleRef" id="Clear" ref="//@fragments.4"/>
-        <metaclass href="http://kmLogo.ecore#//ASM/Clear"/>
-      </conditions>
-    </rule>
-  </fragments>
+<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://sts" start="//@fragments.3">
   <fragments xsi:type="sts:Template" id="Forward">
     <metaclass href="http://kmLogo.ecore#//ASM/Forward"/>
     <rule xsi:type="sts:Sequence" id="">
-      <subRules xsi:type="sts:Terminal" id="" terminal="Forward"/>
-      <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.2"/>
-    </rule>
-  </fragments>
-  <fragments xsi:type="sts:Template" id="Expression">
-    <metaclass href="http://kmLogo.ecore#//ASM/Expression"/>
-    <rule xsi:type="sts:Alternative">
-      <conditions xsi:type="sts:PolymorphicCond" value="">
-        <subRule xsi:type="sts:RuleRef" id="@Constant" ref="//@fragments.3"/>
-        <metaclass href="http://kmLogo.ecore#//ASM/Constant"/>
-      </conditions>
+      <subRules xsi:type="sts:Terminal" id="" terminal="FORWARD"/>
+      <subRules xsi:type="sts:RuleRef" id="@Expression" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/Back/steps"/>
+      </subRules>
     </rule>
   </fragments>
   <fragments xsi:type="sts:Template" id="Constant">
@@ -37,13 +17,152 @@
   </fragments>
   <fragments xsi:type="sts:Template" id="Clear">
     <metaclass href="http://kmLogo.ecore#//ASM/Clear"/>
-    <rule xsi:type="sts:Terminal" terminal="Clear"/>
+    <rule xsi:type="sts:Terminal" terminal="CLEAR"/>
   </fragments>
   <fragments xsi:type="sts:Template" id="UnitBlock">
     <metaclass href="http://kmLogo.ecore#//ASM/Block"/>
     <rule xsi:type="sts:Iteration">
-      <subRule xsi:type="sts:RuleRef" id="Instruction" ref="//@fragments.0"/>
+      <subRule xsi:type="sts:RuleRef" id="Instruction" ref="//@fragments.5"/>
       <container xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/Block/instructions"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="Expression">
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="@Constant" ref="//@fragments.1"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/Constant"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.13"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/ParameterCall"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Alternative" id="Instruction">
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" id="@Forward" ref="//@fragments.0"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/Forward"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="@Clear" ref="//@fragments.2"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/Clear"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.8"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/Block"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" id="" ref="//@fragments.9"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/Repeat"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond" value="">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.10"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/If"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.11"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/While"/>
+    </conditions>
+    <conditions xsi:type="sts:PolymorphicCond">
+      <subRule xsi:type="sts:RuleRef" ref="//@fragments.12"/>
+      <metaclass href="http://kmLogo.ecore#//ASM/ProcDeclaration"/>
+    </conditions>
+  </fragments>
+  <fragments xsi:type="sts:Template" id="BinaryExp">
+    <metaclass href="http://kmLogo.ecore#//ASM/BinaryExp"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:RuleRef" id="" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/BinaryExp/lhs"/>
+      </subRules>
+      <subRules xsi:type="sts:PrimitiveValue">
+        <features xsi:type="ecore:EAttribute" href="http://kmLogo.ecore#//ASM/BinaryExp/operator"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/BinaryExp/rhs"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Terminal" id="Colon" terminal=";"/>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://kmLogo.ecore#//ASM/Block"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="["/>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:RuleRef" ref="//@fragments.5"/>
+        <container xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/Block/instructions"/>
+      </subRules>
+      <subRules xsi:type="sts:Terminal" terminal="]"/>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://kmLogo.ecore#//ASM/Repeat"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="REPEAT"/>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/ControlStructure/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.8">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/Repeat/block"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://kmLogo.ecore#//ASM/If"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="IFELSE"/>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/ControlStructure/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.8">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/If/thenPart"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.8">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/If/elsePart"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://kmLogo.ecore#//ASM/While"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="WHILE"/>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.4">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/ControlStructure/condition"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.8">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/Repeat/block"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://kmLogo.ecore#//ASM/ProcDeclaration"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal="TO"/>
+      <subRules xsi:type="sts:PrimitiveValue" id="">
+        <features xsi:type="ecore:EAttribute" href="http://kmLogo.ecore#//ASM/ProcDeclaration/name"/>
+      </subRules>
+      <subRules xsi:type="sts:Iteration">
+        <subRule xsi:type="sts:Template">
+          <metaclass href="http://kmLogo.ecore#//ASM/Parameter"/>
+          <rule xsi:type="sts:Sequence">
+            <subRules xsi:type="sts:Terminal" terminal=":"/>
+            <subRules xsi:type="sts:PrimitiveValue">
+              <features xsi:type="ecore:EAttribute" href="http://kmLogo.ecore#//ASM/ProcDeclaration/name"/>
+            </subRules>
+          </rule>
+        </subRule>
+        <container xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/ProcDeclaration/args"/>
+      </subRules>
+      <subRules xsi:type="sts:RuleRef" ref="//@fragments.8">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/ProcDeclaration/block"/>
+      </subRules>
+    </rule>
+  </fragments>
+  <fragments xsi:type="sts:Template">
+    <metaclass href="http://kmLogo.ecore#//ASM/ParameterCall"/>
+    <rule xsi:type="sts:Sequence">
+      <subRules xsi:type="sts:Terminal" terminal=":"/>
+      <subRules xsi:type="sts:ObjectReference">
+        <features xsi:type="ecore:EReference" href="http://kmLogo.ecore#//ASM/ParameterCall/parameter"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://kmLogo.ecore#//ASM/Parameter/name"/>
+      </subRules>
     </rule>
   </fragments>
 </sts:Root>

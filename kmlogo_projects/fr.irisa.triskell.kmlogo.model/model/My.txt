@@ -1,0 +1,16 @@
+CLEAR
+CLEAR
+
+TO square [ REPEAT 4 [ FORWARD 2 ]  ]
+
+FORWARD 10
+REPEAT 4 [ FORWARD 2 ] 
+WHILE 4 [ FORWARD -5 ] 
+FORWARD 10
+REPEAT 6 [ CLEAR ] 
+IFELSE 0 [ CLEAR ] [ ] 
+[ CLEAR ] 
+
+TO spiral : size [ FORWARD : size ]
+
+
