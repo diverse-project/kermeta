@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.26 2007-05-24 11:56:06 jmottu Exp $
+/* $Id: KermetaInterpreter.java,v 1.27 2007-05-30 11:29:49 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -80,7 +80,11 @@ public class KermetaInterpreter {
 	    super();
 	    this.unit = unit;
 	    initializeMemory();
-	    initializeEntryPoint();
+	    try {
+			initializeEntryPoint();
+		} catch (UndefinedEntryPointException e) {
+			throw new KermetaInterpreterError( e.getMessage() );
+		}
 	}
 
 	/**
@@ -115,7 +119,12 @@ public class KermetaInterpreter {
 	    }
 	    
 	    initializeMemory();
-	    initializeEntryPoint();
+	    
+	    try {
+			initializeEntryPoint();
+		} catch (UndefinedEntryPointException e) {
+			throw new KermetaInterpreterError( e.getMessage() );
+		}
 	}
 	
 	/**
@@ -159,8 +168,7 @@ public class KermetaInterpreter {
 	 * Initialize the entypoint of the program according to
 	 * tags on the root_package.
 	 */
-	private void initializeEntryPoint() 
-	{
+	private void initializeEntryPoint() throws UndefinedEntryPointException {
 	    String main_class = null;
 	    String main_operation = null;
 	    Iterator it = unit.rootPackage.getTag().iterator();
@@ -186,6 +194,9 @@ public class KermetaInterpreter {
 	    				"(default launch will fail)", null);
 	    	}
 	    }
+	    
+	    if ( (main_class == null) && (main_operation == null) )
+	    	throw new UndefinedEntryPointException("Entry Point not found for " + unit.getUri() );
 	}
 	
 	/**
