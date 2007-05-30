@@ -1,6 +1,6 @@
 
 
-/*$Id: SintaksTextEditorConfiguration.java,v 1.1 2007-05-24 08:45:07 ftanguy Exp $
+/*$Id: SintaksTextEditorConfiguration.java,v 1.2 2007-05-30 09:55:53 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.sintaks.editor
 * File : 	SintaksTextualEditorConfiguration.java
 * License : EPL
@@ -61,8 +61,8 @@ public class SintaksTextEditorConfiguration extends
 	}
 	
 	private void initializeKeywords() {
-		
-		URI uri = URI.createURI("platform:/resource/fr.irisa.triskell.sintaks.samples/examples/RDM/Rdm.sts");
+
+		URI uri = URI.createURI( ruleFile );
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(uri, true);
 		syntax = (Root) resource.getContents().get(0);
