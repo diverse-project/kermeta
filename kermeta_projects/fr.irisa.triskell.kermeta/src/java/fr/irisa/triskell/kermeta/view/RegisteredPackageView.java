@@ -1,4 +1,4 @@
-/*$Id: RegisteredPackageView.java,v 1.2 2007-05-29 16:17:47 dvojtise Exp $
+/*$Id: RegisteredPackageView.java,v 1.3 2007-05-30 07:26:21 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	RegisteredPackageView.java
 * License : EPL
@@ -67,9 +67,8 @@ public class RegisteredPackageView extends ViewPart {
 	 * and always show the same content (Task List, for
 	 * example).
 	 */
-	class ViewContentProvider implements ITreeContentProvider
+	public class ViewContentProvider implements ITreeContentProvider
 	{
-		private final Object[] EMPTY = new Object[] {};
 		
 		public void inputChanged( Viewer v, Object oldInput, Object newInput) {
 			
@@ -82,21 +81,7 @@ public class RegisteredPackageView extends ViewPart {
 		 * returns the list of children of this element
 		 */
 		public Object[] getChildren(Object arg0) {
-			ArrayList<String> result = new ArrayList<String>();
-			Object obj = Registry.INSTANCE.get( arg0 );
-			// get only valid children , ie. registered children
-			if(obj instanceof EPackage) {
-				EPackage p = (EPackage) obj;
-				Iterator subPackageIt = p.getESubpackages().iterator();
-				while(subPackageIt.hasNext()){
-					EPackage subPackage = (EPackage)subPackageIt.next();
-					if(EMFRegistryHelper.isRegistered(subPackage.getNsURI())){
-						result.add(subPackage.getNsURI());
-					}
-				}
-				return result.toArray();
-			}
-			return EMPTY;
+			return EMFRegistryHelper.getRegisteredChildren((String)arg0).toArray();			
 		}
 		
 		
@@ -221,7 +206,7 @@ public class RegisteredPackageView extends ViewPart {
 
 		
 		uriColumn = new TableColumn(table, SWT.LEFT);
-		uriColumn.setText("registered URI");
+		uriColumn.setText("Registered URI");
 		uriColumn.setWidth(300);
 
 		packageNameColumn = new TableColumn(table, SWT.LEFT);
@@ -229,7 +214,7 @@ public class RegisteredPackageView extends ViewPart {
 		packageNameColumn.setWidth(120);
 
 		originColumn = new TableColumn(table, SWT.LEFT);
-		originColumn.setText("");
+		originColumn.setText("Origin");
 		originColumn.setWidth(350);
 		
 		table.setHeaderVisible(true);
@@ -308,7 +293,7 @@ public class RegisteredPackageView extends ViewPart {
 			items[index++] = (String) iter.next();
 		return items;
 	}
-
+	
 	@Override
 	public void setFocus() {		
 		refresh();
