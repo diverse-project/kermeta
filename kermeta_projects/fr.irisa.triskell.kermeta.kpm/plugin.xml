@@ -5,11 +5,12 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.16 2007-05-25 15:04:39 ftanguy Exp $
+ $Id: plugin.xml,v 1.17 2007-05-30 11:25:00 ftanguy Exp $
 -->
 
 <plugin>
-   <extension-point id="actions" name="KPMAction" schema="extension/actions.exsd"/>
+   <extension-point id="javaAction" name="JavaAction" schema="schema/javaAction.exsd"/>
+   <extension-point id="kermetaAction" name="KermetaAction" schema="schema/kermetaAction.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.4 2007-05-28 12:16:19 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.5 2007-05-30 11:25:00 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -10,8 +10,8 @@
 package fr.irisa.triskell.kermeta.kpm.builder;
 
 import java.util.ArrayList;
-import java.util.Date;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceDelta;
@@ -120,6 +120,13 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor {
 			if ( NatureHelper.doesProjectHaveNature( (IProject) resource, KermetaNature.ID ) ) { 
 				currentProject = KermetaWorkspace.getInstance().getKermetaProject( (IProject) resource);
 			} else mustContinue = false;
+			break;
+			
+		case IResource.FILE :
+			IFile file = (IFile) resource;
+			//KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
+			Unit unit = currentProject.getKpm().findUnit( file.getFullPath().toString() );
+			unit.receiveAsynchroneEvent("update", null, null);
 			break;
 			
 		default :

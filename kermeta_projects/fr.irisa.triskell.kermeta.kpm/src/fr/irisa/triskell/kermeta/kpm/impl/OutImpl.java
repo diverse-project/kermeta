@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OutImpl.java,v 1.2 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: OutImpl.java,v 1.3 2007-05-30 11:25:00 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -13,6 +13,7 @@ import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.launcher.KermetaLauncher;
 
 
 import java.util.Map;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * <!-- begin-user-doc -->
@@ -210,10 +212,28 @@ public class OutImpl extends AbstractEntityImpl implements Out {
 			IExtension extension = Platform.getExtensionRegistry().getExtension(getAction().getExtensionPoint());
 		
 			if ( extension != null ) {
-				IConfigurationElement[] elements = extension.getConfigurationElements();
+			
+				String extensionPointName = extension.getExtensionPointUniqueIdentifier();
+				
 				try {
-					IAction action = (IAction) elements[0].createExecutableExtension("class");
-					action.execute(this, unit, monitor, args);
+				
+					if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.javaAction") ) {
+								
+						IConfigurationElement[] elements = extension.getConfigurationElements();
+						IAction action = (IAction) elements[0].createExecutableExtension("class");
+						action.execute(this, unit, monitor, args);
+									
+					} else if ( extensionPointName.equals("fr.irisa.triskell.kermeta.kpm.kermetaAction") ) {
+					
+						IConfigurationElement[] elements = extension.getConfigurationElements();
+						String relativePath = elements[0].getAttribute("File");
+						String filePath = "platform:/plugin/" + extension.getContributor().getName() + "/" + relativePath;
+						String[] arguments = new String[1];
+						arguments[0] = filePath;
+						KermetaLauncher.execute( arguments );
+						
+					}
+					
 				} catch (CoreException exception) {
 					exception.printStackTrace();
 				}
