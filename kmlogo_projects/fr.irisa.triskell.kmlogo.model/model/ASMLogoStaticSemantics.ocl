@@ -10,7 +10,7 @@ inv positive_steps :
 
 context ProcCall 
 inv same_number_of_formals_and_actuals :
-	actualArgs.size = declaration.args.size
+	actualArgs->size = declaration.args.size
 	
 context ProcDeclaration 
 inv unique_names_for_formal_arguments :
