@@ -1,4 +1,4 @@
-/* $Id: TurtleSimpleAWTGUI.java,v 1.3 2007-05-31 21:15:27 dvojtise Exp $
+/* $Id: TurtleSimpleAWTGUI.java,v 1.4 2007-05-31 21:19:46 dvojtise Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleSimpleAWTGUI.java
  * License    : EPL
@@ -66,8 +66,14 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 		yPoints[1]= (int)(size/2+y + (5*Math.sin(angle + Math.PI/2)));
 		xPoints[2]= (int)(size/2+x + (5*Math.cos(angle - Math.PI/2)));
 		yPoints[2]= (int)(size/2+y + (5*Math.sin(angle - Math.PI/2)));
-		
+				
 		image.getGraphics().drawPolygon(xPoints, yPoints, nPoints);
+		
+		if(!isPenUp)
+			image.getGraphics().fillPolygon(xPoints, yPoints, nPoints);
+		else
+			image.getGraphics().drawPolygon(xPoints, yPoints, nPoints);
+		
 		repaint();
 	}
 	
