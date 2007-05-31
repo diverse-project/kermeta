@@ -6,9 +6,6 @@
       <eOperations name="rotate" ordered="false" upperBound="0">
         <eParameters name="angle" eType="//VM/Real"/>
       </eOperations>
-      <eOperations name="goto" ordered="false" upperBound="0">
-        <eParameters name="dest" eType="//VM/Point"/>
-      </eOperations>
       <eOperations name="forward" ordered="false" upperBound="0">
         <eParameters name="steps" eType="//VM/Real"/>
       </eOperations>
