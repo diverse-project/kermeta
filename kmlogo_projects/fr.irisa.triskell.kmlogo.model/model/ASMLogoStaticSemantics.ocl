@@ -15,4 +15,4 @@ inv same_number_of_formals_and_actuals :
 context ProcDeclaration :
 inv unique_names_for_formal_arguments :
 	args->forall ( a1, a2 | a1.name = a2.name implies a1 = a2 )
-end package
+endpackage
