@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LowerImpl.java,v 1.1 2007-05-30 22:18:11 ffleurey Exp $
+ * $Id: LowerImpl.java,v 1.2 2007-05-31 17:03:57 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
+import fr.irisa.triskell.kmLogo.ASM.LogoPackage;
 import fr.irisa.triskell.kmLogo.ASM.ASMPackage;
 import fr.irisa.triskell.kmLogo.ASM.Lower;
 

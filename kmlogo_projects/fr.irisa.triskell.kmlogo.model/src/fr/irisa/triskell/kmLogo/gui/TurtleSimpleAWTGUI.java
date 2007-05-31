@@ -1,4 +1,4 @@
-/* $Id: TurtleSimpleAWTGUI.java,v 1.1 2007-05-31 16:10:49 dvojtise Exp $
+/* $Id: TurtleSimpleAWTGUI.java,v 1.2 2007-05-31 17:03:57 ffleurey Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleSimpleAWTGUI.java
  * License    : EPL
@@ -38,6 +38,7 @@ class TurtleCanvas extends Canvas {
 public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 	private BufferedImage image;
     private int size;
+    private TurtleCanvas turtleCanvas;
 	
 	public TurtleSimpleAWTGUI (String name, int size) {
 		super("Turtle " + name);
@@ -45,7 +46,8 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 		this.size = size;
 		setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE ) ;
         setSize (size,size) ;
-        getContentPane().add(new TurtleCanvas(image, size));
+        turtleCanvas = new TurtleCanvas(image, size);
+        getContentPane().add(turtleCanvas);
         setVisible(true); 
 
 		System.out.println("java side");
@@ -62,9 +64,9 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 	}
 
 	public void drawLine(int x1, int y1, int x2, int y2) {
-		image.getGraphics().drawLine(x1, y1, x2, y2);
+		image.getGraphics().drawLine(size/2+x1, size/2+y1, size/2+x2, size/2+y2);
 		repaint();
-		//this.rep
+		turtleCanvas.repaint();
 		System.out.println("java side");
 	}
 

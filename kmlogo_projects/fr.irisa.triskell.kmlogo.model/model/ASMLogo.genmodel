@@ -30,7 +30,6 @@
       <genClasses ecoreClass="ASMLogo.ecore#//ASM/Clear"/>
       <genClasses ecoreClass="ASMLogo.ecore#//ASM/Expression"/>
       <genClasses ecoreClass="ASMLogo.ecore#//ASM/BinaryExp">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ASMLogo.ecore#//ASM/BinaryExp/operator"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/BinaryExp/lhs"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/BinaryExp/rhs"/>
       </genClasses>
@@ -72,6 +71,13 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference ASMLogo.ecore#//ASM/ParameterCall/parameter"/>
       </genClasses>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Plus"/>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Minus"/>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Mult"/>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Div"/>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Equals"/>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Greater"/>
+      <genClasses ecoreClass="ASMLogo.ecore#//ASM/Lower"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ASMPackage.java,v 1.3 2007-05-31 17:03:57 ffleurey Exp $
+ * $Id: LogoPackage.java,v 1.1 2007-05-31 17:03:57 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM;
 
@@ -22,11 +22,11 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see fr.irisa.triskell.kmLogo.ASM.ASMFactory
+ * @see fr.irisa.triskell.kmLogo.ASM.LogoFactory
  * @model kind="package"
  * @generated
  */
-public interface ASMPackage extends EPackage {
+public interface LogoPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -57,14 +57,14 @@ public interface ASMPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ASMPackage eINSTANCE = fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl.init();
+	LogoPackage eINSTANCE = fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.InstructionImpl <em>Instruction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.InstructionImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getInstruction()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getInstruction()
 	 * @generated
 	 */
 	int INSTRUCTION = 0;
@@ -83,7 +83,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.PrimitiveImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPrimitive()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPrimitive()
 	 * @generated
 	 */
 	int PRIMITIVE = 1;
@@ -102,7 +102,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.BackImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getBack()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getBack()
 	 * @generated
 	 */
 	int BACK = 2;
@@ -130,7 +130,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ForwardImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getForward()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getForward()
 	 * @generated
 	 */
 	int FORWARD = 3;
@@ -158,7 +158,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LeftImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getLeft()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getLeft()
 	 * @generated
 	 */
 	int LEFT = 4;
@@ -186,7 +186,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.RightImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getRight()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getRight()
 	 * @generated
 	 */
 	int RIGHT = 5;
@@ -214,7 +214,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.PenDownImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPenDown()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPenDown()
 	 * @generated
 	 */
 	int PEN_DOWN = 6;
@@ -233,7 +233,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.PenUpImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPenUp()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPenUp()
 	 * @generated
 	 */
 	int PEN_UP = 7;
@@ -252,7 +252,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ClearImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getClear()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getClear()
 	 * @generated
 	 */
 	int CLEAR = 8;
@@ -271,7 +271,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ExpressionImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getExpression()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getExpression()
 	 * @generated
 	 */
 	int EXPRESSION = 9;
@@ -290,7 +290,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.BinaryExpImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getBinaryExp()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getBinaryExp()
 	 * @generated
 	 */
 	int BINARY_EXP = 10;
@@ -327,7 +327,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ConstantImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getConstant()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getConstant()
 	 * @generated
 	 */
 	int CONSTANT = 11;
@@ -355,7 +355,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ProcCallImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getProcCall()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getProcCall()
 	 * @generated
 	 */
 	int PROC_CALL = 12;
@@ -392,7 +392,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ProcDeclarationImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getProcDeclaration()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getProcDeclaration()
 	 * @generated
 	 */
 	int PROC_DECLARATION = 13;
@@ -447,7 +447,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.BlockImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getBlock()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getBlock()
 	 * @generated
 	 */
 	int BLOCK = 14;
@@ -475,7 +475,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ControlStructureImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getControlStructure()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getControlStructure()
 	 * @generated
 	 */
 	int CONTROL_STRUCTURE = 16;
@@ -503,7 +503,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.IfImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getIf()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getIf()
 	 * @generated
 	 */
 	int IF = 15;
@@ -549,7 +549,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.RepeatImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getRepeat()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getRepeat()
 	 * @generated
 	 */
 	int REPEAT = 17;
@@ -586,7 +586,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.WhileImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getWhile()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getWhile()
 	 * @generated
 	 */
 	int WHILE = 18;
@@ -623,7 +623,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ParameterImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getParameter()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getParameter()
 	 * @generated
 	 */
 	int PARAMETER = 19;
@@ -651,7 +651,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ParameterCallImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getParameterCall()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getParameterCall()
 	 * @generated
 	 */
 	int PARAMETER_CALL = 20;
@@ -674,13 +674,12 @@ public interface ASMPackage extends EPackage {
 	 */
 	int PARAMETER_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
-
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl <em>Plus</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPlus()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPlus()
 	 * @generated
 	 */
 	int PLUS = 21;
@@ -717,7 +716,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.MinusImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMinus()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getMinus()
 	 * @generated
 	 */
 	int MINUS = 22;
@@ -754,7 +753,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.MultImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMult()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getMult()
 	 * @generated
 	 */
 	int MULT = 23;
@@ -791,7 +790,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.DivImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getDiv()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getDiv()
 	 * @generated
 	 */
 	int DIV = 24;
@@ -828,7 +827,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.EqualsImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getEquals()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getEquals()
 	 * @generated
 	 */
 	int EQUALS = 25;
@@ -865,7 +864,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.GreaterImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getGreater()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getGreater()
 	 * @generated
 	 */
 	int GREATER = 26;
@@ -902,7 +901,7 @@ public interface ASMPackage extends EPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LowerImpl
-	 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getLower()
+	 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getLower()
 	 * @generated
 	 */
 	int LOWER = 27;
@@ -1453,7 +1452,7 @@ public interface ASMPackage extends EPackage {
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
-	ASMFactory getASMFactory();
+	LogoFactory getLogoFactory();
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1467,13 +1466,13 @@ public interface ASMPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals  {
+	interface Literals {
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kmLogo.ASM.impl.InstructionImpl <em>Instruction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.InstructionImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getInstruction()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getInstruction()
 		 * @generated
 		 */
 		EClass INSTRUCTION = eINSTANCE.getInstruction();
@@ -1483,7 +1482,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.PrimitiveImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPrimitive()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPrimitive()
 		 * @generated
 		 */
 		EClass PRIMITIVE = eINSTANCE.getPrimitive();
@@ -1493,7 +1492,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.BackImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getBack()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getBack()
 		 * @generated
 		 */
 		EClass BACK = eINSTANCE.getBack();
@@ -1511,7 +1510,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ForwardImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getForward()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getForward()
 		 * @generated
 		 */
 		EClass FORWARD = eINSTANCE.getForward();
@@ -1529,7 +1528,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LeftImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getLeft()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getLeft()
 		 * @generated
 		 */
 		EClass LEFT = eINSTANCE.getLeft();
@@ -1547,7 +1546,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.RightImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getRight()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getRight()
 		 * @generated
 		 */
 		EClass RIGHT = eINSTANCE.getRight();
@@ -1565,7 +1564,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.PenDownImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPenDown()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPenDown()
 		 * @generated
 		 */
 		EClass PEN_DOWN = eINSTANCE.getPenDown();
@@ -1575,7 +1574,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.PenUpImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPenUp()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPenUp()
 		 * @generated
 		 */
 		EClass PEN_UP = eINSTANCE.getPenUp();
@@ -1585,7 +1584,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ClearImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getClear()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getClear()
 		 * @generated
 		 */
 		EClass CLEAR = eINSTANCE.getClear();
@@ -1595,7 +1594,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ExpressionImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getExpression()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getExpression()
 		 * @generated
 		 */
 		EClass EXPRESSION = eINSTANCE.getExpression();
@@ -1605,7 +1604,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.BinaryExpImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getBinaryExp()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getBinaryExp()
 		 * @generated
 		 */
 		EClass BINARY_EXP = eINSTANCE.getBinaryExp();
@@ -1631,7 +1630,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ConstantImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getConstant()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getConstant()
 		 * @generated
 		 */
 		EClass CONSTANT = eINSTANCE.getConstant();
@@ -1649,7 +1648,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ProcCallImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getProcCall()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getProcCall()
 		 * @generated
 		 */
 		EClass PROC_CALL = eINSTANCE.getProcCall();
@@ -1675,7 +1674,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ProcDeclarationImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getProcDeclaration()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getProcDeclaration()
 		 * @generated
 		 */
 		EClass PROC_DECLARATION = eINSTANCE.getProcDeclaration();
@@ -1717,7 +1716,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.BlockImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getBlock()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getBlock()
 		 * @generated
 		 */
 		EClass BLOCK = eINSTANCE.getBlock();
@@ -1735,7 +1734,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.IfImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getIf()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getIf()
 		 * @generated
 		 */
 		EClass IF = eINSTANCE.getIf();
@@ -1761,7 +1760,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ControlStructureImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getControlStructure()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getControlStructure()
 		 * @generated
 		 */
 		EClass CONTROL_STRUCTURE = eINSTANCE.getControlStructure();
@@ -1779,7 +1778,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.RepeatImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getRepeat()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getRepeat()
 		 * @generated
 		 */
 		EClass REPEAT = eINSTANCE.getRepeat();
@@ -1797,7 +1796,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.WhileImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getWhile()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getWhile()
 		 * @generated
 		 */
 		EClass WHILE = eINSTANCE.getWhile();
@@ -1815,7 +1814,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ParameterImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getParameter()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getParameter()
 		 * @generated
 		 */
 		EClass PARAMETER = eINSTANCE.getParameter();
@@ -1833,7 +1832,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ParameterCallImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getParameterCall()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getParameterCall()
 		 * @generated
 		 */
 		EClass PARAMETER_CALL = eINSTANCE.getParameterCall();
@@ -1851,7 +1850,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.PlusImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getPlus()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getPlus()
 		 * @generated
 		 */
 		EClass PLUS = eINSTANCE.getPlus();
@@ -1861,7 +1860,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.MinusImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMinus()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getMinus()
 		 * @generated
 		 */
 		EClass MINUS = eINSTANCE.getMinus();
@@ -1871,7 +1870,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.MultImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getMult()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getMult()
 		 * @generated
 		 */
 		EClass MULT = eINSTANCE.getMult();
@@ -1881,7 +1880,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.DivImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getDiv()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getDiv()
 		 * @generated
 		 */
 		EClass DIV = eINSTANCE.getDiv();
@@ -1891,7 +1890,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.EqualsImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getEquals()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getEquals()
 		 * @generated
 		 */
 		EClass EQUALS = eINSTANCE.getEquals();
@@ -1901,7 +1900,7 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.GreaterImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getGreater()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getGreater()
 		 * @generated
 		 */
 		EClass GREATER = eINSTANCE.getGreater();
@@ -1911,11 +1910,11 @@ public interface ASMPackage extends EPackage {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LowerImpl
-		 * @see fr.irisa.triskell.kmLogo.ASM.impl.ASMPackageImpl#getLower()
+		 * @see fr.irisa.triskell.kmLogo.ASM.impl.LogoPackageImpl#getLower()
 		 * @generated
 		 */
 		EClass LOWER = eINSTANCE.getLower();
 
 	}
 
-} //ASMPackage
+} //LogoPackage

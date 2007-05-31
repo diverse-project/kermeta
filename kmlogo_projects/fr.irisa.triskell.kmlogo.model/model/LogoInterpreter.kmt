@@ -1,4 +1,4 @@
-/* $Id: LogoInterpreter.kmt,v 1.6 2007-05-31 15:24:40 jezequel Exp $
+/* $Id: LogoInterpreter.kmt,v 1.7 2007-05-31 17:03:57 ffleurey Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
@@ -14,11 +14,13 @@ require kermeta
 require "ASMLogo.ecore"
 require "VMLogo.ecore"
 require "Math.kmt"
+require "TurtleControler.kmt"
 
 using kermeta::standard
 using kermeta::utils
 using kermeta::persistence
 using kermeta::io
+using kmLogo::controler
 
 
 class Interpreter 
@@ -29,11 +31,16 @@ class Interpreter
 	
 	operation main() is
 	do
-		var root : ASM::Instruction
+		execute("tests/test1.xmi")
+	end
+	
+	operation execute(uri : String) is
+	do
 		context := Context.new()
 		context.reset()
-		root := loadProgram("tests/test1.xmi")
+		root := loadProgram(uri)
 		root.eval(context)
+		context.controler.modelChanged
 	end
 	
 	operation loadProgram(uri : String) : ASM::Instruction is do
@@ -48,11 +55,14 @@ class Bindings inherits Hashtable<String,Integer> {}
 
 class Context  {
 	attribute stack : Stack<Bindings> 
-	reference turtle : VM::Turtle 
+	reference turtle : VM::Turtle
+	
+	reference controler : TurtleControler
 	
 	operation reset() is do
 		stack := Stack<Bindings>.new()
-		turtle := VM::Turtle.new()	
+		turtle := VM::Turtle.new()
+		controler := TurtleControler.new.initialize(turtle)
 	end
 	
 	operation pushFrame (frame : Bindings) is do
@@ -312,6 +322,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.forward(-steps.eval(context))
+			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -319,6 +330,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.forward(steps.eval(context))
+			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -326,6 +338,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.rotate(-angle.eval(context))
+			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -333,6 +346,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.rotate(angle.eval(context))
+			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -340,6 +354,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.setPenUp(false)
+			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -347,6 +362,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.setPenUp(true)
+			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -354,6 +370,7 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.reset()
+			context.controler.modelChanged
 		end
 	}
 	

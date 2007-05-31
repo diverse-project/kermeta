@@ -10,7 +10,9 @@ Export-Package: fr.irisa.triskell.kmLogo,
  fr.irisa.triskell.kmLogo.ASM,
  fr.irisa.triskell.kmLogo.ASM.impl,
  fr.irisa.triskell.kmLogo.ASM.util,
- fr.irisa.triskell.kmLogo.impl
+ fr.irisa.triskell.kmLogo.gui,
+ fr.irisa.triskell.kmLogo.impl,
+ fr.irisa.triskell.kmLogo.wrapper
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  fr.irisa.triskell.kermeta.interpreter

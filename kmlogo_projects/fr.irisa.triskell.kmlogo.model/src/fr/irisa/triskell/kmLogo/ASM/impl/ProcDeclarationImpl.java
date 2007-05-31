@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProcDeclarationImpl.java,v 1.1 2007-05-30 13:23:34 ffleurey Exp $
+ * $Id: ProcDeclarationImpl.java,v 1.2 2007-05-31 17:03:56 ffleurey Exp $
  */
 package fr.irisa.triskell.kmLogo.ASM.impl;
 
 import fr.irisa.triskell.kmLogo.ASM.ASMPackage;
 import fr.irisa.triskell.kmLogo.ASM.Block;
+import fr.irisa.triskell.kmLogo.ASM.LogoPackage;
 import fr.irisa.triskell.kmLogo.ASM.Parameter;
 import fr.irisa.triskell.kmLogo.ASM.ProcCall;
 import fr.irisa.triskell.kmLogo.ASM.ProcDeclaration;
