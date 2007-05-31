@@ -1,10 +1,10 @@
-/* $Id: LogoInterpreter.kmt,v 1.4 2007-05-31 09:47:58 jezequel Exp $
+/* $Id: LogoInterpreter.kmt,v 1.5 2007-05-31 12:07:40 ffleurey Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
  * Authors:
  */
-@mainClass "kmlogo::ASM::Interpreter"
+@mainClass "kmLogo::Interpreter"
 @mainOperation "main"
 
 
@@ -17,17 +17,30 @@ require "VMLogo.ecore"
 
 using kermeta::standard
 using kermeta::utils
+using kermeta::persistence
+using kermeta::io
+
 
 class Interpreter 
 {
 	attribute context : Context
+	
 	reference root : ASM::Instruction
+	
 	operation main() is
 	do
+		var root : ASM::Instruction
 		context := Context.new()
 		context.reset()
-		// obtain root from parser, or load model?
+		root := loadProgram("tests/test1.xmi")
 		root.eval(context)
+	end
+	
+	operation loadProgram(uri : String) : ASM::Instruction is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : Resource init res.createResource(uri, "http://kmLogo.ecore/ASM")
+        resource.load()
+        result ?= resource.instances.one  
 	end
 }
 
@@ -36,17 +49,24 @@ class Bindings inherits Hashtable<String,Integer> {}
 class Context  {
 	attribute stack : Stack<Bindings> 
 	reference turtle : VM::Turtle 
+	
 	operation reset() is do
 		stack := Stack<Bindings>.new()
 		turtle := VM::Turtle.new()	
+		turtle.PI := "3.14".toReal
 	end
+	
 	operation pushFrame (frame : Bindings) is do
 		stack.push(frame)
 	end
+	
 	operation popFrame() : Bindings is do
-		result := stack.pop()
+		result := stack.pop
 	end
-		
+	
+	operation peekFrame() : Bindings is do
+		result := stack.peek
+	end
 }
 
 /**
@@ -55,8 +75,13 @@ class Context  {
 package VM {
 
 @aspect "true"
+
 	class Turtle
 	{
+	
+	attribute PI : Real
+	
+
 		operation reset() is do
 			position := Point.new
 			position.x := 0
@@ -64,38 +89,45 @@ package VM {
 			heading := 0
 			drawings.clear
 		end
+				
 		operation setPenUp(b : Boolean) is do
 			penUp := b
 		end
-		operation rotate(angle : Real) is do
-			heading := heading + angle * 2 * PI / 360
+		
+		operation rotate(angle : Integer)  is do
+			heading := (heading + angle).mod(360)
 		end
-		operation move(dx : Real, dy : Real)  is do
+	
+		operation move(dx : Integer, dy : Integer)  is do
 			var newPos : Point
 			newPos := position.getDelta(dx,dy)
 			if penUp then
-				stdio.writeln("Tortue se deplace en "+newPos.toString)
+				stdio.writeln("Tortue se deplace en "+ newPos.toString)
 			else
-				stdio.writeln("Tortue trace vers "+newPos.toString)
+				stdio.writeln("Tortue trace vers "+ newPos.toString)
 				var trace : Segment init Segment.new
 				trace.make(position,newPos)
 				drawings.add(trace)
 			end
 			position := newPos
 		end
-		operation forward(steps : Real)  is do
+			
+		operation forward(steps : Integer)  is do
 			// move(Math.sin(heading)*steps,Math.cos(heading)*steps)
-		// let's approximate sin/cos for square moves only
-			if heading == 0 then move (0,steps) end
+			// let's approximate sin/cos for square moves only
+			if heading == 0 then move (0, steps) end
 			if heading == 90 then move (steps,0) end
 			if heading == 180 then move (0,-steps) end
 			if heading == 270 then move (-steps,0) end
 		end
+	
 	}
+
+	
 	@aspect "true"
 	class Point
 	{
-		operation getDelta(dx : Real, dy : Real) : Point is do
+		operation getDelta(dx : Integer, dy : Integer) : Point is do
 			result := Point.new
 			result.x := x + dx
 			result.y := y + dy			
@@ -114,7 +146,7 @@ package VM {
 	}
 }
 
-}
+
 
 /**
  * Implementation of the Abstract Syntactic Model
@@ -141,7 +173,7 @@ package ASM {
 	class ParameterCall
 	{
 		operation eval(context : Context) : Integer is do 
-			result := context.first.getValue(parameter.name)
+			result := context.peekFrame.getValue(parameter.name)
 		end 
 	}
 	
