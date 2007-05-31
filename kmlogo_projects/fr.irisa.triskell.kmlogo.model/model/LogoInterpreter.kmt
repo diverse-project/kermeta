@@ -1,4 +1,4 @@
-/* $Id: LogoInterpreter.kmt,v 1.5 2007-05-31 12:07:40 ffleurey Exp $
+/* $Id: LogoInterpreter.kmt,v 1.6 2007-05-31 15:24:40 jezequel Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
@@ -13,7 +13,7 @@ package kmLogo;
 require kermeta
 require "ASMLogo.ecore"
 require "VMLogo.ecore"
-
+require "Math.kmt"
 
 using kermeta::standard
 using kermeta::utils
@@ -53,7 +53,6 @@ class Context  {
 	operation reset() is do
 		stack := Stack<Bindings>.new()
 		turtle := VM::Turtle.new()	
-		turtle.PI := "3.14".toReal
 	end
 	
 	operation pushFrame (frame : Bindings) is do
@@ -79,10 +78,10 @@ package VM {
 	class Turtle
 	{
 	
-	attribute PI : Real
-	
+		attribute math : Math::Math 
 
 		operation reset() is do
+			math := Math::Math.new
 			position := Point.new
 			position.x := 0
 			position.y := 0
@@ -99,8 +98,7 @@ package VM {
 		end
 	
 		operation move(dx : Integer, dy : Integer)  is do
-			var newPos : Point
-			newPos := position.getDelta(dx,dy)
+			var newPos : Point init position.getDelta(dx,dy)
 			if penUp then
 				stdio.writeln("Tortue se deplace en "+ newPos.toString)
 			else
@@ -113,14 +111,15 @@ package VM {
 		end
 			
 		operation forward(steps : Integer)  is do
-			// move(Math.sin(heading)*steps,Math.cos(heading)*steps)
-			// let's approximate sin/cos for square moves only
-			if heading == 0 then move (0, steps) end
-			if heading == 90 then move (steps,0) end
-			if heading == 180 then move (0,-steps) end
-			if heading == 270 then move (-steps,0) end
+		    var radian : Real init math.toRadians(heading.toReal) 
+			move(scale(steps,math.sin(radian)), scale(steps,math.cos(radian)))
 		end
-	
+		/*
+		* scale the "steps" by factor and round the result
+		*/
+		operation scale(steps : Integer, factor : Real) : Integer is do
+			result := (steps.toReal * factor + "0.5".toReal).toInteger
+		end
 	}
 
 	
