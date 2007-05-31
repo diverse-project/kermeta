@@ -1,4 +1,4 @@
-/* $Id: TurtleSimpleAWTGUI.java,v 1.4 2007-05-31 21:19:46 dvojtise Exp $
+/* $Id: TurtleSimpleAWTGUI.java,v 1.5 2007-05-31 21:29:02 dvojtise Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleSimpleAWTGUI.java
  * License    : EPL
@@ -56,16 +56,20 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 	}
 
 	public void drawTurtle(int x, int y, double angle, boolean isPenUp) {
-		int nPoints = 3;
+		int nPoints = 4;
 		int xPoints[] = new int[nPoints];
 		int yPoints[] = new int[nPoints];
 		xPoints[0]= (int)(size/2+x + (20*Math.cos(angle)));
 		yPoints[0]= (int)(size/2+y + (20*Math.sin(angle)));
 
-		xPoints[1]= (int)(size/2+x + (5*Math.cos(angle + Math.PI/2)));
-		yPoints[1]= (int)(size/2+y + (5*Math.sin(angle + Math.PI/2)));
-		xPoints[2]= (int)(size/2+x + (5*Math.cos(angle - Math.PI/2)));
-		yPoints[2]= (int)(size/2+y + (5*Math.sin(angle - Math.PI/2)));
+		xPoints[1]= (int)(size/2+x + (10*Math.cos(angle + Math.PI/1.5)));
+		yPoints[1]= (int)(size/2+y + (10*Math.sin(angle + Math.PI/1.5)));
+		
+		xPoints[2]= (int)(size/2+x);
+		yPoints[2]= (int)(size/2+y);
+		
+		xPoints[3]= (int)(size/2+x + (10*Math.cos(angle - Math.PI/1.5)));
+		yPoints[3]= (int)(size/2+y + (10*Math.sin(angle - Math.PI/1.5)));
 				
 		image.getGraphics().drawPolygon(xPoints, yPoints, nPoints);
 		
