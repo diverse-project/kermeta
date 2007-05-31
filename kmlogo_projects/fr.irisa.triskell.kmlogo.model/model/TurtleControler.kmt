@@ -1,4 +1,4 @@
-/* $Id: TurtleControler.kmt,v 1.1 2007-05-31 16:10:49 dvojtise Exp $
+/* $Id: TurtleControler.kmt,v 1.2 2007-05-31 21:15:27 dvojtise Exp $
  * Creation date: May 31, 2007
  * License:
  * Copyright:
@@ -29,6 +29,8 @@ class TurtleControler
 		result := self
 	end
 	operation modelChanged() : Void is do 
+		// we don't know how to remove only the previous turtle so redraw all ..
+		//registeredGUI.clearDrawing
 		// use the data in the model to draw the board
 		turtleModel.drawings.each{s | 
 			registeredGUI.drawLine(s.origin.x, s.origin.y, s.destination.x, s.destination.y)
