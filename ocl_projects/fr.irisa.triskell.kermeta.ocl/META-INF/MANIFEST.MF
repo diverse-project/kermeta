@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: fr.irisa.triskell.kermeta.ocl
+Bundle-Version: 1.0.2
+Bundle-ClassPath: lib/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200702061926.jar,
+ lib/org.eclipse.ocl_1.1.0.v200705102050.jar,
+ lib/org.eclipse.emf.ocl_1.1.0.v200705031818.jar,
+ lib/emf.common_2.3.0.v200705110650.jar,
+ lib/emf.ecore_2.3.0.v200705110650.jar,
+ lib/emf.ecore.xmi_2.3.0.v200705110650.jar,
+ lib/emf.mapping.ecore2xml_2.3.0.v200705110650.jar
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ fr.irisa.triskell.kermeta.interpreter,
+ org.eclipse.ui.forms,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.console,
+ fr.irisa.triskell.kermeta.ecore
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.ocl ; singleton:=true
+Bundle-Vendor: INRIA/IRISA
+Export-Package: fr.irisa.triskell.kermeta.ocl,
+ fr.irisa.triskell.kermeta.ocl.console,
+ fr.irisa.triskell.kermeta.ocl.kmtactions,
+ fr.irisa.triskell.kermeta.ocl.ui,
+ fr.irisa.triskell.kermeta.ocl.ui.popup.actions

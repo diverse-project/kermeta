@@ -2,5 +2,4 @@ package sample
 -- 17: forAll (explicit variables)
 context A inv:
 	b->forAll( a | true )
-
 endpackage
