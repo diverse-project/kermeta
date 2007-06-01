@@ -1,11 +1,11 @@
-/* $Id: OperatorPolicies.kmt,v 1.1 2007-06-01 15:00:34 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.2 2007-06-01 15:01:30 barais Exp $
  * Creation date: February 23, 2007
  * License:
  * Copyright:
  * Authors: Mark Skipper
  */
  
-
+ 
 package ocl2kmt;
 
 require kermeta

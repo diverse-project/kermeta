@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.1 2007-06-01 15:00:34 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.1 2007-06-01 15:00:34 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.2 2007-06-01 15:01:30 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.2 2007-06-01 15:01:30 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -8,7 +8,7 @@
 @mainClass "::"
 @mainOperation ""
  
-
+ 
 package ocl2kmt;
 
 require kermeta
