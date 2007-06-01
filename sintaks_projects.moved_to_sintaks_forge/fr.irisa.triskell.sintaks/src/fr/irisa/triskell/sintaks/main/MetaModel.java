@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -46,7 +47,7 @@ public class MetaModel implements IMetaModel {
 	public void store(IFile outputFile) {
 		URI uri = URI.createURI("platform:/resource" + outputFile.getFullPath().toString());
 		Resource resource = resSet.createResource(uri);
-		resource.getContents().add(root);
+		resource.getContents().add((EObject) root);
 		try {
 			resource.save(null);
 		} catch (IOException e) {
