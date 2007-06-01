@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.19 2007-02-13 09:20:53 ftanguy Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.20 2007-06-01 11:33:22 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -16,6 +16,7 @@ import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -35,8 +36,11 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStepFilters;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -134,8 +138,8 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 		//startFile = path.lastSegment();
 		startFile = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getFullPath().toString();
 	}
-	/** retrieve the path of the project is this is a java project */ 
-	protected String getCurrentProjectPath() {
+	/** retrieve the path of the project if this is a java project */ 
+	protected String getCurrentProjectOutputPath() {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
     	IProject theProject = myWorkspaceRoot.getProject(this.getProjectName());
     	
@@ -145,7 +149,12 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
     		{
     			try {
 					if(theProject.getNature(org.eclipse.jdt.core.JavaCore.NATURE_ID) != null){
-						currentProjectPath = theProject.getLocation().toString();
+						//currentProjectPath = theProject.getLocation().toString();
+						
+						currentProjectPath = ResourceHelper.root.getLocation().toString();
+						IJavaProject javaProj = JavaCore.create(theProject);
+						currentProjectPath += javaProj.getOutputLocation().toString();
+						
 					}
 				} catch (CoreException e) {
 					// we don't care, just ignore this project for the class path

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.22 2006-09-20 07:40:59 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.23 2007-06-01 11:33:22 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -95,7 +95,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	{
 		// initialize the process for interpretation (in fact, this process is a thread)
 		kermeta_process = new KermetaDebugProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
-		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());    	
+		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectOutputPath());    	
 		kermeta_process.start();
 	}
 	

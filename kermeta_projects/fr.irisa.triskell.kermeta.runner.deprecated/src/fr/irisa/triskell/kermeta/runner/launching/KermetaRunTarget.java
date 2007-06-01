@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.18 2007-02-13 09:20:53 ftanguy Exp $
+/* $Id: KermetaRunTarget.java,v 1.19 2007-06-01 11:33:22 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -51,7 +51,7 @@ public class KermetaRunTarget extends AbstractKermetaTarget
     	initPath();
     	initConsole();
     	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false, console);
-    	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());
+    	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectOutputPath());
     	kermeta_process.start();
     }
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.4 2006-09-19 14:39:15 zdrey Exp $
+/* $Id: KermetaProcess.java,v 1.5 2007-06-01 11:33:23 dvojtise Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL
@@ -19,7 +19,12 @@ import java.util.List;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
 import org.eclipse.jdt.launching.JavaRuntime;
 
@@ -110,6 +115,14 @@ public class KermetaProcess //extends Process
 		}
 		if(currentProjectPath != null){
 			try {
+				
+				//ClasspathEntry cpEntry = new ClasspathEntry();
+				
+			
+
+				
+				
+				
 				urlsV.add(new URL("file://" +currentProjectPath + "//"));
 			} catch (MalformedURLException e) {
 				RunnerPlugin.pluginLog.warn("Current project cannot be added to classpath",

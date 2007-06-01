@@ -1,4 +1,4 @@
-/* $Id: ConstraintRunTarget.java,v 1.4 2006-06-22 07:53:57 dvojtise Exp $
+/* $Id: ConstraintRunTarget.java,v 1.5 2007-06-01 11:33:22 dvojtise Exp $
  * Project: KermetaRunner
  * File: ConstraintRunTarget.java
  * License: EPL
@@ -25,7 +25,7 @@ public class ConstraintRunTarget extends KermetaRunTarget {
 		 kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", true, console);
 		 
 		 
-		 kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());
+		 kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectOutputPath());
 		 kermeta_process.start();
 	 }
 }
