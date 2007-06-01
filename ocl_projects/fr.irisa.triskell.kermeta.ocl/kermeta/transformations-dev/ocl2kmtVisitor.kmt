@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.29 2007-06-01 14:58:27 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.29 2007-06-01 14:58:27 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.1 2007-06-01 15:00:34 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.1 2007-06-01 15:00:34 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -14,7 +14,7 @@ package ocl2kmt;
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "OperatorPolicies.kmt"    
-require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 
 using kermeta::standard
 using kermeta::exceptions
