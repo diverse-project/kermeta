@@ -6,17 +6,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: plugin.xml,v 1.9 2007-05-09 08:56:18 cfaucher Exp $
+ * $Id: plugin.xml,v 1.10 2007-06-01 14:53:15 cfaucher Exp $
  */
 -->
 
 <plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://kermeta/kermeta.ecore" 
-       class = "fr.irisa.triskell.kermeta.KmPackage"
-       /> 
+    <package
+          class="fr.irisa.triskell.kermeta.KmPackage"
+          genModel="build/ecore/kermeta.genmodel"
+          uri="http://kermeta/kermeta.ecore"/> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
