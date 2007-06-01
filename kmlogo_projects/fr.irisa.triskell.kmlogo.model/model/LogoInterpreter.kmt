@@ -1,4 +1,4 @@
-/* $Id: LogoInterpreter.kmt,v 1.7 2007-05-31 17:03:57 ffleurey Exp $
+/* $Id: LogoInterpreter.kmt,v 1.8 2007-06-01 09:58:39 ffleurey Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
@@ -31,7 +31,7 @@ class Interpreter
 	
 	operation main() is
 	do
-		execute("tests/test1.xmi")
+		execute("tests/test2.xmi")
 	end
 	
 	operation execute(uri : String) is
@@ -322,7 +322,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.forward(-steps.eval(context))
-			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -330,7 +329,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.forward(steps.eval(context))
-			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -338,7 +336,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.rotate(-angle.eval(context))
-			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -346,7 +343,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.rotate(angle.eval(context))
-			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -354,7 +350,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.setPenUp(false)
-			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -362,7 +357,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.setPenUp(true)
-			context.controler.modelChanged
 		end
 	}
 	@aspect "true"
@@ -370,7 +364,6 @@ package ASM {
 	{
 		operation eval(context : Context) : Integer is do 
 			context.turtle.reset()
-			context.controler.modelChanged
 		end
 	}
 	

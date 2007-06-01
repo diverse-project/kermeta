@@ -1,4 +1,4 @@
-/* $Id: TurtleSimpleAWTGUI.java,v 1.5 2007-05-31 21:29:02 dvojtise Exp $
+/* $Id: TurtleSimpleAWTGUI.java,v 1.6 2007-06-01 09:58:39 ffleurey Exp $
  * Project    : fr.irisa.triskell.kmLogo
  * File       : TurtleSimpleAWTGUI.java
  * License    : EPL
@@ -52,7 +52,7 @@ public class TurtleSimpleAWTGUI extends JFrame  implements ITurtleGUI {
 
 	public void drawLine(int x1, int y1, int x2, int y2) {
 		image.getGraphics().drawLine(size/2+x1, size/2+y1, size/2+x2, size/2+y2);
-		repaint();
+		turtleCanvas.repaint();
 	}
 
 	public void drawTurtle(int x, int y, double angle, boolean isPenUp) {
