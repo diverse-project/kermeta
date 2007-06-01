@@ -35,10 +35,15 @@ public class TestOCLParser {
 
 		
 	
-	public void run(String ocltext, String uri) {
-		MyOCLParser parser = createParser(ocltext); //$NON-NLS-1$
+	public void run(String ocltextfile, String uri) {
+		File oclSourceFile = new File(ocltextfile);
+		String oclSource =  getContents(oclSourceFile);
+		
+		
+		MyOCLParser parser = createParser(oclSource); //$NON-NLS-1$
 		EObject constraint = null;
 		try {
+			//System.err.println(ocltext + " essai");
 			constraint = parser.parse();
 			System.out.println(constraint.toString());
 		} catch (ParserException e) {
@@ -190,10 +195,8 @@ public class TestOCLParser {
 		 filenames.add("68");
 		 filenames.add("69");
 		 filenames.add("70");
-		 filenames.add("c01");
-		 filenames.add("c02");
-		 filenames.add("c03");
-		 filenames.add("c04");
+		 filenames.add("ASMLogoStaticSemantics");
+
 	 }
 	 
 	public static void main(String[] args) {
@@ -203,17 +206,20 @@ public class TestOCLParser {
 	
 	public void generateAllXmi(){
 		//String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
-		String baseDir = "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/";
+		String baseDir = "/home/barais/workspaces/workspace_demo_kermeta/fr.irisa.triskell.kermeta.ocl/";
 		System.out.println("Processing: OCL SOURCE" );
 		for (String fn: filenames){
 			String oclSourceFileName = baseDir + "ocl/" + fn + ".ocl";
 			String xmiOutputFileName = "model/" + fn + ".xmi";
 			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
-			File oclSourceFile = new File(oclSourceFileName);
-			String oclSource =  getContents(oclSourceFile);
-			new TestOCLParser().run(oclSource, xmiOutputFileName);
+			//File oclSourceFile = new File(oclSourceFileName);
+			//String oclSource =  getContents(oclSourceFile);
+			new TestOCLParser().run(oclSourceFileName, xmiOutputFileName);
 		}
 	}
+	
+
+	
 
 	public static void ifTest() {
 		TestOCLParser oclp = new TestOCLParser();
