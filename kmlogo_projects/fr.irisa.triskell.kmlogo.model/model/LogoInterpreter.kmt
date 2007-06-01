@@ -1,4 +1,4 @@
-/* $Id: LogoInterpreter.kmt,v 1.8 2007-06-01 09:58:39 ffleurey Exp $
+/* $Id: LogoInterpreter.kmt,v 1.9 2007-06-01 12:04:09 jezequel Exp $
  * Creation date: May 30, 2007
  * License:
  * Copyright:
@@ -31,7 +31,8 @@ class Interpreter
 	
 	operation main() is
 	do
-		execute("tests/test2.xmi")
+		execute("tests/snowflake.xmi")
+//		execute("tests/test2.xmi")
 	end
 	
 	operation execute(uri : String) is
@@ -62,6 +63,7 @@ class Context  {
 	operation reset() is do
 		stack := Stack<Bindings>.new()
 		turtle := VM::Turtle.new()
+		turtle.reset
 		controler := TurtleControler.new.initialize(turtle)
 	end
 	
@@ -128,7 +130,7 @@ package VM {
 		* scale the "steps" by factor and round the result
 		*/
 		operation scale(steps : Integer, factor : Real) : Integer is do
-			result := (steps.toReal * factor + "0.5".toReal).toInteger
+			result := ((steps.toReal * factor)).toInteger
 		end
 	}
 
@@ -257,8 +259,6 @@ package ASM {
 		operation eval(context : Context) : Integer is do 
 			// create a new stack frame
 			var frame : Bindings init Bindings.new
-			// push it on the stack
-			context.pushFrame(frame)
 			// for each formal arg, create a binding with actual value
 			from var i : Integer init 0
 			until i >= actualArgs.size
@@ -267,6 +267,8 @@ package ASM {
 				frame.put(declaration.args.elementAt(i).name, actualValue)
 				i := i + 1
 			end
+			// push it on the stack
+			context.pushFrame(frame)
 			// transfert control to procedure body
 			result := declaration.block.eval(context)
 			// pop stack frame
