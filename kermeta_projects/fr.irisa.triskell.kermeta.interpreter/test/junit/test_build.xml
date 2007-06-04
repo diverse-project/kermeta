@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.24 2007-06-04 15:22:44 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.25 2007-06-04 15:25:43 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -58,6 +58,7 @@
 	    <pathelement location="${osgi.jar}"/>
 	    <pathelement location="${core.runtime.jar}"/>
 		<pathelement location="${core.resources.jar}"/>
+		<pathelement location="${core.jobs.jar}"/>
 	    <pathelement location="${log4j.jar}"/>
 	    <pathelement location="${antlr.jar}"/>
 	    <pathelement location="${ldt-core.jar}"/>
