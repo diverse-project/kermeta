@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.1 2007-01-23 15:04:12 dvojtise Exp $
+/* $Id: KMT2KMPass.java,v 1.2 2007-06-04 14:21:39 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -15,14 +15,11 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
-//import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-//import fr.irisa.triskell.kermeta.language.structure.FProperty;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.CollectionType;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.EnumDecl;
@@ -243,7 +240,6 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ModelTypeDecl)
 	 */
 	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
-		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
 		return super.beginVisit(modelTypeDecl);
 	}
 	
@@ -285,7 +281,6 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	}
 	
 	public void endVisit(ModelTypeDecl modelTypeDecl) {
-		builder.current_modeltype = null;
 		super.endVisit(modelTypeDecl);
 	}
 	

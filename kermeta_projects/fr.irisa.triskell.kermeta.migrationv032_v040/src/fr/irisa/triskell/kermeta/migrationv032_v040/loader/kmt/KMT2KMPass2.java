@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.1 2007-01-23 15:04:12 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.2 2007-06-04 14:21:39 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -172,12 +173,12 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		}
 		else {
-			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();
+			ModelType newMTypeDef = builder.struct_factory.createModelType();
 			newMTypeDef.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(newMTypeDef);
 			builder.typeDefs.put(qname, newMTypeDef);
 			builder.storeTrace(newMTypeDef, node);
-			pkgs.push(newMTypeDef);
+			//pkgs.push(newMTypeDef);
 		}
 		return super.beginVisit(node);
 	}

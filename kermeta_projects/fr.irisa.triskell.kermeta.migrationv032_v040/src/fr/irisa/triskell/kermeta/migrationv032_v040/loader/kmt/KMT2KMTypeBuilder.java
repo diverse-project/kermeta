@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.2 2007-05-11 15:33:23 dvojtise Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.3 2007-06-04 14:21:39 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -19,7 +19,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -100,7 +99,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				if ((prefix != null) && (builder.typeVariableLookup(prefix) instanceof ModelTypeVariable)) {
 					ModelTypeVariable mtv = (ModelTypeVariable) builder.typeVariableLookup(prefix);
 					String vtypename = qname.substring(qname.lastIndexOf("::")+2);
-					ModelTypeDefinition mtdef = (ModelTypeDefinition) ((ModelType) mtv.getSupertype()).getTypeDefinition();
+					ModelType mtdef = (ModelType) mtv.getSupertype();
 					// If it already exists we just grab the existing one.
 					Iterator vt_iter = (mtv).getVirtualType().iterator();
 					while (vt_iter.hasNext()) {
@@ -147,13 +146,18 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				return false;
 			}
 		}
+		else if (def instanceof ModelType) {
+			result = (fr.irisa.triskell.kermeta.language.structure.Type)def;
+			if (basictype.getParams() != null) {
+				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for model type'" + qname + "'.",basictype));
+				return false;
+			}
+		}
 		else if (def instanceof GenericTypeDefinition) {
 			GenericTypeDefinition gtdef = (GenericTypeDefinition) def;
 			ParameterizedType res = null;
 			if (gtdef instanceof ClassDefinition) {
 				res = builder.struct_factory.createClass();
-			} else if (gtdef instanceof ModelTypeDefinition) {
-				res = builder.struct_factory.createModelType();
 			}
 			builder.storeTrace(res, basictype);
 			result = res;

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.1 2007-01-23 15:04:12 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.2 2007-06-04 14:21:39 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -18,20 +18,16 @@ import org.eclipse.emf.common.util.EList;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
-import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-//import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-
+import fr.irisa.triskell.kermeta.language.structure.VirtualType;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.AbstractModifier;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.DataTypeDecl;
@@ -144,11 +140,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * *******************************************************
 	 */
 	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
-		builder.pushContext();
-		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
-//		 add type variables to the context
-		Iterator tvs = builder.current_modeltype.getTypeParameter().iterator();
-		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
+		// no real support for model type in 0.3.0, so there is no need to do anything special here
 		
 		return super.beginVisit(modelTypeDecl);
 	}
