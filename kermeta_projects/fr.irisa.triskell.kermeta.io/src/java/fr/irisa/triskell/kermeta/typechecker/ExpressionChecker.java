@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.39 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: ExpressionChecker.java,v 1.40 2007-06-04 08:59:00 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -255,7 +255,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			    	tvb.setType((fr.irisa.triskell.kermeta.language.structure.Type) binding.get(op.getOperation().getTypeParameter().get(i)));
 			    	// Jim: If parameterized virtual type bindings were possible on operation calls, then staticTypeVariableBindings would be
 			    	// TypeVariableBindings instead of just types, and the following line would add tvb instead.
-			        exp.getStaticTypeVariableBindings().add(binding.get(op.getOperation().getTypeParameter().get(i)));
+			        exp.getStaticTypeVariableBindings().add((fr.irisa.triskell.kermeta.language.structure.Type) binding.get(op.getOperation().getTypeParameter().get(i)));
 			    }
 		    }
 		    
