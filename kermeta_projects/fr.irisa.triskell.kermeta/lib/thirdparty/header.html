@@ -1,0 +1,195 @@
+<head>
+<meta name="generator" content="
+HTML Tidy for Linux/x86 (vers 1 September 2005), see www.w3.org" />
+<meta content="text/html; charset=us-ascii" http-equiv="
+content-type" />
+<title>Kermeta API documentation</title>
+<meta name="keywords" content="Kermetadoc kermeta triskell" />
+<meta name="author" content="sebastien.pierre@ivy.fr" />
+<meta http-equiv="Content-Type" content="
+text/html; charset=us-ascii" />
+<link rel="Shortcut Icon" href="images/favicon.ico" type="
+image/x-icon" />
+<link rel="Stylesheet" title="Normal" media="screen" type="
+text/css" href="screen.css" />
+<link rel="start" title="Home" href="index.html" />
+<style type="text/css" media="screen">
+/*<![CDATA[*/
+#api h1 { border: 0; }
+
+#hidden {
+        padding: 0;
+        margin: 0;
+        display: none;
+}
+
+.description {
+        display: none;
+        padding: 5pt;
+}
+
+.representation {
+}
+
+.title {
+        padding-top: 10pt;
+        font-weight: bold;
+		font-size: 9pt;
+        border-bottom: 1px solid #f0f0f0;
+}
+
+.docstring {
+        border-top: 1px solid #f0f0f0;
+        background: #fafafa;
+        padding: 10pt;
+		text-align: left;
+		font-size: 12px;
+        color: #808080;
+}
+
+.root, .container {
+        padding-left: 10pt;
+        color: #808080;
+        border-left: 1px solid #f0f0f0;
+        float: left;
+}
+
+.container {
+        margin-left: 10pt;
+        display: none;
+}
+
+.content {
+        display: none;
+}
+
+.name, .name a {
+        color: #5ed4db;
+}
+
+.name {
+        font-weight: bold;
+        margin-top: 1em;
+}
+
+.undocumented, .undocumented a {
+        color: #b0c0c0;
+        font-style: italic;
+}
+
+#descriptions {
+        width: 60%;
+        float: right;
+        margin:0;
+        margin-left: 15pt;
+        border: 0;
+        border-left: 1px solid #f0f0f0;
+}
+
+#modules {
+        text-align: left;
+        clear: both;
+        padding: 5pt;
+        font-size: 9pt;
+        color: #A0A0A0;
+        background: #fafafa;
+        border-bottom: 1px solid #f0f0f0;
+        margin:0;
+}
+
+#api {
+        border: 0;
+        height: 600px;
+        width: 40%;
+        padding: 0;
+        margin: 0;
+        margin-right: 10pt;
+        background: #fafafa;
+        overflow: auto;
+}
+
+.name, .name a {
+        color: black;
+}
+/*]]>*/
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+
+
+var displays    = [];
+var selected    = undefined;
+var description = undefined;
+var hidden      = undefined;
+var content     = undefined;
+
+function documentElement( from_id, to_id )
+{
+		// ie does not support undefined keyword
+        if ( to_id == undefined ) { to_id = from_id ; from_id = undefined; }
+        if ( hidden  == undefined ) hidden  = document.getElementById("hidden");
+        if ( content == undefined ) content = document.getElementById("api");
+        // We get the target element and the associated description element
+        var element  = document.getElementById(to_id);
+        var felement = document.getElementById(from_id);
+        var level    = 0;
+        if ( felement != undefined )
+        {
+                level        = felement.getAttribute("level");
+                if ( !level ) { level = 0; }
+                else { level = parseInt(level); }
+        }
+        else
+        {
+                level = 0;
+        }
+        // We show the element description
+        describeElement(to_id);
+        // We show the element
+        if (element)
+        {
+                if ( element == selected ) return;
+                // We re-order the content nodes anyway
+                element.parentNode.removeChild(element);
+                element.setAttribute("level", level + 1);
+                content.appendChild(element);
+                // Ensure that the node is visible
+                element.style.display  = "block";
+                // And its description
+                // We hide the old ones
+                while ( displays.length > 0 && displays.length > level )
+                {
+                        var hiding_id = displays.pop()
+                        var hiding_el = document.getElementById(hiding_id);
+                        if ( hiding_el )
+                        {
+                                hiding_el.parentNode.removeChild(hiding_el);
+                                hidden.appendChild(hiding_el);
+                        }
+                }
+                // And update the state
+                displays.push(to_id);
+                selected = element;
+        }
+}
+
+function describeElement( eid )
+{
+        var delement = document.getElementById("d_" + eid);
+        if ( delement != undefined && delement != description )
+        {
+                delement.style.display = "block";
+                if ( description != undefined ) description.style.display = "none";
+                description = delement;
+        }
+        else if ( delement == undefined )
+        {
+                alert("ERROR: Description not found for id 'd_" + eid + "'");
+        }
+}
+
+//]]>
+</script>
+
+</head>
