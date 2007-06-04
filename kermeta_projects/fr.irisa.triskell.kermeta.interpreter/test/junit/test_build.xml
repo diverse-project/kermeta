@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.21 2007-06-04 14:48:03 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.22 2007-06-04 15:03:10 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -33,13 +33,13 @@
 	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta.io\lib\thirdparty\antlr.jar"/>
 	<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar"/>
 	
-    <property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar"/>
-	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar"/>
-	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
-	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.0.0.v200606261144.jar"/>
+    <property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
+	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
+	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005"/>
+	<property name="emf.validation.jar" location="${eclipse.home}/plugins/org.eclipse.emf.validation_1.0.1.v200609250852"/>
 	<property name="equinox.common.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
-	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.2.0.v20060601.jar"/>
-	<property name="osgi.jar" location="${eclipse.home}/plugins/org.eclipse.osgi_3.2.0.v20060601.jar"/>	
+	<property name="equinox.registry.jar" location="${eclipse.home}/plugins/org.eclipse.equinox.registry_3.2.1.R32x_v20060814"/>
+	<property name="osgi.jar" location="${eclipse.home}/plugins/org.eclipse.osgi_3.2.1.R32x_v20060919.jar"/>	
 	<property name="core.runtime.jar" location="${eclipse.home}/plugins/org.eclipse.core.runtime_3.2.0.v20060603.jar"/>
 	<property name="core.resources.jar" location="${eclipse.home}/plugins/org.eclipse.core.resources_3.2.1.R32x_v20060914.jar"/>
 	<path id="interpreter.class.path">
