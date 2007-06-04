@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.15 2007-05-24 12:56:47 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.16 2007-06-04 15:28:04 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -31,10 +31,10 @@
 	<property name="emfatic-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\emfatic-core.jar"/>
 	<!-- <property name="cu_kermeta.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\cu_kermeta.jar"/> -->
 	
-	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar"/>
-	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar"/>
-	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
-	
+	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
+	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
+	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
+		
 	<path id="io.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 		<pathelement location="${triskell.eclipse.util.jar}"/>
