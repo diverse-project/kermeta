@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2007-04-13 12:50:39 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2007-06-05 14:33:11 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -92,6 +92,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","056_load_and_save_in_another_location.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","057_saveDependentModels.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","058_loadSaveEnum.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
