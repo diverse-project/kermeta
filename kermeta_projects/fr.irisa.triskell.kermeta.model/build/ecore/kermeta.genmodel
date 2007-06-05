@@ -2,15 +2,17 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.kermeta.model/build/java"
-    modelPluginID="fr.irisa.triskell.kermeta.model" modelName="Kermeta" importerID="org.eclipse.emf.importer.ecore"
-    containmentProxies="true">
+    modelPluginID="fr.irisa.triskell.kermeta.model" modelName="Kermeta" testsDirectory=""
+    importerID="org.eclipse.emf.importer.ecore" containmentProxies="true">
   <foreignModel>kermeta_java.ecore</foreignModel>
   <genPackages prefix="Km" basePackage="fr.irisa.triskell" disposableProviderFactory="true"
       ecorePackage="kermeta_java.ecore#/">
     <genClasses image="false" ecoreClass="kermeta_java.ecore#//DummyClass"/>
-    <nestedGenPackages prefix="Language" disposableProviderFactory="true" ecorePackage="kermeta_java.ecore#//language">
+    <nestedGenPackages prefix="Language" basePackage="fr.irisa.triskell.kermeta" disposableProviderFactory="true"
+        ecorePackage="kermeta_java.ecore#//language">
       <genClasses image="false" ecoreClass="kermeta_java.ecore#//language/DummyClass"/>
-      <nestedGenPackages prefix="Behavior" disposableProviderFactory="true" ecorePackage="kermeta_java.ecore#//language/behavior">
+      <nestedGenPackages prefix="Behavior" basePackage="fr.irisa.triskell.kermeta.language"
+          disposableProviderFactory="true" ecorePackage="kermeta_java.ecore#//language/behavior">
         <genClasses ecoreClass="kermeta_java.ecore#//language/behavior/Assignment">
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/behavior/Assignment/target"/>
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/behavior/Assignment/value"/>
@@ -98,7 +100,8 @@
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/behavior/VariableDecl/type"/>
         </genClasses>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Structure" disposableProviderFactory="true" ecorePackage="kermeta_java.ecore#//language/structure">
+      <nestedGenPackages prefix="Structure" basePackage="fr.irisa.triskell.kermeta.language"
+          disposableProviderFactory="true" ecorePackage="kermeta_java.ecore#//language/structure">
         <genEnums ecoreEnum="kermeta_java.ecore#//language/structure/ConstraintLanguage">
           <genEnumLiterals ecoreEnumLiteral="kermeta_java.ecore#//language/structure/ConstraintLanguage/kermeta"/>
           <genEnumLiterals ecoreEnumLiteral="kermeta_java.ecore#//language/structure/ConstraintLanguage/ocl"/>
@@ -267,7 +270,7 @@
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ParameterizedType/typeParamBinding"/>
           <genFeatures createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ParameterizedType/typeDefinition"/>
         </genClasses>
-        <genClasses image="false" ecoreClass="kermeta_java.ecore#//language/structure/TypeVariable">
+        <genClasses ecoreClass="kermeta_java.ecore#//language/structure/TypeVariable">
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/TypeVariable/supertype"/>
         </genClasses>

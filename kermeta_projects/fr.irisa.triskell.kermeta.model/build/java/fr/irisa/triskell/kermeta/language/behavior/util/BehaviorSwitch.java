@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorSwitch.java,v 1.2 2006-08-17 14:30:25 dvojtise Exp $
+ * $Id: BehaviorSwitch.java,v 1.3 2007-06-05 15:26:27 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
