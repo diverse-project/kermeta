@@ -1,0 +1,47 @@
+/* $Id: EcoreHelpers.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors: Touzet David
+ *
+ * Description : 
+ */ 
+
+package ecore::helpers;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using ecore
+
+
+/**
+ * This class provides a number of operations dedicated to Ecore models and Ecore model
+ * elements.
+ */
+class EcoreHelper {
+
+	/**
+	 * This operation computes and returns the qualified name of the provided EClass as
+	 * a string.
+	 */
+	operation getQualifiedNameFromEClass(cl : EClass) : String is do
+		result := getQualifiedNameFromEPackage(cl.ePackage) + "::" + cl.name
+	end
+
+	/**
+	 * This operation recursively computes the qualified name of the provided EPackage.
+	 */
+	operation getQualifiedNameFromEPackage(pack : EPackage) : String is do
+		var sPack : EPackage init pack.eSuperPackage
+		if(sPack == void) then
+			result := pack.name
+		else
+			result := getQualifiedNameFromEPackage(sPack) + "::" + pack.name
+		end
+	end
+}

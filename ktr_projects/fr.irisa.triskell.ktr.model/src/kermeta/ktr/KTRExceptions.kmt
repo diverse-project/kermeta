@@ -1,0 +1,46 @@
+/* $Id: KTRExceptions.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors: Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr::exceptions;
+
+require kermeta
+using kermeta::exceptions
+
+
+/**
+ * This class represents an unresolved object exception, raised by the "resolve"
+ * function in the scope of an initialization evaluation
+ */
+class UnresolvedRefException inherits Exception {}
+
+
+/**
+ * This class represents a dynamic expression parsing exception
+ */
+class DynExprParseException inherits Exception {}
+
+
+/**
+ * This class represents a dynamic expression running exception
+ */
+class DynExprRunException inherits Exception {}
+
+
+/**
+ * This class represents a model loading exception
+ */
+class LoadingException inherits Exception {}
+
+
+/**
+ * This class represents a model saving exception
+ */
+class SavingException inherits Exception {}

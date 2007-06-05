@@ -1,0 +1,113 @@
+/* $Id: KTR.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors:
+ *		Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using ecore
+
+
+/**
+ * This class describes the structure and the behavior of an interpretation pattern model
+ */
+class InterpretationPatternModel {
+	/** All InterpretationRules must have a distinct name */
+	inv rulesName is
+		rules.each{r1 |
+			not rules.exists{r2 | r1 != r2 and r1.name == r2.name}
+		}
+
+	/** Name of the Interpretation model */
+	attribute name : String[1..1]
+	/** Interpretation rules defined by the interpretation model */
+	attribute rules : oset InterpretationRule[0..*]#owningModel
+}
+
+
+/**
+ * This class defines an interpretation rule of the InterpretationPatternModel
+ */
+class InterpretationRule {
+	/** Name of the InterpretationRule */
+	attribute name : String[1..1]
+	/** Pattern of the InterpretationRule */
+	attribute source : RulePattern[1..1]#owningRule
+	/** Set of production of the InterpretationRule */
+	attribute productions : RuleProduction[0..*]#owningRule
+	/** Set of variables of the InterpretationRule */
+	attribute variables : RuleVariable[0..*]#owningRule
+	/** Link to the super rule of the InterpretationRule */
+	reference superRule : InterpretationRule[0..1]
+	/** Reference to the InterpretationPatternModel */
+	reference owningModel : InterpretationPatternModel[1..1]#rules
+}
+
+/**
+ * This class defines a variable of an InterpretationRule.
+ */
+class RuleVariable {
+	/** Name of the variable */
+	attribute name : String[1..1]
+	/** Kermeta expression for variable initialization */
+	attribute initExpr : String[1..1]
+	/** Ecore type of the variable */
+	reference varType : EClass[1..1]
+	/** Reference to the InterpretationRule */
+	reference owningRule : InterpretationRule[1..1]#variables
+}
+
+
+/**
+ * This class defines the matching pattern of an InterpretationRule
+ */
+class RulePattern {
+	/** Name of the RulePattern */
+	attribute name : String[1..1]
+	/** Ecore type of input model elements matched by the RulePattern */
+	reference sourceElement : EClass[1..1]
+	/** Name of the model from which input elements must be matched */
+	attribute sourceModel : String[0..1]
+	/** Kermeta condition expression that has to be validated by the input model element */
+	attribute condition : String[0..1]
+	/** Reference to the InterpretationRule */
+	reference owningRule : InterpretationRule[1..1]#source
+}
+
+
+/**
+ * This class defines one of the "outputs" of an InterpretationRule
+ */
+class RuleProduction {
+	/** Name of the RuleProduction */
+	attribute name : String[1..1]
+	/** Ecore type of output model element allocated by the RuleProduction */
+	reference targetElement : EClass[1..1]
+	/** Name of the model to which output elements must be assigned */
+	attribute targetModel : String[0..1]
+	/** Kermeta initialization expression of the allocated output model element */
+	attribute initExpr : String[0..1]
+	/** Reference to the InterpretationRule */
+	reference owningRule : InterpretationRule[1..1]#productions
+}
+
+
+/**
+ * This class defines a singleton output of an InterpretationRule.
+ */
+class SingletonRuleProduction inherits RuleProduction {
+	/** Expression that identifies the singleton object (based on input model elements) */
+	attribute idExpr : String[1..1]
+}

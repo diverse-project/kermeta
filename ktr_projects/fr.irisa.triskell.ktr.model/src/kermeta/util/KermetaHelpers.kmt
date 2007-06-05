@@ -1,0 +1,215 @@
+/* $Id: KermetaHelpers.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors: Touzet David
+ *
+ * Description : 
+ */ 
+
+package kermeta::helpers;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::reflection
+using kermeta::language::structure
+
+
+/**
+ * This class provides a number of operations dedicated to Kermeta models and Kermeta
+ * model elements.
+ */
+class KermetaHelper {
+
+	/**
+	 * This operation computes the root package of the provided class.
+	 */
+	operation getRootPackage(cl : Class) : Package is do
+		var	crtPack : Package
+		var superPack : Package
+		var cDef : ClassDefinition
+		// Get ClassDefinition of class
+		cDef ?=  cl.typeDefinition
+		// Get package of computed ClassDefinition
+		crtPack ?= cDef.container
+		// Iterate over nesting packages
+		superPack := crtPack.nestingPackage
+		from crtPack until superPack == void loop
+			crtPack := superPack
+			superPack := crtPack.nestingPackage
+		end
+		result := crtPack
+	end
+
+	/**
+	 * This operation allocates a new class object from the provided qualified name.
+	 * In case the qualified name does not match any defined class definition, the
+	 * operation returns "void".
+	 * Class parameter provides access to the model structure to be explored.
+	 */
+	operation createKClassFromQualifiedName(qName : String, cl : Class) : Class is do
+		var i : Integer init qName.indexOf("::")
+		if(i != -1) then
+			result := createKClassFromPackage(getRootPackage(cl), qName.substring(i+2, qName.size))
+		else
+			// Wrong qualified name: contains no package
+			result := void
+		end
+	end
+
+	/**
+	 * This operation 1) checks whether the given qualified name matches any existing
+	 * class definition, 2) and, if so, allocates a new class object (returns "void"
+	 * otherwise).
+	 * It is called from the "createKClassFromQualifiedName" operation.
+	 */	
+	operation createKClassFromPackage(pack : Package, qName : String) : Class is do
+		// Get index of "::" first occurence
+		var i : Integer init qName.indexOf("::")
+		
+		// Get name of current qualified name segment
+		var name : String
+		if(i != -1) then
+			// Name corresponds to a package name
+			name := qName.substring(0, i)
+		else
+			// Name corresponds to the class name
+			name := qName
+		end
+		
+		if(i == -1) then
+			// Trying to match the class name
+			// Get a type definition which name matches the class name
+			var tDef : TypeDefinition init
+				pack.ownedTypeDefinition.select{td |
+					ClassDefinition.isInstance(td) and td.name == name
+				}.one
+			if(tDef != void) then
+				// Cast type definition into class definition
+				var cDef : ClassDefinition
+				cDef ?= tDef
+				// Allocate and initialize the new class
+				var newClass : kermeta::language::structure::Class init
+					kermeta::language::structure::Class.new
+				newClass.typeDefinition ?= tDef
+				result := newClass
+			else
+				result := void
+			end
+		else
+			// Trying to match a package name
+			var subPack : Package init pack.nestedPackage.select{p | p.name == name}.one
+			if(subPack == void) then
+				// Package name fails
+				result := void
+			else
+				// Package name match is OK
+				result := createKClassFromPackage(subPack, qName.substring(i+2, qName.size))
+			end
+		end
+	end
+
+	/**
+	 * This operation computes and returns the qualified name of the provided class as
+	 * a string.
+	 */
+	operation getQualifiedNameFromKClass(cl : Class) : String is do
+		var pack : Package
+		pack ?= cl.typeDefinition.container
+		result := getQualifiedNameFromKPackage(pack) + "::" + cl.name
+	end
+	
+	/**
+	 * This operation recursively computes the qualified name of the provided package.
+	 */
+	operation getQualifiedNameFromKPackage(pack : Package) : String is do
+		var sPack : Package init pack.nestingPackage
+		if(sPack == void) then
+			result := pack.name
+		else
+			result := getQualifiedNameFromKPackage(sPack) + "::" + pack.name
+		end
+	end
+
+	/**
+	 *
+	 */
+	operation isSuperClassDefOf(supCDef: ClassDefinition, subCDef: ClassDefinition) : Boolean is do
+		// Init default result value
+		result := false
+		
+		// Compute set of direct super ClassDefs
+		var superCDefs : set ClassDefinition[0..*] init Set<ClassDefinition>.new
+
+		subCDef.superType.each{t |
+			if(Class.isInstance(t)) then
+				var cls : Class
+				var cDef : ClassDefinition
+				cls := t
+				cDef ?= cls.typeDefinition
+				superCDefs.add(cDef)
+			end
+		}
+
+		// Searched super ClassDef is a direct super ClassDef
+		if(superCDefs.contains(supCDef)) then
+			result := true
+		else
+		// Recursive search for indirect super ClassDef
+			var found : Boolean init false
+			from var it : Iterator<ClassDefinition> init superCDefs.iterator
+			until (found or it.isOff) loop
+				if(isSuperClassDefOf(supCDef, it.next)) then
+					result := true
+					found := true
+				end
+			end
+		end
+	end
+
+	/**
+	 *
+	 */
+	operation getSuperClassDefs(cDef: ClassDefinition) : seq ClassDefinition[0..*] is do
+		// Init returned result set
+		result := Sequence<ClassDefinition>.new
+	
+		// Iterate over cDef superTypes
+		cDef.superType.each{t |
+			if(Class.isInstance(t)) then
+				var cls : Class
+				cls := t
+
+				var sCDef : ClassDefinition
+				sCDef ?= cls.typeDefinition
+				
+				// Add set of direct super class definitions
+				result.add(sCDef)
+
+				// Recursively add indirect super class definitions
+				result.addAll( getSuperClassDefs(sCDef) )
+			end
+		}
+	end
+
+	/**
+	 *
+	 */
+	operation getSuperClasses(cls: Class) : seq Class[0..*] is do
+		// Init returned result set
+		result := Sequence<Class>.new
+	
+		// Iterate over cDef superTypes
+		cls.superClass.each{c |
+				// Add set of direct super class definitions
+				result.add(c)
+
+				// Recursively add indirect super class definitions
+				result.addAll( getSuperClasses(c) )
+		}
+	end
+}

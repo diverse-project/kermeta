@@ -1,0 +1,197 @@
+/* $Id: KTRInterface.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: March 30, 2007
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors:
+ *		Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr::interface;
+
+require kermeta
+require "KTR_Behavior.kmt"
+require "KTRExceptions.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability_Behavior.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::exceptions
+using ktr
+using ktr::exceptions
+using traceability
+
+
+
+/**
+ * This class defines an interface that enables to conveniently run patterns
+ * interpretations from source models/metamodels.
+ * It encapsulates source models' loading and target models' saving.
+ */
+class KTRLauncher {
+
+	/**
+	 * This operation allows launching a simple patterns interpretation.
+	 * Concrete launching is delegated to the 'doRun' operation
+	 */
+	operation run(patternsMdlURI: String, inMdls: seq ModelItem[1..*], outMdls: seq ModelItem[1..*]) is do
+		doRun(patternsMdlURI, inMdls, outMdls, void)
+	end
+
+	/**
+	 * This operation allows launching a patterns interpretation with trace saving.
+	 * Concrete launching is delegated to the 'doRun' operation
+	 */
+	operation runWithTrace(patternsMdlURI: String, inMdls: seq ModelItem[1..*], outMdls: seq ModelItem[1..*], traceMdlURI: String) is do
+		doRun(patternsMdlURI, inMdls, outMdls, traceMdlURI)
+	end
+
+	/**
+	 * This operation implements the interpretation launching
+	 */
+	operation doRun(patternsMdlURI: String, inMdls: seq ModelItem[1..*], outMdls: seq ModelItem[1..*], traceMdlURI: String) is do
+		var patternMM : String init "http://www.kermeta.org/Ktr"
+		var traceMM : String init "http://www.kermeta.org/Traceability"
+
+		var emfRep : EMFRepository init EMFRepository.new
+		var engine : InterpretationPatternModel
+		var mdlRes : EMFResource
+		var patternRes : EMFResource
+		var traceRes : EMFResource
+		var traceMdl : TraceModel
+
+		// Load interpretation model
+		do
+	  		patternRes ?= emfRep.createResource(patternsMdlURI, patternMM)
+  			patternRes.load
+  			engine ?= patternRes.instances.one
+
+  			rescue(e: Exception)
+  				var le : LoadingException init LoadingException.new
+  				le.nestedException := e
+  				le.message := "Error encountered while loading pattern model '"
+  					+ patternsMdlURI + "' with metamodel '" + patternMM + "'"
+  				raise le
+  		end
+
+		// Load input models
+		inMdls.each{mi |
+			do
+				mdlRes ?= emfRep.createResource(mi.mdlURI, mi.mMdlURI)
+				mdlRes.load
+				engine.addInput(mi.mdlName, mdlRes.contents)
+
+	  			rescue(e: Exception)
+	  				var le : LoadingException init LoadingException.new
+  					le.nestedException := e
+	  				le.message := "Error encountered while loading input model '"
+  						+ mi.mdlURI + "' with metamodel '" + mi.mMdlURI + "'"
+  					raise le
+			end
+		}
+
+		// Configure interpreter outputs
+		outMdls.each{mi | engine.addOutput(mi.mdlName)}
+
+		// Create output resources
+		var outRes : seq EMFResource[0..*] init Sequence<EMFResource>.new
+		var i : Integer init 0
+		outMdls.each{mi |
+			mdlRes ?= emfRep.createResource(mi.mdlURI, mi.mMdlURI)
+			outRes.addAt(i, mdlRes)
+			i := i + 1
+		}
+
+		// Create trace model and trace resources
+		if(traceMdlURI != void) then
+			stdio.writeln("Create traceability model")
+		
+			traceMdl := TraceModel.new
+			var msg : Message init Message.new
+			msg.language := "English"
+			msg.type := "Requirements to Rm traceability"
+			msg.~value := "Coucou"
+			traceMdl.messages.add(msg)
+
+			traceRes ?= emfRep.createResource(traceMdlURI, traceMM)
+			traceRes.instances.add(traceMdl)
+
+			engine.traceMdl := traceMdl
+		end
+
+		// Run interpretation
+		var outColls : seq Set<Object>[1..*] init engine.execute
+
+		// Assign output models to output resources
+		stdio.writeln("Assign output models to output resources")
+		var it : Iterator<Set<Object>> init outColls.iterator
+		var crtColl : set Object[0..*]
+		i := 0
+		outMdls.each{mi |
+			do
+				stdio.writeln("   Assigning " + mi.mdlURI)
+				crtColl := it.next
+				mdlRes := outRes.elementAt(i)
+				stdio.writeln("     Navigate root elements")
+				crtColl.select{e | e.container == void}.each{e |
+					stdio.writeln("       Crt elt is " + e.toString)
+					mdlRes.instances.add(e)
+				}
+				
+				i := i + 1
+			end
+		}
+
+		// Save output models
+		stdio.writeln("Saving models")
+		i := 0
+		outRes.each{r |
+			var mi : ModelItem init outMdls.elementAt(i)
+			do
+				stdio.writeln("   Saving " + mi.mdlURI)
+				r.save
+
+	  			rescue(e: Exception)
+  					var se : SavingException init SavingException.new
+  					se.nestedException := e
+	  				se.message := "Error encountered while saving output model '"
+  						+ mi.mdlURI + "' with metamodel '"
+  						+ mi.mMdlURI + "'"
+  					raise se
+  			end
+  			i := i + 1
+		}
+
+		// Save trace
+		if(traceMdlURI != void) then
+			stdio.writeln("Saving trace")
+			do
+				traceRes.save
+
+	  			rescue(e: Exception)
+  					var se : SavingException init SavingException.new
+  					se.nestedException := e
+	  				se.message := "Error encountered while saving model '"
+  						+ traceMdlURI + "' with metamodel '" + traceMM + "'"
+  					raise se
+			end
+		end
+	end
+}
+
+
+/**
+ * This class defines the tuple representation for an input/output model
+ * of the patterns interpreter
+ */
+class ModelItem {
+	/** URI of the model */
+	attribute mdlURI : String[1..1]
+	/** URI of the mofdel's metamodel */
+	attribute mMdlURI : String[1..1]
+	/** Name associated with the model for the interpretation */
+	attribute mdlName : String[1..1]
+}

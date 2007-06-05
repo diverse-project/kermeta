@@ -1,0 +1,48 @@
+/* $Id: ContextItems.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors:
+ *		Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::reflection
+
+
+/**
+ * This class defines an abstract context element for the parsing/execution of
+ * a pattern interpretation model element (patern, production, etc.).
+ */
+abstract class ContextItem {
+	/** Name of the context item */
+	attribute name : String[1..1]
+}
+
+
+/**
+ * This class defines a formal context element used in the scope of the parsing
+ * of the embedded code of the pattern interpretation model.
+ */
+class FormalContextItem inherits ContextItem {
+	/** Type of the contextual item */
+	reference type : Class[1..1]
+}
+
+
+/**
+ * This class defines a concrete context element used in the scope of the execution
+ * of the embedded code of the pattern interpretation model.
+ */
+class ConcreteContextItem inherits ContextItem {
+	/** Value of the contextual item */
+	reference object : Object[1..1]
+}

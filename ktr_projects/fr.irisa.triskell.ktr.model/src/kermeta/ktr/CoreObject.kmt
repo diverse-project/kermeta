@@ -1,0 +1,25 @@
+/* $Id: CoreObject.kmt $
+ * Creation date: March 21, 2007
+ * License:   EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * Authors:
+ *		David Touzet
+ */
+
+package ktr;
+
+
+require kermeta
+using kermeta::standard
+
+/**
+ * This class defines a structure that associates a model element to the
+ * name of the model it comes from.
+ * This structure is used to embed each input model element.
+ */
+class CoreObject {
+	/** Name of the input model the element comes from */
+	attribute modelName : String[1..1]
+	/** Link to the input model element */
+	reference object : Object[1..1]
+}

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ktr"
+    nsURI="http://www.kermeta.org/Ktr" nsPrefix="ktr">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+    <details key="http://www.eclipse.org/emf/2002/Ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="InterpretationPatternModel">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * This class describes the structure and the behavior of an interpretation pattern model&#xD;&#xA; */"/>
+    </eAnnotations>
+    <eAnnotations source="kermeta.inv">
+      <details key="rulesName" value="rules.each{r1 | not (rules.exists{r2 | (r1.isNotEqual(r2)) and (r1.name.equals(r2.name))})}"/>
+    </eAnnotations>
+    <eAnnotations source="kermeta.inv.doc" references="#//InterpretationPatternModel/%kermeta.inv%">
+      <details key="documentation" value="/** All InterpretationRules must have a distinct name */"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the Interpretation model */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//InterpretationRule" containment="true" eOpposite="#//InterpretationRule/owningModel">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Interpretation rules defined by the interpretation model */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterpretationRule">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * This class defines an interpretation rule of the InterpretationPatternModel&#xD;&#xA; */"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//RulePattern" containment="true" eOpposite="#//RulePattern/owningRule">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Pattern of the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="productions" upperBound="-1"
+        eType="#//RuleProduction" containment="true" eOpposite="#//RuleProduction/owningRule">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Set of production of the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//RuleVariable" containment="true" eOpposite="#//RuleVariable/owningRule">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Set of variables of the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superRule" eType="#//InterpretationRule">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Link to the super rule of the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningModel" lowerBound="1"
+        eType="#//InterpretationPatternModel" eOpposite="#//InterpretationPatternModel/rules">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Reference to the InterpretationPatternModel */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuleVariable">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * This class defines a variable of an InterpretationRule.&#xD;&#xA; */"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the variable */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initExpr" lowerBound="1"
+        eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Kermeta expression for variable initialization */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varType" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Ecore type of the variable */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRule" lowerBound="1"
+        eType="#//InterpretationRule" eOpposite="#//InterpretationRule/variables">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Reference to the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RulePattern">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * This class defines the matching pattern of an InterpretationRule&#xD;&#xA; */"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the RulePattern */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElement" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Ecore type of input model elements matched by the RulePattern */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceModel" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the model from which input elements must be matched */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Kermeta condition expression that has to be validated by the input model element */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRule" lowerBound="1"
+        eType="#//InterpretationRule" eOpposite="#//InterpretationRule/source">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Reference to the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuleProduction">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * This class defines one of the &quot;outputs&quot; of an InterpretationRule&#xD;&#xA; */"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the RuleProduction */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetElement" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Ecore type of output model element allocated by the RuleProduction */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetModel" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Name of the model to which output elements must be assigned */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initExpr" eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Kermeta initialization expression of the allocated output model element */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRule" lowerBound="1"
+        eType="#//InterpretationRule" eOpposite="#//InterpretationRule/productions">
+      <eAnnotations source="kermeta">
+        <details key="documentation" value="/** Reference to the InterpretationRule */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingletonRuleProduction" eSuperTypes="#//RuleProduction">
+    <eAnnotations source="kermeta">
+      <details key="documentation" value="/**&#xD;&#xA; * This class defines a singleton output of an InterpretationRule.&#xD;&#xA; */"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idExpr" lowerBound="1"
+        eType="#//String">
+      <eAnnotations source="kermeta">
+        <details key="isComposite" value="true"/>
+        <details key="documentation" value="/** Expression that identifies the singleton object (based on input model elements) */"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

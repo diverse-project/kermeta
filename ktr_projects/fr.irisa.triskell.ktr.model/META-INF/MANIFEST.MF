@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KTR plugin
+Bundle-SymbolicName: fr.irisa.triskell.ktr.model; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-ClassPath: .
+Bundle-Vendor: INRIA/IRISA
+Bundle-Localization: plugin
+Export-Package: fr.irisa.triskell.ktr,
+ fr.irisa.triskell.ktr.impl,
+ fr.irisa.triskell.ktr.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Eclipse-LazyStart: true
+Bundle-Activator: fr.irisa.triskell.ktr.model.KTRPlugin

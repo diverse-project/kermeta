@@ -1,0 +1,978 @@
+/* $Id: KTR_Behavior.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors:
+ *		Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr;
+
+
+require kermeta
+require "KTR.kmt"
+require "../util/KermetaHelpers.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "KTRHelpers.kmt"
+require "Bindings.kmt"
+require "ContextItems.kmt"
+require "KTRExceptions.kmt"
+require "CoreObject.kmt"
+require "platform:/plugin/fr.irisa.triskell.traceability/model/kmt/Traceability_Behavior.kmt"
+
+using kermeta::standard
+using kermeta::reflection
+using kermeta::interpreter
+using kermeta::utils
+using kermeta::exceptions
+using kermeta::helpers
+using ecore
+using traceability
+using ktr::exceptions
+using ktr::helpers
+
+
+/**
+ * This class describes the structure and the behavior of an interpretation pattern model
+ */
+@aspect "true"
+class InterpretationPatternModel {
+	/** Traceability status */
+	attribute saveTrace : Boolean[1..1]
+	/** Traceability model */
+	reference traceMdl : TraceModel[0..1]
+
+	/** Bindings between string BindingKeys and BindingValues - maps input model elements to output ones */
+	attribute bValues : Hashtable<String, BindingValue>
+	/** Bindings between string BindingKeys and BindingKeys */
+	attribute bKeys : Hashtable<String, BindingKey>
+	/** List of keys to output model elements that remain uninitialized after the first pass */
+	attribute unresolvedBKeys : seq BindingKey[0..*]
+	/** Bindings between string keys [ruleName#inElememtID] and variable ConcreteContextItems */
+	attribute varContexts : Hashtable<String, Set<ConcreteContextItem>>
+	/** Bindings between string keys [ruleName#inElememtID] and production ConcreteContextItems required for interpretation second pass */
+	attribute prodContexts : Hashtable<String, Set<ConcreteContextItem>>
+
+	/** Bindings between a class and its superclasses */
+	attribute superClasses : Hashtable<Class, Sequence<Class>>
+	/** Bindings between an interpretation rule and its subrules */
+	attribute subRules : Hashtable<InterpretationRule, Sequence<InterpretationRule>>
+
+	/** List of input model names */
+	attribute inputModels : seq String[1..*]
+	/** List of output model names */
+	attribute outputModels : seq String[1..*]
+	/** Set containing all input model elements (from the different input models) */
+	reference inputElts : set Object[0..*]
+	/** Set containing the core model elements built from the corresponding input model elements */
+	reference inputCoreElts : set CoreObject[0..*]
+
+	/**
+	 * This operation declares an input model, with its set of model elements, to
+	 * the interpreter
+	 */
+	operation addInput(mdlName: String, inElts: set Object[0..*]) is do
+		inputModels.add(mdlName)
+		inputElts.addAll(inElts)
+
+		var cObj : CoreObject
+		inElts.each{e |
+			cObj := CoreObject.new
+			cObj.modelName := mdlName
+			cObj.object := e
+			inputCoreElts.add(cObj)
+		}
+	end
+
+	/**
+	 * This operation declares an output model to the interpreter
+	 */
+	operation addOutput(mdlName: String) is do
+		outputModels.add(mdlName)
+	end
+
+	/**
+	 * This operation performs the interpretation of input model elements into a set of
+	 * output model elements based on the patterns defined by the model
+	 */
+	operation execute() : seq Set<Object> [1..*] is do
+		stdio.writeln("INTERPRETER: pre processing")
+		preProcessing
+
+		// First pass applies each pattern to each input model element: when a pattern
+		// condition is validated, the corresponding output model elements are allocated
+		// and initialized (when possible).
+		
+		stdio.writeln("INTERPRETER: pass_1")
+
+		// Iterate over all interpretation rules
+		rules.each{r |
+			// If interpretation rule is a first order rule (has no super rule),
+			// apply rule onto input model elements
+			if(r.superRule == void) then
+				inputCoreElts.each{e | r.apply(e)}
+			end
+		}
+		
+		stdio.writeln("INTERPRETER: pass_2")
+
+		// Second pass iterates over all output model elements that have not been
+		// initialized during the first pass (due to some relations to still unallocated
+		// output model elements).
+
+		// Iterate over all uninitialized output model elements for initialization
+		// Conceret context for output elements initialization
+		var context : set ConcreteContextItem[0..*] init Set<ConcreteContextItem>.new
+		unresolvedBKeys.each{k |
+			// Get concrete context (variables + productions) for production initialization
+			context.addAll(varContexts.getValue(k.prod.owningRule.name + "#" + k.object.toString))
+			context.addAll(prodContexts.getValue(k.prod.owningRule.name + "#" + k.object.toString))
+
+			// Initialize current production
+			k.prod.initialize(k.object,	context)
+
+			// Clear context
+			context.clear
+		}
+
+		stdio.writeln("INTERPRETER: result building")
+
+		// Building result of the interpretation
+		result := Sequence<Set<Object>>.new
+		var objs : set Object[0..*]
+
+		if(outputModels.size == 1) then
+			objs := Set<Object>.new
+			objs.addAll( bValues.values.collect{v | v.object} )
+			result.add(objs)
+		else
+			outputModels.each{m |
+				objs := Set<Object>.new
+				objs.addAll( bValues.values.select{v | v.modelName == m}.collect{v | v.object} )
+				result.add(objs)
+			}
+		end
+		
+		stdio.writeln("INTERPRETER: post processing")
+		postProcessing
+	end
+
+	/**
+	 * This operation initializes the patterns interpreter by:
+	 *  - initializing the hashtables used for pattern interpretation
+	 *  - parsing all the dynamic expressions of the pattern model
+	 *  - getting equivalent Kermeta classes from Ecore classes
+	 */
+	operation preProcessing() is do
+		// Set traceability status
+		saveTrace := (traceMdl != void)
+
+		// Init hashtables
+		bValues := Hashtable<String, BindingValue>.new
+		bKeys := Hashtable<String, BindingKey>.new
+		superClasses := Hashtable<Class, Sequence<Class>>.new
+		varContexts := Hashtable<String, Set<ConcreteContextItem>>.new
+		prodContexts := Hashtable<String, Set<ConcreteContextItem>>.new
+		
+		// Fill subRules hashtable in
+		subRules := Hashtable<InterpretationRule, Sequence<InterpretationRule>>.new
+		rules.each{r |
+			if(r.superRule != void) then
+				var ruleSeq : seq InterpretationRule[0..*] init subRules.getValue(r.superRule)
+				if(ruleSeq != void) then
+					ruleSeq.add(r)
+				else
+					ruleSeq := Sequence<InterpretationRule>.new
+					ruleSeq.add(r)
+					subRules.put(r.superRule, ruleSeq)
+				end
+			end
+		}
+
+		var iTools : KTRHelper init KTRHelper.new
+
+		// Iterate over all interpretation rules for initializing dynamic expressions
+		rules.each{r |
+			// 1- Init condition dynamic expression
+			r.source.sourceKElement := iTools.getKClassFromEClass(r.source.sourceElement)
+
+			if(r.source.condition != void) then
+				if(r.source.condition.size > 0) then
+					r.source.condDynExpr := DynamicExpression.new
+					r.source.condDynExpr.initializeDefaults	
+
+					// Defining formal parameters of dynamic expression
+					r.source.condDynExpr.formalParameters.put(r.source.name, r.source.sourceKElement)
+
+					// Add of the InterpretationPatternModel
+					r.source.condDynExpr.formalParameters.put("module", InterpretationPatternModel)
+
+					// Parsing of dynamic expression
+					do
+						r.source.condDynExpr.parse(r.source.condition)
+
+						// Raise parsing exception
+						rescue(e: Exception)
+							var parseExcep : DynExprParseException init DynExprParseException.new
+							parseExcep.nestedException := e
+							parseExcep.message :=
+								"Parsing error on condition [" + r.source.condition
+								+ "] of pattern of rule [" + r.name + "]"
+							raise parseExcep
+					end
+				end
+			end
+
+			// 2- Init variables dynamic expressions
+			r.variables.each{v |
+				v.varKType := iTools.getKClassFromEClass(v.varType)
+
+				v.varDynExpr := DynamicExpression.new
+				v.varDynExpr.initializeDefaults
+
+				// Defining formal parameters of dynamic expression
+				v.varDynExpr.formalParameters.put(r.source.name, r.source.sourceKElement)
+
+				// Add of the InterpretationPatternModel
+				v.varDynExpr.formalParameters.put("module", InterpretationPatternModel)
+
+				// Parsing of dynamic expression
+				do
+					v.varDynExpr.parse(v.initExpr)
+
+					// Raise parsing exception
+					rescue(e: Exception)
+						var parseExcep : DynExprParseException init DynExprParseException.new
+						parseExcep.nestedException := e
+						parseExcep.message :=
+							"Parsing error on variable initialization [" + v.name
+							+ "] of rule [" + r.name + "]"
+						raise parseExcep
+				end
+			}
+			
+			// 3- Init productions dynamic expression
+			// Get variables formal context for current rule
+			var varContext : set FormalContextItem[0..*] init r.getVariableFormalContext
+			// Get production formal context for current rule
+			var prodContext : set FormalContextItem[0..*] init r.getProductionFormalContext
+
+			r.productions.each{p |
+				p.targetKElement := iTools.getKClassFromEClass(p.targetElement)
+
+				if(p.initExpr != void) then
+					if(p.initExpr.size > 0) then
+						p.initDynExpr := DynamicExpression.new
+						p.initDynExpr.initializeDefaults
+			
+						// Defining formal parameters of dynamic expression
+						// Add of the input model element
+						p.initDynExpr.formalParameters.put(r.source.name, r.source.sourceKElement)
+
+						// Add of the InterpretationPatternModel
+						p.initDynExpr.formalParameters.put("module", InterpretationPatternModel)
+
+						// Add of variables and productions elements
+						varContext.each{ci | p.initDynExpr.formalParameters.put(ci.name, ci.type)}
+						prodContext.each{ci | p.initDynExpr.formalParameters.put(ci.name, ci.type)}
+				
+						// Parse dynamic expression
+						do
+							p.initDynExpr.parse(p.initExpr)
+
+							// Raise parsing exception
+							rescue(e: Exception)
+								var parseExcep : DynExprParseException init DynExprParseException.new
+								parseExcep.nestedException := e
+								parseExcep.message :=
+									"Parsing error on initialization [" + p.initExpr + "] of production ["
+									+ p.name + "] of rule [" + r.name + "]"
+								raise parseExcep
+						end
+					end
+				end
+
+				// Special case of SingletonRuleProduction
+				if(SingletonRuleProduction.isInstance(p)) then
+					var sProd : SingletonRuleProduction
+					sProd ?= p
+					sProd.idDynExpr := DynamicExpression.new
+					sProd.idDynExpr.initializeDefaults
+			
+					// Add of the input model element of the pattern corresponding to the
+					// production rule
+					sProd.idDynExpr.formalParameters.put(r.source.name, r.source.sourceKElement)
+
+					// Add of the InterpretationPatternModel into dynamic expression context
+					sProd.idDynExpr.formalParameters.put("module", InterpretationPatternModel)
+
+					// Add of variables elements
+					varContext.each{ci | sProd.idDynExpr.formalParameters.put(ci.name, ci.type)}
+
+					// Parse dynamic expression
+					do
+						sProd.idDynExpr.parse(sProd.idExpr)
+
+						// Raise parsing exception
+						rescue(e: Exception)
+							var parseExcep : DynExprParseException init DynExprParseException.new
+							parseExcep.nestedException := e
+							parseExcep.message :=
+								"Parsing error on ID [" + sProd.idExpr + "] of production ["
+								+ sProd.name + "] of rule [" + r.name + "]"
+							raise parseExcep
+					end
+				end
+			}
+		}
+	end
+
+	/**
+	 * This operation cleans all computijng structures of the pattern model in
+	 * order to speed up model saving
+	 */
+	operation postProcessing() is do
+		// Clears list for speeding up saving
+		inputElts.clear
+		inputCoreElts.clear
+		unresolvedBKeys.clear
+
+		// Iterate over the pattern model to set all dynamic expression to void
+		// in order to speed up model saving
+		rules.each{r |
+			// Re-init source dynamic expression
+			r.source.condDynExpr := void
+			r.source.sourceKElement := void
+
+			// Re-init variables dynamic expressions and values
+			r.variables.each{v |
+				v.varDynExpr := void
+				v.varValue := void
+				v.varKType := void
+			}
+			
+			// Iterate over targets of crt interpretation rule
+			r.productions.each{p |
+				// Re-init target dynamic expressions
+				p.initDynExpr := void
+				p.targetKElement := void
+				
+				if(SingletonRuleProduction.isInstance(p)) then
+					var sProd : SingletonRuleProduction
+					sProd ?= p
+					
+					sProd.idDynExpr := void
+				end
+			}
+		}
+	end
+
+	/**
+	 * This operation computes the list of instances of the provided Kermeta class within
+	 * the set of input model elements.
+	 */
+	operation allInstancesOf(cls: kermeta::reflection::Class) : set Object[0..*] is do
+		result := inputElts.select{e | cls.isInstance(e)}.asSet
+	end
+
+	/**
+	 * This operation performs object resolution in the bValues hashtable. It accepts an
+	 * input model element, an interpretation rule name and a production name of this
+	 * interpretation rule. The operation returns the output model element corresponding
+	 * to this product, or raise an exception in case the product cannot be found in the
+	 * bValues hashtable.
+	 */
+	operation resolve(inElt: Object, ruleName: String, prodName: String) : Object is do
+		var bValue : BindingValue init bValues.getValue(ruleName + "#" + prodName + "#" + inElt.toString)
+		if(bValue == void) then
+			var e : UnresolvedRefException init UnresolvedRefException.new
+			e.message := ""
+			raise e
+		end
+		result := bValue.object
+	end
+}
+
+
+/**
+ * This class defines an interpretation rule of the InterpretationPatternModel
+ */
+@aspect "true"
+class InterpretationRule {
+	/**
+	 * This operation applies current Rule to the provided input model element.
+	 * The operation recursively applies the subrules of the current rule to the
+	 * input model element.
+	 */
+	operation apply(inElt: CoreObject) is do
+		// Production only applies if the input element validates the condition of the rule
+		if(checkCondition(inElt)) then
+			// Execute current rule over input element
+			execute(inElt)
+			
+			// Get list of subrules of crt rule
+			var sRules : seq InterpretationRule[0..*] init owningModel.subRules.getValue(self)
+
+			// Apply computed subrules to the input model element
+			if(sRules != void) then
+				sRules.each{r |	r.apply(inElt)}
+			end
+		end
+	end
+
+
+	/**
+	 * This operation checks the condition of the pattern of the rule
+	 */
+	operation checkCondition(inElt: CoreObject) : Boolean is do
+		result := source.checkCondition(inElt)
+	end
+
+	/**
+	 * This operation executes the different productions of the InterpretationRule. It
+	 * first allocates the output model elements of the different productions before
+	 * trying to initilialize them.
+	 */	
+	operation execute(inElt: CoreObject) is do
+		// Initialize variables of the rule
+		variables.each{v | v.initialize(inElt.object)}
+		// Get variable concrete context, save it into "varContexts" hashtable
+		var varContext : set ConcreteContextItem[0..*] init getVariableConcreteContext(inElt.object)
+		owningModel.varContexts.put(name + "#" + inElt.object.toString, varContext)
+
+		// First step: allocation of the target model elements corresponding to the
+		// different productions of the InterpretationRule.
+		var tgtElements : set Object[0..*] init Set<Object>.new
+		productions.each{p |
+			if(SingletonRuleProduction.isInstance(p)) then
+				var sProd : SingletonRuleProduction
+				sProd ?= p
+				tgtElements.add( sProd.getOrAllocate(inElt.object, varContext) )
+			else
+				tgtElements.add( p.allocate(inElt.object) )
+			end
+		}	
+
+		// Traceability concerns: fill traceability model in
+		if(owningModel.saveTrace) then
+			var mRef : ModelReference
+			var newTrace : Trace init Trace.new
+			newTrace.description.add(owningModel.traceMdl.messages.one)
+
+			// Source reference
+			mRef := ModelReference.new
+			mRef.refObject := inElt.object
+			newTrace.sourceReferences.add(mRef)
+
+			// Target references
+			var it : Iterator<Object> init tgtElements.iterator
+			tgtElements.each{e |
+				mRef := ModelReference.new
+				mRef.refObject := it.next
+				newTrace.targetReferences.add(mRef)
+			}
+
+			owningModel.traceMdl.addOptimizedTrace(newTrace)
+		end
+		
+		// Second step: initialization of allocated target model elements
+		// Build concrete context (variables+productions) for productions initialization
+		var context : set ConcreteContextItem[0..*] init getProductionConcreteContext(inElt.object)
+		context.addAll(varContext)
+
+		// Initialize rule productions
+		var key : BindingKey init BindingKey.new
+		key.object := inElt.object
+		productions.each{p |
+			key.prod := p
+			if(not SingletonRuleProduction.isInstance(p) or owningModel.bValues.getValue(key.toString).toBeInit) then
+				p.initialize(inElt.object, context)
+			end
+		}
+	end
+
+	/**
+	 * This operation computes the set of variable formal context items for the current
+	 * interpretation rule.
+	 */
+	operation getVariableFormalContext() : set FormalContextItem[0..*] is do
+		// Result set initialization
+		result := Set<FormalContextItem>.new
+		var iTools : KTRHelper init KTRHelper.new
+		var contextElt : FormalContextItem
+
+		// Add variables context
+		variables.each{v |
+			contextElt := FormalContextItem.new
+			contextElt.name := v.name
+			contextElt.type := v.varKType
+			result.add(contextElt)
+		}
+		
+		// Add context inherited from superRule (if any is defined)
+		if(superRule != void) then
+			result.addAll( superRule.getVariableFormalContext )
+		end
+	end
+
+	/**
+	 * This operation computes the set of production formal context items for the current
+	 * interpretation rule.
+	 */
+	operation getProductionFormalContext() : set FormalContextItem[0..*] is do
+		// Result set initialization
+		result := Set<FormalContextItem>.new
+		var iTools : KTRHelper init KTRHelper.new
+		var contextElt : FormalContextItem
+
+		// Add productions context
+		productions.each{p |
+			contextElt := FormalContextItem.new
+			contextElt.name := p.name
+			contextElt.type := iTools.getKClassFromEClass(p.targetElement)
+			//contextElt.type := p.targetKElement
+			result.add(contextElt)
+		}
+		
+		// Add context inherited from superRule (if any is defined)
+		if(superRule != void) then
+			result.addAll( superRule.getProductionFormalContext )
+		end
+	end
+
+	/**
+	 * This operation computes the set of variable concrete context items for the current
+	 * interpretation rule and the provided input model element.
+	 */
+	operation getProductionConcreteContext(inElt: Object) : set ConcreteContextItem[0..*] is do
+		// Result set initialization
+		result := Set<ConcreteContextItem>.new
+		var contextElt : ConcreteContextItem
+		
+		// Add productions context
+		productions.each{p |
+			contextElt := ConcreteContextItem.new
+			contextElt.name := p.name
+			contextElt.object :=
+				owningModel.bValues.getValue(name + "#" + p.name + "#" + inElt.toString).object
+			result.add(contextElt)
+		}
+
+		// Add context inherited from superRule (if any is defined)
+		if(superRule != void) then
+			result.addAll( superRule.getProductionConcreteContext(inElt) )
+		end
+	end
+
+	/**
+	 * This operation computes the set of production concrete context items for the current
+	 * interpretation rule and the provided input model element.
+	 */
+	operation getVariableConcreteContext(inElt: Object) : set ConcreteContextItem[0..*] is do
+		// Result set initialization
+		result := Set<ConcreteContextItem>.new
+		var contextElt : ConcreteContextItem
+
+		// Add variables context
+		variables.each{v |
+			contextElt := ConcreteContextItem.new
+			contextElt.name := v.name
+			contextElt.object := v.varValue
+			result.add(contextElt)
+		}
+
+		// Add context inherited from superRule (if any is defined)
+		if(superRule != void) then
+			result.addAll( superRule.getVariableConcreteContext(inElt) )
+		end
+	end
+}
+
+/**
+ * This class defines a variable of an InterpretationRule.
+ */
+@aspect "true"
+class RuleVariable {
+	/** Dynamic expression for variable initialization */
+	attribute varDynExpr : DynamicExpression[0..1]
+	/** Current value of the rule variable */
+	reference varValue : Object[0..1]
+	/** Kermeta type of the variable */
+	reference varKType : Class[0..1]
+
+	/**
+	 * This operation performs variable initialization for the given input model element.
+	 */
+	operation initialize(inElt: Object) is do
+		// Initializing concrete parameters of the dynamic expression			
+		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+
+		// Add input model element into dynamic expression context
+		params.put(owningRule.source.name, inElt)
+
+		// Add InterpretationPatternModel into dynamic expression context
+		params.put("module", owningRule.owningModel)
+
+		do
+			// Run dynamic expression
+			varValue := varDynExpr.execute(void, params)
+	
+			// Catch other execution exceptions
+			rescue(e: Exception)
+				var runExcep : DynExprRunException init DynExprRunException.new
+				runExcep.nestedException := e
+				runExcep.message :=
+					"Execution error on initialization [" + initExpr + "] of variable ["
+					+ name + "] of rule [" + owningRule.name + "]"
+				raise runExcep
+		end
+
+		// Check whether the computed value conforms to the provided variable type
+		// Raises an exception in case it does not
+		if(not varKType.isInstance(varValue)) then
+			var runExcep : DynExprRunException init DynExprRunException.new
+			runExcep.message :=
+				"Execution error on initialization [" + initExpr + "] of variable ["
+				+ name + "] of rule [" + owningRule.name + "]"
+			raise runExcep
+		end
+	end
+}
+
+
+/**
+ * This class defines the matching pattern of an InterpretationRule
+ */
+@aspect "true"
+class RulePattern {
+	/** Dynamic expression for condition evaluation */
+	attribute condDynExpr : DynamicExpression[0..1]
+	/** Kermeta type of input model elements matched by the RulePattern */
+	reference sourceKElement : Class[0..1]
+
+	/**
+	 * This operation checks whether an input model element: 1) corresponds to the type of
+	 * elements that are matched by the RulePattern, 2) validates the condition of the
+	 * RulePattern.
+	 */
+	operation checkCondition(inElt: CoreObject) : Boolean is do
+		result := false
+		
+		if(matchModel(inElt) and matchType(inElt.object)) then
+			if(condition == void) then
+				// No condition specified: match is Ok
+				result := true
+			else if(condition.size == 0) then
+				// No condition specified: match is Ok
+				result := true
+			else
+				// Defining concrete parameters of dynamic expression
+				var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+				params.put(name, inElt.object)
+				params.put("module", owningRule.owningModel)
+
+				// Run dynamic expression
+				do
+					result ?= condDynExpr.execute(void, params)
+
+					// Raise running exception
+					rescue(e: Exception)
+						var runExcep : DynExprRunException init DynExprRunException.new
+						runExcep.nestedException := e
+						runExcep.message :=
+							"Execution error on condition [" + condition
+							+ "] of pattern of rule [" + owningRule.name + "]"
+						raise runExcep
+				end
+			end end
+		end
+	end
+
+	/**
+	 * This operation checks if the input element matches the model constraint
+	 * of the pattern (in case this constraint is specified)
+	 */
+	operation matchModel(inElt: CoreObject) : Boolean is do
+		result := true
+		if(sourceModel != void) then
+			if(sourceModel.size > 0) then
+				result := (sourceModel == inElt.modelName)
+			end
+		end
+	end
+
+	/**
+	 * This operation checks if the input element matches the type constraint
+	 * of the pattern
+	 */
+	operation matchType(inElt: Object) : Boolean is do
+		if(sourceKElement.equals(inElt.getMetaClass)) then
+			result := true
+		else
+			var kTools : KermetaHelper init KermetaHelper.new
+			var supClasses : seq Class[0..*] init
+				owningRule.owningModel.superClasses.getValue(inElt.getMetaClass)
+
+			if(supClasses == void) then
+				supClasses := kTools.getSuperClasses(inElt.getMetaClass)
+				owningRule.owningModel.superClasses.put(inElt.getMetaClass, supClasses)
+			end
+
+			result := supClasses.contains(sourceKElement)
+		end
+	end
+}
+
+
+/**
+ * This class defines one of the "outputs" of an InterpretationRule
+ */
+@aspect "true"
+class RuleProduction {
+	/** Dynamic expression for first pass initialization */
+	attribute initDynExpr : DynamicExpression[0..1]
+	/** Kermeta type of output model element allocated by the RuleProduction */
+	reference targetKElement : Class[0..1]
+
+	/** Link to the interpretation model "bValues" hashtable */	
+	property readonly bValues : Hashtable<String, BindingValue> getter is do
+		result := owningRule.owningModel.bValues
+	end
+
+	/** Link to the interpretation model "bKeys" hashtable */	
+	property readonly bKeys : Hashtable<String, BindingKey> getter is do
+		result := owningRule.owningModel.bKeys
+	end
+
+	/** Link to the interpretation model "unresolvedBKeys" collection */
+	property readonly unresolvedBKeys : seq BindingKey[0..*] getter is do
+		result := owningRule.owningModel.unresolvedBKeys
+	end
+
+	/**
+	 * This operation allocates a new output model element corresponding to an
+	 * instance of the RuleProduction targetElement, and adds a new entry for this
+	 * allocated element to the "bValues" hastable.
+	 */
+	operation allocate(inElt: Object) : Object is do
+		// Allocate a new class instance
+		result := targetKElement.new
+
+		// Add the new output model element into the "bValues" hashtable
+		var key : BindingKey init BindingKey.new
+		key.prod := self
+		key.object := inElt
+
+		var val : BindingValue init BindingValue.new
+		val.object := result
+		val.modelName := targetModel
+		val.toBeInit := true
+
+		bValues.put(key.toString, val)
+
+		// Add corresponding entry to the "bKeys" hashtable
+		bKeys.put(key.toString, key)
+	end
+
+
+	/**
+	 * This operation performs the initialization of an allocated output model element.
+	 * If the initialization does not succeed, the BindingKey is inserted into the
+	 * "unresolvedBKeys" collection to be handled during the second pass.
+	 */
+	operation initialize(inElt: Object, context: set ConcreteContextItem[0..*]) is do
+		var key : BindingKey init BindingKey.new
+		var init_Ok : Boolean init true
+
+		if(initExpr != void) then
+			if(initExpr.size > 0) then
+				// Initializing concrete parameters of the dynamic expression			
+				var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+
+				// Add input model element into dynamic expression context
+				params.put(owningRule.source.name, inElt)
+
+				// Add InterpretationPatternModel into dynamic expression context
+				params.put("module", owningRule.owningModel)
+
+				// Add concrete context elements into dynamic expression context
+				context.each{ci | params.put(ci.name, ci.object)}
+
+				do
+					// Run dynamic expression
+					initDynExpr.execute(void, params)
+
+					// Catch exceptions raised by the "resolve" operation
+					rescue(e: UnresolvedRefException)
+						init_Ok := false
+					
+						// Insert a new entry into the "keys" hastable: the corresponding output model
+						// element will have to be initialized during the second pass.
+						key.prod := self
+						key.object := inElt
+						unresolvedBKeys.add(key)
+
+						// Save context for second pass initialization
+						owningRule.owningModel.prodContexts.put(owningRule.name + "#" + inElt.toString, context)
+
+					// Catch other execution exceptions
+					rescue(e: Exception)
+						var runExcep : DynExprRunException init DynExprRunException.new
+						runExcep.nestedException := e
+						runExcep.message :=
+							"Execution error on initialization [" + initExpr + "] of production ["
+							+ name + "] of rule [" + owningRule.name + "]"
+						raise runExcep
+				end
+			end
+		end
+	end
+}
+
+
+/**
+ * This class defines a singleton output of an InterpretationRule.
+ */
+@aspect "true"
+class SingletonRuleProduction /*inherits RuleProduction*/ {
+	/** Dynamic expression for model element identification */
+	attribute idDynExpr : DynamicExpression[0..1]
+
+	/**
+	 * This operation first looks for an existing equivalent singleton model element before
+	 * allocating a new one (in case no equivalent singleton has been found).
+	 * The context parameter provides the concrete context for ID evaluation of the current
+	 * singleton rule.
+	 */
+	operation getOrAllocate(inElt: Object, context: set ConcreteContextItem[0..*]) : Object is do
+		// Search bindings for equivalent element (ie produced by a SingletonRuleProd,
+		// with an idExpr that resolves to the same value)
+		var bv : BindingValue init findSingleton(inElt, targetKElement, context)
+		var doInit : Boolean
+
+		if(bv == void) then
+			// Allocation of target model element
+			result := targetKElement.new
+			doInit := true
+		else
+			// No model element allocation
+			result := bv.object
+			doInit := false
+		end
+
+		// Add the output model element into the "bValues" hashtable
+		var key : BindingKey init BindingKey.new
+		key.prod := self
+		key.object := inElt
+
+		var val : BindingValue init BindingValue.new
+		val.object := result
+		val.modelName := targetModel
+		val.toBeInit := doInit
+
+		bValues.put(key.toString, val)
+
+		// Add corresponding entry to the "bKeys" hashtable
+		bKeys.put(key.toString, key)
+	end
+
+	/**
+	 * This operation searches the "bValues" hashtable for an already matched input model
+	 * element that produces an output model element which type is 'kClass' and that is
+	 * equivalent to the 'inElt' object (regarding to the value of its id expression).
+	 * The operation returns the corresponding BindingValue element, or null in case no
+	 * match has been found.
+	 * The context parameter provides the concrete context for ID evaluation of the current
+	 * singleton rule.
+	 */
+	operation findSingleton(inElt: Object, kClass: Class, context: set ConcreteContextItem[0..*]) : BindingValue is do
+		var strKey : String
+		var bKey : BindingKey
+		var bVal : BindingValue
+		var prod : RuleProduction
+		
+		// Init result with default value
+		result := void
+		
+		// Iterate over the string keys of the "bKeys" hashtable
+		var found : Boolean init false
+		from var key_It : Iterator<String> init owningRule.owningModel.bKeys.keyIterator
+		until found or key_It.isOff loop
+			strKey := key_It.next
+
+			// Get corresponding BindingKey element
+			bKey := owningRule.owningModel.bKeys.getValue(strKey)
+			
+			// Get ProductionRule from name
+			prod := bKey.prod
+
+			// If production 1) has the same target model than current production rule and 2) is
+			// a SingletonProductionRule, check whether the associated input model element
+			// resolves into an equivalent singleton model element
+			if(prod.targetModel == targetModel and SingletonRuleProduction.isInstance(prod)) then
+				// Get corresponding BindingValue element
+				bVal := bValues.getValue(strKey)
+
+				// Check whether the output model element type matches the current rule production
+				// type (kClass)
+				if(bVal.object.getMetaClass == kClass) then
+					var sProd : SingletonRuleProduction
+					sProd ?= prod
+
+					// Get respective Ids for:
+					//  - [selfProd, inElt] => id1
+					//  - [iteratedProd, iterated_inElt] => id2
+					var id1 : Object init self.evalIdExpression(inElt, context)
+					var context2 : set ConcreteContextItem[0..*] init
+						owningRule.owningModel.varContexts.getValue(bKey.prod.owningRule.name + "#" + bKey.object.toString)
+					var id2 : Object init sProd.evalIdExpression(bKey.object, context2)
+
+					// If computed ids are equal, return currently iterated BindingValue
+					if(id1.equals(id2)) then
+						found := true
+						result := bVal
+					end
+				end
+			end
+		end
+	end
+
+	/**
+	 * This operation evaluates the id expression of the SingletonRuleProduction over the
+	 * provided input model element.
+	 * The context parameter provides the concrete context for ID evaluation.
+	 */
+	operation evalIdExpression(inElt: Object, context: set ConcreteContextItem[0..*]) : Object is do
+		// Running ID dynamic expression
+		// Initializing concrete parameters of the dynamic expression			
+		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+
+		// Add input model element of the pattern corresponding to the production
+		// rule into dynamic expression context
+		params.put(owningRule.source.name, inElt)
+
+		// Add InterpretationPatternModel into dynamic expression context
+		params.put("module", owningRule.owningModel)
+
+		// Add concrete context into dynamic expression context
+		context.each{ci | params.put(ci.name, ci.object)}
+
+		// Run dynamic expression
+		do
+			result := idDynExpr.execute(void, params)
+
+			// Raise running exception
+			rescue(e: Exception)
+				var runExcep : DynExprRunException init DynExprRunException.new
+				runExcep.nestedException := e
+				runExcep.message :=
+					"Execution error on ID [" + idExpr + "] of production ["
+					+ name + "] of rule [" + owningRule.name + "]"
+				raise runExcep
+		end
+	end
+}

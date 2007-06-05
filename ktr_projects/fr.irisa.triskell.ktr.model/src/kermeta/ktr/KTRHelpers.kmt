@@ -1,0 +1,46 @@
+/* $Id: KTRHelpers.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors:
+ *		Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr::helpers;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "../util/EcoreHelpers.kmt"
+
+using kermeta::standard
+using kermeta::reflection
+using kermeta::interpreter
+using kermeta::utils
+
+using ecore
+using ecore::helpers
+
+
+/**
+ * This class provides helper operations for the InterpretationPattern model.
+ */
+class KTRHelper {
+
+	/**
+	 * This operation gets a Kermeta class from an EClass.
+	 */
+	operation getKClassFromEClass(eCl: EClass) : Class is do
+		var ecoreTools : EcoreHelper init EcoreHelper.new
+	
+		var dynExpr : DynamicExpression init DynamicExpression.new
+		dynExpr.initializeDefaults
+		
+		dynExpr.parse( ecoreTools.getQualifiedNameFromEClass(eCl) )
+		result ?= dynExpr.execute(void, Hashtable<String, Object>.new)
+	end
+}

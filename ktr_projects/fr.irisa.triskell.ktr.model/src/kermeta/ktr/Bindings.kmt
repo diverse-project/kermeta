@@ -1,0 +1,50 @@
+/* $Id: Bindings.kmt,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: November 06, 2006
+ * Project    : RDL
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Authors:
+ *		Touzet David
+ *
+ * Description : 
+ */ 
+
+package ktr;
+
+require kermeta
+require "KTR.kmt"
+require "CoreObject.kmt"
+
+using kermeta::standard
+
+
+/**
+ * This class defines the key of the "bindings" hashtable
+ */
+class BindingKey {
+	/** A RuleProduction (also provides access to its containing InterpretationRule) */
+	reference prod : RuleProduction[1..1]
+	/** An input model element matched by the rule */
+	reference object : Object[1..1]
+
+	/**
+	 * This operation returns a string representation of the BindingKey
+	 */
+	method toString() : String is do
+		result := prod.owningRule.name + "#" + self.prod.name + "#" + object.toString
+	end
+}
+
+
+/**
+ * This class defines the value of the "bindings" hashtable
+ */
+class BindingValue {
+	/** An output model element */
+	reference object : Object[1..1]
+	/** Name of the output model object should be assigned to */
+	attribute modelName : String[0..1]
+	/** Flag telling whether the output model element has been initialized */
+	attribute toBeInit : Boolean[1..1]
+}
