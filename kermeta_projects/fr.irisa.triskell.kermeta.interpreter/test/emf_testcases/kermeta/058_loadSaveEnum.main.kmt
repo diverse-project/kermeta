@@ -1,0 +1,52 @@
+/* $Id: 058_loadSaveEnum.main.kmt,v 1.1 2007-06-05 12:19:40 dvojtise Exp $
+ * Creation date: June 5, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "loadSaveEnum::Main"
+@mainOperation "main"
+
+
+package loadSaveEnum;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/058_MMEnum.ecore"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+class Main inherits TestCase
+{
+	attribute metamodelUri : String
+	attribute modelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation setUp() is do
+		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/058_MMEnum.ecore"
+		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/058_"
+		
+		
+	end
+	
+	operation testLoadModelWithEnum() is do
+		var emfRep : EMFRepository init EMFRepository.new
+		var res_a : EMFResource
+		res_a ?= emfRep.createResource(modelUriBase+"modelWithEEnum1.xmi", metamodelUri)
+		
+		res_a.load
+		rescue (e : ResourceLoadException) 
+			stdio.writeln(e.message)
+	end
+	
+	operation testSaveModelWithEnum() is do
+		var emfRep : EMFRepository init EMFRepository.new
+	end
+	
+}
