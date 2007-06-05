@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StsModelWizard.java,v 1.1 2006-09-26 15:30:03 dtouzet Exp $
+ * $Id: StsModelWizard.java,v 1.2 2007-06-05 09:45:34 cfaucher Exp $
  */
 package sts.presentation;
 
@@ -448,6 +448,9 @@ public class StsModelWizard extends Wizard implements INewWizard {
 
 			setPageComplete(validatePage());
 			setControl(composite);
+			
+			// Added to set automatically the ComboBox item to Root
+			initialObjectField.setText("Root");
 		}
 
 		/**
