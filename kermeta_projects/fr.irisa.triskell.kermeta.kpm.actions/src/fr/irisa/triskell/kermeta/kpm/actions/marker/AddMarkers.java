@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.6 2007-06-05 13:13:03 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.7 2007-06-05 13:19:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -43,20 +43,6 @@ public class AddMarkers implements IAction, Interest {
 		
 			monitor.beginTask("", 1);
 			monitor.subTask("Adding Markers to " + unit.getValue());
-					
-			/*
-			 * 
-			 * Must unit be updated ?
-			 * 
-			 * 
-			 */
-			boolean mustBeUpdated = false;
-			IFile file = ResourceHelper.getIFile(unit.getValue());
-			if ( file.getLocalTimeStamp() != unit.getLastTimeModified().getTime() )
-				mustBeUpdated = true;
-			
-			if ( ! mustBeUpdated )
-				return;
 			
 			/*
 			 * 
@@ -82,6 +68,7 @@ public class AddMarkers implements IAction, Interest {
 			 * Clearing markers. Depending the Kermeta Unit, markers may be added.
 			 * 
 			 */
+			IFile file = ResourceHelper.getIFile(unit.getValue());
 			KermetaMarkersHelper.clearMarkers(file);
 			ArrayList<Unit> markedUnits = new ArrayList<Unit> ();
 			markDependent(out, file, unit, unit, markedUnits, false);

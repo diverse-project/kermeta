@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.5 2007-05-30 11:25:00 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.6 2007-06-05 13:20:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.runtime.CoreException;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
@@ -126,7 +127,19 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor {
 			IFile file = (IFile) resource;
 			//KermetaProject project = KermetaWorkspace.getInstance().getKermetaProject( file.getProject() );
 			Unit unit = currentProject.getKpm().findUnit( file.getFullPath().toString() );
-			unit.receiveAsynchroneEvent("update", null, null);
+			
+			/*
+			 * 
+			 * Must unit be updated ?
+			 * 
+			 * 
+			 */
+			boolean mustBeUpdated = false;
+			if ( file.getLocalTimeStamp() != unit.getLastTimeModified().getTime() )
+				mustBeUpdated = true;
+			
+			if ( mustBeUpdated )
+				unit.receiveAsynchroneEvent("update", null, null);
 			break;
 			
 		default :
