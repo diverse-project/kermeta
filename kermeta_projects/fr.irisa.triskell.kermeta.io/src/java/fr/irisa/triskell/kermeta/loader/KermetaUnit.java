@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.87 2007-05-30 11:28:46 jsteel Exp $
+/* $Id: KermetaUnit.java,v 1.88 2007-06-05 15:41:16 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
@@ -40,7 +39,6 @@ import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -54,10 +52,8 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
-import fr.irisa.triskell.kermeta.loader.message.KermetaUnitTraceHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
-import fr.irisa.triskell.kermeta.util.KmResourceFactoryImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.traceability.ModelReference;
@@ -691,8 +687,7 @@ public abstract class KermetaUnit {
 	 * @param file_path the xmi file. the extension of the file should be .km
 	 */
 	public void saveAsXMIModel(String file_path) {
-		// We specify KmResourceFactoryImpl to benefit of the serialization with UUIDs
-	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new KmResourceFactoryImpl());
+	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
 	    ArrayList resource_tags = new ArrayList();
 	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));

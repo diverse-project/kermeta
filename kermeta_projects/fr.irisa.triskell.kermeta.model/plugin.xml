@@ -6,7 +6,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: plugin.xml,v 1.10 2007-06-01 14:53:15 cfaucher Exp $
+ * $Id: plugin.xml,v 1.11 2007-06-05 15:42:21 cfaucher Exp $
  */
 -->
 
@@ -38,14 +38,6 @@
        uri = "http://kermeta/kermeta.ecore//language/structure" 
        class = "fr.irisa.triskell.kermeta.language.structure.StructurePackage"
        /> 
-  </extension>
-
-  <!-- Parser's extension -->
-  <extension
-        point="org.eclipse.emf.ecore.extension_parser">
-     <parser
-           class="fr.irisa.triskell.kermeta.util.KmResourceFactoryImpl"
-           type="km"/>
-  </extension>
+  </extension>>
 </plugin>
 
