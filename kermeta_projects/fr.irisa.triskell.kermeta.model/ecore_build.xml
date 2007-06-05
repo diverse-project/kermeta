@@ -21,7 +21,10 @@
 	</path>
 	
 		<!-- SOURCE DIR -->
-		<property name="src.dir" location="./src/ecore"/>	
+		<property name="src.dir" location="./src/ecore"/>
+	
+		<!-- TEST DIR -->
+		<property name="test.dir" location="./test/ecore"/>
 		
 		<!-- BUILD DIR -->
 		<property name="build.dir" location="./build/ecore"/>		
@@ -77,7 +80,7 @@
 	<echo> Generating visitor... </echo>
 			<mkdir dir="src/java/fr/irisa/triskell/ecore/visitor"/>
 			<java classname="fr.irisa.triskell.kermeta.dev.model.CreateGenericVisitor" fork="yes" classpathref="full.classpath">
-				<arg line="${src.dir}/Ecore.ecore fr.irisa.triskell.ecore.visitor ./src/java/fr/irisa/triskell/ecore/visitor Ecore"/>
+				<arg line="${test.dir}/Ecore.ecore fr.irisa.triskell.ecore.visitor ./src/java/fr/irisa/triskell/ecore/visitor Ecore"/>
 			</java> 
 	</target>
 	
