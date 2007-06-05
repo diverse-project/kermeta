@@ -4,7 +4,7 @@
     <eLiterals name="accPublic"/>
     <eLiterals name="accPrivate" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Test">
+  <eClassifiers xsi:type="ecore:EClass" name="EnumTest">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="a" eType="//AccesVariableEnumeration"/>
   </eClassifiers>
 </ecore:EPackage>
