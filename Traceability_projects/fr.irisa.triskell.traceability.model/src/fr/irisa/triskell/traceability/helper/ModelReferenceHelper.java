@@ -1,4 +1,4 @@
-/*$Id: ModelReferenceHelper.java,v 1.1 2007-05-15 09:06:29 dvojtise Exp $
+/*$Id: ModelReferenceHelper.java,v 1.2 2007-06-05 15:37:24 dtouzet Exp $
 * Project : fr.irisa.triskell.traceability.model
 * File : 	ModelReferenceHelper.java
 * License : EPL
@@ -14,7 +14,6 @@ package fr.irisa.triskell.traceability.helper;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.Reference;

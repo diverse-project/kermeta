@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.2 2007-05-15 09:06:29 dvojtise Exp $
+/* $Id: Tracer.java,v 1.3 2007-06-05 15:37:24 dtouzet Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.traceability.FileReference;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TraceModel;
 import fr.irisa.triskell.traceability.Reference;
