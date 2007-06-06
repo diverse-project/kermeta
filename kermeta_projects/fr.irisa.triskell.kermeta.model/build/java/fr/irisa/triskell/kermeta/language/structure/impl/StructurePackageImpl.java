@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.13 2007-05-30 11:17:43 jsteel Exp $
+ * $Id: StructurePackageImpl.java,v 1.14 2007-06-06 15:53:36 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -29,7 +29,6 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Model;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;

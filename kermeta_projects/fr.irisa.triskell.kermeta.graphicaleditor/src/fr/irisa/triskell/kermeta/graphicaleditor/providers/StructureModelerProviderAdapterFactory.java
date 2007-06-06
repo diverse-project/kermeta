@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: StructureModelerProviderAdapterFactory.java,v 1.3 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: StructureModelerProviderAdapterFactory.java,v 1.4 2007-06-06 15:52:04 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -232,13 +232,6 @@ public class StructureModelerProviderAdapterFactory extends
 	 * @generated
 	 */
 	private GenericTypeDefinitionModelerProvider generictypedefinitionModelerProvider;
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition} instances.
-	 * 
-	 * @generated
-	 */
-	private ModelTypeDefinitionModelerProvider modeltypedefinitionModelerProvider;
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelType} instances.
@@ -736,21 +729,6 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition}.
-	 *
-	 * @return the Adapter
-	 * @generated
-	 */
-	public Adapter createModelTypeDefinitionAdapter() {
-		if (modeltypedefinitionModelerProvider == null) {
-			modeltypedefinitionModelerProvider = new ModelTypeDefinitionModelerProvider(
-					this);
-		}
-
-		return modeltypedefinitionModelerProvider;
-	}
-
-	/**
 	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelType}.
 	 *
 	 * @return the Adapter
@@ -837,8 +815,6 @@ public class StructureModelerProviderAdapterFactory extends
 			parameterizedtypeModelerProvider.dispose();
 		if (generictypedefinitionModelerProvider != null)
 			generictypedefinitionModelerProvider.dispose();
-		if (modeltypedefinitionModelerProvider != null)
-			modeltypedefinitionModelerProvider.dispose();
 		if (modeltypeModelerProvider != null)
 			modeltypeModelerProvider.dispose();
 		if (typedefinitioncontainerModelerProvider != null)
