@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.57 2007-05-30 11:55:37 jsteel Exp $
+/* $Id: ExpressionInterpreter.java,v 1.58 2007-06-06 16:43:44 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -57,7 +57,6 @@ import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -615,8 +614,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    throw new Error("INTERPRETER INTERNAL ERROR : visit a Class");
 	}
 	
-	public Object visitModelType(ModelType node) {
-		throw new Error("INTERPRETER INTERNAL ERROR : visit a ModelType");
+	public Object visitModelType(ModelType node)
+	{
+		if (node!=null) setParent(node);
+	    // Get the qualified name of this modelType
+	    String qname = NamedElementHelper.getQualifiedName(node);
+	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
+	    return result;
+
 	}
 	
 	/**
@@ -1354,16 +1359,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    String qname = NamedElementHelper.getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
 	    return result;
-	}
-	
-	public Object visitModelTypeDefinition(ModelTypeDefinition node)
-	{
-		if (node!=null) setParent(node);
-	    // Get the qualified name of this modelTypeDef
-	    String qname = NamedElementHelper.getQualifiedName(node);
-	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
-	    return result;
-
 	}
 	
     /**

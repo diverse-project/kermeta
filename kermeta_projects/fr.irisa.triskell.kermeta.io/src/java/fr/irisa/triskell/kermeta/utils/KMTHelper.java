@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.12 2006-10-27 11:58:15 dvojtise Exp $
+/* $Id: KMTHelper.java,v 1.13 2007-06-06 16:41:23 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -16,11 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
-import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * Some helper methods usefull when dealing with kermeta text syntax

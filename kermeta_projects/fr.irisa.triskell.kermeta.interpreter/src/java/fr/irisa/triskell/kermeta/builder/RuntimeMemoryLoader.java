@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.19 2007-04-04 13:52:09 ftanguy Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.20 2007-06-06 16:44:11 cfaucher Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -125,7 +125,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
     private void loadTypesForTypeDefContainer(TypeDefinitionContainer td_cont) {
         // For each type definition, create the associated RuntimeObject
         for (Object tnext : td_cont.getOwnedTypeDefinition()) {
-        	// TypeDefinition can be a ClassDefinition or a ModelTypeDefinition
+        	// TypeDefinition can be a ClassDefinition or a ModelType
             TypeDefinition td = (TypeDefinition)tnext;
             RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
             typeDefinitions.put(NamedElementHelper.getQualifiedName(td), ro);
@@ -141,10 +141,11 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
                     properties.put(NamedElementHelper.getQualifiedName(prop), ro_prop);
                     objects.put(prop, ro_prop);
                 }
-            } else if (td instanceof ModelTypeDefinition) {
+            } /* FIXME CF ModelType 07-06-06
+            else if (td instanceof ModelType) {
             	//Go add the definitions for the classes inside
-            	loadTypesForTypeDefContainer((ModelTypeDefinition) td);
-            }
+            	loadTypesForTypeDefContainer((TypeDefinition) td);
+            }*/
         }
 
     }

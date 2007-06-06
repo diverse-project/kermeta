@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.31 2007-03-27 14:51:24 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.32 2007-06-06 16:42:19 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -361,6 +361,7 @@ public class KM2Ecore {
 
 	/**
 	 * @return Returns the ecoreFileList.
+	 * FIXME NOT USED
 	 */
 	public List<String> getEcoreFileList() {
 		return ecoreFileList;
@@ -368,6 +369,7 @@ public class KM2Ecore {
 
 	/**
 	 * @return Returns the ecoreGenDirectory.
+	 * FIXME NOT USED
 	 */
 	public String getEcoreGenDirectory() {
 		return ecoreGenDirectory;

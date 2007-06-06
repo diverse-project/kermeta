@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.39 2007-04-19 14:24:15 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.40 2007-06-06 16:41:57 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -38,7 +38,7 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -185,7 +185,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * @param node
 	 * @return
 	 */
-	public Object visitModelTypeDefinition(ModelTypeDefinition node) {
+	public Object visitModelType(ModelType node) {
 		current_name = node.getName();
 		internalLog.debug(loggerTabs + "Visiting Package: " + current_name);
 		loggerTabs.increment();
@@ -200,7 +200,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
 		
 		//Visit the type definitions
-		for (Object next : node.getOwnedTypeDefinition()) {
+		for (Object next : node.getIncludedTypeDefinition()) {
 			Object o = accept((EObject) next);
 			if (o != null)
 				newEPackage.getEClassifiers().add((EClassifier) o);
@@ -210,11 +210,11 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		//Visit the tags of the modeltype and convert them into EAnnotations
 		setTagAnnotations(node, newEPackage);
 		
-		//Add a tag indicating that the generated EPackage came from a modelTypeDefinition
+		//Add a tag indicating that the generated EPackage came from a modelType
 		ecoreExporter.addAnnotation(
 				newEPackage,
 				KM2Ecore.ANNOTATION,
-				"isModelTypeDefinition",
+				"isModelType",
 				"true",
 				null);
 		
