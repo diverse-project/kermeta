@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.40 2007-06-06 16:41:57 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.41 2007-06-06 16:50:22 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -184,8 +184,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * Convert model type definitions into EPackages
 	 * @param node
 	 * @return
+	 * FIXME CF ModelType 07-06-06
 	 */
-	public Object visitModelType(ModelType node) {
+	/*public Object visitModelType(ModelType node) {
 		current_name = node.getName();
 		internalLog.debug(loggerTabs + "Visiting Package: " + current_name);
 		loggerTabs.increment();
@@ -221,8 +222,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		km2ecoremapping.put(node, newEPackage);
 		loggerTabs.decrement();
 		return newEPackage;
-	}
-	
+	}*/	
 
 	/** 
 	 * Converts a kermeta ClassDefinition into EClass
