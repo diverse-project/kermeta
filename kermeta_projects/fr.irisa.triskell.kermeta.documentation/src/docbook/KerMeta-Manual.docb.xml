@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.17 2007-06-06 08:11:36 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.18 2007-06-06 16:08:14 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-06-06 08:11:36 $</pubdate>
+    <pubdate>$Date: 2007-06-06 16:08:14 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher,
@@ -40,8 +40,8 @@
     </publisher>
   </bookinfo>
 
-  <preface>
-    <title>Preface<phrase id="preface"></phrase></title>
+  <preface id="preface.link">
+    <title id="preface.title.link">Preface<phrase id="preface"></phrase></title>
 
     <para>Kermeta is a Domain Specific Language dedicated to metamodel
     engineering. It fills the gap let by MOF which defines only the structure
@@ -156,11 +156,12 @@
       execution is made by an interpreter (a compiler is on the way, for
       exhausted performances).</para>
 
-      <section>
-        <title>First Program<phrase
+      <section id="section_first_program.link">
+        <title id="section_first_program.title.link">First Program<phrase
         id="section_first_program"></phrase></title>
 
-        <para>Here is the traditional «&nbsp;Hello world&nbsp;» example you
+        <para>Even if it is not very useful in our context, since it doesn't show the really interresting structures of the language,
+         here is the traditional "&nbsp;Hello world&nbsp;" example you
         can find in every programming book.</para>
 
         <programlisting>@mainClass "helloworld::HelloworldExample"
@@ -203,9 +204,26 @@
 <emphasis>end</emphasis>
 </programlisting>
 
-        <para>You can get more informations about Kermeta syntax in the <link
-        linkend="chapter_reference">REFERENCE chapter</link>: see sections
-        1-6.</para>
+        <para>All these "classic" imperative features and their syntaxes are described in <xref
+        linkend="chapter_reference.link"/>. More precisely in 
+        <itemizedlist>
+        <listitem><para>
+        	<xref linkend="section_comments.link"/>,
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_statements.link"/>,
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_variables.link"/>,
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_operators.link"/>,
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_reserved_keywords.link"/>
+        </para></listitem>
+        </itemizedlist>
+        </para>
       </section>
     </section>
 
@@ -260,19 +278,43 @@
 }</programlisting>
 
       <para>You can get more informations about Kermeta object-oriented
-      features in the <link linkend="chapter_reference">REFERENCE
-      chapter</link>: see sections 7-10.</para>
+      features in <xref linkend="chapter_reference.link"/>. More precisely in 
+      <itemizedlist>
+        <listitem><para>
+        	<xref linkend="section_classesandmethods.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_inheritance.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_genericity.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_exceptions.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_packages.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_properties.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_object_comparison.link"/>
+        </para></listitem>
+      </itemizedlist>
+      </para>
     </section>
 
     <section>
       <title>A model-oriented language</title>
 
-      <para>As explained in <link linkend="preface">Preface</link>, Kermeta
+      <para>As explained in the <xref linkend="preface.link" endterm="preface.title.link"/> and in 
+      <xref linkend="section_architecture.link" endterm="section_architecture.title.link"/>, Kermeta
       extends the MOF. It intends to provide useful models manipulation
       tools.</para>
 
       <section>
-        <title>A first concrete example of a Kermeta model</title>
+        <title>model means using associations : toward a first concrete example of a Kermeta model</title>
 
         <para>MOF defines the concept of "Property" which generalizes the
         notions of attributes, and associations (composite or not) that you
@@ -311,9 +353,7 @@
 }</programlisting>
 
         <para>If we represent our Kermeta model in a graphical syntax we
-        obtain the following diagram (<link
-        linkend="refIllustration6">Illustration 7A concrete example : a
-        library</link>).</para>
+        obtain the following diagram (<xref linkend="refIllustration6"/>).</para>
 
         <figure id="refIllustration6">
           <title>A concrete example : a library</title>
@@ -348,12 +388,26 @@ resource.load</programlisting>
       <section>
         <title>Navigation in a model</title>
 
+		<para>Actually, navigating in a model is as simple as using objects in an Object Oriented program. However, 
+		several features have been added in order to ease this activity.</para>
+		<para>For example, thanks to the lambda expressions, the collections of the language are easily manipulated using 
+		lexical closure (select, collect, each, ...). This applies to all the collections of the language, the one you may define directly but also
+		the one which are used when an <link linkend="section_properties.link">Attribute or Reference</link> has a multiplicity greater than 1.</para>
         <para>TODO : a simple example of navigation (applying visitor pattern
         ???)</para>
 
         <para>You can get more informations about Kermeta model-oriented
-        features in the <link linkend="chapter_reference">REFERENCE
-        chapter</link>: see sections 11-15.</para>
+        features in the <xref linkend="chapter_reference.link"/>. More precisely in 
+      <itemizedlist>
+        <listitem><para>
+        	<xref linkend="section_loadingsaving_models.link"/>
+        </para></listitem>
+      </itemizedlist>
+      </para>
+      <para>
+      	Kermeta has been developed, using MDE principles so it also provides its own metamodel (reflectiveley available). 
+      	Details of Kermeta metamodel is available in <xref linkend="section_kermeta_metamodel.link"/>
+      </para>
       </section>
     </section>
 
@@ -402,9 +456,8 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <programlisting><emphasis role="strong">var</emphasis> res : Integer
 10.<emphasis role="strong">times</emphasis> { i | stdio.writeln(i.toString + ": Hello") } <emphasis>// Say 10 times Hello</emphasis></programlisting>
 
-        <para>See sections <link
-        linkend="section_lambda_expression">2.3.7</link> and <link
-        linkend="section_lambda_expression_mm">5.3.6</link> for detailed
+        <para>See sections "<xref linkend="section_lambda_expression.link" endterm="section_lambda_expression.title.link"/>" and 
+        	<xref linkend="section_lambda_expression_mm.link" endterm="section_lambda_expression_mm.title.link"/> for detailed
         informations.</para>
       </section>
 
@@ -414,42 +467,38 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
         <section>
           <title>High level modeling</title>
 
-          <para>Kermeta most recent versions embed avanced concepts like <link
-          linkend="section_lambda_expression">Lambda functions</link>, <link
-          linkend="section_dynamic_expressions">Dynamic expressions</link>,
-          <link linkend="section_contracts">Design by contract</link> or <link
-          linkend="section_weaving">Aspects weaving</link>.</para>
+          <para>Kermeta most recent versions embed avanced concepts like 
+          <xref linkend="section_lambda_expression.link" endterm="section_lambda_expression.title.link"/>, 
+          <xref linkend="section_dynamic_expressions.link" endterm="section_dynamic_expressions.title.link"/>,
+          <xref linkend="section_contracts.link" endterm="section_contracts.title.link"/> or 
+          <xref linkend="section_weaving.link" endterm="section_weaving.title.link"/>.</para>
         </section>
 
         <section>
-          <title>Other unusual features</title>
+          <title>Other technical features</title>
 
           <para>As Kermeta language is implemented upon Eclipse and Java, you
-          can call and even embed <link linkend="section_java_code">Java
-          code</link> inside Kermeta code.</para>
+          can call Java code inside Kermeta code.(see <xref linkend="section_java_code.link"/>)</para>
 
           <para>TODO : a simple sample of Java code in Kermeta</para>
 
           <para>There is some special behavior regarding object comparison or
           cloning.</para>
 
-          <para>You can get more informations about Kermeta advanced features
-          in the <link linkend="chapter_reference">REFERENCE chapter</link>:
-          see sections 15-21.</para>
         </section>
       </section>
     </section>
   </chapter>
 
-  <chapter>
-    <title>REFERENCE<phrase id="chapter_reference"></phrase></title>
+  <chapter id="chapter_reference.link">
+    <title id="chapter_reference.title.link">Reference<phrase id="chapter_reference"></phrase></title>
 
     <para>The reference sections are ordered in four parts: the imperative
     syntax (1-6), the object-oriented (7-10) and the model-oriented (11-15)
     features, the advanced concepts (16-21).</para>
 
-    <section>
-      <title>Comments<phrase id="section_comments"></phrase></title>
+    <section id="section_comments.link">
+      <title id="section_comments.title.link">Comments<phrase id="section_comments"></phrase></title>
 
       <warning>
          Comments are a little bit particular in the Kermeta language because they are not all ignored by the interpreter. There are two kinds of comments: the first (syntax : // foo , /* bar * 
@@ -482,8 +531,7 @@ names := <emphasis role="strong">self</emphasis>.getMetaClass.classDefinition.ow
             <para>multi-line comments, i.e text between /* */. Be careful with
             this notation : the opening syntax must not have juxtaposed stars
             ("/**"), otherwise it will be considered as a linked comment (see
-            section <link linkend="sec:linked-comments">2.1.2</link>, p.<link
-            linkend="sec:linked-comments">18</link>), i.e a comment that is
+            <xref linkend="section_linked-comments.link"/>), i.e a comment that is
             part of the Kermeta program as a model.</para>
 
             <programlisting>/* This a multi line comment
@@ -493,9 +541,8 @@ this line too. */</programlisting>
         </itemizedlist>
       </section>
 
-      <section>
-        <title>Linked comments<phrase
-        id="sec:linked-comments"></phrase></title>
+      <section id="section_linked-comments.link">
+        <title>Linked comments<phrase></phrase></title>
 
         <para>Kermeta provides a way to define named and unnamed annotations,
         that have to be defined just above any model element among
@@ -533,8 +580,8 @@ this line too. */</programlisting>
       </section>
     </section>
 
-    <section>
-      <title>Escaping reserved keywords<phrase
+    <section id="section_reserved_keywords.link">
+      <title id="section_reserved_keywords.title.link">Escaping reserved keywords<phrase
       id="section_keywords"></phrase></title>
 
       <para>Kermeta textual syntax uses several keywords like
@@ -557,8 +604,8 @@ this line too. */</programlisting>
 }</programlisting>
     </section>
 
-    <section>
-      <title>Operators<phrase id="section_operators"></phrase></title>
+    <section id="section_operators.link">
+      <title id="section_operators.title.link">Operators<phrase id="section_operators"></phrase></title>
 
       <informaltable>
         <tgroup cols="4">
@@ -805,8 +852,8 @@ this line too. */</programlisting>
       </informaltable>
     </section>
 
-    <section>
-      <title>Statements : block, condition, loop<phrase
+    <section id="section_statements.link">
+      <title id="section_statements.title.link">Statements : block, condition, loop<phrase
       id="section_statements"></phrase></title>
 
       <section>
@@ -916,8 +963,7 @@ this line too. */</programlisting>
            Unlike Java, there is no exit, break or continue function in Kermeta. 
         </note>
 
-        <para>See <link linkend="section_collections">Collections
-        section</link> for functions offering iterator-like scanning.</para>
+        <para>See <xref linkend="section_collections.link"/> for functions offering iterator-like scanning.</para>
       </section>
     </section>
 
@@ -967,9 +1013,8 @@ this line too. */</programlisting>
       <para>In the following example, we define 3 variables of type integer.
       The first is initialized with the "14" literal value, the second is
       initialized with an expression using v1. For the last variable, we use a
-      multiplicity notation to specify an ordered set of integer (see <link
-      linkend="section_collections">Collections section</link> and <link
-      linkend="section_properties">Properties section</link> for more
+      multiplicity notation to specify an ordered set of integer (see <xref linkend="section_collections.link"/>
+      and <xref linkend="section_properties.link"/> for more
       information on sets).</para>
 
       <programlisting><emphasis role="strong">do</emphasis>
@@ -1070,8 +1115,8 @@ this line too. */</programlisting>
         </note>
       </section>
 
-      <section>
-        <title>Local datatype using "alias"<phrase
+      <section id="section_alias.link">
+        <title id="section_alias.title.link">Local datatype using "alias"<phrase
         id="section_alias"></phrase></title>
 
         <para>In Kermeta, you can define your own datatype based on existing
@@ -1096,8 +1141,7 @@ this line too. */</programlisting>
         behavior of String in the framework.</para>
 
         <para>The definition of an alias is different from the use of "using"
-        statement (as defined in section <link
-        linkend="section_using">3.4.2</link>), when you write</para>
+        statement (as defined in <xref linkend="section_using.link"/>), when you write</para>
 
         <para><emphasis role="strong">using</emphasis>
         kermeta::standard</para>
@@ -1122,14 +1166,14 @@ this line too. */</programlisting>
       </section>
     </section>
 
-    <section>
-      <title>Classes and methods<phrase id="section_classes"></phrase></title>
+    <section id="section_classesandmethods.link">
+      <title id="section_classesandmethods.title.link">Classes and methods<phrase id="section_classes"></phrase></title>
 
       <section>
         <title>Classes</title>
 
-        <para>As introduced in the "Hello world" example (see section <link
-        linkend="section_first_program">1.2</link>), Kermeta is an
+        <para>As introduced in the "Hello world" example (see <xref
+        linkend="section_first_program.link"/>), Kermeta is an
         object-oriented language and operations are part of classes. Kermeta
         provides all MOF concepts like properties, attributes, package.</para>
 
@@ -1150,9 +1194,8 @@ this line too. */</programlisting>
 }</programlisting>
 
         <para>Additionally, for better code robustness, and more user-friendly
-        programming, classes can use the genericity mechanisms (see <link
-        linkend="section_genericity">Genericity section</link> for more
-        information).</para>
+        programming, classes can use the genericity mechanisms (see <xref linkend="section_genericity.link"/> 
+        for more information).</para>
 
         <programlisting><emphasis>// This is a parametric class</emphasis>
 <emphasis role="strong">class</emphasis> A&lt;G&gt; {
@@ -1316,8 +1359,8 @@ a := A&lt;Integer&gt;.new
       </section>
     </section>
 
-    <section>
-      <title>Inheritance<phrase id="section_inheritance"></phrase></title>
+    <section id="section_inheritance.link">
+      <title id="section_inheritance.title.link">Inheritance<phrase id="section_inheritance"></phrase></title>
 
       <section>
         <title>Using simple inheritance<phrase
@@ -1348,9 +1391,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
         <para>In this example, we define a simple model which represent
         simples family trees. Here, persons are defined by their name and last
         name. Each person have a father and mother and respectively might have
-        children. The figure representing this example is <link
-        linkend="refIllustration7">Illustration A simple family tree
-        model</link></para>
+        children. The figure representing this example is <xref linkend="refIllustration7"/>
+		</para>
 
         <figure id="refIllustration7">
           <title>A simple family tree model</title>
@@ -1713,8 +1755,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
       </section>
     </section>
 
-    <section>
-      <title>Genericity<phrase id="section_genericity"></phrase></title>
+    <section id="section_genericity.link">
+      <title id="section_genericity.title.link">Genericity<phrase id="section_genericity"></phrase></title>
 
       <para>One of the core characteristics of Kermeta is to be statically
       typed. In order to allow static typing of OCL-like expressions, a few
@@ -1804,8 +1846,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
       </section>
     </section>
 
-    <section>
-      <title>Exception handling<phrase
+    <section id="section_exceptions.link">
+      <title id="section_exceptions.title.link">Exception handling<phrase
       id="section_exceptions"></phrase></title>
 
       <para>Kermeta provides also an exception mechanism. You can define a
@@ -1998,8 +2040,8 @@ operation main() is do
       </section>
     </section>
 
-    <section>
-      <title>Packages<phrase id="section_packages"></phrase></title>
+    <section id="section_packages.link">
+      <title id="section_packages.title.link">Packages<phrase id="section_packages"></phrase></title>
 
       <section>
         <title>Definition</title>
@@ -2070,8 +2112,8 @@ operation main() is do
         primitive)</para>
       </section>
 
-      <section>
-        <title>Syntaxic sugars<phrase id="section_using"></phrase></title>
+      <section id="section_using.link">
+        <title id="section_using.title.link">Syntaxic sugars<phrase id="section_using"></phrase></title>
 
         <para>If you want, you can declare the same package in several files.
         You can also directly define subpackages in the package naming
@@ -2115,9 +2157,7 @@ operation main() is do
 
         <note>
            The using statement is different from the definition of a local datatype with an alias. (See 
-
-          <link linkend="section_alias">Alias subsection</link>
-
+          	<xref linkend="section_alias.link" endterm="section_alias.title.link"/> subsection
            ) 
         </note>
       </section>
@@ -2314,8 +2354,7 @@ myCol1.add(50)
         <title>Some existing useful functions</title>
 
         <para>The collections in Kermeta implement several functions based on
-        lambda expressions (see <link
-        linkend="section_lambda_expression">Lamba expressions section</link>).
+        lambda expressions (see <xref linkend="section_lambda_expression.link"/>).
         These ones are very useful for model navigation.</para>
 
         <para><emphasis role="strong">Example 1:</emphasis> closure
@@ -2354,7 +2393,7 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
     <section id="section_properties.link">
       <title  id="section_properties.title.link">Properties<phrase id="section_properties"></phrase></title>
 
-      <para>A property can be expressed in three ways : as a reference, an
+      <para>A property of a (meta)class can be expressed in three ways : as a reference, an
       attribute, or a derived property. In Kermeta, each kind of these
       properties has a dedicated syntax, which is <emphasis
       role="strong">attribute </emphasis>(for attribute), <emphasis
@@ -2528,9 +2567,8 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 
           <literal>OrderedSet</literal>
 
-           . The reader will refer to the 
-
-          <link linkend="section_collections">Collections section</link>
+           . The reader will refer to 
+          <xref linkend="section_collections.link"/>
 
            (except the bag type) to have the available types for a [m..n](n&gt;1) multiplicity property. 
         </note>
@@ -2809,8 +2847,8 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
       </section>
     </section>
 
-    <section>
-      <title>Objects comparison<phrase
+    <section id="section_object_comparison.link">
+      <title id="section_object_comparison.title.link">Objects comparison<phrase
       id="section_objects_comparison"></phrase></title>
 
       <para>Kermeta users could be confused about <emphasis>==</emphasis>
@@ -3018,8 +3056,8 @@ end
       </section>
     </section>
 
-    <section>
-      <title>Lambda Expressions and functions<phrase
+    <section id="section_lambda_expression.link">
+      <title id="section_lambda_expression.title.link">Lambda Expressions and functions<phrase
       id="section_lambda_expressions"></phrase></title>
 
       <para><phrase id="section_lambda_expression"></phrase>Kermeta proposes a
@@ -3034,8 +3072,8 @@ end
          ), then you cannot put more parameters : only one parameter is allowed in such a case. 
       </note>
 
-      <section>
-        <title>Syntax<phrase id="sec:function-syntax"></phrase></title>
+      <section id="section_function-syntax.link">
+        <title id="section_function-syntax.title.link">Syntax<phrase id="sec:function-syntax"></phrase></title>
 
         <para>Here is a definition of function syntax (this is not a formal
         representation)</para>
@@ -3117,7 +3155,7 @@ anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
 
         <para>You can also define your own functions, by declaring an
         operation, with a parameter as a function using the syntax described
-        in <link linkend="sec:function-syntax">Syntax section</link>.</para>
+        in <xref linkend="section_function-syntax.link"/>.</para>
 
         <para><emphasis role="strong">Example</emphasis>: definition of
         functions for collections</para>
@@ -3228,8 +3266,8 @@ sequence := init_set.collect { element | element*10}</programlisting>
       </section>
     </section>
 
-    <section>
-      <title>Dynamic evaluation of Kermeta expressions<phrase
+    <section id="section_dynamic_expressions.link">
+      <title id="section_dynamic_expressions.title.link">Dynamic evaluation of Kermeta expressions<phrase
       id="section_dynamic_expressions"></phrase></title>
 
       <para><phrase id="dynamic_expression"></phrase>Kermeta allow you to
@@ -3302,8 +3340,8 @@ and op.name.indexOf("All")==-1}
       </caution>
     </section>
 
-    <section>
-      <title>Design by contract (pre, post, inv contraints)<phrase
+    <section id="section_contracts.link">
+      <title id="section_contracts.title.link">Design by contract (pre, post, inv contraints)<phrase
       id="section_contracts"></phrase></title>
 
       <para>In Kermeta, a contract is specified by "pre" and "post" conditions
@@ -3450,8 +3488,8 @@ and op.name.indexOf("All")==-1}
       </section>
     </section>
 
-    <section>
-      <title>Weaving kermeta code<phrase
+    <section id="section_weaving.link">
+      <title id="section_weaving.title.link">Weaving kermeta code<phrase
       id="section_weaving"></phrase></title>
 
       <para>Since version 0.4.1, it is possible to write Kermeta code using a
@@ -3700,8 +3738,8 @@ class A {
       </section>
     </section>
 
-    <section>
-      <title>Using existing java code in Kermeta<phrase
+    <section id="section_java_code.link">
+      <title id="section_java_code.title.link">Using existing java code in Kermeta<phrase
       id="section_java_code"></phrase></title>
 
       <para>If you have existing code that you want to run in a Kermeta
@@ -3869,8 +3907,8 @@ class A {
     redefinition, abstract method, ... does not have any sense in the
     MOF).</para>
 
-    <section>
-      <title>Architecture</title>
+    <section id="section_architecture.link">
+      <title id="section_architecture.title.link">Architecture</title>
 
       <para>Kermeta has been designed to be fully compatible with the OMG
       standard meta-data language EMOF. The metamodel of Kermeta is divided
@@ -3902,6 +3940,7 @@ class A {
         </mediaobject>
       </figure>
 
+	  <note>This weaving of behavior into MOF has been explained in <ulink url="http://www.kermeta.org/documents/articles/Muller05a">Pierre-Alain Muller, Franck Fleurey, and Jean-Marc Jézéquel. -- Weaving executability into object-oriented meta-languages. -- In S. Kent L. Briand, editor, Proceedings of MODELS/UML'2005, volume 3713 of LNCS, pages 264--278, Montego Bay, Jamaica, October 2005. Springer.</ulink></note>
       <para>The link between structure and behavior is made through the
       property <literal>body</literal> of class <literal>Operation</literal>
       which allows to define the behavior of an operation using a Kermeta
@@ -4171,8 +4210,8 @@ i := 5&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// 5 is a IntegerLiteral</emphasis>
 s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis></programlisting>
       </section>
 
-      <section>
-        <title>Lambda Expression<phrase
+      <section id="section_lambda_expression_mm.link">
+        <title id="section_lambda_expression_mm.title.link">Lambda Expression<phrase
         id="section_lambda_expression_mm"></phrase></title>
 
         <figure id="refIllustration17">
@@ -4206,12 +4245,11 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       <para>Another typical way to access to a Kermeta model and Kermeta
       metamodel is to use the reflection. All objects inherits from Object
       that defines the <literal>getMetaClass</literal> operation. This use is
-      used in one of the samples of section <link
-      linkend="dynamic_expression">4.1</link> (when it selects an operation to
+      used in one of the samples of <xref linkend="section_dynamic_expressions.link"/> (when it selects an operation to
       be executed).</para>
 
       <para>At last, the parse method on dynamic expression presented in
-      section <link linkend="dynamic_expression">4.1</link> can give you some
+      section <xref linkend="section_dynamic_expressions.link" endterm="section_dynamic_expressions.title.link"/> can give you some
       way to access a Kermeta model as it parses a Kermeta text and provides
       the corresponding model.</para>
     </section>
@@ -4243,8 +4281,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
         <listitem>
           <para>This package defines some classes related to Kermeta
           interpreter and also to Kermeta surface syntax. Some uses of this
-          package are illustrated in section <link
-          linkend="dynamic_expression">4.1</link>.</para>
+          package are illustrated in <xref linkend="section_dynamic_expressions.link"/>.</para>
         </listitem>
       </varlistentry>
 
@@ -4412,9 +4449,9 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
           <row>
             <entry><para>bag</para></entry>
 
-            <entry align="left"><para>See <link
-            linkend="section_collections">Collections
-            section</link></para></entry>
+            <entry align="left"><para>
+            	See <xref linkend="section_collections.link"/>
+            </para></entry>
           </row>
 
           <row>
@@ -4552,9 +4589,9 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
           <row>
             <entry><para>oset</para></entry>
 
-            <entry align="left"><para>See <link
-            linkend="section_collections">Collections
-            section</link></para></entry>
+            <entry align="left"><para>
+            	See <xref linkend="section_collections.link"/>
+            </para></entry>
           </row>
 
           <row>
@@ -4637,17 +4674,17 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
           <row>
             <entry><para>set </para></entry>
 
-            <entry align="left"><para>See <link
-            linkend="section_collections">Collections
-            section</link></para></entry>
+            <entry align="left"><para>
+            	See <xref linkend="section_collections.link"/>
+            </para></entry>
           </row>
 
           <row>
             <entry><para>seq</para></entry>
 
-            <entry align="left"><para>See <link
-            linkend="section_collections">Collections
-            section</link></para></entry>
+            <entry align="left"><para>
+            	See <xref linkend="section_collections.link"/>
+            </para></entry>
           </row>
 
           <row>
