@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<book>
-  <title>Kermeta Language</title>
-
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.17 2007-06-06 08:11:36 dvojtise Exp $ -->
+<book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007/05/10</pubdate>
+    <pubdate>$Date: 2007-06-06 08:11:36 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher,
@@ -52,7 +51,7 @@
     Eiffel.</para>
 
     <para>This document gives beginners an <link
-    linkend="chapter_introduction">introduction</link> to the Kermeta
+    linkend="chapter_introduction.link">introduction</link> to the Kermeta
     language, then it offers a <link
     linkend="chapter_reference">reference</link> of all the aspects of the
     language, including the textual syntax, the metamodeling features and some
@@ -61,6 +60,10 @@
     linkend="chapter_framework">Kermeta framework</link>.</para>
 
     <important>
+       
+
+      <para />
+
        Kermeta is an evolving software and despite that we put a lot of attention to this document, it may contain errors (more likely in the code samples). If you find any error or have some information that improves this document, please send it to us using the bug tracker in the forge: 
 
       <ulink type="" url="http://gforge.inria.fr/tracker/?group_id=32">
@@ -68,7 +71,7 @@
         role="strong">http://gforge.inria.fr/tracker/?group_id=32</emphasis>
       </ulink>
 
-       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.4.0 
+       or using the developer mailing list (kermeta-developers@lists.gforge.inria.fr) Last check: v0.4.1 
     </important>
 
     <tip>
@@ -81,14 +84,13 @@
     </tip>
   </preface>
 
-  <chapter>
-    <title>Introduction to the language<phrase
-    id="chapter_introduction"></phrase></title>
+  <chapter id="chapter_introduction.link">
+    <title id="chapter_introduction.title.link">Introduction to the language<phrase></phrase></title>
 
     <para></para>
 
-    <section>
-      <title>Presentation</title>
+    <section id="sec_introduction_presentation.link">
+      <title id="sec_introduction_presentation.title.link">Presentation</title>
 
       <para>Kermeta is a metamodeling language which allows describing both
       the structure and the behavior of models. It has been designed to be
@@ -275,20 +277,16 @@
         <para>MOF defines the concept of "Property" which generalizes the
         notions of attributes, and associations (composite or not) that you
         can find in UML. Kermeta syntax also distinguishes these two notions
-        as introduced in section <link linkend="sec:properties">3.1.2</link>,
-        p.<link linkend="sec:properties">30</link>.</para>
+        as introduced in <xref linkend="section_properties.link"/>.</para>
 
         <para>As a reminder, the <literal>attribute</literal> keyword defines
         a link with containment (a composite association) whereas the
         <literal>reference</literal> keyword just defines an association. As
         you can see, property declarations are very close to variable
-        declarations introduced in section <link
-        linkend="sec:types-and-variables">2.2</link>, p.<link
-        linkend="sec:types-and-variables">19</link>). Each reference may be
+        declarations introduced in <xref linkend="section_variables.link"/>). Each reference may be
         explicitly linked to another reference (it is the
         <literal>opposite</literal> concept in MOF terminology – see also
-        section <link linkend="sec:properties-opposite">3.1.2.1</link>,
-        p.<link linkend="sec:properties-opposite">31</link>).</para>
+        section <xref linkend="section_properties-opposite.link"/>).</para>
 
         <programlisting><emphasis role="strong">class</emphasis> Library
 {
@@ -867,7 +865,7 @@ this line too. */</programlisting>
 <emphasis role="strong">end</emphasis></programlisting>
 
         <para>The <literal>if</literal> statement is an expression (see
-        section <link linkend="section_kermeta_metamodel">5</link>). As any
+        <xref linkend="section_kermeta_metamodel.link"/>). As any
         expression in Kermeta, it can return a value. The return type of the
         <literal>if</literal> statement must be a super type of the values
         "returned" by both <literal>then</literal> and <literal>else</literal>
@@ -952,8 +950,8 @@ this line too. */</programlisting>
       </section>
     </section>
 
-    <section>
-      <title>Using Variables<phrase id="section_variables"></phrase></title>
+    <section id="section_variables.link">
+      <title id="section_variables.title.link">Using Variables<phrase ></phrase></title>
 
       <para>A variable is defined by a name and by a datatype which determines
       the domain and operations we can apply on the variable.</para>
@@ -1068,7 +1066,7 @@ this line too. */</programlisting>
 <emphasis role="strong">end</emphasis></programlisting>
 
         <note>
-           Enumeration are concept of the same level as classes, they must be defined in a package. 
+          Enumeration are concept of the same level as classes, they must be defined in a package. 
         </note>
       </section>
 
@@ -1846,11 +1844,11 @@ class Female <emphasis role="strong">inherits</emphasis> Person
       rescue :-))</para>
     </section>
 
-    <section>
-      <title>(De)serialization of models<phrase
+    <section id="section_loadingsaving_models.link">
+      <title id="section_loadingsaving_models.title.link">Loading and saving models<phrase
       id="section_serialization"></phrase></title>
 
-      <para>This section explains how to load and save an EMF model in
+      <para>This section explains how to load and save (deserialize and serialize) an EMF model in
       Kermeta. For this purpose, we will use the following small example
       :</para>
 
@@ -1878,8 +1876,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
         <para>The user will refer to eclipse documentation for the creation of
         an EMF model from its ECore meta-model. We suggest to use the Wizard
-        samples to create, at the first hand, an ECore meta-model, and then,
-        at the second hand, instances of this ECore meta-model, using the
+        samples to create, at the first hand, an Ecore meta-model, and then,
+        at the second hand, instances of this Ecore meta-model, using the
         generated EMF reflexive editors.</para>
 
         <para>Once you created the ECore meta-model, please check that you
@@ -1903,10 +1901,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
             </literal>so that you can access your metamodel in Kermeta.</para>
 
             <para>Alternatively, you can use the Kermeta version of your
-            metamodel using</para>
-
-            <para>require "your_metamodel.kmt" or require
-            "your_metamodel.km".</para>
+            metamodel using <literal>require "your_metamodel.kmt"</literal> or <literal>require
+            "your_metamodel.km"</literal>.</para>
 
             <para role="lineBreak">In this case, be careful that your kmt
             required metamodel is strictly equivalent to the ecore version of
@@ -1950,7 +1946,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Get the loaded __root__ instances (a Set&lt;Object&gt;) */</emphasis>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">result</emphasis> := resource.instances
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
- }</programlisting>
+ </programlisting>
 
         <itemizedlist>
           <listitem>
@@ -1966,25 +1962,37 @@ class Female <emphasis role="strong">inherits</emphasis> Person
           </listitem>
         </itemizedlist>
 
-        <programlisting><emphasis role="strong">operation</emphasis> main() <emphasis
-            role="strong">is do</emphasis> <emphasis role="strong">var</emphasis> instances := self.initialize("./test.cs", "./cs.ecore") <emphasis
-            role="strong">from var</emphasis> it : Iterator&lt;Object&gt; <emphasis
-            role="strong">init</emphasis> instances.iterator <emphasis
-            role="strong">until</emphasis> it.isOff <emphasis role="strong">loop</emphasis> <emphasis
-            role="strong">var</emphasis> o : Object o := it.next <emphasis
-            role="strong">if</emphasis> (o == void) <emphasis role="strong">then</emphasis> stdio.writeln("Void object!") <emphasis
-            role="strong">else</emphasis> stdio.writeln("---------------------------------") stdio.writeln("Objet : " + o.getMetaClass.classDefinition.qualifiedName + " ( " +.getMetaClass.typeDefinition.ownedAttribute.size.toString+ "attr.)" ) <emphasis
-            role="strong">end</emphasis> <emphasis role="strong">var</emphasis> template : cs::Template <emphasis>// Print instances which type is cs::Template</emphasis> <emphasis
-            role="strong">if</emphasis> (cs::Template.isInstance(o)) <emphasis
-            role="strong">then</emphasis> template ?= o stdio.writeln(" name : " + template.name) stdio.writeln(" decision : " + template.decision.toString) stdio.writeln(" content : " + template.content) stdio.writeln(" referer : " + template.referer.toString) <emphasis
-            role="strong">end</emphasis> <emphasis>// Print instances which type is cs::Decision</emphasis> <emphasis
-            role="strong">if</emphasis> (cs::Decision.isInstance(o)) <emphasis
-            role="strong">then</emphasis> decision ?= o stdio.writeln(" name : " + decision.name) <emphasis
-            role="strong">end</emphasis> <emphasis role="strong">end</emphasis>}</programlisting>
+        <programlisting>
+operation main() is do 
+   var instances := self.initialize("./test.cs", "./cs.ecore") 
+   from var it : Iterator&lt;Object&gt; init instances.iterator 
+   until it.isOff 
+   loop
+      var o : Object o := it.next 
+      if (o == void) then stdio.writeln("Void object!") 
+      else 
+         stdio.writeln("---------------------------------") 
+         stdio.writeln("Objet : " + o.getMetaClass.classDefinition.qualifiedName + " ( " +.getMetaClass.typeDefinition.ownedAttribute.size.toString+ "attr.)" ) 
+      end
+      var template : cs::Template <emphasis>// Print instances which type is cs::Template</emphasis> 
+      if (cs::Template.isInstance(o)) 
+      then 
+         template ?= o 
+         stdio.writeln(" name : " + template.name) 
+         stdio.writeln(" decision : " + template.decision.toString) 
+         stdio.writeln(" content : " + template.content) stdio.writeln(" referer : " + template.referer.toString) 
+      end
+      <emphasis>// Print instances which type is cs::Decision</emphasis> 
+      if (cs::Decision.isInstance(o)) 
+      then
+         decision ?= o stdio.writeln(" name : " + decision.name) 
+      end
+   end
+}</programlisting>
       </section>
 
       <section>
-        <title>Save a modle into an EMF Resource</title>
+        <title>Save a model into an EMF Resource</title>
 
         <para>TODO : give an example.</para>
       </section>
@@ -2115,8 +2123,8 @@ class Female <emphasis role="strong">inherits</emphasis> Person
       </section>
     </section>
 
-    <section>
-      <title>Collections<phrase id="section_collections"></phrase></title>
+    <section id="section_collections.link">
+      <title id="section_collections.title.link">Collections<phrase id="section_collections"></phrase></title>
 
       <section>
         <title>Definition and initialization</title>
@@ -2343,8 +2351,8 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
       </section>
     </section>
 
-    <section>
-      <title>Properties<phrase id="section_properties"></phrase></title>
+    <section id="section_properties.link">
+      <title  id="section_properties.title.link">Properties<phrase id="section_properties"></phrase></title>
 
       <para>A property can be expressed in three ways : as a reference, an
       attribute, or a derived property. In Kermeta, each kind of these
@@ -2360,8 +2368,8 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
       <para>Unlike UML, there is no concept of visibility in kermeta, so every
       property is visible</para>
 
-      <section>
-        <title>Attributes <emphasis>(attribute)</emphasis>, references
+      <section id="section_properties-opposite.link">
+        <title id="section_properties-opposite.title.link">Attributes <emphasis>(attribute)</emphasis>, references
         <emphasis>(reference)</emphasis> <phrase
         id="sec:properties-opposite"></phrase></title>
 
@@ -3080,7 +3088,7 @@ anInstance.FUNCTION_NAME ( TYPE_1, TYPE_2 | SOME_CODE )</programlisting>
 }
 </programlisting>
 
-        <para>See the <link linkend="???">Collections section</link> for other
+        <para>See <xref linkend="section_collections.link"/> for other
         existing functions on collections.</para>
 
         <para><emphasis role="strong">Example 2:</emphasis> another useful
@@ -3833,8 +3841,8 @@ class A {
     </section>
   </chapter>
 
-  <chapter>
-    <title>Kermeta Metamodel<phrase id="chapter_kermeta_mm"></phrase></title>
+  <chapter id="section_kermeta_metamodel.link">
+    <title id="section_kermeta_metamodel.title.link">Kermeta Metamodel<phrase id="chapter_kermeta_mm"></phrase></title>
 
     <para>As Kermeta is designed to be used in a model driven environment, its
     structure is given as a model. This section presents the metamodel of
@@ -3928,8 +3936,8 @@ class A {
       the ability to define the behavior of operations. To achieve this we
       define an action language in the package
       <literal>behavior</literal><emphasis> </emphasis>of Kermeta. The class
-      hierarchy of the package behavior is presented on Figure <link
-      linkend="refIllustration3">4</link>. In practice, Kermeta expressions
+      hierarchy of the package behavior is presented on <xref
+      linkend="refIllustration11"/>. In practice, Kermeta expressions
       have been designed by adding model modification capabilities (like
       assignment of properties for instance) to OCL expressions.</para>
 
@@ -4246,8 +4254,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
         <listitem>
           <para>This package defines the notion required to serialize and
-          deserialize models. This is illustrated in section <link
-          linkend="Loading_Models_with_kermeta">4.2</link> and in the EMF
+          deserialize models. This is illustrated in <xref linkend="section_loadingsaving_models.link"/> and in the EMF
           tutorial document ( <ulink type=""
           url="http://www.kermeta.org/documents/emfTutorial/">http://www.kermeta.org/documents/emfTutorial/</ulink>
           )</para>
@@ -4255,7 +4262,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::kunit</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::kunit</filename></emphasis></term>
 
         <listitem>
           <para>This is a basic support for unitary tests (like Junit but for
@@ -4264,7 +4271,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::language::structure</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::language::structure</filename></emphasis></term>
 
         <listitem>
           <para>It contains the classes of Kermeta structure. Note that it
@@ -4275,7 +4282,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::language::behavior</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::language::behavior</filename></emphasis></term>
 
         <listitem>
           <para>It contains the classes for the behavior of Kermeta.</para>
@@ -4283,7 +4290,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::exceptions</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::exceptions</filename></emphasis></term>
 
         <listitem>
           <para>It defines various exceptions that you can use in Kermeta.
@@ -4294,7 +4301,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::io</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::io</filename></emphasis></term>
 
         <listitem>
           <para>This package provides basic support for input/output with
@@ -4306,7 +4313,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::reflection</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::reflection</filename></emphasis></term>
 
         <listitem>
           <para>This package contains all the abstract classes needed for the
@@ -4316,7 +4323,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::utils</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::utils</filename></emphasis></term>
 
         <listitem>
           <para>This package defines various tool classes that cannot be part
@@ -4326,7 +4333,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
       </varlistentry>
 
       <varlistentry>
-        <term><filename>kermeta::standard</filename></term>
+        <term><emphasis role="strong"><filename>kermeta::standard</filename></emphasis></term>
 
         <listitem>
           <para>This package defines all the basic objects needed for a
