@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.18 2007-06-06 16:08:14 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.19 2007-06-06 16:22:43 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-06-06 16:08:14 $</pubdate>
+    <pubdate>$Date: 2007-06-06 16:22:43 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher,
@@ -2574,8 +2574,8 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
         </note>
       </section>
 
-      <section>
-        <title>Derived properties <emphasis>(property)</emphasis></title>
+      <section id="section_derived_properties.link">
+        <title id="section_derived_properties.title.link">Derived properties <emphasis>(property)</emphasis></title>
 
         <para>In a class definition, a derived property is a property that is
         derived or calculated, i.e it contains a body, like operations.
@@ -3657,7 +3657,7 @@ class Decoration{
         aspect of another one which is concrete. This is useful in order to
         add pre or post conditions to a given operation.</para>
 
-        <para>Currently, (v0.4.1) the properties cannot be redefined in
+        <para>Currently, (v0.4.1) the <link linkend="section_derived_properties.link">derived properties</link> cannot be redefined in
         several aspect classes.</para>
 
         <programlisting>
