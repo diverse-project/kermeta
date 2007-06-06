@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.18 2007-05-30 11:42:51 jsteel Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.19 2007-06-06 08:56:39 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -401,7 +401,7 @@ public class RuntimeObjectFactory {
 			result.getData().put("StringValue", objectToClone.getData().get("StringValue"));
 		if (objectToClone.getData().containsKey("NumericValue"))
 			result.getData().put("NumericValue", objectToClone.getData().get("NumericValue"));
-		if (objectToClone.getData().containsKey("NumericValue"))
+		if (objectToClone.getData().containsKey("BooleanValue"))
 			result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
 		if (objectToClone.getData().containsKey("CharacterValue"))
 			result.getData().put("CharacterValue", objectToClone.getData().get("CharacterValue"));
