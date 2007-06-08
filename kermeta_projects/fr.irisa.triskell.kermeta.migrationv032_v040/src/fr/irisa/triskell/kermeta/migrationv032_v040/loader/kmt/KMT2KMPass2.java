@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.2 2007-06-04 14:21:39 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.3 2007-06-08 07:47:15 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
@@ -105,7 +104,9 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		GenericTypeDefinition context;
 		if (builder.current_class != null) { // if we're inside a generic class def
 			context = builder.current_class;
-		} else { // otherwise we're inside a generic model type def
+		}
+		// FIXME CF ModelType 07-06-06
+		/*else { // otherwise we're inside a generic model type def
 			context = (ModelTypeDefinition) current_package();
 		}
 		EList other_params = context.getTypeParameter();
@@ -117,6 +118,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		}
 		// add the parameter to the class
 		context.getTypeParameter().add(tv);
+		*/
+		// end of the FIXME CF ModelType 07-06-06
 		builder.storeTrace(tv, typeVarDecl);
 		return false;
 	}

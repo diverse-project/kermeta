@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.1 2007-01-23 15:04:12 dvojtise Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.2 2007-06-08 07:47:15 cfaucher Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -16,7 +16,6 @@ package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
@@ -45,18 +44,20 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 
 	/**
 	 * Keep stock of 
+	 * FIXME CF ModelType 07-06-06
 	 */
-	private Stack<ModelTypeDefinition> mtdefs = new Stack<ModelTypeDefinition>();
+	/*private Stack<ModelTypeDefinition> mtdefs = new Stack<ModelTypeDefinition>();
 	private ModelTypeDefinition current_mtdef() {
 		return (ModelTypeDefinition)mtdefs.peek();
-	}
+	}*/
 	
 	/**
 	 * Build up the namespace stack in order to be able to track the container
 	 * of the type variables
 	 */
 	public boolean beginVisit(ModelTypeDecl mtdef) {
-		mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
+		// FIXME CF ModelType 07-06-06
+		//mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
 		return super.beginVisit(mtdef);
 	}
 	
@@ -64,7 +65,7 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * Pop the mtdef from the namespace stack
 	 */
 	public void endVisit(ModelTypeDecl mtdef) {
-		mtdefs.pop();
+		//mtdefs.pop();
 		super.endVisit(mtdef);
 	}
 	
@@ -84,7 +85,9 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 		// this can be a class, and enum or a type variable.
 		TypeDefinition superdef = builder.getTypeDefinitionByName(qname);
 		//Type supertype = KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder);
-		if (superdef instanceof ModelTypeDefinition) {
+		
+		// FIXME CF ModelType 07-06-06
+		/*if (superdef instanceof ModelTypeDefinition) {
 			ModelTypeVariable mtv = builder.struct_factory.createModelTypeVariable();
 			mtv.setName(tv.getName());
 			GenericTypeDefinition context;
@@ -104,7 +107,9 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 		} else {
 			// Set the supertype while we're here
 			//tv.setSupertype(supertype);
-		}
+		}*/
+		// end of the FIXME CF ModelType 07-06-06
+		
 		return false;
 	}
 	
