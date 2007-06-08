@@ -51,7 +51,7 @@ public class SimpleFileIO {
         java.lang.String ligne;
        	try {
 			br = new BufferedReader(new FileReader(String.getValue(filename)));
-			while((ligne = br.readLine()) != null) builder.append(ligne);
+			while((ligne = br.readLine()) != null) builder.append(ligne + "\n");
 			br.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
