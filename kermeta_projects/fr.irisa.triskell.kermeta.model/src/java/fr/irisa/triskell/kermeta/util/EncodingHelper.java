@@ -1,4 +1,4 @@
-/* $Id: EncodingHelper.java,v 1.1 2007-06-05 15:26:27 cfaucher Exp $
+/* $Id: EncodingHelper.java,v 1.1 2007-06-08 08:18:14 cfaucher Exp $
  * Project: fr.irisa.triskell.kermeta.model
  * File: EncodingHelper.java
  * License: EPL
@@ -8,7 +8,7 @@
  * Authors: cfaucher
  */
 
-package fr.irisa.triskell.kermeta.language.structure.util;
+package fr.irisa.triskell.kermeta.util;
 
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
