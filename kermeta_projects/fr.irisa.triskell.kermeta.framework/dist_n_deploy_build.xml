@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.18 2007-05-16 08:26:30 cfaucher Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.19 2007-06-11 08:43:02 barais Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse_dir" location="C:/eclipse"/>
+	<property name="eclipse_dir" location="/local/eclipsebarais/eclipse/"/>
 	
 	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
@@ -20,10 +20,10 @@
 	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
 	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/>
   		
-  		<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.2.1.v200609210005.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.2.1.v200609210005.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.2.1.v200609210005.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf_2.2.0.v200609210005.jar"/>
+  		<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.2.1.v200702131851.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.2.2.v200702131851.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.2.2.v200702131851.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf_2.2.0.v200702131851.jar"/>
 
 	</path>
 

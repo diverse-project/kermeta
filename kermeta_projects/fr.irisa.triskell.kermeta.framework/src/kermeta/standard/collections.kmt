@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.32 2007-04-02 15:23:42 dtouzet Exp $
+ * $Id: collections.kmt,v 1.33 2007-06-11 08:43:02 barais Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -31,6 +31,15 @@ abstract class Collection<G>
 	operation asSet() : Set<G> is abstract
 	operation asOrderedSet() : OrderedSet<G> is abstract
 	operation asSequence() : Sequence<G> is abstract
+	
+	operation forAllCpl(f : < [G, G] -> Boolean> ) : Boolean is do
+   		result := self.forAll{x | self.forAll {y | f(x,y)}}
+	end 
+	
+	operation existsCpl(f : < [G, G] -> Boolean> ) : Boolean is do
+   		result := self.exists{x | self.exists {y | f(x,y)}}
+	end 
+	
 	
 	
 	/**
