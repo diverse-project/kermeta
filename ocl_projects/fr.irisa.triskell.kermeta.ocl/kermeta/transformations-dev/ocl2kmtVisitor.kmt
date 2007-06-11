@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.4 2007-06-11 12:19:47 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.4 2007-06-11 12:19:47 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.5 2007-06-11 12:25:27 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.5 2007-06-11 12:25:27 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -355,7 +355,7 @@ class FileWriter inherits StdIO
 				write(") :")
 				visitable.typeCS.accept(self)
 				
-				if (classifier!= void) then
+				/*if (classifier!= void) then
 					//classifier.eAllStructuralFeatures.each{ e |  visibleVariable.remove("result",e)}
 					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.remove(e.name.toString)}
 					visibleVariable.remove("self")
@@ -363,7 +363,7 @@ class FileWriter inherits StdIO
 					currops.eParameters.each{ e |  visibleVariable.remove(e.name.toString)
 					}
 				
-				end
+				end*/
 			end
 
 		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
