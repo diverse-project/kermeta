@@ -5,8 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class SintaksSampleExampleWizard
-	extends AbstractExampleWizard {
+public class SintaksSampleExampleWizard extends AbstractExampleWizard {
 	
 	protected Collection getProjectDescriptors() {
 		
