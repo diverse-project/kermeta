@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.2 2007-06-01 15:01:30 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.2 2007-06-01 15:01:30 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.3 2007-06-11 10:15:23 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.3 2007-06-11 10:15:23 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -14,7 +14,8 @@ package ocl2kmt;
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "OperatorPolicies.kmt"    
-require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+//require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 
 using kermeta::standard
 using kermeta::exceptions
@@ -283,15 +284,15 @@ class FileWriter inherits StdIO
 					ppbd.accept(self)
 				}
 				writeln("is")
-				writeln("do")
-				writeln("var e: Exception init NotImplementedException.new")
-				write("e.message := \"OCL pre/post/body: " )
-				visitable.operationCS.pathNameCS.accept(self)
-				write(".")
-				visitable.operationCS.simpleNameCS.accept(self)
-				writeln("\"")
-				writeln("raise e")
-				writeln("end")
+				writeln("abstract")
+				//writeln("var e: Exception init NotImplementedException.new")
+				//write("e.message := \"OCL pre/post/body: " )
+				//visitable.operationCS.pathNameCS.accept(self)
+				//write(".")
+				//visitable.operationCS.simpleNameCS.accept(self)
+				//writeln("\"")
+				//writeln("raise e")
+				//writeln("end")
 				writeln("}")
 			end
   
@@ -314,7 +315,7 @@ class FileWriter inherits StdIO
 				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
 				
 				if (classifier!= void) then
-					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e)}
+					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put("result",e)}
 					var tmp : ecore::EAttribute init ecore::EAttribute.new
 					tmp.eType:=classifier
 					tmp.name := "self"
@@ -339,10 +340,15 @@ class FileWriter inherits StdIO
 				write("operation ")
 				visitable.simpleNameCS.accept(self)
 				write("(")
+				var i : Integer init 0
 				visitable.parameters.each{ p |
 						p.accept(self)
+						i:= i +1
+						if (i <visitable.parameters.size) then
+							write(", ")
+						end 
 					}
-				write("):")
+				write(") :")
 				visitable.typeCS.accept(self)
 			end
 
