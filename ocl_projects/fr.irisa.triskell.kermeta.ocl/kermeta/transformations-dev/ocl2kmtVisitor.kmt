@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.3 2007-06-11 10:15:23 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.3 2007-06-11 10:15:23 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.4 2007-06-11 12:19:47 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.4 2007-06-11 12:19:47 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -312,10 +312,12 @@ class FileWriter inherits StdIO
 				
 				visibleVariable.clear
 				var classifier : ecore::EClass
+				var currops : ecore::EOperation
 				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
 				
 				if (classifier!= void) then
-					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put("result",e)}
+					//classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put("result",e)}
+					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e)}
 					var tmp : ecore::EAttribute init ecore::EAttribute.new
 					tmp.eType:=classifier
 					tmp.name := "self"
@@ -323,7 +325,7 @@ class FileWriter inherits StdIO
 					tmp.lowerBound:=0
 					tmp.upperBound:=1
 					visibleVariable.put(tmp.name.toString,tmp)
-					var currops : ecore::EOperation init classifier.eAllOperations.select{e| e.name == currentOperationname}.one
+					currops:= classifier.eAllOperations.select{e| e.name == currentOperationname}.one
 					currops.eParameters.each{ e |  visibleVariable.put(e.name.toString,e)
 					/*if (e.upperBound >1 or e.upperBound == -1 ) then
 		 				visibleVariableMultiplicities.put(e.name.toString,true)
@@ -333,8 +335,10 @@ class FileWriter inherits StdIO
 					
 					
 					}
+					visibleVariable.put("result",currops)
+					
 				else
-					writeln("no cache for allAttributes of  " + currentClassifiername)
+					self.getIerr.writeln("no cache for allAttributes of  " + currentClassifiername)
 				end
 				
 				write("operation ")
@@ -350,6 +354,16 @@ class FileWriter inherits StdIO
 					}
 				write(") :")
 				visitable.typeCS.accept(self)
+				
+				if (classifier!= void) then
+					//classifier.eAllStructuralFeatures.each{ e |  visibleVariable.remove("result",e)}
+					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.remove(e.name.toString)}
+					visibleVariable.remove("self")
+					visibleVariable.remove("result")
+					currops.eParameters.each{ e |  visibleVariable.remove(e.name.toString)
+					}
+				
+				end
 			end
 
 		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
@@ -1040,8 +1054,8 @@ class FileWriter inherits StdIO
         				addIterator("exists", sameName)
         				addIterator("forAll", sameName)
         				addIterator("isUnique", UniqueIP.new)
-        				addIterator("any", sameName)//SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", sameName)//SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
+        				addIterator("any", SimpleIteratorIP.new.withName("detect"))
+        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
@@ -1151,8 +1165,12 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			if name == void then
 				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
-				visitor.write(name)
+				visitor.write(name )
 			end
+			if oclIterator.variable2 != void then
+				visitor.write("Cpl" )
+			end
+			
 
 			visitor.write("{ ")
 			var variableName : String
@@ -1164,6 +1182,14 @@ class SimpleIteratorIP inherits IteratorPolicy {
 				visitor.write(variableName)
 				//TODO Check that mark
 			end
+			if (oclIterator.variable2 != void) then
+				visitor.write(", ")
+				visitor.iteratorVariable := true 
+				oclIterator.variable2.accept(visitor)
+				variableName:= oclIterator.variable2.name
+				//TODO Check that mark
+			end
+			
 			visitor.write(" | ")
 			//visitor.write(oclIterator.body.getMetaClass.toString)
  					 	
