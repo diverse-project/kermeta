@@ -1,17 +1,17 @@
-/* $Id: OperatorPolicies.kmt,v 1.6 2007-05-28 20:32:19 barais Exp $
+/* $Id: OperatorPolicies.kmt,v 1.7 2007-06-12 10:52:31 barais Exp $
  * Creation date: February 23, 2007
  * License:
  * Copyright:
  * Authors: Mark Skipper
  */
-
-
+ 
+ 
 package ocl2kmt;
 
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "ocl2kmtVisitor.kmt"
-   
+     
 using kermeta::standard
 using kermeta::exceptions
 using ocl::cst
@@ -57,6 +57,8 @@ class OperatorPolicy  {
    	  			result := ""
    	  		end
    	  end
+
+   	  
 
 }
 
@@ -186,8 +188,8 @@ class functionCollectionCall inherits FunctionCallOp{
 		    visitor.write(getPrefix)
 			oclOp.source.accept(visitor)
 			if (not visitor.currentClassifier.many) then
-				visitor.write("/*cannot call this operation in this context*/")
-			end
+				visitor.getIerr.write("/*cannot call this operation in this context : "+ visitor.currentClassifier.eType.name+"*/")
+			end 
 			
 			visitor.write(".")
 			if name != void then
@@ -213,10 +215,35 @@ class functionCollectionCall inherits FunctionCallOp{
 	  			visitor.write(")")
 	  		end
   			visitor.write(getSuffix)
+  			if (res != void and true == res) then
+  			
+  				visitor.previousIsMultiple := resMultiple
+  				visitor.currentClassifier.ordered := resOrdered
+  				if (resMultiple) then
+  					visitor.currentClassifier.upperBound:=-1
+  				else
+  					visitor.currentClassifier.lowerBound:=0
+  					visitor.currentClassifier.upperBound:=1
+  				end
+  			end 
+  			
+  			   	
 //  			visitor.previousIsMultiple := false
-		
-		
 	end
+				reference resMultiple : Boolean
+				reference resOrdered : Boolean
+				reference res : Boolean
+				
+
+				operation setResult(manageResult : Boolean, multiple : Boolean, ordered : Boolean) : OperatorPolicy is do
+					res := manageResult
+					resMultiple := multiple 
+					resOrdered := ordered
+					
+				result:=self
+	
+				end
+	
 
 }
 
@@ -224,8 +251,9 @@ class functionOrderedCollectionCall inherits FunctionCallOp{
 	method generate(oclOp: OperationCallExpCS, visitor: Ocl2kmtVisitor): Void is do
 		    visitor.write(getPrefix)
 			oclOp.source.accept(visitor)
-			if (not (visitor.currentClassifier.ordered and visitor.currentClassifier.many)) then
-				visitor.write("/*cannot call this operation in this context*/")
+			var currentType : ecore::ETypedElement init visitor.ecoreHelper.getETypedElementFromPath(visitor.ecoreHelper.getClassifierQualifiedName(visitor.currentClassifier.eType) , visitor.pathExpression.substring(0, visitor.pathExpression.size -1),".")
+			if (not (currentType.ordered and currentType.many)) then
+				visitor.getIerr.write("/*cannot call this operation in this context : "+ visitor.currentClassifier.name+"*/")
 			end
 			
 			visitor.write(".")
@@ -253,8 +281,35 @@ class functionOrderedCollectionCall inherits FunctionCallOp{
 	  		end
   			visitor.write(getSuffix)
   			visitor.previousIsMultiple := false		
+  			if (res != void and true == res) then
+  			
+  				visitor.previousIsMultiple := resMultiple
+  				visitor.currentClassifier.ordered := resOrdered
+  				if (resMultiple) then
+  					visitor.currentClassifier.upperBound:=-1
+  				else
+  					visitor.currentClassifier.lowerBound:=0
+  					visitor.currentClassifier.upperBound:=1
+  				end
+  			end 
+  			
+  			   	
+//  			visitor.previousIsMultiple := false
 	end
+				reference resMultiple : Boolean
+				reference resOrdered : Boolean
+				reference res : Boolean
+				
 
+				operation setResult(manageResult : Boolean, multiple : Boolean, ordered : Boolean) : OperatorPolicy is do
+					res := manageResult
+					resMultiple := multiple 
+					resOrdered := ordered
+					
+				result:=self
+	
+				end
+	
 }
 
 
@@ -292,6 +347,7 @@ class FunctionCallOp inherits OperatorPolicy {
   			visitor.write(getSuffix)
 //  			visitor.previousIsMultiple := false
 		 end
+
 }
 class EmptyCallOp inherits OperatorPolicy {
 
