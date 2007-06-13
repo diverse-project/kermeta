@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.12 2007-05-30 11:21:45 jsteel Exp $
+ * $Id: ClassItemProvider.java,v 1.13 2007-06-13 09:17:40 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -198,7 +198,7 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 		// class
 		// a '->' is added to show the "reference" semantic
 		String label = "";
-	       if (object instanceof Class && ((Class) object).getTypeDefinition().getName() != null) {
+	       if (object instanceof Class && ((Class) object).getTypeDefinition() != null ) {
 	           label = " -> " + ((Class) object).getTypeDefinition().getName();
 	       }
 	             String parent = "";
