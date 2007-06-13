@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.3 2007-02-23 09:38:03 dvojtise Exp $
+/* $Id: KermetaUtils.java,v 1.4 2007-06-13 09:30:47 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -274,8 +274,19 @@ public class KermetaUtils {
 		else if (type instanceof FunctionType) {
 			type_name = "<" + getLabelForType(((FunctionType) type).getLeft()) + "->" +getLabelForType(((FunctionType) type).getRight())+ ">";
 		}
-		else if (type instanceof ProductType) // TODO : map!
-			type_name = type.toString();
+		else if (type instanceof ProductType) {
+			type_name = "[";
+			boolean first_pt = true;
+			for(Object pt_type : ((ProductType) type).getType()) {
+				if(first_pt) {
+					first_pt = false;
+				} else {
+					type_name += ",";
+				}
+				type_name += getLabelForType((Type) pt_type);
+			}
+			type_name += "]";	
+		}
 		else if (type instanceof DataType)
 			type_name = ((DataType) type).getName();
 		else if (type instanceof VoidType)
