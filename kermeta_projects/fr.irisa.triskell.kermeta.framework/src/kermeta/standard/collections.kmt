@@ -9,7 +9,7 @@ require "primitive_types.kmt"
 using kermeta::exceptions
 
 /* *************************************************
- * $Id: collections.kmt,v 1.33 2007-06-11 08:43:02 barais Exp $
+ * $Id: collections.kmt,v 1.34 2007-06-14 12:34:12 dtouzet Exp $
  * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -26,7 +26,6 @@ using kermeta::exceptions
  */
 abstract class Collection<G> 
 {
-
 	operation asBag() : Bag<G> is abstract
 	operation asSet() : Set<G> is abstract
 	operation asOrderedSet() : OrderedSet<G> is abstract
@@ -225,7 +224,6 @@ abstract class Collection<G>
         	test := test and func(it.next)
         end
         result := test
-        
     end
      
     /**
@@ -331,17 +329,15 @@ abstract class Collection<G>
 		tmp ?= o
 		result := void
 		if (tmp != void) then
-		
-		self.each{ elem  | 
-		o := elem
-		tmp ?= o
-		if (tmp != void) then
-			res := tmp + res 
-			end
+			self.each{ elem  | 
+				o := elem
+				tmp ?= o
+				if (tmp != void) then
+					res := tmp + res 
+				end
 			}
-			end
-	result := res		
-			
+		end
+		result := res		
 	end
 	
 //	operation product(c2: Collection<T2>)) : Set( Tuple( first: T, second: T2) ) is do
@@ -367,6 +363,7 @@ class Set<G> inherits Collection<G>
 			super(element)
 		end
 	end
+
 	/**
 	 * remove the element
 	 * 
@@ -464,6 +461,7 @@ class Set<G> inherits Collection<G>
 		s.addAll(self)
 		result := s
 	end
+
 	/**
 	* 
 	*/
@@ -472,6 +470,7 @@ class Set<G> inherits Collection<G>
 		s.addAll(self)
 		result := s
 	end
+
 	/**
 	* 
 	*/
@@ -484,28 +483,26 @@ class Set<G> inherits Collection<G>
 	operation symmetricDifference(s : Set<G>) : Set<G> is do
 		var res : Set<G> init s.minus(self)
 		result := self.minus(s).addAll(res)
-		
-	
 	end
 	
+	/*
+	 *
+	 */
 	operation flatten() : Set<Object> is do
-		
 		var res: Set<Object> init Set<Object>.new
-		
 		if (G.isKindOf(Collection<Object>)) then
 			var col : Collection<Object>
 			var o : Object 
-			self.each{e| o:= e
-			col ?= o
-			res.addAll(col)}
+			self.each{e |
+				o := e
+				col ?= o
+				res.addAll(col)
+			}
 		end
 		result :=  res
-		
-		
 	end
 	
 	operation sortedBy(comparator : <[G, G] -> Integer>) : OrderedSet<G>  is do
-		 
 		result := quickSort(self.asOrderedSet, comparator) 
 	end
 	
@@ -514,38 +511,31 @@ class Set<G> inherits Collection<G>
 		 var pivotList : OrderedSet<G> init OrderedSet<G>.new
 		 var greater : OrderedSet<G> init OrderedSet<G>.new
 		   
-		 
-     if (q.size <= 1) then   
-     	result := q
-     else
-     	var pivot : G init q.one
-     	q.each{x| 
-     		if (comparator(x,pivot) == 1) then
-     	 		less.add(x)
-     	 	end
-     	 	if (comparator(x,pivot) == 0) then
-     	 		pivotList.add(x)
-     	 	end
-     	 	if (comparator(x,pivot) == -1) then
-     	 		greater.add(x)
-     	 	end
+	     if (q.size <= 1) then   
+   		  	result := q
+	     else
+    	 	var pivot : G init q.one
+     		q.each{x| 
+     			if (comparator(x,pivot) == 1) then
+     		 		less.add(x)
+     		 	end
+     	 		if (comparator(x,pivot) == 0) then
+     	 			pivotList.add(x)
+	     	 	end
+   		  	 	if (comparator(x,pivot) == -1) then
+     		 		greater.add(x)
+     	 		end
      	 	}
-     
-       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
-		
-	end	
+	       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
+		end	
 	end
 	
 	operation concatenate(less : OrderedSet<G>, pivot : OrderedSet<G>, greater : OrderedSet<G>): OrderedSet<G> is do
-	result := OrderedSet<G>.new
-	result.addAll(less)
-	result.addAll(pivot)
-	result.addAll(greater)
-	
+		result := OrderedSet<G>.new
+		result.addAll(less)
+		result.addAll(pivot)
+		result.addAll(greater)
 	end
-	
-	
-	
 }
 
 /**
@@ -555,7 +545,6 @@ class Set<G> inherits Collection<G>
  */
 class Bag<G> inherits Collection<G>
 {
-
 	method equals(element : Object) : Boolean is do
 		var isEqual : Boolean init false
 		if(not element.isVoid) then
@@ -643,7 +632,7 @@ class Bag<G> inherits Collection<G>
 		end
 	end
 	
-		/**
+	/**
 	* 
 	*/
 	method asSet() : Set<G> is do
@@ -660,6 +649,7 @@ class Bag<G> inherits Collection<G>
 		s.addAll(self)
 		result := s
 	end
+
 	/**
 	* 
 	*/
@@ -668,6 +658,7 @@ class Bag<G> inherits Collection<G>
 		s.addAll(self)
 		result := s
 	end
+
 	/**
 	* 
 	*/
@@ -677,13 +668,11 @@ class Bag<G> inherits Collection<G>
 		result := s
 	end
 	
-	
 	operation including(object :G) : Bag<G> is do
 		var s : Bag<G> init Bag<G>.new
 		s.addAll(self)
 		s.add(object)
 		result := s	
-		
 	end
 
 	operation excluding(object :G) : Bag<G> is do
@@ -691,28 +680,23 @@ class Bag<G> inherits Collection<G>
 		s.addAll(self)
 		s.remove(object)
 		result := s	
-		
 	end
 	
 	operation flatten() : Bag<Object> is do
-		
 		var res: Bag<Object> init Bag<Object>.new
-		
 		if (G.isKindOf(Collection<Object>)) then
 			var col : Collection<Object>
 			var o : Object 
-			self.each{e| o:= e
-			col ?= o
-			res.addAll(col)}
+			self.each{e |
+				o:= e
+				col ?= o
+				res.addAll(col)
+			}
 		end
-		result :=  res
-		
-		
+		result := res
 	end
 	
-	
 	operation sortedBy(comparator : <[G, G] -> Integer>) : Sequence<G>  is do
-		 
 		result := quickSort(self.asSequence, comparator) 
 	end
 	
@@ -720,40 +704,34 @@ class Bag<G> inherits Collection<G>
 		 var less : Sequence<G> init Sequence<G>.new
 		 var pivotList : Sequence<G> init Sequence<G>.new
 		 var greater : Sequence<G> init Sequence<G>.new
-		   
 		 
-     if (q.size <= 1) then   
-     	result := q
-     else
-     	var pivot : G init q.one
-     	q.each{x| 
-     		if (comparator(x,pivot) == 1) then
-     	 		less.add(x)
-     	 	end
-     	 	if (comparator(x,pivot) == 0) then
-     	 		pivotList.add(x)
-     	 	end
-     	 	if (comparator(x,pivot) == -1) then
-     	 		greater.add(x)
-     	 	end
-     	 	}
-     
-       result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
-		
-	end	
+	    if (q.size <= 1) then   
+   		 	result := q
+	    else
+			var pivot : G init q.one
+	     	q.each{x| 
+    	 		if (comparator(x,pivot) == 1) then
+     		 		less.add(x)
+     	 		end
+	     	 	if (comparator(x,pivot) == 0) then
+    	 	 		pivotList.add(x)
+     		 	end
+	     	 	if (comparator(x,pivot) == -1) then
+     	 			greater.add(x)
+    	 	 	end
+			}
+			result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))
+		end	
 	end
 	
 	operation concatenate(less : Sequence<G>, pivot : Sequence<G>, greater : Sequence<G>): Sequence<G> is do
-	result := Sequence<G>.new
-	result.addAll(less)
-	result.addAll(pivot)
-	result.addAll(greater)
-	
+		result := Sequence<G>.new
+		result.addAll(less)
+		result.addAll(pivot)
+		result.addAll(greater)
 	end
-	
-	
-	
 }
+
 
 /**
  * An OrderedCollection is the root abstract class for all ordered Collections.
@@ -889,6 +867,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 			}
 		end
 	end
+
 	operation append(subject : G ) : OrderedSet<G> is do
 		result := OrderedSet<G>.new
 		result.addAll(self)
@@ -899,7 +878,6 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 		result := OrderedSet<G>.new
 		result.add(subject)
 		result.addAll(self)
-		
 	end
 	
 	operation insertAt(index : Integer, subject : G ) : OrderedSet<G> is do
@@ -915,11 +893,9 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 		loop
 			result.add(self.at(i))
 		end
-
 	end
 
 	operation at(index : Integer) : G is do
-	
 		if(index >= 0 and index <= self.size) then
 			self.each{e |
 				var i : Integer init self.indexOf(e)
@@ -928,8 +904,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 				end				
 			}
 		end
-	end	
-	
+	end
 }
 
 /**
@@ -975,7 +950,6 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 	
 	
 	operation at(index : Integer) : G is do
-	
 		if(index >= 0 and index <= self.size) then
 			self.each{e |
 				var i : Integer init self.indexOf(e)
@@ -984,12 +958,9 @@ class Sequence<G> inherits Bag<G>, OrderedCollection<G>
 				end				
 			}
 		end
-	end	
-	
-	
-
-	
+	end
 }
+
 
 /**
  * Iterator to be used with Collection
