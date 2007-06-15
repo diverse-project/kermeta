@@ -1,0 +1,40 @@
+/* $Id: 005_several_superoperations.kmt,v 1.1 2007-06-15 11:30:49 dvojtise Exp $ */
+
+// Test of constraints on operations
+// This test must make specific errors to appear. 
+
+package root_package;
+using kermeta::standard
+
+
+class C1
+{
+	operation op1(a:Integer,b:String) is do
+	end
+
+	operation op2() is do
+	end
+
+}
+
+
+class C1bis 
+{
+	operation op2() is do
+	end
+}
+
+
+
+class C2bis inherits C1, C1bis
+{
+	/*
+	 * This method is defined in C1 and C1bis. User must tell which one of the two he
+	 * wants to "inherit"
+	 * (op2 from C1 is do)
+	 * the load  fails on that error ...
+	 */ 
+	method op2() is do
+	end
+	
+}
