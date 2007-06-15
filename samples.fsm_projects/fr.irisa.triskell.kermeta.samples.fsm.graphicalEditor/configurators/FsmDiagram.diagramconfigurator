@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_jhUFEBtTEdyh2_xjYziEqQ" name="Fsm Diagram" package="diagram" prefix="Fsm" forceOverwrite="true" copyrightText="$Id: FsmDiagram.diagramconfigurator,v 1.1 2007-06-15 15:20:25 cfaucher Exp $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.1.0" provider="IRISA/INRIA" samePluginAsEditor="true">
+  <palette xmi:id="_jhUFERtTEdyh2_xjYziEqQ" name="Palette">
+    <paletteCategories xmi:id="_jhUFEhtTEdyh2_xjYziEqQ" name="Objects">
+      <items xmi:id="_jhUFExtTEdyh2_xjYziEqQ" name="State" part="_jhUFFhtTEdyh2_xjYziEqQ"/>
+      <items xmi:id="_jhUFFBtTEdyh2_xjYziEqQ" name="Transition" part="_jhUFFxtTEdyh2_xjYziEqQ"/>
+    </paletteCategories>
+  </palette>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_jhUFFRtTEdyh2_xjYziEqQ" object="_jhUFGhtTEdyh2_xjYziEqQ" childElements="_jhUFFhtTEdyh2_xjYziEqQ" container="true" defaultWidth="0" defaultHeight="0" minimumWidth="200" minimumHeight="200" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_jhUFFhtTEdyh2_xjYziEqQ" object="_jhUFHBtTEdyh2_xjYziEqQ" type="State" defaultBackgroundColor="200,220,230" defaultWidth="60" defaultHeight="40" minimumWidth="0" minimumHeight="0" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_jhUFFxtTEdyh2_xjYziEqQ" object="_jhUFHRtTEdyh2_xjYziEqQ" targetDecoration="ARROW" defaultRouter="RectilinearRouter" directEditable="_jhUFGRtTEdyh2_xjYziEqQ">
+    <sourceTargetCouple xmi:id="_jhUFGBtTEdyh2_xjYziEqQ" containerType="SOURCE" autoRef="true" sourceNode="_jhUFFhtTEdyh2_xjYziEqQ" targetNode="_jhUFFhtTEdyh2_xjYziEqQ">
+      <containerObject href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.genmodel#//fsm/State"/>
+      <containerRef xsi:type="ecore:EReference" href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore#//State/outgoingTransition"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore#//State/outgoingTransition"/>
+      <refEdgeToSource xsi:type="ecore:EReference" href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore#//Transition/source"/>
+      <refTargetToEdge xsi:type="ecore:EReference" href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore#//State/incomingTransition"/>
+      <refEdgeToTarget xsi:type="ecore:EReference" href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore#//Transition/target"/>
+    </sourceTargetCouple>
+    <edgeObjects xmi:id="_jhUFGRtTEdyh2_xjYziEqQ" id="input" type="Middle">
+      <eStructuralFeature xsi:type="ecore:EAttribute" href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.ecore#//Transition/input"/>
+    </edgeObjects>
+  </parts>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_jhUFGhtTEdyh2_xjYziEqQ">
+    <genClass href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.genmodel#//fsm/FSM"/>
+    <diagrams xmi:id="_jhUFGxtTEdyh2_xjYziEqQ" diagram="_jhUFEBtTEdyh2_xjYziEqQ"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_jhUFHBtTEdyh2_xjYziEqQ">
+    <genClass href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.genmodel#//fsm/State"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_jhUFHRtTEdyh2_xjYziEqQ">
+    <genClass href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.genmodel#//fsm/Transition"/>
+  </objects>
+  <genModel href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.genmodel#/"/>
+  <templateRootObject href="../../fr.irisa.triskell.kermeta.samples.fsm.model/model/ecore/fsm.genmodel#//fsm/FSM"/>
+  <editorConfigurator href="FsmEditor.editorconfigurator#_vKuLcBtDEdyh2_xjYziEqQ"/>
+</diagramconfigurator:DiagramConfiguration>
