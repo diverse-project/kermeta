@@ -11,18 +11,18 @@
       <view
             name="Kermeta TouchNavigator View"
             icon="icons/touchgraph.gif"
-            category="fr.irisa.triskell.kermeta.viewcategory"
+            category="fr.irisa.triskell.kermeta.view"
             class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView"
             id="fr.irisa.triskell.kermeta.touchnavigator.views.KermetaTouchView">
       </view>
- <!--     <view
+      <view
             name="EMF Model TouchNavigator View"
             icon="icons/touchgraph.gif"
-            category="fr.irisa.triskell.kermeta.viewcategory"
+            category="fr.irisa.triskell.kermeta.view"
             class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchEMFModelView"
             id="fr.irisa.triskell.kermeta.touchnavigator.views.EMFModelTouchView">
       </view>
-      -->
+      
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -66,36 +66,36 @@
 		
    </extension>
    -->
-<!--   <extension
+   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="true"
             id="fr.irisa.triskell.kermeta.contribution13"
             nameFilter="*.*"
             objectClass="org.eclipse.core.resources.IFile">
-            -->
+            
          <!--<menu
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
 	         label="KerMeta"
 	         path="additions">
       		<separator name="kermetagroup1"/>
 		</menu>-->
-<!--        <action
+        <action
                enablesFor="1"
                label="Open with EMF touchgraph"
                icon="icons/kermeta_touchgraph.png"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
                class="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.OpenWithEMFTouchGraphAction"
                id="fr.irisa.triskell.kermeta.touchgraph.openemftouchgraph"/>
--->               
+               
       <!--  <filter
               name="iscompatible"
               value="true"/>
        -->
-<!--      </objectContribution>
+      </objectContribution>
    </extension>
-   -->
- <!--  <extension
+   
+   <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="true"
@@ -117,5 +117,5 @@
               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
        
       </objectContribution>
-   </extension>-->
+   </extension>
 </plugin>
