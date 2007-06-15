@@ -11,6 +11,7 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -30,14 +31,6 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 	
 	public void reconcile(IRegion partition) {	
 		typecheck();
-		/*t = null;
-		Runnable run = new Runnable() {
-			public void run() {
-				typecheck();
-			}
-		};
-		t = new Thread(run);
-		t.start();*/
 	}
 
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {}
@@ -46,8 +39,6 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 	}
 
 	public void updateValue(Object newValue) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private void typecheck() {
@@ -60,7 +51,6 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 					try {
 						job.join();
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -72,6 +62,11 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 						//KermetaUnitHelper.unloadKermetaUnit( editor.getMcunit() );
 						KermetaMarkersHelper.clearMarkers(editor.getFile());
 						KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( editor.getFile(), editor.getFileContent() );
+						
+						if ( ! kermetaUnit.messages.hasError() ) {
+							KermetaConstraintChecker checker = new KermetaConstraintChecker(kermetaUnit);
+							checker.checkUnit();
+						}
 						
 						if (monitor.isCanceled())
 							return Status.CANCEL_STATUS;
@@ -94,7 +89,6 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 					try {
 						job.join();
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -106,7 +100,6 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 						KermetaUnitHelper.abortTypechecking(editor.getFile());
 		
 						KermetaUnitHelper.unloadAllKermetaUnit();
-						//KermetaUnitHelper.unloadKermetaUnit( editor.getMcunit() );
 						
 						Unit unit = editor.getUnit();
 						KermetaUnitHost.getInstance().declareInterest(interest, unit);
