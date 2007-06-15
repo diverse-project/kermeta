@@ -1,4 +1,4 @@
-/* $Id: TGPanelHelper.java,v 1.4 2006-01-10 22:50:42 dvojtise Exp $
+/* $Id: TGPanelHelper.java,v 1.5 2007-06-15 16:22:34 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaTGPanel.java
  * License : EPL
@@ -25,6 +25,8 @@ import com.touchgraph.graphlayout.graphelements.ImmutableGraphEltSet;
 public class TGPanelHelper {
 
 	public TGPanel tgpanel;
+	
+	public boolean isLargeAdditionPlanned = false;
 	
 	
 	public TGPanelHelper(TGPanel tgPanel2) {
@@ -54,8 +56,13 @@ public class TGPanelHelper {
         else
             node = new ClassNode(id, label);
 
-        tgpanel.updateDrawPos(node); // The addNode() call should probably take a position, this just sets it at 0,0
-        tgpanel.addNode(node);
+        tgpanel.updateDrawPos(node); // The addNode() call should probably take a position, this just sets it at 0,0    	
+        if(!isLargeAdditionPlanned){
+        	tgpanel.addNode(node);
+        }
+        else{
+        	tgpanel.completeEltSet.addNode(node);
+        }
         return node;
     }
     
@@ -77,7 +84,12 @@ public class TGPanelHelper {
             node = new FeatureNode(id, label);
 
         tgpanel.updateDrawPos(node); // The addNode() call should probably take a position, this just sets it at 0,0
-        tgpanel.addNode(node);
+        if(!isLargeAdditionPlanned){
+        	tgpanel.addNode(node);
+        }
+        else{
+        	tgpanel.completeEltSet.addNode(node);
+        }
         return node;
     }
     
@@ -100,29 +112,54 @@ public class TGPanelHelper {
             node = new InvisibleNode(id, label);
 
         tgpanel.updateDrawPos(node); // The addNode() call should probably take a position, this just sets it at 0,0
-        tgpanel.addNode(node);
+        if(!isLargeAdditionPlanned){
+        	tgpanel.addNode(node);
+        }
+        else{
+        	tgpanel.completeEltSet.addNode(node);
+        }
         return node;
     }
     
     public Edge addInheritanceEdge( Node f, Node t, int tension ) {
     	Edge e = new InheritanceEdge(f,t,tension);
-    	tgpanel.addEdge(e);
+    	if(!isLargeAdditionPlanned){
+    		tgpanel.addEdge(e);
+        }
+        else{
+        	tgpanel.completeEltSet.addEdge(e);
+        }
     	return e;
     }
     public Edge addDiamondEdge( Node f, Node t, int tension ) {
     	Edge e = new DiamondEdge(f,t,tension);
-    	tgpanel.addEdge(e);
+    	if(!isLargeAdditionPlanned){
+    		tgpanel.addEdge(e);
+        }
+        else{
+        	tgpanel.completeEltSet.addEdge(e);
+        }
     	return e;
     }
     public Edge addSimpleEdge( Node f, Node t, int tension ) {
     	Edge e = new SimpleEdge(f,t,tension);
-    	tgpanel.addEdge(e);
+    	if(!isLargeAdditionPlanned){
+    		tgpanel.addEdge(e);
+        }
+        else{
+        	tgpanel.completeEltSet.addEdge(e);
+        }
     	return e;
     }
     
     public Edge addSplineEnabledClassEdge( Node f, Node t, int tension ) {
     	Edge e = new SplineEnabledEdge(f,t,tension);
-    	tgpanel.addEdge(e);
+    	if(!isLargeAdditionPlanned){
+    		tgpanel.addEdge(e);
+        }
+        else{
+        	tgpanel.completeEltSet.addEdge(e);
+        }
     	return e;
     }
     

@@ -1,4 +1,4 @@
-/* $Id: EMFModelGraphBuilder.java,v 1.2 2007-04-27 17:51:10 dvojtise Exp $
+/* $Id: EMFModelGraphBuilder.java,v 1.3 2007-06-15 16:22:34 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -32,6 +32,7 @@ import com.touchgraph.graphlayout.Edge;
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.graphelements.VisibleLocality;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -69,7 +70,7 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
 
 	public void buildGraph() throws TGException
 	{
-		if(this.modelGraphMapping.getObjects().size() != 0){
+		if(this.getModelGraphMapping().getObjects().size() != 0){
 			TouchNavigatorPlugin.internalLog.debug(" update of previous graph");
 			updateGraph();			
 		}
@@ -79,27 +80,56 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
 	
 	public void fullBuildGraph() throws TGException
 	{
-	
+		tgPanel.clearAll();
 		Node n1= null;
 		mustStop =  false;
 		EObject firstEObject = (EObject)resource.getContents().get(0);
-		TreeIterator it = resource.getAllContents();
+		boolean localeIsSet = false;
+		tgpHelper.isLargeAdditionPlanned = true; // enable support for large graphes
+		int nbEObj = 0;
+		TreeIterator it = resource.getAllContents();		
 		// foreach element in the resource
 		while(it.hasNext()){
 			// create a node 
 			// add it in the trace
 			Object o = it.next();
 			if(o instanceof EObject){
+				nbEObj++;
 				n1 = createEObjectNode((EObject)o);
-				if(o == firstEObject){tgPanel.setLocale(n1,2);}
+				if(o == firstEObject){tgPanel.setLocale(n1,2);
+					tgPanel.setSelect(n1);
+					localeIsSet = true;
+				}
+				if(!localeIsSet){ // ensure that the local is set from the beginning of the construction
+					tgPanel.setLocale(n1,1);
+					tgPanel.setSelect(n1);
+					localeIsSet = true;
+				}
 			}
 		}
-		Iterator<EObject> it2 = modelGraphMapping.getObjects().iterator();
+
+		TouchNavigatorPlugin.internalLog.debug(" all nodes for EObjects created ("+ nbEObj +"), starting edges");
+		tgpHelper.isLargeAdditionPlanned = true; // enable support for large graphes
+		if(nbEObj < 30){
+			// the graph is small enough to be build dynamically
+
+	        tgPanel.updateLocalityFromVisibility();
+	        tgpHelper.isLargeAdditionPlanned = false;
+		}
+		
+		TreeIterator it2 = resource.getAllContents();// modelGraphMapping.getObjects().iterator();
 		// foreach elements in the resource
 		while(it2.hasNext()){
 			// create the links
-			EObject o = it2.next();
-			createEObjectLinks(o);
+			Object o = it2.next();
+			if(o instanceof EObject){
+				createEObjectLinks((EObject)o);
+			}
+
+			tgPanel.stopDamper();
+			//((VisibleLocality)tgPanel.getGES()).removeNode(n1);
+			//tgPanel.updateLocalityFromVisibility();
+			tgPanel.fastFinishAnimation();
 		}
 		
 		/*Node n1= tgPanel.addNode();
@@ -119,6 +149,8 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
         	tgPanel.getSelect();
         	tgPanel.setSelect(n1);
         }
+        tgPanel.updateLocalityFromVisibility();
+		
 		
 	}
 	
@@ -191,7 +223,7 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
 			// look for an existing one
 			n1 = modelGraphMapping.getObjectNode(eobj);
 			if(n1 == null) {
-				n1 = tgpHelper.addClassNode();			
+				n1 = tgpHelper.addClassNode();
 				modelGraphMapping.addObjectNode(eobj, n1);
 			}
 			// search for an eventual attrbute "name"
@@ -227,7 +259,9 @@ public class EMFModelGraphBuilder extends KermetaOptimizedVisitor{
 		Node n1;
 		n1 = modelGraphMapping.getObjectNode(eobj);
 		if(n1 == null) {
-			n1 = createEObjectNode(eobj);
+			// concurrent modification : ignore this node !
+			return;
+			//n1 = createEObjectNode(eobj);
 		}
 		Iterator it = eobj.eClass().getEAllReferences().iterator();
 		while(it.hasNext()){

@@ -1,4 +1,4 @@
-/* $Id: OpenWithEMFTouchGraphAction.java,v 1.2 2007-01-24 10:14:54 dvojtise Exp $
+/* $Id: OpenWithEMFTouchGraphAction.java,v 1.3 2007-06-15 16:22:34 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Ecore2kmtAction.java
  * License    : EPL
@@ -64,10 +64,11 @@ public class OpenWithEMFTouchGraphAction implements IObjectActionDelegate, IActi
 					fileLocation);
 		}
 		else{
-			MessageDialog.openInformation(
+			/*MessageDialog.openInformation(
 					shell,
 					"Touchnavigator Plug-in",
 					"Opening "+fileLocation);
+					*/
 			TouchEMFModelView.currentView.loadFile(fileLocation);
 		}
 	}
