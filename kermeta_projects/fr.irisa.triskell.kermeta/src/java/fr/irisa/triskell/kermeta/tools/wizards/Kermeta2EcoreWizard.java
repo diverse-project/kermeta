@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.5 2007-02-08 15:32:42 ftanguy Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.6 2007-06-15 14:24:44 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -36,7 +36,10 @@ import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
  */
 public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	
-	/** Default dir. where ecore files will be generated */
+	/** 
+	 * Default dir. where ecore files will be generated
+	 * FIXME never used
+	 */
 	public static final String DEFAULT_GEN_DIR = "build/ecore"; // "platform:/resource/project_name/" + DEFAULT_GEN_DIR
 	
 	
@@ -91,7 +94,7 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
 	    
-		//		 create Ecore structure
+		// create Ecore structure
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
 	    URI u = URI.createURI(ifile.getFullPath().toString());
