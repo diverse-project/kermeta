@@ -31,5 +31,10 @@
          point="fr.irisa.triskell.kermeta.kpm.javaAction">
       <Action class="fr.irisa.triskell.kermeta.kpm.actions.transformation.KMT2KM"/>
    </extension>
+   <extension
+         id="constraintCheck"
+         point="fr.irisa.triskell.kermeta.kpm.javaAction">
+      <Action class="fr.irisa.triskell.kermeta.kpm.actions.typecheck.ConstraintCheck"/>
+   </extension>
 
 </plugin>

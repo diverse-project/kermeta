@@ -1,4 +1,4 @@
-/*$Id: KermetaProject.java,v 1.7 2007-05-28 12:16:19 ftanguy Exp $
+/*$Id: KermetaProject.java,v 1.8 2007-06-15 14:45:34 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -15,8 +15,11 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.Status;
@@ -26,6 +29,7 @@ import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
+import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
 import fr.irisa.triskell.kermeta.kpm.properties.KPMConstants;
 
@@ -200,11 +204,32 @@ public class KermetaProject {
 	 * Create the file if it does not exist.
 	 */
 	public void save() {
-		try {
-			XMIHelper.save( getKpmFilePathString(), kpm);
-		} catch (IOException exception) {
-			exception.printStackTrace();
-		} 
+		Runnable runnable = new Runnable() {
+
+			public void run() {
+
+			    IWorkspaceRunnable runnable= new IWorkspaceRunnable() {
+			    	public void run(IProgressMonitor monitor) throws CoreException {
+			    		try {
+			    			XMIHelper.save( getKpmFilePathString(), kpm);
+			    			getKpmIFile().refreshLocal(0, monitor);
+			    		} catch (IOException exception) {
+			    			exception.printStackTrace();
+			    		} 
+			    	}
+			    };
+			    try {
+					ResourcesPlugin.getWorkspace().run(runnable, null);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+				
+		};
+
+		Thread t = new Thread(runnable);
+		t.start();
+			
 	}
 	
 	public void reinitialize() throws CoreException {

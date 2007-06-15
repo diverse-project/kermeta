@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPMImpl.java,v 1.10 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: KPMImpl.java,v 1.11 2007-06-15 14:45:34 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -325,6 +325,26 @@ public class KPMImpl extends EObjectImpl implements KPM {
 				return currentRule;
 		}
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void removeUnit(String name) {
+		Unit unitToRemove = null;
+		Iterator <Unit> iterator = getUnits().iterator();
+		while ( iterator.hasNext() && (unitToRemove == null) ) {
+			
+			Unit unit = iterator.next();
+			if ( unit.getValue().equals(name) )
+				unitToRemove = unit;
+				
+		}
+		
+		if ( unitToRemove != null )
+			getUnits().remove( unitToRemove );
 	}
 
 	/**

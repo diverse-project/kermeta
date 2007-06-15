@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KPM.java,v 1.6 2007-04-24 12:39:38 ftanguy Exp $
+ * $Id: KPM.java,v 1.7 2007-06-15 14:45:34 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm;
 
@@ -216,6 +216,14 @@ public interface KPM extends EObject {
 	 * @generated
 	 */
 	Rule findRule(String name);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void removeUnit(String name);
 
 	/**
 	 * <!-- begin-user-doc -->

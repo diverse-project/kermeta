@@ -1,4 +1,4 @@
-/*$Id: WorkspaceChangeListener.java,v 1.2 2007-04-13 14:44:40 ftanguy Exp $
+/*$Id: WorkspaceChangeListener.java,v 1.3 2007-06-15 14:45:34 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -14,29 +14,31 @@ import java.util.ArrayList;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 
+import fr.irisa.triskell.kermeta.extension.Interest;
+import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 
 public class WorkspaceChangeListener implements IResourceChangeListener {
 
 	public void resourceChanged(IResourceChangeEvent event) {
 
-		ArrayList<KermetaProject> projectsToOpen = new ArrayList<KermetaProject> ();
+		ArrayList<KermetaProject> projectsToOpen = new ArrayList<KermetaProject> ();	
 		
 		WorkspaceDeltaVisitor visitor = new WorkspaceDeltaVisitor(projectsToOpen);
 		try {
 			if ( event.getDelta() != null )
 				event.getDelta().accept(visitor);
-			if ( projectsToOpen.size() != 0 ) {
-				for ( KermetaProject project : projectsToOpen )
-					project.open();
-					//project.getProjectUnit().receiveAsynchroneEvent("open", null);
-			}
+
+			for ( KermetaProject project : projectsToOpen )
+				project.open();
+			
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-
 }

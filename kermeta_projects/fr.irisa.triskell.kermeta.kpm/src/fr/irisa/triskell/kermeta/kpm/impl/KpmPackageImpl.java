@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KpmPackageImpl.java,v 1.12 2007-05-28 12:16:19 ftanguy Exp $
+ * $Id: KpmPackageImpl.java,v 1.13 2007-06-15 14:45:34 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -1106,6 +1106,9 @@ public class KpmPackageImpl extends EPackageImpl implements KpmPackage {
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
 
 		op = addEOperation(kpmEClass, this.getRule(), "findRule", 0, 1);
+		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
+
+		op = addEOperation(kpmEClass, null, "removeUnit");
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1);
 
 		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
