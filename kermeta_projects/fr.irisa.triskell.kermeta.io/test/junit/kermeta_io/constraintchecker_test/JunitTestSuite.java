@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.7 2007-03-02 14:20:43 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.8 2007-06-15 12:01:30 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -48,6 +48,12 @@ public class JunitTestSuite extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+
+
+
+
+
+
 
 
 
@@ -129,6 +135,42 @@ public void testinvalid_004_cyclicCompositions_05() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_05.kmt" );
 }
 
+public void testinvalid_005_superoperations_parammismatch1_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch1_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch2_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch2_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch3_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch3_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch4_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch4_inv.kmt" );
+}
+
+public void testinvalid_005_superoperations_parammismatch5_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","005_superoperations_parammismatch5_inv.kmt" );
+}
+
+public void testinvalid_006_inheritedproperty1_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty1_inv.kmt" );
+}
+
+public void testinvalid_006_inheritedproperty2_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty2_inv.kmt" );
+}
+
+public void testinvalid_006_inheritedproperty3_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty3_inv.kmt" );
+}
+
+public void testinvalid_006_inheritedproperty4_inv() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","006_inheritedproperty4_inv.kmt" );
+}
+
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 
@@ -182,7 +224,7 @@ testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_0
 			// loader test must not be done in this test suite
 		}
 		
-		
+		System.out.println("load Ok for " +file);
 		if(!inheritanceCycleDetected) {
 			builder.typeCheck(null);
 			builder.constraintCheck(null);
@@ -191,6 +233,11 @@ testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_0
 			
 			if (builder.messages.getAllErrors().size() == 0) {
 				assertTrue("Looking for a constraint error but none found", false);
+			}
+			else {
+				System.out.println("succesfully found error in " +file );
+				System.out.println(builder.messages.getAllMessagesAsString() );
+				
 			}
 		}
 	}

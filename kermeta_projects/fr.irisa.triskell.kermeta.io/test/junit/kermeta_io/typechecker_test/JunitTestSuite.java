@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.25 2007-03-02 14:20:43 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.26 2007-06-15 12:01:30 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -126,6 +126,14 @@ public void testvalid_026_weaving_in_kermeta_mixed_base_aspect() throws Exceptio
 testvalidFile("test/typechecher_tests/valid","026_weaving_in_kermeta_mixed_base_aspect.kmt" );
 }
 
+public void testvalid_027_weaving_in_kermeta_aspect1() throws Exception {
+testvalidFile("test/typechecher_tests/valid","027_weaving_in_kermeta_aspect1.kmt" );
+}
+
+public void testvalid_027_weaving_in_kermeta_base() throws Exception {
+testvalidFile("test/typechecher_tests/valid","027_weaving_in_kermeta_base.kmt" );
+}
+
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
 }
@@ -208,6 +216,10 @@ testvalidFile("test/typechecher_tests/valid","test_clone.kmt" );
 
 public void testvalid_VirtualTypeInheritance() throws Exception {
 testvalidFile("test/typechecher_tests/valid","VirtualTypeInheritance.kmt" );
+}
+
+public void testinvalid_005_several_superoperations() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","005_several_superoperations.kmt" );
 }
 
 public void testinvalid_013_kermetaSignature() throws Exception {
