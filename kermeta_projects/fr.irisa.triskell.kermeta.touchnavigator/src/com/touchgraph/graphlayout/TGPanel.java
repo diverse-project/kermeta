@@ -71,7 +71,7 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.6 2006-01-27 19:41:22 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.7 2007-06-18 09:21:15 dvojtise Exp $
   */
 public class TGPanel extends JPanel {
 
@@ -83,7 +83,7 @@ public class TGPanel extends JPanel {
 
   // ....
 
-    private GraphEltSet completeEltSet;
+    public GraphEltSet completeEltSet;
     private VisibleLocality visibleLocality;
     private LocalityUtils localityUtils;
     public TGLayout tgLayout;
