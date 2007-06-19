@@ -1,0 +1,55 @@
+@mainClass "Object::TestHasSubtypeLoadingModel"
+@mainOperation "main"
+
+package Object;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::reflection
+using kermeta::kunit
+
+
+class TestHasSubtypeLoadingModel inherits kermeta::kunit::TestCase {
+
+	operation main() : Void is do
+		/*var tr : TestRunner init TestRunner.new
+		tr.run(TestHasSubtypeLoadingModel)
+		tr.printTestResult*/
+		testHasSubtype1
+	end
+	
+	operation testHasSubtype1() : Boolean is do
+		var p : Package init loadModel("input_test_models/loadedFile4hasSubType.km")
+		var classes1 : Sequence<TypeDefinition> 
+		classes1 := p.ownedTypeDefinition.select{c |
+			ClassDefinition.isInstance(c)
+		}
+		// expects that the class sequence respects the order of the definitions
+		// in the .km file
+		var class2 : ClassDefinition
+		class2 ?= classes1.elementAt(0)
+		var ops : Sequence<Property> init class2.ownedAttribute.asSequence
+ 		var typeClass1 : Type init ops.elementAt(0).type
+ 		var typeTest2 : Type init ops.elementAt(1).type
+ 		var typeTest3 : Type init ops.elementAt(2).type
+		
+		// inheritance hierarchy: Test3 -> Test2 -> Class1
+		// currently throws an "error in visitor"
+		assert(typeTest2.hasSubType(typeClass1))
+		assert(typeTest3.hasSubType(typeTest2))
+		assert(typeTest3.hasSubType(typeClass1))
+	end
+
+	operation loadModel(path : String) : Package is do
+    	var resource : kermeta::persistence::Resource             
+		var repository : kermeta::persistence::EMFRepository  
+		init kermeta::persistence::EMFRepository.new
+        resource := repository.getResource(path)
+        resource.load()
+        // models should only contain one package
+		result ?= resource.instances.detect{p | Package.isInstance(p)}
+   	end
+}
+
