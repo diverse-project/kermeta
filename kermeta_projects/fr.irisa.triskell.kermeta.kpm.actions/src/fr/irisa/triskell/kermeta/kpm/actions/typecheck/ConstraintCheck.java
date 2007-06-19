@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.1 2007-06-15 14:45:37 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.2 2007-06-19 15:01:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -46,6 +46,16 @@ public class ConstraintCheck implements IAction {
 			 * 
 			 */
 			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);
+			
+			/*
+			 * 
+			 * If the Kermeta Unit is null, it means that the file must have already processed before.
+			 * Therefore we quit.
+			 * 
+			 * 
+			 */
+			if ( kermetaUnit == null )
+				return;
 			
 			/*
 			 * 
