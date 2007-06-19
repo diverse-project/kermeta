@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.39 2007-05-30 11:34:42 jsteel Exp $
+/* $Id: structure.kmt,v 1.40 2007-06-19 08:03:30 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -180,8 +180,8 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
 	end 
 	*/
-	method isSubType(object : kermeta::reflection::Type) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isSubType(self, object)
+	method hasSubType(object : kermeta::reflection::Type) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.hasSubType(self, object)
 	end
 	
 	method equals(other : kermeta::reflection::Object) : Boolean from Object is do

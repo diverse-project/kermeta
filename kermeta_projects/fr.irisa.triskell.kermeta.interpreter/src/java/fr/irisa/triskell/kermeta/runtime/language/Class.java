@@ -40,7 +40,7 @@ public class Class {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 	
-	public static RuntimeObject isSubType(RuntimeObject self, RuntimeObject object) {
+	public static RuntimeObject hasSubType(RuntimeObject self, RuntimeObject object) {
 		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
 		Type pro = (Type)object.getData().get("kcoreObject");
 		

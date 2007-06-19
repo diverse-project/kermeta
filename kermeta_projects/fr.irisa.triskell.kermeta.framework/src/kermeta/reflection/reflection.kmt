@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.37 2007-05-30 11:34:42 jsteel Exp $
+/* $Id: reflection.kmt,v 1.38 2007-06-19 08:03:30 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -384,7 +384,7 @@ abstract class Type inherits Object
 {
 	reference typeContainer : TypeContainer[0..1]#containedType
 	operation isInstance(element : Object) : Boolean is abstract
-	operation isSubType(element : Type) : Boolean is abstract
+	operation hasSubType(element : Type) : Boolean is abstract
 }
 abstract class TypeVariableBinding inherits TypeContainer, Object
 {
