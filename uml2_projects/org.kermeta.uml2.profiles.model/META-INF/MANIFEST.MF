@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UML2 Profiles
+Bundle-SymbolicName: org.kermeta.uml2.profiles.model;singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Localization: plugin
+Bundle-Vendor: INRIA
