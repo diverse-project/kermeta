@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.11 2007-04-13 12:43:58 dvojtise Exp $
+/* $Id: Resource.java,v 1.12 2007-06-20 13:03:22 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
-import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 
 // Get the namespace
@@ -73,18 +72,16 @@ public class Resource {
     		RuntimeObject self,
     		RuntimeObject uri,
     		RuntimeObject mmUri, 
-    		RuntimeObject resourceType, RuntimeObject emptyMap)
+    		RuntimeObject resourceType,
+    		RuntimeObject emptyMap)
     {
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
         	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyMap);
-        // 
-        runtime_unit.load();
-        // after a load, even if mmUri was not set, the load was able to infer it
-        if(runtime_unit instanceof EMFRuntimeUnit){
-        	self.getProperties().put("metaModelURI",String.create(((EMFRuntimeUnit)runtime_unit).metamodel_uri,
-        			self.getFactory()));
-        }
+
+        //
+        runtime_unit.load(self);
+
         return runtime_unit.getContentMap();
     }
     

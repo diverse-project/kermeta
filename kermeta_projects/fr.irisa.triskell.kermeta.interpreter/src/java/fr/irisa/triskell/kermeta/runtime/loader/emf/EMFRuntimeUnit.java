@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.39 2007-05-28 09:43:31 ftanguy Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.40 2007-06-20 13:03:21 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -190,7 +191,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      * Load this RuntimeUnit
      * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit#load()
      */
-    public void load() 
+    //public void load()
+    public void load(RuntimeObject resRO)
     {	
     	String emf_msg = "";
     	EMFRuntimeUnit unit = this;
@@ -230,15 +232,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     				// this mean that the metamodel is a registered package
     				// if we want to save this loaded resource (or save another resource relative to this one) 
     				// then we need to infer the metamodel nsuri
-    				//resource.XML_SCHEMA_URI;
-    				// get one element in the resource, the first is good enough
-    				EObject eo = (EObject)resource.getContents().get(0);
-    				if(eo != null){
-    					//find root package of the metamodel
-    					EPackage rootpack = (EPackage)eo.eClass().eContainer();
-    					while(rootpack.eContainer() != null) rootpack = (EPackage)rootpack.eContainer();
-    					metamodel_uri = rootpack.getNsURI();
-    				}
+    				metamodel_uri = EcoreHelper.getMetaModelUriFromResource(resource);
     			}
     		}
     		else
@@ -247,7 +241,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = new EMF2Runtime(unit, resource);
-	    	emf2Runtime.loadunit();
+	    	//emf2Runtime.loadunit();
+	    	emf2Runtime.loadunit(resRO);
 		}
 		catch (IOException e){
 			emf_msg = "I/O error loading EMF model " + unit.getUriAsString() + ";" + (e.getMessage()!=null?(" :\n " + e.getMessage()):"");
@@ -453,7 +448,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * @param uri
 	 * @return
 	 */
-   private Resource createEMFResource(RuntimeObject roResource, URI uri) {
+   //private Resource createEMFResource(RuntimeObject roResource, URI uri) {
+   public Resource createEMFResource(RuntimeObject roResource, URI uri) {
 	   ResourceSet resource_set = getOrCreateRepositoryResourceSetForResource(roResource);
 		
 		Resource res = resource_set.createResource(uri); 
@@ -758,4 +754,3 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	}
 	   
 }
-

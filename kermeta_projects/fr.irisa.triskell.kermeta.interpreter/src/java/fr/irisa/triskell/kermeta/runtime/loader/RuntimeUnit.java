@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.7 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: RuntimeUnit.java,v 1.8 2007-06-20 13:03:22 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : EPL
@@ -35,7 +35,7 @@ public abstract class RuntimeUnit {
     /** This is called in the constructor of the concrete RuntimeUnit
      *  It construct the RuntimeObject instances.
      */
-    public abstract void load();
+    public abstract void load(RuntimeObject resRO);
     
     public abstract void save(String file_path); // as XMI
     

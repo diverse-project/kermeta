@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.28 2007-04-13 12:40:10 dvojtise Exp $
+ * $Id: resource.kmt,v 1.29 2007-06-20 13:03:26 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -273,6 +273,7 @@ abstract class Repository
 	 * and load a new one.  
 	 */
 	operation getResource(uri : String) : Resource is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
 		from var it : Iterator<Resource> init resources.iterator
 		until it.isOff
 		loop
@@ -305,14 +306,7 @@ class EMFRepository inherits Repository
 	 * otherwise, you can only call the save method
 	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
-		var new_resource : EMFResource init EMFResource.new
-//		var instances    : kermeta::standard::Set<Object> init kermeta::standard::Set<Object>.new
-//		new_resource.instances := instances
-		new_resource.uri := uri
-		new_resource.metaModelURI := mm_uri
-		new_resource.repository := self
-		new_resource.initializeContentMap
-		result := new_resource
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
 	end
 	// Override so that specialized types are fixed ...hum cast is not excellent
 	/**

@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.25 2007-05-15 09:13:10 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.26 2007-06-20 13:03:21 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -293,7 +293,8 @@ public class RuntimeObject {
 	 *     RuntimeObject. Only provided for runtime object that represents primitive types!
 	 *   - <b>CollectionArrayList</b> : if the RuntimeObject represents a Collection (Set, OrderedSet or any inheriting
 	 *   class of Collection in kermeta side), then this entry's value is a java Collection of RuntimeObjects.
-	 *   (Collection&lt;RuntimeObject&gt;)   
+	 *   (Collection&lt;RuntimeObject&gt;)
+	 *   - <b>Hashtable</b> : used to store a java Hashtable in a RuntimeObject representing a Kermeta hashtable
 	 *   - <b>r2e.emfResource</b> : used to store an EMF Resource in a RuntimeObject representing a Kermeta EMFResource
 	 *   Typically used while loading a model
 	 *   - <b>r2e.emfResourceset</b> : used to store EMF ResourceSet in the kermeta RuntimeObject representing an EMFRepository

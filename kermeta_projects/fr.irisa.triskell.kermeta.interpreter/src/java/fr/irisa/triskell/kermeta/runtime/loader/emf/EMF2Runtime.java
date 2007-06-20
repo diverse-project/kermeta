@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.58 2007-05-28 09:43:31 ftanguy Exp $
+/* $Id: EMF2Runtime.java,v 1.59 2007-06-20 13:03:21 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -26,11 +27,9 @@ import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.BasicFeatureMapEntry;
-import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.FeatureMap;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -142,14 +141,89 @@ public class EMF2Runtime {
 	 * Hashtable, that is : { "emfObject" : instance_of_corresponding_EObject }.
 	 * - fills in the runtime_objects_map hashtable
 	 */
-	protected void createEmptyRuntimeObjects()
-	{		
+	//protected void createEmptyRuntimeObjects()
+	protected void createEmptyRuntimeObjects(RuntimeObject mainResRO)
+	{
+		RuntimeObject repRO = mainResRO.getProperties().get("repository");
+		
 		// Find all the resources on which our resource depend,
 		// and for each resource, create the ROs for its hosted EObjects.
 		// (We know that the list returned findDependentResources contains only Resources:))
-		for (Object res : unit.findDependentResources(resource))
+		for (Object resObj : unit.findDependentResources(resource))
 		{
-			TreeIterator treeIt = ((Resource)res).getAllContents();
+			RuntimeObject crtResRO = null;
+			Resource res = (Resource) resObj;
+			
+			// First step: create and/or initialize the RO for the current resources
+			if(! res.getURI().toString().equals(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(mainResRO.getProperties().get("uri")))) {
+				// Create and initialize RO for current Resource
+				crtResRO = mainResRO.getFactory().createRuntimeObjectFromResource(
+								res,
+								repRO,
+								fr.irisa.triskell.kermeta.runtime.basetypes.String.create("", repRO.getFactory())
+							);
+				
+				// Link the repository RO to the newly allocated resource RO 
+				RuntimeObject resListRO = repRO.getProperties().get("resources");
+				ArrayList<RuntimeObject> l = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(resListRO);
+		    	l.add(crtResRO);
+			}
+			else {
+				crtResRO = mainResRO;
+			}
+
+			
+			// 2- Peut-être en deux temps :
+			//   - d'abord le contenu direct des resources, pour init du contenu de chaque resource
+			//   - ensuite, eAllContents sur chacun de ces éléments directement contenus par la ressource
+			// Second step:
+			EList contents = res.getContents();
+			Iterator<Object> rootsIt = contents.iterator();
+			while(rootsIt.hasNext()) {
+				Object rootObj = rootsIt.next();
+				if(rootObj instanceof EObject) {
+					// Create RO for current EObject
+					EObject rootEObj = (EObject) rootObj;
+					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(rootEObj);
+					
+					this.runtime_objects_map.put(rootEObj, rootRO);
+
+					// Add allocated RO to the content of current RO resource
+					RuntimeObject contentMapRO = crtResRO.getProperties().get("contentMap");
+					Hashtable<RuntimeObject, RuntimeObject> ht = fr.irisa.triskell.kermeta.runtime.basetypes.Map.getHashtable(contentMapRO);
+					RuntimeObject rootContentsRO = ht.get(fr.irisa.triskell.kermeta.runtime.basetypes.String.create("rootContents", repRO.getFactory()));
+					ArrayList<RuntimeObject> rootContentsList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(rootContentsRO); 
+					RuntimeObject contentsRO = ht.get(fr.irisa.triskell.kermeta.runtime.basetypes.String.create("contents", repRO.getFactory()));
+					ArrayList<RuntimeObject> contentsList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(contentsRO);
+					
+					rootContentsList.add(rootRO);
+					contentsList.add(rootRO);
+					
+					// Create RO for elements that are not directly contained by the resource
+					TreeIterator treeIt = rootEObj.eAllContents();
+					while(treeIt.hasNext()) {
+						Object obj = treeIt.next();
+						if(obj instanceof EObject) {
+							EObject eObj = (EObject) obj;
+							RuntimeObject ro = this.createEmptyRuntimeObjectForEObject(eObj);
+							this.runtime_objects_map.put(eObj, ro);
+							
+							contentsList.add(ro);
+						}
+						else {
+							unit.throwKermetaRaisedExceptionOnLoad(
+							"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
+						}
+					}
+				}
+				else {
+					unit.throwKermetaRaisedExceptionOnLoad(
+					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ rootObj, null);
+				}
+			}
+			
+			/*
+			TreeIterator treeIt = res.getAllContents();
 			while(treeIt.hasNext())
 			{
 				Object obj = treeIt.next();
@@ -165,6 +239,7 @@ public class EMF2Runtime {
 					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
 				}
 			}
+			*/
 		}
 	}
 	
@@ -181,11 +256,13 @@ public class EMF2Runtime {
 	 * 
 	 * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit
 	 */
-	public void loadunit()
+	//public void loadunit()
+	public void loadunit(RuntimeObject mainResRO)
 	{
 		try {
 			// Pass 1 : pre-create the runtime objects
-			createEmptyRuntimeObjects();
+			//createEmptyRuntimeObjects();
+			createEmptyRuntimeObjects(mainResRO);
 			
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
