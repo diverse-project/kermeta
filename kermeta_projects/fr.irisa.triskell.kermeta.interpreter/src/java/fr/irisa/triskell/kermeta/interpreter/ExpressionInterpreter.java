@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.58 2007-06-06 16:43:44 cfaucher Exp $
+/* $Id: ExpressionInterpreter.java,v 1.59 2007-06-20 10:00:05 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -276,15 +276,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)rhs_value.getMetaclass().getData().get("kcoreObject");
 			SimpleType providedtype = new SimpleType(p);
 			
-			if (r instanceof Enumeration) {
-			    Enumeration enumeration = (Enumeration)r;
-			    if (enumeration.getOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
-			        // It is OK
-			    }
-			    else {
-			        rhs_value = memory.voidINSTANCE;
-			    }
-			}
+			
 			/******************************/
 			/* BEGINNING OF HORRIBLE THING */
 			/******************************/
@@ -309,16 +301,26 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 				// **** THIS IS NOT TYPE SAFE ****
 				// IT SHOULD BE USED WITH CAUTION
 				// AND IT SHOULD BE REMOVED AS SOON AS 
-				// BUG N�112 IS FIXED
+				// BUG #112 IS FIXED
 			}
 			
 			/******************************/
 			/*    END OF HORRIBLE THING   */
 			/******************************/
+			else if (r instanceof Enumeration) {
+			    Enumeration enumeration = (Enumeration)r;
+			    if (enumeration.getOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
+			        // It is OK, let's continue with normal assignment
+			    }
+			    else {
+			        rhs_value = memory.voidINSTANCE;
+			    }
+			}
 			else if (!providedtype.isSubTypeOf(expectedType)) {
 				rhs_value = memory.voidINSTANCE;
 				
 			}
+			
 		}
 		
 		if (node.getTarget() instanceof CallResult)
