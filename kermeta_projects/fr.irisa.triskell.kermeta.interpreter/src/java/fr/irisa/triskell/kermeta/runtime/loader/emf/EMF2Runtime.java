@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.59 2007-06-20 13:03:21 dtouzet Exp $
+/* $Id: EMF2Runtime.java,v 1.60 2007-06-22 09:58:45 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -23,6 +23,8 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -32,6 +34,7 @@ import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -368,7 +371,7 @@ public class EMF2Runtime {
     	}    	
     	else // should never happen
     	{
-    		internalLog.warn("The type of <"+fvalue+"> has not been handled yet. Replaced by Void.");
+    		internalLog.warn("The type of <"+fvalue+"> has not been handled yet("+instance_classname+"). Replaced by Void.");
     		rovalue = rofactory.getMemory().voidINSTANCE;
     	}
     	
@@ -416,10 +419,13 @@ public class EMF2Runtime {
 	    	{
 		    	ftype = InheritanceSearch.getFClassForClassDefinition((ClassDefinition)etype_cdef);
 	    	}
-	    	// PrimitieType case : get its instance type
+	    	// PrimitiveType case : get its instance type
 	    	else if (PrimitiveType.class.isInstance(etype_cdef))
 	    	{
 	    	    ftype = ((PrimitiveType)etype_cdef).getInstanceType();
+	    	}
+	    	else if(Enumeration.class.isInstance(etype_cdef)){
+	    		ftype = ((Enumeration)etype_cdef);
 	    	}
 	    }
 	    if (ftype == null && type_name.equals("ecore::EObject"))
@@ -464,7 +470,8 @@ public class EMF2Runtime {
 	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromEClassifier(eclass);
 	    }
 	    // For each feature, get the value and add it to the properties hashtable
-	    for (Object next : eclass.getEAllStructuralFeatures())
+	    EList allStructuralFeature = eclass.getEAllStructuralFeatures();
+	    for (Object next : allStructuralFeature)
 	    {	
 	    	EStructuralFeature feature = (EStructuralFeature)next;
 	    	EClassifier feature_type = feature.getEType();
@@ -490,6 +497,20 @@ public class EMF2Runtime {
 	    				}
 	    				else // normal case
 	    					rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, feature_type, rObject, roprop);
+	    			}
+	    			else if (feature_type instanceof EEnum){
+	    				// special case of enumeration we must connect it to the enumartion definition instead of creating a RuntimeObject for it
+	    				String enumName = unit.getEQualifiedName(feature_type);
+	    				RuntimeObject roEnum = unit.getRuntimeMemory().getTypeDefinitionAsRuntimeObject(enumName);
+	    				// get the enumliteral
+	    				String litValue = null;
+	    				if (fvalue instanceof org.eclipse.emf.common.util.AbstractEnumerator){
+	    					litValue = ((org.eclipse.emf.common.util.AbstractEnumerator)fvalue).getLiteral();
+	    				}
+	    				else if (fvalue instanceof EEnumLiteral)
+	    					litValue = ((EEnumLiteral)fvalue).getLiteral();
+	    				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.basetypes.Enumeration.getLiteral(roEnum, litValue);
+	    				rObject.getProperties().put(prop.getName(), roEnumLit);
 	    			}
 	    			// Get the RO-repr of this EObject
 	    			else if (fvalue instanceof EObject)

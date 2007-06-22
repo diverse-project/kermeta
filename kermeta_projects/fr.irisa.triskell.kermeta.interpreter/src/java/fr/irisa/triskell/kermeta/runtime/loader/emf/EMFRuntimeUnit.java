@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.40 2007-06-20 13:03:21 dtouzet Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.41 2007-06-22 09:58:45 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -27,10 +27,12 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -39,6 +41,8 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -208,13 +212,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
 			HashMap options = new HashMap();
 			ResourceSet resourceset = new ResourceSetImpl();
-	        
+			
+			if(!metamodel_uri.equals("")){
+				// add the metamodel in the resourcesetregistry in order to make it load correctly
+		/*		Registry reg = resourceset.getPackageRegistry();
+				
+				URI mmURI = URI.createURI(metamodel_uri);
+				Resource res = resourceset.getResource(mmURI, true);
+				
+				EPackage ePack = (EPackage) res.getContents().get(0);// get first package (usual ecore file have only one package ...)
+							// improved version should check to get all of them from the root
+				EMFRegistryHelper.safeRegisterPackages(reg,ePack);
+				*/
+			}
 			// If EMF Diagnostic is enabled
 	    	if(ENABLE_EMF_DIAGNOSTIC)
 	    	{
 		    	String msg = "EMF current URI_MAP entries :\n";
 		    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
-		    		msg += "    "+o + "; " + URIConverterImpl.URI_MAP.get(o) + "\n";
+		    		msg += "    "+o + "; \n";
 		    	KermetaUnit.internalLog.debug(msg);
 		    	//options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 	    		// allow to record unknwon feature
@@ -234,6 +250,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     				// then we need to infer the metamodel nsuri
     				metamodel_uri = EcoreHelper.getMetaModelUriFromResource(resource);
     			}
+    			
     		}
     		else
     			throwKermetaRaisedExceptionOnLoad(
@@ -516,19 +533,28 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * Get the qualified name of the given ENamedElement in a Kermeta representation.
 	 * This is a recursive method,
 	 * that parses the successive containers of an element and return their qualified names.
-	 * This method is uncomplete! : TODO :
-	 *    - handle EEnum type
-	 *    - handle EDataTypes that contains links to java type that have no equivalence in Kermeta
+	 * This method is uncomplete! :
+	 *    TODO handle EDataTypes that contains links to java type that have no equivalence in Kermeta
 	 *    (ex: EBigDecimal, EJavaClass, etc.)
 	 * @param obj
 	 * @return the qualified name of the given object
 	 */
 	public String getEQualifiedName(ENamedElement obj) {
 	    String result = obj.getName();
+	    // if the metamodel is not registered the obtained name for the package is null ... we can fix that using the provided metamodel
+	    if(result == null && obj instanceof EPackage){
+	    	// use the ns uri to retreive the package name
+	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
+	    	result = qualifiedNamePatcher.getPackageQualifiedNameFromMetamodel(obj);
+	    	
+	    }
 	    EObject cont = obj.eContainer();
 	    // Special case: if obj is a EDataType, refering to a java type (like String), 
 	    // search the equivalent type in kermeta.
-	    if (obj instanceof EDataType)
+	    if((obj instanceof EEnum)){
+	    	result = getEQualifiedName((ENamedElement)cont) + "::" + result;
+	    }
+	    else if (obj instanceof EDataType)
 	    {
 	    	String icn = ((EDataType)obj).getInstanceClassName();
 	    	if (icn != null && primitive_types_mapping.containsKey(icn)) 
@@ -546,7 +572,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    }
 	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
 	    	if(this.qualifiedNamePatcher == null) qualifiedNamePatcher = new QualifiedNamePatcher(this);
-	    	result = qualifiedNamePatcher.getGeneratedPackageQualifiedName(obj);
+	    	result = qualifiedNamePatcher.getPackageQualifiedNameFromMetamodel(obj);
 	    }
 	    return result;
 	}
@@ -754,3 +780,4 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	}
 	   
 }
+
