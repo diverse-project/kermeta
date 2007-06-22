@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.8 2007-05-28 09:43:31 ftanguy Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.9 2007-06-22 09:54:03 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -66,7 +66,7 @@ public class QualifiedNamePatcher {
     	emfRuntimeUnit = ru;
     }
     
-	public String getGeneratedPackageQualifiedName(ENamedElement obj){
+	public String getPackageQualifiedNameFromMetamodel(ENamedElement obj){
 		String result=obj.getName();
 //		 optimization : use of an hashtable
     	String nsuri = ((EPackage)obj).getNsURI();
@@ -95,14 +95,24 @@ public class QualifiedNamePatcher {
 		    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
 		    	}
 		    	else{
-		    		EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
+		    		if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
+	    				// this message occurs only when patching generated java
+	    				EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
 	    					" || "+ obj.toString() );
+		    		}
+		    		else EMFRuntimeUnit.internalLog.warn("cannot be sure of package qualified name of "+ obj.getClass().getName() +
+	    					" || "+ obj.toString() + "are you sure to have provided the correct metamodel for loading your resource ?" );
 		    		this.nsUri_QualifiedName_map.put(nsuri,result);	
 		    	}
     		}
     		else{
     			// metamodel uri is not set cannot patch, let's hope there is no package hierachy
-    			EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
+    			if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
+    				// this message occurs only when patching generated java
+    				EMFRuntimeUnit.internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() +
+    					" || "+ obj.toString() );
+    			}
+    			else EMFRuntimeUnit.internalLog.warn("cannot be sure of package qualified name of "+ obj.getClass().getName() +
     					" || "+ obj.toString() );
     			EMFRuntimeUnit.internalLog.warn("Cannot retreive the metamodel. If you have trouble loading your model, maybe you should use repository.createResource(\"yourmodel.xmi\", \"yourmetamodel.ecore\") instead of repository.getResource(\"yourmodel.xmi\")");
     			result = obj.getName();
@@ -169,7 +179,7 @@ public class QualifiedNamePatcher {
 				    	{
 					    	String msg = "EMF current URI_MAP entries :\n";
 					    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
-					    		msg += "    "+o + "; " + URIConverterImpl.URI_MAP.get(o) + "\n";
+					    		msg += "    "+o + "; \n";
 					    	EMFRuntimeUnit.internalLog.debug(msg);
 				    	}
 						URIConverter c = new URIConverterImpl();
