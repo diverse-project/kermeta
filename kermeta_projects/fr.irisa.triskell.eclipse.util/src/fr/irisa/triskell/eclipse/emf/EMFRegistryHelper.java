@@ -1,4 +1,4 @@
-/* $Id: EMFRegistryHelper.java,v 1.3 2007-05-30 07:26:04 dvojtise Exp $
+/* $Id: EMFRegistryHelper.java,v 1.4 2007-06-22 09:50:18 dvojtise Exp $
  * Project   : Kermeta 
  * File      : EMFRegistryHelper.java
  * License   : EPL
@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 /**
@@ -106,6 +107,27 @@ public class EMFRegistryHelper {
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * add in the registry only if it isn't already in the main registry
+	 * @param registry : envetually used to add in a local ResourceSet registry or in the main registry via Registry.INSTANCE
+	 * @param pack
+	 */
+	public static void safeRegisterPackages(Registry registry, EPackage pack) {
+		if(Registry.INSTANCE.get(pack.getNsURI()) == null){
+			// only if not already registered in main Registry
+			registry.put(pack.getNsURI(), pack);
+			
+			EList l = pack.getESubpackages();
+			
+			if(l != null) {
+				Iterator it = l.iterator();
+				while(it.hasNext()) {
+					safeRegisterPackages(registry,(EPackage) it.next());
+				}
+			}
+		}
 	}
 	
 }
