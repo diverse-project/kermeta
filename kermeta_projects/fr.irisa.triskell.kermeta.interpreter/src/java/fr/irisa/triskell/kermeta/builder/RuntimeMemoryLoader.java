@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.20 2007-06-06 16:44:11 cfaucher Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.21 2007-06-22 09:52:02 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -227,17 +227,9 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    		RuntimeObject roEnum = memory.getTypeDefinitionAsRuntimeObject(qnameEnum);
 				    	// then retreive the value in this enumeration and affect it to the property
 			    	    	// get the correct value (enumeration literal) from the enumeration
-				    		RuntimeObject roEnumLitCollection = roEnum.getProperties().get("ownedLiteral");
-				    		Iterator it = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(roEnumLitCollection).iterator();
 				    		RuntimeObject roEnumLit=null;
-				    		while(it.hasNext()){
-				    			RuntimeObject roLit = (RuntimeObject)it.next();
-				    			String litName = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(roLit.getProperties().get("name"));
-				    			org.eclipse.emf.common.util.AbstractEnumerator enumerator = (org.eclipse.emf.common.util.AbstractEnumerator)value;
-				    			if(litName.equals(enumerator.getLiteral())){
-				    				roEnumLit = roLit;
-				    			}
-				    		}
+				    		roEnumLit = fr.irisa.triskell.kermeta.runtime.basetypes.Enumeration.getLiteral(roEnum, ((org.eclipse.emf.common.util.AbstractEnumerator)value).getLiteral());
+				    		
 				    	// set this value to the property
 				    		// DVK : I'm not sure we can directly assign this, is it a kind of singleton in memory ?
 				    		run_obj.getProperties().put(property_name, roEnumLit);
