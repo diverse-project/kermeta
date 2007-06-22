@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.41 2007-06-22 09:58:45 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.42 2007-06-22 12:40:13 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -215,15 +215,17 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			
 			if(!metamodel_uri.equals("")){
 				// add the metamodel in the resourcesetregistry in order to make it load correctly
-		/*		Registry reg = resourceset.getPackageRegistry();
+				Registry reg = resourceset.getPackageRegistry();
 				
-				URI mmURI = URI.createURI(metamodel_uri);
-				Resource res = resourceset.getResource(mmURI, true);
-				
-				EPackage ePack = (EPackage) res.getContents().get(0);// get first package (usual ecore file have only one package ...)
+				Resource res = getMetaModelResource();
+				internalLog.debug("nb res for MM = "+findDependentResources(res).size());
+				Iterator resListIt = findDependentResources(res).listIterator();
+				while(resListIt.hasNext()){
+					Resource mmRes = (Resource) resListIt.next(); 
+					EPackage ePack = (EPackage) mmRes.getContents().get(0);// get first package (usual ecore file have only one package ...)
 							// improved version should check to get all of them from the root
-				EMFRegistryHelper.safeRegisterPackages(reg,ePack);
-				*/
+					EMFRegistryHelper.safeRegisterPackages(reg,ePack);
+				}
 			}
 			// If EMF Diagnostic is enabled
 	    	if(ENABLE_EMF_DIAGNOSTIC)
