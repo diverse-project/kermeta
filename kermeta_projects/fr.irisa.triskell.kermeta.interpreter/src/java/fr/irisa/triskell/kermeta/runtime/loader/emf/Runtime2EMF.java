@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.56 2007-05-28 09:43:31 ftanguy Exp $
+/* $Id: Runtime2EMF.java,v 1.57 2007-06-22 09:57:11 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -14,16 +14,20 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.AbstractEnumerator;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -293,7 +297,7 @@ public class Runtime2EMF {
 				else // EObject, EClass, EDataType
 				{
 					Object p_o = getOrCreatePropertyFromRuntimeObject(property, feature);
-					eObject.eSet(feature, p_o);
+					eObject.eSet(feature, p_o);					
 					if (p_o == null) {
 						internalLog.warn("    setting null to "+ eObject.eClass().getName() + "."  + feature.getName() + "");}
 				}
@@ -315,9 +319,18 @@ public class Runtime2EMF {
 		// a EDataType?
 		else if (RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty) != null)
 			result = RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty);
-		else if (RuntimeObjectHelper.isanEnumerationLiteral(rProperty) == true)
-			result = createEEnumLiteralFromRuntimeObjectWithResource(rProperty,
+		else if (RuntimeObjectHelper.isanEnumerationLiteral(rProperty) == true){
+			if(feature.getEType().getInstanceClass() !=  null){			
+				// this enumeration has its own implementation must use it ...
+				result = createGeneratedClassLiteralFromEnumRuntimeObject(rProperty,
+						feature.getEType());
+			}
+			else {
+				 // DVK: maybe we can improve this by retreiving the EEnum directly in the feature.getEType() rather than looking for it in the resource ?
+				 result = createEEnumLiteralFromRuntimeObjectWithResource(rProperty,			
 					feature.getEType().eResource());
+			}
+		}
 		// by default, an EObject instance of an EClass
 		else if (feature.getEType() instanceof EClass) { 
 			// Important note: once the objects are created (using the metamodel given
@@ -493,8 +506,41 @@ public class Runtime2EMF {
 		return result;
 	}
 
+	/**
+	 * allow to create the expected object from an Enumeration
+	 * this is used when the object to create is driven with a InstanceClassName
+	 * @param rObject
+	 * @param type
+	 * @return
+	 */
+	protected Object createGeneratedClassLiteralFromEnumRuntimeObject(
+			RuntimeObject rObject, EClassifier type) {
+		Object result = null;
+		try {
+			Class c = type.getInstanceClass();
+			// we suppose this is an abstract enumerator ... and that it has a method getByName
+			Method m = c.getMethod("getByName", String.class);
+			// Get the name of the enumeration literal element
+			String enum_literal_name = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) rObject
+					.getProperties().get("name"));
+			result = m.invoke(c, (enum_literal_name));
+		} catch (Exception e) {
+			internalLog.warn("not able to create the enumeration literal concrete object for instanceClass "+type.getInstanceClassName()+
+					", let's try as an EEnumLiteral", e);
+			result = createEEnumLiteralFromRuntimeObjectWithResource(rObject, type.eResource());
+		}
+		return result;
+	}
+	
+	/**
+	 * create a "normal" EEnumLiteral from an enumeration, create it in the target resource ...
+	 * @param rObject
+	 * @param p_resource
+	 * @return
+	 */
 	protected EEnumLiteral createEEnumLiteralFromRuntimeObjectWithResource(
-			RuntimeObject rObject, Resource p_resource) {
+			RuntimeObject rObject, Resource p_resource) {		
+		
 		EEnumLiteral result = null;
 		// 1) get the "enumeration" property of this object.
 		RuntimeObject ro_enumeration = rObject.getProperties().get("enumeration");
