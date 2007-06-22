@@ -1,5 +1,5 @@
 /*
- * Created on 9 févr. 2005
+ * Created on 9 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
@@ -22,11 +22,16 @@ public class CathegorizedKWList {
 	public ArrayList <String> operatorKW = new ArrayList <String> ();
 	public ArrayList <String> specialKW = new ArrayList <String> ();
 	public ArrayList <String> nonSpecialKW = new ArrayList <String> ();
+
+	public ArrayList <String> keywords = new ArrayList <String> ();
+	
 	//////////////////////////
 	//////////////////////////
 	//		Constructor		//
 	//////////////////////////
 	//////////////////////////
+
+	
 	// Singleton instance
 	private static CathegorizedKWList instance = null;
 
@@ -104,6 +109,7 @@ public class CathegorizedKWList {
 
 	private void addKeyword(String kw, ArrayList <String> l) {
 		l.add(kw);
+		keywords.add( kw );
 	}
 	
 	private void calculateNonSpecialKW() {

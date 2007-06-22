@@ -42,6 +42,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
+import fr.irisa.triskell.kermeta.texteditor.editors.CathegorizedKWList;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -111,6 +112,8 @@ public class EditorCompletion implements IContentAssistProcessor {
 			if (doubleColon == true)
 				addProposalsForPackages(doc, offset, qualifier);
 
+			//else if (qualifier.startsWith(":") || qualifier.startsWith("<") ) {
+			
 			/*else if (qualifier.startsWith(":") || qualifier.startsWith("<"))
 			    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
 	*/
@@ -126,7 +129,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 					 * Getting the text.
 					 * 
 					 */
-					while ( ! Character.isWhitespace( doc.getChar(index) ) && (doc.getChar(index) != '<') )
+					while ( ! Character.isWhitespace( doc.getChar(index) ) && (doc.getChar(index) != '<') && (doc.getChar(index) != ':') )
 						index--;
 					int trueOffset = index+1;
 					int length = offset - index -1;
@@ -176,6 +179,15 @@ public class EditorCompletion implements IContentAssistProcessor {
 				        }
 				    	Collections.sort(proposals, cpCmp);
 						
+				    	Iterator <String> iterator = CathegorizedKWList.getInstance().keywords.iterator();
+				    	while ( iterator.hasNext() ) {
+				    		String keyword = iterator.next();
+				    		String regex = text + ".+";
+				    		if ( keyword.toLowerCase().matches(regex) ) {
+				    			CompletionProposal proposal = new CompletionProposal(keyword, offset, text.length(), keyword.length());
+				    			proposals.add( proposal );
+				    		}
+				    	}
 				    	
 					}
 				} catch (BadLocationException e) {
