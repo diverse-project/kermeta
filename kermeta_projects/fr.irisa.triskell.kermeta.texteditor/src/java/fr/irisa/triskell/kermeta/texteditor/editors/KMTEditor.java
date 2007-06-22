@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
+import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 
@@ -53,6 +54,12 @@ public class KMTEditor extends TextEditor implements Interest {
 	
 	protected KermetaUnit mcunit; 
 	protected KermetaOutline outline;
+	
+	private EditorCompletion completion = null;
+	
+	public void setEditorCompletion(EditorCompletion value) {
+		completion = value;
+	}
 	
 	public KermetaProject project;
 	
@@ -106,7 +113,7 @@ public class KMTEditor extends TextEditor implements Interest {
 		KermetaUnitHelper.unloadAllKermetaUnit();
 		KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
 
-		setMcunit(kermetaUnit);
+		updateValue(kermetaUnit);
 		KermetaUnitHost.getInstance().declareInterest(this, unit, kermetaUnit);
 		
 		KPMHelper.addOpenDependencyOnKMTFile(project.getKpm(), unit);
@@ -165,14 +172,6 @@ public class KMTEditor extends TextEditor implements Interest {
 	public KermetaUnit getMcunit() {
 		return mcunit;
 	}
-	/**
-	 * @param mcunit The mcunit to set.
-	 */
-	protected void setMcunit(KMTUnit mcunit) {
-		this.mcunit = mcunit;
-		if (outline != null)
-			outline.update();
-	}
 	
 	public void setFocus() {
 		super.setFocus();
@@ -220,6 +219,10 @@ public class KMTEditor extends TextEditor implements Interest {
 			return "";
 	}
 	
+	public String getCurrentContent() {
+		return currentContent;
+	}
+	
 	public String getSavedContent() {
 		return savedContent;
 	}
@@ -230,7 +233,13 @@ public class KMTEditor extends TextEditor implements Interest {
 	//////////////////////////////////
 	
 	public void updateValue(Object newValue) {
-		setMcunit( (KMTUnit) newValue );
+		KMTUnit kermetaUnit = (KMTUnit) newValue;
+		if ( (kermetaUnit != null) && (kermetaUnit.getTracer() != null) ) {
+			mcunit = (KMTUnit) kermetaUnit;
+			completion.setkermetaUnit( kermetaUnit );
+			if (outline != null)
+				outline.update();
+		}
 	}
 	
 	@Override
@@ -317,7 +326,7 @@ public class KMTEditor extends TextEditor implements Interest {
 					} else {
 						KermetaUnitHelper.unloadAllKermetaUnit();
 						KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
-						setMcunit(kermetaUnit);
+						updateValue(kermetaUnit);
 						KermetaMarkersHelper.clearMarkers(getFile());
 						KermetaMarkersHelper.createMarkers(getFile(), kermetaUnit);
 					}

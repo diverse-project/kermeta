@@ -7,7 +7,14 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
+import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
@@ -19,11 +26,20 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.ParamPostfix;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
@@ -31,6 +47,8 @@ import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TextReference;
 
 /**
  * @author Franck Fleurey
@@ -55,12 +73,17 @@ public class EditorCompletion implements IContentAssistProcessor {
 	public void setIsCompleting(boolean value) {
 		isCompleting = value;
 	}
-	protected KMTEditor editor;
+	
+	private KermetaUnit kermetaUnit = null;
+	
+	public synchronized void setkermetaUnit(KermetaUnit value) {
+		kermetaUnit = value;
+	}
+	
 	protected boolean doubleColon;
 	
-	public EditorCompletion(KMTEditor editor) {
+	public EditorCompletion() {
 		super();
-		this.editor = editor;
 	}
 
 	/**
@@ -69,106 +92,301 @@ public class EditorCompletion implements IContentAssistProcessor {
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		
+		proposals.clear();
+		
 		IDocument doc = viewer.getDocument();
-		ArrayList propList = new ArrayList();
 		
-		if (editor.getMcunit() == null) return null;
+		if (kermetaUnit == null) return null;
 		
-		// Get the token between the cursor and last character reliable for completion
-		// "." -> should be followed by call feature
-		// ":" -> should be followed by class definition
-		// "::" -> should be followed by package or class definition
-		String qualifier = getQualifier(doc, offset);
-		
-		TexteditorPlugin.pluginLog.info(" * Completion -> qualifier = " + qualifier);
-		
-		// "::" -> should be followed by package or type definition 
-		if (doubleColon == true)
-			addProposalsForPackages(doc, offset, propList, qualifier);
+		synchronized (kermetaUnit) {
+			// Get the token between the cursor and last character reliable for completion
+			// "." -> should be followed by call feature
+			// ":" -> should be followed by class definition
+			// "::" -> should be followed by package or class definition
+			String qualifier = getQualifier(doc, offset);
+			
+			TexteditorPlugin.pluginLog.info(" * Completion -> qualifier = " + qualifier);
+			
+			// "::" -> should be followed by package or type definition 
+			if (doubleColon == true)
+				addProposalsForPackages(doc, offset, qualifier);
 
-		else if (qualifier.startsWith(":") || qualifier.startsWith("<"))
-		    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
-
-		// "." -> should be followed by call feature
-		else if (qualifier.startsWith(".")) {
-		    
-		    CompUnit unit = ((KMTUnit)editor.getMcunit()).getMctAST();
-			TexteditorPlugin.pluginLog.info(" * Completion unit -> " + unit);
-			// If the kermeta program was correctly parsed
-		    if (unit != null) {
-		    	// Find the AST node behind the ".", using infos from the AST
-		        KermetaASTNode astnode = getNodeForOffset(doc, offset, qualifier);
-		        TexteditorPlugin.pluginLog.info(" * Completion astnode -> " + astnode);
-		        if (astnode != null) {
-		            fr.irisa.triskell.kermeta.language.structure.Object obj = getFObjectForNode(astnode);
-		            TexteditorPlugin.pluginLog.info(" * Completion FObject -> " + obj);
-		            
-		            if (obj != null && obj instanceof LambdaExpression) {
-		                LambdaExpression lexp = (LambdaExpression)obj;
-		                if (lexp.eContainer() instanceof CallFeature) obj = (CallFeature)lexp.eContainer();
-		                TexteditorPlugin.pluginLog.info(" * -> Completion FObject -> " + obj);
-		            }
-		            // FIXME : completion with "." sometimes does not work because getStaticType returns null, because
-		            // the Parsed Unit contains errors, which is logic, during edition : so KermetaUnit reparsing/typechecking
-		            // Philosophy has definitely to be changed. -> related to CompilationUnit studies, particularly
-		            // type checking at relevant time, not every X seconds
-		            if (obj != null && obj instanceof Expression && ((Expression)obj).getStaticType() != null) {
-		                Type t = new SimpleType(((Expression)obj).getStaticType());
-		                TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
-		                if (t != null) {
-	//		                if (((SimpleType)t).getType() instanceof FunctionType) {
-	//		                    t = t.getFunctionTypeRight();
-	//		                }
-		                    addProposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1), t);
-		                }
-		            }
-		        }
-		    }
-		    else {System.err.println("unit is null" + unit);}
+			/*else if (qualifier.startsWith(":") || qualifier.startsWith("<"))
+			    addProposalsForTypes(doc, offset, propList, qualifier.substring(1));
+	*/
+			// "." -> should be followed by call feature
+			else {
+				
+				int index = offset - 1;
+				String uri = kermetaUnit.getUri();
+				
+				try {
+					/*
+					 * 
+					 * Getting the text.
+					 * 
+					 */
+					while ( ! Character.isWhitespace( doc.getChar(index) ) && (doc.getChar(index) != '<') )
+						index--;
+					int trueOffset = index+1;
+					int length = offset - index -1;
+					String text = doc.get(trueOffset, length);
+				
+					if (qualifier.startsWith(".")) {
+			    	
+						/*
+						 * 
+						 * Removing the . character at the end.
+						 * 
+						 */
+						text = text.substring(0, text.length()-1);
+						
+						Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
+						for ( ModelReference reference : references ) {
+							boolean stop = false;
+							EObject container = reference.getRefObject();
+							while ( ! stop && (container != null) ) {
+								stop = addCompletionProposalsForCalls(container, text, offset);
+								container = container.eContainer();
+							}
+						}
+					
+					} else {
+						
+						Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
+						for ( ModelReference reference : references ) {
+							EObject container = reference.getRefObject();
+							while ( container != null ) {
+								addCompletionProposalsForIdentifiers(container, text, trueOffset);
+								container = container.eContainer();
+							}
+						}
+						
+				        for ( Package p : kermetaUnit.packages.values()) {
+				            for (Object next: p.getOwnedTypeDefinition()) {
+				                TypeDefinition td = (TypeDefinition)next;
+				                CompletionItem ci = new NamedElementCompletionItem(td);
+				                System.out.println(td.getName());
+				                if (ci.getCompletionText().toLowerCase().startsWith( text.toLowerCase()) )
+				                    proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
+				            }
+				            CompletionItem ci = new NamedElementCompletionItem(p);
+				            if (ci.getCompletionText().toLowerCase().startsWith(text.toLowerCase()))
+				                 proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
+				        }
+				    	Collections.sort(proposals, cpCmp);
+						
+				    	
+					}
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+			
+			}			
 		}
+				
+		ICompletionProposal[] proposalsArray = new ICompletionProposal[proposals.size()];
+		proposals.toArray(proposalsArray);
+		
+		return proposalsArray;
+		
+	}
+	
+	
+	private List <ICompletionProposal> proposals = new ArrayList <ICompletionProposal> ();
+	
+	private void addCompletionProposalsForIdentifiers(EObject object, String text, int offset) {
+		
+		if ( object instanceof Block )	
+			addCompletionProposalsForIdentifiers( (Block) object, text, offset);
+		else if ( object instanceof Operation )
+			addCompletionProposalsForIdentifiers( (Operation) object, text, offset);
+		else if ( object instanceof ClassDefinition )
+			addCompletionProposalsForIdentifiers( (ClassDefinition) object, text, offset);
+		
+	}
+	
+	private boolean addCompletionProposalsForCalls(EObject object, String text, int offset) {
+		
+		boolean result = false;
+		
+		if ( object instanceof Block ) {
+			
+			addCompletionProposalsForCalls( (Block) object, text, offset);
+			result = ! proposals.isEmpty();
+		
+		} else if ( object instanceof Operation ) {
+		
+			Operation operation = (Operation) object;
+			fr.irisa.triskell.kermeta.language.structure.Type type = getParameterType(text, operation);	
+			if ( type instanceof Class ) {
+				addCompletionProposalsForCalls( 
+						(ClassDefinition) ((Class) type).getTypeDefinition(),
+						offset
+				);
+				result = true;
+			}
+
+		} else if ( object instanceof ClassDefinition ) {
+		
+			ClassDefinition definition = (ClassDefinition) object;
+			fr.irisa.triskell.kermeta.language.structure.Type type = getAttributeType(text, definition);	
+			if ( type instanceof Class ) {
+				addCompletionProposalsForCalls( 
+						(ClassDefinition) ((Class) type).getTypeDefinition(),
+						offset
+				);
+				return true;
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	
+	private void addCompletionProposalsForCalls(ClassDefinition definition, int offset) {
+		
 		/*
-		if (qualifier.equals("")) { addPrposalsForKW(doc, offset, propList, qualifier); }
-		*/
+		 * 
+		 * Properties
+		 * 
+		 */
+		Iterator <Property> iterator = definition.getOwnedAttribute().iterator();
+		while ( iterator.hasNext() ) {
+			NamedElementCompletionItem item = new NamedElementCompletionItem( iterator.next() );
+			proposals.add( item.getCompletionProposal(offset, 0) );
+		}
 		
-		// Create completion proposal array
-		ICompletionProposal[] proposals = new ICompletionProposal[propList.size()];
-		// and fill with list elements
-		propList.toArray(proposals);
-		
-		// Return the proposals
-		return proposals;
+		/*
+		 * 
+		 * Operations
+		 * 
+		 */
+		Iterator <Operation> itOnOperations = definition.getOwnedOperation().iterator();
+		while ( itOnOperations.hasNext() ) {
+			NamedElementCompletionItem item = new NamedElementCompletionItem( itOnOperations.next() );
+			proposals.add( item.getCompletionProposal(offset, 0) );
+		}
 		
 	}
 	
-	/** Get the node at the specified offset */
-	private KermetaASTNode getNodeForOffset(IDocument doc, int offset, String qualifier) {
-	    CompUnit unit = ((KMTUnit)editor.getMcunit()).getMctAST();
-	    if (unit == null) return null;
-	    KermetaASTNode result = (KermetaASTNode)unit.getNodeAt(offset - qualifier.length(), 0);
-	    if (result == null) return null;
-	    // FIX CALL WITH PARAMS
-	    if (result.isTokenNode() && result.getText().equals(")") && result.getParent() instanceof ParamPostfix) {
-	        result = (KermetaASTNode)unit.getNodeAt(result.getParent().getRangeStart()-1, 0);
-	    }
-	    return result;
+	
+	private void addCompletionProposalsForCalls( Block block, String name, int offset ) {
+		
+		List <VariableDecl> declarations = getVariableDeclarations( block );
+		Iterator <VariableDecl> iterator = declarations.iterator();
+		while ( iterator.hasNext() ) {
+			VariableDecl declaration = iterator.next();
+			if ( declaration.getIdentifier().equals(name) ) {
+				
+				Object type = declaration.getType().getType();
+				
+				if ( type instanceof Class )
+					addCompletionProposalsForCalls(
+						(ClassDefinition) ((Class) type).getTypeDefinition(), 
+						offset);
+			}
+		}
+		
 	}
 	
-	/** Get the object in the model of kermeta program that is represented by the given AST-node */
-	private fr.irisa.triskell.kermeta.language.structure.Object getFObjectForNode(KermetaASTNode node) {
-		KermetaASTNode currentNode = node;
-		fr.irisa.triskell.kermeta.language.structure.Object result = null;
-		while (result == null && currentNode != null) { 
-			result = (fr.irisa.triskell.kermeta.language.structure.Object)editor.getMcunit().getModelElementByNode(currentNode);
-			currentNode = (KermetaASTNode)currentNode.getParent();
+	private void addCompletionProposalsForIdentifiers( Block block, String name, int offset ) {
+		String regex = name + ".+";
+		List <VariableDecl> declarations = getVariableDeclarations( block );
+		Iterator <VariableDecl> iterator = declarations.iterator();
+		while ( iterator.hasNext() ) {
+			VariableDecl declaration = iterator.next();
+			if ( declaration.getIdentifier().toLowerCase().matches(regex) ) {
+				CompletionProposal proposal = new CompletionProposal(declaration.getIdentifier(), offset, name.length(), declaration.getIdentifier().length());
+				proposals.add( proposal );
+			}
+		}
+		
+	}
+	
+	private void addCompletionProposalsForIdentifiers( Operation operation, String name, int offset ) {
+		String regex = name + ".+";
+		Iterator <Parameter> iterator = operation.getOwnedParameter().iterator();	
+		while ( iterator.hasNext() ) {
+			Parameter parameter = iterator.next();
+			if ( parameter.getName().toLowerCase().matches(regex) ) {
+				CompletionProposal proposal = new CompletionProposal(parameter.getName(), offset, name.length(), parameter.getName().length());
+				proposals.add( proposal );
+			}
+		}
+		
+	}
+	
+	private void addCompletionProposalsForIdentifiers( ClassDefinition definition, String name, int offset ) {
+		
+		Iterator <Property> iterator = definition.getOwnedAttribute().iterator();
+		String regex = name + ".+";
+		while ( iterator.hasNext() ) {
+			Property property = iterator.next();
+			if ( property.getName().toLowerCase().matches(regex) ) {
+				CompletionProposal proposal = new CompletionProposal(property.getName(), offset, name.length(), property.getName().length());
+				proposals.add( proposal );
+			}
+		}
+		
+	}
+	
+	
+	private List <VariableDecl> getVariableDeclarations( Block block ) {
+		List <VariableDecl> result = new ArrayList <VariableDecl> ();
+		Iterator iterator = block.eContents().iterator();
+		while ( iterator.hasNext() ) {
+			Object o = iterator.next();
+			if ( o instanceof VariableDecl )
+				result.add( (VariableDecl) o );
 		}
 		return result;
 	}
+	
+	
+	private fr.irisa.triskell.kermeta.language.structure.Type getParameterType(String parameterName, Operation operation) {
+		
+		Iterator <Parameter> iterator = operation.getOwnedParameter().iterator();
+		while ( iterator.hasNext() ) {
+			
+			Parameter parameter = iterator.next();
+			if ( parameter.getName().equals( parameterName ) )
+				return parameter.getType();
+			
+		}
+		
+		return null;
+		
+	}
 
+	
+	private fr.irisa.triskell.kermeta.language.structure.Type getAttributeType(String attributeName, ClassDefinition definition) {
+		Iterator <Property> iterator = definition.getOwnedAttribute().iterator();
+		while ( iterator.hasNext() ) {
+			Property property = iterator.next();
+			if ( property.getName().equals(attributeName) )
+				return property.getType();
+		}
+		return null;
+	}
+	
+	private List <Property> getAttributes(String attributeName, ClassDefinition definition) {
+		List <Property> properties = new ArrayList <Property> ();
+		Iterator <Property> iterator = definition.getOwnedAttribute().iterator();
+		String regex = attributeName + ".+";
+		while ( iterator.hasNext() ) {
+			Property property = iterator.next();
+			if ( property.getName().matches(regex) )
+				properties.add( property );
+		}
+		return properties;
+	}
+	
 	/**
 	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeContextInformation(org.eclipse.jface.text.ITextViewer, int)
 	 */
 	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -289,7 +507,7 @@ public class EditorCompletion implements IContentAssistProcessor {
         Collections.sort(props, cpCmp);
     }
     
-    private void addProposalsForTypes(IDocument doc, int offset, ArrayList props, String begining) {
+  /*  private void addProposalsForTypes(IDocument doc, int offset, ArrayList props, String begining) {
         for ( Package p : editor.getMcunit().packages.values())
         {
             for (Object next: p.getOwnedTypeDefinition()) {
@@ -303,7 +521,7 @@ public class EditorCompletion implements IContentAssistProcessor {
                  props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
         }
     	Collections.sort(props, cpCmp);
-    }
+    }*/
     
     /***
      * Proposes the nested packages and owned type definitions for the package given
@@ -313,22 +531,23 @@ public class EditorCompletion implements IContentAssistProcessor {
      * @param props A list of proposals, initialized to empty list
      * @param begining The string to complete (should contain at least "::" substring)
      */
-    private void addProposalsForPackages(IDocument doc, int offset, ArrayList props, String begining) {
+    private void addProposalsForPackages(IDocument doc, int offset, String begining) {
     	// Get the name of package
     	String pkg_name = begining.substring(1, begining.lastIndexOf("::"));
     	String short_name = ""; // can be class name or package name
     	if (begining.length() > begining.lastIndexOf("::") + 2) 
     		short_name = begining.substring(begining.lastIndexOf("::")+2);
     	
-    	Package pkg = editor.getMcunit().packageLookup(pkg_name);
+    	Package pkg = kermetaUnit.packageLookup(pkg_name);
     	// Get classdefinitions inside pkg
     	for (Object next : pkg.getOwnedTypeDefinition())
     	{
     		 TypeDefinition t = (TypeDefinition)next;
     		 CompletionItem ci = new NamedElementCompletionItem(t);
-             if (short_name.length() == 0 ) props.add(ci.getCompletionProposal(offset, 0));
+             if (short_name.length() == 0 ) 
+            	 proposals.add(ci.getCompletionProposal(offset, 0));
     		 else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase())) {
-                 props.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
+                 proposals.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
              }
             	 
     	}
@@ -337,11 +556,12 @@ public class EditorCompletion implements IContentAssistProcessor {
         for (Object next : pkg.getNestedPackage()) {
         	Package p = (Package)next;
         	CompletionItem ci = new NamedElementCompletionItem(p);
-        	if (short_name.length() == 0) props.add(ci.getCompletionProposal(offset,0));
+        	if (short_name.length() == 0) 
+        		proposals.add(ci.getCompletionProposal(offset,0));
         	else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase()))
-        		props.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
+        		proposals.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
         }
-        Collections.sort(props, cpCmp);
+        Collections.sort(proposals, cpCmp);
     }
 
 	/** Comparator for CompletionProposals sorting. */

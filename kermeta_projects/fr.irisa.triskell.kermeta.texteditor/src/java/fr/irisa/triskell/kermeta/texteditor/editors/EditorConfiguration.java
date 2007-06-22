@@ -66,7 +66,7 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		return new String[] {
 				KMTPartitionScanner.KMT_COMMENT,
 				KMTPartitionScanner.KMT_TAG,
-				IDocument.DEFAULT_CONTENT_TYPE			// Contenu par défaut (pour nous : code)
+				IDocument.DEFAULT_CONTENT_TYPE			// Contenu par dï¿½faut (pour nous : code)
 		};
 	}
 	
@@ -127,7 +127,8 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	 */
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
-		editorCompletion = new EditorCompletion(editor);
+		editorCompletion = new EditorCompletion();
+		editor.setEditorCompletion( editorCompletion );
 		assistant.addCompletionListener( new KermetaCompletionListener(editorCompletion) );
 		assistant.setContentAssistProcessor(editorCompletion, IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.enableAutoActivation(true);

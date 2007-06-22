@@ -71,7 +71,7 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 						if (monitor.isCanceled())
 							return Status.CANCEL_STATUS;
 				
-						editor.setMcunit(kermetaUnit);
+						editor.updateValue(kermetaUnit);
 						KermetaMarkersHelper.createMarkers(editor.getFile(), kermetaUnit);
 						return Status.OK_STATUS;
 					}
@@ -105,7 +105,8 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 						KermetaUnitHost.getInstance().declareInterest(interest, unit);
 						
 						HashMap args = new HashMap();
-						args.put("content", editor.getFileContent());
+						//args.put("content", editor.getFileContent());
+						args.put("content", editor.getCurrentContent());
 						unit.receiveSynchroneEvent("update", args, monitor);
 						
 						KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
