@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.3 2007-06-05 15:37:24 dtouzet Exp $
+/* $Id: Tracer.java,v 1.4 2007-06-22 12:57:47 ftanguy Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -13,7 +13,9 @@
 package fr.irisa.triskell.traceability.helper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -335,6 +337,57 @@ public class Tracer {
 	public void removeTracesWithoutOutputIn()
 	{
 		if (modelTrace ==  null) return;
+	}
+	
+	private Set<TextReference> getTextReferences() {
+		
+		Set <TextReference> textReferences = new HashSet <TextReference> ();
+		Iterator <Reference> iterator = modelTrace.getReferences().iterator();
+		while ( iterator.hasNext() ) {
+			Reference currentReference = iterator.next();
+			if ( currentReference instanceof TextReference )
+				textReferences.add( (TextReference) currentReference );
+		}
+		return textReferences;
+	}
+	
+	public Set <ModelReference> getModelReferences(int offset, int length, String uri) {
+		
+		Set <TextReference> textReferences = getTextReferences();
+		
+		TextReference result = null;
+		
+		for ( TextReference reference : textReferences ) {
+			
+			if ( result == null ) {
+				
+				if ( reference.getFileURI().equals(uri) 
+				&& ( reference.getCharBeginAt() <= offset ) 
+				&& ( reference.getCharEndAt() >= offset+length ) )
+				
+				result = reference;
+					
+			} else {
+			
+				if ( reference.getFileURI().equals(uri) 
+					&& ( reference.getCharBeginAt() < offset ) && ( reference.getCharBeginAt() >= result.getCharBeginAt() ) 
+					&& ( reference.getCharEndAt() > offset+length ) && ( reference.getCharEndAt() <= result.getCharEndAt() ) )
+				
+				result = reference;
+			
+			}
+		}
+
+		Set <ModelReference> modelReferences = new HashSet <ModelReference> ();
+		Iterator <Trace> iterator = result.getTargetTraces().iterator();
+		while ( iterator.hasNext() ) {
+			Trace currentTrace = iterator.next();
+			if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
+				modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+		}
+		
+		return modelReferences;
+		
 	}
 	
 }
