@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_finalstates_fsm_type.kmt,v 1.1 2006-12-13 07:57:29 dvojtise Exp $
+/* $Id: 055_MT_FSM_finalstates_fsm_type.kmt,v 1.2 2007-06-22 13:11:39 dvojtise Exp $
  * Creation date: November 10, 2006
  * License:
  * Copyright:
@@ -14,7 +14,7 @@ package fsm;
 require kermeta
 using kermeta::standard
 
-modeltype finalstates_fsm {
+package finalstates_fsm {
 
   class FSM {
     attribute alphabet : set String[0..*]
@@ -41,3 +41,4 @@ modeltype finalstates_fsm {
   class FinalState inherits State { }
 
 }
+modeltype finalstates_fsm_mt { fsm::finalstates_fsm::FSM, fsm::finalstates_fsm::State, fsm::finalstates_fsm::Transition}

@@ -6,7 +6,7 @@ using kermeta::standard
 using kermeta::utils
 using kermeta::exceptions
 
-class Runner<MT : basic_fsm> {
+class Runner<MT : basic_fsm_mt> {
 
 	reference currentState : Hashtable<MT::FSM, MT::State>
 	

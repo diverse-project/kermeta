@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_fsmLoaders.kmt,v 1.1 2006-12-13 07:57:29 dvojtise Exp $
+/* $Id: 055_MT_FSM_fsmLoaders.kmt,v 1.2 2007-06-22 13:11:39 dvojtise Exp $
  * Creation date: November 13, 2006
  * License:
  * Copyright:
@@ -22,7 +22,7 @@ using kermeta::persistence
 
 class BasicFSMLoader
 {
-	operation loadFromFile(fileName : String) : basic_fsm is
+	operation loadFromFile(fileName : String) : basic_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.createResource(fileName, "../metamodels/basic_fsm_type.ecore")
@@ -31,14 +31,14 @@ class BasicFSMLoader
         // loading
         resource.load()
        	stdio.writeln("after loading")
-       	result := GenericFSMLoader<basic_fsm>.new.resourceToModel(resource)
+       	result := GenericFSMLoader<basic_fsm_mt>.new.resourceToModel(resource)
 	end
 }
 
 /** use the really generic function : addAllCompatible */
 class GenericBasicFSMLoader
 {
-	operation loadFromFile(fileName : String) : basic_fsm is
+	operation loadFromFile(fileName : String) : basic_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.createResource(fileName, "../metamodels/basic_fsm_type.ecore")
@@ -47,7 +47,7 @@ class GenericBasicFSMLoader
         // loading
         resource.load()
        	stdio.writeln("after loading")
-       	result := basic_fsm.new
+       	result := basic_fsm_mt.new
        	stdio.writeln(resource.contents.size.toString + " instances in the resource")
        	result.addAllCompatible(resource.contents)
 	end
@@ -70,7 +70,7 @@ class GenericModelLoader<MT : kermeta::language::structure::Model> {
 }
 
 class FinalStateFSMLoader {
-	operation loadFromFile(fileName : String) : finalstates_fsm is
+	operation loadFromFile(fileName : String) : finalstates_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.createResource(fileName, "../metamodels/finalstates_fsm_type.ecore")
@@ -79,12 +79,12 @@ class FinalStateFSMLoader {
         // loading
         resource.load()
        	stdio.writeln("after loading")
-       	result := GenericFSMLoader<finalstates_fsm>.new.resourceToModel(resource)
+       	result := GenericFSMLoader<finalstates_fsm_mt>.new.resourceToModel(resource)
 	end
 }
 
 
-class GenericFSMLoader<MT : basic_fsm> {
+class GenericFSMLoader<MT : basic_fsm_mt> {
 	operation resourceToModel(resource : Resource) : MT is
 	do
         var newModel : MT init MT.new
@@ -112,7 +112,7 @@ class GenericFSMLoader<MT : basic_fsm> {
 
 class CompositeFSMLoader
 {
-	operation loadFromFile(fileName : String) : composite_fsm is
+	operation loadFromFile(fileName : String) : composite_fsm_mt is
 	do
 		var res : EMFRepository init EMFRepository.new
         var resource : Resource init res.createResource(fileName, "../metamodels/composite_fsm_type.ecore")
@@ -121,7 +121,7 @@ class CompositeFSMLoader
         // loading
         resource.load()
        	stdio.writeln("after loading")
-        var newModel : composite_fsm init composite_fsm.new
+        var newModel : composite_fsm_mt init composite_fsm_mt.new
         resource.instances.select {o | composite_fsm::FSM.isInstance(o) }.each { f |
         	var fsm : composite_fsm::FSM
         	fsm ?= f
@@ -141,7 +141,7 @@ class CompositeFSMLoader
 
 	end
 
-	operation addFSM(model : composite_fsm, fsm : composite_fsm::FSM) is
+	operation addFSM(model : composite_fsm_mt, fsm : composite_fsm::FSM) is
 	do
 		model.add(fsm)
 		fsm.ownedTransition.each{ t | model.add(t) }
