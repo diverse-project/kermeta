@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.42 2007-06-22 12:40:13 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.43 2007-06-25 07:13:29 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -251,6 +251,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     				// if we want to save this loaded resource (or save another resource relative to this one) 
     				// then we need to infer the metamodel nsuri
     				metamodel_uri = EcoreHelper.getMetaModelUriFromResource(resource);
+    				// mmUri was not set, the load was able to infer it, update the RuntimeObject
+    		        resRO.getProperties().put("metaModelURI",
+    		        		fr.irisa.triskell.kermeta.runtime.basetypes.String.create(metamodel_uri, resRO.getFactory()));
+    		        
     			}
     			
     		}
