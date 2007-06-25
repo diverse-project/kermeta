@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.26 2007-06-15 12:01:30 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.27 2007-06-25 14:21:42 jmottu Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -120,6 +120,10 @@ testvalidFile("test/typechecher_tests/valid","024_mt_property_order_valid_tests.
 
 public void testvalid_025_weaving_in_kermeta_aspect1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","025_weaving_in_kermeta_aspect1.kmt" );
+}
+
+public void testvalid_025_weaving_in_kermeta_aspect8() throws Exception {
+testvalidFile("test/typechecher_tests/valid","025_weaving_in_kermeta_aspect8.kmt" );
 }
 
 public void testvalid_026_weaving_in_kermeta_mixed_base_aspect() throws Exception {
@@ -272,6 +276,10 @@ testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect6
 
 public void testinvalid_025_weaving_in_kermeta_aspect7() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect7.kmt" );
+}
+
+public void testinvalid_025_weaving_in_kermeta_aspect8() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","025_weaving_in_kermeta_aspect8.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
