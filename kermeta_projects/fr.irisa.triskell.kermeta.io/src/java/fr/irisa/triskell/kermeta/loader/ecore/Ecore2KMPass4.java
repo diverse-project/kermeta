@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.5 2006-10-25 08:27:12 dvojtise Exp $
+/* $Id: Ecore2KMPass4.java,v 1.6 2007-06-25 12:29:15 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -119,6 +119,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EOperation)
 	 */
 	public Object visit(EOperation node) {
+
 		exporter.current_op = visitorPass1.operations.get(node);
 		
 		// Visit operation annotations
@@ -183,7 +184,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 							while(crtIt.hasNext() && match) {
 								Parameter p1 = (Parameter) crtIt.next();
 								Parameter p2 = (Parameter) refIt.next();
-								match = (p1.getType() == p2.getType());
+								match = (p1.getType().equals(p2.getType()));
 							}
 						}
 					}
@@ -257,6 +258,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	 */
 	protected Operation findSuperOperation(EOperation node)
 	{
+		
 		Operation superop = null; EOperation eoperation = null;
 		EAnnotation ann = node.getEAnnotation(KM2Ecore.ANNOTATION);
 		if (ann != null && ann.getDetails().containsKey(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS))
@@ -281,6 +283,9 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 		}
 		if (superop == null)
 		{
+			
+
+				
 			// If not provided, then find a default one in the inherited classes
 			EClass owningclass = node.getEContainingClass();
 			eoperation = findOperationInSuperTypes(owningclass.getESuperTypes(), node);
