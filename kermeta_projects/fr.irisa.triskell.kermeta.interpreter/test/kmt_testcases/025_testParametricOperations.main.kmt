@@ -1,4 +1,4 @@
-/* $Id: 025_testParametricOperations.main.kmt,v 1.4 2006-07-21 10:22:26 dvojtise Exp $*/
+/* $Id: 025_testParametricOperations.main.kmt,v 1.5 2007-06-25 07:19:57 dvojtise Exp $*/
 @mainClass "root_package::TestParametricOperations"
 //@mainOperation "main"
 /**
@@ -85,11 +85,19 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
 		aString := tester.callParametredBoundWithReturnType()
 	end
 */	
-	/** Create an instance of a type variable (is it authorized?) */
-	@discuss "syntax and semantic validity"
+	/** Create an instance of a type variable */
 	operation test_callParamNewInstance() : Void is do
 		var voidString : String
-		aString := tester.callParamNewInstance(voidString)
+		var s1 : String
+		s1 := tester.callParamNewInstance(voidString)
+	end
+	
+	/** Clone an instance of a type variable */
+	operation test_callParamCloneInstance() : Void is do
+		var s1 : String init "bla"
+		var s2 : String
+		s2 := tester.callParamCloneInstance(s1)
+		assert(s1 == s2)
 	end
     
     /*
@@ -150,10 +158,13 @@ class ParametricOperationTester
 		result := void
 	end
 	
-	/** Create an instance of a type variable (is it authorized?) */
-	@discuss "syntax and semantic validity"
+	/** Create an instance of a type variable */
 	operation callParamNewInstance<P>(unusedParam : P) : P is do
-	//	result := P.new
+		result := P.new
+	end
+	/** Clone an instance of a type variable */
+	operation callParamCloneInstance<P>(param : P) : P is do
+		//result := P.clone(param)
 	end
 	
 
