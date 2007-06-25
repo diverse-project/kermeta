@@ -1,12 +1,14 @@
+/* $Id: 022_testEnum.main.kmt,v 1.4 2007-06-25 07:17:58 dvojtise Exp $ */
 
 @mainClass "testEnum::TestEnum"
-@mainOperation "testCompareLiteral"
+@mainOperation "main"
 
 package testEnum;
 
 require kermeta
 
 using kermeta::standard
+using kermeta::kunit
 
 enumeration Couleur {
 	jaune;
@@ -24,6 +26,12 @@ enumeration Jour {
 
 
 class TestEnum inherits kermeta::kunit::TestCase {
+	
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(TestEnum)
+		tr.printTestResult
+	end	
 	
 	operation testCompareLiteral() : Couleur is
 	do
@@ -79,6 +87,7 @@ class TestEnum inherits kermeta::kunit::TestCase {
 		
 		stdio.writeln(Couleur.rouge.toString)
 		
+		assert(not c.one.isVoid) // test for bug #3438
 		c.each{ lit | stdio.writeln(lit.name)}
 		
 		assert(c.contains(Couleur.vert))
@@ -142,6 +151,23 @@ class TestEnum inherits kermeta::kunit::TestCase {
 		result := p
 	end
    
+   operation testEnumAttributeContainment() is do
+		var c : ClassWithEnumAttributes init ClassWithEnumAttributes.new
+		c.att1 := Couleur.vert
+		assert(c.att1 == Couleur.vert)
+		c.att2 := Couleur.vert
+		assert(c.att2 == Couleur.vert)
+		assert(c.att1 == Couleur.vert)
+		assert(c.att1 == c.att2)
+		stdio.writeln(c.att1.toString + c.att2.toString)
+   end
+   
+}
+
+
+class ClassWithEnumAttributes {
+	attribute att1 : Couleur
+	attribute att2 : Couleur
 }
 
 class Titi<G> {
