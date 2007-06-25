@@ -1,0 +1,62 @@
+/* $Id: 061_multipleIndirectLoad.main.kmt,v 1.1 2007-06-25 16:23:21 dvojtise Exp $
+ * Creation date: June 5, 2007
+ * License:
+ * Copyright:
+ * Authors: Didier Vojtisek
+ *
+ */
+@mainClass "multipleIndirectLoad::Main"
+@mainOperation "main"
+
+
+package multipleIndirectLoad;
+
+
+require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::kunit
+/***
+ * 	- a model A with elements
+ *	- two models B and C referencing elements of A. Some elements are shared between B and C.
+ *	- in a *.kmt file, I load models B and C, I search elements that are common to B and C
+ */
+class Main inherits TestCase
+{
+	attribute metamodelUri : String
+	attribute modelUriBase : String
+	attribute outputmodelUriBase : String
+	
+	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+	
+	operation setUp() is do
+		metamodelUri := "http://www.eclipse.org/emf/2002/Ecore"
+		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_"
+		
+		
+	end
+	
+	operation testMultipleIndirectLoad() is do
+		var emfRep : EMFRepository init EMFRepository.new
+		var resB : EMFResource
+		var resC : EMFResource
+		resB ?= emfRep.createResource(modelUriBase+"B.ecore", metamodelUri)
+		resC ?= emfRep.createResource(modelUriBase+"C.ecore", metamodelUri)
+		
+		resB.load
+		assert(emfRep.resources.size == 2)
+		resC.load
+		assert(emfRep.resources.size == 3)
+		
+		
+		
+	end
+	
+	
+}
