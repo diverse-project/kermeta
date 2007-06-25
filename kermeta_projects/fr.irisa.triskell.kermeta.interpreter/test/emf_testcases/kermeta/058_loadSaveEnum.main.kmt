@@ -1,4 +1,4 @@
-/* $Id: 058_loadSaveEnum.main.kmt,v 1.2 2007-06-05 13:15:38 dvojtise Exp $
+/* $Id: 058_loadSaveEnum.main.kmt,v 1.3 2007-06-25 07:16:10 dvojtise Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -51,11 +51,11 @@ class Main inherits TestCase
 		// that's the first element ...
 		modelelement ?= res.instances.one
 		assert(not modelelement.a.isVoid)
-		stdio.writeln(modelelement.a.toString + modelelement.a.name)
-		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString + MDK::AccesVariableEnumeration.accPublic.name)
-		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString + MDK::AccesVariableEnumeration.accPrivate.name)
+		stdio.writeln(modelelement.a.toString + modelelement.a.name + modelelement.a.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString + MDK::AccesVariableEnumeration.accPublic.name + MDK::AccesVariableEnumeration.accPublic.~enumeration.toString)
+		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString + MDK::AccesVariableEnumeration.accPrivate.name + MDK::AccesVariableEnumeration.accPrivate.~enumeration.toString)
 		// (different OId but same names !?
-		assert (modelelement.a == MDK::AccesVariableEnumeration.accPublic)		
+		assert (modelelement.a == MDK::AccesVariableEnumeration.accPrivate)		
 	end
 	
 	operation testSaveModelWithEnum() is do
@@ -65,15 +65,18 @@ class Main inherits TestCase
 		
 		// create the model
 		var modelelement1 : MDK::EnumTest init MDK::EnumTest.new
-		modelelement1.a := MDK::AccesVariableEnumeration.accPublic
+		modelelement1.a := MDK::AccesVariableEnumeration.accPrivate
 		res1.add(modelelement1)
+		stdio.writeln("before save1")
 		res1.save()
+		stdio.writeln("after save1")
 		// reload it in a new repository and check it
 		
 		var emfRep2 : EMFRepository init EMFRepository.new
 		var res2 : EMFResource
 		res2 ?= emfRep2.createResource(outputmodelUriBase+"modelWithEEnum2.xmi", metamodelUri)
 		res2.load()
+		stdio.writeln("after load1")
 		var modelelement2 : MDK::EnumTest
 		// that's the first element ...
 		modelelement2 ?= res2.instances.one
@@ -82,7 +85,7 @@ class Main inherits TestCase
 		stdio.writeln(modelelement2.a.toString)
 		stdio.writeln(MDK::AccesVariableEnumeration.accPublic.toString)
 		stdio.writeln(MDK::AccesVariableEnumeration.accPrivate.toString)
-		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPublic)
+		assert (modelelement2.a == MDK::AccesVariableEnumeration.accPrivate)
 		
 	end
 	
