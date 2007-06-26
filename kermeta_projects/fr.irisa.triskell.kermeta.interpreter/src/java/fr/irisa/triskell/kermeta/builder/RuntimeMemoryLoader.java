@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.21 2007-06-22 09:52:02 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.22 2007-06-26 08:41:39 dvojtise Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -228,7 +228,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    	// then retreive the value in this enumeration and affect it to the property
 			    	    	// get the correct value (enumeration literal) from the enumeration
 				    		RuntimeObject roEnumLit=null;
-				    		roEnumLit = fr.irisa.triskell.kermeta.runtime.basetypes.Enumeration.getLiteral(roEnum, ((org.eclipse.emf.common.util.AbstractEnumerator)value).getLiteral());
+				    		roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, ((org.eclipse.emf.common.util.AbstractEnumerator)value).getLiteral());
 				    		
 				    	// set this value to the property
 				    		// DVK : I'm not sure we can directly assign this, is it a kind of singleton in memory ?

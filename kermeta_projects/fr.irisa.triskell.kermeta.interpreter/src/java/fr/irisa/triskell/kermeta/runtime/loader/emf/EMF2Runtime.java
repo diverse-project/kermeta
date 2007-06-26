@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.60 2007-06-22 09:58:45 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.61 2007-06-26 08:41:39 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -509,7 +509,7 @@ public class EMF2Runtime {
 	    				}
 	    				else if (fvalue instanceof EEnumLiteral)
 	    					litValue = ((EEnumLiteral)fvalue).getLiteral();
-	    				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.basetypes.Enumeration.getLiteral(roEnum, litValue);
+	    				RuntimeObject roEnumLit = fr.irisa.triskell.kermeta.runtime.rohelper.EnumerationHelper.getLiteral(roEnum, litValue);
 	    				rObject.getProperties().put(prop.getName(), roEnumLit);
 	    			}
 	    			// Get the RO-repr of this EObject
