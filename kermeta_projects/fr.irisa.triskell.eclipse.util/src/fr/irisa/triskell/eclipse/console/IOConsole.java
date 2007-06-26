@@ -1,6 +1,6 @@
 
 
-/*$Id: IOConsole.java,v 1.2 2007-02-20 14:19:55 ftanguy Exp $
+/*$Id: IOConsole.java,v 1.3 2007-06-26 14:28:53 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IOConsoleOutputStream;
@@ -137,8 +138,8 @@ public class IOConsole {
 	}
 	
 	public void print(ConsoleMessage message) {
+		changeColor(message.getColor());
 		IOConsoleOutputStream stream = getOutputStream();
-		stream.setColor(message.getColor());
 		try {
 			stream.write(message.getMessage());
 		} catch (IOException exception) {
@@ -146,9 +147,22 @@ public class IOConsole {
 		}
 	}
 	
+	/**
+	 * this methods allow to change the color of futur message
+	 * (this is because a simple change of current stream color, change the color for all messages, even previous ones ...) 
+	 * @param c
+	 */
+	public void changeColor(Color c){
+		Color previousColor = getOutputStream().getColor();
+		if(!c.equals(previousColor)){
+			// need to change to another stream for the new color
+			outputStream = null; // reset the stream
+			getOutputStream().setColor(c);
+		}
+	}
 	public void println(ConsoleMessage message) {
+		changeColor(message.getColor());
 		IOConsoleOutputStream stream = getOutputStream();
-		stream.setColor(message.getColor());
 		try {
 			stream.write(message.getMessage() + '\n');
 		} catch (IOException exception) {
