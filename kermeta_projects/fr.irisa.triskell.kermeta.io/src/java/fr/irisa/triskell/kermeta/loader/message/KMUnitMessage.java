@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessage.java,v 1.2 2007-01-23 15:26:15 dvojtise Exp $
+/* $Id: KMUnitMessage.java,v 1.3 2007-06-26 15:34:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMUnitMessage.java
  * License : EPL
@@ -13,9 +13,6 @@ package fr.irisa.triskell.kermeta.loader.message;
 
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
-
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * Represents a message in a Kermeta Unit

@@ -5,9 +5,6 @@
 package fr.irisa.triskell.kermeta.loader.message;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
-
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 ;
 
 /**
