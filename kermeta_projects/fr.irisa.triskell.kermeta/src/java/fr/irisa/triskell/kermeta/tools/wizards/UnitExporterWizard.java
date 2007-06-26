@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.16 2007-05-29 13:03:55 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.17 2007-06-26 13:39:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -272,13 +272,10 @@ public class UnitExporterWizard extends Wizard {
 
 		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(
 				inputFile_uri);
-		if (tracePage.enableFileDestinationButton.getSelection()) {
-			if (!isInputKM) { // this is not an xmi load, we need to trace the
-				// loading process too
-				initTraces();
-				unit.setTracer(tracer);
-			}
-		}
+		// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
+		initTraces();
+		unit.setTracer(tracer);
+		
 		return unit;
 	}
 
