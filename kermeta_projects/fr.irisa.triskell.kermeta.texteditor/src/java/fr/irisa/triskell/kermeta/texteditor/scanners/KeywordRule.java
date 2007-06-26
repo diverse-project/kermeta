@@ -1,6 +1,6 @@
 
 
-/*$Id: KeywordRule.java,v 1.2 2007-02-20 14:26:23 ftanguy Exp $
+/*$Id: KeywordRule.java,v 1.3 2007-06-26 09:35:02 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -66,6 +66,7 @@ public class KeywordRule implements IRule {
 		addKeyword("using", specialKeyword);
 		addKeyword("inherits", structureKeyword);
 		addKeyword("class", structureKeyword);
+		addKeyword("modeltype", structureKeyword);
 		addKeyword("@pre", operatorKeyword); //doesn't work properly, probably because the @ is processed firstly
 		addKeyword("pre", specialKeyword);
 		addKeyword("post", specialKeyword);
