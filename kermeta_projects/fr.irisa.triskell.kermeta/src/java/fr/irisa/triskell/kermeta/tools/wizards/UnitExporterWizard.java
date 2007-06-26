@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.17 2007-06-26 13:39:48 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.18 2007-06-26 15:46:30 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.tools.wizards;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -217,12 +218,24 @@ public class UnitExporterWizard extends Wizard {
 		unit.load();
 		unit.typeCheck(null);
 
+		ArrayList<KermetaUnit> kuList = unit.getAllImportedUnits();
+		if(kuList.size() != 0){
+			KermetaPlugin.getDefault().getConsole().println("Files or resources indirectly loaded :");
+			for( KermetaUnit ku :  kuList){
+				KermetaPlugin.getDefault().getConsole().println("    " + ku.getUri());				
+			}
+		}
+		
 		if (unit.messages.hasError()) {
 			Shell theShell = this.getContainer().getShell();
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors: "
-							+ unit.messages.getAllMessagesAsString());
-			ErrorMessage message = new ErrorMessage(unit.messages.getAllMessagesAsString());
+							+ unit.messages.getAllErrorMessagesAsString());
+			if (unit.messages.getAllWarnings().size() > 0) {
+				WarningMessage message = new WarningMessage(unit.messages.getAllWarningMessagesAsString());
+				KermetaPlugin.getDefault().getConsole().println(message);
+			}
+			ErrorMessage message = new ErrorMessage(unit.messages.getAllErrorMessagesAsString());
 			KermetaPlugin.getDefault().getConsole().println(message);
 
 		} else {
