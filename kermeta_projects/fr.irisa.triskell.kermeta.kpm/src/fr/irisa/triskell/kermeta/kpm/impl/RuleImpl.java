@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RuleImpl.java,v 1.4 2007-05-28 12:16:19 ftanguy Exp $
+ * $Id: RuleImpl.java,v 1.5 2007-06-26 12:29:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -18,6 +18,7 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -295,7 +296,7 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 * 
 	 * @generated NOT
 	 */
-	HashMap<Unit, Boolean> mustStop = new HashMap<Unit, Boolean>();
+	//HashMap<Unit, Boolean> mustStop = new HashMap<Unit, Boolean>();
 
 	/**
 	 * 
@@ -303,24 +304,15 @@ public class RuleImpl extends EObjectImpl implements Rule {
 	 */
 	public void processAsSynchrone(Unit unit, Map args, IProgressMonitor monitor) {
 
-		boolean stop = false;
-
-		synchronized (mustStop) {
-			stop = mustStop.get(unit);
-		}
-
 		Iterator<Out> iterator = getOuts().iterator();
-		while (!stop && iterator.hasNext()) {
-			/*
-			 * try { Thread.sleep(100); } catch (InterruptedException e) { //
-			 * TODO Auto-generated catch block e.printStackTrace(); }
-			 */
+		while ( iterator.hasNext() ) {
+
+			if ( monitor.isCanceled() )
+				return;
+			
 			Out currentOut = iterator.next();
 			if (!currentOut.isIndependant()) {
-				if (monitor == null)
-					currentOut.process(unit, new NullProgressMonitor(), args);
-				else
-					currentOut.process(unit, monitor, args);
+				currentOut.process(unit, monitor, args);
 			} else {
 
 				/*
@@ -333,11 +325,9 @@ public class RuleImpl extends EObjectImpl implements Rule {
 				 *  }; subJob.schedule();
 				 */
 			}
-			synchronized (mustStop) {
-				stop = mustStop.get(unit);
-			}
+			
 		}
-		list.remove(unit);
+		
 	}
 
 	/**
@@ -375,53 +365,109 @@ public class RuleImpl extends EObjectImpl implements Rule {
 					 * TODO Auto-generated catch block e.printStackTrace(); }
 					 */
 
-					if (!out.isIndependant()) {
-						out.process(finalUnit, monitor, finalArgs);
-					} else {
+					if ( ! monitor.isCanceled() ) {
+					
+						if ( !out.isIndependant() ) {
+							out.process(finalUnit, monitor, finalArgs);
+						} else {
 
-						/*
-						 * Job subJob = new Job("Processing Independant Out") {
-						 * 
-						 * 
-						 * public IStatus run(IProgressMonitor monitor) {
-						 * out.process(monitor); return Status.OK_STATUS; }
-						 * 
-						 *  }; subJob.schedule();
-						 */
+							/*
+							 * Job subJob = new Job("Processing Independant Out") {
+							 * 
+							 * 
+							 * public IStatus run(IProgressMonitor monitor) {
+							 * out.process(monitor); return Status.OK_STATUS; }
+							 * 
+							 *  }; subJob.schedule();
+							 */
+						}
 					}
 				}
-				jobs.remove(finalUnit);
+				
+				synchronized ( jobs ) {
+					jobs.remove(finalUnit);
+				}
 				// list.remove(finalUnit);
 				return Status.OK_STATUS;
 			}
 		};
-		jobs.put(unit, job);
+		synchronized ( jobs ) {
+			jobs.put(unit, job);
+		}
 		job.schedule();
 	}
 
+	private Hashtable <Unit, IProgressMonitor> monitors = new Hashtable <Unit, IProgressMonitor> ();
+	
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
 	 */
-	public void process(Unit unit, boolean synchrone, Map args, IProgressMonitor monitor) {
+	public void process(final Unit unit, boolean synchrone, final Map args, final IProgressMonitor monitor) {
 	
 		try {
 		
 			monitor.beginTask("", 1);
+						
+			if ( synchrone ) {
 			
-			if (synchrone) {
-				synchronized (list) {
-					if (list.contains(unit))
-						mustStop.put(unit, true);
-					else {
-						mustStop.put(unit, false);
-						list.add(unit);
-					}
+				synchronized( monitors ) {
+					IProgressMonitor currentMonitor = monitors.get(unit);
+					if ( currentMonitor != null )
+						currentMonitor.setCanceled( true );
+					monitors.put(unit, monitor);
 				}
-				processAsSynchrone(unit, args, new SubProgressMonitor(monitor, 1) );
-			} else
+				
+				processAsSynchrone(unit, args, monitor);
+				
+				synchronized( monitors ) {
+					monitors.remove(unit);
+				}
+			/*Job currentJob = null;
+			
+			if ( synchrone ) {
+				
+				synchronized (jobs) {
+					currentJob = jobs.get(unit);
+				}
+				
+				if ( currentJob != null ) {
+						
+					currentJob.cancel();
+					try {
+						currentJob.join();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+							
+				}
+					
+				currentJob = new Job("Processing Rule " + getName()) {
+						 
+					 public IStatus run(IProgressMonitor monitor) {
+						 processAsSynchrone(unit, args, monitor);
+					 	 return Status.OK_STATUS;
+					 }
+						 
+				 };
+					 
+				synchronized(jobs) {
+					jobs.put(unit, currentJob);
+					currentJob.schedule();
+					 
+					 try {
+						 currentJob.join();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					 
+				}*/
+
+			} else {
 				processAsAsynchrone(unit, args, new SubProgressMonitor(monitor, 1) );
+			}
+			
 		} finally {
 			monitor.done();
 		}
@@ -473,86 +519,6 @@ public class RuleImpl extends EObjectImpl implements Rule {
 		 *  }; subJob.schedule(); } } list.remove(unit);
 		 * System.out.println("ending processing dependency"); } }
 		 */
-	}
-
-	final private HashSet<Unit> list = new HashSet<Unit>();
-
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public void process(Unit unit, boolean synchrone, Map args) {
-
-		synchronized (list) {
-			while (list.contains(unit)) {
-				try {
-					Thread.currentThread().sleep(500);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-
-		list.add(unit);
-		if (getIn().evaluate(unit)) {
-
-			if (!synchrone) {
-				final Unit finalUnit = unit;
-				final Map finalArgs = args;
-				Job job = new Job("Processing Rule " + getName()) {
-
-					public IStatus run(IProgressMonitor monitor) {
-
-						for (Out out : (List<Out>) getOuts()) {
-
-							if (!out.isIndependant()) {
-								out.process(finalUnit, monitor, finalArgs);
-							} else {
-
-								/*
-								 * Job subJob = new Job("Processing Independant
-								 * Out") {
-								 * 
-								 * 
-								 * public IStatus run(IProgressMonitor monitor) {
-								 * out.process(monitor); return
-								 * Status.OK_STATUS; }
-								 * 
-								 *  }; subJob.schedule();
-								 */
-							}
-						}
-						list.remove(finalUnit);
-						return Status.OK_STATUS;
-					}
-				};
-				job.schedule();
-			} else {
-				for (Out out : (List<Out>) getOuts()) {
-
-					if (!out.isIndependant()) {
-						out.process(unit, new NullProgressMonitor(), args);
-					} else {
-
-						/*
-						 * Job subJob = new Job("Processing Independant Out") {
-						 * 
-						 * 
-						 * public IStatus run(IProgressMonitor monitor) {
-						 * out.process(monitor); return Status.OK_STATUS; }
-						 * 
-						 *  }; subJob.schedule();
-						 */
-					}
-				}
-				list.remove(unit);
-				System.out.println("ending processing dependency");
-			}
-		}
-
 	}
 
 	/**

@@ -2,14 +2,20 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeFilterImpl.java,v 1.2 2007-04-04 13:43:55 ftanguy Exp $
+ * $Id: TypeFilterImpl.java,v 1.3 2007-06-26 12:29:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.KpmPackage;
 import fr.irisa.triskell.kermeta.kpm.Type;
 import fr.irisa.triskell.kermeta.kpm.TypeFilter;
+import fr.irisa.triskell.kermeta.kpm.Unit;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -151,5 +157,43 @@ public class TypeFilterImpl extends FilterImpl implements TypeFilter {
 		}
 		return super.eIsSet(featureID);
 	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean matches(Unit unit) {
+		
+		try {
+			IResource resource = null;
+			Class type = Class.forName( getType().getValue() );
+			IFile file = ResourceHelper.getIFile( unit.getValue() );
+			if ( (file != null) && file.exists() )
+				resource = file;
+			
+			if ( resource == null ) {
+				IFolder folder = ResourceHelper.getIFolder( unit.getValue() );
+				if ( (folder != null) && folder.exists() )
+					resource = folder;
+			}
+			
+			if ( resource == null ) {
+				IProject project = ResourceHelper.getIProject( unit.getValue() );
+				if ( (project != null) && project.exists() )
+					resource = project;
+			}
+			
+			if ( resource == null )
+				return false;
+			else
+				return type.isInstance( resource );
+			
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
+
+	}
+
 
 } //TypeFilterImpl

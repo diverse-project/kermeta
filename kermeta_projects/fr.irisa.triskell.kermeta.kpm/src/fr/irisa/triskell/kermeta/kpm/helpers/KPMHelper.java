@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.14 2007-06-15 14:45:34 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.15 2007-06-26 12:29:04 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -15,6 +15,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.runtime.CoreException;
 
 import fr.irisa.triskell.kermeta.kpm.FilterExpression;
 import fr.irisa.triskell.kermeta.kpm.In;
@@ -25,6 +29,7 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Rule;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.properties.KPMConstants;
+import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 
 public class KPMHelper {
 
@@ -38,6 +43,7 @@ public class KPMHelper {
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.removeDependentDependencies");
 		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2km");
+		kpm.createAction("fr.irisa.triskell.kermeta.kpm.actions.ecore2kmt");
 		
 		
 		kpm.getEvent("open");
@@ -221,4 +227,69 @@ public class KPMHelper {
 				unit.getRules().add(currentRule);
 		}
 	}
+
+
+
+
+
+
+	static public void addRules(KPM kpm, Unit unit) {
+		
+		Iterator <Rule> iterator = kpm.getRules().iterator();
+		
+		while ( iterator.hasNext() ) {
+			
+			Rule currentRule = iterator.next();
+			if ( currentRule.getIn().getExpression().evaluateIn(unit) )
+				unit.getRules().add( currentRule );
+			
+		}
+		
+	}
+
+
+	static public void addRulesForAll(KPM kpm) {
+		Iterator <Unit> iterator = kpm.getUnits().iterator();
+		while ( iterator.hasNext() ) {
+			addRules(kpm, iterator.next() );
+		}
+	}
+	
+	/*static public void addRulesToProject(KermetaProject project) {
+		
+		project.getValue();
+		
+	}
+
+
+	class RulesAdder implements IResourceDeltaVisitor {
+
+		private KPM kpm = null;
+		
+		public RulesAdder(KPM kpm) {
+			this.kpm = kpm;
+		}
+		
+		public boolean visit(IResourceDelta delta) throws CoreException {
+			
+			IResource resource = delta.getResource();
+			
+			Iterator <Rule> iterator = kpm.getRules().iterator();
+			
+			while ( iterator.hasNext() ) {
+				
+				Rule currentRule = iterator.next();
+				if ( currentRule.getIn().getExpression().evaluateIn( ) )
+					unit.getRules().add( currentRule );
+				
+			}
+			
+			return true;
+		}
+		
+	};*/
+
+
+
+
 }

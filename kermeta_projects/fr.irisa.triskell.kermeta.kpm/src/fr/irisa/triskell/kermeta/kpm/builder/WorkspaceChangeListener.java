@@ -1,4 +1,4 @@
-/*$Id: WorkspaceChangeListener.java,v 1.3 2007-06-15 14:45:34 ftanguy Exp $
+/*$Id: WorkspaceChangeListener.java,v 1.4 2007-06-26 12:29:04 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -35,6 +35,8 @@ public class WorkspaceChangeListener implements IResourceChangeListener {
 
 			for ( KermetaProject project : projectsToOpen )
 				project.open();
+
+			visitor.dispatchEvents();
 			
 		} catch (CoreException e) {
 			e.printStackTrace();
