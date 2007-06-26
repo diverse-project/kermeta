@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitTraceHelper.java,v 1.2 2007-05-15 09:12:38 dvojtise Exp $
+/* $Id: KermetaUnitTraceHelper.java,v 1.3 2007-06-26 13:41:27 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KermetaUnitTraceHelper.java
  * License    : EPL
@@ -57,7 +57,7 @@ public class KermetaUnitTraceHelper {
     			
     		}
 		}
-		return "not able to locate the location of this element in the traces" + fo;
+		return "not able to locate this element in the traces " + fo;
 		
 	}
 	
