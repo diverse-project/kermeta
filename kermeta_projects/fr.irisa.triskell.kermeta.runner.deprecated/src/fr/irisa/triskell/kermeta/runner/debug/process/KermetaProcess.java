@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.5 2007-06-01 11:33:23 dvojtise Exp $
+/* $Id: KermetaProcess.java,v 1.6 2007-06-26 09:33:49 dvojtise Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL
@@ -93,7 +93,7 @@ public class KermetaProcess //extends Process
 									+ " in Thread Class Loader " + this.thread.getName());
 						} else {
 							// deal with project url
-							urlsV.add(new URL("file://" +entry1.getLocation() + "//"));
+							urlsV.add(new URL("file:///" +entry1.getLocation() + "//"));
 							RunnerPlugin.pluginLog.debug("added " + "file:///" + entry1.getLocation()+ "//"
 									+ " in Thread Class Loader " + this.thread.getName());
 						}
