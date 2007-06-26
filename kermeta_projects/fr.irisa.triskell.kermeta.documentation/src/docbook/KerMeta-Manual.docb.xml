@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.19 2007-06-06 16:22:43 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.20 2007-06-26 09:26:39 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-06-06 16:22:43 $</pubdate>
+    <pubdate>$Date: 2007-06-26 09:26:39 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher,
@@ -587,7 +587,7 @@ this line too. */</programlisting>
       <para>Kermeta textual syntax uses several keywords like
       <literal>class</literal>, <literal>attribute</literal>,
       <literal>reference</literal>, <literal>result</literal>, etc. (Please
-      see the appendice at the end of this document to get the complete list
+      see <xref linkend="appendix_keywords.link"/> at the end of this document to get the complete list
       of Kermeta keywords.)</para>
 
       <para>This doesn't mean you cannot use these words for your own model.
@@ -4390,13 +4390,15 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
     </note>
   </chapter>
 
-  <appendix>
-    <title>Language keywords</title>
+  <appendix id="appendix_keywords.link">
+    <title id="appendix_keywords.title.link">Language keywords</title>
 
     <para>The following keywords are used by Kermeta textual syntax.</para>
 
-    <note>
-       If you want to name some class or property using those names, you'll need to escape them using the ~ (tilda).Ex: class ~class {} 
+    <note><para>
+       If you want to name some class or property using those names, you'll need to escape them using the ~ (tilda).Ex: <literal>class ~class {}</literal></para>
+       <para>(See <xref linkend="section_reserved_keywords.link"/>) 
+       </para>
     </note>
 
     <informaltable>
