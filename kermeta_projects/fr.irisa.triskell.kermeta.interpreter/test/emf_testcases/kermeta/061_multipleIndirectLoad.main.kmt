@@ -1,4 +1,4 @@
-/* $Id: 061_multipleIndirectLoad.main.kmt,v 1.1 2007-06-25 16:23:21 dvojtise Exp $
+/* $Id: 061_multipleIndirectLoad.main.kmt,v 1.2 2007-06-26 11:51:52 dvojtise Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -18,7 +18,9 @@ require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::standard
 using kermeta::persistence
 using kermeta::kunit
+using ecore
 /***
+ * related to bug #3173
  * 	- a model A with elements
  *	- two models B and C referencing elements of A. Some elements are shared between B and C.
  *	- in a *.kmt file, I load models B and C, I search elements that are common to B and C
@@ -35,7 +37,7 @@ class Main inherits TestCase
 		tr.printTestResult
 	end
 	
-	operation setUp() is do
+	method setUp() is do
 		metamodelUri := "http://www.eclipse.org/emf/2002/Ecore"
 		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/061_multipleIndirectLoad_"
 		
@@ -49,14 +51,63 @@ class Main inherits TestCase
 		resB ?= emfRep.createResource(modelUriBase+"B.ecore", metamodelUri)
 		resC ?= emfRep.createResource(modelUriBase+"C.ecore", metamodelUri)
 		
+		assertTrueWithMsg(emfRep.resources.size == 2, "looking for 2 resources, found " + emfRep.resources.size.toString)
+		
 		resB.load
-		assert(emfRep.resources.size == 2)
+		stdio.writeln("   after resB.load")
+		emfRep.resources.each{r | stdio.writeln(r.uri)}
+		assertTrueWithMsg(emfRep.resources.size == 3, "looking for 3 resources, found " + emfRep.resources.size.toString)
+		
 		resC.load
-		assert(emfRep.resources.size == 3)
+		stdio.writeln("   after resC.load")
+		emfRep.resources.each{r | stdio.writeln(r.uri)}
+		// we are expecting that it had retrieved the existing resource
+		assertTrueWithMsg(emfRep.resources.size == 3, "looking for 3 resources, found " + emfRep.resources.size.toString)
+		
+		// model specific part
+		var packB : EPackage
+		packB ?= resB.one
+		var classB : EClass
+		classB ?= packB.eClassifiers.one
+		var featB : EStructuralFeature
+		featB := classB.eStructuralFeatures.one 
+
+		var packC : EPackage
+		packC ?= resC.one
+		var classC : EClass
+		classC ?= packC.eClassifiers.one
+		var featC : EStructuralFeature
+		featC := classC.eStructuralFeatures.one 
+		
+		var classAfromResB  : EClassifier
+		classAfromResB := featB.eType
+		var classAfromResC  : EClassifier
+		classAfromResC := featC.eType
+		
+		
+		assertTrueWithMsg(classAfromResB == classAfromResC, "retrieved object from both resources aren't equals (" + classAfromResB.toString + " != "+classAfromResC.toString +")")
+		assertTrueWithMsg(classAfromResB.oid == classAfromResC.oid, "retrieved object from both resources aren't identical (" + classAfromResB.toString + " != "+classAfromResC.toString +")")
+				
+	end
+/*	
+
+	// more or less the same but the creation order is different
+	operation testMultipleIndirectLoad2() is do
+		var emfRep : EMFRepository init EMFRepository.new
+		var resB : EMFResource
+		var resC : EMFResource
+		resB ?= emfRep.createResource(modelUriBase+"B.ecore", metamodelUri)
+		
+		resB.load
+		emfRep.resources.each{r | stdio.writeln(r.uri)}
+		assertTrueWithMsg(emfRep.resources.size == 2, "looking for 2 resources, found " + emfRep.resources.size.toString)
+		resC ?= emfRep.createResource(modelUriBase+"C.ecore", metamodelUri)
+		resC.load
+		assertTrueWithMsg(emfRep.resources.size == 3, "looking for 3 resources, found " + emfRep.resources.size.toString)
 		
 		
 		
 	end
-	
+	*/
 	
 }
