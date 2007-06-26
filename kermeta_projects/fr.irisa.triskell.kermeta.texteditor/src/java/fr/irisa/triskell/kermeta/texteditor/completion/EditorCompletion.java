@@ -155,8 +155,8 @@ public class EditorCompletion implements IContentAssistProcessor {
 							}
 						}
 					
-					} else {
-						
+					} else if ( kermetaUnit.getTracer() != null ){
+												
 						Set <ModelReference> references = kermetaUnit.getTracer().getModelReferences(trueOffset, length, uri);  
 						for ( ModelReference reference : references ) {
 							EObject container = reference.getRefObject();
@@ -185,7 +185,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 				    		String keyword = iterator.next();
 				    		String regex = text + ".+";
 				    		if ( keyword.toLowerCase().matches(regex) ) {
-				    			CompletionProposal proposal = new CompletionProposal(keyword, offset, text.length(), keyword.length());
+				    			CompletionProposal proposal = new CompletionProposal(keyword, trueOffset, text.length(), keyword.length());
 				    			proposals.add( proposal );
 				    		}
 				    	}
