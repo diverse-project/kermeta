@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitTraceHelper.java,v 1.3 2007-06-26 13:41:27 dvojtise Exp $
+/* $Id: KermetaUnitTraceHelper.java,v 1.4 2007-06-26 15:34:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KermetaUnitTraceHelper.java
  * License    : EPL
@@ -12,12 +12,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.message;
 
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
@@ -38,7 +33,6 @@ public class KermetaUnitTraceHelper {
 	 */
 	static public String getLocationAsString(fr.irisa.triskell.kermeta.language.structure.Object fo, KermetaUnit root_unit)
 	{	
-		KermetaUnit ku = null;
 		String result = "";
 		
 		ModelReference mr = root_unit.findModelReferenceToModelElement(fo);
@@ -52,12 +46,13 @@ public class KermetaUnitTraceHelper {
     		if(mr.getRefObject().eResource() != null)
     		{
     			result += mr.getRefObject().eResource().getURI().toFileString();
-    			result += " (not textual source found)";
+    			result += " (no textual source found)";
     			return result;
     			
     		}
 		}
-		return "not able to locate this element in the traces " + fo;
+    	// return null if not found ...
+		return null;
 		
 	}
 	

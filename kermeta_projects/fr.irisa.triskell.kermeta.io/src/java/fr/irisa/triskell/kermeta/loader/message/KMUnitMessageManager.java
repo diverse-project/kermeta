@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.5 2007-05-30 11:28:46 jsteel Exp $
+/* $Id: KMUnitMessageManager.java,v 1.6 2007-06-26 15:34:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -35,7 +35,7 @@ public class KMUnitMessageManager {
 	/**
 	 * The list of warning. typically messages that don't stop the execution 
 	 */
-	protected ArrayList warnings = new ArrayList();
+	protected ArrayList<KMUnitMessage> warnings = new ArrayList<KMUnitMessage>();
 	
 	
 	protected KermetaUnit unit;
@@ -176,8 +176,8 @@ public class KMUnitMessageManager {
 	 * @return Returns the warnings from this unit. If there is an warning in imported unit, 
 	 * 	only report the name of the unit that contain the warning
 	 */
-	public ArrayList getWarnings() {
-	    ArrayList result = new ArrayList();
+	public ArrayList<KMUnitMessage> getWarnings() {
+	    ArrayList<KMUnitMessage> result = new ArrayList<KMUnitMessage>();
 	    // we may have a cycle in the require statements ...
 	    if(isCallinGetWarnings) return result;
 	    isCallinGetWarnings = true;
@@ -204,8 +204,8 @@ public class KMUnitMessageManager {
 	 * @return Returns the warnings and messages from this unit. If there is a warning or error in 
 	 * an imported unit, only report the name of the unit that contain the warning/error
 	 */
-	public ArrayList getMessages() {
-	    ArrayList result = new ArrayList();
+	public ArrayList<KMUnitMessage> getMessages() {
+	    ArrayList<KMUnitMessage> result = new ArrayList<KMUnitMessage>();
 	    result.addAll(getWarnings());
 	    result.addAll(getErrors());
 		return result;
@@ -215,8 +215,8 @@ public class KMUnitMessageManager {
 	 * @return Returns the error from this unit and imported units. 
 	 * Ensures that an error is reported only once.
 	 */
-	public ArrayList getAllErrors() {
-	    ArrayList result = new ArrayList();
+	public ArrayList<KMUnitMessage> getAllErrors() {
+	    ArrayList<KMUnitMessage> result = new ArrayList<KMUnitMessage>();
 	    result.addAll(errors);
 	    ArrayList iulist = unit.getAllImportedUnits();
 	    for (int i=0; i<iulist.size(); i++) {	        
@@ -230,8 +230,8 @@ public class KMUnitMessageManager {
 	 * @return Returns the warnings from this unit and imported units. 
 	 * Ensures that a warning is reported only once.
 	 */
-	public ArrayList getAllWarnings() {
-	    ArrayList result = new ArrayList();
+	public ArrayList<KMUnitMessage> getAllWarnings() {
+	    ArrayList<KMUnitMessage> result = new ArrayList<KMUnitMessage>();
 	    result.addAll(warnings);
 	    ArrayList iulist = unit.getAllImportedUnits();
 	    for (int i=0; i<iulist.size(); i++) {	        
@@ -244,8 +244,8 @@ public class KMUnitMessageManager {
 	 * @return Returns the warnings and errors from this unit and imported units. 
 	 * Ensures that a warning or error is reported only once.
 	 */
-	public ArrayList getAllMessages() {
-	    ArrayList result = new ArrayList();
+	public ArrayList<KMUnitMessage> getAllMessages() {
+	    ArrayList<KMUnitMessage> result = new ArrayList<KMUnitMessage>();
 	    result.addAll(getAllWarnings());
 	    result.addAll(getAllErrors());
 		return result;
@@ -262,44 +262,76 @@ public class KMUnitMessageManager {
 		while(it.hasNext()) {
 			KMUnitMessage kmumessage = (KMUnitMessage)it.next();
 			result += kmumessage.getMessage() + "\n";
-			if(kmumessage.getNode() != null)
-				result += "->   " + KermetaUnitTraceHelper.getLocationAsString(kmumessage.getNode(), unit) + "\n";
-			//result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+			result += "  ->   " + getMessageOrigin(kmumessage) + "\n";
 		}
 		return result;
 	}
 	
 	/**
-	 * Return all the error messages as a string
+	 * Return all the messages as a string
 	 * (including messages from imported unit)
 	 * @return String
 	 */
 	public String getAllMessagesAsString() {
+		return getMessagesListAsString(getAllMessages());
+	}
+	/**
+	 * Return all the error messages as a string
+	 * (including messages from imported unit)
+	 * @return String
+	 */
+	public String getAllErrorMessagesAsString() {
+		return getMessagesListAsString(getAllErrors());
+	}
+	/**
+	 * Return all the error messages as a string
+	 * (including messages from imported unit)
+	 * @return String
+	 */
+	public String getAllWarningMessagesAsString() {
+		return getMessagesListAsString(getAllWarnings());
+	}
+	
+	protected String getMessageOrigin(KMUnitMessage kmumessage){
+		String result =null; 
+		if(kmumessage.getNode() != null){
+			String traceOrigin = KermetaUnitTraceHelper.getLocationAsString(kmumessage.getNode(), unit);
+			if(traceOrigin != null)
+				result =  KermetaUnitTraceHelper.getLocationAsString(kmumessage.getNode(), unit) ;
+		}
+		if(result == null) // last chance
+		{
+			// retreive the unit that hold this message
+			boolean found = false;
+			ArrayList iulist = unit.getAllImportedUnits();
+		    for (int i=0; i<iulist.size(); i++) {	        
+		        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+		        if(iu.messages.getMessages().contains(kmumessage))
+		        {
+		        	result =iu.getUri() ;
+		        	found = true;
+		        	break;
+		        }
+		    }
+		    if(!found) result = unit.getUri() ;
+		    	
+		}
+		return result;
+	}
+	
+	/**
+	 * return the list of messages as a string
+	 * @param messages
+	 * @return
+	 */
+	public String getMessagesListAsString(ArrayList<KMUnitMessage> messages){	
 		String result = "";
 		KMUnitMessage kmumessage;
-		Iterator it = getAllMessages().iterator();
+		Iterator it = messages.iterator();
 		while(it.hasNext()) { 
 			kmumessage = (KMUnitMessage)it.next();
 			result += kmumessage.getMessage() + "\n";
-			if(kmumessage.getNode() != null)
-				result += "->   " + KermetaUnitTraceHelper.getLocationAsString(kmumessage.getNode(), unit) + "\n";
-			else
-			{
-				// retreive the unit that hold this message
-				boolean found = false;
-				ArrayList iulist = unit.getAllImportedUnits();
-			    for (int i=0; i<iulist.size(); i++) {	        
-			        KermetaUnit iu = (KermetaUnit)iulist.get(i);
-			        if(iu.messages.getMessages().contains(kmumessage))
-			        {
-			        	result += "->   " +iu.getUri() + "\n";
-			        	found = true;
-			        	break;
-			        }
-			    }
-			    if(!found) result += "->   " +unit.getUri() + "\n";
-			    	
-			}
+			result += "  ->   " + getMessageOrigin(kmumessage) + "\n";			
 		}
 		return result;
 	}
