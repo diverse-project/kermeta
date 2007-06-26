@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.7 2007-05-28 12:16:22 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.8 2007-06-26 12:24:01 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -101,12 +101,13 @@ public class CreateDependentDependencies implements IAction {
 
 	
 	private void createRequireDependency(KPM kpm, Unit unit, Unit importedUnit) {
-		In in = InOutHelper.createIn();
+		/*In in = InOutHelper.createIn();
 		Out out2 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.update");
 		Rule rule = RuleHelper.createRule(kpm, 
 			"require " + importedUnit.getValue(), 
 			"require", "update", in, out2);
-		unit.beDependentOf(importedUnit, rule.getType());		
+		unit.beDependentOf(importedUnit, rule.getType());		*/
+		unit.beDependentOf(importedUnit, kpm.getRuleType("require") );
 	}
 
 	
