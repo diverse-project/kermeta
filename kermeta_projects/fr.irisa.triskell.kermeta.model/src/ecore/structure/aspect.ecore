@@ -3,8 +3,10 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="structure">
-    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//structure/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1"
+          eType="#//structure/TypeDefinition"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   </eSubpackages>
