@@ -1,15 +1,14 @@
-/* $Id: OutlineItem.java,v 1.6 2006-10-27 08:50:26 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: OutlineItem.java,v 1.7 2007-06-27 13:19:39 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 28 avr. 2005
-* Author : Franck Fleurey
+* Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
-
 
 import org.eclipse.swt.graphics.Image;
 
@@ -25,8 +24,6 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class OutlineItem implements Comparable {
 

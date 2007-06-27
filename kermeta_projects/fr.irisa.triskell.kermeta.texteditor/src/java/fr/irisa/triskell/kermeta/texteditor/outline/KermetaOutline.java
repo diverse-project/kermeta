@@ -1,36 +1,31 @@
-/*
- * Created on 9 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: KermetaOutline.java,v 1.8 2007-06-27 13:19:39 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : KermetaOutline.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 09 feb. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
-//import java.util.Comparator;
 import java.util.Iterator;
 
-//import org.eclipse.jface.action.Action;
-//import org.eclipse.jface.action.IAction;
-//import org.eclipse.jface.action.IMenuManager;
-//import org.eclipse.jface.action.IStatusLineManager;
-//import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
-//import org.eclipse.jface.resource.ImageDescriptor;
-//import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
-//import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
@@ -41,8 +36,6 @@ import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class KermetaOutline extends ContentOutlinePage {
       
@@ -81,7 +74,6 @@ public class KermetaOutline extends ContentOutlinePage {
 	public boolean prefShowImported() {
 	    return preferences.getBoolean("kermeta.outline.show_imported");
 	}
-	
 	
 	public void dispose()
     {
@@ -237,11 +229,12 @@ public class KermetaOutline extends ContentOutlinePage {
     	}
      };
      */
-	
+
+
+
 	class MyBooleanPropertyAction extends BooleanPropertyAction {
 	    
-	
-	        /**
+	    /**
          * @param title
          * @param preferenceStore
          * @param property

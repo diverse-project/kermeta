@@ -1,7 +1,13 @@
-/*
- * Created on 13 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: GetTextVisitor.java,v 1.9 2007-06-27 13:19:39 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : GetTextVisitor.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 13 feb. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.Iterator;
@@ -9,8 +15,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-//import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -31,11 +35,8 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
-public 
-class GetTextVisitor extends KermetaOptimizedVisitor {
+public class GetTextVisitor extends KermetaOptimizedVisitor {
 	
     //protected KermetaOutline outline;
 	

@@ -1,25 +1,18 @@
-
-
-/*$Id: ClassNameRule.java,v 1.2 2007-02-20 14:26:23 ftanguy Exp $
-* Project : fr.irisa.triskell.kermeta.kpm
-* File : 	sdfg.java
+/* $Id: ClassNameRule.java,v 1.3 2007-06-27 13:19:27 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : 	ClassNameRule.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : Feb 20, 2007
 * Authors : ftanguy
 */
-package fr.irisa.triskell.kermeta.texteditor.scanners;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package fr.irisa.triskell.kermeta.texteditor.scanners;
 
 import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
-import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.Token;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -27,7 +20,6 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author ftanguy
- *
  */
 public class ClassNameRule implements IRule {
 

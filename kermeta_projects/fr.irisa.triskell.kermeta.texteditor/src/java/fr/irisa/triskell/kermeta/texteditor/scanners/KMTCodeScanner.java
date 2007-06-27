@@ -1,39 +1,28 @@
-
-
-/*$Id: KMTCodeScanner.java,v 1.2 2007-02-20 14:26:23 ftanguy Exp $
-* Project : fr.irisa.triskell.kermeta.kpm
-* File : 	sdfg.java
+/* $Id: KMTCodeScanner.java,v 1.3 2007-06-27 13:19:27 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : 	KMTCodeScanner.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : Feb 20, 2007
 * Authors : ftanguy
 */
+
 package fr.irisa.triskell.kermeta.texteditor.scanners;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.BufferedRuleBasedScanner;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
-import org.eclipse.jface.text.rules.IWhitespaceDetector;
-import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.PatternRule;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.jface.text.rules.WhitespaceRule;
-import org.eclipse.jface.text.rules.WordRule;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.texteditor.editors.CathegorizedKWList;
-import fr.irisa.triskell.kermeta.texteditor.editors.EditorConfiguration;
-import fr.irisa.triskell.kermeta.texteditor.editors.EditorScanner.IDDetector;
 
 /**
  * @author ftanguy
- *
  */
 public class KMTCodeScanner extends BufferedRuleBasedScanner {
 

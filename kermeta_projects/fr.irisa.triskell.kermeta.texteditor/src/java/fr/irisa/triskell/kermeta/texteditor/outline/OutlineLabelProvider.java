@@ -1,18 +1,21 @@
-/*
- * Created on 13 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: OutlineLabelProvider.java,v 1.3 2007-06-27 13:19:39 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : OutlineLabelProvider.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 13 feb. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
-
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class OutlineLabelProvider implements ILabelProvider{
 

@@ -1,7 +1,13 @@
-/*
- * Created on 13 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: OutlineContentProvider.java,v 1.4 2007-06-27 13:19:39 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : OutlineContentProvider.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 13 feb. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
@@ -16,8 +22,6 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class OutlineContentProvider implements ITreeContentProvider {
 
