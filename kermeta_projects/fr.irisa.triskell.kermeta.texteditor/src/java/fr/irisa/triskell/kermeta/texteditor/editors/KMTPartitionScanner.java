@@ -1,10 +1,10 @@
-/* $Id: KMTPartitionScanner.java,v 1.3 2007-06-27 12:59:08 cfaucher Exp $
+/* $Id: KMTPartitionScanner.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTPartitionScanner.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 26 janv. 2007
+* Creation date : 26 jan. 2007
 * Author : ftanguy (ftanguy@irisa.fr)
 */
 

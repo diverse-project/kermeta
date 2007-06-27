@@ -1,10 +1,10 @@
-/* $Id: KMTEditor.java,v 1.15 2007-06-27 12:59:08 cfaucher Exp $
+/* $Id: KMTEditor.java,v 1.16 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 20 janv. 2005
+* Creation date : 20 jan. 2005
 * Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 

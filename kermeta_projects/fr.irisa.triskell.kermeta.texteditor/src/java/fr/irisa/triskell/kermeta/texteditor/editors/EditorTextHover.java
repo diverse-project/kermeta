@@ -1,10 +1,10 @@
-/* $Id: EditorTextHover.java,v 1.20 2007-06-27 12:41:35 cfaucher Exp $
+/* $Id: EditorTextHover.java,v 1.21 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 12 févr. 2005
+* Creation date : 12 feb. 2005
 * Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 

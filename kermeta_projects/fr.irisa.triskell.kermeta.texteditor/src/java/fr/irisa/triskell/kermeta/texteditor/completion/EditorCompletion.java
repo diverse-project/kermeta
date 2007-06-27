@@ -1,10 +1,10 @@
-/* $Id: EditorCompletion.java,v 1.17 2007-06-27 12:36:00 cfaucher Exp $
+/* $Id: EditorCompletion.java,v 1.18 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 20 janv. 2005
+* Creation date : 20 jan. 2005
 * Author : Franck Fleurey (ffleurey@irisa.fr)
 */
 

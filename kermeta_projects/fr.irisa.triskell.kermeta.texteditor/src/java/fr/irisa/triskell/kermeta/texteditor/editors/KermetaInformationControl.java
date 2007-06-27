@@ -1,10 +1,10 @@
-/* $Id: KermetaInformationControl.java,v 1.3 2007-06-27 12:45:00 cfaucher Exp $
+/* $Id: KermetaInformationControl.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaInformationControl.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 27 avr. 2005
+* Creation date : 27 apr. 2005
 * Author : Franck Fleurey
 */ 
 

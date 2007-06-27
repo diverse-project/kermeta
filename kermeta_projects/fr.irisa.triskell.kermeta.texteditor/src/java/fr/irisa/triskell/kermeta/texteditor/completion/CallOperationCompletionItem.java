@@ -1,10 +1,10 @@
-/* $Id: CallOperationCompletionItem.java,v 1.3 2007-06-27 12:36:00 cfaucher Exp $
+/* $Id: CallOperationCompletionItem.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : CallPropertyCompletionItem.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 10 mai 2005
+* Creation date : 10 may 2005
 * Author : Franck Fleurey
 */ 
 
@@ -23,8 +23,6 @@ import fr.irisa.triskell.kermeta.typechecker.FTypePrettyPrinter;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class CallOperationCompletionItem extends CompletionItem {
 

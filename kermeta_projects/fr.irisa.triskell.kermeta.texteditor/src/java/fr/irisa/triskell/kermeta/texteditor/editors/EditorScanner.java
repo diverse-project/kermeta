@@ -1,10 +1,10 @@
-/* $Id: EditorScanner.java,v 1.9 2007-06-27 12:41:35 cfaucher Exp $
+/* $Id: EditorScanner.java,v 1.10 2007-06-27 14:43:04 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorScanner.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 20 janv. 2005
+* Creation date : 20 jan. 2005
 * Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 

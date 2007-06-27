@@ -1,10 +1,10 @@
-/* $Id: TexteditorPlugin.java,v 1.11 2007-06-27 12:37:06 cfaucher Exp $
+/* $Id: TexteditorPlugin.java,v 1.12 2007-06-27 14:43:05 cfaucher Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : TexteditorPlugin.java
  * License : EPL
  * Copyright : IRISA / INRIA/ Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 11 Fev. 2005
+ * Creation date : 11 feb. 2005
  * Authors : 
  * 		ffleurey <ffleurey@irisa.fr
  *     	dvojtise <dvojtise@irisa.fr>

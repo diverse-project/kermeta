@@ -1,4 +1,4 @@
-/* $Id: NamedElementCompletionItem.java,v 1.3 2007-06-27 12:36:00 cfaucher Exp $
+/* $Id: NamedElementCompletionItem.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : NamedElementCompletionItem.java
 * License : EPL
@@ -16,8 +16,6 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class NamedElementCompletionItem extends CompletionItem {
 

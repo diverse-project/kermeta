@@ -1,10 +1,10 @@
-/* $Id: GetImageVisitor.java,v 1.7 2007-06-27 12:36:00 cfaucher Exp $
+/* $Id: GetImageVisitor.java,v 1.8 2007-06-27 14:43:05 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 13 févr. 2005
+* Creation date : 13 feb. 2005
 * Author : Franck Fleurey (ffleurey@irisa.fr)
 */
 

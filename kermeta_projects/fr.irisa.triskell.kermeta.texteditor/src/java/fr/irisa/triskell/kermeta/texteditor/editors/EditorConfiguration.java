@@ -1,10 +1,10 @@
-/* $Id: EditorConfiguration.java,v 1.19 2007-06-27 12:41:35 cfaucher Exp $
+/* $Id: EditorConfiguration.java,v 1.20 2007-06-27 14:43:04 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorConfiguration.java
 * License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 20 janv. 2005
+* Creation date : 20 jan. 2005
 * Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 
