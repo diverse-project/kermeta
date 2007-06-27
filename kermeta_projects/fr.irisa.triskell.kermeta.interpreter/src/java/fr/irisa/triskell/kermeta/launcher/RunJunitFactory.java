@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.18 2007-04-04 13:51:43 ftanguy Exp $
+/* $Id: RunJunitFactory.java,v 1.19 2007-06-27 08:29:55 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -18,12 +18,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
@@ -85,9 +84,10 @@ public class RunJunitFactory implements Test {
             
             if (unit.messages.hasError()) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
-            	System.err.println(unit.messages.getAllMessagesAsString());
+            	System.out.println(unit.messages.getAllWarningMessagesAsString());            	
+            	System.err.println(unit.messages.getAllErrorMessagesAsString());
             	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)", 
-            		new Exception(unit.messages.getAllMessagesAsString()));
+            		new Exception(unit.messages.getAllErrorMessagesAsString()));
                 return theTestCase;
             }
             
