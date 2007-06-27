@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackageImpl.java,v 1.7 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: BehaviorPackageImpl.java,v 1.8 2007-06-27 15:31:10 jmottu Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -446,6 +446,15 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 */
 	public EClass getCallVariable() {
 		return callVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCallVariable_IsAtpre() {
+		return (EAttribute)callVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -944,6 +953,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		createEReference(blockEClass, BLOCK__RESCUE_BLOCK);
 
 		callVariableEClass = createEClass(CALL_VARIABLE);
+		createEAttribute(callVariableEClass, CALL_VARIABLE__IS_ATPRE);
 
 		callFeatureEClass = createEClass(CALL_FEATURE);
 		createEReference(callFeatureEClass, CALL_FEATURE__TARGET);
@@ -1091,6 +1101,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEReference(getBlock_RescueBlock(), this.getRescue(), null, "rescueBlock", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callVariableEClass, CallVariable.class, "CallVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCallVariable_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", null, 0, 1, CallVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(callFeatureEClass, CallFeature.class, "CallFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallFeature_Target(), this.getExpression(), null, "target", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

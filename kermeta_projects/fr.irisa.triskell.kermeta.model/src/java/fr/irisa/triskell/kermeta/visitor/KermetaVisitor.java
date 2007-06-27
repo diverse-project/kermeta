@@ -1,6 +1,6 @@
 /*
  * This code has been generated to visit an ecore model
- * Creation date: Wed May 16 15:44:33 CEST 2007
+ * Creation date: Wed Jun 27 17:14:21 CEST 2007
  * Template Created on 7 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -204,6 +204,10 @@ public class KermetaVisitor {
 	return genericVisitChildren(node);
 	}
 
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.TypeDefinition node) {
+	return genericVisitChildren(node);
+	}
+
 	public Object visit(fr.irisa.triskell.kermeta.language.structure.Enumeration node) {
 	return genericVisitChildren(node);
 	}
@@ -241,10 +245,6 @@ public class KermetaVisitor {
 	}
 
 	public Object visit(fr.irisa.triskell.kermeta.language.structure.VirtualType node) {
-	return genericVisitChildren(node);
-	}
-
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.TypeDefinition node) {
 	return genericVisitChildren(node);
 	}
 

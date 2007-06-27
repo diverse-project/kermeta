@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.7 2007-05-30 11:17:44 jsteel Exp $
+ * $Id: BehaviorPackage.java,v 1.8 2007-06-27 15:31:10 jmottu Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -422,13 +422,22 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_VARIABLE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
 
 	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_VARIABLE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Call Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_VARIABLE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 0;
+	int CALL_VARIABLE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -654,6 +663,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int CALL_RESULT__STATIC_TYPE_VARIABLE_BINDINGS = CALL_VARIABLE__STATIC_TYPE_VARIABLE_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_RESULT__IS_ATPRE = CALL_VARIABLE__IS_ATPRE;
 
 	/**
 	 * The number of structural features of the '<em>Call Result</em>' class.
@@ -1885,6 +1903,17 @@ public interface BehaviorPackage extends EPackage {
 	EClass getCallVariable();
 
 	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.language.behavior.CallVariable#isIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.CallVariable#isIsAtpre()
+	 * @see #getCallVariable()
+	 * @generated
+	 */
+	EAttribute getCallVariable_IsAtpre();
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2556,6 +2585,14 @@ public interface BehaviorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CALL_VARIABLE = eINSTANCE.getCallVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_VARIABLE__IS_ATPRE = eINSTANCE.getCallVariable_IsAtpre();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.

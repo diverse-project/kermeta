@@ -32,7 +32,9 @@
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/behavior/Block/statement"/>
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/behavior/Block/rescueBlock"/>
         </genClasses>
-        <genClasses ecoreClass="kermeta_java.ecore#//language/behavior/CallVariable"/>
+        <genClasses ecoreClass="kermeta_java.ecore#//language/behavior/CallVariable">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/behavior/CallVariable/isAtpre"/>
+        </genClasses>
         <genClasses ecoreClass="kermeta_java.ecore#//language/behavior/CallFeature">
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/behavior/CallFeature/target"/>
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/behavior/CallFeature/isAtpre"/>

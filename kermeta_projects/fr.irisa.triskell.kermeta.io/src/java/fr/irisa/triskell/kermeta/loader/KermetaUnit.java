@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.88 2007-06-05 15:41:16 cfaucher Exp $
+/* $Id: KermetaUnit.java,v 1.89 2007-06-27 15:28:30 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -34,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -217,8 +218,9 @@ public abstract class KermetaUnit {
 	public Property current_property;
 	public Enumeration current_enum;
 	public Assignment current_assignment;
-	public Constraint current_constraint; //JMM ask the utility of these
+	public Constraint current_constraint;
 	public CallFeature current_callFeature;
+	public CallVariable current_callVariable;
 	
 	
 	/**

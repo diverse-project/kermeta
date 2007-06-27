@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariableItemProvider.java,v 1.6 2006-10-24 09:19:18 cfaucher Exp $
+ * $Id: CallVariableItemProvider.java,v 1.7 2007-06-27 15:28:26 jmottu Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
 
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
@@ -19,11 +20,15 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.CallVariable} object.
@@ -59,8 +64,31 @@ public class CallVariableItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIsAtprePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Atpre feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsAtprePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CallVariable_isAtpre_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CallVariable_isAtpre_feature", "_UI_CallVariable_type"),
+				 BehaviorPackage.Literals.CALL_VARIABLE__IS_ATPRE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -95,6 +123,12 @@ public class CallVariableItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(CallVariable.class)) {
+			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

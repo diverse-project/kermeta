@@ -2,12 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariableImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: CallVariableImpl.java,v 1.3 2007-06-27 15:31:10 jmottu Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+
+import org.eclipse.emf.common.notify.Notification;
 
 import fr.irisa.triskell.kermeta.language.structure.Type;
 
@@ -16,6 +18,8 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -26,11 +30,35 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * An implementation of the model object '<em><b>Call Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl#isIsAtpre <em>Is Atpre</em>}</li>
+ * </ul>
  * </p>
  *
  * @generated
  */
 public class CallVariableImpl extends CallExpressionImpl implements CallVariable {
+	/**
+	 * The default value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ATPRE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAtpre = IS_ATPRE_EDEFAULT;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,6 +75,96 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 */
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.CALL_VARIABLE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsAtpre() {
+		return isAtpre;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAtpre(boolean newIsAtpre) {
+		boolean oldIsAtpre = isAtpre;
+		isAtpre = newIsAtpre;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_VARIABLE__IS_ATPRE, oldIsAtpre, isAtpre));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+				return isIsAtpre() ? Boolean.TRUE : Boolean.FALSE;
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+				setIsAtpre(((Boolean)newValue).booleanValue());
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+				setIsAtpre(IS_ATPRE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
+				return isAtpre != IS_ATPRE_EDEFAULT;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (isAtpre: ");
+		result.append(isAtpre);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CallVariableImpl

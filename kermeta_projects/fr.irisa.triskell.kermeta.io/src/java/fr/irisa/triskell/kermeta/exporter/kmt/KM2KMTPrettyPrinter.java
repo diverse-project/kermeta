@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.49 2007-05-30 11:28:46 jsteel Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.50 2007-06-27 15:28:30 jmottu Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -1009,6 +1009,15 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		else {
 			result += KMTHelper.getMangledIdentifier(node.getName());
 			
+			// handle when the feature is postfixed with @pre
+			if (node.isIsAtpre()){
+				if(node.getStaticProperty() != null){
+					result += "@pre";
+				}else{
+					result += " /* only properties can be postfixed with @pre */";
+				}
+			}
+			
 			// handle the special case where there is 1 parameter, and when This
 			// parameter is a lambdaPostFix
 			//	TODO : throw an exception if type is not a LambdaExpression
@@ -1037,6 +1046,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitCallVariable(CallVariable node) {
 		String result = KMTHelper.getMangledIdentifier(node.getName());
+		
+		//		handle when the feature is postfixed with @pre
+		if(node.isIsAtpre()){
+			result+="@pre";
+		}
+		
 		if (node.getParameters().size()> 0) {
 			result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
 		}

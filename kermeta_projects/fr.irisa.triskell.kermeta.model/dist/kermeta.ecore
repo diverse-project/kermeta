@@ -29,7 +29,9 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="statement" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="//language/behavior/Rescue" containment="true"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//language/behavior/CallExpression"/>
+      <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//language/behavior/CallExpression">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="//language/structure/Boolean"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="//language/behavior/CallExpression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="//language/structure/Boolean"/>
@@ -192,6 +194,10 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="//language/structure/Integer"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="//language/structure/UnlimitedNatural"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="//language/structure/NamedElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="//language/structure/Boolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="//language/structure/TypeDefinition"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="//language/structure/Type //language/structure/TypeDefinition"/>
       <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="//language/structure/DataType">
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" upperBound="-1" eType="//language/structure/EnumerationLiteral" containment="true" eOpposite="//language/structure/EnumerationLiteral/enumeration"/>
@@ -264,7 +270,6 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="modelType" lowerBound="1" eType="//language/structure/VirtualTypeContainer" eOpposite="//language/structure/VirtualTypeContainer/virtualType"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" upperBound="-1" eType="//language/structure/TypeVariableBinding" containment="true"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="//language/structure/NamedElement"/>
       <eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="//language/structure/TypeContainer //language/structure/Type">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" unique="false" upperBound="-1" eType="//language/structure/Type"/>
       </eClassifiers>
