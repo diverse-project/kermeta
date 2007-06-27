@@ -1,11 +1,11 @@
-/* $Id: KermetaSpecialIcons.java,v 1.4 2006-08-07 09:18:17 dvojtise Exp $
-* Project : Kermeta (First iteration)
-* File : ButtonIcons.java
-* License : GPL
+/* $Id: KermetaSpecialIcons.java,v 1.5 2007-06-27 13:01:13 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : KermetaSpecialIcons.java
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 28 avr. 2005
-* Author : Franck Fleurey
+* Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 
 package fr.irisa.triskell.kermeta.texteditor.icons;
@@ -16,8 +16,6 @@ import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class KermetaSpecialIcons {
 

@@ -1,7 +1,13 @@
-/*
- * Created on 20 janv. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: KMTEditor.java,v 1.15 2007-06-27 12:59:08 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : KMTEditor.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 20 janv. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.Date;
@@ -32,7 +38,6 @@ import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
@@ -47,8 +52,6 @@ import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class KMTEditor extends TextEditor implements Interest {
 	

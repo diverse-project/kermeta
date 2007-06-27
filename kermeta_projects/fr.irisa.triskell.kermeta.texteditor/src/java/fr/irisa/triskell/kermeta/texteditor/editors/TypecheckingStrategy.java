@@ -1,3 +1,13 @@
+/* $Id: TypecheckingStrategy.java,v 1.5 2007-06-27 12:59:08 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : TypecheckingStrategy.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 04 apr. 2007
+* Author : ftanguy (ftanguy@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.HashMap;

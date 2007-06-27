@@ -1,6 +1,15 @@
+/* $Id: KMTTextListener.java,v 1.3 2007-06-27 12:59:08 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : KMTTextListener.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 04 apr. 2007
+* Author : ftanguy (ftanguy@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextListener;
 import org.eclipse.jface.text.TextEvent;
 

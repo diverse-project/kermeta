@@ -1,18 +1,20 @@
+/* $Id: KMTPartitionScanner.java,v 1.3 2007-06-27 12:59:08 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : KMTPartitionScanner.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 26 janv. 2007
+* Author : ftanguy (ftanguy@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
-import java.util.ArrayList;
-
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.EndOfLineRule;
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
-import org.eclipse.jface.text.rules.RuleBasedScanner;
-import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.widgets.Display;
 
 public class KMTPartitionScanner extends RuleBasedPartitionScanner {
 
