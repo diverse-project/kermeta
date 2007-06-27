@@ -1,14 +1,19 @@
-/*
- * Created on 9 f�vr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: CathegorizedKWList.java,v 1.8 2007-06-27 12:41:35 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : CathegorizedKWList.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 9 feb. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.ArrayList;
 
 /**
- * @author Franck Fleurey IRISA / University of rennes 1 Distributed under the
- *         terms of the GPL license
+ * @author Franck Fleurey
  */
 public class CathegorizedKWList {
 

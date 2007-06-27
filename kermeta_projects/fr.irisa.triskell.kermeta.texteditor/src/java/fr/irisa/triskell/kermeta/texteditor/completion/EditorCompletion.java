@@ -1,7 +1,13 @@
-/*
- * Created on 20 janv. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: EditorCompletion.java,v 1.17 2007-06-27 12:36:00 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : EditorCompletion.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 20 janv. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/
+
 package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import java.util.ArrayList;
@@ -10,8 +16,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
@@ -23,19 +27,11 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 
-import fr.irisa.triskell.kermeta.ast.CompUnit;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.ParamPostfix;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
-import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -44,13 +40,10 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.CathegorizedKWList;
-import fr.irisa.triskell.kermeta.texteditor.editors.KMTEditor;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.traceability.ModelReference;
-import fr.irisa.triskell.traceability.TextReference;
 
 /**
  * @author Franck Fleurey

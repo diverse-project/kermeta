@@ -1,7 +1,7 @@
-/* $Id: KermetaInformationControl.java,v 1.2 2005-05-02 23:57:51 ffleurey Exp $
+/* $Id: KermetaInformationControl.java,v 1.3 2007-06-27 12:45:00 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaInformationControl.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 27 avr. 2005
@@ -10,13 +10,11 @@
 
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlExtension;
 import org.eclipse.jface.text.IInformationControlExtension2;
 import org.eclipse.jface.text.IInformationControlExtension3;
 import org.eclipse.jface.text.TextPresentation;
-import org.eclipse.jface.text.DefaultInformationControl.IInformationPresenter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
@@ -26,25 +24,19 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
-import fr.irisa.triskell.kermeta.texteditor.outline.GetImageVisitor;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class KermetaInformationControl implements IInformationControl, IInformationControlExtension, IInformationControlExtension2,IInformationControlExtension3,  DisposeListener {
     

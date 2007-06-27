@@ -1,7 +1,13 @@
-/*
- * Created on 20 janv. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: EditorScanner.java,v 1.9 2007-06-27 12:41:35 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : EditorScanner.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 20 janv. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.ArrayList;
@@ -9,16 +15,12 @@ import java.util.Iterator;
 
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.EndOfLineRule;
-import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWhitespaceDetector;
 import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.MultiLineRule;
-import org.eclipse.jface.text.rules.PatternRule;
-import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
-import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WordRule;
 import org.eclipse.swt.graphics.Color;
@@ -27,8 +29,6 @@ import org.eclipse.swt.widgets.Display;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  * 
  * Create rules for different kinds of syntactic elements :
  * - comments

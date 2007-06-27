@@ -1,7 +1,7 @@
-/* $Id: CallOperationCompletionItem.java,v 1.2 2006-03-03 15:23:52 dvojtise Exp $
-* Project : Kermeta (First iteration)
+/* $Id: CallOperationCompletionItem.java,v 1.3 2007-06-27 12:36:00 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
 * File : CallPropertyCompletionItem.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 10 mai 2005

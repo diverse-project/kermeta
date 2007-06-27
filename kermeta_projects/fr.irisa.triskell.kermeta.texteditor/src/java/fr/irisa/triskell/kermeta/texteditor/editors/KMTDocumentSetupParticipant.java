@@ -1,3 +1,13 @@
+/* $Id: KMTDocumentSetupParticipant.java,v 1.3 2007-06-27 12:45:00 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : KMTDocumentSetupParticipant.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 15 déc. 2006
+* Author : ftanguy (ftanguy@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import org.eclipse.core.filebuffers.IDocumentSetupParticipant;

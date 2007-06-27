@@ -1,11 +1,11 @@
-/* $Id: NamedElementCompletionItem.java,v 1.2 2007-01-08 17:21:30 ftanguy Exp $
-* Project : Kermeta (First iteration)
-* File : TypeCompletionItem.java
-* License : GPL
+/* $Id: NamedElementCompletionItem.java,v 1.3 2007-06-27 12:36:00 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : NamedElementCompletionItem.java
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 10 mai 2005
-* Author : Franck Fleurey
+* Author : Franck Fleurey (ffleurey@irisa.fr)
 */ 
 
 package fr.irisa.triskell.kermeta.texteditor.completion;

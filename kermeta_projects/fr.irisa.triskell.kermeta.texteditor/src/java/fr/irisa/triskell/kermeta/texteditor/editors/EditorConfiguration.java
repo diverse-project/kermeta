@@ -1,7 +1,13 @@
-/*
- * Created on 20 janv. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: EditorConfiguration.java,v 1.19 2007-06-27 12:41:35 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : EditorConfiguration.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 20 janv. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -26,15 +32,12 @@ import org.eclipse.swt.widgets.Display;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.completion.KermetaCompletionListener;
-import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCodeScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTCommentScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTStringScanner;
 import fr.irisa.triskell.kermeta.texteditor.scanners.KMTTagScanner;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the EPL license
  * 
  * The class that instanciates/sets all the classes necessary to manage the source-view,
  * (like automatic completion (EditorCompletion), syntactic coloration (EditorScanner), etc.)

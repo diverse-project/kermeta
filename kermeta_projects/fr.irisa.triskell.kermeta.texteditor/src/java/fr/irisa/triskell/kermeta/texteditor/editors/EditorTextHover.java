@@ -1,7 +1,13 @@
-/*
- * Created on 12 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: EditorTextHover.java,v 1.20 2007-06-27 12:41:35 cfaucher Exp $
+* Project : fr.irisa.triskell.kermeta.texteditor
+* File : EditorTextHover.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 12 févr. 2005
+* Author : Franck Fleurey (ffleurey@irisa.fr)
+*/ 
+
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.Hashtable;
@@ -30,8 +36,6 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
@@ -44,9 +48,6 @@ import fr.irisa.triskell.kermeta.typechecker.Type;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
  */
 public class EditorTextHover implements ITextHover, ITextHoverExtension, IInformationControlCreator {
 
