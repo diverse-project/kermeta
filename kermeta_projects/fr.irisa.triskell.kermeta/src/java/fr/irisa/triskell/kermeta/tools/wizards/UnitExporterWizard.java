@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.18 2007-06-26 15:46:30 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.19 2007-06-27 07:07:16 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -226,31 +226,27 @@ public class UnitExporterWizard extends Wizard {
 			}
 		}
 		
+		// display eventual warnings
+		if (unit.messages.getAllWarnings().size() > 0) {
+			WarningMessage message = new WarningMessage(unit.messages.getAllMessagesAsString());
+			KermetaPlugin.getDefault().getConsole().println(message);
+		}
+		
 		if (unit.messages.hasError()) {
 			Shell theShell = this.getContainer().getShell();
 			MessageDialog.openError(theShell, "Error loading file",
-					"The source file contains errors: "
-							+ unit.messages.getAllErrorMessagesAsString());
-			if (unit.messages.getAllWarnings().size() > 0) {
-				WarningMessage message = new WarningMessage(unit.messages.getAllWarningMessagesAsString());
-				KermetaPlugin.getDefault().getConsole().println(message);
-			}
-			ErrorMessage message = new ErrorMessage(unit.messages.getAllErrorMessagesAsString());
-			KermetaPlugin.getDefault().getConsole().println(message);
+					"The source file contains errors. Please have look to the Console view for the details");
+			
+			ErrorMessage errmessage = new ErrorMessage(unit.messages.getAllErrorMessagesAsString());
+			KermetaPlugin.getDefault().getConsole().println(errmessage);
 
-		} else {
+		} 
+		if(!unit.messages.hasError() || outputPage.forceWriteEvenIfErrorCheck.getSelection()){
 			try {
 
-				outputFile = outputPage.createNewFile();
-
-				// display eventual warnings
-				if (unit.messages.getAllWarnings().size() > 0) {
-					WarningMessage message = new WarningMessage(unit.messages.getAllMessagesAsString());
-					KermetaPlugin.getDefault().getConsole().println(message);
-				}
+				outputFile = outputPage.createNewFile();				
 
 				KermetaPlugin.getDefault().getConsole().println("Writing " + outputFile.getName());
-
 
 				writeUnit(unit, outputFile);
 				if (tracePage.enableFileDestinationButton.getSelection()) {
@@ -258,8 +254,8 @@ public class UnitExporterWizard extends Wizard {
 					writeTrace();
 				}
 			} catch (Throwable e) {
-				Shell theShell = this.getContainer().getShell();
-				MessageDialog.openError(theShell, "Error writing file",
+				Shell theShell2 = this.getContainer().getShell();
+				MessageDialog.openError(theShell2, "Error writing file",
 						"errors: " + e.getMessage());
 
 				e.printStackTrace();

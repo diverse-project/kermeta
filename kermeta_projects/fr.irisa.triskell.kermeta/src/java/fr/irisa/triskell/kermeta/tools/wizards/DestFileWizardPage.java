@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.9 2006-08-04 15:31:50 zdrey Exp $
+/* $Id: DestFileWizardPage.java,v 1.10 2007-06-27 07:07:16 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -90,10 +90,14 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	protected Composite linkedResourceComposite;
 
 	protected Group fileExistsGroup;
+	protected Group errorBehaviorGroup;
 
 	protected Button forbidFileExistRadio;
 
 	protected Button overwriteIfFileExistRadio;
+	
+
+	protected Button forceWriteEvenIfErrorCheck;
 
 	// initial value stores
 	protected String initialFileName;
@@ -217,6 +221,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		resourceGroup.setAllowExistingResources(false);
 		initialPopulateContainerNameField();
 		createFileExistsBehaviorControls(topLevel);
+		createErrorBehaviorControls(topLevel);
 		createAdvancedControls(topLevel);
 		if (initialFileName != null)
 			resourceGroup.setResource(initialFileName);
@@ -271,6 +276,29 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	}
 
+	/**
+	 * @param parent
+	 */
+	protected void createErrorBehaviorControls(Composite parent) {
+		Font font = parent.getFont();
+		// Advanced group
+		errorBehaviorGroup = new Group(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(2, false);
+		errorBehaviorGroup.setLayout(layout);
+		errorBehaviorGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		errorBehaviorGroup.setFont(font);
+		errorBehaviorGroup.setText("Behavior if there are errors:");
+
+		Label label = new Label(errorBehaviorGroup, SWT.NULL);
+		label.setText("Write file even if there are errors ");
+		forceWriteEvenIfErrorCheck = new Button(errorBehaviorGroup, SWT.CHECK);
+		forceWriteEvenIfErrorCheck.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				Event trucEvent = new Event();
+				handleEvent(trucEvent);
+			}
+		});
+	}
 	/**
 	 * Creates a file resource given the file handle and contents.
 	 * 
