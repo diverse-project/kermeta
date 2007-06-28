@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.5 2007-06-28 09:23:15 jmottu Exp $
+/* $Id: AtPreVisitor.java,v 1.6 2007-06-28 17:10:47 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -45,6 +45,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 
 	@Override
 	public Object visitCallFeature(CallFeature node) {
+		RuntimeObject result = null; // The result to be returned by this visit
 		if(node.isIsAtpre()){
 			listCallFeatureAtPre.add(node);
 
@@ -56,7 +57,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			// It is a real operation / property call
 
 			fr.irisa.triskell.kermeta.language.structure.Class t_target = null; // Type of the "callee"
-			RuntimeObject result = null; // The result to be returned by this visit
+
 			RuntimeObject ro_target = null; // Runtime repr. of target
 
 			// Get the target of the call
@@ -65,7 +66,9 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 				ro_target = interpreterContext.peekCallFrame().getSelf();
 			}
 			else {
-				ro_target = (RuntimeObject)this.accept(node.getTarget());
+				//ro_target = (RuntimeObject)this.accept(node.getTarget());
+				ro_target = (RuntimeObject)expInterp.accept(node.getTarget());
+				
 			}
 
 
@@ -136,6 +139,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 				}
 
 			}
+
 			listCallFeatureAtPre.add(result);
 		}
 		return super.visitCallFeature(node);
@@ -151,9 +155,9 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 	public Object visitCallVariable(CallVariable node) {
 		RuntimeObject result = null;
 		if (node.isIsAtpre()){
-			
+
 			listCallVariableAtPre.add(node);
-						
+
 			Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getName());
 
 			// This is for debugg purposes it should never happend
@@ -166,13 +170,13 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			if (node.getParameters().size() == 0)
 			{
 				result = var.getRuntimeObject();
-				
+
 //				if(node.getStaticType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-//					//try to use deepClone to use atpre with Objects
-//					result = memory.getROFactory().deepCloneRuntimeObjectFromObject(null, result);
+//				//try to use deepClone to use atpre with Objects
+//				result = memory.getROFactory().deepCloneRuntimeObjectFromObject(null, result);
 //				}
 
-				
+
 				expInterp.current_variable = var;
 				// We add additional information in order to have a better handle of
 				// errors --> FIXME : it perhaps pollute the memory not very smartly...
@@ -184,7 +188,7 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 		}
 		return result;
 	}
-	
+
 	public Vector getListCallVariableAtPre() {
 		return listCallVariableAtPre;
 	}

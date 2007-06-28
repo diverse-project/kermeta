@@ -160,7 +160,7 @@ sequence postfixExp : target=primitiveExpression postfixlst ;
 list postfixlst : postfix* ;
 abstract postfix : callPostfix | lambdaPostfix | paramPostfix;
 
-sequence callPostfix : DOT name=ID ;
+sequence callPostfix : DOT name=ID (atp = atpreOp)?;
 sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN ;
 list actualParameterList : p1=actualParameter (COMMA pn=actualParameter)* ;
 sequence actualParameter : expression=fExpression ;

@@ -1,6 +1,6 @@
 /*
  * This code has been generated to visit an ecore model
- * Creation date: Wed Jun 27 17:14:21 CEST 2007
+ * Creation date: Thu Jun 28 11:26:42 CEST 2007
  * Template Created on 7 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */

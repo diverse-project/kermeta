@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2006-10-25 08:30:35 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2007-06-28 17:10:47 jmottu Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -66,6 +66,10 @@ public class JunitTestSuite extends TestSuite {
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
 		testWithFile("test/jar_testcases/kermeta","001_requireJava_rt_io.main.kmt" );
+
+		testWithFile("test/jar_testcases/kermeta","002_requireJava_rt_awt.main.kmt" );
+
+		testWithFile("test/jar_testcases/kermeta","003_requireJava_rt_math.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

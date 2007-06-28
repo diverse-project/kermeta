@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.9 2006-12-07 08:08:03 dvojtise Exp $
+/* $Id: KMT2KMPostfixExpressionBuilder.java,v 1.10 2007-06-28 17:07:33 jmottu Exp $
  * Project : Kermeta io
  * File : KMT2KMPostfixExpressionBuilder.java
  * License : EPL
@@ -76,7 +76,9 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		CallFeature call = builder.behav_factory.createCallFeature();
 		builder.storeTrace(call,callPostfix);
 		call.setName(getTextForID(callPostfix.getName()));
+		call.setIsAtpre(callPostfix.getAtp()!=null);
 		call.setTarget(result);
+		
 		result = call;
 		return false;
 	}

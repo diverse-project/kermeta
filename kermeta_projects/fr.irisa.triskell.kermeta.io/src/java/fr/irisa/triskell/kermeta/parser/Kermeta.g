@@ -647,8 +647,9 @@ postfix returns [ Postfix retVal = null ]
 
 callPostfix returns [ CallPostfix retVal = null ]
 :
-  dot:DOT name:ID 
-{ retVal = new CallPostfix(dot, name); }
+{ AtpreOp atp = null; }
+  dot:DOT name:ID ( atp=atpreOp )? 
+{ retVal = new CallPostfix(dot, name, atp); }
 ;
 
 paramPostfix returns [ ParamPostfix retVal = null ]
