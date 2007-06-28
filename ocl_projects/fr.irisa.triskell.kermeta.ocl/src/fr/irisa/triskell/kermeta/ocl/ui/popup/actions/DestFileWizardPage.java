@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.1 2007-06-01 15:03:02 barais Exp $
+/* $Id: DestFileWizardPage.java,v 1.2 2007-06-28 13:39:49 jmottu Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -59,6 +59,8 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
+
+import fr.irisa.triskell.kermeta.ocl.ui.Activator;
 
 
 
@@ -130,6 +132,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		super(pageName);
 		setPageComplete(false);
 		this.currentSelection = selection;
+		ecoreFile = Activator.FILE_MM;
 	}
 
 	// FIXME : Temporary static strings, since we used to use
@@ -217,7 +220,12 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		ecoreLbl.setText("Ecore meta-model: ");
 		
 		 ecoreText = new Text(ecoreSelectGrp, SWT.SINGLE | SWT.BORDER);
-		ecoreText.setText("Select you ecore Meta Model");
+		 if(ecoreFile != null){
+			 ecoreText.setText(ecoreFile.getName());
+		 }else{
+			 ecoreText.setText("Select your ecore Meta Model");
+		 }
+		
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		ecoreText.setLayoutData( gridData );
 		
@@ -228,6 +236,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					ecoreFile = handleBrowseButtonSelect();
+					Activator.FILE_MM = ecoreFile;
 					ecoreText.setText(ecoreFile.getName());
 				}
 			}

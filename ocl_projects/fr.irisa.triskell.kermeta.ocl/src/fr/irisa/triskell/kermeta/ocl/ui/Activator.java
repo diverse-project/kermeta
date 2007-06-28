@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.ocl.ui;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -11,6 +12,8 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "fr.irisa.triskell.kermeta.ocl";
+	
+	public static IFile FILE_MM= null;
 
 	// The shared instance
 	private static Activator plugin;
