@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.4 2007-06-28 09:06:38 jmottu Exp $
+/* $Id: AtPreVisitor.java,v 1.5 2007-06-28 09:23:15 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -167,9 +167,10 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			{
 				result = var.getRuntimeObject();
 				
-				if(node.getStaticType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
-					result = memory.getROFactory().deepCloneRuntimeObjectFromObject(null, result);
-				}
+//				if(node.getStaticType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+//					//try to use deepClone to use atpre with Objects
+//					result = memory.getROFactory().deepCloneRuntimeObjectFromObject(null, result);
+//				}
 
 				
 				expInterp.current_variable = var;
