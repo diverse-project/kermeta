@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.3 2007-06-27 15:31:07 jmottu Exp $
+/* $Id: AtPreVisitor.java,v 1.4 2007-06-28 09:06:38 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -166,6 +166,12 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			if (node.getParameters().size() == 0)
 			{
 				result = var.getRuntimeObject();
+				
+				if(node.getStaticType() instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+					result = memory.getROFactory().deepCloneRuntimeObjectFromObject(null, result);
+				}
+
+				
 				expInterp.current_variable = var;
 				// We add additional information in order to have a better handle of
 				// errors --> FIXME : it perhaps pollute the memory not very smartly...

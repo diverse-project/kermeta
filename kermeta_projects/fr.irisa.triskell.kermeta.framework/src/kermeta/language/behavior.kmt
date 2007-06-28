@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.17 2007-03-02 14:52:35 dtouzet Exp $
+/* $Id: behavior.kmt,v 1.18 2007-06-28 09:06:40 jmottu Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -52,6 +52,10 @@ abstract class Expression inherits kermeta::language::structure::Object, kermeta
  */
 class CallVariable inherits CallExpression, KMExpressionVisitable
 {
+
+	/** Tells wether this CallVariable represents a call to @pre in a postcondition */
+	attribute isAtpre : kermeta::standard::Boolean
+	
 	/** Implementation of the visitor design pattern on CallFeature objects */
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
