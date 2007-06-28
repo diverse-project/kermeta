@@ -1,4 +1,4 @@
-/* $Id: 055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt,v 1.4 2007-06-22 13:21:51 dvojtise Exp $
+/* $Id: 055_MT_FSM_simpleLoadFromDynamicInstance.main.kmt,v 1.5 2007-06-28 15:36:50 dvojtise Exp $
  * Creation date: November 14, 2006
  * License:
  * Copyright:
@@ -196,9 +196,9 @@ class SimpleLoader inherits kermeta::kunit::TestCase
     //----------------------------------
     // second serie 
    //    load compatible model
-   /*
+   
    operation testBasicSimpleLoadFromCompositeModel() : Void is do 
-        var myModel : basic_fsm init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.composite.xmi")
+        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.composite.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -216,7 +216,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
     end
     
     operation testBasicSimpleLoadFromFinalStatesModel() : Void is do 
-        var myModel : basic_fsm init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
+        var myModel : basic_fsm_mt init BasicFSMLoader.new.loadFromFile("../instances/055_MT_FSM_createDynamicInstance.finalstates.xmi")
         //stdio.writeln(myModel.contents.size.toString)
         assertTrueWithMsg(myModel.contents.size == 7,"didn't find the 7 objects in the model")
         
@@ -231,7 +231,7 @@ class SimpleLoader inherits kermeta::kunit::TestCase
         assertTrueWithMsg(myModel.filter(basic_fsm::Transition).size == 3, "didn't find 3 and only 3 Transitions in the model")
         
         
-    end*/
+    end
     
     // Third serie
     /* same but load from a model from the classic FSM: ie. that doesn't have 2 packages in the qualified name*/
