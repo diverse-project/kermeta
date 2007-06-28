@@ -2,8 +2,8 @@
 <?eclipse version="3.0"?>
 <plugin
    id="fr.irisa.triskell.kermeta.ecore"
-   name="KermetaEcore Plug-in"
-   version="0.0.1"
+   name="Ecore MDK Plug-in"
+   version="0.0.1.qualifier"
    provider-name=""
    class="fr.irisa.triskell.kermeta.ecore.KermetaEcorePlugin">
 

@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.sintaks"
       label="Sintaks for models"
-      version="0.0.2"
+      version="0.0.2.qualifier"
       provider-name="IRISA/INRIA">
 
    <description url="http://www.kermeta.org/sintaks">
