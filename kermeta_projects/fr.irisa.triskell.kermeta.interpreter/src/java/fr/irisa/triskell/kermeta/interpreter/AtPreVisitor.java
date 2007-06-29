@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.6 2007-06-28 17:10:47 jmottu Exp $
+/* $Id: AtPreVisitor.java,v 1.7 2007-06-29 11:46:59 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -13,9 +13,13 @@ package fr.irisa.triskell.kermeta.interpreter;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import org.eclipse.emf.ecore.EObject;
+
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -67,8 +71,11 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 			}
 			else {
 				//ro_target = (RuntimeObject)this.accept(node.getTarget());
+				if(node.getTarget() instanceof CallFeature && !((CallFeature)node.getTarget()).isIsAtpre()){
+					memory.getROFactory().getKermetaIOStream().print("WARNING : before running the method '" +getContainerOperation(node).getName()+ "' it is not possible to know the future value of '"+((CallFeature)node.getTarget()).getName()+ "' in the post condition '"+getContainerPostCondition(node).getName()+"'\n");
+				}
 				ro_target = (RuntimeObject)expInterp.accept(node.getTarget());
-				
+
 			}
 
 
@@ -142,9 +149,34 @@ public class AtPreVisitor extends KermetaOptimizedVisitor {
 
 			listCallFeatureAtPre.add(result);
 		}
-		return super.visitCallFeature(node);
+		super.visitCallFeature(node);
+		return result;
 	}
 
+	private Operation getContainerOperation(EObject node) {
+		if (node instanceof fr.irisa.triskell.kermeta.language.structure.Package){
+			return null;
+		}
+		
+		if(node instanceof fr.irisa.triskell.kermeta.language.structure.Operation){
+			return (Operation) node;
+		}
+		
+		return getContainerOperation(node.eContainer());
+	}
+	
+	private Constraint getContainerPostCondition(EObject node) {
+		if (node instanceof fr.irisa.triskell.kermeta.language.structure.Package){
+			return null;
+		}
+		
+		if(node instanceof Constraint){
+			return (Constraint) node;
+		}
+		
+		return getContainerPostCondition(node.eContainer());
+	}
+	
 	public Vector getListCallFeatureAtPre() {
 		return listCallFeatureAtPre;
 	}

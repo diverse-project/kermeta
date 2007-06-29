@@ -1,4 +1,4 @@
-/* $Id: ConstraintInterpreter.java,v 1.6 2007-06-27 15:31:07 jmottu Exp $
+/* $Id: ConstraintInterpreter.java,v 1.7 2007-06-29 11:46:59 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -265,7 +265,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 				throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
 			}
 
-			if(node.isIsAtpre()){
+			if(node.isIsAtpre() && atpreV.getListCallFeatureAtPre().indexOf(node) != -1){
 				int index = atpreV.getListCallFeatureAtPre().indexOf(node);
 				result = (RuntimeObject)atpreV.getListCallFeatureAtPre().get(index + 1);
 			}else{
@@ -298,7 +298,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		// It is a simple variable call
 		if (node.getParameters().size() == 0)
 		{
-			if(node.isIsAtpre()){
+			if(node.isIsAtpre() && atpreV.getListCallVariableAtPre().indexOf(node) != -1){
 				int index = atpreV.getListCallVariableAtPre().indexOf(node);
 				result = (RuntimeObject)atpreV.getListCallVariableAtPre().get(index + 1);
 			}else{
