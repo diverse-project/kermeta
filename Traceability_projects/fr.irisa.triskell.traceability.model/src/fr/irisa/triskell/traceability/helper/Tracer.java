@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.4 2007-06-22 12:57:47 ftanguy Exp $
+/* $Id: Tracer.java,v 1.5 2007-07-01 09:26:05 ftanguy Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -378,16 +378,19 @@ public class Tracer {
 			}
 		}
 
-		Set <ModelReference> modelReferences = new HashSet <ModelReference> ();
-		Iterator <Trace> iterator = result.getTargetTraces().iterator();
-		while ( iterator.hasNext() ) {
-			Trace currentTrace = iterator.next();
-			if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
-				modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+		if ( result != null ) {
+			Set <ModelReference> modelReferences = new HashSet <ModelReference> ();
+			Iterator <Trace> iterator = result.getTargetTraces().iterator();
+			while ( iterator.hasNext() ) {
+				Trace currentTrace = iterator.next();
+				if ( currentTrace.getTargetReferences().get(0) instanceof ModelReference )
+					modelReferences.add( (ModelReference) currentTrace.getTargetReferences().get(0) );
+			}
+		
+			return modelReferences;
 		}
 		
-		return modelReferences;
-		
+		return new HashSet <ModelReference> ();
 	}
 	
 }
