@@ -71,9 +71,10 @@ public class OpenProject implements IAction, Interest {
 			 * 
 			 * 
 			 */
-			
-
-			Iterator<Unit> iterator = kpm.getUnits().iterator();
+			// Here the list of units is copied because during the process, some units can be added
+			// wich can lead a concurrent modification exception.
+			List <Unit> copy = new ArrayList( kpm.getUnits() );
+			Iterator<Unit> iterator = copy.iterator();
 			while ( iterator.hasNext() ) {
 				
 				Unit currentUnit = iterator.next();
