@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.18 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: EditorCompletion.java,v 1.19 2007-07-01 09:27:46 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -176,7 +176,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 				    	Iterator <String> iterator = CathegorizedKWList.getInstance().keywords.iterator();
 				    	while ( iterator.hasNext() ) {
 				    		String keyword = iterator.next();
-				    		String regex = text + ".+";
+				    		String regex = getRegularExpression( text.toLowerCase() );
 				    		if ( keyword.toLowerCase().matches(regex) ) {
 				    			CompletionProposal proposal = new CompletionProposal(keyword, trueOffset, text.length(), keyword.length());
 				    			proposals.add( proposal );
@@ -198,6 +198,12 @@ public class EditorCompletion implements IContentAssistProcessor {
 		
 	}
 	
+	private String getRegularExpression(String s) {
+		String regex = s.replaceAll("\\{", "\\\\{");
+		regex = regex.replaceAll("\\}", "\\\\}");
+		regex += ".+";
+		return regex;
+	}
 	
 	private List <ICompletionProposal> proposals = new ArrayList <ICompletionProposal> ();
 	
@@ -298,7 +304,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 	}
 	
 	private void addCompletionProposalsForIdentifiers( Block block, String name, int offset ) {
-		String regex = name.toLowerCase() + ".+";
+		String regex = getRegularExpression( name.toLowerCase() );
 		List <VariableDecl> declarations = getVariableDeclarations( block );
 		Iterator <VariableDecl> iterator = declarations.iterator();
 		while ( iterator.hasNext() ) {
@@ -312,7 +318,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 	}
 	
 	private void addCompletionProposalsForIdentifiers( Operation operation, String name, int offset ) {
-		String regex = name.toLowerCase() + ".+";
+		String regex = getRegularExpression( name.toLowerCase() );
 		Iterator <Parameter> iterator = operation.getOwnedParameter().iterator();	
 		while ( iterator.hasNext() ) {
 			Parameter parameter = iterator.next();
@@ -327,7 +333,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 	private void addCompletionProposalsForIdentifiers( ClassDefinition definition, String name, int offset ) {
 		
 		Iterator <Property> iterator = ClassDefinitionHelper.getAllProperties(definition).iterator();
-		String regex = name.toLowerCase() + ".+";
+		String regex = getRegularExpression( name.toLowerCase() );
 		while ( iterator.hasNext() ) {
 			Property property = iterator.next();
 			if ( property.getName().toLowerCase().matches(regex) ) {
@@ -389,7 +395,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 	private List <Property> getAttributes(String attributeName, ClassDefinition definition) {
 		List <Property> properties = new ArrayList <Property> ();
 		Iterator <Property> iterator = definition.getOwnedAttribute().iterator();
-		String regex = attributeName.toLowerCase() + ".+";
+		String regex = getRegularExpression( attributeName.toLowerCase() );
 		while ( iterator.hasNext() ) {
 			Property property = iterator.next();
 			if ( property.getName().matches(regex) )
