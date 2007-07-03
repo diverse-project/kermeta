@@ -66,7 +66,8 @@ public class EcoreVisitor {
 					throw new Error(e);
 				}
 				catch (Exception e) {
-					
+					KermetaUnit.internalLog.error("Exception during accept");
+					KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);					
 				    throw new Error(e);
 				}
 				return result;
