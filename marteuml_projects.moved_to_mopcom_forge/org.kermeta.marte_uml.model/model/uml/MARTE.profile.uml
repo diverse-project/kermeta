@@ -5431,7 +5431,7 @@
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
     <packageImport xmi:id="_8T8IBssAEdui-MGYX_zatQ">
-      <importedPackage href="./MARTE.uml#_cQON8MWcEduP8IkPcz5YXg"/>
+      <importedPackage href="MARTE.uml#_cQON8MWcEduP8IkPcz5YXg"/>
     </packageImport>
     <packageImport xmi:id="_6mGT4MsFEdui-MGYX_zatQ">
       <importedPackage href="MARTE.uml#_RTG88MWYEduoNd-Z5nIJbQ"/>
@@ -5585,22 +5585,22 @@
       <packagedElement xmi:type="uml:Stereotype" xmi:id="_8T8vGcsAEdui-MGYX_zatQ" name="ExecHost">
         <generalization xmi:id="__9M0EMsIEduD-bGPtBtoYw" general="_RaSzgsr9Edui-MGYX_zatQ"/>
         <ownedAttribute xmi:id="_8T8vGssAEdui-MGYX_zatQ" name="commTxOverhead" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vG8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vHMsAEdui-MGYX_zatQ"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vHcsAEdui-MGYX_zatQ" name="commRcvOverhead" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vHssAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vH8sAEdui-MGYX_zatQ"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vIMsAEdui-MGYX_zatQ" name="contextSwitchTime" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vIcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vIssAEdui-MGYX_zatQ"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vI8sAEdui-MGYX_zatQ" name="clockOverhead" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vJMsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vJcsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vJssAEdui-MGYX_zatQ">
@@ -5611,7 +5611,7 @@
           <ownedComment xmi:id="_8qd_YMsFEdui-MGYX_zatQ" annotatedElement="_8T8vJ8sAEdui-MGYX_zatQ">
             <body>NFP_Interval undefined</body>
           </ownedComment>
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pw-SoMWbEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pw-SoMWbEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vmdd4MsCEdui-MGYX_zatQ" value="2"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vmR3sMsCEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vKssAEdui-MGYX_zatQ">
@@ -5619,7 +5619,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vK8sAEdui-MGYX_zatQ" name="memorySize" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vLMsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vLcsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vLssAEdui-MGYX_zatQ">
@@ -5627,7 +5627,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vL8sAEdui-MGYX_zatQ" name="utilization" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vMMsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vMcsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vMssAEdui-MGYX_zatQ">
@@ -5640,7 +5640,7 @@
       <packagedElement xmi:type="uml:Stereotype" xmi:id="_8T8vNcsAEdui-MGYX_zatQ" name="CommHost">
         <generalization xmi:id="_AZnqUMsJEduD-bGPtBtoYw" general="_RaSzgsr9Edui-MGYX_zatQ"/>
         <ownedAttribute xmi:id="_8T8vNssAEdui-MGYX_zatQ" name="capacity" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_qIrrMMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_qIrrMMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vN8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vOMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vOcsAEdui-MGYX_zatQ">
@@ -5648,7 +5648,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vOssAEdui-MGYX_zatQ" name="throughput" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_qIrrMMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_qIrrMMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vO8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vPMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vPcsAEdui-MGYX_zatQ">
@@ -5656,7 +5656,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vPssAEdui-MGYX_zatQ" name="packetTime" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vP8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vQMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vQcsAEdui-MGYX_zatQ">
@@ -5664,7 +5664,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vQssAEdui-MGYX_zatQ" name="blockingTime" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vQ8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vRMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vRcsAEdui-MGYX_zatQ">
@@ -5679,7 +5679,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vSssAEdui-MGYX_zatQ" name="utilization" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vS8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vTMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vTcsAEdui-MGYX_zatQ">
@@ -5692,7 +5692,7 @@
       <packagedElement xmi:type="uml:Stereotype" xmi:id="_8T8vUMsAEdui-MGYX_zatQ" name="CommChannel">
         <generalization xmi:id="_-o7v0MsIEduD-bGPtBtoYw" general="_RaTar8r9Edui-MGYX_zatQ"/>
         <ownedAttribute xmi:id="_8T8vUcsAEdui-MGYX_zatQ" name="packetSize" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vUssAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vU8sAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vVMsAEdui-MGYX_zatQ">
@@ -5700,7 +5700,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T8vVcsAEdui-MGYX_zatQ" name="utilization" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T8vVssAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T8vV8sAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T8vWMsAEdui-MGYX_zatQ">
@@ -5815,7 +5815,7 @@
       <packagedElement xmi:type="uml:Stereotype" xmi:id="_8T9WWssAEdui-MGYX_zatQ" name="AnalysisContext">
         <generalization xmi:id="_d1eaoMslEdu4HtTLvB6rcw" general="_rc-EwMV3Edu8-79onzvRnw"/>
         <ownedAttribute xmi:id="_8T9WW8sAEdui-MGYX_zatQ" name="contextParams" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_s0HMIMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_s0HMIMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9WXMsAEdui-MGYX_zatQ" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WXcsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WXssAEdui-MGYX_zatQ">
@@ -5829,7 +5829,7 @@
         <generalization xmi:id="_zHqbUMskEdu4HtTLvB6rcw" general="_RaWd58r9Edui-MGYX_zatQ"/>
         <generalization xmi:id="_-4sZYMskEdu4HtTLvB6rcw" general="_Lk3tEMjgEduaYtMA3rvXmA"/>
         <ownedAttribute xmi:id="_8T9WYssAEdui-MGYX_zatQ" name="hostDemand" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9WY8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WZMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WZcsAEdui-MGYX_zatQ">
@@ -5837,7 +5837,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T9WZssAEdui-MGYX_zatQ" name="hostDemandOps" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9WZ8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WaMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WacsAEdui-MGYX_zatQ">
@@ -5845,7 +5845,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T9WassAEdui-MGYX_zatQ" name="interOccTime" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9Wa8sAEdui-MGYX_zatQ" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WbMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WbcsAEdui-MGYX_zatQ">
@@ -5853,7 +5853,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T9WbssAEdui-MGYX_zatQ" name="throughput" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_qIrrMMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_qIrrMMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9Wb8sAEdui-MGYX_zatQ" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WcMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WccsAEdui-MGYX_zatQ">
@@ -5861,7 +5861,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T9WcssAEdui-MGYX_zatQ" name="respTime" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9Wc8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WdMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WdcsAEdui-MGYX_zatQ">
@@ -5869,7 +5869,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T9WdssAEdui-MGYX_zatQ" name="utilization" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9Wd8sAEdui-MGYX_zatQ" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WeMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WecsAEdui-MGYX_zatQ">
@@ -5877,7 +5877,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T9WessAEdui-MGYX_zatQ" name="utilizationOnHost" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T9We8sAEdui-MGYX_zatQ" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T9WfMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T9WfcsAEdui-MGYX_zatQ">
@@ -5897,7 +5897,7 @@
       <packagedElement xmi:type="uml:Stereotype" xmi:id="_8T99MssAEdui-MGYX_zatQ" name="Step">
         <generalization xmi:id="_8T99M8sAEdui-MGYX_zatQ" general="_8T9WYcsAEdui-MGYX_zatQ"/>
         <ownedAttribute xmi:id="_8T99NMsAEdui-MGYX_zatQ" name="isAtomic" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99NcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99NssAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99N8sAEdui-MGYX_zatQ">
@@ -5905,7 +5905,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T99OMsAEdui-MGYX_zatQ" name="blockingTime" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99OcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99OssAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99O8sAEdui-MGYX_zatQ">
@@ -5913,7 +5913,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T99PMsAEdui-MGYX_zatQ" name="repetitions" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99PcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99PssAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99P8sAEdui-MGYX_zatQ">
@@ -5921,7 +5921,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T99QMsAEdui-MGYX_zatQ" name="probability" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99QcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99QssAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99Q8sAEdui-MGYX_zatQ">
@@ -5929,7 +5929,7 @@
           </defaultValue>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T99RMsAEdui-MGYX_zatQ" name="priority" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99RcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99RssAEdui-MGYX_zatQ" value="1"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99R8sAEdui-MGYX_zatQ">
@@ -5947,7 +5947,7 @@
       <packagedElement xmi:type="uml:Stereotype" xmi:id="_8T99TssAEdui-MGYX_zatQ" name="CommStep">
         <generalization xmi:id="_8T99T8sAEdui-MGYX_zatQ" general="_8T99MssAEdui-MGYX_zatQ"/>
         <ownedAttribute xmi:id="_8T99UMsAEdui-MGYX_zatQ" name="msgSize" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99UcsAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99UssAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99U8sAEdui-MGYX_zatQ">
@@ -5964,7 +5964,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hTnz8MsOEdu96YjERFT38A"/>
         </ownedAttribute>
         <ownedAttribute xmi:id="_8T99WcsAEdui-MGYX_zatQ" name="resUnits" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99WssAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99W8sAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99XMsAEdui-MGYX_zatQ">
@@ -5978,7 +5978,7 @@
         <generalization xmi:id="_8T99YMsAEdui-MGYX_zatQ" general="_8T99MssAEdui-MGYX_zatQ"/>
         <ownedAttribute xmi:id="_8T99YcsAEdui-MGYX_zatQ" name="releasedResource" type="_RaQ-esr9Edui-MGYX_zatQ" isUnique="false"/>
         <ownedAttribute xmi:id="_8T99YssAEdui-MGYX_zatQ" name="resUnits" visibility="public" isUnique="false">
-          <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+          <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8T99Y8sAEdui-MGYX_zatQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8T99ZMsAEdui-MGYX_zatQ"/>
           <defaultValue xmi:type="uml:LiteralString" xmi:id="_8T99ZcsAEdui-MGYX_zatQ">
@@ -6180,12 +6180,12 @@
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
     <packageImport xmi:id="_JU9w2MsQEdu96YjERFT38A">
-      <importedPackage href="./MARTE.uml#_cQON8MWcEduP8IkPcz5YXg"/>
+      <importedPackage href="MARTE.uml#_cQON8MWcEduP8IkPcz5YXg"/>
     </packageImport>
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU9w2csQEdu96YjERFT38A" name="SaAnalysisContext">
       <generalization xmi:id="_a2RFQMsqEdu4HtTLvB6rcw" general="_8T9WWssAEdui-MGYX_zatQ"/>
       <ownedAttribute xmi:id="_JU9w2ssQEdu96YjERFT38A" name="isSched" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU9w28sQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU9w3MsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU9w3csQEdu96YjERFT38A">
@@ -6197,7 +6197,7 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU9w4MsQEdu96YjERFT38A" name="End2EndFlow">
       <ownedAttribute xmi:id="_JU9w4csQEdu96YjERFT38A" name="isSched" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU9w4ssQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU9w48sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU9w5MsQEdu96YjERFT38A">
@@ -6205,7 +6205,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU9w5csQEdu96YjERFT38A" name="schSlack" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU9w5ssQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XkMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-XkcsQEdu96YjERFT38A">
@@ -6213,7 +6213,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XkssQEdu96YjERFT38A" name="end2EndT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-Xk8sQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XlMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-XlcsQEdu96YjERFT38A">
@@ -6221,7 +6221,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XlssQEdu96YjERFT38A" name="end2EndD" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-Xl8sQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XmMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-XmcsQEdu96YjERFT38A">
@@ -6239,7 +6239,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU-Xn8sQEdu96YjERFT38A" name="SaCommStep">
       <generalization xmi:id="_i4tRsMsqEdu4HtTLvB6rcw" general="_JU-Xn8sQEdu96YjERFT38A"/>
       <ownedAttribute xmi:id="_JU-XoMsQEdu96YjERFT38A" name="deadline" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XocsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XossQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xo8sQEdu96YjERFT38A">
@@ -6247,7 +6247,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XpMsQEdu96YjERFT38A" name="spareCap" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XpcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XpssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xp8sQEdu96YjERFT38A">
@@ -6255,7 +6255,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XqMsQEdu96YjERFT38A" name="schSlack" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XqcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XqssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xq8sQEdu96YjERFT38A">
@@ -6271,7 +6271,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU-Xr8sQEdu96YjERFT38A" name="SaExecStep">
       <generalization xmi:id="_0UsK8MsrEdu4HtTLvB6rcw" general="_8T99SssAEdui-MGYX_zatQ"/>
       <ownedAttribute xmi:id="_JU-XsMsQEdu96YjERFT38A" name="deadline" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XscsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XsssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xs8sQEdu96YjERFT38A">
@@ -6279,7 +6279,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XtMsQEdu96YjERFT38A" name="spareCap" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XtcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XtssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xt8sQEdu96YjERFT38A">
@@ -6287,7 +6287,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XuMsQEdu96YjERFT38A" name="schSlack" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XucsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XussQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xu8sQEdu96YjERFT38A">
@@ -6295,7 +6295,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XvMsQEdu96YjERFT38A" name="preempT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XvcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XvssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xv8sQEdu96YjERFT38A">
@@ -6303,7 +6303,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XwMsQEdu96YjERFT38A" name="readyT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XwcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XwssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xw8sQEdu96YjERFT38A">
@@ -6311,7 +6311,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-XxMsQEdu96YjERFT38A" name="delayT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-XxcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-XxssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-Xx8sQEdu96YjERFT38A">
@@ -6367,7 +6367,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU-X48sQEdu96YjERFT38A" name="SchedObs">
       <generalization xmi:id="_JU-X5MsQEdu96YjERFT38A" general="_JU-X1csQEdu96YjERFT38A"/>
       <ownedAttribute xmi:id="_JU-X5csQEdu96YjERFT38A" name="suspentions" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-X5ssQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-X58sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-X6MsQEdu96YjERFT38A">
@@ -6375,7 +6375,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-X6csQEdu96YjERFT38A" name="blockT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-X6ssQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-X68sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-X7MsQEdu96YjERFT38A">
@@ -6383,7 +6383,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-X7csQEdu96YjERFT38A" name="overlaps" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-X7ssQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-X78sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-X8MsQEdu96YjERFT38A">
@@ -6396,7 +6396,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU-X88sQEdu96YjERFT38A" name="LatencyObs">
       <generalization xmi:id="_JU-X9MsQEdu96YjERFT38A" general="_JU-X1csQEdu96YjERFT38A"/>
       <ownedAttribute xmi:id="_JU-X9csQEdu96YjERFT38A" name="latency" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-X9ssQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-X98sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-X-MsQEdu96YjERFT38A">
@@ -6404,7 +6404,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-X-csQEdu96YjERFT38A" name="miss" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-X-ssQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-X-8sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-X_MsQEdu96YjERFT38A">
@@ -6422,7 +6422,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU-YAssQEdu96YjERFT38A" name="JitterObs">
       <generalization xmi:id="_JU-YA8sQEdu96YjERFT38A" general="_JU-X1csQEdu96YjERFT38A"/>
       <ownedAttribute xmi:id="_JU-YBMsQEdu96YjERFT38A" name="maxJitter" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-YBcsQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-YBssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-YB8sQEdu96YjERFT38A">
@@ -6435,7 +6435,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU-YCssQEdu96YjERFT38A" name="SharedResource">
       <generalization xmi:id="_x7ls8MsoEdu4HtTLvB6rcw" general="_RaTao8r9Edui-MGYX_zatQ"/>
       <ownedAttribute xmi:id="_JU-YC8sQEdu96YjERFT38A" name="capacity" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tRd2gMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-YDMsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-YDcsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-YDssQEdu96YjERFT38A">
@@ -6443,7 +6443,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-YD8sQEdu96YjERFT38A" name="isPreemp" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-YEMsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU-YEcsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU-YEssQEdu96YjERFT38A">
@@ -6451,7 +6451,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU-YE8sQEdu96YjERFT38A" name="isConsum" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU-YFMsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--oMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--ocsQEdu96YjERFT38A">
@@ -6459,7 +6459,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--ossQEdu96YjERFT38A" name="acquisT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--o8sQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--pMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--pcsQEdu96YjERFT38A">
@@ -6467,7 +6467,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--pssQEdu96YjERFT38A" name="releaseT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--p8sQEdu96YjERFT38A" value="*"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--qMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--qcsQEdu96YjERFT38A">
@@ -6480,7 +6480,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU--rMsQEdu96YjERFT38A" name="SaCommHost">
       <generalization xmi:id="_8fGvAMsoEdu4HtTLvB6rcw" general="_8T8vNcsAEdui-MGYX_zatQ"/>
       <ownedAttribute xmi:id="_JU--rcsQEdu96YjERFT38A" name="isSched" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--rssQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--r8sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--sMsQEdu96YjERFT38A">
@@ -6488,7 +6488,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--scsQEdu96YjERFT38A" name="schSlack" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--sssQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--s8sQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--tMsQEdu96YjERFT38A">
@@ -6501,7 +6501,7 @@
     <packagedElement xmi:type="uml:Stereotype" xmi:id="_JU--t8sQEdu96YjERFT38A" name="SaExecHost">
       <generalization xmi:id="_hW9AgMspEdu4HtTLvB6rcw" general="_8T99SssAEdui-MGYX_zatQ"/>
       <ownedAttribute xmi:id="_JU--uMsQEdu96YjERFT38A" name="isSched" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--ucsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--ussQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--u8sQEdu96YjERFT38A">
@@ -6509,7 +6509,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--vMsQEdu96YjERFT38A" name="schSlack" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--vcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--vssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--v8sQEdu96YjERFT38A">
@@ -6517,7 +6517,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--wMsQEdu96YjERFT38A" name="schedUtiliz" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_tDnAsMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--wcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--wssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--w8sQEdu96YjERFT38A">
@@ -6525,7 +6525,7 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--xMsQEdu96YjERFT38A" name="ISRswitchT" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pWA4IMWfEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--xcsQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--xssQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--x8sQEdu96YjERFT38A">
@@ -6533,11 +6533,11 @@
         </defaultValue>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--yMsQEdu96YjERFT38A" name="ISRprioRange" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_pw-SoMWbEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_pw-SoMWbEduP8IkPcz5YXg"/>
       </ownedAttribute>
       <ownedAttribute xmi:id="_JU--ycsQEdu96YjERFT38A" name="schedPolicy" isUnique="false"/>
       <ownedAttribute xmi:id="_JU--yssQEdu96YjERFT38A" name="isPreemptible" visibility="public" isUnique="false">
-        <type xmi:type="uml:DataType" href="./MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
+        <type xmi:type="uml:DataType" href="MARTE.uml#_sHZ3IMWeEduP8IkPcz5YXg"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JU--y8sQEdu96YjERFT38A" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JU--zMsQEdu96YjERFT38A"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_JU--zcsQEdu96YjERFT38A">
