@@ -1,4 +1,4 @@
-/* $Id: KermetaASTHelper.java,v 1.2 2007-02-20 08:15:22 dvojtise Exp $
+/* $Id: KermetaASTHelper.java,v 1.3 2007-07-03 11:44:38 dvojtise Exp $
  * Project   : Kermeta 
  * File      : KermetaASTHelper.java
  * License   : EPL
@@ -31,6 +31,13 @@ public class KermetaASTHelper {
 	 * @return
 	 */
 	public static boolean isAnAspect(ClassDecl node){
+		if(node.getParent() instanceof TopLevelDecl)
+		{
+			return isTagPresent(((TopLevelDecl)node.getParent()).getAnnotations(), TAGNAME_ASPECT,"true");
+		}
+		return false;
+	}
+	public static boolean isAnAspect(DataTypeDecl node){
 		if(node.getParent() instanceof TopLevelDecl)
 		{
 			return isTagPresent(((TopLevelDecl)node.getParent()).getAnnotations(), TAGNAME_ASPECT,"true");

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.19 2007-05-25 15:11:08 ftanguy Exp $
+/* $Id: Ecore2KMPass3.java,v 1.20 2007-07-03 11:44:38 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -355,6 +355,10 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	 */
 	public Property visitEStructuralFeature(EStructuralFeature node) {
 		exporter.current_prop = (Property)visitorPass1.properties.get(EcoreHelper.getQualifiedName(node));
+		if(exporter.current_prop ==  null){
+			throw new KM2ECoreConversionException(
+					"ECore2KM : EStructuralFeature '" + EcoreHelper.getQualifiedName(node) + "' not found in visitorPass1.properties");
+		}
 		// Set the type of this property
 		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
 		exporter.current_prop.setType(t);

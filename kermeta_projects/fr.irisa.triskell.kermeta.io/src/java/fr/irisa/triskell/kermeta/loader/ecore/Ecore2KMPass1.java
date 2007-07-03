@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.9 2007-05-25 15:11:08 ftanguy Exp $
+/* $Id: Ecore2KMPass1.java,v 1.10 2007-07-03 11:44:38 dvojtise Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -145,11 +145,27 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		
 		// Return a typedef if the element is not contained in ecore metamodel.
 		isEcoreType = ((ENamedElement)node.eContainer()).getName().equals("ecore");
+		
 		if (td != null && isEcoreType) {
-			// Ignore duplicate definition due to the ecore reflexivity
-			exporter.current_classdef = (ClassDefinition)td;
-			unit.messages.addWarning("Ignore duplicate definition of ecore Type " + EcoreHelper.getQualifiedName(node), td);
-			return td;
+			
+			boolean oneIsAspect = false;
+			if(td instanceof ClassDefinition){
+				if(((ClassDefinition)td).isIsAspect()){
+					oneIsAspect = true;
+				}
+			}
+			if(!oneIsAspect){
+				// Ignore duplicate definition due to the ecore reflexivity
+				exporter.current_classdef = (ClassDefinition)td;
+				unit.messages.addWarning("Ignore duplicate definition of ecore Type " + EcoreHelper.getQualifiedName(node), td);
+				
+				return td;
+			}
+			else {
+				// ignore it too, but this times this is because this is an aspect
+				return td;
+			}
+				
 		}
 		
 		// Should we ignore the ecore metamodel types?

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.12 2007-05-30 11:28:45 jsteel Exp $
+/* $Id: KMT2KMPass2.java,v 1.13 2007-07-03 11:44:38 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -93,6 +93,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			{
 				internalLog.debug("Aspect tag found : reopening the class " + node.getName().getText()+ " from " +builder.getUri());
 				builder.current_class = (ClassDefinition)typeDef;
+				builder.current_class.setIsAspect(true);// DVK refactoring needed : the metamodel now use a dedicated property
 				builder.storeTrace(builder.current_class, node); // the trace is used to retreive this element in following passes
 			}
 			else if(TagHelper.findTagFromNameAndValue((ClassDefinition)typeDef,KermetaASTHelper.TAGNAME_ASPECT, "true")!= null){
@@ -105,7 +106,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			}
 			else{
 				// This is an error : the type already exists
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists. (while loading " +builder.getUri()+")",node));
 				super.beginVisit(node);
 				return false;
 			}
@@ -118,6 +119,10 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			builder.current_class.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(builder.current_class);
 			builder.typeDefs.put(qname, builder.current_class);
+			if(KermetaASTHelper.isAnAspect(node))
+			{
+				builder.current_class.setIsAspect(true);// DVK refactoring needed : the metamodel now use a dedicated property				
+			}
 			builder.storeTrace(builder.current_class, node);
 			if(KermetaASTHelper.isAnAspect(node))
 			{
@@ -170,7 +175,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for Enum '" + qname + "' already exists.",node));
 		}
 		else {
 			Enumeration c = builder.struct_factory.createEnumeration();
@@ -188,13 +193,28 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(DataTypeDecl node) {
 		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		if (builder.typeDefinitionLookup(qname) != null) {
-			// This is an error : the type already exists
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+		TypeDefinition typeDef =  builder.typeDefinitionLookup(qname);
+		if (typeDef != null) {
+			boolean isAspect = false;
+			if(typeDef.isIsAspect()){
+				// ok, ignore this one  (DVK: need to be checked when modelingunit will be coded
+
+				builder.typeDefs.put(NamedElementHelper.getQualifiedName(typeDef), typeDef);
+				builder.storeTrace(typeDef, node);
+				return false;
+			}
+			else{
+				// This is an error : the type already exists
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for DataType '" + qname + "' already exists.",node));
+			}
 		}
 		else {
 			PrimitiveType c = builder.struct_factory.createPrimitiveType();
 			c.setName(getTextForID(node.getName()));
+			if(KermetaASTHelper.isAnAspect(node))
+			{
+				c.setIsAspect(true);// DVK refactoring needed : the metamodel now use a dedicated property				
+			}
 			current_package().getOwnedTypeDefinition().add(c);
 			builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
@@ -214,6 +234,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			ModelType newMT = builder.struct_factory.createModelType();
 			newMT.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(newMT);
+			
 			builder.typeDefs.put(qname, newMT);
 			builder.storeTrace(newMT, node);
 //			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();
