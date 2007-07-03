@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.4 2007-03-27 15:08:22 dvojtise Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.5 2007-07-03 12:54:56 dtouzet Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -8,6 +8,8 @@
  * Authors       : dvojtise <dvojtise.irisa.fr>
  */
 package fr.irisa.triskell.kermeta.runtime;
+
+import java.util.ArrayList;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -103,4 +105,36 @@ public class RuntimeObjectHelper {
 		return roProperty;
 	}
 
+
+	/**
+	 * @param rObj
+	 * @return
+	 */
+	public static boolean isKermetaBasicType(RuntimeObject rObj) {
+		RuntimeObject mcRO = rObj.getMetaclass();
+		KermetaUnit kunit = rObj.getFactory().getMemory().getUnit();
+
+		ArrayList<ClassDefinition> l = new ArrayList<ClassDefinition>();
+		
+		ClassDefinition eLitCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::language::structure::EnumerationLiteral");
+		ClassDefinition boolCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Boolean");
+		ClassDefinition strCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::String");
+		ClassDefinition charCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Character");
+		ClassDefinition intCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Integer");
+		ClassDefinition realCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Real");
+		ClassDefinition voidCDef = (ClassDefinition) kunit.getTypeDefinitionByName("kermeta::standard::Void");
+		
+		l.add(eLitCDef);
+		l.add(boolCDef);
+		l.add(strCDef);
+		l.add(charCDef);
+		l.add(intCDef);
+		l.add(realCDef);
+		l.add(voidCDef);
+		
+		fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getData().get("kcoreObject");
+	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
+	    
+		return l.contains(cDef);
+	}
 }

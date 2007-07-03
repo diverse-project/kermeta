@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.29 2007-06-20 13:03:26 dtouzet Exp $
+ * $Id: resource.kmt,v 1.30 2007-07-03 12:54:47 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -49,9 +49,6 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	/** The uri of the meta-model of the model-instance to load */
 	attribute metaModelURI : String
 	
-	/** The includedResource if the model-instance "inter-depends" on other instances*/
-	reference includedResources : set String[*] 
-	
 	/** The entities contained in the model-instance, that are provided when user loads a resource 
 	 *  instances == rootContents
 	 * this is a loop on Resource itself in order to get backward compatibility
@@ -61,42 +58,11 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 		result := self
 	end
 	
-	
-	
 	/** The repository used to create this resource 
 	 * This feature is supposed read only, otherwise it cannot garantee that an element is contained by only 
 	 * one Resource of a given Repository
 	 */
 	reference repository : Repository#resources
-	
-	/** The hashtable that contains the contents loaded by the resource.
-	 *  It is composed of 4 entries : "rootContents", "allRootContents", "contents", "allContents"
-	 *  The two last ones will be kept empty since resource-heavy
-	 *  - rootContents : only the root elements of the "main model" hosted by the given resource
-	 *  - allRootContents : the root elements of the main model
-	 */
-	 reference contentMap : kermeta::utils::Hashtable<String, Set<Object>>
-	
- 	/**
-	 *  - returns the rootContents of the model saved in/loaded from the given uri, excluding
-	 *  the models from the dependent resources
-	 */
-	property readonly rootContents : set Object[0..*]
-		getter is do result:=contentMap.getValue("rootContents") end
-	/** - returns the rootContents of the model saved in/loaded from the given uri, including
-	 *  the models from the dependent resources */
-	property readonly allRootContents : set Object[0..*] 
-		getter is do result:=contentMap.getValue("allRootContents") end
-    /** - returns all the model elements hosted by this resource, excluding elements from the
- 	 * dependent resources */
-	property readonly contents : set Object[0..*] getter is do
-		result:=contentMap.getValue("contents").union(contentMap.getValue("rootContents"))
-	end
-    /** - returns all the model elements hosted by this resource, including elements from the
- 	 * dependent resources */
-	property readonly allContents : set Object[0..*] getter is do
-		result:=contentMap.getValue("allContents").union(contentMap.getValue("allRootContents"))
-	end
 	
 	/** Save a model instance, in the file specified by the initial uri 
 	 * Overrides the old version.
@@ -109,15 +75,37 @@ abstract class Resource inherits kermeta::standard::Set<Object>
 	
 	/** Loads a resource. Once loaded, you'll be able to query the resource for its content.  */	
 	operation load() : Void is abstract
-	/* add an instance, return it if success, otherwise return null
-	    You need to do that for every Object that must be placed in the root of the resource when you'll save it */
-	//method add(instance : Object) : Void is abstract  
-	/* remove the instance, return it if success, otherwise return null */
-	//method remove(instance : Object) : Object is abstract
 	
 /*	operation setInstances(p_instances : Set<Object>) : kermeta::standard::~Void is do
 		instances := p_instances
 	end*/
+
+	/**
+	 * Returns set of Resources on which current Resource depends, empty set if current
+	 * Resource has no dependency
+	 */
+	property readonly dependentResources : set Resource[0..*] getter is do
+		result ?=
+			extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.getDependentResources(
+				self, uri, metaModelURI, "EMF"
+			)
+	end
+	
+	/** 
+	 * Returns the set of all Objects directly or indirectly contained by the Resource,
+	 * or an empty set if the Resource is empty
+	 */
+	property readonly contents : set Object[0..*] getter is do
+		var res : Set<Object> init Set<Object>.new
+		res.addAll(self)
+		
+		var coll : Set<kermeta::language::structure::Object>
+		self.each{e |
+			coll ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getAllContainedObjects(e)
+			res.addAll(coll)
+		}
+		result := res
+	end
 }
 
 /**
@@ -127,23 +115,11 @@ abstract class Resource inherits kermeta::standard::Set<Object>
  */
 class EMFResource inherits Resource
 {
-	/** 
-	 * Create an hashtable with appropriates keys and empty collections. This method 
-	 * should not be called by the end-user
-	 */
-	 operation initializeContentMap() is do
-	 	contentMap := kermeta::utils::Hashtable<String, Set<Object>>.new
-	 	contentMap.put("rootContents", Set<Object>.new)
-	 	contentMap.put("allRootContents", Set<Object>.new)
-	 	contentMap.put("contents", Set<Object>.new)
-	 	contentMap.put("allContents", Set<Object>.new)
-	 end
-
 	/** Save a resource in a file referenced by this new uri. 
 	    This allows to save the result of a transformation without changing the original file. */
 	method saveWithNewURI(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
-			self, new_uri, metaModelURI, "EMF", self,false
+			self, new_uri, metaModelURI, "EMF", self, false
 		)
 	end
 	
@@ -170,26 +146,24 @@ class EMFResource inherits Resource
 	 * the attribute metamodelURI will be filled with the nsuri of the root package of the metamodel used to load this resource
 	 */
 	method load() : Void is do
-		var e : ResourceLoadException init ResourceLoadException.new
-		contentMap ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
-		    self, uri, metaModelURI, "EMF", contentMap
+		self.clear
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+		    self, uri, metaModelURI, "EMF"
 		)
 		// If load failed
-		if (contentMap.getValue("allRootContents").size == 0) then
+		if(self.size == 0) then
 			stdio.writeln("Resource load failed!")
+			var e : ResourceLoadException init ResourceLoadException.new
 			raise e
 		end
-
-		self.clear
-		self.addAll(rootContents)
 	end
 	
-
 
 	/** Add an instance to the Resource 
 	 * It ensures that the instance is referenced by one and only one Resource of the same Repository
 	 */
 	method add(instance : Object) : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, self)
 		super(instance)
 		// search the instance in the other Resources of the containing Repository		
 		repository.resources.select{r | r != self and r.contains(instance)}.each{r |
@@ -200,8 +174,8 @@ class EMFResource inherits Resource
 	
 	/** Remove an instance from the Resource */
 	method remove(instance : Object) : Object is do
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.setContainingResource(instance, void)
 		if self.contains(instance) then 
-			//instances.remove(instance)
 			super(instance)
 			result := instance
 		else

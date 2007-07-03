@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.61 2007-06-26 08:41:39 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.62 2007-07-03 12:54:55 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -73,6 +74,7 @@ public class EMF2Runtime {
      * The list of runtimeObjects that represent the EMF instances
      */
     protected Hashtable<EObject, RuntimeObject> runtime_objects_map; // { eobject : robject }
+    
     /**
      * { qualified name of ecore type : qualified name of kermeta type }
      */
@@ -144,26 +146,53 @@ public class EMF2Runtime {
 	 * Hashtable, that is : { "emfObject" : instance_of_corresponding_EObject }.
 	 * - fills in the runtime_objects_map hashtable
 	 */
-	//protected void createEmptyRuntimeObjects()
-	protected void createEmptyRuntimeObjects(RuntimeObject mainResRO)
-	{
-		RuntimeObject repRO = mainResRO.getProperties().get("repository");
-		
+	protected void createEmptyRuntimeObjects() {
+
 		// Find all the resources on which our resource depend,
 		// and for each resource, create the ROs for its hosted EObjects.
 		// (We know that the list returned findDependentResources contains only Resources:))
-		for (Object resObj : unit.findDependentResources(resource))
-		{
-			RuntimeObject crtResRO = null;
+		for (Object resObj : unit.findDependentResources(resource)) {
 			Resource res = (Resource) resObj;
+			
+			TreeIterator contentsIt = res.getAllContents();
+			while(contentsIt.hasNext()) {
+				Object obj = contentsIt.next();
+				if(obj instanceof EObject) {
+					// Create RO for current EObject
+					EObject eObj = (EObject) obj;
+					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(eObj);
+					this.runtime_objects_map.put(eObj, rootRO);
+				}
+				else {
+					unit.throwKermetaRaisedExceptionOnLoad(
+					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
+				}
+			}
+
+		}
+	}
+	
+	
+	/**
+	 * @param mainResRO
+	 */
+	protected void createResourceRuntimeObjects(RuntimeObject mainResRO) {
+		RuntimeObject repRO = mainResRO.getProperties().get("repository");
+		
+		for (Object resObj : unit.findDependentResources(resource)) {
+			Resource res = (Resource) resObj;
+			RuntimeObject crtResRO = null;
 			
 			// First step: create and/or initialize the RO for the current resources
 			if(! res.getURI().toString().equals(fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(mainResRO.getProperties().get("uri")))) {
+				
+				String metamodel_uri = EcoreHelper.getMetaModelUriFromResource(resource);
+				
 				// Create and initialize RO for current Resource
 				crtResRO = mainResRO.getFactory().createRuntimeObjectFromResource(
 								res,
 								repRO,
-								fr.irisa.triskell.kermeta.runtime.basetypes.String.create("", repRO.getFactory())
+								fr.irisa.triskell.kermeta.runtime.basetypes.String.create(metamodel_uri, repRO.getFactory())
 							);
 				
 				// Link the repository RO to the newly allocated resource RO 
@@ -174,77 +203,23 @@ public class EMF2Runtime {
 			else {
 				crtResRO = mainResRO;
 			}
-
 			
-			// 2- Peut-être en deux temps :
-			//   - d'abord le contenu direct des resources, pour init du contenu de chaque resource
-			//   - ensuite, eAllContents sur chacun de ces éléments directement contenus par la ressource
-			// Second step:
 			EList contents = res.getContents();
 			Iterator<Object> rootsIt = contents.iterator();
 			while(rootsIt.hasNext()) {
 				Object rootObj = rootsIt.next();
 				if(rootObj instanceof EObject) {
-					// Create RO for current EObject
 					EObject rootEObj = (EObject) rootObj;
-					RuntimeObject rootRO = this.createEmptyRuntimeObjectForEObject(rootEObj);
+					RuntimeObject rootRO = this.runtime_objects_map.get(rootEObj);
+					fr.irisa.triskell.kermeta.runtime.language.Object.setContainingResource(rootRO, crtResRO);
 					
-					this.runtime_objects_map.put(rootEObj, rootRO);
-
-					// Add allocated RO to the content of current RO resource
-					RuntimeObject contentMapRO = crtResRO.getProperties().get("contentMap");
-					Hashtable<RuntimeObject, RuntimeObject> ht = fr.irisa.triskell.kermeta.runtime.basetypes.Map.getHashtable(contentMapRO);
-					RuntimeObject rootContentsRO = ht.get(fr.irisa.triskell.kermeta.runtime.basetypes.String.create("rootContents", repRO.getFactory()));
-					ArrayList<RuntimeObject> rootContentsList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(rootContentsRO); 
-					RuntimeObject contentsRO = ht.get(fr.irisa.triskell.kermeta.runtime.basetypes.String.create("contents", repRO.getFactory()));
-					ArrayList<RuntimeObject> contentsList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(contentsRO);
-					
-					rootContentsList.add(rootRO);
-					contentsList.add(rootRO);
-					
-					// Create RO for elements that are not directly contained by the resource
-					TreeIterator treeIt = rootEObj.eAllContents();
-					while(treeIt.hasNext()) {
-						Object obj = treeIt.next();
-						if(obj instanceof EObject) {
-							EObject eObj = (EObject) obj;
-							RuntimeObject ro = this.createEmptyRuntimeObjectForEObject(eObj);
-							this.runtime_objects_map.put(eObj, ro);
-							
-							contentsList.add(ro);
-						}
-						else {
-							unit.throwKermetaRaisedExceptionOnLoad(
-							"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
-						}
-					}
-				}
-				else {
-					unit.throwKermetaRaisedExceptionOnLoad(
-					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ rootObj, null);
+					ArrayList<RuntimeObject> resContents = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(crtResRO);
+					resContents.add(rootRO);
 				}
 			}
-			
-			/*
-			TreeIterator treeIt = res.getAllContents();
-			while(treeIt.hasNext())
-			{
-				Object obj = treeIt.next();
-				if(obj instanceof EObject)
-				{
-					EObject eobj = (EObject)obj;
-					RuntimeObject ro = this.createEmptyRuntimeObjectForEObject(eobj);
-					this.runtime_objects_map.put(eobj, ro);
-				}
-				else
-				{
-					unit.throwKermetaRaisedExceptionOnLoad(
-					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
-				}
-			}
-			*/
 		}
 	}
+
 	
 	/**
 	 * Load the EMFRuntimeUnit. This consists on : 
@@ -264,8 +239,7 @@ public class EMF2Runtime {
 	{
 		try {
 			// Pass 1 : pre-create the runtime objects
-			//createEmptyRuntimeObjects();
-			createEmptyRuntimeObjects(mainResRO);
+			createEmptyRuntimeObjects();
 			
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
@@ -281,32 +255,26 @@ public class EMF2Runtime {
 			    RuntimeObject rObject = (RuntimeObject)this.runtime_objects_map.get((EObject)next);
 			    this.populateRuntimeObject(rObject);
 			}
+
 			// Now that RO are populated, we can fill the contentMap attribute of RuntimeUnit.
 			// contentMap is a RuntimeObject that will be "sent" to the Kermeta side, and that contains
 			// a set of derived properties that can be used by the user to retrieve the EObjects hosted
 			// by the resource that we loaded.
-			for (EObject eObject : runtime_objects_map.keySet())
-			{ 	
+			for (EObject eObject : runtime_objects_map.keySet()) { 	
 			    RuntimeObject rObject = this.runtime_objects_map.get(eObject);
 			    // Set the container if needed 
-			    if (eObject.eContainer() != null)
-			    {
+			    if (eObject.eContainer() != null) {
 			    	rObject.setContainer(runtime_objects_map.get(eObject.eContainer()));
-			    	// Set Content map entry "contents" for the resource that user asked to load
-			        if (eObject.eResource().getURI().toString().equals(unit.getResolvedUri().toString())) 
-			        	fillContentMapEntry("contents", rObject);
 			    }
-			    else
-			    {
+			    else {
 			        rObject.setContainer(null);
-			        // Set Content map entry "contents"
-			        if (eObject.eResource().getURI().toString().equals(unit.getResolvedUri().toString())) 
-			        	fillContentMapEntry("rootContents", rObject);
-			        // Fill in the contentMap that will be returned by the extern load method call
-			        fillContentMapEntry("allRootContents", rObject);
 			    }
-			    fillContentMapEntry("allContents", rObject);
 			}
+			
+			// Manage the resource RuntimeObject:
+			//   1- Create resource RuntimeObject for all dependent resources
+			//   2- Associate resources to their root model elements
+			createResourceRuntimeObjects(mainResRO);
 		}
 		catch (Exception e) {
 			internalLog.error("loadUnit failed due to " + e.getMessage()!=null?e.getMessage():"" + " : exception: " + e + " )", e);
@@ -842,21 +810,4 @@ public class EMF2Runtime {
 	    }
 	    return result;
 	}
-
-	/**
-	 * Complete the contentMap dictionary accessed with <code>unit.getContentMap()</code>
-	 * method call, by modifying the entry ({key : value}) whose key is <code>key</code>. The
-	 * modification will consist on getting  the value of this entry, which is the Runtime Object
-	 * representation of a Collection, and then, add to this collection the given <code>rObject</code>.
-	 * @param key Key in contentMap a value among "contents", "rootContents", "allRootContents", "allContents"
-	 * @param rObject the object to add the collection-value corresponding to the given <code>key</code>
-	 */
-	protected void fillContentMapEntry(String key, RuntimeObject rObject)
-	{
-		// Set the entry to put { RuntimeObjectString , (RuntimeObject)content_table} in contentMap
-		RuntimeObject collection_entry = unit.getContentMapEntryFromString(key); 
-		// Fill in the contentMap that will host the loaded elements
-		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(collection_entry, rObject);
-	}
-
 }

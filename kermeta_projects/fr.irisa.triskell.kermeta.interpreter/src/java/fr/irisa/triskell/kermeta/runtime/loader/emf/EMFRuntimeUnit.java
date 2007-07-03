@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.43 2007-06-25 07:13:29 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.44 2007-07-03 12:54:55 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -241,9 +241,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	else
 	    		options.put(XMLResource.NIL, Boolean.TRUE);
 	    	
+	    	
+	    	// Try to get emf resource from resource RO
+	    	resource = (XMLResource) resRO.getData().get("r2e.emfResource");
+	    	
 	    	// Try to create the resource specified by "u"
-    		resource = 	(XMLResource)resourceset.createResource(u);
-    		if(resource != null){
+	    	if(resource == null)
+	    		resource = 	(XMLResource)resourceset.createResource(u);
+    		
+	    	if(resource != null){
     			resource.load(options);
     			if(metamodel_uri.equals("")){
     				// the model was correctly loaded even if the uri was not provided

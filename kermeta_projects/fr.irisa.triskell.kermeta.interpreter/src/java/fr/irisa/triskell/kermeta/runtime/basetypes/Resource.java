@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.12 2007-06-20 13:03:22 dtouzet Exp $
+/* $Id: Resource.java,v 1.13 2007-07-03 12:54:56 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -10,9 +10,17 @@
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import org.eclipse.emf.common.util.EList;
+
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
+import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 
 // Get the namespace
@@ -69,22 +77,149 @@ public class Resource {
      * @return The emptyMap, filled in.
      */
     public static RuntimeObject load(
-    		RuntimeObject self,
-    		RuntimeObject uri,
-    		RuntimeObject mmUri, 
-    		RuntimeObject resourceType,
-    		RuntimeObject emptyMap)
+			RuntimeObject self,
+			RuntimeObject uri,
+			RuntimeObject mmUri, 
+			RuntimeObject resourceType)
     {
+    	// Set "contentMap" property of resource RO
+    	GenericTypeDefinition mapClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::utils::Hashtable");
+    	
+	    GenericTypeDefinition stringClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::String");
+	    fr.irisa.triskell.kermeta.language.structure.Class stringClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    stringClass.setTypeDefinition(stringClassDef);
+
+    	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::reflection::Object");
+	    fr.irisa.triskell.kermeta.language.structure.Class objClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    objClass.setTypeDefinition(objClassDef);
+	    
+	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
+	    fr.irisa.triskell.kermeta.language.structure.Class setClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    setClass.setTypeDefinition(setClassDef);
+	    
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    tvBinding4set.setType(objClass);
+	    tvBinding4set.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
+	    setClass.getTypeParamBinding().add(tvBinding4set);
+	    
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4map1 = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    tvBinding4map1.setType(stringClass);
+	    tvBinding4map1.setVariable( (TypeVariable) mapClassDef.getTypeParameter().get(0) );
+	    
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4map2 = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    tvBinding4map2.setType(setClass);
+	    tvBinding4map2.setVariable( (TypeVariable) mapClassDef.getTypeParameter().get(1) );
+	    
+	    fr.irisa.triskell.kermeta.language.structure.Class mapClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    mapClass.setTypeDefinition(mapClassDef);
+	    mapClass.getTypeParamBinding().add(tvBinding4map1);
+	    mapClass.getTypeParamBinding().add(tvBinding4map2);
+	    
+	    RuntimeObject metaclassRO = self.getFactory().getMemory().getRuntimeObjectForFObject(mapClass);
+    	RuntimeObject emptyMapRO = new RuntimeObject(self.getFactory(), metaclassRO);
+   	
+    	Hashtable<RuntimeObject, RuntimeObject> ht = new Hashtable<RuntimeObject, RuntimeObject>();
+
+    	ht.put(
+    		fr.irisa.triskell.kermeta.runtime.basetypes.String.create("rootContents", self.getFactory()),
+    		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::Set", self.getFactory(), objClass)
+    	);
+    	ht.put(
+    		fr.irisa.triskell.kermeta.runtime.basetypes.String.create("allRootContents", self.getFactory()),
+    		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::Set", self.getFactory(), objClass)
+    	);
+    	ht.put(
+    		fr.irisa.triskell.kermeta.runtime.basetypes.String.create("contents", self.getFactory()),
+    		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::Set", self.getFactory(), objClass)
+    	);
+    	ht.put(
+    		fr.irisa.triskell.kermeta.runtime.basetypes.String.create("allContents", self.getFactory()),
+    		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.create("kermeta::standard::Set", self.getFactory(), objClass)
+    	);
+    	
+    	emptyMapRO.getData().put("Hashtable", ht);
+    	emptyMapRO.getProperties().put("contentMap", emptyMapRO);
+
+    	
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
-        	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyMap);
+        	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyMapRO);
 
         //
         runtime_unit.load(self);
-
-        return runtime_unit.getContentMap();
+        
+        return self.getFactory().getMemory().voidINSTANCE;
     }
     
- 
     
+    /**
+     * This methods computes the set of resources the contextual resource depends on
+     * @param selfRO         - RO for the current resource
+     * @param uriRO          - RO for the uri of the resource
+     * @param mmUriRO        - RO for the metamodel uri of the resource
+     * @param resourceTypeRO - RO for the string characterizing the type of te resource
+     * @return               - RO for the returned set of dependent resources
+     */
+    public static RuntimeObject getDependentResources(
+			RuntimeObject selfRO,
+			RuntimeObject uriRO,
+			RuntimeObject mmUriRO, 
+			RuntimeObject resourceTypeRO)
+    {
+    	// Default return value
+    	RuntimeObject result = selfRO.getFactory().getMemory().voidINSTANCE;
+    	
+        RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+    		getConcreteFactory(String.getValue(resourceTypeRO)).
+    		createRuntimeUnit(String.getValue(uriRO), String.getValue(mmUriRO), null);
+        
+        if(runtime_unit instanceof EMFRuntimeUnit) {
+        	EMFRuntimeUnit emfUnit = (EMFRuntimeUnit) runtime_unit;
+ 
+        	// Compute list of EMF dependent resources (include self emf resource) 
+        	EList emfDependentResources =
+        		emfUnit.findDependentResources(
+        			(org.eclipse.emf.ecore.resource.Resource) selfRO.getData().get("r2e.emfResource")
+ 				);
+        	
+        	// Allocate a new RO of type Set<Resource>
+        	GenericTypeDefinition resClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::persistence::Resource");
+    	    fr.irisa.triskell.kermeta.language.structure.Class resClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+    	    resClass.setTypeDefinition(resClassDef);
+    	    
+    	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
+    	    fr.irisa.triskell.kermeta.language.structure.Class setClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+    	    setClass.setTypeDefinition(setClassDef);
+    	    
+    	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = selfRO.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+    	    tvBinding4set.setType(resClass);
+    	    tvBinding4set.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
+    	    setClass.getTypeParamBinding().add(tvBinding4set);
+    	    
+    	    RuntimeObject metaclassRO = selfRO.getFactory().getMemory().getRuntimeObjectForFObject(setClass);
+    	    result = new RuntimeObject(selfRO.getFactory(), metaclassRO);
+    	    
+    	    // Get corresponding list of resource ROs
+    	    ArrayList<RuntimeObject> resultList = (ArrayList<RuntimeObject>) fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(result); 
+    	    
+    	    // Get list of resources contained by the Repository
+    	    RuntimeObject repRO = selfRO.getProperties().get("repository");
+    	    RuntimeObject resourcesRO = repRO.getProperties().get("resources");
+    	    ArrayList<RuntimeObject> roList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(resourcesRO);
+    	    
+    	    // Iterate over resources contained by the Repository
+    	    for(Object next : roList) {
+    	    	RuntimeObject crtRO = (RuntimeObject) next;
+    	    	org.eclipse.emf.ecore.resource.Resource crtRes = (org.eclipse.emf.ecore.resource.Resource) crtRO.getData().get("r2e.emfResource");
+    	    	
+    	    	// Test whether current resource belongs to the set computed set of dependent resources
+    	    	// and is different from contextual resource
+    	    	if(crtRO != selfRO && emfDependentResources.contains(crtRes)) {
+    	    		resultList.add(crtRO);
+    	    	}
+    	    }
+        }
+        
+    	return result;
+    }   
 }

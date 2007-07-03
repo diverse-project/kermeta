@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.18 2007-03-16 16:22:58 ffleurey Exp $
+/* $Id: Object.java,v 1.19 2007-07-03 12:54:56 dtouzet Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -17,6 +17,8 @@ package fr.irisa.triskell.kermeta.runtime.language;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
+
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
@@ -26,9 +28,12 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -461,6 +466,159 @@ public class Object {
 			return String.getValue(ro);
 		else
 			return "";
+	}
+
+	
+	/**	
+	 * This method returns the RO object corresponding to the Resource currently
+	 * containing (directly or indirectly) the Object passed as parameter
+	 * @param selfRO - RO for the object
+	 * @return       - RO for the Resource that contains the object, or RO void
+	 */
+	public static RuntimeObject getContainingResource(RuntimeObject selfRO) {
+		// Default return value
+		RuntimeObject result = selfRO.getFactory().getMemory().voidINSTANCE;
+		
+		if(selfRO.getData().containsKey("resourceRO")) {
+			result = (RuntimeObject) selfRO.getData().get("resourceRO");
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * This method sets the containing Resource of the object passed as a parameter
+	 * to the provided Resource.
+	 * This modification is propagated to all objects directly or indirectly contained
+	 * by the targeted object. 
+	 * @param selfRO - RO for the object
+	 * @param resRO  - RO for the Resource the object, and all the objects it contains,
+	 *                 are assigned to
+	 */
+	public static RuntimeObject setContainingResource(RuntimeObject selfRO, RuntimeObject resRO) {
+		selfRO.getData().put("resourceRO", resRO);
+		
+		RuntimeObject objListRO = Object.getAllContainedObjects(selfRO);
+		ArrayList<RuntimeObject> roList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(objListRO);
+		for(java.lang.Object next : roList) {
+			RuntimeObject crtRO = (RuntimeObject) next;
+			Object.setContainingResource(crtRO, resRO);
+		}
+		
+		return selfRO.getFactory().getMemory().voidINSTANCE;
+	}
+
+	
+	/**
+	 * This method computes the set of objects that are directly contained by the object
+	 * passed as a parameter.
+	 * @param selfRO - RO for the object
+	 * @return       - RO for the collection of RO objects directly contained by the object
+	 */
+	public static RuntimeObject getContainedObjects(RuntimeObject selfRO) {
+		// Build RO for collection to be returned
+       	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::structure::Object");
+	    fr.irisa.triskell.kermeta.language.structure.Class objClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    objClass.setTypeDefinition(objClassDef);
+	    
+	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
+	    fr.irisa.triskell.kermeta.language.structure.Class setClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    setClass.setTypeDefinition(setClassDef);
+	    
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = selfRO.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    tvBinding4set.setType(objClass);
+	    tvBinding4set.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
+	    setClass.getTypeParamBinding().add(tvBinding4set);
+	    
+	    RuntimeObject metaclassRO = selfRO.getFactory().getMemory().getRuntimeObjectForFObject(setClass);
+	    RuntimeObject resultRO = new RuntimeObject(selfRO.getFactory(), metaclassRO);
+
+	    // Get ArrayList contained by the built collection RO
+	    ArrayList<RuntimeObject> resultList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(resultRO);
+	    
+	    // Get list of properties of the current object (selfRO) from its metaclass
+	    RuntimeObject mcRO = selfRO.getMetaclass();
+	    fr.irisa.triskell.kermeta.language.structure.Class cl = (fr.irisa.triskell.kermeta.language.structure.Class) mcRO.getData().get("kcoreObject");
+	    ClassDefinition cDef = (ClassDefinition) cl.getTypeDefinition();
+	    EList props = cDef.getOwnedAttribute();
+	    
+	    
+	    // !!!!!! Begin Pure hack dans ta face !!!!!!
+	    // Required for handling the specific case of "ecore::EEnumLiteral" type which recursively
+	    // includes enumerationLiterals through its "instance" property
+	    KermetaUnit kunit = selfRO.getFactory().getMemory().getUnit();
+	    ClassDefinition eEnumLitCDef = (ClassDefinition) kunit.getTypeDefinitionByName("ecore::EEnumLiteral");
+	    if(cDef == eEnumLitCDef) return resultRO;
+	    // !!!!!! End pure hack !!!!!!
+
+
+	    // Iterate over the properties of selfRO
+	    for(java.lang.Object nextProp : props) {
+	    	Property prop = (Property) nextProp;
+	    	java.lang.String propName = prop.getName();
+	    	
+	    	// Current property is a containement
+	    	if(prop.isIsComposite()) {
+	    		
+	    		if(prop.getUpper() == 1) {
+	    			// Single object
+	    			RuntimeObject containedRO = selfRO.getProperties().get(propName);
+	    			if(containedRO != null) {
+	    				//if(! fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper.isKermetaBasicType(containedRO.getMetaclass())) {
+	    				if(! fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper.isKermetaBasicType(containedRO)) {
+	    					resultList.add(containedRO);
+	    				}
+	    			}
+	    		}
+	    		else {
+	    			// Collection
+	    			RuntimeObject containedListRO = selfRO.getProperties().get(propName);
+	    			if(containedListRO != null) {
+		    			ArrayList<RuntimeObject> containedList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(containedListRO);
+		    			
+		    			for(java.lang.Object nextObj : containedList) {
+		    				RuntimeObject crtRO = (RuntimeObject) nextObj;
+		    				//if(! fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper.isKermetaBasicType(crtRO.getMetaclass())) {
+		    				if(! fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper.isKermetaBasicType(crtRO)) {
+		    					resultList.add(crtRO);
+		    				}
+		    			}
+	    			}
+	    		}
+	    	
+	    	}
+	    }
+	    
+		return resultRO;
+	}
+	
+	
+	/**
+	 * This method computes the set of objects that are directly or indirectly contained
+	 * by the object passed as a parameter. 
+	 * @param selfRO - RO for the object
+	 * @return       - RO for the collection of RO objects directly or indirectly
+	 *                 contained by the object
+	 */
+	public static RuntimeObject getAllContainedObjects(RuntimeObject selfRO) {
+		// Get objects directly contained by the selfRO element
+		RuntimeObject resultRO = Object.getContainedObjects(selfRO);
+		ArrayList<RuntimeObject> resultList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(resultRO);
+		
+		ArrayList<RuntimeObject> tmpList = new ArrayList<RuntimeObject>();
+		tmpList.addAll(resultList);
+		
+		// Iterate over the list of directly contained objects
+		// For each of them, compute the set of objects they contain
+		for(java.lang.Object nextRO : tmpList) {
+			RuntimeObject crtRO = (RuntimeObject) nextRO;
+			
+			RuntimeObject containedListRO = Object.getAllContainedObjects(crtRO);
+			ArrayList<RuntimeObject> containedList = fr.irisa.triskell.kermeta.runtime.basetypes.Collection.getArrayList(containedListRO);
+			resultList.addAll(containedList);
+		}
+		
+		return resultRO;
 	}
 	
 }

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2007-06-28 17:10:46 jmottu Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2007-07-03 12:54:56 dtouzet Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : EPL
@@ -63,6 +63,7 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
+		
 		testWithFile("test/emf_testcases/kermeta","027_testRuntimeModelImport.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","028_testLoadEcoreFile.main.kmt" );
@@ -96,6 +97,9 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","058_loadSaveEnum.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","061_multipleIndirectLoad.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","062_resourceTests.main.kmt" );
+		
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

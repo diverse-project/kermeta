@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.40 2007-06-19 08:03:30 cfaucher Exp $
+/* $Id: structure.kmt,v 1.41 2007-07-03 12:54:47 dtouzet Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -24,6 +24,7 @@ require "../Standard.kmt"
 require "behavior.kmt" 
 
 alias String : kermeta::standard::String;
+
 class Object inherits kermeta::reflection::Object, KMStructureVisitable
 {
 	method getMetaClass() : kermeta::reflection::Class from kermeta::reflection::Object is do
@@ -127,6 +128,14 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	
 	method isInstanceOf(type : kermeta::reflection::Type) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isInstanceOf(self, type)
+	end
+	
+	/**
+	 * Returns the Resource currently containing (directly or indirectly) the object 
+	 * or void if the object belongs to ne resource
+	 */
+	method containingResource() : kermeta::persistence::Resource is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.getContainingResource(self)
 	end
 	
 }
