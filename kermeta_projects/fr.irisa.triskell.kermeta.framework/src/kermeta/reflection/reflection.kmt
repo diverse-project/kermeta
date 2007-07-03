@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.38 2007-06-19 08:03:30 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.39 2007-07-03 07:31:21 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -454,6 +454,11 @@ abstract class Package inherits TypeDefinitionContainer
  */
 abstract class TypeDefinition inherits NamedElement
 {
+	/** this boolean allows to tell if this Type definition is an aspect or not
+	 * If it is an aspect, then at runtime, its definition will be merged with the definition of another
+	 * TypeDefinition that has exactly the same qualified name
+	 */
+	attribute isAspect : Boolean
 }
 /** Class definition for the <pre>Void</pre> type */
 abstract class VoidType inherits Type
@@ -465,7 +470,7 @@ abstract class DataType inherits TypeDefinition, Type
 }
 /** Definition for enumeration */
 abstract class Enumeration inherits DataType
-{   /** Owned item in enumeration */
+{   /** Owned item in an enumeration */
 	attribute ownedLiteral : set EnumerationLiteral[0..*]#~enumeration
 }
 /** Item definition for enumeration */
