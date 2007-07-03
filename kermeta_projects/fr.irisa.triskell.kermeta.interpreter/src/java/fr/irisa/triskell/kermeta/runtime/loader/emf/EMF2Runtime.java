@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.62 2007-07-03 12:54:55 dtouzet Exp $
+/* $Id: EMF2Runtime.java,v 1.63 2007-07-03 14:48:24 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -105,6 +105,9 @@ public class EMF2Runtime {
     
     public Resource resource;
     public EMFRuntimeUnit unit;
+    
+    /** List of inter-dependent resources (including the main resource) */
+    public EList dependentResources;
     	
     /**
      * Constructor
@@ -147,11 +150,9 @@ public class EMF2Runtime {
 	 * - fills in the runtime_objects_map hashtable
 	 */
 	protected void createEmptyRuntimeObjects() {
-
-		// Find all the resources on which our resource depend,
-		// and for each resource, create the ROs for its hosted EObjects.
-		// (We know that the list returned findDependentResources contains only Resources:))
-		for (Object resObj : unit.findDependentResources(resource)) {
+		
+		// For each resource, create the ROs for its hosted EObjects.
+		for (Object resObj : dependentResources) {
 			Resource res = (Resource) resObj;
 			
 			TreeIterator contentsIt = res.getAllContents();
@@ -179,7 +180,8 @@ public class EMF2Runtime {
 	protected void createResourceRuntimeObjects(RuntimeObject mainResRO) {
 		RuntimeObject repRO = mainResRO.getProperties().get("repository");
 		
-		for (Object resObj : unit.findDependentResources(resource)) {
+		// Iterate over inter-dependent resources
+		for (Object resObj : dependentResources) {
 			Resource res = (Resource) resObj;
 			RuntimeObject crtResRO = null;
 			
@@ -204,6 +206,9 @@ public class EMF2Runtime {
 				crtResRO = mainResRO;
 			}
 			
+			// Second step: set the containing resource information for the root model elements
+			// of the current resource RO, and add these model elements into the contents of 
+			// the resourde RO
 			EList contents = res.getContents();
 			Iterator<Object> rootsIt = contents.iterator();
 			while(rootsIt.hasNext()) {
@@ -238,6 +243,9 @@ public class EMF2Runtime {
 	public void loadunit(RuntimeObject mainResRO)
 	{
 		try {
+			// Compute list of inter-dependent resources
+			dependentResources = unit.findDependentResources(resource);
+			
 			// Pass 1 : pre-create the runtime objects
 			createEmptyRuntimeObjects();
 			
@@ -256,10 +264,7 @@ public class EMF2Runtime {
 			    this.populateRuntimeObject(rObject);
 			}
 
-			// Now that RO are populated, we can fill the contentMap attribute of RuntimeUnit.
-			// contentMap is a RuntimeObject that will be "sent" to the Kermeta side, and that contains
-			// a set of derived properties that can be used by the user to retrieve the EObjects hosted
-			// by the resource that we loaded.
+			// Set the container RO property for populated ROs
 			for (EObject eObject : runtime_objects_map.keySet()) { 	
 			    RuntimeObject rObject = this.runtime_objects_map.get(eObject);
 			    // Set the container if needed 
@@ -271,7 +276,7 @@ public class EMF2Runtime {
 			    }
 			}
 			
-			// Manage the resource RuntimeObject:
+			// Manage the resource RuntimeObjects:
 			//   1- Create resource RuntimeObject for all dependent resources
 			//   2- Associate resources to their root model elements
 			createResourceRuntimeObjects(mainResRO);
