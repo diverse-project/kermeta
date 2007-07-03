@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kermeta IO Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.io
-Bundle-Version: 0.4.1
+Bundle-Version: 0.4.1.qualifier
 Bundle-ClassPath: .,
  lib/thirdparty/antlr.jar,
  lib/thirdparty/emfatic-core.jar,
