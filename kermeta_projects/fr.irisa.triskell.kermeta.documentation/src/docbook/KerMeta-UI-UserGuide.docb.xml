@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
-<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.9 2007-01-24 13:40:51 dvojtise Exp $ -->
+<!-- $Id: KerMeta-UI-UserGuide.docb.xml,v 1.10 2007-07-03 12:50:34 dvojtise Exp $ -->
 <book lang="en-GB">
   <bookinfo>
     <title>How the workbench is able to help you in your metamodelling
     tasks</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
-    <pubdate>$Date: 2007-01-24 13:40:51 $</pubdate>
+    <pubdate>$Date: 2007-07-03 12:50:34 $</pubdate>
 
     <author>
       <firstname>Didier Vojtisek, Francois Tanguy, Cyril Faucher</firstname>
@@ -728,7 +728,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_HelpContents.png" />
+          <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_HelpContents.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -772,7 +772,7 @@
         <title>Ecore to Km transformation</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_ecore2km.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_ecore2km.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -781,7 +781,7 @@
         <title>Ecore to Kmt transformation</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_ecore2kmt.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_ecore2kmt.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -803,7 +803,7 @@
         <title>Actions on ecore model</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_ActionsOnEcoreModel.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_ActionsOnEcoreModel.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -824,7 +824,7 @@
         <title>Kmt to Ecore transformation</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_kmt2ecore.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_kmt2ecore.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -842,7 +842,7 @@
         <title>Kmt to Km transformation</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_kmt2km.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_kmt2km.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -865,7 +865,7 @@
         <title>Km to Ecore transformation</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_km2ecore.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_km2ecore.png" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -883,7 +883,7 @@
         <title>Km to Kmt transformation</title>
         <mediaobject>
           <imageobject>
-            <imagedata fileref="KerMeta-UI-UserGuide_figures/Kermeta_km2kmt.png" />
+            <imagedata fileref="KerMeta-UI-UserGuide_figures/KerMeta_km2kmt.png" />
           </imageobject>
         </mediaobject>
       </figure>
