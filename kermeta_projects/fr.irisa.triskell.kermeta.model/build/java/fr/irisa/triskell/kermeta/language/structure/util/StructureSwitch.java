@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureSwitch.java,v 1.6 2007-06-05 15:26:27 cfaucher Exp $
+ * $Id: StructureSwitch.java,v 1.7 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -211,6 +211,14 @@ public class StructureSwitch {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StructurePackage.TYPE_DEFINITION: {
+				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
+				Object result = caseTypeDefinition(typeDefinition);
+				if (result == null) result = caseNamedElement(typeDefinition);
+				if (result == null) result = caseObject(typeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case StructurePackage.DATA_TYPE: {
 				DataType dataType = (DataType)theEObject;
 				Object result = caseDataType(dataType);
@@ -371,14 +379,6 @@ public class StructureSwitch {
 				if (result == null) result = caseType(virtualType);
 				if (result == null) result = caseNamedElement(virtualType);
 				if (result == null) result = caseObject(virtualType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_DEFINITION: {
-				TypeDefinition typeDefinition = (TypeDefinition)theEObject;
-				Object result = caseTypeDefinition(typeDefinition);
-				if (result == null) result = caseNamedElement(typeDefinition);
-				if (result == null) result = caseObject(typeDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

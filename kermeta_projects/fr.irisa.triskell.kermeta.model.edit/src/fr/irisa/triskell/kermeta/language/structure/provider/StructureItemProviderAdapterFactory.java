@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureItemProviderAdapterFactory.java,v 1.7 2007-05-30 11:21:45 jsteel Exp $
+ * $Id: StructureItemProviderAdapterFactory.java,v 1.8 2007-07-03 12:12:43 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -709,6 +709,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
 		if (typeVariableBindingItemProvider != null) typeVariableBindingItemProvider.dispose();
 		if (multiplicityElementItemProvider != null) multiplicityElementItemProvider.dispose();
+		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
 		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
 		if (packageItemProvider != null) packageItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
@@ -719,7 +720,6 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
 		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
 		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
-		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
 		if (productTypeItemProvider != null) productTypeItemProvider.dispose();
 		if (functionTypeItemProvider != null) functionTypeItemProvider.dispose();
 		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();

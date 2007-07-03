@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: DataTypeImpl.java,v 1.3 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#isIsAspect <em>Is Aspect</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,6 +58,26 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ASPECT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAspect = IS_ASPECT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,10 +123,33 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsAspect() {
+		return isAspect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAspect(boolean newIsAspect) {
+		boolean oldIsAspect = isAspect;
+		isAspect = newIsAspect;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.DATA_TYPE__IS_ASPECT, oldIsAspect, isAspect));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				return getName();
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,6 +163,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				setName((String)newValue);
+				return;
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				setIsAspect(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,6 +181,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				setIsAspect(IS_ASPECT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -147,6 +197,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
+				return isAspect != IS_ASPECT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -165,6 +217,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		}
 		if (baseClass == TypeDefinition.class) {
 			switch (derivedFeatureID) {
+				case StructurePackage.DATA_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
 				default: return -1;
 			}
 		}
@@ -185,6 +238,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		}
 		if (baseClass == TypeDefinition.class) {
 			switch (baseFeatureID) {
+				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.DATA_TYPE__IS_ASPECT;
 				default: return -1;
 			}
 		}
@@ -202,6 +256,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", isAspect: ");
+		result.append(isAspect);
 		result.append(')');
 		return result.toString();
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.4 2007-05-30 11:17:44 jsteel Exp $
+ * $Id: ModelTypeImpl.java,v 1.5 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#isIsAspect <em>Is Aspect</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl#getIncludedTypeDefinition <em>Included Type Definition</em>}</li>
  * </ul>
  * </p>
@@ -68,6 +69,26 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ASPECT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsAspect() <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAspect()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAspect = IS_ASPECT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getIncludedTypeDefinition() <em>Included Type Definition</em>}' reference list.
@@ -123,6 +144,27 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsAspect() {
+		return isAspect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAspect(boolean newIsAspect) {
+		boolean oldIsAspect = isAspect;
+		isAspect = newIsAspect;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.MODEL_TYPE__IS_ASPECT, oldIsAspect, isAspect));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList getIncludedTypeDefinition() {
 		if (includedTypeDefinition == null) {
 			includedTypeDefinition = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
@@ -161,6 +203,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
 				return getName();
+			case StructurePackage.MODEL_TYPE__IS_ASPECT:
+				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				return getIncludedTypeDefinition();
 		}
@@ -176,6 +220,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
 				setName((String)newValue);
+				return;
+			case StructurePackage.MODEL_TYPE__IS_ASPECT:
+				setIsAspect(((Boolean)newValue).booleanValue());
 				return;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				getIncludedTypeDefinition().clear();
@@ -195,6 +242,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 			case StructurePackage.MODEL_TYPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case StructurePackage.MODEL_TYPE__IS_ASPECT:
+				setIsAspect(IS_ASPECT_EDEFAULT);
+				return;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				getIncludedTypeDefinition().clear();
 				return;
@@ -211,6 +261,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case StructurePackage.MODEL_TYPE__IS_ASPECT:
+				return isAspect != IS_ASPECT_EDEFAULT;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				return includedTypeDefinition != null && !includedTypeDefinition.isEmpty();
 		}
@@ -231,6 +283,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		}
 		if (baseClass == TypeDefinition.class) {
 			switch (derivedFeatureID) {
+				case StructurePackage.MODEL_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
 				default: return -1;
 			}
 		}
@@ -251,6 +304,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		}
 		if (baseClass == TypeDefinition.class) {
 			switch (baseFeatureID) {
+				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.MODEL_TYPE__IS_ASPECT;
 				default: return -1;
 			}
 		}
@@ -268,6 +322,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", isAspect: ");
+		result.append(isAspect);
 		result.append(')');
 		return result.toString();
 	}

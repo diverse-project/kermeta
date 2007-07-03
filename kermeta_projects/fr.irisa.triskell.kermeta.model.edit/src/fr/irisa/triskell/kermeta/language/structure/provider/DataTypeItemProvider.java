@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: DataTypeItemProvider.java,v 1.7 2007-07-03 12:12:43 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -64,6 +64,7 @@ public class DataTypeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addNamePropertyDescriptor(object);
+			addIsAspectPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -86,6 +87,28 @@ public class DataTypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Aspect feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsAspectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeDefinition_isAspect_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_isAspect_feature", "_UI_TypeDefinition_type"),
+				 StructurePackage.Literals.TYPE_DEFINITION__IS_ASPECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -115,6 +138,7 @@ public class DataTypeItemProvider
 
 		switch (notification.getFeatureID(DataType.class)) {
 			case StructurePackage.DATA_TYPE__NAME:
+			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

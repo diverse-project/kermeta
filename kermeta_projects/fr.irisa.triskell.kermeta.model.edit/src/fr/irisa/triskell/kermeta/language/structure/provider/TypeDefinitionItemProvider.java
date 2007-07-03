@@ -2,11 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionItemProvider.java,v 1.6 2006-10-24 09:19:19 cfaucher Exp $
+ * $Id: TypeDefinitionItemProvider.java,v 1.7 2007-07-03 12:12:43 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
@@ -19,11 +20,15 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition} object.
@@ -59,8 +64,31 @@ public class TypeDefinitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIsAspectPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Aspect feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsAspectPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeDefinition_isAspect_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_isAspect_feature", "_UI_TypeDefinition_type"),
+				 StructurePackage.Literals.TYPE_DEFINITION__IS_ASPECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -95,6 +123,12 @@ public class TypeDefinitionItemProvider
 	 */
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(TypeDefinition.class)) {
+			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.7 2007-06-06 15:53:36 cfaucher Exp $
+ * $Id: StructureFactoryImpl.java,v 1.8 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -96,6 +96,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.ENUMERATION_LITERAL: return createEnumerationLiteral();
 			case StructurePackage.TYPE_VARIABLE_BINDING: return createTypeVariableBinding();
 			case StructurePackage.MULTIPLICITY_ELEMENT: return createMultiplicityElement();
+			case StructurePackage.TYPE_DEFINITION: return createTypeDefinition();
 			case StructurePackage.ENUMERATION: return createEnumeration();
 			case StructurePackage.PACKAGE: return createPackage();
 			case StructurePackage.PARAMETER: return createParameter();
@@ -106,7 +107,6 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 			case StructurePackage.OBJECT_TYPE_VARIABLE: return createObjectTypeVariable();
 			case StructurePackage.MODEL_TYPE_VARIABLE: return createModelTypeVariable();
 			case StructurePackage.VIRTUAL_TYPE: return createVirtualType();
-			case StructurePackage.TYPE_DEFINITION: return createTypeDefinition();
 			case StructurePackage.PRODUCT_TYPE: return createProductType();
 			case StructurePackage.FUNCTION_TYPE: return createFunctionType();
 			case StructurePackage.VOID_TYPE: return createVoidType();

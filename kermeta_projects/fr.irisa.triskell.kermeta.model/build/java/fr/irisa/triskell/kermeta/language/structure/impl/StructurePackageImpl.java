@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.14 2007-06-06 15:53:36 cfaucher Exp $
+ * $Id: StructurePackageImpl.java,v 1.15 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -1192,6 +1192,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTypeDefinition_IsAspect() {
+		return (EAttribute)typeDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVoidType() {
 		return voidTypeEClass;
 	}
@@ -1488,6 +1497,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__LOWER);
 		createEAttribute(multiplicityElementEClass, MULTIPLICITY_ELEMENT__UPPER);
 
+		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
+		createEAttribute(typeDefinitionEClass, TYPE_DEFINITION__IS_ASPECT);
+
 		dataTypeEClass = createEClass(DATA_TYPE);
 
 		enumerationEClass = createEClass(ENUMERATION);
@@ -1553,8 +1565,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__MODEL_TYPE);
 		createEReference(virtualTypeEClass, VIRTUAL_TYPE__TYPE_PARAM_BINDING);
 
-		typeDefinitionEClass = createEClass(TYPE_DEFINITION);
-
 		productTypeEClass = createEClass(PRODUCT_TYPE);
 		createEReference(productTypeEClass, PRODUCT_TYPE__TYPE);
 
@@ -1617,6 +1627,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		typeVariableBindingEClass.getESuperTypes().add(this.getTypeContainer());
 		typeVariableBindingEClass.getESuperTypes().add(this.getObject());
 		multiplicityElementEClass.getESuperTypes().add(this.getTypedElement());
+		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
 		dataTypeEClass.getESuperTypes().add(this.getType());
 		dataTypeEClass.getESuperTypes().add(this.getTypeDefinition());
 		enumerationEClass.getESuperTypes().add(this.getDataType());
@@ -1641,7 +1652,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		modelTypeVariableEClass.getESuperTypes().add(this.getVirtualTypeContainer());
 		modelTypeVariableEClass.getESuperTypes().add(this.getTypeVariable());
 		virtualTypeEClass.getESuperTypes().add(this.getObjectTypeVariable());
-		typeDefinitionEClass.getESuperTypes().add(this.getNamedElement());
 		productTypeEClass.getESuperTypes().add(this.getTypeContainer());
 		productTypeEClass.getESuperTypes().add(this.getType());
 		functionTypeEClass.getESuperTypes().add(this.getTypeContainer());
@@ -1750,6 +1760,9 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEAttribute(getMultiplicityElement_Lower(), this.getInteger(), "lower", null, 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMultiplicityElement_Upper(), this.getUnlimitedNatural(), "upper", null, 0, 1, MultiplicityElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTypeDefinition_IsAspect(), this.getBoolean(), "isAspect", null, 0, 1, TypeDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(enumerationEClass, Enumeration.class, "Enumeration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1814,8 +1827,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getVirtualType_ClassDefinition(), this.getClassDefinition(), null, "classDefinition", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualType_ModelType(), this.getVirtualTypeContainer(), this.getVirtualTypeContainer_VirtualType(), "modelType", null, 1, 1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVirtualType_TypeParamBinding(), this.getTypeVariableBinding(), null, "typeParamBinding", null, 0, -1, VirtualType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(typeDefinitionEClass, TypeDefinition.class, "TypeDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(productTypeEClass, ProductType.class, "ProductType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProductType_Type(), this.getType(), null, "type", null, 0, -1, ProductType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

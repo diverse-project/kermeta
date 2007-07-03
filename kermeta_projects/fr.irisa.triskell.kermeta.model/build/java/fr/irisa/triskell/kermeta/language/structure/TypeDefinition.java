@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinition.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: TypeDefinition.java,v 1.2 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -12,10 +12,42 @@ package fr.irisa.triskell.kermeta.language.structure;
  * A representation of the model object '<em><b>Type Definition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#isIsAspect <em>Is Aspect</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition()
  * @model
  * @generated
  */
 public interface TypeDefinition extends NamedElement {
+	/**
+	 * Returns the value of the '<em><b>Is Aspect</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Aspect</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Aspect</em>' attribute.
+	 * @see #setIsAspect(boolean)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition_IsAspect()
+	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	boolean isIsAspect();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#isIsAspect <em>Is Aspect</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Aspect</em>' attribute.
+	 * @see #isIsAspect()
+	 * @generated
+	 */
+	void setIsAspect(boolean value);
+
 } // TypeDefinition

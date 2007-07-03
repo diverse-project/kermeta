@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureAdapterFactory.java,v 1.5 2007-06-05 15:26:27 cfaucher Exp $
+ * $Id: StructureAdapterFactory.java,v 1.6 2007-07-03 12:12:47 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -133,6 +133,9 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			public Object caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
 			}
+			public Object caseTypeDefinition(TypeDefinition object) {
+				return createTypeDefinitionAdapter();
+			}
 			public Object caseDataType(DataType object) {
 				return createDataTypeAdapter();
 			}
@@ -183,9 +186,6 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 			}
 			public Object caseVirtualType(VirtualType object) {
 				return createVirtualTypeAdapter();
-			}
-			public Object caseTypeDefinition(TypeDefinition object) {
-				return createTypeDefinitionAdapter();
 			}
 			public Object caseProductType(ProductType object) {
 				return createProductTypeAdapter();
