@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeItemProvider.java,v 1.7 2007-07-03 12:12:43 dvojtise Exp $
+ * $Id: DataTypeItemProvider.java,v 1.8 2007-07-03 12:37:37 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -65,6 +65,7 @@ public class DataTypeItemProvider
 
 			addNamePropertyDescriptor(object);
 			addIsAspectPropertyDescriptor(object);
+			addBaseAspectsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -109,6 +110,28 @@ public class DataTypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Base Aspects feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBaseAspectsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypeDefinition_baseAspects_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypeDefinition_baseAspects_feature", "_UI_TypeDefinition_type"),
+				 StructurePackage.Literals.TYPE_DEFINITION__BASE_ASPECTS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

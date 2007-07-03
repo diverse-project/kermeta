@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeImpl.java,v 1.3 2007-07-03 12:12:47 dvojtise Exp $
+ * $Id: DataTypeImpl.java,v 1.4 2007-07-03 12:37:33 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -14,6 +14,8 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +23,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#isIsAspect <em>Is Aspect</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +83,16 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * @ordered
 	 */
 	protected boolean isAspect = IS_ASPECT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBaseAspects() <em>Base Aspects</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBaseAspects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList baseAspects = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -144,12 +159,26 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList getBaseAspects() {
+		if (baseAspects == null) {
+			baseAspects = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.DATA_TYPE__BASE_ASPECTS);
+		}
+		return baseAspects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
 				return getName();
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
+			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
+				return getBaseAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,6 +195,10 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return;
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				setIsAspect(((Boolean)newValue).booleanValue());
+				return;
+			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
+				getBaseAspects().clear();
+				getBaseAspects().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -184,6 +217,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
+			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
+				getBaseAspects().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -199,6 +235,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.DATA_TYPE__IS_ASPECT:
 				return isAspect != IS_ASPECT_EDEFAULT;
+			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
+				return baseAspects != null && !baseAspects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -218,6 +256,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		if (baseClass == TypeDefinition.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.DATA_TYPE__IS_ASPECT: return StructurePackage.TYPE_DEFINITION__IS_ASPECT;
+				case StructurePackage.DATA_TYPE__BASE_ASPECTS: return StructurePackage.TYPE_DEFINITION__BASE_ASPECTS;
 				default: return -1;
 			}
 		}
@@ -239,6 +278,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 		if (baseClass == TypeDefinition.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE_DEFINITION__IS_ASPECT: return StructurePackage.DATA_TYPE__IS_ASPECT;
+				case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS: return StructurePackage.DATA_TYPE__BASE_ASPECTS;
 				default: return -1;
 			}
 		}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerItemProvider.java,v 1.10 2007-07-03 12:12:43 dvojtise Exp $
+ * $Id: TypeDefinitionContainerItemProvider.java,v 1.11 2007-07-03 12:37:37 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

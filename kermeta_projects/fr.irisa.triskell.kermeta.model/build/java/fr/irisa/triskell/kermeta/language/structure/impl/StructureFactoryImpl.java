@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.8 2007-07-03 12:12:47 dvojtise Exp $
+ * $Id: StructureFactoryImpl.java,v 1.9 2007-07-03 12:37:33 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

@@ -2,21 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionImpl.java,v 1.3 2007-07-03 12:12:47 dvojtise Exp $
+ * $Id: TypeDefinitionImpl.java,v 1.4 2007-07-03 12:37:33 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 
-import java.util.Collection;
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -31,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#isIsAspect <em>Is Aspect</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,6 +61,16 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected boolean isAspect = IS_ASPECT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getBaseAspects() <em>Base Aspects</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBaseAspects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList baseAspects = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,10 +116,24 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList getBaseAspects() {
+		if (baseAspects == null) {
+			baseAspects = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
+		}
+		return baseAspects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				return isIsAspect() ? Boolean.TRUE : Boolean.FALSE;
+			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
+				return getBaseAspects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +147,10 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				setIsAspect(((Boolean)newValue).booleanValue());
+				return;
+			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
+				getBaseAspects().clear();
+				getBaseAspects().addAll((Collection)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -133,6 +166,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				setIsAspect(IS_ASPECT_EDEFAULT);
 				return;
+			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
+				getBaseAspects().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -146,6 +182,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
 				return isAspect != IS_ASPECT_EDEFAULT;
+			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
+				return baseAspects != null && !baseAspects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

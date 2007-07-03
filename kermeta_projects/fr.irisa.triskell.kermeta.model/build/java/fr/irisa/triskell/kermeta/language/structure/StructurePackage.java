@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.9 2007-07-03 12:12:47 dvojtise Exp $
+ * $Id: StructurePackage.java,v 1.10 2007-07-03 12:37:33 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -653,13 +653,22 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__BASE_ASPECTS = TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Included Type Definition</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__INCLUDED_TYPE_DEFINITION = TYPE_FEATURE_COUNT + 2;
+	int MODEL_TYPE__INCLUDED_TYPE_DEFINITION = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Model Type</em>' class.
@@ -668,7 +677,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
+	int MODEL_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1283,13 +1292,22 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION__IS_ASPECT = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_DEFINITION__BASE_ASPECTS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPE_DEFINITION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1328,13 +1346,22 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__IS_ASPECT = TYPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__BASE_ASPECTS = TYPE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+	int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Tag</b></em>' reference list.
@@ -1371,6 +1398,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__IS_ASPECT = DATA_TYPE__IS_ASPECT;
+
+	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__BASE_ASPECTS = DATA_TYPE__BASE_ASPECTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Literal</b></em>' containment reference list.
@@ -1580,6 +1616,15 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__IS_ASPECT = DATA_TYPE__IS_ASPECT;
 
 	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__BASE_ASPECTS = DATA_TYPE__BASE_ASPECTS;
+
+	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1760,6 +1805,15 @@ public interface StructurePackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION__IS_ASPECT = TYPE_DEFINITION__IS_ASPECT;
 
 	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERIC_TYPE_DEFINITION__BASE_ASPECTS = TYPE_DEFINITION__BASE_ASPECTS;
+
+	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1803,6 +1857,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DEFINITION__IS_ASPECT = GENERIC_TYPE_DEFINITION__IS_ASPECT;
+
+	/**
+	 * The feature id for the '<em><b>Base Aspects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DEFINITION__BASE_ASPECTS = GENERIC_TYPE_DEFINITION__BASE_ASPECTS;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameter</b></em>' containment reference list.
@@ -3288,6 +3351,17 @@ public interface StructurePackage extends EPackage {
 	EAttribute getTypeDefinition_IsAspect();
 
 	/**
+	 * Returns the meta object for the reference list '{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#getBaseAspects <em>Base Aspects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Base Aspects</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.TypeDefinition#getBaseAspects()
+	 * @see #getTypeDefinition()
+	 * @generated
+	 */
+	EReference getTypeDefinition_BaseAspects();
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.VoidType <em>Void Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4297,6 +4371,14 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TYPE_DEFINITION__IS_ASPECT = eINSTANCE.getTypeDefinition_IsAspect();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Aspects</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_DEFINITION__BASE_ASPECTS = eINSTANCE.getTypeDefinition_BaseAspects();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.

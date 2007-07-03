@@ -219,6 +219,11 @@
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/structure/MultiplicityElement/lower"/>
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/structure/MultiplicityElement/upper"/>
         </genClasses>
+        <genClasses ecoreClass="kermeta_java.ecore#//language/structure/TypeDefinition">
+          <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_java.ecore#//language/structure/TypeDefinition/isAspect"/>
+          <genFeatures notify="false" createChild="false" propertySortChoices="true"
+              ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/TypeDefinition/baseAspects"/>
+        </genClasses>
         <genClasses image="false" ecoreClass="kermeta_java.ecore#//language/structure/DataType"/>
         <genClasses ecoreClass="kermeta_java.ecore#//language/structure/Enumeration">
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/Enumeration/ownedLiteral"/>
@@ -287,7 +292,6 @@
           <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/VirtualType/modelType"/>
           <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/VirtualType/typeParamBinding"/>
         </genClasses>
-        <genClasses ecoreClass="kermeta_java.ecore#//language/structure/TypeDefinition"/>
         <genClasses ecoreClass="kermeta_java.ecore#//language/structure/ProductType">
           <genFeatures notify="false" createChild="false" propertySortChoices="true"
               ecoreFeature="ecore:EReference kermeta_java.ecore#//language/structure/ProductType/type"/>

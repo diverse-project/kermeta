@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinition.java,v 1.2 2007-07-03 12:12:47 dvojtise Exp $
+ * $Id: TypeDefinition.java,v 1.3 2007-07-03 12:37:33 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
+
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +18,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#isIsAspect <em>Is Aspect</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition#getBaseAspects <em>Base Aspects</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +52,21 @@ public interface TypeDefinition extends NamedElement {
 	 * @generated
 	 */
 	void setIsAspect(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Base Aspects</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Base Aspects</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Base Aspects</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition_BaseAspects()
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeDefinition"
+	 * @generated
+	 */
+	EList getBaseAspects();
 
 } // TypeDefinition

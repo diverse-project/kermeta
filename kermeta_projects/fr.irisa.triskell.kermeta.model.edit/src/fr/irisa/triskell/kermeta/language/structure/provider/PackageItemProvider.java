@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageItemProvider.java,v 1.11 2007-07-03 12:12:43 dvojtise Exp $
+ * $Id: PackageItemProvider.java,v 1.12 2007-07-03 12:37:37 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

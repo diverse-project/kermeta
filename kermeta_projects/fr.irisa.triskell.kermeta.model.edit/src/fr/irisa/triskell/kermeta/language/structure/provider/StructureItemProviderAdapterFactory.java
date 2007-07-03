@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureItemProviderAdapterFactory.java,v 1.8 2007-07-03 12:12:43 dvojtise Exp $
+ * $Id: StructureItemProviderAdapterFactory.java,v 1.9 2007-07-03 12:37:37 dtouzet Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
