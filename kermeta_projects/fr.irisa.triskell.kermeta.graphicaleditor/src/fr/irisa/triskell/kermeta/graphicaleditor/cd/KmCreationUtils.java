@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmCreationUtils.java,v 1.2 2007-03-01 17:06:10 cfaucher Exp $
+ * $Id: KmCreationUtils.java,v 1.3 2007-07-05 15:16:18 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -20,6 +20,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.util.StructureSwitch;
 import fr.irisa.triskell.kermeta.language.util.LanguageSwitch;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.KmSwitch;
 
 /**
@@ -236,7 +237,7 @@ public class KmCreationUtils extends AbstractCreationUtils {
 			if(obj instanceof Property) {
 				Property prop = (Property) obj;
 				if(prop.eContainer()!=null) {
-					if (prop.getType() == null || (KermetaUtils.getDefault().isStandardType(prop.getType()) || KermetaUtils.getDefault().isPrimitiveType(prop.getType()))) {
+					if (prop.getType() == null || (TypeHelper.isStandardType(prop.getType()) || TypeHelper.isPrimitiveType(prop.getType()))) {
 						presentation="propertyNode";				
 					}
 					else {

@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.4 2007-06-13 09:30:47 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.5 2007-07-05 15:16:18 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -336,94 +336,6 @@ public class KermetaUtils {
 				return op;
 		}
 		return null;
-	}
-
-	/**
-	 * Return true if the given type is linked to a type definition in the
-	 * standard framework (framework.km), false otherwise. This method also
-	 * calls isPrimitiveType method.
-	 * 
-	 * @param type
-	 * @return
-	 * @generated NOT
-	 */
-	public boolean isStandardType(Type type) {
-
-		// FIXME : it is possible to improve the retrieval method of the
-		// ClassDefinition
-		// corresponding with "kermeta::standard::ValueType", may be with a
-		// cache (a class variable)
-		if (type instanceof Class) {
-			TypeDefinition valueTypeTypeDef = getTypeDefinitionFromResourceSet(type.eResource(),"kermeta::standard::ValueType");
-
-			if (((Class) type).getTypeDefinition().getTypeParameter().size() == 0) {
-				
-				// FIXME CF: the uses of the method isSuperClassOfByName is very ugly, it is a temp patch related to the restore connection in the graphical editor
-				if (!ClassDefinitionHelper.isSuperClassOfByName(
-						(ClassDefinition) valueTypeTypeDef,
-						(ClassDefinition) ((Class) type).getTypeDefinition())) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-	}
-
-	/**
-	 * Return true if given type is a primitive type (in kermeta meaning, an
-	 * alias), false otherwise
-	 * 
-	 * @param type
-	 * @return
-	 * 
-	 * @generated NOT
-	 */
-	public boolean isPrimitiveType(Type type) {
-
-		if (type instanceof Class) {
-			
-			TypeDefinition primitiveTypeTypeDef = getTypeDefinitionFromResourceSet(type.eResource(),"kermeta::standard::PrimitiveType");
-
-			if (((Class) type).getTypeDefinition().getTypeParameter().size() == 0) {
-				
-				// FIXME CF: the uses of the method isSuperClassOfByName is very ugly, it is a temp patch related to the restore connection in the graphical editor
-				if (!ClassDefinitionHelper.isSuperClassOfByName(
-						(ClassDefinition) primitiveTypeTypeDef,
-						(ClassDefinition) ((Class) type).getTypeDefinition())) {
-					return false;
-				}
-			}
-		}
-
-		return true;
-
-		// return type instanceof PrimitiveType;
-	}
-	
-	/**
-	 * @param resource EMF Resource
-	 * @param qualifiedName Qualified name of the searched TypeDefinition
-	 * Get the TypeDefinition by QualifiedName from a loaded framework.km in an EMF ResourceSet
-	 * @return
-	 * 
-	 * @generated NOT
-	 */
-	public TypeDefinition getTypeDefinitionFromResourceSet(Resource resource, String qualifiedName) {
-		TypeDefinition typeDef = null;
-		boolean hasFound = false;
-		for (Iterator it = resource.getResourceSet()
-				.getAllContents(); it.hasNext() && hasFound == false;) {
-			Object aResourceElt = (Object) it.next();
-			if (aResourceElt instanceof ClassDefinition) {
-				ClassDefinition aClassDef = (ClassDefinition) aResourceElt;
-				if (NamedElementHelper.getQualifiedName(aClassDef).equals(qualifiedName)) {
-					typeDef = aClassDef;
-					hasFound = true;
-				}
-			}
-		}
-		return typeDef;
 	}
 	
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.1 2007-02-06 17:45:45 cfaucher Exp $
+ * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.2 2007-07-05 15:16:18 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 /**
@@ -141,8 +142,9 @@ public class ClassDefinitionRestoreConnectionCommand extends
 			if (obj instanceof Property) {
 				Property edgeObject = (Property) obj;
 
-				if (!KermetaUtils.getDefault().isStandardType(
-						edgeObject.getType()) && !KermetaUtils.getDefault().isPrimitiveType(
+				if (!TypeHelper.isStandardType(
+						edgeObject.getType())
+						&& !TypeHelper.isPrimitiveType(
 								edgeObject.getType())) {
 
 					// Change : edgeObject.getType()
