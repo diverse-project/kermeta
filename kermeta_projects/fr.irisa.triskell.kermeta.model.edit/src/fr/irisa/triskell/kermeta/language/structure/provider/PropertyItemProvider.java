@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.14 2007-02-19 18:04:51 cfaucher Exp $
+ * $Id: PropertyItemProvider.java,v 1.15 2007-07-05 15:01:02 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -12,6 +12,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import java.util.ArrayList;
@@ -103,8 +104,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 				// Get the owner of this property, thus a ClassDefinition
 				ClassDefinition eContainingClass = eReference.getOwningClass();
 				// Get the target of this property, thus a ClassDefinition
-				ClassDefinition eReferenceType = (ClassDefinition) ((Class) eReference
+				ClassDefinition eReferenceType = null;
+				if(eReference!=null && eReference.getType()!=null) {
+				eReferenceType = (ClassDefinition) ((Class) eReference
 						.getType()).getTypeDefinition();
+				}
 				if (eContainingClass == null || eReferenceType == null) {
 					return Collections.EMPTY_LIST;
 				}
@@ -134,8 +138,11 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 										|| ClassDefinitionHelper.isSuperClassOf(
 												eContainingClass,
 												eOppositeReferenceType)
-										|| eContainingClass != eOppositeReferenceType) {
-									// FIXME We must remove from the list all classes that are typed as PrimitiveType or ValueType
+										|| eContainingClass != eOppositeReferenceType
+										// Fixing the bug #2044
+										|| TypeHelper.isStandardType(eOpposite.getType())
+										|| TypeHelper.isPrimitiveType(eOpposite.getType())
+										) {
 									i.remove();
 								}
 							}
@@ -355,7 +362,7 @@ public class PropertyItemProvider extends MultiplicityElementItemProvider
 		// We get the label (ClassDefinition name) of the parent of the given
 		// Property
 		return label == null || label.length() == 0 ? getString("_UI_Property_type")
-				: /*getString("_UI_Property_type") + " " + */label + " from "
+				: /*getString("_UI_Property_type") + " " + */label + " owned by "
 						+ parent;
 	}
 
