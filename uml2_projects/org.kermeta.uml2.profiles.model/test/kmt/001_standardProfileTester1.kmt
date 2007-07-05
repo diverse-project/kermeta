@@ -1,0 +1,56 @@
+/* $Id: 001_standardProfileTester1.kmt,v 1.1 2007-07-05 09:48:13 dvojtise Exp $
+ * Creation date: June 29, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "standardProfileTester1::Main"
+@mainOperation "main"
+
+
+package standardProfileTester1;
+
+
+require kermeta
+require "../../src/kmt/UmlProfilesHelper.kmt" 
+using kermeta::persistence
+class Main
+{
+	reference resource : Resource
+	reference umlHelper : umlProfiles::UMLHelper
+	operation main() : Void is do 
+		var rep : Repository  init EMFRepository.new
+		resource := rep.createResource("../instances/001_standardProf_test1.uml",
+			"../../model/ecore/Standard.profile.ecore")
+		resource.load
+		umlHelper := umlProfiles::UMLHelper.new.initialize(resource,resource)
+		stdio.writeln(resource.size.toString)
+		resource.each{o | 
+			if(o.isInstanceOf(uml::Package)) then
+				visitPackage(o.asType(uml::Package),"")
+			else		
+				stdio.writeln(o.toString )
+			end
+		}
+	end
+	
+	operation visitPackage(pack : uml::Package, indent : kermeta::standard::String) is do
+		stdio.writeln(indent + "package " + pack.name)
+		pack.packagedElement.each{ o |
+			if(o.isInstanceOf(uml::Package)) then
+				visitPackage(o.asType(uml::Package),indent + "   ")
+			else if(o.isInstanceOf(uml::Class)) then
+				visitClass(o.asType(uml::Class),indent + "   ")
+			else 		
+				stdio.writeln(indent + "   " + o.toString )
+			end end
+		}
+	end
+	operation visitClass(cl : uml::Class, indent : kermeta::standard::String) is do
+		stdio.write(indent + "class " + cl.name)
+		umlHelper.getStereotypesFor(cl).each{st | 
+			stdio.write(" <" + st.getMetaClass.name +">")
+		}
+		stdio.writeln("")
+	end
+}
