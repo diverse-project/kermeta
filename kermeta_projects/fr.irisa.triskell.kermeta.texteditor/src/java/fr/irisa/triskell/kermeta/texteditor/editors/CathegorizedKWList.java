@@ -1,4 +1,4 @@
-/* $Id: CathegorizedKWList.java,v 1.8 2007-06-27 12:41:35 cfaucher Exp $
+/* $Id: CathegorizedKWList.java,v 1.9 2007-07-06 07:05:45 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : CathegorizedKWList.java
 * License : EPL
@@ -56,6 +56,7 @@ public class CathegorizedKWList {
 		addKeyword("using", specialKW);
 		addKeyword("inherits", structKW);
 		addKeyword("class", structKW);
+		addKeyword("modeltype", structKW);
 		addKeyword("@pre", operatorKW); //doesn't work properly, probably because the @ is processed firstly
 		addKeyword("pre", specialKW);
 		addKeyword("post", specialKW);
