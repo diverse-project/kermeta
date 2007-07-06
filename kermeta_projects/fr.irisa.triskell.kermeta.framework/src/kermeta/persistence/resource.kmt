@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.30 2007-07-03 12:54:47 dtouzet Exp $
+ * $Id: resource.kmt,v 1.31 2007-07-06 15:45:32 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -239,7 +239,7 @@ abstract class Repository
 	 * User must provide the mm_uri if he creates a new model from scratch.
 	 */
 	operation createResource(uri : String, mm_uri : String) : Resource is abstract
-	
+
 	/**
 	 * Get the resource of model that is stored in the given uri. 
 	 * This suppose that this URI resource was already created in this Repository.
@@ -247,12 +247,19 @@ abstract class Repository
 	 * and load a new one.  
 	 */
 	operation getResource(uri : String) : Resource is do
+		var nUri : String
+		var crt_nUri : String
+		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+		
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.initRepository(self)
+
 		from var it : Iterator<Resource> init resources.iterator
 		until it.isOff
 		loop
 			var next : Resource init it.next
-			if (uri.equals(next.uri)) then
+			crt_nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(next.uri)
+			//if (uri.equals(next.uri)) then
+			if(nUri.equals(crt_nUri)) then
 				result := next
 			end
 		end
@@ -280,8 +287,19 @@ class EMFRepository inherits Repository
 	 * otherwise, you can only call the save method
 	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
+		var nUri : String
+		nUri ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(uri)
+
+		if(not resources.collect{r | extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.normalizeUri(r.uri)}.contains(nUri)) then
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Repository.createResource(self, uri, mm_uri)
+		else
+			var e : ResourceCreateException init ResourceCreateException.new
+			e.message := "Trying to create a resource already existing at " + uri + ".\n"
+					+ "Remove existing resource from repository first, or use \"getResource\" operation."
+			raise e
+		end
 	end
+	
 	// Override so that specialized types are fixed ...hum cast is not excellent
 	/**
 	 * Get the resource of model that is stored in the given uri. Silently create
@@ -316,6 +334,7 @@ class KMRepository inherits Repository
 /** Specialized exceptions */
 class ResourceLoadException inherits kermeta::exceptions::Exception { }
 class ResourceSaveException inherits kermeta::exceptions::Exception { }
+class ResourceCreateException inherits kermeta::exceptions::Exception { }
 /** Raised when user tries to add an object that is not conform to the metamodel */
 class ResourceUnconformityException inherits kermeta::exceptions::Exception { }
 

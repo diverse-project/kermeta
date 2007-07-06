@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.6 2007-06-25 07:14:16 dvojtise Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.7 2007-07-06 15:45:22 dtouzet Exp $
  * Creation date: November 14, 2006
  * License: EPL
  * Authors: dvojtise
@@ -21,9 +21,10 @@ using tester
 
 class Main inherits kermeta::kunit::TestCase
 {
-
+	attribute ecoreMetamodel : String
+	reference repository : EMFRepository
+	
 	operation main () : Void is do
-		
 		var tr : TestRunner init TestRunner.new
 		tr.run(Main)
 		tr.printTestResult
@@ -35,10 +36,7 @@ class Main inherits kermeta::kunit::TestCase
 		stdio.writeln("--- load_and_save_in_another_location END ---")
 	end
 	
-	attribute ecoreMetamodel : String
-	reference repository : EMFRepository
 	operation setUp() : Void is do
-		
     	ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/Ecore.ecore"
     	repository := EMFRepository.new
 	end
@@ -88,6 +86,7 @@ class Main inherits kermeta::kunit::TestCase
    	 * bug #2256
 	 */
     operation testLoadSaveEcoreFileUsingAnotherResource() : Void is do 
+    	var repository : EMFRepository init EMFRepository.new
     	
 		// load
 		var resource1 : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/fsm.ecore" ,
@@ -109,7 +108,7 @@ class Main inherits kermeta::kunit::TestCase
 	    	"testLoadSaveEcoreFileUsingAnotherResource")
     end
     
-        /** 
+    /** 
    	 * load and save in another location by moving the model element to another resource
    	 * bug #2256
 	 */
@@ -135,7 +134,12 @@ class Main inherits kermeta::kunit::TestCase
 	    	"testLoadSaveEcoreFileUsingAnotherResourceSeparateRepository")
     end
     
+    /**
+     *
+     */
     operation checkEcoreSavedFile(fileName : String, numberOfInstances : Integer, testName : String) : Void is do
+    	var repository : EMFRepository init EMFRepository.new
+    	
     	var resource : Resource init repository.createResource(fileName, ecoreMetamodel)
     	resource.load
     	    	
@@ -174,6 +178,7 @@ class Main inherits kermeta::kunit::TestCase
     	res2.instances.add(root)
     	res2.save
     	//stdio.writeln("Model saved")
+    	rep.resources.clear
     	do 
 	    	//res3 ?= EMFRepository.new.createResource(outputMdlUri, inputMMMdlUri)
 	    	res3 ?= rep.createResource(outputMdlUri, inputMMMdlUri)
@@ -220,6 +225,7 @@ class Main inherits kermeta::kunit::TestCase
 	 */
 	operation testLoadWithoutMMThenIndirectlySaveFile() is do
 		var rep : EMFRepository init EMFRepository.new
+		
 		var res1 : EMFResource
 		var res2 : EMFResource
 		var res3 : EMFResource
@@ -229,10 +235,11 @@ class Main inherits kermeta::kunit::TestCase
         var inputMMMdlUri : String init "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/056_test_MdlSave.ecore"
 
 		
-   		stdio.writeln("Loading model at " + inputMdlUri + " using " + inputMMMdlUri)
-    	res2 ?= rep.getResource(inputMdlUri)
+   		stdio.writeln("Loading model at " + input2MdlUri + " using " + inputMMMdlUri)
+    	res2 ?= rep.getResource(input2MdlUri)
     	res2.load
     	//stdio.writeln("Model loaded")
+    	
     	
     	stdio.writeln("Loading model at " + inputMdlUri + " using " + inputMMMdlUri)
     	res1 ?= rep.createResource(inputMdlUri, inputMMMdlUri)

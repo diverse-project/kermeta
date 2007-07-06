@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.1 2007-06-20 13:03:22 dtouzet Exp $
+/* $Id: Repository.java,v 1.2 2007-07-06 15:45:23 dtouzet Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -114,5 +114,34 @@ public class Repository {
     	}
     	
     	return selfRO;
+    }
+
+    
+    /**
+     * @param uriRO
+     * @return
+     */
+    public static RuntimeObject normalizeUri(RuntimeObject uriRO) {
+    	// Default value for the resource RO to be returned
+    	GenericTypeDefinition strClassDef  = (GenericTypeDefinition)uriRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::String");
+		fr.irisa.triskell.kermeta.language.structure.Class strClass = uriRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+		strClass.setTypeDefinition(strClassDef);
+	    RuntimeObject metaclassRO = uriRO.getFactory().getMemory().getRuntimeObjectForFObject(strClass);
+    	RuntimeObject nuriRO = new RuntimeObject(uriRO.getFactory(), metaclassRO);
+    	
+    	// Normalize uri
+    	java.lang.String file = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(uriRO);
+    	java.lang.String unit_uri = uriRO.getFactory().getMemory().getUnit().getUri();
+    	java.lang.String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
+    	URI u = URI.createURI(file);
+    	if (u.isRelative()) {
+    		URIConverter c = new URIConverterImpl();
+    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
+    	}
+    	
+    	// Assign normalized uri to nuri RO
+    	nuriRO.getData().put("StringValue", u.toString());
+    	
+    	return nuriRO;
     }
 }
