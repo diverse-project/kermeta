@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.11 2007-06-26 09:12:20 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.12 2007-07-06 11:53:18 dvojtise Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -27,10 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * This class is used to help to pacth the EMF problem about empty packages 
@@ -54,6 +51,11 @@ public class QualifiedNamePatcher {
      */
     protected Resource metaModelResource= null;
     
+    /**
+     * used to avoid infinite loops (and stack overflow) while getting the name of reflective EPackage
+     * This works only if we reuse the same QualifierNamePAtcher in the different calls
+     */
+    protected String currentlySearchedURI = "";
 
     /** avoid to have the error several times
      * 
@@ -91,10 +93,16 @@ public class QualifiedNamePatcher {
 		    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
 		    	if (mmPackage != null)
 		    	{
-		    		if(!nsuri.equals("http://www.eclipse.org/emf/2002/Ecore")){ 
-		    			// do not look for real name of ecore, otherwise its reflexivity ends up in an infinite loop ...
-		    			result = emfRuntimeUnit.getEQualifiedName(mmPackage);
-		    		}
+		    		//if(!nsuri.equals("http://www.eclipse.org/emf/2002/Ecore")){ 
+		    			// do not look twice for real name of this package. typically if reflexive, otherwise its reflexivity ends up in an infinite loop ...
+		    			EMFRuntimeUnit.internalLog.debug("looking for EPackage QualifiedName of " + nsuri + " from "+ this);
+		    			if(!nsuri.equals(this.currentlySearchedURI)){
+		    				currentlySearchedURI = nsuri; // avoid stack overflow
+		    				result = emfRuntimeUnit.getEQualifiedName(mmPackage);
+		    				currentlySearchedURI = ""; // search is finished
+		    			}
+		    			else result = mmPackage.getName();
+		    		//}
 		    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization		    		
 		    	}
 		    	else{
