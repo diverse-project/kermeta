@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.20 2007-06-26 09:26:39 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.21 2007-07-09 16:11:06 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-06-26 09:26:39 $</pubdate>
+    <pubdate>$Date: 2007-07-09 16:11:06 $</pubdate>
 
     <author>
       <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher,
@@ -204,6 +204,10 @@
 <emphasis>end</emphasis>
 </programlisting>
 
+		
+      </section>
+      <section>
+        <title>Corresponding section in the Reference chapter</title>
         <para>All these "classic" imperative features and their syntaxes are described in <xref
         linkend="chapter_reference.link"/>. More precisely in 
         <itemizedlist>
@@ -277,6 +281,9 @@
     <emphasis>end</emphasis>
 }</programlisting>
 
+	  
+      <section>
+        <title>Corresponding section in the Reference chapter</title>
       <para>You can get more informations about Kermeta object-oriented
       features in <xref linkend="chapter_reference.link"/>. More precisely in 
       <itemizedlist>
@@ -303,6 +310,8 @@
         </para></listitem>
       </itemizedlist>
       </para>
+      </section>
+      
     </section>
 
     <section>
@@ -373,13 +382,19 @@
         save models done with other EMF tools.</para>
 
         <programlisting>/* Initialize the EMF repository */
-<emphasis role="strong">var</emphasis> repository : EMFRepository init EMFRepository.new
+<emphasis role="strong">var</emphasis> repository : EMFRepository <emphasis role="strong">init</emphasis> EMFRepository.new
 
 /* Create an EMF Resource, given model and metamodel URIs as String */
-<emphasis role="strong">var</emphasis> resource : Resource init repository.createResource(myModelURI, itsMetamodelURI)
+<emphasis role="strong">var</emphasis> resource : Resource <emphasis role="strong">init</emphasis> repository.createResource(myModelURI, itsMetamodelURI)
 
 /* Load the resource */
-resource.load</programlisting>
+resource.load
+
+// get elements from the resource
+// in this sample, you know that your root element is always a Library, 
+// so you can directly get the first one
+<emphasis role="strong">var</emphasis> aLibrary : Libray
+aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if not a Library you'll get Void</programlisting>
 
         <para>In the same way, you can serialize a model, or load, change and
         save an existing model.</para>
@@ -395,20 +410,41 @@ resource.load</programlisting>
 		the one which are used when an <link linkend="section_properties.link">Attribute or Reference</link> has a multiplicity greater than 1.</para>
         <para>TODO : a simple example of navigation (applying visitor pattern
         ???)</para>
-
-        <para>You can get more informations about Kermeta model-oriented
-        features in the <xref linkend="chapter_reference.link"/>. More precisely in 
-      <itemizedlist>
-        <listitem><para>
-        	<xref linkend="section_loadingsaving_models.link"/>
-        </para></listitem>
-      </itemizedlist>
-      </para>
+	  </section>
+		
+	  <section>
+        <title>Model type</title>
+      	<para>
+      		In order to improve reuse of existing code between metamodel variants, the language
+      		introduces the notion of ModelType. It is based on the notion of conformance between two 
+      		metamodels. This allows to write behavior that is valid for a given
+      		metamodel and that will also work for any conformant metamodel.
+      		
+       	</para>
+      
+      </section>
+      <section>
+        <title>Kermeta model reflexively available</title>
       <para>
       	Kermeta has been developed, using MDE principles so it also provides its own metamodel (reflectiveley available). 
       	Details of Kermeta metamodel is available in <xref linkend="section_kermeta_metamodel.link"/>
       </para>
       </section>
+      <section>
+        <title>Corresponding section in the Reference chapter</title>
+        <para>You can get more informations about all Kermeta model-oriented
+        features in the <xref linkend="chapter_reference.link"/>. More precisely in 
+      <itemizedlist>
+        <listitem><para>
+        	<xref linkend="section_loadingsaving_models.link"/>
+        </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_kermeta_metamodel.link"/>
+        </para></listitem>
+      </itemizedlist>
+      </para>
+      </section>
+      
     </section>
 
     <section>
@@ -596,11 +632,12 @@ this line too. */</programlisting>
       <para>So Kermeta syntax allows you to use the word you want, you simply
       have to prefix it with a tilda ~.</para>
 
-      <para>This example is valid:</para>
+      <para>This example is valid even if we use "class" and "attribute" which are keywords in the language:</para>
 
-      <programlisting><emphasis role="strong">require </emphasis>"./ecore.ecore"
+      <programlisting>
 <emphasis role="strong">class</emphasis> ~class {
-    <emphasis role="strong">attribute</emphasis> ~attribute : Ecore::Attribute
+    <emphasis role="strong">attribute</emphasis> ~attribute : kermeta::standard::String
+    <emphasis role="strong">attribute</emphasis> ~class : kermeta::standard::String
 }</programlisting>
     </section>
 
@@ -619,14 +656,14 @@ this line too. */</programlisting>
 
           <thead>
             <row>
-              <entry><?border-top 0.0007inch solid #000000?><para>Priority</para></entry>
+              <entry><para>Priority</para></entry>
 
-              <entry><?border-top 0.0007inch solid #000000?><para>Operator</para></entry>
+              <entry><para>Operator</para></entry>
 
-              <entry><?border-top 0.0007inch solid #000000?><para>Operand
+              <entry><para>Operand
               types</para></entry>
 
-              <entry><?border 0.0007inch solid #000000?><para>Semantic</para></entry>
+              <entry><para>Semantic</para></entry>
             </row>
           </thead>
 
@@ -698,14 +735,14 @@ this line too. */</programlisting>
 
           <thead>
             <row>
-              <entry><?border-top 0.0007inch solid #000000?><para>Priority</para></entry>
+              <entry><para>Priority</para></entry>
 
-              <entry><?border-top 0.0007inch solid #000000?><para>Operators</para></entry>
+              <entry><para>Operators</para></entry>
 
-              <entry><?border-top 0.0007inch solid #000000?><para>Operand
+              <entry><para>Operand
               Types</para></entry>
 
-              <entry><?border 0.0007inch solid #000000?><para>Semantics</para></entry>
+              <entry><para>Semantics</para></entry>
             </row>
           </thead>
 
@@ -716,7 +753,7 @@ this line too. */</programlisting>
               <entry align="center"><para> <literal>==</literal>
               </para></entry>
 
-              <entry align="center"><para>Primitives</para></entry>
+              <entry align="center"><para>All</para></entry>
 
               <entry><para>True, if op1 value's is the same that op2
               value's</para></entry>
@@ -728,7 +765,7 @@ this line too. */</programlisting>
               <entry align="center"><para> <literal>!=</literal>
               </para></entry>
 
-              <entry align="center"><para>Primitives</para></entry>
+              <entry align="center"><para>All</para></entry>
 
               <entry><para>True if op1 value's is different of op2
               value's</para></entry>
@@ -850,6 +887,15 @@ this line too. */</programlisting>
           </tbody>
         </tgroup>
       </informaltable>
+      <note><para>
+      	The  <literal>==</literal> and <literal>!=</literal> can be applied to any Object, in this case, the comparison 
+      	is based on the <literal>equals</literal> operation defined for the object and thus can be redefined to compare only the
+      	values of the objects. To be sure to compare the identity of objects even if they redefine the operation 
+      	<literal>equals</literal>, you need to compare their <literal>oid</literal> (ie. their identifiers).
+      	</para>
+      	<para>See <xref linkend="section_object_comparison.link"/> for more details about object comparison.
+      	</para>
+      </note>
     </section>
 
     <section id="section_statements.link">
@@ -971,9 +1017,9 @@ this line too. */</programlisting>
       <title>File dependency : structuring code<phrase
       id="section_files"></phrase></title>
 
-      <para>You may split your code in many files, when your application
-      becomes too large.</para>
-
+      <para>Kermeta code can be quite large, and invloves many classes in different metamodels. 
+      The main mecanism used to organise your code is the <literal>require</literal> statement.</para>
+      
       <section>
         <title>Require</title>
 
@@ -983,8 +1029,13 @@ this line too. */</programlisting>
         file is processed. In the following example, we define a class C which
         inherits from the A class previously defined.</para>
 
-        <para>TODO : example now is alone =&gt; rewriting !!!</para>
+        <programlisting><emphasis>// file : MyPackage-part1.kmt</emphasis>
+<emphasis role="strong">package</emphasis> subPackage1;
 
+<emphasis role="strong">class</emphasis> A 
+{
+<emphasis>// ...</emphasis>
+}</programlisting>
         <programlisting><emphasis>// file : MyPackage-part2.kmt</emphasis>
 <emphasis role="strong">package</emphasis> MyPackage;
 <emphasis role="strong">require</emphasis> "MyPackage-part1.kmt"
@@ -993,18 +1044,64 @@ this line too. */</programlisting>
 {
 <emphasis>// ...</emphasis>
 }</programlisting>
+	    <note> 
+        	In most case, the order of the declaration in not important. The only exception is a very rare
+        	situation related to aspects (see <xref linkend="section_weaving.link"/>).
+        </note>
+        <note> 
+        	You can create cyclic dependencies of files, the environment will deal with that.
+        </note>
+	  </section>
+      <section>
+        <title>Accepted require statements</title>
+        <para> 
+        	You can <literal>require</literal> different kind of entity
+        </para><para> 
+        	Obvioulsy, you can <literal>require</literal> Kermeta textual syntax, ie. <emphasis role="strong">*.kmt files</emphasis>
+        </para><para> 
+        	You can <literal>require</literal> Kermeta models, ie. <emphasis role="strong">*.km files</emphasis>.
+        </para><para> 
+        	You can <literal>require</literal> Ecore models, ie. <emphasis role="strong">*.ecore files</emphasis>. These models can then be used
+        	as if they were written in Kermeta. In order to add behavior to the classes defined in .ecore files
+        	you may : use the <link linkend="section_weaving.link">weaving</link> to dynamically weave behavior to the ecore, 
+        	or roundtrip using the button action in the workbench (ecore->kmt->ecore) to statically add the behavior (as EAnnotations) into the ecore file.
+        </para><para>
+        	A variant of requiring an ecore file is to require <emphasis role="strong">registered EPackage</emphasis>. When Eclipse deploys an ecore model plugin, it also registers
+        	the EPackage using a unique identifier (nsuri) in order to retreive it quickly. In Kermeta you can also use this nsuri into the require statement.
+        	This approach is useful becauseyou can be sure that you require the very same model as eclispe use to load and save models of that sort. 
+        	For example, instead of requiring ecore.ecore you may use <literal>require "http://www.eclipse.org/emf/2002/Ecore"</literal>. This also works for 
+        	all other registered metamodels (Your own registered metamodel, UML metamodel, etc ...). <ulink url="http://www.kermeta.org/documents/ui_user_guide/">Kermeta user interface</ulink> provides a 
+        	view that display all registered EPackages and their nsuri.
+        </para><para>
+        	In order to use the seamless java import (still prototype in v0.4.2), you can require a <emphasis role="strong">jar file</emphasis>. It will automatically convert the java into 
+        	a Kermeta representation in order to be able to call java code as if it was written in Kermeta. see <xref linkend="section_java_code.link"/> for more details.
+        </para>        
+        
+      </section>
+      <section>
+        <title>Organizing code</title>
+        <para> Kermeta lets you organise your code the way you prefer. There is no predefined organisation of your code, 
+        but the language and the workbench proposes various mecanisms and tools to structure it according to your needs and 
+        the style you wish for your code. Typically if you use kermeta internal weaver (see <xref linkend="section_weaving.link"/>),
+        manually transform your ecore into Kermeta, eventually weaving the ecore using the merge button available on the worbench.
+        </para>
+        <para>
+        For example, you can put all your classes into a single file (like in Ecore, every classes is in the .ecore file)
+        or you may create a file for each of them and then use the <literal>require</literal> to indicates that they must know each other
+        You can also use an organisation like java, with a file per class and a directory per package...        
+        </para>
+        
       </section>
     </section>
 
     <section id="section_variables.link">
       <title id="section_variables.title.link">Using Variables<phrase ></phrase></title>
 
-      <para>A variable is defined by a name and by a datatype which determines
-      the domain and operations we can apply on the variable.</para>
-
-      <programlisting>NAME:&nbsp;&nbsp;&nbsp;&nbsp;( '~' )? 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( 'a'..'z' | 'A'..'Z' | '_' ) 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( 'a'..'z' | 'A'..'Z' | '_' | DIGIT )* </programlisting>
+      <para>
+      	Whenever you need a data locally to a block because it doesn't goes into a class attribute or reference, you
+      	can use a local variable.
+      </para>
+      <para>A variable is defined by a name and by a type. If needed, the name of the variable can be <link linkend="section_reserved_keywords.link">escaped</link> using the tilda (~)</para>      
 
       <para>Declaring a variable:</para>
 
@@ -1018,15 +1115,21 @@ this line too. */</programlisting>
       information on sets).</para>
 
       <programlisting><emphasis role="strong">do</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> v1 : Integer <emphasis
-          role="strong">init</emphasis> 14
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> v2 : Integer <emphasis
-          role="strong">init</emphasis> 145 * v1
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> v1 : Integer <emphasis role="strong">init</emphasis> 14
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> v2 : Integer <emphasis role="strong">init</emphasis> 145 * v1
 
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> tab : Integer[0..*]
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">var</emphasis> tab : Integer[0..*] <emphasis role="strong">init</emphasis> kermeta::standard::OrderedSet&lt;Integer&gt;.new
 &nbsp;&nbsp;&nbsp;&nbsp;v1 := v2/v1
 <emphasis role="strong">end</emphasis></programlisting>
-
+	
+		<para>
+			Be careful to the multiplicity, when you create a variable with multiplicity, you have to initialize it with a <link linkend="section_collections.link">collection</link>.
+			Then to use its content, you need to use the collection operation like add, addAll, remove, select, etc. If you use the
+			assignment <literal>:=</literal> it will replace your collection ...
+		</para>
+	  </section>
+	  <section id="section_basic_types.link">
+         <title id="section_basic_types.title.link">Basic types</title>
       <section>
         <title>Primitive types</title>
 
@@ -1044,11 +1147,11 @@ this line too. */</programlisting>
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?><para>Name</para></entry>
+                <entry><para>Name</para></entry>
 
-                <entry><?border-top 0.0007inch solid #000000?><para>Description</para></entry>
+                <entry><para>Description</para></entry>
 
-                <entry><?border 0.0007inch solid #000000?><para>Literal
+                <entry><para>Literal
                 Example</para></entry>
               </row>
             </thead>
@@ -1060,7 +1163,7 @@ this line too. */</programlisting>
                 <entry><para>Represents integer numeric value like 10 or 12.
                 («&nbsp;int&nbsp;» data type in Java)</para></entry>
 
-                <entry><para>'101', '12', '14, '-45', '-123'</para></entry>
+                <entry><para>101, 12, 14, -45, -123</para></entry>
               </row>
 
               <row>
@@ -1091,6 +1194,10 @@ this line too. */</programlisting>
 <emphasis role="strong">var</emphasis> myVar2 : Integer
 <emphasis role="strong">var</emphasis> myVar4 : String <emphasis role="strong">init</emphasis> "a new string value"
 <emphasis role="strong">var</emphasis> myVar5 : boolean</programlisting>
+		<para>
+			Kermeta also supports some other primitive types like Float and Character, but they currently don't have a surface syntax for their literals.
+			The way to get them is to use the convertion methods available on String (for both of them) or Integer (for Float).
+		</para>
       </section>
 
       <section>
@@ -1158,12 +1265,6 @@ this line too. */</programlisting>
         </tip>
       </section>
 
-      <section>
-        <title>Assignement on &amp; from sets</title>
-
-        <para>TODO : way of using assignement on &amp; from variables with
-        multiplicity &gt; 1.</para>
-      </section>
     </section>
 
     <section id="section_classesandmethods.link">
@@ -1346,22 +1447,59 @@ a := A&lt;Integer&gt;.new
 }
 <emphasis>// If you ask to launch main0, kermeta interpereter will create an instance of A and will run main0 on it.</emphasis></programlisting>
 
-          <para>TODO : only 1 operation or property with the same name in a
-          Kermeta class.</para>
+          
         </section>
       </section>
 
+	  <section>
+        <title>Initializing classes</title>
+        <para>
+        	Kermeta doesn't use constructors.        	
+        </para>
+        <para>
+        	However in some situation, you may need to provide some initialization operation.
+        	The best approach is simply to declare an operation which will return self after having done the initialization work.        	 
+        </para>
+        <programlisting>
+class A
+{
+	attribute name : String
+	operation initialize(name : String) : A is do
+		self.name := name
+	end
+}        
+        </programlisting>
+        
+        <programlisting>
+// now you can use it easily in one line
+	var aA : A init A.new.initialize("hello")
+        </programlisting>
+      </section>
       <section>
-        <title>Rational</title>
-
-        <para>TODO : give technical reasons why there is no constructors in
-        Kermeta</para>
+        <title>Rationale</title>
+        	Here are some explanation about some design choice of Kermeta classes.
+			<section>
+				<title>No constructor</title>
+        		<para> 
+        			This is because of the compatibility with EMOF and Ecore. In those metalanguages, the user
+        			must always be able to create object (except if they are declared abstract), it cannot rely on a action language (since they don't define one).
+        			In addition we want that all Meta tool be able to create the object the same way, so, as Ecore doesn't provide constructor with its editors, then Kermeta doesn't too.
+        		</para>
+      		</section>
+      		<section>
+				<title>No operation overloading</title>
+      			<para>In order to simplify multiple inheritance management, Kermeta allows only one operation or property with the same name in a
+          			given class.
+          		</para>
+      		</section>
       </section>
     </section>
 
     <section id="section_inheritance.link">
       <title id="section_inheritance.title.link">Inheritance<phrase id="section_inheritance"></phrase></title>
-
+	  <para>
+	  	As kermeta is Object Oriented, it supports inheritance. Like its basis EMOF, it support both, simple and multiple inheritance.
+	  </para>
       <section>
         <title>Using simple inheritance<phrase
         id="set:simple-inheritance"></phrase></title>
@@ -1404,9 +1542,82 @@ class Female <emphasis role="strong">inherits</emphasis> Person
           </mediaobject>
         </figure>
 
-        <para>TODO : speak about cast (?=)</para>
       </section>
 
+	  <section>
+        <title>Cast</title>
+        <para>
+        	As Kermeta is strongly typed, you cannot assign or pass something of the wrong type.        	
+        </para><para>
+        	For example :        	
+        </para>
+        <programlisting>
+class A {
+}
+class SubA inherits A {
+}
+class AnotherSubA inherits A {
+}
+
+// ...
+	var aA    : A init SubA.new
+	var aSubA : SubA
+	aSubA := aA  // doesn't work because not type safe
+        </programlisting>
+        <para>
+        	In this situation you must use one of the following methods : conditionnal assignment or asType        	
+        </para>
+        <section>
+        	<title>Casting using contionnal assignment</title>
+        	<para>
+        		The conditionnal assignment <literal>?=</literal> allows to assign only if the passed object is of the 
+        		correct type. If not of the correct type, the assigned value will simply be <literal>Void</literal>.
+        	</para>
+        	<programlisting>
+	aSubA ?= aA  // works
+	var aAnotherSubA : AnotherSubA
+	aAnotherSubA ?= aA  // works too, but has been assigned Void and not the value ...
+        	</programlisting>
+        	<para>
+        		This still propose some control on the types and won't accept all kind of cast, for example, you cannot 
+        		conditionnaly assign if you don't have a common supertype.
+        	</para>
+        	<programlisting>
+class B {
+}
+// ...	
+	var aB : B
+	aB ?= aA  // doesn't work because not type safe
+        	</programlisting>
+        	
+      	</section>
+        <section>
+        	<title>Casting using asType</title>
+        	<para>
+        		You can also use the operation <literal>asType</literal> to cast your value. This one use a syntax which is 
+        		shorter in some situation, since you don't have to create an intermediate variable before passing the casted value to an operation.
+        		However, the drawback is that, if it fails to cast, then it will raise an exception.
+        	</para>
+        	<programlisting>
+class C {
+	operation needASubA(sa : SubA) : Void	is do
+		// do something
+	end
+}
+	// ... typical code using ?= 
+	var aC : C init C.new	
+	aC.needASubA(aA.asType(SubA))
+        	</programlisting>
+      	</section>
+      	<section>
+        	<title>Other useful function when casting</title>
+        	<para>
+        		In complement you can use, the <literal>isVoid</literal> operation (available on every object) to test the result of a conditionnal cast.
+        		Or you may use the <literal>isKindOf</literal> operation to test if the passed object is of the correct type before the assignment/asType.
+        		
+        	</para>
+      	</section>
+      </section>
       <section>
         <title>Using multiple inheritance</title>
 
@@ -1541,7 +1752,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
               <tbody>
                 <row>
-                  <entry align="right"><?border-top 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><mediaobject>
+                  <entry align="right"><mediaobject>
                       <imageobject>
                         <imagedata depth="9.208cm"
                                    fileref="KerMeta-Manual_figures/operation_redefinition.png"
@@ -1549,7 +1760,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
                       </imageobject>
                     </mediaobject> <para></para></entry>
 
-                  <entry><?border 0.002cm solid #000000?><programlisting><emphasis
+                  <entry><programlisting><emphasis
                         role="strong">class</emphasis> A
 {
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m1() <emphasis
@@ -1648,13 +1859,12 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
           <programlisting><emphasis role="strong">class</emphasis> A
 {
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m(i : Integer) <emphasis
-              role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">method</emphasis> m(i : Integer) <emphasis role="strong">is</emphasis> <emphasis role="strong">do</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end method </emphasis>m(s : String)<emphasis
-              role="strong"> is do </emphasis><emphasis>// this is not allowed in Kermeta !!!</emphasis><emphasis
-              role="strong"></emphasis><emphasis>// [...]</emphasis><emphasis
-              role="strong">end</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end 
+&nbsp;&nbsp;&nbsp;&nbsp;method </emphasis>m(s : String)<emphasis role="strong"> is do </emphasis><emphasis>// this is not allowed in Kermeta !!!</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// [...]</emphasis>
+&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
 }</programlisting>
         </section>
 
@@ -1706,7 +1916,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 
               <tbody>
                 <row>
-                  <entry align="center"><?border-top 0.002cm solid #000000?><?border-bottom 0.002cm solid #000000?><?border-left 0.002cm solid #000000?><mediaobject>
+                  <entry align="center"><mediaobject>
                       <imageobject>
                         <imagedata depth="11.374cm"
                                    fileref="KerMeta-Manual_figures/superoperation_selection.png"
@@ -1714,7 +1924,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
                       </imageobject>
                     </mediaobject> <para></para></entry>
 
-                  <entry><?border 0.002cm solid #000000?><programlisting><emphasis
+                  <entry><programlisting><emphasis
                         role="strong">class</emphasis> O
 {
 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">operation</emphasis> m() <emphasis
@@ -1844,6 +2054,14 @@ class Female <emphasis role="strong">inherits</emphasis> Person
            Notice in that sample that even the "if" is an expression that can return a value that is assigned here to the special variable "result". 
         </note>
       </section>
+      <section>
+        <title>Type usable with genericity</title>
+
+        <para>
+        	Actually, all types can be used as a parameter of a generic class or generic operation. 
+        	More, the ModelType, is really useful when combined with generics. see <xref linkend="section_modeltype.link"/>
+        </para>
+      </section>
     </section>
 
     <section id="section_exceptions.link">
@@ -1877,13 +2095,16 @@ class Female <emphasis role="strong">inherits</emphasis> Person
 <emphasis role="strong">do</emphasis>
 &nbsp;&nbsp;&nbsp;&nbsp;var v3 : Integer
 &nbsp;&nbsp;&nbsp;&nbsp;v3 := v1 + v2
+<emphasis role="strong">rescue</emphasis> (myConstraintError : kermeta::exceptions::ConstraintViolatedInv)
+&nbsp;&nbsp;&nbsp;&nbsp;// something with myConstraintError
+&nbsp;&nbsp;&nbsp;&nbsp;// ...
 <emphasis role="strong">rescue</emphasis> (myError : Exception)
 &nbsp;&nbsp;&nbsp;&nbsp;// something with myError
 &nbsp;&nbsp;&nbsp;&nbsp;// ...
 <emphasis role="strong">end</emphasis></programlisting>
 
-      <para>TODO : rescue on different exceptions (need blocks to avoid nested
-      rescue :-))</para>
+      <tip>do not hesitate to create "do .. end" block into another block if you want to check for an 
+      exception only in a part of the code. This also works if you want to rescue code from within a rescue code.</tip>
     </section>
 
     <section id="section_loadingsaving_models.link">
@@ -1986,7 +2207,7 @@ class Female <emphasis role="strong">inherits</emphasis> Person
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Load the resource */</emphasis>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.load
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis>/* Get the loaded __root__ instances (a Set&lt;Object&gt;) */</emphasis>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">result</emphasis> := resource.instances
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">result</emphasis> := resource  // a resource is a collection of objects contained
  &nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">end</emphasis>
  </programlisting>
 
@@ -2031,6 +2252,10 @@ operation main() is do
       end
    end
 }</programlisting>
+		<para>
+			If your resource is dependent of other resources and that EMF succed to load it, the Repository that
+			was used to load your resource will automatically load all these dependent resources.
+		</para>
       </section>
 
       <section>
@@ -3743,8 +3968,18 @@ class A {
       id="section_java_code"></phrase></title>
 
       <para>If you have existing code that you want to run in a Kermeta
-      program, you can use the extern call mechanism.</para>
+      program, you can use one of those two mecanisms : extern call or seamless require.
+      </para><para>
+      The extern call is currently the more robust approach as it is used internally by Kermeta to
+      implement some part of its framework. It also helps to clearly specify the border between java and kermeta. 
+      </para><para>
+      The seamless java require is more straitghforward to use (no wrapper to write) but is still in prototype (v0.4.2) 
+      and still have several limitations.
+      </para>
 
+	  <section id="section_extern_java_code.link">
+      <title id="section_extern_java_code.title.link">Using extern to call java code</title>
+      
       <para>The extern allows you to call a java static method from Kermeta.
       But, to do that, you will have firstly to create a Java wrapper, that
       will be able to manipulate correctly the Java objects, and secondly to
@@ -3816,6 +4051,95 @@ class A {
       <tip>
          This method is used to implement Kermeta framework. You'll find much more code samples of extern call in its sources. 
       </tip>
+      </section>
+      	<section id="section_seamless_java_code.link">
+      		<title id="section_seamless_java_code.title.link">Requiring jar file to call java code</title>
+      		<warning>This feature is still a prototype and still have many limitations. 
+      			The first version is already available but any help is welcome to help us improve it.</warning>      
+      		<para>
+      			The basic principle, is to simply require your jar file. 
+      		</para>
+      		<programlisting> require "yourjar.jar" </programlisting>
+      		<para>
+      			Then Kermeta automatically retreive the class definition it contains
+      			to be used from Kermeta code. However, as java and Kermeta have different language constraints, some adaptation are automatically made.
+      		</para><para>		
+      			If there is several operations with the same name (as this is legal in Java but not in Kermeta) they are renamed. (Please use the outline to 
+      			find the new name of the operation you want)
+      		</para><para>
+      			Java contructors are generated as "initialize" operation. 
+			</para><para>      		
+				When creating a new java object from Kermeta, a call to new is not enough, you also need to call one of the "initialize" operation in order
+				to correctly create it.
+			</para><para> 
+				In order to get the standard library direclty from your running java, you can <literal>require java_rt_jar</literal> but as this
+				library is really big and as you probably don't need all java from Kermeta ;-) then you must use the includeFilter and excludeFilter.
+			</para>Sample using java.io from java Standard library<para> 
+			</para>
+      		<programlisting> 
+require kermeta
+
+require java_rt_jar includeFilter ("java::io")   // the filter ensure we don't get all java
+
+using java::io
+using kermeta::kunit
+class testRequireJava inherits kermeta::kunit::TestCase
+{
+	operation main() : Void is do
+		var tr : TestRunner init TestRunner.new
+		tr.run(testRequireJava)
+		tr.printTestResult
+	end	
+	
+	operation testmain() : Void is do 
+	
+		// create and initialize a File with the String
+		var f : File init File.new.initialize_String("c:/temp/test.txt")
+		var f2 : File
+		// create and initialize a FileWriter with the File
+		var fwriter : FileWriter init FileWriter.new.initialize_File(f)
+		if (f.exists) then 
+			stdio.writeln(f.toString + " already exists")
+		else
+			stdio.writeln(f.createNewFile.toString)
+		end
+		fwriter.write_String("Hello world") 
+		fwriter.close
+		stdio.writeln("file written")
+		stdio.writeln(fwriter.toString)
+	    	    
+		stdio.writeln(f.getPath)
+		stdio.writeln(f.separator)
+		f2 := f
+		stdio.writeln(f2.createNewFile.toString)
+		stdio.writeln((f2.equals(f)).toString)
+		assert( f2.equals(f))
+	    
+		var fwriter2 : FileWriter
+		fwriter2 :=  fwriter
+		stdio.writeln((fwriter2.equals(fwriter)).toString)
+		assert( fwriter2.equals(fwriter))
+	    
+		stdio.writeln(f.getPath)
+		stdio.writeln(f.toString)
+		stdio.writeln("End")
+	end
+} 
+      		</programlisting>
+      		<para>
+      			<literal>includeFilter</literal> and <literal>excludeFilter</literal> accept a comma separated list of qualified name. 
+      			<literal>includeFilter</literal> adds only elements whose qualified name start with one of the list. 
+      			<literal>excludeFilter</literal> removes elements whose qualified name start with one of the list.
+      			If you use a combinaison of 
+      			<literal>includeFilter</literal> and <literal>excludeFilter</literal>, then the <literal>includeFilter</literal> is applied before the <literal>excludeFilter</literal>
+      			(that'll remove element from the included one.
+      			
+      		</para><para>    	      		
+      			Currently known limitations: no support for java5 generics (they are ignored), requiring very big jar like the full java library end up with 
+      			out of memory error (you need to use the includefilter and excludeFilter), some bugs with some primitives types (double/float)
+      		</para>
+      		
+    	</section>  
     </section>
 
     <section>
