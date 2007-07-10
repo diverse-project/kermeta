@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.42 2007-07-10 14:35:13 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.43 2007-07-10 15:06:08 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -331,58 +331,84 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 			}
 		end
 		
-	/** Returns only the attributes: isComposite = true
+	/** Returns only the attributes (isComposite and not isDerived)
 	 *  class definition
 	 */
 	property readonly ownedCompositeAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.ownedAttribute.each{ oa |
- 		    	if oa.isComposite then
+ 		    	if (oa.isComposite and not oa.isDerived) then
  		    		result.add(oa)
  		    	end
  		    }
 		end
 	
-	/** Returns only all the attributes (isComposite = true)
+	/** Returns only all the attributes (isComposite and not isDerived)
 	 *  class definition including the inherited ones
 	 */
 	property readonly ownedAllCompositeAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.allOwnedAttribute.each{ oa |
- 		    	if oa.isComposite then
+ 		    	if (oa.isComposite and not oa.isDerived) then
  		    		result.add(oa)
  		    	end
  		    }
 		end
 	
-	/** Returns only the references: isComposite = false
+	/** Returns only the references (not isComposite and not isDerived)
 	 *  class definition
 	 */
 	property readonly ownedAttributeAsReference : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.ownedAttribute.each{ oa |
- 		    	if not oa.isComposite then
+ 		    	if (not oa.isComposite and not oa.isDerived) then
  		    		result.add(oa)
  		    	end
  		    }
 		end
 	
-	/** Returns only all the references (isComposite = false)
+	/** Returns only all the references (not isComposite and not isDerived)
 	 *  class definition including the inherited ones
 	 */
 	property readonly ownedAllAttributeAsReference : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.allOwnedAttribute.each{ oa |
- 		    	if not oa.isComposite then
+ 		    	if (not oa.isComposite and not oa.isDerived) then
  		    		result.add(oa)
  		    	end
  		    }
 		end
-		
+
+	/** Returns only the properties (not isComposite and isDerived)
+	 *  class definition
+	 */
+	property readonly ownedAttributeAsProperty : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    self.ownedAttribute.each{ oa |
+ 		    	if (not oa.isComposite and oa.isDerived) then
+ 		    		result.add(oa)
+ 		    	end
+ 		    }
+		end
+	
+	/** Returns only all the properties (not isComposite and isDerived)
+	 *  class definition including the inherited ones
+	 */
+	property readonly ownedAllAttributeAsProperty : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    self.allOwnedAttribute.each{ oa |
+ 		    	if (not oa.isComposite and oa.isDerived) then
+ 		    		result.add(oa)
+ 		    	end
+ 		    }
+		end
+
 	/** Returns all the operations of this 
 	 *  class definition including the inherited ones
 	 */
