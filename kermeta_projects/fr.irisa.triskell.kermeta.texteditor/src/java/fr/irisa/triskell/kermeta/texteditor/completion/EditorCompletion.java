@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.19 2007-07-01 09:27:46 ftanguy Exp $
+/* $Id: EditorCompletion.java,v 1.20 2007-07-10 12:43:06 cfaucher Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -129,7 +129,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 					int length = offset - index -1;
 					String text = doc.get(trueOffset, length);
 				
-					if (qualifier.startsWith(".")) {
+					if (length>0 && qualifier.startsWith(".")) {
 			    	
 						/*
 						 * 
@@ -163,7 +163,6 @@ public class EditorCompletion implements IContentAssistProcessor {
 				            for (Object next: p.getOwnedTypeDefinition()) {
 				                TypeDefinition td = (TypeDefinition)next;
 				                CompletionItem ci = new NamedElementCompletionItem(td);
-				                System.out.println(td.getName());
 				                if (ci.getCompletionText().toLowerCase().startsWith( text.toLowerCase()) )
 				                    proposals.add(ci.getCompletionProposal(trueOffset, text.length() ));
 				            }
