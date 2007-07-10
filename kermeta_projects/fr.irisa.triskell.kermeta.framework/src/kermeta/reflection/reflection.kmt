@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.41 2007-07-10 09:52:00 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.42 2007-07-10 14:35:13 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -329,6 +329,58 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 					result.add(p)
 				}
 			}
+		end
+		
+	/** Returns only the attributes: isComposite = true
+	 *  class definition
+	 */
+	property readonly ownedCompositeAttribute : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    self.ownedAttribute.each{ oa |
+ 		    	if oa.isComposite then
+ 		    		result.add(oa)
+ 		    	end
+ 		    }
+		end
+	
+	/** Returns only all the attributes (isComposite = true)
+	 *  class definition including the inherited ones
+	 */
+	property readonly ownedAllCompositeAttribute : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    self.allOwnedAttribute.each{ oa |
+ 		    	if oa.isComposite then
+ 		    		result.add(oa)
+ 		    	end
+ 		    }
+		end
+	
+	/** Returns only the references: isComposite = false
+	 *  class definition
+	 */
+	property readonly ownedAttributeAsReference : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    self.ownedAttribute.each{ oa |
+ 		    	if not oa.isComposite then
+ 		    		result.add(oa)
+ 		    	end
+ 		    }
+		end
+	
+	/** Returns only all the references (isComposite = false)
+	 *  class definition including the inherited ones
+	 */
+	property readonly ownedAllAttributeAsReference : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    self.allOwnedAttribute.each{ oa |
+ 		    	if not oa.isComposite then
+ 		    		result.add(oa)
+ 		    	end
+ 		    }
 		end
 		
 	/** Returns all the operations of this 
