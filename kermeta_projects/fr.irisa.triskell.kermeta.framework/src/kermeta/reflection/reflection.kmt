@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.40 2007-07-03 12:54:47 dtouzet Exp $
+/* $Id: reflection.kmt,v 1.41 2007-07-10 09:52:00 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -326,6 +326,22 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 		    	var cDef : ClassDefinition
 		    	cDef ?= t.typeDefinition
 				cDef.allOwnedAttribute.each{ p | 
+					result.add(p)
+				}
+			}
+		end
+		
+	/** Returns all the operations of this 
+	 *  class definition including the inherited ones
+	 */
+	property readonly allOwnedOperation : set Operation[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Operation>.new
+ 		    result.addAll(self.ownedOperation)
+		    self.superType.each{ t | 
+		    	var cDef : ClassDefinition
+		    	cDef ?= t.typeDefinition
+				cDef.allOwnedOperation.each{ p | 
 					result.add(p)
 				}
 			}
