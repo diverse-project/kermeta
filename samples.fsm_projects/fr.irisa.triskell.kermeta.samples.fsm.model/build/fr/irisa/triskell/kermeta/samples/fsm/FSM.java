@@ -50,10 +50,10 @@ public interface FSM extends EObject {
 	 * @return the value of the '<em>Owned State</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_OwnedState()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.State#getOwningFSM
-	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.State" opposite="owningFSM" containment="true"
+	 * @model opposite="owningFSM" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getOwnedState();
+	EList<State> getOwnedState();
 
 	/**
 	 * Returns the value of the '<em><b>Initial State</b></em>' reference.
@@ -118,10 +118,10 @@ public interface FSM extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Final State</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getFSM_FinalState()
-	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.State" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
-	EList getFinalState();
+	EList<State> getFinalState();
 
 	/**
 	 * <!-- begin-user-doc -->

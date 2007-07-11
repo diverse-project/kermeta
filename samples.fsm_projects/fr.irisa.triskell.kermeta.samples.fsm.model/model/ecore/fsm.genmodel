@@ -3,7 +3,8 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="IRISA/INRIA"
     modelDirectory="/fr.irisa.triskell.kermeta.samples.fsm.model/build" modelPluginID="fr.irisa.triskell.kermeta.samples.fsm"
-    modelName="Fsm" testsDirectory="" importerID="org.eclipse.emf.importer.ecore">
+    modelName="Fsm" testsDirectory="" importerID="org.eclipse.emf.importer.ecore"
+    containmentProxies="true" complianceLevel="5.0">
   <foreignModel>fsm.ecore</foreignModel>
   <genPackages prefix="Fsm" basePackage="fr.irisa.triskell.kermeta.samples" resource="XMI"
       disposableProviderFactory="true" ecorePackage="fsm.ecore#/">

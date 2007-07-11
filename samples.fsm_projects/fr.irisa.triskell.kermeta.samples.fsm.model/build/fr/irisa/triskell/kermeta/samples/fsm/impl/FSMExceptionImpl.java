@@ -44,6 +44,7 @@ public class FSMExceptionImpl extends EObjectImpl implements FSMException {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return FsmPackage.Literals.FSM_EXCEPTION;
 	}

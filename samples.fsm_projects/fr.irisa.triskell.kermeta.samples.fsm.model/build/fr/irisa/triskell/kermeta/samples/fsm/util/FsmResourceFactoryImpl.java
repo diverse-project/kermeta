@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FsmResourceFactoryImpl.java,v 1.1 2007-04-12 14:34:51 cfaucher Exp $
+ * $Id: FsmResourceFactoryImpl.java,v 1.2 2007-07-11 15:15:58 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.samples.fsm.util;
 
@@ -43,6 +43,7 @@ public class FsmResourceFactoryImpl extends ResourceFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Resource createResource(URI uri) {
 		Resource result = new FsmResourceImpl(uri);
 		return result;

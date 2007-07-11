@@ -53,7 +53,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 * @ordered
 	 */
-	protected State target = null;
+	protected State target;
 
 	/**
 	 * The default value of the '{@link #getInput() <em>Input</em>}' attribute.
@@ -109,6 +109,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return FsmPackage.Literals.TRANSITION;
 	}
@@ -121,6 +122,16 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	public State getSource() {
 		if (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE) return null;
 		return (State)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public State basicGetSource() {
+		if (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE) return null;
+		return (State)eInternalContainer();
 	}
 
 	/**
@@ -272,6 +283,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
@@ -291,6 +303,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
@@ -306,6 +319,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case FsmPackage.TRANSITION__SOURCE:
@@ -319,10 +333,12 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
-				return getSource();
+				if (resolve) return getSource();
+				return basicGetSource();
 			case FsmPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -339,6 +355,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
@@ -362,6 +379,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
@@ -385,10 +403,11 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
-				return getSource() != null;
+				return basicGetSource() != null;
 			case FsmPackage.TRANSITION__TARGET:
 				return target != null;
 			case FsmPackage.TRANSITION__INPUT:
@@ -404,6 +423,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

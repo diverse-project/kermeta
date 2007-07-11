@@ -48,7 +48,7 @@ public interface Transition extends EObject {
 	 * @see #setSource(State)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getTransition_Source()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.State#getOutgoingTransition
-	 * @model opposite="outgoingTransition" required="true"
+	 * @model opposite="outgoingTransition" required="true" transient="false"
 	 * @generated
 	 */
 	State getSource();

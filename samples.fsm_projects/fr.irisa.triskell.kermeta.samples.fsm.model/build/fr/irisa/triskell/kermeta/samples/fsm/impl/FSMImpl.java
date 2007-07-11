@@ -59,7 +59,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedState = null;
+	protected EList<State> ownedState;
 
 	/**
 	 * The cached value of the '{@link #getInitialState() <em>Initial State</em>}' reference.
@@ -69,7 +69,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * @generated
 	 * @ordered
 	 */
-	protected State initialState = null;
+	protected State initialState;
 
 	/**
 	 * The cached value of the '{@link #getCurrentState() <em>Current State</em>}' reference.
@@ -79,7 +79,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * @generated
 	 * @ordered
 	 */
-	protected State currentState = null;
+	protected State currentState;
 
 	/**
 	 * The cached value of the '{@link #getFinalState() <em>Final State</em>}' reference list.
@@ -89,7 +89,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList finalState = null;
+	protected EList<State> finalState;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,6 +105,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return FsmPackage.Literals.FSM;
 	}
@@ -114,9 +115,9 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedState() {
+	public EList<State> getOwnedState() {
 		if (ownedState == null) {
-			ownedState = new EObjectContainmentWithInverseEList(State.class, this, FsmPackage.FSM__OWNED_STATE, FsmPackage.STATE__OWNING_FSM);
+			ownedState = new EObjectContainmentWithInverseEList.Resolving<State>(State.class, this, FsmPackage.FSM__OWNED_STATE, FsmPackage.STATE__OWNING_FSM);
 		}
 		return ownedState;
 	}
@@ -202,9 +203,9 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getFinalState() {
+	public EList<State> getFinalState() {
 		if (finalState == null) {
-			finalState = new EObjectResolvingEList(State.class, this, FsmPackage.FSM__FINAL_STATE);
+			finalState = new EObjectResolvingEList<State>(State.class, this, FsmPackage.FSM__FINAL_STATE);
 		}
 		return finalState;
 	}
@@ -236,10 +237,12 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmPackage.FSM__OWNED_STATE:
-				return ((InternalEList)getOwnedState()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedState()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -249,10 +252,11 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmPackage.FSM__OWNED_STATE:
-				return ((InternalEList)getOwnedState()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedState()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -262,6 +266,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FsmPackage.FSM__OWNED_STATE:
@@ -283,11 +288,13 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FsmPackage.FSM__OWNED_STATE:
 				getOwnedState().clear();
-				getOwnedState().addAll((Collection)newValue);
+				getOwnedState().addAll((Collection<? extends State>)newValue);
 				return;
 			case FsmPackage.FSM__INITIAL_STATE:
 				setInitialState((State)newValue);
@@ -297,7 +304,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 				return;
 			case FsmPackage.FSM__FINAL_STATE:
 				getFinalState().clear();
-				getFinalState().addAll((Collection)newValue);
+				getFinalState().addAll((Collection<? extends State>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -308,6 +315,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FsmPackage.FSM__OWNED_STATE:
@@ -331,6 +339,7 @@ public class FSMImpl extends EObjectImpl implements FSM {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FsmPackage.FSM__OWNED_STATE:

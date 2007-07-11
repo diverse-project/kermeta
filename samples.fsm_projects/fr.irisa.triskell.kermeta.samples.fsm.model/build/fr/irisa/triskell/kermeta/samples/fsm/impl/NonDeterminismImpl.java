@@ -42,6 +42,7 @@ public class NonDeterminismImpl extends FSMExceptionImpl implements NonDetermini
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return FsmPackage.Literals.NON_DETERMINISM;
 	}

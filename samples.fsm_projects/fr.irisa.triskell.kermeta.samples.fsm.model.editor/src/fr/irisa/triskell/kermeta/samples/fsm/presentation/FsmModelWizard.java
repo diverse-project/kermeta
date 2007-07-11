@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
+import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
@@ -155,7 +156,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected List initialObjectNames;
+	protected List<String> initialObjectNames;
 
 	/**
 	 * This just records the information.
@@ -176,11 +177,10 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection getInitialObjectNames() {
+	protected Collection<String> getInitialObjectNames() {
 		if (initialObjectNames == null) {
-			initialObjectNames = new ArrayList();
-			for (Iterator classifiers = fsmPackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
-				EClassifier eClassifier = (EClassifier)classifiers.next();
+			initialObjectNames = new ArrayList<String>();
+			for (EClassifier eClassifier : fsmPackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
 					if (!eClass.isAbstract()) {
@@ -188,7 +188,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 					}
 				}
 			}
-			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
+			Collections.sort(initialObjectNames, CommonPlugin.INSTANCE.getComparator());
 		}
 		return initialObjectNames;
 	}
@@ -211,6 +211,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean performFinish() {
 		try {
 			// Remember the file.
@@ -221,6 +222,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 			//
 			WorkspaceModifyOperation operation =
 				new WorkspaceModifyOperation() {
+					@Override
 					protected void execute(IProgressMonitor progressMonitor) {
 						try {
 							// Create a resource set
@@ -229,7 +231,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 
 							// Get the URI of the model file.
 							//
-							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString());
+							URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath().toString(), true);
 
 							// Create a resource for this file.
 							//
@@ -244,7 +246,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 
 							// Save the contents of the resource to the file system.
 							//
-							Map options = new HashMap();
+							Map<Object, Object> options = new HashMap<Object, Object>();
 							options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage.getEncoding());
 							resource.save(options);
 						}
@@ -317,6 +319,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		protected boolean validatePage() {
 			if (super.validatePage()) {
 				// Make sure the file ends in ".fsm".
@@ -365,7 +368,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 */
-		protected List encodings;
+		protected List<String> encodings;
 
 		/**
 		 * <!-- begin-user-doc -->
@@ -486,6 +489,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
+		@Override
 		public void setVisible(boolean visible) {
 			super.setVisible(visible);
 			if (visible) {
@@ -508,8 +512,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 		public String getInitialObjectName() {
 			String label = initialObjectField.getText();
 
-			for (Iterator i = getInitialObjectNames().iterator(); i.hasNext(); ) {
-				String name = (String)i.next();
+			for (String name : getInitialObjectNames()) {
 				if (getLabel(name).equals(label)) {
 					return name;
 				}
@@ -547,9 +550,9 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		protected Collection getEncodings() {
+		protected Collection<String> getEncodings() {
 			if (encodings == null) {
-				encodings = new ArrayList();
+				encodings = new ArrayList<String>();
 				for (StringTokenizer stringTokenizer = new StringTokenizer(FsmEditorPlugin.INSTANCE.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens(); ) {
 					encodings.add(stringTokenizer.nextToken());
 				}
@@ -564,6 +567,7 @@ public class FsmModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//

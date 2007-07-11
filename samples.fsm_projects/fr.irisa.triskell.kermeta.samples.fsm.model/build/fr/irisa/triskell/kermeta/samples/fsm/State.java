@@ -50,7 +50,7 @@ public interface State extends EObject {
 	 * @see #setOwningFSM(FSM)
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_OwningFSM()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FSM#getOwnedState
-	 * @model opposite="ownedState" required="true"
+	 * @model opposite="ownedState" required="true" transient="false"
 	 * @generated
 	 */
 	FSM getOwningFSM();
@@ -104,10 +104,10 @@ public interface State extends EObject {
 	 * @return the value of the '<em>Outgoing Transition</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_OutgoingTransition()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.Transition#getSource
-	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.Transition" opposite="source" containment="true"
+	 * @model opposite="source" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getOutgoingTransition();
+	EList<Transition> getOutgoingTransition();
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Transition</b></em>' reference list.
@@ -122,10 +122,10 @@ public interface State extends EObject {
 	 * @return the value of the '<em>Incoming Transition</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.FsmPackage#getState_IncomingTransition()
 	 * @see fr.irisa.triskell.kermeta.samples.fsm.Transition#getTarget
-	 * @model type="fr.irisa.triskell.kermeta.samples.fsm.Transition" opposite="target"
+	 * @model opposite="target"
 	 * @generated
 	 */
-	EList getIncomingTransition();
+	EList<Transition> getIncomingTransition();
 
 	/**
 	 * <!-- begin-user-doc -->

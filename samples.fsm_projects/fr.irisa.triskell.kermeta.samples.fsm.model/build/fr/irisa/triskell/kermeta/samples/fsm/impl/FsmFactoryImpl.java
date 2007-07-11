@@ -65,6 +65,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case FsmPackage.FSM: return createFSM();
@@ -84,6 +85,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case FsmPackage.STRING:
@@ -98,6 +100,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case FsmPackage.STRING:
@@ -210,6 +213,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static FsmPackage getPackage() {
 		return FsmPackage.eINSTANCE;
 	}

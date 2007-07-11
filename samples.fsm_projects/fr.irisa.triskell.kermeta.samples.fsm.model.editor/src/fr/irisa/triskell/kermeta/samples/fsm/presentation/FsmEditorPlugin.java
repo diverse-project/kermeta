@@ -50,8 +50,8 @@ public final class FsmEditorPlugin extends EMFPlugin {
 	 */
 	public FsmEditorPlugin() {
 		super
-		  (new ResourceLocator [] {
-		   });
+			(new ResourceLocator [] {
+			});
 	}
 
 	/**
@@ -61,6 +61,7 @@ public final class FsmEditorPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -91,7 +92,7 @@ public final class FsmEditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-
+	
 			// Remember the static instance.
 			//
 			plugin = this;

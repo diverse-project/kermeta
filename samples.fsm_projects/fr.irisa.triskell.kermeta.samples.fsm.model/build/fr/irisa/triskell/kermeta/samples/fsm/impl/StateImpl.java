@@ -81,7 +81,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList outgoingTransition = null;
+	protected EList<Transition> outgoingTransition;
 
 	/**
 	 * The cached value of the '{@link #getIncomingTransition() <em>Incoming Transition</em>}' reference list.
@@ -91,7 +91,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList incomingTransition = null;
+	protected EList<Transition> incomingTransition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -107,6 +107,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return FsmPackage.Literals.STATE;
 	}
@@ -119,6 +120,16 @@ public class StateImpl extends EObjectImpl implements State {
 	public FSM getOwningFSM() {
 		if (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM) return null;
 		return (FSM)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FSM basicGetOwningFSM() {
+		if (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM) return null;
+		return (FSM)eInternalContainer();
 	}
 
 	/**
@@ -178,9 +189,9 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOutgoingTransition() {
+	public EList<Transition> getOutgoingTransition() {
 		if (outgoingTransition == null) {
-			outgoingTransition = new EObjectContainmentWithInverseEList(Transition.class, this, FsmPackage.STATE__OUTGOING_TRANSITION, FsmPackage.TRANSITION__SOURCE);
+			outgoingTransition = new EObjectContainmentWithInverseEList.Resolving<Transition>(Transition.class, this, FsmPackage.STATE__OUTGOING_TRANSITION, FsmPackage.TRANSITION__SOURCE);
 		}
 		return outgoingTransition;
 	}
@@ -190,9 +201,9 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getIncomingTransition() {
+	public EList<Transition> getIncomingTransition() {
 		if (incomingTransition == null) {
-			incomingTransition = new EObjectWithInverseResolvingEList(Transition.class, this, FsmPackage.STATE__INCOMING_TRANSITION, FsmPackage.TRANSITION__TARGET);
+			incomingTransition = new EObjectWithInverseResolvingEList<Transition>(Transition.class, this, FsmPackage.STATE__INCOMING_TRANSITION, FsmPackage.TRANSITION__TARGET);
 		}
 		return incomingTransition;
 	}
@@ -213,6 +224,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
@@ -220,9 +233,9 @@ public class StateImpl extends EObjectImpl implements State {
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningFSM((FSM)otherEnd, msgs);
 			case FsmPackage.STATE__OUTGOING_TRANSITION:
-				return ((InternalEList)getOutgoingTransition()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingTransition()).basicAdd(otherEnd, msgs);
 			case FsmPackage.STATE__INCOMING_TRANSITION:
-				return ((InternalEList)getIncomingTransition()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingTransition()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -232,14 +245,15 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
 				return basicSetOwningFSM(null, msgs);
 			case FsmPackage.STATE__OUTGOING_TRANSITION:
-				return ((InternalEList)getOutgoingTransition()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOutgoingTransition()).basicRemove(otherEnd, msgs);
 			case FsmPackage.STATE__INCOMING_TRANSITION:
-				return ((InternalEList)getIncomingTransition()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getIncomingTransition()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -249,6 +263,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case FsmPackage.STATE__OWNING_FSM:
@@ -262,10 +277,12 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
-				return getOwningFSM();
+				if (resolve) return getOwningFSM();
+				return basicGetOwningFSM();
 			case FsmPackage.STATE__NAME:
 				return getName();
 			case FsmPackage.STATE__OUTGOING_TRANSITION:
@@ -281,6 +298,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
@@ -291,11 +310,11 @@ public class StateImpl extends EObjectImpl implements State {
 				return;
 			case FsmPackage.STATE__OUTGOING_TRANSITION:
 				getOutgoingTransition().clear();
-				getOutgoingTransition().addAll((Collection)newValue);
+				getOutgoingTransition().addAll((Collection<? extends Transition>)newValue);
 				return;
 			case FsmPackage.STATE__INCOMING_TRANSITION:
 				getIncomingTransition().clear();
-				getIncomingTransition().addAll((Collection)newValue);
+				getIncomingTransition().addAll((Collection<? extends Transition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -306,6 +325,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
@@ -329,10 +349,11 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
-				return getOwningFSM() != null;
+				return basicGetOwningFSM() != null;
 			case FsmPackage.STATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FsmPackage.STATE__OUTGOING_TRANSITION:
@@ -348,6 +369,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

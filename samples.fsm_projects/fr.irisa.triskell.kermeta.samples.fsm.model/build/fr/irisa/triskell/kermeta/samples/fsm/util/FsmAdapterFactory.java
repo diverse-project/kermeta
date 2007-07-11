@@ -59,6 +59,7 @@ public class FsmAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -75,30 +76,38 @@ public class FsmAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FsmSwitch modelSwitch =
-		new FsmSwitch() {
-			public Object caseFSM(FSM object) {
+	protected FsmSwitch<Adapter> modelSwitch =
+		new FsmSwitch<Adapter>() {
+			@Override
+			public Adapter caseFSM(FSM object) {
 				return createFSMAdapter();
 			}
-			public Object caseState(State object) {
+			@Override
+			public Adapter caseState(State object) {
 				return createStateAdapter();
 			}
-			public Object caseTransition(Transition object) {
+			@Override
+			public Adapter caseTransition(Transition object) {
 				return createTransitionAdapter();
 			}
-			public Object caseFSMException(FSMException object) {
+			@Override
+			public Adapter caseFSMException(FSMException object) {
 				return createFSMExceptionAdapter();
 			}
-			public Object caseNonDeterminism(NonDeterminism object) {
+			@Override
+			public Adapter caseNonDeterminism(NonDeterminism object) {
 				return createNonDeterminismAdapter();
 			}
-			public Object caseNoTransition(NoTransition object) {
+			@Override
+			public Adapter caseNoTransition(NoTransition object) {
 				return createNoTransitionAdapter();
 			}
-			public Object caseNoInitialStateException(NoInitialStateException object) {
+			@Override
+			public Adapter caseNoInitialStateException(NoInitialStateException object) {
 				return createNoInitialStateExceptionAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -111,8 +120,9 @@ public class FsmAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 
