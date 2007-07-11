@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.44 2007-07-11 09:01:12 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.45 2007-07-11 13:39:51 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zoï¿½ Drey <zdrey@irisa.fr>
+ *		Zoé Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
  
@@ -239,7 +239,7 @@ abstract class Operation inherits MultiplicityElement
 	reference owningClass : ClassDefinition#ownedOperation
 	reference typeParameter : set TypeVariable[0..*]
 	reference raisedException : set Type[0..*]
-	attribute ownedParameter : set Parameter[0..*]#~operation
+	attribute ownedParameter : oset Parameter[0..*]#~operation
 }
 /** Tag is intended to be used to add documentation on a 
  * model element, or add some textual information that cannot be expressed
@@ -318,14 +318,14 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns all the attributes, references, derived properties of this 
 	 *  class definition including the inherited ones
 	 */
-	property readonly allOwnedAttribute : set Property[0..*]
+	property readonly allAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    result.addAll(self.ownedAttribute)
 		    self.superType.each{ t | 
 		    	var cDef : ClassDefinition
 		    	cDef ?= t.typeDefinition
-				cDef.allOwnedAttribute.each{ p | 
+				cDef.allAttribute.each{ p | 
 					result.add(p)
 				}
 			}
@@ -338,7 +338,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.ownedAttribute.each{ oa |
- 		    	if (oa.isComposite and not oa.isDerived) then
+ 		    	if ( /*(*/oa.isComposite /*or PrimitiveType.hasSubType(oa.type))*/ and not oa.isDerived ) then
  		    		result.add(oa)
  		    	end
  		    }
@@ -347,10 +347,10 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns only all the attributes (isComposite and not isDerived)
 	 *  class definition including the inherited ones
 	 */
-	property readonly allOwnedCompositeAttribute : set Property[0..*]
+	property readonly allCompositeAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
- 		    self.allOwnedAttribute.each{ oa |
+ 		    self.allAttribute.each{ oa |
  		    	if (oa.isComposite and not oa.isDerived) then
  		    		result.add(oa)
  		    	end
@@ -373,10 +373,10 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns only all the references (not isComposite and not isDerived)
 	 *  class definition including the inherited ones
 	 */
-	property readonly allOwnedAttributeAsReference : set Property[0..*]
+	property readonly allAttributeAsReference : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
- 		    self.allOwnedAttribute.each{ oa |
+ 		    self.allAttribute.each{ oa |
  		    	if (not oa.isComposite and not oa.isDerived) then
  		    		result.add(oa)
  		    	end
@@ -399,10 +399,10 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns only all the properties (not isComposite and isDerived)
 	 *  class definition including the inherited ones
 	 */
-	property readonly allOwnedAttributeAsProperty : set Property[0..*]
+	property readonly allAttributeAsProperty : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
- 		    self.allOwnedAttribute.each{ oa |
+ 		    self.allAttribute.each{ oa |
  		    	if (not oa.isComposite and oa.isDerived) then
  		    		result.add(oa)
  		    	end
@@ -412,14 +412,14 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns all the operations of this 
 	 *  class definition including the inherited ones
 	 */
-	property readonly allOwnedOperation : set Operation[0..*]
+	property readonly allOperation : set Operation[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Operation>.new
  		    result.addAll(self.ownedOperation)
 		    self.superType.each{ t | 
 		    	var cDef : ClassDefinition
 		    	cDef ?= t.typeDefinition
-				cDef.allOwnedOperation.each{ p | 
+				cDef.allOperation.each{ p | 
 					result.add(p)
 				}
 			}
