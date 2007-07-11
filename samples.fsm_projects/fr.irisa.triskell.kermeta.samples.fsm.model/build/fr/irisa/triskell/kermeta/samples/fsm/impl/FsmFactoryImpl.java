@@ -39,7 +39,7 @@ public class FsmFactoryImpl extends EFactoryImpl implements FsmFactory {
 	 */
 	public static FsmFactory init() {
 		try {
-			FsmFactory theFsmFactory = (FsmFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/samples/fsm.ecore"); 
+			FsmFactory theFsmFactory = (FsmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org/fsm"); 
 			if (theFsmFactory != null) {
 				return theFsmFactory;
 			}

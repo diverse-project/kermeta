@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://kermeta/samples/fsm.ecore" xmi:id="_ZW534OnBEduxCpcuRdsECg" initialState="_ZW534enBEduxCpcuRdsECg" finalState="_ZW534-nBEduxCpcuRdsECg">
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsm="http://www.kermeta.org/fsm" xmi:id="_ZW534OnBEduxCpcuRdsECg" initialState="_ZW534enBEduxCpcuRdsECg" finalState="_ZW534-nBEduxCpcuRdsECg">
   <ownedState xmi:id="_ZW534enBEduxCpcuRdsECg" name="s1">
     <outgoingTransition xmi:id="_ZW534unBEduxCpcuRdsECg" target="_ZW534-nBEduxCpcuRdsECg" input="c" output="v"/>
   </ownedState>

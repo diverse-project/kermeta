@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="ASCII"?>
-<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://sts" start="//@fragments.0">
+<sts:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sts="http://www.kermeta.org/Sts" start="//@fragments.0">
   <fragments xsi:type="sts:Template" id="FSM">
-    <metaclass href="http://kermeta/samples/fsm.ecore#//FSM"/>
+    <metaclass href="http://www.kermeta.org/fsm#//FSM"/>
     <rule xsi:type="sts:Sequence">
       <subRules xsi:type="sts:Iteration" id="FSM.ownedState">
         <subRule xsi:type="sts:RuleRef" id="@ State" ref="//@fragments.1"/>
-        <container xsi:type="ecore:EReference" href="http://kermeta/samples/fsm.ecore#//FSM/ownedState"/>
+        <container xsi:type="ecore:EReference" href="http://www.kermeta.org/fsm#//FSM/ownedState"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" terminal="initial"/>
       <subRules xsi:type="sts:ObjectReference">
-        <features xsi:type="ecore:EReference" href="http://kermeta/samples/fsm.ecore#//FSM/initialState"/>
-        <identifier xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//State/name"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/fsm#//FSM/initialState"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//State/name"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id="" terminal=";" lexicalSeparator="true"/>
       <subRules xsi:type="sts:Terminal" id="" terminal="final"/>
       <subRules xsi:type="sts:ObjectReference">
-        <features xsi:type="ecore:EReference" href="http://kermeta/samples/fsm.ecore#//FSM/finalState"/>
-        <identifier xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//State/name"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/fsm#//FSM/finalState"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//State/name"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id="" terminal=";" lexicalSeparator="true"/>
       <subRules xsi:type="sts:Iteration" id="">
@@ -25,37 +25,37 @@
     </rule>
   </fragments>
   <fragments xsi:type="sts:Template" id="State">
-    <metaclass href="http://kermeta/samples/fsm.ecore#//State"/>
+    <metaclass href="http://www.kermeta.org/fsm#//State"/>
     <rule xsi:type="sts:Sequence">
       <subRules xsi:type="sts:Terminal" id="state" terminal="state"/>
       <subRules xsi:type="sts:PrimitiveValue" id="FSM.name">
-        <features xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//State/name"/>
+        <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//State/name"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id=";" terminal=";" lexicalSeparator="true"/>
       <subRules xsi:type="sts:Adornment" terminal="eoln"/>
     </rule>
   </fragments>
   <fragments xsi:type="sts:Template" id="Transition">
-    <metaclass href="http://kermeta/samples/fsm.ecore#//Transition"/>
+    <metaclass href="http://www.kermeta.org/fsm#//Transition"/>
     <rule xsi:type="sts:Sequence">
       <subRules xsi:type="sts:Terminal" id="transition" terminal="transition"/>
       <subRules xsi:type="sts:Terminal" id="from" terminal="from"/>
       <subRules xsi:type="sts:ObjectReference" id="State.source">
-        <features xsi:type="ecore:EReference" href="http://kermeta/samples/fsm.ecore#//Transition/source"/>
-        <identifier xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//State/name"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/fsm#//Transition/source"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//State/name"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id="to" terminal="to"/>
       <subRules xsi:type="sts:ObjectReference" id="State.target">
-        <features xsi:type="ecore:EReference" href="http://kermeta/samples/fsm.ecore#//Transition/target"/>
-        <identifier xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//State/name"/>
+        <features xsi:type="ecore:EReference" href="http://www.kermeta.org/fsm#//Transition/target"/>
+        <identifier xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//State/name"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id="input" terminal="input"/>
       <subRules xsi:type="sts:PrimitiveValue" id="Transition.input">
-        <features xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//Transition/input"/>
+        <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//Transition/input"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id="output" terminal="output"/>
       <subRules xsi:type="sts:PrimitiveValue" id="Transition.output">
-        <features xsi:type="ecore:EAttribute" href="http://kermeta/samples/fsm.ecore#//Transition/output"/>
+        <features xsi:type="ecore:EAttribute" href="http://www.kermeta.org/fsm#//Transition/output"/>
       </subRules>
       <subRules xsi:type="sts:Terminal" id=";" terminal=";" lexicalSeparator="true"/>
       <subRules xsi:type="sts:Adornment" terminal="eoln"/>

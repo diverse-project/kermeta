@@ -49,7 +49,7 @@ public interface FsmPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kermeta/samples/fsm.ecore";
+	String eNS_URI = "http://www.kermeta.org/fsm";
 
 	/**
 	 * The package namespace name.

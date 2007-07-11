@@ -63,7 +63,7 @@ class Determinization
     	output.ownedState.each { e | e.combination.clear } 
     	helper.dotprint(output)
     	// Save the automaton
-    	helper.saveEMFAutomaton(EMFRepository.new, output, output_path, "http://kermeta/samples/fsm.ecore")
+    	helper.saveEMFAutomaton(EMFRepository.new, output, output_path, "http://www.kermeta.org/fsm")
 
     end
     

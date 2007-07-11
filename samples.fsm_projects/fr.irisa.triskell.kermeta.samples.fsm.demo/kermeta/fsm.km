@@ -2681,7 +2681,7 @@
             </parameters>
             <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@ownedTypeDefinition.11/@ownedOperation.0/@body/@statement.1/@containedType.0" name="output"/>
             <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/@ownedTypeDefinition.11/@ownedOperation.0/@body/@statement.2/@containedType.0" name="output_path"/>
-            <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@ownedTypeDefinition.11/@ownedOperation.0/@body/@statement.7/@value/@parameters.0/@containedType.0" value="http://kermeta/samples/fsm.ecore"/>
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/@ownedTypeDefinition.11/@ownedOperation.0/@body/@statement.7/@value/@parameters.0/@containedType.0" value="http://www.kermeta.org/fsm"/>
             <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/@ownedTypeDefinition.11/@ownedAttribute.2/@containedType.0" name="helper" staticProperty="/0/@ownedTypeDefinition.11/@ownedAttribute.2"/>
           </statement>
         </body>
