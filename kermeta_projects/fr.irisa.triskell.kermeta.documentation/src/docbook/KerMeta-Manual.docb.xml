@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<!-- $Id: KerMeta-Manual.docb.xml,v 1.21 2007-07-09 16:11:06 dvojtise Exp $ -->
+<!-- $Id: KerMeta-Manual.docb.xml,v 1.22 2007-07-11 08:53:05 dvojtise Exp $ -->
 <book lang="en-US">
   <bookinfo>
     <title>Kermeta language</title>
 
     <pubdate>Build date: @BUILD.DATE@</pubdate>
 
-    <pubdate>$Date: 2007-07-09 16:11:06 $</pubdate>
-
+    <pubdate>$Date: 2007-07-11 08:53:05 $</pubdate>
+    
     <author>
-      <firstname>Franck Fleurey, Zoé Drey, Didier Vojtisek, Cyril Faucher,
-      Vincent Mahé</firstname>
+      <firstname>Zoé</firstname> <surname>Drey</surname>
+    </author>
+    <author>
+      <firstname>Cyril</firstname> <surname>Faucher</surname>
+    </author>
+    <author>
+      <firstname>Franck</firstname><surname> Fleurey</surname>
+    </author>
+    <author>
+      <firstname>Vincent</firstname> <surname>Mahé</surname>
+    </author>
+    <author>
+      <firstname>Didier</firstname> <surname>Vojtisek</surname>
     </author>
 
     <keywordset>
@@ -87,7 +98,11 @@
   <chapter id="chapter_introduction.link">
     <title id="chapter_introduction.title.link">Introduction to the language<phrase></phrase></title>
 
-    <para></para>
+    <para>This chapter aims to help you to have a quick overview of most of the features of Kermeta.
+    Then, it gives the pointers to the detailled sections in the reference chapter.
+    It also gives some small examples that should help you to understand the basis of the concepts without 
+    having to jump to the corresponding detailled section.
+    </para>
 
     <section id="sec_introduction_presentation.link">
       <title id="sec_introduction_presentation.title.link">Presentation</title>
@@ -421,6 +436,16 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
       		metamodel and that will also work for any conformant metamodel.
       		
        	</para>
+       	<para>
+      		In order to improve reuse of existing code between metamodel variants, the language
+      		introduces the notion of ModelType. It is based on the notion of conformance between two 
+      		metamodels. This allows to write behavior that is valid for a given
+      		metamodel and that will also work for any conformant metamodel.
+      		
+       	</para>
+       	<para>
+       		TODO write a small illustrative example of a simple printer based on a ModelType : a subset of class diagram of UML
+       	</para>
       
       </section>
       <section>
@@ -441,6 +466,9 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
         <listitem><para>
         	<xref linkend="section_kermeta_metamodel.link"/>
         </para></listitem>
+        <listitem><para>
+        	<xref linkend="section_modeltype.link"/>
+        </para></listitem>
       </itemizedlist>
       </para>
       </section>
@@ -448,8 +476,15 @@ aLibrary ?= resource.one // note the conditionnal assignment using the ?=, if no
     </section>
 
     <section>
-      <title>Some advanced features</title>
-
+      <title>Some "advanced" features</title>
+	  <para>
+	    Kermeta implements several "less common" or advanced features that helps in many situations. 
+	 <para>
+	 </para>
+	    Typically, lambda expressions/functions is a well known concept, very useful in almost all
+	    kermeta code. Even, if you will probably not write your own function, you'll certainly 
+	    use the existing one defined on collections.
+	  </para>
       <section>
         <title>Functions in Kermeta<phrase
         id="sec:function-types"></phrase></title>
@@ -1311,10 +1346,9 @@ a := A&lt;Integer&gt;.new
         cannot define nested classes in Kermeta. Kermeta offers the same
         structural concepts than MOF language.</para>
 
-        <para>TODO : no constructors in Kermeta</para>
       </section>
 
-      <section>
+      <section id="section_defining_operations.link">
         <title>Defining operations</title>
 
         <para>Kermeta provides a way to add operational (==action) semantics
@@ -2390,7 +2424,13 @@ operation main() is do
 
     <section id="section_collections.link">
       <title id="section_collections.title.link">Collections<phrase id="section_collections"></phrase></title>
-
+	  <para>
+	  	Collections are widely used in kermeta not only because of their usual usage for collecting data in variables
+	  	but also because they are used to represent <link linkend="section_properties.link">class property</link> when the multiplicity is greater than 1. 
+	  </para>
+	  <para>
+	  	Collections is one of the concept where the genericity is the most visible sinc it greatly helps to write more robust code.
+	  </para>
       <section>
         <title>Definition and initialization</title>
 
@@ -2424,11 +2464,11 @@ operation main() is do
 
             <thead>
               <row>
-                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?><para>Name</para></entry>
+                <entry morerows="1" valign="middle"><para>Name</para></entry>
 
-                <entry morerows="1" valign="middle"><?border-top 0.0007inch solid #000000?><para>Description</para></entry>
+                <entry morerows="1" valign="middle"><para>Description</para></entry>
 
-                <entry nameend="c4" namest="c3"><?border 0.0007inch solid #000000?><para>Constraints</para></entry>
+                <entry nameend="c4" namest="c3"><para>Constraints</para></entry>
               </row>
 
               <row>
@@ -2518,18 +2558,21 @@ operation main() is do
         <para><emphasis role="strong">Example 1</emphasis>: how to declare
         collections</para>
 
-        <programlisting>
+		<programlisting>
+using kermeta::standard		// don't need to specify it all the time
+	<emphasis>// This is the simpliest and recommanded way of declaring a collection variable</emphasis>
+	<emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
+	<emphasis role="strong">var</emphasis> myColB : OrderedSet&lt;Integer&gt; <emphasis>// this is equivalent to saying oset Integer[0..*]</emphasis>
+		</programlisting>
+	    <programlisting>
 	<emphasis>// Collection with multiplicities</emphasis>
 	<emphasis role="strong">var</emphasis> myCol1 : <emphasis role="strong">set</emphasis> Integer[4..6]<emphasis> // At least 4 elements and never more than 6</emphasis>
 	<emphasis role="strong">var</emphasis> myCol3 : <emphasis role="strong">seq</emphasis> String[2..*]<emphasis> // At least two strings in the sequence</emphasis>
 	<emphasis role="strong">var</emphasis> myCol4 : <emphasis role="strong">set</emphasis> String[1..*]<emphasis> // An non empty set</emphasis>
 	<emphasis role="strong">var</emphasis> myCol5 : String[1..*]<emphasis> // If you don't specify any keyword, it is an ordered set</emphasis>
-</programlisting>
+        </programlisting>
 
-        <programlisting>
-    <emphasis>// This way of declaring a variable is recommended</emphasis>
-	<emphasis role="strong">var</emphasis> myColA : Set&lt;Integer&gt; <emphasis>// this is equivalent to saying set Integer[0..*]</emphasis>
-</programlisting>
+        
 
         <para>There is currently no way to define a collection by extension
         like you can do in C or Java. You must initialize your collection
@@ -2616,11 +2659,11 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
     </section>
 
     <section id="section_properties.link">
-      <title  id="section_properties.title.link">Properties<phrase id="section_properties"></phrase></title>
+      <title  id="section_properties.title.link">Class properties<phrase id="section_properties"></phrase></title>
 
       <para>A property of a (meta)class can be expressed in three ways : as a reference, an
       attribute, or a derived property. In Kermeta, each kind of these
-      properties has a dedicated syntax, which is <emphasis
+      properties has a specific behavior and a dedicated syntax, which is <emphasis
       role="strong">attribute </emphasis>(for attribute), <emphasis
       role="strong">reference</emphasis> (for reference), <emphasis
       role="strong">property</emphasis> (for derived property)</para>
@@ -2670,8 +2713,28 @@ aCollection2 := aCollection.<emphasis role="strong">collect</emphasis> { e |
       </section>
 
       <section>
-        <title>opposite properties i.e associations (#)<phrase
-        id="sec:opposite"></phrase></title>
+        <title>properties modifiers</title>
+        
+        <para>
+        	Attributes, references and properties underlying collections may eventually be specialized. 
+        	By default, they are represented by an OrderedSet. If you wish to be more precise and for exemple
+        	allow to have several item with the same value in your collection, you can use the collection
+        	modifiers as defined in <xref linkend="section_collections.link"/>
+        </para>        
+        <para>
+        	 For example :
+        </para>
+        <programlisting>
+class A {
+	attribute x1 : seq String[0..*]  // allows duplicates, ordered
+	attribute x2 : set String[0..*]  // doesn't allow duplicates, not ordered        
+	attribute x3 : bag String[0..*]  // allows duplicates, not ordered               
+	attribute x4 : oset String[0..*] // (default if no modifier) doesn't allow duplicates, ordered        
+}        </programlisting>
+      </section>
+
+      <section>
+        <title>Association using opposite properties</title>
 
         <para>The opposite [property] of a property defines an association
         (bidirectional link) between two entities. An opposite is expressed by
@@ -2867,10 +2930,8 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
 
             <thead>
               <row>
-                <entry><?border-top 0.0007inch solid #000000?><para>Access</para></entry>
-
-                <entry><?border 0.0007inch solid #000000?><para>Kermeta
-                expression</para></entry>
+                <entry><para>Access</para></entry>
+                <entry><para>Kermeta expression</para></entry>
               </row>
             </thead>
 
@@ -2882,6 +2943,7 @@ stdio.writeln("b1 opposite : " + b1.a.name) <emphasis>// This prints "a1"!</emph
                       role="strong">init</emphasis> A6.new
 <emphasis role="strong">var</emphasis> b6 : OrderedSet&lt;B6&gt;
 <emphasis>// get the b attribute</emphasis>
+<emphasis>// Note that as the attribute as a multiplicity &gt;1 it is an OrderedSet </emphasis>
 b6 := a6.b</programlisting></entry>
               </row>
 
@@ -2899,7 +2961,8 @@ a6.b.add(b6)</programlisting></entry>
               <row>
                 <entry><para>Remove an element from a property</para></entry>
 
-                <entry><programlisting><emphasis>// OrderedSet owns a method that removes an element given its// index in the set. For unordered sets, use "remove" method</emphasis>
+                <entry><programlisting><emphasis>// OrderedSet owns a method that removes an element given its
+     // index in the set. For unordered sets, use "remove" method</emphasis>
 a6.b.removeAt(0)
 <emphasis>// Also valid : a6.b.remove(b6)</emphasis></programlisting></entry>
               </row>
@@ -2910,7 +2973,8 @@ a6.b.removeAt(0)
                 <entry><programlisting><emphasis role="strong">var</emphasis> a6 : A6 init A6.new
 <emphasis role="strong">var</emphasis> b6 : B6 init B6.new
 a6.b.add(b6)
-<emphasis>// this assertion is true. Moreover, any instance in a6.b will// have a6 as their opposite since b is a collection</emphasis>
+<emphasis>// this assertion is true. Moreover, any instance in a6.b will
+// have a6 as their opposite since b is a collection</emphasis>
 assert(b6.a == a6)</programlisting></entry>
               </row>
 
@@ -3010,9 +3074,16 @@ assert(a5c.equals(a5))</programlisting></entry>
             </tbody>
           </tgroup>
         </informaltable>
+        <note>
+        	Be careful with attributes or references ref with multiplicity greater than 1, they are automatically 
+    		initialized with a reflective collection (ie. a collection that is aware of an eventual
+    		opposite). So, you cannot assign them using := If you wish to change completely its content
+    		with the one of another collection, you must use the <literal>clear</literal> and 
+    		<literal>addAll</literal> operations.
+        </note>
       </section>
 
-      <section>
+      <section id="section_assignment_behavior_4_attribute.link">
         <title>Assignment behavior for attribute (and reference)</title>
 
         <para>Attribute and reference have one main behavior
@@ -3076,61 +3147,27 @@ aB.c2 := aA.c1 &nbsp;&nbsp;&nbsp;&nbsp;<emphasis>// aB.c2 == aA.c1 and aA.c1 kee
       <title id="section_object_comparison.title.link">Objects comparison<phrase
       id="section_objects_comparison"></phrase></title>
 
-      <para>Kermeta users could be confused about <emphasis>==</emphasis>
-      operator and <emphasis>equals</emphasis> method. These are two ways to
-      compare objects. In Kermeta we kept the Java semantic. The operator
-      <emphasis>==</emphasis> is used as identity comparison and
-      <emphasis>equals</emphasis> method is used for contents
-      comparison.</para>
-
-      <section>
-        <title>isSameAs method</title>
-
-        <para>TODO : OBSOLET. Need to be rewriten !!!!</para>
-
-        <para>The operator <emphasis>==</emphasis> is mapped to
-        <emphasis>isSameAs</emphasis> method. This method compares two
-        references. If they are the same, <emphasis>isSameAs</emphasis>
-        returns true (false otherwise). Then, both pieces of code below
-        behaves EXACTLY the same.</para>
-
-        <programlisting>// assuming class A has been declared
-var a1 : A init A.new
-var a2 : A init A.new
-assert ( not a1.isSameAs(a2) )
-
-var a3 : A init A.new 
-var a4 : A init a3
-assert ( a1.isSameAs(a2) )</programlisting>
-
-        <programlisting>// assuming class A has been declared
-var a1 : A init A.new
-var a2 : A init A.new
-assert ( not a1 == a2 )
-
-var a3 : A init A.new
-var a4 : A init a3
-assert ( a1 == a2 )</programlisting>
-      </section>
+      <para>Kermeta users could be confused about <literal>==</literal>
+      operator and <literal>equals</literal> method. Unlike, Java they do the same and redefining
+      the equals to compare the content also affects the <literal>==</literal>. 
+      </para><para>
+      To compare the identity of two objects you must compare the identifier of each object : using their oid</para>
 
       <section>
         <title>equals method</title>
 
         <para>The <emphasis>equals</emphasis> method behaves the same way as
-        in java. This means that if you want to compare the contents of two
-        objects of the same class, you MUST rewrite the
-        <emphasis>equals</emphasis> method. Look at the example (it results in
-        printing "a1 does not equal a2" and 'a1 equals a2") :</para>
+        in java. This means that you can overwrite it, if you want to compare the contents of two
+        objects of the same class. </para>
 
-        <programlisting>@mainClass "root::NewPrimitiveType"
+        <programlisting>@mainClass "root::Main"
 @mainOperation "main"
 
 package root;
 
 require kermeta
-
 using kermeta::standard
-
+using kermeta::kunit
 class A {
 
   reference x : Integer
@@ -3144,7 +3181,7 @@ class A {
 }
 
 
-class NewPrimitiveType {
+class Main inherits kermeta::kunit::TestCase{
 
   operation main() : Void is do
 
@@ -3154,19 +3191,15 @@ class NewPrimitiveType {
     a1.x := 10
     a2.x := 20
 
-    if ( a1.equals(a2) ) then
-      stdio.writeln("a1 equals a2")
-    else
-      stdio.writeln("a1 does not equal a2")
-    end
+    assert( not a1.equals(a2) )	// objects are different with all methods
+    assert( not a1 == a2 )
+    assert ( a1.oid == a2.oid ) 
 
     a2.x := 10
  
-    if ( a1.equals(a2) ) then
-      stdio.writeln("a1 equals a2")
-    else
-      stdio.writeln("a1 does not equal a2")
-    end
+    assert ( a1.equals(a2) ) 	// objects becomes equals
+    assert ( a1 == a2  )		// also with ==
+    assert ( a1.oid == a2.oid ) // but they physically are still different
 
   end
 
@@ -3191,35 +3224,25 @@ class NewPrimitiveType {
           <listitem>
             <para>String</para>
           </listitem>
+          <listitem>
+            <para>Character</para>
+          </listitem>
         </itemizedlist>
 
-        <para>These classes have a special property. We do not want two
+        <para>We do not want two
         Integer objects with the same value to be different. What we want is
         to use <emphasis>==</emphasis> operator to compare values of primitive
-        types. Then we can write this code :</para>
+        types. These classes simply redefine the equals. Then we can write this code :</para>
 
         <programlisting>var i1 : Integer init 10
 var i2 : Integer init 10
-assert (i1.isSameAs(i2))
+assert (i1.equals(i2))
 
 var i3 : Integer init 10
 var i4 : Integer init 10
-assert (i3 == i4)</programlisting>
-
-        <important>
-          <para>All you have to remember is that for primitive types,
-          <emphasis>==</emphasis> operator behaves the same as
-          <emphasis>equals</emphasis> method</para>
-        </important>
-
-        <para>In fact, it is very simple. We just rewrite the
-        <emphasis>equals</emphasis> method from <emphasis>Object</emphasis>
-        class like this :</para>
-
-        <programlisting>method isSameAs(element : Object) : Boolean is do
-  // instead of comparing references, let us compare the values !
-  result := self.equals(element)
-end</programlisting>
+assert (i3 == i4)
+</programlisting>
+      
       </section>
 
       <section>
@@ -3575,7 +3598,7 @@ and op.name.indexOf("All")==-1}
       <section>
         <title>Writing a contract</title>
 
-        <section>
+        <section id="section_pre_post_syntax.link">
           <title>pre – post conditions syntax</title>
 
           <para>A pre or a post condition is a boolean expression that may be
@@ -3609,7 +3632,7 @@ and op.name.indexOf("All")==-1}
           </tip>
         </section>
 
-        <section>
+        <section  id="section_inv_syntax.link">
           <title>Invariant constraint syntax</title>
 
           <para>An invariant constraint is declared anywhere in a
@@ -3635,13 +3658,13 @@ and op.name.indexOf("All")==-1}
 }</programlisting>
 
           <tip>
+          	<para>
              If the body contains only one instruction, the block declaration "do ... end" is not mandatory. 
+			</para>
+			<programlisting><emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
+<emphasis role="strong">inv</emphasis> nameOfTheInvariant <emphasis role="strong">is self</emphasis>.name != ""</programlisting>
           </tip>
 
-          <programlisting><emphasis>// Declaration of the invariant : deterministicTransition</emphasis>
-<emphasis role="strong">inv</emphasis> nameOfTheInvariant <emphasis
-              role="strong">is</emphasis>
-&nbsp;&nbsp;&nbsp;&nbsp;<emphasis role="strong">self</emphasis>.name != ""</programlisting>
 
           <para>A lambda expression can be used into an invariant
           declaration:</para>
@@ -3738,7 +3761,11 @@ and op.name.indexOf("All")==-1}
 
       <section>
         <title>textual syntax for merging</title>
-
+		<important>
+			Since this feature is really successful and very well accepted, the surface syntax
+			will change in the future release v1.0.0 in order to use a dedicated keyword instead of a simple annotation.
+			 The syntax presented here is valid only for prior versions.
+		</important>
         <para>The merge is driven by the qualified name of the element to
         merge. Two classes will be merged if they have exactly the same
         qualified name (packages names + class name)</para>
@@ -3962,10 +3989,156 @@ class A {
         <para></para>
       </section>
     </section>
+    <section id="section_modeltype.link">
+      <title id="section_modeltype.title.link">Model type</title>
+      <warning> In current version of Kermeta(v0.4.2), ModelType is still a prototype. Any help, feedback, contribution is
+      	welcome to help us to finalize it.
+      </warning>
+      <para>
+      	Kermeta is clearly a model oriented language, one of its first concept is a model element,
+      	because they are the manipulated objects.
+      	However, we often need to organise them and manipulate them as a set : a model.
+      	A common way to do that is to simply use a set, and a resource (used for load and save)
+      	is just a set. This approach is not type safe enough.      	      	
+      </para>
+      <para>
+      	So, Kermeta implement a clear notion of model type, in order to be able to typecheck this 
+      	kind of model. A model type is simply the set of the type of all allowed model element.
+      </para>
+      <para>
+      	In addition, it introduce a mecanism of conformance between modeltype that helps to reuse code from 
+      	one metamodel to another.
+      </para>
+      <section>
+      	<title>Definition of a model type</title>
+      	<para>
+      		A model type is simply a set of metaclasses. Expressed in kermeta, this is a collection
+      		of kermeta classes.
+      	</para>
+      	<programlisting>
+package aMetamodel;
+// let's define some normal classes 
+class C1 {
+	attribute name : String
+	attribute aC2 : C2#aC1
+}
+class C2 {
+	reference aC1 : C1#aC2
+}
 
+// then defining a modeltype is just listing the classes of this modeltype
+// here, the model type is composed of two metaclasses, C1 and C2
+modeltype MainMT { aMetamodel::C1, aMetamodel::C2}
+      	</programlisting>
+      	<tip>You can use all classic way to define classes, in kmt, but you can also require
+      		an ecore file that will contain your class definition (see require section ???) 
+      	</tip>
+      </section>
+      <section>
+      	<title>Using Model types variables</title>
+      	<para>
+      		Now that you have defined a ModelType, you can use it to declare model variables.       		
+      	</para>
+      	<programlisting>
+	var aMainMT : MainMT init MainMT.new
+      	</programlisting>
+      	<para>
+      		But, your model is still empty. As its contents is a (constrained) Set you simply have 
+      		to fill it with your model element using typechecked operations like <literal>add</literal>,
+      		  or using filtered operation like <literal>addCompatible</literal> and <literal>addAllCompatible</literal>
+      		 (with this one you can pass any collection, only compatible objects will be added to the model).
+      	</para>
+      	<programlisting>
+    // create a model element
+	var newC1 : aMetamodel::C1 init aMetamodel::C1.new()
+	newC1.name := "hello"
+	// then add it to the model
+	aMainMT.add(newC1)
+      	</programlisting>
+      </section>
+      <section>
+      	<title>Model type serialisation</title>
+      	<para>
+      		As a model type is based on "normal" class definitions, loading and saving 
+      		models mostly relies on the normal way to load resource (see <xref linkend="section_loadingsaving_models.link"/>)
+      	</para>
+      	<para>
+      		A simple approach for loading is to load with the classical approach, then to use the operations
+      		<literal>addAllCompatible</literal> with the content of the resource or <literal>resourceToModel</literal> with the resource.
+      		 That will fill the model with compatible objects.
+
+      	</para>
+      	<programlisting>
+	// load a resource with model elements
+	var res : EMFRepository init EMFRepository.new
+	var resource : Resource init res.createResource(modelFileName, ecoreMetamodelFileName)
+	resource.load()
+       	    
+	// then add them to the model
+	aMainMT.addAllCompatible(resource.contents)
+	// alternative
+	// aMainMT.resourceToModel(resource)
+      	</programlisting>
+      	<para>
+      		TODO sample of saving (how to put root objects of the model into a resource)
+      	</para>
+      </section>
+      <section>
+      	<title>Model type conformance</title>
+      	<para>
+      		TODO explain how Modeltype helps to reuse existing code from a metamodel to another
+      	</para>
+      	<para>
+      		Model types use a notion of conformance that allows to determine if a metamodel is
+      		conformant to another. The goal is to be able to write code that will be valid not only
+      		for models of a given metamodel, but will be valid for models of conformant metamodels.
+      	</para>
+      	<para>
+      		In order to be flexible, the conformity between metamodel is based on the properties 
+      		offered by the metaclasses. 
+      		It ignores the name of the metaclasses.
+      	</para>
+      	
+      	<para>
+      		As a sample, let's define a mini metamodel and its corresponding model type :
+      	</para>
+      	<programlisting>
+      	</programlisting>
+      	<note>
+      		<para>
+      		We could also define a modeltype directly on top of the previous metamodel (and restrain it 
+      		to some of its metaclasses), but the sample would have been less general and wouldn't have 
+      		illustrated the fact that the name of metaclasses are ignored.
+      		</para>
+      		<programlisting>
+ modeltype MiniMT_2 { aMetamodel::C1 }
+      		</programlisting>
+      		 
+      	</note>
+      	<warning>
+      		The current implementation works only when there is no ambiguity, if there is ambiguity between
+      		two metamodels, then they are considered as not conformant. A future version, may eventually
+      		introduce a binding mecanism that would allows to remove those ambiguity. (See Jim Steel Phd thesis
+      		for more details ???)
+      	</warning>
+      </section>
+      <section>
+      	<title>Using Model types in generic classes/operations</title>
+      	<para>
+      		TODO  
+      	</para>
+      </section>
+      <section>
+      	<title>A more complex example of conformance : FSM variants</title>
+      	<para>
+      		TODO reuse JM slides and the conformity table
+      	</para>
+      </section>
+      
+      
+    </section>  
     <section id="section_java_code.link">
-      <title id="section_java_code.title.link">Using existing java code in Kermeta<phrase
-      id="section_java_code"></phrase></title>
+      <title id="section_java_code.title.link">Using existing java code in Kermeta</title>
 
       <para>If you have existing code that you want to run in a Kermeta
       program, you can use one of those two mecanisms : extern call or seamless require.
@@ -4055,7 +4228,7 @@ class A {
       	<section id="section_seamless_java_code.link">
       		<title id="section_seamless_java_code.title.link">Requiring jar file to call java code</title>
       		<warning>This feature is still a prototype and still have many limitations. 
-      			The first version is already available but any help is welcome to help us improve it.</warning>      
+      			The first version is already available but any help is welcome to help us to improve it.</warning>      
       		<para>
       			The basic principle, is to simply require your jar file. 
       		</para>
@@ -4145,7 +4318,7 @@ class testRequireJava inherits kermeta::kunit::TestCase
     <section>
       <title>Cloning objects<phrase id="section_cloning"></phrase></title>
 
-      <para>As we saw in previous sections, properties can be defined as
+      <para>As we saw in previous sections, class properties can be defined as
       attribute or reference. An attribute cannot be shared between two or
       more objects whereas a reference can be. Let's consider a class
       "<literal>Family</literal>" with a property "<literal>father</literal>"
@@ -4155,10 +4328,9 @@ class testRequireJava inherits kermeta::kunit::TestCase
       <literal>father</literal> attribute of the second with the
       <literal>father</literal> of the first. To do that, we need to clone the
       object Person which represents the father of
-      "<literal>family1</literal>" because, as said in above subsection, it
+      "<literal>family1</literal>" because, as said in <xref linkend="section_assignment_behavior_4_attribute.link"/>, it
       could not be shared between the two objects, by definition of attribute
-      (in "technical" words, 2 containers cannot contain the same
-      object).</para>
+      (in "technical" words, an object cannot be contained by 2 containers).</para>
 
       <programlisting><emphasis role="strong">class</emphasis> Person 
 {
@@ -4522,8 +4694,11 @@ num ?= a</programlisting>
 
         <figure id="refIllustration16">
           <title>Kermeta Literal Expression</title>
-
-          <mediaobject></mediaobject>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="KerMeta-Manual_figures/kermeta_literal_expressions.png" />
+            </imageobject>
+          </mediaobject>
         </figure>
 
         <para></para>
@@ -4744,7 +4919,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
             <entry><para>@pre</para></entry>
 
             <entry align="left"><para>Represents self before the call to this
-            operation in the scope of a post condition</para></entry>
+            operation in the scope of a post condition. See <xref linkend="section_pre_post_syntax.link"/></para></entry>
           </row>
 
           <row>
@@ -4757,7 +4932,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
           <row>
             <entry><para>alias</para></entry>
 
-            <entry><para>Defintion of a primitive type</para></entry>
+            <entry><para>Definition of a primitive type</para></entry>
           </row>
 
           <row>
@@ -4783,7 +4958,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
           <row>
             <entry><para>class</para></entry>
 
-            <entry align="left"><para>Defintion of a class</para></entry>
+            <entry align="left"><para>Definition of a class</para></entry>
           </row>
 
           <row>
@@ -4850,52 +5025,45 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
           <row>
             <entry><para>inherits</para></entry>
-
             <entry align="left"><para>Declartion of the super classes of the
             class</para></entry>
           </row>
 
           <row>
             <entry><para>init</para></entry>
-
             <entry><para>Initialization of a variable</para></entry>
           </row>
-
-          <row>
-            <entry><para>is</para></entry>
-
-            <entry align="left"></entry>
-          </row>
-
+          
           <row>
             <entry align="left"><para>inv</para></entry>
-
             <entry align="left"><para>Declaration of an
-            invariant</para></entry>
+            invariant. See <xref linkend="section_inv_syntax.link"/></para></entry>
+          </row>
+          
+          <row>
+            <entry><para>is</para></entry>
+            <entry align="left"> part of the declaration of an operation or method.
+            	See <xref linkend="section_defining_operations.link"/></entry>
           </row>
 
           <row>
             <entry><para>loop</para></entry>
-
             <entry align="left"><para>Loop instruction</para></entry>
           </row>
 
           <row>
             <entry><para>method</para></entry>
-
-            <entry align="left"><para>Redefinition of an
-            operation</para></entry>
+            <entry align="left"><para>Redefinition of an operation. 
+            	See <xref linkend="section_defining_operations.link"/></para></entry>
           </row>
 
           <row>
             <entry><para>modeltype</para></entry>
-
-            <entry align="left"><para>reserved for a future use</para></entry>
+            <entry align="left"><para>Definition of a modeltype.</para></entry>
           </row>
 
           <row>
             <entry><para>not</para></entry>
-
             <entry><para>Boolean expression</para></entry>
           </row>
 
@@ -4903,7 +5071,7 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
             <entry><para>operation</para></entry>
 
             <entry align="left"><para>Declaration of an
-            operation</para></entry>
+            operation. See <xref linkend="section_defining_operations.link"/></para></entry>
           </row>
 
           <row>
@@ -4928,21 +5096,19 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
           <row>
             <entry><para>post</para></entry>
-
-            <entry><para>Declaration of a postcondition</para></entry>
+            <entry><para>Declaration of a postcondition. See <xref linkend="section_pre_post_syntax.link"/></para></entry>
           </row>
 
           <row>
             <entry align="left"><para>pre</para></entry>
-
             <entry align="left"><para>Declaration of a
-            precondition</para></entry>
+            precondition. See <xref linkend="section_pre_post_syntax.link"/></para></entry>
           </row>
 
           <row>
             <entry><para>property</para></entry>
 
-            <entry><para>Declarion of a derived property</para></entry>
+            <entry><para>Declaration of a derived property</para></entry>
           </row>
 
           <row>
@@ -4983,7 +5149,14 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
 
             <entry align="left"><para>Catch an excetion</para></entry>
           </row>
+          
+          <row>
+            <entry><para>result</para></entry>
 
+            <entry><para>Special variable used for the return value of an
+            operation. See <xref linkend="section_defining_operations.link"/></para></entry>
+          </row>
+          
           <row>
             <entry><para>setter</para></entry>
 
@@ -5066,12 +5239,6 @@ s := "I am a string" <emphasis>// "I am a string" is a StringLiteral</emphasis><
             <entry><para>Void literal</para></entry>
           </row>
 
-          <row>
-            <entry><para>result</para></entry>
-
-            <entry><para>Special variable used for the return value of an
-            operation</para></entry>
-          </row>
         </tbody>
       </tgroup>
     </informaltable>
