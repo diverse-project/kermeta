@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.19 2007-03-01 13:19:50 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.20 2007-07-11 13:33:58 cfaucher Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -541,7 +541,7 @@ public class TypeCheckerContext {
 		// not in the cache ?
 		if (result == null) {
 			// create the class
-			result = new SimpleType(createClass(OSetClassDef, typeParam));
+			result = new SimpleType(createClass(BagClassDef, typeParam));
 			// store result in the cache
 			bag_type_cache.put(typeParam, result);
 		}
