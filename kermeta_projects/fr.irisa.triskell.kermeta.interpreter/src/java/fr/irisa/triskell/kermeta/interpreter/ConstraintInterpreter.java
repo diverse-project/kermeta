@@ -1,4 +1,4 @@
-/* $Id: ConstraintInterpreter.java,v 1.7 2007-06-29 11:46:59 jmottu Exp $
+/* $Id: ConstraintInterpreter.java,v 1.8 2007-07-11 17:18:49 jmottu Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL
@@ -48,22 +48,24 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		interpreterContext.peekCallFrame().pushExpressionContext();
 		interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getBody());
 
-		Operation superOp = node.getSuperOperation();
+		ArrayList<Operation> superOps = getSuperOps(node);
 		try {
 			// Memorise the value of the @pre variables
 			for (Object next : node.getPost())
 				atpreV.accept((Constraint)next);
 
 
-			if (superOp != null){
+			for (Operation superOp : superOps){
 				// Memorise the value of the parents' @pre variables
 				for (Object next : superOp.getPost())
 					atpreV.accept((Constraint)next);
 
 				// TODO : check that parentPre implies Pre
+				
 				// Check the parents' pre conditions
 				for (Object next : superOp.getPre())
 					this.accept((Constraint)next);
+				
 			}
 
 			// Check the post conditions
@@ -78,7 +80,7 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 				this.accept((Constraint)next);
 
 			//TODO : check that post implies parentPost
-			if (superOp != null) {
+			for (Operation superOp : superOps){
 				// Check the parents' post conditions
 				for (Object next : superOp.getPost())
 					this.accept((Constraint)next);
@@ -92,6 +94,18 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		}
 		return result;
 	}
+
+	private ArrayList<Operation> getSuperOps(Operation node) {
+		Operation superOp = node.getSuperOperation();
+		ArrayList<Operation> list_superOps = new ArrayList<Operation>();
+		if(superOp != null){
+			list_superOps.add(superOp);
+			list_superOps.addAll(getSuperOps(superOp));
+		}
+		return list_superOps;
+			
+	}
+
 
 	/**
 	 * 
