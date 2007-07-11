@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmModelerProviderAdapterFactory.java,v 1.3 2007-04-12 13:56:26 cfaucher Exp $
+ * $Id: FsmModelerProviderAdapterFactory.java,v 1.4 2007-07-11 16:13:15 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

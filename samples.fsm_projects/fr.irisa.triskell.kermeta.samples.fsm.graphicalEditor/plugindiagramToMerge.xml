@@ -19,5 +19,6 @@
          <enableFor class="fr.irisa.triskell.kermeta.samples.fsm.FSM"/>
       </diagram>
 	</extension>
+	
    
 </plugin>

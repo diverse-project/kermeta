@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmEditorActionBarContributor.java,v 1.2 2006-12-22 10:36:16 cfaucher Exp $
+ * $Id: FsmEditorActionBarContributor.java,v 1.3 2007-07-11 16:13:15 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

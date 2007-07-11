@@ -8,12 +8,12 @@ package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.editpolicies.ResizableEditPolicy;
+import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
-import org.eclipse.gef.editpolicies.ResizableEditPolicy;
-import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 

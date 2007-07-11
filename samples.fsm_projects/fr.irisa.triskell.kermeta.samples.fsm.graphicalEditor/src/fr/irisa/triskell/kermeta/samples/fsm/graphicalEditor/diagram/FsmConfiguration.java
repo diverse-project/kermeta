@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmConfiguration.java,v 1.4 2007-02-26 14:19:59 cfaucher Exp $
+ * $Id: FsmConfiguration.java,v 1.5 2007-07-11 16:13:16 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

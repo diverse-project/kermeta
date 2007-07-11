@@ -40,14 +40,13 @@ public class StateFigure extends BorderedLabel {
 
 		graphics.drawRoundRectangle(outer, ROUND_CORNER, ROUND_CORNER);
 	}
-	
-    /**
-     * @see org.eclipse.draw2d.Shape#fillShape(org.eclipse.draw2d.Graphics)
-     * @generated NOT
-     */
-    protected void fillShape(Graphics graphics)
-    {
-        graphics.fillRoundRectangle(getBounds(), ROUND_CORNER, ROUND_CORNER);
-    }
+
+	/**
+	 * @see org.eclipse.draw2d.Shape#fillShape(org.eclipse.draw2d.Graphics)
+	 * @generated NOT
+	 */
+	protected void fillShape(Graphics graphics) {
+		graphics.fillRoundRectangle(getBounds(), ROUND_CORNER, ROUND_CORNER);
+	}
 
 }

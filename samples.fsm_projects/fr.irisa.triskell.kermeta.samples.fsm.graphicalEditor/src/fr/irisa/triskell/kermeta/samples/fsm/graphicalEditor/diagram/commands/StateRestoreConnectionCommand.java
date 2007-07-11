@@ -63,12 +63,15 @@ public class StateRestoreConnectionCommand extends
 
 					if (eltObject2 instanceof State) {
 						if (autoRef) {
-							createTransitionFromStateToState(elt, elt);
+							createTransitionFromStateToState_IncomingTransition(
+									elt, elt);
 						} else {
 							// if the elt is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-							createTransitionFromStateToState(elt, elt2);
+							createTransitionFromStateToState_IncomingTransition(
+									elt, elt2);
 							// if elt is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-							createTransitionFromStateToState(elt2, elt);
+							createTransitionFromStateToState_IncomingTransition(
+									elt2, elt);
 						}
 					}
 
@@ -82,8 +85,8 @@ public class StateRestoreConnectionCommand extends
 	 * @param targetElt the target element
 	 * @generated
 	 */
-	private void createTransitionFromStateToState(GraphElement srcElt,
-			GraphElement targetElt) {
+	private void createTransitionFromStateToState_IncomingTransition(
+			GraphElement srcElt, GraphElement targetElt) {
 		State sourceObject = (State) Utils.getElement(srcElt);
 		State targetObject = (State) Utils.getElement(targetElt);
 

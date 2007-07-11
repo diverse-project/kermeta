@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmDiagramsPage.java,v 1.4 2006-12-22 10:38:52 cfaucher Exp $
+ * $Id: FsmDiagramsPage.java,v 1.5 2007-07-11 16:13:16 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

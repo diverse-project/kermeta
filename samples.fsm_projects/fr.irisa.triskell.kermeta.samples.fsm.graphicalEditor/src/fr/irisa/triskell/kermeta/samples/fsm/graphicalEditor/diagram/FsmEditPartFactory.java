@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: FsmEditPartFactory.java,v 1.4 2007-04-13 16:56:08 cfaucher Exp $
+ * $Id: FsmEditPartFactory.java,v 1.5 2007-07-11 16:13:16 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -41,14 +41,12 @@ public class FsmEditPartFactory implements EditPartFactory {
 			final GraphNode node = (GraphNode) model;
 			EObject element = Utils.getElement(node);
 			if (element != null) {
-				Object editPart = null;
-
-				if ("http://kermeta/samples/fsm.ecore".equals(element.eClass()
+				if ("http://www.kermeta.org/fsm".equals(element.eClass()
 						.getEPackage().getNsURI())) {
-					editPart = new NodeFsmSwitch(node).doSwitch(element);
+					return (EditPart) new NodeFsmSwitch(node).doSwitch(element);
 				}
 
-				return (EditPart) editPart;
+				return new EMFGraphNodeEditPart(node);
 			}
 
 			if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
@@ -59,14 +57,12 @@ public class FsmEditPartFactory implements EditPartFactory {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);
 			if (element != null) {
-				Object editPart = null;
-
-				if ("http://kermeta/samples/fsm.ecore".equals(element.eClass()
+				if ("http://www.kermeta.org/fsm".equals(element.eClass()
 						.getEPackage().getNsURI())) {
-					editPart = new EdgeFsmSwitch(edge).doSwitch(element);
+					return (EditPart) new EdgeFsmSwitch(edge).doSwitch(element);
 				}
 
-				return (EditPart) editPart;
+				return new EMFGraphEdgeEditPart(edge);
 			}
 
 			if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
