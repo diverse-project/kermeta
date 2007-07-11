@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmPlugin.java,v 1.1 2007-02-06 17:45:45 cfaucher Exp $
+ * $Id: KmPlugin.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -131,8 +131,7 @@ public class KmPlugin extends AbstractUIPlugin {
 	 * @param level message level
 	 * @generated
 	 */
-	public static void displayDialog(final String title, final String message,
-			final int level) {
+	public static void displayDialog(final String title, final String message, final int level) {
 		if (level == IStatus.INFO) {
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.5 2007-04-18 16:00:42 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.6 2007-07-11 14:50:46 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -11,7 +11,6 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
@@ -36,7 +35,7 @@ public class KmEditor extends Modeler {
 		factories
 				.add(new fr.irisa.triskell.kermeta.provider.KmItemProviderAdapterFactory());
 		factories
-				.add(new fr.irisa.triskell.kermeta.graphicaleditor.providers.StructureModelerProviderAdapterFactory());
+				.add(new fr.irisa.triskell.kermeta.graphicaleditor.providers.KmModelerProviderAdapterFactory());
 		factories
 				.add(new fr.irisa.triskell.kermeta.language.provider.LanguageItemProviderAdapterFactory());
 		factories
@@ -61,7 +60,7 @@ public class KmEditor extends Modeler {
 	 * @return the String that identifies the Editor
 	 * @generated
 	 */
-	public static String getId() {
+	public String getId() {
 		return new String(
 				"fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor");
 	}
@@ -85,25 +84,25 @@ public class KmEditor extends Modeler {
 		return KmPlugin.getDefault().getPreferenceStore();
 	}
 
-    /**
-     * Before the opening of the file framework.ecore is loaded
-     * @generated NOT
-     * Added full method
-     */
+	/**
+	 * Before the opening of the file framework.ecore is loaded
+	 * @generated NOT
+	 * Added full method
+	 */
 	@Override
 	protected EObject openFile(IFile file) {
 
-		URI frameworkURI = URI.createURI(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT);
+		URI frameworkURI = URI
+				.createURI(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT);
 		try {
 			// Load the framework.km through the editing domain.
 			// Force the loading of framework.km when we open a km file
 			this.getResourceSet().getResource(frameworkURI, true);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			getResourceSet().getResource(frameworkURI, false);
 		}
-		
+
 		return super.openFile(file);
 	}
-    
+
 }

@@ -7,7 +7,7 @@
             class="fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor"
             icon="icons/Km.png"
             default="true"
-            name="%editor.name.0"
+            name="Kermeta class diagram"
             id="fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor"
             contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.KmEditorActionBarContributor"
             extensions="kmdi">
@@ -17,9 +17,9 @@
    <extension point="org.eclipse.ui.newWizards">
       <wizard
             icon="icons/Km.png"
-			category="fr.irisa.triskell.kermeta.KermetaWizard"
             class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"
-            name="%wizard.name.0"
+            category="fr.irisa.triskell.kermeta.KermetaWizard"
+            name="Km class diagram"
             id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
@@ -30,7 +30,7 @@
          <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"/>
       </perspectiveExtension>
    </extension>
-	<extension point="org.eclipse.ui.perspectiveExtensions">
+   <extension point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension targetID="kermetaPerspective">
          <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewKmDiagrams"/>
       </perspectiveExtension>
@@ -41,7 +41,7 @@
             category="org.topcased.modeler.preferences.ModelerPreferencePage"
             class="fr.irisa.triskell.kermeta.graphicaleditor.preferences.KmPreferencePage"
             id="fr.irisa.triskell.kermeta.graphicaleditor.preferences.KmPreferencePage"
-            name="%page.name.0"/>
+            name="Km"/>
    </extension>
    
    <extension point="org.topcased.modeler.templates">
@@ -61,8 +61,19 @@
          <enableFor class="fr.irisa.triskell.kermeta.language.structure.Package"/>
       </diagram>
 	</extension>
-   
-<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+		
+	<extension point="org.eclipse.ui.popupMenus"> 
+		<viewerContribution id="fr.irisa.triskell.kermeta.graphicaleditor.cd.viewerContributionDeleteInheritanceEdgeAction" targetID="org.topcased.modeler">
+    		<action class="fr.irisa.triskell.kermeta.graphicaleditor.cd.actions.DeleteInheritanceEdgeAction" 
+    		enablesFor="1" icon="icons/Inheritance.gif" id="fr.irisa.triskell.kermeta.graphicaleditor.cd.DeleteInheritanceEdgeAction" 
+    		label="Delete inheritance edge" menubarPath="org.eclipse.gef.group.edit">
+      		</action>
+    		<visibility>
+        		<objectClass name="fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.InheritanceEditPart"/>
+    		</visibility>
+		</viewerContribution>
+	</extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
     	<propertySections contributorId="org.topcased.modeler.editor.Modeler">
 	    	<propertySection
 	        	id="fr.irisa.triskell.kermeta.graphicaleditor.NameSection"
@@ -72,41 +83,4 @@
 			</propertySection>
 		</propertySections>
 	</extension>
-<extension
-      point="org.eclipse.ui.popupMenus">
-   <viewerContribution
-         id="fr.irisa.triskell.kermeta.graphicaleditor.viewerContribution1"
-         targetID="org.topcased.modeler">
-      <action
-            class="fr.irisa.triskell.kermeta.graphicaleditor.cd.actions.DeleteInheritanceEdgeAction"
-            enablesFor="1"
-            icon="icons/Inheritance.gif"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.newAction"
-            label="Delete inheritance edge"
-            menubarPath="org.eclipse.gef.group.edit">
-      </action>
-      <visibility>
-         <objectClass name="fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.InheritanceEditPart"/>
-      </visibility>
-   </viewerContribution>
-</extension>
-	<!--
-	   <extension
-         point="org.eclipse.ui.popupMenus">
-      <viewerContribution
-            id="titi"
-            targetID="org.topcased.modeler">
-         <visibility>
-            <objectClass name="fr.irisa.triskell.kermeta.graphicaleditor.diag.edit.InheritanceEditPart"/>
-         </visibility>
-         <action
-               class="fr.irisa.triskell.kermeta.graphicaleditor.actions.DeleteInheritanceEdgeAction"
-               icon="icons/kermeta.png"
-               id="fr.irisa.triskell.kermeta.prototyper.newAction3"
-               label="Delete inheritance edge"
-               menubarPath="org.eclipse.gef.group.edit"
-               />
-      </viewerContribution>
-   </extension>
-	-->
 </plugin>

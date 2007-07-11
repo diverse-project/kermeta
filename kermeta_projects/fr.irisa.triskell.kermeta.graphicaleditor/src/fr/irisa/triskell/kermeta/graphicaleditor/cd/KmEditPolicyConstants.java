@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditPolicyConstants.java,v 1.2 2007-02-07 14:11:55 cfaucher Exp $
+ * $Id: KmEditPolicyConstants.java,v 1.3 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -47,5 +47,11 @@ public interface KmEditPolicyConstants {
 	 * @generated
 	 */
 	String PROPERTY_EDITPOLICY = "Property EditPolicy";
+
+	/**
+	 * The key used to install an <i>PropertyBiDirec</i> EditPolicy.
+	 * @generated
+	 */
+	String PROPERTYBIDIREC_EDITPOLICY = "PropertyBiDirec EditPolicy";
 
 }

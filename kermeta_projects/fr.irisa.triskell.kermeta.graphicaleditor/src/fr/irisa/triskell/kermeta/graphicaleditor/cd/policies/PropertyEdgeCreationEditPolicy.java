@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyEdgeCreationEditPolicy.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: PropertyEdgeCreationEditPolicy.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -20,13 +20,15 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 
 /**
  * Property edge creation
- *
+ * 
  * @generated
  */
 public class PropertyEdgeCreationEditPolicy extends
 		AbstractEdgeCreationEditPolicy {
 	/**
-	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain,
+	 *      org.topcased.modeler.di.model.GraphEdge,
+	 *      org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
 	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
@@ -55,7 +57,8 @@ public class PropertyEdgeCreationEditPolicy extends
 	}
 
 	/**
-	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement,
+	 *      org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
 	protected boolean checkTargetForSource(GraphElement source,
@@ -79,8 +82,9 @@ public class PropertyEdgeCreationEditPolicy extends
 	}
 
 	/**
-	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
-	 * @generated NOT
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement,
+	 *      org.topcased.modeler.di.model.GraphElement)
+	 * @generated
 	 */
 	protected SourceTargetData getSourceTargetData(GraphElement source,
 			GraphElement target) {
@@ -96,16 +100,6 @@ public class PropertyEdgeCreationEditPolicy extends
 					"fr.irisa.triskell.kermeta.language.structure.ClassDefinition",
 					"ownedAttribute", "owningClass", null, "ownedAttribute",
 					null, null, null);
-			/* Old source from Kermeta 0.4.0, only one parameter is different: the second false becomes true,
-			 * if there is not problem -> remove the following commented code and restore the annotation @generated to true
-			 return new SourceTargetData(
-			 false,
-			 false,
-			 1,
-			 "fr.irisa.triskell.kermeta.language.structure.ClassDefinition",
-			 "ownedAttribute", "owningClass", null,
-			 "ownedAttribute", null, null, null);
-			 */
 		}
 		return null;
 	}

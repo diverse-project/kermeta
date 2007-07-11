@@ -1,10 +1,11 @@
 /*******************************************************************************
- * $Id: InheritanceEdgeCreationCommand.java,v 1.1 2007-02-06 17:45:45 cfaucher Exp $
+ * $Id: InheritanceEdgeCreationCommand.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
 package fr.irisa.triskell.kermeta.graphicaleditor.cd.commands;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditDomain;
 import org.topcased.modeler.commands.CreateTypedEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
@@ -70,11 +71,15 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
+	 * TODO CF
 	 */
 	protected void undoModel() {
 		//TODO add specific code if super method is not sufficient
 		super.undoModel();
+
+		EObject containerEObject = getContainerEObject();
+		//containerEObject
 	}
 
 }

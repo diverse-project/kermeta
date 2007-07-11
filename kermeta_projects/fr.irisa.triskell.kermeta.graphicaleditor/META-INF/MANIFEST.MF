@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %Bundle-Name.0
+Bundle-Name: Kermeta class diagram
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
 Bundle-Version: 0.4.2
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin
-Bundle-Vendor: %Bundle-Vendor.0
+Bundle-Vendor: IRISA/INRIA
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,

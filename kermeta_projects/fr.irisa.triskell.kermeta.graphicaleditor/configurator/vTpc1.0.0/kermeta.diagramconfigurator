@@ -1,55 +1,65 @@
 <?xml version="1.0" encoding="ASCII"?>
-<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.4.1" provider="IRISA/INRIA" samePluginAsEditor="true">
-  <palette name="Palette">
-    <paletteCategories name="Node">
-      <items name="Package" part="//@parts.0"/>
-      <items name="ClassDefinition" part="//@parts.1"/>
-      <items name="Property" part="//@parts.2"/>
-      <items name="Operation" part="//@parts.3"/>
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_piiX0Rp7Edyx1YiRXapfag" projectName="fr.irisa.triskell.kermeta.graphicaleditor" name="Kermeta class diagram" package="cd" prefix="Km" forceOverwrite="true" copyrightText="$Id: $&#xD;&#xA;License: EPL&#xD;&#xA;Copyright: IRISA / INRIA / Universite de Rennes 1" pluginVersion="0.5.0" provider="IRISA/INRIA" samePluginAsEditor="true">
+  <palette xmi:id="_piiX0hp7Edyx1YiRXapfag" name="Palette">
+    <paletteCategories xmi:id="_piiX0xp7Edyx1YiRXapfag" name="Node">
+      <items xmi:id="_piiX1Bp7Edyx1YiRXapfag" name="Package" part="_pisI0Bp7Edyx1YiRXapfag"/>
+      <items xmi:id="_piiX1Rp7Edyx1YiRXapfag" name="ClassDefinition" part="_pisI0Rp7Edyx1YiRXapfag"/>
+      <items xmi:id="_piiX1hp7Edyx1YiRXapfag" name="Property" part="_pisI0hp7Edyx1YiRXapfag"/>
+      <items xmi:id="_piiX1xp7Edyx1YiRXapfag" name="Operation" part="_pisI0xp7Edyx1YiRXapfag"/>
     </paletteCategories>
-    <paletteCategories name="Edge">
-      <items name="Inheritance link" part="//@parts.4"/>
-      <items name="Property" part="//@parts.5"/>
+    <paletteCategories xmi:id="_piiX2Bp7Edyx1YiRXapfag" name="Edge">
+      <items xmi:id="_piiX2Rp7Edyx1YiRXapfag" name="Inheritance link" part="_pisI1Bp7Edyx1YiRXapfag"/>
+      <items xmi:id="_piiX2hp7Edyx1YiRXapfag" name="Property" part="_pi_DwBp7Edyx1YiRXapfag"/>
+      <items xmi:id="_tQCQIB2jEdyTW6OLABb5fA" name="Bi-directional property" part="_6LjWQB2hEdyYPoyw7qeztQ"/>
     </paletteCategories>
   </palette>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.0" defaultFont="Tahoma-regular-8" type="Package" childElements="//@parts.0 //@parts.1" defaultBackgroundColor="241,241,241" container="true" defaultWidth="20" maximumWidth="0" maximumHeight="0"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.1" defaultFont="Tahoma-regular-8" type="Class" childElements="//@parts.2 //@parts.3" defaultBackgroundColor="241,235,215" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="0" maximumHeight="-1"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.2" presentation="propertyNode" prefix="PropertyNode" type="Label"/>
-  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.3" type="Label"/>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.4" targetDecoration="TRIANGLE" defaultRouter="TreeRouter">
-    <sourceTargetCouple sourceNode="//@parts.1" targetNode="//@parts.1">
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pisI0Bp7Edyx1YiRXapfag" object="_pi_DxBp7Edyx1YiRXapfag" defaultFont="Tahoma-regular-8" type="Package" childElements="_pisI0Bp7Edyx1YiRXapfag _pisI0Rp7Edyx1YiRXapfag" defaultBackgroundColor="241,241,241" container="true" defaultWidth="20" maximumWidth="0" maximumHeight="0"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pisI0Rp7Edyx1YiRXapfag" object="_pi_Dxhp7Edyx1YiRXapfag" defaultFont="Tahoma-regular-8" type="Class" childElements="_pisI0hp7Edyx1YiRXapfag _pisI0xp7Edyx1YiRXapfag" defaultBackgroundColor="241,235,215" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1" minimumWidth="-1" minimumHeight="-1" maximumWidth="0" maximumHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pisI0hp7Edyx1YiRXapfag" object="_pi_Dxxp7Edyx1YiRXapfag" presentation="propertyNode" prefix="PropertyNode" type="Label"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" xmi:id="_pisI0xp7Edyx1YiRXapfag" object="_pi_DyBp7Edyx1YiRXapfag" type="Label"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_pisI1Bp7Edyx1YiRXapfag" object="_pi_DyRp7Edyx1YiRXapfag" targetDecoration="TRIANGLE" defaultRouter="TreeRouter">
+    <actions xmi:id="_r1dcsBp7Edyx1YiRXapfag" prefix="DeleteInheritanceEdge" menuBarGroup="org.eclipse.gef.group.edit" label="Delete inheritance edge" icon="Inheritance.gif"/>
+    <sourceTargetCouple xmi:id="_pisI1Rp7Edyx1YiRXapfag" sourceNode="_pisI0Rp7Edyx1YiRXapfag" targetNode="_pisI0Rp7Edyx1YiRXapfag">
       <containerObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ClassDefinition"/>
     </sourceTargetCouple>
   </parts>
-  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.2" targetDecoration="ARROW" defaultRouter="RectilinearRouter" directEditable="//@parts.5/@edgeObjects.0">
-    <sourceTargetCouple containerType="SOURCE" autoRef="true" sourceNode="//@parts.1" targetNode="//@parts.1">
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_pi_DwBp7Edyx1YiRXapfag" object="_pi_Dxxp7Edyx1YiRXapfag" targetDecoration="ARROW" defaultRouter="RectilinearRouter" directEditable="_pi_Dwhp7Edyx1YiRXapfag">
+    <sourceTargetCouple xmi:id="_pi_DwRp7Edyx1YiRXapfag" containerType="SOURCE" autoRef="true" sourceNode="_pisI0Rp7Edyx1YiRXapfag" targetNode="_pisI0Rp7Edyx1YiRXapfag">
       <containerObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ClassDefinition"/>
       <containerRef xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/ClassDefinition/ownedAttribute"/>
       <refSourceToEdge xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/ClassDefinition/ownedAttribute"/>
       <refEdgeToSource xsi:type="ecore:EReference" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/Property/owningClass"/>
     </sourceTargetCouple>
-    <edgeObjects id="name" type="Target">
+    <edgeObjects xmi:id="_pi_Dwhp7Edyx1YiRXapfag" id="name" type="Target">
       <eStructuralFeature xsi:type="ecore:EAttribute" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/NamedElement/name"/>
     </edgeObjects>
-    <edgeObjects id="multiplicity" type="Target">
+    <edgeObjects xmi:id="_pi_Dwxp7Edyx1YiRXapfag" id="multiplicity" type="Target">
       <eStructuralFeature xsi:type="ecore:EAttribute" href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta_java.ecore#//language/structure/MultiplicityElement/lower"/>
     </edgeObjects>
   </parts>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" xmi:id="_6LjWQB2hEdyYPoyw7qeztQ" object="_xJVu4B2hEdyYPoyw7qeztQ" defaultForegroundColor="0,128,255" defaultRouter="RectilinearRouter">
+    <sourceTargetCouple xmi:id="_DFa58B2iEdyYPoyw7qeztQ" autoRef="true" sourceNode="_pisI0Rp7Edyx1YiRXapfag" targetNode="_pisI0Rp7Edyx1YiRXapfag">
+      <containerObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ClassDefinition"/>
+    </sourceTargetCouple>
+    <edgeObjects xmi:id="_sIyhYSSMEdyHtqGHjujSEg" id="source_name"/>
+    <edgeObjects xmi:id="_yio_YCSMEdyHtqGHjujSEg" id="target_name" type="Target"/>
+  </parts>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_pi_DxBp7Edyx1YiRXapfag">
     <genClass href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Package"/>
-    <diagrams diagram="/"/>
+    <diagrams xmi:id="_pi_DxRp7Edyx1YiRXapfag" diagram="_piiX0Rp7Edyx1YiRXapfag"/>
   </objects>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_pi_Dxhp7Edyx1YiRXapfag">
     <genClass href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/ClassDefinition"/>
   </objects>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_pi_Dxxp7Edyx1YiRXapfag">
     <genClass href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Property"/>
   </objects>
-  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration" xmi:id="_pi_DyBp7Edyx1YiRXapfag">
     <genClass href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Operation"/>
   </objects>
-  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" name="Inheritance"/>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_pi_DyRp7Edyx1YiRXapfag" name="Inheritance"/>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" xmi:id="_xJVu4B2hEdyYPoyw7qeztQ" name="PropertyBiDirec"/>
   <genModel href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#/"/>
   <templateRootObject href="../../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta/language/structure/Package"/>
-  <editorConfigurator href="kermeta.editorconfigurator#/"/>
+  <editorConfigurator href="kermeta.editorconfigurator#_zoDPQBp7Edyx1YiRXapfag"/>
 </diagramconfigurator:DiagramConfiguration>

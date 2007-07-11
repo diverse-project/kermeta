@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmModelerProviderAdapterFactory.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: KmModelerProviderAdapterFactory.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -17,7 +17,6 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
-import org.topcased.modeler.providers.IDeletePartnerProvider;
 import org.topcased.modeler.providers.ILabelFeatureProvider;
 
 import fr.irisa.triskell.kermeta.util.KmAdapterFactory;
@@ -34,21 +33,21 @@ public class KmModelerProviderAdapterFactory extends KmAdapterFactory implements
 	 * 
 	 * @generated
 	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+	private ComposedAdapterFactory parentAdapterFactory;
 
 	/**
 	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
 	 * 
 	 * @generated
 	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	private IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
 	 * 
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	private Collection supportedTypes = new ArrayList();
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.DummyClass} instances.
@@ -64,8 +63,6 @@ public class KmModelerProviderAdapterFactory extends KmAdapterFactory implements
 	 */
 	public KmModelerProviderAdapterFactory() {
 		supportedTypes.add(ILabelFeatureProvider.class);
-        supportedTypes.add(IDeletePartnerProvider.class);
-        //supportedTypes.add(IDeleteObjectProvider.class);
 	}
 
 	/**
@@ -185,8 +182,9 @@ public class KmModelerProviderAdapterFactory extends KmAdapterFactory implements
 	 * @generated
 	 */
 	public void dispose() {
-		if (dummyclassModelerProvider != null)
+		if (dummyclassModelerProvider != null) {
 			dummyclassModelerProvider.dispose();
+		}
 	}
 
 }

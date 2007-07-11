@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: OperationEditPart.java,v 1.2 2007-06-13 09:31:07 cfaucher Exp $
+ * $Id: OperationEditPart.java,v 1.3 2007-07-11 14:50:46 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -35,7 +35,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.OperationFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
-import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 /**
@@ -44,6 +43,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
  * @generated
  */
 public class OperationEditPart extends EMFGraphNodeEditPart {
+
 	/**
 	 * Constructor
 	 *
@@ -132,8 +132,7 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 		if (getModelOperation().getName() != null
 				&& !"".equals(getModelOperation().getName())) {
 			text = getModelOperation().getName();
-		}
-		else {
+		} else {
 			text = "null";
 		}
 		Boolean first = true;
@@ -161,7 +160,10 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 				first = false;
 			else
 				text += ",";
-			text += param.getName() + ":" + KermetaUtils.getDefault().getLabelForType(param.getType());
+			text += param.getName()
+					+ ":"
+					+ KermetaUtils.getDefault()
+							.getLabelForType(param.getType());
 		}
 		text += ")";
 		// The return type
@@ -170,7 +172,7 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 					+ KermetaUtils.getDefault().getLabelForType(
 							getModelOperation().getType());
 		}
-		
+
 		label.setText(text);
 	}
 

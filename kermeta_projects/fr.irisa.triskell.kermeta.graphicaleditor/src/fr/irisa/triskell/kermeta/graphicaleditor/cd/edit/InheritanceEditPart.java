@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: InheritanceEditPart.java,v 1.3 2007-02-19 18:04:53 cfaucher Exp $
+ * $Id: InheritanceEditPart.java,v 1.4 2007-07-11 14:50:46 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

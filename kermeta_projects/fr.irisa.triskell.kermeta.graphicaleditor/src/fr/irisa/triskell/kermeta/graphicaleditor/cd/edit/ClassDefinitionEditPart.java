@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionEditPart.java,v 1.3 2007-04-19 15:17:05 cfaucher Exp $
+ * $Id: ClassDefinitionEditPart.java,v 1.4 2007-07-11 14:50:46 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -33,6 +33,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.figures.ClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.ClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.InheritanceEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PropertyBiDirecEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.policies.PropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -69,6 +70,9 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(KmEditPolicyConstants.PROPERTY_EDITPOLICY,
 				new PropertyEdgeCreationEditPolicy());
+
+		installEditPolicy(KmEditPolicyConstants.PROPERTYBIDIREC_EDITPOLICY,
+				new PropertyBiDirecEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
@@ -129,19 +133,21 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 		ComposedLabel lbl = (ComposedLabel) fig.getLabel();
 
 		if (getClassDefinition() != null
-				&& getClassDefinition().getName() != null){
+				&& getClassDefinition().getName() != null) {
 			ClassDefinition cd = getClassDefinition();
-			String typeParameterString ="";
-			if(!cd.getTypeParameter().isEmpty()){
-				typeParameterString="<";
+			String typeParameterString = "";
+			if (!cd.getTypeParameter().isEmpty()) {
+				typeParameterString = "<";
 				Iterator it = cd.getTypeParameter().iterator();
-				while(it.hasNext()){
-					typeParameterString+=KermetaUtils.getDefault().getLabelForType((Type)it.next());
-					if(it.hasNext()) typeParameterString+=", ";
+				while (it.hasNext()) {
+					typeParameterString += KermetaUtils.getDefault()
+							.getLabelForType((Type) it.next());
+					if (it.hasNext())
+						typeParameterString += ", ";
 				}
-				typeParameterString+=">";
+				typeParameterString += ">";
 			}
-			lbl.setMain(cd.getName()+typeParameterString);
+			lbl.setMain(cd.getName() + typeParameterString);
 		}
 		String imageLabel = "";
 		if (getClassDefinition().isIsAbstract()) {
@@ -175,9 +181,11 @@ public class ClassDefinitionEditPart extends EMFGraphNodeEditPart {
 							.getElement(((GraphElement) getParent().getModel())
 									.getSemanticModel().getGraphElement())) {
 				if (owningPackage.getName() != null) {
-					lbl.setSuffix("from " + NamedElementHelper.getMangledQualifiedName(owningPackage));
+					lbl.setSuffix("from "
+							+ NamedElementHelper
+									.getMangledQualifiedName(owningPackage));
 				}
-				
+
 			} else {
 				lbl.setSuffix("");
 			}

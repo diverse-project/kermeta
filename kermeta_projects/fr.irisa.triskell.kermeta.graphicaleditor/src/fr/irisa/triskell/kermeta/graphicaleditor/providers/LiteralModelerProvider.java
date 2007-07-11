@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: LiteralModelerProvider.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: LiteralModelerProvider.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

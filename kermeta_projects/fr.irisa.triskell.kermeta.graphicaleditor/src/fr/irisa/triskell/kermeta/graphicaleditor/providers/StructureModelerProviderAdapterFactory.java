@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: StructureModelerProviderAdapterFactory.java,v 1.4 2007-06-06 15:52:04 cfaucher Exp $
+ * $Id: StructureModelerProviderAdapterFactory.java,v 1.5 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -35,21 +35,21 @@ public class StructureModelerProviderAdapterFactory extends
 	 * 
 	 * @generated
 	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+	private ComposedAdapterFactory parentAdapterFactory;
 
 	/**
 	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
 	 * 
 	 * @generated
 	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	private IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
 	 * 
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	private Collection supportedTypes = new ArrayList();
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Class} instances.
@@ -64,6 +64,13 @@ public class StructureModelerProviderAdapterFactory extends
 	 * @generated
 	 */
 	private ObjectModelerProvider objectModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Model} instances.
+	 * 
+	 * @generated
+	 */
+	private ModelModelerProvider modelModelerProvider;
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Operation} instances.
@@ -185,6 +192,34 @@ public class StructureModelerProviderAdapterFactory extends
 	private TypeVariableModelerProvider typevariableModelerProvider;
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable} instances.
+	 * 
+	 * @generated
+	 */
+	private ObjectTypeVariableModelerProvider objecttypevariableModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer} instances.
+	 * 
+	 * @generated
+	 */
+	private VirtualTypeContainerModelerProvider virtualtypecontainerModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable} instances.
+	 * 
+	 * @generated
+	 */
+	private ModelTypeVariableModelerProvider modeltypevariableModelerProvider;
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.VirtualType} instances.
+	 * 
+	 * @generated
+	 */
+	private VirtualTypeModelerProvider virtualtypeModelerProvider;
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ProductType} instances.
 	 * 
 	 * @generated
@@ -254,8 +289,8 @@ public class StructureModelerProviderAdapterFactory extends
 	 */
 	public StructureModelerProviderAdapterFactory() {
 		supportedTypes.add(ILabelFeatureProvider.class);
-        supportedTypes.add(IDeletePartnerProvider.class);
-        //supportedTypes.add(IDeleteObjectProvider.class);
+		supportedTypes.add(IDeletePartnerProvider.class);
+		//supportedTypes.add(IDeleteObjectProvider.class);
 	}
 
 	/**
@@ -381,6 +416,20 @@ public class StructureModelerProviderAdapterFactory extends
 		}
 
 		return objectModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Model}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createModelAdapter() {
+		if (modelModelerProvider == null) {
+			modelModelerProvider = new ModelModelerProvider(this);
+		}
+
+		return modelModelerProvider;
 	}
 
 	/**
@@ -627,6 +676,65 @@ public class StructureModelerProviderAdapterFactory extends
 	}
 
 	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createObjectTypeVariableAdapter() {
+		if (objecttypevariableModelerProvider == null) {
+			objecttypevariableModelerProvider = new ObjectTypeVariableModelerProvider(
+					this);
+		}
+
+		return objecttypevariableModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createVirtualTypeContainerAdapter() {
+		if (virtualtypecontainerModelerProvider == null) {
+			virtualtypecontainerModelerProvider = new VirtualTypeContainerModelerProvider(
+					this);
+		}
+
+		return virtualtypecontainerModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createModelTypeVariableAdapter() {
+		if (modeltypevariableModelerProvider == null) {
+			modeltypevariableModelerProvider = new ModelTypeVariableModelerProvider(
+					this);
+		}
+
+		return modeltypevariableModelerProvider;
+	}
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.VirtualType}.
+	 *
+	 * @return the Adapter
+	 * @generated
+	 */
+	public Adapter createVirtualTypeAdapter() {
+		if (virtualtypeModelerProvider == null) {
+			virtualtypeModelerProvider = new VirtualTypeModelerProvider(this);
+		}
+
+		return virtualtypeModelerProvider;
+	}
+
+	/**
 	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ProductType}.
 	 *
 	 * @return the Adapter
@@ -763,62 +871,105 @@ public class StructureModelerProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void dispose() {
-		if (classModelerProvider != null)
+		if (classModelerProvider != null) {
 			classModelerProvider.dispose();
-		if (objectModelerProvider != null)
+		}
+		if (objectModelerProvider != null) {
 			objectModelerProvider.dispose();
-		if (operationModelerProvider != null)
-			operationModelerProvider.dispose();
-		if (propertyModelerProvider != null)
-			propertyModelerProvider.dispose();
-		if (typeModelerProvider != null)
-			typeModelerProvider.dispose();
-		if (typecontainerModelerProvider != null)
-			typecontainerModelerProvider.dispose();
-		if (enumerationliteralModelerProvider != null)
-			enumerationliteralModelerProvider.dispose();
-		if (multiplicityelementModelerProvider != null)
-			multiplicityelementModelerProvider.dispose();
-		if (datatypeModelerProvider != null)
-			datatypeModelerProvider.dispose();
-		if (enumerationModelerProvider != null)
-			enumerationModelerProvider.dispose();
-		if (namedelementModelerProvider != null)
-			namedelementModelerProvider.dispose();
-		if (packageModelerProvider != null)
-			packageModelerProvider.dispose();
-		if (parameterModelerProvider != null)
-			parameterModelerProvider.dispose();
-		if (primitivetypeModelerProvider != null)
-			primitivetypeModelerProvider.dispose();
-		if (typedelementModelerProvider != null)
-			typedelementModelerProvider.dispose();
-		if (tagModelerProvider != null)
-			tagModelerProvider.dispose();
-		if (constraintModelerProvider != null)
-			constraintModelerProvider.dispose();
-		if (classdefinitionModelerProvider != null)
-			classdefinitionModelerProvider.dispose();
-		if (typevariableModelerProvider != null)
-			typevariableModelerProvider.dispose();
-		if (producttypeModelerProvider != null)
-			producttypeModelerProvider.dispose();
-		if (functiontypeModelerProvider != null)
-			functiontypeModelerProvider.dispose();
-		if (typevariablebindingModelerProvider != null)
-			typevariablebindingModelerProvider.dispose();
-		if (typedefinitionModelerProvider != null)
-			typedefinitionModelerProvider.dispose();
-		if (voidtypeModelerProvider != null)
-			voidtypeModelerProvider.dispose();
-		if (parameterizedtypeModelerProvider != null)
-			parameterizedtypeModelerProvider.dispose();
-		if (generictypedefinitionModelerProvider != null)
-			generictypedefinitionModelerProvider.dispose();
-		if (modeltypeModelerProvider != null)
+		}
+		if (modelModelerProvider != null) {
+			modelModelerProvider.dispose();
+		}
+		if (modeltypeModelerProvider != null) {
 			modeltypeModelerProvider.dispose();
-		if (typedefinitioncontainerModelerProvider != null)
+		}
+		if (operationModelerProvider != null) {
+			operationModelerProvider.dispose();
+		}
+		if (propertyModelerProvider != null) {
+			propertyModelerProvider.dispose();
+		}
+		if (typeModelerProvider != null) {
+			typeModelerProvider.dispose();
+		}
+		if (typecontainerModelerProvider != null) {
+			typecontainerModelerProvider.dispose();
+		}
+		if (enumerationliteralModelerProvider != null) {
+			enumerationliteralModelerProvider.dispose();
+		}
+		if (typevariablebindingModelerProvider != null) {
+			typevariablebindingModelerProvider.dispose();
+		}
+		if (multiplicityelementModelerProvider != null) {
+			multiplicityelementModelerProvider.dispose();
+		}
+		if (datatypeModelerProvider != null) {
+			datatypeModelerProvider.dispose();
+		}
+		if (enumerationModelerProvider != null) {
+			enumerationModelerProvider.dispose();
+		}
+		if (namedelementModelerProvider != null) {
+			namedelementModelerProvider.dispose();
+		}
+		if (packageModelerProvider != null) {
+			packageModelerProvider.dispose();
+		}
+		if (parameterModelerProvider != null) {
+			parameterModelerProvider.dispose();
+		}
+		if (primitivetypeModelerProvider != null) {
+			primitivetypeModelerProvider.dispose();
+		}
+		if (typedelementModelerProvider != null) {
+			typedelementModelerProvider.dispose();
+		}
+		if (tagModelerProvider != null) {
+			tagModelerProvider.dispose();
+		}
+		if (constraintModelerProvider != null) {
+			constraintModelerProvider.dispose();
+		}
+		if (classdefinitionModelerProvider != null) {
+			classdefinitionModelerProvider.dispose();
+		}
+		if (generictypedefinitionModelerProvider != null) {
+			generictypedefinitionModelerProvider.dispose();
+		}
+		if (parameterizedtypeModelerProvider != null) {
+			parameterizedtypeModelerProvider.dispose();
+		}
+		if (typevariableModelerProvider != null) {
+			typevariableModelerProvider.dispose();
+		}
+		if (objecttypevariableModelerProvider != null) {
+			objecttypevariableModelerProvider.dispose();
+		}
+		if (virtualtypecontainerModelerProvider != null) {
+			virtualtypecontainerModelerProvider.dispose();
+		}
+		if (modeltypevariableModelerProvider != null) {
+			modeltypevariableModelerProvider.dispose();
+		}
+		if (virtualtypeModelerProvider != null) {
+			virtualtypeModelerProvider.dispose();
+		}
+		if (typedefinitionModelerProvider != null) {
+			typedefinitionModelerProvider.dispose();
+		}
+		if (producttypeModelerProvider != null) {
+			producttypeModelerProvider.dispose();
+		}
+		if (functiontypeModelerProvider != null) {
+			functiontypeModelerProvider.dispose();
+		}
+		if (voidtypeModelerProvider != null) {
+			voidtypeModelerProvider.dispose();
+		}
+		if (typedefinitioncontainerModelerProvider != null) {
 			typedefinitioncontainerModelerProvider.dispose();
+		}
 	}
 
 }

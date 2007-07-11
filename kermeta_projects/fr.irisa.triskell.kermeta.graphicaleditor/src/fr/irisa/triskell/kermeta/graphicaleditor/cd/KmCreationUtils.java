@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmCreationUtils.java,v 1.3 2007-07-05 15:16:18 cfaucher Exp $
+ * $Id: KmCreationUtils.java,v 1.4 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -14,7 +14,6 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.editor.AbstractCreationUtils;
 import org.topcased.modeler.graphconf.DiagramGraphConf;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.behavior.util.BehaviorSwitch;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
@@ -213,26 +212,26 @@ public class KmCreationUtils extends AbstractCreationUtils {
 
 	/**
 	 * @see org.topcased.modeler.editor.ICreationUtils#createGraphElement(org.eclipse.emf.ecore.EObject, java.lang.String)
-	 * @generated NOT
+	 * @generated
 	 */
 	public GraphElement createGraphElement(EObject obj, String presentation) {
 		Object graphElt = null;
 
-		if ("http://kermeta/kermeta.ecore".equals(obj.eClass().getEPackage()
+		if ("http://www.kermeta.org".equals(obj.eClass().getEPackage()
 				.getNsURI())) {
 			graphElt = new GraphicKmSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://kermeta/kermeta.ecore//language".equals(obj.eClass()
+		if ("http://www.kermeta.org//language".equals(obj.eClass()
 				.getEPackage().getNsURI())) {
 			graphElt = new GraphicLanguageSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://kermeta/kermeta.ecore//language/behavior".equals(obj
-				.eClass().getEPackage().getNsURI())) {
+		if ("http://www.kermeta.org//language/behavior".equals(obj.eClass()
+				.getEPackage().getNsURI())) {
 			graphElt = new GraphicBehaviorSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://kermeta/kermeta.ecore//language/structure".equals(obj
+		if ("http://www.kermeta.org//language/structure".equals(obj
 				.eClass().getEPackage().getNsURI())) {
-			
+
 			// Switch according to the property type
 			if(obj instanceof Property) {
 				Property prop = (Property) obj;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.2 2007-07-05 15:16:18 cfaucher Exp $
+ * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.3 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -22,6 +22,9 @@ import org.topcased.modeler.utils.Utils;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.KmSimpleObjectConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+
+//import fr.irisa.triskell.kermeta.language.structure.*;
+
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
@@ -92,6 +95,19 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						}
 					}
 
+					if (eltObject2 instanceof ClassDefinition) {
+						if (autoRef) {
+							createPropertyBiDirecFromClassDefinitionToClassDefinition(
+									elt, elt);
+						} else {
+							// if the elt is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+							createPropertyBiDirecFromClassDefinitionToClassDefinition(
+									elt, elt2);
+							// if elt is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+							createPropertyBiDirecFromClassDefinitionToClassDefinition(
+									elt2, elt);
+						}
+					}
 				}
 			}
 		}
@@ -184,6 +200,33 @@ public class ClassDefinitionRestoreConnectionCommand extends
 						}
 					}
 				}
+			}
+		}
+	}
+
+	/**
+	 * @param srcElt the source element
+	 * @param targetElt the target element
+	 * @generated
+	 */
+	private void createPropertyBiDirecFromClassDefinitionToClassDefinition(
+			GraphElement srcElt, GraphElement targetElt) {
+		ClassDefinition sourceObject = (ClassDefinition) Utils
+				.getElement(srcElt);
+		ClassDefinition targetObject = (ClassDefinition) Utils
+				.getElement(targetElt);
+
+		if (false) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcElt, targetElt,
+					KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC)
+					.size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC);
+				PropertyBiDirecEdgeCreationCommand cmd = new PropertyBiDirecEdgeCreationCommand(
+						null, edge, srcElt, false);
+				cmd.setTarget(targetElt);
+				add(cmd);
 			}
 		}
 	}

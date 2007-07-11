@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: InheritanceEdgeCreationEditPolicy.java,v 1.3 2007-04-19 15:00:05 cfaucher Exp $
+ * $Id: InheritanceEdgeCreationEditPolicy.java,v 1.4 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -21,7 +21,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.commands.InheritanceEdgeCrea
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.util.KermetaCommonUtils;
 
 /**
  * Inheritance edge creation
@@ -47,9 +46,9 @@ public class InheritanceEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
 		if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			return (KmSimpleObjectConstants.SIMPLE_OBJECT_INHERITANCE
+			return KmSimpleObjectConstants.SIMPLE_OBJECT_INHERITANCE
 					.equals(((SimpleSemanticModelElement) edge
-							.getSemanticModel()).getTypeInfo()));
+							.getSemanticModel()).getTypeInfo());
 		}
 		return false;
 	}
@@ -83,7 +82,9 @@ public class InheritanceEdgeCreationEditPolicy extends
 			// Prevent a cyclic inheritance
 			if (!sourceObject.equals(targetObject)
 					&& checkSuperTypeUnicity(sourceObject, targetObject)
-					&& !ClassDefinitionHelper.isSuperClassOf((ClassDefinition) sourceObject, (ClassDefinition) targetObject)) {
+					&& !ClassDefinitionHelper.isSuperClassOf(
+							(ClassDefinition) sourceObject,
+							(ClassDefinition) targetObject)) {
 				return true;
 			}
 			// end-addition
@@ -109,8 +110,8 @@ public class InheritanceEdgeCreationEditPolicy extends
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof ClassDefinition
-				&& targetObject instanceof ClassDefinition) {
+		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition
+				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
 			return new SourceTargetData(
 					false,
 					false,
@@ -151,7 +152,8 @@ public class InheritanceEdgeCreationEditPolicy extends
 				.isUnique()) {
 			// check if an inheritance relation always exists between the 2
 			// given classes
-			if(ClassDefinitionHelper.isSuperClassOfByName(targetClassDef,sourceClassDef)) {
+			if (ClassDefinitionHelper.isSuperClassOfByName(targetClassDef,
+					sourceClassDef)) {
 				isvalid = false;
 			}
 		}

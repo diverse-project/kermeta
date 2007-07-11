@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PackageEditPart.java,v 1.2 2007-04-19 15:17:05 cfaucher Exp $
+ * $Id: PackageEditPart.java,v 1.3 2007-07-11 14:50:46 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -106,7 +106,9 @@ public class PackageEditPart extends EMFGraphNodeEditPart {
 								.getSemanticModel().getGraphElement())) {
 			if (getModelPackage().getNestingPackage().getName() != null) {
 				lbl.setSuffix("from "
-						+ NamedElementHelper.getMangledQualifiedName(getModelPackage().getNestingPackage()));
+						+ NamedElementHelper
+								.getMangledQualifiedName(getModelPackage()
+										.getNestingPackage()));
 			}
 		} else {
 			lbl.setSuffix("");

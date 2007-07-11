@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: BehaviorModelerProviderAdapterFactory.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: BehaviorModelerProviderAdapterFactory.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -34,21 +34,21 @@ public class BehaviorModelerProviderAdapterFactory extends
 	 * 
 	 * @generated
 	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+	private ComposedAdapterFactory parentAdapterFactory;
 
 	/**
 	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
 	 * 
 	 * @generated
 	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	private IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
 	 * 
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	private Collection supportedTypes = new ArrayList();
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.behavior.Assignment} instances.
@@ -719,58 +719,84 @@ public class BehaviorModelerProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void dispose() {
-		if (assignmentModelerProvider != null)
+		if (assignmentModelerProvider != null) {
 			assignmentModelerProvider.dispose();
-		if (expressionModelerProvider != null)
+		}
+		if (expressionModelerProvider != null) {
 			expressionModelerProvider.dispose();
-		if (callexpressionModelerProvider != null)
+		}
+		if (callexpressionModelerProvider != null) {
 			callexpressionModelerProvider.dispose();
-		if (blockModelerProvider != null)
+		}
+		if (blockModelerProvider != null) {
 			blockModelerProvider.dispose();
-		if (callvariableModelerProvider != null)
+		}
+		if (callvariableModelerProvider != null) {
 			callvariableModelerProvider.dispose();
-		if (callfeatureModelerProvider != null)
+		}
+		if (callfeatureModelerProvider != null) {
 			callfeatureModelerProvider.dispose();
-		if (callsuperoperationModelerProvider != null)
+		}
+		if (callsuperoperationModelerProvider != null) {
 			callsuperoperationModelerProvider.dispose();
-		if (callresultModelerProvider != null)
+		}
+		if (callresultModelerProvider != null) {
 			callresultModelerProvider.dispose();
-		if (callvalueModelerProvider != null)
+		}
+		if (callvalueModelerProvider != null) {
 			callvalueModelerProvider.dispose();
-		if (conditionalModelerProvider != null)
+		}
+		if (conditionalModelerProvider != null) {
 			conditionalModelerProvider.dispose();
-		if (raiseModelerProvider != null)
+		}
+		if (raiseModelerProvider != null) {
 			raiseModelerProvider.dispose();
-		if (rescueModelerProvider != null)
+		}
+		if (rescueModelerProvider != null) {
 			rescueModelerProvider.dispose();
-		if (typereferenceModelerProvider != null)
+		}
+		if (typereferenceModelerProvider != null) {
 			typereferenceModelerProvider.dispose();
-		if (literalModelerProvider != null)
+		}
+		if (literalModelerProvider != null) {
 			literalModelerProvider.dispose();
-		if (emptyexpressionModelerProvider != null)
+		}
+		if (emptyexpressionModelerProvider != null) {
 			emptyexpressionModelerProvider.dispose();
-		if (javastaticcallModelerProvider != null)
+		}
+		if (javastaticcallModelerProvider != null) {
 			javastaticcallModelerProvider.dispose();
-		if (lambdaexpressionModelerProvider != null)
+		}
+		if (lambdaexpressionModelerProvider != null) {
 			lambdaexpressionModelerProvider.dispose();
-		if (lambdaparameterModelerProvider != null)
+		}
+		if (lambdaparameterModelerProvider != null) {
 			lambdaparameterModelerProvider.dispose();
-		if (integerliteralModelerProvider != null)
+		}
+		if (integerliteralModelerProvider != null) {
 			integerliteralModelerProvider.dispose();
-		if (stringliteralModelerProvider != null)
+		}
+		if (stringliteralModelerProvider != null) {
 			stringliteralModelerProvider.dispose();
-		if (booleanliteralModelerProvider != null)
+		}
+		if (booleanliteralModelerProvider != null) {
 			booleanliteralModelerProvider.dispose();
-		if (typeliteralModelerProvider != null)
+		}
+		if (typeliteralModelerProvider != null) {
 			typeliteralModelerProvider.dispose();
-		if (voidliteralModelerProvider != null)
+		}
+		if (voidliteralModelerProvider != null) {
 			voidliteralModelerProvider.dispose();
-		if (loopModelerProvider != null)
+		}
+		if (loopModelerProvider != null) {
 			loopModelerProvider.dispose();
-		if (selfexpressionModelerProvider != null)
+		}
+		if (selfexpressionModelerProvider != null) {
 			selfexpressionModelerProvider.dispose();
-		if (variabledeclModelerProvider != null)
+		}
+		if (variabledeclModelerProvider != null) {
 			variabledeclModelerProvider.dispose();
+		}
 	}
 
 }

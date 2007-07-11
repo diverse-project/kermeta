@@ -1,8 +1,10 @@
+
 /*******************************************************************************
- * $Id: DeleteInheritanceEdgeAction.java,v 1.5 2007-04-18 16:02:13 cfaucher Exp $
+ * $Id: DeleteInheritanceEdgeAction.java,v 1.6 2007-07-11 14:50:46 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
+
 package fr.irisa.triskell.kermeta.graphicaleditor.cd.actions;
 
 import org.eclipse.gef.commands.CommandStack;
@@ -27,22 +29,22 @@ import fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor;
 public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 
 	/**
-     * The model/figure object
-     * @generated NOT
-     */
-    private Object template;
-    
-    /**
-     * The EditPart object
-     * @generated NOT
-     */
-    private IEditorPart targetEditor;
-    
-    /**
-     * The WorkbenchPart object
-     * @generated NOT
-     */
-    private IWorkbenchPart targetPart;
+	 * The model/figure object
+	 * @generated NOT
+	 */
+	private Object template;
+
+	/**
+	 * The EditPart object
+	 * @generated NOT
+	 */
+	private IEditorPart targetEditor;
+
+	/**
+	 * The WorkbenchPart object
+	 * @generated NOT
+	 */
+	private IWorkbenchPart targetPart;
 
 	/**
 	 * Constructor for DeleteInheritanceEdgeAction
@@ -51,7 +53,7 @@ public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 	public DeleteInheritanceEdgeAction() {
 		super();
 	}
-	
+
 	/**
 	 * @generated NOT
 	 */
@@ -72,12 +74,13 @@ public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 	 * @generated NOT
 	 */
 	public void run(IAction action) {
-		if(this.template != null) {
+		if (this.template != null) {
 			InheritanceEdgeDeleteCommand cmd = new InheritanceEdgeDeleteCommand();
 			cmd.setPartToBeDeleted(this.template);
-			if(targetEditor instanceof KmEditor) {
+			if (targetEditor instanceof KmEditor) {
 				KmEditor myKmEditor = (KmEditor) targetEditor;
-				((CommandStack) myKmEditor.getAdapter(CommandStack.class)).execute(cmd);
+				((CommandStack) myKmEditor.getAdapter(CommandStack.class))
+						.execute(cmd);
 			}
 		}
 	}
@@ -87,12 +90,11 @@ public class DeleteInheritanceEdgeAction implements IEditorActionDelegate {
 	 * @generated NOT
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-		
-		if(selection instanceof IStructuredSelection)
-		{
+
+		if (selection instanceof IStructuredSelection) {
 			Object first = ((IStructuredSelection) selection).getFirstElement();
-			if(first instanceof InheritanceEditPart) {
-				if(((InheritanceEditPart) first).getModel() instanceof GraphElement) {
+			if (first instanceof InheritanceEditPart) {
+				if (((InheritanceEditPart) first).getModel() instanceof GraphElement) {
 					this.template = ((InheritanceEditPart) first).getModel();
 					action.setEnabled(true);
 				}

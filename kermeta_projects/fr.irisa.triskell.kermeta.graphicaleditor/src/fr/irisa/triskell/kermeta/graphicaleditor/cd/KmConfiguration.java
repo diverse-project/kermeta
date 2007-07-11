@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmConfiguration.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: KmConfiguration.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -126,8 +126,9 @@ public class KmConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	public EditPartFactory getEditPartFactory() {
-		if (editPartFactory == null)
+		if (editPartFactory == null) {
 			editPartFactory = new KmEditPartFactory();
+		}
 
 		return editPartFactory;
 	}
@@ -137,8 +138,9 @@ public class KmConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	public IPaletteManager getPaletteManager() {
-		if (paletteManager == null)
+		if (paletteManager == null) {
 			paletteManager = new KmPaletteManager(getCreationUtils());
+		}
 
 		return paletteManager;
 	}
@@ -148,8 +150,9 @@ public class KmConfiguration implements IConfiguration {
 	 * @generated
 	 */
 	public ICreationUtils getCreationUtils() {
-		if (creationUtils == null)
+		if (creationUtils == null) {
 			creationUtils = new KmCreationUtils(getDiagramGraphConf());
+		}
 
 		return creationUtils;
 	}

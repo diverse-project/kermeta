@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditPartFactory.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: KmEditPartFactory.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.InheritanceEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.KmDiagramEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.OperationEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PackageEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PropertyBiDirecEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PropertyEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.edit.PropertyNodeEditPart;
 import fr.irisa.triskell.kermeta.language.behavior.util.BehaviorSwitch;
@@ -52,20 +53,20 @@ public class KmEditPartFactory implements EditPartFactory {
 			if (element != null) {
 				Object editPart = null;
 
-				if ("http://kermeta/kermeta.ecore".equals(element.eClass()
+				if ("http://www.kermeta.org".equals(element.eClass()
 						.getEPackage().getNsURI())) {
 					editPart = new NodeKmSwitch(node).doSwitch(element);
 				}
-				if ("http://kermeta/kermeta.ecore//language".equals(element
-						.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org//language".equals(element.eClass()
+						.getEPackage().getNsURI())) {
 					editPart = new NodeLanguageSwitch(node).doSwitch(element);
 				}
-				if ("http://kermeta/kermeta.ecore//language/behavior"
-						.equals(element.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org//language/behavior".equals(element
+						.eClass().getEPackage().getNsURI())) {
 					editPart = new NodeBehaviorSwitch(node).doSwitch(element);
 				}
-				if ("http://kermeta/kermeta.ecore//language/structure"
-						.equals(element.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org//language/structure".equals(element
+						.eClass().getEPackage().getNsURI())) {
 					editPart = new NodeStructureSwitch(node).doSwitch(element);
 				}
 
@@ -82,20 +83,20 @@ public class KmEditPartFactory implements EditPartFactory {
 			if (element != null) {
 				Object editPart = null;
 
-				if ("http://kermeta/kermeta.ecore".equals(element.eClass()
+				if ("http://www.kermeta.org".equals(element.eClass()
 						.getEPackage().getNsURI())) {
 					editPart = new EdgeKmSwitch(edge).doSwitch(element);
 				}
-				if ("http://kermeta/kermeta.ecore//language".equals(element
-						.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org//language".equals(element.eClass()
+						.getEPackage().getNsURI())) {
 					editPart = new EdgeLanguageSwitch(edge).doSwitch(element);
 				}
-				if ("http://kermeta/kermeta.ecore//language/behavior"
-						.equals(element.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org//language/behavior".equals(element
+						.eClass().getEPackage().getNsURI())) {
 					editPart = new EdgeBehaviorSwitch(edge).doSwitch(element);
 				}
-				if ("http://kermeta/kermeta.ecore//language/structure"
-						.equals(element.eClass().getEPackage().getNsURI())) {
+				if ("http://www.kermeta.org//language/structure".equals(element
+						.eClass().getEPackage().getNsURI())) {
 					editPart = new EdgeStructureSwitch(edge).doSwitch(element);
 				}
 
@@ -106,8 +107,14 @@ public class KmEditPartFactory implements EditPartFactory {
 				// Manage the Element that are not associated with a model object
 				if (KmSimpleObjectConstants.SIMPLE_OBJECT_INHERITANCE
 						.equals(((SimpleSemanticModelElement) edge
-								.getSemanticModel()).getTypeInfo()))
+								.getSemanticModel()).getTypeInfo())) {
 					return new InheritanceEditPart(edge);
+				}
+				if (KmSimpleObjectConstants.SIMPLE_OBJECT_PROPERTYBIDIREC
+						.equals(((SimpleSemanticModelElement) edge
+								.getSemanticModel()).getTypeInfo())) {
+					return new PropertyBiDirecEditPart(edge);
+				}
 			}
 
 			return new GraphEdgeEditPart(edge);

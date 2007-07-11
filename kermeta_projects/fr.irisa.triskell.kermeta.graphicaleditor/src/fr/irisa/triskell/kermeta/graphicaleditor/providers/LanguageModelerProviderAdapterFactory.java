@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: LanguageModelerProviderAdapterFactory.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+ * $Id: LanguageModelerProviderAdapterFactory.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -34,21 +34,21 @@ public class LanguageModelerProviderAdapterFactory extends
 	 * 
 	 * @generated
 	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+	private ComposedAdapterFactory parentAdapterFactory;
 
 	/**
 	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
 	 * 
 	 * @generated
 	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+	private IChangeNotifier changeNotifier = new ChangeNotifier();
 
 	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
 	 * 
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	private Collection supportedTypes = new ArrayList();
 
 	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.DummyClass} instances.
@@ -183,8 +183,9 @@ public class LanguageModelerProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void dispose() {
-		if (dummyclassModelerProvider != null)
+		if (dummyclassModelerProvider != null) {
 			dummyclassModelerProvider.dispose();
+		}
 	}
 
 }
