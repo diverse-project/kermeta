@@ -9919,25 +9919,25 @@
             </statement>
           </getterBody>
         </ownedAttribute>
-        <ownedAttribute tag="/253" name="ownedAllCompositeAttribute" type="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+        <ownedAttribute tag="/253" name="allOwnedCompositeAttribute" type="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Property"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/Collection/addAll/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
-                <typeParamBinding variable="/0/standard/Set/G" type="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                <typeParamBinding variable="/0/standard/Set/G" type="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Property"/>
                 </typeParamBinding>
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.0/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.0/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="/0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
-                  <typeref type="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                  <typeref type="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.0/@containedType.0" upper="1"/>
                 </target>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/Collection/addAll/@body/@containedType.0" name="each" staticOperation="/0/standard/Collection/each">
-              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0" right="/0/standard/Set/add/@containedType.0">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0" right="/0/standard/Set/add/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:ProductType" type="/0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                 </containedType>
                 <parameters name="oa"/>
@@ -9960,11 +9960,11 @@
                   </condition>
                 </body>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.1/@target/@containedType.0" name="allOwnedAttribute" staticProperty="/0/reflection/ClassDefinition/allOwnedAttribute">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.1/@target/@containedType.0" name="allOwnedAttribute" staticProperty="/0/reflection/ClassDefinition/allOwnedAttribute">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
                   <typeParamBinding variable="/0/standard/Set/G" type="/0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                 </containedType>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/reflection/ClassDefinition/ownedAllCompositeAttribute/@getterBody/@statement.1/@target/@target/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/reflection/ClassDefinition/allOwnedCompositeAttribute/@getterBody/@statement.1/@target/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/ClassDefinition"/>
                 </target>
               </target>
@@ -10025,25 +10025,25 @@
             </statement>
           </getterBody>
         </ownedAttribute>
-        <ownedAttribute tag="/255" name="ownedAllAttributeAsReference" type="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+        <ownedAttribute tag="/255" name="allOwnedAttributeAsReference" type="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Property"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/Collection/addAll/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
-                <typeParamBinding variable="/0/standard/Set/G" type="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                <typeParamBinding variable="/0/standard/Set/G" type="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Property"/>
                 </typeParamBinding>
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.0/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.0/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="/0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
-                  <typeref type="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                  <typeref type="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.0/@containedType.0" upper="1"/>
                 </target>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/Collection/addAll/@body/@containedType.0" name="each" staticOperation="/0/standard/Collection/each">
-              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0" right="/0/standard/Set/add/@containedType.0">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0" right="/0/standard/Set/add/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:ProductType" type="/0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                 </containedType>
                 <parameters name="oa"/>
@@ -10068,11 +10068,11 @@
                   </condition>
                 </body>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.1/@target/@containedType.0" name="allOwnedAttribute" staticProperty="/0/reflection/ClassDefinition/allOwnedAttribute">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.1/@target/@containedType.0" name="allOwnedAttribute" staticProperty="/0/reflection/ClassDefinition/allOwnedAttribute">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
                   <typeParamBinding variable="/0/standard/Set/G" type="/0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                 </containedType>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsReference/@getterBody/@statement.1/@target/@target/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsReference/@getterBody/@statement.1/@target/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/ClassDefinition"/>
                 </target>
               </target>
@@ -10131,25 +10131,25 @@
             </statement>
           </getterBody>
         </ownedAttribute>
-        <ownedAttribute tag="/257" name="ownedAllAttributeAsProperty" type="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+        <ownedAttribute tag="/257" name="allOwnedAttributeAsProperty" type="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Property"/>
           <getterBody xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/Collection/addAll/@body/@containedType.0">
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
-                <typeParamBinding variable="/0/standard/Set/G" type="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                <typeParamBinding variable="/0/standard/Set/G" type="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Property"/>
                 </typeParamBinding>
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.0/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.0/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
                 <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="/0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
-                  <typeref type="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                  <typeref type="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.0/@containedType.0" upper="1"/>
                 </target>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/Collection/addAll/@body/@containedType.0" name="each" staticOperation="/0/standard/Collection/each">
-              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0" right="/0/standard/Set/add/@containedType.0">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0" right="/0/standard/Set/add/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:ProductType" type="/0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                 </containedType>
                 <parameters name="oa"/>
@@ -10172,11 +10172,11 @@
                   </condition>
                 </body>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.1/@target/@containedType.0" name="allOwnedAttribute" staticProperty="/0/reflection/ClassDefinition/allOwnedAttribute">
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.1/@target/@containedType.0" name="allOwnedAttribute" staticProperty="/0/reflection/ClassDefinition/allOwnedAttribute">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
                   <typeParamBinding variable="/0/standard/Set/G" type="/0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                 </containedType>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty/@getterBody/@statement.1/@target/@target/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty/@getterBody/@statement.1/@target/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/ClassDefinition"/>
                 </target>
               </target>
@@ -12727,11 +12727,11 @@
   <kermeta_language_structure:Tag name="documentation" value="/** Returns the Classes of which this class definition inherits.&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/superType"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Returns all the attributes, references, derived properties of this &#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/allOwnedAttribute"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Returns only the attributes (isComposite and not isDerived)&#xD;&#xA;  *  class definition&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/ownedCompositeAttribute"/>
-  <kermeta_language_structure:Tag name="documentation" value="/** Returns only all the attributes (isComposite and not isDerived)&#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/ownedAllCompositeAttribute"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Returns only all the attributes (isComposite and not isDerived)&#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/allOwnedCompositeAttribute"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Returns only the references (not isComposite and not isDerived)&#xD;&#xA;  *  class definition&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/ownedAttributeAsReference"/>
-  <kermeta_language_structure:Tag name="documentation" value="/** Returns only all the references (not isComposite and not isDerived)&#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/ownedAllAttributeAsReference"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Returns only all the references (not isComposite and not isDerived)&#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/allOwnedAttributeAsReference"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Returns only the properties (not isComposite and isDerived)&#xD;&#xA;  *  class definition&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/ownedAttributeAsProperty"/>
-  <kermeta_language_structure:Tag name="documentation" value="/** Returns only all the properties (not isComposite and isDerived)&#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/ownedAllAttributeAsProperty"/>
+  <kermeta_language_structure:Tag name="documentation" value="/** Returns only all the properties (not isComposite and isDerived)&#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/allOwnedAttributeAsProperty"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Returns all the operations of this &#xD;&#xA;  *  class definition including the inherited ones&#xD;&#xA;  */" object="/0/reflection/ClassDefinition/allOwnedOperation"/>
   <kermeta_language_structure:Tag name="documentation" value="/** Abstraction of the notion of typed element : each element &#xD;&#xA; * that is typed inherits this class. */" object="/0/reflection/TypedElement"/>
   <kermeta_language_structure:Tag name="documentation" value="/** The type of this model element */" object="/0/reflection/TypedElement/type"/>

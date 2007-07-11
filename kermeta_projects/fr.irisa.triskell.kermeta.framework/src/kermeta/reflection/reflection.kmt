@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.43 2007-07-10 15:06:08 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.44 2007-07-11 09:01:12 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -347,7 +347,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns only all the attributes (isComposite and not isDerived)
 	 *  class definition including the inherited ones
 	 */
-	property readonly ownedAllCompositeAttribute : set Property[0..*]
+	property readonly allOwnedCompositeAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.allOwnedAttribute.each{ oa |
@@ -373,7 +373,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns only all the references (not isComposite and not isDerived)
 	 *  class definition including the inherited ones
 	 */
-	property readonly ownedAllAttributeAsReference : set Property[0..*]
+	property readonly allOwnedAttributeAsReference : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.allOwnedAttribute.each{ oa |
@@ -399,7 +399,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns only all the properties (not isComposite and isDerived)
 	 *  class definition including the inherited ones
 	 */
-	property readonly ownedAllAttributeAsProperty : set Property[0..*]
+	property readonly allOwnedAttributeAsProperty : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    self.allOwnedAttribute.each{ oa |
