@@ -1,4 +1,4 @@
-/* $Id: OpenWithEMFTouchGraphAction.java,v 1.3 2007-06-15 16:22:34 dvojtise Exp $
+/* $Id: OpenWithEMFTouchGraphAction.java,v 1.4 2007-07-11 13:19:22 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Ecore2kmtAction.java
  * License    : EPL
@@ -26,10 +26,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IActionFilter;
 import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
+import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.views.TouchEMFModelView;
 
 public class OpenWithEMFTouchGraphAction implements IObjectActionDelegate, IActionDelegate {
@@ -60,8 +64,22 @@ public class OpenWithEMFTouchGraphAction implements IObjectActionDelegate, IActi
 	   
 		String fileLocation = file.getFullPath().toOSString();
 		if(TouchEMFModelView.currentView == null){
-			MessageDialog.openWarning( shell, "Warning", "View not opened yet cannot show the file\n" + 
-					fileLocation);
+			IWorkbench workbench = PlatformUI.getWorkbench();
+			IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
+			try {
+				page.showView(TouchNavigatorPlugin.EMFModelTouchView_ID);
+			} catch (PartInitException e) {
+				MessageDialog.openWarning( shell, "Error", "not able to open view\n" + 
+						TouchNavigatorPlugin.EMFModelTouchView_ID);
+				TouchNavigatorPlugin.internalLog.error("not able to open view " + 
+						TouchNavigatorPlugin.EMFModelTouchView_ID, e);
+			}
+			if(TouchEMFModelView.currentView == null){
+				MessageDialog.openWarning( shell, "Error", "not able to open view and load file at the same time !?\n" + 
+						TouchNavigatorPlugin.EMFModelTouchView_ID);
+				
+			}
+			else TouchEMFModelView.currentView.loadFile(fileLocation);
 		}
 		else{
 			/*MessageDialog.openInformation(

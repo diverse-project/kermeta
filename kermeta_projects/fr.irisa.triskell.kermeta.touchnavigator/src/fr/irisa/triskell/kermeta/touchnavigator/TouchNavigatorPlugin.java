@@ -15,6 +15,7 @@ public class TouchNavigatorPlugin extends AbstractUIPlugin {
 	//The shared instance.
 	private static TouchNavigatorPlugin plugin;
 	
+	public static final String EMFModelTouchView_ID = "fr.irisa.triskell.kermeta.touchnavigator.views.EMFModelTouchView";
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("TouchNavigator");
 	
