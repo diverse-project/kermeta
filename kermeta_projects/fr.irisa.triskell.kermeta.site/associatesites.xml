@@ -1,0 +1,5 @@
+<!-- $Id: associatesites.xml,v 1.1 2007-07-11 13:21:02 dvojtise Exp $ -->
+<associateSites>
+	<associateSite url="http://www.openembedd.org/update" label="openemebedd associate site"/>
+	<associateSite url="http://download.eclipse.org/modeling/mdt/updates/sites.xml" label="MDT Update Manager Site"
+</associateSites>
