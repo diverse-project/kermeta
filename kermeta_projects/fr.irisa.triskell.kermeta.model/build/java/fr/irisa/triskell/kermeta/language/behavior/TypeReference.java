@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeReference.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: TypeReference.java,v 1.3 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -19,4 +19,11 @@ import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
  * @generated
  */
 public interface TypeReference extends MultiplicityElement {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
 } // TypeReference

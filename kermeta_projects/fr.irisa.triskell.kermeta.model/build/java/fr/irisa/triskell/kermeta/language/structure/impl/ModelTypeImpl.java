@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeImpl.java,v 1.6 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: ModelTypeImpl.java,v 1.7 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -52,6 +52,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ModelTypeImpl extends TypeImpl implements ModelType {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -99,7 +106,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList baseAspects = null;
+	protected EList<TypeDefinition> baseAspects;
 
 	/**
 	 * The cached value of the '{@link #getIncludedTypeDefinition() <em>Included Type Definition</em>}' reference list.
@@ -109,7 +116,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList includedTypeDefinition = null;
+	protected EList<TypeDefinition> includedTypeDefinition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,6 +132,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.MODEL_TYPE;
 	}
@@ -176,9 +184,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getBaseAspects() {
+	public EList<TypeDefinition> getBaseAspects() {
 		if (baseAspects == null) {
-			baseAspects = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__BASE_ASPECTS);
+			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__BASE_ASPECTS);
 		}
 		return baseAspects;
 	}
@@ -188,9 +196,9 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getIncludedTypeDefinition() {
+	public EList<TypeDefinition> getIncludedTypeDefinition() {
 		if (includedTypeDefinition == null) {
-			includedTypeDefinition = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
+			includedTypeDefinition = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION);
 		}
 		return includedTypeDefinition;
 	}
@@ -222,6 +230,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
@@ -241,6 +250,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
@@ -251,11 +262,11 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 				return;
 			case StructurePackage.MODEL_TYPE__BASE_ASPECTS:
 				getBaseAspects().clear();
-				getBaseAspects().addAll((Collection)newValue);
+				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
 			case StructurePackage.MODEL_TYPE__INCLUDED_TYPE_DEFINITION:
 				getIncludedTypeDefinition().clear();
-				getIncludedTypeDefinition().addAll((Collection)newValue);
+				getIncludedTypeDefinition().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -266,6 +277,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
@@ -289,6 +301,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE__NAME:
@@ -308,7 +321,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.MODEL_TYPE__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
@@ -330,7 +344,8 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.MODEL_TYPE__NAME;
@@ -352,6 +367,7 @@ public class ModelTypeImpl extends TypeImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.6 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: ProductTypeImpl.java,v 1.7 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -42,6 +42,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,7 +55,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList type = null;
+	protected EList<Type> type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -65,6 +71,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.PRODUCT_TYPE;
 	}
@@ -148,6 +155,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -163,6 +171,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -176,6 +185,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -189,6 +199,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -205,6 +216,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -212,7 +225,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 				return;
 			case StructurePackage.PRODUCT_TYPE__TYPE:
 				getType().clear();
-				getType().addAll((Collection)newValue);
+				getType().addAll((Collection<? extends Type>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -223,6 +236,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -240,6 +254,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
@@ -255,7 +270,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER: return StructurePackage.TYPE__TYPE_CONTAINER;
@@ -270,7 +286,8 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE__TYPE_CONTAINER: return StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER;

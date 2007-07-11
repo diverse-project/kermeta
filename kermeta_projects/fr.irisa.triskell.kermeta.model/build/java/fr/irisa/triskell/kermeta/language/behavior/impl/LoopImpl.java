@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoopImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: LoopImpl.java,v 1.4 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -42,6 +42,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class LoopImpl extends ExpressionImpl implements Loop {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getInitialization() <em>Initialization</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,7 +56,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression initialization = null;
+	protected Expression initialization;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -59,7 +66,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression body = null;
+	protected Expression body;
 
 	/**
 	 * The cached value of the '{@link #getStopCondition() <em>Stop Condition</em>}' containment reference.
@@ -69,7 +76,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression stopCondition = null;
+	protected Expression stopCondition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,6 +92,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.LOOP;
 	}
@@ -292,6 +300,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.LOOP__INITIALIZATION:
@@ -309,6 +318,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.LOOP__INITIALIZATION:
@@ -329,6 +339,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.LOOP__INITIALIZATION:
@@ -349,6 +360,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.LOOP__INITIALIZATION:
@@ -369,6 +381,7 @@ public class LoopImpl extends ExpressionImpl implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.LOOP__INITIALIZATION:

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: OperationImpl.java,v 1.4 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -58,6 +58,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class OperationImpl extends MultiplicityElementImpl implements Operation {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,7 +92,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList raisedException = null;
+	protected EList<Type> raisedException;
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
@@ -95,7 +102,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedParameter = null;
+	protected EList<Parameter> ownedParameter;
 
 	/**
 	 * The cached value of the '{@link #getPre() <em>Pre</em>}' containment reference list.
@@ -105,7 +112,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList pre = null;
+	protected EList<Constraint> pre;
 
 	/**
 	 * The cached value of the '{@link #getPost() <em>Post</em>}' containment reference list.
@@ -115,7 +122,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList post = null;
+	protected EList<Constraint> post;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -125,7 +132,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression body = null;
+	protected Expression body;
 
 	/**
 	 * The cached value of the '{@link #getSuperOperation() <em>Super Operation</em>}' reference.
@@ -135,7 +142,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected Operation superOperation = null;
+	protected Operation superOperation;
 
 	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference list.
@@ -145,7 +152,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 * @ordered
 	 */
-	protected EList typeParameter = null;
+	protected EList<TypeVariable> typeParameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +168,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.OPERATION;
 	}
@@ -191,9 +199,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRaisedException() {
+	public EList<Type> getRaisedException() {
 		if (raisedException == null) {
-			raisedException = new EObjectResolvingEList(Type.class, this, StructurePackage.OPERATION__RAISED_EXCEPTION);
+			raisedException = new EObjectResolvingEList<Type>(Type.class, this, StructurePackage.OPERATION__RAISED_EXCEPTION);
 		}
 		return raisedException;
 	}
@@ -203,9 +211,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedParameter() {
+	public EList<Parameter> getOwnedParameter() {
 		if (ownedParameter == null) {
-			ownedParameter = new EObjectContainmentWithInverseEList.Resolving(Parameter.class, this, StructurePackage.OPERATION__OWNED_PARAMETER, StructurePackage.PARAMETER__OPERATION);
+			ownedParameter = new EObjectContainmentWithInverseEList.Resolving<Parameter>(Parameter.class, this, StructurePackage.OPERATION__OWNED_PARAMETER, StructurePackage.PARAMETER__OPERATION);
 		}
 		return ownedParameter;
 	}
@@ -215,9 +223,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getPre() {
+	public EList<Constraint> getPre() {
 		if (pre == null) {
-			pre = new EObjectContainmentWithInverseEList.Resolving(Constraint.class, this, StructurePackage.OPERATION__PRE, StructurePackage.CONSTRAINT__PRE_OWNER);
+			pre = new EObjectContainmentWithInverseEList.Resolving<Constraint>(Constraint.class, this, StructurePackage.OPERATION__PRE, StructurePackage.CONSTRAINT__PRE_OWNER);
 		}
 		return pre;
 	}
@@ -227,9 +235,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getPost() {
+	public EList<Constraint> getPost() {
 		if (post == null) {
-			post = new EObjectContainmentWithInverseEList.Resolving(Constraint.class, this, StructurePackage.OPERATION__POST, StructurePackage.CONSTRAINT__POST_OWNER);
+			post = new EObjectContainmentWithInverseEList.Resolving<Constraint>(Constraint.class, this, StructurePackage.OPERATION__POST, StructurePackage.CONSTRAINT__POST_OWNER);
 		}
 		return post;
 	}
@@ -394,9 +402,9 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTypeParameter() {
+	public EList<TypeVariable> getTypeParameter() {
 		if (typeParameter == null) {
-			typeParameter = new EObjectResolvingEList(TypeVariable.class, this, StructurePackage.OPERATION__TYPE_PARAMETER);
+			typeParameter = new EObjectResolvingEList<TypeVariable>(TypeVariable.class, this, StructurePackage.OPERATION__TYPE_PARAMETER);
 		}
 		return typeParameter;
 	}
@@ -406,14 +414,16 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
-				return ((InternalEList)getOwnedParameter()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedParameter()).basicAdd(otherEnd, msgs);
 			case StructurePackage.OPERATION__PRE:
-				return ((InternalEList)getPre()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPre()).basicAdd(otherEnd, msgs);
 			case StructurePackage.OPERATION__POST:
-				return ((InternalEList)getPost()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPost()).basicAdd(otherEnd, msgs);
 			case StructurePackage.OPERATION__OWNING_CLASS:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -427,14 +437,15 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
-				return ((InternalEList)getOwnedParameter()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedParameter()).basicRemove(otherEnd, msgs);
 			case StructurePackage.OPERATION__PRE:
-				return ((InternalEList)getPre()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getPre()).basicRemove(otherEnd, msgs);
 			case StructurePackage.OPERATION__POST:
-				return ((InternalEList)getPost()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getPost()).basicRemove(otherEnd, msgs);
 			case StructurePackage.OPERATION__BODY:
 				return basicSetBody(null, msgs);
 			case StructurePackage.OPERATION__OWNING_CLASS:
@@ -448,6 +459,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.OPERATION__OWNING_CLASS:
@@ -461,6 +473,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
@@ -493,6 +506,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
@@ -500,19 +515,19 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				return;
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
 				getRaisedException().clear();
-				getRaisedException().addAll((Collection)newValue);
+				getRaisedException().addAll((Collection<? extends Type>)newValue);
 				return;
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
 				getOwnedParameter().clear();
-				getOwnedParameter().addAll((Collection)newValue);
+				getOwnedParameter().addAll((Collection<? extends Parameter>)newValue);
 				return;
 			case StructurePackage.OPERATION__PRE:
 				getPre().clear();
-				getPre().addAll((Collection)newValue);
+				getPre().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case StructurePackage.OPERATION__POST:
 				getPost().clear();
-				getPost().addAll((Collection)newValue);
+				getPost().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case StructurePackage.OPERATION__BODY:
 				setBody((Expression)newValue);
@@ -525,7 +540,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				return;
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				getTypeParameter().clear();
-				getTypeParameter().addAll((Collection)newValue);
+				getTypeParameter().addAll((Collection<? extends TypeVariable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -536,6 +551,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
@@ -574,6 +590,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
@@ -603,6 +620,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

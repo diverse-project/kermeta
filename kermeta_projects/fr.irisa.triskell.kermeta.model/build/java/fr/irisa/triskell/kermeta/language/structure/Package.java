@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Package.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: Package.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -28,6 +28,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Package extends NamedElement, TypeDefinitionContainer {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Nested Package</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Package}.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Package#getNestingPackage <em>Nesting Package</em>}'.
@@ -40,10 +47,10 @@ public interface Package extends NamedElement, TypeDefinitionContainer {
 	 * @return the value of the '<em>Nested Package</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getPackage_NestedPackage()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Package#getNestingPackage
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Package" opposite="nestingPackage" containment="true" resolveProxies="true"
+	 * @model opposite="nestingPackage" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getNestedPackage();
+	EList<Package> getNestedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Nesting Package</b></em>' container reference.

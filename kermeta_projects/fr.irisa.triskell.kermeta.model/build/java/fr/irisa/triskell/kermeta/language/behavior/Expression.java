@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Expression.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: Expression.java,v 1.3 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -26,6 +26,13 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
  * @generated
  */
 public interface Expression extends fr.irisa.triskell.kermeta.language.structure.Object, TypeContainer {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Static Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

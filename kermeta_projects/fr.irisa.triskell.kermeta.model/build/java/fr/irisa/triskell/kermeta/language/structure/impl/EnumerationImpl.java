@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: EnumerationImpl.java,v 1.4 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -38,6 +38,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getOwnedLiteral() <em>Owned Literal</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,7 +51,7 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedLiteral = null;
+	protected EList<EnumerationLiteral> ownedLiteral;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,6 +67,7 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.ENUMERATION;
 	}
@@ -70,9 +77,9 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedLiteral() {
+	public EList<EnumerationLiteral> getOwnedLiteral() {
 		if (ownedLiteral == null) {
-			ownedLiteral = new EObjectContainmentWithInverseEList.Resolving(EnumerationLiteral.class, this, StructurePackage.ENUMERATION__OWNED_LITERAL, StructurePackage.ENUMERATION_LITERAL__ENUMERATION);
+			ownedLiteral = new EObjectContainmentWithInverseEList.Resolving<EnumerationLiteral>(EnumerationLiteral.class, this, StructurePackage.ENUMERATION__OWNED_LITERAL, StructurePackage.ENUMERATION_LITERAL__ENUMERATION);
 		}
 		return ownedLiteral;
 	}
@@ -82,10 +89,12 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION__OWNED_LITERAL:
-				return ((InternalEList)getOwnedLiteral()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedLiteral()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -95,10 +104,11 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION__OWNED_LITERAL:
-				return ((InternalEList)getOwnedLiteral()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedLiteral()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -108,6 +118,7 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION__OWNED_LITERAL:
@@ -121,11 +132,13 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION__OWNED_LITERAL:
 				getOwnedLiteral().clear();
-				getOwnedLiteral().addAll((Collection)newValue);
+				getOwnedLiteral().addAll((Collection<? extends EnumerationLiteral>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -136,6 +149,7 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION__OWNED_LITERAL:
@@ -150,6 +164,7 @@ public class EnumerationImpl extends DataTypeImpl implements Enumeration {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.ENUMERATION__OWNED_LITERAL:

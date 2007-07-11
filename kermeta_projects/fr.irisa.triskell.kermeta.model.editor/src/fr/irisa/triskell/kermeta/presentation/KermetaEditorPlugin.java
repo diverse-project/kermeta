@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaEditorPlugin.java,v 1.1 2006-10-24 09:19:08 cfaucher Exp $
+ * $Id: KermetaEditorPlugin.java,v 1.2 2007-07-11 14:41:42 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -19,6 +19,13 @@ import org.eclipse.emf.common.util.ResourceLocator;
  * @generated
  */
 public final class KermetaEditorPlugin extends EMFPlugin {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
@@ -43,8 +50,8 @@ public final class KermetaEditorPlugin extends EMFPlugin {
 	 */
 	public KermetaEditorPlugin() {
 		super
-		  (new ResourceLocator [] {
-		   });
+			(new ResourceLocator [] {
+			});
 	}
 
 	/**
@@ -54,6 +61,7 @@ public final class KermetaEditorPlugin extends EMFPlugin {
 	 * @return the singleton instance.
 	 * @generated
 	 */
+	@Override
 	public ResourceLocator getPluginResourceLocator() {
 		return plugin;
 	}
@@ -84,7 +92,7 @@ public final class KermetaEditorPlugin extends EMFPlugin {
 		 */
 		public Implementation() {
 			super();
-
+	
 			// Remember the static instance.
 			//
 			plugin = this;

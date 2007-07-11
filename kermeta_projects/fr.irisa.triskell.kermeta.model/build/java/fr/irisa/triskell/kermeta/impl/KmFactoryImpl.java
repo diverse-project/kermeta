@@ -24,6 +24,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -31,7 +38,7 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 */
 	public static KmFactory init() {
 		try {
-			KmFactory theKmFactory = (KmFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore"); 
+			KmFactory theKmFactory = (KmFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org"); 
 			if (theKmFactory != null) {
 				return theKmFactory;
 			}
@@ -57,6 +64,7 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			default:
@@ -79,6 +87,7 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static KmPackage getPackage() {
 		return KmPackage.eINSTANCE;
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.16 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: StructurePackageImpl.java,v 1.17 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -70,6 +70,13 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * @generated
  */
 public class StructurePackageImpl extends EPackageImpl implements StructurePackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1624,6 +1631,10 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		// Obtain other dependent packages
 		BehaviorPackage theBehaviorPackage = (BehaviorPackage)EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI);
 
+		// Create type parameters
+
+		// Set bounds for type parameters
+
 		// Add supertypes to classes
 		classEClass.getESuperTypes().add(this.getParameterizedType());
 		modelEClass.getESuperTypes().add(this.getObject());
@@ -1677,54 +1688,54 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEAttribute(getClass_IsAbstract(), this.getBoolean(), "isAbstract", "false", 0, 1, fr.irisa.triskell.kermeta.language.structure.Class.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClass_Name(), this.getString(), "name", null, 0, 1, fr.irisa.triskell.kermeta.language.structure.Class.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		addEOperation(classEClass, this.getObject(), "_new", 0, 1);
+		addEOperation(classEClass, this.getObject(), "_new", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(objectEClass, fr.irisa.triskell.kermeta.language.structure.Object.class, "Object", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObject_Tag(), this.getTag(), this.getTag_Object(), "tag", null, 0, -1, fr.irisa.triskell.kermeta.language.structure.Object.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1);
+		addEOperation(objectEClass, this.getClass_(), "getMetaClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(objectEClass, this.getObject(), "container", 0, 1);
+		addEOperation(objectEClass, this.getObject(), "container", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = addEOperation(objectEClass, this.getBoolean(), "_equals", 0, 1);
-		addEParameter(op, this.getObject(), "element", 0, 1);
+		EOperation op = addEOperation(objectEClass, this.getBoolean(), "_equals", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(objectEClass, this.getObject(), "get", 0, 1);
-		addEParameter(op, this.getProperty(), "property", 0, 1);
+		op = addEOperation(objectEClass, this.getObject(), "get", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(objectEClass, null, "set");
-		addEParameter(op, this.getProperty(), "property", 0, 1);
-		addEParameter(op, this.getObject(), "element", 0, 1);
+		op = addEOperation(objectEClass, null, "set", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(objectEClass, this.getBoolean(), "isSet", 0, 1);
-		addEParameter(op, this.getProperty(), "property", 0, 1);
+		op = addEOperation(objectEClass, this.getBoolean(), "isSet", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(objectEClass, null, "unset");
-		addEParameter(op, this.getProperty(), "property", 0, 1);
+		op = addEOperation(objectEClass, null, "unset", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getProperty(), "property", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(objectEClass, null, "checkInvariants");
+		addEOperation(objectEClass, null, "checkInvariants", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(objectEClass, null, "checkAllInvariants");
+		addEOperation(objectEClass, null, "checkAllInvariants", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModel_Contents(), this.getObject(), null, "contents", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(modelEClass, this.getObject(), "filter", 0, -1);
-		addEParameter(op, this.getType(), "typeName", 0, 1);
+		op = addEOperation(modelEClass, this.getObject(), "filter", 0, -1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getType(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(modelEClass, null, "add");
-		addEParameter(op, this.getObject(), "obj", 0, 1);
+		op = addEOperation(modelEClass, null, "add", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "obj", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(modelEClass, null, "remove");
-		addEParameter(op, this.getObject(), "obj", 0, 1);
+		op = addEOperation(modelEClass, null, "remove", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "obj", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(modelTypeEClass, ModelType.class, "ModelType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelType_IncludedTypeDefinition(), this.getTypeDefinition(), null, "includedTypeDefinition", null, 0, -1, ModelType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(modelTypeEClass, this.getModel(), "_new", 0, 1);
+		addEOperation(modelTypeEClass, this.getModel(), "_new", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(modelTypeEClass, this.getBoolean(), "isModelTypeOf", 0, 1);
-		addEParameter(op, this.getModel(), "model", 0, 1);
+		op = addEOperation(modelTypeEClass, this.getBoolean(), "isModelTypeOf", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getModel(), "model", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOperation_IsAbstract(), this.getBoolean(), "isAbstract", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1751,8 +1762,8 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getType_TypeContainer(), this.getTypeContainer(), this.getTypeContainer_ContainedType(), "typeContainer", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(typeEClass, this.getBoolean(), "isInstance", 0, 1);
-		addEParameter(op, this.getObject(), "element", 0, 1);
+		op = addEOperation(typeEClass, this.getBoolean(), "isInstance", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getObject(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(typeContainerEClass, TypeContainer.class, "TypeContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeContainer_ContainedType(), this.getType(), this.getType_TypeContainer(), "containedType", null, 0, -1, TypeContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeImpl.java,v 1.5 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: FunctionTypeImpl.java,v 1.6 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getLeft() <em>Left</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -52,7 +59,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * @generated
 	 * @ordered
 	 */
-	protected Type left = null;
+	protected Type left;
 
 	/**
 	 * The cached value of the '{@link #getRight() <em>Right</em>}' reference.
@@ -62,7 +69,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * @generated
 	 * @ordered
 	 */
-	protected Type right = null;
+	protected Type right;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,6 +85,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.FUNCTION_TYPE;
 	}
@@ -225,6 +233,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -240,6 +249,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -253,6 +263,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -266,6 +277,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -286,6 +298,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -306,6 +319,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -326,6 +340,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER:
@@ -343,7 +358,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER: return StructurePackage.TYPE__TYPE_CONTAINER;
@@ -358,7 +374,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE__TYPE_CONTAINER: return StructurePackage.FUNCTION_TYPE__TYPE_CONTAINER;

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinition.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: GenericTypeDefinition.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -26,6 +26,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface GenericTypeDefinition extends TypeDefinition {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Type Parameter</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.TypeVariable}.
 	 * <!-- begin-user-doc -->
@@ -36,9 +43,9 @@ public interface GenericTypeDefinition extends TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getGenericTypeDefinition_TypeParameter()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariable" containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getTypeParameter();
+	EList<TypeVariable> getTypeParameter();
 
 } // GenericTypeDefinition

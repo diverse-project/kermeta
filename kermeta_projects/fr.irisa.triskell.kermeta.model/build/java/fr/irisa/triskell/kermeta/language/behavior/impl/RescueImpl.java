@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RescueImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: RescueImpl.java,v 1.4 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -46,6 +46,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RescueImpl extends ObjectImpl implements Rescue {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,7 +60,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList body = null;
+	protected EList<Expression> body;
 
 	/**
 	 * The cached value of the '{@link #getExceptionType() <em>Exception Type</em>}' containment reference.
@@ -63,7 +70,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference exceptionType = null;
+	protected TypeReference exceptionType;
 
 	/**
 	 * The default value of the '{@link #getExceptionName() <em>Exception Name</em>}' attribute.
@@ -99,6 +106,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.RESCUE;
 	}
@@ -108,9 +116,9 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getBody() {
+	public EList<Expression> getBody() {
 		if (body == null) {
-			body = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.RESCUE__BODY);
+			body = new EObjectContainmentEList.Resolving<Expression>(Expression.class, this, BehaviorPackage.RESCUE__BODY);
 		}
 		return body;
 	}
@@ -207,10 +215,11 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.RESCUE__BODY:
-				return ((InternalEList)getBody()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getBody()).basicRemove(otherEnd, msgs);
 			case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
 				return basicSetExceptionType(null, msgs);
 		}
@@ -222,6 +231,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.RESCUE__BODY:
@@ -240,11 +250,13 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.RESCUE__BODY:
 				getBody().clear();
-				getBody().addAll((Collection)newValue);
+				getBody().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case BehaviorPackage.RESCUE__EXCEPTION_TYPE:
 				setExceptionType((TypeReference)newValue);
@@ -261,6 +273,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.RESCUE__BODY:
@@ -281,6 +294,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.RESCUE__BODY:
@@ -298,6 +312,7 @@ public class RescueImpl extends ObjectImpl implements Rescue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

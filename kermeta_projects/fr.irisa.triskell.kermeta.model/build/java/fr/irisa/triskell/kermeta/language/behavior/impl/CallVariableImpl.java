@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariableImpl.java,v 1.3 2007-06-27 15:31:10 jmottu Exp $
+ * $Id: CallVariableImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -40,6 +40,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class CallVariableImpl extends CallExpressionImpl implements CallVariable {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,6 +80,7 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.CALL_VARIABLE;
 	}
@@ -103,6 +111,7 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
@@ -116,6 +125,7 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
@@ -130,6 +140,7 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
@@ -144,6 +155,7 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_VARIABLE__IS_ATPRE:
@@ -157,6 +169,7 @@ public class CallVariableImpl extends CallExpressionImpl implements CallVariable
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

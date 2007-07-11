@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BooleanLiteral.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: BooleanLiteral.java,v 1.3 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -24,6 +24,13 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * @generated
  */
 public interface BooleanLiteral extends Literal {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

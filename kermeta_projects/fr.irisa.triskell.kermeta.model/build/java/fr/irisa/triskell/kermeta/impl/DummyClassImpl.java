@@ -28,6 +28,13 @@ public abstract class DummyClassImpl extends EObjectImpl implements DummyClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected DummyClassImpl() {
 		super();
 	}
@@ -37,6 +44,7 @@ public abstract class DummyClassImpl extends EObjectImpl implements DummyClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return KmPackage.Literals.DUMMY_CLASS;
 	}

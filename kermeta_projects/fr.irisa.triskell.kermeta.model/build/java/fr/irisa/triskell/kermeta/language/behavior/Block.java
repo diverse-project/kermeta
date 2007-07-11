@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Block.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: Block.java,v 1.5 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -27,6 +27,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Block extends Expression {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Statement</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.behavior.Expression}.
 	 * <!-- begin-user-doc -->
@@ -37,10 +44,10 @@ public interface Block extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Statement</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock_Statement()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getStatement();
+	EList<Expression> getStatement();
 
 	/**
 	 * Returns the value of the '<em><b>Rescue Block</b></em>' containment reference list.
@@ -53,9 +60,9 @@ public interface Block extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rescue Block</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getBlock_RescueBlock()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Rescue" containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getRescueBlock();
+	EList<Rescue> getRescueBlock();
 
 } // Block

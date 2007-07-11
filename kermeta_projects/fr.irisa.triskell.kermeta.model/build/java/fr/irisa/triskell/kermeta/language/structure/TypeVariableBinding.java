@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBinding.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: TypeVariableBinding.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -25,6 +25,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @generated
  */
 public interface TypeVariableBinding extends TypeContainer, fr.irisa.triskell.kermeta.language.structure.Object {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->

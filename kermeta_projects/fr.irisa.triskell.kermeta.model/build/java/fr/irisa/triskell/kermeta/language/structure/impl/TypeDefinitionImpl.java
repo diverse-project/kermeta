@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionImpl.java,v 1.4 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: TypeDefinitionImpl.java,v 1.5 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -12,16 +12,12 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -43,6 +39,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefinition {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The default value of the '{@link #isIsAspect() <em>Is Aspect</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -51,7 +53,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected static final boolean IS_ASPECT_EDEFAULT = false;
-
 	/**
 	 * The cached value of the '{@link #isIsAspect() <em>Is Aspect</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -61,7 +62,6 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @ordered
 	 */
 	protected boolean isAspect = IS_ASPECT_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getBaseAspects() <em>Base Aspects</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -70,8 +70,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * @generated
 	 * @ordered
 	 */
-	protected EList baseAspects = null;
-
+	protected EList<TypeDefinition> baseAspects;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,6 +85,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_DEFINITION;
 	}
@@ -116,9 +116,9 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getBaseAspects() {
+	public EList<TypeDefinition> getBaseAspects() {
 		if (baseAspects == null) {
-			baseAspects = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
+			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION__BASE_ASPECTS);
 		}
 		return baseAspects;
 	}
@@ -128,6 +128,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
@@ -143,6 +144,8 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
@@ -150,7 +153,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 				return;
 			case StructurePackage.TYPE_DEFINITION__BASE_ASPECTS:
 				getBaseAspects().clear();
-				getBaseAspects().addAll((Collection)newValue);
+				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -161,6 +164,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
@@ -178,6 +182,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION__IS_ASPECT:
@@ -193,6 +198,7 @@ public class TypeDefinitionImpl extends NamedElementImpl implements TypeDefiniti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpressionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: LambdaExpressionImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpression {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -52,7 +59,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * @generated
 	 * @ordered
 	 */
-	protected EList parameters = null;
+	protected EList<LambdaParameter> parameters;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -62,7 +69,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression body = null;
+	protected Expression body;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,6 +85,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.LAMBDA_EXPRESSION;
 	}
@@ -87,9 +95,9 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getParameters() {
+	public EList<LambdaParameter> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList.Resolving(LambdaParameter.class, this, BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS);
+			parameters = new EObjectContainmentEList.Resolving<LambdaParameter>(LambdaParameter.class, this, BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -165,10 +173,11 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
-				return ((InternalEList)getParameters()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case BehaviorPackage.LAMBDA_EXPRESSION__BODY:
 				return basicSetBody(null, msgs);
 		}
@@ -180,6 +189,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
@@ -196,11 +206,13 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection)newValue);
+				getParameters().addAll((Collection<? extends LambdaParameter>)newValue);
 				return;
 			case BehaviorPackage.LAMBDA_EXPRESSION__BODY:
 				setBody((Expression)newValue);
@@ -214,6 +226,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:
@@ -231,6 +244,7 @@ public class LambdaExpressionImpl extends ExpressionImpl implements LambdaExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_EXPRESSION__PARAMETERS:

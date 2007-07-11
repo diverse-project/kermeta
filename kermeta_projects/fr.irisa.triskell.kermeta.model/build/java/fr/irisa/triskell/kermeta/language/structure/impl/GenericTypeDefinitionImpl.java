@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: GenericTypeDefinitionImpl.java,v 1.4 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -38,6 +38,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl implements GenericTypeDefinition {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,7 +51,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * @generated
 	 * @ordered
 	 */
-	protected EList typeParameter = null;
+	protected EList<TypeVariable> typeParameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,6 +67,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.GENERIC_TYPE_DEFINITION;
 	}
@@ -70,9 +77,9 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTypeParameter() {
+	public EList<TypeVariable> getTypeParameter() {
 		if (typeParameter == null) {
-			typeParameter = new EObjectContainmentEList.Resolving(TypeVariable.class, this, StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
+			typeParameter = new EObjectContainmentEList.Resolving<TypeVariable>(TypeVariable.class, this, StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
 		}
 		return typeParameter;
 	}
@@ -82,10 +89,11 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
-				return ((InternalEList)getTypeParameter()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTypeParameter()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -95,6 +103,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
@@ -108,11 +117,13 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
 				getTypeParameter().clear();
-				getTypeParameter().addAll((Collection)newValue);
+				getTypeParameter().addAll((Collection<? extends TypeVariable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,6 +134,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
@@ -137,6 +149,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:

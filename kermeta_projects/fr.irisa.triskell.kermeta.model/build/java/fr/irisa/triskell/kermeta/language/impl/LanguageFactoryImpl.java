@@ -24,6 +24,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -31,7 +38,7 @@ public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory
 	 */
 	public static LanguageFactory init() {
 		try {
-			LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore//language"); 
+			LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org//language"); 
 			if (theLanguageFactory != null) {
 				return theLanguageFactory;
 			}
@@ -57,6 +64,7 @@ public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			default:
@@ -79,6 +87,7 @@ public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static LanguagePackage getPackage() {
 		return LanguagePackage.eINSTANCE;
 	}

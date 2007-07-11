@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: AssignmentImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -43,6 +43,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -50,7 +57,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * @generated
 	 * @ordered
 	 */
-	protected CallExpression target = null;
+	protected CallExpression target;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -60,7 +67,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression value = null;
+	protected Expression value;
 
 	/**
 	 * The default value of the '{@link #isIsCast() <em>Is Cast</em>}' attribute.
@@ -96,6 +103,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.ASSIGNMENT;
 	}
@@ -258,6 +266,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
@@ -273,6 +282,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
@@ -292,6 +302,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
@@ -312,6 +323,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
@@ -332,6 +344,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
@@ -349,6 +362,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

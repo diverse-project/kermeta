@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElement.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: MultiplicityElement.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -27,6 +27,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @generated
  */
 public interface MultiplicityElement extends TypedElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Is Ordered</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

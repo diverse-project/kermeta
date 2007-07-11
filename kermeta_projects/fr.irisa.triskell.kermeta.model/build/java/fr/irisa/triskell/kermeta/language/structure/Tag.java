@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Tag.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Tag.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -27,6 +27,13 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -92,9 +99,9 @@ public interface Tag extends fr.irisa.triskell.kermeta.language.structure.Object
 	 * @return the value of the '<em>Object</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTag_Object()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Object#getTag
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Object" opposite="tag" required="true"
+	 * @model opposite="tag" required="true"
 	 * @generated
 	 */
-	EList getObject();
+	EList<fr.irisa.triskell.kermeta.language.structure.Object> getObject();
 
 } // Tag

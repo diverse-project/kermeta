@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationLiteral.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: EnumerationLiteral.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -24,6 +24,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @generated
  */
 public interface EnumerationLiteral extends NamedElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Enumeration#getOwnedLiteral <em>Owned Literal</em>}'.

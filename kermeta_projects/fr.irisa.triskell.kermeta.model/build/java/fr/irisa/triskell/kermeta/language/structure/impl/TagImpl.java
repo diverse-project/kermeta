@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: TagImpl.java,v 1.3 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -41,6 +41,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class TagImpl extends ObjectImpl implements Tag {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -89,7 +96,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList object = null;
+	protected EList<fr.irisa.triskell.kermeta.language.structure.Object> object;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,6 +112,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TAG;
 	}
@@ -156,9 +164,9 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getObject() {
+	public EList<fr.irisa.triskell.kermeta.language.structure.Object> getObject() {
 		if (object == null) {
-			object = new EObjectWithInverseResolvingEList.ManyInverse(fr.irisa.triskell.kermeta.language.structure.Object.class, this, StructurePackage.TAG__OBJECT, StructurePackage.OBJECT__TAG);
+			object = new EObjectWithInverseResolvingEList.ManyInverse<fr.irisa.triskell.kermeta.language.structure.Object>(fr.irisa.triskell.kermeta.language.structure.Object.class, this, StructurePackage.TAG__OBJECT, StructurePackage.OBJECT__TAG);
 		}
 		return object;
 	}
@@ -168,10 +176,12 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TAG__OBJECT:
-				return ((InternalEList)getObject()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getObject()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -181,10 +191,11 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TAG__OBJECT:
-				return ((InternalEList)getObject()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getObject()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -194,6 +205,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TAG__NAME:
@@ -211,6 +223,8 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TAG__NAME:
@@ -221,7 +235,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 				return;
 			case StructurePackage.TAG__OBJECT:
 				getObject().clear();
-				getObject().addAll((Collection)newValue);
+				getObject().addAll((Collection<? extends fr.irisa.triskell.kermeta.language.structure.Object>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -232,6 +246,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TAG__NAME:
@@ -252,6 +267,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TAG__NAME:
@@ -269,6 +285,7 @@ public class TagImpl extends ObjectImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

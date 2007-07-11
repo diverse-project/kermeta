@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureAdapterFactory.java,v 1.7 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: StructureAdapterFactory.java,v 1.8 2007-07-11 14:41:56 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -55,6 +55,12 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class StructureAdapterFactory extends AdapterFactoryImpl {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,6 +88,7 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -98,108 +105,142 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StructureSwitch modelSwitch =
-		new StructureSwitch() {
-			public Object caseClass(fr.irisa.triskell.kermeta.language.structure.Class object) {
+	protected StructureSwitch<Adapter> modelSwitch =
+		new StructureSwitch<Adapter>() {
+			@Override
+			public Adapter caseClass(fr.irisa.triskell.kermeta.language.structure.Class object) {
 				return createClassAdapter();
 			}
-			public Object caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
+			@Override
+			public Adapter caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
 				return createObjectAdapter();
 			}
-			public Object caseModel(Model object) {
+			@Override
+			public Adapter caseModel(Model object) {
 				return createModelAdapter();
 			}
-			public Object caseModelType(ModelType object) {
+			@Override
+			public Adapter caseModelType(ModelType object) {
 				return createModelTypeAdapter();
 			}
-			public Object caseOperation(Operation object) {
+			@Override
+			public Adapter caseOperation(Operation object) {
 				return createOperationAdapter();
 			}
-			public Object caseProperty(Property object) {
+			@Override
+			public Adapter caseProperty(Property object) {
 				return createPropertyAdapter();
 			}
-			public Object caseType(Type object) {
+			@Override
+			public Adapter caseType(Type object) {
 				return createTypeAdapter();
 			}
-			public Object caseTypeContainer(TypeContainer object) {
+			@Override
+			public Adapter caseTypeContainer(TypeContainer object) {
 				return createTypeContainerAdapter();
 			}
-			public Object caseEnumerationLiteral(EnumerationLiteral object) {
+			@Override
+			public Adapter caseEnumerationLiteral(EnumerationLiteral object) {
 				return createEnumerationLiteralAdapter();
 			}
-			public Object caseTypeVariableBinding(TypeVariableBinding object) {
+			@Override
+			public Adapter caseTypeVariableBinding(TypeVariableBinding object) {
 				return createTypeVariableBindingAdapter();
 			}
-			public Object caseMultiplicityElement(MultiplicityElement object) {
+			@Override
+			public Adapter caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
 			}
-			public Object caseTypeDefinition(TypeDefinition object) {
+			@Override
+			public Adapter caseTypeDefinition(TypeDefinition object) {
 				return createTypeDefinitionAdapter();
 			}
-			public Object caseDataType(DataType object) {
+			@Override
+			public Adapter caseDataType(DataType object) {
 				return createDataTypeAdapter();
 			}
-			public Object caseEnumeration(Enumeration object) {
+			@Override
+			public Adapter caseEnumeration(Enumeration object) {
 				return createEnumerationAdapter();
 			}
-			public Object caseNamedElement(NamedElement object) {
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
-			public Object casePackage(fr.irisa.triskell.kermeta.language.structure.Package object) {
+			@Override
+			public Adapter casePackage(fr.irisa.triskell.kermeta.language.structure.Package object) {
 				return createPackageAdapter();
 			}
-			public Object caseParameter(Parameter object) {
+			@Override
+			public Adapter caseParameter(Parameter object) {
 				return createParameterAdapter();
 			}
-			public Object casePrimitiveType(PrimitiveType object) {
+			@Override
+			public Adapter casePrimitiveType(PrimitiveType object) {
 				return createPrimitiveTypeAdapter();
 			}
-			public Object caseTypedElement(TypedElement object) {
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
 			}
-			public Object caseTag(Tag object) {
+			@Override
+			public Adapter caseTag(Tag object) {
 				return createTagAdapter();
 			}
-			public Object caseConstraint(Constraint object) {
+			@Override
+			public Adapter caseConstraint(Constraint object) {
 				return createConstraintAdapter();
 			}
-			public Object caseClassDefinition(ClassDefinition object) {
+			@Override
+			public Adapter caseClassDefinition(ClassDefinition object) {
 				return createClassDefinitionAdapter();
 			}
-			public Object caseGenericTypeDefinition(GenericTypeDefinition object) {
+			@Override
+			public Adapter caseGenericTypeDefinition(GenericTypeDefinition object) {
 				return createGenericTypeDefinitionAdapter();
 			}
-			public Object caseParameterizedType(ParameterizedType object) {
+			@Override
+			public Adapter caseParameterizedType(ParameterizedType object) {
 				return createParameterizedTypeAdapter();
 			}
-			public Object caseTypeVariable(TypeVariable object) {
+			@Override
+			public Adapter caseTypeVariable(TypeVariable object) {
 				return createTypeVariableAdapter();
 			}
-			public Object caseObjectTypeVariable(ObjectTypeVariable object) {
+			@Override
+			public Adapter caseObjectTypeVariable(ObjectTypeVariable object) {
 				return createObjectTypeVariableAdapter();
 			}
-			public Object caseVirtualTypeContainer(VirtualTypeContainer object) {
+			@Override
+			public Adapter caseVirtualTypeContainer(VirtualTypeContainer object) {
 				return createVirtualTypeContainerAdapter();
 			}
-			public Object caseModelTypeVariable(ModelTypeVariable object) {
+			@Override
+			public Adapter caseModelTypeVariable(ModelTypeVariable object) {
 				return createModelTypeVariableAdapter();
 			}
-			public Object caseVirtualType(VirtualType object) {
+			@Override
+			public Adapter caseVirtualType(VirtualType object) {
 				return createVirtualTypeAdapter();
 			}
-			public Object caseProductType(ProductType object) {
+			@Override
+			public Adapter caseProductType(ProductType object) {
 				return createProductTypeAdapter();
 			}
-			public Object caseFunctionType(FunctionType object) {
+			@Override
+			public Adapter caseFunctionType(FunctionType object) {
 				return createFunctionTypeAdapter();
 			}
-			public Object caseVoidType(VoidType object) {
+			@Override
+			public Adapter caseVoidType(VoidType object) {
 				return createVoidTypeAdapter();
 			}
-			public Object caseTypeDefinitionContainer(TypeDefinitionContainer object) {
+			@Override
+			public Adapter caseTypeDefinitionContainer(TypeDefinitionContainer object) {
 				return createTypeDefinitionContainerAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -212,8 +253,9 @@ public class StructureAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

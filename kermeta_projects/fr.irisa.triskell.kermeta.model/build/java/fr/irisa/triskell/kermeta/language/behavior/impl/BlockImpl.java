@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: BlockImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -42,6 +42,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class BlockImpl extends ExpressionImpl implements Block {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getStatement() <em>Statement</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,7 +56,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList statement = null;
+	protected EList<Expression> statement;
 
 	/**
 	 * The cached value of the '{@link #getRescueBlock() <em>Rescue Block</em>}' containment reference list.
@@ -59,7 +66,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList rescueBlock = null;
+	protected EList<Rescue> rescueBlock;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,6 +82,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.BLOCK;
 	}
@@ -84,9 +92,9 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getStatement() {
+	public EList<Expression> getStatement() {
 		if (statement == null) {
-			statement = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.BLOCK__STATEMENT);
+			statement = new EObjectContainmentEList.Resolving<Expression>(Expression.class, this, BehaviorPackage.BLOCK__STATEMENT);
 		}
 		return statement;
 	}
@@ -96,9 +104,9 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getRescueBlock() {
+	public EList<Rescue> getRescueBlock() {
 		if (rescueBlock == null) {
-			rescueBlock = new EObjectContainmentEList.Resolving(Rescue.class, this, BehaviorPackage.BLOCK__RESCUE_BLOCK);
+			rescueBlock = new EObjectContainmentEList.Resolving<Rescue>(Rescue.class, this, BehaviorPackage.BLOCK__RESCUE_BLOCK);
 		}
 		return rescueBlock;
 	}
@@ -108,12 +116,13 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.BLOCK__STATEMENT:
-				return ((InternalEList)getStatement()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getStatement()).basicRemove(otherEnd, msgs);
 			case BehaviorPackage.BLOCK__RESCUE_BLOCK:
-				return ((InternalEList)getRescueBlock()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getRescueBlock()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -123,6 +132,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.BLOCK__STATEMENT:
@@ -138,15 +148,17 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.BLOCK__STATEMENT:
 				getStatement().clear();
-				getStatement().addAll((Collection)newValue);
+				getStatement().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case BehaviorPackage.BLOCK__RESCUE_BLOCK:
 				getRescueBlock().clear();
-				getRescueBlock().addAll((Collection)newValue);
+				getRescueBlock().addAll((Collection<? extends Rescue>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -157,6 +169,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.BLOCK__STATEMENT:
@@ -174,6 +187,7 @@ public class BlockImpl extends ExpressionImpl implements Block {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.BLOCK__STATEMENT:

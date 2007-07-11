@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.5 2006-11-06 10:57:22 cfaucher Exp $
+ * $Id: Type.java,v 1.6 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -25,6 +25,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  */
 public interface Type extends fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Type Container</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType <em>Contained Type</em>}'.
 	 * <!-- begin-user-doc -->
@@ -37,7 +44,7 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * @see #setTypeContainer(TypeContainer)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getType_TypeContainer()
 	 * @see fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType
-	 * @model opposite="containedType"
+	 * @model opposite="containedType" transient="false"
 	 * @generated
 	 */
 	TypeContainer getTypeContainer();

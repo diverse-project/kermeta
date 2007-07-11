@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionalImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: ConditionalImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -42,6 +42,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getThenBody() <em>Then Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -49,7 +56,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression thenBody = null;
+	protected Expression thenBody;
 
 	/**
 	 * The cached value of the '{@link #getElseBody() <em>Else Body</em>}' containment reference.
@@ -59,7 +66,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression elseBody = null;
+	protected Expression elseBody;
 
 	/**
 	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
@@ -69,7 +76,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression condition = null;
+	protected Expression condition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,6 +92,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.CONDITIONAL;
 	}
@@ -292,6 +300,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
@@ -309,6 +318,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
@@ -329,6 +339,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
@@ -349,6 +360,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
@@ -369,6 +381,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LiteralImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: LiteralImpl.java,v 1.3 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -36,6 +36,13 @@ public abstract class LiteralImpl extends ExpressionImpl implements Literal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected LiteralImpl() {
 		super();
 	}
@@ -45,6 +52,7 @@ public abstract class LiteralImpl extends ExpressionImpl implements Literal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.LITERAL;
 	}

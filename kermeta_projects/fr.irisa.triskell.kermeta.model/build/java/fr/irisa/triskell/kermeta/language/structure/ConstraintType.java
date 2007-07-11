@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintType.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ConstraintType.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.AbstractEnumerator;
+import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,42 @@ import org.eclipse.emf.common.util.AbstractEnumerator;
  * @model
  * @generated
  */
-public final class ConstraintType extends AbstractEnumerator {
+public enum ConstraintType implements Enumerator
+{
+	/**
+	 * The '<em><b>Inv</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #INV
+	 * @generated
+	 * @ordered
+	 */
+	INV_LITERAL(0, "inv", "inv"),
+	/**
+	 * The '<em><b>Pre</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PRE
+	 * @generated
+	 * @ordered
+	 */
+	PRE_LITERAL(1, "pre", "pre"),
+	/**
+	 * The '<em><b>Post</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #POST
+	 * @generated
+	 * @ordered
+	 */
+	POST_LITERAL(2, "post", "post");
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * The '<em><b>Inv</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -68,36 +103,6 @@ public final class ConstraintType extends AbstractEnumerator {
 	public static final int POST = 2;
 
 	/**
-	 * The '<em><b>Inv</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #INV
-	 * @generated
-	 * @ordered
-	 */
-	public static final ConstraintType INV_LITERAL = new ConstraintType(INV, "inv", "inv");
-
-	/**
-	 * The '<em><b>Pre</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #PRE
-	 * @generated
-	 * @ordered
-	 */
-	public static final ConstraintType PRE_LITERAL = new ConstraintType(PRE, "pre", "pre");
-
-	/**
-	 * The '<em><b>Post</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #POST
-	 * @generated
-	 * @ordered
-	 */
-	public static final ConstraintType POST_LITERAL = new ConstraintType(POST, "post", "post");
-
-	/**
 	 * An array of all the '<em><b>Constraint Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +121,7 @@ public final class ConstraintType extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<ConstraintType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
 	 * Returns the '<em><b>Constraint Type</b></em>' literal with the specified literal value.
@@ -162,8 +167,29 @@ public final class ConstraintType extends AbstractEnumerator {
 			case PRE: return PRE_LITERAL;
 			case POST: return POST_LITERAL;
 		}
-		return null;	
+		return null;
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final int value;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String name;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private final String literal;
 
 	/**
 	 * Only this class can construct instances.
@@ -172,7 +198,46 @@ public final class ConstraintType extends AbstractEnumerator {
 	 * @generated
 	 */
 	private ConstraintType(int value, String name, String literal) {
-		super(value, name, literal);
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
 	}
 
-} //ConstraintType
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getValue() {
+	  return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+	  return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLiteral() {
+	  return literal;
+	}
+
+	/**
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return literal;
+	}
+}

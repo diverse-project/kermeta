@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelType.java,v 1.3 2007-05-30 11:17:43 jsteel Exp $
+ * $Id: ModelType.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -29,6 +29,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ModelType extends Type, TypeDefinition {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Included Type Definition</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.TypeDefinition}.
 	 * <!-- begin-user-doc -->
@@ -39,10 +46,10 @@ public interface ModelType extends Type, TypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Included Type Definition</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getModelType_IncludedTypeDefinition()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeDefinition"
+	 * @model
 	 * @generated
 	 */
-	EList getIncludedTypeDefinition();
+	EList<TypeDefinition> getIncludedTypeDefinition();
 
 	/**
 	 * <!-- begin-user-doc -->

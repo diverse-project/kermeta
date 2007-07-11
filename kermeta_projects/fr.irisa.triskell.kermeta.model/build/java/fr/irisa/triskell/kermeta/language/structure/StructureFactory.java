@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.4 2007-05-30 11:17:43 jsteel Exp $
+ * $Id: StructureFactory.java,v 1.5 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -17,6 +17,12 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface StructureFactory extends EFactory {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->

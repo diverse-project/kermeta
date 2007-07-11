@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeImpl.java,v 1.4 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: DataTypeImpl.java,v 1.5 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -15,7 +15,6 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
@@ -25,7 +24,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -44,6 +42,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public abstract class DataTypeImpl extends TypeImpl implements DataType {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -92,7 +97,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList baseAspects = null;
+	protected EList<TypeDefinition> baseAspects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -108,6 +113,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.DATA_TYPE;
 	}
@@ -159,9 +165,9 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getBaseAspects() {
+	public EList<TypeDefinition> getBaseAspects() {
 		if (baseAspects == null) {
-			baseAspects = new EObjectResolvingEList(TypeDefinition.class, this, StructurePackage.DATA_TYPE__BASE_ASPECTS);
+			baseAspects = new EObjectResolvingEList<TypeDefinition>(TypeDefinition.class, this, StructurePackage.DATA_TYPE__BASE_ASPECTS);
 		}
 		return baseAspects;
 	}
@@ -171,6 +177,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
@@ -188,6 +195,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
@@ -198,7 +207,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 				return;
 			case StructurePackage.DATA_TYPE__BASE_ASPECTS:
 				getBaseAspects().clear();
-				getBaseAspects().addAll((Collection)newValue);
+				getBaseAspects().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -209,6 +218,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
@@ -229,6 +239,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.DATA_TYPE__NAME:
@@ -246,7 +257,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.DATA_TYPE__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
@@ -268,7 +280,8 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.DATA_TYPE__NAME;
@@ -290,6 +303,7 @@ public abstract class DataTypeImpl extends TypeImpl implements DataType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

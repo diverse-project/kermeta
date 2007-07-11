@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.6 2006-12-06 16:23:09 dvojtise Exp $
+ * $Id: TypeVariableImpl.java,v 1.7 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class TypeVariableImpl extends TypeContainerImpl implements TypeVariable {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +79,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * @generated
 	 * @ordered
 	 */
-	protected Type supertype = null;
+	protected Type supertype;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,6 +95,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_VARIABLE;
 	}
@@ -218,6 +226,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -233,6 +242,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -246,6 +256,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -259,6 +270,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -278,6 +290,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -298,6 +311,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -318,6 +332,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
@@ -335,7 +350,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER: return StructurePackage.TYPE__TYPE_CONTAINER;
@@ -356,7 +372,8 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE__TYPE_CONTAINER: return StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER;
@@ -377,6 +394,7 @@ public abstract class TypeVariableImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RaiseImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: RaiseImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -40,6 +40,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class RaiseImpl extends ExpressionImpl implements Raise {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,7 +53,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression expression = null;
+	protected Expression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,6 +69,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.RAISE;
 	}
@@ -138,6 +145,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.RAISE__EXPRESSION:
@@ -151,6 +159,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.RAISE__EXPRESSION:
@@ -165,6 +174,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.RAISE__EXPRESSION:
@@ -179,6 +189,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.RAISE__EXPRESSION:
@@ -193,6 +204,7 @@ public class RaiseImpl extends ExpressionImpl implements Raise {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.RAISE__EXPRESSION:

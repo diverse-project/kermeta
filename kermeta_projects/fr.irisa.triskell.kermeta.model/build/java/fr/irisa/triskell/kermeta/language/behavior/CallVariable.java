@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariable.java,v 1.3 2007-06-27 15:31:10 jmottu Exp $
+ * $Id: CallVariable.java,v 1.4 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -24,6 +24,14 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * @generated
  */
 public interface CallVariable extends CallExpression {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Is Atpre</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -49,5 +57,4 @@ public interface CallVariable extends CallExpression {
 	 * @generated
 	 */
 	void setIsAtpre(boolean value);
-
 } // CallVariable

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidType.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: VoidType.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,4 +18,11 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @generated
  */
 public interface VoidType extends Type {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
 } // VoidType

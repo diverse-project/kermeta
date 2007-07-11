@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: Operation.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -35,6 +35,13 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Operation extends MultiplicityElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -72,10 +79,10 @@ public interface Operation extends MultiplicityElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Raised Exception</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_RaisedException()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Type"
+	 * @model
 	 * @generated
 	 */
-	EList getRaisedException();
+	EList<Type> getRaisedException();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
@@ -90,10 +97,10 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwnedParameter()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Parameter" opposite="operation" containment="true" resolveProxies="true"
+	 * @model opposite="operation" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getOwnedParameter();
+	EList<Parameter> getOwnedParameter();
 
 	/**
 	 * Returns the value of the '<em><b>Pre</b></em>' containment reference list.
@@ -108,10 +115,10 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Pre</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="preOwner" containment="true" resolveProxies="true"
+	 * @model opposite="preOwner" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getPre();
+	EList<Constraint> getPre();
 
 	/**
 	 * Returns the value of the '<em><b>Post</b></em>' containment reference list.
@@ -126,10 +133,10 @@ public interface Operation extends MultiplicityElement {
 	 * @return the value of the '<em>Post</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="postOwner" containment="true" resolveProxies="true"
+	 * @model opposite="postOwner" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getPost();
+	EList<Constraint> getPost();
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
@@ -196,7 +203,7 @@ public interface Operation extends MultiplicityElement {
 	 * @see #setOwningClass(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwningClass()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedOperation
-	 * @model opposite="ownedOperation"
+	 * @model opposite="ownedOperation" transient="false"
 	 * @generated
 	 */
 	ClassDefinition getOwningClass();
@@ -222,9 +229,9 @@ public interface Operation extends MultiplicityElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Parameter</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_TypeParameter()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariable"
+	 * @model
 	 * @generated
 	 */
-	EList getTypeParameter();
+	EList<TypeVariable> getTypeParameter();
 
 } // Operation

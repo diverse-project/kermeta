@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="http://kermeta/kermeta.ecore" nsPrefix="kermeta">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="http://www.kermeta.org" nsPrefix="kermeta">
   <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
     </eAnnotations>
   </eClassifiers>
-  <eSubpackages name="language" nsURI="http://kermeta/kermeta.ecore//language" nsPrefix="kermeta_language">
+  <eSubpackages name="language" nsURI="http://www.kermeta.org//language" nsPrefix="kermeta_language">
     <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
       </eAnnotations>
     </eClassifiers>
-    <eSubpackages name="behavior" nsURI="http://kermeta/kermeta.ecore//language/behavior" nsPrefix="kermeta_language_behavior">
+    <eSubpackages name="behavior" nsURI="http://www.kermeta.org//language/behavior" nsPrefix="kermeta_language_behavior">
       <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//language/behavior/CallExpression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
@@ -96,7 +96,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//language/behavior/TypeReference" containment="true"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="structure" nsURI="http://kermeta/kermeta.ecore//language/structure" nsPrefix="kermeta_language_structure">
+    <eSubpackages name="structure" nsURI="http://www.kermeta.org//language/structure" nsPrefix="kermeta_language_structure">
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="kermeta::standard::String"/>
       <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="kermeta::standard::Boolean"/>
       <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType">

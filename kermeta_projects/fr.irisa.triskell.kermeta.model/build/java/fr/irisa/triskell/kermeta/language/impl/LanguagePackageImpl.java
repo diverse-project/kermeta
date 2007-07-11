@@ -39,6 +39,12 @@ public class LanguagePackageImpl extends EPackageImpl implements LanguagePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass dummyClassEClass = null;
 
 	/**
@@ -190,6 +196,10 @@ public class LanguagePackageImpl extends EPackageImpl implements LanguagePackage
 		// Add subpackages
 		getESubpackages().add(theBehaviorPackage);
 		getESubpackages().add(theStructurePackage);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
 
 		// Add supertypes to classes
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElementImpl.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
+ * $Id: TypedElementImpl.java,v 1.5 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class TypedElementImpl extends TypeContainerImpl implements TypedElement {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,7 +79,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type = null;
+	protected Type type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,6 +95,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPED_ELEMENT;
 	}
@@ -156,6 +164,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPED_ELEMENT__NAME:
@@ -172,6 +181,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPED_ELEMENT__NAME:
@@ -189,6 +199,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPED_ELEMENT__NAME:
@@ -206,6 +217,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPED_ELEMENT__NAME:
@@ -221,7 +233,8 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.TYPED_ELEMENT__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
@@ -236,7 +249,8 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.TYPED_ELEMENT__NAME;
@@ -251,6 +265,7 @@ public abstract class TypedElementImpl extends TypeContainerImpl implements Type
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

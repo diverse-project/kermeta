@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: VoidTypeImpl.java,v 1.3 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -34,6 +34,13 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected VoidTypeImpl() {
 		super();
 	}
@@ -43,6 +50,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.VOID_TYPE;
 	}

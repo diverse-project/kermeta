@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpression.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: CallExpression.java,v 1.4 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -28,6 +29,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface CallExpression extends Expression {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.behavior.Expression}.
 	 * <!-- begin-user-doc -->
@@ -38,10 +46,10 @@ public interface CallExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_Parameters()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getParameters();
+	EList<Expression> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -80,9 +88,9 @@ public interface CallExpression extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Static Type Variable Bindings</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_StaticTypeVariableBindings()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Type"
+	 * @model
 	 * @generated
 	 */
-	EList getStaticTypeVariableBindings();
+	EList<Type> getStaticTypeVariableBindings();
 
 } // CallExpression

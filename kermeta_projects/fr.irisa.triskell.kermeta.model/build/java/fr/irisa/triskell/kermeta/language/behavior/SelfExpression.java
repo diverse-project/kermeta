@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SelfExpression.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: SelfExpression.java,v 1.3 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -18,4 +18,11 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * @generated
  */
 public interface SelfExpression extends Expression {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
 } // SelfExpression

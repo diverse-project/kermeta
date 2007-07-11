@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerLiteralImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: IntegerLiteralImpl.java,v 1.3 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -39,6 +39,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,6 +79,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.INTEGER_LITERAL;
 	}
@@ -102,6 +110,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
@@ -115,6 +124,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
@@ -129,6 +139,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
@@ -143,6 +154,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
@@ -156,6 +168,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

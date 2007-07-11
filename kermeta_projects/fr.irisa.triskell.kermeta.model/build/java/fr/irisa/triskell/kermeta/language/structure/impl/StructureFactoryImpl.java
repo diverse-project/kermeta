@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.9 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: StructureFactoryImpl.java,v 1.10 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -51,6 +51,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class StructureFactoryImpl extends EFactoryImpl implements StructureFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,7 +65,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 */
 	public static StructureFactory init() {
 		try {
-			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore//language/structure"); 
+			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org//language/structure"); 
 			if (theStructureFactory != null) {
 				return theStructureFactory;
 			}
@@ -84,6 +91,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case StructurePackage.CLASS: return createClass();
@@ -120,6 +128,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
 			case StructurePackage.CONSTRAINT_LANGUAGE:
@@ -144,6 +153,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case StructurePackage.CONSTRAINT_LANGUAGE:
@@ -530,6 +540,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static StructurePackage getPackage() {
 		return StructurePackage.eINSTANCE;
 	}

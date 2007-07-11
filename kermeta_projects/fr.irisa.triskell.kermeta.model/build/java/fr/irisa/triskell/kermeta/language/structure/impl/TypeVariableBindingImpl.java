@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBindingImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: TypeVariableBindingImpl.java,v 1.3 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -40,6 +40,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVariableBinding {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,7 +54,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeVariable variable = null;
+	protected TypeVariable variable;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -57,7 +64,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type = null;
+	protected Type type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,6 +80,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_VARIABLE_BINDING;
 	}
@@ -158,6 +166,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE_BINDING__VARIABLE:
@@ -175,6 +184,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE_BINDING__VARIABLE:
@@ -192,6 +202,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE_BINDING__VARIABLE:
@@ -209,6 +220,7 @@ public class TypeVariableBindingImpl extends TypeContainerImpl implements TypeVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE_BINDING__VARIABLE:

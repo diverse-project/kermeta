@@ -23,4 +23,11 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DummyClass extends EObject {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
 } // DummyClass

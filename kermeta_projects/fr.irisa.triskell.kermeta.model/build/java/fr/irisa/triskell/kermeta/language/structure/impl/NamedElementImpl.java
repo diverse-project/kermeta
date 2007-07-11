@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElementImpl.java,v 1.4 2007-06-08 08:18:13 cfaucher Exp $
+ * $Id: NamedElementImpl.java,v 1.5 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -35,6 +35,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public abstract class NamedElementImpl extends ObjectImpl implements NamedElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -69,6 +76,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.NAMED_ELEMENT;
 	}
@@ -99,6 +107,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
@@ -112,6 +121,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
@@ -126,6 +136,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
@@ -140,6 +151,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
@@ -153,6 +165,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

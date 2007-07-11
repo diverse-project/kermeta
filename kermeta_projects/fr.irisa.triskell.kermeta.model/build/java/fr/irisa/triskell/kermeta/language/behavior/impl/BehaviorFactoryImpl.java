@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.3 2006-09-01 09:32:52 dvojtise Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.4 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -25,6 +25,13 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -32,7 +39,7 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 */
 	public static BehaviorFactory init() {
 		try {
-			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore//language/behavior"); 
+			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.kermeta.org//language/behavior"); 
 			if (theBehaviorFactory != null) {
 				return theBehaviorFactory;
 			}
@@ -58,6 +65,7 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case BehaviorPackage.ASSIGNMENT: return createAssignment();
@@ -333,6 +341,7 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 * @deprecated
 	 * @generated
 	 */
+	@Deprecated
 	public static BehaviorPackage getPackage() {
 		return BehaviorPackage.eINSTANCE;
 	}

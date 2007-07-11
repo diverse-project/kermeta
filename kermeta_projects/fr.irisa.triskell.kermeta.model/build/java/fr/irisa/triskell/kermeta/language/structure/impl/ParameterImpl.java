@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: ParameterImpl.java,v 1.4 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -44,6 +44,13 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	protected ParameterImpl() {
 		super();
 	}
@@ -53,6 +60,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.PARAMETER;
 	}
@@ -113,6 +121,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
@@ -128,6 +137,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
@@ -141,6 +151,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.PARAMETER__OPERATION:
@@ -154,6 +165,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
@@ -168,6 +180,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
@@ -182,6 +195,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:
@@ -196,6 +210,7 @@ public class ParameterImpl extends MultiplicityElementImpl implements Parameter 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PARAMETER__OPERATION:

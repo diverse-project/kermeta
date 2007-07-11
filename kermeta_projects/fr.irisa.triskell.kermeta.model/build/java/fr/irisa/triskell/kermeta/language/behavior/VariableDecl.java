@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDecl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: VariableDecl.java,v 1.5 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -26,6 +26,13 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * @generated
  */
 public interface VariableDecl extends Expression {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Initialization</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

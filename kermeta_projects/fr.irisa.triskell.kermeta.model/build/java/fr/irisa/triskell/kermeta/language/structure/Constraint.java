@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Constraint.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: Constraint.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -30,6 +30,13 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * @generated
  */
 public interface Constraint extends NamedElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -127,7 +134,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setInvOwner(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_InvOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv
-	 * @model opposite="inv"
+	 * @model opposite="inv" transient="false"
 	 * @generated
 	 */
 	ClassDefinition getInvOwner();
@@ -155,7 +162,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setPreOwner(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PreOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPre
-	 * @model opposite="pre"
+	 * @model opposite="pre" transient="false"
 	 * @generated
 	 */
 	Operation getPreOwner();
@@ -183,7 +190,7 @@ public interface Constraint extends NamedElement {
 	 * @see #setPostOwner(Operation)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PostOwner()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPost
-	 * @model opposite="post"
+	 * @model opposite="post" transient="false"
 	 * @generated
 	 */
 	Operation getPostOwner();

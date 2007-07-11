@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductType.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ProductType.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -26,6 +26,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ProductType extends TypeContainer, Type {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Type}.
 	 * <!-- begin-user-doc -->
@@ -36,9 +43,9 @@ public interface ProductType extends TypeContainer, Type {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProductType_Type()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Type"
+	 * @model
 	 * @generated
 	 */
-	EList getType();
+	EList<Type> getType();
 
 } // ProductType

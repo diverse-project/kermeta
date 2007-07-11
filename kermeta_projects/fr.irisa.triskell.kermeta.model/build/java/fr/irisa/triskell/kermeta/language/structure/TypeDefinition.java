@@ -2,12 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinition.java,v 1.3 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: TypeDefinition.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
-
 import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +27,14 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TypeDefinition extends NamedElement {
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Is Aspect</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -64,9 +72,8 @@ public interface TypeDefinition extends NamedElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Base Aspects</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypeDefinition_BaseAspects()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeDefinition"
+	 * @model
 	 * @generated
 	 */
-	EList getBaseAspects();
-
+	EList<TypeDefinition> getBaseAspects();
 } // TypeDefinition

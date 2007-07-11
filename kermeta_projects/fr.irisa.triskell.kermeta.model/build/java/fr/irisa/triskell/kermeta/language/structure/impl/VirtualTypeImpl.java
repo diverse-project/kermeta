@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualTypeImpl.java,v 1.2 2006-12-06 16:23:09 dvojtise Exp $
+ * $Id: VirtualTypeImpl.java,v 1.3 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualType {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getClassDefinition() <em>Class Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -52,7 +59,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @generated
 	 * @ordered
 	 */
-	protected ClassDefinition classDefinition = null;
+	protected ClassDefinition classDefinition;
 
 	/**
 	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
@@ -62,7 +69,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * @generated
 	 * @ordered
 	 */
-	protected EList typeParamBinding = null;
+	protected EList<TypeVariableBinding> typeParamBinding;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,6 +85,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.VIRTUAL_TYPE;
 	}
@@ -176,9 +184,9 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTypeParamBinding() {
+	public EList<TypeVariableBinding> getTypeParamBinding() {
 		if (typeParamBinding == null) {
-			typeParamBinding = new EObjectContainmentEList.Resolving(TypeVariableBinding.class, this, StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING);
+			typeParamBinding = new EObjectContainmentEList.Resolving<TypeVariableBinding>(TypeVariableBinding.class, this, StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING);
 		}
 		return typeParamBinding;
 	}
@@ -188,6 +196,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
@@ -203,12 +212,13 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
 				return basicSetModelType(null, msgs);
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
-				return ((InternalEList)getTypeParamBinding()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTypeParamBinding()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -218,6 +228,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.VIRTUAL_TYPE__MODEL_TYPE:
@@ -231,6 +242,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
@@ -250,6 +262,8 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
@@ -260,7 +274,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 				return;
 			case StructurePackage.VIRTUAL_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
-				getTypeParamBinding().addAll((Collection)newValue);
+				getTypeParamBinding().addAll((Collection<? extends TypeVariableBinding>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -271,6 +285,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:
@@ -291,6 +306,7 @@ public class VirtualTypeImpl extends ObjectTypeVariableImpl implements VirtualTy
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.VIRTUAL_TYPE__CLASS_DEFINITION:

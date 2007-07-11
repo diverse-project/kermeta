@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.3 2006-09-12 12:59:23 dvojtise Exp $
+ * $Id: BehaviorFactory.java,v 1.4 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -17,6 +17,12 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface BehaviorFactory extends EFactory {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->

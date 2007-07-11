@@ -39,6 +39,12 @@ public class KmPackageImpl extends EPackageImpl implements KmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass dummyClassEClass = null;
 
 	/**
@@ -188,6 +194,10 @@ public class KmPackageImpl extends EPackageImpl implements KmPackage {
 
 		// Add subpackages
 		getESubpackages().add(theLanguagePackage);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
 
 		// Add supertypes to classes
 

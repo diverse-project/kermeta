@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: JavaStaticCallImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -45,6 +45,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -52,7 +59,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * @generated
 	 * @ordered
 	 */
-	protected EList parameters = null;
+	protected EList<Expression> parameters;
 
 	/**
 	 * The default value of the '{@link #getJclass() <em>Jclass</em>}' attribute.
@@ -108,6 +115,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.JAVA_STATIC_CALL;
 	}
@@ -117,9 +125,9 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getParameters() {
+	public EList<Expression> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList.Resolving(Expression.class, this, BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS);
+			parameters = new EObjectContainmentEList.Resolving<Expression>(Expression.class, this, BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -171,10 +179,11 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
-				return ((InternalEList)getParameters()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,6 +193,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
@@ -201,11 +211,13 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection)newValue);
+				getParameters().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
 				setJclass((String)newValue);
@@ -222,6 +234,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
@@ -242,6 +255,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
@@ -259,6 +273,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

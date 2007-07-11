@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: TypeDefinitionContainerImpl.java,v 1.4 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -38,6 +38,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class TypeDefinitionContainerImpl extends NamedElementImpl implements TypeDefinitionContainer {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getOwnedTypeDefinition() <em>Owned Type Definition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -45,7 +51,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedTypeDefinition = null;
+	protected EList<TypeDefinition> ownedTypeDefinition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,6 +67,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_DEFINITION_CONTAINER;
 	}
@@ -70,9 +77,9 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedTypeDefinition() {
+	public EList<TypeDefinition> getOwnedTypeDefinition() {
 		if (ownedTypeDefinition == null) {
-			ownedTypeDefinition = new EObjectContainmentEList.Resolving(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
+			ownedTypeDefinition = new EObjectContainmentEList.Resolving<TypeDefinition>(TypeDefinition.class, this, StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 		}
 		return ownedTypeDefinition;
 	}
@@ -82,10 +89,11 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
-				return ((InternalEList)getOwnedTypeDefinition()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedTypeDefinition()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -95,6 +103,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
@@ -108,11 +117,13 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
 				getOwnedTypeDefinition().clear();
-				getOwnedTypeDefinition().addAll((Collection)newValue);
+				getOwnedTypeDefinition().addAll((Collection<? extends TypeDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,6 +134,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:
@@ -137,6 +149,7 @@ public abstract class TypeDefinitionContainerImpl extends NamedElementImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION:

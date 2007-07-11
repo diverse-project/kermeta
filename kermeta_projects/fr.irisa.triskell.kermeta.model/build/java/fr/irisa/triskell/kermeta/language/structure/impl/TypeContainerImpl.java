@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeContainerImpl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: TypeContainerImpl.java,v 1.5 2007-07-11 14:41:54 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -39,6 +39,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class TypeContainerImpl extends ObjectImpl implements TypeContainer {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -46,7 +52,7 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * @generated
 	 * @ordered
 	 */
-	protected EList containedType = null;
+	protected EList<Type> containedType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,6 +68,7 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_CONTAINER;
 	}
@@ -71,9 +78,9 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getContainedType() {
+	public EList<Type> getContainedType() {
 		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList.Resolving(Type.class, this, StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(Type.class, this, StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
 	}
@@ -83,10 +90,12 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -96,10 +105,11 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -109,6 +119,7 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
@@ -122,11 +133,13 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
 				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
+				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -137,6 +150,7 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:
@@ -151,6 +165,7 @@ public abstract class TypeContainerImpl extends ObjectImpl implements TypeContai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE:

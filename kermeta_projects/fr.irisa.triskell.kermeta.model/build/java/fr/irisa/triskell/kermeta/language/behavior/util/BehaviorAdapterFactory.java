@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.2 2007-06-05 15:26:27 cfaucher Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.3 2007-07-11 14:41:55 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
@@ -29,6 +29,12 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public class BehaviorAdapterFactory extends AdapterFactoryImpl {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
@@ -57,6 +63,7 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object object) {
 		if (object == modelPackage) {
 			return true;
@@ -73,102 +80,134 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BehaviorSwitch modelSwitch =
-		new BehaviorSwitch() {
-			public Object caseAssignment(Assignment object) {
+	protected BehaviorSwitch<Adapter> modelSwitch =
+		new BehaviorSwitch<Adapter>() {
+			@Override
+			public Adapter caseAssignment(Assignment object) {
 				return createAssignmentAdapter();
 			}
-			public Object caseExpression(Expression object) {
+			@Override
+			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
 			}
-			public Object caseCallExpression(CallExpression object) {
+			@Override
+			public Adapter caseCallExpression(CallExpression object) {
 				return createCallExpressionAdapter();
 			}
-			public Object caseBlock(Block object) {
+			@Override
+			public Adapter caseBlock(Block object) {
 				return createBlockAdapter();
 			}
-			public Object caseCallVariable(CallVariable object) {
+			@Override
+			public Adapter caseCallVariable(CallVariable object) {
 				return createCallVariableAdapter();
 			}
-			public Object caseCallFeature(CallFeature object) {
+			@Override
+			public Adapter caseCallFeature(CallFeature object) {
 				return createCallFeatureAdapter();
 			}
-			public Object caseCallSuperOperation(CallSuperOperation object) {
+			@Override
+			public Adapter caseCallSuperOperation(CallSuperOperation object) {
 				return createCallSuperOperationAdapter();
 			}
-			public Object caseCallResult(CallResult object) {
+			@Override
+			public Adapter caseCallResult(CallResult object) {
 				return createCallResultAdapter();
 			}
-			public Object caseCallValue(CallValue object) {
+			@Override
+			public Adapter caseCallValue(CallValue object) {
 				return createCallValueAdapter();
 			}
-			public Object caseConditional(Conditional object) {
+			@Override
+			public Adapter caseConditional(Conditional object) {
 				return createConditionalAdapter();
 			}
-			public Object caseRaise(Raise object) {
+			@Override
+			public Adapter caseRaise(Raise object) {
 				return createRaiseAdapter();
 			}
-			public Object caseRescue(Rescue object) {
+			@Override
+			public Adapter caseRescue(Rescue object) {
 				return createRescueAdapter();
 			}
-			public Object caseTypeReference(TypeReference object) {
+			@Override
+			public Adapter caseTypeReference(TypeReference object) {
 				return createTypeReferenceAdapter();
 			}
-			public Object caseLiteral(Literal object) {
+			@Override
+			public Adapter caseLiteral(Literal object) {
 				return createLiteralAdapter();
 			}
-			public Object caseEmptyExpression(EmptyExpression object) {
+			@Override
+			public Adapter caseEmptyExpression(EmptyExpression object) {
 				return createEmptyExpressionAdapter();
 			}
-			public Object caseJavaStaticCall(JavaStaticCall object) {
+			@Override
+			public Adapter caseJavaStaticCall(JavaStaticCall object) {
 				return createJavaStaticCallAdapter();
 			}
-			public Object caseLambdaExpression(LambdaExpression object) {
+			@Override
+			public Adapter caseLambdaExpression(LambdaExpression object) {
 				return createLambdaExpressionAdapter();
 			}
-			public Object caseLambdaParameter(LambdaParameter object) {
+			@Override
+			public Adapter caseLambdaParameter(LambdaParameter object) {
 				return createLambdaParameterAdapter();
 			}
-			public Object caseIntegerLiteral(IntegerLiteral object) {
+			@Override
+			public Adapter caseIntegerLiteral(IntegerLiteral object) {
 				return createIntegerLiteralAdapter();
 			}
-			public Object caseStringLiteral(StringLiteral object) {
+			@Override
+			public Adapter caseStringLiteral(StringLiteral object) {
 				return createStringLiteralAdapter();
 			}
-			public Object caseBooleanLiteral(BooleanLiteral object) {
+			@Override
+			public Adapter caseBooleanLiteral(BooleanLiteral object) {
 				return createBooleanLiteralAdapter();
 			}
-			public Object caseTypeLiteral(TypeLiteral object) {
+			@Override
+			public Adapter caseTypeLiteral(TypeLiteral object) {
 				return createTypeLiteralAdapter();
 			}
-			public Object caseVoidLiteral(VoidLiteral object) {
+			@Override
+			public Adapter caseVoidLiteral(VoidLiteral object) {
 				return createVoidLiteralAdapter();
 			}
-			public Object caseLoop(Loop object) {
+			@Override
+			public Adapter caseLoop(Loop object) {
 				return createLoopAdapter();
 			}
-			public Object caseSelfExpression(SelfExpression object) {
+			@Override
+			public Adapter caseSelfExpression(SelfExpression object) {
 				return createSelfExpressionAdapter();
 			}
-			public Object caseVariableDecl(VariableDecl object) {
+			@Override
+			public Adapter caseVariableDecl(VariableDecl object) {
 				return createVariableDeclAdapter();
 			}
-			public Object caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
+			@Override
+			public Adapter caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
 				return createObjectAdapter();
 			}
-			public Object caseTypeContainer(TypeContainer object) {
+			@Override
+			public Adapter caseTypeContainer(TypeContainer object) {
 				return createTypeContainerAdapter();
 			}
-			public Object caseNamedElement(NamedElement object) {
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
-			public Object caseTypedElement(TypedElement object) {
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
 			}
-			public Object caseMultiplicityElement(MultiplicityElement object) {
+			@Override
+			public Adapter caseMultiplicityElement(MultiplicityElement object) {
 				return createMultiplicityElementAdapter();
 			}
-			public Object defaultCase(EObject object) {
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -181,8 +220,9 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
+	@Override
 	public Adapter createAdapter(Notifier target) {
-		return (Adapter)modelSwitch.doSwitch((EObject)target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 

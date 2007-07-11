@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeature.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: CallFeature.java,v 1.5 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -31,6 +31,13 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
  * @generated
  */
 public interface CallFeature extends CallExpression {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

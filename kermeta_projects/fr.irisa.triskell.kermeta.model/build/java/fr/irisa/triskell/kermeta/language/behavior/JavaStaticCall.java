@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCall.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: JavaStaticCall.java,v 1.4 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -28,6 +28,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface JavaStaticCall extends Expression {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.behavior.Expression}.
 	 * <!-- begin-user-doc -->
@@ -38,10 +45,10 @@ public interface JavaStaticCall extends Expression {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getJavaStaticCall_Parameters()
-	 * @model type="fr.irisa.triskell.kermeta.language.behavior.Expression" containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getParameters();
+	EList<Expression> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Jclass</b></em>' attribute.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.6 2007-05-30 11:17:43 jsteel Exp $
+ * $Id: ClassDefinition.java,v 1.7 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -30,6 +30,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Inv</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}'.
@@ -42,10 +49,10 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @return the value of the '<em>Inv</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="invOwner" containment="true" resolveProxies="true"
+	 * @model opposite="invOwner" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getInv();
+	EList<Constraint> getInv();
 
 	/**
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
@@ -86,10 +93,10 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @return the value of the '<em>Owned Attribute</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedAttribute()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Property" opposite="owningClass" containment="true" resolveProxies="true"
+	 * @model opposite="owningClass" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getOwnedAttribute();
+	EList<Property> getOwnedAttribute();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Operation</b></em>' containment reference list.
@@ -104,10 +111,10 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @return the value of the '<em>Owned Operation</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_OwnedOperation()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Operation" opposite="owningClass" containment="true" resolveProxies="true"
+	 * @model opposite="owningClass" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getOwnedOperation();
+	EList<Operation> getOwnedOperation();
 
 	/**
 	 * Returns the value of the '<em><b>Super Type</b></em>' reference list.
@@ -120,9 +127,9 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Type</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_SuperType()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Type"
+	 * @model
 	 * @generated
 	 */
-	EList getSuperType();
+	EList<Type> getSuperType();
 
 } // ClassDefinition

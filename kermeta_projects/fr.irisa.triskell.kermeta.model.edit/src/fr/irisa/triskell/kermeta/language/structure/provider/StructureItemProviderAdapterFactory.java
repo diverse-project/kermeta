@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureItemProviderAdapterFactory.java,v 1.9 2007-07-03 12:37:37 dtouzet Exp $
+ * $Id: StructureItemProviderAdapterFactory.java,v 1.10 2007-07-11 14:41:35 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -38,6 +38,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  */
 public class StructureItemProviderAdapterFactory extends StructureAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -59,7 +66,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -72,7 +79,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);		
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	/**
@@ -89,6 +96,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createClassAdapter() {
 		if (classItemProvider == null) {
 			classItemProvider = new ClassItemProvider(this);
@@ -111,6 +119,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createObjectAdapter() {
 		if (objectItemProvider == null) {
 			objectItemProvider = new ObjectItemProvider(this);
@@ -133,6 +142,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createModelAdapter() {
 		if (modelItemProvider == null) {
 			modelItemProvider = new ModelItemProvider(this);
@@ -155,6 +165,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createOperationAdapter() {
 		if (operationItemProvider == null) {
 			operationItemProvider = new OperationItemProvider(this);
@@ -177,6 +188,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createPropertyAdapter() {
 		if (propertyItemProvider == null) {
 			propertyItemProvider = new PropertyItemProvider(this);
@@ -199,6 +211,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeAdapter() {
 		if (typeItemProvider == null) {
 			typeItemProvider = new TypeItemProvider(this);
@@ -221,6 +234,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createEnumerationLiteralAdapter() {
 		if (enumerationLiteralItemProvider == null) {
 			enumerationLiteralItemProvider = new EnumerationLiteralItemProvider(this);
@@ -243,6 +257,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createMultiplicityElementAdapter() {
 		if (multiplicityElementItemProvider == null) {
 			multiplicityElementItemProvider = new MultiplicityElementItemProvider(this);
@@ -265,6 +280,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createEnumerationAdapter() {
 		if (enumerationItemProvider == null) {
 			enumerationItemProvider = new EnumerationItemProvider(this);
@@ -287,6 +303,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createPackageAdapter() {
 		if (packageItemProvider == null) {
 			packageItemProvider = new PackageItemProvider(this);
@@ -309,6 +326,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createParameterAdapter() {
 		if (parameterItemProvider == null) {
 			parameterItemProvider = new ParameterItemProvider(this);
@@ -331,6 +349,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createPrimitiveTypeAdapter() {
 		if (primitiveTypeItemProvider == null) {
 			primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
@@ -353,6 +372,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTagAdapter() {
 		if (tagItemProvider == null) {
 			tagItemProvider = new TagItemProvider(this);
@@ -375,6 +395,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createConstraintAdapter() {
 		if (constraintItemProvider == null) {
 			constraintItemProvider = new ConstraintItemProvider(this);
@@ -397,6 +418,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createClassDefinitionAdapter() {
 		if (classDefinitionItemProvider == null) {
 			classDefinitionItemProvider = new ClassDefinitionItemProvider(this);
@@ -419,6 +441,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createObjectTypeVariableAdapter() {
 		if (objectTypeVariableItemProvider == null) {
 			objectTypeVariableItemProvider = new ObjectTypeVariableItemProvider(this);
@@ -441,6 +464,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createProductTypeAdapter() {
 		if (productTypeItemProvider == null) {
 			productTypeItemProvider = new ProductTypeItemProvider(this);
@@ -463,6 +487,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createFunctionTypeAdapter() {
 		if (functionTypeItemProvider == null) {
 			functionTypeItemProvider = new FunctionTypeItemProvider(this);
@@ -485,6 +510,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeVariableBindingAdapter() {
 		if (typeVariableBindingItemProvider == null) {
 			typeVariableBindingItemProvider = new TypeVariableBindingItemProvider(this);
@@ -507,6 +533,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeDefinitionAdapter() {
 		if (typeDefinitionItemProvider == null) {
 			typeDefinitionItemProvider = new TypeDefinitionItemProvider(this);
@@ -529,6 +556,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createVoidTypeAdapter() {
 		if (voidTypeItemProvider == null) {
 			voidTypeItemProvider = new VoidTypeItemProvider(this);
@@ -551,6 +579,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createModelTypeVariableAdapter() {
 		if (modelTypeVariableItemProvider == null) {
 			modelTypeVariableItemProvider = new ModelTypeVariableItemProvider(this);
@@ -573,6 +602,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createVirtualTypeAdapter() {
 		if (virtualTypeItemProvider == null) {
 			virtualTypeItemProvider = new VirtualTypeItemProvider(this);
@@ -595,6 +625,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createModelTypeAdapter() {
 		if (modelTypeItemProvider == null) {
 			modelTypeItemProvider = new ModelTypeItemProvider(this);
@@ -628,6 +659,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -638,6 +670,7 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -647,10 +680,11 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

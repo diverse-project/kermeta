@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElement.java,v 1.2 2006-09-22 12:23:06 cfaucher Exp $
+ * $Id: NamedElement.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -24,6 +24,13 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @generated
  */
 public interface NamedElement extends fr.irisa.triskell.kermeta.language.structure.Object {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

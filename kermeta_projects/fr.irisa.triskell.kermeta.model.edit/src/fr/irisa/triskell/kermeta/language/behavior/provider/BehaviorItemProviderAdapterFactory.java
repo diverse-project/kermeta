@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorItemProviderAdapterFactory.java,v 1.4 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: BehaviorItemProviderAdapterFactory.java,v 1.5 2007-07-11 14:41:35 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -38,6 +38,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  */
 public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -59,7 +66,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Collection supportedTypes = new ArrayList();
+	protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
 	/**
 	 * This constructs an instance.
@@ -72,7 +79,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);		
+		supportedTypes.add(IItemPropertySource.class);
 	}
 
 	/**
@@ -89,6 +96,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createAssignmentAdapter() {
 		if (assignmentItemProvider == null) {
 			assignmentItemProvider = new AssignmentItemProvider(this);
@@ -111,6 +119,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createBlockAdapter() {
 		if (blockItemProvider == null) {
 			blockItemProvider = new BlockItemProvider(this);
@@ -133,6 +142,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createCallVariableAdapter() {
 		if (callVariableItemProvider == null) {
 			callVariableItemProvider = new CallVariableItemProvider(this);
@@ -155,6 +165,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createCallFeatureAdapter() {
 		if (callFeatureItemProvider == null) {
 			callFeatureItemProvider = new CallFeatureItemProvider(this);
@@ -177,6 +188,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createCallSuperOperationAdapter() {
 		if (callSuperOperationItemProvider == null) {
 			callSuperOperationItemProvider = new CallSuperOperationItemProvider(this);
@@ -199,6 +211,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createCallResultAdapter() {
 		if (callResultItemProvider == null) {
 			callResultItemProvider = new CallResultItemProvider(this);
@@ -221,6 +234,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createCallValueAdapter() {
 		if (callValueItemProvider == null) {
 			callValueItemProvider = new CallValueItemProvider(this);
@@ -243,6 +257,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createConditionalAdapter() {
 		if (conditionalItemProvider == null) {
 			conditionalItemProvider = new ConditionalItemProvider(this);
@@ -265,6 +280,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRaiseAdapter() {
 		if (raiseItemProvider == null) {
 			raiseItemProvider = new RaiseItemProvider(this);
@@ -287,6 +303,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createRescueAdapter() {
 		if (rescueItemProvider == null) {
 			rescueItemProvider = new RescueItemProvider(this);
@@ -309,6 +326,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeReferenceAdapter() {
 		if (typeReferenceItemProvider == null) {
 			typeReferenceItemProvider = new TypeReferenceItemProvider(this);
@@ -331,6 +349,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createEmptyExpressionAdapter() {
 		if (emptyExpressionItemProvider == null) {
 			emptyExpressionItemProvider = new EmptyExpressionItemProvider(this);
@@ -353,6 +372,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createJavaStaticCallAdapter() {
 		if (javaStaticCallItemProvider == null) {
 			javaStaticCallItemProvider = new JavaStaticCallItemProvider(this);
@@ -375,6 +395,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createLambdaExpressionAdapter() {
 		if (lambdaExpressionItemProvider == null) {
 			lambdaExpressionItemProvider = new LambdaExpressionItemProvider(this);
@@ -397,6 +418,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createLambdaParameterAdapter() {
 		if (lambdaParameterItemProvider == null) {
 			lambdaParameterItemProvider = new LambdaParameterItemProvider(this);
@@ -419,6 +441,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createIntegerLiteralAdapter() {
 		if (integerLiteralItemProvider == null) {
 			integerLiteralItemProvider = new IntegerLiteralItemProvider(this);
@@ -441,6 +464,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createStringLiteralAdapter() {
 		if (stringLiteralItemProvider == null) {
 			stringLiteralItemProvider = new StringLiteralItemProvider(this);
@@ -463,6 +487,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createBooleanLiteralAdapter() {
 		if (booleanLiteralItemProvider == null) {
 			booleanLiteralItemProvider = new BooleanLiteralItemProvider(this);
@@ -485,6 +510,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createTypeLiteralAdapter() {
 		if (typeLiteralItemProvider == null) {
 			typeLiteralItemProvider = new TypeLiteralItemProvider(this);
@@ -507,6 +533,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createVoidLiteralAdapter() {
 		if (voidLiteralItemProvider == null) {
 			voidLiteralItemProvider = new VoidLiteralItemProvider(this);
@@ -529,6 +556,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createLoopAdapter() {
 		if (loopItemProvider == null) {
 			loopItemProvider = new LoopItemProvider(this);
@@ -551,6 +579,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createSelfExpressionAdapter() {
 		if (selfExpressionItemProvider == null) {
 			selfExpressionItemProvider = new SelfExpressionItemProvider(this);
@@ -573,6 +602,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter createVariableDeclAdapter() {
 		if (variableDeclItemProvider == null) {
 			variableDeclItemProvider = new VariableDeclItemProvider(this);
@@ -606,6 +636,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isFactoryForType(Object type) {
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
@@ -616,6 +647,7 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
 		return super.adapt(notifier, this);
 	}
@@ -625,10 +657,11 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object adapt(Object object, Object type) {
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class) || (((Class)type).isInstance(adapter))) {
+			if (!(type instanceof Class) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}

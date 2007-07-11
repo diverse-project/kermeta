@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.4 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.5 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -47,6 +47,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,7 +61,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression target = null;
+	protected Expression target;
 
 	/**
 	 * The default value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
@@ -84,7 +91,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 * @ordered
 	 */
-	protected Property staticProperty = null;
+	protected Property staticProperty;
 
 	/**
 	 * The cached value of the '{@link #getStaticOperation() <em>Static Operation</em>}' reference.
@@ -94,7 +101,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 * @ordered
 	 */
-	protected Operation staticOperation = null;
+	protected Operation staticOperation;
 
 	/**
 	 * The cached value of the '{@link #getStaticEnumLiteral() <em>Static Enum Literal</em>}' reference.
@@ -104,7 +111,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 * @ordered
 	 */
-	protected EnumerationLiteral staticEnumLiteral = null;
+	protected EnumerationLiteral staticEnumLiteral;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,6 +127,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.CALL_FEATURE;
 	}
@@ -330,6 +338,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
@@ -343,6 +352,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
@@ -368,6 +378,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
@@ -394,6 +405,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
@@ -420,6 +432,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
@@ -441,6 +454,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

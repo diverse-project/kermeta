@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.4 2006-12-06 16:23:09 dvojtise Exp $
+ * $Id: ClassImpl.java,v 1.5 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -47,6 +47,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskell.kermeta.language.structure.Class {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getOwnedAttribute() <em>Owned Attribute</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,7 +61,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedAttribute = null;
+	protected EList<Property> ownedAttribute;
 
 	/**
 	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' reference list.
@@ -64,7 +71,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedOperation = null;
+	protected EList<Operation> ownedOperation;
 
 	/**
 	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference list.
@@ -74,7 +81,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * @generated
 	 * @ordered
 	 */
-	protected EList superClass = null;
+	protected EList<fr.irisa.triskell.kermeta.language.structure.Class> superClass;
 
 	/**
 	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
@@ -130,6 +137,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.CLASS;
 	}
@@ -139,9 +147,9 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedAttribute() {
+	public EList<Property> getOwnedAttribute() {
 		if (ownedAttribute == null) {
-			ownedAttribute = new EObjectResolvingEList(Property.class, this, StructurePackage.CLASS__OWNED_ATTRIBUTE);
+			ownedAttribute = new EObjectResolvingEList<Property>(Property.class, this, StructurePackage.CLASS__OWNED_ATTRIBUTE);
 		}
 		return ownedAttribute;
 	}
@@ -151,9 +159,9 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedOperation() {
+	public EList<Operation> getOwnedOperation() {
 		if (ownedOperation == null) {
-			ownedOperation = new EObjectResolvingEList(Operation.class, this, StructurePackage.CLASS__OWNED_OPERATION);
+			ownedOperation = new EObjectResolvingEList<Operation>(Operation.class, this, StructurePackage.CLASS__OWNED_OPERATION);
 		}
 		return ownedOperation;
 	}
@@ -163,9 +171,9 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getSuperClass() {
+	public EList<fr.irisa.triskell.kermeta.language.structure.Class> getSuperClass() {
 		if (superClass == null) {
-			superClass = new EObjectResolvingEList(fr.irisa.triskell.kermeta.language.structure.Class.class, this, StructurePackage.CLASS__SUPER_CLASS);
+			superClass = new EObjectResolvingEList<fr.irisa.triskell.kermeta.language.structure.Class>(fr.irisa.triskell.kermeta.language.structure.Class.class, this, StructurePackage.CLASS__SUPER_CLASS);
 		}
 		return superClass;
 	}
@@ -204,6 +212,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.CLASS__OWNED_ATTRIBUTE:
@@ -225,6 +234,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.CLASS__OWNED_ATTRIBUTE:
@@ -246,6 +256,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

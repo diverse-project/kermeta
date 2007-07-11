@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.2 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: Property.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -33,6 +33,13 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * @generated
  */
 public interface Property extends MultiplicityElement {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -257,7 +264,7 @@ public interface Property extends MultiplicityElement {
 	 * @see #setOwningClass(ClassDefinition)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_OwningClass()
 	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute
-	 * @model opposite="ownedAttribute"
+	 * @model opposite="ownedAttribute" transient="false"
 	 * @generated
 	 */
 	ClassDefinition getOwningClass();

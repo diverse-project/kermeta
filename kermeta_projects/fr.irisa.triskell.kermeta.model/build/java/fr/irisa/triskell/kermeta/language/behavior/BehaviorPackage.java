@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.8 2007-06-27 15:31:10 jmottu Exp $
+ * $Id: BehaviorPackage.java,v 1.9 2007-07-11 14:41:50 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -30,6 +30,13 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface BehaviorPackage extends EPackage {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,7 +50,7 @@ public interface BehaviorPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kermeta/kermeta.ecore//language/behavior";
+	String eNS_URI = "http://www.kermeta.org//language/behavior";
 
 	/**
 	 * The package namespace name.

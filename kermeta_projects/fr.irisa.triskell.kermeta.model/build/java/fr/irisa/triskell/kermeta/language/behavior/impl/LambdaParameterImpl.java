@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaParameterImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: LambdaParameterImpl.java,v 1.4 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -41,6 +41,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,7 +75,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference type = null;
+	protected TypeReference type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,6 +91,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.LAMBDA_PARAMETER;
 	}
@@ -180,6 +188,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_PARAMETER__TYPE:
@@ -193,6 +202,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_PARAMETER__NAME:
@@ -209,6 +219,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_PARAMETER__NAME:
@@ -226,6 +237,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_PARAMETER__NAME:
@@ -243,6 +255,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case BehaviorPackage.LAMBDA_PARAMETER__NAME:
@@ -258,6 +271,7 @@ public class LambdaParameterImpl extends ObjectImpl implements LambdaParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

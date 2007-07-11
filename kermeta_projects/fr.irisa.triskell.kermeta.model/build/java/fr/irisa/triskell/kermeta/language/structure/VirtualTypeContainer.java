@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualTypeContainer.java,v 1.2 2006-12-06 16:22:58 dvojtise Exp $
+ * $Id: VirtualTypeContainer.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -28,6 +28,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface VirtualTypeContainer extends EObject {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Virtual Type</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.VirtualType}.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.VirtualType#getModelType <em>Model Type</em>}'.
@@ -40,9 +47,9 @@ public interface VirtualTypeContainer extends EObject {
 	 * @return the value of the '<em>Virtual Type</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualTypeContainer_VirtualType()
 	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualType#getModelType
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.VirtualType" opposite="modelType" containment="true" resolveProxies="true"
+	 * @model opposite="modelType" containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getVirtualType();
+	EList<VirtualType> getVirtualType();
 
 } // VirtualTypeContainer

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.10 2007-07-03 12:37:33 dtouzet Exp $
+ * $Id: StructurePackage.java,v 1.11 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -30,6 +30,13 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface StructurePackage extends EPackage {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -43,7 +50,7 @@ public interface StructurePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kermeta/kermeta.ecore//language/structure";
+	String eNS_URI = "http://www.kermeta.org//language/structure";
 
 	/**
 	 * The package namespace name.

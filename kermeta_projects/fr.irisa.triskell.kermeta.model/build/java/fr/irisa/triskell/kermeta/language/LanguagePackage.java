@@ -26,6 +26,13 @@ import org.eclipse.emf.ecore.EPackage;
  */
 public interface LanguagePackage extends EPackage {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -39,7 +46,7 @@ public interface LanguagePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kermeta/kermeta.ecore//language";
+	String eNS_URI = "http://www.kermeta.org//language";
 
 	/**
 	 * The package namespace name.

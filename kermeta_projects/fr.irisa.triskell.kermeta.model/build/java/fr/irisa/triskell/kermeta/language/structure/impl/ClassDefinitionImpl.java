@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.6 2007-05-30 11:17:44 jsteel Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.7 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -57,6 +57,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements ClassDefinition {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,7 +71,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList containedType = null;
+	protected EList<Type> containedType;
 
 	/**
 	 * The cached value of the '{@link #getInv() <em>Inv</em>}' containment reference list.
@@ -74,7 +81,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList inv = null;
+	protected EList<Constraint> inv;
 
 	/**
 	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
@@ -104,7 +111,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedAttribute = null;
+	protected EList<Property> ownedAttribute;
 
 	/**
 	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
@@ -114,7 +121,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList ownedOperation = null;
+	protected EList<Operation> ownedOperation;
 
 	/**
 	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list.
@@ -124,7 +131,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList superType = null;
+	protected EList<Type> superType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,6 +147,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.CLASS_DEFINITION;
 	}
@@ -149,9 +157,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getContainedType() {
+	public EList<Type> getContainedType() {
 		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList.Resolving(Type.class, this, StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(Type.class, this, StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
 	}
@@ -161,9 +169,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getInv() {
+	public EList<Constraint> getInv() {
 		if (inv == null) {
-			inv = new EObjectContainmentWithInverseEList.Resolving(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
+			inv = new EObjectContainmentWithInverseEList.Resolving<Constraint>(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
 		}
 		return inv;
 	}
@@ -194,9 +202,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedAttribute() {
+	public EList<Property> getOwnedAttribute() {
 		if (ownedAttribute == null) {
-			ownedAttribute = new EObjectContainmentWithInverseEList.Resolving(Property.class, this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, StructurePackage.PROPERTY__OWNING_CLASS);
+			ownedAttribute = new EObjectContainmentWithInverseEList.Resolving<Property>(Property.class, this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, StructurePackage.PROPERTY__OWNING_CLASS);
 		}
 		return ownedAttribute;
 	}
@@ -206,9 +214,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getOwnedOperation() {
+	public EList<Operation> getOwnedOperation() {
 		if (ownedOperation == null) {
-			ownedOperation = new EObjectContainmentWithInverseEList.Resolving(Operation.class, this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, StructurePackage.OPERATION__OWNING_CLASS);
+			ownedOperation = new EObjectContainmentWithInverseEList.Resolving<Operation>(Operation.class, this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, StructurePackage.OPERATION__OWNING_CLASS);
 		}
 		return ownedOperation;
 	}
@@ -218,9 +226,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getSuperType() {
+	public EList<Type> getSuperType() {
 		if (superType == null) {
-			superType = new EObjectResolvingEList(Type.class, this, StructurePackage.CLASS_DEFINITION__SUPER_TYPE);
+			superType = new EObjectResolvingEList<Type>(Type.class, this, StructurePackage.CLASS_DEFINITION__SUPER_TYPE);
 		}
 		return superType;
 	}
@@ -230,16 +238,18 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__INV:
-				return ((InternalEList)getInv()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInv()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-				return ((InternalEList)getOwnedAttribute()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAttribute()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
-				return ((InternalEList)getOwnedOperation()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperation()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -249,16 +259,17 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__INV:
-				return ((InternalEList)getInv()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getInv()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-				return ((InternalEList)getOwnedAttribute()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
-				return ((InternalEList)getOwnedOperation()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -268,6 +279,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
@@ -291,30 +303,32 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
+				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
 			case StructurePackage.CLASS_DEFINITION__INV:
 				getInv().clear();
-				getInv().addAll((Collection)newValue);
+				getInv().addAll((Collection<? extends Constraint>)newValue);
 				return;
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 				setIsAbstract(((Boolean)newValue).booleanValue());
 				return;
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 				getOwnedAttribute().clear();
-				getOwnedAttribute().addAll((Collection)newValue);
+				getOwnedAttribute().addAll((Collection<? extends Property>)newValue);
 				return;
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				getOwnedOperation().clear();
-				getOwnedOperation().addAll((Collection)newValue);
+				getOwnedOperation().addAll((Collection<? extends Operation>)newValue);
 				return;
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				getSuperType().clear();
-				getSuperType().addAll((Collection)newValue);
+				getSuperType().addAll((Collection<? extends Type>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -325,6 +339,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
@@ -354,6 +369,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
@@ -377,7 +393,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == TypeContainer.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
@@ -392,7 +409,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == TypeContainer.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE;
@@ -407,6 +425,7 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

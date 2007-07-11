@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: ObjectImpl.java,v 1.3 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -40,6 +40,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+	/**
 	 * The cached value of the '{@link #getTag() <em>Tag</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,7 +53,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * @generated
 	 * @ordered
 	 */
-	protected EList tag = null;
+	protected EList<Tag> tag;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,6 +69,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.OBJECT;
 	}
@@ -72,9 +79,9 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTag() {
+	public EList<Tag> getTag() {
 		if (tag == null) {
-			tag = new EObjectWithInverseResolvingEList.ManyInverse(Tag.class, this, StructurePackage.OBJECT__TAG, StructurePackage.TAG__OBJECT);
+			tag = new EObjectWithInverseResolvingEList.ManyInverse<Tag>(Tag.class, this, StructurePackage.OBJECT__TAG, StructurePackage.TAG__OBJECT);
 		}
 		return tag;
 	}
@@ -183,10 +190,12 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
-				return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTag()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -196,10 +205,11 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
-				return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -209,6 +219,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
@@ -222,11 +233,13 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				getTag().clear();
-				getTag().addAll((Collection)newValue);
+				getTag().addAll((Collection<? extends Tag>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -237,6 +250,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
@@ -251,6 +265,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:

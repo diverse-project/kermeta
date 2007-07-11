@@ -132,13 +132,12 @@ public class KermetaOptimizedVisitor {
 	public Object accept(EObject node) {
 		// Throw an error if the node is null
 		if (node == null) {
-          String msg = "Error in visitor: ";          
-          if (parent!=null) {
+          String msg = "Error in visitor: ";          if (parent!=null) {
               msg += "   (when visiting parent\n    '" + parent.getClass().getName() + "'";
-	          if (parent instanceof NamedElement) msg += "\n    parent's name: '" + ((NamedElement)parent).getName() + "')\n";
+	            if (parent instanceof NamedElement) msg += "\n    parent's name: '" + ((NamedElement)parent).getName() + "')\n";
               else if (parent instanceof VariableDecl) msg += "\n    parent's name (it's a variable): '" + ((VariableDecl)parent).getIdentifier() + "')\n";
-          }
-          throw new Error(msg);
+ }
+			throw new Error(msg);
 		}
 		// Get the accept command
 		AcceptCommand cmd = getAcceptCmd(node);

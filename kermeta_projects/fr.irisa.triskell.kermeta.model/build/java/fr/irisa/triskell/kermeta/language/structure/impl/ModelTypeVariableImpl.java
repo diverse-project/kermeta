@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableImpl.java,v 1.2 2006-12-06 16:23:09 dvojtise Exp $
+ * $Id: ModelTypeVariableImpl.java,v 1.3 2007-07-11 14:41:53 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -51,6 +51,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements ModelTypeVariable {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getTag() <em>Tag</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,7 +65,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * @generated
 	 * @ordered
 	 */
-	protected EList tag = null;
+	protected EList<Tag> tag;
 
 	/**
 	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
@@ -68,7 +75,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * @generated
 	 * @ordered
 	 */
-	protected EList containedType = null;
+	protected EList<Type> containedType;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -98,7 +105,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * @generated
 	 * @ordered
 	 */
-	protected Type supertype = null;
+	protected Type supertype;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,6 +121,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.MODEL_TYPE_VARIABLE;
 	}
@@ -123,9 +131,9 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getTag() {
+	public EList<Tag> getTag() {
 		if (tag == null) {
-			tag = new EObjectWithInverseResolvingEList.ManyInverse(Tag.class, this, StructurePackage.MODEL_TYPE_VARIABLE__TAG, StructurePackage.TAG__OBJECT);
+			tag = new EObjectWithInverseResolvingEList.ManyInverse<Tag>(Tag.class, this, StructurePackage.MODEL_TYPE_VARIABLE__TAG, StructurePackage.TAG__OBJECT);
 		}
 		return tag;
 	}
@@ -135,9 +143,9 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getContainedType() {
+	public EList<Type> getContainedType() {
 		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList.Resolving(Type.class, this, StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
+			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(Type.class, this, StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
 	}
@@ -367,12 +375,14 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
-				return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTag()).basicAdd(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicAdd(otherEnd, msgs);
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -386,12 +396,13 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
-				return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
+				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
 				return basicSetTypeContainer(null, msgs);
 		}
@@ -403,6 +414,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
@@ -416,6 +428,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
@@ -439,15 +452,17 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+		@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
 				getTag().clear();
-				getTag().addAll((Collection)newValue);
+				getTag().addAll((Collection<? extends Tag>)newValue);
 				return;
 			case StructurePackage.MODEL_TYPE_VARIABLE__CONTAINED_TYPE:
 				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
+				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
 			case StructurePackage.MODEL_TYPE_VARIABLE__TYPE_CONTAINER:
 				setTypeContainer((TypeContainer)newValue);
@@ -467,6 +482,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
@@ -493,6 +509,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.MODEL_TYPE_VARIABLE__TAG:
@@ -514,7 +531,8 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == fr.irisa.triskell.kermeta.language.structure.Object.class) {
 			switch (derivedFeatureID) {
 				case StructurePackage.MODEL_TYPE_VARIABLE__TAG: return StructurePackage.OBJECT__TAG;
@@ -553,7 +571,8 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == fr.irisa.triskell.kermeta.language.structure.Object.class) {
 			switch (baseFeatureID) {
 				case StructurePackage.OBJECT__TAG: return StructurePackage.MODEL_TYPE_VARIABLE__TAG;
@@ -592,6 +611,7 @@ public class ModelTypeVariableImpl extends VirtualTypeContainerImpl implements M
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

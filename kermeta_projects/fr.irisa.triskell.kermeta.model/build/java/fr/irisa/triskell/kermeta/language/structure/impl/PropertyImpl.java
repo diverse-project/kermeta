@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyImpl.java,v 1.3 2006-10-23 15:40:50 cfaucher Exp $
+ * $Id: PropertyImpl.java,v 1.4 2007-07-11 14:41:52 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -50,6 +50,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,7 +64,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected Property opposite = null;
+	protected Property opposite;
 
 	/**
 	 * The default value of the '{@link #isIsReadOnly() <em>Is Read Only</em>}' attribute.
@@ -167,7 +174,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression getterBody = null;
+	protected Expression getterBody;
 
 	/**
 	 * The cached value of the '{@link #getSetterBody() <em>Setter Body</em>}' containment reference.
@@ -177,7 +184,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression setterBody = null;
+	protected Expression setterBody;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -193,6 +200,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.PROPERTY;
 	}
@@ -528,6 +536,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.PROPERTY__OWNING_CLASS:
@@ -543,6 +552,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.PROPERTY__GETTER_BODY:
@@ -560,6 +570,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID) {
 			case StructurePackage.PROPERTY__OWNING_CLASS:
@@ -573,6 +584,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
@@ -606,6 +618,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
@@ -644,6 +657,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
@@ -682,6 +696,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
@@ -711,6 +726,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

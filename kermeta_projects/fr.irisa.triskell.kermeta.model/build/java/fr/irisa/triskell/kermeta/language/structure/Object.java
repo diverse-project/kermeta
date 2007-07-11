@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Object.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: Object.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -28,6 +28,13 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Object extends EObject {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Tag</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Tag}.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Tag#getObject <em>Object</em>}'.
@@ -40,10 +47,10 @@ public interface Object extends EObject {
 	 * @return the value of the '<em>Tag</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getObject_Tag()
 	 * @see fr.irisa.triskell.kermeta.language.structure.Tag#getObject
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Tag" opposite="object"
+	 * @model opposite="object"
 	 * @generated
 	 */
-	EList getTag();
+	EList<Tag> getTag();
 
 	/**
 	 * <!-- begin-user-doc -->

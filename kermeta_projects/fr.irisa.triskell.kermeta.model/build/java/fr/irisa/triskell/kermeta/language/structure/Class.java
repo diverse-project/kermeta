@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Class.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Class.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -30,6 +30,13 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Class extends ParameterizedType {
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
 	 * Returns the value of the '<em><b>Owned Attribute</b></em>' reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Property}.
 	 * <!-- begin-user-doc -->
@@ -40,10 +47,10 @@ public interface Class extends ParameterizedType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Attribute</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_OwnedAttribute()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Property" changeable="false" derived="true"
+	 * @model changeable="false" derived="true"
 	 * @generated
 	 */
-	EList getOwnedAttribute();
+	EList<Property> getOwnedAttribute();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Operation</b></em>' reference list.
@@ -56,10 +63,10 @@ public interface Class extends ParameterizedType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Operation</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_OwnedOperation()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Operation" changeable="false" derived="true"
+	 * @model changeable="false" derived="true"
 	 * @generated
 	 */
-	EList getOwnedOperation();
+	EList<Operation> getOwnedOperation();
 
 	/**
 	 * Returns the value of the '<em><b>Super Class</b></em>' reference list.
@@ -72,10 +79,10 @@ public interface Class extends ParameterizedType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super Class</em>' reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClass_SuperClass()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Class" changeable="false" derived="true"
+	 * @model changeable="false" derived="true"
 	 * @generated
 	 */
-	EList getSuperClass();
+	EList<Class> getSuperClass();
 
 	/**
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.

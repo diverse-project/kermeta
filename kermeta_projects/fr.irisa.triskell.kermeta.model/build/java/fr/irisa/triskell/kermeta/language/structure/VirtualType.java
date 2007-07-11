@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VirtualType.java,v 1.2 2006-12-06 16:22:58 dvojtise Exp $
+ * $Id: VirtualType.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -27,6 +27,13 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface VirtualType extends ObjectTypeVariable {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * Returns the value of the '<em><b>Class Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -66,7 +73,7 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * @see #setModelType(VirtualTypeContainer)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_ModelType()
 	 * @see fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer#getVirtualType
-	 * @model opposite="virtualType" required="true"
+	 * @model opposite="virtualType" required="true" transient="false"
 	 * @generated
 	 */
 	VirtualTypeContainer getModelType();
@@ -92,9 +99,9 @@ public interface VirtualType extends ObjectTypeVariable {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Param Binding</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getVirtualType_TypeParamBinding()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding" containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
-	EList getTypeParamBinding();
+	EList<TypeVariableBinding> getTypeParamBinding();
 
 } // VirtualType
