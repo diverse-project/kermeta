@@ -6,7 +6,8 @@ import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.debug.internal.ui.contexts.DebugContextManager;
-import org.eclipse.debug.internal.ui.contexts.provisional.IDebugContextListener;
+import org.eclipse.debug.ui.contexts.DebugContextEvent;
+import org.eclipse.debug.ui.contexts.IDebugContextListener;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
@@ -51,7 +52,7 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
         fView = (IConsoleView) fPage.getSite().getPage().findView(IConsoleConstants.ID_CONSOLE_VIEW);
         
         DebugPlugin.getDefault().addDebugEventListener(this);
-        DebugContextManager.getDefault().addDebugContextListener(this, fPage.getSite().getWorkbenchWindow());
+        DebugContextManager.getDefault().addDebugContextListener(this);
         
         // contribute to toolbar
         IActionBars actionBars = fPage.getSite().getActionBars();
@@ -63,7 +64,7 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
      */
     public void dispose() {
         deactivated();
-        DebugContextManager.getDefault().removeDebugContextListener(this, fPage.getSite().getWorkbenchWindow());
+        DebugContextManager.getDefault().removeDebugContextListener(this);
 		DebugPlugin.getDefault().removeDebugEventListener(this);
 
 		if (fTerminate != null) {
@@ -137,9 +138,10 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.debug.internal.ui.contexts.provisional.IDebugContextListener#contextChanged(org.eclipse.jface.viewers.ISelection, org.eclipse.ui.IWorkbenchPart)
+	 * @see org.eclipse.debug.ui.contexts.IDebugContextListener#contextChanged(org.eclipse.jface.viewers.ISelection, org.eclipse.ui.IWorkbenchPart)
 	 */
-	public void contextChanged(ISelection selection, IWorkbenchPart part) {
+    public void debugContextChanged(DebugContextEvent event) {
+		// TODO Auto-generated method stub
 	}
 
 	/* (non-Javadoc)
@@ -153,6 +155,5 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
      */
     public void deactivated() {
     }
-
 
 }

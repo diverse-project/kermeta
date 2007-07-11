@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.10 2007-06-27 07:07:16 dvojtise Exp $
+/* $Id: DestFileWizardPage.java,v 1.11 2007-07-11 13:43:08 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -96,7 +96,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 
 	protected Button overwriteIfFileExistRadio;
 	
-
 	protected Button forceWriteEvenIfErrorCheck;
 
 	// initial value stores
@@ -357,9 +356,8 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	 * Creates the link target path if a link target has been specified.
 	 */
 	protected void createLinkTarget() {
-		String linkTarget = linkedResourceGroup.getLinkTarget();
-		if (linkTarget != null) {
-			linkTargetPath = new Path(linkTarget);
+		if (linkedResourceGroup.getLinkTargetURI() != null) {
+			linkTargetPath = new Path(linkedResourceGroup.getLinkTargetURI().getPath());
 		} else {
 			linkTargetPath = null;
 		}
