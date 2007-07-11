@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.57 2007-06-22 09:57:11 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.58 2007-07-11 11:26:07 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -188,9 +188,14 @@ public class Runtime2EMF {
 					if("http://www.eclipse.org/emf/2002/Ecore".equals(emfObject.eResource().getURI().toString())){
 						// we really don't want to modify the metameta model we are working on ...
 						internalLog.info("     Ignoring update of Ecore internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
-						EMFRegistryHelper.isRegistered(emfObject.eResource().getURI());
 						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
-					}/* DVK : this suppose that framework.ecore should be registered ...
+					}
+					// normally we should not update/modify objects that comes from a plugin ? ...
+					/*if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km".equals(emfObject.eResource().getURI().toString())){
+						internalLog.debug("     Ignoring update of kermeta framework.km internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
+						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
+					}*/
+					/* DVK : this suppose that framework.ecore should be registered ...
 					if("platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore".equals(emfObject.eResource().getURI().toString())){
 						internalLog.debug("     Ignoring update of kermeta framework internal object : "+((EObject)rObject.getData().get("emfObject")).eClass().getName());
 						return; //platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.ecore
