@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: fr.irisa.triskell.kermeta.ocl
-Bundle-Version: 0.0.2.qualifier
+Bundle-Version: 0.0.3
 Bundle-ClassPath: lib/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200702061926.jar,
  lib/org.eclipse.ocl_1.1.0.v200705102050.jar,
  lib/org.eclipse.emf.ocl_1.1.0.v200705031818.jar,
