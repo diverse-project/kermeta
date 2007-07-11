@@ -8,9 +8,8 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
- org.eclipse.ui.ide,
- fr.irisa.triskell.kermeta.texteditor
-Eclipse-AutoStart: true
+ org.eclipse.ui.ide
+Eclipse-LazyStart: true
 Bundle-Vendor: IRISA/INRIA
 Export-Package: fr.irisa.triskell.kermeta.samples.fsm,
  fr.irisa.triskell.kermeta.samples.fsm.wizards
