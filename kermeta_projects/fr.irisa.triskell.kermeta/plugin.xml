@@ -21,13 +21,6 @@
                class="fr.irisa.triskell.kermeta.popup.actions.Ecore2KermetaAction"
                id="fr.irisa.triskell.kermeta.Ecore2KMT"/>
        <action
-               enablesFor="*"
-               label="Merges Ecore Resources"
-               icon="images/eclipse_ecore.gif"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
-               class="fr.irisa.triskell.kermeta.popup.actions.EcoreMerge2EcoreAction"
-               id="fr.irisa.triskell.kermeta.EcoreMerge2Ecore"/>
-       <action
              class="fr.irisa.triskell.kermeta.popup.actions.Ecore2KmAction"
              icon="images/to_xmi_16.gif"
              id="fr.irisa.triskell.kermeta.action1"
@@ -96,21 +89,28 @@
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
 	         label="Kermeta"
 	         path="additions">
-      		<separator name="kermetagroup1"/>
+      		<separator name="kermetagroupextra"/>
 		</menu>
         <action
                enablesFor="*"
                label="Register EPackages into repository"
                icon="images/eclipse_ecore.gif"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroupextra" 
                class="fr.irisa.triskell.kermeta.popup.actions.EcoreRegisteringAction"
-               id="fr.irisa.triskell.kermeta.Ecore2KMT"/>
+               id="fr.irisa.triskell.kermeta.EcoreRegister"/>
        <action
                enablesFor="*"
                label="Unregister EPackages from repository"
                icon="images/eclipse_ecore.gif"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroupextra" 
                class="fr.irisa.triskell.kermeta.popup.actions.EcoreUnregisteringAction"
+               id="fr.irisa.triskell.kermeta.EcoreUnregister"/>
+       <action
+               enablesFor="*"
+               label="Merge Ecore Resources"
+               icon="images/eclipse_ecore.gif"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroupextra" 
+               class="fr.irisa.triskell.kermeta.popup.actions.EcoreMerge2EcoreAction"
                id="fr.irisa.triskell.kermeta.EcoreMerge2Ecore"/>
        
       </objectContribution>

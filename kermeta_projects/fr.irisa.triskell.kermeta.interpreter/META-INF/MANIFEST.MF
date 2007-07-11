@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Interpreter Plugin
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.interpreter
-Bundle-Version: 0.4.1.qualifier
+Bundle-Version: 0.4.2
 Bundle-ClassPath: .,
  lib/thirdparty/emfatic-core.jar,
  lib/thirdparty/ldt-core.jar,

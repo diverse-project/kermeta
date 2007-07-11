@@ -74,17 +74,17 @@
             nameFilter="*.*"
             objectClass="org.eclipse.core.resources.IFile">
             
-         <!--<menu
+         <menu
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
 	         label="KerMeta"
 	         path="additions">
-      		<separator name="kermetagroup1"/>
-		</menu>-->
+      		<separator name="kermetagroupextra"/>
+		</menu>
         <action
                enablesFor="1"
-               label="Open with EMF touchgraph"
+               label="Show with EMF model TouchNavigator"
                icon="icons/kermeta_touchgraph.png"
-               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroupextra" 
                class="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.OpenWithEMFTouchGraphAction"
                id="fr.irisa.triskell.kermeta.touchgraph.openemftouchgraph"/>
                
@@ -94,28 +94,5 @@
        -->
       </objectContribution>
    </extension>
-   
-   <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            id="fr.irisa.triskell.kermeta.contribution14"
-            nameFilter="*.*"
-            objectClass="org.eclipse.core.resources.IFile">
-         <menu
-	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-	         label="KerMeta"
-	         path="additions">
-      		<separator name="kermetagroup1"/>
-		</menu>
-        <action
-              class="fr.irisa.triskell.kermeta.touchnavigator.popup.actions.ShowInEMFTouchGraphAction"
-              enablesFor="1"
-              icon="icons/kermeta_touchgraph.png"
-              id="fr.irisa.triskell.kermeta.touchgraph.showinemftouchgraph"
-              label="Show in EMF touchgraph"
-              menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
-       
-      </objectContribution>
-   </extension>
+
 </plugin>
