@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.traceability"
       label="Kermeta MDK for Traceability"
-      version="0.0.4.qualifier"
+      version="0.1.0"
       provider-name="IRISA/INRIA">
    <install-handler/>
 
