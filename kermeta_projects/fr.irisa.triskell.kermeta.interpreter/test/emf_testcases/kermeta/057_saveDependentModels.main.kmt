@@ -46,9 +46,9 @@ class Main inherits TestCase {
 	operation setUp() is do
 		aMMdlUri := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelA.ecore"
 		bMMdlUri := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelB.ecore"
-		aMdlUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/057_a"
-		bMdlUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/057_b"
-		cMdlUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/057_c"
+		aMdlUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/out/057_a"
+		bMdlUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/out/057_b"
+		cMdlUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/out/057_c"
 
 		cMMdlUriViaObjectRef := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/057_ModelC_ObjectRef.ecore"		
 		
