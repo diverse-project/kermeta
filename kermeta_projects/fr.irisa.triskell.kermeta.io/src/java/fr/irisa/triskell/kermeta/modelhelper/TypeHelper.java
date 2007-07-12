@@ -1,4 +1,4 @@
-/* $Id: TypeHelper.java,v 1.2 2007-07-05 15:01:18 cfaucher Exp $
+/* $Id: TypeHelper.java,v 1.3 2007-07-12 17:51:27 cfaucher Exp $
  * Project   : Kermeta 
  * File      : TypeHelper.java
  * License   : EPL
@@ -17,6 +17,7 @@ import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
@@ -61,6 +62,9 @@ public class TypeHelper {
 		} else if (type instanceof ParameterizedType) {
 			ParameterizedType fClass = (ParameterizedType) type;
 			return fClass.getTypeDefinition().getName();
+		} else if (type instanceof PrimitiveType) {
+			PrimitiveType fPrimitiveType = (PrimitiveType) type;
+			return ((ParameterizedType) fPrimitiveType.getInstanceType()).getTypeDefinition().getName();
 		}
 		return "";
 	}
