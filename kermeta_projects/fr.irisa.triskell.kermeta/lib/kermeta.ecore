@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="http://kermeta/kermeta.ecore" nsPrefix="kermeta">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="http://www.kermeta.org/kermeta" nsPrefix="kermeta">
   <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
     </eAnnotations>
   </eClassifiers>
-  <eSubpackages name="language" nsURI="http://kermeta/kermeta.ecore//language" nsPrefix="kermeta_language">
+  <eSubpackages name="language" nsURI="http://www.kermeta.org/kermeta//language" nsPrefix="kermeta_language">
     <eClassifiers xsi:type="ecore:EClass" name="DummyClass" abstract="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel"/>
       </eAnnotations>
     </eClassifiers>
-    <eSubpackages name="behavior" nsURI="http://kermeta/kermeta.ecore//language/behavior" nsPrefix="kermeta_language_behavior">
+    <eSubpackages name="behavior" nsURI="http://www.kermeta.org/kermeta//language/behavior" nsPrefix="kermeta_language_behavior">
       <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//language/behavior/CallExpression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
@@ -96,9 +96,9 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//language/behavior/TypeReference" containment="true"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="structure" nsURI="http://kermeta/kermeta.ecore//language/structure" nsPrefix="kermeta_language_structure">
-      <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+    <eSubpackages name="structure" nsURI="http://www.kermeta.org/kermeta//language/structure" nsPrefix="kermeta_language_structure">
+      <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="kermeta::standard::String"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="kermeta::standard::Boolean"/>
       <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType">
         <eOperations name="_new" eType="//language/structure/Object"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" changeable="false" derived="true"/>
@@ -149,7 +149,7 @@
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition" upperBound="-1" eType="//language/structure/TypeDefinition"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
       <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//language/structure/MultiplicityElement">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1" eType="//language/structure/Type"/>
@@ -219,7 +219,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="//language/structure/TypeContainer //language/structure/NamedElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//language/structure/Type"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="int"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="kermeta::standard::UnlimitedNatural"/>
       <eClassifiers xsi:type="ecore:EClass" name="Tag" eSuperTypes="//language/structure/Object">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//language/structure/String"/>
@@ -233,7 +233,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="preOwner" eType="//language/structure/Operation" eOpposite="//language/structure/Operation/pre"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="postOwner" eType="//language/structure/Operation" eOpposite="//language/structure/Operation/post"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage">
+      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage" instanceClassName="kermeta::standard::ConstraintLanguage">
         <eLiterals name="kermeta"/>
         <eLiterals name="ocl" value="1"/>
       </eClassifiers>
@@ -244,7 +244,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" containment="true" eOpposite="//language/structure/Operation/owningClass"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1" eType="//language/structure/Type"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
+      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType" instanceClassName="kermeta::standard::ConstraintType">
         <eLiterals name="inv"/>
         <eLiterals name="pre" value="1"/>
         <eLiterals name="post" value="2"/>
