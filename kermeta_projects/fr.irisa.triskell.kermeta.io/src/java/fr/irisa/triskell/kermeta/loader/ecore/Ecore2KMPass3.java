@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.21 2007-07-12 15:54:30 cfaucher Exp $
+/* $Id: Ecore2KMPass3.java,v 1.22 2007-07-12 17:58:27 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -107,7 +107,6 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		// Visit all the EClasses (their substructure, i.e operations and properties)
 		isTypeSettingMode = true;
 		for (EObject node : visitorPass1.eclassifier_typedefinition_map.keySet()) { // do not visit again datatypes?
-			System.err.println(node.toString());
 			if (node instanceof EClass) accept((EClass) node); 
 		}
 		// Visit again all the EOperations in order to set their super operations
@@ -141,16 +140,14 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		unit.pushContext();
 		addSymbolContext( exporter.current_classdef );
 		
-		// Deprecated since EMF2.3
 		// Order important here! annotation above all.
 		// 1- Visit all non already visited annotations
-		/*for (Object next : node.getEAnnotations()) {
-			EAnnotation annot = (EAnnotation) next;
+		for (EAnnotation annot : node.getEAnnotations()) {
 			// KM2Ecore.ANNOTATION_TYPEPARAMETER annotation already visited in Pass_2
 			if(! annot.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
 				accept(annot);
 			}
-		}*/
+		}
 		// 2- Visit ETypeParameters, StructuralFeatures, Operations
 		acceptList(node.getEStructuralFeatures());
 		acceptList(node.getEOperations());
@@ -225,6 +222,8 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			if(tParam_Annot != null) {
 				visitorPass1.visitTypeParameterAnnotation(tParam_Annot);
 			}*/
+			// Set the type parameters
+			acceptList(node.getETypeParameters());
 
 			// Set the type of the operation
 			if (node.getEType() != null) {
@@ -245,13 +244,13 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			unit.pushContext();
 			
 			// add type variable
-			for (Object next : exporter.current_op.getTypeParameter()) unit.addTypeVar((TypeVariable)next);
+			for (TypeVariable next : exporter.current_op.getTypeParameter()) unit.addTypeVar(next);
 
 			// add parameters
-			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
+			for (Parameter next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter(next));
 			
-			// If the given operation contain no abstract or body annotation then we must create a body with a raise of NotImplemented Exception
-			// and add the overloadble tag to the operation
+			// If the given operation contain no abstract or body annotation or overloadable tag then we must create a body with a raise of NotImplemented Exception
+			// and add the overloadable tag to the operation
 			if(!isBodySpecified(node)){
 				exporter.current_op.setBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
 				TagHelper.createNonExistingTagFromNameAndValue(exporter.current_op, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
@@ -259,16 +258,12 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			
 			visitorPass1.isClassTypeOwner=false;
 			
-			// Deprecared since EMF2.3
 			// Visit all other annotations
-			/*for (Object next : node.getEAnnotations()) {
-				EAnnotation annot = (EAnnotation) next;
+			for (EAnnotation annot : node.getEAnnotations()) {
 				if(! annot.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
 					visitOperationAnnotation(annot);
 				}
-			}*/
-			// Set the type parameters
-			acceptList(node.getETypeParameters());
+			}
 			
 			unit.popContext();
 		}
@@ -308,12 +303,10 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	 * @return
 	 */
 	private boolean isBodySpecified(EOperation node){
-		for (Object next : node.getEAnnotations()) {
-			EAnnotation annot = (EAnnotation) next;
+		for (EAnnotation annot : node.getEAnnotations()) {
 			if(annot.getSource().equals(KM2Ecore.ANNOTATION)) {
 				// Visit all details EAnnotation entries
-				for (Object next2 :  annot.getDetails().keySet()) {
-					String key = (String) next2;						
+				for (String key :  annot.getDetails().keySet()) {					
 					if (key.equals(KM2Ecore.ANNOTATION_BODY_DETAILS)) {	
 						return true;
 					}
@@ -325,25 +318,6 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		}
 		return false;
 	}
-	
-	/*private boolean isBodySpecified(EStructuralFeature node){
-		for (Object next : node.getEAnnotations()) {
-			EAnnotation annot = (EAnnotation) next;
-			if(annot.getSource().equals(KM2Ecore.ANNOTATION)) {
-				// Visit all details EAnnotation entries
-				for (Object next2 :  annot.getDetails().keySet()) {
-					String key = (String) next2;						
-					if (key.equals(KM2Ecore.ANNOTATION_BODY_DETAILS)) {	
-						return true;
-					}
-					else if (key.equals(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS)) {	
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}*/
 
 	/**
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAttribute)

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.42 2007-07-12 15:54:30 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.43 2007-07-12 17:58:27 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -353,8 +353,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * @param newEModelElement the ecore element that corresponds to the given kermeta node 
 	 */
 	protected void setTagAnnotations(NamedElement node, EModelElement newEModelElement) {
-		for (Object next : node.getTag()) {
-			Tag t = (Tag) next;
+		for (Tag t : node.getTag()) {
 			ecoreExporter.addAnnotation( 
 				newEModelElement,
 				KM2Ecore.ANNOTATION,
@@ -364,7 +363,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 	}
 
-	
 	/**
 	 * Convert an kermeta Operation into EOperation
 	 */

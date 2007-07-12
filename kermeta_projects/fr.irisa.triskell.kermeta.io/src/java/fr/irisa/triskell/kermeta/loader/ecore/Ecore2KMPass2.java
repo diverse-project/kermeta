@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.15 2007-07-12 15:54:30 cfaucher Exp $
+/* $Id: Ecore2KMPass2.java,v 1.16 2007-07-12 17:58:27 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -123,12 +123,13 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		exporter.current_classdef = (ClassDefinition)visitorPass1.eclassifier_typedefinition_map.get(node);
 		visitorPass1.isClassTypeOwner = true;
 
+		// Deprecated since EMF2.3, now Type Parameters are set during the PASS3
 		// Visit the TypeParameter annotations
 		// (they have to be set for type variable bindings process in Pass_3)
-		EAnnotation typeVar_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
+		/*EAnnotation typeVar_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
 		if(typeVar_Annot != null) {
 			visitorPass1.visitTypeParameterAnnotation(typeVar_Annot);
-		}
+		}*/
 
 		// Set the super types
 		// Deprecated: only one of the 2 way is required with EMF2.3, we have choosen the second one, because in Ecore "EGenericSuperTypes" is a composite reference
