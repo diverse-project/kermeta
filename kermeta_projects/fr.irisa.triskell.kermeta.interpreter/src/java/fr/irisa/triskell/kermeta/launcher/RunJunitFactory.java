@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.19 2007-06-27 08:29:55 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.20 2007-07-12 08:47:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -69,11 +69,12 @@ public class RunJunitFactory implements Test {
         //KermetaUnitFactory.
         KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
 **/
-        
-    	unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
-    	TypeCheckerContext.initializeTypeChecker(unit);
+    	try {
+    		
+    		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
+    		TypeCheckerContext.initializeTypeChecker(unit);
     	
-        try {
+        
             
             unit.load();
             unit.typeCheck(null);
