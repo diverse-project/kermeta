@@ -253,7 +253,7 @@ class AutomatonHelper
     	stdio.writeln("before loading")
     	resource.load
     	stdio.writeln("after loading")
-    	var roots : Set<Object> init resource.rootContents
+    	var roots : Set<Object> init resource
     	result ?= roots.one
     end
     
