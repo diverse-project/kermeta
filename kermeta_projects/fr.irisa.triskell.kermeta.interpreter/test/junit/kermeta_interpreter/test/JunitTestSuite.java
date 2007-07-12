@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.34 2007-06-19 09:50:52 cfaucher Exp $
+/* $Id: JunitTestSuite.java,v 1.35 2007-07-12 07:42:22 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -184,7 +184,6 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","066_testHasSubType.main.kmt" );
 
-		testWithFile("test/kmt_testcases","067_testHasSubTypeLoadingModel.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
