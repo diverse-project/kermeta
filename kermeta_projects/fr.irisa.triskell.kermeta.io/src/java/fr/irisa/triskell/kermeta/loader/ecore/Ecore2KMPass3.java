@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.20 2007-07-03 11:44:38 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.21 2007-07-12 15:54:30 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -22,11 +22,13 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -39,6 +41,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
@@ -67,7 +70,6 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
 	protected Resource resource;
-
 	
 	/** true if the visit concerns type setting, otherwise false.
 	 * mainly used since operation visit needs 2 passes : 
@@ -105,6 +107,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		// Visit all the EClasses (their substructure, i.e operations and properties)
 		isTypeSettingMode = true;
 		for (EObject node : visitorPass1.eclassifier_typedefinition_map.keySet()) { // do not visit again datatypes?
+			System.err.println(node.toString());
 			if (node instanceof EClass) accept((EClass) node); 
 		}
 		// Visit again all the EOperations in order to set their super operations
@@ -138,18 +141,20 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		unit.pushContext();
 		addSymbolContext( exporter.current_classdef );
 		
+		// Deprecated since EMF2.3
 		// Order important here! annotation above all.
 		// 1- Visit all non already visited annotations
-		for (Object next : node.getEAnnotations()) {
+		/*for (Object next : node.getEAnnotations()) {
 			EAnnotation annot = (EAnnotation) next;
 			// KM2Ecore.ANNOTATION_TYPEPARAMETER annotation already visited in Pass_2
 			if(! annot.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
 				accept(annot);
 			}
-		}
-		// 2- Visit StructuralFeatures / Operations
+		}*/
+		// 2- Visit ETypeParameters, StructuralFeatures, Operations
 		acceptList(node.getEStructuralFeatures());
 		acceptList(node.getEOperations());
+		acceptList(node.getETypeParameters());
 		
 		// Pop previously pushed context
 		unit.popContext();
@@ -214,11 +219,12 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		
 		if (isTypeSettingMode == true)
 		{
+			// Deprecated since EMF2.3
 			// First visit the TypeParameter annotation in order to get type context for body parsing
-			EAnnotation tParam_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
+			/*EAnnotation tParam_Annot = node.getEAnnotation(KM2Ecore.ANNOTATION_TYPEPARAMETER);
 			if(tParam_Annot != null) {
 				visitorPass1.visitTypeParameterAnnotation(tParam_Annot);
-			}
+			}*/
 
 			// Set the type of the operation
 			if (node.getEType() != null) {
@@ -253,13 +259,16 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			
 			visitorPass1.isClassTypeOwner=false;
 			
+			// Deprecared since EMF2.3
 			// Visit all other annotations
-			for (Object next : node.getEAnnotations()) {
+			/*for (Object next : node.getEAnnotations()) {
 				EAnnotation annot = (EAnnotation) next;
 				if(! annot.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER)) {
 					visitOperationAnnotation(annot);
 				}
-			}
+			}*/
+			// Set the type parameters
+			acceptList(node.getETypeParameters());
 			
 			unit.popContext();
 		}
@@ -439,10 +448,8 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 	}	
 
 	
-	/*
-	 *
+	/**
 	 * Helper for super operations
-	 *
 	 */
 	
 	/**
@@ -564,7 +571,33 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		}
 		return null;
 	}
+	
+	/**
+	 * @param node
+	 * @return
+	 */
+	public Object visit(ETypeParameter node) {
+		// Create the object type variable
+		ObjectTypeVariable otv = createObjectTypeVariableFromETypeParameter(node);
 
+		acceptList(node.getEBounds());
+		
+		return otv;
+	}
+	
+	/**
+	 * @param node
+	 * @return
+	 */
+	public Object visit(EGenericType node) {
+		// Create the object type variable
+		//ObjectTypeVariable otv = createObjectTypeVariableFromETypeParameter(node);
+
+		node.getEClassifier();
+		// Créer une classe qui pointe vers le classifier
+		
+		return null;
+	}
 	
 	/**
 	 * Visit the EOperation EAnnotation 'node', which can be of the following types:
@@ -935,5 +968,32 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 * @return
+	 */
+	protected ObjectTypeVariable createObjectTypeVariableFromETypeParameter(ETypeParameter node)
+	{
+		ObjectTypeVariable otv = null;
+		
+		// FIXME CF Maybe a problem here
+		/*otv = (ObjectTypeVariable)object_type_variables.get(node);
+		if (otv == null) {*/
+			otv = unit.struct_factory.createObjectTypeVariable();
+//			object_type_variables.put(node, otv);
+		//}
+		//exporter.current_prop = prop;
+		
+		otv.setName(node.getName());
+		if(visitorPass1.isClassTypeOwner) {
+			exporter.current_classdef.getTypeParameter().add(otv);
+		} else {
+			exporter.current_op.getTypeParameter().add(otv);
+		}
+		
+		return otv;
 	}
 }

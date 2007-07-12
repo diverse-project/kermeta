@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.14 2007-05-25 15:11:08 ftanguy Exp $
+/* $Id: Ecore2KMPass2.java,v 1.15 2007-07-12 15:54:30 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -11,22 +11,28 @@
  */
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import java.util.Hashtable;
+
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * @author dtouzet
@@ -38,6 +44,9 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
 	protected Resource resource;
+	
+	/** dictionary of object type variables : { ETypeParameter : ObjectTypeVariable } */
+	protected Hashtable<ETypeParameter, ObjectTypeVariable> object_type_variables;
 		
 	/** 
 	 * @param unit
@@ -122,8 +131,23 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		}
 
 		// Set the super types
-		for (Object next : ((EClass)node).getESuperTypes()) {
+		// Deprecated: only one of the 2 way is required with EMF2.3, we have choosen the second one, because in Ecore "EGenericSuperTypes" is a composite reference
+		// Way 1: super types are stored thanks to the "eSuperTypes" reference
+		/*for (Object next : ((EClass)node).getESuperTypes()) {
 			EClassifier st = (EClassifier)next;
+			Type t = visitorPass1.createTypeForEClassifier(st, node);
+			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
+				throw new KM2ECoreConversionException(
+						"Internal error of ecore2kermeta :" +
+						" supertypes of class " + EcoreHelper.getQualifiedName((EClass)node) + " : "+ EcoreHelper.getQualifiedName(st) +" not found");
+			}
+			exporter.current_classdef.getSuperType().add(t);
+		}*/
+		
+		// Way 2: super types are stored thanks to the "eGenericSuperTypes" reference
+		for (Object next : ((EClass)node).getEGenericSuperTypes()) {
+			EGenericType gt = (EGenericType)next;
+			EClassifier st = gt.getEClassifier();
 			Type t = visitorPass1.createTypeForEClassifier(st, node);
 			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				throw new KM2ECoreConversionException(
@@ -137,7 +161,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	}
 	
 	/** Create a type for given type definition */
-	public Type createInstanceTypeForTypeDefinition(TypeDefinition type) {
+	protected Type createInstanceTypeForTypeDefinition(TypeDefinition type) {
 		Type iType = null;
 		// Translation : if type is a DataType or an Enumeration (those
 		// types implement both Type and TypeDefinition
@@ -160,4 +184,5 @@ public class Ecore2KMPass2 extends EcoreVisitor {
         if (type==null) throw new KM2ECoreConversionException("Ecore2KM exception : instance type is null for '" + type.getName() + "'");
         return iType;
 	}
+	
 }

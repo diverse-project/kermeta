@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.41 2007-06-06 16:50:22 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.42 2007-07-12 15:54:30 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -79,7 +79,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	/** The enumeration that is currently visited */
 	protected EEnum current_eenum;
 	
-	
 	protected KM2Ecore ecoreExporter;
 	
 	protected KM2KMTPrettyPrinter prettyPrinter;
@@ -90,7 +89,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 
 	/**
 	 * @param resource : the resource to populate
-	 * @param mapping : Hastable containing the newly created object mapping
+	 * @param mapping : Hashtable containing the newly created object mapping
 	 */
 	public KM2EcorePass1(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
@@ -305,6 +304,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			e.printStackTrace();
 		}
 		loggerTabs.decrement();
+		
 		return newEClass;
 	}
 	

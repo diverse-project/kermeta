@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.33 2007-02-22 12:45:20 cfaucher Exp $
+/* $Id: KM2EcorePass2.java,v 1.34 2007-07-12 15:54:30 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -29,6 +30,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,6 +52,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -139,6 +142,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		// Search the Eclass from the pass 1
 		newEClass = (EClass) kmt2ecoremapping.get(node);
 		
+		ecoreExporter.current_eclass = newEClass;
+		ecoreExporter.isClassTypeOwner = true;
+		
 		// Search the super types of EClass
 		for(Object next : node.getSuperType()) {
 			Type t = (Type) next;
@@ -160,9 +166,12 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				throw new KM2ECoreConversionException( "Problem : accept of a getSuperType on '"+ node.getName()+ "' returned null -- " + next);
 		}
 
+		
 		// Visit TypeParameters - One annotation per type parameter
 		for(Object tv : node.getTypeParameter()) {
-			setTypeParameterAnnotation((TypeVariable)tv, newEClass);
+			accept((ObjectTypeVariable) tv);
+			// Deprecated since EMF2.3
+			//setTypeParameterAnnotation((TypeVariable)tv, newEClass);
 		}
 
 		// Visit owned attributes
@@ -184,6 +193,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		// Search the EOperation from pass 1
 		EOperation newEOperation = getEObjectForOperation(node);
+		
+		ecoreExporter.current_eop = newEOperation;
+		ecoreExporter.isClassTypeOwner = false;
 		
 		if (newEOperation == null)
 			throw new KM2ECoreConversionException("KM2Ecore exception : could not find" 
@@ -237,7 +249,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		// TypeParameters : create one annotation per type parameter 
 		for ( Object next : node.getTypeParameter() )
 		{
-			setTypeParameterAnnotation((TypeVariable)next, newEOperation);			
+			accept((ObjectTypeVariable) next);
+			// Deprecated since EMF2.3
+			//setTypeParameterAnnotation((TypeVariable)next, newEOperation);			
 		}
 		
 		loggerTabs.decrement();
@@ -451,11 +465,18 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	
 
 	/**
-	 * TODO!
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitTypeVariable(fr.irisa.triskell.kermeta.language.structure.TypeVariable)
 	 */
-	public Object visitTypeVariable(TypeVariable node) {
-		return getEObjectForQualifiedName("kermeta::standard::Object","kermeta::standard::Object");
+	public Object visitObjectTypeVariable(ObjectTypeVariable node) {
+		ETypeParameter newETP = EcoreFactory.eINSTANCE.createETypeParameter();
+		newETP.setName(node.getName());
+		if( ecoreExporter.isClassTypeOwner ) {
+			ecoreExporter.current_eclass.getETypeParameters().add(newETP);
+		} else {
+			ecoreExporter.current_eop.getETypeParameters().add(newETP);
+		}
+		
+		return newETP;
 	}
 
 
@@ -570,8 +591,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 
 	/**
 	 * @param object_qname the qualified name (in kermeta::format) of the object we are looking for 
-	 * @param ecore_path the path of the object in "emf" representation <code>//Bla/foo/eobject_name</code>
-	 * @param owning_classdef the owning classdefinition to which the object belongs or is related to
+	 * @param owning_typedef_qname the owning typedefinition to which the object belongs or is related to
 	 * 
 	 * @return
 	 */

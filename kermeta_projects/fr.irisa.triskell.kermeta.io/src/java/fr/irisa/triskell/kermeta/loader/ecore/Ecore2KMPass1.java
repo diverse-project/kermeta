@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.10 2007-07-03 11:44:38 dvojtise Exp $
+/* $Id: Ecore2KMPass1.java,v 1.11 2007-07-12 15:54:30 cfaucher Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -174,7 +175,9 @@ public class Ecore2KMPass1 extends EcoreVisitor {
 		// Add the type defs in the unit 
 		unit.typeDefs.put(EcoreHelper.getQualifiedName(node), exporter.current_classdef);
 
+		// FIXME this accept call should not be there, in fact EStructuralFeatures are visited in the PASS3
 		acceptList(((EClass)node).getEStructuralFeatures());
+		
 		acceptList(((EClass)node).getEOperations());
 		
 		return exporter.current_classdef;

@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.32 2007-06-06 16:42:19 cfaucher Exp $
+/* $Id: KM2Ecore.java,v 1.33 2007-07-12 15:54:30 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -20,9 +20,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -70,6 +72,10 @@ public class KM2Ecore {
 	// the resource to populate
 	protected Resource ecoreResource = null;
 	public Resource traceResource = null;
+	
+	protected EClass current_eclass;
+	protected EOperation current_eop;
+	protected boolean isClassTypeOwner = true;
 	
 	public Tracer tracer = null;
 	
