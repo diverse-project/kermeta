@@ -40,6 +40,7 @@ public class EcoreVisitor {
 			}
 			
 			public Object accept(EObject node) {
+				System.err.println(node.toString());
 				Object result = null;
 				String cname="";
 				try {
@@ -110,6 +111,10 @@ public class EcoreVisitor {
 	public Object visit(EFactory node) {
 	return genericVisitChildren(node);
 	}
+	
+	public Object visit(EGenericType node) {
+		return genericVisitChildren(node);
+	}
 
 	public Object visit(EObject node) {
 	return genericVisitChildren(node);
@@ -128,6 +133,10 @@ public class EcoreVisitor {
 	}
 
 	public Object visit(EReference node) {
+	return genericVisitChildren(node);
+	}
+	
+	public Object visit(ETypeParameter node) {
 	return genericVisitChildren(node);
 	}
 
