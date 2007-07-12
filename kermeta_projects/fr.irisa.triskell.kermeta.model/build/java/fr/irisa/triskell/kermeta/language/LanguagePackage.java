@@ -46,7 +46,7 @@ public interface LanguagePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org//language";
+	String eNS_URI = "http://www.kermeta.org/kermeta//language";
 
 	/**
 	 * The package namespace name.

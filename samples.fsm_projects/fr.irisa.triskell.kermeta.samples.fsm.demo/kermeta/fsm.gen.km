@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <kermeta_language_structure:Package name="fsm">
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/1" name="FSM">
       <ownedAttribute name="ownedState" type="/0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="/0/@ownedTypeDefinition.1/@ownedAttribute.0" isComposite="true">

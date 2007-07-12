@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.6 2007-07-11 14:41:55 cfaucher Exp $
+/* $Id: FixPackageNSUri.java,v 1.7 2007-07-12 07:39:08 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  */
 public class FixPackageNSUri {
 	
-	public static final String BaseNsURI = "http://www.kermeta.org";
+	public static final String BaseNsURI = "http://www.kermeta.org/kermeta";
 	/**
 	 * Loads the ecore model from a xmi 2.0 (*.ecore) file
 	 * @param xmifile Path to the file to load

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditPartFactory.java,v 1.2 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: KmEditPartFactory.java,v 1.3 2007-07-12 07:39:37 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -53,19 +53,19 @@ public class KmEditPartFactory implements EditPartFactory {
 			if (element != null) {
 				Object editPart = null;
 
-				if ("http://www.kermeta.org".equals(element.eClass()
+				if ("http://www.kermeta.org/kermeta".equals(element.eClass()
 						.getEPackage().getNsURI())) {
 					editPart = new NodeKmSwitch(node).doSwitch(element);
 				}
-				if ("http://www.kermeta.org//language".equals(element.eClass()
+				if ("http://www.kermeta.org/kermeta//language".equals(element.eClass()
 						.getEPackage().getNsURI())) {
 					editPart = new NodeLanguageSwitch(node).doSwitch(element);
 				}
-				if ("http://www.kermeta.org//language/behavior".equals(element
+				if ("http://www.kermeta.org/kermeta//language/behavior".equals(element
 						.eClass().getEPackage().getNsURI())) {
 					editPart = new NodeBehaviorSwitch(node).doSwitch(element);
 				}
-				if ("http://www.kermeta.org//language/structure".equals(element
+				if ("http://www.kermeta.org/kermeta//language/structure".equals(element
 						.eClass().getEPackage().getNsURI())) {
 					editPart = new NodeStructureSwitch(node).doSwitch(element);
 				}
@@ -83,19 +83,19 @@ public class KmEditPartFactory implements EditPartFactory {
 			if (element != null) {
 				Object editPart = null;
 
-				if ("http://www.kermeta.org".equals(element.eClass()
+				if ("http://www.kermeta.org/kermeta".equals(element.eClass()
 						.getEPackage().getNsURI())) {
 					editPart = new EdgeKmSwitch(edge).doSwitch(element);
 				}
-				if ("http://www.kermeta.org//language".equals(element.eClass()
+				if ("http://www.kermeta.org/kermeta//language".equals(element.eClass()
 						.getEPackage().getNsURI())) {
 					editPart = new EdgeLanguageSwitch(edge).doSwitch(element);
 				}
-				if ("http://www.kermeta.org//language/behavior".equals(element
+				if ("http://www.kermeta.org/kermeta//language/behavior".equals(element
 						.eClass().getEPackage().getNsURI())) {
 					editPart = new EdgeBehaviorSwitch(edge).doSwitch(element);
 				}
-				if ("http://www.kermeta.org//language/structure".equals(element
+				if ("http://www.kermeta.org/kermeta//language/structure".equals(element
 						.eClass().getEPackage().getNsURI())) {
 					editPart = new EdgeStructureSwitch(edge).doSwitch(element);
 				}

@@ -6,7 +6,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: plugin.xml,v 1.12 2007-07-11 14:41:52 cfaucher Exp $
+ * $Id: plugin.xml,v 1.13 2007-07-12 07:39:13 cfaucher Exp $
  */
 -->
 
@@ -16,26 +16,26 @@
     <package
           class="fr.irisa.triskell.kermeta.KmPackage"
           genModel="build/ecore/kermeta.genmodel"
-          uri="http://www.kermeta.org"/> 
+          uri="http://www.kermeta.org/kermeta"/> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.kermeta.org//language" 
+       uri = "http://www.kermeta.org/kermeta//language" 
        class = "fr.irisa.triskell.kermeta.language.LanguagePackage"
        /> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.kermeta.org//language/behavior" 
+       uri = "http://www.kermeta.org/kermeta//language/behavior" 
        class = "fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage"
        /> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.kermeta.org//language/structure" 
+       uri = "http://www.kermeta.org/kermeta//language/structure" 
        class = "fr.irisa.triskell.kermeta.language.structure.StructurePackage"
        /> 
   </extension>

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.11 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: StructurePackage.java,v 1.12 2007-07-12 07:39:10 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -50,7 +50,7 @@ public interface StructurePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.kermeta.org//language/structure";
+	String eNS_URI = "http://www.kermeta.org/kermeta//language/structure";
 
 	/**
 	 * The package namespace name.
