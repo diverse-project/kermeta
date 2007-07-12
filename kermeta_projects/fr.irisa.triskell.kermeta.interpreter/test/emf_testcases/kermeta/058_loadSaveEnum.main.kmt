@@ -1,4 +1,4 @@
-/* $Id: 058_loadSaveEnum.main.kmt,v 1.3 2007-06-25 07:16:10 dvojtise Exp $
+/* $Id: 058_loadSaveEnum.main.kmt,v 1.4 2007-07-12 12:03:47 khpts Exp $
  * Creation date: June 5, 2007
  * License:
  * Copyright:
@@ -32,7 +32,7 @@ class Main inherits TestCase
 		tr.printTestResult
 	end
 	
-	operation setUp() is do
+	method setUp() is do
 		metamodelUri := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/metamodels/058_MMEnum.ecore"
 		modelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/058_"
 		outputmodelUriBase  := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/output/058_"
