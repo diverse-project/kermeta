@@ -40,7 +40,6 @@ public class EcoreVisitor {
 			}
 			
 			public Object accept(EObject node) {
-				System.err.println(node.toString());
 				Object result = null;
 				String cname="";
 				try {
