@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" xmi:id="_FOY9IB2YEdyYPoyw7qeztQ" activeDiagram="_FO1pEB2YEdyYPoyw7qeztQ">
+  <model href="Traceability.ecore#/"/>
+  <diagrams xmi:id="_FO1pEB2YEdyYPoyw7qeztQ" position="0,0" size="100,100" name="No name" viewport="260,0">
+    <property xmi:id="_FvXjQB2YEdyYPoyw7qeztQ" key="pageFormatName" value="A3"/>
+    <property xmi:id="_FvXjQR2YEdyYPoyw7qeztQ" key="diagramWidth" value="1188"/>
+    <property xmi:id="_FvXjQh2YEdyYPoyw7qeztQ" key="diagramHeight" value="1680"/>
+    <property xmi:id="_FvXjQx2YEdyYPoyw7qeztQ" key="pageMarginName" value="Small Margin"/>
+    <property xmi:id="_FvXjRB2YEdyYPoyw7qeztQ" key="diagramTopMargin" value="20"/>
+    <property xmi:id="_FvXjRR2YEdyYPoyw7qeztQ" key="diagramBottomMargin" value="20"/>
+    <property xmi:id="_FvXjRh2YEdyYPoyw7qeztQ" key="diagramLeftMargin" value="20"/>
+    <property xmi:id="_FvXjRx2YEdyYPoyw7qeztQ" key="diagramRightMargin" value="20"/>
+    <property xmi:id="_FvXjSB2YEdyYPoyw7qeztQ" key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_FO1pER2YEdyYPoyw7qeztQ" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="Traceability.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" xmi:id="_LpCFUB2YEdyYPoyw7qeztQ" position="127,29" size="107,-1">
+      <anchorage xmi:id="_Lr3W4B2YEdyYPoyw7qeztQ" graphEdge="_Ls6fwB2YEdyYPoyw7qeztQ _Ls6fxB2YEdyYPoyw7qeztQ _Ls6fyR2YEdyYPoyw7qeztQ _Ls6fzR2YEdyYPoyw7qeztQ _Ls6f0h2YEdyYPoyw7qeztQ _LtDpsB2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LpCFUR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//TraceModel"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_LpCFUh2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LpCFUx2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LpCFVB2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//TraceModel"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_LpCFVR2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LpCFVh2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LpCFVx2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//TraceModel"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_LrQ58B2YEdyYPoyw7qeztQ" position="530,6" size="132,-1">
+      <anchorage xmi:id="_Lr3W4R2YEdyYPoyw7qeztQ" graphEdge="_Ls6fwB2YEdyYPoyw7qeztQ _Ls6fxB2YEdyYPoyw7qeztQ _LtDptB2YEdyYPoyw7qeztQ _LtDpuB2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrQ58R2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Message"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrQ58h2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrQ58x2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrQ59B2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//Message"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrQ5-B2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrQ5-R2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//Message/language"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrQ5-h2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrQ5-x2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//Message/type"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrQ5_B2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrQ5_R2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//Message/value"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrQ59R2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrQ59h2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrQ59x2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//Message"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_Lraq8B2YEdyYPoyw7qeztQ" position="561,166" size="69,-1">
+      <anchorage xmi:id="_Ls6fyB2YEdyYPoyw7qeztQ" graphEdge="_Ls6fyR2YEdyYPoyw7qeztQ _Ls6fzR2YEdyYPoyw7qeztQ _LtDptB2YEdyYPoyw7qeztQ _LtDpuB2YEdyYPoyw7qeztQ _LtDpvB2YEdyYPoyw7qeztQ _LtDpwB2YEdyYPoyw7qeztQ _LtNasB2YEdyYPoyw7qeztQ _LtNatB2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lraq8R2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Trace"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_Lraq8h2YEdyYPoyw7qeztQ">
+        <property xmi:id="_Lraq8x2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lraq9B2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//Trace"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_Lraq9R2YEdyYPoyw7qeztQ">
+        <property xmi:id="_Lraq9h2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lraq9x2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//Trace"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_Lraq-B2YEdyYPoyw7qeztQ" position="129,166" size="103,-1">
+      <anchorage xmi:id="_Ls6f0R2YEdyYPoyw7qeztQ" graphEdge="_Ls6f0h2YEdyYPoyw7qeztQ _LtDpsB2YEdyYPoyw7qeztQ _LtDpvB2YEdyYPoyw7qeztQ _LtDpwB2YEdyYPoyw7qeztQ _LtNasB2YEdyYPoyw7qeztQ _LtNatB2YEdyYPoyw7qeztQ _LtgVoB2YEdyYPoyw7qeztQ _LtgVox2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lraq-R2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Reference"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_Lraq-h2YEdyYPoyw7qeztQ">
+        <property xmi:id="_Lraq-x2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lraq_B2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//Reference"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_Lraq_R2YEdyYPoyw7qeztQ">
+        <property xmi:id="_Lraq_h2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lraq_x2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//Reference"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_LrarAB2YEdyYPoyw7qeztQ" position="163,265" size="125,-1">
+      <anchorage xmi:id="_LtNauB2YEdyYPoyw7qeztQ" graphEdge="_LtgVoB2YEdyYPoyw7qeztQ _LtqGoB2YEdyYPoyw7qeztQ _LtqGox2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarAR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//FileReference"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarAh2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarAx2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarBB2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//FileReference"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrarCB2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarCR2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//FileReference/fileURI"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarBR2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarBh2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarBx2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//FileReference"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_LrarCh2YEdyYPoyw7qeztQ" position="56,367" size="156,-1">
+      <anchorage xmi:id="_LtgVpR2YEdyYPoyw7qeztQ" graphEdge="_LtqGoB2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarCx2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//TextReference"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarDB2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarDR2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarDh2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//TextReference"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrarEh2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarEx2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//TextReference/lineBeginAt"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrarFB2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarFR2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//TextReference/charBeginAt"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrarFh2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarFx2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//TextReference/lineEndAt"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrarGB2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarGR2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//TextReference/charEndAt"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarDx2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarEB2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarER2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//TextReference"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_LrarGh2YEdyYPoyw7qeztQ" position="243,367" size="123,-1">
+      <anchorage xmi:id="_LtqGoh2YEdyYPoyw7qeztQ" graphEdge="_LtqGox2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarGx2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//XMLReference"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarHB2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarHR2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarHh2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//XMLReference"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" xmi:id="_LrarIh2YEdyYPoyw7qeztQ" position="0,0" size="-1,-1">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarIx2YEdyYPoyw7qeztQ" presentation="default">
+            <element href="Traceability.ecore#//XMLReference/xPointer"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarHx2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarIB2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarIR2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//XMLReference"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_LrarJB2YEdyYPoyw7qeztQ" position="9,265" size="134,-1">
+      <anchorage xmi:id="_LtgVoh2YEdyYPoyw7qeztQ" graphEdge="_LtgVox2YEdyYPoyw7qeztQ"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarJR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//ModelReference"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarJh2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarJx2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="21"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarKB2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//ModelReference"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode" xmi:id="_LrarKR2YEdyYPoyw7qeztQ">
+        <property xmi:id="_LrarKh2YEdyYPoyw7qeztQ" key="eStructuralFeatureID" value="11"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LrarKx2YEdyYPoyw7qeztQ" presentation="default">
+          <element href="Traceability.ecore#//ModelReference"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_Lrkb8B2YEdyYPoyw7qeztQ" position="420,279" size="174,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lrkb8R2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//String"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_Lrkb8h2YEdyYPoyw7qeztQ" position="420,351" size="182,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lrkb8x2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Integer"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" xmi:id="_Lrkb9B2YEdyYPoyw7qeztQ" position="420,424" size="178,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Lrkb9R2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Object"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_Ls6fwB2YEdyYPoyw7qeztQ" anchor="_Lr3W4B2YEdyYPoyw7qeztQ _Lr3W4R2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Ls6fwR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//TraceModel/messages"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fwh2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="28" vDistance="-6"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fwx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="3" vDistance="-3"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_Ls6fxB2YEdyYPoyw7qeztQ" anchor="_Lr3W4R2YEdyYPoyw7qeztQ _Lr3W4B2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Ls6fxR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Message/traceMdl"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fxh2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="35" vDistance="-11"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fxx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="21" vDistance="-10"/>
+      <waypoints>[-218, 0, 198, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_Ls6fyR2YEdyYPoyw7qeztQ" anchor="_Lr3W4B2YEdyYPoyw7qeztQ _Ls6fyB2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Ls6fyh2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//TraceModel/traces"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fyx2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="31"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fzB2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="6" vDistance="-9"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_Ls6fzR2YEdyYPoyw7qeztQ" anchor="_Ls6fyB2YEdyYPoyw7qeztQ _Lr3W4B2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Ls6fzh2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Trace/traceMdl"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6fzx2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="-5" vDistance="21"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6f0B2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="30" vDistance="-2"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_Ls6f0h2YEdyYPoyw7qeztQ" anchor="_Lr3W4B2YEdyYPoyw7qeztQ _Ls6f0R2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_Ls6f0x2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//TraceModel/references"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6f1B2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="2" vDistance="-5"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_Ls6f1R2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="2" vDistance="6"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtDpsB2YEdyYPoyw7qeztQ" anchor="_Ls6f0R2YEdyYPoyw7qeztQ _Lr3W4B2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtDpsR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Reference/traceMdl"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpsh2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="4" vDistance="-11"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpsx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="7" vDistance="12"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtDptB2YEdyYPoyw7qeztQ" anchor="_Lr3W4R2YEdyYPoyw7qeztQ _Ls6fyB2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtDptR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Message/traces"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpth2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="2" vDistance="7"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDptx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="3" vDistance="-6"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtDpuB2YEdyYPoyw7qeztQ" anchor="_Ls6fyB2YEdyYPoyw7qeztQ _Lr3W4R2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtDpuR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Trace/description"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpuh2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="7" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpux2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="6" vDistance="-5"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtDpvB2YEdyYPoyw7qeztQ" anchor="_Ls6fyB2YEdyYPoyw7qeztQ _Ls6f0R2YEdyYPoyw7qeztQ">
+      <property xmi:id="_cUv18zB2EdyZK-08tPboPQ" key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtDpvR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Trace/sourceReferences"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpvh2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="30" vDistance="-2"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpvx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="3" vDistance="-2"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtDpwB2YEdyYPoyw7qeztQ" anchor="_Ls6fyB2YEdyYPoyw7qeztQ _Ls6f0R2YEdyYPoyw7qeztQ">
+      <property xmi:id="_cUv18DB2EdyZK-08tPboPQ" key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtDpwR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Trace/targetReferences"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpwh2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="2" vDistance="30"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtDpwx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="3" vDistance="6"/>
+      <waypoints>[22, 41, 437, 41]</waypoints>
+      <waypoints>[-389, 41, 26, 41]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtNasB2YEdyYPoyw7qeztQ" anchor="_Ls6f0R2YEdyYPoyw7qeztQ _Ls6fyB2YEdyYPoyw7qeztQ">
+      <property xmi:id="_cUv18jB2EdyZK-08tPboPQ" key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtNasR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Reference/targetTraces"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtNash2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="28" vDistance="3"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtNasx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="6" vDistance="3"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtNatB2YEdyYPoyw7qeztQ" anchor="_Ls6f0R2YEdyYPoyw7qeztQ _Ls6fyB2YEdyYPoyw7qeztQ">
+      <property xmi:id="_cUv18TB2EdyZK-08tPboPQ" key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge" xmi:id="_LtNatR2YEdyYPoyw7qeztQ" presentation="default">
+        <element href="Traceability.ecore#//Reference/sourceTraces"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtNath2YEdyYPoyw7qeztQ" id="nameLabel" uDistance="26"/>
+      <contained xsi:type="di:EdgeObjectUV" xmi:id="_LtNatx2YEdyYPoyw7qeztQ" id="cardinalityLabel" uDistance="6" vDistance="4"/>
+      <waypoints>[26, 41, -389, 41]</waypoints>
+      <waypoints>[437, 41, 22, 41]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtgVoB2YEdyYPoyw7qeztQ" anchor="_LtNauB2YEdyYPoyw7qeztQ _Ls6f0R2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_LtgVoR2YEdyYPoyw7qeztQ" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtgVox2YEdyYPoyw7qeztQ" anchor="_LtgVoh2YEdyYPoyw7qeztQ _Ls6f0R2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_LtgVpB2YEdyYPoyw7qeztQ" presentation="default" typeInfo="Inheritance"/>
+      <waypoints>[0, -47, -104, 52]</waypoints>
+      <waypoints>[104, -47, 0, 52]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtqGoB2YEdyYPoyw7qeztQ" anchor="_LtgVpR2YEdyYPoyw7qeztQ _LtNauB2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_LtqGoR2YEdyYPoyw7qeztQ" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" xmi:id="_LtqGox2YEdyYPoyw7qeztQ" anchor="_LtqGoh2YEdyYPoyw7qeztQ _LtNauB2YEdyYPoyw7qeztQ">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" xmi:id="_LtqGpB2YEdyYPoyw7qeztQ" presentation="default" typeInfo="Inheritance"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
