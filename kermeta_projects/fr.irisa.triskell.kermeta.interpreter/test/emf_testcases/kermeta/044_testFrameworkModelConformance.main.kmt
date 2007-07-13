@@ -108,10 +108,10 @@ class Main inherits kermeta::kunit::TestCase
   		
   		// print known type in the framework
   		stdio.writeln("  Known properties:")
-  		kClass.allOwnedAttribute.each{ c | stdio.writeln("     " + kClass.name+ "." + c.name) }
+  		kClass.allAttribute.each{ c | stdio.writeln("     " + kClass.name+ "." + c.name) }
   		eClass.eStructuralFeatures.each{ eFeature | 
   			var thekProperty : Property
-  			thekProperty ?= kClass.allOwnedAttribute.detect{kProperty | kProperty.name.equals(eFeature.name)}
+  			thekProperty ?= kClass.allAttribute.detect{kProperty | kProperty.name.equals(eFeature.name)}
 			checkProperty(eFeature, thekProperty)			
   		}
     end
