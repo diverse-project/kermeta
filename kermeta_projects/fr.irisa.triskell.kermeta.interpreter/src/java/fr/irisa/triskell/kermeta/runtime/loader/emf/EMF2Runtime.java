@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.64 2007-07-06 11:52:14 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.65 2007-07-13 14:26:50 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -95,6 +95,8 @@ public class EMF2Runtime {
     		ecore_kermeta_map.put("EEnum.eLiterals", "ownedLiteral");
     		ecore_kermeta_map.put("EEnumLiteral.literal", "");
     		ecore_kermeta_map.put("EEnum.instanceClassName", "");
+    		ecore_kermeta_map.put("EEnum.instanceTypeName", "");
+    		ecore_kermeta_map.put("EEnum.eTypeParameters", "");
     		ecore_kermeta_map.put("EEnum.instanceClass", "");
     		ecore_kermeta_map.put("EEnum.defaultValue", "");
     		ecore_kermeta_map.put("EEnum.ePackage", "");
@@ -502,6 +504,8 @@ public class EMF2Runtime {
 	    			// A "null" instanceClassName property must correspond to a "void" RO property and not to an empty string.
 	    			// Empty string will raise an error during EMF saving.
 	    			else if(eObject instanceof EClassifier && feature.getName().equals("instanceClassName") && fvalue == null) {
+	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
+	    			}else if(eObject instanceof EClassifier && feature.getName().equals("instanceTypeName") && fvalue == null) {
 	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
 	    			}
 	    			// END EMF Patch	    			
