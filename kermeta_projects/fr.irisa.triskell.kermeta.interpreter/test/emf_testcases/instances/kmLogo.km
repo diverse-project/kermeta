@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <kermeta_language_structure:Package tag="/3 /4" name="kmLogo">
     <nestedPackage name="semanticDomain">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Turtle">
