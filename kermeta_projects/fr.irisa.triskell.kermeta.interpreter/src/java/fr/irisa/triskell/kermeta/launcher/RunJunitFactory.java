@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.20 2007-07-12 08:47:04 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.21 2007-07-13 07:42:35 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -116,7 +116,7 @@ public class RunJunitFactory implements Test {
             	
                 ClassDefinition cd = (ClassDefinition)unit.typeDefinitionLookup(main_class);                
                 if(cd != null){
-                	ClassDefinition class_test = (ClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::Test");
+                	ClassDefinition class_test = (ClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::TestCase");
             
 	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
 	                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));

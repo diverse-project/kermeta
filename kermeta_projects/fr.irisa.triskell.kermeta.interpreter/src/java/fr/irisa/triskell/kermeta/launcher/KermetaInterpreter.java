@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.28 2007-06-05 09:30:34 ftanguy Exp $
+/* $Id: KermetaInterpreter.java,v 1.29 2007-07-13 07:42:35 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -260,19 +260,26 @@ public class KermetaInterpreter {
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
 	    
-	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "setUp");
+	    if(isTestSuite){
+	    	callOperation(exp_interpreter, entryObject, "initLog");
+	    	callOperation(exp_interpreter, entryObject, "setUp");
+	    }
 	    
 	    // Execute the operation
 	    RuntimeObject result = (RuntimeObject) exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	    
-	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "tearDown");
+	    if(isTestSuite){ 
+	    	callOperation(exp_interpreter, entryObject, "tearDown");
+	    	// retreives the failures
+	    	callOperation(exp_interpreter, entryObject, "raiseIfHasFailures");
+	    }
 	    
 	    return result;
 	}
 
 	/** call the given operation 
 	 * do nothing if the operation doesn't exist*/
-	private void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String opName) {
+	public void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String opName) {
 		CallableOperation co = new SimpleType(entryClass).getOperationByName(opName); 
 		if (co != null) {
 			Operation setUpOp = co.getOperation();

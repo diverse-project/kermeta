@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.11 2007-04-04 13:51:43 ftanguy Exp $
+/* $Id: RunTestCase.java,v 1.12 2007-07-13 07:42:35 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -107,6 +107,7 @@ public class RunTestCase extends TestCase {
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
     		interpreter.isTestSuite = containerTestSuite.isTestSuite;
     		interpreter.launch();
+    		
     		    		
     	}
     	catch(KermetaRaisedException e){
