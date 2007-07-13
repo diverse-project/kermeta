@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.58 2007-07-11 11:26:07 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.59 2007-07-13 14:27:14 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -325,7 +325,12 @@ public class Runtime2EMF {
 		else if (RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty) != null)
 			result = RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty);
 		else if (RuntimeObjectHelper.isanEnumerationLiteral(rProperty) == true){
-			if(feature.getEType().getInstanceClass() !=  null){			
+			if(feature.getEType().eResource().getURI().toString().equals("http://www.kermeta.org/kermeta")){
+				// this is a special case of writing a km file, so we need to find the enum in the km and not a EEnum
+				result = createEObjectFromRuntimeObjectWithResource(rProperty,
+						feature.getEType().eResource());
+			}
+			else if(feature.getEType().getInstanceClass() !=  null){			
 				// this enumeration has its own implementation must use it ...
 				result = createGeneratedClassLiteralFromEnumRuntimeObject(rProperty,
 						feature.getEType());
