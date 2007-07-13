@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.44 2007-07-13 14:39:38 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.45 2007-07-13 16:26:25 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -252,7 +252,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			
 			// Visit TypeParameters - One annotation per type parameter
 			for(Object tv : node.getTypeParameter()) {
-				accept((ObjectTypeVariable) tv);
+				newEClass.getETypeParameters().add((ETypeParameter) accept((ObjectTypeVariable) tv));
 			}
 			
 			// Owned Attributes
@@ -381,13 +381,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			newETypeParameter = EcoreFactory.eINSTANCE.createETypeParameter();
 			newETypeParameter.setName(node.getName());
 		}
-		
 		km2ecoremapping.put(node, newETypeParameter);
-		if( ecoreExporter.isClassTypeOwner ) {
-			ecoreExporter.current_eclass.getETypeParameters().add(newETypeParameter);
-		} else {
-			ecoreExporter.current_eop.getETypeParameters().add(newETypeParameter);
-		}
 		
 		return newETypeParameter;
 	}
@@ -402,7 +396,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		EOperation newEOperation = EcoreFactory.eINSTANCE.createEOperation();
 		
-		ecoreExporter.current_eop = newEOperation;
 		ecoreExporter.isClassTypeOwner = false;
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
@@ -520,7 +513,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		// TypeParameters : create one annotation per type parameter 
 		for ( Object next : node.getTypeParameter() ) {
-			accept((ObjectTypeVariable) next);
+			newEOperation.getETypeParameters().add((ETypeParameter) accept((ObjectTypeVariable) next));
 		}
 		
 		km2ecoremapping.put(node,newEOperation);

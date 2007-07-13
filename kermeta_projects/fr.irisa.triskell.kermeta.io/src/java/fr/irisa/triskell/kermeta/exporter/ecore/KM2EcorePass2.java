@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.35 2007-07-13 14:39:38 cfaucher Exp $
+/* $Id: KM2EcorePass2.java,v 1.36 2007-07-13 16:26:25 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -170,7 +170,24 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		// Visit type parameters in order to fix the type parameter's super type
 		for(TypeVariable next : node.getTypeParameter()) {
-			accept((ObjectTypeVariable) next);
+			
+			// Add type to supertypes list
+			// FIXME CF We must choose the common super type
+			if(next.getSupertype() != null) {
+				Type t = (Type) next.getSupertype();
+				Object o = accept(t); 
+				if(o != null) {
+					if(o instanceof EClass) {
+						EGenericType newEGenericTypeForSuperType = EcoreFactory.eINSTANCE.createEGenericType();
+						newEGenericTypeForSuperType.setEClassifier((EClass) o);
+						((ETypeParameter) km2ecoremapping.get(next)).getEBounds().add(newEGenericTypeForSuperType);
+					}
+					
+					if(o instanceof EGenericType) {
+						((ETypeParameter) km2ecoremapping.get(next)).getEBounds().add((EGenericType) o);
+					}
+				}
+			}
 		}
 		
 		loggerTabs.decrement();
@@ -187,8 +204,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		// Search the EOperation from pass 1
 		EOperation newEOperation = getEObjectForOperation(node);
-
-		ecoreExporter.current_eop = newEOperation;
 		
 		if (newEOperation == null)
 			throw new KM2ECoreConversionException("KM2Ecore exception : could not find" 
@@ -207,12 +222,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			// datatype created during first pass
 			//newEOperation.setEType(ecoreExporter.kermetaTypesAlias);
 
-			// Add specific EAnnotation to EOperation
+			// Add ObjectTypeVariable to EOperation
 			if(opType instanceof ObjectTypeVariable) {
-				ecoreExporter.isClassTypeOwner = false;
-				accept(opType);
-				ecoreExporter.isClassTypeOwner = true;
-				//setTypeVariableAnnotation(((TypeVariable) opType).getName(), newEOperation);
+				newEOperation.setEGenericType((EGenericType) accept(opType));
 			}
 			else {
 				setFunctionTypeAnnotation((FunctionType) opType, newEOperation);
@@ -254,7 +266,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	public Object visitParameter(Parameter node) {
 		// Search the EParameter from previous pass 1, then set its type
 		EParameter newEParameter = getEObjectForParameter(node);
-		ecoreExporter.current_eparameter = newEParameter;
 		
 		EClassifier type = null; 
 
@@ -267,12 +278,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			// datatype created during first pass
 			//type = ecoreExporter.kermetaTypesAlias; 
 
-			// Add specific EAnnotation to EParameter
+			// Add ObjectTypeVariable to EParameter
 			if(paramType instanceof ObjectTypeVariable) {
-				ecoreExporter.isParameter = true;
-				accept(paramType);
-				ecoreExporter.isParameter = false;
-				//setTypeVariableAnnotation(((TypeVariable) paramType).getName(), newEParameter);
+				newEParameter.setEGenericType((EGenericType) accept(paramType));
 			}
 			else {
 				setFunctionTypeAnnotation((FunctionType) paramType , newEParameter);
@@ -354,8 +362,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		EAttribute newEAttribute = null;
 		// search the Eclass from previous pass
 		newEStructuralFeature = (EStructuralFeature)getEObjectForProperty(node);
-
-		ecoreExporter.current_estructuralfeature = newEStructuralFeature;
 		
 		// If property is composite or derived we have to check the type (primitive type or not)
 		if(ecoreExporter.isPropertyValidForEAttribute(node))
@@ -396,12 +402,9 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			// datatype created during first pass
 			//type = ecoreExporter.kermetaTypesAlias; 
 
-			// Add specific EAnnotation to EStructuralFeature
+			// Add ObjectTypeVariable to EStructuralFeature
 			if(propType instanceof ObjectTypeVariable) {
-				//setTypeVariableAnnotation(((TypeVariable) propType).getName(), newEStructuralFeature);
-				ecoreExporter.isProperty = true;
-				accept(propType);
-				ecoreExporter.isProperty = false;
+				newEStructuralFeature.setEGenericType((EGenericType) accept(propType));
 				//newEStructuralFeature.setEGenericType(EcoreFactory.eINSTANCE.createEGenericType());
 				//newEStructuralFeature.getEGenericType().setETypeParameter((ETypeParameter) km2ecoremapping.get(propType));
 			}
@@ -429,50 +432,14 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		return newEStructuralFeature;
 	}
 	
+	
 	/**
 	 * @see KermetaOptimizedVisitor#visitObjectTypeVariable(fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable)
 	 */
 	public Object visitObjectTypeVariable(ObjectTypeVariable node) {
-		EGenericType newEGenericType = null;
-		if( ecoreExporter.isProperty ) {
-			newEGenericType = createEGenericType(node);
-			ecoreExporter.current_estructuralfeature.setEGenericType(newEGenericType);
-		}
-		if(!ecoreExporter.isClassTypeOwner) {
-			newEGenericType = createEGenericType(node);
-			ecoreExporter.current_eop.setEGenericType(createEGenericType(node));
-		}
-		if(ecoreExporter.isParameter) {
-			newEGenericType = createEGenericType(node);
-			ecoreExporter.current_eparameter.setEGenericType(createEGenericType(node));
-		}
-		
-		/*if(node.getSupertype() != null) {
-			Type t = (Type) node.getSupertype();
-			Object o = accept(t); 
-			if(o != null) {
-				// Add type to supertypes list
-				if(o instanceof EClass) {
-				newEGenericType.setEClassifier((EClass) o);
-				}
-	
-				// In case type has type variable bindings, add a superclass bindings annotation
-				// to generated EClass
-				if(t instanceof ParameterizedType) {
-					ParameterizedType pType = (ParameterizedType) t;
-					if(! pType.getTypeParamBinding().isEmpty())
-						setSuperclassTypeVariableBindingsAnnotation(pType, newEClass);
-				}
-			}
-		}*/
-		
-		return newEGenericType;
-	}
-	
-	private EGenericType createEGenericType(ObjectTypeVariable node) {
 		EGenericType newEGenericType = EcoreFactory.eINSTANCE.createEGenericType();
 		newEGenericType.setETypeParameter((ETypeParameter) km2ecoremapping.get(node));
-		//km2ecoremapping.put(node,newEGenericType);
+		
 		return newEGenericType;
 	}
 	

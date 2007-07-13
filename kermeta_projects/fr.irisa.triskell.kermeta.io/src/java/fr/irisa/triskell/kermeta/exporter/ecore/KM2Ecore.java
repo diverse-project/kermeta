@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.34 2007-07-13 14:39:38 cfaucher Exp $
+/* $Id: KM2Ecore.java,v 1.35 2007-07-13 16:26:25 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -77,12 +77,7 @@ public class KM2Ecore {
 	public Resource traceResource = null;
 	
 	protected EClass current_eclass;
-	protected EStructuralFeature current_estructuralfeature;
-	protected EOperation current_eop;
-	protected EParameter current_eparameter;
 	protected boolean isClassTypeOwner = true;
-	protected boolean isProperty = false;
-	protected boolean isParameter = false;
 	
 	public Tracer tracer = null;
 	
