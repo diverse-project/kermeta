@@ -15,6 +15,10 @@ class C<P1 : B>
 {
 }
 
+class D<P0, P1 : P0>
+{
+}
+
 class XusesA
 {
 	operation main() : kermeta::standard::~Void is do
