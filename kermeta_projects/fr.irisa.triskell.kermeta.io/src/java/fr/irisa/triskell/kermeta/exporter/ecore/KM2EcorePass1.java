@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.43 2007-07-12 17:58:27 cfaucher Exp $
+/* $Id: KM2EcorePass1.java,v 1.44 2007-07-13 14:39:38 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -40,6 +41,7 @@ import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -233,6 +235,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		try{
 			newEClass = EcoreFactory.eINSTANCE.createEClass();
+
+			ecoreExporter.current_eclass = newEClass;
+			ecoreExporter.isClassTypeOwner = true;
 			
 			// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
 			newEClass.setName( KMTHelper.getUnescapedIdentifier(current_name) );
@@ -245,6 +250,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			// Create annotations for Comments
 			setTagAnnotations((NamedElement)node, (EModelElement)newEClass);
 			
+			// Visit TypeParameters - One annotation per type parameter
+			for(Object tv : node.getTypeParameter()) {
+				accept((ObjectTypeVariable) tv);
+			}
 			
 			// Owned Attributes
 			for (Object next : node.getOwnedAttribute()) {
@@ -364,6 +373,26 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	}
 
 	/**
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitTypeVariable(fr.irisa.triskell.kermeta.language.structure.TypeVariable)
+	 */
+	public Object visitObjectTypeVariable(ObjectTypeVariable node) {
+		ETypeParameter newETypeParameter = (ETypeParameter) km2ecoremapping.get(node);
+		if(newETypeParameter == null) {
+			newETypeParameter = EcoreFactory.eINSTANCE.createETypeParameter();
+			newETypeParameter.setName(node.getName());
+		}
+		
+		km2ecoremapping.put(node, newETypeParameter);
+		if( ecoreExporter.isClassTypeOwner ) {
+			ecoreExporter.current_eclass.getETypeParameters().add(newETypeParameter);
+		} else {
+			ecoreExporter.current_eop.getETypeParameters().add(newETypeParameter);
+		}
+		
+		return newETypeParameter;
+	}
+	
+	/**
 	 * Convert an kermeta Operation into EOperation
 	 */
 	public Object visitOperation(Operation node) {
@@ -372,6 +401,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		
 		EOperation newEOperation = EcoreFactory.eINSTANCE.createEOperation();
+		
+		ecoreExporter.current_eop = newEOperation;
+		ecoreExporter.isClassTypeOwner = false;
 		
 		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
 		newEOperation.setName( KMTHelper.getUnescapedIdentifier(current_name) );
@@ -485,6 +517,12 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 
 		setTagAnnotations(node, newEOperation);
+		
+		// TypeParameters : create one annotation per type parameter 
+		for ( Object next : node.getTypeParameter() ) {
+			accept((ObjectTypeVariable) next);
+		}
+		
 		km2ecoremapping.put(node,newEOperation);
 		loggerTabs.decrement();
 		return newEOperation;

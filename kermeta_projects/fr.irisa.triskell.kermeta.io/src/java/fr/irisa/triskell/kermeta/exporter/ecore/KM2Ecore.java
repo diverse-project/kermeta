@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.33 2007-07-12 15:54:30 cfaucher Exp $
+/* $Id: KM2Ecore.java,v 1.34 2007-07-13 14:39:38 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -25,6 +25,9 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -74,8 +77,12 @@ public class KM2Ecore {
 	public Resource traceResource = null;
 	
 	protected EClass current_eclass;
+	protected EStructuralFeature current_estructuralfeature;
 	protected EOperation current_eop;
+	protected EParameter current_eparameter;
 	protected boolean isClassTypeOwner = true;
+	protected boolean isProperty = false;
+	protected boolean isParameter = false;
 	
 	public Tracer tracer = null;
 	
