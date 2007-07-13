@@ -1,10 +1,10 @@
-/* $Id: ecore.kmt,v 1.9 2007-07-13 11:47:19 dvojtise Exp $
+/* $Id: ecore.kmt,v 1.10 2007-07-13 15:13:27 dvojtise Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
  * 	Implementation of ECORE metamodel in Kermeta
  * Authors:	
- *	Vincent MAH� vmahe@irisa.fr
+ *	Vincent MAHE vmahe@irisa.fr
  */
 package ecore;
 

@@ -3,10 +3,10 @@
    <description url="http://www.kermeta.org/update">
       Kermeta eclipse update site
    </description>
-   <feature url="features/fr.irisa.triskell.kermeta_0.4.2.jar" id="fr.irisa.triskell.kermeta" version="0.4.2">
+   <feature url="features/fr.irisa.triskell.kermeta_0.5.0.jar" id="fr.irisa.triskell.kermeta" version="0.5.0">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.graphical_0.4.2.jar" id="fr.irisa.triskell.kermeta.graphical" version="0.4.2">
+   <feature url="features/fr.irisa.triskell.kermeta.graphical_0.5.0.jar" id="fr.irisa.triskell.kermeta.graphical" version="0.5.0">
       <category name="Kermeta"/>
    </feature>
    <feature url="features/fr.irisa.triskell.traceability_0.1.0.jar" id="fr.irisa.triskell.traceability" version="0.1.0">
@@ -21,7 +21,7 @@
    <feature url="features/org.kermeta.sintaks.feature_0.1.0.jar" id="org.kermeta.sintaks.feature" version="0.1.0">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta.ocl_0.0.3.jar" id="fr.irisa.triskell.kermeta.ocl" version="0.0.3">
+   <feature url="features/fr.irisa.triskell.kermeta.ocl_0.1.0.jar" id="fr.irisa.triskell.kermeta.ocl" version="0.1.0">
       <category name="Kermeta"/>
    </feature>
    <category-def name="Kermeta" label="Kermeta and its MDKs">

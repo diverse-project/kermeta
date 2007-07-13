@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
-  <kermeta_language_structure:Package tag="/373" name="kermeta">
+  <kermeta_language_structure:Package tag="/374" name="kermeta">
     <nestedPackage tag="/1 /2" name="standard">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/3" name="Void">
         <ownedOperation name="isVoid" type="/0/standard/Void/isVoid/@containedType.0" isOrdered="true" upper="1" superOperation="/0/reflection/Object/isVoid">
@@ -11736,9 +11736,9 @@
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/kunit/Fallible/getLog/@post.0/@body/@parameters.0/@containedType.0"/>
         </ownedOperation>
-        <ownedOperation name="raiseIfHasFailures" type="/0/kunit/TestCase/raiseIfHasFailures/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/320" name="raiseIfHasFailures" type="/0/kunit/TestCase/raiseIfHasFailures/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <body xsi:type="kermeta_language_behavior:Block" staticType="/0/kunit/Fallible/getLog/@post.0/@body/@parameters.0/@containedType.0">
+          <body xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/Collection/addAll/@body/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.0/@containedType.0" identifier="msg">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
               <initialization xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value=""/>
@@ -11801,6 +11801,71 @@
                   <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.1/@condition/@target/@target/@containedType.0" name="failures" staticProperty="/0/kunit/Log/failures">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/OrderedSet">
                       <typeParamBinding variable="/0/standard/OrderedSet/G" type="/0/kunit/Log/failures/@containedType.0"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/Test/log/@containedType.0" name="log" staticProperty="/0/kunit/Test/log"/>
+                  </target>
+                </target>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Conditional" staticType="/0/standard/Collection/addAll/@body/@containedType.0">
+              <thenBody xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/Collection/addAll/@body/@containedType.0">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/Collection/addAll/@body/@containedType.0" name="each" staticOperation="/0/standard/Collection/each">
+                  <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0">
+                    <containedType xsi:type="kermeta_language_structure:FunctionType" left="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@containedType.0/@containedType.0" right="/0/kunit/Fallible/getLog/@post.0/@body/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:ProductType" type="/0/kunit/Log/errors/@containedType.0"/>
+                    </containedType>
+                    <parameters name="f"/>
+                    <body xsi:type="kermeta_language_behavior:Block" staticType="/0/kunit/Fallible/getLog/@post.0/@body/@parameters.0/@containedType.0">
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0">
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.0/@containedType.0" name="msg"/>
+                        <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="Errors: "/>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/standard/String/plus/@containedType.0">
+                        <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.0/@containedType.0" name="msg"/>
+                        <value xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/String/plus/@containedType.0" name="plus" staticOperation="/0/standard/String/plus">
+                          <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/Error/toString/@containedType.0" name="toString" staticOperation="/0/kunit/Error/toString">
+                            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/Log/errors/@containedType.0" name="f"/>
+                          </parameters>
+                          <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/String/plus/@containedType.0" name="plus" staticOperation="/0/standard/String/plus">
+                            <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="&#xA;   "/>
+                            <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.0/@containedType.0" name="msg"/>
+                          </target>
+                        </value>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@statement.2/@containedType.0" identifier="exception">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/Exception"/>
+                        <initialization xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@statement.2/@initialization/@containedType.0" name="new" staticOperation="/0/language/structure/Class/new">
+                          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/Exception"/>
+                          <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="/0/kunit/Log/addFailure/@body/@statement.0/@parameters.0/@target/@target/@containedType.0">
+                            <typeref type="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@statement.2/@initialization/@containedType.0" upper="1"/>
+                          </target>
+                        </initialization>
+                        <type type="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@statement.2/@containedType.0" isOrdered="true" upper="1"/>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.0/@containedType.0">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0" name="message" staticProperty="/0/exceptions/Exception/message">
+                          <target xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@statement.2/@containedType.0" name="exception"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.0/@containedType.0" name="msg"/>
+                      </statement>
+                      <statement xsi:type="kermeta_language_behavior:Raise" staticType="/0/kunit/Fallible/getLog/@post.0/@body/@parameters.0/@containedType.0">
+                        <expression xsi:type="kermeta_language_behavior:CallVariable" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@parameters.0/@body/@statement.2/@containedType.0" name="exception"/>
+                      </statement>
+                    </body>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@thenBody/@statement.0/@target/@containedType.0" name="errors" staticProperty="/0/kunit/Log/errors">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/OrderedSet">
+                      <typeParamBinding variable="/0/standard/OrderedSet/G" type="/0/kunit/Log/errors/@containedType.0"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/Test/log/@containedType.0" name="log" staticProperty="/0/kunit/Test/log"/>
+                  </target>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/Boolean/not/@containedType.0" name="not" staticOperation="/0/standard/Boolean/not">
+                <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/standard/Collection/empty/@containedType.0" name="empty" staticOperation="/0/standard/Collection/empty">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/TestCase/raiseIfHasFailures/@body/@statement.2/@condition/@target/@target/@containedType.0" name="errors" staticProperty="/0/kunit/Log/errors">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/OrderedSet">
+                      <typeParamBinding variable="/0/standard/OrderedSet/G" type="/0/kunit/Log/errors/@containedType.0"/>
                     </containedType>
                     <target xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/kunit/Test/log/@containedType.0" name="log" staticProperty="/0/kunit/Test/log"/>
                   </target>
@@ -11963,11 +12028,11 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/320" name="TestRunner">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/321" name="TestRunner">
         <ownedAttribute name="log" type="/0/kunit/TestRunner/log/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/kunit/Log"/>
         </ownedAttribute>
-        <ownedOperation tag="/321" name="runTest" type="/0/kunit/TestRunner/runTest/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/322" name="runTest" type="/0/kunit/TestRunner/runTest/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="test" type="/0/kunit/TestRunner/runTest/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/kunit/Test"/>
@@ -12003,7 +12068,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/322" name="run" type="/0/kunit/TestRunner/run/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/323" name="run" type="/0/kunit/TestRunner/run/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="testCaseClass" type="/0/kunit/TestRunner/run/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/reflection/Class"/>
@@ -12037,7 +12102,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/323" name="printTestResult">
+        <ownedOperation tag="/324" name="printTestResult">
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.0/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:CallFeature" staticType="/0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.0/@containedType.0" name="writeln" staticOperation="/0/io/StdIO/writeln">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="/0/kunit/Fallible/assert/@body/@statement.1/@thenBody/@statement.0/@parameters.1/@parameters.0/@containedType.0" value="&#xA;---------------------------------------------  TEST RESULTS-----------------------------------------------&#xA;"/>
@@ -12239,11 +12304,11 @@
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
-    <nestedPackage tag="/324" name="utils">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/325" name="Hashtable">
+    <nestedPackage tag="/325" name="utils">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/326" name="Hashtable">
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="K"/>
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="V"/>
-        <ownedOperation tag="/326" name="size" type="/0/utils/Hashtable/size/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/327" name="size" type="/0/utils/Hashtable/size/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Integer"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/utils/Hashtable/size/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/utils/Hashtable/size/@containedType.0" isCast="true">
@@ -12260,7 +12325,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/327" name="keyIterator" type="/0/utils/Hashtable/keyIterator/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/328" name="keyIterator" type="/0/utils/Hashtable/keyIterator/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Iterator">
             <typeParamBinding variable="/0/standard/Iterator/G" type="/0/utils/Hashtable/K"/>
           </containedType>
@@ -12278,7 +12343,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/328" name="valueIterator" type="/0/utils/Hashtable/valueIterator/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/329" name="valueIterator" type="/0/utils/Hashtable/valueIterator/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Iterator">
             <typeParamBinding variable="/0/standard/Iterator/G" type="/0/utils/Hashtable/V"/>
           </containedType>
@@ -12296,7 +12361,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/329" name="getValue" type="/0/utils/Hashtable/V" isOrdered="true" upper="1">
+        <ownedOperation tag="/330" name="getValue" type="/0/utils/Hashtable/V" isOrdered="true" upper="1">
           <ownedParameter name="key" type="/0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/utils/Hashtable/V">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/utils/Hashtable/V" isCast="true">
@@ -12313,7 +12378,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/330" name="put" type="/0/utils/Hashtable/put/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/331" name="put" type="/0/utils/Hashtable/put/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="key" type="/0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <ownedParameter name="value" type="/0/utils/Hashtable/V" isOrdered="true" upper="1"/>
@@ -12330,7 +12395,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/331" name="remove" type="/0/utils/Hashtable/remove/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/332" name="remove" type="/0/utils/Hashtable/remove/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="key" type="/0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0">
@@ -12345,7 +12410,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/332" name="clear" type="/0/utils/Hashtable/clear/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/333" name="clear" type="/0/utils/Hashtable/clear/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:JavaStaticCall" staticType="/0/utils/Hashtable/size/@body/@statement.0/@value/@containedType.0" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::Map" jmethod="clear">
@@ -12358,7 +12423,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/333" name="keys" type="/0/utils/Hashtable/keys/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/334" name="keys" type="/0/utils/Hashtable/keys/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Set">
             <typeParamBinding variable="/0/standard/Set/G" type="/0/utils/Hashtable/K"/>
           </containedType>
@@ -12402,7 +12467,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/334" name="values" type="/0/utils/Hashtable/values/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/335" name="values" type="/0/utils/Hashtable/values/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Collection">
             <typeParamBinding variable="/0/standard/Collection/G" type="/0/utils/Hashtable/V"/>
           </containedType>
@@ -12445,7 +12510,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/335" name="containsKey" type="/0/utils/Hashtable/containsKey/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/336" name="containsKey" type="/0/utils/Hashtable/containsKey/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Boolean"/>
           <ownedParameter name="key" type="/0/utils/Hashtable/K" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/Boolean/equals/@body/@statement.0/@condition/@containedType.0">
@@ -12461,12 +12526,12 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/336" name="Stack" superType="/0/utils/Stack/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/337" name="Stack" superType="/0/utils/Stack/@containedType.0">
         <typeParameter xsi:type="kermeta_language_structure:ObjectTypeVariable" name="G"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/Sequence">
           <typeParamBinding variable="/0/standard/Sequence/G" type="/0/utils/Stack/G"/>
         </containedType>
-        <ownedOperation tag="/337" name="push" type="/0/utils/Stack/push/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/338" name="push" type="/0/utils/Stack/push/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="element" type="/0/utils/Stack/G" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/OrderedCollection/addAt/@containedType.0">
@@ -12483,7 +12548,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/338" name="peek" type="/0/utils/Stack/G" isOrdered="true" upper="1">
+        <ownedOperation tag="/339" name="peek" type="/0/utils/Stack/G" isOrdered="true" upper="1">
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/utils/Stack/G">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/utils/Stack/G">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/utils/Stack/G" name="result"/>
@@ -12497,7 +12562,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/339" name="pop" type="/0/utils/Stack/G" isOrdered="true" upper="1">
+        <ownedOperation tag="/340" name="pop" type="/0/utils/Stack/G" isOrdered="true" upper="1">
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/standard/OrderedCollection/removeAt/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/utils/Stack/G">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="/0/utils/Stack/G" name="result"/>
@@ -12515,9 +12580,9 @@
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
-    <nestedPackage tag="/340 /341" name="io">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/342" name="StdIO">
-        <ownedOperation tag="/343" name="write" type="/0/io/StdIO/write/@containedType.0" isOrdered="true" upper="1">
+    <nestedPackage tag="/341 /342" name="io">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/343" name="StdIO">
+        <ownedOperation tag="/344" name="write" type="/0/io/StdIO/write/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="object" type="/0/io/StdIO/write/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
@@ -12544,7 +12609,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/344" name="writeln" type="/0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/345" name="writeln" type="/0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.0/@containedType.0" isOrdered="true" upper="1">
           <ownedParameter name="object" type="/0/io/StdIO/writeln/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
           </ownedParameter>
@@ -12566,7 +12631,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/345" name="read" type="/0/io/StdIO/read/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/346" name="read" type="/0/io/StdIO/read/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
           <ownedParameter name="prompt" type="/0/io/StdIO/read/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
@@ -12593,8 +12658,8 @@
           </body>
         </ownedOperation>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/346" name="FileIO">
-        <ownedOperation tag="/347" name="writeTextFile" type="/0/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" upper="1">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/347" name="FileIO">
+        <ownedOperation tag="/348" name="writeTextFile" type="/0/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
           <ownedParameter name="filename" type="/0/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
@@ -12628,7 +12693,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/348" name="readTextFile" type="/0/io/FileIO/readTextFile/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/349" name="readTextFile" type="/0/io/FileIO/readTextFile/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
           <ownedParameter name="filename" type="/0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
@@ -12696,7 +12761,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/349" name="getAbsolutePathFolder" type="/0/io/FileIO/getAbsolutePathFolder/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/350" name="getAbsolutePathFolder" type="/0/io/FileIO/getAbsolutePathFolder/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
           <ownedParameter name="foldername" type="/0/io/FileIO/getAbsolutePathFolder/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
@@ -12754,36 +12819,36 @@
         </ownedOperation>
       </ownedTypeDefinition>
     </nestedPackage>
-    <nestedPackage tag="/350" name="exceptions">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/351" name="Exception">
-        <ownedAttribute tag="/352" name="message" type="/0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0" isOrdered="true" upper="1" isComposite="true"/>
-        <ownedAttribute tag="/353" name="nestedException" type="/0/exceptions/Exception/nestedException/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+    <nestedPackage tag="/351" name="exceptions">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/352" name="Exception">
+        <ownedAttribute tag="/353" name="message" type="/0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0" isOrdered="true" upper="1" isComposite="true"/>
+        <ownedAttribute tag="/354" name="nestedException" type="/0/exceptions/Exception/nestedException/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/Exception"/>
         </ownedAttribute>
-        <ownedAttribute tag="/354" name="stackTrace" type="/0/kunit/Error/toString/@body/@statement.3/@thenBody/@statement.0/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1" isComposite="true"/>
+        <ownedAttribute tag="/355" name="stackTrace" type="/0/kunit/Error/toString/@body/@statement.3/@thenBody/@statement.0/@value/@parameters.0/@containedType.0" isOrdered="true" upper="1" isComposite="true"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/355" name="RuntimeError" superType="/0/exceptions/RuntimeError/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/356" name="RuntimeError" superType="/0/exceptions/RuntimeError/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/Exception"/>
-        <ownedAttribute tag="/356" name="expression" type="/0/exceptions/RuntimeError/expression/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute tag="/357" name="expression" type="/0/exceptions/RuntimeError/expression/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/language/behavior/Expression"/>
         </ownedAttribute>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/357" name="CallOnVoidTarget" superType="/0/exceptions/CallOnVoidTarget/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/358" name="CallOnVoidTarget" superType="/0/exceptions/CallOnVoidTarget/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/RuntimeError"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/358" name="TypeCastError" superType="/0/exceptions/TypeCastError/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/359" name="TypeCastError" superType="/0/exceptions/TypeCastError/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/RuntimeError"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/359" name="NotImplementedException" superType="/0/exceptions/NotImplementedException/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/360" name="NotImplementedException" superType="/0/exceptions/NotImplementedException/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/RuntimeError"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/360" name="UpperBoundReachedError" superType="/0/exceptions/UpperBoundReachedError/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/361" name="UpperBoundReachedError" superType="/0/exceptions/UpperBoundReachedError/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/RuntimeError"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/361" name="AbstractClassInstantiationError" superType="/0/exceptions/AbstractClassInstantiationError/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/362" name="AbstractClassInstantiationError" superType="/0/exceptions/AbstractClassInstantiationError/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/RuntimeError"/>
       </ownedTypeDefinition>
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/362" name="IncompatibleTypeError" superType="/0/exceptions/IncompatibleTypeError/@containedType.0">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/363" name="IncompatibleTypeError" superType="/0/exceptions/IncompatibleTypeError/@containedType.0">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/RuntimeError"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="DivisionByZero" superType="/0/exceptions/DivisionByZero/@containedType.0">
@@ -12826,16 +12891,16 @@
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/exceptions/Exception"/>
       </ownedTypeDefinition>
     </nestedPackage>
-    <nestedPackage tag="/363" name="interpreter">
-      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/364" name="DynamicExpression">
-        <ownedAttribute tag="/365" name="errors" type="/0/interpreter/DynamicExpression/errors/@containedType.0" isOrdered="true" upper="-1">
+    <nestedPackage tag="/364" name="interpreter">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" tag="/365" name="DynamicExpression">
+        <ownedAttribute tag="/366" name="errors" type="/0/interpreter/DynamicExpression/errors/@containedType.0" isOrdered="true" upper="-1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/interpreter/KermetaError"/>
         </ownedAttribute>
-        <ownedAttribute tag="/366" name="expression" type="/0/interpreter/DynamicExpression/expression/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="/367" name="expression" type="/0/interpreter/DynamicExpression/expression/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/language/behavior/Expression"/>
         </ownedAttribute>
-        <ownedAttribute tag="/367" name="selfClass" type="/0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0" isOrdered="true" upper="1"/>
-        <ownedAttribute tag="/368" name="formalParameters" type="/0/interpreter/DynamicExpression/formalParameters/@containedType.0" isOrdered="true" upper="1">
+        <ownedAttribute tag="/368" name="selfClass" type="/0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0" isOrdered="true" upper="1"/>
+        <ownedAttribute tag="/369" name="formalParameters" type="/0/interpreter/DynamicExpression/formalParameters/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/utils/Hashtable">
             <typeParamBinding variable="/0/utils/Hashtable/K" type="/0/interpreter/DynamicExpression/formalParameters/@containedType.0/@typeParamBinding.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
@@ -12845,7 +12910,7 @@
             </typeParamBinding>
           </containedType>
         </ownedAttribute>
-        <ownedOperation tag="/369" name="initializeDefaults">
+        <ownedOperation tag="/370" name="initializeDefaults">
           <body xsi:type="kermeta_language_behavior:Block" staticType="/0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.2/@containedType.0">
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="/0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/utils/Hashtable">
@@ -12881,7 +12946,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/370" name="parse" type="/0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.3/@containedType.0" isOrdered="true" upper="1">
+        <ownedOperation tag="/371" name="parse" type="/0/kunit/TestCase/run/@body/@statement.1/@statement.1/@statement.3/@containedType.0" isOrdered="true" upper="1">
           <ownedParameter name="expression" type="/0/interpreter/DynamicExpression/parse/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
           </ownedParameter>
@@ -13005,7 +13070,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/371" name="execute" type="/0/standard/Object" isOrdered="true" upper="1">
+        <ownedOperation tag="/372" name="execute" type="/0/standard/Object" isOrdered="true" upper="1">
           <ownedParameter name="selfObj" type="/0/standard/Object" isOrdered="true" upper="1"/>
           <ownedParameter name="actualParams" type="/0/interpreter/DynamicExpression/execute/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/utils/Hashtable">
@@ -13088,7 +13153,7 @@
             </statement>
           </body>
         </ownedOperation>
-        <ownedOperation tag="/372" name="evalString" type="/0/standard/Object" isOrdered="true" upper="1">
+        <ownedOperation tag="/373" name="evalString" type="/0/standard/Object" isOrdered="true" upper="1">
           <ownedParameter name="body" type="/0/interpreter/DynamicExpression/evalString/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
             <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/standard/String"/>
           </ownedParameter>
@@ -13473,6 +13538,7 @@
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;   * Add to this suite, a set of test cases of type c, one for each&#xD;&#xA;   * test method in class c. C must be a descendent of TestCase&#xD;&#xA;   */" object="/0/kunit/TestSuite/addAllTestCasesFrom"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA; * A test case comprises one or more test methods plus&#xD;&#xA; * setUp and tearDown that build and destroy their test harness.&#xD;&#xA; * An instance of a subclass of TestCase should have its&#xD;&#xA; * testMethodName set to the name of one of its operations&#xD;&#xA; * which should be called whe the test is run. You can do this&#xD;&#xA; * yourself:&#xD;&#xA; *&#xD;&#xA; * var testCase : TestCase init MyTestCaseClass.new.setTestMethodName(&quot;testSomething&quot;)&#xD;&#xA; *&#xD;&#xA; * Alternatively if your TestCase Class has many methods whose&#xD;&#xA; * name begins with 'test' you can create a set of instaces already&#xD;&#xA; * set up with their testMethodName using the addAllTestCasesFrom&#xD;&#xA; * operation on TestSuite&#xD;&#xA; */" object="/0/kunit/TestCase"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Sets the name of the method from the concrete subclass of&#xD;&#xA;  *  TestCase that should be executed when this TestCase instance&#xD;&#xA;  * is run as a test.&#xD;&#xA;  * Throws invalidTestCaseNameException if the given string is not&#xD;&#xA;  * the name of a  method in the test case&#xD;&#xA;  */" object="/0/kunit/TestCase/setTestMethodName"/>
+  <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * operation used when the TestrCase is run from a java test runner, encapsulates the failures results&#xD;&#xA;  * into an AssertionFailedError so the TestRunner can detect it&#xD;&#xA;  */" object="/0/kunit/TestCase/raiseIfHasFailures"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA; * Create and use a test runner to run one or more tests and print the failure log. E.g.:&#xD;&#xA; * do&#xD;&#xA; *      var suite : TestSuite init TestSuite.new.addAllTestCasesFrom(InterestingTestCaseSet)&#xD;&#xA; *      var runner : TestRunner init TestRunner.new&#xD;&#xA; *      runner.run(suite)&#xD;&#xA; *      runner.printLogs&#xD;&#xA; * end&#xD;&#xA; *&#xD;&#xA; * Where InterestingTestCaseSet is a subclass of TestCase and contains several test... methods&#xD;&#xA; */" object="/0/kunit/TestRunner"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;  * Use this to run a test case or a test suite.&#xD;&#xA;  * If you want to run all the test.... methods in a TestCase class,&#xD;&#xA;  *  you can populate a suite with TestSuite.addAllTestCasesFrom&#xD;&#xA;  */" object="/0/kunit/TestRunner/runTest"/>
   <kermeta_language_structure:Tag name="documentation" value="/**&#xD;&#xA;   * For backwards compatibility with old kunit, this takes a test case class&#xD;&#xA;   * and creates the necessary suite, and runs it. DEPRECATED&#xD;&#xA;   */" object="/0/kunit/TestRunner/run"/>
