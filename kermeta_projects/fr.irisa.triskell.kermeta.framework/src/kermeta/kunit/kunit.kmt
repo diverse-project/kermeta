@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.26 2007-07-13 07:42:12 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.27 2007-07-13 11:20:16 dvojtise Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -427,6 +427,16 @@ abstract class TestCase inherits Test, Fallible
 			var exception : AssertionFailedError init kermeta::kunit::AssertionFailedError.new
 			exception.message := msg
 			raise exception
+		end
+		if not log.errors.empty then
+			log.errors.each { f | 
+				msg := "Errors: "
+				msg := msg +"\n   " + f.toString
+				var exception : exceptions::Exception init exceptions::Exception.new
+				exception.message := msg
+				raise exception 	
+			}
+			
 		end
 	end
 	method run() is
