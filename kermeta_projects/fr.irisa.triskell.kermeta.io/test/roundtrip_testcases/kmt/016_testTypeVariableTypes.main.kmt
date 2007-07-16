@@ -19,4 +19,7 @@ class Main<G> {
 
 	operation test_op4<F>() : F is do
 	end
+	
+	operation test_op5<F : G>(elt: String) is do
+	end
 }
