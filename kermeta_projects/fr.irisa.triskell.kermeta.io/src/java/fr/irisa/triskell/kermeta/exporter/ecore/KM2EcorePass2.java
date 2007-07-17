@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.36 2007-07-13 16:26:25 cfaucher Exp $
+/* $Id: KM2EcorePass2.java,v 1.37 2007-07-17 15:55:29 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -170,24 +170,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		// Visit type parameters in order to fix the type parameter's super type
 		for(TypeVariable next : node.getTypeParameter()) {
-			
-			// Add type to supertypes list
-			// FIXME CF We must choose the common super type
-			if(next.getSupertype() != null) {
-				Type t = (Type) next.getSupertype();
-				Object o = accept(t); 
-				if(o != null) {
-					if(o instanceof EClass) {
-						EGenericType newEGenericTypeForSuperType = EcoreFactory.eINSTANCE.createEGenericType();
-						newEGenericTypeForSuperType.setEClassifier((EClass) o);
-						((ETypeParameter) km2ecoremapping.get(next)).getEBounds().add(newEGenericTypeForSuperType);
-					}
-					
-					if(o instanceof EGenericType) {
-						((ETypeParameter) km2ecoremapping.get(next)).getEBounds().add((EGenericType) o);
-					}
-				}
-			}
+			setTypeParameterSuperType(next);
 		}
 		
 		loggerTabs.decrement();
@@ -253,6 +236,11 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		{
 			fr.irisa.triskell.kermeta.language.structure.Class anException = (fr.irisa.triskell.kermeta.language.structure.Class)next;
 			setRaisedExceptionAnnotation(anException, newEOperation);
+		}
+		
+		// Visit type parameters in order to fix the type parameter's super type
+		for(TypeVariable next : node.getTypeParameter()) {
+			setTypeParameterSuperType(next);
 		}
 		
 		loggerTabs.decrement();
@@ -947,4 +935,29 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				qName,
 				null);
 	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
+	protected void setTypeParameterSuperType(TypeVariable next) {	
+		// Add type to supertypes list
+		// FIXME CF We must choose the common super type
+		if(next.getSupertype() != null) {
+			Type t = (Type) next.getSupertype();
+			Object o = accept(t); 
+			if(o != null) {
+				if(o instanceof EClass) {
+					EGenericType newEGenericTypeForSuperType = EcoreFactory.eINSTANCE.createEGenericType();
+					newEGenericTypeForSuperType.setEClassifier((EClass) o);
+					((ETypeParameter) km2ecoremapping.get(next)).getEBounds().add(newEGenericTypeForSuperType);
+				}
+				
+				if(o instanceof EGenericType) {
+					((ETypeParameter) km2ecoremapping.get(next)).getEBounds().add((EGenericType) o);
+				}
+			}
+		}
+	}
+	
 }
