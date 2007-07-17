@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.16 2007-07-12 17:58:27 cfaucher Exp $
+/* $Id: Ecore2KMPass2.java,v 1.17 2007-07-17 15:56:36 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -44,9 +44,6 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
 	protected Resource resource;
-	
-	/** dictionary of object type variables : { ETypeParameter : ObjectTypeVariable } */
-	protected Hashtable<ETypeParameter, ObjectTypeVariable> object_type_variables;
 		
 	/** 
 	 * @param unit

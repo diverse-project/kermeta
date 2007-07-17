@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.10 2007-05-25 15:11:08 ftanguy Exp $
+/* $Id: Ecore2KM.java,v 1.11 2007-07-17 15:56:36 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -96,11 +96,16 @@ public class Ecore2KM {
 		Ecore2KMPass3 visitor3 = new Ecore2KMPass3(visitor1, this);
 		Hashtable opTable = visitor3.convertUnit();
 		
+		// Third pass : visit the operation and properties and set their types
+		Ecore2KMPass4 visitor4 = new Ecore2KMPass4(visitor1, visitor3, this);
+		visitor4.convertUnit();
+		
 		// Forth pass: visit the operations again, and apply the QuickFix corrections
 		if (Ecore2KM.isQuickFixEnabled) {
-			Ecore2KMPass4 visitor4 = new Ecore2KMPass4(visitor1, opTable, this);
-			visitor4.fixUnit();
+			Ecore2KMPass5 visitor5 = new Ecore2KMPass5(visitor1, opTable, this);
+			visitor5.fixUnit();
 		}
+
 	}
 	
 }
