@@ -18,6 +18,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.*;
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -53,15 +54,34 @@ public class EcoreVisitor {
 						cname = "org.eclipse.emf.ecore.impl.EPackageImpl";
 					}
 					
-					cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "");
+					// Ugly patch CF: Since EMF2.3, the EStringToStringMapEntry interface does not exists (only the implementation), also we must filter on its name
+					if(!cname.equals("org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl")) {
+						cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "");
+					}
+					
 					ptypes[0] = Class.forName(cname);
 					Method m = this.getClass().getMethod("visit", ptypes);
 					Object[] params = new Object[1];
 					params[0] = node;
 					result = m.invoke(this, params);
 				}
+				catch (IllegalAccessException e) {
+					KermetaUnit.internalLog.error("IllegalAccessException during accept");
+					KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);
+					throw new Error(e);
+				}
+				catch (ClassNotFoundException e) {
+					KermetaUnit.internalLog.error("ClassNotFoundException during accept");
+					KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);
+					throw new Error(e);
+				}
 				catch (NoSuchMethodException e) {
 					KermetaUnit.internalLog.error("NoSuchMethodException during accept");
+					KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);
+					throw new Error(e);
+				}
+				catch (IllegalArgumentException e) {
+					KermetaUnit.internalLog.error("IllegalArgumentException during accept");
 					KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);
 					throw new Error(e);
 				}
@@ -136,6 +156,10 @@ public class EcoreVisitor {
 	}
 	
 	public Object visit(ETypeParameter node) {
+	return genericVisitChildren(node);
+	}
+	
+	public Object visit(EStringToStringMapEntryImpl node) {
 	return genericVisitChildren(node);
 	}
 
