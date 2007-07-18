@@ -4,5 +4,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//@eClassifiers.1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//@eClassifiers.1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" lowerBound="0" upperBound="-1" eType="//@eClassifiers.0" eOpposite="//@eClassifiers.0/@eStructuralFeatures.1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" lowerBound="0" upperBound="-1" eType="//@eClassifiers.0" eOpposite="//@eClassifiers.0/@eStructuralFeatures.0"/>
+  </eClassifiers>
 </ecore:EPackage>

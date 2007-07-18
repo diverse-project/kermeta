@@ -6,6 +6,8 @@
     <content href="EPackage.xmi#//@eClassifiers.0/@eStructuralFeatures.0"/>
     <content href="EPackage.xmi#//@eClassifiers.1"/>
     <content href="EPackage.xmi#//@eClassifiers.0/@eStructuralFeatures.1"/>
+    <content href="EPackage.xmi#//@eClassifiers.1/@eStructuralFeatures.0"/>
+    <content href="EPackage.xmi#//@eClassifiers.1/@eStructuralFeatures.1"/>
     <roles name="nodeRole">
       <player href="EPackage.xmi#//@eClassifiers.1"/>
     </roles>
@@ -18,6 +20,12 @@
     <roles name="targetRole">
       <player href="EPackage.xmi#//@eClassifiers.0/@eStructuralFeatures.0"/>
     </roles>
+    <roles name="outgoingRole">
+      <player href="EPackage.xmi#//@eClassifiers.1/@eStructuralFeatures.0"/>
+    </roles>
+    <roles name="incomingRole">
+      <player href="EPackage.xmi#//@eClassifiers.1/@eStructuralFeatures.1"/>
+    </roles>        
   </pattern>
   <featureIdentifier>name</featureIdentifier>
 </patternframework:ModelPattern>
