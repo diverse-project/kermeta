@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.23 2007-07-17 15:56:36 cfaucher Exp $
+/* $Id: Ecore2KMPass3.java,v 1.24 2007-07-18 15:06:37 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -150,6 +150,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			}
 		}
 		// 2- Visit ETypeParameters, StructuralFeatures, Operations
+		// move to the PASS 4 
 		acceptList(node.getEStructuralFeatures());
 		acceptList(node.getEOperations());
 		acceptList(node.getETypeParameters());
@@ -345,25 +346,8 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			buildTypeVariableBindings((fr.irisa.triskell.kermeta.language.structure.Class) t, eAnnot.getDetails(), visitorPass1.getVisibleTypeVariables(node));
 		}
 		
-		// Get the derived properties bodies and other stuffs
-		acceptList(node.getEAnnotations());
 		
-		//TODO, add the getter and setter 
-		if (node.isDerived() && exporter.current_prop.getSetterBody() == null){
-			
-				exporter.current_prop.setSetterBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
-				TagHelper.createNonExistingTagFromNameAndValue(exporter.current_prop, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-			}
-		if (node.isDerived() && exporter.current_prop.getGetterBody() == null){
-			
-			exporter.current_prop.setGetterBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
-			TagHelper.createNonExistingTagFromNameAndValue(exporter.current_prop, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
-		}
-			
-			
-		
-		
-		
+
 		return exporter.current_prop;
 	}
 
@@ -489,7 +473,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		
 		return otv;
 	}
-	
+
 	
 //	/**
 //	 * Visit a TypeParameter ('kermeta.typeParameter') EAnnotation.

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass1.java,v 1.11 2007-07-12 15:54:30 cfaucher Exp $
+/* $Id: Ecore2KMPass1.java,v 1.12 2007-07-18 15:06:37 cfaucher Exp $
  * Project : Kermeta io
  * File : ECore2Kermeta.java
  * License : EPL
@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.7 2007-07-17 15:56:36 cfaucher Exp $
+/* $Id: Ecore2KMPass4.java,v 1.8 2007-07-18 15:06:37 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
+import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Class;
@@ -45,11 +46,13 @@ import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 
 
 /**
@@ -97,6 +100,13 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 		
 		// Set the super types of the type parameters
 		acceptList(((EClass)node).getETypeParameters());
+		
+		for(EStructuralFeature esf : ((EClass) node).getEStructuralFeatures()) {
+			visitEStructuralFeature((EStructuralFeature) esf);
+		}
+		
+		// Set the super types of the type parameters and visit all other annotations
+		acceptList(((EClass)node).getEOperations());
 
 		return exporter.current_classdef;
 	}
@@ -106,7 +116,6 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EOperation)
 	 */
 	public Object visit(EOperation node) {
-
 		exporter.current_op = visitorPass1.operations.get(node);
 		
 		// Set the super types of the type parameters
@@ -123,9 +132,35 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	}
 	
 	
-	/**
-	 * @param node
-	 * @return
+	/* (non-Javadoc)
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EOperation)
+	 */
+	public Object visitEStructuralFeature(EStructuralFeature node) {
+		exporter.current_prop = visitorPass1.properties.get(EcoreHelper.getQualifiedName(node));
+		
+		// Visit all the annotations on Property
+		if(exporter.current_prop != null && exporter.current_prop instanceof Property) {
+			acceptList(node.getEAnnotations());
+		}
+		
+		//TODO, add the getter and setter
+		if (node.isDerived() && exporter.current_prop.getSetterBody() == null){
+			
+				exporter.current_prop.setSetterBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
+				TagHelper.createNonExistingTagFromNameAndValue(exporter.current_prop, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+			}
+		if (node.isDerived() && exporter.current_prop.getGetterBody() == null){
+			
+			exporter.current_prop.setGetterBody(ExpressionParser.parse(unit, "   raise kermeta::exceptions::NotImplementedException.new"));
+			TagHelper.createNonExistingTagFromNameAndValue(exporter.current_prop, KermetaASTHelper.TAGNAME_OVERLOADABLE, "true");
+		}
+		
+		return null;
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EGenericType)
 	 */
 	public Object visit(EGenericType node) {
 		Type res=null;
@@ -150,9 +185,8 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	}
 	
 	
-	/**
-	 * @param node
-	 * @return
+	/* (non-Javadoc)
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.ETypeParameter)
 	 */
 	public Object visit(ETypeParameter node) {
 		ObjectTypeVariable anObjectTypeVariable = visitorPass3.object_type_variables.get(node);
@@ -171,7 +205,7 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	}
 	
 	
-	/**
+	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAnnotation)
 	 */
 	public Object visit(EAnnotation node) {	
@@ -249,101 +283,6 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 				//(fr.irisa.triskell.kermeta.language.structure.Class) createTypeForEClassifier(exceptionEClassifier, null);
 				(fr.irisa.triskell.kermeta.language.structure.Class) visitorPass1.createTypeForEClassifier(exceptionEClassifier, null);
 			exporter.current_op.getRaisedException().add(anException);
-		}
-		return null;
-	}
-	
-	
-	/**
-	 * Visit the EStructuralFeature EAnnotation 'node', which can be of the following types:
-	 *  - kermeta
-	 *  - http://www.eclipse.org/emf/2002/GenModel
-	 *  - kermeta.derivedProp.getter
-	 *  - kermeta.derivedProp.setter
-	 * @param node
-	 * @return
-	 */
-	protected Object visitPropertyAnnotation(EAnnotation node) {
-		// node.getSource() == "kermeta"
-		if (node.getSource().equals(KM2Ecore.ANNOTATION)) {
-			visitStandardAnnotation(node);
-		}
-		// node.getSource() == "http://www.eclipse.org/emf/2002/GenModel"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
-			visitGenModelAnnotation(node);
-		}
-		// node.getSource() == "kermeta.derivedProp.getter"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTER)) {
-			String getter = (String) node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
-			if (getter != null) {
-				Expression exp = ExpressionParser.parse(unit, getter);
-				exporter.current_prop.setGetterBody(exp);
-			}
-		}
-		// node.getSource() == "kermeta.derivedProp.setter"
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTER)) {
-			String setter = (String) node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
-			if (setter != null) {
-				Expression exp = ExpressionParser.parse(unit, setter);
-				exporter.current_prop.setSetterBody(exp);
-			}
-		}
-		// node.getSource() == "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"
-		// used in ecore files generated from xsd
-		else if(node.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)) {
-			String element = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
-			EStructuralFeature prop = (EStructuralFeature)node.getEModelElement();
-			if (element != null && element.equals("element") && prop.isDerived()) {
-				// this is a generated getter for special featuremap
-					//DVK this implementation is probably too simple regarding to EMF use of these annotation 
-					// but I have very few data about how it actually works ...
-					// typically put into the mixed concrete attribute ..
-				
-				String typeName = EcoreHelper.getQualifiedName(prop.getEType());
-				String collection = prop.isUnique() ? "kermeta::standard::OrderedSet" : "kermeta::standard::Sequence";
-				String group = "mixed";	// by default the group is the mixed
-				String groupId = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_GROUP);
-				if(groupId != null){
-					// this property belong to a specific group
-					// retreive it and use it for this feature
-					EClass containerClass =(EClass)prop.eContainer();
-					Iterator attIt = containerClass.getEAttributes().iterator();
-					while(attIt.hasNext()){
-						EAttribute att = (EAttribute)attIt.next();
-						Iterator annIt = att.getEAnnotations().iterator();						
-						while(annIt.hasNext()){
-							EAnnotation currAnn = (EAnnotation)annIt.next();
-							if(currAnn.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)){
-								String attIsGroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
-								if(attIsGroup != null && attIsGroup.equals("group")) {
-									// we have found a group
-									String possiblegroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);
-									if(groupId.equals(possiblegroup)){
-										// this is the good group, use the attribute name
-										group = att.getName();
-									}
-								}								
-							}
-						}
-					}
-				}
-				
-				// let's writte the getter body using all those data
-				String body = //"kermeta::standard::OrderedSet<Docbook::BookType>.new"
-					"do result := " +collection+ "<" +typeName+ ">.new" +
-"			self." +group+ ".each{fme |"+ 
-"				if fme.eStructuralFeatureName == \"" +element+ "\" then"+ 
-"					var val : "+typeName+""+
-"					val ?= fme.~value"+
-"					result.add(val) "+
-"				end"+
-"			} end";
-				//body = "raise kermeta::exceptions::NotImplementedException.new ";
-				Expression exp = ExpressionParser.parse(unit, body);
-				exporter.current_prop.setGetterBody(exp);
-					// it seem that in this case the setter is a nonsense
-				exporter.current_prop.setIsReadOnly( Boolean.valueOf(true));
-			}
 		}
 		return null;
 	}
@@ -461,6 +400,101 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 					node.getDetails(),
 					visitorPass1.getVisibleTypeVariables((EClass) node.getEModelElement()));
 		}
+	}
+	
+	
+	/**
+	 * Visit the EStructuralFeature EAnnotation 'node', which can be of the following types:
+	 *  - kermeta
+	 *  - http://www.eclipse.org/emf/2002/GenModel
+	 *  - kermeta.derivedProp.getter
+	 *  - kermeta.derivedProp.setter
+	 * @param node
+	 * @return
+	 */
+	protected Object visitPropertyAnnotation(EAnnotation node) {
+		// node.getSource() == "kermeta"
+		if (node.getSource().equals(KM2Ecore.ANNOTATION)) {
+			visitStandardAnnotation(node);
+		}
+		// node.getSource() == "http://www.eclipse.org/emf/2002/GenModel"
+		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)) {
+			visitGenModelAnnotation(node);
+		}
+		// node.getSource() == "kermeta.derivedProp.getter"
+		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTER)) {
+			String getter = (String) node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
+			if (getter != null) {
+				Expression exp = ExpressionParser.parse(unit, getter);
+				exporter.current_prop.setGetterBody(exp);
+			}
+		}
+		// node.getSource() == "kermeta.derivedProp.setter"
+		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTER)) {
+			String setter = (String) node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
+			if (setter != null) {
+				Expression exp = ExpressionParser.parse(unit, setter);
+				exporter.current_prop.setSetterBody(exp);
+			}
+		}
+		// node.getSource() == "http:///org/eclipse/emf/ecore/util/ExtendedMetaData"
+		// used in ecore files generated from xsd
+		else if(node.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)) {
+			String element = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+			EStructuralFeature prop = (EStructuralFeature)node.getEModelElement();
+			if (element != null && element.equals("element") && prop.isDerived()) {
+				// this is a generated getter for special featuremap
+					//DVK this implementation is probably too simple regarding to EMF use of these annotation 
+					// but I have very few data about how it actually works ...
+					// typically put into the mixed concrete attribute ..
+				
+				String typeName = EcoreHelper.getQualifiedName(prop.getEType());
+				String collection = prop.isUnique() ? "kermeta::standard::OrderedSet" : "kermeta::standard::Sequence";
+				String group = "mixed";	// by default the group is the mixed
+				String groupId = (String) node.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_GROUP);
+				if(groupId != null){
+					// this property belong to a specific group
+					// retreive it and use it for this feature
+					EClass containerClass =(EClass)prop.eContainer();
+					Iterator attIt = containerClass.getEAttributes().iterator();
+					while(attIt.hasNext()){
+						EAttribute att = (EAttribute)attIt.next();
+						Iterator annIt = att.getEAnnotations().iterator();						
+						while(annIt.hasNext()){
+							EAnnotation currAnn = (EAnnotation)annIt.next();
+							if(currAnn.getSource().equals(KM2Ecore.ANNOTATION_EXTENDEDMETADATA)){
+								String attIsGroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_KIND);
+								if(attIsGroup != null && attIsGroup.equals("group")) {
+									// we have found a group
+									String possiblegroup = (String)currAnn.getDetails().get(KM2Ecore.ANNOTATION_EXTENDEDMETADATA_NAME);
+									if(groupId.equals(possiblegroup)){
+										// this is the good group, use the attribute name
+										group = att.getName();
+									}
+								}								
+							}
+						}
+					}
+				}
+				
+				// let's writte the getter body using all those data
+				String body = //"kermeta::standard::OrderedSet<Docbook::BookType>.new"
+					"do result := " +collection+ "<" +typeName+ ">.new" +
+"			self." +group+ ".each{fme |"+ 
+"				if fme.eStructuralFeatureName == \"" +element+ "\" then"+ 
+"					var val : "+typeName+""+
+"					val ?= fme.~value"+
+"					result.add(val) "+
+"				end"+
+"			} end";
+				//body = "raise kermeta::exceptions::NotImplementedException.new ";
+				Expression exp = ExpressionParser.parse(unit, body);
+				exporter.current_prop.setGetterBody(exp);
+					// it seem that in this case the setter is a nonsense
+				exporter.current_prop.setIsReadOnly( Boolean.valueOf(true));
+			}
+		}
+		return null;
 	}
 	
 	
