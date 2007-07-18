@@ -1,0 +1,29 @@
+/* $Id: test.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "test::SemanticTest1"
+@mainOperation "main"
+
+
+package test;
+
+require kermeta
+require "platform:/resource/SmartAdapters/program/weaving/semanticWeaver.kmt"
+//require "platform:/resource/SmartAdapters/metamodel/domain/EcorePattern.ecore"
+
+using weaver
+using kermeta::standard
+class SemanticTest1
+{
+	operation main() : Void is do 
+		var weaver:SemanticWeaver init SemanticWeaver.new
+		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+		var ecore:String init "platform:/resource/SmartAdapters/metamodel/domain/Ecore.ecore"
+		var ecorePattern:String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+		var pattern:String init "platform:/resource/SmartAdapters/examples/Semantic1/ModelPattern.xmi"
+		weaver.weavingSemantic(domainMM, ecore, ecorePattern, pattern)
+	end
+}

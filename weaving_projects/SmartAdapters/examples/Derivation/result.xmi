@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="platform:/resource/SmartAdapters4Models/metamodel/specificSmartAdapters/stateMachine_AOM_Framework.ecore#//smartadapters/core/adaptations" xmlns:core="platform:/resource/SmartAdapters4Models/metamodel/specificSmartAdapters/stateMachine_AOM_Framework.ecore#//smartadapters/core">
+  <adapt xsi:type="adaptations:setState" name="adapt1"/>
+  <adapt xsi:type="adaptations:setTransition" name="adapt2" isOptional="true"/>
+</core:Adapter>

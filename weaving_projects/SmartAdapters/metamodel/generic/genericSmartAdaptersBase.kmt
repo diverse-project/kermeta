@@ -1,0 +1,137 @@
+/* $Id: genericSmartAdaptersBase.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright:
+ * Authors: bmorin
+ */
+
+package org;
+
+require kermeta 
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt" 
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
+
+using kermeta::standard
+using kermeta::utils
+using patternframework
+using org::smartadapters::core
+//using org::smartadapters::core::adaptations
+using org::smartadapters::extension
+using ecore
+
+package smartadapters
+{
+	package core
+	{
+		class Adapter
+		{
+			attribute aspect : Aspect[1..1]
+			
+			attribute adapt : Adaptation[0..*]#adapter
+						
+			attribute name : ecore::EString			
+		}
+
+		class Aspect
+		{
+			attribute template : ModelPattern[0..1]
+			
+			attribute structure : PModel[1..1]
+			
+			/**
+			persistent refers to aspectual PObject that must not be
+			cloned between two bindings
+			TODO : contraints...
+			*/
+			reference persistent : PObject[0..*]
+			
+		}
+
+		abstract class Adaptation inherits smartadapters::extension::AdapterElement
+		{
+			reference adapter : Adapter[1..1]#adapt			
+			
+			operation check() : Boolean
+				is abstract
+			
+			/**
+			Execute the adaptation for a given binding
+			Sub-classes must implement this method
+			*/		         
+			operation execute() : Void
+				pre checking is check 
+				is abstract
+
+		}
+
+		class makeUnique inherits Adaptation
+		{
+			reference element : PObject[1..1]
+			
+			operation check() : Boolean is do
+				result:=(element!=void and adapter.aspect.structure.content.contains(element))
+			end
+			
+			operation execute() : Void is do
+				adapter.aspect.persistent.add(element)
+			end
+		}		
+	}
+	
+
+	package extension
+	{
+		class AdapterElement
+		{
+			attribute name : ecore::EString
+
+			attribute isOptional : ecore::EBoolean
+
+		}
+		class DerivableAdapter inherits smartadapters::core::Adapter
+		{
+			attribute alternatives : EntityAlternative[0..*]
+
+			attribute options : AdapterElement[0..*]
+			
+			attribute xor : MutualExclusion[0..*]
+			
+			attribute ~and : Dependency[0..*]
+			
+			@overloadable "true"
+			operation resolve(derivation : Derivation) : smartadapters::core::Adapter raises kermeta::exceptions::Exception is do
+				raise kermeta::exceptions::NotImplementedException.new
+			end
+		}
+		class EntityAlternative inherits AdapterElement
+		{			
+			reference xor : AdapterElement[0..*]	
+		}
+		
+		
+		class EntityConjunction inherits AdapterElement
+		{
+			reference ~and : AdapterElement[0..*]
+
+		}
+		
+		class MutualExclusion inherits AdapterElement
+		{
+			reference entities : AdapterElement[0..*]
+		}
+		
+		class Dependency inherits AdapterElement
+		{
+			reference source : AdapterElement[1..1]
+			
+			reference dependencies : AdapterElement[0..*]
+		}
+		
+		class Derivation
+		{
+			reference adaptations : Adaptation[0..*]
+		}	
+	}
+	
+}
+

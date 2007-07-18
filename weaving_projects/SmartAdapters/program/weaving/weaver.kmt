@@ -1,0 +1,142 @@
+/* $Id: weaver.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright:
+ * Authors: bmorin
+ */
+@mainClass "root_package::Weaver"
+@mainOperation "weaving"
+
+package weaver;
+
+require kermeta
+
+require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
+
+using ecore
+using EcoreHelpers
+using kermeta::standard
+using kermeta::utils
+using kermeta::persistence
+using patternframework
+using org::smartadapters::core
+using org::smartadapters::extension
+using kermeta::pattern
+using kermeta::pattern::flora2
+
+class Weaver
+{
+	operation weaving(baseModelUri:String, adapterUri:String, adaptMMUri:String, domainMMUri:String, domainMMPatternUri:String, resultUri:String) : Void is do 
+		var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
+	    handler.initialize()
+		var repository:EMFRepository init EMFRepository.new
+
+		//stdio.writeln("Loading meta-model "+domainMMUri+" ...")
+		var inputMetamodel:Sequence<EPackage> init handler.loadEcoreModel(EMFRepository.new, domainMMUri)
+		var inputPatternMetamodel:Sequence<EPackage> init handler.loadEcoreModel(EMFRepository.new, domainMMPatternUri)
+		//stdio.writeln("Loading meta-models... OK!")
+
+		//stdio.writeln("Weaving...")
+		stdio.write("Loading models...")
+		var inputModel:Set<Object> init loadModel(repository, baseModelUri, domainMMUri)
+		var inputAdapter:Set<Object> init loadModel(repository, adapterUri, adaptMMUri)
+
+		var adapter:Adapter
+		adapter?=inputAdapter.select{o | Adapter.isInstance(o)}.first
+		stdio.writeln(" OK!")
+
+		stdio.write("Checking adaptations...")
+		var isChecked:EBoolean init true
+		adapter.adapt.each{a | isChecked:=(isChecked and a.check)}
+		
+		if (adapter.adapt.size>0 and isChecked) then
+			stdio.writeln(" OK!")
+			adapter.initConvert
+			adapter.initClone		
+			if (adapter.aspect.template!=void) then
+				/*---Pattern matching---*/
+				stdio.writeln("Searching base model elements matching template...")
+		        var matcher : PatternMatching init PatternMatchingFlora2.new
+		        var iteBindings : Iterator<Hashtable<Object, Object>> init Iterator<Hashtable<Object, Object>>.new
+		        iteBindings := matcher.match(inputMetamodel, inputModel, adapter.aspect.template)
+		        stdio.writeln("") 
+		        stdio.writeln("")
+		        stdio.writeln("")                
+		                         	
+				/*---Applying the adapter to the base model---*/       
+				var i:Integer init 0
+				var hash : Hashtable<Object, Object>
+				var keys:Set<Object>
+				var input:String				
+				var apply:Boolean
+				var executePM:Boolean
+			 	var inputPM:String
+				from iteBindings until iteBindings.isOff loop 
+				     hash := iteBindings.next
+					 i:=i+1
+					 stdio.writeln("")
+					 stdio.writeln("")
+				     stdio.writeln("  -Binding"+i.toString+":")
+					 keys:=hash.keys
+					 keys.each{k | stdio.writeln(k.toString+" -> "+hash.getValue(k).toString)}
+					 input:=stdio.read("apply this binding ? (true/false): ")//user interaction
+					 apply:=input.toBoolean
+					 if apply then //apply the adapter for the selected binding
+					 	 stdio.writeln("----------------------------")
+					 	 stdio.writeln("weaving the aspect for binding"+i.toString+"...")
+						 //adapter.binding:=hash
+						 adapter.apply(hash)
+						 /*adapter.adapt.each{a |
+					 		 		a.execute()
+					 	 } 
+					 	adapter.updateClones*/
+					 	stdio.writeln("weaving the aspect for binding"+i.toString+"... done")
+					 	stdio.writeln("----------------------------")
+					 	stdio.writeln("")
+					 	
+					 	if(iteBindings.hasNext) then
+						 	inputPM:=stdio.read("execute pattern matching ? (true/false): ")
+						 	executePM:=inputPM.toBoolean
+						 	if executePM then
+						 		iteBindings := matcher.match(inputMetamodel, inputModel, adapter.aspect.template)
+						 	end
+						end
+					 end     
+				end	
+				end
+			/*
+			Saving modified base model
+			*/
+			stdio.writeln("Saving Result")
+			saveModel(inputModel, resultUri, domainMMUri)		
+		else
+			var e:Exception init WeaverException.new
+			e.display
+			raise e
+		end		
+	end
+
+    operation loadModel(repository : EMFRepository, modelPath : String, metamodelPath : String) : Set<kermeta::standard::Object> is do                   
+    	stdio.writeln("  loading: "+modelPath+"("+metamodelPath+")")
+   		var resource : Resource init repository.createResource(modelPath, metamodelPath)
+       	resource.load()
+       	//stdio.writeln("  loading: OK!")
+        result := resource.instances
+    end	
+	
+    operation saveModel(obj : Set<Object>, uri : String, domainMM : String) is do
+    	var repository:EMFRepository init EMFRepository.new
+	    var resource : Resource init repository.createResource(uri , domainMM)
+	    obj.each{o | resource.instances.add(o)}
+	    resource.save
+    end
+}
+
+class WeaverException inherits Exception
+{
+	operation display() : Void is do
+		stdio.writeln("WeaverException: Adapter contains no adaptation or at least one adaptation is not well typed")
+	end
+}

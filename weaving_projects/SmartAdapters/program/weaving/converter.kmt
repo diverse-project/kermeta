@@ -1,0 +1,120 @@
+/* $Id: converter.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+ * Creation date: July 17, 2007
+ * License:
+ * Copyright:
+ * Authors: bmorin
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package utils;
+
+
+require kermeta
+using kermeta::reflection
+using kermeta::standard
+using kermeta::utils
+
+/**
+Aims at converting a model that conforms to a MM' metamodel 
+into a model that conforms to a MM metamodel
+It can be improved...
+*/
+class Converter
+{
+	attribute converted:Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>
+
+	//handles cyclic references (I hope...)
+	attribute converting:Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>
+	
+	operation deleteConverted(obj:kermeta::reflection::Object) : Void is do
+		converted.remove(obj)
+	end
+		
+	/**
+	changes the metaclass of obj
+	*/	
+	operation convert(obj:kermeta::reflection::Object, convert:Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>) : kermeta::reflection::Object is do		
+		if(converted==void) then
+			converted:=Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
+		end
+		if(converting==void) then
+			converting:=Hashtable<kermeta::reflection::Object,kermeta::reflection::Object>.new
+		end
+
+		var res:kermeta::reflection::Object
+		res:=converted.getValue(obj)
+		if(res!=void) then
+			//stdio.writeln(obj.toString+" already converted: "+res.toString)
+			result:=res 
+		else
+		res:=converting.getValue(obj)
+		if(res!=void) then
+			//stdio.writeln(obj.toString+" being converted: "+res.toString)
+			result:=res 
+		else
+		var newMetaClass:kermeta::reflection::Class 
+		newMetaClass:=convert.getValue(obj.getMetaClass)
+		if(newMetaClass!=void) then
+			//stdio.writeln("")
+			//stdio.writeln("converting "+obj.getMetaClass.typeDefinition.qualifiedName+": "+obj.toString+" into "+newMetaClass.typeDefinition.qualifiedName+" ...")
+			var newObj:kermeta::reflection::Object init newMetaClass.new
+			var classDef:kermeta::reflection::ClassDefinition
+			classDef?=newObj.getMetaClass.typeDefinition
+			converting.put(obj,newObj)
+			if(classDef!=void) then
+				var att:Set<Property> init classDef.allOwnedAttribute
+				att.each{a | 
+					var primitive:kermeta::language::structure::PrimitiveType
+					primitive?=a.type
+					if(a.upper==1) then
+						if (primitive==void) then
+							var temp:Object
+							if(converting.getValue(obj.get(a))==void) then 
+								temp:=self.convert(obj.get(a),convert)
+								if(temp.isInstanceOf(a.type)) then
+									//stdio.writeln("set: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
+									newObj.~set(a,temp)
+								end
+							else
+								//stdio.writeln("set: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
+								newObj.~set(a,obj.get(a))
+							end
+						else
+							//stdio.writeln("set primitive: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
+							newObj.~set(a,obj.get(a))
+						end
+					else
+							//stdio.writeln("recursion")
+							var list:Collection<kermeta::reflection::Object>
+							var convertedList:Collection<kermeta::reflection::Object> init Set<kermeta::reflection::Object>.new
+							list?=obj.get(a)
+							if(list!=void) then
+								list.each{o | if(converting.getValue(o)==void and converted.getValue(o)==void) then
+														var tmp:Object init self.convert(o,convert)
+														converting.put(o,tmp)
+														list.remove(o)
+														list.add(tmp)
+														end}
+								//list.each{o | stdio.writeln(o.toString)}
+								var list2:Collection<kermeta::reflection::Object> 
+								list2 ?= newObj.get(a)
+								list2.clear
+								list2.addAll(list)
+							end
+					end
+				}
+				converted.put(obj,newObj)
+				converting.remove(obj)
+
+				//end
+				//stdio.writeln("converted.put("+obj.toString+", "+newObj.toString+")")
+				//stdio.writeln("")
+				result:=newObj
+			end
+		end
+		end
+		end
+	end
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<FSM:Fsm xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:FSM="platform:/resource/fr.irisa.triskell.kermeta.patternmatching.samples/SimpleFSM/metamodels/FSMMM.ecore">
+  <states name="a"/>
+  <states name="b"/>
+  <states name="c"/>
+  <states xsi:type="FSM:State" name="final"/>
+  <states xsi:type="FSM:State" name="b"/>
+  <states xsi:type="FSM:State" name="newState"/>
+  <states xsi:type="FSM:State" name="final"/>
+  <states xsi:type="FSM:State" name="c"/>
+  <transitions source="//@states.0" target="//@states.1"/>
+  <transitions source="//@states.0" target="//@states.2"/>
+  <transitions xsi:type="FSM:Transition" source="//@states.1" target="//@states.3"/>
+  <transitions source="//@states.2" target="//@states.6"/>
+</FSM:Fsm>

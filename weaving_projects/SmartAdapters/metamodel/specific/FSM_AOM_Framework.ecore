@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="org" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore" nsPrefix="org">
+  <eAnnotations source="kermeta.req">
+    <details key="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km" value="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"/>
+    <details key="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt" value="platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"/>
+    <details key="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore" value="platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"/>
+    <details key="platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore" value="platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eSubpackages name="smartadapters" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters" nsPrefix="smartadapters">
+    <eSubpackages name="core" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters/core" nsPrefix="core">
+      <eClassifiers xsi:type="ecore:EClass" name="Adapter">
+        <eOperations name="initConvert">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;stdio.write(&quot;Mapping MM' to MM...&quot;)&#xA;&#x9;convert := kermeta::utils::Hashtable&lt;kermeta::reflection::Class, kermeta::reflection::Class>.new&#xA;&#x9;convert.put(pattern::FSM::State, FSM::State)&#xA;&#x9;convert.put(pattern::FSM::Transition, FSM::Transition)&#xA;&#x9;convert.put(pattern::FSM::Fsm, FSM::Fsm)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="apply" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;binding := b&#xA;&#x9;if clone.equals(void) then&#xA;&#x9;&#x9;initClone&#xA;&#xA;&#x9;end&#xA;&#x9;adapt.each{a | a.execute}&#xA;&#x9;updateClones&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="b">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="Object"/>
+              <details key="1" value="Object"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//utils/Hashtable"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="initClone" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;converter := utils::Converter.new&#xA;&#x9;clone := kermeta::utils::Hashtable&lt;kermeta::standard::Object, kermeta::standard::Object>.new&#xA;&#x9;created := kermeta::utils::Hashtable&lt;kermeta::standard::Object, kermeta::standard::Object>.new&#xA;&#x9;if aspect.structure.isNotEqual(void) then&#xA;&#x9;&#x9;aspect.structure.content.each{elt | do&#xA;&#x9;&#x9;&#x9;&#x9;var newCloned : kermeta::standard::Object&#xA;&#x9;&#x9;&#x9;&#x9;newCloned := converter.convert(kermeta::standard::Object.clone(elt), convert)&#xA;&#x9;&#x9;&#x9;&#x9;if newCloned.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;clone.put(elt, newCloned)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xA;   initClone must be called before the first binding&#xA;   */"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="updateClones" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if aspect.structure.isNotEqual(void) then&#xA;&#x9;&#x9;aspect.structure.content.each{o | if not (aspect.persistent.contains(o)) then&#xA;&#x9;&#x9;&#x9;&#x9;updateClone(o)&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xA;   updateClone must be called after every binding&#xA;   */"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="updateClone" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;clone.remove(pObj)&#xA;&#x9;converter.deleteConverted(pObj)&#xA;&#x9;var newCloned : kermeta::standard::Object&#xA;&#x9;newCloned := converter.convert(kermeta::standard::Object.clone(pObj), convert)&#xA;&#x9;if newCloned.isNotEqual(void) then&#xA;&#x9;&#x9;clone.put(pObj, newCloned)&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="pObj" eType="//Object"/>
+        </eOperations>
+        <eOperations name="getRealObject" eType="//Object">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if isCollect then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;&#x9;col ?= obj&#xA;&#x9;&#x9;var res : kermeta::standard::Set&lt;kermeta::standard::Object> init kermeta::standard::Set&lt;kermeta::standard::Object>.new&#xA;&#x9;&#x9;col.each{o | res.add(getRealObject(o, false))}&#xA;&#x9;&#x9;result := res&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var realObj : kermeta::standard::Object&#xA;&#x9;&#x9;realObj ?= clone.getValue(obj)&#xA;&#x9;&#x9;if realObj.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;result := realObj&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;realObj ?= binding.getValue(obj)&#xA;&#x9;&#x9;&#x9;if realObj.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;result := realObj&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;realObj ?= created.getValue(obj)&#xA;&#x9;&#x9;&#x9;&#x9;if realObj.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := realObj&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var pObj : patternframework::PObject&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;pObj ?= obj&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if pObj.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result := converter.convert(kermeta::standard::Object.clone(obj), convert)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result := obj&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xA;   returns the PObject that is actually in the base model&#xA;    - a model base element&#xA;   or - a clone of an aspect element already inserted in the base model&#xA;   or  - the element itself (composition of two models without using pattern matching)&#xA;   */"/>
+          </eAnnotations>
+          <eParameters name="obj" eType="//Object"/>
+          <eParameters name="isCollect" eType="//Boolean"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="aspect" lowerBound="1" eType="//smartadapters/core/Aspect" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="adapt" upperBound="-1" eType="//smartadapters/core/Adaptation" containment="true" eOpposite="//smartadapters/core/Adaptation/adapter"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="clone" containment="true">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xA;   key : aspect element&#xA;   value : associated clone&#xA;   */"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="Object"/>
+            <details key="1" value="Object"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//utils/Hashtable"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="binding" containment="true">
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="Object"/>
+            <details key="1" value="Object"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//utils/Hashtable"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="convert" containment="true">
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="kermeta::reflection::Class"/>
+            <details key="1" value="kermeta::reflection::Class"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//utils/Hashtable"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="created" containment="true">
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="Object"/>
+            <details key="1" value="Object"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//utils/Hashtable"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="converter" containment="true">
+          <eType xsi:type="ecore:EClass" href="platform:/resource/SmartAdapters/metamodel/specific//converter.ecore#//Converter"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Aspect">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="template" containment="true">
+          <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//ModelPattern"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="structure" lowerBound="1" containment="true">
+          <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PModel"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="persistent" upperBound="-1">
+          <eAnnotations source="kermeta">
+            <details key="documentation" value="/**&#xD;&#xA;   persistent refers to aspectual PObject that must not be&#xD;&#xA;   cloned between two bindings&#xD;&#xA;   TODO : contraints...&#xD;&#xA;   */"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Adaptation" abstract="true" eSuperTypes="//smartadapters/extension/AdapterElement">
+        <eOperations name="check" eType="//Boolean">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="execute">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+            <details key="documentation" value="/**&#xD;&#xA;   Execute the adaptation for a given binding&#xD;&#xA;   Sub-classes must implement this method&#xD;&#xA;   */"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.pre">
+            <details key="checking" value="check"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="adapter" lowerBound="1" eType="//smartadapters/core/Adapter" eOpposite="//smartadapters/core/Adapter/adapt"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="makeUnique" eSuperTypes="//smartadapters/core/Adaptation">
+        <eOperations name="check" eType="//Boolean">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := (element.isNotEqual(void)) and (adapter.aspect.structure.content.contains(element))&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="execute">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;adapter.aspect.persistent.add(element)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1">
+          <eType xsi:type="ecore:EClass" href="../../../fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore#//PObject"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eSubpackages name="adaptations" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters/core/adaptations" nsPrefix="adaptations">
+        <eClassifiers xsi:type="ecore:EClass" name="createState" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := newState.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;if (adapter.created.getValue(newState).equals(void)) or (not (isUnique)) then&#xA;&#x9;&#x9;var realState : FSM::State&#xA;&#x9;&#x9;realState ?= adapter.converter.convert(kermeta::standard::Object.clone(newState), adapter.convert)&#xA;&#x9;&#x9;adapter.created.put(newState, realState)&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="true"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newState" containment="true">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="cloneState" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := newState.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;realState ?= adapter.getRealObject(newState, false)&#xA;&#x9;if realState.isNotEqual(void) then&#xA;&#x9;&#x9;if (adapter.getRealObject(realState, false).equals(void)) or (not (isUnique)) then&#xA;&#x9;&#x9;&#x9;var clonedState : FSM::State&#xA;&#x9;&#x9;&#x9;clonedState ?= kermeta::standard::Object.clone(realState)&#xA;&#x9;&#x9;&#x9;adapter.clone.put(realState, clonedState)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="true"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newState">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="realState" containment="true">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="setState" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := aState.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var tempState : FSM::State&#xA;&#x9;tempState ?= adapter.getRealObject(aState, false)&#xA;&#x9;var tempname : ecore::EString&#xA;&#x9;tempname ?= adapter.getRealObject(aname, false)&#xA;&#x9;if tempname.isNotEqual(void) then&#xA;&#x9;&#x9;tempState.name := tempname&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="aState">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="aname">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="unsetState" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := aState.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var tempState : FSM::State&#xA;&#x9;tempState ?= adapter.getRealObject(aState, false)&#xA;&#x9;var tempname : ecore::EString&#xA;&#x9;tempname ?= adapter.getRealObject(aname, false)&#xA;&#x9;if tempname.isNotEqual(void) then&#xA;&#x9;&#x9;tempState.name := void&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="aState">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="aname">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="false"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="createTransition" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := newTransition.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;if (adapter.created.getValue(newTransition).equals(void)) or (not (isUnique)) then&#xA;&#x9;&#x9;var realTransition : FSM::Transition&#xA;&#x9;&#x9;realTransition ?= adapter.converter.convert(kermeta::standard::Object.clone(newTransition), adapter.convert)&#xA;&#x9;&#x9;adapter.created.put(newTransition, realTransition)&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="true"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newTransition" containment="true">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Transition"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="cloneTransition" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := newTransition.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var realTransition : FSM::Transition&#xA;&#x9;realTransition ?= adapter.getRealObject(newTransition, false)&#xA;&#x9;if (adapter.clone.getValue(realTransition).equals(void)) or (not (isUnique)) then&#xA;&#x9;&#x9;var clonedTransition : FSM::Transition&#xA;&#x9;&#x9;clonedTransition ?= kermeta::standard::Object.clone(realTransition)&#xA;&#x9;&#x9;adapter.clone.put(realTransition, clonedTransition)&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="true"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newTransition">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Transition"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="setTransition" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := aTransition.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var tempTransition : FSM::Transition&#xA;&#x9;tempTransition ?= adapter.getRealObject(aTransition, false)&#xA;&#x9;var tempsource : FSM::State&#xA;&#x9;tempsource ?= adapter.getRealObject(asource, false)&#xA;&#x9;if tempsource.isNotEqual(void) then&#xA;&#x9;&#x9;tempTransition.source := tempsource&#xA;&#xA;&#x9;end&#xA;&#x9;var temptarget : FSM::State&#xA;&#x9;temptarget ?= adapter.getRealObject(atarget, false)&#xA;&#x9;if temptarget.isNotEqual(void) then&#xA;&#x9;&#x9;tempTransition.target := temptarget&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="aTransition">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Transition"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="asource">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="atarget">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="unsetTransition" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := aTransition.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var tempTransition : FSM::Transition&#xA;&#x9;tempTransition ?= adapter.getRealObject(aTransition, false)&#xA;&#x9;var tempsource : FSM::State&#xA;&#x9;tempsource ?= adapter.getRealObject(asource, false)&#xA;&#x9;if tempsource.isNotEqual(void) then&#xA;&#x9;&#x9;tempTransition.source := tempsource&#xA;&#xA;&#x9;end&#xA;&#x9;var temptarget : FSM::State&#xA;&#x9;temptarget ?= adapter.getRealObject(atarget, false)&#xA;&#x9;if temptarget.isNotEqual(void) then&#xA;&#x9;&#x9;tempTransition.target := void&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="aTransition">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Transition"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="asource">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="atarget">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="createFsm" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := newFsm.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;if (adapter.created.getValue(newFsm).equals(void)) or (not (isUnique)) then&#xA;&#x9;&#x9;var realFsm : FSM::Fsm&#xA;&#x9;&#x9;realFsm ?= adapter.converter.convert(kermeta::standard::Object.clone(newFsm), adapter.convert)&#xA;&#x9;&#x9;adapter.created.put(newFsm, realFsm)&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="true"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newFsm" containment="true">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Fsm"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="cloneFsm" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := newFsm.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var realFsm : FSM::Fsm&#xA;&#x9;realFsm ?= adapter.getRealObject(newFsm, false)&#xA;&#x9;if (adapter.clone.getValue(realFsm).equals(void)) or (not (isUnique)) then&#xA;&#x9;&#x9;var clonedFsm : FSM::Fsm&#xA;&#x9;&#x9;clonedFsm ?= kermeta::standard::Object.clone(realFsm)&#xA;&#x9;&#x9;adapter.clone.put(realFsm, clonedFsm)&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="isComposite" value="true"/>
+            </eAnnotations>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="newFsm">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Fsm"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="setFsm" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := aFsm.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var tempFsm : FSM::Fsm&#xA;&#x9;tempFsm ?= adapter.getRealObject(aFsm, false)&#xA;&#x9;var tempstates : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;tempstates ?= adapter.getRealObject(astates, true)&#xA;&#x9;if tempstates.isNotEqual(void) then&#xA;&#x9;&#x9;tempstates.each{o | do&#xA;&#x9;&#x9;&#x9;&#x9;var temp : FSM::State&#xA;&#x9;&#x9;&#x9;&#x9;temp ?= o&#xA;&#x9;&#x9;&#x9;&#x9;if temp.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;tempFsm.states.add(temp)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;var temptransitions : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;temptransitions ?= adapter.getRealObject(atransitions, true)&#xA;&#x9;if temptransitions.isNotEqual(void) then&#xA;&#x9;&#x9;temptransitions.each{o | do&#xA;&#x9;&#x9;&#x9;&#x9;var temp : FSM::Transition&#xA;&#x9;&#x9;&#x9;&#x9;temp ?= o&#xA;&#x9;&#x9;&#x9;&#x9;if temp.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;tempFsm.transitions.add(temp)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="aFsm">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Fsm"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="astates" upperBound="-1">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="atransitions" upperBound="-1">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Transition"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="unsetFsm" eSuperTypes="//smartadapters/core/Adaptation">
+          <eOperations name="check" eType="//Boolean">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;result := aFsm.isNotEqual(void)&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eOperations name="execute" ordered="false">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;&#x9;var tempFsm : FSM::Fsm&#xA;&#x9;tempFsm ?= adapter.getRealObject(aFsm, false)&#xA;&#x9;var tempstates : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;tempstates ?= adapter.getRealObject(astates, true)&#xA;&#x9;if tempstates.isNotEqual(void) then&#xA;&#x9;&#x9;tempstates.each{o | do&#xA;&#x9;&#x9;&#x9;&#x9;var temp : FSM::State&#xA;&#x9;&#x9;&#x9;&#x9;temp ?= o&#xA;&#x9;&#x9;&#x9;&#x9;if temp.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;tempFsm.states.add(temp)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;var temptransitions : kermeta::standard::Collection&lt;kermeta::reflection::Object>&#xA;&#x9;temptransitions ?= adapter.getRealObject(atransitions, true)&#xA;&#x9;if temptransitions.isNotEqual(void) then&#xA;&#x9;&#x9;temptransitions.each{o | do&#xA;&#x9;&#x9;&#x9;&#x9;var temp : FSM::Transition&#xA;&#x9;&#x9;&#x9;&#x9;temp ?= o&#xA;&#x9;&#x9;&#x9;&#x9;if temp.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;tempFsm.transitions.remove(temp)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+            </eAnnotations>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="aFsm">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Fsm"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="astates" upperBound="-1">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/State"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="atransitions" upperBound="-1">
+            <eType xsi:type="ecore:EClass" href="../domain/FSMMMPattern.ecore#//FSM/Transition"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+    <eSubpackages name="extension" nsURI="platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore#//smartadapters/extension" nsPrefix="extension">
+      <eClassifiers xsi:type="ecore:EClass" name="AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOptional">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DerivableAdapter" eSuperTypes="//smartadapters/core/Adapter">
+        <eOperations name="resolve" eType="//smartadapters/core/Adapter">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if derivation.isApplicableTo(self) then&#xA;&#x9;&#x9;stdio.write(&quot;Deriving an adapter...&quot;)&#xA;&#x9;&#x9;var derivable : org::smartadapters::extension::DerivableAdapter init org::smartadapters::extension::DerivableAdapter.new&#xA;&#x9;&#x9;adapt.each{a | if (not (a.isOptional)) or (derivation.adaptations.contains(a)) then&#xA;&#x9;&#x9;&#x9;&#x9;derivable.adapt.add(a)&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;alternatives.each{alt | if (alt.number) > (0) then&#xA;&#x9;&#x9;&#x9;&#x9;derivable.adapt.addAll(alt.selected)&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;if not (alt.isOptional) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;derivable.alternatives.add(alt)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;if derivable.isConcretizable then&#xA;&#x9;&#x9;&#x9;var adapter : org::smartadapters::core::Adapter init org::smartadapters::core::Adapter.new&#xA;&#x9;&#x9;&#x9;var hash : kermeta::utils::Hashtable&lt;kermeta::reflection::Class, kermeta::reflection::Class> init kermeta::utils::Hashtable&lt;kermeta::reflection::Class, kermeta::reflection::Class>.new&#xA;&#x9;&#x9;&#x9;hash.put(derivable.getMetaClass, adapter.getMetaClass)&#xA;&#x9;&#x9;&#x9;derivable.adapt.each{a | hash.put(a.getMetaClass, a.getMetaClass)}&#xA;&#x9;&#x9;&#x9;if converter.equals(void) then&#xA;&#x9;&#x9;&#x9;&#x9;converter := utils::Converter.new&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;adapter ?= converter.convert(derivable, hash)&#xA;&#x9;&#x9;&#x9;result := adapter&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := derivable&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;stdio.writeln(&quot;  OK!&quot;)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var e : org::smartadapters::extension::Exception init org::smartadapters::extension::NonApplicableDerivation.new&#xA;&#x9;&#x9;e.display&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="overloadable" value="false"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.raisedExceptions">
+            <details key="kermeta::exceptions::Exception" value="kermeta::exceptions::Exception"/>
+            <references href="../../../../plugin/fr.irisa.triskell.kermeta/lib/framework.ecore#//exceptions/Exception"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.raisedExceptions" references="//smartadapters/extension/Exception">
+            <details key="org::smartadapters::extension::Exception" value="org::smartadapters::extension::Exception"/>
+          </eAnnotations>
+          <eParameters name="derivation" eType="//smartadapters/extension/Derivation"/>
+        </eOperations>
+        <eOperations name="isReallyAbstract">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := (alternatives.size) &lt; (1)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eOperations>
+        <eOperations name="isConcretizable">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := (alternatives.size) == (0)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="alternatives" upperBound="-1" eType="//smartadapters/extension/EntityAlternative" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="options" upperBound="-1" eType="//smartadapters/extension/AdapterElement" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="xor" upperBound="-1" eType="//smartadapters/extension/MutualExclusion" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="and" upperBound="-1" eType="//smartadapters/extension/Dependency" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EntityAlternative" eSuperTypes="//smartadapters/extension/AdapterElement">
+        <eOperations name="isDetermined">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var oldNumber : kermeta::standard::Integer init 0&#xA;&#x9;number := 0&#xA;&#x9;self.selected.clear&#xA;&#x9;error := false&#xA;&#x9;xor.each{elt | if not (error) then&#xA;&#x9;&#x9;&#x9;isSelected(elt, derivation)&#xA;&#x9;&#x9;&#x9;if (oldNumber) > (0) then&#xA;&#x9;&#x9;&#x9;&#x9;error := not ((oldNumber) == (number))&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;oldNumber := number&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot;number: &quot;.plus(number.toString))&#xA;&#x9;stdio.writeln(&quot;error: &quot;.plus(error.toString))&#xA;&#x9;if not (error) then&#xA;&#x9;&#x9;result := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var except : org::smartadapters::extension::Exception init org::smartadapters::extension::NonApplicableDerivation.new&#xA;&#x9;&#x9;except.display&#xA;&#x9;&#x9;raise except&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xA;   Returns true if the alternative is correctly determined&#xA;   (if one and only one variant is fully selected in the derivation)&#xA;   */"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.raisedExceptions" references="//smartadapters/extension/Exception">
+            <details key="org::smartadapters::extension::Exception" value="org::smartadapters::extension::Exception"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eParameters name="derivation" eType="//smartadapters/extension/Derivation"/>
+        </eOperations>
+        <eOperations name="isSelected">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var adapt : org::smartadapters::core::Adaptation init void&#xA;&#x9;adapt ?= elt&#xA;&#x9;if adapt.isNotEqual(void) then&#xA;&#x9;&#x9;if derivation.adaptations.contains(adapt) then&#xA;&#x9;&#x9;&#x9;number := (number) + (1)&#xA;&#x9;&#x9;&#x9;selected.add(adapt)&#xA;&#x9;&#x9;&#x9;result := true&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;var c : org::smartadapters::extension::EntityConjunction init void&#xA;&#x9;c ?= elt&#xA;&#x9;if c.isNotEqual(void) then&#xA;&#x9;&#x9;var ~select : ecore::EBoolean init true&#xA;&#x9;&#x9;var option : ecore::EBoolean init false&#xA;&#x9;&#x9;var number : kermeta::standard::Integer init 0&#xA;&#x9;&#x9;c.~and.each{e | if not (e.isOptional) then&#xA;&#x9;&#x9;&#x9;&#x9;if isSelected(e, derivation) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;number := (number) + (1)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;~select := false&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;if isSelected(e, derivation) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;number := (number) + (1)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;stdio.writeln(&quot;select:&quot;.plus(~select.toString))&#xA;&#x9;&#x9;if not (~select) then&#xA;&#x9;&#x9;&#x9;error := (number) != (0)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;var altern : org::smartadapters::extension::EntityAlternative init void&#xA;&#x9;altern ?= elt&#xA;&#x9;if altern.isNotEqual(void) then&#xA;&#x9;&#x9;if altern.isDetermined(derivation) then&#xA;&#x9;&#x9;&#x9;result := true&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="documentation" value="/**&#xA;   Returns 1 if elt is selected in derivation, 0 otherwise&#xA;   */"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eParameters name="elt" eType="//smartadapters/extension/AdapterElement"/>
+          <eParameters name="derivation" eType="//smartadapters/extension/Derivation"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="xor" upperBound="-1" eType="//smartadapters/extension/AdapterElement"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="//Integer">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="selected" upperBound="-1" eType="//smartadapters/core/Adaptation"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="error" eType="//Boolean">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EntityConjunction" eSuperTypes="//smartadapters/extension/AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="and" upperBound="-1" eType="//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MutualExclusion" eSuperTypes="//smartadapters/extension/AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="entities" upperBound="-1" eType="//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="//smartadapters/extension/AdapterElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//smartadapters/extension/AdapterElement"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1" eType="//smartadapters/extension/AdapterElement"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Derivation">
+        <eOperations name="isApplicableTo">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;Checking derivation:&quot;)&#xA;&#x9;var isApplicable : ecore::EBoolean init true&#xA;&#x9;var elements : kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement> init kermeta::standard::Set&lt;org::smartadapters::extension::AdapterElement>.new&#xA;&#x9;adaptations.each{a | elements.add(a)}&#xA;&#x9;stdio.write(&quot;  - alternatives...&quot;)&#xA;&#x9;derivable.alternatives.each{alt | isApplicable := (isApplicable) and (alt.isDetermined(self))}&#xA;&#x9;if isApplicable then&#xA;&#x9;&#x9;stdio.writeln(&quot;  OK!&quot;)&#xA;&#x9;&#x9;stdio.write(&quot;  - mutual exclusions...&quot;)&#xA;&#x9;&#x9;derivable.xor.each{mutex | isApplicable := (isApplicable) and ((elements.intersection(mutex.entities).size) &lt;= (1))}&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;stdio.writeln(&quot;  Error!&quot;)&#xA;&#xA;&#x9;end&#xA;&#x9;if isApplicable then&#xA;&#x9;&#x9;stdio.writeln(&quot; OK!&quot;)&#xA;&#x9;&#x9;stdio.write(&quot;  - dependencies&quot;)&#xA;&#x9;&#x9;derivable.~and.each{dep | if elements.contains(dep.source) then&#xA;&#x9;&#x9;&#x9;&#x9;isApplicable := (isApplicable) and (elements.containsAll(dep.dependencies))&#xA;&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;stdio.writeln(&quot;  Error!&quot;)&#xA;&#xA;&#x9;end&#xA;&#x9;if isApplicable then&#xA;&#x9;&#x9;stdio.writeln(&quot;  OK!&quot;)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;stdio.writeln(&quot;  Error!&quot;)&#xA;&#xA;&#x9;end&#xA;&#x9;result := isApplicable&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+          <eParameters name="derivable" eType="//smartadapters/extension/DerivableAdapter"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="adaptations" upperBound="-1" eType="//smartadapters/core/Adaptation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Exception" abstract="true">
+        <eOperations name="display" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MultipleVariants" eSuperTypes="//smartadapters/extension/Exception">
+        <eOperations name="display" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;Many variants of an alternative have been selected. Maybe the derivation is not well formed.&quot;)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="NonApplicableDerivation" eSuperTypes="//smartadapters/extension/Exception">
+        <eOperations name="display" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;Derivation is not applicable to DerivableAdapter. Maybe the derivation is not well formed.&quot;)&#xA;&#x9;stdio.writeln(&quot;Please check that the derivation respects all the explicit and implicit constraints...&quot;)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="IncompleteConjunction" eSuperTypes="//smartadapters/extension/Exception">
+        <eOperations name="display" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;At least one mandatory element of a conjunction is missing. Maybe the derivation is not well formed&quot;)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,52 @@
+/* $Id: MMPatternBuilder.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+ * Creation date: October 18, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::EcorePatternMetamodelBuilder"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/PatternMetamodelBuilder.kmt"
+
+// require statement to workaround a problem in kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/persistence/EMFHandler.kmt"
+
+using ecore 
+using kermeta::standard
+using kermeta::persistence
+using kermeta::pattern
+ 
+class EcorePatternMetamodelBuilder {
+
+  operation main() is do 
+      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/Ecore.ecore"
+      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/EcorePattern.ecore"
+
+   	  var repository : EMFRepository init EMFRepository.new
+      var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
+      handler.initialize()        	 
+              	 
+      var packagesModelModel : Sequence<EPackage> init handler.loadEcoreModel (repository, sourceMetamodelUri)    
+
+      // Link packages to the framework of patterns (the content of the packages are changed 
+      var patternCreator : PatternMetamodelBuilder init PatternMetamodelBuilder.new       
+      patternCreator.initialize (repository)       
+      var patternPack : EPackage init patternCreator.addPatternFramework(packagesModelModel, targetMetamodelUri) 
+      
+      // remove the source packages from their previours container
+      packagesModelModel.each{p | repository.getResource(sourceMetamodelUri).remove(p)} 
+      
+      // problem in Kermeta: we have to clea instance class name
+      var emfhandler : kermeta::pattern::persistence::EMFHandler init kermeta::pattern::persistence::EMFHandler.new 
+      emfhandler.cleanInstanceClassNames(patternPack)
+        
+      handler.saveEcoreModel(repository, patternPack, targetMetamodelUri) 
+
+  end
+}
