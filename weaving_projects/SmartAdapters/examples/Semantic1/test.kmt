@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.2 2007-07-18 08:26:09 bmorin Exp $
+/* $Id: test.kmt,v 1.3 2007-07-18 12:20:47 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -19,7 +19,7 @@ class SemanticTest1
 {
 	operation main() : Void is do 
 		var weaver:SemanticWeaver init SemanticWeaver.new
-		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.xmi"
 		var ecore:String init "platform:/resource/SmartAdapters/metamodel/domain/Ecore.ecore"
 		var patternFramework:String init "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/pattern/metamodel/PatternFramework.ecore"
 		var pattern:String init "platform:/resource/SmartAdapters/examples/Semantic1/ModelPattern.xmi"

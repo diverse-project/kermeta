@@ -1,0 +1,728 @@
+package org;
+   require kermeta
+   require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+   require "platform:/resource/SmartAdapters/metamodel/domain/ClassMM.ecore"
+   require "platform:/resource/SmartAdapters/metamodel/domain/ClassMMPattern.ecore"
+
+   using kermeta::standard
+   using kermeta::utils
+   using patternframework
+   using org::smartadapters::core
+   using org::smartadapters::extension
+   using ecore
+
+   package smartadapters
+   {
+    	package core
+    	{ 
+     		@aspect "true"
+     		class Adapter{
+				operation initConvert() : Void is do
+stdio.write("Mapping MM' to MM...")
+convert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
+	convert.put(pattern::ClassMM::NamedElement,ClassMM::NamedElement)
+	convert.put(pattern::ClassMM::Classifier,ClassMM::Classifier)
+	convert.put(pattern::ClassMM::Attribute,ClassMM::Attribute)
+	convert.put(pattern::ClassMM::Class,ClassMM::Class)
+	convert.put(pattern::ClassMM::Association,ClassMM::Association)
+	convert.put(pattern::ClassMM::PrimitiveDataType,ClassMM::PrimitiveDataType)
+	convert.put(pattern::ClassMM::ClassModel,ClassMM::ClassModel)
+end
+}
+	package adaptations{
+				class createNamedElement inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newNamedElement:pattern::ClassMM::NamedElement
+
+	operation check() : Boolean is do
+		result:=(newNamedElement!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newNamedElement)==void or not(isUnique)) then
+			var realNamedElement:ClassMM::NamedElement
+			realNamedElement?=adapter.converter.convert(Object.clone(newNamedElement), adapter.convert)
+			adapter.created.put(newNamedElement,realNamedElement)
+		end
+	end
+}
+
+class cloneNamedElement inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newNamedElement:pattern::ClassMM::NamedElement
+	attribute realNamedElement:pattern::ClassMM::NamedElement
+
+	operation check() : Boolean is do
+		result:=(newNamedElement!=void)
+	end
+
+	operation execute() is do
+		var clonedNamedElement:ClassMM::NamedElement
+		var temp:ClassMM::NamedElement
+		temp?=adapter.getRealObject(newNamedElement,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedNamedElement?=Object.clone(temp)
+				adapter.clone.put(realNamedElement,clonedNamedElement)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedNamedElement?=Object.clone(temp)
+			adapter.clone.put(realNamedElement,clonedNamedElement)
+		end
+	end
+}
+
+class setNamedElement inherits Adaptation{
+	reference aNamedElement:pattern::ClassMM::NamedElement
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aNamedElement!=void)
+	end
+
+	operation execute() is do
+		var tempNamedElement:ClassMM::NamedElement
+		tempNamedElement?=adapter.getRealObject(aNamedElement,false)
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempNamedElement.name:=tempname
+		end
+	end
+}
+
+class unsetNamedElement inherits Adaptation{
+	reference aNamedElement:pattern::ClassMM::NamedElement
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aNamedElement!=void)
+	end
+
+	operation execute() is do
+		var tempNamedElement:ClassMM::NamedElement
+		tempNamedElement?=adapter.getRealObject(aNamedElement,false)
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempNamedElement.name:=void
+		end
+	end
+}
+
+class createClassifier inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newNamedElement:pattern::ClassMM::NamedElement
+
+	operation check() : Boolean is do
+		result:=(newNamedElement!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newNamedElement)==void or not(isUnique)) then
+			var realNamedElement:ClassMM::NamedElement
+			realNamedElement?=adapter.converter.convert(Object.clone(newNamedElement), adapter.convert)
+			adapter.created.put(newNamedElement,realNamedElement)
+		end
+	end
+}
+
+class cloneClassifier inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newNamedElement:pattern::ClassMM::NamedElement
+	attribute realNamedElement:pattern::ClassMM::NamedElement
+
+	operation check() : Boolean is do
+		result:=(newNamedElement!=void)
+	end
+
+	operation execute() is do
+		var clonedNamedElement:ClassMM::NamedElement
+		var temp:ClassMM::NamedElement
+		temp?=adapter.getRealObject(newNamedElement,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedNamedElement?=Object.clone(temp)
+				adapter.clone.put(realNamedElement,clonedNamedElement)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedNamedElement?=Object.clone(temp)
+			adapter.clone.put(realNamedElement,clonedNamedElement)
+		end
+	end
+}
+
+class setClassifier inherits Adaptation{
+	reference aClassifier:pattern::ClassMM::Classifier
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aClassifier!=void)
+	end
+
+	operation execute() is do
+		var tempClassifier:ClassMM::Classifier
+		tempClassifier?=adapter.getRealObject(aClassifier,false)
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempClassifier.name:=tempname
+		end
+	end
+}
+
+class unsetClassifier inherits Adaptation{
+	reference aClassifier:pattern::ClassMM::Classifier
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aClassifier!=void)
+	end
+
+	operation execute() is do
+		var tempClassifier:ClassMM::Classifier
+		tempClassifier?=adapter.getRealObject(aClassifier,false)
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempClassifier.name:=void
+		end
+	end
+}
+
+class createAttribute inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newAttribute:pattern::ClassMM::Attribute
+
+	operation check() : Boolean is do
+		result:=(newAttribute!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newAttribute)==void or not(isUnique)) then
+			var realAttribute:ClassMM::Attribute
+			realAttribute?=adapter.converter.convert(Object.clone(newAttribute), adapter.convert)
+			adapter.created.put(newAttribute,realAttribute)
+		end
+	end
+}
+
+class cloneAttribute inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newAttribute:pattern::ClassMM::Attribute
+	attribute realAttribute:pattern::ClassMM::Attribute
+
+	operation check() : Boolean is do
+		result:=(newAttribute!=void)
+	end
+
+	operation execute() is do
+		var clonedAttribute:ClassMM::Attribute
+		var temp:ClassMM::Attribute
+		temp?=adapter.getRealObject(newAttribute,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedAttribute?=Object.clone(temp)
+				adapter.clone.put(realAttribute,clonedAttribute)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedAttribute?=Object.clone(temp)
+			adapter.clone.put(realAttribute,clonedAttribute)
+		end
+	end
+}
+
+class setAttribute inherits Adaptation{
+	reference aAttribute:pattern::ClassMM::Attribute
+	reference atype:pattern::ClassMM::Classifier
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aAttribute!=void)
+	end
+
+	operation execute() is do
+		var tempAttribute:ClassMM::Attribute
+		tempAttribute?=adapter.getRealObject(aAttribute,false)
+		var temptype:ClassMM::Classifier
+		temptype?=adapter.getRealObject(atype,false)
+		if(temptype!=void) then
+			tempAttribute.type:=temptype
+		end
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempAttribute.name:=tempname
+		end
+	end
+}
+
+class unsetAttribute inherits Adaptation{
+	reference aAttribute:pattern::ClassMM::Attribute
+	reference atype:pattern::ClassMM::Classifier
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aAttribute!=void)
+	end
+
+	operation execute() is do
+		var tempAttribute:ClassMM::Attribute
+		tempAttribute?=adapter.getRealObject(aAttribute,false)
+		var temptype:ClassMM::Classifier
+		temptype?=adapter.getRealObject(atype,false)
+		if(temptype!=void) then
+			tempAttribute.type:=temptype
+		end
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempAttribute.name:=void
+		end
+	end
+}
+
+class createClass inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newClass:pattern::ClassMM::Class
+
+	operation check() : Boolean is do
+		result:=(newClass!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newClass)==void or not(isUnique)) then
+			var realClass:ClassMM::Class
+			realClass?=adapter.converter.convert(Object.clone(newClass), adapter.convert)
+			adapter.created.put(newClass,realClass)
+		end
+	end
+}
+
+class cloneClass inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newClass:pattern::ClassMM::Class
+	attribute realClass:pattern::ClassMM::Class
+
+	operation check() : Boolean is do
+		result:=(newClass!=void)
+	end
+
+	operation execute() is do
+		var clonedClass:ClassMM::Class
+		var temp:ClassMM::Class
+		temp?=adapter.getRealObject(newClass,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedClass?=Object.clone(temp)
+				adapter.clone.put(realClass,clonedClass)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedClass?=Object.clone(temp)
+			adapter.clone.put(realClass,clonedClass)
+		end
+	end
+}
+
+class setClass inherits Adaptation{
+	reference aClass:pattern::ClassMM::Class
+	reference aattributes:pattern::ClassMM::Attribute[0..*]
+	reference asuper:pattern::ClassMM::Class
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aClass!=void)
+	end
+
+	operation execute() is do
+		var tempClass:ClassMM::Class
+		tempClass?=adapter.getRealObject(aClass,false)
+		var tempattributes:Collection<kermeta::reflection::Object>
+		tempattributes?=adapter.getRealObject(aattributes,true)
+		if(tempattributes!=void) then
+			tempattributes.each{o | 
+				var temp:ClassMM::Attribute
+				temp?=o
+				if(temp!=void) then
+					tempClass.attributes.add(temp)
+				end}
+		end
+		var tempsuper:ClassMM::Class
+		tempsuper?=adapter.getRealObject(asuper,false)
+		if(tempsuper!=void) then
+			tempClass.~super:=tempsuper
+		end
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempClass.name:=tempname
+		end
+	end
+}
+
+class unsetClass inherits Adaptation{
+	reference aClass:pattern::ClassMM::Class
+	reference aattributes:pattern::ClassMM::Attribute[0..*]
+	reference asuper:pattern::ClassMM::Class
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aClass!=void)
+	end
+
+	operation execute() is do
+		var tempClass:ClassMM::Class
+		tempClass?=adapter.getRealObject(aClass,false)
+		var tempattributes:Collection<kermeta::reflection::Object>
+		tempattributes?=adapter.getRealObject(aattributes,true)
+		if(tempattributes!=void) then
+			tempattributes.each{o | 
+				var temp:ClassMM::Attribute
+				temp?=o
+				if(temp!=void) then
+					tempClass.attributes.add(temp)
+				end}
+		end
+		var tempsuper:ClassMM::Class
+		tempsuper?=adapter.getRealObject(asuper,false)
+		if(tempsuper!=void) then
+			tempClass.~super:=tempsuper
+		end
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempClass.name:=void
+		end
+	end
+}
+
+class createAssociation inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newAssociation:pattern::ClassMM::Association
+
+	operation check() : Boolean is do
+		result:=(newAssociation!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newAssociation)==void or not(isUnique)) then
+			var realAssociation:ClassMM::Association
+			realAssociation?=adapter.converter.convert(Object.clone(newAssociation), adapter.convert)
+			adapter.created.put(newAssociation,realAssociation)
+		end
+	end
+}
+
+class cloneAssociation inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newAssociation:pattern::ClassMM::Association
+	attribute realAssociation:pattern::ClassMM::Association
+
+	operation check() : Boolean is do
+		result:=(newAssociation!=void)
+	end
+
+	operation execute() is do
+		var clonedAssociation:ClassMM::Association
+		var temp:ClassMM::Association
+		temp?=adapter.getRealObject(newAssociation,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedAssociation?=Object.clone(temp)
+				adapter.clone.put(realAssociation,clonedAssociation)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedAssociation?=Object.clone(temp)
+			adapter.clone.put(realAssociation,clonedAssociation)
+		end
+	end
+}
+
+class setAssociation inherits Adaptation{
+	reference aAssociation:pattern::ClassMM::Association
+	reference asrc:pattern::ClassMM::Class
+	reference adest:pattern::ClassMM::Class
+	reference alowerBound:ecore::EInt
+	reference aupperBound:ecore::EInt
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aAssociation!=void)
+	end
+
+	operation execute() is do
+		var tempAssociation:ClassMM::Association
+		tempAssociation?=adapter.getRealObject(aAssociation,false)
+		var tempsrc:ClassMM::Class
+		tempsrc?=adapter.getRealObject(asrc,false)
+		if(tempsrc!=void) then
+			tempAssociation.src:=tempsrc
+		end
+		var tempdest:ClassMM::Class
+		tempdest?=adapter.getRealObject(adest,false)
+		if(tempdest!=void) then
+			tempAssociation.dest:=tempdest
+		end
+		var templowerBound:ecore::EInt
+		templowerBound?=adapter.getRealObject(alowerBound,false)
+		if(templowerBound!=void) then
+			tempAssociation.lowerBound:=templowerBound
+		end
+		var tempupperBound:ecore::EInt
+		tempupperBound?=adapter.getRealObject(aupperBound,false)
+		if(tempupperBound!=void) then
+			tempAssociation.upperBound:=tempupperBound
+		end
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempAssociation.name:=tempname
+		end
+	end
+}
+
+class unsetAssociation inherits Adaptation{
+	reference aAssociation:pattern::ClassMM::Association
+	reference asrc:pattern::ClassMM::Class
+	reference adest:pattern::ClassMM::Class
+	reference alowerBound:ecore::EInt
+	reference aupperBound:ecore::EInt
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aAssociation!=void)
+	end
+
+	operation execute() is do
+		var tempAssociation:ClassMM::Association
+		tempAssociation?=adapter.getRealObject(aAssociation,false)
+		var tempsrc:ClassMM::Class
+		tempsrc?=adapter.getRealObject(asrc,false)
+		if(tempsrc!=void) then
+			tempAssociation.src:=tempsrc
+		end
+		var tempdest:ClassMM::Class
+		tempdest?=adapter.getRealObject(adest,false)
+		if(tempdest!=void) then
+			tempAssociation.dest:=tempdest
+		end
+		var templowerBound:ecore::EInt
+		templowerBound?=adapter.getRealObject(alowerBound,false)
+		if(templowerBound!=void) then
+			tempAssociation.lowerBound:=templowerBound
+		end
+		var tempupperBound:ecore::EInt
+		tempupperBound?=adapter.getRealObject(aupperBound,false)
+		if(tempupperBound!=void) then
+			tempAssociation.upperBound:=tempupperBound
+		end
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempAssociation.name:=void
+		end
+	end
+}
+
+class createPrimitiveDataType inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newPrimitiveDataType:pattern::ClassMM::PrimitiveDataType
+
+	operation check() : Boolean is do
+		result:=(newPrimitiveDataType!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newPrimitiveDataType)==void or not(isUnique)) then
+			var realPrimitiveDataType:ClassMM::PrimitiveDataType
+			realPrimitiveDataType?=adapter.converter.convert(Object.clone(newPrimitiveDataType), adapter.convert)
+			adapter.created.put(newPrimitiveDataType,realPrimitiveDataType)
+		end
+	end
+}
+
+class clonePrimitiveDataType inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newPrimitiveDataType:pattern::ClassMM::PrimitiveDataType
+	attribute realPrimitiveDataType:pattern::ClassMM::PrimitiveDataType
+
+	operation check() : Boolean is do
+		result:=(newPrimitiveDataType!=void)
+	end
+
+	operation execute() is do
+		var clonedPrimitiveDataType:ClassMM::PrimitiveDataType
+		var temp:ClassMM::PrimitiveDataType
+		temp?=adapter.getRealObject(newPrimitiveDataType,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedPrimitiveDataType?=Object.clone(temp)
+				adapter.clone.put(realPrimitiveDataType,clonedPrimitiveDataType)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedPrimitiveDataType?=Object.clone(temp)
+			adapter.clone.put(realPrimitiveDataType,clonedPrimitiveDataType)
+		end
+	end
+}
+
+class setPrimitiveDataType inherits Adaptation{
+	reference aPrimitiveDataType:pattern::ClassMM::PrimitiveDataType
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aPrimitiveDataType!=void)
+	end
+
+	operation execute() is do
+		var tempPrimitiveDataType:ClassMM::PrimitiveDataType
+		tempPrimitiveDataType?=adapter.getRealObject(aPrimitiveDataType,false)
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempPrimitiveDataType.name:=tempname
+		end
+	end
+}
+
+class unsetPrimitiveDataType inherits Adaptation{
+	reference aPrimitiveDataType:pattern::ClassMM::PrimitiveDataType
+	reference aname:ecore::EString
+
+	operation check() : Boolean is do
+		result:=(aPrimitiveDataType!=void)
+	end
+
+	operation execute() is do
+		var tempPrimitiveDataType:ClassMM::PrimitiveDataType
+		tempPrimitiveDataType?=adapter.getRealObject(aPrimitiveDataType,false)
+		var tempname:ecore::EString
+		tempname?=adapter.getRealObject(aname,false)
+		if(tempname!=void) then
+			tempPrimitiveDataType.name:=void
+		end
+	end
+}
+
+class createClassModel inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newClassModel:pattern::ClassMM::ClassModel
+
+	operation check() : Boolean is do
+		result:=(newClassModel!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newClassModel)==void or not(isUnique)) then
+			var realClassModel:ClassMM::ClassModel
+			realClassModel?=adapter.converter.convert(Object.clone(newClassModel), adapter.convert)
+			adapter.created.put(newClassModel,realClassModel)
+		end
+	end
+}
+
+class cloneClassModel inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newClassModel:pattern::ClassMM::ClassModel
+	attribute realClassModel:pattern::ClassMM::ClassModel
+
+	operation check() : Boolean is do
+		result:=(newClassModel!=void)
+	end
+
+	operation execute() is do
+		var clonedClassModel:ClassMM::ClassModel
+		var temp:ClassMM::ClassModel
+		temp?=adapter.getRealObject(newClassModel,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedClassModel?=Object.clone(temp)
+				adapter.clone.put(realClassModel,clonedClassModel)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedClassModel?=Object.clone(temp)
+			adapter.clone.put(realClassModel,clonedClassModel)
+		end
+	end
+}
+
+class setClassModel inherits Adaptation{
+	reference aClassModel:pattern::ClassMM::ClassModel
+	reference aclassifier:pattern::ClassMM::Classifier[0..*]
+	reference aassociation:pattern::ClassMM::Association[0..*]
+
+	operation check() : Boolean is do
+		result:=(aClassModel!=void)
+	end
+
+	operation execute() is do
+		var tempClassModel:ClassMM::ClassModel
+		tempClassModel?=adapter.getRealObject(aClassModel,false)
+		var tempclassifier:Collection<kermeta::reflection::Object>
+		tempclassifier?=adapter.getRealObject(aclassifier,true)
+		if(tempclassifier!=void) then
+			tempclassifier.each{o | 
+				var temp:ClassMM::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempClassModel.classifier.add(temp)
+				end}
+		end
+		var tempassociation:Collection<kermeta::reflection::Object>
+		tempassociation?=adapter.getRealObject(aassociation,true)
+		if(tempassociation!=void) then
+			tempassociation.each{o | 
+				var temp:ClassMM::Association
+				temp?=o
+				if(temp!=void) then
+					tempClassModel.association.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetClassModel inherits Adaptation{
+	reference aClassModel:pattern::ClassMM::ClassModel
+	reference aclassifier:pattern::ClassMM::Classifier[0..*]
+	reference aassociation:pattern::ClassMM::Association[0..*]
+
+	operation check() : Boolean is do
+		result:=(aClassModel!=void)
+	end
+
+	operation execute() is do
+		var tempClassModel:ClassMM::ClassModel
+		tempClassModel?=adapter.getRealObject(aClassModel,false)
+		var tempclassifier:Collection<kermeta::reflection::Object>
+		tempclassifier?=adapter.getRealObject(aclassifier,true)
+		if(tempclassifier!=void) then
+			tempclassifier.each{o | 
+				var temp:ClassMM::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempClassModel.classifier.add(temp)
+				end}
+		end
+		var tempassociation:Collection<kermeta::reflection::Object>
+		tempassociation?=adapter.getRealObject(aassociation,true)
+		if(tempassociation!=void) then
+			tempassociation.each{o | 
+				var temp:ClassMM::Association
+				temp?=o
+				if(temp!=void) then
+					tempClassModel.association.remove(temp)
+				end}
+		end
+	end
+}
+
+						}
+	}
+}

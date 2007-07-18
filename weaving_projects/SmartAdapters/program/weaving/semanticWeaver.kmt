@@ -1,4 +1,4 @@
-/* $Id: semanticWeaver.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: semanticWeaver.kmt,v 1.2 2007-07-18 12:20:47 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -14,6 +14,7 @@ package weaver;
 require kermeta
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta.patternmatching/src/kermeta/flora2/PatternMatchingFlora2.kmt"
+require "platform:/resource/SmartAdapters/metamodel/domain/EcorePattern.ecore"
 
 using ecore
 using EcoreHelpers
@@ -26,25 +27,28 @@ using kermeta::pattern::flora2
 
 class SemanticWeaver
 {
-	operation weavingSemantic(domainMM:String, ecore:String, ecorePattern:String, pattern:String) : Void is do
+	operation weavingSemantic(domainMM:String, ecore:String, patternFramework:String, pattern:String) : Void is do
 		var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  
 	    handler.initialize()
 		var repository:EMFRepository init EMFRepository.new
 
 		var inputMetamodel:Sequence<EPackage> init handler.loadEcoreModel(EMFRepository.new, ecore)
-		var inputPatternMetamodel:Sequence<EPackage> init handler.loadEcoreModel(EMFRepository.new, ecorePattern)
+		inputMetamodel.each{o | stdio.writeln(o.name)}
 
-		var inputModel:Set<Object> init Set<Object>.new
-		var tempModel:Sequence<EPackage> init handler.loadEcoreModel(repository, ecore)
-		tempModel.each{p | inputModel.add(p)}
-		
-		
-		var inputPattern:Set<Object> init loadModel(repository, pattern, ecorePattern)
+		var inputModel:Set<Object> init loadModel(repository, domainMM, ecore)
+		/*var tempModel:Sequence<EPackage> init handler.loadEcoreModel(repository, domainMM)
+		tempModel.each{p | 
+			stdio.writeln("  "+p.name)
+			getAllNestedClassifiers(p).each{o | inputModel.add(o)}}*/
+		inputModel.each{o | stdio.writeln("    "+o.toString)}
+				
+		var inputPattern:Set<Object> init loadModel(EMFRepository.new, pattern, patternFramework)
 		var p:ModelPattern
 		p?=inputPattern.select{o | ModelPattern.isInstance(o)}.first
-		
+
 		var matcher : PatternMatching init PatternMatchingFlora2.new
         var iteBindings : Iterator<Hashtable<Object, Object>> init Iterator<Hashtable<Object, Object>>.new
+        stdio.writeln("Executing pattern matching...")
         iteBindings := matcher.match(inputMetamodel, inputModel, p)
         stdio.writeln("") 
         stdio.writeln("")
@@ -78,4 +82,12 @@ class SemanticWeaver
 	    obj.each{o | resource.instances.add(o)}
 	    resource.save
     end
+    
+    operation getAllNestedClassifiers(pack : EPackage) : Set<EClassifier> is do
+       var eclassifiers : Set<EClassifier> init Set<EClassifier>.new
+       eclassifiers.addAll( pack.eClassifiers)
+       pack.eSubpackages.each{ subpack | 
+                eclassifiers.addAll( getAllNestedClassifiers(subpack))}
+       result := eclassifiers
+    end    
 }

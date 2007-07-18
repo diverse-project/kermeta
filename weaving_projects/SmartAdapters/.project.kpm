@@ -101,19 +101,27 @@
       <expression xsi:type="kpm:NullExpression"/>
     </outs>
   </rules>
+  <rules event="//@events.1" name="require /SmartAdapters/program/weaving/semanticWeaver.kmt" type="//@ruleTypes.0">
+    <in>
+      <expression xsi:type="kpm:NullExpression"/>
+    </in>
+    <outs>
+      <expression xsi:type="kpm:NullExpression"/>
+    </outs>
+  </rules>
   <events name="open"/>
   <events name="update"/>
   <events name="close"/>
   <units rules="//@rules.0" value="/SmartAdapters"/>
-  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T10:44:04.246+0200" value="/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt" dependents="//@units.4/@dependencies.12 //@units.7/@dependencies.1">
+  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt" dependents="//@units.4/@dependencies.12 //@units.7/@dependencies.1 //@units.23/@dependencies.0">
     <dependencies type="//@ruleTypes.0" from="//@units.1" to="//@units.3"/>
     <dependencies type="//@ruleTypes.0" from="//@units.1" to="//@units.8"/>
   </units>
-  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T11:00:16.536+0200" value="/SmartAdapters/program/weaving/weaver4FSMs.kmt" dependents="//@units.6/@dependencies.1 //@units.14/@dependencies.0">
+  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/program/weaving/weaver4FSMs.kmt" dependents="//@units.6/@dependencies.1 //@units.14/@dependencies.0">
     <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.4"/>
     <dependencies type="//@ruleTypes.0" from="//@units.2" to="//@units.7"/>
   </units>
-  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T10:37:16.623+0200" value="/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt" dependents="//@units.1/@dependencies.0"/>
+  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/metamodel/generic/genericSmartAdaptersBase.kmt" dependents="//@units.1/@dependencies.0"/>
   <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T16:30:28.770+0200" value="/SmartAdapters/metamodel/specific/FSM_AOM_Framework.kmt" dependents="//@units.5/@dependencies.0 //@units.2/@dependencies.0">
     <dependencies type="//@ruleTypes.0" from="//@units.4" to="//@units.1"/>
     <dependencies type="//@ruleTypes.0" from="//@units.4" to="//@units.1"/>
@@ -136,29 +144,38 @@
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.2"/>
     <dependencies type="//@ruleTypes.0" from="//@units.6" to="//@units.2"/>
   </units>
-  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T15:47:05.144+0200" value="/SmartAdapters/program/weaving/weaver.kmt" dependents="//@units.2/@dependencies.1">
+  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/program/weaving/weaver.kmt" dependents="//@units.2/@dependencies.1">
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.1"/>
     <dependencies type="//@ruleTypes.0" from="//@units.7" to="//@units.1"/>
   </units>
-  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T11:34:37.271+0200" value="/SmartAdapters/program/weaving/converter.kmt" dependents="//@units.1/@dependencies.1"/>
+  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/program/weaving/converter.kmt" dependents="//@units.1/@dependencies.1"/>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T00:59:59.999+0100" value="/SmartAdapters/examplesV2/generateFramework/test.kmt"/>
-  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-17T16:29:49.187+0200" value="/SmartAdapters/program/specialize/AdaptationBuilder.kmt" dependents="//@units.15/@dependencies.0"/>
+  <units rules="//@rules.1 //@rules.2" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/program/specialize/AdaptationBuilder.kmt" dependents="//@units.15/@dependencies.0"/>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examplesV2/FSM/test.kmt"/>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examplesV2/FSM1/test.kmt"/>
-  <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/Derivation/derive.kmt"/>
-  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-17T15:44:30.608+0200" value="/SmartAdapters/examples/FSM1/test.kmt">
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/examples/Derivation/derive.kmt"/>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T08:58:23.000+0200" value="/SmartAdapters/examples/FSM1/test.kmt">
     <dependencies type="//@ruleTypes.0" from="//@units.14" to="//@units.2"/>
   </units>
-  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-17T11:40:06.410+0200" value="/SmartAdapters/examples/generateFramework/test.kmt">
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/examples/generateFramework/test.kmt">
     <dependencies type="//@ruleTypes.0" from="//@units.15" to="//@units.10"/>
   </units>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/specific/Copy of FSM_AOM_Framework.kmt"/>
-  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-17T16:32:12.328+0200" value="/SmartAdapters/program/weaving/semanticWeaver.kmt"/>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T11:21:02.988+0200" value="/SmartAdapters/program/weaving/semanticWeaver.kmt" dependents="//@units.19/@dependencies.0"/>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T00:59:59.999+0100" value="/SmartAdapters/examples/Semantic1/new_file.kmt"/>
-  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-17T17:14:23.819+0200" value="/SmartAdapters/examples/Semantic1/test.kmt"/>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T11:45:42.323+0200" value="/SmartAdapters/examples/Semantic1/test.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.19" to="//@units.17"/>
+  </units>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T00:59:59.999+0100" value="/SmartAdapters/examples/MM'Builder/ClassDiagPatternMMBuilder.kmt"/>
   <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/metamodel/domain/ecore.kmt"/>
-  <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/examples/MM'Builder/MMPatternBuilder.kmt"/>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T08:58:24.000+0200" value="/SmartAdapters/examples/MM'Builder/MMPatternBuilder.kmt"/>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T13:59:46.735+0200" value="/SmartAdapters/metamodel/specific/simpleClassDiag_AOM_Framework.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.23" to="//@units.1"/>
+  </units>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="2007-07-18T08:58:23.000+0200" value="/SmartAdapters/examples/SimpleClassDiag1/test.kmt">
+    <dependencies type="//@ruleTypes.0" from="//@units.24" to="//@units.2"/>
+  </units>
+  <units rules="//@rules.2 //@rules.1" lastTimeModified="1970-01-01T01:00:00.000+0100" value="/SmartAdapters/program/weaving/weaver4simpleClassDiag.kmt"/>
   <ruleTypes name="require"/>
   <ruleTypes name="normal"/>
 </kpm:KPM>

@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="platform:/resource/SmartAdapters/metamodel/domain/EcorePattern.ecore#/ecore" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/EcorePattern.ecore#/ecore ../../metamodel/domain/EcorePattern.ecore#//ecore">
   <eClassifiers xsi:type="ecore:EClass" name="DirectedLink">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//@eClassifiers.1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//@eClassifiers.1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//@eClassifiers.1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Node">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" lowerBound="0" upperBound="-1" eType="//@eClassifiers.0" eOpposite="//@eClassifiers.0/@eStructuralFeatures.1"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" lowerBound="0" upperBound="-1" eType="//@eClassifiers.0" eOpposite="//@eClassifiers.0/@eStructuralFeatures.0"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node"/>
 </ecore:EPackage>

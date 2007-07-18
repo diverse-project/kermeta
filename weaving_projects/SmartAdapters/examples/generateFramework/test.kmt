@@ -1,4 +1,4 @@
-/* $Id: test.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: test.kmt,v 1.2 2007-07-18 12:20:47 bmorin Exp $
  * Creation date: May 4, 2007
  * License:
  * Copyright:
@@ -20,8 +20,8 @@ using specialize
 class frameworkGenerator
 {
 	operation main() : Void is do
-		generateFSM()
-		//generateClassDiag()
+		//generateFSM()
+		generateClassDiag()
 	end
 
 	operation generateFSM() : Void is do 
@@ -38,7 +38,7 @@ class frameworkGenerator
 		var domainMM:String init "platform:/resource/SmartAdapters/metamodel/domain/ClassMM.ecore"
 		var domainMMPrime:String init "platform:/resource/SmartAdapters/metamodel/domain/ClassMMPattern.ecore"
 		var ecore:String init "http://www.eclipse.org/emf/2002/Ecore" 
-		var file:String init "C:\\temp\\simpleCD_AOM_Framework.kmt"
+		var file:String init "C:\\temp\\simpleClassDiag_AOM_Framework.kmt"
 		specializer.generateFramework(domainMM, domainMMPrime, ecore, file)		
 	end	
 }
