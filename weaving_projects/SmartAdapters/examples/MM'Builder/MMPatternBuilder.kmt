@@ -1,4 +1,4 @@
-/* $Id: MMPatternBuilder.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: MMPatternBuilder.kmt,v 1.2 2007-07-18 15:43:47 bmorin Exp $
  * Creation date: October 18, 2006
  * License:
  * Copyright:
@@ -25,8 +25,8 @@ using kermeta::pattern
 class EcorePatternMetamodelBuilder {
 
   operation main() is do 
-      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/Ecore.ecore"
-      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/EcorePattern.ecore"
+      var sourceMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/ClassDiagUML.ecore"
+      var targetMetamodelUri : String init "platform:/resource/SmartAdapters/metamodel/domain/ClassDiagUMLPattern.ecore"
 
    	  var repository : EMFRepository init EMFRepository.new
       var handler : EcoreHelpers::EcoreHelper init EcoreHelpers::EcoreHelper.new   	  

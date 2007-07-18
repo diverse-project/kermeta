@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ASCII"?>
+<core:Adapter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adaptations="platform:/resource/SmartAdapters/metamodel/specific/UML_AOM_Framework.ecore#//smartadapters/core/adaptations" xmlns:core="platform:/resource/SmartAdapters/metamodel/specific/UML_AOM_Framework.ecore#//smartadapters/core" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/specific/UML_AOM_Framework.ecore#//smartadapters/core/adaptations ../../metamodel/specific/UML_AOM_Framework.ecore#//smartadapters/core/adaptations platform:/resource/SmartAdapters/metamodel/specific/UML_AOM_Framework.ecore#//smartadapters/core ../../metamodel/specific/UML_AOM_Framework.ecore#//smartadapters/core">
+  <aspect>
+    <template>
+      <pattern>
+        <content href="templatePackage.xmi#/"/>
+        <content href="templatePackage.xmi#//@packagedElement.0"/>
+        <content href="templatePackage.xmi#//@packagedElement.0/@ownedAttribute.0"/>
+        <content href="templatePackage.xmi#//@packagedElement.2"/>
+        <content href="templatePackage.xmi#//@packagedElement.1"/>
+        <content href="templatePackage.xmi#//@packagedElement.1/@ownedOperation.0"/>
+        <content href="templatePackage.xmi#//@packagedElement.3"/>
+        <content href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0"/>
+        <content href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0/@upperValue"/>
+        <content href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0/@lowerValue"/>
+        <content href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.1"/>
+        <roles name="pkgRole">
+          <player href="templatePackage.xmi#/"/>
+        </roles>
+        <roles name="UserRole">
+          <player href="templatePackage.xmi#//@packagedElement.0"/>
+        </roles>
+        <roles name="userRole">
+          <player href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0"/>
+        </roles>
+        <roles name="userLowRole">
+          <player href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0/@lowerValue"/>
+        </roles>
+        <roles name="userUpRole">
+          <player href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0/@upperValue"/>
+        </roles>
+        <roles name="ProtectedResourceRole">
+          <player href="templatePackage.xmi#//@packagedElement.1"/>
+        </roles>
+        <roles name="UserIDRole">
+          <player href="templatePackage.xmi#//@packagedElement.2"/>
+        </roles>
+        <roles name="methodRole">
+          <player href="templatePackage.xmi#//@packagedElement.1/@ownedOperation.0"/>
+        </roles>
+      </pattern>
+      <featureIdentifier>name</featureIdentifier>
+    </template>
+    <structure>
+      <content href="structurePackage.xmi#/"/>
+      <content href="structurePackage.xmi#//@packagedElement.0"/>
+      <content href="structurePackage.xmi#//@packagedElement.1"/>
+      <content href="structurePackage.xmi#//@packagedElement.1/@ownedOperation.0"/>
+      <content href="structurePackage.xmi#//@packagedElement.1/@ownedOperation.0/@ownedParameter.0"/>
+      <content href="structurePackage.xmi#//@packagedElement.2"/>
+      <content href="structurePackage.xmi#//@packagedElement.2/@ownedEnd.0"/>
+      <content href="structurePackage.xmi#//@packagedElement.2/@ownedEnd.1"/>
+      <content href="structurePackage.xmi#//@packagedElement.3"/>
+      <content href="structurePackage.xmi#//@packagedElement.3/@ownedEnd.0"/>
+      <content href="structurePackage.xmi#//@packagedElement.3/@ownedEnd.1"/>
+    </structure>
+  </aspect>
+  <adapt xsi:type="adaptations:setPackage">
+    <aPackage href="templatePackage.xmi#/"/>
+    <apackagedElement href="structurePackage.xmi#//@packagedElement.0"/>
+    <apackagedElement href="structurePackage.xmi#//@packagedElement.1"/>
+    <apackagedElement href="structurePackage.xmi#//@packagedElement.2"/>
+    <apackagedElement href="structurePackage.xmi#//@packagedElement.3"/>
+  </adapt>
+  <adapt xsi:type="adaptations:setProperty" name="">
+    <aProperty href="structurePackage.xmi#//@packagedElement.2/@ownedEnd.1"/>
+    <atype href="templatePackage.xmi#//@packagedElement.0"/>
+    <aupperValue href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0/@upperValue"/>
+    <alowerValue href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0/@lowerValue"/>
+  </adapt>
+  <adapt xsi:type="adaptations:setProperty">
+    <aProperty href="templatePackage.xmi#//@packagedElement.3/@ownedEnd.0"/>
+    <atype href="structurePackage.xmi#//@packagedElement.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:cloneOperation" name="">
+    <newOperation href="templatePackage.xmi#//@packagedElement.1/@ownedOperation.0"/>
+    <realOperation name="op"/>
+  </adapt>
+  <adapt xsi:type="adaptations:createParameter">
+    <newParameter name="id"/>
+  </adapt>
+  <adapt xsi:type="adaptations:setOperation" aOperation="//@adapt.3/@realOperation">
+    <aownedParameter href="structurePackage.xmi#//@packagedElement.1/@ownedOperation.0/@ownedParameter.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:setClass" aownedOperation="//@adapt.3/@realOperation">
+    <aClass href="structurePackage.xmi#//@packagedElement.0"/>
+  </adapt>
+  <adapt xsi:type="adaptations:setParameter">
+    <aParameter href="structurePackage.xmi#//@packagedElement.1/@ownedOperation.0/@ownedParameter.0"/>
+    <atype href="templatePackage.xmi#//@packagedElement.2"/>
+  </adapt>
+  <adapt xsi:type="core:makeUnique">
+    <element href="structurePackage.xmi#//@packagedElement.0"/>
+  </adapt>
+  <adapt xsi:type="core:makeUnique">
+    <element href="structurePackage.xmi#//@packagedElement.1"/>
+  </adapt>
+  <adapt xsi:type="core:makeUnique">
+    <element href="structurePackage.xmi#//@packagedElement.2"/>
+  </adapt>
+  <adapt xsi:type="core:makeUnique">
+    <element href="structurePackage.xmi#//@packagedElement.3"/>
+  </adapt>
+</core:Adapter>

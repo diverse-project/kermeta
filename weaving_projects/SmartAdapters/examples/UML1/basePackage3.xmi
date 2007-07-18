@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ASCII"?>
+<uml:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="platform:/resource/SmartAdapters/metamodel/domain/ClassDiagUMLPattern.ecore#/uml" xsi:schemaLocation="platform:/resource/SmartAdapters/metamodel/domain/ClassDiagUMLPattern.ecore#/uml ../../metamodel/domain/ClassDiagUMLPattern.ecore#//uml">
+  <packagedElement xsi:type="uml:Class" name="Manager"/>
+  <packagedElement xsi:type="uml:Class" name="UserMgmt">
+    <ownedOperation name="addUser">
+      <ownedParameter name="u" type="//@packagedElement.10"/>
+    </ownedOperation>
+    <ownedOperation name="deleteUser">
+      <ownedParameter name="u" type="//@packagedElement.10"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Class" name="DataMgmt">
+    <ownedOperation name="addData">
+      <ownedParameter name="d" type="//@packagedElement.11"/>
+    </ownedOperation>
+    <ownedOperation name="deleteData">
+      <ownedParameter name="d" type="//@packagedElement.11"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Class" name="UserRep"/>
+  <packagedElement xsi:type="uml:Class" name="DataRep"/>
+  <packagedElement xsi:type="uml:Association">
+    <ownedEnd type="//@packagedElement.0"/>
+    <ownedEnd type="//@packagedElement.1"/>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Association">
+    <ownedEnd type="//@packagedElement.0"/>
+    <ownedEnd type="//@packagedElement.2"/>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Association">
+    <ownedEnd/>
+    <ownedEnd/>
+  </packagedElement>
+  <packagedElement xsi:type="uml:Association">
+    <ownedEnd/>
+    <ownedEnd/>
+  </packagedElement>
+  <packagedElement xsi:type="uml:DataType" name="MgrID"/>
+  <packagedElement xsi:type="uml:DataType" name="UID"/>
+  <packagedElement xsi:type="uml:DataType" name="DID"/>
+</uml:Package>

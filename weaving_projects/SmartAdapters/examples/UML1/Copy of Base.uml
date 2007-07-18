@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="Base">
+    <packagedElement xmi:type="uml:Class" xmi:id="_6w7YsC-_EdyQBoXH2wLTuA" name="Manager">
+      <ownedAttribute xmi:id="_AQrwgC_BEdyQBoXH2wLTuA" name="m" type="_70pDAC_AEdyQBoXH2wLTuA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PbMBQC_AEdyQBoXH2wLTuA" name="UserMgmt">
+      <ownedOperation xmi:id="_DzXNEC_BEdyQBoXH2wLTuA" name="addUser">
+        <ownedParameter xmi:id="_IGnK8C_BEdyQBoXH2wLTuA" name="u" type="_9Dn-oC_AEdyQBoXH2wLTuA"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_PGQdoC_BEdyQBoXH2wLTuA" name="deleteUser">
+        <ownedParameter xmi:id="_RLxYoC_BEdyQBoXH2wLTuA" name="u" type="_9Dn-oC_AEdyQBoXH2wLTuA"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Sh8W0C_AEdyQBoXH2wLTuA" name="DataMgmt">
+      <ownedOperation xmi:id="_U0iPEC_BEdyQBoXH2wLTuA" name="addData">
+        <ownedParameter xmi:id="_ZsQzAC_BEdyQBoXH2wLTuA" name="d" type="_-ZBEQC_AEdyQBoXH2wLTuA"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_Xe2gQC_BEdyQBoXH2wLTuA" name="deleteData">
+        <ownedParameter xmi:id="_cRODEC_BEdyQBoXH2wLTuA" name="d" type="_-ZBEQC_AEdyQBoXH2wLTuA"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VFZLAC_AEdyQBoXH2wLTuA" name="UserRepository"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_WZt5oC_AEdyQBoXH2wLTuA" name="DataRepository"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_bnm60C_AEdyQBoXH2wLTuA" name="userAccess" memberEnd="_bnm60S_AEdyQBoXH2wLTuA _bnm61C_AEdyQBoXH2wLTuA">
+      <ownedEnd xmi:id="_bnm60S_AEdyQBoXH2wLTuA" name="userManager" type="_6w7YsC-_EdyQBoXH2wLTuA" association="_bnm60C_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bnm60i_AEdyQBoXH2wLTuA" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bnm60y_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_bnm61C_AEdyQBoXH2wLTuA" name="userMgmt" type="_PbMBQC_AEdyQBoXH2wLTuA" association="_bnm60C_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bnm61S_AEdyQBoXH2wLTuA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bnm61i_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_fEvwEC_AEdyQBoXH2wLTuA" name="dataAccess" memberEnd="_fEvwES_AEdyQBoXH2wLTuA _fEvwFC_AEdyQBoXH2wLTuA">
+      <ownedEnd xmi:id="_fEvwES_AEdyQBoXH2wLTuA" name="dataManager" type="_6w7YsC-_EdyQBoXH2wLTuA" association="_fEvwEC_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fEvwEi_AEdyQBoXH2wLTuA" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fEvwEy_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_fEvwFC_AEdyQBoXH2wLTuA" name="dataMgmt" type="_Sh8W0C_AEdyQBoXH2wLTuA" association="_fEvwEC_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fEvwFS_AEdyQBoXH2wLTuA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fEvwFi_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_fcvZUC_AEdyQBoXH2wLTuA" name="userRepAccess" memberEnd="_fcvZUS_AEdyQBoXH2wLTuA _fcvZVC_AEdyQBoXH2wLTuA">
+      <ownedEnd xmi:id="_fcvZUS_AEdyQBoXH2wLTuA" name="userMgmt" type="_PbMBQC_AEdyQBoXH2wLTuA" association="_fcvZUC_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fcvZUi_AEdyQBoXH2wLTuA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fcvZUy_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_fcvZVC_AEdyQBoXH2wLTuA" name="rep" type="_VFZLAC_AEdyQBoXH2wLTuA" association="_fcvZUC_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fcvZVS_AEdyQBoXH2wLTuA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fcvZVi_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_f5zIwC_AEdyQBoXH2wLTuA" name="dataRepAccess" memberEnd="_f5zIwS_AEdyQBoXH2wLTuA _f5zIxC_AEdyQBoXH2wLTuA">
+      <ownedEnd xmi:id="_f5zIwS_AEdyQBoXH2wLTuA" name="dataMgmt" type="_Sh8W0C_AEdyQBoXH2wLTuA" association="_f5zIwC_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_f5zIwi_AEdyQBoXH2wLTuA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_f5zIwy_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_f5zIxC_AEdyQBoXH2wLTuA" name="rep" type="_WZt5oC_AEdyQBoXH2wLTuA" association="_f5zIwC_AEdyQBoXH2wLTuA">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_f5zIxS_AEdyQBoXH2wLTuA" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_f5zIxi_AEdyQBoXH2wLTuA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_70pDAC_AEdyQBoXH2wLTuA" name="MgrID"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_9Dn-oC_AEdyQBoXH2wLTuA" name="UID"/>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_-ZBEQC_AEdyQBoXH2wLTuA" name="DID"/>
+  </packagedElement>
+</uml:Model>

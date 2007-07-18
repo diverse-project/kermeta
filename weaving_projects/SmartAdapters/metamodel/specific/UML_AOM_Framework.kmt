@@ -1,0 +1,2128 @@
+package org;
+   require kermeta
+   require "platform:/resource/SmartAdapters/metamodel/generic/genericSmartAdapters.kmt"
+   require "platform:/resource/SmartAdapters/metamodel/domain/UML.ecore"
+   require "platform:/resource/SmartAdapters/metamodel/domain/UMLPattern.ecore"
+
+   using kermeta::standard
+   using kermeta::utils
+   using patternframework
+   using org::smartadapters::core
+   using org::smartadapters::extension
+   using ecore
+
+   package smartadapters
+   {
+    	package core
+    	{ 
+     		@aspect "true"
+     		class Adapter{
+				operation initConvert() : Void is do
+stdio.write("Mapping MM' to MM...")
+convert:=Hashtable<kermeta::reflection::Class,kermeta::reflection::Class>.new
+	convert.put(pattern::uml::Element,uml::Element)
+	convert.put(pattern::uml::Package,uml::Package)
+	convert.put(pattern::uml::PackageableElement,uml::PackageableElement)
+	convert.put(pattern::uml::NamedElement,uml::NamedElement)
+	convert.put(pattern::uml::Namespace,uml::Namespace)
+	convert.put(pattern::uml::Association,uml::Association)
+	convert.put(pattern::uml::Classifier,uml::Classifier)
+	convert.put(pattern::uml::Generalization,uml::Generalization)
+	convert.put(pattern::uml::Parameter,uml::Parameter)
+	convert.put(pattern::uml::Property,uml::Property)
+	convert.put(pattern::uml::Operation,uml::Operation)
+	convert.put(pattern::uml::Class,uml::Class)
+	convert.put(pattern::uml::Interface,uml::Interface)
+	convert.put(pattern::uml::DataType,uml::DataType)
+end
+}
+	package adaptations{
+
+class createPackage inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newPackage:pattern::uml::Package
+
+	operation check() : Boolean is do
+		result:=(newPackage!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newPackage)==void or not(isUnique)) then
+			var realPackage:uml::Package
+			realPackage?=adapter.converter.convert(Object.clone(newPackage), adapter.convert)
+			adapter.created.put(newPackage,realPackage)
+		end
+	end
+}
+
+class clonePackage inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newPackage:pattern::uml::Package
+	attribute realPackage:pattern::uml::Package
+
+	operation check() : Boolean is do
+		result:=(newPackage!=void)
+	end
+
+	operation execute() is do
+		var clonedPackage:uml::Package
+		var temp:uml::Package
+		temp?=adapter.getRealObject(newPackage,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedPackage?=Object.clone(temp)
+				adapter.clone.put(realPackage,clonedPackage)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedPackage?=Object.clone(temp)
+			adapter.clone.put(realPackage,clonedPackage)
+		end
+	end
+}
+
+class setPackage inherits Adaptation{
+	reference aPackage:pattern::uml::Package
+	reference apackagedElement:pattern::uml::PackageableElement[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aPackage!=void)
+	end
+
+	operation execute() is do
+		var tempPackage:uml::Package
+		tempPackage?=adapter.getRealObject(aPackage,false)
+		var temppackagedElement:Collection<kermeta::reflection::Object>
+		temppackagedElement?=adapter.getRealObject(apackagedElement,true)
+		if(temppackagedElement!=void) then
+			temppackagedElement.each{o | 
+				var temp:uml::PackageableElement
+				temp?=o
+				if(temp!=void) then
+					tempPackage.packagedElement.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempPackage.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempPackage.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempPackage.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetPackage inherits Adaptation{
+	reference aPackage:pattern::uml::Package
+	reference apackagedElement:pattern::uml::PackageableElement[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aPackage!=void)
+	end
+
+	operation execute() is do
+		var tempPackage:uml::Package
+		tempPackage?=adapter.getRealObject(aPackage,false)
+		var temppackagedElement:Collection<kermeta::reflection::Object>
+		temppackagedElement?=adapter.getRealObject(apackagedElement,true)
+		if(temppackagedElement!=void) then
+			temppackagedElement.each{o | 
+				var temp:uml::PackageableElement
+				temp?=o
+				if(temp!=void) then
+					tempPackage.packagedElement.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempPackage.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempPackage.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempPackage.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+
+class createAssociation inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newAssociation:pattern::uml::Association
+
+	operation check() : Boolean is do
+		result:=(newAssociation!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newAssociation)==void or not(isUnique)) then
+			var realAssociation:uml::Association
+			realAssociation?=adapter.converter.convert(Object.clone(newAssociation), adapter.convert)
+			adapter.created.put(newAssociation,realAssociation)
+		end
+	end
+}
+
+class cloneAssociation inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newAssociation:pattern::uml::Association
+	attribute realAssociation:pattern::uml::Association
+
+	operation check() : Boolean is do
+		result:=(newAssociation!=void)
+	end
+
+	operation execute() is do
+		var clonedAssociation:uml::Association
+		var temp:uml::Association
+		temp?=adapter.getRealObject(newAssociation,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedAssociation?=Object.clone(temp)
+				adapter.clone.put(realAssociation,clonedAssociation)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedAssociation?=Object.clone(temp)
+			adapter.clone.put(realAssociation,clonedAssociation)
+		end
+	end
+}
+
+class setAssociation inherits Adaptation{
+	reference aAssociation:pattern::uml::Association
+	reference aownedEnd:pattern::uml::Property[0..*]
+	reference amemberEnd:pattern::uml::Property[0..*]
+	reference aisDerived:pattern::uml::Boolean
+	reference anavigableOwnedEnd:pattern::uml::Property[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference ageneralization:pattern::uml::Generalization[0..*]
+	reference apowertypeExtent:pattern::uml::GeneralizationSet[0..*]
+	reference aredefinedClassifier:pattern::uml::Classifier[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aAssociation!=void)
+	end
+
+	operation execute() is do
+		var tempAssociation:uml::Association
+		tempAssociation?=adapter.getRealObject(aAssociation,false)
+		var tempownedEnd:Collection<kermeta::reflection::Object>
+		tempownedEnd?=adapter.getRealObject(aownedEnd,true)
+		if(tempownedEnd!=void) then
+			tempownedEnd.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.ownedEnd.add(temp)
+				end}
+		end
+		var tempmemberEnd:Collection<kermeta::reflection::Object>
+		tempmemberEnd?=adapter.getRealObject(amemberEnd,true)
+		if(tempmemberEnd!=void) then
+			tempmemberEnd.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.memberEnd.add(temp)
+				end}
+		end
+		var tempisDerived:uml::Boolean
+		tempisDerived?=adapter.getRealObject(aisDerived,false)
+		if(tempisDerived!=void) then
+			tempAssociation.isDerived:=tempisDerived
+		end
+		var tempnavigableOwnedEnd:Collection<kermeta::reflection::Object>
+		tempnavigableOwnedEnd?=adapter.getRealObject(anavigableOwnedEnd,true)
+		if(tempnavigableOwnedEnd!=void) then
+			tempnavigableOwnedEnd.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.navigableOwnedEnd.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempAssociation.isAbstract:=tempisAbstract
+		end
+		var tempgeneralization:Collection<kermeta::reflection::Object>
+		tempgeneralization?=adapter.getRealObject(ageneralization,true)
+		if(tempgeneralization!=void) then
+			tempgeneralization.each{o | 
+				var temp:uml::Generalization
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.generalization.add(temp)
+				end}
+		end
+		var temppowertypeExtent:Collection<kermeta::reflection::Object>
+		temppowertypeExtent?=adapter.getRealObject(apowertypeExtent,true)
+		if(temppowertypeExtent!=void) then
+			temppowertypeExtent.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.powertypeExtent.add(temp)
+				end}
+		end
+		var tempredefinedClassifier:Collection<kermeta::reflection::Object>
+		tempredefinedClassifier?=adapter.getRealObject(aredefinedClassifier,true)
+		if(tempredefinedClassifier!=void) then
+			tempredefinedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.redefinedClassifier.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempAssociation.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetAssociation inherits Adaptation{
+	reference aAssociation:pattern::uml::Association
+	reference aownedEnd:pattern::uml::Property[0..*]
+	reference amemberEnd:pattern::uml::Property[0..*]
+	reference aisDerived:pattern::uml::Boolean
+	reference anavigableOwnedEnd:pattern::uml::Property[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference ageneralization:pattern::uml::Generalization[0..*]
+	reference apowertypeExtent:pattern::uml::GeneralizationSet[0..*]
+	reference aredefinedClassifier:pattern::uml::Classifier[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aAssociation!=void)
+	end
+
+	operation execute() is do
+		var tempAssociation:uml::Association
+		tempAssociation?=adapter.getRealObject(aAssociation,false)
+		var tempownedEnd:Collection<kermeta::reflection::Object>
+		tempownedEnd?=adapter.getRealObject(aownedEnd,true)
+		if(tempownedEnd!=void) then
+			tempownedEnd.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.ownedEnd.add(temp)
+				end}
+		end
+		var tempmemberEnd:Collection<kermeta::reflection::Object>
+		tempmemberEnd?=adapter.getRealObject(amemberEnd,true)
+		if(tempmemberEnd!=void) then
+			tempmemberEnd.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.memberEnd.add(temp)
+				end}
+		end
+		var tempisDerived:uml::Boolean
+		tempisDerived?=adapter.getRealObject(aisDerived,false)
+		if(tempisDerived!=void) then
+			tempAssociation.isDerived:=tempisDerived
+		end
+		var tempnavigableOwnedEnd:Collection<kermeta::reflection::Object>
+		tempnavigableOwnedEnd?=adapter.getRealObject(anavigableOwnedEnd,true)
+		if(tempnavigableOwnedEnd!=void) then
+			tempnavigableOwnedEnd.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.navigableOwnedEnd.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempAssociation.isAbstract:=tempisAbstract
+		end
+		var tempgeneralization:Collection<kermeta::reflection::Object>
+		tempgeneralization?=adapter.getRealObject(ageneralization,true)
+		if(tempgeneralization!=void) then
+			tempgeneralization.each{o | 
+				var temp:uml::Generalization
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.generalization.add(temp)
+				end}
+		end
+		var temppowertypeExtent:Collection<kermeta::reflection::Object>
+		temppowertypeExtent?=adapter.getRealObject(apowertypeExtent,true)
+		if(temppowertypeExtent!=void) then
+			temppowertypeExtent.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.powertypeExtent.add(temp)
+				end}
+		end
+		var tempredefinedClassifier:Collection<kermeta::reflection::Object>
+		tempredefinedClassifier?=adapter.getRealObject(aredefinedClassifier,true)
+		if(tempredefinedClassifier!=void) then
+			tempredefinedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.redefinedClassifier.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempAssociation.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempAssociation.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+class createGeneralization inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newGeneralization:pattern::uml::Generalization
+
+	operation check() : Boolean is do
+		result:=(newGeneralization!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newGeneralization)==void or not(isUnique)) then
+			var realGeneralization:uml::Generalization
+			realGeneralization?=adapter.converter.convert(Object.clone(newGeneralization), adapter.convert)
+			adapter.created.put(newGeneralization,realGeneralization)
+		end
+	end
+}
+
+class cloneGeneralization inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newGeneralization:pattern::uml::Generalization
+	attribute realGeneralization:pattern::uml::Generalization
+
+	operation check() : Boolean is do
+		result:=(newGeneralization!=void)
+	end
+
+	operation execute() is do
+		var clonedGeneralization:uml::Generalization
+		var temp:uml::Generalization
+		temp?=adapter.getRealObject(newGeneralization,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedGeneralization?=Object.clone(temp)
+				adapter.clone.put(realGeneralization,clonedGeneralization)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedGeneralization?=Object.clone(temp)
+			adapter.clone.put(realGeneralization,clonedGeneralization)
+		end
+	end
+}
+
+class setGeneralization inherits Adaptation{
+	reference aGeneralization:pattern::uml::Generalization
+	reference ageneral:pattern::uml::Classifier
+	reference ageneralizationSet:pattern::uml::GeneralizationSet[0..*]
+	reference aspecific:pattern::uml::Classifier
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aGeneralization!=void)
+	end
+
+	operation execute() is do
+		var tempGeneralization:uml::Generalization
+		tempGeneralization?=adapter.getRealObject(aGeneralization,false)
+		var tempgeneral:uml::Classifier
+		tempgeneral?=adapter.getRealObject(ageneral,false)
+		if(tempgeneral!=void) then
+			tempGeneralization.general:=tempgeneral
+		end
+		var tempgeneralizationSet:Collection<kermeta::reflection::Object>
+		tempgeneralizationSet?=adapter.getRealObject(ageneralizationSet,true)
+		if(tempgeneralizationSet!=void) then
+			tempgeneralizationSet.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempGeneralization.generalizationSet.add(temp)
+				end}
+		end
+		var tempspecific:uml::Classifier
+		tempspecific?=adapter.getRealObject(aspecific,false)
+		if(tempspecific!=void) then
+			tempGeneralization.specific:=tempspecific
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempGeneralization.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetGeneralization inherits Adaptation{
+	reference aGeneralization:pattern::uml::Generalization
+	reference ageneral:pattern::uml::Classifier
+	reference ageneralizationSet:pattern::uml::GeneralizationSet[0..*]
+	reference aspecific:pattern::uml::Classifier
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aGeneralization!=void)
+	end
+
+	operation execute() is do
+		var tempGeneralization:uml::Generalization
+		tempGeneralization?=adapter.getRealObject(aGeneralization,false)
+		var tempgeneral:uml::Classifier
+		tempgeneral?=adapter.getRealObject(ageneral,false)
+		if(tempgeneral!=void) then
+			tempGeneralization.general:=tempgeneral
+		end
+		var tempgeneralizationSet:Collection<kermeta::reflection::Object>
+		tempgeneralizationSet?=adapter.getRealObject(ageneralizationSet,true)
+		if(tempgeneralizationSet!=void) then
+			tempgeneralizationSet.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempGeneralization.generalizationSet.add(temp)
+				end}
+		end
+		var tempspecific:uml::Classifier
+		tempspecific?=adapter.getRealObject(aspecific,false)
+		if(tempspecific!=void) then
+			tempGeneralization.specific:=tempspecific
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempGeneralization.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+
+class createParameter inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newParameter:pattern::uml::Parameter
+
+	operation check() : Boolean is do
+		result:=(newParameter!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newParameter)==void or not(isUnique)) then
+			var realParameter:uml::Parameter
+			realParameter?=adapter.converter.convert(Object.clone(newParameter), adapter.convert)
+			adapter.created.put(newParameter,realParameter)
+		end
+	end
+}
+
+class cloneParameter inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newParameter:pattern::uml::Parameter
+	attribute realParameter:pattern::uml::Parameter
+
+	operation check() : Boolean is do
+		result:=(newParameter!=void)
+	end
+
+	operation execute() is do
+		var clonedParameter:uml::Parameter
+		var temp:uml::Parameter
+		temp?=adapter.getRealObject(newParameter,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedParameter?=Object.clone(temp)
+				adapter.clone.put(realParameter,clonedParameter)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedParameter?=Object.clone(temp)
+			adapter.clone.put(realParameter,clonedParameter)
+		end
+	end
+}
+
+class setParameter inherits Adaptation{
+	reference aParameter:pattern::uml::Parameter
+	reference aparameterSet:pattern::uml::ParameterSet[0..*]
+	reference adirection:pattern::uml::ParameterDirectionKind
+	reference adefaultValue:pattern::uml::ValueSpecification
+	reference aisException:pattern::uml::Boolean
+	reference aisStream:pattern::uml::Boolean
+	reference aend:pattern::uml::ConnectorEnd[0..*]
+	reference aisOrdered:pattern::uml::Boolean
+	reference aisUnique:pattern::uml::Boolean
+	reference aupperValue:pattern::uml::ValueSpecification
+	reference alowerValue:pattern::uml::ValueSpecification
+	reference atype:pattern::uml::Type
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aParameter!=void)
+	end
+
+	operation execute() is do
+		var tempParameter:uml::Parameter
+		tempParameter?=adapter.getRealObject(aParameter,false)
+		var tempparameterSet:Collection<kermeta::reflection::Object>
+		tempparameterSet?=adapter.getRealObject(aparameterSet,true)
+		if(tempparameterSet!=void) then
+			tempparameterSet.each{o | 
+				var temp:uml::ParameterSet
+				temp?=o
+				if(temp!=void) then
+					tempParameter.parameterSet.add(temp)
+				end}
+		end
+		var tempdirection:uml::ParameterDirectionKind
+		tempdirection?=adapter.getRealObject(adirection,false)
+		if(tempdirection!=void) then
+			tempParameter.direction:=tempdirection
+		end
+		var tempdefaultValue:uml::ValueSpecification
+		tempdefaultValue?=adapter.getRealObject(adefaultValue,false)
+		if(tempdefaultValue!=void) then
+			tempParameter.defaultValue:=tempdefaultValue
+		end
+		var tempisException:uml::Boolean
+		tempisException?=adapter.getRealObject(aisException,false)
+		if(tempisException!=void) then
+			tempParameter.isException:=tempisException
+		end
+		var tempisStream:uml::Boolean
+		tempisStream?=adapter.getRealObject(aisStream,false)
+		if(tempisStream!=void) then
+			tempParameter.isStream:=tempisStream
+		end
+		var tempend:Collection<kermeta::reflection::Object>
+		tempend?=adapter.getRealObject(aend,true)
+		if(tempend!=void) then
+			tempend.each{o | 
+				var temp:uml::ConnectorEnd
+				temp?=o
+				if(temp!=void) then
+					tempParameter.~end.add(temp)
+				end}
+		end
+		var tempisOrdered:uml::Boolean
+		tempisOrdered?=adapter.getRealObject(aisOrdered,false)
+		if(tempisOrdered!=void) then
+			tempParameter.isOrdered:=tempisOrdered
+		end
+		var tempisUnique:uml::Boolean
+		tempisUnique?=adapter.getRealObject(aisUnique,false)
+		if(tempisUnique!=void) then
+			tempParameter.isUnique:=tempisUnique
+		end
+		var tempupperValue:uml::ValueSpecification
+		tempupperValue?=adapter.getRealObject(aupperValue,false)
+		if(tempupperValue!=void) then
+			tempParameter.upperValue:=tempupperValue
+		end
+		var templowerValue:uml::ValueSpecification
+		templowerValue?=adapter.getRealObject(alowerValue,false)
+		if(templowerValue!=void) then
+			tempParameter.lowerValue:=templowerValue
+		end
+		var temptype:uml::Type
+		temptype?=adapter.getRealObject(atype,false)
+		if(temptype!=void) then
+			tempParameter.type:=temptype
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempParameter.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempParameter.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempParameter.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetParameter inherits Adaptation{
+	reference aParameter:pattern::uml::Parameter
+	reference aparameterSet:pattern::uml::ParameterSet[0..*]
+	reference adirection:pattern::uml::ParameterDirectionKind
+	reference adefaultValue:pattern::uml::ValueSpecification
+	reference aisException:pattern::uml::Boolean
+	reference aisStream:pattern::uml::Boolean
+	reference aend:pattern::uml::ConnectorEnd[0..*]
+	reference aisOrdered:pattern::uml::Boolean
+	reference aisUnique:pattern::uml::Boolean
+	reference aupperValue:pattern::uml::ValueSpecification
+	reference alowerValue:pattern::uml::ValueSpecification
+	reference atype:pattern::uml::Type
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aParameter!=void)
+	end
+
+	operation execute() is do
+		var tempParameter:uml::Parameter
+		tempParameter?=adapter.getRealObject(aParameter,false)
+		var tempparameterSet:Collection<kermeta::reflection::Object>
+		tempparameterSet?=adapter.getRealObject(aparameterSet,true)
+		if(tempparameterSet!=void) then
+			tempparameterSet.each{o | 
+				var temp:uml::ParameterSet
+				temp?=o
+				if(temp!=void) then
+					tempParameter.parameterSet.add(temp)
+				end}
+		end
+		var tempdirection:uml::ParameterDirectionKind
+		tempdirection?=adapter.getRealObject(adirection,false)
+		if(tempdirection!=void) then
+			tempParameter.direction:=tempdirection
+		end
+		var tempdefaultValue:uml::ValueSpecification
+		tempdefaultValue?=adapter.getRealObject(adefaultValue,false)
+		if(tempdefaultValue!=void) then
+			tempParameter.defaultValue:=tempdefaultValue
+		end
+		var tempisException:uml::Boolean
+		tempisException?=adapter.getRealObject(aisException,false)
+		if(tempisException!=void) then
+			tempParameter.isException:=tempisException
+		end
+		var tempisStream:uml::Boolean
+		tempisStream?=adapter.getRealObject(aisStream,false)
+		if(tempisStream!=void) then
+			tempParameter.isStream:=tempisStream
+		end
+		var tempend:Collection<kermeta::reflection::Object>
+		tempend?=adapter.getRealObject(aend,true)
+		if(tempend!=void) then
+			tempend.each{o | 
+				var temp:uml::ConnectorEnd
+				temp?=o
+				if(temp!=void) then
+					tempParameter.~end.add(temp)
+				end}
+		end
+		var tempisOrdered:uml::Boolean
+		tempisOrdered?=adapter.getRealObject(aisOrdered,false)
+		if(tempisOrdered!=void) then
+			tempParameter.isOrdered:=tempisOrdered
+		end
+		var tempisUnique:uml::Boolean
+		tempisUnique?=adapter.getRealObject(aisUnique,false)
+		if(tempisUnique!=void) then
+			tempParameter.isUnique:=tempisUnique
+		end
+		var tempupperValue:uml::ValueSpecification
+		tempupperValue?=adapter.getRealObject(aupperValue,false)
+		if(tempupperValue!=void) then
+			tempParameter.upperValue:=tempupperValue
+		end
+		var templowerValue:uml::ValueSpecification
+		templowerValue?=adapter.getRealObject(alowerValue,false)
+		if(templowerValue!=void) then
+			tempParameter.lowerValue:=templowerValue
+		end
+		var temptype:uml::Type
+		temptype?=adapter.getRealObject(atype,false)
+		if(temptype!=void) then
+			tempParameter.type:=temptype
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempParameter.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempParameter.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempParameter.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+
+class createProperty inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newProperty:pattern::uml::Property
+
+	operation check() : Boolean is do
+		result:=(newProperty!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newProperty)==void or not(isUnique)) then
+			var realProperty:uml::Property
+			realProperty?=adapter.converter.convert(Object.clone(newProperty), adapter.convert)
+			adapter.created.put(newProperty,realProperty)
+		end
+	end
+}
+
+class cloneProperty inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newProperty:pattern::uml::Property
+	attribute realProperty:pattern::uml::Property
+
+	operation check() : Boolean is do
+		result:=(newProperty!=void)
+	end
+
+	operation execute() is do
+		var clonedProperty:uml::Property
+		var temp:uml::Property
+		temp?=adapter.getRealObject(newProperty,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedProperty?=Object.clone(temp)
+				adapter.clone.put(realProperty,clonedProperty)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedProperty?=Object.clone(temp)
+			adapter.clone.put(realProperty,clonedProperty)
+		end
+	end
+}
+
+class setProperty inherits Adaptation{
+	reference aProperty:pattern::uml::Property
+	reference adatatype:pattern::uml::DataType
+	reference aisDerived:pattern::uml::Boolean
+	reference aisDerivedUnion:pattern::uml::Boolean
+	reference aaggregation:pattern::uml::AggregationKind
+	reference aredefinedProperty:pattern::uml::Property[0..*]
+	reference aowningAssociation:pattern::uml::Association
+	reference adefaultValue:pattern::uml::ValueSpecification
+	reference asubsettedProperty:pattern::uml::Property[0..*]
+	reference aassociation:pattern::uml::Association
+	reference aqualifier:pattern::uml::Property[0..*]
+	reference aassociationEnd:pattern::uml::Property
+	reference aisReadOnly:pattern::uml::Boolean
+	reference aend:pattern::uml::ConnectorEnd[0..*]
+	reference atype:pattern::uml::Type
+	reference aisOrdered:pattern::uml::Boolean
+	reference aisUnique:pattern::uml::Boolean
+	reference aupperValue:pattern::uml::ValueSpecification
+	reference alowerValue:pattern::uml::ValueSpecification
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aProperty!=void)
+	end
+
+	operation execute() is do
+		var tempProperty:uml::Property
+		tempProperty?=adapter.getRealObject(aProperty,false)
+		var tempdatatype:uml::DataType
+		tempdatatype?=adapter.getRealObject(adatatype,false)
+		if(tempdatatype!=void) then
+			tempProperty.datatype:=tempdatatype
+		end
+		var tempisDerived:uml::Boolean
+		tempisDerived?=adapter.getRealObject(aisDerived,false)
+		if(tempisDerived!=void) then
+			tempProperty.isDerived:=tempisDerived
+		end
+		var tempisDerivedUnion:uml::Boolean
+		tempisDerivedUnion?=adapter.getRealObject(aisDerivedUnion,false)
+		if(tempisDerivedUnion!=void) then
+			tempProperty.isDerivedUnion:=tempisDerivedUnion
+		end
+		var tempaggregation:uml::AggregationKind
+		tempaggregation?=adapter.getRealObject(aaggregation,false)
+		if(tempaggregation!=void) then
+			tempProperty.aggregation:=tempaggregation
+		end
+		var tempredefinedProperty:Collection<kermeta::reflection::Object>
+		tempredefinedProperty?=adapter.getRealObject(aredefinedProperty,true)
+		if(tempredefinedProperty!=void) then
+			tempredefinedProperty.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempProperty.redefinedProperty.add(temp)
+				end}
+		end
+		var tempowningAssociation:uml::Association
+		tempowningAssociation?=adapter.getRealObject(aowningAssociation,false)
+		if(tempowningAssociation!=void) then
+			tempProperty.owningAssociation:=tempowningAssociation
+		end
+		var tempdefaultValue:uml::ValueSpecification
+		tempdefaultValue?=adapter.getRealObject(adefaultValue,false)
+		if(tempdefaultValue!=void) then
+			tempProperty.defaultValue:=tempdefaultValue
+		end
+		var tempsubsettedProperty:Collection<kermeta::reflection::Object>
+		tempsubsettedProperty?=adapter.getRealObject(asubsettedProperty,true)
+		if(tempsubsettedProperty!=void) then
+			tempsubsettedProperty.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempProperty.subsettedProperty.add(temp)
+				end}
+		end
+		var tempassociation:uml::Association
+		tempassociation?=adapter.getRealObject(aassociation,false)
+		if(tempassociation!=void) then
+			tempProperty.association:=tempassociation
+		end
+		var tempqualifier:Collection<kermeta::reflection::Object>
+		tempqualifier?=adapter.getRealObject(aqualifier,true)
+		if(tempqualifier!=void) then
+			tempqualifier.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempProperty.qualifier.add(temp)
+				end}
+		end
+		var tempassociationEnd:uml::Property
+		tempassociationEnd?=adapter.getRealObject(aassociationEnd,false)
+		if(tempassociationEnd!=void) then
+			tempProperty.associationEnd:=tempassociationEnd
+		end
+		var tempisReadOnly:uml::Boolean
+		tempisReadOnly?=adapter.getRealObject(aisReadOnly,false)
+		if(tempisReadOnly!=void) then
+			tempProperty.isReadOnly:=tempisReadOnly
+		end
+		var tempend:Collection<kermeta::reflection::Object>
+		tempend?=adapter.getRealObject(aend,true)
+		if(tempend!=void) then
+			tempend.each{o | 
+				var temp:uml::ConnectorEnd
+				temp?=o
+				if(temp!=void) then
+					tempProperty.~end.add(temp)
+				end}
+		end
+		var temptype:uml::Type
+		temptype?=adapter.getRealObject(atype,false)
+		if(temptype!=void) then
+			tempProperty.type:=temptype
+		end
+		var tempisOrdered:uml::Boolean
+		tempisOrdered?=adapter.getRealObject(aisOrdered,false)
+		if(tempisOrdered!=void) then
+			tempProperty.isOrdered:=tempisOrdered
+		end
+		var tempisUnique:uml::Boolean
+		tempisUnique?=adapter.getRealObject(aisUnique,false)
+		if(tempisUnique!=void) then
+			tempProperty.isUnique:=tempisUnique
+		end
+		var tempupperValue:uml::ValueSpecification
+		tempupperValue?=adapter.getRealObject(aupperValue,false)
+		if(tempupperValue!=void) then
+			tempProperty.upperValue:=tempupperValue
+		end
+		var templowerValue:uml::ValueSpecification
+		templowerValue?=adapter.getRealObject(alowerValue,false)
+		if(templowerValue!=void) then
+			tempProperty.lowerValue:=templowerValue
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempProperty.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempProperty.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempProperty.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetProperty inherits Adaptation{
+	reference aProperty:pattern::uml::Property
+	reference adatatype:pattern::uml::DataType
+	reference aisDerived:pattern::uml::Boolean
+	reference aisDerivedUnion:pattern::uml::Boolean
+	reference aaggregation:pattern::uml::AggregationKind
+	reference aredefinedProperty:pattern::uml::Property[0..*]
+	reference aowningAssociation:pattern::uml::Association
+	reference adefaultValue:pattern::uml::ValueSpecification
+	reference asubsettedProperty:pattern::uml::Property[0..*]
+	reference aassociation:pattern::uml::Association
+	reference aqualifier:pattern::uml::Property[0..*]
+	reference aassociationEnd:pattern::uml::Property
+	reference aisReadOnly:pattern::uml::Boolean
+	reference aend:pattern::uml::ConnectorEnd[0..*]
+	reference atype:pattern::uml::Type
+	reference aisOrdered:pattern::uml::Boolean
+	reference aisUnique:pattern::uml::Boolean
+	reference aupperValue:pattern::uml::ValueSpecification
+	reference alowerValue:pattern::uml::ValueSpecification
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aProperty!=void)
+	end
+
+	operation execute() is do
+		var tempProperty:uml::Property
+		tempProperty?=adapter.getRealObject(aProperty,false)
+		var tempdatatype:uml::DataType
+		tempdatatype?=adapter.getRealObject(adatatype,false)
+		if(tempdatatype!=void) then
+			tempProperty.datatype:=tempdatatype
+		end
+		var tempisDerived:uml::Boolean
+		tempisDerived?=adapter.getRealObject(aisDerived,false)
+		if(tempisDerived!=void) then
+			tempProperty.isDerived:=tempisDerived
+		end
+		var tempisDerivedUnion:uml::Boolean
+		tempisDerivedUnion?=adapter.getRealObject(aisDerivedUnion,false)
+		if(tempisDerivedUnion!=void) then
+			tempProperty.isDerivedUnion:=tempisDerivedUnion
+		end
+		var tempaggregation:uml::AggregationKind
+		tempaggregation?=adapter.getRealObject(aaggregation,false)
+		if(tempaggregation!=void) then
+			tempProperty.aggregation:=tempaggregation
+		end
+		var tempredefinedProperty:Collection<kermeta::reflection::Object>
+		tempredefinedProperty?=adapter.getRealObject(aredefinedProperty,true)
+		if(tempredefinedProperty!=void) then
+			tempredefinedProperty.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempProperty.redefinedProperty.add(temp)
+				end}
+		end
+		var tempowningAssociation:uml::Association
+		tempowningAssociation?=adapter.getRealObject(aowningAssociation,false)
+		if(tempowningAssociation!=void) then
+			tempProperty.owningAssociation:=tempowningAssociation
+		end
+		var tempdefaultValue:uml::ValueSpecification
+		tempdefaultValue?=adapter.getRealObject(adefaultValue,false)
+		if(tempdefaultValue!=void) then
+			tempProperty.defaultValue:=tempdefaultValue
+		end
+		var tempsubsettedProperty:Collection<kermeta::reflection::Object>
+		tempsubsettedProperty?=adapter.getRealObject(asubsettedProperty,true)
+		if(tempsubsettedProperty!=void) then
+			tempsubsettedProperty.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempProperty.subsettedProperty.add(temp)
+				end}
+		end
+		var tempassociation:uml::Association
+		tempassociation?=adapter.getRealObject(aassociation,false)
+		if(tempassociation!=void) then
+			tempProperty.association:=tempassociation
+		end
+		var tempqualifier:Collection<kermeta::reflection::Object>
+		tempqualifier?=adapter.getRealObject(aqualifier,true)
+		if(tempqualifier!=void) then
+			tempqualifier.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempProperty.qualifier.add(temp)
+				end}
+		end
+		var tempassociationEnd:uml::Property
+		tempassociationEnd?=adapter.getRealObject(aassociationEnd,false)
+		if(tempassociationEnd!=void) then
+			tempProperty.associationEnd:=tempassociationEnd
+		end
+		var tempisReadOnly:uml::Boolean
+		tempisReadOnly?=adapter.getRealObject(aisReadOnly,false)
+		if(tempisReadOnly!=void) then
+			tempProperty.isReadOnly:=tempisReadOnly
+		end
+		var tempend:Collection<kermeta::reflection::Object>
+		tempend?=adapter.getRealObject(aend,true)
+		if(tempend!=void) then
+			tempend.each{o | 
+				var temp:uml::ConnectorEnd
+				temp?=o
+				if(temp!=void) then
+					tempProperty.~end.add(temp)
+				end}
+		end
+		var temptype:uml::Type
+		temptype?=adapter.getRealObject(atype,false)
+		if(temptype!=void) then
+			tempProperty.type:=temptype
+		end
+		var tempisOrdered:uml::Boolean
+		tempisOrdered?=adapter.getRealObject(aisOrdered,false)
+		if(tempisOrdered!=void) then
+			tempProperty.isOrdered:=tempisOrdered
+		end
+		var tempisUnique:uml::Boolean
+		tempisUnique?=adapter.getRealObject(aisUnique,false)
+		if(tempisUnique!=void) then
+			tempProperty.isUnique:=tempisUnique
+		end
+		var tempupperValue:uml::ValueSpecification
+		tempupperValue?=adapter.getRealObject(aupperValue,false)
+		if(tempupperValue!=void) then
+			tempProperty.upperValue:=tempupperValue
+		end
+		var templowerValue:uml::ValueSpecification
+		templowerValue?=adapter.getRealObject(alowerValue,false)
+		if(templowerValue!=void) then
+			tempProperty.lowerValue:=templowerValue
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempProperty.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempProperty.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempProperty.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+class createOperation inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newOperation:pattern::uml::Operation
+
+	operation check() : Boolean is do
+		result:=(newOperation!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newOperation)==void or not(isUnique)) then
+			var realOperation:uml::Operation
+			realOperation?=adapter.converter.convert(Object.clone(newOperation), adapter.convert)
+			adapter.created.put(newOperation,realOperation)
+		end
+	end
+}
+
+class cloneOperation inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newOperation:pattern::uml::Operation
+	attribute realOperation:pattern::uml::Operation
+
+	operation check() : Boolean is do
+		result:=(newOperation!=void)
+	end
+
+	operation execute() is do
+		var clonedOperation:uml::Operation
+		var temp:uml::Operation
+		temp?=adapter.getRealObject(newOperation,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedOperation?=Object.clone(temp)
+				adapter.clone.put(realOperation,clonedOperation)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedOperation?=Object.clone(temp)
+			adapter.clone.put(realOperation,clonedOperation)
+		end
+	end
+}
+
+class setOperation inherits Adaptation{
+	reference aOperation:pattern::uml::Operation
+	reference ainterface:pattern::uml::Interface
+	reference aclass:pattern::uml::Class
+	reference aisQuery:pattern::uml::Boolean
+	reference aredefinedOperation:pattern::uml::Operation[0..*]
+	reference adatatype:pattern::uml::DataType
+	reference aownedParameter:pattern::uml::Parameter[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference amethod:pattern::uml::Behavior[0..*]
+	reference araisedException:pattern::uml::Type[0..*]
+	reference aownedParameterSet:pattern::uml::ParameterSet[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aOperation!=void)
+	end
+
+	operation execute() is do
+		var tempOperation:uml::Operation
+		tempOperation?=adapter.getRealObject(aOperation,false)
+		var tempinterface:uml::Interface
+		tempinterface?=adapter.getRealObject(ainterface,false)
+		if(tempinterface!=void) then
+			tempOperation.interface:=tempinterface
+		end
+		var tempclass:uml::Class
+		tempclass?=adapter.getRealObject(aclass,false)
+		if(tempclass!=void) then
+			tempOperation.~class:=tempclass
+		end
+		var tempisQuery:uml::Boolean
+		tempisQuery?=adapter.getRealObject(aisQuery,false)
+		if(tempisQuery!=void) then
+			tempOperation.isQuery:=tempisQuery
+		end
+		var tempredefinedOperation:Collection<kermeta::reflection::Object>
+		tempredefinedOperation?=adapter.getRealObject(aredefinedOperation,true)
+		if(tempredefinedOperation!=void) then
+			tempredefinedOperation.each{o | 
+				var temp:uml::Operation
+				temp?=o
+				if(temp!=void) then
+					tempOperation.redefinedOperation.add(temp)
+				end}
+		end
+		var tempdatatype:uml::DataType
+		tempdatatype?=adapter.getRealObject(adatatype,false)
+		if(tempdatatype!=void) then
+			tempOperation.datatype:=tempdatatype
+		end
+		var tempownedParameter:Collection<kermeta::reflection::Object>
+		tempownedParameter?=adapter.getRealObject(aownedParameter,true)
+		if(tempownedParameter!=void) then
+			tempownedParameter.each{o | 
+				var temp:uml::Parameter
+				temp?=o
+				if(temp!=void) then
+					tempOperation.ownedParameter.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempOperation.isAbstract:=tempisAbstract
+		end
+		var tempmethod:Collection<kermeta::reflection::Object>
+		tempmethod?=adapter.getRealObject(amethod,true)
+		if(tempmethod!=void) then
+			tempmethod.each{o | 
+				var temp:uml::Behavior
+				temp?=o
+				if(temp!=void) then
+					tempOperation.~method.add(temp)
+				end}
+		end
+		var tempraisedException:Collection<kermeta::reflection::Object>
+		tempraisedException?=adapter.getRealObject(araisedException,true)
+		if(tempraisedException!=void) then
+			tempraisedException.each{o | 
+				var temp:uml::Type
+				temp?=o
+				if(temp!=void) then
+					tempOperation.raisedException.add(temp)
+				end}
+		end
+		var tempownedParameterSet:Collection<kermeta::reflection::Object>
+		tempownedParameterSet?=adapter.getRealObject(aownedParameterSet,true)
+		if(tempownedParameterSet!=void) then
+			tempownedParameterSet.each{o | 
+				var temp:uml::ParameterSet
+				temp?=o
+				if(temp!=void) then
+					tempOperation.ownedParameterSet.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempOperation.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempOperation.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempOperation.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetOperation inherits Adaptation{
+	reference aOperation:pattern::uml::Operation
+	reference ainterface:pattern::uml::Interface
+	reference aclass:pattern::uml::Class
+	reference aisQuery:pattern::uml::Boolean
+	reference aredefinedOperation:pattern::uml::Operation[0..*]
+	reference adatatype:pattern::uml::DataType
+	reference aownedParameter:pattern::uml::Parameter[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference amethod:pattern::uml::Behavior[0..*]
+	reference araisedException:pattern::uml::Type[0..*]
+	reference aownedParameterSet:pattern::uml::ParameterSet[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aOperation!=void)
+	end
+
+	operation execute() is do
+		var tempOperation:uml::Operation
+		tempOperation?=adapter.getRealObject(aOperation,false)
+		var tempinterface:uml::Interface
+		tempinterface?=adapter.getRealObject(ainterface,false)
+		if(tempinterface!=void) then
+			tempOperation.interface:=tempinterface
+		end
+		var tempclass:uml::Class
+		tempclass?=adapter.getRealObject(aclass,false)
+		if(tempclass!=void) then
+			tempOperation.~class:=tempclass
+		end
+		var tempisQuery:uml::Boolean
+		tempisQuery?=adapter.getRealObject(aisQuery,false)
+		if(tempisQuery!=void) then
+			tempOperation.isQuery:=tempisQuery
+		end
+		var tempredefinedOperation:Collection<kermeta::reflection::Object>
+		tempredefinedOperation?=adapter.getRealObject(aredefinedOperation,true)
+		if(tempredefinedOperation!=void) then
+			tempredefinedOperation.each{o | 
+				var temp:uml::Operation
+				temp?=o
+				if(temp!=void) then
+					tempOperation.redefinedOperation.add(temp)
+				end}
+		end
+		var tempdatatype:uml::DataType
+		tempdatatype?=adapter.getRealObject(adatatype,false)
+		if(tempdatatype!=void) then
+			tempOperation.datatype:=tempdatatype
+		end
+		var tempownedParameter:Collection<kermeta::reflection::Object>
+		tempownedParameter?=adapter.getRealObject(aownedParameter,true)
+		if(tempownedParameter!=void) then
+			tempownedParameter.each{o | 
+				var temp:uml::Parameter
+				temp?=o
+				if(temp!=void) then
+					tempOperation.ownedParameter.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempOperation.isAbstract:=tempisAbstract
+		end
+		var tempmethod:Collection<kermeta::reflection::Object>
+		tempmethod?=adapter.getRealObject(amethod,true)
+		if(tempmethod!=void) then
+			tempmethod.each{o | 
+				var temp:uml::Behavior
+				temp?=o
+				if(temp!=void) then
+					tempOperation.~method.add(temp)
+				end}
+		end
+		var tempraisedException:Collection<kermeta::reflection::Object>
+		tempraisedException?=adapter.getRealObject(araisedException,true)
+		if(tempraisedException!=void) then
+			tempraisedException.each{o | 
+				var temp:uml::Type
+				temp?=o
+				if(temp!=void) then
+					tempOperation.raisedException.add(temp)
+				end}
+		end
+		var tempownedParameterSet:Collection<kermeta::reflection::Object>
+		tempownedParameterSet?=adapter.getRealObject(aownedParameterSet,true)
+		if(tempownedParameterSet!=void) then
+			tempownedParameterSet.each{o | 
+				var temp:uml::ParameterSet
+				temp?=o
+				if(temp!=void) then
+					tempOperation.ownedParameterSet.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempOperation.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempOperation.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempOperation.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+
+class createClass inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newClass:pattern::uml::Class
+
+	operation check() : Boolean is do
+		result:=(newClass!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newClass)==void or not(isUnique)) then
+			var realClass:uml::Class
+			realClass?=adapter.converter.convert(Object.clone(newClass), adapter.convert)
+			adapter.created.put(newClass,realClass)
+		end
+	end
+}
+
+class cloneClass inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newClass:pattern::uml::Class
+	attribute realClass:pattern::uml::Class
+
+	operation check() : Boolean is do
+		result:=(newClass!=void)
+	end
+
+	operation execute() is do
+		var clonedClass:uml::Class
+		var temp:uml::Class
+		temp?=adapter.getRealObject(newClass,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedClass?=Object.clone(temp)
+				adapter.clone.put(realClass,clonedClass)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedClass?=Object.clone(temp)
+			adapter.clone.put(realClass,clonedClass)
+		end
+	end
+}
+
+class setClass inherits Adaptation{
+	reference aClass:pattern::uml::Class
+	reference anestedClassifier:pattern::uml::Classifier[0..*]
+	reference aownedOperation:pattern::uml::Operation[0..*]
+	reference aisActive:pattern::uml::Boolean
+	reference aownedBehavior:pattern::uml::Behavior[0..*]
+	reference aclassifierBehavior:pattern::uml::Behavior
+	reference ainterfaceRealization:pattern::uml::InterfaceRealization[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference ageneralization:pattern::uml::Generalization[0..*]
+	reference apowertypeExtent:pattern::uml::GeneralizationSet[0..*]
+	reference aredefinedClassifier:pattern::uml::Classifier[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aClass!=void)
+	end
+
+	operation execute() is do
+		var tempClass:uml::Class
+		tempClass?=adapter.getRealObject(aClass,false)
+		var tempnestedClassifier:Collection<kermeta::reflection::Object>
+		tempnestedClassifier?=adapter.getRealObject(anestedClassifier,true)
+		if(tempnestedClassifier!=void) then
+			tempnestedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempClass.nestedClassifier.add(temp)
+				end}
+		end
+		var tempownedOperation:Collection<kermeta::reflection::Object>
+		tempownedOperation?=adapter.getRealObject(aownedOperation,true)
+		if(tempownedOperation!=void) then
+			tempownedOperation.each{o | 
+				var temp:uml::Operation
+				temp?=o
+				if(temp!=void) then
+					tempClass.ownedOperation.add(temp)
+				end}
+		end
+		var tempisActive:uml::Boolean
+		tempisActive?=adapter.getRealObject(aisActive,false)
+		if(tempisActive!=void) then
+			tempClass.isActive:=tempisActive
+		end
+		var tempownedBehavior:Collection<kermeta::reflection::Object>
+		tempownedBehavior?=adapter.getRealObject(aownedBehavior,true)
+		if(tempownedBehavior!=void) then
+			tempownedBehavior.each{o | 
+				var temp:uml::Behavior
+				temp?=o
+				if(temp!=void) then
+					tempClass.ownedBehavior.add(temp)
+				end}
+		end
+		var tempclassifierBehavior:uml::Behavior
+		tempclassifierBehavior?=adapter.getRealObject(aclassifierBehavior,false)
+		if(tempclassifierBehavior!=void) then
+			tempClass.classifierBehavior:=tempclassifierBehavior
+		end
+		var tempinterfaceRealization:Collection<kermeta::reflection::Object>
+		tempinterfaceRealization?=adapter.getRealObject(ainterfaceRealization,true)
+		if(tempinterfaceRealization!=void) then
+			tempinterfaceRealization.each{o | 
+				var temp:uml::InterfaceRealization
+				temp?=o
+				if(temp!=void) then
+					tempClass.interfaceRealization.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempClass.isAbstract:=tempisAbstract
+		end
+		var tempgeneralization:Collection<kermeta::reflection::Object>
+		tempgeneralization?=adapter.getRealObject(ageneralization,true)
+		if(tempgeneralization!=void) then
+			tempgeneralization.each{o | 
+				var temp:uml::Generalization
+				temp?=o
+				if(temp!=void) then
+					tempClass.generalization.add(temp)
+				end}
+		end
+		var temppowertypeExtent:Collection<kermeta::reflection::Object>
+		temppowertypeExtent?=adapter.getRealObject(apowertypeExtent,true)
+		if(temppowertypeExtent!=void) then
+			temppowertypeExtent.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempClass.powertypeExtent.add(temp)
+				end}
+		end
+		var tempredefinedClassifier:Collection<kermeta::reflection::Object>
+		tempredefinedClassifier?=adapter.getRealObject(aredefinedClassifier,true)
+		if(tempredefinedClassifier!=void) then
+			tempredefinedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempClass.redefinedClassifier.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempClass.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempClass.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempClass.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetClass inherits Adaptation{
+	reference aClass:pattern::uml::Class
+	reference anestedClassifier:pattern::uml::Classifier[0..*]
+	reference aownedOperation:pattern::uml::Operation[0..*]
+	reference aisActive:pattern::uml::Boolean
+	reference aownedBehavior:pattern::uml::Behavior[0..*]
+	reference aclassifierBehavior:pattern::uml::Behavior
+	reference ainterfaceRealization:pattern::uml::InterfaceRealization[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference ageneralization:pattern::uml::Generalization[0..*]
+	reference apowertypeExtent:pattern::uml::GeneralizationSet[0..*]
+	reference aredefinedClassifier:pattern::uml::Classifier[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aClass!=void)
+	end
+
+	operation execute() is do
+		var tempClass:uml::Class
+		tempClass?=adapter.getRealObject(aClass,false)
+		var tempnestedClassifier:Collection<kermeta::reflection::Object>
+		tempnestedClassifier?=adapter.getRealObject(anestedClassifier,true)
+		if(tempnestedClassifier!=void) then
+			tempnestedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempClass.nestedClassifier.add(temp)
+				end}
+		end
+		var tempownedOperation:Collection<kermeta::reflection::Object>
+		tempownedOperation?=adapter.getRealObject(aownedOperation,true)
+		if(tempownedOperation!=void) then
+			tempownedOperation.each{o | 
+				var temp:uml::Operation
+				temp?=o
+				if(temp!=void) then
+					tempClass.ownedOperation.add(temp)
+				end}
+		end
+		var tempisActive:uml::Boolean
+		tempisActive?=adapter.getRealObject(aisActive,false)
+		if(tempisActive!=void) then
+			tempClass.isActive:=tempisActive
+		end
+		var tempownedBehavior:Collection<kermeta::reflection::Object>
+		tempownedBehavior?=adapter.getRealObject(aownedBehavior,true)
+		if(tempownedBehavior!=void) then
+			tempownedBehavior.each{o | 
+				var temp:uml::Behavior
+				temp?=o
+				if(temp!=void) then
+					tempClass.ownedBehavior.add(temp)
+				end}
+		end
+		var tempclassifierBehavior:uml::Behavior
+		tempclassifierBehavior?=adapter.getRealObject(aclassifierBehavior,false)
+		if(tempclassifierBehavior!=void) then
+			tempClass.classifierBehavior:=tempclassifierBehavior
+		end
+		var tempinterfaceRealization:Collection<kermeta::reflection::Object>
+		tempinterfaceRealization?=adapter.getRealObject(ainterfaceRealization,true)
+		if(tempinterfaceRealization!=void) then
+			tempinterfaceRealization.each{o | 
+				var temp:uml::InterfaceRealization
+				temp?=o
+				if(temp!=void) then
+					tempClass.interfaceRealization.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempClass.isAbstract:=tempisAbstract
+		end
+		var tempgeneralization:Collection<kermeta::reflection::Object>
+		tempgeneralization?=adapter.getRealObject(ageneralization,true)
+		if(tempgeneralization!=void) then
+			tempgeneralization.each{o | 
+				var temp:uml::Generalization
+				temp?=o
+				if(temp!=void) then
+					tempClass.generalization.add(temp)
+				end}
+		end
+		var temppowertypeExtent:Collection<kermeta::reflection::Object>
+		temppowertypeExtent?=adapter.getRealObject(apowertypeExtent,true)
+		if(temppowertypeExtent!=void) then
+			temppowertypeExtent.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempClass.powertypeExtent.add(temp)
+				end}
+		end
+		var tempredefinedClassifier:Collection<kermeta::reflection::Object>
+		tempredefinedClassifier?=adapter.getRealObject(aredefinedClassifier,true)
+		if(tempredefinedClassifier!=void) then
+			tempredefinedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempClass.redefinedClassifier.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempClass.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempClass.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempClass.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+class createDataType inherits Adaptation{
+	attribute isUnique:Boolean
+	attribute newDataType:pattern::uml::DataType
+
+	operation check() : Boolean is do
+		result:=(newDataType!=void)
+	end
+
+	operation execute() is do
+		if(adapter.created.getValue(newDataType)==void or not(isUnique)) then
+			var realDataType:uml::DataType
+			realDataType?=adapter.converter.convert(Object.clone(newDataType), adapter.convert)
+			adapter.created.put(newDataType,realDataType)
+		end
+	end
+}
+
+class cloneDataType inherits Adaptation{
+	attribute isUnique:Boolean
+	reference newDataType:pattern::uml::DataType
+	attribute realDataType:pattern::uml::DataType
+
+	operation check() : Boolean is do
+		result:=(newDataType!=void)
+	end
+
+	operation execute() is do
+		var clonedDataType:uml::DataType
+		var temp:uml::DataType
+		temp?=adapter.getRealObject(newDataType,false)
+		if(isUnique) then
+			if(not(adapter.cloned.exists{o | o==temp})) then
+				clonedDataType?=Object.clone(temp)
+				adapter.clone.put(realDataType,clonedDataType)
+				adapter.cloned.add(temp)
+			end
+		else
+			clonedDataType?=Object.clone(temp)
+			adapter.clone.put(realDataType,clonedDataType)
+		end
+	end
+}
+
+class setDataType inherits Adaptation{
+	reference aDataType:pattern::uml::DataType
+	reference aownedAttribute:pattern::uml::Property[0..*]
+	reference aownedOperation:pattern::uml::Operation[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference ageneralization:pattern::uml::Generalization[0..*]
+	reference apowertypeExtent:pattern::uml::GeneralizationSet[0..*]
+	reference aredefinedClassifier:pattern::uml::Classifier[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aDataType!=void)
+	end
+
+	operation execute() is do
+		var tempDataType:uml::DataType
+		tempDataType?=adapter.getRealObject(aDataType,false)
+		var tempownedAttribute:Collection<kermeta::reflection::Object>
+		tempownedAttribute?=adapter.getRealObject(aownedAttribute,true)
+		if(tempownedAttribute!=void) then
+			tempownedAttribute.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempDataType.ownedAttribute.add(temp)
+				end}
+		end
+		var tempownedOperation:Collection<kermeta::reflection::Object>
+		tempownedOperation?=adapter.getRealObject(aownedOperation,true)
+		if(tempownedOperation!=void) then
+			tempownedOperation.each{o | 
+				var temp:uml::Operation
+				temp?=o
+				if(temp!=void) then
+					tempDataType.ownedOperation.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempDataType.isAbstract:=tempisAbstract
+		end
+		var tempgeneralization:Collection<kermeta::reflection::Object>
+		tempgeneralization?=adapter.getRealObject(ageneralization,true)
+		if(tempgeneralization!=void) then
+			tempgeneralization.each{o | 
+				var temp:uml::Generalization
+				temp?=o
+				if(temp!=void) then
+					tempDataType.generalization.add(temp)
+				end}
+		end
+		var temppowertypeExtent:Collection<kermeta::reflection::Object>
+		temppowertypeExtent?=adapter.getRealObject(apowertypeExtent,true)
+		if(temppowertypeExtent!=void) then
+			temppowertypeExtent.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempDataType.powertypeExtent.add(temp)
+				end}
+		end
+		var tempredefinedClassifier:Collection<kermeta::reflection::Object>
+		tempredefinedClassifier?=adapter.getRealObject(aredefinedClassifier,true)
+		if(tempredefinedClassifier!=void) then
+			tempredefinedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempDataType.redefinedClassifier.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempDataType.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempDataType.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempDataType.ownedComment.add(temp)
+				end}
+		end
+	end
+}
+
+class unsetDataType inherits Adaptation{
+	reference aDataType:pattern::uml::DataType
+	reference aownedAttribute:pattern::uml::Property[0..*]
+	reference aownedOperation:pattern::uml::Operation[0..*]
+	reference aisAbstract:pattern::uml::Boolean
+	reference ageneralization:pattern::uml::Generalization[0..*]
+	reference apowertypeExtent:pattern::uml::GeneralizationSet[0..*]
+	reference aredefinedClassifier:pattern::uml::Classifier[0..*]
+	reference aclientDependency:pattern::uml::Dependency[0..*]
+	reference anameExpression:pattern::uml::StringExpression
+	reference aownedComment:pattern::uml::Comment[0..*]
+
+	operation check() : Boolean is do
+		result:=(aDataType!=void)
+	end
+
+	operation execute() is do
+		var tempDataType:uml::DataType
+		tempDataType?=adapter.getRealObject(aDataType,false)
+		var tempownedAttribute:Collection<kermeta::reflection::Object>
+		tempownedAttribute?=adapter.getRealObject(aownedAttribute,true)
+		if(tempownedAttribute!=void) then
+			tempownedAttribute.each{o | 
+				var temp:uml::Property
+				temp?=o
+				if(temp!=void) then
+					tempDataType.ownedAttribute.add(temp)
+				end}
+		end
+		var tempownedOperation:Collection<kermeta::reflection::Object>
+		tempownedOperation?=adapter.getRealObject(aownedOperation,true)
+		if(tempownedOperation!=void) then
+			tempownedOperation.each{o | 
+				var temp:uml::Operation
+				temp?=o
+				if(temp!=void) then
+					tempDataType.ownedOperation.add(temp)
+				end}
+		end
+		var tempisAbstract:uml::Boolean
+		tempisAbstract?=adapter.getRealObject(aisAbstract,false)
+		if(tempisAbstract!=void) then
+			tempDataType.isAbstract:=tempisAbstract
+		end
+		var tempgeneralization:Collection<kermeta::reflection::Object>
+		tempgeneralization?=adapter.getRealObject(ageneralization,true)
+		if(tempgeneralization!=void) then
+			tempgeneralization.each{o | 
+				var temp:uml::Generalization
+				temp?=o
+				if(temp!=void) then
+					tempDataType.generalization.add(temp)
+				end}
+		end
+		var temppowertypeExtent:Collection<kermeta::reflection::Object>
+		temppowertypeExtent?=adapter.getRealObject(apowertypeExtent,true)
+		if(temppowertypeExtent!=void) then
+			temppowertypeExtent.each{o | 
+				var temp:uml::GeneralizationSet
+				temp?=o
+				if(temp!=void) then
+					tempDataType.powertypeExtent.add(temp)
+				end}
+		end
+		var tempredefinedClassifier:Collection<kermeta::reflection::Object>
+		tempredefinedClassifier?=adapter.getRealObject(aredefinedClassifier,true)
+		if(tempredefinedClassifier!=void) then
+			tempredefinedClassifier.each{o | 
+				var temp:uml::Classifier
+				temp?=o
+				if(temp!=void) then
+					tempDataType.redefinedClassifier.add(temp)
+				end}
+		end
+		var tempclientDependency:Collection<kermeta::reflection::Object>
+		tempclientDependency?=adapter.getRealObject(aclientDependency,true)
+		if(tempclientDependency!=void) then
+			tempclientDependency.each{o | 
+				var temp:uml::Dependency
+				temp?=o
+				if(temp!=void) then
+					tempDataType.clientDependency.add(temp)
+				end}
+		end
+		var tempnameExpression:uml::StringExpression
+		tempnameExpression?=adapter.getRealObject(anameExpression,false)
+		if(tempnameExpression!=void) then
+			tempDataType.nameExpression:=tempnameExpression
+		end
+		var tempownedComment:Collection<kermeta::reflection::Object>
+		tempownedComment?=adapter.getRealObject(aownedComment,true)
+		if(tempownedComment!=void) then
+			tempownedComment.each{o | 
+				var temp:uml::Comment
+				temp?=o
+				if(temp!=void) then
+					tempDataType.ownedComment.remove(temp)
+				end}
+		end
+	end
+}
+
+
+						}
+	}
+}
