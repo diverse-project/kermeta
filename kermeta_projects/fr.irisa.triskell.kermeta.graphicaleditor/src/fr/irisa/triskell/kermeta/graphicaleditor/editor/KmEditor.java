@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.6 2007-07-11 14:50:46 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.7 2007-07-20 15:34:04 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -17,7 +17,6 @@ import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.KmPlugin;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 /**
  * Generated Model editor
@@ -82,27 +81,6 @@ public class KmEditor extends Modeler {
 	 */
 	public IPreferenceStore getPreferenceStore() {
 		return KmPlugin.getDefault().getPreferenceStore();
-	}
-
-	/**
-	 * Before the opening of the file framework.ecore is loaded
-	 * @generated NOT
-	 * Added full method
-	 */
-	@Override
-	protected EObject openFile(IFile file) {
-
-		URI frameworkURI = URI
-				.createURI(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT);
-		try {
-			// Load the framework.km through the editing domain.
-			// Force the loading of framework.km when we open a km file
-			this.getResourceSet().getResource(frameworkURI, true);
-		} catch (Exception e) {
-			getResourceSet().getResource(frameworkURI, false);
-		}
-
-		return super.openFile(file);
 	}
 
 }

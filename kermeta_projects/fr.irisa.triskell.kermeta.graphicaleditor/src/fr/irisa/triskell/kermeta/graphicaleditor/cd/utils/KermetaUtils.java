@@ -1,4 +1,4 @@
-/* $Id: KermetaUtils.java,v 1.6 2007-07-11 14:50:45 cfaucher Exp $
+/* $Id: KermetaUtils.java,v 1.7 2007-07-20 15:34:04 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : KermetaUtils.java
  * License   : EPL
@@ -17,10 +17,13 @@ package fr.irisa.triskell.kermeta.graphicaleditor.cd.utils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import org.eclipse.emf.ecore.resource.Resource;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.loader.kmt.fixer.TypeContainementFixer;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
@@ -33,11 +36,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 
 /**
  * This class is a singleton, that is only created once (it is a "static" class,
@@ -100,9 +99,8 @@ public class KermetaUtils {
 	 * only once, when the editor is launched. Standard Lib is not intended to
 	 * dynamically change, so we did not consider this eventuality.
 	 */
-	public KermetaUnit loadStdLib() { // KermetaUnit.STD_LIB_URI =
-										// "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-		return StdLibKermetaUnitHelper.getKermetaUnit();
+	public KermetaUnit loadStdLib() {
+		return IOPlugin.getDefault().getFramework();
 	}
 
 	/**
@@ -239,9 +237,8 @@ public class KermetaUtils {
 	 * 
 	 * @return
 	 */
-	public List<TypeDefinition> getStdLibTypeDefinitions() {
-		// return new ArrayList<TypeDefinition>();
-		return standardUnit.getAllTypeDefinitions();
+	public Set<TypeDefinition> getStdLibTypeDefinitions() {
+		return KermetaUnitHelper.getTypeDefinitions( standardUnit );
 	}
 
 	/***************************************************************************

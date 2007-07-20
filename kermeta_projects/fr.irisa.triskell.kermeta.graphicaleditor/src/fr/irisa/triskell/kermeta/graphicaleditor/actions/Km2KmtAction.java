@@ -1,4 +1,4 @@
-/* $Id: Km2KmtAction.java,v 1.3 2007-02-19 18:04:53 cfaucher Exp $
+/* $Id: Km2KmtAction.java,v 1.4 2007-07-20 15:34:05 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -27,14 +27,16 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.graphicaleditor.KmActionConstants;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
 /**
@@ -115,8 +117,15 @@ public class Km2KmtAction extends WorkbenchPartAction {
 	 */
 	public void performAction() {
 		Shell shell = new Shell();
-		KMUnit kermeta_unit = (KMUnit) KermetaUnitFactory.getDefaultLoader()
-				.createKermetaUnit(getModelURI().toString());
+		try {
+			KermetaUnit kermeta_unit = IOPlugin.getDefault().loadKermetaUnit( getModelURI().toString() );
+		} catch (KermetaIOFileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Diagram currentDiagram = this.getCurrentDiagram();
 		EObject modelObject = Utils.getElement(currentDiagram

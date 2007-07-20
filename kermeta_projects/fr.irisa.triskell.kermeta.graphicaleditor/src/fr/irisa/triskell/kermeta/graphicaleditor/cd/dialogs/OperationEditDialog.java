@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.1 2007-02-06 17:45:46 cfaucher Exp $
+/* $Id: OperationEditDialog.java,v 1.2 2007-07-20 15:34:05 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -43,6 +43,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.KmImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
@@ -52,7 +53,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 
 /**
@@ -396,7 +396,7 @@ public class OperationEditDialog extends Dialog
 	 * Create the inject button. When user clicks on it, it inserts the operation
 	 * body in the edited model.
 	 */
-	protected void createInjectButton(Composite composite)
+	/*protected void createInjectButton(Composite composite)
 	{
 		Button inject = new Button(composite, SWT.PUSH);
 		inject.setText("Check"); // was "inject"..
@@ -456,7 +456,7 @@ public class OperationEditDialog extends Dialog
 				}
 			}
 		});
-	}
+	}*/
 	
 	/**
 	 * Creates the group

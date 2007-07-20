@@ -1,4 +1,4 @@
-/* $Id: OperationUpdateCommand.java,v 1.1 2007-02-06 17:45:45 cfaucher Exp $
+/* $Id: OperationUpdateCommand.java,v 1.2 2007-07-20 15:34:04 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.gef.commands.Command;
+import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.dialogs.OperationEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
@@ -156,7 +157,7 @@ public class OperationUpdateCommand extends Command {
 		}
 
 		if (_dataStructure.getOperationBody() != null) {
-			_operation.setBody(ExpressionParser.parse_operation2body(
+			_operation.setBody(ExpressionParser.parse_operation2body( new LoadingContext(),
 					EditorReconcilingStrategy.parse(_operation.eResource()),
 					_dataStructure.getOperationBody()));
 		}

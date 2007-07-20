@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.10 2007-02-19 18:04:53 cfaucher Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.11 2007-07-20 15:34:04 cfaucher Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -21,21 +21,21 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.kermeta.io.ErrorMessage;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+
 
 /**
  * @author Franck Fleurey
@@ -54,27 +54,22 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
      * */
     public static KermetaUnit parse(Resource resource)
     {
-    	StdLibKermetaUnitHelper.setURItoDefault();
     	org.eclipse.core.resources.IFile file = ResourceHelper.getIFile(resource.getURI().toString());
     	String uri = "platform:/resource" + file.getFullPath().toString();
-    	KermetaUnitFactory.getDefaultLoader().unloadAll();
-    	KMUnit result = null;
+    	IOPlugin.getDefault().unload( uri );
+    	KermetaUnit result = null;
         EditorReconcilingStrategy.clearMarkers(file);
-       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
+       
         try {
-        	result = (KMUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-        	result.setResource(resource);
-	        result.load();
-        }
-        catch(Throwable e) {
-            KermetaUnit.internalLog.error("load error ", e);
-        	if (result == null) {
-        		e.printStackTrace();
-        		return null;
-        	}
-        	else if (!result.messages.unitHasError)
-        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
-        }
+			result = IOPlugin.getDefault().loadKermetaUnit( uri );
+		} catch (KermetaIOFileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
         EditorReconcilingStrategy.createMarkers(file, result);
         return result;
     }
@@ -86,9 +81,13 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
     	KermetaUnit result = parse(resource);
         // Set type_check boolean to false so that we can check again 
-        result.setType_checked(false);
-        result.typeCheck(null);
-        result.constraintCheck(null);
+		KermetaTypeChecker typechecker = new KermetaTypeChecker( result );
+		typechecker.checkUnit();
+		
+		if ( ! result.isErrored() ) {
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( result );
+			constraintchecker.checkUnit();
+		}
         return result;
     }
     
@@ -105,105 +104,9 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     
     public static void createMarkers(IFile file, KermetaUnit unit)
     {
-    	Iterator it = unit.messages.getErrors().iterator();
-    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), unit);
-    	it = unit.messages.getWarnings().iterator();
-    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), unit);
+    	KermetaMarkersHelper.createMarkers(file, unit);
     }
-
-    private static void createMarker(IFile file, KMUnitMessage message, KMTUnit unit)
-    {
-        HashMap map = new HashMap();
-        
-        int offset = 0;
-        int length = 1;
-        
-        if (message instanceof KMUnitParseError) {
-        	KMUnitParseError pe = (KMUnitParseError)message;
-        	offset = pe.getOffset();
-        	length = pe.getLength();
-        }
-        else if (message instanceof KMTUnitLoadError) {
-        	offset = ((KMTUnitLoadError)message).getAstNode().getRangeStart();
-        	length = ((KMTUnitLoadError)message).getAstNode().getRangeLength();	
-        }
-        else if(message.getNode() != null) {
-            KermetaASTNode astn = unit.getKMTAstNodeForModelElement(message.getNode());
-            if (astn != null) {
-                offset = astn.getRangeStart();
-                length = astn.getRangeLength();	
-            }
-        }
-        else if(message.getAstNode() != null) {
-            ASTNode astn = message.getAstNode();
-            offset = astn.getRangeStart();
-            length = astn.getRangeLength();
-        }
-        
-        
-        if (offset > 0) offset--;
-        
-        map.put("message", formatMessage(message.getMessage()));
-        if(message instanceof KMUnitError)
-            map.put("severity", new Integer(2));
-        else
-        if(message instanceof KMUnitWarning)
-            map.put("severity", new Integer(1));
-        else
-            map.put("severity", new Integer(0));
-        map.put("charStart", new Integer(offset));
-        map.put("charEnd", new Integer(offset + length));
-        map.put("transient", new Boolean(true));
-        try
-        {
-            MarkerUtilities.createMarker(file, map, getMarkerType());
-        }
-        catch(CoreException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-    
-    
-    private static void createMarker(IFile file, KMUnitMessage message, KermetaUnit unit)
-    {
-        HashMap map = new HashMap();
-        
-        int offset = 0;
-        int length = 1;
-        
-        if (message instanceof KMUnitParseError) {
-        	KMUnitParseError pe = (KMUnitParseError)message;
-        	offset = pe.getOffset();
-        	length = pe.getLength();
-        }
-        else if (message instanceof KMTUnitLoadError) {
-        	offset = ((KMTUnitLoadError)message).getAstNode().getRangeStart();
-        	length = ((KMTUnitLoadError)message).getAstNode().getRangeLength();	
-        }
-        
-        if (offset > 0) offset--;
-        
-        map.put("message", message.getMessage());
-        if(message instanceof KMUnitError)
-            map.put("severity", new Integer(2));
-        else
-        if(message instanceof KMUnitWarning)
-            map.put("severity", new Integer(1));
-        else
-            map.put("severity", new Integer(0));
-        map.put("charStart", new Integer(offset));
-        map.put("charEnd", new Integer(offset + length));
-        map.put("transient", new Boolean(true));
-        try
-        {
-            MarkerUtilities.createMarker(file, map, getMarkerType());
-        }
-        catch(CoreException ex)
-        {
-            ex.printStackTrace();
-        }
-    }
+ 
     
     public static String getMarkerType()
     {
