@@ -1,4 +1,4 @@
-/* $Id: converter.kmt,v 1.1 2007-07-18 06:58:24 bmorin Exp $
+/* $Id: converter.kmt,v 1.2 2007-07-20 14:51:08 bmorin Exp $
  * Creation date: July 17, 2007
  * License:
  * Copyright:
@@ -71,15 +71,16 @@ class Converter
 					if(a.upper==1) then
 						if (primitive==void) then
 							var temp:Object
+							temp:=self.convert(obj.get(a),convert)
 							if(converting.getValue(obj.get(a))==void) then 
-								temp:=self.convert(obj.get(a),convert)
+								
 								if(temp.isInstanceOf(a.type)) then
 									//stdio.writeln("set: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
 									newObj.~set(a,temp)
 								end
 							else
 								//stdio.writeln("set: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")
-								newObj.~set(a,obj.get(a))
+								newObj.~set(a,temp)
 							end
 						else
 							//stdio.writeln("set primitive: "+a.name+": "+a.type.toString+"("+obj.get(a).toString+")")

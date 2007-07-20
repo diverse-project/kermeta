@@ -1,0 +1,32 @@
+/* $Id: test.kmt,v 1.1 2007-07-20 14:51:08 bmorin Exp $
+ * Creation date: April 24, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "test::FSMTest2"
+@mainOperation "main"
+
+
+package test;
+
+
+require kermeta
+require "platform:/resource/SmartAdapters/program/weaving/weaver4FSMs.kmt"
+
+using kermeta::standard
+using weaver
+class FSMTest2
+{
+	operation main() : Void is do 
+		var weaver:Weaver init Weaver.new
+		//Uri complètes !
+		var baseModelUri:String init "platform:/resource/SmartAdapters/examples/FSM2/baseFsm.xmi"
+		var adapterUri:String init "platform:/resource/SmartAdapters/examples/FSM2/Adapter.xmi"
+		var adaptMMUri:String init "platform:/resource/SmartAdapters/metamodel/specific/FSM_AOM_Framework.ecore"
+		var domainMMUri:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMM.ecore"
+		var domainMMPatternUri:String init "platform:/resource/SmartAdapters/metamodel/domain/FSMMMPattern.ecore"
+		var resultUri:String init "platform:/resource/SmartAdapters/examples/FSM2/result.xmi"
+		weaver.weaving(baseModelUri, adapterUri, adaptMMUri, domainMMUri, domainMMPatternUri, resultUri)
+	end
+}

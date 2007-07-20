@@ -65,6 +65,7 @@ class cloneState inherits Adaptation{
 		else
 			clonedState?=Object.clone(temp)
 			adapter.clone.put(realState,clonedState)
+			adapter.cloned.add(temp)
 		end
 	end
 }
@@ -263,6 +264,7 @@ class setFsm inherits Adaptation{
 				temp?=o
 				if(temp!=void) then
 					tempFsm.states.add(temp)
+					stdio.writeln("  "+temp.toString+" added into "+tempFsm.toString)
 				end}
 		end
 		var temptransitions:Collection<kermeta::reflection::Object>
