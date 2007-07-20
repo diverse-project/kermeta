@@ -12,6 +12,7 @@
         </eAnnotations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeParameters">
           <details key="G" value="G"/>
         </eAnnotations>
@@ -376,6 +377,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="/1/standard/Collection">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
         </eAnnotations>
@@ -586,6 +588,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Bag" eSuperTypes="/1/standard/Collection">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
         </eAnnotations>
@@ -796,6 +799,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="OrderedCollection" abstract="true" eSuperTypes="/1/standard/Collection">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
         </eAnnotations>
@@ -877,6 +881,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="OrderedSet" eSuperTypes="/1/standard/Set /1/standard/OrderedCollection">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Set&lt;G>" value="kermeta::standard::Set&lt;G>"/>
           <details key="kermeta::standard::OrderedCollection&lt;G>" value="kermeta::standard::OrderedCollection&lt;G>"/>
@@ -1006,6 +1011,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="/1/standard/Bag /1/standard/OrderedCollection">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Bag&lt;G>" value="kermeta::standard::Bag&lt;G>"/>
           <details key="kermeta::standard::OrderedCollection&lt;G>" value="kermeta::standard::OrderedCollection&lt;G>"/>
@@ -1094,6 +1100,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Iterator">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeParameters">
           <details key="G" value="G"/>
         </eAnnotations>
@@ -1123,42 +1130,53 @@
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../language/structure.ecore#/0"/>
-    <references href="../language/structure.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="java.ecore#/0"/>
+    <references href="java.ecore#/1"/>
+    <references href="java.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
-    <references href="primitive_types.ecore#/0"/>
-    <references href="primitive_types.ecore#/1"/>
-    <references href="../utils/stack.ecore#/0"/>
-    <references href="../utils/stack.ecore#/1"/>
-    <references href="../io/std_io.ecore#/0"/>
-    <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
-    <references href="java.ecore#/0"/>
-    <references href="java.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
-    <references href="../language/dynamic_expression.ecore#/0"/>
-    <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="#/0"/>
-    <references href="#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="primitive_types.ecore#/0"/>
+    <references href="primitive_types.ecore#/1"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

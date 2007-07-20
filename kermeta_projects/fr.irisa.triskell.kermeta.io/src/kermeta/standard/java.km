@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage name="standard">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
@@ -11,14 +11,13 @@
           <containedType xsi:type="kermeta_language_structure:Class">
             <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
           </containedType>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/standard/UnknownJavaObject/toString/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/standard/UnknownJavaObject/toString/@body/@containedType.0">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:StringLiteral" value="toString of  UnknownJavaObject not implemented yet">
-                <staticType href="primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
-              </value>
+              <value xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/standard/UnknownJavaObject/toString/@body/@containedType.0" value="toString of  UnknownJavaObject not implemented yet"/>
             </statement>
           </body>
           <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>
@@ -27,23 +26,24 @@
     </nestedPackage>
   </packages>
   <requires uri="primitive_types.kmt">
-    <ownedTag value="/**&#xA; * $Id: java.km,v 1.2 2007-07-20 15:08:12 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+    <ownedTag value="/**&#xA; * $Id: java.km,v 1.3 2007-07-20 16:21:58 cfaucher Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
   </requires>
   <usings qualifiedName="kermeta::exceptions"/>
-  <referencedModellingUnit href="../language/structure.km#/"/>
-  <referencedModellingUnit href="../utils/hashtable.km#/"/>
-  <referencedModellingUnit href="../reflection/reflection.km#/"/>
-  <referencedModellingUnit href="../persistence/resource.km#/"/>
-  <referencedModellingUnit href="../Standard.km#/"/>
-  <referencedModellingUnit href="../exceptions/exceptions.km#/"/>
-  <referencedModellingUnit href="../io/file_io.km#/"/>
-  <referencedModellingUnit href="primitive_types.km#/"/>
-  <referencedModellingUnit href="../utils/stack.km#/"/>
-  <referencedModellingUnit href="../io/std_io.km#/"/>
-  <referencedModellingUnit href="#/"/>
-  <referencedModellingUnit href="../kunit/kunit.km#/"/>
-  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
-  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
-  <referencedModellingUnit href="collections.km#/"/>
-  <referencedModellingUnit href="../language/behavior.km#/"/>
-</kermeta_language_structure:CompilationUnit>
+  <referencedModelingUnits href="collections.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="primitive_types.km#/"/>
+  <referencedModelingUnits href="../Standard.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../language/structure.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../utils/hashtable.km#/"/>
+</kermeta_language_structure:ModelingUnit>

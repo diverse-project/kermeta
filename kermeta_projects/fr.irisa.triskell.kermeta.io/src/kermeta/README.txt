@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.2 2007-07-20 15:08:13 ftanguy Exp $
+$Id: README.txt,v 1.3 2007-07-20 16:21:57 cfaucher Exp $
 
 The distribution of the KM framework
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage name="exceptions">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Exception" superType="//@packages.0/exceptions/Exception/@containedType.0">
@@ -9,17 +9,15 @@
         </containedType>
         <ownedAttribute name="message" isOrdered="true" upper="1" isComposite="true">
           <ownedTag value="/**&#xA;     * The message attached to the exception&#xA;     */"/>
-          <type href="../language/structure.km#//@packages.0/language/structure/Object/set/@body/@statement.0/@elseBody/@statement.1/@target/@containedType.0"/>
+          <type href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/parse/@body/@statement.1/@thenBody/@statement.1/@target/@containedType.0"/>
         </ownedAttribute>
         <ownedAttribute name="nestedException" type="//@packages.0/exceptions/Exception/nestedException/@containedType.0" isOrdered="true" upper="1" isComposite="true">
           <ownedTag value="/**&#xA;     * Any nested exception&#xA;     */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/exceptions/Exception"/>
         </ownedAttribute>
-        <ownedAttribute name="stackTrace" type="//@packages.0/exceptions/Exception/stackTrace/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <ownedAttribute name="stackTrace" isOrdered="true" upper="1" isComposite="true">
           <ownedTag value="/**&#xA;     * The stack trace as a String&#xA;     * Filled by the interpreted when the exception is raised&#xA;     */"/>
-          <containedType xsi:type="kermeta_language_structure:Class">
-            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
-          </containedType>
+          <type href="../kunit/kunit.km#//@packages.0/kunit/Error/toString/@body/@statement.3/@thenBody/@statement.0/@value/@parameters.0/@containedType.0"/>
         </ownedAttribute>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="RuntimeError" superType="//@packages.0/exceptions/RuntimeError/@containedType.0">
@@ -102,20 +100,21 @@
   </requires>
   <usings qualifiedName="kermeta::standard"/>
   <usings qualifiedName="kermeta::utils"/>
-  <referencedModellingUnit href="../language/structure.km#/"/>
-  <referencedModellingUnit href="../utils/hashtable.km#/"/>
-  <referencedModellingUnit href="../reflection/reflection.km#/"/>
-  <referencedModellingUnit href="../persistence/resource.km#/"/>
-  <referencedModellingUnit href="../Standard.km#/"/>
-  <referencedModellingUnit href="#/"/>
-  <referencedModellingUnit href="../io/file_io.km#/"/>
-  <referencedModellingUnit href="../standard/primitive_types.km#/"/>
-  <referencedModellingUnit href="../utils/stack.km#/"/>
-  <referencedModellingUnit href="../io/std_io.km#/"/>
-  <referencedModellingUnit href="../standard/java.km#/"/>
-  <referencedModellingUnit href="../kunit/kunit.km#/"/>
-  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
-  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
-  <referencedModellingUnit href="../standard/collections.km#/"/>
-  <referencedModellingUnit href="../language/behavior.km#/"/>
-</kermeta_language_structure:CompilationUnit>
+  <referencedModelingUnits href="../standard/collections.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../standard/primitive_types.km#/"/>
+  <referencedModelingUnits href="../Standard.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../language/structure.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../utils/hashtable.km#/"/>
+</kermeta_language_structure:ModelingUnit>

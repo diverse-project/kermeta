@@ -7,6 +7,7 @@
   <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="standard" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/standard/primitive_types.ecore#//standard" nsPrefix="standard">
       <eClassifiers xsi:type="ecore:EClass" name="Void">
+        <eAnnotations source="kermeta"/>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="isVoid" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
@@ -34,10 +35,14 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true">
+        <eAnnotations source="kermeta"/>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="ValueType" abstract="true" eSuperTypes="/1/standard/PrimitiveType"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ValueType" abstract="true" eSuperTypes="/1/standard/PrimitiveType">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Comparable" abstract="true">
+        <eAnnotations source="kermeta"/>
         <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
         <eOperations name="compareTo" eType="/1/standard/Integer">
           <eAnnotations source="kermeta">
@@ -81,6 +86,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Summable" abstract="true">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeParameters">
           <details key="G" value="G"/>
         </eAnnotations>
@@ -105,6 +111,7 @@
         <eSuperTypes href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="/1/standard/PrimitiveType">
+        <eAnnotations source="kermeta"/>
         <eOperations name="equals" eType="/1/standard/Boolean">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;if other.getMetaClass.isNotEqual(kermeta::standard::Boolean) then&#xA;&#x9;&#x9;result := false&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -158,8 +165,11 @@
           </eAnnotations>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Numeric" abstract="true" eSuperTypes="/1/standard/Comparable /1/standard/ValueType"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Numeric" abstract="true" eSuperTypes="/1/standard/Comparable /1/standard/ValueType">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="/1/standard/Numeric /1/standard/Summable">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Summable&lt;kermeta::standard::Integer>" value="kermeta::standard::Summable&lt;kermeta::standard::Integer>"/>
         </eAnnotations>
@@ -280,6 +290,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Real" eSuperTypes="/1/standard/Numeric /1/standard/Summable">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Summable&lt;kermeta::standard::Real>" value="kermeta::standard::Summable&lt;kermeta::standard::Real>"/>
         </eAnnotations>
@@ -346,6 +357,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Character" eSuperTypes="/1/standard/ValueType /1/standard/Comparable">
+        <eAnnotations source="kermeta"/>
         <eOperations name="compareTo" eType="/1/standard/Integer">
           <eAnnotations source="kermeta" references="/1/standard/Comparable/compareTo">
             <details key="body" value="do&#xA;&#x9;if other.isVoid then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self, other)&#xA;&#xA;&#x9;end&#xA;end"/>
@@ -374,6 +386,7 @@
         </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="/1/standard/ValueType /1/standard/Comparable /1/standard/Summable">
+        <eAnnotations source="kermeta"/>
         <eAnnotations source="kermeta.typeVariableBindings">
           <details key="kermeta::standard::Summable&lt;kermeta::standard::String>" value="kermeta::standard::Summable&lt;kermeta::standard::String>"/>
         </eAnnotations>
@@ -463,56 +476,60 @@
           </eAnnotations>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../language/structure.ecore#/0"/>
-    <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/2"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="collections.ecore#/0"/>
+    <references href="collections.ecore#/1"/>
+    <references href="collections.ecore#/2"/>
+    <references href="java.ecore#/0"/>
+    <references href="java.ecore#/1"/>
+    <references href="java.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="../Standard.ecore#/2"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/2"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
-    <references href="#/0"/>
-    <references href="#/1"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
-    <references href="java.ecore#/0"/>
-    <references href="java.ecore#/1"/>
-    <references href="java.ecore#/2"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
-    <references href="../language/reflective_collections.ecore#/0"/>
-    <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
-    <references href="../language/dynamic_expression.ecore#/0"/>
-    <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
-    <references href="collections.ecore#/0"/>
-    <references href="collections.ecore#/1"/>
-    <references href="collections.ecore#/2"/>
-    <references href="../language/behavior.ecore#/0"/>
-    <references href="../language/behavior.ecore#/1"/>
-    <references href="../language/behavior.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

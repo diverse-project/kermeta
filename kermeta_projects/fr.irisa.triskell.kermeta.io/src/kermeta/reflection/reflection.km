@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage name="reflection">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="String">
-        <instanceType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+        <instanceType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
       </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Object" isAbstract="true">
         <ownedTag value="/** &#xA; * Object type : all entities of Kermeta metamodel explicitely inherit Object.&#xA; */"/>
+        <ownedAttribute name="ownedTag" type="//@packages.0/reflection/Object/ownedTag/@containedType.0" upper="-1" isDerived="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Tag"/>
+        </ownedAttribute>
         <ownedAttribute name="tag" type="//@packages.0/reflection/Object/tag/@containedType.0" upper="-1" opposite="//@packages.0/reflection/Tag/object">
           <ownedTag value="/** Tags are used to put comments/documentation */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Tag"/>
         </ownedAttribute>
-        <ownedAttribute name="ownedTag" type="//@packages.0/reflection/Object/ownedTag/@containedType.0" upper="-1" isDerived="true">
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Tag"/>
-        </ownedAttribute>
-        <ownedOperation name="getMetaClass" isOrdered="true" upper="1" isAbstract="true">
-          <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@target/@containedType.0"/>
+        <ownedOperation name="getMetaClass" type="//@packages.0/reflection/Object/getMetaClass/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Class"/>
         </ownedOperation>
         <ownedOperation name="container" type="//@packages.0/reflection/Object/container/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Object"/>
@@ -23,8 +23,8 @@
         <ownedOperation name="checkInvariants" type="//@packages.0/reflection/Object/checkInvariants/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
-        <ownedOperation name="checkAllInvariants" isOrdered="true" upper="1" isAbstract="true">
-          <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@thenBody/@statement.2/@parameters.0/@containedType.0/@containedType.1"/>
+        <ownedOperation name="checkAllInvariants" type="//@packages.0/reflection/Object/checkAllInvariants/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
         </ownedOperation>
         <ownedOperation name="equals" type="//@packages.0/reflection/Boolean" isOrdered="true" upper="1" isAbstract="true">
           <ownedTag value="/** semantic equality,&#xA;  * if you wish to test for object identity you need to use the method oid&#xA;  * ex: x.oid == y.oid&#xA;  * by default, (ie. if not overloaded), the equals method for class Object implements &#xA;  * the most discriminating possible equivalence relation on objects; that is, for any non-null &#xA;  * reference values x and y, this method returns true if and only if x and y refer to the same &#xA;  * object (x.oid == y.oid has the value true). &#xA;  *&#xA;  * note1: the operator == is mapped to this &#xA;  * note2: overloading this operation have some impact on the behavior on collection and hashtable that rely on it&#xA;  */"/>
@@ -114,7 +114,7 @@
         <ownedTag value="/** Abstraction for Parameterized types, namely, Class and ModelType*/"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Type"/>
         <ownedAttribute name="typeDefinition" isOrdered="true" lower="1" upper="1">
-          <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+          <type href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
         </ownedAttribute>
         <ownedAttribute name="typeParamBinding" type="//@packages.0/reflection/ParameterizedType/typeParamBinding/@containedType.0" upper="-1" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/TypeVariableBinding"/>
@@ -144,7 +144,7 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.0/@containedType.0" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.0/@containedType.0" name="cDef"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@containedType.0">
@@ -180,7 +180,7 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/ownedOperation/@getterBody/@statement.0/@containedType.0" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/ownedOperation/@getterBody/@statement.0/@containedType.0" name="cDef"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/ownedOperation/@getterBody/@containedType.0">
@@ -215,7 +215,7 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/superClass/@getterBody/@statement.0/@containedType.0" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/superClass/@getterBody/@statement.0/@containedType.0" name="cDef"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/superClass/@getterBody/@containedType.0">
@@ -244,7 +244,7 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/Class/isAbstract/@getterBody/@statement.0/@containedType.0" isCast="true">
               <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/isAbstract/@getterBody/@statement.0/@containedType.0" name="cDef"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -262,16 +262,16 @@
         <ownedAttribute name="name" type="//@packages.0/reflection/String" isOrdered="true" upper="1" isReadOnly="true" isDerived="true">
           <ownedTag value="/** Returns the name of the classDefinition of this class&#xA;  */"/>
           <getterBody xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+            <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+              <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="name" staticProperty="//@packages.0/reflection/NamedElement/name">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                  <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
                 </target>
               </value>
             </statement>
@@ -283,16 +283,16 @@
         <ownedOperation name="toString" type="//@packages.0/reflection/String" isOrdered="true" upper="1" superOperation="//@packages.0/reflection/Object/toString">
           <ownedTag value="/** Returns the String representation of this class. &#xA;  *  Note : throws an exception if this class has no classDefinition&#xA;  *  or if the classDefinition is not well constructed.&#xA;  */"/>
           <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+            <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+              <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="name" staticProperty="//@packages.0/reflection/NamedElement/name">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                  <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/Class/toString/@body/@statement.0/@value/@target/@target/@containedType.0">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Class"/>
                   </target>
@@ -416,7 +416,7 @@
         <ownedAttribute name="raisedException" type="//@packages.0/reflection/Operation/raisedException/@containedType.0" upper="-1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Type"/>
         </ownedAttribute>
-        <ownedAttribute name="ownedParameter" type="//@packages.0/reflection/Operation/ownedParameter/@containedType.0" upper="-1" opposite="//@packages.0/reflection/Parameter/operation" isComposite="true">
+        <ownedAttribute name="ownedParameter" type="//@packages.0/reflection/Operation/ownedParameter/@containedType.0" isOrdered="true" upper="-1" opposite="//@packages.0/reflection/Parameter/operation" isComposite="true">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Parameter"/>
         </ownedAttribute>
       </ownedTypeDefinition>
@@ -484,31 +484,33 @@
           <ownedTag value="/** Returns the Classes of which this class definition inherits.&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Class"/>
         </ownedAttribute>
-        <ownedAttribute name="allOwnedAttribute" type="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+        <ownedAttribute name="allAttribute" type="//@packages.0/reflection/ClassDefinition/allAttribute/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
           <ownedTag value="/** Returns all the attributes, references, derived properties of this &#xA;  *  class definition including the inherited ones&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
           <getterBody xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
-            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@containedType.0">
               <containedType xsi:type="kermeta_language_structure:Class">
-                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
                   <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
                 </typeParamBinding>
                 <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
               </containedType>
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
-              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@containedType.0" name="new">
-                <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0"/>
-                  <typeref type="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.0/@containedType.0" upper="1"/>
-                </target>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@containedType.0" name="new">
                 <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Class"/>
+                  </containedType>
+                  <typeref type="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
               </value>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="addAll">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@containedType.0"/>
-              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0" name="ownedAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/ownedAttribute">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0" name="ownedAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/ownedAttribute">
                 <containedType xsi:type="kermeta_language_structure:Class">
                   <typeParamBinding>
                     <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
@@ -516,38 +518,38 @@
                   </typeParamBinding>
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
                 </containedType>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.1/@parameters.0/@target/@containedType.0">
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.1/@parameters.0/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
                 </target>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
               <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/addAll"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
               <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
-              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@containedType.0">
-                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@containedType.0/@containedType.0">
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@containedType.0/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/reflection/Class/superClass/@containedType.0"/>
                   <right href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
                 </containedType>
                 <parameters name="t"/>
                 <body xsi:type="kermeta_language_behavior:Block">
                   <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
-                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" identifier="cDef">
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" identifier="cDef">
                     <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
-                    <type type="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                    <type type="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
                   </statement>
-                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" isCast="true">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" name="cDef"/>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" name="cDef"/>
                     <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@target/@containedType.0"/>
+                      <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
                       <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/superClass/@containedType.0" name="t"/>
                     </value>
                   </statement>
                   <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
                     <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
-                    <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0">
-                      <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0/@containedType.0">
+                    <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0/@containedType.0">
                         <containedType xsi:type="kermeta_language_structure:ProductType">
                           <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </containedType>
@@ -559,11 +561,12 @@
                         <parameters xsi:type="kermeta_language_behavior:CallVariable" name="p">
                           <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
                         </parameters>
-                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
                         <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
                       </body>
                     </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@target/@containedType.0" name="allOwnedAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/allOwnedAttribute">
+                    <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@target/@containedType.0" name="allAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/allAttribute">
                       <containedType xsi:type="kermeta_language_structure:Class">
                         <typeParamBinding>
                           <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
@@ -571,22 +574,620 @@
                         </typeParamBinding>
                         <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
                       </containedType>
-                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" name="cDef"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" name="cDef"/>
                     </target>
-                    <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
                   </statement>
                 </body>
               </parameters>
-              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="superType" staticProperty="//@packages.0/reflection/ClassDefinition/superType">
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.2/@target/@containedType.0" name="superType" staticProperty="//@packages.0/reflection/ClassDefinition/superType">
                 <containedType xsi:type="kermeta_language_structure:Class">
                   <typeParamBinding type="//@packages.0/reflection/Class/superClass/@containedType.0">
                     <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
                   </typeParamBinding>
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
                 </containedType>
-                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allOwnedAttribute/@getterBody/@statement.1/@parameters.0/@target/@containedType.0"/>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.1/@parameters.0/@target/@containedType.0"/>
               </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="ownedCompositeAttribute" type="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns only the attributes (isComposite and not isDerived)&#xA;  *  class definition&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                </containedType>
+                <parameters name="oa"/>
+                <body xsi:type="kermeta_language_behavior:Conditional">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </parameters>
+                      <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </target>
+                    </target>
+                  </condition>
+                </body>
+              </parameters>
               <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.1/@target/@containedType.0" name="ownedAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/ownedAttribute">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/ownedCompositeAttribute/@getterBody/@statement.1/@target/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="allCompositeAttribute" type="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns only all the attributes (isComposite and not isDerived)&#xA;  *  class definition including the inherited ones&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                </containedType>
+                <parameters name="oa"/>
+                <body xsi:type="kermeta_language_behavior:Conditional">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </parameters>
+                      <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </target>
+                    </target>
+                  </condition>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.1/@target/@containedType.0" name="allAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/allAttribute">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allCompositeAttribute/@getterBody/@statement.1/@target/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="ownedAttributeAsReference" type="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns only the references (not isComposite and not isDerived)&#xA;  *  class definition&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                </containedType>
+                <parameters name="oa"/>
+                <body xsi:type="kermeta_language_behavior:Conditional">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </parameters>
+                      <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </target>
+                  </condition>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.1/@target/@containedType.0" name="ownedAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/ownedAttribute">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsReference/@getterBody/@statement.1/@target/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="allAttributeAsReference" type="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns only all the references (not isComposite and not isDerived)&#xA;  *  class definition including the inherited ones&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                </containedType>
+                <parameters name="oa"/>
+                <body xsi:type="kermeta_language_behavior:Conditional">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </parameters>
+                      <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </target>
+                  </condition>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.1/@target/@containedType.0" name="allAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/allAttribute">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsReference/@getterBody/@statement.1/@target/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="ownedAttributeAsProperty" type="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns only the properties (not isComposite and isDerived)&#xA;  *  class definition&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                </containedType>
+                <parameters name="oa"/>
+                <body xsi:type="kermeta_language_behavior:Conditional">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </parameters>
+                      <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </target>
+                  </condition>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.1/@target/@containedType.0" name="ownedAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/ownedAttribute">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/ownedAttributeAsProperty/@getterBody/@statement.1/@target/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="allAttributeAsProperty" type="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns only all the properties (not isComposite and isDerived)&#xA;  *  class definition including the inherited ones&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Property"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.1/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType">
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </containedType>
+                  <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                </containedType>
+                <parameters name="oa"/>
+                <body xsi:type="kermeta_language_behavior:Conditional">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                    <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </parameters>
+                      <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                      <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedAttribute/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                    </statement>
+                  </thenBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="and">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/forAll/@body/@statement.1/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="isDerived" staticProperty="//@packages.0/reflection/Property/isDerived">
+                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                      </target>
+                    </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/and"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="isComposite" staticProperty="//@packages.0/reflection/Property/isComposite">
+                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="oa">
+                          <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                        </target>
+                      </target>
+                    </target>
+                  </condition>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.1/@target/@containedType.0" name="allAttribute" staticProperty="//@packages.0/reflection/ClassDefinition/allAttribute">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding>
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                    <type href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@containedType.0/@containedType.0/@containedType.0"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allAttributeAsProperty/@getterBody/@statement.1/@target/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </target>
+            </statement>
+          </getterBody>
+        </ownedAttribute>
+        <ownedAttribute name="allOperation" type="//@packages.0/reflection/ClassDefinition/allOperation/@containedType.0" upper="-1" isReadOnly="true" isDerived="true">
+          <ownedTag value="/** Returns all the operations of this &#xA;  *  class definition including the inherited ones&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Operation"/>
+          <getterBody xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.0/@containedType.0">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeParamBinding type="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.0/@containedType.0/@typeParamBinding.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Operation"/>
+                  <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                </typeParamBinding>
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+              </containedType>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedOperation/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.0/@containedType.0" name="new">
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="//@packages.0/reflection/ClassDefinition/allAttribute/@getterBody/@statement.0/@value/@target/@containedType.0">
+                  <typeref type="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.0/@containedType.0" upper="1"/>
+                </target>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="addAll">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.1/@parameters.0/@containedType.0" name="ownedOperation" staticProperty="//@packages.0/reflection/ClassDefinition/ownedOperation">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding type="//@packages.0/reflection/Class/ownedOperation/@containedType.0">
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.1/@parameters.0/@target/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                </target>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/addAll"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedOperation/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@containedType.0/@containedType.0">
+                  <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/reflection/Class/superClass/@containedType.0"/>
+                  <right href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                </containedType>
+                <parameters name="t"/>
+                <body xsi:type="kermeta_language_behavior:Block">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                  <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" identifier="cDef">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ClassDefinition"/>
+                    <type type="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" isCast="true">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" name="cDef"/>
+                    <value xsi:type="kermeta_language_behavior:CallFeature" name="typeDefinition" staticProperty="//@packages.0/reflection/ParameterizedType/typeDefinition">
+                      <staticType href="../language/dynamic_expression.km#//@packages.0/interpreter/DynamicExpression/initializeDefaults/@body/@statement.1/@value/@containedType.0"/>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/superClass/@containedType.0" name="t"/>
+                    </value>
+                  </statement>
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+                    <staticType href="../standard/collections.km#//@packages.0/standard/Collection/addAll/@body/@containedType.0"/>
+                    <parameters xsi:type="kermeta_language_behavior:LambdaExpression" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:FunctionType" left="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@parameters.0/@containedType.0/@containedType.0">
+                        <containedType xsi:type="kermeta_language_structure:ProductType" type="//@packages.0/reflection/Class/ownedOperation/@containedType.0"/>
+                        <right href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                      </containedType>
+                      <parameters name="p"/>
+                      <body xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                        <staticType href="../standard/collections.km#//@packages.0/standard/Set/add/@containedType.0"/>
+                        <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/Class/ownedOperation/@containedType.0" name="p"/>
+                        <staticOperation href="../standard/collections.km#//@packages.0/standard/Set/add"/>
+                        <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/reflection/Class/ownedOperation/@getterBody/@statement.2/@target/@containedType.0" name="result"/>
+                      </body>
+                    </parameters>
+                    <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.2/@target/@containedType.0" name="allOperation" staticProperty="//@packages.0/reflection/ClassDefinition/allOperation">
+                      <containedType xsi:type="kermeta_language_structure:Class">
+                        <typeParamBinding type="//@packages.0/reflection/Class/ownedOperation/@containedType.0">
+                          <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                        </typeParamBinding>
+                        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                      </containedType>
+                      <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@parameters.0/@body/@statement.0/@containedType.0" name="cDef"/>
+                    </target>
+                  </statement>
+                </body>
+              </parameters>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/Collection/each"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.2/@target/@containedType.0" name="superType" staticProperty="//@packages.0/reflection/ClassDefinition/superType">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeParamBinding type="//@packages.0/reflection/Class/superClass/@containedType.0">
+                    <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="../standard/collections.km#//@packages.0/standard/Set/G"/>
+                  </typeParamBinding>
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/collections.km#//@packages.0/standard/Set"/>
+                </containedType>
+                <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/ClassDefinition/allOperation/@getterBody/@statement.1/@parameters.0/@target/@containedType.0"/>
+              </target>
             </statement>
           </getterBody>
         </ownedAttribute>
@@ -690,8 +1291,10 @@
         </ownedAttribute>
         <ownedOperation name="qualifiedName" type="//@packages.0/reflection/String" isOrdered="true" upper="1">
           <ownedTag value="/** Returns the qualified name of this named element. Qualified name is &#xA;  * the list of the names of the packages hierarchically ordered, delimited by&#xA;  * a &quot;::&quot;, followed by the name of this named element.&#xA;  */"/>
-          <body xsi:type="kermeta_language_behavior:Block">
-            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Void"/>
+            </containedType>
             <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" identifier="elem">
               <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/NamedElement"/>
               <initialization xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@initialization/@containedType.0">
@@ -700,20 +1303,21 @@
               <type type="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" isOrdered="true" upper="1"/>
             </statement>
             <statement xsi:type="kermeta_language_behavior:Assignment">
-              <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+              <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
               <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
               </target>
               <value xsi:type="kermeta_language_behavior:CallFeature" name="name" staticProperty="//@packages.0/reflection/NamedElement/name">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@initialization/@containedType.0"/>
               </value>
             </statement>
-            <statement xsi:type="kermeta_language_behavior:Loop">
-              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Loop" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@containedType.0">
               <initialization xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" isCast="true">
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
-                <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/Object/container/@containedType.0" name="container" staticOperation="//@packages.0/reflection/Object/container">
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="container">
+                  <staticType href="../language/structure.km#//@packages.0/language/structure/Object/container/@containedType.0"/>
+                  <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/container"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
                 </value>
               </initialization>
@@ -721,39 +1325,42 @@
                 <statement xsi:type="kermeta_language_behavior:Assignment">
                   <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                   <target xsi:type="kermeta_language_behavior:CallResult" name="result">
-                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                    <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
                   </target>
                   <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                     <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
                     <parameters xsi:type="kermeta_language_behavior:CallResult" name="result">
-                      <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                      <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
                     </parameters>
+                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                     <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                       <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/plus/@containedType.0"/>
-                      <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="::">
-                        <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                      <parameters xsi:type="kermeta_language_behavior:StringLiteral" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.2/@body/@statement.0/@value/@target/@parameters.0/@containedType.0" value="::">
+                        <containedType xsi:type="kermeta_language_structure:Class">
+                          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+                        </containedType>
                       </parameters>
+                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                       <target xsi:type="kermeta_language_behavior:CallFeature" name="name" staticProperty="//@packages.0/reflection/NamedElement/name">
-                        <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@thenBody/@statement.0/@condition/@parameters.0/@target/@containedType.0"/>
+                        <staticType href="../persistence/resource.km#//@packages.0/persistence/EMFResource/isInTypeDefSet/@body/@statement.1/@body/@statement.2/@condition/@parameters.0/@containedType.0"/>
                         <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
                       </target>
-                      <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                     </target>
-                    <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/plus"/>
                   </value>
                 </statement>
                 <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" isCast="true">
                   <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/reflection/Object/container/@containedType.0" name="container" staticOperation="//@packages.0/reflection/Object/container">
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="container">
+                    <staticType href="../language/structure.km#//@packages.0/language/structure/Object/container/@containedType.0"/>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/container"/>
                     <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
                   </value>
                 </statement>
               </body>
-              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals" staticOperation="//@packages.0/reflection/Object/equals">
-                <staticType href="../language/structure.km#//@packages.0/language/structure/Object/checkAllInvariants/@body/@statement.0/@thenBody/@statement.1/@parameters.0/@body/@condition/@containedType.0"/>
-                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
-                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
-                </parameters>
+              <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@statement.1/@initialization/@value/@parameters.0/@containedType.0/@containedType.1"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@containedType.0"/>
+                <staticOperation href="../language/structure.km#//@packages.0/language/structure/Object/equals"/>
                 <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/reflection/NamedElement/qualifiedName/@body/@statement.0/@containedType.0" name="elem"/>
               </stopCondition>
             </statement>
@@ -782,6 +1389,31 @@
         </ownedAttribute>
         <ownedAttribute name="uri" type="//@packages.0/reflection/String" isOrdered="true" upper="1" isComposite="true"/>
       </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ModelingUnit" isAbstract="true">
+        <ownedAttribute name="packages" type="//@packages.0/reflection/ModelingUnit/packages/@containedType.0" upper="-1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Package"/>
+        </ownedAttribute>
+        <ownedAttribute name="requires" type="//@packages.0/reflection/ModelingUnit/requires/@containedType.0" upper="-1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Require"/>
+        </ownedAttribute>
+        <ownedAttribute name="usings" type="//@packages.0/reflection/ModelingUnit/usings/@containedType.0" upper="-1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Using"/>
+        </ownedAttribute>
+        <ownedAttribute name="referencedModelingUnits" type="//@packages.0/reflection/ModelingUnit/referencedModelingUnits/@containedType.0" upper="-1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/ModelingUnit"/>
+        </ownedAttribute>
+        <ownedAttribute name="ownedTags" type="//@packages.0/reflection/ModelingUnit/ownedTags/@containedType.0" upper="-1" isComposite="true">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Tag"/>
+        </ownedAttribute>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Require" isAbstract="true" superType="//@packages.0/reflection/Require/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Object"/>
+        <ownedAttribute name="uri" type="//@packages.0/reflection/String" isOrdered="true" upper="1" isComposite="true"/>
+      </ownedTypeDefinition>
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Using" isAbstract="true" superType="//@packages.0/reflection/Using/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/Object"/>
+        <ownedAttribute name="qualifiedName" type="//@packages.0/reflection/String" isOrdered="true" upper="1" isComposite="true"/>
+      </ownedTypeDefinition>
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypeDefinition" isAbstract="true" superType="//@packages.0/reflection/TypeDefinition/@containedType.0">
         <ownedTag value="/**&#xA; * Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit&#xA; * this class)&#xA; */"/>
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/NamedElement"/>
@@ -790,6 +1422,9 @@
         </ownedAttribute>
         <ownedAttribute name="baseAspects" type="//@packages.0/reflection/TypeDefinition/baseAspects/@containedType.0" isOrdered="true" upper="-1">
           <ownedTag value="/** References to the base classes */"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/TypeDefinition"/>
+        </ownedAttribute>
+        <ownedAttribute name="aspects" type="//@packages.0/reflection/TypeDefinition/aspects/@containedType.0" isOrdered="true" upper="-1" opposite="//@packages.0/reflection/TypeDefinition/baseAspects">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/reflection/TypeDefinition"/>
         </ownedAttribute>
       </ownedTypeDefinition>
@@ -835,20 +1470,21 @@
     <ownedTag value="/**&#xA; * Contains all the abstract classes used in the reflection mechanism. Implements the &lt;b>derived&#xA; * properties&lt;/b> contained in the classes; declares the abstract operations.&#xA; * Concrete implementation is in kermeta.language.structure.&#xA; */"/>
   </requires>
   <requires uri="../persistence/resource.kmt"/>
-  <referencedModellingUnit href="../language/structure.km#/"/>
-  <referencedModellingUnit href="../utils/hashtable.km#/"/>
-  <referencedModellingUnit href="#/"/>
-  <referencedModellingUnit href="../persistence/resource.km#/"/>
-  <referencedModellingUnit href="../Standard.km#/"/>
-  <referencedModellingUnit href="../exceptions/exceptions.km#/"/>
-  <referencedModellingUnit href="../io/file_io.km#/"/>
-  <referencedModellingUnit href="../standard/primitive_types.km#/"/>
-  <referencedModellingUnit href="../utils/stack.km#/"/>
-  <referencedModellingUnit href="../io/std_io.km#/"/>
-  <referencedModellingUnit href="../standard/java.km#/"/>
-  <referencedModellingUnit href="../kunit/kunit.km#/"/>
-  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
-  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
-  <referencedModellingUnit href="../standard/collections.km#/"/>
-  <referencedModellingUnit href="../language/behavior.km#/"/>
-</kermeta_language_structure:CompilationUnit>
+  <referencedModelingUnits href="../standard/collections.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="../utils/stack.km#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../standard/primitive_types.km#/"/>
+  <referencedModelingUnits href="../Standard.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../language/structure.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="../utils/hashtable.km#/"/>
+</kermeta_language_structure:ModelingUnit>

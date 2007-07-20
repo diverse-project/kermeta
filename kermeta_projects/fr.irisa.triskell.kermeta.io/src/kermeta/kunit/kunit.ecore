@@ -1,56 +1,53 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
   <ecore:EAnnotation source="CompilationUnit">
-    <details key="require" value="../Standard.kmt|"/>
-    <details key="using" value="kermeta::standard|kermeta::language::structure|kermeta::utils|"/>
+    <details key="require" value="../Standard.kmt|assert.kmt|"/>
+    <details key="using" value="kermeta::standard|kermeta::utils|kermeta|kermeta::reflection|kermeta::kunit|"/>
   </ecore:EAnnotation>
   <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#/" nsPrefix="kermeta">
     <eSubpackages name="kunit" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/kunit/kunit.ecore#//kunit" nsPrefix="kunit">
-      <eClassifiers xsi:type="ecore:EClass" name="AssertionFailedError">
+      <eClassifiers xsi:type="ecore:EClass" name="InvalidTestCaseNameException">
+        <eAnnotations source="kermeta"/>
         <eSuperTypes href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Assert" abstract="true">
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+      <eClassifiers xsi:type="ecore:EClass" name="InvalidParameterException">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Fallible" abstract="true">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="assert.ecore#/1/kunit/AbstractFallible"/>
+        <eOperations name="getLog" eType="/1/kunit/Log">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.post">
+            <details key="logDefined" value="result.isNotEqual(void)"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="number">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if rank.isVoid then&#xA;&#x9;&#x9;rank := 0&#xA;&#xA;&#x9;end&#xA;&#x9;rank := (rank) + (1)&#xA;&#x9;result := rank&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
+        </eOperations>
         <eOperations name="assert">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init order&#xA;&#x9;if not (bool) then&#xA;&#x9;&#x9;fail(&quot;assert number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;getLog.addFailure(self, &quot;assertion number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assert"/>
           </eAnnotations>
-          <eParameters name="bool">
+          <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
         </eOperations>
-        <eOperations name="assertTrue">
+        <eOperations name="assertWithMsg">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init order&#xA;&#x9;if not (bool) then&#xA;&#x9;&#x9;fail(&quot;assertTrue number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.number&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;getLog.addFailure(self, &quot;assertion number &quot;.plus(number.toString).plus(&quot; failed: &quot;).plus(msg))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assertWithMsg"/>
           </eAnnotations>
-          <eParameters name="bool">
-            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eParameters>
-        </eOperations>
-        <eOperations name="assertTrueWithMsg">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init order&#xA;&#x9;if not (bool) then&#xA;&#x9;&#x9;fail(&quot;assertTrueWithMsg number &quot;.plus(number.toString).plus(&quot; failed : &quot;).plus(msg))&#xA;&#xA;&#x9;end&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="bool">
-            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eParameters>
-          <eParameters name="msg">
-            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
-          </eParameters>
-        </eOperations>
-        <eOperations name="assertFalse">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init order&#xA;&#x9;if bool then&#xA;&#x9;&#x9;fail(&quot;assertTrue number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="bool">
-            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
-          </eParameters>
-        </eOperations>
-        <eOperations name="assertFalseWithMsg">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init order&#xA;&#x9;if bool then&#xA;&#x9;&#x9;fail(&quot;assertTrueWithMsg number &quot;.plus(number.toString).plus(&quot; failed : &quot;).plus(msg))&#xA;&#xA;&#x9;end&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="bool">
+          <eParameters name="condition">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
           </eParameters>
           <eParameters name="msg">
@@ -59,28 +56,288 @@
         </eOperations>
         <eOperations name="fail">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;exception.message := msg&#xA;&#x9;raise exception&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;getLog.addFailure(self, &quot;explicit failure: &quot;.plus(msg))&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/fail"/>
           </eAnnotations>
           <eParameters name="msg">
             <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
           </eParameters>
         </eOperations>
-        <eOperations name="order">
+        <eOperations name="assertTrue">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if rank.isVoid then&#xA;&#x9;&#x9;rank := 0&#xA;&#xA;&#x9;end&#xA;&#x9;rank := (rank) + (1)&#xA;&#x9;result := rank&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;assert(condition)&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assertTrue"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertTrueWithMsg">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;assertWithMsg(condition, message)&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assertTrueWithMsg"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="message">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertFalse">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;assert(not (condition))&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assertFalse"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertFalseWithMsg">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;assertWithMsg(not (condition), message)&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assertFalseWithMsg"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="message">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertEqual">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;assertWithMsg(expected.equals(actual), &quot;&#xA;expected&#x9;:[&quot;.plus(expected).plus(&quot;] != &#xA;actual&#x9;:[&quot;).plus(actual).plus(&quot;]&quot;))&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+            <references href="assert.ecore#/1/kunit/AbstractFallible/assertEqual"/>
+          </eAnnotations>
+          <eParameters name="expected">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+          <eParameters name="actual">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="rank" containment="true">
           <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Test" abstract="true" eSuperTypes="/1/kunit/Assert">
+      <eClassifiers xsi:type="ecore:EClass" name="Log">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="newAttempt">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if (runtests) == (void) then&#xA;&#x9;&#x9;runtests := 0&#xA;&#xA;&#x9;end&#xA;&#x9;runtests := (1) + (runtests)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="addFailure">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;failures.add(kermeta::kunit::Failure.new.initFrom(test, msg))&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="test" eType="/1/kunit/Fallible"/>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="addTestError">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;errors.add(kermeta::kunit::Error.new.initFrom(test, e))&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="test" eType="/1/kunit/Fallible"/>
+          <eParameters name="e">
+            <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="addSetUpError">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;harnessErrors.add(kermeta::kunit::Error.new.initFrom(test, e).makeSetUp)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="test" eType="/1/kunit/Fallible"/>
+          <eParameters name="e">
+            <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="addTearDownError">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;harnessErrors.add(kermeta::kunit::Error.new.initFrom(test, e).makeTearDown)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="test" eType="/1/kunit/Fallible"/>
+          <eParameters name="e">
+            <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+          </eParameters>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="runtests" containment="true">
+          <eAnnotations source="kermeta"/>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="failures" upperBound="-1" eType="/1/kunit/Failure">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="errors" upperBound="-1" eType="/1/kunit/Error">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="harnessErrors" upperBound="-1" eType="/1/kunit/Error">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Failure">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="initFrom" eType="/1/kunit/Failure">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;failure := fallible&#xA;&#x9;message := msg&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="fallible" eType="/1/kunit/Fallible"/>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="toString">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := failure.toString.plus(&quot; &quot;).plus(message)&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="failure" eType="/1/kunit/Fallible"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="message">
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ErrorKind">
+        <eLiterals name="setUpError" literal="setUpError"/>
+        <eLiterals name="testError" value="1" literal="testError"/>
+        <eLiterals name="tearDownError" value="2" literal="tearDownError"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Error">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="initFrom" eType="/1/kunit/Error">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;self.error := error&#xA;&#x9;exception := e&#xA;&#x9;kind := kermeta::kunit::ErrorKind.testError&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="error" eType="/1/kunit/Fallible"/>
+          <eParameters name="e">
+            <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="makeSetUp" eType="/1/kunit/Error">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;kind := kermeta::kunit::ErrorKind.setUpError&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="makeTearDown" eType="/1/kunit/Error">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;kind := kermeta::kunit::ErrorKind.tearDownError&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="toString">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if kind.equals(kermeta::kunit::ErrorKind.testError) then&#xA;&#x9;&#x9;result := error.toString&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := error.getMetaClass.name.plus(&quot;.&quot;)&#xA;&#x9;&#x9;if kind.equals(kermeta::kunit::ErrorKind.setUpError) then&#xA;&#x9;&#x9;&#x9;result := result.plus(&quot;setUp()&quot;)&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;result := result.plus(&quot;tearDown()&quot;)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := result.plus(&quot; raised &quot;).plus(exception.getMetaClass.name)&#xA;&#x9;if exception.message.isNotEqual(void) then&#xA;&#x9;&#x9;result := result.plus(&quot;&#xA;    Caused by: &quot;).plus(exception.message)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := result.plus(&quot;&#xA;    (no message)&quot;)&#xA;&#xA;&#x9;end&#xA;&#x9;if exception.stackTrace.isNotEqual(void) then&#xA;&#x9;&#x9;result := result.plus(&quot;&#xA;    Stack Trace:&#xA;&quot;).plus(exception.stackTrace)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := result.plus(&quot;&#xA;    (no stack trace)&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="error" eType="/1/kunit/Fallible"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="exception">
+          <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="/1/kunit/ErrorKind">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Test" abstract="true">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="initLog" eType="/1/kunit/Log">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;self.log := kermeta::kunit::Log.new&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="setLog">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;self.log := log&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.pre">
+            <details key="paramNotVoid" value="log.isNotEqual(void)"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.post">
+            <details key="logNotVoid" value="self.log.isNotEqual(void)"/>
+          </eAnnotations>
+          <eParameters name="log" eType="/1/kunit/Log"/>
+        </eOperations>
         <eOperations name="run">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
           </eAnnotations>
-          <eParameters name="r" eType="/1/kunit/TestResult"/>
+          <eAnnotations source="kermeta.pre">
+            <details key="logNotVoid" value="self.log.isNotEqual(void)"/>
+          </eAnnotations>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="/1/kunit/Log"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TestSuite" eSuperTypes="/1/kunit/Test">
+        <eAnnotations source="kermeta"/>
+        <eOperations name="run" ordered="false">
+          <eAnnotations source="kermeta" references="/1/kunit/Test/run">
+            <details key="body" value="do&#xA;&#x9;tests.each{t | do&#xA;&#x9;&#x9;&#x9;t.setLog(log)&#xA;&#x9;&#x9;&#x9;t.run&#xA;&#x9;&#x9;end}&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::Test"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="addAllTestCasesFrom" eType="/1/kunit/TestSuite">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if not (testCaseClass.superClass.exists{sc | sc.equals(kermeta::kunit::TestCase)}) then&#xA;&#x9;&#x9;var e : kermeta::exceptions::Exception init kermeta::kunit::InvalidParameterException.new&#xA;&#x9;&#x9;e.message := &quot;Cannot build a suite from class: &quot;.plus(testCaseClass.name)&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;var classDefinition : kermeta::reflection::ClassDefinition&#xA;&#x9;classDefinition ?= testCaseClass.typeDefinition&#xA;&#x9;classDefinition.baseAspects.each{aspect | if aspect.isInstanceOf(kermeta::reflection::ClassDefinition) then&#xA;&#x9;&#x9;&#x9;var castAspect : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;castAspect ?= aspect&#xA;&#x9;&#x9;&#x9;addAllTestCasesFromAspects(testCaseClass, castAspect)&#xA;&#xA;&#x9;&#x9;end}&#xA;&#x9;testCaseClass.ownedOperation.~select{o | ((o.name.size) >= (4)) and (o.name.substring(0, 4).equals(&quot;test&quot;))}.each{o | do&#xA;&#x9;&#x9;&#x9;var testCase : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;testCase ?= testCaseClass.new&#xA;&#x9;&#x9;&#x9;testCase.setTestMethodName(o.name)&#xA;&#x9;&#x9;&#x9;self.tests.add(testCase)&#xA;&#x9;&#x9;end}&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.pre">
+            <details key="testCaseClassIsATestCase" value="testCaseClass.superClass.contains(kermeta::kunit::TestCase)"/>
+          </eAnnotations>
+          <eParameters name="testCaseClass">
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Class"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="addAllTestCasesFromAspects">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;aspect.ownedOperation.~select{o | ((o.name.size) >= (4)) and (o.name.substring(0, 4).equals(&quot;test&quot;))}.each{o | do&#xA;&#x9;&#x9;&#x9;var testCase : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;testCase ?= testCaseClass.new&#xA;&#x9;&#x9;&#x9;testCase.setTestMethodName(o.name)&#xA;&#x9;&#x9;&#x9;self.tests.add(testCase)&#xA;&#x9;&#x9;end}&#xA;&#x9;aspect.baseAspects.each{a | if a.isInstanceOf(kermeta::reflection::ClassDefinition) then&#xA;&#x9;&#x9;&#x9;var castAspect : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;castAspect ?= a&#xA;&#x9;&#x9;&#x9;addAllTestCasesFromAspects(testCaseClass, castAspect)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="testCaseClass">
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Class"/>
+          </eParameters>
+          <eParameters name="aspect">
+            <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/ClassDefinition"/>
+          </eParameters>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tests" upperBound="-1" eType="/1/kunit/Test"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TestCase" abstract="true" eSuperTypes="/1/kunit/Test /1/kunit/Fallible">
+        <eAnnotations source="kermeta"/>
+        <eOperations name="getTestMethodName">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := __testMethodName&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eOperations>
+        <eOperations name="setTestMethodName" eType="/1/kunit/TestCase">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;__testMethodName := name&#xA;&#x9;result := self&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="name">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="getLog" eType="/1/kunit/Log">
+          <eAnnotations source="kermeta" references="/1/kunit/Fallible/getLog">
+            <details key="body" value="do&#xA;&#x9;result := self.log&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::Fallible"/>
+          </eAnnotations>
         </eOperations>
         <eOperations name="setUp">
           <eAnnotations source="kermeta">
@@ -92,223 +349,109 @@
             <details key="body" value="do&#xA;end"/>
           </eAnnotations>
         </eOperations>
-        <eOperations name="runTest">
+        <eOperations name="raiseIfHasFailures">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;end"/>
-          </eAnnotations>
-        </eOperations>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestCase" eSuperTypes="/1/kunit/Test">
-        <eOperations name="initialize">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;self.name := name&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="name">
-            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
-          </eParameters>
-        </eOperations>
-        <eOperations name="run">
-          <eAnnotations source="kermeta" references="/1/kunit/Test/run">
-            <details key="body" value="do&#xA;&#x9;if r.equals(void) then&#xA;&#x9;&#x9;r := createDefaultTestResult&#xA;&#xA;&#x9;end&#xA;&#x9;r.startTest(self)&#xA;&#x9;runTest&#xA;rescue(e : kermeta::kunit::AssertionFailedError)&#xA;&#x9;r.addFailure(self, e)&#xA;&#xA;rescue(e : kermeta::exceptions::Exception)&#xA;&#x9;r.addError(self, e)&#xA;&#xA;end"/>
-            <details key="superOperation" value="kermeta::kunit::Test"/>
-          </eAnnotations>
-          <eParameters name="r" eType="/1/kunit/TestResult"/>
-        </eOperations>
-        <eOperations name="runTest">
-          <eAnnotations source="kermeta" references="/1/kunit/Test/runTest">
-            <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= self.getMetaClass.typeDefinition&#xA;&#x9;if cDef.ownedOperation.detect{o | o.name.equals(name)}.equals(void) then&#xA;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new&#xA;&#x9;&#x9;de.initializeDefaults&#xA;&#x9;&#x9;var selfClassName : kermeta::standard::String init cDef.qualifiedName&#xA;&#x9;&#x9;de.parse(&quot;do var test : &quot;.plus(selfClassName).plus(&quot; init &quot;).plus(selfClassName).plus(&quot;.new&#xA;&quot;).plus(&quot;test.setUp &quot;).plus(&quot;&#xA;test.&quot;).plus(name).plus(&quot;&#xA;test.tearDown end&quot;))&#xA;&#x9;&#x9;de.execute(void, kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::standard::Object>.new)&#xA;&#xA;&#x9;end&#xA;end"/>
-            <details key="superOperation" value="kermeta::kunit::Test"/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="createDefaultTestResult" eType="/1/kunit/TestResult">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::kunit::TestResult.new&#xA;&#x9;result.initialize&#xA;end"/>
-          </eAnnotations>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="name" containment="true">
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestResult">
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eOperations name="initialize">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;runtests := 0&#xA;end"/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="startTest">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;runtests := (1) + (runtests)&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="test" eType="/1/kunit/Test"/>
-        </eOperations>
-        <eOperations name="addFailure">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;failures.add(createTestFailure(test, e))&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="test" eType="/1/kunit/Test"/>
-          <eParameters name="e" eType="/1/kunit/AssertionFailedError"/>
-        </eOperations>
-        <eOperations name="addError">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;errors.add(createTestFailure(test, e))&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="test" eType="/1/kunit/Test"/>
-          <eParameters name="e">
-            <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
-          </eParameters>
-        </eOperations>
-        <eOperations name="createTestFailure" eType="/1/kunit/TestFailure">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::kunit::TestFailure.new&#xA;&#x9;result.failedTest := test&#xA;&#x9;result.raised := e&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="test" eType="/1/kunit/Test"/>
-          <eParameters name="e">
-            <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
-          </eParameters>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="runtests">
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="failures" ordered="false" upperBound="-1" eType="/1/kunit/TestFailure"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="errors" ordered="false" upperBound="-1" eType="/1/kunit/TestFailure"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestFailure">
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="failedTest" eType="/1/kunit/Test"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="raised">
-          <eType xsi:type="ecore:EClass" href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestSuite" eSuperTypes="/1/kunit/Test">
-        <eOperations name="run">
-          <eAnnotations source="kermeta" references="/1/kunit/Test/run">
-            <details key="body" value="do&#xA;&#x9;tests.each{t | t.run(test_result)}&#xA;end"/>
-            <details key="superOperation" value="kermeta::kunit::Test"/>
-          </eAnnotations>
-          <eParameters name="test_result" eType="/1/kunit/TestResult"/>
-        </eOperations>
-        <eOperations name="runTest">
-          <eAnnotations source="kermeta" references="/1/kunit/Test/runTest">
-            <details key="body" value="do&#xA;end"/>
-            <details key="superOperation" value="kermeta::kunit::Test"/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="addTest">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;tests.add(test)&#xA;end"/>
-          </eAnnotations>
-          <eParameters name="test" eType="/1/kunit/Test"/>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="tests" upperBound="-1" eType="/1/kunit/Test"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestLoader">
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eOperations name="initialize" ordered="false">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;methodPrefix := &quot;test&quot;&#xA;&#x9;suiteClass := kermeta::kunit::TestSuite&#xA;end"/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="loadTestMethodsFromTestCase">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::kunit::Test>.new&#xA;&#x9;var test_case : kermeta::kunit::TestCase&#xA;&#x9;var test_ops : kermeta::standard::Sequence&lt;kermeta::reflection::Operation>&#xA;&#x9;test_ops := test_type.ownedOperation.~select{o | ((o.name.size) >= (4)) and (o.name.substring(0, 4).equals(methodPrefix))}&#xA;&#x9;test_ops.each{o | do&#xA;&#x9;&#x9;&#x9;test_case ?= test_type.new&#xA;&#x9;&#x9;&#x9;test_case.initialize(o.name)&#xA;&#x9;&#x9;&#x9;result.add(test_case)&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
-          <eAnnotations source="kermeta.typeVariableBindings">
-            <details key="0" value="kermeta::kunit::Test"/>
-          </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/collections.ecore#/1/standard/Set"/>
-          <eParameters name="test_type">
-            <eType xsi:type="ecore:EClass" href="../language/structure.ecore#/1/language/structure/Class"/>
-          </eParameters>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="methodPrefix" containment="true">
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="suiteClass">
-          <eType xsi:type="ecore:EClass" href="../language/structure.ecore#/1/language/structure/Class"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TestRunner">
-        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
-        <eOperations name="initialize" ordered="false">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;end"/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="createTestResult" eType="/1/kunit/TestResult">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::kunit::TestResult.new&#xA;&#x9;result.initialize&#xA;end"/>
-          </eAnnotations>
-        </eOperations>
-        <eOperations name="createTestLoader" eType="/1/kunit/TestLoader">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::kunit::TestLoader.new&#xA;&#x9;result.initialize&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;var msg : kermeta::standard::String init &quot;&quot;&#xA;&#x9;if not (log.failures.empty) then&#xA;&#x9;&#x9;msg := &quot;Failures: &quot;&#xA;&#x9;&#x9;log.failures.each{f | msg := msg.plus(&quot;&#xA;   &quot;).plus(f.toString)}&#xA;&#x9;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;raise exception&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.errors.empty) then&#xA;&#x9;&#x9;log.errors.each{f | do&#xA;&#x9;&#x9;&#x9;&#x9;msg := &quot;Errors: &quot;&#xA;&#x9;&#x9;&#x9;&#x9;msg := msg.plus(&quot;&#xA;   &quot;).plus(f.toString)&#xA;&#x9;&#x9;&#x9;&#x9;var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new&#xA;&#x9;&#x9;&#x9;&#x9;exception.message := msg&#xA;&#x9;&#x9;&#x9;&#x9;raise exception&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
           </eAnnotations>
         </eOperations>
         <eOperations name="run" ordered="false">
-          <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;var test_loader : kermeta::kunit::TestLoader init createTestLoader&#xA;&#x9;testResult := createTestResult&#xA;&#x9;if not (doesInheritFromTestCase(test_class)) then&#xA;&#x9;&#x9;var msg : kermeta::standard::String init &quot;ERROR : the given class '&quot;.plus(test_class.typeDefinition.name).plus(&quot;' should inherit from TestCase&quot;)&#xA;&#x9;&#x9;stdio.writeln(msg)&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var test_ops : kermeta::standard::Set&lt;kermeta::kunit::Test> init test_loader.loadTestMethodsFromTestCase(test_class)&#xA;&#x9;&#x9;var test_suite : kermeta::kunit::TestSuite init kermeta::kunit::TestSuite.new&#xA;&#x9;&#x9;test_suite.tests.addAll(test_ops)&#xA;&#x9;&#x9;test_suite.run(testResult)&#xA;&#xA;&#x9;end&#xA;end"/>
+          <eAnnotations source="kermeta" references="/1/kunit/Test/run">
+            <details key="body" value="do&#xA;&#x9;getLog.newAttempt&#xA;&#x9;do&#xA;&#x9;&#x9;setUp&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new&#xA;&#x9;&#x9;&#x9;de.initializeDefaults&#xA;&#x9;&#x9;&#x9;de.selfClass ?= self.getMetaClass.typeDefinition&#xA;&#x9;&#x9;&#x9;de.parse(&quot;self.&quot;.plus(self.getTestMethodName))&#xA;&#x9;&#x9;&#x9;de.execute(self, kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::standard::Object>.new)&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;tearDown&#xA;&#x9;&#x9;&#x9;rescue(e : kermeta::exceptions::Exception)&#xA;&#x9;&#x9;&#x9;&#x9;getLog.addTearDownError(self, e)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;rescue(afe : kermeta::kunit::AssertionFailedError)&#xA;&#x9;&#x9;&#x9;getLog.addFailure(self, afe.message.plus(&quot;&#xA;stack trace:&#xA;&quot;).plus(afe.stackTrace))&#xA;&#xA;&#x9;&#x9;rescue(e1 : kermeta::exceptions::Exception)&#xA;&#x9;&#x9;&#x9;getLog.addTestError(self, e1)&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;tearDown&#xA;&#x9;&#x9;&#x9;rescue(e : kermeta::exceptions::Exception)&#xA;&#x9;&#x9;&#x9;&#x9;getLog.addTearDownError(self, e)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;rescue(e : kermeta::exceptions::Exception)&#xA;&#x9;&#x9;getLog.addSetUpError(self, e)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::Test"/>
           </eAnnotations>
-          <eParameters name="test_class">
-            <eType xsi:type="ecore:EClass" href="../language/structure.ecore#/1/language/structure/Class"/>
-          </eParameters>
         </eOperations>
-        <eOperations name="doesInheritFromTestCase">
+        <eOperations name="toString">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;if test_class.superClass.exists{c | c.equals(kermeta::kunit::TestCase)} then&#xA;&#x9;&#x9;result := true&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;result := test_class.superClass.exists{c | doesInheritFromTestCase(c)}&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := self.getMetaClass.name.plus(&quot;.&quot;).plus(getTestMethodName).plus(&quot;()&quot;)&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
           </eAnnotations>
-          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
-          <eParameters name="test_class">
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="__testMethodName" containment="true">
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TestRunner">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="runTest">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;log := kermeta::kunit::Log.new&#xA;&#x9;test.setLog(log)&#xA;&#x9;test.run&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.pre">
+            <details key="testNotVoid" value="test.isNotEqual(void)"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.post">
+            <details key="logNotVoid" value="log.isNotEqual(void)"/>
+          </eAnnotations>
+          <eParameters name="test" eType="/1/kunit/Test"/>
+        </eOperations>
+        <eOperations name="run">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;runTest(kermeta::kunit::TestSuite.new.addAllTestCasesFrom(testCaseClass))&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.pre">
+            <details key="cIsATestCase" value="testCaseClass.superClass.contains(kermeta::kunit::TestCase)"/>
+          </eAnnotations>
+          <eParameters name="testCaseClass">
             <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/Class"/>
           </eParameters>
         </eOperations>
         <eOperations name="printTestResult" ordered="false">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;&#xA;================================== TEST RESULTS ==================================&#xA;&quot;)&#xA;&#x9;stdio.writeln(&quot; Number of launched tests : &quot;.plus(testResult.runtests.toString))&#xA;&#x9;stdio.writeln(&quot; Number of failures : &quot;.plus(testResult.failures.size.toString))&#xA;&#x9;stdio.writeln(&quot; Number of errors : &quot;.plus(testResult.errors.size.toString))&#xA;&#x9;stdio.writeln(&quot;&#xA; Failed : &quot;)&#xA;&#x9;testResult.failures.each{f | do&#xA;&#x9;&#x9;&#x9;var tc : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;tc ?= f.failedTest&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;    ->&quot;.plus(tc.name).plus(&quot;( raised : &quot;).plus(f.raised.message).plus(&quot;)&quot;))&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot; Errors : &quot;)&#xA;&#x9;testResult.errors.each{e | do&#xA;&#x9;&#x9;&#x9;var tc : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;tc ?= e.failedTest&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;    -> &quot;.plus(tc.name).plus(&quot;( raised : &quot;).plus(e.raised.toString).plus(&quot;)&quot;))&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot;&#xA;==================================================================================&#xA;&quot;)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;&#xA;---------------------------------------------  TEST RESULTS-----------------------------------------------&#xA;&quot;)&#xA;&#x9;if not (log.failures.empty) then&#xA;&#x9;&#x9;stdio.writeln(&quot;&#xA;Failures: &quot;)&#xA;&#x9;&#x9;log.failures.each{f | stdio.writeln(&quot;&#xA;   &quot;.plus(f.toString))}&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.errors.empty) then&#xA;&#x9;&#x9;stdio.writeln(&quot;&#xA;Errors: &quot;)&#xA;&#x9;&#x9;log.errors.each{e | stdio.writeln(&quot;&#xA;   &quot;.plus(e.toString))}&#xA;&#xA;&#x9;end&#xA;&#x9;if not (log.harnessErrors.empty) then&#xA;&#x9;&#x9;stdio.writeln(&quot;&#xA;Errors from setUp or tearDown : &quot;)&#xA;&#x9;&#x9;log.harnessErrors.each{e | stdio.writeln(&quot;&#xA;   &quot;.plus(e.toString))}&#xA;&#xA;&#x9;end&#xA;&#x9;stdio.writeln(&quot;&#xA; Summary: &quot;)&#xA;&#x9;stdio.writeln(&quot;   Number of launched tests : &quot;.plus(log.runtests.toString))&#xA;&#x9;stdio.writeln(&quot;   Number of failures : &quot;.plus(log.failures.size.toString))&#xA;&#x9;stdio.writeln(&quot;   Number of errors : &quot;.plus(log.errors.size.toString))&#xA;&#x9;stdio.writeln(&quot;   Number of errors in setUp or tearDown: &quot;.plus(log.harnessErrors.size.toString))&#xA;&#x9;stdio.writeln(&quot;&#xA;-------------------------------------------------------------------------------------------------------------------------------&#xA;&quot;)&#xA;end"/>
           </eAnnotations>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="testClass">
-          <eType xsi:type="ecore:EClass" href="../language/structure.ecore#/1/language/structure/Class"/>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="testResult" eType="/1/kunit/TestResult"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="log" eType="/1/kunit/Log" containment="true"/>
       </eClassifiers>
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../language/structure.ecore#/0"/>
-    <references href="../language/structure.ecore#/1"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../standard/primitive_types.ecore#/0"/>
-    <references href="../standard/primitive_types.ecore#/1"/>
-    <references href="../utils/stack.ecore#/0"/>
-    <references href="../utils/stack.ecore#/1"/>
-    <references href="../io/std_io.ecore#/0"/>
-    <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
-    <references href="../standard/java.ecore#/0"/>
-    <references href="../standard/java.ecore#/1"/>
-    <references href="#/0"/>
-    <references href="#/1"/>
     <references href="../language/reflective_collections.ecore#/0"/>
     <references href="../language/reflective_collections.ecore#/1"/>
     <references href="../language/reflective_collections.ecore#/2"/>
-    <references href="../language/dynamic_expression.ecore#/0"/>
-    <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../standard/collections.ecore#/0"/>
-    <references href="../standard/collections.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="assert.ecore#/0"/>
+    <references href="assert.ecore#/1"/>
     <references href="../language/behavior.ecore#/0"/>
     <references href="../language/behavior.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

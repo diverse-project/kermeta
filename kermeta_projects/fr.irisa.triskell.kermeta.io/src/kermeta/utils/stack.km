@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
   <packages name="kermeta">
     <nestedPackage name="utils">
       <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Stack" superType="//@packages.0/utils/Stack/@containedType.0">
@@ -14,23 +14,25 @@
         <ownedOperation name="push" type="//@packages.0/utils/Stack/push/@containedType.0" isOrdered="true" upper="1">
           <ownedTag value="/**&#xA;  * Push an element in the stack&#xA;  */"/>
           <containedType xsi:type="kermeta_language_structure:VoidType"/>
-          <ownedParameter name="element" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1"/>
           <body xsi:type="kermeta_language_behavior:Block">
             <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@containedType.0"/>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="addAt">
               <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt/@containedType.0"/>
-              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/empty/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.0/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Integer"/>
+                </containedType>
               </parameters>
               <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/utils/Stack/G" name="element"/>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt"/>
               <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Stack/push/@body/@statement.0/@target/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Stack">
                   <typeParamBinding variable="//@packages.0/utils/Stack/G" type="//@packages.0/utils/Stack/G"/>
                 </containedType>
               </target>
-              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/addAt"/>
             </statement>
           </body>
+          <ownedParameter name="element" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1"/>
         </ownedOperation>
         <ownedOperation name="peek" type="//@packages.0/utils/Stack/G" isOrdered="true" upper="1">
           <ownedTag value="/**&#xA;  * Get the element at the top of the stack&#xA;  */"/>
@@ -38,12 +40,12 @@
             <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/utils/Stack/G">
               <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/utils/Stack/G" name="result"/>
               <value xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/utils/Stack/G" name="first">
+                <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/first"/>
                 <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Stack/peek/@body/@statement.0/@value/@target/@containedType.0">
                   <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Stack">
                     <typeParamBinding variable="//@packages.0/utils/Stack/G" type="//@packages.0/utils/Stack/G"/>
                   </containedType>
                 </target>
-                <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/first"/>
               </value>
             </statement>
           </body>
@@ -58,15 +60,13 @@
             </statement>
             <statement xsi:type="kermeta_language_behavior:CallFeature" name="removeAt">
               <staticType href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt/@containedType.0"/>
-              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral">
-                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/empty/@body/@statement.0/@value/@parameters.0/@containedType.0"/>
-              </parameters>
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" staticType="//@packages.0/utils/Stack/push/@body/@statement.0/@parameters.0/@containedType.0"/>
+              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt"/>
               <target xsi:type="kermeta_language_behavior:SelfExpression" staticType="//@packages.0/utils/Stack/pop/@body/@statement.1/@target/@containedType.0">
                 <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@packages.0/utils/Stack">
                   <typeParamBinding variable="//@packages.0/utils/Stack/G" type="//@packages.0/utils/Stack/G"/>
                 </containedType>
               </target>
-              <staticOperation href="../standard/collections.km#//@packages.0/standard/OrderedCollection/removeAt"/>
             </statement>
           </body>
         </ownedOperation>
@@ -75,20 +75,21 @@
   </packages>
   <requires uri="../Standard.kmt"/>
   <usings qualifiedName="kermeta::standard"/>
-  <referencedModellingUnit href="../language/structure.km#/"/>
-  <referencedModellingUnit href="hashtable.km#/"/>
-  <referencedModellingUnit href="../reflection/reflection.km#/"/>
-  <referencedModellingUnit href="../persistence/resource.km#/"/>
-  <referencedModellingUnit href="../Standard.km#/"/>
-  <referencedModellingUnit href="../exceptions/exceptions.km#/"/>
-  <referencedModellingUnit href="../io/file_io.km#/"/>
-  <referencedModellingUnit href="../standard/primitive_types.km#/"/>
-  <referencedModellingUnit href="#/"/>
-  <referencedModellingUnit href="../io/std_io.km#/"/>
-  <referencedModellingUnit href="../standard/java.km#/"/>
-  <referencedModellingUnit href="../kunit/kunit.km#/"/>
-  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
-  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
-  <referencedModellingUnit href="../standard/collections.km#/"/>
-  <referencedModellingUnit href="../language/behavior.km#/"/>
-</kermeta_language_structure:CompilationUnit>
+  <referencedModelingUnits href="../standard/collections.km#/"/>
+  <referencedModelingUnits href="../standard/java.km#/"/>
+  <referencedModelingUnits href="../language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="../persistence/resource.km#/"/>
+  <referencedModelingUnits href="../language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="../reflection/reflection.km#/"/>
+  <referencedModelingUnits href="../kunit/kunit.km#/"/>
+  <referencedModelingUnits href="../kunit/assert.km#/"/>
+  <referencedModelingUnits href="../language/behavior.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="../io/std_io.km#/"/>
+  <referencedModelingUnits href="../standard/primitive_types.km#/"/>
+  <referencedModelingUnits href="../Standard.km#/"/>
+  <referencedModelingUnits href="../io/file_io.km#/"/>
+  <referencedModelingUnits href="../language/structure.km#/"/>
+  <referencedModelingUnits href="../exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="hashtable.km#/"/>
+</kermeta_language_structure:ModelingUnit>

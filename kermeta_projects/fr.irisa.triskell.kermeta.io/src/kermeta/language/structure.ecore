@@ -220,6 +220,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="#/1/language/structure/TypeDefinition"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ModelType"/>
@@ -638,6 +641,9 @@
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/TypeVariable"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ObjectTypeVariable"/>
@@ -670,6 +676,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="VirtualType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/ObjectTypeVariable"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/VirtualType"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
@@ -701,6 +710,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ModelTypeVariable">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeVariable"/>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/VirtualTypeContainer"/>
@@ -822,6 +834,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="ProductType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ProductType"/>
@@ -854,6 +869,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="FunctionType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/FunctionType"/>
@@ -886,6 +904,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Type">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Object"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Type"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
@@ -971,6 +992,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeContainer"/>
           <eSuperTypes href="#/1/language/structure/DataType"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/PrimitiveType"/>
@@ -1041,6 +1065,7 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer">
+          <eAnnotations source="kermeta"/>
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeDefinitionContainer"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
@@ -1102,6 +1127,96 @@
             </eParameters>
           </eOperations>
         </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit">
+          <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/ModelingUnit"/>
+          <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
+          <eOperations name="acceptKMStructureVisitor">
+            <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitModelingUnit(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Require" abstract="true">
+          <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Require"/>
+          <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
+          <eOperations name="acceptKMStructureVisitor">
+            <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitRequire(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Using" abstract="true">
+          <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Using"/>
+          <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
+          <eOperations name="acceptKMStructureVisitor">
+            <eAnnotations source="kermeta" references="/1/language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitUsing(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/structure/KMStructureVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition">
           <eSuperTypes href="#/1/language/structure/NamedElement"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/TypeDefinition"/>
@@ -1134,6 +1249,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="VoidType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/VoidType"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
@@ -1165,6 +1283,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="DataType">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="clone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/TypeDefinition"/>
           <eSuperTypes href="#/1/language/structure/Type"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/DataType"/>
@@ -1204,6 +1325,9 @@
           </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
+          <eAnnotations source="kermeta">
+            <details key="isSemanticallyAbstract" value="deepClone"/>
+          </eAnnotations>
           <eSuperTypes href="#/1/language/structure/DataType"/>
           <eSuperTypes href="../reflection/reflection.ecore#/1/reflection/Enumeration"/>
           <eSuperTypes href="#/1/language/structure/KMStructureVisitable"/>
@@ -1303,8 +1427,11 @@
             </eParameters>
           </eOperations>
         </eClassifiers>
-        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer"/>
+        <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
+          <eAnnotations source="kermeta"/>
+        </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitor" abstract="true" eSuperTypes="/1/language/structure/Object">
+          <eAnnotations source="kermeta"/>
           <eAnnotations source="kermeta.typeParameters">
             <details key="ContextType" value="ContextType"/>
             <details key="ResultType" value="ResultType"/>
@@ -1773,8 +1900,57 @@
               <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
             </eParameters>
           </eOperations>
+          <eOperations name="visitModelingUnit">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/structure/ModelingUnit"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitRequire">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/structure/Require"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitUsing">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/structure/Using"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
         </eClassifiers>
         <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitable" abstract="true">
+          <eAnnotations source="kermeta"/>
           <eOperations name="acceptKMStructureVisitor">
             <eAnnotations source="kermeta">
               <details key="isAbstract" value="true"/>
@@ -1805,45 +1981,52 @@
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="#/0"/>
-    <references href="#/1"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
-    <references href="../reflection/reflection.ecore#/0"/>
-    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="dynamic_expression.ecore#/0"/>
+    <references href="dynamic_expression.ecore#/1"/>
+    <references href="dynamic_expression.ecore#/2"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
     <references href="../persistence/resource.ecore#/2"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
-    <references href="../standard/primitive_types.ecore#/0"/>
-    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="reflective_collections.ecore#/0"/>
+    <references href="reflective_collections.ecore#/1"/>
+    <references href="reflective_collections.ecore#/2"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
+    <references href="behavior.ecore#/0"/>
+    <references href="behavior.ecore#/1"/>
+    <references href="behavior.ecore#/2"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
     <references href="../io/std_io.ecore#/2"/>
-    <references href="../standard/java.ecore#/0"/>
-    <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
-    <references href="reflective_collections.ecore#/0"/>
-    <references href="reflective_collections.ecore#/1"/>
-    <references href="reflective_collections.ecore#/2"/>
-    <references href="dynamic_expression.ecore#/0"/>
-    <references href="dynamic_expression.ecore#/1"/>
-    <references href="../standard/collections.ecore#/0"/>
-    <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
-    <references href="behavior.ecore#/0"/>
-    <references href="behavior.ecore#/1"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>

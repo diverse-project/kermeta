@@ -7,6 +7,7 @@
     <eSubpackages name="reflection" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/reflection/reflection.ecore#//reflection" nsPrefix="reflection">
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
       <eClassifiers xsi:type="ecore:EClass" name="Object" abstract="true">
+        <eAnnotations source="kermeta"/>
         <eOperations name="getMetaClass" eType="/1/reflection/Class">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -118,7 +119,6 @@
           </eAnnotations>
           <eType xsi:type="ecore:EClass" href="../persistence/resource.ecore#/1/persistence/Resource"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" ordered="false" upperBound="-1" eType="/1/reflection/Tag" eOpposite="/1/reflection/Tag/object"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTag" ordered="false" upperBound="-1" eType="/1/reflection/Tag" volatile="true" transient="true" derived="true">
           <eAnnotations source="kermetaderivedProp.setter">
             <details key="body" value="do&#xA;   //TODO: implement setterfor derived property ownedTag&#xA;   raise kermeta::exceptions::NotImplementedException.new &#xA;end"/>
@@ -130,15 +130,24 @@
             <details key="isReadOnly" value="false"/>
           </eAnnotations>
         </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" ordered="false" upperBound="-1" eType="/1/reflection/Tag" eOpposite="/1/reflection/Tag/object">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
-      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" abstract="true" eSuperTypes="/1/reflection/Type">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1" eType="/1/reflection/GenericTypeDefinition"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" ordered="false" upperBound="-1" eType="/1/reflection/TypeVariableBinding" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTypeBinding" ordered="false" upperBound="-1" eType="/1/reflection/TypeVariableBinding" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Class" abstract="true" eSuperTypes="/1/reflection/ParameterizedType">
+        <eAnnotations source="kermeta"/>
         <eOperations name="new" eType="/1/reflection/Object">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -151,27 +160,27 @@
           </eAnnotations>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
           <eAnnotations source="kermetaderivedProp.getter">
             <details key="body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.ownedAttribute&#xA;end"/>
           </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="/1/reflection/Operation" changeable="false" volatile="true" transient="true" derived="true">
           <eAnnotations source="kermeta">
             <details key="isReadOnly" value="true"/>
           </eAnnotations>
-        </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="/1/reflection/Operation" changeable="false" volatile="true" transient="true" derived="true">
           <eAnnotations source="kermetaderivedProp.getter">
             <details key="body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.ownedOperation&#xA;end"/>
           </eAnnotations>
-          <eAnnotations source="kermeta">
-            <details key="isReadOnly" value="true"/>
-          </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" ordered="false" upperBound="-1" eType="/1/reflection/Class" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.superType&#xA;end"/>
-          </eAnnotations>
           <eAnnotations source="kermeta">
             <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= typeDefinition&#xA;&#x9;result := cDef.superType&#xA;end"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/Boolean" changeable="false" volatile="true" transient="true" derived="true">
@@ -194,6 +203,7 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ModelType" abstract="true" eSuperTypes="/1/reflection/Type /1/reflection/TypeDefinition">
+        <eAnnotations source="kermeta"/>
         <eOperations name="new" eType="/1/reflection/Model">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -208,6 +218,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="includedTypeDefinition" ordered="false" upperBound="-1" eType="/1/reflection/TypeDefinition"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Model" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eAnnotations source="kermeta"/>
         <eOperations name="filter" ordered="false" upperBound="-1" eType="/1/reflection/Object">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -247,9 +258,12 @@
           </eAnnotations>
           <eParameters name="objectsToAdd" eType="/1/reflection/Object"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="contents" ordered="false" upperBound="-1" eType="/1/reflection/Object" changeable="false"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="contents" ordered="false" upperBound="-1" eType="/1/reflection/Object" changeable="false">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true" eSuperTypes="/1/reflection/TypedElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
@@ -272,11 +286,13 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true" eSuperTypes="/1/reflection/NamedElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="invOwner" eType="/1/reflection/ClassDefinition" eOpposite="/1/reflection/ClassDefinition/inv"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="preOwner" eType="/1/reflection/Operation" eOpposite="/1/reflection/Operation/pre"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="postOwner" eType="/1/reflection/Operation" eOpposite="/1/reflection/Operation/post"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="/1/reflection/MultiplicityElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
@@ -288,9 +304,10 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="/1/reflection/ClassDefinition" eOpposite="/1/reflection/ClassDefinition/ownedOperation"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" ordered="false" upperBound="-1" eType="/1/reflection/TypeVariable"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" ordered="false" upperBound="-1" eType="/1/reflection/Type"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" ordered="false" upperBound="-1" eType="/1/reflection/Parameter" containment="true" eOpposite="/1/reflection/Parameter/operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1" eType="/1/reflection/Parameter" containment="true" eOpposite="/1/reflection/Parameter/operation"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Tag" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="object" ordered="false" lowerBound="1" upperBound="-1" eType="/1/reflection/Object" eOpposite="/1/reflection/Object/tag"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
@@ -304,6 +321,7 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true" eSuperTypes="/1/reflection/MultiplicityElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="/1/reflection/ClassDefinition" eOpposite="/1/reflection/ClassDefinition/ownedAttribute"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="/1/reflection/Property"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="/1/reflection/Boolean">
@@ -333,37 +351,106 @@
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" ordered="false" upperBound="-1" eType="/1/reflection/Type" containment="true" eOpposite="/1/reflection/Type/typeContainer"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="VirtualTypeContainer" abstract="true" eSuperTypes="/1/reflection/Object">
         <eStructuralFeatures xsi:type="ecore:EReference" name="virtualType" ordered="false" upperBound="-1" eType="/1/reflection/VirtualType" containment="true" eOpposite="/1/reflection/VirtualType/modelType"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" abstract="true" eSuperTypes="/1/reflection/TypeDefinition">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" ordered="false" upperBound="-1" eType="/1/reflection/TypeVariable" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" abstract="true" eSuperTypes="/1/reflection/TypeContainer /1/reflection/GenericTypeDefinition">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" containment="true" eOpposite="/1/reflection/Property/owningClass"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="/1/reflection/Operation" containment="true" eOpposite="/1/reflection/Operation/owningClass"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" containment="true" eOpposite="/1/reflection/Property/owningClass">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="/1/reflection/Operation" containment="true" eOpposite="/1/reflection/Operation/owningClass">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="inv" ordered="false" upperBound="-1" eType="/1/reflection/Constraint" containment="true" eOpposite="/1/reflection/Constraint/invOwner"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="superType" ordered="false" upperBound="-1" eType="/1/reflection/Class"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="allOwnedAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
-          <eAnnotations source="kermetaderivedProp.getter">
-            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;result.addAll(self.ownedAttribute)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;cDef ?= t.typeDefinition&#xA;&#x9;&#x9;&#x9;cDef.allOwnedAttribute.each{p | result.add(p)}&#xA;&#x9;&#x9;end}&#xA;end"/>
-          </eAnnotations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superType" ordered="false" upperBound="-1" eType="/1/reflection/Class">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
           <eAnnotations source="kermeta">
             <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;result.addAll(self.ownedAttribute)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;cDef ?= t.typeDefinition&#xA;&#x9;&#x9;&#x9;cDef.allAttribute.each{p | result.add(p)}&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCompositeAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.ownedAttribute.each{oa | if (oa.isComposite) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allCompositeAttribute" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.allAttribute.each{oa | if (oa.isComposite) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributeAsReference" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.ownedAttribute.each{oa | if (not (oa.isComposite)) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allAttributeAsReference" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.allAttribute.each{oa | if (not (oa.isComposite)) and (not (oa.isDerived)) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributeAsProperty" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.ownedAttribute.each{oa | if (not (oa.isComposite)) and (oa.isDerived) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allAttributeAsProperty" ordered="false" upperBound="-1" eType="/1/reflection/Property" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;self.allAttribute.each{oa | if (not (oa.isComposite)) and (oa.isDerived) then&#xA;&#x9;&#x9;&#x9;result.add(oa)&#xA;&#xA;&#x9;&#x9;end}&#xA;end"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="allOperation" ordered="false" upperBound="-1" eType="/1/reflection/Operation" changeable="false" volatile="true" transient="true" derived="true">
+          <eAnnotations source="kermeta">
+            <details key="isReadOnly" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermetaderivedProp.getter">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Operation>.new&#xA;&#x9;result.addAll(self.ownedOperation)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;cDef ?= t.typeDefinition&#xA;&#x9;&#x9;&#x9;cDef.allOperation.each{p | result.add(p)}&#xA;&#x9;&#x9;end}&#xA;end"/>
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="/1/reflection/TypeContainer /1/reflection/NamedElement">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="/1/reflection/Type"/>
+        <eAnnotations source="kermeta"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="/1/reflection/Type">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true" eSuperTypes="/1/reflection/TypeContainer /1/reflection/Type /1/reflection/NamedElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="/1/reflection/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ObjectTypeVariable" abstract="true" eSuperTypes="/1/reflection/TypeContainer /1/reflection/TypeVariable"/>
@@ -377,10 +464,12 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1" upperBound="-1" eType="/1/reflection/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="FunctionType" abstract="true" eSuperTypes="/1/reflection/TypeContainer /1/reflection/Type">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="/1/reflection/Type"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="/1/reflection/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eAnnotations source="kermeta"/>
         <eOperations name="isInstance" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -400,9 +489,11 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="/1/reflection/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="/1/reflection/TypeContainer /1/reflection/DataType">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" eType="/1/reflection/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eAnnotations source="kermeta"/>
         <eOperations name="qualifiedName" eType="/1/reflection/String">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;var elem : kermeta::reflection::NamedElement init self&#xA;&#x9;result := self.name&#xA;&#x9;from elem ?= elem.container&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;result := elem.name.plus(&quot;::&quot;).plus(result)&#xA;&#x9;&#x9;elem ?= elem.container&#xA;&#x9;end&#xA;end"/>
@@ -414,11 +505,15 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="SelfType" abstract="true" eSuperTypes="/1/reflection/Type"/>
+      <eClassifiers xsi:type="ecore:EClass" name="SelfType" abstract="true" eSuperTypes="/1/reflection/Type">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" abstract="true" eSuperTypes="/1/reflection/NamedElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeDefinition" ordered="false" upperBound="-1" eType="/1/reflection/TypeDefinition" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Package" abstract="true" eSuperTypes="/1/reflection/TypeDefinitionContainer">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false" upperBound="-1" eType="/1/reflection/Package" containment="true" eOpposite="/1/reflection/Package/nestingPackage"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="nestingPackage" eType="/1/reflection/Package" eOpposite="/1/reflection/Package/nestedPackage"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="/1/reflection/String">
@@ -427,70 +522,102 @@
           </eAnnotations>
         </eStructuralFeatures>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="packages" ordered="false" upperBound="-1" eType="/1/reflection/Package" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="requires" ordered="false" upperBound="-1" eType="/1/reflection/Require" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="usings" ordered="false" upperBound="-1" eType="/1/reflection/Using" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="referencedModelingUnits" ordered="false" upperBound="-1" eType="/1/reflection/ModelingUnit"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTags" ordered="false" upperBound="-1" eType="/1/reflection/Tag" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Require" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="/1/reflection/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Using" abstract="true" eSuperTypes="/1/reflection/Object">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="/1/reflection/String">
+          <eAnnotations source="kermeta">
+            <details key="isComposite" value="true"/>
+          </eAnnotations>
+        </eStructuralFeatures>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" abstract="true" eSuperTypes="/1/reflection/NamedElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="/1/reflection/Boolean">
           <eAnnotations source="kermeta">
             <details key="isComposite" value="true"/>
           </eAnnotations>
         </eStructuralFeatures>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="/1/reflection/TypeDefinition"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1" eType="/1/reflection/TypeDefinition">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1" eType="/1/reflection/TypeDefinition" eOpposite="/1/reflection/TypeDefinition/baseAspects"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="VoidType" abstract="true" eSuperTypes="/1/reflection/Type"/>
-      <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="/1/reflection/TypeDefinition /1/reflection/Type"/>
+      <eClassifiers xsi:type="ecore:EClass" name="VoidType" abstract="true" eSuperTypes="/1/reflection/Type">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="/1/reflection/TypeDefinition /1/reflection/Type">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Enumeration" abstract="true" eSuperTypes="/1/reflection/DataType">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" ordered="false" upperBound="-1" eType="/1/reflection/EnumerationLiteral" containment="true" eOpposite="/1/reflection/EnumerationLiteral/enumeration"/>
+        <eAnnotations source="kermeta"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" ordered="false" upperBound="-1" eType="/1/reflection/EnumerationLiteral" containment="true" eOpposite="/1/reflection/EnumerationLiteral/enumeration">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" abstract="true" eSuperTypes="/1/reflection/NamedElement">
+        <eAnnotations source="kermeta"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" eType="/1/reflection/Enumeration" eOpposite="/1/reflection/Enumeration/ownedLiteral"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true" eSuperTypes="/1/reflection/MultiplicityElement">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="/1/reflection/Operation" eOpposite="/1/reflection/Operation/ownedParameter"/>
+        <eAnnotations source="kermeta"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="/1/reflection/Operation" eOpposite="/1/reflection/Operation/ownedParameter">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="java.lang.Integer">
+        <eAnnotations source="kermeta"/>
+      </eClassifiers>
     </eSubpackages>
   </ecore:EPackage>
   <ecore:EAnnotation source="dependentResource">
-    <references href="../language/structure.ecore#/0"/>
-    <references href="../language/structure.ecore#/1"/>
-    <references href="../language/structure.ecore#/2"/>
-    <references href="../utils/hashtable.ecore#/0"/>
-    <references href="../utils/hashtable.ecore#/1"/>
-    <references href="#/0"/>
-    <references href="#/1"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
     <references href="../persistence/resource.ecore#/0"/>
     <references href="../persistence/resource.ecore#/1"/>
-    <references href="../persistence/resource.ecore#/2"/>
-    <references href="../Standard.ecore#/0"/>
-    <references href="../Standard.ecore#/1"/>
-    <references href="../exceptions/exceptions.ecore#/0"/>
-    <references href="../exceptions/exceptions.ecore#/1"/>
-    <references href="../io/file_io.ecore#/0"/>
-    <references href="../io/file_io.ecore#/1"/>
-    <references href="../io/file_io.ecore#/2"/>
-    <references href="../standard/primitive_types.ecore#/0"/>
-    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
     <references href="../utils/stack.ecore#/0"/>
     <references href="../utils/stack.ecore#/1"/>
     <references href="../utils/stack.ecore#/2"/>
     <references href="../io/std_io.ecore#/0"/>
     <references href="../io/std_io.ecore#/1"/>
-    <references href="../io/std_io.ecore#/2"/>
-    <references href="../standard/java.ecore#/0"/>
-    <references href="../standard/java.ecore#/1"/>
-    <references href="../standard/java.ecore#/2"/>
-    <references href="../kunit/kunit.ecore#/0"/>
-    <references href="../kunit/kunit.ecore#/1"/>
-    <references href="../kunit/kunit.ecore#/2"/>
-    <references href="../language/reflective_collections.ecore#/0"/>
-    <references href="../language/reflective_collections.ecore#/1"/>
-    <references href="../language/reflective_collections.ecore#/2"/>
-    <references href="../language/dynamic_expression.ecore#/0"/>
-    <references href="../language/dynamic_expression.ecore#/1"/>
-    <references href="../language/dynamic_expression.ecore#/2"/>
-    <references href="../standard/collections.ecore#/0"/>
-    <references href="../standard/collections.ecore#/1"/>
-    <references href="../standard/collections.ecore#/2"/>
-    <references href="../language/behavior.ecore#/0"/>
-    <references href="../language/behavior.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
   </ecore:EAnnotation>
 </xmi:XMI>
