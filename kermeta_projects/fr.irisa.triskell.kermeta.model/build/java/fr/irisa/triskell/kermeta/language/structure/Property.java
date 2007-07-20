@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Property.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: Property.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -16,15 +16,15 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOpposite <em>Opposite</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsReadOnly <em>Is Read Only</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getDefault <em>Default</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsComposite <em>Is Composite</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsDerived <em>Is Derived</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#isIsID <em>Is ID</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,6 +39,86 @@ public interface Property extends MultiplicityElement {
 	 * @generated
 	 */
 	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * Returns the value of the '<em><b>Getter Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Getter Body</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Getter Body</em>' containment reference.
+	 * @see #setGetterBody(Expression)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_GetterBody()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	Expression getGetterBody();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Getter Body</em>' containment reference.
+	 * @see #getGetterBody()
+	 * @generated
+	 */
+	void setGetterBody(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Setter Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Setter Body</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Setter Body</em>' containment reference.
+	 * @see #setSetterBody(Expression)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_SetterBody()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	Expression getSetterBody();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Setter Body</em>' containment reference.
+	 * @see #getSetterBody()
+	 * @generated
+	 */
+	void setSetterBody(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Owning Class</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute <em>Owned Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Class</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Class</em>' container reference.
+	 * @see #setOwningClass(ClassDefinition)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_OwningClass()
+	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute
+	 * @model opposite="ownedAttribute" transient="false"
+	 * @generated
+	 */
+	ClassDefinition getOwningClass();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Class</em>' container reference.
+	 * @see #getOwningClass()
+	 * @generated
+	 */
+	void setOwningClass(ClassDefinition value);
 
 	/**
 	 * Returns the value of the '<em><b>Opposite</b></em>' reference.
@@ -198,85 +278,5 @@ public interface Property extends MultiplicityElement {
 	 * @generated
 	 */
 	void setIsID(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Getter Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Getter Body</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Getter Body</em>' containment reference.
-	 * @see #setGetterBody(Expression)
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_GetterBody()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	Expression getGetterBody();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#getGetterBody <em>Getter Body</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Getter Body</em>' containment reference.
-	 * @see #getGetterBody()
-	 * @generated
-	 */
-	void setGetterBody(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Setter Body</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Setter Body</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Setter Body</em>' containment reference.
-	 * @see #setSetterBody(Expression)
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_SetterBody()
-	 * @model containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	Expression getSetterBody();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#getSetterBody <em>Setter Body</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Setter Body</em>' containment reference.
-	 * @see #getSetterBody()
-	 * @generated
-	 */
-	void setSetterBody(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Owning Class</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute <em>Owned Attribute</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owning Class</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owning Class</em>' container reference.
-	 * @see #setOwningClass(ClassDefinition)
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getProperty_OwningClass()
-	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute
-	 * @model opposite="ownedAttribute" transient="false"
-	 * @generated
-	 */
-	ClassDefinition getOwningClass();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Property#getOwningClass <em>Owning Class</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Class</em>' container reference.
-	 * @see #getOwningClass()
-	 * @generated
-	 */
-	void setOwningClass(ClassDefinition value);
 
 } // Property

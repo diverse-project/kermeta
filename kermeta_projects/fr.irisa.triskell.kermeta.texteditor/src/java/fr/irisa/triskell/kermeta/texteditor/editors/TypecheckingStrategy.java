@@ -1,4 +1,4 @@
-/* $Id: TypecheckingStrategy.java,v 1.5 2007-06-27 12:59:08 cfaucher Exp $
+/* $Id: TypecheckingStrategy.java,v 1.6 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : TypecheckingStrategy.java
 * License : EPL
@@ -20,14 +20,15 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.util2.KermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
-import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 
 public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 
@@ -68,12 +69,14 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 				job = new Job("Typechecking " + editor.getFile().getFullPath().toString()) {
 					
 					public IStatus run(IProgressMonitor monitor) {
-						KermetaUnitHelper.unloadAllKermetaUnit();
 						//KermetaUnitHelper.unloadKermetaUnit( editor.getMcunit() );
 						KermetaMarkersHelper.clearMarkers(editor.getFile());
-						KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( editor.getFile(), editor.getFileContent() );
 						
-						if ( ! kermetaUnit.messages.hasError() ) {
+						IOPlugin.getDefault().unload( editor.getFile() );
+						
+						KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile( editor.getFile(), editor.getFileContent() );
+						
+						if ( ! kermetaUnit.isErrored() ) {
 							KermetaConstraintChecker checker = new KermetaConstraintChecker(kermetaUnit);
 							checker.checkUnit();
 						}
@@ -108,9 +111,7 @@ public class TypecheckingStrategy implements IReconcilingStrategy, Interest {
 					public IStatus run(IProgressMonitor monitor) {
 			
 						KermetaUnitHelper.abortTypechecking(editor.getFile());
-		
-						KermetaUnitHelper.unloadAllKermetaUnit();
-						
+								
 						Unit unit = editor.getUnit();
 						KermetaUnitHost.getInstance().declareInterest(interest, unit);
 						

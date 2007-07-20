@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.21 2007-07-03 12:54:55 dtouzet Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.22 2007-07-20 15:07:49 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -137,13 +137,13 @@ public class RuntimeObjectFactory {
 	private RuntimeObject getClassReflectiveSequenceOtTypeParamBinding() 
 	{
 	    if (classReflectiveSequenceOtTypeParamBinding == null) {
-	    	fr.irisa.triskell.kermeta.language.structure.Class fc = memory.getUnit().struct_factory.createClass();
-		    fc.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+	    	fr.irisa.triskell.kermeta.language.structure.Class fc = StructureFactory.eINSTANCE.createClass();
+		    fc.setTypeDefinition((ClassDefinition)memory.getUnit().getTypeDefinitionByQualifiedName("kermeta::language::ReflectiveSequence"));
 		    
-		    fr.irisa.triskell.kermeta.language.structure.Class tpb_class = memory.getUnit().struct_factory.createClass();
-		    tpb_class.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::structure::TypeVariableBinding"));
+		    fr.irisa.triskell.kermeta.language.structure.Class tpb_class = StructureFactory.eINSTANCE.createClass();
+		    tpb_class.setTypeDefinition((ClassDefinition)memory.getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::TypeVariableBinding"));
 		    
-		    TypeVariableBinding binding = memory.getUnit().struct_factory.createTypeVariableBinding();
+		    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 		    binding.setVariable((TypeVariable)fc.getTypeDefinition().getTypeParameter().get(0));
 		    binding.setType(tpb_class);
 		    
@@ -266,9 +266,10 @@ public class RuntimeObjectFactory {
 		RuntimeObject result = new RuntimeObject(this, meta_class);
 		if(meta_class.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 			fr.irisa.triskell.kermeta.language.structure.Class the_class = (fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject");
-			SimpleType t = (new SimpleType(the_class)); 
+			SimpleType t = new SimpleType(the_class); 
 			if (t.isSemanticallyAbstract()) {
 				//throw new Error("Kermeta Runtime Error: Unable to instantiate semantically abstract class " + FTypePrettyPrinter.getInstance().accept(the_class));
+				SimpleType t1 = new SimpleType(the_class);
 				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::AbstractClassInstantiationError",
 						"Unable to instantiate semantically abstract class " + FTypePrettyPrinter.getInstance().accept(the_class) + "; " +t.getSemanticallyAbstractCause(),
 						meta_class.getFactory().memory.getCurrentInterpreter(),
@@ -667,8 +668,8 @@ public class RuntimeObjectFactory {
      */
     public RuntimeObject createRuntimeObjectFromResource(Resource emfRes, RuntimeObject repRO, RuntimeObject mmUriRO) {
     	// Allocate RO for the resource to be created
-    	GenericTypeDefinition resClassDef  = (GenericTypeDefinition) this.getMemory().getUnit().typeDefinitionLookup("kermeta::persistence::EMFResource");
-	    fr.irisa.triskell.kermeta.language.structure.Class resClass = this.getMemory().getUnit().struct_factory.createClass();
+    	GenericTypeDefinition resClassDef  = (GenericTypeDefinition) this.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::persistence::EMFResource");
+	    fr.irisa.triskell.kermeta.language.structure.Class resClass = StructureFactory.eINSTANCE.createClass();
 	    resClass.setTypeDefinition(resClassDef);
 	    RuntimeObject metaclassRO = repRO.getFactory().getMemory().getRuntimeObjectForFObject(resClass);
 

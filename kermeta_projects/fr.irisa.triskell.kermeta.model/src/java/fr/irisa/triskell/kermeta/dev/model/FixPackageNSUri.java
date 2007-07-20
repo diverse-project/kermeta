@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.7 2007-07-12 07:39:08 cfaucher Exp $
+/* $Id: FixPackageNSUri.java,v 1.8 2007-07-20 15:09:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL

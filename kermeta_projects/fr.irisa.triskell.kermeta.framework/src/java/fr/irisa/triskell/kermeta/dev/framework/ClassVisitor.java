@@ -1,4 +1,4 @@
-/* $Id: ClassVisitor.java,v 1.6 2006-12-07 08:53:07 dvojtise Exp $
+/* $Id: ClassVisitor.java,v 1.7 2007-07-20 15:08:39 ftanguy Exp $
  * Project   : Kermeta framework
  * File      : ClassVisitor.java
  * License   : EPL
@@ -11,18 +11,21 @@
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallResult;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
@@ -52,15 +55,15 @@ public class ClassVisitor extends KermetaVisitor {
 	
 	public void createVisitorForPackage(Package pkg, String visitor_name) {
 		// Create visitor
-		visitor = unit.struct_factory.createClassDefinition();
+		visitor = StructureFactory.eINSTANCE.createClassDefinition();
 		visitor.setName(visitor_name + "Visitor");
 		visitor.setIsAbstract(true);
-		ObjectTypeVariable typevar = unit.struct_factory.createObjectTypeVariable();
+		ObjectTypeVariable typevar = StructureFactory.eINSTANCE.createObjectTypeVariable();
 		typevar.setName("ContextType");
 		visitor.getTypeParameter().add(typevar);
 		
 		// Create visitable
-		visitable = unit.struct_factory.createClassDefinition();
+		visitable = StructureFactory.eINSTANCE.createClassDefinition();
 		visitable.setName(visitor_name + "Visitable");
 		visitable.setIsAbstract(true);
 		
@@ -90,18 +93,18 @@ public class ClassVisitor extends KermetaVisitor {
 	
 	protected Operation buildAcceptOp() {
 		Operation result;
-		result = unit.struct_factory.createOperation();
+		result = StructureFactory.eINSTANCE.createOperation();
 		result.setSuperOperation(acceptOp);
 		result.setName("accept" + visitor.getName());
-		ObjectTypeVariable typevar = unit.struct_factory.createObjectTypeVariable();
+		ObjectTypeVariable typevar = StructureFactory.eINSTANCE.createObjectTypeVariable();
 		typevar.setName("ContextType");
 		result.getTypeParameter().add(typevar);
 		// visitor : Visitor<ContextType>
-		Parameter p1 = unit.struct_factory.createParameter();
+		Parameter p1 = StructureFactory.eINSTANCE.createParameter();
 		p1.setName("visitor");
-		fr.irisa.triskell.kermeta.language.structure.Class p1Type = unit.struct_factory.createClass();
+		fr.irisa.triskell.kermeta.language.structure.Class p1Type = StructureFactory.eINSTANCE.createClass();
 		p1Type.setTypeDefinition(visitor);
-		TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
+		TypeVariableBinding bind = StructureFactory.eINSTANCE.createTypeVariableBinding();
 		bind.setVariable((ObjectTypeVariable)visitor.getTypeParameter().get(0));
 		bind.setType(typevar);
 		p1Type.getTypeParamBinding().add(bind);
@@ -109,7 +112,7 @@ public class ClassVisitor extends KermetaVisitor {
 		p1.setUpper(1);
 		result.getOwnedParameter().add(p1);
 		// context : ContextType
-		Parameter p2 = unit.struct_factory.createParameter();
+		Parameter p2 = StructureFactory.eINSTANCE.createParameter();
 		p2.setName("context");
 		p2.setType(typevar);
 		p2.setUpper(1);
@@ -134,29 +137,29 @@ public class ClassVisitor extends KermetaVisitor {
 		
 		
 		// Make the class inherit from visitable :
-		fr.irisa.triskell.kermeta.language.structure.Class visitable_class = unit.struct_factory.createClass();
+		fr.irisa.triskell.kermeta.language.structure.Class visitable_class = StructureFactory.eINSTANCE.createClass();
 		visitable_class.setTypeDefinition(visitable);
 		
 		arg0.getSuperType().add(visitable_class);
 		
 		Operation result = buildAcceptOp();
 		// Body :
-		Assignment ass = unit.behav_factory.createAssignment();
-		CallResult res = unit.behav_factory.createCallResult();
+		Assignment ass = BehaviorFactory.eINSTANCE.createAssignment();
+		CallResult res = BehaviorFactory.eINSTANCE.createCallResult();
 		ass.setTarget(res);
-		CallFeature fc = unit.behav_factory.createCallFeature();
-		CallVariable cvisit = unit.behav_factory.createCallVariable();
+		CallFeature fc = BehaviorFactory.eINSTANCE.createCallFeature();
+		CallVariable cvisit = BehaviorFactory.eINSTANCE.createCallVariable();
 		cvisit.setName("visitor");
 		fc.setTarget(cvisit);
 		fc.setName("visit" + arg0.getName());
-		SelfExpression self = unit.behav_factory.createSelfExpression();
-		CallVariable varcontext = unit.behav_factory.createCallVariable();
+		SelfExpression self = BehaviorFactory.eINSTANCE.createSelfExpression();
+		CallVariable varcontext = BehaviorFactory.eINSTANCE.createCallVariable();
 		varcontext.setName("context");
 		fc.getParameters().add(self);
 		fc.getParameters().add(varcontext);
 		ass.setIsCast(false);
 		ass.setValue(fc);
-		Block block = unit.behav_factory.createBlock();
+		Block block = BehaviorFactory.eINSTANCE.createBlock();
 		block.getStatement().add(ass);
 		result.setBody(block);
 		result.setUpper(1);
@@ -164,18 +167,18 @@ public class ClassVisitor extends KermetaVisitor {
 		// And then add visit<> to visitor
 		// operation visitObject(node : Object, context : ContextType) : ContextType is abstract
 		Operation visitOp;
-		visitOp = unit.struct_factory.createOperation();
+		visitOp = StructureFactory.eINSTANCE.createOperation();
 		visitOp.setName("visit"+arg0.getName());
 		visitOp.setIsAbstract(true);
 		// create params
-		fr.irisa.triskell.kermeta.language.structure.Class nodeClass = unit.struct_factory.createClass();
+		fr.irisa.triskell.kermeta.language.structure.Class nodeClass = StructureFactory.eINSTANCE.createClass();
 		nodeClass.setTypeDefinition(arg0);
-		Parameter pv1 = unit.struct_factory.createParameter();
+		Parameter pv1 = StructureFactory.eINSTANCE.createParameter();
 		pv1.setName("node");
 		pv1.setType(nodeClass);
 		pv1.setUpper(1);
 		visitOp.getOwnedParameter().add(pv1);
-		Parameter pv2 = unit.struct_factory.createParameter();
+		Parameter pv2 = StructureFactory.eINSTANCE.createParameter();
 		pv2.setName("context");
 		pv2.setType((Type)visitor.getTypeParameter().get(0));
 		pv2.setUpper(1);

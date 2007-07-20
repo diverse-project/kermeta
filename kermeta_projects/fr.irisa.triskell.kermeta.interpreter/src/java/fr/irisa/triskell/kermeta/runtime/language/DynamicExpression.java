@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.7 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: DynamicExpression.java,v 1.8 2007-07-20 15:07:47 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : EPL
@@ -13,15 +13,17 @@ package fr.irisa.triskell.kermeta.runtime.language;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.kermeta.io.ErrorMessage;
+
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 
 /*
@@ -58,7 +60,7 @@ public class DynamicExpression {
 	    if (cdef == null) throw new Error("NOT IMPLEMENTED");
 	    
 		java.lang.String stringExpression = String.getValue(expression);
-		DynamicExpressionUnit dynamicExpressionUnit = new DynamicExpressionUnit(self.getFactory().getMemory().getUnit().packages);
+		DynamicExpressionUnit dynamicExpressionUnit = new DynamicExpressionUnit( self.getFactory().getMemory().getUnit() );
 		self.getData().put("DynamicExpressionUnit", dynamicExpressionUnit);
 		
 	    try {
@@ -82,11 +84,12 @@ public class DynamicExpression {
         self.getProperties().put("expression", parsed_expression);
 		
 		// the expression's creation process in the parse method of DynamicExpressionUnit may have find errors
-		if ( ! dynamicExpressionUnit.messages.hasError() ) dynamicExpressionUnit.typeCheck(null);
+		if ( ! dynamicExpressionUnit.isErrored() ) 
+			dynamicExpressionUnit.typeCheck(null);
 
 //	    if (!deu.messages.hasError()) deu.typeCheck(null);
 	    
-	    if ( ! dynamicExpressionUnit.messages.hasError() ) {
+	    if ( ! dynamicExpressionUnit.isErrored() ) {
 	       // RuntimeObject parsed_expression = self.getFactory().getMemory().getRuntimeObjectForFObject(dynamicExpressionUnit.getExpression());
 	        self.getProperties().put("expression", parsed_expression);
 	        return self.getFactory().getMemory().trueINSTANCE;
@@ -95,10 +98,9 @@ public class DynamicExpression {
 	    	// First : get the collection which will receive found errors
 		    RuntimeObject errors = (RuntimeObject)self.getProperties().get("errors");
 		    
-		    for (java.util.Iterator iter = dynamicExpressionUnit.messages.getAllErrors().iterator(); iter.hasNext();) {
-		    	KMUnitError er = (KMUnitError)iter.next();
-		    	RuntimeObject pe = self.getFactory().createObjectFromClassName("kermeta::interpreter::ParseError");
-		    	RuntimeObject s = String.create(er.getMessage(), self.getFactory());
+		    for ( ErrorMessage message : KermetaUnitHelper.getErrors(dynamicExpressionUnit) ) {
+		       	RuntimeObject pe = self.getFactory().createObjectFromClassName("kermeta::interpreter::ParseError");
+		    	RuntimeObject s = String.create( message.getValue(), self.getFactory());
 		    	pe.getProperties().put("message", s);
 		    	
 		    	// adding found ParseError to the DynamicExpression collection

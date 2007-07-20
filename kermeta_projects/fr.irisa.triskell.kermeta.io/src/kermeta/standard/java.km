@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+  <packages name="kermeta">
+    <nestedPackage name="standard">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="UnknownJavaObject" superType="//@packages.0/standard/UnknownJavaObject/@containedType.0">
+        <ownedTag value="/** &#xA;  * This special object is used to represent java object that cannot be concretly used with kermeta&#xA;  * the only actions possible on these objects are : assignment and passing them as parameter&#xA;  */"/>
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
+        </containedType>
+        <ownedOperation name="toString" type="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
+          <body xsi:type="kermeta_language_behavior:Block">
+            <staticType href="primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Assignment">
+              <staticType href="primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/standard/UnknownJavaObject/toString/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:StringLiteral" value="toString of  UnknownJavaObject not implemented yet">
+                <staticType href="primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+              </value>
+            </statement>
+          </body>
+          <superOperation href="../language/structure.km#//@packages.0/language/structure/Object/toString"/>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </nestedPackage>
+  </packages>
+  <requires uri="primitive_types.kmt">
+    <ownedTag value="/**&#xA; * $Id: java.km,v 1.2 2007-07-20 15:08:12 ftanguy Exp $&#xA; * Contains types dedicated to dealing with java objects&#xA; */"/>
+  </requires>
+  <usings qualifiedName="kermeta::exceptions"/>
+  <referencedModellingUnit href="../language/structure.km#/"/>
+  <referencedModellingUnit href="../utils/hashtable.km#/"/>
+  <referencedModellingUnit href="../reflection/reflection.km#/"/>
+  <referencedModellingUnit href="../persistence/resource.km#/"/>
+  <referencedModellingUnit href="../Standard.km#/"/>
+  <referencedModellingUnit href="../exceptions/exceptions.km#/"/>
+  <referencedModellingUnit href="../io/file_io.km#/"/>
+  <referencedModellingUnit href="primitive_types.km#/"/>
+  <referencedModellingUnit href="../utils/stack.km#/"/>
+  <referencedModellingUnit href="../io/std_io.km#/"/>
+  <referencedModellingUnit href="#/"/>
+  <referencedModellingUnit href="../kunit/kunit.km#/"/>
+  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
+  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
+  <referencedModellingUnit href="collections.km#/"/>
+  <referencedModellingUnit href="../language/behavior.km#/"/>
+</kermeta_language_structure:CompilationUnit>

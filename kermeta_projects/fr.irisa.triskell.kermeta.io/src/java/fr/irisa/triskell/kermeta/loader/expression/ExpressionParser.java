@@ -1,27 +1,32 @@
-/* $Id: ExpressionParser.java,v 1.9 2006-05-03 15:04:23 zdrey Exp $
+/* $Id: ExpressionParser.java,v 1.10 2007-07-20 15:08:15 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
 * Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
-* Creation date : 15 févr. 2005
+* Creation date : 15 fï¿½vr. 2005
 * Author : Franck Fleurey
 */
 package fr.irisa.triskell.kermeta.loader.expression;
 
+
 import java.io.StringReader;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
+
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
+import fr.irisa.triskell.kermeta.ast.FExpression;
+import fr.irisa.triskell.kermeta.ast.OperationBody;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
-import fr.irisa.triskell.kermeta.ast.PrimitiveExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPrimitiveExpressionBuilder;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoader;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 
@@ -37,22 +42,24 @@ public class ExpressionParser {
 	 * @param str A string that is supposed to be a Kermeta expression 
 	 * @return the model element representing an Expression.
 	 */
-	public static Expression parse(KermetaUnit unit, String str) {
+	public static Expression parse(LoadingContext context, KermetaUnit unit, String str) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
-		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = null;
+		FExpression  ast_exp = null;
 		try {
 			ast_exp = parser.asingleExpression().getFExpression();
 			
 		} catch (RecognitionException e) {
-			 unit.messages.addMessage(new KMUnitError("Expression Parse error : " + e, null, ast_exp));
-			 throw new Error(e);
+			// unit.messages.addMessage(new KMUnitError("Expression Parse error : " + e, null, ast_exp));
+			unit.error("Expression Parse error : " + e); 
+			throw new Error(e);
 		} catch (TokenStreamException e) {
-			 unit.messages.addMessage(new KMUnitError("Expression Parse error : " + e, null, ast_exp));
+			unit.error("Expression Parse error : " + e); 
+			//unit.messages.addMessage(new KMUnitError("Expression Parse error : " + e, null, ast_exp));
 			 throw new Error(e);
 		}
 		Expression result;
 		if (ast_exp != null)
-			result = KMT2KMExperessionBuilder.process(ast_exp, unit);
+			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit);
 		else 
 			result = null;
 		return result;
@@ -65,10 +72,10 @@ public class ExpressionParser {
 	 * @param str The string supposed to represent an operation. (a "firstKeyword" visitor?)
 	 * @return the model element representing an Expression.
 	 */
-	public static Expression parse_operation2body(KermetaUnit unit, String str) {
+	public static Expression parse_operation2body(LoadingContext context, KermetaUnit unit, String str) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
-		fr.irisa.triskell.kermeta.ast.OperationBody  ast_op = null;
-		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = null;
+		OperationBody  ast_op = null;
+		FExpression  ast_exp = null;
 		try {
 			ast_op = parser.operation().getOperationBody();
 			// If the operation contains an expression, we parse it (otherwise, its type is OperationEmptyBody)
@@ -78,15 +85,17 @@ public class ExpressionParser {
 			}
 			
 		} catch (RecognitionException e) {
-			 unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
-			 throw new Error(e);
+			 //unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
+			unit.error("Operation Parse error : " + e); 
+			throw new Error(e);
 		} catch (TokenStreamException e) {
-			 unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
+			unit.error("Operation Parse error : " + e); 
+			//unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
 			 throw new Error(e);
 		}
 		Expression result;
 		if (ast_exp != null)
-			result = KMT2KMExperessionBuilder.process(ast_exp, unit);
+			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit);
 		else 
 			result = null;
 		return result;
@@ -99,10 +108,10 @@ public class ExpressionParser {
 	 * @param str The string supposed to represent an operation. (a "firstKeyword" visitor?)
 	 * @return the model element representing an Expression.
 	 */
-	public static Expression parse_operationbody(KermetaUnit unit, String str) {
+	public static Expression parse_operationbody(LoadingContext context, KermetaUnit unit, String str) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
-		fr.irisa.triskell.kermeta.ast.OperationBody  ast_op = null;
-		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = null;
+		OperationBody  ast_op = null;
+		FExpression  ast_exp = null;
 		try {
 			ast_op = parser.operationBody();
 			// If the operation contains an expression, we parse it (otherwise, its type is OperationEmptyBody)
@@ -112,16 +121,18 @@ public class ExpressionParser {
 			}
 			
 		} catch (RecognitionException e) {
-			 unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
+			unit.error("Operation Parse error : " + e);
+			//unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
 			 throw new Error(e);
 		} catch (TokenStreamException e) {
-			 unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
+			unit.error("Operation Parse error : " + e); 
+			//unit.messages.addMessage(new KMUnitError("Operation Parse error : " + e, null, ast_op));
 			 throw new Error(e);
 		}
 		Expression result;
 		if (ast_exp != null)
 		{
-			result = KMT2KMExperessionBuilder.process(ast_exp, unit);
+			result = KMT2KMExperessionBuilder.process(context, ast_exp, unit);
 		}
 		else 
 			result = null;

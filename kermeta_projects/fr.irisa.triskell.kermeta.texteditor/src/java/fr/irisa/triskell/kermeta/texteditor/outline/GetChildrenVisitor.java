@@ -1,4 +1,4 @@
-/* $Id: GetChildrenVisitor.java,v 1.8 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: GetChildrenVisitor.java,v 1.9 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetChildrenVisitor.java
 * License : EPL
@@ -12,6 +12,9 @@ package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -24,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -88,14 +92,76 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		
 		}
 
+		Set <TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses( arg0 );
+		
+		Set <String> propertiesName = new HashSet <String> ();
+		Set <String> operationsName = new HashSet <String> ();
+				
+		/*
+		 * 
+		 * Invariants
+		 * 
+		 */
 		for (Object ci : arg0.getInv())
 	    	result.add(new OutlineItem((Constraint)ci, item, outline));
-	    
-	    for (Object p : arg0.getOwnedAttribute())
+
+	    for ( TypeDefinition typeDefinition : baseClasses ) {
+	    	
+	    	if ( typeDefinition instanceof ClassDefinition ) {
+	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
+	    		for ( Constraint c : (List<Constraint>) cl.getInv() ) {
+	    			result.add( new OutlineItem( c, item, outline ) );
+	    		}
+	    	}
+	    	
+	    }
+		
+		/*
+		 * 
+		 * Attributes
+		 * 
+		 */
+	    for (Property p : (List<Property>) arg0.getOwnedAttribute()) {
 	        result.add(new OutlineItem((Property)p, item, outline));
+	        propertiesName.add( p.getName() );
+	    }
+	        
+	    for ( TypeDefinition typeDefinition : baseClasses ) {
+	    	
+	    	if ( typeDefinition instanceof ClassDefinition ) {
+	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
+	    		for ( Property p : (List<Property>) cl.getOwnedAttribute() ) {
+	    			if ( ! propertiesName.contains(p.getName()) ) {
+	    				result.add( new OutlineItem( p, item, outline ) );
+	    				propertiesName.add( p.getName() );
+	    			}
+	    		}
+	    	}
+	    	
+	    }
 	    
-	    for (Object op : arg0.getOwnedOperation())
+	    /*
+	     * 
+	     * Operations
+	     * 
+	     */
+	    for (Operation op : (List<Operation>) arg0.getOwnedOperation()) {
 	        result.add(new OutlineItem((Operation)op, item, outline));
+	        operationsName.add( op.getName() );
+	    }
+	    
+	    for ( TypeDefinition typeDefinition : baseClasses ) {
+	    	
+	    	if ( typeDefinition instanceof ClassDefinition ) {
+	    		ClassDefinition cl = (ClassDefinition) typeDefinition;
+	    		for ( Operation o : (List<Operation>) cl.getOwnedOperation() )
+	    			if ( ! operationsName.contains(o.getName()) ) {
+	    				result.add( new OutlineItem( o, item, outline ) );
+	    				operationsName.add( o.getName() );
+	    			}
+	    	}
+	    	
+	    }
 	    
 		if (outline.prefSortedOutline())
 		    Collections.sort(result);

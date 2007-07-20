@@ -1,4 +1,4 @@
-/* $Id: Model.java,v 1.5 2007-06-06 16:43:01 cfaucher Exp $
+/* $Id: Model.java,v 1.6 2007-07-20 15:07:47 ftanguy Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -12,9 +12,11 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.ArrayList;
 
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -48,8 +50,8 @@ public class Model {
 		// will contain a list of the objects that have been added
 		
 	    
-	    GenericTypeDefinition typeVarClassDef  = (GenericTypeDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::reflection::Object");
-	    fr.irisa.triskell.kermeta.language.structure.Class typeParam = factory.getMemory().getUnit().struct_factory.createClass();
+	    GenericTypeDefinition typeVarClassDef  = (GenericTypeDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::reflection::Object");
+	    fr.irisa.triskell.kermeta.language.structure.Class typeParam = StructureFactory.eINSTANCE.createClass();
 	    typeParam.setTypeDefinition(typeVarClassDef);
 		
 	    
@@ -88,7 +90,7 @@ public class Model {
 		for(java.lang.Object oTypeDef : modelType.getIncludedTypeDefinition()){
 			Type requiredType = null; 
 			if(oTypeDef instanceof ClassDefinition){
-				fr.irisa.triskell.kermeta.language.structure.Class aclass = factory.getMemory().getUnit().struct_factory.createClass();
+				fr.irisa.triskell.kermeta.language.structure.Class aclass = StructureFactory.eINSTANCE.createClass();
 				aclass.setTypeDefinition((ClassDefinition)oTypeDef);
 				if(!((ClassDefinition)oTypeDef).getTypeParameter().isEmpty()){
 					// TODO do not deal with Parametrized ClassDefinition

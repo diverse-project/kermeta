@@ -1,4 +1,4 @@
-/* $Id: kunit.kmt,v 1.27 2007-07-13 11:20:16 dvojtise Exp $
+/* $Id: kunit.kmt,v 1.28 2007-07-20 15:08:39 ftanguy Exp $
  * Creation date: February 19, 2007
  * License:
  * Copyright:
@@ -7,6 +7,7 @@
  
 package kermeta::kunit;
 
+require "../Standard.kmt"
 require "assert.kmt"
 
 using kermeta::standard
@@ -346,6 +347,23 @@ class TestSuite inherits Test
  				e.message :="Cannot build a suite from class: " + testCaseClass.name
  				raise e
  			end
+			
+			
+/*			testCaseClass.superClass.each { sc | 
+				addAllTestCasesFrom( sc )
+			}*/
+			 
+			
+			var classDefinition : ClassDefinition
+			classDefinition ?= testCaseClass.typeDefinition
+			classDefinition.baseAspects.each { aspect |
+				if ( aspect.isInstanceOf( ClassDefinition ) ) then
+					var castAspect : ClassDefinition
+					castAspect ?= aspect
+					addAllTestCasesFromAspects( testCaseClass, castAspect )
+				end
+			}
+
 			testCaseClass.ownedOperation.select { o |  
 				o.name.size>=4 and o.name.substring(0, 4)== "test"
 			}.each { o | 
@@ -354,9 +372,36 @@ class TestSuite inherits Test
 				testCase.setTestMethodName(o.name)
 				self.tests.add(testCase)
 			}
+			
+			/*self.tests.each { test | 
+				var testCase : TestCase
+				testCase ?= test
+				stdio.writeln( testCase.getTestMethodName() ) 
+			}*/
+			
 			result := self
  		end
 	   
+	   operation addAllTestCasesFromAspects( testCaseClass: Class, aspect : ClassDefinition ) : Void is do
+	   		
+	   		aspect.ownedOperation.select { o |  
+				o.name.size>=4 and o.name.substring(0, 4)== "test"
+			}.each { o | 
+			    var testCase : TestCase
+				testCase ?= testCaseClass.new
+				testCase.setTestMethodName( o.name)
+				self.tests.add(testCase)
+			}
+			
+			aspect.baseAspects.each { a |
+				if ( a.isInstanceOf( ClassDefinition ) ) then
+					var castAspect : ClassDefinition
+					castAspect ?= a
+					addAllTestCasesFromAspects( testCaseClass, castAspect )
+				end
+			}
+			
+	   end
 }
 
 /**
@@ -393,13 +438,14 @@ abstract class TestCase inherits Test, Fallible
 	 */
 	operation setTestMethodName(name: String): TestCase is 
 		do
-			if self.getMetaClass.ownedOperation.exists{o| o.name.equals(name)} then
+			__testMethodName := name
+			/*if self.getMetaClass.ownedOperation.exists{o| o.name.equals(name)} then
 				__testMethodName := name
 			else	
 				var e :  InvalidTestCaseNameException init InvalidTestCaseNameException.new
 				e.message := name + " is not a valid method name for class " + self.getMetaClass.name
 				raise e
-			end
+			end*/
 			result := self
 		end
 	method getLog(): Log is

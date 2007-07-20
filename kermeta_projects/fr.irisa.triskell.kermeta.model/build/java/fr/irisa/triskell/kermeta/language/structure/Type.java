@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.6 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: Type.java,v 1.7 2007-07-20 15:09:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 

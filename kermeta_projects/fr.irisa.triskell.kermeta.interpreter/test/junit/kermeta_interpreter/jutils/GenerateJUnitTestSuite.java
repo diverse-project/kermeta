@@ -1,10 +1,10 @@
-/* $Id: GenerateJUnitTestSuite.java,v 1.1 2006-07-26 12:10:47 dvojtise Exp $
+/* $Id: GenerateJUnitTestSuite.java,v 1.2 2007-07-20 15:07:49 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
  * License : GPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 16 févr. 2005
+ * Creation date : 16 fï¿½vr. 2005
  * Authors : 
  * 		Franck FLEUREY (ffleurey@irisa.fr)
  * Description :  	
@@ -46,8 +46,10 @@ public class GenerateJUnitTestSuite {
 		//System.out.println("folders.length "+ folders.length);
 		for(int i=0; i<folders.length; i++) {
 			File dir = new File(folders[i]);
-			if (dir.isDirectory()) tcs += generateForDirectory(dir);
-			else System.err.println("ignored test folder " + folders[i] );
+			if (dir.isDirectory()) 
+				tcs += generateForDirectory(dir);
+			else 
+				System.err.println("ignored test folder " + folders[i] );
 		}
 		//System.out.println("result "+ tcs);
 		String result = getFileContent(junitfile);

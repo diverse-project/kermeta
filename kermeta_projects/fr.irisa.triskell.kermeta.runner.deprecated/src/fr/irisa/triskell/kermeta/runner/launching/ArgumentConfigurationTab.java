@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.27 2007-02-08 15:33:58 ftanguy Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.28 2007-07-20 15:09:14 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.runner.launching;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -53,13 +54,17 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -270,8 +275,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	}
     	if (kunit != null)
   		{
-    		ArrayList point = KermetaRunHelper.findEntryPoint(kunit);
-  		    defaultClassName = (String)point.get(0);
+    		Tag cls = ModelingUnitHelper.getMainClass( kunit );
+  		    defaultClassName = cls.getValue();
   		}
     	return defaultClassName;
     }
@@ -290,8 +295,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     	}
     	if (kunit != null)
   		{
-    		ArrayList point = KermetaRunHelper.findEntryPoint(kunit);
-  		    defaultOperationName = (String)point.get(1);
+    		Tag operation = ModelingUnitHelper.getMainOperation( kunit );
+  		    defaultOperationName = operation.getValue();
   		}
     	return defaultOperationName;
     }
@@ -579,9 +584,11 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     {
         IFile file = ResourceHelper.getIFile(currentPath);
         KermetaUnit selectedUnit = KermetaRunHelper.parse(file);
-	    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
-	    selectedClassString = (String)point.get(0);
-	    String selectedOperationString = (String)point.get(1);
+        Tag operation = ModelingUnitHelper.getMainOperation( selectedUnit );
+	    Tag cls = ModelingUnitHelper.getMainClass( selectedUnit );
+
+	    selectedClassString = cls.getValue();
+	    String selectedOperationString = operation.getValue();
 	    
         getFileLocationText().setText(currentPath);
         getclassNameText().setText(selectedClassString);
@@ -678,17 +685,13 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
 	        
 	        // Get classes of root package, and recursively of child packages
-	        ArrayList typedefs = new ArrayList();
-	
-	        KermetaRunHelper.getRecursivePackageTypeDefs(selectedUnit.rootPackage, typedefs);
+	        Set <TypeDefinition> typedefs = KermetaUnitHelper.getTypeDefinitions( selectedUnit );
 	        
 	        
 	        // Get all the classes defined in this Unit
 	        ArrayList<String> qnameList = new ArrayList<String>(typedefs.size());
-	        for (int i=0; i<typedefs.size(); i++)
-	        {
-	            qnameList.add(NamedElementHelper.getQualifiedName((NamedElement)typedefs.get(i)));
-	        }
+	        for ( TypeDefinition typeDefinition : typedefs )
+	            qnameList.add(NamedElementHelper.getQualifiedName( typeDefinition ) );
 	        
 	        // if no classes found alert the user
 	        if (qnameList.size() == 0) {

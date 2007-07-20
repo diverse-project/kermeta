@@ -1,4 +1,4 @@
-/* $Id: TypeDoesNotMatchError.java,v 1.1 2005-04-19 08:55:21 ffleurey Exp $
+/* $Id: TypeDoesNotMatchError.java,v 1.2 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeDoesNotMatchError.java
 * License : GPL

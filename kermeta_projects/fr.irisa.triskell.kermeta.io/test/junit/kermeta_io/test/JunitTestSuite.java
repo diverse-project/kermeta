@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.31 2007-05-30 11:28:46 jsteel Exp $
+/* $Id: JunitTestSuite.java,v 1.32 2007-07-20 15:08:19 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -20,19 +20,24 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.printer.KMTOutputBuilder;
+import org.kermeta.io.util2.UserDirURI;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.utils.UserDirURI;
+import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
+import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 
 
 /**
@@ -41,12 +46,24 @@ import fr.irisa.triskell.kermeta.utils.UserDirURI;
  */
 public class JunitTestSuite extends TestCase {
 
+	static private IOPlugin ioPlugin;
 
 	public JunitTestSuite(String arg0) {
 		super(arg0);
+		initialize();
 		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 		        "../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
-		StdLibKermetaUnitHelper.STD_LIB_URI = "../fr.irisa.triskell.kermeta/lib/framework.km";
+	}
+	
+	private void initialize() {
+
+		if ( ioPlugin == null ) {
+
+			IOPlugin.LOCAL_USE = true;
+			ioPlugin = new IOPlugin();
+		
+		}
+
 	}
 	
 	protected void setUp() throws Exception {
@@ -62,11 +79,9 @@ public class JunitTestSuite extends TestCase {
 
 
 
-/*** BEGIN GENERATED TESTS ***/
-public void testSimple() throws Exception {
-testWithFile("test/ecore_testcases","Simple.ecore" );
-}
 
+
+/*** BEGIN GENERATED TESTS ***/
 public void testUML2() throws Exception {
 testWithFile("test/ecore_testcases","UML2.ecore" );
 }
@@ -75,92 +90,28 @@ public void testpuzzle() throws Exception {
 testWithFile("test/ecore_testcases","puzzle.ecore" );
 }
 
-public void testemof() throws Exception {
-testWithFile("test/emfatic_testcases","emof.emf" );
+public void testSimple() throws Exception {
+testWithFile("test/ecore_testcases","Simple.ecore" );
 }
 
-public void testmetacore() throws Exception {
-testWithFile("test/emfatic_testcases","metacore.emf" );
+public void testtestVariable() throws Exception {
+testWithFile("test/kmt_testcases","testVariable.kmt" );
 }
 
-public void test10_testEnum() throws Exception {
-testWithFile("test/kmt_testcases","10_testEnum.kmt" );
+public void testtestSCommentInline() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentInline.kmt" );
 }
 
-public void test1_testAssignment() throws Exception {
-testWithFile("test/kmt_testcases","1_testAssignment.kmt" );
-}
-
-public void test2_testArithm() throws Exception {
-testWithFile("test/kmt_testcases","2_testArithm.kmt" );
-}
-
-public void test3_testOpCall() throws Exception {
-testWithFile("test/kmt_testcases","3_testOpCall.kmt" );
-}
-
-public void test4_testOpOpCall() throws Exception {
-testWithFile("test/kmt_testcases","4_testOpOpCall.kmt" );
-}
-
-public void test5_testExternPackageCall() throws Exception {
-testWithFile("test/kmt_testcases","5_testExternPackageCall.kmt" );
-}
-
-public void test5_testOpPkgCall() throws Exception {
-testWithFile("test/kmt_testcases","5_testOpPkgCall.kmt" );
-}
-
-public void test6_failtestExternPackageCall() throws Exception {
-testWithFile("test/kmt_testcases","6_failtestExternPackageCall.kmt" );
-}
-
-public void test6_testExternPackageCall() throws Exception {
-testWithFile("test/kmt_testcases","6_testExternPackageCall.kmt" );
-}
-
-public void test6_testExternPackageCall2() throws Exception {
-testWithFile("test/kmt_testcases","6_testExternPackageCall2.kmt" );
-}
-
-public void test6_testOpPkgCall() throws Exception {
-testWithFile("test/kmt_testcases","6_testOpPkgCall.kmt" );
-}
-
-public void test7_testInterPackageCall() throws Exception {
-testWithFile("test/kmt_testcases","7_testInterPackageCall.kmt" );
-}
-
-public void test7_testOpPkgCall() throws Exception {
-testWithFile("test/kmt_testcases","7_testOpPkgCall.kmt" );
-}
-
-public void test8_testOpInternPkgCall() throws Exception {
-testWithFile("test/kmt_testcases","8_testOpInternPkgCall.kmt" );
-}
-
-public void test9_testOpCallObject() throws Exception {
-testWithFile("test/kmt_testcases","9_testOpCallObject.kmt" );
+public void testtestSCommentEndOfFile() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentEndOfFile.kmt" );
 }
 
 public void testtestBlock() throws Exception {
 testWithFile("test/kmt_testcases","testBlock.kmt" );
 }
 
-public void testtestBlocksSequence() throws Exception {
-testWithFile("test/kmt_testcases","testBlocksSequence.kmt" );
-}
-
-public void testtestCallExp() throws Exception {
-testWithFile("test/kmt_testcases","testCallExp.kmt" );
-}
-
-public void testtestClass() throws Exception {
-testWithFile("test/kmt_testcases","testClass.kmt" );
-}
-
-public void testtestConditional() throws Exception {
-testWithFile("test/kmt_testcases","testConditional.kmt" );
+public void testtestMCommentInline() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentInline.kmt" );
 }
 
 public void testtestCycleA() throws Exception {
@@ -183,28 +134,20 @@ public void testtestCycleE() throws Exception {
 testWithFile("test/kmt_testcases","testCycleE.kmt" );
 }
 
-public void testtestEnum() throws Exception {
-testWithFile("test/kmt_testcases","testEnum.kmt" );
+public void test6_testExternPackageCall2() throws Exception {
+testWithFile("test/kmt_testcases","6_testExternPackageCall2.kmt" );
 }
 
-public void testtestExpression() throws Exception {
-testWithFile("test/kmt_testcases","testExpression.kmt" );
+public void testtestSimpleCond() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleCond.kmt" );
 }
 
-public void testtestExtractOperation() throws Exception {
-testWithFile("test/kmt_testcases","testExtractOperation.kmt" );
+public void test10_testEnum() throws Exception {
+testWithFile("test/kmt_testcases","10_testEnum.kmt" );
 }
 
-public void testtestGenericClass() throws Exception {
-testWithFile("test/kmt_testcases","testGenericClass.kmt" );
-}
-
-public void testtestImportAlias() throws Exception {
-testWithFile("test/kmt_testcases","testImportAlias.kmt" );
-}
-
-public void testtestInjectOperation() throws Exception {
-testWithFile("test/kmt_testcases","testInjectOperation.kmt" );
+public void testtestModelTypesStateMachines() throws Exception {
+testWithFile("test/kmt_testcases","testModelTypesStateMachines.kmt" );
 }
 
 public void testtestInterDependA() throws Exception {
@@ -215,244 +158,282 @@ public void testtestInterDependB() throws Exception {
 testWithFile("test/kmt_testcases","testInterDependB.kmt" );
 }
 
+public void testtestGenericClass() throws Exception {
+testWithFile("test/kmt_testcases","testGenericClass.kmt" );
+}
+
+public void test7_testOpPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","7_testOpPkgCall.kmt" );
+}
+
+public void test5_testOpPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","5_testOpPkgCall.kmt" );
+}
+
+public void test2_testArithm() throws Exception {
+testWithFile("test/kmt_testcases","2_testArithm.kmt" );
+}
+
+public void testtestExpression() throws Exception {
+testWithFile("test/kmt_testcases","testExpression.kmt" );
+}
+
+public void testtestInjectOperation() throws Exception {
+testWithFile("test/kmt_testcases","testInjectOperation.kmt" );
+}
+
 public void testtestLambdaExpressionAsCallFeature() throws Exception {
 testWithFile("test/kmt_testcases","testLambdaExpressionAsCallFeature.kmt" );
-}
-
-public void testtestLoadStdLibSource() throws Exception {
-testWithFile("test/kmt_testcases","testLoadStdLibSource.kmt" );
-}
-
-public void testtestMCommentAlone() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentAlone.kmt" );
-}
-
-public void testtestMCommentBegin() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentBegin.kmt" );
-}
-
-public void testtestMCommentEmptyOp() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentEmptyOp.kmt" );
-}
-
-public void testtestMCommentInline() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentInline.kmt" );
-}
-
-public void testtestMCommentMany() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentMany.kmt" );
-}
-
-public void testtestMCommentMiddleOfLoop() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentMiddleOfLoop.kmt" );
-}
-
-public void testtestModelType() throws Exception {
-testWithFile("test/kmt_testcases","testModelType.kmt" );
-}
-
-public void testtestModelTypesStateMachines() throws Exception {
-testWithFile("test/kmt_testcases","testModelTypesStateMachines.kmt" );
-}
-
-public void testtestOperation() throws Exception {
-testWithFile("test/kmt_testcases","testOperation.kmt" );
-}
-
-public void testtestOperationOnObject() throws Exception {
-testWithFile("test/kmt_testcases","testOperationOnObject.kmt" );
-}
-
-public void testtestPackage() throws Exception {
-testWithFile("test/kmt_testcases","testPackage.kmt" );
-}
-
-public void testtestPackageDepA() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepA.kmt" );
-}
-
-public void testtestPackageDepA2() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepA2.kmt" );
-}
-
-public void testtestPackageDepB() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepB.kmt" );
-}
-
-public void testtestPackageDepB2() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepB2.kmt" );
-}
-
-public void testtestPackageDepC() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepC.kmt" );
-}
-
-public void testtestPackageDepC2() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepC2.kmt" );
-}
-
-public void testtestPackageDepD() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepD.kmt" );
-}
-
-public void testtestPackageDepD2() throws Exception {
-testWithFile("test/kmt_testcases","testPackageDepD2.kmt" );
-}
-
-public void testtestPrimitiveType() throws Exception {
-testWithFile("test/kmt_testcases","testPrimitiveType.kmt" );
-}
-
-public void testtestProperty() throws Exception {
-testWithFile("test/kmt_testcases","testProperty.kmt" );
-}
-
-public void testtestResult() throws Exception {
-testWithFile("test/kmt_testcases","testResult.kmt" );
-}
-
-public void testtestSCommentAlone() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentAlone.kmt" );
-}
-
-public void testtestSCommentBegin() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentBegin.kmt" );
 }
 
 public void testtestSCommentEmptyOp() throws Exception {
 testWithFile("test/kmt_testcases","testSCommentEmptyOp.kmt" );
 }
 
-public void testtestSCommentEndOfFile() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentEndOfFile.kmt" );
+public void testtestPackageDepA() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepA.kmt" );
 }
 
-public void testtestSCommentInline() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentInline.kmt" );
+public void testtestPackageDepB() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepB.kmt" );
 }
 
-public void testtestSCommentMany() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentMany.kmt" );
-}
-
-public void testtestSCommentMiddleOfLoop() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentMiddleOfLoop.kmt" );
+public void testtestPackageDepC() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepC.kmt" );
 }
 
 public void testtestSimpleAnnotations() throws Exception {
 testWithFile("test/kmt_testcases","testSimpleAnnotations.kmt" );
 }
 
-public void testtestSimpleAnnotations2() throws Exception {
-testWithFile("test/kmt_testcases","testSimpleAnnotations2.kmt" );
+public void testtestPackageDepD() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepD.kmt" );
 }
 
-public void testtestSimpleCond() throws Exception {
-testWithFile("test/kmt_testcases","testSimpleCond.kmt" );
+public void testtestConditional() throws Exception {
+testWithFile("test/kmt_testcases","testConditional.kmt" );
 }
 
-public void testtestSimpleExpression() throws Exception {
-testWithFile("test/kmt_testcases","testSimpleExpression.kmt" );
+public void test9_testOpCallObject() throws Exception {
+testWithFile("test/kmt_testcases","9_testOpCallObject.kmt" );
+}
+
+public void test4_testOpOpCall() throws Exception {
+testWithFile("test/kmt_testcases","4_testOpOpCall.kmt" );
+}
+
+public void test6_failtestExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","6_failtestExternPackageCall.kmt" );
+}
+
+public void testtestSCommentMiddleOfLoop() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentMiddleOfLoop.kmt" );
+}
+
+public void testtestPackage() throws Exception {
+testWithFile("test/kmt_testcases","testPackage.kmt" );
+}
+
+public void testtestSCommentAlone() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentAlone.kmt" );
+}
+
+public void testtestOperation() throws Exception {
+testWithFile("test/kmt_testcases","testOperation.kmt" );
+}
+
+public void test7_testInterPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","7_testInterPackageCall.kmt" );
+}
+
+public void testtestPackageDepA2() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepA2.kmt" );
+}
+
+public void testtestSCommentMany() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentMany.kmt" );
+}
+
+public void testtestPackageDepB2() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepB2.kmt" );
+}
+
+public void testtestImportAlias() throws Exception {
+testWithFile("test/kmt_testcases","testImportAlias.kmt" );
 }
 
 public void testtestSimpleLoop() throws Exception {
 testWithFile("test/kmt_testcases","testSimpleLoop.kmt" );
 }
 
-public void testtestVariable() throws Exception {
-testWithFile("test/kmt_testcases","testVariable.kmt" );
+public void testtestPackageDepC2() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepC2.kmt" );
 }
 
-public void testtestExtOperation() throws Exception {
-testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
+public void testtestSimpleAnnotations2() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleAnnotations2.kmt" );
+}
+
+public void testtestResult() throws Exception {
+testWithFile("test/kmt_testcases","testResult.kmt" );
+}
+
+public void testtestPackageDepD2() throws Exception {
+testWithFile("test/kmt_testcases","testPackageDepD2.kmt" );
+}
+
+public void testtestMCommentMiddleOfLoop() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentMiddleOfLoop.kmt" );
+}
+
+public void testtestMCommentMany() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentMany.kmt" );
+}
+
+public void test6_testExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","6_testExternPackageCall.kmt" );
+}
+
+public void testtestSCommentBegin() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentBegin.kmt" );
+}
+
+public void testtestModelType() throws Exception {
+testWithFile("test/kmt_testcases","testModelType.kmt" );
+}
+
+public void testtestMCommentAlone() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentAlone.kmt" );
+}
+
+public void testtestSimpleExpression() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleExpression.kmt" );
+}
+
+public void test6_testOpPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","6_testOpPkgCall.kmt" );
+}
+
+public void testtestBlocksSequence() throws Exception {
+testWithFile("test/kmt_testcases","testBlocksSequence.kmt" );
+}
+
+public void test8_testOpInternPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","8_testOpInternPkgCall.kmt" );
+}
+
+public void testtestMCommentEmptyOp() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentEmptyOp.kmt" );
+}
+
+public void test3_testOpCall() throws Exception {
+testWithFile("test/kmt_testcases","3_testOpCall.kmt" );
+}
+
+public void test1_testAssignment() throws Exception {
+testWithFile("test/kmt_testcases","1_testAssignment.kmt" );
+}
+
+public void testtestProperty() throws Exception {
+testWithFile("test/kmt_testcases","testProperty.kmt" );
+}
+
+public void test5_testExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","5_testExternPackageCall.kmt" );
+}
+
+public void testtestLoadStdLibSource() throws Exception {
+testWithFile("test/kmt_testcases","testLoadStdLibSource.kmt" );
+}
+
+public void testtestClass() throws Exception {
+testWithFile("test/kmt_testcases","testClass.kmt" );
+}
+
+public void testtestMCommentBegin() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentBegin.kmt" );
+}
+
+public void testtestPrimitiveType() throws Exception {
+testWithFile("test/kmt_testcases","testPrimitiveType.kmt" );
+}
+
+public void testtestExtractOperation() throws Exception {
+testWithFile("test/kmt_testcases","testExtractOperation.kmt" );
+}
+
+public void testtestOperationOnObject() throws Exception {
+testWithFile("test/kmt_testcases","testOperationOnObject.kmt" );
+}
+
+public void testtestCallExp() throws Exception {
+testWithFile("test/kmt_testcases","testCallExp.kmt" );
+}
+
+public void testtestEnum() throws Exception {
+testWithFile("test/kmt_testcases","testEnum.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
 public void testWithFile(String dir, String file) throws Exception {
-	UserDirURI.createDirFromName(dir+"/output/");
-	//	MetaCoreUnit builder = new MetaCoreUnit();
-	//	builder.loadMCT(new File(baseDir + file));
+	UserDirURI.createDirFromName(dir+"/output");
 	
+	String fileURI = "platform:/plugin/fr.irisa.triskell.kermeta.io/" + dir + "/" + file;
 	// phase 1 : test that it load correctly
-	StdLibKermetaUnitHelper.unloadStdLib();
-	KermetaUnitFactory.resetDefaultLoader();
-	KermetaUnitFactory.getDefaultLoader().unloadAll();
-	KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
-	try {
-		builder.load();
-	} catch(Exception e ) {if (!builder.messages.hasError()) throw e;};
+	KermetaUnit builder = ioPlugin.loadKermetaUnit( fileURI );
 	
-	if (builder.messages.getAllErrors().size() > 0) {
-		assertTrue(builder.messages.getAllMessagesAsString(), false);
-	}
+	if ( builder.isErrored() )
+		assertTrue( KermetaUnitHelper.getAllErrorsAsString(builder), false);
+	
 	else {	
 		
 		// phase 2 : verify that it can be save as an xmi (km file)
-		try {	
-			Iterator it = builder.importedUnits.iterator();
-			while(it.hasNext()){
-				KermetaUnit importedKU = (KermetaUnit)it.next();
-				System.out.println("Need to export importedUnit :" + 
-						importedKU.getUri() + " " +
-						importedKU.getRootPackage().getName()+ ".km");
-				importedKU.saveAsXMIModel(dir + "/" + "output/" + importedKU.getRootPackage().getName()+ ".km");
-			}
-			builder.saveAsXMIModel(dir + "/" + "output/" + file.replace('.', '_') + ".km");
+		try {				
+			KmExporter exporter = new KmExporter();
+			String outputDir = "platform:/plugin/fr.irisa.triskell.kermeta.io/" + dir + "/output";
+			exporter.export(builder, outputDir);
 		}
 		catch (Throwable t){
 			fail("file "+file+" didn't serialize correctly into km; "+t.getMessage());
 		}
 		
-		
 		// phase 3 :
 		// try to pretty-print the result in another file
-		URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
-		String ppfile =userLocatedPpfile.toString();
-		//builder.prettyPrint(ppfile);
+		//URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
+		//String ppfile =userLocatedPpfile.toString();
+		String outputFile = file.replaceAll("(.+)\\.+.+", "$1\\.kmt");
+		String ppfile = "platform:/plugin/fr.irisa.triskell.kermeta.io/" + dir + "/output/"  + outputFile;
 		
-		ppUnit(builder, userLocatedPpfile.toFileString(), dir);
-		
-		
+		KMTOutputBuilder kmtExporter = new KMTOutputBuilder();
+		kmtExporter.print(builder, "platform:/plugin/fr.irisa.triskell.kermeta.io/" + dir + "/output");
+		kmtExporter.flush();
+				
 		// Phase 3 bis cannot be run on a per file basis if there is a cycle in the file dependencies
 		// this should be run globally, currently, just ignore this phase
 		// test for require cycles
-		if(!hasDependencyCycle(builder)){
+		if( ! hasDependencyCycle(builder) ){
 			
-			KermetaUnitFactory.getDefaultLoader().unloadAll();
-			
+			ioPlugin.unload("platform:/plugin/fr.irisa.triskell.kermeta.io/" + dir + "/" + file);
 			// phase 3 bis, check that the prettyprinted version can be parsed 
 			// try to re-parse the pretty-printed version
-			StdLibKermetaUnitHelper.unloadStdLib();
-			KermetaUnitFactory.resetDefaultLoader();
-			KermetaUnitFactory.getDefaultLoader().unloadAll();
-			KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
-			try {
-				builder2.load();
-			} 
-			catch(Exception e ) {
-				if (!builder2.messages.hasError()) throw e;
-			}
-			
-			if (builder2.messages.getErrors().size() > 0) {
-				assertTrue("RE-PARSE : " + builder2.messages.getMessagesAsString(), false);
-			}
-		}	
-		else
-		{
+			KermetaUnit builder2 = ioPlugin.loadKermetaUnit(ppfile);
+			if ( builder2.isErrored() )
+				assertTrue("RE-PARSE : " + KermetaUnitHelper.getAllErrorsAsString(builder2), false);
+
+		} else
 			System.out.println("Ignoring phase 3bis of " + builder.getUri() + ", due to a cycle in its require statements. \n (in this case a per file basis test cannot be applied)");
-		}
 	}
 }
 
 	protected boolean hasDependencyCycle(KermetaUnit ku){
-		ArrayList<KermetaUnit> kuList = ku.getAllImportedUnits();
+		List<KermetaUnit> kuList = ku.getImportedKermetaUnits();
 		boolean hasDependencyCycle = false;
 		Iterator it = kuList.iterator();
 		while(!hasDependencyCycle && it.hasNext()){
 			KermetaUnit importedKU = (KermetaUnit)it.next();
-			ArrayList<KermetaUnit> kuSubList = importedKU.getAllImportedUnits();
+			List<KermetaUnit> kuSubList = importedKU.getImportedKermetaUnits();
 			Iterator subIt = kuSubList.iterator();
 			while(!hasDependencyCycle && subIt.hasNext()){
 				if(subIt.next() == ku) hasDependencyCycle = true; 
@@ -462,7 +443,7 @@ public void testWithFile(String dir, String file) throws Exception {
 			
 		return hasDependencyCycle;	
 	}
-	
+	/*
 	public void ppUnit(KermetaUnit builder, String file, String dir) throws Exception  {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
@@ -471,7 +452,6 @@ public void testWithFile(String dir, String file) throws Exception {
 		
 		w.write("package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n");
 	
-		/* imported units needed to recognize the imported classes...*/
 		Iterator it = builder.importedUnits.iterator();
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
@@ -492,6 +472,6 @@ public void testWithFile(String dir, String file) throws Exception {
 		w.write(str_kmt.substring(pkg_name.length()));
 		w.close();
 	}
-	
+	*/
 
 }

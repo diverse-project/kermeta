@@ -1,29 +1,29 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.20 2007-07-12 07:42:23 cfaucher Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.21 2007-07-20 15:08:40 ftanguy Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse_dir" location="C:/eclipse3.3_1"/>
+	<property name="eclipse_dir" location="/opt/eclipse"/>
 	
 	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
   	<path id="project.class.path">
 		<pathelement location="build/class"/>
-	  	<pathelement location="../fr.irisa.triskell.kermeta.io/build/class"/>
+	  	<pathelement location="../org.kermeta.io/bin/"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.model/build/class"/>
-	  	<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
 	  	<pathelement location="../fr.irisa.triskell.kermeta.interpreter/build/class"/>
+  		<pathelement location="../fr.irisa.triskell.traceability.model/build/class"/>
 	  	<pathelement location="lib/thirdparty/log4j.jar"/>
 	  	<pathelement location="lib/thirdparty/antlr.jar"/>
 	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
 	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/>
   		
-  		<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.3.0.v200706262000.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.3.0.v200706262000.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.3.0.v200706262000.jar"/>
-	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf_2.3.0.v200706262000.jar"/>
+		<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.2.1.v200702131851.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.2.2.v200702131851.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.2.2.v200702131851.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf_2.2.0.v200702131851.jar"/>
 
 	</path>
 

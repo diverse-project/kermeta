@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.12 2007-03-01 10:34:01 dtouzet Exp $
+/* $Id: SimpleType.java,v 1.13 2007-07-20 15:08:04 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -17,7 +17,10 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
+
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
@@ -136,7 +139,10 @@ public class SimpleType extends Type {
 			resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
 		}
 		if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
-			return InheritanceSearch.callableOperations((fr.irisa.triskell.kermeta.language.structure.Class)resolved);
+			Class c = (Class) resolved;
+
+			ArrayList <CallableOperation> list = InheritanceSearch.callableOperations(c);
+			return list;
 		} else if (resolved instanceof ModelType) {
 			ArrayList<CallableOperation> result = new ArrayList<CallableOperation>();
 			fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).type;
@@ -173,7 +179,16 @@ public class SimpleType extends Type {
 			resolved = TypeVariableUtility.getLeastDerivedAdmissibleType(resolved);
 		}
 		if (resolved instanceof fr.irisa.triskell.kermeta.language.structure.Class) {			
-			return InheritanceSearch.callableProperties((fr.irisa.triskell.kermeta.language.structure.Class)resolved);
+			Class c = (Class) resolved;
+			ArrayList <CallableProperty> list = InheritanceSearch.callableProperties(c);
+			list.addAll( InheritanceSearch.callableProperties(c) );
+			Iterator <TypeDefinition> iterator = c.getTypeDefinition().getBaseAspects().iterator();
+			while ( iterator.hasNext() ) {
+				Class tempClass = StructureFactory.eINSTANCE.createClass();
+				tempClass.setTypeDefinition( (ClassDefinition) iterator.next() );
+				list.addAll( InheritanceSearch.callableProperties( tempClass ) );
+			}
+			return list;
 		} else if (resolved instanceof ModelType) {
 			ArrayList<CallableProperty> result = new ArrayList<CallableProperty>();
 			fr.irisa.triskell.kermeta.language.structure.Class model = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ModelType).type;

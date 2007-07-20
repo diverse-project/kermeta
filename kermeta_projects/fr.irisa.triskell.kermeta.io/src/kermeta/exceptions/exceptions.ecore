@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="../Standard.kmt|"/>
+    <details key="using" value="kermeta::standard|kermeta::utils|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="exceptions" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/exceptions/exceptions.ecore#//exceptions" nsPrefix="exceptions">
+      <eClassifiers xsi:type="ecore:EClass" name="Exception">
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="message" containment="true">
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="nestedException" eType="/1/exceptions/Exception" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="stackTrace" containment="true">
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="RuntimeError" eSuperTypes="/1/exceptions/Exception">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="expression" containment="true">
+          <eType xsi:type="ecore:EClass" href="../language/behavior.ecore#/1/language/behavior/Expression"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CallOnVoidTarget" eSuperTypes="/1/exceptions/RuntimeError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TypeCastError" eSuperTypes="/1/exceptions/RuntimeError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="NotImplementedException" eSuperTypes="/1/exceptions/RuntimeError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="UpperBoundReachedError" eSuperTypes="/1/exceptions/RuntimeError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="AbstractClassInstantiationError" eSuperTypes="/1/exceptions/RuntimeError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IncompatibleTypeError" eSuperTypes="/1/exceptions/RuntimeError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DivisionByZero" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="OverflowError" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="VoidOperandError" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="StringIndexOutOfBound" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="StringFormatException" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IndexOutOfBound" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="EmptyCollection" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IteratorIsOff" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IOException" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="FileNotFoundException" eSuperTypes="/1/exceptions/IOException"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPre" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPost" eSuperTypes="/1/exceptions/Exception"/>
+      <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedInv" eSuperTypes="/1/exceptions/Exception"/>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

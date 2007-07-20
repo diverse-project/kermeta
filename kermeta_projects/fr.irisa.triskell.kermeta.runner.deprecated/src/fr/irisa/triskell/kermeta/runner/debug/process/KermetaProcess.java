@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.7 2007-07-03 12:22:18 dvojtise Exp $
+/* $Id: KermetaProcess.java,v 1.8 2007-07-20 15:09:14 ftanguy Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL

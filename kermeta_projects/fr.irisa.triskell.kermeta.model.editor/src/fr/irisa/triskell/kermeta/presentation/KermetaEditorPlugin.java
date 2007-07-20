@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaEditorPlugin.java,v 1.2 2007-07-11 14:41:42 cfaucher Exp $
+ * $Id: KermetaEditorPlugin.java,v 1.3 2007-07-20 15:09:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 

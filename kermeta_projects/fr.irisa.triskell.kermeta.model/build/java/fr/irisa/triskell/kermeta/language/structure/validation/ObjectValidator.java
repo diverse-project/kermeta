@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectValidator.java,v 1.1 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: ObjectValidator.java,v 1.2 2007-07-20 15:08:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
@@ -19,4 +19,5 @@ public interface ObjectValidator {
 	boolean validate();
 
 	boolean validateTag(EList value);
+	boolean validateOwnedTag(EList value);
 }

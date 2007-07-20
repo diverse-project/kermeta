@@ -1,4 +1,4 @@
-/* $Id: CathegorizedKWList.java,v 1.9 2007-07-06 07:05:45 dvojtise Exp $
+/* $Id: CathegorizedKWList.java,v 1.10 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : CathegorizedKWList.java
 * License : EPL

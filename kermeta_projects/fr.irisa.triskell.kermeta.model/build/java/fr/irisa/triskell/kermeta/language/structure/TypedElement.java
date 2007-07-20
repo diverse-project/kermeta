@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElement.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: TypedElement.java,v 1.4 2007-07-20 15:09:02 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getTypedElement()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface TypedElement extends TypeContainer, NamedElement {

@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.6 2006-03-03 15:21:47 dvojtise Exp $ 
+/* $Id: Boolean.java,v 1.7 2007-07-20 15:07:48 ftanguy Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -9,6 +9,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 
 public class Boolean {
@@ -76,8 +77,8 @@ public class Boolean {
 	 */
 	public static void createTrue(RuntimeObjectFactory factory, RuntimeObject result) {
 	    
-		fr.irisa.triskell.kermeta.language.structure.Class bool_class = factory.getMemory().getUnit().struct_factory.createClass();
-	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+		fr.irisa.triskell.kermeta.language.structure.Class bool_class = StructureFactory.eINSTANCE.createClass();
+	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Boolean"));
 	    
 	    result.setMetaclass(factory.createMetaClass(bool_class));
 	    setValue(result, true);
@@ -85,8 +86,8 @@ public class Boolean {
 	
 	public static void createFalse(RuntimeObjectFactory factory, RuntimeObject result) {
 	    
-		fr.irisa.triskell.kermeta.language.structure.Class bool_class = factory.getMemory().getUnit().struct_factory.createClass();
-	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+		fr.irisa.triskell.kermeta.language.structure.Class bool_class = StructureFactory.eINSTANCE.createClass();
+	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Boolean"));
 	    
 	    result.setMetaclass(factory.createMetaClass(bool_class));
 	    setValue(result, false);

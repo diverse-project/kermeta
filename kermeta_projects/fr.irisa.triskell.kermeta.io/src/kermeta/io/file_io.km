@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+  <packages name="kermeta">
+    <nestedPackage name="io">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="FileIO" superType="//@packages.0/io/FileIO/@containedType.0">
+        <ownedTag value="/**&#xA; * Implementation of simple helpers to read ans write text files&#xA; */"/>
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
+        </containedType>
+        <ownedOperation name="writeTextFile" type="//@packages.0/io/FileIO/writeTextFile/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Write a string in a text file&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <ownedParameter name="filename" type="//@packages.0/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <ownedParameter name="text" type="//@packages.0/io/FileIO/writeTextFile/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Raise">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                  <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" name="new">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0"/>
+                      <typeref type="//@packages.0/io/FileIO/writeTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" upper="1"/>
+                    </target>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  </expression>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO" jmethod="writeTextFile">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/writeTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/writeTextFile/@ownedParameter.1/@containedType.0" name="text"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="readTextFile" type="//@packages.0/io/FileIO/readTextFile/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Read a text file&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
+          <ownedParameter name="filename" type="//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/io/FileIO/readTextFile/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Raise">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                  <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" name="new">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0"/>
+                      <typeref type="//@packages.0/io/FileIO/readTextFile/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" upper="1"/>
+                    </target>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  </expression>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@containedType.0" identifier="exists">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+              </containedType>
+              <type type="//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@containedType.0" isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0" identifier="isdirectory">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+              </containedType>
+              <type type="//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0" isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@containedType.0" name="exists"/>
+              <value xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO" jmethod="fileExists">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0" name="isdirectory"/>
+              <value xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO" jmethod="fileIsDirectory">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Raise">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                  <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody/@statement.0/@expression/@containedType.0" name="new">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0"/>
+                      <typeref type="//@packages.0/io/FileIO/readTextFile/@body/@statement.5/@thenBody/@statement.0/@expression/@containedType.0" upper="1"/>
+                    </target>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  </expression>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="or">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/contains/@body/@statement.1/@stopCondition/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.2/@containedType.0" name="isdirectory"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="not">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@post.0/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@body/@statement.1/@containedType.0" name="exists"/>
+                  <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/not"/>
+                </target>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/Boolean/or"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/io/FileIO/readTextFile/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/io/FileIO/readTextFile/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO" jmethod="readTextFile">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/readTextFile/@ownedParameter.0/@containedType.0" name="filename"/>
+              </value>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="getAbsolutePathFolder" type="//@packages.0/io/FileIO/getAbsolutePathFolder/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * Get the path of a folder from the folder of the current kermeta file&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
+          <ownedParameter name="foldername" type="//@packages.0/io/FileIO/getAbsolutePathFolder/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Raise">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                  <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" name="new">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0"/>
+                      <typeref type="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@statement.0/@thenBody/@statement.0/@expression/@containedType.0" upper="1"/>
+                    </target>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  </expression>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@ownedParameter.0/@containedType.0" name="foldername"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:VariableDecl" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0" identifier="path">
+              <type type="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0" isOrdered="true" upper="1"/>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0" name="path"/>
+              <value xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::io::SimpleFileIO" jmethod="getAbsolutePathFolder">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@ownedParameter.0/@containedType.0" name="foldername"/>
+              </value>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Raise">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                  <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@statement.3/@thenBody/@statement.0/@expression/@containedType.0" name="new">
+                    <containedType xsi:type="kermeta_language_structure:Class">
+                      <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../exceptions/exceptions.km#//@packages.0/exceptions/FileNotFoundException"/>
+                    </containedType>
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                      <staticType href="../standard/collections.km#//@packages.0/standard/Collection/iterator/@body/@statement.0/@value/@target/@containedType.0"/>
+                      <typeref type="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@statement.3/@thenBody/@statement.0/@expression/@containedType.0" upper="1"/>
+                    </target>
+                    <staticOperation href="../language/structure.km#//@packages.0/language/structure/Class/new"/>
+                  </expression>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="Cannot find path.">
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0" name="path"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/FileIO/getAbsolutePathFolder/@body/@containedType.0" name="path"/>
+            </statement>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </nestedPackage>
+  </packages>
+  <requires uri="../Standard.kmt">
+    <ownedTag value="/**&#xA; * Contains Input/Output related classes. &#xA; */"/>
+  </requires>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::language::structure"/>
+  <usings qualifiedName="kermeta::exceptions"/>
+  <referencedModellingUnit href="../language/structure.km#/"/>
+  <referencedModellingUnit href="../utils/hashtable.km#/"/>
+  <referencedModellingUnit href="../reflection/reflection.km#/"/>
+  <referencedModellingUnit href="../persistence/resource.km#/"/>
+  <referencedModellingUnit href="../Standard.km#/"/>
+  <referencedModellingUnit href="../exceptions/exceptions.km#/"/>
+  <referencedModellingUnit href="#/"/>
+  <referencedModellingUnit href="../standard/primitive_types.km#/"/>
+  <referencedModellingUnit href="../utils/stack.km#/"/>
+  <referencedModellingUnit href="std_io.km#/"/>
+  <referencedModellingUnit href="../standard/java.km#/"/>
+  <referencedModellingUnit href="../kunit/kunit.km#/"/>
+  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
+  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
+  <referencedModellingUnit href="../standard/collections.km#/"/>
+  <referencedModellingUnit href="../language/behavior.km#/"/>
+</kermeta_language_structure:CompilationUnit>

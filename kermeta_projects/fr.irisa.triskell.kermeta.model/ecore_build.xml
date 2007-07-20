@@ -6,7 +6,7 @@
 
 	<!-- CLASSPATH AND LIBRARY : Change that to fit your config -->
 	<!--<property name="eclipse_dir" location="/home/apps/eclipse3"/>-->
-	<property name="eclipse_dir" location="C:/Eclipse3.3_1"/>
+	<property name="eclipse_dir" location="/opt/eclipse/"/>
 	
 	<property name="libdir" location="./lib"/>
 	
@@ -80,7 +80,7 @@
 	<echo> Generating visitor... </echo>
 			<mkdir dir="src/java/fr/irisa/triskell/ecore/visitor"/>
 			<java classname="fr.irisa.triskell.kermeta.dev.model.CreateGenericVisitor" fork="yes" classpathref="full.classpath">
-				<arg line="${test.dir}/Ecore.ecore fr.irisa.triskell.ecore.visitor ./src/java/fr/irisa/triskell/ecore/visitor Ecore"/>
+				<arg line="${src.dir}/Ecore.ecore fr.irisa.triskell.ecore.visitor ./src/java/fr/irisa/triskell/ecore/visitor Ecore"/>
 			</java> 
 	</target>
 	

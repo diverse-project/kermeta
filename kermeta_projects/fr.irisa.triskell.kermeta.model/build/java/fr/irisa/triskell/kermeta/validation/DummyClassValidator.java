@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyClassValidator.java,v 1.1 2007-07-11 14:41:56 cfaucher Exp $
+ * $Id: DummyClassValidator.java,v 1.2 2007-07-20 15:09:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.validation;
 

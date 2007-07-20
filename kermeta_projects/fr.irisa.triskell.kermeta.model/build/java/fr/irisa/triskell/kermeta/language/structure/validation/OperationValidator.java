@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationValidator.java,v 1.1 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: OperationValidator.java,v 1.2 2007-07-20 15:08:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
@@ -26,13 +26,13 @@ import org.eclipse.emf.common.util.EList;
 public interface OperationValidator {
 	boolean validate();
 
-	boolean validateIsAbstract(boolean value);
-	boolean validateRaisedException(EList value);
-	boolean validateOwnedParameter(EList value);
-	boolean validatePre(EList value);
-	boolean validatePost(EList value);
 	boolean validateBody(Expression value);
 	boolean validateSuperOperation(Operation value);
 	boolean validateOwningClass(ClassDefinition value);
 	boolean validateTypeParameter(EList value);
+	boolean validateRaisedException(EList value);
+	boolean validateOwnedParameter(EList value);
+	boolean validatePre(EList value);
+	boolean validatePost(EList value);
+	boolean validateIsAbstract(boolean value);
 }

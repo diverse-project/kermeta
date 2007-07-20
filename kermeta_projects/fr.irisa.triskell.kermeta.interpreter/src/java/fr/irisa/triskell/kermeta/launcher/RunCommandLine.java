@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.13 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: RunCommandLine.java,v 1.14 2007-07-20 15:07:48 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : EPL
@@ -29,15 +29,14 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;
 import fr.irisa.triskell.utils.argumentsreader.Option;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 /**
  * Start a Kermeta program from the command line
@@ -181,7 +180,7 @@ public class RunCommandLine {
 	        internalLog.error("Cannot initialise because the location of Kermeta Standard Library is not known. Please use option -K ");
 	        return; 
 	    }
-	    else StdLibKermetaUnitHelper.STD_LIB_URI = kermetaStandardURI;
+	    //else StdLibKermetaUnitHelper.STD_LIB_URI = kermetaStandardURI;
         
         
 	    theInterpreter = new KermetaInterpreter(unitURI);
@@ -197,13 +196,7 @@ public class RunCommandLine {
 		            fr.irisa.triskell.kermeta.runtime.basetypes.String.create(arg,theInterpreter.getMemory().getROFactory()));
 		}
 	    //		  Is there a "testOperation" tag?
-	    Iterator it2 = theInterpreter.getUnit().rootPackage.getTag().iterator();
-        while(it2.hasNext()) {
-            Tag tag = (Tag)it2.next();
-            //          is there a tag "testOperation" -- we don't care about its value!!
-            if (tag.getName().equals("testOperation"))
-                isTestSuite=true; 
-        }
+		//isTestSuite = theInterpreter.getUnit().getModelingUnit().isTestSuite();
         initialized = true;
 	}
 	public void run()

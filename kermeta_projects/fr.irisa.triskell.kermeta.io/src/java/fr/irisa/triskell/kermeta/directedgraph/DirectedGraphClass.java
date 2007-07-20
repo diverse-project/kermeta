@@ -3,16 +3,17 @@ package fr.irisa.triskell.kermeta.directedgraph;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
-
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 public class DirectedGraphClass implements DirectedGraphInterface {
@@ -31,10 +32,11 @@ public class DirectedGraphClass implements DirectedGraphInterface {
         nodes=new ArrayList();
         //construction de l'ensemble des noeuds
         buildNode();
-        ArrayList iulist = unit.getAllImportedUnits();
-	    for (int i=0; i<iulist.size(); i++) {	        
+        List iulist = unit.getImportedKermetaUnits();
+	    for (int i=0; i<iulist.size(); i++) {	      
 	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
-	        buildNode(iu);
+	        if ( ! iu.isFramework() )
+	        	buildNode(iu);
 	    }
     }
 	
@@ -51,7 +53,7 @@ public class DirectedGraphClass implements DirectedGraphInterface {
      * cycle detection need a clean list of all nodes
      */
     public void buildNode() {        
-        Iterator it = unit.typeDefs.values().iterator();
+        Iterator it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
         while(it.hasNext()) {
             TypeDefinition td = (TypeDefinition)it.next();
             if (td instanceof ClassDefinition) {
@@ -62,7 +64,7 @@ public class DirectedGraphClass implements DirectedGraphInterface {
     public void buildNode(KermetaUnit u) {
         
         
-        Iterator it = u.typeDefs.values().iterator();
+        Iterator it = TypeDefinitionSearcher.getInternalTypesDefinition(unit).iterator();
         while(it.hasNext()) {
             TypeDefinition td = (TypeDefinition)it.next();
             if (td instanceof ClassDefinition) {

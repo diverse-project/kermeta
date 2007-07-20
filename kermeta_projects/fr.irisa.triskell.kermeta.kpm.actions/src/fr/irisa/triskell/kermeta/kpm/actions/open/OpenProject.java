@@ -9,6 +9,7 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
@@ -21,8 +22,6 @@ import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 
 public class OpenProject implements IAction, Interest {
 
@@ -59,10 +58,7 @@ public class OpenProject implements IAction, Interest {
 			Map map = new HashMap();
 			List<Unit> updatedUnits = new ArrayList<Unit> ();
 			map.put("updatedUnits", updatedUnits);
-			
-	
-			KermetaUnitHelper.unloadAllKermetaUnit();
-			
+		
 			/*
 			 * 
 			 * For each unit of the project, we check if the update dependency is 
@@ -104,7 +100,7 @@ public class OpenProject implements IAction, Interest {
 						if ( monitor.isCanceled() )
 							return;
 						
-						KermetaUnitHelper.unloadAllKermetaUnit();
+						//KermetaUnitHelper.unloadAllKermetaUnit();
 						
 						KermetaUnitHost.getInstance().declareInterest(this, currentUnit);
 						map.put("forceTypechecking", true);

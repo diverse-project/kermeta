@@ -2,22 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.7 2007-07-11 14:41:52 cfaucher Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.8 2007-07-20 15:09:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
-import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
-
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 import java.util.Collection;
 
@@ -27,12 +22,10 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -45,11 +38,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getContainedType <em>Contained Type</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getInv <em>Inv</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl#getInv <em>Inv</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,16 +65,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * @ordered
 	 */
 	protected EList<Type> containedType;
-
-	/**
-	 * The cached value of the '{@link #getInv() <em>Inv</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInv()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Constraint> inv;
 
 	/**
 	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
@@ -134,6 +117,16 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	protected EList<Type> superType;
 
 	/**
+	 * The cached value of the '{@link #getInv() <em>Inv</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInv()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> inv;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -162,18 +155,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 			containedType = new EObjectContainmentWithInverseEList.Resolving<Type>(Type.class, this, StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Constraint> getInv() {
-		if (inv == null) {
-			inv = new EObjectContainmentWithInverseEList.Resolving<Constraint>(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
-		}
-		return inv;
 	}
 
 	/**
@@ -238,18 +219,30 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Constraint> getInv() {
+		if (inv == null) {
+			inv = new EObjectContainmentWithInverseEList.Resolving<Constraint>(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
+		}
+		return inv;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 		@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getContainedType()).basicAdd(otherEnd, msgs);
-			case StructurePackage.CLASS_DEFINITION__INV:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInv()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAttribute()).basicAdd(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperation()).basicAdd(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__INV:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInv()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -264,12 +257,12 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 				return ((InternalEList<?>)getContainedType()).basicRemove(otherEnd, msgs);
-			case StructurePackage.CLASS_DEFINITION__INV:
-				return ((InternalEList<?>)getInv()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 				return ((InternalEList<?>)getOwnedAttribute()).basicRemove(otherEnd, msgs);
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				return ((InternalEList<?>)getOwnedOperation()).basicRemove(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__INV:
+				return ((InternalEList<?>)getInv()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -284,8 +277,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 				return getContainedType();
-			case StructurePackage.CLASS_DEFINITION__INV:
-				return getInv();
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
@@ -294,6 +285,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return getOwnedOperation();
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				return getSuperType();
+			case StructurePackage.CLASS_DEFINITION__INV:
+				return getInv();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -311,10 +304,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				getContainedType().clear();
 				getContainedType().addAll((Collection<? extends Type>)newValue);
 				return;
-			case StructurePackage.CLASS_DEFINITION__INV:
-				getInv().clear();
-				getInv().addAll((Collection<? extends Constraint>)newValue);
-				return;
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 				setIsAbstract(((Boolean)newValue).booleanValue());
 				return;
@@ -329,6 +318,10 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				getSuperType().clear();
 				getSuperType().addAll((Collection<? extends Type>)newValue);
+				return;
+			case StructurePackage.CLASS_DEFINITION__INV:
+				getInv().clear();
+				getInv().addAll((Collection<? extends Constraint>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -345,9 +338,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 				getContainedType().clear();
 				return;
-			case StructurePackage.CLASS_DEFINITION__INV:
-				getInv().clear();
-				return;
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
@@ -359,6 +349,9 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return;
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				getSuperType().clear();
+				return;
+			case StructurePackage.CLASS_DEFINITION__INV:
+				getInv().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -374,8 +367,6 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
 				return containedType != null && !containedType.isEmpty();
-			case StructurePackage.CLASS_DEFINITION__INV:
-				return inv != null && !inv.isEmpty();
 			case StructurePackage.CLASS_DEFINITION__IS_ABSTRACT:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
@@ -384,6 +375,8 @@ public class ClassDefinitionImpl extends GenericTypeDefinitionImpl implements Cl
 				return ownedOperation != null && !ownedOperation.isEmpty();
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				return superType != null && !superType.isEmpty();
+			case StructurePackage.CLASS_DEFINITION__INV:
+				return inv != null && !inv.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

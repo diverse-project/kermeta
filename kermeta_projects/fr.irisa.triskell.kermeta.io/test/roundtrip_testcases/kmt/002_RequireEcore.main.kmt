@@ -4,8 +4,12 @@
 package src;
 
 require kermeta
-require "./002_MetaModel.ecore"
+require "http://www.eclipse.org/emf/2002/Ecore"
+//require "platform:/plugin/fr.irisa.triskell.kermeta.io/test/roundtrip_testcases/kmt/002_MetaModel.ecore"
+require "002_MetaModel.ecore"
 
+
+using kermeta
 using kermeta::persistence
 using kermeta::standard
 
@@ -21,7 +25,7 @@ class Main
         //Configuration of different resources
     	var statemachine : StateMachine
     	var repository : EMFRepository init EMFRepository.new
-    	var resource : EMFResource init repository.createResource("./StateMachine.xmi", "./MetaModel.ecore")
+    	var resource : Resource init repository.createResource("./StateMachine.xmi", "./MetaModel.ecore")
     	
     	//Load
     	stdio.writeln("Before Load")
@@ -45,8 +49,8 @@ class Main
     	t1.source := s0
     	t1.target := s1
     	setTrans.add(t1)
-    	s0.outgoing := setTrans
-    	s1.incoming := setTrans
+    	s0.outgoing.addAll(setTrans)
+    	s1.incoming.addAll(setTrans)
     	statemachine.top := s0
     	
     	// Manage the resource 

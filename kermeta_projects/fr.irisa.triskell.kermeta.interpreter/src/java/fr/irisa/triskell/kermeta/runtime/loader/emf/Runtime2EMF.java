@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.59 2007-07-13 14:27:14 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.60 2007-07-20 15:07:49 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -42,8 +42,6 @@ import org.eclipse.emf.ecore.util.FeatureMapUtil;
 
 //import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;

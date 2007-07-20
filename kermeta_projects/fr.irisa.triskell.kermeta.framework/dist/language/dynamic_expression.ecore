@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="../Standard.kmt|"/>
+    <details key="using" value="kermeta::standard|kermeta::reflection|kermeta::utils|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="interpreter" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/dynamic_expression.ecore#//interpreter" nsPrefix="interpreter">
+      <eClassifiers xsi:type="ecore:EClass" name="DynamicExpression">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="initializeDefaults" ordered="false">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;formalParameters := kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::language::structure::Type>.new&#xA;&#x9;selfClass ?= kermeta::reflection::Object.typeDefinition&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="parse">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;errors.clear&#xA;&#x9;if (formalParameters.equals(void)) or (selfClass.equals(void)) then&#xA;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;parse precondition - formalParameters or selfType is void&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)&#xA;&#x9;if (errors.size) != (0) then&#xA;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;parse result - expression contains errors&quot;&#xA;&#x9;&#x9;errors.each{error | e.message.append(&quot;&#xA;&quot;.plus(error.message))}&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="expression">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="execute">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if expression.equals(void) then&#xA;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;execute precondition - expression is void&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;if (errors.size) != (0) then&#xA;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;execute precondition - expression contains errors&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.execute(self, selfObj, actualParams)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eParameters name="selfObj">
+            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          </eParameters>
+          <eParameters name="actualParams">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="kermeta::standard::String"/>
+              <details key="1" value="kermeta::standard::Object"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../utils/hashtable.ecore#/1/utils/Hashtable"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="evalString">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if not (parse(body)) then&#xA;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;e.message := &quot;evalString - expression contains errors&quot;&#xA;&#x9;&#x9;raise e&#xA;&#xA;&#x9;end&#xA;&#x9;result := execute(selfObj, actualParams)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          <eParameters name="body">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+          <eParameters name="selfObj">
+            <eType xsi:type="ecore:EDataType" href="../standard/collections.ecore#/1/standard/Object"/>
+          </eParameters>
+          <eParameters name="actualParams">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="kermeta::standard::String"/>
+              <details key="1" value="kermeta::standard::Object"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EClass" href="../utils/hashtable.ecore#/1/utils/Hashtable"/>
+          </eParameters>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="errors" upperBound="-1" eType="/1/interpreter/KermetaError">
+          <eAnnotations source="kermeta"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="expression">
+          <eAnnotations source="kermeta"/>
+          <eType xsi:type="ecore:EClass" href="behavior.ecore#/1/language/behavior/Expression"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="selfClass">
+          <eAnnotations source="kermeta"/>
+          <eType xsi:type="ecore:EClass" href="../reflection/reflection.ecore#/1/reflection/ClassDefinition"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="formalParameters">
+          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="kermeta::standard::String"/>
+            <details key="1" value="kermeta::reflection::Type"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="../utils/hashtable.ecore#/1/utils/Hashtable"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="DynamicExpressionException">
+        <eSuperTypes href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="KermetaError" abstract="true">
+        <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="message" containment="true">
+          <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ParseError" eSuperTypes="/1/interpreter/KermetaError"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TypeError" eSuperTypes="/1/interpreter/KermetaError"/>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="reflective_collections.ecore#/0"/>
+    <references href="reflective_collections.ecore#/1"/>
+    <references href="reflective_collections.ecore#/2"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
+    <references href="behavior.ecore#/0"/>
+    <references href="behavior.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="structure.ecore#/0"/>
+    <references href="structure.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

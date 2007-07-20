@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpressionValidator.java,v 1.1 2007-07-11 14:41:49 cfaucher Exp $
+ * $Id: CallExpressionValidator.java,v 1.2 2007-07-20 15:08:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 
@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.EList;
 public interface CallExpressionValidator {
 	boolean validate();
 
+	boolean validateStaticTypeVariableBindings(EList value);
 	boolean validateParameters(EList value);
 	boolean validateName(String value);
-	boolean validateStaticTypeVariableBindings(EList value);
 }

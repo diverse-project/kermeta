@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.11 2007-07-17 15:56:36 cfaucher Exp $
+/* $Id: Ecore2KM.java,v 1.12 2007-07-20 15:08:11 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -36,7 +36,6 @@ public class Ecore2KM {
 	public boolean isClassTypeOwner = true;
 	
 	protected Resource resource;
-	protected EcoreUnit unit;
 	/**
 	 * reference to element currently visited 
 	 */
@@ -65,47 +64,6 @@ public class Ecore2KM {
 	 * Tag elements.
 	 */
 	public Hashtable<EAnnotation,fr.irisa.triskell.kermeta.language.structure.Object> nestedAnnotMap = new Hashtable<EAnnotation,fr.irisa.triskell.kermeta.language.structure.Object>();
-	
-	public Ecore2KM(Resource resource, EcoreUnit unit)
-	{
-		this.resource = resource;
-		this.unit = unit;
-	}
-	
-	public void export()
-	{
-		// First pass : visit all the packages, type definitions, and operations and properties without
-		// their types
-		Ecore2KMPass1 visitor1 = new Ecore2KMPass1(this);
 
-		// Visit the metamodel : we visit the packages, which imply the visit of 
-		// the classdefinitions and sub packages
-		Iterator pkgs = resource.getContents().iterator();
-		while(pkgs.hasNext()) {
-			EObject obj = (EObject)pkgs.next();
-			if (obj instanceof EPackage) {
-				visitor1.accept(obj);
-			}
-			
-		}
-		// Second pass : visit the classes and set their supertypes
-		Ecore2KMPass2 visitor2 = new Ecore2KMPass2(visitor1, this);
-		visitor2.convertUnit();
-		
-		// Third pass : visit the operation and properties and set their types
-		Ecore2KMPass3 visitor3 = new Ecore2KMPass3(visitor1, this);
-		Hashtable opTable = visitor3.convertUnit();
-		
-		// Third pass : visit the operation and properties and set their types
-		Ecore2KMPass4 visitor4 = new Ecore2KMPass4(visitor1, visitor3, this);
-		visitor4.convertUnit();
-		
-		// Forth pass: visit the operations again, and apply the QuickFix corrections
-		if (Ecore2KM.isQuickFixEnabled) {
-			Ecore2KMPass5 visitor5 = new Ecore2KMPass5(visitor1, opTable, this);
-			visitor5.fixUnit();
-		}
-
-	}
 	
 }

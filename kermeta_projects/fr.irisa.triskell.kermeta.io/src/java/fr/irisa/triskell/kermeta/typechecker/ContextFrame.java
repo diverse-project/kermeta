@@ -1,4 +1,4 @@
-/* $Id: ContextFrame.java,v 1.3 2006-09-29 13:29:04 zdrey Exp $
+/* $Id: ContextFrame.java,v 1.4 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ContextFrame.java
 * License : GPL
@@ -16,6 +16,8 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+
+
 
 /**
  * @author Franck Fleurey

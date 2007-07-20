@@ -2,6 +2,8 @@
 @mainOperation "e"
 package MDK;
 
+require "http://www.eclipse.org/emf/2002/Ecore"
+
 enumeration AccesVariableEnumeration
 {
 	accPublic;

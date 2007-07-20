@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="primitive_types.kmt|"/>
+    <details key="using" value="kermeta::exceptions|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/standard/collections.ecore#//standard" nsPrefix="standard">
+      <eClassifiers xsi:type="ecore:EDataType" name="Object" instanceClassName="java.lang.Object">
+        <eAnnotations source="kermeta">
+          <details key="alias" value="kermeta::language::structure::Object"/>
+        </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Collection" abstract="true">
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="asBag" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asSet" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asOrderedSet" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asSequence" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="forAllCpl">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.forAll{x | self.forAll{y | f(x, y)}}&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="f">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="G"/>
+              <details key="2" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="existsCpl">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.exists{x | self.exists{y | f(x, y)}}&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="f">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="G"/>
+              <details key="2" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="add">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="remove">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;from elem := self.detect{e | e.equals(element)}&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#x9;&#x9;elem := self.detect{e | e.equals(element)}&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.post">
+            <details key="doesntContainsElementAnymore" value="not (contains(element))"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="clear">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)&#xA;end"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="addAll">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;elements.each{element | add(element)}&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Collection">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="contains">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := false&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or (result)&#xA;&#x9;loop&#xA;&#x9;&#x9;result := it.next.equals(element)&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="includes">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.contains(element)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="containsAll">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until (it.isOff) or (not (result))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := self.contains(it.next)&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="elements" eType="/1/standard/Collection">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="includesAll">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.containsAll(elements)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="elements" eType="/1/standard/Collection">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="excludes">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := not (self.contains(element))&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="excludesAll">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until (it.isOff) or (not (result))&#xA;&#x9;loop&#xA;&#x9;&#x9;result := not (self.contains(it.next))&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="elements" eType="/1/standard/Collection">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="size">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+        </eOperations>
+        <eOperations name="empty">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := (size) == (0)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+        </eOperations>
+        <eOperations name="isEmpty">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.empty&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+        </eOperations>
+        <eOperations name="isNotEmpty">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := not (self.empty)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+        </eOperations>
+        <eOperations name="iterator" eType="/1/standard/Iterator">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Iterator&lt;G>.new&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self, result)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="one">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;result := void&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;&#x9;result := it.next&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+        </eOperations>
+        <eOperations name="any">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;result := it.next&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+        </eOperations>
+        <eOperations name="each">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;func(it.next)&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="func">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="alias Object : kermeta::language::structure::Object;"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="forAll">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var test : kermeta::standard::Boolean init true&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;test := (test) and (func(it.next))&#xA;&#x9;end&#xA;&#x9;result := test&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="func">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="exists">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var test : kermeta::standard::Boolean init false&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or ((test) != (false))&#xA;&#x9;loop&#xA;&#x9;&#x9;test := (test) or (func(it.next))&#xA;&#x9;end&#xA;&#x9;result := test&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="func">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="collect" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(collector(it.next))&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="T"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeParameters">
+            <details key="T" value="T"/>
+          </eAnnotations>
+          <eParameters name="collector">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="T"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="isUnique">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := true&#xA;&#x9;var s : kermeta::standard::Sequence&lt;T> init kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or (not (result))&#xA;&#x9;loop&#xA;&#x9;&#x9;var t : T init collector(it.next)&#xA;&#x9;&#x9;if s.contains(t) then&#xA;&#x9;&#x9;&#x9;result := false&#xA;&#xA;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;s.add(t)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeParameters">
+            <details key="T" value="T"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="collector">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="T"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="detect">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;result := void&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until (it.isOff) or (result.isNotEqual(void))&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if detector(elem) then&#xA;&#x9;&#x9;&#x9;result := elem&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          <eParameters name="detector">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="select" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if selector(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="selector">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="reject" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.~select{elem | not (rejector(elem))}&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="rejector">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="kermeta::standard::Boolean"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="count">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := self.~select{e | e.equals(element)}.size&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="sum">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var res : G&#xA;&#x9;var tmp : kermeta::standard::Summable&lt;G>&#xA;&#x9;var o : kermeta::standard::Object&#xA;&#x9;o := self.one&#xA;&#x9;tmp ?= o&#xA;&#x9;result := void&#xA;&#x9;if tmp.isNotEqual(void) then&#xA;&#x9;&#x9;self.each{elem | do&#xA;&#x9;&#x9;&#x9;&#x9;o := elem&#xA;&#x9;&#x9;&#x9;&#x9;tmp ?= o&#xA;&#x9;&#x9;&#x9;&#x9;if tmp.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;res := tmp.plus(res)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="/1/standard/Collection">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eOperations name="add">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/add">
+            <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(element)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="remove">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/remove">
+            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="equals">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if (self.size) == (collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var elem : G&#xA;&#x9;&#x9;&#x9;&#x9;var ok : kermeta::standard::Boolean init true&#xA;&#x9;&#x9;&#x9;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;until (it.isOff) or (not (ok))&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (collection.contains(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;ok := false&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := ok&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element" eType="/1/standard/Object"/>
+        </eOperations>
+        <eOperations name="union" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAll(elements)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Set">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="unionWithBag" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;result := addAll(self)&#xA;&#x9;result := addAll(elements)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Bag">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="intersection" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if elements.contains(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Collection">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="minus" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if not (elements.contains(elem)) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Set">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="asSet" eType="/1/standard/Set">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asSet">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Set&lt;G> init kermeta::standard::Set&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asOrderedSet" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asOrderedSet">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asBag" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asBag">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asSequence" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asSequence">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="symmetricDifference" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;G> init s.minus(self)&#xA;&#x9;result := self.minus(s).addAll(res)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="s" eType="/1/standard/Set">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="flatten" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Set&lt;kermeta::standard::Object> init kermeta::standard::Set&lt;kermeta::standard::Object>.new&#xA;&#x9;if G.isKindOf(kermeta::standard::Collection&lt;kermeta::standard::Object>) then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;var o : kermeta::standard::Object&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;o := e&#xA;&#x9;&#x9;&#x9;&#x9;col ?= o&#xA;&#x9;&#x9;&#x9;&#x9;res.addAll(col)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="kermeta::standard::Object"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="sortedBy" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := quickSort(self.asOrderedSet, comparator)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="comparator">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="G"/>
+              <details key="2" value="kermeta::standard::Integer"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="quickSort" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var less : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;var pivotList : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;var greater : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;if (q.size) &lt;= (1) then&#xA;&#x9;&#x9;result := q&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var pivot : G init q.one&#xA;&#x9;&#x9;q.each{x | do&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;less.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (0) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;pivotList.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1.uminus) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;greater.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="q" eType="/1/standard/OrderedSet">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+          <eParameters name="comparator">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="G"/>
+              <details key="2" value="kermeta::standard::Integer"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="concatenate" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(less)&#xA;&#x9;result.addAll(pivot)&#xA;&#x9;result.addAll(greater)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="less" eType="/1/standard/OrderedSet">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+          <eParameters name="pivot" eType="/1/standard/OrderedSet">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+          <eParameters name="greater" eType="/1/standard/OrderedSet">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Bag" eSuperTypes="/1/standard/Collection">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eOperations name="equals">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::Collection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Bag&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;var selfAsSet : kermeta::standard::Set&lt;G> init self.asSet&#xA;&#x9;&#x9;&#x9;result := selfAsSet.equals(collection.asSet)&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element" eType="/1/standard/Object"/>
+        </eOperations>
+        <eOperations name="union" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;result := addAll(self)&#xA;&#x9;result := addAll(elements)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Collection">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="intersection" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Bag&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;from it&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if elements.contains(elem) then&#xA;&#x9;&#x9;&#x9;if (self.count(elem)) &lt;= (elements.count(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;it := elements.iterator&#xA;&#x9;from it&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if self.contains(elem) then&#xA;&#x9;&#x9;&#x9;if (elements.count(elem)) &lt; (self.count(elem)) then&#xA;&#x9;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Bag">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="intersectionWithSet" eType="/1/standard/Set">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;G>.new&#xA;&#x9;var elem : G&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init elements.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;if self.contains(elem) then&#xA;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="elements" eType="/1/standard/Set">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+        <eOperations name="removeFromOid">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | (e.oid) == (elementOid)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.post">
+            <details key="doesntContainsElementAnymore" value="not (exists{e | (e.oid) == (elementOid)})"/>
+          </eAnnotations>
+          <eParameters name="elementOid">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="removeOne">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | e.equals(element)}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="asSet" eType="/1/standard/Set">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asSet">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Set&lt;G> init kermeta::standard::Set&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asOrderedSet" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asOrderedSet">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::OrderedSet&lt;G> init kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asBag" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asBag">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="asSequence" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta" references="/1/standard/Collection/asSequence">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;result := s&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Collection"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="including" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;s.add(object)&#xA;&#x9;result := s&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="object">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="excluding" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var s : kermeta::standard::Bag&lt;G> init kermeta::standard::Bag&lt;G>.new&#xA;&#x9;s.addAll(self)&#xA;&#x9;s.remove(object)&#xA;&#x9;result := s&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="object">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="flatten" eType="/1/standard/Bag">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var res : kermeta::standard::Bag&lt;kermeta::standard::Object> init kermeta::standard::Bag&lt;kermeta::standard::Object>.new&#xA;&#x9;if G.isKindOf(kermeta::standard::Collection&lt;kermeta::standard::Object>) then&#xA;&#x9;&#x9;var col : kermeta::standard::Collection&lt;kermeta::standard::Object>&#xA;&#x9;&#x9;var o : kermeta::standard::Object&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;o := e&#xA;&#x9;&#x9;&#x9;&#x9;col ?= o&#xA;&#x9;&#x9;&#x9;&#x9;res.addAll(col)&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;&#x9;result := res&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="kermeta::standard::Object"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="sortedBy" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := quickSort(self.asSequence, comparator)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="comparator">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="G"/>
+              <details key="2" value="kermeta::standard::Integer"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="quickSort" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var less : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;var pivotList : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;var greater : kermeta::standard::Sequence&lt;G> init kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;if (q.size) &lt;= (1) then&#xA;&#x9;&#x9;result := q&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var pivot : G init q.one&#xA;&#x9;&#x9;q.each{x | do&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;less.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (0) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;pivotList.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;if (comparator(x, pivot)) == (1.uminus) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;greater.add(x)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;result := concatenate(quickSort(less, comparator), pivotList, quickSort(greater, comparator))&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="q" eType="/1/standard/Sequence">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+          <eParameters name="comparator">
+            <eAnnotations source="kermeta.functionType">
+              <details key="0" value="G"/>
+              <details key="1" value="G"/>
+              <details key="2" value="kermeta::standard::Integer"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="concatenate" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.addAll(less)&#xA;&#x9;result.addAll(pivot)&#xA;&#x9;result.addAll(greater)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="less" eType="/1/standard/Sequence">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+          <eParameters name="pivot" eType="/1/standard/Sequence">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+          <eParameters name="greater" eType="/1/standard/Sequence">
+            <eAnnotations source="kermeta.typeVariableBindings">
+              <details key="0" value="G"/>
+            </eAnnotations>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="OrderedCollection" abstract="true" eSuperTypes="/1/standard/Collection">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="kermeta::standard::Collection&lt;G>" value="kermeta::standard::Collection&lt;G>"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eOperations name="addAt">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > (size)) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(self, index, element)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="removeAt">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > ((size) - (1))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(self, index)&#xA;end"/>
+          </eAnnotations>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="elementAt">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if ((index) &lt; (0)) or ((index) > ((size) - (1))) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(self, index)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="first">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;result := elementAt(0)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+        </eOperations>
+        <eOperations name="last">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;result := elementAt((size) - (1))&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+        </eOperations>
+        <eOperations name="equals">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;var isEqual : kermeta::standard::Boolean init false&#xA;&#x9;if not (element.isVoid) then&#xA;&#x9;&#x9;if kermeta::standard::OrderedCollection&lt;G>.isInstance(element) then&#xA;&#x9;&#x9;&#x9;var collection : kermeta::standard::Collection&lt;G>&#xA;&#x9;&#x9;&#x9;collection ?= element&#xA;&#x9;&#x9;&#x9;if (self.size) == (collection.size) then&#xA;&#x9;&#x9;&#x9;&#x9;var selfIterator : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var collectionIterator : kermeta::standard::Iterator&lt;G> init collection.iterator&#xA;&#x9;&#x9;&#x9;&#x9;var difference : kermeta::standard::Boolean init false&#xA;&#x9;&#x9;&#x9;&#x9;from void&#xA;&#x9;&#x9;&#x9;&#x9;until ((selfIterator.isOff) or (collectionIterator.isOff)) or (difference)&#xA;&#x9;&#x9;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not (selfIterator.next.equals(collectionIterator.next)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;difference := true&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;isEqual := not (difference)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#xA;&#x9;&#x9;end&#xA;&#xA;&#x9;end&#xA;&#x9;result := isEqual&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/equals"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element" eType="/1/standard/Object"/>
+        </eOperations>
+        <eOperations name="indexOf">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if (size) == (0) then&#xA;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#xA;&#x9;end&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;result := 1.uminus&#xA;&#xA;&#x9;else&#xA;&#x9;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;&#x9;from var found : kermeta::standard::Boolean init false&#xA;&#x9;&#x9;until found&#xA;&#x9;&#x9;loop&#xA;&#x9;&#x9;&#x9;if element.equals(elementAt(i)) then&#xA;&#x9;&#x9;&#x9;&#x9;found := true&#xA;&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;i := (i) + (1)&#xA;&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;result := i&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="OrderedSet" eSuperTypes="/1/standard/Set /1/standard/OrderedCollection">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="kermeta::standard::Set&lt;G>" value="kermeta::standard::Set&lt;G>"/>
+          <details key="kermeta::standard::OrderedCollection&lt;G>" value="kermeta::standard::OrderedCollection&lt;G>"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eOperations name="add" ordered="false">
+          <eAnnotations source="kermeta" references="/1/standard/Set/add">
+            <details key="body" value="do&#xA;&#x9;super(element)&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::Set"/>
+          </eAnnotations>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="addAt">
+          <eAnnotations source="kermeta" references="/1/standard/OrderedCollection/addAt">
+            <details key="body" value="do&#xA;&#x9;if not (self.contains(element)) then&#xA;&#x9;&#x9;super(index, element)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
+          </eAnnotations>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="element">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="equals">
+          <eAnnotations source="kermeta" references="/1/standard/OrderedCollection/equals">
+            <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element" eType="/1/standard/Object"/>
+        </eOperations>
+        <eOperations name="subSet" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;if ((min) >= (0)) and ((max) &lt;= (self.size)) then&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;var i : kermeta::standard::Integer init self.indexOf(e)&#xA;&#x9;&#x9;&#x9;&#x9;if ((i) >= (min)) and ((i) &lt;= (max)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(e)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="min">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="max">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="append" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.add(subject)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="subject">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="preppend" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.add(subject)&#xA;&#x9;result.addAll(self)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="subject">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="insertAt" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAt(index, subject)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="subject">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="subOrderedSet" eType="/1/standard/OrderedSet">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::OrderedSet&lt;G>.new&#xA;&#x9;from var i : kermeta::standard::Integer init lower&#xA;&#x9;until (i) &lt;= (upper)&#xA;&#x9;loop&#xA;&#x9;&#x9;result.add(self.at(i))&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="lower">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="upper">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="at">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if ((index) >= (0)) and ((index) &lt;= (self.size)) then&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;var i : kermeta::standard::Integer init self.indexOf(e)&#xA;&#x9;&#x9;&#x9;&#x9;if (i) == (index) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := e&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="/1/standard/Bag /1/standard/OrderedCollection">
+        <eAnnotations source="kermeta.typeVariableBindings">
+          <details key="kermeta::standard::Bag&lt;G>" value="kermeta::standard::Bag&lt;G>"/>
+          <details key="kermeta::standard::OrderedCollection&lt;G>" value="kermeta::standard::OrderedCollection&lt;G>"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eOperations name="equals">
+          <eAnnotations source="kermeta" references="/1/standard/OrderedCollection/equals">
+            <details key="body" value="do&#xA;&#x9;result := super(element)&#xA;end"/>
+            <details key="superOperation" value="kermeta::standard::OrderedCollection"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+          <eParameters name="element" eType="/1/standard/Object"/>
+        </eOperations>
+        <eOperations name="subSequence" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;if ((min) >= (0)) and ((max) &lt;= (self.size)) then&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;var i : kermeta::standard::Integer init self.indexOf(e)&#xA;&#x9;&#x9;&#x9;&#x9;if ((i) >= (min)) and ((i) &lt;= (max)) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(e)&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="min">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="max">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="append" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.add(subject)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="subject">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="preppend" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.add(subject)&#xA;&#x9;result.addAll(self)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="subject">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="insertAt" eType="/1/standard/Sequence">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;result.addAll(self)&#xA;&#x9;result.addAt(index, subject)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariableBindings">
+            <details key="0" value="G"/>
+          </eAnnotations>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+          <eParameters name="subject">
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="G" value="G"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="at">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if ((index) >= (0)) and ((index) &lt;= (self.size)) then&#xA;&#x9;&#x9;self.each{e | do&#xA;&#x9;&#x9;&#x9;&#x9;var i : kermeta::standard::Integer init self.indexOf(e)&#xA;&#x9;&#x9;&#x9;&#x9;if (i) == (index) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := e&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end}&#xA;&#xA;&#x9;end&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+          <eParameters name="index">
+            <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Integer"/>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Iterator">
+        <eAnnotations source="kermeta.typeParameters">
+          <details key="G" value="G"/>
+        </eAnnotations>
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="isOff">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := not (hasNext)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+        </eOperations>
+        <eOperations name="hasNext">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)&#xA;end"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/Boolean"/>
+        </eOperations>
+        <eOperations name="next">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;if not (hasNext) then&#xA;&#x9;&#x9;raise kermeta::exceptions::IteratorIsOff.new&#xA;&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="kermeta.typeVariable">
+            <details key="G" value="G"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="primitive_types.ecore#/0"/>
+    <references href="primitive_types.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="java.ecore#/0"/>
+    <references href="java.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

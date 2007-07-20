@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElementItemProvider.java,v 1.7 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: NamedElementItemProvider.java,v 1.8 2007-07-20 15:08:27 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

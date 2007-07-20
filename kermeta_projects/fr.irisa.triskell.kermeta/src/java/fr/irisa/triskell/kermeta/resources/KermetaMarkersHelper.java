@@ -1,4 +1,4 @@
-/*$Id: KermetaMarkersHelper.java,v 1.4 2007-05-28 12:51:41 dvojtise Exp $
+/*$Id: KermetaMarkersHelper.java,v 1.5 2007-07-20 15:09:18 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta
 * File : 	KermetaMarkersHelper.java
 * License : EPL
@@ -16,18 +16,18 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.kermeta.io.ErrorMessage;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.Message;
+import org.kermeta.io.ParseErrorMessage;
+import org.kermeta.io.ParsingError;
+import org.kermeta.io.WarningMessage;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.ModelReferenceHelper;
@@ -57,10 +57,10 @@ public class KermetaMarkersHelper {
      */
     public static void createMarkers(IFile file, KermetaUnit unit)
     {
-    	for (Object next : unit.messages.getErrors()) 
-    		createMarkerForKMTFile(file, (KMUnitMessage)next, (KMTUnit)unit);
-    	for (Object next : unit.messages.getWarnings()) 
-    		createMarkerForKMTFile(file, (KMUnitMessage)next, (KMTUnit)unit);
+    	for (ErrorMessage next : KermetaUnitHelper.getErrors(unit) ) 
+    		createMarkerForKMTFile(file, next, unit);
+    	for (WarningMessage next : KermetaUnitHelper.getWarnings(unit)) 
+    		createMarkerForKMTFile(file, next, unit);
     }
 
     /**
@@ -71,59 +71,69 @@ public class KermetaMarkersHelper {
      *  contains the given message/warning/error
      *  @param unit the kermeta unit for the given file
      */
-    public static void createMarkerForKMTFile(IFile file, KMUnitMessage message, KMTUnit unit)
+    public static void createMarkerForKMTFile(IFile file, Message message, KermetaUnit unit)
     {
-    	String realMessage = formatMessage(message.getMessage());
+    	String realMessage = formatMessage(message.getValue());
 
         try
         {
-        	if ( findMarker(file, realMessage) == null ) {
+        //	if ( findMarker(file, realMessage) == null ) {
                 HashMap <String, Object> map = new HashMap <String, Object> ();
                 
                 int offset = 0;
                 int length = -1;
                 
-                if (message instanceof KMUnitParseError) {
-                	KMUnitParseError pe = (KMUnitParseError)message;
-                	offset = pe.getOffset();
+                if (message instanceof ParsingError) {
+                	ParsingError pe = (ParsingError)message;
+                	offset = pe.getOffset() -1;
                 	length = pe.getLength();
                 }
-                else if (message instanceof KMTUnitLoadError) {
+               /* else if (message instanceof KMTUnitLoadError) {
                 	offset = ((KMTUnitLoadError)message).getAstNode().getRangeStart();
                 	length = ((KMTUnitLoadError)message).getAstNode().getRangeLength();	
-                }
-                else if(message.getNode() != null) {
-                	ModelReference mr = unit.tracer.getModelReference(message.getNode());
-                    TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
-                    if(tr != null){
-                    	if(tr.getFileURI().equals(file.getLocationURI().toString())){
-                    		offset = tr.getCharBeginAt();
-                    		length = tr.getCharEndAt()-offset;	
-                    	}
+                }*/
+               else if( message.getTarget() != null ) {
+            	   
+            	   if ( message.getTarget() instanceof KermetaASTNode ) {
+            		   KermetaASTNode node = (KermetaASTNode) message.getTarget(); 
+            		   offset = node.getRangeStart() - 1;
+                       length = node.getRangeLength();   
+            	   } else if ( message.getTarget() instanceof fr.irisa.triskell.kermeta.language.structure.Object ) {
+            	               	   
+            		   fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object) message.getTarget();
+            		   ModelReference mr = unit.getTracer().getModelReference( o );
+            		   TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
+            		   if (tr != null) {
+            			   if(tr.getFileURI().equals( "platform:/resource" + file.getFullPath().toString())){
+            				   offset = tr.getCharBeginAt() - 1;
+            				   length = tr.getCharEndAt() - offset;	
+            			   }
+            		   }
                     }
                     
                 }
-                else if(message.getAstNode() != null) {
-                    ASTNode astn = message.getAstNode();
-                    offset = astn.getRangeStart();
-                    length = astn.getRangeLength();
-                }
+/*                else if(message.getAstNode() != null) {
+                 */
                 
                 
-                if (offset > 0) offset--;
+                //if (offset > 0) offset--;
                 
                 if ( length != -1 ) {  
                 
+                	//MarkerUtilities.setLineNumber(map, line);
+                	MarkerUtilities.setCharStart(map, offset);
+                	MarkerUtilities.setCharEnd(map, offset + length);
+                	
                 	map.put("message", realMessage);
-                	if(message instanceof KMUnitError)
+                	if(message instanceof ErrorMessage)
                 		map.put("severity", new Integer(2));
                 	else
-                		if(message instanceof KMUnitWarning)
+                		if(message instanceof WarningMessage)
                 			map.put("severity", new Integer(1));
                 		else
                 			map.put("severity", new Integer(0));
-                	map.put("charStart", new Integer(offset));
-                	map.put("charEnd", new Integer(offset + length)); 
+                	//map.put("charStart", new Integer(offset));
+                	//map.put("charEnd", new Integer(offset + length)); 
                 	int lineNumber = new Integer(ResourceHelper.calculateLineNumber(offset,file));
                 	if(lineNumber != -1){
                 		map.put("lineNumber", new Integer(lineNumber));
@@ -131,11 +141,11 @@ public class KermetaMarkersHelper {
                 	MarkerUtilities.createMarker(file, map, getMarkerType());
         		//MarkerUtilities.createMarker(file, null, getMarkerType());
                 } else {
-                	map.put("message", "Cannot locate error in file, maybe one of required file is erroneous. " + message.getMessage());
-                	if(message instanceof KMUnitError)
+                	map.put("message", "Cannot locate error in file, maybe one of required file is erroneous.\n" + message.getValue());
+                	if(message instanceof ErrorMessage)
                 		map.put("severity", new Integer(2));
                 	else
-                		if(message instanceof KMUnitWarning)
+                		if(message instanceof WarningMessage)
                 			map.put("severity", new Integer(1));
                 		else
                 			map.put("severity", new Integer(0));
@@ -143,7 +153,7 @@ public class KermetaMarkersHelper {
                 	map.put("charEnd", 0);        		
                 	MarkerUtilities.createMarker(file, map, getMarkerType());
                 }
-        	}
+        	
             
         }
         catch(CoreException ex)
@@ -161,19 +171,19 @@ public class KermetaMarkersHelper {
      *  contains the given message/warning/error
      *  @param unit the kermeta unit for the given file
      */
-    public static void createMarkerForKMFile(IFile file, KMUnitMessage message, KMUnit unit)
+    public static void createMarkerForKMFile(IFile file, Message message, KermetaUnit unit)
     {
         HashMap <String, Object> map = new HashMap <String, Object> ();
-        String realMessage = formatMessage(message.getMessage());
+        String realMessage = formatMessage(message.getValue());
 
         try
         {
         	if ( findMarker(file, realMessage) == null ) {
                 map.put("message", realMessage);
-                if(message instanceof KMUnitError)
+                if(message instanceof ErrorMessage)
                     map.put("severity", new Integer(2));
                 else
-                if(message instanceof KMUnitWarning)
+                if(message instanceof WarningMessage)
                     map.put("severity", new Integer(1));
                 else
                     map.put("severity", new Integer(0));
@@ -274,9 +284,11 @@ public class KermetaMarkersHelper {
 
     static public void removeMarker( IResource resource, String message ) {
 		try {
-			IMarker marker = findMarker(resource, message);
-	    	if ( marker != null )
-	    		marker.delete();
+			if ( resource.exists() ) {
+				IMarker marker = findMarker(resource, message);
+				if ( marker != null )
+					marker.delete();
+			}
 		} catch (CoreException e) {}
     }
     

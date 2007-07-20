@@ -1,4 +1,4 @@
-/* $Id: ModelType.java,v 1.2 2006-12-07 09:38:38 dvojtise Exp $
+/* $Id: ModelType.java,v 1.3 2007-07-20 15:07:47 ftanguy Exp $
  * Project : Kermeta interpreter
  * File : ModelType.java
  * License : EPL
@@ -9,6 +9,7 @@
  * 		Jim Steel
  */
 package fr.irisa.triskell.kermeta.runtime.language;
+
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;

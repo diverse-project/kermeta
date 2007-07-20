@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.9 2007-05-23 07:02:29 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.10 2007-07-20 15:08:07 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -20,10 +20,12 @@ import java.util.jar.JarEntry;
 import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.io.KermetaUnit;
 
 
 /**
@@ -32,7 +34,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  *
  */
 public abstract class Jar2KMPass {
-	protected JarUnit builder;
+	protected KermetaUnit builder;
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("Jar2KM");
 	
 	final static public String JARUNIT_TAG_NAME = "IsProxyForJar";
@@ -45,7 +47,7 @@ public abstract class Jar2KMPass {
 	public int processedJavaClasses = 0; // used to get user feedback in case of OutOfMemory crash ...
 	
 	/** the constructor */
-	public Jar2KMPass(JarUnit builder) {
+	public Jar2KMPass(KermetaUnit builder) {
 		this.builder = builder;
 	}
 	/** entry point for processing this pass */
@@ -123,7 +125,7 @@ public abstract class Jar2KMPass {
     protected Type getTypeByID(String name) {
 	    boolean isUnknownJavaObject = false;
 		if (name.equals("void")) {
-			return builder.struct_factory.createVoidType();
+			return StructureFactory.eINSTANCE.createVoidType();
 		}
 		if (primitive_types_mapping.containsKey(name)) {
         	name = (String)primitive_types_mapping.get(name);
@@ -134,26 +136,26 @@ public abstract class Jar2KMPass {
 	    if (typeDef == null) {
 	        typeDef = builder.getTypeDefinitionByName("kermeta::standard::UnknownJavaObject");
 	        if(typeDef != null){
-	        	builder.messages.addWarning("Cannot resolve type '"+name+"', replaced by kermeta::standard::UnknownJavaObject" ,null);
+	        	builder.warning("Cannot resolve type '"+name+"', replaced by kermeta::standard::UnknownJavaObject" ,null);
 	        	isUnknownJavaObject = true;
 	        }
 	        else{
-	        	builder.messages.addError("Cannot resolve type '"+name+"' nor type kermeta::standard::UnknownJavaObject; is the framework uptodate ?" ,null);
+	        	builder.error("Cannot resolve type '"+name+"' nor type kermeta::standard::UnknownJavaObject; is the framework uptodate ?" ,null);
 	        	return null;
 	        }
 	    }
 	    if (typeDef instanceof Type) return (Type)typeDef;
 	    else {
 	        ClassDefinition cd = (ClassDefinition)typeDef;
-	        fr.irisa.triskell.kermeta.language.structure.Class result = builder.struct_factory.createClass();
+	        fr.irisa.triskell.kermeta.language.structure.Class result = StructureFactory.eINSTANCE.createClass();
 	        //result.setFName(cd.getFName());
 	        if (isUnknownJavaObject){
 	        	// add a tag so we can retrieve the original object type name
 	        	// question : maybe it would be better to have a real type UnknownJavaObject instead of a simple alias ?
-	        	Tag tag = builder.struct_factory.createTag();
+	        	Tag tag = StructureFactory.eINSTANCE.createTag();
 	        	tag.setName(IS_PROXY_FOR_JAVA_TYPE);
 	        	tag.setValue(name);
-	        	result.getTag().add(tag);
+	        	result.getOwnedTag().add(tag);
 	        }
 	        result.setTypeDefinition(cd);
 	        return result;

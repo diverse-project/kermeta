@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionItemProvider.java,v 1.11 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: ClassDefinitionItemProvider.java,v 1.12 2007-07-20 15:08:27 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -138,9 +138,9 @@ public class ClassDefinitionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
-			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__INV);
 			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__OWNED_ATTRIBUTE);
 			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__OWNED_OPERATION);
+			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__INV);
 		}
 		return childrenFeatures;
 	}
@@ -198,9 +198,9 @@ public class ClassDefinitionItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-			case StructurePackage.CLASS_DEFINITION__INV:
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
+			case StructurePackage.CLASS_DEFINITION__INV:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -236,17 +236,37 @@ public class ClassDefinitionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createFunctionType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createProductType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createVoidType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
+				 StructureFactory.eINSTANCE.createDataType()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createObjectTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -260,26 +280,6 @@ public class ClassDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createProductType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createFunctionType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
-				 StructureFactory.eINSTANCE.createVoidType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CLASS_DEFINITION__INV,
-				 StructureFactory.eINSTANCE.createConstraint()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(StructurePackage.Literals.CLASS_DEFINITION__OWNED_ATTRIBUTE,
 				 StructureFactory.eINSTANCE.createProperty()));
 
@@ -287,6 +287,11 @@ public class ClassDefinitionItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.CLASS_DEFINITION__OWNED_OPERATION,
 				 StructureFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CLASS_DEFINITION__INV,
+				 StructureFactory.eINSTANCE.createConstraint()));
 	}
 
 	/**

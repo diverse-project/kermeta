@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.12 2007-07-13 07:42:35 dvojtise Exp $
+/* $Id: RunTestCase.java,v 1.13 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : EPL
@@ -21,6 +21,7 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
+import fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -41,13 +42,16 @@ public class RunTestCase extends TestCase {
     
     private KermetaInterpreter interpreter = null;
 
-    public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite)
+    private boolean constraintExecution = false;
+    
+    public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite, boolean constraintExecution)
 
     {
         super(themainClassValue + "." + themainOperationValue);
         mainClassValue = themainClassValue;
         mainOperationValue = themainOperationValue;
         containerTestSuite = thecontainerTestSuite;
+        this.constraintExecution = constraintExecution;
     }
 
     protected void setUp() throws java.lang.Exception {
@@ -58,7 +62,7 @@ public class RunTestCase extends TestCase {
         
         if (interpreter == null) {
             System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
-            interpreter = new KermetaInterpreter(containerTestSuite.unit);
+           	interpreter = new KermetaInterpreter(containerTestSuite.unit);
             System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         
@@ -106,8 +110,10 @@ public class RunTestCase extends TestCase {
     			
     		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
     		interpreter.isTestSuite = containerTestSuite.isTestSuite;
-    		interpreter.launch();
-    		
+    		if ( constraintExecution )
+    			interpreter.launchConstraint();
+    		else
+    			interpreter.launch();
     		    		
     	}
     	catch(KermetaRaisedException e){

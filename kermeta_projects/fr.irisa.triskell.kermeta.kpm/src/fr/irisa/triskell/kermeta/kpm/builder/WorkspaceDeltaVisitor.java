@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.8 2007-06-26 12:29:04 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.9 2007-07-20 15:08:48 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -23,6 +23,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.NatureHelper;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -225,6 +226,7 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 				//sendEvent("delete", unit);
 				currentProject.getKpm().removeUnit( resource.getFullPath().toString() );
 				currentProject.save();
+				IOPlugin.getDefault().unload( (IFile) resource );
 			}
 			break;
 			

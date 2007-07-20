@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.20 2007-07-11 13:33:58 cfaucher Exp $
+/* $Id: TypeCheckerContext.java,v 1.21 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -11,18 +11,17 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
+
+import org.apache.log4j.Logger;
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
@@ -36,6 +35,12 @@ import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey
@@ -43,6 +48,8 @@ import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
  */
 public class TypeCheckerContext {
 
+	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeCheckerContext");
+	
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
 	    objectAsType = null;
 	    robjectAsType = null;
@@ -57,7 +64,7 @@ public class TypeCheckerContext {
 	    modelFilter = null;
 	    
 		// TODO : Assign Basic types and classdefinition here
-	    KermetaUnit.internalLog.info("Initializing type checker with standard lib...");
+	    internalLog.info("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
 	    RObjectType = createTypeForClassDefinition("kermeta::reflection::Object", std_lib);
 	    ModelType = createTypeForClassDefinition("kermeta::language::structure::Model", std_lib);
@@ -75,10 +82,10 @@ public class TypeCheckerContext {
 	    BooleanType = createTypeForClassDefinition("kermeta::standard::Boolean", std_lib);
 	    StdIOType = createTypeForClassDefinition("kermeta::io::StdIO", std_lib);
 	    
-	    SetClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Set");
-	    OSetClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::OrderedSet");
-	    SeqClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Sequence");
-	    BagClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Bag");
+	    SetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByName("kermeta::standard::Set");
+	    OSetClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::OrderedSet");
+	    SeqClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Sequence");
+	    BagClassDef = (ClassDefinition)std_lib.getTypeDefinitionByQualifiedName("kermeta::standard::Bag");
 	    
 		bag_type_cache = new Hashtable();
 		set_type_cache = new Hashtable();
@@ -86,9 +93,9 @@ public class TypeCheckerContext {
 		oset_type_cache = new Hashtable();
 		
 		if (ObjectType == null || SetClassDef == null) {
-		    KermetaUnit.internalLog.error("Error initializing type checker. The standard library may not be loaded corectly.");
+		    internalLog.error("Error initializing type checker. The standard library may not be loaded corectly.");
 		} else {
-		    KermetaUnit.internalLog.info("Type checker initialized.");
+		    internalLog.info("Type checker initialized.");
 		}
 		
 	}
@@ -242,8 +249,8 @@ public class TypeCheckerContext {
 	
 	
 	protected static Type createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
-	    ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(qualified_name);
-	    fr.irisa.triskell.kermeta.language.structure.Class cls = unit.struct_factory.createClass();
+	    ClassDefinition cdef = (ClassDefinition)unit.getTypeDefinitionByQualifiedName(qualified_name);
+	    fr.irisa.triskell.kermeta.language.structure.Class cls = StructureFactory.eINSTANCE.createClass();
 	    cls.setTypeDefinition(cdef);
 	    return new SimpleType(cls);
 	}
@@ -405,7 +412,8 @@ public class TypeCheckerContext {
 	        Iterator it = ops.iterator();
 	        while(it.hasNext()) {
 	            CallableOperation op = (CallableOperation)it.next();
-	            if (op.getOperation() == superOp) return op;
+	            if (op.getOperation() == superOp) 
+	            	return op;
 	        }
 	    }
 	    return null;
@@ -440,12 +448,12 @@ public class TypeCheckerContext {
 	public Type getSelfType() {
 		if (selfType == null) 
 		{
-			fr.irisa.triskell.kermeta.language.structure.Class c = unit.struct_factory.createClass();
+			fr.irisa.triskell.kermeta.language.structure.Class c = StructureFactory.eINSTANCE.createClass();
 			c.setTypeDefinition(selfClass);
 			Iterator it = selfClass.getTypeParameter().iterator();
 			while(it.hasNext()) {
 				TypeVariable tv = (TypeVariable)it.next();
-				TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
+				TypeVariableBinding bind = StructureFactory.eINSTANCE.createTypeVariableBinding();
 				bind.setVariable(tv);
 				if (tv.getSupertype() != null) bind.setType(tv.getSupertype());
 				else bind.setType(((SimpleType)TypeCheckerContext.ObjectType).getType());

@@ -1,4 +1,4 @@
-/* $Id: CallableProperty.java,v 1.3 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: CallableProperty.java,v 1.4 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
 * License : GPL
@@ -42,7 +42,9 @@ public class CallableProperty extends CallableElement {
     public boolean equals(Object other) {
         if (other instanceof CallableProperty) {
             CallableProperty p = (CallableProperty)other;
-            return p.getProperty() == property && TypeEqualityChecker.equals(fclass, p.fclass);
+            return p.getName().equals(property.getName()) 
+            		&& TypeEqualityChecker.equals(fclass, p.fclass);
+            //return p.getProperty() == property && TypeEqualityChecker.equals(fclass, p.fclass);
         }
         return false;
     }

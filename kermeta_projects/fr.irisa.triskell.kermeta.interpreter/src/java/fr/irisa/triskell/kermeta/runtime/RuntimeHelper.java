@@ -1,4 +1,4 @@
-/* $Id: RuntimeHelper.java,v 1.1 2006-08-18 09:19:36 dvojtise Exp $
+/* $Id: RuntimeHelper.java,v 1.2 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Iterator;
 
+
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -28,7 +29,7 @@ public class RuntimeHelper {
      * @return
      */
     public static boolean isJarProxy(TypeDefinition definition) {
-    	Iterator it = definition.getTag().iterator();
+    	Iterator it = definition.getOwnedTag().iterator();
     	while (it.hasNext()){
     		Tag t = (Tag)it.next();
     		if(Jar2KMPass.JARUNIT_TAG_NAME.equals(t.getName())) 
@@ -42,7 +43,7 @@ public class RuntimeHelper {
      * @return
      */
     public static boolean isInitOperation(Operation operation) {
-    	Iterator it = operation.getTag().iterator();
+    	Iterator it = operation.getOwnedTag().iterator();
     	while (it.hasNext()){
     		Tag t = (Tag)it.next();
     		if(Jar2KMPass.INITOPERATION_TAG_NAME.equals(t.getName())) 

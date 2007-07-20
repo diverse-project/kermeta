@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.59 2007-06-20 10:00:05 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.60 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -26,10 +26,12 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
+import fr.irisa.triskell.kermeta.ast.helper.SimpleKWList;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
@@ -60,17 +62,16 @@ import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
-import fr.irisa.triskell.kermeta.loader.DummyUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.java.JarUnit;
+import fr.irisa.triskell.kermeta.loader.java.JarCache;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
-import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
 import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
@@ -78,7 +79,6 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
-import fr.irisa.triskell.kermeta.typechecker.ExpressionChecker;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
@@ -281,13 +281,13 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			/* BEGINNING OF HORRIBLE THING */
 			/******************************/
 			// Type collection of object
-			fr.irisa.triskell.kermeta.language.structure.Class coll_class = memory.getUnit().struct_factory.createClass();    
-		    coll_class.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::standard::Collection"));
-		    TypeVariableBinding binding = memory.getUnit().struct_factory.createTypeVariableBinding();
+			fr.irisa.triskell.kermeta.language.structure.Class coll_class = StructureFactory.eINSTANCE.createClass();    
+		    coll_class.setTypeDefinition((ClassDefinition)memory.getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Collection"));
+		    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 		    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
 		    
-		    fr.irisa.triskell.kermeta.language.structure.Class object_class = memory.getUnit().struct_factory.createClass();   
-		    object_class.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::reflection::Object"));
+		    fr.irisa.triskell.kermeta.language.structure.Class object_class = StructureFactory.eINSTANCE.createClass();   
+		    object_class.setTypeDefinition((ClassDefinition)memory.getUnit().getTypeDefinitionByQualifiedName("kermeta::reflection::Object"));
 
 		    
 		    // Set the param binding type
@@ -791,8 +791,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    }
 	    
 	    
-	    // It is a real operation / property call
-	    
+	    // It is a real operation / property call    
 	    fr.irisa.triskell.kermeta.language.structure.Class t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target
@@ -1131,14 +1130,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     protected Constructor getJavaConstructor(Operation operation){
     	Constructor constructor = null;
-    	for (KermetaUnit unit : memory.getUnit().getAllImportedUnits()){
-    		if(unit instanceof JarUnit){
-    			JarUnit jarunit = (JarUnit)unit;
-    			constructor = jarunit.jarCache.getConstructor(operation);
-    			if (constructor != null ) return constructor;
+    	KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject( operation );
+    	if ( kermetaUnit != null ) {
+    		JarCache cache = JarCache.getJarCache( kermetaUnit );
+    		if ( cache != null ) {
+    			constructor = cache.getConstructor( operation );
     		}
     	}
-    	return null;
+    	return constructor;
     }
     
     /** retrieves the java method for a given operation
@@ -1148,14 +1147,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     protected Method getJavaMethod(Operation operation){
     	Method method = null;
-		for (KermetaUnit unit : memory.getUnit().getAllImportedUnits() ){
-    		if(unit instanceof JarUnit){
-    			JarUnit jarunit = (JarUnit)unit;
-    			method = jarunit.jarCache.getMethod(operation);
-    			if (method != null ) return method;
+    	KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject( operation );
+    	if ( kermetaUnit != null ) {
+    		JarCache cache = JarCache.getJarCache( kermetaUnit );
+    		if ( cache != null ) {
+    			method = cache.getMethod( operation );
     		}
     	}
-    	return null;
+    	return method;
     }
     /** retrieves the java field for a given property
      * 
@@ -1164,14 +1163,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     protected Field getJavaField(Property prop){
     	Field field = null;
-		for (KermetaUnit unit : memory.getUnit().getAllImportedUnits() ) {
-    		if(unit instanceof JarUnit){
-    			JarUnit jarunit = (JarUnit)unit;
-    			field = jarunit.jarCache.getField(prop);
-    			if (field != null ) return field;
+    	KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject( prop );
+    	if ( kermetaUnit != null ) {
+    		JarCache cache = JarCache.getJarCache( kermetaUnit );
+    		if ( cache != null ) {
+    			field = cache.getField( prop );
     		}
     	}
-    	return null;
+    	return field;
     }
 	/**
      * Visit a JavaStaticCall : 

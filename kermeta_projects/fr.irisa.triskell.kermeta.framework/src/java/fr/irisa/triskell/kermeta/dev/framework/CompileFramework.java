@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.6 2006-10-26 12:55:06 dvojtise Exp $
+/* $Id: CompileFramework.java,v 1.7 2007-07-20 15:08:39 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -9,9 +9,22 @@
 */ 
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.kermeta.io.IoFactory;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.KermetaUnitStorer;
+import org.kermeta.io.plugin.IOPlugin;
+
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
+import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+
 
 /**
  * @author Franck Fleurey
@@ -26,38 +39,57 @@ public class CompileFramework {
 
 
     public static void main(String[] args) {
-        
-    	StdLibKermetaUnitHelper.unloadStdLib();
-        KermetaUnit u = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/kermeta/Standard.kmt");
 
-        // As we are checking the standard lib itself, it cannot find it automatically using the usal way ...        
-        StdLibKermetaUnitHelper.forceStdLib(u);
+    	IOPlugin.LOCAL_USE = true;
+    	IOPlugin.FRAMEWORK_GENERATION = true;
+    	IOPlugin ioPlugin = new IOPlugin();
+    	
+    	KermetaUnit kermetaUnit = null;
+		try {
+			kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( "platform:/plugin/fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt" );
+		} catch (KermetaIOFileNotFoundException e) {
+			e.printStackTrace();
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		}
+    	 	
         System.out.println("LOADING STANDARD LIBRARY...");
-        u.load();
-        if (u.messages.getAllErrors().size() != 0) {
+        if ( kermetaUnit.isErrored() ) {
         	System.err.println("Standard library contains errors:");
-        	System.err.println(u.messages.getAllMessagesAsString());
+        	System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );
         	//System.exit(0);
         }
         
         System.out.println("TYPE CHECKING...");
-        u.typeCheckAllUnits();
-        System.out.println("Constraint CHECKING...");
-        u.constraintCheckAllUnits();
-        if (u.messages.hasError()) {
+        KermetaTypeChecker typechecker = new KermetaTypeChecker( kermetaUnit );
+        typechecker.checkUnit();
+        
+        if ( ! kermetaUnit.isErrored() ) {
+        	System.out.println("Constraint CHECKING...");
+        	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( kermetaUnit );
+        	constraintchecker.checkUnit();
+        }
+        
+        if ( kermetaUnit.isErrored() ) {
         	System.err.println("Standard library contains type errors:");
-        	System.err.println(u.messages.getAllMessagesAsString());
+        	System.err.println( KermetaUnitHelper.getAllErrorsAsString(kermetaUnit) );
         	//System.exit(0);
         }
         else
         {
-        	if(u.messages.getAllWarnings().size() > 0)
+        	if( kermetaUnit.isWarned() )
         	{
         		System.err.println("Standard library contains type warnings:");
-            	System.err.println(u.messages.getAllMessagesAsString());
+            	System.err.println( KermetaUnitHelper.getAllWarningsAsString(kermetaUnit) );
         	}
-        	System.out.println("SAVING...");
-        	u.saveAsXMIModel("dist/framework.km");
+        	System.out.println("SAVING IN KM...");
+        	KmExporter exporter = new KmExporter();
+        	exporter.export(kermetaUnit, "platform:/resource/fr.irisa.triskell.kermeta.framework/dist");
+        	System.out.println("DONE");
+
+        	System.out.println("SAVING IN ECORE...");
+        	EcoreExporter exporter2 = new EcoreExporter();
+        	exporter2.export(kermetaUnit, "platform:/plugin/fr.irisa.triskell.kermeta.framework/dist");
         	System.out.println("DONE");
         }
     }

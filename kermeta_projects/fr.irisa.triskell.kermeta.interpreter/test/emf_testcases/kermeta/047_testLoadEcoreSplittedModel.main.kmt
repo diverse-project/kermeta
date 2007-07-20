@@ -7,12 +7,12 @@ package testLoadEcoreSplittedModel;
 
 
 require kermeta
-require "platform:/resource/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 using kermeta::persistence
 using kermeta::standard
 using ecore
 
-class Main inherits kermeta::kunit::TestCase
+class Main inherits kermeta::kunit::Assert
 {
     operation testmain() : Void is do 
         var inputModel : Set<ecore::EPackage> init loadClassModel
@@ -35,7 +35,7 @@ class Main inherits kermeta::kunit::TestCase
 		assertTrueWithMsg(C3 !=  void, "didn't find C3")
 		stdio.writeln(C3.name + " " +C3.toString)
         assertTrueWithMsg(C3.name.equals("C3"), "didn't find EClass named C3")
-        
+
         
       
     end

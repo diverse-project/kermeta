@@ -1,0 +1,51 @@
+/* $Id: 023_testResultFail.main.kmt,v 1.2 2007-07-20 15:07:47 ftanguy Exp $
+ * Creation date: January 23, 2007
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::kunit
+
+class Main inherits TestCase
+{
+
+	operation main() : Void is do
+    	var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+    end		
+
+    operation test0() : Void is do 
+        truc("bidule")
+        assert(false)
+       	rescue (err : ConstraintViolatedPost)
+       		stdio.writeln(err.toString)
+       		stdio.writeln(err.message)
+       		assert(true)   
+    end
+    
+    
+    operation truc(param : String)  : String
+    post lapost is do result == param end
+    is
+     do   	
+        stdio.writeln("test")
+        result := param
+        
+        // to make the execution fail:
+ 		result := "not bidule"
+        
+     end
+     
+}

@@ -1,4 +1,4 @@
-/*$Id: KermetaUnitHost.java,v 1.2 2007-04-13 14:45:12 ftanguy Exp $
+/*$Id: KermetaUnitHost.java,v 1.3 2007-07-20 15:08:48 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -9,11 +9,12 @@
 */
 package fr.irisa.triskell.kermeta.kpm.hosting;
 
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.interest.InterestFactory;
 import fr.irisa.triskell.kermeta.kpm.interest.InterestHost;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 public class KermetaUnitHost {
 

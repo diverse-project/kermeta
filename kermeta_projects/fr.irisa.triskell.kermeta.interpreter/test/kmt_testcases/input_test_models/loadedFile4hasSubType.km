@@ -1,121 +1,116 @@
-<?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure" name="Test">
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class2">
-    <ownedAttribute name="c1" type="//@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    </ownedAttribute>
-    <ownedAttribute name="t2" type="//@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.2"/>
-    </ownedAttribute>
-    <ownedAttribute name="t3" type="//@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.3"/>
-    </ownedAttribute>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class1">
-    <ownedAttribute name="prop1" type="//@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class">
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
-      </containedType>
-    </ownedAttribute>
-    <ownedAttribute name="prop2">
-      <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.2/@ownedTypeDefinition.3"/>
-    </ownedAttribute>
-    <ownedAttribute name="att1" isOrdered="true" upper="1">
-      <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.2/@ownedTypeDefinition.0"/>
-    </ownedAttribute>
-    <ownedAttribute name="att3" type="//@ownedTypeDefinition.1/@ownedAttribute.3/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class">
-        <typeParamBinding>
-          <variable xsi:type="kermeta_language_structure:ObjectTypeVariable" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16/@typeParameter.0"/>
-          <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.2/@ownedTypeDefinition.0"/>
-        </typeParamBinding>
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.16"/>
-      </containedType>
-    </ownedAttribute>
-    <ownedOperation name="op1" type="//@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class">
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
-      </containedType>
-      <body xsi:type="kermeta_language_behavior:Block">
-        <statement xsi:type="kermeta_language_behavior:Raise">
-          <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-            <target xsi:type="kermeta_language_behavior:TypeLiteral">
-              <typeref type="//@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.4"/>
-                </containedType>
-              </typeref>
-            </target>
-          </expression>
-        </statement>
-      </body>
-    </ownedOperation>
-    <ownedOperation name="op2">
-      <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.2/@ownedTypeDefinition.0"/>
-      <ownedParameter name="param" type="//@ownedTypeDefinition.1/@ownedOperation.1/@ownedParameter.0/@containedType.0">
-        <containedType xsi:type="kermeta_language_structure:Class">
-          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kermeta_language_behavior="http://www.kermeta.org/kermeta//language/behavior"
+    xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure" referencedModelingUnits="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/Standard.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/assert.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/persistence/resource.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/java.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/behavior.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/kunit/kunit.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/stack.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/file_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/io/std_io.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/utils/hashtable.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/dynamic_expression.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/reflective_collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#/ platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#/">
+  <packages name="Test">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class2"
+        superType="#//@packages.0/Class2/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="c1" type="#//@packages.0/Class2/c1/@containedType.0" isOrdered="true"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Class1"/>
+      </ownedAttribute>
+      <ownedAttribute name="t2" type="#//@packages.0/Class2/t2/@containedType.0" isOrdered="true"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Test2"/>
+      </ownedAttribute>
+      <ownedAttribute name="t3" type="#//@packages.0/Class2/t3/@containedType.0" isOrdered="true"
+          upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Test3"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class1"
+        superType="#//@packages.0/Class1/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Object"/>
+      <ownedAttribute name="prop1" type="#//@packages.0/Class1/prop1/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Boolean"/>
+      </ownedAttribute>
+      <ownedAttribute name="prop2" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#//@packages.0/reflection/Integer"/>
+      <ownedAttribute name="att1" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#//@packages.0/reflection/String"
+          isOrdered="true" upper="1"/>
+      <ownedAttribute name="att3" type="#//@packages.0/Class1/att3/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Bag">
+          <typeParamBinding variable="kermeta_language_structure:ObjectTypeVariable platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/collections.km#//@packages.0/standard/Bag/G"
+              type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#//@packages.0/reflection/String"/>
         </containedType>
-      </ownedParameter>
-      <body xsi:type="kermeta_language_behavior:Block">
-        <statement xsi:type="kermeta_language_behavior:Raise">
-          <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-            <target xsi:type="kermeta_language_behavior:TypeLiteral">
-              <typeref type="//@ownedTypeDefinition.1/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.4"/>
-                </containedType>
-              </typeref>
-            </target>
-          </expression>
-        </statement>
-      </body>
-    </ownedOperation>
-    <ownedOperation name="op3">
-      <type href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.2/@ownedTypeDefinition.0"/>
-      <body xsi:type="kermeta_language_behavior:Block">
-        <statement xsi:type="kermeta_language_behavior:Raise">
-          <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-            <target xsi:type="kermeta_language_behavior:TypeLiteral">
-              <typeref type="//@ownedTypeDefinition.1/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.4"/>
-                </containedType>
-              </typeref>
-            </target>
-          </expression>
-        </statement>
-      </body>
-    </ownedOperation>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Test2" superType="//@ownedTypeDefinition.2/@containedType.0">
-    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.1"/>
-    <ownedAttribute name="prop1" type="//@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:VoidType"/>
-    </ownedAttribute>
-    <ownedAttribute name="Property1" type="//@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:VoidType"/>
-    </ownedAttribute>
-  </ownedTypeDefinition>
-  <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Test3" superType="//@ownedTypeDefinition.3/@containedType.0">
-    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@ownedTypeDefinition.2"/>
-    <ownedOperation name="Operation1" type="//@ownedTypeDefinition.3/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
-      <containedType xsi:type="kermeta_language_structure:Class">
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
-      </containedType>
-      <body xsi:type="kermeta_language_behavior:Block">
-        <statement xsi:type="kermeta_language_behavior:Raise">
-          <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-            <target xsi:type="kermeta_language_behavior:TypeLiteral">
-              <typeref type="//@ownedTypeDefinition.3/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                <containedType xsi:type="kermeta_language_structure:Class">
-                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.4"/>
-                </containedType>
-              </typeref>
-            </target>
-          </expression>
-        </statement>
-      </body>
-    </ownedOperation>
-  </ownedTypeDefinition>
-</kermeta_language_structure:Package>
+      </ownedAttribute>
+      <ownedOperation name="op1" type="#//@packages.0/Class1/op1/@containedType.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Real"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+          <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+            <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Class1/op1/@body/@statement.0/@expression/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/Class1/op1/@body/@statement.0/@expression/@target/@containedType.0">
+                <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class"/>
+                <typeref type="#//@packages.0/Class1/op1/@body/@statement.0/@expression/@containedType.0"
+                    upper="1"/>
+              </target>
+            </expression>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="op2" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#//@packages.0/reflection/String">
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+            <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Class1/op2/@body/@statement.0/@expression/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/Class1/op1/@body/@statement.0/@expression/@target/@containedType.0">
+                <typeref type="#//@packages.0/Class1/op2/@body/@statement.0/@expression/@containedType.0"
+                    upper="1"/>
+              </target>
+            </expression>
+          </statement>
+        </body>
+        <ownedParameter name="param" type="#//@packages.0/Class1/op2/@ownedParameter.0/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Real"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="op3" type="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/reflection/reflection.km#//@packages.0/reflection/String">
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+            <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Class1/op3/@body/@statement.0/@expression/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/Class1/op1/@body/@statement.0/@expression/@target/@containedType.0">
+                <typeref type="#//@packages.0/Class1/op3/@body/@statement.0/@expression/@containedType.0"
+                    upper="1"/>
+              </target>
+            </expression>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Test2"
+        superType="#//@packages.0/Test2/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Class1"/>
+      <ownedAttribute name="Property1" type="#//@packages.0/Test2/Property1/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:VoidType"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Test3"
+        superType="#//@packages.0/Test3/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="#//@packages.0/Test2"/>
+      <ownedOperation name="Operation1" type="#//@packages.0/Test3/Operation1/@containedType.0"
+          isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/standard/primitive_types.km#//@packages.0/standard/Void"/>
+        <body xsi:type="kermeta_language_behavior:Block" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+          <statement xsi:type="kermeta_language_behavior:Raise" staticType="#//@packages.0/Class1/op1/@body/@containedType.0">
+            <expression xsi:type="kermeta_language_behavior:CallFeature" staticType="#//@packages.0/Test3/Operation1/@body/@statement.0/@expression/@containedType.0"
+                name="new" staticOperation="platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/language/structure.km#//@packages.0/language/structure/Class/new">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="kermeta_language_structure:ClassDefinition platform:/plugin/fr.irisa.triskell.kermeta.io/src/kermeta/exceptions/exceptions.km#//@packages.0/exceptions/NotImplementedException"/>
+              <target xsi:type="kermeta_language_behavior:TypeLiteral" staticType="#//@packages.0/Class1/op1/@body/@statement.0/@expression/@target/@containedType.0">
+                <typeref type="#//@packages.0/Test3/Operation1/@body/@statement.0/@expression/@containedType.0"
+                    upper="1"/>
+              </target>
+            </expression>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </packages>
+</kermeta_language_structure:ModelingUnit>

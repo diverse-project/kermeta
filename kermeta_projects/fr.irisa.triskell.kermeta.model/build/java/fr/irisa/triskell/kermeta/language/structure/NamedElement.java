@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElement.java,v 1.3 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: NamedElement.java,v 1.4 2007-07-20 15:09:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -20,7 +20,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getNamedElement()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface NamedElement extends fr.irisa.triskell.kermeta.language.structure.Object {

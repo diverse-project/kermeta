@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureSwitch.java,v 1.9 2007-07-11 14:41:56 cfaucher Exp $
+ * $Id: StructureSwitch.java,v 1.10 2007-07-20 15:09:05 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -11,11 +11,13 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Filter;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Model;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
@@ -25,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -34,6 +37,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
+import fr.irisa.triskell.kermeta.language.structure.Using;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VirtualTypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
@@ -123,35 +127,19 @@ public class StructureSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case StructurePackage.CLASS: {
-				fr.irisa.triskell.kermeta.language.structure.Class class_ = (fr.irisa.triskell.kermeta.language.structure.Class)theEObject;
-				T result = caseClass(class_);
-				if (result == null) result = caseParameterizedType(class_);
-				if (result == null) result = caseType(class_);
-				if (result == null) result = caseObject(class_);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.OBJECT: {
 				fr.irisa.triskell.kermeta.language.structure.Object object = (fr.irisa.triskell.kermeta.language.structure.Object)theEObject;
 				T result = caseObject(object);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.MODEL: {
-				Model model = (Model)theEObject;
-				T result = caseModel(model);
-				if (result == null) result = caseObject(model);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.MODEL_TYPE: {
-				ModelType modelType = (ModelType)theEObject;
-				T result = caseModelType(modelType);
-				if (result == null) result = caseType(modelType);
-				if (result == null) result = caseTypeDefinition(modelType);
-				if (result == null) result = caseObject(modelType);
-				if (result == null) result = caseNamedElement(modelType);
+			case StructurePackage.MULTIPLICITY_ELEMENT: {
+				MultiplicityElement multiplicityElement = (MultiplicityElement)theEObject;
+				T result = caseMultiplicityElement(multiplicityElement);
+				if (result == null) result = caseTypedElement(multiplicityElement);
+				if (result == null) result = caseTypeContainer(multiplicityElement);
+				if (result == null) result = caseNamedElement(multiplicityElement);
+				if (result == null) result = caseObject(multiplicityElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -202,18 +190,99 @@ public class StructureSwitch<T> {
 			case StructurePackage.TYPE_VARIABLE_BINDING: {
 				TypeVariableBinding typeVariableBinding = (TypeVariableBinding)theEObject;
 				T result = caseTypeVariableBinding(typeVariableBinding);
-				if (result == null) result = caseTypeContainer(typeVariableBinding);
 				if (result == null) result = caseObject(typeVariableBinding);
+				if (result == null) result = caseTypeContainer(typeVariableBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.MULTIPLICITY_ELEMENT: {
-				MultiplicityElement multiplicityElement = (MultiplicityElement)theEObject;
-				T result = caseMultiplicityElement(multiplicityElement);
-				if (result == null) result = caseTypedElement(multiplicityElement);
-				if (result == null) result = caseTypeContainer(multiplicityElement);
-				if (result == null) result = caseNamedElement(multiplicityElement);
-				if (result == null) result = caseObject(multiplicityElement);
+			case StructurePackage.CLASS: {
+				fr.irisa.triskell.kermeta.language.structure.Class class_ = (fr.irisa.triskell.kermeta.language.structure.Class)theEObject;
+				T result = caseClass(class_);
+				if (result == null) result = caseParameterizedType(class_);
+				if (result == null) result = caseType(class_);
+				if (result == null) result = caseObject(class_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL: {
+				Model model = (Model)theEObject;
+				T result = caseModel(model);
+				if (result == null) result = caseObject(model);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODEL_TYPE: {
+				ModelType modelType = (ModelType)theEObject;
+				T result = caseModelType(modelType);
+				if (result == null) result = caseType(modelType);
+				if (result == null) result = caseTypeDefinition(modelType);
+				if (result == null) result = caseObject(modelType);
+				if (result == null) result = caseNamedElement(modelType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.OBJECT_TYPE_VARIABLE: {
+				ObjectTypeVariable objectTypeVariable = (ObjectTypeVariable)theEObject;
+				T result = caseObjectTypeVariable(objectTypeVariable);
+				if (result == null) result = caseTypeVariable(objectTypeVariable);
+				if (result == null) result = caseType(objectTypeVariable);
+				if (result == null) result = caseNamedElement(objectTypeVariable);
+				if (result == null) result = caseTypeContainer(objectTypeVariable);
+				if (result == null) result = caseObject(objectTypeVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.NAMED_ELEMENT: {
+				NamedElement namedElement = (NamedElement)theEObject;
+				T result = caseNamedElement(namedElement);
+				if (result == null) result = caseObject(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.TYPED_ELEMENT: {
+				TypedElement typedElement = (TypedElement)theEObject;
+				T result = caseTypedElement(typedElement);
+				if (result == null) result = caseTypeContainer(typedElement);
+				if (result == null) result = caseNamedElement(typedElement);
+				if (result == null) result = caseObject(typedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.CLASS_DEFINITION: {
+				ClassDefinition classDefinition = (ClassDefinition)theEObject;
+				T result = caseClassDefinition(classDefinition);
+				if (result == null) result = caseGenericTypeDefinition(classDefinition);
+				if (result == null) result = caseTypeContainer(classDefinition);
+				if (result == null) result = caseTypeDefinition(classDefinition);
+				if (result == null) result = caseObject(classDefinition);
+				if (result == null) result = caseNamedElement(classDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.FUNCTION_TYPE: {
+				FunctionType functionType = (FunctionType)theEObject;
+				T result = caseFunctionType(functionType);
+				if (result == null) result = caseType(functionType);
+				if (result == null) result = caseTypeContainer(functionType);
+				if (result == null) result = caseObject(functionType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PRODUCT_TYPE: {
+				ProductType productType = (ProductType)theEObject;
+				T result = caseProductType(productType);
+				if (result == null) result = caseType(productType);
+				if (result == null) result = caseTypeContainer(productType);
+				if (result == null) result = caseObject(productType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PACKAGE: {
+				fr.irisa.triskell.kermeta.language.structure.Package package_ = (fr.irisa.triskell.kermeta.language.structure.Package)theEObject;
+				T result = casePackage(package_);
+				if (result == null) result = caseTypeDefinitionContainer(package_);
+				if (result == null) result = caseNamedElement(package_);
+				if (result == null) result = caseObject(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -225,13 +294,82 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StructurePackage.VOID_TYPE: {
+				VoidType voidType = (VoidType)theEObject;
+				T result = caseVoidType(voidType);
+				if (result == null) result = caseType(voidType);
+				if (result == null) result = caseObject(voidType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case StructurePackage.DATA_TYPE: {
 				DataType dataType = (DataType)theEObject;
 				T result = caseDataType(dataType);
-				if (result == null) result = caseType(dataType);
 				if (result == null) result = caseTypeDefinition(dataType);
-				if (result == null) result = caseObject(dataType);
+				if (result == null) result = caseType(dataType);
 				if (result == null) result = caseNamedElement(dataType);
+				if (result == null) result = caseObject(dataType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.PARAMETERIZED_TYPE: {
+				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
+				T result = caseParameterizedType(parameterizedType);
+				if (result == null) result = caseType(parameterizedType);
+				if (result == null) result = caseObject(parameterizedType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.GENERIC_TYPE_DEFINITION: {
+				GenericTypeDefinition genericTypeDefinition = (GenericTypeDefinition)theEObject;
+				T result = caseGenericTypeDefinition(genericTypeDefinition);
+				if (result == null) result = caseTypeDefinition(genericTypeDefinition);
+				if (result == null) result = caseNamedElement(genericTypeDefinition);
+				if (result == null) result = caseObject(genericTypeDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.TYPE_DEFINITION_CONTAINER: {
+				TypeDefinitionContainer typeDefinitionContainer = (TypeDefinitionContainer)theEObject;
+				T result = caseTypeDefinitionContainer(typeDefinitionContainer);
+				if (result == null) result = caseNamedElement(typeDefinitionContainer);
+				if (result == null) result = caseObject(typeDefinitionContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.TYPE_VARIABLE: {
+				TypeVariable typeVariable = (TypeVariable)theEObject;
+				T result = caseTypeVariable(typeVariable);
+				if (result == null) result = caseType(typeVariable);
+				if (result == null) result = caseNamedElement(typeVariable);
+				if (result == null) result = caseTypeContainer(typeVariable);
+				if (result == null) result = caseObject(typeVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.REQUIRE: {
+				Require require = (Require)theEObject;
+				T result = caseRequire(require);
+				if (result == null) result = caseObject(require);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.USING: {
+				Using using = (Using)theEObject;
+				T result = caseUsing(using);
+				if (result == null) result = caseObject(using);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.MODELING_UNIT: {
+				ModelingUnit modelingUnit = (ModelingUnit)theEObject;
+				T result = caseModelingUnit(modelingUnit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StructurePackage.FILTER: {
+				Filter filter = (Filter)theEObject;
+				T result = caseFilter(filter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -239,26 +377,10 @@ public class StructureSwitch<T> {
 				Enumeration enumeration = (Enumeration)theEObject;
 				T result = caseEnumeration(enumeration);
 				if (result == null) result = caseDataType(enumeration);
-				if (result == null) result = caseType(enumeration);
 				if (result == null) result = caseTypeDefinition(enumeration);
-				if (result == null) result = caseObject(enumeration);
+				if (result == null) result = caseType(enumeration);
 				if (result == null) result = caseNamedElement(enumeration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.NAMED_ELEMENT: {
-				NamedElement namedElement = (NamedElement)theEObject;
-				T result = caseNamedElement(namedElement);
-				if (result == null) result = caseObject(namedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PACKAGE: {
-				fr.irisa.triskell.kermeta.language.structure.Package package_ = (fr.irisa.triskell.kermeta.language.structure.Package)theEObject;
-				T result = casePackage(package_);
-				if (result == null) result = caseNamedElement(package_);
-				if (result == null) result = caseTypeDefinitionContainer(package_);
-				if (result == null) result = caseObject(package_);
+				if (result == null) result = caseObject(enumeration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -278,19 +400,10 @@ public class StructureSwitch<T> {
 				T result = casePrimitiveType(primitiveType);
 				if (result == null) result = caseDataType(primitiveType);
 				if (result == null) result = caseTypeContainer(primitiveType);
-				if (result == null) result = caseType(primitiveType);
 				if (result == null) result = caseTypeDefinition(primitiveType);
+				if (result == null) result = caseType(primitiveType);
 				if (result == null) result = caseObject(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPED_ELEMENT: {
-				TypedElement typedElement = (TypedElement)theEObject;
-				T result = caseTypedElement(typedElement);
-				if (result == null) result = caseTypeContainer(typedElement);
-				if (result == null) result = caseNamedElement(typedElement);
-				if (result == null) result = caseObject(typedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -309,55 +422,6 @@ public class StructureSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case StructurePackage.CLASS_DEFINITION: {
-				ClassDefinition classDefinition = (ClassDefinition)theEObject;
-				T result = caseClassDefinition(classDefinition);
-				if (result == null) result = caseGenericTypeDefinition(classDefinition);
-				if (result == null) result = caseTypeContainer(classDefinition);
-				if (result == null) result = caseTypeDefinition(classDefinition);
-				if (result == null) result = caseObject(classDefinition);
-				if (result == null) result = caseNamedElement(classDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.GENERIC_TYPE_DEFINITION: {
-				GenericTypeDefinition genericTypeDefinition = (GenericTypeDefinition)theEObject;
-				T result = caseGenericTypeDefinition(genericTypeDefinition);
-				if (result == null) result = caseTypeDefinition(genericTypeDefinition);
-				if (result == null) result = caseNamedElement(genericTypeDefinition);
-				if (result == null) result = caseObject(genericTypeDefinition);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PARAMETERIZED_TYPE: {
-				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
-				T result = caseParameterizedType(parameterizedType);
-				if (result == null) result = caseType(parameterizedType);
-				if (result == null) result = caseObject(parameterizedType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_VARIABLE: {
-				TypeVariable typeVariable = (TypeVariable)theEObject;
-				T result = caseTypeVariable(typeVariable);
-				if (result == null) result = caseTypeContainer(typeVariable);
-				if (result == null) result = caseType(typeVariable);
-				if (result == null) result = caseNamedElement(typeVariable);
-				if (result == null) result = caseObject(typeVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.OBJECT_TYPE_VARIABLE: {
-				ObjectTypeVariable objectTypeVariable = (ObjectTypeVariable)theEObject;
-				T result = caseObjectTypeVariable(objectTypeVariable);
-				if (result == null) result = caseTypeVariable(objectTypeVariable);
-				if (result == null) result = caseTypeContainer(objectTypeVariable);
-				if (result == null) result = caseType(objectTypeVariable);
-				if (result == null) result = caseNamedElement(objectTypeVariable);
-				if (result == null) result = caseObject(objectTypeVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case StructurePackage.VIRTUAL_TYPE_CONTAINER: {
 				VirtualTypeContainer virtualTypeContainer = (VirtualTypeContainer)theEObject;
 				T result = caseVirtualTypeContainer(virtualTypeContainer);
@@ -369,9 +433,9 @@ public class StructureSwitch<T> {
 				T result = caseModelTypeVariable(modelTypeVariable);
 				if (result == null) result = caseVirtualTypeContainer(modelTypeVariable);
 				if (result == null) result = caseTypeVariable(modelTypeVariable);
-				if (result == null) result = caseTypeContainer(modelTypeVariable);
 				if (result == null) result = caseType(modelTypeVariable);
 				if (result == null) result = caseNamedElement(modelTypeVariable);
+				if (result == null) result = caseTypeContainer(modelTypeVariable);
 				if (result == null) result = caseObject(modelTypeVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -381,64 +445,15 @@ public class StructureSwitch<T> {
 				T result = caseVirtualType(virtualType);
 				if (result == null) result = caseObjectTypeVariable(virtualType);
 				if (result == null) result = caseTypeVariable(virtualType);
-				if (result == null) result = caseTypeContainer(virtualType);
 				if (result == null) result = caseType(virtualType);
 				if (result == null) result = caseNamedElement(virtualType);
+				if (result == null) result = caseTypeContainer(virtualType);
 				if (result == null) result = caseObject(virtualType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.PRODUCT_TYPE: {
-				ProductType productType = (ProductType)theEObject;
-				T result = caseProductType(productType);
-				if (result == null) result = caseTypeContainer(productType);
-				if (result == null) result = caseType(productType);
-				if (result == null) result = caseObject(productType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.FUNCTION_TYPE: {
-				FunctionType functionType = (FunctionType)theEObject;
-				T result = caseFunctionType(functionType);
-				if (result == null) result = caseTypeContainer(functionType);
-				if (result == null) result = caseType(functionType);
-				if (result == null) result = caseObject(functionType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.VOID_TYPE: {
-				VoidType voidType = (VoidType)theEObject;
-				T result = caseVoidType(voidType);
-				if (result == null) result = caseType(voidType);
-				if (result == null) result = caseObject(voidType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case StructurePackage.TYPE_DEFINITION_CONTAINER: {
-				TypeDefinitionContainer typeDefinitionContainer = (TypeDefinitionContainer)theEObject;
-				T result = caseTypeDefinitionContainer(typeDefinitionContainer);
-				if (result == null) result = caseNamedElement(typeDefinitionContainer);
-				if (result == null) result = caseObject(typeDefinitionContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			default: return defaultCase(theEObject);
 		}
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Class</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Class</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseClass(fr.irisa.triskell.kermeta.language.structure.Class object) {
-		return null;
 	}
 
 	/**
@@ -457,32 +472,17 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseModel(Model object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModelType(ModelType object) {
+	public T caseMultiplicityElement(MultiplicityElement object) {
 		return null;
 	}
 
@@ -577,47 +577,62 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Multiplicity Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Class</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMultiplicityElement(MultiplicityElement object) {
+	public T caseClass(fr.irisa.triskell.kermeta.language.structure.Class object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDataType(DataType object) {
+	public T caseModel(Model object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumeration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumeration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEnumeration(Enumeration object) {
+	public T caseModelType(ModelType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Object Type Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Object Type Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseObjectTypeVariable(ObjectTypeVariable object) {
 		return null;
 	}
 
@@ -637,6 +652,66 @@ public class StructureSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassDefinition(ClassDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFunctionType(FunctionType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Product Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Product Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProductType(ProductType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -648,6 +723,186 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T casePackage(fr.irisa.triskell.kermeta.language.structure.Package object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeDefinition(TypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVoidType(VoidType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataType(DataType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterizedType(ParameterizedType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Type Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Type Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGenericTypeDefinition(GenericTypeDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Definition Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Definition Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeDefinitionContainer(TypeDefinitionContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeVariable(TypeVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Require</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Require</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRequire(Require object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Using</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Using</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUsing(Using object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Modeling Unit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Modeling Unit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelingUnit(ModelingUnit object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Filter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Filter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFilter(Filter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enumeration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enumeration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumeration(Enumeration object) {
 		return null;
 	}
 
@@ -682,21 +937,6 @@ public class StructureSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypedElement(TypedElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Tag</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -723,81 +963,6 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseConstraint(Constraint object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Class Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Class Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseClassDefinition(ClassDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Generic Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Generic Type Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseGenericTypeDefinition(GenericTypeDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameterizedType(ParameterizedType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeVariable(TypeVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Object Type Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Object Type Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObjectTypeVariable(ObjectTypeVariable object) {
 		return null;
 	}
 
@@ -843,81 +1008,6 @@ public class StructureSwitch<T> {
 	 * @generated
 	 */
 	public T caseVirtualType(VirtualType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Definition</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeDefinition(TypeDefinition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Product Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Product Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProductType(ProductType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctionType(FunctionType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVoidType(VoidType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Definition Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Definition Container</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypeDefinitionContainer(TypeDefinitionContainer object) {
 		return null;
 	}
 

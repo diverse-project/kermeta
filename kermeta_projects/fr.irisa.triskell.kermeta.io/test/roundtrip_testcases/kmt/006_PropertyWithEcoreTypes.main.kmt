@@ -1,7 +1,9 @@
 package aPackage;
 
 require kermeta
-require "006_PropertyWithEcoreTypes.mainecore.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+
 class A
 {
 	attribute aString : ecore::EString

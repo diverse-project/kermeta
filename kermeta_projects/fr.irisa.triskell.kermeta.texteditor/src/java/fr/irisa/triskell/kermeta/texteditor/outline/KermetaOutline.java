@@ -1,4 +1,4 @@
-/* $Id: KermetaOutline.java,v 1.8 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: KermetaOutline.java,v 1.9 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KermetaOutline.java
 * License : EPL
@@ -87,7 +87,7 @@ public class KermetaOutline extends ContentOutlinePage {
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
 		treeViewer.addSelectionChangedListener(this);
-		if (editor.getMcunit() != null && editor.getMcunit().rootPackage != null) {
+		if (editor.getMcunit() != null && ! editor.getMcunit().getInternalPackages().isEmpty() ) {
 			treeViewer.setInput(editor.getMcunit());
 			treeViewer.expandToLevel(1);
 		}
@@ -135,7 +135,7 @@ public class KermetaOutline extends ContentOutlinePage {
     public void selectionChanged(SelectionChangedEvent event)
     {
         super.selectionChanged(event);
-        if (editor.getMcunit()==null || editor.getMcunit().rootPackage == null) return;
+        if (editor.getMcunit()==null || editor.getMcunit().getInternalPackages().get(0) == null) return;
         ISelection selection = event.getSelection();
         if(selection.isEmpty())
         	editor.resetHighlightRange();
@@ -143,7 +143,7 @@ public class KermetaOutline extends ContentOutlinePage {
             try
             {
                 IStructuredSelection ssel = (IStructuredSelection)selection;
-                ModelReference mr = editor.getMcunit().tracer.getModelReference((EObject)(((OutlineItem)ssel.getFirstElement()).modelElement));
+                ModelReference mr = editor.getMcunit().getTracer().getModelReference((EObject)(((OutlineItem)ssel.getFirstElement()).modelElement));
                 TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
                 if(tr != null)
                 	editor.setHighlightRange(tr.getCharBeginAt()-1,0 ,true);

@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.14 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeVariableInferer.java,v 1.15 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeVariableInferer.java
 * License : EPL

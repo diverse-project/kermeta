@@ -1,4 +1,4 @@
-/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.8 2007-07-13 13:04:43 dvojtise Exp $
+/* $Id: 056_load_and_save_in_another_location.main.kmt,v 1.9 2007-07-20 15:07:48 ftanguy Exp $
  * Creation date: November 14, 2006
  * License: EPL
  * Authors: dvojtise
@@ -36,7 +36,7 @@ class Main inherits kermeta::kunit::TestCase
 		stdio.writeln("--- load_and_save_in_another_location END ---")
 	end
 	
-	operation setUp() : Void is do
+	method setUp() : Void is do
     	ecoreMetamodel := "platform:/resource/fr.irisa.triskell.kermeta.interpreter/test/emf_testcases/instances/Ecore.ecore"
     	repository := EMFRepository.new
 	end

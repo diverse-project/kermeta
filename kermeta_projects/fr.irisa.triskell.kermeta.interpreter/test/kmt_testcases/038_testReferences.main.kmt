@@ -25,7 +25,7 @@ class RefObject {
 }
 
 
-class TestMyObjectCreation inherits kermeta::kunit::TestSuite {
+class TestMyObjectCreation inherits kermeta::kunit::TestCase {
 
 	operation testCreateMyObject() : Void is do
 		var o : MyObject

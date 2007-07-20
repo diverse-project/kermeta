@@ -1,13 +1,15 @@
 /*
- * Created on 2 févr. 2005
+ * Created on 2 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import org.kermeta.io.KermetaUnit;
+
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
@@ -55,7 +57,7 @@ public class KMSymbolVariable extends KMSymbol {
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
 	public CallExpression generateCallExpression(KermetaUnit builder) {
-		CallVariable call = builder.behav_factory.createCallVariable();
+		CallVariable call = BehaviorFactory.eINSTANCE.createCallVariable();
 		call.setName(variable.getIdentifier());
 		return call;
 	}

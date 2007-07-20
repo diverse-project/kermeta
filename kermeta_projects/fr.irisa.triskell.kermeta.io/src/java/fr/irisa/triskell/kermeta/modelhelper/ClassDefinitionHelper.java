@@ -1,4 +1,4 @@
-/* $Id: ClassDefinitionHelper.java,v 1.3 2007-02-05 13:42:26 cfaucher Exp $
+/* $Id: ClassDefinitionHelper.java,v 1.4 2007-07-20 15:08:10 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL
@@ -10,11 +10,12 @@
 package fr.irisa.triskell.kermeta.modelhelper;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -22,6 +23,7 @@ import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
@@ -53,10 +55,11 @@ public class ClassDefinitionHelper {
 	 * Get a property by its name
 	 */
 	public static Property getPropertyByName(ClassDefinition c, String name) {
-		EList props = c.getOwnedAttribute();
+		List props = getAllProperties(c);
 		for (int i=0; i<props.size(); i++) {
 			Property prop = (Property)props.get(i);
-			if (prop.getName().equals(name)) return prop;
+			if (prop.getName().equals(name)) 
+				return prop;
 		}
 		return null;
 	}
@@ -67,12 +70,7 @@ public class ClassDefinitionHelper {
 	 */
 	public static ArrayList<Property> getAllProperties(ClassDefinition cls) {
 		ArrayList<Property> result = new ArrayList<Property>();
-		//		 Get the properties on object type :
-		ClassDefinition ObjectTypeDef = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
-		if (ObjectTypeDef != null) {
-		    result.addAll(getAllExplicitProperties(ObjectTypeDef));
-		}
-		
+				
 		// ensures that each property is added only once.
 		for (Object prop : cls.getOwnedAttribute()) {
 			if(!result.contains(prop)) result.add( (Property) prop);
@@ -84,6 +82,22 @@ public class ClassDefinitionHelper {
 				if(!result.contains(prop)) result.add( (Property) prop);
 			}
 		}
+		
+		for (Object stnext : cls.getSuperType()) {
+			//ensures that each property is added only once.
+			ClassDefinition superClass =  (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) stnext).getTypeDefinition();
+			result.addAll( getAllProperties(superClass) );
+		}
+		
+		for ( TypeDefinition baseTypeDefinition : (List<TypeDefinition>) cls.getBaseAspects() ) {
+			
+			if ( baseTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition baseClass = (ClassDefinition) baseTypeDefinition;
+				result.addAll( getAllProperties(baseClass) );
+			}
+			
+		}
+		
 		return result;
 	}
 	
@@ -91,8 +105,8 @@ public class ClassDefinitionHelper {
 	 * @param classDefinition
 	 * @return the list of all properties defined for the given class definition. This includes the inherited properties
 	 */
-	public static ArrayList<Property> getAllExplicitProperties(ClassDefinition cls) {
-		ArrayList<Property> result = new ArrayList<Property>();
+	public static Set<Property> getAllExplicitProperties(ClassDefinition cls) {
+		Set<Property> result = new HashSet<Property>();
 		// ensures that each property is added only once.
 		for (Object prop : cls.getOwnedAttribute()) {
 			if(!result.contains(prop)) result.add( (Property) prop);
@@ -135,24 +149,35 @@ public class ClassDefinitionHelper {
 	/** Returns a list of all operations for this classdefinition including inherited operations and
 	 * implicit operations inherited from kermeta::standard::Object
 	 */
-	public static ArrayList<Operation> getAllOperations(ClassDefinition cls) {
-		ArrayList<Operation> result = new ArrayList<Operation>();
+	public static Set<Operation> getAllOperations(ClassDefinition cls) {
 		
-		// Get the operations on object type :
-		ClassDefinition ObjectTypeDef = StdLibKermetaUnitHelper.get_ROOT_TYPE_ClassDefinition();
-		if (ObjectTypeDef != null) {
-		    result.addAll(getAllExplicitOperations(ObjectTypeDef));
-		}
-		
+		Set<Operation> result = new HashSet<Operation>();
+				
 		for (Object next : cls.getOwnedOperation()) {
 			Operation op = (Operation)next;
 			// only take operation. no methods
 			if (op.getSuperOperation() == null && !result.contains(op)) result.add(op);
 		}
 		// search recursively in super classes
-		for (Object next : cls.getSuperType()) {
+		/*for (Object next : cls.getSuperType()) {
 			result.addAll(getAllOperations((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition()));
+		}*/
+		
+		for (Object stnext : cls.getSuperType()) {
+			//ensures that each property is added only once.
+			ClassDefinition superClass =  (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) stnext).getTypeDefinition();
+			result.addAll( getAllOperations(superClass) );
 		}
+				
+		for ( TypeDefinition baseTypeDefinition : (List<TypeDefinition>) cls.getBaseAspects() ) {
+			
+			if ( baseTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition baseClass = (ClassDefinition) baseTypeDefinition;
+				result.addAll( getAllOperations(baseClass) );
+			}
+			
+		}
+		
 		return result;
 	}
 	
@@ -192,6 +217,20 @@ public class ClassDefinitionHelper {
 			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stype).getTypeDefinition();
 			if (supercls == scls) return true;
 			else if(isSuperClassOf(supercls, scls)) return true;
+		}
+		for ( TypeDefinition typeDefinition : cls.getBaseAspects() ) {
+			if ( typeDefinition instanceof ClassDefinition ) {
+				ClassDefinition c = (ClassDefinition) typeDefinition;
+				if ( isSuperClassOf(supercls, c) )
+					return true;
+			}
+		}
+		for ( TypeDefinition typeDefinition : supercls.getBaseAspects() ) {
+			if ( typeDefinition instanceof ClassDefinition ) {
+				ClassDefinition c = (ClassDefinition) typeDefinition;
+				if ( isSuperClassOf(c, cls) )
+					return true;
+			}
 		}
 		return false;
 	}
@@ -283,11 +322,13 @@ public class ClassDefinitionHelper {
 	 * this methods looks for this tag and returns true if it found it. */
 	public static boolean isSemanticallyAbstract(ClassDefinition cdef) {
 		boolean isSemanticallyAbstract = false;
-		if (cdef.isIsAbstract()) return true;
-		Iterator it = cdef.getTag().iterator();
-		while(it.hasNext() && !isSemanticallyAbstract)
-		{
-			isSemanticallyAbstract = ((Tag)it.next()).getName().equals(KermetaTypeChecker.IS_SEMANTICALLY_ABSTRACT);
+		if ( cdef.isIsAbstract() ) 
+			return true;
+		Iterator <Tag> it = cdef.getOwnedTag().iterator();
+		while(it.hasNext() && ! isSemanticallyAbstract) {
+			Tag tag = it.next();
+			if ( tag.getName() != null )
+				isSemanticallyAbstract = tag.getName().equals(KermetaTypeChecker.IS_SEMANTICALLY_ABSTRACT);
 		}
 		return isSemanticallyAbstract;
 	}
@@ -299,7 +340,7 @@ public class ClassDefinitionHelper {
 	public static String getSemanticallyAbstractCause(ClassDefinition cdef) {
 		String semanticallyAbstractCause = "(at least) one operation ";
 		if (cdef.isIsAbstract()) return "The ClassDefinition is declared abstract";
-		Iterator it = cdef.getTag().iterator();
+		Iterator it = cdef.getOwnedTag().iterator();
 		while(it.hasNext() )
 		{
 			Tag t =(Tag)it.next();
@@ -309,5 +350,94 @@ public class ClassDefinitionHelper {
 		}
 		semanticallyAbstractCause += " is abstract";
 		return semanticallyAbstractCause;
+	}
+	
+	
+	static public Set <TypeDefinition> getAllBaseClasses(ClassDefinition cl) {
+		Set<TypeDefinition> baseClasses = new HashSet<TypeDefinition> ();
+		getAllBaseClasses(cl, baseClasses);
+		return baseClasses;
+	}
+	
+	static private void getAllBaseClasses(ClassDefinition cl, Set<TypeDefinition> baseClasses) {
+		
+		for ( TypeDefinition typeDefinition : (List<TypeDefinition>) cl.getBaseAspects() ) {
+			
+			if ( typeDefinition instanceof ClassDefinition ) {
+				
+				ClassDefinition baseClass = (ClassDefinition) typeDefinition;
+				if ( ! baseClasses.contains(baseClass) ) {
+					baseClasses.add( baseClass );
+					getAllBaseClasses(baseClass, baseClasses);
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	static private void getAllAspectClasses(ClassDefinition cl, Set<TypeDefinition> aspectClasses) {
+		
+		for ( TypeDefinition typeDefinition : (List<TypeDefinition>) cl.getAspects() ) {
+			
+			if ( typeDefinition instanceof ClassDefinition ) {
+				
+				ClassDefinition aspectClass = (ClassDefinition) typeDefinition;
+				if ( ! aspectClasses.contains(aspectClass) ) {
+					aspectClasses.add( aspectClass );
+					getAllBaseClasses(aspectClass, aspectClasses);
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	static public Set <TypeDefinition> getAllAspectClasses(ClassDefinition cl) {
+		Set<TypeDefinition> baseClasses = new HashSet<TypeDefinition> ();
+		getAllAspectClasses(cl, baseClasses);
+		return baseClasses;
+	}
+
+	
+	static public Operation getLocalMatchingOperation(ClassDefinition cl, Operation operation) {
+		for ( Operation currentOperation : (List<Operation>) cl.getOwnedOperation() ) {
+			if ( OperationHelper.operationsSignatureEqualityChecker(operation, currentOperation) )
+				return currentOperation;
+		}
+		return null;
+	}
+	
+	public static Set<Constraint> getAllInvariants(ClassDefinition cls) {
+		Set<Constraint> result = new HashSet<Constraint>();
+		getAllInvariants(cls, result);
+		return result;
+	}
+	
+	private static void getAllInvariants(ClassDefinition cls, Set<Constraint> result) {
+				
+		for ( Constraint c : cls.getInv() )
+			// only take operation. no methods
+				result.add(c);
+		
+		for (Object stnext : cls.getSuperType()) {
+			//ensures that each property is added only once.
+			ClassDefinition superClass =  (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) stnext).getTypeDefinition();
+			//result.addAll( superClass.getInv() );
+			getAllInvariants(superClass, result);
+		}
+				
+		for ( TypeDefinition baseTypeDefinition : (List<TypeDefinition>) cls.getBaseAspects() ) {
+			
+			if ( baseTypeDefinition instanceof ClassDefinition ) {
+				ClassDefinition baseClass = (ClassDefinition) baseTypeDefinition;
+				//result.addAll( baseClass.getInv() );
+				getAllInvariants(baseClass, result);
+			}
+			
+		}
+		
 	}
 }

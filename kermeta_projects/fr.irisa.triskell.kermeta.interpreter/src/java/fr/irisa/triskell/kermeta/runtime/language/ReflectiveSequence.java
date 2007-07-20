@@ -4,15 +4,17 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.Hashtable;
 
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection;
+import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 public class ReflectiveSequence {
 
@@ -78,11 +80,11 @@ public class ReflectiveSequence {
 	    if (metaClass == null) {
 	        // Create a Class element, with it's type definition=ReflectiveSequence, 
 	    	// and type variable binding=property.getType().
-	    	fr.irisa.triskell.kermeta.language.structure.Class reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    	fr.irisa.triskell.kermeta.language.structure.Class reflect_class = StructureFactory.eINSTANCE.createClass();
 	        
-		    reflect_class.setTypeDefinition( (ClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+		    reflect_class.setTypeDefinition( (ClassDefinition) object.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::language::ReflectiveSequence"));
 		    
-		    TypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+		    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 		    binding.setVariable((TypeVariable)reflect_class.getTypeDefinition().getTypeParameter().get(0));
 		    binding.setType(prop_type);
 		   

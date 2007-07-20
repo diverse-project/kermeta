@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.3 2007-02-23 09:59:04 dvojtise Exp $
+/* $Id: CacheTypeData.java,v 1.4 2007-07-20 15:07:48 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -16,9 +16,13 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.Type;
+
 
 /**
  * Cached Data for a given Type
@@ -35,6 +39,8 @@ public class CacheTypeData {
 	 */
 	public CacheTypeData(Type aType)
 	{
+		
+		
 		// build callableOperations table
 		ArrayList ops = aType.callableOperations();
 		if (ops != null) 
@@ -42,7 +48,25 @@ public class CacheTypeData {
 			Iterator it = ops.iterator();
 			while(it.hasNext()) {
 			    CallableOperation op = (CallableOperation)it.next();
-			    callableOperationsCached.put(op.getOperation().getName(), op);
+			    CallableOperation savedOp = callableOperationsCached.get( op.getOperation().getName() );
+			    
+			    /*
+			     * 
+			     * If the operation does not exist yet, add it to the list.
+			     * It an operation with the same name already exis, we check wether the abstract property is set
+			     * or not in order to replace it.
+			     * 
+			     */
+			    if ( savedOp == null ) 
+			       	callableOperationsCached.put(op.getOperation().getName(), op);
+			    else {
+					boolean shouldAdd = false;
+					if ( savedOp.getOperation().isIsAbstract()
+						|| ( ! OperationHelper.isOverloadable( op.getOperation() ) && ! savedOp.getOperation().isIsAbstract() ) )
+					shouldAdd = true;
+					if ( shouldAdd )
+				    	callableOperationsCached.put(op.getOperation().getName(), op);
+			    }
 			}
 		}
 		//		 build callableProperties table

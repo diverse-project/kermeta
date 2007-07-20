@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionItemProvider.java,v 1.8 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: GenericTypeDefinitionItemProvider.java,v 1.9 2007-07-20 15:08:27 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

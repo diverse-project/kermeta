@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveTypeImpl.java,v 1.5 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: PrimitiveTypeImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

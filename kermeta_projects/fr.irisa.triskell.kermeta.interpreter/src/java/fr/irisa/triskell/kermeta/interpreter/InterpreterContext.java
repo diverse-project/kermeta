@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.18 2007-04-18 15:22:40 ffleurey Exp $
+/* $Id: InterpreterContext.java,v 1.19 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : EPL
@@ -17,12 +17,11 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Stack;
 
+
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
-import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 
 /**
  * The context of the interpreter. It contains a stack of contexts that are called <code>CallFrame</code>.

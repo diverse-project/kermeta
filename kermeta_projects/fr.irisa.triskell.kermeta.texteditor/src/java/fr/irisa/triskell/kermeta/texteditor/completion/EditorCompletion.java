@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.20 2007-07-10 12:43:06 cfaucher Exp $
+/* $Id: EditorCompletion.java,v 1.21 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorCompletion.java
 * License : EPL
@@ -26,10 +26,10 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -159,7 +159,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 							}
 						}
 						
-				        for ( Package p : kermetaUnit.packages.values()) {
+				        for ( Package p : (List<Package>) kermetaUnit.getPackages() ) {
 				            for (Object next: p.getOwnedTypeDefinition()) {
 				                TypeDefinition td = (TypeDefinition)next;
 				                CompletionItem ci = new NamedElementCompletionItem(td);
@@ -558,29 +558,34 @@ public class EditorCompletion implements IContentAssistProcessor {
     	if (begining.length() > begining.lastIndexOf("::") + 2) 
     		short_name = begining.substring(begining.lastIndexOf("::")+2);
     	
-    	Package pkg = kermetaUnit.packageLookup(pkg_name);
+    	List<Package> packages = kermetaUnit.getPackages(pkg_name);
     	// Get classdefinitions inside pkg
-    	for (Object next : pkg.getOwnedTypeDefinition())
-    	{
-    		 TypeDefinition t = (TypeDefinition)next;
-    		 CompletionItem ci = new NamedElementCompletionItem(t);
-             if (short_name.length() == 0 ) 
-            	 proposals.add(ci.getCompletionProposal(offset, 0));
-    		 else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase())) {
+    	
+    	for ( Package p : packages ) {
+    	
+    		for (Object next : p.getOwnedTypeDefinition())
+    		{
+    			TypeDefinition t = (TypeDefinition)next;
+    			CompletionItem ci = new NamedElementCompletionItem(t);
+    			if (short_name.length() == 0 ) 
+    				proposals.add(ci.getCompletionProposal(offset, 0));
+    			else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase())) {
                  proposals.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
-             }
+    			}
             	 
+    		}
+    		
     	}
     	
     	// Get sub packages of this pkg
-        for (Object next : pkg.getNestedPackage()) {
+      /*  for (Object next : pkg.getNestedPackage()) {
         	Package p = (Package)next;
         	CompletionItem ci = new NamedElementCompletionItem(p);
         	if (short_name.length() == 0) 
         		proposals.add(ci.getCompletionProposal(offset,0));
         	else if (ci.getCompletionText().toLowerCase().startsWith(short_name.toLowerCase()))
         		proposals.add(ci.getCompletionProposal(offset - short_name.length(), short_name.length()));
-        }
+        }*/
         Collections.sort(proposals, cpCmp);
     }
 

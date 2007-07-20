@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.7 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: ClassDefinition.java,v 1.8 2007-07-20 15:09:02 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -16,11 +16,11 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv <em>Inv</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#isIsAbstract <em>Is Abstract</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedAttribute <em>Owned Attribute</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getOwnedOperation <em>Owned Operation</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv <em>Inv</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,24 +35,6 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @generated
 	 */
 	String copyright = "IRISA / INRIA / Universite de Rennes 1";
-
-	/**
-	 * Returns the value of the '<em><b>Inv</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Inv</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inv</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
-	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
-	 * @model opposite="invOwner" containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<Constraint> getInv();
 
 	/**
 	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
@@ -131,5 +113,23 @@ public interface ClassDefinition extends GenericTypeDefinition, TypeContainer {
 	 * @generated
 	 */
 	EList<Type> getSuperType();
+
+	/**
+	 * Returns the value of the '<em><b>Inv</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inv</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inv</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
+	 * @model opposite="invOwner" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<Constraint> getInv();
 
 } // ClassDefinition

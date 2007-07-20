@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="primitive_types.kmt|"/>
+    <details key="using" value="kermeta::exceptions|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="standard" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/standard/java.ecore#//standard" nsPrefix="standard">
+      <eClassifiers xsi:type="ecore:EClass" name="UnknownJavaObject">
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="toString">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := &quot;toString of  UnknownJavaObject not implemented yet&quot;&#xA;end"/>
+            <details key="superOperation" value="kermeta::language::structure::Object"/>
+            <references href="../language/structure.ecore#/1/language/structure/Object/toString"/>
+          </eAnnotations>
+          <eType xsi:type="ecore:EClass" href="primitive_types.ecore#/1/standard/String"/>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="primitive_types.ecore#/0"/>
+    <references href="primitive_types.ecore#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="collections.ecore#/0"/>
+    <references href="collections.ecore#/1"/>
+    <references href="collections.ecore#/2"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

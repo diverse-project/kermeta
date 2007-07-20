@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.19 2006-09-28 13:04:04 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.20 2007-07-20 15:07:48 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -32,9 +32,9 @@ import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 
 /**
  * This is the ExpressionInterpreter improved to handle the debugging mode

@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.19 2007-06-27 07:07:16 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.20 2007-07-20 15:09:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.tools.wizards;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
@@ -32,14 +33,21 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.console.messages.ErrorMessage;
 import fr.irisa.triskell.eclipse.console.messages.ThrowableMessage;
 import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
+import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
+import fr.irisa.triskell.kermeta.exporter.km.KmExporter;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
@@ -161,8 +169,13 @@ public class UnitExporterWizard extends Wizard {
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception {
 
-		builder.saveAsXMIModel(ifile.getLocation().toOSString());
-
+		String fileURI = "platform:/resource" + ifile.getFullPath().toString();
+    	int index = fileURI.lastIndexOf("/");
+    	String targetDir = fileURI.substring(0, index);
+		KmExporter exporter = new KmExporter();
+		
+		exporter.export(builder, targetDir, fileURI);
+		
 		ifile.refreshLocal(1, null);
 	}
 
@@ -178,7 +191,11 @@ public class UnitExporterWizard extends Wizard {
 			IFile traceKmFile = IDEWorkbenchPlugin.getPluginWorkspace()
 					.getRoot().getFile(
 							traceFile.getFullPath().addFileExtension("km"));
-			unit.saveAsXMIModel(traceKmFile.getLocation().toOSString());
+			
+			KmExporter exporter = new KmExporter();
+			//exporter.export(unit.getTracer(), "./");
+			
+	//		unit.saveAsXMIModel(traceKmFile.getLocation().toOSString());
 
 			traceKmFile.refreshLocal(1, null);
 		}
@@ -215,10 +232,16 @@ public class UnitExporterWizard extends Wizard {
 				outputPage.getContainerFullPath().append(
 						tracePage.getFileName()));
 		unit = createUnit();
-		unit.load();
-		unit.typeCheck(null);
+		
+		KermetaTypeChecker typechecker = new KermetaTypeChecker(unit);
+		typechecker.checkUnit();
 
-		ArrayList<KermetaUnit> kuList = unit.getAllImportedUnits();
+		if ( ! unit.isErrored() ) {
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker(unit);
+			constraintchecker.checkUnit();
+		}
+		
+		Set<KermetaUnit> kuList = KermetaUnitHelper.getAllImportedKermetaUnits(unit);
 		if(kuList.size() != 0){
 			KermetaPlugin.getDefault().getConsole().println("Files or resources indirectly loaded :");
 			for( KermetaUnit ku :  kuList){
@@ -227,21 +250,22 @@ public class UnitExporterWizard extends Wizard {
 		}
 		
 		// display eventual warnings
-		if (unit.messages.getAllWarnings().size() > 0) {
-			WarningMessage message = new WarningMessage(unit.messages.getAllMessagesAsString());
+		if ( KermetaUnitHelper.isWarned(unit) ) {
+			WarningMessage message = new WarningMessage( KermetaUnitHelper.getAllWarningsAsString(unit) );
 			KermetaPlugin.getDefault().getConsole().println(message);
 		}
 		
-		if (unit.messages.hasError()) {
+		if ( KermetaUnitHelper.isErrored(unit) ) {
 			Shell theShell = this.getContainer().getShell();
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors. Please have look to the Console view for the details");
 			
-			ErrorMessage errmessage = new ErrorMessage(unit.messages.getAllErrorMessagesAsString());
+			ErrorMessage errmessage = new ErrorMessage( KermetaUnitHelper.getAllErrorsAsString(unit) );
 			KermetaPlugin.getDefault().getConsole().println(errmessage);
 
 		} 
-		if(!unit.messages.hasError() || outputPage.forceWriteEvenIfErrorCheck.getSelection()){
+		
+		if(! unit.isErrored() || outputPage.forceWriteEvenIfErrorCheck.getSelection()){
 			try {
 
 				outputFile = outputPage.createNewFile();				
@@ -274,16 +298,25 @@ public class UnitExporterWizard extends Wizard {
 	 */
 	public KermetaUnit createUnit() {
 
-		String inputFile_uri = "platform:/resource"
-				+ inputFile.getFullPath().toString();
+		String inputFile_uri = "platform:/resource" + inputFile.getFullPath().toString();
+			
+			//"platform:/resource"
+			//	+ inputFile.getFullPath().toString();
 
-		KermetaUnitFactory.getDefaultLoader().unloadAll();
+		//KermetaUnitFactory.getDefaultLoader().unloadAll();
 
-		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(
-				inputFile_uri);
-		// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
-		initTraces();
-		unit.setTracer(tracer);
+		try {
+			unit = IOPlugin.getDefault().getKermetaUnit( inputFile_uri );
+			// init the tracer (needed in order to get error messages and for an eventual save of the trace file)
+			initTraces();
+			unit.setTracer(tracer);
+			IOPlugin.getDefault().loadKermetaUnit( inputFile_uri );
+						
+		} catch (KermetaIOFileNotFoundException e) {
+			return null;
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		}
 		
 		return unit;
 	}

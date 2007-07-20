@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.5 2007-05-30 11:45:56 dvojtise Exp $
+/* $Id: Jar2KMPass2.java,v 1.6 2007-07-20 15:08:07 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -18,17 +18,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Filter;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Require;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+import org.kermeta.io.KermetaUnit;
 
 /**
  *  Jar2KM PASS 2 : creates packages and collects types
@@ -36,7 +40,7 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 public class Jar2KMPass2 extends Jar2KMPass {
 
 	
-	public Jar2KMPass2(JarUnit builder) {
+	public Jar2KMPass2(KermetaUnit builder) {
 		super(builder);
 	}
 
@@ -49,8 +53,9 @@ public class Jar2KMPass2 extends Jar2KMPass {
     	URIConverter converter = new URIConverterImpl();				
     	try
     	{
+    		URI uri = URI.createURI( builder.getUri() );
 	    	//converter.
-    		InputStream stream = converter.createInputStream(builder.platformURI);
+    		InputStream stream = converter.createInputStream(uri);
     				
 	    	//JarInputStream jis = new JarInputStream(urls[0].openStream());
 	    	JarInputStream jis = new JarInputStream(stream);
@@ -67,15 +72,19 @@ public class Jar2KMPass2 extends Jar2KMPass {
 	    				if(!cname.contains("$")){ // ignore inner class
 		    				String qname = pqname + "::" + cname;
 		    				// apply exclusion /inclusion rules
-		    				if(builder.excludeFilters.size()==0){
-		    					if(builder.includeFilters.size() == 0){
-		    						// no filter
-				    				internalLog.debug("JAR : file "+jentry.getName());
-		    						addClass(jentry, pqname, qname);
-		    					}
-		    					else {
-		    						// select only those in the include filter
-		    						if(isInFilter(pqname, builder.includeFilters) || isInFilter(qname, builder.includeFilters)) {
+		    				
+		    				if ( qname.matches(".+lang.+") )
+		    					System.out.println();
+		    					
+		    				if( builder.getModelingUnit().getExcludeFilters().size()==0){
+			    				if( builder.getModelingUnit().getIncludeFilters().size() == 0){
+			    					// no filter
+					    			internalLog.debug("JAR : file "+jentry.getName());
+			    					addClass(jentry, pqname, qname);
+			    				}
+			    				else {
+			    					// select only those in the include filter
+			    					if(isInFilter(pqname, builder.getModelingUnit().getIncludeFilters()) || isInFilter(qname, builder.getModelingUnit().getIncludeFilters())) {
 					    				internalLog.debug("JAR : file "+jentry.getName());
 		    							addClass(jentry, pqname, qname);
 		    						}
@@ -83,33 +92,33 @@ public class Jar2KMPass2 extends Jar2KMPass {
 		    				}
 		    				else {
 		    					//	select only those not in the exclude filter
-	    						if(! (isInFilter(pqname, builder.excludeFilters)|| isInFilter(qname, builder.includeFilters))) {
-				    				internalLog.debug("JAR : file "+jentry.getName());
-	    							addClass(jentry, pqname, qname);
-	    						}
-	    						else if(builder.includeFilters.size() != 0){
+	    						if(! (isInFilter(pqname, builder.getModelingUnit().getExcludeFilters())|| isInFilter(qname, builder.getModelingUnit().getIncludeFilters()))) {
+					    			internalLog.debug("JAR : file "+jentry.getName());
+		    						addClass(jentry, pqname, qname);
+		    					}
+		    					else if(builder.getModelingUnit().getIncludeFilters().size() != 0){
 		    						// if it is in the include filter it may rescued and added
-		    						if(isInFilter(pqname, builder.includeFilters)|| isInFilter(qname, builder.includeFilters)) {
+		    						if(isInFilter(pqname, builder.getModelingUnit().getIncludeFilters())|| isInFilter(qname, builder.getModelingUnit().getIncludeFilters())) {
 					    				internalLog.debug("JAR : file "+jentry.getName());
 		    							addClass(jentry, pqname, qname);
 		    						}
 		    					}
 		    				}
-		    					
 	    				}
+	    					
+    				}
 	    				//else internalLog.debug("JAR : ignored inner class "+jentry.getName() );
-	    			}
 	    		}
 	    		jentry = jis.getNextJarEntry();
 	    	}
 	    	stream.close();
     	} catch (FileNotFoundException fe) {
-			internalLog.error("File not found "+builder.platformURI.toFileString() ,fe);
-			builder.messages.addMessage(new KMTUnitLoadError("File not found "+fe.getMessage(),null));
+			internalLog.error("File not found "+builder.getUri() ,fe);
+			builder.error( "File not found "+fe.getMessage(), null );
 					
     	} catch (IOException e) {
-			internalLog.error("IOException reading jar file "+builder.platformURI.toFileString() ,e);
-			builder.messages.addMessage(new KMTUnitLoadError("IOException reading jar file "+builder.platformURI.toFileString() + " " + e.getMessage(),null));
+			internalLog.error("IOException reading jar file "+builder.getUri() ,e);
+			builder.error( "IOException reading jar file "+builder.getUri() + " " + e.getMessage(), null );
 			
 		}
 
@@ -121,37 +130,36 @@ public class Jar2KMPass2 extends Jar2KMPass {
 	 * @param includeFilters
 	 * @return true if if one on the filter values in a substring of the given name
 	 */
-	private boolean isInFilter(String pqname, ArrayList<String> includeFilters) {		
-		Iterator<String> it = includeFilters.iterator();
-		while(it.hasNext()){
-			if(pqname.startsWith(it.next())) return true;
+	private boolean isInFilter(String pqname, List<Filter> includeFilters) {		
+		for ( Filter filter : includeFilters ) {
+			if ( pqname.startsWith(filter.getQualifiedName()) )
+				return true;
 		}
 		return false;
 	}
 
 	private void addClass(JarEntry jentry, String packageqname, String classqname) {
-		if (builder.typeDefinitionLookup(classqname) != null) {
+		if (builder.getTypeDefinitionByQualifiedName(classqname) != null) {
 			// This is an error : the type already exists
-			builder.messages.addMessage(new KMTUnitLoadError("A type definition for '" + classqname + "' already exists.",null));
+			builder.error( "A type definition for '" + classqname + "' already exists.",null );
 			
 		}
 		else {
-			Package theEnclosingPackage = getOrCreatePackage(packageqname);
-			ClassDefinition c = builder.struct_factory.createClassDefinition();
+			Package theEnclosingPackage = builder.addInternalPackage(packageqname);
+			ClassDefinition c = StructureFactory.eINSTANCE.createClassDefinition();
 			//this.storeTrace(c, node);
 			c.setName(getClassName(jentry));
 			theEnclosingPackage.getOwnedTypeDefinition().add(c);
-			builder.typeDefs.put(classqname, c);
 			
 			// this is a java definition add a tag so the interpreter can recognize it and work with it
-			Tag tag = builder.struct_factory.createTag();
+			Tag tag = StructureFactory.eINSTANCE.createTag();
 			tag.setName(JARUNIT_TAG_NAME);
 			tag.setValue(builder.getUri());
-			c.getTag().add(tag);
+			c.getOwnedTag().add(tag);
 		}
 	}
 	
-	protected fr.irisa.triskell.kermeta.language.structure.Package getOrCreatePackage(String qualified_name) {
+/*	protected fr.irisa.triskell.kermeta.language.structure.Package getOrCreatePackage(String qualified_name) {
 		fr.irisa.triskell.kermeta.language.structure.Package result = builder.packageLookup(qualified_name);
 		if (result != null) return result;
 		if (qualified_name.indexOf("::")>=0) {
@@ -171,6 +179,6 @@ public class Jar2KMPass2 extends Jar2KMPass {
 		}
 		builder.packages.put(NamedElementHelper.getQualifiedName(result), result);
 		return result;
-	}
+	}*/
 
 }

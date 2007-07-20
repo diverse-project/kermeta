@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.directedgraph;
 
+
 public class test {
 
 	/**

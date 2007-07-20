@@ -1,4 +1,4 @@
-/*$Id: CreateDependentDependencies.java,v 1.8 2007-06-26 12:24:01 ftanguy Exp $
+/*$Id: CreateDependentDependencies.java,v 1.9 2007-07-20 15:09:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	CreateDependentDependencies.java
 * License : EPL
@@ -9,10 +9,13 @@
 */
 package fr.irisa.triskell.kermeta.kpm.actions.dependents;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
@@ -24,8 +27,6 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.RuleHelper;
 import fr.irisa.triskell.kermeta.kpm.helpers.InOutHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 public class CreateDependentDependencies implements IAction {
 
@@ -45,6 +46,9 @@ public class CreateDependentDependencies implements IAction {
 			 * 
 			 */
 			KPM kpm = (KPM) unit.eContainer();
+			// The unit may be a ghost. It has no container.
+			if ( kpm == null )
+				return;
 			KermetaUnit kermetaUnit = KermetaUnitHost.getInstance().getValue(unit);		
 			
 			
@@ -64,9 +68,9 @@ public class CreateDependentDependencies implements IAction {
 			 * 
 			 * 
 			 */
-			for ( KermetaUnit importedKermetaUnit : kermetaUnit.importedUnits ) {
+			for ( KermetaUnit importedKermetaUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() ) {
 				
-				if ( ! importedKermetaUnit.getUri().equals(StdLibKermetaUnitHelper.STD_LIB_URI) ) {
+				if ( ! importedKermetaUnit.getUri().equals(IOPlugin.FRAMEWORK_KM_URI) ) {
 		
 					IFile importedFile = ResourceHelper.getIFile(importedKermetaUnit.getUri());
 						// the uri may be an incorrect path, ignore it (the typecheckec will do its job to report the error

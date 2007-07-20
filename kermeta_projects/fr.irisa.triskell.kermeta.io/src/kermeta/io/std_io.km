@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_language_structure:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore//language/structure">
+  <packages name="kermeta">
+    <nestedPackage name="io">
+      <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="StdIO" superType="//@packages.0/io/StdIO/@containedType.0">
+        <ownedTag value="/**&#xA; * An implementation of StdIO : standard input/output&#xA; * &lt;img src=&quot;./figures/io_package.png&quot;>&#xA; */"/>
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../language/structure.km#//@packages.0/language/structure/Object"/>
+        </containedType>
+        <ownedOperation name="write" type="//@packages.0/io/StdIO/write/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * write the object to standard output&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:VoidType"/>
+          <ownedParameter name="object" type="//@packages.0/io/StdIO/write/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/write/@ownedParameter.0/@containedType.0" name="object"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" value="&lt;void>">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                  </value>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/write/@ownedParameter.0/@containedType.0" name="object"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::StdIO" jmethod="write">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/write/@ownedParameter.0/@containedType.0" name="object"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="writeln" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * writeln the object to standard output&#xA;  */"/>
+          <type href="../persistence/resource.km#//@packages.0/persistence/EMFResource/load/@body/@statement.2/@thenBody/@statement.0/@containedType.0"/>
+          <ownedParameter name="object" type="//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block">
+            <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0" name="object"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" value="&lt;void>">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                  </value>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0" name="object"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::StdIO" jmethod="writeln">
+              <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/writeln/@ownedParameter.0/@containedType.0" name="object"/>
+            </statement>
+          </body>
+        </ownedOperation>
+        <ownedOperation name="read" type="//@packages.0/io/StdIO/read/@containedType.0" isOrdered="true" upper="1">
+          <ownedTag value="/**&#xA;  * read an object from standard input&#xA;  */"/>
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+          </containedType>
+          <ownedParameter name="prompt" type="//@packages.0/io/StdIO/read/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+            <containedType xsi:type="kermeta_language_structure:Class">
+              <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="../standard/primitive_types.km#//@packages.0/standard/String"/>
+            </containedType>
+          </ownedParameter>
+          <body xsi:type="kermeta_language_behavior:Block" staticType="//@packages.0/io/StdIO/read/@containedType.0">
+            <statement xsi:type="kermeta_language_behavior:Conditional">
+              <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+              <thenBody xsi:type="kermeta_language_behavior:Block">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/read/@ownedParameter.0/@containedType.0" name="prompt"/>
+                  <value xsi:type="kermeta_language_behavior:StringLiteral" value="">
+                    <staticType href="../standard/primitive_types.km#//@packages.0/standard/Void/toString/@body/@containedType.0"/>
+                  </value>
+                </statement>
+              </thenBody>
+              <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                <staticType href="../standard/primitive_types.km#//@packages.0/standard/String/equals/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:VoidLiteral">
+                  <staticType href="../standard/collections.km#//@packages.0/standard/Collection/remove/@body/@containedType.0"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/read/@ownedParameter.0/@containedType.0" name="prompt"/>
+                <staticOperation href="../standard/primitive_types.km#//@packages.0/standard/String/equals"/>
+              </condition>
+            </statement>
+            <statement xsi:type="kermeta_language_behavior:Assignment" staticType="//@packages.0/io/StdIO/read/@containedType.0" isCast="true">
+              <target xsi:type="kermeta_language_behavior:CallResult" staticType="//@packages.0/io/StdIO/read/@containedType.0" name="result"/>
+              <value xsi:type="kermeta_language_behavior:JavaStaticCall" jclass="fr::irisa::triskell::kermeta::runtime::basetypes::StdIO" jmethod="read">
+                <staticType href="../standard/collections.km#//@packages.0/standard/Collection/add/@body/@containedType.0"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" staticType="//@packages.0/io/StdIO/read/@ownedParameter.0/@containedType.0" name="prompt"/>
+              </value>
+            </statement>
+          </body>
+        </ownedOperation>
+      </ownedTypeDefinition>
+    </nestedPackage>
+  </packages>
+  <requires uri="../Standard.kmt">
+    <ownedTag value="/**&#xA; * Contains Input/Output related classes. &#xA; */"/>
+  </requires>
+  <usings qualifiedName="kermeta::standard"/>
+  <usings qualifiedName="kermeta::language::structure"/>
+  <referencedModellingUnit href="../language/structure.km#/"/>
+  <referencedModellingUnit href="../utils/hashtable.km#/"/>
+  <referencedModellingUnit href="../reflection/reflection.km#/"/>
+  <referencedModellingUnit href="../persistence/resource.km#/"/>
+  <referencedModellingUnit href="../Standard.km#/"/>
+  <referencedModellingUnit href="../exceptions/exceptions.km#/"/>
+  <referencedModellingUnit href="file_io.km#/"/>
+  <referencedModellingUnit href="../standard/primitive_types.km#/"/>
+  <referencedModellingUnit href="../utils/stack.km#/"/>
+  <referencedModellingUnit href="#/"/>
+  <referencedModellingUnit href="../kunit/kunit.km#/"/>
+  <referencedModellingUnit href="../standard/java.km#/"/>
+  <referencedModellingUnit href="../language/reflective_collections.km#/"/>
+  <referencedModellingUnit href="../language/dynamic_expression.km#/"/>
+  <referencedModellingUnit href="../standard/collections.km#/"/>
+  <referencedModellingUnit href="../language/behavior.km#/"/>
+</kermeta_language_structure:CompilationUnit>

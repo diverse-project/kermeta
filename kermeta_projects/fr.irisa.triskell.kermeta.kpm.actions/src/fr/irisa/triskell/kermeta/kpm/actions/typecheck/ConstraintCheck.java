@@ -1,6 +1,6 @@
 
 
-/*$Id: ConstraintCheck.java,v 1.3 2007-07-02 14:03:06 ftanguy Exp $
+/*$Id: ConstraintCheck.java,v 1.4 2007-07-20 15:09:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	ConstraintCheck.java
 * License : EPL
@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -24,9 +25,6 @@ import fr.irisa.triskell.kermeta.extension.IAction;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
-
 public class ConstraintCheck implements IAction {
 
 	public void execute(Out out, Unit unit, IProgressMonitor monitor, Map args) {
@@ -54,7 +52,10 @@ public class ConstraintCheck implements IAction {
 			 * 
 			 * 
 			 */
-			if ( (kermetaUnit == null) || kermetaUnit.messages.unitHasError )
+			if ( kermetaUnit == null )
+				return;
+			
+			if ( kermetaUnit.isErrored() )
 				return;
 			
 			/*

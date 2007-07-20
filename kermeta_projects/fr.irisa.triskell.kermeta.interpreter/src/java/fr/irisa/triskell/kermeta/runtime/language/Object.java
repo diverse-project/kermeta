@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.19 2007-07-03 12:54:56 dtouzet Exp $
+/* $Id: Object.java,v 1.20 2007-07-20 15:07:47 ftanguy Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -16,8 +16,10 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
@@ -30,11 +32,12 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
@@ -100,8 +103,22 @@ public class Object {
 		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	     ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
 	     
-	     checkConstraintAndPrintMes(classDef, self);
-	     checkInheritedInvariants(classDef , self);
+	     java.lang.String message = "";
+	     Set <Constraint> invariants = ClassDefinitionHelper.getAllInvariants( classDef );
+	     for (Constraint c : invariants ) {
+	    	 if ( ! checkConstraint(c.getBody(), classDef, self) ) {
+	   			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
+	   			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
+		        			message,
+							self.getFactory().getMemory().getCurrentInterpreter(),
+							self.getFactory().getMemory(),
+							c.getBody(),
+							null);
+	   		 }
+	     }
+	     
+	     //checkConstraintAndPrintMes(classDef, self);
+	     //checkInheritedInvariants(classDef , self);
          return self.getFactory().getMemory().trueINSTANCE; //if the constraints don't raise any constraint exception then it means that the constraints are true
 	}
 	
@@ -146,10 +163,11 @@ public class Object {
 	}
 	
 	protected static boolean checkConstraint(Expression exp, ClassDefinition classDef, RuntimeObject obj) {
-		DynamicExpressionUnit deu = new DynamicExpressionUnit(obj.getFactory().getMemory().getUnit().getPackages(), exp, classDef);
+		DynamicExpressionUnit deu = new DynamicExpressionUnit(exp);
 		ExpressionInterpreter interp = obj.getFactory().getMemory().getCurrentInterpreter();
 		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj, true);
-		return ecf.eval(interp) == obj.getFactory().getMemory().trueINSTANCE;
+		RuntimeObject result = ecf.eval(interp);
+		return result == obj.getFactory().getMemory().trueINSTANCE;
 	}
 	
 
@@ -517,15 +535,15 @@ public class Object {
 	 */
 	public static RuntimeObject getContainedObjects(RuntimeObject selfRO) {
 		// Build RO for collection to be returned
-       	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::structure::Object");
-	    fr.irisa.triskell.kermeta.language.structure.Class objClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+       	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
+	    fr.irisa.triskell.kermeta.language.structure.Class objClass = StructureFactory.eINSTANCE.createClass();
 	    objClass.setTypeDefinition(objClassDef);
 	    
-	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
-	    fr.irisa.triskell.kermeta.language.structure.Class setClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Set");
+	    fr.irisa.triskell.kermeta.language.structure.Class setClass = StructureFactory.eINSTANCE.createClass();
 	    setClass.setTypeDefinition(setClassDef);
 	    
-	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = selfRO.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    tvBinding4set.setType(objClass);
 	    tvBinding4set.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
 	    setClass.getTypeParamBinding().add(tvBinding4set);

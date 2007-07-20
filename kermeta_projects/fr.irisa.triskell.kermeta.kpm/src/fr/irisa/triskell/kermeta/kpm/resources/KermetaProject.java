@@ -1,4 +1,4 @@
-/*$Id: KermetaProject.java,v 1.8 2007-06-15 14:45:34 ftanguy Exp $
+/*$Id: KermetaProject.java,v 1.9 2007-07-20 15:08:47 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -94,7 +94,7 @@ public class KermetaProject {
 	 */
 	private void initialize() throws CoreException {
 		IFile file = getKpmIFile();
-		if ( ! file.exists() ) {
+		if ( file == null ) {
 			initializeConstants();
 			kpm = KPMHelper.getDefaultKPM(project);
 			//kpm = KpmFactory.eINSTANCE.createKPM();
@@ -127,7 +127,7 @@ public class KermetaProject {
 				done = true;
 				QualifiedName key = new QualifiedName("fr.irisa.triskell.kermeta.kpm", "forceOpening");
 				String value = project.getPersistentProperty(key);
-				if ( value.equals("true") ) {
+				if ( (value == null) || value.equals("true") ) {
 					HashMap map = new HashMap();
 					map.put("forceOpening", true);
 					currentUnit.receiveAsynchroneEvent( "open", map, null );
@@ -212,7 +212,9 @@ public class KermetaProject {
 			    	public void run(IProgressMonitor monitor) throws CoreException {
 			    		try {
 			    			XMIHelper.save( getKpmFilePathString(), kpm);
-			    			getKpmIFile().refreshLocal(0, monitor);
+			    			IFile kpmFile = getKpmIFile();
+			    			if ( kpmFile != null )
+			    				kpmFile.refreshLocal(0, monitor);
 			    		} catch (IOException exception) {
 			    			exception.printStackTrace();
 			    		} 

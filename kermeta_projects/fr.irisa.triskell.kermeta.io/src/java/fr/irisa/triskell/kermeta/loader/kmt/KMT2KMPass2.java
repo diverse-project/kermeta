@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.13 2007-07-03 11:44:38 dvojtise Exp $
+/* $Id: KMT2KMPass2.java,v 1.14 2007-07-20 15:08:06 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -12,30 +12,32 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.ClassMemberDecls;
 import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.ast.EnumDecl;
-import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
+import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
-//import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -56,8 +58,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass2(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMPass2(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 		pkgs = new Stack();
 	}
 	
@@ -66,14 +68,19 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(PackageDecl node) {
-		builder.rootPackage = getOrCreatePackage(qualifiedIDAsString(node.getName()), node);
-		pkgs.push(builder.rootPackage);
-		return false;
+		//fr.irisa.triskell.kermeta.language.structure.Package p = getOrCreatePackage(qualifiedIDAsString(node.getName()), node);
+		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qualifiedIDAsString(node.getName()) );
+		builder.storeTrace(p, node);
+		pkgs.push( p );
+		//builder.addUsing( p.getName() );
+		return true;
 	}
 	
 	public boolean beginVisit(SubPackageDecl node) {
 		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		pkgs.push(getOrCreatePackage(qname, node));
+		fr.irisa.triskell.kermeta.language.structure.Package p = builder.addInternalPackage( qname );
+		//pkgs.push(getOrCreatePackage(qname, node));
+		pkgs.push(p);
 		return super.beginVisit(node);
 	}
 	public void endVisit(SubPackageDecl arg0) {
@@ -82,31 +89,31 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	}
 	
 	public boolean beginVisit(ClassDecl node) {
-		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		TypeDefinition typeDef = builder.typeDefinitionLookup(qname);
+		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		TypeDefinition typeDef = builder.getTypeDefinitionByQualifiedName(qualifiedName);
 		if (typeDef != null) {
 			// special case of the weaving: if the new class has a decorator tag set to true then we can reopen the class
 			// this will weave the classes directly at parsing time
 			// DVK: may be we can have another approach that doesn't reopen the class, but weave the result in memory only
 			//     so we can still have the separation
-			if(KermetaASTHelper.isAnAspect(node))
-			{
+			if(KermetaASTHelper.isAnAspect(node)) {
+				
 				internalLog.debug("Aspect tag found : reopening the class " + node.getName().getText()+ " from " +builder.getUri());
-				builder.current_class = (ClassDefinition)typeDef;
-				builder.current_class.setIsAspect(true);// DVK refactoring needed : the metamodel now use a dedicated property
-				builder.storeTrace(builder.current_class, node); // the trace is used to retreive this element in following passes
-			}
-			else if(TagHelper.findTagFromNameAndValue((ClassDefinition)typeDef,KermetaASTHelper.TAGNAME_ASPECT, "true")!= null){
+				context.current_class = (ClassDefinition)typeDef;
+				builder.storeTrace(context.current_class, node); // the trace is used to retreive this element in following passes
+			
+			} else if(TagHelper.findTagFromNameAndValue((ClassDefinition)typeDef,KermetaASTHelper.TAGNAME_ASPECT, "true")!= null){
 				// previous class was an aspect we can reopen it
 				internalLog.debug("no aspect tag found but previous definition was an aspect: reopening the class " + node.getName().getText()+ " from " +builder.getUri());
-				builder.current_class = (ClassDefinition)typeDef;
-				builder.storeTrace(builder.current_class, node); // the trace is used to retreive this element in following passes
+				context.current_class = (ClassDefinition)typeDef;
+				builder.storeTrace(context.current_class, node); // the trace is used to retreive this element in following passes
 				// since are now loading the base, the class shouldn't be tagged as aspect anymore 
-				TagHelper.findTagFromNameAndValue(builder.current_class,KermetaASTHelper.TAGNAME_ASPECT, "true").setValue("false");
+				TagHelper.findTagFromNameAndValue(context.current_class,KermetaASTHelper.TAGNAME_ASPECT, "true").setValue("false");
 			}
 			else{
 				// This is an error : the type already exists
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists. (while loading " +builder.getUri()+")",node));
+				//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
+				builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.", node);
 				super.beginVisit(node);
 				return false;
 			}
@@ -115,18 +122,14 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			// first time we see this classdefinition
 			internalLog.debug("class " + node.getName().getText()+ " from " +builder.getUri());
 			
-			builder.current_class = builder.struct_factory.createClassDefinition();
-			builder.current_class.setName(getTextForID(node.getName()));
-			current_package().getOwnedTypeDefinition().add(builder.current_class);
-			builder.typeDefs.put(qname, builder.current_class);
+			context.current_class = StructureFactory.eINSTANCE.createClassDefinition();
+			context.current_class.setName(getTextForID(node.getName()));
+			current_package().getOwnedTypeDefinition().add(context.current_class);
+			builder.storeTrace(context.current_class, node);
 			if(KermetaASTHelper.isAnAspect(node))
 			{
-				builder.current_class.setIsAspect(true);// DVK refactoring needed : the metamodel now use a dedicated property				
-			}
-			builder.storeTrace(builder.current_class, node);
-			if(KermetaASTHelper.isAnAspect(node))
-			{
-				TagHelper.createNonExistingTagFromNameAndValue(builder.current_class, KermetaASTHelper.TAGNAME_ASPECT, "true");
+				context.current_class.setIsAspect( true );
+				TagHelper.createNonExistingTagFromNameAndValue(context.current_class, KermetaASTHelper.TAGNAME_ASPECT, "true");
 			}
 		}
 		return super.beginVisit(node);
@@ -141,25 +144,28 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		//if (builder.current_class == null) return false;
 		// create the parameter
 		String name = getTextForID(typeVarDecl.getName());
-		ObjectTypeVariable tv = builder.struct_factory.createObjectTypeVariable();
+		ObjectTypeVariable tv = StructureFactory.eINSTANCE.createObjectTypeVariable();
 		tv.setName(name);
 		// check that another param with the same name does not exist yet
-		GenericTypeDefinition context = null;
-		if (builder.current_class != null) { // if we're inside a generic class def
-			context = builder.current_class;
-		} else { // otherwise we're inside a generic model type def
+		GenericTypeDefinition typeDefinition = null;
+		if (context.current_class != null) { // if we're inside a generic class def
+			typeDefinition = context.current_class;
+		} else {  
+						
+			// otherwise we're inside a generic model type def
 //			context = (ModelTypeDefinition) current_package();
 //			This should never happen!
 		}
-		EList other_params = context.getTypeParameter();
+		EList other_params = typeDefinition.getTypeParameter();
 		for (int i=0; i<other_params.size(); i++) {
 			if (((ObjectTypeVariable)other_params.get(i)).getName().equals(name)) {
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : Parametric type definition '" + context.getName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
+				//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : Parametric type definition '" + context.getName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
+				builder.error("PASS 2 : Parametric type definition '" + typeDefinition.getName() + "' already contains a parameter named '"+name+"'.");
 				return false;
 			}
 		}
 		// add the parameter to the class
-		context.getTypeParameter().add(tv);
+		typeDefinition.getTypeParameter().add(tv);
 		builder.storeTrace(tv, typeVarDecl);
 		return false;
 	}
@@ -172,16 +178,17 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		return false;
 	}
 	public boolean beginVisit(EnumDecl node) {
-		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		if (builder.typeDefinitionLookup(qname) != null) {
+		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
 			// This is an error : the type already exists
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for Enum '" + qname + "' already exists.",node));
+			//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
+			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
 		}
 		else {
-			Enumeration c = builder.struct_factory.createEnumeration();
+			Enumeration c = StructureFactory.eINSTANCE.createEnumeration();
 			c.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(c);
-			builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
+			//builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
 		return false;
@@ -192,31 +199,17 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.DataTypeDecl)
 	 */
 	public boolean beginVisit(DataTypeDecl node) {
-		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		TypeDefinition typeDef =  builder.typeDefinitionLookup(qname);
-		if (typeDef != null) {
-			boolean isAspect = false;
-			if(typeDef.isIsAspect()){
-				// ok, ignore this one  (DVK: need to be checked when modelingunit will be coded
-
-				builder.typeDefs.put(NamedElementHelper.getQualifiedName(typeDef), typeDef);
-				builder.storeTrace(typeDef, node);
-				return false;
-			}
-			else{
-				// This is an error : the type already exists
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for DataType '" + qname + "' already exists.",node));
-			}
+		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
+			// This is an error : the type already exists
+			//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
+			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
 		}
 		else {
-			PrimitiveType c = builder.struct_factory.createPrimitiveType();
+			PrimitiveType c = StructureFactory.eINSTANCE.createPrimitiveType();
 			c.setName(getTextForID(node.getName()));
-			if(KermetaASTHelper.isAnAspect(node))
-			{
-				c.setIsAspect(true);// DVK refactoring needed : the metamodel now use a dedicated property				
-			}
 			current_package().getOwnedTypeDefinition().add(c);
-			builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
+			//builder.typeDefs.put(NamedElementHelper.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
 		return false;
@@ -224,31 +217,31 @@ public class KMT2KMPass2 extends KMT2KMPass {
 	
 	
 	public boolean beginVisit(ModelTypeDecl node) {
-		String qname = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
-		if (builder.typeDefinitionLookup(qname) != null) {
+		String qualifiedName = NamedElementHelper.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		if (builder.getTypeDefinitionByName(qualifiedName) != null) {
 			// This is an error : the type already exists
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+			//builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qualifiedName + "' already exists.",node));
+			builder.error("PASS 2 : A type definition for '" + qualifiedName + "' already exists.");
 			return false;
 		}
 		else {
-			ModelType newMT = builder.struct_factory.createModelType();
+			ModelType newMT = StructureFactory.eINSTANCE.createModelType();
 			newMT.setName(getTextForID(node.getName()));
 			current_package().getOwnedTypeDefinition().add(newMT);
-			
-			builder.typeDefs.put(qname, newMT);
+			//builder.typeDefs.put(qualifiedName, newMT);
 			builder.storeTrace(newMT, node);
 //			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();
 //			newMTypeDef.setName(getTextForID(node.getName()));
 //			current_package().getOwnedTypeDefinition().add(newMTypeDef);
 //			builder.typeDefs.put(qname, newMTypeDef);
 //			builder.storeTrace(newMTypeDef, node);
-//			pkgs.push(newMTypeDef);
+			pkgs.push(newMT);
 		}
 		return super.beginVisit(node);
 	}
 	
 	public void endVisit(ModelTypeDecl arg0) {
-//		pkgs.pop();
+		pkgs.pop();
 		super.endVisit(arg0);
 	}
 

@@ -1,4 +1,4 @@
-/* $Id: Collection.java,v 1.9 2007-03-30 09:44:46 ffleurey Exp $
+/* $Id: Collection.java,v 1.10 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta interpreter
  * File : Collection.java
  * License : EPL
@@ -18,6 +18,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
@@ -98,11 +99,11 @@ public class Collection {
 	 */
 	public static RuntimeObject create(java.lang.String specColl, RuntimeObjectFactory factory, Type typeParam) {
 		
-		fr.irisa.triskell.kermeta.language.structure.Class coll_class = factory.getMemory().getUnit().struct_factory.createClass();
+		fr.irisa.triskell.kermeta.language.structure.Class coll_class = StructureFactory.eINSTANCE.createClass();
 	    
-	    coll_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup(specColl));
+	    coll_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().getTypeDefinitionByName(specColl));
 	    
-	    TypeVariableBinding binding = factory.getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    
 	    binding.setVariable((ObjectTypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
 	    

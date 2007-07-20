@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Expression.java,v 1.3 2007-07-11 14:41:50 cfaucher Exp $
+ * $Id: Expression.java,v 1.4 2007-07-20 15:09:00 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -25,7 +25,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
  * @model abstract="true"
  * @generated
  */
-public interface Expression extends fr.irisa.triskell.kermeta.language.structure.Object, TypeContainer {
+public interface Expression extends TypeContainer, fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

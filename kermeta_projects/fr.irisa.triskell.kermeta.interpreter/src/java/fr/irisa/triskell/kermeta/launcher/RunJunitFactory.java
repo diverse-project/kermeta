@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.21 2007-07-13 07:42:35 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.22 2007-07-20 15:07:48 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -14,18 +14,23 @@ package fr.irisa.triskell.kermeta.launcher;
 
 import java.util.Iterator;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 /**
  * Run a kermeta program as a Junit test It may return either a TestCase or a
@@ -51,88 +56,84 @@ public class RunJunitFactory implements Test {
     }
    // public KermetaInterpreter kminterpreter = null;
     
-    
+    public Test addTestsForUnit(String unit_uri) {
+    	return addTestsForUnit(unit_uri, false);
+    }
     
     /**
      * @param args
      */
-    public Test addTestsForUnit(String unit_uri) {
+    public Test addTestsForUnit(String unit_uri, boolean constraintExecution) {
 
-        
-       /* if(root_unit == null) {
-        	StdLibKermetaUnitHelper.unloadStdLib();
-        	KermetaUnitFactory.resetDefaultLoader();
-            root_unit = StdLibKermetaUnitHelper.getKermetaUnit();
-            TypeCheckerContext.initializeTypeChecker(root_unit);
-        }
-        //KermetaUnitFactory.resetDefaultLoader(); // each test must be run in its own environment
-        //KermetaUnitFactory.
-        KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
-**/
-    	try {
-    		
-    		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
-    		TypeCheckerContext.initializeTypeChecker(unit);
+        try {
+			unit = IOPlugin.getDefault().loadKermetaUnit( unit_uri );
+		} catch (KermetaIOFileNotFoundException e1) {
+			e1.printStackTrace();
+			return null;
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+			return null;
+		}
     	
-        
+        try {
             
-            unit.load();
-            unit.typeCheck(null);
-        
-            // copy imported unit to the root unit
-            // DVK: needed to make sure the seamlaess java works ...
-           //StdLibKermetaUnitHelper.getKermetaUnit().importedUnits.addAll(unit.importedUnits);
-            
-            if (unit.messages.hasError()) {
+        	KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+        	typechecker.checkUnit();
+
+            if ( unit.isErrored() ) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
-            	System.out.println(unit.messages.getAllWarningMessagesAsString());            	
-            	System.err.println(unit.messages.getAllErrorMessagesAsString());
+            	System.out.println( KermetaUnitHelper.getAllWarningsAsString(unit));            	
+            	System.err.println(KermetaUnitHelper.getAllErrorsAsString(unit));
             	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)", 
-            		new Exception(unit.messages.getAllErrorMessagesAsString()));
+            		new Exception(KermetaUnitHelper.getAllErrorsAsString(unit)));
                 return theTestCase;
             }
             
-            
-            //System.err.println("Memory before : " + Runtime.getRuntime().totalMemory());
-            //unit.discardAllTraceabilityInfo();
-            //Runtime.getRuntime().gc();
-            //System.err.println("Memory after : " + Runtime.getRuntime().totalMemory());
-            
-
+        	KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
+        	constraintchecker.checkUnit();
+        
+            if ( unit.isErrored() ) {
+            	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)");
+            	System.out.println( KermetaUnitHelper.getAllWarningsAsString(unit));            	
+            	System.err.println(KermetaUnitHelper.getAllErrorsAsString(unit));
+            	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or constraintcheck correctly)", 
+            		new Exception(KermetaUnitHelper.getAllErrorsAsString(unit)));
+                return theTestCase;
+            }
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
             isTestSuite = false;
             String main_class = null;
             String main_operation = null;
-            Iterator it = unit.rootPackage.getTag().iterator();
+            Iterator it = unit.getModelingUnit().getOwnedTags().iterator();
             while(it.hasNext()) {
                 Tag tag = (Tag)it.next();
-                if (tag.getName().equals("mainClass")) 
-    	            main_class = tag.getValue(); 
-                if (tag.getName().equals("mainOperation"))
-    	            main_operation = tag.getValue(); //remove the " to memorize value
+                if ( tag.getName() != null ) {
+                	if (tag.getName().equals("mainClass")) 
+                		main_class = tag.getValue(); 
+                	if (tag.getName().equals("mainOperation"))
+                		main_operation = tag.getValue(); //remove the " to memorize value
+                }
             }
             if (main_class != null) {
             	
-                ClassDefinition cd = (ClassDefinition)unit.typeDefinitionLookup(main_class);                
+                ClassDefinition cd = (ClassDefinition)unit.getTypeDefinitionByName(main_class);                
                 if(cd != null){
-                	ClassDefinition class_test = (ClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::TestCase");
+                	ClassDefinition class_test = (ClassDefinition)unit.getTypeDefinitionByQualifiedName("kermeta::kunit::Test");
             
 	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
 	                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
 	                
-	                if (main_type.isSubTypeOf(kunit_test_type)) isTestSuite = true;
+	                if (main_type.isSubTypeOf(kunit_test_type)) 
+	                	isTestSuite = true;
                 }
             }
             
             // Display the errors stored in the unit that is checked
-            if (unit.messages.unitHasError)
+            if ( unit.isErrored() )
             {
                 System.err.println("*** There are errors in the TestSuite of <"+ unit_uri + "> :" );
-                for (int i=0; i<unit.messages.getErrors().size(); i++)
-                {
-                    System.out.println("Error "+i+":"+ unit.messages.getErrors().get(i));
-                }
+                System.out.println( KermetaUnitHelper.getAllErrorsAsString(unit) );
             }
             else
             {
@@ -145,7 +146,7 @@ public class RunJunitFactory implements Test {
                 theTestSuite = new TestSuite();
                 theTestSuite.setName(unit_uri);
                 
-                includeTestSuite(main_class, unit);
+                includeTestSuite(main_class, unit, constraintExecution);
 
                 if(theTestSuite.countTestCases() == 0){
                 	// No valid test in the testsuite ! => fails
@@ -157,7 +158,7 @@ public class RunJunitFactory implements Test {
             }
             else // it is not a test suite
             {
-                theTestCase = new RunTestCase(main_class, main_operation, this);
+                theTestCase = new RunTestCase(main_class, main_operation, this, constraintExecution);
                 return theTestCase;
             }
 
@@ -196,6 +197,11 @@ public class RunJunitFactory implements Test {
     }
 
     public void includeTestSuite(String main_class, KermetaUnit unit) {
+    	includeTestSuite(main_class, unit, false);
+    }
+    
+    
+    public void includeTestSuite(String main_class, KermetaUnit unit, boolean constraintExecution) {
 
         // all operations that begin by "test" inside the class
         // specified by mainClassValue are added as concrete testcases
@@ -205,7 +211,7 @@ public class RunJunitFactory implements Test {
         
         
         
-       Iterator it = ((ClassDefinition)unit.typeDefinitionLookup(main_class)).getOwnedOperation().iterator();
+       Iterator it = ((ClassDefinition)unit.getTypeDefinitionByName(main_class)).getOwnedOperation().iterator();
 
         // Get each operation which name begins by "test",
         // and run it.
@@ -214,7 +220,7 @@ public class RunJunitFactory implements Test {
             // the BaseInterpreter
             Operation mainOp = (Operation) it.next();
             if (mainOp.getName().startsWith("test")) {
-                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getName(), this));
+                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getName(), this, constraintExecution));
             }
         }
     }

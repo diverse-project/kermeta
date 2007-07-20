@@ -1,4 +1,4 @@
-/* $Id: Edge.java,v 1.1 2005-11-29 14:17:12 dvojtise Exp $
+/* $Id: Edge.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Edge.java
  * License : EPL
@@ -13,6 +13,8 @@ package fr.irisa.triskell.kermeta.directedgraph;
 
 import java.util.Vector;
 import java.util.Enumeration;
+
+import fr.irisa.triskell.kermeta.directedgraph.Edge;
 
 
 public class Edge {

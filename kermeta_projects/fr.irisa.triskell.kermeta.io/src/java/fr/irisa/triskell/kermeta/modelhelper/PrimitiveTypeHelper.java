@@ -1,4 +1,4 @@
-/*$Id: PrimitiveTypeHelper.java,v 1.1 2007-05-16 13:45:05 dvojtise Exp $
+/*$Id: PrimitiveTypeHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	PrimitiveTypeHelper.java
 * License : EPL

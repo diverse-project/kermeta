@@ -1,4 +1,4 @@
-/*$Id: ResourceHelper.java,v 1.10 2007-04-27 14:38:12 cfaucher Exp $
+/*$Id: ResourceHelper.java,v 1.11 2007-07-20 15:08:44 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	ResourceHelper.java
 * License : EPL
@@ -89,7 +89,11 @@ public class ResourceHelper {
 		String cleanPath = cleanIfNecessaryPath(filePath);
 		Path path = new Path(cleanPath);
 		try {
-			return root.getFile(path);
+			IFile file = root.getFile(path);
+			if ( file.exists() )
+				return file;
+			else 
+				return null;
 		} catch (java.lang.IllegalArgumentException exception) {
 			return null;
 		}

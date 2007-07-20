@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.6 2007-06-15 14:24:44 cfaucher Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.7 2007-07-20 15:09:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -24,10 +24,11 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.console.messages.WarningMessage;
+import fr.irisa.triskell.kermeta.exporter.ecore.EcoreExporter;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**
@@ -96,43 +97,54 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	    
 		// create Ecore structure
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
-	    ResourceSet resource_set = new ResourceSetImpl();
-	    URI u = URI.createURI(ifile.getFullPath().toString());
-    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
-    	URIConverter c = new URIConverterImpl();
-    	u = c.normalize(u);
-	    Resource resource = resource_set.createResource(u);
+	    //ResourceSet resource_set = new ResourceSetImpl();
+	    String fileURI = "platform:/resource" + ifile.getFullPath().toString();
+	    //URI u = URI.createURI( fileURI );
+    	//KermetaUnit.internalLog.info("URI created for model to save : "+u);
+    	//URIConverter c = new URIConverterImpl();
+    	//u = c.normalize(u);
+	    //Resource resource = resource_set.createResource(u);
 	    
-	    KM2Ecore exporter;
-	    String gendir = null;
-	    List<String> ecorelist = null;
+	    //KM2Ecore exporter;
+	    //String gendir = null;
+	    //List<String> ecorelist = null;
 	    
-    	if (this.resolvePage.overwriteGeneratedEcore())
+    	/*if (this.resolvePage.overwriteGeneratedEcore())
     		gendir = this.resolvePage.getEcoreFolder();
     	else
-    		ecorelist = this.resolvePage.getEcoreFileList();
+    		ecorelist = this.resolvePage.getEcoreFileList();*/
 	    
 	    if(this.tracePage.enableFileDestinationButton.getSelection())
 	    {
 	    	if (trace_resource == null) initTraces();
-	    	exporter = new KM2Ecore(resource, trace_resource, builder, gendir, ecorelist);
+	    	
+	    	int i = fileURI.lastIndexOf("/");
+	    	String targetDir = fileURI.substring(0, i);
+	    	EcoreExporter exporter = new EcoreExporter();
+	    	exporter.export(builder, targetDir,null);
+	    	
+	    	
+//	    	exporter = new KM2Ecore(resource, trace_resource, builder, gendir, ecorelist);
 	    }
-	    else exporter = new KM2Ecore(resource, builder, gendir, ecorelist);
-	
-		exporter.exportPackage(builder.rootPackage);
-		//		 display eventual warnings
-		if(exporter.messages.getAllWarnings().size() > 0){
+	    else {
+	    	int index = fileURI.lastIndexOf("/");
+	    	String targetDir = fileURI.substring(0, index);
+	    	EcoreExporter exporter = new EcoreExporter();
+	    	exporter.export(builder, targetDir, fileURI);
+	    }
+	    //		 display eventual warnings
+		/*if(exporter.messages.getAllWarnings().size() > 0){
 			WarningMessage message = new WarningMessage( exporter.messages.getAllMessagesAsString() );
 			KermetaPlugin.getDefault().getConsole().println( message );
-		}
+		}*/
 		
 	    // Save Ecore structure	
-		try {
+		/*try {
 			resource.save(null);
 		} catch (IOException e) {
 			KermetaUnit.internalLog.error("cannot save ecore ressource, due to Exception: "+ e.getMessage(), e);
 			throw new Error("Cannot save ecore ressource (" + ifile.getName() + "), due to Exception: ", e);
-		}
+		}*/
 		ifile.refreshLocal(1, null);		
 	}
 

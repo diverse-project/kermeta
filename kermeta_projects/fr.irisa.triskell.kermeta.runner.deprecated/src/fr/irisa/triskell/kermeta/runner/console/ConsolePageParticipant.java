@@ -6,8 +6,6 @@ import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.debug.internal.ui.contexts.DebugContextManager;
-import org.eclipse.debug.ui.contexts.DebugContextEvent;
-import org.eclipse.debug.ui.contexts.IDebugContextListener;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.ISelection;
@@ -21,6 +19,8 @@ import org.eclipse.ui.part.IPageBookViewPage;
 import org.eclipse.ui.part.IShowInSource;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
+import org.eclipse.debug.ui.contexts.DebugContextEvent;
+import org.eclipse.debug.ui.contexts.IDebugContextListener;
 
 /**
  * Strongly inspired from org.eclipse.debug.internal.ui.views.console.ProcessConsolePageParticipant
@@ -45,33 +45,33 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
      */
     public void init(IPageBookViewPage page, IConsole console) {
     	fPage = page;
-        fConsole = (InternalIOConsole) console;
-        target = fConsole.getKermetaConsole().getTarget();
-        fTerminate = new ConsoleTerminateAction(fConsole);
-        
-        fView = (IConsoleView) fPage.getSite().getPage().findView(IConsoleConstants.ID_CONSOLE_VIEW);
-        
-        DebugPlugin.getDefault().addDebugEventListener(this);
-        DebugContextManager.getDefault().addDebugContextListener(this);
-        
-        // contribute to toolbar
-        IActionBars actionBars = fPage.getSite().getActionBars();
-        configureToolBar(actionBars.getToolBarManager());
+    	fConsole = (InternalIOConsole) console;
+    	target = fConsole.getKermetaConsole().getTarget();
+    	fTerminate = new ConsoleTerminateAction(fConsole);
+
+    	fView = (IConsoleView) fPage.getSite().getPage().findView(IConsoleConstants.ID_CONSOLE_VIEW);
+
+    	DebugPlugin.getDefault().addDebugEventListener(this);
+    	DebugContextManager.getDefault().addDebugContextListener(this);
+
+    	// contribute to toolbar
+    	IActionBars actionBars = fPage.getSite().getActionBars();
+    	configureToolBar(actionBars.getToolBarManager());
     }
     
     /* (non-Javadoc)
      * @see org.eclipse.ui.console.IConsolePageParticipant#dispose()
      */
     public void dispose() {
-        deactivated();
-        DebugContextManager.getDefault().removeDebugContextListener(this);
-		DebugPlugin.getDefault().removeDebugEventListener(this);
+    	deactivated();
+    	DebugContextManager.getDefault().removeDebugContextListener(this);
+    	DebugPlugin.getDefault().removeDebugEventListener(this);
 
-		if (fTerminate != null) {
-		    fTerminate.dispose();
-		    fTerminate = null;
-		}
-		fConsole = null;
+    	if (fTerminate != null) {
+    		fTerminate.dispose();
+    		fTerminate = null;
+    	}
+    	fConsole = null;
     }
 
     /**
@@ -140,8 +140,7 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.contexts.IDebugContextListener#contextChanged(org.eclipse.jface.viewers.ISelection, org.eclipse.ui.IWorkbenchPart)
 	 */
-    public void debugContextChanged(DebugContextEvent event) {
-		// TODO Auto-generated method stub
+	public void contextChanged(ISelection selection, IWorkbenchPart part) {
 	}
 
 	/* (non-Javadoc)
@@ -155,5 +154,11 @@ public class ConsolePageParticipant implements IConsolePageParticipant, IShowInS
      */
     public void deactivated() {
     }
+
+	public void debugContextChanged(DebugContextEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

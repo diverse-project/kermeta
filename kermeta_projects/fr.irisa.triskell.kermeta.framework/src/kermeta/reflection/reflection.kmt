@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.45 2007-07-11 13:39:51 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.46 2007-07-20 15:08:39 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Mar 14, 2006
  * Authors   : 
  *		Franck Fleurey <ffleurey@irisa.fr>
- *		Zoé Drey <zdrey@irisa.fr>
+ *		Zoï¿½ Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
  
@@ -28,6 +28,10 @@ alias String : kermeta::standard::String;
  */
 abstract class Object
 {
+	
+	property ownedTag : set Tag[0..*]
+	
+
 	/** Tags are used to put comments/documentation */
 	reference tag : set Tag[0..*]#object
 	operation getMetaClass() : Class is abstract
@@ -549,6 +553,27 @@ abstract class Package inherits TypeDefinitionContainer
 	reference nestingPackage : Package#nestedPackage
 	attribute uri : String
 }
+/*
+ * The modeling unit is the root of any kermeta model. It contains packages, requires and usings.
+ * It also reference others modeling unit.
+ */
+abstract class ModelingUnit
+{
+	attribute packages : set Package[0..*]
+	attribute requires : set Require[0..*]
+	attribute usings : set Using[0..*]
+	reference referencedModelingUnits : set ModelingUnit[0..*]
+	attribute ownedTags : set Tag[0..*]
+}
+abstract class Require inherits Object
+{
+	attribute uri : String
+}
+abstract class Using inherits Object
+{
+	attribute qualifiedName : String
+}
+
 /**
  * Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit
  * this class)
@@ -563,6 +588,8 @@ abstract class TypeDefinition inherits NamedElement
 	
 	/** References to the base classes */
 	reference baseAspects : TypeDefinition[0..*]
+	
+	reference aspects : TypeDefinition[0..*]#baseAspects
 }
 /** Class definition for the <pre>Void</pre> type */
 abstract class VoidType inherits Type

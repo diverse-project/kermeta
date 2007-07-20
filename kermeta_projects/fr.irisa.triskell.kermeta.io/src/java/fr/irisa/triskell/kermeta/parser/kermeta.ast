@@ -1,4 +1,4 @@
-// $Id: $
+// $Id: kermeta.ast,v 1.1.2.1 2007/07/04 15:59:32 ftanguy Exp $
 
 language Kermeta;
 	

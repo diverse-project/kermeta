@@ -1,0 +1,42 @@
+package weavinginvalidtest4;
+
+
+require kermeta
+
+using kermeta::standard
+
+class A {
+
+
+}
+
+class B inherits A {}
+class C inherits kermeta::kunit::Assert{
+
+	inv originv is true
+	operation test0(param : A) : Void
+	pre origPre is true
+	is do
+		a == b
+	end
+		
+	
+	attribute a : A
+	attribute b : B
+	operation returnString() : kermeta::standard::String is do
+		result := "a string"
+	end
+	
+	@overloadable "true"
+	operation overload1() : Void is do
+		// will be overloaded
+		stdio.writeln("will be overloaded")
+		assertTrueWithMsg(false,"overload1 from base should have been overloaded !")
+	end
+	
+	operation overload2() : Void is do
+		// will be overloaded
+		stdio.writeln("will not be overloaded")
+	end
+
+}

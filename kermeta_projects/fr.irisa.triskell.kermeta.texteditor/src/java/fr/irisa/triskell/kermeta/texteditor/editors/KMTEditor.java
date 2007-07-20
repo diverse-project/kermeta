@@ -1,4 +1,4 @@
-/* $Id: KMTEditor.java,v 1.16 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: KMTEditor.java,v 1.17 2007-07-20 15:09:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : KMTEditor.java
 * License : EPL
@@ -33,19 +33,21 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.util2.KermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.extension.Interest;
 import fr.irisa.triskell.kermeta.kpm.Unit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaProject;
 import fr.irisa.triskell.kermeta.kpm.resources.KermetaWorkspace;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
-import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
@@ -105,7 +107,7 @@ public class KMTEditor extends TextEditor implements Interest {
 		return mustBeTypechecked;
 	}
 	
-	private void initializeInterest() {
+	private void initializeInterest() throws KermetaIOFileNotFoundException, URIMalformedException {
 		
 		unit = project.getKpm().findUnit(getFile().getFullPath().toString()); 
 		if ( unit == null ) {
@@ -113,9 +115,9 @@ public class KMTEditor extends TextEditor implements Interest {
 			project.save();
 		}
 			
-		KermetaUnitHelper.unloadAllKermetaUnit();
-		KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
-
+		//KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile( getFile() );
+		KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( getFile() );
+		
 		updateValue(kermetaUnit);
 		KermetaUnitHost.getInstance().declareInterest(this, unit, kermetaUnit);
 		
@@ -236,10 +238,11 @@ public class KMTEditor extends TextEditor implements Interest {
 	//////////////////////////////////
 	
 	public void updateValue(Object newValue) {
-		KMTUnit kermetaUnit = (KMTUnit) newValue;
+		KermetaUnit kermetaUnit = (KermetaUnit) newValue;
 		if ( (kermetaUnit != null) && (kermetaUnit.getTracer() != null) ) {
-			mcunit = (KMTUnit) kermetaUnit;
-			completion.setkermetaUnit( kermetaUnit );
+			mcunit = kermetaUnit;
+			if ( completion != null )
+				completion.setkermetaUnit( kermetaUnit );
 			if (outline != null)
 				outline.update();
 		}
@@ -249,27 +252,27 @@ public class KMTEditor extends TextEditor implements Interest {
 	public void dispose() {
 		if ( project == null ) {
 			if ( ! savedContent.equals( currentContent ) ) {
-				KermetaUnitHelper.unloadAllKermetaUnit();
 				KermetaMarkersHelper.clearMarkers(getFile());
-				KMTUnit kermetaUnit = null;
+				KermetaUnit kermetaUnit = null;
+				IOPlugin.getDefault().unload( getFile() );
 				if ( ! savedContent.equals("") )
-					kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile(), savedContent );
+					kermetaUnit = KermetaUnitHelper.typecheckFile( getFile(), savedContent );
 				else
-					kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
+					kermetaUnit = KermetaUnitHelper.typecheckFile( getFile() );
 				KermetaMarkersHelper.createMarkers(getFile(), kermetaUnit);
 			}
 		} else {
 			KermetaUnitHost.getInstance().undeclareInterest(this, unit);
 			mcunit = null;
-			if ( ! savedContent.equals( currentContent ) ) {
+			if ( savedContent.equals( currentContent ) ) {
+				IOPlugin.getDefault().unload( getFile() );
+			} else {
 				final Interest interest = this;
 				Job job = new Job("Building Workspace") {
 					
 					public IStatus run(IProgressMonitor monitor) {
 			
 						KermetaUnitHelper.abortTypechecking( getFile() );
-	
-						KermetaUnitHelper.unloadAllKermetaUnit();
 						//KermetaUnitHelper.unloadKermetaUnit( getMcunit() );
 						
 						Unit unit = getUnit();
@@ -284,6 +287,7 @@ public class KMTEditor extends TextEditor implements Interest {
 						unit.receiveSynchroneEvent("update", args, monitor);
 	
 						KermetaUnitHost.getInstance().undeclareInterest(interest, unit);
+						IOPlugin.getDefault().unload( getFile() );
 						return Status.OK_STATUS;
 					}
 					
@@ -327,13 +331,17 @@ public class KMTEditor extends TextEditor implements Interest {
 						monitor.subTask("Initializing Interest for " + getFile().getName());
 						initializeInterest();
 					} else {
-						KermetaUnitHelper.unloadAllKermetaUnit();
-						KMTUnit kermetaUnit = (KMTUnit) KermetaUnitHelper.typecheckFile( getFile() );
+						//KermetaUnit kermetaUnit = KermetaUnitHelper.typecheckFile( getFile() );
+						KermetaUnit kermetaUnit = IOPlugin.getDefault().loadKermetaUnit( getFile() );
 						updateValue(kermetaUnit);
 						KermetaMarkersHelper.clearMarkers(getFile());
 						KermetaMarkersHelper.createMarkers(getFile(), kermetaUnit);
 					}
 					monitor.worked(100);
+				} catch (KermetaIOFileNotFoundException e) {
+					e.printStackTrace();
+				} catch (URIMalformedException e) {
+					e.printStackTrace();
 				} finally {
 					monitor.done();
 				}

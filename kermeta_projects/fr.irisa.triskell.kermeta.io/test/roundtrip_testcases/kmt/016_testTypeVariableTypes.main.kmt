@@ -1,7 +1,8 @@
 
 package test;
 
-require kermeta
+
+require "http://www.eclipse.org/emf/2002/Ecore"
 using kermeta::standard
 
 

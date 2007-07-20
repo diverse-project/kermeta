@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.8 2007-06-20 13:03:22 dtouzet Exp $
+/* $Id: RuntimeUnit.java,v 1.9 2007-07-20 15:07:49 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : EPL
@@ -9,8 +9,9 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader;
 
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**

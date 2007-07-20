@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.14 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.15 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : EPL
@@ -10,12 +10,15 @@
 
 package fr.irisa.triskell.kermeta.typechecker;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import org.apache.log4j.Logger;
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -25,7 +28,11 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTBuildingState;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * @author Franck Fleurey
@@ -35,11 +42,15 @@ import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
  */
 public class KermetaTypeChecker {
     
+	final static private Logger internalLog = LogConfigurationHelper.getLogger("TypeChecker");	
+	
     protected KermetaUnit unit;
     protected TypeCheckerContext context;
     /** Attribute that is set to semantically abstract class definitions */
     public static final String IS_SEMANTICALLY_ABSTRACT = "isSemanticallyAbstract";
         
+    private boolean internalOperation = false;
+    
     public Type getTypeOfExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
         return new SimpleType(expression.getStaticType());
     }
@@ -55,60 +66,89 @@ public class KermetaTypeChecker {
     public KermetaTypeChecker(KermetaUnit unit) {
         super();
         this.unit = unit;
-//      initialize the type checker if this is the std lib
-        if (unit.typeDefinitionLookup("kermeta::language::structure::Object") != null)
-            TypeCheckerContext.initializeTypeChecker(unit);
-        else
-            TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
+        if (unit.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object") != null)
+        	TypeCheckerContext.initializeTypeChecker(unit);
         context = new TypeCheckerContext(unit);
-        
     }
+       
+    
+    private void checkPackages(List<Package> packages) {
+    	Iterator <Package> iterator = packages.iterator();
+    	while ( iterator.hasNext() ) {
+    		
+    		Package current = iterator.next();
+        	
+        	Iterator <TypeDefinition> it = current.getOwnedTypeDefinition().iterator();
+            // First, annotate semantically abstract class definitions
+        	// Lets call this the structural-only pass, and check type parameterizations, too
+        	while ( it.hasNext() ) {
+
+        		TypeDefinition td = it.next();
+        		
+        		if (td instanceof ClassDefinition) {
+        			ClassDefinition cdef = (ClassDefinition) td;
+        			annotateSemanticallyAbstractClassDefinition(cdef);
+           			// Check any parameterized supertypes
+        			for (Object sup : cdef.getSuperType()) {
+        				ParameterizedTypeChecker.checkType((fr.irisa.triskell.kermeta.language.structure.Type) sup, unit, context, cdef);
+        			}
+        			// Check property types
+        			for (Object prop : cdef.getOwnedAttribute()) {
+        				ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop);
+        			}
+        			// Check operation signatures
+        			for (Object opObj : cdef.getOwnedOperation()) {
+        				Operation op = (Operation) opObj;
+        				if (null != op.getType()) {
+        					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
+        				}
+        				//Check parameter types
+        				for (Object param : op.getOwnedParameter()) {
+        					ParameterizedTypeChecker.checkType(((Parameter)param).getType(), unit, context, (Parameter)param);
+        				}
+        			}
+        		} else if (td instanceof PrimitiveType) {
+        			// Check aliased types
+        			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td);
+        		}
+        	}
+            // Second, check for each class def, its operation (inc. bodies) and properties
+        	// (Uses annotations set above to check operation call "new".)
+        	it = current.getOwnedTypeDefinition().iterator();
+        	while ( it.hasNext() )
+        	{
+        		TypeDefinition td = it.next();
+                if (td instanceof ClassDefinition) {
+                    checkClassDefinition((ClassDefinition)td);
+                }
+            }
+
+        	
+    	}
+    }
+    
     
     /**
      * Type check all the class definitions 
      * of a kermeta unit
      */
-    public void checkUnit() {
-    	Collection<TypeDefinition> typedefs = unit.typeDefs.values();
-        // First, annotate semantically abstract class definitions
-    	// Lets call this the structural-only pass, and check type parameterizations, too
-    	for (TypeDefinition td : typedefs)
-    	{
-    		if (td instanceof ClassDefinition) {
-    			ClassDefinition cdef = (ClassDefinition) td;
-    			annotateSemanticallyAbstractClassDefinition(cdef);
-       			// Check any parameterized supertypes
-    			for (Object sup : cdef.getSuperType()) {
-    				ParameterizedTypeChecker.checkType((fr.irisa.triskell.kermeta.language.structure.Type) sup, unit, context, cdef);
-    			}
-    			// Check property types
-    			for (Object prop : cdef.getOwnedAttribute()) {
-    				ParameterizedTypeChecker.checkType(((Property) prop).getType(), unit, context, (Property)prop);
-    			}
-    			// Check operation signatures
-    			for (Object opObj : cdef.getOwnedOperation()) {
-    				Operation op = (Operation) opObj;
-    				if (null != op.getType()) {
-    					ParameterizedTypeChecker.checkType(op.getType(), unit, context, op);
-    				}
-    				//Check parameter types
-    				for (Object param : op.getOwnedParameter()) {
-    					ParameterizedTypeChecker.checkType(((Parameter)param).getType(), unit, context, (Parameter)param);
-    				}
-    			}
-    		} else if (td instanceof PrimitiveType) {
-    			// Check aliased types
-    			ParameterizedTypeChecker.checkType(((PrimitiveType)td).getInstanceType(), unit, context, (PrimitiveType)td);
+    public void checkUnit() {		
+    	
+    	internalLog.info("Typechecking " + unit.getUri());
+    	if ( ! unit.isTypeChecked() ) {
+    		internalOperation = true;
+    		checkPackages( unit.getInternalPackages() );
+    		/*internalOperation = false;
+    		checkPackages( unit.getExternalPackages() );*/
+    		unit.setTypeChecked( true );
+    	}
+    	
+    	for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits(unit) ) {
+    		if ( ! importedUnit.isTypeChecked() ) {
+    			KermetaTypeChecker t = new KermetaTypeChecker(importedUnit);
+    			t.checkUnit();
     		}
     	}
-        // Second, check for each class def, its operation (inc. bodies) and properties
-    	// (Uses annotations set above to check operation call "new".)
-    	for (TypeDefinition td : typedefs)
-    	{
-            if (td instanceof ClassDefinition) {
-                checkClassDefinition((ClassDefinition)td);
-            }
-        }
     }
     
 	/** 
@@ -139,12 +179,24 @@ public class KermetaTypeChecker {
 		while (it.hasNext() && !foundSAbstractTag && !ClassDefinitionHelper.isSemanticallyAbstract(typedef))
 		{
 			Operation op = ((CallableOperation)it.next()).getOperation();
-			if (op.isIsAbstract())
-			{
+			if (op.isIsAbstract()) {
+				/*
+				 * 
+				 * Maybe the class is an aspect and the operation is defined in on of its base classes.
+				 * 
+				 */
+				for ( TypeDefinition typeDefinition : (List<TypeDefinition>) typedef.getBaseAspects() ) {
+					if ( typeDefinition instanceof ClassDefinition ) {
+						ClassDefinition classDefinition = (ClassDefinition) typeDefinition;
+						
+					}
+				}
+				
 				foundSAbstractTag = true;
 				Tag tag = StructureFactory.eINSTANCE.createTag(); 
 				tag.setName(IS_SEMANTICALLY_ABSTRACT); tag.setValue(op.getName());
-				typedef.getTag().add(tag);
+				//typedef.getTag().add(tag);
+				typedef.getOwnedTag().add(tag);
 			}
 		}
 		return foundSAbstractTag;
@@ -187,7 +239,7 @@ public class KermetaTypeChecker {
     	
            ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
            if(!getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
-   				unit.messages.addError("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
+   				unit.error("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
    		    }
            
     }
@@ -199,7 +251,7 @@ public class KermetaTypeChecker {
     public void checkOperation(Operation op) {
         
         // THIS IS JUST FOR TESTING PURPOSES
-        int error_count = unit.messages.getMessages().size();
+        int error_count = unit.getMessages().size();
         
         // initialize context
         context.init(op.getOwningClass(), op);
@@ -220,8 +272,12 @@ public class KermetaTypeChecker {
         }
         
         // THIS IS JUST FOR TESTING PURPOSES
-        if (error_count != unit.messages.getMessages().size()) wrongOperations.add(op.getName());
-        else correctOperation.add(op.getName());
+        if ( internalOperation ) {
+        	if (error_count != unit.getMessages().size())
+        		wrongOperations.add(op.getName());
+        	else 
+        		correctOperation.add(op.getName());
+       }
     }
     
     public void checkExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {

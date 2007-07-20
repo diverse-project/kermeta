@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeReference.java,v 1.3 2007-07-11 14:41:50 cfaucher Exp $
+ * $Id: TypeReference.java,v 1.4 2007-07-20 15:09:00 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 

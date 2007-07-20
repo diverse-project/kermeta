@@ -2,11 +2,12 @@
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 public class Class {
 

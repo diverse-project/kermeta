@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.44 2007-07-03 12:54:55 dtouzet Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.45 2007-07-20 15:07:49 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : EPL
@@ -41,19 +41,19 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.util2.ResourceSetManager;
 
 import fr.irisa.triskell.eclipse.emf.EMFRegistryHelper;
 
 import fr.irisa.triskell.eclipse.ecore.EcoreHelper;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.kermeta.utils.ResourceSetManager;
-
 /**
  * FIXME : Check that we work with all qualified names of Classes.
  */
@@ -233,7 +233,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		    	String msg = "EMF current URI_MAP entries :\n";
 		    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
 		    		msg += "    "+o + "; \n";
-		    	KermetaUnit.internalLog.debug(msg);
+		    	KermetaInterpreter.internalLog.debug(msg);
 		    	//options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
 	    		// allow to record unknwon feature
 	    		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
@@ -352,7 +352,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         
         // Create an URI for the resource that is going to be saved
         URI u = createURI(file_path); 
-        KermetaUnit.internalLog.info("URI created for model to save : "+u);
+        KermetaInterpreter.internalLog.info("URI created for model to save : "+u);
         
         // Add the extension of the file to save into the resource registry, so that EMF won't complain
         registerEMFextensionToFactoryMap(getKermetaUnit().getUri());

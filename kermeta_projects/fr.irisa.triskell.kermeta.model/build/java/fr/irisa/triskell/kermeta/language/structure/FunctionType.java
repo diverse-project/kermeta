@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionType.java,v 1.2 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: FunctionType.java,v 1.3 2007-07-20 15:09:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -24,7 +24,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @model
  * @generated
  */
-public interface FunctionType extends TypeContainer, Type {
+public interface FunctionType extends Type, TypeContainer {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

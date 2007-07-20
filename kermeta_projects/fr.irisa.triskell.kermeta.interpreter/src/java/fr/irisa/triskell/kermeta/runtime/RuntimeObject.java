@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.26 2007-06-20 13:03:21 dtouzet Exp $
+/* $Id: RuntimeObject.java,v 1.27 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -18,11 +18,11 @@ package fr.irisa.triskell.kermeta.runtime;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;

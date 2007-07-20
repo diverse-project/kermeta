@@ -1,6 +1,6 @@
 
 
-/*$Id: WizardHelper.java,v 1.1 2007-05-24 08:49:53 ftanguy Exp $
+/*$Id: WizardHelper.java,v 1.2 2007-07-20 15:08:44 ftanguy Exp $
 * Project : fr.irisa.triskell.eclipse.util
 * File : 	WizardHelper.java
 * License : EPL
@@ -13,7 +13,6 @@
 package fr.irisa.triskell.eclipse.wizard;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.IWizardDescriptor;
@@ -27,7 +26,10 @@ public class WizardHelper {
 	 * @return the wizard descriptor matching the given id or <code>null</code>
 	 */
 	public static IWizardDescriptor getWizardDescriptor(String wizardId) {
-		return PlatformUI.getWorkbench().getNewWizardRegistry().findWizard( wizardId );
+		IWizardDescriptor descriptor = PlatformUI.getWorkbench().getNewWizardRegistry().findWizard( wizardId );
+		if ( descriptor == null )
+			descriptor = PlatformUI.getWorkbench().getImportWizardRegistry().findWizard( wizardId );
+		return descriptor;
 	}
 	
 	/**

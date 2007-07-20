@@ -1,8 +1,9 @@
 // $ANTLR : "Kermeta.g" -> "KermetaParser.java"$
 
 package fr.irisa.triskell.kermeta.parser;
-import fr.irisa.triskell.kermeta.ast.*;
 import com.ibm.eclipse.ldt.core.parser.*;
+
+import fr.irisa.triskell.kermeta.ast.*;
 
 public interface KermetaParserTokenTypes {
 	int EOF = 1;

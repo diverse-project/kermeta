@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.19 2006-10-25 08:29:16 dvojtise Exp $
+/* $Id: KermetaRunHelper.java,v 1.20 2007-07-20 15:09:14 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -14,12 +14,11 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
@@ -46,19 +45,16 @@ public class KermetaRunHelper {
 	 */
     public static KermetaUnit parse(IFile file)
     {   
-    	StdLibKermetaUnitHelper.setURItoDefault();
+    	//StdLibKermetaUnitHelper.setURItoDefault();
 
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
     	String uri = "platform:/resource" + file.getFullPath().toString();
-    	KermetaUnitFactory.getDefaultLoader().unloadAll();
+    	//KermetaUnitFactory.getDefaultLoader().unloadAll();
         KermetaUnit result = null;
     	try {
-        	result = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-	        result.load();
-	        
-	        result.typeCheck(null);
-	        
+        	result = IOPlugin.getDefault().loadKermetaUnit( uri );
+	        result.load();	        
         }
         catch(Throwable e) {
             KermetaUnit.internalLog.error("load error ", e);
@@ -66,8 +62,8 @@ public class KermetaRunHelper {
         		e.printStackTrace();
         		return null;
         	}
-        	else if (!result.messages.unitHasError)
-        		result.messages.addError("INTERNAL ERROR : " + e, null);
+        	else if ( ! result.isErrored() )
+        		result.error("INTERNAL ERROR : " + e, null);
         }
         return result;
     }
@@ -83,7 +79,7 @@ public class KermetaRunHelper {
 	 * @return the ArrayList which 1st element is the @mainClass tag value, and
 	 * 2nd element is the @mainOperation tag value.
 	 */
-	public static ArrayList findEntryPoint(KermetaUnit unit) 
+	/*public static ArrayList findEntryPoint(KermetaUnit unit) 
 	{
 	    ArrayList taglist = new ArrayList(2);
 	    String mc = ""; String mo = "";
@@ -108,7 +104,7 @@ public class KermetaRunHelper {
 	    }
         taglist.add(mc); taglist.add(mo);
 	    return taglist;
-	}
+	}*/
 	
 	/** Get and flatten recursively the classes in the given package and in the packages children */
 	public static void getRecursivePackageTypeDefs(Package pPackage, ArrayList pList)

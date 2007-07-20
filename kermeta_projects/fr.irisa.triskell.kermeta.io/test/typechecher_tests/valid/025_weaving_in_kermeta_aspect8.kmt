@@ -4,19 +4,11 @@
 
 package weavinginvalidtest7;
 
+require kermeta
+require "025_weaving_in_kermeta_aspect8/025_weaving_in_kermeta_aspect8_baseClass.kmt"
+
 using kermeta::standard
-//------------------------------
-// Base classes
-//------------------------------
-class A {
-	operation amethod() : A[0..*] is abstract
-}
 
-
-
-//------------------------------
-// Aspect classes
-//------------------------------
 
 @aspect "true"
 class A {

@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.9 2006-12-15 15:19:44 ftanguy Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.10 2007-07-20 15:09:14 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -49,15 +49,11 @@ import org.eclipse.ui.texteditor.AbstractMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
+import org.kermeta.io.KermetaUnit;
 import org.osgi.framework.Bundle;
 
-import fr.irisa.triskell.kermeta.ast.CompUnit;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
@@ -284,9 +280,10 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 	private String getFunctionAboveLine(IDocument document, int lineNumber) {
 		if (!(textEditor instanceof KMTEditor))
 			return null;
-		KMTUnit mcunit = (KMTUnit)((KMTEditor)textEditor).getMcunit();
+		KermetaUnit mcunit = ((KMTEditor) textEditor).getMcunit();
+		//KMTUnit mcunit = (KMTUnit)((KMTEditor)textEditor).getMcunit();
 		// Copied from EditorTextHover class
-		if (mcunit != null && mcunit.getMctAST() != null) {
+		/*if (mcunit != null && mcunit.getMctAST() != null) {
 		    CompUnit unit = mcunit.getMctAST();
 		    int [] interval = getCharAtLine(mcunit, lineNumber); 
 		    KermetaASTNode astnode = 
@@ -328,7 +325,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		                // return the source code representation or the signature
 		                // of the element pointed by the cursor
 		                return (String)new KM2KMTPrettyPrinter().accept(fobj);//+ " : " + t;
-		            }*/
+		            }
 		        }
 		        else if(fobj instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 		        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)fobj;
@@ -336,7 +333,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		        }
 		        
 		    }
-		}
+		}*/
 		return null;
 
 	}
@@ -347,7 +344,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 	 * @param line
 	 * @return an array of 2 int : begin char and end char
 	 */
-	private int[] getCharAtLine(KMTUnit unit, int line)
+	/*private int[] getCharAtLine(KMTUnit unit, int line)
 	{
 		// Get start char at the given line
 		int c; int bchar = 0; int echar = 0; int iline = 1;
@@ -364,7 +361,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
             in.close();
         } catch (IOException e) { e.printStackTrace(); }
 		return new int[] { bchar, echar };
-	}
+	}*/
 
 	
 	

@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.13 2007-05-15 09:13:43 dvojtise Exp $
+/* $Id: Traceback.java,v 1.14 2007-07-20 15:07:48 ftanguy Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -13,16 +13,18 @@ package fr.irisa.triskell.kermeta.interpreter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 //import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.traceability.ModelReference;
 import fr.irisa.triskell.traceability.TextReference;
@@ -85,6 +87,57 @@ public class Traceback {
         stack_trace = "Trace: \n" + getContextForFObject(null, cause_object) + stack_trace;
         return stack_trace;
     }
+    
+    
+	/**
+	 * Helper method that looks into all the imported unit to find the researched 
+	 * model element
+	 * @param object the model element (fr.irisa.triskell.kermeta.language.structure.FObject) that we want to find
+	 * @return the KermetaUnit that contains the expected model element
+	 * FIXME : not optimized at all, since getNodeByModelElement is finally called
+	 * (duplicated hashtable access)
+	 * wherever this method is used and whenever it returns a unit. (return result, uri?)
+	 * FIXME : does not deal with unit in km format since it use the parser traces and not a reliable trace
+	 * other loaders may have not filled these tables
+	 */
+	public KermetaUnit findUnitForModelElement(KermetaUnit kermetaUnit, fr.irisa.triskell.kermeta.language.structure.Object object)
+	{
+	    Object result = kermetaUnit.getNodeByModelElement(object);
+	    if (result != null) 
+	    	return kermetaUnit;
+	    
+	    Set <KermetaUnit> iulist = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
+	    for ( KermetaUnit iu : iulist ) {	        
+	        result = iu.getNodeByModelElement(object);
+		    if (result != null) 
+		    	return iu;
+	    }
+	    return null;		
+	}
+    
+	
+	/**
+	 * retreives the ModelRefence (ie. a trace ref) to this object
+	 * also looks into imported units's tracers
+	 * @param object
+	 * @return
+	 */
+	public ModelReference findModelReferenceToModelElement(KermetaUnit kermetaUnit, fr.irisa.triskell.kermeta.language.structure.Object object)
+	{
+		ModelReference result = kermetaUnit.getTracer().getModelReference(object);
+	    if (result != null) 
+	    	return result;
+	    // try imported unit tracer
+	    Set <KermetaUnit> iulist = KermetaUnitHelper.getAllImportedKermetaUnits( kermetaUnit );
+	    for ( KermetaUnit iu : iulist ) {	        
+	        if (iu.getTracer() != null) 
+	        	result = iu.getTracer().getModelReference(object);
+		    if (result != null) 
+		    	return result;
+	    }
+	    return result;
+	}
+	
 
     /**
      * Info : File <>, line X, in Method M
@@ -105,7 +158,7 @@ public class Traceback {
         String info = " ";
         KermetaUnit kunit = interpreter.getMemory().getUnit();
         
-        KermetaUnit u = kunit.findUnitForModelElement(fobject);
+        KermetaUnit u = findUnitForModelElement(kunit, fobject);
         if (u!=null && fobject!=null) // I have not figured out why fobject given in parameters could be null
         {
             Object fo_source = u.getNodeByModelElement(fobject);
@@ -113,7 +166,7 @@ public class Traceback {
         }
         else {
         	 // use the Tracer tools in order to get directly the URI of an elemeent
-        	ModelReference mr = kunit.findModelReferenceToModelElement(fobject);
+        	ModelReference mr = findModelReferenceToModelElement(kunit, fobject);
         	if(mr != null){
         		TextReference tr = ModelReferenceHelper.getFirstTextReference(mr);
         		info += getTextInfoForNode(fobject, tr, u, frame);
@@ -143,7 +196,7 @@ public class Traceback {
         String[] infos = new String[4];
         Object fo_source = null;
         KermetaUnit kunit = interpreter.getMemory().getUnit();
-        ModelReference mr = kunit.findModelReferenceToModelElement(fobject);
+        ModelReference mr = findModelReferenceToModelElement(kunit, fobject);
         if(mr != null)
         	fo_source = ModelReferenceHelper.getFirstTextReference(mr);        
         infos = getInfoForNode(fobject, fo_source, kunit, frame);

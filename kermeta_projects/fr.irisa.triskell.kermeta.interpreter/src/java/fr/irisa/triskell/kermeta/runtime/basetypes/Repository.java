@@ -1,4 +1,4 @@
-/* $Id: Repository.java,v 1.2 2007-07-06 15:45:23 dtouzet Exp $
+/* $Id: Repository.java,v 1.3 2007-07-20 15:07:48 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Repository.java
  * License   : EPL
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
@@ -92,17 +93,17 @@ public class Repository {
     	RuntimeObject resListRO = selfRO.getProperties().get("resources"); 
     	if(resListRO == null) {
     		// RO for the "resource" property does not exist - we have to build it
-    		GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
-    		GenericTypeDefinition resClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::persistence::EMFResource");
+    		GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Set");
+    		GenericTypeDefinition resClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::persistence::EMFResource");
 
-    		fr.irisa.triskell.kermeta.language.structure.Class resClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+    		fr.irisa.triskell.kermeta.language.structure.Class resClass = StructureFactory.eINSTANCE.createClass();
     		resClass.setTypeDefinition(resClassDef);
     		
-    		fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding = selfRO.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+    		fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding = StructureFactory.eINSTANCE.createTypeVariableBinding();
     		tvBinding.setType(resClass);
     		tvBinding.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
     		
-    	    fr.irisa.triskell.kermeta.language.structure.Class setClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+    	    fr.irisa.triskell.kermeta.language.structure.Class setClass = StructureFactory.eINSTANCE.createClass();
     	    setClass.setTypeDefinition(setClassDef);
     	    setClass.getTypeParamBinding().add(tvBinding);
     	    
@@ -123,8 +124,8 @@ public class Repository {
      */
     public static RuntimeObject normalizeUri(RuntimeObject uriRO) {
     	// Default value for the resource RO to be returned
-    	GenericTypeDefinition strClassDef  = (GenericTypeDefinition)uriRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::String");
-		fr.irisa.triskell.kermeta.language.structure.Class strClass = uriRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+    	GenericTypeDefinition strClassDef  = (GenericTypeDefinition)uriRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::String");
+		fr.irisa.triskell.kermeta.language.structure.Class strClass = StructureFactory.eINSTANCE.createClass();
 		strClass.setTypeDefinition(strClassDef);
 	    RuntimeObject metaclassRO = uriRO.getFactory().getMemory().getRuntimeObjectForFObject(strClass);
     	RuntimeObject nuriRO = new RuntimeObject(uriRO.getFactory(), metaclassRO);

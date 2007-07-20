@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.5 2006-08-10 08:12:41 zdrey Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.6 2007-07-20 15:09:04 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+//import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+//import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 
 
 /**

@@ -1,4 +1,4 @@
-/* $Id: PrimitiveTypeResolver.java,v 1.3 2006-10-17 09:15:16 cfaucher Exp $
+/* $Id: PrimitiveTypeResolver.java,v 1.4 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : PrimitiveTypeResolver.java
 * License : GPL

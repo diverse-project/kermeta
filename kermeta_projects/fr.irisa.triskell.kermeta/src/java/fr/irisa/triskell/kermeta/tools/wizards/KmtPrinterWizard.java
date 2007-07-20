@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.11 2007-04-19 14:23:17 dvojtise Exp $
+/* $Id: KmtPrinterWizard.java,v 1.12 2007-07-20 15:09:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -18,12 +18,12 @@ import java.io.FileWriter;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+import org.kermeta.io.printer.KMTOutputBuilder;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
+
 
 /**
  * Pretty print of kmt files from a KermetaUnit.
@@ -71,14 +71,22 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
 	    
-		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( );
+		String fileName = "platform:/resource" + ifile.getFullPath().toString();
+		int index = fileName.lastIndexOf("/");
+		String rep = fileName.substring(0, index);
+		
+		KMTOutputBuilder exporter = new KMTOutputBuilder();
+		exporter.print(builder, rep, fileName);
+		exporter.flush();
+		
+/*		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( );
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(ifile.getLocation().toFile()));
 		String pkg_name = "package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n";
 		
 		w.write("package " + NamedElementHelper.getQualifiedName(builder.rootPackage) + ";\n\n");
 	
-		/* imported units needed to recognize the imported classes...*/
+		/* imported units needed to recognize the imported classes...
 		Iterator it = builder.importedUnits.iterator();
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
@@ -107,7 +115,7 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 		String str_kmt = pp.ppPackage(builder.rootPackage);
 		// Do not write again the package declaration..
 		w.write(str_kmt.substring(pkg_name.length()));
-		w.close();
+		w.close();*/
 		ifile.refreshLocal(1, null);
 	}
 

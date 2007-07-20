@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorAdapterFactory.java,v 1.3 2007-07-11 14:41:55 cfaucher Exp $
+ * $Id: BehaviorAdapterFactory.java,v 1.4 2007-07-20 15:09:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
@@ -83,16 +83,48 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	protected BehaviorSwitch<Adapter> modelSwitch =
 		new BehaviorSwitch<Adapter>() {
 			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
+			public Adapter caseConditional(Conditional object) {
+				return createConditionalAdapter();
 			}
 			@Override
 			public Adapter caseExpression(Expression object) {
 				return createExpressionAdapter();
 			}
 			@Override
+			public Adapter caseLambdaExpression(LambdaExpression object) {
+				return createLambdaExpressionAdapter();
+			}
+			@Override
+			public Adapter caseLambdaParameter(LambdaParameter object) {
+				return createLambdaParameterAdapter();
+			}
+			@Override
+			public Adapter caseTypeReference(TypeReference object) {
+				return createTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseCallFeature(CallFeature object) {
+				return createCallFeatureAdapter();
+			}
+			@Override
 			public Adapter caseCallExpression(CallExpression object) {
 				return createCallExpressionAdapter();
+			}
+			@Override
+			public Adapter caseLiteral(Literal object) {
+				return createLiteralAdapter();
+			}
+			@Override
+			public Adapter caseEmptyExpression(EmptyExpression object) {
+				return createEmptyExpressionAdapter();
+			}
+			@Override
+			public Adapter caseRaise(Raise object) {
+				return createRaiseAdapter();
+			}
+			@Override
+			public Adapter caseRescue(Rescue object) {
+				return createRescueAdapter();
 			}
 			@Override
 			public Adapter caseBlock(Block object) {
@@ -101,10 +133,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCallVariable(CallVariable object) {
 				return createCallVariableAdapter();
-			}
-			@Override
-			public Adapter caseCallFeature(CallFeature object) {
-				return createCallFeatureAdapter();
 			}
 			@Override
 			public Adapter caseCallSuperOperation(CallSuperOperation object) {
@@ -117,42 +145,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCallValue(CallValue object) {
 				return createCallValueAdapter();
-			}
-			@Override
-			public Adapter caseConditional(Conditional object) {
-				return createConditionalAdapter();
-			}
-			@Override
-			public Adapter caseRaise(Raise object) {
-				return createRaiseAdapter();
-			}
-			@Override
-			public Adapter caseRescue(Rescue object) {
-				return createRescueAdapter();
-			}
-			@Override
-			public Adapter caseTypeReference(TypeReference object) {
-				return createTypeReferenceAdapter();
-			}
-			@Override
-			public Adapter caseLiteral(Literal object) {
-				return createLiteralAdapter();
-			}
-			@Override
-			public Adapter caseEmptyExpression(EmptyExpression object) {
-				return createEmptyExpressionAdapter();
-			}
-			@Override
-			public Adapter caseJavaStaticCall(JavaStaticCall object) {
-				return createJavaStaticCallAdapter();
-			}
-			@Override
-			public Adapter caseLambdaExpression(LambdaExpression object) {
-				return createLambdaExpressionAdapter();
-			}
-			@Override
-			public Adapter caseLambdaParameter(LambdaParameter object) {
-				return createLambdaParameterAdapter();
 			}
 			@Override
 			public Adapter caseIntegerLiteral(IntegerLiteral object) {
@@ -175,16 +167,24 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 				return createVoidLiteralAdapter();
 			}
 			@Override
+			public Adapter caseAssignment(Assignment object) {
+				return createAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseJavaStaticCall(JavaStaticCall object) {
+				return createJavaStaticCallAdapter();
+			}
+			@Override
+			public Adapter caseVariableDecl(VariableDecl object) {
+				return createVariableDeclAdapter();
+			}
+			@Override
 			public Adapter caseLoop(Loop object) {
 				return createLoopAdapter();
 			}
 			@Override
 			public Adapter caseSelfExpression(SelfExpression object) {
 				return createSelfExpressionAdapter();
-			}
-			@Override
-			public Adapter caseVariableDecl(VariableDecl object) {
-				return createVariableDeclAdapter();
 			}
 			@Override
 			public Adapter caseObject(fr.irisa.triskell.kermeta.language.structure.Object object) {
@@ -227,16 +227,16 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Assignment <em>Assignment</em>}'.
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Conditional <em>Conditional</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.Assignment
+	 * @see fr.irisa.triskell.kermeta.language.behavior.Conditional
 	 * @generated
 	 */
-	public Adapter createAssignmentAdapter() {
+	public Adapter createConditionalAdapter() {
 		return null;
 	}
 
@@ -255,6 +255,62 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.LambdaExpression <em>Lambda Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.LambdaExpression
+	 * @generated
+	 */
+	public Adapter createLambdaExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.LambdaParameter <em>Lambda Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.LambdaParameter
+	 * @generated
+	 */
+	public Adapter createLambdaParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.TypeReference <em>Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.TypeReference
+	 * @generated
+	 */
+	public Adapter createTypeReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.CallFeature
+	 * @generated
+	 */
+	public Adapter createCallFeatureAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression <em>Call Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -265,6 +321,62 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Literal <em>Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.Literal
+	 * @generated
+	 */
+	public Adapter createLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.EmptyExpression <em>Empty Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.EmptyExpression
+	 * @generated
+	 */
+	public Adapter createEmptyExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Raise <em>Raise</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.Raise
+	 * @generated
+	 */
+	public Adapter createRaiseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Rescue <em>Rescue</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.Rescue
+	 * @generated
+	 */
+	public Adapter createRescueAdapter() {
 		return null;
 	}
 
@@ -293,20 +405,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature <em>Call Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.CallFeature
-	 * @generated
-	 */
-	public Adapter createCallFeatureAdapter() {
 		return null;
 	}
 
@@ -349,132 +447,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallValueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Conditional <em>Conditional</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.Conditional
-	 * @generated
-	 */
-	public Adapter createConditionalAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Raise <em>Raise</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.Raise
-	 * @generated
-	 */
-	public Adapter createRaiseAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Rescue <em>Rescue</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.Rescue
-	 * @generated
-	 */
-	public Adapter createRescueAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.TypeReference <em>Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.TypeReference
-	 * @generated
-	 */
-	public Adapter createTypeReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Literal <em>Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.Literal
-	 * @generated
-	 */
-	public Adapter createLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.EmptyExpression <em>Empty Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.EmptyExpression
-	 * @generated
-	 */
-	public Adapter createEmptyExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall <em>Java Static Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall
-	 * @generated
-	 */
-	public Adapter createJavaStaticCallAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.LambdaExpression <em>Lambda Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.LambdaExpression
-	 * @generated
-	 */
-	public Adapter createLambdaExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.LambdaParameter <em>Lambda Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.LambdaParameter
-	 * @generated
-	 */
-	public Adapter createLambdaParameterAdapter() {
 		return null;
 	}
 
@@ -549,6 +521,48 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Assignment <em>Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.Assignment
+	 * @generated
+	 */
+	public Adapter createAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall <em>Java Static Call</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall
+	 * @generated
+	 */
+	public Adapter createJavaStaticCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.VariableDecl
+	 * @generated
+	 */
+	public Adapter createVariableDeclAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.Loop <em>Loop</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -573,20 +587,6 @@ public class BehaviorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSelfExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link fr.irisa.triskell.kermeta.language.behavior.VariableDecl <em>Variable Decl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.VariableDecl
-	 * @generated
-	 */
-	public Adapter createVariableDeclAdapter() {
 		return null;
 	}
 

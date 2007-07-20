@@ -22,7 +22,7 @@ package package1 {
 	}
 	
 	class Class12 inherits Class11, Class1 {
-		reference property111 : testProperty::Class2<Integer>[*]
+		reference property113 : testProperty::Class2<Integer>[*]
 	}
 
 }

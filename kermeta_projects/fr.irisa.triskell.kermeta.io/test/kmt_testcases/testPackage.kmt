@@ -1,6 +1,6 @@
 package testPackage;
 
-using metacore::standard
+//using metacore::standard
 
 package package1 {
 

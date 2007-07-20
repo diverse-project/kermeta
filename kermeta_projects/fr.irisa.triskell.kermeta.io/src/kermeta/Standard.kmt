@@ -1,0 +1,36 @@
+/** The root package. See the other packages if you want to browse the classes of Kermeta api. */
+package kermeta;
+
+/*
+ This unit loads kermeta standard library
+*/
+
+// this imports the standard types and
+// the definition of the language
+
+require "standard/collections.kmt"
+
+require "language/behavior.kmt"
+
+require "reflection/reflection.kmt"
+
+require "language/reflective_collections.kmt"
+
+require "kunit/kunit.kmt"
+
+require "utils/hashtable.kmt"
+
+require "utils/stack.kmt"
+
+require "io/std_io.kmt"
+
+require "io/file_io.kmt"
+
+require "exceptions/exceptions.kmt"
+
+require "language/dynamic_expression.kmt"
+
+require "persistence/resource.kmt"
+
+require "standard/java.kmt"
+ 

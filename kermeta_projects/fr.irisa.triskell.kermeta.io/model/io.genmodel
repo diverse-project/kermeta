@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.kermeta.io/src/java"
+    modelPluginID="fr.irisa.triskell.kermeta.io" modelName="fr.irisa.triskell.kermeta.io"
+    importerID="org.eclipse.emf.importer.ecore" usedGenPackages="../../fr.irisa.triskell.kermeta.model/build/ecore/kermeta.genmodel#//kermeta">
+  <foreignModel>io.ecore</foreignModel>
+  <genPackages prefix="Io" basePackage="org.kermeta" disposableProviderFactory="true"
+      ecorePackage="io.ecore#/">
+    <genDataTypes ecoreDataType="io.ecore#//Set"/>
+    <genDataTypes ecoreDataType="io.ecore#//List"/>
+    <genDataTypes ecoreDataType="io.ecore#//Tracer"/>
+    <genDataTypes ecoreDataType="io.ecore#//ASTNode"/>
+    <genDataTypes ecoreDataType="io.ecore#//RecognitionException"/>
+    <genDataTypes ecoreDataType="io.ecore#//IOPlugin"/>
+    <genClasses ecoreClass="io.ecore#//KermetaUnit">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/storer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/uri"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/compilationUnit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/internalPackageEntries"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/externalPackageEntries"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/importedKermetaUnits"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/importers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/buildingState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnit/messages"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/needASTTraces"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/typeChecked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/framework"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/tracer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//KermetaUnit/constraintChecked"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/load"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/addInternalPackage">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/addInternalPackage/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/findInternalpackage">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/findInternalpackage/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/addRequire">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/addRequire/uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/addUsing">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/addUsing/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getRequires"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/importKermetaUnit">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/importKermetaUnit/value"/>
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/importKermetaUnit/force"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/addExternalPackage">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/addExternalPackage/p"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getPackages"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getInternalPackages"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getExternalPackages"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getTypeDefinitionByName">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getTypeDefinitionByName/name"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getTypeDefinitionByQualifiedName">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getTypeDefinitionByQualifiedName/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getPackages.1">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getPackages.1/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getInternalPackage">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getInternalPackage/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getExternalPackage">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getExternalPackage/qualifiedName"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/print"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/isLoading"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/error">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/error/message"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/warning">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/warning/message"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/isErrored"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/storeTrace">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/storeTrace/modelElement"/>
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/storeTrace/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getModelElementByNode">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getModelElementByNode/node"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getNodeByModelElement">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/getNodeByModelElement/modelElement"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/getUsings"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/error.1">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/error.1/message"/>
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/error.1/target"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/isWarned"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/parsingError">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/parsingError/exception"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnit/warning.1">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/warning.1/message"/>
+        <genParameters ecoreParameter="io.ecore#//KermetaUnit/warning.1/target"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="io.ecore#//IBuildingState"/>
+    <genClasses ecoreClass="io.ecore#//KermetaUnitStorer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitStorer/kermetaUnits"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/get">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/get/uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/find">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/find/uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/load">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/load/uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/unload">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/unload/uri"/>
+      </genOperations>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnitStorer/load.1">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/load.1/uri"/>
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitStorer/load.1/content"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="io.ecore#//PackageEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//PackageEntry/qualifiedName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//PackageEntry/package"/>
+    </genClasses>
+    <genClasses ecoreClass="io.ecore#//KermetaUnitLoader">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference io.ecore#//KermetaUnitLoader/kermetaUnits"/>
+      <genOperations ecoreOperation="io.ecore#//KermetaUnitLoader/load">
+        <genParameters ecoreParameter="io.ecore#//KermetaUnitLoader/load/uri"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="io.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//Message/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute io.ecore#//Message/target"/>
+    </genClasses>
+    <genClasses ecoreClass="io.ecore#//ErrorMessage"/>
+    <genClasses ecoreClass="io.ecore#//WarningMessage"/>
+    <genClasses ecoreClass="io.ecore#//ParseErrorMessage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//ParseErrorMessage/node"/>
+    </genClasses>
+    <genClasses ecoreClass="io.ecore#//ParsingError">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//ParsingError/offset"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute io.ecore#//ParsingError/length"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

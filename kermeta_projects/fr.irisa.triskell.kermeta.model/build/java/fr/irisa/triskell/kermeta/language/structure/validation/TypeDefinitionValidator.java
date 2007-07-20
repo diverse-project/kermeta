@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionValidator.java,v 1.1 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: TypeDefinitionValidator.java,v 1.2 2007-07-20 15:08:58 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
@@ -20,4 +20,5 @@ public interface TypeDefinitionValidator {
 
 	boolean validateIsAspect(boolean value);
 	boolean validateBaseAspects(EList value);
+	boolean validateAspects(EList value);
 }

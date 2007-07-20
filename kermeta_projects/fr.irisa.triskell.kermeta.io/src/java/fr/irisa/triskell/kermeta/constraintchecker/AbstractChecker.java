@@ -1,4 +1,4 @@
-/* $Id: AbstractChecker.java,v 1.1 2006-03-30 09:30:14 zdrey Exp $
+/* $Id: AbstractChecker.java,v 1.2 2007-07-20 15:08:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : AbstractChecker.java
  * License    : EPL
@@ -13,8 +13,9 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+
 
 /**
  * Pattern command for constraint checking on the model elements of a model
@@ -49,8 +50,8 @@ public abstract class AbstractChecker {
 	public void addProblem(String msg_kind, String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{
 		if (msg_kind.equals(ERROR))
-			builder.messages.addError(ERROR_TYPE + ": " + msg, node);
+			builder.error(ERROR_TYPE + ": " + msg, node);
 		else
-			builder.messages.addWarning(ERROR_TYPE + ": " + msg, node);
+			builder.warning(ERROR_TYPE + ": " + msg, node);
 	}
 }

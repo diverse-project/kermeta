@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.22 2007-06-26 08:41:39 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.23 2007-07-20 15:07:49 ftanguy Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.builder;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -23,15 +24,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-
+import org.kermeta.io.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -113,7 +116,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
      * Pre-create runtime objects for type definitions
      */
     private void _1_loadTypes() {
-       for ( Package p : unit.getAllPackages() )
+       for ( Package p : (List <Package>) unit.getPackages() )
     	   loadTypesForTypeDefContainer(p);
     	
     	/* for (Package p : unit.packages.values()) {
@@ -152,12 +155,12 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
     
     private void _2_initializeMemory() {
         // Intialize the class Class
-    	fr.irisa.triskell.kermeta.language.structure.Class fclass=unit.struct_factory.createClass();
+    	fr.irisa.triskell.kermeta.language.structure.Class fclass= StructureFactory.eINSTANCE.createClass();
 		fclass.setTypeDefinition(
 		  (ClassDefinition)unit.getTypeDefinitionByName("kermeta::language::structure::Class"));
 	    memory.getROFactory().setClassClassFromFClass(fclass);
 	    // Initialize the class ModelType
-	    fr.irisa.triskell.kermeta.language.structure.Class fModelType = unit.struct_factory.createClass();
+	    fr.irisa.triskell.kermeta.language.structure.Class fModelType = StructureFactory.eINSTANCE.createClass();
 	    fModelType.setTypeDefinition(
 	    		(ClassDefinition)unit.getTypeDefinitionByName("kermeta::language::structure::ModelType"));
 	    memory.getROFactory().setModelTypeClassFromFClass(fModelType);
@@ -169,7 +172,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
      * Create all runtime objects and fill correspondance table
      */
     private void _3_createRuntimeObjects() {
-    	for ( Package p : unit.getAllPackages() )
+    	for ( Package p : (List<Package>) unit.getPackages() )
     		getOrCreateRuntimeObject( p );
     	/*  for (Object next : unit.packages.values()) {
             getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)next);
@@ -192,7 +195,8 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 		run_obj.setMetaclass( memory.getROFactory().getClassForClassDefinition(classdef) );
 		
 		// set the container
-		run_obj.setContainer( getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)kcoreObject.eContainer()) );
+		if ( ! (kcoreObject.eContainer() instanceof ModelingUnit) ) 
+			run_obj.setContainer( getOrCreateRuntimeObject((fr.irisa.triskell.kermeta.language.structure.Object)kcoreObject.eContainer()) );
 		
 		EClass cl = kcoreObject.eClass();
 		
@@ -265,8 +269,8 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 				    	String refQualifiedName = getEQualifiedName(ref);
 				    	RuntimeObject property_ro = (RuntimeObject)properties.get(refQualifiedName);
 				    	if(property_ro == null){
-				    		KermetaUnit.internalLog.error(refQualifiedName + " not found in properties !");
-				    		KermetaUnit.internalLog.error(properties.toString());
+				    		KermetaInterpreter.internalLog.error(refQualifiedName + " not found in properties !");
+				    		KermetaInterpreter.internalLog.error(properties.toString());
 				    	}
 				        list = ReflectiveSequence.createReflectiveSequence(run_obj, property_ro);
 				    }
@@ -302,7 +306,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 		
 		// This is an error
 		if (result == null) {
-			KermetaUnit.internalLog.error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
+			KermetaInterpreter.internalLog.error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
 			throw new Error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
 		}
 		
@@ -391,7 +395,7 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 	}
 	protected void finalize() throws Throwable {
 		super.finalize();
-        KermetaUnit.internalLog.debug("FINALIZE RuntimeMemoryLoader ...");
+		KermetaInterpreter.internalLog.debug("FINALIZE RuntimeMemoryLoader ...");
         
         // clear as much ref as possible        
         unit = null;

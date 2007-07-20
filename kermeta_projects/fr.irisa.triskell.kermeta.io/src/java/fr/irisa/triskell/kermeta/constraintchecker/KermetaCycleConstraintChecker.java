@@ -1,4 +1,4 @@
-/* $Id: KermetaCycleConstraintChecker.java,v 1.3 2006-03-30 12:33:58 ssaudrai Exp $
+/* $Id: KermetaCycleConstraintChecker.java,v 1.4 2007-07-20 15:08:18 ftanguy Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -16,19 +16,18 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.directedgraph.DirectedGraphClass;
-import fr.irisa.triskell.kermeta.directedgraph.DirectedGraphTest;
 import fr.irisa.triskell.kermeta.directedgraph.Findcycle;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Object;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.TypeDefinitionSearcher;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * Constraint checker 
@@ -82,7 +81,9 @@ public class KermetaCycleConstraintChecker {
 				reponse.add(rep);
 			}
 			System.out.println("les cycles sont :" + reponse.toString());
-			unit.messages.addError("CONSTRAINT-CHECKER : Cycle of composition : " + reponse.toString(),(ClassDefinition) ((ArrayList) allcycle.get(0)).get(0));
+			unit.error("CONSTRAINT-CHECKER : Cycle of composition : " + reponse.toString(),
+					null);
+	//				(ClassDefinition) ((ArrayList) allcycle.get(0)).get(0));
 		}
 		//System.out.println("cycle :" + find.findloop());
 		
@@ -96,7 +97,7 @@ public class KermetaCycleConstraintChecker {
     public void buildNode(KermetaUnit u) {
         
         
-        Iterator it = u.typeDefs.values().iterator();
+        Iterator it = TypeDefinitionSearcher.getTypesDefinition(unit).iterator();
         while(it.hasNext()) {
             TypeDefinition td = (TypeDefinition)it.next();
             if (td instanceof ClassDefinition) {

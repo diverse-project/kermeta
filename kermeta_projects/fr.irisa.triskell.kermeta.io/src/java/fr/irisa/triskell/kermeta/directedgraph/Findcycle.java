@@ -19,10 +19,10 @@ public class Findcycle {
 		// Construction de l'ensemble S des noeuds sans parents	
 		nodelist=GI.getAllNodes();
 	}
-	// retourne le premier cycle trouvé
+	// retourne le premier cycle trouvï¿½
 	public ArrayList findfirstcycle(){
-//		 Pour chaque s de S on vérifie si il y un cycle
-		// appel de cycle : chemin courant et retourne booléen
+//		 Pour chaque s de S on vï¿½rifie si il y un cycle
+		// appel de cycle : chemin courant et retourne boolï¿½en
 		while(!nodelist.isEmpty()){
 			Object current=nodelist.get(0);
 			ArrayList chemin=new ArrayList();
@@ -37,8 +37,8 @@ public class Findcycle {
 	// retourne vrai si il existe un cycle
 	public boolean findcycle(){	
 		
-		// Pour chaque s de S on vérifie si il y un cycle
-		// appel de cycle : chemin courant et retourne booléen
+		// Pour chaque s de S on vï¿½rifie si il y un cycle
+		// appel de cycle : chemin courant et retourne boolï¿½en
 		while(!nodelist.isEmpty()){
 			//System.out.println("liste des noeuds restants:"+nodelist.toString());
 			Object current=nodelist.get(0);
@@ -53,8 +53,8 @@ public class Findcycle {
 	}
 	
 	public ArrayList findallcycle(){
-//		 Pour chaque s de S on vérifie si il y un cycle
-		// appel de cycle : chemin courant et retourne booléen
+		//		 Pour chaque s de S on vï¿½rifie si il y un cycle
+		// appel de cycle : chemin courant et retourne boolï¿½en
 		ArrayList result=new ArrayList();
 		while(!nodelist.isEmpty()){
 			Object current=nodelist.get(0);
@@ -69,13 +69,13 @@ public class Findcycle {
 	
 	// retourne vrai si un cycle existe
 	public boolean chemin(ArrayList chemin){
-		// Récupération de l'ensemble des parents
+		// Rï¿½cupï¿½ration de l'ensemble des parents
 		ArrayList parents=GI.getTargetsforNode(chemin.get(chemin.size()-1));
 		// si l'ensemble des parents est non vide
 		if(!parents.isEmpty()){
-			//pour chaque parent on recherche la présence de cycle
+			//pour chaque parent on recherche la prï¿½sence de cycle
 			while (!parents.isEmpty()){
-				// si le parent choisi appartient à l'ensemble --> cycle
+				// si le parent choisi appartient ï¿½ l'ensemble --> cycle
 				Object parent=parents.get(0);
 				if(chemin.contains(parent)){
 					return true;
@@ -91,20 +91,20 @@ public class Findcycle {
 				}
 			}
 		} else {
-			// si il est vide pas de cycle présent
+			// si il est vide pas de cycle prï¿½sent
 			return false;
 		}
 		return false;
 	}
 	
 	public ArrayList returnchemin(ArrayList chemin){
-		// Récupération de l'ensemble des parents
+		// Rï¿½cupï¿½ration de l'ensemble des parents
 		ArrayList parents=GI.getTargetsforNode(chemin.get(chemin.size()-1));
 		// si l'ensemble des parents est non vide
 		if(!parents.isEmpty()){
-			//pour chaque parent on recherche la présence de cycle
+			//pour chaque parent on recherche la prï¿½sence de cycle
 			while (!parents.isEmpty()){
-				// si le parent choisi appartient à l'ensemble --> cycle
+				// si le parent choisi appartient ï¿½ l'ensemble --> cycle
 				Object parent=parents.get(0);
 				if(chemin.contains(parent)){
 					chemin.add(parent);
@@ -117,7 +117,7 @@ public class Findcycle {
 				}		
 			}
 		} else {
-			// si il est vide pas de cycle présent
+			// si il est vide pas de cycle prï¿½sent
 			return null;
 		}
 		return null;

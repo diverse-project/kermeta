@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockValidator.java,v 1.1 2007-07-11 14:41:50 cfaucher Exp $
+ * $Id: BlockValidator.java,v 1.2 2007-07-20 15:08:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 
@@ -19,6 +19,6 @@ import org.eclipse.emf.common.util.EList;
 public interface BlockValidator {
 	boolean validate();
 
-	boolean validateStatement(EList value);
 	boolean validateRescueBlock(EList value);
+	boolean validateStatement(EList value);
 }

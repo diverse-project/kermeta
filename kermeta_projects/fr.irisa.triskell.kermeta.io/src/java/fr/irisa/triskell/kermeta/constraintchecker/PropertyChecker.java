@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.4 2006-10-25 08:27:26 dvojtise Exp $
+/* $Id: PropertyChecker.java,v 1.5 2007-07-20 15:08:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -16,12 +16,15 @@
 package fr.irisa.triskell.kermeta.constraintchecker;
 
 import java.util.List;
+import java.util.Set;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
@@ -92,11 +95,37 @@ public class PropertyChecker extends AbstractChecker {
 		// An property cannot be defined twice in the same class
 		boolean result = true;
 		int number_of_duplicate = 0;
-		List<Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
+		List <Property> props = ClassDefinitionHelper.getAllProperties(classDefinition);
 		for (Property p : props) {
-			if (p.getName().equals(property.getName()))
-			{
-				number_of_duplicate += 1;
+			if ( (p != property) && (p.getName().equals(property.getName())) ) {
+				ClassDefinition possibleBaseClass = (ClassDefinition) p.eContainer();
+				if ( classDefinition.isIsAspect() && (possibleBaseClass != classDefinition) ) {
+					boolean error = false;
+					
+					if ( property.isIsComposite() != p.isIsComposite() )
+						error = true;
+					
+					if ( !error && ! TypeEqualityChecker.equals(property.getType(), p.getType()) ) {
+						ClassDefinition cd1 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) property.getType()).getTypeDefinition();
+						ClassDefinition cd2 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) p.getType()).getTypeDefinition();
+						if ( ! ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
+							error = true;
+					} 
+					if ( error ) {
+						KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(p);
+						String message = "";
+						if ( distantUnit != null )
+							message = "Property " + p.getName() + " is declared with a different type in " + distantUnit.getUri();
+						else
+							message = "Property " + p.getName() + " is declared with a different type elsewhere.";
+						
+						addProblem(ERROR, message, property);
+
+					}
+				} else if (p.getName().equals(property.getName())) {
+					number_of_duplicate += 1;
+				}
+			
 			}
 		}
 		// An operation cannot be defined twice in the same class
@@ -154,17 +183,17 @@ public class PropertyChecker extends AbstractChecker {
 			 // Opposite mismatch
 			 if(property.getOpposite().getOpposite() != property)
 			 {
-				 builder.messages.addError(OPPOSITE_ERROR
+				 builder.error(OPPOSITE_ERROR
 					 + pp .ppSimplifiedPropertyInContext(property), property);
 				 if(property.getOpposite().getOpposite() == null)
-					 builder.messages.addError(OPPOSITE_ERROR
+					 builder.error(OPPOSITE_ERROR
 					+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
 				 result = false;
 			 }
 			 // Composition multiplicity
 			 if(property.getOpposite().isIsComposite()){
 				 if(property.getUpper() != 1){
-					 builder.messages.addError(MULTIPLICITY_ERROR
+					 builder.error(MULTIPLICITY_ERROR
 					 + pp.ppSimplifiedPropertyInContext(property), property);
 					 result = false;
 				 }
@@ -173,7 +202,7 @@ public class PropertyChecker extends AbstractChecker {
 			 if(property.getOpposite().isIsComposite()){
 				 if(property.isIsComposite()){
 					 // message on this end only, the other end will be checked too from the other class
-					 builder.messages.addError(ISCOMPOSITE_ERROR 
+					 builder.error(ISCOMPOSITE_ERROR 
 							 + pp.ppSimplifiedPropertyInContext(property), property);
 					 result = false;
 				 }

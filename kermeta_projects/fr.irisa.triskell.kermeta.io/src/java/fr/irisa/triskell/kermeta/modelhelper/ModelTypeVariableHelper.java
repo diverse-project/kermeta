@@ -1,4 +1,4 @@
-/* $Id: ModelTypeVariableHelper.java,v 1.3 2007-05-30 11:28:45 jsteel Exp $
+/* $Id: ModelTypeVariableHelper.java,v 1.4 2007-07-20 15:08:10 ftanguy Exp $
  * Project   : Kermeta 
  * File      : ClassDefinitionHelper.java
  * License   : EPL

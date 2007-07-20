@@ -1,12 +1,16 @@
 /*
- * Created on 6 févr. 2005
+ * Created on 6 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
+
 import fr.irisa.triskell.kermeta.ast.TypeRef;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author Franck Fleurey
@@ -15,9 +19,9 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 
-	public static TypeReference process(TypeRef node, KermetaUnit builder) {
+	public static TypeReference process(LoadingContext context, TypeRef node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMTypeReferenceBuilder visitor = new KMT2KMTypeReferenceBuilder(builder);
+		KMT2KMTypeReferenceBuilder visitor = new KMT2KMTypeReferenceBuilder(builder, context);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -27,21 +31,21 @@ public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMTypeReferenceBuilder(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMTypeReferenceBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 	
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.TypeRef)
 	 */
 	public boolean beginVisit(TypeRef typeRef) {
-		result = builder.behav_factory.createTypeReference();
+		result = BehaviorFactory.eINSTANCE.createTypeReference();
 		builder.storeTrace(result, typeRef);
 		result.setIsOrdered(isOrdered(typeRef));
 		result.setIsUnique(isUnique(typeRef));
 		result.setLower(getLower(typeRef));
 		result.setUpper(getUpper(typeRef));
-		result.setType(KMT2KMTypeBuilder.process(typeRef.getReftype(), builder));
+		result.setType(KMT2KMTypeBuilder.process(context, typeRef.getReftype(), builder));
 		return false;
 	}
 }

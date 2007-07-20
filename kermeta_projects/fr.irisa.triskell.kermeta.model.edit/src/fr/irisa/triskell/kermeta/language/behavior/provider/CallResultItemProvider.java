@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallResultItemProvider.java,v 1.7 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: CallResultItemProvider.java,v 1.8 2007-07-20 15:08:28 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 

@@ -1,7 +1,7 @@
 package testPropertyConversion;
 
-require "../km/framework.main.km"
-require "./011b_testStringConversionInEcore.kmt"
+require "http://www.eclipse.org/emf/2002/Ecore"
+require "011b_testStringConversionInEcore.kmt"
 
 /* This class is used to test the conversion of KMT 2 Ecore 
  *  Notice : when we declare "using kermeta::language::structure", the alias String is used, instead of the real

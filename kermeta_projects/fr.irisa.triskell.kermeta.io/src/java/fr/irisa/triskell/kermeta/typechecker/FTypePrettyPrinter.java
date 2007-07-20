@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.10 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.11 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta io
 * File : FTypePrettyPrinter.java
 * License : EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;

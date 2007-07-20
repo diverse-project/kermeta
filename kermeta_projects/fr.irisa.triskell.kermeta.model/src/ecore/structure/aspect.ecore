@@ -6,7 +6,9 @@
     <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAspect" eType="#//structure/Boolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="baseAspects" upperBound="-1"
-          eType="#//structure/TypeDefinition"/>
+          eType="#//structure/TypeDefinition" eOpposite="#//structure/TypeDefinition/aspects"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="aspects" upperBound="-1"
+          eType="#//structure/TypeDefinition" eOpposite="#//structure/TypeDefinition/baseAspects"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   </eSubpackages>

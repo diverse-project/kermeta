@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /*
- * Created on 16 févr. 2005
+ * Created on 16 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 
@@ -33,7 +33,7 @@ public class GenerateJUnitTestSuite {
 		return template;
 	}
 
-	protected static String junitfile = "test/junit/kermeta_io/constraintchecker_test/JunitTestSuite.java";
+	protected static String junitfile = "junit/kermeta_io/constraintchecker_test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";

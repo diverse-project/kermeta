@@ -44,7 +44,7 @@ class BClass {
 }
 
 /** The test class */
-class TestReflection inherits kermeta::kunit::TestCase
+class TestReflection inherits kermeta::kunit::Assert
 {    
 
 	operation main() : Void is do

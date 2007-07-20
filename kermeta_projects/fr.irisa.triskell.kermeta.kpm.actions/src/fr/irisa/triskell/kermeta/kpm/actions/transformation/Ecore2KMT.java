@@ -1,6 +1,6 @@
 
 
-/*$Id: Ecore2KMT.java,v 1.1 2007-06-26 12:24:01 ftanguy Exp $
+/*$Id: Ecore2KMT.java,v 1.2 2007-07-20 15:09:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	Ecore2KMT.java
 * License : EPL
@@ -18,6 +18,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KMTOutputBuilder;
 
 import fr.irisa.triskell.eclipse.resources.PropertyNotFoundException;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
@@ -27,8 +29,6 @@ import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
 public class Ecore2KMT implements IAction {
@@ -108,7 +108,7 @@ public class Ecore2KMT implements IAction {
 			 * 
 			 * 
 			 */
-			if ( kermetaUnit.messages.hasError() ) {
+			if ( kermetaUnit.isErrored() ) {
 				
 				String msg = outputFile.getFullPath().toString() + " may contain errors because " + inputFile.getFullPath().toString() + " has been incorrectly typechecked.";
 				KPMPlugin.getDefault().getLog().log(
@@ -116,9 +116,10 @@ public class Ecore2KMT implements IAction {
 				);
 				
 			}	
-			KmtPrinterWizard wizard= new KmtPrinterWizard();
 			try {
-				wizard.writeUnit(kermetaUnit, outputFile);
+				KMTOutputBuilder builder = new KMTOutputBuilder();
+				builder.print(kermetaUnit, "");
+				builder.flush();
 				outputFile.refreshLocal(0, monitor);
 			} catch (Exception e1) {
 				e1.printStackTrace();

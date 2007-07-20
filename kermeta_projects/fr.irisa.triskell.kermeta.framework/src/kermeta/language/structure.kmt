@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.41 2007-07-03 12:54:47 dtouzet Exp $
+/* $Id: structure.kmt,v 1.42 2007-07-20 15:08:40 ftanguy Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -439,6 +439,27 @@ class Package inherits TypeDefinitionContainer, kermeta::reflection::Package, KM
 			result := visitor.visitPackage(self, context)
 		end
 }
+class ModelingUnit inherits kermeta::reflection::ModelingUnit, KMStructureVisitable
+{
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitModelingUnit(self, context)
+		end
+}
+abstract class Require inherits kermeta::reflection::Require, KMStructureVisitable
+{
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitRequire(self, context)
+		end
+}
+abstract class Using inherits kermeta::reflection::Using, KMStructureVisitable
+{
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitUsing(self, context)
+		end
+}
 class TypeDefinition inherits NamedElement, kermeta::reflection::TypeDefinition, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -527,6 +548,9 @@ abstract class KMStructureVisitor<ContextType, ResultType>
 	operation visitModelType(node : ModelType, context : ContextType) : ResultType is do end
 	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is do end
 	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is do end
+	operation visitModelingUnit(node : ModelingUnit, context : ContextType) : ResultType is do end
+	operation visitRequire(node : Require, context : ContextType) : ResultType is do end
+	operation visitUsing(node : Using, context : ContextType) : ResultType is do end
 	
 }
 /** All the classes defined in this <code>kermeta::language::structure</code> package 

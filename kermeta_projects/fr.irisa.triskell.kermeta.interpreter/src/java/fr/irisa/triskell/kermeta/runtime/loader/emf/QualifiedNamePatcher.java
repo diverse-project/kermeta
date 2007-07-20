@@ -1,4 +1,4 @@
-/*$Id: QualifiedNamePatcher.java,v 1.12 2007-07-06 11:53:18 dvojtise Exp $
+/*$Id: QualifiedNamePatcher.java,v 1.13 2007-07-20 15:07:49 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.interpreter
 * File : 	QualifiedNamePatcher.java
 * License : EPL
@@ -27,7 +27,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
 
 /**
  * This class is used to help to pacth the EMF problem about empty packages 

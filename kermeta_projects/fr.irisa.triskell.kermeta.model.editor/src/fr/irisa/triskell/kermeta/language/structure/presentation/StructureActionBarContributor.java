@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureActionBarContributor.java,v 1.4 2007-07-11 14:41:41 cfaucher Exp $
+ * $Id: StructureActionBarContributor.java,v 1.5 2007-07-20 15:09:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.presentation;
 

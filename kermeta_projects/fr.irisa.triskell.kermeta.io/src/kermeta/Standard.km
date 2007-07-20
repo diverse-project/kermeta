@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_language_structure:ModelingUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kermeta_language_structure="http://www.kermeta.org/kermeta//language/structure">
+  <packages name="kermeta"/>
+  <requires uri="standard/collections.kmt">
+    <ownedTag value="/** The root package. See the other packages if you want to browse the classes of Kermeta api. */"/>
+  </requires>
+  <requires uri="language/behavior.kmt"/>
+  <requires uri="reflection/reflection.kmt"/>
+  <requires uri="language/reflective_collections.kmt"/>
+  <requires uri="kunit/kunit.kmt"/>
+  <requires uri="utils/hashtable.kmt"/>
+  <requires uri="utils/stack.kmt"/>
+  <requires uri="io/std_io.kmt"/>
+  <requires uri="io/file_io.kmt"/>
+  <requires uri="exceptions/exceptions.kmt"/>
+  <requires uri="language/dynamic_expression.kmt"/>
+  <requires uri="persistence/resource.kmt"/>
+  <requires uri="standard/java.kmt"/>
+  <referencedModelingUnits href="standard/collections.km#/"/>
+  <referencedModelingUnits href="standard/java.km#/"/>
+  <referencedModelingUnits href="language/dynamic_expression.km#/"/>
+  <referencedModelingUnits href="persistence/resource.km#/"/>
+  <referencedModelingUnits href="language/reflective_collections.km#/"/>
+  <referencedModelingUnits href="reflection/reflection.km#/"/>
+  <referencedModelingUnits href="kunit/kunit.km#/"/>
+  <referencedModelingUnits href="kunit/assert.km#/"/>
+  <referencedModelingUnits href="language/behavior.km#/"/>
+  <referencedModelingUnits href="utils/stack.km#/"/>
+  <referencedModelingUnits href="io/std_io.km#/"/>
+  <referencedModelingUnits href="standard/primitive_types.km#/"/>
+  <referencedModelingUnits href="#/"/>
+  <referencedModelingUnits href="io/file_io.km#/"/>
+  <referencedModelingUnits href="language/structure.km#/"/>
+  <referencedModelingUnits href="exceptions/exceptions.km#/"/>
+  <referencedModelingUnits href="utils/hashtable.km#/"/>
+</kermeta_language_structure:ModelingUnit>

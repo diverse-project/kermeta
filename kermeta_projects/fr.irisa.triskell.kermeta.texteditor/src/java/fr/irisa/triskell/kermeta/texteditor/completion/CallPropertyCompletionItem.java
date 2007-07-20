@@ -1,4 +1,4 @@
-/* $Id: CallPropertyCompletionItem.java,v 1.3 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: CallPropertyCompletionItem.java,v 1.4 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : CallPropertyCompletionItem.java
 * License : EPL
@@ -13,6 +13,7 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 import org.eclipse.swt.graphics.Image;
 
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+
 
 /**
  * @author Franck Fleurey

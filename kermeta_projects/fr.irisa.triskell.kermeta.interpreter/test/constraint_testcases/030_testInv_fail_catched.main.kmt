@@ -1,0 +1,133 @@
+@mainClass "testInvariant::Main"
+@mainOperation "main"
+
+
+package testInvariant;
+
+
+using kermeta::standard
+using kermeta::exceptions
+using kermeta::kunit
+
+
+class Main inherits TestCase, superMain, superMain2 {
+ 
+ 	@overloadable "true"
+ 	operation main() : Void is do 
+		var tr : TestRunner init TestRunner.new
+		tr.run(Main)
+		tr.printTestResult
+	end
+ 
+ 
+    inv titi is  do
+    	stdio.writeln( "Inv titi : " + str )
+    	str == "titi" 
+    end
+    
+    inv toto is do 
+    	true 
+    end
+
+	reference str : String 
+
+    operation test0() is do
+    
+    	var check : Boolean init false
+    
+        str := "titi"
+        superstr := "supertiti"
+        superstr2 := "supertiti2"
+
+        do
+	        self.checkInvariants
+    		check := true
+    		stdio.writeln("OK for test0")
+        rescue (err : ConstraintViolatedInv)
+             stdio.writeln(str)
+        	stdio.writeln(superstr)
+        	stdio.writeln(superstr2)
+        end
+        
+		assert( check )
+        
+ 	end
+
+    operation test1() is do
+    
+    	var check : Boolean init false
+    
+        str := "not titi"
+        superstr := "supertiti"
+        superstr2 := "supertiti2"
+
+        do
+	        self.checkInvariants
+        rescue (err : ConstraintViolatedInv)
+        	check := true
+        	stdio.writeln("OK for test1")
+		end
+        
+		assert( check )
+        
+ 	end
+ 	
+ 	operation test2() is do
+ 	
+ 		var check : Boolean init false
+ 	
+        str := "titi"
+        superstr := "not supertiti"
+        superstr2 := "supertiti2"
+        
+        do
+        	self.checkInvariants
+        rescue (err : ConstraintViolatedInv)
+			check := true
+			stdio.writeln("OK for test2")
+        end
+       
+		assert( check )
+
+    end
+    
+    
+     operation test3() is do
+ 	
+ 		var check : Boolean init false
+ 	
+        str := "titi"
+        superstr := "supertiti"
+        superstr2 := "not supertiti2"
+        
+        do
+        	self.checkInvariants
+        rescue (err : ConstraintViolatedInv)
+			check := true
+			stdio.writeln("OK for test3")
+        end
+       
+		assert( check )
+
+    end
+}
+
+class superMain
+{
+	reference superstr : String
+	
+	inv superMainInv is do
+		stdio.writeln( "Inv superMainInv : " + superstr )
+		superstr == "supertiti"
+	end
+}
+
+class superMain2
+{
+	reference superstr2 : String
+	
+	inv superMain2Inv is do 
+		stdio.writeln( "Inv superMain2Inv : " + superstr2 )
+		superstr2 == "supertiti2" 
+	end
+}

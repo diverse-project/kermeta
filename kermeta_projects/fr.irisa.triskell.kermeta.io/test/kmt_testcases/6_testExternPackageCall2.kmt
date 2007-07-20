@@ -1,6 +1,8 @@
 package testExternPackage2;
 
-require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
+require "kermeta"
+
+using kermeta::standard
 
 // operation called in another package
 class Test_opcall2 {

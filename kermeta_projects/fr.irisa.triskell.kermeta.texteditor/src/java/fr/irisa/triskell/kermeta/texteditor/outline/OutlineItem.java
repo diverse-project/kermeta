@@ -1,4 +1,4 @@
-/* $Id: OutlineItem.java,v 1.7 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: OutlineItem.java,v 1.8 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineItem.java
 * License : EPL
@@ -11,8 +11,8 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import org.eclipse.swt.graphics.Image;
+import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 public class OutlineItem implements Comparable {
 
     protected fr.irisa.triskell.kermeta.language.structure.Object modelElement;
-    protected OutlineItem parent;
+    protected Object parent;
     
     protected KermetaOutline outline;
     
@@ -40,9 +40,10 @@ public class OutlineItem implements Comparable {
     /**
      * Constructor
      */
-    public OutlineItem(fr.irisa.triskell.kermeta.language.structure.Object modelElement, OutlineItem parent, KermetaOutline outline) {
+    public OutlineItem(fr.irisa.triskell.kermeta.language.structure.Object modelElement, Object parent, KermetaOutline outline) {
         super();
-        if (modelElement == null) throw new Error("Assertion failed : instanciate OutlineItem with null model element");
+        if (modelElement == null) 
+        	throw new Error("Assertion failed : instanciate OutlineItem with null model element");
         this.modelElement = modelElement;
         this.parent = parent;
         this.outline = outline;
@@ -109,23 +110,29 @@ public class OutlineItem implements Comparable {
         KermetaUnit unit = outline.editor.getMcunit();
         if (unit == null) return false;
         if (modelElement instanceof TypeDefinition) {
-            return !unit.typeDefs.containsKey(NamedElementHelper.getQualifiedName((TypeDefinition)modelElement));
+            return ! (unit.getTypeDefinitionByName(NamedElementHelper.getQualifiedName((TypeDefinition)modelElement)) != null);
         }
         else return false;
     }
     
     public boolean isPropertyInherited() {
-        if (modelElement instanceof Property && parent != null && parent.modelElement instanceof ClassDefinition) {
-            return !((ClassDefinition)parent.modelElement).getOwnedAttribute().contains(modelElement);
-        }
-        else return false;
+    	
+    	if ( parent instanceof OutlineItem ) {
+    		OutlineItem parentItem = (OutlineItem) parent;
+    	
+    		if (modelElement instanceof Property && parent != null && parentItem.modelElement instanceof ClassDefinition)
+    			return !((ClassDefinition)parentItem.modelElement).getOwnedAttribute().contains(modelElement);
+    	}
+    	return false;
     }
     
     public boolean isOperationInherited() {
-        if (modelElement instanceof Operation && parent != null && parent.modelElement instanceof ClassDefinition) {
-            return !((ClassDefinition)parent.modelElement).getOwnedOperation().contains(modelElement);
+    	if ( parent instanceof OutlineItem ) {
+    		OutlineItem parentItem = (OutlineItem) parent;
+    		if (modelElement instanceof Operation && parentItem != null && parentItem.modelElement instanceof ClassDefinition)
+    			return !((ClassDefinition)parentItem.modelElement).getOwnedOperation().contains(modelElement);
         }
-        else return false;
+    	return false;
     }
     
     public boolean isPackageEmpty() {
@@ -137,7 +144,10 @@ public class OutlineItem implements Comparable {
     
     public boolean isPackageFullyImported() {
         KermetaUnit unit = outline.editor.getMcunit();
-        if (unit == null) return false;
+       
+        if (unit == null) 
+        	return false;
+        
         if (modelElement instanceof Package) { 
             boolean result = true;
             for (int i=0; i<getChildren().length;i++) {

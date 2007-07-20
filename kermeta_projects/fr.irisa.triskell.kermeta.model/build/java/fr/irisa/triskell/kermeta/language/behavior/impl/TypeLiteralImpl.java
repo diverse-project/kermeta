@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteralImpl.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: TypeLiteralImpl.java,v 1.5 2007-07-20 15:09:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -10,20 +10,13 @@ import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 
-import fr.irisa.triskell.kermeta.language.structure.Type;
-
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->

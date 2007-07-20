@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariable.java,v 1.4 2007-07-11 14:41:50 cfaucher Exp $
+ * $Id: CallVariable.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -24,7 +24,6 @@ package fr.irisa.triskell.kermeta.language.behavior;
  * @generated
  */
 public interface CallVariable extends CallExpression {
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -57,4 +56,5 @@ public interface CallVariable extends CallExpression {
 	 * @generated
 	 */
 	void setIsAtpre(boolean value);
+
 } // CallVariable

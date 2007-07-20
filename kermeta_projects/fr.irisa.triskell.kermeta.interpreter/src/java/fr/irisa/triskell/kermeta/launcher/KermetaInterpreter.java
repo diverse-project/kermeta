@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.29 2007-07-13 07:42:35 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.30 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -21,15 +21,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
+import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
@@ -37,8 +42,10 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -91,29 +98,35 @@ public class KermetaInterpreter {
 	{
 	    super();
 	    
-	    KermetaUnitFactory.getDefaultLoader().unloadAll();
-	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);
+	   // KermetaUnitFactory.getDefaultLoader().unloadAll();
+	   // unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);
 	    //	  we need to set the tracer before loading the unit ;P
-	    if (tracer!= null) unit.setTracer(tracer);
+	   	    
 	    try {
-	        unit.load();
-	    } catch(Throwable t) {
-	        String message ="INTERPRETER INITIALIZATION ERROR : The program "+uri_unit+ " could not be loaded";
-	        internalLog.error(message, t);
-	        throw new Error(message, t);
-	    }
-	    if (unit.messages.hasError())
-	    {
-	        throw new KermetaInterpreterError(unit.messages.getAllMessagesAsString());
+			unit = IOPlugin.getDefault().loadKermetaUnit( uri_unit );
+			// Why to erase the previous tracer ???
+			// If we erase the previous one, the debugger can not retrieve locations where to stop...
+			// if ( tracer != null ) 
+			//	 unit.setTracer(tracer);
+	    } catch (KermetaIOFileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+			return;
+		}
 	    
-	    }
-	    unit.typeCheck(null);
-	    if (unit.messages.hasError())
-	    {
-	        throw new KermetaInterpreterError(unit.messages.getAllMessagesAsString());
-	    
-	    }
-	    
+		KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+		typechecker.checkUnit();
+		
+		if ( ! unit.isErrored() ) {
+			KermetaConstraintChecker constraintchecker = new KermetaConstraintChecker( unit );
+			constraintchecker.checkUnit();
+		}
+		
+		if ( unit.isErrored() )
+	        throw new KermetaInterpreterError( KermetaUnitHelper.getAllMessagesAsString(unit) );
+	    	    
 	    initializeMemory();
 	    initializeEntryPoint();
 	}
@@ -146,8 +159,8 @@ public class KermetaInterpreter {
 	private void initializeMemory() {
 	    //unit.typeCheck();
 	    TypeCheckerContext.initializeTypeChecker(unit);
-	    if (unit.messages.hasError()) {
-	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + unit.messages.getAllMessagesAsString();
+	    if ( unit.isErrored() ) {
+	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + KermetaUnitHelper.getAllMessagesAsString(unit);
 	        internalLog.error(message);
 	        
 	    }
@@ -163,13 +176,15 @@ public class KermetaInterpreter {
 	{
 	    String main_class = null;
 	    String main_operation = null;
-	    Iterator it = unit.rootPackage.getTag().iterator();
+	    Iterator it = unit.getModelingUnit().getOwnedTags().iterator();
 	    while (it.hasNext()) {
 	        Tag tag = (Tag)it.next();
-	        if (tag.getName().equals("mainClass")) 
-	            main_class = tag.getValue(); //remove the " to memorize value
-	        if (tag.getName().equals("mainOperation"))
-	            main_operation = tag.getValue(); //remove the " to memorize value
+	        if ( tag.getName() != null ) {
+	        	if (tag.getName().equals("mainClass")) 
+	        		main_class = tag.getValue(); //remove the " to memorize value
+	        	if (tag.getName().equals("mainOperation"))
+	        		main_operation = tag.getValue(); //remove the " to memorize value
+	        }
 	    }
 	    if (main_class != null && main_operation != null)
 	    {
@@ -179,8 +194,7 @@ public class KermetaInterpreter {
 	    	}
 	    	catch (KermetaInterpreterError e)
 	    	{
-	    		unit.messages.
-	    		addWarning(
+	    		unit.warning(
 	    				"class \"" + "main_class\"" +  
 	    				"or operation \"" + main_operation + "\" given in @mainClass/@mainOperation tags does not seem to be valid;" +
 	    				"(default launch will fail)", null);
@@ -195,7 +209,7 @@ public class KermetaInterpreter {
 	 */
 	public void setEntryPoint(String class_def_qname, String operation_name) throws KermetaInterpreterError {
 	    // get the type definition
-	    TypeDefinition td = unit.typeDefinitionLookup(class_def_qname);
+	    TypeDefinition td = unit.getTypeDefinitionByQualifiedName(class_def_qname);
 	    CallableOperation co = null;
 	    String emessage = "";
 	    // check that it exists and that it is a class
@@ -279,7 +293,7 @@ public class KermetaInterpreter {
 
 	/** call the given operation 
 	 * do nothing if the operation doesn't exist*/
-	public void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String opName) {
+	private void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String opName) {
 		CallableOperation co = new SimpleType(entryClass).getOperationByName(opName); 
 		if (co != null) {
 			Operation setUpOp = co.getOperation();
@@ -331,7 +345,7 @@ public class KermetaInterpreter {
      */
     public void freeJavaMemory()
     {
-    	KermetaUnitFactory.getDefaultLoader().unloadAll();
+//    	KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    unit = null;
 	    memory.freeJavaMemory();
 	    memory = null;

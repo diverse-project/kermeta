@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeVariableValidator.java,v 1.1 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: ModelTypeVariableValidator.java,v 1.2 2007-07-20 15:08:59 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 

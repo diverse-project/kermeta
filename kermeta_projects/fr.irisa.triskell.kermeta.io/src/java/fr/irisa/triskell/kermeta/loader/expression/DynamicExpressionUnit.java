@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.9 2007-05-15 09:10:36 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.10 2007-07-20 15:08:15 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -16,52 +16,51 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.impl.KermetaUnitImpl;
+import org.kermeta.loader.LoadingContext;
+
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 
+import fr.irisa.triskell.kermeta.ast.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
-import fr.irisa.triskell.kermeta.parser.KermetaLexer;
-import fr.irisa.triskell.kermeta.parser.KermetaParser;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
+import fr.irisa.triskell.kermeta.parser.KermetaLexer;
+import fr.irisa.triskell.kermeta.parser.KermetaParser;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
  */
-public class DynamicExpressionUnit extends KermetaUnit {
+public class DynamicExpressionUnit extends KermetaUnitImpl {
 
     
     Expression expression;
     ClassDefinition context;
     ArrayList variables;
+
+    private LoadingContext loadingContext = new LoadingContext();
     
-    /**
-     * @param uri
-     * @param packages
-     */
-    public DynamicExpressionUnit(Hashtable packages) {
-        super("", packages);
-        this.pushContext();
+    public DynamicExpressionUnit(Expression expression) {
+    	this.expression = expression;
     }
     
-    public DynamicExpressionUnit(Hashtable packages, Expression expression, ClassDefinition context) {
-        super("", packages);
-        this.pushContext();
-        this.expression = expression;
-        this.context = context;
+    public DynamicExpressionUnit(KermetaUnit kermetaUnit) {
+    	setModelingUnit( kermetaUnit.getModelingUnit() );
+    	getInternalPackageEntries().addAll( kermetaUnit.getInternalPackageEntries() );
+    	getExternalPackageEntries().addAll( kermetaUnit.getExternalPackageEntries() );
     }
     
     public void resetMessages() {
-    	messages = new KMUnitMessageManager(this);
+    	getMessages().clear();
     }
     
     
@@ -70,12 +69,12 @@ public class DynamicExpressionUnit extends KermetaUnit {
      * FIXME The parser does not correctly parse expression. If an expression is not correct but its beginning matches 
      * a rule, then it is accepted. Of course it should not be. If the parser found a matched rule, it skips the other charachters.
      */
-    private fr.irisa.triskell.kermeta.ast.FExpression parseString(String expression) throws Exception {
+    private FExpression parseString(String expression) throws Exception {
     	
     	KermetaLexer lexer = new KermetaLexer(new StringReader(expression));
     	KermetaParser parser = new KermetaParser(lexer);
     	
-    	fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = parser.asingleExpression().getFExpression();
+    	FExpression  ast_exp = parser.asingleExpression().getFExpression();
 
     	return ast_exp;
     }
@@ -83,46 +82,46 @@ public class DynamicExpressionUnit extends KermetaUnit {
     
     public void parse(String stringExpression, ClassDefinition context, Hashtable formalParams) throws Exception {
         
-   		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = parseString(stringExpression);
+   		FExpression  ast_exp = parseString(stringExpression);
 
    		this.context = context;
         variables = new ArrayList();
         
-        this.current_class = context;
-        this.pushContext();
+        loadingContext.current_class = context;
+        loadingContext.pushContext();
         
         Enumeration e = formalParams.keys();
         while(e.hasMoreElements()) {
             String var_name = (String)e.nextElement();
             Type var_type = (Type)formalParams.get(var_name);
-            VariableDecl var = this.behav_factory.createVariableDecl();
+            VariableDecl var = BehaviorFactory.eINSTANCE.createVariableDecl();
             var.setIdentifier(var_name);
             
-            TypeReference tref = this.behav_factory.createTypeReference();
+            TypeReference tref = BehaviorFactory.eINSTANCE.createTypeReference();
             tref.setType(var_type);
             tref.setUpper(1);
             
             var.setType(tref);
             variables.add(var);
-            this.addSymbol(new KMSymbolVariable(var));
+            loadingContext.addSymbol(new KMSymbolVariable(var));
         }
 		
 		if (ast_exp != null)
-		    expression = KMT2KMExperessionBuilder.process(ast_exp, this);
+		    expression = KMT2KMExperessionBuilder.process(loadingContext, ast_exp, this);
 		else {
-			this.messages.addMessage(new KMUnitError("Expression Parse error.", null, ast_exp));
+			error( "Expression Parse error." );
 		}
     }
     
     public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
-       if (expression == null || messages.unitHasError)
+       if ( expression == null || isErrored() )
            throw new Error("Internal error : cannot type check the expression to eval");
        if (checker == null) {
            checker = new KermetaTypeChecker(this);
        }
        checker.getContext().init(this);
        
-       Hashtable symbs = (Hashtable)this.symbols.peek();
+       Hashtable symbs = loadingContext.peekSymbols();
        KMSymbolVariable var;
        Iterator it = symbs.values().iterator();
        
@@ -202,9 +201,4 @@ public class DynamicExpressionUnit extends KermetaUnit {
     public ArrayList getVariables() {
         return variables;
     }
-
-	@Override
-	public void postLoad() {
-		
-	}
 }

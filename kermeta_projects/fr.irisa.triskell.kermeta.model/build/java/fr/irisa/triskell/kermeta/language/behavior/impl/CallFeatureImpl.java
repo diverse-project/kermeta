@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.5 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: CallFeatureImpl.java,v 1.6 2007-07-20 15:09:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -13,20 +13,14 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Type;
-
-import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,11 +29,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#isIsAtpre <em>Is Atpre</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#getStaticProperty <em>Static Property</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#getStaticOperation <em>Static Operation</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#getStaticEnumLiteral <em>Static Enum Literal</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl#isIsAtpre <em>Is Atpre</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,36 +46,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 */
 	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
-
-	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
-	protected Expression target;
-
-	/**
-	 * The default value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsAtpre()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_ATPRE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsAtpre()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isAtpre = IS_ATPRE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getStaticProperty() <em>Static Property</em>}' reference.
@@ -114,6 +78,36 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	protected EnumerationLiteral staticEnumLiteral;
 
 	/**
+	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTarget()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression target;
+
+	/**
+	 * The default value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_ATPRE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsAtpre() <em>Is Atpre</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsAtpre()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isAtpre = IS_ATPRE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -130,93 +124,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	protected EClass eStaticClass() {
 		return BehaviorPackage.Literals.CALL_FEATURE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Expression getTarget() {
-		if (target != null && target.eIsProxy()) {
-			InternalEObject oldTarget = (InternalEObject)target;
-			target = (Expression)eResolveProxy(oldTarget);
-			if (target != oldTarget) {
-				InternalEObject newTarget = (InternalEObject)target;
-				NotificationChain msgs = oldTarget.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, null);
-				if (newTarget.eInternalContainer() == null) {
-					msgs = newTarget.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__TARGET, oldTarget, target));
-			}
-		}
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Expression basicGetTarget() {
-		return target;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTarget(Expression newTarget, NotificationChain msgs) {
-		Expression oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__TARGET, oldTarget, newTarget);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTarget(Expression newTarget) {
-		if (newTarget != target) {
-			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__TARGET, newTarget, newTarget));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isIsAtpre() {
-		return isAtpre;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsAtpre(boolean newIsAtpre) {
-		boolean oldIsAtpre = isAtpre;
-		isAtpre = newIsAtpre;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__IS_ATPRE, oldIsAtpre, isAtpre));
 	}
 
 	/**
@@ -338,6 +245,93 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Expression getTarget() {
+		if (target != null && target.eIsProxy()) {
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (Expression)eResolveProxy(oldTarget);
+			if (target != oldTarget) {
+				InternalEObject newTarget = (InternalEObject)target;
+				NotificationChain msgs = oldTarget.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, null);
+				if (newTarget.eInternalContainer() == null) {
+					msgs = newTarget.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__TARGET, oldTarget, target));
+			}
+		}
+		return target;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression basicGetTarget() {
+		return target;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTarget(Expression newTarget, NotificationChain msgs) {
+		Expression oldTarget = target;
+		target = newTarget;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__TARGET, oldTarget, newTarget);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTarget(Expression newTarget) {
+		if (newTarget != target) {
+			NotificationChain msgs = null;
+			if (target != null)
+				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
+			if (newTarget != null)
+				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BehaviorPackage.CALL_FEATURE__TARGET, null, msgs);
+			msgs = basicSetTarget(newTarget, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__TARGET, newTarget, newTarget));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsAtpre() {
+		return isAtpre;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAtpre(boolean newIsAtpre) {
+		boolean oldIsAtpre = isAtpre;
+		isAtpre = newIsAtpre;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BehaviorPackage.CALL_FEATURE__IS_ATPRE, oldIsAtpre, isAtpre));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -355,11 +349,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BehaviorPackage.CALL_FEATURE__TARGET:
-				if (resolve) return getTarget();
-				return basicGetTarget();
-			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-				return isIsAtpre() ? Boolean.TRUE : Boolean.FALSE;
 			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
 				if (resolve) return getStaticProperty();
 				return basicGetStaticProperty();
@@ -369,6 +358,11 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
 				if (resolve) return getStaticEnumLiteral();
 				return basicGetStaticEnumLiteral();
+			case BehaviorPackage.CALL_FEATURE__TARGET:
+				if (resolve) return getTarget();
+				return basicGetTarget();
+			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+				return isIsAtpre() ? Boolean.TRUE : Boolean.FALSE;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -381,12 +375,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BehaviorPackage.CALL_FEATURE__TARGET:
-				setTarget((Expression)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-				setIsAtpre(((Boolean)newValue).booleanValue());
-				return;
 			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
 				setStaticProperty((Property)newValue);
 				return;
@@ -395,6 +383,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				return;
 			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
 				setStaticEnumLiteral((EnumerationLiteral)newValue);
+				return;
+			case BehaviorPackage.CALL_FEATURE__TARGET:
+				setTarget((Expression)newValue);
+				return;
+			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+				setIsAtpre(((Boolean)newValue).booleanValue());
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -408,12 +402,6 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BehaviorPackage.CALL_FEATURE__TARGET:
-				setTarget((Expression)null);
-				return;
-			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-				setIsAtpre(IS_ATPRE_EDEFAULT);
-				return;
 			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
 				setStaticProperty((Property)null);
 				return;
@@ -422,6 +410,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				return;
 			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
 				setStaticEnumLiteral((EnumerationLiteral)null);
+				return;
+			case BehaviorPackage.CALL_FEATURE__TARGET:
+				setTarget((Expression)null);
+				return;
+			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+				setIsAtpre(IS_ATPRE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -435,16 +429,16 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BehaviorPackage.CALL_FEATURE__TARGET:
-				return target != null;
-			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
-				return isAtpre != IS_ATPRE_EDEFAULT;
 			case BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY:
 				return staticProperty != null;
 			case BehaviorPackage.CALL_FEATURE__STATIC_OPERATION:
 				return staticOperation != null;
 			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
 				return staticEnumLiteral != null;
+			case BehaviorPackage.CALL_FEATURE__TARGET:
+				return target != null;
+			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+				return isAtpre != IS_ATPRE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

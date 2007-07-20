@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.13 2007-07-03 12:54:56 dtouzet Exp $
+/* $Id: Resource.java,v 1.14 2007-07-20 15:07:48 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : EPL
@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
@@ -83,34 +84,34 @@ public class Resource {
 			RuntimeObject resourceType)
     {
     	// Set "contentMap" property of resource RO
-    	GenericTypeDefinition mapClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::utils::Hashtable");
+    	GenericTypeDefinition mapClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::utils::Hashtable");
     	
-	    GenericTypeDefinition stringClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::String");
-	    fr.irisa.triskell.kermeta.language.structure.Class stringClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    GenericTypeDefinition stringClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::String");
+	    fr.irisa.triskell.kermeta.language.structure.Class stringClass = StructureFactory.eINSTANCE.createClass();
 	    stringClass.setTypeDefinition(stringClassDef);
 
-    	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::reflection::Object");
-	    fr.irisa.triskell.kermeta.language.structure.Class objClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+    	GenericTypeDefinition objClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::reflection::Object");
+	    fr.irisa.triskell.kermeta.language.structure.Class objClass = StructureFactory.eINSTANCE.createClass();
 	    objClass.setTypeDefinition(objClassDef);
 	    
-	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
-	    fr.irisa.triskell.kermeta.language.structure.Class setClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Set");
+	    fr.irisa.triskell.kermeta.language.structure.Class setClass = StructureFactory.eINSTANCE.createClass();
 	    setClass.setTypeDefinition(setClassDef);
 	    
-	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    tvBinding4set.setType(objClass);
 	    tvBinding4set.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
 	    setClass.getTypeParamBinding().add(tvBinding4set);
 	    
-	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4map1 = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4map1 = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    tvBinding4map1.setType(stringClass);
 	    tvBinding4map1.setVariable( (TypeVariable) mapClassDef.getTypeParameter().get(0) );
 	    
-	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4map2 = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4map2 = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    tvBinding4map2.setType(setClass);
 	    tvBinding4map2.setVariable( (TypeVariable) mapClassDef.getTypeParameter().get(1) );
 	    
-	    fr.irisa.triskell.kermeta.language.structure.Class mapClass = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    fr.irisa.triskell.kermeta.language.structure.Class mapClass = StructureFactory.eINSTANCE.createClass();
 	    mapClass.setTypeDefinition(mapClassDef);
 	    mapClass.getTypeParamBinding().add(tvBinding4map1);
 	    mapClass.getTypeParamBinding().add(tvBinding4map2);
@@ -183,15 +184,15 @@ public class Resource {
  				);
         	
         	// Allocate a new RO of type Set<Resource>
-        	GenericTypeDefinition resClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::persistence::Resource");
-    	    fr.irisa.triskell.kermeta.language.structure.Class resClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+        	GenericTypeDefinition resClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::persistence::Resource");
+    	    fr.irisa.triskell.kermeta.language.structure.Class resClass = StructureFactory.eINSTANCE.createClass();
     	    resClass.setTypeDefinition(resClassDef);
     	    
-    	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Set");
-    	    fr.irisa.triskell.kermeta.language.structure.Class setClass = selfRO.getFactory().getMemory().getUnit().struct_factory.createClass();
+    	    GenericTypeDefinition setClassDef  = (GenericTypeDefinition)selfRO.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Set");
+    	    fr.irisa.triskell.kermeta.language.structure.Class setClass = StructureFactory.eINSTANCE.createClass();
     	    setClass.setTypeDefinition(setClassDef);
     	    
-    	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = selfRO.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+    	    fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding tvBinding4set = StructureFactory.eINSTANCE.createTypeVariableBinding();
     	    tvBinding4set.setType(resClass);
     	    tvBinding4set.setVariable( (TypeVariable) setClassDef.getTypeParameter().get(0) );
     	    setClass.getTypeParamBinding().add(tvBinding4set);

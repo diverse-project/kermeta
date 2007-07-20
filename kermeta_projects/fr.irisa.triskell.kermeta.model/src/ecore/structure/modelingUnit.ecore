@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
+  <eSubpackages name="structure" nsPrefix="structure">
+    <eClassifiers xsi:type="ecore:EClass" name="ModelingUnit">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+          eType="#//structure/Package" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"
+          eType="#//structure/Require" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="usings" upperBound="-1"
+          eType="#//structure/Using" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referencedModelingUnits"
+          upperBound="-1" eType="#//structure/ModelingUnit"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="includeFilters" upperBound="-1"
+          eType="#//structure/Filter" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="excludeFilters" upperBound="-1"
+          eType="#//structure/Filter" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Package"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="#//structure/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Using" eSuperTypes="#//structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="#//structure/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Object"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Filter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="#//structure/String"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

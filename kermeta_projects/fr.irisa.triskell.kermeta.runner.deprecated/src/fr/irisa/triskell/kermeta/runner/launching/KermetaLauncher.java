@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.22 2007-03-07 10:01:32 dvojtise Exp $
+/* $Id: KermetaLauncher.java,v 1.23 2007-07-20 15:09:14 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -24,8 +24,6 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
@@ -111,7 +109,7 @@ public class KermetaLauncher
         {
         	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
             //  be sure this value is correctly set           
-        	StdLibKermetaUnitHelper.setURItoDefault();
+        	//StdLibKermetaUnitHelper.setURItoDefault();
             
             Tracer tracer = isDebugMode?createTracer():null;
             
@@ -134,7 +132,7 @@ public class KermetaLauncher
             	else interpreter.launch();
             	interpreter.getKStream().dispose();
     	        interpreter.freeJavaMemory();
-    	        KermetaUnitFactory.resetDefaultLoader();
+    	       // KermetaUnitFactory.resetDefaultLoader();
     	        return null;
             }
             else  // We launch an interpreter with a special "condition"
@@ -205,9 +203,9 @@ public class KermetaLauncher
 	    KermetaInterpreter interpreter = null;
         try
         {
-        	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
+        	String uri = "platform:/resource" + selectedFile.getFullPath().toString();
             //  be sure this value is correctly set        
-        	StdLibKermetaUnitHelper.setURItoDefault();
+        	//StdLibKermetaUnitHelper.setURItoDefault();
             
             Tracer tracer = isDebugMode?createTracer():null;
             
@@ -238,11 +236,13 @@ public class KermetaLauncher
             
             if (isDebugMode == false)
             {
-            	if (isConstraintMode) interpreter.launchConstraint();
-            	else interpreter.launch();
+            	if (isConstraintMode) 
+            		interpreter.launchConstraint();
+            	else 
+            		interpreter.launch();
             	console.dispose();
     	        interpreter.freeJavaMemory();
-    	        KermetaUnitFactory.resetDefaultLoader();
+    	        //KermetaUnitFactory.resetDefaultLoader();
     	        return null;
             }
             else  // We launch an interpreter with a special "condition"

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.5 2007-07-12 07:39:10 cfaucher Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.6 2007-07-20 15:09:04 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -10,7 +10,6 @@ import fr.irisa.triskell.kermeta.language.behavior.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
@@ -68,29 +67,30 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case BehaviorPackage.ASSIGNMENT: return createAssignment();
+			case BehaviorPackage.CONDITIONAL: return createConditional();
+			case BehaviorPackage.LAMBDA_EXPRESSION: return createLambdaExpression();
+			case BehaviorPackage.LAMBDA_PARAMETER: return createLambdaParameter();
+			case BehaviorPackage.TYPE_REFERENCE: return createTypeReference();
+			case BehaviorPackage.CALL_FEATURE: return createCallFeature();
+			case BehaviorPackage.CALL_EXPRESSION: return createCallExpression();
+			case BehaviorPackage.EMPTY_EXPRESSION: return createEmptyExpression();
+			case BehaviorPackage.RAISE: return createRaise();
+			case BehaviorPackage.RESCUE: return createRescue();
 			case BehaviorPackage.BLOCK: return createBlock();
 			case BehaviorPackage.CALL_VARIABLE: return createCallVariable();
-			case BehaviorPackage.CALL_FEATURE: return createCallFeature();
 			case BehaviorPackage.CALL_SUPER_OPERATION: return createCallSuperOperation();
 			case BehaviorPackage.CALL_RESULT: return createCallResult();
 			case BehaviorPackage.CALL_VALUE: return createCallValue();
-			case BehaviorPackage.CONDITIONAL: return createConditional();
-			case BehaviorPackage.RAISE: return createRaise();
-			case BehaviorPackage.RESCUE: return createRescue();
-			case BehaviorPackage.TYPE_REFERENCE: return createTypeReference();
-			case BehaviorPackage.EMPTY_EXPRESSION: return createEmptyExpression();
-			case BehaviorPackage.JAVA_STATIC_CALL: return createJavaStaticCall();
-			case BehaviorPackage.LAMBDA_EXPRESSION: return createLambdaExpression();
-			case BehaviorPackage.LAMBDA_PARAMETER: return createLambdaParameter();
 			case BehaviorPackage.INTEGER_LITERAL: return createIntegerLiteral();
 			case BehaviorPackage.STRING_LITERAL: return createStringLiteral();
 			case BehaviorPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
 			case BehaviorPackage.TYPE_LITERAL: return createTypeLiteral();
 			case BehaviorPackage.VOID_LITERAL: return createVoidLiteral();
+			case BehaviorPackage.ASSIGNMENT: return createAssignment();
+			case BehaviorPackage.JAVA_STATIC_CALL: return createJavaStaticCall();
+			case BehaviorPackage.VARIABLE_DECL: return createVariableDecl();
 			case BehaviorPackage.LOOP: return createLoop();
 			case BehaviorPackage.SELF_EXPRESSION: return createSelfExpression();
-			case BehaviorPackage.VARIABLE_DECL: return createVariableDecl();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -101,9 +101,89 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Assignment createAssignment() {
-		AssignmentImpl assignment = new AssignmentImpl();
-		return assignment;
+	public Conditional createConditional() {
+		ConditionalImpl conditional = new ConditionalImpl();
+		return conditional;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LambdaExpression createLambdaExpression() {
+		LambdaExpressionImpl lambdaExpression = new LambdaExpressionImpl();
+		return lambdaExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LambdaParameter createLambdaParameter() {
+		LambdaParameterImpl lambdaParameter = new LambdaParameterImpl();
+		return lambdaParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeReference createTypeReference() {
+		TypeReferenceImpl typeReference = new TypeReferenceImpl();
+		return typeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallFeature createCallFeature() {
+		CallFeatureImpl callFeature = new CallFeatureImpl();
+		return callFeature;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CallExpression createCallExpression() {
+		CallExpressionImpl callExpression = new CallExpressionImpl();
+		return callExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EmptyExpression createEmptyExpression() {
+		EmptyExpressionImpl emptyExpression = new EmptyExpressionImpl();
+		return emptyExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Raise createRaise() {
+		RaiseImpl raise = new RaiseImpl();
+		return raise;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Rescue createRescue() {
+		RescueImpl rescue = new RescueImpl();
+		return rescue;
 	}
 
 	/**
@@ -124,16 +204,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public CallVariable createCallVariable() {
 		CallVariableImpl callVariable = new CallVariableImpl();
 		return callVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CallFeature createCallFeature() {
-		CallFeatureImpl callFeature = new CallFeatureImpl();
-		return callFeature;
 	}
 
 	/**
@@ -164,86 +234,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public CallValue createCallValue() {
 		CallValueImpl callValue = new CallValueImpl();
 		return callValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Conditional createConditional() {
-		ConditionalImpl conditional = new ConditionalImpl();
-		return conditional;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Raise createRaise() {
-		RaiseImpl raise = new RaiseImpl();
-		return raise;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Rescue createRescue() {
-		RescueImpl rescue = new RescueImpl();
-		return rescue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TypeReference createTypeReference() {
-		TypeReferenceImpl typeReference = new TypeReferenceImpl();
-		return typeReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EmptyExpression createEmptyExpression() {
-		EmptyExpressionImpl emptyExpression = new EmptyExpressionImpl();
-		return emptyExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JavaStaticCall createJavaStaticCall() {
-		JavaStaticCallImpl javaStaticCall = new JavaStaticCallImpl();
-		return javaStaticCall;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LambdaExpression createLambdaExpression() {
-		LambdaExpressionImpl lambdaExpression = new LambdaExpressionImpl();
-		return lambdaExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LambdaParameter createLambdaParameter() {
-		LambdaParameterImpl lambdaParameter = new LambdaParameterImpl();
-		return lambdaParameter;
 	}
 
 	/**
@@ -301,6 +291,36 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Assignment createAssignment() {
+		AssignmentImpl assignment = new AssignmentImpl();
+		return assignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JavaStaticCall createJavaStaticCall() {
+		JavaStaticCallImpl javaStaticCall = new JavaStaticCallImpl();
+		return javaStaticCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableDecl createVariableDecl() {
+		VariableDeclImpl variableDecl = new VariableDeclImpl();
+		return variableDecl;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Loop createLoop() {
 		LoopImpl loop = new LoopImpl();
 		return loop;
@@ -314,16 +334,6 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	public SelfExpression createSelfExpression() {
 		SelfExpressionImpl selfExpression = new SelfExpressionImpl();
 		return selfExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VariableDecl createVariableDecl() {
-		VariableDeclImpl variableDecl = new VariableDeclImpl();
-		return variableDecl;
 	}
 
 	/**

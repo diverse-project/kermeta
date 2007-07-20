@@ -1,5 +1,7 @@
 package testParameterizedClass;
 
+require "http://www.eclipse.org/emf/2002/Ecore"
+
 class A<P1>
 {
 
@@ -12,6 +14,10 @@ class B
 }
 
 class C<P1 : B>
+{
+}
+
+class D<P0, P1 : P0>
 {
 }
 

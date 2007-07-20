@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorItemProviderAdapterFactory.java,v 1.5 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: BehaviorItemProviderAdapterFactory.java,v 1.6 2007-07-20 15:08:28 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -172,6 +172,29 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 		}
 
 		return callFeatureItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.behavior.CallExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected CallExpressionItemProvider callExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.CallExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createCallExpressionAdapter() {
+		if (callExpressionItemProvider == null) {
+			callExpressionItemProvider = new CallExpressionItemProvider(this);
+		}
+
+		return callExpressionItemProvider;
 	}
 
 	/**
@@ -710,29 +733,30 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
-		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
+		if (conditionalItemProvider != null) conditionalItemProvider.dispose();
+		if (lambdaExpressionItemProvider != null) lambdaExpressionItemProvider.dispose();
+		if (lambdaParameterItemProvider != null) lambdaParameterItemProvider.dispose();
+		if (typeReferenceItemProvider != null) typeReferenceItemProvider.dispose();
+		if (callFeatureItemProvider != null) callFeatureItemProvider.dispose();
+		if (callExpressionItemProvider != null) callExpressionItemProvider.dispose();
+		if (emptyExpressionItemProvider != null) emptyExpressionItemProvider.dispose();
+		if (raiseItemProvider != null) raiseItemProvider.dispose();
+		if (rescueItemProvider != null) rescueItemProvider.dispose();
 		if (blockItemProvider != null) blockItemProvider.dispose();
 		if (callVariableItemProvider != null) callVariableItemProvider.dispose();
-		if (callFeatureItemProvider != null) callFeatureItemProvider.dispose();
 		if (callSuperOperationItemProvider != null) callSuperOperationItemProvider.dispose();
 		if (callResultItemProvider != null) callResultItemProvider.dispose();
 		if (callValueItemProvider != null) callValueItemProvider.dispose();
-		if (conditionalItemProvider != null) conditionalItemProvider.dispose();
-		if (raiseItemProvider != null) raiseItemProvider.dispose();
-		if (rescueItemProvider != null) rescueItemProvider.dispose();
-		if (typeReferenceItemProvider != null) typeReferenceItemProvider.dispose();
-		if (emptyExpressionItemProvider != null) emptyExpressionItemProvider.dispose();
-		if (javaStaticCallItemProvider != null) javaStaticCallItemProvider.dispose();
-		if (lambdaExpressionItemProvider != null) lambdaExpressionItemProvider.dispose();
-		if (lambdaParameterItemProvider != null) lambdaParameterItemProvider.dispose();
 		if (integerLiteralItemProvider != null) integerLiteralItemProvider.dispose();
 		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
 		if (booleanLiteralItemProvider != null) booleanLiteralItemProvider.dispose();
 		if (typeLiteralItemProvider != null) typeLiteralItemProvider.dispose();
 		if (voidLiteralItemProvider != null) voidLiteralItemProvider.dispose();
+		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
+		if (javaStaticCallItemProvider != null) javaStaticCallItemProvider.dispose();
+		if (variableDeclItemProvider != null) variableDeclItemProvider.dispose();
 		if (loopItemProvider != null) loopItemProvider.dispose();
 		if (selfExpressionItemProvider != null) selfExpressionItemProvider.dispose();
-		if (variableDeclItemProvider != null) variableDeclItemProvider.dispose();
 	}
 
 }

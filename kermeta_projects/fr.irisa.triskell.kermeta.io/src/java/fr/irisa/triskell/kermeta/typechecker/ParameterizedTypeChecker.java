@@ -1,4 +1,4 @@
-/* $Id: ParameterizedTypeChecker.java,v 1.4 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: ParameterizedTypeChecker.java,v 1.5 2007-07-20 15:08:03 ftanguy Exp $
  * Project : Kermeta io
  * File : ParametrizedTypeChecker.java
  * License : EPL
@@ -10,8 +10,11 @@
  */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
+
 import java.util.Hashtable;
 import java.util.Iterator;
+
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -25,7 +28,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ModelTypeVariableHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 /**
@@ -73,7 +75,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 				//TypeCheckerContext.initializeTypeChecker(StdLibKermetaUnitHelper.getKermetaUnit());
 				if (var instanceof ObjectTypeVariable) {
 					if (!TypeConformanceChecker.conforms(required, provided)) {
-						unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+						unit.error("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
 					}
 				} else if (var instanceof ModelTypeVariable) {
 					if (provided instanceof ModelType) {
@@ -84,7 +86,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 							if(matcher.getErrors().size() > 0){
 								msg += "\n   " + matcher.getErrors().get(0).getMessage();
 							}
-							unit.messages.addError(msg, codeContext);
+							unit.error(msg, codeContext);
 						} else {
 							//TODO Populate static bindings somehow to bind each required::virtual to its match
 							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
@@ -106,7 +108,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 							if(matcher.getErrors().size() > 0){
 								msg += "\n   " + matcher.getErrors().get(0).getMessage();
 							}
-							unit.messages.addError(msg, codeContext);
+							unit.error(msg, codeContext);
 						} else {
 							//TODO Populate static bindings somehow to bind each required::virtual to its match
 							for (fr.irisa.triskell.kermeta.language.structure.Class e : matcher.getResultMatch().keySet()) {
@@ -122,7 +124,7 @@ public class ParameterizedTypeChecker extends KermetaOptimizedVisitor {
 							}
 						}
 					} else {
-						unit.messages.addError("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
+						unit.error("Type " + FTypePrettyPrinter.getInstance().accept(provided) + " is not a conformant type binding for the variable " + var.getName() + " : " + FTypePrettyPrinter.getInstance().accept(required) + ".", codeContext);
 					}
 				}
 			}

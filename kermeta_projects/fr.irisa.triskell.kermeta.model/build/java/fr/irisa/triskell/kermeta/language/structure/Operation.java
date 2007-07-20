@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.4 2007-07-11 14:41:51 cfaucher Exp $
+ * $Id: Operation.java,v 1.5 2007-07-20 15:09:03 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -18,15 +18,15 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#isIsAbstract <em>Is Abstract</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getRaisedException <em>Raised Exception</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPre <em>Pre</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPost <em>Post</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getBody <em>Body</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getSuperOperation <em>Super Operation</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getOwningClass <em>Owning Class</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getTypeParameter <em>Type Parameter</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getRaisedException <em>Raised Exception</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPre <em>Pre</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPost <em>Post</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Operation#isIsAbstract <em>Is Abstract</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,102 +41,6 @@ public interface Operation extends MultiplicityElement {
 	 * @generated
 	 */
 	String copyright = "IRISA / INRIA / Universite de Rennes 1";
-
-	/**
-	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Abstract</em>' attribute.
-	 * @see #setIsAbstract(boolean)
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_IsAbstract()
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
-	 * @generated
-	 */
-	boolean isIsAbstract();
-
-	/**
-	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Operation#isIsAbstract <em>Is Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Abstract</em>' attribute.
-	 * @see #isIsAbstract()
-	 * @generated
-	 */
-	void setIsAbstract(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Raised Exception</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Type}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Raised Exception</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Raised Exception</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_RaisedException()
-	 * @model
-	 * @generated
-	 */
-	EList<Type> getRaisedException();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Parameter}.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation <em>Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Parameter</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwnedParameter()
-	 * @see fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation
-	 * @model opposite="operation" containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<Parameter> getOwnedParameter();
-
-	/**
-	 * Returns the value of the '<em><b>Pre</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner <em>Pre Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Pre</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pre</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
-	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
-	 * @model opposite="preOwner" containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<Constraint> getPre();
-
-	/**
-	 * Returns the value of the '<em><b>Post</b></em>' containment reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
-	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner <em>Post Owner</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Post</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Post</em>' containment reference list.
-	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
-	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
-	 * @model opposite="postOwner" containment="true" resolveProxies="true"
-	 * @generated
-	 */
-	EList<Constraint> getPost();
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
@@ -233,5 +137,101 @@ public interface Operation extends MultiplicityElement {
 	 * @generated
 	 */
 	EList<TypeVariable> getTypeParameter();
+
+	/**
+	 * Returns the value of the '<em><b>Raised Exception</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Type}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Raised Exception</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Raised Exception</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_RaisedException()
+	 * @model
+	 * @generated
+	 */
+	EList<Type> getRaisedException();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Parameter}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Parameter</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Parameter</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_OwnedParameter()
+	 * @see fr.irisa.triskell.kermeta.language.structure.Parameter#getOperation
+	 * @model opposite="operation" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<Parameter> getOwnedParameter();
+
+	/**
+	 * Returns the value of the '<em><b>Pre</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner <em>Pre Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pre</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pre</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
+	 * @model opposite="preOwner" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<Constraint> getPre();
+
+	/**
+	 * Returns the value of the '<em><b>Post</b></em>' containment reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner <em>Post Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Post</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Post</em>' containment reference list.
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
+	 * @model opposite="postOwner" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<Constraint> getPost();
+
+	/**
+	 * Returns the value of the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Abstract</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Abstract</em>' attribute.
+	 * @see #setIsAbstract(boolean)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_IsAbstract()
+	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 * @generated
+	 */
+	boolean isIsAbstract();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Operation#isIsAbstract <em>Is Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Abstract</em>' attribute.
+	 * @see #isIsAbstract()
+	 * @generated
+	 */
+	void setIsAbstract(boolean value);
 
 } // Operation

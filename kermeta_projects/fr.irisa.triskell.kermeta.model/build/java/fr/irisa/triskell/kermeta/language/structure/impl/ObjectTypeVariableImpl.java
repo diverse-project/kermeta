@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectTypeVariableImpl.java,v 1.3 2007-07-11 14:41:53 cfaucher Exp $
+ * $Id: ObjectTypeVariableImpl.java,v 1.4 2007-07-20 15:09:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 

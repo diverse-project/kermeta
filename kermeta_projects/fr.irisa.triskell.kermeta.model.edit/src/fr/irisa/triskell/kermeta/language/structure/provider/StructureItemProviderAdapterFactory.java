@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureItemProviderAdapterFactory.java,v 1.10 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: StructureItemProviderAdapterFactory.java,v 1.11 2007-07-20 15:08:26 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -451,6 +451,52 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.NamedElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NamedElementItemProvider namedElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.NamedElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNamedElementAdapter() {
+		if (namedElementItemProvider == null) {
+			namedElementItemProvider = new NamedElementItemProvider(this);
+		}
+
+		return namedElementItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.TypedElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypedElementItemProvider typedElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.TypedElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypedElementAdapter() {
+		if (typedElementItemProvider == null) {
+			typedElementItemProvider = new TypedElementItemProvider(this);
+		}
+
+		return typedElementItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ProductType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -566,6 +612,29 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.DataType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataTypeItemProvider dataTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.DataType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataTypeAdapter() {
+		if (dataTypeItemProvider == null) {
+			dataTypeItemProvider = new DataTypeItemProvider(this);
+		}
+
+		return dataTypeItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -609,6 +678,98 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 		}
 
 		return virtualTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Require} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RequireItemProvider requireItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Require}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRequireAdapter() {
+		if (requireItemProvider == null) {
+			requireItemProvider = new RequireItemProvider(this);
+		}
+
+		return requireItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Using} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected UsingItemProvider usingItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Using}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createUsingAdapter() {
+		if (usingItemProvider == null) {
+			usingItemProvider = new UsingItemProvider(this);
+		}
+
+		return usingItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ModelingUnitItemProvider modelingUnitItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.ModelingUnit}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createModelingUnitAdapter() {
+		if (modelingUnitItemProvider == null) {
+			modelingUnitItemProvider = new ModelingUnitItemProvider(this);
+		}
+
+		return modelingUnitItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.structure.Filter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FilterItemProvider filterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Filter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFilterAdapter() {
+		if (filterItemProvider == null) {
+			filterItemProvider = new FilterItemProvider(this);
+		}
+
+		return filterItemProvider;
 	}
 
 	/**
@@ -733,30 +894,37 @@ public class StructureItemProviderAdapterFactory extends StructureAdapterFactory
 	 * @generated
 	 */
 	public void dispose() {
-		if (classItemProvider != null) classItemProvider.dispose();
 		if (objectItemProvider != null) objectItemProvider.dispose();
-		if (modelItemProvider != null) modelItemProvider.dispose();
-		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
+		if (multiplicityElementItemProvider != null) multiplicityElementItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (typeItemProvider != null) typeItemProvider.dispose();
 		if (enumerationLiteralItemProvider != null) enumerationLiteralItemProvider.dispose();
 		if (typeVariableBindingItemProvider != null) typeVariableBindingItemProvider.dispose();
-		if (multiplicityElementItemProvider != null) multiplicityElementItemProvider.dispose();
-		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
-		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
+		if (classItemProvider != null) classItemProvider.dispose();
+		if (modelItemProvider != null) modelItemProvider.dispose();
+		if (modelTypeItemProvider != null) modelTypeItemProvider.dispose();
+		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
+		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
+		if (typedElementItemProvider != null) typedElementItemProvider.dispose();
+		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
+		if (functionTypeItemProvider != null) functionTypeItemProvider.dispose();
+		if (productTypeItemProvider != null) productTypeItemProvider.dispose();
 		if (packageItemProvider != null) packageItemProvider.dispose();
+		if (typeDefinitionItemProvider != null) typeDefinitionItemProvider.dispose();
+		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
+		if (dataTypeItemProvider != null) dataTypeItemProvider.dispose();
+		if (requireItemProvider != null) requireItemProvider.dispose();
+		if (usingItemProvider != null) usingItemProvider.dispose();
+		if (modelingUnitItemProvider != null) modelingUnitItemProvider.dispose();
+		if (filterItemProvider != null) filterItemProvider.dispose();
+		if (enumerationItemProvider != null) enumerationItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
 		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
 		if (tagItemProvider != null) tagItemProvider.dispose();
 		if (constraintItemProvider != null) constraintItemProvider.dispose();
-		if (classDefinitionItemProvider != null) classDefinitionItemProvider.dispose();
-		if (objectTypeVariableItemProvider != null) objectTypeVariableItemProvider.dispose();
 		if (modelTypeVariableItemProvider != null) modelTypeVariableItemProvider.dispose();
 		if (virtualTypeItemProvider != null) virtualTypeItemProvider.dispose();
-		if (productTypeItemProvider != null) productTypeItemProvider.dispose();
-		if (functionTypeItemProvider != null) functionTypeItemProvider.dispose();
-		if (voidTypeItemProvider != null) voidTypeItemProvider.dispose();
 	}
 
 }

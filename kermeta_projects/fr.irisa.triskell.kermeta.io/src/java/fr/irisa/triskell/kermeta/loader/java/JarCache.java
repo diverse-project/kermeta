@@ -1,4 +1,4 @@
-/*$Id: JarCache.java,v 1.1 2007-05-16 13:44:26 dvojtise Exp $
+/*$Id: JarCache.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io
 * File : 	JavaLoaderCache.java
 * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TagHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import org.kermeta.io.KermetaUnit;
 
 /**
  * This class implements a cache for various request on the java jar
@@ -32,6 +33,14 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  */
 public class JarCache {
 
+	
+	static private Hashtable <KermetaUnit, JarCache> caches = new Hashtable <KermetaUnit, JarCache> (); 
+	
+	static public JarCache getJarCache(KermetaUnit kermetaUnit) {
+		return caches.get(kermetaUnit);
+	}
+	
+	
 	// The cache structure are there but will be filled only on request due to the memory required to keep it
 	// structure used to optimize the retreival of java methods from a kermeta operation
 	protected Hashtable<Operation,Method> cachedJavaMethods = new Hashtable<Operation,Method>();
@@ -43,14 +52,18 @@ public class JarCache {
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("JarCache");
 	
 	
-	protected JarUnit jarUnit = null;
+	protected KermetaUnit kermetaUnit = null;
+	
+	private ClassLoader classLoader = null;
 
 	/**
 	 * Constructor
 	 */
-	public JarCache(JarUnit jarUnit) {
+	public JarCache(KermetaUnit kermetaUnit, ClassLoader classLoader) {
 		super();
-		this.jarUnit = jarUnit;
+		this.kermetaUnit = kermetaUnit;
+		this.classLoader = classLoader;
+		caches.put(kermetaUnit, this);
 	}
 	
 	/**
@@ -71,13 +84,13 @@ public class JarCache {
     		Tag indextag = TagHelper.findTagFromName(op, Jar2KMPass.JAVAMETHODINDEX_TAG_NAME);
     		Integer index = new Integer(indextag.getValue());
 			try{			    		
-				Class currentClass = jarUnit.cl.loadClass(javaQualifiedName);
+				Class currentClass = classLoader.loadClass(javaQualifiedName);
 				Method[] methods = currentClass.getDeclaredMethods();
 				result = methods[index];
 				// put it in the cache for later use
 				cachedJavaMethods.put(op, result);
 			} catch (ClassNotFoundException e) {
-				internalLog.error("ClassNotFound in jar "+jarUnit.platformURI.toFileString() +" looking for "+javaQualifiedName ,e);				
+				internalLog.error("ClassNotFound in jar "+kermetaUnit.getUri() +" looking for "+javaQualifiedName ,e);				
 			} 
 		}
 		return result;
@@ -93,13 +106,13 @@ public class JarCache {
     		Tag indextag = TagHelper.findTagFromName(op, Jar2KMPass.JAVACONSTRUCTORINDEX_TAG_NAME);
     		Integer index = new Integer(indextag.getValue());
 			try{			    		
-				Class currentClass = jarUnit.cl.loadClass(javaQualifiedName);
+				Class currentClass = classLoader.loadClass(javaQualifiedName);
 				Constructor[] constructors = currentClass.getConstructors();
 				result = constructors[index];
 				// put it in the cache for later use
 				cachedJavaConstructors.put(op, result);
 			} catch (ClassNotFoundException e) {
-				internalLog.error("ClassNotFound in jar "+jarUnit.platformURI.toFileString() +" looking for "+javaQualifiedName ,e);				
+				internalLog.error("ClassNotFound in jar "+kermetaUnit.getUri() +" looking for "+javaQualifiedName ,e);				
 			}
 		}
 		return result;
@@ -114,16 +127,16 @@ public class JarCache {
     		String javaQualifiedName = typeQualifiedName.replaceAll("::",".");
     		
 			try{			    		
-				Class currentClass = jarUnit.cl.loadClass(javaQualifiedName);
+				Class currentClass = classLoader.loadClass(javaQualifiedName);
 				result = currentClass.getDeclaredField(prop.getName());
 				// put it in the cache for later use
 				cachedJavaFields.put(prop, result);
 			} catch (ClassNotFoundException e) {
-				internalLog.error("ClassNotFound in jar "+jarUnit.platformURI.toFileString() +" looking for "+javaQualifiedName ,e);				
+				internalLog.error("ClassNotFound in jar "+kermetaUnit.getUri() +" looking for "+javaQualifiedName ,e);				
 			} catch (SecurityException e) {
-				internalLog.error("ClassNotFound in jar "+jarUnit.platformURI.toFileString() +" looking for "+javaQualifiedName ,e);
+				internalLog.error("ClassNotFound in jar "+kermetaUnit.getUri() +" looking for "+javaQualifiedName ,e);
 			} catch (NoSuchFieldException e) {
-				internalLog.error("Field " + prop.getName() + " not found in java class "+ javaQualifiedName +" in jar "+jarUnit.platformURI.toFileString() ,e);
+				internalLog.error("Field " + prop.getName() + " not found in java class "+ javaQualifiedName +" in jar "+kermetaUnit.getUri() ,e);
 			}
 		}
 		return result;

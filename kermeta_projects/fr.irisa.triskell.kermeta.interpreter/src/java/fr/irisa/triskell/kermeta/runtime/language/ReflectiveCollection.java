@@ -1,4 +1,4 @@
-/* $Id: ReflectiveCollection.java,v 1.11 2006-12-07 09:35:29 dvojtise Exp $
+/* $Id: ReflectiveCollection.java,v 1.12 2007-07-20 15:07:47 ftanguy Exp $
  * Project   : Kermeta interpreter
  * File      : ReflectiveCollection.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Jul 7, 2005
  * Authors       :
  *      Franck Fleurey <ffleurey@irisa.fr> 
- *		Zoé Drey <zdrey@irisa.fr>
+ *		Zoï¿½ Drey <zdrey@irisa.fr>
  *		Cyril Faucher <cfaucher@irisa.fr>
  * Description : 
  * 		Implementation of Kermeta base type ReflectiveCollection
@@ -20,17 +20,19 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
+import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 /**
  * Reflective collection is the java side (wrapper for add/remove/clear base methods
@@ -179,11 +181,11 @@ public class ReflectiveCollection {
 	    
 	    if (metaClass == null) {
 	        
-	    	fr.irisa.triskell.kermeta.language.structure.Class reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createClass();
+	    	fr.irisa.triskell.kermeta.language.structure.Class reflect_class = StructureFactory.eINSTANCE.createClass();
 	        
-		    reflect_class.setTypeDefinition( (ClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveCollection"));
+		    reflect_class.setTypeDefinition( (ClassDefinition) object.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::language::ReflectiveCollection"));
 		    
-		    TypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+		    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 		    
 		    binding.setVariable((TypeVariable)reflect_class.getTypeDefinition().getTypeParameter().get(0));
 		    

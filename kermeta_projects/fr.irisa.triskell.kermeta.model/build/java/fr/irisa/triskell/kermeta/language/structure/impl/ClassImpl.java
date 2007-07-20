@@ -2,31 +2,19 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.5 2007-07-11 14:41:52 cfaucher Exp $
+ * $Id: ClassImpl.java,v 1.6 2007-07-20 15:09:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
-import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
-import org.eclipse.emf.common.notify.Notification;
-
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -271,25 +259,30 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 
 	/**
 	 * Unparameterized classes with the same type definition are equal
+	 * 
 	 * @generated NOT
 	 */
 	public boolean equals(Object o) {
 		if (super.equals(o)) {
 			return true;
 		} else if ((o instanceof fr.irisa.triskell.kermeta.language.structure.Class)
-				&& (null != ((fr.irisa.triskell.kermeta.language.structure.Class) o).getTypeDefinition())
+				&& (null != ((fr.irisa.triskell.kermeta.language.structure.Class) o)
+						.getTypeDefinition())
 				&& (null != getTypeDefinition())
-				&& ((fr.irisa.triskell.kermeta.language.structure.Class) o).getTypeDefinition().equals(getTypeDefinition())
-				&& ((fr.irisa.triskell.kermeta.language.structure.Class) o).getTypeDefinition().getTypeParameter().isEmpty()
+				&& ((fr.irisa.triskell.kermeta.language.structure.Class) o)
+						.getTypeDefinition().equals(getTypeDefinition())
+				&& ((fr.irisa.triskell.kermeta.language.structure.Class) o)
+						.getTypeDefinition().getTypeParameter().isEmpty()
 				&& getTypeDefinition().getTypeParameter().isEmpty()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Objects that are equals() should always yield the same hashCode()
+	 * 
 	 * @generated NOT
 	 */
 	public int hashCode() {
@@ -298,10 +291,11 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 			return super.hashCode();
 		} else {
 			int code = 11;
-			code += null == getTypeDefinition() ? 0 : 31 * getTypeDefinition().hashCode();
+			code += null == getTypeDefinition() ? 0 : 31 * getTypeDefinition()
+					.hashCode();
 			return code;
 		}
-		
+
 	}
-	
+
 } //ClassImpl

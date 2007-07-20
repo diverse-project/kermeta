@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallValidator.java,v 1.1 2007-07-11 14:41:49 cfaucher Exp $
+ * $Id: JavaStaticCallValidator.java,v 1.2 2007-07-20 15:08:56 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 

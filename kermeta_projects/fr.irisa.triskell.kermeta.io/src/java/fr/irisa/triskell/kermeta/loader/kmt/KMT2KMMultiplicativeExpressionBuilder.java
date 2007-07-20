@@ -1,10 +1,15 @@
 /*
- * Created on 6 févr. 2005
+ * Created on 6 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+
 import java.util.Hashtable;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
@@ -12,9 +17,9 @@ import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.MultiplicativeExpression;
 import fr.irisa.triskell.kermeta.ast.MultiplicativeOp;
 import fr.irisa.triskell.kermeta.ast.UnaryExpression;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 
 /**
@@ -27,9 +32,9 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 
-	public static Expression process(MultiplicativeExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, MultiplicativeExpression node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMMultiplicativeExpressionBuilder visitor = new KMT2KMMultiplicativeExpressionBuilder(builder);
+		KMT2KMMultiplicativeExpressionBuilder visitor = new KMT2KMMultiplicativeExpressionBuilder(builder, context);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -49,8 +54,8 @@ public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMMultiplicativeExpressionBuilder(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMMultiplicativeExpressionBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -62,14 +67,14 @@ public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof UnaryExpression) {
 				if (operator == null) {
-					result = KMT2KMUnaryExpressionBuilder.process((UnaryExpression)children[i], builder);
+					result = KMT2KMUnaryExpressionBuilder.process(context, (UnaryExpression)children[i], builder);
 				}
 				else {
-					CallFeature call = builder.behav_factory.createCallFeature();
+					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMUnaryExpressionBuilder.process((UnaryExpression)children[i], builder));
+					call.getParameters().add(KMT2KMUnaryExpressionBuilder.process(context, (UnaryExpression)children[i], builder));
 					result = call;
 				}
 			}

@@ -1,4 +1,4 @@
-/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.7 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.8 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL

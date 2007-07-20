@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.10 2006-03-03 15:21:25 dvojtise Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.11 2007-07-20 15:08:39 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -23,13 +23,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
+
+import javax.naming.InitialContext;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -39,7 +46,14 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class ExternJavaClassGenerator extends KermetaVisitor {
 
-	KermetaUnit unit;
+	private KermetaUnit unit;
+	
+	private IOPlugin ioPlugin = null;
+	
+	private void initialize() {
+		IOPlugin.LOCAL_USE = true;
+		ioPlugin = new IOPlugin();
+	}
 	
 	public String out_dir = "src/java";
 	
@@ -50,22 +64,27 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		super();
 	}
 	
-	public void loadmodel() {
-		loadmodelfromfile("src/kermeta/Standard.kmt");
+	public void loadmodel() throws KermetaIOFileNotFoundException, URIMalformedException {
+		loadmodelfromfile( IOPlugin.FRAMEWORK_KM_URI );
 	}
 	
-	public void loadmodelfromfile(String kmt_filename) {
-	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kmt_filename);
+	public void loadmodelfromfile(String fileName) throws KermetaIOFileNotFoundException, URIMalformedException {
+		unit = IOPlugin.getDefault().getKermetaUnit(fileName);
+//	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kmt_filename);
 		unit.load();
-		if (unit.messages.unitHasError) {
-			System.out.println(unit.messages.getErrors().size() + " Load error : " + unit.messages.getMessagesAsString());
+		if ( unit.isErrored() ) {
+			System.out.println( KermetaUnitHelper.getErrors(unit).size() + " Load error : " + KermetaUnitHelper.getAllErrorsAsString(unit));
 		}
-		Package pkg = (Package)unit.packageLookup("kermeta");
-		this.accept(pkg);
+		
+		accept( unit.getModelingUnit() );
+		
+		for ( KermetaUnit importedUnit : KermetaUnitHelper.getAllImportedKermetaUnits( unit ) )
+			accept( importedUnit.getModelingUnit() );
+		
 		Enumeration e = classes.keys();
 		while(e.hasMoreElements()) {
 			String code = generateclass((String)e.nextElement());
-		//	System.out.println(code);
+			//	System.out.println(code);
 		}
 	}
 	
@@ -108,25 +127,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 			}
 			
 		}
-		
-		/*
-		String createcode = getCreateTemplate();
-		createcode = createcode.replaceAll("CLASSNAME", cname);
-		
-		out = new File(out_dir + "/fr/irisa/triskell/kermeta/runtime/factory/" + cname + "CreationCommand.java");
-		
-		if (!out.exists()) {
-			try {
-				BufferedWriter w = new BufferedWriter(new FileWriter(out));
-				w.write(createcode);
-				w.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		*/
+
 		return result;
 	}
 	
@@ -203,17 +204,20 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	 * we assume that the first args is a kermeta file, and we only generate its classes. 
 	 */
 	public static void main(String[] args) {
-	    ExternJavaClassGenerator g = new ExternJavaClassGenerator();
-	    if (args.length == 0)
-	        g.loadmodel();
-	    else
-	    {
-	        File f = new File(args[0]);
-	        if (f.exists())
-	            g.loadmodelfromfile(args[0]);
-	        else
-	            System.err.println("'"+args[0]+"' is not a valid file name");
-	    }
+		ExternJavaClassGenerator g = new ExternJavaClassGenerator();
+		g.initialize();
+	    
+	    try {
+	    	if (args.length == 0)
+	    		g.loadmodel();
+	    	else
+	        	g.loadmodelfromfile(args[0]);
+		} catch (KermetaIOFileNotFoundException e) {
+		    System.err.println("'"+args[0]+"' is not a valid file name");
+		    //e.printStackTrace();
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

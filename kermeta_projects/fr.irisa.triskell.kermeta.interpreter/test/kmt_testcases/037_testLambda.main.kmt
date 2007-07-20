@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.15 2005-09-27 15:47:49 dvojtise Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.16 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -27,7 +27,7 @@ using kermeta::standard
 
 //alias FunctionType : kermeta::language::structure::FunctionType;
 
-class TestLambda inherits kermeta::kunit::TestSuite
+class TestLambda inherits kermeta::kunit::TestCase
 {
 
 	operation testNoLambda() : kermeta::standard::Integer is do

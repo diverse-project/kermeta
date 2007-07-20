@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.16 2007-05-30 11:28:45 jsteel Exp $
+/* $Id: KMT2KMPass3.java,v 1.17 2007-07-20 15:08:06 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -12,35 +12,21 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Stack;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.ast.AbstractModifier;
-import fr.irisa.triskell.kermeta.ast.ClassDecl;
-import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
-import fr.irisa.triskell.kermeta.ast.EnumDecl;
-import fr.irisa.triskell.kermeta.ast.EnumLiteral;
-import fr.irisa.triskell.kermeta.ast.KermetaASTHelper;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
-import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
-import fr.irisa.triskell.kermeta.ast.Operation;
-import fr.irisa.triskell.kermeta.ast.OperationBody;
-import fr.irisa.triskell.kermeta.ast.Param;
-import fr.irisa.triskell.kermeta.ast.Property;
-import fr.irisa.triskell.kermeta.ast.PropertyBody;
-import fr.irisa.triskell.kermeta.ast.PropertyKind;
-import fr.irisa.triskell.kermeta.ast.QualifiedID;
-import fr.irisa.triskell.kermeta.ast.ReadOnlyModifier;
-import fr.irisa.triskell.kermeta.ast.Type;
-import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
-import fr.irisa.triskell.kermeta.ast.UsingStmt;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.ast.*;
+import fr.irisa.triskell.kermeta.ast.helper.KermetaASTHelper;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
@@ -49,14 +35,15 @@ import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 //import fr.irisa.triskell.kermeta.language.structure.FType;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.modelhelper.TypeHelper;
 
-import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
@@ -84,9 +71,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass3(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMPass3(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
+		
 	
 	/*
 	* *******************************************************
@@ -98,22 +86,27 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.AbstractModifier)
 	 */
 	public boolean beginVisit(AbstractModifier abstractModifier) {
-		builder.current_class.setIsAbstract(true);
+		context.current_class.setIsAbstract(true);
 		return super.beginVisit(abstractModifier);
 	}
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
-		builder.pushContext();
-		builder.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
+		context.pushContext();
+		try {
+			context.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
+			context.current_class.getName();
+		} catch (Exception e) {
+			context.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
+		}
 		currentClassIsAspect = KermetaASTHelper.isAnAspect(classDecl);
-		internalLog.debug(builder.current_class.getName() + " isAspect="+currentClassIsAspect + " from " +builder.getUri());
+		internalLog.debug(context.current_class.getName() + " isAspect="+currentClassIsAspect + " from " +builder.getUri());
 //		 add type variables to the context
-		Iterator tvs = builder.current_class.getTypeParameter().iterator();
-		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
+		Iterator tvs = context.current_class.getTypeParameter().iterator();
+		while(tvs.hasNext()) context.addTypeVar((TypeVariable)tvs.next());
 		
-		builder.current_class.setIsAbstract(false); // false by default
+		context.current_class.setIsAbstract(false); // false by default
 		
 		// super types - should be classes
 		if (classDecl.getSuperTypes() != null) {
@@ -121,27 +114,42 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			for(int i=0; i<supertypes.length; i++) {
 				//System.out.println(builder.current_class.getFName() +" Node in super type : " + supertypes[i].getClass().getName());
 				if (supertypes[i] instanceof Type) {
-					fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process((Type)supertypes[i], builder);
+					fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, (Type)supertypes[i], builder);
 					//System.out.println(builder.current_class.getFName() + " Found a super type : " + supertype.getFName() + " : " + supertype.getClass().getName());
 					if (!(supertype instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 						if  (!(supertype instanceof VirtualType)) {
-							builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).",(KermetaASTNode)supertypes[i]));
+							//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).",(KermetaASTNode)supertypes[i]));
+							builder.error("PASS 3 : Class '"+ context.current_class.getName()+"' - A class can only inherit from classes and/or virtual types ("+supertype+" is neither).");
 							return false;
 						}
 					}
-					EList tmpsts = builder.current_class.getSuperType();
+					EList tmpsts = context.current_class.getSuperType();
 					for(int a=0;a<tmpsts.size();a++) {
 						if (((fr.irisa.triskell.kermeta.language.structure.Class)tmpsts.get(a)).getTypeDefinition() 
 								== ((fr.irisa.triskell.kermeta.language.structure.Class)supertype).getTypeDefinition()) {
-							builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit once from another.",(KermetaASTNode)supertypes[i]));
+							//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' - A class can only inherit once from another.",(KermetaASTNode)supertypes[i]));
+							builder.error("PASS 3 : Class '"+context.current_class.getName()+"' - A class can only inherit once from another.");
 							return false;
 						}
 					}
-					builder.current_class.getSuperType().add(supertype);
+					context.current_class.getSuperType().add(supertype);
 				}
 			}
+		} else {
+			
+			String qualifiedName = NamedElementHelper.getQualifiedName( context.current_class );
+			if ( ! qualifiedName.matches("kermeta::reflection.+") 
+					&& ! qualifiedName.equals("kermeta::language::structure::Object")
+					&& ! qualifiedName.equals("kermeta::language::structure::KMStructureVisitable")
+					&& ! qualifiedName.equals("kermeta::language::behavior::KMExpressionVisitable")) {
+				ClassDefinition supertypeDefinition = (ClassDefinition) builder.getTypeDefinitionByQualifiedName("kermeta::language::structure::Object");
+				if ( supertypeDefinition == null )
+					builder.error("Missing the statement : require kermeta");
+				fr.irisa.triskell.kermeta.language.structure.Class superclass = StructureFactory.eINSTANCE.createClass();
+				superclass.setTypeDefinition( supertypeDefinition );
+				context.current_class.getSuperType().add( superclass );
+			}
 		}
-		
 		return super.beginVisit(classDecl);
 	}
 	
@@ -149,7 +157,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.ClassDecl)
 	 */
 	public void endVisit(ClassDecl classDecl) {
-		builder.popContext();
+		context.popContext();
 		super.endVisit(classDecl);
 	}
 	
@@ -167,11 +175,13 @@ public class KMT2KMPass3 extends KMT2KMPass {
 				String qid = this.qualifiedIDAsString((QualifiedID) included[i]);
 				TypeDefinition referredTD = builder.getTypeDefinitionByName(qid);
 				if (null == referredTD) {
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Type definition not found : " + qid, (KermetaASTNode) included[i]));
+					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Type definition not found : " + qid, (KermetaASTNode) included[i]));
+					builder.error("PASS 3 : Type definition not found : " + qid);
 					return false;
 				}
 				if ((referredTD instanceof GenericTypeDefinition) && !((GenericTypeDefinition) referredTD).getTypeParameter().isEmpty()) {
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Generic type definitions are not permitted in model types", (KermetaASTNode) included[i]));
+					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Generic type definitions are not permitted in model types", (KermetaASTNode) included[i]));
+					builder.error("PASS 3 : Generic type definitions are not permitted in model types");
 					return false;
 				} else {
 					thisMT.getIncludedTypeDefinition().add(referredTD);
@@ -187,7 +197,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	}
 	
 	public void endVisit(ModelTypeDecl modelTypeDecl) {
-		//builder.popContext();
+		//loader.popContext(builder);
 		super.endVisit(modelTypeDecl);
 	}
 	
@@ -201,25 +211,26 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
-		builder.pushContext();
+		context.pushContext();
 		// Create the operation:
-		builder.current_operation = builder.struct_factory.createOperation();
-		builder.storeTrace(builder.current_operation, operation);
+
+		context.current_operation = StructureFactory.eINSTANCE.createOperation();
+		builder.storeTrace(context.current_operation, operation);
 		// Name
-		builder.current_operation.setName(getTextForID(operation.getName()));
+		context.current_operation.setName(getTextForID(operation.getName()));
 		if (operation.getTypeRef() != null) {
 			// isOrdered :
-			builder.current_operation.setIsOrdered(isOrdered(operation.getTypeRef()));
+			context.current_operation.setIsOrdered(isOrdered(operation.getTypeRef()));
 			// isUnique :
-			builder.current_operation.setIsUnique(isUnique(operation.getTypeRef()));
+			context.current_operation.setIsUnique(isUnique(operation.getTypeRef()));
 			// upper :
-			builder.current_operation.setUpper(getUpper(operation.getTypeRef()));
+			context.current_operation.setUpper(getUpper(operation.getTypeRef()));
 			// lower :
-			builder.current_operation.setLower(getLower(operation.getTypeRef()));
+			context.current_operation.setLower(getLower(operation.getTypeRef()));
 		}
 		internalLog.debug("visiting operation " +getTextForID(operation.getName()));
 		// checks that the class do not have an op with the same name yet
-		fr.irisa.triskell.kermeta.language.structure.Operation existingOperation =  ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_operation.getName());
+		fr.irisa.triskell.kermeta.language.structure.Operation existingOperation =  ClassDefinitionHelper.getOperationByName(context.current_class, context.current_operation.getName());
 		if (existingOperation != null) {
 			//if the operation is from an aspect class and its signature is the same, we need to continue 
 			if(currentClassIsAspect){
@@ -232,23 +243,38 @@ public class KMT2KMPass3 extends KMT2KMPass {
 				}
 				else{
 //					 otherwise this is an error
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definitions of operation '"+builder.current_operation.getName()+"' with different signatures.",operation ));
+					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definitions of operation '"+builder.current_operation.getName()+"' with different signatures.",operation ));
+					String message = "PASS 3 : Class '" + context.current_class.getName() 
+														+ "' duplicate definitions of operation '" 
+														+ context.current_operation.getName() 
+														+ "' with different signatures.";
+					builder.error(message, context.current_operation);
 					return false;
 				}
 			}
 			else {
 				// otherwise this is an error
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation));
+				//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation));
+				String message = "PASS 3 : Class '" + context.current_class.getName() 
+													+ "' duplicate definition of operation '" 
+													+ context.current_operation.getName() 
+													+ "'.";
+				builder.error(message, context.current_operation);
 				return false;
 			}
 		}
-		if (ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_operation.getName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_operation.getName()+"'.",operation));
+		if (ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_operation.getName()) != null) {
+			//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_operation.getName()+"'.",operation));
+			String message = "PASS 3 : Class '" + context.current_class.getName() 
+												+ "' contains both an operation and a property named '" 
+												+ context.current_operation.getName() 
+												+ "'.";
+			builder.error(message, context.current_operation);
 			return false;
 		}
 		
 		// owningClass :
-		builder.current_class.getOwnedOperation().add(builder.current_operation);
+		context.current_class.getOwnedOperation().add(context.current_operation);
 		return super.beginVisit(operation);
 	}
 	
@@ -287,19 +313,19 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	public void endVisit(Operation operation) {
 		if (operation.getTypeRef() != null) {
 			// type :
-			builder.current_operation.setType(getFType(operation.getTypeRef()));
+			context.current_operation.setType(getFType(operation.getTypeRef()));
 		}
 		// Exceptions
 		if (operation.getExceptions() != null) {
 			ASTNode[] exceptions = operation.getExceptions().getChildren();
 			for(int i=0; i<exceptions.length; i++) {
 				if (exceptions[i] instanceof Type) {
-					builder.current_operation.getRaisedException().add(KMT2KMTypeBuilder.process((Type)exceptions[i], builder));
+					context.current_operation.getRaisedException().add(KMT2KMTypeBuilder.process(context, (Type)exceptions[i], builder));
 				}
 			}
 		}
-		builder.popContext();
-		builder.current_operation = null;
+		context.popContext();
+		context.current_operation = null;
 		super.endVisit(operation);
 	}
 	
@@ -309,7 +335,8 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(TypeVarDecl typeVarDecl) {
 		TypeVariable tv;
-		if (builder.current_operation == null) {
+		
+		if (context.current_operation == null) {
 			// it is a type variable for a class. the object already exists but
 			// the supertype needs to be set
 			tv = (TypeVariable)builder.getModelElementByNode(typeVarDecl);
@@ -321,24 +348,26 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			String name = getTextForID(typeVarDecl.getName());
 			// If it has a supertype that is a model type, then we need to create a modeltypeVar.
 			// Otherwise create an ObjectTypeVariable
-			if (KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder) instanceof ModelType) {
+			if (KMT2KMTypeBuilder.process(context, typeVarDecl.getSupertype(), builder) instanceof ModelType) {
 				//tv = builder.struct_factory.createModelTypeVariable();
-				builder.messages.addMessage(new KMTUnitLoadError("Unable to create type variable '" + name + "': no model-type variables on operations", typeVarDecl));
+			//	builder.messages.addMessage(new KMTUnitLoadError("Unable to create type variable '" + name + "': no model-type variables on operations", typeVarDecl));
+				builder.error("Unable to create type variable '" + name + "': no model-type variables on operations");
 				return false;
 			} else {
-				tv = builder.struct_factory.createObjectTypeVariable();
+				tv = StructureFactory.eINSTANCE.createObjectTypeVariable();
 			}
 			tv.setName(name);
 			// check that another param with the same name does not exist yet
-			EList other_params = builder.current_operation.getTypeParameter();
+			EList other_params = context.current_operation.getTypeParameter();
 			for (int i=0; i<other_params.size(); i++) {
 				if (((TypeVariable)other_params.get(i)).getName().equals(name)) {
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Parametric operation '" + builder.current_operation.getName() + "' already contains a type parameter named '"+name+"'.",typeVarDecl));
+					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Parametric operation '" + builder.current_operation.getName() + "' already contains a type parameter named '"+name+"'.",typeVarDecl));
+					builder.error("PASS 3 : Parametric operation '" + context.current_operation.getName() + "' already contains a type parameter named '"+name+"'.");
 					return false;
 				}
 			}
 			// add the parameter to the operation
-			builder.current_operation.getTypeParameter().add(tv);
+			context.current_operation.getTypeParameter().add(tv);
 			builder.storeTrace(tv, typeVarDecl);
 			//tv.setSupertype(KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder));
 
@@ -346,10 +375,10 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		}
 		
 		if (!(tv instanceof ModelTypeVariable)) {
-			tv.setSupertype(KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder));
+			tv.setSupertype(KMT2KMTypeBuilder.process(context, typeVarDecl.getSupertype(), builder));
 		}
 		// in both cases the variable should be added to the context
-		builder.addTypeVar(tv);
+		context.addTypeVar(tv);
 		return false;
 	}
 	/**
@@ -362,7 +391,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			return false;
 		}
 		// Create the parameter and adds it to the current op
-		Parameter parameter = builder.struct_factory.createParameter();
+		Parameter parameter = StructureFactory.eINSTANCE.createParameter();
 		builder.storeTrace(parameter, param);
 		// Name
 		parameter.setName(getTextForID(param.getName()));
@@ -375,19 +404,22 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		// lower :
 		parameter.setLower(getLower(param.getTypeRef()));
 		// type :
+		if ( getFType( param.getTypeRef() ) == null )
+			getFType( param.getTypeRef() );
 		parameter.setType(getFType(param.getTypeRef()));
 		
 		// check that another param with the same name does not exist yet
-		EList other_params = builder.current_operation.getOwnedParameter();
+		EList other_params = context.current_operation.getOwnedParameter();
 		for (int i=0; i<other_params.size(); i++) {
 			if (((Parameter)other_params.get(i)).getName().equals(parameter.getName())) {
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Operation '" + builder.current_operation.getName() + "' already contains a parameter named '"+parameter.getName()+"'.",param));
+				//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Operation '" + builder.current_operation.getName() + "' already contains a parameter named '"+parameter.getName()+"'.",param));
+				builder.error("PASS 3 : Operation '" + context.current_operation.getName() + "' already contains a parameter named '"+parameter.getName()+"'.");
 				return false;
 			}
 		}
 		
 		// ownedOperation
-		builder.current_operation.getOwnedParameter().add(parameter);
+		context.current_operation.getOwnedParameter().add(parameter);
 		return false;
 	}
 	
@@ -409,45 +441,48 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(Property property) {
 		// Create the parameter and adds it to the current op
-		builder.current_property = builder.struct_factory.createProperty();
-		builder.storeTrace(builder.current_property, property);
+		context.current_property = StructureFactory.eINSTANCE.createProperty();
+		builder.storeTrace(context.current_property, property);
 		// Name
-		builder.current_property.setName(getTextForID(property.getName()));
+		context.current_property.setName(getTextForID(property.getName()));
 		// isOrdered :
-		builder.current_property.setIsOrdered(isOrdered(property.getTypeRef()));
+		context.current_property.setIsOrdered(isOrdered(property.getTypeRef()));
 		// isUnique :
-		builder.current_property.setIsUnique(isUnique(property.getTypeRef()));
+		context.current_property.setIsUnique(isUnique(property.getTypeRef()));
 		// upper :
-		builder.current_property.setUpper(getUpper(property.getTypeRef()));
+		context.current_property.setUpper(getUpper(property.getTypeRef()));
 		// lower :
-		builder.current_property.setLower(getLower(property.getTypeRef()));
+		context.current_property.setLower(getLower(property.getTypeRef()));
 		// type :
-		builder.current_property.setType(getFType(property.getTypeRef()));
+
+		context.current_property.setType(getFType(property.getTypeRef()));
 		// is readonly, false by default
-		builder.current_property.setIsReadOnly(false);
+		context.current_property.setIsReadOnly(false);
 		
-		if (ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()) != null) {
+	/*	if (ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_property.getName()) != null) {
 			//	if the property is from an aspect class and its signature is the same, we should continue but reuse the existing one 
 			if(currentClassIsAspect &&
-					haveSameTypeSignature(property, ClassDefinitionHelper.getPropertyByName(builder.current_class, builder.current_property.getName()))){
+					haveSameTypeSignature(property, ClassDefinitionHelper.getPropertyByName(context.current_class, context.current_property.getName()))){
 					return super.beginVisit(property);
 				}
 				else{
 					//	 otherwise this is an error
 			
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of property '"+builder.current_property.getName()+"'.",property));
+					//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of property '"+builder.current_property.getName()+"'.",property));
+					builder.error("PASS 3 : Class '"+context.current_class.getName()+"' duplicate definition of property '"+context.current_property.getName()+"'.", context.current_class);
 					return false;
 			}
-		}
+		}*/
 		
 		// checks that the class do not have an op with the same name yet
-		if (ClassDefinitionHelper.getOperationByName(builder.current_class, builder.current_property.getName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_property.getName()+"'.",property));
+		if (ClassDefinitionHelper.getOperationByName(context.current_class, context.current_property.getName()) != null) {
+			//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getName()+"' contains both an operation and a property named '"+builder.current_property.getName()+"'.",property));
+			builder.error("PASS 3 : Class '"+context.current_class.getName()+"' contains both an operation and a property named '"+context.current_property.getName()+"'.");
 			return false;
 		}
 		
 		// owningClass
-		builder.current_class.getOwnedAttribute().add(builder.current_property);
+		context.current_class.getOwnedAttribute().add(context.current_property);
 		return super.beginVisit(property);
 	}
 
@@ -472,7 +507,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.Property)
 	 */
 	public void endVisit(Property property) {
-		builder.current_property = null;
+		context.current_property = null;
 		super.endVisit(property);
 	}
 	/**
@@ -480,16 +515,16 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(PropertyKind propertyKind) {
 		if (propertyKind.getText().equals("attribute")) {
-			builder.current_property.setIsDerived(false);
-			builder.current_property.setIsComposite(true);
+			context.current_property.setIsDerived(false);
+			context.current_property.setIsComposite(true);
 		}
 		else if (propertyKind.getText().equals("reference")) {
-			builder.current_property.setIsDerived(false);
-			builder.current_property.setIsComposite(false);
+			context.current_property.setIsDerived(false);
+			context.current_property.setIsComposite(false);
 		}
 		else if (propertyKind.getText().equals("property")) {
-			builder.current_property.setIsDerived(true);
-			builder.current_property.setIsComposite(false);
+			context.current_property.setIsDerived(true);
+			context.current_property.setIsComposite(false);
 		}
 		return super.beginVisit(propertyKind);
 	}
@@ -498,7 +533,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ReadOnlyModifier)
 	 */
 	public boolean beginVisit(ReadOnlyModifier readOnlyModifier) {
-		builder.current_property.setIsReadOnly(true);
+		context.current_property.setIsReadOnly(true);
 		return super.beginVisit(readOnlyModifier);
 	}
 	
@@ -519,17 +554,17 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.EnumDecl)
 	 */
 	public boolean beginVisit(EnumDecl enumDecl) {
-		builder.current_enum = (Enumeration)builder.getModelElementByNode(enumDecl);
+		context.current_enum = (Enumeration)builder.getModelElementByNode(enumDecl);
 		return super.beginVisit(enumDecl);
 	}
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.EnumLiteral)
 	 */
 	public boolean beginVisit(EnumLiteral enumLiteral) {
-		EnumerationLiteral lit = builder.struct_factory.createEnumerationLiteral();
+		EnumerationLiteral lit = StructureFactory.eINSTANCE.createEnumerationLiteral();
 		lit.setName(getTextForID(enumLiteral.getName()));
 		builder.storeTrace(lit, enumLiteral);
-		builder.current_enum.getOwnedLiteral().add(lit);
+		context.current_enum.getOwnedLiteral().add(lit);
 		return super.beginVisit(enumLiteral);
 	}
 	
@@ -539,7 +574,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(DataTypeDecl node) {
 		PrimitiveType pt = (PrimitiveType)builder.getModelElementByNode(node);
-		pt.setInstanceType(KMT2KMTypeBuilder.process(node.getInstanceClass(), builder));
+		pt.setInstanceType(KMT2KMTypeBuilder.process(context, node.getInstanceClass(), builder));
 		return false;
 	}
 
@@ -548,8 +583,9 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(UsingStmt usingStmt) {
 		String u = qualifiedIDAsString(usingStmt.getName());
-		if (builder.containsPackage(u) == false) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Wrong using - package '"+u+"' does not exist", usingStmt));
+		if (builder.getPackages(u).size() == 0) {
+			//builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Wrong using - package '"+u+"' does not exist", usingStmt));
+			builder.error("PASS 3 : Wrong using - package '"+u+"' does not exist", usingStmt);
 			return false;
 		}
 		return super.beginVisit(usingStmt);

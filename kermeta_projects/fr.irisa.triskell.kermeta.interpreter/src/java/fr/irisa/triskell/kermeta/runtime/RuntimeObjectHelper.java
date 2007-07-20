@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.5 2007-07-03 12:54:56 dtouzet Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.6 2007-07-20 15:07:48 ftanguy Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -9,12 +9,12 @@
  */
 package fr.irisa.triskell.kermeta.runtime;
 
+import org.kermeta.io.KermetaUnit;
+
 import java.util.ArrayList;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**

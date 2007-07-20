@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpression.java,v 1.5 2007-07-11 14:41:50 cfaucher Exp $
+ * $Id: LambdaExpression.java,v 1.6 2007-07-20 15:09:00 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 

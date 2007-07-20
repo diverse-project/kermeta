@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ActionImpl.java,v 1.7 2007-05-15 15:22:53 ftanguy Exp $
+ * $Id: ActionImpl.java,v 1.8 2007-07-20 15:08:47 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.kpm.impl;
 
@@ -105,7 +105,6 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 */
 	public void execute(Unit unit, IProgressMonitor monitor, Map args) {
 		IConfigurationElement[] element = Platform.getExtensionRegistry().getConfigurationElementsFor(extensionPoint);
-		System.out.println();
 	}
 
 	/**

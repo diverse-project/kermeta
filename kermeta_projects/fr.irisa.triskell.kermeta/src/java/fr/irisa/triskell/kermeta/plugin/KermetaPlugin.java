@@ -2,8 +2,6 @@ package fr.irisa.triskell.kermeta.plugin;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -11,6 +9,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import fr.irisa.triskell.kermeta.KermetaIcons;
+import fr.irisa.triskell.kermeta.FileRegistry;
 import fr.irisa.triskell.eclipse.console.IOConsole;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -46,6 +45,15 @@ public class KermetaPlugin extends AbstractUIPlugin {
 
 		// check the compatibility of dependent  stuff ... 
 		new CompatibilityChecker().check();
+		
+		/*
+		 * 
+		 * Register files that have been set up within Register File extension point.
+		 * 
+		 */
+		FileRegistry.registerAll();
+		
+		FileRegistry.getPackage("http://kermeta/framework");
 	}
 
 	/**

@@ -1,4 +1,4 @@
-/* $Id: ClassNameRule.java,v 1.3 2007-06-27 13:19:27 cfaucher Exp $
+/* $Id: ClassNameRule.java,v 1.4 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : 	ClassNameRule.java
 * License : EPL
@@ -14,9 +14,9 @@ import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author ftanguy

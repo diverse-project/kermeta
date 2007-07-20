@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.14 2007-03-08 14:16:37 cfaucher Exp $
+/* $Id: RuntimeMemory.java,v 1.15 2007-07-20 15:07:49 ftanguy Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -12,8 +12,10 @@ package fr.irisa.triskell.kermeta.builder;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
@@ -57,7 +59,7 @@ public class RuntimeMemory {
     
     protected void finalize() throws Throwable {
         super.finalize();
-        KermetaUnit.internalLog.debug("FINALIZE RuntimeMemory ...");
+        KermetaInterpreter.internalLog.debug("FINALIZE RuntimeMemory ...");
     }
     /**
      * remove as much ref as possible for helping garbage collector

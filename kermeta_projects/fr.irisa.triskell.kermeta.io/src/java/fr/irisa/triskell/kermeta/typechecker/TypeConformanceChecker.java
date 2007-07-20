@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.12 2006-12-13 08:06:01 dvojtise Exp $
+/* $Id: TypeConformanceChecker.java,v 1.13 2007-07-20 15:08:04 ftanguy Exp $
 * Project : Kermeta (io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -14,8 +14,13 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
+
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -25,8 +30,11 @@ import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -48,6 +56,38 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
 		fr.irisa.triskell.kermeta.language.structure.Class cobject = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).getType();
 		if (TypeEqualityChecker.equals(cobject, required)) return true;
+		
+		/*
+		 * 
+		 * Base classes checking.
+		 * 
+		 */
+		if ( provided instanceof Class 
+			&& required instanceof Class ) {
+
+			Class cProvided = (Class) provided;
+			Class cRequired = (Class) required;
+			Set <TypeDefinition> providedBaseClasses = ClassDefinitionHelper.getAllBaseClasses( (ClassDefinition) cProvided.getTypeDefinition());
+			Set <TypeDefinition> requiredAspectClasses = ClassDefinitionHelper.getAllAspectClasses( (ClassDefinition) cRequired.getTypeDefinition());
+			
+			for ( TypeDefinition aspectClass : requiredAspectClasses ) {
+				for ( TypeDefinition baseClass : providedBaseClasses ) {
+					Class p = StructureFactory.eINSTANCE.createClass();
+					Class r = StructureFactory.eINSTANCE.createClass();
+					p.setTypeDefinition( (ClassDefinition) baseClass);
+					r.setTypeDefinition( (ClassDefinition) aspectClass );
+					if ( TypeConformanceChecker.conforms(r, p) )
+							return true;
+				}
+				
+			}
+		}
+		
+		/*
+		 * 
+		 * Supertype checking.
+		 * 
+		 */
 		Iterator it = ((ClassDefinition) cobject.getTypeDefinition()).getSuperType().iterator();
 		while (it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();

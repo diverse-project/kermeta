@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.14 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: ClassItemProvider.java,v 1.15 2007-07-20 15:08:27 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -208,7 +208,7 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 		// class
 		// a '->' is added to show the "reference" semantic
 		String label = "";
-	       if (object instanceof Class && ((Class) object).getTypeDefinition() != null ) {
+	       if (object instanceof Class && ((Class) object).getTypeDefinition().getName() != null) {
 	           label = " -> " + ((Class) object).getTypeDefinition().getName();
 	       }
 	             String parent = "";
@@ -265,8 +265,8 @@ public class ClassItemProvider extends ParameterizedTypeItemProvider implements
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING ||
-			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING;
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING ||
+			childFeature == StructurePackage.Literals.PARAMETERIZED_TYPE__VIRTUAL_TYPE_BINDING;
 
 		if (qualify) {
 			return getString

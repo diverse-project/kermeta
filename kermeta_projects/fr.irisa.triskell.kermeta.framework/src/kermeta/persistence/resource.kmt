@@ -8,7 +8,7 @@ require "../Standard.kmt"
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.31 2007-07-06 15:45:32 dtouzet Exp $
+ * $Id: resource.kmt,v 1.32 2007-07-20 15:08:39 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt

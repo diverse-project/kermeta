@@ -1,4 +1,4 @@
-/* $Id: GetTextVisitor.java,v 1.11 2007-07-10 12:44:46 cfaucher Exp $
+/* $Id: GetTextVisitor.java,v 1.12 2007-07-20 15:09:22 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta.texteditor
  * File : GetTextVisitor.java
  * License : EPL

@@ -1,4 +1,4 @@
-/* $Id: CycleDetector.java,v 1.1 2005-11-29 14:17:12 dvojtise Exp $
+/* $Id: CycleDetector.java,v 1.2 2007-07-20 15:08:11 ftanguy Exp $
  * Project : Kermeta IO
  * File : KermetaConstraintChecker.java
  * License : EPL
@@ -16,6 +16,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 import java.util.Stack;
 import javax.swing.JTextArea;
+
 
 
 
@@ -191,9 +192,7 @@ public class CycleDetector {
 			System.out.print( x.intValue() + " ");
 			
 		}
-		
-		System.out.println();
-		
+				
 	}
 	
 	

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallExpression.java,v 1.4 2007-07-11 14:41:50 cfaucher Exp $
+ * $Id: CallExpression.java,v 1.5 2007-07-20 15:09:00 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -17,14 +17,14 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getStaticTypeVariableBindings <em>Static Type Variable Bindings</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getParameters <em>Parameters</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getName <em>Name</em>}</li>
- *   <li>{@link fr.irisa.triskell.kermeta.language.behavior.CallExpression#getStaticTypeVariableBindings <em>Static Type Variable Bindings</em>}</li>
  * </ul>
  * </p>
  *
  * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface CallExpression extends Expression {
@@ -34,6 +34,22 @@ public interface CallExpression extends Expression {
 	 * @generated
 	 */
 	String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
+	/**
+	 * Returns the value of the '<em><b>Static Type Variable Bindings</b></em>' reference list.
+	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Type}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Static Type Variable Bindings</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Static Type Variable Bindings</em>' reference list.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_StaticTypeVariableBindings()
+	 * @model
+	 * @generated
+	 */
+	EList<Type> getStaticTypeVariableBindings();
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
@@ -76,21 +92,5 @@ public interface CallExpression extends Expression {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Static Type Variable Bindings</b></em>' reference list.
-	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Type}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static Type Variable Bindings</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Static Type Variable Bindings</em>' reference list.
-	 * @see fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage#getCallExpression_StaticTypeVariableBindings()
-	 * @model
-	 * @generated
-	 */
-	EList<Type> getStaticTypeVariableBindings();
 
 } // CallExpression

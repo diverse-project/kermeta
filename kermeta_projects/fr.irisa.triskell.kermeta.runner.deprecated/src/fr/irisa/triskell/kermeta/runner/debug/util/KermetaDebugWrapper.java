@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.19 2007-04-24 12:45:36 dtouzet Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.20 2007-07-20 15:09:14 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -14,6 +14,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+
 
 
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;

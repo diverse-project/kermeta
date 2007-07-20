@@ -1,10 +1,10 @@
-/* $Id: TagHelper.java,v 1.1 2007-02-15 13:53:50 dvojtise Exp $
+/* $Id: TagHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
  * Project   : Kermeta 
  * File      : TagHelper.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
- * Creation date : 14 févr. 07
+ * Creation date : 14 fï¿½vr. 07
  * Authors       : dvojtise <dvojtise.irisa.fr>
  */
 package fr.irisa.triskell.kermeta.modelhelper;
@@ -26,7 +26,7 @@ public class TagHelper {
 			Tag newTag =  StructurePackageImpl.init().getStructureFactory().createTag();
 			newTag.setName(tagname);
 			newTag.setValue(tagvalue);
-			element.getTag().add(newTag);
+			element.getOwnedTag().add(newTag);
 			return newTag;
 		}
 		else return null;
@@ -41,10 +41,10 @@ public class TagHelper {
 	public static Tag findTagFromName(fr.irisa.triskell.kermeta.language.structure.Object element, String tagname){
 		Tag result = null;
 		boolean found = false;
-		Iterator it = element.getTag().iterator();
+		Iterator it = element.getOwnedTag().iterator();
 		while(it.hasNext() && !found){
 			Tag retreivedTag = (Tag)it.next();
-			if(retreivedTag.getName().equals(tagname)){
+			if( (retreivedTag.getName() != null) && retreivedTag.getName().equals(tagname)){
 				found = true;
 				result = retreivedTag;
 			}
@@ -61,14 +61,16 @@ public class TagHelper {
 	public static Tag findTagFromNameAndValue(fr.irisa.triskell.kermeta.language.structure.Object element, String tagname, String tagvalue){
 		Tag result = null;
 		boolean found = false;
-		Iterator it = element.getTag().iterator();
+		Iterator it = element.getOwnedTag().iterator();
 		// Note: cannot reuse findTagFromName because we cannot garantee that the first tag with 
 		// this name will have this value in the case of several tags
 		while(it.hasNext() && !found){
 			Tag retreivedTag = (Tag)it.next();
-			if(retreivedTag.getName().equals(tagname) && retreivedTag.getValue().equals(tagvalue)){
-				found = true;
-				result = retreivedTag;
+			if ( retreivedTag.getName() != null ) {
+				if(retreivedTag.getName().equals(tagname) && retreivedTag.getValue().equals(tagvalue)){
+					found = true;
+					result = retreivedTag;
+				}
 			}
 		}
 		return result;

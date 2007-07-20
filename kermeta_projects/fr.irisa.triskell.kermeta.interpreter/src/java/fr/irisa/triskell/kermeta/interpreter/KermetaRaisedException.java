@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.15 2007-03-16 16:18:46 ffleurey Exp $
+/* $Id: KermetaRaisedException.java,v 1.16 2007-07-20 15:07:48 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -12,17 +12,17 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
 
+
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
 
 /**

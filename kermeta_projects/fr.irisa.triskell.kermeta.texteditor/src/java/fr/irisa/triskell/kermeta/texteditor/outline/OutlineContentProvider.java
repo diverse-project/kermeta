@@ -1,4 +1,4 @@
-/* $Id: OutlineContentProvider.java,v 1.4 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: OutlineContentProvider.java,v 1.5 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineContentProvider.java
 * License : EPL
@@ -12,13 +12,17 @@ package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 /**
  * @author Franck Fleurey
@@ -39,16 +43,25 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
 	public Object[] getChildren(Object parentElement) {
-	    if (parentElement == null) return new Object[0];
-		if (parentElement instanceof OutlineItem) return ((OutlineItem)parentElement).getChildren();
-		else if (parentElement instanceof KermetaUnit) return getElements(parentElement);
-		else return new Object[0];
+	    if (parentElement == null) 
+	    	return new Object[0];
+	    
+	    if ( parentElement instanceof PackageItem )
+	    	return ((PackageItem) parentElement).getTypeDefinitions().toArray();
+		if (parentElement instanceof OutlineItem) 
+			return ((OutlineItem)parentElement).getChildren();
+		else if (parentElement instanceof KermetaUnit) 
+			return getElements(parentElement);
+		else 
+			return new Object[0];
 	}
 	
 	/**
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang.Object)
 	 */
 	public Object getParent(Object element) {
+		if ( element instanceof PackageItem )
+			return null;
 		return ((OutlineItem)element).parent;
 	}
 	/**
@@ -56,7 +69,12 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	 */
 	public boolean hasChildren(Object element) {
 	    if (element == null) return false;
-		return ((OutlineItem)element).getChildren().length != 0;
+	    
+	    if ( element instanceof PackageItem ) {
+	    	return ((PackageItem) element).getTypeDefinitions().size() > 0;
+	    } else {    
+	    	return ((OutlineItem)element).getChildren().length != 0;
+	    }
 	}
 	/**
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
@@ -70,10 +88,44 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	        o[0] = "error creating outline";
 	    }
 		KermetaUnit unit = (KermetaUnit)inputElement;
-		ArrayList result = new ArrayList();
+		ArrayList <PackageItem> result = new ArrayList <PackageItem> ();
 		
-	    Iterator it = unit.packages.values().iterator();
+		Map <String, PackageItem> packages = new HashMap <String, PackageItem> ();
+		
+		if ( outline.prefShowImported() ) {
+			for ( Package p : (List<Package>) unit.getExternalPackages() ) {
+				String qualifiedName = NamedElementHelper.getQualifiedName(p);
+				PackageItem item = packages.get( qualifiedName );
+				if ( item == null ) {
+					item = new PackageItem( qualifiedName, false, outline );
+					item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+					packages.put( qualifiedName, item );
+					result.add( item );
+				} else {
+					item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+				}
+			}	
+		}
+		
+		for ( Package p : (List<Package>) unit.getInternalPackages() ) {
+			String qualifiedName = NamedElementHelper.getQualifiedName(p);
+			PackageItem item = packages.get( qualifiedName );
+			if ( item == null ) {
+				item = new PackageItem( qualifiedName, true, outline );
+				item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+				 result.add( item );
+				 packages.put( qualifiedName, item );
+			} else {
+				item.addAllTypeDefinitions( p.getOwnedTypeDefinition() );
+			}
+		}	
+	
+		
+	   /* Iterator it = unit.getPackages().iterator();
 	    while(it.hasNext()) {
+	    	
+	    	
+	    	
 	        Package pack = (Package)it.next();
 	       
             OutlineItem item = new OutlineItem(pack, null, outline);
@@ -84,7 +136,7 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	                result.add(item);
 	            }
             }
-	    }
+	    }*/
 	    
 		if (outline.prefSortedOutline())
 		    Collections.sort(result);

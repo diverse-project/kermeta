@@ -2,22 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidTypeImpl.java,v 1.3 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: VoidTypeImpl.java,v 1.4 2007-07-20 15:09:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->

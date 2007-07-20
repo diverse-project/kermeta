@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.18 2007-04-04 13:48:08 ftanguy Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.19 2007-07-20 15:09:14 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -30,10 +30,12 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.util2.KermetaUnitHelper;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.utils.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.modelhelper.ModelingUnitHelper;
 
 /**
  * Launch shortcut that appears when users selects a file > Run > Kermeta App.
@@ -75,7 +77,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
      * 												its file name corresponds to fileName, 
      * 												its class name corresponds to className and
      * 												its operation name corresponds to operationName.  
-    @author François Tanguy
+    @author Franï¿½ois Tanguy
     @param projectName The name of the project.
     @param fileName The name of the file.
     @param className The name of the class.
@@ -252,11 +254,25 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		
 		unit = KermetaUnitHelper.typecheckFile(selectedFile);
 		
+		if ( unit.isErrored() ) {
+			MessageDialog.openError(new Shell(), "The file is not correctly typechecked.", fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper.getAllErrorsAsString(unit));
+			return;
+		}
+		
 		try {
 			// Get the @mainClass and @mainOperation tags (if they exist)
-			ArrayList point = KermetaRunHelper.findEntryPoint(unit);
-			String className = (String) point.get(0);
-			String operationName = (String) point.get(1);
+			Tag cls = ModelingUnitHelper.getMainClass( unit );
+			String className = "";
+			if ( cls != null )
+				className = cls.getValue();
+			
+			
+			Tag operation = ModelingUnitHelper.getMainOperation( unit );
+			String operationName = "";
+			if ( operation != null )
+				operationName = operation.getValue();
+			
+			
 			// FIXME : wrong path (not file system path)
 			String fileName = ifile.getFullPath().makeAbsolute().toOSString();
 			String projectName = ifile.getProject().getName();

@@ -1,4 +1,4 @@
-/*$Id: AddMarkers.java,v 1.8 2007-06-26 12:24:01 ftanguy Exp $
+/*$Id: AddMarkers.java,v 1.9 2007-07-20 15:09:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	AddMarkers.java
 * License : EPL
@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.QualifiedName;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
@@ -29,7 +30,6 @@ import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.helpers.NameFilterHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 
 public class AddMarkers implements IAction, Interest {
@@ -69,6 +69,8 @@ public class AddMarkers implements IAction, Interest {
 			 * 
 			 */
 			IFile file = ResourceHelper.getIFile(unit.getValue());
+			if ( file == null )
+				return;
 			KermetaMarkersHelper.clearMarkers(file);
 			ArrayList<Unit> markedUnits = new ArrayList<Unit> ();
 			markDependent(out, file, unit, unit, markedUnits, false);
@@ -107,7 +109,7 @@ public class AddMarkers implements IAction, Interest {
 			 * 
 			 * 
 			 */
-			if ( ! kermetaUnit.messages.hasError() ) {
+			if ( ! kermetaUnit.isErrored() ) {
 				
 				Iterator<Dependency> iterator = unit.getDependents().iterator();
 				while ( iterator.hasNext() ) {
@@ -161,7 +163,7 @@ public class AddMarkers implements IAction, Interest {
 		if ( markedUnits.contains(unit) )
 			return;
 		
-		String message = "File " + first.getFullPath().toString() + " contains error(s).";
+		String message = "File " + first.getFullPath().toString() + " contains error(s).\n";
 		
 		if ( top != unit ) {
 		
@@ -210,17 +212,17 @@ public class AddMarkers implements IAction, Interest {
 	}
 	
 	private void markOuts(Out out, Unit unit, String message, boolean adding) {
-		System.out.println();
 		Iterator<Out> iterator = out.getRule().getOuts().iterator();
 		while ( iterator.hasNext() ) {
 			Out currentOut = iterator.next();
 			String outputString = NameFilterHelper.getOuputString(unit, currentOut);
 			if ( ! outputString.equals("") ) {
 				IFile file = ResourceHelper.getIFile(outputString);
-				if ( adding )
-					KermetaMarkersHelper.createError(file, message);
-				else
-					KermetaMarkersHelper.removeMarker(file, message);
+				if ( file != null )
+					if ( adding )
+						KermetaMarkersHelper.createError(file, message);
+					else
+						KermetaMarkersHelper.removeMarker(file, message);
 			}
 		}
 	}

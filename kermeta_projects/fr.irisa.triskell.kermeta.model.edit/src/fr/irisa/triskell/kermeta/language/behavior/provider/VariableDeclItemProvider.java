@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDeclItemProvider.java,v 1.7 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: VariableDeclItemProvider.java,v 1.8 2007-07-20 15:08:28 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -195,7 +195,32 @@ public class VariableDeclItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createCallExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -206,11 +231,6 @@ public class VariableDeclItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -226,31 +246,6 @@ public class VariableDeclItemProvider
 			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createConditional()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createRaise()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -280,17 +275,27 @@ public class VariableDeclItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
-				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter

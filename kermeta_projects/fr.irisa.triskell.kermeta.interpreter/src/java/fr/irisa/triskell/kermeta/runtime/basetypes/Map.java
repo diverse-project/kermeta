@@ -1,4 +1,4 @@
-/* $Id: Map.java,v 1.8 2006-12-07 09:39:48 dvojtise Exp $
+/* $Id: Map.java,v 1.9 2007-07-20 15:07:48 ftanguy Exp $
  * Project : Kermeta interpreter
  * File : Map.java
  * License : EPL
@@ -17,6 +17,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
 /** Implementation of Kermeta base type Map  
@@ -55,11 +56,11 @@ public class Map {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator()
 	public static RuntimeObject keysIterator(RuntimeObject self) {
 	
-		fr.irisa.triskell.kermeta.language.structure.Class it_class = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+		fr.irisa.triskell.kermeta.language.structure.Class it_class = StructureFactory.eINSTANCE.createClass();
 	    
-	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Iterator"));
 	    
-	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    
 	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
@@ -81,11 +82,11 @@ public class Map {
 	public static RuntimeObject valueIterator(RuntimeObject self) {
 	    
 
-		fr.irisa.triskell.kermeta.language.structure.Class it_class = self.getFactory().getMemory().getUnit().struct_factory.createClass();
+		fr.irisa.triskell.kermeta.language.structure.Class it_class = StructureFactory.eINSTANCE.createClass();
 	    
-	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().getTypeDefinitionByQualifiedName("kermeta::standard::Iterator"));
 	    
-	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
+	    TypeVariableBinding binding = StructureFactory.eINSTANCE.createTypeVariableBinding();
 	    
 	    binding.setVariable((ObjectTypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    

@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.6 2006-12-07 08:04:38 dvojtise Exp $
+/* $Id: CallableOperation.java,v 1.7 2007-07-20 15:08:03 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : EPL

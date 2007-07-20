@@ -67,5 +67,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" abstract="true" eSuperTypes="#//structure/Type #//structure/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//structure/Type"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Require"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Using"/>
   </eSubpackages>
 </ecore:EPackage>

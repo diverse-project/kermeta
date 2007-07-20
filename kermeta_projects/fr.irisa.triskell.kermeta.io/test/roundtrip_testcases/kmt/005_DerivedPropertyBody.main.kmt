@@ -1,13 +1,14 @@
 package derivedPropertyBody;
 
 require kermeta
+require "http://www.eclipse.org/emf/2002/Ecore"
 
 class Main
 {
 	property readonly d1 : A 
 		getter is do
 			var a : A
-			result := A
+			result := a
 		end
 		
 	property readonly d1broken : A 

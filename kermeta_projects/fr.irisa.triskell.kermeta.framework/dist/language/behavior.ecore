@@ -1,0 +1,1228 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="structure.kmt|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/behavior.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="language" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/behavior.ecore#//language" nsPrefix="language">
+      <eSubpackages name="behavior" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/language/behavior.ecore#//language/behavior" nsPrefix="behavior">
+        <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="/1/language/behavior/Expression">
+          <eAnnotations source="kermeta"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false" upperBound="-1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="name" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings" upperBound="-1">
+            <eType xsi:type="ecore:EClass" href="structure.ecore#/1/language/structure/Type"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true">
+          <eAnnotations source="kermeta"/>
+          <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
+          <eSuperTypes href="structure.ecore#/1/language/structure/TypeContainer"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticType">
+            <eType xsi:type="ecore:EClass" href="structure.ecore#/1/language/structure/Type"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="/1/language/behavior/CallExpression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitCallVariable(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isAtpre" containment="true">
+            <eAnnotations source="kermeta"/>
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="/1/language/behavior/CallExpression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitCallFeature(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation">
+            <eType xsi:type="ecore:EClass" href="structure.ecore#/1/language/structure/Operation"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral">
+            <eType xsi:type="ecore:EClass" href="structure.ecore#/1/language/structure/EnumerationLiteral"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty">
+            <eType xsi:type="ecore:EClass" href="structure.ecore#/1/language/structure/Property"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isAtpre" containment="true">
+            <eAnnotations source="kermeta"/>
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="/1/language/behavior/Expression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="/1/language/behavior/CallExpression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitCallSuperOperation(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="/1/language/behavior/CallVariable /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitCallResult(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="/1/language/behavior/CallExpression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitCallValue(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitAssignment(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="/1/language/behavior/CallExpression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="isCast" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitBlock(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="statement" ordered="false" upperBound="-1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" ordered="false" upperBound="-1" eType="/1/language/behavior/Rescue" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitConditional(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="thenBody" lowerBound="1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="elseBody" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1" eType="/1/language/behavior/Expression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="/1/language/behavior/Expression">
+          <eAnnotations source="kermeta"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="EmptyExpression" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitEmptyExpression(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="/1/language/behavior/Literal /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitIntegerLiteral(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true">
+            <eAnnotations source="kermeta"/>
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Integer"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="/1/language/behavior/Literal /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitStringLiteral(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true">
+            <eAnnotations source="kermeta"/>
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="/1/language/behavior/Literal /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitBooleanLiteral(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="value" containment="true">
+            <eAnnotations source="kermeta"/>
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TypeLiteral" eSuperTypes="/1/language/behavior/Literal /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeLiteral(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="typeref" lowerBound="1" eType="/1/language/behavior/TypeReference" containment="true">
+            <eAnnotations source="kermeta"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="TypeReference">
+          <eAnnotations source="kermeta"/>
+          <eSuperTypes href="structure.ecore#/1/language/structure/MultiplicityElement"/>
+          <eSuperTypes href="#/1/language/behavior/KMExpressionVisitable"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeReference(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="VoidLiteral" eSuperTypes="/1/language/behavior/Literal /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitVoidLiteral(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitLoop(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" lowerBound="1" eType="/1/language/behavior/Expression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="SelfExpression" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitSelfExpression(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="VariableDecl" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitVariableDecl(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" lowerBound="1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="identifier" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="/1/language/behavior/TypeReference" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Raise" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitRaise(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1" eType="/1/language/behavior/Expression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="Rescue">
+          <eAnnotations source="kermeta"/>
+          <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
+          <eSuperTypes href="#/1/language/behavior/KMExpressionVisitable"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitRescue(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false" lowerBound="1" upperBound="-1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="exceptionType" lowerBound="1" eType="/1/language/behavior/TypeReference" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="exceptionName" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="JavaStaticCall" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitJavaStaticCall(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false" upperBound="-1" eType="/1/language/behavior/Expression" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="jclass" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="jmethod" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="LambdaExpression" eSuperTypes="/1/language/behavior/Expression /1/language/behavior/KMExpressionVisitable">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitLambdaExpression(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false" upperBound="-1" eType="/1/language/behavior/LambdaParameter" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="/1/language/behavior/Expression" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="LambdaParameter">
+          <eAnnotations source="kermeta"/>
+          <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
+          <eSuperTypes href="#/1/language/behavior/KMExpressionVisitable"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta" references="/1/language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+              <details key="body" value="do&#xA;&#x9;result := visitor.visitLambdaParameter(self, context)&#xA;end"/>
+              <details key="superOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="name" containment="true">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="/1/language/behavior/TypeReference" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="KMExpressionVisitor" abstract="true">
+          <eAnnotations source="kermeta"/>
+          <eAnnotations source="kermeta.typeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eSuperTypes href="structure.ecore#/1/language/structure/Object"/>
+          <eOperations name="visitCallVariable">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/CallVariable"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitCallFeature">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/CallFeature"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitCallSuperOperation">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/CallSuperOperation"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitCallResult">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/CallResult"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitCallValue">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/CallValue"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitAssignment">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/Assignment"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitBlock">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/Block"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitConditional">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/Conditional"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitEmptyExpression">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/EmptyExpression"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitIntegerLiteral">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/IntegerLiteral"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitStringLiteral">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/StringLiteral"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitBooleanLiteral">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/BooleanLiteral"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitTypeLiteral">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/TypeLiteral"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitTypeReference">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/TypeReference"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitVoidLiteral">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/VoidLiteral"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitLoop">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/Loop"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitSelfExpression">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/SelfExpression"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitVariableDecl">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/VariableDecl"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitRaise">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/Raise"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitRescue">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/Rescue"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitJavaStaticCall">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/JavaStaticCall"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitLambdaExpression">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/LambdaExpression"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+          <eOperations name="visitLambdaParameter">
+            <eAnnotations source="kermeta">
+              <details key="body" value="do&#xA;end"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="node" eType="/1/language/behavior/LambdaParameter"/>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" name="KMExpressionVisitable" abstract="true">
+          <eAnnotations source="kermeta"/>
+          <eOperations name="acceptKMExpressionVisitor">
+            <eAnnotations source="kermeta">
+              <details key="isAbstract" value="true"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeVariable">
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eAnnotations source="kermeta.typeParameters">
+              <details key="ContextType" value="ContextType"/>
+              <details key="ResultType" value="ResultType"/>
+            </eAnnotations>
+            <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            <eParameters name="visitor" eType="/1/language/behavior/KMExpressionVisitor">
+              <eAnnotations source="kermeta.typeVariableBindings">
+                <details key="0" value="ContextType"/>
+                <details key="1" value="ResultType"/>
+              </eAnnotations>
+            </eParameters>
+            <eParameters name="context">
+              <eAnnotations source="kermeta.typeVariable">
+                <details key="ContextType" value="ContextType"/>
+              </eAnnotations>
+              <eType xsi:type="ecore:EDataType" href="../Standard.ecore#/1/_KermetaSpecialTypesAlias_"/>
+            </eParameters>
+          </eOperations>
+        </eClassifiers>
+      </eSubpackages>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="dynamic_expression.ecore#/0"/>
+    <references href="dynamic_expression.ecore#/1"/>
+    <references href="dynamic_expression.ecore#/2"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
+    <references href="reflective_collections.ecore#/0"/>
+    <references href="reflective_collections.ecore#/1"/>
+    <references href="reflective_collections.ecore#/2"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="../kunit/kunit.ecore#/0"/>
+    <references href="../kunit/kunit.ecore#/1"/>
+    <references href="../kunit/kunit.ecore#/2"/>
+    <references href="../kunit/assert.ecore#/0"/>
+    <references href="../kunit/assert.ecore#/1"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="structure.ecore#/0"/>
+    <references href="structure.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

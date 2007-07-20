@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.12 2006-10-27 08:49:38 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.13 2007-07-20 15:08:18 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -15,22 +15,29 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
-import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
+import fr.irisa.triskell.kermeta.modelhelper.OperationHelper;
 //import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
  * Defaults : some comparison tests need to be done using KM2KMTPrettyPrinter..
@@ -67,11 +74,12 @@ public class OperationChecker extends AbstractChecker {
 	public Boolean check()
 	{
 		boolean result = false;
-		if (operation.getName()!=null)
+		if (operation.getName()!=null) {
 			result =
-			checkOperationIsUnique() &&
-			checkOperationSignature() &&
-			checkOperationIsAbstract();
+				result = checkOperationIsUnique(operation) &&
+				checkOperationSignature(operation) &&
+				checkOperationIsAbstract(operation);
+		}
 		else return Boolean.FALSE;
 		return new Boolean(result);
 	}
@@ -82,7 +90,7 @@ public class OperationChecker extends AbstractChecker {
 	 * @return true if operation signature is conform to 
 	 * super operations if they exist.
 	 */
-	public boolean checkOperationSignature()
+	private boolean checkOperationSignature(Operation operation)
 	{
 		boolean result = false;
 		Operation next = null;
@@ -111,17 +119,21 @@ public class OperationChecker extends AbstractChecker {
 	 * @param operation the operation to check
 	 * @return true if operation is abstract and does not have a body, false otherwise
 	 */
-	public boolean checkOperationIsAbstract()
+	private boolean checkOperationIsAbstract(Operation operation)
 	{
 		// null body is not empty body
-		boolean result = ((operation.isIsAbstract() && operation.getBody()==null
-				)||(operation.isIsAbstract() == false && operation.getBody()!=null));
-		if (!result) 
-		{
-			String e = operation.getName()+ 
-				": [ isAbstract : " +  operation.isIsAbstract() + " ]" + 
-			    " and [ body : " +  operation.getBody() + " ] are " + " uncompatible.";
-			addProblem(ERROR, e, operation);
+		boolean result = ((operation.isIsAbstract() && operation.getBody() == null
+				)||(operation.isIsAbstract() == false && operation.getBody() != null));
+		
+		if (!result) {
+			KermetaUnit kermetaUnit = KermetaUnitHelper.getKermetaUnitFromObject( operation );
+			if ( ! kermetaUnit.getUri().matches(".+\\.jar") ) {				
+				ClassDefinition classDefinition = (ClassDefinition) operation.eContainer();
+				String e = "In Class Definition " + classDefinition.getName() + " : " + operation.getName()+ 
+					": [ isAbstract : " +  operation.isIsAbstract() + " ]" + 
+				    " and [ body : " +  operation.getBody() + " ] are " + " uncompatible.";
+				addProblem(ERROR, e, operation);
+			}
 		}
 		return result;
 	}
@@ -130,27 +142,150 @@ public class OperationChecker extends AbstractChecker {
 	 * 
 	 * @return
 	 */
-	public boolean checkOperationIsUnique()
+	private boolean checkOperationIsUnique(Operation operation)
 	{
-		boolean result = true;
-		int number_of_duplicate = 0;
-		List<Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
+		Set <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
 		for (Operation op : ops) {
-			if (op.getName().equals(operation.getName()) && operation.getSuperOperation()==null)
-			{
-				// if superOperation is null, perhaps it however exists in the implicit inherited Object?
-				// ex: Boolean does not inherit explicitely Object.
-				if (!NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object"))
-					number_of_duplicate += 1;
+
+			if ( op != operation ) { 
+			
+				if (op.getName().equals(operation.getName()) && operation.getSuperOperation()==null) {
+					
+					ClassDefinition possibleBaseClass = (ClassDefinition) op.eContainer();
+					
+					/*
+					 * 
+					 * Special case when the class definition is an aspect.
+					 * 
+					 */
+					if ( classDefinition.isIsAspect() && (classDefinition != possibleBaseClass) ) {
+					
+						boolean error = false;
+						// Checking abstract
+						boolean isAbstract = 
+									(op.isIsAbstract() && ! operation.isIsAbstract())
+								|| 	(! op.isIsAbstract() && operation.isIsAbstract())
+								||	OperationHelper.isOverloadable(op) && ! operation.isIsAbstract()
+								||	OperationHelper.isOverloadable(operation) && ! op.isIsAbstract();
+						if ( ! isAbstract )
+							error = true;
+						
+						if ( ! error )
+							// Checking the returned type
+							error = ! TypeEqualityChecker.equals(operation.getType(), op.getType());
+						// Checking the parameter's type
+						Iterator <Parameter> iterator1 = operation.getOwnedParameter().iterator();
+						Iterator <Parameter> iterator2 = op.getOwnedParameter().iterator();
+						while ( ! error && iterator1.hasNext() && iterator2.hasNext() ) {
+							Parameter parameter1 = iterator1.next();
+							Parameter parameter2 = iterator2.next();
+							error = ! TypeEqualityChecker.equals(parameter1.getType(), parameter2.getType());
+							// If there is an error, it is maybe because types come from aspect. Let's take one more shot.
+							if ( error ) {
+								if ( parameter1.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class ) {
+									
+									ClassDefinition cd1 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) parameter1.getType()).getTypeDefinition();
+									ClassDefinition cd2 = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) parameter2.getType()).getTypeDefinition();
+									
+									if ( ClassDefinitionHelper.getAllBaseClasses(cd1).contains(cd2) )
+										error = false;
+									
+								} else if ( parameter1.getType() instanceof PrimitiveType ) {
+									
+								}
+							}
+						}
+						
+						if ( error ) {
+							KermetaUnit distantUnit = KermetaUnitHelper.getKermetaUnitFromObject(op);
+							String message = "";
+							if ( distantUnit != null ) {
+								KM2KMTPrettyPrinter printer = new KM2KMTPrettyPrinter();
+								message = "Operation " + operation.getName() + " is already implemented in " + distantUnit.getUri() + "\n\n";
+								message += printer.ppSimplifiedFOperation(operation) + " does not matched with " + printer.ppSimplifiedFOperation(op);
+							} else
+								message = "Operation " + operation.getName() + " is already implemented elsewhere.";
+							
+							addProblem(ERROR, message, operation);
+							return false;
+						}
+					} else 
+											
+					// if superOperation is null, perhaps it however exists in the implicit inherited Object?
+					// ex: Boolean does not inherit explicitely Object.
+					if (!NamedElementHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object")) {
+						addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
+								"duplicate definition of operation '"+operation.getName()+"'.",operation);
+						return false;
+					}
+				}
 			}
 		}
-		// An operation cannot be defined twice in the same class
-		if (number_of_duplicate > 1) {
-			addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
-					"duplicate definition of operation '"+operation.getName()+"'.",operation);
-			result = false;
+		return true;
+	}
+	
+	/**
+	 * 
+	 * Check if one operation with the same name, same parameters, same returned type and abstract exist in base classes.
+	 * 
+	 * @param operation
+	 * @param classDefinition
+	 * @return
+	 */
+/*	private boolean checkAspectOperation(Operation operation) {
+		Set <Operation> ops = ClassDefinitionHelper.getAllOperations(classDefinition);
+		for (Operation op : ops) {
+			if ( operation != op ) {		
+				
+				if ( operation.getName().equals(op.getName()) )
+					return false;
+
+				ClassDefinition possibleBaseClass = (ClassDefinition) op.eContainer();
+				Set<TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses(classDefinition);
+				if ( baseClasses.contains(possibleBaseClass) ) {
+					boolean isAbstract = checkOperationIsAbstract(op);
+					
+					
+					
+					return checkOperationIsAbstract(op) && ! checkOperationSignature(operation);
+				}
+			}
 		}
-		return result;
+		return false;
+	}*/
+	
+	private boolean isOperationAspectOverloadingCorrect(Operation operation, Operation operationToCompare) {
+		/*
+		 * 
+		 * Check if the operation to compare comes from a base class.
+		 * 
+		 */
+		ClassDefinition possibleBaseClass = (ClassDefinition) operationToCompare.eContainer();
+		Set<TypeDefinition> baseClasses = ClassDefinitionHelper.getAllBaseClasses(classDefinition);
+		if ( baseClasses.contains(possibleBaseClass) ) {
+	
+			///if ( checkOperationIsAbstract() )
+			
+			/*if ( 
+					// checking if abstract
+					operationToCompare.isIsAbstract() 
+					// check the name
+					&& operationToCompare.getName().equals(operation.getName()) 
+					// Check the returned type
+					&& TypeEqualityChecker.equals( operationToCompare.getType(), operation.getType() ) ) {
+					
+				for ( Parameter currentParameter : (List<Parameter>) operationToCompare.getOwnedParameter() ) {
+					Parameter parameter = OperationHelper.getParameter(operation, currentParameter.getName());
+					if ( ! TypeEqualityChecker.equals(parameter.getType(), currentParameter.getType()) )
+						return false;
+				}
+					
+				return true;
+					
+			}*/
+			
+		}
+		return false;
 	}
 	
 	/**

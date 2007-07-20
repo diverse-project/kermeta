@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureValidator.java,v 1.1 2007-07-11 14:41:49 cfaucher Exp $
+ * $Id: CallFeatureValidator.java,v 1.2 2007-07-20 15:08:57 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.validation;
 
@@ -21,9 +21,9 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 public interface CallFeatureValidator {
 	boolean validate();
 
-	boolean validateTarget(Expression value);
-	boolean validateIsAtpre(boolean value);
 	boolean validateStaticProperty(Property value);
 	boolean validateStaticOperation(Operation value);
 	boolean validateStaticEnumLiteral(EnumerationLiteral value);
+	boolean validateTarget(Expression value);
+	boolean validateIsAtpre(boolean value);
 }

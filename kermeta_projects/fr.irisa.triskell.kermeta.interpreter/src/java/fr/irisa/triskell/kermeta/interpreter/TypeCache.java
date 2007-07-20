@@ -1,4 +1,4 @@
-/* $Id: TypeCache.java,v 1.1 2005-09-02 15:25:19 dvojtise Exp $
+/* $Id: TypeCache.java,v 1.2 2007-07-20 15:07:48 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TypeCache.java
  * License    : EPL

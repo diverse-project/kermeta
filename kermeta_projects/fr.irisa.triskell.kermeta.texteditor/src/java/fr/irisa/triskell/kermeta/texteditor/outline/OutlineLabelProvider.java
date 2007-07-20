@@ -1,4 +1,4 @@
-/* $Id: OutlineLabelProvider.java,v 1.3 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: OutlineLabelProvider.java,v 1.4 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : OutlineLabelProvider.java
 * License : EPL
@@ -32,12 +32,16 @@ public class OutlineLabelProvider implements ILabelProvider{
 	 * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object element) {
+		if ( element instanceof PackageItem )
+			return ((PackageItem) element).getImage();
 		return ((OutlineItem)element).getImage();
 	}
 	/**
 	 * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
 	 */
 	public String getText(Object element) {
+		if ( element instanceof PackageItem )
+			return ((PackageItem) element).getName(); 
 	    return ((OutlineItem)element).getLabel();
 	}
 	/* (non-Javadoc)

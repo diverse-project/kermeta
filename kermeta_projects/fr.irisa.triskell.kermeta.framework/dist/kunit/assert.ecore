@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EAnnotation source="CompilationUnit">
+    <details key="require" value="../Standard.kmt|"/>
+    <details key="using" value="kermeta::standard|"/>
+  </ecore:EAnnotation>
+  <ecore:EPackage name="kermeta" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#/" nsPrefix="kermeta">
+    <eSubpackages name="kunit" nsURI="file:/home/paco/workspace/kermeta/fr.irisa.triskell.kermeta.framework/dist/kunit/assert.ecore#//kunit" nsPrefix="kunit">
+      <eClassifiers xsi:type="ecore:EClass" name="AbstractFallible" abstract="true">
+        <eSuperTypes href="../language/structure.ecore#/1/language/structure/Object"/>
+        <eOperations name="assert">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertWithMsg">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="fail">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertTrue">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertTrueWithMsg">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="message">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertFalse">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertFalseWithMsg">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="message">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertEqual">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="expected">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+          <eParameters name="actual">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="AssertionFailedError">
+        <eAnnotations source="kermeta"/>
+        <eSuperTypes href="../exceptions/exceptions.ecore#/1/exceptions/Exception"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Assert" eSuperTypes="/1/kunit/AbstractFallible">
+        <eOperations name="assert">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assert">
+            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(&quot;assert failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertTrue">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assertTrue">
+            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(&quot;assertTrue failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertTrueWithMsg">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assertTrueWithMsg">
+            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(&quot;assertTrueWithMsg failed : &quot;.plus(msg))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertFalse">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assertFalse">
+            <details key="body" value="do&#xA;&#x9;if condition then&#xA;&#x9;&#x9;fail(&quot;assertTrue number failed&quot;)&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertFalseWithMsg">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assertFalseWithMsg">
+            <details key="body" value="do&#xA;&#x9;if condition then&#xA;&#x9;&#x9;fail(&quot;assertTrueWithMsg failed : &quot;.plus(msg))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertWithMsg">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assertWithMsg">
+            <details key="body" value="do&#xA;&#x9;if not (condition) then&#xA;&#x9;&#x9;fail(&quot;assertTrueWithMsg failed : &quot;.plus(msg))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="condition">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/Boolean"/>
+          </eParameters>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="fail">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/fail">
+            <details key="body" value="do&#xA;&#x9;var exception : kermeta::kunit::AssertionFailedError init kermeta::kunit::AssertionFailedError.new&#xA;&#x9;exception.message := msg&#xA;&#x9;raise exception&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="msg">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+        <eOperations name="assertEqual">
+          <eAnnotations source="kermeta" references="/1/kunit/AbstractFallible/assertEqual">
+            <details key="body" value="do&#xA;&#x9;if not (expected.equals(actual)) then&#xA;&#x9;&#x9;fail(&quot;assertEqual failed&#xA;expected&#x9;:[&quot;.plus(expected).plus(&quot;] != &#xA;actual&#x9;:[&quot;).plus(actual).plus(&quot;]&quot;))&#xA;&#xA;&#x9;end&#xA;end"/>
+            <details key="superOperation" value="kermeta::kunit::AbstractFallible"/>
+          </eAnnotations>
+          <eParameters name="expected">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+          <eParameters name="actual">
+            <eType xsi:type="ecore:EClass" href="../standard/primitive_types.ecore#/1/standard/String"/>
+          </eParameters>
+        </eOperations>
+      </eClassifiers>
+    </eSubpackages>
+  </ecore:EPackage>
+  <ecore:EAnnotation source="dependentResource">
+    <references href="../standard/collections.ecore#/0"/>
+    <references href="../standard/collections.ecore#/1"/>
+    <references href="../standard/collections.ecore#/2"/>
+    <references href="../standard/java.ecore#/0"/>
+    <references href="../standard/java.ecore#/1"/>
+    <references href="../standard/java.ecore#/2"/>
+    <references href="../language/dynamic_expression.ecore#/0"/>
+    <references href="../language/dynamic_expression.ecore#/1"/>
+    <references href="../language/dynamic_expression.ecore#/2"/>
+    <references href="../persistence/resource.ecore#/0"/>
+    <references href="../persistence/resource.ecore#/1"/>
+    <references href="../persistence/resource.ecore#/2"/>
+    <references href="../language/reflective_collections.ecore#/0"/>
+    <references href="../language/reflective_collections.ecore#/1"/>
+    <references href="../language/reflective_collections.ecore#/2"/>
+    <references href="../reflection/reflection.ecore#/0"/>
+    <references href="../reflection/reflection.ecore#/1"/>
+    <references href="../reflection/reflection.ecore#/2"/>
+    <references href="kunit.ecore#/0"/>
+    <references href="kunit.ecore#/1"/>
+    <references href="kunit.ecore#/2"/>
+    <references href="#/0"/>
+    <references href="#/1"/>
+    <references href="../language/behavior.ecore#/0"/>
+    <references href="../language/behavior.ecore#/1"/>
+    <references href="../language/behavior.ecore#/2"/>
+    <references href="../utils/stack.ecore#/0"/>
+    <references href="../utils/stack.ecore#/1"/>
+    <references href="../utils/stack.ecore#/2"/>
+    <references href="../io/std_io.ecore#/0"/>
+    <references href="../io/std_io.ecore#/1"/>
+    <references href="../io/std_io.ecore#/2"/>
+    <references href="../Standard.ecore#/0"/>
+    <references href="../Standard.ecore#/1"/>
+    <references href="../Standard.ecore#/2"/>
+    <references href="../standard/primitive_types.ecore#/0"/>
+    <references href="../standard/primitive_types.ecore#/1"/>
+    <references href="../standard/primitive_types.ecore#/2"/>
+    <references href="../io/file_io.ecore#/0"/>
+    <references href="../io/file_io.ecore#/1"/>
+    <references href="../io/file_io.ecore#/2"/>
+    <references href="../language/structure.ecore#/0"/>
+    <references href="../language/structure.ecore#/1"/>
+    <references href="../language/structure.ecore#/2"/>
+    <references href="../exceptions/exceptions.ecore#/0"/>
+    <references href="../exceptions/exceptions.ecore#/1"/>
+    <references href="../exceptions/exceptions.ecore#/2"/>
+    <references href="../utils/hashtable.ecore#/0"/>
+    <references href="../utils/hashtable.ecore#/1"/>
+    <references href="../utils/hashtable.ecore#/2"/>
+  </ecore:EAnnotation>
+</xmi:XMI>

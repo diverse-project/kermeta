@@ -1,4 +1,4 @@
-/* $Id: AtPreVisitor.java,v 1.7 2007-06-29 11:46:59 jmottu Exp $
+/* $Id: AtPreVisitor.java,v 1.8 2007-07-20 15:07:48 ftanguy Exp $
  * Project   : kermeta interpreter
  * File      : Extern2CmdCompiler.java
  * License   : EPL

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectTypeVariableItemProvider.java,v 1.3 2007-07-11 14:41:35 cfaucher Exp $
+ * $Id: ObjectTypeVariableItemProvider.java,v 1.4 2007-07-20 15:08:27 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 

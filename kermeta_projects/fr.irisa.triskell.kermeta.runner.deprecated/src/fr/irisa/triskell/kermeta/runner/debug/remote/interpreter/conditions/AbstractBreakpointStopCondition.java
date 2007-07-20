@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.11 2007-04-24 12:45:36 dtouzet Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.12 2007-07-20 15:09:14 ftanguy Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -14,20 +14,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionContext;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.interpreter.Traceback;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableBreakpoint;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.traceability.TextReference;
 
 public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDebugCondition {
@@ -131,7 +130,7 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		}
 		else
 		{
-			Iterator it = unit.getAllImportedUnits().iterator();
+			Iterator it = KermetaUnitHelper.getAllImportedKermetaUnits(unit).iterator();
 			while (it.hasNext()) {
 				KermetaUnit u = (KermetaUnit)it.next();
 				String unit_uri = u.getUri().replaceAll("/+", "/");

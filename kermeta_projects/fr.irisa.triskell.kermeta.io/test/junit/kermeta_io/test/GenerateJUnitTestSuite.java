@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /*
- * Created on 16 févr. 2005
+ * Created on 16 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 
@@ -20,7 +20,9 @@ import java.io.IOException;
 public class GenerateJUnitTestSuite {
 
 
-	protected static String[] folders = {"test/ecore_testcases", "test/emfatic_testcases", "test/kmt_testcases", "test/kmtbodies_testcases"} ;
+	protected static String[] folders = {"test/ecore_testcases", 
+										//"test/emfatic_testcases", 
+										"test/kmt_testcases"} ;
 	protected static String[] filetypes = {"kmt", "emf", "ecore"};
 	
 	protected static String template = null;
@@ -33,7 +35,7 @@ public class GenerateJUnitTestSuite {
 		return template;
 	}
 
-	protected static String junitfile = "test/junit/kermeta_io/test/JunitTestSuite.java";
+	protected static String junitfile = "junit/kermeta_io/test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";

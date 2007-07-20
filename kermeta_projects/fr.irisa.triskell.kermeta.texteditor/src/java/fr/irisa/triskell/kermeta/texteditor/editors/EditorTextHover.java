@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.21 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: EditorTextHover.java,v 1.22 2007-07-20 15:09:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : EditorTextHover.java
 * License : EPL
@@ -27,23 +27,16 @@ import org.eclipse.jface.text.Region;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.MarkerUtilities;
-
-import fr.irisa.triskell.kermeta.ast.CompUnit;
+import org.kermeta.io.printer.KM2KMTPrettyPrinter;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.typechecker.Type;
 
 
 /**
@@ -98,7 +91,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 			TexteditorPlugin.pluginLog.warn("error computing hover info", e);
 		}
 		
-		if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
+		/*if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
 		    CompUnit unit = ((KMTUnit)editor.mcunit).getMctAST();
 		    KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(hoverRegion.getOffset(), hoverRegion.getLength());
 		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
@@ -122,11 +115,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		            // Find the tag of the CallFeature definition!
 		            if (fexp instanceof CallFeature)
 		            {
-		                /*FObject fdef = this.getDefinitionForCallFeature((CallFeature)fexp);
-		                if (fdef != null)
-		                {
-		                    ftags = kdocPrettyPrint(fdef.getTag());
-		                }*/
+
 		                return ppDefinitionForCallFeature((CallFeature)fexp);
 		            }
 		            else if (fexp.getStaticType() != null) {
@@ -144,7 +133,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        }
 		        
 		    }
-		}
+		}*/
 		
 		return null;
 	}

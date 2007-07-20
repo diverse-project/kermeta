@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmEditor.java,v 1.4 2007-02-19 18:04:48 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.5 2007-07-20 15:09:10 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -167,9 +167,10 @@ import fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProvider
 import fr.irisa.triskell.kermeta.language.provider.LanguageItemProviderAdapterFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
 
 
 /**
@@ -915,19 +916,19 @@ public class KmEditor
 		Exception exception = null;
 		Resource resource = null;
 		
-		URI frameworkURI = URI.createURI(StdLibKermetaUnitHelper.STD_LIB_URI_DEFAULT);
 		try {
 			// Load the resource through the editing domain.
 			//
 			resource = editingDomain.getResourceSet().getResource(resourceURI, true);
 			// Added CF in order to force the loading of framework.km when we open a km file
-			editingDomain.getResourceSet().getResource(frameworkURI, true);
+			KermetaUnit kermetaUnit = IOPlugin.getDefault().getFramework();
+			editingDomain.getResourceSet().getResources().add( kermetaUnit.getModelingUnit().eResource() );
 		}
 		catch (Exception e) {
 			exception = e;
 			resource = editingDomain.getResourceSet().getResource(resourceURI, false);
 			// Added CF
-			editingDomain.getResourceSet().getResource(frameworkURI, false);
+		//	editingDomain.getResourceSet().getResource(frameworkURI, false);
 		}
 
 		Diagnostic diagnostic = analyzeResourceProblems(resource, exception);

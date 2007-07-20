@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionValidator.java,v 1.1 2007-07-11 14:41:54 cfaucher Exp $
+ * $Id: ClassDefinitionValidator.java,v 1.2 2007-07-20 15:08:58 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.validation;
 
@@ -21,9 +21,9 @@ import org.eclipse.emf.common.util.EList;
 public interface ClassDefinitionValidator {
 	boolean validate();
 
-	boolean validateInv(EList value);
 	boolean validateIsAbstract(boolean value);
 	boolean validateOwnedAttribute(EList value);
 	boolean validateOwnedOperation(EList value);
 	boolean validateSuperType(EList value);
+	boolean validateInv(EList value);
 }

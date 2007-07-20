@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2007-06-28 17:10:47 jmottu Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2007-07-20 15:07:49 ftanguy Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -18,14 +18,13 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.kermeta.io.plugin.IOPlugin;
 
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.URIMapUtil;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 /**
  * Interpreter test suite.
@@ -36,32 +35,32 @@ public class JunitTestSuite extends TestSuite {
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("JunitTestSuite");
     RunJunitFactory runfactory = new RunJunitFactory();
     
+    static private IOPlugin ioPlugin;
+    
+    private void initialize() {
+    	
+    	if ( ioPlugin == null ) {
+		
+    		IOPlugin.LOCAL_USE = true;
+    		ioPlugin = new IOPlugin();
+	
+    	}
+
+    }
+    
     public JunitTestSuite(java.lang.Class theClass)
     {
         super();
+        initialize();
     }
     public JunitTestSuite(java.lang.Class theClass, String bla)
     {
         super();
+        initialize();
     }    
 	public JunitTestSuite(String arg0) {
 		super();
-		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
-        	"../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
-		
-		StdLibKermetaUnitHelper.STD_LIB_URI = "lib/framework.km";
-		
-		File file = new File("uri.map");
-		if (file.exists())
-		{	// if this file exists, load its content as a uri.map, this map is used by EMF while loading indirect files
-			URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
-			URI u = URI.createURI(file.getName());
-	    	if (u.isRelative()) {
-	    		URIConverter c = new URIConverterImpl();
-	    		u = u.resolve(c.normalize(URI.createURI(file.getName())));    			
-	    	}
-			internalLog.info("Loading URI_MAP from file: " + u.toFileString());
-		}
+		initialize();
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
@@ -87,7 +86,8 @@ public class JunitTestSuite extends TestSuite {
 	
 	public void testWithFile(String dir, String file)  {
 	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
-		addTest(new RunJunitFactory().addTestsForUnit(dir+"/"+file));
+		String uri = "platform:/plugin/fr.irisa.triskell.kermeta.interpreter/" + dir + "/" + file;
+		addTest(new RunJunitFactory().addTestsForUnit(uri));
 	}
 	
 	public static void main(String[] args) {

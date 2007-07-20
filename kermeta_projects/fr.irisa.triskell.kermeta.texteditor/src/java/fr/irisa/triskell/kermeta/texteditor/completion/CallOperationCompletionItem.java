@@ -1,4 +1,4 @@
-/* $Id: CallOperationCompletionItem.java,v 1.4 2007-06-27 14:43:05 cfaucher Exp $
+/* $Id: CallOperationCompletionItem.java,v 1.5 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : CallPropertyCompletionItem.java
 * License : EPL

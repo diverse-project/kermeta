@@ -1,6 +1,6 @@
 package testOpCall;
 
-require "../../../fr.irisa.triskell.kermeta/lib/framework.km"
+require "kermeta"
 
 class Test_opcall {
 

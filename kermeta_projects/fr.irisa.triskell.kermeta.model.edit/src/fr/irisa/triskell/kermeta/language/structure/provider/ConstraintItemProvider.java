@@ -217,7 +217,32 @@ public class ConstraintItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createAssignment()));
+				 BehaviorFactory.eINSTANCE.createConditional()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createCallExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createCallFeature()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -228,11 +253,6 @@ public class ConstraintItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -248,31 +268,6 @@ public class ConstraintItemProvider
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createConditional()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createRaise()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -302,17 +297,27 @@ public class ConstraintItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
+				 BehaviorFactory.eINSTANCE.createVariableDecl()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.Literals.CONSTRAINT__BODY,
-				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
 	/**

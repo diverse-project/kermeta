@@ -1,4 +1,4 @@
-/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.5 2006-09-22 11:21:02 zdrey Exp $
+/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.6 2007-07-20 15:09:18 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL

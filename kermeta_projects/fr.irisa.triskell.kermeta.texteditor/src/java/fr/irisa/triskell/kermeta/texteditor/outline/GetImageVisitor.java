@@ -1,4 +1,4 @@
-/* $Id: GetImageVisitor.java,v 1.7 2007-06-27 13:19:39 cfaucher Exp $
+/* $Id: GetImageVisitor.java,v 1.8 2007-07-20 15:09:22 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.texteditor
 * File : GetImageVisitor.java
 * License : EPL
@@ -64,11 +64,12 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 */
 	public Object visitClassDefinition(ClassDefinition arg0) {
 	   
-	    if (item.isTypeDefinitionImported()) {
+		if ( arg0.isIsAspect() ) {
+			return KermetaSpecialIcons.PACKAGE_BLUE_RED;
+		} else if (item.isTypeDefinitionImported()) {
 	        if (arg0.isIsAbstract()) return KermetaIconsBlue.CLASS_ABSTRACT;
 			return KermetaIconsBlue.CLASS;
-	    }
-	    else {
+	    } else {
 	        if (arg0.isIsAbstract()) return KermetaIconsRed.CLASS_ABSTRACT;
 			return KermetaIconsRed.CLASS;
 	    }
@@ -102,12 +103,12 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
 	public Object visitEnumerationLiteral(EnumerationLiteral arg0) {
-	    if (item.parent.isTypeDefinitionImported()) {
-	        return KermetaIconsBlue.ENUM_LIT;
+    	if ( item.parent instanceof OutlineItem ) {
+    		OutlineItem parentItem = (OutlineItem) item.parent;
+    		if ( parentItem.isTypeDefinitionImported() )
+    			return KermetaIconsBlue.ENUM_LIT;
 	    }
-	    else {
-	        return KermetaIconsRed.ENUM_LIT;
-	    }
+    	return KermetaIconsRed.ENUM_LIT;
 	}
 	
 	/**

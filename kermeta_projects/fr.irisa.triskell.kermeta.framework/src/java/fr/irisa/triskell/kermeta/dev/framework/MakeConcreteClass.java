@@ -1,4 +1,4 @@
-/* $Id: MakeConcreteClass.java,v 1.6 2006-03-03 15:21:25 dvojtise Exp $
+/* $Id: MakeConcreteClass.java,v 1.7 2007-07-20 15:08:39 ftanguy Exp $
  * Created on Feb 18, 2005
  * By zdrey
  * Description :
@@ -13,11 +13,13 @@
 package fr.irisa.triskell.kermeta.dev.framework;
 
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import org.kermeta.io.KermetaUnit;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -47,7 +49,7 @@ public class MakeConcreteClass extends KermetaVisitor {
     public Object visit(ClassDefinition classdef) {
         
         // create the class of classdefinition
-    	fr.irisa.triskell.kermeta.language.structure.Class parent_fclass = abstract_unit.struct_factory.createClass();
+    	fr.irisa.triskell.kermeta.language.structure.Class parent_fclass = StructureFactory.eINSTANCE.createClass();
         parent_fclass.setTypeDefinition((ClassDefinition)abstract_unit.getTypeDefinitionByName(
                 "kermeta::structure::"+classdef.getName()));
         

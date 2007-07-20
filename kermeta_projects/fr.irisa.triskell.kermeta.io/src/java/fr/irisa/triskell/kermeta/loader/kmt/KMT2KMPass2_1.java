@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.3 2007-05-30 11:28:45 jsteel Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.4 2007-07-20 15:08:06 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -13,7 +13,11 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+
 import java.util.Stack;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingContext;
 
 import fr.irisa.triskell.kermeta.ast.Basictype;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
@@ -21,9 +25,9 @@ import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * 
@@ -39,8 +43,8 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * 
 	 * @param builder
 	 */
-	public KMT2KMPass2_1(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMPass2_1(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 
 	/**
@@ -81,17 +85,21 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 		// If there is no supertype, or if for some reason its not a basic type (impossible), we don't care any more
 		if (null == bsuper) return false; 
 		String qname = qualifiedIDAsString(bsuper.getName());
+		
 		// this can be a class, and enum or a type variable.
 		TypeDefinition superdef = builder.getTypeDefinitionByName(qname);
 		//Type supertype = KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder);
 		if (superdef instanceof ModelType) {
-			ModelTypeVariable mtv = builder.struct_factory.createModelTypeVariable();
+			ModelTypeVariable mtv = StructureFactory.eINSTANCE.createModelTypeVariable();
 			mtv.setName(tv.getName());
-			GenericTypeDefinition context;
-				context = builder.current_class;
-			context.getTypeParameter().set(context.getTypeParameter().indexOf(tv), mtv);
+			GenericTypeDefinition typeDefinition;
+				
+			typeDefinition = context.current_class;
+			//context = ((ModelType) superdef).g
+			
+			typeDefinition.getTypeParameter().set(typeDefinition.getTypeParameter().indexOf(tv), mtv);
 			builder.storeTrace(mtv, typeVarDecl);
-			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(bsuper, builder);
+			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, bsuper, builder);
 			mtv.setSupertype(supertype);
 			// this supertype is contained by the ModeltypeVariable
 			//mtv.getContainedType().add(supertype);

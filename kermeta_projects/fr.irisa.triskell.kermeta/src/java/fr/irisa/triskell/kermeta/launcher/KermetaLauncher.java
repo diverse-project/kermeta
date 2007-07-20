@@ -1,5 +1,5 @@
 
-/*$Id: KermetaLauncher.java,v 1.1 2007-05-30 13:28:24 ftanguy Exp $
+/*$Id: KermetaLauncher.java,v 1.2 2007-07-20 15:09:18 ftanguy Exp $
  * Project : fr.irisa.triskell.kermeta
  * File : 	KermetaLauncher.java
  * License : EPL
@@ -14,11 +14,15 @@ package fr.irisa.triskell.kermeta.launcher;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.io.plugin.IOPlugin;
+
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
+import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 public class KermetaLauncher {
 
@@ -32,7 +36,16 @@ public class KermetaLauncher {
 		for (int i = 0; i < args.length - 1; i++)
 			arguments += args[i + 1] + " ";
 
-		KermetaInterpreter interpreter = typeCheckTranfo(file);
+		KermetaInterpreter interpreter;
+		try {
+			interpreter = typeCheckTranfo(file);
+		} catch (KermetaIOFileNotFoundException e1) {
+			e1.printStackTrace();
+			return false;
+		} catch (URIMalformedException e) {
+			e.printStackTrace();
+			return false;
+		}
 
 		if (interpreter == null)
 			return false;
@@ -52,13 +65,13 @@ public class KermetaLauncher {
 		return true;
 	}
 
-	private static KermetaInterpreter typeCheckTranfo(String file) {
+	private static KermetaInterpreter typeCheckTranfo(String file) throws KermetaIOFileNotFoundException, URIMalformedException {
 
-		KermetaUnitFactory.getDefaultLoader().unloadAll();
-		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader()
-				.createKermetaUnit(file);
-		unit.load();
-		unit.typeCheckAllUnits();
+		KermetaUnit unit = IOPlugin.getDefault().loadKermetaUnit( file );
+
+		KermetaTypeChecker typechecker = new KermetaTypeChecker( unit );
+		typechecker.checkUnit();
+		
 		try {
 			KermetaInterpreter interpreter = new KermetaInterpreter(unit);
 			return interpreter;

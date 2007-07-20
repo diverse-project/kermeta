@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.5 2006-12-06 16:38:03 dvojtise Exp $
+/* $Id: UnionType.java,v 1.6 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : EPL

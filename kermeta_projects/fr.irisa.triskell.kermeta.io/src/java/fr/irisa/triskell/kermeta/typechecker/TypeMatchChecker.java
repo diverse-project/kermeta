@@ -1,4 +1,4 @@
-/* $Id: TypeMatchChecker.java,v 1.5 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: TypeMatchChecker.java,v 1.6 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeMatchChecker.java
 * License : EPL
@@ -343,7 +343,7 @@ public class TypeMatchChecker {
 			int match_count = 0;
 			SimpleType simp = new SimpleType(req);
 			for (Binding b : candidates) {
-				if (simp.equals(new SimpleType(b.getFrom()))) {
+				if (simp.equals(new SimpleType(b.getFrom()))) { 
 					match_count++;
 				}
 			}

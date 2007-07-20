@@ -39,7 +39,6 @@ class Class1
 }
 class Test2 inherits Class1
 {
-	reference prop1: Void
 
 	reference Property1 : Void
 

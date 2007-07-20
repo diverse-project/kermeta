@@ -1,4 +1,4 @@
-/*$Id: KermetaWorkspace.java,v 1.2 2007-05-25 15:04:38 ftanguy Exp $
+/*$Id: KermetaWorkspace.java,v 1.3 2007-07-20 15:08:47 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -89,8 +89,11 @@ public class KermetaWorkspace {
 	 * @throws CoreException
 	 */
 	public KermetaProject addKermetaProject(IProject value) throws CoreException {
-		KermetaProject project = new KermetaProject(value);
-		projects.put(value, project);
+		KermetaProject project = getKermetaProject(value);
+		if ( project == null ) {
+			project = new KermetaProject(value);
+			projects.put(value, project);
+		}
 		return project;
 	}
 	

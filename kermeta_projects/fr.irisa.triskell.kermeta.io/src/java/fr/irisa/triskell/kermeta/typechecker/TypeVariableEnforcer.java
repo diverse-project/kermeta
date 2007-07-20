@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.8 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.9 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta io
 * File : GenericTypeSubstitution.java
 * License : EPL
@@ -87,6 +87,7 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 				TypeVariableBinding provided = (TypeVariableBinding)it.next();
 				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
 				bind.setVariable(provided.getVariable());
+				
 				bind.setType(getBoundType(provided.getType(), bindings));
 				result.getTypeParamBinding().add(bind);
 			}

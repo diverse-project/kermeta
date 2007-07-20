@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.9 2007-05-30 11:28:44 jsteel Exp $
+/* $Id: TypeEqualityChecker.java,v 1.10 2007-07-20 15:08:03 ftanguy Exp $
 * Project : Kermeta io
 * File : TypeConformanceChecker.java
 * License : EPL
@@ -15,6 +15,10 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import org.kermeta.io.KermetaUnit;
+
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
@@ -25,6 +29,9 @@ import fr.irisa.triskell.kermeta.language.structure.VirtualType;
 import fr.irisa.triskell.kermeta.language.structure.ObjectTypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -39,7 +46,14 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 		required = PrimitiveTypeResolver.getResolvedType(required);
 		provided = PrimitiveTypeResolver.getResolvedType(provided);
 		TypeEqualityChecker visitor = new TypeEqualityChecker(provided);
-		return ((Boolean)visitor.accept(required)).booleanValue();
+		boolean result = ((Boolean)visitor.accept(required)).booleanValue();
+		if ( ! result && (required instanceof Class) && (provided instanceof Class) ) {
+			ClassDefinition cdRequired = (ClassDefinition) ((Class) required).getTypeDefinition(); 
+			ClassDefinition cdProvided = (ClassDefinition) ((Class) provided).getTypeDefinition(); 
+			if ( ClassDefinitionHelper.getAllBaseClasses(cdRequired).contains( cdProvided ) )
+				result = true;			
+		}
+		return result;
 	}
 	
 	/**

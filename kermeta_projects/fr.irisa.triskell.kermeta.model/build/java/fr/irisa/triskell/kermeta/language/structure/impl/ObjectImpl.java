@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectImpl.java,v 1.3 2007-07-11 14:41:52 cfaucher Exp $
+ * $Id: ObjectImpl.java,v 1.4 2007-07-20 15:09:01 ftanguy Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -17,11 +17,11 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl#getTag <em>Tag</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl#getOwnedTag <em>Owned Tag</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,6 +46,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * @generated
 	 */
 	public static final String copyright = "IRISA / INRIA / Universite de Rennes 1";
+
 	/**
 	 * The cached value of the '{@link #getTag() <em>Tag</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -54,6 +56,16 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * @ordered
 	 */
 	protected EList<Tag> tag;
+
+	/**
+	 * The cached value of the '{@link #getOwnedTag() <em>Owned Tag</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedTag()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Tag> ownedTag;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,6 +96,18 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 			tag = new EObjectWithInverseResolvingEList.ManyInverse<Tag>(Tag.class, this, StructurePackage.OBJECT__TAG, StructurePackage.TAG__OBJECT);
 		}
 		return tag;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Tag> getOwnedTag() {
+		if (ownedTag == null) {
+			ownedTag = new EObjectContainmentEList.Resolving<Tag>(Tag.class, this, StructurePackage.OBJECT__OWNED_TAG);
+		}
+		return ownedTag;
 	}
 
 	/**
@@ -210,6 +234,8 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
+			case StructurePackage.OBJECT__OWNED_TAG:
+				return ((InternalEList<?>)getOwnedTag()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -224,6 +250,8 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				return getTag();
+			case StructurePackage.OBJECT__OWNED_TAG:
+				return getOwnedTag();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -241,6 +269,10 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 				getTag().clear();
 				getTag().addAll((Collection<? extends Tag>)newValue);
 				return;
+			case StructurePackage.OBJECT__OWNED_TAG:
+				getOwnedTag().clear();
+				getOwnedTag().addAll((Collection<? extends Tag>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -256,6 +288,9 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 			case StructurePackage.OBJECT__TAG:
 				getTag().clear();
 				return;
+			case StructurePackage.OBJECT__OWNED_TAG:
+				getOwnedTag().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -270,6 +305,8 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				return tag != null && !tag.isEmpty();
+			case StructurePackage.OBJECT__OWNED_TAG:
+				return ownedTag != null && !ownedTag.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

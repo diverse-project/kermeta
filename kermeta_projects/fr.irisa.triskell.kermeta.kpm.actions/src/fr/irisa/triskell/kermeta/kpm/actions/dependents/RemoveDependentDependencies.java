@@ -1,4 +1,4 @@
-/*$Id: RemoveDependentDependencies.java,v 1.5 2007-05-28 12:16:22 ftanguy Exp $
+/*$Id: RemoveDependentDependencies.java,v 1.6 2007-07-20 15:09:26 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm.actions
 * File : 	RemoveDependentDependencies.java
 * License : EPL
@@ -11,10 +11,12 @@ package fr.irisa.triskell.kermeta.kpm.actions.dependents;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.extension.IAction;
@@ -22,7 +24,6 @@ import fr.irisa.triskell.kermeta.kpm.Dependency;
 import fr.irisa.triskell.kermeta.kpm.Out;
 import fr.irisa.triskell.kermeta.kpm.Unit;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 
 public class RemoveDependentDependencies implements IAction {
@@ -94,9 +95,9 @@ public class RemoveDependentDependencies implements IAction {
 	}
 
 	private boolean findImportedUnit(KermetaUnit kermetaUnit, Unit unitToFind) {
-		for ( KermetaUnit currentKermetaUnit : kermetaUnit.importedUnits ) {
+		for ( KermetaUnit currentKermetaUnit : (List<KermetaUnit>) kermetaUnit.getImportedKermetaUnits() ) {
 			IFile currentFile = ResourceHelper.getIFile(currentKermetaUnit.getUri());
-			if ( currentFile.getFullPath().toString().equals(unitToFind.getValue()) )
+			if ( (currentFile != null) && currentFile.getFullPath().toString().equals(unitToFind.getValue()) )
 				return true;
 		}
 		return false;
