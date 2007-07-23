@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.20 2007-07-20 15:09:18 ftanguy Exp $
+/* $Id: UnitExporterWizard.java,v 1.21 2007-07-23 13:55:53 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -267,8 +267,6 @@ public class UnitExporterWizard extends Wizard {
 		
 		if(! unit.isErrored() || outputPage.forceWriteEvenIfErrorCheck.getSelection()){
 			try {
-
-				outputFile = outputPage.createNewFile();				
 
 				KermetaPlugin.getDefault().getConsole().println("Writing " + outputFile.getName());
 
