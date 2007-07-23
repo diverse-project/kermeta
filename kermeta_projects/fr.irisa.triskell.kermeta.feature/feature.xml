@@ -145,6 +145,13 @@ GPL license.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
+   <plugin
+         id="fr.irisa.triskell.kermeta.migrationv032_v040"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.eclipse.util"
