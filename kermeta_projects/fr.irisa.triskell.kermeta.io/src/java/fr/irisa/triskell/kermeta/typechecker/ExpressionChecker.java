@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.41 2007-07-20 15:08:03 ftanguy Exp $
+/* $Id: ExpressionChecker.java,v 1.42 2007-07-23 11:48:05 ftanguy Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -62,6 +62,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.modelhelper.ClassDefinitionHelper;
+import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -508,6 +509,19 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 				return TypeCheckerContext.VoidType;
 				
 			}
+			
+			if ( prop == null ) {
+				if ( target.getFType() instanceof Class ) {
+					Class c = (Class) target.getFType();
+					String message = "The class definition " + NamedElementHelper.getQualifiedName(c.getTypeDefinition()) + " does not declare any property named " + fc.getName() + ".";
+					unit.error(message, expression);
+				} else {
+					String message = "Assignment impossible because one class definition is missing a property named " + fc.getName() + ".";
+					unit.error(message, expression);	
+				}				
+				return TypeCheckerContext.VoidType;
+			}
+			
 			// Check if the property is not a reflectivecollection
 			int upperBound = prop.getProperty().getUpper();
 			if ( (prop != null) && ((upperBound == -1) || (upperBound > 1)) ) {
