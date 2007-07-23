@@ -1,4 +1,4 @@
-/*$Id: KermetaProject.java,v 1.9 2007-07-20 15:08:47 ftanguy Exp $
+/*$Id: KermetaProject.java,v 1.10 2007-07-23 14:00:58 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.eclipse.ecore.XMIHelper;
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
 import fr.irisa.triskell.kermeta.kpm.KPM;
 import fr.irisa.triskell.kermeta.kpm.Unit;
+import fr.irisa.triskell.kermeta.kpm.builder.KPMResourceVisitor;
 import fr.irisa.triskell.kermeta.kpm.helpers.KPMHelper;
 import fr.irisa.triskell.kermeta.kpm.hosting.KermetaUnitHost;
 import fr.irisa.triskell.kermeta.kpm.plugin.KPMPlugin;
@@ -97,8 +98,9 @@ public class KermetaProject {
 		if ( file == null ) {
 			initializeConstants();
 			kpm = KPMHelper.getDefaultKPM(project);
-			//kpm = KpmFactory.eINSTANCE.createKPM();
-			save();
+	    	KPMResourceVisitor visitor = new KPMResourceVisitor(this);
+	    	project.accept(visitor);
+	    	save();
 		} else {
 			load();
 		}
