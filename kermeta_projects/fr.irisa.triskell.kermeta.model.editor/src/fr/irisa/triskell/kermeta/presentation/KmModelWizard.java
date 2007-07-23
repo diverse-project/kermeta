@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmModelWizard.java,v 1.5 2006-12-20 10:53:53 cfaucher Exp $
+ * $Id: KmModelWizard.java,v 1.6 2007-07-23 09:15:06 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.presentation;
 
@@ -78,6 +78,8 @@ import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
 import fr.irisa.triskell.kermeta.provider.KermetaEditPlugin;
 
+import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 
@@ -187,7 +189,7 @@ public class KmModelWizard extends Wizard implements INewWizard {
 				}
 			}
 			// begin Adding at the generated code
-			initialObjectNames.add("Package");
+			initialObjectNames.add("ModelingUnit");
 			// finish Adding at the generated code
 			Collections.sort(initialObjectNames, java.text.Collator.getInstance());
 		}
@@ -205,13 +207,17 @@ public class KmModelWizard extends Wizard implements INewWizard {
 		//EClass eClass = (EClass)kmPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
 		//EObject rootObject = kmFactory.create(eClass);
 		
-		// We are setting strongly the initial object of the new model => Package from kermeta::language::structure
-		// A finest way will be to get the classifiers
-		// that are in all the subpackages of KmPackage
-		// (with an exploration recursive method in getInitialObjectNames())
+		// We are setting strongly the initial object of the new model => ModelingUnit from kermeta::language::structure
 		StructurePackage structurePackage = StructurePackage.eINSTANCE;
-		EClass eClass = (EClass)structurePackage.getEClassifier("Package");
-		EObject rootObject = structurePackage.getStructureFactory().create(eClass);
+		EClass eClass = (EClass) structurePackage.getEClassifier("ModelingUnit");
+		ModelingUnit rootObject = (ModelingUnit) structurePackage.getStructureFactory().create(eClass);
+		
+		// Add a first package to the new modeling unit
+		EClass eClass4Package = (EClass) structurePackage.getEClassifier("Package");
+		Package firstPackage = (Package) structurePackage.getStructureFactory().create(eClass4Package);
+		
+		rootObject.getPackages().add(firstPackage);
+		
 		return rootObject;
 	}
 
