@@ -15,10 +15,10 @@ public class MyOCLParser extends OCLParser {
 	
 	private int errorReportLineOffset = 0;
 	
-	public MyOCLParser(OCLLexer lexStream,Environment e) {
-		super(lexStream,e);
+	public MyOCLParser(String oclTextToParse) {
+		super ( new OCLLexer((oclTextToParse).toCharArray()),
+				new MyEnvironement<Object, Object, Object, Object, Object, Object, Object, Object,Object,Object,Object,Object>());
 	}
-
 	
 	public EObject parse() throws  org.eclipse.ocl.ParserException {
 		EObject cstNode = parser();
@@ -29,7 +29,6 @@ public class MyOCLParser extends OCLParser {
 			throw new ParserException(error);
 		}
 		return cstNode;
-		
 	}
 	
 	

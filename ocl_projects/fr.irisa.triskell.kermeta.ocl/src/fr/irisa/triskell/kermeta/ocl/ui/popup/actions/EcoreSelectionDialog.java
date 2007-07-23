@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreSelectionDialog.java,v 1.1 2007-06-01 15:03:02 barais Exp $
+/*$Id: EcoreSelectionDialog.java,v 1.2 2007-07-23 14:33:38 bitterjug Exp $
 * Project : fr.irisa.triskell.sintaks
 * File : 	SyntaksModelSelectionDialog.java
 * License : EPL
@@ -17,10 +17,6 @@ import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -30,10 +26,8 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;

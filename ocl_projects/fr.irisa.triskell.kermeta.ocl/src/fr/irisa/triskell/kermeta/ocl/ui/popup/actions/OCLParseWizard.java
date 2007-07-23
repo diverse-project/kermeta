@@ -20,6 +20,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import fr.irisa.triskell.kermeta.ocl.TestOCLParser;
 import fr.irisa.triskell.kermeta.ocl.console.OCLConsole;
 import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
+import fr.irisa.triskell.kermeta.ocl.kmtactions.KermetaConfig;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 
@@ -181,7 +182,7 @@ public class OCLParseWizard extends Wizard {
 			
 			// Here I need to redirect Kermeta Console !
 			
-			GenerateOCL.run(ipath, imetapath, opath, new OCLConsole());
+			GenerateOCL.run(ipath, imetapath, opath, new OCLConsole(), KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
 			
 			
 			 File f = new File(inputFile.getLocation().removeFileExtension().addFileExtension("mocl").toString());

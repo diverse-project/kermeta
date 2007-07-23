@@ -13,9 +13,9 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 public class GenerateOCL {
 
-	public static void run(String in, String inmeta, String out, KermetaIOStream console) {
+	public static void run(String in, String inmeta, String out, KermetaIOStream console, String KermetaTransfoPath) {
 		System.out.println("run OCL2KMT Transformation");
-		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(KermetaConfig.KM_DIR + "/OCLKMTPrinter.kmt");
+		KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(KermetaTransfoPath);
 		unit.load();
 		unit.typeCheckAllUnits();
 		KermetaInterpreter inter = new KermetaInterpreter(unit);
@@ -28,6 +28,7 @@ public class GenerateOCL {
 		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(inmeta, inter.getMemory().getROFactory()));
 		params.add(fr.irisa.triskell.kermeta.runtime.basetypes.String.create(out, inter.getMemory().getROFactory()));
 		inter.setEntryParameters(params);
+		
 		// And we launch the interpreter
 		inter.launch();
 	}
