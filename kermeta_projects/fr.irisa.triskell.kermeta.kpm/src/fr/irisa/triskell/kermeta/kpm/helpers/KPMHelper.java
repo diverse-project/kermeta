@@ -1,4 +1,4 @@
-/*$Id: KPMHelper.java,v 1.15 2007-06-26 12:29:04 ftanguy Exp $
+/*$Id: KPMHelper.java,v 1.16 2007-07-23 14:00:21 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -108,6 +108,8 @@ public class KPMHelper {
 		dependency.getOuts().add(out2);*/
 		
 		addUpdateDependencyForKMTFile(kpm);
+		addUpdateDependencyForKMFile(kpm);
+		addUpdateDependencyForEcoreFile(kpm);
 		addCloseKMTFileDependency(kpm);
 		
 		return kpm;
@@ -138,21 +140,6 @@ public class KPMHelper {
 		
 		Out out3 = InOutHelper.createOutWithNameFilter(kpm, "fr.irisa.triskell.kermeta.kpm.actions.kmt2km", "*.km");
 		outs.add(out3);
-		
-		
-		/*FilterExpression outExpression = KpmFactory.eINSTANCE.createFilterExpression();
-		NameFilter ecoreFilter = kpm.findNameFilter("*.ecore");
-		outExpression.setFilter(ecoreFilter);
-
-		FilterExpression filterExpression = KpmFactory.eINSTANCE.createFilterExpression();
-		filterExpression.setFilter(kpm.getExistFilter());
-		ANDExpression and = KpmFactory.eINSTANCE.createANDExpression();
-		and.setExpression(filterExpression);
-		outExpression.setSubExpression(and);
-		
-		Out out3 = KpmFactory.eINSTANCE.createOut();
-		out3.setExpression(outExpression);
-		out3.setAction( kpm.findAction("fr.irisa.triskell.kermeta.kpm.actions.kmt2ecore") );*/
 
 		Out out4 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.createDependentDependencies");
 		outs.add(out4);
@@ -169,6 +156,40 @@ public class KPMHelper {
 		}
 		
 		RuleHelper.createRule(kpm, "Update KMT File", "normal", "update", in, outs);
+	}
+	
+	static public void addUpdateDependencyForKMFile(KPM kpm) {
+		
+		ArrayList<Out> outs = new ArrayList<Out> ();
+		
+		In in = InOutHelper.createInWithNameFilter(kpm, "*.km");
+		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out1);
+
+		Out out2 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintCheck");
+		outs.add(out2);
+		
+		Out out6 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
+		outs.add(out6);
+		
+		RuleHelper.createRule(kpm, "Update KM File", "normal", "update", in, outs);
+	}
+	
+	static public void addUpdateDependencyForEcoreFile(KPM kpm) {
+		
+		ArrayList<Out> outs = new ArrayList<Out> ();
+		
+		In in = InOutHelper.createInWithNameFilter(kpm, "*.ecore");
+		Out out1 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.typecheck");
+		outs.add(out1);
+
+		Out out2 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.constraintCheck");
+		outs.add(out2);
+		
+		Out out6 = InOutHelper.createOut(kpm, "fr.irisa.triskell.kermeta.kpm.actions.addMarkers");
+		outs.add(out6);
+		
+		RuleHelper.createRule(kpm, "Update Ecore File", "normal", "update", in, outs);
 	}
 	
 	static public void addCloseKMTFileDependency(KPM kpm) {
