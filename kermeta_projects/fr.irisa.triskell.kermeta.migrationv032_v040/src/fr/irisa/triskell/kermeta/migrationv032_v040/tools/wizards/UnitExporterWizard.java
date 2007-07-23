@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.1 2007-01-23 15:04:13 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.2 2007-07-23 09:16:19 ftanguy Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -33,10 +33,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.kermeta.io.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.migrationv032_v040.Activator;
+import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
@@ -135,10 +135,6 @@ public class UnitExporterWizard extends Wizard {
 	 * @throws Exception
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception {
-
-		builder.saveAsXMIModel(ifile.getLocation().toOSString());
-
-		ifile.refreshLocal(1, null);
 	}
 
 	public void writeTrace() throws Exception {
@@ -150,12 +146,12 @@ public class UnitExporterWizard extends Wizard {
 			// when parsed form kmt files
 			// tracer.optimizeTraces();
 
-			IFile traceKmFile = IDEWorkbenchPlugin.getPluginWorkspace()
+/*			IFile traceKmFile = IDEWorkbenchPlugin.getPluginWorkspace()
 					.getRoot().getFile(
 							traceFile.getFullPath().addFileExtension("km"));
 			unit.saveAsXMIModel(traceKmFile.getLocation().toOSString());
 
-			traceKmFile.refreshLocal(1, null);
+			traceKmFile.refreshLocal(1, null);*/
 		}
 		// Save trace
 		try {
@@ -188,18 +184,17 @@ public class UnitExporterWizard extends Wizard {
 				outputPage.getContainerFullPath().append(
 						outputPage.getFileName()));
 		unit = createUnit();
-		unit.load();
 
-		if (unit.messages.hasError()) {
+		if ( unit.isErrored() ) {
 			Shell theShell = this.getContainer().getShell();
 			MessageDialog.openError(theShell, "Error loading file",
 					"The source file contains errors: "
-							+ unit.messages.getAllMessagesAsString());
+							+ KermetaUnitHelper.getAllErrorsAsString(unit) );
 
 			MessageConsoleStream mcs = Activator.getDefault().getConsole()
 					.newMessageStream();
 			mcs.setColor(new Color(null, 255, 0, 0));
-			mcs.println(unit.messages.getAllMessagesAsString());
+			mcs.println( KermetaUnitHelper.getAllErrorsAsString(unit) );
 
 		} else {
 			try {
@@ -207,11 +202,11 @@ public class UnitExporterWizard extends Wizard {
 				outputFile = outputPage.createNewFile();
 
 				// display eventual warnings
-				if (unit.messages.getAllWarnings().size() > 0) {
+				if ( unit.isWarned() ) {
 					MessageConsoleStream mcs = Activator.getDefault()
 							.getConsole().newMessageStream();
 					mcs.setColor(new Color(null, 255, 170, 0));
-					mcs.println(unit.messages.getAllMessagesAsString());
+					mcs.println( KermetaUnitHelper.getAllWarningsAsString(unit) );
 				}
 
 				Activator.getDefault().getConsoleStream().println(
@@ -239,18 +234,7 @@ public class UnitExporterWizard extends Wizard {
 	 * @return KermetaUnit
 	 */
 	public KermetaUnit createUnit() {
-
-		String inputFile_uri = "platform:/resource"
-				+ inputFile.getFullPath().toString();
-
-		// Do not use default loader, use the one from the migration tool
-		KermetaUnitFactory.resetDefaultLoader(); // this is the magic, replace the loader by our migration version
-		fr.irisa.triskell.kermeta.migrationv032_v040.loader.KermetaUnitFactory.getDefaultLoader().unloadAll();
-		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(
-				inputFile_uri);
-		KermetaUnitFactory.resetDefaultLoader(); // reset it back so another app won't have this parser ...
-		
-		return unit;
+		return null;
 	}
 
 	protected void initTraces() {

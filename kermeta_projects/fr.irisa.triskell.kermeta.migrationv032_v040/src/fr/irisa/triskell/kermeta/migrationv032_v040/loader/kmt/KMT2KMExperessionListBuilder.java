@@ -1,14 +1,18 @@
 /*
- * Created on 6 févr. 2005
+ * Created on 6 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+
 import java.util.ArrayList;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpression;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpressionLst;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
+
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+
 
 
 /**
@@ -18,12 +22,12 @@ import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpressionLst;
  */
 public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 
-	public static ArrayList process(FExpressionLst node, KermetaUnit builder) {
+	public static ArrayList process(LoadingContext context, FExpressionLst node, KermetaUnit builder) {
 		if (node == null) return new ArrayList();
-		KMT2KMExperessionListBuilder visitor = new KMT2KMExperessionListBuilder(builder);
-		builder.pushContext();
+		KMT2KMExperessionListBuilder visitor = new KMT2KMExperessionListBuilder(builder, context);
+		context.pushContext();
 		node.accept(visitor);
-		builder.popContext();
+		context.popContext();
 		return visitor.result;
 	}
 	
@@ -32,8 +36,8 @@ public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMExperessionListBuilder(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMExperessionListBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 		result = new ArrayList();
 	}
 	
@@ -41,7 +45,7 @@ public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FExpression)
 	 */
 	public boolean beginVisit(FExpression fExpression) {
-		fr.irisa.triskell.kermeta.language.behavior.Expression exp = KMT2KMExperessionBuilder.process(fExpression, builder);
+		fr.irisa.triskell.kermeta.language.behavior.Expression exp = KMT2KMExperessionBuilder.process(context, fExpression, builder);
 		if (exp != null) result.add(exp);
 		return false;
 	}

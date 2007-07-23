@@ -1,20 +1,21 @@
 /*
- * Created on 6 févr. 2005
+ * Created on 6 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+
 import java.util.Hashtable;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-//import fr.irisa.triskell.kermeta.language.behavior.FExpression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.AdditiveExpression;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.AdditiveOp;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.MultiplicativeExpression;
 
 
 /**
@@ -28,9 +29,9 @@ import fr.irisa.triskell.kermeta.migrationv032_v040.ast.MultiplicativeExpression
 public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 
 	
-	public static fr.irisa.triskell.kermeta.language.behavior.Expression process(AdditiveExpression node, KermetaUnit builder) {
+	public static fr.irisa.triskell.kermeta.language.behavior.Expression process(LoadingContext context, AdditiveExpression node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMAdditiveExpressionBuilder visitor = new KMT2KMAdditiveExpressionBuilder(builder);
+		KMT2KMAdditiveExpressionBuilder visitor = new KMT2KMAdditiveExpressionBuilder(builder, context);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -49,9 +50,8 @@ public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMAdditiveExpressionBuilder(KermetaUnit builder) {
-		super(builder);
-		// TODO Auto-generated constructor stub
+	public KMT2KMAdditiveExpressionBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 
 	/**
@@ -62,14 +62,14 @@ public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof MultiplicativeExpression) {
 				if (operator == null) {
-					result = KMT2KMMultiplicativeExpressionBuilder.process((MultiplicativeExpression)children[i], builder);
+					result = KMT2KMMultiplicativeExpressionBuilder.process(context, (MultiplicativeExpression)children[i], builder);
 				}
 				else {
-					CallFeature call = builder.behav_factory.createCallFeature();
+					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMMultiplicativeExpressionBuilder.process((MultiplicativeExpression)children[i], builder));
+					call.getParameters().add(KMT2KMMultiplicativeExpressionBuilder.process(context, (MultiplicativeExpression)children[i], builder));
 					result = call;
 				}
 			}

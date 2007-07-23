@@ -1,13 +1,17 @@
 /* $Id : $
- * Created on 5 févr. 2005
+ * Created on 5 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
+
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FAssignement;
 
 /**
  * @author Franck Fleurey
@@ -21,18 +25,18 @@ import fr.irisa.triskell.kermeta.migrationv032_v040.ast.FAssignement;
  */
 public class KMT2KMExperessionBuilder extends KMT2KMPass {
 
-	public static Expression process(fr.irisa.triskell.kermeta.migrationv032_v040.ast.FExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, FExpression node, KermetaUnit builder) {
 	    
 		if (node == null) return null;
-		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder);
-		int old_errs = builder.messages.nbErrors();
+		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder, context);
+		int old_errs = builder.getMessages().size();
 		try {
 			node.accept(visitor);
 		}
 		catch(IllegalArgumentException e) {
 			// just catch the exeption if an error has been reported
 			// otherwise trow the exception to the caller
-			if (!(builder.messages.nbErrors() > old_errs)) throw e;
+			if (!(builder.getMessages().size() > old_errs)) throw e;
 		}
 		return visitor.result;
 	}
@@ -42,8 +46,8 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	/**
 	 * 
 	 */
-	public KMT2KMExperessionBuilder(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMExperessionBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 
 	}
 	
@@ -52,11 +56,11 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(FAssignement fAssignement) {
 		if (fAssignement.getAssignementOp() != null) {
-			Expression left = KMT2KMLogicalExperessionBuilder.process(fAssignement.getExpression(), builder);
-			Expression right = KMT2KMLogicalExperessionBuilder.process(fAssignement.getNewvalue(), builder);
+			Expression left = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder);
+			Expression right = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getNewvalue(), builder);
 			// left should be a call expr without params
 			if (left instanceof CallExpression && ((CallExpression)left).getParameters().size() == 0)  {
-				fr.irisa.triskell.kermeta.language.behavior.Assignment assign = builder.behav_factory.createAssignment();
+				fr.irisa.triskell.kermeta.language.behavior.Assignment assign = BehaviorFactory.eINSTANCE.createAssignment();
 				builder.storeTrace(assign, fAssignement);
 				assign.setTarget((CallExpression)left);
 				assign.setValue(right);
@@ -65,13 +69,14 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 				result = assign;
 			}
 			else {
-				builder.messages.addMessage(new KMTUnitLoadError("Assignement : Only variables and properties can be assigned", fAssignement));
+				//builder.messages.addMessage(new KMTUnitLoadError("Assignement : Only variables and properties can be assigned", fAssignement));
+				builder.error("Assignement : Only variables and properties can be assigned");
 				result = left;
 				return false;
 			}
 		}
 		else {
-			result = KMT2KMLogicalExperessionBuilder.process(fAssignement.getExpression(), builder);
+			result = KMT2KMLogicalExperessionBuilder.process(context, fAssignement.getExpression(), builder);
 		}
 		return false;
 	}

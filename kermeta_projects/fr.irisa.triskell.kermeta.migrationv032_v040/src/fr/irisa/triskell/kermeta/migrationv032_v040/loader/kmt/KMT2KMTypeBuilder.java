@@ -1,4 +1,4 @@
-/* $Id: KMT2KMTypeBuilder.java,v 1.3 2007-06-04 14:21:39 dvojtise Exp $
+/* $Id: KMT2KMTypeBuilder.java,v 1.4 2007-07-23 09:16:19 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMTypeBuilder.java
  * License : EPL
@@ -10,29 +10,37 @@
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
+
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VirtualType;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Basictype;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Functype;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Prodtype;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Type;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Typelst;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.VoidType;
+import fr.irisa.triskell.kermeta.modelhelper.ModelTypeHelper;
 import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
 
 
@@ -41,13 +49,14 @@ import fr.irisa.triskell.kermeta.modelhelper.NamedElementHelper;
  */
 public class KMT2KMTypeBuilder extends KMT2KMPass {
 	
-	public static fr.irisa.triskell.kermeta.language.structure.Type process(Type node, KermetaUnit builder) {
+	public static fr.irisa.triskell.kermeta.language.structure.Type process(LoadingContext context, Type node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMTypeBuilder visitor = new KMT2KMTypeBuilder(builder);
-		int nb_err = builder.messages.nbErrors();
+		KMT2KMTypeBuilder visitor = new KMT2KMTypeBuilder(builder, context);
+		int nb_err = builder.getMessages().size();
 		node.accept(visitor);
-		if (visitor.result == null && builder.messages.nbErrors() == nb_err) {
-			builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve type '" + node.getText() + "'.",node));
+		if (visitor.result == null && builder.getMessages().size() == nb_err) {
+			builder.error("Cannot resolve type '" + node.getText() + "'.");
+			//builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve type '" + node.getText() + "'.",node));
 		}
 		return visitor.result;
 	}
@@ -57,9 +66,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMTypeBuilder(KermetaUnit builder) {
-		super(builder);
-		// TODO Auto-generated constructor stub
+	public KMT2KMTypeBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 	
 	
@@ -70,7 +78,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		ASTNode[] children = node.getChildren();
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof Type && children[i] != null) {
-				result.add(KMT2KMTypeBuilder.process((Type)children[i], builder));
+				result.add(KMT2KMTypeBuilder.process(context, (Type)children[i], builder));
 			}
 		}
 		fr.irisa.triskell.kermeta.language.structure.Type[] res = new fr.irisa.triskell.kermeta.language.structure.Type[result.size()];
@@ -83,21 +91,32 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(Basictype basictype) {
 		String qname = qualifiedIDAsString(basictype.getName());
+		TypeDefinition def = null;
+		
+		if ( context.current_class != null ) {
+			String qualifiedName = NamedElementHelper.getQualifiedName( (NamedElement) context.current_class.eContainer() ) + "::" + qname;
+			def = builder.getTypeDefinitionByQualifiedName(qualifiedName);
+		}
+		
+		if ( def == null )
+			def = builder.getTypeDefinitionByName(qname);
+		
 		// this can be a class, and enum or a type variable.
-		TypeDefinition def = builder.getTypeDefinitionByName(qname);
+		
 		if (def == null) {
-			result = builder.typeVariableLookup(qname);
+			result = context.typeVariableLookup(qname);
 			
 			if (result != null && basictype.getParams() != null) {
-				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for type variable '" + qname + "'.",basictype));
+				//builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for type variable '" + qname + "'.",basictype));
+				builder.error("Unexpected type parameters for type variable '" + qname + "'.");
 				return false;
 			}
 			
 			// It might be relative to a model-type variable, in which case we need to build a virtual type
 			if (qname.contains("::")) {
 				String prefix = qname.substring(0, qname.lastIndexOf("::"));
-				if ((prefix != null) && (builder.typeVariableLookup(prefix) instanceof ModelTypeVariable)) {
-					ModelTypeVariable mtv = (ModelTypeVariable) builder.typeVariableLookup(prefix);
+				if ((prefix != null) && (context.typeVariableLookup(prefix) instanceof ModelTypeVariable)) {
+					ModelTypeVariable mtv = (ModelTypeVariable) context.typeVariableLookup(prefix);
 					String vtypename = qname.substring(qname.lastIndexOf("::")+2);
 					ModelType mtdef = (ModelType) mtv.getSupertype();
 					// If it already exists we just grab the existing one.
@@ -110,17 +129,20 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 					}
 					// If there isn't already one, do some checks and then create one
 					if (result == null) {
-						ClassDefinition vtclsdef = (ClassDefinition) builder.getTypeDefinitionByName(NamedElementHelper.getQualifiedName(mtdef) + "::" + vtypename);
+						//ClassDefinition vtclsdef = (ClassDefinition) builder.getTypeDefinitionByName(NamedElementHelper.getQualifiedName(mtdef) + "::" + vtypename);
+						ClassDefinition vtclsdef = (ClassDefinition) ModelTypeHelper.getTypeDefinitionByName(mtdef, vtypename);
 						if (null == vtclsdef) {
-							builder.messages.addMessage(new KMTUnitLoadError("Unable to find class '" + vtypename + "' in model type definition '" + NamedElementHelper.getQualifiedName(mtdef) + "'.",basictype));
+							//builder.messages.addMessage(new KMTUnitLoadError("Unable to find class '" + vtypename + "' in model type definition '" + NamedElementHelper.getQualifiedName(mtdef) + "'.",basictype));
+							builder.error("Unable to find class '" + vtypename + "' in model type definition '" + NamedElementHelper.getQualifiedName(mtdef) + "'.");
 							return false;
 						}
 						fr.irisa.triskell.kermeta.language.structure.Type[] actual_params = getTypeFromLst(basictype.getParams());
 						if (actual_params.length > 0) {
-							builder.messages.addMessage(new KMTUnitLoadError("Parameterized virtual types not permitted: '" + basictype.getName().toString() + "'.", basictype));
+							//builder.messages.addMessage(new KMTUnitLoadError("Parameterized virtual types not permitted: '" + basictype.getName().toString() + "'.", basictype));
+							builder.error("Parameterized virtual types not permitted: '" + basictype.getName().toString() + "'.");
 							return false;
 						}
-						VirtualType virt = builder.struct_factory.createVirtualType();
+						VirtualType virt = StructureFactory.eINSTANCE.createVirtualType();
 						virt.setName(vtypename);
 						virt.setClassDefinition(vtclsdef);
 						virt.setModelType(mtv);
@@ -134,7 +156,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			// If result is null here, then the type is unresolved
 			
 			if(result == null) {
-				builder.messages.addMessage(new KMTUnitLoadError("Unresolved type '" + qname + "'. (missing using ?)",basictype));
+				//builder.messages.addMessage(new KMTUnitLoadError("Unresolved type '" + qname + "'. (missing using ?)",basictype));
+				builder.error("Unresolved type '" + qname + "'. (missing using ?)", basictype);
 				return false;
 			}
 			
@@ -142,14 +165,16 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		else if (def instanceof Enumeration || def instanceof PrimitiveType) {
 			result = (fr.irisa.triskell.kermeta.language.structure.Type)def;
 			if (basictype.getParams() != null) {
-				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for enumeration or primitive type'" + qname + "'.",basictype));
+				//builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for enumeration or primitive type'" + qname + "'.",basictype));
+				builder.error("Unexpected type parameters for enumeration or primitive type'" + qname + "'.");
 				return false;
 			}
 		}
 		else if (def instanceof ModelType) {
 			result = (fr.irisa.triskell.kermeta.language.structure.Type)def;
 			if (basictype.getParams() != null) {
-				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for model type'" + qname + "'.",basictype));
+				//builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for model type'" + qname + "'.",basictype));
+				builder.error("Unexpected type parameters for model type'" + qname + "'.");
 				return false;
 			}
 		}
@@ -157,7 +182,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			GenericTypeDefinition gtdef = (GenericTypeDefinition) def;
 			ParameterizedType res = null;
 			if (gtdef instanceof ClassDefinition) {
-				res = builder.struct_factory.createClass();
+				res = StructureFactory.eINSTANCE.createClass();
 			}
 			builder.storeTrace(res, basictype);
 			result = res;
@@ -165,7 +190,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			//res.setFName(classdef.getFName());
 			fr.irisa.triskell.kermeta.language.structure.Type[] actual_params = getTypeFromLst(basictype.getParams());
 			if (actual_params.length != gtdef.getTypeParameter().size()) {
-				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for generic type '" + qname + "'.",basictype));
+				//builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for generic type '" + qname + "'.",basictype));
+				builder.error("Wrong number of type parameters for generic type '" + qname + "'.");
 			}
 			else {
 				for(int i=0; i<actual_params.length; i++) {
@@ -237,7 +263,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 					
 					
 					
-					TypeVariableBinding bind = builder.struct_factory.createTypeVariableBinding();
+					TypeVariableBinding bind = StructureFactory.eINSTANCE.createTypeVariableBinding();
 					bind.setVariable((TypeVariable)gtdef.getTypeParameter().get(i));
 					bind.setType(actual_params[i]);
 					res.getTypeParamBinding().add(bind);
@@ -245,7 +271,8 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			}
 		} else {
 			//Its something unknown
-			builder.messages.addMessage(new KMTUnitLoadError("Unrecognized type definition: '" + qname + "'",basictype));
+			//builder.messages.addMessage(new KMTUnitLoadError("Unrecognized type definition: '" + qname + "'",basictype));
+			builder.error("Unrecognized type definition: '" + qname + "'");
 		}
 		return false;
 	}
@@ -253,10 +280,10 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Functype)
 	 */
 	public boolean beginVisit(Functype functype) {
-		fr.irisa.triskell.kermeta.language.structure.FunctionType res = builder.struct_factory.createFunctionType();
+		fr.irisa.triskell.kermeta.language.structure.FunctionType res = StructureFactory.eINSTANCE.createFunctionType();
 		builder.storeTrace(res, functype);
-		res.setLeft(KMT2KMTypeBuilder.process(functype.getLeft(), builder));
-		res.setRight(KMT2KMTypeBuilder.process(functype.getRight(), builder));
+		res.setLeft(KMT2KMTypeBuilder.process(context, functype.getLeft(), builder));
+		res.setRight(KMT2KMTypeBuilder.process(context, functype.getRight(), builder));
 		if (res.getLeft() == null || res.getRight() == null) return false;
 		result = res;
 		return false;
@@ -265,7 +292,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Prodtype)
 	 */
 	public boolean beginVisit(Prodtype prodtype) {
-		fr.irisa.triskell.kermeta.language.structure.ProductType res = builder.struct_factory.createProductType();
+		fr.irisa.triskell.kermeta.language.structure.ProductType res = StructureFactory.eINSTANCE.createProductType();
 		builder.storeTrace(res, prodtype);
 		fr.irisa.triskell.kermeta.language.structure.Type[] lst = getTypeFromLst(prodtype.getTypelst());
 		for(int i=0; i<lst.length; i++) {
@@ -285,7 +312,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.VoidType)
 	 */
 	public boolean beginVisit(VoidType voidType) {
-		fr.irisa.triskell.kermeta.language.structure.VoidType res = builder.struct_factory.createVoidType();
+		fr.irisa.triskell.kermeta.language.structure.VoidType res = StructureFactory.eINSTANCE.createVoidType();
 		builder.storeTrace(res, voidType);
 		result = res;
 		return false;

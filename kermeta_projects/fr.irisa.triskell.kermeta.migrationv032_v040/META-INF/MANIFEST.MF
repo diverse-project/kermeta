@@ -14,7 +14,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.console,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.io,
- fr.irisa.triskell.traceability
+ fr.irisa.triskell.traceability,
+ fr.irisa.triskell.eclipse.util
 Eclipse-LazyStart: true
 Bundle-ClassPath: .
 Bundle-Vendor: IRISA/INRIA

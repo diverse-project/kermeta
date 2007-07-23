@@ -1,16 +1,20 @@
 /*
- * Created on 6 févr. 2005
+ * Created on 6 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+
 import java.util.Hashtable;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
+
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.UnaryExpression;
-
 
 /**
  * @author Franck Fleurey
@@ -23,9 +27,9 @@ import fr.irisa.triskell.kermeta.migrationv032_v040.ast.UnaryExpression;
 public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 
 	
-	public static Expression process(UnaryExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, UnaryExpression node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMUnaryExpressionBuilder visitor = new KMT2KMUnaryExpressionBuilder(builder);
+		KMT2KMUnaryExpressionBuilder visitor = new KMT2KMUnaryExpressionBuilder(builder, context);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -43,8 +47,8 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMUnaryExpressionBuilder(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMUnaryExpressionBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -52,9 +56,9 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.UnaryExpression)
 	 */
 	public boolean beginVisit(UnaryExpression unaryExpression) {
-		result = KMT2KMPostfixExpressionBuilder.process(unaryExpression.getPostfixExp(), builder);
+		result = KMT2KMPostfixExpressionBuilder.process(context, unaryExpression.getPostfixExp(), builder);
 		if (unaryExpression.getUnaryOp() != null) {
-			CallFeature call = builder.behav_factory.createCallFeature();
+			CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 			builder.storeTrace(call,unaryExpression.getUnaryOp());
 			call.setName((String)operators.get(unaryExpression.getUnaryOp().getText()));
 			call.setTarget(result);

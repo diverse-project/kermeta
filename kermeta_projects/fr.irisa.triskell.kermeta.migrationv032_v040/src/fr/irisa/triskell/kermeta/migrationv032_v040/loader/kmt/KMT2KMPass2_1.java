@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2_1.java,v 1.2 2007-06-08 07:47:15 cfaucher Exp $
+/* $Id: KMT2KMPass2_1.java,v 1.3 2007-07-23 09:16:19 ftanguy Exp $
  * Project : Kermeta io
  * File : KMT2KMPass2_1.java
  * License : EPL
@@ -13,13 +13,18 @@
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+
 import java.util.Stack;
 
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingContext;
+
 import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.Basictype;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.migrationv032_v040.ast.TypeVarDecl;
@@ -38,26 +43,24 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * 
 	 * @param builder
 	 */
-	public KMT2KMPass2_1(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMPass2_1(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 
 	/**
 	 * Keep stock of 
-	 * FIXME CF ModelType 07-06-06
 	 */
-	/*private Stack<ModelTypeDefinition> mtdefs = new Stack<ModelTypeDefinition>();
-	private ModelTypeDefinition current_mtdef() {
-		return (ModelTypeDefinition)mtdefs.peek();
-	}*/
+//	private Stack<ModelTypeDefinition> mtdefs = new Stack<ModelTypeDefinition>();
+//	private ModelTypeDefinition current_mtdef() {
+//		return (ModelTypeDefinition)mtdefs.peek();
+//	}
 	
 	/**
 	 * Build up the namespace stack in order to be able to track the container
 	 * of the type variables
 	 */
 	public boolean beginVisit(ModelTypeDecl mtdef) {
-		// FIXME CF ModelType 07-06-06
-		//mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
+//		mtdefs.push((ModelTypeDefinition) builder.getModelElementByNode(mtdef));
 		return super.beginVisit(mtdef);
 	}
 	
@@ -65,7 +68,7 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 	 * Pop the mtdef from the namespace stack
 	 */
 	public void endVisit(ModelTypeDecl mtdef) {
-		//mtdefs.pop();
+//		mtdefs.pop();
 		super.endVisit(mtdef);
 	}
 	
@@ -82,34 +85,28 @@ public class KMT2KMPass2_1 extends KMT2KMPass {
 		// If there is no supertype, or if for some reason its not a basic type (impossible), we don't care any more
 		if (null == bsuper) return false; 
 		String qname = qualifiedIDAsString(bsuper.getName());
+		
 		// this can be a class, and enum or a type variable.
 		TypeDefinition superdef = builder.getTypeDefinitionByName(qname);
 		//Type supertype = KMT2KMTypeBuilder.process(typeVarDecl.getSupertype(), builder);
-		
-		// FIXME CF ModelType 07-06-06
-		/*if (superdef instanceof ModelTypeDefinition) {
-			ModelTypeVariable mtv = builder.struct_factory.createModelTypeVariable();
+		if (superdef instanceof ModelType) {
+			ModelTypeVariable mtv = StructureFactory.eINSTANCE.createModelTypeVariable();
 			mtv.setName(tv.getName());
-			GenericTypeDefinition context;
-			if (builder.current_class != null) {
-				// We are parameterizing a model type definition
-				context = builder.current_class;
-			} else {
-				// Otherwise it is a class
-				context = (ModelTypeDefinition) current_mtdef();
-			}
-			context.getTypeParameter().set(context.getTypeParameter().indexOf(tv), mtv);
+			GenericTypeDefinition typeDefinition;
+				
+			typeDefinition = context.current_class;
+			//context = ((ModelType) superdef).g
+			
+			typeDefinition.getTypeParameter().set(typeDefinition.getTypeParameter().indexOf(tv), mtv);
 			builder.storeTrace(mtv, typeVarDecl);
-			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(bsuper, builder);
+			fr.irisa.triskell.kermeta.language.structure.Type supertype = KMT2KMTypeBuilder.process(context, bsuper, builder);
 			mtv.setSupertype(supertype);
 			// this supertype is contained by the ModeltypeVariable
-			mtv.getContainedType().add(supertype);
+			//mtv.getContainedType().add(supertype);
 		} else {
 			// Set the supertype while we're here
 			//tv.setSupertype(supertype);
-		}*/
-		// end of the FIXME CF ModelType 07-06-06
-		
+		}
 		return false;
 	}
 	

@@ -1,11 +1,14 @@
 /*
- * Created on 5 févr. 2005
+ * Created on 5 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.ClassDecl;
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.LoadingContext;
+
+import fr.irisa.triskell.kermeta.ast.ClassDecl;
+
 
 /**
  * @author Franck Fleurey
@@ -23,8 +26,8 @@ public class KMT2KMPass5 extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMPass5(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMPass5(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 	
 	/**

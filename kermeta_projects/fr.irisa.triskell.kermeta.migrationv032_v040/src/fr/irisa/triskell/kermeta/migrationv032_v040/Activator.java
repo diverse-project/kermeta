@@ -16,8 +16,6 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
-
 /**
  * The activator class controls the plug-in life cycle
  */
@@ -46,9 +44,6 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		
-
-		if(StdLibKermetaUnitHelper.STD_LIB_URI == null) StdLibKermetaUnitHelper.setURItoDefault();
 	}
 
 	/*

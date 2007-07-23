@@ -1,20 +1,22 @@
 /*
- * Created on 5 févr. 2005
+ * Created on 5 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+
 import java.util.Hashtable;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.LogicalExpression;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.LogicalOp;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.RelationalExpression;
 
 
 /**
@@ -34,9 +36,9 @@ import fr.irisa.triskell.kermeta.migrationv032_v040.ast.RelationalExpression;
 public class KMT2KMLogicalExperessionBuilder extends KMT2KMPass {
 
 	
-	public static Expression process(LogicalExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, LogicalExpression node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMLogicalExperessionBuilder visitor = new KMT2KMLogicalExperessionBuilder(builder);
+		KMT2KMLogicalExperessionBuilder visitor = new KMT2KMLogicalExperessionBuilder(builder, context);
 		node.accept(visitor);
 		return visitor.result;
 	}
@@ -54,8 +56,8 @@ public class KMT2KMLogicalExperessionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMLogicalExperessionBuilder(KermetaUnit builder) {
-		super(builder);
+	public KMT2KMLogicalExperessionBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 
 	/**
@@ -66,14 +68,14 @@ public class KMT2KMLogicalExperessionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof RelationalExpression) {
 				if (operator == null) {
-					result = KMT2KMRelationalExpressionBuilder.process((RelationalExpression)children[i], builder);
+					result = KMT2KMRelationalExpressionBuilder.process(context, (RelationalExpression)children[i], builder);
 				}
 				else {
-					CallFeature call = builder.behav_factory.createCallFeature();
+					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMRelationalExpressionBuilder.process((RelationalExpression)children[i], builder));
+					call.getParameters().add(KMT2KMRelationalExpressionBuilder.process(context, (RelationalExpression)children[i], builder));
 					result = call;
 				}
 			}

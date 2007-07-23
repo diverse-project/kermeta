@@ -1,27 +1,27 @@
-/*
- * Created on 6 févr. 2005
+/* $Id: KMT2KMRelationalExpressionBuilder.java,v 1.2 2007-07-23 09:16:19 ftanguy Exp $
+ * Licence : EPL
+ * Copyright : IRISA / INRIA / University of rennes 1
+ * Created on 6 fï¿½vr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
 package fr.irisa.triskell.kermeta.migrationv032_v040.loader.kmt;
 
+
 import java.util.Hashtable;
+
+import org.kermeta.io.KermetaUnit;
+import org.kermeta.loader.AbstractKermetaUnitLoader;
+import org.kermeta.loader.LoadingContext;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.kermeta.migrationv032_v040.ast.*;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.AdditiveExpression;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.RelationalExpression;
-import fr.irisa.triskell.kermeta.migrationv032_v040.ast.RelationalOp;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
  * sequence relationalExpression : left=additiveExpression (relationalOp right=additiveExpression )? ;
  * token relationalOp : EQEQ | NEQ | GT | LT | GTE | LTE ;
  * 
@@ -29,23 +29,23 @@ import fr.irisa.triskell.kermeta.migrationv032_v040.ast.RelationalOp;
 public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 
 	
-	public static Expression process(RelationalExpression node, KermetaUnit builder) {
+	public static Expression process(LoadingContext context, RelationalExpression node, KermetaUnit builder) {
 		if (node == null) return null;
-		KMT2KMRelationalExpressionBuilder visitor = new KMT2KMRelationalExpressionBuilder(builder);
+		KMT2KMRelationalExpressionBuilder visitor = new KMT2KMRelationalExpressionBuilder(builder, context);
 		node.accept(visitor);
 		return visitor.result;
 	}
 	
-	protected static Hashtable operators;
+	protected static Hashtable<String,String> operators;
 	static {
 		// Maping operator -> method
-		operators = new Hashtable();
-		operators.put("==", "isSameAs");
-		operators.put(">", "isGreater");
-		operators.put("<", "isLower");
+		operators = new Hashtable<String,String>();
+		operators.put("==", "equals");
+		operators.put(">",  "isGreater");
+		operators.put("<",  "isLower");
 		operators.put("<=", "isLowerOrEqual");
 		operators.put(">=", "isGreaterOrEqual");
-		operators.put("!=", "isNotSameAs");
+		operators.put("!=", "isNotEqual");
 	}
 	
 	protected Expression result;
@@ -54,9 +54,8 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 	/**
 	 * @param builder
 	 */
-	public KMT2KMRelationalExpressionBuilder(KermetaUnit builder) {
-		super(builder);
-		// TODO Auto-generated constructor stub
+	public KMT2KMRelationalExpressionBuilder(KermetaUnit builder, LoadingContext context) {
+		super(builder, context);
 	}
 	
 	public boolean beginVisit(RelationalExpression node) {
@@ -64,14 +63,14 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 		for(int i=0; i< children.length; i++) {
 			if (children[i] instanceof AdditiveExpression) {
 				if (operator == null) {
-					result = KMT2KMAdditiveExpressionBuilder.process((AdditiveExpression)children[i], builder);
+					result = KMT2KMAdditiveExpressionBuilder.process(context, (AdditiveExpression)children[i], builder);
 				}
 				else {
-					CallFeature call = builder.behav_factory.createCallFeature();
+					CallFeature call = BehaviorFactory.eINSTANCE.createCallFeature();
 					builder.storeTrace(call,operator);
 					call.setName((String)operators.get(operator.getText()));
 					call.setTarget(result);
-					call.getParameters().add(KMT2KMAdditiveExpressionBuilder.process((AdditiveExpression)children[i], builder));
+					call.getParameters().add(KMT2KMAdditiveExpressionBuilder.process(context, (AdditiveExpression)children[i], builder));
 					result = call;
 				}
 			}
