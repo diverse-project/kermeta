@@ -1,6 +1,6 @@
 
 
-/*$Id: EcoreSelectionDialog.java,v 1.2 2007-07-23 14:33:38 bitterjug Exp $
+/*$Id: EcoreSelectionDialog.java,v 1.3 2007-07-23 15:20:42 barais Exp $
 * Project : fr.irisa.triskell.sintaks
 * File : 	SyntaksModelSelectionDialog.java
 * License : EPL

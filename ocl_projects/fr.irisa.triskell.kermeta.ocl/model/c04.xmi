@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" endOffset="134">
+  <pathNameCS startOffset="8" endOffset="14">
+    <sequenceOfNames>company</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="50" endOffset="121">
+    <pathNameCS startOffset="58" endOffset="74">
+      <sequenceOfNames>Personnel</sequenceOfNames>
+      <sequenceOfNames>Person</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="76" endOffset="121">
+      <expressionCS xsi:type="ocl.cst:FeatureCallExpCS" startOffset="82" endOffset="121" accessor="dot">
+        <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="82" endOffset="112" accessor="dot">
+          <source xsi:type="ocl.cst:OperationCallExpCS" startOffset="82" endOffset="103" accessor="arrow">
+            <source xsi:type="ocl.cst:FeatureCallExpCS" startOffset="82" endOffset="93" accessor="dot">
+              <source xsi:type="ocl.cst:VariableExpCS" startOffset="82" endOffset="85">
+                <simpleNameCS startOffset="82" endOffset="85" value="self" type="self"/>
+                <isMarkedPreCS startOffset="86" endOffset="86"/>
+              </source>
+              <simpleNameCS startOffset="87" endOffset="93" value="company"/>
+              <isMarkedPreCS startOffset="95" endOffset="96"/>
+            </source>
+            <simpleNameCS startOffset="97" endOffset="101" value="first"/>
+            <isMarkedPreCS startOffset="102" endOffset="102"/>
+          </source>
+          <simpleNameCS startOffset="105" endOffset="112" value="employee"/>
+          <isMarkedPreCS startOffset="113" endOffset="113"/>
+        </source>
+        <simpleNameCS startOffset="114" endOffset="121" value="forename"/>
+        <isMarkedPreCS startOffset="125" endOffset="134"/>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

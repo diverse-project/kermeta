@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.3 2007-07-13 15:10:09 dvojtise Exp $
+/* $Id: DestFileWizardPage.java,v 1.4 2007-07-23 15:20:42 barais Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -59,8 +59,6 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
-
-import fr.irisa.triskell.kermeta.ocl.ui.Activator;
 
 
 
@@ -132,7 +130,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		super(pageName);
 		setPageComplete(false);
 		this.currentSelection = selection;
-		ecoreFile = Activator.FILE_MM;
 	}
 
 	// FIXME : Temporary static strings, since we used to use
@@ -220,12 +217,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		ecoreLbl.setText("Ecore meta-model: ");
 		
 		 ecoreText = new Text(ecoreSelectGrp, SWT.SINGLE | SWT.BORDER);
-		 if(ecoreFile != null){
-			 ecoreText.setText(ecoreFile.getName());
-		 }else{
-			 ecoreText.setText("Select your ecore Meta Model");
-		 }
-		
+		ecoreText.setText("Select you ecore Meta Model");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		ecoreText.setLayoutData( gridData );
 		
@@ -236,7 +228,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					ecoreFile = handleBrowseButtonSelect();
-					Activator.FILE_MM = ecoreFile;
 					ecoreText.setText(ecoreFile.getName());
 				}
 			}
@@ -365,8 +356,9 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	 * Creates the link target path if a link target has been specified.
 	 */
 	protected void createLinkTarget() {
-		if (linkedResourceGroup.getLinkTargetURI() != null) {
-			linkTargetPath = new Path(linkedResourceGroup.getLinkTargetURI().getPath());
+		String linkTarget = linkedResourceGroup.getLinkTarget();
+		if (linkTarget != null) {
+			linkTargetPath = new Path(linkTarget);
 		} else {
 			linkTargetPath = null;
 		}

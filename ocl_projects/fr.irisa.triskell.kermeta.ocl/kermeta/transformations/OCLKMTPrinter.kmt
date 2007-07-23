@@ -1,4 +1,4 @@
-/* $Id: OCLKMTPrinter.kmt,v 1.2 2007-06-12 10:52:31 barais Exp $
+/* $Id: OCLKMTPrinter.kmt,v 1.3 2007-07-23 15:20:41 barais Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -37,11 +37,9 @@ class OCLKMTPrinter
     operation main(): Void is
 		do
 				self.generateOCL("../../model/ASMLogoStaticSemantics.xmi","../../ocl/ASMLogo.ecore", "test.output")
-
-	    
-		
 	    end
-	    operation generateOCL(modelURI : String, metamodelURI : String, Outputfilnename : String): Void is
+	    
+	    operation generateOCL(modelURI : String, metamodelURI : String,Outputfilnename : String): Void is
 		do
 					
 			    

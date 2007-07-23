@@ -5,18 +5,69 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.StdLibKermetaUnitHelper;
 import fr.irisa.triskell.kermeta.ocl.console.DevOCLConsole;
 import fr.irisa.triskell.kermeta.ocl.kmtactions.GenerateOCL;
-import fr.irisa.triskell.kermeta.loader.*;
 public class GenerateKMT {
 
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				  "ecore", new EcoreResourceFactoryImpl());
+
+
+		
+		ResourceSet rs = new ResourceSetImpl();
+		rs.setResourceFactoryRegistry(Resource.Factory.Registry.INSTANCE);
+		//String strURI = "platform:/plugin/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"; 
+		//mmURI = URI.createURI(strURI);
+		String baseDir1 = "C:/Documents and Settings/barais.COREFF/workspace/fr.irisa.triskell.kermeta.ocl/";
+		
+		
+		
+			String fn = "70";
+			String ecoreFileName = baseDir1 +"ocl/sample.ecore";
+			
+			String oclSourceFileName = baseDir1 + "ocl/" + fn + ".ocl";
+			String xmiOutputFileName = baseDir1 +"ocl/" + fn + ".xmi";
+			String outputKMTFileName = baseDir1 +"ocl/" + fn + ".kmt";
+			
+			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
+			TestOCLParser.run(oclSourceFileName, xmiOutputFileName);
+			String URIxmiOutputFileName = "file:///" + xmiOutputFileName;
+			
+			
+			//Resource res1 = rs.getResource(URI.createFileURI("kermeta/transformations-dev/Ecore.ecore"), true);
+			//EPackage ePack1 = (EPackage) res1.getContents().get(0);
+			//registerPackages(ePack1);
+			//registerPackages(EcorePackage.eINSTANCE);
+			//URIConverter.URI_MAP.
+			URIConverter.URI_MAP.put(URI.createURI("http://www.eclipse.org/emf/2002/Ecore"), URI.createURI("file:///C:/Documents and Settings/barais.COREFF/workspace/fr.irisa.triskell.kermeta.ocl/kermeta/transformations-dev/Ecore.ecore"));
+			
+			Resource res = rs.getResource(URI.createFileURI("kermeta/transformations-dev/OCLCST.ecore"), true);
+			EPackage ePack = (EPackage) res.getContents().get(0);
+			registerPackages(ePack); 
+			
+			StdLibKermetaUnitHelper.STD_LIB_URI= "file:///c:/Documents and Settings/barais.COREFF/Bureau/eclipse_kermeta_0.4.1_windows/plugins/fr.irisa.triskell.kermeta_0.4.1/lib/framework.km";
+			GenerateOCL.run(URIxmiOutputFileName,ecoreFileName,  outputKMTFileName, new DevOCLConsole(), "./kermeta/transformations-dev/OCLKMTPrinter.kmt");
+
+			
+		
+	}
+	
 	private static void registerPackages(EPackage pack) {
+		System.err.println(pack.getNsURI());
 		Registry.INSTANCE.put(pack.getNsURI(), pack);
 		
 		EList l = pack.getESubpackages();
@@ -29,38 +80,5 @@ public class GenerateKMT {
 		}
 	}
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-//		String baseDir = "/udd/barais/runtime-New_configuration/fr.irisa.triskell.kermeta.ocl/";
-		//String baseDir = "/home/barais/workspaces/workspace_demo_kermeta/fr.irisa.triskell.kermeta.ocl/";
-		ResourceSet rs = new ResourceSetImpl();
-		
-		//String strURI = "platform:/plugin/fr.irisa.triskell.kermeta.ocl/mmodel/OCLCST.ecore"; 
-		//mmURI = URI.createURI(strURI);
-		String baseDir1 = "/home/mskipper/runtime-EclipseApplication/speedsImplementation/hrc/";
-		
-		
-		Resource res = rs.getResource(URI.createFileURI("oclcst.ecore"), true);
-		EPackage ePack = (EPackage) res.getContents().get(0);
-		registerPackages(ePack);
-		
-		for (String fn: TestOCLParser.filenames){
-			String ecoreFileNameFileName = baseDir1 +"ecore/speedsL1.ecore";
-			
-			String oclSourceFileName = baseDir1 + "constraints/ocl/" + fn + ".ocl";
-			String xmiOutputFileName = baseDir1 +"constraints/ocl/" + fn + ".xmi";
-			String outputKMTFileName = baseDir1 +"constraints/ocl/" + fn + ".kmt";
-			
-			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
-			TestOCLParser.run(oclSourceFileName, xmiOutputFileName);
-			StdLibKermetaUnitHelper.STD_LIB_URI= "/opt/eclipse/plugins/fr.irisa.triskell.kermeta_0.4.1/lib/framework.km";
-			GenerateOCL.run(xmiOutputFileName,ecoreFileNameFileName,  outputKMTFileName, new DevOCLConsole(), "./kermeta/transformations-dev/OCLKMTPrinter.kmt");
-
-			
-		}
-		
-	}
 
 }

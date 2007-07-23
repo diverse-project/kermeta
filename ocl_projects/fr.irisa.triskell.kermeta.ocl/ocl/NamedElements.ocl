@@ -1,0 +1,7 @@
+package speedsL1::kernel::Structure
+
+context NamedElement inv:
+	-- names are not empty
+	self.name <> '' 
+
+endpackage 

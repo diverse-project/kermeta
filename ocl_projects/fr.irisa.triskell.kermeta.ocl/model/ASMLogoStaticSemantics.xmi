@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ocl.cst:PackageDeclarationCS xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ocl.cst="http://www.eclipse.org/ocl/1.1.0/OCL/CST" startOffset="1" endOffset="129">
+  <pathNameCS startOffset="9" endOffset="19">
+    <sequenceOfNames>kmLogo</sequenceOfNames>
+    <sequenceOfNames>ASM</sequenceOfNames>
+  </pathNameCS>
+  <contextDecls xsi:type="ocl.cst:ClassifierContextDeclCS" startOffset="22" endOffset="113">
+    <pathNameCS startOffset="30" endOffset="44">
+      <sequenceOfNames>ProcDeclaration</sequenceOfNames>
+    </pathNameCS>
+    <invOrDefCS xsi:type="ocl.cst:InvCS" startOffset="47" endOffset="113">
+      <simpleNameCS startOffset="51" endOffset="83" value="unique_names_for_formal_arguments"/>
+      <expressionCS xsi:type="ocl.cst:IteratorExpCS" startOffset="89" endOffset="113" accessor="arrow">
+        <source xsi:type="ocl.cst:VariableExpCS" startOffset="89" endOffset="92">
+          <simpleNameCS startOffset="89" endOffset="92" value="args"/>
+          <isMarkedPreCS startOffset="93" endOffset="94"/>
+        </source>
+        <simpleNameCS startOffset="95" endOffset="100" value="forAll" type="keyword"/>
+        <variable1 startOffset="104" endOffset="105" name="a1"/>
+        <body xsi:type="ocl.cst:BooleanLiteralExpCS" startOffset="109" endOffset="112" symbol="true" booleanSymbol="true"/>
+      </expressionCS>
+    </invOrDefCS>
+  </contextDecls>
+</ocl.cst:PackageDeclarationCS>

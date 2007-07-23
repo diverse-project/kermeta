@@ -1,4 +1,4 @@
-/* $Id: BiteSizeOclTests.kmt,v 1.14 2007-05-30 16:55:42 bitterjug Exp $
+/* $Id: BiteSizeOclTests.kmt,v 1.15 2007-07-23 15:20:41 barais Exp $
  * Creation date: February 22, 2007
  * License:
  * Copyright:
@@ -11,7 +11,7 @@ package oclTests;
 
 require kermeta
 require "../../../someUnit/src/newUnit.kmt" 
-require "../transformations/ocl2kmtVisitor.kmt" 
+require "../transformations/ocl2kmtVisitor.kmt"  
 require "../helpers/OCLHelper.kmt"   
 
 //require "http://sample"

@@ -1,0 +1,75 @@
+/* $Id: OCLHelper.kmt,v 1.1 2007-07-23 15:20:41 barais Exp $
+ * File : EcoreHelper.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ * 
+ */
+//@mainClass "OCLHelpers::OCLHelper"
+//@mainOperation "main"
+
+
+package OCLHelpers;
+ 
+require kermeta
+require "./oclcstvisitor.kmt" 
+ //require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+  
+using ocl::cst
+using kermeta::standard
+using kermeta::persistence
+using kermeta::exceptions
+
+/** This class provides some helper methods to load/save Ecore models
+    Plus some other useful navigation methods
+ */
+class OCLHelper
+{
+	attribute __ecoreOCLMetamodel : String
+
+	
+	/* Get ecore OCL metamodel URI with default value */
+	operation ecoreOCLMetamodelURI():String is
+		do
+			if __ecoreOCLMetamodel == void then
+				__ecoreOCLMetamodel := "../../mmodel/OCLCST.ecore"
+			end
+			result := __ecoreOCLMetamodel
+		end
+		
+    operation loadOCLModel(repository : EMFRepository, modelUri : String) : Set<Object> is 
+	    do
+	    	var resource : Resource init repository.createResource(modelUri , ecoreOCLMetamodelURI)
+	    	resource.load
+	    	result := resource.instances
+	    end
+    
+    operation getPackageDeclaration(os : Set<Object>): ocl::cst::PackageDeclarationCS is
+	    do
+	    	result ?= os.detect{ o |
+	    			var packageDeclaration: ocl::cst::PackageDeclarationCS
+		     	   packageDeclaration ?= o
+		     	   packageDeclaration != void
+	    		}
+	    end
+	    
+	operation getInvExpression(os: Set<Object>): ocl::cst::OCLExpressionCS is
+		do
+			var invariant : InvCS 
+			invariant ?= os.detect{ o | 
+				o.isKindOf(PackageDeclarationCS)
+			}.asType(PackageDeclarationCS).contextDecls.detect{ o |
+				o.isKindOf(ClassifierContextDeclCS)
+			}.asType(ClassifierContextDeclCS).invOrDefCS
+			// TODO: check for null invariant here and throw exception						
+			result := invariant.expressionCS
+		end
+		
+	
+
+  }
+  

@@ -1,6 +1,6 @@
-package p
+package sample
 
-context Y def:
+context A def:
  	test(): Boolean = true
 
 endpackage

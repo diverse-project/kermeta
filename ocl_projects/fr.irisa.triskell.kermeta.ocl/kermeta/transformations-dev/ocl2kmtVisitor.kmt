@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.6 2007-06-12 10:52:31 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.6 2007-06-12 10:52:31 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.7 2007-07-23 15:20:41 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.7 2007-07-23 15:20:41 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -12,10 +12,11 @@
 package ocl2kmt;
 
 require kermeta
-require "../../mmodel/oclcstvisitor.kmt"
+require "EcoreHelper.kmt"
+require "./oclcstvisitor.kmt"
 require "OperatorPolicies.kmt"    
 //require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
-require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+//require "platform:/resource/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 
 using kermeta::standard
 using kermeta::exceptions
@@ -194,7 +195,7 @@ class FileWriter inherits StdIO
 		
 		method visitPackageDeclarationCS(visitable : PackageDeclarationCS) : Void is
 			do
-			
+			//ecoreFileName.replace()
 				visitable.pathNameCS.sequenceOfNames.each{ e | currentPackagename := currentPackagename + "::"+e}
 				currentPackagename:=currentPackagename.substring(2,currentPackagename.size)
 				write("package ")
@@ -203,7 +204,7 @@ class FileWriter inherits StdIO
 				writeln("require kermeta")
 				write("require \"")
 				//visitable.pathNameCS.accept(self)
-				write(ecoreFileName)
+				write(ecoreFileName.replace("\\", "\\\\"))
 				writeln("\"")
 				
 				writeln("using kermeta::standard")
@@ -802,9 +803,13 @@ class FileWriter inherits StdIO
 				do 	
 		 			if (self.currentClassifier == void) then 
 		 				isMultiple :=false
-		 			else
-		 						 			
-		 				isMultiple := self.ecoreHelper.getETypedElementFromPath(ecoreHelper.getClassifierQualifiedName(self.currentClassifier.eType) , pathExpression.substring(0, pathExpression.size -1),".").many
+		 			else 
+		 				if (self.currentClassifier.eType.getMetaClass == ecore::EDataType) then
+		 					isMultiple :=false
+		 					stdio.writeln("toto = "+self.currentClassifier.eType.toString)
+		 				else
+		 					isMultiple := self.ecoreHelper.getETypedElementFromPath(ecoreHelper.getClassifierQualifiedName(self.currentClassifier.eType) , pathExpression.substring(0, pathExpression.size -1),".").many
+						end
 					end
 				if (previousIsMultiple) then
 					var variableName : String init nextName("variable")
@@ -980,7 +985,7 @@ class FileWriter inherits StdIO
            				//__operators.put("first", functionCall)  
            				//__operators.put("count", functionCall)             				
            				 
-           				
+           			 	
            				//TODO Manage return
           				__operators.put("oclAsType", CastOp.new)   
           				__operators.put("union", functionCollectionCall.new.setResult(true,true,false))
@@ -1217,17 +1222,19 @@ class SimpleIteratorIP inherits IteratorPolicy {
 				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
 				visitor.write(name )
-			end
+			end 
 			if oclIterator.variable2 != void then
 				visitor.write("Cpl" )
 			end
 			
 
 			visitor.write("{ ")
-			var variableName : String
+			var variableName : String 
 			if (oclIterator.variable1 != void) then
 				oclIterator.variable1.accept(visitor)
 				variableName:= oclIterator.variable1.name
+				visitor.visibleVariable.getValue(variableName).upperBound:=1
+				
 			else
 			 variableName := visitor.nextName("variable")
 				visitor.write(variableName)
@@ -1237,13 +1244,16 @@ class SimpleIteratorIP inherits IteratorPolicy {
 				visitor.write(", ")
 				visitor.iteratorVariable := true 
 				oclIterator.variable2.accept(visitor)
+				
 				variableName:= oclIterator.variable2.name
+				visitor.visibleVariable.getValue(variableName).upperBound:=1
+				
 				//TODO Check that mark
 			end
 			
 			visitor.write(" | ")
 			//visitor.write(oclIterator.body.getMetaClass.toString)
- 					 	
+ 			visitor.previousIsMultiple:=false		 	
 			oclIterator.body.accept(visitor)
 			visitor.write("}")
 			if suffix != void then

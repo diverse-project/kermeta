@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v200702061926.jar"/>
-	<classpathentry sourcepath="lib/src/org.eclipse.ocl_1.1.0.v200705102050/src.zip" kind="lib" path="lib/org.eclipse.ocl_1.1.0.v200705102050.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.ocl_1.1.0.v200705102050.jar" sourcepath="lib/src/org.eclipse.ocl_1.1.0.v200705102050/src.zip"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.emf.ocl_1.1.0.v200705031818.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/emf.common_2.3.0.v200705110650.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/emf.ecore_2.3.0.v200705110650.jar"/>

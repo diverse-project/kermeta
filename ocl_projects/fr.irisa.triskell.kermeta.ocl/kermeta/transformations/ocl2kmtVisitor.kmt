@@ -1,5 +1,5 @@
-/* $Id: ocl2kmtVisitor.kmt,v 1.30 2007-06-12 10:52:31 barais Exp $
-/* $Id: ocl2kmtVisitor.kmt,v 1.30 2007-06-12 10:52:31 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.31 2007-07-23 15:20:41 barais Exp $
+/* $Id: ocl2kmtVisitor.kmt,v 1.31 2007-07-23 15:20:41 barais Exp $
  * Creation date: February 5, 2007
  * License:
  * Copyright:
@@ -8,14 +8,14 @@
 @mainClass "::"
 @mainOperation ""
  
- 
+
 package ocl2kmt;
 
 require kermeta
 require "../../mmodel/oclcstvisitor.kmt"
 require "OperatorPolicies.kmt"    
-//require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
+//require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/helpers/EcoreHelper.kmt"
 
 using kermeta::standard
 using kermeta::exceptions
@@ -249,31 +249,17 @@ class FileWriter inherits StdIO
 					tmp.lowerBound:=0
 					tmp.upperBound:=1
 					visibleVariable.put(tmp.name.toString,tmp)
-					//writeln(currentClassifiername )
-					var packsName : Stack<String> init  Stack<String>.new
-					visitable.pathNameCS.sequenceOfNames.each{ e | packsName.push(e)}
-					//packsName.remove(packsName.first)
-					packsName.pop
-					packsName.each{ e | writeln("package " + e +" {")}
-					
-					
-					writeln("@aspect \"true\"")
-					write("class ")
-					write(classifier.name)
-					//visitable.pathNameCS.accept(self)
-					writeln("{")
-					visitable.invOrDefCS.accept(self)
-		      		writeln("}")
-		      		
-		      		packsName.each{ e | writeln("}")}
-		      		
-					
 				else
-					getIerr.writeln("Class " + self.currentPackagename + "::" + currentClassifiername + " can not be found in the ecore metamodel")
-					getIerr.writeln("no cache for allAttributes of  " + currentClassifiername)
+					writeln("no cache for allAttributes of  " + currentClassifiername)
 				end
 				
-				
+				//writeln(currentClassifiername )
+				writeln("@aspect \"true\"")
+				write("class ")
+				visitable.pathNameCS.accept(self)
+				writeln("{")
+				visitable.invOrDefCS.accept(self)
+		      	writeln("}")
 			end
 			attribute currentContextClassifier : ecore::EClassifier
 
@@ -285,19 +271,11 @@ class FileWriter inherits StdIO
 				visitable.operationCS.pathNameCS.sequenceOfNames.each{ e | currentClassifiername := currentClassifiername + "::"+e}
 				currentClassifiername:=currentClassifiername.substring(2,currentClassifiername.size)
 				
-				var packsName : Stack<String> init  Stack<String>.new
-					visitable.operationCS.pathNameCS.sequenceOfNames.each{ e | packsName.push(e)}
-					//packsName.remove(packsName.first)
-				var className: String init packsName.pop
-				packsName.each{ e | writeln("package " + e +" {")}
-					
 				
 				
 				writeln("@aspect \"true\"")
 				write("class ")
-				write(className)
-				
-				//visitable.operationCS.pathNameCS.accept(self)
+				visitable.operationCS.pathNameCS.accept(self)
 				writeln("{")
 				writeln("@overloadable \"true\"")
 				visitable.operationCS.accept(self)
@@ -306,17 +284,16 @@ class FileWriter inherits StdIO
 					ppbd.accept(self)
 				}
 				writeln("is")
-				writeln("abstract")
-				//writeln("var e: Exception init NotImplementedException.new")
-				//write("e.message := \"OCL pre/post/body: " )
-				//visitable.operationCS.pathNameCS.accept(self)
-				//write(".")
-				//visitable.operationCS.simpleNameCS.accept(self)
-				//writeln("\"")
-				//writeln("raise e")
-				//writeln("end")
+				writeln("do")
+				writeln("var e: Exception init NotImplementedException.new")
+				write("e.message := \"OCL pre/post/body: " )
+				visitable.operationCS.pathNameCS.accept(self)
+				write(".")
+				visitable.operationCS.simpleNameCS.accept(self)
+				writeln("\"")
+				writeln("raise e")
+				writeln("end")
 				writeln("}")
-				packsName.each{ e | writeln("}")}
 			end
   
 		method visitPrePostOrBodyDeclCS(visitable : PrePostOrBodyDeclCS) : Void is
@@ -335,11 +312,9 @@ class FileWriter inherits StdIO
 				
 				visibleVariable.clear
 				var classifier : ecore::EClass
-				var currops : ecore::EOperation
 				 classifier ?= self.ecoreHelper.getEcoreClassifierByQualifiedName(self.currentPackagename + "::" + self.currentClassifiername)
 				
 				if (classifier!= void) then
-					//classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put("result",e)}
 					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.put(e.name.toString,e)}
 					var tmp : ecore::EAttribute init ecore::EAttribute.new
 					tmp.eType:=classifier
@@ -348,7 +323,7 @@ class FileWriter inherits StdIO
 					tmp.lowerBound:=0
 					tmp.upperBound:=1
 					visibleVariable.put(tmp.name.toString,tmp)
-					currops:= classifier.eAllOperations.select{e| e.name == currentOperationname}.one
+					var currops : ecore::EOperation init classifier.eAllOperations.select{e| e.name == currentOperationname}.one
 					currops.eParameters.each{ e |  visibleVariable.put(e.name.toString,e)
 					/*if (e.upperBound >1 or e.upperBound == -1 ) then
 		 				visibleVariableMultiplicities.put(e.name.toString,true)
@@ -358,35 +333,18 @@ class FileWriter inherits StdIO
 					
 					
 					}
-					visibleVariable.put("result",currops)
-					
 				else
-					self.getIerr.writeln("no cache for allAttributes of  " + currentClassifiername)
+					writeln("no cache for allAttributes of  " + currentClassifiername)
 				end
 				
 				write("operation ")
 				visitable.simpleNameCS.accept(self)
 				write("(")
-				var i : Integer init 0
 				visitable.parameters.each{ p |
 						p.accept(self)
-						i:= i +1
-						if (i <visitable.parameters.size) then
-							write(", ")
-						end 
 					}
-				write(") :")
+				write("):")
 				visitable.typeCS.accept(self)
-				
-				/*if (classifier!= void) then
-					//classifier.eAllStructuralFeatures.each{ e |  visibleVariable.remove("result",e)}
-					classifier.eAllStructuralFeatures.each{ e |  visibleVariable.remove(e.name.toString)}
-					visibleVariable.remove("self")
-					visibleVariable.remove("result")
-					currops.eParameters.each{ e |  visibleVariable.remove(e.name.toString)
-					}
-				
-				end*/
 			end
 
 		method visitInitOrDerValueCS(visitable : InitOrDerValueCS) : Void is
@@ -797,13 +755,10 @@ class FileWriter inherits StdIO
 				//writeln(self.currentPackagename + "::" + self.currentClassifiername)
 				//writeln(pathExpression.substring(0, pathExpression.size -1))
 				var isMultiple : Boolean 
-				//var nextcurrentClassifier : ecore::EClassifier
-				//nextcurrentClassifier := ecoreHelper.getClassifierQualifiedName(self.currentClassifier.eType) , pathExpression.substring(0, pathExpression.size -1)
 				do 	
 		 			if (self.currentClassifier == void) then 
 		 				isMultiple :=false
 		 			else
-		 						 			
 		 				isMultiple := self.ecoreHelper.getETypedElementFromPath(ecoreHelper.getClassifierQualifiedName(self.currentClassifier.eType) , pathExpression.substring(0, pathExpression.size -1),".").many
 					end
 				if (previousIsMultiple) then
@@ -899,37 +854,13 @@ class FileWriter inherits StdIO
         property readonly operators: Hashtable<String, OperatorPolicy>
 			getter is 
 				do
-					
-				
           			if __operators == void then
-          				var bool : ecore::EAttribute init ecore::EAttribute.new
-          				do
-          					/*bool.eType:=
-//          					bool.eType.name:="EBoolean"
-							bool.name := "res"
-							bool.ordered := false
-							bool.lowerBound:=0
-							bool.upperBound:=1*/
-          				end
-          				var int : ecore::EAttribute init ecore::EAttribute.new
-          				do
-          					/*int.eType:=ecore::EClassifier.new
-          					int.eType.name:="EBoolean"
-							int.name := "res"
-							int.ordered := false
-							int.lowerBound:=0
-							int.upperBound:=1*/
-          				end
-          				
-          				
           			    var functionCall : OperatorPolicy init FunctionCallOp.new
           			    var simpleOp : OperatorPolicy init SimpleOP.new
-          				
-          				
           				__operators := Hashtable<String, OperatorPolicy>.new
           				__operators.put("implies", ImpliesOP.new)
-          				__operators.put("and", functionCall)  
-          				__operators.put("or", functionCall) 
+          				__operators.put("and", functionCall)
+          				__operators.put("or", functionCall)
           				__operators.put("xor", functionCall)
           				__operators.put("<", FunctionCallOp.new.withName("isLower"))
           				__operators.put("<=", FunctionCallOp.new.withName("isLowerOrEqual"))
@@ -940,22 +871,23 @@ class FileWriter inherits StdIO
           				__operators.put("-", MinusSignOp.new)
           				__operators.put("*",  FunctionCallOp.new.withName("mult"))
           				__operators.put("/",  FunctionCallOp.new.withName("div"))
-          				//__operators.put("includes", functionCollectionCall.new)
-           				//__operators.put("includesAll", functionCollectionCall.new)
-          				//__operators.put("excludes", functionCollectionCall.new)
-           				//__operators.put("excludesAll", functionCollectionCall.new)
+          				__operators.put("includes", functionCollectionCall.new)
+           				__operators.put("includesAll", functionCollectionCall.new)
+          				__operators.put("excludes", functionCollectionCall.new)
+           				__operators.put("excludesAll", functionCollectionCall.new)
           				
-          				//__operators.put("size", FunctionCallOp.new)
-          				//__operators.put("at", functionCollectionCall.new.withName("elementAt"))
-          				//__operators.put("indexOf", functionCollectionCall.new)
-          				//__operators.put("includes", functionCollectionCall.new)
-           				//_operators.put("includesAll", functionCollectionCall.new)
-          				//__operators.put("excludes", functionCollectionCall.new)
-           				//__operators.put("excludesAll", functionCollectionCall.new)
+          				__operators.put("size", FunctionCallOp.new)
+          				__operators.put("at", functionCollectionCall.new.withName("elementAt"))
+          				__operators.put("indexOf", functionCollectionCall.new)
+          				__operators.put("includes", functionCollectionCall.new)
+           				__operators.put("includesAll", functionCollectionCall.new)
+          				__operators.put("excludes", functionCollectionCall.new)
+           				__operators.put("excludesAll", functionCollectionCall.new)
           				
-          				//__operators.put("size", functionCollectionCall.new)
-          				//__operators.put("at", functionCollectionCall.new.withName("elementAt"))
-          				//__operators.put("indexOf", functionCollectionCall.new)
+          				__operators.put("size", functionCollectionCall.new)
+          				__operators.put("at", functionCollectionCall.new.withName("elementAt"))
+          				__operators.put("indexOf", functionCollectionCall.new)
+          				__operators.put("oclAsType", CastOp.new)   
           				__operators.put("oclIsUndefined", NotNullOp.new)          				
           				__operators.put("not", functionCall)  
           				__operators.put("oclIsTypeOf", FunctionCallOp.new.withName("isKindOf"))
@@ -972,94 +904,92 @@ class FileWriter inherits StdIO
           				__operators.put("excludesAll", functionCollectionCall.new)
           				__operators.put("notEmpty", EmptyCallOp.new.withName("empty").withSuffix(".~not"))
           				__operators.put("isEmpty", EmptyCallOp.new.withName("empty"))
-           				//__operators.put("union", FunctionCallOp.new)
-           				//__operators.put("intersection", FunctionCallOp.new) 
-           				//__operators.put("including", functionCall)  
-           				//__operators.put("excluding", functionCall)  
-           				//__operators.put("last", functionCall)  
-           				//__operators.put("first", functionCall)  
-           				//__operators.put("count", functionCall)             				
-           				 
-           				
-           				//TODO Manage return
-          				__operators.put("oclAsType", CastOp.new)   
-          				__operators.put("union", functionCollectionCall.new.setResult(true,true,false))
-           				__operators.put("intersection", functionCollectionCall.new.setResult(true,true,false)) 
-           				__operators.put("including", functionCollectionCall.new.setResult(true,true,false))   
-           				__operators.put("excluding", functionCollectionCall.new.setResult(true,true,false))  
-           				__operators.put("asBag", functionCollectionCall.new.setResult(true,true,false))  
-           				__operators.put("asSet", functionCollectionCall.new.setResult(true,true,false))  
-           				__operators.put("asOrderedSet", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("asSequence", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("subSequence", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("prepend", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("insertAt", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("append", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("flatten", functionCollectionCall.new.setResult(true,true,true))  
-           				__operators.put("sum", functionCollectionCall.new.setResult(true,true,true))
-           				__operators.put("product", functionCollectionCall.new.setResult(true,true,true).withName("empty"))
-           				__operators.put("symmetricDifference", functionCollectionCall.new.setResult(true,true,true))
-           				__operators.put("subOrderedSet", functionCollectionCall.new.setResult(true,true,true)) 
-           				//__operators.put("at", functionCollectionCall.new.withName("elementAt"))
-          				//__operators.put("indexOf", functionCollectionCall.new)
-          				__operators.put("last", functionOrderedCollectionCall.new.setResult(true,false,false))  
-           				__operators.put("first", functionOrderedCollectionCall.new.setResult(true,false,false))  
-           				 
-						//Standard library : Bag operation
-          				//__operators.put("subSequence", functionCollectionCall.new)  
-          				
-           				
-           				
-           				//__operators.put("union", functionCollectionCall.new)
-           				//__operators.put("intersection", functionCollectionCall.new) 
-           				//__operators.put("including", functionCollectionCall.new)   
-           				//__operators.put("excluding", functionCollectionCall.new)  
-           				//__operators.put("last", functionOrderedCollectionCall.new)  
-           				//__operators.put("first", functionOrderedCollectionCall.new)  
-           				//__operators.put("count", functionCollectionCall.new)  
-           				//__operators.put("asBag", functionCollectionCall.new)  
-           				//__operators.put("asSet", functionCollectionCall.new)  
-           				//__operators.put("asOrderedSet", functionCollectionCall.new)  
-           				//__operators.put("asSequence", functionCollectionCall.new)  
-           				//__operators.put("subSequence", functionCollectionCall.new)  
-           				//__operators.put("prepend", functionCollectionCall.new)  
-           				//__operators.put("insertAt", functionCollectionCall.new)  
-           				//__operators.put("append", functionCollectionCall.new)  
-           				//__operators.put("flatten", functionCollectionCall.new)  
-           				//__operators.put("union", functionCollectionCall.new)
-           				//__operators.put("intersection", functionCollectionCall.new) 
-           				//__operators.put("including", functionCollectionCall.new)   
-           				//__operators.put("excluding", functionCollectionCall.new)  
-           				//__operators.put("last", functionOrderedCollectionCall.new)  
-           				//__operators.put("first", functionOrderedCollectionCall.new)  
-           				//__operators.put("count", functionCollectionCall.new)  
-           				//__operators.put("asBag", functionCollectionCall.new)  
-           				//__operators.put("asSet", functionCollectionCall.new)  
-           				//__operators.put("asOrderedSet", functionCollectionCall.new)  
-           				//__operators.put("asSequence", functionCollectionCall.new)  
-           				/*__operators.put("subSequence", functionCollectionCall.new)  
-           				__operators.put("prepend", functionCollectionCall.new)  
-           				__operators.put("insertAt", functionCollectionCall.new)  
-           				__operators.put("append", functionCollectionCall.new)  
-           				__operators.put("flatten", functionCollectionCall.new)  */
-           				
-           				//Standard library : Set operation
-          				//__operators.put("union", functionCollectionCall.new)
-           				__operators.put("=", FunctionCallOp.new.withName("equals"))
-          				/*__operators.put("intersection", functionCollectionCall.new) 
+           				__operators.put("oclIsTypeOf", FunctionCallOp.new.withName("isKindOf"))
+           				__operators.put("oclIsKindOf", FunctionCallOp.new.withName("isInstanceOf"))
+           				__operators.put("union", FunctionCallOp.new)
+           				__operators.put("intersection", FunctionCallOp.new) 
+           				__operators.put("including", functionCall)  
+           				__operators.put("excluding", functionCall)  
+           				__operators.put("last", functionCall)  
+           				__operators.put("first", functionCall)  
+           				__operators.put("count", functionCall)             				
+           				__operators.put("union", functionCollectionCall.new)
+           				__operators.put("intersection", functionCollectionCall.new) 
            				__operators.put("including", functionCollectionCall.new)   
            				__operators.put("excluding", functionCollectionCall.new)  
-           				__operators.put("flatten", functionCollectionCall.new)  
-           				*//*__operators.put("asBag", functionCollectionCall.new)  
+           				__operators.put("last", functionOrderedCollectionCall.new)  
+           				__operators.put("first", functionOrderedCollectionCall.new)  
+           				__operators.put("count", functionCollectionCall.new)  
+           				__operators.put("asBag", functionCollectionCall.new)  
            				__operators.put("asSet", functionCollectionCall.new)  
            				__operators.put("asOrderedSet", functionCollectionCall.new)  
            				__operators.put("asSequence", functionCollectionCall.new)  
-           				*/
-           				//Standard library : OrderedSet operation
-          				//__operators.put("prepend", functionCollectionCall.new)  
-           				//__operators.put("insertAt", functionCollectionCall.new)  
-           				//__operators.put("append", functionCollectionCall.new)  
+           				__operators.put("subSequence", functionCollectionCall.new)  
+           				__operators.put("prepend", functionCollectionCall.new)  
+           				__operators.put("insertAt", functionCollectionCall.new)  
+           				__operators.put("append", functionCollectionCall.new)  
+           				__operators.put("flatten", functionCollectionCall.new)  
+           				__operators.put("union", functionCollectionCall.new)
+           				__operators.put("intersection", functionCollectionCall.new) 
+           				__operators.put("including", functionCollectionCall.new)   
+           				__operators.put("excluding", functionCollectionCall.new)  
+           				__operators.put("last", functionOrderedCollectionCall.new)  
+           				__operators.put("first", functionOrderedCollectionCall.new)  
+           				__operators.put("count", functionCollectionCall.new)  
+           				__operators.put("asBag", functionCollectionCall.new)  
+           				__operators.put("asSet", functionCollectionCall.new)  
+           				__operators.put("asOrderedSet", functionCollectionCall.new)  
+           				__operators.put("asSequence", functionCollectionCall.new)  
+           				__operators.put("subSequence", functionCollectionCall.new)  
+           				__operators.put("prepend", functionCollectionCall.new)  
+           				__operators.put("insertAt", functionCollectionCall.new)  
+           				__operators.put("append", functionCollectionCall.new)  
+           				__operators.put("flatten", functionCollectionCall.new)  
+           				__operators.put("union", functionCollectionCall.new)
+           				__operators.put("intersection", functionCollectionCall.new) 
+           				__operators.put("including", functionCollectionCall.new)   
+           				__operators.put("excluding", functionCollectionCall.new)  
+           				__operators.put("last", functionOrderedCollectionCall.new)  
+           				__operators.put("first", functionOrderedCollectionCall.new)  
+           				__operators.put("count", functionCollectionCall.new)  
+           				__operators.put("asBag", functionCollectionCall.new)  
+           				__operators.put("asSet", functionCollectionCall.new)  
+           				__operators.put("asOrderedSet", functionCollectionCall.new)  
+           				__operators.put("asSequence", functionCollectionCall.new)  
+           				__operators.put("subSequence", functionCollectionCall.new)  
+           				__operators.put("prepend", functionCollectionCall.new)  
+           				__operators.put("insertAt", functionCollectionCall.new)  
+           				__operators.put("append", functionCollectionCall.new)  
+           				__operators.put("flatten", functionCollectionCall.new)  
+           				__operators.put("sum", functionCollectionCall.new)
+           				__operators.put("product", EmptyCallOp.new.withName("empty"))
            				
+           				//Standard library : Set operation
+          				__operators.put("union", functionCollectionCall.new)
+           				__operators.put("=", FunctionCallOp.new.withName("equals"))
+          				__operators.put("intersection", functionCollectionCall.new) 
+           				__operators.put("including", functionCollectionCall.new)   
+           				__operators.put("excluding", functionCollectionCall.new)  
+           				__operators.put("flatten", functionCollectionCall.new)  
+           				__operators.put("symmetricDifference", functionCall)
+           				__operators.put("asBag", functionCollectionCall.new)  
+           				__operators.put("asSet", functionCollectionCall.new)  
+           				__operators.put("asOrderedSet", functionCollectionCall.new)  
+           				__operators.put("asSequence", functionCollectionCall.new)  
+           				
+           				//Standard library : OrderedSet operation
+          				__operators.put("prepend", functionCollectionCall.new)  
+           				__operators.put("insertAt", functionCollectionCall.new)  
+           				__operators.put("append", functionCollectionCall.new)  
+           				__operators.put("subOrderedSet", functionCollectionCall.new) 
+           				__operators.put("at", functionCollectionCall.new.withName("elementAt"))
+          				__operators.put("indexOf", functionCollectionCall.new)
+          				__operators.put("last", functionOrderedCollectionCall.new)  
+           				__operators.put("first", functionOrderedCollectionCall.new)  
+           				
+						//Standard library : Bag operation
+          				__operators.put("subSequence", functionCollectionCall.new)  
+          				
           				
 
            				
@@ -1105,8 +1035,8 @@ class FileWriter inherits StdIO
         				addIterator("exists", sameName)
         				addIterator("forAll", sameName)
         				addIterator("isUnique", UniqueIP.new)
-        				addIterator("any", SimpleIteratorIP.new.withName("detect"))
-        				addIterator("one", SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
+        				addIterator("any", sameName)//SimpleIteratorIP.new.withName("detect"))
+        				addIterator("one", sameName)//SimpleIteratorIP.new.withName("select").withSuffix(".size.equals(1)"))
         				addIterator("select", SimpleIteratorIP.new.withName("select"))
         				addIterator("collect", sameName)
         				addIterator("collectNested", doNothing)
@@ -1216,12 +1146,8 @@ class SimpleIteratorIP inherits IteratorPolicy {
 			if name == void then
 				visitor.write(oclIterator.simpleNameCS.~value.toString )
 			else
-				visitor.write(name )
+				visitor.write(name)
 			end
-			if oclIterator.variable2 != void then
-				visitor.write("Cpl" )
-			end
-			
 
 			visitor.write("{ ")
 			var variableName : String
@@ -1233,14 +1159,6 @@ class SimpleIteratorIP inherits IteratorPolicy {
 				visitor.write(variableName)
 				//TODO Check that mark
 			end
-			if (oclIterator.variable2 != void) then
-				visitor.write(", ")
-				visitor.iteratorVariable := true 
-				oclIterator.variable2.accept(visitor)
-				variableName:= oclIterator.variable2.name
-				//TODO Check that mark
-			end
-			
 			visitor.write(" | ")
 			//visitor.write(oclIterator.body.getMetaClass.toString)
  					 	
