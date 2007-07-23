@@ -1,11 +1,12 @@
 package sample;
 require kermeta
-require "/home/barais/workspaces/workspace_demo_kermeta/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
+require "/home/mskipper/runtime-EclipseApplication/fr.irisa.triskell.kermeta.ocl/ocl/sample.ecore"
 using kermeta::standard
 @aspect "true"
 class A{
 inv invariant1 is
 do
-ab.y
+ab./*INVALIDPATHfoo B*/foo
+
 end
 }

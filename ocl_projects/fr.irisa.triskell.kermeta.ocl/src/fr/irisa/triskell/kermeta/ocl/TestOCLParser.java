@@ -41,26 +41,23 @@ public class TestOCLParser {
 	 *  for a file whose path is given in oclSourcePath
 	 *  generating an output xmi file in the xmiOutputPath location
 	 */
-	public static void callParser(RuntimeObject oclSourcePath, RuntimeObject xmiOutputPath) {
+	public static void callParser(RuntimeObject oclSourcePath, RuntimeObject xmiOutputPath) throws ParserException {
 		String sourcePath = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(oclSourcePath); 
 		String targetPath = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(xmiOutputPath); 
 		new TestOCLParser().run(sourcePath, targetPath);
 	}
 	
-	public static void run(String ocltextfile, String uri) {
+	public static void run(String ocltextfile, String uri) throws ParserException {
 		File oclSourceFile = new File(ocltextfile);
 		String oclSource =  getContents(oclSourceFile);
 		
 		MyOCLParser parser = new MyOCLParser(oclSource);
 		//MyOCLParser parser = createParser(oclSource); //$NON-NLS-1$
 		EObject constraint = null;
-		try {
 			//System.err.println(ocltext + " essai");
 			constraint = parser.parse();
 			System.out.println(constraint.toString());
-		} catch (ParserException e) {
-			e.printStackTrace();
-		}
+		
 
 		if (constraint != null) {
 			URI fileURI = URI.createFileURI(uri);
@@ -292,7 +289,12 @@ public class TestOCLParser {
 			String oclSourceFileName = baseDir + "ocl/" + fn + ".ocl";
 			String xmiOutputFileName = "ocl/" + fn + ".xmi";
 			System.out.println("Processing: " + oclSourceFileName + " --> " + xmiOutputFileName  );
-			run(oclSourceFileName, xmiOutputFileName);
+			try {
+				run(oclSourceFileName, xmiOutputFileName);
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
