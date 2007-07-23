@@ -1,4 +1,4 @@
-/*$Id: WorkspaceDeltaVisitor.java,v 1.9 2007-07-20 15:08:48 ftanguy Exp $
+/*$Id: WorkspaceDeltaVisitor.java,v 1.10 2007-07-23 14:00:05 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -222,11 +222,15 @@ public class WorkspaceDeltaVisitor implements IResourceDeltaVisitor, Interest {
 			currentProject = KermetaWorkspace.getInstance().getKermetaProject( resource.getProject() );
 			if ( currentProject != null ) {
 				Unit unit = currentProject.getKpm().findUnit( resource.getFullPath().toString() );
-				unit.receiveAsynchroneEvent("delete", null, null);
-				//sendEvent("delete", unit);
-				currentProject.getKpm().removeUnit( resource.getFullPath().toString() );
-				currentProject.save();
-				IOPlugin.getDefault().unload( (IFile) resource );
+				if ( resource.getName().matches("\\.project\\.kpm") ) {
+					currentProject.reinitialize();
+				} else if ( unit != null ) {
+					unit.receiveAsynchroneEvent("delete", null, null);
+					//sendEvent("delete", unit);
+					currentProject.getKpm().removeUnit( resource.getFullPath().toString() );
+					currentProject.save();
+					IOPlugin.getDefault().unload( (IFile) resource );
+				}
 			}
 			break;
 			
