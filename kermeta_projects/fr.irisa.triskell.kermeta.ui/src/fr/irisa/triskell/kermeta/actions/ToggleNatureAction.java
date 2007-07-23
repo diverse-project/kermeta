@@ -1,4 +1,4 @@
-/*$Id: ToggleNatureAction.java,v 1.2 2007-04-13 14:47:55 ftanguy Exp $
+/*$Id: ToggleNatureAction.java,v 1.3 2007-07-23 14:01:23 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -93,9 +93,9 @@ public class ToggleNatureAction implements IObjectActionDelegate {
 				if ( ! project.hasNature(KermetaNature.ID) ) {
 					NatureHelper.addNatureToProject(project, KermetaNature.ID);
 			    	KermetaProject kermetaProject = KermetaWorkspace.getInstance().addKermetaProject(project);	
-			    	KPMResourceVisitor visitor = new KPMResourceVisitor(kermetaProject);
+			    	/*KPMResourceVisitor visitor = new KPMResourceVisitor(kermetaProject);
 			    	project.accept(visitor);
-			    	kermetaProject.save();
+			    	kermetaProject.save();*/
 			    	kermetaProject.open();
 				} else {
 					NatureHelper.removeNatureFromProject(project, KermetaNature.ID);
