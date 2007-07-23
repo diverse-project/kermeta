@@ -1,4 +1,4 @@
-/*$Id: KPMResourceVisitor.java,v 1.2 2007-04-13 14:44:40 ftanguy Exp $
+/*$Id: KPMResourceVisitor.java,v 1.3 2007-07-23 13:59:45 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.kpm
 * File : 	sdfg.java
 * License : EPL
@@ -41,14 +41,29 @@ public class KPMResourceVisitor implements IResourceVisitor {
 		switch ( resource.getType() ) {
 		
 		case IResource.FILE:
-			if ( (resource.getFileExtension() != null) && resource.getFileExtension().equals("kmt") ) {
-				Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
-				unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
-				project.getKpm().getUnits().add(unit);
-				KPMHelper.addCloseDependencyOnKMTFile(project.getKpm(), unit);
-				KPMHelper.addOpenDependencyOnKMTFile(project.getKpm(), unit);
-				KPMHelper.addUpdateDependencyOnKMTFile(project.getKpm(), unit);
-			}
+			Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
+			unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
+			project.getKpm().getUnits().add(unit);
+			KPMHelper.addRules(project.getKpm(), unit);
+			if ( unit.getRules().isEmpty() )
+				project.getKpm().removeUnit( resource.getFullPath().toString() );
+			/*if ( resource.getFileExtension() != null ) {
+				if ( resource.getFileExtension().equals("kmt") ) {
+
+					KPMHelper.addCloseDependencyOnKMTFile(project.getKpm(), unit);
+					KPMHelper.addOpenDependencyOnKMTFile(project.getKpm(), unit);
+					KPMHelper.addUpdateDependencyOnKMTFile(project.getKpm(), unit);
+				} else if ( resource.getFileExtension().equals("km") ) {
+					Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
+					unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
+					project.getKpm().getUnits().add(unit);
+					KPMHelper.ad
+				} else if ( resource.getFileExtension().equals("ecore") ) {
+					Unit unit = KPMHelper.getOrCreateUnit(project.getKpm(), resource.getFullPath().toString());
+					unit.setLastTimeModified( project.getProjectUnit().getLastTimeModified() );
+					project.getKpm().getUnits().add(unit);
+				}
+			}*/
 			break;
 			
 		case IResource.FOLDER :
