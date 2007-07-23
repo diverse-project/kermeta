@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: PropertyBiDirecFigure.java,v 1.1 2007-07-11 14:50:46 cfaucher Exp $
+ * $Id: PropertyBiDirecFigure.java,v 1.2 2007-07-23 09:21:25 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

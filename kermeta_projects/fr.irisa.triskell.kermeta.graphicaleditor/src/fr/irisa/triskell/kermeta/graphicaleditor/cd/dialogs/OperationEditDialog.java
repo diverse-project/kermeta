@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.2 2007-07-20 15:34:05 cfaucher Exp $
+/* $Id: OperationEditDialog.java,v 1.3 2007-07-23 09:21:25 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -27,13 +27,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -43,17 +40,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
-import org.kermeta.io.KermetaUnit;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.KmImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.OperationDataStructure;
-import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 
 /**
  * Popup dialog associated to the Operation graphical object, used for the 

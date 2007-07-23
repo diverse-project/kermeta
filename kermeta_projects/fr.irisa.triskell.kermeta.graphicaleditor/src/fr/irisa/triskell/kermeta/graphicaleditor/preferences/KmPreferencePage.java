@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmPreferencePage.java,v 1.2 2007-07-11 14:50:46 cfaucher Exp $
+ * $Id: KmPreferencePage.java,v 1.3 2007-07-23 09:21:26 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

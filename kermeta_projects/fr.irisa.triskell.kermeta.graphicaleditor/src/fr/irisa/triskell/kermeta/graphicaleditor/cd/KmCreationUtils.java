@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmCreationUtils.java,v 1.5 2007-07-12 07:39:37 cfaucher Exp $
+ * $Id: KmCreationUtils.java,v 1.6 2007-07-23 09:21:23 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -212,7 +212,7 @@ public class KmCreationUtils extends AbstractCreationUtils {
 
 	/**
 	 * @see org.topcased.modeler.editor.ICreationUtils#createGraphElement(org.eclipse.emf.ecore.EObject, java.lang.String)
-	 * @generated
+	 * @generated NOT
 	 */
 	public GraphElement createGraphElement(EObject obj, String presentation) {
 		Object graphElt = null;
@@ -225,8 +225,8 @@ public class KmCreationUtils extends AbstractCreationUtils {
 				.getEPackage().getNsURI())) {
 			graphElt = new GraphicLanguageSwitch(presentation).doSwitch(obj);
 		}
-		if ("http://www.kermeta.org/kermeta//language/behavior".equals(obj.eClass()
-				.getEPackage().getNsURI())) {
+		if ("http://www.kermeta.org/kermeta//language/behavior".equals(obj
+				.eClass().getEPackage().getNsURI())) {
 			graphElt = new GraphicBehaviorSwitch(presentation).doSwitch(obj);
 		}
 		if ("http://www.kermeta.org/kermeta//language/structure".equals(obj

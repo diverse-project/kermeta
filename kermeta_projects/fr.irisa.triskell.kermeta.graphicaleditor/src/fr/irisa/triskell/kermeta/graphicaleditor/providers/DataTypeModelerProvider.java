@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: DataTypeModelerProvider.java,v 1.3 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: DataTypeModelerProvider.java,v 1.4 2007-07-23 09:21:24 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -19,8 +19,8 @@ import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
  * @generated
  */
 
-public class DataTypeModelerProvider extends TypeModelerProvider implements
-		ILabelFeatureProvider {
+public class DataTypeModelerProvider extends TypeDefinitionModelerProvider
+		implements ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

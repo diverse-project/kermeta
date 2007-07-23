@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ParameterizedTypeModelerProvider.java,v 1.3 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: ParameterizedTypeModelerProvider.java,v 1.4 2007-07-23 09:21:23 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

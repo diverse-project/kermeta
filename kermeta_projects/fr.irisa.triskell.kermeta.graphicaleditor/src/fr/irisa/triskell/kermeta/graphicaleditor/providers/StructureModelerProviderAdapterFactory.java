@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: StructureModelerProviderAdapterFactory.java,v 1.5 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: StructureModelerProviderAdapterFactory.java,v 1.6 2007-07-23 09:21:24 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -904,6 +904,9 @@ public class StructureModelerProviderAdapterFactory extends
 		if (multiplicityelementModelerProvider != null) {
 			multiplicityelementModelerProvider.dispose();
 		}
+		if (typedefinitionModelerProvider != null) {
+			typedefinitionModelerProvider.dispose();
+		}
 		if (datatypeModelerProvider != null) {
 			datatypeModelerProvider.dispose();
 		}
@@ -954,9 +957,6 @@ public class StructureModelerProviderAdapterFactory extends
 		}
 		if (virtualtypeModelerProvider != null) {
 			virtualtypeModelerProvider.dispose();
-		}
-		if (typedefinitionModelerProvider != null) {
-			typedefinitionModelerProvider.dispose();
 		}
 		if (producttypeModelerProvider != null) {
 			producttypeModelerProvider.dispose();

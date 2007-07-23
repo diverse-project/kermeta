@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.11 2007-07-20 15:34:04 cfaucher Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.12 2007-07-23 09:21:25 cfaucher Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -10,29 +10,19 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
 
-import java.util.HashMap;
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
-import org.eclipse.ui.texteditor.MarkerUtilities;
-import org.kermeta.io.ErrorMessage;
 import org.kermeta.io.KermetaUnit;
 import org.kermeta.io.plugin.IOPlugin;
 
-import com.ibm.eclipse.ldt.core.ast.ASTNode;
-
 import fr.irisa.triskell.eclipse.resources.ResourceHelper;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exceptions.KermetaIOFileNotFoundException;
 import fr.irisa.triskell.kermeta.exceptions.URIMalformedException;
-import fr.irisa.triskell.kermeta.modelhelper.KermetaUnitHelper;
 import fr.irisa.triskell.kermeta.resources.KermetaMarkersHelper;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 

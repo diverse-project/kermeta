@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: NewKmDiagrams.java,v 1.3 2007-07-11 14:50:46 cfaucher Exp $
+ * $Id: NewKmDiagrams.java,v 1.4 2007-07-23 09:21:25 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

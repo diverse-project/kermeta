@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: KmEditor.java,v 1.7 2007-07-20 15:34:04 cfaucher Exp $
+ * $Id: KmEditor.java,v 1.8 2007-07-23 09:21:25 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -8,9 +8,6 @@ package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
@@ -60,8 +57,7 @@ public class KmEditor extends Modeler {
 	 * @generated
 	 */
 	public String getId() {
-		return new String(
-				"fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor");
+		return "fr.irisa.triskell.kermeta.graphicaleditor.editor.KmEditor";
 	}
 
 	/**

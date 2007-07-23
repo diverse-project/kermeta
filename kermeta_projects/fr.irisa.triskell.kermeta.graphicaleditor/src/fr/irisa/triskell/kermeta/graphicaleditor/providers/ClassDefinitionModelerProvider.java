@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionModelerProvider.java,v 1.7 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: ClassDefinitionModelerProvider.java,v 1.8 2007-07-23 09:21:24 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/

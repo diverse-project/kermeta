@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.3 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: ClassDefinitionRestoreConnectionCommand.java,v 1.4 2007-07-23 09:21:25 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -20,10 +20,7 @@ import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.cd.KmSimpleObjectConstants;
-import fr.irisa.triskell.kermeta.graphicaleditor.cd.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-
-//import fr.irisa.triskell.kermeta.language.structure.*;
 
 import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -158,10 +155,8 @@ public class ClassDefinitionRestoreConnectionCommand extends
 			if (obj instanceof Property) {
 				Property edgeObject = (Property) obj;
 
-				if (!TypeHelper.isStandardType(
-						edgeObject.getType())
-						&& !TypeHelper.isPrimitiveType(
-								edgeObject.getType())) {
+				if (!TypeHelper.isStandardType(edgeObject.getType())
+						&& !TypeHelper.isPrimitiveType(edgeObject.getType())) {
 
 					// Change : edgeObject.getType()
 					if (targetObject.equals(((ParameterizedType) edgeObject

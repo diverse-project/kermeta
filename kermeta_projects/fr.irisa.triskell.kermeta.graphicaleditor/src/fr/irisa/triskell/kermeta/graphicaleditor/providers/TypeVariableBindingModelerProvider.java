@@ -1,5 +1,5 @@
 /*******************************************************************************
- * $Id: TypeVariableBindingModelerProvider.java,v 1.3 2007-07-11 14:50:45 cfaucher Exp $
+ * $Id: TypeVariableBindingModelerProvider.java,v 1.4 2007-07-23 09:21:23 cfaucher Exp $
  * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  ******************************************************************************/
@@ -17,8 +17,8 @@ import org.topcased.modeler.providers.ILabelFeatureProvider;
  * @generated
  */
 
-public class TypeVariableBindingModelerProvider extends
-		TypeContainerModelerProvider implements ILabelFeatureProvider {
+public class TypeVariableBindingModelerProvider extends ObjectModelerProvider
+		implements ILabelFeatureProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
