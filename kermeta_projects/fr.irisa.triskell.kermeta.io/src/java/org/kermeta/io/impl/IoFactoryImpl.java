@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoFactoryImpl.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+ * $Id: IoFactoryImpl.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
+import antlr.ANTLRException;
 import antlr.RecognitionException;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
@@ -98,8 +99,8 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 				return createTracerFromString(eDataType, initialValue);
 			case IoPackage.AST_NODE:
 				return createASTNodeFromString(eDataType, initialValue);
-			case IoPackage.RECOGNITION_EXCEPTION:
-				return createRecognitionExceptionFromString(eDataType, initialValue);
+			case IoPackage.ANTLR_EXCEPTION:
+				return createANTLRExceptionFromString(eDataType, initialValue);
 			case IoPackage.IO_PLUGIN:
 				return createIOPluginFromString(eDataType, initialValue);
 			default:
@@ -122,8 +123,8 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 				return convertTracerToString(eDataType, instanceValue);
 			case IoPackage.AST_NODE:
 				return convertASTNodeToString(eDataType, instanceValue);
-			case IoPackage.RECOGNITION_EXCEPTION:
-				return convertRecognitionExceptionToString(eDataType, instanceValue);
+			case IoPackage.ANTLR_EXCEPTION:
+				return convertANTLRExceptionToString(eDataType, instanceValue);
 			case IoPackage.IO_PLUGIN:
 				return convertIOPluginToString(eDataType, instanceValue);
 			default:
@@ -278,8 +279,8 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RecognitionException createRecognitionExceptionFromString(EDataType eDataType, String initialValue) {
-		return (RecognitionException)super.createFromString(eDataType, initialValue);
+	public ANTLRException createANTLRExceptionFromString(EDataType eDataType, String initialValue) {
+		return (ANTLRException)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
@@ -287,7 +288,7 @@ public class IoFactoryImpl extends EFactoryImpl implements IoFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertRecognitionExceptionToString(EDataType eDataType, Object instanceValue) {
+	public String convertANTLRExceptionToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

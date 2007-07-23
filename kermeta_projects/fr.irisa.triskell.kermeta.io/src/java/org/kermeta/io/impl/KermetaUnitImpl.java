@@ -2,16 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnitImpl.java,v 1.2 2007-07-20 15:08:06 ftanguy Exp $
+ * $Id: KermetaUnitImpl.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
+import antlr.ANTLRException;
 import antlr.MismatchedTokenException;
 import antlr.NoViableAltException;
 import antlr.RecognitionException;
+import antlr.TokenStreamRecognitionException;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Require;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -64,6 +65,8 @@ import org.kermeta.io.PackageEntry;
 import org.kermeta.io.ParsingError;
 import org.kermeta.io.WarningMessage;
 import org.kermeta.io.printer.KM2KMTPrettyPrinter;
+
+import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 /**
  * <!-- begin-user-doc -->
@@ -1130,7 +1133,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				tracer = new Tracer();
 			}
 		   
-			KermetaASTNode astNode = (KermetaASTNode)node;
+			ASTNode astNode = (ASTNode)node;
 			tracer.addTextInputTrace(this.uri, 
 					-1,// this cost too much, this computation is done only on demand, ResourceHelper.calculateLineNumber(astNode.getRangeStart(),this.uri),//getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
 					astNode.getRangeStart(),
@@ -1199,8 +1202,7 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void parsingError(RecognitionException exception) {
-		
+	public void parsingError(ANTLRException exception) {
 		if ( exception instanceof MismatchedTokenException ) {
 			ParsingError error = IoFactory.eINSTANCE.createParsingError();
 			MismatchedTokenException e = (MismatchedTokenException) exception;
@@ -1221,8 +1223,14 @@ public class KermetaUnitImpl extends EObjectImpl implements KermetaUnit {
 				error.setLength( e.token.getText().length() );
 			error.setValue( e.getLocalizedMessage() );
 			getMessages().add( error );
+		} else if ( exception instanceof TokenStreamRecognitionException ) {
+			TokenStreamRecognitionException e = (TokenStreamRecognitionException) exception;
+			ParsingError error = IoFactory.eINSTANCE.createParsingError();
+			error.setOffset( e.recog.column );
+			error.setLength( 0 );
+			error.setValue( e.getLocalizedMessage() );
+			getMessages().add( error );
 		}
-		
 	}
 
 	/**

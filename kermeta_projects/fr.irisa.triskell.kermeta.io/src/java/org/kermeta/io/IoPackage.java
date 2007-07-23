@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackage.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: IoPackage.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
  */
 package org.kermeta.io;
 
@@ -574,15 +574,14 @@ public interface IoPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '<em>Recognition Exception</em>' data type.
+	 * The meta object id for the '<em>ANTLR Exception</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see antlr.RecognitionException
-	 * @see org.kermeta.io.impl.IoPackageImpl#getRecognitionException()
+	 * @see antlr.ANTLRException
+	 * @see org.kermeta.io.impl.IoPackageImpl#getANTLRException()
 	 * @generated
 	 */
-	int RECOGNITION_EXCEPTION = 14;
-
+	int ANTLR_EXCEPTION = 14;
 
 	/**
 	 * The meta object id for the '<em>IO Plugin</em>' data type.
@@ -993,15 +992,15 @@ public interface IoPackage extends EPackage {
 	EDataType getASTNode();
 
 	/**
-	 * Returns the meta object for data type '{@link antlr.RecognitionException <em>Recognition Exception</em>}'.
+	 * Returns the meta object for data type '{@link antlr.ANTLRException <em>ANTLR Exception</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Recognition Exception</em>'.
-	 * @see antlr.RecognitionException
-	 * @model instanceClass="antlr.RecognitionException"
+	 * @return the meta object for data type '<em>ANTLR Exception</em>'.
+	 * @see antlr.ANTLRException
+	 * @model instanceClass="antlr.ANTLRException"
 	 * @generated
 	 */
-	EDataType getRecognitionException();
+	EDataType getANTLRException();
 
 	/**
 	 * Returns the meta object for data type '{@link org.kermeta.io.plugin.IOPlugin <em>IO Plugin</em>}'.
@@ -1361,14 +1360,14 @@ public interface IoPackage extends EPackage {
 		EDataType AST_NODE = eINSTANCE.getASTNode();
 
 		/**
-		 * The meta object literal for the '<em>Recognition Exception</em>' data type.
+		 * The meta object literal for the '<em>ANTLR Exception</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see antlr.RecognitionException
-		 * @see org.kermeta.io.impl.IoPackageImpl#getRecognitionException()
+		 * @see antlr.ANTLRException
+		 * @see org.kermeta.io.impl.IoPackageImpl#getANTLRException()
 		 * @generated
 		 */
-		EDataType RECOGNITION_EXCEPTION = eINSTANCE.getRecognitionException();
+		EDataType ANTLR_EXCEPTION = eINSTANCE.getANTLRException();
 
 		/**
 		 * The meta object literal for the '<em>IO Plugin</em>' data type.

@@ -49,7 +49,7 @@ Package io <http://io>
     Operation getUsings() : Set
     Operation error(EString, EJavaObject) : void
     Operation isWarned() : EBoolean
-    Operation parsingError(RecognitionException) : void
+    Operation parsingError(ANTLRException) : void
     Operation warning(EString, EJavaObject) : void
 
   Class IBuildingState
@@ -93,6 +93,6 @@ Package io <http://io>
 
   DataType ASTNode <com.ibm.eclipse.ldt.core.ast.ASTNode>
 
-  DataType RecognitionException <antlr.RecognitionException>
+  DataType ANTLRException <antlr.ANTLRException>
 
   DataType IOPlugin <org.kermeta.io.plugin.IOPlugin>

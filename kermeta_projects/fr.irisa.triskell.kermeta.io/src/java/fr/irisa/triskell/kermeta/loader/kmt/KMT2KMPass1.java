@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.10 2007-07-20 15:08:06 ftanguy Exp $
+/* $Id: KMT2KMPass1.java,v 1.11 2007-07-23 13:57:20 ftanguy Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -131,6 +131,8 @@ public class KMT2KMPass1 extends KMT2KMPass {
 						uriRequire = fileURI;
 					} else
 						error = true;
+				} catch (IllegalArgumentException e) {
+					error = true;
 				}
 			}
 			

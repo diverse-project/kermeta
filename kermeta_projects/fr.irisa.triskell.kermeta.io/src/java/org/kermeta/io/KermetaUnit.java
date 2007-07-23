@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KermetaUnit.java,v 1.2 2007-07-20 15:08:08 ftanguy Exp $
+ * $Id: KermetaUnit.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
  */
 package org.kermeta.io;
 
+import antlr.ANTLRException;
 import antlr.RecognitionException;
 
 import fr.irisa.triskell.kermeta.language.structure.ModelingUnit;
@@ -606,10 +607,10 @@ public interface KermetaUnit extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model exceptionDataType="org.kermeta.io.RecognitionException"
+	 * @model exceptionDataType="org.kermeta.io.ANTLRException"
 	 * @generated
 	 */
-	void parsingError(RecognitionException exception);
+	void parsingError(ANTLRException exception);
 
 	/**
 	 * <!-- begin-user-doc -->

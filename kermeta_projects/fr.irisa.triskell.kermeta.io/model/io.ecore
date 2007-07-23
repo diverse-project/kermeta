@@ -69,7 +69,7 @@
     </eOperations>
     <eOperations name="isWarned" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="parsingError">
-      <eParameters name="exception" eType="#//RecognitionException"/>
+      <eParameters name="exception" eType="#//ANTLRException"/>
     </eOperations>
     <eOperations name="warning">
       <eParameters name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -151,6 +151,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="RecognitionException" instanceClassName="antlr.RecognitionException"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ANTLRException" instanceClassName="antlr.ANTLRException"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IOPlugin" instanceClassName="org.kermeta.io.plugin.IOPlugin"/>
 </ecore:EPackage>

@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IoPackageImpl.java,v 1.2 2007-07-20 15:08:05 ftanguy Exp $
+ * $Id: IoPackageImpl.java,v 1.3 2007-07-23 13:58:05 ftanguy Exp $
  */
 package org.kermeta.io.impl;
 
+import antlr.ANTLRException;
 import antlr.RecognitionException;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
@@ -155,7 +156,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType recognitionExceptionEDataType = null;
+	private EDataType antlrExceptionEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -573,8 +574,8 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getRecognitionException() {
-		return recognitionExceptionEDataType;
+	public EDataType getANTLRException() {
+		return antlrExceptionEDataType;
 	}
 
 	/**
@@ -662,7 +663,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		listEDataType = createEDataType(LIST);
 		tracerEDataType = createEDataType(TRACER);
 		astNodeEDataType = createEDataType(AST_NODE);
-		recognitionExceptionEDataType = createEDataType(RECOGNITION_EXCEPTION);
+		antlrExceptionEDataType = createEDataType(ANTLR_EXCEPTION);
 		ioPluginEDataType = createEDataType(IO_PLUGIN);
 	}
 
@@ -790,7 +791,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		addEOperation(kermetaUnitEClass, ecorePackage.getEBoolean(), "isWarned", 0, 1);
 
 		op = addEOperation(kermetaUnitEClass, null, "parsingError");
-		addEParameter(op, this.getRecognitionException(), "exception", 0, 1);
+		addEParameter(op, this.getANTLRException(), "exception", 0, 1);
 
 		op = addEOperation(kermetaUnitEClass, null, "warning");
 		addEParameter(op, ecorePackage.getEString(), "message", 0, 1);
@@ -847,7 +848,7 @@ public class IoPackageImpl extends EPackageImpl implements IoPackage {
 		initEDataType(listEDataType, List.class, "List", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(tracerEDataType, Tracer.class, "Tracer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(astNodeEDataType, ASTNode.class, "ASTNode", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(recognitionExceptionEDataType, RecognitionException.class, "RecognitionException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(antlrExceptionEDataType, ANTLRException.class, "ANTLRException", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(ioPluginEDataType, IOPlugin.class, "IOPlugin", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
