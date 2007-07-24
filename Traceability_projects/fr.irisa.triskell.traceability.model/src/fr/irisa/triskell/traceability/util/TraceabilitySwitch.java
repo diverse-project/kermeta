@@ -2,16 +2,24 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilitySwitch.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: TraceabilitySwitch.java,v 1.2 2007-07-24 13:45:40 ftanguy Exp $
  */
 package fr.irisa.triskell.traceability.util;
-
-import fr.irisa.triskell.traceability.*;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.traceability.FileReference;
+import fr.irisa.triskell.traceability.Message;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.Reference;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.Trace;
+import fr.irisa.triskell.traceability.TraceModel;
+import fr.irisa.triskell.traceability.TraceabilityPackage;
+import fr.irisa.triskell.traceability.XMLReference;
 
 /**
  * <!-- begin-user-doc -->

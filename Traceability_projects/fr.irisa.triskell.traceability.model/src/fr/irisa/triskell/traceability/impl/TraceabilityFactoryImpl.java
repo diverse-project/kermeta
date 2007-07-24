@@ -2,20 +2,25 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TraceabilityFactoryImpl.java,v 1.1 2007-05-04 15:58:27 dtouzet Exp $
+ * $Id: TraceabilityFactoryImpl.java,v 1.2 2007-07-24 13:45:40 ftanguy Exp $
  */
 package fr.irisa.triskell.traceability.impl;
-
-import fr.irisa.triskell.traceability.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import fr.irisa.triskell.traceability.Message;
+import fr.irisa.triskell.traceability.ModelReference;
+import fr.irisa.triskell.traceability.TextReference;
+import fr.irisa.triskell.traceability.Trace;
+import fr.irisa.triskell.traceability.TraceModel;
+import fr.irisa.triskell.traceability.TraceabilityFactory;
+import fr.irisa.triskell.traceability.TraceabilityPackage;
+import fr.irisa.triskell.traceability.XMLReference;
 
 /**
  * <!-- begin-user-doc -->
