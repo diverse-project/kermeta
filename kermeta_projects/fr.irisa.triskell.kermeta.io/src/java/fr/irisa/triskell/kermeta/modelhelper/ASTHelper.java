@@ -1,6 +1,6 @@
 
 
-/*$Id: ASTHelper.java,v 1.2 2007-07-20 15:08:10 ftanguy Exp $
+/*$Id: ASTHelper.java,v 1.3 2007-07-24 07:26:47 ftanguy Exp $
 * Project : fr.irisa.triskell.kermeta.io2
 * File : 	ASTHelper.java
 * License : EPL
@@ -12,9 +12,6 @@
 
 package fr.irisa.triskell.kermeta.modelhelper;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -25,8 +22,6 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
